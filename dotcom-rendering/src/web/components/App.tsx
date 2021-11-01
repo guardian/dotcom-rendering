@@ -50,7 +50,7 @@ import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
-import { ArticleDisplay, ArticleDesign, storage } from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat, CountryCode } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -146,7 +146,9 @@ type Props = {
 	ophanRecord: OphanRecordFunction;
 };
 
+let renderCount = 0;
 export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
+	log('dotcom', `App.tsx render #${renderCount += 1}`);
 	const [isSignedIn, setIsSignedIn] = useState<boolean>();
 	const [user, setUser] = useState<UserProfile | null>();
 	const [countryCode, setCountryCode] = useState<string>();
@@ -177,6 +179,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	);
 	useOnce(() => {
 		setBrowserId(getCookie('bwid'));
+		log('dotcom', 'State: browserId set');
 	}, []);
 
 	const componentEventHandler = (
@@ -209,10 +212,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		ABTestAPI.trackABTests(allRunnableTests);
 		ABTestAPI.registerImpressionEvents(allRunnableTests);
 		ABTestAPI.registerCompleteEvents(allRunnableTests);
+		log('dotcom', 'AB tests initialised');
 	}, [ABTestAPI]);
 
 	useEffect(() => {
 		setIsSignedIn(!!getCookie('GU_U'));
+		log('dotcom', 'State: isSignedIn set');
 	}, []);
 
 	useOnce(() => {
@@ -221,7 +226,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		if (isSignedIn) {
 			getUser(CAPI.config.discussionApiUrl)
 				.then((theUser) => {
-					if (theUser) setUser(theUser);
+					if (theUser) {
+						setUser(theUser);
+						log('dotcom', 'State: user set');
+					}
 				})
 				.catch((e) => console.error(`getUser - error: ${e}`));
 		} else {
@@ -234,7 +242,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			const countryCodePromise = getLocaleCode();
 			setAsyncCountryCode(countryCodePromise);
 			countryCodePromise
-				.then((cc) => setCountryCode(cc || ''))
+				.then((cc) => {
+					setCountryCode(cc || '')
+					log('dotcom', 'State: countryCode set');
+				})
 				.catch((e) =>
 					console.error(`countryCodePromise - error: ${e}`),
 				);
@@ -339,6 +350,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		// Run each time consent is submitted
 		onConsentChange((newConsent) => {
 			setConsentState(newConsent);
+			log('dotcom', 'State: consentState set');
 		});
 
 		// manually updates the footer DOM because it's not hydrated
@@ -355,6 +367,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				pageViewId,
 			},
 		});
+		log('dotcom', 'CMP initialised');
 	}, [countryCode, pageViewId, browserId]);
 
 	// This code is executed at first render and then again each time consentState is set
@@ -392,7 +405,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				Promise.all([
 					loadScript('https://www.google-analytics.com/analytics.js'),
 					loadScript(window.guardian.gaPath),
-				]).catch((e) => console.error(`GA - error: ${e}`));
+				]).then(()=>{
+					log('dotcom', 'GA script loaded');
+				}).catch((e) => console.error(`GA - error: ${e}`));
 			} else {
 				// We should never be able to directly set things to the global window object.
 				// But in this case we want to stub things for testing, so it's ok to ignore this rule
