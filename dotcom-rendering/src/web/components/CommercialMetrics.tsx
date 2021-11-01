@@ -32,7 +32,9 @@ export const CommercialMetrics: React.FC<{
 
 		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
 			sendCommercialMetrics(pageViewId, browserId, isDev, adBlockerInUse);
-			// TODO: force CWV, too
+			// TODO: capture CWV also, to ensure commercial performance
+			// doesn’t come at the expense of user experience.
+			// See https://git.io/JP68Q in `frontend`
 		}
 	}, [ABTestAPI, pageViewId, adBlockerInUse, isHidden]);
 
