@@ -16,11 +16,12 @@ type Props = {
 
 type ResolutionType = 'hdpi' | 'mdpi';
 
-const getClosestSetForWidth = (
+export const getClosestSetForWidth = (
 	desiredWidth: number,
 	inlineSrcSets: SrcSetItem[],
 ): SrcSetItem => {
 	// For a desired width, find the SrcSetItem which is the closest match
+	// A match greated than the desired width will always be picked when one is available
 	const sorted = inlineSrcSets.sort((a, b) => b.width - a.width);
 	return sorted.reduce((best, current) => {
 		if (current.width < best.width && current.width >= desiredWidth) {
@@ -47,62 +48,30 @@ const getSourcesForRoleAndResolution = (
 };
 
 const getFallback = (
-	role: RoleType,
-	resolution: ResolutionType,
-	imageSources: ImageSource[],
+	sources: SrcSetItem[],
 ): string | undefined => {
-	// Get the sources for this role and resolution
-	const sources: SrcSetItem[] = getSourcesForRoleAndResolution(
-		imageSources,
-		role,
-		resolution,
-	);
 	if (sources.length === 0) return undefined;
 	// The assumption here is readers on devices that do not support srcset are likely to be on poor
 	// network connections so we're going to fallback to a small image
 	return getClosestSetForWidth(300, sources).src;
 };
 
-const getSources = (
-	role: RoleType,
-	resolution: ResolutionType,
-	imageSources: ImageSource[],
-): string => {
-	// Get the sources for this role and resolution
-	const sources: SrcSetItem[] = getSourcesForRoleAndResolution(
-		imageSources,
-		role,
-		resolution,
-	);
+// The image sources we're provided use double-widths for HDPI images
+// We should therefor multiple the width based on if it's HDPI or not
+// e.g { url: '... ?width=500&dpr=2 ...', width: '1000' }
+export const getDesiredWidth = (width: number, hdpi: boolean) => hdpi ? width * 2 : width
 
-	return sources.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
-};
+// Turn SrsSets into a string which can be passed to the source element
+const getSourcesFromSrcSets = (sources: SrcSetItem[]) => sources.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
 
-/**
- *       mobile: 320
- *       mobileMedium: 375
- *       mobileLandscape: 480
- *       phablet: 660
- *       tablet: 740
- *       desktop: 980
- *       leftCol: 1140
- *       wide: 1300
- */
-
-const getSizes = (
+// Returns the size image desired at a particular breakpoint based on the image role, format, and if it's main media.
+const getSizeForBreakpoint = (
+	breakpoint: number,
 	role: RoleType,
 	isMainMedia: boolean,
 	format: ArticleFormat,
-): string => {
-	if (format.display === ArticleDisplay.Immersive && isMainMedia) {
-		// Immersive MainMedia elements fill the height of the viewport, meaning
-		// on mobile devices even though the viewport width is small, we'll need
-		// a larger image to maintain quality. To solve this problem we're using
-		// the viewport height (vh) to calculate width. The value of 167vh
-		// relates to an assumed image ratio of 5:3 which is equal to
-		// 167 (viewport height)  : 100 (viewport width).
-		return `(orientation: portrait) 167vh, 100vw`;
-	}
+): number => {
+	if (format.display === ArticleDisplay.Immersive && isMainMedia) return breakpoint // 100vh
 
 	if (
 		(format.display === ArticleDisplay.Showcase ||
@@ -111,24 +80,54 @@ const getSizes = (
 	) {
 		// Showcase main media images (which includes numbered list articles) appear
 		// larger than in body showcase images so we use a different set of image sizes
-		return `(min-width: ${breakpoints.wide}px) 1020px, (min-width: ${breakpoints.leftCol}px) 940px, (min-width: ${breakpoints.tablet}px) 700px, (min-width: ${breakpoints.phablet}px) 660px, 100vw`;
+		if (breakpoint >= breakpoints.wide) return 1020
+		if (breakpoint >= breakpoints.leftCol) return 940
+		if (breakpoint >= breakpoints.tablet) return 700
+		if (breakpoint >= breakpoints.phablet) return 700
+		return breakpoint
 	}
 
 	switch (role) {
 		case 'inline':
-			return `(min-width: ${breakpoints.phablet}px) 620px, 100vw`;
+			if (breakpoint >= breakpoints.phablet) return 620
+			return breakpoint // 100vw
 		case 'halfWidth':
-			return `(min-width: ${breakpoints.phablet}px) 300px, 50vw`;
+			if (breakpoint >= breakpoints.phablet) return 300
+			return breakpoint / 2 // 50vw
 		case 'thumbnail':
-			return '140px';
+			return 140
 		case 'immersive':
-			return `(min-width: ${breakpoints.wide}px) 1300px, 100vw`;
+			if (breakpoint >= breakpoints.wide) return 1300
+			return breakpoint // 100vw
 		case 'supporting':
-			return `(min-width: ${breakpoints.wide}px) 380px, 300px`;
+			if (breakpoint >= breakpoints.wide) return 380
+			return 300
 		case 'showcase':
-			return `(min-width: ${breakpoints.wide}px) 860px, (min-width: ${breakpoints.leftCol}px) 780px, (min-width: ${breakpoints.phablet}px) 620px, 100vw`;
+			if (breakpoint >= breakpoints.wide) return 860
+			if (breakpoint >= breakpoints.leftCol) return 780
+			if (breakpoint >= breakpoints.phablet) return 620
+			return breakpoint // 100vw
 	}
 };
+
+// Takes a size & sources, and returns a source set with 1 matching image with the desired size
+const getSourceSetForSize = (size: number, sources: SrcSetItem[], hdpi: boolean) => getSourcesFromSrcSets([getClosestSetForWidth(getDesiredWidth(size, hdpi), sources)])
+
+// Create sourcesets for portrait immersive
+// TODO: In a future PR this system will be updated to solve scaling issues with DPR
+const portraitImmersiveSource = (sources: SrcSetItem[], hdpi: boolean) => (
+	<source
+		media={hdpi ? '(orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.25), (orientation: portrait) and (min-resolution: 120dpi)' : '(orientation: portrait)'}
+		// Immersive MainMedia elements fill the height of the viewport, meaning
+		// on mobile devices even though the viewport width is small, we'll need
+		// a larger image to maintain quality. To solve this problem we're using
+		// the viewport height (vh) to calculate width. The value of 167vh
+		// relates to an assumed image ratio of 5:3 which is equal to
+		// 167 (viewport height)  : 100 (viewport width).
+		sizes="167vh"
+		srcSet={getSourcesFromSrcSets(sources)}
+	/>
+)
 
 export const Picture = ({
 	imageSources,
@@ -140,21 +139,40 @@ export const Picture = ({
 	isMainMedia = false,
 	isLazy = true,
 }: Props) => {
-	const hdpiSources = getSources(role, 'hdpi', imageSources);
-	const mdpiSources = getSources(role, 'mdpi', imageSources);
-	const fallbackSrc = getFallback(role, 'hdpi', imageSources);
-	const sizes = getSizes(role, isMainMedia, format);
+	const hdpiSourceSets = getSourcesForRoleAndResolution(imageSources, role, 'hdpi',);
+	const mdpiSourcesSets = getSourcesForRoleAndResolution(imageSources, role, 'mdpi');
+	const fallbackSrc = getFallback(hdpiSourceSets);
 
 	return (
 		<picture itemProp="contentUrl">
-			{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
-			<source
-				srcSet={hdpiSources}
-				sizes={sizes}
-				media="(-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi)"
-			/>
-			{/* MDPI Source (DPR1) - images in this srcset have `quality=85` in the url */}
-			<source srcSet={mdpiSources} sizes={sizes} />
+			{
+				format.display === ArticleDisplay.Immersive && isMainMedia ?
+					<>
+						{portraitImmersiveSource(hdpiSourceSets, true)}
+						{portraitImmersiveSource(mdpiSourcesSets, false)}
+					</>
+				 : ''
+			}
+
+			{
+				// Loop through the breakpoints from highest to lowest, adding '0' as the last option
+				[...Object.values(breakpoints).reverse(), 0].map((breakpoint) =>
+					<>
+						{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
+						<source
+							srcSet={getSourceSetForSize(getSizeForBreakpoint(breakpoint, role, isMainMedia, format), hdpiSourceSets, true)}
+							sizes={`${breakpoint || getSizeForBreakpoint(breakpoint, role, isMainMedia, format)}px`}
+							media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
+						/>
+						{/* MDPI Source - images in this srcset have `quality=85` in the url */}
+						<source
+							srcSet={getSourceSetForSize(getSizeForBreakpoint(breakpoint, role, isMainMedia, format), mdpiSourcesSets, false)}
+							sizes={`${breakpoint || getSizeForBreakpoint(breakpoint, role, isMainMedia, format)}px`}
+							media={`min-width: ${breakpoint}px`}
+						/>
+					</>
+			)}
+
 			<img
 				alt={alt}
 				src={fallbackSrc}
