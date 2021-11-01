@@ -5,7 +5,7 @@ import {
 } from '@guardian/libs';
 import { startup } from '@root/src/web/browser/startup';
 
-const coreVitals = (): Promise<void> => {
+const init = (): Promise<void> => {
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
 	const isDev =
@@ -28,4 +28,4 @@ const coreVitals = (): Promise<void> => {
 	return Promise.resolve();
 };
 
-startup('coreVitals', null, coreVitals);
+startup('coreVitals', null, init);
