@@ -5,13 +5,12 @@ import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
 const firstPage =
-	'https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife';
+	'https://www.theguardian.com/environment/2020/aug/01/plan-to-curb-englands-most-polluted-spot-divides-residents';
 
 const secondPage =
 	'https://www.theguardian.com/environment/2020/nov/19/blue-whale-sightings-off-south-georgia-raise-hopes-of-recovery';
 
 describe('Consent tests', function () {
-
 	const waitForAnalyticsToInit = () => {
 		// Waiting is sad but we need to ensure the init script has executed which occurs
 		// after the pageLoadEvent has fired
@@ -41,7 +40,7 @@ describe('Consent tests', function () {
 	});
 
 	it('should not add GA tracking scripts onto the window object after the reader rejects consent', function () {
-		// TODO: temporary workaround for uncaught exception from rich-link json request
+		// TODO: handle unhandled promise rejection
 		cy.on('uncaught:exception', (err, runnable, promise) => {
 			// return false to prevent the error from failing this test
 			if (promise) {
@@ -49,7 +48,6 @@ describe('Consent tests', function () {
 				return false;
 			}
 		});
-
 		cy.visit(`Article?url=${firstPage}`);
 		waitForAnalyticsToInit();
 		cy.window().its('ga').should('not.exist');

@@ -13,8 +13,7 @@
 
 export const Dead: CAPIType = {
 	slotMachineFlags: '',
-	main:
-		'<figure class="element element-image" data-media-id="2dbb8d5200a0c46420d3d9145194d7bcb9311d44"> \n <img src="https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg" alt="Perseverance rover as it touched down in the area known as Jezero crater." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Perseverance rover as it touched down in the area known as Jezero crater.</span> \n  <span class="element-image__credit">Photograph: NASA/Getty Images</span> \n </figcaption> \n</figure>',
+	main: '<figure class="element element-image" data-media-id="2dbb8d5200a0c46420d3d9145194d7bcb9311d44"> \n <img src="https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg" alt="Perseverance rover as it touched down in the area known as Jezero crater." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Perseverance rover as it touched down in the area known as Jezero crater.</span> \n  <span class="element-image__credit">Photograph: NASA/Getty Images</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
 		{
 			url: '/science/mars',
@@ -58,8 +57,7 @@ export const Dead: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 				},
 				{
 					name: 'ct',
@@ -103,8 +101,7 @@ export const Dead: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 				},
 				{
 					name: 'edition',
@@ -152,8 +149,7 @@ export const Dead: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 				},
 				{
 					name: 'ct',
@@ -205,8 +201,7 @@ export const Dead: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+					value: '/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 				},
 				{
 					name: 'ct',
@@ -397,8 +392,7 @@ export const Dead: CAPIType = {
 							},
 							{
 								title: 'Project Syndicate',
-								url:
-									'/business/series/project-syndicate-economists',
+								url: '/business/series/project-syndicate-economists',
 							},
 							{
 								title: 'B2B',
@@ -781,8 +775,7 @@ export const Dead: CAPIType = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 			},
 			{
 				title: 'Video',
@@ -858,8 +851,7 @@ export const Dead: CAPIType = {
 			},
 			{
 				title: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
 			{
 				title: 'Crosswords',
@@ -911,23 +903,19 @@ export const Dead: CAPIType = {
 		brandExtensions: [
 			{
 				title: 'Search jobs',
-				url:
-					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
 			},
 			{
 				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
 			},
 			{
 				title: 'Holidays',
-				url:
-					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 			},
 			{
 				title: 'Live events',
-				url:
-					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
 			},
 			{
 				title: 'Masterclasses',
@@ -1100,8 +1088,7 @@ export const Dead: CAPIType = {
 						},
 						{
 							title: 'Project Syndicate',
-							url:
-								'/business/series/project-syndicate-economists',
+							url: '/business/series/project-syndicate-economists',
 						},
 						{
 							title: 'B2B',
@@ -1321,8 +1308,7 @@ export const Dead: CAPIType = {
 		'article:modified_time': '2021-02-19T19:47:39.000Z',
 	},
 	sectionUrl: 'science/mars',
-	pageId:
-		'science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+	pageId: 'science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	version: 3,
 	tags: [
 		{
@@ -1396,8 +1382,7 @@ export const Dead: CAPIType = {
 		},
 	],
 	pillar: 'news',
-	webURL:
-		'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+	webURL: 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Mars',
@@ -1482,8 +1467,7 @@ export const Dead: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url:
-						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1525,8 +1509,7 @@ export const Dead: CAPIType = {
 				},
 				{
 					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
 					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
@@ -1546,15 +1529,13 @@ export const Dead: CAPIType = {
 				},
 				{
 					text: 'Search jobs',
-					url:
-						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
 					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
 				{
 					text: 'Patrons',
-					url:
-						'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
 					extraClasses: '',
 				},
@@ -1607,8 +1588,7 @@ export const Dead: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/140.jpg',
+						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/140.jpg',
 					},
 					{
 						index: 1,
@@ -1618,8 +1598,7 @@ export const Dead: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/500.jpg',
+						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/500.jpg',
 					},
 					{
 						index: 2,
@@ -1629,8 +1608,7 @@ export const Dead: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg',
+						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg',
 					},
 					{
 						index: 3,
@@ -1640,8 +1618,7 @@ export const Dead: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/2000.jpg',
+						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/2000.jpg',
 					},
 					{
 						index: 4,
@@ -1651,8 +1628,7 @@ export const Dead: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/2048.jpg',
+						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/2048.jpg',
 					},
 					{
 						index: 5,
@@ -1663,14 +1639,12 @@ export const Dead: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg',
+						url: 'https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg',
 					},
 				],
 			},
 			data: {
-				alt:
-					'Perseverance rover as it touched down in the area known as Jezero crater.',
+				alt: 'Perseverance rover as it touched down in the area known as Jezero crater.',
 				caption:
 					'Perseverance rover as it touched down in the area known as Jezero crater.',
 				credit: 'Photograph: NASA/Getty Images',
@@ -1682,33 +1656,27 @@ export const Dead: CAPIType = {
 					weighting: 'inline',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=85&auto=format&fit=max&s=adb28ceed03e945c91c0ac85d60db861',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=85&auto=format&fit=max&s=adb28ceed03e945c91c0ac85d60db861',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=20a6d7751c140f7022956bfbfbb41cea',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=20a6d7751c140f7022956bfbfbb41cea',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=85&auto=format&fit=max&s=0caaf828dce160082c7725d29d2cb915',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=85&auto=format&fit=max&s=0caaf828dce160082c7725d29d2cb915',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8e5a6b092ff018912819866b084042bb',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8e5a6b092ff018912819866b084042bb',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=85&auto=format&fit=max&s=8533ab7c4dac9682b791ab358d3827ff',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=85&auto=format&fit=max&s=8533ab7c4dac9682b791ab358d3827ff',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=0d75637f99e5257e185f2349b6a069fd',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=0d75637f99e5257e185f2349b6a069fd',
 							width: 890,
 						},
 					],
@@ -1717,23 +1685,19 @@ export const Dead: CAPIType = {
 					weighting: 'thumbnail',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=140&quality=85&auto=format&fit=max&s=f37a9084ed51fc2559ae07fdd0c4cfbc',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=140&quality=85&auto=format&fit=max&s=f37a9084ed51fc2559ae07fdd0c4cfbc',
 							width: 140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=f8b55e6010c2fd9aeeadc002b246421a',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=f8b55e6010c2fd9aeeadc002b246421a',
 							width: 280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=120&quality=85&auto=format&fit=max&s=cce6b84be0e3dfb1a08bbbabdfe18ed2',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=120&quality=85&auto=format&fit=max&s=cce6b84be0e3dfb1a08bbbabdfe18ed2',
 							width: 120,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=0badae24fe95dd0be48ee248c40010ba',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=0badae24fe95dd0be48ee248c40010ba',
 							width: 240,
 						},
 					],
@@ -1742,53 +1706,43 @@ export const Dead: CAPIType = {
 					weighting: 'supporting',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=380&quality=85&auto=format&fit=max&s=4c5d0b40d33b2a6593e487f9eb267f96',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=380&quality=85&auto=format&fit=max&s=4c5d0b40d33b2a6593e487f9eb267f96',
 							width: 380,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=46135471fcb8919568a0d449580ce279',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=46135471fcb8919568a0d449580ce279',
 							width: 760,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=300&quality=85&auto=format&fit=max&s=c9587abb6137a82f1bbcf43357f23ffd',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=300&quality=85&auto=format&fit=max&s=c9587abb6137a82f1bbcf43357f23ffd',
 							width: 300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=9e50be0266af5e42e555482ad1fb1abc',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=9e50be0266af5e42e555482ad1fb1abc',
 							width: 600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=85&auto=format&fit=max&s=adb28ceed03e945c91c0ac85d60db861',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=85&auto=format&fit=max&s=adb28ceed03e945c91c0ac85d60db861',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=20a6d7751c140f7022956bfbfbb41cea',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=20a6d7751c140f7022956bfbfbb41cea',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=85&auto=format&fit=max&s=0caaf828dce160082c7725d29d2cb915',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=85&auto=format&fit=max&s=0caaf828dce160082c7725d29d2cb915',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8e5a6b092ff018912819866b084042bb',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8e5a6b092ff018912819866b084042bb',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=85&auto=format&fit=max&s=8533ab7c4dac9682b791ab358d3827ff',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=85&auto=format&fit=max&s=8533ab7c4dac9682b791ab358d3827ff',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=0d75637f99e5257e185f2349b6a069fd',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=0d75637f99e5257e185f2349b6a069fd',
 							width: 890,
 						},
 					],
@@ -1797,73 +1751,59 @@ export const Dead: CAPIType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1020&quality=85&auto=format&fit=max&s=67e9d4132782282b0aa56f9525516417',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1020&quality=85&auto=format&fit=max&s=67e9d4132782282b0aa56f9525516417',
 							width: 1020,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f9eba00816f393597284695943d112cf',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f9eba00816f393597284695943d112cf',
 							width: 2040,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=940&quality=85&auto=format&fit=max&s=c6bbbcc0e77dcc8a039ea6f640a4eecb',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=940&quality=85&auto=format&fit=max&s=c6bbbcc0e77dcc8a039ea6f640a4eecb',
 							width: 940,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=dad0bd0860f6b4e037cc484c30887ce6',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=dad0bd0860f6b4e037cc484c30887ce6',
 							width: 1880,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=85&auto=format&fit=max&s=57d9f746c53a43263bf32297de052b65',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=85&auto=format&fit=max&s=57d9f746c53a43263bf32297de052b65',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cbd06a6adbd9c0b21956da14f5da251d',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cbd06a6adbd9c0b21956da14f5da251d',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=85&auto=format&fit=max&s=57d9f746c53a43263bf32297de052b65',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=85&auto=format&fit=max&s=57d9f746c53a43263bf32297de052b65',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cbd06a6adbd9c0b21956da14f5da251d',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cbd06a6adbd9c0b21956da14f5da251d',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=85&auto=format&fit=max&s=975c2421c807af30a12c3e6c05d65875',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=85&auto=format&fit=max&s=975c2421c807af30a12c3e6c05d65875',
 							width: 660,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=28a9f8208b4ffa31540c03131f5c8a3a',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=28a9f8208b4ffa31540c03131f5c8a3a',
 							width: 1320,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=85&auto=format&fit=max&s=b93342a1d7d6c47eb03a861d8f9c5930',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=85&auto=format&fit=max&s=b93342a1d7d6c47eb03a861d8f9c5930',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=68e148b680a741f6a1bedf93d521f1cc',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=68e148b680a741f6a1bedf93d521f1cc',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=85&auto=format&fit=max&s=0c3b95be996a3eda5e09222c10c62d84',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=85&auto=format&fit=max&s=0c3b95be996a3eda5e09222c10c62d84',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3e3a43e1921bcffcb3254a32bfcf51ee',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3e3a43e1921bcffcb3254a32bfcf51ee',
 							width: 930,
 						},
 					],
@@ -1872,33 +1812,27 @@ export const Dead: CAPIType = {
 					weighting: 'halfwidth',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=85&auto=format&fit=max&s=adb28ceed03e945c91c0ac85d60db861',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=85&auto=format&fit=max&s=adb28ceed03e945c91c0ac85d60db861',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=20a6d7751c140f7022956bfbfbb41cea',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=20a6d7751c140f7022956bfbfbb41cea',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=85&auto=format&fit=max&s=0caaf828dce160082c7725d29d2cb915',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=85&auto=format&fit=max&s=0caaf828dce160082c7725d29d2cb915',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8e5a6b092ff018912819866b084042bb',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8e5a6b092ff018912819866b084042bb',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=85&auto=format&fit=max&s=8533ab7c4dac9682b791ab358d3827ff',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=85&auto=format&fit=max&s=8533ab7c4dac9682b791ab358d3827ff',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=0d75637f99e5257e185f2349b6a069fd',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=0d75637f99e5257e185f2349b6a069fd',
 							width: 890,
 						},
 					],
@@ -1907,73 +1841,59 @@ export const Dead: CAPIType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1300&quality=85&auto=format&fit=max&s=9a938ed8177af5ab092504bd03d13579',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1300&quality=85&auto=format&fit=max&s=9a938ed8177af5ab092504bd03d13579',
 							width: 1300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=ab736df6a83b603cdd32d3bf54b9e88b',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=ab736df6a83b603cdd32d3bf54b9e88b',
 							width: 2600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1140&quality=85&auto=format&fit=max&s=06aa47685dd1df4ab8ac8629564f0b9d',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1140&quality=85&auto=format&fit=max&s=06aa47685dd1df4ab8ac8629564f0b9d',
 							width: 1140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c1c563ae6a46241e682cd8bf28ada246',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c1c563ae6a46241e682cd8bf28ada246',
 							width: 2280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1125&quality=85&auto=format&fit=max&s=6434a1ddc15aa772738ee85d6f4804c6',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1125&quality=85&auto=format&fit=max&s=6434a1ddc15aa772738ee85d6f4804c6',
 							width: 1125,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=54bf79142acd2021f1787bc4610bb6b9',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=54bf79142acd2021f1787bc4610bb6b9',
 							width: 2250,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=965&quality=85&auto=format&fit=max&s=9d6ad04b622bcf41e21fc85e12b072ad',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=965&quality=85&auto=format&fit=max&s=9d6ad04b622bcf41e21fc85e12b072ad',
 							width: 965,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=634a6ff50ab66a44f9f40b899af23fc6',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=634a6ff50ab66a44f9f40b899af23fc6',
 							width: 1930,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=725&quality=85&auto=format&fit=max&s=6552ee576cb0d9e208a992338b0c6eee',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=725&quality=85&auto=format&fit=max&s=6552ee576cb0d9e208a992338b0c6eee',
 							width: 725,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=9f91cd3681aac918a2c583eb77c3909c',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=9f91cd3681aac918a2c583eb77c3909c',
 							width: 1450,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=85&auto=format&fit=max&s=b93342a1d7d6c47eb03a861d8f9c5930',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=85&auto=format&fit=max&s=b93342a1d7d6c47eb03a861d8f9c5930',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=68e148b680a741f6a1bedf93d521f1cc',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=68e148b680a741f6a1bedf93d521f1cc',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=85&auto=format&fit=max&s=0c3b95be996a3eda5e09222c10c62d84',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=85&auto=format&fit=max&s=0c3b95be996a3eda5e09222c10c62d84',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3e3a43e1921bcffcb3254a32bfcf51ee',
+							src: 'https://i.guim.co.uk/img/media/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/master/2048.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3e3a43e1921bcffcb3254a32bfcf51ee',
 							width: 930,
 						},
 					],
@@ -1989,23 +1909,18 @@ export const Dead: CAPIType = {
 			id: '60300f5f8f08ad21ea60071e',
 			elements: [
 				{
-					html:
-						'<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>That’s it for our live coverage of Nasa’s celebratory news conference and Q&amp;A following the successful landing of the rover Perseverance on Mars. </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '517e7044-2548-49d5-ac6e-cb94a1472667',
 				},
 				{
 					html: '<p>To recap:</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '256ed5d6-e517-4ccf-a31e-f3c4ac3a838d',
 				},
 				{
-					html:
-						'<ul> \n <li>The rover is “healthy” and undergoing systems testing.</li> \n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li> \n <li>The images include the first color images beamed directly from <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> as opposed to images touched up later.</li> \n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li> \n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li> \n <li>The wheeled rover could begin to move around its new home as early as late February.</li> \n <li>The rover’s mini helicopter could launch as early as April.</li> \n <li>Its broad mission is to stay on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li> \n <li>The point is to determine whether there was life on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> and subsidiary questions.</li> \n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li>The rover is “healthy” and undergoing systems testing.</li> \n <li>It already has beamed back stunning photos from the surface of <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> promising significant scientific discoveries ahead.</li> \n <li>The images include the first color images beamed directly from <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> as opposed to images touched up later.</li> \n <li>The rover documented its own touchdown via an ingenious system of booster rockets and a “space crane”.</li> \n <li>It landed in a “pool-table flat” crater in a prime location for searching for traces of ancient life.</li> \n <li>The wheeled rover could begin to move around its new home as early as late February.</li> \n <li>The rover’s mini helicopter could launch as early as April.</li> \n <li>Its broad mission is to stay on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> for a couple years, gather data and harvest samples to be collected and returned to Earth on a future mission.</li> \n <li>The point is to determine whether there was life on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> and subsidiary questions.</li> \n <li>The team at Nasa is very happy and excited, “on cloud nine” in a “weird, dreamlike state”... with lots of work ahead.</li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd3ca499a-4878-4a65-8e8b-0324d5a02d22',
 				},
 			],
@@ -2023,8 +1938,7 @@ export const Dead: CAPIType = {
 			elements: [
 				{
 					html: '<p>#TBT</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '0c19c89c-4e86-493b-9d36-3384928aecce',
 				},
 				{
@@ -2035,35 +1949,29 @@ export const Dead: CAPIType = {
 						'Nasa launches Perseverance rover in mission to find evidence of life on Mars – video',
 					posterImage: [
 						{
-							url:
-								'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/2000.jpg',
+							url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/2000.jpg',
 							width: 2000,
 						},
 						{
-							url:
-								'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/1000.jpg',
+							url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/1000.jpg',
 							width: 1000,
 						},
 						{
-							url:
-								'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/500.jpg',
+							url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/500.jpg',
 							width: 500,
 						},
 						{
-							url:
-								'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/140.jpg',
+							url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/140.jpg',
 							width: 140,
 						},
 						{
-							url:
-								'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/3282.jpg',
+							url: 'https://media.guim.co.uk/c981848745e482e03e23b2ec9402e1f5c5bee6a6/102_73_3282_1848/3282.jpg',
 							width: 3282,
 						},
 					],
 					expired: false,
 					duration: 142,
-					_type:
-						'model.dotcomrendering.pageElements.YoutubeBlockElement',
+					_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 					elementId: '94654a9d-ea19-4cd3-9256-61641a8840c2',
 				},
 			],
@@ -2081,36 +1989,29 @@ export const Dead: CAPIType = {
 			elements: [
 				{
 					html: '<p>#FF</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd3b9fedf-627e-41a0-b03a-39d83e4c3002',
 				},
 				{
-					html:
-						'<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I love rocks. Look at these right next to my wheel. Are they volcanic or sedimentary? What story do they tell? Can’t wait to find out.<a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a><a href="https://t.co/7w3rbvbyoL">https://t.co/7w3rbvbyoL</a> <a href="https://t.co/H3q1M0YJAd">pic.twitter.com/H3q1M0YJAd</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362831783444717568?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
-					url:
-						'https://twitter.com/NASAPersevere/status/1362831783444717568',
+					html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I love rocks. Look at these right next to my wheel. Are they volcanic or sedimentary? What story do they tell? Can’t wait to find out.<a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a><a href="https://t.co/7w3rbvbyoL">https://t.co/7w3rbvbyoL</a> <a href="https://t.co/H3q1M0YJAd">pic.twitter.com/H3q1M0YJAd</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362831783444717568?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
+					url: 'https://twitter.com/NASAPersevere/status/1362831783444717568',
 					id: '1362831783444717568',
 					hasMedia: false,
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					_type:
-						'model.dotcomrendering.pageElements.TweetBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
 					elementId: 'b1c709c6-091b-4837-96b2-567ce2539963',
 				},
 				{
-					html:
-						'<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Every picture tells a story. This one captures me in midair, floating over Mars while hanging from my parachute during the final <a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a>.<br><br>Latest update and images: <a href="https://t.co/fnnEOOMWsV">https://t.co/fnnEOOMWsV</a> <a href="https://t.co/39aGp963a3">pic.twitter.com/39aGp963a3</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362839907824136193?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
-					url:
-						'https://twitter.com/NASAPersevere/status/1362839907824136193',
+					html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Every picture tells a story. This one captures me in midair, floating over Mars while hanging from my parachute during the final <a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a>.<br><br>Latest update and images: <a href="https://t.co/fnnEOOMWsV">https://t.co/fnnEOOMWsV</a> <a href="https://t.co/39aGp963a3">pic.twitter.com/39aGp963a3</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362839907824136193?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
+					url: 'https://twitter.com/NASAPersevere/status/1362839907824136193',
 					id: '1362839907824136193',
 					hasMedia: false,
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'Twitter',
-					_type:
-						'model.dotcomrendering.pageElements.TweetBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
 					elementId: '1a809fef-c9a1-402d-8717-2bafd8b49e57',
 				},
 			],
@@ -2127,10 +2028,8 @@ export const Dead: CAPIType = {
 			id: '60300c878f08c3cb92a5cab0',
 			elements: [
 				{
-					html:
-						'<p>Have you typed “<a href="https://www.google.com/search?q=perseverance&amp;oq=pers&amp;aqs=chrome.0.69i59j69i57j0l3j46j69i60j69i61.1091j0j7&amp;sourceid=chrome&amp;ie=UTF-8">perseverance</a>” into Google today? </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Have you typed “<a href="https://www.google.com/search?q=perseverance&amp;oq=pers&amp;aqs=chrome.0.69i59j69i57j0l3j46j69i60j69i61.1091j0j7&amp;sourceid=chrome&amp;ie=UTF-8">perseverance</a>” into Google today? </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'ab2dfb77-e0a3-4f74-8db9-73e0613e0b4b',
 				},
 			],
@@ -2147,17 +2046,13 @@ export const Dead: CAPIType = {
 			id: '60300aa38f08ad21ea6006e5',
 			elements: [
 				{
-					html:
-						'<p>Now that Perseverance persevered through the “seven minutes of terror” – a new era of space exploration has officially begun. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Now that Perseverance persevered through the “seven minutes of terror” – a new era of space exploration has officially begun. </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3a912f04-20e9-4b86-87cf-7959404c3165',
 				},
 				{
-					html:
-						'<p>Next up, the science team will make crucial decisions on which direction to take the rover in as it kicks off its search for ancient life. <br></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Next up, the science team will make crucial decisions on which direction to take the rover in as it kicks off its search for ancient life. <br></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '4b37ead9-d4f4-4efb-b607-7425e8992377',
 				},
 			],
@@ -2174,23 +2069,18 @@ export const Dead: CAPIType = {
 			id: '60300a3a8f08c3cb92a5ca90',
 			elements: [
 				{
-					html:
-						'<p>The event is concluding. They’ll be back for a 2pm ET news conference on Monday. Mission updates can be found meanwhile on the <a href="https://mars.nasa.gov/mars2020/">Nasa web site</a>.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The event is concluding. They’ll be back for a 2pm ET news conference on Monday. Mission updates can be found meanwhile on the <a href="https://mars.nasa.gov/mars2020/">Nasa web site</a>.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '44d63763-c045-4dc5-84d8-7c5fd5d75258',
 				},
 				{
 					html: '<p>McGregor signs off:</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '93a165f9-ee27-49ef-8d22-6339480ec1f8',
 				},
 				{
-					html:
-						'<p>“Everyone have a great day, on Earth and on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a>.”</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>“Everyone have a great day, on Earth and on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a>.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a23e1efc-bc21-4bfc-9b5e-e620f7781566',
 				},
 			],
@@ -2207,17 +2097,13 @@ export const Dead: CAPIType = {
 			id: '6030096d8f08c3cb92a5ca88',
 			elements: [
 				{
-					html:
-						'<p>Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption. </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'f2049b91-8df1-40fd-ab21-2de169b8a391',
 				},
 				{
-					html:
-						'<p>After the landing success yesterday, one team says they had a “socially distanced ice cream” event, while the engineering team had a virtual happy hour! <br></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>After the landing success yesterday, one team says they had a “socially distanced ice cream” event, while the engineering team had a virtual happy hour! <br></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '8a02fdc6-84e3-4db6-8ba2-ca2612c4ef30',
 				},
 			],
@@ -2234,23 +2120,18 @@ export const Dead: CAPIType = {
 			id: '603008b48f08bdbed283be5f',
 			elements: [
 				{
-					html:
-						'<p>Next question: <strong>How did you celebrate?</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Next question: <strong>How did you celebrate?</strong></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '6cff0ec8-4f74-4da7-84b3-d6418658a095',
 				},
 				{
 					html: '<p>Answers include: </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '519d67c9-2d5f-4e8a-9b86-2c49b9606b5f',
 				},
 				{
-					html:
-						'<ul> \n <li>Virtual happy hour</li> \n <li>“Socially distanced consumption of ice cream outdoors”</li> \n <li>“I went home and just passed out from just the excitement of the day”</li> \n <li>“In the coming days I’ll definitely be having a glass of wine”</li> \n <li>“It was super-exciting”</li> \n <li>“We’re working two shifts a day almost 20 hours a day... it is kind of a really cool thing”</li> \n <li>“Business as usual for a science team working on a <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> rover”</li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li>Virtual happy hour</li> \n <li>“Socially distanced consumption of ice cream outdoors”</li> \n <li>“I went home and just passed out from just the excitement of the day”</li> \n <li>“In the coming days I’ll definitely be having a glass of wine”</li> \n <li>“It was super-exciting”</li> \n <li>“We’re working two shifts a day almost 20 hours a day... it is kind of a really cool thing”</li> \n <li>“Business as usual for a science team working on a <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> rover”</li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '98230fa7-00cb-4c80-9daf-971d260560fa',
 				},
 			],
@@ -2267,38 +2148,28 @@ export const Dead: CAPIType = {
 			id: '603008388f08c3cb92a5ca7b',
 			elements: [
 				{
-					html:
-						'<p>Another key question: <strong>When will the rover drive? </strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Another key question: <strong>When will the rover drive? </strong></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '57e18240-3233-46d7-ac5e-bc91f93fae92',
 				},
 				{
-					html:
-						'<p>“We’re anticipating the earliest... would be sol 8 or 9... our current best estimate.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>“We’re anticipating the earliest... would be sol 8 or 9... our current best estimate.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '6011e3b4-ca92-44da-aee7-a423aa6a7d42',
 				},
 				{
-					html:
-						'<p>“Maybe a short drive just to check everything out...</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>“Maybe a short drive just to check everything out...</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '52cb7c3e-f589-4334-85d2-7ff3c3908242',
 				},
 				{
-					html:
-						'<p>“We’ll also be figuring out the route and direction we need to go.”</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>“We’ll also be figuring out the route and direction we need to go.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'ff64840b-33c2-451b-80bc-0b1de6e9478b',
 				},
 				{
-					html:
-						'<p>That means rover could rove before February is out. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>That means rover could rove before February is out. </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '4a18d951-8345-4aa6-9e86-6e2a4619e906',
 				},
 			],
@@ -2315,10 +2186,8 @@ export const Dead: CAPIType = {
 			id: '603007c48f08c3cb92a5ca74',
 			elements: [
 				{
-					html:
-						'<p>The team members have described their fascination with the holes in the rocks visible next to the rover’s wheel in this photograph just released by <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a>. It is unknown whether the holes indicate volcanic or sedimentary rock. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The team members have described their fascination with the holes in the rocks visible next to the rover’s wheel in this photograph just released by <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a>. It is unknown whether the holes indicate volcanic or sedimentary rock. </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '0a57323d-efe0-4d89-a58e-7f488f01bfd1',
 				},
 				{
@@ -2332,8 +2201,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/4000.jpg',
+								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/4000.jpg',
 							},
 							{
 								index: 1,
@@ -2344,8 +2212,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg',
+								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg',
 							},
 							{
 								index: 2,
@@ -2355,8 +2222,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/2000.jpg',
+								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/2000.jpg',
 							},
 							{
 								index: 3,
@@ -2366,8 +2232,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/1000.jpg',
+								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/1000.jpg',
 							},
 							{
 								index: 4,
@@ -2377,8 +2242,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/500.jpg',
+								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/500.jpg',
 							},
 							{
 								index: 5,
@@ -2388,14 +2252,12 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/140.jpg',
+								url: 'https://media.guim.co.uk/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/140.jpg',
 							},
 						],
 					},
 					data: {
-						alt:
-							'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
+						alt: 'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
 						caption:
 							'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover of the surface of Mars and one of the rover’s wheels after landing on February 18, 2021.',
 						credit: 'Photograph: NASA/AFP/Getty Images',
@@ -2407,33 +2269,27 @@ export const Dead: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
 									width: 890,
 								},
 							],
@@ -2442,23 +2298,19 @@ export const Dead: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=c0243cd0dc3451467801871faf91d37c',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=c0243cd0dc3451467801871faf91d37c',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=90eae9662baaae39be5c932eb43db411',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=90eae9662baaae39be5c932eb43db411',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=f4239320fca925504ce9590b82854fc0',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=f4239320fca925504ce9590b82854fc0',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=814bfbaf0ec52db9a71bbf8672a07edd',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=814bfbaf0ec52db9a71bbf8672a07edd',
 									width: 240,
 								},
 							],
@@ -2467,53 +2319,43 @@ export const Dead: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=13713b8b02366b4beddf8e1bb3e2dede',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=13713b8b02366b4beddf8e1bb3e2dede',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=71e01c69477ac4c9d4382d95b34937a2',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=71e01c69477ac4c9d4382d95b34937a2',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=a784d2696e39f80be6b98e14a2b9bd67',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=a784d2696e39f80be6b98e14a2b9bd67',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=594bb948379cfc4801faaeaa12652748',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=594bb948379cfc4801faaeaa12652748',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
 									width: 890,
 								},
 							],
@@ -2522,73 +2364,59 @@ export const Dead: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1020&quality=85&auto=format&fit=max&s=c854b9c770a9c29e733a892712141472',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1020&quality=85&auto=format&fit=max&s=c854b9c770a9c29e733a892712141472',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=d7f6df2487b831a8c2da512d0a9660dc',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=d7f6df2487b831a8c2da512d0a9660dc',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=940&quality=85&auto=format&fit=max&s=8632e953c37b798253a0f22244124bd8',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=940&quality=85&auto=format&fit=max&s=8632e953c37b798253a0f22244124bd8',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=d180184a8c21d1033decd7e1a18cdaa6',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=d180184a8c21d1033decd7e1a18cdaa6',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=3aab32065813b9f67b19f189651a6bdd',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=3aab32065813b9f67b19f189651a6bdd',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=7ecd9fa53a39f013d389516a8730c485',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=7ecd9fa53a39f013d389516a8730c485',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=3aab32065813b9f67b19f189651a6bdd',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=3aab32065813b9f67b19f189651a6bdd',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=7ecd9fa53a39f013d389516a8730c485',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=7ecd9fa53a39f013d389516a8730c485',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=2d6ae2c6a7919e85e2b22081c46985bd',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=2d6ae2c6a7919e85e2b22081c46985bd',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f51da918a3e88ceae3cb1d8b59095d8a',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f51da918a3e88ceae3cb1d8b59095d8a',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=b8727bd3d43fe72ebe016d223df4af5f',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=b8727bd3d43fe72ebe016d223df4af5f',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ee9a8742b79b0942d003090764a2b002',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ee9a8742b79b0942d003090764a2b002',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=7a087a9b08f641637d6b2bb0884da4ed',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=7a087a9b08f641637d6b2bb0884da4ed',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=33d69e1b2ce924b0f789c8677f5113af',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=33d69e1b2ce924b0f789c8677f5113af',
 									width: 930,
 								},
 							],
@@ -2597,33 +2425,27 @@ export const Dead: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=39b5c4de4e55efeeb311d6071a747c3b',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ea39104182c964bdab06c2b3dd56a42',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=da4bbdf71d541c243468582fcb21c06f',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=52fdc40d558696693728f21ae908c093',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=e943edc032db43fa85e7438d458d28c4',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=65a7d92da0be48f2dff5988a85764dc4',
 									width: 890,
 								},
 							],
@@ -2632,80 +2454,65 @@ export const Dead: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=84e5f56cbbf0a210bff7adabaa4724ba',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=84e5f56cbbf0a210bff7adabaa4724ba',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=3525873cc7be9270f0c8c34e8eb37d8c',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=3525873cc7be9270f0c8c34e8eb37d8c',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=b7e0df28c44175474c01155c3cb27258',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=b7e0df28c44175474c01155c3cb27258',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=4278f04351c3f8b7f4f32d2857afc0f8',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=4278f04351c3f8b7f4f32d2857afc0f8',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1125&quality=85&auto=format&fit=max&s=99e1e9ed6d322dbe1943f5b7ce7165cf',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1125&quality=85&auto=format&fit=max&s=99e1e9ed6d322dbe1943f5b7ce7165cf',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=3b9ef9f19920c2fd8d5e93266ccca946',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=3b9ef9f19920c2fd8d5e93266ccca946',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=965&quality=85&auto=format&fit=max&s=a1a5b1e7e71a76e54df71287536c786e',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=965&quality=85&auto=format&fit=max&s=a1a5b1e7e71a76e54df71287536c786e',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=b73079b71c21addfe21baab2f9e7156e',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=b73079b71c21addfe21baab2f9e7156e',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=725&quality=85&auto=format&fit=max&s=08ed5aabecf4735d81a3125abdc05fdf',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=725&quality=85&auto=format&fit=max&s=08ed5aabecf4735d81a3125abdc05fdf',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=98fc71e53574c2a35cbc29ee71e0161b',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=98fc71e53574c2a35cbc29ee71e0161b',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=b8727bd3d43fe72ebe016d223df4af5f',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=b8727bd3d43fe72ebe016d223df4af5f',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ee9a8742b79b0942d003090764a2b002',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ee9a8742b79b0942d003090764a2b002',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=7a087a9b08f641637d6b2bb0884da4ed',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=7a087a9b08f641637d6b2bb0884da4ed',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=33d69e1b2ce924b0f789c8677f5113af',
+									src: 'https://i.guim.co.uk/img/media/ead346f8f00d38b314958e3164e010295124d621/0_0_4000_3000/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=33d69e1b2ce924b0f789c8677f5113af',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '11cd42e1-baa7-4b22-b152-35f84b7f3c7d',
 				},
 			],
@@ -2722,17 +2529,13 @@ export const Dead: CAPIType = {
 			id: '6030076d8f08ad21ea6006cf',
 			elements: [
 				{
-					html:
-						'<p>Attached to the rover’s belly is a diminutive helicopter called Ingenuity. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Attached to the rover’s belly is a diminutive helicopter called Ingenuity. </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'aed5ac8e-6e93-4b8b-bfa6-fd8955a1c7a4',
 				},
 				{
-					html:
-						'<p>The 1.8kg drone-like rotorcraft is the first flying machine ever sent to another planet — it has the ability to take colour pictures and video. The rover can also take images of Ingenuity. <br></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The 1.8kg drone-like rotorcraft is the first flying machine ever sent to another planet — it has the ability to take colour pictures and video. The rover can also take images of Ingenuity. <br></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3fbe7191-dca8-45e8-bc47-142d9b73791a',
 				},
 				{
@@ -2746,8 +2549,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/4696.jpg',
+								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/4696.jpg',
 							},
 							{
 								index: 1,
@@ -2758,8 +2560,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg',
+								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg',
 							},
 							{
 								index: 2,
@@ -2769,8 +2570,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/2000.jpg',
+								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/2000.jpg',
 							},
 							{
 								index: 3,
@@ -2780,8 +2580,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/1000.jpg',
+								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/1000.jpg',
 							},
 							{
 								index: 4,
@@ -2791,8 +2590,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/500.jpg',
+								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/500.jpg',
 							},
 							{
 								index: 5,
@@ -2802,14 +2600,12 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/140.jpg',
+								url: 'https://media.guim.co.uk/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/140.jpg',
 							},
 						],
 					},
 					data: {
-						alt:
-							'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
+						alt: 'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
 						caption:
 							'A staff member carries a full-scale model of the Ingenuity Mars Helicopter at NASA’s Jet Propulsion Laboratory (JPL) ahead of the Mars 2020 Perseverance rover landing on February 18, 2021 in Pasadena, California.',
 						credit: 'Photograph: Patrick T Fallon/AFP/Getty Images',
@@ -2821,33 +2617,27 @@ export const Dead: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
 									width: 890,
 								},
 							],
@@ -2856,23 +2646,19 @@ export const Dead: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=140&quality=85&auto=format&fit=max&s=c8ec75c9fda9e676a5f9c22bd3bf901c',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=140&quality=85&auto=format&fit=max&s=c8ec75c9fda9e676a5f9c22bd3bf901c',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=f388fcbbf12716c29c47d90b7a88d00d',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=f388fcbbf12716c29c47d90b7a88d00d',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=120&quality=85&auto=format&fit=max&s=1210e28b5fbc744e22ded87b90968869',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=120&quality=85&auto=format&fit=max&s=1210e28b5fbc744e22ded87b90968869',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=0b16571fc9891fd32a95e2e001089e99',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=0b16571fc9891fd32a95e2e001089e99',
 									width: 240,
 								},
 							],
@@ -2881,53 +2667,43 @@ export const Dead: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=380&quality=85&auto=format&fit=max&s=0deb295190bb8da6288d8b15629d514a',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=380&quality=85&auto=format&fit=max&s=0deb295190bb8da6288d8b15629d514a',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=39b39319a4ee5770676ed699b8a50a23',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=39b39319a4ee5770676ed699b8a50a23',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=300&quality=85&auto=format&fit=max&s=f8f6722aef47ef10e446790272592de2',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=300&quality=85&auto=format&fit=max&s=f8f6722aef47ef10e446790272592de2',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=16e4daf997a9fe988222a679a4b48a4e',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=16e4daf997a9fe988222a679a4b48a4e',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
 									width: 890,
 								},
 							],
@@ -2936,73 +2712,59 @@ export const Dead: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1020&quality=85&auto=format&fit=max&s=fbe7899898188b1123a8803af4db8bb8',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1020&quality=85&auto=format&fit=max&s=fbe7899898188b1123a8803af4db8bb8',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=def0bde4725c7af5b04e488cf0dd2d9a',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=def0bde4725c7af5b04e488cf0dd2d9a',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=940&quality=85&auto=format&fit=max&s=c0c3b98f3aaee4a2833e2e7d81038456',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=940&quality=85&auto=format&fit=max&s=c0c3b98f3aaee4a2833e2e7d81038456',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=4e0550564265311e6168245f862a55f9',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=4e0550564265311e6168245f862a55f9',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=700&quality=85&auto=format&fit=max&s=312a639859506631e1a01086c64787e5',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=700&quality=85&auto=format&fit=max&s=312a639859506631e1a01086c64787e5',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=9eef7c6970af2cce813e7ad6c09ac23b',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=9eef7c6970af2cce813e7ad6c09ac23b',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=700&quality=85&auto=format&fit=max&s=312a639859506631e1a01086c64787e5',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=700&quality=85&auto=format&fit=max&s=312a639859506631e1a01086c64787e5',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=9eef7c6970af2cce813e7ad6c09ac23b',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=9eef7c6970af2cce813e7ad6c09ac23b',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=660&quality=85&auto=format&fit=max&s=a50b035143395765c215b482ba82aec0',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=660&quality=85&auto=format&fit=max&s=a50b035143395765c215b482ba82aec0',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=2a576a73c926f663af02f6b9a988405c',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=2a576a73c926f663af02f6b9a988405c',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=645&quality=85&auto=format&fit=max&s=bfa5c9bd94be8fcc57a033d8f6548eba',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=645&quality=85&auto=format&fit=max&s=bfa5c9bd94be8fcc57a033d8f6548eba',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=40b925200c72a74adba7db4fa70752a0',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=40b925200c72a74adba7db4fa70752a0',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=465&quality=85&auto=format&fit=max&s=96a6ad795ec4856d479506908bba991f',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=465&quality=85&auto=format&fit=max&s=96a6ad795ec4856d479506908bba991f',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=60776d5cd3d7de656a427b9883932523',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=60776d5cd3d7de656a427b9883932523',
 									width: 930,
 								},
 							],
@@ -3011,33 +2773,27 @@ export const Dead: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=85&auto=format&fit=max&s=b22d62a31697f2adff74abfa6a2c0d43',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=e31231382074eae8ec0359a5acce2829',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=85&auto=format&fit=max&s=1930a230b4233b64759be578f51a2dfd',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=4a573ef344e98f6df663f1ab6b1fb2b7',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=85&auto=format&fit=max&s=b28572facc61cf5d949fdfa16ad28a59',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=cbf84604827f30057b1d124bf320d993',
 									width: 890,
 								},
 							],
@@ -3046,80 +2802,65 @@ export const Dead: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1300&quality=85&auto=format&fit=max&s=b4aaa93fde52edc87f62f8c67151672a',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1300&quality=85&auto=format&fit=max&s=b4aaa93fde52edc87f62f8c67151672a',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=553c14190a74bc2ca9decb234fd91db1',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=553c14190a74bc2ca9decb234fd91db1',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1140&quality=85&auto=format&fit=max&s=83b02c981e25fbdf5e19a6ed9ef8fc08',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1140&quality=85&auto=format&fit=max&s=83b02c981e25fbdf5e19a6ed9ef8fc08',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=7020cdbdb61721ac7b968471624df2de',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=7020cdbdb61721ac7b968471624df2de',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1125&quality=85&auto=format&fit=max&s=36b626bc2ac314f37aaa7aa980e4f09f',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1125&quality=85&auto=format&fit=max&s=36b626bc2ac314f37aaa7aa980e4f09f',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=4a7055cfc88684366b10e8091e8b89f4',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=4a7055cfc88684366b10e8091e8b89f4',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=965&quality=85&auto=format&fit=max&s=1cbbffd0943a75b8835bd15e6ea665a8',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=965&quality=85&auto=format&fit=max&s=1cbbffd0943a75b8835bd15e6ea665a8',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=ef03a0df72131db6ebe57e1e4ce00bc8',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=ef03a0df72131db6ebe57e1e4ce00bc8',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=725&quality=85&auto=format&fit=max&s=5a36152620f414df5519b33e72471de0',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=725&quality=85&auto=format&fit=max&s=5a36152620f414df5519b33e72471de0',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=d0c072de38b47015f52cd7c6ce25c9d3',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=d0c072de38b47015f52cd7c6ce25c9d3',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=645&quality=85&auto=format&fit=max&s=bfa5c9bd94be8fcc57a033d8f6548eba',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=645&quality=85&auto=format&fit=max&s=bfa5c9bd94be8fcc57a033d8f6548eba',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=40b925200c72a74adba7db4fa70752a0',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=40b925200c72a74adba7db4fa70752a0',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=465&quality=85&auto=format&fit=max&s=96a6ad795ec4856d479506908bba991f',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=465&quality=85&auto=format&fit=max&s=96a6ad795ec4856d479506908bba991f',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=60776d5cd3d7de656a427b9883932523',
+									src: 'https://i.guim.co.uk/img/media/ea98d90c006dad6818cc9224e7e2a2bcfe7add7b/0_0_4696_3131/master/4696.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=60776d5cd3d7de656a427b9883932523',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '98099aa8-61c7-41f6-8936-2f6c3f87f393',
 				},
 			],
@@ -3136,17 +2877,13 @@ export const Dead: CAPIType = {
 			id: '603006868f08ad21ea6006c7',
 			elements: [
 				{
-					html:
-						'<p>Key question: <strong>how long till they fly the helicopter?</strong> </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Key question: <strong>how long till they fly the helicopter?</strong> </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '6c079e12-76a4-4980-9107-c19173f35d2f',
 				},
 				{
-					html:
-						'<p>“Caveat caveat caveat,” the scientist says. “Super-fast” would be “sol 60.” With a sol being 37 minutes longer than and earth days, that would be 60 earth days plus 37 hours = 61 days, 13 hours. Sometime in April. Best-case scenario. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>“Caveat caveat caveat,” the scientist says. “Super-fast” would be “sol 60.” With a sol being 37 minutes longer than and earth days, that would be 60 earth days plus 37 hours = 61 days, 13 hours. Sometime in April. Best-case scenario. </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '57169fe7-e806-4751-abea-8a96bb82bf91',
 				},
 			],
@@ -3173,8 +2910,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/4000.jpg',
+								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/4000.jpg',
 							},
 							{
 								index: 1,
@@ -3185,8 +2921,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg',
+								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg',
 							},
 							{
 								index: 2,
@@ -3196,8 +2931,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/2000.jpg',
+								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/2000.jpg',
 							},
 							{
 								index: 3,
@@ -3207,8 +2941,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/1000.jpg',
+								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/1000.jpg',
 							},
 							{
 								index: 4,
@@ -3218,8 +2951,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/500.jpg',
+								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/500.jpg',
 							},
 							{
 								index: 5,
@@ -3229,14 +2961,12 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/140.jpg',
+								url: 'https://media.guim.co.uk/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/140.jpg',
 							},
 						],
 					},
 					data: {
-						alt:
-							'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
+						alt: 'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
 						caption:
 							'This NASA photo released on February 19, 2021, shows an image from NASAs Perseverance rover as it landed on the surface of Mars on February 18, 2021.',
 						credit: 'Photograph: NASA/AFP/Getty Images',
@@ -3248,33 +2978,27 @@ export const Dead: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
 									width: 890,
 								},
 							],
@@ -3283,23 +3007,19 @@ export const Dead: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=79b9f578604116a20becaa15616b9403',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=79b9f578604116a20becaa15616b9403',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=b07ed61915f695be4fd7e4bb2d0e415a',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=b07ed61915f695be4fd7e4bb2d0e415a',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=4d164922cd857ca020ba542d6376944a',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=4d164922cd857ca020ba542d6376944a',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=91a8428e9df88acee619e7879373e79b',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=91a8428e9df88acee619e7879373e79b',
 									width: 240,
 								},
 							],
@@ -3308,53 +3028,43 @@ export const Dead: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=9d51616fac736222b356a9e1fac28e53',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=9d51616fac736222b356a9e1fac28e53',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=608ac7a8755f891e2078b5c602d1a1c6',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=608ac7a8755f891e2078b5c602d1a1c6',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=f76acd8daad0de5bbc33bc47009a20cd',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=f76acd8daad0de5bbc33bc47009a20cd',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=5cbf781084463daff76c3cbb27d84ca9',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=5cbf781084463daff76c3cbb27d84ca9',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
 									width: 890,
 								},
 							],
@@ -3363,73 +3073,59 @@ export const Dead: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1020&quality=85&auto=format&fit=max&s=e86464f805e69fb8e770c29f2bcaf74e',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1020&quality=85&auto=format&fit=max&s=e86464f805e69fb8e770c29f2bcaf74e',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=30e2258e5f8af9c31522b177d944ed1c',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=30e2258e5f8af9c31522b177d944ed1c',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=940&quality=85&auto=format&fit=max&s=165474e87158dc7dfd2bb6ee6a6dd9c5',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=940&quality=85&auto=format&fit=max&s=165474e87158dc7dfd2bb6ee6a6dd9c5',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=bf56054fe18f2fef3f0cd91dd52d5286',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=bf56054fe18f2fef3f0cd91dd52d5286',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=b52fc42fb4b688acfb4b9aa698ce6d73',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=b52fc42fb4b688acfb4b9aa698ce6d73',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=02819b0eacf7a9f3d7587a1f45a4d26a',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=02819b0eacf7a9f3d7587a1f45a4d26a',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=b52fc42fb4b688acfb4b9aa698ce6d73',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=b52fc42fb4b688acfb4b9aa698ce6d73',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=02819b0eacf7a9f3d7587a1f45a4d26a',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=02819b0eacf7a9f3d7587a1f45a4d26a',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=0c4596cdfeb0ff395ee7f1df8b1a8e0e',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=0c4596cdfeb0ff395ee7f1df8b1a8e0e',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=7a6f5fdf456bca2d7bf22206eaa5293e',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=7a6f5fdf456bca2d7bf22206eaa5293e',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=50dd4bc5c704fb225fd95b2ffde8fe42',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=50dd4bc5c704fb225fd95b2ffde8fe42',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ddaaf6f4b944ab8f27d5163f1c1d0993',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ddaaf6f4b944ab8f27d5163f1c1d0993',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=73c593d709139a029ccaef29b3c0ff93',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=73c593d709139a029ccaef29b3c0ff93',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=898beb484d67e13be19ac24b0ab15476',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=898beb484d67e13be19ac24b0ab15476',
 									width: 930,
 								},
 							],
@@ -3438,33 +3134,27 @@ export const Dead: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=6730ecb623239b21bb36ec559dfa575d',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b66d9b0adad6becf6d46a1ed5afecf2f',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=12fc599f682fbb5db956f3bf3cf3dd34',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=6f10aab48e950e2db32e45782fe3471d',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=79f96d88f4aee40b0d70d5402fe10b3c',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a58255c344f798243c25cff7f5303808',
 									width: 890,
 								},
 							],
@@ -3473,80 +3163,65 @@ export const Dead: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=4a046f9fba22acdff1d46130ca07dd0e',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=4a046f9fba22acdff1d46130ca07dd0e',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=12ee921fc3efd02d5da9f0993e297929',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=12ee921fc3efd02d5da9f0993e297929',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=8b8942ddd00603c9cba3bc374d9bdd1a',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=8b8942ddd00603c9cba3bc374d9bdd1a',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=996b9b3caa45c83e28bc7d11c5ad71d4',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=996b9b3caa45c83e28bc7d11c5ad71d4',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1125&quality=85&auto=format&fit=max&s=8455b59ef1222180044897992e94dd65',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1125&quality=85&auto=format&fit=max&s=8455b59ef1222180044897992e94dd65',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=4052e8f9a7c5e87c2d627c2b7ee5e9a3',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=4052e8f9a7c5e87c2d627c2b7ee5e9a3',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=965&quality=85&auto=format&fit=max&s=dd5d970606d5587d8cd06b494785fd42',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=965&quality=85&auto=format&fit=max&s=dd5d970606d5587d8cd06b494785fd42',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a759edb36fd69f0279e73c4cc8f541cc',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a759edb36fd69f0279e73c4cc8f541cc',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=725&quality=85&auto=format&fit=max&s=d3f9c02ac0a87a36162ae3ed10c184ce',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=725&quality=85&auto=format&fit=max&s=d3f9c02ac0a87a36162ae3ed10c184ce',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=f09607376bec31ece741b55cc87ee89c',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=f09607376bec31ece741b55cc87ee89c',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=50dd4bc5c704fb225fd95b2ffde8fe42',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=50dd4bc5c704fb225fd95b2ffde8fe42',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ddaaf6f4b944ab8f27d5163f1c1d0993',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ddaaf6f4b944ab8f27d5163f1c1d0993',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=73c593d709139a029ccaef29b3c0ff93',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=73c593d709139a029ccaef29b3c0ff93',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=898beb484d67e13be19ac24b0ab15476',
+									src: 'https://i.guim.co.uk/img/media/b1e7b490e505c57a17af88fa81b850c3fe579409/0_0_4000_3000/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=898beb484d67e13be19ac24b0ab15476',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '69c9fbe3-a3fc-4dba-8380-f693684e6d3e',
 				},
 			],
@@ -3564,8 +3239,7 @@ export const Dead: CAPIType = {
 		{
 			'@type': 'LiveBlogPosting',
 			'@context': 'http://schema.org',
-			'@id':
-				'https://amp.theguardian.comscience/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+			'@id': 'https://amp.theguardian.comscience/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -3574,8 +3248,7 @@ export const Dead: CAPIType = {
 				url: 'https://www.theguardian.com/',
 				logo: {
 					'@type': 'ImageObject',
-					url:
-						'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 					width: 190,
 					height: 60,
 				},
@@ -3601,8 +3274,7 @@ export const Dead: CAPIType = {
 				{
 					'@type': 'Person',
 					name: 'Natalie Grover',
-					sameAs:
-						'https://www.theguardian.com/profile/natalie-grover',
+					sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 				},
 			],
 			datePublished: '2021-02-19T19:41:53.000Z',
@@ -3626,8 +3298,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -3648,14 +3319,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -3679,8 +3348,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -3701,14 +3369,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -3731,8 +3397,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -3753,14 +3418,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -3783,8 +3446,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -3805,14 +3467,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -3836,8 +3496,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -3858,14 +3517,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -3889,8 +3546,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -3911,14 +3567,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -3942,8 +3596,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -3964,14 +3617,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -3995,8 +3646,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -4017,14 +3667,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -4048,8 +3696,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -4070,14 +3717,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -4101,8 +3746,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -4123,14 +3767,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -4154,8 +3796,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -4176,14 +3817,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -4207,8 +3846,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -4229,14 +3867,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -4260,8 +3896,7 @@ export const Dead: CAPIType = {
 						url: 'https://www.theguardian.com/',
 						logo: {
 							'@type': 'ImageObject',
-							url:
-								'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+							url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 							width: 190,
 							height: 60,
 						},
@@ -4282,14 +3917,12 @@ export const Dead: CAPIType = {
 						{
 							'@type': 'Person',
 							name: 'Tom McCarthy',
-							sameAs:
-								'https://www.theguardian.com/profile/tommccarthy',
+							sameAs: 'https://www.theguardian.com/profile/tommccarthy',
 						},
 						{
 							'@type': 'Person',
 							name: 'Natalie Grover',
-							sameAs:
-								'https://www.theguardian.com/profile/natalie-grover',
+							sameAs: 'https://www.theguardian.com/profile/natalie-grover',
 						},
 					],
 					datePublished: '2021-02-19T19:41:53.000Z',
@@ -4305,12 +3938,10 @@ export const Dead: CAPIType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+			'@id': 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target:
-					'android-app://com.guardian/https/www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+				target: 'android-app://com.guardian/https/www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 			},
 		},
 	],
@@ -4335,8 +3966,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/4000.jpg',
+								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/4000.jpg',
 							},
 							{
 								index: 1,
@@ -4347,8 +3977,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg',
+								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg',
 							},
 							{
 								index: 2,
@@ -4358,8 +3987,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/2000.jpg',
+								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/2000.jpg',
 							},
 							{
 								index: 3,
@@ -4369,8 +3997,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/1000.jpg',
+								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/1000.jpg',
 							},
 							{
 								index: 4,
@@ -4380,8 +4007,7 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/500.jpg',
+								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/500.jpg',
 							},
 							{
 								index: 5,
@@ -4391,14 +4017,12 @@ export const Dead: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/140.jpg',
+								url: 'https://media.guim.co.uk/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/140.jpg',
 							},
 						],
 					},
 					data: {
-						alt:
-							'This photo released by NASA, shows the Perseverance rover being lowered by the Sky Crane to the surface of Mars on February 18, 2021.',
+						alt: 'This photo released by NASA, shows the Perseverance rover being lowered by the Sky Crane to the surface of Mars on February 18, 2021.',
 						caption:
 							'This photo released by NASA, shows the Perseverance rover being lowered by the Sky Crane to the surface of Mars on February 18, 2021.',
 						credit: 'Photograph: NASA/AFP/Getty Images',
@@ -4410,33 +4034,27 @@ export const Dead: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
 									width: 890,
 								},
 							],
@@ -4445,23 +4063,19 @@ export const Dead: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=87c37270fb8407941d88e74c04e2762d',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=140&quality=85&auto=format&fit=max&s=87c37270fb8407941d88e74c04e2762d',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=fb665850dd7e3efe8826797129968bb9',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=fb665850dd7e3efe8826797129968bb9',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=8fb190de13314138fbf0ae411e9341d0',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=120&quality=85&auto=format&fit=max&s=8fb190de13314138fbf0ae411e9341d0',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=2a975c552341b8d95f8fffea51912917',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=2a975c552341b8d95f8fffea51912917',
 									width: 240,
 								},
 							],
@@ -4470,53 +4084,43 @@ export const Dead: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=dd182f8a9555434b29bb4e8292dd4a88',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=380&quality=85&auto=format&fit=max&s=dd182f8a9555434b29bb4e8292dd4a88',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=c0c4fe10071c27d5d86bc6cfb9f3370c',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=c0c4fe10071c27d5d86bc6cfb9f3370c',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=221f80b8ac626ea906fed38aeb67c36d',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=221f80b8ac626ea906fed38aeb67c36d',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=d7595a03c70a0734f27581c6541b9a69',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=d7595a03c70a0734f27581c6541b9a69',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
 									width: 890,
 								},
 							],
@@ -4525,73 +4129,59 @@ export const Dead: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1020&quality=85&auto=format&fit=max&s=6a965778f2c2c11b0392da4cb1df7c48',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1020&quality=85&auto=format&fit=max&s=6a965778f2c2c11b0392da4cb1df7c48',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=27469c375e3ef0805fee980274b43d22',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=27469c375e3ef0805fee980274b43d22',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=940&quality=85&auto=format&fit=max&s=a7530250e3737f45f5134078810460fe',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=940&quality=85&auto=format&fit=max&s=a7530250e3737f45f5134078810460fe',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=d1c08fd34850ee97599bf9807a2899aa',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=d1c08fd34850ee97599bf9807a2899aa',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=eba02301a1c69a70b552432cfabae868',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=eba02301a1c69a70b552432cfabae868',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b69e15593f45427e505c9f6f95eb5f8e',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b69e15593f45427e505c9f6f95eb5f8e',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=eba02301a1c69a70b552432cfabae868',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=700&quality=85&auto=format&fit=max&s=eba02301a1c69a70b552432cfabae868',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b69e15593f45427e505c9f6f95eb5f8e',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b69e15593f45427e505c9f6f95eb5f8e',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=978b7e2eec7178a53430971e82505e08',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=660&quality=85&auto=format&fit=max&s=978b7e2eec7178a53430971e82505e08',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=260ae4003ab109f6ac45892daf15795d',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=260ae4003ab109f6ac45892daf15795d',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=398912558310f520d5fb572cbda1ee40',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=398912558310f520d5fb572cbda1ee40',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=887dd13dd4b9e709e69f67a3e34454ac',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=887dd13dd4b9e709e69f67a3e34454ac',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=c462193aabdb3e1fa2e6ef2a0a4126f1',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=c462193aabdb3e1fa2e6ef2a0a4126f1',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3948bdd0c790ccd63f7fbf24d059c41f',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3948bdd0c790ccd63f7fbf24d059c41f',
 									width: 930,
 								},
 							],
@@ -4600,33 +4190,27 @@ export const Dead: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=85&auto=format&fit=max&s=ef7cf743cf8ab5ef998be5ef2f41c2e3',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=0010eb3066a38fa8e9fea2c751a62ad7',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=85&auto=format&fit=max&s=cfb92c72e3dba3accd001a34ce1603be',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=42e49e06c8c08103d14918e627cf6bc9',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=85&auto=format&fit=max&s=39df0de51ba45502f3f8de87caf745e3',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48c63cdf344e4e3b4d810dbf06067edf',
 									width: 890,
 								},
 							],
@@ -4635,80 +4219,65 @@ export const Dead: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=e393f002906cb6ef2f7bbf05da8943d5',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1300&quality=85&auto=format&fit=max&s=e393f002906cb6ef2f7bbf05da8943d5',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f9860e3e3022cd91062ccc788137aa4',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f9860e3e3022cd91062ccc788137aa4',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=50f0853e16f19889587ea5744f28883e',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1140&quality=85&auto=format&fit=max&s=50f0853e16f19889587ea5744f28883e',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=8781d4362ead88ae16be8d30396bf695',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=8781d4362ead88ae16be8d30396bf695',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1125&quality=85&auto=format&fit=max&s=375c9ee2ab7e5f04d6ff5b11ac280819',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1125&quality=85&auto=format&fit=max&s=375c9ee2ab7e5f04d6ff5b11ac280819',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=c102c95ca469a50c1788dacaa25405af',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=c102c95ca469a50c1788dacaa25405af',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=965&quality=85&auto=format&fit=max&s=bdd6020c155d0f60e899b0b06d4e8982',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=965&quality=85&auto=format&fit=max&s=bdd6020c155d0f60e899b0b06d4e8982',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a1b38f782b8ec92cf7c92dcee4cce37a',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a1b38f782b8ec92cf7c92dcee4cce37a',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=725&quality=85&auto=format&fit=max&s=8765d5d86a17c315c91c066bbd44103c',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=725&quality=85&auto=format&fit=max&s=8765d5d86a17c315c91c066bbd44103c',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=b3c20d8686732742abf7f595c298efa3',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=b3c20d8686732742abf7f595c298efa3',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=398912558310f520d5fb572cbda1ee40',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=645&quality=85&auto=format&fit=max&s=398912558310f520d5fb572cbda1ee40',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=887dd13dd4b9e709e69f67a3e34454ac',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=887dd13dd4b9e709e69f67a3e34454ac',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=c462193aabdb3e1fa2e6ef2a0a4126f1',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=465&quality=85&auto=format&fit=max&s=c462193aabdb3e1fa2e6ef2a0a4126f1',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3948bdd0c790ccd63f7fbf24d059c41f',
+									src: 'https://i.guim.co.uk/img/media/803fc46680bf4a27739f614e95c4833c99ab066b/0_300_4000_2400/master/4000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=3948bdd0c790ccd63f7fbf24d059c41f',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '5b27d234-2d44-4b2f-8678-d3f133bebf5c',
 				},
 			],
@@ -4718,8 +4287,7 @@ export const Dead: CAPIType = {
 			blockLastUpdatedDisplay: '18.38 GMT',
 			blockFirstPublished: 1613758917000,
 			blockFirstPublishedDisplay: '18.21 GMT',
-			title:
-				'New image of Perseverance shows rover being lowered to Mars surface',
+			title: 'New image of Perseverance shows rover being lowered to Mars surface',
 			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
 			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
 		},
@@ -4727,17 +4295,13 @@ export const Dead: CAPIType = {
 			id: '602ffd998f08c3cb92a5c9ac',
 			elements: [
 				{
-					html:
-						'<p>Steltzner is showing some of the most fantastic images from space explorations past, from moonshots to the Hubble telescope. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Steltzner is showing some of the most fantastic images from space explorations past, from moonshots to the Hubble telescope. </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '9a066d1c-be10-410b-9bdb-d82ff3326c17',
 				},
 				{
-					html:
-						'<p>He proposes an image of the dangling Perseverance Rover taken yesterday – it looks like a futuristic marionette – as the next entry in this cosmic scrapbook. <br></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>He proposes an image of the dangling Perseverance Rover taken yesterday – it looks like a futuristic marionette – as the next entry in this cosmic scrapbook. <br></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '62e23bfd-a074-4f14-b789-633ab141b274',
 				},
 			],
@@ -4747,8 +4311,7 @@ export const Dead: CAPIType = {
 			blockLastUpdatedDisplay: '18.16 GMT',
 			blockFirstPublished: 1613757946000,
 			blockFirstPublishedDisplay: '18.05 GMT',
-			title:
-				'Nasa scientists show new images of Perseverance rover after Mars landing',
+			title: 'Nasa scientists show new images of Perseverance rover after Mars landing',
 			primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
 			secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
 		},
@@ -4756,38 +4319,28 @@ export const Dead: CAPIType = {
 			id: '602fd0c48f08ad21ea600275',
 			elements: [
 				{
-					html:
-						'<p>Members of the National Aeronautics and <a href="https://www.theguardian.com/science/space" data-component="auto-linked-tag">Space</a> Administration (Nasa) team that put a rover on Mars on Thursday are preparing to host a news conference and answer questions about the mission.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Members of the National Aeronautics and <a href="https://www.theguardian.com/science/space" data-component="auto-linked-tag">Space</a> Administration (Nasa) team that put a rover on Mars on Thursday are preparing to host a news conference and answer questions about the mission.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '37cb6d1e-2ef6-4738-8dc0-7d2d171c26bb',
 				},
 				{
-					html:
-						'<p>The rover, called Perseverance or Percy for short, is on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> to search for signs of ancient life and collect samples to be returned by a future mission. About the size of a car, the wheeled rover is equipped with cameras, microphones, drills and even a small helicopter. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The rover, called Perseverance or Percy for short, is on <a href="https://www.theguardian.com/science/mars" data-component="auto-linked-tag">Mars</a> to search for signs of ancient life and collect samples to be returned by a future mission. About the size of a car, the wheeled rover is equipped with cameras, microphones, drills and even a small helicopter. </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'efabdc81-a49a-4fcc-bd89-89b2c1777602',
 				},
 				{
-					html:
-						'<p>Guardian science correspondent Natalie Grover reports of Percy’s mission:</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Guardian science correspondent Natalie Grover reports of Percy’s mission:</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '4cb9692b-4e25-4277-9494-a5366df83f10',
 				},
 				{
-					html:
-						'<blockquote class="quoted"> \n <p>Previous Mars missions including <a href="https://viewer.gutools.co.uk/science/2013/jul/28/curiosity-rover-descent-mars-nasa">Curiosity</a> and Opportunity have suggested Mars was once a wet planet with an environment likely to have been supportive of life billions of years ago. Astrobiologists hope this latest mission can offer some evidence to prove whether that was the case.</p> \n</blockquote>',
-					_type:
-						'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+					html: '<blockquote class="quoted"> \n <p>Previous Mars missions including <a href="https://viewer.gutools.co.uk/science/2013/jul/28/curiosity-rover-descent-mars-nasa">Curiosity</a> and Opportunity have suggested Mars was once a wet planet with an environment likely to have been supportive of life billions of years ago. Astrobiologists hope this latest mission can offer some evidence to prove whether that was the case.</p> \n</blockquote>',
+					_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 					elementId: '0dfc0628-3e3f-49b4-9524-5a6a582fdbb2',
 				},
 				{
-					html:
-						'<p>The <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a> scientists appear to feel they may be tantalizingly close to a discovery that could change the way we see the universe and our home in it. Here was the scene in the control room near Los Angeles just before 1pm local time on Thursday when Percy’s safe touchdown on Mars was confirmed:<br></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The <a href="https://www.theguardian.com/science/nasa" data-component="auto-linked-tag">Nasa</a> scientists appear to feel they may be tantalizingly close to a discovery that could change the way we see the universe and our home in it. Here was the scene in the control room near Los Angeles just before 1pm local time on Thursday when Percy’s safe touchdown on Mars was confirmed:<br></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '58bf1578-e1ff-4f6f-895a-725b44e10e99',
 				},
 				{
@@ -4800,21 +4353,17 @@ export const Dead: CAPIType = {
 					role: 'inline',
 					isThirdPartyTracking: false,
 					source: 'YouTube',
-					_type:
-						'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
+					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
 					elementId: '7b8ac3dc-8ec6-4922-ac0f-40f3ed74e10b',
 				},
 				{
-					html:
-						'<p>The robotic vehicle sailed through space for nearly seven months, covering 293m miles (472m km) before piercing the Martian atmosphere at 12,000mph (19,000km/h) to begin its approach to touchdown on the planet’s surface.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The robotic vehicle sailed through space for nearly seven months, covering 293m miles (472m km) before piercing the Martian atmosphere at 12,000mph (19,000km/h) to begin its approach to touchdown on the planet’s surface.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '277915d9-1916-4be5-9e24-fcc754c21236',
 				},
 				{
 					html: '<p>Thank you for joining our live coverage. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '62513de2-5c37-4192-8861-ba9c7f6a3ee5',
 				},
 			],
@@ -4934,8 +4483,7 @@ export const Dead: CAPIType = {
 		sharedAdTargeting: {
 			ct: 'article',
 			co: ['jennifer-rankin'],
-			url:
-				'/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 			su: ['0'],
 			edition: 'uk',
 			tn: ['news'],
@@ -4989,8 +4537,7 @@ export const Dead: CAPIType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId:
-			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

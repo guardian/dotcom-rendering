@@ -53,15 +53,13 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 		withUpdatedSubheadings.forEach((element) => {
 			if (isInteractiveContentsBlockElement(element)) {
 				updatedElements.push({
-					_type:
-						'model.dotcomrendering.pageElements.DividerBlockElement',
+					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 					size: 'full',
 					spaceAbove: 'tight',
 				});
 				if ('elementId' in element)
 					updatedElements.push({
-						_type:
-							'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+						_type: 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 						elementId: element.elementId,
 						// Strip the HTML from the subheading links for use as titles within the element
 						subheadingLinks: subheadingLinks.map((subheading) => ({

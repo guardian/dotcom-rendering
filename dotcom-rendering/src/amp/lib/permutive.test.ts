@@ -53,7 +53,7 @@ describe('generatePermutivePayload', () => {
 			'properties.content.title': 'article headline',
 		};
 		expect(
-			generatePermutivePayload((config as unknown) as ConfigType),
+			generatePermutivePayload(config as unknown as ConfigType),
 		).toStrictEqual(expected);
 	});
 
@@ -73,7 +73,7 @@ describe('generatePermutivePayload', () => {
 		};
 
 		expect(
-			generatePermutivePayload((config as unknown) as ConfigType),
+			generatePermutivePayload(config as unknown as ConfigType),
 		).toStrictEqual(expected);
 	});
 
@@ -85,7 +85,7 @@ describe('generatePermutivePayload', () => {
 		const expected = {};
 
 		expect(
-			generatePermutivePayload((config as unknown) as ConfigType),
+			generatePermutivePayload(config as unknown as ConfigType),
 		).toStrictEqual(expected);
 	});
 });

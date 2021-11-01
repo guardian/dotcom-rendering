@@ -18,20 +18,20 @@ const embedPlayEvent = {
 };
 
 describe('Video', function () {
-
 	beforeEach(function () {
 		storage.local.set('gu.geo.override', 'GB');
-	})
+	});
 
 	it('Main media youtube video', function () {
-
 		cy.visit(`/Article?url=${mainMediaVideo}`);
 		cmpIframe().contains("It's your choice");
 		cmpIframe().find("[title='Manage my cookies']").click();
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Accept all']").click();
 
-		cy.intercept('https://www.youtube.com/embed/S0CE1n-R3OY?*').as('youtubePlayer');
+		cy.intercept('https://www.youtube.com/embed/S0CE1n-R3OY?*').as(
+			'youtubePlayer',
+		);
 
 		cy.intercept(
 			{
@@ -61,14 +61,15 @@ describe('Video', function () {
 	});
 
 	it('Embed youtube video', function () {
-
 		cy.visit(`/Article?url=${embedMediaVideo}`);
 		cmpIframe().contains("It's your choice");
 		cmpIframe().find("[title='Manage my cookies']").click();
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Accept all']").click();
 
-		cy.intercept('https://www.youtube.com/embed/N9Cgy-ke5-s?*').as('youtubePlayer');
+		cy.intercept('https://www.youtube.com/embed/N9Cgy-ke5-s?*').as(
+			'youtubePlayer',
+		);
 
 		cy.intercept(
 			{
@@ -80,9 +81,7 @@ describe('Video', function () {
 			function (req) {
 				const url = new URL(req.url);
 				const videoValue = url.searchParams.get('video');
-				expect(JSON.parse(videoValue)).to.deep.equal(
-					embedPlayEvent,
-				);
+				expect(JSON.parse(videoValue)).to.deep.equal(embedPlayEvent);
 			},
 		).as('ophanCall');
 

@@ -118,19 +118,25 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 		case ArticleDisplay.Standard:
 		default: {
 			switch (format.design) {
-				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
+				case ArticleDesign.Comment:
 				case ArticleDesign.Feature:
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review:
 					return css`
-						${headline.xxsmall({
+						${headline.xxxsmall({
 							fontWeight: 'light',
 						})};
 						margin-bottom: ${space[3]}px;
-						max-width: 540px;
+						max-width: 80%;
 						color: ${palette.text.standfirst};
+						${from.tablet} {
+							${headline.xxsmall({
+								fontWeight: 'light',
+							})};
+							max-width: 540px;
+						}
 					`;
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
@@ -167,8 +173,11 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 								})};
 								line-height: 20px;
 								margin-bottom: ${space[3]}px;
-								max-width: 540px;
+								max-width: 80%;
 								color: ${palette.text.standfirst};
+								${from.tablet} {
+									max-width: 540px;
+								}
 							`;
 					}
 			}
