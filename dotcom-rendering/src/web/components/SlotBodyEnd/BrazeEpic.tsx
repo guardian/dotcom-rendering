@@ -27,7 +27,7 @@ type EpicConfig = {
 	idApiUrl: string;
 };
 
-export const canShow = async (
+export const canShowBrazeEpic = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
 	brazeArticleContext: BrazeArticleContext
 ): Promise<CanShowResult<any>> => {
