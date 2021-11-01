@@ -129,13 +129,13 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 							fontWeight: 'light',
 						})};
 						margin-bottom: ${space[3]}px;
-						max-width:80%;
+						max-width: 80%;
 						color: ${palette.text.standfirst};
 						${from.tablet} {
 							${headline.xxsmall({
 								fontWeight: 'light',
 							})};
-							max-width:540px;
+							max-width: 540px;
 						}
 					`;
 				case ArticleDesign.LiveBlog:
@@ -176,7 +176,7 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 								max-width: 80%;
 								color: ${palette.text.standfirst};
 								${from.tablet} {
-									max-width:540px;
+									max-width: 540px;
 								}
 							`;
 					}
