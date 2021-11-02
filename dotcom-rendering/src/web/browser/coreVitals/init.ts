@@ -1,14 +1,30 @@
-import '../webpackPublicPath';
+import {
+	bypassCoreWebVitalsSampling,
+	getCookie,
+	initCoreWebVitals,
+} from '@guardian/libs';
 import { startup } from '@root/src/web/browser/startup';
-import { coreVitals } from './coreVitals';
 
-const init = async (): Promise<void> => {
-	// Sample 1 out of 100
-	const inSample = Math.floor(Math.random() * 100);
-	const inLocal = window.location.hostname === 'localhost';
-	if (inSample === 1 || inLocal) {
-		coreVitals();
-	}
+const init = (): Promise<void> => {
+	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
+	const { pageViewId } = window.guardian.config.ophan;
+	const isDev =
+		window.location.hostname === 'm.code.dev-theguardian.com' ||
+		window.location.hostname === 'localhost' ||
+		window.location.hostname === 'preview.gutools.co.uk';
+	const sampling = 1 / 100;
+
+	initCoreWebVitals({
+		browserId,
+		pageViewId,
+		isDev,
+		sampling,
+		team: 'dotcom',
+	});
+
+	if (window.location.hostname === 'localhost')
+		bypassCoreWebVitalsSampling('dotcom');
+
 	return Promise.resolve();
 };
 

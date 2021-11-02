@@ -48,7 +48,7 @@ const extractInteractiveAssets = (elements: BodyElement[]): Assets =>
 	);
 
 const getElements = (item: Item): Array<Result<string, BodyElement>> =>
-	item.design === Design.LiveBlog
+	item.design === Design.LiveBlog || item.design === Design.DeadBlog
 		? item.blocks.flatMap((block) => block.body)
 		: item.body;
 

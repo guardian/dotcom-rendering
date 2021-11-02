@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { css } from '@emotion/react';
 
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
-import { logView } from '@guardian/automat-contributions';
 import {
 	shouldHideSupportMessaging,
 	withinLocalNoBannerCachePeriod,
@@ -12,10 +11,7 @@ import {
 	getEmail,
 } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
-import {
-	sendOphanComponentEvent,
-	submitComponentEvent,
-} from '@root/src/web/browser/ophan/ophan';
+import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
@@ -23,7 +19,6 @@ import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { useOnce } from '@root/src/web/lib/useOnce';
-import { storage } from '@guardian/libs';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -300,7 +295,6 @@ const RemoteBanner = ({
 			.guardianPolyfilledImport(module.url)
 			.then((bannerModule: { [key: string]: JSX.Element }) => {
 				setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
-				sendOphanComponentEvent('INSERT', meta);
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${error}`;
@@ -314,11 +308,7 @@ const RemoteBanner = ({
 	}, []);
 
 	useOnce(() => {
-		const { abTestName, componentType } = meta;
-
-		logView(storage.local, abTestName);
-
-		sendOphanComponentEvent('VIEW', meta);
+		const { componentType } = meta;
 
 		// track banner view event in Google Analytics for subscriptions banner
 		if (componentType === componentTypeName) {

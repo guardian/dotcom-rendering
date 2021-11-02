@@ -15,7 +15,7 @@ import {
 } from "@guardian/src-foundations/palette";
 import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
 import { Link } from "@guardian/src-link";
-import { Pillar, Theme } from "@guardian/types";
+import { ArticlePillar, ArticleTheme } from "@guardian/libs";
 import { from } from "@guardian/src-foundations/mq";
 import { darkModeCss } from "../lib";
 
@@ -30,25 +30,25 @@ interface KeyEvent {
 
 interface KeyEventsProps {
 	keyEvents: KeyEvent[];
-	theme: Theme;
+	theme: ArticleTheme;
 	supportsDarkMode: boolean;
 }
 
 interface ListItemProps {
 	keyEvent: KeyEvent;
-	theme: Theme;
+	theme: ArticleTheme;
 	supportsDarkMode: boolean;
 }
 
-const getColor = (theme: Theme, paletteId: paletteId) => {
+const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
 	switch (theme) {
-		case Pillar.Sport:
+		case ArticlePillar.Sport:
 			return sport[paletteId];
-		case Pillar.Culture:
+		case ArticlePillar.Culture:
 			return culture[paletteId];
-		case Pillar.Lifestyle:
+		case ArticlePillar.Lifestyle:
 			return lifestyle[paletteId];
-		case Pillar.Opinion:
+		case ArticlePillar.Opinion:
 			return opinion[paletteId];
 		default:
 			return news[paletteId];
@@ -170,7 +170,7 @@ const timeTextWrapperStyles: SerializedStyles = css`
 `;
 
 const textStyles = (
-	theme: Theme,
+	theme: ArticleTheme,
 	supportsDarkMode: boolean
 ): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};

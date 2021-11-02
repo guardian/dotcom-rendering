@@ -18,6 +18,5 @@ jobs:
 
             - uses: preactjs/compressed-size-action@v2
               with:
-                  cwd: ./dotcom-rendering
                   repo-token: "${{ secrets.GITHUB_TOKEN }}"
-                  build-script: makeBuild
+                  build-script: build:dcr

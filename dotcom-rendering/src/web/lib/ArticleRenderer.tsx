@@ -3,9 +3,12 @@ import { css } from '@emotion/react';
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
-import { from, until } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/src-foundations/mq';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { labelStyles as adLabelStyles } from '../components/AdSlot';
+import {
+	labelStyles as adLabelStyles,
+	adCollapseStyles,
+} from '../components/AdSlot';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -19,22 +22,7 @@ const commercialPosition = css`
 // hence we scope the styles at the same level
 const adStylesDynamic = css`
 	${adLabelStyles}
-
-	& .ad-slot.ad-slot--collapse {
-		display: none;
-	}
-
-	${from.tablet} {
-		.mobile-only .ad-slot {
-			display: none;
-		}
-	}
-
-	${until.tablet} {
-		.hide-until-tablet .ad-slot {
-			display: none;
-		}
-	}
+	${adCollapseStyles}
 
 	.ad-slot--im {
 		float: left;

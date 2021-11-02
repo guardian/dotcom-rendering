@@ -95,6 +95,15 @@ const numberParser: Parser<number> = parser((a) =>
 );
 
 /**
+ * Parses a value into a `boolean`.
+ */
+const booleanParser: Parser<boolean> = parser((a) =>
+	typeof a === 'boolean'
+		? ok(a)
+		: err(`Unable to parse ${String(a)} as a boolean`),
+);
+
+/**
  * Parses a value into a `Date`.
  */
 const dateParser: Parser<Date> = parser((a) => {
@@ -245,7 +254,11 @@ const arrayParser = <A>(pa: Parser<A>): Parser<A[]> =>
 				return f([...acc, parsed.value], tail);
 			}
 
-			return err(`Could not parse array item ${String(item)}`);
+			return err(
+				`Could not parse array item ${String(item)} because ${
+					parsed.err
+				}`,
+			);
 		};
 
 		if (Array.isArray(a)) {
@@ -770,6 +783,7 @@ export {
 	parse,
 	stringParser,
 	numberParser,
+	booleanParser,
 	dateParser,
 	maybe,
 	fieldParser,

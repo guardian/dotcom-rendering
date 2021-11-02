@@ -185,14 +185,10 @@ const ReaderRevenueLinksRemote: React.FC<{
 	contributionsServiceUrl,
 	ophanRecord,
 }) => {
-	const [
-		supportHeaderResponse,
-		setSupportHeaderResponse,
-	] = useState<SupportHeaderData | null>(null);
-	const [
-		SupportHeader,
-		setSupportHeader,
-	] = useState<React.FC<SupportHeaderProps> | null>(null);
+	const [supportHeaderResponse, setSupportHeaderResponse] =
+		useState<SupportHeaderData | null>(null);
+	const [SupportHeader, setSupportHeader] =
+		useState<React.FC<SupportHeaderProps> | null>(null);
 
 	useOnce((): void => {
 		setAutomat();

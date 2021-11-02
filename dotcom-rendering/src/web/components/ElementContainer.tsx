@@ -26,10 +26,6 @@ const topBorder = (colour: string) => emoCss`
 	border-top: 1px solid ${colour};
 `;
 
-const bottomBorder = (colour: string) => emoCss`
-	border-bottom: 1px solid ${colour};
-`;
-
 const setBackgroundColour = (colour: string) => emoCss`
 	background-color: ${colour};
 `;
@@ -38,7 +34,6 @@ type Props = {
 	sectionId?: string;
 	showSideBorders?: boolean;
 	showTopBorder?: boolean;
-	showBottomBorder?: boolean;
 	padded?: boolean;
 	backgroundColour?: string;
 	borderColour?: string;
@@ -52,7 +47,6 @@ export const ElementContainer = ({
 	sectionId,
 	showSideBorders = true,
 	showTopBorder = true,
-	showBottomBorder = false,
 	padded = true,
 	borderColour = border.secondary,
 	backgroundColour,
@@ -70,7 +64,6 @@ export const ElementContainer = ({
 						shouldCenter && center,
 						showSideBorders && sideBorders(borderColour),
 						showTopBorder && topBorder(borderColour),
-						showBottomBorder && bottomBorder(borderColour),
 						padded && padding,
 					]}
 				>
