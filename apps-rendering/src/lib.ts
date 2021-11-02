@@ -254,4 +254,5 @@ export {
 	resultToNullable,
 	fold,
 	convertFormatToArticleFormat,
+	convertThemeToArticleTheme,
 };

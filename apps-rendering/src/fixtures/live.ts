@@ -14,7 +14,7 @@ import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
 import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
-import type { Liveblog } from 'item';
+import type { LiveBlog } from 'item';
 import { pipe } from 'lib';
 
 const parser = new DOMParser();
@@ -260,7 +260,7 @@ const fields = {
 	webUrl: '',
 };
 
-const live: Liveblog = {
+const live: LiveBlog = {
 	design: Design.LiveBlog,
 	...fields,
 	blocks: [],
