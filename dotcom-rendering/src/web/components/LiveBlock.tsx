@@ -20,8 +20,6 @@ type Props = {
 	host?: string;
 };
 
-
-
 const Header = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<header
@@ -35,7 +33,6 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 		</header>
 	);
 };
-
 
 const BlockTitle = ({ title }: { title: string }) => {
 	return (
@@ -73,7 +70,7 @@ const LastUpdated = ({
 	);
 };
 
-const formatTime = (time: number) => time < 10 ? `0${time}` : time;
+const formatTime = (time: number) => (time < 10 ? `0${time}` : time);
 
 const FirstPublished = ({
 	firstPublished,
@@ -116,7 +113,9 @@ const FirstPublished = ({
 					color: ${neutral[46]};
 				`}
 			>
-				{`${formatTime(publishedDate.getHours())}:${formatTime(publishedDate.getMinutes())}`}
+				{`${formatTime(publishedDate.getHours())}:${formatTime(
+					publishedDate.getMinutes(),
+				)}`}
 			</span>
 		</a>
 	);
@@ -170,7 +169,10 @@ export const LiveBlock = ({
 		block.blockLastUpdated > block.blockFirstPublished;
 
 	return (
-		<LiveBlockContainer id={block.id} borderColour={palette.border.liveBlock}>
+		<LiveBlockContainer
+			id={block.id}
+			borderColour={palette.border.liveBlock}
+		>
 			<Header>
 				{block.blockFirstPublished && (
 					<FirstPublished
@@ -205,8 +207,7 @@ export const LiveBlock = ({
 						webTitle,
 					})}
 				</p>
-				)
-			)}
+			))}
 			<div>
 				<Hide when="below" breakpoint="phablet">
 					<div
