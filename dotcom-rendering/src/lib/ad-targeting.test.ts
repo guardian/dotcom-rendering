@@ -11,8 +11,7 @@ const CAPI = {
 		sharedAdTargeting: {
 			ct: 'article',
 			co: ['rob-davies'],
-			url:
-				'/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+			url: '/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 			su: ['0'],
 			edition: 'uk',
 			tn: ['news'],
@@ -51,8 +50,7 @@ describe('buildAdTargeting', () => {
 			sh: 'https://theguardian.com/p/64ak8',
 			su: ['0'],
 			tn: ['news'],
-			url:
-				'/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+			url: '/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 			sens: 'f',
 			si: 'f',
 			vl: 0,

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, body } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { LiveBlogRenderer } from '@root/src/web/lib/LiveBlogRenderer';
@@ -23,6 +23,18 @@ const globalH2Styles = (display: ArticleDisplay) => css`
 		${display === ArticleDisplay.Immersive
 			? headline.medium({ fontWeight: 'light' })
 			: headline.xxsmall({ fontWeight: 'bold' })};
+	}
+`;
+
+const globalOlStyles = () => css`
+	ol:not([data-ignore='global-ol-styling']) {
+		counter-reset: li;
+		li:before {
+			${body.medium({ lineHeight: 'tight' })};
+			content: counter(li);
+			counter-increment: li;
+			margin-right: ${space[1]}px;
+		}
 	}
 `;
 
@@ -98,6 +110,7 @@ export const ArticleBody = ({
 				isInteractive ? null : bodyPadding,
 				globalH2Styles(format.display),
 				globalH3Styles(format.display),
+				globalOlStyles(),
 				globalStrongStyles,
 				globalLinkStyles(palette),
 			]}

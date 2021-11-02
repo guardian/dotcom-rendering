@@ -13,8 +13,7 @@
 
 export const SpecialReport: CAPIType = {
 	slotMachineFlags: '',
-	main:
-		'<figure class="element element-image" data-media-id="d302a26f2229a71ab1dfa231208cefc9ae72e3e8"> \n <img src="https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/1000.jpg" alt="Lindsey oil refinery in north Lincolnshire." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Lindsey oil refinery in north Lincolnshire.</span> \n  <span class="element-image__credit">Photograph: Christopher Furlong/Getty Images</span> \n </figcaption> \n</figure>',
+	main: '<figure class="element element-image" data-media-id="d302a26f2229a71ab1dfa231208cefc9ae72e3e8"> \n <img src="https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/1000.jpg" alt="Lindsey oil refinery in north Lincolnshire." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Lindsey oil refinery in north Lincolnshire.</span> \n  <span class="element-image__credit">Photograph: Christopher Furlong/Getty Images</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
 		{
 			url: '/environment/environment',
@@ -34,8 +33,7 @@ export const SpecialReport: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 				},
 				{
 					name: 'tn',
@@ -94,8 +92,7 @@ export const SpecialReport: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 				},
 				{
 					name: 'tn',
@@ -158,8 +155,7 @@ export const SpecialReport: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 				},
 				{
 					name: 'tn',
@@ -222,8 +218,7 @@ export const SpecialReport: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 				},
 				{
 					name: 'tn',
@@ -477,8 +472,7 @@ export const SpecialReport: CAPIType = {
 							},
 							{
 								title: 'Project Syndicate',
-								url:
-									'/business/series/project-syndicate-economists',
+								url: '/business/series/project-syndicate-economists',
 							},
 							{
 								title: 'B2B',
@@ -861,8 +855,7 @@ export const SpecialReport: CAPIType = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 			},
 			{
 				title: 'Video',
@@ -938,8 +931,7 @@ export const SpecialReport: CAPIType = {
 			},
 			{
 				title: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
 			{
 				title: 'Crosswords',
@@ -991,23 +983,19 @@ export const SpecialReport: CAPIType = {
 		brandExtensions: [
 			{
 				title: 'Search jobs',
-				url:
-					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
 			},
 			{
 				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
 			},
 			{
 				title: 'Holidays',
-				url:
-					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 			},
 			{
 				title: 'Live events',
-				url:
-					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
 			},
 			{
 				title: 'Masterclasses',
@@ -1128,8 +1116,7 @@ export const SpecialReport: CAPIType = {
 		},
 	},
 	author: {
-		byline:
-			'Fiona Harvey, Damian Carrington, Jonathan Watts and Patrick Greenfield',
+		byline: 'Fiona Harvey, Damian Carrington, Jonathan Watts and Patrick Greenfield',
 	},
 	designType: 'Analysis',
 	editionId: 'UK',
@@ -1168,8 +1155,7 @@ export const SpecialReport: CAPIType = {
 		'article:modified_time': '2019-10-14T15:25:06.000Z',
 	},
 	sectionUrl: 'environment/environment',
-	pageId:
-		'environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+	pageId: 'environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	version: 3,
 	tags: [
 		{
@@ -1291,8 +1277,7 @@ export const SpecialReport: CAPIType = {
 			'https://assets.guim.co.uk/images/badges/b36f98674bc4fdb9631360f7d66b2531/the-polluters.svg',
 	},
 	pillar: 'news',
-	webURL:
-		'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+	webURL: 'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Environment',
@@ -1371,8 +1356,7 @@ export const SpecialReport: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url:
-						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1414,8 +1398,7 @@ export const SpecialReport: CAPIType = {
 				},
 				{
 					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
 					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
@@ -1435,15 +1418,13 @@ export const SpecialReport: CAPIType = {
 				},
 				{
 					text: 'Search jobs',
-					url:
-						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
 					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
 				{
 					text: 'Patrons',
-					url:
-						'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
 					extraClasses: '',
 				},
@@ -1495,8 +1476,7 @@ export const SpecialReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/2000.jpg',
+						url: 'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/2000.jpg',
 					},
 					{
 						index: 1,
@@ -1506,8 +1486,7 @@ export const SpecialReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/1000.jpg',
+						url: 'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/1000.jpg',
 					},
 					{
 						index: 2,
@@ -1517,8 +1496,7 @@ export const SpecialReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/500.jpg',
+						url: 'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/500.jpg',
 					},
 					{
 						index: 3,
@@ -1528,8 +1506,7 @@ export const SpecialReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/140.jpg',
+						url: 'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/140.jpg',
 					},
 					{
 						index: 4,
@@ -1539,8 +1516,7 @@ export const SpecialReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/3000.jpg',
+						url: 'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/3000.jpg',
 					},
 					{
 						index: 5,
@@ -1551,8 +1527,7 @@ export const SpecialReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg',
+						url: 'https://media.guim.co.uk/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg',
 					},
 				],
 			},
@@ -1569,33 +1544,27 @@ export const SpecialReport: CAPIType = {
 					weighting: 'inline',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=56a5e178c093af566a14c218f06df570',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=56a5e178c093af566a14c218f06df570',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9bf2a8d8cbca4b48025ffbff35b3452c',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9bf2a8d8cbca4b48025ffbff35b3452c',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=ce101acd5c1ac070bf723d93631b4f3f',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=ce101acd5c1ac070bf723d93631b4f3f',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8d6af0320bdd977cd9d4645b935e0256',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8d6af0320bdd977cd9d4645b935e0256',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=6ee8f7a59ea8b30f0fd3d078993ef641',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=6ee8f7a59ea8b30f0fd3d078993ef641',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4e3c8902c65e3cee44286a948eb6ec24',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4e3c8902c65e3cee44286a948eb6ec24',
 							width: 890,
 						},
 					],
@@ -1604,23 +1573,19 @@ export const SpecialReport: CAPIType = {
 					weighting: 'thumbnail',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=140&quality=85&auto=format&fit=max&s=70205fdfe62edc25a65689b97e44613c',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=140&quality=85&auto=format&fit=max&s=70205fdfe62edc25a65689b97e44613c',
 							width: 140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=99fc530c0107bb5e0a33f7da588d6f87',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=99fc530c0107bb5e0a33f7da588d6f87',
 							width: 280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=120&quality=85&auto=format&fit=max&s=7f20aae6b9fcd742667a84d4deadf765',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=120&quality=85&auto=format&fit=max&s=7f20aae6b9fcd742667a84d4deadf765',
 							width: 120,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=581f83d7eb61e021ecd47dd2a6c16b46',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=581f83d7eb61e021ecd47dd2a6c16b46',
 							width: 240,
 						},
 					],
@@ -1629,53 +1594,43 @@ export const SpecialReport: CAPIType = {
 					weighting: 'supporting',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=380&quality=85&auto=format&fit=max&s=b098f9e33de232b0a1b54e011d5c993c',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=380&quality=85&auto=format&fit=max&s=b098f9e33de232b0a1b54e011d5c993c',
 							width: 380,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=2ffc1cbedd6ac26601102635c29c92ec',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=2ffc1cbedd6ac26601102635c29c92ec',
 							width: 760,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=f712108623dcbd22d996e16b9cea3f69',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=f712108623dcbd22d996e16b9cea3f69',
 							width: 300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=503a99b41488ec5de3c007dc7c4ed0f1',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=503a99b41488ec5de3c007dc7c4ed0f1',
 							width: 600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=56a5e178c093af566a14c218f06df570',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=56a5e178c093af566a14c218f06df570',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9bf2a8d8cbca4b48025ffbff35b3452c',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9bf2a8d8cbca4b48025ffbff35b3452c',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=ce101acd5c1ac070bf723d93631b4f3f',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=ce101acd5c1ac070bf723d93631b4f3f',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8d6af0320bdd977cd9d4645b935e0256',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8d6af0320bdd977cd9d4645b935e0256',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=6ee8f7a59ea8b30f0fd3d078993ef641',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=6ee8f7a59ea8b30f0fd3d078993ef641',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4e3c8902c65e3cee44286a948eb6ec24',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4e3c8902c65e3cee44286a948eb6ec24',
 							width: 890,
 						},
 					],
@@ -1684,73 +1639,59 @@ export const SpecialReport: CAPIType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1020&quality=85&auto=format&fit=max&s=0982b6a823df0e46c0fdfeb699ea1fe8',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1020&quality=85&auto=format&fit=max&s=0982b6a823df0e46c0fdfeb699ea1fe8',
 							width: 1020,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=a36d661ce81f02614a05e9693575fcfc',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=a36d661ce81f02614a05e9693575fcfc',
 							width: 2040,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=940&quality=85&auto=format&fit=max&s=bc95fef71fc9867e945b64fc31425603',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=940&quality=85&auto=format&fit=max&s=bc95fef71fc9867e945b64fc31425603',
 							width: 940,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=611615dd9e8ee0335c3dbd4a1f8039cd',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=611615dd9e8ee0335c3dbd4a1f8039cd',
 							width: 1880,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=262a77a9c547545846653a4cc223bc3c',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=262a77a9c547545846653a4cc223bc3c',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=4db8fd681abda4bef594a655908fd117',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=4db8fd681abda4bef594a655908fd117',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=262a77a9c547545846653a4cc223bc3c',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=262a77a9c547545846653a4cc223bc3c',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=4db8fd681abda4bef594a655908fd117',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=4db8fd681abda4bef594a655908fd117',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=660&quality=85&auto=format&fit=max&s=075cd46658e868d4040ede59a5dbbc7f',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=660&quality=85&auto=format&fit=max&s=075cd46658e868d4040ede59a5dbbc7f',
 							width: 660,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=8eb91af65932330c6eb02ee82304638d',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=8eb91af65932330c6eb02ee82304638d',
 							width: 1320,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=fdd5c31dbfab51be235a2d0005dfad44',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=fdd5c31dbfab51be235a2d0005dfad44',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=d4d28132dd7be4d139087267cf5f3e3b',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=d4d28132dd7be4d139087267cf5f3e3b',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=e729d78e1811b164096c67fdcacc0d8d',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=e729d78e1811b164096c67fdcacc0d8d',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=04642cd32d5bcd6951c531e516aa746a',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=04642cd32d5bcd6951c531e516aa746a',
 							width: 930,
 						},
 					],
@@ -1759,33 +1700,27 @@ export const SpecialReport: CAPIType = {
 					weighting: 'halfwidth',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=56a5e178c093af566a14c218f06df570',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=56a5e178c093af566a14c218f06df570',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9bf2a8d8cbca4b48025ffbff35b3452c',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=9bf2a8d8cbca4b48025ffbff35b3452c',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=ce101acd5c1ac070bf723d93631b4f3f',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=ce101acd5c1ac070bf723d93631b4f3f',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8d6af0320bdd977cd9d4645b935e0256',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8d6af0320bdd977cd9d4645b935e0256',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=6ee8f7a59ea8b30f0fd3d078993ef641',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=6ee8f7a59ea8b30f0fd3d078993ef641',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4e3c8902c65e3cee44286a948eb6ec24',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4e3c8902c65e3cee44286a948eb6ec24',
 							width: 890,
 						},
 					],
@@ -1794,73 +1729,59 @@ export const SpecialReport: CAPIType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1300&quality=85&auto=format&fit=max&s=9b43c6dcdf51698e660b190e70e6b1bd',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1300&quality=85&auto=format&fit=max&s=9b43c6dcdf51698e660b190e70e6b1bd',
 							width: 1300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=1ad0b7861c0639e03a8a0eef924a529f',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=1ad0b7861c0639e03a8a0eef924a529f',
 							width: 2600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1140&quality=85&auto=format&fit=max&s=a2e1fb061bb2919de67a662f9b3177a7',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1140&quality=85&auto=format&fit=max&s=a2e1fb061bb2919de67a662f9b3177a7',
 							width: 1140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=74ea7cd8a3b3c6e29adc9888507715bd',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=74ea7cd8a3b3c6e29adc9888507715bd',
 							width: 2280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1125&quality=85&auto=format&fit=max&s=6a7479bc71ed7fa7067ad904ffc06f7f',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1125&quality=85&auto=format&fit=max&s=6a7479bc71ed7fa7067ad904ffc06f7f',
 							width: 1125,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=94e79e14befc958842657cc4f361dd88',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=94e79e14befc958842657cc4f361dd88',
 							width: 2250,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=965&quality=85&auto=format&fit=max&s=fb9c11ded4e499512674f3a73ba9ba2b',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=965&quality=85&auto=format&fit=max&s=fb9c11ded4e499512674f3a73ba9ba2b',
 							width: 965,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=fdd2d99a951121b7bfbec0bffc88e66f',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=fdd2d99a951121b7bfbec0bffc88e66f',
 							width: 1930,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=725&quality=85&auto=format&fit=max&s=5daba6333bd0613bc2d1b1d0cbd4011e',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=725&quality=85&auto=format&fit=max&s=5daba6333bd0613bc2d1b1d0cbd4011e',
 							width: 725,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=c0c70e37a1ba504b58c8de38d227a989',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=c0c70e37a1ba504b58c8de38d227a989',
 							width: 1450,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=fdd5c31dbfab51be235a2d0005dfad44',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=fdd5c31dbfab51be235a2d0005dfad44',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=d4d28132dd7be4d139087267cf5f3e3b',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=d4d28132dd7be4d139087267cf5f3e3b',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=e729d78e1811b164096c67fdcacc0d8d',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=e729d78e1811b164096c67fdcacc0d8d',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=04642cd32d5bcd6951c531e516aa746a',
+							src: 'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=04642cd32d5bcd6951c531e516aa746a',
 							width: 930,
 						},
 					],
@@ -1876,115 +1797,86 @@ export const SpecialReport: CAPIType = {
 			id: '5d97218b8f08fbb0c1720cfa',
 			elements: [
 				{
-					html:
-						'<h2><strong>Put climate on the ballot paper</strong></h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2><strong>Put climate on the ballot paper</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: '430fe467-8c44-4a1a-a0e3-cd543eb418d0',
 				},
 				{
-					html:
-						'<p>Individual actions, such as flying less or buying electric cars, are helpful, but they will be futile without collective political action to slash emissions on a corporate, national and global scale. Politicians need to feel this is a priority for the electorate. That means keeping the subject high on the agenda for MPs with questions, protests, emails, social media posts, lobbying by NGOs and most of all through voting choices. Politicians need to know the public is behind them if they are to take on the petrochemical industry.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Individual actions, such as flying less or buying electric cars, are helpful, but they will be futile without collective political action to slash emissions on a corporate, national and global scale. Politicians need to feel this is a priority for the electorate. That means keeping the subject high on the agenda for MPs with questions, protests, emails, social media posts, lobbying by NGOs and most of all through voting choices. Politicians need to know the public is behind them if they are to take on the petrochemical industry.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'ae97af07-0f1d-4975-8186-27cdb77bf49d',
 				},
 				{
-					html:
-						'<h2><strong>End</strong><strong> fossil fuel subsidies</strong></h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2><strong>End</strong><strong> fossil fuel subsidies</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: 'a41c7729-4908-43bf-8e23-a6475b7f2fdf',
 				},
 				{
-					html:
-						'<p>The coal, oil and gas industries benefit from <a href="https://www.imf.org/en/Publications/WP/Issues/2019/05/02/Global-Fossil-Fuel-Subsidies-Remain-Large-An-Update-Based-on-Country-Level-Estimates-46509">$5tn dollars a year</a> – $10m a minute – according to the International Monetary Fund, which described its own estimate as “shocking”. Even <a href="https://www.iea.org/newsroom/news/2019/june/fossil-fuel-consumption-subsidies-bounced-back-strongly-in-2018.html">direct consumption subsidies for fossil fuels</a> are double those for renewables, which the International Energy Agency says “greatly complicates the task” of tackling the climate crisis. The biggest subsidisers, the G20 nations, pledged in 2009 to end the handouts, but progress has been very limited. The UN secretary general, António Guterres, <a href="https://uk.reuters.com/article/global-climatechange-energy/fossil-fuel-subsidies-are-wrecking-the-world-says-u-n-chief-idUKL8N2345F6">attacked</a> the incentives in May, saying: “What we are doing is using taxpayers’ money … to destroy the world.” Any change has to include provisions for social justice. Cuts in fuel subsidies should not be used as an austerity measure that hurts the poor most.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The coal, oil and gas industries benefit from <a href="https://www.imf.org/en/Publications/WP/Issues/2019/05/02/Global-Fossil-Fuel-Subsidies-Remain-Large-An-Update-Based-on-Country-Level-Estimates-46509">$5tn dollars a year</a> – $10m a minute – according to the International Monetary Fund, which described its own estimate as “shocking”. Even <a href="https://www.iea.org/newsroom/news/2019/june/fossil-fuel-consumption-subsidies-bounced-back-strongly-in-2018.html">direct consumption subsidies for fossil fuels</a> are double those for renewables, which the International Energy Agency says “greatly complicates the task” of tackling the climate crisis. The biggest subsidisers, the G20 nations, pledged in 2009 to end the handouts, but progress has been very limited. The UN secretary general, António Guterres, <a href="https://uk.reuters.com/article/global-climatechange-energy/fossil-fuel-subsidies-are-wrecking-the-world-says-u-n-chief-idUKL8N2345F6">attacked</a> the incentives in May, saying: “What we are doing is using taxpayers’ money … to destroy the world.” Any change has to include provisions for social justice. Cuts in fuel subsidies should not be used as an austerity measure that hurts the poor most.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd7096e50-fdc5-439b-9bb1-f2beb97621c0',
 				},
 				{
 					id: 'e182ee5f-c378-4474-b7da-79f6b0a671b3',
 					title: 'What is the polluters project?',
-					html:
-						'<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
+					html: '<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
 					credit: '',
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
 					elementId: 'd3102389-5104-4d55-836a-206995493742',
 				},
 				{
 					html: '<h2><strong>Put a price on carbon</strong></h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: 'f2fd73f2-e545-4dba-9206-abbf5b4c9ff2',
 				},
 				{
-					html:
-						'<p>The idea of putting a price on carbon has been around since the early 1990s and a cap-and-trade system was incorporated into the 1997 Kyoto protocol. Under cap-and-trade, a limit is set on emissions and businesses issued with permits to emit carbon. Those cutting their emissions fastest can sell spare permits to laggards, while the cap is ratcheted down over time. But success depends on a strict cap and a scarcity of permits, and <a href="https://www.carbonbrief.org/qa-will-reformed-eu-emissions-trading-system-raise-carbon-prices">the EU’s scheme</a> has been widely criticised. An alternative is a tax, which forces companies to factor the damage caused by climate change into their business decisions, and should encourage them to cut waste, cut emissions and use clean technology. The danger is of carbon leakage: that the extra cost in one country might encourage businesses to look elsewhere to site their factories. This can be dealt with by a border adjustment tax, as the <a href="https://uk.reuters.com/article/uk-eu-commission-timmermans-border-tax/incoming-top-eu-climate-official-pledges-to-tax-polluting-imports-idUKKBN1WN23F">EU’s new commissioner pledged</a> this week. Carbon taxes don’t have to create economic losers, either – <a href="https://www.theguardian.com/world/2018/dec/04/how-to-make-a-carbon-tax-popular-give-the-profits-to-the-people">revenue neutral taxes</a> redistribute the money to the people and are advocated by many.<strong>Scale back demand for fossil fuels</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The idea of putting a price on carbon has been around since the early 1990s and a cap-and-trade system was incorporated into the 1997 Kyoto protocol. Under cap-and-trade, a limit is set on emissions and businesses issued with permits to emit carbon. Those cutting their emissions fastest can sell spare permits to laggards, while the cap is ratcheted down over time. But success depends on a strict cap and a scarcity of permits, and <a href="https://www.carbonbrief.org/qa-will-reformed-eu-emissions-trading-system-raise-carbon-prices">the EU’s scheme</a> has been widely criticised. An alternative is a tax, which forces companies to factor the damage caused by climate change into their business decisions, and should encourage them to cut waste, cut emissions and use clean technology. The danger is of carbon leakage: that the extra cost in one country might encourage businesses to look elsewhere to site their factories. This can be dealt with by a border adjustment tax, as the <a href="https://uk.reuters.com/article/uk-eu-commission-timmermans-border-tax/incoming-top-eu-climate-official-pledges-to-tax-polluting-imports-idUKKBN1WN23F">EU’s new commissioner pledged</a> this week. Carbon taxes don’t have to create economic losers, either – <a href="https://www.theguardian.com/world/2018/dec/04/how-to-make-a-carbon-tax-popular-give-the-profits-to-the-people">revenue neutral taxes</a> redistribute the money to the people and are advocated by many.<strong>Scale back demand for fossil fuels</strong></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd4308ce1-3484-43ef-a839-f3bbe4b40eb9',
 				},
 				{
-					html:
-						'<p>Oil companies will sell oil for as long as there are buyers. Public shaming and social and political pressure can work to force companies to own up to their activities but most oil and gas around the world is produced by <a href="https://www.theguardian.com/environment/2019/oct/09/secretive-national-oil-companies-climate">national oil companies</a>, and they need no social licence to operate beyond that granted by their governments, which are often autocratic or unresponsive to public opinion. All companies are responsive to economic pressure, however. The only way to cut emissions from oil in the long term is to stop using oil. Reducing demand is driven by government regulation and by technological development (also driven by regulation), such as cheaper solar panels, offshore windfarms, electric cars and improved public transport.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Oil companies will sell oil for as long as there are buyers. Public shaming and social and political pressure can work to force companies to own up to their activities but most oil and gas around the world is produced by <a href="https://www.theguardian.com/environment/2019/oct/09/secretive-national-oil-companies-climate">national oil companies</a>, and they need no social licence to operate beyond that granted by their governments, which are often autocratic or unresponsive to public opinion. All companies are responsive to economic pressure, however. The only way to cut emissions from oil in the long term is to stop using oil. Reducing demand is driven by government regulation and by technological development (also driven by regulation), such as cheaper solar panels, offshore windfarms, electric cars and improved public transport.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '275e0d06-b4f3-40f9-b642-1c7f0d385a44',
 				},
 				{
 					html: '<h2><strong>Stop flaring</strong></h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: '4bf4ce25-e840-4c9a-8d25-92da558ef5c3',
 				},
 				{
-					html:
-						'<p>If oil and gas are to be extracted, the least oil companies can do is extract efficiently. The <a href="https://www.worldbank.org/en/programs/zero-routine-flaring-by-2030">World Bank has estimated</a> that the amount of gas wastefully flared globally each year, if used for power generation instead, could supply all of Africa’s electricity needs. <a href="https://www.ft.com/content/6f8f334e-0ebd-11e9-a3aa-118c761d2745">The FT</a> reported earlier this year that flaring in Texas was lighting up the night sky as producers let off the gas to get the oil to market quickly, to turn a faster buck regardless of the environmental consequences. The World Bank wants an end to routine flaring globally by 2030 – yet <a href="https://www.worldbank.org/en/programs/gasflaringreduction#7">in 2018 it increased</a>. </p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>If oil and gas are to be extracted, the least oil companies can do is extract efficiently. The <a href="https://www.worldbank.org/en/programs/zero-routine-flaring-by-2030">World Bank has estimated</a> that the amount of gas wastefully flared globally each year, if used for power generation instead, could supply all of Africa’s electricity needs. <a href="https://www.ft.com/content/6f8f334e-0ebd-11e9-a3aa-118c761d2745">The FT</a> reported earlier this year that flaring in Texas was lighting up the night sky as producers let off the gas to get the oil to market quickly, to turn a faster buck regardless of the environmental consequences. The World Bank wants an end to routine flaring globally by 2030 – yet <a href="https://www.worldbank.org/en/programs/gasflaringreduction#7">in 2018 it increased</a>. </p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '558aff6d-79dc-4bc1-b57e-7d5613a4f34b',
 				},
 				{
-					html:
-						'<h2><strong>Roll out large scale carbon capture and storage</strong></h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2><strong>Roll out large scale carbon capture and storage</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: '6933b98a-e0a0-4531-8dd3-44db346ae1c8',
 				},
 				{
-					html:
-						'<p>Trapping and burying the CO2 from fossil fuel burning is possible but not yet deployed at scale. Without this, the Intergovernmental Panel on Climate Change says tackling the climate crisis will be much more expensive. Oil companies have the expertise to roll out CCS but say that without a price on carbon emissions there is no commercial incentive. CCS could be used to actually remove CO2 from the atmosphere by growing trees and plants, burning them for electricity, then sequestering the emissions. But the IPCC has warned that doing this at large scale could conflict with growing food.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Trapping and burying the CO2 from fossil fuel burning is possible but not yet deployed at scale. Without this, the Intergovernmental Panel on Climate Change says tackling the climate crisis will be much more expensive. Oil companies have the expertise to roll out CCS but say that without a price on carbon emissions there is no commercial incentive. CCS could be used to actually remove CO2 from the atmosphere by growing trees and plants, burning them for electricity, then sequestering the emissions. But the IPCC has warned that doing this at large scale could conflict with growing food.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '2e0cdd01-6da2-4cb1-8eb8-96f253adcc20',
 				},
 				{
-					html:
-						'<h2><strong>Halt investment in fossil fuels</strong></h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2><strong>Halt investment in fossil fuels</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: '68d9441a-8ea6-420d-98ef-06dadf23a768',
 				},
 				{
-					html:
-						'<p>The energy transition poses many risks and opportunities for investors, but it cannot be that well-intentioned savers seeking to use their money to support renewable energy businesses and divest from fossil fuels are still inadvertently investing in oil, gas and coal companies. Green investing must be regulated to ensure it really is green.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The energy transition poses many risks and opportunities for investors, but it cannot be that well-intentioned savers seeking to use their money to support renewable energy businesses and divest from fossil fuels are still inadvertently investing in oil, gas and coal companies. Green investing must be regulated to ensure it really is green.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '465bd462-0dd1-43b5-84c8-a97bac4af311',
 				},
 				{
-					html:
-						'<h2><strong>Establish market metrics on climate change</strong></h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2><strong>Establish market metrics on climate change</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: '12816cb5-a952-42b4-943e-479b898e8c82',
 				},
 				{
-					html:
-						'<p>Nearly three years after the Paris agreement, world markets still have no mandatory, comparable data to measure the risks posed by the climate crisis at a company level. Regulators must act urgently – slow-moving voluntary schemes are not enough. Last week, <a href="https://www.theguardian.com/business/2019/oct/08/corporations-told-to-draw-up-climate-rules-or-have-them-imposed">the governor of the Bank of England warned</a> major corporations that they had two years to agree rules for reporting climate risks before global regulators devised their own and made them compulsory. If markets do not understand what climate change really means for car manufacturers, fossil fuel companies and energy firms, a climate-induced financial crisis is just a matter of time. Investment in fossil fuels must end. The <a href="https://gofossilfree.org/divestment/commitments/">fossil fuel divestment movement</a> now has $11.5tn of assets under management committed to divestment.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Nearly three years after the Paris agreement, world markets still have no mandatory, comparable data to measure the risks posed by the climate crisis at a company level. Regulators must act urgently – slow-moving voluntary schemes are not enough. Last week, <a href="https://www.theguardian.com/business/2019/oct/08/corporations-told-to-draw-up-climate-rules-or-have-them-imposed">the governor of the Bank of England warned</a> major corporations that they had two years to agree rules for reporting climate risks before global regulators devised their own and made them compulsory. If markets do not understand what climate change really means for car manufacturers, fossil fuel companies and energy firms, a climate-induced financial crisis is just a matter of time. Investment in fossil fuels must end. The <a href="https://gofossilfree.org/divestment/commitments/">fossil fuel divestment movement</a> now has $11.5tn of assets under management committed to divestment.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '725edc16-aa9c-42e4-b271-bdcaff639822',
 				},
 			],
@@ -2002,8 +1894,7 @@ export const SpecialReport: CAPIType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://amp.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+			'@id': 'https://amp.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2012,8 +1903,7 @@ export const SpecialReport: CAPIType = {
 				url: 'https://www.theguardian.com/',
 				logo: {
 					'@type': 'ImageObject',
-					url:
-						'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 					width: 190,
 					height: 60,
 				},
@@ -2044,14 +1934,12 @@ export const SpecialReport: CAPIType = {
 				{
 					'@type': 'Person',
 					name: 'Damian Carrington',
-					sameAs:
-						'https://www.theguardian.com/profile/damiancarrington',
+					sameAs: 'https://www.theguardian.com/profile/damiancarrington',
 				},
 				{
 					'@type': 'Person',
 					name: 'Patrick Greenfield',
-					sameAs:
-						'https://www.theguardian.com/profile/patrick-greenfield',
+					sameAs: 'https://www.theguardian.com/profile/patrick-greenfield',
 				},
 				{
 					'@type': 'Person',
@@ -2069,12 +1957,10 @@ export const SpecialReport: CAPIType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+			'@id': 'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target:
-					'android-app://com.guardian/https/www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				target: 'android-app://com.guardian/https/www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 			},
 		},
 	],
@@ -2190,8 +2076,7 @@ export const SpecialReport: CAPIType = {
 		sharedAdTargeting: {
 			ct: 'article',
 			co: ['jennifer-rankin'],
-			url:
-				'/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 			su: ['0'],
 			edition: 'uk',
 			tn: ['news'],
@@ -2245,8 +2130,7 @@ export const SpecialReport: CAPIType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId:
-			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

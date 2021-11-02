@@ -36,14 +36,12 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 
 const trails: TrailType[] = [
 	{
-		url:
-			'https://www.theguardian.com/politics/live/2021/feb/17/uk-covid-nationwide-rapid-testing-lockdown-coronavirus-latest-update',
+		url: 'https://www.theguardian.com/politics/live/2021/feb/17/uk-covid-nationwide-rapid-testing-lockdown-coronavirus-latest-update',
 		linkText:
 			'UK Covid live: England lockdown to be eased in stages, says PM, amid reports of nationwide mass testing',
 		showByline: false,
 		byline: 'Yohannes Lowe',
-		image:
-			'https://i.guim.co.uk/img/media/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg?width=300&quality=85&auto=format&fit=max&s=9a17ef5d7a6240caa29965407ef912e0',
+		image: 'https://i.guim.co.uk/img/media/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg?width=300&quality=85&auto=format&fit=max&s=9a17ef5d7a6240caa29965407ef912e0',
 		carouselImages: {
 			300: 'https://i.guim.co.uk/img/media/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg?width=300&quality=85&auto=format&fit=max&s=9a17ef5d7a6240caa29965407ef912e0',
 			460: 'https://i.guim.co.uk/img/media/77e960298d4339e047eac5c1986d0f3214f6285d/419_447_4772_2863/master/4772.jpg?width=460&quality=85&auto=format&fit=max&s=bfec50f21befd99c68868a648ac002c9',
@@ -65,14 +63,12 @@ const trails: TrailType[] = [
 		shortUrl: 'https://gu.com/p/gekj6',
 	},
 	{
-		url:
-			'https://www.theguardian.com/world/2021/feb/17/uk-to-begin-worlds-first-covid-human-challenge-study-within-weeks',
+		url: 'https://www.theguardian.com/world/2021/feb/17/uk-to-begin-worlds-first-covid-human-challenge-study-within-weeks',
 		linkText:
 			'UK to infect up to 90 healthy volunteers with Covid in world first trial',
 		showByline: false,
 		byline: 'Nicola Davis and agency',
-		image:
-			'https://i.guim.co.uk/img/media/56d554a7c453dc1040f70453a01fefcb227f2055/0_0_3060_1836/master/3060.jpg?width=300&quality=85&auto=format&fit=max&s=501112ecfd78672fc4a19133053fe04a',
+		image: 'https://i.guim.co.uk/img/media/56d554a7c453dc1040f70453a01fefcb227f2055/0_0_3060_1836/master/3060.jpg?width=300&quality=85&auto=format&fit=max&s=501112ecfd78672fc4a19133053fe04a',
 		carouselImages: {
 			300: 'https://i.guim.co.uk/img/media/56d554a7c453dc1040f70453a01fefcb227f2055/0_0_3060_1836/master/3060.jpg?width=300&quality=85&auto=format&fit=max&s=501112ecfd78672fc4a19133053fe04a',
 			460: 'https://i.guim.co.uk/img/media/56d554a7c453dc1040f70453a01fefcb227f2055/0_0_3060_1836/master/3060.jpg?width=460&quality=85&auto=format&fit=max&s=72289dbb38ff18ad9e953bb47b96a1c4',
@@ -94,14 +90,12 @@ const trails: TrailType[] = [
 		shortUrl: 'https://gu.com/p/gey5n',
 	},
 	{
-		url:
-			'https://www.theguardian.com/world/2021/feb/17/scottish-government-inadequately-prepared-for-covid-audit-scotland-report',
+		url: 'https://www.theguardian.com/world/2021/feb/17/scottish-government-inadequately-prepared-for-covid-audit-scotland-report',
 		linkText:
 			'Scottish government inadequately prepared for Covid – watchdog',
 		showByline: false,
 		byline: 'Libby Brooks Scotland correspondent',
-		image:
-			'https://i.guim.co.uk/img/media/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg?width=300&quality=85&auto=format&fit=max&s=4de26576c2388e49ee9c9414d5c46d6d',
+		image: 'https://i.guim.co.uk/img/media/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg?width=300&quality=85&auto=format&fit=max&s=4de26576c2388e49ee9c9414d5c46d6d',
 		carouselImages: {
 			300: 'https://i.guim.co.uk/img/media/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg?width=300&quality=85&auto=format&fit=max&s=4de26576c2388e49ee9c9414d5c46d6d',
 			460: 'https://i.guim.co.uk/img/media/df5aea6391e21b5a5d2d25fd9aad81d497f99d42/0_45_3062_1837/master/3062.jpg?width=460&quality=85&auto=format&fit=max&s=5c00af8c60a6927dc8c46fea69e6e7d3',
@@ -123,14 +117,12 @@ const trails: TrailType[] = [
 		shortUrl: 'https://gu.com/p/gey2h',
 	},
 	{
-		url:
-			'https://www.theguardian.com/society/2021/feb/16/encouraging-signs-covid-vaccine-over-80s-deaths-fall-england',
+		url: 'https://www.theguardian.com/society/2021/feb/16/encouraging-signs-covid-vaccine-over-80s-deaths-fall-england',
 		linkText:
 			'‘Encouraging’ signs for Covid vaccine as over-80s deaths fall in England',
 		showByline: false,
 		byline: 'Anna Leach, Ashley Kirk and Pamela Duncan',
-		image:
-			'https://i.guim.co.uk/img/media/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=51c9ef2f26b312a7c057d86e9a53f365',
+		image: 'https://i.guim.co.uk/img/media/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=51c9ef2f26b312a7c057d86e9a53f365',
 		carouselImages: {
 			300: 'https://i.guim.co.uk/img/media/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=51c9ef2f26b312a7c057d86e9a53f365',
 			460: 'https://i.guim.co.uk/img/media/5ebec1a8d662f0da39887dae16e4b2720379246e/0_0_5000_3000/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=a6ac6e3f75c8338cc1afed646f484943',
@@ -152,14 +144,12 @@ const trails: TrailType[] = [
 		shortUrl: 'https://gu.com/p/g94y7',
 	},
 	{
-		url:
-			'https://www.theguardian.com/world/2021/feb/16/contact-tracing-alone-has-little-impact-on-curbing-covid-spread-report-finds',
+		url: 'https://www.theguardian.com/world/2021/feb/16/contact-tracing-alone-has-little-impact-on-curbing-covid-spread-report-finds',
 		linkText:
 			'Contact tracing alone has little impact on curbing Covid spread, report finds',
 		showByline: false,
 		byline: 'Nicola Davis and Natalie Grover',
-		image:
-			'https://i.guim.co.uk/img/media/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg?width=300&quality=85&auto=format&fit=max&s=63ca0f0e218f3c7d886231b544a82cbd',
+		image: 'https://i.guim.co.uk/img/media/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg?width=300&quality=85&auto=format&fit=max&s=63ca0f0e218f3c7d886231b544a82cbd',
 		carouselImages: {
 			300: 'https://i.guim.co.uk/img/media/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg?width=300&quality=85&auto=format&fit=max&s=63ca0f0e218f3c7d886231b544a82cbd',
 			460: 'https://i.guim.co.uk/img/media/046002abfc13c8cf7f0c40454349eb0e95d842b2/0_147_3884_2331/master/3884.jpg?width=460&quality=85&auto=format&fit=max&s=c418c5d1966c7da232eb9fb58e5bbd30',
@@ -181,15 +171,12 @@ const trails: TrailType[] = [
 		shortUrl: 'https://gu.com/p/geeq2',
 	},
 	{
-		url:
-			'https://www.theguardian.com/world/2021/feb/16/covid-almost-2m-more-people-asked-shield-england',
+		url: 'https://www.theguardian.com/world/2021/feb/16/covid-almost-2m-more-people-asked-shield-england',
 		linkText:
 			'Ethnicity and poverty are Covid risk factors, new Oxford modelling tool shows',
 		showByline: false,
-		byline:
-			'Sarah Boseley Health editor and Aamna Mohdin Community affairs correspondent',
-		image:
-			'https://i.guim.co.uk/img/media/9e47ac13c7ffc63ee56235e8ef64301d6ed96d03/0_90_3520_2111/master/3520.jpg?width=300&quality=85&auto=format&fit=max&s=206ae21754ca45db0f098b08091562ef',
+		byline: 'Sarah Boseley Health editor and Aamna Mohdin Community affairs correspondent',
+		image: 'https://i.guim.co.uk/img/media/9e47ac13c7ffc63ee56235e8ef64301d6ed96d03/0_90_3520_2111/master/3520.jpg?width=300&quality=85&auto=format&fit=max&s=206ae21754ca45db0f098b08091562ef',
 		carouselImages: {
 			300: 'https://i.guim.co.uk/img/media/9e47ac13c7ffc63ee56235e8ef64301d6ed96d03/0_90_3520_2111/master/3520.jpg?width=300&quality=85&auto=format&fit=max&s=206ae21754ca45db0f098b08091562ef',
 			460: 'https://i.guim.co.uk/img/media/9e47ac13c7ffc63ee56235e8ef64301d6ed96d03/0_90_3520_2111/master/3520.jpg?width=460&quality=85&auto=format&fit=max&s=ba37fece37f9819111a7ded88284e535',
@@ -211,14 +198,12 @@ const trails: TrailType[] = [
 		shortUrl: 'https://gu.com/p/gee2t',
 	},
 	{
-		url:
-			'https://www.theguardian.com/politics/live/2021/feb/16/uk-covid-live-coronavirus-sturgeon-return-scottish-schools-latest-updates',
+		url: 'https://www.theguardian.com/politics/live/2021/feb/16/uk-covid-live-coronavirus-sturgeon-return-scottish-schools-latest-updates',
 		linkText:
 			'UK Covid: 799 more deaths and 10,625 new cases reported; Scottish schools in phased return from Monday – as it happened',
 		showByline: false,
 		byline: 'Nicola Slawson',
-		image:
-			'https://i.guim.co.uk/img/media/c01ad5ee63034e0f478959fc7a705c93debf8ba7/0_220_4104_2462/master/4104.jpg?width=300&quality=85&auto=format&fit=max&s=5dbe0a813852f2ce7304f2eddd0b6e45',
+		image: 'https://i.guim.co.uk/img/media/c01ad5ee63034e0f478959fc7a705c93debf8ba7/0_220_4104_2462/master/4104.jpg?width=300&quality=85&auto=format&fit=max&s=5dbe0a813852f2ce7304f2eddd0b6e45',
 		carouselImages: {
 			300: 'https://i.guim.co.uk/img/media/c01ad5ee63034e0f478959fc7a705c93debf8ba7/0_220_4104_2462/master/4104.jpg?width=300&quality=85&auto=format&fit=max&s=5dbe0a813852f2ce7304f2eddd0b6e45',
 			460: 'https://i.guim.co.uk/img/media/c01ad5ee63034e0f478959fc7a705c93debf8ba7/0_220_4104_2462/master/4104.jpg?width=460&quality=85&auto=format&fit=max&s=8f0e19d4111cd7b3c24ab9575447183a',
@@ -240,14 +225,12 @@ const trails: TrailType[] = [
 		shortUrl: 'https://gu.com/p/geczb',
 	},
 	{
-		url:
-			'https://www.theguardian.com/uk-news/2021/feb/16/qcovid-how-improved-algorithm-can-identify-more-higher-risk-adults',
+		url: 'https://www.theguardian.com/uk-news/2021/feb/16/qcovid-how-improved-algorithm-can-identify-more-higher-risk-adults',
 		linkText:
 			'QCovid: how improved algorithm can identify more higher-risk adults',
 		showByline: false,
 		byline: 'Sarah Boseley Health editor',
-		image:
-			'https://i.guim.co.uk/img/media/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg?width=300&quality=85&auto=format&fit=max&s=de76d3ccfb81477fa0ec3e24a93a0daf',
+		image: 'https://i.guim.co.uk/img/media/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg?width=300&quality=85&auto=format&fit=max&s=de76d3ccfb81477fa0ec3e24a93a0daf',
 		carouselImages: {
 			300: 'https://i.guim.co.uk/img/media/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg?width=300&quality=85&auto=format&fit=max&s=de76d3ccfb81477fa0ec3e24a93a0daf',
 			460: 'https://i.guim.co.uk/img/media/6d152e60fdb37dbbc063a68e2cffccf97cdab183/0_40_5458_3275/master/5458.jpg?width=460&quality=85&auto=format&fit=max&s=22504f7fa18de75cba0b1d63d8dec15f',

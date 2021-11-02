@@ -8,9 +8,8 @@ export default {
 };
 
 export const DefaultStory = (): ReactElement => {
-	const [BrazeMessage, setBrazeMessage] = useState<
-		React.FC<BrazeBannerProps>
-	>();
+	const [BrazeMessage, setBrazeMessage] =
+		useState<React.FC<BrazeBannerProps>>();
 
 	useEffect(() => {
 		import(

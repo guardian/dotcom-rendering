@@ -1,7 +1,8 @@
 import type appboy from '@braze/web-sdk-core';
+import { log } from '@guardian/libs';
 
 const SDK_OPTIONS: appboy.InitializationOptions = {
-	enableLogging: false,
+	enableLogging: true,
 	noCookies: true,
 	baseUrl: 'https://sdk.fra-01.braze.eu/api/v3',
 	sessionTimeoutInSeconds: 1,
@@ -10,10 +11,11 @@ const SDK_OPTIONS: appboy.InitializationOptions = {
 };
 
 const initialiseAppboy = async (apiKey: string): Promise<typeof appboy> => {
-	const importedAppboy = ((await import(
+	const importedAppboy = (await import(
 		/* webpackChunkName: "braze-web-sdk-core" */ '@braze/web-sdk-core'
-	)) as unknown) as typeof appboy;
+	)) as unknown as typeof appboy;
 
+	importedAppboy.setLogger((message) => log('tx', message));
 	importedAppboy.initialize(apiKey, SDK_OPTIONS);
 
 	return importedAppboy;

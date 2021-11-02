@@ -23,26 +23,22 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<p>* * *</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
@@ -58,25 +54,21 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							dropCap: true,
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
@@ -96,20 +88,17 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>•••</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
 						},
@@ -125,18 +114,15 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							dropCap: true,
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
@@ -157,20 +143,17 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<p>***</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
 						},
@@ -186,18 +169,15 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							dropCap: true,
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
@@ -218,26 +198,22 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<h2><strong>* * *</strong></h2>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
@@ -253,25 +229,21 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							dropCap: true,
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
@@ -291,38 +263,32 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<p>* * *</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<h2><strong>***</strong></h2>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should also become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
@@ -338,36 +304,30 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							dropCap: true,
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							dropCap: true,
 							elementId: 'mockId',
 							html: '<p>I should also become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
@@ -387,20 +347,17 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<h2><strong>* * *</strong></h2>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.InstagramBlockElement',
+							_type: 'model.dotcomrendering.pageElements.InstagramBlockElement',
 							elementId: 'mockId',
 							isThirdPartyTracking: true,
 							html: '',
@@ -408,8 +365,7 @@ describe('Dividers and Drop Caps', () => {
 							hasCaption: false,
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
@@ -425,18 +381,15 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.InstagramBlockElement',
+							_type: 'model.dotcomrendering.pageElements.InstagramBlockElement',
 							elementId: 'mockId',
 							isThirdPartyTracking: true,
 							html: '',
@@ -444,8 +397,7 @@ describe('Dividers and Drop Caps', () => {
 							hasCaption: false,
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
@@ -465,38 +417,32 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<p>* * *</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<p>* * *</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
 							html: '<p>* * *</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
@@ -512,33 +458,27 @@ describe('Dividers and Drop Caps', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							dropCap: true,
 							elementId: 'mockId',
 							html: '<p>I should become a drop cap.</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I should NOT become a drop cap.</p>',
 						},

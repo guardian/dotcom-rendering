@@ -13,8 +13,7 @@
 
 export const Comment: CAPIType = {
 	slotMachineFlags: '',
-	main:
-		'<figure class="element element-image" data-media-id="90f6640a4b3a916602353d2158a042b6a7e63726"> <img src="https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg" alt="A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’" width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’</span> <span class="element-image__credit">Photograph: Mark Pinder/The Guardian</span> </figcaption> </figure>',
+	main: '<figure class="element element-image" data-media-id="90f6640a4b3a916602353d2158a042b6a7e63726"> <img src="https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg" alt="A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’" width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’</span> <span class="element-image__credit">Photograph: Mark Pinder/The Guardian</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
 			url: '/business/austerity',
@@ -42,8 +41,7 @@ export const Comment: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
 					name: 'k',
@@ -91,8 +89,7 @@ export const Comment: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
 					name: 'k',
@@ -144,8 +141,7 @@ export const Comment: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
 					name: 'k',
@@ -197,8 +193,7 @@ export const Comment: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
 					name: 'k',
@@ -421,8 +416,7 @@ export const Comment: CAPIType = {
 							},
 							{
 								title: 'Project Syndicate',
-								url:
-									'/business/series/project-syndicate-economists',
+								url: '/business/series/project-syndicate-economists',
 							},
 							{
 								title: 'B2B',
@@ -805,8 +799,7 @@ export const Comment: CAPIType = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 			},
 			{
 				title: 'Video',
@@ -882,8 +875,7 @@ export const Comment: CAPIType = {
 			},
 			{
 				title: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
 			{
 				title: 'Crosswords',
@@ -935,23 +927,19 @@ export const Comment: CAPIType = {
 		brandExtensions: [
 			{
 				title: 'Search jobs',
-				url:
-					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
 			},
 			{
 				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
 			},
 			{
 				title: 'Holidays',
-				url:
-					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 			},
 			{
 				title: 'Live events',
-				url:
-					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
 			},
 			{
 				title: 'Masterclasses',
@@ -1179,8 +1167,7 @@ export const Comment: CAPIType = {
 		'article:modified_time': '2020-02-10T11:19:50.000Z',
 	},
 	sectionUrl: 'business/austerity',
-	pageId:
-		'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+	pageId: 'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 	version: 3,
 	tags: [
 		{
@@ -1263,8 +1250,7 @@ export const Comment: CAPIType = {
 		},
 	],
 	pillar: 'opinion',
-	webURL:
-		'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+	webURL: 'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Austerity',
@@ -1343,8 +1329,7 @@ export const Comment: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url:
-						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1386,8 +1371,7 @@ export const Comment: CAPIType = {
 				},
 				{
 					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
 					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
@@ -1407,15 +1391,13 @@ export const Comment: CAPIType = {
 				},
 				{
 					text: 'Search jobs',
-					url:
-						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
 					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
 				{
 					text: 'Patrons',
-					url:
-						'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
 					extraClasses: '',
 				},
@@ -1467,8 +1449,7 @@ export const Comment: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/140.jpg',
+						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/140.jpg',
 					},
 					{
 						index: 1,
@@ -1478,8 +1459,7 @@ export const Comment: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/500.jpg',
+						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/500.jpg',
 					},
 					{
 						index: 2,
@@ -1489,8 +1469,7 @@ export const Comment: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg',
+						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg',
 					},
 					{
 						index: 3,
@@ -1500,8 +1479,7 @@ export const Comment: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/2000.jpg',
+						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/2000.jpg',
 					},
 					{
 						index: 4,
@@ -1511,8 +1489,7 @@ export const Comment: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/3240.jpg',
+						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/3240.jpg',
 					},
 					{
 						index: 5,
@@ -1523,15 +1500,13 @@ export const Comment: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg',
+						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg',
 					},
 				],
 			},
 			data: {
 				copyright: '©Mark Pinder',
-				alt:
-					'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
+				alt: 'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
 				caption:
 					'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
 				credit: 'Photograph: Mark Pinder/The Guardian',
@@ -1543,33 +1518,27 @@ export const Comment: CAPIType = {
 					weighting: 'inline',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
 							width: 890,
 						},
 					],
@@ -1578,23 +1547,19 @@ export const Comment: CAPIType = {
 					weighting: 'thumbnail',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=140&quality=85&auto=format&fit=max&s=668c45e6439ce78e74caabc670caae95',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=140&quality=85&auto=format&fit=max&s=668c45e6439ce78e74caabc670caae95',
 							width: 140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=5e94737d27c7a05cbed83892fd012f8a',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=5e94737d27c7a05cbed83892fd012f8a',
 							width: 280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=120&quality=85&auto=format&fit=max&s=26ea4d3fe4bdb051075f28ac562d948d',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=120&quality=85&auto=format&fit=max&s=26ea4d3fe4bdb051075f28ac562d948d',
 							width: 120,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=85351583559b7e857a2b0025a5840a9f',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=85351583559b7e857a2b0025a5840a9f',
 							width: 240,
 						},
 					],
@@ -1603,53 +1568,43 @@ export const Comment: CAPIType = {
 					weighting: 'supporting',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=380&quality=85&auto=format&fit=max&s=8ca054ff212c3cf6081d12e3fb07f48a',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=380&quality=85&auto=format&fit=max&s=8ca054ff212c3cf6081d12e3fb07f48a',
 							width: 380,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=835b7e68c3c7dbd3949e979c421ed9f2',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=835b7e68c3c7dbd3949e979c421ed9f2',
 							width: 760,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=300&quality=85&auto=format&fit=max&s=e82066644d9998c30c539675dd442c80',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=300&quality=85&auto=format&fit=max&s=e82066644d9998c30c539675dd442c80',
 							width: 300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=123b68c0d764968a95bf8f9437c79dcf',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=123b68c0d764968a95bf8f9437c79dcf',
 							width: 600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
 							width: 890,
 						},
 					],
@@ -1658,73 +1613,59 @@ export const Comment: CAPIType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=85&auto=format&fit=max&s=26a09576dd9b3bac4ab827034f7f91c8',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=85&auto=format&fit=max&s=26a09576dd9b3bac4ab827034f7f91c8',
 							width: 1020,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=813b6acd761529966116835eff6a8909',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=813b6acd761529966116835eff6a8909',
 							width: 2040,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=85&auto=format&fit=max&s=3319f7b3832d50285dfb34b7f0fd0c94',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=85&auto=format&fit=max&s=3319f7b3832d50285dfb34b7f0fd0c94',
 							width: 940,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=b7779aa84cf1776a55a3e7d39689315b',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=b7779aa84cf1776a55a3e7d39689315b',
 							width: 1880,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=85&auto=format&fit=max&s=0326f2185bb8e242f4433dc27a3ec922',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=85&auto=format&fit=max&s=0326f2185bb8e242f4433dc27a3ec922',
 							width: 660,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=1eb4e21b9178b60d2110ac9a0a16cf36',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=1eb4e21b9178b60d2110ac9a0a16cf36',
 							width: 1320,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
 							width: 930,
 						},
 					],
@@ -1733,33 +1674,27 @@ export const Comment: CAPIType = {
 					weighting: 'halfwidth',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=85&auto=format&fit=max&s=4736f0efce0408c2b82a7b0f4056197f',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=bf17d5973066b20eadae233e8c4c5717',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=85&auto=format&fit=max&s=cc90f1d9d46630ebbef59be2fecd4382',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=681f4349f0b0b5a40c938d51135a0a45',
 							width: 890,
 						},
 					],
@@ -1768,73 +1703,59 @@ export const Comment: CAPIType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=85&auto=format&fit=max&s=aa6833bc19ffd820a12ce33c3eb2d63f',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=85&auto=format&fit=max&s=aa6833bc19ffd820a12ce33c3eb2d63f',
 							width: 1300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=616dca8321ef2cf9feb36b48d349cefa',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=616dca8321ef2cf9feb36b48d349cefa',
 							width: 2600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=85&auto=format&fit=max&s=b8a3b1d849822273359f87c045c3aa76',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=85&auto=format&fit=max&s=b8a3b1d849822273359f87c045c3aa76',
 							width: 1140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3e8e7586f1725a997b04a34e2e521b3c',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3e8e7586f1725a997b04a34e2e521b3c',
 							width: 2280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1125&quality=85&auto=format&fit=max&s=8704c5061b3a6f1e0d897580494ac4d7',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1125&quality=85&auto=format&fit=max&s=8704c5061b3a6f1e0d897580494ac4d7',
 							width: 1125,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=4736204e8038bf3a4008c9e184b75956',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=4736204e8038bf3a4008c9e184b75956',
 							width: 2250,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=85&auto=format&fit=max&s=0f68b28eaa79271f6458ec7c84ea08d7',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=85&auto=format&fit=max&s=0f68b28eaa79271f6458ec7c84ea08d7',
 							width: 965,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=cb7abf09cb7946df62726e737d20cc7a',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=cb7abf09cb7946df62726e737d20cc7a',
 							width: 1930,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=85&auto=format&fit=max&s=1559cec86eaba98a1a38fd2468085622',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=85&auto=format&fit=max&s=1559cec86eaba98a1a38fd2468085622',
 							width: 725,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=07d0cecc175e2386725996b5aee44abf',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=07d0cecc175e2386725996b5aee44abf',
 							width: 1450,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
+							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
 							width: 930,
 						},
 					],
@@ -1850,106 +1771,78 @@ export const Comment: CAPIType = {
 			id: '6bc6fa8c-a504-4e81-9828-3a7a0a78b052',
 			elements: [
 				{
-					html:
-						'<p>Seven years ago, pretty much to the week, I paid my <a href="https://www.theguardian.com/commentisfree/2013/feb/04/newcastle-cold-fear-little-sense-of-hope" title="">first visit as a journalist</a> to Newcastle upon Tyne. The ostensible reason was a fuss about the city council’s proposal to cut its arts budget to zero, and a <a href="https://www.theguardian.com/uk/2012/dec/16/newcastle-arts-cuts-disastrous-stars" title="">campaign of opposition</a> endorsed by such alumni of the city as Bryan Ferry and Gordon “Sting” Sumner. But that controversy was only a small, distracting aspect of a much bigger story: the fact that the coalition government’s austerity was now threatening some of the most basic parts of Newcastle’s social fabric, as councillors faced cuts of around £100m, spread over three years. Then as now, they were led by Nick Forbes, the imaginative, engaging politician who remains in post, and is these days also the leader of the Local Government Association’s Labour group, which represents councillors from across England and Wales, and had its annual conference at the weekend.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Seven years ago, pretty much to the week, I paid my <a href="https://www.theguardian.com/commentisfree/2013/feb/04/newcastle-cold-fear-little-sense-of-hope" title="">first visit as a journalist</a> to Newcastle upon Tyne. The ostensible reason was a fuss about the city council’s proposal to cut its arts budget to zero, and a <a href="https://www.theguardian.com/uk/2012/dec/16/newcastle-arts-cuts-disastrous-stars" title="">campaign of opposition</a> endorsed by such alumni of the city as Bryan Ferry and Gordon “Sting” Sumner. But that controversy was only a small, distracting aspect of a much bigger story: the fact that the coalition government’s austerity was now threatening some of the most basic parts of Newcastle’s social fabric, as councillors faced cuts of around £100m, spread over three years. Then as now, they were led by Nick Forbes, the imaginative, engaging politician who remains in post, and is these days also the leader of the Local Government Association’s Labour group, which represents councillors from across England and Wales, and had its annual conference at the weekend.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'db8f1287-7c8b-487a-ae9b-7fafbab9be19',
 				},
 				{
-					html:
-						'£37m was cut in 2013-14, followed by £38m, then £40m and so on, until the council had lost £300m by the end of 2019',
+					html: '£37m was cut in 2013-14, followed by £38m, then £40m and so on, until the council had lost £300m by the end of 2019',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					_type:
-						'model.dotcomrendering.pageElements.PullquoteBlockElement',
+					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					elementId: '1f8499ca-c300-484c-9509-536c2859df6e',
 				},
 				{
-					html:
-						'<p>As the government hacked back the money that went from Whitehall to councils and the need for child and adult social care services continued to rise, <a href="https://www.chroniclelive.co.uk/news/north-east-news/tax-freeze-cuts-newcastle-city-6464052" title="">£37m</a> was cut from Newcastle’s budgets in 2013-14, followed by <a href="https://www.chroniclelive.co.uk/news/north-east-news/newcastle-city-council-reveals-40m-7276999" title="">£38m, then £40m</a> and <a href="https://www.bbc.co.uk/news/uk-england-tyne-38145319" title="">£30m</a> – and so on, until the council had lost <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">an estimated £300m</a> by the end of 2019. Each time I have gone back, I have heard about what has happened to libraries, seen closed youth clubs that were among the first things to be axed, and talked to people about cuts to early-years provision leading to four in 10 of the north-east’s children’s centres being shut. There is an awful symbolism in the fall in the <a href="https://www.bbc.co.uk/news/uk-politics-46514670" title="">number of lollipop men and women</a> from 64 to seven; on one trip, I was struck by the quiet poignancy of parks smattered with broken slides and swings.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>As the government hacked back the money that went from Whitehall to councils and the need for child and adult social care services continued to rise, <a href="https://www.chroniclelive.co.uk/news/north-east-news/tax-freeze-cuts-newcastle-city-6464052" title="">£37m</a> was cut from Newcastle’s budgets in 2013-14, followed by <a href="https://www.chroniclelive.co.uk/news/north-east-news/newcastle-city-council-reveals-40m-7276999" title="">£38m, then £40m</a> and <a href="https://www.bbc.co.uk/news/uk-england-tyne-38145319" title="">£30m</a> – and so on, until the council had lost <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">an estimated £300m</a> by the end of 2019. Each time I have gone back, I have heard about what has happened to libraries, seen closed youth clubs that were among the first things to be axed, and talked to people about cuts to early-years provision leading to four in 10 of the north-east’s children’s centres being shut. There is an awful symbolism in the fall in the <a href="https://www.bbc.co.uk/news/uk-politics-46514670" title="">number of lollipop men and women</a> from 64 to seven; on one trip, I was struck by the quiet poignancy of parks smattered with broken slides and swings.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '16e51742-bea8-4dd8-930a-44e0e4d62410',
 				},
 				{
-					html:
-						'<p>But despite cliches about places in “the north” being social deserts, Newcastle is full of initiative and innovation – and as austerity hit, there was plenty of <a href="https://www.theguardian.com/business/2015/nov/23/newcastle-cuts-save-library-lose-pool-john-harris" title="">grassroots work</a> aimed at parrying the cuts, bringing in new approaches and making parts of the city more resilient. But hacked-back spending has taken an inevitable toll, and reflects something happening all over the country: the government using local and city government to administer policies that reflect ideological prejudices coursing through Westminster and Whitehall.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>But despite cliches about places in “the north” being social deserts, Newcastle is full of initiative and innovation – and as austerity hit, there was plenty of <a href="https://www.theguardian.com/business/2015/nov/23/newcastle-cuts-save-library-lose-pool-john-harris" title="">grassroots work</a> aimed at parrying the cuts, bringing in new approaches and making parts of the city more resilient. But hacked-back spending has taken an inevitable toll, and reflects something happening all over the country: the government using local and city government to administer policies that reflect ideological prejudices coursing through Westminster and Whitehall.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'c38e99d1-b686-4c39-9bc6-5336841e5740',
 				},
 				{
-					html:
-						'<p>Of late, by contrast, we have heard a lot of talk about Boris Johnson and his allies turning on the fiscal taps, and somehow marking the “end of austerity”. When he moved into Downing Street, <a href="https://www.bbc.co.uk/news/uk-politics-49102495" title="">the prime minister said</a> he would be “answering at last the plea of the forgotten people and left-behind towns, by physically and literally renewing the ties that bind us together, so that with safer streets and better education, and fantastic new road and rail infrastructure and full-fibre broadband, we level up across Britain”. Some of this is likely to happen, but all over the country austerity is nonetheless grinding on.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Of late, by contrast, we have heard a lot of talk about Boris Johnson and his allies turning on the fiscal taps, and somehow marking the “end of austerity”. When he moved into Downing Street, <a href="https://www.bbc.co.uk/news/uk-politics-49102495" title="">the prime minister said</a> he would be “answering at last the plea of the forgotten people and left-behind towns, by physically and literally renewing the ties that bind us together, so that with safer streets and better education, and fantastic new road and rail infrastructure and full-fibre broadband, we level up across Britain”. Some of this is likely to happen, but all over the country austerity is nonetheless grinding on.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a1ef7644-1b27-4ddb-92b6-e0fbe7cdd0ec',
 				},
 				{
-					html:
-						'<p>Whatever paltry financial extras the government may now be granting councils, rising costs and increased need far outstrip them. Leeds <a href="https://www.yorkshireeveningpost.co.uk/news/politics/leeds-council-reveals-ps28m-cuts-coming-year-1385168" title="">faces cuts</a> in the next financial year of £28m. On the Wirral, the <a href="https://www.wirralglobe.co.uk/news/18213040.council-budget-clash/" title="">figure is £30m</a>; across the water in Liverpool, where <a href="https://www.liverpoolecho.co.uk/news/liverpool-news/joe-anderson-refuse-carry-out-17659928" title="">the mayor, Joe Anderson</a>, now says he will refuse to put through any further cuts beyond April 2021, there is a funding gap of £30m, only £7.2m of which will come from putting up council tax. In Doncaster, <a href="https://www.doncasterfreepress.co.uk/news/politics/council-tax-rise-and-job-cuts-way-doncaster-council-announces-its-budget-1384199" title="">new cuts</a> must total £18m; in Blackpool, to meet its obligations in children’s services, the council must somehow <a href="https://www.blackpoolgazette.co.uk/news/politics/ps20m-savings-plus-more-job-losses-blackpool-council-unveils-budget-proposals-1380603" title="">save £20m</a> from its other work. In Newcastle, the council will have to <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">cut £20m</a> across its budgets in 2020-21 – and, on current projections, another £17-18m the year after that.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Whatever paltry financial extras the government may now be granting councils, rising costs and increased need far outstrip them. Leeds <a href="https://www.yorkshireeveningpost.co.uk/news/politics/leeds-council-reveals-ps28m-cuts-coming-year-1385168" title="">faces cuts</a> in the next financial year of £28m. On the Wirral, the <a href="https://www.wirralglobe.co.uk/news/18213040.council-budget-clash/" title="">figure is £30m</a>; across the water in Liverpool, where <a href="https://www.liverpoolecho.co.uk/news/liverpool-news/joe-anderson-refuse-carry-out-17659928" title="">the mayor, Joe Anderson</a>, now says he will refuse to put through any further cuts beyond April 2021, there is a funding gap of £30m, only £7.2m of which will come from putting up council tax. In Doncaster, <a href="https://www.doncasterfreepress.co.uk/news/politics/council-tax-rise-and-job-cuts-way-doncaster-council-announces-its-budget-1384199" title="">new cuts</a> must total £18m; in Blackpool, to meet its obligations in children’s services, the council must somehow <a href="https://www.blackpoolgazette.co.uk/news/politics/ps20m-savings-plus-more-job-losses-blackpool-council-unveils-budget-proposals-1380603" title="">save £20m</a> from its other work. In Newcastle, the council will have to <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">cut £20m</a> across its budgets in 2020-21 – and, on current projections, another £17-18m the year after that.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '8b6a0e04-7e5f-4402-bc48-1ab0b592fdfd',
 				},
 				{
-					html:
-						'<p>I spoke to Forbes last week. “We’ve cut every other service that the council provides to the absolute minimum, to try to protect social care,” he told me. “This is the first year we haven’t been able to do anything other than take money out of social care budgets … in some cases, we’re going to have to take away support that people have previously had.”</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>I spoke to Forbes last week. “We’ve cut every other service that the council provides to the absolute minimum, to try to protect social care,” he told me. “This is the first year we haven’t been able to do anything other than take money out of social care budgets … in some cases, we’re going to have to take away support that people have previously had.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a7a19377-e87b-40b4-aa5a-0f1d3c7af04e',
 				},
 				{
-					html:
-						'<p>By way of cold comfort, last year’s autumn statement meant an injection by the government of £11m into the city’s finances, but it will be largely eaten up by the recent increase in the minimum wage. Embracing the Conservatives’ proposal that councils can raise council tax by up to 2% to cover rising pressures on adult social care, Forbes says, will bring a paltry £2m. Next year “looks even more scary, because it looks like we’re going to have to start dismantling various aspects of our social work teams”. This seems set to affect children’s services, which up to now have been protected.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>By way of cold comfort, last year’s autumn statement meant an injection by the government of £11m into the city’s finances, but it will be largely eaten up by the recent increase in the minimum wage. Embracing the Conservatives’ proposal that councils can raise council tax by up to 2% to cover rising pressures on adult social care, Forbes says, will bring a paltry £2m. Next year “looks even more scary, because it looks like we’re going to have to start dismantling various aspects of our social work teams”. This seems set to affect children’s services, which up to now have been protected.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '70884394-53a2-4aa0-a910-62a8d7eaa1b3',
 				},
 				{
-					url:
-						'https://www.theguardian.com/commentisfree/2020/feb/06/tory-level-up-north-regional-inequality',
-					text:
-						'Tory plans to ‘level up’ the north are laughably inadequate | Polly Toynbee',
+					url: 'https://www.theguardian.com/commentisfree/2020/feb/06/tory-level-up-north-regional-inequality',
+					text: 'Tory plans to ‘level up’ the north are laughably inadequate | Polly Toynbee',
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
 					elementId: '6b1385ee-c124-4eb8-81d1-24fe8584142b',
 				},
 				{
-					html:
-						'<p>The politics of continuing austerity are often maddeningly contradictory. I have been to plenty of places where cuts have intensified people’s conviction that they have been neglected by Westminster and Whitehall. That impulse was one of the reasons behind the Brexit vote. In turn, the frustrations of three years of post-referendum politics and Johnson’s cynical approximation of optimism convinced people in lots of these areas to vote Conservative. And so it is that austerity continues, while the government tries to escape the blame by cosmetically positioning itself against its own policies.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The politics of continuing austerity are often maddeningly contradictory. I have been to plenty of places where cuts have intensified people’s conviction that they have been neglected by Westminster and Whitehall. That impulse was one of the reasons behind the Brexit vote. In turn, the frustrations of three years of post-referendum politics and Johnson’s cynical approximation of optimism convinced people in lots of these areas to vote Conservative. And so it is that austerity continues, while the government tries to escape the blame by cosmetically positioning itself against its own policies.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3b93f204-e351-47ed-87df-1ec805162e36',
 				},
 				{
-					html:
-						'<p>For the people involved in councils, other aspects of the picture are equally confounding. Rather than being able to plan for the long term, they have to wait every year for news of what the government will give them; thanks partly to the December election, even with the start of the next financial year looming, the next set of figures was confirmed only last week. In the spring, the government will reveal its new system of so-called “fair funding”. Recent reports have suggested that allocations for social care in some of England’s most deprived areas (including many places that were until recently part of the “red wall” of Labour constituencies) will <a href="https://www.theguardian.com/society/2020/jan/25/former-red-wall-areas-could-lose-millions-in-council-funding-review" title="">fall by £320m</a>, while those in more affluent places will rise by around the same amount.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>For the people involved in councils, other aspects of the picture are equally confounding. Rather than being able to plan for the long term, they have to wait every year for news of what the government will give them; thanks partly to the December election, even with the start of the next financial year looming, the next set of figures was confirmed only last week. In the spring, the government will reveal its new system of so-called “fair funding”. Recent reports have suggested that allocations for social care in some of England’s most deprived areas (including many places that were until recently part of the “red wall” of Labour constituencies) will <a href="https://www.theguardian.com/society/2020/jan/25/former-red-wall-areas-could-lose-millions-in-council-funding-review" title="">fall by £320m</a>, while those in more affluent places will rise by around the same amount.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'f2f0dbf9-eed1-4929-a731-c381c7411fa5',
 				},
 				{
-					html:
-						'<p>Possibly in response to the anxiety these projections sparked, subsequent predictions have suggested that other changes could balance these unfairnesses out – although many injustices would seemingly get worse. <a href="https://www.countycouncilsnetwork.org.uk/lgc-article-on-fair-funding-review-modelling-ccn-response/" title="">One report</a> suggests that inner London boroughs could lose as much as a quarter of their funding. The consequences of that would be unimaginable. To cap it all, there is the mess of uncertainty surrounding Brexit, and what it may mean for the public finances.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Possibly in response to the anxiety these projections sparked, subsequent predictions have suggested that other changes could balance these unfairnesses out – although many injustices would seemingly get worse. <a href="https://www.countycouncilsnetwork.org.uk/lgc-article-on-fair-funding-review-modelling-ccn-response/" title="">One report</a> suggests that inner London boroughs could lose as much as a quarter of their funding. The consequences of that would be unimaginable. To cap it all, there is the mess of uncertainty surrounding Brexit, and what it may mean for the public finances.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '06dd87ad-bc53-4619-a0b9-495ee2fc1c4e',
 				},
 				{
-					html:
-						'<p>We know that the chancellor has already told departments to come up with <a href="https://www.theguardian.com/society/2020/jan/29/ministers-told-to-find-5-savings-to-refocus-on-pms-priorities" title="">savings of 5%</a>. Some people say that if the government has any intention of easing the predicament of councils and the people who need their services, the last chance for a rethink will come with the autumn statement. But whatever happens, most of the people I have spoken to are worried and angry for one incurable reason: the fact that after 10 years of cuts, so much damage has been done. Most of what has been closed will not come back; countless instances of need and hardship now feel like they are locked in. Brexit flags and banners, and some of those overhyped infrastructure projects, are hardly going to make up for the pain.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>We know that the chancellor has already told departments to come up with <a href="https://www.theguardian.com/society/2020/jan/29/ministers-told-to-find-5-savings-to-refocus-on-pms-priorities" title="">savings of 5%</a>. Some people say that if the government has any intention of easing the predicament of councils and the people who need their services, the last chance for a rethink will come with the autumn statement. But whatever happens, most of the people I have spoken to are worried and angry for one incurable reason: the fact that after 10 years of cuts, so much damage has been done. Most of what has been closed will not come back; countless instances of need and hardship now feel like they are locked in. Brexit flags and banners, and some of those overhyped infrastructure projects, are hardly going to make up for the pain.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '21e1f9dd-3c67-4b1c-99c1-a4c1bddeb160',
 				},
 				{
 					html: '<p>• John Harris is a Guardian columnist</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'b64f8846-45d0-4f50-a464-db014b750feb',
 				},
 			],
@@ -1965,8 +1858,7 @@ export const Comment: CAPIType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://amp.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'@id': 'https://amp.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1975,8 +1867,7 @@ export const Comment: CAPIType = {
 				url: 'https://www.theguardian.com/',
 				logo: {
 					'@type': 'ImageObject',
-					url:
-						'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 					width: 190,
 					height: 60,
 				},
@@ -2015,12 +1906,10 @@ export const Comment: CAPIType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'@id': 'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target:
-					'android-app://com.guardian/https/www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				target: 'android-app://com.guardian/https/www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 			},
 		},
 	],
@@ -2136,8 +2025,7 @@ export const Comment: CAPIType = {
 		sharedAdTargeting: {
 			ct: 'article',
 			co: ['jennifer-rankin'],
-			url:
-				'/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 			su: ['0'],
 			edition: 'uk',
 			tn: ['news'],
@@ -2191,8 +2079,7 @@ export const Comment: CAPIType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId:
-			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

@@ -18,14 +18,12 @@ describe('Middot Tests', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>• I should have a dot.</p>',
 						},
@@ -41,17 +39,14 @@ describe('Middot Tests', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p><span data-dcr-style="bullet"></span> I should have have a dot.</p>',
+							html: '<p><span data-dcr-style="bullet"></span> I should have have a dot.</p>',
 						},
 					],
 				},
@@ -69,20 +64,17 @@ describe('Middot Tests', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>*</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am text.</p>',
 						},
@@ -98,21 +90,18 @@ describe('Middot Tests', () => {
 					...blockMetaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am the first paragraph</p>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>*</p>',
 						},
 
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I am text.</p>',
 						},

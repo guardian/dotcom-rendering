@@ -16,11 +16,10 @@ const isReady = (dependencies: unknown[]): boolean => {
 const resetHydrationStateEventName = 'resetHydrationState';
 
 // HOF required to enable removeEventListener
-const setAlreadyHydratedToFalse = () => (
-	setAlreadyHydrated: (value: SetStateAction<boolean>) => void,
-) => {
-	setAlreadyHydrated(false);
-};
+const setAlreadyHydratedToFalse =
+	() => (setAlreadyHydrated: (value: SetStateAction<boolean>) => void) => {
+		setAlreadyHydrated(false);
+	};
 
 // For use in storybook for clicking between components
 export const fireAndResetHydrationState = () => {
@@ -73,9 +72,9 @@ export const HydrateOnce = ({ rootId, children, waitFor = [] }: Props) => {
  * @param {Array} waitFor - An array of variables that must be defined before the task is executed
  * */
 export const HydrateInteractiveOnce = ({
-	 rootId,
-	 children,
-	 waitFor = [],
+	rootId,
+	children,
+	waitFor = [],
 }: Props) => {
 	const [alreadyHydrated, setAlreadyHydrated] = useState(false);
 	if (alreadyHydrated) return null;

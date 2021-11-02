@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
-import {
-	getEpicMeta,
-	getViewLog,
-	logView,
-} from '@guardian/automat-contributions';
+import { getEpicMeta, getViewLog } from '@guardian/automat-contributions';
 import {
 	isRecurringContributor,
 	getLastOneOffContributionTimestamp,
@@ -20,9 +16,7 @@ import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
 	OphanComponentEvent,
-	sendOphanComponentEvent,
 	submitComponentEvent,
-	SdcTestMeta,
 } from '@root/src/web/browser/ophan/ophan';
 import {
 	Metadata,
@@ -32,12 +26,8 @@ import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { cmp } from '@guardian/consent-management-platform';
 import { storage } from '@guardian/libs';
 import { getCookie } from '../../browser/cookie';
-import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
-
-type HasBeenSeen = [boolean, (el: HTMLDivElement) => void];
 
 type PreEpicConfig = {
-	meta: SdcTestMeta;
 	module: {
 		url: string;
 		props: { [key: string]: any };
@@ -122,7 +112,7 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
 
-export const canShow = async (
+export const canShowReaderRevenueEpic = async (
 	data: CanShowData,
 ): Promise<CanShowResult<EpicConfig>> => {
 	const {
@@ -163,11 +153,10 @@ export const canShow = async (
 
 	const hasConsentForArticleCount = await hasCmpConsentForArticleCount();
 
-	const { meta, module } = json.data;
+	const { module } = json.data;
 	return {
 		show: true,
 		meta: {
-			meta,
 			module,
 			email,
 			hasConsentForArticleCount,
@@ -177,18 +166,12 @@ export const canShow = async (
 };
 
 export const ReaderRevenueEpic = ({
-	meta,
 	module,
 	email,
 	hasConsentForArticleCount,
 	stage,
 }: EpicConfig) => {
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
-	const [hasBeenSeen, setNode] = useHasBeenSeen({
-		rootMargin: '-18px',
-		threshold: 0,
-		debounce: true,
-	}) as HasBeenSeen;
 
 	const openCmp = () => {
 		cmp.showPrivacyManager();
@@ -205,7 +188,6 @@ export const ReaderRevenueEpic = ({
 			.then((epicModule: { ContributionsEpic: React.FC<EpicProps> }) => {
 				modulePerf.end();
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
-				sendOphanComponentEvent('INSERT', meta);
 			})
 			.catch((error) => {
 				const msg = `Error importing RR epic: ${error}`;
@@ -219,19 +201,9 @@ export const ReaderRevenueEpic = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	useEffect(() => {
-		if (hasBeenSeen && meta) {
-			// Should only run once
-			const { abTestName } = meta;
-
-			logView(storage.local, abTestName);
-
-			sendOphanComponentEvent('VIEW', meta);
-		}
-	}, [hasBeenSeen, meta]);
 	if (Epic) {
 		return (
-			<div ref={setNode} css={wrapperMargins}>
+			<div css={wrapperMargins}>
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<Epic
 					{...module.props}
