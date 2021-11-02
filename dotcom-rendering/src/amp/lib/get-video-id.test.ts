@@ -19,16 +19,16 @@ describe('getIdFromUrl', () => {
 			},
 			{
 				url: 'https://youtu.be/NRHEIGHTx8I',
-				id: 'NRHEIGHTx8I'
+				id: 'NRHEIGHTx8I',
 			},
 			{
 				url: 'https://youtu.be/NRH_IGHTx8I',
-				id: 'NRH_IGHTx8I'
+				id: 'NRH_IGHTx8I',
 			},
 			{
 				url: 'https://youtu.be/NRH-IGHTx8I',
-				id: 'NRH-IGHTx8I'
-			}
+				id: 'NRH-IGHTx8I',
+			},
 		];
 
 		formats.forEach((_) => {
@@ -61,13 +61,16 @@ describe('getIdFromUrl', () => {
 	});
 
 	it('Finds ID if both options are allowed', () => {
-		const formats = [ 'https://theguardian.com/test', 'https://theguardian.com?a=test', 'https://theguardian.com/test?a=test']
+		const formats = [
+			'https://theguardian.com/test',
+			'https://theguardian.com?a=test',
+			'https://theguardian.com/test?a=test',
+		];
 
 		formats.forEach((_) => {
 			expect(getIdFromUrl(_, 'test', true, 'a')).toBe('test');
 		});
-
-	})
+	});
 
 	it('Throws an error if it cannot find an ID', () => {
 		expect(() => {
