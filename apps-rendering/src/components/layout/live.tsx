@@ -14,7 +14,7 @@ import type { DeadBlog, LiveBlog } from 'item';
 import { convertThemeToArticleTheme } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
-import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
+import { articleWidthStyles, darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -61,9 +61,7 @@ const Live: FC<Props> = ({ item }) => (
 		<section css={articleWidthStyles}>
 			<Tags tags={item.tags} format={item} />
 		</section>
-		<section css={onwardStyles}>
-			<RelatedContent content={item.relatedContent} />
-		</section>
+		<RelatedContent content={item.relatedContent} />
 		<section css={articleWidthStyles}>
 			<Footer isCcpa={false} />
 		</section>

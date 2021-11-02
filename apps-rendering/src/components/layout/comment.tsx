@@ -27,7 +27,6 @@ import {
 	articleWidthStyles,
 	darkModeCss,
 	lineStyles,
-	onwardStyles,
 } from 'styles';
 
 // ----- Styles ----- //
@@ -108,9 +107,7 @@ const Comment: FC<Props> = ({ item, children }) => (
 				<Tags tags={item.tags} format={item} />
 			</section>
 		</article>
-		<section css={onwardStyles}>
-			<RelatedContent content={item.relatedContent} />
-		</section>
+		<RelatedContent content={item.relatedContent} />
 		<Footer isCcpa={false} />
 	</main>
 );

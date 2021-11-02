@@ -32,7 +32,6 @@ import {
 	articleWidthStyles,
 	darkModeCss,
 	lineStyles,
-	onwardStyles,
 } from 'styles';
 import { getThemeStyles, themeToPillarString } from 'themeStyles';
 
@@ -103,7 +102,6 @@ const Standard: FC<Props> = ({ item, children }) => {
 				item.internalShortId,
 				map((id) => (
 					<section
-						css={onwardStyles}
 						id="comments"
 						data-closed={false}
 						data-pillar={themeToPillarString(item.theme)}
@@ -157,9 +155,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 					<Tags tags={item.tags} format={item} />
 				</section>
 			</article>
-			<section css={onwardStyles}>
-				<RelatedContent content={item.relatedContent} />
-			</section>
+			<RelatedContent content={item.relatedContent} />
 			{commentContainer}
 			<Footer isCcpa={false} />
 		</main>

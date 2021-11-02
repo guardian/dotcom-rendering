@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { neutral, remSpace } from '@guardian/src-foundations';
+import { background, breakpoints, neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Option } from '@guardian/types';
@@ -15,6 +15,22 @@ import { darkModeCss } from 'styles';
 interface Props {
 	content: Option<ResizedRelatedContent>;
 }
+
+const styles = css`
+	background: ${neutral[97]};
+	margin: 0 ${remSpace[3]};
+
+	${darkModeCss`
+        background: ${background.inverse};
+    `};
+
+	padding: ${remSpace[1]} 0 0;
+	${from.wide} {
+		width: ${breakpoints.wide}px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+`;
 
 const headingStyles = css`
 	${headline.xsmall({ fontWeight: 'bold' })}
@@ -92,7 +108,7 @@ const RelatedContent: FC<Props> = ({ content }) => {
 			}
 
 			return (
-				<section>
+				<section css={styles}>
 					<h2 css={headingStyles}>{title}</h2>
 					<ul css={listStyles}>
 						{relatedItems.map((relatedItem, key) => {

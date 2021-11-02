@@ -14,7 +14,7 @@ import Standfirst from 'components/standfirst';
 import HeaderMedia from 'headerMedia';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
-import { articleWidthStyles, onwardStyles } from 'styles';
+import { articleWidthStyles } from 'styles';
 
 // ----- Styles ----- //
 
@@ -68,9 +68,7 @@ const Media: FC<Props> = ({ item, children }) => (
 				<Tags tags={item.tags} />
 			</section>
 		</article>
-		<section css={onwardStyles}>
-			<RelatedContent content={item.relatedContent} />
-		</section>
+		<RelatedContent content={item.relatedContent} />
 		<Footer isCcpa={false} />
 	</main>
 );

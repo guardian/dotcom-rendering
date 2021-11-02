@@ -21,7 +21,6 @@ import {
 	articleWidthStyles,
 	darkModeCss,
 	lineStyles,
-	onwardStyles,
 } from 'styles';
 
 // ----- Styles ----- //
@@ -80,9 +79,7 @@ const Labs: FC<Props> = ({ item, children }) => {
 					{children}
 				</Body>
 			</article>
-			<section css={onwardStyles}>
-				<RelatedContent content={item.relatedContent} />
-			</section>
+			<RelatedContent content={item.relatedContent} />
 			<Footer isCcpa={false} />
 		</main>
 	);

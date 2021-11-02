@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 import {
-	background,
 	brandAltBackground,
 	neutral,
 } from '@guardian/src-foundations/palette';
@@ -83,22 +82,6 @@ export const lineStyles = css`
             transparent 3px
             );
     `}
-	}
-`;
-
-export const onwardStyles: SerializedStyles = css`
-	background: ${neutral[97]};
-	margin: 0 ${remSpace[3]};
-
-	${darkModeCss`
-        background: ${background.inverse};
-    `};
-
-	padding: 0.125rem 0 0;
-	${from.wide} {
-		width: 1300px;
-		margin-left: auto;
-		margin-right: auto;
 	}
 `;
 
