@@ -130,41 +130,30 @@ export const RegionalAd = ({
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
 	return (
-		<ClassNames>
-			{({ css, cx }) => (
-				<amp-ad
-					class={cx(
-						css`
-							${regionClasses[adRegion].styles}
-						`,
-					)}
-					data-block-on-consent=""
-					// Primary ad size width and height
-					width={width}
-					height={height}
-					// Secondary ad sizes
-					data-multi-size={multiSizes}
-					// Setting data-multi-size-validation to false allows
-					// secondary ad sizes that are less than 2/3rds of the
-					// corresponding primary size.
-					data-multi-size-validation="false"
-					data-npa-on-unknown-consent={true}
-					data-loading-strategy="prefer-viewability-over-views"
-					layout="fixed"
-					type="doubleclick"
-					json={stringify(
-						adJson(commercialProperties[edition].adTargeting),
-					)}
-					data-slot={ampData(section, contentType)}
-					rtc-config={realTimeConfig(
-						isSticky,
-						adRegion,
-						config.usePrebid,
-						config.usePermutive,
-					)}
-				/>
+		<amp-ad
+			data-block-on-consent=""
+			// Primary ad size width and height
+			width={width}
+			height={height}
+			// Secondary ad sizes
+			data-multi-size={multiSizes}
+			// Setting data-multi-size-validation to false allows
+			// secondary ad sizes that are less than 2/3rds of the
+			// corresponding primary size.
+			data-multi-size-validation="false"
+			data-npa-on-unknown-consent={true}
+			data-loading-strategy="prefer-viewability-over-views"
+			layout="fixed"
+			type="doubleclick"
+			json={stringify(adJson(commercialProperties[edition].adTargeting))}
+			data-slot={ampData(section, contentType)}
+			rtc-config={realTimeConfig(
+				isSticky,
+				adRegion,
+				config.usePrebid,
+				config.usePermutive,
 			)}
-		</ClassNames>
+		/>
 	);
 };
 
@@ -178,15 +167,27 @@ export const Ad = ({
 }: AdProps) => (
 	<>
 		{adRegions.map((adRegion) => (
-			<RegionalAd
-				adRegion={adRegion}
-				isSticky={isSticky}
-				edition={edition}
-				section={section}
-				contentType={contentType}
-				config={config}
-				commercialProperties={commercialProperties}
-			/>
+			<ClassNames>
+				{({ css, cx }) => (
+					<div
+						className={cx(
+							css`
+								${regionClasses[adRegion].styles}
+							`,
+						)}
+					>
+						<RegionalAd
+							adRegion={adRegion}
+							isSticky={isSticky}
+							edition={edition}
+							section={section}
+							contentType={contentType}
+							config={config}
+							commercialProperties={commercialProperties}
+						/>
+					</div>
+				)}
+			</ClassNames>
 		))}
 	</>
 );
