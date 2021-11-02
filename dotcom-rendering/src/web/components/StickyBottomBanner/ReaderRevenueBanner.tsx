@@ -96,7 +96,7 @@ const buildPayload = async ({
 			optedOutOfArticleCount,
 			modulesVersion: MODULES_VERSION,
 			sectionId,
-			tags: tags.map(tag => tag.id),
+			tagIds: tags.map(tag => tag.id),
 		},
 	};
 };
