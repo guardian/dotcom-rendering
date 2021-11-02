@@ -542,6 +542,9 @@ const fillCaptionTriangle = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const fillCaptionCamera = (format: ArticleFormat): string =>
+	textCaption(format);
+
 const fillBlockquoteIcon = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
 
@@ -844,6 +847,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
 			captionTriangle: fillCaptionTriangle(format),
+			cameraCaptionIcon: fillCaptionCamera(format),
 			cardIcon: fillCardIcon(format),
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),

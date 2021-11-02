@@ -111,11 +111,8 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-/* The fill colour for the icon should always be the same
-as the caption text colour, which is why the fill here uses
-the palette.text.caption rather than palette.fill[something] */
 const iconStyle = (palette: Palette) => css`
-	fill: ${palette.text.caption};
+	fill: ${palette.fill.cameraCaptionIcon};
 	margin-right: ${space[1] / 2}px;
 	display: inline-block;
 	vertical-align: middle;
