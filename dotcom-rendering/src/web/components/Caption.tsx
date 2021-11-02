@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
 import CameraIcon from '@frontend/static/icons/camera.svg';
