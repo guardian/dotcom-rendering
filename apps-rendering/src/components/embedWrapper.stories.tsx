@@ -113,7 +113,7 @@ const Spotify: FC = () => (
 	</div>
 );
 
-const Instagram: FC = () => (
+const Instagram = () => (
 	<div>
 		<p>
 			This is an example of the embed wrapper rendering a instagram
@@ -143,6 +143,11 @@ const Instagram: FC = () => (
 		/>
 	</div>
 );
+Instagram.story = {
+	parameters: {
+		chromatic: { disable: true },
+	},
+};
 
 // ----- Exports ----- //
 
