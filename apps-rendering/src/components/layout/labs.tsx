@@ -17,11 +17,7 @@ import HeaderMedia from 'headerMedia';
 import type { Item } from 'item';
 import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
-import {
-	articleWidthStyles,
-	darkModeCss,
-	lineStyles,
-} from 'styles';
+import { articleWidthStyles, darkModeCss, lineStyles } from 'styles';
 
 // ----- Styles ----- //
 

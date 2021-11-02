@@ -23,11 +23,7 @@ import Tags from 'components/tags';
 import HeaderMedia from 'headerMedia';
 import type { Comment as CommentItem, Editorial, Letter } from 'item';
 import type { FC, ReactNode } from 'react';
-import {
-	articleWidthStyles,
-	darkModeCss,
-	lineStyles,
-} from 'styles';
+import { articleWidthStyles, darkModeCss, lineStyles } from 'styles';
 
 // ----- Styles ----- //
 

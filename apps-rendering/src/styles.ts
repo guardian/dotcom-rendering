@@ -2,10 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
-import {
-	brandAltBackground,
-	neutral,
-} from '@guardian/src-foundations/palette';
+import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
 import { Design, map, none, some, withDefault } from '@guardian/types';

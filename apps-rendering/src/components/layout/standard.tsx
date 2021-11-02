@@ -28,11 +28,7 @@ import type {
 } from 'item';
 import { maybeRender, pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
-import {
-	articleWidthStyles,
-	darkModeCss,
-	lineStyles,
-} from 'styles';
+import { articleWidthStyles, darkModeCss, lineStyles } from 'styles';
 import { getThemeStyles, themeToPillarString } from 'themeStyles';
 
 // ----- Styles ----- //

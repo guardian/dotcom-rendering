@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { background, breakpoints, neutral, remSpace } from '@guardian/src-foundations';
+import {
+	background,
+	breakpoints,
+	neutral,
+	remSpace,
+} from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
 import type { Option } from '@guardian/types';
