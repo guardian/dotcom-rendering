@@ -43,15 +43,15 @@ const overlayedStyles = (palette: Palette) => css`
 	background: rgba(18, 18, 18, 0.8);
 
 	span {
-		color: ${palette.text.overlayed};
+		color: ${palette.text.overlayedCaption};
 		font-size: 0.75rem;
 		line-height: 1rem;
 	}
 
 	svg {
-		fill: ${palette.text.overlayed};
+		fill: ${palette.text.overlayedCaption};
 	}
-	color: ${palette.text.overlayed};
+	color: ${palette.text.overlayedCaption};
 	font-size: 0.75rem;
 	line-height: 1rem;
 	padding-top: 0.375rem;
