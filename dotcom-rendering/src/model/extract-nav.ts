@@ -100,11 +100,9 @@ export const extractNAV = (data: any): NavType => {
 				getLink(l, { isPillar: false }),
 			),
 		},
-		brandExtensions: getArray<ObjectType>(
-			data,
-			'brandExtensions',
-			[],
-		).map((l) => getLink(l, { isPillar: false })),
+		brandExtensions: getArray<ObjectType>(data, 'brandExtensions', []).map(
+			(l) => getLink(l, { isPillar: false }),
+		),
 		currentNavLink: getString(data, 'currentNavLinkTitle', ''),
 		subNavSections: subnav
 			? {

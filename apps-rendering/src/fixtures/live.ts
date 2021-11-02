@@ -1,12 +1,12 @@
 // ----- Imports ----- //
 
+import { ArticleElementRole } from '@guardian/libs';
 import {
 	Design,
 	Display,
 	none,
 	OptionKind,
 	Pillar,
-	Role,
 	some,
 	toOption,
 } from '@guardian/types';
@@ -14,7 +14,7 @@ import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
 import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
-import type { Liveblog } from 'item';
+import type { LiveBlog } from 'item';
 import { pipe } from 'lib';
 
 const parser = new DOMParser();
@@ -61,7 +61,7 @@ const mainMedia: Option<MainMedia> = {
 				kind: OptionKind.Some,
 				value: '‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.',
 			},
-			role: Role.Standard,
+			role: ArticleElementRole.Standard,
 		},
 	},
 };
@@ -260,7 +260,7 @@ const fields = {
 	webUrl: '',
 };
 
-const live: Liveblog = {
+const live: LiveBlog = {
 	design: Design.LiveBlog,
 	...fields,
 	blocks: [],

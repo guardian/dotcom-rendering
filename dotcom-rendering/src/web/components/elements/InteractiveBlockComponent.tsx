@@ -286,7 +286,7 @@ export const InteractiveBlockComponent = ({
 	return (
 		<>
 			<figure
-				id={elementId} // required for hydration
+				id={elementId} // boot scripts use id when inserting interactive content
 				ref={wrapperRef}
 				css={wrapperStyle({ format, role, loaded, palette })}
 				className={interactiveLegacyFigureClasses(
@@ -298,13 +298,13 @@ export const InteractiveBlockComponent = ({
 			>
 				{!loaded && (
 					<>
-						<Placeholder
+						<Placeholder // removed by HydrateInteractiveOnce
 							height={decideHeight(role)}
 							shouldShimmer={false}
 						/>
 						<a
 							ref={placeholderLinkRef}
-							data-name="placeholder"
+							data-name="placeholder" // removed by HydrateInteractiveOnce
 							css={placeholderLinkStyle}
 							href={url}
 						>

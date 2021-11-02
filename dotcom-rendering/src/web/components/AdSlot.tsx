@@ -59,6 +59,12 @@ export const labelStyles = css`
 	}
 `;
 
+export const adCollapseStyles = css`
+	& .ad-slot.ad-slot--collapse {
+		display: none;
+	}
+`;
+
 /**
  * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
  * These styles come mostly from RichLink in DCR.
@@ -341,7 +347,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 			const adSlotAboveNav = css`
 				position: relative;
 				margin: 0 auto;
-				min-height: 90px;
+				min-height: ${adSizes.leaderboard.height}px;
 				text-align: left;
 				display: block;
 				min-width: 728px;

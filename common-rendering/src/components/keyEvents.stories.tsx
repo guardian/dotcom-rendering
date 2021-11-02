@@ -2,7 +2,7 @@
 
 import { KeyEvent } from "./keyEvents";
 import KeyEvents from "./keyEvents";
-import { Pillar, Special, Theme } from "@guardian/types";
+import { ArticlePillar, ArticleSpecial, ArticleTheme } from "@guardian/libs";
 import { css } from "@emotion/react";
 
 // ----- Stories ----- //
@@ -59,7 +59,7 @@ const events: KeyEvent[] = [
 	},
 ];
 
-const KeyEventComp = (dark: boolean, theme: Theme, title: string) => (
+const KeyEventComp = (dark: boolean, theme: ArticleTheme, title: string) => (
 	<div
 		css={css`
 			flex-grow: 1;
@@ -79,13 +79,13 @@ const keyEventWithTheme = (dark: boolean) => () => (
 			flex-wrap: wrap;
 		`}
 	>
-		{KeyEventComp(dark, Pillar.News, "News")}
-		{KeyEventComp(dark, Pillar.Culture, "Culture")}
-		{KeyEventComp(dark, Pillar.Lifestyle, "Lifestyle")}
-		{KeyEventComp(dark, Pillar.Opinion, "Opinion")}
-		{KeyEventComp(dark, Pillar.Sport, "Sport")}
-		{KeyEventComp(dark, Special.Labs, "Labs")}
-		{KeyEventComp(dark, Special.SpecialReport, "SpecialReport")}
+		{KeyEventComp(dark, ArticlePillar.News, "News")}
+		{KeyEventComp(dark, ArticlePillar.Culture, "Culture")}
+		{KeyEventComp(dark, ArticlePillar.Lifestyle, "Lifestyle")}
+		{KeyEventComp(dark, ArticlePillar.Opinion, "Opinion")}
+		{KeyEventComp(dark, ArticlePillar.Sport, "Sport")}
+		{KeyEventComp(dark, ArticleSpecial.Labs, "Labs")}
+		{KeyEventComp(dark, ArticleSpecial.SpecialReport, "SpecialReport")}
 	</div>
 );
 

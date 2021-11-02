@@ -19,8 +19,7 @@ const enhance = (
 					// When blockquotes have the `quoted` class we represent this using
 					// the quoted prop
 					enhanced.push({
-						_type:
-							'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 						elementId: element.elementId,
 						html: element.html,
 						quoted: true,
@@ -29,8 +28,7 @@ const enhance = (
 					// If a blockquote is not queoted it is a Simple Blockquote and for
 					// photo essays we transform these into HighlightBlockElements
 					enhanced.push({
-						_type:
-							'model.dotcomrendering.pageElements.HighlightBlockElement',
+						_type: 'model.dotcomrendering.pageElements.HighlightBlockElement',
 						elementId: element.elementId,
 						html: element.html,
 					});

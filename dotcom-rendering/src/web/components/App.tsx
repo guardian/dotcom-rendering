@@ -32,7 +32,10 @@ import {
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
 
 import { Portal } from '@frontend/web/components/Portal';
-import { HydrateOnce } from '@frontend/web/components/HydrateOnce';
+import {
+	HydrateOnce,
+	HydrateInteractiveOnce,
+} from '@frontend/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
@@ -153,17 +156,15 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// non-async version (this is the case in the banner picker where some
 	// banners need countryCode but we don't want to block all banners from
 	// executing their canShow logic until countryCode is available):
-	const [asyncCountryCode, setAsyncCountryCode] = useState<
-		Promise<CountryCode | null>
-	>();
+	const [asyncCountryCode, setAsyncCountryCode] =
+		useState<Promise<CountryCode | null>>();
 
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
 
-	const [brazeMessages, setBrazeMessages] = useState<
-		Promise<BrazeMessagesInterface>
-	>();
+	const [brazeMessages, setBrazeMessages] =
+		useState<Promise<BrazeMessagesInterface>>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 	// [string] for the actual id;
@@ -176,26 +177,22 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		setBrowserId(getCookie('bwid'));
 	}, []);
 
-	const componentEventHandler = (
-		componentType: any,
-		id: any,
-		action: any,
-	) => () => {
-		const componentEvent: OphanComponentEvent = {
-			component: {
-				componentType,
-				id,
-				products: [],
-				labels: [],
-			},
-			action,
+	const componentEventHandler =
+		(componentType: any, id: any, action: any) => () => {
+			const componentEvent: OphanComponentEvent = {
+				component: {
+					componentType,
+					id,
+					products: [],
+					labels: [],
+				},
+				action,
+			};
+			submitComponentEvent(componentEvent, ophanRecord);
 		};
-		submitComponentEvent(componentEvent, ophanRecord);
-	};
 
-	const [asyncArticleCount, setAsyncArticleCount] = useState<
-		Promise<WeeklyArticleHistory | undefined>
-	>();
+	const [asyncArticleCount, setAsyncArticleCount] =
+		useState<Promise<WeeklyArticleHistory | undefined>>();
 
 	// *******************************
 	// ** Setup AB Test Tracking *****
@@ -286,22 +283,25 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 
 	useEffect(() => {
 		// Used internally only, so only import each function on demand
-		const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (
-			asExistingSupporter: boolean,
-		) =>
-			import(
-				/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
-			)
-				.then((utils) =>
-					utils[key](
-						asExistingSupporter,
-						CAPI.shouldHideReaderRevenue,
-					),
+		const loadAndRun =
+			<K extends keyof ReaderRevenueDevUtils>(key: K) =>
+			(asExistingSupporter: boolean) =>
+				import(
+					/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
 				)
-				/* eslint-disable no-console */
-				.catch((error) =>
-					console.log('Error loading readerRevenueDevUtils', error),
-				);
+					.then((utils) =>
+						utils[key](
+							asExistingSupporter,
+							CAPI.shouldHideReaderRevenue,
+						),
+					)
+					/* eslint-disable no-console */
+					.catch((error) =>
+						console.log(
+							'Error loading readerRevenueDevUtils',
+							error,
+						),
+					);
 		/* eslint-enable no-console */
 
 		if (window && window.guardian) {
@@ -721,10 +721,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
 	);
-	const interactiveContentsElement = elementsByType<InteractiveContentsBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
-	);
+	const interactiveContentsElement =
+		elementsByType<InteractiveContentsBlockElement>(
+			CAPI.elementsToHydrate,
+			'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+		);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
@@ -786,7 +787,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</Portal>
 			)}
 			{youTubeAtoms.map((youTubeAtom) => (
-				<HydrateOnce rootId={youTubeAtom.elementId}>
+				<HydrateOnce
+					rootId={youTubeAtom.elementId}
+					waitFor={[consentState]}
+				>
 					<YoutubeBlockComponent
 						format={format}
 						palette={palette}
@@ -794,6 +798,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
 						adTargeting={adTargeting}
+						consentState={consentState}
 						isMainMedia={false}
 						id={youTubeAtom.id}
 						assetId={youTubeAtom.assetId}
@@ -807,7 +812,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</HydrateOnce>
 			))}
 			{interactiveElements.map((interactiveBlock) => (
-				<HydrateOnce rootId={interactiveBlock.elementId}>
+				<HydrateInteractiveOnce rootId={interactiveBlock.elementId}>
 					<InteractiveBlockComponent
 						url={interactiveBlock.url}
 						scriptUrl={interactiveBlock.scriptUrl}
@@ -817,7 +822,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						format={format}
 						palette={palette}
 					/>
-				</HydrateOnce>
+				</HydrateInteractiveOnce>
 			))}
 			{interactiveContentsElement.map((interactiveBlock) => (
 				<HydrateOnce rootId={interactiveBlock.elementId}>

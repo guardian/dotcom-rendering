@@ -8,15 +8,18 @@ import {
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
 
-import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import type {
+	BrazeMessagesInterface,
+	BrazeArticleContext,
+} from '@guardian/braze-components/logic';
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import {
 	ReaderRevenueEpic,
-	canShow as canShowReaderRevenueEpic,
+	canShowReaderRevenueEpic,
 	CanShowData as RRCanShowData,
 	EpicConfig as RREpicConfig,
 } from './ReaderRevenueEpic';
-import { MaybeBrazeEpic, canShow as canShowBrazeEpic } from './BrazeEpic';
+import { MaybeBrazeEpic, canShowBrazeEpic } from './BrazeEpic';
 
 type Props = {
 	isSignedIn?: boolean;
@@ -79,18 +82,20 @@ const buildBrazeEpicConfig = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
 	countryCode: string,
 	idApiUrl: string,
+	brazeArticleContext: BrazeArticleContext,
 ): CandidateConfig<any> => {
 	return {
 		candidate: {
 			id: 'braze-epic',
-			canShow: () => canShowBrazeEpic(brazeMessages),
-			show: (meta: any) => () => (
-				<MaybeBrazeEpic
-					meta={meta}
-					countryCode={countryCode}
-					idApiUrl={idApiUrl}
-				/>
-			),
+			canShow: () => canShowBrazeEpic(brazeMessages, brazeArticleContext),
+			show: (meta: any) => () =>
+				(
+					<MaybeBrazeEpic
+						meta={meta}
+						countryCode={countryCode}
+						idApiUrl={idApiUrl}
+					/>
+				),
 		},
 		timeoutMillis: 2000,
 	};
@@ -129,10 +134,14 @@ export const SlotBodyEnd = ({
 				WeeklyArticleHistory | undefined
 			>,
 		});
+		const brazeArticleContext: BrazeArticleContext = {
+			section: sectionName,
+		};
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as Promise<BrazeMessagesInterface>,
 			countryCode as string,
 			idApiUrl,
+			brazeArticleContext,
 		);
 		const epicConfig: SlotConfig = {
 			candidates: [brazeEpic, readerRevenueEpic],

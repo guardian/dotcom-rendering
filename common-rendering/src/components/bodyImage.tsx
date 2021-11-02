@@ -5,8 +5,10 @@ import { css } from "@emotion/react";
 import { remSpace } from "@guardian/src-foundations";
 import type { Breakpoint } from "@guardian/src-foundations/mq";
 import { from } from "@guardian/src-foundations/mq";
-import type { Format, Option } from "@guardian/types";
-import { none, Role, some, withDefault } from "@guardian/types";
+import type { ArticleFormat } from "@guardian/libs";
+import { ArticleElementRole} from "@guardian/libs";
+import type { Option } from "@guardian/types";
+import { none, some, withDefault } from "@guardian/types";
 import type { FC, ReactNode } from "react";
 import type { Image } from "../image";
 import { darkModeCss } from "../lib";
@@ -23,9 +25,9 @@ const thumbnailWidth = "8.75rem";
 
 // ----- Functions ----- //
 
-const getSizes = (role: Role): Sizes => {
+const getSizes = (role: ArticleElementRole): Sizes => {
   switch (role) {
-    case Role.Thumbnail:
+    case ArticleElementRole.Thumbnail:
       return {
         mediaQueries: [],
         default: thumbnailWidth,
@@ -42,7 +44,7 @@ const getSizes = (role: Role): Sizes => {
 
 type Props = {
   image: Image;
-  format: Format;
+  format: ArticleFormat;
   supportsDarkMode: boolean;
   lightbox: Option<Lightbox>;
   caption: Option<ReactNode>;
@@ -72,11 +74,11 @@ const thumbnailStyles = (
 `;
 
 const imgStyles = (
-  role: Role,
+  role: ArticleElementRole,
   supportsDarkMode: boolean
 ): Option<SerializedStyles> => {
   switch (role) {
-    case Role.Thumbnail:
+    case ArticleElementRole.Thumbnail:
       return some(css`
         background-color: transparent;
 
@@ -90,11 +92,11 @@ const imgStyles = (
 };
 
 const getStyles = (
-  role: Role,
+  role: ArticleElementRole,
   leftColumnBreakpoint: Option<Breakpoint>
 ): SerializedStyles => {
   switch (role) {
-    case Role.Thumbnail:
+    case ArticleElementRole.Thumbnail:
       return thumbnailStyles(
         withDefault<Breakpoint>("leftCol")(leftColumnBreakpoint)
       );

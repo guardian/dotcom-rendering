@@ -69,8 +69,7 @@ export const footerLinksNew: Link[][] = [
 		},
 		{
 			title: 'Modern Slavery Act',
-			url:
-				'https://www.theguardian.com/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+			url: 'https://www.theguardian.com/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
 		},
 		{
 			title: 'Digital newspaper archive',
@@ -100,8 +99,7 @@ export const footerLinksNew: Link[][] = [
 		},
 		{
 			title: 'Discount Codes',
-			url:
-				'https://discountcode.theguardian.com/uk?INTCMP=guardian_footer',
+			url: 'https://discountcode.theguardian.com/uk?INTCMP=guardian_footer',
 		},
 	],
 ];

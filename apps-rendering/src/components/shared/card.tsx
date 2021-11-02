@@ -27,7 +27,7 @@ import { stars } from 'components/starRating';
 import { formatSeconds, makeRelativeDate } from 'date';
 import { border } from 'editorialPalette';
 import type { Image } from 'image';
-import { pipe } from 'lib';
+import { convertFormatToArticleFormat, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
@@ -415,7 +415,7 @@ const cardImage = (
 							],
 							default: '100%',
 						}}
-						format={format}
+						format={convertFormatToArticleFormat(format)}
 						className={none}
 						supportsDarkMode
 						lightbox={none}

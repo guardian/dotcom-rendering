@@ -114,7 +114,7 @@ export const hasRequiredConsents = (): Promise<boolean> => {
 	});
 };
 
-export const canShow = (
+export const canShowSignInGate = (
 	CAPI: CAPIBrowserType,
 	isSignedIn: boolean,
 	currentTest: CurrentSignInGateABTest,
@@ -147,6 +147,6 @@ export const canShowMandatoryUs: (
 	return (
 		(await getLocale()) === 'US' &&
 		(await hasRequiredConsents()) &&
-		(await canShow(CAPI, isSignedIn, currentTest))
+		(await canShowSignInGate(CAPI, isSignedIn, currentTest))
 	);
 };
