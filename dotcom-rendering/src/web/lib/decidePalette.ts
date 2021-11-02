@@ -535,13 +535,6 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const fillCaptionTriangle = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	return pillarPalette[format.theme].main;
-};
-
 const fillCaptionCamera = (format: ArticleFormat): string =>
 	textCaption(format);
 
@@ -846,7 +839,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		fill: {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
-			captionTriangle: fillCaptionTriangle(format),
 			cameraCaptionIcon: fillCaptionCamera(format),
 			cardIcon: fillCardIcon(format),
 			richLink: fillRichLink(format),

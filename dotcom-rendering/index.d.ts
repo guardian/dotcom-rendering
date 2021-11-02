@@ -138,7 +138,6 @@ type Palette = {
 	fill: {
 		commentCount: Colour;
 		shareIcon: Colour;
-		captionTriangle: Colour;
 		cameraCaptionIcon: Colour;
 		cardIcon: Colour;
 		richLink: Colour;
