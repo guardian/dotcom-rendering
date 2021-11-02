@@ -58,7 +58,7 @@ const getStyles = ({ theme, design }: Format): SerializedStyles => {
 				color: ${neutral[46]};
 				border-left: 1px solid ${neutral[86]};
 			}
-			margin-bottom: 6px;
+			margin-bottom: ${remSpace[2]};
 		`;
 	}
 
