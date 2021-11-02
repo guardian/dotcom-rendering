@@ -763,7 +763,7 @@ const textNumberedPosition = (): string => {
 
 const textOverlayed = (): string => {
 	return WHITE;
-}
+};
 
 const backgroundHeadlineTag = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
