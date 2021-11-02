@@ -819,7 +819,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
-			overlayed: textOverlayed(),
+			overlayedCaption: textOverlayed(),
 		},
 		background: {
 			article: backgroundArticle(format),

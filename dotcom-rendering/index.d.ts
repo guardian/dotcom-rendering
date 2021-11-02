@@ -114,7 +114,7 @@ type Palette = {
 		blockquote: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
-		overlayed: Colour;
+		overlayedCaption: Colour;
 	};
 	background: {
 		article: Colour;
