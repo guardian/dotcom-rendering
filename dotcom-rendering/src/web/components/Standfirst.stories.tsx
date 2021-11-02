@@ -1,4 +1,4 @@
-import { breakpoints, news } from '@guardian/src-foundations';
+import { news } from '@guardian/src-foundations';
 import {
 	ArticleDisplay,
 	ArticleDesign,
@@ -12,11 +12,6 @@ import { Standfirst } from './Standfirst';
 export default {
 	component: Standfirst,
 	title: 'Components/Standfirst',
-	parameters: {
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.tablet],
-		},
-	},
 };
 
 export const Article = () => {

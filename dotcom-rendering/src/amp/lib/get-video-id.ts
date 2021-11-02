@@ -16,17 +16,20 @@ export const getIdFromUrl = (
 
 	// Looks for ID in both formats if provided
 	const ids: string[] = [
-		tryQueryParam && url.query && new URLSearchParams(url.query).get(tryQueryParam),
+		tryQueryParam &&
+			url.query &&
+			new URLSearchParams(url.query).get(tryQueryParam),
 		tryInPath && url.pathname && url.pathname.split('/').pop(),
-	].filter((tryId): tryId is string => !!tryId)
+	].filter((tryId): tryId is string => !!tryId);
 
-	if (!ids.length) logErr(
-		'an undefined ID',
-		'Could not get ID from pathname or searchParams.',
-	);
+	if (!ids.length)
+		logErr(
+			'an undefined ID',
+			'Could not get ID from pathname or searchParams.',
+		);
 
 	// Allows for a matching ID to be selected from either (or both) formats
-	const id = ids.find((tryId) => new RegExp(regexFormat).test(tryId))
+	const id = ids.find((tryId) => new RegExp(regexFormat).test(tryId));
 
 	if (!id) {
 		return logErr(
