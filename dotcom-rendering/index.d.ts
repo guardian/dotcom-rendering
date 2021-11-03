@@ -114,6 +114,7 @@ type Palette = {
 		blockquote: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
+		overlayedCaption: Colour;
 	};
 	background: {
 		article: Colour;
@@ -137,7 +138,7 @@ type Palette = {
 	fill: {
 		commentCount: Colour;
 		shareIcon: Colour;
-		captionTriangle: Colour;
+		cameraCaptionIcon: Colour;
 		cardIcon: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
