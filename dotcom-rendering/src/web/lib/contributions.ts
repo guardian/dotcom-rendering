@@ -188,9 +188,10 @@ export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
 			if (ccpa || aus) {
 				resolve(true);
 			} else if (tcfv2) {
-				const hasRequiredConsents = REQUIRED_CONSENTS_FOR_BROWSER_ID.every(
-					(consent) => tcfv2.consents[consent],
-				);
+				const hasRequiredConsents =
+					REQUIRED_CONSENTS_FOR_BROWSER_ID.every(
+						(consent) => tcfv2.consents[consent],
+					);
 				resolve(hasRequiredConsents);
 			}
 		});

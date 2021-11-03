@@ -110,7 +110,9 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 			countryCode: data.countryCode,
 			modulesVersion: MODULES_VERSION,
 			url: window.location.origin + window.location.pathname,
-			browserId: await hasCmpConsentForBrowserId() ? data.browserId : undefined,
+			browserId: (await hasCmpConsentForBrowserId())
+				? data.browserId
+				: undefined,
 		},
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
