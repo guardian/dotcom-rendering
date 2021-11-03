@@ -9,6 +9,13 @@ export interface IdApiUserData {
 	};
 }
 
+export interface IdApiUserIdentifiers {
+	id: string;
+	brazeUuid: string;
+	puzzleId: string;
+	googleTagId: string;
+}
+
 function checkForErrors(response: Response) {
 	if (!response.ok) {
 		throw Error(
@@ -27,13 +34,25 @@ const callApi = (url: string) => {
 		.then((response) => response.json());
 };
 
-const cache: { [url: string]: Promise<IdApiUserData> } = {};
+const cache: {
+	idapiUserMeResponse?: Promise<IdApiUserData>;
+	idapiUserIdentifiersResponse?: Promise<IdApiUserIdentifiers>;
+} = {};
 
 export const getIdApiUserData = (ajaxUrl: string): Promise<IdApiUserData> => {
-	if (!(ajaxUrl in cache)) {
+	if (!cache.idapiUserMeResponse) {
 		const url = joinUrl([ajaxUrl, 'user/me']);
-		const response = callApi(url);
-		cache[ajaxUrl] = response;
+		cache.idapiUserMeResponse = callApi(url);
 	}
-	return cache[ajaxUrl];
+	return cache.idapiUserMeResponse;
+};
+
+export const getIdapiUserIdentifiers = (
+	ajaxUrl: string,
+): Promise<IdApiUserIdentifiers> => {
+	if (!cache.idapiUserIdentifiersResponse) {
+		const url = joinUrl([ajaxUrl, 'user/me/identifiers']);
+		cache.idapiUserIdentifiersResponse = callApi(url);
+	}
+	return cache.idapiUserIdentifiersResponse;
 };
