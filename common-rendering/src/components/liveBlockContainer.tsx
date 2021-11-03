@@ -18,7 +18,7 @@ const LiveBlockContainer = ({
 }) => {
 
 	return (
-		<div
+		<article
 			id={`block-${id}`}
 			css={css`
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
@@ -31,8 +31,8 @@ const LiveBlockContainer = ({
 				}
 			`}
 		>
-			<main>{children}</main>
-		</div>
+			{children}
+		</article>
 	);
 };
 
