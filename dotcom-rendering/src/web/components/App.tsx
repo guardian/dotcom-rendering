@@ -148,7 +148,7 @@ type Props = {
 
 let renderCount = 0;
 export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
-	log('dotcom', `App.tsx render #${renderCount += 1}`);
+	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 	const [isSignedIn, setIsSignedIn] = useState<boolean>();
 	const [user, setUser] = useState<UserProfile | null>();
 	const [countryCode, setCountryCode] = useState<string>();
@@ -237,7 +237,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			setAsyncCountryCode(countryCodePromise);
 			countryCodePromise
 				.then((cc) => {
-					setCountryCode(cc || '')
+					setCountryCode(cc || '');
 					log('dotcom', 'State: countryCode set');
 				})
 				.catch((e) =>
@@ -402,9 +402,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				Promise.all([
 					loadScript('https://www.google-analytics.com/analytics.js'),
 					loadScript(window.guardian.gaPath),
-				]).then(()=>{
-					log('dotcom', 'GA script loaded');
-				}).catch((e) => console.error(`GA - error: ${e}`));
+				])
+					.then(() => {
+						log('dotcom', 'GA script loaded');
+					})
+					.catch((e) => console.error(`GA - error: ${e}`));
 			} else {
 				// We should never be able to directly set things to the global window object.
 				// But in this case we want to stub things for testing, so it's ok to ignore this rule

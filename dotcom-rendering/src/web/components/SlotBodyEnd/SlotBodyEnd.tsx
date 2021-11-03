@@ -35,15 +35,16 @@ type Props = {
 	idApiUrl: string;
 	stage: string;
 	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
-	browserId?: string,
+	browserId?: string;
 };
 
-const buildReaderRevenueEpicConfig = (canShowData: RRCanShowData): CandidateConfig<RREpicConfig> => {
+const buildReaderRevenueEpicConfig = (
+	canShowData: RRCanShowData,
+): CandidateConfig<RREpicConfig> => {
 	return {
 		candidate: {
 			id: 'reader-revenue-banner',
-			canShow: () =>
-				canShowReaderRevenueEpic(canShowData),
+			canShow: () => canShowReaderRevenueEpic(canShowData),
 			show: (meta: RREpicConfig) => () => {
 				/* eslint-disable-next-line react/jsx-props-no-spreading */
 				return <ReaderRevenueEpic {...meta} />;
