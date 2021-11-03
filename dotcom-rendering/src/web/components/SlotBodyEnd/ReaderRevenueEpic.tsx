@@ -10,6 +10,7 @@ import {
 	MODULES_VERSION,
 	hasOptedOutOfArticleCount,
 	lazyFetchEmailWithTimeout,
+	hasCmpConsentForBrowserId,
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
@@ -76,6 +77,7 @@ export type CanShowData = {
 	idApiUrl: string;
 	stage: string;
 	asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
+	browserId?: string;
 };
 
 const buildPayload = async (data: CanShowData): Promise<Metadata> => {
@@ -108,6 +110,7 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 			countryCode: data.countryCode,
 			modulesVersion: MODULES_VERSION,
 			url: window.location.origin + window.location.pathname,
+			browserId: await hasCmpConsentForBrowserId() ? data.browserId : undefined,
 		},
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };

@@ -14,7 +14,7 @@ import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
 import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
-import type { Liveblog } from 'item';
+import type { LiveBlog } from 'item';
 import { pipe } from 'lib';
 
 const parser = new DOMParser();
@@ -260,11 +260,52 @@ const fields = {
 	webUrl: '',
 };
 
-const live: Liveblog = {
+const live: LiveBlog = {
 	design: Design.LiveBlog,
 	...fields,
-	blocks: [],
-	totalBodyBlocks: 12,
+	blocks: [
+		{
+			id: '1',
+			isKeyEvent: true,
+			title: 'Block One',
+			firstPublished: some(new Date('2021-11-02T12:00:00Z')),
+			lastModified: some(new Date('2021-11-02T13:13:13Z')),
+			body: [],
+		},
+		{
+			id: '2',
+			isKeyEvent: false,
+			title: 'Block Two',
+			firstPublished: some(new Date('2021-11-02T11:20:00Z')),
+			lastModified: some(new Date('2021-11-02T13:03:13Z')),
+			body: [],
+		},
+		{
+			id: '3',
+			isKeyEvent: true,
+			title: 'Block Three',
+			firstPublished: some(new Date('2021-11-02T11:05:12Z')),
+			lastModified: some(new Date('2021-11-02T12:13:13Z')),
+			body: [],
+		},
+		{
+			id: '4',
+			isKeyEvent: true,
+			title: 'Block Four',
+			firstPublished: some(new Date('2021-11-02T10:55:03Z')),
+			lastModified: some(new Date('2021-11-02T11:13:13Z')),
+			body: [],
+		},
+		{
+			id: '5',
+			isKeyEvent: false,
+			title: 'Block Five',
+			firstPublished: some(new Date('2021-11-02T10:20:20Z')),
+			lastModified: some(new Date('2021-11-02T11:13:13Z')),
+			body: [],
+		},
+	],
+	totalBodyBlocks: 5,
 };
 
 export { live };
