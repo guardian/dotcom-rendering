@@ -70,6 +70,7 @@ const LastUpdated = ({
 	);
 };
 
+// TODO: update this code to use shared version when it is available
 const formatTime = (time: number) => (time < 10 ? `0${time}` : time);
 
 const FirstPublished = ({
