@@ -113,11 +113,12 @@ const hideIconBelowLeftCol = css`
 
 const iconStyle = (palette: Palette) => css`
 	fill: ${palette.fill.cameraCaptionIcon};
-	margin-right: ${space[1] / 2}px;
+	margin-right: ${space[1]}px;
 	display: inline-block;
 	vertical-align: middle;
 	svg {
-		width: 85%;
+		width: 14px;
+		display: inline-block;
 	}
 `;
 
