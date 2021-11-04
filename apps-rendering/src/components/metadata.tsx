@@ -121,7 +121,7 @@ const straightLineBackgroundImage = (color: string): SerializedStyles => {
 	`;
 };
 
-const straightLines = css`
+const straightLinesStyles = css`
 	${straightLineBackgroundImage('rgba(255, 255, 255, 0.4)')}
 	background-repeat: repeat-x;
 	background-position: top;
@@ -170,7 +170,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 	const [checked, setChecked] = useState<boolean>(false);
 	return (
 		<div css={css(styles, withBylineStyles, blogStyles)}>
-			<div css={straightLines} />
+			<div css={straightLinesStyles} />
 			<Avatar {...item} />
 			<div
 				css={css(textStyles, withBylineTextStyles, liveblogSidePadding)}
