@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
