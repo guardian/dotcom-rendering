@@ -7,9 +7,10 @@ import {
 	getLastOneOffContributionTimestamp,
 	shouldHideSupportMessaging,
 	hasCmpConsentForArticleCount,
-	getEmail,
 	MODULES_VERSION,
 	hasOptedOutOfArticleCount,
+	lazyFetchEmailWithTimeout,
+	hasCmpConsentForBrowserId,
 } from '@root/src/web/lib/contributions';
 import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
@@ -35,13 +36,13 @@ type PreEpicConfig = {
 };
 
 export type EpicConfig = PreEpicConfig & {
-	email?: string;
+	fetchEmail?: () => Promise<string | null>;
 	hasConsentForArticleCount: boolean;
 	stage: string;
 };
 
 type EpicProps = {
-	email?: string;
+	fetchEmail?: () => Promise<string | null>;
 	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 	openCmp: () => void;
 	hasConsentForArticleCount: boolean;
@@ -76,6 +77,7 @@ export type CanShowData = {
 	idApiUrl: string;
 	stage: string;
 	asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
+	browserId?: string;
 };
 
 const buildPayload = async (data: CanShowData): Promise<Metadata> => {
@@ -108,6 +110,9 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 			countryCode: data.countryCode,
 			modulesVersion: MODULES_VERSION,
 			url: window.location.origin + window.location.pathname,
+			browserId: (await hasCmpConsentForBrowserId())
+				? data.browserId
+				: undefined,
 		},
 	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
 };
@@ -149,7 +154,9 @@ export const canShowReaderRevenueEpic = async (
 		return { show: false };
 	}
 
-	const email = isSignedIn ? await getEmail(idApiUrl) : undefined;
+	const fetchEmail: (() => Promise<string | null>) | undefined = isSignedIn
+		? lazyFetchEmailWithTimeout(idApiUrl)
+		: undefined;
 
 	const hasConsentForArticleCount = await hasCmpConsentForArticleCount();
 
@@ -158,7 +165,7 @@ export const canShowReaderRevenueEpic = async (
 		show: true,
 		meta: {
 			module,
-			email,
+			fetchEmail,
 			hasConsentForArticleCount,
 			stage,
 		},
@@ -167,7 +174,7 @@ export const canShowReaderRevenueEpic = async (
 
 export const ReaderRevenueEpic = ({
 	module,
-	email,
+	fetchEmail,
 	hasConsentForArticleCount,
 	stage,
 }: EpicConfig) => {
@@ -207,7 +214,7 @@ export const ReaderRevenueEpic = ({
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<Epic
 					{...module.props}
-					email={email}
+					fetchEmail={fetchEmail}
 					submitComponentEvent={submitComponentEvent}
 					openCmp={openCmp}
 					hasConsentForArticleCount={hasConsentForArticleCount}

@@ -35,40 +35,16 @@ type Props = {
 	idApiUrl: string;
 	stage: string;
 	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
+	browserId?: string;
 };
 
-const buildReaderRevenueEpicConfig = ({
-	isSignedIn,
-	countryCode,
-	contentType,
-	sectionName,
-	shouldHideReaderRevenue,
-	isMinuteArticle,
-	isPaidContent,
-	tags,
-	contributionsServiceUrl,
-	idApiUrl,
-	stage,
-	asyncArticleCount,
-}: RRCanShowData): CandidateConfig<RREpicConfig> => {
+const buildReaderRevenueEpicConfig = (
+	canShowData: RRCanShowData,
+): CandidateConfig<RREpicConfig> => {
 	return {
 		candidate: {
 			id: 'reader-revenue-banner',
-			canShow: () =>
-				canShowReaderRevenueEpic({
-					isSignedIn,
-					countryCode,
-					contentType,
-					sectionName,
-					shouldHideReaderRevenue,
-					isMinuteArticle,
-					isPaidContent,
-					tags,
-					contributionsServiceUrl,
-					idApiUrl,
-					stage,
-					asyncArticleCount,
-				}),
+			canShow: () => canShowReaderRevenueEpic(canShowData),
 			show: (meta: RREpicConfig) => () => {
 				/* eslint-disable-next-line react/jsx-props-no-spreading */
 				return <ReaderRevenueEpic {...meta} />;
@@ -115,6 +91,7 @@ export const SlotBodyEnd = ({
 	idApiUrl,
 	stage,
 	asyncArticleCount,
+	browserId,
 }: Props) => {
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
 	useOnce(() => {
@@ -133,6 +110,7 @@ export const SlotBodyEnd = ({
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
 			>,
+			browserId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionName,

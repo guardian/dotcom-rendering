@@ -94,7 +94,7 @@ const buildRRBannerConfigWith = ({
 						isSignedIn,
 						asyncCountryCode,
 						contentType: CAPI.contentType,
-						sectionName: CAPI.sectionName,
+						sectionId: CAPI.config.section,
 						shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
 						isMinuteArticle: CAPI.pageType.isMinuteArticle,
 						isPaidContent: CAPI.pageType.isPaidContent,
@@ -115,13 +115,13 @@ const buildRRBannerConfigWith = ({
 						asyncArticleCount,
 					}),
 				show:
-					({ meta, module, email }: BannerProps) =>
+					({ meta, module, fetchEmail }: BannerProps) =>
 					() =>
 						(
 							<BannerComponent
 								meta={meta}
 								module={module}
-								email={email}
+								fetchEmail={fetchEmail}
 							/>
 						),
 			},

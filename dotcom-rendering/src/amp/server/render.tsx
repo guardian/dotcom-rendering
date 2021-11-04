@@ -36,7 +36,6 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 			section: sectionName,
 			contentType: CAPI.contentType,
 			id: CAPI.pageId,
-			beacon: `${CAPI.beaconURL}/count/pv.gif`,
 			neilsenAPIID,
 			domain: 'amp.theguardian.com',
 			permutive: {
