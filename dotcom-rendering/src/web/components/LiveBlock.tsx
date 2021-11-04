@@ -71,7 +71,7 @@ const LastUpdated = ({
 };
 
 // TODO: update this code to use shared version when it is available
-const formatTime = (time: number) => (time < 10 ? `0${time}` : time);
+const padString = (time: number) => (time < 10 ? `0${time}` : time);
 
 const FirstPublished = ({
 	firstPublished,
@@ -114,7 +114,7 @@ const FirstPublished = ({
 					color: ${neutral[46]};
 				`}
 			>
-				{`${formatTime(publishedDate.getHours())}:${formatTime(
+				{`${padString(publishedDate.getHours())}:${padString(
 					publishedDate.getMinutes(),
 				)}`}
 			</span>
@@ -195,7 +195,6 @@ export const LiveBlock = ({
 						webTitle,
 					})}
 			</Header>
-			{/* For each element, we decide what margins to set depending on the type */}
 			{mainElements.map((element, index) => (
 				<p key={`${element._type}-${index}`}>
 					{renderArticleElement({
@@ -211,7 +210,7 @@ export const LiveBlock = ({
 			))}
 			<div>
 				<Hide when="below" breakpoint="phablet">
-					<div
+					<footer
 						css={css`
 							display: flex;
 							justify-content: space-between;
@@ -234,7 +233,7 @@ export const LiveBlock = ({
 									}
 								/>
 							)}
-					</div>
+					</footer>
 				</Hide>
 			</div>
 		</LiveBlockContainer>
