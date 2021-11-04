@@ -7,7 +7,7 @@ module.exports = {
 	},
 	stories: [
 		"../apps-rendering/src/**/*.stories.@(js|mdx|ts|tsx)",
-		// "../dotcom-rendering/src/**/*.stories.@(tsx)",
+		"../dotcom-rendering/src/**/*.stories.@(tsx)",
 		"../common-rendering/src/**/*.stories.@(tsx)",
 	],
 	addons: [
