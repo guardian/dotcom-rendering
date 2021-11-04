@@ -4,6 +4,7 @@ import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
+
 import CameraIcon from '@frontend/static/icons/camera.svg';
 
 type Props = {

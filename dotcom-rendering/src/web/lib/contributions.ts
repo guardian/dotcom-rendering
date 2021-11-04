@@ -214,7 +214,7 @@ export const withinLocalNoBannerCachePeriod = (): boolean => {
 export const setLocalNoBannerCachePeriod = (): void =>
 	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
 
-export const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
+const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
 	return getIdApiUserData(ajaxUrl)
 		.then((data: IdApiUserData) => data.user?.primaryEmailAddress)
 		.catch((error) => {
@@ -222,3 +222,19 @@ export const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
 			return undefined;
 		});
 };
+
+export const lazyFetchEmailWithTimeout =
+	(idapiUrl: string): (() => Promise<string | null>) =>
+	() => {
+		return new Promise((resolve) => {
+			setTimeout(() => resolve(null), 1000);
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			getEmail(idapiUrl).then((email) => {
+				if (email) {
+					resolve(email);
+				} else {
+					resolve(null);
+				}
+			});
+		});
+	};
