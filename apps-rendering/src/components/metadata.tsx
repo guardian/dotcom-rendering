@@ -1,10 +1,7 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/react';
-import {
-	Lines,
-	ToggleSwitch,
-} from '@guardian/source-react-components-development-kitchen';
+import { css, SerializedStyles } from '@emotion/react';
+import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 import { Design, Display } from '@guardian/types';
@@ -65,7 +62,7 @@ const metaBottomStyles = css`
 
 const toggleStyles = css`
 	flex-grow: 1;
-	padding-top: 8px;
+	padding-top: ${remSpace[2]};
 `;
 
 const liveblogSidePadding = css`
@@ -88,7 +85,7 @@ const toggleOverrideStyles = css`
 
 	display: flex;
 	align-items: center;
-	padding-right: 6px;
+	padding-right: ${remSpace[1]};
 
 	label {
 		flex-shrink: 100;
@@ -104,34 +101,46 @@ const toggleOverrideStyles = css`
 	}
 `;
 
-const lineStyles = css`
-	div {
-		${darkModeCss`
-			background-image: repeating-linear-gradient( 
-				to bottom, 
-				rgba(255, 255, 255, 0.4), 
-				rgba(255, 255, 255, 0.4) 1px, 
-				transparent 1px, 
-				transparent 0.25rem );
-			`}
-
-		${from.desktop} {
-			background-image: repeating-linear-gradient(
-				to bottom,
-				${neutral[86]},
-				${neutral[86]} 1px,
-				transparent 1px,
-				transparent 0.25rem
-			);
-		}
-	}
-`;
-
 const liveBylineStyles = css`
 	margin-bottom: ${remSpace[2]};
 	${from.desktop} {
 		margin-bottom: ${remSpace[6]};
 	}
+`;
+
+const straightLineBackgroundImage = (color: string): SerializedStyles => {
+	return css`
+		background-image: repeating-linear-gradient(
+			to bottom,
+			${color},
+			${color} 1px,
+			transparent 1px,
+			transparent ${remSpace[1]}
+		);
+	`;
+};
+
+const straightLines = css`
+	${straightLineBackgroundImage('rgba(255, 255, 255, 0.4)')}
+	background-repeat: repeat-x;
+	background-position: top;
+	background-size: 1px calc(${remSpace[1]} * ${3} + 1px);
+	height: calc(${remSpace[1]} * ${3} + 1px);
+	${from.desktop} {
+		${straightLineBackgroundImage(neutral[86])}
+	}
+	${darkModeCss`
+		${from.desktop} {
+			background-image: repeating-linear-gradient(
+				to bottom,
+				${neutral[20]},
+				${neutral[20]} 1px,
+				transparent 1px,
+				transparent ${remSpace[1]}
+			);
+		}
+			
+	`}
 `;
 
 const MetadataWithByline: FC<Props> = ({ item }: Props) => (
@@ -160,9 +169,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 	const [checked, setChecked] = useState<boolean>(false);
 	return (
 		<div css={css(styles, withBylineStyles, blogStyles)}>
-			<div css={lineStyles}>
-				<Lines count={4} color={'rgba(255, 255, 255, 0.4)'} />
-			</div>
+			<div css={straightLines} />
 			<Avatar {...item} />
 			<div
 				css={css(textStyles, withBylineTextStyles, liveblogSidePadding)}

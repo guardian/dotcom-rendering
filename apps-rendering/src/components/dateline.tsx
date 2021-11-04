@@ -41,13 +41,16 @@ const liveblogDatelineStyles = css`
 	${textSans.xxsmall()}
 	color: ${neutral[100]};
 
-	${darkMode`
-    	color: ${neutral[93]};
-	`}
-
 	${from.desktop} {
 		color: ${neutral[20]};
 	}
+
+	${darkMode`
+    	color: ${neutral[93]};
+		${from.desktop} {
+			color: ${neutral[60]};
+		}
+	`}
 `;
 
 const getDatelineStyles = (format: Format): SerializedStyles => {
