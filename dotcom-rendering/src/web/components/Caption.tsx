@@ -5,7 +5,6 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import CameraIcon from '@frontend/static/icons/camera.svg';
-import VideoIcon from '@frontend/static/icons/video-icon.svg';
 
 type Props = {
 	captionText?: string;
@@ -146,7 +145,6 @@ export const Caption = ({
 	shouldLimitWidth = false,
 	isOverlayed,
 	isLeftCol,
-	isVideo = false,
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -171,7 +169,7 @@ export const Caption = ({
 						hideIconBelowLeftCol,
 				]}
 			>
-				{isVideo ? <VideoIcon /> : <CameraIcon />}
+				<CameraIcon />
 			</span>
 			{captionText && (
 				<span

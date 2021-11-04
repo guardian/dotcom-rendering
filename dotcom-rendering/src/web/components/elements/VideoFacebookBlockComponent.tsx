@@ -45,7 +45,6 @@ export const VideoFacebookBlockComponent: React.FC<{
 					format={format}
 					palette={palette}
 					credit={credit}
-					isVideo
 				/>
 			)}
 		</div>

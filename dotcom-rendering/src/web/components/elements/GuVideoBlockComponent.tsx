@@ -29,7 +29,6 @@ export const GuVideoBlockComponent: React.FC<{
 					format={format}
 					palette={palette}
 					credit={credit}
-					isVideo
 				/>
 			)}
 		</div>
