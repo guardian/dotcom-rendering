@@ -5,7 +5,12 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
+<<<<<<< Updated upstream
 import TriangleIcon from '@frontend/static/icons/triangle.svg';
+=======
+import CameraIcon from '@frontend/static/icons/camera.svg';
+import VideoIcon from '@frontend/static/icons/video-icon.svg';
+>>>>>>> Stashed changes
 
 type Props = {
 	captionText?: string;
@@ -17,6 +22,7 @@ type Props = {
 	shouldLimitWidth?: boolean;
 	isOverlayed?: boolean;
 	isLeftCol?: boolean;
+	isVideo?: boolean;
 };
 
 const captionStyle = (palette: Palette) => css`
@@ -108,8 +114,19 @@ const hideIconBelowLeftCol = css`
 `;
 
 const iconStyle = (palette: Palette) => css`
+<<<<<<< Updated upstream
 	fill: ${palette.fill.captionTriangle};
 	padding-right: 3px;
+=======
+	fill: ${palette.fill.cameraCaptionIcon};
+	margin-right: ${space[1]}px;
+	display: inline-block;
+	vertical-align: middle;
+	svg {
+		width: 14px;
+		display: inline-block;
+	}
+>>>>>>> Stashed changes
 `;
 
 const captionLink = (palette: Palette) => css`
@@ -135,6 +152,7 @@ export const Caption = ({
 	shouldLimitWidth = false,
 	isOverlayed,
 	isLeftCol,
+	isVideo = false,
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -159,7 +177,11 @@ export const Caption = ({
 						hideIconBelowLeftCol,
 				]}
 			>
+<<<<<<< Updated upstream
 				<TriangleIcon />
+=======
+				{isVideo ? <VideoIcon /> : <CameraIcon />}
+>>>>>>> Stashed changes
 			</span>
 			{captionText && (
 				<span
