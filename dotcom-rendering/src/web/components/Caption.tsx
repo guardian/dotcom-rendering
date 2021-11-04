@@ -16,7 +16,6 @@ type Props = {
 	shouldLimitWidth?: boolean;
 	isOverlayed?: boolean;
 	isLeftCol?: boolean;
-	isVideo?: boolean;
 };
 
 const captionStyle = (palette: Palette) => css`
