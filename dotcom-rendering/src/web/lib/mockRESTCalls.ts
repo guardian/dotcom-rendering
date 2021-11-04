@@ -106,8 +106,7 @@ const richLinkCard = {
 			width: '3650',
 		},
 		mediaType: 'Image',
-		url:
-			'https://media.guim.co.uk/0847eccb8898d4e91499f8a68c4cfdb454f91382/101_177_3650_2191/master/3650.jpg',
+		url: 'https://media.guim.co.uk/0847eccb8898d4e91499f8a68c4cfdb454f91382/101_177_3650_2191/master/3650.jpg',
 	},
 	headline: 'Eminem attacks Donald Trump on surprise album Kamikaze',
 	contentType: 'Article',
@@ -210,8 +209,7 @@ export const mockRESTCalls = (): void => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 273,
 					refreshStatus: true,
 				},

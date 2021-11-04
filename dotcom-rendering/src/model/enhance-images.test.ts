@@ -30,11 +30,9 @@ describe('Enhance Images', () => {
 						elements: [
 							image,
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li>This new caption replaces the one on the image object.</li></ul>',
+								html: '<ul><li>This new caption replaces the one on the image object.</li></ul>',
 							},
 						],
 					},
@@ -76,11 +74,9 @@ describe('Enhance Images', () => {
 							{ ...image, role: 'halfWidth' },
 							{ ...image, role: 'halfWidth' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
+								html: '<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
 							},
 						],
 					},
@@ -94,8 +90,7 @@ describe('Enhance Images', () => {
 						...metaData,
 						elements: [
 							{
-								_type:
-									'model.dotcomrendering.pageElements.MultiImageBlockElement',
+								_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
 								elementId: images[0].elementId,
 								images: [
 									{
@@ -140,11 +135,9 @@ describe('Enhance Images', () => {
 							{ ...image, role: 'inline' },
 							{ ...image, role: 'showcase' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
+								html: '<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
 							},
 						],
 					},
@@ -195,11 +188,9 @@ describe('Enhance Images', () => {
 						elements: [
 							{ ...image, role: 'halfWidth' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
+								html: '<ul><li><p>Judy, just sitting in the square on her own in Walworth.</p></li></ul>',
 							},
 						],
 					},
@@ -240,8 +231,7 @@ describe('Enhance Images', () => {
 						elements: [
 							image,
 							{
-								_type:
-									'model.dotcomrendering.pageElements.SubheadingBlockElement',
+								_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 								elementId: 'mockId',
 								html: '<h2>Example title text</h2>',
 							},
@@ -283,21 +273,17 @@ describe('Enhance Images', () => {
 						elements: [
 							image,
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.SubheadingBlockElement',
+								_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 								elementId: 'mockId',
 								html: '<h2>The title</h2>',
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
 								html: '<p>Just some normal text</p>',
 							},
@@ -324,8 +310,7 @@ describe('Enhance Images', () => {
 								title: 'The title',
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
 								html: '<p>Just some normal text</p>',
 							},
@@ -348,11 +333,9 @@ describe('Enhance Images', () => {
 							{ ...image, role: 'halfWidth' },
 							{ ...image, role: 'halfWidth' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 						],
 					},
@@ -366,8 +349,7 @@ describe('Enhance Images', () => {
 						...metaData,
 						elements: [
 							{
-								_type:
-									'model.dotcomrendering.pageElements.MultiImageBlockElement',
+								_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
 								elementId: images[0].elementId,
 								images: [
 									{
@@ -420,21 +402,17 @@ describe('Enhance Images', () => {
 						elements: [
 							image,
 							{
-								_type:
-									'model.dotcomrendering.pageElements.SubheadingBlockElement',
+								_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 								elementId: 'mockId',
 								html: '<h2>The title</h2>',
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
 								html: '<p>Just some normal text</p>',
 							},
@@ -461,8 +439,7 @@ describe('Enhance Images', () => {
 								title: 'The title',
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
 								html: '<p>Just some normal text</p>',
 							},
@@ -516,21 +493,17 @@ describe('Enhance Images', () => {
 						elements: [
 							image,
 							{
-								_type:
-									'model.dotcomrendering.pageElements.SubheadingBlockElement',
+								_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 								elementId: 'mockId',
 								html: '<h2>The title</h2>',
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
 								html: '<p>Just some normal text</p>',
 							},
@@ -559,8 +532,7 @@ describe('Enhance Images', () => {
 								title: 'The title',
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
 								html: '<p>Just some normal text</p>',
 							},
@@ -603,8 +575,7 @@ describe('Enhance Images', () => {
 						elements: [
 							{
 								// @ts-ignore
-								_type:
-									'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
+								_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 								elementId: 'mockId',
 								html: '<p>A Pullquote</p>',
 								// @ts-ignore
@@ -613,8 +584,7 @@ describe('Enhance Images', () => {
 							},
 							image,
 							{
-								_type:
-									'model.dotcomrendering.pageElements.SubheadingBlockElement',
+								_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 								elementId: 'mockId',
 								html: '<h2>The title</h2>',
 							},
@@ -630,8 +600,7 @@ describe('Enhance Images', () => {
 						...metaData,
 						elements: [
 							{
-								_type:
-									'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
+								_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 								elementId: 'mockId',
 								html: '<p>A Pullquote</p>',
 								pillar: ArticlePillar.News,
@@ -697,11 +666,9 @@ describe('Enhance Images', () => {
 							{ ...image, role: 'halfWidth' },
 							{ ...image, role: 'halfWidth' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 						],
 					},
@@ -715,8 +682,7 @@ describe('Enhance Images', () => {
 						...metaData,
 						elements: [
 							{
-								_type:
-									'model.dotcomrendering.pageElements.MultiImageBlockElement',
+								_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
 								elementId: images[0].elementId,
 								images: [
 									{
@@ -734,8 +700,7 @@ describe('Enhance Images', () => {
 								],
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.MultiImageBlockElement',
+								_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
 								elementId: images[0].elementId,
 								images: [
 									{
@@ -809,11 +774,9 @@ describe('Enhance Images', () => {
 							{ ...image, role: 'halfWidth' },
 							{ ...image, role: 'inline' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 						],
 					},
@@ -827,8 +790,7 @@ describe('Enhance Images', () => {
 						...metaData,
 						elements: [
 							{
-								_type:
-									'model.dotcomrendering.pageElements.MultiImageBlockElement',
+								_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
 								elementId: images[0].elementId,
 								images: [
 									{
@@ -847,11 +809,9 @@ describe('Enhance Images', () => {
 							},
 							{ ...image, role: 'inline' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 						],
 					},
@@ -923,11 +883,9 @@ describe('Enhance Images', () => {
 							{ ...image, role: 'inline' },
 							{ ...image, role: 'inline' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 						],
 					},
@@ -950,11 +908,9 @@ describe('Enhance Images', () => {
 							{ ...image, role: 'inline' },
 							{ ...image, role: 'halfWidth' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 						],
 					},
@@ -975,8 +931,7 @@ describe('Enhance Images', () => {
 						elements: [
 							image,
 							{
-								_type:
-									'model.dotcomrendering.pageElements.SubheadingBlockElement',
+								_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 								elementId: 'mockId',
 								html: '<h2>Example title text</h2>',
 							},
@@ -1001,11 +956,9 @@ describe('Enhance Images', () => {
 							{ ...image, role: 'halfWidth' },
 							{ ...image, role: 'inline' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 						],
 					},
@@ -1019,8 +972,7 @@ describe('Enhance Images', () => {
 						...metaData,
 						elements: [
 							{
-								_type:
-									'model.dotcomrendering.pageElements.MultiImageBlockElement',
+								_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
 								elementId: images[0].elementId,
 								images: [
 									{
@@ -1039,11 +991,9 @@ describe('Enhance Images', () => {
 							},
 							{ ...image, role: 'inline' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 						],
 					},
@@ -1064,11 +1014,9 @@ describe('Enhance Images', () => {
 							{ ...image, role: 'halfWidth' },
 							{ ...image, role: 'halfWidth' },
 							{
-								_type:
-									'model.dotcomrendering.pageElements.TextBlockElement',
+								_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 								elementId: 'mockId',
-								html:
-									'<ul><li><p>This is the caption</p></li></ul>',
+								html: '<ul><li><p>This is the caption</p></li></ul>',
 							},
 						],
 					},
@@ -1090,8 +1038,7 @@ describe('Enhance Images', () => {
 								},
 							},
 							{
-								_type:
-									'model.dotcomrendering.pageElements.MultiImageBlockElement',
+								_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
 								elementId: images[0].elementId,
 								images: [
 									{

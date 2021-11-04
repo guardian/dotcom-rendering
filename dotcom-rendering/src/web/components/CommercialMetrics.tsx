@@ -18,7 +18,7 @@ export const CommercialMetrics: React.FC<{
 
 	const adBlockerInUse = useAdBlockInUse();
 	// only send metrics when visibility state changes to hidden;
-	const isHidden = visibilityState === 'hidden' || undefined
+	const isHidden = visibilityState === 'hidden' || undefined;
 
 	useOnce(() => {
 		const testsToForceMetrics: ABTest[] = [prebidTimeout];
@@ -31,14 +31,12 @@ export const CommercialMetrics: React.FC<{
 			window.location.hostname.includes('localhost');
 
 		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
-			sendCommercialMetrics(pageViewId, browserId, Boolean(isDev), adBlockerInUse);
+			sendCommercialMetrics(pageViewId, browserId, isDev, adBlockerInUse);
+			// TODO: capture CWV also, to ensure commercial performance
+			// doesn’t come at the expense of user experience.
+			// See https://git.io/JP68Q in `frontend`
 		}
-	}, [
-		ABTestAPI,
-		pageViewId,
-		adBlockerInUse,
-		isHidden
-	]);
+	}, [ABTestAPI, pageViewId, adBlockerInUse, isHidden]);
 
 	// We don’t render anything
 	return null;

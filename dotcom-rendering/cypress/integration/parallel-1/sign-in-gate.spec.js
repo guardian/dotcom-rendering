@@ -118,8 +118,7 @@ describe('Sign In Gate Tests', function () {
 
 		it('should not load the sign in gate if the article is not a valid section (membership)', function () {
 			visitArticleAndScrollToGateForLazyLoad({
-				url:
-					'https://www.theguardian.com/membership/2018/nov/15/support-guardian-readers-future-journalism',
+				url: 'https://www.theguardian.com/membership/2018/nov/15/support-guardian-readers-future-journalism',
 			});
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
@@ -127,8 +126,7 @@ describe('Sign In Gate Tests', function () {
 
 		it('should not load the sign in gate if the article is a paid article', function () {
 			visitArticleAndScrollToGateForLazyLoad({
-				url:
-					'https://www.theguardian.com/defining-moment/2016/jun/29/challenges-opportunities-life-coach-goals-empower-proactive',
+				url: 'https://www.theguardian.com/defining-moment/2016/jun/29/challenges-opportunities-life-coach-goals-empower-proactive',
 			});
 
 			cy.get('[data-cy=sign-in-gate-main]').should('not.exist');
@@ -141,8 +139,7 @@ describe('Sign In Gate Tests', function () {
 				{
 					onBeforeLoad: (win) => {
 						Object.defineProperty(win.navigator, 'userAgent', {
-							value:
-								'Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
+							value: 'Mozilla/5.0 (iPad; CPU OS 9_0 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
 						});
 					},
 				},

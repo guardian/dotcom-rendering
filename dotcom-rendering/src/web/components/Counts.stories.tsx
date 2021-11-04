@@ -33,8 +33,7 @@ export const Both = () => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 80,
 					refreshStatus: true,
 				},
@@ -78,8 +77,7 @@ export const ShareOnly = () => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 273,
 					refreshStatus: true,
 				},
@@ -123,8 +121,7 @@ export const CommentOnly = () => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 0,
 					refreshStatus: true,
 				},
@@ -168,8 +165,7 @@ export const ZeroComments = () => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 60,
 					refreshStatus: true,
 				},
@@ -213,8 +209,7 @@ export const BigNumbers = () => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 204320,
 					refreshStatus: true,
 				},
