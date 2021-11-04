@@ -23,7 +23,7 @@ import { useOnce } from '@root/src/web/lib/useOnce';
 type BaseProps = {
 	isSignedIn: boolean;
 	contentType: string;
-	sectionName?: string;
+	sectionId?: string;
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
 	isPaidContent: boolean;
@@ -71,6 +71,8 @@ const buildPayload = async ({
 	countryCode,
 	optedOutOfArticleCount,
 	asyncArticleCount,
+	sectionId,
+	tags,
 }: BuildPayloadProps) => {
 	return {
 		tracking: {
@@ -91,6 +93,8 @@ const buildPayload = async ({
 			weeklyArticleHistory: await asyncArticleCount,
 			optedOutOfArticleCount,
 			modulesVersion: MODULES_VERSION,
+			sectionId,
+			tagIds: tags.map(tag => tag.id),
 		},
 	};
 };
@@ -120,7 +124,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	isSignedIn,
 	asyncCountryCode,
 	contentType,
-	sectionName,
+	sectionId,
 	shouldHideReaderRevenue,
 	isMinuteArticle,
 	isPaidContent,
@@ -161,7 +165,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		isSignedIn,
 		countryCode,
 		contentType,
-		sectionName,
+		sectionId,
 		shouldHideReaderRevenue,
 		isMinuteArticle,
 		isPaidContent,
@@ -202,7 +206,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	isSignedIn,
 	asyncCountryCode,
 	contentType,
-	sectionName,
+	sectionId,
 	shouldHideReaderRevenue,
 	isMinuteArticle,
 	isPaidContent,
@@ -231,7 +235,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 			isSignedIn,
 			countryCode,
 			contentType,
-			sectionName,
+			sectionId,
 			shouldHideReaderRevenue,
 			isMinuteArticle,
 			isPaidContent,
