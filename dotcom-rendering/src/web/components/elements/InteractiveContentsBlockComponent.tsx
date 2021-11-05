@@ -135,7 +135,7 @@ interface EnhancedSubheadingType extends SubheadingBlockElement {
 	ref?: HTMLElement | null;
 }
 
-export const InteractiveContentsBlockElement = ({
+export const InteractiveContentsBlockComponent = ({
 	subheadingLinks,
 	endDocumentElementId,
 }: Props) => {
