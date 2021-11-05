@@ -6,6 +6,7 @@ import { space } from '@guardian/src-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
 import CameraIcon from '@frontend/static/icons/camera.svg';
+import VideoIcon from '@frontend/static/icons/video-icon.svg';
 
 type Props = {
 	captionText?: string;
@@ -17,6 +18,7 @@ type Props = {
 	shouldLimitWidth?: boolean;
 	isOverlayed?: boolean;
 	isLeftCol?: boolean;
+	isVideo?: boolean;
 };
 
 const captionStyle = (palette: Palette) => css`
@@ -118,6 +120,10 @@ const iconStyle = (palette: Palette) => css`
 	}
 `;
 
+const videoIconStyle = css`
+	margin-bottom: -2px;
+`;
+
 const captionLink = (palette: Palette) => css`
 	a {
 		color: ${palette.text.captionLink};
@@ -141,6 +147,7 @@ export const Caption = ({
 	shouldLimitWidth = false,
 	isOverlayed,
 	isLeftCol,
+	isVideo = false,
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -163,9 +170,10 @@ export const Caption = ({
 					iconStyle(palette),
 					format.display === ArticleDisplay.Immersive &&
 						hideIconBelowLeftCol,
+					isVideo && videoIconStyle,
 				]}
 			>
-				<CameraIcon />
+				{isVideo ? <VideoIcon /> : <CameraIcon />}
 			</span>
 			{captionText && (
 				<span
