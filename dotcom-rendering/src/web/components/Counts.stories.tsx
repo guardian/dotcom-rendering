@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import fetchMock from 'fetch-mock';
 
-import { Pillar, Design, Display } from '@guardian/types';
+import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
 
 import { decidePalette } from '../lib/decidePalette';
 
@@ -33,8 +33,7 @@ export const Both = () => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 80,
 					refreshStatus: true,
 				},
@@ -56,9 +55,9 @@ export const Both = () => {
 						isCommentable={true}
 						commentCount={239}
 						palette={decidePalette({
-							theme: Pillar.News,
-							design: Design.Article,
-							display: Display.Standard,
+							theme: ArticlePillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
 						})}
 						setIsExpanded={() => {}}
 					/>
@@ -78,8 +77,7 @@ export const ShareOnly = () => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 273,
 					refreshStatus: true,
 				},
@@ -101,9 +99,9 @@ export const ShareOnly = () => {
 						isCommentable={false}
 						commentCount={239}
 						palette={decidePalette({
-							theme: Pillar.News,
-							design: Design.Article,
-							display: Display.Standard,
+							theme: ArticlePillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
 						})}
 						setIsExpanded={() => {}}
 					/>
@@ -123,8 +121,7 @@ export const CommentOnly = () => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 0,
 					refreshStatus: true,
 				},
@@ -146,9 +143,9 @@ export const CommentOnly = () => {
 						isCommentable={true}
 						commentCount={239}
 						palette={decidePalette({
-							theme: Pillar.News,
-							design: Design.Article,
-							display: Display.Standard,
+							theme: ArticlePillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
 						})}
 						setIsExpanded={() => {}}
 					/>
@@ -168,8 +165,7 @@ export const ZeroComments = () => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 60,
 					refreshStatus: true,
 				},
@@ -191,9 +187,9 @@ export const ZeroComments = () => {
 						isCommentable={true}
 						commentCount={0}
 						palette={decidePalette({
-							theme: Pillar.News,
-							design: Design.Article,
-							display: Display.Standard,
+							theme: ArticlePillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
 						})}
 						setIsExpanded={() => {}}
 					/>
@@ -213,8 +209,7 @@ export const BigNumbers = () => {
 			{
 				status: 200,
 				body: {
-					path:
-						'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
 					share_count: 204320,
 					refreshStatus: true,
 				},
@@ -236,9 +231,9 @@ export const BigNumbers = () => {
 						isCommentable={true}
 						commentCount={4320}
 						palette={decidePalette({
-							theme: Pillar.News,
-							design: Design.Article,
-							display: Display.Standard,
+							theme: ArticlePillar.News,
+							design: ArticleDesign.Standard,
+							display: ArticleDisplay.Standard,
 						})}
 						setIsExpanded={() => {}}
 					/>

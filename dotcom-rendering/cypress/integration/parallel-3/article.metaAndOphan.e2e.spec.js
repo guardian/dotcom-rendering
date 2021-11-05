@@ -20,8 +20,7 @@ describe('The web document renders with the correct meta and analytics elements 
 		const metaTags = [
 			{
 				name: 'description',
-				value:
-					'From warming up your voice to avoiding spillages, here are some tips for keeping up professional appearances',
+				value: 'From warming up your voice to avoiding spillages, here are some tips for keeping up professional appearances',
 			},
 			{
 				name: 'viewport',
@@ -106,9 +105,9 @@ describe('The web document renders with the correct meta and analytics elements 
 	});
 
 	it('Sample of script tags have the correct attributes', function () {
-		getExists(`script[type="module"][src="/assets/react.js"]`);
-		getExists(`script[defer][nomodule][src="/assets/react.legacy.js"]`);
-		getExists(`script[type="module"][src="/assets/ophan.js"]`);
-		getExists(`script[defer][nomodule][src="/assets/ophan.legacy.js"]`);
+		getExists(`script[type="module"][src$="/assets/react.js"]`);
+		getExists(`script[defer][nomodule][src$="/assets/react.legacy.js"]`);
+		getExists(`script[type="module"][src$="/assets/ophan.js"]`);
+		getExists(`script[defer][nomodule][src$="/assets/ophan.legacy.js"]`);
 	});
 });

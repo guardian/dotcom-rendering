@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Design, Special } from '@guardian/types';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMetaNews } from '@root/src/amp/components/topMeta/TopMetaNews';
@@ -10,17 +10,17 @@ import { TopMetaAnalysis } from '@root/src/amp/components/topMeta/TopMetaAnalysi
 
 export const TopMeta: React.FunctionComponent<{
 	data: ArticleModel;
-	design: Design;
-	pillar: Theme;
+	design: ArticleDesign;
+	pillar: ArticleTheme;
 	adTargeting?: AdTargeting;
 }> = ({ data, design, pillar, adTargeting }) => {
-	if (pillar === Special.Labs)
+	if (pillar === ArticleSpecial.Labs)
 		return <TopMetaPaidContent articleData={data} pillar={pillar} />;
 	switch (design) {
-		case Design.Comment:
-		case Design.Letter:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
 			return <TopMetaOpinion articleData={data} pillar={pillar} />;
-		case Design.Analysis:
+		case ArticleDesign.Analysis:
 			return <TopMetaAnalysis articleData={data} pillar={pillar} />;
 		default:
 			return (

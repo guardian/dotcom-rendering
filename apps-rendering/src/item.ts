@@ -75,8 +75,14 @@ interface ResizedRelatedContent extends RelatedContent {
 	resizedImages: Array<Option<Image>>;
 }
 
-interface Liveblog extends Fields {
+interface LiveBlog extends Fields {
 	design: Design.LiveBlog;
+	blocks: LiveBlock[];
+	totalBodyBlocks: number;
+}
+
+interface DeadBlog extends Fields {
+	design: Design.DeadBlog;
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
 }
@@ -123,6 +129,7 @@ interface Standard extends Fields {
 	design: Exclude<
 		Design,
 		| Design.LiveBlog
+		| Design.DeadBlog
 		| Design.Review
 		| Design.Comment
 		| Design.Letter
@@ -132,7 +139,8 @@ interface Standard extends Fields {
 }
 
 type Item =
-	| Liveblog
+	| LiveBlog
+	| DeadBlog
 	| Review
 	| Comment
 	| Standard
@@ -256,11 +264,15 @@ const itemFieldsWithBody = (
 	};
 };
 
-const hasSomeTag = (tagIds: string[]) => (tags: Tag[]): boolean =>
-	tags.some((tag) => tagIds.includes(tag.id));
+const hasSomeTag =
+	(tagIds: string[]) =>
+	(tags: Tag[]): boolean =>
+		tags.some((tag) => tagIds.includes(tag.id));
 
-const hasTag = (tagId: string) => (tags: Tag[]): boolean =>
-	tags.some((tag) => tag.id === tagId);
+const hasTag =
+	(tagId: string) =>
+	(tags: Tag[]): boolean =>
+		tags.some((tag) => tag.id === tagId);
 
 const isAudio = hasTag('type/audio');
 
@@ -309,122 +321,130 @@ const isCorrection = hasTag('theguardian/series/correctionsandclarifications');
 
 const isPicture = hasTag('type/picture');
 
-const fromCapiLiveBlog = (context: Context) => (
-	request: RenderingRequest,
-): Liveblog => {
-	const { content } = request;
-	const body = content.blocks?.body?.slice(0, 7) ?? [];
+const fromCapiLiveBlog =
+	(context: Context) =>
+	(request: RenderingRequest): LiveBlog | DeadBlog => {
+		const { content } = request;
+		const body = content.blocks?.body ?? [];
 
-	return {
-		design: Design.LiveBlog,
-		blocks: parseLiveBlocks(body)(context),
-		totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
-		...itemFields(context, request),
+		return {
+			design:
+				content.fields?.liveBloggingNow === true
+					? Design.LiveBlog
+					: Design.DeadBlog,
+			blocks: parseLiveBlocks(body)(context),
+			totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
+			...itemFields(context, request),
+		};
 	};
-};
 
-const fromCapi = (context: Context) => (request: RenderingRequest): Item => {
-	const { content } = request;
-	const { tags, fields } = content;
+const fromCapi =
+	(context: Context) =>
+	(request: RenderingRequest): Item => {
+		const { content } = request;
+		const { tags, fields } = content;
 
-	// These checks aim for parity with the CAPI Scala client:
-	// https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
-	if (isInteractive(content)) {
-		return {
-			design: Design.Interactive,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isMedia(tags)) {
-		return {
-			design: Design.Media,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (fields?.starRating !== undefined && isReview(tags)) {
-		return {
-			design: Design.Review,
-			starRating: fields.starRating,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isAnalysis(tags)) {
-		return {
-			design: Design.Analysis,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isCorrection(tags)) {
-		return {
-			design: Design.Correction,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isLetter(tags)) {
-		return {
-			design: Design.Letter,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isObituary(tags)) {
-		return {
-			design: Design.Obituary,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isGuardianView(tags)) {
-		return {
-			design: Design.Editorial,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isComment(tags)) {
-		const item = itemFieldsWithBody(context, request);
-		return {
-			design: Design.Comment,
-			...item,
-			theme: item.theme === Pillar.News ? Pillar.Opinion : item.theme,
-		};
-	} else if (isInterview(tags)) {
-		return {
-			design: Design.Interview,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isFeature(tags)) {
-		return {
-			design: Design.Feature,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isLive(tags)) {
-		return fromCapiLiveBlog(context)(request);
-	} else if (isRecipe(tags)) {
-		return {
-			design: Design.Recipe,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isQuiz(tags)) {
-		return {
-			design: Design.Quiz,
-			...itemFieldsWithBody(context, request),
-		};
-	} else if (isLabs(tags)) {
+		// These checks aim for parity with the CAPI Scala client:
+		// https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
+		if (isInteractive(content)) {
+			return {
+				design: Design.Interactive,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isMedia(tags)) {
+			return {
+				design: Design.Media,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (fields?.starRating !== undefined && isReview(tags)) {
+			return {
+				design: Design.Review,
+				starRating: fields.starRating,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isAnalysis(tags)) {
+			return {
+				design: Design.Analysis,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isCorrection(tags)) {
+			return {
+				design: Design.Correction,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isLetter(tags)) {
+			return {
+				design: Design.Letter,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isObituary(tags)) {
+			return {
+				design: Design.Obituary,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isGuardianView(tags)) {
+			return {
+				design: Design.Editorial,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isComment(tags)) {
+			const item = itemFieldsWithBody(context, request);
+			return {
+				design: Design.Comment,
+				...item,
+				theme: item.theme === Pillar.News ? Pillar.Opinion : item.theme,
+			};
+		} else if (isInterview(tags)) {
+			return {
+				design: Design.Interview,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isFeature(tags)) {
+			return {
+				design: Design.Feature,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isLive(tags)) {
+			return fromCapiLiveBlog(context)(request);
+		} else if (isRecipe(tags)) {
+			return {
+				design: Design.Recipe,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isQuiz(tags)) {
+			return {
+				design: Design.Quiz,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isLabs(tags)) {
+			return {
+				design: Design.Article,
+				...itemFieldsWithBody(context, request),
+				theme: Special.Labs,
+			};
+		} else if (isMatchReport(tags)) {
+			return {
+				design: Design.MatchReport,
+				football: parseMatchScores(
+					fromNullable(request.footballContent),
+				),
+				...itemFieldsWithBody(context, request),
+			};
+		}
+
 		return {
 			design: Design.Article,
 			...itemFieldsWithBody(context, request),
-			theme: Special.Labs,
 		};
-	} else if (isMatchReport(tags)) {
-		return {
-			design: Design.MatchReport,
-			football: parseMatchScores(fromNullable(request.footballContent)),
-			...itemFieldsWithBody(context, request),
-		};
-	}
-
-	return {
-		design: Design.Article,
-		...itemFieldsWithBody(context, request),
 	};
-};
 
 // ----- Exports ----- //
 
 export {
 	Item,
 	Comment,
-	Liveblog,
+	LiveBlog,
+	DeadBlog,
 	Review,
 	Standard,
 	MatchReport,

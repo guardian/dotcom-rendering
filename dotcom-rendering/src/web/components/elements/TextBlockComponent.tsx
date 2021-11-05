@@ -9,12 +9,17 @@ import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
-import { Display, Design, Format, Special } from '@guardian/types';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	ArticleFormat,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
 	html: string;
-	format: Format;
+	format: ArticleFormat;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
 };
@@ -58,16 +63,16 @@ const decideDropCapLetter = (html: string): string => {
 	return isLetter(first) ? first : '';
 };
 
-const allowsDropCaps = (format: Format) => {
-	if (format.theme === Special.Labs) return false;
-	if (format.display === Display.Immersive) return true;
+const allowsDropCaps = (format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.Labs) return false;
+	if (format.display === ArticleDisplay.Immersive) return true;
 	switch (format.design) {
-		case Design.Feature:
-		case Design.Comment:
-		case Design.Review:
-		case Design.Interview:
-		case Design.PhotoEssay:
-		case Design.Recipe:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Review:
+		case ArticleDesign.Interview:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Recipe:
 			return true;
 		default:
 			return false;
@@ -79,7 +84,7 @@ const shouldShowDropCap = ({
 	isFirstParagraph,
 	forceDropCap,
 }: {
-	format: Format;
+	format: ArticleFormat;
 	isFirstParagraph: boolean;
 	forceDropCap?: boolean;
 }): boolean => {
@@ -121,7 +126,7 @@ export const TextBlockComponent = ({
 		{({ css }) => {
 			const paraStyles = css`
 				margin-bottom: 16px;
-				${format.theme === Special.Labs
+				${format.theme === ArticleSpecial.Labs
 					? textSans.medium()
 					: body.medium()};
 

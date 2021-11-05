@@ -15,7 +15,7 @@ import {
 
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
-import { Pillar } from '@guardian/types';
+import { ArticlePillar } from '@guardian/libs';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 import { decideTheme } from '../lib/decideTheme';
@@ -48,7 +48,10 @@ interface Props {
 }
 
 const decideTitle = (CAPI: CAPIType): string => {
-	if (decideTheme(CAPI.format) === Pillar.Opinion && CAPI.author.byline) {
+	if (
+		decideTheme(CAPI.format) === ArticlePillar.Opinion &&
+		CAPI.author.byline
+	) {
 		return `${CAPI.headline} | ${CAPI.author.byline} | The Guardian`;
 	}
 	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
@@ -228,7 +231,7 @@ export const document = ({ data }: Props): string => {
 	];
 
 	const polyfillIO =
-		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
+		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
 	const pageHasNonBootInteractiveElements = CAPIElements.some(
 		(element) =>

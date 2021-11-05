@@ -9,7 +9,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import type { Compiler, Configuration, ResolveOptions } from 'webpack';
 import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
-import nodeExternals from 'webpack-node-externals';
 import { renederedItemsAssetsCss } from './config/rendered-items-assets-styles';
 import { WebpackPluginInstance } from 'webpack';
 
@@ -43,20 +42,6 @@ function resolve(
 		modules: [path.resolve(__dirname, 'src'), 'node_modules'],
 		alias: {
 			logger: path.resolve(__dirname, `src/logger/${loggerName}`),
-			react: path.resolve('./node_modules/react'),
-			// This line exists because atoms-rendering imports `preact-render-to-string`
-			// https://github.com/guardian/atoms-rendering/blob/24b166fc40d125b33ae9ac56d3535c27b0ff5304/src/lib/unifyPageContent.tsx#L2
-			//
-			// It works to keep the compiler happy, but it will crash at runtime
-			// because it's imported as default, whereas ReactDOM exports
-			// as a named method. This isn't a problem for now because it
-			// only affects Interactive Atoms, and we don't use atoms-rendering
-			// for those yet.
-			//
-			// I think a better solution would be for atoms-rendering to import
-			// `react-dom/server`, and for DCR to alias that to `preact-render-to-string`.
-			// Then we can get rid of this line.
-			'preact-render-to-string': 'react-dom/server',
 		},
 	};
 
@@ -96,14 +81,6 @@ const serverConfig = (
 		mode,
 		entry: 'server/server.ts',
 		target: 'node',
-		externals: isProd
-			? []
-			: [
-					nodeExternals({
-						allowlist: [/@guardian/],
-					}),
-			  ],
-
 		node: {
 			__dirname: false,
 		},

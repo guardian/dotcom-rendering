@@ -1,4 +1,4 @@
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { decidePalette } from '../lib/decidePalette';
 
@@ -23,9 +23,9 @@ export const Medium = () => {
 				'whatsApp',
 			]}
 			palette={decidePalette({
-				theme: Pillar.News,
-				design: Design.Article,
-				display: Display.Standard,
+				theme: ArticlePillar.News,
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
 			})}
 			size="medium"
 		/>
@@ -47,9 +47,9 @@ export const Small = () => {
 				'whatsApp',
 			]}
 			palette={decidePalette({
-				theme: Pillar.News,
-				design: Design.Article,
-				display: Display.Standard,
+				theme: ArticlePillar.News,
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
 			})}
 			size="small"
 		/>

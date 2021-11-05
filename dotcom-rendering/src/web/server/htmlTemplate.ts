@@ -119,6 +119,10 @@ export const htmlTemplate = ({
 	const weAreHiringMessage = `
 <!--
 
+We are hiring, ever thought about joining us?
+https://workforus.theguardian.com/careers/product-engineering/
+
+
                                     GGGGGGGGG
                            GGGGGGGGGGGGGGGGGGGGGGGGGG
                        GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
@@ -144,10 +148,6 @@ export const htmlTemplate = ({
                        GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
                             GGGGGGGGGGGGGGGGGGGGGGGGG
                                     GGGGGGGGG
-
-
-        We are hiring, ever thought about joining us?
-        https://workforus.theguardian.com/careers/product-engineering/
 
 
          GGGGG    GGG     GGG
@@ -284,7 +284,8 @@ export const htmlTemplate = ({
                 </noscript>
                 ${loadableConfigScripts.join('\n')}
                 ${priorityScriptTags.join('\n')}
-                <style class="webfont">${getFontsCss()}${resetCSS}${css}</style>
+                <style class="webfont">${getFontsCss()}</style>
+                <style>${resetCSS}${css}</style>
 
                 <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
             </head>

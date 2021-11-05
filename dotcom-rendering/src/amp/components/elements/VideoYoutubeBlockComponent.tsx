@@ -4,17 +4,18 @@ import { Caption } from '@root/src/amp/components/Caption';
 
 export const VideoYoutubeBlockComponent: React.FC<{
 	element: VideoYoutubeBlockElement;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ element, pillar }) => {
 	const youtubeId = getIdFromUrl(
 		element.originalUrl || element.url,
 		'^[a-zA-Z0-9_-]{11}$', // Alpha numeric, underscores and hyphens, exactly 11 numbers long
-		false,
+		true,
 		'v',
 	);
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>
 			<amp-youtube
+				data-block-on-consent={true} // Block player until consent is obtained
 				data-videoid={youtubeId}
 				layout="responsive"
 				width={element.width}

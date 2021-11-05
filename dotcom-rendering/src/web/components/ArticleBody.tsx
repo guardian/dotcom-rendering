@@ -1,15 +1,15 @@
 import { css } from '@emotion/react';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline, body } from '@guardian/src-foundations/typography';
 import { between } from '@guardian/src-foundations/mq';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { LiveBlogRenderer } from '@root/src/web/lib/LiveBlogRenderer';
-import { Design, Display } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { space } from '@guardian/src-foundations';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	blocks: Block[];
 	adTargeting: AdTargeting;
@@ -18,19 +18,31 @@ type Props = {
 	webTitle: string;
 };
 
-const globalH2Styles = (display: Display) => css`
+const globalH2Styles = (display: ArticleDisplay) => css`
 	h2:not([data-ignore='global-h2-styling']) {
-		${display === Display.Immersive
+		${display === ArticleDisplay.Immersive
 			? headline.medium({ fontWeight: 'light' })
 			: headline.xxsmall({ fontWeight: 'bold' })};
 	}
 `;
 
-const globalH3Styles = (display: Display) => {
-	if (display !== Display.NumberedList) return null;
+const globalOlStyles = () => css`
+	ol:not([data-ignore='global-ol-styling']) {
+		counter-reset: li;
+		li:before {
+			${body.medium({ lineHeight: 'tight' })};
+			content: counter(li);
+			counter-increment: li;
+			margin-right: ${space[1]}px;
+		}
+	}
+`;
+
+const globalH3Styles = (display: ArticleDisplay) => {
+	if (display !== ArticleDisplay.NumberedList) return null;
 	return css`
 		h3 {
-			${headline.xxsmall({ fontWeight: 'bold' })};
+			${headline.xsmall({ fontWeight: 'bold' })};
 			margin-bottom: ${space[2]}px;
 		}
 	`;
@@ -70,11 +82,11 @@ export const ArticleBody = ({
 	pageId,
 	webTitle,
 }: Props) => {
-	const isInteractive = format.design === Design.Interactive;
+	const isInteractive = format.design === ArticleDesign.Interactive;
 
 	if (
-		format.design === Design.LiveBlog ||
-		format.design === Design.DeadBlog
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
 	) {
 		return (
 			<div css={[globalStrongStyles, globalLinkStyles(palette)]}>
@@ -98,6 +110,7 @@ export const ArticleBody = ({
 				isInteractive ? null : bodyPadding,
 				globalH2Styles(format.display),
 				globalH3Styles(format.display),
+				globalOlStyles(),
 				globalStrongStyles,
 				globalLinkStyles(palette),
 			]}

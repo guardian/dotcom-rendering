@@ -87,9 +87,8 @@ export const getSharingUrls = (
 	};
 
 	return Object.keys(platforms).reduce((shareUrls, platform) => {
-		const { userMessage, baseUrl, params } = platforms[
-			platform as SharePlatform
-		];
+		const { userMessage, baseUrl, params } =
+			platforms[platform as SharePlatform];
 
 		return {
 			[platform]: {

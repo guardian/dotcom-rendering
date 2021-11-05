@@ -13,7 +13,7 @@ export const buildAdTargeting = (
 	const customParams = {
 		sens: config.isSensitive ? 't' : 'f',
 		si: 'f',
-		vl: config.videoDuration,
+		vl: config.videoDuration || 0,
 		cc: config.edition,
 		s: config.section,
 		inskin: 'f',

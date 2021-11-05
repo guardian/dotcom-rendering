@@ -8,8 +8,8 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import type { Format } from '@guardian/types';
-import { Lines } from '@guardian/src-ed-lines';
+import type { ArticleFormat } from '@guardian/libs';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -32,6 +32,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
+import { Pagination } from '@frontend/web/components/Pagination';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -180,7 +181,7 @@ const ageWarningMargins = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }
 
@@ -246,52 +247,54 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							}
 						/>
 					</ElementContainer>
+
+					<ElementContainer
+						showSideBorders={true}
+						borderColour={brandLine.primary}
+						showTopBorder={false}
+						padded={false}
+						backgroundColour={brandBackground.primary}
+					>
+						<Nav
+							nav={NAV}
+							format={{
+								...format,
+								theme: getCurrentPillar(CAPI),
+							}}
+							subscribeUrl={
+								CAPI.nav.readerRevenueLinks.header.subscribe
+							}
+							edition={CAPI.editionId}
+						/>
+					</ElementContainer>
+
+					{NAV.subNavSections && (
+						<ElementContainer
+							backgroundColour={palette.background.article}
+							padded={false}
+							sectionId="sub-nav-root"
+							borderColour={palette.border.article}
+							element="nav"
+						>
+							<SubNav
+								subNavSections={NAV.subNavSections}
+								currentNavLink={NAV.currentNavLink}
+								palette={palette}
+								format={format}
+							/>
+						</ElementContainer>
+					)}
+
+					<ElementContainer
+						backgroundColour={palette.background.article}
+						padded={false}
+						showTopBorder={false}
+						borderColour={palette.border.article}
+					>
+						<Lines count={4} effect="straight" />
+					</ElementContainer>
 				</SendToBack>
 			</div>
-
-			<ElementContainer
-				showSideBorders={true}
-				borderColour={brandLine.primary}
-				showTopBorder={false}
-				padded={false}
-				backgroundColour={brandBackground.primary}
-			>
-				<Nav
-					nav={NAV}
-					format={{
-						...format,
-						theme: getCurrentPillar(CAPI),
-					}}
-					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
-					edition={CAPI.editionId}
-				/>
-			</ElementContainer>
-
-			{NAV.subNavSections && (
-				<ElementContainer
-					backgroundColour={palette.background.article}
-					padded={false}
-					sectionId="sub-nav-root"
-					borderColour={palette.border.article}
-					element="nav"
-				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						palette={palette}
-						format={format}
-					/>
-				</ElementContainer>
-			)}
-
-			<ElementContainer
-				backgroundColour={palette.background.article}
-				padded={false}
-				showTopBorder={false}
-				borderColour={palette.border.article}
-			>
-				<Lines count={4} effect="straight" />
-			</ElementContainer>
 
 			<ContainerLayout
 				showTopBorder={false}
@@ -416,6 +419,22 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="body">
 						<ArticleContainer>
 							<main css={articleWidth}>
+								{CAPI.pagination &&
+									CAPI.pagination.currentPage !== 1 && (
+										<Pagination
+											currentPage={
+												CAPI.pagination?.currentPage ||
+												1
+											}
+											totalPages={
+												CAPI.pagination?.totalPages || 1
+											}
+											newest={CAPI.pagination?.newest}
+											oldest={CAPI.pagination?.oldest}
+											newer={CAPI.pagination?.newer}
+											older={CAPI.pagination?.older}
+										/>
+									)}
 								<ArticleBody
 									format={format}
 									palette={palette}
@@ -425,6 +444,22 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
+								{CAPI.pagination &&
+									CAPI.pagination.totalPages > 1 && (
+										<Pagination
+											currentPage={
+												CAPI.pagination?.currentPage ||
+												1
+											}
+											totalPages={
+												CAPI.pagination?.totalPages || 1
+											}
+											newest={CAPI.pagination?.newest}
+											oldest={CAPI.pagination?.oldest}
+											newer={CAPI.pagination?.newer}
+											older={CAPI.pagination?.older}
+										/>
+									)}
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines
 									data-print-layout="hide"

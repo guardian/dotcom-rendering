@@ -90,14 +90,14 @@ const commentStyles = css`
 `;
 
 const labsStyles = css`
-    ${textSans.xxxlarge({ lineHeight: 'regular' })}}
+	${textSans.xxxlarge({ lineHeight: 'regular' })}
 `;
 
 const immersiveLabs = css`
-    ${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}}
-    ${from.desktop} {
-        ${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}}
-    }
+	${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}
+	${from.desktop} {
+		${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}
+	}
 `;
 
 // stop headlines from growing in size with font resizer

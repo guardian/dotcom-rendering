@@ -29,93 +29,75 @@ const root = resolve(__dirname, '..', '..');
 const articles = [
 	{
 		name: 'Article',
-		url:
-			'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		url: 'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 	},
 	{
 		name: 'Analysis',
-		url:
-			'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+		url: 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 	},
 	{
 		name: 'Comment',
-		url:
-			'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+		url: 'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 	},
 	{
 		name: 'Feature',
-		url:
-			'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+		url: 'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
 	},
 	{
 		name: 'Live',
-		url:
-			'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+		url: 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	},
 	{
 		name: 'Dead',
-		url:
-			'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
+		url: 'https://www.theguardian.com/science/live/2021/feb/19/mars-landing-nasa-perseverance-rover-briefing-latest-live-news-updates',
 	},
 	{
 		name: 'Editorial',
-		url:
-			'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+		url: 'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 	},
 	{
 		name: 'Letter',
-		url:
-			'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+		url: 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 	},
 	{
 		name: 'SpecialReport',
-		url:
-			'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+		url: 'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	},
 	{
 		name: 'Interview',
-		url:
-			'https://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
+		url: 'https://www.theguardian.com/global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation',
 	},
 	{
 		name: 'MatchReport',
-		url:
-			'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+		url: 'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 	},
 	{
 		name: 'PhotoEssay',
-		url:
-			'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+		url: 'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 	},
 	{
 		name: 'PrintShop',
-		url:
-			'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+		url: 'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 	},
 	{
 		name: 'Recipe',
-		url:
-			'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+		url: 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 	},
 	{
 		name: 'Review',
-		url:
-			'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+		url: 'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 	},
 	{
 		name: 'Quiz',
-		url:
-			'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+		url: 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 	},
 	{
 		name: 'Labs',
-		url:
-			'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
+		url: 'https://www.theguardian.com/whats-in-your-blood-/2018/oct/11/royal-ancestry-genetics-things-to-consider',
 	},
 	{
 		name: 'NumberedList',
-		url:
-			'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+		url: 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 	},
 ];
 

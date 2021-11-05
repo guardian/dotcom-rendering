@@ -1,4 +1,4 @@
-import { Pillar } from '@guardian/types';
+import { ArticlePillar } from '@guardian/libs';
 
 export const NAV: NavType = {
 	pillars: [
@@ -6,7 +6,7 @@ export const NAV: NavType = {
 			title: 'News',
 			longTitle: 'Headlines',
 			url: '/',
-			pillar: Pillar.News,
+			pillar: ArticlePillar.News,
 			children: [
 				{
 					title: 'Coronavirus',
@@ -358,8 +358,7 @@ export const NAV: NavType = {
 						{
 							title: 'Project Syndicate',
 							longTitle: 'Project Syndicate',
-							url:
-								'/business/series/project-syndicate-economists',
+							url: '/business/series/project-syndicate-economists',
 							children: [],
 							mobileOnly: false,
 						},
@@ -394,7 +393,7 @@ export const NAV: NavType = {
 			title: 'Opinion',
 			longTitle: 'Opinion home',
 			url: '/commentisfree',
-			pillar: Pillar.Opinion,
+			pillar: ArticlePillar.Opinion,
 			children: [
 				{
 					title: 'The Guardian view',
@@ -438,7 +437,7 @@ export const NAV: NavType = {
 			title: 'Sport',
 			longTitle: 'Sport home',
 			url: '/sport',
-			pillar: Pillar.Sport,
+			pillar: ArticlePillar.Sport,
 			children: [
 				{
 					title: 'Football',
@@ -546,7 +545,7 @@ export const NAV: NavType = {
 			title: 'Culture',
 			longTitle: 'Culture home',
 			url: '/culture',
-			pillar: Pillar.Culture,
+			pillar: ArticlePillar.Culture,
 			children: [
 				{
 					title: 'Books',
@@ -611,7 +610,7 @@ export const NAV: NavType = {
 			title: 'Lifestyle',
 			longTitle: 'Lifestyle home',
 			url: '/lifeandstyle',
-			pillar: Pillar.Lifestyle,
+			pillar: ArticlePillar.Lifestyle,
 			children: [
 				{
 					title: 'Fashion',
@@ -761,8 +760,7 @@ export const NAV: NavType = {
 			{
 				title: 'The Guardian app',
 				longTitle: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 				children: [],
 				mobileOnly: false,
 			},
@@ -883,8 +881,7 @@ export const NAV: NavType = {
 			{
 				title: 'Guardian Weekly',
 				longTitle: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_Int',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_Int',
 				children: [],
 				mobileOnly: false,
 			},
@@ -979,16 +976,14 @@ export const NAV: NavType = {
 		{
 			title: 'Search jobs',
 			longTitle: 'Search jobs',
-			url:
-				'https://jobs.theguardian.com?INTCMP=jobs_int_web_newheader_dropdown',
+			url: 'https://jobs.theguardian.com?INTCMP=jobs_int_web_newheader_dropdown',
 			children: [],
 			mobileOnly: false,
 		},
 		{
 			title: 'Holidays',
 			longTitle: 'Holidays',
-			url:
-				'https://holidays.theguardian.com?INTCMP=holidays_int_web_newheader',
+			url: 'https://holidays.theguardian.com?INTCMP=holidays_int_web_newheader',
 			children: [],
 			mobileOnly: false,
 		},
@@ -1207,8 +1202,7 @@ export const pageFooter: FooterType = {
 			},
 			{
 				text: 'Newsletters',
-				url:
-					'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_INTERNATIONAL',
+				url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_INTERNATIONAL',
 				dataLinkName: 'international : footer : newsletters',
 				extraClasses: '',
 			},
@@ -1222,8 +1216,7 @@ export const pageFooter: FooterType = {
 			},
 			{
 				text: 'Search UK jobs',
-				url:
-					'https://jobs.theguardian.com/?INTCMP=NGW_FOOTER_INT_GU_JOBS',
+				url: 'https://jobs.theguardian.com/?INTCMP=NGW_FOOTER_INT_GU_JOBS',
 				dataLinkName: 'international : footer : uk-jobs',
 				extraClasses: '',
 			},

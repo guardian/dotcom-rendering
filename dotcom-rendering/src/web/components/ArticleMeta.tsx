@@ -1,20 +1,20 @@
 import { css } from '@emotion/react';
 import { between, from, until } from '@guardian/src-foundations/mq';
-import { Display, Design, Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 
 import { Contributor } from '@root/src/web/components/Contributor';
 import { Avatar } from '@root/src/web/components/Avatar';
 import { Counts } from '@root/src/web/components/Counts';
 import { Branding } from '@root/src/web/components/Branding';
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { border, space } from '@guardian/src-foundations';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	pageId: string;
 	webTitle: string;
@@ -115,7 +115,7 @@ const metaNumbers = (palette: Palette) => css`
 	}
 `;
 
-const metaContainer = (format: Format) => {
+const metaContainer = (format: ArticleFormat) => {
 	const defaultMargins = css`
 		${until.phablet} {
 			margin-left: -20px;
@@ -127,13 +127,13 @@ const metaContainer = (format: Format) => {
 		}
 	`;
 	switch (format.display) {
-		case Display.Immersive:
-		case Display.Showcase:
-		case Display.NumberedList:
-		case Display.Standard: {
+		case ArticleDisplay.Immersive:
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard: {
 			switch (format.design) {
-				case Design.PhotoEssay:
-					return format.theme === Special.Labs
+				case ArticleDesign.PhotoEssay:
+					return format.theme === ArticleSpecial.Labs
 						? defaultMargins
 						: css`
 								${until.phablet} {
@@ -168,18 +168,18 @@ const getAuthorName = (tags: TagType[]) => {
 	return contributorTag && contributorTag.title;
 };
 
-const shouldShowAvatar = (format: Format) => {
+const shouldShowAvatar = (format: ArticleFormat) => {
 	switch (format.display) {
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			return false;
-		case Display.Showcase:
-		case Display.NumberedList:
-		case Display.Standard: {
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.NumberedList:
+		case ArticleDisplay.Standard: {
 			switch (format.design) {
-				case Design.Feature:
-				case Design.Review:
-				case Design.Recipe:
-				case Design.Interview:
+				case ArticleDesign.Feature:
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Interview:
 					return true;
 				default:
 					return false;
@@ -188,17 +188,17 @@ const shouldShowAvatar = (format: Format) => {
 	}
 };
 
-const shouldShowContributor = (format: Format) => {
+const shouldShowContributor = (format: ArticleFormat) => {
 	switch (format.display) {
-		case Display.NumberedList:
+		case ArticleDisplay.NumberedList:
 			return true;
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			return false;
-		case Display.Showcase:
-		case Display.Standard: {
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.Standard: {
 			switch (format.design) {
-				case Design.Comment:
-				case Design.Editorial:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
 					return false;
 				default:
 					return true;
@@ -260,11 +260,25 @@ export const ArticleMeta = ({
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
 
+	const showAvatarFromAuthor = () => {
+		if (
+			author.byline === undefined ||
+			!author.byline ||
+			author.byline === ''
+		) {
+			return false;
+		}
+		return true;
+	};
+
 	const onlyOneContributor: boolean =
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
-	const showAvatar = onlyOneContributor && shouldShowAvatar(format);
-	const isInteractive = format.design === Design.Interactive;
+	const showAvatar =
+		onlyOneContributor &&
+		showAvatarFromAuthor() &&
+		shouldShowAvatar(format);
+	const isInteractive = format.design === ArticleDesign.Interactive;
 	return (
 		<div
 			className={
@@ -274,7 +288,7 @@ export const ArticleMeta = ({
 		>
 			<div css={meta}>
 				{branding && <Branding branding={branding} palette={palette} />}
-				{format.theme === Special.Labs ? (
+				{format.theme === ArticleSpecial.Labs ? (
 					<div css={stretchLines}>
 						<Lines
 							count={1}

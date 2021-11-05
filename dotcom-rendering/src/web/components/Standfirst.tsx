@@ -4,13 +4,13 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { Display, Design, Special } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { sanitise } from '@frontend/lib/sanitise-html';
 import { decidePalette } from '../lib/decidePalette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	standfirst: string;
 };
 
@@ -61,12 +61,12 @@ const nestedStyles = (palette: Palette) => css`
 	}
 `;
 
-const standfirstStyles = (format: Format, palette: Palette) => {
+const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 	switch (format.display) {
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			switch (format.design) {
-				case Design.PhotoEssay:
-					if (format.theme === Special.Labs) {
+				case ArticleDesign.PhotoEssay:
+					if (format.theme === ArticleSpecial.Labs) {
 						return css`
 							${textSans.large({})};
 							margin-top: ${space[2]}px;
@@ -86,7 +86,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 					`;
 				default:
 					return css`
-						${format.theme === Special.Labs
+						${format.theme === ArticleSpecial.Labs
 							? textSans.medium()
 							: headline.xsmall({
 									fontWeight: 'light',
@@ -104,7 +104,7 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 					`;
 			}
 
-		case Display.NumberedList:
+		case ArticleDisplay.NumberedList:
 			return css`
 				${headline.xxsmall({
 					fontWeight: 'bold',
@@ -114,16 +114,16 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 				color: ${palette.text.standfirst};
 			`;
 
-		case Display.Showcase:
-		case Display.Standard:
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.Standard:
 		default: {
 			switch (format.design) {
-				case Design.Comment:
-				case Design.Editorial:
-				case Design.Letter:
-				case Design.Feature:
-				case Design.Recipe:
-				case Design.Review:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+				case ArticleDesign.Comment:
+				case ArticleDesign.Feature:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Review:
 					return css`
 						${headline.xxsmall({
 							fontWeight: 'light',
@@ -132,8 +132,8 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 						max-width: 540px;
 						color: ${palette.text.standfirst};
 					`;
-				case Design.LiveBlog:
-				case Design.DeadBlog:
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
 					return css`
 						${headline.xxxsmall({
 							fontWeight: 'bold',
@@ -146,12 +146,19 @@ const standfirstStyles = (format: Format, palette: Palette) => {
 					`;
 				default:
 					switch (format.theme) {
-						case Special.Labs:
+						case ArticleSpecial.Labs:
 							return css`
 								${textSans.medium()}
 								margin-bottom: ${space[3]}px;
 								max-width: 540px;
 								color: ${palette.text.standfirst};
+								a {
+									color: ${neutral[7]};
+									border-bottom: 1px solid ${neutral[60]};
+								}
+								a:hover {
+									border-bottom: 1px solid ${neutral[7]};
+								}
 							`;
 						default:
 							return css`
@@ -177,7 +184,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 			data-print-layout="hide"
 			css={[nestedStyles(palette), standfirstStyles(format, palette)]}
 			className={
-				format.design === Design.Interactive
+				format.design === ArticleDesign.Interactive
 					? interactiveLegacyClasses.standFirst
 					: ''
 			}

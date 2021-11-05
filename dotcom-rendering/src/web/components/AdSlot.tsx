@@ -3,47 +3,14 @@ import { css } from '@emotion/react';
 import { border, neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 import { space } from '@guardian/src-foundations';
+import { adSizes } from '@guardian/commercial-core';
 
 type Props = {
-	display: Display;
+	display: ArticleDisplay;
 	position: AdSlotType;
 };
-
-/*
-    This file's values are meant to mirror the values used by frontend.
-    Look for marks:
-        432b3a46-90c1-4573-90d3-2400b51af8d0
-        1b109a4a-791c-4214-acd2-2720d7d9f96f
-    ... in the frontend code
- */
-
-enum Size {
-	// standard ad sizes
-	billboard = '970,250',
-	leaderboard = '728,90',
-	mpu = '300,250',
-	halfPage = '300,600',
-	portrait = '300,1050',
-	skyscraper = '160,600',
-	mobilesticky = '320,50',
-	// dfp proprietary ad sizes
-	fluid = 'fluid',
-	outOfPage = '1,1',
-	googleCard = '300,274',
-	// guardian proprietary ad sizes
-	video = '620,1',
-	outstreamDesktop = '620,350',
-	outstreamGoogleDesktop = '550,310',
-	outstreamMobile = '300,197',
-	merchandisingHighAdFeature = '88,89',
-	merchandisingHigh = '88,87',
-	merchandising = '88,88',
-	inlineMerchandising = '88,85',
-	fabric = '88,71',
-	empty = '2,2',
-}
 
 export const labelHeight = 24;
 
@@ -89,6 +56,12 @@ export const labelStyles = css`
 		position: fixed;
 		bottom: 0;
 		width: 100%;
+	}
+`;
+
+export const adCollapseStyles = css`
+	& .ad-slot.ad-slot--collapse {
+		display: none;
 	}
 `;
 
@@ -221,9 +194,9 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 	switch (position) {
 		case 'right':
 			switch (display) {
-				case Display.Immersive:
-				case Display.Showcase:
-				case Display.NumberedList: {
+				case ArticleDisplay.Immersive:
+				case ArticleDisplay.Showcase:
+				case ArticleDisplay.NumberedList: {
 					return (
 						<div
 							id="dfp-ad--right"
@@ -240,18 +213,20 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							data-name="right"
 							// mark: 01303e88-ef1f-462d-9b6e-242419435cec
 							data-mobile={[
-								`${Size.outOfPage}`,
-								`${Size.empty}`,
-								`${Size.mpu}`,
-								`${Size.googleCard}`,
-								`${Size.halfPage}`,
-								`${Size.fluid}`,
-							].join('|')}
+								adSizes.outOfPage,
+								adSizes.empty,
+								adSizes.mpu,
+								adSizes.googleCard,
+								adSizes.halfPage,
+								adSizes.fluid,
+							]
+								.map((size) => size.toString())
+								.join('|')}
 							aria-hidden="true"
 						/>
 					);
 				}
-				case Display.Standard: {
+				case ArticleDisplay.Standard: {
 					const MOSTVIEWED_STICKY_HEIGHT = 1059;
 					return (
 						<div
@@ -282,13 +257,15 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 								data-name="right"
 								// mark: 01303e88-ef1f-462d-9b6e-242419435cec
 								data-mobile={[
-									`${Size.outOfPage}`,
-									`${Size.empty}`,
-									`${Size.mpu}`,
-									`${Size.googleCard}`,
-									`${Size.halfPage}`,
-									`${Size.fluid}`,
-								].join('|')}
+									adSizes.outOfPage,
+									adSizes.empty,
+									adSizes.mpu,
+									adSizes.googleCard,
+									adSizes.halfPage,
+									adSizes.fluid,
+								]
+									.map((size) => size.toString())
+									.join('|')}
 								aria-hidden="true"
 							/>
 						</div>
@@ -325,36 +302,42 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 						data-link-name="ad slot comments"
 						data-name="comments"
 						data-mobile={[
-							`${Size.outOfPage}`,
-							`${Size.empty}`,
-							`${Size.halfPage}`,
-							`${Size.outstreamMobile}`,
-							`${Size.mpu}`,
-							`${Size.googleCard}`,
-							`${Size.fluid}`,
-						].join('|')}
+							adSizes.outOfPage,
+							adSizes.empty,
+							adSizes.halfPage,
+							adSizes.outstreamMobile,
+							adSizes.mpu,
+							adSizes.googleCard,
+							adSizes.fluid,
+						]
+							.map((size) => size.toString())
+							.join('|')}
 						data-desktop={[
-							`${Size.outOfPage}`,
-							`${Size.empty}`,
-							`${Size.mpu}`,
-							`${Size.googleCard}`,
-							`${Size.video}`,
-							`${Size.outstreamDesktop}`,
-							`${Size.outstreamGoogleDesktop}`,
-							`${Size.fluid}`,
-							`${Size.halfPage}`,
-							`${Size.skyscraper}`,
-						].join('|')}
+							adSizes.outOfPage,
+							adSizes.empty,
+							adSizes.mpu,
+							adSizes.googleCard,
+							adSizes.video,
+							adSizes.outstreamDesktop,
+							adSizes.outstreamGoogleDesktop,
+							adSizes.fluid,
+							adSizes.halfPage,
+							adSizes.skyscraper,
+						]
+							.map((size) => size.toString())
+							.join('|')}
 						data-phablet={[
-							`${Size.outOfPage}`,
-							`${Size.empty}`,
-							`${Size.outstreamMobile}`,
-							`${Size.mpu}`,
-							`${Size.googleCard}`,
-							`${Size.outstreamDesktop}`,
-							`${Size.outstreamGoogleDesktop}`,
-							`${Size.fluid}`,
-						].join('|')}
+							adSizes.outOfPage,
+							adSizes.empty,
+							adSizes.outstreamMobile,
+							adSizes.mpu,
+							adSizes.googleCard,
+							adSizes.outstreamDesktop,
+							adSizes.outstreamGoogleDesktop,
+							adSizes.fluid,
+						]
+							.map((size) => size.toString())
+							.join('|')}
 						aria-hidden="true"
 					/>
 				</div>
@@ -364,7 +347,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 			const adSlotAboveNav = css`
 				position: relative;
 				margin: 0 auto;
-				min-height: 90px;
+				min-height: ${adSizes.leaderboard.height}px;
 				text-align: left;
 				display: block;
 				min-width: 728px;
@@ -388,22 +371,26 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 						// 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
 						// 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
 						data-tablet={[
-							`${Size.outOfPage}`,
-							`${Size.empty}`,
-							`${Size.fabric}`,
-							`${Size.fluid}`,
-							`${Size.leaderboard}`,
-						].join('|')}
+							adSizes.outOfPage,
+							adSizes.empty,
+							adSizes.fabric,
+							adSizes.fluid,
+							adSizes.leaderboard,
+						]
+							.map((size) => size.toString())
+							.join('|')}
 						data-desktop={[
-							`${Size.outOfPage}`,
-							`${Size.empty}`,
-							`${Size.leaderboard}`,
+							adSizes.outOfPage,
+							adSizes.empty,
+							adSizes.leaderboard,
 							`940,230`,
 							`900,250`,
-							`${Size.billboard}`,
-							`${Size.fabric}`,
-							`${Size.fluid}`,
-						].join('|')}
+							adSizes.billboard,
+							adSizes.fabric,
+							adSizes.fluid,
+						]
+							.map((size) => size.toString())
+							.join('|')}
 						// Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
 						aria-hidden="true"
 					/>
@@ -431,39 +418,47 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					data-name="mostpop"
 					// mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
 					data-mobile={[
-						`${Size.outOfPage}`,
-						`${Size.empty}`,
-						`${Size.mpu}`,
-						`${Size.googleCard}`,
-						`${Size.fluid}`,
-					].join('|')}
+						adSizes.outOfPage,
+						adSizes.empty,
+						adSizes.mpu,
+						adSizes.googleCard,
+						adSizes.fluid,
+					]
+						.map((size) => size.toString())
+						.join('|')}
 					data-tablet={[
-						`${Size.outOfPage}`,
-						`${Size.empty}`,
-						`${Size.mpu}`,
-						`${Size.googleCard}`,
-						`${Size.halfPage}`,
-						`${Size.leaderboard}`,
-						`${Size.fluid}`,
-					].join('|')}
+						adSizes.outOfPage,
+						adSizes.empty,
+						adSizes.mpu,
+						adSizes.googleCard,
+						adSizes.halfPage,
+						adSizes.leaderboard,
+						adSizes.fluid,
+					]
+						.map((size) => size.toString())
+						.join('|')}
 					data-phablet={[
-						`${Size.outOfPage}`,
-						`${Size.empty}`,
-						`${Size.outstreamMobile}`,
-						`${Size.mpu}`,
-						`${Size.googleCard}`,
-						`${Size.halfPage}`,
-						`${Size.outstreamGoogleDesktop}`,
-						`${Size.fluid}`,
-					].join('|')}
+						adSizes.outOfPage,
+						adSizes.empty,
+						adSizes.outstreamMobile,
+						adSizes.mpu,
+						adSizes.googleCard,
+						adSizes.halfPage,
+						adSizes.outstreamGoogleDesktop,
+						adSizes.fluid,
+					]
+						.map((size) => size.toString())
+						.join('|')}
 					data-desktop={[
-						`${Size.outOfPage}`,
-						`${Size.empty}`,
-						`${Size.mpu}`,
-						`${Size.googleCard}`,
-						`${Size.halfPage}`,
-						`${Size.fluid}`,
-					].join('|')}
+						adSizes.outOfPage,
+						adSizes.empty,
+						adSizes.mpu,
+						adSizes.googleCard,
+						adSizes.halfPage,
+						adSizes.fluid,
+					]
+						.map((size) => size.toString())
+						.join('|')}
 					aria-hidden="true"
 				/>
 			);
@@ -488,11 +483,13 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					data-name="merchandising-high"
 					// mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
 					data-mobile={[
-						`${Size.outOfPage}`,
-						`${Size.empty}`,
-						`${Size.merchandisingHigh}`,
-						`${Size.fluid}`,
-					].join('|')}
+						adSizes.outOfPage,
+						adSizes.empty,
+						adSizes.merchandisingHigh,
+						adSizes.fluid,
+					]
+						.map((size) => size.toString())
+						.join('|')}
 					aria-hidden="true"
 				/>
 			);
@@ -517,11 +514,13 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					data-name="merchandising"
 					// mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
 					data-mobile={[
-						`${Size.outOfPage}`,
-						`${Size.empty}`,
-						`${Size.merchandising}`,
-						`${Size.fluid}`,
-					].join('|')}
+						adSizes.outOfPage,
+						adSizes.empty,
+						adSizes.merchandising,
+						adSizes.fluid,
+					]
+						.map((size) => size.toString())
+						.join('|')}
 					aria-hidden="true"
 				/>
 			);
@@ -541,7 +540,9 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					data-label="false"
 					data-refresh="false"
 					data-out-of-page="true"
-					data-desktop={[`${Size.outOfPage}`].join('|')}
+					data-desktop={[adSizes.outOfPage]
+						.map((size) => size.toString())
+						.join('|')}
 					aria-hidden="true"
 				/>
 			);

@@ -55,10 +55,8 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 	const { kicker: cultureKicker, inverted: cultureInverted } = getThemeStyles(
 		Pillar.Culture,
 	);
-	const {
-		kicker: lifestyleKicker,
-		inverted: lifestyleInverted,
-	} = getThemeStyles(Pillar.Lifestyle);
+	const { kicker: lifestyleKicker, inverted: lifestyleInverted } =
+		getThemeStyles(Pillar.Lifestyle);
 
 	return css`
 		background: ${backgroundColor(format)};

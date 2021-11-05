@@ -8,6 +8,7 @@ import type { Format } from '@guardian/types';
 import { Design } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
+import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
@@ -45,8 +46,20 @@ const mediaStyles = css`
 	}
 `;
 
+const liveblogStyles = (format: Format): SerializedStyles => {
+	const { liveblogKicker } = getThemeStyles(format.theme);
+
+	return css`
+		&::before {
+			background-color: ${liveblogKicker};
+		}
+	`;
+};
+
 const styles = (format: Format): SerializedStyles => {
 	switch (format.design) {
+		case Design.LiveBlog:
+			return css(baseStyles, liveblogStyles(format));
 		case Design.Media:
 			return css(baseStyles, mediaStyles);
 		default:

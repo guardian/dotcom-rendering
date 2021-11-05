@@ -19,7 +19,7 @@ import {
 } from '@root/src/web/lib/contributions';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { getCookie } from '@root/src/web/browser/cookie';
-import type { OphanComponentEvent, TestMeta } from '@guardian/types';
+import type { OphanComponentEvent, OphanABTestMeta } from '@guardian/libs';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
 import {
@@ -160,7 +160,7 @@ interface SupportHeaderProps {
 		primaryCta?: Cta;
 		secondaryCta?: Cta;
 	};
-	tracking: TestMeta;
+	tracking: OphanABTestMeta;
 	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
 }
 interface SupportHeaderData {
@@ -169,7 +169,7 @@ interface SupportHeaderData {
 		name: string;
 		props: SupportHeaderProps;
 	};
-	meta: TestMeta;
+	meta: OphanABTestMeta;
 }
 
 const ReaderRevenueLinksRemote: React.FC<{
@@ -185,14 +185,10 @@ const ReaderRevenueLinksRemote: React.FC<{
 	contributionsServiceUrl,
 	ophanRecord,
 }) => {
-	const [
-		supportHeaderResponse,
-		setSupportHeaderResponse,
-	] = useState<SupportHeaderData | null>(null);
-	const [
-		SupportHeader,
-		setSupportHeader,
-	] = useState<React.FC<SupportHeaderProps> | null>(null);
+	const [supportHeaderResponse, setSupportHeaderResponse] =
+		useState<SupportHeaderData | null>(null);
+	const [SupportHeader, setSupportHeader] =
+		useState<React.FC<SupportHeaderProps> | null>(null);
 
 	useOnce((): void => {
 		setAutomat();
@@ -279,7 +275,7 @@ export const ReaderRevenueLinksNative: React.FC<Props> = ({
 	// Only the header component is in the AB test
 	const testName = inHeader ? 'RRHeaderLinks' : 'RRFooterLinks';
 	const campaignCode = `${testName}_control`;
-	const tracking: TestMeta = {
+	const tracking: OphanABTestMeta = {
 		abTestName: testName,
 		abTestVariant: 'control',
 		componentType: inHeader ? 'ACQUISITIONS_HEADER' : 'ACQUISITIONS_FOOTER',

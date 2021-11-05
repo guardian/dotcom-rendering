@@ -1,4 +1,9 @@
-import { Design, Display, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
 
 import { LinkHeadline } from '@frontend/web/components/LinkHeadline';
@@ -14,14 +19,14 @@ export const xsmallStory = () => (
 		<LinkHeadline
 			headlineText="This is how a large headline link looks"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			size="large"
 		/>
@@ -34,14 +39,14 @@ export const liveStory = () => (
 		<LinkHeadline
 			headlineText="This is how a headline with a live kicker looks"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			kickerText="Live"
 		/>
@@ -54,14 +59,14 @@ export const noSlash = () => (
 		<LinkHeadline
 			headlineText="This is how a headline with no kicker slash looks"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			kickerText="Live"
 			showSlash={false}
@@ -75,14 +80,14 @@ export const pulsingDot = () => (
 		<LinkHeadline
 			headlineText="This is how a headline with a pulsing dot looks"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			kickerText="Live"
 			showPulsingDot={true}
@@ -96,14 +101,14 @@ export const cultureVariant = () => (
 		<LinkHeadline
 			headlineText="This is how a headline with the culture pillar looks"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.Culture,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Culture,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.Culture,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Culture,
 			}}
 			kickerText="Art and stuff"
 		/>
@@ -116,14 +121,14 @@ export const opinionxxxsmall = () => (
 		<LinkHeadline
 			headlineText="This is how small links to opinion articles look"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Pillar.Opinion,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticlePillar.Opinion,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Pillar.Opinion,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticlePillar.Opinion,
 			}}
 			showQuotes={true}
 			size="small"
@@ -138,14 +143,14 @@ export const OpinionKicker = () => (
 		<LinkHeadline
 			headlineText="This is how an opinion headline with a kicker looks"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Pillar.Opinion,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticlePillar.Opinion,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Pillar.Opinion,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticlePillar.Opinion,
 			}}
 			showQuotes={true}
 			kickerText="George Monbiot"
@@ -160,14 +165,14 @@ export const SpecialReport = () => (
 		<LinkHeadline
 			headlineText="This is how a Special Report headline with a kicker looks"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Special.SpecialReport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticleSpecial.SpecialReport,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.Comment,
-				theme: Special.SpecialReport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticleSpecial.SpecialReport,
 			}}
 			showQuotes={true}
 			kickerText="Special Report"
@@ -182,22 +187,21 @@ export const InUnderlinedState = () => (
 		<LinkHeadline
 			headlineText="This is the underlined state when showUnderline is true"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
 			}}
 			showUnderline={true}
 			size="small"
 			kickerText="I am never underlined"
 			showSlash={true}
 			link={{
-				to:
-					'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
+				to: 'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
 			}}
 		/>
 	</ElementContainer>
@@ -209,20 +213,19 @@ export const linkStory = () => (
 		<LinkHeadline
 			headlineText="This is how a headline looks as a link"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.Sport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Sport,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.Sport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Sport,
 			}}
 			kickerText="I am not a link"
 			showSlash={true}
 			link={{
-				to:
-					'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
+				to: 'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
 			}}
 		/>
 	</ElementContainer>
@@ -234,14 +237,14 @@ export const LiveBlogSizes = () => (
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.LiveBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.LiveBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Large live"
@@ -253,14 +256,14 @@ export const LiveBlogSizes = () => (
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.LiveBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.LiveBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Medium live"
@@ -272,14 +275,14 @@ export const LiveBlogSizes = () => (
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.LiveBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.LiveBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Small live"
@@ -291,14 +294,14 @@ export const LiveBlogSizes = () => (
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.LiveBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.LiveBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Tiny live"
@@ -315,14 +318,14 @@ export const DeadBlogSizes = () => (
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.DeadBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.DeadBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Large live"
@@ -334,14 +337,14 @@ export const DeadBlogSizes = () => (
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.DeadBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.DeadBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Medium live"
@@ -353,14 +356,14 @@ export const DeadBlogSizes = () => (
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.DeadBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.DeadBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Small live"
@@ -372,14 +375,14 @@ export const DeadBlogSizes = () => (
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.DeadBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.DeadBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
 			kickerText="Tiny live"
@@ -396,14 +399,14 @@ export const Updated = () => (
 		<LinkHeadline
 			headlineText=""
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.LiveBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
 			})}
 			format={{
-				display: Display.Standard,
-				design: Design.LiveBlog,
-				theme: Pillar.News,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.LiveBlog,
+				theme: ArticlePillar.News,
 			}}
 			showPulsingDot={true}
 			showSlash={false}

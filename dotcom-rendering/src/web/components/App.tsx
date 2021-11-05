@@ -15,7 +15,10 @@ import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
-import { incrementWeeklyArticleCount } from '@guardian/automat-contributions';
+import {
+	getWeeklyArticleHistory,
+	incrementWeeklyArticleCount,
+} from '@guardian/automat-contributions';
 import {
 	QandaAtom,
 	GuideAtom,
@@ -29,7 +32,10 @@ import {
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
 
 import { Portal } from '@frontend/web/components/Portal';
-import { HydrateOnce } from '@frontend/web/components/HydrateOnce';
+import {
+	HydrateOnce,
+	HydrateInteractiveOnce,
+} from '@frontend/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
@@ -44,8 +50,8 @@ import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
-import { Display, Design } from '@guardian/types';
-import type { Format, CountryCode } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
+import type { ArticleFormat, CountryCode } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
@@ -68,8 +74,12 @@ import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/Uns
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { storage } from '@guardian/libs';
+
+import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
+
 import {
+	OphanComponentType,
+	OphanAction,
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
@@ -136,7 +146,9 @@ type Props = {
 	ophanRecord: OphanRecordFunction;
 };
 
+let renderCount = 0;
 export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
+	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 	const [isSignedIn, setIsSignedIn] = useState<boolean>();
 	const [user, setUser] = useState<UserProfile | null>();
 	const [countryCode, setCountryCode] = useState<string>();
@@ -146,37 +158,44 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// non-async version (this is the case in the banner picker where some
 	// banners need countryCode but we don't want to block all banners from
 	// executing their canShow logic until countryCode is available):
-	const [asyncCountryCode, setAsyncCountryCode] = useState<
-		Promise<CountryCode | null>
-	>();
+	const [asyncCountryCode, setAsyncCountryCode] =
+		useState<Promise<CountryCode | null>>();
 
-	const [brazeMessages, setBrazeMessages] = useState<
-		Promise<BrazeMessagesInterface>
-	>();
+	const [consentState, setConsentState] = useState<ConsentState | undefined>(
+		undefined,
+	);
+
+	const [brazeMessages, setBrazeMessages] =
+		useState<Promise<BrazeMessagesInterface>>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-	const [browserId, setBrowserId] = useState<string | undefined>(undefined);
+	// [string] for the actual id;
+	// [null] for when the cookie does not exist;
+	// [undefined] for when the cookie has not been read yet
+	const [browserId, setBrowserId] = useState<string | null | undefined>(
+		undefined,
+	);
 	useOnce(() => {
-		// TODO: can the browserId actually be null?
-		setBrowserId(getCookie('bwid') ?? undefined);
+		setBrowserId(getCookie('bwid'));
+		log('dotcom', 'State: browserId set');
 	}, []);
 
-	const componentEventHandler = (
-		componentType: any,
-		id: any,
-		action: any,
-	) => () => {
-		const componentEvent: OphanComponentEvent = {
-			component: {
-				componentType,
-				id,
-				products: [],
-				labels: [],
-			},
-			action,
+	const componentEventHandler =
+		(componentType: any, id: any, action: any) => () => {
+			const componentEvent: OphanComponentEvent = {
+				component: {
+					componentType,
+					id,
+					products: [],
+					labels: [],
+				},
+				action,
+			};
+			submitComponentEvent(componentEvent, ophanRecord);
 		};
-		submitComponentEvent(componentEvent, ophanRecord);
-	};
+
+	const [asyncArticleCount, setAsyncArticleCount] =
+		useState<Promise<WeeklyArticleHistory | undefined>>();
 
 	// *******************************
 	// ** Setup AB Test Tracking *****
@@ -187,10 +206,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		ABTestAPI.trackABTests(allRunnableTests);
 		ABTestAPI.registerImpressionEvents(allRunnableTests);
 		ABTestAPI.registerCompleteEvents(allRunnableTests);
+		log('dotcom', 'AB tests initialised');
 	}, [ABTestAPI]);
 
 	useEffect(() => {
 		setIsSignedIn(!!getCookie('GU_U'));
+		log('dotcom', 'State: isSignedIn set');
 	}, []);
 
 	useOnce(() => {
@@ -199,7 +220,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		if (isSignedIn) {
 			getUser(CAPI.config.discussionApiUrl)
 				.then((theUser) => {
-					if (theUser) setUser(theUser);
+					if (theUser) {
+						setUser(theUser);
+						log('dotcom', 'State: user set');
+					}
 				})
 				.catch((e) => console.error(`getUser - error: ${e}`));
 		} else {
@@ -212,7 +236,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			const countryCodePromise = getLocaleCode();
 			setAsyncCountryCode(countryCodePromise);
 			countryCodePromise
-				.then((cc) => setCountryCode(cc || ''))
+				.then((cc) => {
+					setCountryCode(cc || '');
+					log('dotcom', 'State: countryCode set');
+				})
 				.catch((e) =>
 					console.error(`countryCodePromise - error: ${e}`),
 				);
@@ -233,13 +260,20 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			const hasOptedOut = await hasOptedOutOfArticleCount();
 			if (!hasOptedOut) {
 				incrementDailyArticleCount();
-				incrementWeeklyArticleCount(storage.local, CAPI.pageId);
+				incrementWeeklyArticleCount(
+					storage.local,
+					CAPI.pageId,
+					CAPI.config.keywordIds.split(','),
+				);
 			}
 		};
-		incrementArticleCountsIfConsented().catch((e) =>
-			console.error(`incrementArticleCountsIfConsented - error: ${e}`),
+
+		setAsyncArticleCount(
+			incrementArticleCountsIfConsented().then(() =>
+				getWeeklyArticleHistory(storage.local),
+			),
 		);
-	}, [CAPI.pageId]);
+	}, [CAPI.pageId, CAPI.config.keywordIds]);
 
 	// AnniversaryAtom
 	// Add a cookie for the serverside A/B test that is checked to see if we should
@@ -260,22 +294,25 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 
 	useEffect(() => {
 		// Used internally only, so only import each function on demand
-		const loadAndRun = <K extends keyof ReaderRevenueDevUtils>(key: K) => (
-			asExistingSupporter: boolean,
-		) =>
-			import(
-				/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
-			)
-				.then((utils) =>
-					utils[key](
-						asExistingSupporter,
-						CAPI.shouldHideReaderRevenue,
-					),
+		const loadAndRun =
+			<K extends keyof ReaderRevenueDevUtils>(key: K) =>
+			(asExistingSupporter: boolean) =>
+				import(
+					/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
 				)
-				/* eslint-disable no-console */
-				.catch((error) =>
-					console.log('Error loading readerRevenueDevUtils', error),
-				);
+					.then((utils) =>
+						utils[key](
+							asExistingSupporter,
+							CAPI.shouldHideReaderRevenue,
+						),
+					)
+					/* eslint-disable no-console */
+					.catch((error) =>
+						console.log(
+							'Error loading readerRevenueDevUtils',
+							error,
+						),
+					);
 		/* eslint-enable no-console */
 
 		if (window && window.guardian) {
@@ -290,51 +327,70 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	}, [CAPI.shouldHideReaderRevenue]);
 
 	// kick off the CMP...
-	useEffect(() => {
+	useOnce(() => {
+		if (!CAPI.config.switches.consentManagement) return; // CMP turned off!
+
+		// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
+		// mark: CONSENT_TIMING
+		cmp.willShowPrivacyMessage()
+			.then((willShow) => {
+				trackPerformance(
+					'consent',
+					'acquired',
+					willShow ? 'new' : 'existing',
+				);
+			})
+			.catch((e) =>
+				console.error(`CMP willShowPrivacyMessage - error: ${e}`),
+			);
+
+		// Run each time consent is submitted
+		onConsentChange((newConsent) => {
+			setConsentState(newConsent);
+			log('dotcom', 'State: consentState set');
+		});
+
+		// manually updates the footer DOM because it's not hydrated
+		injectPrivacySettingsLink();
+
 		// the UI is injected automatically into the page,
 		// and is not a react component, so it's
 		// handled in here.
-		if (CAPI.config.switches.consentManagement && countryCode) {
-			const pubData = {
+		cmp.init({
+			country: countryCode,
+			pubData: {
 				platform: 'next-gen',
-				browserId,
+				browserId: browserId ?? undefined, // if `undefined`, the resulting consent signal cannot be joined to a page view.
 				pageViewId,
-			};
-			injectPrivacySettingsLink(); // manually updates the footer DOM because it's not hydrated
+			},
+		});
+		log('dotcom', 'CMP initialised');
+	}, [countryCode, pageViewId, browserId]);
 
-			// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
-			// mark: CONSENT_TIMING
-			let recordedConsentTime = false;
-			onConsentChange(() => {
-				if (!recordedConsentTime) {
-					recordedConsentTime = true;
-					cmp.willShowPrivacyMessage()
-						.then((willShow) => {
-							trackPerformance(
-								'consent',
-								'acquired',
-								willShow ? 'new' : 'existing',
-							);
-						})
-						.catch((e) =>
-							console.error(
-								`CMP willShowPrivacyMessage - error: ${e}`,
-							),
-						);
-				}
-			});
-
-			cmp.init({
-				country: countryCode,
-				pubData,
-			});
-		}
-	}, [
-		countryCode,
-		CAPI.config.switches.consentManagement,
-		pageViewId,
-		browserId,
-	]);
+	// This code is executed at first render and then again each time consentState is set
+	useEffect(() => {
+		if (!consentState) return;
+		// Register changes in consent state
+		const decideConsentString = () => {
+			if (consentState.tcfv2) {
+				return consentState.tcfv2?.tcString;
+			}
+			return '';
+		};
+		const componentType: OphanComponentType = 'CONSENT';
+		const consentUUID = getCookie('consentUUID') || '';
+		const consentString = decideConsentString();
+		const action: OphanAction = 'MANAGE_CONSENT'; // I am using MANAGE_CONSENT as the default action while we develop this code.
+		const event = {
+			component: {
+				componentType,
+				products: [],
+				labels: [consentUUID, consentString],
+			},
+			action,
+		};
+		submitComponentEvent(event);
+	}, [consentState]);
 
 	// ************************
 	// *   Google Analytics   *
@@ -346,7 +402,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				Promise.all([
 					loadScript('https://www.google-analytics.com/analytics.js'),
 					loadScript(window.guardian.gaPath),
-				]).catch((e) => console.error(`GA - error: ${e}`));
+				])
+					.then(() => {
+						log('dotcom', 'GA script loaded');
+					})
+					.catch((e) => console.error(`GA - error: ${e}`));
 			} else {
 				// We should never be able to directly set things to the global window object.
 				// But in this case we want to stub things for testing, so it's ok to ignore this rule
@@ -356,17 +416,17 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		});
 	}, []);
 
-	const display: Display = decideDisplay(CAPI.format);
-	const design: Design = decideDesign(CAPI.format);
-	const pillar: Theme = decideTheme(CAPI.format);
-
 	useOnce(() => {
 		setBrazeMessages(
 			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
 		);
 	}, [isSignedIn, CAPI.config.idApiUrl]);
 
-	const format: Format = {
+	const display: ArticleDisplay = decideDisplay(CAPI.format);
+	const design: ArticleDesign = decideDesign(CAPI.format);
+	const pillar: ArticleTheme = decideTheme(CAPI.format);
+
+	const format: ArticleFormat = {
 		display,
 		design,
 		theme: pillar,
@@ -678,10 +738,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
 	);
-	const interactiveContentsElement = elementsByType<InteractiveContentsBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
-	);
+	const interactiveContentsElement =
+		elementsByType<InteractiveContentsBlockElement>(
+			CAPI.elementsToHydrate,
+			'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+		);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
@@ -700,7 +761,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				window.guardian.config?.ophan !== undefined,
 			].every(Boolean) && (
 				<CommercialMetrics
-					browserId={browserId}
+					browserId={browserId ?? undefined}
 					pageViewId={pageViewId}
 				/>
 			)}
@@ -743,7 +804,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</Portal>
 			)}
 			{youTubeAtoms.map((youTubeAtom) => (
-				<HydrateOnce rootId={youTubeAtom.elementId}>
+				<HydrateOnce
+					rootId={youTubeAtom.elementId}
+					waitFor={[consentState]}
+				>
 					<YoutubeBlockComponent
 						format={format}
 						palette={palette}
@@ -751,6 +815,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
 						adTargeting={adTargeting}
+						consentState={consentState}
 						isMainMedia={false}
 						id={youTubeAtom.id}
 						assetId={youTubeAtom.assetId}
@@ -764,7 +829,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</HydrateOnce>
 			))}
 			{interactiveElements.map((interactiveBlock) => (
-				<HydrateOnce rootId={interactiveBlock.elementId}>
+				<HydrateInteractiveOnce rootId={interactiveBlock.elementId}>
 					<InteractiveBlockComponent
 						url={interactiveBlock.url}
 						scriptUrl={interactiveBlock.scriptUrl}
@@ -774,7 +839,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						format={format}
 						palette={palette}
 					/>
-				</HydrateOnce>
+				</HydrateInteractiveOnce>
 			))}
 			{interactiveContentsElement.map((interactiveBlock) => (
 				<HydrateOnce rootId={interactiveBlock.elementId}>
@@ -1180,6 +1245,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					brazeMessages={brazeMessages}
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
+					asyncArticleCount={asyncArticleCount}
+					browserId={browserId || undefined}
 				/>
 			</Portal>
 			<Portal
@@ -1280,6 +1347,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					CAPI={CAPI}
 					brazeMessages={brazeMessages}
 					isPreview={!!CAPI.isPreview}
+					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
 		</React.StrictMode>

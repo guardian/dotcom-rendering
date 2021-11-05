@@ -10,8 +10,8 @@ import {
 	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
@@ -49,7 +49,7 @@ import {
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 const StandardGrid = ({
 	children,
@@ -300,7 +300,7 @@ const ageWarningMargins = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }
 
@@ -326,7 +326,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
 	const isMatchReport =
-		format.design === Design.MatchReport && !!CAPI.matchUrl;
+		format.design === ArticleDesign.MatchReport && !!CAPI.matchUrl;
 
 	const showComments = CAPI.isCommentable;
 
@@ -335,7 +335,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
 	const formatForNav =
-		format.theme === Special.Labs
+		format.theme === ArticleSpecial.Labs
 			? format
 			: {
 					...format,
@@ -360,7 +360,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</ElementContainer>
 					</Stuck>
-					{format.theme !== Special.Labs && (
+					{format.theme !== ArticleSpecial.Labs && (
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
@@ -377,48 +377,54 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</ElementContainer>
 					)}
+					<ElementContainer
+						showSideBorders={true}
+						borderColour={brandLine.primary}
+						showTopBorder={false}
+						padded={false}
+						backgroundColour={brandBackground.primary}
+					>
+						<Nav
+							nav={NAV}
+							format={formatForNav}
+							subscribeUrl={
+								CAPI.nav.readerRevenueLinks.header.subscribe
+							}
+							edition={CAPI.editionId}
+						/>
+					</ElementContainer>
+					{NAV.subNavSections &&
+						format.theme !== ArticleSpecial.Labs && (
+							<>
+								<ElementContainer
+									backgroundColour={
+										palette.background.article
+									}
+									padded={false}
+									sectionId="sub-nav-root"
+								>
+									<SubNav
+										subNavSections={NAV.subNavSections}
+										currentNavLink={NAV.currentNavLink}
+										palette={palette}
+										format={format}
+									/>
+								</ElementContainer>
+								<ElementContainer
+									backgroundColour={
+										palette.background.article
+									}
+									padded={false}
+									showTopBorder={false}
+								>
+									<Lines count={4} effect="straight" />
+								</ElementContainer>
+							</>
+						)}
 				</>
 			</div>
 
-			<ElementContainer
-				showSideBorders={true}
-				borderColour={brandLine.primary}
-				showTopBorder={false}
-				padded={false}
-				backgroundColour={brandBackground.primary}
-			>
-				<Nav
-					nav={NAV}
-					format={formatForNav}
-					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
-					edition={CAPI.editionId}
-				/>
-			</ElementContainer>
-
-			{NAV.subNavSections && format.theme !== Special.Labs && (
-				<ElementContainer
-					backgroundColour={palette.background.article}
-					padded={false}
-					sectionId="sub-nav-root"
-				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						palette={palette}
-						format={format}
-					/>
-				</ElementContainer>
-			)}
-
-			{format.theme !== Special.Labs ? (
-				<ElementContainer
-					backgroundColour={palette.background.article}
-					padded={false}
-					showTopBorder={false}
-				>
-					<Lines count={4} effect="straight" />
-				</ElementContainer>
-			) : (
+			{format.theme === ArticleSpecial.Labs && (
 				<Stuck>
 					<ElementContainer
 						showSideBorders={true}
@@ -456,7 +462,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</GridItem>
 					<GridItem area="border">
-						{format.theme === Special.Labs ? (
+						{format.theme === ArticleSpecial.Labs ? (
 							<></>
 						) : (
 							<Border palette={palette} />
@@ -464,7 +470,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</GridItem>
 					<GridItem area="matchNav">
 						<div css={maxWidth}>
-							{format.design === Design.MatchReport &&
+							{format.design === ArticleDesign.MatchReport &&
 								CAPI.matchUrl && (
 									<Placeholder
 										rootId="match-nav"
@@ -534,7 +540,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="lines">
 						<div css={maxWidth}>
 							<div css={stretchLines}>
-								{format.theme === Special.Labs ? (
+								{format.theme === ArticleSpecial.Labs ? (
 									<GuardianLabsLines />
 								) : (
 									<Lines

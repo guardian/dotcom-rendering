@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
 
@@ -37,9 +37,9 @@ export const defaultStory = () => {
 			<TextBlockComponent
 				html={html}
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isFirstParagraph={false}
 			/>
@@ -55,9 +55,9 @@ export const DropCap = () => {
 				html={html}
 				forceDropCap={true}
 				format={{
-					theme: Pillar.Culture,
-					design: Design.Article,
-					display: Display.Immersive,
+					theme: ArticlePillar.Culture,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Immersive,
 				}}
 				isFirstParagraph={false}
 			/>
@@ -73,9 +73,9 @@ export const QuotedDropCap = () => {
 				html={quotedHtml}
 				forceDropCap={false}
 				format={{
-					theme: Pillar.Opinion,
-					design: Design.Comment,
-					display: Display.Standard,
+					theme: ArticlePillar.Opinion,
+					design: ArticleDesign.Comment,
+					display: ArticleDisplay.Standard,
 				}}
 				isFirstParagraph={true}
 			/>
@@ -91,9 +91,9 @@ export const ShortText = () => {
 				html={shortHtml}
 				forceDropCap={true}
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isFirstParagraph={false}
 			/>
@@ -109,9 +109,9 @@ export const NoTags = () => {
 				html={differentWrapperTags}
 				forceDropCap={true}
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isFirstParagraph={false}
 			/>
@@ -127,9 +127,9 @@ export const FeatureDropCap = () => {
 				html={html}
 				forceDropCap={false}
 				format={{
-					theme: Pillar.Culture,
-					design: Design.Feature,
-					display: Display.Standard,
+					theme: ArticlePillar.Culture,
+					design: ArticleDesign.Feature,
+					display: ArticleDisplay.Standard,
 				}}
 				isFirstParagraph={true}
 			/>
@@ -145,9 +145,9 @@ export const AList = () => {
 				html={aListHtml}
 				forceDropCap={true}
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isFirstParagraph={false}
 			/>
@@ -163,9 +163,9 @@ export const BadMarkup = () => {
 				html={badMarkup}
 				forceDropCap={false}
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isFirstParagraph={false}
 			/>
@@ -181,9 +181,9 @@ export const SubSupscript = () => {
 				html="<p><strong>P<sub>kj</sub> = (1-r<sub>j</sub>)C<sup>kj</sup> + r<sub>j</sub>(C<sub>kj</sub> + q<sub>kj</sub> - p<sub>kj</sub>)</strong></p><p><var>a<sup>2</sup></var> + <var>b<sup>2</sup></var> = <var>c<sup>2</sup></var></p>"
 				forceDropCap={false}
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isFirstParagraph={false}
 			/>
@@ -198,9 +198,9 @@ export const dotStory = () => {
 			<TextBlockComponent
 				html={htmlWithDot}
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isFirstParagraph={false}
 			/>
@@ -215,9 +215,9 @@ export const longWordStory = () => {
 			<TextBlockComponent
 				html={longWords}
 				format={{
-					theme: Pillar.News,
-					design: Design.Article,
-					display: Display.Standard,
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
 				}}
 				isFirstParagraph={false}
 			/>

@@ -10,7 +10,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { clearFix } from '@root/src/lib/mixins';
-import { Display } from '@guardian/types';
+import { ArticleDisplay } from '@guardian/libs';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 
@@ -217,7 +217,7 @@ const year = new Date().getFullYear();
 
 export const Footer: React.FC<{
 	pillars: PillarType[];
-	pillar: Theme;
+	pillar: ArticleTheme;
 	pageFooter: FooterType;
 }> = ({ pillars, pillar, pageFooter }) => (
 	<footer
@@ -228,7 +228,7 @@ export const Footer: React.FC<{
 	>
 		<div css={pillarWrap}>
 			<Pillars
-				display={Display.Standard}
+				display={ArticleDisplay.Standard}
 				pillars={pillars}
 				pillar={pillar}
 				showLastPillarDivider={false}

@@ -1,10 +1,7 @@
 // ----- Imports ----- //
+
 import 'regenerator-runtime/runtime.js';
-import {
-	AudioAtom,
-	KnowledgeQuizAtom,
-	PersonalityQuizAtom,
-} from '@guardian/atoms-rendering';
+import { AudioAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
@@ -37,6 +34,7 @@ import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
+import { hydrate as hydrateAtoms } from './atoms';
 
 // ----- Run ----- //
 
@@ -127,7 +125,6 @@ function formatDates(): void {
 		} catch (e) {
 			const message =
 				timestamp ?? 'because the data-date attribute was empty';
-
 			logger.error(`Unable to parse and format date ${message}`, e);
 		}
 	});
@@ -143,12 +140,8 @@ function insertEpic(): void {
 		Promise.all([userClient.isPremium(), acquisitionsClient.getEpics()])
 			.then(([isPremium, maybeEpic]) => {
 				if (!isPremium && maybeEpic.epic) {
-					const {
-						title,
-						body,
-						firstButton,
-						secondButton,
-					} = maybeEpic.epic;
+					const { title, body, firstButton, secondButton } =
+						maybeEpic.epic;
 					const epicProps = {
 						title,
 						body,
@@ -347,9 +340,8 @@ function callouts(): void {
 
 					submit(await data, form);
 				} catch (e) {
-					const errorPlaceholder = form.querySelector(
-						'.js-error-message',
-					);
+					const errorPlaceholder =
+						form.querySelector('.js-error-message');
 					if (errorPlaceholder) {
 						errorPlaceholder.textContent =
 							'There was a problem with the file you uploaded above. We accept images and pdfs up to 6MB';
@@ -388,42 +380,6 @@ function initAudioAtoms(): void {
 				h(AudioAtom, { id, trackUrl, pillar, kicker, title, duration }),
 				atom,
 			);
-		}
-	});
-}
-
-function hydrateQuizAtoms(): void {
-	Array.from(document.querySelectorAll('.js-quiz')).forEach((atom) => {
-		const props = atom.querySelector('.js-quiz-params')?.innerHTML;
-		try {
-			if (props) {
-				const quizProps = (JSON.parse(
-					props.replace(/&quot;/g, '"'),
-				) as unknown) as { quizType: string };
-				if (quizProps.quizType === 'personality') {
-					ReactDOM.hydrate(
-						h(
-							PersonalityQuizAtom,
-							(quizProps as unknown) as React.ComponentProps<
-								typeof PersonalityQuizAtom
-							>,
-						),
-						atom,
-					);
-				} else if (quizProps.quizType === 'knowledge') {
-					ReactDOM.hydrate(
-						h(
-							KnowledgeQuizAtom,
-							(quizProps as unknown) as React.ComponentProps<
-								typeof KnowledgeQuizAtom
-							>,
-						),
-						atom,
-					);
-				}
-			}
-		} catch (e) {
-			console.error(e);
 		}
 	});
 }
@@ -468,9 +424,8 @@ function richLinks(): void {
 								richLink.classList.add(`js-${pillar}`);
 							}
 
-							const placeholder = richLink.querySelector(
-								'.js-image',
-							);
+							const placeholder =
+								richLink.querySelector('.js-image');
 							if (placeholder && typeof image === 'string') {
 								const img = document.createElement('img');
 								img.addEventListener('load', (_) => {
@@ -513,9 +468,8 @@ function resizeEmailSignups(): void {
 	const emailSignupIframes = document.querySelectorAll('.js-email-signup');
 	Array.from(emailSignupIframes).forEach((emailSignupIframe) => {
 		if (isIframe(emailSignupIframe)) {
-			const innerIframe = emailSignupIframe.contentDocument?.querySelector(
-				'iframe',
-			);
+			const innerIframe =
+				emailSignupIframe.contentDocument?.querySelector('iframe');
 			if (innerIframe) {
 				innerIframe.style.width = '100%';
 			}
@@ -538,7 +492,7 @@ callouts();
 renderComments();
 hasSeenCards();
 initAudioAtoms();
-hydrateQuizAtoms();
+hydrateAtoms();
 localDates();
 richLinks();
 hydrateClickToView();

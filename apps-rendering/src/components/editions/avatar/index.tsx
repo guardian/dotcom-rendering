@@ -1,12 +1,12 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import type { Sizes } from '@guardian/image-rendering';
-import { Img } from '@guardian/image-rendering';
+import Img from '@guardian/common-rendering/src/components/img';
+import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import { map, none, some, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { pipe } from 'lib';
+import { convertFormatToArticleFormat, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 
 // ----- Component ----- //
@@ -36,7 +36,7 @@ const Avatar: FC<Props> = ({ item }) => {
 				image={image}
 				sizes={sizes}
 				className={some(imgStyles)}
-				format={format}
+				format={convertFormatToArticleFormat(format)}
 				supportsDarkMode={false}
 				lightbox={none}
 			/>

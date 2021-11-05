@@ -22,8 +22,7 @@ const srcset =
 
 const galleryImage: Image = {
 	kind: ElementKind.Image,
-	src:
-		'https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=500&quality=85&fit=bounds&s=94dc44b35cec62a756b7987b9d4ddd0c',
+	src: 'https://i.guim.co.uk/img/media/3e1d87f40e2ba9dc7607584222b82463c66dab26/0_0_2999_3543/master/2999.jpg?width=500&quality=85&fit=bounds&s=94dc44b35cec62a756b7987b9d4ddd0c',
 	srcset: srcset,
 	dpr2Srcset: srcset,
 	alt: some('image'),

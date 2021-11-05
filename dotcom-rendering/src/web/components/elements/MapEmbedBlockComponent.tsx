@@ -9,7 +9,7 @@ export const MapEmbedBlockComponent: React.FC<{
 	width: number;
 	title?: string;
 	caption?: string;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	credit?: string;
 }> = ({ embedUrl, title, width, height, caption, format, palette, credit }) => {

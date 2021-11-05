@@ -11,13 +11,14 @@ import { Pillar } from '@guardian/types';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
-import { Role, none, some } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import { Design, Display, Format } from '@guardian/types';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { act } from 'react-dom/test-utils';
 import { unmountComponentAtNode, render as renderDom } from 'react-dom';
 import { EmbedKind } from 'embed';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
+import { ArticleElementRole } from '@guardian/libs';
 
 const mockFormat: Format = {
 	theme: Pillar.News,
@@ -45,7 +46,7 @@ const imageElement = (): BodyElement => ({
 	credit: some('credit'),
 	width: 500,
 	height: 500,
-	role: Role.Standard,
+	role: ArticleElementRole.Standard,
 });
 
 const imageElementWithRole = () => ({
@@ -178,15 +179,13 @@ const timelineElement = (): BodyElement => ({
 		{
 			title: ' ',
 			date: '1 May 2019',
-			body:
-				'<p><a href="https://www.theguardian.com/media/2019/may/01/julian-assange-jailed-for-50-weeks-for-breaching-bail-in-2012">He is jailed for 50 weeks</a>&nbsp;in the UK for breaching his bail conditions back in 2012. An apology letter from Assange is read out in court, but the judge rules that he had engaged in a \'deliberate attempt to evade justice\'. On the following day <a href="https://www.theguardian.com/media/2019/may/02/us-begins-extradition-case-against-julian-assange-in-london">the US extradition proceedings were formally started</a>.&nbsp;</p>',
+			body: '<p><a href="https://www.theguardian.com/media/2019/may/01/julian-assange-jailed-for-50-weeks-for-breaching-bail-in-2012">He is jailed for 50 weeks</a>&nbsp;in the UK for breaching his bail conditions back in 2012. An apology letter from Assange is read out in court, but the judge rules that he had engaged in a \'deliberate attempt to evade justice\'. On the following day <a href="https://www.theguardian.com/media/2019/may/02/us-begins-extradition-case-against-julian-assange-in-london">the US extradition proceedings were formally started</a>.&nbsp;</p>',
 			unixDate: 1556732925,
 		},
 		{
 			title: ' ',
 			date: '13 May 2019',
-			body:
-				'<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
+			body: '<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
 			unixDate: 1557769725,
 		},
 	],

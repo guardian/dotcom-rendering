@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-
-import { isAdBlockInUse } from '@root/src/web/lib/detectAdBlocker';
+import { isAdBlockInUse } from '@guardian/commercial-core';
 
 /**
  * @description
@@ -12,9 +11,7 @@ export const useAdBlockInUse = () => {
 	useEffect(() => {
 		// eslint-disable-next-line @typescript-eslint/no-floating-promises
 		isAdBlockInUse().then((blockerDetected) => {
-			// We're using react state here to trigger the rerender, but only
-			// if a blocker was detected
-			if (blockerDetected) setIsInUse(true);
+			setIsInUse(blockerDetected);
 		});
 	}, []);
 

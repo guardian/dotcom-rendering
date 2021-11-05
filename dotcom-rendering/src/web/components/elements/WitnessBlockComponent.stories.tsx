@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import {
@@ -31,9 +31,9 @@ export const WitnessTextBlockComponentDefault = () => (
 			authorName="Louise Griffiths"
 			dateCreated="2016-01-29T22:19:51Z"
 			palette={decidePalette({
-				theme: Pillar.Sport,
-				design: Design.Article,
-				display: Display.Standard,
+				theme: ArticlePillar.Sport,
+				design: ArticleDesign.Standard,
+				display: ArticleDisplay.Standard,
 			})}
 		/>
 	</div>
@@ -43,8 +43,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumlandscapecropdouble.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumlandscapecropdouble.jpg',
 		typeData: {
 			name: 'mediumlandscapecropdouble',
 		},
@@ -52,8 +51,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumlandscapecrop.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumlandscapecrop.jpg',
 		typeData: {
 			name: 'mediumlandscapecrop',
 		},
@@ -61,8 +59,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumoriginalaspectdouble.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumoriginalaspectdouble.jpg',
 		typeData: {
 			name: 'mediumoriginalaspectdouble',
 		},
@@ -70,8 +67,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-small.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-small.jpg',
 		typeData: {
 			name: 'small',
 		},
@@ -79,8 +75,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-medium.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-medium.jpg',
 		typeData: {
 			name: 'medium',
 		},
@@ -88,8 +83,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-large.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-large.jpg',
 		typeData: {
 			name: 'large',
 		},
@@ -97,8 +91,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-extralarge.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-extralarge.jpg',
 		typeData: {
 			name: 'extralarge',
 		},
@@ -106,8 +99,7 @@ const assets: WitnessAssetType[] = [
 	{
 		type: 'Image',
 		mimeType: 'image/jpeg',
-		file:
-			'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumdouble.jpg',
+		file: 'https://gu-witness.s3.amazonaws.com/image/1440505256168e17c87ce879c40d3f575b6625340fb7c-mediumdouble.jpg',
 		typeData: {
 			name: 'mediumdouble',
 		},
@@ -129,9 +121,9 @@ export const WitnessImageBlockComponentDefault = () => (
 			dateCreated="2015-08-25T12:20:58Z"
 			alt="Risk - Home Made Space expansion"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.Sport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Sport,
 			})}
 		/>
 	</div>
@@ -151,9 +143,9 @@ export const WitnessVideoBlockComponentDefault = () => (
 			youtubeHtml='<iframe width="440" height="330" src="https://www.youtube.com/embed/N9Cgy-ke5-s?origin=https://www.theguardian.com&widgetid=1&modestbranding=1" frameborder="0" allowfullscreen></iframe>'
 			dateCreated="2015-08-27T13:32:32Z"
 			palette={decidePalette({
-				display: Display.Standard,
-				design: Design.Article,
-				theme: Pillar.Sport,
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.Sport,
 			})}
 		/>
 	</div>

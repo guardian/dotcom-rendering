@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { Img } from '@guardian/image-rendering';
+import Img from '@guardian/common-rendering/src/components/img';
 import { palette, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import {
@@ -27,7 +27,7 @@ import { stars } from 'components/starRating';
 import { formatSeconds, makeRelativeDate } from 'date';
 import { border } from 'editorialPalette';
 import type { Image } from 'image';
-import { pipe } from 'lib';
+import { convertFormatToArticleFormat, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
@@ -235,10 +235,8 @@ const cardStyles = (
 		}
 
 		case RelatedItemType.LIVE: {
-			const {
-				liveblogBackground,
-				liveblogDarkBackground,
-			} = getThemeStyles(format.theme);
+			const { liveblogBackground, liveblogDarkBackground } =
+				getThemeStyles(format.theme);
 			return css`
 				background: ${liveblogBackground};
 				h3,
@@ -417,7 +415,7 @@ const cardImage = (
 							],
 							default: '100%',
 						}}
-						format={format}
+						format={convertFormatToArticleFormat(format)}
 						className={none}
 						supportsDarkMode
 						lightbox={none}

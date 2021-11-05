@@ -9,11 +9,11 @@ class ClientDevLogger implements LoggerFunctions {
 		console.info(message);
 	}
 
-	warn(message: string, error?: Error): void {
+	warn(message: string, error?: Error | unknown): void {
 		console.warn(message, error);
 	}
 
-	error(message: string, error?: Error): void {
+	error(message: string, error?: Error | unknown): void {
 		console.error(message, error);
 	}
 }

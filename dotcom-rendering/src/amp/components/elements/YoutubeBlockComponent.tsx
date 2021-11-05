@@ -42,7 +42,7 @@ const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
 
 export const YoutubeBlockComponent: React.FC<{
 	element: YoutubeBlockElement;
-	pillar: Theme;
+	pillar: ArticleTheme;
 	adTargeting?: AdTargeting;
 }> = ({ element, pillar, adTargeting }) => {
 	// https://www.ampproject.org/docs/reference/components/amp-youtube
@@ -53,6 +53,7 @@ export const YoutubeBlockComponent: React.FC<{
 		layout: 'responsive',
 		width: '16',
 		height: '9',
+		'data-block-on-consent': true, // Block player until consent is obtained
 		'data-param-modestbranding': true, // Remove YouTube logo
 		credentials: 'omit',
 	};

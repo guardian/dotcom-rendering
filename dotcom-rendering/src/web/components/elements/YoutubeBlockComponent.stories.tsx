@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Display, Design, Pillar } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
@@ -48,14 +48,14 @@ export const Default = () => {
 			</p>
 			<YoutubeBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
@@ -86,14 +86,14 @@ export const Vertical = () => {
 			</p>
 			<YoutubeBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
@@ -126,14 +126,14 @@ export const Expired = () => {
 			</p>
 			<YoutubeBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
@@ -167,14 +167,14 @@ export const WithOverlayImage = () => {
 			</p>
 			<YoutubeBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
@@ -209,14 +209,14 @@ export const WithPosterImage = () => {
 			</p>
 			<YoutubeBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
@@ -225,28 +225,23 @@ export const WithPosterImage = () => {
 				duration={333}
 				posterImage={[
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
 						width: 2000,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
 						width: 1000,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
 						width: 500,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
 						width: 140,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
 						width: 4255,
 					},
 				]}
@@ -277,14 +272,14 @@ export const WithPosterAndOverlayImage = () => {
 			</p>
 			<YoutubeBlockComponent
 				format={{
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				}}
 				palette={decidePalette({
-					display: Display.Standard,
-					design: Design.Article,
-					theme: Pillar.News,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
 				})}
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
@@ -294,28 +289,23 @@ export const WithPosterAndOverlayImage = () => {
 				duration={333}
 				posterImage={[
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
 						width: 2000,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
 						width: 1000,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
 						width: 500,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
 						width: 140,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
 						width: 4255,
 					},
 				]}

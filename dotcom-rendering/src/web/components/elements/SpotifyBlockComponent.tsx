@@ -6,7 +6,7 @@ export const SpotifyBlockComponent: React.FC<{
 	height?: number;
 	width?: number;
 	title?: string;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	caption?: string;
 	credit?: string;

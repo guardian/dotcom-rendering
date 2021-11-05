@@ -51,8 +51,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p><strong>Faux H3 text</strong></p>',
 						},
@@ -67,14 +66,12 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
 							spaceAbove: 'tight',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<h3>Faux H3 text</h3>',
 						},
@@ -93,11 +90,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p><strong>Strong 1</strong> <strong>Strong 2</strong></p>',
+							html: '<p><strong>Strong 1</strong> <strong>Strong 2</strong></p>',
 						},
 					],
 				},
@@ -110,14 +105,12 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
 							spaceAbove: 'tight',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<h3>Strong 1 Strong 2</h3>',
 						},
@@ -136,11 +129,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p><strong>Strong 1</strong> <strong>Strong 2 <a href="example.com">Some Link</a></strong></p>',
+							html: '<p><strong>Strong 1</strong> <strong>Strong 2 <a href="example.com">Some Link</a></strong></p>',
 						},
 					],
 				},
@@ -153,17 +144,14 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
 							spaceAbove: 'tight',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<h3>Strong 1 Strong 2 <a href="example.com">Some Link</a></h3>',
+							html: '<h3>Strong 1 Strong 2 <a href="example.com">Some Link</a></h3>',
 						},
 					],
 				},
@@ -180,11 +168,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p><strong>Strong 1</strong> some text inbetween <strong>Strong 2</strong></p>',
+							html: '<p><strong>Strong 1</strong> some text inbetween <strong>Strong 2</strong></p>',
 						},
 					],
 				},
@@ -197,17 +183,14 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
 							spaceAbove: 'tight',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<h3>Strong 1 some text inbetween Strong 2</h3>',
+							html: '<h3>Strong 1 some text inbetween Strong 2</h3>',
 						},
 					],
 				},
@@ -224,11 +207,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p>Some text before <strong>Strong 1</strong></p>',
+							html: '<p>Some text before <strong>Strong 1</strong></p>',
 						},
 					],
 				},
@@ -241,11 +222,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p>Some text before <strong>Strong 1</strong></p>',
+							html: '<p>Some text before <strong>Strong 1</strong></p>',
 						},
 					],
 				},
@@ -262,11 +241,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p><strong>Strong 1</strong>Some text after</p>',
+							html: '<p><strong>Strong 1</strong>Some text after</p>',
 						},
 					],
 				},
@@ -279,11 +256,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p><strong>Strong 1</strong>Some text after</p>',
+							html: '<p><strong>Strong 1</strong>Some text after</p>',
 						},
 					],
 				},
@@ -300,11 +275,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p>Some text before <strong>Strong 1</strong>Some text after</p>',
+							html: '<p>Some text before <strong>Strong 1</strong>Some text after</p>',
 						},
 					],
 				},
@@ -317,11 +290,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html:
-								'<p>Some text before <strong>Strong 1</strong>Some text after</p>',
+							html: '<p>Some text before <strong>Strong 1</strong>Some text after</p>',
 						},
 					],
 				},
@@ -338,8 +309,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p><strong>abc</strong>some other text</p>',
 						},
@@ -354,8 +324,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p><strong>abc</strong>some other text</p>',
 						},
@@ -374,15 +343,12 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.ItemLinkBlockElement',
+							_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement',
 							elementId: 'mockId',
-							html:
-								'<ul><li><strong>Item link block</strong><a href="https://www.theguardian.com">Link</a></li></ul>',
+							html: '<ul><li><strong>Item link block</strong><a href="https://www.theguardian.com">Link</a></li></ul>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p><strong>Faux H3 text</strong></p>',
 						},
@@ -397,21 +363,17 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.ItemLinkBlockElement',
+							_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement',
 							elementId: 'mockId',
-							html:
-								'<ul><li><strong>Item link block</strong><a href="https://www.theguardian.com">Link</a></li></ul>',
+							html: '<ul><li><strong>Item link block</strong><a href="https://www.theguardian.com">Link</a></li></ul>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
 							spaceAbove: 'loose',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<h3>Faux H3 text</h3>',
 						},
@@ -430,14 +392,12 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: 'some HTML text',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p><strong>Faux H3 text</strong></p>',
 						},
@@ -452,20 +412,17 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: 'some HTML text',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
 							spaceAbove: 'tight',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<h3>Faux H3 text</h3>',
 						},
@@ -484,8 +441,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>★★★★☆</p>',
 						},
@@ -501,8 +457,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.StarRatingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement',
 							elementId: 'mockId',
 							rating: 4,
 							size: 'large',
@@ -523,8 +478,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>I give this 4 ★★★★☆</p>',
 						},
@@ -546,8 +500,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>★★☆</p>',
 						},
@@ -569,10 +522,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
-							html: '<h2>★★★★☆</h2>',
+							html: '<h2 data-ignore="global-h2-styling">★★★★☆</h2>',
 						},
 					],
 				},
@@ -592,8 +544,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>☆☆☆☆☆</p>',
 						},
@@ -609,8 +560,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.StarRatingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement',
 							elementId: 'mockId',
 							rating: 0,
 							size: 'large',
@@ -631,8 +581,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>★★★★★</p>',
 						},
@@ -648,8 +597,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.StarRatingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement',
 							elementId: 'mockId',
 							rating: 5,
 							size: 'large',
@@ -670,8 +618,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>★☆☆☆☆</p>',
 						},
@@ -707,8 +654,7 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>☆☆☆☆☆</p>',
 						},
@@ -770,10 +716,9 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId',
-							html: '<h2>Some text</h2>',
+							html: '<h2 data-ignore="global-h2-styling">Some text</h2>',
 						},
 					],
 				},
@@ -787,17 +732,15 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
 							spaceAbove: 'loose',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+							_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 							elementId: 'mockId',
 							position: 1,
-							html: '<h2>Some text</h2>',
+							html: '<h2 data-ignore="global-h2-styling">Some text</h2>',
 							format: NumberedList.format,
 						},
 					],
@@ -816,29 +759,25 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId1',
-							html: '<h2>Some text</h2>',
+							html: '<h2 data-ignore="global-h2-styling">Some text</h2>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.TextBlockElement',
+							_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 							elementId: 'mockId',
 							html: '<p>☆☆☆☆☆</p>',
 						},
 						images[0],
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId2',
-							html: '<h2>Other text</h2>',
+							html: '<h2 data-ignore="global-h2-styling">Other text</h2>',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.SubheadingBlockElement',
+							_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 							elementId: 'mockId3',
-							html: '<h2>More text</h2>',
+							html: '<h2 data-ignore="global-h2-styling">More text</h2>',
 						},
 					],
 				},
@@ -852,17 +791,15 @@ describe('Enhance Numbered Lists', () => {
 					...metaData,
 					elements: [
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
 							spaceAbove: 'loose',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+							_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 							elementId: 'mockId1',
 							position: 1,
-							html: '<h2>Some text</h2>',
+							html: '<h2 data-ignore="global-h2-styling">Some text</h2>',
 							format: NumberedList.format,
 						},
 						{
@@ -870,32 +807,28 @@ describe('Enhance Numbered Lists', () => {
 							starRating: 0,
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
 							spaceAbove: 'loose',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+							_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 							elementId: 'mockId2',
 							position: 2,
-							html: '<h2>Other text</h2>',
+							html: '<h2 data-ignore="global-h2-styling">Other text</h2>',
 							format: NumberedList.format,
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.DividerBlockElement',
+							_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 							size: 'full',
 							spaceAbove: 'loose',
 						},
 						{
-							_type:
-								'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+							_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 
 							elementId: 'mockId3',
 							position: 3,
-							html: '<h2>More text</h2>',
+							html: '<h2 data-ignore="global-h2-styling">More text</h2>',
 							format: NumberedList.format,
 						},
 					],

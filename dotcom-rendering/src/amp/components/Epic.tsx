@@ -14,9 +14,57 @@ import {
 	neutral,
 	error,
 	brandBackground,
+	border,
 } from '@guardian/src-foundations/palette';
-import { JsonScript } from '@root/src/amp/components/JsonScript';
 
+export const epicChoiceCardCss = `
+	.epicChoiceCard {
+		color: ${neutral[46]};
+		cursor: pointer;
+		border-radius: 4px;
+		box-shadow: inset 0 0 0 2px ${border.primary};
+		box-sizing: border-box;
+		min-height: 44px;
+		margin: 0 0 8px 0;
+		border: none;
+		outline: none;
+		background-color: transparent;
+		font-weight: 700;
+		font-size: 1.0625rem;
+		font-family: GuardianTextSans, Guardian Text Sans Web, Helvetica Neue,
+			Helvetica, Arial, Lucida Grande, sans-serif;
+		text-align: center;
+	}
+	.epicChoiceCard:hover {
+		box-shadow: inset 0 0 0 4px ${brand[500]};
+		color: ${brand[400]};
+	}
+	.epicChoiceCardSelected {
+		box-shadow: inset 0 0 0 4px ${brand[500]};
+		background-color: #e3f6ff;
+		color: ${brand[400]};
+	}
+`;
+
+const choiceCardGroupColumn = css`
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	box-sizing: border-box;
+`;
+const choiceCardGroupRow = css`
+	display: grid;
+	justify-content: space-between;
+	width: 100%;
+	column-gap: 8px;
+	row-gap: 8px;
+	box-sizing: border-box;
+	grid-template-columns: repeat(3, 1fr);
+`;
+const choiceCardContainer = css`
+	position: relative;
+	margin-top: 8px;
+`;
 const epicStyle = css`
 	border-top: 0.0625rem solid ${brandAlt[400]};
 	background-color: ${neutral[97]};
@@ -295,71 +343,19 @@ const reminderWrapperStyle = css`
 	}
 `;
 
-interface ABTest {
-	name: string;
-	variant: string;
-}
-
-const buildUrl = (
-	contributionsUrl: string,
-	articleUrl: string,
-	campaignCode: string,
-	componentId: string,
-	abTest: ABTest,
-): string => {
-	const acquisitionData = {
-		source: 'GOOGLE_AMP',
-		componentType: 'ACQUISITIONS_EPIC',
-		componentId,
-		campaignCode,
-		abTest,
-		referrerUrl: articleUrl,
-	};
-	return `${contributionsUrl}?INTCMP=${campaignCode}&acquisitionData=${JSON.stringify(
-		acquisitionData,
-	)}`;
-};
-
-const getReminderDate = (date: Date = new Date()): Date => {
-	const monthsAhead = date.getDate() < 20 ? 1 : 2;
-	const reminderDate = new Date();
-	reminderDate.setMonth(date.getMonth() + monthsAhead);
-
-	return reminderDate;
-};
-
 export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
-	const reminderDate = getReminderDate();
-	const reminderMonth = reminderDate.toLocaleString('default', {
-		month: 'long',
-	});
-	const reminderYear = reminderDate.getFullYear();
-	const reminderDateString = `${reminderDate.getFullYear()}-${(
-		reminderDate.getMonth() + 1
-	)
-		.toString()
-		.padStart(2, '0')}-01`;
-	const epicStateJson = {
-		hideButtons: false,
-		hideReminderWrapper: true,
-		hideSuccessMessage: true,
-		hideFailureMessage: true,
-		hideReminderCta: false,
-		hideReminderForm: false,
-		headerText: `Remind me in ${reminderMonth} ${reminderYear}`,
-	};
 	const supportDotcomComponentsUrl =
 		process.env.GU_STAGE === 'PROD'
 			? 'https://contributions.guardianapis.com'
-			: 'https://contributions.code.dev-guardianapis.com';
+			: process?.env?.SDC_URL ??
+			  'https://contributions.code.dev-guardianapis.com';
+
 	const setReminderUrl = `${supportDotcomComponentsUrl}/amp/set_reminder`;
-	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS`;
+	const epicUrl = `${supportDotcomComponentsUrl}/amp/epic?ampVariantAssignments=VARIANTS&webUrl=${webURL}`;
 
 	return (
 		<div>
-			<amp-state id="epicState">
-				<JsonScript o={epicStateJson} />
-			</amp-state>
+			<amp-state id="epicState" src={epicUrl} />
 
 			<amp-list
 				layout="fixed-height"
@@ -367,7 +363,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 				// will not display. This is such an edge case that we can live with it, and in general it will fill the
 				// space.
 				height="1px"
-				src={epicUrl}
+				src="amp-state:epicState"
 				credentials="include"
 				id="epic-container"
 				single-item="true"
@@ -435,32 +431,65 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							<MoustacheVariable name="highlightedText" />
 						</span>
 						<br />
+
+						<MoustacheSection name="choiceCards">
+							<div css={choiceCardContainer}>
+								<br />
+								<div css={choiceCardGroupRow}>
+									<button
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.frequency == 'ONE_OFF' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { frequency: 'ONE_OFF', amount: epicState.choiceCards.amounts['ONE_OFF'][1] } } } })"
+									>
+										<span>Single</span>
+									</button>
+									<button
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.frequency == 'MONTHLY' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { frequency: 'MONTHLY', amount: epicState.choiceCards.amounts['MONTHLY'][1] } } } })"
+									>
+										<span>Monthly</span>
+									</button>
+									<button
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.frequency == 'ANNUAL' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { frequency: 'ANNUAL', amount: epicState.choiceCards.amounts['ANNUAL'][1] } } } })"
+									>
+										<span>Annual</span>
+									</button>
+								</div>
+								<br />
+								<div css={choiceCardGroupColumn}>
+									<button
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.amount == epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][0] ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { amount: epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][0] } } } })"
+									>
+										<span data-amp-bind-text="epicState.choiceCards.currencySymbol + epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][0] + epicState.choiceCards.choiceCardLabelSuffix[epicState.choiceCards.choiceCardSelection.frequency]" />
+									</button>
+									<button
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.amount == epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][1] ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { amount: epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][1] } } } })"
+									>
+										<span data-amp-bind-text="epicState.choiceCards.currencySymbol + epicState.choiceCards.amounts[epicState.choiceCards.choiceCardSelection.frequency][1] + epicState.choiceCards.choiceCardLabelSuffix[epicState.choiceCards.choiceCardSelection.frequency]" />
+									</button>
+									<button
+										data-amp-bind-class="epicState.choiceCards.choiceCardSelection.amount == 'other' ? epicState.choiceCards.classNames.choiceCardSelected : epicState.choiceCards.classNames.choiceCard"
+										on="tap:AMP.setState({ epicState: { choiceCards: { choiceCardSelection: { amount: 'other' } } } })"
+									>
+										<span>Other</span>
+									</button>
+								</div>
+							</div>
+						</MoustacheSection>
+
 						<div
 							css="buttonsWrapper"
-							data-amp-bind-hidden="epicState.hideButtons"
+							data-amp-bind-hidden="epicState.reminder.hideButtons"
 						>
 							<div css={buttonsStyle}>
 								<div>
 									<MoustacheSection name="cta">
+										{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 										<a
-											href={buildUrl(
-												moustacheVariable('url'),
-												webURL,
-												moustacheVariable(
-													'campaignCode',
-												),
-												moustacheVariable(
-													'componentId',
-												),
-												{
-													name: moustacheVariable(
-														'testName',
-													),
-													variant: moustacheVariable(
-														'variantName',
-													),
-												},
-											)}
+											id="primaryCta"
+											data-amp-bind-href="epicState.choiceCards ? epicState.ctaUrl + '&selected-contribution-type=' + epicState.choiceCards.choiceCardSelection.frequency + '&selected-amount=' + epicState.choiceCards.choiceCardSelection.amount : epicState.ctaUrl"
 											css={yellowButtonStyle}
 										>
 											<MoustacheVariable name="text" />
@@ -477,12 +506,12 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 										</a>
 									</MoustacheSection>
 								</div>
-								<div data-amp-bind-hidden="epicState.hideReminderCta">
+								<div data-amp-bind-hidden="epicState.reminder.hideReminderCta">
 									<button
 										css={transparentButtonStyle}
-										on="tap:AMP.setState({epicState:{hideReminderWrapper: false, hideButtons: true}}),epic-container.changeToLayoutContainer()"
+										on="tap:AMP.setState({epicState:{reminder:{hideReminderWrapper: false, hideButtons: true}}}),epic-container.changeToLayoutContainer()"
 									>
-										Remind me in {reminderMonth}
+										<span data-amp-bind-text="epicState.reminder.reminderCta" />
 									</button>
 								</div>
 							</div>
@@ -499,17 +528,17 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 
 						<div
 							css={reminderWrapperStyle}
-							data-amp-bind-hidden="epicState.hideReminderWrapper"
+							data-amp-bind-hidden="epicState.reminder.hideReminderWrapper"
 						>
 							<div css={quadLineStyle} />
 							<div css={reminderFormTopStyle}>
 								<div
 									css={epicHeaderStyle}
-									data-amp-bind-text="epicState.headerText"
+									data-amp-bind-text="'Remind me in ' + epicState.reminder.reminderLabel"
 								/>
 								<button
 									css={closeButtonStyle}
-									on="tap:AMP.setState({epicState:{hideReminderWrapper: true, hideButtons: false}}),reminderForm.clear"
+									on="tap:AMP.setState({epicState:{reminder:{hideReminderWrapper: true, hideButtons: false}}}),reminderForm.clear"
 								>
 									<svg
 										viewBox="0 0 30 30"
@@ -525,13 +554,13 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							</div>
 							<form
 								id="reminderForm"
-								data-amp-bind-hidden="epicState.hideReminderForm"
+								data-amp-bind-hidden="epicState.reminder.hideReminderForm"
 								method="post"
 								action-xhr={setReminderUrl}
 								target="_blank"
 								custom-validation-reporting="interact-and-submit"
 								encType="application/x-www-form-urlencoded"
-								on="submit-success:AMP.setState({epicState:{hideReminderCta: true, hideSuccessMessage: false, hideReminderForm: true, headerText: 'Thank you! Your reminder is set.'}});submit-error:AMP.setState({epicState:{hideFailureMessage:false}})"
+								on="submit-success:AMP.setState({epicState:{reminder:{hideReminderCta: true, hideSuccessMessage: false, hideReminderForm: true, headerText: 'Thank you! Your reminder is set.'}}});submit-error:AMP.setState({epicState:{reminder:{hideFailureMessage:false}}})"
 							>
 								<div css={inputLabelStyle}>Email address</div>
 								<div
@@ -578,7 +607,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								<input
 									type="hidden"
 									name="reminderDate"
-									value={reminderDateString}
+									data-amp-bind-value="epicState.reminder.reminderPeriod"
 								/>
 								<input
 									css={emailInputStyle}
@@ -605,16 +634,16 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								</button>
 								<div
 									css={reminderErrorStyle}
-									data-amp-bind-hidden="epicState.hideFailureMessage"
+									data-amp-bind-hidden="epicState.reminder.hideFailureMessage"
 								>
 									Sorry we couldn&apos;t set a reminder for
 									you this time. Please try again later.
 								</div>
 								<div css={reminderTermsStyle}>
 									We will send you a maximum of two emails in{' '}
-									{reminderMonth} {reminderYear}. To find out
-									what personal data we collect and how we use
-									it, view our{' '}
+									<span data-amp-bind-text="epicState.reminder.reminderLabel" />
+									. To find out what personal data we collect
+									and how we use it, view our{' '}
 									<a
 										target="_blank"
 										href="https://www.theguardian.com/help/privacy-policy"
@@ -626,12 +655,13 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							</form>
 							<div
 								css={successMessageStyle}
-								data-amp-bind-hidden="epicState.hideSuccessMessage"
+								data-amp-bind-hidden="epicState.reminder.hideSuccessMessage"
 							>
 								We will be in touch to remind you to contribute.
 								Look out for a message in your inbox in{' '}
-								{reminderMonth} {reminderYear}. If you have any
-								questions about contributing, please{' '}
+								<span data-amp-bind-text="epicState.reminder.reminderLabel" />
+								. If you have any questions about contributing,
+								please{' '}
 								<a
 									target="_blank"
 									href="mailto:contribution.support@theguardian.com"

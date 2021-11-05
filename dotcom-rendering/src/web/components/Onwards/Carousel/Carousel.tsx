@@ -6,13 +6,14 @@ import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { space } from '@guardian/src-foundations';
 import { neutral, brandAlt, text } from '@guardian/src-foundations/palette';
-import { Design, Display } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { Hide } from '@frontend/web/components/Hide';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 import { Card } from '@frontend/web/components/Card/Card';
 import { LI } from '@frontend/web/components/Card/components/LI';
+import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
@@ -184,7 +185,7 @@ const buttonContainerStyle = css`
 	flex-direction: column;
 	justify-content: center;
 	position: absolute;
-	z-index: 20;
+	${getZIndex('onwardsCarousel')}
 	height: 100%;
 	padding-bottom: 36px; /* Align buttons centrally with cards */
 
@@ -314,7 +315,7 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 	return trails.map((trail) => {
 		const format = {
 			...trail.format,
-			display: Display.Immersive,
+			display: ArticleDisplay.Immersive,
 		};
 		return {
 			...trail,
@@ -326,7 +327,7 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 
 type CarouselCardProps = {
 	isFirst: boolean;
-	format: Format;
+	format: ArticleFormat;
 	linkTo: string;
 	headlineText: string;
 	webPublicationDate: string;
@@ -367,8 +368,8 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			minWidthInPixels={220}
 			isFullCardImage={isFullCardImage}
 			showQuotes={
-				format.design === Design.Comment ||
-				format.design === Design.Letter
+				format.design === ArticleDesign.Comment ||
+				format.design === ArticleDesign.Letter
 			}
 			dataLinkName={dataLinkName}
 		/>

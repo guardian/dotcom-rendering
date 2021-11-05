@@ -34,7 +34,7 @@ const ListStyle = (iconColour: string) => css`
 	}
 `;
 
-const headerStyle = (pillar: Theme) => css`
+const headerStyle = (pillar: ArticleTheme) => css`
 	${headline.small()};
 	font-weight: 500;
 	padding: 3px 10px 24px;
@@ -42,7 +42,7 @@ const headerStyle = (pillar: Theme) => css`
 	background-color: ${pillarPalette_DO_NOT_USE[pillar].main};
 `;
 
-const bylineStyle = (pillar: Theme) => css`
+const bylineStyle = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
 	color: ${pillarPalette_DO_NOT_USE[pillar].main};
 	padding-top: 3px;
@@ -57,7 +57,7 @@ const bylineStyle = (pillar: Theme) => css`
 	}
 `;
 
-const standfirstStyle = (pillar: Theme) => css`
+const standfirstStyle = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
 	color: ${palette.neutral[100]};
 	background-color: ${pillarPalette_DO_NOT_USE[pillar].dark};
@@ -85,8 +85,7 @@ const fullWidth = css`
 const Headline: React.FC<{
 	headlineText: string;
 	standfirst: string;
-	pillar: Theme;
-	starRating?: number;
+	pillar: ArticleTheme;
 }> = ({ headlineText, pillar, standfirst }) => {
 	return (
 		<div css={fullWidth}>
@@ -103,14 +102,13 @@ const Headline: React.FC<{
 
 export const TopMetaLiveblog: React.FC<{
 	articleData: ArticleModel;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ articleData, pillar }) => (
 	<header>
 		<Headline
 			headlineText={articleData.headline}
 			standfirst={articleData.standfirst}
 			pillar={pillar}
-			starRating={articleData.starRating}
 		/>
 
 		{articleData.mainMediaElements.map((element, i) => (

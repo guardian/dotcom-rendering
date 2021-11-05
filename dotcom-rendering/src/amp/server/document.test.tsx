@@ -43,7 +43,6 @@ test('produces valid AMP doc', async () => {
 		section: CAPI.sectionName,
 		contentType: CAPI.contentType,
 		id: CAPI.pageId,
-		beacon: `${CAPI.beaconURL}/count/pv.gif`,
 		neilsenAPIID: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX',
 		domain: 'amp.theguardian.com',
 		permutive: {

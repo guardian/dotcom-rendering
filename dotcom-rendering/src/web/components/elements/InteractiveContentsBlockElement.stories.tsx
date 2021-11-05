@@ -6,13 +6,12 @@ import { enhanceInteractiveContentsElements } from '@root/src/model/enhance-inte
 import { InteractiveContentsBlockElement } from './InteractiveContentsBlockElement';
 
 // @ts-ignore: we know that NumberedList fixture has an interactive content block
-const interactiveContentsBlock: InteractiveContentsBlockElement = enhanceInteractiveContentsElements(
-	NumberedList,
-).blocks[0].elements.find(
-	(block) =>
-		block._type ===
-		'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
-);
+const interactiveContentsBlock: InteractiveContentsBlockElement =
+	enhanceInteractiveContentsElements(NumberedList).blocks[0].elements.find(
+		(block) =>
+			block._type ===
+			'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+	);
 
 export default {
 	component: InteractiveContentsBlockElement,

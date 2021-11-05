@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { brand, brandText } from '@guardian/src-foundations/palette';
 import { headline } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Display, Design } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { navInputCheckboxId } from './Nav/config';
 
@@ -16,9 +16,9 @@ export const preLeftColPillarWidth = 134;
 export const preDesktopPillarWidth = 'auto';
 
 // CSS
-const pillarsStyles = (display: Display) => css`
+const pillarsStyles = (display: ArticleDisplay) => css`
 	${until.tablet} {
-		display: ${display === Display.Immersive && 'none'};
+		display: ${display === ArticleDisplay.Immersive && 'none'};
 	}
 	clear: right;
 	margin: 0;
@@ -56,13 +56,13 @@ const pillarsStyles = (display: Display) => css`
 		bottom: 0;
 		left: 0;
 		right: 0;
-		height: ${display === Display.Immersive ? '48px' : '36px'};
+		height: ${display === ArticleDisplay.Immersive ? '48px' : '36px'};
 		${from.tablet} {
 			border-bottom: 0;
 			height: 49px;
 		}
 		${from.desktop} {
-			height: ${display === Display.Immersive ? '48px' : '42px'};
+			height: ${display === ArticleDisplay.Immersive ? '48px' : '42px'};
 		}
 	}
 `;
@@ -137,7 +137,7 @@ const pillarDivider = css`
 	}
 `;
 
-const linkStyle = (display: Display) => css`
+const linkStyle = (display: ArticleDisplay) => css`
 	${headline.xxxsmall()};
 	box-sizing: border-box;
 	font-weight: 900;
@@ -145,44 +145,46 @@ const linkStyle = (display: Display) => css`
 	cursor: pointer;
 	display: block;
 	font-size: 15.4px;
-	height: ${display === Display.Immersive ? '48px' : '36px'};
-	padding-top: ${display === Display.Immersive ? '10px' : '9px'};
-	padding-right: ${display === Display.Immersive ? '5px' : '5px'};
-	padding-bottom: ${display === Display.Immersive ? '0' : '0'};
-	padding-left: ${display === Display.Immersive ? '5px' : '5px'};
+	height: ${display === ArticleDisplay.Immersive ? '48px' : '36px'};
+	padding-top: ${display === ArticleDisplay.Immersive ? '10px' : '9px'};
+	padding-right: ${display === ArticleDisplay.Immersive ? '5px' : '5px'};
+	padding-bottom: ${display === ArticleDisplay.Immersive ? '0' : '0'};
+	padding-left: ${display === ArticleDisplay.Immersive ? '5px' : '5px'};
 	position: relative;
 	overflow: hidden;
 	text-decoration: none;
 	z-index: 1;
 	${from.mobileMedium} {
 		font-size: 15.7px;
-		padding-top: ${display === Display.Immersive ? '9px' : '9px'};
-		padding-right: ${display === Display.Immersive ? '5px' : '5px'};
-		padding-bottom: ${display === Display.Immersive ? '0' : '0'};
-		padding-left: ${display === Display.Immersive ? '5px' : '5px'};
+		padding-top: ${display === ArticleDisplay.Immersive ? '9px' : '9px'};
+		padding-right: ${display === ArticleDisplay.Immersive ? '5px' : '5px'};
+		padding-bottom: ${display === ArticleDisplay.Immersive ? '0' : '0'};
+		padding-left: ${display === ArticleDisplay.Immersive ? '5px' : '5px'};
 	}
 	${from.mobileLandscape} {
 		font-size: 18px;
-		padding-top: ${display === Display.Immersive ? '9px' : '9px'};
-		padding-right: ${display === Display.Immersive ? '5px' : '5px'};
-		padding-bottom: ${display === Display.Immersive ? '0' : '0'};
-		padding-left: ${display === Display.Immersive ? '5px' : '5px'};
+		padding-top: ${display === ArticleDisplay.Immersive ? '9px' : '9px'};
+		padding-right: ${display === ArticleDisplay.Immersive ? '5px' : '5px'};
+		padding-bottom: ${display === ArticleDisplay.Immersive ? '0' : '0'};
+		padding-left: ${display === ArticleDisplay.Immersive ? '5px' : '5px'};
 	}
 	${from.tablet} {
 		font-size: 22px;
 		height: 48px;
-		padding-top: ${display === Display.Immersive ? '9px' : '9px'};
-		padding-right: ${display === Display.Immersive ? '20px' : '20px'};
-		padding-bottom: ${display === Display.Immersive ? '0' : '0'};
-		padding-left: ${display === Display.Immersive ? '9px' : '9px'};
+		padding-top: ${display === ArticleDisplay.Immersive ? '9px' : '9px'};
+		padding-right: ${display === ArticleDisplay.Immersive
+			? '20px'
+			: '20px'};
+		padding-bottom: ${display === ArticleDisplay.Immersive ? '0' : '0'};
+		padding-left: ${display === ArticleDisplay.Immersive ? '9px' : '9px'};
 	}
 	${from.desktop} {
-		padding-top: ${display === Display.Immersive ? '9px' : '5px'};
-		height: ${display === Display.Immersive ? '48px' : '42px'};
+		padding-top: ${display === ArticleDisplay.Immersive ? '9px' : '5px'};
+		height: ${display === ArticleDisplay.Immersive ? '48px' : '42px'};
 	}
 
 	${from.wide} {
-		padding-top: ${display === Display.Immersive ? '10px' : '7px'};
+		padding-top: ${display === ArticleDisplay.Immersive ? '10px' : '7px'};
 		font-size: 24px;
 	}
 
@@ -228,10 +230,10 @@ const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 	i !== noOfPillars - 1;
 
 export const Pillars: React.FC<{
-	display: Display;
+	display: ArticleDisplay;
 	isTopNav?: boolean;
 	pillars: PillarType[];
-	pillar: Theme;
+	pillar: ArticleTheme;
 	showLastPillarDivider?: boolean;
 	dataLinkName: string;
 }> = ({
@@ -254,8 +256,8 @@ export const Pillars: React.FC<{
 							linkStyle(display),
 							pillarUnderline(
 								decidePalette({
-									display: Display.Standard,
-									design: Design.Feature,
+									display: ArticleDisplay.Standard,
+									design: ArticleDesign.Feature,
 									theme: p.pillar,
 								}),
 							),

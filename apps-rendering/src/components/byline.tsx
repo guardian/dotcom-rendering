@@ -3,6 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { neutral, palette } from '@guardian/src-foundations';
+import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { Design, map, Special, withDefault } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
@@ -42,6 +43,24 @@ const anchorStyles = (
     `}
 `;
 
+const liveblogAnchorStyles = (
+	kicker: string,
+	inverted: string,
+): SerializedStyles => css`
+	${headline.xxxsmall({ fontWeight: 'bold' })}
+	font-style: normal;
+	color: ${neutral[93]};
+	text-decoration: none;
+
+	${from.desktop} {
+		color: ${kicker};
+
+		${darkModeCss`
+			color: ${inverted};
+		`}
+	}
+`;
+
 const commentStyles = (kicker: string): SerializedStyles => css`
 	color: ${kicker};
 	width: 75%;
@@ -70,6 +89,15 @@ const labsStyles = css`
     `}
 `;
 
+const liveblogStyles = (kicker: string): SerializedStyles => css`
+	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
+	color: ${palette.neutral[93]};
+
+	${from.desktop} {
+		color: ${kicker};
+	}
+`;
+
 const labsAnchorStyles = css`
 	font-weight: bold;
 	color: ${palette.labs[300]};
@@ -89,6 +117,9 @@ const getStyles = (format: Format): SerializedStyles => {
 	}
 
 	switch (format.design) {
+		case Design.LiveBlog:
+		case Design.DeadBlog:
+			return liveblogStyles(kicker);
 		case Design.Editorial:
 		case Design.Letter:
 		case Design.Comment:
@@ -104,6 +135,9 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
 		return labsAnchorStyles;
 	}
 	switch (format.design) {
+		case Design.LiveBlog:
+		case Design.DeadBlog:
+			return liveblogAnchorStyles(kicker, inverted);
 		case Design.Editorial:
 		case Design.Letter:
 		case Design.Comment:
@@ -114,23 +148,25 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
 	}
 };
 
-const toReact = (format: Format) => (node: Node, index: number): ReactNode => {
-	switch (node.nodeName) {
-		case 'A':
-			return (
-				<a
-					href={withDefault('')(getHref(node))}
-					css={getAnchorStyles(format)}
-					key={`anchor-${index}`}
-				>
-					{node.textContent ?? ''}
-				</a>
-			);
-		case 'SPAN':
-			return Array.from(node.childNodes).map(toReact(format));
-		case '#text':
-			return node.textContent;
-	}
+const toReact = (format: Format) => {
+	return function getReactNode(node: Node, index: number): ReactNode {
+		switch (node.nodeName) {
+			case 'A':
+				return (
+					<a
+						href={withDefault('')(getHref(node))}
+						css={getAnchorStyles(format)}
+						key={`anchor-${index}`}
+					>
+						{node.textContent ?? ''}
+					</a>
+				);
+			case 'SPAN':
+				return Array.from(node.childNodes).map(toReact(format));
+			case '#text':
+				return node.textContent;
+		}
+	};
 };
 
 const renderText = (format: Format, byline: DocumentFragment): ReactNode =>

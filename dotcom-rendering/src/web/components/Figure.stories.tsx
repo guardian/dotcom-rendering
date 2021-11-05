@@ -8,7 +8,7 @@ import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
-import { Display, Design, Pillar } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
 import { breakpoints } from '@guardian/src-foundations/mq';
 
@@ -21,9 +21,9 @@ const SomeText = () => (
 	<TextBlockComponent
 		html={textHtml}
 		format={{
-			theme: Pillar.News,
-			design: Design.Article,
-			display: Display.Standard,
+			theme: ArticlePillar.News,
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
 		}}
 		isFirstParagraph={false}
 	/>

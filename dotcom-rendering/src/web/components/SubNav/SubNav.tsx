@@ -10,7 +10,7 @@ type Props = {
 	subNavSections: SubNavType;
 	palette: Palette;
 	currentNavLink: string;
-	format: Format;
+	format: ArticleFormat;
 };
 
 const wrapperCollapsedStyles = css`
@@ -78,7 +78,7 @@ const fontStyle = css`
 	}
 `;
 
-const linkStyle = (format: Format) => css`
+const linkStyle = (format: ArticleFormat) => css`
 	${fontStyle};
 	float: left;
 	text-decoration: none;

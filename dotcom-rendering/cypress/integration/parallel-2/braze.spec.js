@@ -1,7 +1,8 @@
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { overrideGeo } from '../../lib/overrideGeo';
 import { hasCurrentBrazeUser } from '../../lib/hasCurrentBrazeUser';
-const idapiResponse = `{ "status": "ok", "user": { "primaryEmailAddress": "user@example.com", "id": "000000000", "publicFields": { "displayName": "user" }, "privateFields": { "brazeUuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", "puzzleUuid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "googleTagId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "legacyPackages": "CRE,RCO", "legacyProducts": "CRE,RCO" }, "statusFields": { "userEmailValidated": true }, "dates": { "accountCreatedDate": "2021-01-01T00:00:00Z" }, "userGroups": [ { "path": "/sys/policies/basic-identity", "packageCode": "CRE" }, { "path": "/sys/policies/basic-community", "packageCode": "RCO" } ], "socialLinks": [ { "socialId": "111111111111111111111", "network": "google" } ], "adData": {}, "consents": [ { "actor": "user", "id": "sms", "version": 0, "consented": false, "timestamp": "2021-01-01T00:00:00Z", "privacyPolicyVersion": 1 }, { "actor": "user", "id": "post_optout", "version": 0, "consented": false, "timestamp": "2021-01-01T00:00:00Z", "privacyPolicyVersion": 1 }, { "actor": "user", "id": "phone_optout", "version": 0, "consented": false, "timestamp": "2021-01-01T00:00:00Z", "privacyPolicyVersion": 1 }, { "actor": "user", "id": "market_research_optout", "version": 0, "consented": true, "timestamp": "2021-01-01T00:00:00Z", "privacyPolicyVersion": 1 }, { "actor": "user", "id": "supporter", "version": 0, "consented": false, "timestamp": "2021-01-01T00:00:00Z", "privacyPolicyVersion": 1 }, { "actor": "user", "id": "jobs", "version": 0, "consented": false, "timestamp": "2021-01-01T00:00:00Z", "privacyPolicyVersion": 1 }, { "actor": "user", "id": "holidays", "version": 0, "consented": false, "timestamp": "2021-01-01T00:00:00Z", "privacyPolicyVersion": 1 }, { "actor": "user", "id": "events", "version": 0, "consented": false, "timestamp": "2021-01-01T00:00:00Z", "privacyPolicyVersion": 1 }, { "actor": "user", "id": "offers", "version": 0, "consented": false, "timestamp": "2021-01-01T00:00:00Z", "privacyPolicyVersion": 1 }, { "actor": "user", "id": "profiling_optout", "version": 0, "consented": false, "timestamp": "2021-01-01T00:00:00Z", "privacyPolicyVersion": 1 } ], "hasPassword": false } }`;
+
+const idapiIdentifiersResponse = `{ "id": "000000000", "brazeUuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", "puzzleUuid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "googleTagId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }`;
 
 const handleGuCookieError = () => {
 	cy.on('uncaught:exception', (err, runnable) => {
@@ -64,13 +65,13 @@ describe('Braze messaging', function () {
 		cy.setCookie('gu_hide_support_messaging', 'true', {
 			log: true,
 		});
-		cy.intercept('GET', '**/user/me', idapiResponse);
+		cy.intercept('GET', '**/user/me/identifiers', idapiIdentifiersResponse);
 	};
 
 	const becomeLoggedOut = () => {
 		// User no longer logged in
 		cy.clearCookie('GU_U');
-		cy.intercept('GET', '**/user/me', { statusCode: 403 });
+		cy.intercept('GET', '**/user/me/identifiers', { statusCode: 403 });
 	};
 
 	const setCountry = () => {
@@ -81,6 +82,8 @@ describe('Braze messaging', function () {
 	it('records in local storage that the Braze SDK was loaded', function () {
 		enableBraze();
 		becomeLoggedIn();
+
+		cy.setCookie('bwid', 'myBrowserId');
 
 		setCountry();
 		acceptConsents()
@@ -95,6 +98,8 @@ describe('Braze messaging', function () {
 	it('clears Braze data when a user logs out', function () {
 		enableBraze();
 		becomeLoggedIn();
+
+		cy.setCookie('bwid', 'myBrowserId');
 
 		setCountry();
 		acceptConsents()

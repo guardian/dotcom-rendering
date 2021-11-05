@@ -3,7 +3,7 @@ import { Caption } from '@root/src/amp/components/Caption';
 
 export const GuVideoBlockComponent: React.FC<{
 	element: GuVideoBlockElement;
-	pillar: Theme;
+	pillar: ArticleTheme;
 }> = ({ element, pillar }) => {
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>

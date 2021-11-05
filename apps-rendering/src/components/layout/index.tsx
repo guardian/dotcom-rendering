@@ -15,14 +15,14 @@ import Standard from 'components/layout/standard';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
+import Live from './live';
 
 // ----- Functions ----- //
 
-const renderWithAds = (shouldHide: boolean) => (
-	format: Format,
-	elements: BodyElement[],
-): ReactNode[] =>
-	getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
+const renderWithAds =
+	(shouldHide: boolean) =>
+	(format: Format, elements: BodyElement[]): ReactNode[] =>
+		getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
 
 // ----- Component ----- //
 
@@ -42,8 +42,8 @@ const notImplemented = (
 );
 
 const Layout: FC<Props> = ({ item, shouldHideAds }) => {
-	if (item.design === Design.LiveBlog) {
-		return notImplemented;
+	if (item.design === Design.LiveBlog || item.design === Design.DeadBlog) {
+		return <Live item={item} />;
 	}
 
 	const body = partition(item.body).oks;

@@ -37,7 +37,9 @@ interface Palette {
 const textHeadlinePrimary = (format: Format): Colour => {
 	if (
 		format.display === Display.Immersive ||
-		format.design === Design.Media
+		format.design === Design.Media ||
+		format.design === Design.LiveBlog ||
+		format.design === Design.DeadBlog
 	) {
 		return neutral[100];
 	}
@@ -60,11 +62,35 @@ const textHeadlinePrimary = (format: Format): Colour => {
 	return coreText.primary;
 };
 
-const textHeadlinePrimaryInverse = (_: Format): Colour => neutral[86];
+const textHeadlinePrimaryInverse = (format: Format): Colour => {
+	if (
+		format.design === Design.LiveBlog ||
+		format.design === Design.DeadBlog
+	) {
+		return neutral[93];
+	}
+
+	return neutral[86];
+};
 
 const backgroundHeadlinePrimary = (format: Format): Colour => {
 	if (format.display === Display.Immersive) {
 		return neutral[7];
+	} else if (format.design === Design.LiveBlog) {
+		switch (format.theme) {
+			case Pillar.Culture:
+				return culture[300];
+			case Pillar.Sport:
+				return sport[300];
+			case Pillar.Lifestyle:
+				return lifestyle[300];
+			case Pillar.Opinion:
+				return opinion[300];
+			case Pillar.News:
+				return news[300];
+			default:
+				return news[300];
+		}
 	} else if (
 		format.design === Design.Comment ||
 		format.design === Design.Letter ||
@@ -78,8 +104,28 @@ const backgroundHeadlinePrimary = (format: Format): Colour => {
 	return coreBackground.primary;
 };
 
-const backgroundHeadlinePrimaryInverse = (_: Format): Colour =>
-	coreBackground.inverse;
+const backgroundHeadlinePrimaryInverse = (format: Format): Colour => {
+	if (
+		format.design === Design.LiveBlog ||
+		format.design === Design.DeadBlog
+	) {
+		switch (format.theme) {
+			case Pillar.Culture:
+				return culture[200];
+			case Pillar.Sport:
+				return sport[200];
+			case Pillar.Lifestyle:
+				return lifestyle[200];
+			case Pillar.Opinion:
+				return opinion[200];
+			case Pillar.News:
+				return news[200];
+			default:
+				return news[200];
+		}
+	}
+	return coreBackground.inverse;
+};
 
 const borderPrimary = (format: Format): Colour => {
 	switch (format.theme) {

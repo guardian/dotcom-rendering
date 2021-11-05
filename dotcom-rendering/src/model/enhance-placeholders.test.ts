@@ -3,12 +3,11 @@ import { replacePlaceholders } from './enhance-placeholders';
 describe('Enhance Placeholders', () => {
 	it('replaces supported placeholder', () => {
 		const el: InteractiveAtomBlockElement = {
-			_type:
-				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
+			_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 			id: 'foo',
 			url: 'example.com/foo',
 			elementId: 'foo1',
-			html: '<div>Written by: {{ byline }}</div>',
+			html: '<div>Written by: [[ byline ]]</div>',
 		};
 
 		const variables = new Map();
@@ -21,12 +20,11 @@ describe('Enhance Placeholders', () => {
 
 	it('replaces supported placeholder ignoring surrounding whitespace', () => {
 		const el: InteractiveAtomBlockElement = {
-			_type:
-				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
+			_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 			id: 'foo',
 			url: 'example.com/foo',
 			elementId: 'foo1',
-			html: '<div>Written by: {{byline    }}</div>',
+			html: '<div>Written by: [[byline    ]]</div>',
 		};
 
 		const variables = new Map();
@@ -39,12 +37,11 @@ describe('Enhance Placeholders', () => {
 
 	it('preserves unsupported placeholder', () => {
 		const el: InteractiveAtomBlockElement = {
-			_type:
-				'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
+			_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
 			id: 'foo',
 			url: 'example.com/foo',
 			elementId: 'foo1',
-			html: '<div>Written by: {{ unsupported }}</div>',
+			html: '<div>Written by: [[ unsupported ]]</div>',
 		};
 
 		const variables = new Map();

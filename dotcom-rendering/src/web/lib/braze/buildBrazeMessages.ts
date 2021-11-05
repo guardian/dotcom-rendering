@@ -11,9 +11,9 @@ import {
 	LocalMessageCache,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
-import { storage } from '@guardian/libs';
+import { log, storage } from '@guardian/libs';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
-import { getInitialisedAppboy, SDK_OPTIONS } from './initialiseAppboy';
+import { getInitialisedAppboy } from './initialiseAppboy';
 
 const maybeWipeUserData = async (
 	apiKey?: string,
@@ -33,6 +33,7 @@ const maybeWipeUserData = async (
 			clearHasCurrentBrazeUser();
 		} catch (error) {
 			window.guardian.modules.sentry.reportError(
+				// @ts-expect-error
 				error,
 				'braze-maybeWipeUserData',
 			);
@@ -56,11 +57,10 @@ export const buildBrazeMessages = async (
 	if (!dependenciesResult.isSuccessful) {
 		const { failure, data } = dependenciesResult;
 
-		if (SDK_OPTIONS.enableLogging) {
-			console.log(
-				`Not attempting to show Braze messages. Dependency ${failure.field} failed with ${failure.data}.`,
-			);
-		}
+		log(
+			'tx',
+			`Not attempting to show Braze messages. Dependency ${failure.field} failed with ${failure.data}.`,
+		);
 
 		await maybeWipeUserData(
 			data.apiKey as string | undefined,

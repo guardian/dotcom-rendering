@@ -9,8 +9,8 @@ import {
 	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -48,7 +48,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -179,11 +179,11 @@ const PositionHeadline = ({
 	design,
 	children,
 }: {
-	design: Design;
+	design: ArticleDesign;
 	children: React.ReactNode;
 }) => {
 	switch (design) {
-		case Design.Interview:
+		case ArticleDesign.Interview:
 			return (
 				<div
 					css={css`
@@ -218,7 +218,7 @@ const ageWarningMargins = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }
 
@@ -255,7 +255,7 @@ export const ShowcaseLayout = ({
 
 	return (
 		<>
-			{format.theme !== Special.Labs ? (
+			{format.theme !== ArticleSpecial.Labs ? (
 				<>
 					<div>
 						<Stuck>
@@ -263,6 +263,7 @@ export const ShowcaseLayout = ({
 								showTopBorder={false}
 								showSideBorders={false}
 								padded={false}
+								shouldCenter={false}
 							>
 								<HeaderAdSlot
 									isAdFreeUser={CAPI.isAdFreeUser}
@@ -288,51 +289,53 @@ export const ShowcaseLayout = ({
 									}
 								/>
 							</ElementContainer>
+							<ElementContainer
+								showSideBorders={true}
+								borderColour={brandLine.primary}
+								showTopBorder={false}
+								padded={false}
+								backgroundColour={brandBackground.primary}
+							>
+								<Nav
+									nav={NAV}
+									format={{
+										...format,
+										theme: getCurrentPillar(CAPI),
+									}}
+									subscribeUrl={
+										CAPI.nav.readerRevenueLinks.header
+											.subscribe
+									}
+									edition={CAPI.editionId}
+								/>
+							</ElementContainer>
+
+							{NAV.subNavSections && (
+								<ElementContainer
+									backgroundColour={
+										palette.background.article
+									}
+									padded={false}
+									sectionId="sub-nav-root"
+								>
+									<SubNav
+										subNavSections={NAV.subNavSections}
+										currentNavLink={NAV.currentNavLink}
+										palette={palette}
+										format={format}
+									/>
+								</ElementContainer>
+							)}
+
+							<ElementContainer
+								backgroundColour={palette.background.article}
+								padded={false}
+								showTopBorder={false}
+							>
+								<Lines count={4} effect="straight" />
+							</ElementContainer>
 						</SendToBack>
 					</div>
-
-					<ElementContainer
-						showSideBorders={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-					>
-						<Nav
-							nav={NAV}
-							format={{
-								...format,
-								theme: getCurrentPillar(CAPI),
-							}}
-							subscribeUrl={
-								CAPI.nav.readerRevenueLinks.header.subscribe
-							}
-							edition={CAPI.editionId}
-						/>
-					</ElementContainer>
-
-					{NAV.subNavSections && (
-						<ElementContainer
-							backgroundColour={palette.background.article}
-							padded={false}
-							sectionId="sub-nav-root"
-						>
-							<SubNav
-								subNavSections={NAV.subNavSections}
-								currentNavLink={NAV.currentNavLink}
-								palette={palette}
-								format={format}
-							/>
-						</ElementContainer>
-					)}
-
-					<ElementContainer
-						backgroundColour={palette.background.article}
-						padded={false}
-						showTopBorder={false}
-					>
-						<Lines count={4} effect="straight" />
-					</ElementContainer>
 				</>
 			) : (
 				// Else, this is a labs article so just show Nav and the Labs header
@@ -444,7 +447,7 @@ export const ShowcaseLayout = ({
 								elements={CAPI.mainMediaElements}
 								adTargeting={adTargeting}
 								starRating={
-									format.design === Design.Review &&
+									format.design === ArticleDesign.Review &&
 									CAPI.starRating
 										? CAPI.starRating
 										: undefined

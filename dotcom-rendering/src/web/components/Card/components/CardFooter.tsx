@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 
-import { Design, Special } from '@guardian/types';
-import { Lines } from '@guardian/src-ed-lines';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { from } from '@guardian/src-foundations/mq';
 
 type Props = {
-	format: Format;
+	format: ArticleFormat;
 	age?: JSX.Element;
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
@@ -49,15 +49,15 @@ export const CardFooter = ({
 	isFullCardImage,
 	cardBranding,
 }: Props) => {
-	if (format.theme === Special.Labs && cardBranding) {
+	if (format.theme === ArticleSpecial.Labs && cardBranding) {
 		return <footer>{cardBranding}</footer>;
 	}
 
 	if (
 		!isFullCardImage &&
-		(format.design === Design.Comment ||
-			format.design === Design.Editorial ||
-			format.design === Design.Letter)
+		(format.design === ArticleDesign.Comment ||
+			format.design === ArticleDesign.Editorial ||
+			format.design === ArticleDesign.Letter)
 	) {
 		return (
 			<footer css={spaceBetween}>
@@ -70,7 +70,7 @@ export const CardFooter = ({
 		);
 	}
 
-	if (format.design === Design.Media) {
+	if (format.design === ArticleDesign.Media) {
 		return (
 			<footer css={spaceBetween}>
 				{mediaMeta}

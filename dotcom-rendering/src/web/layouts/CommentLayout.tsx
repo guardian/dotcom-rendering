@@ -7,10 +7,10 @@ import {
 	brandLine,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Display, Design, Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/src-ed-lines';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -50,7 +50,7 @@ const StandardGrid = ({
 	display,
 }: {
 	children: React.ReactNode;
-	display: Display;
+	display: ArticleDisplay;
 }) => (
 	<div
 		css={css`
@@ -85,7 +85,7 @@ const StandardGrid = ({
 				${from.wide} {
 					grid-template-columns: 219px 1px 1fr 300px;
 
-					${display === Display.Showcase
+					${display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
 									'title      border  headline    headline'
@@ -117,7 +117,7 @@ const StandardGrid = ({
 				${until.wide} {
 					grid-template-columns: 140px 1px 1fr 300px;
 
-					${display === Display.Showcase
+					${display === ArticleDisplay.Showcase
 						? css`
 								grid-template-areas:
 									'title      border  headline    headline'
@@ -272,7 +272,7 @@ const mainMediaWrapper = css`
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 }
 
@@ -322,6 +322,7 @@ export const CommentLayout = ({
 						showTopBorder={false}
 						showSideBorders={false}
 						padded={false}
+						shouldCenter={false}
 					>
 						<HeaderAdSlot
 							isAdFreeUser={CAPI.isAdFreeUser}
@@ -331,7 +332,7 @@ export const CommentLayout = ({
 					</ElementContainer>
 				</Stuck>
 				<SendToBack>
-					{format.theme !== Special.Labs && (
+					{format.theme !== ArticleSpecial.Labs && (
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
@@ -348,49 +349,51 @@ export const CommentLayout = ({
 							/>
 						</ElementContainer>
 					)}
+
+					<ElementContainer
+						showSideBorders={true}
+						borderColour={brandLine.primary}
+						showTopBorder={false}
+						padded={false}
+						backgroundColour={brandBackground.primary}
+					>
+						<Nav
+							nav={NAV}
+							format={{
+								...format,
+								theme: getCurrentPillar(CAPI),
+							}}
+							subscribeUrl={
+								CAPI.nav.readerRevenueLinks.header.subscribe
+							}
+							edition={CAPI.editionId}
+						/>
+					</ElementContainer>
+
+					{NAV.subNavSections && (
+						<ElementContainer
+							backgroundColour={palette.background.article}
+							padded={false}
+							sectionId="sub-nav-root"
+						>
+							<SubNav
+								subNavSections={NAV.subNavSections}
+								currentNavLink={NAV.currentNavLink}
+								palette={palette}
+								format={format}
+							/>
+						</ElementContainer>
+					)}
+
+					<ElementContainer
+						backgroundColour={palette.background.article}
+						padded={false}
+						showTopBorder={false}
+					>
+						<Lines count={4} effect="straight" />
+					</ElementContainer>
 				</SendToBack>
 			</div>
-
-			<ElementContainer
-				showSideBorders={true}
-				borderColour={brandLine.primary}
-				showTopBorder={false}
-				padded={false}
-				backgroundColour={brandBackground.primary}
-			>
-				<Nav
-					nav={NAV}
-					format={{
-						...format,
-						theme: getCurrentPillar(CAPI),
-					}}
-					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
-					edition={CAPI.editionId}
-				/>
-			</ElementContainer>
-
-			{NAV.subNavSections && (
-				<ElementContainer
-					backgroundColour={palette.background.article}
-					padded={false}
-					sectionId="sub-nav-root"
-				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						palette={palette}
-						format={format}
-					/>
-				</ElementContainer>
-			)}
-
-			<ElementContainer
-				backgroundColour={palette.background.article}
-				padded={false}
-				showTopBorder={false}
-			>
-				<Lines count={4} effect="straight" />
-			</ElementContainer>
 
 			<ElementContainer
 				showTopBorder={false}
@@ -472,7 +475,7 @@ export const CommentLayout = ({
 					<GridItem area="media">
 						<div
 							css={
-								format.display === Display.Showcase
+								format.display === ArticleDisplay.Showcase
 									? mainMediaWrapper
 									: maxWidth
 							}
@@ -483,7 +486,7 @@ export const CommentLayout = ({
 								elements={CAPI.mainMediaElements}
 								adTargeting={adTargeting}
 								starRating={
-									format.design === Design.Review &&
+									format.design === ArticleDesign.Review &&
 									CAPI.starRating
 										? CAPI.starRating
 										: undefined

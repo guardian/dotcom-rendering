@@ -217,102 +217,96 @@ const divElementPropsToEmbedComponentProps = (
 	): Result<string, Embed> => {
 		return pipe(
 			parseEmbedKind(elementProps['kind']),
-			resultAndThen(
-				(embedKind: EmbedKind): Result<string, Embed> => {
-					switch (embedKind) {
-						case EmbedKind.Spotify:
-							return resultMap3(
-								(
-									src: string,
-									width: number,
-									height: number,
-								): Spotify => ({
-									kind: EmbedKind.Spotify,
-									src,
-									width,
-									height,
-									tracking: parseTrackingParam(
-										elementProps['tracking'],
-									),
-								}),
-							)(requiredStringParam(elementProps, 'src'))(
-								requiredNumberParam(elementProps, 'width'),
-							)(requiredNumberParam(elementProps, 'height'));
-						case EmbedKind.YouTube:
-							return resultMap3(
-								(
-									id: string,
-									width: number,
-									height: number,
-								): YouTube => ({
-									kind: EmbedKind.YouTube,
-									id,
-									width,
-									height,
-									tracking: parseTrackingParam(
-										elementProps['tracking'],
-									),
-								}),
-							)(requiredStringParam(elementProps, 'id'))(
-								requiredNumberParam(elementProps, 'width'),
-							)(requiredNumberParam(elementProps, 'height'));
-						case EmbedKind.Instagram: {
-							return resultMap<string, Instagram>(
-								(id: string): Instagram => ({
-									kind: EmbedKind.Instagram,
-									id,
-									caption: fromNullable(
-										elementProps['caption'],
-									),
-									tracking: parseTrackingParam(
-										elementProps['tracking'],
-									),
-								}),
-							)(requiredStringParam(elementProps, 'id'));
-						}
-						case EmbedKind.Generic: {
-							return pipe(
-								elementProps,
-								parseGenericFields,
-								resultMap(
-									(
-										genericFields: GenericFields,
-									): Generic => ({
-										kind: EmbedKind.Generic,
-										...genericFields,
-									}),
+			resultAndThen((embedKind: EmbedKind): Result<string, Embed> => {
+				switch (embedKind) {
+					case EmbedKind.Spotify:
+						return resultMap3(
+							(
+								src: string,
+								width: number,
+								height: number,
+							): Spotify => ({
+								kind: EmbedKind.Spotify,
+								src,
+								width,
+								height,
+								tracking: parseTrackingParam(
+									elementProps['tracking'],
 								),
-							);
-						}
-						case EmbedKind.TikTok: {
-							return pipe(
-								elementProps,
-								parseGenericFields,
-								resultMap(
-									(genericFields: GenericFields): TikTok => ({
-										kind: EmbedKind.TikTok,
-										...genericFields,
-									}),
+							}),
+						)(requiredStringParam(elementProps, 'src'))(
+							requiredNumberParam(elementProps, 'width'),
+						)(requiredNumberParam(elementProps, 'height'));
+					case EmbedKind.YouTube:
+						return resultMap3(
+							(
+								id: string,
+								width: number,
+								height: number,
+							): YouTube => ({
+								kind: EmbedKind.YouTube,
+								id,
+								width,
+								height,
+								tracking: parseTrackingParam(
+									elementProps['tracking'],
 								),
-							);
-						}
-						case EmbedKind.EmailSignup: {
-							return pipe(
-								elementProps,
-								parseGenericFields,
-								resultMap(
-									(
-										genericFields: GenericFields,
-									): EmailSignup => ({
-										kind: EmbedKind.EmailSignup,
-										...genericFields,
-									}),
+							}),
+						)(requiredStringParam(elementProps, 'id'))(
+							requiredNumberParam(elementProps, 'width'),
+						)(requiredNumberParam(elementProps, 'height'));
+					case EmbedKind.Instagram: {
+						return resultMap<string, Instagram>(
+							(id: string): Instagram => ({
+								kind: EmbedKind.Instagram,
+								id,
+								caption: fromNullable(elementProps['caption']),
+								tracking: parseTrackingParam(
+									elementProps['tracking'],
 								),
-							);
-						}
+							}),
+						)(requiredStringParam(elementProps, 'id'));
 					}
-				},
-			),
+					case EmbedKind.Generic: {
+						return pipe(
+							elementProps,
+							parseGenericFields,
+							resultMap(
+								(genericFields: GenericFields): Generic => ({
+									kind: EmbedKind.Generic,
+									...genericFields,
+								}),
+							),
+						);
+					}
+					case EmbedKind.TikTok: {
+						return pipe(
+							elementProps,
+							parseGenericFields,
+							resultMap(
+								(genericFields: GenericFields): TikTok => ({
+									kind: EmbedKind.TikTok,
+									...genericFields,
+								}),
+							),
+						);
+					}
+					case EmbedKind.EmailSignup: {
+						return pipe(
+							elementProps,
+							parseGenericFields,
+							resultMap(
+								(
+									genericFields: GenericFields,
+								): EmailSignup => ({
+									kind: EmbedKind.EmailSignup,
+									...genericFields,
+								}),
+							),
+						);
+					}
+				}
+			}),
 		);
 	};
 

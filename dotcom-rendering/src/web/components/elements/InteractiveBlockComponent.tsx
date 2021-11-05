@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { css } from '@emotion/react';
 import { body, textSans } from '@guardian/src-foundations/typography';
-import { Special } from '@guardian/types';
+import { ArticleSpecial } from '@guardian/libs';
 import { space } from '@guardian/src-foundations';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 import { Caption } from '@root/src/web/components/Caption';
@@ -15,7 +15,7 @@ type Props = {
 	alt?: string;
 	role?: RoleType;
 	caption?: string;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 	elementId?: string;
 };
@@ -98,12 +98,12 @@ const wrapperStyle = ({
 	loaded,
 	palette,
 }: {
-	format: Format;
+	format: ArticleFormat;
 	role: RoleType;
 	loaded: boolean;
 	palette: Palette;
 }) => css`
-	${format.theme === Special.Labs ? textSans.medium() : body.medium()};
+	${format.theme === ArticleSpecial.Labs ? textSans.medium() : body.medium()};
 	background-color: ${palette.background.article};
 	min-height: ${getMinHeight(role, loaded)};
 	position: relative;
@@ -137,6 +137,7 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 				message = JSON.parse(event.data);
 			} catch (e) {
 				window?.guardian?.modules?.sentry?.reportError(
+					// @ts-expect-error
 					e,
 					'Json parse Failed on in interactiveBlockComponent',
 				);
@@ -285,22 +286,25 @@ export const InteractiveBlockComponent = ({
 	return (
 		<>
 			<figure
-				id={elementId} // required for hydration
+				id={elementId} // boot scripts use id when inserting interactive content
 				ref={wrapperRef}
 				css={wrapperStyle({ format, role, loaded, palette })}
-				className={interactiveLegacyFigureClasses}
+				className={interactiveLegacyFigureClasses(
+					'model.dotcomrendering.pageElements.InteractiveBlockElement',
+					role,
+				)}
 				data-alt={alt} // for compatibility with custom boot scripts
 				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
 			>
 				{!loaded && (
 					<>
-						<Placeholder
+						<Placeholder // removed by HydrateInteractiveOnce
 							height={decideHeight(role)}
 							shouldShimmer={false}
 						/>
 						<a
 							ref={placeholderLinkRef}
-							data-name="placeholder"
+							data-name="placeholder" // removed by HydrateInteractiveOnce
 							css={placeholderLinkStyle}
 							href={url}
 						>

@@ -9,6 +9,7 @@ import { Pillar, Special } from '@guardian/types';
 interface ThemeStyles {
 	kicker: string;
 	inverted: string;
+	liveblogKicker: string;
 	liveblogBackground: string;
 	liveblogDarkBackground: string;
 	link: string;
@@ -24,8 +25,9 @@ export const themeColours: ThemeColours = {
 	[Pillar.News]: {
 		kicker: palette.news[400],
 		inverted: palette.news[500],
-		liveblogBackground: palette.news[300],
-		liveblogDarkBackground: palette.news[200],
+		liveblogKicker: palette.news[600],
+		liveblogBackground: palette.news[200],
+		liveblogDarkBackground: palette.news[100],
 		link: palette.news[300],
 		cameraIcon: palette.news[800],
 		cameraIconBackground: palette.news[400],
@@ -33,8 +35,9 @@ export const themeColours: ThemeColours = {
 	[Pillar.Opinion]: {
 		kicker: palette.opinion[400],
 		inverted: palette.opinion[500],
-		liveblogBackground: palette.opinion[300],
-		liveblogDarkBackground: palette.opinion[200],
+		liveblogKicker: palette.opinion[600],
+		liveblogBackground: palette.opinion[200],
+		liveblogDarkBackground: palette.opinion[100],
 		link: palette.opinion[300],
 		cameraIcon: palette.opinion[800],
 		cameraIconBackground: palette.opinion[400],
@@ -42,8 +45,9 @@ export const themeColours: ThemeColours = {
 	[Pillar.Sport]: {
 		kicker: palette.sport[400],
 		inverted: palette.sport[500],
-		liveblogBackground: palette.sport[300],
-		liveblogDarkBackground: palette.sport[200],
+		liveblogKicker: palette.sport[600],
+		liveblogBackground: palette.sport[200],
+		liveblogDarkBackground: palette.sport[100],
 		link: palette.sport[300],
 		cameraIcon: palette.sport[800],
 		cameraIconBackground: palette.sport[400],
@@ -51,8 +55,9 @@ export const themeColours: ThemeColours = {
 	[Pillar.Culture]: {
 		kicker: palette.culture[400],
 		inverted: palette.culture[500],
-		liveblogBackground: palette.culture[300],
-		liveblogDarkBackground: palette.culture[200],
+		liveblogKicker: palette.culture[600],
+		liveblogBackground: palette.culture[200],
+		liveblogDarkBackground: palette.culture[100],
 		link: palette.culture[300],
 		cameraIcon: palette.culture[800],
 		cameraIconBackground: palette.culture[400],
@@ -60,8 +65,9 @@ export const themeColours: ThemeColours = {
 	[Pillar.Lifestyle]: {
 		kicker: palette.lifestyle[400],
 		inverted: palette.lifestyle[500],
-		liveblogBackground: palette.lifestyle[300],
-		liveblogDarkBackground: palette.lifestyle[200],
+		liveblogKicker: palette.lifestyle[500],
+		liveblogBackground: palette.lifestyle[200],
+		liveblogDarkBackground: palette.lifestyle[100],
 		link: palette.lifestyle[300],
 		cameraIcon: palette.lifestyle[800],
 		cameraIconBackground: palette.lifestyle[400],
@@ -69,8 +75,9 @@ export const themeColours: ThemeColours = {
 	[Special.SpecialReport]: {
 		kicker: palette.specialReport[400],
 		inverted: palette.specialReport[500],
-		liveblogBackground: palette.specialReport[300],
-		liveblogDarkBackground: palette.specialReport[200],
+		liveblogKicker: palette.specialReport[500],
+		liveblogBackground: palette.specialReport[200],
+		liveblogDarkBackground: palette.specialReport[100],
 		link: palette.specialReport[300],
 		cameraIcon: palette.specialReport[800],
 		cameraIconBackground: palette.specialReport[400],
@@ -78,8 +85,9 @@ export const themeColours: ThemeColours = {
 	[Special.Labs]: {
 		kicker: palette.specialReport[400],
 		inverted: palette.specialReport[500],
-		liveblogBackground: palette.specialReport[300],
-		liveblogDarkBackground: palette.specialReport[200],
+		liveblogKicker: palette.specialReport[500],
+		liveblogBackground: palette.specialReport[200],
+		liveblogDarkBackground: palette.specialReport[100],
 		link: palette.specialReport[300],
 		cameraIcon: palette.specialReport[800],
 		cameraIconBackground: palette.specialReport[400],

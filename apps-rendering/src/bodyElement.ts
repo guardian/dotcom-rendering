@@ -15,6 +15,7 @@ import {
 	withDefault,
 } from '@guardian/types';
 import { parseAtom } from 'atoms';
+import { ElementKind } from 'bodyElementKind';
 import { formatDate } from 'date';
 import { parseAudio, parseGeneric, parseInstagram, parseVideo } from 'embed';
 import type { Embed } from 'embed';
@@ -22,31 +23,9 @@ import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
 import type { Context } from 'parserContext';
+import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 
 // ----- Types ----- //
-
-const enum ElementKind {
-	Text,
-	Image,
-	Pullquote,
-	Interactive,
-	RichLink,
-	Tweet,
-	Embed,
-	Callout,
-	LiveEvent,
-	InteractiveAtom,
-	ExplainerAtom,
-	MediaAtom,
-	GuideAtom,
-	QandaAtom,
-	ProfileAtom,
-	TimelineAtom,
-	ChartAtom,
-	AudioAtom,
-	KnowledgeQuizAtom,
-	PersonalityQuizAtom,
-}
 
 type Text = {
 	kind: ElementKind.Text;
@@ -131,48 +110,6 @@ interface AudioAtom {
 	title: string;
 }
 
-interface KnowledgeQuizAtom {
-	kind: ElementKind.KnowledgeQuizAtom;
-	id: string;
-	questions: QuestionType[];
-	resultGroups: ResultGroupsType[];
-}
-
-interface PersonalityQuizAtom {
-	kind: ElementKind.PersonalityQuizAtom;
-	id: string;
-	questions: QuestionType[];
-	resultBuckets: ResultBucket[];
-}
-
-type AnswerType = {
-	id: string;
-	text: string;
-	revealText?: string;
-	isCorrect: boolean;
-	answerBuckets: string[];
-};
-
-type ResultBucket = {
-	id: string;
-	title: string;
-	description: string;
-};
-
-type QuestionType = {
-	id: string;
-	text: string;
-	answers: AnswerType[];
-	imageUrl?: string;
-};
-
-type ResultGroupsType = {
-	title: string;
-	shareText: string;
-	minScore: number;
-	id: string;
-};
-
 type BodyElement =
 	| Text
 	| Image
@@ -250,194 +187,203 @@ const toEmbedElement: (
 	embed,
 }));
 
-const parse = (context: Context, atoms?: Atoms, campaigns?: Campaign[]) => (
-	element: BlockElement,
-): Result<string, BodyElement> => {
-	switch (element.type) {
-		case ElementType.TEXT: {
-			const html = element.textTypeData?.html;
+const parse =
+	(context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
+	(element: BlockElement): Result<string, BodyElement> => {
+		switch (element.type) {
+			case ElementType.TEXT: {
+				const html = element.textTypeData?.html;
 
-			if (!html) {
-				return err('No html field on textTypeData');
-			}
-
-			return ok({ kind: ElementKind.Text, doc: context.docParser(html) });
-		}
-
-		case ElementType.IMAGE:
-			return pipe(
-				parseImage(context)(element),
-				map<ImageData, Result<string, Image>>((image) =>
-					ok({
-						kind: ElementKind.Image,
-						...image,
-					}),
-				),
-				withDefault<Result<string, Image>>(
-					err("I couldn't find a master asset"),
-				),
-			);
-
-		case ElementType.PULLQUOTE: {
-			const { html: quote, attribution } =
-				element.pullquoteTypeData ?? {};
-
-			if (!quote) {
-				return err('No quote field on pullquoteTypeData');
-			}
-
-			return ok({
-				kind: ElementKind.Pullquote,
-				quote,
-				attribution: fromNullable(attribution),
-			});
-		}
-
-		case ElementType.INTERACTIVE: {
-			const { iframeUrl, alt } = element.interactiveTypeData ?? {};
-
-			if (!iframeUrl) {
-				return err('No iframeUrl field on interactiveTypeData');
-			}
-
-			return ok({
-				kind: ElementKind.Interactive,
-				url: iframeUrl,
-				alt: fromNullable(alt),
-			});
-		}
-
-		case ElementType.RICH_LINK: {
-			const { url, linkText } = element.richLinkTypeData ?? {};
-
-			if (!url) {
-				return err('No "url" field on richLinkTypeData');
-			} else if (!linkText) {
-				return err('No "linkText" field on richLinkTypeData');
-			}
-
-			return ok({ kind: ElementKind.RichLink, url, linkText });
-		}
-
-		case ElementType.TWEET: {
-			const { id, html: h } = element.tweetTypeData ?? {};
-
-			if (!id) {
-				return err('No "id" field on tweetTypeData');
-			} else if (!h) {
-				return err('No "html" field on tweetTypeData');
-			}
-
-			return pipe(
-				tweetContent(id, context.docParser(h)),
-				resultMap((content) => ({ kind: ElementKind.Tweet, content })),
-			);
-		}
-
-		case ElementType.EMBED: {
-			const { html: embedHtml } = element.embedTypeData ?? {};
-
-			if (!embedHtml) {
-				return err('No html field on embedTypeData');
-			}
-
-			const id = context
-				.docParser(embedHtml)
-				.querySelector('[data-callout-tagname]')
-				?.getAttribute('data-callout-tagname');
-
-			if (id) {
-				if (!campaigns) {
-					return err('No campaign data for this callout');
+				if (!html) {
+					return err('No html field on textTypeData');
 				}
 
-				const campaign = campaigns.find(
-					(campaign) => campaign.fields.tagName === id,
-				);
-
-				if (!campaign) {
-					return err('No matching campaign');
-				}
-
-				const description = context.docParser(
-					campaign.fields.description ?? '',
-				);
 				return ok({
-					kind: ElementKind.Callout,
-					id,
-					campaign,
-					description,
+					kind: ElementKind.Text,
+					doc: context.docParser(html),
 				});
 			}
 
-			return compose(
-				toEmbedElement,
-				parseGeneric(context.docParser),
-			)(element);
-		}
+			case ElementType.IMAGE:
+				return pipe(
+					parseImage(context)(element),
+					map<ImageData, Result<string, Image>>((image) =>
+						ok({
+							kind: ElementKind.Image,
+							...image,
+						}),
+					),
+					withDefault<Result<string, Image>>(
+						err("I couldn't find a master asset"),
+					),
+				);
 
-		case ElementType.MEMBERSHIP: {
-			const { linkText, originalUrl: url, price, start, image } =
-				element.membershipTypeData ?? {};
+			case ElementType.PULLQUOTE: {
+				const { html: quote, attribution } =
+					element.pullquoteTypeData ?? {};
 
-			if (!linkText || !url) {
-				return err(
-					'No linkText or originalUrl field on membershipTypeData',
+				if (!quote) {
+					return err('No quote field on pullquoteTypeData');
+				}
+
+				return ok({
+					kind: ElementKind.Pullquote,
+					quote,
+					attribution: fromNullable(attribution),
+				});
+			}
+
+			case ElementType.INTERACTIVE: {
+				const { iframeUrl, alt } = element.interactiveTypeData ?? {};
+
+				if (!iframeUrl) {
+					return err('No iframeUrl field on interactiveTypeData');
+				}
+
+				return ok({
+					kind: ElementKind.Interactive,
+					url: iframeUrl,
+					alt: fromNullable(alt),
+				});
+			}
+
+			case ElementType.RICH_LINK: {
+				const { url, linkText } = element.richLinkTypeData ?? {};
+
+				if (!url) {
+					return err('No "url" field on richLinkTypeData');
+				} else if (!linkText) {
+					return err('No "linkText" field on richLinkTypeData');
+				}
+
+				return ok({ kind: ElementKind.RichLink, url, linkText });
+			}
+
+			case ElementType.TWEET: {
+				const { id, html: h } = element.tweetTypeData ?? {};
+
+				if (!id) {
+					return err('No "id" field on tweetTypeData');
+				} else if (!h) {
+					return err('No "html" field on tweetTypeData');
+				}
+
+				return pipe(
+					tweetContent(id, context.docParser(h)),
+					resultMap((content) => ({
+						kind: ElementKind.Tweet,
+						content,
+					})),
 				);
 			}
 
-			const formattedDate =
-				start?.iso8601 && !isNaN(new Date(start.iso8601).valueOf())
-					? formatDate(new Date(start.iso8601))
-					: undefined;
+			case ElementType.EMBED: {
+				const { html: embedHtml } = element.embedTypeData ?? {};
 
-			return ok({
-				kind: ElementKind.LiveEvent,
-				linkText,
-				url,
-				price,
-				start: formattedDate,
-				image,
-			});
-		}
+				if (!embedHtml) {
+					return err('No html field on embedTypeData');
+				}
 
-		case ElementType.INSTAGRAM:
-			return compose(toEmbedElement, parseInstagram)(element);
+				const id = context
+					.docParser(embedHtml)
+					.querySelector('[data-callout-tagname]')
+					?.getAttribute('data-callout-tagname');
 
-		case ElementType.AUDIO:
-			return compose(
-				toEmbedElement,
-				parseAudio(context.docParser),
-			)(element);
+				if (id) {
+					if (!campaigns) {
+						return err('No campaign data for this callout');
+					}
 
-		case ElementType.VIDEO:
-			return compose(toEmbedElement, parseVideo)(element);
+					const campaign = campaigns.find(
+						(campaign) => campaign.fields.tagName === id,
+					);
 
-		case ElementType.CONTENTATOM: {
-			if (!atoms) {
-				return err('No atom data returned by capi');
+					if (!campaign) {
+						return err('No matching campaign');
+					}
+
+					const description = context.docParser(
+						campaign.fields.description ?? '',
+					);
+					return ok({
+						kind: ElementKind.Callout,
+						id,
+						campaign,
+						description,
+					});
+				}
+
+				return compose(
+					toEmbedElement,
+					parseGeneric(context.docParser),
+				)(element);
 			}
 
-			return parseAtom(element, atoms, context.docParser);
+			case ElementType.MEMBERSHIP: {
+				const {
+					linkText,
+					originalUrl: url,
+					price,
+					start,
+					image,
+				} = element.membershipTypeData ?? {};
+
+				if (!linkText || !url) {
+					return err(
+						'No linkText or originalUrl field on membershipTypeData',
+					);
+				}
+
+				const formattedDate =
+					start?.iso8601 && !isNaN(new Date(start.iso8601).valueOf())
+						? formatDate(new Date(start.iso8601))
+						: undefined;
+
+				return ok({
+					kind: ElementKind.LiveEvent,
+					linkText,
+					url,
+					price,
+					start: formattedDate,
+					image,
+				});
+			}
+
+			case ElementType.INSTAGRAM:
+				return compose(toEmbedElement, parseInstagram)(element);
+
+			case ElementType.AUDIO:
+				return compose(
+					toEmbedElement,
+					parseAudio(context.docParser),
+				)(element);
+
+			case ElementType.VIDEO:
+				return compose(toEmbedElement, parseVideo)(element);
+
+			case ElementType.CONTENTATOM: {
+				if (!atoms) {
+					return err('No atom data returned by capi');
+				}
+
+				return parseAtom(element, atoms, context.docParser);
+			}
+
+			default:
+				return err(
+					`I'm afraid I don't understand the element I was given: ${element.type}`,
+				);
 		}
+	};
 
-		default:
-			return err(
-				`I'm afraid I don't understand the element I was given: ${element.type}`,
-			);
-	}
-};
-
-const parseElements = (
-	context: Context,
-	atoms?: Atoms,
-	campaigns?: Campaign[],
-) => (elements: Elements): Array<Result<string, BodyElement>> => {
-	if (!elements) {
-		return [err('No body elements available')];
-	}
-	return elements.map(parse(context, atoms, campaigns));
-};
+const parseElements =
+	(context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
+	(elements: Elements): Array<Result<string, BodyElement>> => {
+		if (!elements) {
+			return [err('No body elements available')];
+		}
+		return elements.map(parse(context, atoms, campaigns));
+	};
 
 // ----- Exports ----- //
 
@@ -455,7 +401,5 @@ export {
 	ProfileAtom,
 	TimelineAtom,
 	AudioAtom,
-	KnowledgeQuizAtom,
-	PersonalityQuizAtom,
 	parseElements,
 };

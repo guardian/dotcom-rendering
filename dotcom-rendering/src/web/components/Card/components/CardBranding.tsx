@@ -6,7 +6,7 @@ import { decideLogo } from '@root/src/web/lib/decideLogo';
 
 type Props = {
 	branding: Branding;
-	format: Format;
+	format: ArticleFormat;
 	palette: Palette;
 };
 

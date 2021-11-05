@@ -13,12 +13,10 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 	const html = frag.firstElementChild.outerHTML;
 	// The following things must be true for an element to be a faux H3
 	const hasPwrapper = frag.firstElementChild.nodeName === 'P';
-	const containsStrongtags = frag.firstElementChild.outerHTML.includes(
-		'<strong>',
-	);
-	const doesNotContainLinks = !frag.firstElementChild.outerHTML.includes(
-		'<a>',
-	);
+	const containsStrongtags =
+		frag.firstElementChild.outerHTML.includes('<strong>');
+	const doesNotContainLinks =
+		!frag.firstElementChild.outerHTML.includes('<a>');
 	const htmlLength = html.length;
 	const startStrong = html.substr(0, 11) === '<p><strong>';
 	const endsStrong = html.substr(htmlLength - 13) === '</strong></p>';
@@ -144,8 +142,7 @@ const inlineStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
 			const rating = extractStarCount(thisElement);
 			// Inline this image
 			withStars.push({
-				_type:
-					'model.dotcomrendering.pageElements.StarRatingBlockElement',
+				_type: 'model.dotcomrendering.pageElements.StarRatingBlockElement',
 				elementId: thisElement.elementId,
 				rating,
 				size: 'large',
@@ -198,6 +195,38 @@ const isItemLink = (element: CAPIElement): boolean => {
 	return hasULWrapper && hasOnlyOneChild && hasLINestedWrapper;
 };
 
+const removeGlobalH2Styles = (elements: CAPIElement[]): CAPIElement[] => {
+	/**
+	 * Article pages come with some global style rules, one of which affects h2
+	 * tags. But for numbered lists we don't want these styles because we use
+	 * these html elements to represents our special titles. Rather than start a
+	 * css war, this enhancer uses the `data-ignore` attribute which is a contract
+	 * established to allow global styles to be ignored.
+	 *
+	 * All h2 tags inside an article of Design: NumberedList have this attirbute
+	 * set.
+	 */
+	const withH2StylesIgnored: CAPIElement[] = [];
+	elements.forEach((thisElement) => {
+		if (
+			thisElement._type ===
+			'model.dotcomrendering.pageElements.SubheadingBlockElement'
+		) {
+			withH2StylesIgnored.push({
+				...thisElement,
+				html: thisElement.html.replace(
+					'<h2>',
+					'<h2 data-ignore="global-h2-styling">',
+				),
+			});
+		} else {
+			// Pass through
+			withH2StylesIgnored.push(thisElement);
+		}
+	});
+	return withH2StylesIgnored;
+};
+
 const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 	/**
 	 * Why not just add H3s in Composer?
@@ -228,8 +257,7 @@ const addH3s = (elements: CAPIElement[]): CAPIElement[] => {
 
 			withH3s.push(
 				{
-					_type:
-						'model.dotcomrendering.pageElements.DividerBlockElement',
+					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 					size: 'full',
 					spaceAbove: isPreviousItemLink ? 'loose' : 'tight',
 				},
@@ -257,15 +285,13 @@ const addItemLinks = (elements: CAPIElement[]): CAPIElement[] => {
 		) {
 			withItemLink.push(
 				{
-					_type:
-						'model.dotcomrendering.pageElements.DividerBlockElement',
+					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 					size: 'full',
 					spaceAbove: 'tight',
 				},
 				{
 					...thisElement,
-					_type:
-						'model.dotcomrendering.pageElements.ItemLinkBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement',
 				},
 			);
 		} else {
@@ -300,14 +326,12 @@ const addTitles = (
 			const { html } = thisElement;
 			withTitles.push(
 				{
-					_type:
-						'model.dotcomrendering.pageElements.DividerBlockElement',
+					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 					size: 'full',
 					spaceAbove: 'loose',
 				},
 				{
-					_type:
-						'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
+					_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement',
 					elementId: thisElement.elementId,
 					position,
 					html,
@@ -343,6 +367,11 @@ class Enhancer {
 		return this;
 	}
 
+	removeGlobalH2Styles() {
+		this.elements = removeGlobalH2Styles(this.elements);
+		return this;
+	}
+
 	addH3s() {
 		this.elements = addH3s(this.elements);
 		return this;
@@ -370,6 +399,8 @@ const enhance = (
 ): CAPIElement[] => {
 	return (
 		new Enhancer(elements, format)
+			// Add the data-ignore='global-h2-styling' attribute
+			.removeGlobalH2Styles()
 			// Turn false h3s into real ones
 			.addH3s()
 			// Add item links

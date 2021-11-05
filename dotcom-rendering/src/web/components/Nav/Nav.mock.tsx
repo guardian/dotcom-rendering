@@ -1,4 +1,4 @@
-import { Pillar } from '@guardian/types';
+import { ArticlePillar } from '@guardian/libs';
 
 export const nav: NavType = {
 	pillars: [
@@ -6,7 +6,7 @@ export const nav: NavType = {
 			title: 'News',
 			longTitle: 'Headlines',
 			url: '/',
-			pillar: Pillar.News,
+			pillar: ArticlePillar.News,
 			children: [
 				{
 					title: 'UK',
@@ -251,8 +251,7 @@ export const nav: NavType = {
 						{
 							title: 'Project Syndicate',
 							longTitle: 'Project Syndicate',
-							url:
-								'/business/series/project-syndicate-economists',
+							url: '/business/series/project-syndicate-economists',
 							children: [],
 							mobileOnly: false,
 						},
@@ -444,7 +443,7 @@ export const nav: NavType = {
 			title: 'Opinion',
 			longTitle: 'Opinion home',
 			url: '/commentisfree',
-			pillar: Pillar.Opinion,
+			pillar: ArticlePillar.Opinion,
 			children: [
 				{
 					title: 'The Guardian view',
@@ -488,7 +487,7 @@ export const nav: NavType = {
 			title: 'Sport',
 			longTitle: 'Sport home',
 			url: '/sport',
-			pillar: Pillar.Sport,
+			pillar: ArticlePillar.Sport,
 			children: [
 				{
 					title: 'Football',
@@ -617,7 +616,7 @@ export const nav: NavType = {
 			title: 'Culture',
 			longTitle: 'Culture home',
 			url: '/culture',
-			pillar: Pillar.Culture,
+			pillar: ArticlePillar.Culture,
 			children: [
 				{
 					title: 'Film',
@@ -682,7 +681,7 @@ export const nav: NavType = {
 			title: 'Lifestyle',
 			longTitle: 'Lifestyle home',
 			url: '/lifeandstyle',
-			pillar: Pillar.Lifestyle,
+			pillar: ArticlePillar.Lifestyle,
 			children: [
 				{
 					title: 'Fashion',
@@ -831,8 +830,7 @@ export const nav: NavType = {
 		},
 	],
 	otherLinks: {
-		url:
-			'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+		url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 		title: 'More',
 		longTitle: 'More',
 		more: true,
@@ -840,8 +838,7 @@ export const nav: NavType = {
 			{
 				title: 'The Guardian app',
 				longTitle: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 				children: [],
 				mobileOnly: false,
 			},
@@ -955,8 +952,7 @@ export const nav: NavType = {
 			{
 				title: 'Guardian Weekly',
 				longTitle: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 				children: [],
 				mobileOnly: false,
 			},
@@ -1051,16 +1047,14 @@ export const nav: NavType = {
 		{
 			title: 'Search jobs',
 			longTitle: 'Search jobs',
-			url:
-				'https://jobs.theguardian.com/jobs?INTCMP=jobs_uk_web_newheader_dropdown',
+			url: 'https://jobs.theguardian.com/jobs?INTCMP=jobs_uk_web_newheader_dropdown',
 			children: [],
 			mobileOnly: false,
 		},
 		{
 			title: 'Holidays',
 			longTitle: 'Holidays',
-			url:
-				'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+			url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 			children: [],
 			mobileOnly: false,
 		},

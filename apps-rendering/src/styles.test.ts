@@ -10,8 +10,9 @@ describe('helper functions return correct styles', () => {
 			cameraIconBackground: '#C70000',
 			kicker: '#C70000',
 			inverted: '#FF5943',
-			liveblogBackground: '#AB0613',
-			liveblogDarkBackground: '#8B0000',
+			liveblogBackground: "#8B0000",
+			liveblogDarkBackground: "#660505",
+			liveblogKicker: "#FFBAC8",
 			link: '#AB0613',
 		};
 		expect(pillarStyles).toEqual(expectedNewsPillarStyles);
@@ -19,7 +20,7 @@ describe('helper functions return correct styles', () => {
 
 	test('Returns correct dark mode styles', () => {
 		const css = darkModeCss`a { text-decoration: none; color: ${`aliceblue`}; }`;
-		const expectedCss = `@media(prefers-color-scheme:dark){a{text-decoration:none;color:aliceblue;};};label:darkModeCss;`;
+		const expectedCss = `@media(prefers-color-scheme:dark){a{text-decoration:none;color:aliceblue;}}`;
 		expect(css.styles.trim().replace(/\s/g, '')).toEqual(expectedCss);
 	});
 });
