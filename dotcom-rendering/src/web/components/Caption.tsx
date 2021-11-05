@@ -160,7 +160,7 @@ export const Caption = ({
 	const defaultCaption = (
 		<figcaption
 			css={[
-				captionStyle(palette, isVideo),
+				captionStyle(palette),
 				shouldLimitWidth && limitedWidth,
 				!isOverlayed && bottomMargin,
 				isOverlayed && overlayedStyles(palette),
