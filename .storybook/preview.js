@@ -3,9 +3,7 @@ import MockDate from 'mockdate';
 
 import { getFontsCss } from '@root/src/lib/fonts-css';
 
-import { defaults } from './default-css';
-
-import 'reset-css';
+import { resets } from '@guardian/src-foundations/utils'
 
 import { Lazy } from '@root/src/web/components/Lazy';
 import { Picture } from '@root/src/web/components/Picture';
@@ -26,7 +24,7 @@ if (isChromatic()) {
 mockRESTCalls();
 
 // Add base css for the site
-let css = `${getFontsCss()}${defaults}`;
+let css = `${getFontsCss()}${resets.resetCSS}`;
 let head = document.getElementsByTagName('head')[0];
 let style = document.createElement('style');
 head.appendChild(style);
