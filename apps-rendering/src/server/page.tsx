@@ -8,6 +8,7 @@ import type { RenderingRequest } from '@guardian/apps-rendering-api-models/rende
 import { background } from '@guardian/src-foundations/palette';
 import { Design, Display, map, none, some } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
+import { resets } from '@guardian/src-foundations/utils';
 import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import { atomCss, atomScript } from 'components/interactiveAtom';
@@ -63,6 +64,7 @@ const shouldHideAds = (request: RenderingRequest): boolean =>
 
 const styles = (format: Format): string => `
     ${pageFonts}
+	${resets.resetCSS}
 
     body {
         background: ${

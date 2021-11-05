@@ -7,6 +7,7 @@ import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Option, Theme } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
+import { resets } from '@guardian/src-foundations/utils';
 import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import Article from 'components/editions/article';
@@ -77,6 +78,7 @@ const getFonts = (env: EditionsEnv): string => {
 
 const getStyles = (fonts: string): string => `
 	${fonts}
+	${resets.resetCSS}
 
 	html {
 		margin: 0;
