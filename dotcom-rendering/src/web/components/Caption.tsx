@@ -121,7 +121,9 @@ const iconStyle = (palette: Palette) => css`
 `;
 
 const videoIconStyle = css`
-	margin-bottom: -2px;
+	svg {
+		height: 11px;
+	}
 `;
 
 const captionLink = (palette: Palette) => css`
@@ -158,7 +160,7 @@ export const Caption = ({
 	const defaultCaption = (
 		<figcaption
 			css={[
-				captionStyle(palette),
+				captionStyle(palette, isVideo),
 				shouldLimitWidth && limitedWidth,
 				!isOverlayed && bottomMargin,
 				isOverlayed && overlayedStyles(palette),
