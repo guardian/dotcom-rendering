@@ -11,7 +11,7 @@ const baseProperties = {
 };
 
 describe('KeyEventsContainer', () => {
-	it('It should render KeyEventsContainer as expected', () => {
+	it.skip('It should render KeyEventsContainer as expected', () => {
 		const { container } = render(
 			<KeyEventsContainer
 				format={{
@@ -32,7 +32,7 @@ describe('KeyEventsContainer', () => {
 		expect(container).toHaveTextContent('title');
 	});
 
-	it('It should not render events without a blockFirstPublishedDisplay property', () => {
+	it.skip('It should not render events without a blockFirstPublishedDisplay property', () => {
 		const { container } = render(
 			<KeyEventsContainer
 				format={{
@@ -55,7 +55,7 @@ describe('KeyEventsContainer', () => {
 		expect(container).not.toHaveTextContent('should not exist');
 	});
 
-	it('It should not render events without a title property', () => {
+	it.skip('It should not render events without a title property', () => {
 		const { container } = render(
 			<KeyEventsContainer
 				format={{
