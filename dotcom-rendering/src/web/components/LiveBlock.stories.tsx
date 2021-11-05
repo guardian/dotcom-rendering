@@ -37,9 +37,9 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 		<div
 			css={css`
 				padding: 20px;
-				max-width: ${breakpoints.tablet}px;
+				max-width: 700px;
 				${from.tablet} {
-					width: ${breakpoints.tablet}px;
+					width: 700px;
 				}
 			`}
 		>
