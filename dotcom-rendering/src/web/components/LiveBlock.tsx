@@ -196,7 +196,7 @@ export const LiveBlock = ({
 					})}
 			</Header>
 			{mainElements.map((element, index) => (
-				<p key={`${element._type}-${index}`}>
+				<>
 					{renderArticleElement({
 						format,
 						palette,
@@ -206,7 +206,7 @@ export const LiveBlock = ({
 						pageId,
 						webTitle,
 					})}
-				</p>
+				</>
 			))}
 			<div>
 				<Hide when="below" breakpoint="phablet">
