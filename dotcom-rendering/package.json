@@ -263,7 +263,8 @@
     ],
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}"
-    ]
+    ],
+		"isolatedModules": true
   },
   "run-if-changed": {
     "src/lib/content.d.ts": "make gen-schema && make gen-fixtures",
