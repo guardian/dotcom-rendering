@@ -100,7 +100,6 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 		}
 
 		svg {
-			/* box-sizing: content-box; */
 			width: 1.5rem;
 			border-radius: 100%;
 			border: solid 1px ${neutral[7]};
