@@ -1514,21 +1514,21 @@
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
 
-"@guardian/eslint-plugin-source-foundations@^4.0.0-rc.0":
-  version "4.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@guardian/eslint-plugin-source-foundations/-/eslint-plugin-source-foundations-4.0.0-rc.0.tgz#5f5c8e12aa9f4acb13991d0499a3bb38f4109854"
-  integrity sha512-8A7Bypck62+GD7Q11q0n/AAb0FpSFdSXRee+/bUniJ+kUpzZQIucLDcpHhwPaHxP571zg1rZoVQ2bDjL9GvxZQ==
+"@guardian/eslint-plugin-source-foundations@^4.0.0-rc.1":
+  version "4.0.0-rc.1"
+  resolved "https://registry.npmjs.org/@guardian/eslint-plugin-source-foundations/-/eslint-plugin-source-foundations-4.0.0-rc.1.tgz#d875178188c487ea66abcd7621942621c6748dc2"
+  integrity sha512-IWoPc2lMVSclhFMP9jFymmARNfyyy1MOhBvCB3Kcc0sruSaG2NVWcN6A5qr1oGdFO0dTlb4D59+C5eLVRvkpSQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "4.33.0"
     "@typescript-eslint/parser" "4.29.2"
     eslint-plugin-import "2.24.0"
 
-"@guardian/eslint-plugin-source-react-components@^4.0.0-rc.0":
-  version "4.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-4.0.0-rc.0.tgz#da55a462d13e4be5e0f502751242a5ce971cdb74"
-  integrity sha512-R96JMfhe6FTwKJ9l8XXEJQ4iR1Dz9pW0uRG7DfQ2mlEyXtwmjqqz731O2EPPQ9uR2EGG6L91W2JvOIQw0fy2og==
+"@guardian/eslint-plugin-source-react-components@^4.0.0-rc.1":
+  version "4.0.0-rc.1"
+  resolved "https://registry.npmjs.org/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-4.0.0-rc.1.tgz#4db10a13cf985342c515985c95ce3bf8a0eb0046"
+  integrity sha512-X+5jASWzvRlWMcveK/QY9YaREQxTrt6itvisuRx+YI1EvcIBX6W9Xr+bPDd86JIvs1M5ndQ1zSqN1i3A2SSoIQ==
   dependencies:
-    "@guardian/eslint-plugin-source-foundations" "^4.0.0-rc.0"
+    "@guardian/eslint-plugin-source-foundations" "^4.0.0-rc.1"
     "@typescript-eslint/eslint-plugin" "4.29.2"
     "@typescript-eslint/parser" "4.29.2"
 
@@ -1580,10 +1580,10 @@
     "@guardian/src-button" "^3.12.0"
     "@guardian/src-helpers" "^3.12.0"
 
-"@guardian/source-react-components@^4.0.0-rc.0":
-  version "4.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@guardian/source-react-components/-/source-react-components-4.0.0-rc.0.tgz#4f158538d132875e3c549df04d62acf16bf3f2cf"
-  integrity sha512-wusYk9bjH3qMCJMYcQ8HkMQpQ4iE5oHvWCox/dSz10cjmpdtVRhMfh8Jj5hXLfxH25y6C0BaLsORBnnPaDmHwA==
+"@guardian/source-react-components@^4.0.0-rc.1":
+  version "4.0.0-rc.1"
+  resolved "https://registry.npmjs.org/@guardian/source-react-components/-/source-react-components-4.0.0-rc.1.tgz#cd6f372471f8cc09d868ab0c8afd9d2dd7e428d7"
+  integrity sha512-C0hZuTpeJSv+GV9r4G8OTQRZt8SKjvFjtbYeXVCxccseDVq3tjT9eOKQg08X809PvYWtFOVgZR+ySHnqJVyiAg==
 
 "@guardian/src-brand@^3.10.0", "@guardian/src-brand@^3.9.0":
   version "3.11.0"
