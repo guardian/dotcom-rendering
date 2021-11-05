@@ -195,19 +195,17 @@ export const LiveBlock = ({
 						webTitle,
 					})}
 			</Header>
-			{mainElements.map((element, index) => (
-				<>
-					{renderArticleElement({
-						format,
-						palette,
-						element,
-						isMainMedia: false,
-						index,
-						pageId,
-						webTitle,
-					})}
-				</>
-			))}
+			{mainElements.map((element, index) =>
+				renderArticleElement({
+					format,
+					palette,
+					element,
+					isMainMedia: false,
+					index,
+					pageId,
+					webTitle,
+				}),
+			)}
 			<div>
 				<Hide when="below" breakpoint="phablet">
 					<footer
