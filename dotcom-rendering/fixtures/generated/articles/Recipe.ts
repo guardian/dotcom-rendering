@@ -13,8 +13,7 @@
 
 export const Recipe: CAPIType = {
 	slotMachineFlags: '',
-	main:
-		'<figure class="element element-image" data-media-id="e5a2cb2a63b788eae68ff654f739eff53a0cee28"> <img src="https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg" alt="Meera Sodha’s spring onion pancakes with sesame sauce" width="851" height="1000" class="gu-image" /> <figcaption> <span class="element-image__caption">Meera Sodha’s spring onion pancakes with sesame sauce.</span> <span class="element-image__credit">Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.</span> </figcaption> </figure>',
+	main: '<figure class="element element-image" data-media-id="e5a2cb2a63b788eae68ff654f739eff53a0cee28"> <img src="https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg" alt="Meera Sodha’s spring onion pancakes with sesame sauce" width="851" height="1000" class="gu-image" /> <figcaption> <span class="element-image__caption">Meera Sodha’s spring onion pancakes with sesame sauce.</span> <span class="element-image__credit">Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
 			url: '/food/vegan',
@@ -30,8 +29,7 @@ export const Recipe: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 				},
 				{
 					name: 'edition',
@@ -84,8 +82,7 @@ export const Recipe: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 				},
 				{
 					name: 'tn',
@@ -138,8 +135,7 @@ export const Recipe: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 				},
 				{
 					name: 'tn',
@@ -192,8 +188,7 @@ export const Recipe: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+					value: '/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 				},
 				{
 					name: 'tn',
@@ -437,8 +432,7 @@ export const Recipe: CAPIType = {
 							},
 							{
 								title: 'Project Syndicate',
-								url:
-									'/business/series/project-syndicate-economists',
+								url: '/business/series/project-syndicate-economists',
 							},
 							{
 								title: 'B2B',
@@ -821,8 +815,7 @@ export const Recipe: CAPIType = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 			},
 			{
 				title: 'Video',
@@ -898,8 +891,7 @@ export const Recipe: CAPIType = {
 			},
 			{
 				title: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
 			{
 				title: 'Crosswords',
@@ -951,23 +943,19 @@ export const Recipe: CAPIType = {
 		brandExtensions: [
 			{
 				title: 'Search jobs',
-				url:
-					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
 			},
 			{
 				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
 			},
 			{
 				title: 'Holidays',
-				url:
-					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 			},
 			{
 				title: 'Live events',
-				url:
-					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
 			},
 			{
 				title: 'Masterclasses',
@@ -1172,8 +1160,7 @@ export const Recipe: CAPIType = {
 		'article:modified_time': '2021-02-06T10:30:38.000Z',
 	},
 	sectionUrl: 'food/vegan',
-	pageId:
-		'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+	pageId: 'food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 	version: 3,
 	tags: [
 		{
@@ -1265,8 +1252,7 @@ export const Recipe: CAPIType = {
 		},
 	],
 	pillar: 'lifestyle',
-	webURL:
-		'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+	webURL: 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Vegan food and drink',
@@ -1345,8 +1331,7 @@ export const Recipe: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url:
-						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1388,8 +1373,7 @@ export const Recipe: CAPIType = {
 				},
 				{
 					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
 					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
@@ -1409,15 +1393,13 @@ export const Recipe: CAPIType = {
 				},
 				{
 					text: 'Search jobs',
-					url:
-						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
 					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
 				{
 					text: 'Patrons',
-					url:
-						'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
 					extraClasses: '',
 				},
@@ -1468,8 +1450,7 @@ export const Recipe: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/1702.jpg',
+						url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/1702.jpg',
 					},
 					{
 						index: 1,
@@ -1479,8 +1460,7 @@ export const Recipe: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg',
+						url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg',
 					},
 					{
 						index: 2,
@@ -1490,8 +1470,7 @@ export const Recipe: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/426.jpg',
+						url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/426.jpg',
 					},
 					{
 						index: 3,
@@ -1501,8 +1480,7 @@ export const Recipe: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/3731.jpg',
+						url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/3731.jpg',
 					},
 					{
 						index: 4,
@@ -1513,8 +1491,7 @@ export const Recipe: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
+						url: 'https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg',
 					},
 				],
 			},
@@ -1522,8 +1499,7 @@ export const Recipe: CAPIType = {
 				alt: 'Meera Sodha’s spring onion pancakes with sesame sauce',
 				caption:
 					'Meera Sodha’s spring onion pancakes with sesame sauce.',
-				credit:
-					'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
+				credit: 'Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.',
 			},
 			displayCredit: true,
 			role: 'inline',
@@ -1532,33 +1508,27 @@ export const Recipe: CAPIType = {
 					weighting: 'inline',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=85&auto=format&fit=max&s=e0e3e52813ea618fb0bd61c236172aaf',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=85&auto=format&fit=max&s=e0e3e52813ea618fb0bd61c236172aaf',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=cf3dd2d42647f863d321a2f7f80170cf',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=cf3dd2d42647f863d321a2f7f80170cf',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=85&auto=format&fit=max&s=63451f46c7512f40055617e45ace4dc2',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=85&auto=format&fit=max&s=63451f46c7512f40055617e45ace4dc2',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=24a49e5a645e29fbec709824b2b157cb',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=24a49e5a645e29fbec709824b2b157cb',
 							width: 890,
 						},
 					],
@@ -1567,23 +1537,19 @@ export const Recipe: CAPIType = {
 					weighting: 'thumbnail',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=140&quality=85&auto=format&fit=max&s=008ad26364b5689c6f8b77de55ade880',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=140&quality=85&auto=format&fit=max&s=008ad26364b5689c6f8b77de55ade880',
 							width: 140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=1cc25b4ca9c8db2cbfe793b1749e8278',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=1cc25b4ca9c8db2cbfe793b1749e8278',
 							width: 280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=120&quality=85&auto=format&fit=max&s=9d77405d0083b03b935b3adc671a3c61',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=120&quality=85&auto=format&fit=max&s=9d77405d0083b03b935b3adc671a3c61',
 							width: 120,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=8fe2af437b3b2a3d07aa93c7d5b6ec92',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=8fe2af437b3b2a3d07aa93c7d5b6ec92',
 							width: 240,
 						},
 					],
@@ -1592,53 +1558,43 @@ export const Recipe: CAPIType = {
 					weighting: 'supporting',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=380&quality=85&auto=format&fit=max&s=8607e63381731166269954691e0d087f',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=380&quality=85&auto=format&fit=max&s=8607e63381731166269954691e0d087f',
 							width: 380,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=7fa82a0187870dbdce5d4355b8707d6b',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=7fa82a0187870dbdce5d4355b8707d6b',
 							width: 760,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=300&quality=85&auto=format&fit=max&s=b4e8d8ba855c13fad9a4f80b198fe752',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=300&quality=85&auto=format&fit=max&s=b4e8d8ba855c13fad9a4f80b198fe752',
 							width: 300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=983762eeff9cf0184efd87c9f58a292c',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=983762eeff9cf0184efd87c9f58a292c',
 							width: 600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=85&auto=format&fit=max&s=e0e3e52813ea618fb0bd61c236172aaf',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=85&auto=format&fit=max&s=e0e3e52813ea618fb0bd61c236172aaf',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=cf3dd2d42647f863d321a2f7f80170cf',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=cf3dd2d42647f863d321a2f7f80170cf',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=85&auto=format&fit=max&s=63451f46c7512f40055617e45ace4dc2',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=85&auto=format&fit=max&s=63451f46c7512f40055617e45ace4dc2',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=24a49e5a645e29fbec709824b2b157cb',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=24a49e5a645e29fbec709824b2b157cb',
 							width: 890,
 						},
 					],
@@ -1647,73 +1603,59 @@ export const Recipe: CAPIType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1020&quality=85&auto=format&fit=max&s=0f8576b561babcea6db4ac7c4c39b61d',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1020&quality=85&auto=format&fit=max&s=0f8576b561babcea6db4ac7c4c39b61d',
 							width: 1020,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f0e68993e508db8c81d513a740aae17d',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f0e68993e508db8c81d513a740aae17d',
 							width: 2040,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=940&quality=85&auto=format&fit=max&s=2f6f81f802ccbc45a720d702343d52bc',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=940&quality=85&auto=format&fit=max&s=2f6f81f802ccbc45a720d702343d52bc',
 							width: 940,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=531f9cb72baad5291f6d5abd8ae6cee0',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=531f9cb72baad5291f6d5abd8ae6cee0',
 							width: 1880,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=85&auto=format&fit=max&s=7ebeb9bd6ba668b9ec3c5f07ab368571',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f3fa29bf9e522e983e8a60783c9245f3',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=85&auto=format&fit=max&s=783f5534691df8762be1335594ed34ad',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=85&auto=format&fit=max&s=783f5534691df8762be1335594ed34ad',
 							width: 660,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=07f6fbb711263a205caf7010f4f798d5',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=07f6fbb711263a205caf7010f4f798d5',
 							width: 1320,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=85&auto=format&fit=max&s=2c60c23eca47fc66c01b8fc3ff76f74c',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=85&auto=format&fit=max&s=2c60c23eca47fc66c01b8fc3ff76f74c',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1273419669b835132dfd61194bd67efc',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1273419669b835132dfd61194bd67efc',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=85&auto=format&fit=max&s=332989766531687e638bc122557ea079',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=85&auto=format&fit=max&s=332989766531687e638bc122557ea079',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=61117c461b9590a98b917cef4b66514d',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=61117c461b9590a98b917cef4b66514d',
 							width: 930,
 						},
 					],
@@ -1722,33 +1664,27 @@ export const Recipe: CAPIType = {
 					weighting: 'halfwidth',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=85&auto=format&fit=max&s=841c1ef62af3b1af97754a55e5c1ee49',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=b04495718c1992edaa97b8c97a569570',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=85&auto=format&fit=max&s=e0e3e52813ea618fb0bd61c236172aaf',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=85&auto=format&fit=max&s=e0e3e52813ea618fb0bd61c236172aaf',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=cf3dd2d42647f863d321a2f7f80170cf',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=cf3dd2d42647f863d321a2f7f80170cf',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=85&auto=format&fit=max&s=63451f46c7512f40055617e45ace4dc2',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=85&auto=format&fit=max&s=63451f46c7512f40055617e45ace4dc2',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=24a49e5a645e29fbec709824b2b157cb',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=24a49e5a645e29fbec709824b2b157cb',
 							width: 890,
 						},
 					],
@@ -1757,73 +1693,59 @@ export const Recipe: CAPIType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1300&quality=85&auto=format&fit=max&s=dc1a27541c4a1a32bc6d0fd66c7bd421',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1300&quality=85&auto=format&fit=max&s=dc1a27541c4a1a32bc6d0fd66c7bd421',
 							width: 1300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=8e1bb367a46778fe5f2a33b52ce76c00',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=8e1bb367a46778fe5f2a33b52ce76c00',
 							width: 2600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1140&quality=85&auto=format&fit=max&s=d4dabfc10b7bc1ff85093297a569cae4',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1140&quality=85&auto=format&fit=max&s=d4dabfc10b7bc1ff85093297a569cae4',
 							width: 1140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=1e911fff808b4df87a01d7443bfa6ed9',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=1e911fff808b4df87a01d7443bfa6ed9',
 							width: 2280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1125&quality=85&auto=format&fit=max&s=7a1e3699cb217a0702e12784c32f5546',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1125&quality=85&auto=format&fit=max&s=7a1e3699cb217a0702e12784c32f5546',
 							width: 1125,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=a89aad8e374d6777adc4921990a970b9',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=a89aad8e374d6777adc4921990a970b9',
 							width: 2250,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=965&quality=85&auto=format&fit=max&s=2253468b51b234688a514efda30b28ac',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=965&quality=85&auto=format&fit=max&s=2253468b51b234688a514efda30b28ac',
 							width: 965,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=d16d3f30174ec4d0bbae8dc0bf32e81c',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=d16d3f30174ec4d0bbae8dc0bf32e81c',
 							width: 1930,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=725&quality=85&auto=format&fit=max&s=aeb5250059ec234cb74983c89c775355',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=725&quality=85&auto=format&fit=max&s=aeb5250059ec234cb74983c89c775355',
 							width: 725,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=be5ae6d801368022ac6a5f37f0b93283',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=be5ae6d801368022ac6a5f37f0b93283',
 							width: 1450,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=85&auto=format&fit=max&s=2c60c23eca47fc66c01b8fc3ff76f74c',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=85&auto=format&fit=max&s=2c60c23eca47fc66c01b8fc3ff76f74c',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1273419669b835132dfd61194bd67efc',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1273419669b835132dfd61194bd67efc',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=85&auto=format&fit=max&s=332989766531687e638bc122557ea079',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=85&auto=format&fit=max&s=332989766531687e638bc122557ea079',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=61117c461b9590a98b917cef4b66514d',
+							src: 'https://i.guim.co.uk/img/media/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/master/3731.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=61117c461b9590a98b917cef4b66514d',
 							width: 930,
 						},
 					],
@@ -1839,86 +1761,63 @@ export const Recipe: CAPIType = {
 			id: '5ee89b118f089a4ae3aff6e7',
 			elements: [
 				{
-					html:
-						'<p> The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p> The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '706938dd-874e-4c61-950e-17b40e6796b6',
 				},
 				{
 					html: '<h2>Spring onion pancakes with sesame sauce</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: 'b4663ca4-782f-4c31-a9e6-7768e8c2bd8b',
 				},
 				{
-					html:
-						'<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '7c10db22-0cef-4e3f-b99b-e12813a6b200',
 				},
 				{
-					html:
-						'<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '5d9799b7-fa6c-4909-8e6c-08864483a5ae',
 				},
 				{
-					html:
-						'<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'ed580bcb-582f-43c9-a0ea-8c814e5baa78',
 				},
 				{
-					html:
-						'<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '9a91f21e-6cac-4a6c-ae1d-47c48a79bf55',
 				},
 				{
-					html:
-						'<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '284bce07-c2d1-4211-9071-ba167492c03b',
 				},
 				{
-					html:
-						'<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'afab43ce-19c8-475a-8eac-ec472a840adf',
 				},
 				{
-					html:
-						'<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3a3b136d-f53d-4361-922a-015e8411ec8f',
 				},
 				{
-					html:
-						'<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '6c2605ee-b9d6-403c-908c-9cb8a256f003',
 				},
 				{
-					html:
-						'<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '38b88729-a08f-4d72-96c9-e95cbcfca57c',
 				},
 				{
-					html:
-						'<p>Serve the pancakes hot with the sauce for dipping or drizzling over the top.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Serve the pancakes hot with the sauce for dipping or drizzling over the top.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'bd0a9ca0-ffd1-460f-88f5-d3f50e1707b9',
 				},
 			],
@@ -1936,8 +1835,7 @@ export const Recipe: CAPIType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://amp.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+			'@id': 'https://amp.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1946,8 +1844,7 @@ export const Recipe: CAPIType = {
 				url: 'https://www.theguardian.com/',
 				logo: {
 					'@type': 'ImageObject',
-					url:
-						'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 					width: 190,
 					height: 60,
 				},
@@ -1985,12 +1882,10 @@ export const Recipe: CAPIType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+			'@id': 'https://www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target:
-					'android-app://com.guardian/https/www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
+				target: 'android-app://com.guardian/https/www.theguardian.com/food/2021/feb/06/meera-sodhas-vegan-recipe-for-spring-onion-pancakes',
 			},
 		},
 	],
@@ -2106,8 +2001,7 @@ export const Recipe: CAPIType = {
 		sharedAdTargeting: {
 			ct: 'article',
 			co: ['jennifer-rankin'],
-			url:
-				'/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 			su: ['0'],
 			edition: 'uk',
 			tn: ['news'],
@@ -2161,8 +2055,7 @@ export const Recipe: CAPIType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId:
-			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

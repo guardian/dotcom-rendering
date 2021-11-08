@@ -8,8 +8,8 @@ import {
   specialReport,
   sport,
 } from "@guardian/src-foundations/palette";
-import type { Format } from "@guardian/types";
-import { Pillar, Special } from "@guardian/types";
+import type { ArticleFormat } from "@guardian/libs";
+import { ArticlePillar, ArticleSpecial } from "@guardian/libs";
 
 // ----- Types ----- //
 
@@ -17,37 +17,37 @@ type Colour = string;
 
 // ----- Functions ----- //
 
-const fillIconPrimary = (format: Format): Colour => {
+const fillIconPrimary = (format: ArticleFormat): Colour => {
   switch (format.theme) {
-    case Pillar.Opinion:
+    case ArticlePillar.Opinion:
       return opinion[400];
-    case Pillar.Sport:
+    case ArticlePillar.Sport:
       return sport[400];
-    case Pillar.Culture:
+    case ArticlePillar.Culture:
       return culture[400];
-    case Pillar.Lifestyle:
+    case ArticlePillar.Lifestyle:
       return lifestyle[400];
-    case Special.SpecialReport:
+    case ArticleSpecial.SpecialReport:
       return specialReport[500];
-    case Pillar.News:
+    case ArticlePillar.News:
     default:
       return news[400];
   }
 };
 
-const fillIconPrimaryInverse = (format: Format): Colour => {
+const fillIconPrimaryInverse = (format: ArticleFormat): Colour => {
   switch (format.theme) {
-    case Pillar.Opinion:
+    case ArticlePillar.Opinion:
       return opinion[500];
-    case Pillar.Sport:
+    case ArticlePillar.Sport:
       return sport[500];
-    case Pillar.Culture:
+    case ArticlePillar.Culture:
       return culture[500];
-    case Pillar.Lifestyle:
+    case ArticlePillar.Lifestyle:
       return lifestyle[500];
-    case Special.SpecialReport:
+    case ArticleSpecial.SpecialReport:
       return specialReport[500];
-    case Pillar.News:
+    case ArticlePillar.News:
     default:
       return news[500];
   }

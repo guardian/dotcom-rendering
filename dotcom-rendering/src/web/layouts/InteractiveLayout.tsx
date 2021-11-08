@@ -252,12 +252,13 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 	return (
 		<>
-			<div data-print-layout="hide">
-				{CAPI.isLegacyInteractive && (
-					<Global styles={interactiveGlobalStyles} />
-				)}
-				<>
-					<Stuck>
+			{CAPI.isLegacyInteractive && (
+				<Global styles={interactiveGlobalStyles} />
+			)}
+
+			<div>
+				<Stuck>
+					<div data-print-layout="hide">
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
@@ -270,8 +271,11 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								display={format.display}
 							/>
 						</ElementContainer>
-					</Stuck>
-					{format.theme !== ArticleSpecial.Labs && (
+					</div>
+				</Stuck>
+
+				{format.theme !== ArticleSpecial.Labs && (
+					<div data-print-layout="hide">
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
@@ -287,45 +291,45 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								}
 							/>
 						</ElementContainer>
-					)}
-				</>
-			</div>
+					</div>
+				)}
 
-			<ElementContainer
-				showSideBorders={true}
-				borderColour={brandLine.primary}
-				showTopBorder={false}
-				padded={false}
-				backgroundColour={brandBackground.primary}
-			>
-				<Nav
-					nav={NAV}
-					format={{
-						...format,
-						theme: getCurrentPillar(CAPI),
-					}}
-					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
-					edition={CAPI.editionId}
-				/>
-			</ElementContainer>
-
-			{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
 				<ElementContainer
-					backgroundColour={palette.background.article}
+					showSideBorders={true}
+					borderColour={brandLine.primary}
+					showTopBorder={false}
 					padded={false}
-					sectionId="sub-nav-root"
+					backgroundColour={brandBackground.primary}
 				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						palette={palette}
-						format={format}
+					<Nav
+						nav={NAV}
+						format={{
+							...format,
+							theme: getCurrentPillar(CAPI),
+						}}
+						subscribeUrl={
+							CAPI.nav.readerRevenueLinks.header.subscribe
+						}
+						edition={CAPI.editionId}
 					/>
 				</ElementContainer>
-			)}
 
-			{format.theme !== ArticleSpecial.Labs ? (
-				<>
+				{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
+					<ElementContainer
+						backgroundColour={palette.background.article}
+						padded={false}
+						sectionId="sub-nav-root"
+					>
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							palette={palette}
+							format={format}
+						/>
+					</ElementContainer>
+				)}
+
+				{format.theme !== ArticleSpecial.Labs && (
 					<ElementContainer
 						backgroundColour={palette.background.article}
 						padded={false}
@@ -333,8 +337,10 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					>
 						<Lines count={4} effect="straight" />
 					</ElementContainer>
-				</>
-			) : (
+				)}
+			</div>
+
+			{format.theme === ArticleSpecial.Labs && (
 				<Stuck>
 					<ElementContainer
 						showSideBorders={true}

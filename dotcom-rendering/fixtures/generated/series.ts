@@ -19,19 +19,15 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/jun/22/philly-da-breaking-the-law-review-a-deeply-thrilling-hopeful-show-to-devour',
+			url: 'https://www.theguardian.com/tv-and-radio/2021/jun/22/philly-da-breaking-the-law-review-a-deeply-thrilling-hopeful-show-to-devour',
 			linkText:
 				'Philly DA: Breaking the Law review – a deeply thrilling, hopeful show to devour',
 			showByline: false,
 			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/486e06694ce1d6bf843f3e5fbb47e4670f838087/2_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=de3f2a3f73dc8e33d225448851e18a77',
+			image: 'https://i.guim.co.uk/img/media/486e06694ce1d6bf843f3e5fbb47e4670f838087/2_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=de3f2a3f73dc8e33d225448851e18a77',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/486e06694ce1d6bf843f3e5fbb47e4670f838087/2_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=de3f2a3f73dc8e33d225448851e18a77',
-				'460':
-					'https://i.guim.co.uk/img/media/486e06694ce1d6bf843f3e5fbb47e4670f838087/2_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=c9457b5d750e198ee19b03ff280f3e66',
+				'300': 'https://i.guim.co.uk/img/media/486e06694ce1d6bf843f3e5fbb47e4670f838087/2_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=de3f2a3f73dc8e33d225448851e18a77',
+				'460': 'https://i.guim.co.uk/img/media/486e06694ce1d6bf843f3e5fbb47e4670f838087/2_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=c9457b5d750e198ee19b03ff280f3e66',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -48,19 +44,15 @@ export const series = {
 			starRating: 4,
 		},
 		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/jun/21/rick-and-morty-series-five-review-proof-that-elon-musk-must-be-stopped',
+			url: 'https://www.theguardian.com/tv-and-radio/2021/jun/21/rick-and-morty-series-five-review-proof-that-elon-musk-must-be-stopped',
 			linkText:
 				'Rick and Morty series five review – proof that Elon Musk must be stopped! ',
 			showByline: false,
 			byline: 'Stuart Jeffries',
-			image:
-				'https://i.guim.co.uk/img/media/5067ea35e36de6f67bcc3922d42788e79caff932/120_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=b1af8ab424453f9dfc809d44afe985d4',
+			image: 'https://i.guim.co.uk/img/media/5067ea35e36de6f67bcc3922d42788e79caff932/120_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=b1af8ab424453f9dfc809d44afe985d4',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/5067ea35e36de6f67bcc3922d42788e79caff932/120_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=b1af8ab424453f9dfc809d44afe985d4',
-				'460':
-					'https://i.guim.co.uk/img/media/5067ea35e36de6f67bcc3922d42788e79caff932/120_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=e0f681da1226ecb10e0e49d7a1087a7a',
+				'300': 'https://i.guim.co.uk/img/media/5067ea35e36de6f67bcc3922d42788e79caff932/120_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=b1af8ab424453f9dfc809d44afe985d4',
+				'460': 'https://i.guim.co.uk/img/media/5067ea35e36de6f67bcc3922d42788e79caff932/120_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=e0f681da1226ecb10e0e49d7a1087a7a',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -77,19 +69,15 @@ export const series = {
 			starRating: 5,
 		},
 		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/jun/20/the-handmaids-tale-season-four-review-hope-at-last-in-the-most-harrowing-show-on-tv',
+			url: 'https://www.theguardian.com/tv-and-radio/2021/jun/20/the-handmaids-tale-season-four-review-hope-at-last-in-the-most-harrowing-show-on-tv',
 			linkText:
 				'The Handmaid’s Tale season four review – hope at last in the most harrowing show on TV',
 			showByline: false,
 			byline: 'Rebecca Nicholson',
-			image:
-				'https://i.guim.co.uk/img/media/f7a164a94f28390b88493fbbfd8fc8bc1c351722/0_333_2825_1696/master/2825.jpg?width=300&quality=85&auto=format&fit=max&s=7dc1226fad2c174642631447f5dd0805',
+			image: 'https://i.guim.co.uk/img/media/f7a164a94f28390b88493fbbfd8fc8bc1c351722/0_333_2825_1696/master/2825.jpg?width=300&quality=85&auto=format&fit=max&s=7dc1226fad2c174642631447f5dd0805',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/f7a164a94f28390b88493fbbfd8fc8bc1c351722/0_333_2825_1696/master/2825.jpg?width=300&quality=85&auto=format&fit=max&s=7dc1226fad2c174642631447f5dd0805',
-				'460':
-					'https://i.guim.co.uk/img/media/f7a164a94f28390b88493fbbfd8fc8bc1c351722/0_333_2825_1696/master/2825.jpg?width=460&quality=85&auto=format&fit=max&s=d1b894c0520c49c685d654ccdf2909db',
+				'300': 'https://i.guim.co.uk/img/media/f7a164a94f28390b88493fbbfd8fc8bc1c351722/0_333_2825_1696/master/2825.jpg?width=300&quality=85&auto=format&fit=max&s=7dc1226fad2c174642631447f5dd0805',
+				'460': 'https://i.guim.co.uk/img/media/f7a164a94f28390b88493fbbfd8fc8bc1c351722/0_333_2825_1696/master/2825.jpg?width=460&quality=85&auto=format&fit=max&s=d1b894c0520c49c685d654ccdf2909db',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -106,19 +94,15 @@ export const series = {
 			starRating: 4,
 		},
 		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/jun/18/physical-review-rose-byrne-appletv',
+			url: 'https://www.theguardian.com/tv-and-radio/2021/jun/18/physical-review-rose-byrne-appletv',
 			linkText:
 				'Physical review – Rose Byrne’s fitness guru fails to get the pulse racing',
 			showByline: false,
 			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/8b0be89669c841fa5eee00fcb26979ff77d39462/0_246_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=ffa18f75c779271e325a8504eaebfba0',
+			image: 'https://i.guim.co.uk/img/media/8b0be89669c841fa5eee00fcb26979ff77d39462/0_246_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=ffa18f75c779271e325a8504eaebfba0',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/8b0be89669c841fa5eee00fcb26979ff77d39462/0_246_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=ffa18f75c779271e325a8504eaebfba0',
-				'460':
-					'https://i.guim.co.uk/img/media/8b0be89669c841fa5eee00fcb26979ff77d39462/0_246_6000_3600/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=132779ba338af197ea30347aec4d77bd',
+				'300': 'https://i.guim.co.uk/img/media/8b0be89669c841fa5eee00fcb26979ff77d39462/0_246_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=ffa18f75c779271e325a8504eaebfba0',
+				'460': 'https://i.guim.co.uk/img/media/8b0be89669c841fa5eee00fcb26979ff77d39462/0_246_6000_3600/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=132779ba338af197ea30347aec4d77bd',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -135,19 +119,15 @@ export const series = {
 			starRating: 2,
 		},
 		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/jun/17/together-review-sharon-horgan-and-james-mcavoy-let-rip-in-lockdown-tour-de-force',
+			url: 'https://www.theguardian.com/tv-and-radio/2021/jun/17/together-review-sharon-horgan-and-james-mcavoy-let-rip-in-lockdown-tour-de-force',
 			linkText:
 				'Together review – Sharon Horgan and James McAvoy let rip in lockdown tour de force',
 			showByline: false,
 			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/94356ea3fe72d003caacd14152e9c38cc1b51aed/0_127_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=b65c63e6a7cb3fb9711460bdc5585b24',
+			image: 'https://i.guim.co.uk/img/media/94356ea3fe72d003caacd14152e9c38cc1b51aed/0_127_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=b65c63e6a7cb3fb9711460bdc5585b24',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/94356ea3fe72d003caacd14152e9c38cc1b51aed/0_127_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=b65c63e6a7cb3fb9711460bdc5585b24',
-				'460':
-					'https://i.guim.co.uk/img/media/94356ea3fe72d003caacd14152e9c38cc1b51aed/0_127_4284_2570/master/4284.jpg?width=460&quality=85&auto=format&fit=max&s=a562c7344f4eb07820a2d5e6f309d9a3',
+				'300': 'https://i.guim.co.uk/img/media/94356ea3fe72d003caacd14152e9c38cc1b51aed/0_127_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=b65c63e6a7cb3fb9711460bdc5585b24',
+				'460': 'https://i.guim.co.uk/img/media/94356ea3fe72d003caacd14152e9c38cc1b51aed/0_127_4284_2570/master/4284.jpg?width=460&quality=85&auto=format&fit=max&s=a562c7344f4eb07820a2d5e6f309d9a3',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -164,19 +144,15 @@ export const series = {
 			starRating: 4,
 		},
 		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/jun/16/horizon-special-the-vaccine-review-meet-the-superheroes-who-saved-the-planet',
+			url: 'https://www.theguardian.com/tv-and-radio/2021/jun/16/horizon-special-the-vaccine-review-meet-the-superheroes-who-saved-the-planet',
 			linkText:
 				'Horizon Special: The Vaccine review – meet the superheroes who saved the planet',
 			showByline: false,
 			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/4f32ab77b481fc03ef2d877ffcdb3a63a47acb89/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=463890006d3374886ee5f05980e7207e',
+			image: 'https://i.guim.co.uk/img/media/4f32ab77b481fc03ef2d877ffcdb3a63a47acb89/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=463890006d3374886ee5f05980e7207e',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/4f32ab77b481fc03ef2d877ffcdb3a63a47acb89/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=463890006d3374886ee5f05980e7207e',
-				'460':
-					'https://i.guim.co.uk/img/media/4f32ab77b481fc03ef2d877ffcdb3a63a47acb89/60_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=a1d9d1b8e5d7bf8ba90bfe4b73564563',
+				'300': 'https://i.guim.co.uk/img/media/4f32ab77b481fc03ef2d877ffcdb3a63a47acb89/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=463890006d3374886ee5f05980e7207e',
+				'460': 'https://i.guim.co.uk/img/media/4f32ab77b481fc03ef2d877ffcdb3a63a47acb89/60_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=a1d9d1b8e5d7bf8ba90bfe4b73564563',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -193,19 +169,15 @@ export const series = {
 			starRating: 5,
 		},
 		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/jun/15/the-return-life-after-isis-review-prepare-to-question-all-you-know-about-shamima-begum',
+			url: 'https://www.theguardian.com/tv-and-radio/2021/jun/15/the-return-life-after-isis-review-prepare-to-question-all-you-know-about-shamima-begum',
 			linkText:
 				'The Return: Life After Isis review – prepare to question all you know about Shamima Begum',
 			showByline: false,
 			byline: 'Lucy Mangan',
-			image:
-				'https://i.guim.co.uk/img/media/36b1158ee6a49690c376fbbbcef106581156a4c9/128_0_1920_1152/master/1920.jpg?width=300&quality=85&auto=format&fit=max&s=29b936dbf3c4eba55d1161487e8dddbc',
+			image: 'https://i.guim.co.uk/img/media/36b1158ee6a49690c376fbbbcef106581156a4c9/128_0_1920_1152/master/1920.jpg?width=300&quality=85&auto=format&fit=max&s=29b936dbf3c4eba55d1161487e8dddbc',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/36b1158ee6a49690c376fbbbcef106581156a4c9/128_0_1920_1152/master/1920.jpg?width=300&quality=85&auto=format&fit=max&s=29b936dbf3c4eba55d1161487e8dddbc',
-				'460':
-					'https://i.guim.co.uk/img/media/36b1158ee6a49690c376fbbbcef106581156a4c9/128_0_1920_1152/master/1920.jpg?width=460&quality=85&auto=format&fit=max&s=40c15934dad1a2d84ab9079c6233197c',
+				'300': 'https://i.guim.co.uk/img/media/36b1158ee6a49690c376fbbbcef106581156a4c9/128_0_1920_1152/master/1920.jpg?width=300&quality=85&auto=format&fit=max&s=29b936dbf3c4eba55d1161487e8dddbc',
+				'460': 'https://i.guim.co.uk/img/media/36b1158ee6a49690c376fbbbcef106581156a4c9/128_0_1920_1152/master/1920.jpg?width=460&quality=85&auto=format&fit=max&s=40c15934dad1a2d84ab9079c6233197c',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -222,19 +194,15 @@ export const series = {
 			starRating: 4,
 		},
 		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/jun/14/peter-taylor-ireland-after-partition-review-a-fascinating-look-at-the-fragile-peace-now-at-risk',
+			url: 'https://www.theguardian.com/tv-and-radio/2021/jun/14/peter-taylor-ireland-after-partition-review-a-fascinating-look-at-the-fragile-peace-now-at-risk',
 			linkText:
 				'Ireland After Partition review – a fascinating look at the fragile peace now at risk',
 			showByline: false,
 			byline: 'Stuart Jeffries',
-			image:
-				'https://i.guim.co.uk/img/media/5d126a7306f9102d49844eba698c587d1f080d9a/120_0_3971_2384/master/3971.jpg?width=300&quality=85&auto=format&fit=max&s=ca64a3521301340f3440869c029c84fe',
+			image: 'https://i.guim.co.uk/img/media/5d126a7306f9102d49844eba698c587d1f080d9a/120_0_3971_2384/master/3971.jpg?width=300&quality=85&auto=format&fit=max&s=ca64a3521301340f3440869c029c84fe',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/5d126a7306f9102d49844eba698c587d1f080d9a/120_0_3971_2384/master/3971.jpg?width=300&quality=85&auto=format&fit=max&s=ca64a3521301340f3440869c029c84fe',
-				'460':
-					'https://i.guim.co.uk/img/media/5d126a7306f9102d49844eba698c587d1f080d9a/120_0_3971_2384/master/3971.jpg?width=460&quality=85&auto=format&fit=max&s=88c14134bcd81ca76b16ae053e5b630c',
+				'300': 'https://i.guim.co.uk/img/media/5d126a7306f9102d49844eba698c587d1f080d9a/120_0_3971_2384/master/3971.jpg?width=300&quality=85&auto=format&fit=max&s=ca64a3521301340f3440869c029c84fe',
+				'460': 'https://i.guim.co.uk/img/media/5d126a7306f9102d49844eba698c587d1f080d9a/120_0_3971_2384/master/3971.jpg?width=460&quality=85&auto=format&fit=max&s=88c14134bcd81ca76b16ae053e5b630c',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -251,19 +219,15 @@ export const series = {
 			starRating: 4,
 		},
 		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/jun/13/gb-news-review-andrew-neils-alternative-bbc-utterly-deadly-stuff',
+			url: 'https://www.theguardian.com/tv-and-radio/2021/jun/13/gb-news-review-andrew-neils-alternative-bbc-utterly-deadly-stuff',
 			linkText:
 				'GB News review – Andrew Neil’s alternative BBC? Utterly deadly stuff',
 			showByline: false,
 			byline: 'Stuart Jeffries',
-			image:
-				'https://i.guim.co.uk/img/media/677a37ac19dfe61a1ee3c8fb03eadc5abf9e6f4b/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=bafbe86e18aa6ef12c0bdf7f0b27f3f1',
+			image: 'https://i.guim.co.uk/img/media/677a37ac19dfe61a1ee3c8fb03eadc5abf9e6f4b/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=bafbe86e18aa6ef12c0bdf7f0b27f3f1',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/677a37ac19dfe61a1ee3c8fb03eadc5abf9e6f4b/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=bafbe86e18aa6ef12c0bdf7f0b27f3f1',
-				'460':
-					'https://i.guim.co.uk/img/media/677a37ac19dfe61a1ee3c8fb03eadc5abf9e6f4b/60_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=6c88d9da42f15cac052770cb4a321140',
+				'300': 'https://i.guim.co.uk/img/media/677a37ac19dfe61a1ee3c8fb03eadc5abf9e6f4b/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=bafbe86e18aa6ef12c0bdf7f0b27f3f1',
+				'460': 'https://i.guim.co.uk/img/media/677a37ac19dfe61a1ee3c8fb03eadc5abf9e6f4b/60_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=6c88d9da42f15cac052770cb4a321140',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',
@@ -280,19 +244,15 @@ export const series = {
 			starRating: 1,
 		},
 		{
-			url:
-				'https://www.theguardian.com/tv-and-radio/2021/jun/13/blindspotting-review-film-to-tv-transfer-offers-spike-lee-style-thrills',
+			url: 'https://www.theguardian.com/tv-and-radio/2021/jun/13/blindspotting-review-film-to-tv-transfer-offers-spike-lee-style-thrills',
 			linkText:
 				'Blindspotting review – film-to-TV transfer offers Spike Lee-style thrills',
 			showByline: false,
 			byline: 'Chitra Ramaswamy',
-			image:
-				'https://i.guim.co.uk/img/media/ba33a90d1682089fe919ff67f128a7bec6023835/0_138_6833_4102/master/6833.jpg?width=300&quality=85&auto=format&fit=max&s=3c9ff12ad161aa7487de93449242b9f9',
+			image: 'https://i.guim.co.uk/img/media/ba33a90d1682089fe919ff67f128a7bec6023835/0_138_6833_4102/master/6833.jpg?width=300&quality=85&auto=format&fit=max&s=3c9ff12ad161aa7487de93449242b9f9',
 			carouselImages: {
-				'300':
-					'https://i.guim.co.uk/img/media/ba33a90d1682089fe919ff67f128a7bec6023835/0_138_6833_4102/master/6833.jpg?width=300&quality=85&auto=format&fit=max&s=3c9ff12ad161aa7487de93449242b9f9',
-				'460':
-					'https://i.guim.co.uk/img/media/ba33a90d1682089fe919ff67f128a7bec6023835/0_138_6833_4102/master/6833.jpg?width=460&quality=85&auto=format&fit=max&s=006146406e23e02552f30bfcdef6e5ef',
+				'300': 'https://i.guim.co.uk/img/media/ba33a90d1682089fe919ff67f128a7bec6023835/0_138_6833_4102/master/6833.jpg?width=300&quality=85&auto=format&fit=max&s=3c9ff12ad161aa7487de93449242b9f9',
+				'460': 'https://i.guim.co.uk/img/media/ba33a90d1682089fe919ff67f128a7bec6023835/0_138_6833_4102/master/6833.jpg?width=460&quality=85&auto=format&fit=max&s=006146406e23e02552f30bfcdef6e5ef',
 			},
 			isLiveBlog: false,
 			pillar: 'culture',

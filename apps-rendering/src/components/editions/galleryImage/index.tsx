@@ -8,7 +8,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import type { Format, Option } from '@guardian/types';
 import { map, none, OptionKind, some, withDefault } from '@guardian/types';
 import type { Image } from 'bodyElement';
-import { maybeRender, pipe } from 'lib';
+import { convertFormatToArticleFormat, maybeRender, pipe } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 
@@ -173,7 +173,7 @@ const GalleryImage: FC<Props> = ({ image, format }) => {
 				image={image}
 				sizes={sizes}
 				className={none}
-				format={format}
+				format={convertFormatToArticleFormat(format)}
 				supportsDarkMode={false}
 				lightbox={some({
 					className: 'js-launch-slideshow',

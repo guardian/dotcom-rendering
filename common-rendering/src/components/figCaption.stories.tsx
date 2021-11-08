@@ -2,7 +2,8 @@
 
 // ----- Imports ----- //
 
-import { Design, Display, Pillar, some } from "@guardian/types";
+import { ArticleDesign, ArticleDisplay, ArticlePillar} from "@guardian/libs";
+import { some } from "@guardian/types";
 import type { FC } from "react";
 import FigCaption from "./figCaption";
 
@@ -11,9 +12,9 @@ import FigCaption from "./figCaption";
 const Default: FC = () => (
   <FigCaption
     format={{
-      design: Design.Article,
-      display: Display.Standard,
-      theme: Pillar.News,
+      design: ArticleDesign.Standard,
+      display: ArticleDisplay.Standard,
+      theme: ArticlePillar.News,
     }}
     supportsDarkMode={true}
   >

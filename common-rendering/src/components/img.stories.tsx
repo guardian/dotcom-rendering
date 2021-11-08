@@ -2,7 +2,8 @@
 
 // ----- Imports ----- //
 
-import { Design, Display, none, Pillar } from "@guardian/types";
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from "@guardian/libs";
+import { none } from "@guardian/types";
 import type { FC } from "react";
 import { image } from "../fixtures/image";
 import Img from "./img";
@@ -19,9 +20,9 @@ const Default: FC = () => (
     sizes={sizes}
     className={none}
     format={{
-      design: Design.Article,
-      display: Display.Standard,
-      theme: Pillar.News,
+      design: ArticleDesign.Standard,
+      display: ArticleDisplay.Standard,
+      theme: ArticlePillar.News,
     }}
     supportsDarkMode={true}
     lightbox={none}
@@ -39,9 +40,9 @@ const Placeholder: FC = () => (
     sizes={sizes}
     className={none}
     format={{
-      design: Design.Article,
-      display: Display.Standard,
-      theme: Pillar.News,
+      design: ArticleDesign.Standard,
+      display: ArticleDisplay.Standard,
+      theme: ArticlePillar.News,
     }}
     supportsDarkMode={true}
     lightbox={none}

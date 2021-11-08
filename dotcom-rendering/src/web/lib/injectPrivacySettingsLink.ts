@@ -28,9 +28,8 @@ export const injectPrivacySettingsLink = (): void => {
 						? 'California resident – Do Not Sell'
 						: 'Privacy settings';
 
-					const newPrivacyLinkListItem = privacyLinkListItem.cloneNode(
-						false,
-					) as Element;
+					const newPrivacyLinkListItem =
+						privacyLinkListItem.cloneNode(false) as Element;
 
 					newPrivacyLinkListItem.appendChild(newPrivacyLink);
 

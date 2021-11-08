@@ -2,20 +2,16 @@ import { useState } from 'react';
 import { css } from '@emotion/react';
 
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
-import { logView } from '@guardian/automat-contributions';
 import {
 	shouldHideSupportMessaging,
 	withinLocalNoBannerCachePeriod,
 	setLocalNoBannerCachePeriod,
 	MODULES_VERSION,
 	hasOptedOutOfArticleCount,
-	getEmail,
+	lazyFetchEmailWithTimeout,
 } from '@root/src/web/lib/contributions';
 import { getCookie } from '@root/src/web/browser/cookie';
-import {
-	sendOphanComponentEvent,
-	submitComponentEvent,
-} from '@root/src/web/browser/ophan/ophan';
+import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
@@ -23,12 +19,11 @@ import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { useOnce } from '@root/src/web/lib/useOnce';
-import { storage } from '@guardian/libs';
 
 type BaseProps = {
 	isSignedIn: boolean;
 	contentType: string;
-	sectionName?: string;
+	sectionId?: string;
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
 	isPaidContent: boolean;
@@ -76,6 +71,8 @@ const buildPayload = async ({
 	countryCode,
 	optedOutOfArticleCount,
 	asyncArticleCount,
+	sectionId,
+	tags,
 }: BuildPayloadProps) => {
 	return {
 		tracking: {
@@ -96,6 +93,8 @@ const buildPayload = async ({
 			weeklyArticleHistory: await asyncArticleCount,
 			optedOutOfArticleCount,
 			modulesVersion: MODULES_VERSION,
+			sectionId,
+			tagIds: tags.map((tag) => tag.id),
 		},
 	};
 };
@@ -125,7 +124,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	isSignedIn,
 	asyncCountryCode,
 	contentType,
-	sectionName,
+	sectionId,
 	shouldHideReaderRevenue,
 	isMinuteArticle,
 	isPaidContent,
@@ -166,7 +165,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		isSignedIn,
 		countryCode,
 		contentType,
-		sectionName,
+		sectionId,
 		shouldHideReaderRevenue,
 		isMinuteArticle,
 		isPaidContent,
@@ -195,9 +194,11 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 
 	const { module, meta } = json.data;
 
-	const email = isSignedIn ? await getEmail(idApiUrl) : undefined;
+	const fetchEmail = isSignedIn
+		? lazyFetchEmailWithTimeout(idApiUrl)
+		: undefined;
 
-	return { show: true, meta: { module, meta, email } };
+	return { show: true, meta: { module, meta, fetchEmail } };
 };
 
 export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
@@ -205,7 +206,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	isSignedIn,
 	asyncCountryCode,
 	contentType,
-	sectionName,
+	sectionId,
 	shouldHideReaderRevenue,
 	isMinuteArticle,
 	isPaidContent,
@@ -234,7 +235,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 			isSignedIn,
 			countryCode,
 			contentType,
-			sectionName,
+			sectionId,
 			shouldHideReaderRevenue,
 			isMinuteArticle,
 			isPaidContent,
@@ -267,7 +268,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 export type BannerProps = {
 	meta: any;
 	module: { url: string; name: string; props: any[] };
-	email?: string;
+	fetchEmail?: () => Promise<string | null>;
 };
 
 type RemoteBannerProps = BannerProps & {
@@ -280,7 +281,7 @@ const RemoteBanner = ({
 	displayEvent,
 	meta,
 	module,
-	email,
+	fetchEmail,
 }: RemoteBannerProps) => {
 	const [Banner, setBanner] = useState<React.FC>();
 
@@ -300,7 +301,6 @@ const RemoteBanner = ({
 			.guardianPolyfilledImport(module.url)
 			.then((bannerModule: { [key: string]: JSX.Element }) => {
 				setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
-				sendOphanComponentEvent('INSERT', meta);
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${error}`;
@@ -314,11 +314,7 @@ const RemoteBanner = ({
 	}, []);
 
 	useOnce(() => {
-		const { abTestName, componentType } = meta;
-
-		logView(storage.local, abTestName);
-
-		sendOphanComponentEvent('VIEW', meta);
+		const { componentType } = meta;
 
 		// track banner view event in Google Analytics for subscriptions banner
 		if (componentType === componentTypeName) {
@@ -341,7 +337,7 @@ const RemoteBanner = ({
 					{...module.props}
 					// @ts-ignore
 					submitComponentEvent={submitComponentEvent}
-					email={email}
+					fetchEmail={fetchEmail}
 				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
@@ -351,13 +347,17 @@ const RemoteBanner = ({
 	return null;
 };
 
-export const ReaderRevenueBanner = ({ meta, module, email }: BannerProps) => (
+export const ReaderRevenueBanner = ({
+	meta,
+	module,
+	fetchEmail,
+}: BannerProps) => (
 	<RemoteBanner
 		componentTypeName="ACQUISITIONS_SUBSCRIPTIONS_BANNER"
 		displayEvent="subscription-banner : display"
 		meta={meta}
 		module={module}
-		email={email}
+		fetchEmail={fetchEmail}
 	/>
 );
 

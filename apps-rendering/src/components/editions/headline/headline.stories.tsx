@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
-import { Display, none, Pillar, Role, some } from '@guardian/types';
+import { ArticleElementRole } from '@guardian/libs';
+import { Display, none, Pillar, some } from '@guardian/types';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import type { Contributor } from 'contributor';
 import {
@@ -29,7 +30,7 @@ const image: Image = {
 	alt: some('image'),
 	width: 550,
 	height: 550,
-	role: Role.Immersive,
+	role: ArticleElementRole.Immersive,
 	caption: none,
 	nativeCaption: none,
 	credit: none,

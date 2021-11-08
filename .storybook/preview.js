@@ -3,9 +3,7 @@ import MockDate from 'mockdate';
 
 import { getFontsCss } from '@root/src/lib/fonts-css';
 
-import { defaults } from './default-css';
-
-import 'reset-css';
+import { resets } from '@guardian/src-foundations/utils'
 
 import { Lazy } from '@root/src/web/components/Lazy';
 import { Picture } from '@root/src/web/components/Picture';
@@ -18,13 +16,15 @@ Picture.disableLazyLoading = isChromatic();
 
 if (isChromatic()) {
 	// Fix the date to prevent false negatives
-	MockDate.set('Sun Jan 10 2021 12:00:00 GMT+0000 (Greenwich Mean Time)');
+	// And not just any date... 200 years! 🎉
+	// https://www.theguardian.com/gnm-press-office/2021/apr/30/the-guardian-celebrates-200-extraordinary-years
+	MockDate.set('Wed May 5 2021 12:00:00 GMT+0000 (Greenwich Mean Time)');
 }
 
 mockRESTCalls();
 
 // Add base css for the site
-let css = `${getFontsCss()}${defaults}`;
+let css = `${getFontsCss()}${resets.resetCSS}`;
 let head = document.getElementsByTagName('head')[0];
 let style = document.createElement('style');
 head.appendChild(style);

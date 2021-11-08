@@ -2,7 +2,8 @@
 
 // ----- Imports ----- //
 
-import { Design, Display, none, Pillar, Role, some } from "@guardian/types";
+import { ArticleDesign, ArticleDisplay, ArticlePillar, ArticleElementRole } from "@guardian/libs";
+import { none, some } from "@guardian/types";
 import type { FC } from "react";
 import { image } from "../fixtures/image";
 import BodyImage from "./bodyImage";
@@ -10,9 +11,9 @@ import BodyImage from "./bodyImage";
 // ----- Setup ----- //
 
 const format = {
-  design: Design.Article,
-  display: Display.Standard,
-  theme: Pillar.News,
+  design: ArticleDesign.Standard,
+  display: ArticleDisplay.Standard,
+  theme: ArticlePillar.News,
 };
 const caption = some(
   "Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images"
@@ -65,7 +66,7 @@ const Thumbnail: FC = () => (
     <BodyImage
       image={{
         ...image,
-        role: Role.Thumbnail,
+        role: ArticleElementRole.Thumbnail,
       }}
       format={format}
       supportsDarkMode={true}
@@ -82,7 +83,7 @@ const ThumbnailNoCaption: FC = () => (
     <BodyImage
       image={{
         ...image,
-        role: Role.Thumbnail,
+        role: ArticleElementRole.Thumbnail,
       }}
       format={format}
       supportsDarkMode={true}

@@ -74,14 +74,12 @@ describe('buildUrl', () => {
 				heading: 'opinion',
 				trails: [
 					{
-						url:
-							'https://www.theguardian.com/commentisfree/2020/nov/03/nigel-farage-new-party-reform-uk-brexit-alternative',
+						url: 'https://www.theguardian.com/commentisfree/2020/nov/03/nigel-farage-new-party-reform-uk-brexit-alternative',
 						linkText:
 							"There's no point railing against Farage. You have to present an alternative | Zoe Williams",
 						showByline: true,
 						byline: 'Zoe Williams',
-						image:
-							'https://i.guim.co.uk/img/media/8ffbd3dc5aedfd502ca5ddd5f91f82c767cd28ea/0_0_3442_2065/master/3442.jpg?width=300&quality=85&auto=format&fit=max&s=52292233df8e95c6308e01f4222e25b3',
+						image: 'https://i.guim.co.uk/img/media/8ffbd3dc5aedfd502ca5ddd5f91f82c767cd28ea/0_0_3442_2065/master/3442.jpg?width=300&quality=85&auto=format&fit=max&s=52292233df8e95c6308e01f4222e25b3',
 						isLiveBlog: false,
 						format: {
 							display: ArticleDisplay.Standard,
@@ -99,14 +97,12 @@ describe('buildUrl', () => {
 						shortUrl: 'https://theguardian.com/p/fb28c',
 					},
 					{
-						url:
-							'https://www.theguardian.com/commentisfree/2020/nov/03/this-election-isnt-about-the-next-four-years-its-about-the-next-four-millennia',
+						url: 'https://www.theguardian.com/commentisfree/2020/nov/03/this-election-isnt-about-the-next-four-years-its-about-the-next-four-millennia',
 						linkText:
 							"This election isn't about the next four years. It's about the next four millennia | Bill McKibben",
 						showByline: true,
 						byline: 'Bill McKibben',
-						image:
-							'https://i.guim.co.uk/img/media/5dfdcb80828f014e04054ab626750cc112e92364/0_129_5065_3039/master/5065.jpg?width=300&quality=85&auto=format&fit=max&s=c108e8f88f55b627161b8f1827c93698',
+						image: 'https://i.guim.co.uk/img/media/5dfdcb80828f014e04054ab626750cc112e92364/0_129_5065_3039/master/5065.jpg?width=300&quality=85&auto=format&fit=max&s=c108e8f88f55b627161b8f1827c93698',
 						isLiveBlog: false,
 						format: {
 							display: ArticleDisplay.Standard,
@@ -143,15 +139,12 @@ describe('buildUrl', () => {
 				heading: 'opinion',
 				trails: [
 					{
-						url:
-							'https://www.theguardian.com/commentisfree/2020/nov/03/ehrc-report-anti-racist-politics-antisemitism-labour-party',
+						url: 'https://www.theguardian.com/commentisfree/2020/nov/03/ehrc-report-anti-racist-politics-antisemitism-labour-party',
 						linkText:
 							'The EHRC report shows how difficult building real anti-racist politics will be | David Feldman and others',
 						showByline: true,
-						byline:
-							'David Feldman, Ben Gidley and Brendan McGeever',
-						image:
-							'https://i.guim.co.uk/img/media/637243d90e93683dd13234ff543ab9b93da3d8d0/0_161_3926_2355/master/3926.jpg?width=300&quality=85&auto=format&fit=max&s=4f1ca464b3b4e7c498acd29d548ecae0',
+						byline: 'David Feldman, Ben Gidley and Brendan McGeever',
+						image: 'https://i.guim.co.uk/img/media/637243d90e93683dd13234ff543ab9b93da3d8d0/0_161_3926_2355/master/3926.jpg?width=300&quality=85&auto=format&fit=max&s=4f1ca464b3b4e7c498acd29d548ecae0',
 						isLiveBlog: false,
 						format: {
 							display: ArticleDisplay.Standard,
@@ -169,14 +162,12 @@ describe('buildUrl', () => {
 						shortUrl: 'https://gu.com/p/fb7yx',
 					},
 					{
-						url:
-							'https://www.theguardian.com/commentisfree/2020/nov/03/emmanuel-macron-islam-french-president-terror-attacks',
+						url: 'https://www.theguardian.com/commentisfree/2020/nov/03/emmanuel-macron-islam-french-president-terror-attacks',
 						linkText:
 							"Macron wants to fix France's social ills – but he won't do it by 'reforming' Islam | Arthur Goldhammer",
 						showByline: true,
 						byline: 'Arthur Goldhammer',
-						image:
-							'https://i.guim.co.uk/img/media/1f18d9b3ee4a6d38ff5a5544651f6cc382fdf480/0_203_5184_3110/master/5184.jpg?width=300&quality=85&auto=format&fit=max&s=ebc79b062b7f7f72582f8480a548eacb',
+						image: 'https://i.guim.co.uk/img/media/1f18d9b3ee4a6d38ff5a5544651f6cc382fdf480/0_203_5184_3110/master/5184.jpg?width=300&quality=85&auto=format&fit=max&s=ebc79b062b7f7f72582f8480a548eacb',
 						isLiveBlog: false,
 						format: {
 							display: ArticleDisplay.Standard,

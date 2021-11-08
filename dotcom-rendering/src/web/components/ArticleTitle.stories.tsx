@@ -184,8 +184,7 @@ export const ImmersiveSeriesTag = () => {
 				tags={[
 					{
 						id: '',
-						title:
-							'Series title with the addition of some more text to see how this wraps',
+						title: 'Series title with the addition of some more text to see how this wraps',
 						type: 'Series',
 					},
 				]}
@@ -381,8 +380,7 @@ export const LongStory = () => {
 				tags={[
 					{
 						id: '',
-						title:
-							"Edward Snowden's choice of Hong Kong as haven is a high-stakes gamble",
+						title: "Edward Snowden's choice of Hong Kong as haven is a high-stakes gamble",
 						type: 'Series',
 					},
 				]}

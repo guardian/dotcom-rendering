@@ -15,6 +15,7 @@ import {
 	withDefault,
 } from '@guardian/types';
 import { parseAtom } from 'atoms';
+import { ElementKind } from 'bodyElementKind';
 import { formatDate } from 'date';
 import { parseAudio, parseGeneric, parseInstagram, parseVideo } from 'embed';
 import type { Embed } from 'embed';
@@ -22,31 +23,9 @@ import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
 import type { Context } from 'parserContext';
+import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 
 // ----- Types ----- //
-
-const enum ElementKind {
-	Text,
-	Image,
-	Pullquote,
-	Interactive,
-	RichLink,
-	Tweet,
-	Embed,
-	Callout,
-	LiveEvent,
-	InteractiveAtom,
-	ExplainerAtom,
-	MediaAtom,
-	GuideAtom,
-	QandaAtom,
-	ProfileAtom,
-	TimelineAtom,
-	ChartAtom,
-	AudioAtom,
-	KnowledgeQuizAtom,
-	PersonalityQuizAtom,
-}
 
 type Text = {
 	kind: ElementKind.Text;
@@ -130,48 +109,6 @@ interface AudioAtom {
 	kicker: string;
 	title: string;
 }
-
-interface KnowledgeQuizAtom {
-	kind: ElementKind.KnowledgeQuizAtom;
-	id: string;
-	questions: QuestionType[];
-	resultGroups: ResultGroupsType[];
-}
-
-interface PersonalityQuizAtom {
-	kind: ElementKind.PersonalityQuizAtom;
-	id: string;
-	questions: QuestionType[];
-	resultBuckets: ResultBucket[];
-}
-
-type AnswerType = {
-	id: string;
-	text: string;
-	revealText?: string;
-	isCorrect: boolean;
-	answerBuckets: string[];
-};
-
-type ResultBucket = {
-	id: string;
-	title: string;
-	description: string;
-};
-
-type QuestionType = {
-	id: string;
-	text: string;
-	answers: AnswerType[];
-	imageUrl?: string;
-};
-
-type ResultGroupsType = {
-	title: string;
-	shareText: string;
-	minScore: number;
-	id: string;
-};
 
 type BodyElement =
 	| Text
@@ -464,7 +401,5 @@ export {
 	ProfileAtom,
 	TimelineAtom,
 	AudioAtom,
-	KnowledgeQuizAtom,
-	PersonalityQuizAtom,
 	parseElements,
 };
