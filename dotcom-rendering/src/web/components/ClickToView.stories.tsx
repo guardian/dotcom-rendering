@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/aria-role */
 
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/src-foundations/typography';
+import { textSans } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';

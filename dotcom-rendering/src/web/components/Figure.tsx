@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from, until } from '@guardian/src-foundations/mq';
-import { space } from '@guardian/src-foundations';
+import { from, until , space } from '@guardian/source-foundations';
 
 const roleCss = {
 	inline: css`

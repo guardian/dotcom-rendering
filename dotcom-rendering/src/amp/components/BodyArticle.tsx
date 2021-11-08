@@ -5,10 +5,8 @@ import {
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';
-import { until } from '@guardian/src-foundations/mq';
-import { text } from '@guardian/src-foundations/palette';
+import { until , text , textSans } from '@guardian/source-foundations';
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
 
 import { Elements } from '@root/src/amp/components/Elements';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';

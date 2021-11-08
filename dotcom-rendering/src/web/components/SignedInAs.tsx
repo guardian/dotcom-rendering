@@ -1,9 +1,6 @@
 import { css } from '@emotion/react';
 
-import { text, border, neutral, news } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { space } from '@guardian/src-foundations';
-import { until } from '@guardian/src-foundations/mq';
+import { text, border, neutral, news , headline, textSans , space , until } from '@guardian/source-foundations';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 
 type Props = {

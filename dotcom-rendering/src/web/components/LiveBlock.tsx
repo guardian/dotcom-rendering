@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 
-import { neutral, space } from '@guardian/src-foundations';
+import {
+	neutral,
+	space,
+	headline,
+	textSans,
+} from '@guardian/source-foundations';
 import { timeAgo } from '@guardian/libs';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
@@ -8,7 +13,6 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
-import { headline, textSans } from '@guardian/src-foundations/typography';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 
 type Props = {

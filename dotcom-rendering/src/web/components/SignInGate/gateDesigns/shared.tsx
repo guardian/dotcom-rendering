@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
-import { opinion, palette, space } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { palette } from '@guardian/src-foundations';
+import { opinion,  space , from , headline, textSans } from '@guardian/source-foundations';
 
 export const signInGateContainer = css`
 	max-width: 617px;

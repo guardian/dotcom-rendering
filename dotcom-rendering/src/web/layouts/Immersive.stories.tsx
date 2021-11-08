@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { breakpoints } from '@guardian/src-foundations/mq';
+import { breakpoints } from '@guardian/source-foundations';
 
 import {
 	makeGuardianBrowserCAPI,

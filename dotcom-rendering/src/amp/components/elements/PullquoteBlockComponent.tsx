@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
-import { body } from '@guardian/src-foundations/typography';
+import { body } from '@guardian/source-foundations';
 
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';

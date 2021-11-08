@@ -1,4 +1,4 @@
-import { body } from '@guardian/src-foundations/typography';
+import { body } from '@guardian/source-foundations';
 import { css } from '@emotion/react';
 
 const disclaimerStyles = css`

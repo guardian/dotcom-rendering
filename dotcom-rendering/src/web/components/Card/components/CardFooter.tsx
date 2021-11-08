@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { from } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/source-foundations';
 
 type Props = {
 	format: ArticleFormat;

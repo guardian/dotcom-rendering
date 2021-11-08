@@ -1,6 +1,6 @@
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/src-foundations/typography';
+import { textSans } from '@guardian/source-foundations';
 
 const titleStyle = css`
 	p {

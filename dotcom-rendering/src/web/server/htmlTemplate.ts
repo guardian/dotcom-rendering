@@ -1,7 +1,7 @@
 import { resets } from '@guardian/src-foundations/utils';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { CDN } from '@root/src/lib/assets';
-import { brandBackground } from '@guardian/src-foundations/palette';
+import { brandBackground } from '@guardian/source-foundations';
 import he from 'he';
 
 export const htmlTemplate = ({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/source-foundations';
 
 import {
 	MoustacheSection,

@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign } from '@guardian/libs';
-import { border, neutral, text } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
-import { until } from '@guardian/src-foundations/mq';
+import { border, neutral, text , headline , until } from '@guardian/source-foundations';
 import { BigNumber } from '@root/src/web/components/BigNumber/BigNumber';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 

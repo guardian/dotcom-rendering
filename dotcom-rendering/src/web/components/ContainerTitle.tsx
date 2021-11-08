@@ -1,9 +1,6 @@
 import { css } from '@emotion/react';
 
-import { text } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
-import { between, from, until } from '@guardian/src-foundations/mq';
-import { space } from '@guardian/src-foundations';
+import { text , headline , between, from, until , space } from '@guardian/source-foundations';
 
 const linkStyles = css`
 	text-decoration: none;

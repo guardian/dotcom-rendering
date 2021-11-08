@@ -1,9 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { text } from '@guardian/src-foundations/palette';
+import { text , textSans } from '@guardian/source-foundations';
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
 
 import { Elements } from '@root/src/amp/components/Elements';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';

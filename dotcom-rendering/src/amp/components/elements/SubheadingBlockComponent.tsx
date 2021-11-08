@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 import { ArticleSpecial as Special } from '@guardian/libs';
 import { palette } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 

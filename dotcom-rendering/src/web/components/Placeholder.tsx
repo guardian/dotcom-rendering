@@ -1,7 +1,6 @@
 import { css, keyframes } from '@emotion/react';
 
-import { space } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
+import { space , neutral } from '@guardian/source-foundations';
 
 const BACKGROUND_COLOUR = neutral[93];
 

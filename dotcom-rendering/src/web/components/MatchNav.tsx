@@ -4,10 +4,8 @@ import {
 	brandAlt,
 	background,
 	border,
-} from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { space, palette } from '@guardian/src-foundations';
-import { until } from '@guardian/src-foundations/mq';
+ headline, textSans , space,  , until } from '@guardian/source-foundations';
+import { palette } from '@guardian/src-foundations';
 
 import { Score } from '@frontend/web/components/Score';
 

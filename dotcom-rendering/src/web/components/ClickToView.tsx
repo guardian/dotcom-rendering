@@ -2,11 +2,8 @@
 import { useState } from 'react';
 import { css } from '@emotion/react';
 
-import { border, background } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { Button } from '@guardian/src-button';
-import { SvgCheckmark } from '@guardian/src-icons';
-import { space } from '@guardian/src-foundations';
+import { border, background , textSans , space } from '@guardian/source-foundations';
+import { Button , SvgCheckmark } from '@guardian/source-react-components';
 
 type Props = {
 	children: React.ReactNode;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { palette } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
+import { textSans } from '@guardian/source-foundations';
 
 const wrapper = css`
 	overflow: hidden;

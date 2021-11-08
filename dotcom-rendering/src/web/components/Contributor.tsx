@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { neutral , headline, textSans } from '@guardian/source-foundations';
 
 import { BylineLink } from '@frontend/web/components/BylineLink';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import { palette } from '@guardian/src-foundations';
-import { body, textSans, headline } from '@guardian/src-foundations/typography';
+import { body, textSans, headline } from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 import InfoIcon from '@frontend/static/icons/info.svg';

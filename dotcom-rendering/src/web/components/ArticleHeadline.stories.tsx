@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { news } from '@guardian/src-foundations';
+import { news } from '@guardian/source-foundations';
 import {
 	ArticleDisplay,
 	ArticleDesign,

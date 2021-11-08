@@ -2,7 +2,7 @@ import React from 'react';
 import { ClassNames } from '@emotion/react';
 
 import { palette } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { headline, textSans } from '@guardian/source-foundations';
 
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 
