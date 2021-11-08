@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { space , from, until } from '@guardian/source-foundations';
+import { space, from, until } from '@guardian/source-foundations';
 
 import { ImageComponent } from '@root/src/web/components/elements/ImageComponent';
 import { Caption } from '@frontend/web/components/Caption';

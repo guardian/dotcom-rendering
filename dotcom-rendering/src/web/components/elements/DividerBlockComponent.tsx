@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from , border , space } from '@guardian/source-foundations';
+import { from, border, space } from '@guardian/source-foundations';
 
 type Props = {
 	size?: 'full' | 'partial';

@@ -6,7 +6,10 @@ import {
 	brandBackground,
 	brandLine,
 	brandBorder,
- from, until , space } from '@guardian/source-foundations';
+	from,
+	until,
+	space,
+} from '@guardian/source-foundations';
 import type { ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 

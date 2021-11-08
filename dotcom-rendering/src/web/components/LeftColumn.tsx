@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { border , from, between, until } from '@guardian/source-foundations';
+import { border, from, between, until } from '@guardian/source-foundations';
 
 const leftWidth = (size: LeftColSize) => {
 	switch (size) {

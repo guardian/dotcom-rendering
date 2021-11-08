@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { border , body } from '@guardian/source-foundations';
+import { border, body } from '@guardian/source-foundations';
 import { unescapeData } from '@root/src/lib/escapeData';
 
 // fallback styling for when JS is disabled

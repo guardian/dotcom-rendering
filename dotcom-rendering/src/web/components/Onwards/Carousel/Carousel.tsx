@@ -2,7 +2,15 @@ import { useRef, useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import libDebounce from 'lodash/debounce';
 
-import { headline , from, until , space , neutral, brandAlt, text } from '@guardian/source-foundations';
+import {
+	headline,
+	from,
+	until,
+	space,
+	neutral,
+	brandAlt,
+	text,
+} from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 
 import { LeftColumn } from '@frontend/web/components/LeftColumn';

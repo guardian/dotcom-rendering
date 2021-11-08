@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { text , textSans } from '@guardian/source-foundations';
+import { text, textSans } from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';

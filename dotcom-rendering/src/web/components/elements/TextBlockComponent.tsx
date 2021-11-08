@@ -1,6 +1,12 @@
 import { ClassNames } from '@emotion/react';
 
-import { neutral , body, textSans , from, until } from '@guardian/source-foundations';
+import {
+	neutral,
+	body,
+	textSans,
+	from,
+	until,
+} from '@guardian/source-foundations';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 import { unwrapHtml } from '@root/src/model/unwrapHtml';

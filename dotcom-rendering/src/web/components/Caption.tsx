@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from, until , textSans , space } from '@guardian/source-foundations';
+import { from, until, textSans, space } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
 import CameraSvg from '@frontend/static/icons/camera.svg';

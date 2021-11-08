@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign } from '@guardian/libs';
-import { from , space } from '@guardian/source-foundations';
+import { from, space } from '@guardian/source-foundations';
 
 const determinePadding = ({
 	design,

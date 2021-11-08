@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from, until , space } from '@guardian/source-foundations';
+import { from, until, space } from '@guardian/source-foundations';
 
 const sizingStyles = css`
 	display: flex;

@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { brandAltBackground , headline, textSans , space , until } from '@guardian/source-foundations';
+import {
+	brandAltBackground,
+	headline,
+	textSans,
+	space,
+	until,
+} from '@guardian/source-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
 import {

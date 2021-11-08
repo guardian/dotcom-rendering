@@ -8,7 +8,9 @@ import {
 	brandLine,
 	labs,
 	border,
- from, until } from '@guardian/source-foundations';
+	from,
+	until,
+} from '@guardian/source-foundations';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 
-import { textSans , neutral } from '@guardian/source-foundations';
+import { textSans, neutral } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';

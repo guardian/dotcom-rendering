@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 
-import { space , textSans , until } from '@guardian/source-foundations';
-import { LinkButton ,
+import { space, textSans, until } from '@guardian/source-foundations';
+import {
+	LinkButton,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';

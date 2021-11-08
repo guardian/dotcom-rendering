@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 
-import { neutral , space , from , headline, textSans } from '@guardian/source-foundations';
+import {
+	neutral,
+	space,
+	from,
+	headline,
+	textSans,
+} from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { sanitise } from '@frontend/lib/sanitise-html';
 import { decidePalette } from '../lib/decidePalette';

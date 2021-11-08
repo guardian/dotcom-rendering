@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { until , body } from '@guardian/source-foundations';
+import { until, body } from '@guardian/source-foundations';
 
 type Props = {
 	children: string;

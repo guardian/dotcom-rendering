@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { neutral, border, text , headline } from '@guardian/source-foundations';
+import { neutral, border, text, headline } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Avatar } from '@root/src/web/components/Avatar';

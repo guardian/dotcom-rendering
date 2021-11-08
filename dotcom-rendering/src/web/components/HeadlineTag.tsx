@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { brandText , headline } from '@guardian/source-foundations';
+import { brandText, headline } from '@guardian/source-foundations';
 
 const headlineTagWrapper = css`
 	margin-left: 6px;

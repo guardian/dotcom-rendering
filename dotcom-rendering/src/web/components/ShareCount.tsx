@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { neutral, text , textSans , between } from '@guardian/source-foundations';
+import { neutral, text, textSans, between } from '@guardian/source-foundations';
 
 import ShareIcon from '@frontend/static/icons/share.svg';
 

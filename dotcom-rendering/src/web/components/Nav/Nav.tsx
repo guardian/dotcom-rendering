@@ -1,9 +1,13 @@
 import { css, ThemeProvider } from '@emotion/react';
 
-import { visuallyHidden , space , until } from '@guardian/source-foundations';
+import { visuallyHidden, space, until } from '@guardian/source-foundations';
 import { Pillars } from '@root/src/web/components/Pillars';
 import { GuardianRoundel } from '@root/src/web/components/GuardianRoundel';
-import { LinkButton, buttonReaderRevenue , SvgArrowRightStraight } from '@guardian/source-react-components';
+import {
+	LinkButton,
+	buttonReaderRevenue,
+	SvgArrowRightStraight,
+} from '@guardian/source-react-components';
 
 import { Hide } from '@frontend/web/components/Hide';
 

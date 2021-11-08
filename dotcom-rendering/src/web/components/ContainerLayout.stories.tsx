@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
-import { breakpoints ,
+import {
+	breakpoints,
 	brandAltBackground,
 	brandBackground,
 	brandBorder,

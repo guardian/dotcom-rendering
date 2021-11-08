@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { space , neutral , body } from '@guardian/source-foundations';
+import { space, neutral, body } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';

@@ -6,7 +6,7 @@ import { ContainerTitle } from '@root/src/web/components/ContainerTitle';
 import { Hide } from '@root/src/web/components/Hide';
 import { Flex } from '@root/src/web/components/Flex';
 
-import { space , from } from '@guardian/source-foundations';
+import { space, from } from '@guardian/source-foundations';
 
 type Props = {
 	title?: string;

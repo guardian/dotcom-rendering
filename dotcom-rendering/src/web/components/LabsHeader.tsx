@@ -1,11 +1,21 @@
 import { css } from '@emotion/react';
 
-import { from , border, labs, space , textSans } from '@guardian/source-foundations';
+import {
+	from,
+	border,
+	labs,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 
 import { Dropdown } from '@root/src/web/components/Dropdown';
 
 import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
-import { LinkButton , SvgArrowRightStraight , Link } from '@guardian/source-react-components';
+import {
+	LinkButton,
+	SvgArrowRightStraight,
+	Link,
+} from '@guardian/source-react-components';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div

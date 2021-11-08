@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 
-import { from , brandText, brandAlt , headline } from '@guardian/source-foundations';
+import {
+	from,
+	brandText,
+	brandAlt,
+	headline,
+} from '@guardian/source-foundations';
 
 const hideDesktop = css`
 	${from.desktop} {

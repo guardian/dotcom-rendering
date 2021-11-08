@@ -6,7 +6,10 @@ import {
 	brandBorder,
 	labs,
 	border,
- from, until , space } from '@guardian/source-foundations';
+	from,
+	until,
+	space,
+} from '@guardian/source-foundations';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 

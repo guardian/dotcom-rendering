@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { textSans , neutral } from '@guardian/source-foundations';
+import { textSans, neutral } from '@guardian/source-foundations';
 
 const fieldLabelStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}

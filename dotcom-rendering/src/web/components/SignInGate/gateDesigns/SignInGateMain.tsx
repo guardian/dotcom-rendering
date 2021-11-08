@@ -1,4 +1,4 @@
-import { LinkButton , Link } from '@guardian/source-react-components';
+import { LinkButton, Link } from '@guardian/source-react-components';
 import { cmp } from '@guardian/consent-management-platform';
 
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';

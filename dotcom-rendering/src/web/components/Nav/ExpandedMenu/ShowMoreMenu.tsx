@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 
-import { from , visuallyHidden , headline , brandText, brandAlt } from '@guardian/source-foundations';
+import {
+	from,
+	visuallyHidden,
+	headline,
+	brandText,
+	brandAlt,
+} from '@guardian/source-foundations';
 
 import { ArticleDisplay } from '@guardian/libs';
 import { navInputCheckboxId, showMoreButtonId } from '../config';
