@@ -45,7 +45,7 @@ import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getCookie, addCookie } from '@root/src/web/browser/cookie';
+import { getCookie } from '@root/src/web/browser/cookie';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
@@ -274,16 +274,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			),
 		);
 	}, [CAPI.pageId, CAPI.config.keywordIds]);
-
-	// AnniversaryAtom
-	// Add a cookie for the serverside A/B test that is checked to see if we should
-	// show the anniversary atom. This means that this user will not see the atom
-	// on the next and following page views.
-	useEffect(() => {
-		if (CAPI.config.switches.anniversaryArticleHeader) {
-			addCookie('X-GU-Experiment-0perc-D', 'true', 2); // 2 days to live means that the atom will show when the switch is on Wednesday AND Saturday
-		}
-	});
 
 	// Ensure the focus state of any buttons/inputs in any of the Source
 	// components are only applied when navigating via keyboard.

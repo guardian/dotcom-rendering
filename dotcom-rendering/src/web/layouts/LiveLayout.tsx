@@ -241,9 +241,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							idUrl={CAPI.config.idUrl}
 							mmaUrl={CAPI.config.mmaUrl}
 							isAnniversary={
-								CAPI.config.switches.anniversaryHeaderSvg &&
-								CAPI.config.abTests.anniversaryAtomVariant ===
-									'variant'
+								CAPI.config.switches.anniversaryHeaderSvg
 							}
 						/>
 					</ElementContainer>
