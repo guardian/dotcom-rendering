@@ -353,7 +353,8 @@ export const InteractiveImmersiveLayout = ({
 						elements={CAPI.mainMediaElements}
 						adTargeting={adTargeting}
 						starRating={
-							format.design === ArticleDesign.Review && CAPI.starRating
+							format.design === ArticleDesign.Review &&
+							CAPI.starRating
 								? CAPI.starRating
 								: undefined
 						}
