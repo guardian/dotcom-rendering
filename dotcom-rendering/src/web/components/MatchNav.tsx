@@ -4,7 +4,11 @@ import {
 	brandAlt,
 	background,
 	border,
- headline, textSans , space,  , until } from '@guardian/source-foundations';
+	headline,
+	textSans,
+	space,
+	until,
+} from '@guardian/source-foundations';
 import { palette } from '@guardian/src-foundations';
 
 import { Score } from '@frontend/web/components/Score';

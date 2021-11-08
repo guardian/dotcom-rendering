@@ -3,11 +3,16 @@ import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
-import { space ,
+import {
+	space,
 	brandText,
 	brandAlt,
 	neutral,
-, textSans, headline , from, until } from '@guardian/source-foundations';
+	textSans,
+	headline,
+	from,
+	until,
+} from '@guardian/source-foundations';
 
 import {
 	getLastOneOffContributionDate,
