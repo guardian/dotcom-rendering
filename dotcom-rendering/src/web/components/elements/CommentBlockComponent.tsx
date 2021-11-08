@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
-import { textSans , space } from '@guardian/source-foundations';
-import { palette } from '@guardian/src-foundations';
+import { textSans, space, neutral } from '@guardian/source-foundations';
 
 type Props = {
 	body: string;
@@ -14,8 +13,8 @@ type Props = {
 
 const commentWrapperStyles = css`
 	${textSans.medium()};
-	border-left: 1px ${palette.neutral[86]} solid;
-	border-top: 1px ${palette.neutral[86]} solid;
+	border-left: 1px ${neutral[86]} solid;
+	border-top: 1px ${neutral[86]} solid;
 	padding-top: ${space[1]}px;
 	padding-left: ${space[2]}px;
 	margin-top: ${space[3]}px;
@@ -48,12 +47,12 @@ const usernameWrapperStyles = css`
 	height: ${space[12]}px;
 	/* in order to overwrite the a tag style we had to add a second class to give higher order specificity */
 	& > a.permalink {
-		color: ${palette.neutral[46]};
+		color: ${neutral[46]};
 		border-bottom: none;
 	}
 	& > a.permalink:hover {
-		color: ${palette.neutral[46]};
-		border-bottom: 1px solid ${palette.neutral[46]};
+		color: ${neutral[46]};
+		border-bottom: 1px solid ${neutral[46]};
 	}
 `;
 

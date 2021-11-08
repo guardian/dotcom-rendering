@@ -1,10 +1,9 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { text , textSans, body } from '@guardian/source-foundations';
+import { text, textSans, body, neutral } from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
-import { palette } from '@guardian/src-foundations';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';
 import CommentIcon from '@frontend/static/icons/comment.svg';
 
@@ -37,7 +36,7 @@ const linkStyle = (pillar: ArticleTheme) => css`
 		pointer-events: none;
 		top: 0;
 		right: -3px;
-		color: ${palette.neutral[86]};
+		color: ${neutral[86]};
 	}
 `;
 
@@ -72,7 +71,7 @@ const sectionLinkStyle = (pillar: ArticleTheme) => css`
 		pointer-events: none;
 		top: 0;
 		right: -3px;
-		color: ${palette.neutral[86]};
+		color: ${neutral[86]};
 	}
 `;
 
@@ -97,7 +96,7 @@ const siteLinkStyle = css`
 	${textSans.small()};
 	font-weight: bold;
 	text-decoration: none;
-	color: ${palette.neutral[7]};
+	color: ${neutral[7]};
 	text-align: right;
 `;
 

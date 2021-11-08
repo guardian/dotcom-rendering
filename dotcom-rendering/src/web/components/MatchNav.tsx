@@ -8,8 +8,9 @@ import {
 	textSans,
 	space,
 	until,
+	sport,
+	neutral,
 } from '@guardian/source-foundations';
-import { palette } from '@guardian/src-foundations';
 
 import { Score } from '@frontend/web/components/Score';
 
@@ -237,16 +238,16 @@ const tab = css`
 	border-top: 3px solid ${border.secondary};
 
 	:nth-child(1) {
-		border-top: 3px solid ${palette.sport[300]};
+		border-top: 3px solid ${sport[300]};
 	}
 `;
 
 const tabLink = css`
-	color: ${palette.sport[300]};
+	color: ${sport[300]};
 	display: block;
 	text-decoration: none;
 	&:hover {
-		background-color: ${palette.neutral[93]};
+		background-color: ${neutral[93]};
 	}
 `;
 

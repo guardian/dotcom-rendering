@@ -1,8 +1,13 @@
 import React from 'react';
 import { ClassNames } from '@emotion/react';
 
-import { palette } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/source-foundations';
+import {
+	headline,
+	textSans,
+	brand,
+	brandAlt,
+	neutral,
+} from '@guardian/source-foundations';
 
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 
@@ -15,7 +20,7 @@ export const Sidebar: React.FC<{ nav: NavType }> = () => {
 			{({ css, cx }) => {
 				const sidebarStyles = css`
 					width: 80vh;
-					background-color: ${palette.brand[400]};
+					background-color: ${brand[400]};
 
 					[aria-expanded='true'] {
 						i {
@@ -39,7 +44,7 @@ export const Sidebar: React.FC<{ nav: NavType }> = () => {
 						position: absolute;
 
 						:before {
-							border: 2px solid ${palette.neutral[100]};
+							border: 2px solid ${neutral[100]};
 							border-top: 0;
 							border-left: 0;
 							content: '';
@@ -47,7 +52,7 @@ export const Sidebar: React.FC<{ nav: NavType }> = () => {
 							height: 8px;
 							transform: rotate(45deg);
 							width: 8px;
-							color: ${palette.neutral[100]};
+							color: ${neutral[100]};
 						}
 					}
 				`;
@@ -64,7 +69,7 @@ export const Sidebar: React.FC<{ nav: NavType }> = () => {
 					text-align: left;
 					width: 100%;
 					font-weight: 700;
-					color: ${palette.neutral[100]};
+					color: ${neutral[100]};
 					${toggle};
 				`;
 
@@ -72,7 +77,7 @@ export const Sidebar: React.FC<{ nav: NavType }> = () => {
 					background-color: transparent;
 					border: 0;
 					box-sizing: border-box;
-					color: ${palette.neutral[100]};
+					color: ${neutral[100]};
 					text-decoration: none;
 					display: block;
 					${textSans.large({ lineHeight: 'tight' })};
@@ -85,7 +90,7 @@ export const Sidebar: React.FC<{ nav: NavType }> = () => {
 				`;
 
 				const subLinks = css`
-					background-color: ${palette.brand[300]};
+					background-color: ${brand[300]};
 					padding-bottom: 12px;
 
 					a {
@@ -102,7 +107,7 @@ export const Sidebar: React.FC<{ nav: NavType }> = () => {
 				const membershipLinks = css`
 					a {
 						font-weight: 700;
-						color: ${palette.brandAlt[400]};
+						color: ${brandAlt[400]};
 					}
 				`;
 

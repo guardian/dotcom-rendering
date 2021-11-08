@@ -1,13 +1,12 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { palette } from '@guardian/src-foundations';
-import { body } from '@guardian/source-foundations';
+import { body, neutral } from '@guardian/source-foundations';
 
 import Quote from '@frontend/static/icons/quote.svg';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 
 const styles = (pillar: ArticleTheme) => css`
-	background-color: ${palette.neutral[97]};
+	background-color: ${neutral[97]};
 	padding: 0.375rem 0.625rem 0.75rem;
 	margin-bottom: 0.75rem;
 	display: block;

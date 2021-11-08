@@ -1,8 +1,12 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { palette } from '@guardian/src-foundations';
-import { textSans , from } from '@guardian/source-foundations';
+import {
+	textSans,
+	from,
+	brandAlt,
+	neutral,
+} from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
 
 import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
@@ -24,7 +28,7 @@ const headerStyle = css`
 `;
 
 const focusColor = css`
-	outline-color: ${palette.brandAlt[400]};
+	outline-color: ${brandAlt[400]};
 `;
 
 const metaStyle = css`
@@ -75,8 +79,8 @@ const popUpStyle = css`
 	transform: translate(-15%, 30%);
 	width: 266px;
 	padding: 16px;
-	background-color: ${palette.neutral[7]};
-	color: ${palette.neutral[100]};
+	background-color: ${neutral[7]};
+	color: ${neutral[100]};
 	font-weight: normal;
 	border-radius: 4px;
 	z-index: 100;

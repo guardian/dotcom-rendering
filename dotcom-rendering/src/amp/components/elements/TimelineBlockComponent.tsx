@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import { Expandable } from '@root/src/amp/components/Expandable';
-import { palette } from '@guardian/src-foundations';
+import { brandAlt, neutral } from '@guardian/source-foundations';
 
 const eventsWrapper = css`
 	margin-left: 8px;
@@ -18,7 +18,7 @@ const eventStyle = css`
 `;
 
 const highlight = css`
-	background-color: ${palette.brandAlt[400]};
+	background-color: ${brandAlt[400]};
 `;
 
 const eventIconStyle = css`
@@ -29,7 +29,7 @@ const eventIconStyle = css`
 		border-radius: 100%;
 		float: left;
 		margin-left: -25px;
-		background-color: ${palette.neutral[7]};
+		background-color: ${neutral[7]};
 	}
 `;
 
