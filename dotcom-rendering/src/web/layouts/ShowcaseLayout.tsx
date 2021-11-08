@@ -278,6 +278,7 @@ export const ShowcaseLayout = ({
 								showSideBorders={false}
 								padded={false}
 								backgroundColour={brandBackground.primary}
+								element="header"
 							>
 								<Header
 									edition={CAPI.editionId}
@@ -295,6 +296,7 @@ export const ShowcaseLayout = ({
 								showTopBorder={false}
 								padded={false}
 								backgroundColour={brandBackground.primary}
+								element="nav"
 							>
 								<Nav
 									nav={NAV}
@@ -317,6 +319,7 @@ export const ShowcaseLayout = ({
 									}
 									padded={false}
 									sectionId="sub-nav-root"
+									element="aside"
 								>
 									<SubNav
 										subNavSections={NAV.subNavSections}
@@ -361,6 +364,7 @@ export const ShowcaseLayout = ({
 								showTopBorder={false}
 								padded={false}
 								backgroundColour={brandBackground.primary}
+								element="nav"
 							>
 								<Nav
 									nav={NAV}
@@ -391,112 +395,115 @@ export const ShowcaseLayout = ({
 				</>
 			)}
 
-			<ElementContainer
-				showTopBorder={false}
-				backgroundColour={palette.background.article}
-				element="article"
-			>
-				<ShowcaseGrid>
-					<GridItem area="title">
-						<ArticleTitle
-							format={format}
-							palette={palette}
-							tags={CAPI.tags}
-							sectionLabel={CAPI.sectionLabel}
-							sectionUrl={CAPI.sectionUrl}
-							guardianBaseURL={CAPI.guardianBaseURL}
-							badge={CAPI.badge}
-						/>
-					</GridItem>
-					<GridItem area="border">
-						<Border palette={palette} />
-					</GridItem>
-					<GridItem area="headline">
-						<PositionHeadline design={format.design}>
-							<div
-								css={css`
-									padding-bottom: 24px;
-								`}
-							>
-								{age && (
-									<div css={ageWarningMargins}>
-										<AgeWarning age={age} />
-									</div>
-								)}
-								<ArticleHeadline
-									format={format}
-									headlineString={CAPI.headline}
-									palette={palette}
-									tags={CAPI.tags}
-									byline={CAPI.author.byline}
-								/>
-								{age && (
-									<AgeWarning
-										age={age}
-										isScreenReader={true}
-									/>
-								)}
-							</div>
-						</PositionHeadline>
-					</GridItem>
-					<GridItem area="media">
-						<div css={mainMediaWrapper}>
-							<MainMedia
+			<main>
+				<ElementContainer
+					showTopBorder={false}
+					backgroundColour={palette.background.article}
+					element="article"
+				>
+					<ShowcaseGrid>
+						<GridItem area="title" element="aside">
+							<ArticleTitle
 								format={format}
 								palette={palette}
-								elements={CAPI.mainMediaElements}
-								adTargeting={adTargeting}
-								starRating={
-									format.design === ArticleDesign.Review &&
-									CAPI.starRating
-										? CAPI.starRating
-										: undefined
-								}
-								host={host}
-								pageId={CAPI.pageId}
-								webTitle={CAPI.webTitle}
-							/>
-						</div>
-					</GridItem>
-					<GridItem area="standfirst">
-						<Standfirst
-							format={format}
-							standfirst={CAPI.standfirst}
-						/>
-					</GridItem>
-					<GridItem area="lines">
-						<div css={maxWidth}>
-							<div css={stretchLines}>
-								<Lines
-									count={decideLineCount(format.design)}
-									effect={decideLineEffect(
-										format.design,
-										format.theme,
-									)}
-								/>
-							</div>
-						</div>
-					</GridItem>
-					<GridItem area="meta">
-						<div css={maxWidth}>
-							<ArticleMeta
-								branding={branding}
-								format={format}
-								palette={palette}
-								pageId={CAPI.pageId}
-								webTitle={CAPI.webTitle}
-								author={CAPI.author}
 								tags={CAPI.tags}
-								primaryDateline={CAPI.webPublicationDateDisplay}
-								secondaryDateline={
-									CAPI.webPublicationSecondaryDateDisplay
-								}
+								sectionLabel={CAPI.sectionLabel}
+								sectionUrl={CAPI.sectionUrl}
+								guardianBaseURL={CAPI.guardianBaseURL}
+								badge={CAPI.badge}
 							/>
-						</div>
-					</GridItem>
-					<GridItem area="body">
-						<ArticleContainer>
-							<main css={maxWidth}>
+						</GridItem>
+						<GridItem area="border">
+							<Border palette={palette} />
+						</GridItem>
+						<GridItem area="headline">
+							<PositionHeadline design={format.design}>
+								<div
+									css={css`
+										padding-bottom: 24px;
+									`}
+								>
+									{age && (
+										<div css={ageWarningMargins}>
+											<AgeWarning age={age} />
+										</div>
+									)}
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										palette={palette}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+									/>
+									{age && (
+										<AgeWarning
+											age={age}
+											isScreenReader={true}
+										/>
+									)}
+								</div>
+							</PositionHeadline>
+						</GridItem>
+						<GridItem area="media">
+							<div css={mainMediaWrapper}>
+								<MainMedia
+									format={format}
+									palette={palette}
+									elements={CAPI.mainMediaElements}
+									adTargeting={adTargeting}
+									starRating={
+										format.design ===
+											ArticleDesign.Review &&
+										CAPI.starRating
+											? CAPI.starRating
+											: undefined
+									}
+									host={host}
+									pageId={CAPI.pageId}
+									webTitle={CAPI.webTitle}
+								/>
+							</div>
+						</GridItem>
+						<GridItem area="standfirst">
+							<Standfirst
+								format={format}
+								standfirst={CAPI.standfirst}
+							/>
+						</GridItem>
+						<GridItem area="lines">
+							<div css={maxWidth}>
+								<div css={stretchLines}>
+									<Lines
+										count={decideLineCount(format.design)}
+										effect={decideLineEffect(
+											format.design,
+											format.theme,
+										)}
+									/>
+								</div>
+							</div>
+						</GridItem>
+						<GridItem area="meta" element="aside">
+							<div css={maxWidth}>
+								<ArticleMeta
+									branding={branding}
+									format={format}
+									palette={palette}
+									pageId={CAPI.pageId}
+									webTitle={CAPI.webTitle}
+									author={CAPI.author}
+									tags={CAPI.tags}
+									primaryDateline={
+										CAPI.webPublicationDateDisplay
+									}
+									secondaryDateline={
+										CAPI.webPublicationSecondaryDateDisplay
+									}
+								/>
+							</div>
+						</GridItem>
+						<GridItem area="body">
+							<ArticleContainer>
 								<ArticleBody
 									format={format}
 									palette={palette}
@@ -525,110 +532,110 @@ export const ShowcaseLayout = ({
 									}
 									badge={CAPI.badge}
 								/>
-							</main>
-						</ArticleContainer>
-					</GridItem>
-					<GridItem area="right-column">
-						<div
-							css={css`
-								padding-top: 6px;
-								height: 100%;
-								${from.desktop} {
-									/* above 980 */
-									margin-left: 20px;
-									margin-right: -20px;
-								}
-								${from.leftCol} {
-									/* above 1140 */
-									margin-left: 0px;
-									margin-right: 0px;
-								}
-							`}
-						>
-							<RightColumn>
-								<AdSlot
-									position="right"
-									display={format.display}
-								/>
-								{!isPaidContent ? (
-									<MostViewedRightIsland />
-								) : (
-									<></>
-								)}
-							</RightColumn>
-						</div>
-					</GridItem>
-				</ShowcaseGrid>
-			</ElementContainer>
+							</ArticleContainer>
+						</GridItem>
+						<GridItem area="right-column">
+							<div
+								css={css`
+									padding-top: 6px;
+									height: 100%;
+									${from.desktop} {
+										/* above 980 */
+										margin-left: 20px;
+										margin-right: -20px;
+									}
+									${from.leftCol} {
+										/* above 1140 */
+										margin-left: 0px;
+										margin-right: 0px;
+									}
+								`}
+							>
+								<RightColumn>
+									<AdSlot
+										position="right"
+										display={format.display}
+									/>
+									{!isPaidContent ? (
+										<MostViewedRightIsland />
+									) : (
+										<></>
+									)}
+								</RightColumn>
+							</div>
+						</GridItem>
+					</ShowcaseGrid>
+				</ElementContainer>
 
-			<ElementContainer
-				padded={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot
-					position="merchandising-high"
-					display={format.display}
-				/>
-			</ElementContainer>
-
-			{/* Onwards (when signed OUT) */}
-			<aside id="onwards-upper-whensignedout" />
-			{showOnwardsLower && (
 				<ElementContainer
-					sectionId="onwards-lower-whensignedout"
+					padded={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
 					element="aside"
-				/>
-			)}
-
-			{!isPaidContent && showComments && (
-				<ElementContainer sectionId="comments" element="aside">
-					<Discussion
-						discussionApiUrl={CAPI.config.discussionApiUrl}
-						shortUrlId={CAPI.config.shortUrlId}
-						isCommentable={CAPI.isCommentable}
-						pillar={format.theme}
-						palette={palette}
-						discussionD2Uid={CAPI.config.discussionD2Uid}
-						discussionApiClientHeader={
-							CAPI.config.discussionApiClientHeader
-						}
-						enableDiscussionSwitch={false}
-						isAdFreeUser={CAPI.isAdFreeUser}
-						shouldHideAds={CAPI.shouldHideAds}
-						beingHydrated={false}
+				>
+					<AdSlot
+						position="merchandising-high"
 						display={format.display}
 					/>
 				</ElementContainer>
-			)}
 
-			{/* Onwards (when signed IN) */}
-			<aside id="onwards-upper-whensignedin" />
-			{showOnwardsLower && (
+				{/* Onwards (when signed OUT) */}
+				<aside id="onwards-upper-whensignedout" />
+				{showOnwardsLower && (
+					<ElementContainer
+						sectionId="onwards-lower-whensignedout"
+						element="aside"
+					/>
+				)}
+
+				{!isPaidContent && showComments && (
+					<ElementContainer sectionId="comments" element="section">
+						<Discussion
+							discussionApiUrl={CAPI.config.discussionApiUrl}
+							shortUrlId={CAPI.config.shortUrlId}
+							isCommentable={CAPI.isCommentable}
+							pillar={format.theme}
+							palette={palette}
+							discussionD2Uid={CAPI.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPI.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={false}
+							isAdFreeUser={CAPI.isAdFreeUser}
+							shouldHideAds={CAPI.shouldHideAds}
+							beingHydrated={false}
+							display={format.display}
+						/>
+					</ElementContainer>
+				)}
+
+				{/* Onwards (when signed IN) */}
+				<aside id="onwards-upper-whensignedin" />
+				{showOnwardsLower && (
+					<ElementContainer
+						sectionId="onwards-lower-whensignedin"
+						element="aside"
+					/>
+				)}
+
+				{!isPaidContent && (
+					<ElementContainer
+						sectionId="most-viewed-footer"
+						element="aside"
+					/>
+				)}
+
 				<ElementContainer
-					sectionId="onwards-lower-whensignedin"
+					padded={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
 					element="aside"
-				/>
-			)}
-
-			{!isPaidContent && (
-				<ElementContainer
-					sectionId="most-viewed-footer"
-					element="aside"
-				/>
-			)}
-
-			<ElementContainer
-				padded={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot position="merchandising" display={format.display} />
-			</ElementContainer>
+				>
+					<AdSlot position="merchandising" display={format.display} />
+				</ElementContainer>
+			</main>
 
 			{NAV.subNavSections && (
 				<ElementContainer
@@ -650,6 +657,7 @@ export const ShowcaseLayout = ({
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
+				element="footer"
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}

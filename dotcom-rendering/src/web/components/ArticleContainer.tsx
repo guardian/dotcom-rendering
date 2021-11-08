@@ -9,6 +9,10 @@ const articleContainer = css`
 		padding-left: 0;
 	}
 
+	${from.desktop} {
+		width: 620px;
+	}
+
 	flex-grow: 1;
 
 	/* Due to MainMedia using position: relative, this seems to effect the rendering order
@@ -87,7 +91,7 @@ type Props = {
 
 export const ArticleContainer = ({ children }: Props) => {
 	return (
-		<main
+		<div
 			css={[
 				articleContainer,
 				articleAdStyles,
@@ -96,6 +100,6 @@ export const ArticleContainer = ({ children }: Props) => {
 			]}
 		>
 			{children}
-		</main>
+		</div>
 	);
 };
