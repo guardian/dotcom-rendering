@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/aria-role */
 
 import { css } from '@emotion/react';
-
+import { from } from '@guardian/src-foundations/mq';
+import { breakpoints } from '@guardian/src-foundations';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
 import { images } from '@root/fixtures/generated/images';
-
 import { LiveBlock } from './LiveBlock';
 
 const baseBlock: Block = {
@@ -38,7 +37,10 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 		<div
 			css={css`
 				padding: 20px;
-				max-width: 620px;
+				max-width: 700px;
+				${from.tablet} {
+					width: 700px;
+				}
 			`}
 		>
 			{children}
@@ -53,6 +55,13 @@ export default {
 		backgrounds: {
 			default: 'grey',
 			values: [{ name: 'grey', value: 'lightgrey' }],
+		},
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.wide,
+			],
 		},
 	},
 };
