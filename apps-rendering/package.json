@@ -38,7 +38,7 @@
     "@guardian/libs": "^3.3.0",
     "@guardian/node-riffraff-artifact": "^0.2.2",
     "@guardian/renditions": "^0.2.0",
-    "@guardian/source-react-components-development-kitchen": "^0.0.23",
+    "@guardian/source-react-components-development-kitchen": "^0.0.3",
     "@guardian/src-brand": "^3.9.0",
     "@guardian/src-button": "^3.9.0",
     "@guardian/src-foundations": "^3.9.0",
