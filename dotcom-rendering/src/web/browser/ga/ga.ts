@@ -149,6 +149,8 @@ export const sendPageView = (): void => {
 		// do nothing
 	}
 
+	ga(send, 'pageview');
+
 	// //////////////////////
 	// Core Vitals Reporting
 	// Supported only in Chromium but npm module tested in all our supported browsers
