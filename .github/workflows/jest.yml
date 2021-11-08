@@ -1,22 +1,23 @@
 name: DCR jest 🤔
 on:
-  push:
-    paths-ignore:
-      - "apps-rendering/**"
+    push:
+        paths-ignore:
+            - "apps-rendering/**"
 
 jobs:
-  jest:
-    name: DCR Jest
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: guardian/actions-setup-node@main
-        with:
-          cache: "yarn"
+    jest:
+        name: DCR Jest
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: guardian/actions-setup-node@main
 
-      - name: Install
-        run: yarn
+            # Cache npm dependencies using https://github.com/bahmutov/npm-install
+            - uses: bahmutov/npm-install@v1
 
-      - name: Run Jest
-        run: CI=true yarn test
-        working-directory: dotcom-rendering
+            - name: Install
+              run: yarn
+
+            - name: Run Jest
+              run: CI=true yarn test
+              working-directory: dotcom-rendering
