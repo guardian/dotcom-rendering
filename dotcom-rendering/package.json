@@ -263,8 +263,7 @@
     ],
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}"
-    ],
-    "preserveSymlinks": true
+    ]
   },
   "run-if-changed": {
     "src/lib/content.d.ts": "make gen-schema && make gen-fixtures",
