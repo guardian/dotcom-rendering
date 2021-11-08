@@ -1541,13 +1541,13 @@
   dependencies:
     tslib "^2.0.0"
 
-"@guardian/source-react-components-development-kitchen@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-0.0.3.tgz#fbe7292ddd0bdacb444d6afbb602ff545eea7d89"
-  integrity sha512-D69S8wT6aka126UfGH+NGFIS7BRhXLDA/uu2B8S07JWFZjcfzJu56UNE5YkvgJ8qLJVMkvjJsh3pRYaLHKEUjw==
+"@guardian/source-react-components-development-kitchen@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-0.0.23.tgz#ebb93ad65354d69e84623a8de4f951778f825edd"
+  integrity sha512-mOkQNgc1LMoLtu9v48d995Sht4IGJqdM4faErOYfBUFlBs+JsnKxAUdn8g1wm4/9AWKnal0z0q0ndNVwCn4bMg==
   dependencies:
-    "@guardian/src-button" "^3.9.0"
-    "@guardian/src-helpers" "^3.9.0"
+    "@guardian/src-button" "^3.12.0"
+    "@guardian/src-helpers" "^3.12.0"
 
 "@guardian/src-brand@^3.10.0":
   version "3.11.0"
@@ -1561,12 +1561,12 @@
   dependencies:
     "@guardian/src-helpers" "^3.10.3-rc.1"
 
-"@guardian/src-button@^3.9.0":
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/@guardian/src-button/-/src-button-3.10.1.tgz#84493c588e04b8cc3878806d348f26e1e42b9a4e"
-  integrity sha512-J8RwWq5kjglZQkEKR1dVxEXDR8ih1dr6Ssan6VaXoF4qj4IOGlP31bixmN+BCj2INQNU/4tdEIv3hl59KTlDzA==
+"@guardian/src-button@^3.12.0":
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-button/-/src-button-3.12.0.tgz#634eaf39cce32751b99bd1034bf37bc241e25fdb"
+  integrity sha512-FroR0rtjC+czauFjnufB9tNIHXS/PBdzbo+pRDO1THcZBaF+KerKRpVkCZvusGS59B7CRQdvyPQVDMCQ1LQL7g==
   dependencies:
-    "@guardian/src-helpers" "^3.9.2-rc.1"
+    "@guardian/src-helpers" "^3.12.0"
 
 "@guardian/src-checkbox@^3.10.0":
   version "3.11.0"
@@ -1582,10 +1582,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-3.11.0.tgz#238ee5dda4c68eb8f7cb7a818c6770c20b036be7"
   integrity sha512-KgGZG023jS713iI/k8CoPc8I87udCM2Uv4P0vopRMG5EnlbFAQyLzxzNh8MdGyjnrlf/M4JC+3uU1FMyG/73rA==
 
-"@guardian/src-foundations@^3.9.2-rc.1":
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-3.10.1.tgz#03badadab6c1692fc6dad506ddbffe872b7f13fc"
-  integrity sha512-cnWhKlPyqoBuzC8mHxW7mUNwFIFkg/amhpxw5eTs1P1I8fqe+zT57oxEO+9bj9NIUn1/vzcU0kF1c+V8BRHNlQ==
+"@guardian/src-foundations@^3.12.0":
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-3.12.0.tgz#52d11d2fff649e04934033473b3ed7c7bf4a1639"
+  integrity sha512-JIFBybaCd69tf+zJZZ7KNLdqaVePOAc36wGFor0I60vc9Ib0jMuzYVffMjMhF6LHSXMdoOcqGwiPdFucObVYAA==
 
 "@guardian/src-helpers@^3.10.3-rc.1":
   version "3.11.0"
@@ -1595,12 +1595,12 @@
     "@guardian/src-foundations" "^3.10.3-rc.1"
     mini-svg-data-uri "^1.3.3"
 
-"@guardian/src-helpers@^3.9.0", "@guardian/src-helpers@^3.9.2-rc.1":
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/@guardian/src-helpers/-/src-helpers-3.10.1.tgz#3e1953e8d70115d9da5365021693019f87200358"
-  integrity sha512-BOcTA0fyZ8sT+bbOsifTgRES45RZC7WNRkngOpqyUGKtxSiKGnHWOcjDXHAN81afJR3hhRRpTW5jRd0ErHj9pw==
+"@guardian/src-helpers@^3.12.0":
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-helpers/-/src-helpers-3.12.0.tgz#298ce656b95a2546a88590ad2903502026e460a6"
+  integrity sha512-C8V8qWzjmVLfSH1AdQm6yEtckag0Lp08fw9cLda4+g6VDRw5gSWY0H3SYK9HbGvxTUGadKNCde7Y5FzNhgWDRw==
   dependencies:
-    "@guardian/src-foundations" "^3.9.2-rc.1"
+    "@guardian/src-foundations" "^3.12.0"
     mini-svg-data-uri "^1.3.3"
 
 "@guardian/src-icons@^3.10.0", "@guardian/src-icons@^3.10.3-rc.1":

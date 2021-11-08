@@ -37,7 +37,7 @@
     "@guardian/src-radio": "^3.10.0",
     "@guardian/src-text-area": "^3.10.0",
     "@guardian/src-text-input": "^3.10.0",
-    "@guardian/source-react-components-development-kitchen": "^0.0.3",
+    "@guardian/source-react-components-development-kitchen": "^0.0.23",
     "@guardian/src-svgs": "^2.8.2",
     "@storybook/addon-essentials": "^6.3.7",
     "@storybook/addon-knobs": "^6.3.1",
