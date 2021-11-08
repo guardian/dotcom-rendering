@@ -5,8 +5,13 @@ import {
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';
-import { until , text , textSans } from '@guardian/source-foundations';
-import { palette } from '@guardian/src-foundations';
+import {
+	until,
+	text,
+	textSans,
+	neutral,
+	opinion,
+} from '@guardian/source-foundations';
 
 import { Elements } from '@root/src/amp/components/Elements';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
@@ -46,13 +51,13 @@ const bulletStyle = (pillar: ArticleTheme) => css`
 `;
 
 const decideBackground = (design: Design, pillar: ArticleTheme): string => {
-	if (pillar === Special.Labs) return palette.neutral[86];
+	if (pillar === Special.Labs) return neutral[86];
 	switch (design) {
 		case Design.Comment:
 		case Design.Letter:
-			return palette.opinion[800];
+			return opinion[800];
 		default:
-			return palette.neutral[100];
+			return neutral[100];
 	}
 };
 
@@ -65,8 +70,8 @@ const body = (pillar: ArticlePillar, design: Design) => {
 
 const adStyle = css`
 	float: right;
-	background: ${palette.neutral[93]};
-	border-top: 1px solid ${palette.neutral[86]};
+	background: ${neutral[93]};
+	border-top: 1px solid ${neutral[86]};
 	width: min-content;
 	height: min-content;
 	clear: both;

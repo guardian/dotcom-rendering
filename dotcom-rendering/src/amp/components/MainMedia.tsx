@@ -1,8 +1,11 @@
 import React from 'react';
 import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';
 import { css } from '@emotion/react';
-import { palette } from '@guardian/src-foundations';
-import { textSans , visuallyHidden } from '@guardian/source-foundations';
+import {
+	textSans,
+	visuallyHidden,
+	neutral,
+} from '@guardian/source-foundations';
 
 import InfoIcon from '@frontend/static/icons/info.svg';
 import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
@@ -23,7 +26,7 @@ const captionStyle = css`
 	right: 0;
 	bottom: 0;
 	background: rgba(18, 18, 18, 0.8);
-	color: ${palette.neutral[100]};
+	color: ${neutral[100]};
 	display: none;
 	padding: 6px 40px 12px 10px;
 	max-width: 100%;
@@ -59,7 +62,7 @@ const labelStyle = css`
 		left: 0;
 		margin: auto;
 		position: absolute;
-		fill: ${palette.neutral[100]};
+		fill: ${neutral[100]};
 	}
 `;
 

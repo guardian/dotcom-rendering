@@ -1,7 +1,12 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { palette } from '@guardian/src-foundations';
-import { textSans, body } from '@guardian/source-foundations';
+import {
+	textSans,
+	body,
+	brand,
+	neutral,
+	brandAlt,
+} from '@guardian/source-foundations';
 
 import {
 	Link,
@@ -17,8 +22,8 @@ const innerContainerStyles = css`
 `;
 
 const footer = css`
-	background-color: ${palette.brand[400]};
-	color: ${palette.neutral[86]};
+	background-color: ${brand[400]};
+	color: ${neutral[86]};
 	${textSans.medium()};
 	margin-top: 20px;
 `;
@@ -29,13 +34,13 @@ const footerInner = css`
 `;
 
 const footerLink = css`
-	color: ${palette.neutral[100]};
+	color: ${neutral[100]};
 	text-decoration: none;
 	padding-bottom: 12px;
 	display: block;
 
 	:hover {
-		color: ${palette.brandAlt[400]};
+		color: ${brandAlt[400]};
 	}
 `;
 
@@ -83,7 +88,7 @@ const iconContainer = css`
 	float: right;
 	margin-top: -6px;
 	border-radius: 100%;
-	background-color: ${palette.neutral[100]};
+	background-color: ${neutral[100]};
 	cursor: pointer;
 	height: 42px;
 	min-width: 42px;
@@ -97,7 +102,7 @@ const icon = css`
 		left: 0;
 		right: 0;
 		margin: auto;
-		border: 2px solid ${palette.brand[400]};
+		border: 2px solid ${brand[400]};
 		border-bottom: 0;
 		border-right: 0;
 		content: '';
@@ -109,8 +114,8 @@ const icon = css`
 
 const backToTopLink = css`
 	position: absolute;
-	background-color: ${palette.brand[400]};
-	color: ${palette.neutral[100]};
+	background-color: ${brand[400]};
+	color: ${neutral[100]};
 	font-weight: 700;
 	top: -14px;
 	right: 20px;
@@ -124,7 +129,7 @@ const backToTopText = css`
 `;
 
 const supportLink = css`
-	color: ${palette.brandAlt[400]};
+	color: ${brandAlt[400]};
 	${body.medium()};
 	padding-bottom: 0.375rem;
 `;

@@ -1,14 +1,18 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { neutral , headline, textSans } from '@guardian/source-foundations';
-import { palette } from '@guardian/src-foundations';
+import {
+	headline,
+	textSans,
+	neutral,
+	sport,
+} from '@guardian/source-foundations';
 import DownArrow from '@frontend/static/icons/down-arrow.svg';
 import { blockLink } from '@root/src/amp/lib/block-link';
 
 const headingStyle = css`
 	${headline.xxsmall()};
-	background-color: ${palette.neutral[100]};
+	background-color: ${neutral[100]};
 	padding: 0.375rem 0.625rem;
 	font-weight: bold;
 	span {
@@ -18,7 +22,7 @@ const headingStyle = css`
 	}
 
 	svg {
-		fill: ${palette.neutral[100]};
+		fill: ${neutral[100]};
 		color: black;
 		display: block;
 	}
@@ -30,7 +34,7 @@ const listItemStyle = css`
 	width: 100%;
 	overflow: hidden;
 	min-height: 2.5rem;
-	border-bottom: 0.0625rem solid ${palette.neutral[86]};
+	border-bottom: 0.0625rem solid ${neutral[86]};
 	padding: 0.125rem 0 0.375rem;
 `;
 
@@ -52,7 +56,7 @@ const wrapper = css`
 const eventLinkStyle = css`
 	display: block;
 	text-decoration: none;
-	color: ${palette.sport[300]};
+	color: ${sport[300]};
 	:hover {
 		text-decoration: underline;
 	}

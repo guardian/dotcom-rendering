@@ -3,8 +3,12 @@ import { css } from '@emotion/react';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMetaLiveblog } from '@root/src/amp/components/topMeta/TopMetaLiveblog';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
-import { palette } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/source-foundations';
+import {
+	headline,
+	textSans,
+	neutral,
+	news,
+} from '@guardian/source-foundations';
 import { KeyEvents } from '@root/src/amp/components/KeyEvents';
 import { Blocks } from '@root/src/amp/components/Blocks';
 import RefreshIcon from '@frontend/static/icons/refresh.svg';
@@ -21,7 +25,7 @@ const innerContainerStyles = css`
 `;
 
 const bodyStyle = css`
-	background-color: ${palette.neutral[97]};
+	background-color: ${neutral[97]};
 
 	h2 {
 		${headline.xxsmall()};
@@ -52,8 +56,8 @@ const updateButtonStyle = css`
 		height: 36px;
 		padding: 0 12px;
 
-		background-color: ${palette.news[400]};
-		color: ${palette.neutral[100]};
+		background-color: ${news[400]};
+		color: ${neutral[100]};
 		font-weight: bold;
 		${textSans.xxsmall()};
 
