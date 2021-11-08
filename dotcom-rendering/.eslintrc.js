@@ -12,7 +12,6 @@ module.exports = {
 		'airbnb-typescript',
 		'prettier',
 		'plugin:@guardian/eslint-plugin-source-react-components/recommended',
-		'plugin:@guardian/eslint-plugin-source-foundations/recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
