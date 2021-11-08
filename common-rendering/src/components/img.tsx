@@ -3,8 +3,10 @@
 import type { SerializedStyles } from "@emotion/react";
 import { css } from "@emotion/react";
 import { neutral } from "@guardian/src-foundations/palette";
-import type { Format, Option } from "@guardian/types";
-import { Design, withDefault } from "@guardian/types";
+import type { ArticleFormat } from "@guardian/libs";
+import { ArticleDesign } from "@guardian/libs";
+import type { Option } from "@guardian/types";
+import { withDefault } from "@guardian/types";
 import type { FC } from "react";
 import type { Image } from "../image";
 import { darkModeCss } from "../lib";
@@ -15,12 +17,12 @@ import type { Sizes } from "../sizes";
 
 // ----- Functions ----- //
 
-const backgroundColour = (format: Format): string => {
+const backgroundColour = (format: ArticleFormat): string => {
   switch (format.design) {
-    case Design.Media:
+    case ArticleDesign.Media:
       return neutral[20];
-    case Design.Comment:
-    case Design.Letter:
+    case ArticleDesign.Comment:
+    case ArticleDesign.Letter:
       return neutral[86];
     default:
       return neutral[97];
@@ -33,13 +35,13 @@ type Props = {
   image: Image;
   sizes: Sizes;
   className: Option<SerializedStyles>;
-  format: Format;
+  format: ArticleFormat;
   supportsDarkMode: boolean;
   lightbox: Option<Lightbox>;
 };
 
 const styles = (
-  format: Format,
+  format: ArticleFormat,
   supportsDarkMode: boolean
 ): SerializedStyles => css`
   background-color: ${backgroundColour(format)};

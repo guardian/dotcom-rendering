@@ -13,8 +13,7 @@
 
 export const MatchReport: CAPIType = {
 	slotMachineFlags: '',
-	main:
-		'<figure class="element element-image" data-media-id="cc1d3dc14ab9104587323ef12ac477004b369637"> <img src="https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/1000.jpg" alt="André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.</span> <span class="element-image__credit">Photograph: Kieran McManus/BPI/Shutterstock</span> </figcaption> </figure>',
+	main: '<figure class="element element-image" data-media-id="cc1d3dc14ab9104587323ef12ac477004b369637"> <img src="https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/1000.jpg" alt="André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.</span> <span class="element-image__credit">Photograph: Kieran McManus/BPI/Shutterstock</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
 			url: '/football/championship',
@@ -30,8 +29,7 @@ export const MatchReport: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+					value: '/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'k',
@@ -73,8 +71,7 @@ export const MatchReport: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+					value: '/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'k',
@@ -120,8 +117,7 @@ export const MatchReport: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+					value: '/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'k',
@@ -167,8 +163,7 @@ export const MatchReport: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+					value: '/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 				},
 				{
 					name: 'k',
@@ -389,8 +384,7 @@ export const MatchReport: CAPIType = {
 							},
 							{
 								title: 'Project Syndicate',
-								url:
-									'/business/series/project-syndicate-economists',
+								url: '/business/series/project-syndicate-economists',
 							},
 							{
 								title: 'B2B',
@@ -773,8 +767,7 @@ export const MatchReport: CAPIType = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 			},
 			{
 				title: 'Video',
@@ -850,8 +843,7 @@ export const MatchReport: CAPIType = {
 			},
 			{
 				title: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
 			{
 				title: 'Crosswords',
@@ -903,23 +895,19 @@ export const MatchReport: CAPIType = {
 		brandExtensions: [
 			{
 				title: 'Search jobs',
-				url:
-					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
 			},
 			{
 				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
 			},
 			{
 				title: 'Holidays',
-				url:
-					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 			},
 			{
 				title: 'Live events',
-				url:
-					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
 			},
 			{
 				title: 'Masterclasses',
@@ -1112,8 +1100,7 @@ export const MatchReport: CAPIType = {
 		'article:modified_time': '2021-02-06T05:27:20.000Z',
 	},
 	sectionUrl: 'football/championship',
-	pageId:
-		'football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+	pageId: 'football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 	version: 3,
 	tags: [
 		{
@@ -1180,8 +1167,7 @@ export const MatchReport: CAPIType = {
 		},
 	],
 	pillar: 'sport',
-	webURL:
-		'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+	webURL: 'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Championship',
@@ -1260,8 +1246,7 @@ export const MatchReport: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url:
-						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1303,8 +1288,7 @@ export const MatchReport: CAPIType = {
 				},
 				{
 					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
 					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
@@ -1324,15 +1308,13 @@ export const MatchReport: CAPIType = {
 				},
 				{
 					text: 'Search jobs',
-					url:
-						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
 					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
 				{
 					text: 'Patrons',
-					url:
-						'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
 					extraClasses: '',
 				},
@@ -1386,8 +1368,7 @@ export const MatchReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/1000.jpg',
+						url: 'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/1000.jpg',
 					},
 					{
 						index: 1,
@@ -1397,8 +1378,7 @@ export const MatchReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/500.jpg',
+						url: 'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/500.jpg',
 					},
 					{
 						index: 2,
@@ -1408,8 +1388,7 @@ export const MatchReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/140.jpg',
+						url: 'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/140.jpg',
 					},
 					{
 						index: 3,
@@ -1419,8 +1398,7 @@ export const MatchReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/1713.jpg',
+						url: 'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/1713.jpg',
 					},
 					{
 						index: 4,
@@ -1431,14 +1409,12 @@ export const MatchReport: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg',
+						url: 'https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg',
 					},
 				],
 			},
 			data: {
-				alt:
-					'André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.',
+				alt: 'André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.',
 				caption:
 					'André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.',
 				credit: 'Photograph: Kieran McManus/BPI/Shutterstock',
@@ -1450,33 +1426,27 @@ export const MatchReport: CAPIType = {
 					weighting: 'inline',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=85&auto=format&fit=max&s=2e852cd56aed3ab41675e2dbb380a93c',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=85&auto=format&fit=max&s=2e852cd56aed3ab41675e2dbb380a93c',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=208554c4cb446786a0856ec41f97b550',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=208554c4cb446786a0856ec41f97b550',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=85&auto=format&fit=max&s=7cf31e91b66cdff430159385c573848c',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=85&auto=format&fit=max&s=7cf31e91b66cdff430159385c573848c',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b3f503e873cba7ab501ca0bcc90ba063',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b3f503e873cba7ab501ca0bcc90ba063',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=85&auto=format&fit=max&s=226d9fc8084be99e0dfe08f66421fcba',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=85&auto=format&fit=max&s=226d9fc8084be99e0dfe08f66421fcba',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=33fa0d7a99e09629baad6038c09d29a2',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=33fa0d7a99e09629baad6038c09d29a2',
 							width: 890,
 						},
 					],
@@ -1485,23 +1455,19 @@ export const MatchReport: CAPIType = {
 					weighting: 'thumbnail',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=140&quality=85&auto=format&fit=max&s=ca1fc952b0b5bfcbfb7a8666c110e597',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=140&quality=85&auto=format&fit=max&s=ca1fc952b0b5bfcbfb7a8666c110e597',
 							width: 140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=9490e2983dc38e7abcc0819d07358e2d',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=9490e2983dc38e7abcc0819d07358e2d',
 							width: 280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=120&quality=85&auto=format&fit=max&s=fc7bf55b34904547630abb290e07ba2b',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=120&quality=85&auto=format&fit=max&s=fc7bf55b34904547630abb290e07ba2b',
 							width: 120,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=7f7b2be69723c4c6571336362b432805',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=7f7b2be69723c4c6571336362b432805',
 							width: 240,
 						},
 					],
@@ -1510,53 +1476,43 @@ export const MatchReport: CAPIType = {
 					weighting: 'supporting',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=380&quality=85&auto=format&fit=max&s=0b6cd1334b62c2cdf3a69e7b8fb5682e',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=380&quality=85&auto=format&fit=max&s=0b6cd1334b62c2cdf3a69e7b8fb5682e',
 							width: 380,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=3ceac779c69416232712bf4c8e99032f',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=3ceac779c69416232712bf4c8e99032f',
 							width: 760,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=300&quality=85&auto=format&fit=max&s=ebcc0889e3b990c755a1f2674f55b139',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=300&quality=85&auto=format&fit=max&s=ebcc0889e3b990c755a1f2674f55b139',
 							width: 300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=3acf7faad2c14d8fb8ce977dc8d74399',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=3acf7faad2c14d8fb8ce977dc8d74399',
 							width: 600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=85&auto=format&fit=max&s=2e852cd56aed3ab41675e2dbb380a93c',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=85&auto=format&fit=max&s=2e852cd56aed3ab41675e2dbb380a93c',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=208554c4cb446786a0856ec41f97b550',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=208554c4cb446786a0856ec41f97b550',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=85&auto=format&fit=max&s=7cf31e91b66cdff430159385c573848c',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=85&auto=format&fit=max&s=7cf31e91b66cdff430159385c573848c',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b3f503e873cba7ab501ca0bcc90ba063',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b3f503e873cba7ab501ca0bcc90ba063',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=85&auto=format&fit=max&s=226d9fc8084be99e0dfe08f66421fcba',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=85&auto=format&fit=max&s=226d9fc8084be99e0dfe08f66421fcba',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=33fa0d7a99e09629baad6038c09d29a2',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=33fa0d7a99e09629baad6038c09d29a2',
 							width: 890,
 						},
 					],
@@ -1565,73 +1521,59 @@ export const MatchReport: CAPIType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1020&quality=85&auto=format&fit=max&s=218bd7173095566fc62bc0e5b6f19f31',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1020&quality=85&auto=format&fit=max&s=218bd7173095566fc62bc0e5b6f19f31',
 							width: 1020,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=921d1bac4fa4864c5834c185c1440596',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=921d1bac4fa4864c5834c185c1440596',
 							width: 2040,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=940&quality=85&auto=format&fit=max&s=33cee4387567d8dc5989a2cb74744605',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=940&quality=85&auto=format&fit=max&s=33cee4387567d8dc5989a2cb74744605',
 							width: 940,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=efe8f8ce7874db475bad461e7e6c37a2',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=efe8f8ce7874db475bad461e7e6c37a2',
 							width: 1880,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=85&auto=format&fit=max&s=c26150091859708116bb6f3b1d8e6fd7',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=85&auto=format&fit=max&s=c26150091859708116bb6f3b1d8e6fd7',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e5badc76e3ddac60f7166895d09d444e',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e5badc76e3ddac60f7166895d09d444e',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=85&auto=format&fit=max&s=c26150091859708116bb6f3b1d8e6fd7',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=85&auto=format&fit=max&s=c26150091859708116bb6f3b1d8e6fd7',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e5badc76e3ddac60f7166895d09d444e',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e5badc76e3ddac60f7166895d09d444e',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=660&quality=85&auto=format&fit=max&s=8e9b081837d4367f83a7633713e45eee',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=660&quality=85&auto=format&fit=max&s=8e9b081837d4367f83a7633713e45eee',
 							width: 660,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=2dd8e33f8868179ff7bc099e4170f224',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=2dd8e33f8868179ff7bc099e4170f224',
 							width: 1320,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=85&auto=format&fit=max&s=3137a1577d4433cdf7b6e95fd8d4cf78',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=85&auto=format&fit=max&s=3137a1577d4433cdf7b6e95fd8d4cf78',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=09f4336af469ce67ced5fe9df7c83e5e',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=09f4336af469ce67ced5fe9df7c83e5e',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=85&auto=format&fit=max&s=271e6711f51b1c0055793baf2749bd32',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=85&auto=format&fit=max&s=271e6711f51b1c0055793baf2749bd32',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d7df199c9bd479a283c3a7afb80736e8',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d7df199c9bd479a283c3a7afb80736e8',
 							width: 930,
 						},
 					],
@@ -1640,33 +1582,27 @@ export const MatchReport: CAPIType = {
 					weighting: 'halfwidth',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=85&auto=format&fit=max&s=2e852cd56aed3ab41675e2dbb380a93c',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=85&auto=format&fit=max&s=2e852cd56aed3ab41675e2dbb380a93c',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=208554c4cb446786a0856ec41f97b550',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=208554c4cb446786a0856ec41f97b550',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=85&auto=format&fit=max&s=7cf31e91b66cdff430159385c573848c',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=85&auto=format&fit=max&s=7cf31e91b66cdff430159385c573848c',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b3f503e873cba7ab501ca0bcc90ba063',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=b3f503e873cba7ab501ca0bcc90ba063',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=85&auto=format&fit=max&s=226d9fc8084be99e0dfe08f66421fcba',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=85&auto=format&fit=max&s=226d9fc8084be99e0dfe08f66421fcba',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=33fa0d7a99e09629baad6038c09d29a2',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=33fa0d7a99e09629baad6038c09d29a2',
 							width: 890,
 						},
 					],
@@ -1675,73 +1611,59 @@ export const MatchReport: CAPIType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1300&quality=85&auto=format&fit=max&s=da89361749c2db884b396202fe281df2',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1300&quality=85&auto=format&fit=max&s=da89361749c2db884b396202fe281df2',
 							width: 1300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=7ee884b9c6840d7993cdff8bb5b608e2',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=7ee884b9c6840d7993cdff8bb5b608e2',
 							width: 2600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1140&quality=85&auto=format&fit=max&s=73dda51a11db9bc1df0f918c2d0222ef',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1140&quality=85&auto=format&fit=max&s=73dda51a11db9bc1df0f918c2d0222ef',
 							width: 1140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=e54589b2000f6314ab8083e69b199edc',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=e54589b2000f6314ab8083e69b199edc',
 							width: 2280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1125&quality=85&auto=format&fit=max&s=b37a0e995403ea1f5e2b9c7a3cd4ec2a',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1125&quality=85&auto=format&fit=max&s=b37a0e995403ea1f5e2b9c7a3cd4ec2a',
 							width: 1125,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=d87c09c55375ad9095089dca71189b38',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=d87c09c55375ad9095089dca71189b38',
 							width: 2250,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=965&quality=85&auto=format&fit=max&s=ef553179832fe351026879cd5cca4017',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=965&quality=85&auto=format&fit=max&s=ef553179832fe351026879cd5cca4017',
 							width: 965,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=f7992d9e3a74bca6f832ef8d7156bdf4',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=f7992d9e3a74bca6f832ef8d7156bdf4',
 							width: 1930,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=725&quality=85&auto=format&fit=max&s=474e255381529f0047dff2dd11389d1b',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=725&quality=85&auto=format&fit=max&s=474e255381529f0047dff2dd11389d1b',
 							width: 725,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=28c4b267f9038263223f14307704c4fa',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=28c4b267f9038263223f14307704c4fa',
 							width: 1450,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=85&auto=format&fit=max&s=3137a1577d4433cdf7b6e95fd8d4cf78',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=85&auto=format&fit=max&s=3137a1577d4433cdf7b6e95fd8d4cf78',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=09f4336af469ce67ced5fe9df7c83e5e',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=09f4336af469ce67ced5fe9df7c83e5e',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=85&auto=format&fit=max&s=271e6711f51b1c0055793baf2749bd32',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=85&auto=format&fit=max&s=271e6711f51b1c0055793baf2749bd32',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d7df199c9bd479a283c3a7afb80736e8',
+							src: 'https://i.guim.co.uk/img/media/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/master/1713.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d7df199c9bd479a283c3a7afb80736e8',
 							width: 930,
 						},
 					],
@@ -1757,105 +1679,78 @@ export const MatchReport: CAPIType = {
 			id: '601d96ef8f0862592e4b23ca',
 			elements: [
 				{
-					html:
-						'<p>When does a blip become something more major? Whatever this sticky patch is for <a href="https://www.theguardian.com/football/norwichcity" data-component="auto-linked-tag">Norwich City</a>, it is impossible to ignore the changing landscape at the top of the Championship after Swansea cut their lead at the summit to two points courtesy of goals by André Ayew and Conor Hourihane.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>When does a blip become something more major? Whatever this sticky patch is for <a href="https://www.theguardian.com/football/norwichcity" data-component="auto-linked-tag">Norwich City</a>, it is impossible to ignore the changing landscape at the top of the Championship after Swansea cut their lead at the summit to two points courtesy of goals by André Ayew and Conor Hourihane.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '0b06a523-b078-4982-be6a-e6afc118bc05',
 				},
 				{
-					html:
-						'<p>Norwich may have fired blanks for the fourth successive game but Hourihane is on quite the streak, with a superb strike here his third goal since arriving on loan from Aston Villa a fortnight ago. It looks an increasingly shrewd piece of business.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Norwich may have fired blanks for the fourth successive game but Hourihane is on quite the streak, with a superb strike here his third goal since arriving on loan from Aston Villa a fortnight ago. It looks an increasingly shrewd piece of business.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'cba790de-7f2a-4f55-a40b-3e9eb3c6539c',
 				},
 				{
-					html:
-						'<p>Swansea have a game in hand on the leaders but Brentford and Reading, both of whom also have games up their sleeve, will be equally encouraged by a Norwich team stuck in a rut. Ayew capitalised on an uncharacteristic error by Tim Krul to open the scoring before Hourihane sent a rasping strike beyond the Norwich goalkeeper from distance after the interval.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Swansea have a game in hand on the leaders but Brentford and Reading, both of whom also have games up their sleeve, will be equally encouraged by a Norwich team stuck in a rut. Ayew capitalised on an uncharacteristic error by Tim Krul to open the scoring before Hourihane sent a rasping strike beyond the Norwich goalkeeper from distance after the interval.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '8b44990a-becc-4451-87cb-78fc584a94c6',
 				},
 				{
-					url:
-						'https://www.theguardian.com/football/football-league-blog/2021/jan/29/tim-krul-way-we-play-norwich-similar-holland-netherlands-goalkeeper',
-					text:
-						"Tim Krul: 'The way we play at Norwich is similar to Holland'",
+					url: 'https://www.theguardian.com/football/football-league-blog/2021/jan/29/tim-krul-way-we-play-norwich-similar-holland-netherlands-goalkeeper',
+					text: "Tim Krul: 'The way we play at Norwich is similar to Holland'",
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					_type:
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
 					elementId: 'cb10c05f-18f1-41b6-b1ed-d36d4585079c',
 				},
 				{
-					html:
-						'<p>Swansea should have had a late penalty too, but the referee Simon Hooper waved away appeals despite Ben Gibson appearing to fell the substitute Jordan Morris after Grant Hanley collided with the all-action Connor Roberts.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Swansea should have had a late penalty too, but the referee Simon Hooper waved away appeals despite Ben Gibson appearing to fell the substitute Jordan Morris after Grant Hanley collided with the all-action Connor Roberts.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '850d9699-edd2-48b0-b9a6-43598b9be1a1',
 				},
 				{
-					html:
-						'<p>On the eve of this game, Swansea’s unpopular American owners gave a rare interview in which they broke their silence on a multitude of longstanding issues but also made a point of stressing they have not been “taking a victory lap” on the back of their impressive start under Steve Cooper.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>On the eve of this game, Swansea’s unpopular American owners gave a rare interview in which they broke their silence on a multitude of longstanding issues but also made a point of stressing they have not been “taking a victory lap” on the back of their impressive start under Steve Cooper.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd711e52d-0f49-45ec-973f-2c25599b7ac8',
 				},
 				{
-					html:
-						'<p>“There were no expectations at the start of the season so I think it would be unfair to start doing it [building them] now with 19 games to go,” Cooper said. “There are clubs not even in the top 10 with much more resources than us but we’re going well and enjoying the journey and that’s how we work.”</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>“There were no expectations at the start of the season so I think it would be unfair to start doing it [building them] now with 19 games to go,” Cooper said. “There are clubs not even in the top 10 with much more resources than us but we’re going well and enjoying the journey and that’s how we work.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '8dcefc95-2234-49a5-b80a-0ec9e6aae74f',
 				},
 				{
-					html:
-						'<p>Perhaps it was kidology but Daniel Farke had been at pains to play down the significance of the occasion after stuttering to a point at Millwall on Tuesday. Todd Cantwell, among those of interest to the watching England Under-21s manager Aidy Boothroyd, showed touches of class, setting Teemu Pukki free with a wonderfully weighted pass and later Kenny McLean after twirling away from Matt Grimes but the killer instinct again eluded them.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Perhaps it was kidology but Daniel Farke had been at pains to play down the significance of the occasion after stuttering to a point at Millwall on Tuesday. Todd Cantwell, among those of interest to the watching England Under-21s manager Aidy Boothroyd, showed touches of class, setting Teemu Pukki free with a wonderfully weighted pass and later Kenny McLean after twirling away from Matt Grimes but the killer instinct again eluded them.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '443c9e34-1eb4-4c2d-b296-4dd536f43744',
 				},
 				{
-					html:
-						'<p>Swansea seized the advantage three minutes before the interval but the goal was a tragicomedy from a Norwich perspective. Krul flapped at Roberts’ in-swinging corner and when the ball dropped, Marc Guehi, another player on Boothroyd’s radar, scooped the ball away from the Norwich goalkeeper’s grasp, allowing Swansea to feast on the leftovers. Jake Bidwell tried his luck and then Ayew fired in his ninth goal of the season. Farke sought a response and Freddie Woodman saved superbly to keep out Grant Hanley’s header on the brink of the interval after the captain met Przemyslaw Placheta’s free-kick.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Swansea seized the advantage three minutes before the interval but the goal was a tragicomedy from a Norwich perspective. Krul flapped at Roberts’ in-swinging corner and when the ball dropped, Marc Guehi, another player on Boothroyd’s radar, scooped the ball away from the Norwich goalkeeper’s grasp, allowing Swansea to feast on the leftovers. Jake Bidwell tried his luck and then Ayew fired in his ninth goal of the season. Farke sought a response and Freddie Woodman saved superbly to keep out Grant Hanley’s header on the brink of the interval after the captain met Przemyslaw Placheta’s free-kick.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '777d94ec-1516-4460-8d18-1391e4f8628f',
 				},
 				{
-					html:
-						'<p>Krul came out early to limber up for the second half but, before Norwich had a chance to write the wrongs, they found themselves two goals down. Jay Fulton gobbled up possession following a loose pass by McLean and played a sliderule pass infield to Hourihane, who joined on loan last month in search of regular game time. The midfielder steadied himself with first touch and then arrowed a piercing left-footed strike into the corner with his second.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Krul came out early to limber up for the second half but, before Norwich had a chance to write the wrongs, they found themselves two goals down. Jay Fulton gobbled up possession following a loose pass by McLean and played a sliderule pass infield to Hourihane, who joined on loan last month in search of regular game time. The midfielder steadied himself with first touch and then arrowed a piercing left-footed strike into the corner with his second.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '8a92ce9d-82d3-448c-aca3-16442d906590',
 				},
 				{
-					html:
-						'<iframe id="the-fiver" name="the-fiver" src="https://www.theguardian.com/email/form/plaintone/the-fiver" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--the-fiver"></iframe>',
+					html: '<iframe id="the-fiver" name="the-fiver" src="https://www.theguardian.com/email/form/plaintone/the-fiver" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--the-fiver"></iframe>',
 					safe: true,
 					alt: 'Fiver',
 					isMandatory: false,
 					isThirdPartyTracking: false,
 					source: 'The Guardian',
 					sourceDomain: 'theguardian.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: '2957b548-62b0-42ad-bdbc-ee69ec1562e3',
 					caption: 'Fiver email embed',
 				},
 				{
-					html:
-						'<p>“We didn’t think he was going to come in and score three goals in first three league games, but we’ll take it,” said Cooper. “As soon as it fell to Conor I think everybody in the stadium thought ‘there’s a good chance of this going in.’ Once we lost Morgan [Gibbs-White, who returned to Wolves], I felt we needed a player you fancy to get goals. Conor’s numbers are really good.”</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>“We didn’t think he was going to come in and score three goals in first three league games, but we’ll take it,” said Cooper. “As soon as it fell to Conor I think everybody in the stadium thought ‘there’s a good chance of this going in.’ Once we lost Morgan [Gibbs-White, who returned to Wolves], I felt we needed a player you fancy to get goals. Conor’s numbers are really good.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '02f07401-ea60-42c6-8cf3-3eabe302b18c',
 				},
 				{
-					html:
-						'<p>Krul shook his head in disbelief and Farke admitted his players are hurting. “When you lose such a spotlight game, of course, you are disappointed,” he said. “I will allow my players to be disappointed because it’s important to feel this and be greedy for this next game. We want this winning feeling back.”</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Krul shook his head in disbelief and Farke admitted his players are hurting. “When you lose such a spotlight game, of course, you are disappointed,” he said. “I will allow my players to be disappointed because it’s important to feel this and be greedy for this next game. We want this winning feeling back.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a82fb27b-6c92-4991-a178-313257010548',
 				},
 			],
@@ -1873,8 +1768,7 @@ export const MatchReport: CAPIType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://amp.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+			'@id': 'https://amp.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1883,8 +1777,7 @@ export const MatchReport: CAPIType = {
 				url: 'https://www.theguardian.com/',
 				logo: {
 					'@type': 'ImageObject',
-					url:
-						'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 					width: 190,
 					height: 60,
 				},
@@ -1923,12 +1816,10 @@ export const MatchReport: CAPIType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+			'@id': 'https://www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target:
-					'android-app://com.guardian/https/www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
+				target: 'android-app://com.guardian/https/www.theguardian.com/football/2021/feb/05/andre-ayew-sparks-swansea-victory-over-norwich-to-close-gap-at-top',
 			},
 		},
 	],
@@ -2044,8 +1935,7 @@ export const MatchReport: CAPIType = {
 		sharedAdTargeting: {
 			ct: 'article',
 			co: ['jennifer-rankin'],
-			url:
-				'/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 			su: ['0'],
 			edition: 'uk',
 			tn: ['news'],
@@ -2099,8 +1989,7 @@ export const MatchReport: CAPIType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId:
-			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},

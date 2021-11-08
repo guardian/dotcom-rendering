@@ -115,6 +115,7 @@ type Palette = {
 		blockquote: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
+		overlayedCaption: Colour;
 	};
 	background: {
 		article: Colour;
@@ -138,7 +139,7 @@ type Palette = {
 	fill: {
 		commentCount: Colour;
 		shareIcon: Colour;
-		captionTriangle: Colour;
+		cameraCaptionIcon: Colour;
 		cardIcon: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
@@ -187,10 +188,14 @@ interface AdTargetParam {
 	value: string | string[];
 }
 
+type CustomParams = {
+	[key: string]: string | string[] | number | number[] | boolean | boolean[]
+};
+
 type AdTargeting =
 	| {
 			adUnit: string;
-			customParams: Record<string, unknown>;
+			customParams: CustomParams;
 			disableAds?: false;
 	  }
 	| {

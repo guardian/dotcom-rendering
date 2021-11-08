@@ -189,8 +189,7 @@ export const MultipleDuplicateStory = () => {
 	);
 };
 MultipleDuplicateStory.story = {
-	name:
-		'Immersive with multiple contributors with distinct tags but identical names',
+	name: 'Immersive with multiple contributors with distinct tags but identical names',
 };
 
 export const noBylineStory = () => {

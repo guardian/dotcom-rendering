@@ -104,6 +104,7 @@ export const AdConsent: React.FC = ({}) => {
 								clientConfig: clientConfigAus,
 							},
 						},
+						exposesTcfApi: true,
 					}}
 				/>
 			</amp-consent>

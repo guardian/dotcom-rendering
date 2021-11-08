@@ -10,6 +10,7 @@ import { findBySubsection } from '@root/src/model/article-sections';
 import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
 import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
 import { getAmpExperimentCache } from '@root/src/amp/server/ampExperimentCache';
+import { NotRenderableInDCR } from '@root/src/lib/errors/not-renderable-in-dcr';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
 	try {
@@ -35,7 +36,6 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 			section: sectionName,
 			contentType: CAPI.contentType,
 			id: CAPI.pageId,
-			beacon: `${CAPI.beaconURL}/count/pv.gif`,
 			neilsenAPIID,
 			domain: 'amp.theguardian.com',
 			permutive: {
@@ -72,6 +72,8 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 		// a validation error
 		if (e instanceof TypeError) {
 			res.status(400).send(`<pre>${e.message}</pre>`);
+		} else if (e instanceof NotRenderableInDCR) {
+			res.status(415).send(`<pre>${e.message}</pre>`);
 		} else {
 			// @ts-expect-error
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

@@ -71,6 +71,10 @@ const buttonStyles = css`
 	border: none;
 	padding: 0;
 	height: 2.5rem;
+
+	svg {
+		box-sizing: content-box;
+	}
 `;
 
 const ShareIcon: FC = () => {

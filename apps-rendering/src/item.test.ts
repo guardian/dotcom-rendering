@@ -61,6 +61,14 @@ const reviewContent = {
 	},
 };
 
+const liveblogContent = {
+	...contentWithTag('tone/minutebyminute'),
+	type: ContentType.LIVEBLOG,
+	fields: {
+		liveBloggingNow: true,
+	}
+}
+
 const immersive = {
 	id: '',
 	type: ContentType.ARTICLE,
@@ -224,8 +232,13 @@ describe('fromCapi returns correct Item', () => {
 		expect(item.design).toBe(Design.Feature);
 	});
 
-	test('live blog', () => {
+	test('deadblog', () => {
 		const item = f(contentWithTag('tone/minutebyminute'));
+		expect(item.design).toBe(Design.DeadBlog);
+	});
+
+	test('liveblog', () => {
+		const item = f(liveblogContent);
 		expect(item.design).toBe(Design.LiveBlog);
 	});
 

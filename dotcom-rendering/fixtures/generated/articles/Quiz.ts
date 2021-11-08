@@ -13,8 +13,7 @@
 
 export const Quiz: CAPIType = {
 	slotMachineFlags: '',
-	main:
-		'<figure class="element element-image element--showcase" data-media-id="0584dd0a4813e6002e11ff67c28aff9b32da7abf"> \n <img src="https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg" alt="Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.</span> \n  <span class="element-image__credit">Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy</span> \n </figcaption> \n</figure>',
+	main: '<figure class="element element-image element--showcase" data-media-id="0584dd0a4813e6002e11ff67c28aff9b32da7abf"> \n <img src="https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg" alt="Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.</span> \n  <span class="element-image__credit">Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
 		{
 			url: '/football/football',
@@ -30,8 +29,7 @@ export const Quiz: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 				{
 					name: 'edition',
@@ -79,8 +77,7 @@ export const Quiz: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 				{
 					name: 'sh',
@@ -128,8 +125,7 @@ export const Quiz: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 				{
 					name: 'sh',
@@ -177,8 +173,7 @@ export const Quiz: CAPIType = {
 			adTargeting: [
 				{
 					name: 'url',
-					value:
-						'/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 				{
 					name: 'sh',
@@ -393,8 +388,7 @@ export const Quiz: CAPIType = {
 							},
 							{
 								title: 'Project Syndicate',
-								url:
-									'/business/series/project-syndicate-economists',
+								url: '/business/series/project-syndicate-economists',
 							},
 							{
 								title: 'B2B',
@@ -777,8 +771,7 @@ export const Quiz: CAPIType = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 			},
 			{
 				title: 'Video',
@@ -854,8 +847,7 @@ export const Quiz: CAPIType = {
 			},
 			{
 				title: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
 			{
 				title: 'Crosswords',
@@ -907,23 +899,19 @@ export const Quiz: CAPIType = {
 		brandExtensions: [
 			{
 				title: 'Search jobs',
-				url:
-					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
 			},
 			{
 				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
 			},
 			{
 				title: 'Holidays',
-				url:
-					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 			},
 			{
 				title: 'Live events',
-				url:
-					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
 			},
 			{
 				title: 'Masterclasses',
@@ -1116,8 +1104,7 @@ export const Quiz: CAPIType = {
 		'article:modified_time': '2020-06-12T09:09:25.000Z',
 	},
 	sectionUrl: 'football/football',
-	pageId:
-		'football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+	pageId: 'football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 	version: 3,
 	tags: [
 		{
@@ -1162,8 +1149,7 @@ export const Quiz: CAPIType = {
 		},
 	],
 	pillar: 'sport',
-	webURL:
-		'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+	webURL: 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Football',
@@ -1242,8 +1228,7 @@ export const Quiz: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url:
-						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1285,8 +1270,7 @@ export const Quiz: CAPIType = {
 				},
 				{
 					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
 					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
@@ -1306,15 +1290,13 @@ export const Quiz: CAPIType = {
 				},
 				{
 					text: 'Search jobs',
-					url:
-						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
 					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
 				{
 					text: 'Patrons',
-					url:
-						'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
 					extraClasses: '',
 				},
@@ -1365,8 +1347,7 @@ export const Quiz: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/140.jpg',
+						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/140.jpg',
 					},
 					{
 						index: 1,
@@ -1376,8 +1357,7 @@ export const Quiz: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/500.jpg',
+						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/500.jpg',
 					},
 					{
 						index: 2,
@@ -1387,8 +1367,7 @@ export const Quiz: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg',
+						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg',
 					},
 					{
 						index: 3,
@@ -1398,8 +1377,7 @@ export const Quiz: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/2000.jpg',
+						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/2000.jpg',
 					},
 					{
 						index: 4,
@@ -1409,8 +1387,7 @@ export const Quiz: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/3020.jpg',
+						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/3020.jpg',
 					},
 					{
 						index: 5,
@@ -1421,18 +1398,15 @@ export const Quiz: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
+						url: 'https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg',
 					},
 				],
 			},
 			data: {
-				alt:
-					'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
+				alt: 'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
 				caption:
 					'Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.',
-				credit:
-					'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
+				credit: 'Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy',
 			},
 			displayCredit: true,
 			role: 'showcase',
@@ -1441,33 +1415,27 @@ export const Quiz: CAPIType = {
 					weighting: 'inline',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=85&auto=format&fit=max&s=80197e8eda11940bf4a98995dc21b427',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=85&auto=format&fit=max&s=80197e8eda11940bf4a98995dc21b427',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=59d4a88c81779335939a856cbf0c7d5d',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=59d4a88c81779335939a856cbf0c7d5d',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=85&auto=format&fit=max&s=a2d4526b829ba0bf9ee3c9b581dd2064',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=85&auto=format&fit=max&s=a2d4526b829ba0bf9ee3c9b581dd2064',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=190ca7bcf672f8ceb453bffb9279aff3',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=190ca7bcf672f8ceb453bffb9279aff3',
 							width: 890,
 						},
 					],
@@ -1476,23 +1444,19 @@ export const Quiz: CAPIType = {
 					weighting: 'thumbnail',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=140&quality=85&auto=format&fit=max&s=1131df57cc83f112b199558ab9333089',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=140&quality=85&auto=format&fit=max&s=1131df57cc83f112b199558ab9333089',
 							width: 140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=61953cf410eeff93698c8cc6f15f810a',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=61953cf410eeff93698c8cc6f15f810a',
 							width: 280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=120&quality=85&auto=format&fit=max&s=547c614424ff3161c418d362fb4bce4f',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=120&quality=85&auto=format&fit=max&s=547c614424ff3161c418d362fb4bce4f',
 							width: 120,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=42d601a8cd539e7603f5baf856e73090',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=42d601a8cd539e7603f5baf856e73090',
 							width: 240,
 						},
 					],
@@ -1501,53 +1465,43 @@ export const Quiz: CAPIType = {
 					weighting: 'supporting',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=380&quality=85&auto=format&fit=max&s=f5d47c1ede2183ae111ffd6ea00955c0',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=380&quality=85&auto=format&fit=max&s=f5d47c1ede2183ae111ffd6ea00955c0',
 							width: 380,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=3ab07742f92e681a2876aa773ff1d7df',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=3ab07742f92e681a2876aa773ff1d7df',
 							width: 760,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=300&quality=85&auto=format&fit=max&s=7d216e0794ec32f80f0abb72056c3dd0',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=300&quality=85&auto=format&fit=max&s=7d216e0794ec32f80f0abb72056c3dd0',
 							width: 300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=8b77afda159b860b2bcc4513f1112b0e',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=8b77afda159b860b2bcc4513f1112b0e',
 							width: 600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=85&auto=format&fit=max&s=80197e8eda11940bf4a98995dc21b427',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=85&auto=format&fit=max&s=80197e8eda11940bf4a98995dc21b427',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=59d4a88c81779335939a856cbf0c7d5d',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=59d4a88c81779335939a856cbf0c7d5d',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=85&auto=format&fit=max&s=a2d4526b829ba0bf9ee3c9b581dd2064',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=85&auto=format&fit=max&s=a2d4526b829ba0bf9ee3c9b581dd2064',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=190ca7bcf672f8ceb453bffb9279aff3',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=190ca7bcf672f8ceb453bffb9279aff3',
 							width: 890,
 						},
 					],
@@ -1556,73 +1510,59 @@ export const Quiz: CAPIType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1020&quality=85&auto=format&fit=max&s=d0614d6555b666d043e7d9af13ce1874',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1020&quality=85&auto=format&fit=max&s=d0614d6555b666d043e7d9af13ce1874',
 							width: 1020,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=03d83d28be0228cbb2f8102305c63d29',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=03d83d28be0228cbb2f8102305c63d29',
 							width: 2040,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=940&quality=85&auto=format&fit=max&s=ff4686f3bcdbf35b62876872a1e907a9',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=940&quality=85&auto=format&fit=max&s=ff4686f3bcdbf35b62876872a1e907a9',
 							width: 940,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=9ea5f7504d3eff0e1de1358942c0a8a6',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=9ea5f7504d3eff0e1de1358942c0a8a6',
 							width: 1880,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=85&auto=format&fit=max&s=1e11e11b4e26e9a4d2285b48bddc04c6',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=85&auto=format&fit=max&s=1e11e11b4e26e9a4d2285b48bddc04c6',
 							width: 660,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ddf05ee6f3cbe8fb6ad4f9065cc4bca9',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ddf05ee6f3cbe8fb6ad4f9065cc4bca9',
 							width: 1320,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=85&auto=format&fit=max&s=2ab576ce1f053f23b2354c2fb2349ad6',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=85&auto=format&fit=max&s=2ab576ce1f053f23b2354c2fb2349ad6',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=834cec1a66c2853d6971de4146edaae8',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=834cec1a66c2853d6971de4146edaae8',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=85&auto=format&fit=max&s=772296f353024f019a0fd61bd2850607',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=85&auto=format&fit=max&s=772296f353024f019a0fd61bd2850607',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=ccdc3536e3c99dcc1a43ac6f1239baf0',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=ccdc3536e3c99dcc1a43ac6f1239baf0',
 							width: 930,
 						},
 					],
@@ -1631,33 +1571,27 @@ export const Quiz: CAPIType = {
 					weighting: 'halfwidth',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=85&auto=format&fit=max&s=80197e8eda11940bf4a98995dc21b427',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=85&auto=format&fit=max&s=80197e8eda11940bf4a98995dc21b427',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=59d4a88c81779335939a856cbf0c7d5d',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=59d4a88c81779335939a856cbf0c7d5d',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=85&auto=format&fit=max&s=a2d4526b829ba0bf9ee3c9b581dd2064',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=85&auto=format&fit=max&s=a2d4526b829ba0bf9ee3c9b581dd2064',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=190ca7bcf672f8ceb453bffb9279aff3',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=190ca7bcf672f8ceb453bffb9279aff3',
 							width: 890,
 						},
 					],
@@ -1666,73 +1600,59 @@ export const Quiz: CAPIType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1300&quality=85&auto=format&fit=max&s=6942bb5fd934c057f1abd0e59cd6807a',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1300&quality=85&auto=format&fit=max&s=6942bb5fd934c057f1abd0e59cd6807a',
 							width: 1300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f6c419830f8f0889672431013fc98f4',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f6c419830f8f0889672431013fc98f4',
 							width: 2600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1140&quality=85&auto=format&fit=max&s=032071d334a61121147084e37af44e05',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1140&quality=85&auto=format&fit=max&s=032071d334a61121147084e37af44e05',
 							width: 1140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=50e8ab26e453e385630c7dc54455fcb4',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=50e8ab26e453e385630c7dc54455fcb4',
 							width: 2280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1125&quality=85&auto=format&fit=max&s=793113adf6645711f64e9f286558d16b',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1125&quality=85&auto=format&fit=max&s=793113adf6645711f64e9f286558d16b',
 							width: 1125,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e9740ae7c19b36bdcb56a0d359f3ef81',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e9740ae7c19b36bdcb56a0d359f3ef81',
 							width: 2250,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=965&quality=85&auto=format&fit=max&s=faee23085ae3293e02dfe2ff680de59c',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=965&quality=85&auto=format&fit=max&s=faee23085ae3293e02dfe2ff680de59c',
 							width: 965,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=005faaac26b415cb40650efe6171c86f',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=005faaac26b415cb40650efe6171c86f',
 							width: 1930,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=725&quality=85&auto=format&fit=max&s=e370b5c011fa0e3ba17bacef3dc2f092',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=725&quality=85&auto=format&fit=max&s=e370b5c011fa0e3ba17bacef3dc2f092',
 							width: 725,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=434ed91fda3d7484228575a4898fe34c',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=434ed91fda3d7484228575a4898fe34c',
 							width: 1450,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=85&auto=format&fit=max&s=2ab576ce1f053f23b2354c2fb2349ad6',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=85&auto=format&fit=max&s=2ab576ce1f053f23b2354c2fb2349ad6',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=834cec1a66c2853d6971de4146edaae8',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=834cec1a66c2853d6971de4146edaae8',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=85&auto=format&fit=max&s=772296f353024f019a0fd61bd2850607',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=85&auto=format&fit=max&s=772296f353024f019a0fd61bd2850607',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=ccdc3536e3c99dcc1a43ac6f1239baf0',
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=ccdc3536e3c99dcc1a43ac6f1239baf0',
 							width: 930,
 						},
 					],
@@ -1753,8 +1673,7 @@ export const Quiz: CAPIType = {
 					questions: [
 						{
 							id: 'b0342160-7678-417d-85c6-67a60ec4994b',
-							text:
-								'Who captained Italy to World Cup success in 1982?',
+							text: 'Who captained Italy to World Cup success in 1982?',
 							answers: [
 								{
 									id: 'c5c49561-d9df-4fd4-a7bb-47e7e0a88240',
@@ -1786,27 +1705,23 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: '1a335512-22f9-440b-8d51-e2b87d039965',
-							text:
-								'Which of these statements about the 1980 European Championship is true?',
+							text: 'Which of these statements about the 1980 European Championship is true?',
 							answers: [
 								{
 									id: '0d78318b-8707-48e3-92ea-697262bdcbf7',
-									text:
-										'It was the first finals tournament to feature eight teams\n',
+									text: 'It was the first finals tournament to feature eight teams\n',
 									answerBuckets: [],
 									isCorrect: false,
 								},
 								{
 									id: 'eef3f58e-c436-4f66-8f55-dc2c3c5d0ad5',
-									text:
-										'It was the last European Championship to feature a third-fourth play-off match\n',
+									text: 'It was the last European Championship to feature a third-fourth play-off match\n',
 									answerBuckets: [],
 									isCorrect: false,
 								},
 								{
 									id: 'dff2dbdf-b737-4bbb-8c76-081f915a6757',
-									text:
-										'The top scorer in the tournament scored all his goals in one match\n',
+									text: 'The top scorer in the tournament scored all his goals in one match\n',
 									answerBuckets: [],
 									isCorrect: false,
 								},
@@ -1822,8 +1737,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: '35176385-377b-44f7-bbac-11b01294135e',
-							text:
-								'Steaua Bucharest beat Barcelona on penalties in the 1986 European Cup final, making them the only Romanian club to have won the trophy. What was the score in the penalty shootout?',
+							text: 'Steaua Bucharest beat Barcelona on penalties in the 1986 European Cup final, making them the only Romanian club to have won the trophy. What was the score in the penalty shootout?',
 							answers: [
 								{
 									id: '28d936b1-66e1-452d-9583-a5d972b495cb',
@@ -1855,8 +1769,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: 'b4a75142-8e28-4634-b9ac-fe7556aee2cf',
-							text:
-								'At which stadium did Liverpool beat Everton to win the 1984 Milk Cup final – their fourth consecutive League Cup triumph?',
+							text: 'At which stadium did Liverpool beat Everton to win the 1984 Milk Cup final – their fourth consecutive League Cup triumph?',
 							answers: [
 								{
 									id: '8c08e076-e124-4411-ac3e-669581824f4d',
@@ -1890,8 +1803,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: 'ecbbd1cb-19a0-4d93-8f4a-878e2c43f977',
-							text:
-								'Ipswich won the Uefa Cup in the 1980-81 season – their only European silverware (so far). Which of their players scored 14 goals in the competition that season?',
+							text: 'Ipswich won the Uefa Cup in the 1980-81 season – their only European silverware (so far). Which of their players scored 14 goals in the competition that season?',
 							answers: [
 								{
 									id: '5d0fd3f6-6a34-4cb2-8d78-1ba525c19ff6',
@@ -1923,8 +1835,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: 'f7ff56d4-0643-42cc-be70-27f3b6df0520',
-							text:
-								'Glenn Hoddle and Chris Waddle released the song Diamond Lights under the name ‘Glenn & Chris’ in 1987. Where did it peak in the UK charts?',
+							text: 'Glenn Hoddle and Chris Waddle released the song Diamond Lights under the name ‘Glenn & Chris’ in 1987. Where did it peak in the UK charts?',
 							answers: [
 								{
 									id: '7e8448a6-28a0-4458-a0ed-d6d3e2e9a060',
@@ -1956,8 +1867,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: '85667bd4-31aa-4ef7-8518-267415b15fb7',
-							text:
-								'Celtic won the double in 1987-88, their centenary season. Which team did they beat in the 1988 Scottish Cup final? Clue: they beat the same team by the same score in the final three years earlier.',
+							text: 'Celtic won the double in 1987-88, their centenary season. Which team did they beat in the 1988 Scottish Cup final? Clue: they beat the same team by the same score in the final three years earlier.',
 							answers: [
 								{
 									id: '1622448a-7708-4fa1-aa2f-96958071762f',
@@ -1989,8 +1899,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: '6b5ab29f-4bfc-4853-86cc-0b751b7855bd',
-							text:
-								'Arsenal pipped Liverpool to the league title in the 1988-89 season after a memorable victory at Anfield in the final match of the campaign. Which player – who was on the field that night – finished as the top scorer in the league that season?',
+							text: 'Arsenal pipped Liverpool to the league title in the 1988-89 season after a memorable victory at Anfield in the final match of the campaign. Which player – who was on the field that night – finished as the top scorer in the league that season?',
 							answers: [
 								{
 									id: '6ef6917d-8a69-403c-b68a-85c97066c46b',
@@ -2022,8 +1931,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: 'c63bca8f-7f09-4a2f-88fe-4c8a2c40a25c',
-							text:
-								'Which two teams lost FA Cup semi-finals in the same season in the 1980s, but then contested the final 10 years later?',
+							text: 'Which two teams lost FA Cup semi-finals in the same season in the 1980s, but then contested the final 10 years later?',
 							answers: [
 								{
 									id: '00d69f0f-ebe1-415b-8158-955a4a20cbcd',
@@ -2055,8 +1963,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: '2dc74cd4-2c58-4c4d-ad85-d531eb36e815',
-							text:
-								'Everton won their first and, so far, only European trophy in the 1980s, when they beat Rapid Vienna in the Cup Winners’ Cup final in 1985. Who scored the last goal in the final?',
+							text: 'Everton won their first and, so far, only European trophy in the 1980s, when they beat Rapid Vienna in the Cup Winners’ Cup final in 1985. Who scored the last goal in the final?',
 							answers: [
 								{
 									id: 'afc609c5-8c0c-4fdf-8915-665b5348d62f',
@@ -2090,8 +1997,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: '15708aa9-4483-4b16-a32b-e5137bf5a832',
-							text:
-								'Which club – who were managed by Neil Warnock at the time – were promoted to the Fourth Division in 1987, becoming the first club to earn promotion by winning the Conference?',
+							text: 'Which club – who were managed by Neil Warnock at the time – were promoted to the Fourth Division in 1987, becoming the first club to earn promotion by winning the Conference?',
 							answers: [
 								{
 									id: '6810575c-52e6-4c8b-b50d-e6016bb17223',
@@ -2123,8 +2029,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: '6b8d30df-c63b-4d87-ae12-d25ddd565b4c',
-							text:
-								'Complete the sequence of these Wembley cup winners: Chelsea, Blackburn Rovers, Reading ...',
+							text: 'Complete the sequence of these Wembley cup winners: Chelsea, Blackburn Rovers, Reading ...',
 							answers: [
 								{
 									id: '00d1eb4a-e71b-4d7c-9f64-73d8fb45c1fb',
@@ -2156,8 +2061,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: 'efc7a5cf-4bf7-4069-9dba-d986f269d647',
-							text:
-								'Who was the only footballer to finish in the top three of the BBC Sports Personality of the Year award in the 1980s?',
+							text: 'Who was the only footballer to finish in the top three of the BBC Sports Personality of the Year award in the 1980s?',
 							answers: [
 								{
 									id: '0aea24e9-6ab9-4a1b-9056-3492e4006f78',
@@ -2189,8 +2093,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: '3a0f2ab0-ab35-425b-8220-067f509b5573',
-							text:
-								'Which team won the last edition of the Anglo-Scottish Cup in the 1980-81 season?',
+							text: 'Which team won the last edition of the Anglo-Scottish Cup in the 1980-81 season?',
 							answers: [
 								{
 									id: 'bc033ca5-38bf-409e-98b3-22bcf862920b',
@@ -2222,8 +2125,7 @@ export const Quiz: CAPIType = {
 						},
 						{
 							id: '79cf8a12-fb5d-46d1-ba46-4135e5f7f6ef',
-							text:
-								'QPR, Luton Town, Oldham Athletic and which other club played home matches on an artificial pitch during the 1980s?',
+							text: 'QPR, Luton Town, Oldham Athletic and which other club played home matches on an artificial pitch during the 1980s?',
 							answers: [
 								{
 									id: '7a0a376c-e740-470e-b48a-a7a1a1668dda',
@@ -2369,8 +2271,7 @@ export const Quiz: CAPIType = {
 							minScore: 2,
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.QuizAtomBlockElement',
+					_type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement',
 					elementId: 'fac89896-5408-4c1e-9993-12c070694b29',
 				},
 			],
@@ -2388,8 +2289,7 @@ export const Quiz: CAPIType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://amp.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+			'@id': 'https://amp.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2398,8 +2298,7 @@ export const Quiz: CAPIType = {
 				url: 'https://www.theguardian.com/',
 				logo: {
 					'@type': 'ImageObject',
-					url:
-						'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 					width: 190,
 					height: 60,
 				},
@@ -2437,12 +2336,10 @@ export const Quiz: CAPIType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+			'@id': 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target:
-					'android-app://com.guardian/https/www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				target: 'android-app://com.guardian/https/www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 			},
 		},
 	],
@@ -2557,8 +2454,7 @@ export const Quiz: CAPIType = {
 		sharedAdTargeting: {
 			ct: 'article',
 			co: ['jennifer-rankin'],
-			url:
-				'/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 			su: ['0'],
 			edition: 'uk',
 			tn: ['news'],
@@ -2612,8 +2508,7 @@ export const Quiz: CAPIType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId:
-			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
