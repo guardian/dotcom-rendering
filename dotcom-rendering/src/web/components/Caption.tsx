@@ -25,10 +25,6 @@ const captionStyle = (palette: Palette) => css`
 	padding-top: 6px;
 	word-wrap: break-all;
 	color: ${palette.text.caption};
-	${until.tablet} {
-		padding-left: ${space[2]}px;
-		padding-right: ${space[2]}px;
-	}
 `;
 
 const bottomMargin = css`
@@ -113,11 +109,12 @@ const hideIconBelowLeftCol = css`
 
 const iconStyle = (palette: Palette) => css`
 	fill: ${palette.fill.cameraCaptionIcon};
-	margin-right: ${space[1] / 2}px;
+	margin-right: ${space[1]}px;
 	display: inline-block;
 	vertical-align: middle;
 	svg {
-		width: 85%;
+		width: 14px;
+		display: inline-block;
 	}
 `;
 

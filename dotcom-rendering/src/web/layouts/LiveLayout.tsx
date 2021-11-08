@@ -32,6 +32,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
+import { Pagination } from '@frontend/web/components/Pagination';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -122,13 +123,13 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 const maxWidth = css`
 	${from.desktop} {
-		max-width: 620px;
+		max-width: 700px;
 	}
 `;
 
 const articleWidth = css`
 	${from.desktop} {
-		width: 620px;
+		width: 700px;
 	}
 `;
 
@@ -418,6 +419,22 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<GridItem area="body">
 						<ArticleContainer>
 							<main css={articleWidth}>
+								{CAPI.pagination &&
+									CAPI.pagination.currentPage !== 1 && (
+										<Pagination
+											currentPage={
+												CAPI.pagination?.currentPage ||
+												1
+											}
+											totalPages={
+												CAPI.pagination?.totalPages || 1
+											}
+											newest={CAPI.pagination?.newest}
+											oldest={CAPI.pagination?.oldest}
+											newer={CAPI.pagination?.newer}
+											older={CAPI.pagination?.older}
+										/>
+									)}
 								<ArticleBody
 									format={format}
 									palette={palette}
@@ -427,6 +444,22 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
+								{CAPI.pagination &&
+									CAPI.pagination.totalPages > 1 && (
+										<Pagination
+											currentPage={
+												CAPI.pagination?.currentPage ||
+												1
+											}
+											totalPages={
+												CAPI.pagination?.totalPages || 1
+											}
+											newest={CAPI.pagination?.newest}
+											oldest={CAPI.pagination?.oldest}
+											newer={CAPI.pagination?.newer}
+											older={CAPI.pagination?.older}
+										/>
+									)}
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines
 									data-print-layout="hide"

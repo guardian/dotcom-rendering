@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# exit when any command fails
+set -e
+
 git fetch origin main
 
 gitBranches="$(git branch -r)"

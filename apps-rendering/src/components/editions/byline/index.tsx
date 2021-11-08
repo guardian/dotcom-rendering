@@ -83,6 +83,7 @@ const styles = (iconColor: string): SerializedStyles => {
 		position: relative;
 		display: flex;
 		justify-content: space-between;
+		font-style: italic;
 		svg {
 			flex: 0 0 1.875rem;
 			padding-top: 0.375rem;
