@@ -1,4 +1,4 @@
-import { resets , brandBackground } from '@guardian/source-foundations';
+import { resets, brandBackground } from '@guardian/source-foundations';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { CDN } from '@root/src/lib/assets';
 import he from 'he';

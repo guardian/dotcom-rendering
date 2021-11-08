@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/aria-role */
 
 import { css } from '@emotion/react';
-import { from , breakpoints } from '@guardian/source-foundations';
+import { from, breakpoints } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { images } from '@root/fixtures/generated/images';
 import { LiveBlock } from './LiveBlock';
