@@ -1,8 +1,10 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import type { SerializedStyles } from '@emotion/react';
-import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	ToggleSwitch,
+} from '@guardian/source-react-components-development-kitchen';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 import { Design, Display } from '@guardian/types';
@@ -80,17 +82,8 @@ const liveblogSidePadding = css`
 `;
 
 const toggleOverrideStyles = css`
-	button {
-		margin-left: 0;
-	}
-
-	display: flex;
-	align-items: center;
 	padding-right: ${remSpace[1]};
 
-	label {
-		flex-shrink: 100;
-	}
 	${until.desktop} {
 		button[aria-checked='false'] {
 			background-color: rgba(255, 255, 255, 0.5);
@@ -109,39 +102,24 @@ const liveBylineStyles = css`
 	}
 `;
 
-const straightLineBackgroundImage = (color: string): SerializedStyles => {
-	return css`
-		background-image: repeating-linear-gradient(
-			to bottom,
-			${color},
-			${color} 1px,
-			transparent 1px,
-			transparent ${remSpace[1]}
-		);
-	`;
-};
-
-const straightLinesStyles = css`
-	${straightLineBackgroundImage('rgba(255, 255, 255, 0.4)')}
-	background-repeat: repeat-x;
-	background-position: top;
-	background-size: 1px calc(${remSpace[1]} * ${3} + 1px);
-	height: calc(${remSpace[1]} * ${3} + 1px);
-	${from.desktop} {
-		${straightLineBackgroundImage(neutral[86])}
+const linesStyles = css`
+	display: none;
+	${until.desktop} {
+		display: block;
 	}
-	${darkModeCss`
-		${from.desktop} {
-			background-image: repeating-linear-gradient(
-				to bottom,
-				${neutral[20]},
-				${neutral[20]} 1px,
-				transparent 1px,
-				transparent ${remSpace[1]}
-			);
-		}
-			
-	`}
+`;
+
+const linesDesktopStyles = css`
+	display: none;
+	${from.desktop} {
+		display: block;
+	}
+	${darkModeCss`${from.desktop} {display: none;}`}
+`;
+
+const linesDarkStyles = css`
+	display: none;
+	${darkModeCss`${from.desktop} {display: block;}`}
 `;
 
 const MetadataWithByline: FC<Props> = ({ item }: Props) => (
@@ -170,7 +148,12 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 	const [checked, setChecked] = useState<boolean>(false);
 	return (
 		<div css={css(styles, withBylineStyles, blogStyles)}>
-			<div css={straightLinesStyles} />
+			<Lines
+				color={'rgba(255, 255, 255, 0.4)'}
+				cssOverrides={linesStyles}
+			/>
+			<Lines color={neutral[86]} cssOverrides={linesDesktopStyles} />
+			<Lines color={neutral[20]} cssOverrides={linesDarkStyles} />
 			<Avatar {...item} />
 			<div
 				css={css(textStyles, withBylineTextStyles, liveblogSidePadding)}
