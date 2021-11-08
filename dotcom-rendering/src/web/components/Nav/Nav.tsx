@@ -5,7 +5,7 @@ import { Pillars } from '@root/src/web/components/Pillars';
 import { GuardianRoundel } from '@root/src/web/components/GuardianRoundel';
 import {
 	LinkButton,
-	buttonReaderRevenue,
+	buttonThemeReaderRevenue,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 
@@ -172,7 +172,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 			>
 				{format.display === ArticleDisplay.Immersive && (
 					<Hide when="above" breakpoint="tablet">
-						<ThemeProvider theme={buttonReaderRevenue}>
+						<ThemeProvider theme={buttonThemeReaderRevenue}>
 							<PositionButton>
 								<LinkButton
 									priority="primary"
