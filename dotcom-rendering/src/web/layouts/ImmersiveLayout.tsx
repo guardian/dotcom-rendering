@@ -549,7 +549,7 @@ export const ImmersiveLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer>
+							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
 									palette={palette}

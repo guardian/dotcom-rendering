@@ -489,7 +489,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="body" element="article">
-								<ArticleContainer>
+								<ArticleContainer format={format}>
 									<ArticleBody
 										format={format}
 										palette={palette}

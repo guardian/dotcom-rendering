@@ -576,7 +576,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer>
+							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
 									palette={palette}

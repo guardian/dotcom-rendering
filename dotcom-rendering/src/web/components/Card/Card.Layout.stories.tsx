@@ -34,7 +34,13 @@ export const News = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row" bottomMargin={true}>
 					<LI percentage="75%" showDivider={false} padSides={true}>
 						<Card
@@ -242,7 +248,13 @@ export const InDepth = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row">
 					<LI percentage="50%" padSides={true}>
 						<UL direction="column">
@@ -364,7 +376,13 @@ export const Related = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row" bottomMargin={true}>
 					<LI padSides={true} percentage="33%">
 						<Card
@@ -511,7 +529,13 @@ export const Spotlight = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<Card
 					linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 					format={{
@@ -539,7 +563,13 @@ export const Quad = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row">
 					<LI percentage="25%" padSides={true}>
 						<Card
@@ -643,7 +673,13 @@ export const Media = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row">
 					<LI
 						padSides={true}
@@ -786,7 +822,13 @@ export const Labs = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row">
 					<LI percentage="25%" padSides={true}>
 						<Card

@@ -1,3 +1,4 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { Flex } from '@root/src/web/components/Flex';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
@@ -24,7 +25,13 @@ export const PartialRightBorder = () => {
 						stretch the whole height
 					</>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<Placeholder
 						height={500}
 						width={600}
@@ -47,7 +54,13 @@ export const RightBorder = () => {
 				<LeftColumn>
 					<>The border to my right should stretch the whole height</>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<Placeholder
 						height={500}
 						width={600}

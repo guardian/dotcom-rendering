@@ -503,7 +503,7 @@ export const ShowcaseLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer>
+							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
 									palette={palette}

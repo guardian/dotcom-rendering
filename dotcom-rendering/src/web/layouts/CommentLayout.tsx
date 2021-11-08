@@ -522,7 +522,7 @@ export const CommentLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer>
+							<ArticleContainer format={format}>
 								<div css={maxWidth}>
 									<ArticleBody
 										format={format}
