@@ -11,6 +11,7 @@ import { ImageElementFields } from '@guardian/content-api-models/v1/imageElement
 import { Context } from 'parserContext';
 import { Asset } from '@guardian/content-api-models/v1/asset';
 import { AssetFields } from '@guardian/content-api-models/v1/assetFields';
+import { ArticleElementRole } from '@guardian/libs';
 
 // ----- Mocks ----- //
 let imageBlock: BlockElement;
@@ -32,7 +33,7 @@ const defaultImage: Image = {
 	caption: none,
 	credit: none,
 	nativeCaption: none,
-	role: Role.Standard,
+	role: ArticleElementRole.Standard,
 };
 const roleTestCases = [
 	{

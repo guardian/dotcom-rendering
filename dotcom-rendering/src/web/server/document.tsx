@@ -48,7 +48,10 @@ interface Props {
 }
 
 const decideTitle = (CAPI: CAPIType): string => {
-	if (decideTheme(CAPI.format) === ArticlePillar.Opinion && CAPI.author.byline) {
+	if (
+		decideTheme(CAPI.format) === ArticlePillar.Opinion &&
+		CAPI.author.byline
+	) {
 		return `${CAPI.headline} | ${CAPI.author.byline} | The Guardian`;
 	}
 	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;

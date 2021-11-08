@@ -225,28 +225,23 @@ export const WithPosterImage = () => {
 				duration={333}
 				posterImage={[
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
 						width: 2000,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
 						width: 1000,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
 						width: 500,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
 						width: 140,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
 						width: 4255,
 					},
 				]}
@@ -294,28 +289,23 @@ export const WithPosterAndOverlayImage = () => {
 				duration={333}
 				posterImage={[
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/2000.jpg',
 						width: 2000,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/1000.jpg',
 						width: 1000,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/500.jpg',
 						width: 500,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/140.jpg',
 						width: 140,
 					},
 					{
-						url:
-							'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
+						url: 'https://media.guim.co.uk/45c34a4312b228773b1bdec415b4253667b21ae3/0_0_4255_2394/4255.jpg',
 						width: 4255,
 					},
 				]}

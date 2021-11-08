@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
-import type { Option, Role } from "@guardian/types";
+import type { ArticleElementRole } from "@guardian/libs";
+import type { Option } from "@guardian/types";
 
 // ----- Types ----- //
 
@@ -11,7 +12,7 @@ interface Image {
   alt: Option<string>;
   width: number;
   height: number;
-  role: Role;
+  role: ArticleElementRole;
 }
 
 // ----- Exports ----- //

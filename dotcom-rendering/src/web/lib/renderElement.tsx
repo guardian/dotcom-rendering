@@ -729,6 +729,12 @@ export const renderElement = ({
 // bareElements is the set of element types that don't get wrapped in a Figure
 // for most article types, either because they don't need it or because they
 // add the figure themselves.
+// We might assume that InteractiveBlockElement should be included in this list,
+// however we can't do this while we maintain the current component abstraction.
+// If no outer figure, then HydrateOnce uses the component's figure as the root
+// for hydration. For InteractiveBlockElements, the result is that the state that
+// determines height is never updated leaving an empty placeholder space in the
+// article even after the interactive content has loaded.
 const bareElements = new Set([
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 	'model.dotcomrendering.pageElements.CaptionBlockElement',

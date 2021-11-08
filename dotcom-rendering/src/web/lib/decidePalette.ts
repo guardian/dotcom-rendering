@@ -535,12 +535,8 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const fillCaptionTriangle = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	return pillarPalette[format.theme].main;
-};
+const fillCaptionCamera = (format: ArticleFormat): string =>
+	textCaption(format);
 
 const fillBlockquoteIcon = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
@@ -761,6 +757,10 @@ const textNumberedPosition = (): string => {
 	return text.supporting;
 };
 
+const textOverlayed = (): string => {
+	return WHITE;
+};
+
 const backgroundHeadlineTag = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
@@ -815,6 +815,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
+			overlayedCaption: textOverlayed(),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -838,7 +839,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		fill: {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
-			captionTriangle: fillCaptionTriangle(format),
+			cameraCaptionIcon: fillCaptionCamera(format),
 			cardIcon: fillCardIcon(format),
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),

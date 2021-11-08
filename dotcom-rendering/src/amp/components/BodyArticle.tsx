@@ -80,7 +80,7 @@ const adStyle = css`
 		display: block;
 		${textSans.xxsmall()};
 		/* Adverts specifcally don't use the GU font branding. */
-		/* stylelint-disable-next-line property-blacklist */
+		/* stylelint-disable-next-line property-disallowed-list */
 		font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande',
 			sans-serif;
 		padding: 3px 10px;

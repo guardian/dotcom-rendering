@@ -2,7 +2,7 @@
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
-export PATH := node_modules/.bin:$(PATH)
+export PATH := node_modules/.bin:../node_modules/.bin:$(PATH)
 export SHELL := /usr/bin/env bash
 
 # messaging #########################################

@@ -1,10 +1,7 @@
 // ----- Imports ----- //
+
 import 'regenerator-runtime/runtime.js';
-import {
-	AudioAtom,
-	KnowledgeQuizAtom,
-	PersonalityQuizAtom,
-} from '@guardian/atoms-rendering';
+import { AudioAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
@@ -37,6 +34,7 @@ import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
+import { hydrate as hydrateAtoms } from './atoms';
 
 // ----- Run ----- //
 
@@ -386,42 +384,6 @@ function initAudioAtoms(): void {
 	});
 }
 
-function hydrateQuizAtoms(): void {
-	Array.from(document.querySelectorAll('.js-quiz')).forEach((atom) => {
-		const props = atom.querySelector('.js-quiz-params')?.innerHTML;
-		try {
-			if (props) {
-				const quizProps = JSON.parse(
-					props.replace(/&quot;/g, '"'),
-				) as unknown as { quizType: string };
-				if (quizProps.quizType === 'personality') {
-					ReactDOM.hydrate(
-						h(
-							PersonalityQuizAtom,
-							quizProps as unknown as React.ComponentProps<
-								typeof PersonalityQuizAtom
-							>,
-						),
-						atom,
-					);
-				} else if (quizProps.quizType === 'knowledge') {
-					ReactDOM.hydrate(
-						h(
-							KnowledgeQuizAtom,
-							quizProps as unknown as React.ComponentProps<
-								typeof KnowledgeQuizAtom
-							>,
-						),
-						atom,
-					);
-				}
-			}
-		} catch (e) {
-			console.error(e);
-		}
-	});
-}
-
 function localDates(): void {
 	const date = document.querySelector('time.js-date');
 	const dateString = date?.getAttribute('data-date');
@@ -530,7 +492,7 @@ callouts();
 renderComments();
 hasSeenCards();
 initAudioAtoms();
-hydrateQuizAtoms();
+hydrateAtoms();
 localDates();
 richLinks();
 hydrateClickToView();

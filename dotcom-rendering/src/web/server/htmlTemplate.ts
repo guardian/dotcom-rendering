@@ -1,4 +1,4 @@
-import resetCSS from /* preval */ '@root/src/lib/reset-css';
+import { resets } from '@guardian/src-foundations/utils';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { CDN } from '@root/src/lib/assets';
 import { brandBackground } from '@guardian/src-foundations/palette';
@@ -119,6 +119,10 @@ export const htmlTemplate = ({
 	const weAreHiringMessage = `
 <!--
 
+We are hiring, ever thought about joining us?
+https://workforus.theguardian.com/careers/product-engineering/
+
+
                                     GGGGGGGGG
                            GGGGGGGGGGGGGGGGGGGGGGGGGG
                        GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
@@ -144,10 +148,6 @@ export const htmlTemplate = ({
                        GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
                             GGGGGGGGGGGGGGGGGGGGGGGGG
                                     GGGGGGGGG
-
-
-        We are hiring, ever thought about joining us?
-        https://workforus.theguardian.com/careers/product-engineering/
 
 
          GGGGG    GGG     GGG
@@ -285,7 +285,7 @@ export const htmlTemplate = ({
                 ${loadableConfigScripts.join('\n')}
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>
-                <style>${resetCSS}${css}</style>
+                <style>${resets.resetCSS}${css}</style>
 
                 <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
             </head>

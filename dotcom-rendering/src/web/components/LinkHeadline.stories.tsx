@@ -201,8 +201,7 @@ export const InUnderlinedState = () => (
 			kickerText="I am never underlined"
 			showSlash={true}
 			link={{
-				to:
-					'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
+				to: 'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
 			}}
 		/>
 	</ElementContainer>
@@ -226,8 +225,7 @@ export const linkStory = () => (
 			kickerText="I am not a link"
 			showSlash={true}
 			link={{
-				to:
-					'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
+				to: 'https://www.theguardian.com/us-news/2019/nov/14/nancy-pelosi-trump-ukraine-bribery',
 			}}
 		/>
 	</ElementContainer>

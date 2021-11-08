@@ -87,15 +87,13 @@ export const BrandingStory = () => {
 				branding={{
 					sponsorName: 'Humanity United',
 					logo: {
-						src:
-							'https://static.theguardian.com/commercial/sponsor/14/May/2018/533d381b-ac99-4e10-83be-8b64a1da9710-hu.png',
+						src: 'https://static.theguardian.com/commercial/sponsor/14/May/2018/533d381b-ac99-4e10-83be-8b64a1da9710-hu.png',
 						dimensions: { width: 140, height: 90 },
 						link: 'http://www.humanityunited.org/ ',
 						label: 'Supported by',
 					},
 					logoForDarkBackground: {
-						src:
-							'https://static.theguardian.com/commercial/sponsor/14/May/2018/4192d462-d794-4f07-a43c-6b546f4dcd93-hu-white.png',
+						src: 'https://static.theguardian.com/commercial/sponsor/14/May/2018/4192d462-d794-4f07-a43c-6b546f4dcd93-hu-white.png',
 						dimensions: { width: 140, height: 39 },
 						link: 'http://www.humanityunited.org/ ',
 						label: 'Supported by',

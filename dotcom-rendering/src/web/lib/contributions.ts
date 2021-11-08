@@ -25,7 +25,7 @@ const WEEKLY_ARTICLE_COUNT_KEY = 'gu.history.weeklyArticleCount';
 export const NO_RR_BANNER_TIMESTAMP_KEY = 'gu.noRRBannerTimestamp'; // timestamp of when we were last told not to show a RR banner
 
 // See https://github.com/guardian/support-dotcom-components/blob/main/module-versions.md
-export const MODULES_VERSION = 'v2';
+export const MODULES_VERSION = 'v3';
 
 // Cookie set by the User Attributes API upon signing in.
 // Value computed server-side and looks at all of the user's active products,
@@ -141,6 +141,7 @@ export const shouldHideSupportMessaging = (
 	isRecentOneOffContributor();
 
 const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
+const REQUIRED_CONSENTS_FOR_BROWSER_ID = [1, 3, 5, 7];
 
 export const hasArticleCountOptOutCookie = (): boolean =>
 	getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
@@ -159,9 +160,10 @@ export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 			if (ccpa || aus) {
 				resolve(true);
 			} else if (tcfv2) {
-				const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
-					(consent) => tcfv2.consents[consent],
-				);
+				const hasRequiredConsents =
+					REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
+						(consent) => tcfv2.consents[consent],
+					);
 
 				if (!hasRequiredConsents) {
 					removeArticleCountsFromLocalStorage();
@@ -176,6 +178,24 @@ export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {
 	const hasCmpConsent = await hasCmpConsentForArticleCount();
 	return !hasCmpConsent || hasArticleCountOptOutCookie();
 };
+
+export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
+	new Promise((resolve) => {
+		if (getCookie('gu-cmp-disabled')) {
+			resolve(true);
+		}
+		onConsentChange(({ ccpa, tcfv2, aus }) => {
+			if (ccpa || aus) {
+				resolve(true);
+			} else if (tcfv2) {
+				const hasRequiredConsents =
+					REQUIRED_CONSENTS_FOR_BROWSER_ID.every(
+						(consent) => tcfv2.consents[consent],
+					);
+				resolve(hasRequiredConsents);
+			}
+		});
+	});
 
 const twentyMins = 20 * 60000;
 export const withinLocalNoBannerCachePeriod = (): boolean => {
@@ -194,7 +214,7 @@ export const withinLocalNoBannerCachePeriod = (): boolean => {
 export const setLocalNoBannerCachePeriod = (): void =>
 	window.localStorage.setItem(NO_RR_BANNER_TIMESTAMP_KEY, `${Date.now()}`);
 
-export const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
+const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
 	return getIdApiUserData(ajaxUrl)
 		.then((data: IdApiUserData) => data.user?.primaryEmailAddress)
 		.catch((error) => {
@@ -202,3 +222,19 @@ export const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
 			return undefined;
 		});
 };
+
+export const lazyFetchEmailWithTimeout =
+	(idapiUrl: string): (() => Promise<string | null>) =>
+	() => {
+		return new Promise((resolve) => {
+			setTimeout(() => resolve(null), 1000);
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			getEmail(idapiUrl).then((email) => {
+				if (email) {
+					resolve(email);
+				} else {
+					resolve(null);
+				}
+			});
+		});
+	};

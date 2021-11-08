@@ -5,7 +5,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
-import TriangleIcon from '@frontend/static/icons/triangle.svg';
+import CameraIcon from '@frontend/static/icons/camera.svg';
 
 type Props = {
 	captionText?: string;
@@ -20,22 +20,18 @@ type Props = {
 };
 
 const captionStyle = (palette: Palette) => css`
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
+	line-height: 135%;
 	padding-top: 6px;
-	${textSans.xxsmall()};
-	word-wrap: break-word;
+	word-wrap: break-all;
 	color: ${palette.text.caption};
-	${until.tablet} {
-		padding-left: ${space[2]}px;
-		padding-right: ${space[2]}px;
-	}
 `;
 
 const bottomMargin = css`
 	margin-bottom: 6px;
 `;
 
-const overlayedStyles = css`
+const overlayedStyles = (palette: Palette) => css`
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -43,11 +39,15 @@ const overlayedStyles = css`
 	background: rgba(18, 18, 18, 0.8);
 
 	span {
-		color: white;
+		color: ${palette.text.overlayedCaption};
 		font-size: 0.75rem;
 		line-height: 1rem;
 	}
-	color: white;
+
+	svg {
+		fill: ${palette.text.overlayedCaption};
+	}
+	color: ${palette.text.overlayedCaption};
 	font-size: 0.75rem;
 	line-height: 1rem;
 	padding-top: 0.375rem;
@@ -108,8 +108,14 @@ const hideIconBelowLeftCol = css`
 `;
 
 const iconStyle = (palette: Palette) => css`
-	fill: ${palette.fill.captionTriangle};
-	padding-right: 3px;
+	fill: ${palette.fill.cameraCaptionIcon};
+	margin-right: ${space[1]}px;
+	display: inline-block;
+	vertical-align: middle;
+	svg {
+		width: 14px;
+		display: inline-block;
+	}
 `;
 
 const captionLink = (palette: Palette) => css`
@@ -148,7 +154,7 @@ export const Caption = ({
 				captionStyle(palette),
 				shouldLimitWidth && limitedWidth,
 				!isOverlayed && bottomMargin,
-				isOverlayed && overlayedStyles,
+				isOverlayed && overlayedStyles(palette),
 				padCaption && captionPadding,
 			]}
 		>
@@ -159,7 +165,7 @@ export const Caption = ({
 						hideIconBelowLeftCol,
 				]}
 			>
-				<TriangleIcon />
+				<CameraIcon />
 			</span>
 			{captionText && (
 				<span

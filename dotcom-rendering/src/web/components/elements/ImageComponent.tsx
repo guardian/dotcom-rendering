@@ -259,6 +259,7 @@ export const ImageComponent = ({
 			>
 				<Picture
 					role={role}
+					format={format}
 					imageSources={element.imageSources}
 					alt={element.data.alt || ''}
 					width={imageWidth}
@@ -290,6 +291,7 @@ export const ImageComponent = ({
 			>
 				<Picture
 					role={role}
+					format={format}
 					imageSources={element.imageSources}
 					alt={element.data.alt || ''}
 					width={imageWidth}
@@ -321,6 +323,7 @@ export const ImageComponent = ({
 			>
 				<Picture
 					role={role}
+					format={format}
 					imageSources={element.imageSources}
 					alt={element.data.alt || ''}
 					width={imageWidth}

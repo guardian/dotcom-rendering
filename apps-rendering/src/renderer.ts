@@ -7,8 +7,6 @@ import {
 	ChartAtom,
 	ExplainerAtom,
 	GuideAtom,
-	KnowledgeQuizAtom,
-	PersonalityQuizAtom,
 	ProfileAtom,
 	QandaAtom,
 	TimelineAtom,
@@ -40,15 +38,14 @@ import type {
 	GuideAtom as GuideAtomElement,
 	Image,
 	InteractiveAtom as InteractiveAtomElement,
-	KnowledgeQuizAtom as KnowledgeQuizAtomElement,
 	MediaAtom as MediaAtomElement,
-	PersonalityQuizAtom as PersonalityQuizAtomElement,
 	ProfileAtom as ProfileAtomElement,
 	QandaAtom as QandaAtomElement,
 	Text,
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
 import Anchor from 'components/anchor';
+import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
@@ -69,7 +66,7 @@ import LiveEventLink from 'components/liveEventLink';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
 import RichLink from 'components/richLink';
-import { isElement, pipe } from 'lib';
+import { convertFormatToArticleFormat, isElement, pipe } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { backgroundColor, darkModeCss } from 'styles';
@@ -257,12 +254,15 @@ const textElement =
 		}
 	};
 
+const isBlog = (format: Format): boolean =>
+	format.design === Design.LiveBlog || format.design === Design.DeadBlog;
+
 const linkColourFromFormat = (format: Format): string => {
 	if (format.theme === Special.Labs) {
 		return palette.labs[300];
 	}
 
-	if (format.design === Design.LiveBlog) {
+	if (isBlog(format)) {
 		return palette.neutral[100];
 	}
 
@@ -270,8 +270,16 @@ const linkColourFromFormat = (format: Format): string => {
 	return format.design === Design.Media ? inverted : kicker;
 };
 
-const textDecorationFromFormat = (format: Format): string =>
-	format.design === Design.LiveBlog ? 'underline' : 'none';
+const borderFromFormat = (format: Format): string => {
+	const { liveblogKicker } = getThemeStyles(format.theme);
+
+	const styles = `
+		border-bottom: 0.0625rem solid ${liveblogKicker};
+		text-decoration: none;
+	`;
+
+	return isBlog(format) ? styles : 'none';
+};
 
 const standfirstTextElement =
 	(format: Format) =>
@@ -289,11 +297,9 @@ const standfirstTextElement =
 			case 'LI':
 				return h(ListItem, { format, children });
 			case 'A': {
-				const { liveblogKicker } = getThemeStyles(format.theme);
 				const styles = css`
 					color: ${linkColourFromFormat(format)};
-					text-decoration: ${textDecorationFromFormat(format)};
-					text-decoration-color: ${liveblogKicker};
+					${borderFromFormat(format)};
 				`;
 				const url = withDefault('')(getHref(node));
 				const href = url.startsWith('profile/')
@@ -425,7 +431,7 @@ const imageRenderer = (
 			renderCaption(cap, format),
 			h(Credit, { credit, format, key }),
 		])(caption),
-		format,
+		format: convertFormatToArticleFormat(format),
 		key,
 		supportsDarkMode: true,
 		lightbox: some({
@@ -583,7 +589,7 @@ const mediaAtomRenderer = (
 		css: styles,
 	};
 	const figcaption = h(FigCaption, {
-		format,
+		format: convertFormatToArticleFormat(format),
 		supportsDarkMode: true,
 		children: map((cap: DocumentFragment) => renderCaption(cap, format))(
 			caption,
@@ -621,29 +627,6 @@ const audioAtomRenderer = (
 		},
 		h(AudioAtom, { ...element, pillar, duration: 0 }),
 	);
-};
-
-const quizAtomRenderer = (
-	format: Format,
-	element: KnowledgeQuizAtomElement | PersonalityQuizAtomElement,
-): ReactNode => {
-	const props = JSON.stringify(element);
-	const { theme } = format;
-	const hydrationParams = h(
-		'script',
-		{ className: 'js-quiz-params', type: 'application/json' },
-		props,
-	);
-	if (element.kind === ElementKind.KnowledgeQuizAtom) {
-		return h('div', { className: 'js-quiz' }, [
-			hydrationParams,
-			h(KnowledgeQuizAtom, { ...element, theme, sharingUrls: {} }),
-		]);
-	}
-	return h('div', { className: 'js-quiz' }, [
-		hydrationParams,
-		h(PersonalityQuizAtom, { ...element, theme, sharingUrls: {} }),
-	]);
 };
 
 const render =
@@ -722,7 +705,7 @@ const render =
 
 			case ElementKind.KnowledgeQuizAtom:
 			case ElementKind.PersonalityQuizAtom:
-				return quizAtomRenderer(format, element);
+				return h(Quiz, { format, element });
 		}
 	};
 

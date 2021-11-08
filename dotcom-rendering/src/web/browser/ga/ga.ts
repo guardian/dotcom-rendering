@@ -149,13 +149,6 @@ export const sendPageView = (): void => {
 		// do nothing
 	}
 
-	ga(send, 'pageview', {
-		hitCallback() {
-			const image = new Image();
-			image.src = `${GA.beaconUrl}/count/pvg.gif`;
-		},
-	});
-
 	// //////////////////////
 	// Core Vitals Reporting
 	// Supported only in Chromium but npm module tested in all our supported browsers

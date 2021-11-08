@@ -5,9 +5,9 @@ import { brandAlt, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { SvgCamera } from '@guardian/src-icons';
 import type { Option } from '@guardian/types';
-import { map, withDefault } from '@guardian/types';
+import { map, OptionKind, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
-import type { FC, ReactElement, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import { articlePaddingStyles } from './styles';
 
 const captionId = 'header-image-caption';
@@ -102,34 +102,33 @@ const HeaderImageCaption: FC<Props> = ({
 	iconColor,
 	iconBackgroundColor,
 	isFullWidthImage,
-}: Props) =>
-	pipe(
-		caption,
-		map((cap) => (
-			<figcaption
-				css={[
-					HeaderImageCaptionStyles(
-						isFullWidthImage,
-						iconBackgroundColor,
-					),
-					styles,
-				]}
-			>
-				<details>
-					<summary>
-						<span css={svgStyle(iconColor)}>
-							<SvgCamera />
-							Click to see figure caption
-						</span>
-					</summary>
-					<span id={captionId}>
-						{renderText(cap)} {withDefault('')(credit)}
+}: Props) => {
+	if (caption.kind === OptionKind.None && credit.kind === OptionKind.None) {
+		return null;
+	}
+
+	return (
+		<figcaption
+			css={[
+				HeaderImageCaptionStyles(isFullWidthImage, iconBackgroundColor),
+				styles,
+			]}
+		>
+			<details>
+				<summary>
+					<span css={svgStyle(iconColor)}>
+						<SvgCamera />
+						Click to see figure caption
 					</span>
-				</details>
-			</figcaption>
-		)),
-		withDefault<ReactElement | null>(null),
+				</summary>
+				<span id={captionId}>
+					{pipe(caption, map(renderText), withDefault<ReactNode>(''))}{' '}
+					{withDefault('')(credit)}
+				</span>
+			</details>
+		</figcaption>
 	);
+};
 
 export default HeaderImageCaption;
 

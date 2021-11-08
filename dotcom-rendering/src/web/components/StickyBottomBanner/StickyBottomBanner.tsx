@@ -17,10 +17,13 @@ import {
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
 import { CountryCode } from '@guardian/libs';
-import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import type {
+	BrazeArticleContext,
+	BrazeMessagesInterface,
+} from '@guardian/braze-components/logic';
 import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
-import { BrazeBanner, canShow as canShowBrazeBanner } from './BrazeBanner';
+import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
 	isSignedIn?: boolean;
@@ -91,7 +94,7 @@ const buildRRBannerConfigWith = ({
 						isSignedIn,
 						asyncCountryCode,
 						contentType: CAPI.contentType,
-						sectionName: CAPI.sectionName,
+						sectionId: CAPI.config.section,
 						shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
 						isMinuteArticle: CAPI.pageType.isMinuteArticle,
 						isPaidContent: CAPI.pageType.isPaidContent,
@@ -111,13 +114,16 @@ const buildRRBannerConfigWith = ({
 						signInGateWillShow,
 						asyncArticleCount,
 					}),
-				show: ({ meta, module, email }: BannerProps) => () => (
-					<BannerComponent
-						meta={meta}
-						module={module}
-						email={email}
-					/>
-				),
+				show:
+					({ meta, module, fetchEmail }: BannerProps) =>
+					() =>
+						(
+							<BannerComponent
+								meta={meta}
+								module={module}
+								fetchEmail={fetchEmail}
+							/>
+						),
 			},
 			timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 		};
@@ -140,10 +146,11 @@ const buildReaderRevenueBannerConfig = buildRRBannerConfigWith({
 
 const buildBrazeBanner = (
 	brazeMessages: Promise<BrazeMessagesInterface>,
+	brazeArticleContext: BrazeArticleContext,
 ): CandidateConfig<any> => ({
 	candidate: {
 		id: 'braze-banner',
-		canShow: () => canShowBrazeBanner(brazeMessages),
+		canShow: () => canShowBrazeBanner(brazeMessages, brazeArticleContext),
 		show: (meta: any) => () => <BrazeBanner meta={meta} />,
 	},
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
@@ -176,8 +183,12 @@ export const StickyBottomBanner = ({
 			asyncArticleCount as Promise<WeeklyArticleHistory | undefined>,
 			signInGateWillShow,
 		);
+		const brazeArticleContext: BrazeArticleContext = {
+			section: CAPI.sectionName,
+		};
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as Promise<BrazeMessagesInterface>,
+			brazeArticleContext,
 		);
 		const bannerConfig: SlotConfig = {
 			candidates: [CMP, puzzlesBanner, readerRevenue, brazeBanner],

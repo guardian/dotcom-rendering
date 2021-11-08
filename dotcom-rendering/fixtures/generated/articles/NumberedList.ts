@@ -13,8 +13,7 @@
 
 export const NumberedList: CAPIType = {
 	slotMachineFlags: '',
-	main:
-		'<figure class="element element-image" data-media-id="2ce8db064eabb9e22a69cc45a9b6d4e10d595f06"> \n <img src="https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/1000.jpg" alt="best smartphone 2019" width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Which is the best premium smartphone for you? Check out this guide to the top mobile phones including iPhone, Samsung, Huawei, OnePlus and Google. </span> \n  <span class="element-image__credit">Photograph: Samuel Gibbs/The Guardian</span> \n </figcaption> \n</figure>',
+	main: '<figure class="element element-image" data-media-id="2ce8db064eabb9e22a69cc45a9b6d4e10d595f06"> \n <img src="https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/1000.jpg" alt="best smartphone 2019" width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Which is the best premium smartphone for you? Check out this guide to the top mobile phones including iPhone, Samsung, Huawei, OnePlus and Google. </span> \n  <span class="element-image__credit">Photograph: Samuel Gibbs/The Guardian</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
 		{
 			url: '/technology/smartphones',
@@ -68,8 +67,7 @@ export const NumberedList: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+					value: '/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 				},
 				{
 					name: 'ct',
@@ -123,8 +121,7 @@ export const NumberedList: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+					value: '/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 				},
 				{
 					name: 'ct',
@@ -182,8 +179,7 @@ export const NumberedList: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+					value: '/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 				},
 				{
 					name: 'ct',
@@ -245,8 +241,7 @@ export const NumberedList: CAPIType = {
 				},
 				{
 					name: 'url',
-					value:
-						'/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+					value: '/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 				},
 				{
 					name: 'ct',
@@ -457,8 +452,7 @@ export const NumberedList: CAPIType = {
 							},
 							{
 								title: 'Project Syndicate',
-								url:
-									'/business/series/project-syndicate-economists',
+								url: '/business/series/project-syndicate-economists',
 							},
 							{
 								title: 'B2B',
@@ -841,8 +835,7 @@ export const NumberedList: CAPIType = {
 		otherLinks: [
 			{
 				title: 'The Guardian app',
-				url:
-					'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
 			},
 			{
 				title: 'Video',
@@ -918,8 +911,7 @@ export const NumberedList: CAPIType = {
 			},
 			{
 				title: 'Guardian Weekly',
-				url:
-					'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
 			},
 			{
 				title: 'Crosswords',
@@ -971,23 +963,19 @@ export const NumberedList: CAPIType = {
 		brandExtensions: [
 			{
 				title: 'Search jobs',
-				url:
-					'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
 			},
 			{
 				title: 'Hire with Guardian Jobs',
-				url:
-					'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
 			},
 			{
 				title: 'Holidays',
-				url:
-					'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
 			},
 			{
 				title: 'Live events',
-				url:
-					'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
 			},
 			{
 				title: 'Masterclasses',
@@ -1160,8 +1148,7 @@ export const NumberedList: CAPIType = {
 						},
 						{
 							title: 'Project Syndicate',
-							url:
-								'/business/series/project-syndicate-economists',
+							url: '/business/series/project-syndicate-economists',
 						},
 						{
 							title: 'B2B',
@@ -1380,8 +1367,7 @@ export const NumberedList: CAPIType = {
 		'article:modified_time': '2020-07-01T14:19:04.000Z',
 	},
 	sectionUrl: 'technology/smartphones',
-	pageId:
-		'technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+	pageId: 'technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 	version: 3,
 	tags: [
 		{
@@ -1476,8 +1462,7 @@ export const NumberedList: CAPIType = {
 		},
 	],
 	pillar: 'news',
-	webURL:
-		'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+	webURL: 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 	showBottomSocialButtons: true,
 	isImmersive: false,
 	sectionLabel: 'Smartphones',
@@ -1556,8 +1541,7 @@ export const NumberedList: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url:
-						'/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1599,8 +1583,7 @@ export const NumberedList: CAPIType = {
 				},
 				{
 					text: 'Newsletters',
-					url:
-						'/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
 					dataLinkName: 'uk : footer : newsletters',
 					extraClasses: '',
 				},
@@ -1620,15 +1603,13 @@ export const NumberedList: CAPIType = {
 				},
 				{
 					text: 'Search jobs',
-					url:
-						'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
 					dataLinkName: 'uk : footer : jobs',
 					extraClasses: '',
 				},
 				{
 					text: 'Patrons',
-					url:
-						'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
 					dataLinkName: 'uk : footer : patrons',
 					extraClasses: '',
 				},
@@ -1680,8 +1661,7 @@ export const NumberedList: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/140.jpg',
+						url: 'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/140.jpg',
 					},
 					{
 						index: 1,
@@ -1691,8 +1671,7 @@ export const NumberedList: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/500.jpg',
+						url: 'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/500.jpg',
 					},
 					{
 						index: 2,
@@ -1702,8 +1681,7 @@ export const NumberedList: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/1000.jpg',
+						url: 'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/1000.jpg',
 					},
 					{
 						index: 3,
@@ -1713,8 +1691,7 @@ export const NumberedList: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/2000.jpg',
+						url: 'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/2000.jpg',
 					},
 					{
 						index: 4,
@@ -1724,8 +1701,7 @@ export const NumberedList: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/4171.jpg',
+						url: 'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/4171.jpg',
 					},
 					{
 						index: 5,
@@ -1736,8 +1712,7 @@ export const NumberedList: CAPIType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url:
-							'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg',
+						url: 'https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg',
 					},
 				],
 			},
@@ -1754,33 +1729,27 @@ export const NumberedList: CAPIType = {
 					weighting: 'inline',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=85&auto=format&fit=max&s=0eb918e27ad755df7255039455fb100f',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=85&auto=format&fit=max&s=0eb918e27ad755df7255039455fb100f',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=46d47a535753b7b2bcd272fe990c4574',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=46d47a535753b7b2bcd272fe990c4574',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=85&auto=format&fit=max&s=3d9cbe2e6e053f072587ccf63d70dd1c',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=85&auto=format&fit=max&s=3d9cbe2e6e053f072587ccf63d70dd1c',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=a8b1ad7e63a8529278468ff4f7b4cd24',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=a8b1ad7e63a8529278468ff4f7b4cd24',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=85&auto=format&fit=max&s=390f53e790430d7be9d4d3f28854a25c',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=85&auto=format&fit=max&s=390f53e790430d7be9d4d3f28854a25c',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5b026759dbd9a6afca07a46771024d3f',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5b026759dbd9a6afca07a46771024d3f',
 							width: 890,
 						},
 					],
@@ -1789,23 +1758,19 @@ export const NumberedList: CAPIType = {
 					weighting: 'thumbnail',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=140&quality=85&auto=format&fit=max&s=59a4af9bafbbbd56b2f76b73411e53be',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=140&quality=85&auto=format&fit=max&s=59a4af9bafbbbd56b2f76b73411e53be',
 							width: 140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=e32a8865a68828e9f2ff3e7cdb6c96de',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=e32a8865a68828e9f2ff3e7cdb6c96de',
 							width: 280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=120&quality=85&auto=format&fit=max&s=ce8c5765e1aee3fcc4721f15d7fe2cc9',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=120&quality=85&auto=format&fit=max&s=ce8c5765e1aee3fcc4721f15d7fe2cc9',
 							width: 120,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=bc89327efac0ab5c95fac08a7183c7dc',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=bc89327efac0ab5c95fac08a7183c7dc',
 							width: 240,
 						},
 					],
@@ -1814,53 +1779,43 @@ export const NumberedList: CAPIType = {
 					weighting: 'supporting',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=380&quality=85&auto=format&fit=max&s=35b16f93ffc7057ff4f74d21b1808942',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=380&quality=85&auto=format&fit=max&s=35b16f93ffc7057ff4f74d21b1808942',
 							width: 380,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=51f4913f8e88341d540ac41802016ad7',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=51f4913f8e88341d540ac41802016ad7',
 							width: 760,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=300&quality=85&auto=format&fit=max&s=cd7ba3a903d91951dc955462f92e2509',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=300&quality=85&auto=format&fit=max&s=cd7ba3a903d91951dc955462f92e2509',
 							width: 300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=1cab299f5a9d90939d00ac2cb7d91946',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=1cab299f5a9d90939d00ac2cb7d91946',
 							width: 600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=85&auto=format&fit=max&s=0eb918e27ad755df7255039455fb100f',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=85&auto=format&fit=max&s=0eb918e27ad755df7255039455fb100f',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=46d47a535753b7b2bcd272fe990c4574',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=46d47a535753b7b2bcd272fe990c4574',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=85&auto=format&fit=max&s=3d9cbe2e6e053f072587ccf63d70dd1c',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=85&auto=format&fit=max&s=3d9cbe2e6e053f072587ccf63d70dd1c',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=a8b1ad7e63a8529278468ff4f7b4cd24',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=a8b1ad7e63a8529278468ff4f7b4cd24',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=85&auto=format&fit=max&s=390f53e790430d7be9d4d3f28854a25c',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=85&auto=format&fit=max&s=390f53e790430d7be9d4d3f28854a25c',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5b026759dbd9a6afca07a46771024d3f',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5b026759dbd9a6afca07a46771024d3f',
 							width: 890,
 						},
 					],
@@ -1869,73 +1824,59 @@ export const NumberedList: CAPIType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1020&quality=85&auto=format&fit=max&s=f917e62eff9bb097c3708b8b4b3573cb',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1020&quality=85&auto=format&fit=max&s=f917e62eff9bb097c3708b8b4b3573cb',
 							width: 1020,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=9655a8b159d3c2ec9ccd60215731b2d5',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=9655a8b159d3c2ec9ccd60215731b2d5',
 							width: 2040,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=940&quality=85&auto=format&fit=max&s=ef5cc3d0dc02de3466983ffeabbb71c4',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=940&quality=85&auto=format&fit=max&s=ef5cc3d0dc02de3466983ffeabbb71c4',
 							width: 940,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c3b649aeca872a321cb1a404febd18d1',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c3b649aeca872a321cb1a404febd18d1',
 							width: 1880,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=700&quality=85&auto=format&fit=max&s=efba78cd819483ade7e9d5a370389dd9',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=700&quality=85&auto=format&fit=max&s=efba78cd819483ade7e9d5a370389dd9',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=02113199281726f2e709ee6781e25e01',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=02113199281726f2e709ee6781e25e01',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=700&quality=85&auto=format&fit=max&s=efba78cd819483ade7e9d5a370389dd9',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=700&quality=85&auto=format&fit=max&s=efba78cd819483ade7e9d5a370389dd9',
 							width: 700,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=02113199281726f2e709ee6781e25e01',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=02113199281726f2e709ee6781e25e01',
 							width: 1400,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=660&quality=85&auto=format&fit=max&s=d9233111c97df6cf14d8647733e65c8a',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=660&quality=85&auto=format&fit=max&s=d9233111c97df6cf14d8647733e65c8a',
 							width: 660,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=dde8beb159c35aeef57dda754483efa1',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=dde8beb159c35aeef57dda754483efa1',
 							width: 1320,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=645&quality=85&auto=format&fit=max&s=10017c4a763916e27c35faaa33312792',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=645&quality=85&auto=format&fit=max&s=10017c4a763916e27c35faaa33312792',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=89fca8ba186b804a5a7745302a47d2ff',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=89fca8ba186b804a5a7745302a47d2ff',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=465&quality=85&auto=format&fit=max&s=d6ee05853a3267b29ad79f04cc0054e8',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=465&quality=85&auto=format&fit=max&s=d6ee05853a3267b29ad79f04cc0054e8',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0a3898bb6dc837b1c06aadf5856b39e7',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0a3898bb6dc837b1c06aadf5856b39e7',
 							width: 930,
 						},
 					],
@@ -1944,33 +1885,27 @@ export const NumberedList: CAPIType = {
 					weighting: 'halfwidth',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=85&auto=format&fit=max&s=0eb918e27ad755df7255039455fb100f',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=85&auto=format&fit=max&s=0eb918e27ad755df7255039455fb100f',
 							width: 620,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=46d47a535753b7b2bcd272fe990c4574',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=46d47a535753b7b2bcd272fe990c4574',
 							width: 1240,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=85&auto=format&fit=max&s=3d9cbe2e6e053f072587ccf63d70dd1c',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=85&auto=format&fit=max&s=3d9cbe2e6e053f072587ccf63d70dd1c',
 							width: 605,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=a8b1ad7e63a8529278468ff4f7b4cd24',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=a8b1ad7e63a8529278468ff4f7b4cd24',
 							width: 1210,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=85&auto=format&fit=max&s=390f53e790430d7be9d4d3f28854a25c',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=85&auto=format&fit=max&s=390f53e790430d7be9d4d3f28854a25c',
 							width: 445,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5b026759dbd9a6afca07a46771024d3f',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5b026759dbd9a6afca07a46771024d3f',
 							width: 890,
 						},
 					],
@@ -1979,73 +1914,59 @@ export const NumberedList: CAPIType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1300&quality=85&auto=format&fit=max&s=02fe6cd176b07e76899cbfcf8599ae59',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1300&quality=85&auto=format&fit=max&s=02fe6cd176b07e76899cbfcf8599ae59',
 							width: 1300,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=874c906d0213ec3c14e99ea2337a9df0',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=874c906d0213ec3c14e99ea2337a9df0',
 							width: 2600,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1140&quality=85&auto=format&fit=max&s=1d8e92ff32d815276298664f64876b81',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1140&quality=85&auto=format&fit=max&s=1d8e92ff32d815276298664f64876b81',
 							width: 1140,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=04dddf051fb4b156d45931ce3fb1e805',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=04dddf051fb4b156d45931ce3fb1e805',
 							width: 2280,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1125&quality=85&auto=format&fit=max&s=55ec33e824cd4e028d53753f96e1a091',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1125&quality=85&auto=format&fit=max&s=55ec33e824cd4e028d53753f96e1a091',
 							width: 1125,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=856dec3ccadea21d0e88060c28651309',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=856dec3ccadea21d0e88060c28651309',
 							width: 2250,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=965&quality=85&auto=format&fit=max&s=c1211d7b0b0f2995c9f99a9585e56553',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=965&quality=85&auto=format&fit=max&s=c1211d7b0b0f2995c9f99a9585e56553',
 							width: 965,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=79c5c019afc4dbdd366f11b702bf7cb7',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=79c5c019afc4dbdd366f11b702bf7cb7',
 							width: 1930,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=725&quality=85&auto=format&fit=max&s=e58f94b783470045f272d678bede9f3f',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=725&quality=85&auto=format&fit=max&s=e58f94b783470045f272d678bede9f3f',
 							width: 725,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=443b16aa8b8b07e5f69320dc5eebebc8',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=443b16aa8b8b07e5f69320dc5eebebc8',
 							width: 1450,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=645&quality=85&auto=format&fit=max&s=10017c4a763916e27c35faaa33312792',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=645&quality=85&auto=format&fit=max&s=10017c4a763916e27c35faaa33312792',
 							width: 645,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=89fca8ba186b804a5a7745302a47d2ff',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=89fca8ba186b804a5a7745302a47d2ff',
 							width: 1290,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=465&quality=85&auto=format&fit=max&s=d6ee05853a3267b29ad79f04cc0054e8',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=465&quality=85&auto=format&fit=max&s=d6ee05853a3267b29ad79f04cc0054e8',
 							width: 465,
 						},
 						{
-							src:
-								'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0a3898bb6dc837b1c06aadf5856b39e7',
+							src: 'https://i.guim.co.uk/img/media/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/master/4171.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0a3898bb6dc837b1c06aadf5856b39e7',
 							width: 930,
 						},
 					],
@@ -2061,31 +1982,24 @@ export const NumberedList: CAPIType = {
 			id: '5df7a00b8f087e8308e5f0ea',
 			elements: [
 				{
-					html:
-						'<p>Need a new smartphone but don’t know which one is the very best? Here’s a guide comparing the current top-end smartphones from Apple, <a href="https://www.theguardian.com/technology/samsung" data-component="auto-linked-tag">Samsung</a>, Huawei, OnePlus and others to help you pick the best handset for you.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Need a new smartphone but don’t know which one is the very best? Here’s a guide comparing the current top-end smartphones from Apple, <a href="https://www.theguardian.com/technology/samsung" data-component="auto-linked-tag">Samsung</a>, Huawei, OnePlus and others to help you pick the best handset for you.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3a1252d6-1558-433f-8d65-a1c7b79e7eec',
 				},
 				{
-					html:
-						'<p>There has never been a better time to buy a new flagship smartphone with many quality handsets available at a wider range of prices than ever before. Whether your priority is two-day battery life, fantastic camera performance or a spectacular screen, there’s plenty to choose from.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>There has never been a better time to buy a new flagship smartphone with many quality handsets available at a wider range of prices than ever before. Whether your priority is two-day battery life, fantastic camera performance or a spectacular screen, there’s plenty to choose from.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'ef81ad35-96bb-4863-8b64-8f4b1f78a899',
 				},
 				{
-					html:
-						'<p>This Guardian buyer’s guide to top-end smartphones was last updated on 17 December 2019, and represents the best available models at the time. As new models are released and tested, this guide will be updated to help you choose the right flagship phone for you.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>This Guardian buyer’s guide to top-end smartphones was last updated on 17 December 2019, and represents the best available models at the time. As new models are released and tested, this guide will be updated to help you choose the right flagship phone for you.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'e1a19ef2-9557-4bd6-86b2-ad54280e0e6f',
 				},
 				{
 					id: '92deaa29-9664-41a3-afb0-963d19c17764',
 					title: "What is a buyer's guide?",
-					html:
-						"<p>Welcome to one of the Guardian’s new buyer’s guides. This article represents hundreds of hours of testing by the author to bring together a succinct list of recommended products or services so you can pick from the best and ignore the rest without having to do hours of your own research.</p><p>While the Guardian may earn a small commission from items bought through affiliate links, the items featured in this buyer's guide have been tested and included without influence from any advertiser or commercial initiative.</p>",
+					html: "<p>Welcome to one of the Guardian’s new buyer’s guides. This article represents hundreds of hours of testing by the author to bring together a succinct list of recommended products or services so you can pick from the best and ignore the rest without having to do hours of your own research.</p><p>While the Guardian may earn a small commission from items bought through affiliate links, the items featured in this buyer's guide have been tested and included without influence from any advertiser or commercial initiative.</p>",
 					credit: '',
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
 					elementId: 'fe0afff5-9fed-40e6-a60a-7a5d67714eac',
@@ -2093,28 +2007,22 @@ export const NumberedList: CAPIType = {
 				{
 					alt: 'Contents',
 					scriptUrl: 'https://uploads.guim.co.uk/2019/03/20/boot.js',
-					_type:
-						'model.dotcomrendering.pageElements.InteractiveBlockElement',
+					_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					elementId: '1b776025-d9a3-40f8-abbd-81dbb7e7a5eb',
 				},
 				{
-					html:
-						'<h2><strong>Best overall: </strong>OnePlus 7T Pro</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2><strong>Best overall: </strong>OnePlus 7T Pro</h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: 'a847eaf9-0d0a-4090-905a-1edc6a0539ca',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Fuk%2Foneplus-7t-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£699</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Fuk%2Foneplus-7t-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£699</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'cd52e8f9-589c-474d-b4e9-96cd6f7ed175',
 				},
 				{
 					html: '<p>★★★★★</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'eaf986b7-18db-41cd-94c4-35165b77f52e',
 				},
 				{
@@ -2128,8 +2036,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/4203.jpg',
+								url: 'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/4203.jpg',
 							},
 							{
 								index: 1,
@@ -2140,8 +2047,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg',
+								url: 'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg',
 							},
 							{
 								index: 2,
@@ -2151,8 +2057,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/2000.jpg',
+								url: 'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/2000.jpg',
 							},
 							{
 								index: 3,
@@ -2162,8 +2067,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/1000.jpg',
+								url: 'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/1000.jpg',
 							},
 							{
 								index: 4,
@@ -2173,8 +2077,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/500.jpg',
+								url: 'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/500.jpg',
 							},
 							{
 								index: 5,
@@ -2184,8 +2087,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/140.jpg',
+								url: 'https://media.guim.co.uk/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/140.jpg',
 							},
 						],
 					},
@@ -2202,33 +2104,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=85&auto=format&fit=max&s=0ad987d572ab1626667cfe4b151312d8',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=85&auto=format&fit=max&s=0ad987d572ab1626667cfe4b151312d8',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=7cb7abd112cc40a06727a9dffb7b3ccc',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=7cb7abd112cc40a06727a9dffb7b3ccc',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=85&auto=format&fit=max&s=78d70ac6d8bc9d5a2019d83731ba748b',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=85&auto=format&fit=max&s=78d70ac6d8bc9d5a2019d83731ba748b',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90a251be2767192e9f336cb56f773133',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90a251be2767192e9f336cb56f773133',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=85&auto=format&fit=max&s=c5a3a87df30a2b084c6e381269781523',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=85&auto=format&fit=max&s=c5a3a87df30a2b084c6e381269781523',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4bad4e5f70170bd34d8535417fefcbed',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4bad4e5f70170bd34d8535417fefcbed',
 									width: 890,
 								},
 							],
@@ -2237,23 +2133,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=140&quality=85&auto=format&fit=max&s=997d91f6cf93dde176222dc3b1fc2615',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=140&quality=85&auto=format&fit=max&s=997d91f6cf93dde176222dc3b1fc2615',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=621a1d07cbb7f28b5d5491321276a3c2',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=621a1d07cbb7f28b5d5491321276a3c2',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=120&quality=85&auto=format&fit=max&s=2c5607609153412aa6bf642fb5791929',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=120&quality=85&auto=format&fit=max&s=2c5607609153412aa6bf642fb5791929',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=71c9de4793811c08b6586e2ff1b6dc05',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=71c9de4793811c08b6586e2ff1b6dc05',
 									width: 240,
 								},
 							],
@@ -2262,53 +2154,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=380&quality=85&auto=format&fit=max&s=8bf2c2df328ff9c00ab303557e3a9772',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=380&quality=85&auto=format&fit=max&s=8bf2c2df328ff9c00ab303557e3a9772',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=54705726152cfe49636f72b2896a2a0b',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=54705726152cfe49636f72b2896a2a0b',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=300&quality=85&auto=format&fit=max&s=f9a317137573349997745c96174d390c',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=300&quality=85&auto=format&fit=max&s=f9a317137573349997745c96174d390c',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=aacdc64ebc13808a17a139614dbc08dc',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=aacdc64ebc13808a17a139614dbc08dc',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=85&auto=format&fit=max&s=0ad987d572ab1626667cfe4b151312d8',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=85&auto=format&fit=max&s=0ad987d572ab1626667cfe4b151312d8',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=7cb7abd112cc40a06727a9dffb7b3ccc',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=7cb7abd112cc40a06727a9dffb7b3ccc',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=85&auto=format&fit=max&s=78d70ac6d8bc9d5a2019d83731ba748b',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=85&auto=format&fit=max&s=78d70ac6d8bc9d5a2019d83731ba748b',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90a251be2767192e9f336cb56f773133',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90a251be2767192e9f336cb56f773133',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=85&auto=format&fit=max&s=c5a3a87df30a2b084c6e381269781523',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=85&auto=format&fit=max&s=c5a3a87df30a2b084c6e381269781523',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4bad4e5f70170bd34d8535417fefcbed',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4bad4e5f70170bd34d8535417fefcbed',
 									width: 890,
 								},
 							],
@@ -2317,73 +2199,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1020&quality=85&auto=format&fit=max&s=122a1cda2a4d40afb8a1562c2dec429b',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1020&quality=85&auto=format&fit=max&s=122a1cda2a4d40afb8a1562c2dec429b',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=7c2bb90719e474c4a32f9c949fe9315f',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=7c2bb90719e474c4a32f9c949fe9315f',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=940&quality=85&auto=format&fit=max&s=0fc36649dc8df76fac14029730e442af',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=940&quality=85&auto=format&fit=max&s=0fc36649dc8df76fac14029730e442af',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=a30948b3d3309067c119529b8d0f9ae7',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=a30948b3d3309067c119529b8d0f9ae7',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=700&quality=85&auto=format&fit=max&s=33420dba7a016426b33b6827223338f6',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=700&quality=85&auto=format&fit=max&s=33420dba7a016426b33b6827223338f6',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=8e9048f3d88d5cb9f7b1ea917ccadde3',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=8e9048f3d88d5cb9f7b1ea917ccadde3',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=700&quality=85&auto=format&fit=max&s=33420dba7a016426b33b6827223338f6',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=700&quality=85&auto=format&fit=max&s=33420dba7a016426b33b6827223338f6',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=8e9048f3d88d5cb9f7b1ea917ccadde3',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=8e9048f3d88d5cb9f7b1ea917ccadde3',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=660&quality=85&auto=format&fit=max&s=01e2495cf7e32939048a12c660622700',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=660&quality=85&auto=format&fit=max&s=01e2495cf7e32939048a12c660622700',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=d4ed1701600a9b11d57979911d141ed2',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=d4ed1701600a9b11d57979911d141ed2',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=645&quality=85&auto=format&fit=max&s=21797aaa96682dfc453c931d4e9bae6c',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=645&quality=85&auto=format&fit=max&s=21797aaa96682dfc453c931d4e9bae6c',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=95f7a1b0f8a0f6bcc9522af20f4be7be',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=95f7a1b0f8a0f6bcc9522af20f4be7be',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=465&quality=85&auto=format&fit=max&s=94e4239682ed25ce738364c3825156bf',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=465&quality=85&auto=format&fit=max&s=94e4239682ed25ce738364c3825156bf',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=58c25f7847239e33bcc84fa01df26563',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=58c25f7847239e33bcc84fa01df26563',
 									width: 930,
 								},
 							],
@@ -2392,33 +2260,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=85&auto=format&fit=max&s=0ad987d572ab1626667cfe4b151312d8',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=85&auto=format&fit=max&s=0ad987d572ab1626667cfe4b151312d8',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=7cb7abd112cc40a06727a9dffb7b3ccc',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=7cb7abd112cc40a06727a9dffb7b3ccc',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=85&auto=format&fit=max&s=78d70ac6d8bc9d5a2019d83731ba748b',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=85&auto=format&fit=max&s=78d70ac6d8bc9d5a2019d83731ba748b',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90a251be2767192e9f336cb56f773133',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90a251be2767192e9f336cb56f773133',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=85&auto=format&fit=max&s=c5a3a87df30a2b084c6e381269781523',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=85&auto=format&fit=max&s=c5a3a87df30a2b084c6e381269781523',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4bad4e5f70170bd34d8535417fefcbed',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4bad4e5f70170bd34d8535417fefcbed',
 									width: 890,
 								},
 							],
@@ -2427,196 +2289,151 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1300&quality=85&auto=format&fit=max&s=22b003bb01b6d0c13069997b36e1fdcf',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1300&quality=85&auto=format&fit=max&s=22b003bb01b6d0c13069997b36e1fdcf',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=e05d4bfd5c4545bb0e4c3560df7cb324',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=e05d4bfd5c4545bb0e4c3560df7cb324',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1140&quality=85&auto=format&fit=max&s=d2b5d140665d4c89f74f038eb65dbff1',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1140&quality=85&auto=format&fit=max&s=d2b5d140665d4c89f74f038eb65dbff1',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=34020ffdba4b0637ee7b922727fb0e2c',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=34020ffdba4b0637ee7b922727fb0e2c',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1125&quality=85&auto=format&fit=max&s=20d53d39e418f466815fadc36b549619',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1125&quality=85&auto=format&fit=max&s=20d53d39e418f466815fadc36b549619',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=fc01ecd20cd5728c5f073fdb1c0810e3',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=fc01ecd20cd5728c5f073fdb1c0810e3',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=965&quality=85&auto=format&fit=max&s=71f4aec6ae649b9583410643f620f622',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=965&quality=85&auto=format&fit=max&s=71f4aec6ae649b9583410643f620f622',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=53a3fa91b57219f13b1132d0ce04202f',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=53a3fa91b57219f13b1132d0ce04202f',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=725&quality=85&auto=format&fit=max&s=5a62dc5c6a6017e9e3609a8209d5fc7a',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=725&quality=85&auto=format&fit=max&s=5a62dc5c6a6017e9e3609a8209d5fc7a',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=4e35f9fb02cd32b6961847669f59027b',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=4e35f9fb02cd32b6961847669f59027b',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=645&quality=85&auto=format&fit=max&s=21797aaa96682dfc453c931d4e9bae6c',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=645&quality=85&auto=format&fit=max&s=21797aaa96682dfc453c931d4e9bae6c',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=95f7a1b0f8a0f6bcc9522af20f4be7be',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=95f7a1b0f8a0f6bcc9522af20f4be7be',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=465&quality=85&auto=format&fit=max&s=94e4239682ed25ce738364c3825156bf',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=465&quality=85&auto=format&fit=max&s=94e4239682ed25ce738364c3825156bf',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=58c25f7847239e33bcc84fa01df26563',
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=58c25f7847239e33bcc84fa01df26563',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '521ef76f-dcde-4498-ba81-ee88494dfb32',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=OnePlus%207t%20pro%20NOT%20monthly&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:106px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=OnePlus%207t%20pro%20NOT%20monthly&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:106px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of OnePlus 7T Pro',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: '28c9f43e-1acf-4a60-99f5-d1d9b1673989',
 				},
 				{
-					html:
-						'<p>The follow-up to the <a href="https://www.theguardian.com/technology/2019/may/31/oneplus-7-pro-review-an-absolute-beast-in-every-way">best smartphone of the first half of 2019</a> is, unsurprisingly, the best phone to end 2019. The OnePlus 7T Pro is a minor update to the stellar OnePlus 7 Pro that keeps all the good bits, improves the camera, and speeds up the fingerprint scanner.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The follow-up to the <a href="https://www.theguardian.com/technology/2019/may/31/oneplus-7-pro-review-an-absolute-beast-in-every-way">best smartphone of the first half of 2019</a> is, unsurprisingly, the best phone to end 2019. The OnePlus 7T Pro is a minor update to the stellar OnePlus 7 Pro that keeps all the good bits, improves the camera, and speeds up the fingerprint scanner.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '88bec75a-07ac-4e3b-a376-afea13fb41a5',
 				},
 				{
-					html:
-						'<p>The monster 6.67in QHD+ AMOLED screen runs at 90Hz – compared with 60Hz for most of the competition – is arguably the best in the business. It’s bright, crisp and super smooth, plus it’s free of holes or camera notches. The selfie camera pops up from the top on command – a consistent crowd-pleaser.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The monster 6.67in QHD+ AMOLED screen runs at 90Hz – compared with 60Hz for most of the competition – is arguably the best in the business. It’s bright, crisp and super smooth, plus it’s free of holes or camera notches. The selfie camera pops up from the top on command – a consistent crowd-pleaser.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'c84a3a98-51ef-4372-94ab-a64bec582554',
 				},
 				{
-					html:
-						'<p>The 7T Pro is the fastest-feeling phone – everything zips along. It has Qualcomm’s top chip, the Snapdragon 855+, 8GB of RAM and 256GB of fast UFS3.0 storage – plenty for practically everything. The optical in-display fingerprint scanner is even faster than before continuing to put the competition to shame.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The 7T Pro is the fastest-feeling phone – everything zips along. It has Qualcomm’s top chip, the Snapdragon 855+, 8GB of RAM and 256GB of fast UFS3.0 storage – plenty for practically everything. The optical in-display fingerprint scanner is even faster than before continuing to put the competition to shame.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '5ebd0e4b-921b-480b-ab8f-e3314e2b9b51',
 				},
 				{
-					html:
-						'<p>The latest OxygenOS 10, the firm’s super-slick version of <a href="https://www.theguardian.com/technology/2019/sep/04/android-10-released-everything-you-need-to-know-about-google-update">Android 10</a>, is arguably the best in the business too, and you’ll get prompt updates for three years.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The latest OxygenOS 10, the firm’s super-slick version of <a href="https://www.theguardian.com/technology/2019/sep/04/android-10-released-everything-you-need-to-know-about-google-update">Android 10</a>, is arguably the best in the business too, and you’ll get prompt updates for three years.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'e3724c58-3d40-4748-a5e0-61b0e2f5cbb2',
 				},
 				{
-					html:
-						'<p>The triple camera system on the back is good too, combining a 48MP main, a 16MP ultra-wide angle and an 8MP telephoto camera. New for the 7T Pro is a super-macro mode, which is surprisingly good, producing crisp images up to just 2.5cm from the lens – great fun. The 7T Pro can’t quite beat the <a href="https://www.theguardian.com/technology/iphone" data-component="auto-linked-tag">iPhone</a> 11 Pro or Pixel 4XL, but it matches or beats the rest on detail and utility.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The triple camera system on the back is good too, combining a 48MP main, a 16MP ultra-wide angle and an 8MP telephoto camera. New for the 7T Pro is a super-macro mode, which is surprisingly good, producing crisp images up to just 2.5cm from the lens – great fun. The 7T Pro can’t quite beat the <a href="https://www.theguardian.com/technology/iphone" data-component="auto-linked-tag">iPhone</a> 11 Pro or Pixel 4XL, but it matches or beats the rest on detail and utility.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '71ddb3e5-9b65-48d9-b139-4232107c8058',
 				},
 				{
-					html:
-						'<p>The 7T Pro lasts about 32 hours between charges, making it one of the better performers. Charging is exceptionally fast via the firm’s WarpCharge system too, hitting 70% in just 34 minutes via cable. There’s no wireless charging though.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The 7T Pro lasts about 32 hours between charges, making it one of the better performers. Charging is exceptionally fast via the firm’s WarpCharge system too, hitting 70% in just 34 minutes via cable. There’s no wireless charging though.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'c02bf21d-0d03-4e51-8ebc-356a905ae9a3',
 				},
 				{
-					html:
-						'<p>Dual-sim support is handy for work or travelling. It’s water resistant to some extent, but has no IP rating. There’s a McLaren limited edition and a 5G version in the US, but not UK where the OnePlus 7 Pro 5G is still the current model.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Dual-sim support is handy for work or travelling. It’s water resistant to some extent, but has no IP rating. There’s a McLaren limited edition and a 5G version in the US, but not UK where the OnePlus 7 Pro 5G is still the current model.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd8c30843-b4db-46a6-b0d8-b7e015009d0b',
 				},
 				{
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '2f24579f-7c02-4ff5-aee6-f8247747bf79',
 				},
 				{
-					html:
-						'<p>The unrivalled screen, sheer speed and in-display fingerprint scanner, combined with the slick OxygenOS 10 make even mundane tasks a joy. The massive OnePlus 7T Pro is a stretch worth making.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The unrivalled screen, sheer speed and in-display fingerprint scanner, combined with the slick OxygenOS 10 make even mundane tasks a joy. The massive OnePlus 7T Pro is a stretch worth making.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '9b16ff9c-5793-4eba-b26c-73c9fc7b0c37',
 				},
 				{
-					html:
-						'<p><strong>Buy if:</strong> you want the best and fastest superphone experience</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Buy if:</strong> you want the best and fastest superphone experience</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '59ef9cc3-f0ff-48c1-b11d-16dd1cac15e5',
 				},
 				{
-					html:
-						'<p><strong>Don’t buy if:</strong> you don’t want to stretch to such a big phone</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Don’t buy if:</strong> you don’t want to stretch to such a big phone</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '03828c5f-4920-4ad1-85e3-b1b33141d73f',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro review: the best kind of deja vu</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro review: the best kind of deja vu</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'ed4e0cbd-70ee-461d-85ed-7042251220ae',
 				},
 				{
-					html:
-						'<h2><strong>Best iOS:</strong> Apple iPhone 11 Pro</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2><strong>Best iOS:</strong> Apple iPhone 11 Pro</h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: '3c01442b-d67c-4868-859a-02aacbf26c69',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,049</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$999</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,049</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$999</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '5696e25f-4f49-435d-b6b8-aef269f554ca',
 				},
 				{
 					html: '<p>★★★★★</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'fb8dc372-f1ff-4f7e-a850-e501b8b85000',
 				},
 				{
@@ -2630,8 +2447,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/4075.jpg',
+								url: 'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/4075.jpg',
 							},
 							{
 								index: 1,
@@ -2642,8 +2458,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg',
+								url: 'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg',
 							},
 							{
 								index: 2,
@@ -2653,8 +2468,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/2000.jpg',
+								url: 'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/2000.jpg',
 							},
 							{
 								index: 3,
@@ -2664,8 +2478,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/1000.jpg',
+								url: 'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/1000.jpg',
 							},
 							{
 								index: 4,
@@ -2675,8 +2488,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/500.jpg',
+								url: 'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/500.jpg',
 							},
 							{
 								index: 5,
@@ -2686,8 +2498,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/140.jpg',
+								url: 'https://media.guim.co.uk/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/140.jpg',
 							},
 						],
 					},
@@ -2704,33 +2515,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=85&auto=format&fit=max&s=2a1e90c78ba947283b9737eb6606ec7e',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=85&auto=format&fit=max&s=2a1e90c78ba947283b9737eb6606ec7e',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=dbc833edcf6427df1651eafbf5febb7c',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=dbc833edcf6427df1651eafbf5febb7c',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=85&auto=format&fit=max&s=24b8fdc281bb0b5dd7bc2f6166cbda65',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=85&auto=format&fit=max&s=24b8fdc281bb0b5dd7bc2f6166cbda65',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=13d728a5b4712db2e0b4ea6f1736ddf0',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=13d728a5b4712db2e0b4ea6f1736ddf0',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=85&auto=format&fit=max&s=f8afb28b073bbc48e0b4c8a0f6417b46',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=85&auto=format&fit=max&s=f8afb28b073bbc48e0b4c8a0f6417b46',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4e40e37f64afe70e10bf514ab0f1c3e',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4e40e37f64afe70e10bf514ab0f1c3e',
 									width: 890,
 								},
 							],
@@ -2739,23 +2544,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=140&quality=85&auto=format&fit=max&s=4447e61a68c557453f719bb09222d7d5',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=140&quality=85&auto=format&fit=max&s=4447e61a68c557453f719bb09222d7d5',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=2b7c114ac6f1581c80397e68c305b5f9',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=2b7c114ac6f1581c80397e68c305b5f9',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=120&quality=85&auto=format&fit=max&s=998c7b11f6587d2ba8def2c022636a7e',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=120&quality=85&auto=format&fit=max&s=998c7b11f6587d2ba8def2c022636a7e',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=de5bc510491fadc892f1f92f276b00b4',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=de5bc510491fadc892f1f92f276b00b4',
 									width: 240,
 								},
 							],
@@ -2764,53 +2565,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=380&quality=85&auto=format&fit=max&s=55d017648e8c93dcae7a3c378e8e9eb4',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=380&quality=85&auto=format&fit=max&s=55d017648e8c93dcae7a3c378e8e9eb4',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=006f6272448b4d2c957d3f603491adf9',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=006f6272448b4d2c957d3f603491adf9',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=300&quality=85&auto=format&fit=max&s=961bd61d9c48e18509b6dacfafd22d6e',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=300&quality=85&auto=format&fit=max&s=961bd61d9c48e18509b6dacfafd22d6e',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=e31e0373f55bc0daeda20a208786eafe',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=e31e0373f55bc0daeda20a208786eafe',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=85&auto=format&fit=max&s=2a1e90c78ba947283b9737eb6606ec7e',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=85&auto=format&fit=max&s=2a1e90c78ba947283b9737eb6606ec7e',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=dbc833edcf6427df1651eafbf5febb7c',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=dbc833edcf6427df1651eafbf5febb7c',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=85&auto=format&fit=max&s=24b8fdc281bb0b5dd7bc2f6166cbda65',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=85&auto=format&fit=max&s=24b8fdc281bb0b5dd7bc2f6166cbda65',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=13d728a5b4712db2e0b4ea6f1736ddf0',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=13d728a5b4712db2e0b4ea6f1736ddf0',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=85&auto=format&fit=max&s=f8afb28b073bbc48e0b4c8a0f6417b46',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=85&auto=format&fit=max&s=f8afb28b073bbc48e0b4c8a0f6417b46',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4e40e37f64afe70e10bf514ab0f1c3e',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4e40e37f64afe70e10bf514ab0f1c3e',
 									width: 890,
 								},
 							],
@@ -2819,73 +2610,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1020&quality=85&auto=format&fit=max&s=23d9dd837a44c476eeb1258dbb5844a8',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1020&quality=85&auto=format&fit=max&s=23d9dd837a44c476eeb1258dbb5844a8',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=bbfb4d42a08b9e1721d98e2c914a2050',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=bbfb4d42a08b9e1721d98e2c914a2050',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=940&quality=85&auto=format&fit=max&s=9157e94142781265f53ac1baa4bd0536',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=940&quality=85&auto=format&fit=max&s=9157e94142781265f53ac1baa4bd0536',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=10679b6fee3d6249877b9e6a10109b90',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=10679b6fee3d6249877b9e6a10109b90',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=700&quality=85&auto=format&fit=max&s=00afc6ac38d204dbb4053f95b8896f09',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=700&quality=85&auto=format&fit=max&s=00afc6ac38d204dbb4053f95b8896f09',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=c5d5c164d5c5fb96fd324558f8fc45ad',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=c5d5c164d5c5fb96fd324558f8fc45ad',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=700&quality=85&auto=format&fit=max&s=00afc6ac38d204dbb4053f95b8896f09',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=700&quality=85&auto=format&fit=max&s=00afc6ac38d204dbb4053f95b8896f09',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=c5d5c164d5c5fb96fd324558f8fc45ad',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=c5d5c164d5c5fb96fd324558f8fc45ad',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=660&quality=85&auto=format&fit=max&s=9fa37176c71d559b5fe026e0b13369a4',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=660&quality=85&auto=format&fit=max&s=9fa37176c71d559b5fe026e0b13369a4',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=bc74f9a7c39b3ddbd370030c4158c5bd',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=bc74f9a7c39b3ddbd370030c4158c5bd',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=645&quality=85&auto=format&fit=max&s=0dda7ea69dcc8db95c0c4b2ca6048869',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=645&quality=85&auto=format&fit=max&s=0dda7ea69dcc8db95c0c4b2ca6048869',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=4e71d1949c5f90af1076df1edf4c0dbc',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=4e71d1949c5f90af1076df1edf4c0dbc',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=465&quality=85&auto=format&fit=max&s=ac843feb0531f8777788facf777a20a7',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=465&quality=85&auto=format&fit=max&s=ac843feb0531f8777788facf777a20a7',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=4f0c533173ed58eea94360abbaefb559',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=4f0c533173ed58eea94360abbaefb559',
 									width: 930,
 								},
 							],
@@ -2894,33 +2671,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=85&auto=format&fit=max&s=2a1e90c78ba947283b9737eb6606ec7e',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=85&auto=format&fit=max&s=2a1e90c78ba947283b9737eb6606ec7e',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=dbc833edcf6427df1651eafbf5febb7c',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=dbc833edcf6427df1651eafbf5febb7c',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=85&auto=format&fit=max&s=24b8fdc281bb0b5dd7bc2f6166cbda65',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=85&auto=format&fit=max&s=24b8fdc281bb0b5dd7bc2f6166cbda65',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=13d728a5b4712db2e0b4ea6f1736ddf0',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=13d728a5b4712db2e0b4ea6f1736ddf0',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=85&auto=format&fit=max&s=f8afb28b073bbc48e0b4c8a0f6417b46',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=85&auto=format&fit=max&s=f8afb28b073bbc48e0b4c8a0f6417b46',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4e40e37f64afe70e10bf514ab0f1c3e',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4e40e37f64afe70e10bf514ab0f1c3e',
 									width: 890,
 								},
 							],
@@ -2929,196 +2700,151 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1300&quality=85&auto=format&fit=max&s=66aeb5b2973b67c26c1b815b8ea9976a',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1300&quality=85&auto=format&fit=max&s=66aeb5b2973b67c26c1b815b8ea9976a',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=7ec904470251d0b00a92a8267df9109d',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=7ec904470251d0b00a92a8267df9109d',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1140&quality=85&auto=format&fit=max&s=0f0004d9d49b3a0bbef5de8845887eb9',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1140&quality=85&auto=format&fit=max&s=0f0004d9d49b3a0bbef5de8845887eb9',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=251e1a7a515649c965a61e8038497cd5',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=251e1a7a515649c965a61e8038497cd5',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1125&quality=85&auto=format&fit=max&s=02828da333fc5ecb6f57170eb80b037d',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1125&quality=85&auto=format&fit=max&s=02828da333fc5ecb6f57170eb80b037d',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=09faa1116fcc37eafa8d9f1b12089454',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=09faa1116fcc37eafa8d9f1b12089454',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=965&quality=85&auto=format&fit=max&s=8a93d7531ed2b8a62dda82aac2641037',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=965&quality=85&auto=format&fit=max&s=8a93d7531ed2b8a62dda82aac2641037',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=652043f86f377c3931c957d0a962f2b6',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=652043f86f377c3931c957d0a962f2b6',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=725&quality=85&auto=format&fit=max&s=4b6be14e1c99f68f8aeddbe8778e946d',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=725&quality=85&auto=format&fit=max&s=4b6be14e1c99f68f8aeddbe8778e946d',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=54da451c8d86f47b79c1c90d4cad09cb',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=54da451c8d86f47b79c1c90d4cad09cb',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=645&quality=85&auto=format&fit=max&s=0dda7ea69dcc8db95c0c4b2ca6048869',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=645&quality=85&auto=format&fit=max&s=0dda7ea69dcc8db95c0c4b2ca6048869',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=4e71d1949c5f90af1076df1edf4c0dbc',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=4e71d1949c5f90af1076df1edf4c0dbc',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=465&quality=85&auto=format&fit=max&s=ac843feb0531f8777788facf777a20a7',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=465&quality=85&auto=format&fit=max&s=ac843feb0531f8777788facf777a20a7',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=4f0c533173ed58eea94360abbaefb559',
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=4f0c533173ed58eea94360abbaefb559',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '31e9d5d1-e47a-4f50-b283-df1ddd306b27',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=iPhone%2011%20pro%20NOT%20max%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=iPhone%2011%20pro%20NOT%20max%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of iphone 11 pro',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: 'a9160725-bbbf-4450-94cf-090e178c470b',
 				},
 				{
-					html:
-						'<p>Good things come in smaller packages. The iPhone 11 Pro isn’t the biggest or the most expensive of Apple’s 2019 smartphones, but it is the best and very nearly the best phone of the year.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Good things come in smaller packages. The iPhone 11 Pro isn’t the biggest or the most expensive of Apple’s 2019 smartphones, but it is the best and very nearly the best phone of the year.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '22c565b2-633e-4b62-b9d0-679de615d196',
 				},
 				{
-					html:
-						'<p>The iPhone 11 Pro combines a stunning, big-enough 5.8in screen, svelte, luxurious-feeling body, top-notch performance and battery life to keep up with most of the competition.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The iPhone 11 Pro combines a stunning, big-enough 5.8in screen, svelte, luxurious-feeling body, top-notch performance and battery life to keep up with most of the competition.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'df321a5a-dff7-4d3b-85e9-76fa5d0e2e0e',
 				},
 				{
-					html:
-						'<p>Truth be told, the design is basically uncharged since the mould-breaking <a href="https://www.theguardian.com/technology/2017/nov/10/iphone-x-review-apple-face-id-all-screen-design-home-button">iPhone X from 2017</a>. The back is now frosted glass, which looks particularly good in silver, and has a triple camera lump in the top left. The rest stays pretty much unchanged.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Truth be told, the design is basically uncharged since the mould-breaking <a href="https://www.theguardian.com/technology/2017/nov/10/iphone-x-review-apple-face-id-all-screen-design-home-button">iPhone X from 2017</a>. The back is now frosted glass, which looks particularly good in silver, and has a triple camera lump in the top left. The rest stays pretty much unchanged.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a77bd35d-d2bb-4c38-a8ab-dc2a073e3633',
 				},
 				{
-					html:
-						'<p>Apple’s Face ID is still the best, most widely-supported face recognition system in the business. The new A13 Bionic chip continues to lead the pack. The gesture navigation system continues to be one of the best, and you’re in line for around five years of <a href="https://www.theguardian.com/technology/ios" data-component="auto-linked-tag">iOS</a> software updates from release - at least two more than any other manufacturer will provide.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Apple’s Face ID is still the best, most widely-supported face recognition system in the business. The new A13 Bionic chip continues to lead the pack. The gesture navigation system continues to be one of the best, and you’re in line for around five years of <a href="https://www.theguardian.com/technology/ios" data-component="auto-linked-tag">iOS</a> software updates from release - at least two more than any other manufacturer will provide.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '5869b5fb-c145-4513-8cf2-9f85c1a42ee9',
 				},
 				{
-					html:
-						'<p>This year the iPhone 11 Pro introduces a significantly improved triple camera with ultra-wide, wide and telephoto lenses, which matches the best rivals in photography and beats them in video. It even has an effective night mode now.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>This year the iPhone 11 Pro introduces a significantly improved triple camera with ultra-wide, wide and telephoto lenses, which matches the best rivals in photography and beats them in video. It even has an effective night mode now.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '35bd951a-6c96-41ce-8a3c-b7fcfe064dd0',
 				},
 				{
-					html:
-						'<p>It’s not all gravy – starting with just 64GB of storage is poor. The old Lightning connector still persists, rather than the newer standard of USB-C. There’s no 5G option and it is exceedingly expensive – you don’t buy the iPhone 11 Pro looking for value for money. Plus iOS 13 has been a mixed bag since its introduction, with a lot of bugs that needed fixing.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>It’s not all gravy – starting with just 64GB of storage is poor. The old Lightning connector still persists, rather than the newer standard of USB-C. There’s no 5G option and it is exceedingly expensive – you don’t buy the iPhone 11 Pro looking for value for money. Plus iOS 13 has been a mixed bag since its introduction, with a lot of bugs that needed fixing.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3ac19baf-bd8d-43b8-b13b-8a8496fbe425',
 				},
 				{
-					html:
-						'<p>But as a whole, no other phone can match the iPhone 11 Pro in power, capability and size. The iPhone 11 Pro is the smaller phone to buy and the best running iOS.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>But as a whole, no other phone can match the iPhone 11 Pro in power, capability and size. The iPhone 11 Pro is the smaller phone to buy and the best running iOS.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '58b8efbf-684c-457b-9095-0e7f47fe6f80',
 				},
 				{
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'ff440e2d-e3a9-4f90-9d6f-c5912db495c5',
 				},
 				{
-					html:
-						'<p>You want the best smaller phone, or simply the best Apple phone, then the iPhone 11 Pro is fantastic, but comes at a considerable cost</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>You want the best smaller phone, or simply the best Apple phone, then the iPhone 11 Pro is fantastic, but comes at a considerable cost</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '95bd538e-07dd-4e47-969e-08756842d1be',
 				},
 				{
-					html:
-						'<p><strong>Buy if:</strong> you want the best iPhone</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Buy if:</strong> you want the best iPhone</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '2e576f50-8a59-4ef6-a229-2683ac033420',
 				},
 				{
-					html:
-						'<p><strong>Don’t buy if:</strong> you don’t want to spend £1,049 or want to use Android</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Don’t buy if:</strong> you don’t want to spend £1,049 or want to use Android</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '1a89f852-5d19-45c8-a303-57f2dbd4376b',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro review: the best small phone available</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro review: the best small phone available</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '815400f9-b9b4-4185-86ee-e963ea53488c',
 				},
 				{
-					html:
-						'<h2><strong>Best smaller Android:</strong> Samsung Galaxy S10</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2><strong>Best smaller Android:</strong> Samsung Galaxy S10</h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: '35b33933-4716-455f-b29d-0949000fbc3f',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£799</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$899</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£799</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$899</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'b17b9951-fc1b-42a7-a441-f70a0a6a49a7',
 				},
 				{
 					html: '<p>★★★★★</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3a7c2e6d-674c-4a91-a68d-bd5eee7fa3fd',
 				},
 				{
@@ -3132,8 +2858,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/3726.jpg',
+								url: 'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/3726.jpg',
 							},
 							{
 								index: 1,
@@ -3144,8 +2869,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg',
+								url: 'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg',
 							},
 							{
 								index: 2,
@@ -3155,8 +2879,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/2000.jpg',
+								url: 'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/2000.jpg',
 							},
 							{
 								index: 3,
@@ -3166,8 +2889,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/1000.jpg',
+								url: 'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/1000.jpg',
 							},
 							{
 								index: 4,
@@ -3177,8 +2899,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/500.jpg',
+								url: 'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/500.jpg',
 							},
 							{
 								index: 5,
@@ -3188,8 +2909,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/140.jpg',
+								url: 'https://media.guim.co.uk/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/140.jpg',
 							},
 						],
 					},
@@ -3206,33 +2926,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=85&auto=format&fit=max&s=548aaa2cbb4ce837508d757542e646f5',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=85&auto=format&fit=max&s=548aaa2cbb4ce837508d757542e646f5',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d9e414cfb993a883f339e9052257085b',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d9e414cfb993a883f339e9052257085b',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=85&auto=format&fit=max&s=a964d6bc877695afcaee371e6dd80a0a',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=85&auto=format&fit=max&s=a964d6bc877695afcaee371e6dd80a0a',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f0e27d9b606d586d8b7ea71318717cbf',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f0e27d9b606d586d8b7ea71318717cbf',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=85&auto=format&fit=max&s=bab4c0dc353cbdb781bb52d93af66723',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=85&auto=format&fit=max&s=bab4c0dc353cbdb781bb52d93af66723',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5c9d5106e023a1da5e985331a19d5f4',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5c9d5106e023a1da5e985331a19d5f4',
 									width: 890,
 								},
 							],
@@ -3241,23 +2955,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=140&quality=85&auto=format&fit=max&s=f801cd582ae6c5ef3e3aab28561cb0ce',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=140&quality=85&auto=format&fit=max&s=f801cd582ae6c5ef3e3aab28561cb0ce',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=81890066b964b3c500b7b24ea3aead70',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=81890066b964b3c500b7b24ea3aead70',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=120&quality=85&auto=format&fit=max&s=6675adbadc40a4bda39c5ab4ba65f0ce',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=120&quality=85&auto=format&fit=max&s=6675adbadc40a4bda39c5ab4ba65f0ce',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=7f4ed2639f90447d80cf97b8a885b115',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=7f4ed2639f90447d80cf97b8a885b115',
 									width: 240,
 								},
 							],
@@ -3266,53 +2976,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=380&quality=85&auto=format&fit=max&s=da67c1f53e72864a5b1cd87adc1543dc',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=380&quality=85&auto=format&fit=max&s=da67c1f53e72864a5b1cd87adc1543dc',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=9b0b08ceffd4871238081b2a7bab3714',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=9b0b08ceffd4871238081b2a7bab3714',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=300&quality=85&auto=format&fit=max&s=bc0a93bb9b203b33c5118f47d30ec5e8',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=300&quality=85&auto=format&fit=max&s=bc0a93bb9b203b33c5118f47d30ec5e8',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=e43ad173ca7e9f387fe68a9915f7b1f2',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=e43ad173ca7e9f387fe68a9915f7b1f2',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=85&auto=format&fit=max&s=548aaa2cbb4ce837508d757542e646f5',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=85&auto=format&fit=max&s=548aaa2cbb4ce837508d757542e646f5',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d9e414cfb993a883f339e9052257085b',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d9e414cfb993a883f339e9052257085b',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=85&auto=format&fit=max&s=a964d6bc877695afcaee371e6dd80a0a',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=85&auto=format&fit=max&s=a964d6bc877695afcaee371e6dd80a0a',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f0e27d9b606d586d8b7ea71318717cbf',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f0e27d9b606d586d8b7ea71318717cbf',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=85&auto=format&fit=max&s=bab4c0dc353cbdb781bb52d93af66723',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=85&auto=format&fit=max&s=bab4c0dc353cbdb781bb52d93af66723',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5c9d5106e023a1da5e985331a19d5f4',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5c9d5106e023a1da5e985331a19d5f4',
 									width: 890,
 								},
 							],
@@ -3321,73 +3021,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1020&quality=85&auto=format&fit=max&s=625f273d770d715f4116fbb2138b715f',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1020&quality=85&auto=format&fit=max&s=625f273d770d715f4116fbb2138b715f',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=a0bfe6eae69b69994df0b97cdad72c6b',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=a0bfe6eae69b69994df0b97cdad72c6b',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=940&quality=85&auto=format&fit=max&s=0faaafb7738a5416d0590388183bdb2f',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=940&quality=85&auto=format&fit=max&s=0faaafb7738a5416d0590388183bdb2f',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=956ad35e7cfd8376c49bafb425f0ecae',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=956ad35e7cfd8376c49bafb425f0ecae',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=700&quality=85&auto=format&fit=max&s=26979a195e0d89ca7325ec5626ed351c',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=700&quality=85&auto=format&fit=max&s=26979a195e0d89ca7325ec5626ed351c',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cf3a109124439dc31e703ffad2b25e78',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cf3a109124439dc31e703ffad2b25e78',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=700&quality=85&auto=format&fit=max&s=26979a195e0d89ca7325ec5626ed351c',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=700&quality=85&auto=format&fit=max&s=26979a195e0d89ca7325ec5626ed351c',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cf3a109124439dc31e703ffad2b25e78',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=cf3a109124439dc31e703ffad2b25e78',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=660&quality=85&auto=format&fit=max&s=63ad920e4ee5a9c43f39abf04f7be687',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=660&quality=85&auto=format&fit=max&s=63ad920e4ee5a9c43f39abf04f7be687',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=26985049894d44aeaf4c0b5821e4d80e',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=26985049894d44aeaf4c0b5821e4d80e',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=645&quality=85&auto=format&fit=max&s=6c7bf87610800f12e04f6863d12c97c9',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=645&quality=85&auto=format&fit=max&s=6c7bf87610800f12e04f6863d12c97c9',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=41131cc65f5aee03b07fce567648c30e',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=41131cc65f5aee03b07fce567648c30e',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=465&quality=85&auto=format&fit=max&s=684950080b054d98fb9d5c087ae9e942',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=465&quality=85&auto=format&fit=max&s=684950080b054d98fb9d5c087ae9e942',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=22ce8e519745c177f891d5a0d76493f9',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=22ce8e519745c177f891d5a0d76493f9',
 									width: 930,
 								},
 							],
@@ -3396,33 +3082,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=85&auto=format&fit=max&s=548aaa2cbb4ce837508d757542e646f5',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=85&auto=format&fit=max&s=548aaa2cbb4ce837508d757542e646f5',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d9e414cfb993a883f339e9052257085b',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d9e414cfb993a883f339e9052257085b',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=85&auto=format&fit=max&s=a964d6bc877695afcaee371e6dd80a0a',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=85&auto=format&fit=max&s=a964d6bc877695afcaee371e6dd80a0a',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f0e27d9b606d586d8b7ea71318717cbf',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f0e27d9b606d586d8b7ea71318717cbf',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=85&auto=format&fit=max&s=bab4c0dc353cbdb781bb52d93af66723',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=85&auto=format&fit=max&s=bab4c0dc353cbdb781bb52d93af66723',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5c9d5106e023a1da5e985331a19d5f4',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5c9d5106e023a1da5e985331a19d5f4',
 									width: 890,
 								},
 							],
@@ -3431,189 +3111,146 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1300&quality=85&auto=format&fit=max&s=e818449b2a79faf5c7ac0904d32f41dd',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1300&quality=85&auto=format&fit=max&s=e818449b2a79faf5c7ac0904d32f41dd',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=6e2f3f57ce2e66ff1914623d3135aa7b',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=6e2f3f57ce2e66ff1914623d3135aa7b',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1140&quality=85&auto=format&fit=max&s=4efb88ce0bcc049fa4a8eee758382781',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1140&quality=85&auto=format&fit=max&s=4efb88ce0bcc049fa4a8eee758382781',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=31835d471df3f8be97ce6f70b05668b8',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=31835d471df3f8be97ce6f70b05668b8',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1125&quality=85&auto=format&fit=max&s=c72fad06061e30bf4d4a14e773cc317c',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1125&quality=85&auto=format&fit=max&s=c72fad06061e30bf4d4a14e773cc317c',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=c2950be976ef214c721d4dbfe459a677',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=c2950be976ef214c721d4dbfe459a677',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=965&quality=85&auto=format&fit=max&s=aa9a61ee2e4bec6b0d807472ce2ab38c',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=965&quality=85&auto=format&fit=max&s=aa9a61ee2e4bec6b0d807472ce2ab38c',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=e85b3cfeabe9d96886e4daf2dbbb295e',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=e85b3cfeabe9d96886e4daf2dbbb295e',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=725&quality=85&auto=format&fit=max&s=0587c78b6266c47cd298e769d22e4bbd',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=725&quality=85&auto=format&fit=max&s=0587c78b6266c47cd298e769d22e4bbd',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=71488a298124c545dc2b36eb7390550b',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=71488a298124c545dc2b36eb7390550b',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=645&quality=85&auto=format&fit=max&s=6c7bf87610800f12e04f6863d12c97c9',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=645&quality=85&auto=format&fit=max&s=6c7bf87610800f12e04f6863d12c97c9',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=41131cc65f5aee03b07fce567648c30e',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=41131cc65f5aee03b07fce567648c30e',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=465&quality=85&auto=format&fit=max&s=684950080b054d98fb9d5c087ae9e942',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=465&quality=85&auto=format&fit=max&s=684950080b054d98fb9d5c087ae9e942',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=22ce8e519745c177f891d5a0d76493f9',
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=22ce8e519745c177f891d5a0d76493f9',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: 'eccd0d95-e1d4-4984-a26d-9b4fa977554d',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=samsung%20galaxy%20s10%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=samsung%20galaxy%20s10%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of samsung galaxy s10',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: 'dee4a470-2d5c-4d4d-ab2d-56d8d7de3900',
 				},
 				{
-					html:
-						'<p>If you want the Android sweet-spot between a big, stunning screen and smaller phone size that’s easier to handle and fit in a pocket, that’s the Galaxy S10.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>If you want the Android sweet-spot between a big, stunning screen and smaller phone size that’s easier to handle and fit in a pocket, that’s the Galaxy S10.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '37568afe-c248-4f46-90fc-e15fc3a4d330',
 				},
 				{
-					html:
-						'<p>The 6.1in QHD+ AMOLED screen with a small hole-punch notch in the top right is one of the best on the market and is big enough to make the most of apps and movies look great.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The 6.1in QHD+ AMOLED screen with a small hole-punch notch in the top right is one of the best on the market and is big enough to make the most of apps and movies look great.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'fe56702f-d809-4cd9-9fda-848b527f1c6a',
 				},
 				{
-					html:
-						'<p>Small bezels all round make the phone pretty compact compared with rivals, and it’s light too. It’s still a glass and metal sandwich, which means you might need a case to protect against falls.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Small bezels all round make the phone pretty compact compared with rivals, and it’s light too. It’s still a glass and metal sandwich, which means you might need a case to protect against falls.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'fd73d074-dc4f-4d9e-9e8b-bf59025ed970',
 				},
 				{
-					html:
-						'<p>The Galaxy S10 was recently updated with Samsung’s new One UI 2 software, based on the latest Android 10 including much-improved navigation gestures. You should get about three years of software support from release from Samsung, although the company is usually slower than <a href="https://www.theguardian.com/technology/google" data-component="auto-linked-tag">Google</a> and OnePlus to deliver big Android version updates.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The Galaxy S10 was recently updated with Samsung’s new One UI 2 software, based on the latest Android 10 including much-improved navigation gestures. You should get about three years of software support from release from Samsung, although the company is usually slower than <a href="https://www.theguardian.com/technology/google" data-component="auto-linked-tag">Google</a> and OnePlus to deliver big Android version updates.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '82235e78-8b0a-4d38-b2ec-6fbeda5937af',
 				},
 				{
-					html:
-						'<p>The rear triple camera is good allowing you to zoom from 0.5 through 2x, and on to a 10x hybrid zoom. It won’t beat the <a href="https://www.theguardian.com/technology/2019/oct/29/google-pixel-4-xl-review-not-quite-ready-for-primetime">Pixel 4 XL</a> or <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro</a>, but gets the job done. The selfie camera pokes straight though the screen and is one of the better ones on the market.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The rear triple camera is good allowing you to zoom from 0.5 through 2x, and on to a 10x hybrid zoom. It won’t beat the <a href="https://www.theguardian.com/technology/2019/oct/29/google-pixel-4-xl-review-not-quite-ready-for-primetime">Pixel 4 XL</a> or <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro</a>, but gets the job done. The selfie camera pokes straight though the screen and is one of the better ones on the market.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '9845d255-31a4-40c3-9d12-42c6ba0334d3',
 				},
 				{
-					html:
-						'<p>Performance is good but battery life is a bit weak, lasting a day of usage but not much more. The ultrasonic fingerprint sensor mounted under the display has proved to be a bit slow and finickity over time, which can be annoying.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Performance is good but battery life is a bit weak, lasting a day of usage but not much more. The ultrasonic fingerprint sensor mounted under the display has proved to be a bit slow and finickity over time, which can be annoying.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '83e75c91-edcd-42bd-ab0c-e47ebf5305b4',
 				},
 				{
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'def249e7-6fc0-47e0-a30e-8b90a93bdf41',
 				},
 				{
-					html:
-						'<p>A big screen Android experience in a relatively small phone is the main selling point, but the good camera, performance and looks help too.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>A big screen Android experience in a relatively small phone is the main selling point, but the good camera, performance and looks help too.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '9f02f591-596d-4d41-ae2b-95b039c45dae',
 				},
 				{
-					html:
-						'<p><strong>Buy if:</strong> you want a good balance of screen and phone size without breaking the bank</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Buy if:</strong> you want a good balance of screen and phone size without breaking the bank</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '896eecf9-281b-4755-8b98-1cafbb92a029',
 				},
 				{
-					html:
-						'<p><strong>Don’t buy if:</strong> you want brilliant battery life</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Don’t buy if:</strong> you want brilliant battery life</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd52e1e3d-c899-4350-89c9-555fd24e8bbe',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review: </strong><a href="https://www.theguardian.com/technology/2019/jun/06/samsung-galaxy-s10-review-the-sweet-spot">Samsung Galaxy S10 review: the sweet spot</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review: </strong><a href="https://www.theguardian.com/technology/2019/jun/06/samsung-galaxy-s10-review-the-sweet-spot">Samsung Galaxy S10 review: the sweet spot</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'dc8adfe3-751c-40eb-848f-682502149e64',
 				},
 				{
-					html:
-						'<h2><strong>Best camera: </strong>Huawei P30 Pro</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2><strong>Best camera: </strong>Huawei P30 Pro</h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: '36c5ca66-8638-4744-8ca2-f7e1624f31b8',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fconsumer.huawei.com%2Fuk%2Fphones%2Fp30-pro%2F%23buy&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£750</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fconsumer.huawei.com%2Fuk%2Fphones%2Fp30-pro%2F%23buy&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£750</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a5d9e38b-0587-45e7-9f63-bed32ed3d6ed',
 				},
 				{
 					html: '<p>★★★★★</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'b8305a94-0b67-4919-9163-9a262ee816ee',
 				},
 				{
@@ -3627,8 +3264,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/4327.jpg',
+								url: 'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/4327.jpg',
 							},
 							{
 								index: 1,
@@ -3639,8 +3275,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg',
+								url: 'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg',
 							},
 							{
 								index: 2,
@@ -3650,8 +3285,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/2000.jpg',
+								url: 'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/2000.jpg',
 							},
 							{
 								index: 3,
@@ -3661,8 +3295,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/1000.jpg',
+								url: 'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/1000.jpg',
 							},
 							{
 								index: 4,
@@ -3672,8 +3305,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/500.jpg',
+								url: 'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/500.jpg',
 							},
 							{
 								index: 5,
@@ -3683,8 +3315,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/140.jpg',
+								url: 'https://media.guim.co.uk/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/140.jpg',
 							},
 						],
 					},
@@ -3701,33 +3332,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=85&auto=format&fit=max&s=9ff6fc1cc4133ad0a89ba008dadefe04',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=85&auto=format&fit=max&s=9ff6fc1cc4133ad0a89ba008dadefe04',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=2b1d22219c16d798b02444a282e97ce2',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=2b1d22219c16d798b02444a282e97ce2',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=85&auto=format&fit=max&s=5fbee0897a4ccc4ddc6fd7dd3dbaa1c3',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=85&auto=format&fit=max&s=5fbee0897a4ccc4ddc6fd7dd3dbaa1c3',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c3cd6d80572976497b3869e535c6b63e',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c3cd6d80572976497b3869e535c6b63e',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=85&auto=format&fit=max&s=93fc4d6ad344b4c51de3d23ec4ef253f',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=85&auto=format&fit=max&s=93fc4d6ad344b4c51de3d23ec4ef253f',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=2f764856905ec2733c11ff900bea58df',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=2f764856905ec2733c11ff900bea58df',
 									width: 890,
 								},
 							],
@@ -3736,23 +3361,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=140&quality=85&auto=format&fit=max&s=3ed2b9bef0e0dbc7a9c02c7a2c2a1dff',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=140&quality=85&auto=format&fit=max&s=3ed2b9bef0e0dbc7a9c02c7a2c2a1dff',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=24771684f97eacb3623e747576f0e12c',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=24771684f97eacb3623e747576f0e12c',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=120&quality=85&auto=format&fit=max&s=eb138955cda31ca3e976170a46e871b4',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=120&quality=85&auto=format&fit=max&s=eb138955cda31ca3e976170a46e871b4',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=d92548a46d58fa593155968c0d80a2cd',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=d92548a46d58fa593155968c0d80a2cd',
 									width: 240,
 								},
 							],
@@ -3761,53 +3382,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=380&quality=85&auto=format&fit=max&s=75e71c2f882505958d405933ff50b271',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=380&quality=85&auto=format&fit=max&s=75e71c2f882505958d405933ff50b271',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=f97b1cf7d2662b121a20767fba5b42b4',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=f97b1cf7d2662b121a20767fba5b42b4',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=300&quality=85&auto=format&fit=max&s=827d808ff46407af965a9576450d9bd8',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=300&quality=85&auto=format&fit=max&s=827d808ff46407af965a9576450d9bd8',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=0ab3873724a92a2bca362f54a3f99696',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=0ab3873724a92a2bca362f54a3f99696',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=85&auto=format&fit=max&s=9ff6fc1cc4133ad0a89ba008dadefe04',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=85&auto=format&fit=max&s=9ff6fc1cc4133ad0a89ba008dadefe04',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=2b1d22219c16d798b02444a282e97ce2',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=2b1d22219c16d798b02444a282e97ce2',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=85&auto=format&fit=max&s=5fbee0897a4ccc4ddc6fd7dd3dbaa1c3',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=85&auto=format&fit=max&s=5fbee0897a4ccc4ddc6fd7dd3dbaa1c3',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c3cd6d80572976497b3869e535c6b63e',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c3cd6d80572976497b3869e535c6b63e',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=85&auto=format&fit=max&s=93fc4d6ad344b4c51de3d23ec4ef253f',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=85&auto=format&fit=max&s=93fc4d6ad344b4c51de3d23ec4ef253f',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=2f764856905ec2733c11ff900bea58df',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=2f764856905ec2733c11ff900bea58df',
 									width: 890,
 								},
 							],
@@ -3816,73 +3427,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1020&quality=85&auto=format&fit=max&s=fb445941bdfccee65b34632a4d0aa3f5',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1020&quality=85&auto=format&fit=max&s=fb445941bdfccee65b34632a4d0aa3f5',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=2ad922ac92e27c338971c7bf52f2618e',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=2ad922ac92e27c338971c7bf52f2618e',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=940&quality=85&auto=format&fit=max&s=73c62e7c76ea17ca01041ece5669e8e5',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=940&quality=85&auto=format&fit=max&s=73c62e7c76ea17ca01041ece5669e8e5',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=f1288ced4f61b61f589cf9b1a6373376',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=f1288ced4f61b61f589cf9b1a6373376',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=700&quality=85&auto=format&fit=max&s=90f5ed69ae6838403ac95b7bec2b6c74',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=700&quality=85&auto=format&fit=max&s=90f5ed69ae6838403ac95b7bec2b6c74',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=c80559734f89a2a1fe5b5b18003bece7',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=c80559734f89a2a1fe5b5b18003bece7',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=700&quality=85&auto=format&fit=max&s=90f5ed69ae6838403ac95b7bec2b6c74',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=700&quality=85&auto=format&fit=max&s=90f5ed69ae6838403ac95b7bec2b6c74',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=c80559734f89a2a1fe5b5b18003bece7',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=c80559734f89a2a1fe5b5b18003bece7',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=660&quality=85&auto=format&fit=max&s=f4e280adb384be75233c8b97abfcb1a8',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=660&quality=85&auto=format&fit=max&s=f4e280adb384be75233c8b97abfcb1a8',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=b921d07fee240dc5920324b8b389a486',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=b921d07fee240dc5920324b8b389a486',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=645&quality=85&auto=format&fit=max&s=0cbd9aeb46f5e06fa52aa6d00370e633',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=645&quality=85&auto=format&fit=max&s=0cbd9aeb46f5e06fa52aa6d00370e633',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=3516477415bd1c34e543de7ebbf0a5a2',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=3516477415bd1c34e543de7ebbf0a5a2',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=465&quality=85&auto=format&fit=max&s=1683316e972bdb7708f47c445ea2d22c',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=465&quality=85&auto=format&fit=max&s=1683316e972bdb7708f47c445ea2d22c',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=afeeb0620223693a1517a43f44d841e3',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=afeeb0620223693a1517a43f44d841e3',
 									width: 930,
 								},
 							],
@@ -3891,33 +3488,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=85&auto=format&fit=max&s=9ff6fc1cc4133ad0a89ba008dadefe04',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=85&auto=format&fit=max&s=9ff6fc1cc4133ad0a89ba008dadefe04',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=2b1d22219c16d798b02444a282e97ce2',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=2b1d22219c16d798b02444a282e97ce2',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=85&auto=format&fit=max&s=5fbee0897a4ccc4ddc6fd7dd3dbaa1c3',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=85&auto=format&fit=max&s=5fbee0897a4ccc4ddc6fd7dd3dbaa1c3',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c3cd6d80572976497b3869e535c6b63e',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c3cd6d80572976497b3869e535c6b63e',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=85&auto=format&fit=max&s=93fc4d6ad344b4c51de3d23ec4ef253f',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=85&auto=format&fit=max&s=93fc4d6ad344b4c51de3d23ec4ef253f',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=2f764856905ec2733c11ff900bea58df',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=2f764856905ec2733c11ff900bea58df',
 									width: 890,
 								},
 							],
@@ -3926,188 +3517,146 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1300&quality=85&auto=format&fit=max&s=9dd4557ccfc393f8ac3638a8e116c64c',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1300&quality=85&auto=format&fit=max&s=9dd4557ccfc393f8ac3638a8e116c64c',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=fd5d76266faca2fc915dd513c4f604f1',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=fd5d76266faca2fc915dd513c4f604f1',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1140&quality=85&auto=format&fit=max&s=249a24f4c59359fd747511fc835f780b',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1140&quality=85&auto=format&fit=max&s=249a24f4c59359fd747511fc835f780b',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=2656ca360ebe0176dc78ff8ee838ca4f',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=2656ca360ebe0176dc78ff8ee838ca4f',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1125&quality=85&auto=format&fit=max&s=016725d256bb6039322a7edd0730b5e9',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1125&quality=85&auto=format&fit=max&s=016725d256bb6039322a7edd0730b5e9',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=81a2c9436eb6dd5a7532ebc1b3d6775e',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=81a2c9436eb6dd5a7532ebc1b3d6775e',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=965&quality=85&auto=format&fit=max&s=fa7292251c64ce67c02fbb71c41483af',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=965&quality=85&auto=format&fit=max&s=fa7292251c64ce67c02fbb71c41483af',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=86e7508324a93b9c3edc1f7705c0afab',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=86e7508324a93b9c3edc1f7705c0afab',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=725&quality=85&auto=format&fit=max&s=6b0dd71e65f43a21c15f7c48a2300c64',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=725&quality=85&auto=format&fit=max&s=6b0dd71e65f43a21c15f7c48a2300c64',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=c6d3d133c0af6fb675044fa1aeee6bfb',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=c6d3d133c0af6fb675044fa1aeee6bfb',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=645&quality=85&auto=format&fit=max&s=0cbd9aeb46f5e06fa52aa6d00370e633',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=645&quality=85&auto=format&fit=max&s=0cbd9aeb46f5e06fa52aa6d00370e633',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=3516477415bd1c34e543de7ebbf0a5a2',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=3516477415bd1c34e543de7ebbf0a5a2',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=465&quality=85&auto=format&fit=max&s=1683316e972bdb7708f47c445ea2d22c',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=465&quality=85&auto=format&fit=max&s=1683316e972bdb7708f47c445ea2d22c',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=afeeb0620223693a1517a43f44d841e3',
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=afeeb0620223693a1517a43f44d841e3',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '674d0a68-6055-4fea-8b0b-ce7d07cafb13',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=huawei%20p30%20pro%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=huawei%20p30%20pro%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of Huawei P30 Pro',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: '44d8e6f9-160c-4b17-841a-a632a62e0e31',
 				},
 				{
-					html:
-						'<p>The best camera on a phone is the <a href="https://www.theguardian.com/technology/huawei" data-component="auto-linked-tag">Huawei</a> P30 Pro by some margin. Even at the end of 2019, no other phone provides as comprehensive a combination as Huawei’s new Leica quad camera.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The best camera on a phone is the <a href="https://www.theguardian.com/technology/huawei" data-component="auto-linked-tag">Huawei</a> P30 Pro by some margin. Even at the end of 2019, no other phone provides as comprehensive a combination as Huawei’s new Leica quad camera.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '40df3968-04df-4998-9eb5-ff65a6cfccdd',
 				},
 				{
-					html:
-						'<p>The 20MP 0.6x ultra-wide angle camera is fun, the main 40MP camera is terrific and it’s joined by a new periscopic 5x optical zoom camera that gets you closer than any other smartphone. If five times magnification wasn’t enough, there’s an excellent 10x hybrid zoom on top and then a digital zoom all the way up to 50x. A 3D depth-sensing time-of-flight sensor rounds out the modules on the back.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The 20MP 0.6x ultra-wide angle camera is fun, the main 40MP camera is terrific and it’s joined by a new periscopic 5x optical zoom camera that gets you closer than any other smartphone. If five times magnification wasn’t enough, there’s an excellent 10x hybrid zoom on top and then a digital zoom all the way up to 50x. A 3D depth-sensing time-of-flight sensor rounds out the modules on the back.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '42f5750f-e33b-42c2-b007-c0f18725938d',
 				},
 				{
-					html:
-						'<p>Remarkable levels of zoom aside, the P30 Pro also has low-light performance that instantly turns night into day without having to wait for a couple of seconds of capture. The P30 Pro might not have the best Night Sight rival, but most of the time it simply doesn’t need it.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Remarkable levels of zoom aside, the P30 Pro also has low-light performance that instantly turns night into day without having to wait for a couple of seconds of capture. The P30 Pro might not have the best Night Sight rival, but most of the time it simply doesn’t need it.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '6fa5acd7-55f3-40d9-8ad4-14dadfa260c5',
 				},
 				{
-					html:
-						'<p>The rest of the phone is excellent, too, with stunning colour options. The large 6.47in FHD+ OLED is great, with a small notch in the top containing the selfie camera and slim bezels all round. The curved edges keep the width of the phone to a narrow 73.4mm wide, meaning it’s still relatively manageable and easier to wield day-to-day particularly compared with the <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro</a> or <a href="https://www.theguardian.com/technology/2019/oct/09/iphone-11-pro-max-review-battery-camera-screen">iPhone 11 Pro Max</a>.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The rest of the phone is excellent, too, with stunning colour options. The large 6.47in FHD+ OLED is great, with a small notch in the top containing the selfie camera and slim bezels all round. The curved edges keep the width of the phone to a narrow 73.4mm wide, meaning it’s still relatively manageable and easier to wield day-to-day particularly compared with the <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro</a> or <a href="https://www.theguardian.com/technology/2019/oct/09/iphone-11-pro-max-review-battery-camera-screen">iPhone 11 Pro Max</a>.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd1dd31ca-1cf0-4915-b11d-f4bef2b77c17',
 				},
 				{
-					html:
-						'<p>The in-screen optical fingerprint sensor is second only to the OnePlus 7T Pro’s. Huawei’s Kirin 980 processor, 8GB of RAM and 128GB of storage, provides great performance and a battery that will last about two days. Plus the battery charges super fast and has wireless charging and power sharing.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The in-screen optical fingerprint sensor is second only to the OnePlus 7T Pro’s. Huawei’s Kirin 980 processor, 8GB of RAM and 128GB of storage, provides great performance and a battery that will last about two days. Plus the battery charges super fast and has wireless charging and power sharing.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '23812d4f-4b19-43a0-9a89-5421d71738a6',
 				},
 				{
-					html:
-						'<p>Huawei’s modified Android 10, EMUI 10, is highly customisable and has plenty of features but may not be to everyone’s tastes. Huawei is still facing sanctions from the US as part of the <a href="https://www.theguardian.com/technology/2019/may/20/trump-us-ban-huawei-google-trade-war">US-China trade war</a>, which <a href="https://www.theguardian.com/technology/2019/may/19/google-huawei-trump-blacklist-report">makes its future uncertain</a>. The P30 Pro’s recent Android 10 update showed that it should <a href="https://www.theguardian.com/technology/2019/may/20/huawei-blockade-do-i-need-to-stop-using-my-android-phone">continue to receive updates as normal</a>, however.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Huawei’s modified Android 10, EMUI 10, is highly customisable and has plenty of features but may not be to everyone’s tastes. Huawei is still facing sanctions from the US as part of the <a href="https://www.theguardian.com/technology/2019/may/20/trump-us-ban-huawei-google-trade-war">US-China trade war</a>, which <a href="https://www.theguardian.com/technology/2019/may/19/google-huawei-trump-blacklist-report">makes its future uncertain</a>. The P30 Pro’s recent Android 10 update showed that it should <a href="https://www.theguardian.com/technology/2019/may/20/huawei-blockade-do-i-need-to-stop-using-my-android-phone">continue to receive updates as normal</a>, however.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'cad9e1d1-8a74-4c82-b3eb-d8b089dec425',
 				},
 				{
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '9976ff0f-c7ac-4bff-a757-3461b6f71138',
 				},
 				{
-					html:
-						'<p>The camera is game-changing in meaningful, not gimmick-filled ways, while the rest of the phone is excellent</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The camera is game-changing in meaningful, not gimmick-filled ways, while the rest of the phone is excellent</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'f7131ae3-e4b3-4d96-b694-d94971dfaf8c',
 				},
 				{
-					html:
-						'<p><strong>Buy if:</strong> you want the best camera on a great phone</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Buy if:</strong> you want the best camera on a great phone</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'e60992da-c1a5-4e0f-8515-21284408425c',
 				},
 				{
-					html:
-						'<p><strong>Don’t buy if:</strong> you want a smaller phone or are worried about US blockade of Huawei</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Don’t buy if:</strong> you want a smaller phone or are worried about US blockade of Huawei</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '0ebd85b3-3f7b-45b2-9f8a-7ba1ae1f936a',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/apr/24/huawei-p30-pro-review-leica-quad-camera-zoom">Huawei P30 Pro review: game-changing camera, stellar battery life</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/apr/24/huawei-p30-pro-review-leica-quad-camera-zoom">Huawei P30 Pro review: game-changing camera, stellar battery life</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a99f1976-2b4b-4402-b550-e7c09f9fa1c0',
 				},
 				{
 					html: '<h2><strong>Best value:</strong> OnePlus 7T</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: '0994b758-97aa-4e52-9a56-c276cb8b4ba5',
 				},
 				{
-					html:
-						'<p><strong>Price:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Fuk%2Foneplus-7t&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£549</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Foneplus-7t&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$599</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Price:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Fuk%2Foneplus-7t&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£549</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Foneplus-7t&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$599</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '182df23d-e0c6-45cb-b8d4-c43892100673',
 				},
 				{
 					html: '<p>★★★★★</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3b9a9f1a-dcfa-45e3-bb6f-e1ddb1542fe9',
 				},
 				{
@@ -4121,8 +3670,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/4219.jpg',
+								url: 'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/4219.jpg',
 							},
 							{
 								index: 1,
@@ -4133,8 +3681,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg',
+								url: 'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg',
 							},
 							{
 								index: 2,
@@ -4144,8 +3691,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/2000.jpg',
+								url: 'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/2000.jpg',
 							},
 							{
 								index: 3,
@@ -4155,8 +3701,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/1000.jpg',
+								url: 'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/1000.jpg',
 							},
 							{
 								index: 4,
@@ -4166,8 +3711,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/500.jpg',
+								url: 'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/500.jpg',
 							},
 							{
 								index: 5,
@@ -4177,8 +3721,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/140.jpg',
+								url: 'https://media.guim.co.uk/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/140.jpg',
 							},
 						],
 					},
@@ -4195,33 +3738,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=85&auto=format&fit=max&s=fc66322cec73bb046c44532d65303ac5',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=85&auto=format&fit=max&s=fc66322cec73bb046c44532d65303ac5',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8b73f95319d545de2ba9c4aea98a7d0d',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8b73f95319d545de2ba9c4aea98a7d0d',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=85&auto=format&fit=max&s=8b3cabd994b10a9001fdfe7685416f8e',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=85&auto=format&fit=max&s=8b3cabd994b10a9001fdfe7685416f8e',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ad318cb6fcd262e7a190bd85d45f349c',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ad318cb6fcd262e7a190bd85d45f349c',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=85&auto=format&fit=max&s=9529b23d97cc8f61f674df317a0f272b',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=85&auto=format&fit=max&s=9529b23d97cc8f61f674df317a0f272b',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a1246bda866f7f5ea6dcf661a0a379b6',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a1246bda866f7f5ea6dcf661a0a379b6',
 									width: 890,
 								},
 							],
@@ -4230,23 +3767,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=140&quality=85&auto=format&fit=max&s=b63d2f0f6a57a3db8b1a8d00768446c7',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=140&quality=85&auto=format&fit=max&s=b63d2f0f6a57a3db8b1a8d00768446c7',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=af6fb0599a10255e18ac4375ac014f86',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=af6fb0599a10255e18ac4375ac014f86',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=120&quality=85&auto=format&fit=max&s=6e05ece36dc74a1674af7c2ab12e520c',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=120&quality=85&auto=format&fit=max&s=6e05ece36dc74a1674af7c2ab12e520c',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=a9fd9fb25ae59d69217d986cbee7ce56',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=a9fd9fb25ae59d69217d986cbee7ce56',
 									width: 240,
 								},
 							],
@@ -4255,53 +3788,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=380&quality=85&auto=format&fit=max&s=0243c606d7d60c7cca783566a7ebdd10',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=380&quality=85&auto=format&fit=max&s=0243c606d7d60c7cca783566a7ebdd10',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=b87fbcfee19fea11419883396de9b3eb',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=b87fbcfee19fea11419883396de9b3eb',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=300&quality=85&auto=format&fit=max&s=d9a243f87cee83b5735168820209c25e',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=300&quality=85&auto=format&fit=max&s=d9a243f87cee83b5735168820209c25e',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=21b2b81ca2983e6b3d5a711e9382432f',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=21b2b81ca2983e6b3d5a711e9382432f',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=85&auto=format&fit=max&s=fc66322cec73bb046c44532d65303ac5',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=85&auto=format&fit=max&s=fc66322cec73bb046c44532d65303ac5',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8b73f95319d545de2ba9c4aea98a7d0d',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8b73f95319d545de2ba9c4aea98a7d0d',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=85&auto=format&fit=max&s=8b3cabd994b10a9001fdfe7685416f8e',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=85&auto=format&fit=max&s=8b3cabd994b10a9001fdfe7685416f8e',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ad318cb6fcd262e7a190bd85d45f349c',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ad318cb6fcd262e7a190bd85d45f349c',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=85&auto=format&fit=max&s=9529b23d97cc8f61f674df317a0f272b',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=85&auto=format&fit=max&s=9529b23d97cc8f61f674df317a0f272b',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a1246bda866f7f5ea6dcf661a0a379b6',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a1246bda866f7f5ea6dcf661a0a379b6',
 									width: 890,
 								},
 							],
@@ -4310,73 +3833,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1020&quality=85&auto=format&fit=max&s=9d537ffbefdc0d2e422a671640b27192',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1020&quality=85&auto=format&fit=max&s=9d537ffbefdc0d2e422a671640b27192',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=0174a54c860e23cc91f738f1106b063e',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=0174a54c860e23cc91f738f1106b063e',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=940&quality=85&auto=format&fit=max&s=4309ef8f7609608875cbef0d53a9f155',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=940&quality=85&auto=format&fit=max&s=4309ef8f7609608875cbef0d53a9f155',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=0d9eeae41a9d789f3605a13465696975',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=0d9eeae41a9d789f3605a13465696975',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=700&quality=85&auto=format&fit=max&s=327d92a22b352bc1b3edb766fc7a7510',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=700&quality=85&auto=format&fit=max&s=327d92a22b352bc1b3edb766fc7a7510',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=6d32f7a99b4e9f959b233616243daec2',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=6d32f7a99b4e9f959b233616243daec2',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=700&quality=85&auto=format&fit=max&s=327d92a22b352bc1b3edb766fc7a7510',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=700&quality=85&auto=format&fit=max&s=327d92a22b352bc1b3edb766fc7a7510',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=6d32f7a99b4e9f959b233616243daec2',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=6d32f7a99b4e9f959b233616243daec2',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=660&quality=85&auto=format&fit=max&s=caad0f9d500ea181ac2f921b75992b5b',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=660&quality=85&auto=format&fit=max&s=caad0f9d500ea181ac2f921b75992b5b',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=a453a954fd92ab6086dce61695f1dca3',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=a453a954fd92ab6086dce61695f1dca3',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=645&quality=85&auto=format&fit=max&s=2874b6867f305e200a6fa0794eaeaf1b',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=645&quality=85&auto=format&fit=max&s=2874b6867f305e200a6fa0794eaeaf1b',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=92f98a77850d0906874a87b145897dbe',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=92f98a77850d0906874a87b145897dbe',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=465&quality=85&auto=format&fit=max&s=d71b90478752837eed9f206e9f2117ab',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=465&quality=85&auto=format&fit=max&s=d71b90478752837eed9f206e9f2117ab',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=075b02b2e2df2a220627f8194b93e108',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=075b02b2e2df2a220627f8194b93e108',
 									width: 930,
 								},
 							],
@@ -4385,33 +3894,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=85&auto=format&fit=max&s=fc66322cec73bb046c44532d65303ac5',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=85&auto=format&fit=max&s=fc66322cec73bb046c44532d65303ac5',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8b73f95319d545de2ba9c4aea98a7d0d',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8b73f95319d545de2ba9c4aea98a7d0d',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=85&auto=format&fit=max&s=8b3cabd994b10a9001fdfe7685416f8e',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=85&auto=format&fit=max&s=8b3cabd994b10a9001fdfe7685416f8e',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ad318cb6fcd262e7a190bd85d45f349c',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ad318cb6fcd262e7a190bd85d45f349c',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=85&auto=format&fit=max&s=9529b23d97cc8f61f674df317a0f272b',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=85&auto=format&fit=max&s=9529b23d97cc8f61f674df317a0f272b',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a1246bda866f7f5ea6dcf661a0a379b6',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a1246bda866f7f5ea6dcf661a0a379b6',
 									width: 890,
 								},
 							],
@@ -4420,205 +3923,160 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1300&quality=85&auto=format&fit=max&s=4aef811346afba8d78fca461e14c9624',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1300&quality=85&auto=format&fit=max&s=4aef811346afba8d78fca461e14c9624',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=e56606499dcaa855b5c4028b94a9fc51',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=e56606499dcaa855b5c4028b94a9fc51',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1140&quality=85&auto=format&fit=max&s=944d2e332a3d38b79bcc683af94d1360',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1140&quality=85&auto=format&fit=max&s=944d2e332a3d38b79bcc683af94d1360',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c001e916c98f2b93e31405d02062dd99',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c001e916c98f2b93e31405d02062dd99',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1125&quality=85&auto=format&fit=max&s=4566aa4d256f6596679bbdab97a22055',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1125&quality=85&auto=format&fit=max&s=4566aa4d256f6596679bbdab97a22055',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=080482b59f7a51026771d1b9baf95e85',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=080482b59f7a51026771d1b9baf95e85',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=965&quality=85&auto=format&fit=max&s=4f3adbb822e0c76f30d826c715cae3f1',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=965&quality=85&auto=format&fit=max&s=4f3adbb822e0c76f30d826c715cae3f1',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=28f5156282fe8f1f251ee67b97d189ca',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=28f5156282fe8f1f251ee67b97d189ca',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=725&quality=85&auto=format&fit=max&s=d155c95a67c1f92a9285b14312ea2b1e',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=725&quality=85&auto=format&fit=max&s=d155c95a67c1f92a9285b14312ea2b1e',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=f49796bbc7c8a13e23d0f41acd051e39',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=f49796bbc7c8a13e23d0f41acd051e39',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=645&quality=85&auto=format&fit=max&s=2874b6867f305e200a6fa0794eaeaf1b',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=645&quality=85&auto=format&fit=max&s=2874b6867f305e200a6fa0794eaeaf1b',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=92f98a77850d0906874a87b145897dbe',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=92f98a77850d0906874a87b145897dbe',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=465&quality=85&auto=format&fit=max&s=d71b90478752837eed9f206e9f2117ab',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=465&quality=85&auto=format&fit=max&s=d71b90478752837eed9f206e9f2117ab',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=075b02b2e2df2a220627f8194b93e108',
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=075b02b2e2df2a220627f8194b93e108',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '408abb26-6897-481b-8472-5ea776ba1712',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=oneplus%207T%20NOT%20month%20NOT%20pro&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:106px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=oneplus%207T%20NOT%20month%20NOT%20pro&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:106px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of oneplus 7t',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: '7010ce02-962e-4b81-8f13-e34da9fd7cb2',
 				},
 				{
-					html:
-						'<p>Pound for pound the OnePlus 7T offers the best performance, design and experience than any other smartphone.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Pound for pound the OnePlus 7T offers the best performance, design and experience than any other smartphone.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '19d2f547-dba4-4222-8bd2-5c086df753fc',
 				},
 				{
-					html:
-						'<p>It’s got the big, good-looking 6.41in full HD OLED screen, with a small, widow’s-peak-like notch at the top for a selfie camera. New for the 7T is a 90Hz refresh rate, which like its <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">bigger sibling the 7T Pro</a>, makes even the mundane silky smooth.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>It’s got the big, good-looking 6.41in full HD OLED screen, with a small, widow’s-peak-like notch at the top for a selfie camera. New for the 7T is a 90Hz refresh rate, which like its <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">bigger sibling the 7T Pro</a>, makes even the mundane silky smooth.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '9c22e273-ed90-4e3c-8cbe-e8071e703d6b',
 				},
 				{
-					html:
-						'<p>It’s got 2019’s top-of-the-line Snapdragon 855+ processor, 8GB of RAM and 128GB of fast UFS3.0 storage. It also lasts a good 31 hours on a charge, and its OxygenOS 10 Android software is fast and slick. OnePlus guarantees two years of software updates and an additional year of bi-monthly security updates from the release date of the phone too.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>It’s got 2019’s top-of-the-line Snapdragon 855+ processor, 8GB of RAM and 128GB of fast UFS3.0 storage. It also lasts a good 31 hours on a charge, and its OxygenOS 10 Android software is fast and slick. OnePlus guarantees two years of software updates and an additional year of bi-monthly security updates from the release date of the phone too.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3b13a51e-762a-4d84-a377-279a45ddd7a7',
 				},
 				{
-					html:
-						'<p>It even has the fastest and best in-display fingerprint scanner currently available, which is as good as the best dedicated capacitive sensors, good haptics and dual-sim support for having two mobile phone network connections at the same time.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>It even has the fastest and best in-display fingerprint scanner currently available, which is as good as the best dedicated capacitive sensors, good haptics and dual-sim support for having two mobile phone network connections at the same time.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '1c778947-52f7-4321-97b5-0545a41d9fec',
 				},
 				{
-					html:
-						'<p>The triple camera is good too, with ultra-wide, wide and 2x telephoto lenses, plus a dedicated macro mode, but it can’t beat the very best in the market. There’s no formal water resistance rating and no wireless charging, but WarpCharge sees it hit full charge in 60 minutes flat.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The triple camera is good too, with ultra-wide, wide and 2x telephoto lenses, plus a dedicated macro mode, but it can’t beat the very best in the market. There’s no formal water resistance rating and no wireless charging, but WarpCharge sees it hit full charge in 60 minutes flat.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '780c5352-5077-47aa-98da-ef05d1097d25',
 				},
 				{
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '0c8f600f-0133-4d9e-8585-8f7ef57fcebc',
 				},
 				{
-					html:
-						'<p>A great 90Hz screen, excellent software and the best performance, in-display fingerprint scanner and a good camera mean you have to spend significantly more to get a better phone than this</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>A great 90Hz screen, excellent software and the best performance, in-display fingerprint scanner and a good camera mean you have to spend significantly more to get a better phone than this</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '1a6530ca-04b2-4c11-b275-5e718c355cc9',
 				},
 				{
-					html:
-						'<p><strong>Buy if:</strong> you want a top-notch phone but don’t want to spend more than £549</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Buy if:</strong> you want a top-notch phone but don’t want to spend more than £549</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '6ae59513-1134-49d3-9b0a-6b40218c7984',
 				},
 				{
-					html:
-						'<p><strong>Don’t buy if:</strong> you want a really good camera</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Don’t buy if:</strong> you want a really good camera</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '01cc60d5-e996-4ec0-aea3-17ccad8a7c09',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/16/oneplus-7t-review-the-new-cut-price-flagship-king">OnePlus 7T review: the new cut-price flagship king</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/16/oneplus-7t-review-the-new-cut-price-flagship-king">OnePlus 7T review: the new cut-price flagship king</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'fd4a1460-8f8c-49af-ad6a-38d704f53f31',
 				},
 				{
 					id: '7b332116-e1f5-4d7a-9fee-922bf6558b00',
 					label: 'Quick Guide',
 					title: 'Smartphone jargon',
-					html:
-						"<p><strong>Size</strong></p><p>Smartphones are rated by screen size measured on the diagonal in inches. The bigger the number the larger the phone, but different phones use different ratios of height to width.</p><p>How easy it is to handle comes down to the width of the phone and its weight. The narrower and lighter it is, the easier it is to hold in one hand and the less likely you are to drop it.</p><p><strong>Processor</strong></p><p>What is commonly called the processor in a phone is actually a system-on-a-chip combining the processor, graphics and other essential systems into one.</p><p>Generally the newer the processor the more powerful and battery efficient it will be. Samsung, Huawei and Apple make their own, while Qualcomm is the largest supplier to other brands at the high end, with its Snapdragon 8-series range at the top.</p><p><strong>RAM</strong></p><p>The RAM (memory) is where your apps and processes are stored when in use, so the you more your phone has the better, up to a point.</p><p>Android requires more RAM than iOS, so it's difficult to directly compare them. But with Android at least 4GB of RAM is currently recommended.</p><p><strong>Storage</strong></p><p>Different from memory, storage is where everything is stored on the phone, including apps and media. While a few phones can have their storage expanded with microSD cards, most cannot.</p><p>That means you should aim for 64GB of storage at a minimum, but more if you want to store lots of photos. Cloud services such as Spotify or Google's Photos can help offload your music, photos or videos to the internet.</p><p><strong>Software updates</strong></p><p>Keeping your phone secure from hackers is essential, which makes software updates critical to patch bugs and security holes, as well as adding new features and improving things such as battery life and the camera.</p><p>Not all phones receive regular updates. Apple's support of older phones is the best in the business of around 5 years, followed by Samsung and Google's three years, both from when the phone was released - not when you buy it.</p><p><strong>Battery life</strong></p><p>Battery life varies drastically between devices, and \"all-day battery\" often doesn't mean 24 hours between charges. Some may not last long enough, particularly if you're out in the evening.</p><p>Battery life gets worse as the battery ages too, so a two-day battery will likely make sure the phone lasts at least a day two years later.</p><p><strong>Camera</strong></p><p>Cameras are the current battleground between the big players, but the margins between them are slimming.</p><p>Most use computational photography that combines hardware with advanced software algorithms, typically allowing multiple cameras to combine to make one image.</p><p>As such the camera software makes as much difference as the hardware, and is one of the few areas that actually improves over time with updates.</p><p>Multi-camera systems often offer more, such as useful zooms, portrait modes and better low-light performance, but they are not all created equally. There are also 3D cameras, which can detect facial expressions and other fun tricks.</p><p>The number of megapixels (MP) also makes a difference. Having more MP doesn't necessarily equal a better image, but modern smartphone cameras combine multiple pixels to improve image quality producing 12MP shots from 48MP sensors, for example.</p><p><strong>Other things to consider</strong></p><p><b>Wireless charging:</b>&nbsp;convenient, but slower than via cable and normally a charging pad doesn't come in the box</p><p><b>Durability:</b>&nbsp;generally glass on the front and back of the phone makes it more fragile</p><p><b>Resale value:</b>&nbsp;iPhones hold their value better than most others</p><p><b>OLED versus LCD:</b> OLED screens emit their own light so have much deeper blacks and more vibrant colours, while LCD screens are cheaper</p>",
+					html: "<p><strong>Size</strong></p><p>Smartphones are rated by screen size measured on the diagonal in inches. The bigger the number the larger the phone, but different phones use different ratios of height to width.</p><p>How easy it is to handle comes down to the width of the phone and its weight. The narrower and lighter it is, the easier it is to hold in one hand and the less likely you are to drop it.</p><p><strong>Processor</strong></p><p>What is commonly called the processor in a phone is actually a system-on-a-chip combining the processor, graphics and other essential systems into one.</p><p>Generally the newer the processor the more powerful and battery efficient it will be. Samsung, Huawei and Apple make their own, while Qualcomm is the largest supplier to other brands at the high end, with its Snapdragon 8-series range at the top.</p><p><strong>RAM</strong></p><p>The RAM (memory) is where your apps and processes are stored when in use, so the you more your phone has the better, up to a point.</p><p>Android requires more RAM than iOS, so it's difficult to directly compare them. But with Android at least 4GB of RAM is currently recommended.</p><p><strong>Storage</strong></p><p>Different from memory, storage is where everything is stored on the phone, including apps and media. While a few phones can have their storage expanded with microSD cards, most cannot.</p><p>That means you should aim for 64GB of storage at a minimum, but more if you want to store lots of photos. Cloud services such as Spotify or Google's Photos can help offload your music, photos or videos to the internet.</p><p><strong>Software updates</strong></p><p>Keeping your phone secure from hackers is essential, which makes software updates critical to patch bugs and security holes, as well as adding new features and improving things such as battery life and the camera.</p><p>Not all phones receive regular updates. Apple's support of older phones is the best in the business of around 5 years, followed by Samsung and Google's three years, both from when the phone was released - not when you buy it.</p><p><strong>Battery life</strong></p><p>Battery life varies drastically between devices, and \"all-day battery\" often doesn't mean 24 hours between charges. Some may not last long enough, particularly if you're out in the evening.</p><p>Battery life gets worse as the battery ages too, so a two-day battery will likely make sure the phone lasts at least a day two years later.</p><p><strong>Camera</strong></p><p>Cameras are the current battleground between the big players, but the margins between them are slimming.</p><p>Most use computational photography that combines hardware with advanced software algorithms, typically allowing multiple cameras to combine to make one image.</p><p>As such the camera software makes as much difference as the hardware, and is one of the few areas that actually improves over time with updates.</p><p>Multi-camera systems often offer more, such as useful zooms, portrait modes and better low-light performance, but they are not all created equally. There are also 3D cameras, which can detect facial expressions and other fun tricks.</p><p>The number of megapixels (MP) also makes a difference. Having more MP doesn't necessarily equal a better image, but modern smartphone cameras combine multiple pixels to improve image quality producing 12MP shots from 48MP sensors, for example.</p><p><strong>Other things to consider</strong></p><p><b>Wireless charging:</b>&nbsp;convenient, but slower than via cable and normally a charging pad doesn't come in the box</p><p><b>Durability:</b>&nbsp;generally glass on the front and back of the phone makes it more fragile</p><p><b>Resale value:</b>&nbsp;iPhones hold their value better than most others</p><p><b>OLED versus LCD:</b> OLED screens emit their own light so have much deeper blacks and more vibrant colours, while LCD screens are cheaper</p>",
 					credit: '',
-					_type:
-						'model.dotcomrendering.pageElements.GuideAtomBlockElement',
+					_type: 'model.dotcomrendering.pageElements.GuideAtomBlockElement',
 					elementId: '3be10ddf-d252-4dde-8374-d879cd2dafa4',
 				},
 				{
 					html: '<h2>Runners up</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: '73c024db-2e67-4798-85ca-cd7362e654c5',
 				},
 				{
-					html:
-						'<p>These are good phones still worth buying if none of the top smartphones fit the bill.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>These are good phones still worth buying if none of the top smartphones fit the bill.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '2271fbc2-995e-43dc-9691-2372f43666fe',
 				},
 				{
 					html: '<p><strong>Apple iPhone 11</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '18aa8505-1e34-44c1-83da-7e2f2cf02cb7',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£729</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fus%2Fshop%2Fbuy-iphone%2Fiphone-11&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$699</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£729</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fus%2Fshop%2Fbuy-iphone%2Fiphone-11&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$699</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '535367d3-5bd7-4c3e-950d-f8dec67eed06',
 				},
 				{
 					html: '<p>★★★★☆</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '2811b721-9479-4211-81dd-feecc0aefe6e',
 				},
 				{
@@ -4632,8 +4090,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/2683.jpg',
+								url: 'https://media.guim.co.uk/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/2683.jpg',
 							},
 							{
 								index: 1,
@@ -4644,8 +4101,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg',
+								url: 'https://media.guim.co.uk/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg',
 							},
 							{
 								index: 2,
@@ -4655,8 +4111,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/2000.jpg',
+								url: 'https://media.guim.co.uk/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/2000.jpg',
 							},
 							{
 								index: 3,
@@ -4666,8 +4121,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/1000.jpg',
+								url: 'https://media.guim.co.uk/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/1000.jpg',
 							},
 							{
 								index: 4,
@@ -4677,8 +4131,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/500.jpg',
+								url: 'https://media.guim.co.uk/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/500.jpg',
 							},
 						],
 					},
@@ -4693,33 +4146,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=85&auto=format&fit=max&s=2355947a4d51c8efcccf2f7af5f5dafa',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=85&auto=format&fit=max&s=2355947a4d51c8efcccf2f7af5f5dafa',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=908d467cdd8c734f849f308fdf66715a',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=908d467cdd8c734f849f308fdf66715a',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=85&auto=format&fit=max&s=557ec054d1014ee850c5e7e639f38431',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=85&auto=format&fit=max&s=557ec054d1014ee850c5e7e639f38431',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=32277bd4595764f8117b54d992ee9079',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=32277bd4595764f8117b54d992ee9079',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=85&auto=format&fit=max&s=b9e6527f87fe3e082ea6e2c1a438f954',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=85&auto=format&fit=max&s=b9e6527f87fe3e082ea6e2c1a438f954',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=07364ebd108137f3a92cb09ee6f82034',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=07364ebd108137f3a92cb09ee6f82034',
 									width: 890,
 								},
 							],
@@ -4728,23 +4175,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=140&quality=85&auto=format&fit=max&s=2ae5b3ca770948a2e2ed5212ac2cc4fa',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=140&quality=85&auto=format&fit=max&s=2ae5b3ca770948a2e2ed5212ac2cc4fa',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=1b7bb2565f52eed1c9fdda9da55dd585',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=1b7bb2565f52eed1c9fdda9da55dd585',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=120&quality=85&auto=format&fit=max&s=98783efac825580a03eb20ad5d102b8d',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=120&quality=85&auto=format&fit=max&s=98783efac825580a03eb20ad5d102b8d',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=1f8f1f97f0fa916130c4e5af3fff729c',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=1f8f1f97f0fa916130c4e5af3fff729c',
 									width: 240,
 								},
 							],
@@ -4753,53 +4196,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=380&quality=85&auto=format&fit=max&s=5d7e57a7820d527c6694712db8578e00',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=380&quality=85&auto=format&fit=max&s=5d7e57a7820d527c6694712db8578e00',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=1d6ff9276a88f7658b4996ddccf92c54',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=1d6ff9276a88f7658b4996ddccf92c54',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=300&quality=85&auto=format&fit=max&s=dd80b8646787d1b004a741a51e9c3c70',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=300&quality=85&auto=format&fit=max&s=dd80b8646787d1b004a741a51e9c3c70',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=c7e4782596147225ea28c8e2a5181df0',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=c7e4782596147225ea28c8e2a5181df0',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=85&auto=format&fit=max&s=2355947a4d51c8efcccf2f7af5f5dafa',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=85&auto=format&fit=max&s=2355947a4d51c8efcccf2f7af5f5dafa',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=908d467cdd8c734f849f308fdf66715a',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=908d467cdd8c734f849f308fdf66715a',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=85&auto=format&fit=max&s=557ec054d1014ee850c5e7e639f38431',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=85&auto=format&fit=max&s=557ec054d1014ee850c5e7e639f38431',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=32277bd4595764f8117b54d992ee9079',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=32277bd4595764f8117b54d992ee9079',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=85&auto=format&fit=max&s=b9e6527f87fe3e082ea6e2c1a438f954',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=85&auto=format&fit=max&s=b9e6527f87fe3e082ea6e2c1a438f954',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=07364ebd108137f3a92cb09ee6f82034',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=07364ebd108137f3a92cb09ee6f82034',
 									width: 890,
 								},
 							],
@@ -4808,73 +4241,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1020&quality=85&auto=format&fit=max&s=e4043e4abf5c78396ca818754d2f7696',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1020&quality=85&auto=format&fit=max&s=e4043e4abf5c78396ca818754d2f7696',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=d290c365d39c1300ebbf79a8186a650d',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=d290c365d39c1300ebbf79a8186a650d',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=940&quality=85&auto=format&fit=max&s=c506252365e1914d44fcfdc243cc8366',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=940&quality=85&auto=format&fit=max&s=c506252365e1914d44fcfdc243cc8366',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=287bcb4a8680d1c2aaa077444ed13dce',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=287bcb4a8680d1c2aaa077444ed13dce',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=700&quality=85&auto=format&fit=max&s=d75b6a1b4f8d2b73c3a66c978b6637e2',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=700&quality=85&auto=format&fit=max&s=d75b6a1b4f8d2b73c3a66c978b6637e2',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=7f22335dcdfcd0d9f651509e9e7516df',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=7f22335dcdfcd0d9f651509e9e7516df',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=700&quality=85&auto=format&fit=max&s=d75b6a1b4f8d2b73c3a66c978b6637e2',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=700&quality=85&auto=format&fit=max&s=d75b6a1b4f8d2b73c3a66c978b6637e2',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=7f22335dcdfcd0d9f651509e9e7516df',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=7f22335dcdfcd0d9f651509e9e7516df',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=660&quality=85&auto=format&fit=max&s=f1d28ce7a5ab567127ba926afce3d555',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=660&quality=85&auto=format&fit=max&s=f1d28ce7a5ab567127ba926afce3d555',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=a59f31093acff15e79ecf4cce962811e',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=a59f31093acff15e79ecf4cce962811e',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=645&quality=85&auto=format&fit=max&s=c13784d32e14627d674f1d03cce6c0a0',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=645&quality=85&auto=format&fit=max&s=c13784d32e14627d674f1d03cce6c0a0',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5747764623ca9fe8a0ed4ca5e33a8fba',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5747764623ca9fe8a0ed4ca5e33a8fba',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=465&quality=85&auto=format&fit=max&s=20cbf61a7317c533277ec21901991578',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=465&quality=85&auto=format&fit=max&s=20cbf61a7317c533277ec21901991578',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d4f0439b7b3bdeb708d04b550b744c26',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d4f0439b7b3bdeb708d04b550b744c26',
 									width: 930,
 								},
 							],
@@ -4883,33 +4302,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=85&auto=format&fit=max&s=2355947a4d51c8efcccf2f7af5f5dafa',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=85&auto=format&fit=max&s=2355947a4d51c8efcccf2f7af5f5dafa',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=908d467cdd8c734f849f308fdf66715a',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=908d467cdd8c734f849f308fdf66715a',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=85&auto=format&fit=max&s=557ec054d1014ee850c5e7e639f38431',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=85&auto=format&fit=max&s=557ec054d1014ee850c5e7e639f38431',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=32277bd4595764f8117b54d992ee9079',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=32277bd4595764f8117b54d992ee9079',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=85&auto=format&fit=max&s=b9e6527f87fe3e082ea6e2c1a438f954',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=85&auto=format&fit=max&s=b9e6527f87fe3e082ea6e2c1a438f954',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=07364ebd108137f3a92cb09ee6f82034',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=07364ebd108137f3a92cb09ee6f82034',
 									width: 890,
 								},
 							],
@@ -4918,133 +4331,106 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1300&quality=85&auto=format&fit=max&s=c60dc7d354b494c78bfbd3fdc18727d6',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1300&quality=85&auto=format&fit=max&s=c60dc7d354b494c78bfbd3fdc18727d6',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=17fc739f8115bf92e4d00ac5f1d66647',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=17fc739f8115bf92e4d00ac5f1d66647',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1140&quality=85&auto=format&fit=max&s=12865ebf097f8331bc452c067562ec0e',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1140&quality=85&auto=format&fit=max&s=12865ebf097f8331bc452c067562ec0e',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=060c7e4ae38a9c16feff6d3570757e7a',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=060c7e4ae38a9c16feff6d3570757e7a',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1125&quality=85&auto=format&fit=max&s=0e7ec6cd95a5c31a1768d18182e85892',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1125&quality=85&auto=format&fit=max&s=0e7ec6cd95a5c31a1768d18182e85892',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=7062e0eae593472010132a9065b2d46d',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=7062e0eae593472010132a9065b2d46d',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=965&quality=85&auto=format&fit=max&s=5ce61318cd50c30c3c282f0b9ff3a662',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=965&quality=85&auto=format&fit=max&s=5ce61318cd50c30c3c282f0b9ff3a662',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=912c72b34a6451f875262cbccd0bcfb9',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=912c72b34a6451f875262cbccd0bcfb9',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=725&quality=85&auto=format&fit=max&s=c86982fcb43eb501a10d2538be1c7366',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=725&quality=85&auto=format&fit=max&s=c86982fcb43eb501a10d2538be1c7366',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=2ed53b995b3a73eefed55dabbeb76abf',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=2ed53b995b3a73eefed55dabbeb76abf',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=645&quality=85&auto=format&fit=max&s=c13784d32e14627d674f1d03cce6c0a0',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=645&quality=85&auto=format&fit=max&s=c13784d32e14627d674f1d03cce6c0a0',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5747764623ca9fe8a0ed4ca5e33a8fba',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5747764623ca9fe8a0ed4ca5e33a8fba',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=465&quality=85&auto=format&fit=max&s=20cbf61a7317c533277ec21901991578',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=465&quality=85&auto=format&fit=max&s=20cbf61a7317c533277ec21901991578',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d4f0439b7b3bdeb708d04b550b744c26',
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=d4f0439b7b3bdeb708d04b550b744c26',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '32c5d4ef-7b21-4594-b90d-0c4e8836322d',
 				},
 				{
-					html:
-						'<p>Apple’s cheaper iPhone 11 is the follow-up to last year’s iPhone XR and offers most of the features of the iPhone 11 Pro. It has slightly battery life too, but is missing the excellent ultra-wide angle camera, has a slightly larger, but worse screen. It is made of aluminium and glass, instead of stainless steel, losing its luxurious feel and the knowledge that it’s the best Apple can make.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Apple’s cheaper iPhone 11 is the follow-up to last year’s iPhone XR and offers most of the features of the iPhone 11 Pro. It has slightly battery life too, but is missing the excellent ultra-wide angle camera, has a slightly larger, but worse screen. It is made of aluminium and glass, instead of stainless steel, losing its luxurious feel and the knowledge that it’s the best Apple can make.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'c3f85de4-b8dc-44a4-aa20-45e6f6ed09f5',
 				},
 				{
-					html:
-						'<p>The iPhone 11 looks great in red or white, but it’s not cheap by any stretch of the imagination, costing as much or more as true flagship phones from competitors. The iPhone 11 certainly holds its own for the money, but the <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro</a> still the one to buy if you want the best iPhone. If you want a cheaper phone, switch to Android or buy last <a href="https://www.theguardian.com/technology/2018/oct/31/iphone-xr-review-apple-big-bezels-battery-face-id-screen">year’s iPhone XR</a>.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The iPhone 11 looks great in red or white, but it’s not cheap by any stretch of the imagination, costing as much or more as true flagship phones from competitors. The iPhone 11 certainly holds its own for the money, but the <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro</a> still the one to buy if you want the best iPhone. If you want a cheaper phone, switch to Android or buy last <a href="https://www.theguardian.com/technology/2018/oct/31/iphone-xr-review-apple-big-bezels-battery-face-id-screen">year’s iPhone XR</a>.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '91c33d42-0ea8-4da0-ae83-162f15a61b93',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=iPhone%2011%20NOT%20month%20NOT%20pro%20NOT%208&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=iPhone%2011%20NOT%20month%20NOT%20pro%20NOT%208&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of iphone 11',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: '5a2530aa-be44-4a32-8234-328ee59197f9',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/01/iphone-11-review-iphone-xr-dual-camera-a13-smartphone">iPhone 11 review: an iPhone XR with a better camera</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/01/iphone-11-review-iphone-xr-dual-camera-a13-smartphone">iPhone 11 review: an iPhone XR with a better camera</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '74f9b462-3e4d-4f48-b5b0-63e4c7d41c5d',
 				},
 				{
 					html: '<p><strong>Apple iPhone 11 Pro Max</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'af9a19b9-6e5a-4c64-b89f-f39e3d86c540',
 				},
 				{
-					html:
-						'<p><strong>RRP: </strong><a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,149</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fus%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,099</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP: </strong><a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,149</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fus%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,099</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'f8e064c1-7077-427d-a7e5-db6b184897f0',
 				},
 				{
 					html: '<p>★★★★☆</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '4f7708fb-613b-4769-b7e1-cb4d3ac5326d',
 				},
 				{
@@ -5058,8 +4444,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/1883.jpg',
+								url: 'https://media.guim.co.uk/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/1883.jpg',
 							},
 							{
 								index: 1,
@@ -5070,8 +4455,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg',
+								url: 'https://media.guim.co.uk/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg',
 							},
 							{
 								index: 2,
@@ -5081,8 +4465,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/1000.jpg',
+								url: 'https://media.guim.co.uk/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/1000.jpg',
 							},
 							{
 								index: 3,
@@ -5092,8 +4475,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/500.jpg',
+								url: 'https://media.guim.co.uk/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/500.jpg',
 							},
 							{
 								index: 4,
@@ -5103,8 +4485,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/140.jpg',
+								url: 'https://media.guim.co.uk/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/140.jpg',
 							},
 						],
 					},
@@ -5119,33 +4500,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=85&auto=format&fit=max&s=4f8f22c0634c1d465981ce86b86eb85f',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=85&auto=format&fit=max&s=4f8f22c0634c1d465981ce86b86eb85f',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1ea97dfe600b9469e13dc392d380bd22',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1ea97dfe600b9469e13dc392d380bd22',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=85&auto=format&fit=max&s=548f76e63dbb5fd6d45f96c9c91d76b2',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=85&auto=format&fit=max&s=548f76e63dbb5fd6d45f96c9c91d76b2',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90d27bfea238dc8ada26fba30a241066',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90d27bfea238dc8ada26fba30a241066',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=85&auto=format&fit=max&s=e8862f38b816533c5e1118f2a5f9f4ae',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=85&auto=format&fit=max&s=e8862f38b816533c5e1118f2a5f9f4ae',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=35947b1e4a42ac4667f885e2b6e2a77d',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=35947b1e4a42ac4667f885e2b6e2a77d',
 									width: 890,
 								},
 							],
@@ -5154,23 +4529,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=140&quality=85&auto=format&fit=max&s=2170769b879a5cc9980bceec08b2e06e',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=140&quality=85&auto=format&fit=max&s=2170769b879a5cc9980bceec08b2e06e',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=925054f00d378ef195d353fd9e6e0453',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=925054f00d378ef195d353fd9e6e0453',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=120&quality=85&auto=format&fit=max&s=ac552a977117f67fb895bdd24d4009a9',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=120&quality=85&auto=format&fit=max&s=ac552a977117f67fb895bdd24d4009a9',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=9f778dda8a949ba5ee1e202c9dc42b98',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=9f778dda8a949ba5ee1e202c9dc42b98',
 									width: 240,
 								},
 							],
@@ -5179,53 +4550,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=380&quality=85&auto=format&fit=max&s=73afd29aa1ebe4d94c4708b5016456a7',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=380&quality=85&auto=format&fit=max&s=73afd29aa1ebe4d94c4708b5016456a7',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=fcf18a1e1cd0509292bf55585c047f56',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=fcf18a1e1cd0509292bf55585c047f56',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=300&quality=85&auto=format&fit=max&s=41c8e34f9a273981b3dd8bd82757f4fa',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=300&quality=85&auto=format&fit=max&s=41c8e34f9a273981b3dd8bd82757f4fa',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=3b59fbb3817686f9e7c1577cb60813d8',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=3b59fbb3817686f9e7c1577cb60813d8',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=85&auto=format&fit=max&s=4f8f22c0634c1d465981ce86b86eb85f',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=85&auto=format&fit=max&s=4f8f22c0634c1d465981ce86b86eb85f',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1ea97dfe600b9469e13dc392d380bd22',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1ea97dfe600b9469e13dc392d380bd22',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=85&auto=format&fit=max&s=548f76e63dbb5fd6d45f96c9c91d76b2',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=85&auto=format&fit=max&s=548f76e63dbb5fd6d45f96c9c91d76b2',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90d27bfea238dc8ada26fba30a241066',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90d27bfea238dc8ada26fba30a241066',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=85&auto=format&fit=max&s=e8862f38b816533c5e1118f2a5f9f4ae',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=85&auto=format&fit=max&s=e8862f38b816533c5e1118f2a5f9f4ae',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=35947b1e4a42ac4667f885e2b6e2a77d',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=35947b1e4a42ac4667f885e2b6e2a77d',
 									width: 890,
 								},
 							],
@@ -5234,73 +4595,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1020&quality=85&auto=format&fit=max&s=a0359875f3f18eee0d1194f625e5d9de',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1020&quality=85&auto=format&fit=max&s=a0359875f3f18eee0d1194f625e5d9de',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=cc1a772d7000bef7b8344f0c6568eb7a',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=cc1a772d7000bef7b8344f0c6568eb7a',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=940&quality=85&auto=format&fit=max&s=e1982fdba4032d5977aacfa77150666a',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=940&quality=85&auto=format&fit=max&s=e1982fdba4032d5977aacfa77150666a',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=aa41be0f1f9b538f1ead156bd75f76bc',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=aa41be0f1f9b538f1ead156bd75f76bc',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=700&quality=85&auto=format&fit=max&s=aef833ee7d39b05c5303fa2f8057a691',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=700&quality=85&auto=format&fit=max&s=aef833ee7d39b05c5303fa2f8057a691',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=5b4cea9d8ed1aa4d935f8c3bb44d13a5',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=5b4cea9d8ed1aa4d935f8c3bb44d13a5',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=700&quality=85&auto=format&fit=max&s=aef833ee7d39b05c5303fa2f8057a691',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=700&quality=85&auto=format&fit=max&s=aef833ee7d39b05c5303fa2f8057a691',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=5b4cea9d8ed1aa4d935f8c3bb44d13a5',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=5b4cea9d8ed1aa4d935f8c3bb44d13a5',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=660&quality=85&auto=format&fit=max&s=e9c28ea9d1f2ac0be4a7a9a40c599e40',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=660&quality=85&auto=format&fit=max&s=e9c28ea9d1f2ac0be4a7a9a40c599e40',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=6b3695f767330ce77083d680cd42cf8b',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=6b3695f767330ce77083d680cd42cf8b',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=645&quality=85&auto=format&fit=max&s=c6bc8caa5da45febf0c07ccd81af4ce7',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=645&quality=85&auto=format&fit=max&s=c6bc8caa5da45febf0c07ccd81af4ce7',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=23a94df40a4a140b84651519e27c174c',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=23a94df40a4a140b84651519e27c174c',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=465&quality=85&auto=format&fit=max&s=052849eb8926146abddf107b22d8cb7e',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=465&quality=85&auto=format&fit=max&s=052849eb8926146abddf107b22d8cb7e',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b369d6c852f97a2ea6f0ea77a364b058',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b369d6c852f97a2ea6f0ea77a364b058',
 									width: 930,
 								},
 							],
@@ -5309,33 +4656,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=85&auto=format&fit=max&s=4f8f22c0634c1d465981ce86b86eb85f',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=85&auto=format&fit=max&s=4f8f22c0634c1d465981ce86b86eb85f',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1ea97dfe600b9469e13dc392d380bd22',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1ea97dfe600b9469e13dc392d380bd22',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=85&auto=format&fit=max&s=548f76e63dbb5fd6d45f96c9c91d76b2',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=85&auto=format&fit=max&s=548f76e63dbb5fd6d45f96c9c91d76b2',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90d27bfea238dc8ada26fba30a241066',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90d27bfea238dc8ada26fba30a241066',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=85&auto=format&fit=max&s=e8862f38b816533c5e1118f2a5f9f4ae',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=85&auto=format&fit=max&s=e8862f38b816533c5e1118f2a5f9f4ae',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=35947b1e4a42ac4667f885e2b6e2a77d',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=35947b1e4a42ac4667f885e2b6e2a77d',
 									width: 890,
 								},
 							],
@@ -5344,126 +4685,101 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1300&quality=85&auto=format&fit=max&s=3cd7cd1a0a8ec404508ff7a7ca04320f',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1300&quality=85&auto=format&fit=max&s=3cd7cd1a0a8ec404508ff7a7ca04320f',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=956f4b36f0d67c51d369de6f5decb5d0',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=956f4b36f0d67c51d369de6f5decb5d0',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1140&quality=85&auto=format&fit=max&s=4d40ccd600185b89ffd640f3038826f2',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1140&quality=85&auto=format&fit=max&s=4d40ccd600185b89ffd640f3038826f2',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=f31f9d20decf455c8adc55b9e75d7c1a',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=f31f9d20decf455c8adc55b9e75d7c1a',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1125&quality=85&auto=format&fit=max&s=a252c062078ce33423215dd03fa4742e',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1125&quality=85&auto=format&fit=max&s=a252c062078ce33423215dd03fa4742e',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=7c8441dff090a0604a177045a793de49',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=7c8441dff090a0604a177045a793de49',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=965&quality=85&auto=format&fit=max&s=deab2956df6afbebfc4f38705e401a92',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=965&quality=85&auto=format&fit=max&s=deab2956df6afbebfc4f38705e401a92',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=082dc3b19ce0e6ab1ec00a0f152c7bad',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=082dc3b19ce0e6ab1ec00a0f152c7bad',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=725&quality=85&auto=format&fit=max&s=4336cc5cbbad3346a6c8e054679c9292',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=725&quality=85&auto=format&fit=max&s=4336cc5cbbad3346a6c8e054679c9292',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=f35976e41ec8615762cfe8b0a1b10a5b',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=f35976e41ec8615762cfe8b0a1b10a5b',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=645&quality=85&auto=format&fit=max&s=c6bc8caa5da45febf0c07ccd81af4ce7',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=645&quality=85&auto=format&fit=max&s=c6bc8caa5da45febf0c07ccd81af4ce7',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=23a94df40a4a140b84651519e27c174c',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=23a94df40a4a140b84651519e27c174c',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=465&quality=85&auto=format&fit=max&s=052849eb8926146abddf107b22d8cb7e',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=465&quality=85&auto=format&fit=max&s=052849eb8926146abddf107b22d8cb7e',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b369d6c852f97a2ea6f0ea77a364b058',
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=b369d6c852f97a2ea6f0ea77a364b058',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: 'b442c3bf-4c4a-4654-b9be-5980eaef8227',
 				},
 				{
-					html:
-						'<p>If you must have an iPhone and it must have a massive screen or epic battery life then the iPhone 11 Pro Max is your only option. But it has really poor ergonomics, is big, expensive and heavy, making the smaller iPhone 11 Pro or iPhone 11 are better options.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>If you must have an iPhone and it must have a massive screen or epic battery life then the iPhone 11 Pro Max is your only option. But it has really poor ergonomics, is big, expensive and heavy, making the smaller iPhone 11 Pro or iPhone 11 are better options.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd1ed46f8-86e6-4d3a-90c9-d57f5c9a625a',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=iPhone%2011%20Pro%20max%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=iPhone%2011%20Pro%20max%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of iphone 11 pro max',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: '174248fc-4c1d-4dc8-8dbf-2d293b5f35ef',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/09/iphone-11-pro-max-review-battery-camera-screen">iPhone 11 Pro Max review: salvaged by epic battery life</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/09/iphone-11-pro-max-review-battery-camera-screen">iPhone 11 Pro Max review: salvaged by epic battery life</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '200aa4d4-2e0c-4d2a-af40-583b81f267f2',
 				},
 				{
 					html: '<p><strong>Samsung Galaxy S10e</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'e83055db-e802-407e-8b98-808a830bbdff',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£669</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$650</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£669</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$650</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '62b37437-8d55-4140-b86f-f730ad324cf6',
 				},
 				{
 					html: '<p>★★★★☆</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '8c9cebd9-2a13-47cc-83c0-792a8612d1d5',
 				},
 				{
@@ -5477,8 +4793,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/2618.jpg',
+								url: 'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/2618.jpg',
 							},
 							{
 								index: 1,
@@ -5489,8 +4804,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg',
+								url: 'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg',
 							},
 							{
 								index: 2,
@@ -5500,8 +4814,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/2000.jpg',
+								url: 'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/2000.jpg',
 							},
 							{
 								index: 3,
@@ -5511,8 +4824,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/1000.jpg',
+								url: 'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/1000.jpg',
 							},
 							{
 								index: 4,
@@ -5522,8 +4834,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/500.jpg',
+								url: 'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/500.jpg',
 							},
 							{
 								index: 5,
@@ -5533,8 +4844,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/140.jpg',
+								url: 'https://media.guim.co.uk/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/140.jpg',
 							},
 						],
 					},
@@ -5549,33 +4859,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=85&auto=format&fit=max&s=13c5bf82f41524439394bedc273792fc',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=85&auto=format&fit=max&s=13c5bf82f41524439394bedc273792fc',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ae0274386f4a8608179e3b27f6bdd1b',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ae0274386f4a8608179e3b27f6bdd1b',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=85&auto=format&fit=max&s=8f57a6a733aee91736d419969a75c855',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=85&auto=format&fit=max&s=8f57a6a733aee91736d419969a75c855',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3dece1fe2d9b2c8c276bbcd2b7957330',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3dece1fe2d9b2c8c276bbcd2b7957330',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=85&auto=format&fit=max&s=8bc78a610614f6255674107e4ce0e839',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=85&auto=format&fit=max&s=8bc78a610614f6255674107e4ce0e839',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4d6bbcf3f5e536ea3d52a9350ca08e8a',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4d6bbcf3f5e536ea3d52a9350ca08e8a',
 									width: 890,
 								},
 							],
@@ -5584,23 +4888,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=140&quality=85&auto=format&fit=max&s=6c5f920bb44c26a5f7e895bd3b4de26e',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=140&quality=85&auto=format&fit=max&s=6c5f920bb44c26a5f7e895bd3b4de26e',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=cf68150de652239464d35a81d90b7700',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=cf68150de652239464d35a81d90b7700',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=120&quality=85&auto=format&fit=max&s=630cb41a67087ece3574285763a1e793',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=120&quality=85&auto=format&fit=max&s=630cb41a67087ece3574285763a1e793',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=f59c097f9dfa4efc80bcca89711d697e',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=f59c097f9dfa4efc80bcca89711d697e',
 									width: 240,
 								},
 							],
@@ -5609,53 +4909,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=380&quality=85&auto=format&fit=max&s=6ec9aff1db00f6cfc33b1b37175a0ab9',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=380&quality=85&auto=format&fit=max&s=6ec9aff1db00f6cfc33b1b37175a0ab9',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=2aa8a3c5f74c97b9543bbc2ac6bb92c5',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=2aa8a3c5f74c97b9543bbc2ac6bb92c5',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=300&quality=85&auto=format&fit=max&s=08946b1343fb7755de2116d972bb03e0',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=300&quality=85&auto=format&fit=max&s=08946b1343fb7755de2116d972bb03e0',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=5f446e299de2891eed9ed06df4f5bed7',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=5f446e299de2891eed9ed06df4f5bed7',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=85&auto=format&fit=max&s=13c5bf82f41524439394bedc273792fc',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=85&auto=format&fit=max&s=13c5bf82f41524439394bedc273792fc',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ae0274386f4a8608179e3b27f6bdd1b',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ae0274386f4a8608179e3b27f6bdd1b',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=85&auto=format&fit=max&s=8f57a6a733aee91736d419969a75c855',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=85&auto=format&fit=max&s=8f57a6a733aee91736d419969a75c855',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3dece1fe2d9b2c8c276bbcd2b7957330',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3dece1fe2d9b2c8c276bbcd2b7957330',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=85&auto=format&fit=max&s=8bc78a610614f6255674107e4ce0e839',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=85&auto=format&fit=max&s=8bc78a610614f6255674107e4ce0e839',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4d6bbcf3f5e536ea3d52a9350ca08e8a',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4d6bbcf3f5e536ea3d52a9350ca08e8a',
 									width: 890,
 								},
 							],
@@ -5664,73 +4954,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1020&quality=85&auto=format&fit=max&s=602cbb75537abe150b1ca6b7f1e2e4bc',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1020&quality=85&auto=format&fit=max&s=602cbb75537abe150b1ca6b7f1e2e4bc',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=993dca5424f1232c3a39fc485f485b1a',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=993dca5424f1232c3a39fc485f485b1a',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=940&quality=85&auto=format&fit=max&s=3915b1eb188d2d7a71cb3b0e1ded6c7c',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=940&quality=85&auto=format&fit=max&s=3915b1eb188d2d7a71cb3b0e1ded6c7c',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=030ad90f16eb4652ee12afaeb5e4f2d1',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=030ad90f16eb4652ee12afaeb5e4f2d1',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=700&quality=85&auto=format&fit=max&s=82453fa787606185f1a4a0feaadb87b2',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=700&quality=85&auto=format&fit=max&s=82453fa787606185f1a4a0feaadb87b2',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b868ca4101d009d1540160c9794da5ba',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b868ca4101d009d1540160c9794da5ba',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=700&quality=85&auto=format&fit=max&s=82453fa787606185f1a4a0feaadb87b2',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=700&quality=85&auto=format&fit=max&s=82453fa787606185f1a4a0feaadb87b2',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b868ca4101d009d1540160c9794da5ba',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=b868ca4101d009d1540160c9794da5ba',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=660&quality=85&auto=format&fit=max&s=8a2781a2d8d1e3bb254d4cc995714222',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=660&quality=85&auto=format&fit=max&s=8a2781a2d8d1e3bb254d4cc995714222',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=edf1cdcd883d9f35e2103e09c12cf760',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=edf1cdcd883d9f35e2103e09c12cf760',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=645&quality=85&auto=format&fit=max&s=0e4ed895390682fe9670143f28cc3c3c',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=645&quality=85&auto=format&fit=max&s=0e4ed895390682fe9670143f28cc3c3c',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e7f210da3c7ab4450c659e7a2076a3ce',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e7f210da3c7ab4450c659e7a2076a3ce',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=465&quality=85&auto=format&fit=max&s=b9656792cab8c314a0aefc2205718d5d',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=465&quality=85&auto=format&fit=max&s=b9656792cab8c314a0aefc2205718d5d',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=dcc0db12f7b5aaa4443972cafe04c66d',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=dcc0db12f7b5aaa4443972cafe04c66d',
 									width: 930,
 								},
 							],
@@ -5739,33 +5015,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=85&auto=format&fit=max&s=13c5bf82f41524439394bedc273792fc',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=85&auto=format&fit=max&s=13c5bf82f41524439394bedc273792fc',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ae0274386f4a8608179e3b27f6bdd1b',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ae0274386f4a8608179e3b27f6bdd1b',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=85&auto=format&fit=max&s=8f57a6a733aee91736d419969a75c855',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=85&auto=format&fit=max&s=8f57a6a733aee91736d419969a75c855',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3dece1fe2d9b2c8c276bbcd2b7957330',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3dece1fe2d9b2c8c276bbcd2b7957330',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=85&auto=format&fit=max&s=8bc78a610614f6255674107e4ce0e839',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=85&auto=format&fit=max&s=8bc78a610614f6255674107e4ce0e839',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4d6bbcf3f5e536ea3d52a9350ca08e8a',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4d6bbcf3f5e536ea3d52a9350ca08e8a',
 									width: 890,
 								},
 							],
@@ -5774,126 +5044,101 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1300&quality=85&auto=format&fit=max&s=e0b92b50523039d34a2dadedc70ae640',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1300&quality=85&auto=format&fit=max&s=e0b92b50523039d34a2dadedc70ae640',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=2a179402732384730217ff940c9b8385',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=2a179402732384730217ff940c9b8385',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1140&quality=85&auto=format&fit=max&s=0b690f1686e258dc2681e00f67dee406',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1140&quality=85&auto=format&fit=max&s=0b690f1686e258dc2681e00f67dee406',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c8a70b64374cc534a595623f9698e03b',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c8a70b64374cc534a595623f9698e03b',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1125&quality=85&auto=format&fit=max&s=94e0f707b508b8e5928d4165f19554a2',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1125&quality=85&auto=format&fit=max&s=94e0f707b508b8e5928d4165f19554a2',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=a5212827885dbf97aec6b1d3fca0cb9a',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=a5212827885dbf97aec6b1d3fca0cb9a',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=965&quality=85&auto=format&fit=max&s=e7364661f6df60d5e7c17157a01c9a05',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=965&quality=85&auto=format&fit=max&s=e7364661f6df60d5e7c17157a01c9a05',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=bdd0eaf701aed3bf7a143a33ff4970c8',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=bdd0eaf701aed3bf7a143a33ff4970c8',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=725&quality=85&auto=format&fit=max&s=716496b989353adbd908867276542a6d',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=725&quality=85&auto=format&fit=max&s=716496b989353adbd908867276542a6d',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=9d289f1df1d1aff270f46de022580b78',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=9d289f1df1d1aff270f46de022580b78',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=645&quality=85&auto=format&fit=max&s=0e4ed895390682fe9670143f28cc3c3c',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=645&quality=85&auto=format&fit=max&s=0e4ed895390682fe9670143f28cc3c3c',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e7f210da3c7ab4450c659e7a2076a3ce',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e7f210da3c7ab4450c659e7a2076a3ce',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=465&quality=85&auto=format&fit=max&s=b9656792cab8c314a0aefc2205718d5d',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=465&quality=85&auto=format&fit=max&s=b9656792cab8c314a0aefc2205718d5d',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=dcc0db12f7b5aaa4443972cafe04c66d',
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=dcc0db12f7b5aaa4443972cafe04c66d',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: 'e590f526-303e-4cdf-a70a-bcad523b1130',
 				},
 				{
-					html:
-						'<p>The smallest, cheapest variant of Samsung’s current S10 line is still good, but falls slightly short of the high bar set by the regular Galaxy S10. The Galaxy S10e loses the optical zoom with only two cameras on the back, has a flat, slightly smaller screen and a lower capacity battery. It also ditches in the in-screen fingerprint scanner for one embedded in the power button – great for right-handed users but not so for the left handed.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The smallest, cheapest variant of Samsung’s current S10 line is still good, but falls slightly short of the high bar set by the regular Galaxy S10. The Galaxy S10e loses the optical zoom with only two cameras on the back, has a flat, slightly smaller screen and a lower capacity battery. It also ditches in the in-screen fingerprint scanner for one embedded in the power button – great for right-handed users but not so for the left handed.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd76fd73e-3358-42a2-8778-5298de06ee15',
 				},
 				{
-					html:
-						'<p>It doesn’t feel any smaller in the hand, but can be had for less if you must have a top-end Samsung for the lowest possible cost or dislike curved screens.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>It doesn’t feel any smaller in the hand, but can be had for less if you must have a top-end Samsung for the lowest possible cost or dislike curved screens.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a795b335-1344-40c8-9fef-f47109c5b76f',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=samsung%20galaxy%20s10e%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=samsung%20galaxy%20s10e%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of samsung galaxy s10e',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: '77d31063-7861-4381-a5d7-d8d8354381da',
 				},
 				{
 					html: '<p><strong>Samsung Galaxy S10+</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '872d285c-d520-4897-8c6e-42b34e6e4389',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£899</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$999</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£899</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$999</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'c668d943-cb8a-40ed-8d09-110cc487670c',
 				},
 				{
 					html: '<p>★★★★★</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '0d489066-4191-4196-b058-d095fde9e803',
 				},
 				{
@@ -5907,8 +5152,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/2406.jpg',
+								url: 'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/2406.jpg',
 							},
 							{
 								index: 1,
@@ -5919,8 +5163,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg',
+								url: 'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg',
 							},
 							{
 								index: 2,
@@ -5930,8 +5173,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/2000.jpg',
+								url: 'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/2000.jpg',
 							},
 							{
 								index: 3,
@@ -5941,8 +5183,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/1000.jpg',
+								url: 'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/1000.jpg',
 							},
 							{
 								index: 4,
@@ -5952,8 +5193,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/500.jpg',
+								url: 'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/500.jpg',
 							},
 							{
 								index: 5,
@@ -5963,8 +5203,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/140.jpg',
+								url: 'https://media.guim.co.uk/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/140.jpg',
 							},
 						],
 					},
@@ -5979,33 +5218,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=85&auto=format&fit=max&s=39af1e48032054f8d7aa5534909c5934',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=85&auto=format&fit=max&s=39af1e48032054f8d7aa5534909c5934',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5af11279fab1fffec968a049ea656b47',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5af11279fab1fffec968a049ea656b47',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=85&auto=format&fit=max&s=9a527fc97fadcdcf83773ec1dc5b35d8',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=85&auto=format&fit=max&s=9a527fc97fadcdcf83773ec1dc5b35d8',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=31d28dce7ec7002c9ffda771b9838743',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=31d28dce7ec7002c9ffda771b9838743',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=85&auto=format&fit=max&s=fd477718698cb317b86bcaacf4dafb30',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=85&auto=format&fit=max&s=fd477718698cb317b86bcaacf4dafb30',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4833e866766b70e8d2e395dcf773625',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4833e866766b70e8d2e395dcf773625',
 									width: 890,
 								},
 							],
@@ -6014,23 +5247,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=140&quality=85&auto=format&fit=max&s=17ce4050cba7df643e68c6145cbafdc6',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=140&quality=85&auto=format&fit=max&s=17ce4050cba7df643e68c6145cbafdc6',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=b5d074de003533c1346a15b370f97dea',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=b5d074de003533c1346a15b370f97dea',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=120&quality=85&auto=format&fit=max&s=67e78486ebd82e951f8c2f9ed7ce8d02',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=120&quality=85&auto=format&fit=max&s=67e78486ebd82e951f8c2f9ed7ce8d02',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=a3a5dc446e340fa860024c99b4494b6c',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=a3a5dc446e340fa860024c99b4494b6c',
 									width: 240,
 								},
 							],
@@ -6039,53 +5268,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=380&quality=85&auto=format&fit=max&s=75166563f69bc2782c2008e54a2e8bd0',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=380&quality=85&auto=format&fit=max&s=75166563f69bc2782c2008e54a2e8bd0',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=b6d679edf3b12161d0026c33198d4e5d',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=b6d679edf3b12161d0026c33198d4e5d',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=300&quality=85&auto=format&fit=max&s=ec3fe0370750f78803572211345d3d1c',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=300&quality=85&auto=format&fit=max&s=ec3fe0370750f78803572211345d3d1c',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=9f0460f3f8f16141aee2cbf8685994b1',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=9f0460f3f8f16141aee2cbf8685994b1',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=85&auto=format&fit=max&s=39af1e48032054f8d7aa5534909c5934',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=85&auto=format&fit=max&s=39af1e48032054f8d7aa5534909c5934',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5af11279fab1fffec968a049ea656b47',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5af11279fab1fffec968a049ea656b47',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=85&auto=format&fit=max&s=9a527fc97fadcdcf83773ec1dc5b35d8',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=85&auto=format&fit=max&s=9a527fc97fadcdcf83773ec1dc5b35d8',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=31d28dce7ec7002c9ffda771b9838743',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=31d28dce7ec7002c9ffda771b9838743',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=85&auto=format&fit=max&s=fd477718698cb317b86bcaacf4dafb30',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=85&auto=format&fit=max&s=fd477718698cb317b86bcaacf4dafb30',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4833e866766b70e8d2e395dcf773625',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4833e866766b70e8d2e395dcf773625',
 									width: 890,
 								},
 							],
@@ -6094,73 +5313,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1020&quality=85&auto=format&fit=max&s=26954abe41e43e3ce2891c6e04143995',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1020&quality=85&auto=format&fit=max&s=26954abe41e43e3ce2891c6e04143995',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=b48541ebbc7350fe3fa8af528cbbd141',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=b48541ebbc7350fe3fa8af528cbbd141',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=940&quality=85&auto=format&fit=max&s=d6b53b0b9259da45a8bdb882ecd3cf4a',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=940&quality=85&auto=format&fit=max&s=d6b53b0b9259da45a8bdb882ecd3cf4a',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=95fdf5ba57c2c189e7ce33995cc9eddf',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=95fdf5ba57c2c189e7ce33995cc9eddf',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=700&quality=85&auto=format&fit=max&s=85c8cd6969b60d2188f6ab8321163b2c',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=700&quality=85&auto=format&fit=max&s=85c8cd6969b60d2188f6ab8321163b2c',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=accdcdac1222b630aa05233ffc9159a6',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=accdcdac1222b630aa05233ffc9159a6',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=700&quality=85&auto=format&fit=max&s=85c8cd6969b60d2188f6ab8321163b2c',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=700&quality=85&auto=format&fit=max&s=85c8cd6969b60d2188f6ab8321163b2c',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=accdcdac1222b630aa05233ffc9159a6',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=accdcdac1222b630aa05233ffc9159a6',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=660&quality=85&auto=format&fit=max&s=795dcd5ad3400f1b230d45b175dd4bca',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=660&quality=85&auto=format&fit=max&s=795dcd5ad3400f1b230d45b175dd4bca',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=37b660e0988c941222d9aca8a1221d21',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=37b660e0988c941222d9aca8a1221d21',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=645&quality=85&auto=format&fit=max&s=709528b90c1a83f11a012f8df4b63715',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=645&quality=85&auto=format&fit=max&s=709528b90c1a83f11a012f8df4b63715',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ee8e5cff75a5012141fd77856d59c9c9',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ee8e5cff75a5012141fd77856d59c9c9',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=465&quality=85&auto=format&fit=max&s=c8e13918560ec7a8ec8a0d2e82b56b76',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=465&quality=85&auto=format&fit=max&s=c8e13918560ec7a8ec8a0d2e82b56b76',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=e2bef39b2607cd2c864c799be95f875f',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=e2bef39b2607cd2c864c799be95f875f',
 									width: 930,
 								},
 							],
@@ -6169,33 +5374,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=85&auto=format&fit=max&s=39af1e48032054f8d7aa5534909c5934',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=85&auto=format&fit=max&s=39af1e48032054f8d7aa5534909c5934',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5af11279fab1fffec968a049ea656b47',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5af11279fab1fffec968a049ea656b47',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=85&auto=format&fit=max&s=9a527fc97fadcdcf83773ec1dc5b35d8',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=85&auto=format&fit=max&s=9a527fc97fadcdcf83773ec1dc5b35d8',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=31d28dce7ec7002c9ffda771b9838743',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=31d28dce7ec7002c9ffda771b9838743',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=85&auto=format&fit=max&s=fd477718698cb317b86bcaacf4dafb30',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=85&auto=format&fit=max&s=fd477718698cb317b86bcaacf4dafb30',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4833e866766b70e8d2e395dcf773625',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4833e866766b70e8d2e395dcf773625',
 									width: 890,
 								},
 							],
@@ -6204,126 +5403,101 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1300&quality=85&auto=format&fit=max&s=27ee98efa6d0d4f8eec2ce7062d08059',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1300&quality=85&auto=format&fit=max&s=27ee98efa6d0d4f8eec2ce7062d08059',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=91ad7c54c1d9efa05949116a0841470a',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=91ad7c54c1d9efa05949116a0841470a',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1140&quality=85&auto=format&fit=max&s=654d005ee800b0956a55c1d6e0135711',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1140&quality=85&auto=format&fit=max&s=654d005ee800b0956a55c1d6e0135711',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=12cf7492da8dd5f7cace47d4598c3f1c',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=12cf7492da8dd5f7cace47d4598c3f1c',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1125&quality=85&auto=format&fit=max&s=02ec05e90107f6433cc9e6a64117d28c',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1125&quality=85&auto=format&fit=max&s=02ec05e90107f6433cc9e6a64117d28c',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=628624b99ea282c9507fbc146700c093',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=628624b99ea282c9507fbc146700c093',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=965&quality=85&auto=format&fit=max&s=6aca2e843d7f63bd509bbc70218f3de3',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=965&quality=85&auto=format&fit=max&s=6aca2e843d7f63bd509bbc70218f3de3',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a764526e85a98904bf07ab3f217f6236',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=a764526e85a98904bf07ab3f217f6236',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=725&quality=85&auto=format&fit=max&s=e9e315296ab80f666e218f4e5a9b0c8d',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=725&quality=85&auto=format&fit=max&s=e9e315296ab80f666e218f4e5a9b0c8d',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=81adbb408a75f1b3f344881d24b3aadb',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=81adbb408a75f1b3f344881d24b3aadb',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=645&quality=85&auto=format&fit=max&s=709528b90c1a83f11a012f8df4b63715',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=645&quality=85&auto=format&fit=max&s=709528b90c1a83f11a012f8df4b63715',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ee8e5cff75a5012141fd77856d59c9c9',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ee8e5cff75a5012141fd77856d59c9c9',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=465&quality=85&auto=format&fit=max&s=c8e13918560ec7a8ec8a0d2e82b56b76',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=465&quality=85&auto=format&fit=max&s=c8e13918560ec7a8ec8a0d2e82b56b76',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=e2bef39b2607cd2c864c799be95f875f',
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=e2bef39b2607cd2c864c799be95f875f',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '3b770983-679a-4bc3-8971-6cd61d01edc2',
 				},
 				{
-					html:
-						'<p>The bigger version of the Galaxy S10 with a 6.4in QHD+ display has the best screen available on any device. The oval-shaped hole-punch notch is novel, containing two good selfie cameras. The triple rear camera is good, but not a patch on the Huawei P30 Pro. Performance is good, so is the software, but the battery life is slightly disappointing compared with the best. The fingerprint scanner is a bit slow and can be frustrating to use.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The bigger version of the Galaxy S10 with a 6.4in QHD+ display has the best screen available on any device. The oval-shaped hole-punch notch is novel, containing two good selfie cameras. The triple rear camera is good, but not a patch on the Huawei P30 Pro. Performance is good, so is the software, but the battery life is slightly disappointing compared with the best. The fingerprint scanner is a bit slow and can be frustrating to use.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'aa35568f-9036-4283-8fb9-5dac09042d9f',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=samsung%20galaxy%20S10%20plus%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:106px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=samsung%20galaxy%20S10%20plus%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:106px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of samsung galaxy s10 plus',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: 'f290a3aa-f950-4e12-a0b7-28bf31433d8b',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/mar/11/samsung-galaxy-s10-plus-review-smartphone-ultrasonic-triple-camera">Samsung Galaxy S10+ review: a simply stunning screen</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/mar/11/samsung-galaxy-s10-plus-review-smartphone-ultrasonic-triple-camera">Samsung Galaxy S10+ review: a simply stunning screen</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3ec942b4-3902-4a26-9ba5-7add2103cf84',
 				},
 				{
 					html: '<p><strong>Samsung Galaxy Note 10+</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'c7b4ec4f-3e6b-465e-8da9-a9438fb4ff68',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-note10plus-sm-n975%2FSM-N975FZSDBTU%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£999</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-note10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,099</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-note10plus-sm-n975%2FSM-N975FZSDBTU%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£999</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-note10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,099</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '9a13a592-e21e-4c41-bba8-11d73c743ef8',
 				},
 				{
 					html: '<p>★★★★☆</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'f25a7970-2a16-4555-b263-efd3b8891c34',
 				},
 				{
@@ -6337,8 +5511,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/2784.jpg',
+								url: 'https://media.guim.co.uk/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/2784.jpg',
 							},
 							{
 								index: 1,
@@ -6349,8 +5522,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg',
+								url: 'https://media.guim.co.uk/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg',
 							},
 							{
 								index: 2,
@@ -6360,8 +5532,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/2000.jpg',
+								url: 'https://media.guim.co.uk/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/2000.jpg',
 							},
 							{
 								index: 3,
@@ -6371,8 +5542,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/1000.jpg',
+								url: 'https://media.guim.co.uk/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/1000.jpg',
 							},
 							{
 								index: 4,
@@ -6382,14 +5552,12 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/500.jpg',
+								url: 'https://media.guim.co.uk/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/500.jpg',
 							},
 						],
 					},
 					data: {
-						alt:
-							"smartphone buyer's guide - samsung galaxy note 10+",
+						alt: "smartphone buyer's guide - samsung galaxy note 10+",
 						credit: 'Photograph: Samuel Gibbs/The Guardian',
 					},
 					displayCredit: false,
@@ -6399,33 +5567,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=85&auto=format&fit=max&s=89759f27477c279473618b5f7146cade',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=85&auto=format&fit=max&s=89759f27477c279473618b5f7146cade',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1b4f8a1acc1f255ab5edee2301c79b03',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1b4f8a1acc1f255ab5edee2301c79b03',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=85&auto=format&fit=max&s=bd9ae1182d7ad6d0c9bf8363193f4158',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=85&auto=format&fit=max&s=bd9ae1182d7ad6d0c9bf8363193f4158',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=29fb3b2eebfb8f8c98072f00c6f7c4a3',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=29fb3b2eebfb8f8c98072f00c6f7c4a3',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=85&auto=format&fit=max&s=933484680da15c6a869ebe29e7dcd478',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=85&auto=format&fit=max&s=933484680da15c6a869ebe29e7dcd478',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=165d1eac8772a3570f3cacd1f8d2ba43',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=165d1eac8772a3570f3cacd1f8d2ba43',
 									width: 890,
 								},
 							],
@@ -6434,23 +5596,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=140&quality=85&auto=format&fit=max&s=20748c3c257708a9aba4e57b1b1a08a5',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=140&quality=85&auto=format&fit=max&s=20748c3c257708a9aba4e57b1b1a08a5',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=39ebe56682435c39101f426d0b39b791',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=39ebe56682435c39101f426d0b39b791',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=120&quality=85&auto=format&fit=max&s=59bf9960c68522075b936ed0a04429e7',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=120&quality=85&auto=format&fit=max&s=59bf9960c68522075b936ed0a04429e7',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=107b224716dd07c215c9d199870fb428',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=107b224716dd07c215c9d199870fb428',
 									width: 240,
 								},
 							],
@@ -6459,53 +5617,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=380&quality=85&auto=format&fit=max&s=f5483163ceb98d4f19d5d992023b3dbe',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=380&quality=85&auto=format&fit=max&s=f5483163ceb98d4f19d5d992023b3dbe',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=ca1fbcba6a5958900ffde8729d19243a',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=ca1fbcba6a5958900ffde8729d19243a',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=300&quality=85&auto=format&fit=max&s=95f5598485022a2956b2e5c36ea4030e',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=300&quality=85&auto=format&fit=max&s=95f5598485022a2956b2e5c36ea4030e',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=2d37b576f2aafac0c341127ed4e93270',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=2d37b576f2aafac0c341127ed4e93270',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=85&auto=format&fit=max&s=89759f27477c279473618b5f7146cade',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=85&auto=format&fit=max&s=89759f27477c279473618b5f7146cade',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1b4f8a1acc1f255ab5edee2301c79b03',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1b4f8a1acc1f255ab5edee2301c79b03',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=85&auto=format&fit=max&s=bd9ae1182d7ad6d0c9bf8363193f4158',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=85&auto=format&fit=max&s=bd9ae1182d7ad6d0c9bf8363193f4158',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=29fb3b2eebfb8f8c98072f00c6f7c4a3',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=29fb3b2eebfb8f8c98072f00c6f7c4a3',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=85&auto=format&fit=max&s=933484680da15c6a869ebe29e7dcd478',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=85&auto=format&fit=max&s=933484680da15c6a869ebe29e7dcd478',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=165d1eac8772a3570f3cacd1f8d2ba43',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=165d1eac8772a3570f3cacd1f8d2ba43',
 									width: 890,
 								},
 							],
@@ -6514,73 +5662,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1020&quality=85&auto=format&fit=max&s=b84eea3768bd0397ca52640788a88bc4',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1020&quality=85&auto=format&fit=max&s=b84eea3768bd0397ca52640788a88bc4',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=b0789e80efb86528ee11d6cde6dfd6f5',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=b0789e80efb86528ee11d6cde6dfd6f5',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=940&quality=85&auto=format&fit=max&s=265b0862f8826ca8aa5d00094d5b3fe5',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=940&quality=85&auto=format&fit=max&s=265b0862f8826ca8aa5d00094d5b3fe5',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=a536a66af324862b47dcbbb5a1e70d44',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=a536a66af324862b47dcbbb5a1e70d44',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=700&quality=85&auto=format&fit=max&s=ea576f16daba31d08ae3b82406d2b34e',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=700&quality=85&auto=format&fit=max&s=ea576f16daba31d08ae3b82406d2b34e',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=01554d97dcf272e262b9e8693fce6260',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=01554d97dcf272e262b9e8693fce6260',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=700&quality=85&auto=format&fit=max&s=ea576f16daba31d08ae3b82406d2b34e',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=700&quality=85&auto=format&fit=max&s=ea576f16daba31d08ae3b82406d2b34e',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=01554d97dcf272e262b9e8693fce6260',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=01554d97dcf272e262b9e8693fce6260',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=660&quality=85&auto=format&fit=max&s=d04aa693ae33914fbe51bf25f9415b38',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=660&quality=85&auto=format&fit=max&s=d04aa693ae33914fbe51bf25f9415b38',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=984615c01b025ac27c0920b5da705fb7',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=984615c01b025ac27c0920b5da705fb7',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=645&quality=85&auto=format&fit=max&s=720280e5bc9c51d21b9be321450df3a0',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=645&quality=85&auto=format&fit=max&s=720280e5bc9c51d21b9be321450df3a0',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ae1d00bb35ad43e8e50ce327f7b755fb',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ae1d00bb35ad43e8e50ce327f7b755fb',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=465&quality=85&auto=format&fit=max&s=4832f1475a314f9790e409c0ba94d794',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=465&quality=85&auto=format&fit=max&s=4832f1475a314f9790e409c0ba94d794',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=10e68e6ad2ec0752f38f4933390ebc9b',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=10e68e6ad2ec0752f38f4933390ebc9b',
 									width: 930,
 								},
 							],
@@ -6589,33 +5723,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=85&auto=format&fit=max&s=89759f27477c279473618b5f7146cade',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=85&auto=format&fit=max&s=89759f27477c279473618b5f7146cade',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1b4f8a1acc1f255ab5edee2301c79b03',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1b4f8a1acc1f255ab5edee2301c79b03',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=85&auto=format&fit=max&s=bd9ae1182d7ad6d0c9bf8363193f4158',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=85&auto=format&fit=max&s=bd9ae1182d7ad6d0c9bf8363193f4158',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=29fb3b2eebfb8f8c98072f00c6f7c4a3',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=29fb3b2eebfb8f8c98072f00c6f7c4a3',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=85&auto=format&fit=max&s=933484680da15c6a869ebe29e7dcd478',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=85&auto=format&fit=max&s=933484680da15c6a869ebe29e7dcd478',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=165d1eac8772a3570f3cacd1f8d2ba43',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=165d1eac8772a3570f3cacd1f8d2ba43',
 									width: 890,
 								},
 							],
@@ -6624,126 +5752,101 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1300&quality=85&auto=format&fit=max&s=4d38de129313ac74bee8eeb4ea987d35',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1300&quality=85&auto=format&fit=max&s=4d38de129313ac74bee8eeb4ea987d35',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=b540dba8b6ab3b9c9b9093643c4c0d6c',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=b540dba8b6ab3b9c9b9093643c4c0d6c',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1140&quality=85&auto=format&fit=max&s=5254fa62003d39895adfbcc7a2114f6d',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1140&quality=85&auto=format&fit=max&s=5254fa62003d39895adfbcc7a2114f6d',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=521adc7ab4560e3259e196938ba0c18c',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=521adc7ab4560e3259e196938ba0c18c',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1125&quality=85&auto=format&fit=max&s=81bf67ed36d7ba1563444c8631b2809b',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1125&quality=85&auto=format&fit=max&s=81bf67ed36d7ba1563444c8631b2809b',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=cef6f9c3860e948768f22df0703640c0',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=cef6f9c3860e948768f22df0703640c0',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=965&quality=85&auto=format&fit=max&s=fd327492afac24234d8f3267b0937fe3',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=965&quality=85&auto=format&fit=max&s=fd327492afac24234d8f3267b0937fe3',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=6ed0c677d1bc04ef2dcb213400c148e2',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=6ed0c677d1bc04ef2dcb213400c148e2',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=725&quality=85&auto=format&fit=max&s=31e2ad613799d31a9582dbed0958b767',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=725&quality=85&auto=format&fit=max&s=31e2ad613799d31a9582dbed0958b767',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=2cf017db808b4baad44dd7bff06750ca',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=2cf017db808b4baad44dd7bff06750ca',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=645&quality=85&auto=format&fit=max&s=720280e5bc9c51d21b9be321450df3a0',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=645&quality=85&auto=format&fit=max&s=720280e5bc9c51d21b9be321450df3a0',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ae1d00bb35ad43e8e50ce327f7b755fb',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=ae1d00bb35ad43e8e50ce327f7b755fb',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=465&quality=85&auto=format&fit=max&s=4832f1475a314f9790e409c0ba94d794',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=465&quality=85&auto=format&fit=max&s=4832f1475a314f9790e409c0ba94d794',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=10e68e6ad2ec0752f38f4933390ebc9b',
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=10e68e6ad2ec0752f38f4933390ebc9b',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '0486257a-3762-42f1-81bd-91133bb810d4',
 				},
 				{
-					html:
-						'<p>The Galaxy Note 10+ is a Samsung super-fan’s dream. It has the biggest screen on a Samsung with a monstrous 6.8in on the diagonal, new faster UFS3.0 storage, reasonable battery life and plenty of party tricks. The stylus can now be used as a magic wand for gestures, there are three cameras on the back and is available in a 5G version too. The fingerprint scanner is a bit slow and can be a bit frustrating to use.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The Galaxy Note 10+ is a Samsung super-fan’s dream. It has the biggest screen on a Samsung with a monstrous 6.8in on the diagonal, new faster UFS3.0 storage, reasonable battery life and plenty of party tricks. The stylus can now be used as a magic wand for gestures, there are three cameras on the back and is available in a 5G version too. The fingerprint scanner is a bit slow and can be a bit frustrating to use.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '84e42977-324a-4d23-8b3a-0a7298549056',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=Samsung%20Galaxy%20note%2010%20plus%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:106px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=Samsung%20Galaxy%20note%2010%20plus%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:106px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of samsung galaxy note 10+',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: '0e787476-daae-4203-b10c-4d197ee07fee',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/sep/12/samsung-galaxy-note-10-review-bigger-and-now-with-a-magic-wand">Samsung Galaxy Note 10+ review: bigger and now with a magic wand</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/sep/12/samsung-galaxy-note-10-review-bigger-and-now-with-a-magic-wand">Samsung Galaxy Note 10+ review: bigger and now with a magic wand</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '2bfaacb8-4171-47b7-9671-4d51d977028e',
 				},
 				{
 					html: '<p><strong>Samsung Galaxy S10 5G</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'deabe9cc-8b1f-47c2-895d-65d011a32a34',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10-sm-g977-5g%2FSM-G977BZAABTU%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,099</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2Fv2%2F%3Flink%3Dgalaxy-s10%2B&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,299</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10-sm-g977-5g%2FSM-G977BZAABTU%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,099</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2Fv2%2F%3Flink%3Dgalaxy-s10%2B&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,299</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '036fd2f1-5057-44d6-8d4b-c8339fc91d8c',
 				},
 				{
 					html: '<p>★★★★☆</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '32114f5c-dc31-4711-a097-17eae9cebb56',
 				},
 				{
@@ -6757,8 +5860,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/2602.jpg',
+								url: 'https://media.guim.co.uk/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/2602.jpg',
 							},
 							{
 								index: 1,
@@ -6769,8 +5871,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg',
+								url: 'https://media.guim.co.uk/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg',
 							},
 							{
 								index: 2,
@@ -6780,8 +5881,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/2000.jpg',
+								url: 'https://media.guim.co.uk/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/2000.jpg',
 							},
 							{
 								index: 3,
@@ -6791,8 +5891,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/1000.jpg',
+								url: 'https://media.guim.co.uk/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/1000.jpg',
 							},
 							{
 								index: 4,
@@ -6802,8 +5901,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/500.jpg',
+								url: 'https://media.guim.co.uk/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/500.jpg',
 							},
 						],
 					},
@@ -6818,33 +5916,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=85&auto=format&fit=max&s=1c9d85e54f8e72439479b49679a85c02',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=85&auto=format&fit=max&s=1c9d85e54f8e72439479b49679a85c02',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=76692d25f67756d0c74be1ce2724ece4',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=76692d25f67756d0c74be1ce2724ece4',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=85&auto=format&fit=max&s=db0e5c99c30a76320d0219f9d31b4894',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=85&auto=format&fit=max&s=db0e5c99c30a76320d0219f9d31b4894',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3069dbd3e7d4ad685abffab321b3423c',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3069dbd3e7d4ad685abffab321b3423c',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=85&auto=format&fit=max&s=3f8757cb8ae92200b44455d2b366aeec',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=85&auto=format&fit=max&s=3f8757cb8ae92200b44455d2b366aeec',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e93197d23f1c1b35e0583eb3e3065fe2',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e93197d23f1c1b35e0583eb3e3065fe2',
 									width: 890,
 								},
 							],
@@ -6853,23 +5945,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=140&quality=85&auto=format&fit=max&s=d4184b3c487c10615ab9838044850f67',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=140&quality=85&auto=format&fit=max&s=d4184b3c487c10615ab9838044850f67',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=9a31baaaebdfc5aa0821a824b2026931',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=9a31baaaebdfc5aa0821a824b2026931',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=120&quality=85&auto=format&fit=max&s=d99fd557ea555cb0e51a5fa7e6f9ee01',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=120&quality=85&auto=format&fit=max&s=d99fd557ea555cb0e51a5fa7e6f9ee01',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=cdca201d3fdb0f194ac9a9e67026db21',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=cdca201d3fdb0f194ac9a9e67026db21',
 									width: 240,
 								},
 							],
@@ -6878,53 +5966,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=380&quality=85&auto=format&fit=max&s=7059bbb867dcb7f06cccf552337ebff2',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=380&quality=85&auto=format&fit=max&s=7059bbb867dcb7f06cccf552337ebff2',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=8d9973ac1f625aa7cd7db8d760b557aa',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=8d9973ac1f625aa7cd7db8d760b557aa',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=300&quality=85&auto=format&fit=max&s=9f1d7fcc51894a9cb579033745117d05',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=300&quality=85&auto=format&fit=max&s=9f1d7fcc51894a9cb579033745117d05',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=26c78c9c8dbdd2e9f5d5434f571f0f4d',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=26c78c9c8dbdd2e9f5d5434f571f0f4d',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=85&auto=format&fit=max&s=1c9d85e54f8e72439479b49679a85c02',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=85&auto=format&fit=max&s=1c9d85e54f8e72439479b49679a85c02',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=76692d25f67756d0c74be1ce2724ece4',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=76692d25f67756d0c74be1ce2724ece4',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=85&auto=format&fit=max&s=db0e5c99c30a76320d0219f9d31b4894',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=85&auto=format&fit=max&s=db0e5c99c30a76320d0219f9d31b4894',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3069dbd3e7d4ad685abffab321b3423c',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3069dbd3e7d4ad685abffab321b3423c',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=85&auto=format&fit=max&s=3f8757cb8ae92200b44455d2b366aeec',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=85&auto=format&fit=max&s=3f8757cb8ae92200b44455d2b366aeec',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e93197d23f1c1b35e0583eb3e3065fe2',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e93197d23f1c1b35e0583eb3e3065fe2',
 									width: 890,
 								},
 							],
@@ -6933,73 +6011,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1020&quality=85&auto=format&fit=max&s=785b0f7d52bf78927d2d60d4bc2f56c0',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1020&quality=85&auto=format&fit=max&s=785b0f7d52bf78927d2d60d4bc2f56c0',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=b6d30faf89f63130d285ed87052e1feb',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=b6d30faf89f63130d285ed87052e1feb',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=940&quality=85&auto=format&fit=max&s=d59ff1f907d290852bbea9687b84f6e3',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=940&quality=85&auto=format&fit=max&s=d59ff1f907d290852bbea9687b84f6e3',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=79836d7a6a6aea0f26efe930c4d70e96',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=79836d7a6a6aea0f26efe930c4d70e96',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=700&quality=85&auto=format&fit=max&s=666b5da2493fbd27775c25f0077ac807',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=700&quality=85&auto=format&fit=max&s=666b5da2493fbd27775c25f0077ac807',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=9852be916051186b40cf10a133e44ab7',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=9852be916051186b40cf10a133e44ab7',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=700&quality=85&auto=format&fit=max&s=666b5da2493fbd27775c25f0077ac807',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=700&quality=85&auto=format&fit=max&s=666b5da2493fbd27775c25f0077ac807',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=9852be916051186b40cf10a133e44ab7',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=9852be916051186b40cf10a133e44ab7',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=660&quality=85&auto=format&fit=max&s=4528c57d40ab224539d7aa9a1801cd88',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=660&quality=85&auto=format&fit=max&s=4528c57d40ab224539d7aa9a1801cd88',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f2912944cb65764d234876899c630b76',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f2912944cb65764d234876899c630b76',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=645&quality=85&auto=format&fit=max&s=68e944ce35a091ac2cdc52c24a2c4ff2',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=645&quality=85&auto=format&fit=max&s=68e944ce35a091ac2cdc52c24a2c4ff2',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=a4a24f2051e289f5894fb1f334820421',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=a4a24f2051e289f5894fb1f334820421',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=465&quality=85&auto=format&fit=max&s=27f820bab484a4cb4d5aadf66824b1a0',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=465&quality=85&auto=format&fit=max&s=27f820bab484a4cb4d5aadf66824b1a0',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37dbb9e77aeeb42b7ec70c8c57dfd9d6',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37dbb9e77aeeb42b7ec70c8c57dfd9d6',
 									width: 930,
 								},
 							],
@@ -7008,33 +6072,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=85&auto=format&fit=max&s=1c9d85e54f8e72439479b49679a85c02',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=85&auto=format&fit=max&s=1c9d85e54f8e72439479b49679a85c02',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=76692d25f67756d0c74be1ce2724ece4',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=76692d25f67756d0c74be1ce2724ece4',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=85&auto=format&fit=max&s=db0e5c99c30a76320d0219f9d31b4894',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=85&auto=format&fit=max&s=db0e5c99c30a76320d0219f9d31b4894',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3069dbd3e7d4ad685abffab321b3423c',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3069dbd3e7d4ad685abffab321b3423c',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=85&auto=format&fit=max&s=3f8757cb8ae92200b44455d2b366aeec',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=85&auto=format&fit=max&s=3f8757cb8ae92200b44455d2b366aeec',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e93197d23f1c1b35e0583eb3e3065fe2',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e93197d23f1c1b35e0583eb3e3065fe2',
 									width: 890,
 								},
 							],
@@ -7043,125 +6101,101 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1300&quality=85&auto=format&fit=max&s=911f989e58119a71923e43cc68720681',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1300&quality=85&auto=format&fit=max&s=911f989e58119a71923e43cc68720681',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=ec4f65c08da26c48f865913c5fdad7cc',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=ec4f65c08da26c48f865913c5fdad7cc',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1140&quality=85&auto=format&fit=max&s=5eb96daf5236817d76117bc533f1d556',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1140&quality=85&auto=format&fit=max&s=5eb96daf5236817d76117bc533f1d556',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=65dc9e36832543934c553570a77a58f8',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=65dc9e36832543934c553570a77a58f8',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1125&quality=85&auto=format&fit=max&s=3cefc4014f158f5fbc951c936670f6af',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1125&quality=85&auto=format&fit=max&s=3cefc4014f158f5fbc951c936670f6af',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=719d3c13f8793c97c5f3fda988bf97e6',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=719d3c13f8793c97c5f3fda988bf97e6',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=965&quality=85&auto=format&fit=max&s=f8d03ecc8253415e4d80357e31b41b6a',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=965&quality=85&auto=format&fit=max&s=f8d03ecc8253415e4d80357e31b41b6a',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=4aeae62220866bf03d90457bf12fd538',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=4aeae62220866bf03d90457bf12fd538',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=725&quality=85&auto=format&fit=max&s=ff4070e3a0d577b918438d7e536c8ed9',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=725&quality=85&auto=format&fit=max&s=ff4070e3a0d577b918438d7e536c8ed9',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=b6b9cd1094b3768b65b8c954b7e7a82d',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=b6b9cd1094b3768b65b8c954b7e7a82d',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=645&quality=85&auto=format&fit=max&s=68e944ce35a091ac2cdc52c24a2c4ff2',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=645&quality=85&auto=format&fit=max&s=68e944ce35a091ac2cdc52c24a2c4ff2',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=a4a24f2051e289f5894fb1f334820421',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=a4a24f2051e289f5894fb1f334820421',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=465&quality=85&auto=format&fit=max&s=27f820bab484a4cb4d5aadf66824b1a0',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=465&quality=85&auto=format&fit=max&s=27f820bab484a4cb4d5aadf66824b1a0',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37dbb9e77aeeb42b7ec70c8c57dfd9d6',
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37dbb9e77aeeb42b7ec70c8c57dfd9d6',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '673aeb71-9c0b-4977-86b5-1f041686985c',
 				},
 				{
-					html:
-						'<p>The biggest, most powerful version of Samsung’s S-line is the S10 5G and it’s huge with a 6.7in QHD+ AMOLED screen, long oval-shaped hole-punch notch for the selfie cameras, and four cameras on the back. Performance, software and battery are good, but it’s not as slick or ergonomic as the OnePlus 7 Pro 5G. The fingerprint scanner is a bit slow and can be frustrating to use.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The biggest, most powerful version of Samsung’s S-line is the S10 5G and it’s huge with a 6.7in QHD+ AMOLED screen, long oval-shaped hole-punch notch for the selfie cameras, and four cameras on the back. Performance, software and battery are good, but it’s not as slick or ergonomic as the OnePlus 7 Pro 5G. The fingerprint scanner is a bit slow and can be frustrating to use.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '2791074c-c659-4eb1-8a14-3b57c5b5249f',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=Samsung%20Galaxy%20s10%205g%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=Samsung%20Galaxy%20s10%205g%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of Samsung Galaxy S10 5G',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: '2d03d795-5149-454e-b74e-2b771f803fde',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/aug/21/samsung-galaxy-s10-5g-review-bigger-faster-and-lasts-longer">Samsung Galaxy S10 5G review: bigger, faster and lasts longer</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/aug/21/samsung-galaxy-s10-5g-review-bigger-faster-and-lasts-longer">Samsung Galaxy S10 5G review: bigger, faster and lasts longer</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '8d3a6e1a-a5f8-4f77-8a4e-d751a5bb6b90',
 				},
 				{
 					html: '<p><strong>Huawei Mate 20 Pro</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '9dfeb9fc-fa00-4f8d-8666-c2c8cb42a54d',
 				},
 				{
 					html: '<p><strong>RRP: </strong>£899.99</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '6fd0d15d-3696-494f-841a-537a313d43c0',
 				},
 				{
 					html: '<p>★★★★★</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a8529642-6a17-4c04-95c7-2c8ae83d7b37',
 				},
 				{
@@ -7175,8 +6209,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/2309.jpg',
+								url: 'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/2309.jpg',
 							},
 							{
 								index: 1,
@@ -7187,8 +6220,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg',
+								url: 'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg',
 							},
 							{
 								index: 2,
@@ -7198,8 +6230,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/2000.jpg',
+								url: 'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/2000.jpg',
 							},
 							{
 								index: 3,
@@ -7209,8 +6240,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/1000.jpg',
+								url: 'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/1000.jpg',
 							},
 							{
 								index: 4,
@@ -7220,8 +6250,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/500.jpg',
+								url: 'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/500.jpg',
 							},
 							{
 								index: 5,
@@ -7231,8 +6260,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/140.jpg',
+								url: 'https://media.guim.co.uk/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/140.jpg',
 							},
 						],
 					},
@@ -7247,33 +6275,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=85&auto=format&fit=max&s=805c5fbff7431f93dab075de73b6e477',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=85&auto=format&fit=max&s=805c5fbff7431f93dab075de73b6e477',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8196c3ea81581d5d7bbafbbed70b40ad',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8196c3ea81581d5d7bbafbbed70b40ad',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=85&auto=format&fit=max&s=00d68514d2e041127c46334a39da162f',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=85&auto=format&fit=max&s=00d68514d2e041127c46334a39da162f',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5d893b9313b825bc3e78195a02e2dc8b',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5d893b9313b825bc3e78195a02e2dc8b',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=85&auto=format&fit=max&s=3b348d173cbe3eb2020f37e098832a72',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=85&auto=format&fit=max&s=3b348d173cbe3eb2020f37e098832a72',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=328f565150b50c0ed7caae86fccd9d1f',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=328f565150b50c0ed7caae86fccd9d1f',
 									width: 890,
 								},
 							],
@@ -7282,23 +6304,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=140&quality=85&auto=format&fit=max&s=2d3e29b7d16a391b6bd2f41c47515fa4',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=140&quality=85&auto=format&fit=max&s=2d3e29b7d16a391b6bd2f41c47515fa4',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=a90ce071a63e09d22c6fd3effac45525',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=a90ce071a63e09d22c6fd3effac45525',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=120&quality=85&auto=format&fit=max&s=457c416e62722e2d1ef92dc352f52eae',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=120&quality=85&auto=format&fit=max&s=457c416e62722e2d1ef92dc352f52eae',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=1811a6bb0164ffb88af66386e548e3c5',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=1811a6bb0164ffb88af66386e548e3c5',
 									width: 240,
 								},
 							],
@@ -7307,53 +6325,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=380&quality=85&auto=format&fit=max&s=a6c01b1a6882535ebfe2ab267388eb1d',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=380&quality=85&auto=format&fit=max&s=a6c01b1a6882535ebfe2ab267388eb1d',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=70473f3996fe10d0e22083a367588ace',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=70473f3996fe10d0e22083a367588ace',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=300&quality=85&auto=format&fit=max&s=54351ab0281ab1242b598bbb85e3425d',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=300&quality=85&auto=format&fit=max&s=54351ab0281ab1242b598bbb85e3425d',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=3d9d380d32db530b017d58409bc17045',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=3d9d380d32db530b017d58409bc17045',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=85&auto=format&fit=max&s=805c5fbff7431f93dab075de73b6e477',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=85&auto=format&fit=max&s=805c5fbff7431f93dab075de73b6e477',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8196c3ea81581d5d7bbafbbed70b40ad',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8196c3ea81581d5d7bbafbbed70b40ad',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=85&auto=format&fit=max&s=00d68514d2e041127c46334a39da162f',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=85&auto=format&fit=max&s=00d68514d2e041127c46334a39da162f',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5d893b9313b825bc3e78195a02e2dc8b',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5d893b9313b825bc3e78195a02e2dc8b',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=85&auto=format&fit=max&s=3b348d173cbe3eb2020f37e098832a72',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=85&auto=format&fit=max&s=3b348d173cbe3eb2020f37e098832a72',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=328f565150b50c0ed7caae86fccd9d1f',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=328f565150b50c0ed7caae86fccd9d1f',
 									width: 890,
 								},
 							],
@@ -7362,73 +6370,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1020&quality=85&auto=format&fit=max&s=d32d120c33af8d14a91f72bd64e96460',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1020&quality=85&auto=format&fit=max&s=d32d120c33af8d14a91f72bd64e96460',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f0dc3ff0140881f27889fd94d49b9247',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=f0dc3ff0140881f27889fd94d49b9247',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=940&quality=85&auto=format&fit=max&s=e0bbdd3e60be0a0343e4ea3ebf1f0f38',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=940&quality=85&auto=format&fit=max&s=e0bbdd3e60be0a0343e4ea3ebf1f0f38',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=8fd8f694db782877d41c2a94c1b00dfa',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=8fd8f694db782877d41c2a94c1b00dfa',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=700&quality=85&auto=format&fit=max&s=82185685b479da04ef44cb641f8bde62',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=700&quality=85&auto=format&fit=max&s=82185685b479da04ef44cb641f8bde62',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=14f010b0c0bc26f96be1243d20b56c70',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=14f010b0c0bc26f96be1243d20b56c70',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=700&quality=85&auto=format&fit=max&s=82185685b479da04ef44cb641f8bde62',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=700&quality=85&auto=format&fit=max&s=82185685b479da04ef44cb641f8bde62',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=14f010b0c0bc26f96be1243d20b56c70',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=14f010b0c0bc26f96be1243d20b56c70',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=660&quality=85&auto=format&fit=max&s=48fa99d38d75df98560acd9270e88e08',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=660&quality=85&auto=format&fit=max&s=48fa99d38d75df98560acd9270e88e08',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=4fc3d30ccd111d745196410c491e0700',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=4fc3d30ccd111d745196410c491e0700',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=645&quality=85&auto=format&fit=max&s=503ff6520fae3b7f41b2977c74d4e386',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=645&quality=85&auto=format&fit=max&s=503ff6520fae3b7f41b2977c74d4e386',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=4b648d0831cd4a09e1ed22e7fce02fbe',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=4b648d0831cd4a09e1ed22e7fce02fbe',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=465&quality=85&auto=format&fit=max&s=0e3db5c0a305f60e2bde59e8cf23fde7',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=465&quality=85&auto=format&fit=max&s=0e3db5c0a305f60e2bde59e8cf23fde7',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=848d3bb8cfda1b792b47e96fc69e479f',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=848d3bb8cfda1b792b47e96fc69e479f',
 									width: 930,
 								},
 							],
@@ -7437,33 +6431,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=85&auto=format&fit=max&s=805c5fbff7431f93dab075de73b6e477',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=85&auto=format&fit=max&s=805c5fbff7431f93dab075de73b6e477',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8196c3ea81581d5d7bbafbbed70b40ad',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8196c3ea81581d5d7bbafbbed70b40ad',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=85&auto=format&fit=max&s=00d68514d2e041127c46334a39da162f',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=85&auto=format&fit=max&s=00d68514d2e041127c46334a39da162f',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5d893b9313b825bc3e78195a02e2dc8b',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5d893b9313b825bc3e78195a02e2dc8b',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=85&auto=format&fit=max&s=3b348d173cbe3eb2020f37e098832a72',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=85&auto=format&fit=max&s=3b348d173cbe3eb2020f37e098832a72',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=328f565150b50c0ed7caae86fccd9d1f',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=328f565150b50c0ed7caae86fccd9d1f',
 									width: 890,
 								},
 							],
@@ -7472,126 +6460,101 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1300&quality=85&auto=format&fit=max&s=24cc0a4371e0d529f66c1062ed5590e2',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1300&quality=85&auto=format&fit=max&s=24cc0a4371e0d529f66c1062ed5590e2',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=efa1af746b116072b25db31fd4d22911',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=efa1af746b116072b25db31fd4d22911',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1140&quality=85&auto=format&fit=max&s=3aefface9a9b6b0dcb85f4d96d3b96e0',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1140&quality=85&auto=format&fit=max&s=3aefface9a9b6b0dcb85f4d96d3b96e0',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3a4a9879fe22959880722e105bade1fc',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3a4a9879fe22959880722e105bade1fc',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1125&quality=85&auto=format&fit=max&s=9b30a683f1813927881bde45e0eb9152',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1125&quality=85&auto=format&fit=max&s=9b30a683f1813927881bde45e0eb9152',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e5c3692d254ac28c78c9529ff6e02eef',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e5c3692d254ac28c78c9529ff6e02eef',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=965&quality=85&auto=format&fit=max&s=02185eb47b16ac6305a793244408f649',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=965&quality=85&auto=format&fit=max&s=02185eb47b16ac6305a793244408f649',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=65c3da6c3f2c394b9475666ca0551717',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=65c3da6c3f2c394b9475666ca0551717',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=725&quality=85&auto=format&fit=max&s=4419a67ba0023205b482235fafaec218',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=725&quality=85&auto=format&fit=max&s=4419a67ba0023205b482235fafaec218',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=2a61cda6c28710e0b7f21fdb3bb8c2ea',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=2a61cda6c28710e0b7f21fdb3bb8c2ea',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=645&quality=85&auto=format&fit=max&s=503ff6520fae3b7f41b2977c74d4e386',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=645&quality=85&auto=format&fit=max&s=503ff6520fae3b7f41b2977c74d4e386',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=4b648d0831cd4a09e1ed22e7fce02fbe',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=4b648d0831cd4a09e1ed22e7fce02fbe',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=465&quality=85&auto=format&fit=max&s=0e3db5c0a305f60e2bde59e8cf23fde7',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=465&quality=85&auto=format&fit=max&s=0e3db5c0a305f60e2bde59e8cf23fde7',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=848d3bb8cfda1b792b47e96fc69e479f',
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=848d3bb8cfda1b792b47e96fc69e479f',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '7be8bcf8-4d95-4a53-9c0a-0faeb5983e5e',
 				},
 				{
-					html:
-						'<p>The Mate 20 Pro has the big, attractive 6.39in QHD+ screen, svelte body, long battery life and great performance that made it the top phone of 2018. However, its excellent triple camera system with 3x optical zoom has been outdone by Huawei’s newer P30 Pro, which has a Leica quad camera with 5x optical zoom. It recently received EMUI 10 (Android 10) and is worth looking out for deals, particularly if you want the 3D face unlock option.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The Mate 20 Pro has the big, attractive 6.39in QHD+ screen, svelte body, long battery life and great performance that made it the top phone of 2018. However, its excellent triple camera system with 3x optical zoom has been outdone by Huawei’s newer P30 Pro, which has a Leica quad camera with 5x optical zoom. It recently received EMUI 10 (Android 10) and is worth looking out for deals, particularly if you want the 3D face unlock option.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a7269fe6-e077-47c7-abee-e9937e6e87f0',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=huawei%20mate%2020%20pro%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:147px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=huawei%20mate%2020%20pro%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:147px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of huawei mate 20 pro',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: 'cf5ba707-52be-4e5c-aee8-9dfb3557e35f',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2018/oct/29/huawei-mate-20-pro-cutting-edge-brilliance-in-display-fingerprint-and-3d-face-scanning-triple-camera-long-battery-life">Huawei Mate 20 Pro review: cutting-edge brilliance</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2018/oct/29/huawei-mate-20-pro-cutting-edge-brilliance-in-display-fingerprint-and-3d-face-scanning-triple-camera-long-battery-life">Huawei Mate 20 Pro review: cutting-edge brilliance</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '7d08be09-5f79-4cc0-84d1-6157059c95bd',
 				},
 				{
 					html: '<p><strong>Google Pixel 4 XL</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'e459b36f-bb9a-4aef-a439-40ffb8743510',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://store.google.com/gb/config/pixel_4">£829</a> / <a href="https://store.google.com/config/pixel_4">$899</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://store.google.com/gb/config/pixel_4">£829</a> / <a href="https://store.google.com/config/pixel_4">$899</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '6245d183-e523-4f10-943e-af77ad785842',
 				},
 				{
 					html: '<p>★★★★☆</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'd5b949ea-61e6-4949-8b94-4a7bbefbcc4d',
 				},
 				{
@@ -7605,8 +6568,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/2693.jpg',
+								url: 'https://media.guim.co.uk/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/2693.jpg',
 							},
 							{
 								index: 1,
@@ -7617,8 +6579,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg',
+								url: 'https://media.guim.co.uk/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg',
 							},
 							{
 								index: 2,
@@ -7628,8 +6589,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/2000.jpg',
+								url: 'https://media.guim.co.uk/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/2000.jpg',
 							},
 							{
 								index: 3,
@@ -7639,8 +6599,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/1000.jpg',
+								url: 'https://media.guim.co.uk/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/1000.jpg',
 							},
 							{
 								index: 4,
@@ -7650,8 +6609,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/500.jpg',
+								url: 'https://media.guim.co.uk/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/500.jpg',
 							},
 						],
 					},
@@ -7666,33 +6624,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=85&auto=format&fit=max&s=e58069073e7562cc9fdd5a3487730b04',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=85&auto=format&fit=max&s=e58069073e7562cc9fdd5a3487730b04',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3070dd72306dfe47d3ea790a0d446fa1',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3070dd72306dfe47d3ea790a0d446fa1',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=85&auto=format&fit=max&s=771798cf9f2d9c0926cd4b52630c80a9',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=85&auto=format&fit=max&s=771798cf9f2d9c0926cd4b52630c80a9',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f6fd843aefe34ae5db01a5fefbb112c3',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f6fd843aefe34ae5db01a5fefbb112c3',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=85&auto=format&fit=max&s=d778ad245273ec7afbf8b2a5fbe136e9',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=85&auto=format&fit=max&s=d778ad245273ec7afbf8b2a5fbe136e9',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=373c340205a827095338704f6d9f29de',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=373c340205a827095338704f6d9f29de',
 									width: 890,
 								},
 							],
@@ -7701,23 +6653,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=140&quality=85&auto=format&fit=max&s=00c7420ac11346f46749bdc2d3fc2437',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=140&quality=85&auto=format&fit=max&s=00c7420ac11346f46749bdc2d3fc2437',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=8b3386eef4601310add04a7e51941d13',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=8b3386eef4601310add04a7e51941d13',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=120&quality=85&auto=format&fit=max&s=78cbe5d504e515e346327d6c8cf01557',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=120&quality=85&auto=format&fit=max&s=78cbe5d504e515e346327d6c8cf01557',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=7c2137d1db2d6eb5fc2265c390f5d2b1',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=7c2137d1db2d6eb5fc2265c390f5d2b1',
 									width: 240,
 								},
 							],
@@ -7726,53 +6674,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=380&quality=85&auto=format&fit=max&s=0f50b300f5133ebd8c0e2c1a970744ab',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=380&quality=85&auto=format&fit=max&s=0f50b300f5133ebd8c0e2c1a970744ab',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=2a7bf86e85df94a453fb4914c04bd053',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=2a7bf86e85df94a453fb4914c04bd053',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=300&quality=85&auto=format&fit=max&s=524b5a9e302312d506d7221db4a79178',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=300&quality=85&auto=format&fit=max&s=524b5a9e302312d506d7221db4a79178',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=224923ced01e81527bceeb624b407266',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=224923ced01e81527bceeb624b407266',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=85&auto=format&fit=max&s=e58069073e7562cc9fdd5a3487730b04',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=85&auto=format&fit=max&s=e58069073e7562cc9fdd5a3487730b04',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3070dd72306dfe47d3ea790a0d446fa1',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3070dd72306dfe47d3ea790a0d446fa1',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=85&auto=format&fit=max&s=771798cf9f2d9c0926cd4b52630c80a9',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=85&auto=format&fit=max&s=771798cf9f2d9c0926cd4b52630c80a9',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f6fd843aefe34ae5db01a5fefbb112c3',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f6fd843aefe34ae5db01a5fefbb112c3',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=85&auto=format&fit=max&s=d778ad245273ec7afbf8b2a5fbe136e9',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=85&auto=format&fit=max&s=d778ad245273ec7afbf8b2a5fbe136e9',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=373c340205a827095338704f6d9f29de',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=373c340205a827095338704f6d9f29de',
 									width: 890,
 								},
 							],
@@ -7781,73 +6719,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1020&quality=85&auto=format&fit=max&s=99ae7c74705b6dc04abe5dc6c4862acd',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1020&quality=85&auto=format&fit=max&s=99ae7c74705b6dc04abe5dc6c4862acd',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=949c38217a281b1694d1028edbc1cdd0',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=949c38217a281b1694d1028edbc1cdd0',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=940&quality=85&auto=format&fit=max&s=a6acc6907b6949991264085b3072310f',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=940&quality=85&auto=format&fit=max&s=a6acc6907b6949991264085b3072310f',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=36af2fa51813fa3145728e2ad1517f33',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=36af2fa51813fa3145728e2ad1517f33',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=700&quality=85&auto=format&fit=max&s=fe70792ce80e3c6de202d70f6ad272e7',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=700&quality=85&auto=format&fit=max&s=fe70792ce80e3c6de202d70f6ad272e7',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d444f87a10c82271de647e8349cf7b45',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d444f87a10c82271de647e8349cf7b45',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=700&quality=85&auto=format&fit=max&s=fe70792ce80e3c6de202d70f6ad272e7',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=700&quality=85&auto=format&fit=max&s=fe70792ce80e3c6de202d70f6ad272e7',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d444f87a10c82271de647e8349cf7b45',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d444f87a10c82271de647e8349cf7b45',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=660&quality=85&auto=format&fit=max&s=6c9fe8abb3bfe69547c53aeaa5fd539b',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=660&quality=85&auto=format&fit=max&s=6c9fe8abb3bfe69547c53aeaa5fd539b',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=8802c47ceb09f85d00c5bfde1906c847',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=8802c47ceb09f85d00c5bfde1906c847',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=645&quality=85&auto=format&fit=max&s=4c29522d77997bcfbb6c579fadca81e9',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=645&quality=85&auto=format&fit=max&s=4c29522d77997bcfbb6c579fadca81e9',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=c8931741de67e50c1f22ddc048818ec3',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=c8931741de67e50c1f22ddc048818ec3',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=465&quality=85&auto=format&fit=max&s=48739bfd68f7aac15ad8f8d48d36db5b',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=465&quality=85&auto=format&fit=max&s=48739bfd68f7aac15ad8f8d48d36db5b',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=1edf39e2b60d68b25918eac7c4d569b0',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=1edf39e2b60d68b25918eac7c4d569b0',
 									width: 930,
 								},
 							],
@@ -7856,33 +6780,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=85&auto=format&fit=max&s=e58069073e7562cc9fdd5a3487730b04',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=85&auto=format&fit=max&s=e58069073e7562cc9fdd5a3487730b04',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3070dd72306dfe47d3ea790a0d446fa1',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3070dd72306dfe47d3ea790a0d446fa1',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=85&auto=format&fit=max&s=771798cf9f2d9c0926cd4b52630c80a9',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=85&auto=format&fit=max&s=771798cf9f2d9c0926cd4b52630c80a9',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f6fd843aefe34ae5db01a5fefbb112c3',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f6fd843aefe34ae5db01a5fefbb112c3',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=85&auto=format&fit=max&s=d778ad245273ec7afbf8b2a5fbe136e9',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=85&auto=format&fit=max&s=d778ad245273ec7afbf8b2a5fbe136e9',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=373c340205a827095338704f6d9f29de',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=373c340205a827095338704f6d9f29de',
 									width: 890,
 								},
 							],
@@ -7891,126 +6809,101 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1300&quality=85&auto=format&fit=max&s=dc89c011ee5d19f207866b72edcbe661',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1300&quality=85&auto=format&fit=max&s=dc89c011ee5d19f207866b72edcbe661',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=bb40548b8617c58295b00a0484c839b5',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=bb40548b8617c58295b00a0484c839b5',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1140&quality=85&auto=format&fit=max&s=9586791926217a3620161ff359154529',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1140&quality=85&auto=format&fit=max&s=9586791926217a3620161ff359154529',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=f139685957f49d6fbbe5e2244f8f3eff',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=f139685957f49d6fbbe5e2244f8f3eff',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1125&quality=85&auto=format&fit=max&s=eb9a3ceffb606f8d12d8a372622cdc74',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1125&quality=85&auto=format&fit=max&s=eb9a3ceffb606f8d12d8a372622cdc74',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=db2d33dd8e8fb89b6008818abda8eeb3',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=db2d33dd8e8fb89b6008818abda8eeb3',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=965&quality=85&auto=format&fit=max&s=d7eb0c6d32375dc2376e7b31861d7416',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=965&quality=85&auto=format&fit=max&s=d7eb0c6d32375dc2376e7b31861d7416',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=dda21a674a97fa5bb00f1c3f045bff67',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=dda21a674a97fa5bb00f1c3f045bff67',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=725&quality=85&auto=format&fit=max&s=af99fcf182f2ebaa061e5abf4544c32e',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=725&quality=85&auto=format&fit=max&s=af99fcf182f2ebaa061e5abf4544c32e',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=2898408fa14ad42bbd45a8e6e803150d',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=2898408fa14ad42bbd45a8e6e803150d',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=645&quality=85&auto=format&fit=max&s=4c29522d77997bcfbb6c579fadca81e9',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=645&quality=85&auto=format&fit=max&s=4c29522d77997bcfbb6c579fadca81e9',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=c8931741de67e50c1f22ddc048818ec3',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=c8931741de67e50c1f22ddc048818ec3',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=465&quality=85&auto=format&fit=max&s=48739bfd68f7aac15ad8f8d48d36db5b',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=465&quality=85&auto=format&fit=max&s=48739bfd68f7aac15ad8f8d48d36db5b',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=1edf39e2b60d68b25918eac7c4d569b0',
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=1edf39e2b60d68b25918eac7c4d569b0',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: 'd9a17ce9-d4f5-4201-b330-f4caab2c7629',
 				},
 				{
-					html:
-						'<p>The Google Pixel 4 XL is a mixed bag. On the one hand you have a good-looking 6.3in QHD+ AMOLED display running at 90Hz, a stellar camera, new Soli radar gesture system, amazing new on-device AI and super-fast 3D Face Unlock. But on the other you have no fingerprint scanner, meaning until apps are updated to use the Face Unlock you’re forced back to using the old pin or password, the battery life is fairly short and there have been quite a few bugs that have needed fixing since launch. One day it might be great.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The Google Pixel 4 XL is a mixed bag. On the one hand you have a good-looking 6.3in QHD+ AMOLED display running at 90Hz, a stellar camera, new Soli radar gesture system, amazing new on-device AI and super-fast 3D Face Unlock. But on the other you have no fingerprint scanner, meaning until apps are updated to use the Face Unlock you’re forced back to using the old pin or password, the battery life is fairly short and there have been quite a few bugs that have needed fixing since launch. One day it might be great.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '5fe54ff0-86e5-40a0-8fba-5ef5ef00e5a3',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=google%20pixel%204%20xl%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=google%20pixel%204%20xl%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=300&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of google pixel 4 xl',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: 'a89563e1-a97b-43fe-a7c9-32ecf753c3ba',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/29/google-pixel-4-xl-review-not-quite-ready-for-primetime">Google Pixel 4 XL review: not quite ready for primetime</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/29/google-pixel-4-xl-review-not-quite-ready-for-primetime">Google Pixel 4 XL review: not quite ready for primetime</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '00603b09-2f93-4c1f-ad5b-f0ba2fb52d0b',
 				},
 				{
 					html: '<p><strong>Xiaomi Mi Mix 3</strong></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '13ceab78-3b76-4cfb-9d98-0468d594d1f5',
 				},
 				{
-					html:
-						'<p><strong>RRP:</strong> <a href="https://buy.mi.com/uk/buy/product/mix3">£499</a></p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>RRP:</strong> <a href="https://buy.mi.com/uk/buy/product/mix3">£499</a></p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '3bd45feb-90e7-46ef-a91b-d7668f6bfbc5',
 				},
 				{
 					html: '<p>★★★★☆</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '62417830-0521-4bc5-9731-61dace6d6e00',
 				},
 				{
@@ -8024,8 +6917,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/2302.jpg',
+								url: 'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/2302.jpg',
 							},
 							{
 								index: 1,
@@ -8036,8 +6928,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg',
+								url: 'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg',
 							},
 							{
 								index: 2,
@@ -8047,8 +6938,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/2000.jpg',
+								url: 'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/2000.jpg',
 							},
 							{
 								index: 3,
@@ -8058,8 +6948,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/1000.jpg',
+								url: 'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/1000.jpg',
 							},
 							{
 								index: 4,
@@ -8069,8 +6958,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/500.jpg',
+								url: 'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/500.jpg',
 							},
 							{
 								index: 5,
@@ -8080,8 +6968,7 @@ export const NumberedList: CAPIType = {
 								},
 								mediaType: 'Image',
 								mimeType: 'image/jpeg',
-								url:
-									'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/140.jpg',
+								url: 'https://media.guim.co.uk/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/140.jpg',
 							},
 						],
 					},
@@ -8096,33 +6983,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'inline',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=85&auto=format&fit=max&s=6405cc5360b28c13c57ff720a0dcbf83',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=85&auto=format&fit=max&s=6405cc5360b28c13c57ff720a0dcbf83',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=87952983329d86853791f47ade5bf818',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=87952983329d86853791f47ade5bf818',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=85&auto=format&fit=max&s=a4f338e55da6c099f8f6fd40dd1ef386',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=85&auto=format&fit=max&s=a4f338e55da6c099f8f6fd40dd1ef386',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=28ab6fd7de2c7016e3d9c759315ec52b',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=28ab6fd7de2c7016e3d9c759315ec52b',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=85&auto=format&fit=max&s=9c86c44b49e7f7560e556347548b98b9',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=85&auto=format&fit=max&s=9c86c44b49e7f7560e556347548b98b9',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a94b8a2e0bc213ac904e8d99f22f20ee',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a94b8a2e0bc213ac904e8d99f22f20ee',
 									width: 890,
 								},
 							],
@@ -8131,23 +7012,19 @@ export const NumberedList: CAPIType = {
 							weighting: 'thumbnail',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=140&quality=85&auto=format&fit=max&s=5e22c8d4c2997f4814d9185b65ce55f3',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=140&quality=85&auto=format&fit=max&s=5e22c8d4c2997f4814d9185b65ce55f3',
 									width: 140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=da0a4ff30cfd5c96e09fdb6c8741bd45',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=da0a4ff30cfd5c96e09fdb6c8741bd45',
 									width: 280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=120&quality=85&auto=format&fit=max&s=5f43e519d69e7bd404beb6829d864f41',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=120&quality=85&auto=format&fit=max&s=5f43e519d69e7bd404beb6829d864f41',
 									width: 120,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=a775d324b1833db70d1a6f98c5b1655d',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=a775d324b1833db70d1a6f98c5b1655d',
 									width: 240,
 								},
 							],
@@ -8156,53 +7033,43 @@ export const NumberedList: CAPIType = {
 							weighting: 'supporting',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=380&quality=85&auto=format&fit=max&s=d67d0c193bff1b886d23101f54d53181',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=380&quality=85&auto=format&fit=max&s=d67d0c193bff1b886d23101f54d53181',
 									width: 380,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=d1c9da071443e5bd5809c80a361918ce',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=d1c9da071443e5bd5809c80a361918ce',
 									width: 760,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=300&quality=85&auto=format&fit=max&s=8413a409148b12de76ba323cb91946a2',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=300&quality=85&auto=format&fit=max&s=8413a409148b12de76ba323cb91946a2',
 									width: 300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=0f00451ae0169e770d58613301a4872b',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=0f00451ae0169e770d58613301a4872b',
 									width: 600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=85&auto=format&fit=max&s=6405cc5360b28c13c57ff720a0dcbf83',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=85&auto=format&fit=max&s=6405cc5360b28c13c57ff720a0dcbf83',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=87952983329d86853791f47ade5bf818',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=87952983329d86853791f47ade5bf818',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=85&auto=format&fit=max&s=a4f338e55da6c099f8f6fd40dd1ef386',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=85&auto=format&fit=max&s=a4f338e55da6c099f8f6fd40dd1ef386',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=28ab6fd7de2c7016e3d9c759315ec52b',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=28ab6fd7de2c7016e3d9c759315ec52b',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=85&auto=format&fit=max&s=9c86c44b49e7f7560e556347548b98b9',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=85&auto=format&fit=max&s=9c86c44b49e7f7560e556347548b98b9',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a94b8a2e0bc213ac904e8d99f22f20ee',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a94b8a2e0bc213ac904e8d99f22f20ee',
 									width: 890,
 								},
 							],
@@ -8211,73 +7078,59 @@ export const NumberedList: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1020&quality=85&auto=format&fit=max&s=08cf152f18dcf81f32738051f28d3e9e',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1020&quality=85&auto=format&fit=max&s=08cf152f18dcf81f32738051f28d3e9e',
 									width: 1020,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=9bf8118f6e062d9cd2fb90bd86f2be67',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=9bf8118f6e062d9cd2fb90bd86f2be67',
 									width: 2040,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=940&quality=85&auto=format&fit=max&s=5aadf9e9bab1d220eaef52dc6524d468',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=940&quality=85&auto=format&fit=max&s=5aadf9e9bab1d220eaef52dc6524d468',
 									width: 940,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=6c1e1ef5007e8420b033a23c4e72253b',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=6c1e1ef5007e8420b033a23c4e72253b',
 									width: 1880,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=700&quality=85&auto=format&fit=max&s=867803550a42db119fbd512ca8c8b4af',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=700&quality=85&auto=format&fit=max&s=867803550a42db119fbd512ca8c8b4af',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e5df9058e2c0de047036ef9558bc0ed9',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e5df9058e2c0de047036ef9558bc0ed9',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=700&quality=85&auto=format&fit=max&s=867803550a42db119fbd512ca8c8b4af',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=700&quality=85&auto=format&fit=max&s=867803550a42db119fbd512ca8c8b4af',
 									width: 700,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e5df9058e2c0de047036ef9558bc0ed9',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e5df9058e2c0de047036ef9558bc0ed9',
 									width: 1400,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=660&quality=85&auto=format&fit=max&s=1ababbe281cb55df4590af64910cca83',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=660&quality=85&auto=format&fit=max&s=1ababbe281cb55df4590af64910cca83',
 									width: 660,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=37868eb83520571571058aed3e9405e6',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=37868eb83520571571058aed3e9405e6',
 									width: 1320,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=645&quality=85&auto=format&fit=max&s=12063ae2e48e70499b60a6527c62ad54',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=645&quality=85&auto=format&fit=max&s=12063ae2e48e70499b60a6527c62ad54',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5f9b7ff832bdf6bdb818cd4e557a8d45',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5f9b7ff832bdf6bdb818cd4e557a8d45',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=465&quality=85&auto=format&fit=max&s=7bc3079c399827a4a48061b0cc8d6b3d',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=465&quality=85&auto=format&fit=max&s=7bc3079c399827a4a48061b0cc8d6b3d',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7757ac30421596cff19a535294f1bb9f',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7757ac30421596cff19a535294f1bb9f',
 									width: 930,
 								},
 							],
@@ -8286,33 +7139,27 @@ export const NumberedList: CAPIType = {
 							weighting: 'halfwidth',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=85&auto=format&fit=max&s=6405cc5360b28c13c57ff720a0dcbf83',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=85&auto=format&fit=max&s=6405cc5360b28c13c57ff720a0dcbf83',
 									width: 620,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=87952983329d86853791f47ade5bf818',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=87952983329d86853791f47ade5bf818',
 									width: 1240,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=85&auto=format&fit=max&s=a4f338e55da6c099f8f6fd40dd1ef386',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=85&auto=format&fit=max&s=a4f338e55da6c099f8f6fd40dd1ef386',
 									width: 605,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=28ab6fd7de2c7016e3d9c759315ec52b',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=28ab6fd7de2c7016e3d9c759315ec52b',
 									width: 1210,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=85&auto=format&fit=max&s=9c86c44b49e7f7560e556347548b98b9',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=85&auto=format&fit=max&s=9c86c44b49e7f7560e556347548b98b9',
 									width: 445,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a94b8a2e0bc213ac904e8d99f22f20ee',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a94b8a2e0bc213ac904e8d99f22f20ee',
 									width: 890,
 								},
 							],
@@ -8321,155 +7168,121 @@ export const NumberedList: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1300&quality=85&auto=format&fit=max&s=9cf28c9dd25f68983f644b65308a5463',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1300&quality=85&auto=format&fit=max&s=9cf28c9dd25f68983f644b65308a5463',
 									width: 1300,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=2a6223b0c29eda3f576edad8939a8307',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=2a6223b0c29eda3f576edad8939a8307',
 									width: 2600,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1140&quality=85&auto=format&fit=max&s=f666bacda95a36974d29d2ffef26d6cf',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1140&quality=85&auto=format&fit=max&s=f666bacda95a36974d29d2ffef26d6cf',
 									width: 1140,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=b8e756ec8a46538ccfe1fcc4a00149bb',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=b8e756ec8a46538ccfe1fcc4a00149bb',
 									width: 2280,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1125&quality=85&auto=format&fit=max&s=6e1c97d417e2971c37f315c23c87d01e',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1125&quality=85&auto=format&fit=max&s=6e1c97d417e2971c37f315c23c87d01e',
 									width: 1125,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=bc423368878434a0e3e280c223ec2896',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=bc423368878434a0e3e280c223ec2896',
 									width: 2250,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=965&quality=85&auto=format&fit=max&s=cb4ce4f65f2b90d84137ff890df2c51b',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=965&quality=85&auto=format&fit=max&s=cb4ce4f65f2b90d84137ff890df2c51b',
 									width: 965,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=b6c64286c6a054564242ad20d830a495',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=b6c64286c6a054564242ad20d830a495',
 									width: 1930,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=725&quality=85&auto=format&fit=max&s=4a405a9adba3a0a289c17cfd7eb6bc7d',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=725&quality=85&auto=format&fit=max&s=4a405a9adba3a0a289c17cfd7eb6bc7d',
 									width: 725,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=9bae2272d59811d6b726ea8cdb3ff231',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=9bae2272d59811d6b726ea8cdb3ff231',
 									width: 1450,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=645&quality=85&auto=format&fit=max&s=12063ae2e48e70499b60a6527c62ad54',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=645&quality=85&auto=format&fit=max&s=12063ae2e48e70499b60a6527c62ad54',
 									width: 645,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5f9b7ff832bdf6bdb818cd4e557a8d45',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=5f9b7ff832bdf6bdb818cd4e557a8d45',
 									width: 1290,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=465&quality=85&auto=format&fit=max&s=7bc3079c399827a4a48061b0cc8d6b3d',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=465&quality=85&auto=format&fit=max&s=7bc3079c399827a4a48061b0cc8d6b3d',
 									width: 465,
 								},
 								{
-									src:
-										'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7757ac30421596cff19a535294f1bb9f',
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7757ac30421596cff19a535294f1bb9f',
 									width: 930,
 								},
 							],
 						},
 					],
-					_type:
-						'model.dotcomrendering.pageElements.ImageBlockElement',
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					elementId: '286df481-45b7-48e1-a48f-fb9857ddfc6d',
 				},
 				{
-					html:
-						'<p>Xiaomi’s first slider phone offers more than most for the money, with top-flight specs for 2018 competing directly with the OnePlus 6T and Honor View20. It takes a different approach to the problem of where to put the selfie camera in an all-screen design, hiding it behind the screen on slide-out section.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Xiaomi’s first slider phone offers more than most for the money, with top-flight specs for 2018 competing directly with the OnePlus 6T and Honor View20. It takes a different approach to the problem of where to put the selfie camera in an all-screen design, hiding it behind the screen on slide-out section.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '6c793592-ebae-4f9a-8c55-8681b905ebe1',
 				},
 				{
-					html:
-						'<p>Good, but quite as great as its competition, this huge phone is held back by a heavy weight and a software experience that just isn’t as good, despite solid gesture navigation options.</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Good, but quite as great as its competition, this huge phone is held back by a heavy weight and a software experience that just isn’t as good, despite solid gesture navigation options.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '58b10129-39a5-45f0-b23d-5646db4e57e9',
 				},
 				{
-					html:
-						'<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=xiaomi%20mi%20mix%203%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=250&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
+					html: '<iframe src="https://m.skimresources.com/widget/skimlinks/pc/iframe/iframe.html?shopId=973&isoCurrencyCode=GBP&isoLanguageCode=en&geolocation=true&nameKeywords=xiaomi%20mi%20mix%203%20NOT%20month&resultLimit=3&pub=114047X1592509&css=rslxksjjea&priceMin=250&merchantFilterType=EXCLUDE&merchantIds=8903,8902"\n          name="monetizer1"          \n          scrolling="no"\n          width="100%"\n          style="border:none;height:154px">\n        </iframe>',
 					safe: true,
 					alt: 'price comparison of xiaomi mi mix 3',
 					isMandatory: false,
 					isThirdPartyTracking: true,
 					source: 'Skimlinks',
 					sourceDomain: 'm.skimresources.com',
-					_type:
-						'model.dotcomrendering.pageElements.EmbedBlockElement',
+					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 					elementId: 'ab9b505a-65d2-4cdb-9c66-744345f3f155',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/feb/27/xiaomi-mi-mix-3-review-novel-slider-finally-hits-the-uk">Xiaomi Mi Mix 3 review: novel slider finally hits the UK</a></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/feb/27/xiaomi-mi-mix-3-review-novel-slider-finally-hits-the-uk">Xiaomi Mi Mix 3 review: novel slider finally hits the UK</a></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '1ce136c0-cfe5-4632-8b15-8eb6e7f1523a',
 				},
 				{
 					html: '<h2>Not recommended</h2>',
-					_type:
-						'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					elementId: 'eb803d2b-fd4d-4233-8520-74efd3c67110',
 				},
 				{
-					html:
-						'<p><strong>Google Pixel 4</strong> - Great phone utterly ruined by <a href="https://www.theguardian.com/technology/2019/oct/31/google-pixel-4-review-battery-life-camera">terrible battery life</a> - £669</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Google Pixel 4</strong> - Great phone utterly ruined by <a href="https://www.theguardian.com/technology/2019/oct/31/google-pixel-4-review-battery-life-camera">terrible battery life</a> - £669</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '94607ca3-54ac-4678-bca1-27584f6f626f',
 				},
 				{
-					html:
-						'<p><strong>Razer Phone 2</strong> - Gaming phone beast that falls down on camera performance – £500</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Razer Phone 2</strong> - Gaming phone beast that falls down on camera performance – £500</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'a4ab9dc4-8dbc-4de3-84f8-4b892d10103c',
 				},
 				{
-					html:
-						'<p><strong>Sony Xperia XZ3</strong> – Good, but not great phone that misses the mark – £699</p>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><strong>Sony Xperia XZ3</strong> – Good, but not great phone that misses the mark – £699</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: '9225faf9-44e6-45da-b4fc-a032c1817aaa',
 				},
 				{
-					html:
-						'<ul> \n <li><p><strong><a href="https://www.theguardian.com/technology/2019/may/01/best-true-wireless-earbuds-airpods-samsung-jabra-sennheiser-anker-compared-and-ranked">Best true wireless earbuds: AirPods, Samsung, Jabra and Anker compared and ranked</a></strong></p></li> \n</ul>',
-					_type:
-						'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<ul> \n <li><p><strong><a href="https://www.theguardian.com/technology/2019/may/01/best-true-wireless-earbuds-airpods-samsung-jabra-sennheiser-anker-compared-and-ranked">Best true wireless earbuds: AirPods, Samsung, Jabra and Anker compared and ranked</a></strong></p></li> \n</ul>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					elementId: 'dcbb7b64-53a7-41bd-ba29-c64669d554ba',
 				},
 				{
-					html:
-						'\n\n\n\n\n\n\n    <p><em><sup>\n        This article contains affiliate links, which means we may earn a small commission if a reader clicks through and\n        makes a purchase. All our journalism is independent and is in no way influenced by any advertiser or commercial initiative.\n        By clicking on an affiliate link, you accept that third-party cookies will be set.\n        <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links" data-link-name="in body link" class="u-underline">More information</a>.\n    </sup></em></p>\n\n',
-					_type:
-						'model.dotcomrendering.pageElements.DisclaimerBlockElement',
+					html: '\n\n\n\n\n\n\n    <p><em><sup>\n        This article contains affiliate links, which means we may earn a small commission if a reader clicks through and\n        makes a purchase. All our journalism is independent and is in no way influenced by any advertiser or commercial initiative.\n        By clicking on an affiliate link, you accept that third-party cookies will be set.\n        <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links" data-link-name="in body link" class="u-underline">More information</a>.\n    </sup></em></p>\n\n',
+					_type: 'model.dotcomrendering.pageElements.DisclaimerBlockElement',
 					elementId: '6e4eb948-3ae3-4f55-9c08-a748fdac6eaf',
 				},
 			],
@@ -8487,8 +7300,7 @@ export const NumberedList: CAPIType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://amp.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+			'@id': 'https://amp.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -8497,8 +7309,7 @@ export const NumberedList: CAPIType = {
 				url: 'https://www.theguardian.com/',
 				logo: {
 					'@type': 'ImageObject',
-					url:
-						'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
 					width: 190,
 					height: 60,
 				},
@@ -8537,12 +7348,10 @@ export const NumberedList: CAPIType = {
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id':
-				'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+			'@id': 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target:
-					'android-app://com.guardian/https/www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+				target: 'android-app://com.guardian/https/www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
 			},
 		},
 	],
@@ -8658,8 +7467,7 @@ export const NumberedList: CAPIType = {
 		sharedAdTargeting: {
 			ct: 'article',
 			co: ['jennifer-rankin'],
-			url:
-				'/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 			su: ['0'],
 			edition: 'uk',
 			tn: ['news'],
@@ -8713,8 +7521,7 @@ export const NumberedList: CAPIType = {
 		idUrl: 'https://profile.theguardian.com',
 		author: 'Jennifer Rankin',
 		dfpAccountId: '59666047',
-		pageId:
-			'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
 		mmaUrl: 'https://manage.theguardian.com',
 		abTests: {},
