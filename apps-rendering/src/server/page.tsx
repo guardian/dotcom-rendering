@@ -6,6 +6,7 @@ import createEmotionServer from '@emotion/server/create-instance';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
+import { resets } from '@guardian/src-foundations/utils';
 import { Design, Display, map, none, some } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
 import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
@@ -63,6 +64,7 @@ const shouldHideAds = (request: RenderingRequest): boolean =>
 
 const styles = (format: Format): string => `
     ${pageFonts}
+	${resets.resetCSS}
 
     body {
         background: ${
