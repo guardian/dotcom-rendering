@@ -100,12 +100,12 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 		}
 
 		svg {
-			width: 1.0625rem;
+			width: 1.5rem;
 			border-radius: 100%;
 			border: solid 1px ${neutral[7]};
 			padding: 4px;
 			display: inline-block;
-			margin-right: ${remSpace[3]};
+			margin-right: ${remSpace[2]};
 			transition: all 0.2s ease;
 		}
 

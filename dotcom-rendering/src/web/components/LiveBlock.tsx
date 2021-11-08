@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 
-import { from } from '@guardian/src-foundations/mq';
 import { neutral, space } from '@guardian/src-foundations';
 import { timeAgo } from '@guardian/libs';
 
@@ -10,9 +9,7 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-
-const ASIDE_WIDTH = 58;
-const GUTTER = space[3];
+import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 
 type Props = {
 	format: ArticleFormat;
@@ -23,93 +20,17 @@ type Props = {
 	host?: string;
 };
 
-const Container = ({
-	id,
-	children,
-	palette,
-}: {
-	id: string;
-	children: React.ReactNode;
-	palette: Palette;
-}) => {
-	return (
-		<div
-			id={`block-${id}`}
-			css={css`
-				padding-top: ${space[2]}px;
-				padding-bottom: ${space[3]}px;
-				margin-bottom: ${space[3]}px;
-				background: ${neutral[100]};
-				border-top: 1px solid ${palette.border.liveBlock};
-			`}
-		>
-			{children}
-		</div>
-	);
-};
-
 const Header = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<header
 			css={css`
-				padding-right: ${GUTTER}px;
+				padding-right: ${space[3]}px;
 				display: flex;
 				flex-direction: column;
-				${from.phablet} {
-					flex-direction: row;
-				}
 			`}
 		>
 			{children}
 		</header>
-	);
-};
-
-const Footer = ({ children }: { children: React.ReactNode }) => {
-	return (
-		<footer
-			css={css`
-				margin-left: ${ASIDE_WIDTH}px;
-				padding-left: ${GUTTER}px;
-				padding-right: ${GUTTER}px;
-			`}
-		>
-			{children}
-		</footer>
-	);
-};
-
-const BlockMedia = ({ children }: { children: React.ReactNode }) => {
-	return (
-		// Don't set side margins, causing content to flow to the edges (but
-		// we do set margins on any figcaption)
-		<div
-			css={css`
-				& figcaption {
-					margin-left: ${ASIDE_WIDTH}px;
-					padding-left: ${GUTTER}px;
-					padding-right: ${GUTTER}px;
-				}
-			`}
-		>
-			{children}
-		</div>
-	);
-};
-
-const BlockText = ({ children }: { children: React.ReactNode }) => {
-	return (
-		// Set a left margin the same with as the left aside column plus
-		// padding gutters on both sides
-		<div
-			css={css`
-				margin-left: ${ASIDE_WIDTH}px;
-				padding-left: ${GUTTER}px;
-				padding-right: ${GUTTER}px;
-			`}
-		>
-			{children}
-		</div>
 	);
 };
 
@@ -118,7 +39,7 @@ const BlockTitle = ({ title }: { title: string }) => {
 		<h2
 			css={css`
 				${headline.xxsmall({ fontWeight: 'bold' })}
-				margin-bottom: ${space[3]}px;
+				margin-bottom: ${space[2]}px;
 			`}
 		>
 			{title}
@@ -149,6 +70,9 @@ const LastUpdated = ({
 	);
 };
 
+// TODO: update this code to use shared version when it is available
+const padString = (time: number) => (time < 10 ? `0${time}` : time);
+
 const FirstPublished = ({
 	firstPublished,
 	blockLink,
@@ -168,9 +92,6 @@ const FirstPublished = ({
 				padding-top: ${space[1]}px;
 				display: flex;
 				flex-direction: row;
-				${from.phablet} {
-					flex-direction: column;
-				}
 				text-decoration: none;
 				:hover {
 					filter: brightness(30%);
@@ -180,7 +101,9 @@ const FirstPublished = ({
 			<time
 				dateTime={publishedDate.toISOString()}
 				css={css`
-					color: ${neutral[20]};
+					color: ${neutral[46]};
+					font-weight: bold;
+					margin-right: ${space[2]}px;
 				`}
 			>
 				{timeAgo(firstPublished)}
@@ -191,7 +114,9 @@ const FirstPublished = ({
 					color: ${neutral[46]};
 				`}
 			>
-				{`${publishedDate.getHours()}:${publishedDate.getMinutes()}`}
+				{`${padString(publishedDate.getHours())}:${padString(
+					publishedDate.getMinutes(),
+				)}`}
 			</span>
 		</a>
 	);
@@ -245,82 +170,45 @@ export const LiveBlock = ({
 		block.blockLastUpdated > block.blockFirstPublished;
 
 	return (
-		<Container id={block.id} palette={palette}>
+		<LiveBlockContainer
+			id={block.id}
+			borderColour={palette.border.liveBlock}
+		>
 			<Header>
-				<aside
-					css={css`
-						${from.phablet} {
-							/* Yes, we do need both */
-							min-width: ${ASIDE_WIDTH + GUTTER}px;
-							width: ${ASIDE_WIDTH + GUTTER}px;
-						}
-						padding-left: ${GUTTER}px;
-						padding-right: ${GUTTER}px;
-						padding-bottom: ${space[2]}px;
-					`}
-				>
-					{block.blockFirstPublished && (
-						<FirstPublished
-							firstPublished={block.blockFirstPublished}
-							blockLink={blockLink}
-						/>
-					)}
-				</aside>
-				<span>
-					{block.title && <BlockTitle title={block.title} />}
-					{headerElement &&
-						renderArticleElement({
-							format,
-							palette,
-							element: headerElement,
-							isMainMedia: false,
-							host,
-							adTargeting,
-							index: 0,
-							pageId,
-							webTitle,
-						})}
-				</span>
+				{block.blockFirstPublished && (
+					<FirstPublished
+						firstPublished={block.blockFirstPublished}
+						blockLink={blockLink}
+					/>
+				)}
+				{block.title && <BlockTitle title={block.title} />}
+				{headerElement &&
+					renderArticleElement({
+						format,
+						palette,
+						element: headerElement,
+						isMainMedia: false,
+						host,
+						adTargeting,
+						index: 0,
+						pageId,
+						webTitle,
+					})}
 			</Header>
-			<main>
-				{/* For each element, we decide what margins to set depending on the type */}
-				{mainElements.map((element, index) => {
-					if (typesWeStretch.includes(element._type)) {
-						return (
-							<BlockMedia key={`${element._type}-${index}`}>
-								{renderArticleElement({
-									format,
-									palette,
-									element,
-									adTargeting,
-									host,
-									index,
-									isMainMedia: false,
-									pageId,
-									webTitle,
-								})}
-							</BlockMedia>
-						);
-					}
-
-					return (
-						<BlockText key={`${element._type}-${index}`}>
-							{renderArticleElement({
-								format,
-								palette,
-								element,
-								isMainMedia: false,
-								index,
-								pageId,
-								webTitle,
-							})}
-						</BlockText>
-					);
-				})}
-			</main>
-			<Footer>
+			{mainElements.map((element, index) =>
+				renderArticleElement({
+					format,
+					palette,
+					element,
+					isMainMedia: false,
+					index,
+					pageId,
+					webTitle,
+				}),
+			)}
+			<div>
 				<Hide when="below" breakpoint="phablet">
-					<div
+					<footer
 						css={css`
 							display: flex;
 							justify-content: space-between;
@@ -343,9 +231,9 @@ export const LiveBlock = ({
 									}
 								/>
 							)}
-					</div>
+					</footer>
 				</Hide>
-			</Footer>
-		</Container>
+			</div>
+		</LiveBlockContainer>
 	);
 };

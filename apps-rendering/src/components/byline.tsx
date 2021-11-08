@@ -20,7 +20,7 @@ interface Props extends Format {
 }
 
 const styles = (kicker: string): SerializedStyles => css`
-	${headline.xxxsmall()}
+	${headline.xxxsmall({ fontStyle: 'italic' })}
 	color: ${kicker};
 
 	${darkModeCss`
@@ -79,7 +79,7 @@ const commentAnchorStyles = (
 `;
 
 const labsStyles = css`
-	${textSans.medium({ lineHeight: 'regular' })}
+	${textSans.medium({ lineHeight: 'regular', fontStyle: 'italic' })}
 	color: ${palette.labs[300]};
 
 	${darkModeCss`

@@ -123,7 +123,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 const maxWidth = css`
 	${from.desktop} {
-		max-width: 620px;
+		max-width: 700px;
 	}
 `;
 
@@ -429,7 +429,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="body">
-								<ArticleContainer>
+								<ArticleContainer format={format}>
 									{CAPI.pagination &&
 										CAPI.pagination.currentPage !== 1 && (
 											<Pagination

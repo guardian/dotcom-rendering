@@ -44,6 +44,8 @@ export const borderWidthStyles: SerializedStyles = css`
 `;
 
 export const articleWidthStyles: SerializedStyles = css`
+	box-sizing: content-box;
+
 	${from.tablet} {
 		width: ${tabletContentWidth}px;
 	}
