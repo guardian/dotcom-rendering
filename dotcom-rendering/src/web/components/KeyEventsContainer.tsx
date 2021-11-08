@@ -8,19 +8,18 @@ type Props = {
 };
 
 export const KeyEventsContainer = ({ keyEvents, format }: Props) => {
-	const transformedKeyEvents: KeyEvent[] = keyEvents.reduce(
-		(acc: KeyEvent[], keyEvent) => {
-			if (keyEvent.title && keyEvent.blockFirstPublishedDisplay) {
-				acc.push({
-					text: keyEvent.title,
-					url: `?page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
-					time: keyEvent.blockFirstPublishedDisplay,
-				});
-			}
-			return acc;
-		},
-		[],
-	);
+	const transformedKeyEvents: KeyEvent[] = keyEvents
+		.filter((keyEvent) => {
+			return keyEvent.title && keyEvent.blockFirstPublishedDisplay;
+		})
+		.map((keyEvent) => {
+			return {
+				text: keyEvent.title || '', // We fallback to '' here purely to keep ts happy
+				url: `?page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
+				time: keyEvent.blockFirstPublishedDisplay || '', // We fallback to '' here purely to keep ts happy
+			};
+		});
+
 	return (
 		<KeyEvents
 			theme={format.theme}
