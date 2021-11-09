@@ -1,6 +1,16 @@
-import { css } from '@emotion/react';
+import { SerializedStyles, css } from '@emotion/react';
 
-import { space } from '@guardian/src-foundations';
+import {
+	space,
+	news,
+	culture,
+	lifestyle,
+	sport,
+	opinion,
+	labs,
+	specialReport,
+} from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import { LinkButton } from '@guardian/src-button';
 import { textSans } from '@guardian/src-foundations/typography';
 import {
@@ -8,6 +18,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/src-icons';
 import { until } from '@guardian/src-foundations/mq';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { Hide } from './Hide';
 
 type Props = {
@@ -17,6 +28,7 @@ type Props = {
 	newer?: string;
 	oldest?: string;
 	older?: string;
+	format: ArticleFormat;
 };
 
 const Container = ({ children }: { children: React.ReactNode }) => (
@@ -79,6 +91,67 @@ const Space = () => (
 	/>
 );
 
+const decidePaginationCss = (format: ArticleFormat): SerializedStyles => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return css`
+				color: ${news[300]};
+				border: 1px solid ${neutral[86]};
+				:hover {
+					border: 1px solid ${news[300]};
+				}
+			`;
+		case ArticlePillar.Culture:
+			return css`
+				color: ${culture[300]};
+				border: 1px solid ${neutral[86]};
+				:hover {
+					border: 1px solid ${culture[300]};
+				}
+			`;
+		case ArticlePillar.Lifestyle:
+			return css`
+				color: ${lifestyle[300]};
+				border: 1px solid ${neutral[86]};
+				:hover {
+					border: 1px solid ${lifestyle[300]};
+				}
+			`;
+		case ArticlePillar.Sport:
+			return css`
+				color: ${sport[300]};
+				border: 1px solid ${neutral[86]};
+				:hover {
+					border: 1px solid ${sport[300]};
+				}
+			`;
+		case ArticlePillar.Opinion:
+			return css`
+				color: ${opinion[300]};
+				border: 1px solid ${neutral[86]};
+				:hover {
+					border: 1px solid ${opinion[300]};
+				}
+			`;
+		case ArticleSpecial.Labs:
+			return css`
+				color: ${labs[300]};
+				border: 1px solid ${neutral[86]};
+				:hover {
+					border: 1px solid ${labs[300]};
+				}
+			`;
+		case ArticleSpecial.SpecialReport:
+			return css`
+				color: ${specialReport[300]};
+				border: 1px solid ${neutral[86]};
+				:hover {
+					border: 1px solid ${specialReport[300]};
+				}
+			`;
+	}
+};
+
 export const Pagination = ({
 	currentPage,
 	totalPages,
@@ -86,34 +159,39 @@ export const Pagination = ({
 	older,
 	newest,
 	newer,
+	format,
 }: Props) => {
 	return (
 		<Container>
-			<Section>
-				<LinkButton
-					size="small"
-					priority="tertiary"
-					icon={<SvgChevronLeftSingle />}
-					iconSide="left"
-					href={newest}
-				>
-					<Hide when="below" breakpoint="phablet">
-						Newest
-					</Hide>
-				</LinkButton>
-				<Space />
-				<LinkButton
-					size="small"
-					priority="tertiary"
-					icon={<SvgChevronLeftSingle />}
-					hideLabel={true}
-					href={newer}
-				>
-					<Hide when="below" breakpoint="phablet">
-						Previous
-					</Hide>
-				</LinkButton>
-			</Section>
+			{currentPage !== 1 && (
+				<Section>
+					<LinkButton
+						size="small"
+						priority="tertiary"
+						icon={<SvgChevronLeftSingle />}
+						iconSide="left"
+						href={newest}
+						cssOverrides={decidePaginationCss(format)}
+					>
+						<Hide when="below" breakpoint="phablet">
+							Newest
+						</Hide>
+					</LinkButton>
+					<Space />
+					<LinkButton
+						size="small"
+						priority="tertiary"
+						icon={<SvgChevronLeftSingle />}
+						hideLabel={true}
+						href={newer}
+						cssOverrides={decidePaginationCss(format)}
+					>
+						<Hide when="below" breakpoint="phablet">
+							Previous
+						</Hide>
+					</LinkButton>
+				</Section>
+			)}
 			<Section>
 				<Position>
 					<Bold>{currentPage}</Bold>
@@ -128,6 +206,7 @@ export const Pagination = ({
 					icon={<SvgChevronRightSingle />}
 					hideLabel={true}
 					href={older}
+					cssOverrides={decidePaginationCss(format)}
 				>
 					<Hide when="below" breakpoint="phablet">
 						Next
@@ -140,6 +219,7 @@ export const Pagination = ({
 					icon={<SvgChevronRightSingle />}
 					iconSide="right"
 					href={oldest}
+					cssOverrides={decidePaginationCss(format)}
 				>
 					<Hide when="below" breakpoint="phablet">
 						Oldest
