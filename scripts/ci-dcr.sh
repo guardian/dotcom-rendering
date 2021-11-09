@@ -3,10 +3,6 @@
 # exit when any command fails
 set -e
 
-# TEST: Add 'failing' grep to ensure we don't bail out
-test="$(echo "test" | { grep -v 'apps-rendering' || :; })"
-echo $test
-
 git fetch origin main
 
 gitBranches="$(git branch -r)"
