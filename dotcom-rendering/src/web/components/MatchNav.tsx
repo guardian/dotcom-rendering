@@ -1,15 +1,11 @@
 import { css } from '@emotion/react';
 
-import {
-	brandAlt,
-	background,
-	border,
-} from '@guardian/src-foundations/palette';
+import { brandAlt, background } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { space, palette } from '@guardian/src-foundations';
+import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
-
 import { Score } from '@frontend/web/components/Score';
+import { MatchTabs } from './MatchTabs';
 
 type Props = {
 	homeTeam: TeamType;
@@ -208,71 +204,6 @@ const YellowBorder = () => (
 			width: ${space[2]}px;
 		`}
 	/>
-);
-
-const thinGreySolid = `1px solid ${border.secondary}`;
-
-const GreyBorder = () => (
-	<div
-		css={css`
-			/* stylelint-disable-next-line color-no-hex */
-			border-left: ${thinGreySolid};
-			margin-left: ${space[1]}px;
-			width: ${space[2]}px;
-		`}
-	/>
-);
-
-const tabsContainer = css`
-	display: flex;
-	position: relative;
-	border-bottom: ${thinGreySolid};
-`;
-
-const tab = css`
-	flex-basis: 50%;
-	height: 40px;
-	border-top: 3px solid ${border.secondary};
-
-	:nth-child(1) {
-		border-top: 3px solid ${palette.sport[300]};
-	}
-`;
-
-const tabLink = css`
-	color: ${palette.sport[300]};
-	display: block;
-	text-decoration: none;
-	&:hover {
-		background-color: ${palette.neutral[93]};
-	}
-`;
-
-const tabLabel = css`
-	${headline.xxxsmall()};
-	background: transparent;
-	padding: 6px 8px 0;
-	text-align: left;
-	font-weight: 600;
-	min-height: 36px;
-	display: block;
-	width: 100%;
-`;
-
-const MatchTabs = ({ minByMinUrl }: { minByMinUrl?: string }) => (
-	<div>
-		<ul css={tabsContainer}>
-			<li css={tab}>
-				<span css={tabLabel}>Report</span>
-			</li>
-			<GreyBorder />
-			<li css={tab}>
-				<a href={minByMinUrl} data-link-name="Min-by-min" css={tabLink}>
-					<span css={tabLabel}>Min-by-min</span>
-				</a>
-			</li>
-		</ul>
-	</div>
 );
 
 export const MatchNav = ({
