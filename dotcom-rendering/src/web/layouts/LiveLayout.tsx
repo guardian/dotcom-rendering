@@ -123,13 +123,13 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 const maxWidth = css`
 	${from.desktop} {
-		max-width: 620px;
+		max-width: 700px;
 	}
 `;
 
 const articleWidth = css`
 	${from.desktop} {
-		width: 620px;
+		width: 700px;
 	}
 `;
 

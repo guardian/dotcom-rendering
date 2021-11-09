@@ -6,48 +6,9 @@ You should always `cd` into the correct subdirectory before running commands (e.
 
 <!-- TEMPORARY : This section is just here as an initial guide for the first few days post-migration -->
 
-## Getting started after migration?
-
-Welcome to the monorepo for dotcom-rendering and apps-rendering.
-
-If you're using this project, not too much has changed. Follow the steps below to get up and running:
-
-```bash
-# (Optional) Delete your existing node_modules folder
-dotcom-rendering $ rm -rf ./node_modules
-
-# Install root dependencies for storybook
-dotcom-rendering $ yarn install
-
-# (IMPORTANT) Move into the dotcom-rendering subdirectory
-dotcom-rendering $ cd dotcom-rendering
-
-# You should now be in the 'dotcom-rendering' subdirectory
-
-# (Optional) Install node packages
-# If you're not running 'make dev' right away - this will help your vscode eslint, etc work as expected (if you use them)
-dotcom-rendering/dotcom-rendering $ yarn install
-
-# Run DCR
-dotcom-rendering/dotcom-rendering $ make dev
-
-# If you're working with apps-rendering, move into the apps-rendering subdirectory
-dotcom-rendering $ cd apps-rendering
-
-# You should now be in the 'apps-rendering' subdirectory
-
-# (Optional) Install node packages
-# If you're not running 'npm run watch' right away
-dotcom-rendering/apps-rendering $ npm install
-
-# Run AR
-dotcom-rendering/apps-rendering $ npm run watch
-```
-
 ## Storybook
 
 While most DCR scripts should be run from within the `dotcom-rendering` subdirectory, storybook remains at the root of the project. So make sure you're _not_ in a subdirectory before running `yarn storybook` or `yarn build-storybook` as before.
-
 
 ## Quick start
 
