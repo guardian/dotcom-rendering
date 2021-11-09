@@ -1,41 +1,41 @@
 import { breakpoints } from '@guardian/src-foundations/mq';
 
-import { getClosestSetForWidth, getDesiredWidth } from './Picture'
+import { getClosestSetForWidth, getDesiredWidth, getSourcesFromSrcSets } from './Picture'
 
 const hdpiSources: SrcSetItem[] = [
 	{
-		src: '',
+		src: '1',
 		width: 1400
 	},
 	{
-		src: '',
+		src: '2',
 		width: 1240
 	},
 	{
-		src: '',
+		src: '3',
 		width: 930
 	},
 	{
-		src: '',
+		src: '4',
 		width: 1290
 	},
 ]
 
 const mdpiSources: SrcSetItem[] = [
 	{
-		src: '',
+		src: '1',
 		width: 620
 	},
 	{
-		src: '',
+		src: '2',
 		width: 700
 	},
 	{
-		src: '',
+		src: '3',
 		width: 465
 	},
 	{
-		src: '',
+		src: '4',
 		width: 645
 	},
 ]
@@ -69,6 +69,7 @@ describe(`Picture`, () => {
 		})
 
 		it('Gets the closest source for a given width (mdpi)', () => {
+			// Breakpoints
 			expect(getClosestSetForWidth(breakpoints.mobile, mdpiSources).width).toBe(465)
 			expect(getClosestSetForWidth(breakpoints.mobileMedium, mdpiSources).width).toBe(465)
 			expect(getClosestSetForWidth(breakpoints.mobileLandscape, mdpiSources).width).toBe(620)
@@ -89,6 +90,17 @@ describe(`Picture`, () => {
 		})
 		it('Returns the correct with for MDPI', () => {
 			expect(getDesiredWidth(200, false)).toBe(200)
+		})
+	})
+
+	describe('getSourcesFromSrcSets', () => {
+		it('Constructs the string correctly', () => {
+			expect(getSourcesFromSrcSets(hdpiSources)).toBe(
+				'1 1400w,2 1240w,3 930w,4 1290w'
+			)
+			expect(getSourcesFromSrcSets(mdpiSources)).toBe(
+				'1 620w,2 700w,3 465w,4 645w'
+			)
 		})
 	})
 

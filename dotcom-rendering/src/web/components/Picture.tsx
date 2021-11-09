@@ -22,7 +22,7 @@ export const getClosestSetForWidth = (
 ): SrcSetItem => {
 	// For a desired width, find the SrcSetItem which is the closest match
 	// A match greated than the desired width will always be picked when one is available
-	const sorted = inlineSrcSets.sort((a, b) => b.width - a.width);
+	const sorted = inlineSrcSets.slice().sort((a, b) => b.width - a.width);
 	return sorted.reduce((best, current) => {
 		if (current.width < best.width && current.width >= desiredWidth) {
 			return current;
@@ -62,7 +62,7 @@ const getFallback = (
 export const getDesiredWidth = (width: number, hdpi: boolean) => hdpi ? width * 2 : width
 
 // Turn SrsSets into a string which can be passed to the source element
-const getSourcesFromSrcSets = (sources: SrcSetItem[]) => sources.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
+export const getSourcesFromSrcSets = (sources: SrcSetItem[]) => sources.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
 
 // Returns the size image desired at a particular breakpoint based on the image role, format, and if it's main media.
 const getSizeForBreakpoint = (
