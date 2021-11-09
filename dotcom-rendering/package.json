@@ -123,8 +123,6 @@
     "@babel/preset-typescript": "^7.12.7",
     "@babel/runtime": "^7.12.5",
     "@emotion/babel-plugin": "^11.3.0",
-    "@guardian/eslint-plugin-source-foundations": "^4.0.0-rc.1",
-    "@guardian/eslint-plugin-source-react-components": "^4.0.0-rc.1",
     "@guardian/prettier": "^0.5.0",
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/webpack-plugin": "^5.14.2",
