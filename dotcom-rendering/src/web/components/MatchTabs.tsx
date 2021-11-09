@@ -5,6 +5,7 @@ import { headline } from '@guardian/src-foundations/typography';
 
 type Props = {
 	minByMinUrl?: string;
+	// TODO: reportUrl?: string;
 };
 
 const thinGreySolid = `1px solid ${border.secondary}`;
