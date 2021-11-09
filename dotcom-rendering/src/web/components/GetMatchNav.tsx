@@ -18,6 +18,8 @@ export const GetMatchNav = ({ matchUrl }: Props) => {
 		minByMinUrl?: string;
 	}>(matchUrl);
 
+	const MATCH_URL: string = matchUrl;
+
 	if (loading) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
@@ -32,6 +34,7 @@ export const GetMatchNav = ({ matchUrl }: Props) => {
 				awayTeam={data.awayTeam}
 				comments={data.comments}
 				minByMinUrl={data.minByMinUrl}
+				matchURL={MATCH_URL}
 			/>
 		);
 	}

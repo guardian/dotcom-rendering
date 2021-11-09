@@ -5,7 +5,7 @@ import { headline } from '@guardian/src-foundations/typography';
 
 type Props = {
 	minByMinUrl?: string;
-	// TODO: reportUrl?: string;
+	matchUrl?: string;
 };
 
 const thinGreySolid = `1px solid ${border.secondary}`;
@@ -57,11 +57,13 @@ const tabLabel = css`
 	width: 100%;
 `;
 
-export const MatchTabs = ({ minByMinUrl }: Props) => (
+export const MatchTabs = ({ minByMinUrl, matchUrl }: Props) => (
 	<div>
 		<ul css={tabsContainer}>
 			<li css={tab}>
-				<span css={tabLabel}>Report</span>
+				<a href={matchUrl} data-link-name="Match" css={tabLink}>
+					<span css={tabLabel}>Report</span>
+				</a>
 			</li>
 			<GreyBorder />
 			<li css={tab}>
