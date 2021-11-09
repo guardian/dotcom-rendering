@@ -12,7 +12,13 @@ import { border } from 'editorialPalette';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import type { ReactElement } from 'react';
-import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
+import {
+	articleWidthStyles,
+	darkModeCss,
+	liveblogPhabletSidePadding,
+	liveblogWidthStyles,
+	wideContentWidth,
+} from 'styles';
 
 // ----- Component ----- //
 
@@ -108,6 +114,11 @@ const fontSizeRestriction = css`
 	}
 `;
 
+const liveblogStyles = css`
+	${liveblogPhabletSidePadding}
+	${liveblogWidthStyles}
+`;
+
 const getStyles = (format: Format): SerializedStyles => {
 	if (format.display === Display.Immersive) {
 		const labs = format.theme === Special.Labs ? immersiveLabs : null;
@@ -133,6 +144,10 @@ const getStyles = (format: Format): SerializedStyles => {
 			return css(styles(format), commentStyles, fontSizeRestriction);
 		case Design.Media:
 			return css(styles(format), mediaStyles, fontSizeRestriction);
+
+		case Design.LiveBlog:
+		case Design.DeadBlog:
+			return css(styles(format), fontSizeRestriction, liveblogStyles);
 
 		default:
 			return css(styles(format), fontSizeRestriction);

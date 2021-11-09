@@ -233,7 +233,7 @@ const fields = {
 	standfirst: standfirst,
 	byline: '',
 	bylineHtml: bylineHtml,
-	publishDate: none,
+	publishDate: some(new Date('2021-10-17T03:24:00')),
 	contributors: [],
 	mainMedia: mainMedia,
 	series: some({
