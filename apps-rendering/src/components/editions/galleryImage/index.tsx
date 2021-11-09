@@ -2,9 +2,12 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import Img from '@guardian/common-rendering/src/components/img';
 import type { Sizes } from '@guardian/common-rendering/src/sizes';
-import { neutral, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { textSans } from '@guardian/src-foundations/typography';
+import {
+	from,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import type { Format, Option } from '@guardian/types';
 import { map, none, OptionKind, some, withDefault } from '@guardian/types';
 import type { Image } from 'bodyElement';

@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
+import { remSpace, textSans } from '@guardian/source-foundations';
 import type { Format, Option } from '@guardian/types';
 import { Design, map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';

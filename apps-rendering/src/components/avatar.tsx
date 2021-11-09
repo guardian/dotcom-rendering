@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace } from '@guardian/source-foundations';
 import type { Format } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import Img from 'components/img';

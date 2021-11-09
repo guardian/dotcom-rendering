@@ -5,8 +5,7 @@ import {
 	Lines,
 	ToggleSwitch,
 } from '@guardian/source-react-components-development-kitchen';
-import { neutral, remSpace } from '@guardian/src-foundations';
-import { from, until } from '@guardian/src-foundations/mq';
+import { neutral, from, until, remSpace } from '@guardian/source-foundations';
 import { Design, Display } from '@guardian/types';
 import Avatar from 'components/avatar';
 import Byline from 'components/byline';

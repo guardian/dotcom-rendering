@@ -2,10 +2,14 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import {
+	background,
+	breakpoints,
+	from,
+	neutral,
+	remSpace,
+} from '@guardian/source-foundations';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { remSpace } from '@guardian/src-foundations';
-import { breakpoints, from } from '@guardian/src-foundations/mq';
-import { background, neutral } from '@guardian/src-foundations/palette';
 import { Display, map, none, withDefault } from '@guardian/types';
 import FootballScores from 'components/footballScores';
 import Footer from 'components/footer';

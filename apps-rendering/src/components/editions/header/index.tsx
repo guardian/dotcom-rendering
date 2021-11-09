@@ -2,8 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { border, neutral, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { border, from, neutral, remSpace } from '@guardian/source-foundations';
 import { Design, Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
 import HeaderMedia from 'components/editions/headerMedia';

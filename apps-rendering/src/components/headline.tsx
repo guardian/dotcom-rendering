@@ -2,9 +2,14 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral, remSpace } from '@guardian/src-foundations';
-import { between, from } from '@guardian/src-foundations/mq';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	between,
+	from,
+	headline,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import type { Format } from '@guardian/types';
 import { Design, Display, Special } from '@guardian/types';
 import StarRating from 'components/starRating';

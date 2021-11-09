@@ -13,11 +13,15 @@ import {
 } from '@guardian/atoms-rendering';
 import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
-import { palette, remSpace } from '@guardian/src-foundations';
-import { until } from '@guardian/src-foundations/mq';
-import type { Breakpoint } from '@guardian/src-foundations/mq';
-import { neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import type { Breakpoint } from '@guardian/source-foundations';
+import {
+	headline,
+	labs,
+	neutral,
+	remSpace,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import {
 	andThen,
 	Design,
@@ -264,11 +268,11 @@ const isBlog = (format: Format): boolean =>
 
 const linkColourFromFormat = (format: Format): string => {
 	if (format.theme === Special.Labs) {
-		return palette.labs[300];
+		return labs[300];
 	}
 
 	if (isBlog(format)) {
-		return palette.neutral[100];
+		return neutral[100];
 	}
 
 	const { kicker, inverted } = getThemeStyles(format.theme);

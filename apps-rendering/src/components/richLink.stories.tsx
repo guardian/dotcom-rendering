@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { from, remSpace } from '@guardian/source-foundations';
 import { Design, Display, Pillar } from '@guardian/types';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';

@@ -4,8 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import Img from '@guardian/common-rendering/src/components/img';
 import type { Sizes } from '@guardian/common-rendering/src/sizes';
-import { brandAltBackground } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { brandAltBackground, from } from '@guardian/source-foundations';
 import type { Format } from '@guardian/types';
 import { Design, Display, none, some } from '@guardian/types';
 import HeaderImageCaption, {

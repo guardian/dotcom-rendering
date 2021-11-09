@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/source-foundations';
 import type { Option, Theme } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import type { Series } from 'capi';

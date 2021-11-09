@@ -2,10 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { border, neutral } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import {
+	from,
+	border,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import type { Format, Option } from '@guardian/types';
 import { Design, map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';

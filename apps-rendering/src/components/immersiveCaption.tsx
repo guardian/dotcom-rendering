@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import { Display, OptionKind } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
 import { MainMediaKind } from 'headerMedia';

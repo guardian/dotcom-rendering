@@ -9,7 +9,7 @@ import {
 	news,
 	opinion,
 	sport,
-} from '@guardian/src-foundations/palette';
+} from '@guardian/source-foundations';
 import type { Format } from '@guardian/types';
 import { Design, Display, Pillar } from '@guardian/types';
 

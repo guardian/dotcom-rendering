@@ -3,16 +3,23 @@ import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import Img from '@guardian/common-rendering/src/components/img';
-import { palette, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import {
 	background,
+	from,
+	headline,
+	labs,
 	neutral,
 	opinion,
+	remSpace,
 	text,
-} from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { SvgAudio, SvgCamera, SvgQuote, SvgVideo } from '@guardian/src-icons';
+	textSans,
+} from '@guardian/source-foundations';
+import {
+	SvgAudio,
+	SvgCamera,
+	SvgQuote,
+	SvgVideo,
+} from '@guardian/source-react-components';
 import {
 	Design,
 	Display,
@@ -42,7 +49,7 @@ const borderColor = (
 	format: Format,
 ): SerializedStyles => {
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
-		return css`1px solid ${palette.labs[300]}`;
+		return css`1px solid ${labs[300]}`;
 	} else {
 		return css`1px solid ${getThemeStyles(format.theme).kicker}`;
 	}

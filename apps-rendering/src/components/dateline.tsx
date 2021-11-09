@@ -3,10 +3,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { from } from '@guardian/src-foundations/mq';
-import { neutral, text } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
 import { Design, map, Pillar, withDefault } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
+import { neutral, text, textSans } from '@guardian/source-foundations';
 import { formatDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';

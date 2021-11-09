@@ -2,9 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
-import { SvgQuote } from '@guardian/src-icons';
+import { neutral, remSpace } from '@guardian/source-foundations';
+import { SvgQuote } from '@guardian/source-react-components';
 import type { Format } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';

@@ -2,9 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { background, border, neutral } from '@guardian/src-foundations/palette';
+import {
+	background,
+	border,
+	from,
+	neutral,
+	remSpace,
+} from '@guardian/source-foundations';
 import type { Format } from '@guardian/types';
 import { Design, Display, partition } from '@guardian/types';
 import type { Item } from 'item';

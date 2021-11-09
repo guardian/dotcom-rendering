@@ -2,9 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral, palette } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	from,
+	headline,
+	labs,
+	neutral,
+	textSans,
+} from '@guardian/source-foundations';
 import { Design, map, Special, withDefault } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
 import { pipe } from 'lib';
@@ -86,10 +90,10 @@ const commentAnchorStyles = (
 
 const labsStyles = css`
 	${textSans.medium({ lineHeight: 'regular', fontStyle: 'italic' })}
-	color: ${palette.labs[300]};
+	color: ${labs[300]};
 
 	${darkModeCss`
-        color: ${palette.labs[400]};
+        color: ${labs[400]};
     `}
 `;
 
@@ -103,12 +107,12 @@ const liveblogStyles = (
 
 const labsAnchorStyles = css`
 	font-weight: bold;
-	color: ${palette.labs[300]};
+	color: ${labs[300]};
 	font-style: normal;
 	text-decoration: none;
 
 	${darkModeCss`
-        color: ${palette.labs[400]};
+        color: ${labs[400]};
     `}
 `;
 

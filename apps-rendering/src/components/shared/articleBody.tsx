@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { background, neutral } from '@guardian/src-foundations/palette';
+import { background, neutral, remSpace } from '@guardian/source-foundations';
 import type { Format } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
 import { adStyles, darkModeCss } from 'styles';

@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
 import { ArticleElementRole } from '@guardian/libs';
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/source-foundations';
 import type { Format } from '@guardian/types';
 import { Design, withDefault } from '@guardian/types';
 import type { Image } from 'image';

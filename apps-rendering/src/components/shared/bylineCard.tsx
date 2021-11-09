@@ -1,10 +1,15 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
-import { remSpace } from '@guardian/src-foundations';
-import { neutral, opinion, text } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { SvgQuote } from '@guardian/src-icons';
+import {
+	headline,
+	neutral,
+	opinion,
+	remSpace,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
+import { SvgQuote } from '@guardian/source-react-components';
 import type { Format, Option } from '@guardian/types';
 import {
 	Design,

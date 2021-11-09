@@ -2,11 +2,15 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { palette, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { labs, neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
 import type { Format, Theme } from '@guardian/types';
+import {
+	from,
+	headline,
+	labs,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import { Design, Display, map, Special, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { pipe } from 'lib';
@@ -88,7 +92,7 @@ const getLinkStyles = ({
 const immersiveStyles = (theme: Theme): SerializedStyles => css`
 	padding: ${remSpace[1]} ${remSpace[3]};
 	background-color: ${theme === Special.Labs
-		? palette.labs[300]
+		? labs[300]
 		: getThemeStyles(theme).kicker};
 	position: absolute;
 	left: 0;

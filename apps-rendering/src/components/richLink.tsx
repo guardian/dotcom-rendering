@@ -1,10 +1,13 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { SvgArrowRightStraight } from '@guardian/src-icons';
+import {
+	from,
+	headline,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
+import { SvgArrowRightStraight } from '@guardian/source-react-components';
 import { Pillar } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import { createElement as h } from 'react';

@@ -2,8 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { from, neutral, remSpace } from '@guardian/source-foundations';
 import type { Format } from '@guardian/types';
 import { Design } from '@guardian/types';
 import type { FC } from 'react';

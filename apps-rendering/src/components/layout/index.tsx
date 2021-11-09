@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace } from '@guardian/source-foundations';
 import { Design, Display, partition, Special } from '@guardian/types';
 import type { Format } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';

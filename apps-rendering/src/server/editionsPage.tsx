@@ -5,7 +5,7 @@ import { CacheProvider } from '@emotion/react';
 import { extractCritical } from '@emotion/server';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
-import { resets } from '@guardian/src-foundations/utils';
+import { resets } from '@guardian/source-foundations';
 import type { Option, Theme } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
 import { getThirdPartyEmbeds } from 'capi';

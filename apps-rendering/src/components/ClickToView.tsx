@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
-import { Button } from '@guardian/src-button';
-import { remSpace } from '@guardian/src-foundations';
-import { background, border } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { SvgCheckmark } from '@guardian/src-icons';
+import {
+	background,
+	border,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
+import { Button, SvgCheckmark } from '@guardian/source-react-components';
 import type { Option } from '@guardian/types';
 import { OptionKind, Role, withDefault } from '@guardian/types';
 import { fold } from 'lib';

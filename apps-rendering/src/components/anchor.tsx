@@ -2,8 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { palette } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
+import { labs, neutral } from '@guardian/source-foundations';
 import type { Format } from '@guardian/types';
 import { Design, Special } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
@@ -33,7 +32,7 @@ const colour = (format: Format): SerializedStyles => {
 	const { link, inverted } = getThemeStyles(format.theme);
 	if (format.theme === Special.Labs) {
 		return css`
-			color: ${palette.labs[300]};
+			color: ${labs[300]};
 			border-bottom: 0.0625rem solid ${neutral[86]};
 
 			${darkModeCss`
