@@ -2,24 +2,18 @@ import { SerializedStyles, css } from '@emotion/react';
 
 import {
 	space,
-	news,
-	culture,
-	lifestyle,
-	sport,
-	opinion,
-	labs,
-	specialReport,
 } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
 import { LinkButton } from '@guardian/src-button';
 import { textSans } from '@guardian/src-foundations/typography';
 import {
 	SvgChevronLeftSingle,
+	SvgChevronLeftDouble,
+	SvgChevronRightDouble,
 	SvgChevronRightSingle,
 } from '@guardian/src-icons';
 import { until } from '@guardian/src-foundations/mq';
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { Hide } from './Hide';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	currentPage: number;
@@ -91,66 +85,15 @@ const Space = () => (
 	/>
 );
 
-const decidePaginationCss = (format: ArticleFormat): SerializedStyles => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return css`
-				color: ${news[300]};
-				border: 1px solid ${neutral[86]};
-				:hover {
-					border: 1px solid ${news[300]};
-				}
-			`;
-		case ArticlePillar.Culture:
-			return css`
-				color: ${culture[300]};
-				border: 1px solid ${neutral[86]};
-				:hover {
-					border: 1px solid ${culture[300]};
-				}
-			`;
-		case ArticlePillar.Lifestyle:
-			return css`
-				color: ${lifestyle[300]};
-				border: 1px solid ${neutral[86]};
-				:hover {
-					border: 1px solid ${lifestyle[300]};
-				}
-			`;
-		case ArticlePillar.Sport:
-			return css`
-				color: ${sport[300]};
-				border: 1px solid ${neutral[86]};
-				:hover {
-					border: 1px solid ${sport[300]};
-				}
-			`;
-		case ArticlePillar.Opinion:
-			return css`
-				color: ${opinion[300]};
-				border: 1px solid ${neutral[86]};
-				:hover {
-					border: 1px solid ${opinion[300]};
-				}
-			`;
-		case ArticleSpecial.Labs:
-			return css`
-				color: ${labs[300]};
-				border: 1px solid ${neutral[86]};
-				:hover {
-					border: 1px solid ${labs[300]};
-				}
-			`;
-		case ArticleSpecial.SpecialReport:
-			return css`
-				color: ${specialReport[300]};
-				border: 1px solid ${neutral[86]};
-				:hover {
-					border: 1px solid ${specialReport[300]};
-				}
-			`;
-	}
-};
+const decidePaginationCss = (palette: Palette): SerializedStyles => {
+	return css`
+		color: ${palette.text.pagination};
+		border: 1px solid ${palette.border.pagination};
+		:hover {
+			border: 1px solid ${palette.hover.pagination}
+		}
+	`;
+}
 
 export const Pagination = ({
 	currentPage,
@@ -161,6 +104,9 @@ export const Pagination = ({
 	newer,
 	format,
 }: Props) => {
+
+	const palette = decidePalette(format)
+
 	return (
 		<Container>
 			{currentPage !== 1 && (
@@ -168,10 +114,10 @@ export const Pagination = ({
 					<LinkButton
 						size="small"
 						priority="tertiary"
-						icon={<SvgChevronLeftSingle />}
+						icon={<SvgChevronLeftDouble />}
 						iconSide="left"
 						href={newest}
-						cssOverrides={decidePaginationCss(format)}
+						cssOverrides={decidePaginationCss(palette)}
 					>
 						<Hide when="below" breakpoint="phablet">
 							Newest
@@ -184,7 +130,7 @@ export const Pagination = ({
 						icon={<SvgChevronLeftSingle />}
 						hideLabel={true}
 						href={newer}
-						cssOverrides={decidePaginationCss(format)}
+						cssOverrides={decidePaginationCss(palette)}
 					>
 						<Hide when="below" breakpoint="phablet">
 							Previous
@@ -206,7 +152,7 @@ export const Pagination = ({
 					icon={<SvgChevronRightSingle />}
 					hideLabel={true}
 					href={older}
-					cssOverrides={decidePaginationCss(format)}
+					cssOverrides={decidePaginationCss(palette)}
 				>
 					<Hide when="below" breakpoint="phablet">
 						Next
@@ -216,10 +162,10 @@ export const Pagination = ({
 				<LinkButton
 					size="small"
 					priority="tertiary"
-					icon={<SvgChevronRightSingle />}
+					icon={<SvgChevronRightDouble />}
 					iconSide="right"
 					href={oldest}
-					cssOverrides={decidePaginationCss(format)}
+					cssOverrides={decidePaginationCss(palette)}
 				>
 					<Hide when="below" breakpoint="phablet">
 						Oldest
