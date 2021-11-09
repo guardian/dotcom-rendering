@@ -1,5 +1,3 @@
-import { css } from '@emotion/react';
-
 import {
 	ArticleDesign,
 	ArticleDisplay,
