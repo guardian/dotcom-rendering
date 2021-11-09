@@ -777,16 +777,16 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 };
 
 const textPagination = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme][300]
-}
+	return pillarPalette[format.theme][300];
+};
 
 const borderPagination = (): string => {
-	return neutral[86]
-}
+	return neutral[86];
+};
 
 const hoverPagination = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme][300]
-}
+	return pillarPalette[format.theme][300];
+};
 
 export const decidePalette = (format: ArticleFormat): Palette => {
 	return {

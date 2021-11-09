@@ -1,8 +1,6 @@
 import { SerializedStyles, css } from '@emotion/react';
 
-import {
-	space,
-} from '@guardian/src-foundations';
+import { space } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { textSans } from '@guardian/src-foundations/typography';
 import {
@@ -90,10 +88,10 @@ const decidePaginationCss = (palette: Palette): SerializedStyles => {
 		color: ${palette.text.pagination};
 		border: 1px solid ${palette.border.pagination};
 		:hover {
-			border: 1px solid ${palette.hover.pagination}
+			border: 1px solid ${palette.hover.pagination};
 		}
 	`;
-}
+};
 
 export const Pagination = ({
 	currentPage,
@@ -104,8 +102,7 @@ export const Pagination = ({
 	newer,
 	format,
 }: Props) => {
-
-	const palette = decidePalette(format)
+	const palette = decidePalette(format);
 
 	return (
 		<Container>
