@@ -9,6 +9,7 @@ module.exports = {
 		'plugin:react/recommended',
 		'plugin:jsx-a11y/recommended',
 		'@guardian/eslint-config-typescript',
+		'plugin:@guardian/eslint-plugin-source-react-components/recommended',
 	],
 	parserOptions: {
 		// Allows for the parsing of modern ECMAScript features
