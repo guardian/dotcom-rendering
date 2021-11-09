@@ -5,7 +5,7 @@ export default {
 	title: 'Components/MatchTabs',
 };
 
-export const Default = () => {
+export const BothURLs = () => {
 	return (
 		<MatchTabs
 			minByMinUrl="https://www.theguardian.com/football/live/2021/nov/03/manchester-city-v-club-brugge-champions-league-live-score-updates"
@@ -13,4 +13,18 @@ export const Default = () => {
 		/>
 	);
 };
-Default.story = { name: 'default' };
+BothURLs.story = { name: 'Both URLs' };
+
+export const OnReportPage = () => {
+	return (
+		<MatchTabs minByMinUrl="https://www.theguardian.com/football/live/2021/nov/03/manchester-city-v-club-brugge-champions-league-live-score-updates" />
+	);
+};
+OnReportPage.story = { name: 'On Report Page' };
+
+export const OnBlogPage = () => {
+	return (
+		<MatchTabs matchUrl="https://www.theguardian.com/football/2021/nov/03/manchester-city-club-brugge-champions-league-match-report" />
+	);
+};
+OnBlogPage.story = { name: 'On Blog Page' };
