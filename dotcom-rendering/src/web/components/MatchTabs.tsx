@@ -61,7 +61,7 @@ export const MatchTabs = ({ minByMinUrl, matchUrl }: Props) => (
 	<div>
 		<ul css={tabsContainer}>
 			<li css={tab}>
-				<a href={matchUrl} data-link-name="Match" css={tabLink}>
+				<a href={matchUrl} data-link-name="report" css={tabLink}>
 					<span css={tabLabel}>Report</span>
 				</a>
 			</li>
