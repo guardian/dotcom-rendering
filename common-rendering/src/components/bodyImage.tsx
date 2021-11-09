@@ -2,9 +2,8 @@
 
 import type { SerializedStyles } from "@emotion/react";
 import { css } from "@emotion/react";
-import { remSpace } from "@guardian/src-foundations";
-import type { Breakpoint } from "@guardian/src-foundations/mq";
-import { from } from "@guardian/src-foundations/mq";
+import { remSpace, from } from "@guardian/source-foundations";
+import type { Breakpoint } from "@guardian/source-foundations";
 import type { ArticleFormat } from "@guardian/libs";
 import { ArticleElementRole} from "@guardian/libs";
 import type { Option } from "@guardian/types";

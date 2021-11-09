@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { matchers } from "@emotion/jest";
-import { breakpoints } from "@guardian/src-foundations/mq";
+import { breakpoints } from "@guardian/source-foundations";
 import renderer from "react-test-renderer";
 import type { Sizes } from "./sizes";
 import { sizesAttribute, styles } from "./sizes";

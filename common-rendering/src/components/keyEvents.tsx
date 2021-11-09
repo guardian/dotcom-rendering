@@ -2,21 +2,20 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { textSans, headline } from "@guardian/src-foundations/typography";
-import { remSpace } from "@guardian/src-foundations";
-import { focusHalo } from "@guardian/src-foundations/accessibility";
 import {
+	textSans, headline,
+	remSpace,
+	focusHalo,
 	culture,
 	lifestyle,
 	neutral,
 	news,
 	sport,
 	opinion,
-} from "@guardian/src-foundations/palette";
-import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
-import { Link } from "@guardian/src-link";
+	from
+} from "@guardian/source-foundations";
+import { SvgChevronUpSingle, SvgChevronDownSingle, Link } from "@guardian/source-react-components";
 import { ArticlePillar, ArticleTheme } from "@guardian/libs";
-import { from } from "@guardian/src-foundations/mq";
 import { darkModeCss } from "../lib";
 
 // ----- Component ----- //

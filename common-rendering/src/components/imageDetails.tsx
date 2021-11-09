@@ -2,10 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { brandAlt, neutral } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { SvgCamera } from '@guardian/src-icons';
+import { remSpace, brandAlt, neutral, textSans } from '@guardian/source-foundations';
+import { SvgCamera } from '@guardian/source-react-components';
 import { Option, OptionKind } from '@guardian/types';
 import { withDefault } from '@guardian/types';
 import { darkModeCss } from '@guardian/common-rendering/src/lib';

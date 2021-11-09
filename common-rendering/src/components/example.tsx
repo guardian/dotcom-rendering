@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { FC } from 'react';
-import { body } from '@guardian/src-foundations/typography';
+import { body } from '@guardian/source-foundations';
 import type { Person } from '@guardian/common-rendering/src/example';
 import { fullName } from '@guardian/common-rendering/src/example';
 

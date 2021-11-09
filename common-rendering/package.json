@@ -22,7 +22,7 @@
     "jest": {
         "preset": "ts-jest/presets/js-with-ts",
         "transformIgnorePatterns": [
-            "node_modules/(?!(@guardian/src-foundations|@guardian/types|@guardian/libs)/)"
+            "node_modules/(?!(@guardian/types|@guardian/libs)/)"
         ]
     }
 }

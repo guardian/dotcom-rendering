@@ -7,7 +7,7 @@ import {
   opinion,
   specialReport,
   sport,
-} from "@guardian/src-foundations/palette";
+} from "@guardian/source-foundations";
 import type { ArticleFormat } from "@guardian/libs";
 import { ArticlePillar, ArticleSpecial } from "@guardian/libs";
 

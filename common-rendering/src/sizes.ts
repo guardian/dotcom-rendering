@@ -2,8 +2,8 @@
 
 import type { SerializedStyles } from "@emotion/react";
 import { css } from "@emotion/react";
-import type { Breakpoint } from "@guardian/src-foundations/mq";
-import { breakpoints, from } from "@guardian/src-foundations/mq";
+import type { Breakpoint } from "@guardian/source-foundations";
+import { breakpoints, from } from "@guardian/source-foundations";
 
 // ----- Types ----- //
 

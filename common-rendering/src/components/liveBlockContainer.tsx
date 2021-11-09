@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from } from '@guardian/src-foundations/mq';
-import { neutral, space } from '@guardian/src-foundations';
+import { from, neutral, space } from '@guardian/source-foundations';
 
 const LEFT_MARGIN_DESKTOP = 60;
 const SIDE_MARGIN = space[5];
