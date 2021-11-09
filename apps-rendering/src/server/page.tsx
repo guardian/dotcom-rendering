@@ -109,9 +109,9 @@ function renderHead(
 
 	return `
         ${renderToString(meta)}
-        <link rel="stylesheet" type="text/css" href="/fontSize.css">
         <style>${generalStyles}</style>
         <style data-emotion-css="${emotionIds.join(' ')}">${itemStyles}</style>
+        <link rel="stylesheet" type="text/css" href="/fontSize.css">
         <script id="targeting-params" type="application/json">
             ${JSON.stringify(request.targetingParams)}
         </script>
