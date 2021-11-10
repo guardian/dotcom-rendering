@@ -2,9 +2,9 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { border, neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { Design, Display } from '@guardian/types';
 import Byline from 'components/editions/byline';
 import HeaderMedia from 'components/editions/headerMedia';
 import Headline from 'components/editions/headline';
@@ -250,24 +250,24 @@ const CorrectionsHeader: FC<HeaderProps> = ({ item }) => (
 );
 
 const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
-	// Display.Immersive needs to come before Design.Interview
-	if (item.display === Display.Immersive) {
+	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
+	if (item.display === ArticleDisplay.Immersive) {
 		return <ImmersiveHeader item={item} />;
-	} else if (item.design === Design.Editorial) {
+	} else if (item.design === ArticleDesign.Editorial) {
 		return <StandardHeader item={item} />;
-	} else if (item.design === Design.Letter) {
+	} else if (item.design === ArticleDesign.Letter) {
 		return <LetterHeader item={item} />;
-	} else if (item.design === Design.Interview) {
+	} else if (item.design === ArticleDesign.Interview) {
 		return <InterviewHeader item={item} />;
-	} else if (item.design === Design.Comment) {
+	} else if (item.design === ArticleDesign.Comment) {
 		return <CommentHeader item={item} />;
-	} else if (item.display === Display.Showcase) {
+	} else if (item.display === ArticleDisplay.Showcase) {
 		return <ShowcaseHeader item={item} />;
-	} else if (item.design === Design.Analysis) {
+	} else if (item.design === ArticleDesign.Analysis) {
 		return <AnalysisHeader item={item} />;
-	} else if (item.design === Design.Correction) {
+	} else if (item.design === ArticleDesign.Correction) {
 		return <CorrectionsHeader item={item} />;
-	} else if (item.design === Design.Media) {
+	} else if (item.design === ArticleDesign.Media) {
 		return isPicture(item.tags) ? (
 			<PictureHeader item={item} />
 		) : (

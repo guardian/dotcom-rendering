@@ -6,7 +6,7 @@ import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import { map, none, some, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { convertFormatToArticleFormat, pipe } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 
 // ----- Component ----- //
@@ -36,7 +36,7 @@ const Avatar: FC<Props> = ({ item }) => {
 				image={image}
 				sizes={sizes}
 				className={some(imgStyles)}
-				format={convertFormatToArticleFormat(format)}
+				format={format}
 				supportsDarkMode={false}
 				lightbox={none}
 			/>

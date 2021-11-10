@@ -1,21 +1,26 @@
 // ----- Imports ----- //
 
-import { Design, Display, Pillar, Special } from '@guardian/types';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 import type { FC } from 'react';
 import Paragraph from './paragraph';
 
 // ----- Stories ----- //
 
 const standard = {
-	design: Design.Article,
-	display: Display.Standard,
-	theme: Pillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: ArticlePillar.News,
 };
 
 const labs = {
-	design: Design.Article,
-	display: Display.Standard,
-	theme: Special.Labs,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: ArticleSpecial.Labs,
 };
 
 const Default: FC = () => (

@@ -1,16 +1,17 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons';
-import type { Format, Option } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
-const styles = (format: Format): SerializedStyles => {
+const styles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(format.theme);
 	return css`
 		color: ${kicker};
@@ -20,7 +21,7 @@ const styles = (format: Format): SerializedStyles => {
 	`;
 };
 
-const quoteStyles = (format: Format): SerializedStyles => {
+const quoteStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(format.theme);
 
 	return css`
@@ -43,7 +44,7 @@ const citeStyles = css`
 
 type Props = {
 	quote: string;
-	format: Format;
+	format: ArticleFormat;
 	attribution: Option<string>;
 };
 

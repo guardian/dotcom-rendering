@@ -5,7 +5,8 @@ import type { Image as ImageData } from '@guardian/common-rendering/src/image';
 import { Dpr, src, srcsets } from '@guardian/common-rendering/src/srcsets';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ArticleElementRole } from '@guardian/libs';
-import type { Format, Option } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
+import type { Option } from '@guardian/types';
 import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import { pipe } from 'lib';
 import type { Context } from 'parserContext';
@@ -22,7 +23,7 @@ interface Image extends ImageData {
 interface BodyImageProps {
 	image: Image;
 	children?: ReactNode;
-	format: Format;
+	format: ArticleFormat;
 }
 
 // ----- Functions ----- //

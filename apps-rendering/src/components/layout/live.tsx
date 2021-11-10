@@ -8,7 +8,6 @@ import LiveblogHeader from 'components/liveblogHeader';
 import RelatedContent from 'components/shared/relatedContent';
 import Tags from 'components/tags';
 import type { DeadBlog, LiveBlog } from 'item';
-import { convertThemeToArticleTheme } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
 import { articleWidthStyles, onwardStyles } from 'styles';
@@ -40,7 +39,7 @@ const Live: FC<Props> = ({ item }) => (
 		<LiveblogHeader item={item} />
 		<KeyEvents
 			keyEvents={keyEvents(item.blocks)}
-			theme={convertThemeToArticleTheme(item.theme)}
+			theme={item.theme}
 			supportsDarkMode
 		/>
 		<section css={articleWidthStyles}>

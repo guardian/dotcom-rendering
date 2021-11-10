@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
-import { Display, none, Pillar, some, toOption } from '@guardian/types';
+import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { none, some, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
@@ -63,11 +64,11 @@ const mockBylineHtml = (): Option<DocumentFragment> =>
 		toOption,
 	);
 
-const isImmersive = (): { display: Display } => {
+const isImmersive = (): { display: ArticleDisplay } => {
 	return {
 		display: boolean('Immersive', false)
-			? Display.Immersive
-			: Display.Standard,
+			? ArticleDisplay.Immersive
+			: ArticleDisplay.Standard,
 	};
 };
 
@@ -77,9 +78,9 @@ const Default = (): ReactElement => (
 	<Byline
 		item={{
 			...article,
-			display: Display.Standard,
+			display: ArticleDisplay.Standard,
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -90,7 +91,7 @@ const Analysis = (): ReactElement => (
 			...analysis,
 			...isImmersive(),
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -101,7 +102,7 @@ const Feature = (): ReactElement => (
 			...feature,
 			...isImmersive(),
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -111,7 +112,7 @@ const Review = (): ReactElement => (
 		item={{
 			...review,
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -120,9 +121,9 @@ const Showcase = (): ReactElement => (
 	<Byline
 		item={{
 			...article,
-			display: Display.Showcase,
+			display: ArticleDisplay.Showcase,
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -133,7 +134,7 @@ const Interview = (): ReactElement => (
 			...interview,
 			...isImmersive(),
 			bylineHtml: mockBylineHtml(),
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -149,7 +150,7 @@ const Comment = (): ReactElement => (
 				...comment,
 				...isImmersive(),
 				bylineHtml: mockBylineHtml(),
-				theme: selectPillar(Pillar.News),
+				theme: selectPillar(ArticlePillar.News),
 				contributors: contributors,
 			}}
 		/>
