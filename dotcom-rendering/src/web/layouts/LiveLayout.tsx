@@ -431,12 +431,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									/>
 								</div>
 							</GridItem>
-              <GridItem area="keyevents">
-                <KeyEventsContainer
-                  format={format}
-                  keyEvents={CAPI.keyEvents}
-                />
-              </GridItem>
+							<GridItem area="keyevents">
+								<KeyEventsContainer
+									format={format}
+									keyEvents={CAPI.keyEvents}
+								/>
+							</GridItem>
 							<GridItem area="body">
 								<ArticleContainer format={format}>
 									{CAPI.pagination &&
