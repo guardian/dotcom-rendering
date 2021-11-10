@@ -1227,6 +1227,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					countryCode={countryCode}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
+					sectionId={CAPI.config.section}
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 					isMinuteArticle={CAPI.pageType.isMinuteArticle}
 					isPaidContent={CAPI.pageType.isPaidContent}

@@ -27,6 +27,7 @@ import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { cmp } from '@guardian/consent-management-platform';
 import { storage } from '@guardian/libs';
 import { getCookie } from '../../browser/cookie';
+import {Targeting} from "@guardian/automat-contributions/lib/types";
 
 type PreEpicConfig = {
 	module: {
@@ -68,7 +69,7 @@ export type CanShowData = {
 	isSignedIn?: boolean;
 	countryCode?: string;
 	contentType: string;
-	sectionName?: string;
+	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
 	isPaidContent: boolean;
@@ -91,7 +92,7 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 		},
 		targeting: {
 			contentType: data.contentType,
-			sectionName: data.sectionName || '', // TODO update client to reflect that this is optional
+			sectionId: data.sectionId,
 			shouldHideReaderRevenue: data.shouldHideReaderRevenue,
 			isMinuteArticle: data.isMinuteArticle,
 			isPaidContent: data.isPaidContent,
