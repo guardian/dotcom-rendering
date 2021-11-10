@@ -113,7 +113,12 @@ const Spotify: FC = () => (
 	</div>
 );
 
-const Instagram: FC = () => (
+// I'm disabling the requirement for a return type because that doesnt make sense here 🤷. It
+// popped up after I removed the FC type which was causing problems when I tried to set parameters
+// on an individual story. Ideally, we'd use the type from Storybook directly
+// but https://github.com/storybookjs/storybook/issues/13486
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- because 👆
+const Instagram = () => (
 	<div>
 		<p>
 			This is an example of the embed wrapper rendering a instagram
@@ -143,6 +148,11 @@ const Instagram: FC = () => (
 		/>
 	</div>
 );
+Instagram.story = {
+	parameters: {
+		chromatic: { disable: true },
+	},
+};
 
 // ----- Exports ----- //
 

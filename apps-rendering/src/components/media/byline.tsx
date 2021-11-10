@@ -58,7 +58,7 @@ const Byline: FC<Props> = ({ publicationDate, className, item }) => {
 			<div>
 				<div className="author">
 					{byline}
-					<Dateline date={publicationDate} theme={item.theme} />
+					<Dateline date={publicationDate} format={item} />
 				</div>
 			</div>
 		</div>

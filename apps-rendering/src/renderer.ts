@@ -63,6 +63,7 @@ import InteractiveAtom, {
 import List from 'components/list';
 import ListItem from 'components/listItem';
 import LiveEventLink from 'components/liveEventLink';
+import OrderedList from 'components/orderedList';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
 import RichLink from 'components/richLink';
@@ -181,6 +182,8 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 			return h('br', { key }, null);
 		case 'UL':
 			return h('ul', { key }, children);
+		case 'OL':
+			return h('ol', { key }, children);
 		case 'LI':
 			return h('li', { key }, children);
 		case 'MARK':
@@ -241,6 +244,8 @@ const textElement =
 				return h('br', { key }, null);
 			case 'UL':
 				return h(List, { children });
+			case 'OL':
+				return h(OrderedList, { children });
 			case 'LI':
 				return h(ListItem, { format, children });
 			case 'MARK':

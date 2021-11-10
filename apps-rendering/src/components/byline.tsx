@@ -42,22 +42,28 @@ const anchorStyles = (
     `}
 `;
 
+const liveBlogColor = (link: string, inverted: string): SerializedStyles => css`
+	color: ${neutral[100]};
+	${from.desktop} {
+		color: ${link};
+	}
+
+	${darkModeCss`
+		color: ${neutral[93]};
+		${from.desktop} {
+			color: ${inverted};
+		}
+	`}
+`;
+
 const liveblogAnchorStyles = (
-	kicker: string,
+	link: string,
 	inverted: string,
 ): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: 'bold' })}
 	font-style: normal;
-	color: ${neutral[93]};
 	text-decoration: none;
-
-	${from.desktop} {
-		color: ${kicker};
-
-		${darkModeCss`
-			color: ${inverted};
-		`}
-	}
+	${liveBlogColor(link, inverted)}
 `;
 
 const commentStyles = (kicker: string): SerializedStyles => css`
@@ -87,13 +93,12 @@ const labsStyles = css`
     `}
 `;
 
-const liveblogStyles = (kicker: string): SerializedStyles => css`
+const liveblogStyles = (
+	link: string,
+	inverted: string,
+): SerializedStyles => css`
 	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
-	color: ${palette.neutral[93]};
-
-	${from.desktop} {
-		color: ${kicker};
-	}
+	${liveBlogColor(link, inverted)}
 `;
 
 const labsAnchorStyles = css`
@@ -108,7 +113,7 @@ const labsAnchorStyles = css`
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
-	const { kicker } = getThemeStyles(format.theme);
+	const { kicker, link, inverted } = getThemeStyles(format.theme);
 
 	if (format.theme === Special.Labs) {
 		return labsStyles;
@@ -117,7 +122,7 @@ const getStyles = (format: Format): SerializedStyles => {
 	switch (format.design) {
 		case Design.LiveBlog:
 		case Design.DeadBlog:
-			return liveblogStyles(kicker);
+			return liveblogStyles(link, inverted);
 		case Design.Editorial:
 		case Design.Letter:
 		case Design.Comment:
@@ -128,14 +133,14 @@ const getStyles = (format: Format): SerializedStyles => {
 };
 
 const getAnchorStyles = (format: Format): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
+	const { kicker, inverted, link } = getThemeStyles(format.theme);
 	if (format.theme === Special.Labs) {
 		return labsAnchorStyles;
 	}
 	switch (format.design) {
 		case Design.LiveBlog:
 		case Design.DeadBlog:
-			return liveblogAnchorStyles(kicker, inverted);
+			return liveblogAnchorStyles(link, inverted);
 		case Design.Editorial:
 		case Design.Letter:
 		case Design.Comment:
