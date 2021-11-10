@@ -37,11 +37,18 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 	</nav>
 );
 
-const Section = ({ children }: { children: React.ReactNode }) => (
+const Section = ({
+	isFirst = false,
+	children,
+}: {
+	isFirst?: boolean;
+	children: React.ReactNode;
+}) => (
 	<section
 		css={css`
 			display: flex;
 			align-items: center;
+			visibility: ${isFirst ? 'hidden' : 'visible'};
 		`}
 	>
 		{children}
@@ -106,35 +113,32 @@ export const Pagination = ({
 
 	return (
 		<Container>
-			{currentPage !== 1 && (
-				<Section>
-					<LinkButton
-						size="small"
-						priority="tertiary"
-						icon={<SvgChevronLeftDouble />}
-						iconSide="left"
-						href={newest}
-						cssOverrides={decidePaginationCss(palette)}
-					>
-						<Hide when="below" breakpoint="phablet">
-							Newest
-						</Hide>
-					</LinkButton>
-					<Space />
-					<LinkButton
-						size="small"
-						priority="tertiary"
-						icon={<SvgChevronLeftSingle />}
-						hideLabel={true}
-						href={newer}
-						cssOverrides={decidePaginationCss(palette)}
-					>
-						<Hide when="below" breakpoint="phablet">
-							Previous
-						</Hide>
-					</LinkButton>
-				</Section>
-			)}
+			<Section isFirst={currentPage === 1}>
+				<LinkButton
+					size="small"
+					priority="tertiary"
+					icon={<SvgChevronLeftDouble />}
+					iconSide="left"
+					href={newest}
+					cssOverrides={decidePaginationCss(palette)}
+				>
+					<Hide when="below" breakpoint="phablet">
+						Newest
+					</Hide>
+				</LinkButton>
+				<Space />
+				<LinkButton
+					size="small"
+					priority="tertiary"
+					icon={<SvgChevronLeftSingle />}
+					hideLabel={true}
+					href={newer}
+					cssOverrides={decidePaginationCss(palette)}
+				>
+					{/* Label needed for screen readers? */}
+					Previous
+				</LinkButton>
+			</Section>
 			<Section>
 				<Position>
 					<Bold>{currentPage}</Bold>
@@ -151,9 +155,8 @@ export const Pagination = ({
 					href={older}
 					cssOverrides={decidePaginationCss(palette)}
 				>
-					<Hide when="below" breakpoint="phablet">
-						Next
-					</Hide>
+					{/* Label needed for screen readers? */}
+					Next
 				</LinkButton>
 				<Space />
 				<LinkButton

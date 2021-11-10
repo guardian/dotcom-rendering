@@ -78,3 +78,51 @@ defaultStory.story = {
 		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
 	},
 };
+
+export const firstPageStory = () => {
+	return (
+		<>
+			<Pagination
+				currentPage={1}
+				totalPages={4}
+				format={formatMap.news}
+			/>
+			<Pagination
+				currentPage={1}
+				totalPages={4}
+				format={formatMap.sport}
+			/>
+			<Pagination
+				currentPage={1}
+				totalPages={4}
+				format={formatMap.culture}
+			/>
+			<Pagination
+				currentPage={1}
+				totalPages={4}
+				format={formatMap.lifestyle}
+			/>
+			<Pagination
+				currentPage={1}
+				totalPages={4}
+				format={formatMap.opinion}
+			/>
+			<Pagination
+				currentPage={1}
+				totalPages={4}
+				format={formatMap.specialReport}
+			/>
+			<Pagination
+				currentPage={1}
+				totalPages={4}
+				format={formatMap.labs}
+			/>
+		</>
+	);
+};
+firstPageStory.story = {
+	name: 'Pagination in first page',
+	parameters: {
+		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
+	},
+};
