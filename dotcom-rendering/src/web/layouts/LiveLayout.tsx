@@ -33,6 +33,7 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Pagination } from '@frontend/web/components/Pagination';
+import { KeyEventsContainer } from '@frontend/web/components/KeyEventsContainer';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -80,19 +81,21 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				${from.desktop} {
 					grid-template-columns: 309px 1px 1fr;
 					grid-template-areas:
-						'lines border media'
-						'meta  border media'
-						'meta  border body'
-						'.     border .';
+						'lines		border media'
+						'meta		border media'
+						'keyevents	border media'
+						'.			border body'
+						'. 			border .';
 				}
 
 				${from.wide} {
 					grid-template-columns: 309px 1px 1fr 340px;
 					grid-template-areas:
-						'lines border media right-column'
-						'meta  border media right-column'
-						'meta  border body  right-column'
-						'.     border .     right-column';
+						'lines 		border media right-column'
+						'meta  		border media right-column'
+						'keyevents  border media right-column'
+						'.  		border body  right-column'
+						'.			border .     right-column';
 				}
 
 				${until.desktop} {
@@ -101,6 +104,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'media'
 						'lines'
 						'meta'
+						'keyevents'
 						'body';
 				}
 
@@ -112,6 +116,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'media'
 						'lines'
 						'meta'
+						'keyevents'
 						'body';
 				}
 			}
@@ -241,9 +246,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							idUrl={CAPI.config.idUrl}
 							mmaUrl={CAPI.config.mmaUrl}
 							isAnniversary={
-								CAPI.config.switches.anniversaryHeaderSvg &&
-								CAPI.config.abTests.anniversaryAtomVariant ===
-									'variant'
+								CAPI.config.switches.anniversaryHeaderSvg
 							}
 						/>
 					</ElementContainer>
@@ -415,6 +418,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								}
 							/>
 						</div>
+					</GridItem>
+					<GridItem area="keyevents">
+						<KeyEventsContainer
+							format={format}
+							keyEvents={CAPI.keyEvents}
+						/>
 					</GridItem>
 					<GridItem area="body">
 						<ArticleContainer>

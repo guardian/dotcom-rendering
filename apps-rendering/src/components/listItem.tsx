@@ -16,18 +16,6 @@ const baseStyles = css`
 	padding-left: ${remSpace[6]};
 	padding-bottom: 0.375rem;
 
-	&::before {
-		display: inline-block;
-		content: '';
-		border-radius: 0.5rem;
-		height: 1rem;
-		width: 1rem;
-		margin-right: ${remSpace[2]};
-		background-color: ${neutral[86]};
-		margin-left: -${remSpace[6]};
-		vertical-align: middle;
-	}
-
 	> p:first-of-type {
 		display: inline;
 		padding: 0;
