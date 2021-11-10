@@ -11,11 +11,7 @@ import { Design, Display, map, Special, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import {
-	articleWidthStyles,
-	darkModeCss,
-	wideContentWidth,
-} from 'styles';
+import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
@@ -26,7 +22,7 @@ interface Props {
 
 const standardLinkStyles = (theme: Theme): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(theme);
-	
+
 	return css`
 		${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
 		color: ${kicker};
@@ -36,7 +32,7 @@ const standardLinkStyles = (theme: Theme): SerializedStyles => {
 			color: ${inverted};
 		`}
 	`;
-}
+};
 
 const labsLinkStyles = (theme: Theme): SerializedStyles => css`
 	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
@@ -65,7 +61,11 @@ const liveLinkStyles = (theme: Theme): SerializedStyles => css`
 	text-decoration: none;
 `;
 
-const getLinkStyles = ({ design, display, theme }: Format): SerializedStyles => {
+const getLinkStyles = ({
+	design,
+	display,
+	theme,
+}: Format): SerializedStyles => {
 	if (display === Display.Immersive && theme === Special.Labs) {
 		return css(immersiveLinkStyles, immersiveLabsLinkStyles);
 	}
@@ -87,10 +87,9 @@ const getLinkStyles = ({ design, display, theme }: Format): SerializedStyles => 
 
 const immersiveStyles = (theme: Theme): SerializedStyles => css`
 	padding: ${remSpace[1]} ${remSpace[3]};
-	background-color: ${
-		theme === Special.Labs
-			? palette.labs[300]
-			: getThemeStyles(theme).kicker};
+	background-color: ${theme === Special.Labs
+		? palette.labs[300]
+		: getThemeStyles(theme).kicker};
 	position: absolute;
 	left: 0;
 	transform: translateY(-100%);

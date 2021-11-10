@@ -4,6 +4,8 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { neutral, news, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
+import { textSans } from '@guardian/src-foundations/typography';
+import { Column, Columns, Container } from '@guardian/src-layout';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';
@@ -14,8 +16,6 @@ import type { FC } from 'react';
 import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';
 import Series from './series';
-import { Column, Columns, Container } from '@guardian/src-layout';
-import { textSans } from '@guardian/src-foundations/typography';
 
 // // ----- Styles ----- //
 

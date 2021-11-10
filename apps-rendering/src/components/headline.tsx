@@ -12,11 +12,7 @@ import { border } from 'editorialPalette';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import type { ReactElement } from 'react';
-import {
-	articleWidthStyles,
-	darkModeCss,
-	wideContentWidth,
-} from 'styles';
+import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 
 // ----- Component ----- //
 
