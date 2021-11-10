@@ -1,13 +1,14 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import {
 	Lines,
 	ToggleSwitch,
 } from '@guardian/source-react-components-development-kitchen';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Display } from '@guardian/types';
+import { Design, Display, Format } from '@guardian/types';
 import Avatar from 'components/avatar';
 import Byline from 'components/byline';
 import CommentCount from 'components/commentCount';
@@ -22,6 +23,7 @@ import {
 	sidePadding,
 	wideColumnWidth,
 } from 'styles';
+import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
@@ -125,6 +127,29 @@ const linesDarkStyles = css`
 
 const isLive = (design: Design): boolean => design === Design.LiveBlog;
 
+const tempraryBackgroundStyle = (format: Format): SerializedStyles => {
+	const themeStyles = getThemeStyles(format.theme);
+	switch (format.design) {
+		case Design.DeadBlog:
+			return css`
+				background-color: ${neutral[93]};
+				${from.desktop} {
+					background-color: ${neutral[97]};
+				}
+				@media (prefers-color-scheme: dark) {
+					background-color: ${neutral[10]};
+				}
+			`;
+		default:
+			return css`
+				background-color: ${themeStyles.liveblogBackground};
+				@media (prefers-color-scheme: dark) {
+					background-color: ${themeStyles.liveblogDarkBackground};
+				}
+			`;
+	}
+};
+
 const BlogLines: FC<Item> = (item: Item) => (
 	<div>
 		<Lines
@@ -171,7 +196,14 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 	const { design } = item;
 	const [checked, setChecked] = useState<boolean>(false);
 	return (
-		<div css={css(styles, withBylineStyles, blogStyles)}>
+		<div
+			css={css(
+				styles,
+				withBylineStyles,
+				blogStyles,
+				tempraryBackgroundStyle(item),
+			)}
+		>
 			<BlogLines {...item} />
 			<Avatar {...item} />
 			<div

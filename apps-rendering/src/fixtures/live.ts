@@ -16,7 +16,7 @@ import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
 import type { DeadBlog, LiveBlog } from 'item';
 import { pipe } from 'lib';
-import { LiveBlock } from 'liveBlock';
+import type { LiveBlock } from 'liveBlock';
 
 const parser = new DOMParser();
 const parseHtml = parse(parser);
