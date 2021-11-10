@@ -5,8 +5,8 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
-import CameraIcon from '@frontend/static/icons/camera.svg';
-import VideoIcon from '@frontend/static/icons/video-icon.svg';
+import CameraSvg from '@frontend/static/icons/camera.svg';
+import VideoSvg from '@frontend/static/icons/video-icon.svg';
 
 type Props = {
 	captionText?: string;
@@ -18,7 +18,7 @@ type Props = {
 	shouldLimitWidth?: boolean;
 	isOverlayed?: boolean;
 	isLeftCol?: boolean;
-	isVideo?: boolean;
+	mediaType?: MediaType;
 };
 
 const captionStyle = (palette: Palette) => css`
@@ -139,6 +139,35 @@ const captionLink = (palette: Palette) => css`
 	}
 `;
 
+const CameraIcon = (props: {palette: Palette, format: ArticleFormat}) => {
+	return (
+		<span
+				css={[
+					iconStyle(props.palette),
+					props.format.display === ArticleDisplay.Immersive &&
+						hideIconBelowLeftCol,
+				]}
+			>
+				<CameraSvg />
+			</span>
+	)
+}
+
+const VideoIcon = (props: {palette: Palette, format: ArticleFormat}) => {
+	return (
+		<span
+				css={[
+					iconStyle(props.palette),
+					props.format.display === ArticleDisplay.Immersive &&
+						hideIconBelowLeftCol,
+					videoIconStyle,
+				]}
+			>
+				<VideoSvg />
+			</span>
+	)
+}
+
 export const Caption = ({
 	captionText,
 	format,
@@ -149,7 +178,7 @@ export const Caption = ({
 	shouldLimitWidth = false,
 	isOverlayed,
 	isLeftCol,
-	isVideo = false,
+	mediaType = 'Gallery',
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -167,16 +196,10 @@ export const Caption = ({
 				padCaption && captionPadding,
 			]}
 		>
-			<span
-				css={[
-					iconStyle(palette),
-					format.display === ArticleDisplay.Immersive &&
-						hideIconBelowLeftCol,
-					isVideo && videoIconStyle,
-				]}
-			>
-				{isVideo ? <VideoIcon /> : <CameraIcon />}
-			</span>
+			{mediaType === 'Video' ?
+				<VideoIcon palette={palette} format={format} /> :
+				<CameraIcon palette={palette} format={format} />
+			}
 			{captionText && (
 				<span
 					css={captionLink(palette)}

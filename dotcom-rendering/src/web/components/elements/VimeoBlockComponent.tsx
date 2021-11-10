@@ -55,7 +55,7 @@ export const VimeoBlockComponent: React.FC<{
 					format={format}
 					palette={palette}
 					credit={credit}
-					isVideo={true}
+					mediaType="Video"
 				/>
 			)}
 		</div>
