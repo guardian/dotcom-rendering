@@ -21,6 +21,11 @@ type Props = {
 	mediaType?: MediaType;
 };
 
+type IconProps = {
+	palette: Palette;
+	format: ArticleFormat;
+};
+
 const captionStyle = (palette: Palette) => css`
 	${textSans.xsmall()};
 	line-height: 135%;
@@ -139,12 +144,12 @@ const captionLink = (palette: Palette) => css`
 	}
 `;
 
-const CameraIcon = (props: { palette: Palette; format: ArticleFormat }) => {
+const CameraIcon = ({ palette, format }: IconProps) => {
 	return (
 		<span
 			css={[
-				iconStyle(props.palette),
-				props.format.display === ArticleDisplay.Immersive &&
+				iconStyle(palette),
+				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 			]}
 		>
@@ -153,12 +158,12 @@ const CameraIcon = (props: { palette: Palette; format: ArticleFormat }) => {
 	);
 };
 
-const VideoIcon = (props: { palette: Palette; format: ArticleFormat }) => {
+const VideoIcon = ({ palette, format }: IconProps) => {
 	return (
 		<span
 			css={[
-				iconStyle(props.palette),
-				props.format.display === ArticleDisplay.Immersive &&
+				iconStyle(palette),
+				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 				videoIconStyle,
 			]}
