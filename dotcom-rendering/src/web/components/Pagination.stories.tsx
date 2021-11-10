@@ -12,8 +12,8 @@ export default {
 	title: 'Components/Pagination',
 	parameters: {
 		layout: 'padded',
+		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
 	},
-	// breakpoints:
 };
 
 const defaultFormat = {
@@ -31,7 +31,7 @@ const formatMap = {
 	labs: { ...defaultFormat, theme: ArticleSpecial.Labs },
 };
 
-export const defaultStory = () => {
+export const notFirstPage = () => {
 	return (
 		<>
 			<Pagination
@@ -72,11 +72,8 @@ export const defaultStory = () => {
 		</>
 	);
 };
-defaultStory.story = {
-	name: 'default',
-	parameters: {
-		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
-	},
+notFirstPage.story = {
+	name: 'Not first page',
 };
 
 export const firstPageStory = () => {
@@ -121,8 +118,5 @@ export const firstPageStory = () => {
 	);
 };
 firstPageStory.story = {
-	name: 'Pagination in first page',
-	parameters: {
-		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
-	},
+	name: 'First page',
 };

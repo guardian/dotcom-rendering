@@ -115,18 +115,31 @@ export const Pagination = ({
 	return (
 		<Container>
 			<Section isFirst={currentPage === 1}>
-				<LinkButton
-					size="small"
-					priority="tertiary"
-					icon={<SvgChevronLeftDouble />}
-					iconSide="left"
-					href={newest}
-					cssOverrides={decidePaginationCss(palette)}
-				>
-					<Hide when="below" breakpoint="phablet">
+				<Hide when="above" breakpoint="phablet">
+					<LinkButton
+						size="small"
+						priority="tertiary"
+						icon={<SvgChevronLeftDouble />}
+						iconSide="left"
+						hideLabel={true}
+						href={newest}
+						cssOverrides={decidePaginationCss(palette)}
+					>
 						Newest
-					</Hide>
-				</LinkButton>
+					</LinkButton>
+				</Hide>
+				<Hide when="below" breakpoint="phablet">
+					<LinkButton
+						size="small"
+						priority="tertiary"
+						icon={<SvgChevronLeftDouble />}
+						iconSide="left"
+						href={newest}
+						cssOverrides={decidePaginationCss(palette)}
+					>
+						Newest
+					</LinkButton>
+				</Hide>
 				<Space />
 				<LinkButton
 					size="small"
@@ -156,22 +169,34 @@ export const Pagination = ({
 					href={older}
 					cssOverrides={decidePaginationCss(palette)}
 				>
-					{/* Label needed for screen readers? */}
 					Next
 				</LinkButton>
 				<Space />
-				<LinkButton
-					size="small"
-					priority="tertiary"
-					icon={<SvgChevronRightDouble />}
-					iconSide="right"
-					href={oldest}
-					cssOverrides={decidePaginationCss(palette)}
-				>
-					<Hide when="below" breakpoint="phablet">
+				<Hide when="above" breakpoint="phablet">
+					<LinkButton
+						size="small"
+						priority="tertiary"
+						icon={<SvgChevronRightDouble />}
+						iconSide="right"
+						href={oldest}
+						hideLabel={true}
+						cssOverrides={decidePaginationCss(palette)}
+					>
 						Oldest
-					</Hide>
-				</LinkButton>
+					</LinkButton>
+				</Hide>
+				<Hide when="below" breakpoint="phablet">
+					<LinkButton
+						size="small"
+						priority="tertiary"
+						icon={<SvgChevronRightDouble />}
+						iconSide="right"
+						href={oldest}
+						cssOverrides={decidePaginationCss(palette)}
+					>
+						Oldest
+					</LinkButton>
+				</Hide>
 			</Section>
 		</Container>
 	);
