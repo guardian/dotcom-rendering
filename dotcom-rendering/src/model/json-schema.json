@@ -384,9 +384,6 @@
         },
         "isLegacyInteractive": {
             "type": "boolean"
-        },
-        "anniversaryInteractiveAtom": {
-            "$ref": "#/definitions/InteractiveAtomBlockElement"
         }
     },
     "required": [
