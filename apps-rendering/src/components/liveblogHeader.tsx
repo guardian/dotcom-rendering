@@ -5,6 +5,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import type { Format } from '@guardian/types';
+import { Design } from '@guardian/types';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';
@@ -24,19 +25,27 @@ const headlineBackgroundStyles = (format: Format): SerializedStyles => css`
 	${headlineBackgroundColour(format)};
 `;
 
-const headerBackgroundStyles = ({
-	liveblogBackground,
-	liveblogDarkBackground,
-}: ThemeStyles): SerializedStyles => css`
-	background-color: ${liveblogBackground};
+const headerBackgroundStyles = (
+	background: string,
+	darkBackground: string,
+): SerializedStyles => css`
+	background-color: ${background};
 
 	@media (prefers-color-scheme: dark) {
-		background-color: ${liveblogDarkBackground};
+		background-color: ${darkBackground};
 	}
 `;
 
-const metadataStyles = (themeStyle: ThemeStyles): SerializedStyles => css`
-	${headerBackgroundStyles(themeStyle)}
+const metadataStyles = (
+	isLive: Boolean,
+	themeStyle: ThemeStyles,
+): SerializedStyles => css`
+	${isLive
+		? headerBackgroundStyles(
+				themeStyle.liveblogBackground,
+				themeStyle.liveblogDarkBackground,
+		  )
+		: headerBackgroundStyles(neutral[93], neutral[93])}
 
 	${from.desktop} {
 		background-color: ${neutral[97]};
@@ -57,6 +66,8 @@ interface Props {
 	item: LiveBlog | DeadBlog;
 }
 
+const isLive = (design: Design): Boolean => design === Design.LiveBlog;
+
 const LiveblogHeader: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const themeStyles = getThemeStyles(format.theme);
@@ -67,12 +78,17 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 				<Series item={item} />
 				<Headline item={item} />
 			</div>
-			<div css={headerBackgroundStyles(themeStyles)}>
+			<div
+				css={headerBackgroundStyles(
+					themeStyles.liveblogBackground,
+					themeStyles.liveblogDarkBackground,
+				)}
+			>
 				<div css={css(liveblogWidthStyles, liveblogPhabletSidePadding)}>
 					<Standfirst item={item} />
 				</div>
 			</div>
-			<div css={metadataStyles(themeStyles)}>
+			<div css={metadataStyles(isLive(item.design), themeStyles)}>
 				<Metadata item={item} />
 				<div css={headerMediaStyles}>
 					<HeaderMedia item={item} />

@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import {
 	Lines,
 	ToggleSwitch,
@@ -48,30 +48,31 @@ const withBylineTextStyles = css`
 
 const blogStyles = css`
 	display: block;
-	margin-bottom: ${remSpace[2]};
+	margin-bottom: 0;
 	${from.desktop} {
 		width: ${wideColumnWidth}px;
 	}
 `;
 
-const metaBottomStyles = css`
+const metaBottomStyles = (isLive: boolean): SerializedStyles => css`
 	display: flex;
 	border-top: 1px solid rgba(255, 255, 255, 0.4);
 
 	${from.desktop} {
 		border-top: 1px solid ${neutral[86]};
 	}
+
+	${!isLive && `border-top: 1px solid rgba(153, 153, 153, 0.4);`}
 `;
 
 const toggleStyles = css`
 	flex-grow: 1;
-	padding-top: ${remSpace[2]};
 `;
 
 const liveblogSidePadding = css`
 	${sidePadding}
 
-	padding-bottom: ${remSpace[3]};
+	padding-bottom: ${remSpace[2]};
 
 	${liveblogPhabletSidePadding}
 
@@ -122,6 +123,28 @@ const linesDarkStyles = css`
 	${darkModeCss`${from.desktop} {display: block;}`}
 `;
 
+const isLive = (design: Design): boolean => design === Design.LiveBlog;
+
+const BlogLines: FC<Item> = (item: Item) => (
+	<div>
+		<Lines
+			color={
+				isLive(item.design)
+					? 'rgba(255, 255, 255, 0.4)'
+					: 'rgba(153, 153, 153, 0.4)'
+			}
+			cssOverrides={linesStyles}
+		/>
+		<Lines color={neutral[86]} cssOverrides={linesDesktopStyles} />
+		<Lines
+			color={
+				isLive(item.design) ? neutral[20] : 'rgba(237, 237, 237, 0.4)'
+			}
+			cssOverrides={linesDarkStyles}
+		/>
+	</div>
+);
+
 const MetadataWithByline: FC<Props> = ({ item }: Props) => (
 	<div css={css(styles, withBylineStyles)}>
 		<Avatar {...item} />
@@ -145,15 +168,11 @@ const ShortMetadata: FC<Props> = ({ item }: Props) => (
 );
 
 const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
+	const { design } = item;
 	const [checked, setChecked] = useState<boolean>(false);
 	return (
 		<div css={css(styles, withBylineStyles, blogStyles)}>
-			<Lines
-				color={'rgba(255, 255, 255, 0.4)'}
-				cssOverrides={linesStyles}
-			/>
-			<Lines color={neutral[86]} cssOverrides={linesDesktopStyles} />
-			<Lines color={neutral[20]} cssOverrides={linesDarkStyles} />
+			<BlogLines {...item} />
 			<Avatar {...item} />
 			<div
 				css={css(textStyles, withBylineTextStyles, liveblogSidePadding)}
@@ -164,18 +183,20 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 				<Dateline date={item.publishDate} format={item} />
 				<Follow {...item} />
 			</div>
-			<div css={metaBottomStyles}>
-				<div css={css(toggleStyles, liveblogSidePadding)}>
-					<ToggleSwitch
-						checked={checked}
-						label={'Get alerts on this story'}
-						cssOverrides={toggleOverrideStyles}
-						onClick={(e): void => {
-							setChecked(!checked);
-							console.log('changed toggle');
-						}}
-					></ToggleSwitch>
-				</div>
+			<div css={metaBottomStyles(isLive(design))}>
+				{isLive(design) && (
+					<div css={css(toggleStyles, liveblogSidePadding)}>
+						<ToggleSwitch
+							checked={checked}
+							label={'Get alerts on this story'}
+							cssOverrides={toggleOverrideStyles}
+							onClick={(e): void => {
+								setChecked(!checked);
+								console.log('changed toggle');
+							}}
+						></ToggleSwitch>
+					</div>
+				)}
 				<CommentCount count={item.commentCount} {...item} />
 			</div>
 		</div>

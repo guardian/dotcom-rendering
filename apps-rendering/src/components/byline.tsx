@@ -42,8 +42,12 @@ const anchorStyles = (
     `}
 `;
 
-const liveBlogColor = (link: string, inverted: string): SerializedStyles => css`
-	color: ${neutral[100]};
+const blogColor = (
+	color: string,
+	link: string,
+	inverted: string,
+): SerializedStyles => css`
+	color: ${color};
 	${from.desktop} {
 		color: ${link};
 	}
@@ -56,14 +60,10 @@ const liveBlogColor = (link: string, inverted: string): SerializedStyles => css`
 	`}
 `;
 
-const liveblogAnchorStyles = (
-	link: string,
-	inverted: string,
-): SerializedStyles => css`
+const blogAnchorStyles = css`
 	${headline.xxxsmall({ fontWeight: 'bold' })}
 	font-style: normal;
 	text-decoration: none;
-	${liveBlogColor(link, inverted)}
 `;
 
 const commentStyles = (kicker: string): SerializedStyles => css`
@@ -93,12 +93,8 @@ const labsStyles = css`
     `}
 `;
 
-const liveblogStyles = (
-	link: string,
-	inverted: string,
-): SerializedStyles => css`
+const blogStyles = css`
 	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
-	${liveBlogColor(link, inverted)}
 `;
 
 const labsAnchorStyles = css`
@@ -121,8 +117,9 @@ const getStyles = (format: Format): SerializedStyles => {
 
 	switch (format.design) {
 		case Design.LiveBlog:
+			return css(blogStyles, blogColor(neutral[100], link, inverted));
 		case Design.DeadBlog:
-			return liveblogStyles(link, inverted);
+			return css(blogStyles, blogColor(link, link, inverted));
 		case Design.Editorial:
 		case Design.Letter:
 		case Design.Comment:
@@ -139,8 +136,12 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
 	}
 	switch (format.design) {
 		case Design.LiveBlog:
+			return css(
+				blogAnchorStyles,
+				blogColor(neutral[100], link, inverted),
+			);
 		case Design.DeadBlog:
-			return liveblogAnchorStyles(link, inverted);
+			return css(blogAnchorStyles, blogColor(link, link, inverted));
 		case Design.Editorial:
 		case Design.Letter:
 		case Design.Comment:

@@ -43,41 +43,76 @@ const bubbleStyles = (colour: string): SerializedStyles => css`
 	fill: ${colour};
 `;
 
+const blogStyles = (color: string): SerializedStyles => css`
+	${styles(color, 'rgba(255, 255, 255, 0.4)', 'rgba(255, 255, 255, 0.4)')}
+
+	${from.desktop} {
+		color: ${neutral[46]};
+		border-left: 1px solid ${neutral[86]};
+	}
+	padding-top: ${remSpace[2]};
+	margin-bottom: ${remSpace[2]};
+`;
+
+const deadblogStyles = css`
+	border-left: none;
+	padding-left: ${remSpace[3]};
+	${from.phablet} {
+		padding-left: ${remSpace[5]};
+	}
+	${from.desktop} {
+		padding-left: 0;
+		border-left: none;
+	}
+`;
+
 const getStyles = ({ theme, design }: Format): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
-	if (design === Design.LiveBlog || design === Design.DeadBlog) {
-		return css`
-			${styles(
-				neutral[93],
-				'rgba(255, 255, 255, 0.4)',
-				'rgba(255, 255, 255, 0.4)',
-			)}
-
-			${from.desktop} {
-				color: ${neutral[46]};
-				border-left: 1px solid ${neutral[86]};
-			}
-			margin-bottom: ${remSpace[2]};
-		`;
+	switch (design) {
+		case Design.LiveBlog:
+			return blogStyles(neutral[93]);
+		case Design.DeadBlog:
+			return css(blogStyles(colours.link), deadblogStyles);
+		default:
+			return styles(colours.kicker, border.secondary, neutral[20]);
 	}
-
-	return styles(colours.kicker, border.secondary, neutral[20]);
 };
+
+const liveblogBubbleStyles = (color: string): SerializedStyles => css`
+	${from.desktop} {
+		fill: ${color};
+	}
+`;
+
+const deadblogBubbleStyles = (
+	color: string,
+	desktopColor: string,
+): SerializedStyles => css`
+	fill: ${color};
+	margin-left: revert;
+	${from.desktop} {
+		fill: ${desktopColor};
+	}
+`;
 
 const getBubbleStyles = ({ theme, design }: Format): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
-	if (design === Design.LiveBlog || design === Design.DeadBlog) {
-		return css`
-			${bubbleStyles(neutral[93])}
-			${from.desktop} {
-				fill: ${neutral[46]};
-			}
-		`;
+	switch (design) {
+		case Design.LiveBlog:
+			return css(
+				bubbleStyles(neutral[93]),
+				liveblogBubbleStyles(neutral[46]),
+			);
+		case Design.DeadBlog:
+			return css(
+				bubbleStyles(neutral[93]),
+				deadblogBubbleStyles(colours.link, neutral[46]),
+			);
+		default:
+			return bubbleStyles(colours.kicker);
 	}
-
-	return bubbleStyles(colours.kicker);
 };
 
 const CommentCount: FC<Props> = ({ count, commentable, ...format }: Props) => {
