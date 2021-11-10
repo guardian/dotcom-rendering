@@ -14,12 +14,16 @@ const articleWidth = (format: ArticleFormat) => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return css`
-				width: 700px;
+				${from.desktop} {
+					width: 700px;
+				}
 			`;
 		}
 		default: {
 			return css`
-				width: 620px;
+				${from.desktop} {
+					width: 620px;
+				}
 			`;
 		}
 	}
