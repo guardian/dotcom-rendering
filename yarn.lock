@@ -1615,6 +1615,13 @@
   dependencies:
     "@guardian/src-helpers" "^3.10.3-rc.1"
 
+"@guardian/src-layout@^3.12.0":
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-layout/-/src-layout-3.12.0.tgz#14604624b31862a804b70e0d2590a93a36da951c"
+  integrity sha512-/81HeDGHg2mJVC/SPn4gq0qmGXbrgKmXniPfRse1nU7fvL/0V1F1okMSx2SW72NmcatVC3HRNG4J1ecqFpYz+g==
+  dependencies:
+    "@guardian/src-helpers" "^3.12.0"
+
 "@guardian/src-link@^3.10.0":
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-link/-/src-link-3.11.0.tgz#2bf5dc6b994cdf05e7c6e1e7f26c5e3c0536d705"

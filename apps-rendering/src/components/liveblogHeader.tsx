@@ -2,27 +2,22 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { neutral, remSpace } from '@guardian/src-foundations';
+import { neutral, news, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import type { Format } from '@guardian/types';
+import { textSans } from '@guardian/src-foundations/typography';
+import { Column, Columns, Container } from '@guardian/src-layout';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';
-import { headlineBackgroundColour } from 'editorialStyles';
 import HeaderMedia from 'headerMedia';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
-import { liveblogPhabletSidePadding, liveblogWidthStyles } from 'styles';
 import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';
 import Series from './series';
 
 // // ----- Styles ----- //
-
-const headlineBackgroundStyles = (format: Format): SerializedStyles => css`
-	${headlineBackgroundColour(format)};
-`;
 
 const headerBackgroundStyles = ({
 	liveblogBackground,
@@ -53,6 +48,11 @@ const headerMediaStyles = css`
 	}
 `;
 
+const timestampStyles = css`
+	color: ${neutral[100]};
+	${textSans.xxsmall({ lineHeight: 'tight' })}
+`;
+
 interface Props {
 	item: LiveBlog | DeadBlog;
 }
@@ -63,15 +63,28 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 
 	return (
 		<header>
-			<div css={headlineBackgroundStyles(format)}>
-				<Series item={item} />
-				<Headline item={item} />
-			</div>
-			<div css={headerBackgroundStyles(themeStyles)}>
-				<div css={css(liveblogWidthStyles, liveblogPhabletSidePadding)}>
-					<Standfirst item={item} />
-				</div>
-			</div>
+			<Container element="div" backgroundColor={news[300]}>
+				<Columns collapseUntil="desktop">
+					<Column span={3}>
+						<Series item={item} />
+					</Column>
+					<Column span={8}>
+						<Headline item={item} />
+					</Column>
+				</Columns>
+			</Container>
+			<Container element="div" backgroundColor={news[200]}>
+				<Columns collapseUntil="desktop">
+					<Column span={3}>
+						<time css={timestampStyles}>
+							TODO: Updated timestamp
+						</time>
+					</Column>
+					<Column span={8}>
+						<Standfirst item={item} />
+					</Column>
+				</Columns>
+			</Container>
 			<div css={metadataStyles(themeStyles)}>
 				<Metadata item={item} />
 				<div css={headerMediaStyles}>
