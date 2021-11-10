@@ -139,34 +139,34 @@ const captionLink = (palette: Palette) => css`
 	}
 `;
 
-const CameraIcon = (props: {palette: Palette, format: ArticleFormat}) => {
+const CameraIcon = (props: { palette: Palette; format: ArticleFormat }) => {
 	return (
 		<span
-				css={[
-					iconStyle(props.palette),
-					props.format.display === ArticleDisplay.Immersive &&
-						hideIconBelowLeftCol,
-				]}
-			>
-				<CameraSvg />
-			</span>
-	)
-}
+			css={[
+				iconStyle(props.palette),
+				props.format.display === ArticleDisplay.Immersive &&
+					hideIconBelowLeftCol,
+			]}
+		>
+			<CameraSvg />
+		</span>
+	);
+};
 
-const VideoIcon = (props: {palette: Palette, format: ArticleFormat}) => {
+const VideoIcon = (props: { palette: Palette; format: ArticleFormat }) => {
 	return (
 		<span
-				css={[
-					iconStyle(props.palette),
-					props.format.display === ArticleDisplay.Immersive &&
-						hideIconBelowLeftCol,
-					videoIconStyle,
-				]}
-			>
-				<VideoSvg />
-			</span>
-	)
-}
+			css={[
+				iconStyle(props.palette),
+				props.format.display === ArticleDisplay.Immersive &&
+					hideIconBelowLeftCol,
+				videoIconStyle,
+			]}
+		>
+			<VideoSvg />
+		</span>
+	);
+};
 
 export const Caption = ({
 	captionText,
@@ -196,10 +196,11 @@ export const Caption = ({
 				padCaption && captionPadding,
 			]}
 		>
-			{mediaType === 'Video' ?
-				<VideoIcon palette={palette} format={format} /> :
+			{mediaType === 'Video' ? (
+				<VideoIcon palette={palette} format={format} />
+			) : (
 				<CameraIcon palette={palette} format={format} />
-			}
+			)}
 			{captionText && (
 				<span
 					css={captionLink(palette)}
