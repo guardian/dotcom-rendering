@@ -119,7 +119,7 @@ const getStyles = (format: Format): SerializedStyles => {
 		case Design.LiveBlog:
 			return css(blogStyles, blogColor(neutral[100], link, inverted));
 		case Design.DeadBlog:
-			return css(blogStyles, blogColor(link, link, inverted));
+			return css(blogStyles, blogColor(link, link, neutral[93]));
 		case Design.Editorial:
 		case Design.Letter:
 		case Design.Comment:

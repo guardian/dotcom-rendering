@@ -8,7 +8,8 @@ import {
 } from '@guardian/source-react-components-development-kitchen';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Display, Format } from '@guardian/types';
+import { Design, Display } from '@guardian/types';
+import type { Format } from '@guardian/types';
 import Avatar from 'components/avatar';
 import Byline from 'components/byline';
 import CommentCount from 'components/commentCount';
@@ -127,6 +128,9 @@ const linesDarkStyles = css`
 
 const isLive = (design: Design): boolean => design === Design.LiveBlog;
 
+// This styling function is only temprarily used and will be removed
+// after the liveblog header is completed and ackground colours
+// are added
 const tempraryBackgroundStyle = (format: Format): SerializedStyles => {
 	const themeStyles = getThemeStyles(format.theme);
 	switch (format.design) {
@@ -143,8 +147,14 @@ const tempraryBackgroundStyle = (format: Format): SerializedStyles => {
 		default:
 			return css`
 				background-color: ${themeStyles.liveblogBackground};
+				${from.desktop} {
+					background-color: ${neutral[97]};
+				}
 				@media (prefers-color-scheme: dark) {
 					background-color: ${themeStyles.liveblogDarkBackground};
+					${from.desktop} {
+						background-color: ${neutral[10]};
+					}
 				}
 			`;
 	}
