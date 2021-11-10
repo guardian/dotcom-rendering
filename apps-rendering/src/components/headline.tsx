@@ -15,8 +15,6 @@ import type { ReactElement } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
-	liveblogPhabletSidePadding,
-	liveblogWidthStyles,
 	wideContentWidth,
 } from 'styles';
 
@@ -115,8 +113,7 @@ const fontSizeRestriction = css`
 `;
 
 const liveblogStyles = css`
-	${liveblogPhabletSidePadding}
-	${liveblogWidthStyles}
+	padding: 0 0 ${remSpace[5]};
 `;
 
 const getStyles = (format: Format): SerializedStyles => {
