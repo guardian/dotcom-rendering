@@ -9,17 +9,19 @@ import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
 import { ElementKind, BodyElement } from 'bodyElement';
 import {
-	ArticleDesign,
-	ArticleDisplay,
 	err,
 	none,
 	ok,
 	resultAndThen,
 	resultMap,
-	ArticleSpecial,
 	toOption,
 	withDefault,
 } from '@guardian/types';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { pipe } from 'lib';
