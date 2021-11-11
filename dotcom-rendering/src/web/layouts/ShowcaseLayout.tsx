@@ -321,7 +321,6 @@ export const ShowcaseLayout = ({
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
-										palette={palette}
 										format={format}
 									/>
 								</ElementContainer>
@@ -589,8 +588,7 @@ export const ShowcaseLayout = ({
 						discussionApiUrl={CAPI.config.discussionApiUrl}
 						shortUrlId={CAPI.config.shortUrlId}
 						isCommentable={CAPI.isCommentable}
-						pillar={format.theme}
-						palette={palette}
+						format={format}
 						discussionD2Uid={CAPI.config.discussionD2Uid}
 						discussionApiClientHeader={
 							CAPI.config.discussionApiClientHeader
@@ -599,7 +597,6 @@ export const ShowcaseLayout = ({
 						isAdFreeUser={CAPI.isAdFreeUser}
 						shouldHideAds={CAPI.shouldHideAds}
 						beingHydrated={false}
-						display={format.display}
 					/>
 				</ElementContainer>
 			)}
@@ -639,7 +636,6 @@ export const ShowcaseLayout = ({
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						palette={palette}
 						format={format}
 					/>
 				</ElementContainer>

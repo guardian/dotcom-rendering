@@ -154,7 +154,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
 			return [
 				true,
-				<CalloutBlockComponent callout={element} palette={palette} />,
+				<CalloutBlockComponent callout={element} format={format} />,
 			];
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return [
@@ -372,7 +372,6 @@ export const renderElement = ({
 					alt={element.alt}
 					role={element.role}
 					format={format}
-					palette={palette}
 					elementId={element.elementId}
 				/>,
 			];
@@ -400,7 +399,6 @@ export const renderElement = ({
 				>
 					<MapEmbedBlockComponent
 						format={format}
-						palette={palette}
 						embedUrl={element.embedUrl}
 						height={element.height}
 						width={element.width}
@@ -532,7 +530,6 @@ export const renderElement = ({
 						width={element.width}
 						title={element.title}
 						format={format}
-						palette={palette}
 						caption={element.caption}
 						credit="Spotify"
 					/>
@@ -596,7 +593,6 @@ export const renderElement = ({
 				>
 					<VideoFacebookBlockComponent
 						format={format}
-						palette={palette}
 						embedUrl={element.embedUrl}
 						height={element.height}
 						width={element.width}
@@ -699,7 +695,6 @@ export const renderElement = ({
 				true,
 				<YoutubeBlockComponent
 					format={format}
-					palette={palette}
 					key={index}
 					hideCaption={hideCaption}
 					// eslint-disable-next-line jsx-a11y/aria-role
