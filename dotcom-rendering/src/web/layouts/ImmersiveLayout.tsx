@@ -39,7 +39,7 @@ import {
 	decideLineEffect,
 } from '@root/src/web/lib/layoutHelpers';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { ImmersiveHeader } from './ImmersiveHeader';
+import { ImmersiveHeader } from './headers/ImmersiveHeader';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
