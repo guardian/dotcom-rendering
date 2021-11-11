@@ -22,10 +22,7 @@ import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 import { Stuck } from '@root/src/web/layouts/lib/stickiness';
-import {
-	getCurrentPillar,
-} from '@root/src/web/lib/layoutHelpers';
-
+import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 
 const hasMainMediaStyles = css`
 	height: 100vh;
@@ -112,12 +109,9 @@ export const ImmersiveHeader = ({
 
 	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
 
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
-
-
 
 	const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
 	const captionText = decideCaption(mainMedia);

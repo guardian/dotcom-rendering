@@ -185,7 +185,6 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	return caption.join(' ');
 };
 
-
 export const ImmersiveLayout = ({
 	CAPI,
 	NAV,
@@ -219,7 +218,12 @@ export const ImmersiveLayout = ({
 
 	return (
 		<>
-			<ImmersiveHeader CAPI={CAPI} NAV={NAV} format={format} palette={palette} />
+			<ImmersiveHeader
+				CAPI={CAPI}
+				NAV={NAV}
+				format={format}
+				palette={palette}
+			/>
 			<main>
 				<ElementContainer
 					showTopBorder={false}

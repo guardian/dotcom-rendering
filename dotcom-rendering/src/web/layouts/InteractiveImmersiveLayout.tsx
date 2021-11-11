@@ -53,7 +53,11 @@ import {
 } from './lib/interactiveLegacyStyling';
 import { ImmersiveHeader } from './ImmersiveHeader';
 
-const InteractiveImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
+const InteractiveImmersiveGrid = ({
+	children,
+}: {
+	children: React.ReactNode;
+}) => (
 	<div
 		css={css`
 			/* IE Fallback */
@@ -361,7 +365,12 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			{CAPI.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
-			<ImmersiveHeader CAPI={CAPI} NAV={NAV} format={format} palette={palette} />
+			<ImmersiveHeader
+				CAPI={CAPI}
+				NAV={NAV}
+				format={format}
+				palette={palette}
+			/>
 			<main>
 				<ElementContainer
 					data-print-layout="hide"
