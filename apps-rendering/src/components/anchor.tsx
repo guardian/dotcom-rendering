@@ -4,8 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { palette } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
+import { labs, neutral } from '@guardian/src-foundations/palette';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
@@ -33,7 +32,7 @@ const colour = (format: ArticleFormat): SerializedStyles => {
 	const { link, inverted } = getThemeStyles(format.theme);
 	if (format.theme === ArticleSpecial.Labs) {
 		return css`
-			color: ${palette.labs[300]};
+			color: ${labs[300]};
 			border-bottom: 0.0625rem solid ${neutral[86]};
 
 			${darkModeCss`

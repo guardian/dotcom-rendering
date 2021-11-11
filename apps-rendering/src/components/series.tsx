@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { palette, remSpace } from '@guardian/src-foundations';
+import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { labs, neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
@@ -92,7 +92,7 @@ const getLinkStyles = ({
 const immersiveStyles = (theme: ArticleTheme): SerializedStyles => css`
 	padding: ${remSpace[1]} ${remSpace[3]};
 	background-color: ${theme === ArticleSpecial.Labs
-		? palette.labs[300]
+		? labs[300]
 		: getThemeStyles(theme).kicker};
 	position: absolute;
 	left: 0;

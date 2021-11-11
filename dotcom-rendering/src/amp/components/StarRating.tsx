@@ -1,11 +1,11 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { palette } from '@guardian/src-foundations';
+import { brandAlt } from '@guardian/src-foundations';
 
 import { Star } from '@frontend/static/icons/Star';
 
 const ratingsWrapper = css`
-	background-color: ${palette.brandAlt[400]};
+	background-color: ${brandAlt[400]};
 	display: inline-block;
 `;
 

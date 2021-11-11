@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { text } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
+import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans, body } from '@guardian/src-foundations/typography';
 
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
@@ -21,18 +20,18 @@ const headerStyle = css`
 	font-weight: 400;
 	padding-top: 3px;
 	padding-bottom: 27px;
-	color: ${palette.neutral[7]};
+	color: ${neutral[7]};
 `;
 
 const bylineStyle = css`
 	${body.medium()};
-	color: ${palette.neutral[7]};
+	color: ${neutral[7]};
 	padding-bottom: 8px;
 	font-style: italic;
 
 	a {
 		font-weight: 700;
-		color: ${palette.neutral[7]};
+		color: ${neutral[7]};
 		text-decoration: none;
 		font-style: normal;
 	}
