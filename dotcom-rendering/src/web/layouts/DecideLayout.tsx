@@ -11,9 +11,8 @@ import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
-import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
-import { InteractiveImmersiveLayout } from './InteractiveImmersiveLayout';
+import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 
 type Props = {
 	CAPI: CAPIType;
@@ -36,29 +35,18 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case ArticleDisplay.Immersive: {
 			switch (design) {
 				case ArticleDesign.Interactive: {
-					// TBD: Remove when we migrate legacy content
-					// switch (CAPI.isLegacyInteractive) {
-					// 	case true: {
-					// 		return (
-					// 			<FullPageInteractiveLayout
-					// 				CAPI={CAPI}
-					// 				NAV={NAV}
-					// 				format={format}
-					// 				palette={palette}
-					// 			/>
-					// 		);
-					// 	}
-					// 	default: {
+					// Render all 'immersive interactives' until switchover date as 'FullPageInteractive'
+					// TBD: After 'immersive interactive' changes to CAPI are merged, add logic here to either use
+					// 'InteractiveImmersiveLayout' if published after switchover date, or 'FullPageInteractiveLayout'
+					// if published before.
 					return (
-						<InteractiveImmersiveLayout
+						<FullPageInteractiveLayout
 							CAPI={CAPI}
 							NAV={NAV}
 							format={format}
 							palette={palette}
 						/>
 					);
-					// 	}
-					// }
 				}
 				default: {
 					return (
