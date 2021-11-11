@@ -1,6 +1,12 @@
 // ----- Imports ----- //
 
-import { Design, Display, Pillar, Special, toOption } from '@guardian/types';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
+import { toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
@@ -32,27 +38,27 @@ const mockBylineHtml = (): Option<DocumentFragment> =>
 
 const Default: FC = () => (
 	<Byline
-		theme={selectPillar(Pillar.News)}
-		design={Design.Article}
-		display={Display.Standard}
+		theme={selectPillar(ArticlePillar.News)}
+		design={ArticleDesign.Standard}
+		display={ArticleDisplay.Standard}
 		bylineHtml={mockBylineHtml()}
 	/>
 );
 
 const Comment: FC = () => (
 	<Byline
-		theme={selectPillar(Pillar.Opinion)}
-		design={Design.Comment}
-		display={Display.Standard}
+		theme={selectPillar(ArticlePillar.Opinion)}
+		design={ArticleDesign.Comment}
+		display={ArticleDisplay.Standard}
 		bylineHtml={mockBylineHtml()}
 	/>
 );
 
 const Labs: FC = () => (
 	<Byline
-		theme={Special.Labs}
-		design={Design.Article}
-		display={Display.Standard}
+		theme={ArticleSpecial.Labs}
+		design={ArticleDesign.Standard}
+		display={ArticleDisplay.Standard}
 		bylineHtml={mockBylineHtml()}
 	/>
 );

@@ -2,8 +2,8 @@
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { FC } from 'react';
-import List from './list';
 import ListItem from './listItem';
+import OrderedList from './orderedList';
 
 // ----- Setup ----- //
 
@@ -21,13 +21,15 @@ const listItem = (
 
 // ----- Stories ----- //
 
-const Default: FC = () => <List>{[listItem, listItem, listItem]}</List>;
+const Default: FC = () => (
+	<OrderedList>{[listItem, listItem, listItem]}</OrderedList>
+);
 
 // ----- Exports ----- //
 
 export default {
-	component: List,
-	title: 'AR/List',
+	component: OrderedList,
+	title: 'AR/OrderedList',
 };
 
 export { Default };

@@ -22,7 +22,7 @@ type Props = {
 };
 
 export const Header = ({ edition, idUrl, mmaUrl, isAnniversary }: Props) => (
-	<header css={headerStyles}>
+	<div css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
 			<div id="edition-root">
 				<EditionDropdown
@@ -36,5 +36,5 @@ export const Header = ({ edition, idUrl, mmaUrl, isAnniversary }: Props) => (
 		<div id="links-root">
 			<Links supporterCTA="" idUrl={idUrl} mmaUrl={mmaUrl} />
 		</div>
-	</header>
+	</div>
 );

@@ -2,11 +2,12 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { ArticleDisplay } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { remSpace } from '@guardian/src-foundations';
 import { breakpoints, from } from '@guardian/src-foundations/mq';
 import { background, neutral } from '@guardian/src-foundations/palette';
-import { Display, map, none, withDefault } from '@guardian/types';
+import { map, none, withDefault } from '@guardian/types';
 import FootballScores from 'components/footballScores';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
@@ -60,7 +61,7 @@ const itemStyles = (item: Item): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(item.theme);
 
 	switch (item.display) {
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			return css`
 				> p:first-of-type:first-letter,
 				> hr + p:first-letter {

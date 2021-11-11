@@ -45,6 +45,7 @@ export const YoutubeEmbedBlockComponent: React.FC<{
 					format={format}
 					palette={palette}
 					credit={credit}
+					mediaType="Video"
 				/>
 			)}
 		</div>

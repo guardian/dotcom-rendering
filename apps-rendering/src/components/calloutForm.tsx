@@ -2,13 +2,13 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
+import type { ArticleFormat } from '@guardian/libs';
 import { Button } from '@guardian/src-button';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
 import { body, headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgMinus, SvgPlus } from '@guardian/src-icons';
 import { TextArea } from '@guardian/src-text-area';
 import { TextInput } from '@guardian/src-text-input';
-import type { Format } from '@guardian/types';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';
@@ -18,7 +18,7 @@ import { getThemeStyles } from 'themeStyles';
 
 export interface CalloutProps {
 	campaign: Campaign;
-	format: Format;
+	format: ArticleFormat;
 	description: DocumentFragment;
 }
 

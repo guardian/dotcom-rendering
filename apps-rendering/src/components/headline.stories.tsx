@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Display, Pillar } from '@guardian/types';
+import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { boolean, radios, withKnobs } from '@storybook/addon-knobs';
 import { analysis, article, feature, labs, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
@@ -18,8 +18,8 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			display: boolean('Immersive', false)
-				? Display.Immersive
-				: Display.Standard,
+				? ArticleDisplay.Immersive
+				: ArticleDisplay.Standard,
 		}}
 	/>
 );
@@ -29,9 +29,9 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			display: boolean('Immersive', false)
-				? Display.Immersive
-				: Display.Standard,
-			theme: selectPillar(Pillar.News),
+				? ArticleDisplay.Immersive
+				: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -41,9 +41,9 @@ const Feature = (): ReactElement => (
 		item={{
 			...feature,
 			display: boolean('Immersive', false)
-				? Display.Immersive
-				: Display.Standard,
-			theme: selectPillar(Pillar.News),
+				? ArticleDisplay.Immersive
+				: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -54,8 +54,8 @@ const Review = (): ReactElement => (
 			...review,
 			starRating: radios('Rating', starRating, 3),
 			display: boolean('Immersive', false)
-				? Display.Immersive
-				: Display.Standard,
+				? ArticleDisplay.Immersive
+				: ArticleDisplay.Standard,
 		}}
 	/>
 );
@@ -64,7 +64,7 @@ const Labs = (): ReactElement => (
 	<Headline
 		item={{
 			...labs,
-			display: Display.Standard,
+			display: ArticleDisplay.Standard,
 		}}
 	/>
 );

@@ -13,6 +13,8 @@ import {
 } from '@guardian/atoms-rendering';
 import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { palette, remSpace } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import type { Breakpoint } from '@guardian/src-foundations/mq';
@@ -20,17 +22,15 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import {
 	andThen,
-	Design,
 	fromNullable,
 	fromUnsafe,
 	map,
 	none,
 	some,
-	Special,
 	toOption,
 	withDefault,
 } from '@guardian/types';
-import type { Format, Option, Result } from '@guardian/types';
+import type { Option, Result } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
 import type {
 	AudioAtom as AudioAtomElement,
@@ -63,10 +63,11 @@ import InteractiveAtom, {
 import List from 'components/list';
 import ListItem from 'components/listItem';
 import LiveEventLink from 'components/liveEventLink';
+import OrderedList from 'components/orderedList';
 import Paragraph from 'components/paragraph';
 import Pullquote from 'components/pullquote';
 import RichLink from 'components/richLink';
-import { convertFormatToArticleFormat, isElement, pipe } from 'lib';
+import { isElement, pipe } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { backgroundColor, darkModeCss } from 'styles';
@@ -122,7 +123,10 @@ const getHref = (node: Node): Option<string> =>
 		),
 	);
 
-const transform = (text: string, format: Format): ReactElement | string => {
+const transform = (
+	text: string,
+	format: ArticleFormat,
+): ReactElement | string => {
 	if (text.includes('•')) {
 		return h(Bullet, { format, text });
 	} else if (text.includes('* * *')) {
@@ -131,9 +135,9 @@ const transform = (text: string, format: Format): ReactElement | string => {
 	return text;
 };
 
-const HeadingTwoStyles = (format: Format): SerializedStyles => {
+const HeadingTwoStyles = (format: ArticleFormat): SerializedStyles => {
 	const font =
-		format.theme === Special.Labs
+		format.theme === ArticleSpecial.Labs
 			? textSans.large({ fontWeight: 'bold' })
 			: headline.xxsmall({ fontWeight: 'bold' });
 
@@ -181,6 +185,8 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 			return h('br', { key }, null);
 		case 'UL':
 			return h('ul', { key }, children);
+		case 'OL':
+			return h('ol', { key }, children);
 		case 'LI':
 			return h('li', { key }, children);
 		case 'MARK':
@@ -195,7 +201,7 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 };
 
 const textElement =
-	(format: Format, isEditions = false) =>
+	(format: ArticleFormat, isEditions = false) =>
 	(node: Node, key: number): ReactNode => {
 		const text = node.textContent ?? '';
 		const children = Array.from(node.childNodes).map(
@@ -241,6 +247,8 @@ const textElement =
 				return h('br', { key }, null);
 			case 'UL':
 				return h(List, { children });
+			case 'OL':
+				return h(OrderedList, { children });
 			case 'LI':
 				return h(ListItem, { format, children });
 			case 'MARK':
@@ -254,11 +262,12 @@ const textElement =
 		}
 	};
 
-const isBlog = (format: Format): boolean =>
-	format.design === Design.LiveBlog || format.design === Design.DeadBlog;
+const isBlog = (format: ArticleFormat): boolean =>
+	format.design === ArticleDesign.LiveBlog ||
+	format.design === ArticleDesign.DeadBlog;
 
-const linkColourFromFormat = (format: Format): string => {
-	if (format.theme === Special.Labs) {
+const linkColourFromFormat = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.Labs) {
 		return palette.labs[300];
 	}
 
@@ -267,10 +276,10 @@ const linkColourFromFormat = (format: Format): string => {
 	}
 
 	const { kicker, inverted } = getThemeStyles(format.theme);
-	return format.design === Design.Media ? inverted : kicker;
+	return format.design === ArticleDesign.Media ? inverted : kicker;
 };
 
-const borderFromFormat = (format: Format): string => {
+const borderFromFormat = (format: ArticleFormat): string => {
 	const { liveblogKicker } = getThemeStyles(format.theme);
 
 	const styles = `
@@ -282,7 +291,7 @@ const borderFromFormat = (format: Format): string => {
 };
 
 const standfirstTextElement =
-	(format: Format) =>
+	(format: ArticleFormat) =>
 	(node: Node, key: number): ReactNode => {
 		const children = Array.from(node.childNodes).map(
 			standfirstTextElement(format),
@@ -314,7 +323,7 @@ const standfirstTextElement =
 
 const text = (
 	doc: DocumentFragment,
-	format: Format,
+	format: ArticleFormat,
 	isEditions = false,
 ): ReactNode[] =>
 	Array.from(doc.childNodes).map(textElement(format, isEditions));
@@ -324,7 +333,7 @@ const editionsStandfirstFilter = (node: Node): boolean =>
 
 const standfirstText = (
 	doc: DocumentFragment,
-	format: Format,
+	format: ArticleFormat,
 	isEditions?: boolean,
 ): ReactNode[] => {
 	const nodes = Array.from(doc.childNodes);
@@ -336,7 +345,7 @@ const standfirstText = (
 
 const Tweet = (props: {
 	content: NodeList;
-	format: Format;
+	format: ArticleFormat;
 	key: number;
 }): ReactElement =>
 	// twitter script relies on twitter-tweet class being present
@@ -354,7 +363,7 @@ const captionHeadingStyles = css`
 `;
 
 const captionElement =
-	(format: Format) =>
+	(format: ArticleFormat) =>
 	(node: Node, key: number): ReactNode => {
 		const text = node.textContent ?? '';
 		const children = Array.from(node.childNodes).map(
@@ -362,7 +371,7 @@ const captionElement =
 		);
 		switch (node.nodeName) {
 			case 'STRONG':
-				return format.design === Design.Media
+				return format.design === ArticleDesign.Media
 					? styledH(
 							'h2',
 							{ css: captionHeadingStyles, key },
@@ -391,7 +400,7 @@ const captionElement =
 					{
 						href: withDefault('')(getHref(node)),
 						className:
-							format.design === Design.Media
+							format.design === ArticleDesign.Media
 								? css`
 										color: ${neutral[86]};
 								  `
@@ -417,11 +426,13 @@ const captionElement =
 		}
 	};
 
-const renderCaption = (doc: DocumentFragment, format: Format): ReactNode[] =>
-	Array.from(doc.childNodes).map(captionElement(format));
+const renderCaption = (
+	doc: DocumentFragment,
+	format: ArticleFormat,
+): ReactNode[] => Array.from(doc.childNodes).map(captionElement(format));
 
 const imageRenderer = (
-	format: Format,
+	format: ArticleFormat,
 	element: Image,
 	key: number,
 ): ReactNode => {
@@ -431,7 +442,7 @@ const imageRenderer = (
 			renderCaption(cap, format),
 			h(Credit, { credit, format, key }),
 		])(caption),
-		format: convertFormatToArticleFormat(format),
+		format: format,
 		key,
 		supportsDarkMode: true,
 		lightbox: some({
@@ -445,7 +456,7 @@ const imageRenderer = (
 };
 
 const textRenderer = (
-	format: Format,
+	format: ArticleFormat,
 	excludeStyles: boolean,
 	element: Text,
 	isEditions?: boolean,
@@ -456,7 +467,7 @@ const textRenderer = (
 };
 
 const guideAtomRenderer = (
-	format: Format,
+	format: ArticleFormat,
 	element: GuideAtomElement,
 ): ReactNode => {
 	return h(GuideAtom, {
@@ -475,7 +486,7 @@ const guideAtomRenderer = (
 };
 
 const qandaAtomRenderer = (
-	format: Format,
+	format: ArticleFormat,
 	element: QandaAtomElement,
 ): ReactNode => {
 	return h(QandaAtom, {
@@ -494,7 +505,7 @@ const qandaAtomRenderer = (
 };
 
 const profileAtomRenderer = (
-	format: Format,
+	format: ArticleFormat,
 	element: ProfileAtomElement,
 ): ReactNode => {
 	return h(ProfileAtom, {
@@ -513,7 +524,7 @@ const profileAtomRenderer = (
 };
 
 const timelineAtomRenderer = (
-	format: Format,
+	format: ArticleFormat,
 	element: TimelineAtomElement,
 ): ReactNode => {
 	return h(TimelineAtom, {
@@ -532,11 +543,11 @@ const timelineAtomRenderer = (
 };
 
 const interactiveAtomRenderer = (
-	format: Format,
+	format: ArticleFormat,
 	element: InteractiveAtomElement,
 ): ReactNode => {
 	const { html, css: styles, js } = element;
-	if (format.design !== Design.Interactive) {
+	if (format.design !== ArticleDesign.Interactive) {
 		const fenced = `
 			<html>
 				<head>
@@ -559,7 +570,7 @@ const interactiveAtomRenderer = (
 };
 
 const mediaAtomRenderer = (
-	format: Format,
+	format: ArticleFormat,
 	element: MediaAtomElement,
 	isEditions: boolean,
 ): ReactNode => {
@@ -589,7 +600,7 @@ const mediaAtomRenderer = (
 		css: styles,
 	};
 	const figcaption = h(FigCaption, {
-		format: convertFormatToArticleFormat(format),
+		format: format,
 		supportsDarkMode: true,
 		children: map((cap: DocumentFragment) => renderCaption(cap, format))(
 			caption,
@@ -607,7 +618,7 @@ const mediaAtomRenderer = (
 };
 
 const audioAtomRenderer = (
-	format: Format,
+	format: ArticleFormat,
 	element: AudioAtomElement,
 ): ReactNode => {
 	const { theme } = format;
@@ -630,7 +641,7 @@ const audioAtomRenderer = (
 };
 
 const render =
-	(format: Format, excludeStyles = false) =>
+	(format: ArticleFormat, excludeStyles = false) =>
 	(element: BodyElement, key: number): ReactNode => {
 		switch (element.kind) {
 			case ElementKind.Text:
@@ -710,14 +721,14 @@ const render =
 	};
 
 const renderEditions =
-	(format: Format, excludeStyles = false) =>
+	(format: ArticleFormat, excludeStyles = false) =>
 	(element: BodyElement, key: number): ReactNode => {
 		switch (element.kind) {
 			case ElementKind.Text:
 				return textRenderer(format, excludeStyles, element, true);
 
 			case ElementKind.Image:
-				return format.design === Design.Media
+				return format.design === ArticleDesign.Media
 					? h(GalleryImage, { format, image: element })
 					: imageRenderer(format, element, key);
 
@@ -751,16 +762,18 @@ const renderEditions =
 		}
 	};
 
-const renderAll = (format: Format, elements: BodyElement[]): ReactNode[] =>
-	elements.map(render(format));
+const renderAll = (
+	format: ArticleFormat,
+	elements: BodyElement[],
+): ReactNode[] => elements.map(render(format));
 
 const renderEditionsAll = (
-	format: Format,
+	format: ArticleFormat,
 	elements: BodyElement[],
 ): ReactNode[] => elements.map(renderEditions(format));
 
 const renderAllWithoutStyles = (
-	format: Format,
+	format: ArticleFormat,
 	elements: BodyElement[],
 ): ReactNode[] => elements.map(render(format, true));
 

@@ -2,10 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline } from '@guardian/src-foundations/typography';
-import { Design, Display } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
@@ -45,8 +45,8 @@ const getStyles = (item: Item): SerializedStyles => {
 	const format = getFormat(item);
 	const { kicker } = getThemeStyles(format.theme);
 	if (
-		item.design === Design.Interview ||
-		item.display === Display.Immersive
+		item.design === ArticleDesign.Interview ||
+		item.display === ArticleDisplay.Immersive
 	) {
 		return css(styles(kicker), interviewStyles(kicker));
 	}

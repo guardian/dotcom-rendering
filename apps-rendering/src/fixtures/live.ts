@@ -1,15 +1,12 @@
 // ----- Imports ----- //
 
-import { ArticleElementRole } from '@guardian/libs';
 import {
-	Design,
-	Display,
-	none,
-	OptionKind,
-	Pillar,
-	some,
-	toOption,
-} from '@guardian/types';
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleElementRole,
+	ArticlePillar,
+} from '@guardian/libs';
+import { none, OptionKind, some, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
 import type { MainMedia } from 'headerMedia';
@@ -226,14 +223,14 @@ const tags = [
 ];
 
 const fields = {
-	theme: Pillar.News,
-	display: Display.Standard,
+	theme: ArticlePillar.News,
+	display: ArticleDisplay.Standard,
 	body: [],
 	headline: headline,
 	standfirst: standfirst,
 	byline: '',
 	bylineHtml: bylineHtml,
-	publishDate: none,
+	publishDate: some(new Date('2021-10-17T03:24:00')),
 	contributors: [],
 	mainMedia: mainMedia,
 	series: some({
@@ -261,7 +258,7 @@ const fields = {
 };
 
 const live: LiveBlog = {
-	design: Design.LiveBlog,
+	design: ArticleDesign.LiveBlog,
 	...fields,
 	blocks: [
 		{

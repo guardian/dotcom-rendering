@@ -1,18 +1,14 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral, opinion, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgQuote } from '@guardian/src-icons';
-import type { Format, Option } from '@guardian/types';
-import {
-	Design,
-	Display,
-	fromNullable,
-	map,
-	withDefault,
-} from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { fromNullable, map, withDefault } from '@guardian/types';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -23,11 +19,11 @@ interface Props {
 	relatedItem: RelatedItem;
 }
 
-const borderColor = (format: Format): SerializedStyles => {
+const borderColor = (format: ArticleFormat): SerializedStyles => {
 	return css`1px solid ${getThemeStyles(format.theme).kicker}`;
 };
 
-const listStyles = (format: Format): SerializedStyles => {
+const listStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		background: white;
 		margin-right: ${remSpace[3]};
@@ -185,8 +181,8 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
 	const { link, pillar, lastModified } = relatedItem;
 	const format = {
 		theme: themeFromString(pillar.id),
-		design: Design.Article,
-		display: Display.Standard,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	};
 
 	const img = cardImage(relatedItem);
