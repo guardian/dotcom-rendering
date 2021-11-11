@@ -27,7 +27,6 @@ import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { cmp } from '@guardian/consent-management-platform';
 import { storage } from '@guardian/libs';
 import { getCookie } from '../../browser/cookie';
-import {Targeting} from "@guardian/automat-contributions/lib/types";
 
 type PreEpicConfig = {
 	module: {
