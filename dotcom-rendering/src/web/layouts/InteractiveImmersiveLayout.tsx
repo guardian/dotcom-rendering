@@ -237,7 +237,12 @@ interface Props {
 	palette: Palette;
 }
 
-export const InteractiveImmersiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const InteractiveImmersiveLayout = ({
+	CAPI,
+	NAV,
+	format,
+	palette,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
