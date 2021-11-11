@@ -150,7 +150,6 @@ export const Pagination = ({
 					href={newer}
 					cssOverrides={decidePaginationCss(palette)}
 				>
-					{/* Label needed for screen readers? */}
 					Previous
 				</LinkButton>
 			</Section>
