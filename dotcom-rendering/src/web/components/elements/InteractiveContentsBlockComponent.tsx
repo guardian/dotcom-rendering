@@ -135,7 +135,7 @@ interface EnhancedSubheadingType extends SubheadingBlockElement {
 	ref?: HTMLElement | null;
 }
 
-export const InteractiveContentsBlockElement = ({
+export const InteractiveContentsBlockComponent = ({
 	subheadingLinks,
 	endDocumentElementId,
 }: Props) => {
@@ -284,6 +284,7 @@ export const InteractiveContentsBlockElement = ({
 				</button>
 			)}
 			<ol
+				data-ignore="global-ol-styling"
 				css={[
 					olStyles,
 					// we detach `ol` from the container when `stickyNavCurrentHeader` is defined

@@ -1,6 +1,8 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import type {
 	FontStyle,
@@ -10,8 +12,7 @@ import type {
 import { from } from '@guardian/src-foundations/mq';
 import { border } from '@guardian/src-foundations/palette';
 import { body, headline } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types';
-import { Design, Display, OptionKind } from '@guardian/types';
+import { OptionKind } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index, maybeRender } from 'lib';
@@ -134,11 +135,14 @@ const standardTextStyles = (
 	${body.medium({ fontStyle, fontWeight, lineHeight })}
 `;
 
-const bylinePrimaryStyles = (format: Format): SerializedStyles => {
+const bylinePrimaryStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 	const color = ignoreTextColour(format) ? neutral[100] : kickerColor;
 
-	if (format.design === Design.Analysis || format.design === Design.Comment) {
+	if (
+		format.design === ArticleDesign.Analysis ||
+		format.design === ArticleDesign.Comment
+	) {
 		return css`
 			color: ${color};
 			${largeTextStyles('normal', 'bold', 'regular')}
@@ -151,10 +155,13 @@ const bylinePrimaryStyles = (format: Format): SerializedStyles => {
 	`;
 };
 
-const bylineSecondaryStyles = (format: Format): SerializedStyles => {
+const bylineSecondaryStyles = (format: ArticleFormat): SerializedStyles => {
 	const color = ignoreTextColour(format) ? neutral[100] : neutral[7];
 
-	if (format.design === Design.Analysis || format.design === Design.Comment) {
+	if (
+		format.design === ArticleDesign.Analysis ||
+		format.design === ArticleDesign.Comment
+	) {
 		return css`
 			${largeTextStyles('italic', 'light')};
 			color: ${color};
@@ -167,24 +174,24 @@ const bylineSecondaryStyles = (format: Format): SerializedStyles => {
 };
 
 const getBylineStyles = (
-	format: Format,
+	format: ArticleFormat,
 	iconColor: string,
 	hasImage: boolean,
 ): SerializedStyles => {
-	// Display.Immersive needs to come before Design.Interview
-	if (format.display === Display.Immersive) {
+	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
+	if (format.display === ArticleDisplay.Immersive) {
 		return css(styles(iconColor), immersiveStyles);
 	}
-	if (format.design === Design.Interview) {
+	if (format.design === ArticleDesign.Interview) {
 		return css(styles(iconColor), interviewStyles);
 	}
-	if (format.design === Design.Comment) {
+	if (format.design === ArticleDesign.Comment) {
 		return css(styles(iconColor), commentStyles(hasImage));
 	}
-	if (format.display === Display.Showcase) {
+	if (format.display === ArticleDisplay.Showcase) {
 		return css(styles(iconColor), showcaseStyles);
 	}
-	if (format.design === Design.Media) {
+	if (format.design === ArticleDesign.Media) {
 		return css(styles(iconColor), galleryStyles);
 	}
 	return styles(iconColor);
@@ -196,7 +203,10 @@ interface Props {
 	item: Item;
 }
 
-const renderText = (byline: DocumentFragment, format: Format): ReactNode =>
+const renderText = (
+	byline: DocumentFragment,
+	format: ArticleFormat,
+): ReactNode =>
 	Array.from(byline.childNodes).map((node) => {
 		switch (node.nodeName) {
 			case 'A':
@@ -215,17 +225,23 @@ const renderText = (byline: DocumentFragment, format: Format): ReactNode =>
 		}
 	});
 
-const hasShareIcon = (format: Format): boolean =>
-	!(format.design === Design.Analysis || format.design === Design.Comment);
+const hasShareIcon = (format: ArticleFormat): boolean =>
+	!(
+		format.design === ArticleDesign.Analysis ||
+		format.design === ArticleDesign.Comment
+	);
 
 const hasAvatar = (item: Item): boolean => {
-	return item.design === Design.Comment && item.contributors.length > 0;
+	return (
+		item.design === ArticleDesign.Comment && item.contributors.length > 0
+	);
 };
-const ignoreIconColour = (format: Format): boolean =>
-	format.design === Design.Media;
+const ignoreIconColour = (format: ArticleFormat): boolean =>
+	format.design === ArticleDesign.Media;
 
-const ignoreTextColour = (format: Format): boolean =>
-	format.design === Design.Media || format.display === Display.Immersive;
+const ignoreTextColour = (format: ArticleFormat): boolean =>
+	format.design === ArticleDesign.Media ||
+	format.display === ArticleDisplay.Immersive;
 
 const Byline: FC<Props> = ({ item }) => {
 	const format = getFormat(item);

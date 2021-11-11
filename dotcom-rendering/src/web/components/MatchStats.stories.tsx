@@ -1,3 +1,4 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { matchReport } from '@root/fixtures/generated/match-report';
 
 import { ElementContainer } from './ElementContainer';
@@ -27,7 +28,13 @@ export const InContext = () => {
 				<LeftColumn>
 					<></>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<MatchStats
 						home={matchReport.homeTeam}
 						away={matchReport.awayTeam}

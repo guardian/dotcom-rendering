@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { FC } from 'react';
 import { selectDesign, selectPillar } from 'storybookHelpers';
 import ListItem from './listItem';
@@ -10,9 +10,9 @@ import ListItem from './listItem';
 const Default: FC = () => (
 	<ListItem
 		format={{
-			design: selectDesign(Design.Article),
-			display: Display.Standard,
-			theme: selectPillar(Pillar.News),
+			design: selectDesign(ArticleDesign.Standard),
+			display: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	>
 		A bullet point

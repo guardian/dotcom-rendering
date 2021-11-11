@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
-import { Design, Display, none, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { none } from '@guardian/types';
 import type { Contributor } from 'contributor';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
@@ -10,9 +11,9 @@ import Follow from './follow';
 // ----- Setup ----- //
 
 const followFormat = {
-	theme: Pillar.News,
-	design: Design.Article,
-	display: Display.Standard,
+	theme: ArticlePillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
 };
 
 // ----- Tests ----- //

@@ -220,7 +220,7 @@ export const Footer: React.FC<{
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
 }> = ({ pillars, pillar, pageFooter }) => (
-	<footer
+	<div
 		data-print-layout="hide"
 		css={footer}
 		data-link-name="footer"
@@ -255,5 +255,5 @@ export const Footer: React.FC<{
 			© {year} Guardian News & Media Limited or its affiliated companies.
 			All rights reserved. (modern)
 		</div>
-	</footer>
+	</div>
 );

@@ -39,7 +39,15 @@ type Props = {
 	borderColour?: string;
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
-	element?: 'div' | 'article' | 'aside' | 'nav'; // ElementContainer is generally a top-level wrapper
+	element?:
+		| 'div'
+		| 'article'
+		| 'aside'
+		| 'nav'
+		| 'main'
+		| 'header'
+		| 'section'
+		| 'footer'; // ElementContainer is generally a top-level wrapper
 	className?: string;
 };
 

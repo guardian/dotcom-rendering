@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 import { selectPillar } from '../storybookHelpers';
@@ -18,9 +18,9 @@ const copy = (): string =>
 const Default: FC = () => (
 	<Anchor
 		format={{
-			design: Design.Article,
-			display: Display.Standard,
-			theme: selectPillar(Pillar.News),
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.News),
 		}}
 		href={link()}
 	>
