@@ -9,8 +9,7 @@ import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import Comment from 'components/layout/comment';
-// import Interactive from 'components/layout/interactive';
-import InteractiveImmersive from 'components/layout/interactiveimmersive';
+import Interactive from 'components/layout/interactive';
 import Labs from 'components/layout/labs';
 import Media from 'components/layout/media';
 import Standard from 'components/layout/standard';
@@ -62,11 +61,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Interactive &&
 		item.display === ArticleDisplay.Immersive
 	) {
-		return (
-			<InteractiveImmersive item={item}>
-				{renderAllWithoutStyles(item, body)}
-			</InteractiveImmersive>
-		);
+		return <Interactive>{renderAllWithoutStyles(item, body)}</Interactive>;
 	}
 
 	if (
