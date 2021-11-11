@@ -777,7 +777,15 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 };
 
 const textPagination = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme][300];
+	switch(format.theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+		case ArticlePillar.Culture:
+			return pillarPalette[format.theme][400];
+		default:
+			return pillarPalette[format.theme][300];
+	}
 };
 
 const borderPagination = (): string => {
@@ -785,7 +793,15 @@ const borderPagination = (): string => {
 };
 
 const hoverPagination = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme][300];
+	switch(format.theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+		case ArticlePillar.Culture:
+			return pillarPalette[format.theme][400];
+		default:
+			return pillarPalette[format.theme][300];
+	}
 };
 
 export const decidePalette = (format: ArticleFormat): Palette => {

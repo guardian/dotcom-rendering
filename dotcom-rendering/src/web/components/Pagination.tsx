@@ -31,7 +31,8 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
-			padding-bottom: ${space[3]}px;
+			padding-top: ${space[1]}px;
+			padding-bottom: ${space[4]}px;
 		`}
 	>
 		{children}
