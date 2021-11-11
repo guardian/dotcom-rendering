@@ -3,6 +3,8 @@ import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import Img from '@guardian/common-rendering/src/components/img';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { palette, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import {
@@ -14,20 +16,18 @@ import {
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgAudio, SvgCamera, SvgQuote, SvgVideo } from '@guardian/src-icons';
 import {
-	Design,
-	Display,
 	fromNullable,
 	map,
 	none,
 	OptionKind,
 	withDefault,
 } from '@guardian/types';
-import type { Format, Option } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { stars } from 'components/starRating';
 import { formatSeconds, makeRelativeDate } from 'date';
 import { border } from 'editorialPalette';
 import type { Image } from 'image';
-import { convertFormatToArticleFormat, pipe } from 'lib';
+import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
@@ -39,7 +39,7 @@ interface Props {
 
 const borderColor = (
 	type: RelatedItemType,
-	format: Format,
+	format: ArticleFormat,
 ): SerializedStyles => {
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
 		return css`1px solid ${palette.labs[300]}`;
@@ -50,7 +50,7 @@ const borderColor = (
 
 const listStyles = (
 	type: RelatedItemType,
-	format: Format,
+	format: ArticleFormat,
 ): SerializedStyles => {
 	return css`
 		background: white;
@@ -188,7 +188,7 @@ const relativeFirstPublished = (
 
 const cardStyles = (
 	type: RelatedItemType,
-	format: Format,
+	format: ArticleFormat,
 ): SerializedStyles => {
 	switch (type) {
 		case RelatedItemType.FEATURE: {
@@ -282,7 +282,7 @@ const parentIconStyles: SerializedStyles = css`
 	}
 `;
 
-const iconStyles = (format: Format): SerializedStyles => {
+const iconStyles = (format: ArticleFormat): SerializedStyles => {
 	const { inverted } = getThemeStyles(format.theme);
 	return css`
 		width: 1.5rem;
@@ -304,7 +304,10 @@ const commentIconStyle: SerializedStyles = css`
 	margin-right: -2px;
 `;
 
-const icon = (type: RelatedItemType, format: Format): ReactElement | null => {
+const icon = (
+	type: RelatedItemType,
+	format: ArticleFormat,
+): ReactElement | null => {
 	switch (type) {
 		case RelatedItemType.GALLERY:
 			return (
@@ -331,7 +334,7 @@ const icon = (type: RelatedItemType, format: Format): ReactElement | null => {
 
 const quotationComment = (
 	type: RelatedItemType,
-	format: Format,
+	format: ArticleFormat,
 ): ReactElement | null => {
 	if (type === RelatedItemType.COMMENT) {
 		return (
@@ -398,8 +401,8 @@ const cardImage = (
 ): ReactElement | null => {
 	const format = {
 		theme: themeFromString(relatedItem.pillar.id),
-		design: Design.Article,
-		display: Display.Standard,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	};
 
 	return pipe(
@@ -415,7 +418,7 @@ const cardImage = (
 							],
 							default: '100%',
 						}}
-						format={convertFormatToArticleFormat(format)}
+						format={format}
 						className={none}
 						supportsDarkMode
 						lightbox={none}
@@ -432,8 +435,8 @@ const cardImage = (
 const Card: FC<Props> = ({ relatedItem, image }) => {
 	const format = {
 		theme: themeFromString(relatedItem.pillar.id),
-		design: Design.Article,
-		display: Display.Standard,
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
 	};
 
 	const img = cardImage(image, relatedItem);

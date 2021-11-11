@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Format } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
 import { map, withDefault } from '@guardian/types';
 import Img from 'components/img';
 import type { Contributor } from 'contributor';
@@ -35,7 +35,7 @@ const imageStyles = css`
 interface Props {
 	contributors: Contributor[];
 	className: SerializedStyles;
-	format: Format;
+	format: ArticleFormat;
 }
 
 const Cutout: FC<Props> = ({ contributors, className, format }) => {

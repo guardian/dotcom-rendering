@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { NumberedList } from '@root/fixtures/generated/articles/NumberedList';
 import { enhanceInteractiveContentsElements } from '@root/src/model/enhance-interactive-contents-elements';
 
-import { InteractiveContentsBlockElement } from './InteractiveContentsBlockElement';
+import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent';
 
 // @ts-ignore: we know that NumberedList fixture has an interactive content block
 const interactiveContentsBlock: InteractiveContentsBlockElement =
@@ -14,7 +14,7 @@ const interactiveContentsBlock: InteractiveContentsBlockElement =
 	);
 
 export default {
-	component: InteractiveContentsBlockElement,
+	component: InteractiveContentsBlockComponent,
 	title: 'Components/InteractiveContentsBlockElement',
 };
 
@@ -24,7 +24,7 @@ export const Default = () => (
 			margin: 20px;
 		`}
 	>
-		<InteractiveContentsBlockElement
+		<InteractiveContentsBlockComponent
 			subheadingLinks={interactiveContentsBlock.subheadingLinks}
 			endDocumentElementId={interactiveContentsBlock.endDocumentElementId}
 		/>

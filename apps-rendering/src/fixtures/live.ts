@@ -1,15 +1,12 @@
 // ----- Imports ----- //
 
-import { ArticleElementRole } from '@guardian/libs';
 import {
-	Design,
-	Display,
-	none,
-	OptionKind,
-	Pillar,
-	some,
-	toOption,
-} from '@guardian/types';
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleElementRole,
+	ArticlePillar,
+} from '@guardian/libs';
+import { none, OptionKind, some, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
 import type { MainMedia } from 'headerMedia';
@@ -227,8 +224,8 @@ const tags = [
 ];
 
 const fields = {
-	theme: Pillar.News,
-	display: Display.Standard,
+	theme: ArticlePillar.News,
+	display: ArticleDisplay.Standard,
 	body: [],
 	headline: headline,
 	standfirst: standfirst,
@@ -305,14 +302,14 @@ const blocks: LiveBlock[] = [
 ];
 
 const live: LiveBlog = {
-	design: Design.LiveBlog,
+	design: ArticleDesign.LiveBlog,
 	...fields,
 	blocks: blocks,
 	totalBodyBlocks: 5,
 };
 
 const deadBlog: DeadBlog = {
-	design: Design.DeadBlog,
+	design: ArticleDesign.DeadBlog,
 	...fields,
 	blocks: blocks,
 	totalBodyBlocks: 5,

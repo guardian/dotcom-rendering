@@ -1,8 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
-import type { Format, Option } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -15,7 +16,7 @@ export interface InteractiveAtomProps {
 	html: string;
 	styles: string;
 	js: Option<string>;
-	format: Format;
+	format: ArticleFormat;
 }
 
 const InteractiveAtomStyles = (
@@ -30,13 +31,13 @@ const InteractiveAtomStyles = (
 	}
 `;
 const atomCss = `
-    ${pageFonts} 
-    
+    ${pageFonts}
+
     @media (prefers-color-scheme: dark) {
         body {
             background: white;
             padding: ${remSpace[3]} !important;
-        } 
+        }
     }`;
 const atomScript = `
     function resize() {

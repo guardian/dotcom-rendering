@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Pillar } from '@guardian/types';
+import { ArticlePillar } from '@guardian/libs';
 import imageFixture from 'fixtures/galleryImage';
 import { article } from 'fixtures/item';
 import type { ReactElement } from 'react';
@@ -15,7 +15,7 @@ const Default = (): ReactElement => (
 		<GalleryImage
 			format={{
 				...article,
-				theme: selectPillar(Pillar.News),
+				theme: selectPillar(ArticlePillar.News),
 			}}
 			image={imageFixture}
 		/>

@@ -2,12 +2,14 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { border, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Format, Option } from '@guardian/types';
-import { Design, map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
@@ -15,7 +17,7 @@ import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
-interface Props extends Format {
+interface Props extends ArticleFormat {
 	count: Option<number>;
 	commentable: boolean;
 }
@@ -66,13 +68,13 @@ const deadblogStyles = css`
 	}
 `;
 
-const getStyles = ({ theme, design }: Format): SerializedStyles => {
+const getStyles = ({ theme, design }: ArticleFormat): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
 	switch (design) {
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			return blogStyles(neutral[93]);
-		case Design.DeadBlog:
+		case ArticleDesign.DeadBlog:
 			return css(blogStyles(colours.link), deadblogStyles);
 		default:
 			return styles(colours.kicker, border.secondary, neutral[20]);
@@ -96,16 +98,19 @@ const deadblogBubbleStyles = (
 	}
 `;
 
-const getBubbleStyles = ({ theme, design }: Format): SerializedStyles => {
+const getBubbleStyles = ({
+	theme,
+	design,
+}: ArticleFormat): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
 	switch (design) {
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			return css(
 				bubbleStyles(neutral[93]),
 				liveblogBubbleStyles(neutral[46]),
 			);
-		case Design.DeadBlog:
+		case ArticleDesign.DeadBlog:
 			return css(
 				bubbleStyles(neutral[93]),
 				deadblogBubbleStyles(colours.link, neutral[46]),

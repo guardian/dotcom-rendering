@@ -1,9 +1,35 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/src-foundations/mq';
 
 import { labelStyles, carrotAdStyles } from '@root/src/web/components/AdSlot';
 
-const articleContainer = css`
+type Props = {
+	format: ArticleFormat;
+	children: React.ReactNode;
+};
+
+const articleWidth = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
+			return css`
+				${from.desktop} {
+					width: 700px;
+				}
+			`;
+		}
+		default: {
+			return css`
+				${from.desktop} {
+					width: 620px;
+				}
+			`;
+		}
+	}
+};
+
+const articleWrapper = css`
 	${until.leftCol} {
 		/* below 1140 */
 		padding-left: 0;
@@ -81,21 +107,18 @@ const articleAdStyles = css`
 	}
 `;
 
-type Props = {
-	children: React.ReactNode;
-};
-
-export const ArticleContainer = ({ children }: Props) => {
+export const ArticleContainer = ({ children, format }: Props) => {
 	return (
-		<main
+		<div
 			css={[
-				articleContainer,
+				articleWrapper,
+				articleWidth(format),
 				articleAdStyles,
 				carrotAdStyles,
 				labelStyles,
 			]}
 		>
 			{children}
-		</main>
+		</div>
 	);
 };

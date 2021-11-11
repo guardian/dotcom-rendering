@@ -2,11 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { neutral, palette } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { Design, map, Special, withDefault } from '@guardian/types';
-import type { Format, Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { getHref } from 'renderer';
@@ -15,7 +17,7 @@ import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
-interface Props extends Format {
+interface Props extends ArticleFormat {
 	bylineHtml: Option<DocumentFragment>;
 }
 
@@ -108,43 +110,43 @@ const labsAnchorStyles = css`
     `}
 `;
 
-const getStyles = (format: Format): SerializedStyles => {
+const getStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker, link, inverted } = getThemeStyles(format.theme);
 
-	if (format.theme === Special.Labs) {
+	if (format.theme === ArticleSpecial.Labs) {
 		return labsStyles;
 	}
 
 	switch (format.design) {
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			return css(blogStyles, blogColor(neutral[100], link, inverted));
-		case Design.DeadBlog:
+		case ArticleDesign.DeadBlog:
 			return css(blogStyles, blogColor(link, link, neutral[93]));
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return commentStyles(kicker);
 		default:
 			return styles(kicker);
 	}
 };
 
-const getAnchorStyles = (format: Format): SerializedStyles => {
+const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker, inverted, link } = getThemeStyles(format.theme);
-	if (format.theme === Special.Labs) {
+	if (format.theme === ArticleSpecial.Labs) {
 		return labsAnchorStyles;
 	}
 	switch (format.design) {
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			return css(
 				blogAnchorStyles,
 				blogColor(neutral[100], link, inverted),
 			);
-		case Design.DeadBlog:
+		case ArticleDesign.DeadBlog:
 			return css(blogAnchorStyles, blogColor(link, link, inverted));
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return commentAnchorStyles(kicker, inverted);
 
 		default:
@@ -152,7 +154,7 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
 	}
 };
 
-const toReact = (format: Format) => {
+const toReact = (format: ArticleFormat) => {
 	return function getReactNode(node: Node, index: number): ReactNode {
 		switch (node.nodeName) {
 			case 'A':
@@ -173,7 +175,10 @@ const toReact = (format: Format) => {
 	};
 };
 
-const renderText = (format: Format, byline: DocumentFragment): ReactNode =>
+const renderText = (
+	format: ArticleFormat,
+	byline: DocumentFragment,
+): ReactNode =>
 	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
 
 const Byline: FC<Props> = ({ bylineHtml, ...format }) =>
