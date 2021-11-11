@@ -81,20 +81,17 @@ const getStyles = ({ theme, design }: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const liveblogBubbleStyles = (color: string): SerializedStyles => css`
+const liveblogBubbleStyles = css`
 	${from.desktop} {
-		fill: ${color};
+		fill: ${neutral[46]};
 	}
 `;
 
-const deadblogBubbleStyles = (
-	color: string,
-	desktopColor: string,
-): SerializedStyles => css`
+const deadblogBubbleStyles = (color: string): SerializedStyles => css`
 	fill: ${color};
 	margin-left: revert;
 	${from.desktop} {
-		fill: ${desktopColor};
+		fill: ${neutral[46]};
 	}
 `;
 
@@ -106,14 +103,11 @@ const getBubbleStyles = ({
 
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return css(
-				bubbleStyles(neutral[93]),
-				liveblogBubbleStyles(neutral[46]),
-			);
+			return css(bubbleStyles(neutral[93]), liveblogBubbleStyles);
 		case ArticleDesign.DeadBlog:
 			return css(
 				bubbleStyles(neutral[93]),
-				deadblogBubbleStyles(colours.link, neutral[46]),
+				deadblogBubbleStyles(colours.link),
 			);
 		default:
 			return bubbleStyles(colours.kicker);

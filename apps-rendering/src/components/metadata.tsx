@@ -162,7 +162,7 @@ const tempraryBackgroundStyle = (format: ArticleFormat): SerializedStyles => {
 };
 
 const BlogLines: FC<Item> = (item: Item) => (
-	<div>
+	<>
 		<Lines
 			color={
 				isLive(item.design)
@@ -178,7 +178,7 @@ const BlogLines: FC<Item> = (item: Item) => (
 			}
 			cssOverrides={linesDarkStyles}
 		/>
-	</div>
+	</>
 );
 
 const MetadataWithByline: FC<Props> = ({ item }: Props) => (
