@@ -172,7 +172,7 @@ const H4 = ({ children }: { children: React.ReactNode }) => (
 export const MatchStats = ({ home, away }: Props) => (
 	<StretchBackground>
 		<StatsGrid>
-			<GridItem area="title">
+			<GridItem area="title" element="aside">
 				<ShiftLeft>
 					{/* Don't show the right border if this text was
                         shifted into the left column */}

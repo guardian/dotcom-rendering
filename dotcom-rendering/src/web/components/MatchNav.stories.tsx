@@ -1,3 +1,4 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -89,7 +90,13 @@ export const InContext = () => {
 				<LeftColumn>
 					<></>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<MatchNav
 						homeTeam={homeTeam}
 						awayTeam={awayTeam}
