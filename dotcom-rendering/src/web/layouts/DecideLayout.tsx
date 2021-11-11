@@ -13,6 +13,7 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
+import { InteractiveImmersiveLayout } from './InteractiveImmersiveLayout';
 
 type Props = {
 	CAPI: CAPIType;
