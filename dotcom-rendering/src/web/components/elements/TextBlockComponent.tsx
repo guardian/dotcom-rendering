@@ -126,6 +126,7 @@ export const TextBlockComponent = ({
 		{({ css }) => {
 			const paraStyles = css`
 				margin-bottom: 16px;
+				word-break: break-word;
 				${format.theme === ArticleSpecial.Labs
 					? textSans.medium()
 					: body.medium()};

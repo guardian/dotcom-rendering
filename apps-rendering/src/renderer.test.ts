@@ -7,12 +7,12 @@ import {
 	transformHref,
 } from 'renderer';
 import { JSDOM } from 'jsdom';
-import { Pillar } from '@guardian/types';
+import { ArticlePillar } from '@guardian/libs';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { none, some } from '@guardian/types';
-import { Design, Display, Format } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticleFormat } from '@guardian/libs';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { act } from 'react-dom/test-utils';
 import { unmountComponentAtNode, render as renderDom } from 'react-dom';
@@ -20,10 +20,10 @@ import { EmbedKind } from 'embed';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import { ArticleElementRole } from '@guardian/libs';
 
-const mockFormat: Format = {
-	theme: Pillar.News,
-	design: Design.Article,
-	display: Display.Standard,
+const mockFormat: ArticleFormat = {
+	theme: ArticlePillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
 };
 
 beforeEach(() => {

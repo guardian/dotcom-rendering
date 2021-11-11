@@ -189,7 +189,7 @@ interface AdTargetParam {
 }
 
 type CustomParams = {
-	[key: string]: string | string[] | number | number[] | boolean | boolean[]
+	[key: string]: string | string[] | number | number[] | boolean | boolean[];
 };
 
 type AdTargeting =
@@ -482,8 +482,6 @@ interface CAPIType {
 	// The logic is date-driven. See:
 	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
 	isLegacyInteractive?: boolean;
-
-	anniversaryInteractiveAtom?: InteractiveAtomBlockElement; // TEMPORARY, to be removed following 200th anniversary
 }
 
 // Browser data models. Note the CAPI prefix here means something different to

@@ -1,9 +1,10 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
-import { Design, Display, partition, Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
+import { partition } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
@@ -22,7 +23,7 @@ import Live from './live';
 
 const renderWithAds =
 	(shouldHide: boolean) =>
-	(format: Format, elements: BodyElement[]): ReactNode[] =>
+	(format: ArticleFormat, elements: BodyElement[]): ReactNode[] =>
 		getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
 
 // ----- Component ----- //
@@ -43,20 +44,23 @@ const notImplemented = (
 );
 
 const Layout: FC<Props> = ({ item, shouldHideAds }) => {
-	if (item.design === Design.LiveBlog || item.design === Design.DeadBlog) {
+	if (
+		item.design === ArticleDesign.LiveBlog ||
+		item.design === ArticleDesign.DeadBlog
+	) {
 		return <Live item={item} />;
 	}
 
 	const body = partition(item.body).oks;
 	const render = renderWithAds(shouldHideAds);
 
-	if (item.theme === Special.Labs) {
+	if (item.theme === ArticleSpecial.Labs) {
 		return <Labs item={item}>{render(item, body)}</Labs>;
 	}
 
 	if (
-		item.design === Design.Interactive &&
-		item.display === Display.Immersive
+		item.design === ArticleDesign.Interactive &&
+		item.display === ArticleDisplay.Immersive
 	) {
 		return (
 			<InteractiveImmersive item={item}>
@@ -66,14 +70,14 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 	}
 
 	if (
-		item.design === Design.Comment ||
-		item.design === Design.Letter ||
-		item.design === Design.Editorial
+		item.design === ArticleDesign.Comment ||
+		item.design === ArticleDesign.Letter ||
+		item.design === ArticleDesign.Editorial
 	) {
 		return <Comment item={item}>{render(item, body)}</Comment>;
 	}
 
-	if (item.design === Design.Media) {
+	if (item.design === ArticleDesign.Media) {
 		return (
 			<Media item={item}>
 				{render(
@@ -85,15 +89,15 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 	}
 
 	if (
-		item.design === Design.Feature ||
-		item.design === Design.Analysis ||
-		item.design === Design.Review ||
-		item.design === Design.Article ||
-		item.design === Design.Interactive ||
-		item.design === Design.Quiz ||
-		item.design === Design.MatchReport ||
-		item.design === Design.Obituary ||
-		item.design === Design.Correction
+		item.design === ArticleDesign.Feature ||
+		item.design === ArticleDesign.Analysis ||
+		item.design === ArticleDesign.Review ||
+		item.design === ArticleDesign.Standard ||
+		item.design === ArticleDesign.Interactive ||
+		item.design === ArticleDesign.Quiz ||
+		item.design === ArticleDesign.MatchReport ||
+		item.design === ArticleDesign.Obituary ||
+		item.design === ArticleDesign.Correction
 	) {
 		return <Standard item={item}>{render(item, body)}</Standard>;
 	}

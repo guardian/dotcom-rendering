@@ -3,4 +3,3 @@
 
 yarn workspace @guardian/dotcom-rendering prettier:check
 yarn workspace @guardian/dotcom-rendering tsc
-yarn workspace @guardian/dotcom-rendering lint-staged

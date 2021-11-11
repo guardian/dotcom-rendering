@@ -2,23 +2,23 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { background, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types';
-import { Design } from '@guardian/types';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-const backgroundColour = (format: Format): string => {
+const backgroundColour = (format: ArticleFormat): string => {
 	switch (format.design) {
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return neutral[86];
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			return neutral[93];
 		default:
 			return neutral[97];
@@ -46,7 +46,7 @@ const tagStyles = css`
 	line-height: 0;
 `;
 
-const anchorStyles = (format: Format): SerializedStyles => css`
+const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	text-decoration: none;
 	white-space: nowrap;
 	padding: 6px 16px;
@@ -72,7 +72,7 @@ interface Props {
 		webTitle: string;
 	}>;
 	background?: string;
-	format: Format;
+	format: ArticleFormat;
 }
 
 const Tags: FC<Props> = ({ tags, format }) => (

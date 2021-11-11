@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
+import { ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { Display, OptionKind } from '@guardian/types';
-import type { Format, Option } from '@guardian/types';
+import { OptionKind } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { MainMediaKind } from 'headerMedia';
 import type { MainMedia } from 'headerMedia';
 import type { Item } from 'item';
@@ -24,7 +26,7 @@ const captionHeadingStyles = css`
 
 const buildCaption = (
 	cap: Option<DocumentFragment>,
-	format: Format,
+	format: ArticleFormat,
 	credit: Option<string>,
 ): ReactElement | null => {
 	if (cap.kind === OptionKind.Some && credit.kind === OptionKind.Some) {
@@ -50,7 +52,7 @@ const buildCaption = (
 };
 
 const caption =
-	(format: Format) =>
+	(format: ArticleFormat) =>
 	(mainmedia: MainMedia): ReactElement | null => {
 		switch (mainmedia.kind) {
 			case MainMediaKind.Image:
@@ -66,7 +68,7 @@ const caption =
 	};
 
 const ImmersiveCaption: FC<Props> = (props) => {
-	if (props.item.display === Display.Immersive) {
+	if (props.item.display === ArticleDisplay.Immersive) {
 		switch (props.item.mainMedia.kind) {
 			case OptionKind.Some:
 				return caption(props.item)(props.item.mainMedia.value);

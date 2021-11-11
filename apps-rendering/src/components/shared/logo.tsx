@@ -1,9 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
+import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import Anchor from 'components/anchor';
 import { getFormat } from 'item';
@@ -15,11 +15,11 @@ import { getThemeStyles } from 'themeStyles';
 
 interface Props {
 	branding: Branding;
-	format: Format;
+	format: ArticleFormat;
 }
 
 const styles = (
-	format: Format,
+	format: ArticleFormat,
 	lightModeImage: string,
 	darkModeImage?: string,
 ): SerializedStyles => {
