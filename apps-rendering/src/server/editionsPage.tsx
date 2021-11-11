@@ -28,6 +28,7 @@ import {
 	editionsPageFonts as prodFonts,
 } from 'styles';
 import { Stage } from './appIdentity';
+import { FormatOverride } from './server';
 
 // ----- Types ----- //
 
@@ -157,6 +158,7 @@ function render(
 	res: Response,
 	getAssetLocation: (assetName: string) => string,
 	themeOverride: Option<Theme>,
+	formatOverride: FormatOverride
 ): Page {
 	const path = res.req.path;
 	const isPreview = res.req.query.isPreview === 'true';
@@ -165,7 +167,9 @@ function render(
 
 	const newItem = {
 		...item,
-		theme: withDefault(item.theme)(themeOverride),
+		theme: withDefault(item.theme)(formatOverride.theme),
+		design: withDefault(item.design)(formatOverride.design),
+		display: withDefault(item.display)(formatOverride.display)
 	};
 
 	const body = renderBody(newItem);

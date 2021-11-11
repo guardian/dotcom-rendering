@@ -5,8 +5,9 @@ import path from 'path';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import type { Option, Result, Theme } from '@guardian/types';
+import { Display, Option, Result, Theme } from '@guardian/types';
 import {
+	Design,
 	either,
 	err,
 	map,
@@ -58,6 +59,35 @@ type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
 
 // ----- Functions ----- //
 
+export interface FormatOverride {
+	display: Option<Display>;
+	design: Option<Design>;
+	theme: Option<Theme>;
+}
+
+function getFormatParams(designParam: unknown, displayParam: unknown, themeParam: unknown): FormatOverride {
+	const design = designFromUnknown(designParam)
+	const display = displayFromUnknown(displayParam);
+	const theme = themeFromUnknown(themeParam)
+
+	return { design, display, theme };
+}
+
+function displayFromUnknown(a: unknown): Option<Display> {
+	switch (a) {
+		case '0':
+			return some(Display.Standard);
+		case '1':
+			return some(Display.Immersive);
+		case '2':
+			return some(Display.Showcase);
+		case '3':
+			return some(Display.NumberedList);
+		default:
+			return none;
+	}
+}
+
 function themeFromUnknown(a: unknown): Option<Theme> {
 	switch (a) {
 		case '0':
@@ -74,6 +104,53 @@ function themeFromUnknown(a: unknown): Option<Theme> {
 			return some(Special.SpecialReport);
 		case '6':
 			return some(Special.Labs);
+		default:
+			return none;
+	}
+}
+
+function designFromUnknown(a: unknown): Option<Design> {
+	switch (a) {
+		case '0':
+			return some(Design.Article);
+		case '1':
+			return some(Design.Media);
+		case '2':
+			return some(Design.Review);
+		case '3':
+			return some(Design.Analysis);
+		case '4':
+			return some(Design.Comment);
+		case '5':
+			return some(Design.Letter);
+		case '6':
+			return some(Design.Feature);
+		case '7':
+			return some(Design.LiveBlog);
+		case '8':
+			return some(Design.Feature);
+		case '9':
+			return some(Design.Recipe);
+		case '10':
+			return some(Design.MatchReport);
+		case '11':
+			return some(Design.Interview);
+		case '12':
+			return some(Design.Editorial);
+		case '13':
+			return some(Design.Quiz);
+		case '14':
+			return some(Design.Interactive);
+		case '15':
+			return some(Design.PhotoEssay);
+		case '16':
+			return some(Design.PrintShop);
+		case '17':
+			return some(Design.Obituary);
+		case '18':
+			return some(Design.Correction);
+		case '19':
+			return some(Design.FullPageInteractive);
 		default:
 			return none;
 	}
@@ -159,16 +236,18 @@ function serveArticleSwitch(
 	res: ExpressResponse,
 	isEditions: boolean,
 	themeOverride: Option<Theme>,
+	formatOverride: FormatOverride
 ): Promise<void> {
 	if (isEditions) {
-		return serveEditionsArticle(renderingRequest, res, themeOverride);
+		return serveEditionsArticle(renderingRequest, res, themeOverride, formatOverride);
 	}
-	return serveArticle(renderingRequest, res);
+	return serveArticle(renderingRequest, res, formatOverride);
 }
 
 async function serveArticle(
 	request: RenderingRequest,
 	res: ExpressResponse,
+	formatOverride: FormatOverride
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 
@@ -176,7 +255,7 @@ async function serveArticle(
 		throw new Error('Could not get image salt');
 	}
 
-	const { html, clientScript } = render(imageSalt, request, getAssetLocation);
+	const { html, clientScript } = render(imageSalt, request, getAssetLocation, formatOverride);
 
 	res.set('Link', getPrefetchHeader(resourceList(clientScript)));
 	res.write(html);
@@ -187,6 +266,7 @@ async function serveEditionsArticle(
 	request: RenderingRequest,
 	res: ExpressResponse,
 	themeOverride: Option<Theme>,
+	formatOverride: FormatOverride,
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 
@@ -200,6 +280,7 @@ async function serveEditionsArticle(
 		res,
 		getAssetLocation,
 		themeOverride,
+		formatOverride,
 	);
 
 	res.set('Link', getPrefetchHeader(resourceList(clientScript)));
@@ -250,6 +331,8 @@ async function serveArticlePost(
 		const richLinkDetails = req.query.richlink === '';
 		const isEditions = req.query.editions === '';
 		const themeOverride = themeFromUnknown(req.query.theme);
+		const formatOverride = getFormatParams(req.query.design, req.query.display, req.query.theme);
+		console.log(req.query)
 
 		if (richLinkDetails) {
 			await serveRichLinkDetails(renderingRequest, res);
@@ -259,6 +342,7 @@ async function serveArticlePost(
 				res,
 				isEditions,
 				themeOverride,
+				formatOverride
 			);
 		}
 	} catch (e) {
@@ -282,8 +366,9 @@ async function serveEditionsArticlePost(
 			footballContent: resultToNullable(footballContent),
 		};
 		const themeOverride = themeFromUnknown(req.query.theme);
+		const formatOverride = getFormatParams(req.query.design, req.query.display, req.query.theme)
 
-		await serveEditionsArticle(renderingRequest, res, themeOverride);
+		await serveEditionsArticle(renderingRequest, res, themeOverride, formatOverride);
 	} catch (e) {
 		logger.error('This error occurred', e);
 		next(e);
@@ -298,6 +383,7 @@ async function serveArticleGet(
 		const articleId = req.params[0] || defaultId;
 		const isEditions = req.query.editions === '';
 		const capiContent = await askCapiFor(articleId);
+		const formatOverride = getFormatParams(req.query.design, req.query.display, req.query.theme)
 
 		await either(
 			(errorStatus: number) => {
@@ -329,6 +415,7 @@ async function serveArticleGet(
 						res,
 						isEditions,
 						themeOverride,
+						formatOverride,
 					);
 				}
 			},

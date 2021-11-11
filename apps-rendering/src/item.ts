@@ -147,7 +147,7 @@ type Item =
 
 type ItemFields = Omit<Fields, 'design'>;
 
-type ItemFieldsWithBody = ItemFields & { body: Body };
+export type ItemFieldsWithBody = ItemFields & { body: Body };
 
 // ----- Functions ----- //
 

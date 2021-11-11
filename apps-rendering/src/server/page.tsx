@@ -6,7 +6,7 @@ import createEmotionServer from '@emotion/server/create-instance';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { background } from '@guardian/src-foundations/palette';
-import { Design, Display, map, none, some } from '@guardian/types';
+import { Design, Display, map, none, some, withDefault } from '@guardian/types';
 import type { Format, Option } from '@guardian/types';
 import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
@@ -21,6 +21,7 @@ import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
+import { FormatOverride } from './server';
 
 // ----- Types ----- //
 
@@ -142,18 +143,27 @@ const buildHtml = (
     </html>
 `;
 
+
 function render(
 	imageSalt: string,
 	request: RenderingRequest,
 	getAssetLocation: (assetName: string) => string,
+	formatOverride: FormatOverride
 ): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request);
-	const clientScript = map(getAssetLocation)(scriptName(item));
+
+	const newItem = {
+		...item,
+		theme: withDefault(item.theme)(formatOverride.theme),
+		display: withDefault(item.display)(formatOverride.display),
+		// design: withDefault(item.design)(formatOverride.design),
+	};
+	const clientScript = map(getAssetLocation)(scriptName(newItem));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
-	const body = renderBody(item, request);
+	const body = renderBody(newItem, request);
 	const inlineStyles = requiresInlineStyles(request.content);
 	const head = renderHead(
-		item,
+		newItem,
 		request,
 		thirdPartyEmbeds,
 		body.css,
