@@ -30,11 +30,11 @@
   "dependencies": {
     "@creditkarma/thrift-server-core": "^0.16.1",
     "@guardian/apps-rendering-api-models": "^0.11.2",
-    "@guardian/atoms-rendering": "^19.0.0",
+    "@guardian/atoms-rendering": "^22.0.0",
     "@guardian/bridget": "^1.11.0",
     "@guardian/content-api-models": "^17.1.1",
     "@guardian/content-atom-model": "^3.2.4",
-    "@guardian/discussion-rendering": "^7.0.0",
+    "@guardian/discussion-rendering": "^9.0.0",
     "@guardian/libs": "^3.3.0",
     "@guardian/node-riffraff-artifact": "^0.2.2",
     "@guardian/renditions": "^0.2.0",
