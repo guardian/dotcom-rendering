@@ -47,7 +47,6 @@ notFirstPage.story = {
 export const firstPageStory = () => {
 	return (
 		<>
-			{' '}
 			{formats.map((format) => (
 				<Pagination currentPage={1} totalPages={4} format={format} />
 			))}
