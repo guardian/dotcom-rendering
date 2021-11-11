@@ -262,6 +262,7 @@ export const document = ({ data }: Props): string => {
 			pageHasNonBootInteractiveElements && {
 				src: `${CDN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
+			...getScriptArrayFromChunkName('hydration'),
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
 		].filter(isDefined), // We use the TypeGuard to keep TS happy
 	);

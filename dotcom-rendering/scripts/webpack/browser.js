@@ -37,6 +37,7 @@ module.exports = ({ isLegacyJS }) => ({
 		sentryLoader: scriptPath('sentryLoader'),
 		ga: scriptPath('ga'),
 		ophan: scriptPath('ophan'),
+		hydration: scriptPath('hydration'),
 		react: scriptPath('react'),
 		dynamicImport: scriptPath('dynamicImport'),
 		atomIframe: scriptPath('atomIframe'),
