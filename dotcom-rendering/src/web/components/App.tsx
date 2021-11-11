@@ -496,14 +496,14 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/InteractiveContentsBlockElement'
+					'@frontend/web/components/elements/InteractiveContentsBlockComponent'
 				);
 			}
 			return Promise.reject();
 		},
 		{
 			resolveComponent: (module) =>
-				module.InteractiveContentsBlockElement,
+				module.InteractiveContentsBlockComponent,
 		},
 	);
 
