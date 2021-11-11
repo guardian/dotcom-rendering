@@ -3,232 +3,103 @@ import { css, Global } from '@emotion/react';
 
 import {
 	neutral,
-	brandAltBackground,
 	brandBackground,
 	brandBorder,
-	brandLine,
-	labs,
-	border,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
-
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { ArticleBody } from '@root/src/web/components/ArticleBody';
-import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
-import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
-import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { SubMeta } from '@root/src/web/components/SubMeta';
-import { MainMedia } from '@root/src/web/components/MainMedia';
-import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
-import { Standfirst } from '@root/src/web/components/Standfirst';
-import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
-import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
-import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
-import { Border } from '@root/src/web/components/Border';
-import { GridItem } from '@root/src/web/components/GridItem';
-import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@frontend/web/components/Discussion';
-import { Nav } from '@frontend/web/components/Nav/Nav';
-import { LabsHeader } from '@frontend/web/components/LabsHeader';
-
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
-	decideLineCount,
-	decideLineEffect,
-	getCurrentPillar,
-} from '@root/src/web/lib/layoutHelpers';
-import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import {
-	interactiveGlobalStyles,
-	interactiveLegacyClasses,
-} from './lib/interactiveLegacyStyling';
+	MobileStickyContainer,
+	AdSlot,
+	labelStyles as adLabelStyles,
+	adCollapseStyles,
+} from '@root/src/web/components/AdSlot';
+import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
+import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { ImmersiveHeader } from './ImmersiveHeader';
+import { renderElement } from '../lib/renderElement';
 
-const InteractiveImmersiveGrid = ({
-	children,
-}: {
-	children: React.ReactNode;
-}) => (
-	<div
-		css={css`
-			/* IE Fallback */
-			display: flex;
-			flex-direction: column;
-			${until.leftCol} {
-				margin-left: 0px;
+interface Props {
+	CAPI: CAPIType;
+	NAV: NavType;
+	format: ArticleFormat;
+	palette: Palette;
+}
+
+const Renderer: React.FC<{
+	format: ArticleFormat;
+	palette: Palette;
+	elements: CAPIElement[];
+	host?: string;
+	pageId: string;
+	webTitle: string;
+}> = ({ format, palette, elements, host, pageId, webTitle }) => {
+	// const cleanedElements = elements.map(element =>
+	//     'html' in element ? { ...element, html: clean(element.html) } : element,
+	// );
+	// ^^ Until we decide where to do the "isomorphism split" in this this code is not safe here.
+	//    But should be soon.
+	const output = elements.map((element, index) => {
+		const [ok, el] = renderElement({
+			format,
+			palette,
+			element,
+			adTargeting: undefined,
+			host,
+			index,
+			isMainMedia: false,
+			pageId,
+			webTitle,
+		});
+
+		if (ok) {
+			switch (element._type) {
+				// Here we think it makes sense not to wrap every `p` inside a `figure`
+				case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
+				case 'model.dotcomrendering.pageElements.TextBlockElement':
+					return el;
+
+				default:
+					return (
+						<figure
+							id={
+								'elementId' in element
+									? element.elementId
+									: undefined
+							}
+							key={index}
+						>
+							{el}
+						</figure>
+					);
 			}
-			${from.leftCol} {
-				margin-left: 151px;
+		}
+
+		return null;
+	});
+
+	const adStyles = css`
+		${adLabelStyles}
+		${adCollapseStyles}
+
+		${from.tablet} {
+			.mobile-only .ad-slot {
+				display: none;
 			}
-			${from.wide} {
-				margin-left: 230px;
+		}
+		${until.tablet} {
+			.hide-until-tablet .ad-slot {
+				display: none;
 			}
+		}
+	`;
 
-			@supports (display: grid) {
-				display: grid;
-				width: 100%;
-				margin-left: 0;
-
-				grid-column-gap: 10px;
-
-				/*
-					Explanation of each unit of grid-template-columns
-
-					Left Column (220 - 1px border)
-					Vertical grey border
-					Main content
-				*/
-				${from.wide} {
-					grid-template-columns: 219px 1px 1fr;
-
-					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'.      border  media'
-						'.      border  media'
-						'.      border  lines'
-						'.      border  meta'
-						'body   body    body'
-						'.      .       .';
-				}
-
-				/*
-					Explanation of each unit of grid-template-columns
-
-					Left Column (220 - 1px border)
-					Vertical grey border
-					Main content
-				*/
-				${until.wide} {
-					grid-template-columns: 140px 1px 1fr;
-
-					grid-template-areas:
-						'title  border  headline'
-						'.      border  standfirst'
-						'.      border  media'
-						'.      border  media'
-						'.      border  lines'
-						'.      border  meta'
-						'body   body    body'
-						'.      .       .';
-				}
-
-				${until.leftCol} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
-					grid-template-areas:
-						'title'
-						'headline'
-						'standfirst'
-						'media'
-						'lines'
-						'meta'
-						'body'
-						'.';
-				}
-
-				${until.desktop} {
-					grid-template-columns: minmax(0, 1fr); /* Main content */
-					grid-template-areas:
-						'title'
-						'headline'
-						'standfirst'
-						'media'
-						'lines'
-						'meta'
-						'body';
-				}
-
-				${until.tablet} {
-					grid-column-gap: 0px;
-					grid-template-columns: minmax(0, 1fr); /* Main content */
-					grid-template-areas:
-						'media'
-						'title'
-						'headline'
-						'standfirst'
-						'lines'
-						'meta'
-						'body';
-				}
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
-const maxWidth = css`
-	${from.desktop} {
-		max-width: 620px;
-	}
-`;
-
-const stretchLines = css`
-	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-	}
-	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
-	}
-`;
-
-const stretchMetaLines = css`
-	margin: 0 -10px;
-	${from.mobileLandscape} {
-		margin: 0 -20px;
-	}
-	${from.tablet} {
-		margin-right: -40px;
-	}
-	${from.leftCol} {
-		margin-right: -20px;
-	}
-`;
-
-const starWrapper = css`
-	margin-bottom: 18px;
-	margin-top: 6px;
-	background-color: ${brandAltBackground.primary};
-	display: inline-block;
-
-	${until.phablet} {
-		padding-left: 20px;
-		margin-left: -20px;
-	}
-	${until.leftCol} {
-		padding-left: 0px;
-		margin-left: -0px;
-	}
-
-	padding-left: 10px;
-	margin-left: -10px;
-`;
-
-const ageWarningMargins = css`
-	margin-top: 12px;
-	margin-left: -10px;
-	margin-bottom: 6px;
-
-	${from.tablet} {
-		margin-left: -20px;
-	}
-
-	${from.leftCol} {
-		margin-left: -10px;
-		margin-top: 0;
-	}
-`;
+	return <div css={adStyles}>{output}</div>;
+};
 
 interface Props {
 	CAPI: CAPIType;
@@ -244,132 +115,18 @@ export const InteractiveImmersiveLayout = ({
 	palette,
 }: Props) => {
 	const {
-		config: { isPaidContent, host },
+		config: { host },
 	} = CAPI;
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
-
-	const seriesTag = CAPI.tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
-	);
-
-	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
-
-	const showComments = CAPI.isCommentable;
-
-	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
-
-	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 	return (
 		<>
 			{CAPI.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
 			)}
-
-			<div>
-				<Stuck>
-					<div data-print-layout="hide">
-						<ElementContainer
-							showTopBorder={false}
-							showSideBorders={false}
-							padded={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-								display={format.display}
-							/>
-						</ElementContainer>
-					</div>
-				</Stuck>
-
-				{format.theme !== ArticleSpecial.Labs && (
-					<div data-print-layout="hide">
-						<ElementContainer
-							showTopBorder={false}
-							showSideBorders={false}
-							padded={false}
-							backgroundColour={brandBackground.primary}
-							element="header"
-						>
-							<Header
-								edition={CAPI.editionId}
-								idUrl={CAPI.config.idUrl}
-								mmaUrl={CAPI.config.mmaUrl}
-								isAnniversary={
-									CAPI.config.switches.anniversaryHeaderSvg
-								}
-							/>
-						</ElementContainer>
-					</div>
-				)}
-
-				<ElementContainer
-					showSideBorders={true}
-					borderColour={brandLine.primary}
-					showTopBorder={false}
-					padded={false}
-					backgroundColour={brandBackground.primary}
-					element="nav"
-				>
-					<Nav
-						nav={NAV}
-						format={{
-							...format,
-							theme: getCurrentPillar(CAPI),
-						}}
-						subscribeUrl={
-							CAPI.nav.readerRevenueLinks.header.subscribe
-						}
-						edition={CAPI.editionId}
-					/>
-				</ElementContainer>
-
-				{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
-					<ElementContainer
-						backgroundColour={palette.background.article}
-						padded={false}
-						sectionId="sub-nav-root"
-						element="aside"
-					>
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							palette={palette}
-							format={format}
-						/>
-					</ElementContainer>
-				)}
-
-				{format.theme !== ArticleSpecial.Labs && (
-					<ElementContainer
-						backgroundColour={palette.background.article}
-						padded={false}
-						showTopBorder={false}
-					>
-						<Lines count={4} effect="straight" />
-					</ElementContainer>
-				)}
-			</div>
-
-			{format.theme === ArticleSpecial.Labs && (
-				<Stuck>
-					<ElementContainer
-						showSideBorders={true}
-						showTopBorder={false}
-						backgroundColour={labs[400]}
-						borderColour={border.primary}
-						sectionId="labs-header"
-					>
-						<LabsHeader />
-					</ElementContainer>
-				</Stuck>
-			)}
-
 			{CAPI.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
+
 			<ImmersiveHeader
 				CAPI={CAPI}
 				NAV={NAV}
@@ -378,265 +135,33 @@ export const InteractiveImmersiveLayout = ({
 			/>
 			<main>
 				<ElementContainer
-					data-print-layout="hide"
 					showTopBorder={false}
+					showSideBorders={false}
+					shouldCenter={false}
+					padded={false}
 					backgroundColour={palette.background.article}
-					borderColour={palette.border.article}
-					element="article"
-					className={interactiveLegacyClasses.contentInteractive}
+					element="main"
 				>
-					<div
-						className={interactiveLegacyClasses.contentInteractive}
-					>
-						<InteractiveImmersiveGrid>
-							<GridItem area="title" element="aside">
-								<div
-									className={`${interactiveLegacyClasses.contentLabels} ${interactiveLegacyClasses.contentLabelsNotImmersive}`}
-								>
-									<ArticleTitle
-										format={format}
-										palette={palette}
-										tags={CAPI.tags}
-										sectionLabel={CAPI.sectionLabel}
-										sectionUrl={CAPI.sectionUrl}
-										guardianBaseURL={CAPI.guardianBaseURL}
-										badge={CAPI.badge}
-									/>
-								</div>
-							</GridItem>
-							<GridItem area="border">
-								{format.theme === ArticleSpecial.Labs ? (
-									<></>
-								) : (
-									<Border palette={palette} />
-								)}
-							</GridItem>
-							<GridItem area="headline">
-								<div css={maxWidth}>
-									<ArticleHeadlinePadding
-										design={format.design}
-										starRating={
-											!!CAPI.starRating ||
-											CAPI.starRating === 0
-										}
-									>
-										{age && (
-											<div css={ageWarningMargins}>
-												<AgeWarning age={age} />
-											</div>
-										)}
-										<ArticleHeadline
-											format={format}
-											headlineString={CAPI.headline}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
-											palette={palette}
-										/>
-										{age && (
-											<AgeWarning
-												age={age}
-												isScreenReader={true}
-											/>
-										)}
-									</ArticleHeadlinePadding>
-								</div>
-								{CAPI.starRating || CAPI.starRating === 0 ? (
-									<div css={starWrapper}>
-										<StarRating
-											rating={CAPI.starRating}
-											size="large"
-										/>
-									</div>
-								) : (
-									<></>
-								)}
-							</GridItem>
-							<GridItem area="standfirst">
-								<Standfirst
-									format={format}
-									standfirst={CAPI.standfirst}
-								/>
-							</GridItem>
-							<GridItem area="media">
-								<div css={maxWidth}>
-									<MainMedia
-										format={format}
-										palette={palette}
-										elements={CAPI.mainMediaElements}
-										adTargeting={adTargeting}
-										host={host}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-									/>
-								</div>
-							</GridItem>
-							<GridItem area="lines">
-								<div css={maxWidth}>
-									<div css={stretchLines}>
-										<Lines
-											count={decideLineCount(
-												format.design,
-											)}
-											effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-										/>
-									</div>
-								</div>
-							</GridItem>
-							<GridItem area="meta" element="aside">
-								<div css={maxWidth}>
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										palette={palette}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-										author={CAPI.author}
-										tags={CAPI.tags}
-										primaryDateline={
-											CAPI.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											CAPI.webPublicationSecondaryDateDisplay
-										}
-									/>
-								</div>
-							</GridItem>
-							<GridItem area="body" element="article">
-								<ArticleContainer format={format}>
-									<ArticleBody
-										format={format}
-										palette={palette}
-										blocks={CAPI.blocks}
-										adTargeting={adTargeting}
-										host={host}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-									/>
-
-									{/* <Lines data-print-layout="hide" count={4} /> */}
-									<div css={stretchMetaLines}>
-										<Lines
-											count={4}
-											data-print-layout="hide"
-										/>
-									</div>
-									<SubMeta
-										palette={palette}
-										format={format}
-										subMetaKeywordLinks={
-											CAPI.subMetaKeywordLinks
-										}
-										subMetaSectionLinks={
-											CAPI.subMetaSectionLinks
-										}
-										pageId={CAPI.pageId}
-										webUrl={CAPI.webURL}
-										webTitle={CAPI.webTitle}
-										showBottomSocialButtons={
-											CAPI.showBottomSocialButtons
-										}
-										badge={CAPI.badge}
-									/>
-								</ArticleContainer>
-							</GridItem>
-						</InteractiveImmersiveGrid>
-					</div>
-				</ElementContainer>
-
-				<ElementContainer
-					data-print-layout="hide"
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						data-print-layout="hide"
-						position="merchandising-high"
-						display={format.display}
-					/>
-				</ElementContainer>
-
-				{/* Onwards (when signed OUT) */}
-				<aside
-					data-print-layout="hide"
-					id="onwards-upper-whensignedout"
-				/>
-				{showOnwardsLower && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="onwards-lower-whensignedout"
-						element="aside"
-					/>
-				)}
-
-				{!isPaidContent && showComments && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="comments"
-						element="section"
-					>
-						<Discussion
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							shortUrlId={CAPI.config.shortUrlId}
-							isCommentable={CAPI.isCommentable}
-							pillar={format.theme}
+					<article>
+						<Renderer
+							format={format}
 							palette={palette}
-							discussionD2Uid={CAPI.config.discussionD2Uid}
-							discussionApiClientHeader={
-								CAPI.config.discussionApiClientHeader
+							elements={
+								CAPI.blocks[0] ? CAPI.blocks[0].elements : []
 							}
-							enableDiscussionSwitch={false}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							beingHydrated={false}
-							display={format.display}
+							host={host}
+							pageId={CAPI.pageId}
+							webTitle={CAPI.webTitle}
 						/>
-					</ElementContainer>
-				)}
-
-				{/* Onwards (when signed IN) */}
-				<aside
-					data-print-layout="hide"
-					id="onwards-upper-whensignedin"
-				/>
-				{showOnwardsLower && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="onwards-lower-whensignedin"
-						element="aside"
-					/>
-				)}
-
-				{!isPaidContent && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="most-viewed-footer"
-						element="aside"
-					/>
-				)}
-
-				<ElementContainer
-					data-print-layout="hide"
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot position="merchandising" display={format.display} />
+					</article>
 				</ElementContainer>
 			</main>
 
 			{NAV.subNavSections && (
 				<ElementContainer
-					data-print-layout="hide"
 					padded={false}
 					sectionId="sub-nav-root"
+					backgroundColour={neutral[100]}
 					element="nav"
 				>
 					<SubNav
@@ -649,7 +174,6 @@ export const InteractiveImmersiveLayout = ({
 			)}
 
 			<ElementContainer
-				data-print-layout="hide"
 				padded={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
@@ -663,8 +187,8 @@ export const InteractiveImmersiveLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper data-print-layout="hide" />
-			<MobileStickyContainer data-print-layout="hide" />
+			<BannerWrapper />
+			<MobileStickyContainer />
 		</>
 	);
 };
