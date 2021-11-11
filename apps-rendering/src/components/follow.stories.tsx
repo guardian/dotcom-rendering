@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
-import { Design, Display, none, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { none } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 import { selectPillar } from 'storybookHelpers';
@@ -18,9 +19,9 @@ const Default: FC = () => (
 				image: none,
 			},
 		]}
-		theme={selectPillar(Pillar.News)}
-		design={Design.Article}
-		display={Display.Standard}
+		theme={selectPillar(ArticlePillar.News)}
+		design={ArticleDesign.Standard}
+		display={ArticleDisplay.Standard}
 	/>
 );
 

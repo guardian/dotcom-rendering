@@ -1,13 +1,13 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	Lines,
 	ToggleSwitch,
 } from '@guardian/source-react-components-development-kitchen';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
-import { Design, Display } from '@guardian/types';
 import Avatar from 'components/avatar';
 import Byline from 'components/byline';
 import CommentCount from 'components/commentCount';
@@ -186,13 +186,16 @@ const Metadata: FC<Props> = (props: Props) => {
 	const { display, design } = props.item;
 
 	if (
-		display === Display.Immersive ||
-		design === Design.Comment ||
-		design === Design.Letter ||
-		design === Design.Editorial
+		display === ArticleDisplay.Immersive ||
+		design === ArticleDesign.Comment ||
+		design === ArticleDesign.Letter ||
+		design === ArticleDesign.Editorial
 	) {
 		return <ShortMetadata {...props} />;
-	} else if (design === Design.LiveBlog || design === Design.DeadBlog) {
+	} else if (
+		design === ArticleDesign.LiveBlog ||
+		design === ArticleDesign.DeadBlog
+	) {
 		return <MetadataWithAlertSwitch {...props} />;
 	}
 

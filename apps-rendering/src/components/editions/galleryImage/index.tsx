@@ -2,13 +2,14 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import Img from '@guardian/common-rendering/src/components/img';
 import type { Sizes } from '@guardian/common-rendering/src/sizes';
+import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Format, Option } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { map, none, OptionKind, some, withDefault } from '@guardian/types';
 import type { Image } from 'bodyElement';
-import { convertFormatToArticleFormat, maybeRender, pipe } from 'lib';
+import { maybeRender, pipe } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 
@@ -16,12 +17,12 @@ const width = '100%';
 
 type Props = {
 	image: Image;
-	format: Format;
+	format: ArticleFormat;
 };
 
 type CaptionProps = {
 	details: CaptionDetails;
-	format: Format;
+	format: ArticleFormat;
 };
 
 type CaptionDetails = {
@@ -173,7 +174,7 @@ const GalleryImage: FC<Props> = ({ image, format }) => {
 				image={image}
 				sizes={sizes}
 				className={none}
-				format={convertFormatToArticleFormat(format)}
+				format={format}
 				supportsDarkMode={false}
 				lightbox={some({
 					className: 'js-launch-slideshow',

@@ -1,5 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 import {
@@ -8,8 +10,8 @@ import {
 	neutral,
 } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import type { Format, Option } from '@guardian/types';
-import { Design, map, none, some, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { map, none, some, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 
 export const sidePadding = css`
@@ -118,14 +120,14 @@ export const onwardStyles: SerializedStyles = css`
 
 const adHeight = '258px';
 
-export const backgroundColor = (format: Format): string =>
-	format.design === Design.Comment ||
-	format.design === Design.Letter ||
-	format.design === Design.Editorial
+export const backgroundColor = (format: ArticleFormat): string =>
+	format.design === ArticleDesign.Comment ||
+	format.design === ArticleDesign.Letter ||
+	format.design === ArticleDesign.Editorial
 		? neutral[86]
 		: neutral[97];
 
-export const adStyles = (format: Format): SerializedStyles => {
+export const adStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		.ad-placeholder {
 			margin: ${remSpace[4]} 0;

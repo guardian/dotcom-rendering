@@ -2,12 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { palette, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { labs, neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import type { Format, Theme } from '@guardian/types';
-import { Design, Display, map, Special, withDefault } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -20,7 +21,7 @@ interface Props {
 	item: Item;
 }
 
-const standardLinkStyles = (theme: Theme): SerializedStyles => {
+const standardLinkStyles = (theme: ArticleTheme): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(theme);
 
 	return css`
@@ -34,7 +35,7 @@ const standardLinkStyles = (theme: Theme): SerializedStyles => {
 	`;
 };
 
-const labsLinkStyles = (theme: Theme): SerializedStyles => css`
+const labsLinkStyles = (theme: ArticleTheme): SerializedStyles => css`
 	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
 	color: ${labs[300]};
 	text-decoration: none;
@@ -55,7 +56,7 @@ const immersiveLabsLinkStyles = css`
 	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
 `;
 
-const liveLinkStyles = (theme: Theme): SerializedStyles => css`
+const liveLinkStyles = (theme: ArticleTheme): SerializedStyles => css`
 	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
 	color: ${getThemeStyles(theme).liveblogKicker};
 	text-decoration: none;
@@ -65,29 +66,32 @@ const getLinkStyles = ({
 	design,
 	display,
 	theme,
-}: Format): SerializedStyles => {
-	if (display === Display.Immersive && theme === Special.Labs) {
+}: ArticleFormat): SerializedStyles => {
+	if (display === ArticleDisplay.Immersive && theme === ArticleSpecial.Labs) {
 		return css(immersiveLinkStyles, immersiveLabsLinkStyles);
 	}
 
-	if (display === Display.Immersive) {
+	if (display === ArticleDisplay.Immersive) {
 		return immersiveLinkStyles;
 	}
 
-	if (theme === Special.Labs) {
+	if (theme === ArticleSpecial.Labs) {
 		return labsLinkStyles(theme);
 	}
 
-	if (design === Design.LiveBlog || design === Design.DeadBlog) {
+	if (
+		design === ArticleDesign.LiveBlog ||
+		design === ArticleDesign.DeadBlog
+	) {
 		return liveLinkStyles(theme);
 	}
 
 	return standardLinkStyles(theme);
 };
 
-const immersiveStyles = (theme: Theme): SerializedStyles => css`
+const immersiveStyles = (theme: ArticleTheme): SerializedStyles => css`
 	padding: ${remSpace[1]} ${remSpace[3]};
-	background-color: ${theme === Special.Labs
+	background-color: ${theme === ArticleSpecial.Labs
 		? palette.labs[300]
 		: getThemeStyles(theme).kicker};
 	position: absolute;
@@ -112,12 +116,19 @@ const standardStyles: SerializedStyles = css`
 	padding-top: ${remSpace[1]};
 `;
 
-const getStyles = ({ design, display, theme }: Format): SerializedStyles => {
-	if (display === Display.Immersive) {
+const getStyles = ({
+	design,
+	display,
+	theme,
+}: ArticleFormat): SerializedStyles => {
+	if (display === ArticleDisplay.Immersive) {
 		return css(immersiveStyles(theme));
 	}
 
-	if (design === Design.LiveBlog || design === Design.DeadBlog) {
+	if (
+		design === ArticleDesign.LiveBlog ||
+		design === ArticleDesign.DeadBlog
+	) {
 		return css();
 	}
 
