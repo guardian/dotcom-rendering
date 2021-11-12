@@ -7,6 +7,9 @@ interface HydrateProps {
 /**
  * Hydrates a component in the client by async loading the exported component.
  *
+ * Note. The component being hydrated must follow the [MyComponent].importable.tsx
+ * namimg convention
+ *
  * @param when - When hydration should take place.
  * 		- immediate - Hydrate without delay
  * 		- idle - Hydrate when browser idle
