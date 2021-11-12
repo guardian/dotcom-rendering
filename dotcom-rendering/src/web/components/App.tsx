@@ -1312,7 +1312,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					palette={palette}
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
-					display={display}
+					format={format}
 				/>
 			</Portal>
 			<Portal rootId="reader-revenue-links-footer">

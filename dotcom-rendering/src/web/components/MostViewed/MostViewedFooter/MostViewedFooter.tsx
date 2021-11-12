@@ -11,7 +11,6 @@ import { Lazy } from '@root/src/web/components/Lazy';
 
 import { useAB } from '@guardian/ab-react';
 import { abTestTest } from '@frontend/web/experiments/tests/ab-test-test';
-import { ArticleDisplay } from '@guardian/libs';
 
 const MostViewedFooterData = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedFooterData');
@@ -95,14 +94,14 @@ interface Props {
 	sectionName?: string;
 	palette: Palette;
 	ajaxUrl: string;
-	display: ArticleDisplay;
+	format: ArticleFormat;
 }
 
 export const MostViewedFooter = ({
 	sectionName,
 	palette,
 	ajaxUrl,
-	display,
+	format,
 }: Props) => {
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
@@ -148,7 +147,7 @@ export const MostViewedFooter = ({
 							margin: 6px 0 0 10px;
 						`}
 					>
-						<AdSlot position="mostpop" display={display} />
+						<AdSlot position="mostpop" display={format.display} />
 					</div>
 				</section>
 			</div>
