@@ -4,7 +4,6 @@ import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
 import { textSans, headline } from "@guardian/src-foundations/typography";
 import { remSpace } from "@guardian/src-foundations";
-import { focusHalo } from "@guardian/src-foundations/accessibility";
 import {
 	culture,
 	lifestyle,
@@ -12,12 +11,12 @@ import {
 	news,
 	sport,
 	opinion,
-} from "@guardian/src-foundations/palette";
-import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
+} from "@guardian/src-foundations/palette"
 import { Link } from "@guardian/src-link";
 import { ArticlePillar, ArticleTheme } from "@guardian/libs";
 import { from } from "@guardian/src-foundations/mq";
 import { darkModeCss } from "../lib";
+import DropDown from "./dropDown";
 
 // ----- Component ----- //
 type paletteId = 300 | 400 | 500;
@@ -66,60 +65,6 @@ const keyEventWrapperStyles = (
 
 	${darkModeCss(supportsDarkMode)`
 		background-color: ${neutral[10]};
-	`}
-`;
-
-const detailsStyles: SerializedStyles = css`
-	&:not([open]) .is-on,
-	&[open] .is-off {
-		display: none;
-	}
-
-	summary::-webkit-details-marker {
-		display: none;
-	}
-`;
-
-const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
-	position: relative;
-	margin: 0 ${remSpace[1]} 0 ${remSpace[3]};
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-
-	&:focus {
-		${focusHalo}
-	}
-
-	path {
-		fill: ${neutral[46]};
-	}
-
-	svg {
-		height: 2rem;
-	}
-
-	${darkModeCss(supportsDarkMode)`
-		path {
-			fill: ${neutral[60]};
-		}
-	`}
-
-	${from.phablet} {
-		margin: ${remSpace[1]} ${remSpace[4]} 0;
-	}
-
-	${from.desktop} {
-		display: none;
-	}
-`;
-
-const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
-	${headline.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
-	color: ${neutral[7]};
-
-	${darkModeCss(supportsDarkMode)`
-		color: ${neutral[86]};
 	`}
 `;
 
@@ -220,16 +165,7 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 	return (
 		<div css={keyEventWrapperStyles(supportsDarkMode)}>
-			<details open css={detailsStyles}>
-				<summary css={titleRowStyles(supportsDarkMode)}>
-					<h2 css={titleStyle(supportsDarkMode)}>Key Events</h2>
-					<span className="is-off">
-						<SvgChevronDownSingle />
-					</span>
-					<span className="is-on">
-						<SvgChevronUpSingle />
-					</span>
-				</summary>
+			<DropDown supportsDarkMode={supportsDarkMode} dropDownTitle="Key events">
 				<ul css={listStyles(supportsDarkMode)}>
 					{keyEvents.slice(0, 7).map((event, index) => (
 						<ListItem
@@ -240,7 +176,7 @@ const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 						/>
 					))}
 				</ul>
-			</details>
+			</DropDown>
 		</div>
 	);
 };

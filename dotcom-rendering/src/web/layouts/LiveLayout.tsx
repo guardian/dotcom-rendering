@@ -8,6 +8,7 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
+import { Accordion } from '@guardian/src-accordion';
 import type { ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 
@@ -79,11 +80,12 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 309px 1px 1fr;
+					grid-template-columns: 220px 1px 1fr;
 					grid-template-areas:
 						'lines		border media'
 						'meta		border media'
 						'keyevents	border media'
+						'keyevents	border body'
 						'.			border body'
 						'. 			border .';
 				}
@@ -94,6 +96,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines 		border media right-column'
 						'meta  		border media right-column'
 						'keyevents  border media right-column'
+						'keyevents  border body right-column'
 						'.  		border body  right-column'
 						'.			border .     right-column';
 				}
@@ -129,6 +132,24 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 700px;
+	}
+`;
+
+const hideOnMobile = css`
+	${until.desktop} {
+		display: none;
+	}
+`;
+
+const hideOnDesktop = css`
+	${from.desktop} {
+		display: none;
+	}
+`;
+
+const marginBottom = css`
+	${until.desktop} {
+		margin-bottom: ${space[4]}px;
 	}
 `;
 
@@ -361,6 +382,34 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							format={format}
 							standfirst={CAPI.standfirst}
 						/>
+						<div css={[stretchLines, hideOnDesktop]}>
+							<Lines
+								count={decideLineCount(
+												format.design,
+											)}
+								effect={decideLineEffect(
+												format.design,
+												format.theme,
+											)}
+										/>
+						</div>
+						<div css={hideOnDesktop}>
+							<ArticleMeta
+								branding={branding}
+								format={format}
+								palette={palette}
+								pageId={CAPI.pageId}
+								webTitle={CAPI.webTitle}
+								author={CAPI.author}
+								tags={CAPI.tags}
+								primaryDateline={
+											CAPI.webPublicationDateDisplay
+										}
+								secondaryDateline={
+											CAPI.webPublicationSecondaryDateDisplay
+										}
+									/>
+						</div>
 					</ContainerLayout>
 
 					<ElementContainer
@@ -379,10 +428,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						showTopBorder={false}
 						backgroundColour={palette.background.article}
 						borderColour={palette.border.article}
+						padded={false}
 					>
 						<LiveGrid>
 							<GridItem area="media">
-								<div css={maxWidth}>
+								<div css={[maxWidth, marginBottom]}>
 									<MainMedia
 										format={format}
 										palette={palette}
@@ -399,7 +449,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="lines">
 								<div css={maxWidth}>
-									<div css={stretchLines}>
+									<div css={[stretchLines, hideOnMobile]}>
 										<Lines
 											count={decideLineCount(
 												format.design,
@@ -413,7 +463,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="meta" element="aside">
-								<div css={maxWidth}>
+								<div css={[maxWidth, hideOnMobile]}>
 									<ArticleMeta
 										branding={branding}
 										format={format}

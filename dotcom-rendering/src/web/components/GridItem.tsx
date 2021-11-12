@@ -1,4 +1,6 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/src-foundations/mq';
+import { space } from '@guardian/src-foundations';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
 type Props = {
@@ -32,6 +34,20 @@ const gridAreaStyles = (area: string) => {
 			grid-area: ${area};
 			/* Pop me above the right column */
 			${getZIndex('bodyArea')}
+		`;
+	}
+
+	if (area === 'keyevents') {
+		return css`
+			grid-area: ${area};
+			background: white;
+			margin-bottom: ${space[5]}px;
+
+			${from.desktop} {
+				position: sticky;
+				top: 10px;
+				background: none;
+			}
 		`;
 	}
 
