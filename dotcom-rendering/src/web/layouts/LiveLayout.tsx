@@ -454,6 +454,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												oldest={CAPI.pagination?.oldest}
 												newer={CAPI.pagination?.newer}
 												older={CAPI.pagination?.older}
+												format={format}
 											/>
 										)}
 									<ArticleBody
@@ -480,6 +481,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												oldest={CAPI.pagination?.oldest}
 												newer={CAPI.pagination?.newer}
 												older={CAPI.pagination?.older}
+												format={format}
 											/>
 										)}
 									{showBodyEndSlot && (

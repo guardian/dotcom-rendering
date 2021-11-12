@@ -115,6 +115,7 @@ type Palette = {
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		overlayedCaption: Colour;
+		pagination: Colour;
 	};
 	background: {
 		article: Colour;
@@ -157,12 +158,14 @@ type Palette = {
 		navPillar: Colour;
 		article: Colour;
 		lines: Colour;
+		pagination: Colour;
 	};
 	topBar: {
 		card: Colour;
 	};
 	hover: {
 		headlineByline: Colour;
+		pagination: Colour;
 	};
 };
 
