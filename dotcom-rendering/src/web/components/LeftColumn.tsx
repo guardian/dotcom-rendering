@@ -64,41 +64,34 @@ const partialRightBorder = (colour: string) => css`
 	}
 `;
 
-const rightBorder = (colour: string) => css`
+const fullRightBorder = (colour: string) => css`
 	border-right: 1px solid ${colour};
 `;
 
 type Props = {
 	children: React.ReactNode;
-	showRightBorder?: boolean;
-	showPartialRightBorder?: boolean;
+	borderType?: 'full' | 'partial';
 	borderColour?: string;
 	size?: LeftColSize;
 };
 
 export const LeftColumn = ({
 	children,
-	showRightBorder = true,
+	borderType = 'full',
 	borderColour = border.secondary,
-	showPartialRightBorder = false,
 	size = 'compact',
 }: Props) => {
-	// Make sure we can never have both borders at the same time
-	const shouldShowPartialBorder = showRightBorder
-		? false
-		: showPartialRightBorder;
-
 	return (
 		<section
 			css={[
 				positionRelative,
 				leftWidth(size),
-				showRightBorder && rightBorder(borderColour),
+				borderType === 'full' && fullRightBorder(borderColour),
 			]}
 		>
 			<div
 				css={
-					shouldShowPartialBorder && partialRightBorder(borderColour)
+					borderType === 'partial' && partialRightBorder(borderColour)
 				}
 			>
 				{children}

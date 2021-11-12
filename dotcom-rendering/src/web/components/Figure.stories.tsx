@@ -62,7 +62,7 @@ export const InlineStory = () => {
 	return (
 		<ElementContainer showTopBorder={false}>
 			<Flex>
-				<LeftColumn showRightBorder={false}>
+				<LeftColumn>
 					<></>
 				</LeftColumn>
 				<ArticleContainer
@@ -91,7 +91,7 @@ export const SupportingStory = () => {
 	return (
 		<ElementContainer showTopBorder={false}>
 			<Flex>
-				<LeftColumn showRightBorder={false}>
+				<LeftColumn>
 					<></>
 				</LeftColumn>
 				<ArticleContainer
@@ -125,7 +125,7 @@ export const ImmersiveStory = () => {
 	return (
 		<ElementContainer showTopBorder={false} showSideBorders={false}>
 			<Flex>
-				<LeftColumn showRightBorder={false}>
+				<LeftColumn>
 					<></>
 				</LeftColumn>
 				<ArticleContainer
@@ -154,7 +154,7 @@ export const ThumbnailStory = () => {
 	return (
 		<ElementContainer showTopBorder={false}>
 			<Flex>
-				<LeftColumn showRightBorder={false}>
+				<LeftColumn>
 					<></>
 				</LeftColumn>
 				<ArticleContainer
@@ -184,7 +184,7 @@ export const ShowcaseStory = () => {
 	return (
 		<ElementContainer showTopBorder={false}>
 			<Flex>
-				<LeftColumn showRightBorder={false}>
+				<LeftColumn>
 					<></>
 				</LeftColumn>
 				<ArticleContainer
@@ -213,7 +213,7 @@ export const HalfWidthStory = () => {
 	return (
 		<ElementContainer showTopBorder={false}>
 			<Flex>
-				<LeftColumn showRightBorder={false}>
+				<LeftColumn>
 					<></>
 				</LeftColumn>
 				<ArticleContainer

@@ -107,9 +107,8 @@ export const ContainerLayout = ({
 	>
 		<Flex>
 			<LeftColumn
-				showRightBorder={centralBorder === 'full'}
+				borderType={centralBorder}
 				borderColour={borderColour}
-				showPartialRightBorder={centralBorder === 'partial'}
 				size={leftColSize}
 			>
 				<>

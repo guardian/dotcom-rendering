@@ -552,7 +552,15 @@ export const Carousel: React.FC<OnwardsType> = ({
 			css={wrapperStyle(trails.length)}
 			data-link-name={formatAttrString(heading)}
 		>
-			<LeftColumn showRightBorder={false} showPartialRightBorder={true}>
+			<LeftColumn
+				borderType="partial"
+				size={
+					format.design === ArticleDesign.LiveBlog ||
+					format.design === ArticleDesign.DeadBlog
+						? 'wide'
+						: 'compact'
+				}
+			>
 				<HeaderAndNav
 					heading={heading}
 					trails={trails}
