@@ -15,10 +15,6 @@ export const doHydration = (name: string, data: any, marker: HTMLElement) => {
 		})
 		.catch((error) => {
 			if (name && error.message.includes(name)) {
-				/**
-				 * Most likely, we're being asked to hydrate a component whose name hasn't been added to the
-				 * webpackInclude option in the dynamic import statement above
-				 */
 				console.error(
 					`🚨 Error importing ${name}. Did you forget to use th [MyComponent].importable.tsx naming convention? 🚨`,
 				);
