@@ -193,15 +193,29 @@ const buttonContainerStyle = css`
 		display: none;
 	}
 `;
-const prevButtonContainerStyle = css`
-	${from.leftCol} {
-		left: 120px;
-	}
+const prevButtonContainerStyle = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
+			return css`
+				${from.leftCol} {
+					left: 305px;
+				}
+			`;
+		}
+		default: {
+			return css`
+				${from.leftCol} {
+					left: 120px;
+				}
 
-	${from.wide} {
-		left: 205px;
+				${from.wide} {
+					left: 205px;
+				}
+			`;
+		}
 	}
-`;
+};
 
 const nextButtonContainerStyle = css`
 	right: 10px;
@@ -571,7 +585,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
-			<div css={[buttonContainerStyle, prevButtonContainerStyle]}>
+			<div css={[buttonContainerStyle, prevButtonContainerStyle(format)]}>
 				<button
 					onClick={prev}
 					aria-label="Move carousel backwards"
