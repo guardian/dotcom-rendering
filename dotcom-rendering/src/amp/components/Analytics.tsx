@@ -9,7 +9,6 @@ export interface AnalyticsModel {
 	section?: string;
 	contentType: string;
 	id: string;
-	beacon: string;
 	neilsenAPIID: string;
 	domain: string;
 	permutive: {
@@ -31,7 +30,6 @@ export const Analytics: React.FC<{
 		section,
 		contentType,
 		id,
-		beacon,
 		neilsenAPIID,
 		domain,
 		permutive,
@@ -39,7 +37,6 @@ export const Analytics: React.FC<{
 	},
 }) => {
 	const scripts: string[] = [
-		`<amp-pixel data-block-on-consent src="${beacon}"></amp-pixel>`,
 		`<amp-pixel data-block-on-consent src="//www.facebook.com/tr?id=${fbPixelaccount}&ev=PageView&noscript=1"></amp-pixel>`,
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
 		`<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">

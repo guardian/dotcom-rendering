@@ -5,7 +5,9 @@ import { CacheProvider } from '@emotion/react';
 import { extractCritical } from '@emotion/server';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
-import type { Option, Theme } from '@guardian/types';
+import type { ArticleTheme } from '@guardian/libs';
+import { resets } from '@guardian/src-foundations/utils';
+import type { Option } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
 import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
@@ -78,6 +80,7 @@ const getFonts = (env: EditionsEnv): string => {
 
 const getStyles = (fonts: string): string => `
 	${fonts}
+	${resets.resetCSS}
 
 	html {
 		margin: 0;
@@ -157,7 +160,7 @@ function render(
 	request: RenderingRequest,
 	res: Response,
 	getAssetLocation: (assetName: string) => string,
-	themeOverride: Option<Theme>,
+	themeOverride: Option<ArticleTheme>,
 	formatOverride: FormatOverride
 ): Page {
 	const path = res.req.path;

@@ -4,7 +4,7 @@ import {
 	KnowledgeQuizAtom,
 	PersonalityQuizAtom,
 } from '@guardian/atoms-rendering';
-import type { Format } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
 import { ElementKind } from 'bodyElementKind';
 import type { QuizAtom } from 'quizAtom';
 import type { FC } from 'react';
@@ -12,7 +12,7 @@ import type { FC } from 'react';
 // ----- Component ----- //
 
 interface Props {
-	format: Format;
+	format: ArticleFormat;
 	element: QuizAtom;
 }
 

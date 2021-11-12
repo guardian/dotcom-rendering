@@ -34,7 +34,13 @@ export const News = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row" bottomMargin={true}>
 					<LI percentage="75%" showDivider={false} padSides={true}>
 						<Card
@@ -242,7 +248,13 @@ export const InDepth = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row">
 					<LI percentage="50%" padSides={true}>
 						<UL direction="column">
@@ -364,7 +376,13 @@ export const Related = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row" bottomMargin={true}>
 					<LI padSides={true} percentage="33%">
 						<Card
@@ -511,7 +529,13 @@ export const Spotlight = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<Card
 					linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 					format={{
@@ -539,7 +563,13 @@ export const Quad = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row">
 					<LI percentage="25%" padSides={true}>
 						<Card
@@ -556,8 +586,7 @@ export const Quad = () => (
 							kickerText={kickers[3]}
 							webPublicationDate="2019-11-11T09:45:30.000Z"
 							avatar={{
-								src:
-									'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
+								src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
 								alt: 'Avatar alt text',
 							}}
 							showClock={true}
@@ -644,7 +673,13 @@ export const Media = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row">
 					<LI
 						padSides={true}
@@ -724,8 +759,7 @@ Media.story = { name: 'Media' };
 const labsBranding1: Branding = {
 	sponsorName: 'Saint Agur',
 	logo: {
-		src:
-			'https://static.theguardian.com/commercial/sponsor/22/Mar/2021/c476c5ec-9c79-417f-b10f-e3e48c0dfb72-Saint Agur logo.png',
+		src: 'https://static.theguardian.com/commercial/sponsor/22/Mar/2021/c476c5ec-9c79-417f-b10f-e3e48c0dfb72-Saint Agur logo.png',
 		link: 'https://en.wikipedia.org/wiki/Saint_Agur_Blue',
 		label: 'Paid for by',
 		dimensions: {
@@ -756,8 +790,7 @@ const labsBranding3: Branding = {
 	sponsorName: 'DfE',
 	logo: {
 		src: `https://static.theguardian.com/commercial/sponsor/20/Jan/2021/103af03d-6b40-475b-9595-dff2ab20a0a4-DfE-lockup-Online-TIM.png`,
-		link:
-			'https://www.gov.uk/government/organisations/department-for-education',
+		link: 'https://www.gov.uk/government/organisations/department-for-education',
 		label: 'Paid for by',
 		dimensions: {
 			width: 280,
@@ -789,7 +822,13 @@ export const Labs = () => (
 			<LeftColumn showRightBorder={false}>
 				<></>
 			</LeftColumn>
-			<ArticleContainer>
+			<ArticleContainer
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<UL direction="row">
 					<LI percentage="25%" padSides={true}>
 						<Card

@@ -135,13 +135,12 @@ interface EnhancedSubheadingType extends SubheadingBlockElement {
 	ref?: HTMLElement | null;
 }
 
-export const InteractiveContentsBlockElement = ({
+export const InteractiveContentsBlockComponent = ({
 	subheadingLinks,
 	endDocumentElementId,
 }: Props) => {
-	const [showStickyNavOption, setShowStickyNavOption] = useState<boolean>(
-		false,
-	);
+	const [showStickyNavOption, setShowStickyNavOption] =
+		useState<boolean>(false);
 
 	// Loop through subheadingLinks and add a reference + reverse each object
 	const [enhancedSubheadings, setEnhancedSubheadings] = useState<
@@ -163,10 +162,8 @@ export const InteractiveContentsBlockElement = ({
 		if (node) setHeight(node.getBoundingClientRect().height);
 	}, []);
 
-	const [
-		stickyNavCurrentHeader,
-		setStickyNavCurrentHeader,
-	] = useState<null | EnhancedSubheadingType>(null);
+	const [stickyNavCurrentHeader, setStickyNavCurrentHeader] =
+		useState<null | EnhancedSubheadingType>(null);
 
 	// The sticky header needs to be based on the section of the article that is being view
 	// We accomplish this by
@@ -249,9 +246,8 @@ export const InteractiveContentsBlockElement = ({
 			);
 
 			if (endDocumentElementId) {
-				const endDocumentRef = document.getElementById(
-					endDocumentElementId,
-				);
+				const endDocumentRef =
+					document.getElementById(endDocumentElementId);
 				if (endDocumentRef) observer.observe(endDocumentRef);
 			}
 
@@ -288,6 +284,7 @@ export const InteractiveContentsBlockElement = ({
 				</button>
 			)}
 			<ol
+				data-ignore="global-ol-styling"
 				css={[
 					olStyles,
 					// we detach `ol` from the container when `stickyNavCurrentHeader` is defined

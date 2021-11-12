@@ -1,7 +1,8 @@
 // ----- Imports ----- //
 
-import { Design, Display, Pillar } from '@guardian/types';
-import type { Format, Option } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import type { Option } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
@@ -11,7 +12,7 @@ import Pullquote from './index';
 
 type Props = {
 	quote: string;
-	format: Format;
+	format: ArticleFormat;
 	attribution: Option<string>;
 };
 
@@ -19,9 +20,9 @@ const getInputProps = (): Props => ({
 	quote: 'The anti-slaughter movement is declining due to increased surveillance and repression that criminalises Tibetan identity',
 	attribution: { kind: 0, value: 'Katia Buffetrille, anthropologist' },
 	format: {
-		display: Display.Standard,
-		design: Design.Analysis,
-		theme: selectPillar(Pillar.News),
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Analysis,
+		theme: selectPillar(ArticlePillar.News),
 	},
 });
 

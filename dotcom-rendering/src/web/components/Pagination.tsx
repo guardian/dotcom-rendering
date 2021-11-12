@@ -1,14 +1,17 @@
-import { css } from '@emotion/react';
+import { SerializedStyles, css } from '@emotion/react';
 
 import { space } from '@guardian/src-foundations';
 import { LinkButton } from '@guardian/src-button';
 import { textSans } from '@guardian/src-foundations/typography';
 import {
 	SvgChevronLeftSingle,
+	SvgChevronLeftDouble,
+	SvgChevronRightDouble,
 	SvgChevronRightSingle,
 } from '@guardian/src-icons';
 import { until } from '@guardian/src-foundations/mq';
 import { Hide } from './Hide';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	currentPage: number;
@@ -17,6 +20,7 @@ type Props = {
 	newer?: string;
 	oldest?: string;
 	older?: string;
+	format: ArticleFormat;
 };
 
 const Container = ({ children }: { children: React.ReactNode }) => (
@@ -27,17 +31,26 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
+			padding-top: ${space[1]}px;
+			padding-bottom: ${space[4]}px;
 		`}
 	>
 		{children}
 	</nav>
 );
 
-const Section = ({ children }: { children: React.ReactNode }) => (
+const Section = ({
+	isFirst = false,
+	children,
+}: {
+	isFirst?: boolean;
+	children: React.ReactNode;
+}) => (
 	<section
 		css={css`
 			display: flex;
 			align-items: center;
+			visibility: ${isFirst ? 'hidden' : 'visible'};
 		`}
 	>
 		{children}
@@ -79,6 +92,16 @@ const Space = () => (
 	/>
 );
 
+const decidePaginationCss = (palette: Palette): SerializedStyles => {
+	return css`
+		color: ${palette.text.pagination};
+		border: 1px solid ${palette.border.pagination};
+		:hover {
+			border: 1px solid ${palette.hover.pagination};
+		}
+	`;
+};
+
 export const Pagination = ({
 	currentPage,
 	totalPages,
@@ -86,21 +109,38 @@ export const Pagination = ({
 	older,
 	newest,
 	newer,
+	format,
 }: Props) => {
+	const palette = decidePalette(format);
+
 	return (
 		<Container>
-			<Section>
-				<LinkButton
-					size="small"
-					priority="tertiary"
-					icon={<SvgChevronLeftSingle />}
-					iconSide="left"
-					href={newest}
-				>
-					<Hide when="below" breakpoint="phablet">
+			<Section isFirst={currentPage === 1}>
+				<Hide when="above" breakpoint="phablet">
+					<LinkButton
+						size="small"
+						priority="tertiary"
+						icon={<SvgChevronLeftDouble />}
+						iconSide="left"
+						hideLabel={true}
+						href={newest}
+						cssOverrides={decidePaginationCss(palette)}
+					>
 						Newest
-					</Hide>
-				</LinkButton>
+					</LinkButton>
+				</Hide>
+				<Hide when="below" breakpoint="phablet">
+					<LinkButton
+						size="small"
+						priority="tertiary"
+						icon={<SvgChevronLeftDouble />}
+						iconSide="left"
+						href={newest}
+						cssOverrides={decidePaginationCss(palette)}
+					>
+						Newest
+					</LinkButton>
+				</Hide>
 				<Space />
 				<LinkButton
 					size="small"
@@ -108,10 +148,9 @@ export const Pagination = ({
 					icon={<SvgChevronLeftSingle />}
 					hideLabel={true}
 					href={newer}
+					cssOverrides={decidePaginationCss(palette)}
 				>
-					<Hide when="below" breakpoint="phablet">
-						Previous
-					</Hide>
+					Previous
 				</LinkButton>
 			</Section>
 			<Section>
@@ -128,23 +167,36 @@ export const Pagination = ({
 					icon={<SvgChevronRightSingle />}
 					hideLabel={true}
 					href={older}
+					cssOverrides={decidePaginationCss(palette)}
 				>
-					<Hide when="below" breakpoint="phablet">
-						Next
-					</Hide>
+					Next
 				</LinkButton>
 				<Space />
-				<LinkButton
-					size="small"
-					priority="tertiary"
-					icon={<SvgChevronRightSingle />}
-					iconSide="right"
-					href={oldest}
-				>
-					<Hide when="below" breakpoint="phablet">
+				<Hide when="above" breakpoint="phablet">
+					<LinkButton
+						size="small"
+						priority="tertiary"
+						icon={<SvgChevronRightDouble />}
+						iconSide="right"
+						href={oldest}
+						hideLabel={true}
+						cssOverrides={decidePaginationCss(palette)}
+					>
 						Oldest
-					</Hide>
-				</LinkButton>
+					</LinkButton>
+				</Hide>
+				<Hide when="below" breakpoint="phablet">
+					<LinkButton
+						size="small"
+						priority="tertiary"
+						icon={<SvgChevronRightDouble />}
+						iconSide="right"
+						href={oldest}
+						cssOverrides={decidePaginationCss(palette)}
+					>
+						Oldest
+					</LinkButton>
+				</Hide>
 			</Section>
 		</Container>
 	);

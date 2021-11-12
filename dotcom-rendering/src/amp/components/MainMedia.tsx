@@ -1,7 +1,7 @@
 import React from 'react';
 import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';
 import { css } from '@emotion/react';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import { visuallyHidden } from '@guardian/src-foundations/accessibility';
 
@@ -24,7 +24,7 @@ const captionStyle = css`
 	right: 0;
 	bottom: 0;
 	background: rgba(18, 18, 18, 0.8);
-	color: ${palette.neutral[100]};
+	color: ${neutral[100]};
 	display: none;
 	padding: 6px 40px 12px 10px;
 	max-width: 100%;
@@ -60,7 +60,7 @@ const labelStyle = css`
 		left: 0;
 		margin: auto;
 		position: absolute;
-		fill: ${palette.neutral[100]};
+		fill: ${neutral[100]};
 	}
 `;
 

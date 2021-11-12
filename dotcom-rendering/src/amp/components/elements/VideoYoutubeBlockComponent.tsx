@@ -9,7 +9,7 @@ export const VideoYoutubeBlockComponent: React.FC<{
 	const youtubeId = getIdFromUrl(
 		element.originalUrl || element.url,
 		'^[a-zA-Z0-9_-]{11}$', // Alpha numeric, underscores and hyphens, exactly 11 numbers long
-		false,
+		true,
 		'v',
 	);
 	return (

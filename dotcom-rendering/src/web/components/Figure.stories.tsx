@@ -65,7 +65,13 @@ export const InlineStory = () => {
 				<LeftColumn showRightBorder={false}>
 					<></>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<SomeText />
 					<Figure isMainMedia={false}>
 						<Grey />
@@ -88,7 +94,13 @@ export const SupportingStory = () => {
 				<LeftColumn showRightBorder={false}>
 					<></>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<SomeText />
 					<SomeText />
 					<Figure isMainMedia={false} role="supporting">
@@ -116,7 +128,13 @@ export const ImmersiveStory = () => {
 				<LeftColumn showRightBorder={false}>
 					<></>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<SomeText />
 					<Figure isMainMedia={false} role="immersive">
 						<Grey heightInPixels={700} />
@@ -139,7 +157,13 @@ export const ThumbnailStory = () => {
 				<LeftColumn showRightBorder={false}>
 					<></>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<SomeText />
 					<Figure isMainMedia={false} role="thumbnail">
 						<Grey heightInPixels={200} />
@@ -163,7 +187,13 @@ export const ShowcaseStory = () => {
 				<LeftColumn showRightBorder={false}>
 					<></>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<SomeText />
 					<Figure isMainMedia={false} role="showcase">
 						<Grey heightInPixels={500} />
@@ -186,7 +216,13 @@ export const HalfWidthStory = () => {
 				<LeftColumn showRightBorder={false}>
 					<></>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<SomeText />
 					<Figure isMainMedia={false} role="halfWidth">
 						<Grey />

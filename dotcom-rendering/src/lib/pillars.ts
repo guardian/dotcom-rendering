@@ -150,9 +150,9 @@ export const pillarPalette_DO_NOT_USE: Record<
 This takes a function, f, and applies it to all pillars.
 It returns an object with each pillar as the keys and f('pillar') as the value
 */
-export const pillarMap: <T>(
-	f: (name: ArticleTheme) => T,
-) => { [K in ArticleTheme]: T } = (f) => ({
+export const pillarMap: <T>(f: (name: ArticleTheme) => T) => {
+	[K in ArticleTheme]: T;
+} = (f) => ({
 	[ArticlePillar.News]: f(ArticlePillar.News),
 	[ArticlePillar.Opinion]: f(ArticlePillar.Opinion),
 	[ArticlePillar.Sport]: f(ArticlePillar.Sport),

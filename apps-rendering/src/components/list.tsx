@@ -3,6 +3,7 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { remSpace } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations/palette';
 import type { FC, ReactNode } from 'react';
 
 // ----- Component ----- //
@@ -12,6 +13,18 @@ const styles: SerializedStyles = css`
 	margin: ${remSpace[3]} 0;
 	padding-left: 0;
 	clear: both;
+
+	> li::before {
+		display: inline-block;
+		content: '';
+		border-radius: 0.5rem;
+		height: 1rem;
+		width: 1rem;
+		margin-right: ${remSpace[2]};
+		background-color: ${neutral[86]};
+		margin-left: -${remSpace[6]};
+		vertical-align: middle;
+	}
 `;
 
 interface Props {

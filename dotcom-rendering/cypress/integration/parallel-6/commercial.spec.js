@@ -41,15 +41,6 @@ describe('Commercial E2E tests', function () {
 		});
 
 		it(`It should check slots for a long article in Frontend`, function () {
-			// TODO: temporary workaround for uncaught exception from rich-link json request
-			cy.on('uncaught:exception', (err, runnable, promise) => {
-				// return false to prevent the error from failing this test
-				if (promise) {
-					console.log(err);
-					return false;
-				}
-			});
-
 			Cypress.config('baseUrl', '');
 			runLongReadTestFor(`${longReadURL}?dcr=false`);
 		});

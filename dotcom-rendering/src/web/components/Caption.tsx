@@ -5,7 +5,8 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
-import TriangleIcon from '@frontend/static/icons/triangle.svg';
+import CameraSvg from '@frontend/static/icons/camera.svg';
+import VideoSvg from '@frontend/static/icons/video-icon.svg';
 
 type Props = {
 	captionText?: string;
@@ -17,25 +18,27 @@ type Props = {
 	shouldLimitWidth?: boolean;
 	isOverlayed?: boolean;
 	isLeftCol?: boolean;
+	mediaType?: MediaType;
+};
+
+type IconProps = {
+	palette: Palette;
+	format: ArticleFormat;
 };
 
 const captionStyle = (palette: Palette) => css`
-	${textSans.xxsmall()};
+	${textSans.xsmall()};
+	line-height: 135%;
 	padding-top: 6px;
-	${textSans.xxsmall()};
-	word-wrap: break-word;
+	word-wrap: break-all;
 	color: ${palette.text.caption};
-	${until.tablet} {
-		padding-left: ${space[2]}px;
-		padding-right: ${space[2]}px;
-	}
 `;
 
 const bottomMargin = css`
 	margin-bottom: 6px;
 `;
 
-const overlayedStyles = css`
+const overlayedStyles = (palette: Palette) => css`
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -43,11 +46,15 @@ const overlayedStyles = css`
 	background: rgba(18, 18, 18, 0.8);
 
 	span {
-		color: white;
+		color: ${palette.text.overlayedCaption};
 		font-size: 0.75rem;
 		line-height: 1rem;
 	}
-	color: white;
+
+	svg {
+		fill: ${palette.text.overlayedCaption};
+	}
+	color: ${palette.text.overlayedCaption};
 	font-size: 0.75rem;
 	line-height: 1rem;
 	padding-top: 0.375rem;
@@ -108,8 +115,20 @@ const hideIconBelowLeftCol = css`
 `;
 
 const iconStyle = (palette: Palette) => css`
-	fill: ${palette.fill.captionTriangle};
-	padding-right: 3px;
+	fill: ${palette.fill.cameraCaptionIcon};
+	margin-right: ${space[1]}px;
+	display: inline-block;
+	vertical-align: middle;
+	svg {
+		width: 14px;
+		display: inline-block;
+	}
+`;
+
+const videoIconStyle = css`
+	svg {
+		height: 11px;
+	}
 `;
 
 const captionLink = (palette: Palette) => css`
@@ -125,6 +144,35 @@ const captionLink = (palette: Palette) => css`
 	}
 `;
 
+const CameraIcon = ({ palette, format }: IconProps) => {
+	return (
+		<span
+			css={[
+				iconStyle(palette),
+				format.display === ArticleDisplay.Immersive &&
+					hideIconBelowLeftCol,
+			]}
+		>
+			<CameraSvg />
+		</span>
+	);
+};
+
+const VideoIcon = ({ palette, format }: IconProps) => {
+	return (
+		<span
+			css={[
+				iconStyle(palette),
+				format.display === ArticleDisplay.Immersive &&
+					hideIconBelowLeftCol,
+				videoIconStyle,
+			]}
+		>
+			<VideoSvg />
+		</span>
+	);
+};
+
 export const Caption = ({
 	captionText,
 	format,
@@ -135,6 +183,7 @@ export const Caption = ({
 	shouldLimitWidth = false,
 	isOverlayed,
 	isLeftCol,
+	mediaType = 'Gallery',
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -148,19 +197,15 @@ export const Caption = ({
 				captionStyle(palette),
 				shouldLimitWidth && limitedWidth,
 				!isOverlayed && bottomMargin,
-				isOverlayed && overlayedStyles,
+				isOverlayed && overlayedStyles(palette),
 				padCaption && captionPadding,
 			]}
 		>
-			<span
-				css={[
-					iconStyle(palette),
-					format.display === ArticleDisplay.Immersive &&
-						hideIconBelowLeftCol,
-				]}
-			>
-				<TriangleIcon />
-			</span>
+			{mediaType === 'Video' ? (
+				<VideoIcon palette={palette} format={format} />
+			) : (
+				<CameraIcon palette={palette} format={format} />
+			)}
 			{captionText && (
 				<span
 					css={captionLink(palette)}

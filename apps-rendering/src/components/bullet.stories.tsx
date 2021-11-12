@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Design, Display, Pillar } from '@guardian/types';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 import { selectPillar } from 'storybookHelpers';
@@ -11,9 +11,9 @@ import Bullet from './bullet';
 const Default: FC = () => (
 	<Bullet
 		format={{
-			design: Design.Article,
-			display: Display.Standard,
-			theme: selectPillar(Pillar.News),
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.News),
 		}}
 		text="• Lorem ipsum"
 	/>

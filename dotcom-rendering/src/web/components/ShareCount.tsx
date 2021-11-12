@@ -59,9 +59,8 @@ const shortStyles = css`
 
 export const ShareCount = ({ ajaxUrl, pageId }: Props) => {
 	const shareUrl = joinUrl([ajaxUrl, 'sharecount', `${pageId}.json`]);
-	const { data: shareData, error: shareError } = useApi<ShareCountType>(
-		shareUrl,
-	);
+	const { data: shareData, error: shareError } =
+		useApi<ShareCountType>(shareUrl);
 	if (shareError) {
 		window.guardian.modules.sentry.reportError(shareError, 'share-count');
 	}

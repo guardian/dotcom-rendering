@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# exit when any command fails
+set -e
+
 git fetch origin main
 
 gitBranches="$(git branch -r)"
@@ -13,7 +16,7 @@ files="$(git diff --name-only $currentBranch origin/main)"
 echo "files: $files"
 
 # files that are not within apps-rendering sub directory
-filteredFiles="$(echo "$files" | grep -v 'apps-rendering')"
+filteredFiles="$(echo "$files" | { grep -v 'apps-rendering' || :; })"
 echo "filteredFiles: $filteredFiles"
 
 # run the ci steps if either of the followings is true

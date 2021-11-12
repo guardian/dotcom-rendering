@@ -1,10 +1,10 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import * as Palette from '@guardian/src-foundations/palette';
-import type { Format } from '@guardian/types';
-import { Design, Display, Pillar } from '@guardian/types';
 import type { Colour } from 'editorialPalette';
 
 export const tabletContentWidth = 526;
@@ -44,6 +44,8 @@ export const borderWidthStyles: SerializedStyles = css`
 `;
 
 export const articleWidthStyles: SerializedStyles = css`
+	box-sizing: content-box;
+
 	${from.tablet} {
 		width: ${tabletContentWidth}px;
 	}
@@ -81,39 +83,39 @@ export const articlePaddingStyles: SerializedStyles = css`
 	}
 `;
 
-export const headerBackgroundColour = (format: Format): Colour => {
-	if (format.display === Display.Immersive) {
+export const headerBackgroundColour = (format: ArticleFormat): Colour => {
+	if (format.display === ArticleDisplay.Immersive) {
 		return Palette.neutral[7];
 	}
 
-	if (format.design === Design.Analysis) {
+	if (format.design === ArticleDesign.Analysis) {
 		return Palette.neutral[97];
 	}
 
-	if (format.design === Design.Media) {
+	if (format.design === ArticleDesign.Media) {
 		return Palette.neutral[7];
 	}
 
-	if (format.design === Design.Comment) {
+	if (format.design === ArticleDesign.Comment) {
 		switch (format.theme) {
-			case Pillar.Culture:
+			case ArticlePillar.Culture:
 				return Palette.culture[800];
-			case Pillar.Sport:
+			case ArticlePillar.Sport:
 				return Palette.sport[800];
-			case Pillar.News:
+			case ArticlePillar.News:
 				return Palette.news[800];
-			case Pillar.Lifestyle:
+			case ArticlePillar.Lifestyle:
 				return Palette.lifestyle[800];
-			case Pillar.Opinion:
+			case ArticlePillar.Opinion:
 				return Palette.opinion[800];
 			default:
 				return Palette.neutral[100];
 		}
 	}
 
-	if (format.design === Design.Review) {
+	if (format.design === ArticleDesign.Review) {
 		switch (format.theme) {
-			case Pillar.Culture:
+			case ArticlePillar.Culture:
 				return Palette.culture[800];
 			default:
 				return Palette.neutral[100];
@@ -123,13 +125,13 @@ export const headerBackgroundColour = (format: Format): Colour => {
 	return Palette.neutral[100];
 };
 
-export const interviewBackgroundColour = (format: Format): Colour => {
+export const interviewBackgroundColour = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
-		case Pillar.Sport:
+		case ArticlePillar.Sport:
 			return Palette.brandAlt[400];
-		case Pillar.Culture:
+		case ArticlePillar.Culture:
 			return Palette.culture[600];
-		case Pillar.Lifestyle:
+		case ArticlePillar.Lifestyle:
 			return Palette.lifestyle[800];
 		default:
 			return Palette.neutral[100];

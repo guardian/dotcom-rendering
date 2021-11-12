@@ -1,12 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
+import { ArticlePillar } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { SvgArrowRightStraight } from '@guardian/src-icons';
-import { Pillar } from '@guardian/types';
-import type { Format } from '@guardian/types';
 import { createElement as h } from 'react';
 import type { ReactElement } from 'react';
 import { backgroundColor, darkModeCss, darkModeStyles } from 'styles';
@@ -42,21 +42,21 @@ const richLinkPillarStyles = (kicker: string, inverted: string): string => {
 	`;
 };
 
-const richLinkStyles = (format: Format): SerializedStyles => {
+const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker: newsKicker, inverted: newsInverted } = getThemeStyles(
-		Pillar.News,
+		ArticlePillar.News,
 	);
 	const { kicker: opinionKicker, inverted: opinionInverted } = getThemeStyles(
-		Pillar.Opinion,
+		ArticlePillar.Opinion,
 	);
 	const { kicker: sportKicker, inverted: sportInverted } = getThemeStyles(
-		Pillar.Sport,
+		ArticlePillar.Sport,
 	);
 	const { kicker: cultureKicker, inverted: cultureInverted } = getThemeStyles(
-		Pillar.Culture,
+		ArticlePillar.Culture,
 	);
 	const { kicker: lifestyleKicker, inverted: lifestyleInverted } =
-		getThemeStyles(Pillar.Lifestyle);
+		getThemeStyles(ArticlePillar.Lifestyle);
 
 	return css`
 		background: ${backgroundColor(format)};
@@ -100,12 +100,12 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 		}
 
 		svg {
-			width: 1.0625rem;
+			width: 1.5rem;
 			border-radius: 100%;
 			border: solid 1px ${neutral[7]};
 			padding: 4px;
 			display: inline-block;
-			margin-right: ${remSpace[3]};
+			margin-right: ${remSpace[2]};
 			transition: all 0.2s ease;
 		}
 
@@ -158,7 +158,7 @@ const richLinkStyles = (format: Format): SerializedStyles => {
 const RichLink = (props: {
 	url: string;
 	linkText: string;
-	format: Format;
+	format: ArticleFormat;
 }): ReactElement => {
 	const { url, linkText, format } = props;
 	const webUrl = 'https://www.theguardian.com';

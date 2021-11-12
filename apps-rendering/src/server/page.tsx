@@ -5,9 +5,12 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { background } from '@guardian/src-foundations/palette';
-import { Design, Display, map, none, some, withDefault } from '@guardian/types';
-import type { Format, Option } from '@guardian/types';
+import { resets } from '@guardian/src-foundations/utils';
+import { map, none, some, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import { atomCss, atomScript } from 'components/interactiveAtom';
@@ -38,21 +41,23 @@ const emotionServer = createEmotionServer(emotionCache);
 
 // ----- Functions ----- //
 
-const scriptName = ({ design, display }: Format): Option<string> => {
+const scriptName = ({ design, display }: ArticleFormat): Option<string> => {
 	switch (design) {
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			return some('liveblog.js');
-		case Design.Interactive:
-			return display !== Display.Immersive ? some('article.js') : none;
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
-		case Design.Feature:
-		case Design.Analysis:
-		case Design.Review:
-		case Design.Article:
-		case Design.Quiz:
-		case Design.Media:
+		case ArticleDesign.Interactive:
+			return display !== ArticleDisplay.Immersive
+				? some('article.js')
+				: none;
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Review:
+		case ArticleDesign.Standard:
+		case ArticleDesign.Quiz:
+		case ArticleDesign.Media:
 			return some('article.js');
 		default:
 			return none;
@@ -62,12 +67,13 @@ const scriptName = ({ design, display }: Format): Option<string> => {
 const shouldHideAds = (request: RenderingRequest): boolean =>
 	request.content.fields?.shouldHideAdverts ?? false;
 
-const styles = (format: Format): string => `
+const styles = (format: ArticleFormat): string => `
     ${pageFonts}
+	${resets.resetCSS}
 
     body {
         background: ${
-			format.design === Design.Media ? background.inverse : 'white'
+			format.design === ArticleDesign.Media ? background.inverse : 'white'
 		};
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
@@ -108,9 +114,9 @@ function renderHead(
 
 	return `
         ${renderToString(meta)}
-        <link rel="stylesheet" type="text/css" href="/fontSize.css">
         <style>${generalStyles}</style>
         <style data-emotion-css="${emotionIds.join(' ')}">${itemStyles}</style>
+        <link rel="stylesheet" type="text/css" href="/fontSize.css">
         <script id="targeting-params" type="application/json">
             ${JSON.stringify(request.targetingParams)}
         </script>

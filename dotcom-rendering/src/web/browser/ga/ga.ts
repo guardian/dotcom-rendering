@@ -149,12 +149,7 @@ export const sendPageView = (): void => {
 		// do nothing
 	}
 
-	ga(send, 'pageview', {
-		hitCallback() {
-			const image = new Image();
-			image.src = `${GA.beaconUrl}/count/pvg.gif`;
-		},
-	});
+	ga(send, 'pageview');
 
 	// //////////////////////
 	// Core Vitals Reporting

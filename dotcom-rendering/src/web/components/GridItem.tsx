@@ -4,6 +4,10 @@ import { getZIndex } from '@frontend/web/lib/getZIndex';
 type Props = {
 	children: React.ReactNode;
 	area: string;
+	/**
+	 * The element type to use.
+	 */
+	element?: 'div' | 'article' | 'main' | 'aside' | 'section';
 };
 
 const gridAreaStyles = (area: string) => {
@@ -36,6 +40,12 @@ const gridAreaStyles = (area: string) => {
 	`;
 };
 
-export const GridItem = ({ children, area }: Props) => (
-	<div css={gridAreaStyles(area)}>{children}</div>
+export const GridItem = ({
+	children,
+	area,
+	element: Element = 'div',
+}: Props) => (
+	<Element css={gridAreaStyles(area)} data-gu-name={area}>
+		{children}
+	</Element>
 );

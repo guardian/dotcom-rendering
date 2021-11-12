@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+yarn workspace @guardian/dotcom-rendering prettier:check
+yarn workspace @guardian/dotcom-rendering tsc

@@ -2,10 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { SvgQuote } from '@guardian/src-icons';
-import type { Format } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
@@ -14,10 +14,10 @@ import { getThemeStyles } from 'themeStyles';
 
 interface Props {
 	children?: ReactNode;
-	format: Format;
+	format: ArticleFormat;
 }
 
-const styles = (format: Format): SerializedStyles => {
+const styles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker } = getThemeStyles(format.theme);
 	return css`
 		font-style: italic;

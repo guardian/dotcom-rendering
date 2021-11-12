@@ -5,18 +5,17 @@ import path from 'path';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import { Display, Option, Result, Theme } from '@guardian/types';
+import type { ArticleTheme } from '@guardian/libs';
+import { ArticlePillar, ArticleSpecial, ArticleDisplay, ArticleDesign } from '@guardian/libs';
+import type { Option, Result } from '@guardian/types';
 import {
-	Design,
 	either,
 	err,
 	map,
 	none,
 	ok,
 	OptionKind,
-	Pillar,
 	some,
-	Special,
 	withDefault,
 } from '@guardian/types';
 import { capiEndpoint } from 'capi';
@@ -60,9 +59,9 @@ type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
 // ----- Functions ----- //
 
 export interface FormatOverride {
-	display: Option<Display>;
-	design: Option<Design>;
-	theme: Option<Theme>;
+	display: Option<ArticleDisplay>;
+	design: Option<ArticleDesign>;
+	theme: Option<ArticleTheme>;
 }
 
 function getFormatParams(designParam: unknown, displayParam: unknown, themeParam: unknown): FormatOverride {
@@ -73,84 +72,84 @@ function getFormatParams(designParam: unknown, displayParam: unknown, themeParam
 	return { design, display, theme };
 }
 
-function displayFromUnknown(a: unknown): Option<Display> {
+function displayFromUnknown(a: unknown): Option<ArticleDisplay> {
 	switch (a) {
 		case '0':
-			return some(Display.Standard);
+			return some(ArticleDisplay.Standard);
 		case '1':
-			return some(Display.Immersive);
+			return some(ArticleDisplay.Immersive);
 		case '2':
-			return some(Display.Showcase);
+			return some(ArticleDisplay.Showcase);
 		case '3':
-			return some(Display.NumberedList);
+			return some(ArticleDisplay.NumberedList);
 		default:
 			return none;
 	}
 }
 
-function themeFromUnknown(a: unknown): Option<Theme> {
+function themeFromUnknown(a: unknown): Option<ArticleTheme> {
 	switch (a) {
 		case '0':
-			return some(Pillar.News);
+			return some(ArticlePillar.News);
 		case '1':
-			return some(Pillar.Opinion);
+			return some(ArticlePillar.Opinion);
 		case '2':
-			return some(Pillar.Sport);
+			return some(ArticlePillar.Sport);
 		case '3':
-			return some(Pillar.Culture);
+			return some(ArticlePillar.Culture);
 		case '4':
-			return some(Pillar.Lifestyle);
+			return some(ArticlePillar.Lifestyle);
 		case '5':
-			return some(Special.SpecialReport);
+			return some(ArticleSpecial.SpecialReport);
 		case '6':
-			return some(Special.Labs);
+			return some(ArticleSpecial.Labs);
 		default:
 			return none;
 	}
 }
 
-function designFromUnknown(a: unknown): Option<Design> {
+function designFromUnknown(a: unknown): Option<ArticleDesign> {
 	switch (a) {
 		case '0':
-			return some(Design.Article);
+			return some(ArticleDesign.Standard);
 		case '1':
-			return some(Design.Media);
+			return some(ArticleDesign.Media);
 		case '2':
-			return some(Design.Review);
+			return some(ArticleDesign.Review);
 		case '3':
-			return some(Design.Analysis);
+			return some(ArticleDesign.Analysis);
 		case '4':
-			return some(Design.Comment);
+			return some(ArticleDesign.Comment);
 		case '5':
-			return some(Design.Letter);
+			return some(ArticleDesign.Letter);
 		case '6':
-			return some(Design.Feature);
+			return some(ArticleDesign.Feature);
 		case '7':
-			return some(Design.LiveBlog);
+			return some(ArticleDesign.LiveBlog);
 		case '8':
-			return some(Design.Feature);
+			return some(ArticleDesign.Feature);
 		case '9':
-			return some(Design.Recipe);
+			return some(ArticleDesign.Recipe);
 		case '10':
-			return some(Design.MatchReport);
+			return some(ArticleDesign.MatchReport);
 		case '11':
-			return some(Design.Interview);
+			return some(ArticleDesign.Interview);
 		case '12':
-			return some(Design.Editorial);
+			return some(ArticleDesign.Editorial);
 		case '13':
-			return some(Design.Quiz);
+			return some(ArticleDesign.Quiz);
 		case '14':
-			return some(Design.Interactive);
+			return some(ArticleDesign.Interactive);
 		case '15':
-			return some(Design.PhotoEssay);
+			return some(ArticleDesign.PhotoEssay);
 		case '16':
-			return some(Design.PrintShop);
+			return some(ArticleDesign.PrintShop);
 		case '17':
-			return some(Design.Obituary);
+			return some(ArticleDesign.Obituary);
 		case '18':
-			return some(Design.Correction);
+			return some(ArticleDesign.Correction);
 		case '19':
-			return some(Design.FullPageInteractive);
+			return some(ArticleDesign.FullPageInteractive);
 		default:
 			return none;
 	}
@@ -235,7 +234,7 @@ function serveArticleSwitch(
 	renderingRequest: RenderingRequest,
 	res: ExpressResponse,
 	isEditions: boolean,
-	themeOverride: Option<Theme>,
+	themeOverride: Option<ArticleTheme>,
 	formatOverride: FormatOverride
 ): Promise<void> {
 	if (isEditions) {
@@ -265,7 +264,7 @@ async function serveArticle(
 async function serveEditionsArticle(
 	request: RenderingRequest,
 	res: ExpressResponse,
-	themeOverride: Option<Theme>,
+	themeOverride: Option<ArticleTheme>,
 	formatOverride: FormatOverride,
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');

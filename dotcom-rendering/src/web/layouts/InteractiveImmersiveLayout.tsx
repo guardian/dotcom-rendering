@@ -119,7 +119,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 
 	if (isSlimNav) {
 		return (
-			<header
+			<div
 				css={css`
 					${getZIndex('headerWrapper')}
 					order: 0;
@@ -131,6 +131,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 					showTopBorder={false}
 					padded={false}
 					backgroundColour={brandBackground.primary}
+					element="nav"
 				>
 					<Nav
 						format={{
@@ -145,12 +146,12 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 						edition={CAPI.editionId}
 					/>
 				</ElementContainer>
-			</header>
+			</div>
 		);
 	}
 
 	return (
-		<header
+		<section
 			/* Note, some interactives require this - e.g. https://www.theguardian.com/environment/ng-interactive/2015/jun/05/carbon-bomb-the-coal-boom-choking-china. */
 			css={css`
 				${getZIndex('headerWrapper')};
@@ -182,6 +183,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 						showSideBorders={false}
 						padded={false}
 						backgroundColour={brandBackground.primary}
+						element="header"
 					>
 						<Header
 							edition={CAPI.editionId}
@@ -201,6 +203,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 				showTopBorder={false}
 				padded={false}
 				backgroundColour={brandBackground.primary}
+				element="nav"
 			>
 				<Nav
 					format={{
@@ -219,6 +222,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 					backgroundColour={neutral[100]}
 					padded={false}
 					sectionId="sub-nav-root"
+					element="aside"
 				>
 					<SubNav
 						subNavSections={NAV.subNavSections}
@@ -228,7 +232,7 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 					/>
 				</ElementContainer>
 			)}
-		</header>
+		</section>
 	);
 };
 
@@ -247,7 +251,7 @@ export const InteractiveImmersiveLayout = ({
 			{CAPI.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
 			)}
-			<div
+			<header
 				css={css`
 					background-color: ${palette.background.article};
 				`}
@@ -272,7 +276,7 @@ export const InteractiveImmersiveLayout = ({
 						</ElementContainer>
 					</Stuck>
 				)}
-			</div>
+			</header>
 
 			<ElementContainer
 				showTopBorder={false}
@@ -280,9 +284,9 @@ export const InteractiveImmersiveLayout = ({
 				shouldCenter={false}
 				padded={false}
 				backgroundColour={palette.background.article}
-				element="article"
+				element="main"
 			>
-				<main>
+				<article>
 					<Renderer
 						format={format}
 						palette={palette}
@@ -291,7 +295,7 @@ export const InteractiveImmersiveLayout = ({
 						pageId={CAPI.pageId}
 						webTitle={CAPI.webTitle}
 					/>
-				</main>
+				</article>
 			</ElementContainer>
 
 			{NAV.subNavSections && (
@@ -315,6 +319,7 @@ export const InteractiveImmersiveLayout = ({
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
+				element="footer"
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}

@@ -1,7 +1,8 @@
 // ----- Imports ----- //
 
 import { createHash } from 'crypto';
-import { Design, map, partition, withDefault } from '@guardian/types';
+import { ArticleDesign } from '@guardian/libs';
+import { map, partition, withDefault } from '@guardian/types';
 import type { Result } from '@guardian/types';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
@@ -48,7 +49,8 @@ const extractInteractiveAssets = (elements: BodyElement[]): Assets =>
 	);
 
 const getElements = (item: Item): Array<Result<string, BodyElement>> =>
-	item.design === Design.LiveBlog
+	item.design === ArticleDesign.LiveBlog ||
+	item.design === ArticleDesign.DeadBlog
 		? item.blocks.flatMap((block) => block.body)
 		: item.body;
 
@@ -98,7 +100,7 @@ const buildCsp = (
 			? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:'
 			: ''
 	};
-    script-src 'self' ${assetHashes(scripts)} 
+    script-src 'self' ${assetHashes(scripts)}
 	https://interactive.guim.co.uk https://s16.tiktokcdn.com https://www.tiktok.com/embed.js https://sf16-scmcdn-sg.ibytedtos.com/ ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'

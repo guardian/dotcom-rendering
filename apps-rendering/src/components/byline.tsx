@@ -2,11 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral, palette } from '@guardian/src-foundations';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { labs, neutral } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { Design, map, Special, withDefault } from '@guardian/types';
-import type { Format, Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { getHref } from 'renderer';
@@ -15,12 +17,12 @@ import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
-interface Props extends Format {
+interface Props extends ArticleFormat {
 	bylineHtml: Option<DocumentFragment>;
 }
 
 const styles = (kicker: string): SerializedStyles => css`
-	${headline.xxxsmall()}
+	${headline.xxxsmall({ fontStyle: 'italic' })}
 	color: ${kicker};
 
 	${darkModeCss`
@@ -42,22 +44,28 @@ const anchorStyles = (
     `}
 `;
 
-const liveblogAnchorStyles = (
-	kicker: string,
+const blogColor = (
+	color: string,
+	link: string,
 	inverted: string,
 ): SerializedStyles => css`
+	color: ${color};
+	${from.desktop} {
+		color: ${link};
+	}
+
+	${darkModeCss`
+		color: ${neutral[93]};
+		${from.desktop} {
+			color: ${inverted};
+		}
+	`}
+`;
+
+const blogAnchorStyles = css`
 	${headline.xxxsmall({ fontWeight: 'bold' })}
 	font-style: normal;
-	color: ${neutral[93]};
 	text-decoration: none;
-
-	${from.desktop} {
-		color: ${kicker};
-
-		${darkModeCss`
-			color: ${inverted};
-		`}
-	}
 `;
 
 const commentStyles = (kicker: string): SerializedStyles => css`
@@ -79,66 +87,66 @@ const commentAnchorStyles = (
 `;
 
 const labsStyles = css`
-	${textSans.medium({ lineHeight: 'regular' })}
-	color: ${palette.labs[300]};
+	${textSans.medium({ lineHeight: 'regular', fontStyle: 'italic' })}
+	color: ${labs[300]};
 
 	${darkModeCss`
-        color: ${palette.labs[400]};
+        color: ${labs[400]};
     `}
 `;
 
-const liveblogStyles = (kicker: string): SerializedStyles => css`
+const blogStyles = css`
 	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
-	color: ${palette.neutral[93]};
-
-	${from.desktop} {
-		color: ${kicker};
-	}
 `;
 
 const labsAnchorStyles = css`
 	font-weight: bold;
-	color: ${palette.labs[300]};
+	color: ${labs[300]};
 	font-style: normal;
 	text-decoration: none;
 
 	${darkModeCss`
-        color: ${palette.labs[400]};
+        color: ${labs[400]};
     `}
 `;
 
-const getStyles = (format: Format): SerializedStyles => {
-	const { kicker } = getThemeStyles(format.theme);
+const getStyles = (format: ArticleFormat): SerializedStyles => {
+	const { kicker, link, inverted } = getThemeStyles(format.theme);
 
-	if (format.theme === Special.Labs) {
+	if (format.theme === ArticleSpecial.Labs) {
 		return labsStyles;
 	}
 
 	switch (format.design) {
-		case Design.LiveBlog:
-		case Design.DeadBlog:
-			return liveblogStyles(kicker);
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.LiveBlog:
+			return css(blogStyles, blogColor(neutral[100], link, inverted));
+		case ArticleDesign.DeadBlog:
+			return css(blogStyles, blogColor(link, link, neutral[93]));
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return commentStyles(kicker);
 		default:
 			return styles(kicker);
 	}
 };
 
-const getAnchorStyles = (format: Format): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
-	if (format.theme === Special.Labs) {
+const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
+	const { kicker, inverted, link } = getThemeStyles(format.theme);
+	if (format.theme === ArticleSpecial.Labs) {
 		return labsAnchorStyles;
 	}
 	switch (format.design) {
-		case Design.LiveBlog:
-		case Design.DeadBlog:
-			return liveblogAnchorStyles(kicker, inverted);
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.LiveBlog:
+			return css(
+				blogAnchorStyles,
+				blogColor(neutral[100], link, inverted),
+			);
+		case ArticleDesign.DeadBlog:
+			return css(blogAnchorStyles, blogColor(link, link, inverted));
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return commentAnchorStyles(kicker, inverted);
 
 		default:
@@ -146,7 +154,7 @@ const getAnchorStyles = (format: Format): SerializedStyles => {
 	}
 };
 
-const toReact = (format: Format) => {
+const toReact = (format: ArticleFormat) => {
 	return function getReactNode(node: Node, index: number): ReactNode {
 		switch (node.nodeName) {
 			case 'A':
@@ -167,7 +175,10 @@ const toReact = (format: Format) => {
 	};
 };
 
-const renderText = (format: Format, byline: DocumentFragment): ReactNode =>
+const renderText = (
+	format: ArticleFormat,
+	byline: DocumentFragment,
+): ReactNode =>
 	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
 
 const Byline: FC<Props> = ({ bylineHtml, ...format }) =>

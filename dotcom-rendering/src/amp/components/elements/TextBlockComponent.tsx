@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import { ArticleSpecial } from '@guardian/libs';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations';
 import { body, textSans } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
@@ -53,7 +53,7 @@ const TextStyle = (pillar: ArticleTheme) => css`
 		${body.medium()};
 		font-weight: 300;
 		word-wrap: break-word;
-		color: ${palette.neutral[7]};
+		color: ${neutral[7]};
 	}
 
 	blockquote {

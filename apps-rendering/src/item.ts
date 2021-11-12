@@ -9,15 +9,15 @@ import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Element } from '@guardian/content-api-models/v1/element';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import type { Format, Option } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
 import {
-	Design,
-	Display,
-	fromNullable,
-	map,
-	Pillar,
-	Special,
-} from '@guardian/types';
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
+import type { Option } from '@guardian/types';
+import { fromNullable, map } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import type { Logo } from 'capi';
@@ -45,7 +45,7 @@ import { themeFromString } from 'themeStyles';
 
 // ----- Item Type ----- //
 
-interface Fields extends Format {
+interface Fields extends ArticleFormat {
 	headline: string;
 	standfirst: Option<DocumentFragment>;
 	byline: string;
@@ -66,7 +66,7 @@ interface Fields extends Format {
 }
 
 interface MatchReport extends Fields {
-	design: Design.MatchReport;
+	design: ArticleDesign.MatchReport;
 	body: Body;
 	football: Option<MatchScores>;
 }
@@ -75,64 +75,72 @@ interface ResizedRelatedContent extends RelatedContent {
 	resizedImages: Array<Option<Image>>;
 }
 
-interface Liveblog extends Fields {
-	design: Design.LiveBlog;
+interface LiveBlog extends Fields {
+	design: ArticleDesign.LiveBlog;
+	blocks: LiveBlock[];
+	totalBodyBlocks: number;
+}
+
+interface DeadBlog extends Fields {
+	design: ArticleDesign.DeadBlog;
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
 }
 
 interface Review extends Fields {
-	design: Design.Review;
+	design: ArticleDesign.Review;
 	body: Body;
 	starRating: number;
 }
 
 interface Comment extends Fields {
-	design: Design.Comment;
+	design: ArticleDesign.Comment;
 	body: Body;
 }
 
 interface Letter extends Fields {
-	design: Design.Letter;
+	design: ArticleDesign.Letter;
 	body: Body;
 }
 
 interface Editorial extends Fields {
-	design: Design.Editorial;
+	design: ArticleDesign.Editorial;
 	body: Body;
 }
 
 interface Interactive extends Fields {
-	design: Design.Interactive;
+	design: ArticleDesign.Interactive;
 	body: Body;
 }
 
 interface Obituary extends Fields {
-	design: Design.Obituary;
+	design: ArticleDesign.Obituary;
 	body: Body;
 }
 
 interface Correction extends Fields {
-	design: Design.Correction;
+	design: ArticleDesign.Correction;
 	body: Body;
 }
 
 // Catch-all for other Designs for now. As coverage of Designs increases,
-// this will likely be split out into each Design type.
+// this will likely be split out into each ArticleDesign type.
 interface Standard extends Fields {
 	design: Exclude<
-		Design,
-		| Design.LiveBlog
-		| Design.Review
-		| Design.Comment
-		| Design.Letter
-		| Design.Editorial
+		ArticleDesign,
+		| ArticleDesign.LiveBlog
+		| ArticleDesign.DeadBlog
+		| ArticleDesign.Review
+		| ArticleDesign.Comment
+		| ArticleDesign.Letter
+		| ArticleDesign.Editorial
 	>;
 	body: Body;
 }
 
 type Item =
-	| Liveblog
+	| LiveBlog
+	| DeadBlog
 	| Review
 	| Comment
 	| Standard
@@ -151,7 +159,7 @@ export type ItemFieldsWithBody = ItemFields & { body: Body };
 
 // ----- Functions ----- //
 
-const getFormat = (item: Item): Format => ({
+const getFormat = (item: Item): ArticleFormat => ({
 	design: item.design,
 	display: item.display,
 	theme: item.theme,
@@ -180,16 +188,16 @@ const isShowcaseEmbed = (content: Content): boolean =>
 		(elem) => isMainEmbed(elem) && hasShowcaseAsset(elem.assets),
 	) ?? false;
 
-function getDisplay(content: Content): Display {
+function getDisplay(content: Content): ArticleDisplay {
 	if (isImmersive(content) || isPhotoEssay(content)) {
-		return Display.Immersive;
+		return ArticleDisplay.Immersive;
 		// This is meant to replicate the current logic in frontend:
 		// https://github.com/guardian/frontend/blob/88cfa609c73545085c3e5f3921631ec344a3eb83/common/app/model/meta.scala#L586
 	} else if (isShowcaseImage(content) || isShowcaseEmbed(content)) {
-		return Display.Showcase;
+		return ArticleDisplay.Showcase;
 	}
 
-	return Display.Standard;
+	return ArticleDisplay.Standard;
 }
 
 const itemFields = (
@@ -315,12 +323,15 @@ const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog =
 	(context: Context) =>
-	(request: RenderingRequest): Liveblog => {
+	(request: RenderingRequest): LiveBlog | DeadBlog => {
 		const { content } = request;
-		const body = content.blocks?.body?.slice(0, 7) ?? [];
+		const body = content.blocks?.body ?? [];
 
 		return {
-			design: Design.LiveBlog,
+			design:
+				content.fields?.liveBloggingNow === true
+					? ArticleDesign.LiveBlog
+					: ArticleDesign.DeadBlog,
 			blocks: parseLiveBlocks(body)(context),
 			totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
 			...itemFields(context, request),
@@ -337,83 +348,86 @@ const fromCapi =
 		// https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
 		if (isInteractive(content)) {
 			return {
-				design: Design.Interactive,
+				design: ArticleDesign.Interactive,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isMedia(tags)) {
 			return {
-				design: Design.Media,
+				design: ArticleDesign.Media,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (fields?.starRating !== undefined && isReview(tags)) {
 			return {
-				design: Design.Review,
+				design: ArticleDesign.Review,
 				starRating: fields.starRating,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isAnalysis(tags)) {
 			return {
-				design: Design.Analysis,
+				design: ArticleDesign.Analysis,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isCorrection(tags)) {
 			return {
-				design: Design.Correction,
+				design: ArticleDesign.Correction,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isLetter(tags)) {
 			return {
-				design: Design.Letter,
+				design: ArticleDesign.Letter,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isObituary(tags)) {
 			return {
-				design: Design.Obituary,
+				design: ArticleDesign.Obituary,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isGuardianView(tags)) {
 			return {
-				design: Design.Editorial,
+				design: ArticleDesign.Editorial,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isComment(tags)) {
 			const item = itemFieldsWithBody(context, request);
 			return {
-				design: Design.Comment,
+				design: ArticleDesign.Comment,
 				...item,
-				theme: item.theme === Pillar.News ? Pillar.Opinion : item.theme,
+				theme:
+					item.theme === ArticlePillar.News
+						? ArticlePillar.Opinion
+						: item.theme,
 			};
 		} else if (isInterview(tags)) {
 			return {
-				design: Design.Interview,
+				design: ArticleDesign.Interview,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isFeature(tags)) {
 			return {
-				design: Design.Feature,
+				design: ArticleDesign.Feature,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isLive(tags)) {
 			return fromCapiLiveBlog(context)(request);
 		} else if (isRecipe(tags)) {
 			return {
-				design: Design.Recipe,
+				design: ArticleDesign.Recipe,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isQuiz(tags)) {
 			return {
-				design: Design.Quiz,
+				design: ArticleDesign.Quiz,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isLabs(tags)) {
 			return {
-				design: Design.Article,
+				design: ArticleDesign.Standard,
 				...itemFieldsWithBody(context, request),
-				theme: Special.Labs,
+				theme: ArticleSpecial.Labs,
 			};
 		} else if (isMatchReport(tags)) {
 			return {
-				design: Design.MatchReport,
+				design: ArticleDesign.MatchReport,
 				football: parseMatchScores(
 					fromNullable(request.footballContent),
 				),
@@ -422,7 +436,7 @@ const fromCapi =
 		}
 
 		return {
-			design: Design.Article,
+			design: ArticleDesign.Standard,
 			...itemFieldsWithBody(context, request),
 		};
 	};
@@ -432,7 +446,8 @@ const fromCapi =
 export {
 	Item,
 	Comment,
-	Liveblog,
+	LiveBlog,
+	DeadBlog,
 	Review,
 	Standard,
 	MatchReport,

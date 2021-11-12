@@ -17,10 +17,23 @@ describe('getIdFromUrl', () => {
 				url: 'http://www.youtube.com/ytscreeningroom?v=NRH-IGHTx8I',
 				id: 'NRH-IGHTx8I',
 			},
+			{
+				url: 'https://youtu.be/NRHEIGHTx8I',
+				id: 'NRHEIGHTx8I',
+			},
+			{
+				url: 'https://youtu.be/NRH_IGHTx8I',
+				id: 'NRH_IGHTx8I',
+			},
+			{
+				url: 'https://youtu.be/NRH-IGHTx8I',
+				id: 'NRH-IGHTx8I',
+			},
 		];
 
 		formats.forEach((_) => {
-			expect(getIdFromUrl(_.url, youtubeRegEx, false, 'v')).toBe(_.id);
+			// Search for both in path & query param
+			expect(getIdFromUrl(_.url, youtubeRegEx, true, 'v')).toBe(_.id);
 		});
 	});
 
@@ -44,6 +57,18 @@ describe('getIdFromUrl', () => {
 
 		formats.forEach((_) => {
 			expect(getIdFromUrl(_.url, vimeoRegEx, true)).toBe(_.id);
+		});
+	});
+
+	it('Finds ID if both options are allowed', () => {
+		const formats = [
+			'https://theguardian.com/test',
+			'https://theguardian.com?a=test',
+			'https://theguardian.com/test?a=test',
+		];
+
+		formats.forEach((_) => {
+			expect(getIdFromUrl(_, 'test', true, 'a')).toBe('test');
 		});
 	});
 
@@ -71,6 +96,15 @@ describe('getIdFromUrl', () => {
 				'https://theguardian.com?p=test',
 				'nottest',
 				false,
+				'p',
+			);
+		}).toThrow();
+
+		expect(() => {
+			getIdFromUrl(
+				'https://theguardian.com/test?p=test',
+				'nottest',
+				true,
 				'p',
 			);
 		}).toThrow();

@@ -53,7 +53,7 @@ export const SendToBack = ({ children }: Props) => (
 );
 
 export const BannerWrapper = ({ children }: Props) => (
-	<div id="bottom-banner" css={bannerWrapper}>
+	<aside id="bottom-banner" css={bannerWrapper}>
 		{children}
-	</div>
+	</aside>
 );

@@ -535,12 +535,8 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const fillCaptionTriangle = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	return pillarPalette[format.theme].main;
-};
+const fillCaptionCamera = (format: ArticleFormat): string =>
+	textCaption(format);
 
 const fillBlockquoteIcon = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
@@ -761,6 +757,10 @@ const textNumberedPosition = (): string => {
 	return text.supporting;
 };
 
+const textOverlayed = (): string => {
+	return WHITE;
+};
+
 const backgroundHeadlineTag = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
@@ -774,6 +774,32 @@ const backgroundCarouselDotFocus = (format: ArticleFormat): string => {
 
 const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
+};
+
+const textPagination = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+			return pillarPalette[format.theme][400];
+		default:
+			return pillarPalette[format.theme][300];
+	}
+};
+
+const borderPagination = (): string => {
+	return neutral[86];
+};
+
+const hoverPagination = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+			return pillarPalette[format.theme][400];
+		default:
+			return pillarPalette[format.theme][300];
+	}
 };
 
 export const decidePalette = (format: ArticleFormat): Palette => {
@@ -815,6 +841,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
+			overlayedCaption: textOverlayed(),
+			pagination: textPagination(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -838,7 +866,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		fill: {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
-			captionTriangle: fillCaptionTriangle(format),
+			cameraCaptionIcon: fillCaptionCamera(format),
 			cardIcon: fillCardIcon(format),
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
@@ -857,12 +885,14 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
 			lines: borderLines(format),
+			pagination: borderPagination(),
 		},
 		topBar: {
 			card: topBarCard(format),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
+			pagination: hoverPagination(format),
 		},
 	};
 };
