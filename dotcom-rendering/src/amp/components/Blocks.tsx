@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { text } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
+import { text, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { Elements } from '@root/src/amp/components/Elements';
@@ -12,8 +11,8 @@ import { findBlockAdSlots } from '@root/src/amp/lib/find-adslots';
 import { Ad } from '@root/src/amp/components/Ad';
 
 const adStyle = css`
-	background: ${palette.neutral[93]};
-	border-top: 1px solid ${palette.neutral[86]};
+	background: ${neutral[93]};
+	border-top: 1px solid ${neutral[86]};
 	width: min-content;
 	height: min-content;
 	clear: both;
@@ -36,14 +35,14 @@ const adStyle = css`
 
 const blockStyle = (pillar: ArticleTheme) => css`
 	padding: 6px 10px 12px;
-	background-color: ${palette.neutral[100]};
+	background-color: ${neutral[100]};
 	border-top: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
-	border-bottom: 1px solid ${palette.neutral[93]};
+	border-bottom: 1px solid ${neutral[93]};
 	margin-bottom: 12px;
 `;
 
 const firstPublishedStyle = css`
-	color: ${palette.neutral[7]};
+	color: ${neutral[7]};
 	margin-bottom: 10px;
 	text-decoration: none;
 	font-weight: bold;
@@ -52,7 +51,7 @@ const firstPublishedStyle = css`
 
 const lastUpdatedStyle = css`
 	${textSans.xxsmall()};
-	color: ${palette.neutral[60]};
+	color: ${neutral[60]};
 	text-align: right;
 	padding-right: 15px;
 `;

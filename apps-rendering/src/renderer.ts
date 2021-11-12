@@ -15,10 +15,10 @@ import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { palette, remSpace } from '@guardian/src-foundations';
+import { remSpace } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import type { Breakpoint } from '@guardian/src-foundations/mq';
-import { neutral } from '@guardian/src-foundations/palette';
+import { labs, neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import {
 	andThen,
@@ -268,11 +268,11 @@ const isBlog = (format: ArticleFormat): boolean =>
 
 const linkColourFromFormat = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) {
-		return palette.labs[300];
+		return labs[300];
 	}
 
 	if (isBlog(format)) {
-		return palette.neutral[100];
+		return neutral[100];
 	}
 
 	const { kicker, inverted } = getThemeStyles(format.theme);
