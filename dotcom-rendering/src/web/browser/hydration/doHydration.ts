@@ -3,7 +3,7 @@ import { hydrate, h } from 'preact';
 import { initPerf } from '../initPerf';
 
 export const doHydration = (name: string, data: any, marker: HTMLElement) => {
-	const { start, end } = initPerf(name);
+	const { start, end } = initPerf(`hydrate-${name}`);
 	start();
 	import(
 		/* webpackInclude: /\.importable\.(tsx|jsx)$/ */
