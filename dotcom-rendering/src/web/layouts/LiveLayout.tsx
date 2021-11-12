@@ -384,14 +384,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 						<div css={[stretchLines, hideOnDesktop]}>
 							<Lines
-								count={decideLineCount(
-												format.design,
-											)}
+								count={decideLineCount(format.design)}
 								effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-										/>
+									format.design,
+									format.theme,
+								)}
+							/>
 						</div>
 						<div css={hideOnDesktop}>
 							<ArticleMeta
@@ -402,13 +400,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								webTitle={CAPI.webTitle}
 								author={CAPI.author}
 								tags={CAPI.tags}
-								primaryDateline={
-											CAPI.webPublicationDateDisplay
-										}
+								primaryDateline={CAPI.webPublicationDateDisplay}
 								secondaryDateline={
-											CAPI.webPublicationSecondaryDateDisplay
-										}
-									/>
+									CAPI.webPublicationSecondaryDateDisplay
+								}
+							/>
 						</div>
 					</ContainerLayout>
 
