@@ -1296,6 +1296,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					isPreview={!!CAPI.isPreview}
 					host={CAPI.config.host}
 					pageId={CAPI.pageId}
+					idUrl={CAPI.config.idUrl}
 				/>
 			</Portal>
 			<HydrateOnce rootId="comments" waitFor={[user]}>

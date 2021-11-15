@@ -54,7 +54,7 @@ const generateSignInUrl = ({
 }: {
 	pageId: string;
 	pageViewId: string;
-	idUrl?: string;
+	idUrl: string;
 	host?: string;
 	currentTest: CurrentSignInGateABTest;
 }) => {
@@ -132,6 +132,7 @@ export const SignInGateSelector = ({
 	isPreview,
 	host,
 	pageId,
+	idUrl = 'https://profile.theguardian.com',
 }: SignInGateSelectorProps) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -198,7 +199,7 @@ export const SignInGateSelector = ({
 		pageId,
 		host,
 		pageViewId: window.guardian.config.ophan.pageViewId,
-		idUrl: CAPI.config.idUrl,
+		idUrl,
 		currentTest,
 	});
 
