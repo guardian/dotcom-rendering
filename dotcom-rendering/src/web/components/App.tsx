@@ -1290,7 +1290,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					isSignedIn={isSignedIn}
 					CAPI={CAPI}
 					contentType={CAPI.contentType}
-					sectionName={CAPI.sectionName}
+					sectionName={CAPI.sectionName || ''}
 					tags={CAPI.tags}
 					isPaidContent={CAPI.pageType.isPaidContent}
 					isPreview={!!CAPI.isPreview}
@@ -1346,7 +1346,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}
 					contentType={CAPI.contentType}
-					sectionName={CAPI.sectionName}
+					sectionName={CAPI.sectionName || ''}
 					tags={CAPI.tags}
 					isPaidContent={CAPI.pageType.isPaidContent}
 					isPreview={!!CAPI.isPreview}
