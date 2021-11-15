@@ -42,7 +42,7 @@ export const isValidContentType = (contentType: string): boolean => {
 };
 
 // hide the sign in gate on certain sections of the site, e.g info, about, help etc.
-export const isValidSection = (CAPI: CAPIBrowserType): boolean => {
+export const isValidSection = (sectionName?: string): boolean => {
 	const invalidSections = [
 		'about',
 		'info',
@@ -55,7 +55,7 @@ export const isValidSection = (CAPI: CAPIBrowserType): boolean => {
 	// we check for invalid section by reducing the above array, and then NOT the result so we know
 	// its a valid section
 	return !invalidSections.some(
-		(section: string): boolean => CAPI.sectionName === section,
+		(section: string): boolean => sectionName === section,
 	);
 };
 
@@ -126,7 +126,7 @@ export const canShowSignInGate = (
 			) &&
 			isNPageOrHigherPageView(3) &&
 			isValidContentType(CAPI.contentType) &&
-			isValidSection(CAPI) &&
+			isValidSection(CAPI.sectionName) &&
 			isValidTag(CAPI) &&
 			!isPaidContent(CAPI) &&
 			!isPreview(CAPI) &&

@@ -131,28 +131,12 @@ describe('SignInGate - displayRule methods', () => {
 	});
 
 	describe('isValidSection', () => {
-		let defaultCAPIBrowser: CAPIBrowserType;
-		let CAPIBrowser: CAPIBrowserType;
-
-		beforeAll(() => {
-			defaultCAPIBrowser = makeGuardianBrowserCAPI(CAPI);
-		});
-
-		beforeEach(() => {
-			// reset the CAPI data
-			CAPIBrowser = { ...defaultCAPIBrowser };
-		});
-
 		test('is valid section - politics - returns true', () => {
-			CAPIBrowser.sectionName = 'politics';
-
-			expect(isValidSection(CAPIBrowser)).toBe(true);
+			expect(isValidSection('politics')).toBe(true);
 		});
 
 		test('is valid section - membership - return false', () => {
-			CAPIBrowser.sectionName = 'membership';
-
-			expect(isValidSection(CAPIBrowser)).toBe(false);
+			expect(isValidSection('membership')).toBe(false);
 		});
 	});
 
