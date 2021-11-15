@@ -44,12 +44,21 @@ const dismissGate = (
 
 // function to generate the profile.theguardian.com url with tracking params
 // and the return url (link to current article page)
-const generateSignInUrl = (
-	CAPI: CAPIBrowserType,
-	currentTest: CurrentSignInGateABTest,
-) => {
+const generateSignInUrl = ({
+	pageId,
+	pageViewId,
+	idUrl,
+	host,
+	currentTest,
+}: {
+	pageId: string;
+	pageViewId: string;
+	idUrl?: string;
+	host?: string;
+	currentTest: CurrentSignInGateABTest;
+}) => {
 	// url of the article, return user here after sign in/registration
-	const returnUrl = `${CAPI.config.host}/${CAPI.pageId}`;
+	const returnUrl = `${host}/${pageId}`;
 
 	// set the component event params to be included in the query
 	const queryParams: ComponentEventParams = {
@@ -57,14 +66,12 @@ const generateSignInUrl = (
 		componentId: signInGateTestIdToComponentId[currentTest.id],
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
-		viewId: window.guardian.ophan.viewId,
+		viewId: pageViewId,
 		browserId: getCookie('bwid') || undefined,
 		visitId: getCookie('vsid') || undefined,
 	};
 
-	return `${
-		CAPI.config.idUrl
-	}/signin?returnUrl=${returnUrl}&componentEventParams=${encodeURIComponent(
+	return `${idUrl}/signin?returnUrl=${returnUrl}&componentEventParams=${encodeURIComponent(
 		constructQuery(queryParams),
 	)}`;
 };
@@ -161,7 +168,13 @@ export const SignInGateSelector = ({
 		return null;
 	}
 
-	const signInUrl = generateSignInUrl(CAPI, currentTest);
+	const signInUrl = generateSignInUrl({
+		pageId: CAPI.pageId,
+		host: CAPI.config.host,
+		pageViewId: window.guardian.config.ophan.pageViewId,
+		idUrl: CAPI.config.idUrl,
+		currentTest,
+	});
 
 	return (
 		<>
