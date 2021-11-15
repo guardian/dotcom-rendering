@@ -308,11 +308,7 @@ const standfirstTextElement =
 			case 'P':
 				return h('p', { key }, children);
 			case 'STRONG':
-				return styledH(
-					'strong',
-					{ css: { fontWeight: 'bold' }, key },
-					children,
-				);
+				return h('strong', { key }, children);
 			case 'UL':
 				return h(List, { children });
 			case 'LI':
