@@ -41,6 +41,7 @@ export interface SignInGateSelectorProps {
 	isPaidContent: boolean;
 	isPreview: boolean;
 	host?: string;
+	pageId: string;
 }
 
 export type SignInGateTestMap = { [name: string]: SignInGateComponent };

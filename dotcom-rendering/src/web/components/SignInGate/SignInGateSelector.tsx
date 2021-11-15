@@ -131,6 +131,7 @@ export const SignInGateSelector = ({
 	isPaidContent,
 	isPreview,
 	host,
+	pageId,
 }: SignInGateSelectorProps) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -194,7 +195,7 @@ export const SignInGateSelector = ({
 	}
 
 	const signInUrl = generateSignInUrl({
-		pageId: CAPI.pageId,
+		pageId,
 		host,
 		pageViewId: window.guardian.config.ophan.pageViewId,
 		idUrl: CAPI.config.idUrl,
