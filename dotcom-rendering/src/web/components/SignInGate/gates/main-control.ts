@@ -11,11 +11,15 @@ import {
 	isIOS9,
 } from '@frontend/web/components/SignInGate/displayRule';
 
-const canShow = (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentSignInGateABTest,
-): Promise<boolean> =>
+const canShow = ({
+	CAPI,
+	isSignedIn,
+	currentTest,
+}: {
+	CAPI: CAPIBrowserType;
+	isSignedIn: boolean;
+	currentTest: CurrentSignInGateABTest;
+}): Promise<boolean> =>
 	Promise.resolve(
 		!isSignedIn &&
 			!hasUserDismissedGate(currentTest.variant, currentTest.name) &&

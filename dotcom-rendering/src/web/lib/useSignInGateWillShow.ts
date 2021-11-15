@@ -36,7 +36,7 @@ export const useSignInGateWillShow = ({
 		if (gateVariant && currentTest) {
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			gateVariant
-				?.canShow(CAPI, !!isSignedIn, currentTest)
+				?.canShow({ CAPI, isSignedIn: !!isSignedIn, currentTest })
 				.then(setCanShowGate);
 		}
 	}, [currentTest, gateVariant, CAPI, isSignedIn]);

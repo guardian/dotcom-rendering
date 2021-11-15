@@ -104,11 +104,15 @@ export const hasRequiredConsents = (): Promise<boolean> => {
 	});
 };
 
-export const canShowSignInGate = (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentSignInGateABTest,
-): Promise<boolean> =>
+export const canShowSignInGate = ({
+	CAPI,
+	isSignedIn,
+	currentTest,
+}: {
+	CAPI: CAPIBrowserType;
+	isSignedIn: boolean;
+	currentTest: CurrentSignInGateABTest;
+}): Promise<boolean> =>
 	Promise.resolve(
 		!isSignedIn &&
 			!hasUserDismissedGateMoreThanCount(
@@ -127,18 +131,26 @@ export const canShowSignInGate = (
 			!isIOS9(),
 	);
 
-export const canShowMandatoryUs: (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentSignInGateABTest,
-) => Promise<boolean> = async (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentSignInGateABTest,
-) => {
+export const canShowMandatoryUs: ({
+	CAPI,
+	isSignedIn,
+	currentTest,
+}: {
+	CAPI: CAPIBrowserType;
+	isSignedIn: boolean;
+	currentTest: CurrentSignInGateABTest;
+}) => Promise<boolean> = async ({
+	CAPI,
+	isSignedIn,
+	currentTest,
+}: {
+	CAPI: CAPIBrowserType;
+	isSignedIn: boolean;
+	currentTest: CurrentSignInGateABTest;
+}) => {
 	return (
 		(await getLocale()) === 'US' &&
 		(await hasRequiredConsents()) &&
-		(await canShowSignInGate(CAPI, isSignedIn, currentTest))
+		(await canShowSignInGate({ CAPI, isSignedIn, currentTest }))
 	);
 };

@@ -1,10 +1,14 @@
 export type SignInGateComponent = {
 	gate?: (props: SignInGateProps) => JSX.Element;
-	canShow: (
-		CAPI: CAPIBrowserType,
-		isSignedIn: boolean,
-		currentTest: CurrentSignInGateABTest,
-	) => Promise<boolean>;
+	canShow: ({
+		CAPI,
+		isSignedIn,
+		currentTest,
+	}: {
+		CAPI: CAPIBrowserType;
+		isSignedIn: boolean;
+		currentTest: CurrentSignInGateABTest;
+	}) => Promise<boolean>;
 };
 
 export interface SignInGateProps {
