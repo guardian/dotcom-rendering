@@ -68,14 +68,6 @@ export const isValidTag = (tags: TagType[]): boolean => {
 	);
 };
 
-// hide the sign in gate on isPaidContent
-export const isPaidContent = (CAPI: CAPIBrowserType): boolean =>
-	CAPI.pageType.isPaidContent;
-
-// hide the sign in gate on internal tools preview
-export const isPreview = (CAPI: CAPIBrowserType): boolean =>
-	CAPI.isPreview || false;
-
 export const hasRequiredConsents = (): Promise<boolean> => {
 	const hasConsentedToAll = (state: ConsentState) => {
 		const consentFlags = state.tcfv2?.consents
@@ -128,8 +120,10 @@ export const canShowSignInGate = (
 			isValidContentType(CAPI.contentType) &&
 			isValidSection(CAPI.sectionName) &&
 			isValidTag(CAPI.tags) &&
-			!isPaidContent(CAPI) &&
-			!isPreview(CAPI) &&
+			// hide the sign in gate on isPaidContent
+			!CAPI.pageType.isPaidContent &&
+			// hide the sign in gate on internal tools preview &&
+			!CAPI.isPreview &&
 			!isIOS9(),
 	);
 

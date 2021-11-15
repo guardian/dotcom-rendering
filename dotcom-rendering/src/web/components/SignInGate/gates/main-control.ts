@@ -8,8 +8,6 @@ import {
 	isValidContentType,
 	isValidSection,
 	isValidTag,
-	isPaidContent,
-	isPreview,
 	isIOS9,
 } from '@frontend/web/components/SignInGate/displayRule';
 
@@ -25,8 +23,10 @@ const canShow = (
 			isValidContentType(CAPI.contentType) &&
 			isValidSection(CAPI.sectionName) &&
 			isValidTag(CAPI.tags) &&
-			!isPaidContent(CAPI) &&
-			!isPreview(CAPI) &&
+			// hide the sign in gate on isPaidContent
+			!CAPI.pageType.isPaidContent &&
+			// hide the sign in gate on internal tools preview &&
+			!CAPI.isPreview &&
 			!isIOS9(),
 	);
 
