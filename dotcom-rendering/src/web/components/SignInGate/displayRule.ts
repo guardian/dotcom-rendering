@@ -105,13 +105,13 @@ export const hasRequiredConsents = (): Promise<boolean> => {
 };
 
 export const canShowSignInGate = ({
-	CAPI,
 	isSignedIn,
 	currentTest,
 	contentType,
 	sectionName,
 	tags,
 	isPaidContent,
+	isPreview,
 }: CanShowGateProps): Promise<boolean> =>
 	Promise.resolve(
 		!isSignedIn &&
@@ -127,38 +127,38 @@ export const canShowSignInGate = ({
 			// hide the sign in gate on isPaidContent
 			!isPaidContent &&
 			// hide the sign in gate on internal tools preview &&
-			!CAPI.isPreview &&
+			!isPreview &&
 			!isIOS9(),
 	);
 
 export const canShowMandatoryUs: ({
-	CAPI,
 	isSignedIn,
 	currentTest,
 	contentType,
 	sectionName,
 	tags,
 	isPaidContent,
+	isPreview,
 }: CanShowGateProps) => Promise<boolean> = async ({
-	CAPI,
 	isSignedIn,
 	currentTest,
 	contentType,
 	sectionName,
 	tags,
 	isPaidContent,
+	isPreview,
 }: CanShowGateProps) => {
 	return (
 		(await getLocale()) === 'US' &&
 		(await hasRequiredConsents()) &&
 		(await canShowSignInGate({
-			CAPI,
 			isSignedIn,
 			currentTest,
 			contentType,
 			sectionName,
 			tags,
 			isPaidContent,
+			isPreview,
 		}))
 	);
 };

@@ -1,6 +1,6 @@
 import { hasUserDismissedGate } from '@frontend/web/components/SignInGate/dismissGate';
 import {
-	CurrentSignInGateABTest,
+	CanShowGateProps,
 	SignInGateComponent,
 } from '@frontend/web/components/SignInGate/types';
 import {
@@ -12,25 +12,25 @@ import {
 } from '@frontend/web/components/SignInGate/displayRule';
 
 const canShow = ({
-	CAPI,
 	isSignedIn,
 	currentTest,
-}: {
-	CAPI: CAPIBrowserType;
-	isSignedIn: boolean;
-	currentTest: CurrentSignInGateABTest;
-}): Promise<boolean> =>
+	contentType,
+	sectionName,
+	tags,
+	isPaidContent,
+	isPreview,
+}: CanShowGateProps): Promise<boolean> =>
 	Promise.resolve(
 		!isSignedIn &&
 			!hasUserDismissedGate(currentTest.variant, currentTest.name) &&
 			isNPageOrHigherPageView(3) &&
-			isValidContentType(CAPI.contentType) &&
-			isValidSection(CAPI.sectionName) &&
-			isValidTag(CAPI.tags) &&
+			isValidContentType(contentType) &&
+			isValidSection(sectionName) &&
+			isValidTag(tags) &&
 			// hide the sign in gate on isPaidContent
-			!CAPI.pageType.isPaidContent &&
+			!isPaidContent &&
 			// hide the sign in gate on internal tools preview &&
-			!CAPI.isPreview &&
+			!isPreview &&
 			!isIOS9(),
 	);
 
