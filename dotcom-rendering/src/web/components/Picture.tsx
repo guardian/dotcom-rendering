@@ -89,6 +89,7 @@ const getSizeForBreakpoint = (
 
 	switch (role) {
 		case 'inline':
+			if (breakpoint >= breakpoints.tablet && breakpoint < breakpoints.desktop) return 680
 			if (breakpoint >= breakpoints.phablet) return 620
 			return breakpoint // 100vw
 		case 'halfWidth':
@@ -101,7 +102,7 @@ const getSizeForBreakpoint = (
 			return breakpoint // 100vw
 		case 'supporting':
 			if (breakpoint >= breakpoints.wide) return 380
-			return 300
+			return breakpoint // 100vw
 		case 'showcase':
 			if (breakpoint >= breakpoints.wide) return 860
 			if (breakpoint >= breakpoints.leftCol) return 780
