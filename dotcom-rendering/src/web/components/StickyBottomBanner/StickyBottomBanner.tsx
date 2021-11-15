@@ -32,6 +32,7 @@ type Props = {
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	isPreview: boolean;
 	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
+	contentType: string;
 };
 
 type RRBannerConfig = {
@@ -163,9 +164,14 @@ export const StickyBottomBanner = ({
 	brazeMessages,
 	isPreview,
 	asyncArticleCount,
+	contentType,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
-	const signInGateWillShow = useSignInGateWillShow({ isSignedIn, CAPI });
+	const signInGateWillShow = useSignInGateWillShow({
+		isSignedIn,
+		CAPI,
+		contentType,
+	});
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
 		const puzzlesBanner = buildPuzzlesBannerConfig(

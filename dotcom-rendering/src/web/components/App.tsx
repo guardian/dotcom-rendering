@@ -1286,7 +1286,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</Lazy>
 			</Portal>
 			<Portal rootId="sign-in-gate">
-				<SignInGateSelector isSignedIn={isSignedIn} CAPI={CAPI} />
+				<SignInGateSelector
+					isSignedIn={isSignedIn}
+					CAPI={CAPI}
+					contentType={CAPI.contentType}
+				/>
 			</Portal>
 			<HydrateOnce rootId="comments" waitFor={[user]}>
 				<Discussion
@@ -1338,6 +1342,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					brazeMessages={brazeMessages}
 					isPreview={!!CAPI.isPreview}
 					asyncArticleCount={asyncArticleCount}
+					contentType={CAPI.contentType}
 				/>
 			</Portal>
 		</React.StrictMode>

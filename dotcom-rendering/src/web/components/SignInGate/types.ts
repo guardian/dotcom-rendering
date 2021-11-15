@@ -35,6 +35,7 @@ export type CurrentSignInGateABTest = {
 export interface SignInGateSelectorProps {
 	isSignedIn?: boolean;
 	CAPI: CAPIBrowserType;
+	contentType: string;
 }
 
 export type SignInGateTestMap = { [name: string]: SignInGateComponent };
