@@ -127,6 +127,7 @@ export const SignInGateSelector = ({
 	sectionName,
 	tags,
 	isPaidContent,
+	isPreview,
 }: SignInGateSelectorProps) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -170,7 +171,7 @@ export const SignInGateSelector = ({
 					sectionName,
 					tags,
 					isPaidContent,
-					isPreview: CAPI.isPreview,
+					isPreview,
 				})
 				.then(setCanShowGate);
 		}
@@ -183,6 +184,7 @@ export const SignInGateSelector = ({
 		sectionName,
 		tags,
 		isPaidContent,
+		isPreview,
 	]);
 
 	if (!currentTest || !gateVariant) {

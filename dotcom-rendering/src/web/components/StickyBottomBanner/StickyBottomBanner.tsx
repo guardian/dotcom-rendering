@@ -30,12 +30,12 @@ type Props = {
 	asyncCountryCode?: Promise<CountryCode | null>;
 	CAPI: CAPIBrowserType;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
-	isPreview: boolean;
 	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
 	contentType: string;
 	sectionName?: string;
 	tags: TagType[];
 	isPaidContent: boolean;
+	isPreview: boolean;
 };
 
 type RRBannerConfig = {
@@ -165,12 +165,12 @@ export const StickyBottomBanner = ({
 	asyncCountryCode,
 	CAPI,
 	brazeMessages,
-	isPreview,
 	asyncArticleCount,
 	contentType,
 	sectionName,
 	tags,
 	isPaidContent,
+	isPreview,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const signInGateWillShow = useSignInGateWillShow({
@@ -180,6 +180,7 @@ export const StickyBottomBanner = ({
 		sectionName,
 		tags,
 		isPaidContent,
+		isPreview,
 	});
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
