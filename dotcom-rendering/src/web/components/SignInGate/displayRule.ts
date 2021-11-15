@@ -7,7 +7,7 @@ import { onConsentChange } from '@guardian/consent-management-platform';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { getLocale } from '@guardian/libs';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
-import { CurrentSignInGateABTest } from './types';
+import { CanShowGateProps } from './types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {
@@ -108,11 +108,7 @@ export const canShowSignInGate = ({
 	CAPI,
 	isSignedIn,
 	currentTest,
-}: {
-	CAPI: CAPIBrowserType;
-	isSignedIn: boolean;
-	currentTest: CurrentSignInGateABTest;
-}): Promise<boolean> =>
+}: CanShowGateProps): Promise<boolean> =>
 	Promise.resolve(
 		!isSignedIn &&
 			!hasUserDismissedGateMoreThanCount(
@@ -135,19 +131,11 @@ export const canShowMandatoryUs: ({
 	CAPI,
 	isSignedIn,
 	currentTest,
-}: {
-	CAPI: CAPIBrowserType;
-	isSignedIn: boolean;
-	currentTest: CurrentSignInGateABTest;
-}) => Promise<boolean> = async ({
+}: CanShowGateProps) => Promise<boolean> = async ({
 	CAPI,
 	isSignedIn,
 	currentTest,
-}: {
-	CAPI: CAPIBrowserType;
-	isSignedIn: boolean;
-	currentTest: CurrentSignInGateABTest;
-}) => {
+}: CanShowGateProps) => {
 	return (
 		(await getLocale()) === 'US' &&
 		(await hasRequiredConsents()) &&
