@@ -5,6 +5,7 @@ export type CanShowGateProps = {
 	contentType: string;
 	sectionName?: string;
 	tags: TagType[];
+	isPaidContent: boolean;
 };
 
 export type SignInGateComponent = {

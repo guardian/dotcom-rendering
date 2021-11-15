@@ -166,6 +166,7 @@ export const SignInGateSelector = ({
 					contentType: CAPI.contentType,
 					sectionName: CAPI.sectionName,
 					tags: CAPI.tags,
+					isPaidContent: CAPI.pageType.isPaidContent,
 				})
 				.then(setCanShowGate);
 		}
