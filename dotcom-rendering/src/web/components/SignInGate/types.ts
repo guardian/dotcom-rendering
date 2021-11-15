@@ -34,7 +34,7 @@ export type CurrentSignInGateABTest = {
 
 export interface SignInGateSelectorProps {
 	isSignedIn?: boolean;
-	CAPI: CAPIBrowserType;
+	format: ArticleFormat;
 	contentType: string;
 	sectionName: string;
 	tags: TagType[];

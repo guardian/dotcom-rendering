@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { constructQuery } from '@root/src/lib/querystring';
+import { ArticleDesign } from '@guardian/libs';
 
 import {
 	incrementUserDismissedGateCount,
@@ -25,7 +26,7 @@ import {
 interface ShowSignInGateProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	abTest: CurrentSignInGateABTest;
-	CAPI: CAPIBrowserType;
+	format: ArticleFormat;
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
 	host: string;
@@ -81,7 +82,7 @@ const generateSignInUrl = ({
 // fires a VIEW ophan component event
 // and show the gate component if it exists
 const ShowSignInGate = ({
-	CAPI,
+	format,
 	abTest,
 	setShowGate,
 	signInUrl,
@@ -112,8 +113,8 @@ const ShowSignInGate = ({
 			abTest,
 			ophanComponentId: signInGateTestIdToComponentId[abTest.id],
 			isComment:
-				CAPI.format.design === 'CommentDesign' ||
-				CAPI.format.design === 'EditorialDesign',
+				format.design === ArticleDesign.Comment ||
+				format.design === ArticleDesign.Editorial,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -124,7 +125,7 @@ const ShowSignInGate = ({
 // should be shown on the current page
 export const SignInGateSelector = ({
 	isSignedIn,
-	CAPI,
+	format,
 	contentType,
 	sectionName,
 	tags,
@@ -208,7 +209,7 @@ export const SignInGateSelector = ({
 			{/* Sign In Gate Display Logic */}
 			{!isGateDismissed && canShowGate && (
 				<ShowSignInGate
-					CAPI={CAPI}
+					format={format}
 					abTest={currentTest}
 					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={signInUrl}

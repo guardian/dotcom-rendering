@@ -1288,7 +1288,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			<Portal rootId="sign-in-gate">
 				<SignInGateSelector
 					isSignedIn={isSignedIn}
-					CAPI={CAPI}
+					format={format}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName || ''}
 					tags={CAPI.tags}
