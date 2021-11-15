@@ -24,7 +24,7 @@ const canShow = (
 			isNPageOrHigherPageView(3) &&
 			isValidContentType(CAPI.contentType) &&
 			isValidSection(CAPI.sectionName) &&
-			isValidTag(CAPI) &&
+			isValidTag(CAPI.tags) &&
 			!isPaidContent(CAPI) &&
 			!isPreview(CAPI) &&
 			!isIOS9(),

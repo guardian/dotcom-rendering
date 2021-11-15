@@ -60,11 +60,11 @@ export const isValidSection = (sectionName?: string): boolean => {
 };
 
 // hide the sign in gate for certain tags on the site
-export const isValidTag = (CAPI: CAPIBrowserType): boolean => {
+export const isValidTag = (tags: TagType[]): boolean => {
 	const invalidTags = ['info/newsletter-sign-up'];
 
 	return !invalidTags.some((invalidTag) =>
-		CAPI.tags.map((tag) => tag.id).includes(invalidTag),
+		tags.map((tag) => tag.id).includes(invalidTag),
 	);
 };
 
@@ -127,7 +127,7 @@ export const canShowSignInGate = (
 			isNPageOrHigherPageView(3) &&
 			isValidContentType(CAPI.contentType) &&
 			isValidSection(CAPI.sectionName) &&
-			isValidTag(CAPI) &&
+			isValidTag(CAPI.tags) &&
 			!isPaidContent(CAPI) &&
 			!isPreview(CAPI) &&
 			!isIOS9(),
