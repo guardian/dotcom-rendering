@@ -1292,6 +1292,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
 					tags={CAPI.tags}
+					isPaidContent={CAPI.pageType.isPaidContent}
 				/>
 			</Portal>
 			<HydrateOnce rootId="comments" waitFor={[user]}>
@@ -1347,6 +1348,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
 					tags={CAPI.tags}
+					isPaidContent={CAPI.pageType.isPaidContent}
 				/>
 			</Portal>
 		</React.StrictMode>

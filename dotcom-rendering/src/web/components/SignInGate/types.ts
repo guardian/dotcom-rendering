@@ -38,6 +38,7 @@ export interface SignInGateSelectorProps {
 	contentType: string;
 	sectionName?: string;
 	tags: TagType[];
+	isPaidContent: boolean;
 }
 
 export type SignInGateTestMap = { [name: string]: SignInGateComponent };

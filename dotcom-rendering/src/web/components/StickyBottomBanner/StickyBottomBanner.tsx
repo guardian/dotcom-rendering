@@ -35,6 +35,7 @@ type Props = {
 	contentType: string;
 	sectionName?: string;
 	tags: TagType[];
+	isPaidContent: boolean;
 };
 
 type RRBannerConfig = {
@@ -169,6 +170,7 @@ export const StickyBottomBanner = ({
 	contentType,
 	sectionName,
 	tags,
+	isPaidContent,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const signInGateWillShow = useSignInGateWillShow({
@@ -177,6 +179,7 @@ export const StickyBottomBanner = ({
 		contentType,
 		sectionName,
 		tags,
+		isPaidContent,
 	});
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();

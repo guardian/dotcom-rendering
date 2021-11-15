@@ -18,6 +18,8 @@ export const useSignInGateWillShow = ({
 	CAPI,
 	contentType,
 	sectionName,
+	tags,
+	isPaidContent,
 }: SignInGateSelectorProps): boolean | undefined => {
 	const [gateVariant, setGateVariant] = useState<
 		SignInGateComponent | null | undefined
@@ -43,13 +45,22 @@ export const useSignInGateWillShow = ({
 					currentTest,
 					contentType,
 					sectionName,
-					tags: CAPI.tags,
-					isPaidContent: CAPI.pageType.isPaidContent,
+					tags,
+					isPaidContent,
 					isPreview: CAPI.isPreview,
 				})
 				.then(setCanShowGate);
 		}
-	}, [currentTest, gateVariant, CAPI, isSignedIn, contentType, sectionName]);
+	}, [
+		currentTest,
+		gateVariant,
+		CAPI,
+		isSignedIn,
+		contentType,
+		sectionName,
+		tags,
+		isPaidContent,
+	]);
 
 	return canShowGate && !!gateVariant && !!gateVariant.gate;
 };
