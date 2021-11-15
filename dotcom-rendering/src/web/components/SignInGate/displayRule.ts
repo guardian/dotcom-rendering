@@ -109,6 +109,7 @@ export const canShowSignInGate = ({
 	isSignedIn,
 	currentTest,
 	contentType,
+	sectionName,
 }: CanShowGateProps): Promise<boolean> =>
 	Promise.resolve(
 		!isSignedIn &&
@@ -119,8 +120,8 @@ export const canShowSignInGate = ({
 			) &&
 			isNPageOrHigherPageView(3) &&
 			isValidContentType(contentType) &&
-			isValidSection(CAPI.sectionName) &&
 			isValidTag(CAPI.tags) &&
+			isValidSection(sectionName) &&
 			// hide the sign in gate on isPaidContent
 			!CAPI.pageType.isPaidContent &&
 			// hide the sign in gate on internal tools preview &&
@@ -133,11 +134,13 @@ export const canShowMandatoryUs: ({
 	isSignedIn,
 	currentTest,
 	contentType,
+	sectionName,
 }: CanShowGateProps) => Promise<boolean> = async ({
 	CAPI,
 	isSignedIn,
 	currentTest,
 	contentType,
+	sectionName,
 }: CanShowGateProps) => {
 	return (
 		(await getLocale()) === 'US' &&
@@ -147,6 +150,7 @@ export const canShowMandatoryUs: ({
 			isSignedIn,
 			currentTest,
 			contentType,
+			sectionName,
 		}))
 	);
 };

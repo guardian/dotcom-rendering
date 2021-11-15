@@ -164,6 +164,7 @@ export const SignInGateSelector = ({
 					isSignedIn: !!isSignedIn,
 					currentTest,
 					contentType: CAPI.contentType,
+					sectionName: CAPI.sectionName,
 				})
 				.then(setCanShowGate);
 		}

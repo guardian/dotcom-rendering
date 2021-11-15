@@ -3,6 +3,7 @@ export type CanShowGateProps = {
 	isSignedIn: boolean;
 	currentTest: CurrentSignInGateABTest;
 	contentType: string;
+	sectionName?: string;
 };
 
 export type SignInGateComponent = {
