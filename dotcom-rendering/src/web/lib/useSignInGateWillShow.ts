@@ -2,11 +2,18 @@ import { useEffect, useState } from 'react';
 import {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
-	SignInGateSelectorProps,
 } from '@frontend/web/components/SignInGate/types';
 import { useOnce } from '@frontend/web/lib/useOnce';
 import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
 
+type Props = {
+	isSignedIn?: boolean;
+	contentType: string;
+	sectionName: string;
+	tags: TagType[];
+	isPaidContent: boolean;
+	isPreview: boolean;
+};
 /**
  * @description
  * A custom hook to determine if a sign in gate will show on the current page
@@ -20,7 +27,7 @@ export const useSignInGateWillShow = ({
 	tags,
 	isPaidContent,
 	isPreview,
-}: SignInGateSelectorProps): boolean | undefined => {
+}: Props): boolean | undefined => {
 	const [gateVariant, setGateVariant] = useState<
 		SignInGateComponent | null | undefined
 	>(undefined);

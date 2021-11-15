@@ -175,7 +175,6 @@ export const StickyBottomBanner = ({
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const signInGateWillShow = useSignInGateWillShow({
 		isSignedIn,
-		CAPI,
 		contentType,
 		sectionName,
 		tags,
