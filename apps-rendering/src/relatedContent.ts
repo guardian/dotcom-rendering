@@ -68,6 +68,14 @@ const parseHeaderImage = (content: Content): Image | undefined => {
 	}
 };
 
+const getBylineImage = (content: Content): string | undefined => {
+	const contributors = content.tags.filter(tag => tag.type === TagType.CONTRIBUTOR);
+
+	if (contributors.length > 0) {
+		return contributors[0].bylineLargeImageUrl
+	}
+};
+
 const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 	return {
 		title: 'Related stories',
@@ -85,6 +93,7 @@ const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 						sectionIds: [],
 					},
 					starRating: content.fields?.starRating?.toString(),
+					bylineImage: getBylineImage(content)
 				};
 			})
 			.slice(0, 4),
