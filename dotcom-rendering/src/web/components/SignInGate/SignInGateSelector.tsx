@@ -28,6 +28,7 @@ interface ShowSignInGateProps {
 	CAPI: CAPIBrowserType;
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
+	host?: string;
 }
 
 const dismissGate = (
@@ -85,6 +86,7 @@ const ShowSignInGate = ({
 	setShowGate,
 	signInUrl,
 	gateVariant,
+	host = 'https://theguardian.com/',
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -102,7 +104,7 @@ const ShowSignInGate = ({
 	// but still fire a view event if they are eligible to see the gate
 	if (gateVariant.gate) {
 		return gateVariant.gate({
-			guUrl: CAPI.config.host || 'https://theguardian.com/',
+			guUrl: host,
 			signInUrl,
 			dismissGate: () => {
 				dismissGate(setShowGate, abTest);
@@ -128,6 +130,7 @@ export const SignInGateSelector = ({
 	tags,
 	isPaidContent,
 	isPreview,
+	host,
 }: SignInGateSelectorProps) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -192,7 +195,7 @@ export const SignInGateSelector = ({
 
 	const signInUrl = generateSignInUrl({
 		pageId: CAPI.pageId,
-		host: CAPI.config.host,
+		host,
 		pageViewId: window.guardian.config.ophan.pageViewId,
 		idUrl: CAPI.config.idUrl,
 		currentTest,
@@ -208,6 +211,7 @@ export const SignInGateSelector = ({
 					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
+					host={host}
 				/>
 			)}
 		</>
