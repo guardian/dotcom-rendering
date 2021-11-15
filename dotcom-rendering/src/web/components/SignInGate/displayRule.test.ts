@@ -121,28 +121,12 @@ describe('SignInGate - displayRule methods', () => {
 	});
 
 	describe('isValidContentType', () => {
-		let defaultCAPIBrowser: CAPIBrowserType;
-		let CAPIBrowser: CAPIBrowserType;
-
-		beforeAll(() => {
-			defaultCAPIBrowser = makeGuardianBrowserCAPI(CAPI);
-		});
-
-		beforeEach(() => {
-			// reset the CAPI data
-			CAPIBrowser = { ...defaultCAPIBrowser };
-		});
-
 		test('is a valid type - article', () => {
-			CAPIBrowser.contentType = 'Article';
-
-			expect(isValidContentType(CAPIBrowser)).toBe(true);
+			expect(isValidContentType('Article')).toBe(true);
 		});
 
 		test('is not a valid type - LiveBlog', () => {
-			CAPIBrowser.contentType = 'LiveBlog';
-
-			expect(isValidContentType(CAPIBrowser)).toBe(false);
+			expect(isValidContentType('LiveBlog')).toBe(false);
 		});
 	});
 

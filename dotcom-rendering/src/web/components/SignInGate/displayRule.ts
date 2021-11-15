@@ -33,14 +33,12 @@ export const isIOS9 = (): boolean => {
 };
 
 // hide the sign in gate on article types that are not supported
-export const isValidContentType = (CAPI: CAPIBrowserType): boolean => {
+export const isValidContentType = (contentType: string): boolean => {
 	// It's safer to definitively *include* types as we
 	// know new types will not break the sign-in-gate going forward
 	const validTypes = ['Article'];
 
-	return validTypes.some(
-		(type: string): boolean => CAPI.contentType === type,
-	);
+	return validTypes.some((type: string): boolean => contentType === type);
 };
 
 // hide the sign in gate on certain sections of the site, e.g info, about, help etc.
@@ -127,7 +125,7 @@ export const canShowSignInGate = (
 				5,
 			) &&
 			isNPageOrHigherPageView(3) &&
-			isValidContentType(CAPI) &&
+			isValidContentType(CAPI.contentType) &&
 			isValidSection(CAPI) &&
 			isValidTag(CAPI) &&
 			!isPaidContent(CAPI) &&

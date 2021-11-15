@@ -22,7 +22,7 @@ const canShow = (
 		!isSignedIn &&
 			!hasUserDismissedGate(currentTest.variant, currentTest.name) &&
 			isNPageOrHigherPageView(3) &&
-			isValidContentType(CAPI) &&
+			isValidContentType(CAPI.contentType) &&
 			isValidSection(CAPI) &&
 			isValidTag(CAPI) &&
 			!isPaidContent(CAPI) &&
