@@ -28,7 +28,7 @@ interface ShowSignInGateProps {
 	CAPI: CAPIBrowserType;
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
-	host?: string;
+	host: string;
 }
 
 const dismissGate = (
@@ -55,7 +55,7 @@ const generateSignInUrl = ({
 	pageId: string;
 	pageViewId: string;
 	idUrl: string;
-	host?: string;
+	host: string;
 	currentTest: CurrentSignInGateABTest;
 }) => {
 	// url of the article, return user here after sign in/registration
@@ -86,7 +86,7 @@ const ShowSignInGate = ({
 	setShowGate,
 	signInUrl,
 	gateVariant,
-	host = 'https://theguardian.com/',
+	host,
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -130,7 +130,7 @@ export const SignInGateSelector = ({
 	tags,
 	isPaidContent,
 	isPreview,
-	host,
+	host = 'https://theguardian.com/',
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
 }: SignInGateSelectorProps) => {
