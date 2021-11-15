@@ -5,7 +5,7 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import * as Palette from '@guardian/src-foundations/palette';
-import type { Colour } from 'editorialPalette';
+import type { Colour } from '@guardian/common-rendering/src/editorialPalette';
 
 export const tabletContentWidth = 526;
 export const wideContentWidth = 545;

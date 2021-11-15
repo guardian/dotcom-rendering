@@ -25,7 +25,7 @@ import {
 import type { Option } from '@guardian/types';
 import { stars } from 'components/starRating';
 import { formatSeconds, makeRelativeDate } from 'date';
-import { border } from 'editorialPalette';
+import { border } from '@guardian/common-rendering/src/editorialPalette';
 import type { Image } from 'image';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -209,7 +209,7 @@ const cardStyles = (
 					fontWeight: 'light',
 				})};
 				h3 {
-					box-shadow: inset 0 -0.025rem ${border.primary(format)};
+					box-shadow: inset 0 -0.025rem ${border.articleLink(format)};
 					display: inline;
 
 					${darkModeCss`
