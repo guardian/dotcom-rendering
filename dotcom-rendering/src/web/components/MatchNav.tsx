@@ -236,7 +236,7 @@ export const MatchNav = ({
 		{minByMinUrl && (
 			<MatchTabs
 				minByMinUrl={minByMinUrl}
-				matchUrl={matchURL}
+				reportUrl={matchURL}
 				format={format}
 			/>
 		)}

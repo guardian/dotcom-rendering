@@ -7,7 +7,6 @@ type Props = {
 	minByMinUrl?: string;
 	reportUrl?: string;
 	format: ArticleFormat;
-	matchUrl?: string;
 };
 
 const thinGreySolid = (palette: Palette) =>
@@ -60,7 +59,7 @@ const tabLabel = css`
 	width: 100%;
 `;
 
-export const MatchTabs = ({ minByMinUrl, matchUrl, format }: Props) => {
+export const MatchTabs = ({ minByMinUrl, reportUrl, format }: Props) => {
 	const palette = decidePalette(format);
 
 	return (
@@ -68,7 +67,7 @@ export const MatchTabs = ({ minByMinUrl, matchUrl, format }: Props) => {
 			<ul css={tabsContainer(palette)}>
 				<li css={tab(palette)}>
 					<a
-						href={matchUrl}
+						href={reportUrl}
 						data-link-name="report"
 						css={tabLink(palette)}
 					>
