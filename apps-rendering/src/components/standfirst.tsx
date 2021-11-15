@@ -2,13 +2,16 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { map, withDefault } from '@guardian/types';
-import { background, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe } from 'lib';
