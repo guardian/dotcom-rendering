@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { neutral, news, remSpace } from '@guardian/src-foundations';
+import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { Column, Columns, Container } from '@guardian/src-layout';
@@ -16,8 +16,9 @@ import type { FC } from 'react';
 import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';
 import Series from './series';
+import { background } from 'editorialPalette';
 
-// // ----- Styles ----- //
+// ----- Component ----- //
 
 const headerBackgroundStyles = ({
 	liveblogBackground,
@@ -61,7 +62,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 
 	return (
 		<header>
-			<Container element="div" backgroundColor={news[300]}>
+			<Container element="div" backgroundColor={background.headlinePrimary(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Series item={item} />
@@ -71,7 +72,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 					</Column>
 				</Columns>
 			</Container>
-			<Container element="div" backgroundColor={news[200]}>
+			<Container element="div" backgroundColor={background.standfirstPrimary(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<time css={timestampStyles}>
