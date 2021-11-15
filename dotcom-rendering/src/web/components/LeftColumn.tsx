@@ -14,7 +14,7 @@ const leftWidth = (size: LeftColSize) => {
 
 				${from.desktop} {
 					/* above 1300 */
-					flex-basis: 320px;
+					flex-basis: 230px;
 					flex-grow: 0;
 					flex-shrink: 0;
 				}
