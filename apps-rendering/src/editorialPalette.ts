@@ -41,12 +41,15 @@ interface Palette {
 const textHeadlinePrimary = (format: ArticleFormat): Colour => {
 	if (
 		format.display === ArticleDisplay.Immersive ||
-		format.design === ArticleDesign.Media) {
+		format.design === ArticleDesign.Media
+	) {
 		return neutral[100];
 	}
 
 	if (format.design === ArticleDesign.LiveBlog) {
-		return format.theme === ArticlePillar.Culture ? neutral[86] : neutral[93];
+		return format.theme === ArticlePillar.Culture
+			? neutral[86]
+			: neutral[93];
 	}
 
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -94,7 +97,7 @@ const textStandfirstPrimary = ({ design }: ArticleFormat): Colour => {
 		default:
 			return neutral[7];
 	}
-}
+};
 
 const textStandfirstPrimaryInverse = ({ design }: ArticleFormat): Colour => {
 	switch (design) {
@@ -104,7 +107,7 @@ const textStandfirstPrimaryInverse = ({ design }: ArticleFormat): Colour => {
 		default:
 			return neutral[60];
 	}
-}
+};
 
 const backgroundHeadlinePrimary = (format: ArticleFormat): Colour => {
 	if (format.display === ArticleDisplay.Immersive) {
@@ -180,7 +183,10 @@ const borderPrimary = (format: ArticleFormat): Colour => {
 
 const borderPrimaryInverse = borderPrimary;
 
-const backgroundStandfirstPrimary = ({ design, theme }: ArticleFormat): Colour => {
+const backgroundStandfirstPrimary = ({
+	design,
+	theme,
+}: ArticleFormat): Colour => {
 	if (design === ArticleDesign.DeadBlog) {
 		return neutral[93];
 	}
@@ -202,9 +208,12 @@ const backgroundStandfirstPrimary = ({ design, theme }: ArticleFormat): Colour =
 	}
 
 	return neutral[100];
-}
+};
 
-const backgroundStandfirstPrimaryInverse = ({ design, theme }: ArticleFormat): Colour => {
+const backgroundStandfirstPrimaryInverse = ({
+	design,
+	theme,
+}: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			return neutral[10];
@@ -225,7 +234,7 @@ const backgroundStandfirstPrimaryInverse = ({ design, theme }: ArticleFormat): C
 		default:
 			return neutral[7];
 	}
-}
+};
 
 // ----- API ----- //
 

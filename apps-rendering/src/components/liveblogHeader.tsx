@@ -9,6 +9,7 @@ import { Column, Columns, Container } from '@guardian/src-layout';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';
+import { background } from 'editorialPalette';
 import HeaderMedia from 'headerMedia';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
@@ -16,7 +17,6 @@ import type { FC } from 'react';
 import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';
 import Series from './series';
-import { background } from 'editorialPalette';
 
 // ----- Component ----- //
 
@@ -62,7 +62,10 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 
 	return (
 		<header>
-			<Container element="div" backgroundColor={background.headlinePrimary(format)}>
+			<Container
+				element="div"
+				backgroundColor={background.headlinePrimary(format)}
+			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Series item={item} />
@@ -72,7 +75,10 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 					</Column>
 				</Columns>
 			</Container>
-			<Container element="div" backgroundColor={background.standfirstPrimary(format)}>
+			<Container
+				element="div"
+				backgroundColor={background.standfirstPrimary(format)}
+			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<time css={timestampStyles}>
