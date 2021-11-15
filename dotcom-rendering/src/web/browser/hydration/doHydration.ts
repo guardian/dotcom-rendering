@@ -25,7 +25,7 @@ export const doHydration = (name: string, data: any, marker: HTMLElement) => {
 		.catch((error) => {
 			if (name && error.message.includes(name)) {
 				console.error(
-					`🚨 Error importing ${name}. Did you forget to use th [MyComponent].importable.tsx naming convention? 🚨`,
+					`🚨 Error importing ${name}. Did you forget to use the [MyComponent].importable.tsx naming convention? 🚨`,
 				);
 			}
 			throw error;
