@@ -178,7 +178,6 @@ export const SignInGateSelector = ({
 	}, [
 		currentTest,
 		gateVariant,
-		CAPI,
 		isSignedIn,
 		contentType,
 		sectionName,

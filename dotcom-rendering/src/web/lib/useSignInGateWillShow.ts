@@ -15,7 +15,6 @@ import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
  * */
 export const useSignInGateWillShow = ({
 	isSignedIn,
-	CAPI,
 	contentType,
 	sectionName,
 	tags,
@@ -55,7 +54,6 @@ export const useSignInGateWillShow = ({
 	}, [
 		currentTest,
 		gateVariant,
-		CAPI,
 		isSignedIn,
 		contentType,
 		sectionName,
