@@ -4,6 +4,7 @@ export type CanShowGateProps = {
 	currentTest: CurrentSignInGateABTest;
 	contentType: string;
 	sectionName?: string;
+	tags: TagType[];
 };
 
 export type SignInGateComponent = {

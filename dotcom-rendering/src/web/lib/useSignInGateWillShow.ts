@@ -42,6 +42,7 @@ export const useSignInGateWillShow = ({
 					currentTest,
 					contentType: CAPI.contentType,
 					sectionName: CAPI.sectionName,
+					tags: CAPI.tags,
 				})
 				.then(setCanShowGate);
 		}
