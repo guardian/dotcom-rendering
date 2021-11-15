@@ -161,7 +161,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
                       })`,
 				}}
 			/>
-			<nav
+			<div
 				css={[
 					clearFixStyle,
 					rowStyles,
@@ -213,7 +213,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 					isTopNav={true}
 				/>
 				<ExpandedMenu nav={nav} display={format.display} />
-			</nav>
+			</div>
 			{displayRoundel && (
 				<PositionRoundel>
 					<GuardianRoundel />

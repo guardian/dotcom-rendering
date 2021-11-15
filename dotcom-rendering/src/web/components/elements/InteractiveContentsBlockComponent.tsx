@@ -77,7 +77,8 @@ const stickyOlStyles = (showStickyNavOption: boolean) => css`
 	top: 0;
 	position: fixed;
 	margin-top: ${space[12]}px;
-
+	max-height: 90vh;
+	overflow-y: auto;
 	display: none;
 	${showStickyNavOption && 'display: grid;'}
 `;
@@ -135,7 +136,7 @@ interface EnhancedSubheadingType extends SubheadingBlockElement {
 	ref?: HTMLElement | null;
 }
 
-export const InteractiveContentsBlockElement = ({
+export const InteractiveContentsBlockComponent = ({
 	subheadingLinks,
 	endDocumentElementId,
 }: Props) => {
@@ -284,6 +285,7 @@ export const InteractiveContentsBlockElement = ({
 				</button>
 			)}
 			<ol
+				data-ignore="global-ol-styling"
 				css={[
 					olStyles,
 					// we detach `ol` from the container when `stickyNavCurrentHeader` is defined

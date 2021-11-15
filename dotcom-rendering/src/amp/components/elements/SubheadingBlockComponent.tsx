@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import { ArticleSpecial as Special } from '@guardian/libs';
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
@@ -19,7 +19,7 @@ const style = (pillar: ArticleTheme) => css`
 	a {
 		color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 		text-decoration: none;
-		border-bottom: 1px solid ${palette.neutral[86]};
+		border-bottom: 1px solid ${neutral[86]};
 		:hover {
 			border-bottom: 1px solid ${pillarPalette_DO_NOT_USE[pillar].dark};
 		}

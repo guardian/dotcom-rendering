@@ -776,6 +776,32 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
+const textPagination = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+			return pillarPalette[format.theme][400];
+		default:
+			return pillarPalette[format.theme][300];
+	}
+};
+
+const borderPagination = (): string => {
+	return neutral[86];
+};
+
+const hoverPagination = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+			return pillarPalette[format.theme][400];
+		default:
+			return pillarPalette[format.theme][300];
+	}
+};
+
 export const decidePalette = (format: ArticleFormat): Palette => {
 	return {
 		text: {
@@ -816,6 +842,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			overlayedCaption: textOverlayed(),
+			pagination: textPagination(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -858,12 +885,14 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
 			lines: borderLines(format),
+			pagination: borderPagination(),
 		},
 		topBar: {
 			card: topBarCard(format),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
+			pagination: hoverPagination(format),
 		},
 	};
 };

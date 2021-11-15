@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, palette, remSpace, text } from '@guardian/src-foundations';
+import { labs, neutral, remSpace, text } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 import type { Logo as LogoImage } from 'capi';
 import type { FC } from 'react';
@@ -16,7 +16,7 @@ const styles = css`
 	color: ${text.supporting};
 
 	a {
-		color: ${palette.labs[300]};
+		color: ${labs[300]};
 	}
 
 	${darkModeCss`

@@ -11,6 +11,7 @@ import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
 
 import { Caption } from '@root/src/web/components/Caption';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
 	id: string;
@@ -19,7 +20,6 @@ type Props = {
 	assetId: string;
 	expired: boolean;
 	format: ArticleFormat;
-	palette: Palette;
 	role: RoleType;
 	hideCaption?: boolean;
 	overrideImage?: string;
@@ -76,7 +76,6 @@ export const YoutubeBlockComponent = ({
 	mediaTitle,
 	altText,
 	format,
-	palette,
 	hideCaption,
 	overrideImage,
 	posterImage,
@@ -90,6 +89,7 @@ export const YoutubeBlockComponent = ({
 	duration,
 	origin,
 }: Props): JSX.Element => {
+	const palette = decidePalette(format);
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
@@ -127,6 +127,7 @@ export const YoutubeBlockComponent = ({
 						format={format}
 						displayCredit={false}
 						shouldLimitWidth={shouldLimitWidth}
+						mediaType="Video"
 					/>
 				)}
 			</figure>
@@ -199,6 +200,7 @@ export const YoutubeBlockComponent = ({
 					format={format}
 					displayCredit={false}
 					shouldLimitWidth={shouldLimitWidth}
+					mediaType="Video"
 				/>
 			)}
 		</div>

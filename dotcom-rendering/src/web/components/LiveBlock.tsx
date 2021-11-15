@@ -122,21 +122,6 @@ const FirstPublished = ({
 	);
 };
 
-const typesWeStretch: CAPIElement['_type'][] = [
-	'model.dotcomrendering.pageElements.YoutubeBlockElement',
-	'model.dotcomrendering.pageElements.ImageBlockElement',
-	'model.dotcomrendering.pageElements.VideoBlockElement',
-	'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-	'model.dotcomrendering.pageElements.VideoVimeoBlockElement',
-	'model.dotcomrendering.pageElements.WitnessBlockElement',
-	'model.dotcomrendering.pageElements.VineBlockElement',
-	'model.dotcomrendering.pageElements.MultiImageBlockElement',
-	'model.dotcomrendering.pageElements.MediaAtomBlockElement',
-	'model.dotcomrendering.pageElements.GuVideoBlockElement',
-	'model.dotcomrendering.pageElements.EmbedBlockElement',
-	'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
-];
-
 export const LiveBlock = ({
 	format,
 	block,
@@ -148,19 +133,6 @@ export const LiveBlock = ({
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
 	const blockLink = `${pageId}#block-${block.id}`;
-
-	// We split the array of elements into headerElement (the first one) and
-	// mainElements (the rest) because we want to prevent any media elements
-	// stretch left and covering the lastUpdated info
-	let headerElement: CAPIElement | null = null;
-	let mainElements: CAPIElement[] = [];
-	if (typesWeStretch.includes(block.elements[0]._type)) {
-		// The first element needs to be stretched so don't put
-		// it in the header
-		mainElements = block.elements;
-	} else {
-		[headerElement, ...mainElements] = block.elements;
-	}
 
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
@@ -182,25 +154,15 @@ export const LiveBlock = ({
 					/>
 				)}
 				{block.title && <BlockTitle title={block.title} />}
-				{headerElement &&
-					renderArticleElement({
-						format,
-						palette,
-						element: headerElement,
-						isMainMedia: false,
-						host,
-						adTargeting,
-						index: 0,
-						pageId,
-						webTitle,
-					})}
 			</Header>
-			{mainElements.map((element, index) =>
+			{block.elements.map((element, index) =>
 				renderArticleElement({
 					format,
 					palette,
 					element,
 					isMainMedia: false,
+					host,
+					adTargeting,
 					index,
 					pageId,
 					webTitle,

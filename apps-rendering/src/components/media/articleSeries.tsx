@@ -1,7 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleTheme } from '@guardian/libs';
 import { headline } from '@guardian/src-foundations/typography';
-import type { Option, Theme } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import type { Series } from 'capi';
 import { pipe } from 'lib';
@@ -21,7 +22,7 @@ const ArticleSeriesStyles = ({
 
 interface ArticleSeriesProps {
 	series: Option<Series>;
-	theme: Theme;
+	theme: ArticleTheme;
 }
 
 const ArticleSeries: FC<ArticleSeriesProps> = (props) =>

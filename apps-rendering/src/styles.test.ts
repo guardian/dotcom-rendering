@@ -1,10 +1,10 @@
 import { darkModeCss } from './styles';
 import { getThemeStyles } from 'themeStyles';
-import { Pillar } from '@guardian/types';
+import { ArticlePillar } from '@guardian/libs';
 
 describe('helper functions return correct styles', () => {
 	test('Returns correct pillar styles for pillar', () => {
-		const pillarStyles = getThemeStyles(Pillar.News);
+		const pillarStyles = getThemeStyles(ArticlePillar.News);
 		const expectedNewsPillarStyles = {
 			cameraIcon: '#FFF4F2',
 			cameraIconBackground: '#C70000',

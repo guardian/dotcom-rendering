@@ -155,7 +155,12 @@ function insertEpic(): void {
 	}
 }
 
-declare type Pillar = 'news' | 'opinion' | 'sport' | 'culture' | 'lifestyle';
+declare type ArticlePillar =
+	| 'news'
+	| 'opinion'
+	| 'sport'
+	| 'culture'
+	| 'lifestyle';
 
 function isPillarString(pillar: string): boolean {
 	return ['news', 'opinion', 'sport', 'culture', 'lifestyle'].includes(
@@ -169,7 +174,7 @@ function renderComments(): void {
 	const isClosedForComments = !!commentContainer?.getAttribute('pillar');
 
 	if (pillarString && isPillarString(pillarString) && shortUrl) {
-		const pillar = pillarString as Pillar;
+		const pillar = pillarString as ArticlePillar;
 		const user = {
 			userId: 'abc123',
 			displayName: 'Jane Smith',

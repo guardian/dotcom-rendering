@@ -2,10 +2,9 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { palette } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
-import type { Format } from '@guardian/types';
-import { Design, Special } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { labs, neutral } from '@guardian/src-foundations/palette';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
@@ -15,7 +14,7 @@ import { getThemeStyles } from 'themeStyles';
 interface Props {
 	href: string;
 	children?: ReactNode;
-	format: Format;
+	format: ArticleFormat;
 	className?: SerializedStyles;
 	isEditions?: boolean;
 }
@@ -29,11 +28,11 @@ const styles = (isEditions: boolean): SerializedStyles => css`
     `}
 `;
 
-const colour = (format: Format): SerializedStyles => {
+const colour = (format: ArticleFormat): SerializedStyles => {
 	const { link, inverted } = getThemeStyles(format.theme);
-	if (format.theme === Special.Labs) {
+	if (format.theme === ArticleSpecial.Labs) {
 		return css`
-			color: ${palette.labs[300]};
+			color: ${labs[300]};
 			border-bottom: 0.0625rem solid ${neutral[86]};
 
 			${darkModeCss`
@@ -42,7 +41,7 @@ const colour = (format: Format): SerializedStyles => {
 		`;
 	}
 	switch (format.design) {
-		case Design.Media:
+		case ArticleDesign.Media:
 			return css`
 				color: ${inverted};
 				border-bottom: 0.0625rem solid ${neutral[20]};

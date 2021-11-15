@@ -1,21 +1,19 @@
 // ----- Imports ----- //
 
-import { ArticleElementRole } from '@guardian/libs';
 import {
-	Design,
-	Display,
-	none,
-	OptionKind,
-	Pillar,
-	some,
-	toOption,
-} from '@guardian/types';
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleElementRole,
+	ArticlePillar,
+} from '@guardian/libs';
+import { none, OptionKind, some, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
 import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
-import type { LiveBlog } from 'item';
+import type { DeadBlog, LiveBlog } from 'item';
 import { pipe } from 'lib';
+import type { LiveBlock } from 'liveBlock';
 
 const parser = new DOMParser();
 const parseHtml = parse(parser);
@@ -226,14 +224,14 @@ const tags = [
 ];
 
 const fields = {
-	theme: Pillar.News,
-	display: Display.Standard,
+	theme: ArticlePillar.News,
+	display: ArticleDisplay.Standard,
 	body: [],
 	headline: headline,
 	standfirst: standfirst,
 	byline: '',
 	bylineHtml: bylineHtml,
-	publishDate: none,
+	publishDate: some(new Date('2021-10-17T03:24:00')),
 	contributors: [],
 	mainMedia: mainMedia,
 	series: some({
@@ -260,52 +258,61 @@ const fields = {
 	webUrl: '',
 };
 
+const blocks: LiveBlock[] = [
+	{
+		id: '1',
+		isKeyEvent: true,
+		title: 'Block One',
+		firstPublished: some(new Date('2021-11-02T12:00:00Z')),
+		lastModified: some(new Date('2021-11-02T13:13:13Z')),
+		body: [],
+	},
+	{
+		id: '2',
+		isKeyEvent: false,
+		title: 'Block Two',
+		firstPublished: some(new Date('2021-11-02T11:20:00Z')),
+		lastModified: some(new Date('2021-11-02T13:03:13Z')),
+		body: [],
+	},
+	{
+		id: '3',
+		isKeyEvent: true,
+		title: 'Block Three',
+		firstPublished: some(new Date('2021-11-02T11:05:12Z')),
+		lastModified: some(new Date('2021-11-02T12:13:13Z')),
+		body: [],
+	},
+	{
+		id: '4',
+		isKeyEvent: true,
+		title: 'Block Four',
+		firstPublished: some(new Date('2021-11-02T10:55:03Z')),
+		lastModified: some(new Date('2021-11-02T11:13:13Z')),
+		body: [],
+	},
+	{
+		id: '5',
+		isKeyEvent: false,
+		title: 'Block Five',
+		firstPublished: some(new Date('2021-11-02T10:20:20Z')),
+		lastModified: some(new Date('2021-11-02T11:13:13Z')),
+		body: [],
+	},
+];
+
 const live: LiveBlog = {
-	design: Design.LiveBlog,
+	design: ArticleDesign.LiveBlog,
 	...fields,
-	blocks: [
-		{
-			id: '1',
-			isKeyEvent: true,
-			title: 'Block One',
-			firstPublished: some(new Date('2021-11-02T12:00:00Z')),
-			lastModified: some(new Date('2021-11-02T13:13:13Z')),
-			body: [],
-		},
-		{
-			id: '2',
-			isKeyEvent: false,
-			title: 'Block Two',
-			firstPublished: some(new Date('2021-11-02T11:20:00Z')),
-			lastModified: some(new Date('2021-11-02T13:03:13Z')),
-			body: [],
-		},
-		{
-			id: '3',
-			isKeyEvent: true,
-			title: 'Block Three',
-			firstPublished: some(new Date('2021-11-02T11:05:12Z')),
-			lastModified: some(new Date('2021-11-02T12:13:13Z')),
-			body: [],
-		},
-		{
-			id: '4',
-			isKeyEvent: true,
-			title: 'Block Four',
-			firstPublished: some(new Date('2021-11-02T10:55:03Z')),
-			lastModified: some(new Date('2021-11-02T11:13:13Z')),
-			body: [],
-		},
-		{
-			id: '5',
-			isKeyEvent: false,
-			title: 'Block Five',
-			firstPublished: some(new Date('2021-11-02T10:20:20Z')),
-			lastModified: some(new Date('2021-11-02T11:13:13Z')),
-			body: [],
-		},
-	],
+	blocks: blocks,
 	totalBodyBlocks: 5,
 };
 
-export { live };
+const deadBlog: DeadBlog = {
+	design: ArticleDesign.DeadBlog,
+	...fields,
+	blocks: blocks,
+	totalBodyBlocks: 5,
+};
+
+export { live, deadBlog };

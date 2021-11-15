@@ -16,7 +16,7 @@ files="$(git diff --name-only $currentBranch origin/main)"
 echo "git diff files: $files"
 
 # files that are not within dotcom-rendering sub directory
-filteredFiles="$(echo "$files" | grep -v 'dotcom-rendering')"
+filteredFiles="$(echo "$files" | { grep -v 'dotcom-rendering' || :; })"
 echo "files that are not in dotcom-rendering: $filteredFiles"
 
 # run the ci steps if either of the followings is true

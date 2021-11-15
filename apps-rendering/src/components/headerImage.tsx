@@ -5,12 +5,12 @@ import { css } from '@emotion/react';
 import ImageDetails from '@guardian/common-rendering/src/components/imageDetails';
 import Img from '@guardian/common-rendering/src/components/img';
 import type { Sizes } from '@guardian/common-rendering/src/sizes';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import type { Format } from '@guardian/types';
-import { Design, Display, some } from '@guardian/types';
+import { some } from '@guardian/types';
 import type { Image } from 'image';
-import { convertFormatToArticleFormat } from 'lib';
 import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
 
@@ -21,13 +21,13 @@ const captionId = 'header-image-caption';
 // ----- Subcomponents ----- //
 
 interface CaptionProps {
-	format: Format;
+	format: ArticleFormat;
 	image: Image;
 }
 
 const Caption: FC<CaptionProps> = ({ format, image }: CaptionProps) => {
 	switch (format.display) {
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			return null;
 		default:
 			return (
@@ -78,6 +78,20 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
 	}
 `;
 
+const liveblogImgStyles = (
+	width: number,
+	height: number,
+): SerializedStyles => css`
+	display: block;
+	width: 100%;
+	height: calc(100vw * ${height / width});
+
+	${from.desktop} {
+		width: 700px;
+		height: ${(700 * height) / width}px;
+	}
+`;
+
 const immersiveImgStyles = css`
 	display: block;
 	height: 80vh;
@@ -85,12 +99,12 @@ const immersiveImgStyles = css`
 	width: 100vw;
 `;
 
-const getStyles = ({ design, display }: Format): SerializedStyles => {
+const getStyles = ({ design, display }: ArticleFormat): SerializedStyles => {
 	switch (design) {
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			return css(styles, liveStyles);
 		default:
-			if (display === Display.Immersive) {
+			if (display === ArticleDisplay.Immersive) {
 				return immersiveStyles;
 			}
 
@@ -98,18 +112,27 @@ const getStyles = ({ design, display }: Format): SerializedStyles => {
 	}
 };
 
-const getImgStyles = (format: Format, image: Image): SerializedStyles => {
-	switch (format.display) {
-		case Display.Immersive:
-			return immersiveImgStyles;
+const getImgStyles = (
+	format: ArticleFormat,
+	image: Image,
+): SerializedStyles => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return liveblogImgStyles(image.width, image.height);
 		default:
-			return imgStyles(image.width, image.height);
+			switch (format.display) {
+				case ArticleDisplay.Immersive:
+					return immersiveImgStyles;
+				default:
+					return imgStyles(image.width, image.height);
+			}
 	}
 };
 
-const getSizes = ({ display }: Format, image: Image): Sizes => {
+const getSizes = ({ display }: ArticleFormat, image: Image): Sizes => {
 	switch (display) {
-		case Display.Immersive:
+		case ArticleDisplay.Immersive:
 			return {
 				mediaQueries: [],
 				default: `${(100 * image.width) / image.height}vh `,
@@ -125,7 +148,7 @@ const getSizes = ({ display }: Format, image: Image): Sizes => {
 interface Props {
 	image: Image;
 	className?: SerializedStyles;
-	format: Format;
+	format: ArticleFormat;
 }
 
 const HeaderImage: FC<Props> = ({ className, image, format }: Props) => (
@@ -134,7 +157,7 @@ const HeaderImage: FC<Props> = ({ className, image, format }: Props) => (
 			image={image}
 			sizes={getSizes(format, image)}
 			className={some(getImgStyles(format, image))}
-			format={convertFormatToArticleFormat(format)}
+			format={format}
 			supportsDarkMode
 			lightbox={some({
 				className: 'js-launch-slideshow',
