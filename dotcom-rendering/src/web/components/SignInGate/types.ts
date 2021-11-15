@@ -2,6 +2,7 @@ export type CanShowGateProps = {
 	CAPI: CAPIBrowserType;
 	isSignedIn: boolean;
 	currentTest: CurrentSignInGateABTest;
+	contentType: string;
 };
 
 export type SignInGateComponent = {
