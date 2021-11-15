@@ -1,27 +1,37 @@
-export const buildAdTargeting = (
-	CAPI:
-		| CAPIType
-		| CAPIBrowserType
-		| Pick<CAPIType, 'isAdFreeUser' | 'config'>,
-): AdTargeting => {
-	if (CAPI.isAdFreeUser) {
+export const buildAdTargeting = ({
+	isAdFreeUser,
+	isSensitive,
+	edition,
+	section,
+	sharedAdTargeting,
+	adUnit,
+	videoDuration,
+}: {
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	edition: string;
+	section: string;
+	sharedAdTargeting: Record<string, unknown>;
+	adUnit: string;
+	videoDuration?: number;
+}): AdTargeting => {
+	if (isAdFreeUser) {
 		return {
 			disableAds: true,
 		};
 	}
-	const { config } = CAPI;
 	const customParams = {
-		sens: config.isSensitive ? 't' : 'f',
+		sens: isSensitive ? 't' : 'f',
 		si: 'f',
-		vl: config.videoDuration || 0,
-		cc: config.edition,
-		s: config.section,
+		vl: videoDuration || 0,
+		cc: edition,
+		s: section,
 		inskin: 'f',
-		...config.sharedAdTargeting,
+		...sharedAdTargeting,
 		pa: 'f',
 	};
 	return {
 		customParams,
-		adUnit: config.adUnit,
+		adUnit,
 	};
 };
