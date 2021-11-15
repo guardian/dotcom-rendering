@@ -64,6 +64,22 @@ export const getDesiredWidth = (width: number, hdpi: boolean) =>
 export const getSourcesFromSrcSets = (sources: SrcSetItem[]) =>
 	sources.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
 
+export const optimiseBreakpointSizes = (
+	breakpointSizes: [number, number][],
+): [number, number][] =>
+	breakpointSizes.filter(([, size], index) => {
+		// If the NEXT element in the array has the SAME size as this one, we can trust that this current breakpoint is redundant
+		// e.g
+		// [[980, 620], [660, 620]] > [[660, 620]]
+		// Because we use min-width, any source larger than 660 will get the 620px image, even without the min-width: 980 source element
+		if (
+			index + 1 < breakpointSizes.length &&
+			breakpointSizes[index + 1][1] === size
+		)
+			return false;
+		return true;
+	});
+
 // Returns the size image desired at a particular breakpoint based on the image role, format, and if it's main media.
 const getSizeForBreakpoint = (
 	breakpoint: number,
@@ -168,6 +184,16 @@ export const Picture = ({
 	);
 	const fallbackSrc = getFallback(hdpiSourceSets);
 
+	const breakpointSizes: [number, number][] = [
+		...Object.values(breakpoints).reverse(),
+		0,
+	].map((breakpoint) => [
+		breakpoint,
+		getSizeForBreakpoint(breakpoint, role, isMainMedia, format),
+	]);
+	const optimisedBreakPointSizes: [number, number][] =
+		optimiseBreakpointSizes(breakpointSizes);
+
 	return (
 		<picture itemProp="contentUrl">
 			{format.display === ArticleDisplay.Immersive && isMainMedia ? (
@@ -181,58 +207,30 @@ export const Picture = ({
 
 			{
 				// Loop through the breakpoints from highest to lowest, adding '0' as the last option
-				[...Object.values(breakpoints).reverse(), 0].map(
-					(breakpoint) => (
-						<>
-							{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
-							<source
-								srcSet={getSourceSetForSize(
-									getSizeForBreakpoint(
-										breakpoint,
-										role,
-										isMainMedia,
-										format,
-									),
-									hdpiSourceSets,
-									true,
-								)}
-								sizes={`${
-									breakpoint ||
-									getSizeForBreakpoint(
-										breakpoint,
-										role,
-										isMainMedia,
-										format,
-									)
-								}px`}
-								media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
-							/>
-							{/* MDPI Source - images in this srcset have `quality=85` in the url */}
-							<source
-								srcSet={getSourceSetForSize(
-									getSizeForBreakpoint(
-										breakpoint,
-										role,
-										isMainMedia,
-										format,
-									),
-									mdpiSourcesSets,
-									false,
-								)}
-								sizes={`${
-									breakpoint ||
-									getSizeForBreakpoint(
-										breakpoint,
-										role,
-										isMainMedia,
-										format,
-									)
-								}px`}
-								media={`min-width: ${breakpoint}px`}
-							/>
-						</>
-					),
-				)
+				optimisedBreakPointSizes.map(([breakpoint, size]) => (
+					<>
+						{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
+						<source
+							srcSet={getSourceSetForSize(
+								size,
+								hdpiSourceSets,
+								true,
+							)}
+							sizes={`${breakpoint || size}px`}
+							media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
+						/>
+						{/* MDPI Source - images in this srcset have `quality=85` in the url */}
+						<source
+							srcSet={getSourceSetForSize(
+								size,
+								mdpiSourcesSets,
+								false,
+							)}
+							sizes={`${breakpoint || size}px`}
+							media={`min-width: ${breakpoint}px`}
+						/>
+					</>
+				))
 			}
 
 			<img

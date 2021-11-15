@@ -4,6 +4,7 @@ import {
 	getClosestSetForWidth,
 	getDesiredWidth,
 	getSourcesFromSrcSets,
+	optimiseBreakpointSizes,
 } from './Picture';
 
 const hdpiSources: SrcSetItem[] = [
@@ -150,6 +151,73 @@ describe(`Picture`, () => {
 			expect(getSourcesFromSrcSets(mdpiSources)).toBe(
 				'1 620w,2 700w,3 465w,4 645w',
 			);
+		});
+	});
+
+	describe('optimiseBreakpointSizes', () => {
+		it('Leaves un-optimisable breakpointSizes as-is', () => {
+			const breakPointSizes: [number, number][] = [
+				[1000, 500],
+				[800, 400],
+				[600, 300],
+				[400, 200],
+			];
+			expect(optimiseBreakpointSizes(breakPointSizes)).toEqual(
+				breakPointSizes,
+			);
+		});
+
+		it('Correctly removes optimisable breakpointSizes', () => {
+			expect(
+				optimiseBreakpointSizes([
+					[1000, 500],
+					[800, 400],
+					[600, 400],
+					[400, 200],
+				]),
+			).toEqual([
+				[1000, 500],
+				[600, 400],
+				[400, 200],
+			]);
+
+			expect(
+				optimiseBreakpointSizes([
+					[1000, 500],
+					[800, 400],
+					[600, 200],
+					[400, 200],
+				]),
+			).toEqual([
+				[1000, 500],
+				[800, 400],
+				[400, 200],
+			]);
+
+			expect(
+				optimiseBreakpointSizes([
+					[1000, 500],
+					[800, 200],
+					[600, 200],
+					[400, 200],
+				]),
+			).toEqual([
+				[1000, 500],
+				[400, 200],
+			]);
+
+			expect(
+				optimiseBreakpointSizes([
+					[1000, 500],
+					[800, 500],
+					[600, 300],
+					[400, 200],
+				]),
+			).toEqual([
+				[800, 500],
+				[600, 300],
+				[400, 200],
+			]);
 		});
 	});
 });
