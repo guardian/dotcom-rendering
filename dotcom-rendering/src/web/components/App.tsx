@@ -1290,6 +1290,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					isSignedIn={isSignedIn}
 					CAPI={CAPI}
 					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
 				/>
 			</Portal>
 			<HydrateOnce rootId="comments" waitFor={[user]}>
@@ -1343,6 +1344,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					isPreview={!!CAPI.isPreview}
 					asyncArticleCount={asyncArticleCount}
 					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
 				/>
 			</Portal>
 		</React.StrictMode>

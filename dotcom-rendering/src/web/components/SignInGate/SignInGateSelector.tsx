@@ -124,6 +124,7 @@ export const SignInGateSelector = ({
 	isSignedIn,
 	CAPI,
 	contentType,
+	sectionName,
 }: SignInGateSelectorProps) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -164,7 +165,7 @@ export const SignInGateSelector = ({
 					isSignedIn: !!isSignedIn,
 					currentTest,
 					contentType,
-					sectionName: CAPI.sectionName,
+					sectionName,
 					tags: CAPI.tags,
 					isPaidContent: CAPI.pageType.isPaidContent,
 					isPreview: CAPI.isPreview,
