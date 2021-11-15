@@ -178,7 +178,11 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 		case 'BLOCKQUOTE':
 			return h('blockquote', { key }, children);
 		case 'STRONG':
-			return h('strong', { key }, children);
+			return styledH(
+				'strong',
+				{ css: { fontWeight: 'bold' }, key },
+				children,
+			);
 		case 'EM':
 			return h('em', { key }, children);
 		case 'BR':
@@ -238,7 +242,11 @@ const textElement =
 					? h('blockquote', { key }, children)
 					: h(Blockquote, { key, format }, children);
 			case 'STRONG':
-				return h('strong', { key }, children);
+				return styledH(
+					'strong',
+					{ css: { fontWeight: 'bold' }, key },
+					children,
+				);
 			case 'B':
 				return h('b', { key }, children);
 			case 'EM':
@@ -300,7 +308,11 @@ const standfirstTextElement =
 			case 'P':
 				return h('p', { key }, children);
 			case 'STRONG':
-				return h('strong', { key }, children);
+				return styledH(
+					'strong',
+					{ css: { fontWeight: 'bold' }, key },
+					children,
+				);
 			case 'UL':
 				return h(List, { children });
 			case 'LI':
