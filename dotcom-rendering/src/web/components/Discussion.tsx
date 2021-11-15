@@ -17,14 +17,13 @@ import { Hide } from '@frontend/web/components/Hide';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { useDiscussion } from '@root/src/web/lib/useDiscussion';
-import { ArticleDisplay } from '@guardian/libs';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
+	format: ArticleFormat;
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
-	pillar: ArticleTheme;
-	palette: Palette;
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
@@ -45,7 +44,6 @@ type Props = {
 	// then thank you!
 	beingHydrated?: boolean;
 	// **************************************************************************
-	display: ArticleDisplay;
 };
 
 const commentIdFromUrl = () => {
@@ -58,11 +56,10 @@ const commentIdFromUrl = () => {
 };
 
 export const Discussion = ({
+	format,
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
-	pillar,
-	palette,
 	user,
 	discussionD2Uid,
 	discussionApiClientHeader,
@@ -70,7 +67,6 @@ export const Discussion = ({
 	isAdFreeUser,
 	shouldHideAds,
 	beingHydrated,
-	display,
 }: Props) => {
 	const [commentPage, setCommentPage] = useState<number>();
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
@@ -85,6 +81,8 @@ export const Discussion = ({
 	const { commentCount, isClosedForComments } = useDiscussion(
 		joinUrl([discussionApiUrl, 'discussion', shortUrlId]),
 	);
+
+	const palette = decidePalette(format);
 
 	const hasCommentsHash =
 		typeof window !== 'undefined' &&
@@ -203,7 +201,7 @@ export const Discussion = ({
 							<Comments
 								user={user}
 								baseUrl={discussionApiUrl}
-								pillar={pillar}
+								pillar={format.theme}
 								initialPage={commentPage}
 								pageSizeOverride={commentPageSize}
 								isClosedForComments={
@@ -231,7 +229,7 @@ export const Discussion = ({
 								<Comments
 									user={user}
 									baseUrl={discussionApiUrl}
-									pillar={pillar}
+									pillar={format.theme}
 									initialPage={commentPage}
 									pageSizeOverride={commentPageSize}
 									isClosedForComments={
@@ -267,7 +265,7 @@ export const Discussion = ({
 								>
 									<AdSlot
 										position="comments"
-										display={display}
+										display={format.display}
 									/>
 								</div>
 							</RightColumn>
