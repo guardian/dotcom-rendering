@@ -1291,6 +1291,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					CAPI={CAPI}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
+					tags={CAPI.tags}
 				/>
 			</Portal>
 			<HydrateOnce rootId="comments" waitFor={[user]}>
@@ -1345,6 +1346,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					asyncArticleCount={asyncArticleCount}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
+					tags={CAPI.tags}
 				/>
 			</Portal>
 		</React.StrictMode>

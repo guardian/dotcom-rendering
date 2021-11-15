@@ -34,6 +34,7 @@ type Props = {
 	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
 	contentType: string;
 	sectionName?: string;
+	tags: TagType[];
 };
 
 type RRBannerConfig = {
@@ -167,6 +168,7 @@ export const StickyBottomBanner = ({
 	asyncArticleCount,
 	contentType,
 	sectionName,
+	tags,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const signInGateWillShow = useSignInGateWillShow({
@@ -174,6 +176,7 @@ export const StickyBottomBanner = ({
 		CAPI,
 		contentType,
 		sectionName,
+		tags,
 	});
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();

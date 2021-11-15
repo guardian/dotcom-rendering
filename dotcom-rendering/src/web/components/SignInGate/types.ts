@@ -37,6 +37,7 @@ export interface SignInGateSelectorProps {
 	CAPI: CAPIBrowserType;
 	contentType: string;
 	sectionName?: string;
+	tags: TagType[];
 }
 
 export type SignInGateTestMap = { [name: string]: SignInGateComponent };
