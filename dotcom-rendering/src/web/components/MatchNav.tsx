@@ -234,7 +234,11 @@ export const MatchNav = ({
 			{comments && <Comments comments={comments} />}
 		</StretchBackground>
 		{minByMinUrl && (
-			<MatchTabs minByMinUrl={minByMinUrl} matchUrl={matchURL} />
+			<MatchTabs
+				minByMinUrl={minByMinUrl}
+				matchUrl={matchURL}
+				format={format}
+			/>
 		)}
 	</div>
 );

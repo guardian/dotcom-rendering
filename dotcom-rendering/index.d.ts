@@ -157,6 +157,8 @@ type Palette = {
 		navPillar: Colour;
 		article: Colour;
 		lines: Colour;
+		secondary: Colour;
+		sportBorderTop: Colour;
 	};
 	topBar: {
 		card: Colour;
@@ -188,7 +190,7 @@ interface AdTargetParam {
 }
 
 type CustomParams = {
-	[key: string]: string | string[] | number | number[] | boolean | boolean[]
+	[key: string]: string | string[] | number | number[] | boolean | boolean[];
 };
 
 type AdTargeting =

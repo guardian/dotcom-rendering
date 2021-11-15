@@ -49,6 +49,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
+import { MatchTabs } from '../components/MatchTabs';
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -208,6 +209,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const showComments = CAPI.isCommentable;
 
+	const showMatchTabs = CAPI.matchUrl;
+
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
@@ -315,6 +318,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					/>
 				}
 			>
+				{showMatchTabs && (
+					<MatchTabs format={format} matchUrl={CAPI.matchUrl} />
+				)}
 				<div css={maxWidth}>
 					<ArticleHeadlinePadding design={format.design}>
 						{age && (

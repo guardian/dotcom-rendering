@@ -18,7 +18,7 @@ export const GetMatchNav = ({ matchUrl }: Props) => {
 		minByMinUrl?: string;
 	}>(matchUrl);
 
-	// We are using a variable because the MatchNav does not have direct access to 'matchUrl'
+	// We are using a variable because the MatchNav does not have direct access to
 	const MATCH_URL: string = matchUrl;
 
 	if (loading) return <Loading />;
