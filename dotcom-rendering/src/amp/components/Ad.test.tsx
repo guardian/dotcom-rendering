@@ -169,4 +169,86 @@ describe('Ad', () => {
 		expect(auRtcAttribute.urls).toHaveLength(0);
 		expect(rowRtcAttribute.urls).toHaveLength(0);
 	});
+
+	it('rtc-config contains the correct vendor config when `useAmazon` is set to true', () => {
+		const { container } = render(
+			<Ad
+				edition="UK"
+				section=""
+				contentType=""
+				config={{
+					usePrebid: false,
+					usePermutive: false,
+					useAmazon: true,
+				}}
+				commercialProperties={{
+					UK: { adTargeting: [] },
+					US: { adTargeting: [] },
+					AU: { adTargeting: [] },
+					INT: { adTargeting: [] },
+				}}
+			/>,
+		);
+
+		const ampAdElement = container.querySelectorAll('amp-ad');
+
+		expect(ampAdElement).not.toBeNull();
+
+		const usRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[0].getAttribute('rtc-config') || '{}',
+		);
+		const auRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[1].getAttribute('rtc-config') || '{}',
+		);
+		const rowRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[2].getAttribute('rtc-config') || '{}',
+		);
+
+		const apsVendorObj = {
+			aps: { PUB_ID: '3722', PARAMS: { amp: '1' } },
+		};
+
+		expect(usRtcAttribute.vendors).toMatchObject(apsVendorObj);
+		expect(auRtcAttribute.vendors).toMatchObject(apsVendorObj);
+		expect(rowRtcAttribute.vendors).toMatchObject(apsVendorObj);
+	});
+
+	it('rtc-config contains no vendor config when `useAmazon` is set to false', () => {
+		const { container } = render(
+			<Ad
+				edition="UK"
+				section=""
+				contentType=""
+				config={{
+					usePrebid: false,
+					usePermutive: false,
+					useAmazon: false,
+				}}
+				commercialProperties={{
+					UK: { adTargeting: [] },
+					US: { adTargeting: [] },
+					AU: { adTargeting: [] },
+					INT: { adTargeting: [] },
+				}}
+			/>,
+		);
+
+		const ampAdElement = container.querySelectorAll('amp-ad');
+
+		expect(ampAdElement).not.toBeNull();
+
+		const usRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[0].getAttribute('rtc-config') || '{}',
+		);
+		const auRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[1].getAttribute('rtc-config') || '{}',
+		);
+		const rowRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[2].getAttribute('rtc-config') || '{}',
+		);
+
+		expect(usRtcAttribute.vendors).toMatchObject({});
+		expect(auRtcAttribute.vendors).toMatchObject({});
+		expect(rowRtcAttribute.vendors).toMatchObject({});
+	});
 });
