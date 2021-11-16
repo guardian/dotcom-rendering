@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { neutral, text } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import { neutral, text , textSans } from '@guardian/source-foundations';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';

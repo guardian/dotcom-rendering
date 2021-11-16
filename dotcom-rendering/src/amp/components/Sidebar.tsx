@@ -1,8 +1,7 @@
 import React from 'react';
 import { ClassNames } from '@emotion/react';
 
-import { neutral, brand, brandAlt } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { neutral, brand, brandAlt , headline, textSans } from '@guardian/source-foundations';
 
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 

@@ -2,9 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import ArrowRight from '@frontend/static/icons/arrow-right.svg';
-import { neutral, brandAlt } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
-import { until } from '@guardian/src-foundations/mq';
+import { neutral, brandAlt , textSans , until } from '@guardian/source-foundations';
 
 const supportStyles = css`
 	align-self: flex-start;

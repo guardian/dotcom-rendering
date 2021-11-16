@@ -2,8 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import { ArticleSpecial } from '@guardian/libs';
-import { neutral } from '@guardian/src-foundations';
-import { body, textSans } from '@guardian/src-foundations/typography';
+import { neutral , body, textSans } from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 import { sanitise } from '@frontend/lib/sanitise-html';

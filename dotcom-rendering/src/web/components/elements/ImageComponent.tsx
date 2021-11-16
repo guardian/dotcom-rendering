@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
 
-import { until, from, between } from '@guardian/src-foundations/mq';
-import { headline } from '@guardian/src-foundations/typography';
-import { brandAltBackground, neutral } from '@guardian/src-foundations/palette';
+import { until, from, between , headline , brandAltBackground, neutral } from '@guardian/source-foundations';
 
 import { Picture } from '@root/src/web/components/Picture';
 import { Caption } from '@root/src/web/components/Caption';

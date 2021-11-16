@@ -6,9 +6,7 @@ import {
 	opinion,
 	space,
 	text,
-} from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+ from , headline, textSans } from '@guardian/source-foundations';
 
 export const signInGateContainer = css`
 	max-width: 617px;

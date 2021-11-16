@@ -1,9 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from } from '@guardian/src-foundations/mq';
-import { visuallyHidden } from '@guardian/src-foundations/accessibility';
-import { headline } from '@guardian/src-foundations/typography';
-import { brandText, brandAlt } from '@guardian/src-foundations/palette';
+import { from , visuallyHidden , headline , brandText, brandAlt } from '@guardian/source-foundations';
 
 import { ArticleDisplay } from '@guardian/libs';
 import { navInputCheckboxId, showMoreButtonId } from '../config';

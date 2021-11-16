@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/source-foundations';
 
 const linkStyles = (format: ArticleFormat, palette: Palette) => {
 	const baseLinkStyles = css`

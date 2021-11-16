@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { neutral } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import { neutral , textSans } from '@guardian/source-foundations';
 import ChevronRightSingle from '@frontend/static/icons/chevron-right-single.svg';
 import ChevronRightDouble from '@frontend/static/icons/chevron-right-double.svg';
 import ChevronLeftSingle from '@frontend/static/icons/chevron-left-single.svg';

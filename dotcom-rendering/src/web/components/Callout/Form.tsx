@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { css } from '@emotion/react';
 
-import { Link } from '@guardian/src-link';
-import { Button } from '@guardian/src-button';
-import { text } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import { Link , Button } from '@guardian/source-react-components';
+import { text , textSans } from '@guardian/source-foundations';
 
 import { FileUpload } from './FileUpload';
 import { MultiSelect } from './MultiSelect';

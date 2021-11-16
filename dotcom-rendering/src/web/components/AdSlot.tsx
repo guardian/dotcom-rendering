@@ -1,10 +1,7 @@
 import { css } from '@emotion/react';
 
-import { border, neutral, text } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
+import { border, neutral, text , textSans , from, until , space } from '@guardian/source-foundations';
 import { ArticleDisplay } from '@guardian/libs';
-import { space } from '@guardian/src-foundations';
 import { adSizes } from '@guardian/commercial-core';
 
 type Props = {

@@ -1,15 +1,12 @@
 import { SerializedStyles, css } from '@emotion/react';
 
-import { space } from '@guardian/src-foundations';
-import { LinkButton } from '@guardian/src-button';
-import { textSans } from '@guardian/src-foundations/typography';
-import {
+import { space , textSans , until } from '@guardian/source-foundations';
+import { LinkButton ,
 	SvgChevronLeftSingle,
 	SvgChevronLeftDouble,
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
-} from '@guardian/src-icons';
-import { until } from '@guardian/src-foundations/mq';
+} from '@guardian/source-react-components';
 import { Hide } from './Hide';
 import { decidePalette } from '../lib/decidePalette';
 

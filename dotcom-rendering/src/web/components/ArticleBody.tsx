@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
 
-import { headline, body } from '@guardian/src-foundations/typography';
-import { between } from '@guardian/src-foundations/mq';
+import { headline, body , between , space } from '@guardian/source-foundations';
 import { ArticleRenderer } from '@root/src/web/lib/ArticleRenderer';
 import { LiveBlogRenderer } from '@root/src/web/lib/LiveBlogRenderer';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { space } from '@guardian/src-foundations';
 
 type Props = {
 	format: ArticleFormat;

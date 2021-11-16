@@ -1,9 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { brandAlt, neutral } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { brandAlt, neutral , textSans , from } from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
 
 import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';

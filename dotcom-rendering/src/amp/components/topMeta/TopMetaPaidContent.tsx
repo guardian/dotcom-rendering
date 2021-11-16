@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { neutral, text } from '@guardian/src-foundations/palette';
-import { textSans, body } from '@guardian/src-foundations/typography';
+import { neutral, text , textSans, body } from '@guardian/source-foundations';
 
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { MainMedia } from '@root/src/amp/components/MainMedia';

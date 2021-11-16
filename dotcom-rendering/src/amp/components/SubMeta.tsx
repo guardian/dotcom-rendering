@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { text, neutral } from '@guardian/src-foundations/palette';
-import { textSans, body } from '@guardian/src-foundations/typography';
+import { text, neutral , textSans, body } from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 import { ShareIcons } from '@root/src/amp/components/ShareIcons';

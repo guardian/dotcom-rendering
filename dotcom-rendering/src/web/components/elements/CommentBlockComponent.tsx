@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
-import { textSans } from '@guardian/src-foundations/typography';
-import { neutral, space } from '@guardian/src-foundations';
+import { textSans , neutral, space } from '@guardian/source-foundations';
 
 type Props = {
 	body: string;

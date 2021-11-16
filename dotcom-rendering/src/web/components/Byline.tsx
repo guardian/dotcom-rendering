@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { until } from '@guardian/src-foundations/mq';
+import { headline, textSans , until } from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
 
 type Props = {

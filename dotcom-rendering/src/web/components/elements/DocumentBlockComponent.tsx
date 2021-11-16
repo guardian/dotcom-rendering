@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { LinkButton } from '@guardian/src-button';
+import { LinkButton } from '@guardian/source-react-components';
 
 const widthOverride = css`
 	iframe {

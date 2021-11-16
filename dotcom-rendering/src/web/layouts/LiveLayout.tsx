@@ -6,8 +6,7 @@ import {
 	brandBackground,
 	brandLine,
 	brandBorder,
-} from '@guardian/src-foundations/palette';
-import { from, until } from '@guardian/src-foundations/mq';
+ from, until , space } from '@guardian/source-foundations';
 import type { ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 
@@ -48,7 +47,6 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (

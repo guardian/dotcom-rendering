@@ -1,7 +1,7 @@
 import React, { StrictMode } from 'react';
 import { EmotionCache } from '@emotion/cache';
 import { CacheProvider, Global, css } from '@emotion/react';
-import { focusHalo } from '@guardian/src-foundations/accessibility';
+import { focusHalo } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/src-foundations/typography';
-import { neutral, border } from '@guardian/src-foundations/palette';
+import { textSans , neutral, border } from '@guardian/source-foundations';
 
 type Identifier = 'maincontent' | 'navigation';
 

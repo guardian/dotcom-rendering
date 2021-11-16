@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { neutral, sport } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { neutral, sport , headline, textSans } from '@guardian/source-foundations';
 import DownArrow from '@frontend/static/icons/down-arrow.svg';
 import { blockLink } from '@root/src/amp/lib/block-link';
 

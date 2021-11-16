@@ -4,9 +4,7 @@ import {
 	text,
 	brandAltBackground,
 	neutral,
-} from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+ headline, textSans , from } from '@guardian/source-foundations';
 import { ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
 import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';

@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
 
-import { visuallyHidden } from '@guardian/src-foundations/accessibility';
-import { from } from '@guardian/src-foundations/mq';
-import { brandAlt, neutral } from '@guardian/src-foundations/palette';
+import { visuallyHidden , from , brandAlt, neutral } from '@guardian/source-foundations';
 
 import { ArticleDisplay } from '@guardian/libs';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
