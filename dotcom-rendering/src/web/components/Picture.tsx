@@ -178,13 +178,13 @@ export const Picture = ({
 		role,
 		'hdpi',
 	);
-	const mdpiSourcesSets = getSourcesForRoleAndResolution(
+	const mdpiSourceSets = getSourcesForRoleAndResolution(
 		imageSources,
 		role,
 		'mdpi',
 	);
 	const fallbackSrc = getFallback(
-		hdpiSourceSets.length ? hdpiSourceSets : mdpiSourcesSets,
+		hdpiSourceSets.length ? hdpiSourceSets : mdpiSourceSets,
 	);
 
 	// Create an array of breakpoints going from highest to lowest, with 0 as the final option
@@ -203,7 +203,7 @@ export const Picture = ({
 			{format.display === ArticleDisplay.Immersive && isMainMedia ? (
 				<>
 					{portraitImmersiveSource(hdpiSourceSets, true)}
-					{portraitImmersiveSource(mdpiSourcesSets, false)}
+					{portraitImmersiveSource(mdpiSourceSets, false)}
 				</>
 			) : (
 				''
@@ -229,11 +229,11 @@ export const Picture = ({
 					<source
 						srcSet={getSourceSetForSize(
 							size,
-							mdpiSourcesSets,
+							mdpiSourceSets,
 							false,
 						)}
 						sizes={`${breakpoint || size}px`}
-						media={`min-width: ${breakpoint}px`}
+						media={`(min-width: ${breakpoint}px)`}
 					/>
 				</>
 			))}
