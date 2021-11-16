@@ -223,7 +223,7 @@ export const Picture = ({
 							media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
 						/>
 					) : (
-						''
+						<></>
 					)}
 					{/* MDPI Source - images in this srcset have `quality=85` in the url */}
 					<source
