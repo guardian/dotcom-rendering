@@ -157,7 +157,8 @@ const TweetStyles = css`
 	}
 `;
 
-//Elements rendered by this function should contain no styles. For example in callout form and interactives we want to exclude styles.
+//Elements rendered by this function should contain no styles.
+// For example in callout form and interactives we want to exclude styles.
 const plainTextElement = (node: Node, key: number): ReactNode => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map(plainTextElement);
