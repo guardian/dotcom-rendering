@@ -1,6 +1,12 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { neutral, brand, brandAlt , textSans, body } from '@guardian/source-foundations';
+import {
+	neutral,
+	brand,
+	brandAlt,
+	textSans,
+	body,
+} from '@guardian/source-foundations';
 
 import {
 	Link,

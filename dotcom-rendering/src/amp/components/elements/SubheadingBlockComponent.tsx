@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import { ArticleSpecial as Special } from '@guardian/libs';
-import { neutral , headline, textSans } from '@guardian/source-foundations';
+import { neutral, headline, textSans } from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 

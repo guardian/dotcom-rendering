@@ -1,7 +1,12 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { neutral , body, textSans, headline } from '@guardian/source-foundations';
+import {
+	neutral,
+	body,
+	textSans,
+	headline,
+} from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 import InfoIcon from '@frontend/static/icons/info.svg';

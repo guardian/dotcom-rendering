@@ -1,7 +1,4 @@
-import {
-	brandBackground,
-	brandBorder,
-} from '@guardian/source-foundations';
+import { brandBackground, brandBorder } from '@guardian/source-foundations';
 
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
 

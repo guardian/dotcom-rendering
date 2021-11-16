@@ -1,6 +1,13 @@
 import { css } from '@emotion/react';
 
-import { brand, brandText, brandAlt , headline, textSans , from } from '@guardian/source-foundations';
+import {
+	brand,
+	brandText,
+	brandAlt,
+	headline,
+	textSans,
+	from,
+} from '@guardian/source-foundations';
 
 import { Column } from './Column';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';

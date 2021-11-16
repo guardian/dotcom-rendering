@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { textSans , between } from '@guardian/source-foundations';
+import { textSans, between } from '@guardian/source-foundations';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 import CommentIcon from '@frontend/static/icons/comment.svg';

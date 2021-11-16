@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { border , from, Breakpoint } from '@guardian/source-foundations';
+import { border, from, Breakpoint } from '@guardian/source-foundations';
 
 import { useApi } from '@root/src/web/lib/useApi';
 import { joinUrl } from '@root/src/lib/joinUrl';

@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
 
-import { brandText , from, until , visuallyHidden } from '@guardian/source-foundations';
+import {
+	brandText,
+	from,
+	until,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 
 import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
 import GuardianAnniversaryLogoSVG from '@frontend/static/logos/guardian-anniversary-logo.svg';

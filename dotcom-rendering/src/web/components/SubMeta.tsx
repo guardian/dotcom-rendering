@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 
-import { space , headline, textSans , until, from } from '@guardian/source-foundations';
+import {
+	space,
+	headline,
+	textSans,
+	until,
+	from,
+} from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 

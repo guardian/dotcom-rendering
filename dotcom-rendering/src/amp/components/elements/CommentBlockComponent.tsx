@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { neutral, news , textSans } from '@guardian/source-foundations';
+import { neutral, news, textSans } from '@guardian/source-foundations';
 
 const wrapper = css`
 	overflow: hidden;

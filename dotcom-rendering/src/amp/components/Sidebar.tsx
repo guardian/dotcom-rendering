@@ -1,7 +1,13 @@
 import React from 'react';
 import { ClassNames } from '@emotion/react';
 
-import { neutral, brand, brandAlt , headline, textSans } from '@guardian/source-foundations';
+import {
+	neutral,
+	brand,
+	brandAlt,
+	headline,
+	textSans,
+} from '@guardian/source-foundations';
 
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 

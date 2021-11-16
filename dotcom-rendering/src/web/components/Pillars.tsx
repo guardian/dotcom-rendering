@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 
-import { brand, brandText , headline , from, until } from '@guardian/source-foundations';
+import {
+	brand,
+	brandText,
+	headline,
+	from,
+	until,
+} from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { navInputCheckboxId } from './Nav/config';

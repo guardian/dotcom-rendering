@@ -6,7 +6,11 @@ import {
 	border,
 	neutral,
 	sport,
- headline, textSans , space , until } from '@guardian/source-foundations';
+	headline,
+	textSans,
+	space,
+	until,
+} from '@guardian/source-foundations';
 
 import { Score } from '@frontend/web/components/Score';
 

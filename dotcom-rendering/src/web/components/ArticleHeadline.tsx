@@ -3,7 +3,13 @@ import { css } from '@emotion/react';
 import { HeadlineTag } from '@root/src/web/components/HeadlineTag';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
 
-import { headline, textSans , from, until , space } from '@guardian/source-foundations';
+import {
+	headline,
+	textSans,
+	from,
+	until,
+	space,
+} from '@guardian/source-foundations';
 import {
 	ArticleDisplay,
 	ArticleDesign,

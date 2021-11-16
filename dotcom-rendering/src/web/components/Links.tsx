@@ -3,7 +3,13 @@ import { css } from '@emotion/react';
 
 import SearchIcon from '@frontend/static/icons/search.svg';
 
-import { brand, brandText, brandAlt , textSans , from } from '@guardian/source-foundations';
+import {
+	brand,
+	brandText,
+	brandAlt,
+	textSans,
+	from,
+} from '@guardian/source-foundations';
 
 import { getCookie } from '@root/src/web/browser/cookie';
 import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';

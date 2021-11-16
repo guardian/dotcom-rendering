@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { neutral , headline, textSans } from '@guardian/source-foundations';
+import { neutral, headline, textSans } from '@guardian/source-foundations';
 
 import {
 	MoustacheSection,

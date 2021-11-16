@@ -7,7 +7,10 @@ import {
 	MoustacheTemplate,
 	moustacheVariable,
 } from '@root/src/amp/components/moustache';
-import { headline, body, textSans ,
+import {
+	headline,
+	body,
+	textSans,
 	brand,
 	brandAlt,
 	neutral,

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { neutral , until , textSans } from '@guardian/source-foundations';
+import { neutral, until, textSans } from '@guardian/source-foundations';
 
 const brandingStyle = css`
 	padding-bottom: 10px;

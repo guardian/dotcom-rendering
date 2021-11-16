@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { text , textSans , from } from '@guardian/source-foundations';
+import { text, textSans, from } from '@guardian/source-foundations';
 
 const captionFont = css`
 	${textSans.xxsmall()};

@@ -1,6 +1,14 @@
 import { css } from '@emotion/react';
 
-import { border, neutral, text , textSans , from, until , space } from '@guardian/source-foundations';
+import {
+	border,
+	neutral,
+	text,
+	textSans,
+	from,
+	until,
+	space,
+} from '@guardian/source-foundations';
 import { ArticleDisplay } from '@guardian/libs';
 import { adSizes } from '@guardian/commercial-core';
 

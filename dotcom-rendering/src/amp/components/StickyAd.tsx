@@ -1,5 +1,5 @@
 import { ClassNames } from '@emotion/react';
-import { text , textSans } from '@guardian/source-foundations';
+import { text, textSans } from '@guardian/source-foundations';
 import { regionClasses } from '../lib/region-classes';
 import { RegionalAdProps, RegionalAd } from './Ad';
 

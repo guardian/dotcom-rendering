@@ -1,7 +1,11 @@
 import React from 'react';
 import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';
 import { css } from '@emotion/react';
-import { neutral , textSans , visuallyHidden } from '@guardian/source-foundations';
+import {
+	neutral,
+	textSans,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 
 import InfoIcon from '@frontend/static/icons/info.svg';
 import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';

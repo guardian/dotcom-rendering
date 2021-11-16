@@ -1,7 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
-import { from, until , space , neutral, border , headline } from '@guardian/source-foundations';
+import {
+	from,
+	until,
+	space,
+	neutral,
+	border,
+	headline,
+} from '@guardian/source-foundations';
 import { SvgChevronDownSingle } from '@guardian/source-react-components';
 
 import { getZIndex } from '@root/src/web/lib/getZIndex';

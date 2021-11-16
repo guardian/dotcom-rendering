@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/react';
-import { neutral, space , border } from '@guardian/source-foundations';
+import { neutral, space, border } from '@guardian/source-foundations';
 import { ArticleDisplay } from '@guardian/libs';
 import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial-core/dist/esm/constants';
 

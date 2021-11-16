@@ -1,9 +1,16 @@
 import { css } from '@emotion/react';
 
-import { LinkButton , Link } from '@guardian/source-react-components';
+import { LinkButton, Link } from '@guardian/source-react-components';
 import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-import { headline, textSans , line, space , from, until } from '@guardian/source-foundations';
+import {
+	headline,
+	textSans,
+	line,
+	space,
+	from,
+	until,
+} from '@guardian/source-foundations';
 import { SignInGateProps } from '@frontend/web/components/SignInGate/types';
 import {
 	actionButtons,

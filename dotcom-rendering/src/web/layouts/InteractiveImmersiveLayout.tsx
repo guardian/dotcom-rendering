@@ -7,7 +7,9 @@ import {
 	border,
 	brandLine,
 	neutral,
- from, until } from '@guardian/source-foundations';
+	from,
+	until,
+} from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
 import { Footer } from '@root/src/web/components/Footer';

@@ -16,7 +16,8 @@ import {
 	brandBackground,
 	brandLine,
 	neutral,
- headline } from '@guardian/source-foundations';
+	headline,
+} from '@guardian/source-foundations';
 
 import { NAV, pageFooter } from './Example.mocks';
 

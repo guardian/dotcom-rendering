@@ -1,7 +1,13 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { headline, textSans , neutral , until , space } from '@guardian/source-foundations';
+import {
+	headline,
+	textSans,
+	neutral,
+	until,
+	space,
+} from '@guardian/source-foundations';
 
 import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
 import { Kicker } from '@root/src/web/components/Kicker';
