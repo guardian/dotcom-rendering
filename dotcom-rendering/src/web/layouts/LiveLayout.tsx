@@ -150,6 +150,13 @@ const marginBottomMobile = css`
 	}
 `;
 
+const sticky = css`
+	${from.desktop} {
+		position: sticky;
+		top: 10px;
+	}
+`;
+
 const stretchLines = css`
 	${until.phablet} {
 		margin-left: -20px;
@@ -467,6 +474,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<GridItem area="keyevents">
 								<div
 									css={[
+										sticky,
 										keyEventsBottomMargin,
 										sidePaddingDesktop,
 									]}
