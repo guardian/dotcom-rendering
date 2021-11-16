@@ -2,7 +2,7 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { neutral } from "@guardian/src-foundations/palette";
+import { neutral, line } from "@guardian/src-foundations/palette";
 import { headline } from "@guardian/src-foundations/typography";
 import { remSpace } from "@guardian/src-foundations";
 import { focusHalo } from "@guardian/src-foundations/accessibility";
@@ -36,6 +36,7 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	border-top: ${line.primary} 1px solid;
 
 	&:focus {
 		${focusHalo}
