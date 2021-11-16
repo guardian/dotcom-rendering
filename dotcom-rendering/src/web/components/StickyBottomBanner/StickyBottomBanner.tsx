@@ -32,7 +32,7 @@ type Props = {
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
 	contentType: string;
-	sectionName: string;
+	sectionName?: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;

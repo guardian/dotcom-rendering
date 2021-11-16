@@ -36,7 +36,7 @@ export interface SignInGateSelectorProps {
 	isSignedIn?: boolean;
 	format: ArticleFormat;
 	contentType: string;
-	sectionName: string;
+	sectionName?: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;

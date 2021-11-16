@@ -9,7 +9,7 @@ import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
 type Props = {
 	isSignedIn?: boolean;
 	contentType: string;
-	sectionName: string;
+	sectionName?: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;

@@ -127,7 +127,7 @@ export const SignInGateSelector = ({
 	isSignedIn,
 	format,
 	contentType,
-	sectionName,
+	sectionName = '',
 	tags,
 	isPaidContent,
 	isPreview,
