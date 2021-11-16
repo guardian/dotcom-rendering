@@ -126,6 +126,7 @@ type Palette = {
 		headline: Colour;
 		headlineByline: Colour;
 		bullet: Colour;
+		bulletStandfirst: Colour;
 		header: Colour;
 		standfirst: Colour;
 		richLink: Colour;

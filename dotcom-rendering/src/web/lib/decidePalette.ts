@@ -487,16 +487,18 @@ const backgroundHeadlineByline = (format: ArticleFormat): string => {
 };
 
 const backgroundBullet = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.Labs) return BLACK;
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[300];
+	return pillarPalette[format.theme].main;
+};
+
+const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.DeadBlog:
 			return neutral[60];
-		case ArticleDesign.LiveBlog:
-			return neutral[86]; // default previously defined in Standfirst.tsx
 		default:
-			if (format.theme === ArticleSpecial.Labs) return BLACK;
-			if (format.theme === ArticleSpecial.SpecialReport)
-				return specialReport[300];
-			return pillarPalette[format.theme].main;
+			return neutral[86]; // default previously defined in Standfirst.tsx
 	}
 };
 
@@ -860,6 +862,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
+			bulletStandfirst: backgroundBulletStandfirst(format),
 			header: backgroundHeader(format),
 			standfirst: backgroundStandfirst(format),
 			richLink: backgroundRichLink(format),
