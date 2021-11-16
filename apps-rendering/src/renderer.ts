@@ -157,6 +157,7 @@ const TweetStyles = css`
 	}
 `;
 
+//Elements rendered by this function should contain no styles. For example in callout form and interactives we want to exclude styles.
 const plainTextElement = (node: Node, key: number): ReactNode => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map(plainTextElement);
@@ -178,11 +179,7 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 		case 'BLOCKQUOTE':
 			return h('blockquote', { key }, children);
 		case 'STRONG':
-			return styledH(
-				'strong',
-				{ css: { fontWeight: 'bold' }, key },
-				children,
-			);
+			return h('strong', { key }, children);
 		case 'EM':
 			return h('em', { key }, children);
 		case 'BR':
@@ -227,7 +224,7 @@ const textElement =
 						key,
 						isEditions,
 					},
-					transform(text, format),
+					children,
 				);
 			case 'H2':
 				return text.includes('* * *')
@@ -308,7 +305,11 @@ const standfirstTextElement =
 			case 'P':
 				return h('p', { key }, children);
 			case 'STRONG':
-				return h('strong', { key }, children);
+				return styledH(
+					'strong',
+					{ css: { fontWeight: 'bold' }, key },
+					children,
+				);
 			case 'UL':
 				return h(List, { children });
 			case 'LI':
