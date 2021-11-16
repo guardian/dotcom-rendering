@@ -6,21 +6,17 @@ import { MatchNav } from './MatchNav';
 
 type Props = {
 	matchUrl: string;
-	format: ArticleFormat;
 };
 
 const Loading = () => <Placeholder height={230} />;
 
-export const GetMatchNav = ({ matchUrl, format }: Props) => {
+export const GetMatchNav = ({ matchUrl }: Props) => {
 	const { data, error, loading } = useApi<{
 		homeTeam: TeamType;
 		awayTeam: TeamType;
 		comments?: string;
 		minByMinUrl?: string;
 	}>(matchUrl);
-
-	// We are using a variable because the MatchNav does not have direct access to
-	const MATCH_URL: string = matchUrl;
 
 	if (loading) return <Loading />;
 	if (error) {
@@ -35,9 +31,6 @@ export const GetMatchNav = ({ matchUrl, format }: Props) => {
 				homeTeam={data.homeTeam}
 				awayTeam={data.awayTeam}
 				comments={data.comments}
-				minByMinUrl={data.minByMinUrl}
-				reportUrl={matchUrl}
-				format={format}
 			/>
 		);
 	}

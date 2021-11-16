@@ -5,15 +5,11 @@ import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import { Score } from '@frontend/web/components/Score';
-import { MatchTabs } from './MatchTabs';
 
 type Props = {
 	homeTeam: TeamType;
 	awayTeam: TeamType;
 	comments?: string;
-	minByMinUrl?: string;
-	reportUrl?: string;
-	format: ArticleFormat;
 };
 
 const Row = ({ children }: { children: React.ReactNode }) => (
@@ -208,14 +204,7 @@ const YellowBorder = () => (
 	/>
 );
 
-export const MatchNav = ({
-	homeTeam,
-	awayTeam,
-	comments,
-	minByMinUrl,
-	reportUrl,
-	format,
-}: Props) => (
+export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
 	<div>
 		<StretchBackground>
 			<Row>
@@ -235,12 +224,5 @@ export const MatchNav = ({
 			</Row>
 			{comments && <Comments comments={comments} />}
 		</StretchBackground>
-		{minByMinUrl && (
-			<MatchTabs
-				minByMinUrl={minByMinUrl}
-				reportUrl={reportUrl}
-				format={format}
-			/>
-		)}
 	</div>
 );
