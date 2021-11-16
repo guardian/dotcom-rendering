@@ -5,7 +5,7 @@
  */
 export const whenIdle = (callback: () => void) => {
 	if ('requestIdleCallback' in window) {
-		window.requestIdleCallback(callback);
+		window.requestIdleCallback(callback, { timeout: 500 });
 	} else {
 		setTimeout(callback, 300);
 	}
