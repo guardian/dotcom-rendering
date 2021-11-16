@@ -1,15 +1,16 @@
 import { css } from '@emotion/react';
 
-import { neutral, space } from '@guardian/src-foundations';
-import { timeAgo } from '@guardian/libs';
+import { space } from '@guardian/src-foundations';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
+import { FirstPublished } from '@guardian/common-rendering/src/components/FirstPublished';
+import { LastUpdated } from '@guardian/common-rendering/src/components/LastUpdated';
 
 type Props = {
 	format: ArticleFormat;
@@ -44,81 +45,6 @@ const BlockTitle = ({ title }: { title: string }) => {
 		>
 			{title}
 		</h2>
-	);
-};
-
-const LastUpdated = ({
-	lastUpdatedDisplay,
-	lastUpdated,
-}: {
-	lastUpdatedDisplay: string;
-	lastUpdated: number;
-}) => {
-	return (
-		<div
-			css={css`
-				display: flex;
-				align-items: flex-end;
-				${textSans.xxsmall()};
-				color: ${neutral[46]};
-			`}
-		>
-			<time dateTime={new Date(lastUpdated).toISOString()}>
-				{`Updated at ${lastUpdatedDisplay}`}
-			</time>
-		</div>
-	);
-};
-
-// TODO: update this code to use shared version when it is available
-const padString = (time: number) => (time < 10 ? `0${time}` : time);
-
-const FirstPublished = ({
-	firstPublished,
-	blockLink,
-}: {
-	firstPublished: number;
-	blockLink: string;
-}) => {
-	const publishedDate = new Date(firstPublished);
-	return (
-		<a
-			href={blockLink}
-			data-ignore="global-link-styling"
-			// title={publishedDate.toLocaleString()}
-			css={css`
-				${textSans.xxsmall({ fontWeight: 'bold' })}
-				margin-bottom: ${space[1]}px;
-				padding-top: ${space[1]}px;
-				display: flex;
-				flex-direction: row;
-				text-decoration: none;
-				:hover {
-					filter: brightness(30%);
-				}
-			`}
-		>
-			<time
-				dateTime={publishedDate.toISOString()}
-				css={css`
-					color: ${neutral[46]};
-					font-weight: bold;
-					margin-right: ${space[2]}px;
-				`}
-			>
-				{timeAgo(firstPublished)}
-			</time>
-			<span
-				css={css`
-					${textSans.xxsmall()};
-					color: ${neutral[46]};
-				`}
-			>
-				{`${padString(publishedDate.getHours())}:${padString(
-					publishedDate.getMinutes(),
-				)}`}
-			</span>
-		</a>
 	);
 };
 
