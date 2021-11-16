@@ -183,7 +183,9 @@ export const Picture = ({
 		role,
 		'mdpi',
 	);
-	const fallbackSrc = getFallback(hdpiSourceSets);
+	const fallbackSrc = getFallback(
+		hdpiSourceSets.length ? hdpiSourceSets : mdpiSourcesSets,
+	);
 
 	// Create an array of breakpoints going from highest to lowest, with 0 as the final option
 	const breakpointSizes: [number, number][] = [
@@ -210,11 +212,19 @@ export const Picture = ({
 			{optimisedBreakPointSizes.map(([breakpoint, size]) => (
 				<>
 					{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
-					<source
-						srcSet={getSourceSetForSize(size, hdpiSourceSets, true)}
-						sizes={`${breakpoint || size}px`}
-						media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
-					/>
+					{hdpiSourceSets.length ? (
+						<source
+							srcSet={getSourceSetForSize(
+								size,
+								hdpiSourceSets,
+								true,
+							)}
+							sizes={`${breakpoint || size}px`}
+							media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
+						/>
+					) : (
+						''
+					)}
 					{/* MDPI Source - images in this srcset have `quality=85` in the url */}
 					<source
 						srcSet={getSourceSetForSize(
