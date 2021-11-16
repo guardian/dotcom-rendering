@@ -384,7 +384,7 @@ const backgroundArticle = (format: ArticleFormat): string => {
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
 	)
-		return neutral[93];
+		return neutral[97];
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === ArticleDesign.Letter) return opinion[800];
 	if (format.design === ArticleDesign.Comment) return opinion[800];
