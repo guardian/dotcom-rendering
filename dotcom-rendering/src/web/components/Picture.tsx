@@ -55,7 +55,7 @@ const getFallback = (sources: SrcSetItem[]): string | undefined => {
 };
 
 // The image sources we're provided use double-widths for HDPI images
-// We should therefor multiple the width based on if it's HDPI or not
+// We should therefor multiply the width based on if it's HDPI or not
 // e.g { url: '... ?width=500&dpr=2 ...', width: '1000' }
 export const getDesiredWidth = (width: number, hdpi: boolean) =>
 	hdpi ? width * 2 : width;
