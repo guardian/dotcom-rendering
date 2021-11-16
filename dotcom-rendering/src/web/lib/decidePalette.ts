@@ -493,6 +493,15 @@ const backgroundBullet = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundBulletStandfirst = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.DeadBlog:
+			return neutral[60];
+		default:
+			return neutral[86]; // default previously defined in Standfirst.tsx
+	}
+};
+
 const backgroundHeader = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -507,7 +516,7 @@ const backgroundStandfirst = (format: ArticleFormat): string => {
 		case ArticleDesign.LiveBlog:
 			return pillarPalette[format.theme][300];
 		case ArticleDesign.DeadBlog:
-			return neutral[86];
+			return neutral[93];
 		default:
 			return backgroundArticle(format);
 	}
@@ -853,6 +862,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
+			bulletStandfirst: backgroundBulletStandfirst(format),
 			header: backgroundHeader(format),
 			standfirst: backgroundStandfirst(format),
 			richLink: backgroundRichLink(format),
