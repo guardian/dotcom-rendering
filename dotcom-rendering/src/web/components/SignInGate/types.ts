@@ -43,6 +43,7 @@ export interface SignInGateSelectorProps {
 	host?: string;
 	pageId: string;
 	idUrl?: string;
+	pageViewId: string;
 }
 
 export type SignInGateTestMap = { [name: string]: SignInGateComponent };

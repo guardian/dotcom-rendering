@@ -134,6 +134,7 @@ export const SignInGateSelector = ({
 	host = 'https://theguardian.com/',
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
+	pageViewId,
 }: SignInGateSelectorProps) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -199,7 +200,7 @@ export const SignInGateSelector = ({
 	const signInUrl = generateSignInUrl({
 		pageId,
 		host,
-		pageViewId: window.guardian.config.ophan.pageViewId,
+		pageViewId,
 		idUrl,
 		currentTest,
 	});
