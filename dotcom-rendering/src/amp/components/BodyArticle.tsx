@@ -98,9 +98,14 @@ export const Body: React.FC<{
 	config: ConfigType;
 }> = ({ data, config }) => {
 	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
-	const adTargeting = buildAdTargeting({
+	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: data.isAdFreeUser,
-		config,
+		isSensitive: config.isSensitive,
+		videoDuration: config.videoDuration,
+		edition: config.edition,
+		section: config.section,
+		sharedAdTargeting: config.sharedAdTargeting,
+		adUnit: config.adUnit,
 	});
 	const design = decideDesign(data.format);
 	const pillar = decideTheme(data.format);

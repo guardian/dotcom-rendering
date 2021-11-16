@@ -421,7 +421,15 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		theme: pillar,
 	};
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+	const adTargeting: AdTargeting = buildAdTargeting({
+		isAdFreeUser: CAPI.isAdFreeUser,
+		isSensitive: CAPI.config.isSensitive,
+		videoDuration: CAPI.config.videoDuration,
+		edition: CAPI.config.edition,
+		section: CAPI.config.section,
+		sharedAdTargeting: CAPI.config.sharedAdTargeting,
+		adUnit: CAPI.config.adUnit,
+	});
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
