@@ -6,14 +6,10 @@ import {
 	KnowledgeQuizAtom,
 	PersonalityQuizAtom,
 } from '@guardian/atoms-rendering';
-import type { Result, Theme } from '@guardian/types';
-import {
-	fromUnsafe,
-	Pillar,
-	resultAndThen,
-	ResultKind,
-	Special,
-} from '@guardian/types';
+import type { ArticleTheme } from '@guardian/libs';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { Result } from '@guardian/types';
+import { fromUnsafe, resultAndThen, ResultKind } from '@guardian/types';
 import { ElementKind } from 'bodyElementKind';
 import { pipe, resultFromNullable } from 'lib';
 import type { Parser } from 'parser';
@@ -33,27 +29,27 @@ import ReactDOM from 'react-dom';
 
 interface QuizProps {
 	quiz: QuizAtom;
-	theme: Theme;
+	theme: ArticleTheme;
 }
 
 // ----- Functions ----- //
 
-const makeQuizProps = (quiz: QuizAtom, theme: Theme): QuizProps => ({
+const makeQuizProps = (quiz: QuizAtom, theme: ArticleTheme): QuizProps => ({
 	quiz,
 	theme,
 });
 
-const themeParser: Parser<Theme> = pipe(
+const themeParser: Parser<ArticleTheme> = pipe(
 	numberParser,
 	andThen((num) => {
 		switch (num) {
-			case Pillar.News:
-			case Pillar.Opinion:
-			case Pillar.Sport:
-			case Pillar.Culture:
-			case Pillar.Lifestyle:
-			case Special.SpecialReport:
-			case Special.Labs:
+			case ArticlePillar.News:
+			case ArticlePillar.Opinion:
+			case ArticlePillar.Sport:
+			case ArticlePillar.Culture:
+			case ArticlePillar.Lifestyle:
+			case ArticleSpecial.SpecialReport:
+			case ArticleSpecial.Labs:
 				return succeed(num);
 			default:
 				return fail(

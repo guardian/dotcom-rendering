@@ -5,7 +5,9 @@ import path from 'path';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import type { Option, Result, Theme } from '@guardian/types';
+import type { ArticleTheme } from '@guardian/libs';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { Option, Result } from '@guardian/types';
 import {
 	either,
 	err,
@@ -13,9 +15,7 @@ import {
 	none,
 	ok,
 	OptionKind,
-	Pillar,
 	some,
-	Special,
 	withDefault,
 } from '@guardian/types';
 import { capiEndpoint } from 'capi';
@@ -58,22 +58,22 @@ type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
 
 // ----- Functions ----- //
 
-function themeFromUnknown(a: unknown): Option<Theme> {
+function themeFromUnknown(a: unknown): Option<ArticleTheme> {
 	switch (a) {
 		case '0':
-			return some(Pillar.News);
+			return some(ArticlePillar.News);
 		case '1':
-			return some(Pillar.Opinion);
+			return some(ArticlePillar.Opinion);
 		case '2':
-			return some(Pillar.Sport);
+			return some(ArticlePillar.Sport);
 		case '3':
-			return some(Pillar.Culture);
+			return some(ArticlePillar.Culture);
 		case '4':
-			return some(Pillar.Lifestyle);
+			return some(ArticlePillar.Lifestyle);
 		case '5':
-			return some(Special.SpecialReport);
+			return some(ArticleSpecial.SpecialReport);
 		case '6':
-			return some(Special.Labs);
+			return some(ArticleSpecial.Labs);
 		default:
 			return none;
 	}
@@ -158,7 +158,7 @@ function serveArticleSwitch(
 	renderingRequest: RenderingRequest,
 	res: ExpressResponse,
 	isEditions: boolean,
-	themeOverride: Option<Theme>,
+	themeOverride: Option<ArticleTheme>,
 ): Promise<void> {
 	if (isEditions) {
 		return serveEditionsArticle(renderingRequest, res, themeOverride);
@@ -186,7 +186,7 @@ async function serveArticle(
 async function serveEditionsArticle(
 	request: RenderingRequest,
 	res: ExpressResponse,
-	themeOverride: Option<Theme>,
+	themeOverride: Option<ArticleTheme>,
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 

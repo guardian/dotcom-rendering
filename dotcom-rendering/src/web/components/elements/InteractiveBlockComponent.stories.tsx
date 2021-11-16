@@ -6,7 +6,6 @@ import { InteractiveBlockComponent } from '@frontend/web/components/elements/Int
 import { Figure } from '@frontend/web/components/Figure';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
 import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { decidePalette } from '@frontend/web/lib/decidePalette';
 
 export default {
 	component: InteractiveBlockComponent,
@@ -54,11 +53,6 @@ export const Default = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 			<SomeText />
@@ -85,11 +79,6 @@ export const InlineMap = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 			<SomeText />
@@ -115,11 +104,6 @@ export const Showcase = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 			<SomeText />
@@ -147,11 +131,6 @@ export const WithCaption = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 			<SomeText />
@@ -178,11 +157,6 @@ export const NonBootJs = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 			<SomeText />

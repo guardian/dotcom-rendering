@@ -2,8 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
-import type { Format } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import Img from 'components/img';
 import { isSingleContributor } from 'contributor';
@@ -18,7 +18,7 @@ const dimensions = '4rem';
 
 // ----- Component ----- //
 
-interface Props extends Format {
+interface Props extends ArticleFormat {
 	contributors: Contributor[];
 }
 
@@ -32,7 +32,7 @@ const styles = (background: string): SerializedStyles => css`
 	margin-top: ${remSpace[1]};
 `;
 
-const getStyles = ({ theme }: Format): SerializedStyles => {
+const getStyles = ({ theme }: ArticleFormat): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 	return styles(colours.inverted);
 };

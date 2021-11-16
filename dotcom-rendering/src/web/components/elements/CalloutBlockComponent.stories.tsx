@@ -4,7 +4,6 @@ import fetchMock from 'fetch-mock';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { calloutCampaign } from '@root/fixtures/manual/calloutCampaign';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { CalloutBlockComponent } from './CalloutBlockComponent';
 
@@ -32,11 +31,11 @@ export const Default = () => {
 		>
 			<CalloutBlockComponent
 				callout={calloutCampaign}
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 			/>
 		</div>
 	);

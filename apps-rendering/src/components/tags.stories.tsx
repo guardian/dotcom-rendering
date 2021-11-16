@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import type { Format } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
 import { withKnobs } from '@storybook/addon-knobs';
 import Tags from 'components/tags';
 
@@ -13,7 +13,7 @@ const tag = {
 
 // ----- Stories ----- //
 
-const Default = (format: Format): JSX.Element => (
+const Default = (format: ArticleFormat): JSX.Element => (
 	<Tags tags={[tag, tag, tag]} format={format} />
 );
 

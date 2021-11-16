@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
@@ -38,7 +38,7 @@ const headerStyle = (pillar: ArticleTheme) => css`
 	${headline.small()};
 	font-weight: 500;
 	padding: 3px 10px 24px;
-	color: ${palette.neutral[100]};
+	color: ${neutral[100]};
 	background-color: ${pillarPalette_DO_NOT_USE[pillar].main};
 `;
 
@@ -59,13 +59,13 @@ const bylineStyle = (pillar: ArticleTheme) => css`
 
 const standfirstStyle = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
-	color: ${palette.neutral[100]};
+	color: ${neutral[100]};
 	background-color: ${pillarPalette_DO_NOT_USE[pillar].dark};
 	font-weight: bold;
 	padding: 3px 10px 12px;
 
 	a {
-		color: ${palette.neutral[100]};
+		color: ${neutral[100]};
 	}
 
 	p {

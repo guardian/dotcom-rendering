@@ -4,7 +4,6 @@ import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { ABProvider } from '@guardian/ab-react';
 
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
 import {
 	responseWithTwoTabs,
 	responseWithOneTab,
@@ -45,18 +44,13 @@ export const withTwoTabs = () => {
 		<AbProvider>
 			<ElementContainer>
 				<MostViewedFooter
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
-					sectionName="politics"
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
+					sectionName="politics"
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				/>
 			</ElementContainer>
 		</AbProvider>
@@ -74,17 +68,12 @@ export const withOneTabs = () => {
 		<AbProvider>
 			<ElementContainer>
 				<MostViewedFooter
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				/>
 			</ElementContainer>
 		</AbProvider>
@@ -102,17 +91,12 @@ export const withNoMostSharedImage = () => {
 		<AbProvider>
 			<ElementContainer>
 				<MostViewedFooter
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				/>
 			</ElementContainer>
 		</AbProvider>

@@ -2,11 +2,11 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { Special } from '@guardian/types';
-import type { Format } from '@guardian/types';
 import FollowStatus from 'components/followStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
@@ -16,11 +16,11 @@ import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
-interface Props extends Format {
+interface Props extends ArticleFormat {
 	contributors: Contributor[];
 }
 
-const styles = ({ theme }: Format): SerializedStyles => {
+const styles = ({ theme }: ArticleFormat): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(theme);
 
 	return css`
@@ -40,7 +40,7 @@ const styles = ({ theme }: Format): SerializedStyles => {
 	`;
 };
 
-const statusStyles = ({ theme }: Format): SerializedStyles => {
+const statusStyles = ({ theme }: ArticleFormat): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(theme);
 
 	return css`
@@ -86,7 +86,7 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
 	if (
 		isSingleContributor(contributors) &&
 		contributor.apiUrl !== '' &&
-		format.theme !== Special.Labs
+		format.theme !== ArticleSpecial.Labs
 	) {
 		return (
 			<button

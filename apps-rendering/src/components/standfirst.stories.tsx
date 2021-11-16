@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Display, Pillar } from '@guardian/types';
+import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { article, comment, feature, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
@@ -14,9 +14,9 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			display: boolean('Immersive', false)
-				? Display.Immersive
-				: Display.Standard,
-			theme: selectPillar(Pillar.News),
+				? ArticleDisplay.Immersive
+				: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -26,9 +26,9 @@ const Review = (): ReactElement => (
 		item={{
 			...review,
 			display: boolean('Immersive', false)
-				? Display.Immersive
-				: Display.Standard,
-			theme: selectPillar(Pillar.Culture),
+				? ArticleDisplay.Immersive
+				: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.Culture),
 		}}
 	/>
 );
@@ -38,9 +38,9 @@ const Feature = (): ReactElement => (
 		item={{
 			...feature,
 			display: boolean('Immersive', false)
-				? Display.Immersive
-				: Display.Standard,
-			theme: selectPillar(Pillar.Sport),
+				? ArticleDisplay.Immersive
+				: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.Sport),
 		}}
 	/>
 );
@@ -50,9 +50,9 @@ const Comment = (): ReactElement => (
 		item={{
 			...comment,
 			display: boolean('Immersive', false)
-				? Display.Immersive
-				: Display.Standard,
-			theme: selectPillar(Pillar.Opinion),
+				? ArticleDisplay.Immersive
+				: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.Opinion),
 		}}
 	/>
 );

@@ -1,9 +1,9 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import { ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial, ArticleTheme } from '@guardian/libs';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 
@@ -42,7 +42,7 @@ const LinkStyle = (pillar: ArticleTheme) => css`
 const standfirstCss = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};
 	font-weight: 100;
-	color: ${palette.neutral[7]};
+	color: ${neutral[7]};
 	margin-bottom: 12px;
 
 	p {

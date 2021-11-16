@@ -66,13 +66,12 @@ const AndroidShareIcon = (): ReactElement => (
 	</svg>
 );
 
-const buttonStyles = css`
-	background: none;
-	border: none;
-	padding: 0;
-	height: 2.5rem;
-
-	svg {
+const hydratedButtonStyles = css`
+	.share-button {
+		background: none;
+		border: none;
+		padding: 0;
+		height: 2.5rem;
 		box-sizing: content-box;
 	}
 `;
@@ -86,18 +85,24 @@ const ShareIcon: FC = () => {
 	}, []);
 
 	return showIcon ? (
-		<button
-			css={buttonStyles}
-			onClick={(): void =>
-				pingEditionsNative({ kind: MessageKind.Share })
-			}
+		<div
+			css={hydratedButtonStyles}
+			className="js-share-button"
+			role="button"
 		>
-			{platform === Platform.IOS ? (
-				<IOSShareIcon />
-			) : (
-				<AndroidShareIcon />
-			)}
-		</button>
+			<button
+				className="share-button"
+				onClick={(): void =>
+					pingEditionsNative({ kind: MessageKind.Share })
+				}
+			>
+				{platform === Platform.IOS ? (
+					<IOSShareIcon />
+				) : (
+					<AndroidShareIcon />
+				)}
+			</button>
+		</div>
 	) : null;
 };
 
