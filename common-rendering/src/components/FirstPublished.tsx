@@ -18,7 +18,6 @@ const FirstPublished = ({
 		<a
 			href={blockLink}
 			data-ignore="global-link-styling"
-			// title={publishedDate.toLocaleString()}
 			css={css`
 				${textSans.xxsmall({ fontWeight: "bold" })}
 				margin-bottom: ${space[1]}px;
