@@ -178,7 +178,7 @@ export const Ad = ({
 }: AdProps) => (
 	<>
 		{adRegions.map((adRegion) => (
-			<ClassNames>
+			<ClassNames key={adRegion}>
 				{({ css, cx }) => (
 					<div
 						className={cx(
