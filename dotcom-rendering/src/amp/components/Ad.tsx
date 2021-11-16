@@ -30,6 +30,12 @@ const ampData = (section: string, contentType: string): string => {
 	return `/${dfpAccountId}/${dfpAdUnitRoot}/amp`;
 };
 
+const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
+const permutiveURL = 'https://guardian.amp.permutive.com/rtc?type=doubleclick';
+const amazonConfig = {
+	aps: { PUB_ID: '3722', PARAMS: { amp: '1' } },
+};
+
 /**
  * Determine the Placement ID that is used to look up a given stored bid request
  *
@@ -62,11 +68,9 @@ const realTimeConfig = (
 	adRegion: AdRegion,
 	usePrebid: boolean,
 	usePermutive: boolean,
-): any => {
+	useAmazon: boolean,
+): string => {
 	const placementID = getPlacementId(isSticky, adRegion);
-	const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
-	const permutiveURL =
-		'https://guardian.amp.permutive.com/rtc?type=doubleclick';
 	const prebidURL = [
 		// The tag_id in the URL is used to look up the bulk of the request
 		// In this case it corresponds to the placement ID of the bid requests
@@ -86,11 +90,16 @@ const realTimeConfig = (
 		'gdpr_consent=CONSENT_STRING',
 	].join('&');
 
+	const urls = [
+		usePrebid ? prebidURL : '',
+		usePermutive ? permutiveURL : '',
+	].filter(Boolean); // remove empty strings, which are falsey
+
+	const vendors = useAmazon ? amazonConfig : {};
+
 	const data = {
-		urls: [
-			usePrebid ? prebidURL : '',
-			usePermutive ? permutiveURL : '',
-		].filter((url) => url),
+		urls,
+		vendors,
 	};
 
 	return JSON.stringify(data);
@@ -99,6 +108,7 @@ const realTimeConfig = (
 interface CommercialConfig {
 	usePrebid: boolean;
 	usePermutive: boolean;
+	useAmazon: boolean;
 }
 
 export interface AdProps {
@@ -152,6 +162,7 @@ export const RegionalAd = ({
 				adRegion,
 				config.usePrebid,
 				config.usePermutive,
+				config.useAmazon,
 			)}
 		/>
 	);
