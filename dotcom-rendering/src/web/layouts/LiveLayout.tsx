@@ -80,7 +80,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 260px 1px 1fr;
+					grid-template-columns: 240px 1px 1fr;
 					grid-template-areas:
 						'lines		border media'
 						'meta		border media'
@@ -91,7 +91,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${from.wide} {
-					grid-template-columns: 260px 1px 1fr 340px;
+					grid-template-columns: 240px 1px 1fr 340px;
 					grid-template-areas:
 						'lines 		border media right-column'
 						'meta  		border media right-column'
@@ -154,17 +154,6 @@ const sticky = css`
 	${from.desktop} {
 		position: sticky;
 		top: 10px;
-	}
-`;
-
-const stretchLines = css`
-	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-	}
-	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
 	}
 `;
 
@@ -436,7 +425,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<></>
 							</GridItem>
 							<GridItem area="lines">
-								<div css={[sidePaddingDesktop, stretchLines]}>
+								<div css={sidePaddingDesktop}>
 									<Lines
 										count={decideLineCount(format.design)}
 										effect={decideLineEffect(
