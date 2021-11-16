@@ -29,7 +29,7 @@ const canShow = ({
 			isValidTag(tags) &&
 			// hide the sign in gate on isPaidContent
 			!isPaidContent &&
-			// hide the sign in gate on internal tools preview &&
+			// hide the sign in gate on internal tools preview
 			!isPreview &&
 			!isIOS9(),
 	);
