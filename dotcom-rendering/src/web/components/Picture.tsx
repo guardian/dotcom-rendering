@@ -123,6 +123,7 @@ const getSizeForBreakpoint = (
 			return breakpoint; // 100vw
 		case 'supporting':
 			if (breakpoint >= breakpoints.wide) return 380;
+			if (breakpoint >= breakpoints.tablet) return 300;
 			return breakpoint; // 100vw
 		case 'showcase':
 			if (breakpoint >= breakpoints.wide) return 860;
