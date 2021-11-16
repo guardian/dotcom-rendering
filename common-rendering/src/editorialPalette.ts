@@ -43,15 +43,10 @@ interface Palette {
 const textHeadline = (format: ArticleFormat): Colour => {
 	if (
 		format.display === ArticleDisplay.Immersive ||
-		format.design === ArticleDesign.Media
+		format.design === ArticleDesign.Media ||
+		format.design === ArticleDesign.LiveBlog
 	) {
 		return neutral[100];
-	}
-
-	if (format.design === ArticleDesign.LiveBlog) {
-		return format.theme === ArticlePillar.Culture
-			? neutral[86]
-			: neutral[93];
 	}
 
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -80,14 +75,16 @@ const textHeadline = (format: ArticleFormat): Colour => {
 };
 
 const textHeadlineDark = (format: ArticleFormat): Colour => {
-	if (
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog
-	) {
-		return neutral[93];
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			return format.theme === ArticlePillar.Culture
+				? neutral[86]
+				: neutral[93];
+		case ArticleDesign.DeadBlog:
+			return neutral[93];
+		default:
+			return neutral[86];
 	}
-
-	return neutral[86];
 };
 
 const textStandfirst = ({ design }: ArticleFormat): Colour => {
