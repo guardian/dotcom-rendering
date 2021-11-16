@@ -1,3 +1,4 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { MatchTabs } from './MatchTabs';
 
 export default {
@@ -10,6 +11,11 @@ export const BothURLs = () => {
 		<MatchTabs
 			minByMinUrl="https://www.theguardian.com/football/live/2021/nov/03/manchester-city-v-club-brugge-champions-league-live-score-updates"
 			reportUrl="https://www.theguardian.com/football/2021/nov/03/manchester-city-club-brugge-champions-league-match-report"
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.Sport,
+			}}
 		/>
 	);
 };
@@ -20,6 +26,11 @@ export const OnReportPage = () => {
 		<MatchTabs
 			minByMinUrl="https://www.theguardian.com/football/live/2021/nov/03/manchester-city-v-club-brugge-champions-league-live-score-updates"
 			reportUrl="https://www.theguardian.com/football/2021/nov/03/manchester-city-club-brugge-champions-league-match-report"
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.Sport,
+			}}
 		/>
 	);
 };
@@ -30,6 +41,11 @@ export const OnBlogPage = () => {
 		<MatchTabs
 			minByMinUrl="https://www.theguardian.com/football/live/2021/nov/03/manchester-city-v-club-brugge-champions-league-live-score-updates"
 			reportUrl="https://www.theguardian.com/football/2021/nov/03/manchester-city-club-brugge-champions-league-match-report"
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.Sport,
+			}}
 		/>
 	);
 };

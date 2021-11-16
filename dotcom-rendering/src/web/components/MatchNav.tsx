@@ -12,7 +12,8 @@ type Props = {
 	awayTeam: TeamType;
 	comments?: string;
 	minByMinUrl?: string;
-	matchURL?: string;
+	reportUrl?: string;
+	format: ArticleFormat;
 };
 
 const Row = ({ children }: { children: React.ReactNode }) => (
@@ -212,7 +213,8 @@ export const MatchNav = ({
 	awayTeam,
 	comments,
 	minByMinUrl,
-	matchURL,
+	reportUrl,
+	format,
 }: Props) => (
 	<div>
 		<StretchBackground>
@@ -236,7 +238,7 @@ export const MatchNav = ({
 		{minByMinUrl && (
 			<MatchTabs
 				minByMinUrl={minByMinUrl}
-				reportUrl={matchURL}
+				reportUrl={reportUrl}
 				format={format}
 			/>
 		)}
