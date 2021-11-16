@@ -109,23 +109,25 @@ const metaContainer = (format: ArticleFormat) => {
 		case ArticleDisplay.Standard: {
 			switch (format.design) {
 				case ArticleDesign.PhotoEssay:
-					return format.theme === ArticleSpecial.Labs
-						&& css`
-								${until.phablet} {
-									margin-left: -20px;
-									margin-right: -20px;
-								}
-								${until.mobileLandscape} {
-									margin-left: -10px;
-									margin-right: -10px;
-								}
-								${from.leftCol} {
-									margin-left: 20px;
-								}
-								${from.wide} {
-									margin-left: 40px;
-								}
-						  `;
+					return (
+						format.theme === ArticleSpecial.Labs &&
+						css`
+							${until.phablet} {
+								margin-left: -20px;
+								margin-right: -20px;
+							}
+							${until.mobileLandscape} {
+								margin-left: -10px;
+								margin-right: -10px;
+							}
+							${from.leftCol} {
+								margin-left: 20px;
+							}
+							${from.wide} {
+								margin-left: 40px;
+							}
+						`
+					);
 			}
 		}
 	}
