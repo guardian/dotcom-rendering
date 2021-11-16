@@ -140,11 +140,13 @@ const sidePaddingMobile = css`
 const keyEventsBottomMargin = css`
 	margin-bottom: ${space[3]}px;
 	${from.desktop} {
-		margin-bottom: ${space[5]}px;
+		margin-bottom: 0;
 	}
 `;
 
 const marginBottomMobile = css`
+	margin-bottom: 0;
+
 	${until.desktop} {
 		margin-bottom: ${space[4]}px;
 	}
