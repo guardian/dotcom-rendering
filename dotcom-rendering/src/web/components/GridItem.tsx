@@ -40,13 +40,10 @@ const gridAreaStyles = (area: string) => {
 	if (area === 'keyevents') {
 		return css`
 			grid-area: ${area};
-			background: white;
-			margin-bottom: ${space[5]}px;
 
 			${from.desktop} {
 				position: sticky;
 				top: 10px;
-				background: none;
 			}
 		`;
 	}

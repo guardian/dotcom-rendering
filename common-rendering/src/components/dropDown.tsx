@@ -16,6 +16,8 @@ interface DropDownProps {
 	children: React.ReactNode;
 	supportsDarkMode: boolean;
 	dropDownTitle: string;
+	backgroundBody?: SerializedStyles;
+	backgroundTitle?: SerializedStyles;
 }
 
 const detailsStyles: SerializedStyles = css`
@@ -31,7 +33,6 @@ const detailsStyles: SerializedStyles = css`
 
 const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	position: relative;
-	margin: 0 ${remSpace[1]} 0 ${remSpace[3]};
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -54,10 +55,6 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		}
 	`}
 
-	${from.phablet} {
-		margin: ${remSpace[1]} ${remSpace[4]} 0;
-	}
-
 	${from.desktop} {
 		display: none;
 	}
@@ -66,26 +63,49 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
 	${headline.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
 	color: ${neutral[7]};
+	padding: 0 ${remSpace[1]} 0 ${remSpace[3]};
 
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[86]};
 	`}
+
+	${from.phablet} {
+		margin: ${remSpace[1]} ${remSpace[4]} 0;
+	}
 `;
 
-const DropDown = ({ children, supportsDarkMode, dropDownTitle }: DropDownProps) => {
+const paddingBody: SerializedStyles = css`
+	padding: ${remSpace[3]};
+
+	${from.phablet} {
+		padding: ${remSpace[3]} ${remSpace[5]} 0;
+	}
+
+	${from.desktop} {
+		padding: 0;
+	}
+`;
+
+const DropDown = ({
+	children,
+	supportsDarkMode,
+	dropDownTitle,
+	backgroundTitle,
+	backgroundBody,
+}: DropDownProps) => {
 	return (
-			<details open css={detailsStyles}>
-				<summary css={titleRowStyles(supportsDarkMode)}>
-					<h2 css={titleStyle(supportsDarkMode)}>{dropDownTitle}</h2>
-					<span className="is-off">
-						<SvgChevronDownSingle />
-					</span>
-					<span className="is-on">
-						<SvgChevronUpSingle />
-					</span>
-				</summary>
-				{children}
-			</details>
+		<details open css={[detailsStyles]}>
+			<summary css={[titleRowStyles(supportsDarkMode), backgroundTitle]}>
+				<h2 css={titleStyle(supportsDarkMode)}>{dropDownTitle}</h2>
+				<span className="is-off">
+					<SvgChevronDownSingle />
+				</span>
+				<span className="is-on">
+					<SvgChevronUpSingle />
+				</span>
+			</summary>
+			<div css={[backgroundBody, paddingBody]}>{children}</div>
+		</details>
 	);
 };
 

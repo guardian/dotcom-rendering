@@ -11,10 +11,11 @@ import {
 	news,
 	sport,
 	opinion,
+	background,
 } from "@guardian/src-foundations/palette"
 import { Link } from "@guardian/src-link";
 import { ArticlePillar, ArticleTheme } from "@guardian/libs";
-import { from } from "@guardian/src-foundations/mq";
+import { from, until } from "@guardian/src-foundations/mq";
 import { darkModeCss } from "../lib";
 import DropDown from "./dropDown";
 
@@ -54,6 +55,12 @@ const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
 	}
 };
 
+const whiteBackground: SerializedStyles = css`
+	${until.desktop} {
+		background-color: ${background.primary};
+	}
+`;
+
 const keyEventWrapperStyles = (
 	supportsDarkMode: boolean
 ): SerializedStyles => css`
@@ -69,16 +76,6 @@ const keyEventWrapperStyles = (
 `;
 
 const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
-	margin: ${remSpace[3]};
-
-	${from.phablet} {
-		margin: ${remSpace[3]} ${remSpace[5]} 0;
-	}
-
-	${from.desktop} {
-		margin: ${remSpace[1]} 0 0;
-	}
-
 	li::before {
 		content: "";
 		border-color: transparent ${neutral[7]};
@@ -165,7 +162,12 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 	return (
 		<div css={keyEventWrapperStyles(supportsDarkMode)}>
-			<DropDown supportsDarkMode={supportsDarkMode} dropDownTitle="Key events">
+			<DropDown
+				supportsDarkMode={supportsDarkMode}
+				dropDownTitle="Key events"
+				backgroundBody={whiteBackground}
+				backgroundTitle={whiteBackground}
+			>
 				<ul css={listStyles(supportsDarkMode)}>
 					{keyEvents.slice(0, 7).map((event, index) => (
 						<ListItem

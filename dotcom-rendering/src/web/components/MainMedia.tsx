@@ -27,18 +27,6 @@ const mainMedia = css`
 	}
 `;
 
-const noGutters = css`
-	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
-	}
-
-	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
-	}
-`;
-
 const immersiveWrapper = css`
 	/*
         Immersive main media is wrapped in a flex div with height 100vw and then
@@ -74,9 +62,7 @@ export const MainMedia: React.FC<{
 	<div
 		css={[
 			mainMedia,
-			format.display === ArticleDisplay.Immersive
-				? immersiveWrapper
-				: noGutters,
+			format.display === ArticleDisplay.Immersive && immersiveWrapper,
 		]}
 	>
 		{elements.map((element, index) =>
