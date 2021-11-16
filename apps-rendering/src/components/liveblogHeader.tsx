@@ -2,9 +2,8 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { textSans } from '@guardian/src-foundations/typography';
-import { Column, Columns, Container } from '@guardian/src-layout';
-import { from, neutral, news, remSpace } from '@guardian/source-foundations';
+import { Column, Columns, Container } from '@guardian/source-react-components';
+import { from, neutral, news, remSpace, textSans } from '@guardian/source-foundations';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';

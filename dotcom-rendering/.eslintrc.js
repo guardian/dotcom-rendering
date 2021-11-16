@@ -35,7 +35,6 @@ module.exports = {
                     'jsdom',
                     'curlyquotes',
                     'react-dom',
-                    '@guardian/src-foundations',
                     '@frontend/lib/',
                     '@frontend/amp/lib/',
                     '@frontend/amp/types',
