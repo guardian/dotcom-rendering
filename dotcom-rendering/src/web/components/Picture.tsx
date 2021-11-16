@@ -21,7 +21,7 @@ export const getClosestSetForWidth = (
 	inlineSrcSets: SrcSetItem[],
 ): SrcSetItem => {
 	// For a desired width, find the SrcSetItem which is the closest match
-	// A match greated than the desired width will always be picked when one is available
+	// A match greater than the desired width will always be picked when one is available
 	const sorted = inlineSrcSets.slice().sort((a, b) => b.width - a.width);
 	return sorted.reduce((best, current) => {
 		if (current.width < best.width && current.width >= desiredWidth) {
@@ -88,7 +88,7 @@ const getSizeForBreakpoint = (
 	format: ArticleFormat,
 ): number => {
 	if (format.display === ArticleDisplay.Immersive && isMainMedia)
-		return breakpoint; // 100vh
+		return breakpoint; // 100vw
 
 	if (
 		(format.display === ArticleDisplay.Showcase ||
@@ -185,6 +185,7 @@ export const Picture = ({
 	);
 	const fallbackSrc = getFallback(hdpiSourceSets);
 
+	// Create an array of breakpoints going from highest to lowest, with 0 as the final option
 	const breakpointSizes: [number, number][] = [
 		...Object.values(breakpoints).reverse(),
 		0,
@@ -206,33 +207,26 @@ export const Picture = ({
 				''
 			)}
 
-			{
-				// Loop through the breakpoints from highest to lowest, adding '0' as the last option
-				optimisedBreakPointSizes.map(([breakpoint, size]) => (
-					<>
-						{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
-						<source
-							srcSet={getSourceSetForSize(
-								size,
-								hdpiSourceSets,
-								true,
-							)}
-							sizes={`${breakpoint || size}px`}
-							media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
-						/>
-						{/* MDPI Source - images in this srcset have `quality=85` in the url */}
-						<source
-							srcSet={getSourceSetForSize(
-								size,
-								mdpiSourcesSets,
-								false,
-							)}
-							sizes={`${breakpoint || size}px`}
-							media={`min-width: ${breakpoint}px`}
-						/>
-					</>
-				))
-			}
+			{optimisedBreakPointSizes.map(([breakpoint, size]) => (
+				<>
+					{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
+					<source
+						srcSet={getSourceSetForSize(size, hdpiSourceSets, true)}
+						sizes={`${breakpoint || size}px`}
+						media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
+					/>
+					{/* MDPI Source - images in this srcset have `quality=85` in the url */}
+					<source
+						srcSet={getSourceSetForSize(
+							size,
+							mdpiSourcesSets,
+							false,
+						)}
+						sizes={`${breakpoint || size}px`}
+						media={`min-width: ${breakpoint}px`}
+					/>
+				</>
+			))}
 
 			<img
 				alt={alt}
