@@ -11,7 +11,7 @@ import {
 	news,
 	opinion,
 	sport,
-} from '@guardian/src-foundations/palette';
+} from '@guardian/source-foundations';
 
 // ----- Types ----- //
 

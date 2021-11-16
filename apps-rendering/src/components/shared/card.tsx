@@ -5,17 +5,23 @@ import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItem
 import Img from '@guardian/common-rendering/src/components/img';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import {
 	background,
+	from,
+	headline,
 	labs,
 	neutral,
 	opinion,
+	remSpace,
 	text,
-} from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { SvgAudio, SvgCamera, SvgQuote, SvgVideo } from '@guardian/src-icons';
+	textSans,
+} from '@guardian/source-foundations';
+import {
+	SvgAudio,
+	SvgCamera,
+	SvgQuote,
+	SvgVideo,
+} from '@guardian/source-react-components';
 import {
 	fromNullable,
 	map,

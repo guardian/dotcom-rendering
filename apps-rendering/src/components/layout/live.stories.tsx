@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-import { breakpoints } from '@guardian/src-foundations';
+import { breakpoints } from '@guardian/source-foundations';
 import { withKnobs } from '@storybook/addon-knobs';
 import Live from 'components/layout/live';
 import { deadBlog, live } from 'fixtures/live';
