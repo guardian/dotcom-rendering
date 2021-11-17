@@ -12,11 +12,16 @@ const logLocation =
 		? '/var/log/dotcom-rendering/dotcom-rendering.log'
 		: `${path.resolve('logs')}/dotcom-rendering.log`;
 
+const stage =
+	typeof process.env.GU_STAGE === 'string'
+		? process.env.GU_STAGE.toUpperCase()
+		: 'DEV';
+
 const logFields = (logEvent: LoggingEvent): any => {
 	const coreFields = {
 		stack: 'frontend',
 		app: 'dotcom-rendering',
-		stage: 'CODE',
+		stage,
 		'@timestamp': logEvent.startTime,
 		'@version': 1,
 		level: logEvent.level.levelStr,

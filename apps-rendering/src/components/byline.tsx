@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, palette } from '@guardian/src-foundations';
+import { labs, neutral } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { map, withDefault } from '@guardian/types';
@@ -44,8 +44,12 @@ const anchorStyles = (
     `}
 `;
 
-const liveBlogColor = (link: string, inverted: string): SerializedStyles => css`
-	color: ${neutral[100]};
+const blogColor = (
+	color: string,
+	link: string,
+	inverted: string,
+): SerializedStyles => css`
+	color: ${color};
 	${from.desktop} {
 		color: ${link};
 	}
@@ -58,14 +62,10 @@ const liveBlogColor = (link: string, inverted: string): SerializedStyles => css`
 	`}
 `;
 
-const liveblogAnchorStyles = (
-	link: string,
-	inverted: string,
-): SerializedStyles => css`
+const blogAnchorStyles = css`
 	${headline.xxxsmall({ fontWeight: 'bold' })}
 	font-style: normal;
 	text-decoration: none;
-	${liveBlogColor(link, inverted)}
 `;
 
 const commentStyles = (kicker: string): SerializedStyles => css`
@@ -88,29 +88,25 @@ const commentAnchorStyles = (
 
 const labsStyles = css`
 	${textSans.medium({ lineHeight: 'regular', fontStyle: 'italic' })}
-	color: ${palette.labs[300]};
+	color: ${labs[300]};
 
 	${darkModeCss`
-        color: ${palette.labs[400]};
+        color: ${labs[400]};
     `}
 `;
 
-const liveblogStyles = (
-	link: string,
-	inverted: string,
-): SerializedStyles => css`
+const blogStyles = css`
 	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
-	${liveBlogColor(link, inverted)}
 `;
 
 const labsAnchorStyles = css`
 	font-weight: bold;
-	color: ${palette.labs[300]};
+	color: ${labs[300]};
 	font-style: normal;
 	text-decoration: none;
 
 	${darkModeCss`
-        color: ${palette.labs[400]};
+        color: ${labs[400]};
     `}
 `;
 
@@ -123,8 +119,9 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
+			return css(blogStyles, blogColor(neutral[100], link, inverted));
 		case ArticleDesign.DeadBlog:
-			return liveblogStyles(link, inverted);
+			return css(blogStyles, blogColor(link, link, neutral[93]));
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
@@ -141,8 +138,12 @@ const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
+			return css(
+				blogAnchorStyles,
+				blogColor(neutral[100], link, inverted),
+			);
 		case ArticleDesign.DeadBlog:
-			return liveblogAnchorStyles(link, inverted);
+			return css(blogAnchorStyles, blogColor(link, link, inverted));
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:

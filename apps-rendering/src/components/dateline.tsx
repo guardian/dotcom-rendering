@@ -39,9 +39,9 @@ const commentDatelineStyles = css`
 	${darkStyles}
 `;
 
-const liveblogDatelineStyles = css`
+const blogDatelineStyles = (color: string): SerializedStyles => css`
 	${textSans.xxsmall()}
-	color: ${neutral[100]};
+	color: ${color};
 
 	${from.desktop} {
 		color: ${neutral[20]};
@@ -58,7 +58,9 @@ const liveblogDatelineStyles = css`
 const getDatelineStyles = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
-			return liveblogDatelineStyles;
+			return blogDatelineStyles(neutral[100]);
+		case ArticleDesign.DeadBlog:
+			return blogDatelineStyles(neutral[20]);
 		default:
 			switch (format.theme) {
 				case ArticlePillar.Opinion:
