@@ -27,8 +27,8 @@ import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 
 import { extractNAV } from '@root/src/model/extract-nav';
 import { fireAndResetHydrationState } from '@root/src/web/components/HydrateOnce';
-import { DecideLayout } from './DecideLayout';
 import { breakpoints } from '@guardian/src-foundations';
+import { DecideLayout } from './DecideLayout';
 
 mockRESTCalls();
 
