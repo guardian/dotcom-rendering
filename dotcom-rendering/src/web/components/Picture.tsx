@@ -15,6 +15,7 @@ type Props = {
 };
 
 type ResolutionType = 'hdpi' | 'mdpi';
+type Pixel = number;
 
 export const getClosestSetForWidth = (
 	desiredWidth: number,
@@ -65,8 +66,8 @@ export const getSourcesFromSrcSets = (sources: SrcSetItem[]) =>
 	sources.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
 
 export const optimiseBreakpointSizes = (
-	breakpointSizes: [number, number][],
-): [number, number][] =>
+	breakpointSizes: [number, Pixel][],
+): [number, Pixel][] =>
 	breakpointSizes.filter(([, size], index) => {
 		// If the NEXT element in the array has the SAME size as this one, we can trust that this current breakpoint is redundant
 		// e.g
@@ -86,7 +87,7 @@ const getSizeForBreakpoint = (
 	role: RoleType,
 	isMainMedia: boolean,
 	format: ArticleFormat,
-): number => {
+): Pixel => {
 	if (format.display === ArticleDisplay.Immersive && isMainMedia)
 		return breakpoint; // 100vw
 
@@ -195,7 +196,7 @@ export const Picture = ({
 		breakpoint,
 		getSizeForBreakpoint(breakpoint, role, isMainMedia, format),
 	]);
-	const optimisedBreakPointSizes: [number, number][] =
+	const optimisedBreakPointSizes: [number, Pixel][] =
 		optimiseBreakpointSizes(breakpointSizes);
 
 	return (
