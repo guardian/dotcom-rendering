@@ -102,22 +102,55 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
 						'media'
-						'lines'
-						'meta'
 						'keyevents'
 						'body';
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0px;
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
 
+const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			/* IE Fallback */
+			display: flex;
+			flex-direction: column;
+			${until.desktop} {
+				margin-left: 0px;
+			}
+			${from.desktop} {
+				margin-left: 320px;
+			}
+
+			@supports (display: grid) {
+				display: grid;
+				width: 100%;
+				margin-left: 0;
+
+				grid-column-gap: 10px;
+
+				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
-						'media'
+						'standfirst'
 						'lines'
-						'meta'
-						'keyevents'
-						'body';
+						'meta';
+				}
+
+				${from.desktop} {
+					grid-template-columns: 309px 1px 1fr;
+					grid-template-areas: 'lastupdated	border	standfirst';
+				}
+
+				${until.tablet} {
+					grid-column-gap: 0px;
 				}
 			}
 		`}
@@ -356,19 +389,60 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<></>
 						)}
 					</ContainerLayout>
-					<ContainerLayout
+					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={palette.background.standfirst}
 						borderColour={palette.border.standfirst}
-						sideBorders={true}
-						leftColSize="wide"
-						verticalMargins={false}
 					>
-						<Standfirst
-							format={format}
-							standfirst={CAPI.standfirst}
-						/>
-					</ContainerLayout>
+						<StandFirstGrid>
+							<GridItem area="standfirst">
+								<Standfirst
+									format={format}
+									standfirst={CAPI.standfirst}
+								/>
+							</GridItem>
+							<GridItem area="lastupdated">
+								<></>
+							</GridItem>
+							<GridItem area="border">
+								<></>
+							</GridItem>
+							<GridItem area="lines">
+								<div css={maxWidth}>
+									<div css={stretchLines}>
+										<Lines
+											count={decideLineCount(
+												format.design,
+											)}
+											effect={decideLineEffect(
+												format.design,
+												format.theme,
+											)}
+										/>
+									</div>
+								</div>
+							</GridItem>
+							<GridItem area="meta">
+								<div css={maxWidth}>
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										palette={palette}
+										pageId={CAPI.pageId}
+										webTitle={CAPI.webTitle}
+										author={CAPI.author}
+										tags={CAPI.tags}
+										primaryDateline={
+											CAPI.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											CAPI.webPublicationSecondaryDateDisplay
+										}
+									/>
+								</div>
+							</GridItem>
+						</StandFirstGrid>
+					</ElementContainer>
 
 					<ElementContainer
 						showTopBorder={false}
