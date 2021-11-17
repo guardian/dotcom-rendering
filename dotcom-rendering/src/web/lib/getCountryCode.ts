@@ -1,6 +1,5 @@
-import { getLocale, storage } from '@guardian/libs';
+import { getCookie, getLocale, storage } from '@guardian/libs';
 import type { CountryCode } from '@guardian/libs';
-import { getCookie } from '@frontend/web/browser/cookie';
 
 const COUNTRY_CODE_KEY = 'GU_geo_country';
 const COUNTRY_CODE_KEY_OVERRIDE = 'gu.geo.override';
@@ -27,7 +26,7 @@ export const getCountryCodeSync = (): CountryCode | null => {
 	return (
 		locale ||
 		storage.local.get(COUNTRY_CODE_KEY_OVERRIDE) ||
-		getCookie(COUNTRY_CODE_KEY)
+		getCookie({ name: COUNTRY_CODE_KEY, shouldMemoize: true })
 	);
 };
 

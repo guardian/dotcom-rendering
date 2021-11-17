@@ -5,10 +5,10 @@ import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
 } from '@frontend/web/components/SignInGate/dismissGate';
-import { getCookie } from '@frontend/web/browser/cookie';
 import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
 
 import { useOnce } from '@frontend/web/lib/useOnce';
+import { getCookie } from '@guardian/libs';
 import {
 	ComponentEventParams,
 	submitViewEventTracking,
@@ -58,8 +58,9 @@ const generateSignInUrl = (
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
 		viewId: window.guardian.ophan.viewId,
-		browserId: getCookie('bwid') || undefined,
-		visitId: getCookie('vsid') || undefined,
+		browserId:
+			getCookie({ name: 'bwid', shouldMemoize: true }) || undefined,
+		visitId: getCookie({ name: 'vsid' }) || undefined,
 	};
 
 	return `${
