@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import { timeAgo } from "@guardian/libs";
-import { neutral, space } from "@guardian/src-foundations";
-import { textSans } from "@guardian/src-foundations/typography";
+import { neutral, space, textSans } from "@guardian/source-foundations";
 
 // TODO: update this code to use shared version when it is available
 const padString = (time: number) => (time < 10 ? `0${time}` : time);
