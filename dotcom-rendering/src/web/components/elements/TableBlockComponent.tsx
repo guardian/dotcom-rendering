@@ -1,16 +1,16 @@
 import { css } from '@emotion/react';
 import { unescapeData } from '@root/src/lib/escapeData';
-import { palette, border } from '@guardian/src-foundations';
+import { border, neutral, text } from '@guardian/src-foundations';
 import { textSans } from '@guardian/src-foundations/typography';
 
 const tableEmbed = css`
 	.table--football {
 		width: 100%;
-		background: ${palette.neutral[97]};
+		background: ${neutral[97]};
 		border-top: 0.0625rem solid ${border.focusHalo};
 		border-collapse: inherit;
 		tr:nth-child(odd) > td {
-			background-color: ${palette.neutral[93]};
+			background-color: ${neutral[93]};
 		}
 		th {
 			padding: 0.5rem;
@@ -29,7 +29,7 @@ const tableEmbed = css`
 		}
 		tr > th:first-child,
 		td:first-child {
-			color: ${palette.text.supporting};
+			color: ${text.supporting};
 		}
 		.table-column--main {
 			width: 100%;

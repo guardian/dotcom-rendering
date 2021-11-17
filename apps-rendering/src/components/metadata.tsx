@@ -1,7 +1,9 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	Lines,
 	ToggleSwitch,
@@ -22,6 +24,7 @@ import {
 	sidePadding,
 	wideColumnWidth,
 } from 'styles';
+import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
@@ -48,30 +51,31 @@ const withBylineTextStyles = css`
 
 const blogStyles = css`
 	display: block;
-	margin-bottom: ${remSpace[2]};
+	margin-bottom: 0;
 	${from.desktop} {
 		width: ${wideColumnWidth}px;
 	}
 `;
 
-const metaBottomStyles = css`
+const metaBottomStyles = (isLive: boolean): SerializedStyles => css`
 	display: flex;
 	border-top: 1px solid rgba(255, 255, 255, 0.4);
 
 	${from.desktop} {
 		border-top: 1px solid ${neutral[86]};
 	}
+
+	${!isLive && `border-top: 1px solid rgba(153, 153, 153, 0.4);`}
 `;
 
 const toggleStyles = css`
 	flex-grow: 1;
-	padding-top: ${remSpace[2]};
 `;
 
 const liveblogSidePadding = css`
 	${sidePadding}
 
-	padding-bottom: ${remSpace[3]};
+	padding-bottom: ${remSpace[2]};
 
 	${liveblogPhabletSidePadding}
 
@@ -122,6 +126,61 @@ const linesDarkStyles = css`
 	${darkModeCss`${from.desktop} {display: block;}`}
 `;
 
+const isLive = (design: ArticleDesign): boolean =>
+	design === ArticleDesign.LiveBlog;
+
+// This styling function is only temprarily used and will be removed
+// after the liveblog header is completed and ackground colours
+// are added
+const tempraryBackgroundStyle = (format: ArticleFormat): SerializedStyles => {
+	const themeStyles = getThemeStyles(format.theme);
+	switch (format.design) {
+		case ArticleDesign.DeadBlog:
+			return css`
+				background-color: ${neutral[93]};
+				${from.desktop} {
+					background-color: ${neutral[97]};
+				}
+				@media (prefers-color-scheme: dark) {
+					background-color: ${neutral[10]};
+				}
+			`;
+		default:
+			return css`
+				background-color: ${themeStyles.liveblogBackground};
+				${from.desktop} {
+					background-color: ${neutral[97]};
+				}
+				@media (prefers-color-scheme: dark) {
+					background-color: ${themeStyles.liveblogDarkBackground};
+					${from.desktop} {
+						background-color: ${neutral[10]};
+					}
+				}
+			`;
+	}
+};
+
+const BlogLines: FC<Item> = (item: Item) => (
+	<>
+		<Lines
+			color={
+				isLive(item.design)
+					? 'rgba(255, 255, 255, 0.4)'
+					: 'rgba(153, 153, 153, 0.4)'
+			}
+			cssOverrides={linesStyles}
+		/>
+		<Lines color={neutral[86]} cssOverrides={linesDesktopStyles} />
+		<Lines
+			color={
+				isLive(item.design) ? neutral[20] : 'rgba(237, 237, 237, 0.4)'
+			}
+			cssOverrides={linesDarkStyles}
+		/>
+	</>
+);
+
 const MetadataWithByline: FC<Props> = ({ item }: Props) => (
 	<div css={css(styles, withBylineStyles)}>
 		<Avatar {...item} />
@@ -145,15 +204,18 @@ const ShortMetadata: FC<Props> = ({ item }: Props) => (
 );
 
 const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
+	const { design } = item;
 	const [checked, setChecked] = useState<boolean>(false);
 	return (
-		<div css={css(styles, withBylineStyles, blogStyles)}>
-			<Lines
-				color={'rgba(255, 255, 255, 0.4)'}
-				cssOverrides={linesStyles}
-			/>
-			<Lines color={neutral[86]} cssOverrides={linesDesktopStyles} />
-			<Lines color={neutral[20]} cssOverrides={linesDarkStyles} />
+		<div
+			css={css(
+				styles,
+				withBylineStyles,
+				blogStyles,
+				tempraryBackgroundStyle(item),
+			)}
+		>
+			<BlogLines {...item} />
 			<Avatar {...item} />
 			<div
 				css={css(textStyles, withBylineTextStyles, liveblogSidePadding)}
@@ -164,18 +226,20 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 				<Dateline date={item.publishDate} format={item} />
 				<Follow {...item} />
 			</div>
-			<div css={metaBottomStyles}>
-				<div css={css(toggleStyles, liveblogSidePadding)}>
-					<ToggleSwitch
-						checked={checked}
-						label={'Get alerts on this story'}
-						cssOverrides={toggleOverrideStyles}
-						onClick={(e): void => {
-							setChecked(!checked);
-							console.log('changed toggle');
-						}}
-					></ToggleSwitch>
-				</div>
+			<div css={metaBottomStyles(isLive(design))}>
+				{isLive(design) && (
+					<div css={css(toggleStyles, liveblogSidePadding)}>
+						<ToggleSwitch
+							checked={checked}
+							label={'Get alerts on this story'}
+							cssOverrides={toggleOverrideStyles}
+							onClick={(e): void => {
+								setChecked(!checked);
+								console.log('changed toggle');
+							}}
+						></ToggleSwitch>
+					</div>
+				)}
 				<CommentCount count={item.commentCount} {...item} />
 			</div>
 		</div>

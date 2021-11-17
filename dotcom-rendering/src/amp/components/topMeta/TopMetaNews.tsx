@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
@@ -25,7 +25,7 @@ const headerStyle = css`
 	font-weight: 500;
 	padding-bottom: 24px;
 	padding-top: 3px;
-	color: ${palette.neutral[7]};
+	color: ${neutral[7]};
 `;
 const bylineStyle = (pillar: ArticleTheme) => css`
 	${headline.xxxsmall()};

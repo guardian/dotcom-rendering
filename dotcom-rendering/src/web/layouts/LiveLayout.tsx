@@ -215,7 +215,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		config: { isPaidContent, host },
 	} = CAPI;
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+	const adTargeting: AdTargeting = buildAdTargeting({
+		isAdFreeUser: CAPI.isAdFreeUser,
+		isSensitive: CAPI.config.isSensitive,
+		videoDuration: CAPI.config.videoDuration,
+		edition: CAPI.config.edition,
+		section: CAPI.config.section,
+		sharedAdTargeting: CAPI.config.sharedAdTargeting,
+		adUnit: CAPI.config.adUnit,
+	});
 
 	const showBodyEndSlot =
 		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
@@ -304,7 +312,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								palette={palette}
 								format={format}
 							/>
 						</ElementContainer>
@@ -637,8 +644,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							discussionApiUrl={CAPI.config.discussionApiUrl}
 							shortUrlId={CAPI.config.shortUrlId}
 							isCommentable={CAPI.isCommentable}
-							pillar={format.theme}
-							palette={palette}
+							format={format}
 							discussionD2Uid={CAPI.config.discussionD2Uid}
 							discussionApiClientHeader={
 								CAPI.config.discussionApiClientHeader
@@ -647,7 +653,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							isAdFreeUser={CAPI.isAdFreeUser}
 							shouldHideAds={CAPI.shouldHideAds}
 							beingHydrated={false}
-							display={format.display}
 						/>
 					</ElementContainer>
 				)}
@@ -695,7 +700,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						palette={palette}
 						format={format}
 					/>
 				</ElementContainer>

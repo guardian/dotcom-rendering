@@ -86,10 +86,10 @@ const styles = (iconColor: string): SerializedStyles => {
 		justify-content: space-between;
 		font-style: italic;
 		svg {
-			flex: 0 0 1.875rem;
+			flex: 0 0 2.25rem;
 			padding-top: 0.375rem;
-			width: 1.875rem;
-			height: 1.875rem;
+			width: 2.25rem;
+			height: 2.25rem;
 
 			circle {
 				stroke: ${iconColor};
@@ -258,11 +258,7 @@ const Byline: FC<Props> = ({ item }) => {
 	return maybeRender(item.bylineHtml, (byline) => (
 		<div css={getBylineStyles(format, iconColor, hasImage)}>
 			<address>{renderText(byline, format)}</address>
-			{showShareIcon && (
-				<span className="js-share-button" role="button">
-					<ShareIcon />
-				</span>
-			)}
+			{showShareIcon && <ShareIcon />}
 			{hasAvatar(item) && (
 				<div css={avatarWrapperStyles}>
 					<EditionsAvatar item={item} />

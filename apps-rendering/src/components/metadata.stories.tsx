@@ -3,13 +3,13 @@
 import { css } from '@emotion/react';
 import { neutral } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import { live } from 'fixtures/live';
+import { deadBlog, live } from 'fixtures/live';
 import type { FC } from 'react';
 import Metadata from './metadata';
 
 // ----- Stories ----- //
 
-const containerStyles = css`
+const liveContainerStyles = css`
 	background: rgb(139, 0, 0);
 
 	${from.desktop} {
@@ -17,9 +17,23 @@ const containerStyles = css`
 	}
 `;
 
+const deadContainerStyles = css`
+	background: ${neutral[93]};
+
+	${from.desktop} {
+		background-color: ${neutral[97]};
+	}
+`;
+
 const LiveblogMetadata: FC = () => (
-	<div css={containerStyles}>
+	<div css={liveContainerStyles}>
 		<Metadata item={{ ...live }} />
+	</div>
+);
+
+const DeadBlogMetadata: FC = () => (
+	<div css={deadContainerStyles}>
+		<Metadata item={{ ...deadBlog }} />
 	</div>
 );
 
@@ -30,4 +44,4 @@ export default {
 	title: 'AR/Metadata',
 };
 
-export { LiveblogMetadata };
+export { LiveblogMetadata, DeadBlogMetadata };

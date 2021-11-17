@@ -2,12 +2,14 @@
 import { breakpoints } from '@guardian/src-foundations';
 import { withKnobs } from '@storybook/addon-knobs';
 import Live from 'components/layout/live';
-import { live } from 'fixtures/live';
+import { deadBlog, live } from 'fixtures/live';
 import type { ReactElement } from 'react';
 
 // ----- Stories ----- //
 
 const Default = (): ReactElement => <Live item={{ ...live }} />;
+
+const DeadBlog = (): ReactElement => <Live item={{ ...deadBlog }} />;
 
 // ----- Exports ----- //
 
@@ -24,4 +26,4 @@ export default {
 	},
 };
 
-export { Default };
+export { Default, DeadBlog };

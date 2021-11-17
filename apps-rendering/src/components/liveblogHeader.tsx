@@ -24,7 +24,6 @@ const headerBackgroundStyles = ({
 	liveblogDarkBackground,
 }: ThemeStyles): SerializedStyles => css`
 	background-color: ${liveblogBackground};
-
 	@media (prefers-color-scheme: dark) {
 		background-color: ${liveblogDarkBackground};
 	}
@@ -32,7 +31,6 @@ const headerBackgroundStyles = ({
 
 const metadataStyles = (themeStyle: ThemeStyles): SerializedStyles => css`
 	${headerBackgroundStyles(themeStyle)}
-
 	${from.desktop} {
 		background-color: ${neutral[97]};
 		padding: ${remSpace[3]} ${remSpace[5]};

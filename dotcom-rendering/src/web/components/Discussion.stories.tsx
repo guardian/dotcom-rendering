@@ -1,5 +1,4 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
 
 import { Discussion } from './Discussion';
 
@@ -14,19 +13,17 @@ export const Basic = () => {
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/4v8kk"
 				isCommentable={true}
-				pillar={3}
-				palette={decidePalette({
+				format={{
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Culture,
-				})}
+				}}
 				discussionD2Uid="zHoBy6HNKsk"
 				discussionApiClientHeader="nextgen"
 				enableDiscussionSwitch={true}
 				isAdFreeUser={false}
 				shouldHideAds={false}
 				beingHydrated={true}
-				display={0}
 			/>
 		</div>
 	);
