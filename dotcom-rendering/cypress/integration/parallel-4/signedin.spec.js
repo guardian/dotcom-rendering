@@ -28,7 +28,11 @@ describe('Signed in readers', function () {
 			return false;
 		});
 		// Mock call to 'profile/me'
-		cy.intercept('GET', '**/profile/me', profileResponse);
+		cy.intercept(
+			'GET',
+			'**/profile/me?strict_sanctions_check=false',
+			profileResponse,
+		);
 		cy.visit(`Article?url=${articleUrl}`);
 		// This text is shown in the header for signed in users
 		cy.contains('My account');
