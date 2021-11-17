@@ -384,7 +384,7 @@ const backgroundArticle = (format: ArticleFormat): string => {
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
 	)
-		return neutral[93];
+		return neutral[97];
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === ArticleDesign.Letter) return opinion[800];
 	if (format.design === ArticleDesign.Comment) return opinion[800];
@@ -493,6 +493,15 @@ const backgroundBullet = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundBulletStandfirst = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.DeadBlog:
+			return neutral[60];
+		default:
+			return neutral[86]; // default previously defined in Standfirst.tsx
+	}
+};
+
 const backgroundHeader = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -507,7 +516,7 @@ const backgroundStandfirst = (format: ArticleFormat): string => {
 		case ArticleDesign.LiveBlog:
 			return pillarPalette[format.theme][300];
 		case ArticleDesign.DeadBlog:
-			return neutral[86];
+			return neutral[93];
 		default:
 			return backgroundArticle(format);
 	}
@@ -776,6 +785,32 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
+const textPagination = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+			return pillarPalette[format.theme][400];
+		default:
+			return pillarPalette[format.theme][300];
+	}
+};
+
+const borderPagination = (): string => {
+	return neutral[86];
+};
+
+const hoverPagination = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+			return pillarPalette[format.theme][400];
+		default:
+			return pillarPalette[format.theme][300];
+	}
+};
+
 export const decidePalette = (format: ArticleFormat): Palette => {
 	return {
 		text: {
@@ -816,6 +851,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			overlayedCaption: textOverlayed(),
+			pagination: textPagination(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -826,6 +862,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
+			bulletStandfirst: backgroundBulletStandfirst(format),
 			header: backgroundHeader(format),
 			standfirst: backgroundStandfirst(format),
 			richLink: backgroundRichLink(format),
@@ -858,12 +895,14 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
 			lines: borderLines(format),
+			pagination: borderPagination(),
 		},
 		topBar: {
 			card: topBarCard(format),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
+			pagination: hoverPagination(format),
 		},
 	};
 };

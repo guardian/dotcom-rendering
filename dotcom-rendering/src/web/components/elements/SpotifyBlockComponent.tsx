@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { Caption } from '@root/src/web/components/Caption';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 export const SpotifyBlockComponent: React.FC<{
 	embedUrl?: string;
@@ -7,16 +8,17 @@ export const SpotifyBlockComponent: React.FC<{
 	width?: number;
 	title?: string;
 	format: ArticleFormat;
-	palette: Palette;
 	caption?: string;
 	credit?: string;
-}> = ({ embedUrl, width, height, title, format, palette, caption, credit }) => {
+}> = ({ embedUrl, width, height, title, format, caption, credit }) => {
 	const embedContainer = css`
 		iframe {
 			width: 100%;
 		}
 		margin-bottom: 16px;
 	`;
+
+	const palette = decidePalette(format);
 
 	return (
 		<>

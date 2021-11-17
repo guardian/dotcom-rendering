@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { palette } from '@guardian/src-foundations';
-import { text } from '@guardian/src-foundations/palette';
+import { neutral, text } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
@@ -13,8 +12,8 @@ const richLinkContainer = css`
 	padding: 4px;
 	padding-bottom: 18px;
 	margin: 4px 10px 12px 0;
-	background-color: ${palette.neutral[93]};
-	border-top: 1px solid ${palette.neutral[86]};
+	background-color: ${neutral[93]};
+	border-top: 1px solid ${neutral[86]};
 	margin-right: 20px;
 `;
 

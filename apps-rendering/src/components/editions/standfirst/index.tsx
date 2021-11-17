@@ -66,11 +66,11 @@ const styles = (kickerColor: string): SerializedStyles => css`
 	}
 
 	svg {
-		flex: 0 0 1.875rem;
+		flex: 0 0 2.25rem;
 		margin-top: 0.375rem;
 		padding-left: 0.5rem;
-		width: 1.875rem;
-		height: 1.875rem;
+		width: 2.25rem;
+		height: 2.25rem;
 
 		circle {
 			stroke: ${kickerColor};
@@ -136,11 +136,7 @@ const Standfirst: FC<Props> = ({ item, shareIcon }) => {
 			<div css={textContainerStyles}>
 				{renderStandfirstText(standfirst, item, isEditions)}
 			</div>
-			{shareIcon && (
-				<span className="js-share-button" role="button">
-					<ShareIcon />
-				</span>
-			)}
+			{shareIcon && <ShareIcon />}
 		</div>
 	));
 };

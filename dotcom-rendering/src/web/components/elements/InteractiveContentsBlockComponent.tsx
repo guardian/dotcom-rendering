@@ -77,7 +77,8 @@ const stickyOlStyles = (showStickyNavOption: boolean) => css`
 	top: 0;
 	position: fixed;
 	margin-top: ${space[12]}px;
-
+	max-height: 90vh;
+	overflow-y: auto;
 	display: none;
 	${showStickyNavOption && 'display: grid;'}
 `;

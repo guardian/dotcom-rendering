@@ -6,8 +6,7 @@ import {
 	ArticleSpecial as Special,
 } from '@guardian/libs';
 import { until } from '@guardian/src-foundations/mq';
-import { text } from '@guardian/src-foundations/palette';
-import { palette } from '@guardian/src-foundations';
+import { text, neutral, opinion } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 
 import { Elements } from '@root/src/amp/components/Elements';
@@ -48,13 +47,13 @@ const bulletStyle = (pillar: ArticleTheme) => css`
 `;
 
 const decideBackground = (design: Design, pillar: ArticleTheme): string => {
-	if (pillar === Special.Labs) return palette.neutral[86];
+	if (pillar === Special.Labs) return neutral[86];
 	switch (design) {
 		case Design.Comment:
 		case Design.Letter:
-			return palette.opinion[800];
+			return opinion[800];
 		default:
-			return palette.neutral[100];
+			return neutral[100];
 	}
 };
 
@@ -67,8 +66,8 @@ const body = (pillar: ArticlePillar, design: Design) => {
 
 const adStyle = css`
 	float: right;
-	background: ${palette.neutral[93]};
-	border-top: 1px solid ${palette.neutral[86]};
+	background: ${neutral[93]};
+	border-top: 1px solid ${neutral[86]};
 	width: min-content;
 	height: min-content;
 	clear: both;
@@ -99,9 +98,14 @@ export const Body: React.FC<{
 	config: ConfigType;
 }> = ({ data, config }) => {
 	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
-	const adTargeting = buildAdTargeting({
+	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: data.isAdFreeUser,
-		config,
+		isSensitive: config.isSensitive,
+		videoDuration: config.videoDuration,
+		edition: config.edition,
+		section: config.section,
+		sharedAdTargeting: config.sharedAdTargeting,
+		adUnit: config.adUnit,
 	});
 	const design = decideDesign(data.format);
 	const pillar = decideTheme(data.format);

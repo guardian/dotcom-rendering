@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { VideoFacebookBlockComponent } from './VideoFacebookBlockComponent';
 
 export default {
@@ -36,11 +35,6 @@ export const largeAspectRatio = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 			/>
 			<p>abc</p>
 		</Container>
@@ -64,11 +58,6 @@ export const verticalAspectRatio = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 			/>
 			<p>abc</p>
 		</Container>

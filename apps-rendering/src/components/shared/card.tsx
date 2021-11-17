@@ -6,10 +6,11 @@ import Img from '@guardian/common-rendering/src/components/img';
 import { border } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { palette, remSpace } from '@guardian/src-foundations';
+import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import {
 	background,
+	labs,
 	neutral,
 	opinion,
 	text,
@@ -42,7 +43,7 @@ const borderColor = (
 	format: ArticleFormat,
 ): SerializedStyles => {
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
-		return css`1px solid ${palette.labs[300]}`;
+		return css`1px solid ${labs[300]}`;
 	} else {
 		return css`1px solid ${getThemeStyles(format.theme).kicker}`;
 	}

@@ -15,10 +15,10 @@ import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { palette, remSpace } from '@guardian/src-foundations';
+import { remSpace } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import type { Breakpoint } from '@guardian/src-foundations/mq';
-import { neutral } from '@guardian/src-foundations/palette';
+import { labs, neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import {
 	andThen,
@@ -157,6 +157,8 @@ const TweetStyles = css`
 	}
 `;
 
+//Elements rendered by this function should contain no styles.
+// For example in callout form and interactives we want to exclude styles.
 const plainTextElement = (node: Node, key: number): ReactNode => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map(plainTextElement);
@@ -223,7 +225,7 @@ const textElement =
 						key,
 						isEditions,
 					},
-					transform(text, format),
+					children,
 				);
 			case 'H2':
 				return text.includes('* * *')
@@ -238,7 +240,11 @@ const textElement =
 					? h('blockquote', { key }, children)
 					: h(Blockquote, { key, format }, children);
 			case 'STRONG':
-				return h('strong', { key }, children);
+				return styledH(
+					'strong',
+					{ css: { fontWeight: 'bold' }, key },
+					children,
+				);
 			case 'B':
 				return h('b', { key }, children);
 			case 'EM':
@@ -268,11 +274,11 @@ const isBlog = (format: ArticleFormat): boolean =>
 
 const linkColourFromFormat = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) {
-		return palette.labs[300];
+		return labs[300];
 	}
 
 	if (isBlog(format)) {
-		return palette.neutral[100];
+		return neutral[100];
 	}
 
 	const { kicker, inverted } = getThemeStyles(format.theme);
@@ -300,7 +306,11 @@ const standfirstTextElement =
 			case 'P':
 				return h('p', { key }, children);
 			case 'STRONG':
-				return h('strong', { key }, children);
+				return styledH(
+					'strong',
+					{ css: { fontWeight: 'bold' }, key },
+					children,
+				);
 			case 'UL':
 				return h(List, { children });
 			case 'LI':

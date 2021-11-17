@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, palette } from '@guardian/src-foundations';
+import { labs, neutral } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { map, withDefault } from '@guardian/types';
@@ -88,10 +88,10 @@ const commentAnchorStyles = (
 
 const labsStyles = css`
 	${textSans.medium({ lineHeight: 'regular', fontStyle: 'italic' })}
-	color: ${palette.labs[300]};
+	color: ${labs[300]};
 
 	${darkModeCss`
-        color: ${palette.labs[400]};
+        color: ${labs[400]};
     `}
 `;
 
@@ -101,12 +101,12 @@ const blogStyles = css`
 
 const labsAnchorStyles = css`
 	font-weight: bold;
-	color: ${palette.labs[300]};
+	color: ${labs[300]};
 	font-style: normal;
 	text-decoration: none;
 
 	${darkModeCss`
-        color: ${palette.labs[400]};
+        color: ${labs[400]};
     `}
 `;
 

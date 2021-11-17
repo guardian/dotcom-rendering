@@ -561,7 +561,7 @@ describe('Paragraph tags rendered correctly', () => {
 		);
 		const nodes = renderStandfirstText(fragment, mockFormat);
 		const html = getHtml(nodes.flat()[0]);
-		expect(html).toContain('<strong><p>Standfirst link</p></strong>');
+		expect(html).toContain('<p>Standfirst link</p>');
 	});
 
 	test('Contains styles in article body', () => {
