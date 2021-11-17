@@ -28,6 +28,7 @@ import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
 import { extractNAV } from '@root/src/model/extract-nav';
 import { fireAndResetHydrationState } from '@root/src/web/components/HydrateOnce';
 import { DecideLayout } from './DecideLayout';
+import { breakpoints } from '@guardian/src-foundations';
 
 mockRESTCalls();
 
@@ -112,7 +113,14 @@ export const LiveStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(LiveBlog);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-LiveStory.story = { name: 'LiveBlog' };
+LiveStory.story = {
+	name: 'LiveBlog',
+	parameters: {
+		chromatic: {
+			viewports: [breakpoints.tablet, breakpoints.wide],
+		},
+	},
+};
 
 export const DeadStory = (): React.ReactNode => {
 	const DeadBlog = {
@@ -125,7 +133,14 @@ export const DeadStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(DeadBlog);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-DeadStory.story = { name: 'DeadBlog' };
+DeadStory.story = {
+	name: 'DeadBlog',
+	parameters: {
+		chromatic: {
+			viewports: [breakpoints.tablet, breakpoints.wide],
+		},
+	},
+};
 
 export const EditorialStory = (): React.ReactNode => {
 	const ServerCAPI = convertToShowcase(Editorial);
