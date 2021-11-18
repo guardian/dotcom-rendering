@@ -13,6 +13,7 @@ import { record } from '@root/src/web/browser/ophan/ophan';
 
 import { Caption } from '@root/src/web/components/Caption';
 import { useOnce } from '@root/src/web/lib/useOnce';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
 	id: string;
@@ -21,7 +22,6 @@ type Props = {
 	assetId: string;
 	expired: boolean;
 	format: ArticleFormat;
-	palette: Palette;
 	role: RoleType;
 	hideCaption?: boolean;
 	overrideImage?: string;
@@ -77,7 +77,6 @@ export const YoutubeBlockComponent = ({
 	mediaTitle,
 	altText,
 	format,
-	palette,
 	hideCaption,
 	overrideImage,
 	posterImage,
@@ -115,6 +114,7 @@ export const YoutubeBlockComponent = ({
 			});
 	}, []);
 
+	const palette = decidePalette(format);
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');

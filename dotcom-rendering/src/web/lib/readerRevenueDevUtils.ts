@@ -9,13 +9,13 @@ import {
 	SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
 	SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE,
 } from '@root/src/web/lib/contributions';
+import { setAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import {
-	addCookie,
+	CountryCode,
+	setCookie,
 	getCookie,
 	removeCookie,
-} from '@root/src/web/browser/cookie';
-import { setAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
-import { CountryCode } from '@guardian/libs';
+} from '@guardian/libs';
 
 const readerRevenueCookies = [
 	HIDE_SUPPORT_MESSAGING_COOKIE,
@@ -35,29 +35,41 @@ const clearBannerLastClosedAt = (): void => {
 };
 
 const fakeOneOffContributor = (): void =>
-	addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, Date.now().toString());
+	setCookie({
+		name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
+		value: Date.now().toString(),
+	});
 
 const MULTIVARIATE_ID_COOKIE = 'GU_mvt_id';
 const MAX_CLIENT_MVT_ID = 1000000;
 const incrementMvtCookie = (): void => {
-	const mvtId = parseInt(getCookie(MULTIVARIATE_ID_COOKIE) || '10', 10);
+	const mvtId = parseInt(
+		getCookie({ name: MULTIVARIATE_ID_COOKIE }) || '10',
+		10,
+	);
 	if (mvtId) {
 		if (mvtId === MAX_CLIENT_MVT_ID) {
 			// Wrap back to 1 if it would exceed the max
-			addCookie(MULTIVARIATE_ID_COOKIE, '1');
+			setCookie({ name: MULTIVARIATE_ID_COOKIE, value: '1' });
 		} else {
-			addCookie(MULTIVARIATE_ID_COOKIE, `${mvtId + 1}`);
+			setCookie({ name: MULTIVARIATE_ID_COOKIE, value: `${mvtId + 1}` });
 		}
 	}
 };
 const decrementMvtCookie = (): void => {
-	const mvtId = parseInt(getCookie(MULTIVARIATE_ID_COOKIE) || '10', 10);
+	const mvtId = parseInt(
+		getCookie({ name: MULTIVARIATE_ID_COOKIE }) || '10',
+		10,
+	);
 	if (mvtId) {
 		if (mvtId === 0) {
 			// Wrap back to max if it would be less than 0
-			addCookie(MULTIVARIATE_ID_COOKIE, MAX_CLIENT_MVT_ID.toString());
+			setCookie({
+				name: MULTIVARIATE_ID_COOKIE,
+				value: MAX_CLIENT_MVT_ID.toString(),
+			});
 		} else {
-			addCookie(MULTIVARIATE_ID_COOKIE, `${mvtId - 1}`);
+			setCookie({ name: MULTIVARIATE_ID_COOKIE, value: `${mvtId - 1}` });
 		}
 	}
 };
@@ -75,7 +87,7 @@ const clearCommonReaderRevenueStateAndReload = (
 		return;
 	}
 
-	readerRevenueCookies.forEach((cookie) => removeCookie(cookie));
+	readerRevenueCookies.forEach((cookie) => removeCookie({ name: cookie }));
 	clearEpicViewLog();
 
 	if (asExistingSupporter) {

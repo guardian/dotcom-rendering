@@ -44,12 +44,17 @@ import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getCookie } from '@root/src/web/browser/cookie';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
-import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	storage,
+	log,
+	getCookie,
+} from '@guardian/libs';
 import type { ArticleFormat, CountryCode } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -73,6 +78,7 @@ import {
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
 import { decidePalette } from '../lib/decidePalette';
+import { trackPerformance } from '../browser/ga/ga';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 
@@ -160,7 +166,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		undefined,
 	);
 	useOnce(() => {
-		setBrowserId(getCookie('bwid'));
+		setBrowserId(getCookie({ name: 'bwid', shouldMemoize: true }));
 		log('dotcom', 'State: browserId set');
 	}, []);
 
@@ -194,7 +200,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	}, [ABTestAPI]);
 
 	useEffect(() => {
-		setIsSignedIn(!!getCookie('GU_U'));
+		setIsSignedIn(!!getCookie({ name: 'GU_U', shouldMemoize: true }));
 		log('dotcom', 'State: isSignedIn set');
 	}, []);
 
@@ -315,9 +321,16 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		design,
 		theme: pillar,
 	};
-	const palette = decidePalette(format);
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+	const adTargeting: AdTargeting = buildAdTargeting({
+		isAdFreeUser: CAPI.isAdFreeUser,
+		isSensitive: CAPI.config.isSensitive,
+		videoDuration: CAPI.config.videoDuration,
+		edition: CAPI.config.edition,
+		section: CAPI.config.section,
+		sharedAdTargeting: CAPI.config.sharedAdTargeting,
+		adUnit: CAPI.config.adUnit,
+	});
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const YoutubeBlockComponent = loadable(
@@ -691,7 +704,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
 						format={format}
-						palette={palette}
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
@@ -717,7 +729,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						role={interactiveBlock.role}
 						caption={interactiveBlock.caption}
 						format={format}
-						palette={palette}
 					/>
 				</HydrateInteractiveOnce>
 			))}
@@ -768,7 +779,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
-							palette={palette}
 							format={format}
 						/>
 					</>
@@ -809,10 +819,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			))}
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
-					<CalloutBlockComponent
-						callout={callout}
-						palette={palette}
-					/>
+					<CalloutBlockComponent callout={callout} format={format} />
 				</HydrateOnce>
 			))}
 			{chartAtoms.map((chartAtom) => (
@@ -1026,7 +1033,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					>
 						<MapEmbedBlockComponent
 							format={format}
-							palette={palette}
 							embedUrl={map.embedUrl}
 							height={map.height}
 							width={map.width}
@@ -1051,7 +1057,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 							width={spotify.width}
 							title={spotify.title}
 							format={format}
-							palette={palette}
 							caption={spotify.caption}
 							credit="Spotify"
 						/>
@@ -1068,7 +1073,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					>
 						<VideoFacebookBlockComponent
 							format={format}
-							palette={palette}
 							embedUrl={facebookVideo.embedUrl}
 							height={facebookVideo.height}
 							width={facebookVideo.width}
@@ -1176,15 +1180,26 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</Lazy>
 			</Portal>
 			<Portal rootId="sign-in-gate">
-				<SignInGateSelector isSignedIn={isSignedIn} CAPI={CAPI} />
+				<SignInGateSelector
+					isSignedIn={isSignedIn}
+					format={format}
+					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
+					tags={CAPI.tags}
+					isPaidContent={CAPI.pageType.isPaidContent}
+					isPreview={!!CAPI.isPreview}
+					host={CAPI.config.host}
+					pageId={CAPI.pageId}
+					idUrl={CAPI.config.idUrl}
+					pageViewId={pageViewId}
+				/>
 			</Portal>
 			<HydrateOnce rootId="comments" waitFor={[user]}>
 				<Discussion
+					format={format}
 					discussionApiUrl={CAPI.config.discussionApiUrl}
 					shortUrlId={CAPI.config.shortUrlId}
 					isCommentable={CAPI.isCommentable}
-					pillar={pillar}
-					palette={palette}
 					user={user || undefined}
 					discussionD2Uid={CAPI.config.discussionD2Uid}
 					discussionApiClientHeader={
@@ -1194,15 +1209,13 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					isAdFreeUser={CAPI.isAdFreeUser}
 					shouldHideAds={CAPI.shouldHideAds}
 					beingHydrated={true}
-					display={display}
 				/>
 			</HydrateOnce>
 			<Portal rootId="most-viewed-footer">
 				<MostViewedFooter
-					palette={palette}
+					format={format}
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
-					display={display}
 				/>
 			</Portal>
 			<Portal rootId="reader-revenue-links-footer">
@@ -1226,8 +1239,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					asyncCountryCode={asyncCountryCode}
 					CAPI={CAPI}
 					brazeMessages={brazeMessages}
-					isPreview={!!CAPI.isPreview}
 					asyncArticleCount={asyncArticleCount}
+					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
+					tags={CAPI.tags}
+					isPaidContent={CAPI.pageType.isPaidContent}
+					isPreview={!!CAPI.isPreview}
 				/>
 			</Portal>
 		</React.StrictMode>

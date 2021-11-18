@@ -960,11 +960,6 @@ export const SpotifyBlockComponentStory = () => {
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
 							}}
-							palette={decidePalette({
-								theme: ArticlePillar.News,
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-							})}
 							credit="Spotify"
 						/>
 					</ClickToView>

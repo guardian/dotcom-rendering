@@ -3,7 +3,12 @@ import { css } from '@emotion/react';
 import { from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
-import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	ArticleSpecial,
+	ArticleFormat,
+} from '@guardian/libs';
 
 import CameraSvg from '@frontend/static/icons/camera.svg';
 import VideoSvg from '@frontend/static/icons/video-icon.svg';
@@ -38,7 +43,21 @@ const bottomMargin = css`
 	margin-bottom: 6px;
 `;
 
-const overlayedStyles = (palette: Palette) => css`
+const overlayedBottomPadding = (format: ArticleFormat) => {
+	if (
+		format.display === ArticleDisplay.Showcase &&
+		format.design === ArticleDesign.Review
+	) {
+		return css`
+			padding-bottom: 2.5rem;
+		`;
+	}
+	return css`
+		padding-bottom: 0.375rem;
+	`;
+};
+
+const overlayedStyles = (palette: Palette, format: ArticleFormat) => css`
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -60,7 +79,7 @@ const overlayedStyles = (palette: Palette) => css`
 	padding-top: 0.375rem;
 	padding-right: 2.5rem;
 	padding-left: 0.75rem;
-	padding-bottom: 0.375rem;
+	${overlayedBottomPadding(format)};
 
 	flex-grow: 1;
 	min-height: 2.25rem;
@@ -197,7 +216,7 @@ export const Caption = ({
 				captionStyle(palette),
 				shouldLimitWidth && limitedWidth,
 				!isOverlayed && bottomMargin,
-				isOverlayed && overlayedStyles(palette),
+				isOverlayed && overlayedStyles(palette, format),
 				padCaption && captionPadding,
 			]}
 		>
