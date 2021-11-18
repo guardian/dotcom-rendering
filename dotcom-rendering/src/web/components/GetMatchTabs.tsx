@@ -5,16 +5,16 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 import { MatchTabs } from './MatchTabs';
 
 type Props = {
-	reportUrl: string;
-	minByMinUrl: string;
+	matchUrl: string;
+	format: ArticleFormat;
 };
 
 const Loading = () => <Placeholder height={230} />;
 
-export const GetMatchTabs = ({ matchUrl, minByMinUrl }: Props) => {
+export const GetMatchTabs = ({ matchUrl, format }: Props) => {
 	const { data, error, loading } = useApi<{
-		reportUrl: string;
-		minByMinUrl: string;
+		reportUrl?: string;
+		minByMinUrl?: string;
 	}>(matchUrl);
 
 	if (loading) return <Loading />;
@@ -25,7 +25,13 @@ export const GetMatchTabs = ({ matchUrl, minByMinUrl }: Props) => {
 		return null;
 	}
 	if (data) {
-		return <MatchTabs minByMinUrl={} reportUrl={} />;
+		return (
+			<MatchTabs
+				minByMinUrl={data.minByMinUrl}
+				reportUrl={data.reportUrl}
+				format={format}
+			/>
+		);
 	}
 
 	return null;

@@ -87,6 +87,7 @@ import { trackPerformance } from '../browser/ga/ga';
 import { decidePalette } from '../lib/decidePalette';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
+import { GetMatchTabs } from './GetMatchTabs';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -897,6 +898,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			{CAPI.matchUrl && (
 				<Portal rootId="match-nav">
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
+				</Portal>
+			)}
+			{CAPI.matchUrl && (
+				<Portal rootId="match-nav">
+					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />
 				</Portal>
 			)}
 			{/*

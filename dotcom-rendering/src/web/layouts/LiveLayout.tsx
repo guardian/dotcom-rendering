@@ -50,6 +50,7 @@ import {
 import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { MatchTabs } from '../components/MatchTabs';
+import { GetMatchTabs } from '../components/GetMatchTabs';
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -318,8 +319,18 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					/>
 				}
 			>
-				{showMatchTabs && (
-					<MatchTabs format={format} reportUrl={CAPI.sectionUrl} />
+				{CAPI.matchUrl && showMatchTabs && (
+					<Portal rootId="match-tabs">
+						<GetMatchTabs
+							matchUrl={CAPI.matchUrl}
+							format={format}
+						/>
+					</Portal>
+
+<Placeholder
+rootId="match-tabs"
+height={230}
+/>
 				)}
 				<div css={maxWidth}>
 					<ArticleHeadlinePadding design={format.design}>
