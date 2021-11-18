@@ -70,14 +70,14 @@ const fullRightBorder = (colour: string) => css`
 
 type Props = {
 	children: React.ReactNode;
-	borderType?: 'full' | 'partial';
+	borderType?: 'full' | 'partial'; // if no borderType provided -> no border
 	borderColour?: string;
 	size?: LeftColSize;
 };
 
 export const LeftColumn = ({
 	children,
-	borderType = 'full',
+	borderType,
 	borderColour = border.secondary,
 	size = 'compact',
 }: Props) => {

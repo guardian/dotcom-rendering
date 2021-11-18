@@ -48,7 +48,7 @@ export const RightBorder = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<>The border to my right should stretch the whole height</>
 				</LeftColumn>
 				<ArticleContainer
