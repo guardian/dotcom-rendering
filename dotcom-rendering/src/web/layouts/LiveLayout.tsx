@@ -80,7 +80,7 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 				*/
 				${from.desktop} {
 					grid-template-columns: 309px 1px 1fr;
-					grid-template-areas: 'title		border headline';
+					grid-template-areas: 'title	border headline';
 				}
 
 				${until.desktop} {
