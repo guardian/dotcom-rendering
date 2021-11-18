@@ -261,7 +261,7 @@ export const OverlayedWithStars = () => (
 				css={css`
 					position: absolute;
 					bottom: 0;
-					background-color: yellow; ;
+					background-color: yellow;
 				`}
 			>
 				<StarRating rating={3} size="large" />
