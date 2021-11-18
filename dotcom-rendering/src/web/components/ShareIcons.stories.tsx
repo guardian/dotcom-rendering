@@ -9,6 +9,12 @@ export default {
 	title: 'Components/ShareIcons',
 };
 
+const defaultFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.News,
+};
+
 export const Medium = () => {
 	return (
 		<ShareIcons
@@ -27,6 +33,7 @@ export const Medium = () => {
 				design: ArticleDesign.Standard,
 				display: ArticleDisplay.Standard,
 			})}
+			format={defaultFormat}
 			size="medium"
 		/>
 	);
@@ -51,6 +58,7 @@ export const Small = () => {
 				design: ArticleDesign.Standard,
 				display: ArticleDisplay.Standard,
 			})}
+			format={defaultFormat}
 			size="small"
 		/>
 	);

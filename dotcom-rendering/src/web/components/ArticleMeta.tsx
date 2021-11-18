@@ -158,6 +158,15 @@ const metaContainer = (format: ArticleFormat) => {
 	}
 };
 
+const datelineStyles = (palette: Palette, format: ArticleFormat) => css`
+	${format.design === ArticleDesign.LiveBlog &&
+	css`
+		${until.desktop} {
+			color: ${palette.text.standfirst};
+		}
+	`};
+`;
+
 const getBylineImageUrl = (tags: TagType[]) => {
 	const contributorTag = tags.find((tag) => tag.type === 'Contributor');
 	return contributorTag && contributorTag.bylineImageUrl;
@@ -328,6 +337,7 @@ export const ArticleMeta = ({
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}
+								cssOverrides={datelineStyles(palette, format)}
 							/>
 						</div>
 					</>
@@ -345,6 +355,7 @@ export const ArticleMeta = ({
 							pageId={pageId}
 							webTitle={webTitle}
 							palette={palette}
+							format={format}
 							displayIcons={['facebook', 'twitter', 'email']}
 							size="medium"
 						/>

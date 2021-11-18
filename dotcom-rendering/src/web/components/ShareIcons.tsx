@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 
 import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
 import FacebookIcon from '@frontend/static/icons/facebook.svg';
@@ -9,6 +9,7 @@ import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
 
+import { ArticleDesign } from '@guardian/libs';
 import { Hide } from './Hide';
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
 	webTitle: string;
 	displayIcons: SharePlatform[];
 	palette: Palette;
+	format: ArticleFormat;
 	size: ShareIconSize;
 };
 
@@ -37,11 +39,23 @@ const topMarginStlyes = css`
 	margin-top: 3px;
 `;
 
+const iconsColor = (palette: Palette, format: ArticleFormat) => css`
+	fill: ${palette.fill.shareIcon};
+	${format.design === ArticleDesign.LiveBlog &&
+	css`
+		${until.desktop} {
+			fill: ${palette.text.standfirst};
+		}
+	`};
+`;
+
 const iconStyles = ({
 	palette,
+	format,
 	size,
 }: {
 	palette: Palette;
+	format: ArticleFormat;
 	size: ShareIconSize;
 }) => css`
 	border: 1px solid ${palette.border.article};
@@ -57,7 +71,7 @@ const iconStyles = ({
 	vertical-align: middle;
 	position: relative;
 	box-sizing: content-box;
-	fill: ${palette.fill.shareIcon};
+	${iconsColor(palette, format)};
 
 	svg {
 		height: 88%;
@@ -89,6 +103,7 @@ export const ShareIcons = ({
 	webTitle,
 	displayIcons,
 	palette,
+	format,
 	size,
 }: Props) => {
 	return (
@@ -105,7 +120,7 @@ export const ShareIcons = ({
 						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, size })}>
+						<span css={iconStyles({ palette, format, size })}>
 							<FacebookIcon />
 						</span>
 					</a>
@@ -124,7 +139,7 @@ export const ShareIcons = ({
 						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, size })}>
+						<span css={iconStyles({ palette, format, size })}>
 							<TwitterIconPadded />
 						</span>
 					</a>
@@ -142,7 +157,7 @@ export const ShareIcons = ({
 						target="_blank"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, size })}>
+						<span css={iconStyles({ palette, format, size })}>
 							<EmailIcon />
 						</span>
 					</a>
@@ -161,7 +176,7 @@ export const ShareIcons = ({
 						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, size })}>
+						<span css={iconStyles({ palette, format, size })}>
 							<LinkedInIcon />
 						</span>
 					</a>
@@ -181,7 +196,7 @@ export const ShareIcons = ({
 							rel="noreferrer"
 							data-ignore="global-link-styling"
 						>
-							<span css={iconStyles({ palette, size })}>
+							<span css={iconStyles({ palette, format, size })}>
 								<WhatsAppIcon />
 							</span>
 						</a>
@@ -202,7 +217,7 @@ export const ShareIcons = ({
 							rel="noreferrer"
 							data-ignore="global-link-styling"
 						>
-							<span css={iconStyles({ palette, size })}>
+							<span css={iconStyles({ palette, format, size })}>
 								<MessengerIcon />
 							</span>
 						</a>

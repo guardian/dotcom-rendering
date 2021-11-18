@@ -159,6 +159,17 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const doNotDisplayInWide = css`
+	${from.desktop} {
+		display: none;
+	}
+`;
+const doNotDisplayInNarrow = css`
+	${until.desktop} {
+		display: none;
+	}
+`;
+
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 700px;
@@ -408,7 +419,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<></>
 							</GridItem>
 							<GridItem area="lines">
-								<div css={maxWidth}>
+								<div css={css(maxWidth, doNotDisplayInWide)}>
 									<div css={stretchLines}>
 										<Lines
 											count={decideLineCount(
@@ -418,12 +429,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												format.design,
 												format.theme,
 											)}
+											color="rgba(255, 255, 255, 0.4)"
 										/>
 									</div>
 								</div>
 							</GridItem>
 							<GridItem area="meta">
-								<div css={maxWidth}>
+								<div css={css(maxWidth, doNotDisplayInWide)}>
 									<ArticleMeta
 										branding={branding}
 										format={format}
@@ -479,7 +491,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<></>
 							</GridItem>
 							<GridItem area="lines">
-								<div css={maxWidth}>
+								<div css={css(maxWidth, doNotDisplayInNarrow)}>
 									<div css={stretchLines}>
 										<Lines
 											count={decideLineCount(
@@ -494,7 +506,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="meta" element="aside">
-								<div css={maxWidth}>
+								<div css={css(maxWidth, doNotDisplayInNarrow)}>
 									<ArticleMeta
 										branding={branding}
 										format={format}

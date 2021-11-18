@@ -230,6 +230,7 @@ export const SubMeta = ({
 						pageId={pageId}
 						webTitle={webTitle}
 						palette={palette}
+						format={format}
 						displayIcons={[
 							'facebook',
 							'twitter',

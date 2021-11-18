@@ -8,6 +8,7 @@ import { BylineLink } from '@frontend/web/components/BylineLink';
 
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
+import { until } from '@guardian/src-foundations/mq';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 const twitterHandleStyles = (palette: Palette) => css`
@@ -31,18 +32,29 @@ const twitterHandleStyles = (palette: Palette) => css`
 	}
 `;
 
+const bylineColor = (palette: Palette, format: ArticleFormat) => css`
+	color: ${palette.text.byline};
+	${format.design === ArticleDesign.LiveBlog &&
+	css`
+		${until.desktop} {
+			color: ${palette.text.standfirst};
+		}
+	`};
+`;
+
 const bylineStyles = (palette: Palette, format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
 		? textSans.medium()
 		: headline.xxxsmall()};
 	${format.theme === ArticleSpecial.Labs && 'line-height: 20px;'};
-	color: ${palette.text.byline};
+
+	${bylineColor(palette, format)};
 	padding-bottom: 8px;
 	font-style: italic;
 
 	a {
 		font-weight: 700;
-		color: ${palette.text.byline};
+		${bylineColor(palette, format)};
 		text-decoration: none;
 		font-style: normal;
 		:hover {

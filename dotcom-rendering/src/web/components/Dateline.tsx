@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
@@ -50,12 +50,13 @@ const labelStyles = css`
 export const Dateline: React.FC<{
 	primaryDateline: string;
 	secondaryDateline: string;
-}> = ({ primaryDateline, secondaryDateline }) => {
+	cssOverrides?: SerializedStyles;
+}> = ({ primaryDateline, secondaryDateline, cssOverrides }) => {
 	return (
 		<div css={dateline}>
 			{secondaryDateline &&
 			!secondaryDateline.includes(primaryDateline) ? (
-				<div css={[toggleClass, dateline]}>
+				<div css={[toggleClass, dateline, cssOverrides]}>
 					<label css={labelStyles} htmlFor="dateToggle">
 						{primaryDateline}
 					</label>
