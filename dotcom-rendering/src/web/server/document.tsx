@@ -256,6 +256,7 @@ export const document = ({ data }: Props): string => {
 			{ src: polyfillIO },
 			...getScriptArrayFromChunkName('ophan'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
+			...getScriptArrayFromChunkName('bootCmp'),
 			...getScriptArrayFromChunkName('sentryLoader'),
 			...getScriptArrayFromChunkName('coreVitals'),
 			...getScriptArrayFromChunkName('dynamicImport'),

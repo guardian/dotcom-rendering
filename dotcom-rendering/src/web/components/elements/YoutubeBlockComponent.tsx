@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { css } from '@emotion/react';
 
 import { space } from '@guardian/src-foundations';
@@ -11,6 +12,7 @@ import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
 
 import { Caption } from '@root/src/web/components/Caption';
+import { useOnce } from '@root/src/web/lib/useOnce';
 
 type Props = {
 	id: string;
@@ -28,7 +30,6 @@ type Props = {
 		width: number;
 	}[];
 	adTargeting?: AdTargeting;
-	consentState?: ConsentState;
 	isMainMedia?: boolean;
 	height?: number;
 	width?: number;
@@ -83,13 +84,37 @@ export const YoutubeBlockComponent = ({
 	expired,
 	role,
 	adTargeting,
-	consentState,
 	isMainMedia,
 	height = 259,
 	width = 460,
 	duration,
 	origin,
 }: Props): JSX.Element => {
+	const [consentState, setConsentState] = useState<ConsentState | undefined>(
+		undefined,
+	);
+
+	useOnce(() => {
+		import(
+			/* webpackChunkName: "cmp" */ '@guardian/consent-management-platform'
+		)
+			.then((module: { onConsentChange: any }) => {
+				module.onConsentChange((newConsent: ConsentState) => {
+					console.log('consent changed, new', newConsent);
+					setConsentState(newConsent);
+				});
+			})
+			.catch((error) => {
+				const msg = `Error: ${error}`;
+				// eslint-disable-next-line no-console
+				console.log(msg);
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'youtube-consent',
+				);
+			});
+	}, []);
+
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
