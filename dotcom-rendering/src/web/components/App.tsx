@@ -1288,7 +1288,19 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</Lazy>
 			</Portal>
 			<Portal rootId="sign-in-gate">
-				<SignInGateSelector isSignedIn={isSignedIn} CAPI={CAPI} />
+				<SignInGateSelector
+					isSignedIn={isSignedIn}
+					format={format}
+					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
+					tags={CAPI.tags}
+					isPaidContent={CAPI.pageType.isPaidContent}
+					isPreview={!!CAPI.isPreview}
+					host={CAPI.config.host}
+					pageId={CAPI.pageId}
+					idUrl={CAPI.config.idUrl}
+					pageViewId={pageViewId}
+				/>
 			</Portal>
 			<HydrateOnce rootId="comments" waitFor={[user]}>
 				<Discussion
@@ -1335,8 +1347,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					asyncCountryCode={asyncCountryCode}
 					CAPI={CAPI}
 					brazeMessages={brazeMessages}
-					isPreview={!!CAPI.isPreview}
 					asyncArticleCount={asyncArticleCount}
+					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
+					tags={CAPI.tags}
+					isPaidContent={CAPI.pageType.isPaidContent}
+					isPreview={!!CAPI.isPreview}
 				/>
 			</Portal>
 		</React.StrictMode>
