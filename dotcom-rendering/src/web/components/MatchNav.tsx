@@ -1,13 +1,6 @@
 import { css } from '@emotion/react';
 
-
-import {
-	brandAlt,
-	background,
-	border,
-	neutral,
-	sport,
-} from '@guardian/src-foundations/palette';
+import { brandAlt, background } from '@guardian/src-foundations/palette';
 
 import { headline, textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
@@ -212,14 +205,7 @@ const YellowBorder = () => (
 	/>
 );
 
-
-
-export const MatchNav = ({
-	homeTeam,
-	awayTeam,
-	comments,
-	minByMinUrl,
-}: Props) => (
+export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
 	<div>
 		<StretchBackground>
 			<Row>

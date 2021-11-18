@@ -305,7 +305,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</SendToBack>
 			</div>
 
-
 			<main>
 				<article>
 					<ContainerLayout
@@ -327,9 +326,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						}
 					>
-                {CAPI.matchUrl && showMatchTabs && (
-					<Placeholder rootId="match-tabs" height={230} />
-				)}
+						{CAPI.matchUrl && showMatchTabs && (
+							<Placeholder rootId="match-tabs" height={230} />
+						)}
 						<div css={maxWidth}>
 							<ArticleHeadlinePadding design={format.design}>
 								{age && (
