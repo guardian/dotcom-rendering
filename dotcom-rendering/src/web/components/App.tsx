@@ -45,12 +45,17 @@ import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getCookie } from '@root/src/web/browser/cookie';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/src-foundations/utils';
-import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
+import {
+	ArticleDisplay,
+	ArticleDesign,
+	storage,
+	log,
+	getCookie,
+} from '@guardian/libs';
 import type { ArticleFormat, CountryCode } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -176,7 +181,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		undefined,
 	);
 	useOnce(() => {
-		setBrowserId(getCookie('bwid'));
+		setBrowserId(getCookie({ name: 'bwid', shouldMemoize: true }));
 		log('dotcom', 'State: browserId set');
 	}, []);
 
@@ -210,7 +215,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	}, [ABTestAPI]);
 
 	useEffect(() => {
-		setIsSignedIn(!!getCookie('GU_U'));
+		setIsSignedIn(!!getCookie({ name: 'GU_U', shouldMemoize: true }));
 		log('dotcom', 'State: isSignedIn set');
 	}, []);
 
@@ -368,7 +373,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			return '';
 		};
 		const componentType: OphanComponentType = 'CONSENT';
-		const consentUUID = getCookie('consentUUID') || '';
+		const consentUUID = getCookie({ name: 'consentUUID' }) || '';
 		const consentString = decideConsentString();
 		const action: OphanAction = 'MANAGE_CONSENT'; // I am using MANAGE_CONSENT as the default action while we develop this code.
 		const event = {

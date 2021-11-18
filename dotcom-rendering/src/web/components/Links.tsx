@@ -7,12 +7,12 @@ import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from } from '@guardian/src-foundations/mq';
 
-import { getCookie } from '@root/src/web/browser/cookie';
 import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 import { useOnce } from '@frontend/web/lib/useOnce';
+import { getCookie } from '@guardian/libs';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
@@ -142,7 +142,12 @@ export const Links = ({
 
 	// show supporter CTA if support messaging isn't shown
 	useEffect(() => {
-		setShowSupporterCTA(getCookie('gu_hide_support_messaging') === 'true');
+		setShowSupporterCTA(
+			getCookie({
+				name: 'gu_hide_support_messaging',
+				shouldMemoize: true,
+			}) === 'true',
+		);
 	}, []);
 
 	// we intentionally re-render here because we know the DOM structure could be different

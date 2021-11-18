@@ -1,5 +1,5 @@
-import { getCookie } from '@root/src/web/browser/cookie';
 import { onConsentChange } from '@guardian/consent-management-platform';
+import { getCookie } from '@guardian/libs';
 import {
 	getIdApiUserData,
 	IdApiUserData,
@@ -34,7 +34,7 @@ export const MODULES_VERSION = 'v3';
 // https://github.com/guardian/members-data-api/blob/3a72dc00b9389968d91e5930686aaf34d8040c52/membership-attribute-service/app/models/Attributes.scala
 const shouldShowSupportMessaging = (): boolean => {
 	const hideSupportMessaging =
-		getCookie(HIDE_SUPPORT_MESSAGING_COOKIE) === 'true';
+		getCookie({ name: HIDE_SUPPORT_MESSAGING_COOKIE }) === 'true';
 
 	return !hideSupportMessaging;
 };
@@ -47,13 +47,19 @@ const shouldShowSupportMessaging = (): boolean => {
 export const isRecurringContributor = (isSignedIn: boolean): boolean => {
 	// Attributes cookie - we want this to have a specific value
 	const isRecurringContributorFromAttrs =
-		getCookie(RECURRING_CONTRIBUTOR_COOKIE) === 'true';
+		getCookie({ name: RECURRING_CONTRIBUTOR_COOKIE }) === 'true';
 
 	// Support cookies - we only care whether these exist
 	const hasMonthlyContributionCookie =
-		getCookie(SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE) !== null;
+		getCookie({
+			name: SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE,
+			shouldMemoize: true,
+		}) !== null;
 	const hasAnnualContributionCookie =
-		getCookie(SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE) !== null;
+		getCookie({
+			name: SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
+			shouldMemoize: true,
+		}) !== null;
 
 	return (
 		isSignedIn &&
@@ -70,14 +76,14 @@ export const isRecurringContributor = (isSignedIn: boolean): boolean => {
 // and returning a Unix epoch string of the latest date found.
 export const getLastOneOffContributionTimestamp = (): number | undefined => {
 	// Attributes cookie - expects YYYY-MM-DD
-	const contributionDateFromAttributes = getCookie(
-		ONE_OFF_CONTRIBUTION_DATE_COOKIE,
-	);
+	const contributionDateFromAttributes = getCookie({
+		name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
+	});
 
 	// Support cookies - expects Unix epoch
-	const contributionDateFromSupport = getCookie(
-		SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
-	);
+	const contributionDateFromSupport = getCookie({
+		name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
+	});
 
 	if (!contributionDateFromAttributes && !contributionDateFromSupport) {
 		return undefined;
@@ -144,7 +150,7 @@ const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 const REQUIRED_CONSENTS_FOR_BROWSER_ID = [1, 3, 5, 7];
 
 export const hasArticleCountOptOutCookie = (): boolean =>
-	getCookie(OPT_OUT_OF_ARTICLE_COUNT_COOKIE) !== null;
+	getCookie({ name: OPT_OUT_OF_ARTICLE_COUNT_COOKIE }) !== null;
 
 const removeArticleCountsFromLocalStorage = () => {
 	window.localStorage.removeItem(DAILY_ARTICLE_COUNT_KEY);
@@ -153,7 +159,7 @@ const removeArticleCountsFromLocalStorage = () => {
 
 export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 	return new Promise((resolve) => {
-		if (getCookie('gu-cmp-disabled')) {
+		if (getCookie({ name: 'gu-cmp-disabled', shouldMemoize: true })) {
 			resolve(true);
 		}
 		onConsentChange(({ ccpa, tcfv2, aus }) => {
@@ -181,7 +187,7 @@ export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {
 
 export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
 	new Promise((resolve) => {
-		if (getCookie('gu-cmp-disabled')) {
+		if (getCookie({ name: 'gu-cmp-disabled', shouldMemoize: true })) {
 			resolve(true);
 		}
 		onConsentChange(({ ccpa, tcfv2, aus }) => {

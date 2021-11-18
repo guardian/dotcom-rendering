@@ -25,8 +25,7 @@ import {
 } from '@guardian/automat-contributions/dist/lib/types';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { cmp } from '@guardian/consent-management-platform';
-import { storage } from '@guardian/libs';
-import { getCookie } from '../../browser/cookie';
+import { getCookie, storage } from '@guardian/libs';
 
 type PreEpicConfig = {
 	module: {
@@ -106,7 +105,9 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 			epicViewLog: getViewLog(storage.local),
 			weeklyArticleHistory: await data.asyncArticleCount,
 			hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
-			mvtId: Number(getCookie('GU_mvt_id')),
+			mvtId: Number(
+				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+			),
 			countryCode: data.countryCode,
 			modulesVersion: MODULES_VERSION,
 			url: window.location.origin + window.location.pathname,
