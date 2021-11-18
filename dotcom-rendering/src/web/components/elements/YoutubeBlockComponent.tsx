@@ -6,7 +6,10 @@ import { neutral } from '@guardian/src-foundations/palette';
 import { body } from '@guardian/src-foundations/typography';
 import { SvgAlertRound } from '@guardian/src-icons';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type {
+	Callback,
+	ConsentState,
+} from '@guardian/consent-management-platform/dist/types';
 
 import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
