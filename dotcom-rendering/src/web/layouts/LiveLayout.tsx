@@ -49,7 +49,6 @@ import {
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { space } from '@guardian/src-foundations';
-import { ContainerLayout } from '../components/ContainerLayout';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
