@@ -87,7 +87,7 @@ export const InContext = () => {
 	return (
 		<ElementContainer padded={false}>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer

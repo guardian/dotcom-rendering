@@ -25,7 +25,7 @@ export const InContext = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer
