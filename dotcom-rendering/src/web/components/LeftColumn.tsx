@@ -77,7 +77,7 @@ type Props = {
 
 export const LeftColumn = ({
 	children,
-	borderType,
+	borderType = 'partial',
 	borderColour = border.secondary,
 	size = 'compact',
 }: Props) => {
