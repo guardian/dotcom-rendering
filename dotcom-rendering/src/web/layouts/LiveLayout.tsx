@@ -321,16 +321,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				}
 			>
 				{CAPI.matchUrl && showMatchTabs && (
-					<>
-						<Portal rootId="match-tabs">
-							<GetMatchTabs
-								matchUrl={CAPI.matchUrl}
-								format={format}
-							/>
-						</Portal>
-
-						<Placeholder rootId="match-tabs" height={230} />
-					</>
+					<Placeholder rootId="match-tabs" height={230} />
 				)}
 				<div css={maxWidth}>
 					<ArticleHeadlinePadding design={format.design}>
