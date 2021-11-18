@@ -16,13 +16,25 @@ type Props = {
 
 type ResolutionType = 'hdpi' | 'mdpi';
 type Pixel = number;
+type Breakpoint = number;
 
-export const getClosestSetForWidth = (
-	desiredWidth: number,
+export type DesiredWidth = {
+	breakpoint: Breakpoint;
+	width: Pixel;
+};
+
+/**
+ * Given a desired width & array of SrcSetItems, return the closest match.
+ * The match will always be greater than the desired width when available
+ *
+ * @param desiredWidth
+ * @param inlineSrcSets
+ * @returns {SrcSetItem}
+ */
+export const getBestSourceForDesiredWidth = (
+	desiredWidth: Pixel,
 	inlineSrcSets: SrcSetItem[],
 ): SrcSetItem => {
-	// For a desired width, find the SrcSetItem which is the closest match
-	// A match greater than the desired width will always be picked when one is available
 	const sorted = inlineSrcSets.slice().sort((a, b) => b.width - a.width);
 	return sorted.reduce((best, current) => {
 		if (current.width < best.width && current.width >= desiredWidth) {
@@ -52,44 +64,57 @@ const getFallback = (sources: SrcSetItem[]): string | undefined => {
 	if (sources.length === 0) return undefined;
 	// The assumption here is readers on devices that do not support srcset are likely to be on poor
 	// network connections so we're going to fallback to a small image
-	return getClosestSetForWidth(300, sources).src;
+	return getBestSourceForDesiredWidth(300, sources).src;
 };
 
-// The image sources we're provided use double-widths for HDPI images
-// We should therefor multiply the width based on if it's HDPI or not
-// e.g { url: '... ?width=500&dpr=2 ...', width: '1000' }
-export const getDesiredWidth = (width: number, hdpi: boolean) =>
-	hdpi ? width * 2 : width;
+/**
+ * Removes redundant widths from an array of DesiredWidths
+ *
+ * This function specifically looks for *consecutive duplicates*,
+ * in which case we should always keep the last consecutive element.
+ *
+ * @param {DesiredWidth[]} desiredWidths
+ * @returns {DesiredWidth}
+ */
+export const removeRedundantWidths = (
+	allDesiredWidths: DesiredWidth[],
+): DesiredWidth[] => {
+	const desiredWidths: DesiredWidth[] = [];
 
-// Turn SrsSets into a string which can be passed to the source element
-export const getSourcesFromSrcSets = (sources: SrcSetItem[]) =>
-	sources.map((srcSet) => `${srcSet.src} ${srcSet.width}w`).join(',');
-
-export const optimiseBreakpointSizes = (
-	breakpointSizes: [number, Pixel][],
-): [number, Pixel][] =>
-	breakpointSizes.filter(([, size], index) => {
-		// If the NEXT element in the array has the SAME size as this one, we can trust that this current breakpoint is redundant
-		// e.g
-		// [[980, 620], [660, 620]] > [[660, 620]]
-		// Because we use min-width, any source larger than 660 will get the 620px image, even without the min-width: 980 source element
+	for (const desiredWidth of allDesiredWidths) {
 		if (
-			index + 1 < breakpointSizes.length &&
-			breakpointSizes[index + 1][1] === size
-		)
-			return false;
-		return true;
-	});
+			desiredWidths[desiredWidths.length - 1]?.width ===
+			desiredWidth.width
+		) {
+			// We overwrite the end element as we want to keep the *last* consecutive duplicate
+			desiredWidths[desiredWidths.length - 1] = desiredWidth;
+		} else desiredWidths.push(desiredWidth);
+	}
 
-// Returns the size image desired at a particular breakpoint based on the image role, format, and if it's main media.
-const getSizeForBreakpoint = (
+	return desiredWidths;
+};
+
+/**
+ * Returns the desired width for an image at the specified breakpoint, based on the image role, format, and if it's main media.
+ * This function acts as a source of truth for widths of images based on the provided parameters
+ *
+ * Returns 'breakpoint', or 'breakpoint / x' when the image is expected to fill a % of the viewport,
+ * instead of a fixed width.
+ *
+ * @param breakpoint
+ * @param role
+ * @param isMainMedia
+ * @param format
+ * @returns {Pixel}
+ */
+const getDesiredWidthForBreakpoint = (
 	breakpoint: number,
 	role: RoleType,
 	isMainMedia: boolean,
 	format: ArticleFormat,
 ): Pixel => {
 	if (format.display === ArticleDisplay.Immersive && isMainMedia)
-		return breakpoint; // 100vw
+		return breakpoint;
 
 	if (
 		(format.display === ArticleDisplay.Showcase ||
@@ -113,43 +138,52 @@ const getSizeForBreakpoint = (
 			)
 				return 680;
 			if (breakpoint >= breakpoints.phablet) return 620;
-			return breakpoint; // 100vw
+			return breakpoint;
 		case 'halfWidth':
 			if (breakpoint >= breakpoints.phablet) return 300;
-			return breakpoint / 2; // 50vw
+			return breakpoint / 2;
 		case 'thumbnail':
 			return 140;
 		case 'immersive':
 			if (breakpoint >= breakpoints.wide) return 1300;
-			return breakpoint; // 100vw
+			return breakpoint;
 		case 'supporting':
 			if (breakpoint >= breakpoints.wide) return 380;
 			if (breakpoint >= breakpoints.tablet) return 300;
-			return breakpoint; // 100vw
+			return breakpoint;
 		case 'showcase':
 			if (breakpoint >= breakpoints.wide) return 860;
 			if (breakpoint >= breakpoints.leftCol) return 780;
 			if (breakpoint >= breakpoints.phablet) return 620;
-			return breakpoint; // 100vw
+			return breakpoint;
 	}
 };
 
 // Takes a size & sources, and returns a source set with 1 matching image with the desired size
-const getSourceSetForSize = (
-	size: number,
+const getSourceForDesiredWidth = (
+	desiredWidth: Pixel,
 	sources: SrcSetItem[],
-	hdpi: boolean,
-) =>
-	getSourcesFromSrcSets([
-		getClosestSetForWidth(getDesiredWidth(size, hdpi), sources),
-	]);
+	resolution: ResolutionType,
+) => {
+	// The image sources we're provided use double-widths for HDPI images
+	// We should therefor multiply the width based on if it's HDPI or not
+	// e.g { url: '... ?width=500&dpr=2 ...', width: '1000' }
+	const source = getBestSourceForDesiredWidth(
+		resolution === 'hdpi' ? desiredWidth * 2 : desiredWidth,
+		sources,
+	);
+	return `${source.src} ${source.width}w`;
+};
 
 // Create sourcesets for portrait immersive
 // TODO: In a future PR this system will be updated to solve scaling issues with DPR
-const portraitImmersiveSource = (sources: SrcSetItem[], hdpi: boolean) => (
+const portraitImmersiveSource = (
+	sources: SrcSetItem[],
+	resolution: ResolutionType,
+) => (
 	<source
 		media={
-			hdpi
+			resolution === 'hdpi'
 				? '(orientation: portrait) and (-webkit-min-device-pixel-ratio: 1.25), (orientation: portrait) and (min-resolution: 120dpi)'
 				: '(orientation: portrait)'
 		}
@@ -160,7 +194,9 @@ const portraitImmersiveSource = (sources: SrcSetItem[], hdpi: boolean) => (
 		// relates to an assumed image ratio of 5:3 which is equal to
 		// 167 (viewport height)  : 100 (viewport width).
 		sizes="167vh"
-		srcSet={getSourcesFromSrcSets(sources)}
+		srcSet={sources
+			.map((srcSet) => `${srcSet.src} ${srcSet.width}w`)
+			.join(',')}
 	/>
 );
 
@@ -188,52 +224,61 @@ export const Picture = ({
 		hdpiSourceSets.length ? hdpiSourceSets : mdpiSourceSets,
 	);
 
-	// Create an array of breakpoints going from highest to lowest, with 0 as the final option
-	const breakpointSizes: [number, number][] = [
-		...Object.values(breakpoints).reverse(),
+	const allDesiredWidths: DesiredWidth[] = [
+		// Create an array of breakpoints going from highest to lowest, with 0 as the final option
+		breakpoints.wide,
+		breakpoints.leftCol,
+		breakpoints.desktop,
+		breakpoints.tablet,
+		breakpoints.phablet,
+		breakpoints.mobileLandscape,
+		breakpoints.mobileMedium,
+		breakpoints.mobile,
 		0,
-	].map((breakpoint) => [
+	].map((breakpoint) => ({
 		breakpoint,
-		getSizeForBreakpoint(breakpoint, role, isMainMedia, format),
-	]);
-	const optimisedBreakPointSizes: [number, Pixel][] =
-		optimiseBreakpointSizes(breakpointSizes);
+		width: getDesiredWidthForBreakpoint(
+			breakpoint,
+			role,
+			isMainMedia,
+			format,
+		),
+	}));
+
+	const desiredWidths: DesiredWidth[] =
+		removeRedundantWidths(allDesiredWidths);
 
 	return (
 		<picture itemProp="contentUrl">
-			{format.display === ArticleDisplay.Immersive && isMainMedia ? (
+			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
-					{portraitImmersiveSource(hdpiSourceSets, true)}
-					{portraitImmersiveSource(mdpiSourceSets, false)}
+					{portraitImmersiveSource(hdpiSourceSets, 'hdpi')}
+					{portraitImmersiveSource(mdpiSourceSets, 'mdpi')}
 				</>
-			) : (
-				''
 			)}
 
-			{optimisedBreakPointSizes.map(([breakpoint, size]) => (
+			{desiredWidths.map(({ breakpoint, width: desiredWidth }) => (
 				<>
 					{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
-					{hdpiSourceSets.length ? (
+					{hdpiSourceSets.length > 0 && (
 						<source
-							srcSet={getSourceSetForSize(
-								size,
+							srcSet={getSourceForDesiredWidth(
+								desiredWidth,
 								hdpiSourceSets,
-								true,
+								'hdpi',
 							)}
-							sizes={`${breakpoint || size}px`}
+							sizes={`${desiredWidth}px`}
 							media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
 						/>
-					) : (
-						<></>
 					)}
 					{/* MDPI Source - images in this srcset have `quality=85` in the url */}
 					<source
-						srcSet={getSourceSetForSize(
-							size,
+						srcSet={getSourceForDesiredWidth(
+							desiredWidth,
 							mdpiSourceSets,
-							false,
+							'mdpi',
 						)}
-						sizes={`${breakpoint || size}px`}
+						sizes={`${desiredWidth}px`}
 						media={`(min-width: ${breakpoint}px)`}
 					/>
 				</>

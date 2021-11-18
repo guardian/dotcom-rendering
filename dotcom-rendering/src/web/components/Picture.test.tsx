@@ -1,11 +1,6 @@
 import { breakpoints } from '@guardian/src-foundations/mq';
-
-import {
-	getClosestSetForWidth,
-	getDesiredWidth,
-	getSourcesFromSrcSets,
-	optimiseBreakpointSizes,
-} from './Picture';
+import type { DesiredWidth } from './Picture';
+import { getBestSourceForDesiredWidth, removeRedundantWidths } from './Picture';
 
 const hdpiSources: SrcSetItem[] = [
 	{
@@ -61,162 +56,167 @@ describe(`Picture`, () => {
 		it('Gets the closest source for a given width (hdpi)', () => {
 			// Breakpoints
 			expect(
-				getClosestSetForWidth(breakpoints.mobile * 2, hdpiSources)
-					.width,
+				getBestSourceForDesiredWidth(
+					breakpoints.mobile * 2,
+					hdpiSources,
+				).width,
 			).toBe(930);
 			expect(
-				getClosestSetForWidth(breakpoints.mobileMedium * 2, hdpiSources)
-					.width,
+				getBestSourceForDesiredWidth(
+					breakpoints.mobileMedium * 2,
+					hdpiSources,
+				).width,
 			).toBe(930);
 			expect(
-				getClosestSetForWidth(
+				getBestSourceForDesiredWidth(
 					breakpoints.mobileLandscape * 2,
 					hdpiSources,
 				).width,
 			).toBe(1240);
 			expect(
-				getClosestSetForWidth(breakpoints.phablet * 2, hdpiSources)
-					.width,
+				getBestSourceForDesiredWidth(
+					breakpoints.phablet * 2,
+					hdpiSources,
+				).width,
 			).toBe(1400);
 			expect(
-				getClosestSetForWidth(breakpoints.tablet * 2, hdpiSources)
-					.width,
+				getBestSourceForDesiredWidth(
+					breakpoints.tablet * 2,
+					hdpiSources,
+				).width,
 			).toBe(1400);
 			expect(
-				getClosestSetForWidth(breakpoints.desktop * 2, hdpiSources)
-					.width,
+				getBestSourceForDesiredWidth(
+					breakpoints.desktop * 2,
+					hdpiSources,
+				).width,
 			).toBe(1400);
 			expect(
-				getClosestSetForWidth(breakpoints.leftCol * 2, hdpiSources)
-					.width,
+				getBestSourceForDesiredWidth(
+					breakpoints.leftCol * 2,
+					hdpiSources,
+				).width,
 			).toBe(1400);
 			expect(
-				getClosestSetForWidth(breakpoints.wide * 2, hdpiSources).width,
+				getBestSourceForDesiredWidth(breakpoints.wide * 2, hdpiSources)
+					.width,
 			).toBe(1400);
 
 			// Example widths
-			expect(getClosestSetForWidth(620 * 2, hdpiSources).width).toBe(
-				1240,
-			);
+			expect(
+				getBestSourceForDesiredWidth(620 * 2, hdpiSources).width,
+			).toBe(1240);
 		});
 
 		it('Gets the closest source for a given width (mdpi)', () => {
 			// Breakpoints
 			expect(
-				getClosestSetForWidth(breakpoints.mobile, mdpiSources).width,
-			).toBe(465);
-			expect(
-				getClosestSetForWidth(breakpoints.mobileMedium, mdpiSources)
+				getBestSourceForDesiredWidth(breakpoints.mobile, mdpiSources)
 					.width,
 			).toBe(465);
 			expect(
-				getClosestSetForWidth(breakpoints.mobileLandscape, mdpiSources)
-					.width,
+				getBestSourceForDesiredWidth(
+					breakpoints.mobileMedium,
+					mdpiSources,
+				).width,
+			).toBe(465);
+			expect(
+				getBestSourceForDesiredWidth(
+					breakpoints.mobileLandscape,
+					mdpiSources,
+				).width,
 			).toBe(620);
 			expect(
-				getClosestSetForWidth(breakpoints.phablet, mdpiSources).width,
+				getBestSourceForDesiredWidth(breakpoints.phablet, mdpiSources)
+					.width,
 			).toBe(700);
 			expect(
-				getClosestSetForWidth(breakpoints.tablet, mdpiSources).width,
+				getBestSourceForDesiredWidth(breakpoints.tablet, mdpiSources)
+					.width,
 			).toBe(700);
 			expect(
-				getClosestSetForWidth(breakpoints.desktop, mdpiSources).width,
+				getBestSourceForDesiredWidth(breakpoints.desktop, mdpiSources)
+					.width,
 			).toBe(700);
 			expect(
-				getClosestSetForWidth(breakpoints.leftCol, mdpiSources).width,
+				getBestSourceForDesiredWidth(breakpoints.leftCol, mdpiSources)
+					.width,
 			).toBe(700);
 			expect(
-				getClosestSetForWidth(breakpoints.wide, mdpiSources).width,
+				getBestSourceForDesiredWidth(breakpoints.wide, mdpiSources)
+					.width,
 			).toBe(700);
 
 			// Example widths
-			expect(getClosestSetForWidth(620, mdpiSources).width).toBe(620);
-		});
-	});
-
-	describe('getDesiredWidth', () => {
-		it('Returns the correct with for HDPI', () => {
-			expect(getDesiredWidth(200, true)).toBe(400);
-		});
-		it('Returns the correct with for MDPI', () => {
-			expect(getDesiredWidth(200, false)).toBe(200);
-		});
-	});
-
-	describe('getSourcesFromSrcSets', () => {
-		it('Constructs the string correctly', () => {
-			expect(getSourcesFromSrcSets(hdpiSources)).toBe(
-				'1 1400w,2 1240w,3 930w,4 1290w',
-			);
-			expect(getSourcesFromSrcSets(mdpiSources)).toBe(
-				'1 620w,2 700w,3 465w,4 645w',
+			expect(getBestSourceForDesiredWidth(620, mdpiSources).width).toBe(
+				620,
 			);
 		});
 	});
 
 	describe('optimiseBreakpointSizes', () => {
 		it('Leaves un-optimisable breakpointSizes as-is', () => {
-			const breakPointSizes: [number, number][] = [
-				[1000, 500],
-				[800, 400],
-				[600, 300],
-				[400, 200],
+			const breakPointSizes: DesiredWidth[] = [
+				{ breakpoint: 1000, width: 500 },
+				{ breakpoint: 800, width: 400 },
+				{ breakpoint: 600, width: 300 },
+				{ breakpoint: 400, width: 200 },
 			];
-			expect(optimiseBreakpointSizes(breakPointSizes)).toEqual(
+			expect(removeRedundantWidths(breakPointSizes)).toEqual(
 				breakPointSizes,
 			);
 		});
 
 		it('Correctly removes optimisable breakpointSizes', () => {
 			expect(
-				optimiseBreakpointSizes([
-					[1000, 500],
-					[800, 400],
-					[600, 400],
-					[400, 200],
+				removeRedundantWidths([
+					{ breakpoint: 1000, width: 500 },
+					{ breakpoint: 800, width: 400 },
+					{ breakpoint: 600, width: 400 },
+					{ breakpoint: 400, width: 200 },
 				]),
 			).toEqual([
-				[1000, 500],
-				[600, 400],
-				[400, 200],
+				{ breakpoint: 1000, width: 500 },
+				{ breakpoint: 600, width: 400 },
+				{ breakpoint: 400, width: 200 },
 			]);
 
 			expect(
-				optimiseBreakpointSizes([
-					[1000, 500],
-					[800, 400],
-					[600, 200],
-					[400, 200],
+				removeRedundantWidths([
+					{ breakpoint: 1000, width: 500 },
+					{ breakpoint: 800, width: 400 },
+					{ breakpoint: 600, width: 200 },
+					{ breakpoint: 400, width: 200 },
 				]),
 			).toEqual([
-				[1000, 500],
-				[800, 400],
-				[400, 200],
+				{ breakpoint: 1000, width: 500 },
+				{ breakpoint: 800, width: 400 },
+				{ breakpoint: 400, width: 200 },
 			]);
 
 			expect(
-				optimiseBreakpointSizes([
-					[1000, 500],
-					[800, 200],
-					[600, 200],
-					[400, 200],
+				removeRedundantWidths([
+					{ breakpoint: 1000, width: 500 },
+					{ breakpoint: 800, width: 200 },
+					{ breakpoint: 600, width: 200 },
+					{ breakpoint: 400, width: 200 },
 				]),
 			).toEqual([
-				[1000, 500],
-				[400, 200],
+				{ breakpoint: 1000, width: 500 },
+				{ breakpoint: 400, width: 200 },
 			]);
 
 			expect(
-				optimiseBreakpointSizes([
-					[1000, 500],
-					[800, 500],
-					[600, 300],
-					[400, 200],
+				removeRedundantWidths([
+					{ breakpoint: 1000, width: 500 },
+					{ breakpoint: 800, width: 500 },
+					{ breakpoint: 600, width: 300 },
+					{ breakpoint: 400, width: 200 },
 				]),
 			).toEqual([
-				[800, 500],
-				[600, 300],
-				[400, 200],
+				{ breakpoint: 800, width: 500 },
+				{ breakpoint: 600, width: 300 },
+				{ breakpoint: 400, width: 200 },
 			]);
 		});
 	});
