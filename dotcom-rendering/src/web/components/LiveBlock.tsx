@@ -1,15 +1,16 @@
 import { css } from '@emotion/react';
 
-import { neutral, space } from '@guardian/src-foundations';
-import { timeAgo } from '@guardian/libs';
+import { space } from '@guardian/src-foundations';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/src-foundations/typography';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
+import { FirstPublished } from '@guardian/common-rendering/src/components/FirstPublished';
+import { LastUpdated } from '@guardian/common-rendering/src/components/LastUpdated';
 
 type Props = {
 	format: ArticleFormat;
@@ -47,96 +48,6 @@ const BlockTitle = ({ title }: { title: string }) => {
 	);
 };
 
-const LastUpdated = ({
-	lastUpdatedDisplay,
-	lastUpdated,
-}: {
-	lastUpdatedDisplay: string;
-	lastUpdated: number;
-}) => {
-	return (
-		<div
-			css={css`
-				display: flex;
-				align-items: flex-end;
-				${textSans.xxsmall()};
-				color: ${neutral[46]};
-			`}
-		>
-			<time dateTime={new Date(lastUpdated).toISOString()}>
-				{`Updated at ${lastUpdatedDisplay}`}
-			</time>
-		</div>
-	);
-};
-
-// TODO: update this code to use shared version when it is available
-const padString = (time: number) => (time < 10 ? `0${time}` : time);
-
-const FirstPublished = ({
-	firstPublished,
-	blockLink,
-}: {
-	firstPublished: number;
-	blockLink: string;
-}) => {
-	const publishedDate = new Date(firstPublished);
-	return (
-		<a
-			href={blockLink}
-			data-ignore="global-link-styling"
-			// title={publishedDate.toLocaleString()}
-			css={css`
-				${textSans.xxsmall({ fontWeight: 'bold' })}
-				margin-bottom: ${space[1]}px;
-				padding-top: ${space[1]}px;
-				display: flex;
-				flex-direction: row;
-				text-decoration: none;
-				:hover {
-					filter: brightness(30%);
-				}
-			`}
-		>
-			<time
-				dateTime={publishedDate.toISOString()}
-				css={css`
-					color: ${neutral[46]};
-					font-weight: bold;
-					margin-right: ${space[2]}px;
-				`}
-			>
-				{timeAgo(firstPublished)}
-			</time>
-			<span
-				css={css`
-					${textSans.xxsmall()};
-					color: ${neutral[46]};
-				`}
-			>
-				{`${padString(publishedDate.getHours())}:${padString(
-					publishedDate.getMinutes(),
-				)}`}
-			</span>
-		</a>
-	);
-};
-
-const typesWeStretch: CAPIElement['_type'][] = [
-	'model.dotcomrendering.pageElements.YoutubeBlockElement',
-	'model.dotcomrendering.pageElements.ImageBlockElement',
-	'model.dotcomrendering.pageElements.VideoBlockElement',
-	'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-	'model.dotcomrendering.pageElements.VideoVimeoBlockElement',
-	'model.dotcomrendering.pageElements.WitnessBlockElement',
-	'model.dotcomrendering.pageElements.VineBlockElement',
-	'model.dotcomrendering.pageElements.MultiImageBlockElement',
-	'model.dotcomrendering.pageElements.MediaAtomBlockElement',
-	'model.dotcomrendering.pageElements.GuVideoBlockElement',
-	'model.dotcomrendering.pageElements.EmbedBlockElement',
-	'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
-];
-
 export const LiveBlock = ({
 	format,
 	block,
@@ -148,19 +59,6 @@ export const LiveBlock = ({
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
 	const blockLink = `${pageId}#block-${block.id}`;
-
-	// We split the array of elements into headerElement (the first one) and
-	// mainElements (the rest) because we want to prevent any media elements
-	// stretch left and covering the lastUpdated info
-	let headerElement: CAPIElement | null = null;
-	let mainElements: CAPIElement[] = [];
-	if (typesWeStretch.includes(block.elements[0]._type)) {
-		// The first element needs to be stretched so don't put
-		// it in the header
-		mainElements = block.elements;
-	} else {
-		[headerElement, ...mainElements] = block.elements;
-	}
 
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
@@ -182,25 +80,15 @@ export const LiveBlock = ({
 					/>
 				)}
 				{block.title && <BlockTitle title={block.title} />}
-				{headerElement &&
-					renderArticleElement({
-						format,
-						palette,
-						element: headerElement,
-						isMainMedia: false,
-						host,
-						adTargeting,
-						index: 0,
-						pageId,
-						webTitle,
-					})}
 			</Header>
-			{mainElements.map((element, index) =>
+			{block.elements.map((element, index) =>
 				renderArticleElement({
 					format,
 					palette,
 					element,
 					isMainMedia: false,
+					host,
+					adTargeting,
 					index,
 					pageId,
 					webTitle,

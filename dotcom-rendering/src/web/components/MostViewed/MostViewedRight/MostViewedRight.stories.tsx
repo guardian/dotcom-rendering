@@ -1,5 +1,6 @@
 import fetchMock from 'fetch-mock';
 
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { Flex } from '@root/src/web/components/Flex';
 import { RightColumn } from '@root/src/web/components/RightColumn';
 import { LeftColumn } from '@root/src/web/components/LeftColumn';
@@ -32,7 +33,13 @@ export const defaultStory = () => {
 				>
 					<></>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<></>
 				</ArticleContainer>
 				<RightColumn>
@@ -62,7 +69,13 @@ export const limitItemsStory = () => {
 				<LeftColumn>
 					<></>
 				</LeftColumn>
-				<ArticleContainer>
+				<ArticleContainer
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+				>
 					<></>
 				</ArticleContainer>
 				<RightColumn>

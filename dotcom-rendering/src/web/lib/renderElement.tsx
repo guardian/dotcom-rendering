@@ -15,7 +15,7 @@ import { ImageBlockComponent } from '@root/src/web/components/elements/ImageBloc
 import { InstagramBlockComponent } from '@root/src/web/components/elements/InstagramBlockComponent';
 import { InteractiveBlockComponent } from '@root/src/web/components/elements/InteractiveBlockComponent';
 import { ItemLinkBlockElement } from '@root/src/web/components/elements/ItemLinkBlockElement';
-import { InteractiveContentsBlockElement } from '@root/src/web/components/elements/InteractiveContentsBlockElement';
+import { InteractiveContentsBlockComponent } from '@root/src/web/components/elements/InteractiveContentsBlockComponent';
 import { MainMediaEmbedBlockComponent } from '@root/src/web/components/elements/MainMediaEmbedBlockComponent';
 import { NumberedTitleBlockComponent } from '@root/src/web/components/elements/NumberedTitleBlockComponent';
 import { MapEmbedBlockComponent } from '@root/src/web/components/elements/MapEmbedBlockComponent';
@@ -154,7 +154,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
 			return [
 				true,
-				<CalloutBlockComponent callout={element} palette={palette} />,
+				<CalloutBlockComponent callout={element} format={format} />,
 			];
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return [
@@ -372,7 +372,6 @@ export const renderElement = ({
 					alt={element.alt}
 					role={element.role}
 					format={format}
-					palette={palette}
 					elementId={element.elementId}
 				/>,
 			];
@@ -382,7 +381,7 @@ export const renderElement = ({
 			return [
 				true,
 				<div id={element.elementId}>
-					<InteractiveContentsBlockElement
+					<InteractiveContentsBlockComponent
 						subheadingLinks={element.subheadingLinks}
 						endDocumentElementId={element.endDocumentElementId}
 					/>
@@ -400,7 +399,6 @@ export const renderElement = ({
 				>
 					<MapEmbedBlockComponent
 						format={format}
-						palette={palette}
 						embedUrl={element.embedUrl}
 						height={element.height}
 						width={element.width}
@@ -532,7 +530,6 @@ export const renderElement = ({
 						width={element.width}
 						title={element.title}
 						format={format}
-						palette={palette}
 						caption={element.caption}
 						credit="Spotify"
 					/>
@@ -596,7 +593,6 @@ export const renderElement = ({
 				>
 					<VideoFacebookBlockComponent
 						format={format}
-						palette={palette}
 						embedUrl={element.embedUrl}
 						height={element.height}
 						width={element.width}
@@ -699,7 +695,6 @@ export const renderElement = ({
 				true,
 				<YoutubeBlockComponent
 					format={format}
-					palette={palette}
 					key={index}
 					hideCaption={hideCaption}
 					// eslint-disable-next-line jsx-a11y/aria-role

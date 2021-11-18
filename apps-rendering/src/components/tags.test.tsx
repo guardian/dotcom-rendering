@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import { matchers } from '@emotion/jest';
-import type { Format } from '@guardian/types';
-import { Design, Display, Pillar } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import Tags from 'components/tags';
 import renderer from 'react-test-renderer';
 
@@ -15,10 +15,10 @@ const mockTag = {
 	webUrl: 'https://mapi.co.uk/tag',
 };
 
-const mockFormat: Format = {
-	theme: Pillar.News,
-	design: Design.Comment,
-	display: Display.Standard,
+const mockFormat: ArticleFormat = {
+	theme: ArticlePillar.News,
+	design: ArticleDesign.Comment,
+	display: ArticleDisplay.Standard,
 };
 
 // ----- Tests ----- //

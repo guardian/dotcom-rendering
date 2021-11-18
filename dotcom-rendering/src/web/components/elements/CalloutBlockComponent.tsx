@@ -8,6 +8,7 @@ import { Button } from '@guardian/src-button';
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
 
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { Form } from '../Callout/Form';
 
 const wrapperStyles = css`
@@ -125,10 +126,10 @@ type FormDataType = { [key in string]: any };
 
 export const CalloutBlockComponent = ({
 	callout,
-	palette,
+	format,
 }: {
 	callout: CalloutBlockElement;
-	palette: Palette;
+	format: ArticleFormat;
 }) => {
 	let expandFormButtonRef: HTMLButtonElement | null = null;
 	let firstFieldElementRef: HTMLElement | null = null;
@@ -137,6 +138,8 @@ export const CalloutBlockComponent = ({
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [error, setError] = useState('');
 	const [submissionSuccess, setSubmissionSuccess] = useState(false);
+
+	const palette = decidePalette(format);
 
 	const { title, description, formFields } = callout;
 

@@ -4,14 +4,14 @@ import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { Hide } from '@root/src/web/components/Hide';
 import { Logo } from '@frontend/web/components/Logo';
 import { Links } from '@frontend/web/components/Links';
-import { palette } from '@guardian/src-foundations';
+import { brand } from '@guardian/src-foundations';
 
 const headerStyles = css`
 	/* Ensure header height contains it's children */
 	overflow: auto;
 	/* Prevent a scrollbar appearing here on IE/Edge */
 	-ms-overflow-style: none;
-	background-color: ${palette.brand[400]};
+	background-color: ${brand[400]};
 `;
 
 type Props = {
@@ -22,7 +22,7 @@ type Props = {
 };
 
 export const Header = ({ edition, idUrl, mmaUrl, isAnniversary }: Props) => (
-	<header css={headerStyles}>
+	<div css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
 			<div id="edition-root">
 				<EditionDropdown
@@ -36,5 +36,5 @@ export const Header = ({ edition, idUrl, mmaUrl, isAnniversary }: Props) => (
 		<div id="links-root">
 			<Links supporterCTA="" idUrl={idUrl} mmaUrl={mmaUrl} />
 		</div>
-	</header>
+	</div>
 );

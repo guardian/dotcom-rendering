@@ -4,7 +4,12 @@ import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Flex } from '@frontend/web/components/Flex';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
-import { ArticleDisplay, ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleDesign,
+	ArticleSpecial,
+} from '@guardian/libs';
 
 import { Card } from './Card';
 import { UL } from './components/UL';
@@ -19,7 +24,13 @@ export const Format =
 					<LeftColumn showRightBorder={false}>
 						<></>
 					</LeftColumn>
-					<ArticleContainer>
+					<ArticleContainer
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
+					>
 						<UL direction="row" bottomMargin={true}>
 							<LI padSides={true} percentage="25%">
 								<Card

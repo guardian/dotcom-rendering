@@ -1,6 +1,7 @@
 // ----- Imports ----- //
+import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { neutral } from '@guardian/src-foundations/palette';
-import { Display, Pillar, toOption } from '@guardian/types';
+import { toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
@@ -29,7 +30,7 @@ const Default = (): ReactElement => (
 		item={{
 			...article,
 			standfirst,
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -40,8 +41,8 @@ const Showcase = (): ReactElement => (
 		item={{
 			...article,
 			standfirst,
-			display: Display.Showcase,
-			theme: selectPillar(Pillar.News),
+			display: ArticleDisplay.Showcase,
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -52,7 +53,7 @@ const Comment = (): ReactElement => (
 		item={{
 			...comment,
 			standfirst,
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -63,7 +64,7 @@ const Analysis = (): ReactElement => (
 		item={{
 			...analysis,
 			standfirst,
-			theme: selectPillar(Pillar.News),
+			theme: selectPillar(ArticlePillar.News),
 		}}
 	/>
 );
@@ -79,7 +80,7 @@ const Media = (): ReactElement => (
 			item={{
 				...media,
 				standfirst,
-				theme: selectPillar(Pillar.News),
+				theme: selectPillar(ArticlePillar.News),
 			}}
 		/>
 	</div>

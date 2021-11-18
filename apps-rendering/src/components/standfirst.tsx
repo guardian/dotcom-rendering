@@ -2,11 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
-import { background, neutral, text } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/src-foundations/palette';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types';
-import { Design, Display, map, Special, withDefault } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
+import { background, text } from 'editorialPalette';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe } from 'lib';
@@ -20,22 +22,24 @@ interface Props {
 	item: Item;
 }
 
-const darkStyles: SerializedStyles = darkMode`
-    background: ${background.inverse};
-    color: ${neutral[60]};
+const darkStyles = (format: ArticleFormat): SerializedStyles => darkMode`
+    background: ${background.standfirstPrimaryInverse(format)};
+    color: ${text.standfirstPrimaryInverse(format)};
 
     a {
-        color: ${neutral[60]};
+        color: ${text.standfirstPrimaryInverse(format)};
         border-bottom: 0.0625rem solid ${neutral[46]};
     }
 `;
 
-const isNotBlog = (format: Format): boolean =>
-	format.design !== Design.LiveBlog && format.design !== Design.DeadBlog;
+const isNotBlog = (format: ArticleFormat): boolean =>
+	format.design !== ArticleDesign.LiveBlog &&
+	format.design !== ArticleDesign.DeadBlog;
 
-const styles = (format: Format): SerializedStyles => css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	margin-bottom: ${remSpace[3]};
-	color: ${text.primary};
+	color: ${text.standfirstPrimary(format)};
+	background-color: ${background.standfirstPrimary(format)};
 
 	p,
 	ul {
@@ -46,7 +50,7 @@ const styles = (format: Format): SerializedStyles => css`
 		font-style: normal;
 	}
 
-	${isNotBlog(format) && darkStyles}
+	${isNotBlog(format) && darkStyles(format)}
 `;
 
 const normalHeadline = css`
@@ -69,17 +73,22 @@ const immersiveLabs: SerializedStyles = css`
 `;
 
 const liveblogStyles: SerializedStyles = css`
-	color: ${neutral[100]};
 	${headline.xxxsmall()};
+	margin-bottom: 0;
+	padding-bottom: ${remSpace[3]};
 
 	p {
 		margin: 0;
 		padding: 0.75rem 0;
 	}
+
+	ul {
+		margin-bottom: 0;
+	}
 `;
 
-const media = css`
-	color: ${neutral[86]};
+const media = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.standfirstPrimary(format)};
 	p,
 	ul,
 	li {
@@ -93,27 +102,27 @@ const advertisementFeature = css`
 
 const getStyles = (item: Item): SerializedStyles => {
 	const format = getFormat(item);
-	if (item.display === Display.Immersive) {
-		return item.theme === Special.Labs
+	if (item.display === ArticleDisplay.Immersive) {
+		return item.theme === ArticleSpecial.Labs
 			? css(styles(format), immersiveLabs)
 			: css(styles(format), immersive);
 	}
 
-	if (item.theme === Special.Labs) {
+	if (item.theme === ArticleSpecial.Labs) {
 		return css(styles(format), advertisementFeature);
 	}
 
 	switch (item.design) {
-		case Design.LiveBlog:
+		case ArticleDesign.LiveBlog:
 			return css(styles(format), liveblogStyles);
-		case Design.Review:
-		case Design.Feature:
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.Review:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return css(styles(format), thinHeadline);
-		case Design.Media:
-			return media;
+		case ArticleDesign.Media:
+			return media(format);
 
 		default:
 			return css(styles(format), normalHeadline);
@@ -129,7 +138,7 @@ function content(standfirst: DocumentFragment, item: Item): ReactNode {
 	const bylineInStandfirst =
 		item.byline !== '' && standfirst.textContent?.includes(item.byline);
 
-	if (item.display === Display.Immersive && !bylineInStandfirst) {
+	if (item.display === ArticleDisplay.Immersive && !bylineInStandfirst) {
 		return pipe(
 			item.bylineHtml,
 			map((byline) => (

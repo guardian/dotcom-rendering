@@ -115,6 +115,7 @@ type Palette = {
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		overlayedCaption: Colour;
+		pagination: Colour;
 	};
 	background: {
 		article: Colour;
@@ -125,6 +126,7 @@ type Palette = {
 		headline: Colour;
 		headlineByline: Colour;
 		bullet: Colour;
+		bulletStandfirst: Colour;
 		header: Colour;
 		standfirst: Colour;
 		richLink: Colour;
@@ -159,12 +161,14 @@ type Palette = {
 		lines: Colour;
 		secondary: Colour;
 		sportBorderTop: Colour;
+		pagination: Colour;
 	};
 	topBar: {
 		card: Colour;
 	};
 	hover: {
 		headlineByline: Colour;
+		pagination: Colour;
 	};
 };
 
@@ -483,8 +487,6 @@ interface CAPIType {
 	// The logic is date-driven. See:
 	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
 	isLegacyInteractive?: boolean;
-
-	anniversaryInteractiveAtom?: InteractiveAtomBlockElement; // TEMPORARY, to be removed following 200th anniversary
 }
 
 // Browser data models. Note the CAPI prefix here means something different to

@@ -1,5 +1,12 @@
 import { css } from '@emotion/react';
-import { opinion, palette, space } from '@guardian/src-foundations';
+import {
+	background,
+	brand,
+	line,
+	opinion,
+	space,
+	text,
+} from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
 
@@ -23,7 +30,7 @@ export const headingStyles = css`
 `;
 
 export const bodySeparator = css`
-	border-top: 1px ${palette.line.primary} solid;
+	border-top: 1px ${line.primary} solid;
 `;
 
 export const bodyBold = css`
@@ -65,16 +72,16 @@ export const actionButtons = css`
 `;
 
 export const registerButton = css`
-	color: ${palette.text.ctaPrimary} !important;
+	color: ${text.ctaPrimary} !important;
 `;
 
 export const laterButton = css`
-	color: ${palette.brand[400]} !important;
+	color: ${brand[400]} !important;
 `;
 
 export const signInLink = css`
-	color: ${palette.text.anchorPrimary} !important;
-	text-decoration-color: ${palette.line.primary} !important;
+	color: ${text.anchorPrimary} !important;
+	text-decoration-color: ${line.primary} !important;
 	text-underline-position: under;
 `;
 
@@ -84,22 +91,22 @@ export const faq = css`
 	margin-top: ${space[5]}px;
 
 	& a {
-		color: ${palette.text.anchorPrimary};
+		color: ${text.anchorPrimary};
 		display: block;
 		margin-bottom: ${space[4]}px;
-		text-decoration-color: ${palette.line.primary};
+		text-decoration-color: ${line.primary};
 		text-underline-position: under;
 	}
 
 	& a:hover {
-		color: ${palette.text.anchorPrimary};
+		color: ${text.anchorPrimary};
 	}
 `;
 
 export const privacyLink = css`
-	color: ${palette.text.anchorPrimary};
+	color: ${text.anchorPrimary};
 	text-decoration: underline;
-	text-decoration-color: ${palette.line.primary};
+	text-decoration-color: ${line.primary};
 	text-underline-position: under;
 	border: 0;
 	background: transparent;
@@ -117,7 +124,7 @@ export const firstParagraphOverlay = (isComment: boolean) => css`
 	/* "transparent" only works here because == rgba(0,0,0,0) */
 	background-image: linear-gradient(
 		0deg,
-		${isComment ? opinion[800] : palette.background.primary},
+		${isComment ? opinion[800] : background.primary},
 		70%,
 		rgba(255, 255, 255, 0)
 	);

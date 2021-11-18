@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { palette } from '@guardian/src-foundations';
+import { neutral } from '@guardian/src-foundations';
 import { headline } from '@guardian/src-foundations/typography';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
@@ -22,7 +22,7 @@ const headerStyle = css`
 	${headline.small()};
 	font-weight: 100;
 	padding-top: 3px;
-	color: ${palette.neutral[7]};
+	color: ${neutral[7]};
 `;
 
 const bylineStyle = (pillar: ArticleTheme) => css`
@@ -50,8 +50,8 @@ const bylineWrapper = css`
 
 	background-image: repeating-linear-gradient(
 		to bottom,
-		${palette.neutral[86]},
-		${palette.neutral[86]} 1px,
+		${neutral[86]},
+		${neutral[86]} 1px,
 		transparent 1px,
 		transparent 4px
 	);
