@@ -50,55 +50,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
-
-const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			/* IE Fallback */
-			display: flex;
-			flex-direction: column;
-			${until.desktop} {
-				margin-left: 0px;
-			}
-			${from.desktop} {
-				margin-left: 320px;
-			}
-
-			@supports (display: grid) {
-				display: grid;
-				width: 100%;
-				margin-left: 0;
-
-				grid-column-gap: 10px;
-
-				/*
-					Explanation of each unit of grid-template-columns
-
-					Main content
-					Empty border for spacing
-					Right Column
-				*/
-				${from.desktop} {
-					grid-template-columns: 309px 1px 1fr;
-					grid-template-areas: 'title	border headline';
-				}
-
-				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
-					grid-template-areas:
-						'title'
-						'headline';
-				}
-
-				${until.tablet} {
-					grid-column-gap: 0px;
-				}
-			}
-		`}
-	>
-		{children}
-	</div>
-);
+import { Placeholder } from '../components/Placeholder';
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -264,6 +216,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const showComments = CAPI.isCommentable;
 
+	const showMatchTabs = CAPI.matchUrl;
+
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
@@ -353,62 +307,61 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 			<main>
 				<article>
-					<ElementContainer
+					<ContainerLayout
 						showTopBorder={false}
 						backgroundColour={palette.background.header}
 						borderColour={palette.border.headline}
+						sideBorders={true}
+						leftColSize="wide"
+						leftContent={
+							// eslint-disable-next-line react/jsx-wrap-multilines
+							<ArticleTitle
+								format={format}
+								palette={palette}
+								tags={CAPI.tags}
+								sectionLabel={CAPI.sectionLabel}
+								sectionUrl={CAPI.sectionUrl}
+								guardianBaseURL={CAPI.guardianBaseURL}
+								badge={CAPI.badge}
+							/>
+						}
 					>
-						<HeadlineGrid>
-							<GridItem area="title">
-								<ArticleTitle
-									format={format}
-									palette={palette}
-									tags={CAPI.tags}
-									sectionLabel={CAPI.sectionLabel}
-									sectionUrl={CAPI.sectionUrl}
-									guardianBaseURL={CAPI.guardianBaseURL}
-									badge={CAPI.badge}
-								/>
-							</GridItem>
-							<GridItem area="headline">
-								<div css={maxWidth}>
-									<ArticleHeadlinePadding
-										design={format.design}
-									>
-										{age && (
-											<div css={ageWarningMargins}>
-												<AgeWarning age={age} />
-											</div>
-										)}
-										<ArticleHeadline
-											format={format}
-											headlineString={CAPI.headline}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
-											palette={palette}
-										/>
-										{age && (
-											<AgeWarning
-												age={age}
-												isScreenReader={true}
-											/>
-										)}
-									</ArticleHeadlinePadding>
-								</div>
-								{CAPI.starRating || CAPI.starRating === 0 ? (
-									<div css={starWrapper}>
-										<StarRating
-											rating={CAPI.starRating}
-											size="large"
-										/>
+						{CAPI.matchUrl && showMatchTabs && (
+							<Placeholder rootId="match-tabs" height={40} />
+						)}
+						<div css={maxWidth}>
+							<ArticleHeadlinePadding design={format.design}>
+								{age && (
+									<div css={ageWarningMargins}>
+										<AgeWarning age={age} />
 									</div>
-								) : (
-									<></>
 								)}
-							</GridItem>
-						</HeadlineGrid>
-					</ElementContainer>
-
+								<ArticleHeadline
+									format={format}
+									headlineString={CAPI.headline}
+									tags={CAPI.tags}
+									byline={CAPI.author.byline}
+									palette={palette}
+								/>
+								{age && (
+									<AgeWarning
+										age={age}
+										isScreenReader={true}
+									/>
+								)}
+							</ArticleHeadlinePadding>
+						</div>
+						{CAPI.starRating || CAPI.starRating === 0 ? (
+							<div css={starWrapper}>
+								<StarRating
+									rating={CAPI.starRating}
+									size="large"
+								/>
+							</div>
+						) : (
+							<></>
+						)}
+					</ContainerLayout>
 					<ContainerLayout
 						showTopBorder={false}
 						backgroundColour={palette.background.standfirst}
