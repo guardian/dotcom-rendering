@@ -135,7 +135,7 @@ const backgroundHeadline = (format: ArticleFormat): Colour => {
 	) {
 		return opinion[800];
 	} else if (format.design === ArticleDesign.Media) {
-		return neutral[7];
+		return neutral[10];
 	}
 
 	return neutral[100];
@@ -161,7 +161,7 @@ const backgroundHeadlineDark = (format: ArticleFormat): Colour => {
 				return news[200];
 		}
 	}
-	return neutral[7];
+	return neutral[10];
 };
 
 const borderArticleLink = (format: ArticleFormat): Colour => {
