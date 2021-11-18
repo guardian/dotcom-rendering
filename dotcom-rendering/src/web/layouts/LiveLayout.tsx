@@ -327,10 +327,10 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</Portal>
 
-<Placeholder
-rootId="match-tabs"
-height={230}
-/>
+					<Placeholder
+						rootId="match-tabs"
+						height={230}
+					/>
 				)}
 				<div css={maxWidth}>
 					<ArticleHeadlinePadding design={format.design}>
