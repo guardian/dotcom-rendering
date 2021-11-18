@@ -16,7 +16,6 @@ export const GetMatchTabs = ({ matchUrl, format }: Props) => {
 		reportUrl?: string;
 		minByMinUrl?: string;
 	}>(matchUrl);
-	console.log(matchUrl);
 	if (loading) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering

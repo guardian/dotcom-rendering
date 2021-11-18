@@ -15,7 +15,6 @@ const thinGreySolid = (palette: Palette) =>
 const GreyBorder = ({ palette }: { palette: Palette }) => (
 	<div
 		css={css`
-			/* stylelint-disable-next-line color-no-hex */
 			border-left: ${thinGreySolid(palette)};
 			margin-left: ${space[1]}px;
 			width: ${space[2]}px;
