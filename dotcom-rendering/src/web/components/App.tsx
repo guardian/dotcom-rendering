@@ -901,7 +901,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</Portal>
 			)}
 			{CAPI.matchUrl && (
-				<Portal rootId="match-nav">
+				<Portal rootId="match-tabs">
 					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />
 				</Portal>
 			)}
