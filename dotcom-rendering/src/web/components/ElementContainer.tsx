@@ -88,8 +88,7 @@ export const ElementContainer = ({
 				</div>
 			);
 			const style = css`
-				${backgroundColour &&
-				setBackgroundColour(backgroundColour)};
+				${backgroundColour && setBackgroundColour(backgroundColour)};
 				${backgroundColourMobile &&
 				setBackgroundColourMobile(backgroundColourMobile)};
 			`;
