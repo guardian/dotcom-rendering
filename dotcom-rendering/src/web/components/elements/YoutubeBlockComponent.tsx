@@ -97,12 +97,14 @@ export const YoutubeBlockComponent = ({
 		import(
 			/* webpackChunkName: "cmp" */ '@guardian/consent-management-platform'
 		)
-			.then((module: { onConsentChange: (callback: Callback) => void }) => {
-				module.onConsentChange((newConsent: ConsentState) => {
-					console.log('consent changed, new', newConsent);
-					setConsentState(newConsent);
-				});
-			})
+			.then(
+				(module: { onConsentChange: (callback: Callback) => void }) => {
+					module.onConsentChange((newConsent: ConsentState) => {
+						console.log('consent changed, new', newConsent);
+						setConsentState(newConsent);
+					});
+				},
+			)
 			.catch((error) => {
 				const msg = `Error: ${error}`;
 				// eslint-disable-next-line no-console
