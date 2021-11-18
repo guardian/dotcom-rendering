@@ -484,23 +484,32 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								>
 									<ArticleContainer format={format}>
 										{CAPI.pagination &&
-										CAPI.pagination.currentPage !== 1 && (
-											<Pagination
-												currentPage={
-													CAPI.pagination
-														?.currentPage || 1
-												}
-												totalPages={
-													CAPI.pagination
-														?.totalPages || 1
-												}
-												newest={CAPI.pagination?.newest}
-												oldest={CAPI.pagination?.oldest}
-												newer={CAPI.pagination?.newer}
-												older={CAPI.pagination?.older}
-												format={format}
-											/>
-										)}
+											CAPI.pagination.currentPage !==
+												1 && (
+												<Pagination
+													currentPage={
+														CAPI.pagination
+															?.currentPage || 1
+													}
+													totalPages={
+														CAPI.pagination
+															?.totalPages || 1
+													}
+													newest={
+														CAPI.pagination?.newest
+													}
+													oldest={
+														CAPI.pagination?.oldest
+													}
+													newer={
+														CAPI.pagination?.newer
+													}
+													older={
+														CAPI.pagination?.older
+													}
+													format={format}
+												/>
+											)}
 										<ArticleBody
 											format={format}
 											palette={palette}
@@ -511,22 +520,30 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											webTitle={CAPI.webTitle}
 										/>
 										{CAPI.pagination &&
-										CAPI.pagination.totalPages > 1 && (
-											<Pagination
-												currentPage={
-													CAPI.pagination
-														?.currentPage || 1
-												}
-												totalPages={
-													CAPI.pagination
-														?.totalPages || 1
-												}
-												newest={CAPI.pagination?.newest}
-												oldest={CAPI.pagination?.oldest}
-												newer={CAPI.pagination?.newer}
-												older={CAPI.pagination?.older}
-												format={format}
-											/>
+											CAPI.pagination.totalPages > 1 && (
+												<Pagination
+													currentPage={
+														CAPI.pagination
+															?.currentPage || 1
+													}
+													totalPages={
+														CAPI.pagination
+															?.totalPages || 1
+													}
+													newest={
+														CAPI.pagination?.newest
+													}
+													oldest={
+														CAPI.pagination?.oldest
+													}
+													newer={
+														CAPI.pagination?.newer
+													}
+													older={
+														CAPI.pagination?.older
+													}
+													format={format}
+												/>
 											)}
 										{showBodyEndSlot && (
 											<div id="slot-body-end" />
