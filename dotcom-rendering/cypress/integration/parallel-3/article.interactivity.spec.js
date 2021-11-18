@@ -53,7 +53,6 @@ describe('Interactivity', function () {
 				cy.visit(`/Article?url=${articleUrl}`);
 				cy.contains('Lifestyle');
 				cy.get('[data-component="most-popular"]').scrollIntoView({
-					duration: 300,
 					offset: { top: 150 },
 				});
 				cy.wait('@getMostReadGeo');

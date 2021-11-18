@@ -1,11 +1,13 @@
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { Caption } from '@frontend/web/components/Caption';
+import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import {
 	ArticleDisplay,
 	ArticleDesign,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
+import { css } from '@emotion/react';
 import { decidePalette } from '../lib/decidePalette';
 
 export default {
@@ -181,3 +183,90 @@ export const Padded = () => (
 	</ElementContainer>
 );
 Padded.story = { name: 'when padded' };
+
+export const Overlayed = () => (
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
+		<div
+			css={css`
+				position: relative;
+				height: 600px;
+				width: 800px;
+
+				img {
+					height: 100%;
+					width: 100%;
+					object-fit: cover;
+				}
+			`}
+		>
+			<img
+				alt=""
+				src="https://i.guim.co.uk/img/media/eaecb92d15c7e9691274226d0935038bfcc9de53/0_0_6720_4480/master/6720.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=452e8da9ad0b2ba274ae8987b3799fd4"
+			/>
+			<Caption
+				isOverlayed={true}
+				captionText="This is how a caption looks when it's overlayed"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				palette={decidePalette({
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				})}
+				padCaption={true}
+			/>
+		</div>
+	</ElementContainer>
+);
+Overlayed.story = { name: 'when overlayed' };
+
+export const OverlayedWithStars = () => (
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
+		<div
+			css={css`
+				position: relative;
+				height: 600px;
+				width: 800px;
+
+				img {
+					height: 100%;
+					width: 100%;
+					object-fit: cover;
+				}
+			`}
+		>
+			<img
+				alt=""
+				src="https://i.guim.co.uk/img/media/eaecb92d15c7e9691274226d0935038bfcc9de53/0_0_6720_4480/master/6720.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=452e8da9ad0b2ba274ae8987b3799fd4"
+			/>
+			<Caption
+				isOverlayed={true}
+				captionText="This is how a caption looks when it's overlayed with stars"
+				format={{
+					display: ArticleDisplay.Showcase,
+					design: ArticleDesign.Review,
+					theme: ArticlePillar.News,
+				}}
+				palette={decidePalette({
+					display: ArticleDisplay.Showcase,
+					design: ArticleDesign.Review,
+					theme: ArticlePillar.News,
+				})}
+				padCaption={true}
+			/>
+			<div
+				css={css`
+					position: absolute;
+					bottom: 0;
+					background-color: yellow;
+				`}
+			>
+				<StarRating rating={3} size="large" />
+			</div>
+		</div>
+	</ElementContainer>
+);
+OverlayedWithStars.story = { name: 'when overlayed on stars' };

@@ -2,13 +2,14 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { neutral, news, remSpace } from '@guardian/src-foundations';
+import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { Column, Columns, Container } from '@guardian/src-layout';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';
+import { background } from 'editorialPalette';
 import HeaderMedia from 'headerMedia';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
@@ -17,7 +18,7 @@ import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';
 import Series from './series';
 
-// // ----- Styles ----- //
+// ----- Component ----- //
 
 const headerBackgroundStyles = ({
 	liveblogBackground,
@@ -61,7 +62,10 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 
 	return (
 		<header>
-			<Container element="div" backgroundColor={news[300]}>
+			<Container
+				element="div"
+				backgroundColor={background.headlinePrimary(format)}
+			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Series item={item} />
@@ -71,7 +75,10 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 					</Column>
 				</Columns>
 			</Container>
-			<Container element="div" backgroundColor={news[200]}>
+			<Container
+				element="div"
+				backgroundColor={background.standfirstPrimary(format)}
+			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<time css={timestampStyles}>

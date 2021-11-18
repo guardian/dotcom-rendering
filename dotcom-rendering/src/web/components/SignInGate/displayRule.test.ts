@@ -1,6 +1,4 @@
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-import { Article } from '@root/fixtures/generated/articles/Article';
-import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 import {
 	isNPageOrHigherPageView,
 	isIOS9,
@@ -8,8 +6,6 @@ import {
 	isValidSection,
 	isValidTag,
 } from './displayRule';
-
-const CAPI = Article;
 
 describe('SignInGate - displayRule methods', () => {
 	describe('isNPageOrHigherPageView', () => {
@@ -121,92 +117,48 @@ describe('SignInGate - displayRule methods', () => {
 	});
 
 	describe('isValidContentType', () => {
-		let defaultCAPIBrowser: CAPIBrowserType;
-		let CAPIBrowser: CAPIBrowserType;
-
-		beforeAll(() => {
-			defaultCAPIBrowser = makeGuardianBrowserCAPI(CAPI);
-		});
-
-		beforeEach(() => {
-			// reset the CAPI data
-			CAPIBrowser = { ...defaultCAPIBrowser };
-		});
-
 		test('is a valid type - article', () => {
-			CAPIBrowser.contentType = 'Article';
-
-			expect(isValidContentType(CAPIBrowser)).toBe(true);
+			expect(isValidContentType('Article')).toBe(true);
 		});
 
 		test('is not a valid type - LiveBlog', () => {
-			CAPIBrowser.contentType = 'LiveBlog';
-
-			expect(isValidContentType(CAPIBrowser)).toBe(false);
+			expect(isValidContentType('LiveBlog')).toBe(false);
 		});
 	});
 
 	describe('isValidSection', () => {
-		let defaultCAPIBrowser: CAPIBrowserType;
-		let CAPIBrowser: CAPIBrowserType;
-
-		beforeAll(() => {
-			defaultCAPIBrowser = makeGuardianBrowserCAPI(CAPI);
-		});
-
-		beforeEach(() => {
-			// reset the CAPI data
-			CAPIBrowser = { ...defaultCAPIBrowser };
-		});
-
 		test('is valid section - politics - returns true', () => {
-			CAPIBrowser.sectionName = 'politics';
-
-			expect(isValidSection(CAPIBrowser)).toBe(true);
+			expect(isValidSection('politics')).toBe(true);
 		});
 
 		test('is valid section - membership - return false', () => {
-			CAPIBrowser.sectionName = 'membership';
-
-			expect(isValidSection(CAPIBrowser)).toBe(false);
+			expect(isValidSection('membership')).toBe(false);
 		});
 	});
 
 	describe('isValidTag', () => {
-		let defaultCAPIBrowser: CAPIBrowserType;
-		let CAPIBrowser: CAPIBrowserType;
-
-		beforeAll(() => {
-			defaultCAPIBrowser = makeGuardianBrowserCAPI(CAPI);
-		});
-
-		beforeEach(() => {
-			// reset the CAPI data
-			CAPIBrowser = { ...defaultCAPIBrowser };
-		});
-
 		test('is valid tag - us-news/us-news - returns true', () => {
-			CAPIBrowser.tags = [
-				{
-					id: 'us-news/us-news',
-					type: 'Keyword',
-					title: 'US news',
-				},
-			];
-
-			expect(isValidTag(CAPIBrowser)).toBe(true);
+			expect(
+				isValidTag([
+					{
+						id: 'us-news/us-news',
+						type: 'Keyword',
+						title: 'US news',
+					},
+				]),
+			).toBe(true);
 		});
 
 		test('is valid tag - info/newsletter-sign-up - return false', () => {
-			CAPIBrowser.tags = [
-				{
-					id: 'info/newsletter-sign-up',
-					type: 'Keyword',
-					title: 'Newsletters',
-				},
-			];
-
-			expect(isValidTag(CAPIBrowser)).toBe(false);
+			expect(
+				isValidTag([
+					{
+						id: 'info/newsletter-sign-up',
+						type: 'Keyword',
+						title: 'Newsletters',
+					},
+				]),
+			).toBe(false);
 		});
 	});
 });
