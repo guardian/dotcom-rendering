@@ -141,7 +141,7 @@ const getDesiredWidthForBreakpoint = (
 			return breakpoint;
 		case 'halfWidth':
 			if (breakpoint >= breakpoints.phablet) return 300;
-			return breakpoint / 2;
+			return Math.round(breakpoint / 2);
 		case 'thumbnail':
 			return 140;
 		case 'immersive':
