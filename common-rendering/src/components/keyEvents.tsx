@@ -11,13 +11,12 @@ import {
 	news,
 	sport,
 	opinion,
-	background,
 } from "@guardian/src-foundations/palette"
 import { Link } from "@guardian/src-link";
 import { ArticlePillar, ArticleTheme } from "@guardian/libs";
-import { from, until } from "@guardian/src-foundations/mq";
+import { from } from "@guardian/src-foundations/mq";
 import { darkModeCss } from "../lib";
-import DropDown from "./dropDown";
+import Accordion from "./accordion";
 
 // ----- Component ----- //
 type paletteId = 300 | 400 | 500;
@@ -54,12 +53,6 @@ const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
 			return news[paletteId];
 	}
 };
-
-const whiteBackground: SerializedStyles = css`
-	${until.desktop} {
-		background-color: ${background.primary};
-	}
-`;
 
 const keyEventWrapperStyles = (
 	supportsDarkMode: boolean
@@ -162,11 +155,10 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 	return (
 		<div css={keyEventWrapperStyles(supportsDarkMode)}>
-			<DropDown
+			<Accordion
 				supportsDarkMode={supportsDarkMode}
-				dropDownTitle="Key events"
-				backgroundBody={whiteBackground}
-				backgroundTitle={whiteBackground}
+				accordionTitle="Key events"
+				backgroundBody="white"
 			>
 				<ul css={listStyles(supportsDarkMode)}>
 					{keyEvents.slice(0, 7).map((event, index) => (
@@ -178,7 +170,7 @@ const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 						/>
 					))}
 				</ul>
-			</DropDown>
+			</Accordion>
 		</div>
 	);
 };

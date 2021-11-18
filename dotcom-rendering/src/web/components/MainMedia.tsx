@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { until } from '@guardian/src-foundations/mq';
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
@@ -24,6 +24,17 @@ const mainMedia = css`
 		flex: 0 0 auto; /* IE */
 		width: 100%;
 		height: 100%;
+	}
+`;
+
+const noGutters = css`
+	${until.phablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
 	}
 `;
 
@@ -58,27 +69,34 @@ export const MainMedia: React.FC<{
 	host,
 	pageId,
 	webTitle,
-}) => (
-	<div
-		css={[
-			mainMedia,
-			format.display === ArticleDisplay.Immersive && immersiveWrapper,
-		]}
-	>
-		{elements.map((element, index) =>
-			renderArticleElement({
-				format,
-				palette,
-				element,
-				adTargeting,
-				host,
-				index,
-				isMainMedia: true,
-				starRating,
-				hideCaption,
-				pageId,
-				webTitle,
-			}),
-		)}
-	</div>
-);
+}) => {
+	const isInteractive = format.design === ArticleDesign.Interactive;
+	const isLiveOrDeadBlog =
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
+	return (
+		<div
+			css={[
+				mainMedia,
+				isInteractive && immersiveWrapper,
+				!isInteractive && !isLiveOrDeadBlog && noGutters,
+			]}
+		>
+			{elements.map((element, index) =>
+				renderArticleElement({
+					format,
+					palette,
+					element,
+					adTargeting,
+					host,
+					index,
+					isMainMedia: true,
+					starRating,
+					hideCaption,
+					pageId,
+					webTitle,
+				}),
+			)}
+		</div>
+	);
+};

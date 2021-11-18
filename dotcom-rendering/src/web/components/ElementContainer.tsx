@@ -1,7 +1,7 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
 
 import { border } from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
 import { center } from '@root/src/web/lib/center';
 // @ts-ignore-start
 import { jsx as _jsx } from 'react/jsx-runtime';
@@ -27,7 +27,14 @@ const topBorder = (colour: string) => emoCss`
 `;
 
 const setBackgroundColour = (colour: string) => emoCss`
-	background-color: ${colour};
+	background-color: ${colour}
+`;
+
+const setBackgroundColourMobile = (colour: string) => emoCss`
+	${until.desktop} {
+		background-color: ${colour};
+	}
+
 `;
 
 type Props = {
@@ -36,6 +43,7 @@ type Props = {
 	showTopBorder?: boolean;
 	padded?: boolean;
 	backgroundColour?: string;
+	backgroundColourMobile?: string;
 	borderColour?: string;
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
@@ -58,6 +66,7 @@ export const ElementContainer = ({
 	padded = true,
 	borderColour = border.secondary,
 	backgroundColour,
+	backgroundColourMobile,
 	shouldCenter = true,
 	children,
 	element = 'div',
@@ -79,7 +88,10 @@ export const ElementContainer = ({
 				</div>
 			);
 			const style = css`
-				${backgroundColour && setBackgroundColour(backgroundColour)}
+				${backgroundColour &&
+				setBackgroundColour(backgroundColour)};
+				${backgroundColourMobile &&
+				setBackgroundColourMobile(backgroundColourMobile)};
 			`;
 			// Create a react element from the tagName passed in OR
 			// default to <div>

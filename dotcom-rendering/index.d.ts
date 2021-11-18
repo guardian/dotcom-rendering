@@ -136,8 +136,7 @@ type Palette = {
 		carouselDotFocus: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
-		liveblogDropDownBody: Colour;
-		liveblogDropDownTitle: Colour;
+		liveBlogMobile: Colour
 	};
 	fill: {
 		commentCount: Colour;

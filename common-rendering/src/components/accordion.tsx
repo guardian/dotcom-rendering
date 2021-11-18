@@ -2,7 +2,7 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { neutral, line } from "@guardian/src-foundations/palette";
+import { neutral, line, background } from "@guardian/src-foundations/palette";
 import { headline } from "@guardian/src-foundations/typography";
 import { remSpace } from "@guardian/src-foundations";
 import { focusHalo } from "@guardian/src-foundations/accessibility";
@@ -15,9 +15,8 @@ import { darkModeCss } from "../lib";
 interface DropDownProps {
 	children: React.ReactNode;
 	supportsDarkMode: boolean;
-	dropDownTitle: string;
-	backgroundBody?: SerializedStyles;
-	backgroundTitle?: SerializedStyles;
+	accordionTitle: string;
+	backgroundBody: 'white' | 'grey';
 }
 
 const detailsStyles: SerializedStyles = css`
@@ -37,9 +36,11 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	justify-content: space-between;
 	align-items: center;
 	border-top: ${line.primary} 1px solid;
+	background-color: ${background.primary};
+	padding: ${remSpace[1]} ${remSpace[2]} 0 ${remSpace[3]};
 
 	&:focus {
-		${focusHalo}
+		${focusHalo};
 	}
 
 	path {
@@ -56,6 +57,10 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		}
 	`}
 
+	${from.phablet} {
+		padding: ${remSpace[1]} ${remSpace[4]} 0 ${remSpace[5]};
+	}
+
 	${from.desktop} {
 		display: none;
 	}
@@ -64,16 +69,28 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
 	${headline.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
 	color: ${neutral[7]};
-	padding: 0 ${remSpace[1]} 0 ${remSpace[3]};
 
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[86]};
 	`}
-
-	${from.phablet} {
-		margin: ${remSpace[1]} ${remSpace[4]} 0;
-	}
 `;
+
+const backgroundColour = (backgroundBody: 'white' | 'grey'): SerializedStyles => {
+	if(backgroundBody === 'white') {
+		return css`
+			background-color: ${background.primary};
+			${from.desktop} {
+				background-color: transparent;
+			}
+		`
+	}
+	return css`
+		background-color: ${neutral[97]};
+		${from.desktop} {
+			background-color: transparent;
+		}
+	`;
+};
 
 const paddingBody: SerializedStyles = css`
 	padding: ${remSpace[3]};
@@ -87,17 +104,16 @@ const paddingBody: SerializedStyles = css`
 	}
 `;
 
-const DropDown = ({
+const Accordion = ({
 	children,
 	supportsDarkMode,
-	dropDownTitle,
-	backgroundTitle,
+	accordionTitle,
 	backgroundBody,
 }: DropDownProps) => {
 	return (
-		<details open css={[detailsStyles]}>
-			<summary css={[titleRowStyles(supportsDarkMode), backgroundTitle]}>
-				<h2 css={titleStyle(supportsDarkMode)}>{dropDownTitle}</h2>
+		<details open css={detailsStyles}>
+			<summary css={titleRowStyles(supportsDarkMode)}>
+				<h2 css={titleStyle(supportsDarkMode)}>{accordionTitle}</h2>
 				<span className="is-off">
 					<SvgChevronDownSingle />
 				</span>
@@ -105,11 +121,11 @@ const DropDown = ({
 					<SvgChevronUpSingle />
 				</span>
 			</summary>
-			<div css={[backgroundBody, paddingBody]}>{children}</div>
+			<div css={[backgroundColour(backgroundBody), paddingBody]}>{children}</div>
 		</details>
 	);
 };
 
 // ----- Exports ----- //
 
-export default DropDown;
+export default Accordion;

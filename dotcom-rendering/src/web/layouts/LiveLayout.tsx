@@ -49,7 +49,7 @@ import {
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { space } from '@guardian/src-foundations';
-import DropDown from '@guardian/common-rendering/src/components/dropDown';
+import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { ContainerLayout } from '../components/ContainerLayout';
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
@@ -80,7 +80,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 240px 1px 1fr;
+					grid-template-columns: 309px 1px 1fr;
 					grid-template-areas:
 						'lines		border media'
 						'meta		border media'
@@ -91,7 +91,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${from.wide} {
-					grid-template-columns: 240px 1px 1fr 340px;
+					grid-template-columns: 309px 1px 1fr 340px;
 					grid-template-areas:
 						'lines 		border media right-column'
 						'meta  		border media right-column'
@@ -144,6 +144,13 @@ const keyEventsBottomMargin = css`
 	}
 `;
 
+const accordionBottomMargin = css`
+	margin-bottom: ${space[2]}px;
+	${from.desktop} {
+		margin-bottom: 0;
+	}
+`;
+
 const marginBottomMobile = css`
 	margin-bottom: 0;
 
@@ -185,19 +192,6 @@ const ageWarningMargins = css`
 		margin-top: 0;
 	}
 `;
-
-const backgroundBody = (palette: Palette) => css`
-	${until.desktop} {
-		background-color: ${palette.background.liveblogDropDownBody};
-	}
-`;
-
-const backgroundTitle = (palette: Palette) => css`
-	${until.desktop} {
-		background-color: ${palette.background.liveblogDropDownTitle};
-	}
-`;
-
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
@@ -406,6 +400,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={palette.background.article}
+						backgroundColourMobile={
+							palette.background.liveBlogMobile
+						}
 						borderColour={palette.border.article}
 						padded={false}
 					>
@@ -476,102 +473,117 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="body">
-								<DropDown
-									supportsDarkMode={false}
-									dropDownTitle="Live feed"
-									backgroundBody={backgroundBody(palette)}
-									backgroundTitle={backgroundTitle(palette)}
-								>
-									<ArticleContainer format={format}>
-										{CAPI.pagination &&
-											CAPI.pagination.currentPage !==
-												1 && (
-												<Pagination
-													currentPage={
-														CAPI.pagination
-															?.currentPage || 1
-													}
-													totalPages={
-														CAPI.pagination
-															?.totalPages || 1
-													}
-													newest={
-														CAPI.pagination?.newest
-													}
-													oldest={
-														CAPI.pagination?.oldest
-													}
-													newer={
-														CAPI.pagination?.newer
-													}
-													older={
-														CAPI.pagination?.older
-													}
-													format={format}
-												/>
+								<div css={accordionBottomMargin}>
+									<Accordion
+										supportsDarkMode={false}
+										accordionTitle="Live feed"
+										backgroundBody="grey"
+									>
+										<ArticleContainer format={format}>
+											{CAPI.pagination &&
+												CAPI.pagination.currentPage !==
+													1 && (
+													<Pagination
+														currentPage={
+															CAPI.pagination
+																?.currentPage ||
+															1
+														}
+														totalPages={
+															CAPI.pagination
+																?.totalPages ||
+															1
+														}
+														newest={
+															CAPI.pagination
+																?.newest
+														}
+														oldest={
+															CAPI.pagination
+																?.oldest
+														}
+														newer={
+															CAPI.pagination
+																?.newer
+														}
+														older={
+															CAPI.pagination
+																?.older
+														}
+														format={format}
+													/>
+												)}
+
+											<ArticleBody
+												format={format}
+												palette={palette}
+												blocks={CAPI.blocks}
+												adTargeting={adTargeting}
+												host={host}
+												pageId={CAPI.pageId}
+												webTitle={CAPI.webTitle}
+											/>
+											{CAPI.pagination &&
+												CAPI.pagination.totalPages >
+													1 && (
+													<Pagination
+														currentPage={
+															CAPI.pagination
+																?.currentPage ||
+															1
+														}
+														totalPages={
+															CAPI.pagination
+																?.totalPages ||
+															1
+														}
+														newest={
+															CAPI.pagination
+																?.newest
+														}
+														oldest={
+															CAPI.pagination
+																?.oldest
+														}
+														newer={
+															CAPI.pagination
+																?.newer
+														}
+														older={
+															CAPI.pagination
+																?.older
+														}
+														format={format}
+													/>
+												)}
+											{showBodyEndSlot && (
+												<div id="slot-body-end" />
 											)}
-										<ArticleBody
-											format={format}
-											palette={palette}
-											blocks={CAPI.blocks}
-											adTargeting={adTargeting}
-											host={host}
-											pageId={CAPI.pageId}
-											webTitle={CAPI.webTitle}
-										/>
-										{CAPI.pagination &&
-											CAPI.pagination.totalPages > 1 && (
-												<Pagination
-													currentPage={
-														CAPI.pagination
-															?.currentPage || 1
-													}
-													totalPages={
-														CAPI.pagination
-															?.totalPages || 1
-													}
-													newest={
-														CAPI.pagination?.newest
-													}
-													oldest={
-														CAPI.pagination?.oldest
-													}
-													newer={
-														CAPI.pagination?.newer
-													}
-													older={
-														CAPI.pagination?.older
-													}
-													format={format}
-												/>
-											)}
-										{showBodyEndSlot && (
-											<div id="slot-body-end" />
-										)}
-										<Lines
-											data-print-layout="hide"
-											count={4}
-											effect="straight"
-										/>
-										<SubMeta
-											palette={palette}
-											format={format}
-											subMetaKeywordLinks={
-												CAPI.subMetaKeywordLinks
-											}
-											subMetaSectionLinks={
-												CAPI.subMetaSectionLinks
-											}
-											pageId={CAPI.pageId}
-											webUrl={CAPI.webURL}
-											webTitle={CAPI.webTitle}
-											showBottomSocialButtons={
-												CAPI.showBottomSocialButtons
-											}
-											badge={CAPI.badge}
-										/>
-									</ArticleContainer>
-								</DropDown>
+											<Lines
+												data-print-layout="hide"
+												count={4}
+												effect="straight"
+											/>
+											<SubMeta
+												palette={palette}
+												format={format}
+												subMetaKeywordLinks={
+													CAPI.subMetaKeywordLinks
+												}
+												subMetaSectionLinks={
+													CAPI.subMetaSectionLinks
+												}
+												pageId={CAPI.pageId}
+												webUrl={CAPI.webURL}
+												webTitle={CAPI.webTitle}
+												showBottomSocialButtons={
+													CAPI.showBottomSocialButtons
+												}
+												badge={CAPI.badge}
+											/>
+										</ArticleContainer>
+									</Accordion>
+								</div>
 							</GridItem>
 							<GridItem area="right-column">
 								<div

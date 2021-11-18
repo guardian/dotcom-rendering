@@ -99,9 +99,32 @@ const metaNumbers = (palette: Palette) => css`
 	${between.leftCol.and.wide} {
 		justify-content: flex-start;
 	}
+
+	${until.phablet} {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
 `;
 
 const metaContainer = (format: ArticleFormat) => {
+	const defaultMargins = css`
+		${until.phablet} {
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+		${until.mobileLandscape} {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+	`;
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 		case ArticleDisplay.Showcase:
@@ -128,8 +151,12 @@ const metaContainer = (format: ArticleFormat) => {
 							}
 						`
 					);
-				default:
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog: {
 					return '';
+				}
+				default:
+					return defaultMargins;
 			}
 		}
 	}
