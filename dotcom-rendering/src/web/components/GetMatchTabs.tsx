@@ -9,7 +9,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const Loading = () => <Placeholder height={230} />;
+const Loading = () => <Placeholder height={40} />;
 
 export const GetMatchTabs = ({ matchUrl, format }: Props) => {
 	const { data, error, loading } = useApi<{
