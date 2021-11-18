@@ -77,8 +77,6 @@ import {
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
-import { decidePalette } from '../lib/decidePalette';
-import { trackPerformance } from '../browser/ga/ga';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 
