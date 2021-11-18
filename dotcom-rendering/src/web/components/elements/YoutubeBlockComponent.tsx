@@ -97,7 +97,7 @@ export const YoutubeBlockComponent = ({
 		import(
 			/* webpackChunkName: "cmp" */ '@guardian/consent-management-platform'
 		)
-			.then((module: { onConsentChange: any }) => {
+			.then((module: { onConsentChange: (callback: Callback) => void }) => {
 				module.onConsentChange((newConsent: ConsentState) => {
 					console.log('consent changed, new', newConsent);
 					setConsentState(newConsent);
