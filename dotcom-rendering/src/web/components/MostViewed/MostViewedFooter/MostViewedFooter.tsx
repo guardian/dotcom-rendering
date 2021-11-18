@@ -13,6 +13,7 @@ import { useAB } from '@guardian/ab-react';
 import { abTestTest } from '@frontend/web/experiments/tests/ab-test-test';
 import { ArticleDesign } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { Hide } from '../../Hide';
 import { LeftColumn } from '../../LeftColumn';
 
 const MostViewedFooterData = React.lazy(() => {
@@ -123,6 +124,9 @@ export const MostViewedFooter = ({ sectionName, format, ajaxUrl }: Props) => {
 					<h2 css={headingStyles}>Most popular</h2>
 				</LeftColumn>
 				<section css={stackBelow('desktop')}>
+					<Hide when="above" breakpoint="leftCol">
+						<h2 css={headingStyles}>Most popular</h2>
+					</Hide>
 					<Lazy margin={300}>
 						<Suspense fallback={<></>}>
 							<MostViewedFooterData
