@@ -152,13 +152,6 @@ const marginBottomMobile = css`
 	}
 `;
 
-const sticky = css`
-	${from.desktop} {
-		position: sticky;
-		top: 10px;
-	}
-`;
-
 const starWrapper = css`
 	margin-bottom: 18px;
 	margin-top: 6px;
@@ -472,7 +465,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<GridItem area="keyevents">
 								<div
 									css={[
-										sticky,
 										keyEventsBottomMargin,
 										sidePaddingDesktop,
 									]}
