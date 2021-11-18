@@ -10,7 +10,7 @@ type Props = {
 };
 
 const thinGreySolid = (palette: Palette) =>
-	`1px solid ${palette.border.secondary}`;
+	`1px solid ${palette.border.matchTab}`;
 
 const GreyBorder = ({ palette }: { palette: Palette }) => (
 	<div
@@ -32,15 +32,15 @@ const tabsContainer = (palette: Palette) => css`
 const tab = (palette: Palette) => css`
 	flex-basis: 50%;
 	height: 40px;
-	border-top: 3px solid ${palette.border.secondary};
+	border-top: 3px solid ${palette.border.matchTab};
 
 	:nth-child(1) {
-		border-top: 3px solid ${palette.border.sportBorderTop};
+		border-top: 3px solid ${palette.border.activeMatchTab};
 	}
 `;
 
 const tabLink = (palette: Palette) => css`
-	color: ${palette.border.sportBorderTop};
+	color: ${palette.border.activeMatchTab};
 	display: block;
 	text-decoration: none;
 	&:hover {

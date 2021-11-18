@@ -650,13 +650,11 @@ const borderStandfirst = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
-const borderSecondary = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) return border.secondary;
-	if (format.design === ArticleDesign.DeadBlog) return border.secondary;
+const matchTab = (): string => {
 	return border.secondary;
 };
 
-const sportBorderTop = (): string => {
+const activeMatchTab = (): string => {
 	return palette.sport[300];
 };
 
@@ -906,8 +904,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
 			lines: borderLines(format),
-			secondary: borderSecondary(format),
-			sportBorderTop: sportBorderTop(),
+			matchTab: matchTab(),
+			activeMatchTab: activeMatchTab(),
 			pagination: borderPagination(),
 		},
 		topBar: {
