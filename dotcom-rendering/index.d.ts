@@ -159,6 +159,8 @@ type Palette = {
 		navPillar: Colour;
 		article: Colour;
 		lines: Colour;
+		matchTab: Colour;
+		activeMatchTab: Colour;
 		pagination: Colour;
 	};
 	topBar: {
