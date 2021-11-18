@@ -53,7 +53,6 @@ export const Default = () => {
 			homeTeam={homeTeam}
 			awayTeam={awayTeam}
 			comments="Here is a comments string"
-			minByMinUrl="https://www.theguardian.com/football/live/2020/aug/10/manchester-united-v-fc-copenhagen-europa-league-quarter-final-live"
 		/>
 	);
 };
@@ -65,20 +64,13 @@ export const ZeroZero = () => {
 			homeTeam={{ ...homeTeam, score: 0, scorers: [] }}
 			awayTeam={{ ...awayTeam, score: 0, scorers: [] }}
 			comments="Neither team scored any goals"
-			minByMinUrl="https://www.theguardian.com/football/live/2020/aug/10/manchester-united-v-fc-copenhagen-europa-league-quarter-final-live"
 		/>
 	);
 };
 ZeroZero.story = { name: 'zero - zero' };
 
 export const NoComments = () => {
-	return (
-		<MatchNav
-			homeTeam={homeTeam}
-			awayTeam={awayTeam}
-			minByMinUrl="https://www.theguardian.com/football/live/2020/aug/10/manchester-united-v-fc-copenhagen-europa-league-quarter-final-live"
-		/>
-	);
+	return <MatchNav homeTeam={homeTeam} awayTeam={awayTeam} />;
 };
 NoComments.story = { name: 'with no comments' };
 
@@ -94,7 +86,6 @@ export const InContext = () => {
 						homeTeam={homeTeam}
 						awayTeam={awayTeam}
 						comments="Here is a comments string"
-						minByMinUrl="https://www.theguardian.com/football/live/2020/aug/10/manchester-united-v-fc-copenhagen-europa-league-quarter-final-live"
 					/>
 				</ArticleContainer>
 				<RightColumn>
