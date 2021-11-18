@@ -49,9 +49,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
-import { GetMatchTabs } from '../components/GetMatchTabs';
 import { Placeholder } from '../components/Placeholder';
-import { Portal } from '../components/Portal';
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
