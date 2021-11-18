@@ -2,6 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { neutral, remSpace, text } from '@guardian/src-foundations';
 import type {
 	FontWeight,
@@ -9,8 +11,6 @@ import type {
 } from '@guardian/src-foundations/dist/types/typography/types';
 import { from } from '@guardian/src-foundations/mq';
 import { body, headline } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types';
-import { Design, Display } from '@guardian/types';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
@@ -19,7 +19,7 @@ import { getThemeStyles } from 'themeStyles';
 import ShareIcon from '../shareIcon';
 import { articleWidthStyles, sidePadding } from '../styles';
 
-// ----- Template Format Specific Styles ----- //
+// ----- Template ArticleFormat Specific Styles ----- //
 
 const interviewStyles = css`
 	${sidePadding}
@@ -66,11 +66,11 @@ const styles = (kickerColor: string): SerializedStyles => css`
 	}
 
 	svg {
-		flex: 0 0 1.875rem;
+		flex: 0 0 2.25rem;
 		margin-top: 0.375rem;
 		padding-left: 0.5rem;
-		width: 1.875rem;
-		height: 1.875rem;
+		width: 2.25rem;
+		height: 2.25rem;
 
 		circle {
 			stroke: ${kickerColor};
@@ -87,33 +87,36 @@ const textContainerStyles = css`
 	flex-direction: column;
 `;
 
-const getStyles = (format: Format): SerializedStyles => {
+const getStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
-	// Display.Immersive needs to come before Design.Interview
-	if (format.display === Display.Immersive) {
+	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
+	if (format.display === ArticleDisplay.Immersive) {
 		return css(
 			styles(kickerColor),
 			getFontStyles(neutral[100], 'tight', 'bold'),
 		);
 	}
-	if (format.design === Design.Interview) {
+	if (format.design === ArticleDesign.Interview) {
 		return css(styles(kickerColor), interviewStyles);
 	}
-	if (format.design === Design.Analysis || format.design === Design.Letter) {
+	if (
+		format.design === ArticleDesign.Analysis ||
+		format.design === ArticleDesign.Letter
+	) {
 		return css(
 			styles(kickerColor),
 			getFontStyles(neutral[46], 'tight', 'bold'),
 		);
 	}
 	if (
-		format.design === Design.Comment ||
-		format.display === Display.Showcase
+		format.design === ArticleDesign.Comment ||
+		format.display === ArticleDisplay.Showcase
 	) {
 		return css(styles(kickerColor), getFontStyles(neutral[20], 'tight'));
 	}
 
-	if (format.design === Design.Media) {
+	if (format.design === ArticleDesign.Media) {
 		return css(styles(kickerColor), galleryStyles);
 	}
 	return styles(kickerColor);
@@ -133,11 +136,7 @@ const Standfirst: FC<Props> = ({ item, shareIcon }) => {
 			<div css={textContainerStyles}>
 				{renderStandfirstText(standfirst, item, isEditions)}
 			</div>
-			{shareIcon && (
-				<span className="js-share-button" role="button">
-					<ShareIcon />
-				</span>
-			)}
+			{shareIcon && <ShareIcon />}
 		</div>
 	));
 };

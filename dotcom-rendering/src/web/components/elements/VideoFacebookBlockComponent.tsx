@@ -2,17 +2,17 @@ import { css } from '@emotion/react';
 
 import { Caption } from '@root/src/web/components/Caption';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 export const VideoFacebookBlockComponent: React.FC<{
 	format: ArticleFormat;
-	palette: Palette;
 	embedUrl?: string;
 	height: number;
 	width: number;
 	caption?: string;
 	credit?: string;
 	title?: string;
-}> = ({ embedUrl, caption, title, format, palette, width, height, credit }) => {
+}> = ({ embedUrl, caption, title, format, width, height, credit }) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
 	// Constrain iframe embeds with a width to their natural width
 	// rather than stretch them to the container using
@@ -27,6 +27,8 @@ export const VideoFacebookBlockComponent: React.FC<{
 		width: 100%;
 		margin-bottom: ${caption ? `0px` : `6px`};
 	`;
+
+	const palette = decidePalette(format);
 
 	return (
 		<div css={embedContainer}>

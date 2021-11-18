@@ -8,7 +8,6 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
 	subNavSections: SubNavType;
-	palette: Palette;
 	currentNavLink: string;
 	format: ArticleFormat;
 };
@@ -78,13 +77,13 @@ const fontStyle = css`
 	}
 `;
 
-const linkStyle = (format: ArticleFormat) => css`
+const linkStyle = (palette: Palette) => css`
 	${fontStyle};
 	float: left;
 	text-decoration: none;
 
 	:hover {
-		color: ${decidePalette(format).text.articleLinkHover};
+		color: ${palette.text.articleLinkHover};
 	}
 
 	:focus {
@@ -150,15 +149,11 @@ const listItemStyles = (palette: Palette) => css`
 const trimLeadingSlash = (url: string): string =>
 	url.substr(0, 1) === '/' ? url.slice(1) : url;
 
-export const SubNav = ({
-	subNavSections,
-	palette,
-	currentNavLink,
-	format,
-}: Props) => {
+export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 	const [showMore, setShowMore] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const ulRef = useRef<HTMLUListElement>(null);
+	const palette = decidePalette(format);
 
 	useEffect(() => {
 		const ulEl = ulRef.current;
@@ -196,7 +191,7 @@ export const SubNav = ({
 					>
 						<a
 							data-src-focus-disabled={true}
-							css={linkStyle(format)}
+							css={linkStyle(palette)}
 							href={subNavSections.parent.url}
 						>
 							{subNavSections.parent.title}
@@ -206,7 +201,7 @@ export const SubNav = ({
 				{subNavSections.links.map((link) => (
 					<li key={link.url}>
 						<a
-							css={linkStyle(format)}
+							css={linkStyle(palette)}
 							data-src-focus-disabled={true}
 							href={link.url}
 							data-link-name={`nav2 : subnav : ${trimLeadingSlash(

@@ -132,12 +132,6 @@ const maxWidth = css`
 	}
 `;
 
-const articleWidth = css`
-	${from.desktop} {
-		width: 700px;
-	}
-`;
-
 const stretchLines = css`
 	${until.phablet} {
 		margin-left: -20px;
@@ -195,7 +189,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		config: { isPaidContent, host },
 	} = CAPI;
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+	const adTargeting: AdTargeting = buildAdTargeting({
+		isAdFreeUser: CAPI.isAdFreeUser,
+		isSensitive: CAPI.config.isSensitive,
+		videoDuration: CAPI.config.videoDuration,
+		edition: CAPI.config.edition,
+		section: CAPI.config.section,
+		sharedAdTargeting: CAPI.config.sharedAdTargeting,
+		adUnit: CAPI.config.adUnit,
+	});
 
 	const showBodyEndSlot =
 		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
@@ -240,6 +242,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						showSideBorders={false}
 						padded={false}
 						backgroundColour={brandBackground.primary}
+						element="header"
 					>
 						<Header
 							edition={CAPI.editionId}
@@ -257,6 +260,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						showTopBorder={false}
 						padded={false}
 						backgroundColour={brandBackground.primary}
+						element="nav"
 					>
 						<Nav
 							nav={NAV}
@@ -277,12 +281,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							padded={false}
 							sectionId="sub-nav-root"
 							borderColour={palette.border.article}
-							element="nav"
+							element="aside"
 						>
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
-								palette={palette}
 								format={format}
 							/>
 						</ElementContainer>
@@ -299,308 +302,334 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</SendToBack>
 			</div>
 
-			<ContainerLayout
-				showTopBorder={false}
-				backgroundColour={palette.background.header}
-				borderColour={palette.border.headline}
-				sideBorders={true}
-				leftColSize="wide"
-				leftContent={
-					// eslint-disable-next-line react/jsx-wrap-multilines
-					<ArticleTitle
-						format={format}
-						palette={palette}
-						tags={CAPI.tags}
-						sectionLabel={CAPI.sectionLabel}
-						sectionUrl={CAPI.sectionUrl}
-						guardianBaseURL={CAPI.guardianBaseURL}
-						badge={CAPI.badge}
-					/>
-				}
-			>
-				<div css={maxWidth}>
-					<ArticleHeadlinePadding design={format.design}>
-						{age && (
-							<div css={ageWarningMargins}>
-								<AgeWarning age={age} />
-							</div>
-						)}
-						<ArticleHeadline
-							format={format}
-							headlineString={CAPI.headline}
-							tags={CAPI.tags}
-							byline={CAPI.author.byline}
-							palette={palette}
-						/>
-						{age && <AgeWarning age={age} isScreenReader={true} />}
-					</ArticleHeadlinePadding>
-				</div>
-				{CAPI.starRating || CAPI.starRating === 0 ? (
-					<div css={starWrapper}>
-						<StarRating rating={CAPI.starRating} size="large" />
-					</div>
-				) : (
-					<></>
-				)}
-			</ContainerLayout>
-			<ContainerLayout
-				showTopBorder={false}
-				backgroundColour={palette.background.standfirst}
-				borderColour={palette.border.standfirst}
-				sideBorders={true}
-				leftColSize="wide"
-				verticalMargins={false}
-			>
-				<Standfirst format={format} standfirst={CAPI.standfirst} />
-			</ContainerLayout>
-
-			<ElementContainer
-				showTopBorder={false}
-				borderColour={palette.border.article}
-				backgroundColour={palette.background.article}
-			>
-				<div
-					css={css`
-						height: ${space[4]}px;
-					`}
-				/>
-			</ElementContainer>
-
-			<ElementContainer
-				showTopBorder={false}
-				backgroundColour={palette.background.article}
-				borderColour={palette.border.article}
-				element="article"
-			>
-				<LiveGrid>
-					<GridItem area="media">
-						<div css={maxWidth}>
-							<MainMedia
+			<main>
+				<article>
+					<ContainerLayout
+						showTopBorder={false}
+						backgroundColour={palette.background.header}
+						borderColour={palette.border.headline}
+						sideBorders={true}
+						leftColSize="wide"
+						leftContent={
+							// eslint-disable-next-line react/jsx-wrap-multilines
+							<ArticleTitle
 								format={format}
 								palette={palette}
-								elements={CAPI.mainMediaElements}
-								adTargeting={adTargeting}
-								host={host}
-								pageId={CAPI.pageId}
-								webTitle={CAPI.webTitle}
-							/>
-						</div>
-					</GridItem>
-					<GridItem area="border">
-						<></>
-					</GridItem>
-					<GridItem area="lines">
-						<div css={maxWidth}>
-							<div css={stretchLines}>
-								<Lines
-									count={decideLineCount(format.design)}
-									effect={decideLineEffect(
-										format.design,
-										format.theme,
-									)}
-								/>
-							</div>
-						</div>
-					</GridItem>
-					<GridItem area="meta">
-						<div css={maxWidth}>
-							<ArticleMeta
-								branding={branding}
-								format={format}
-								palette={palette}
-								pageId={CAPI.pageId}
-								webTitle={CAPI.webTitle}
-								author={CAPI.author}
 								tags={CAPI.tags}
-								primaryDateline={CAPI.webPublicationDateDisplay}
-								secondaryDateline={
-									CAPI.webPublicationSecondaryDateDisplay
-								}
+								sectionLabel={CAPI.sectionLabel}
+								sectionUrl={CAPI.sectionUrl}
+								guardianBaseURL={CAPI.guardianBaseURL}
+								badge={CAPI.badge}
 							/>
+						}
+					>
+						<div css={maxWidth}>
+							<ArticleHeadlinePadding design={format.design}>
+								{age && (
+									<div css={ageWarningMargins}>
+										<AgeWarning age={age} />
+									</div>
+								)}
+								<ArticleHeadline
+									format={format}
+									headlineString={CAPI.headline}
+									tags={CAPI.tags}
+									byline={CAPI.author.byline}
+									palette={palette}
+								/>
+								{age && (
+									<AgeWarning
+										age={age}
+										isScreenReader={true}
+									/>
+								)}
+							</ArticleHeadlinePadding>
 						</div>
-					</GridItem>
-					<GridItem area="keyevents">
-						<KeyEventsContainer
+						{CAPI.starRating || CAPI.starRating === 0 ? (
+							<div css={starWrapper}>
+								<StarRating
+									rating={CAPI.starRating}
+									size="large"
+								/>
+							</div>
+						) : (
+							<></>
+						)}
+					</ContainerLayout>
+					<ContainerLayout
+						showTopBorder={false}
+						backgroundColour={palette.background.standfirst}
+						borderColour={palette.border.standfirst}
+						sideBorders={true}
+						leftColSize="wide"
+						verticalMargins={false}
+					>
+						<Standfirst
 							format={format}
-							keyEvents={CAPI.keyEvents}
+							standfirst={CAPI.standfirst}
 						/>
-					</GridItem>
-					<GridItem area="body">
-						<ArticleContainer>
-							<main css={articleWidth}>
-								{CAPI.pagination &&
-									CAPI.pagination.currentPage !== 1 && (
-										<Pagination
-											currentPage={
-												CAPI.pagination?.currentPage ||
-												1
-											}
-											totalPages={
-												CAPI.pagination?.totalPages || 1
-											}
-											newest={CAPI.pagination?.newest}
-											oldest={CAPI.pagination?.oldest}
-											newer={CAPI.pagination?.newer}
-											older={CAPI.pagination?.older}
-										/>
-									)}
-								<ArticleBody
-									format={format}
-									palette={palette}
-									blocks={CAPI.blocks}
-									adTargeting={adTargeting}
-									host={host}
-									pageId={CAPI.pageId}
-									webTitle={CAPI.webTitle}
-								/>
-								{CAPI.pagination &&
-									CAPI.pagination.totalPages > 1 && (
-										<Pagination
-											currentPage={
-												CAPI.pagination?.currentPage ||
-												1
-											}
-											totalPages={
-												CAPI.pagination?.totalPages || 1
-											}
-											newest={CAPI.pagination?.newest}
-											oldest={CAPI.pagination?.oldest}
-											newer={CAPI.pagination?.newer}
-											older={CAPI.pagination?.older}
-										/>
-									)}
-								{showBodyEndSlot && <div id="slot-body-end" />}
-								<Lines
-									data-print-layout="hide"
-									count={4}
-									effect="straight"
-								/>
-								<SubMeta
-									palette={palette}
-									format={format}
-									subMetaKeywordLinks={
-										CAPI.subMetaKeywordLinks
-									}
-									subMetaSectionLinks={
-										CAPI.subMetaSectionLinks
-									}
-									pageId={CAPI.pageId}
-									webUrl={CAPI.webURL}
-									webTitle={CAPI.webTitle}
-									showBottomSocialButtons={
-										CAPI.showBottomSocialButtons
-									}
-									badge={CAPI.badge}
-								/>
-							</main>
-						</ArticleContainer>
-					</GridItem>
-					<GridItem area="right-column">
+					</ContainerLayout>
+
+					<ElementContainer
+						showTopBorder={false}
+						borderColour={palette.border.article}
+						backgroundColour={palette.background.article}
+					>
 						<div
 							css={css`
-								padding-top: 6px;
-								height: 100%;
-								${from.desktop} {
-									/* above 980 */
-									margin-left: 20px;
-									margin-right: -20px;
-								}
-								${from.leftCol} {
-									/* above 1140 */
-									margin-left: 0px;
-									margin-right: 0px;
-								}
+								height: ${space[4]}px;
 							`}
-						>
-							<RightColumn>
-								<AdSlot
-									position="right"
-									display={format.display}
+						/>
+					</ElementContainer>
+
+					<ElementContainer
+						showTopBorder={false}
+						backgroundColour={palette.background.article}
+						borderColour={palette.border.article}
+					>
+						<LiveGrid>
+							<GridItem area="media">
+								<div css={maxWidth}>
+									<MainMedia
+										format={format}
+										palette={palette}
+										elements={CAPI.mainMediaElements}
+										adTargeting={adTargeting}
+										host={host}
+										pageId={CAPI.pageId}
+										webTitle={CAPI.webTitle}
+									/>
+								</div>
+							</GridItem>
+							<GridItem area="border">
+								<></>
+							</GridItem>
+							<GridItem area="lines">
+								<div css={maxWidth}>
+									<div css={stretchLines}>
+										<Lines
+											count={decideLineCount(
+												format.design,
+											)}
+											effect={decideLineEffect(
+												format.design,
+												format.theme,
+											)}
+										/>
+									</div>
+								</div>
+							</GridItem>
+							<GridItem area="meta" element="aside">
+								<div css={maxWidth}>
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										palette={palette}
+										pageId={CAPI.pageId}
+										webTitle={CAPI.webTitle}
+										author={CAPI.author}
+										tags={CAPI.tags}
+										primaryDateline={
+											CAPI.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											CAPI.webPublicationSecondaryDateDisplay
+										}
+									/>
+								</div>
+							</GridItem>
+							<GridItem area="keyevents">
+								<KeyEventsContainer
+									format={format}
+									keyEvents={CAPI.keyEvents}
 								/>
-							</RightColumn>
-						</div>
-					</GridItem>
-				</LiveGrid>
-			</ElementContainer>
+							</GridItem>
+							<GridItem area="body">
+								<ArticleContainer format={format}>
+									{CAPI.pagination &&
+										CAPI.pagination.currentPage !== 1 && (
+											<Pagination
+												currentPage={
+													CAPI.pagination
+														?.currentPage || 1
+												}
+												totalPages={
+													CAPI.pagination
+														?.totalPages || 1
+												}
+												newest={CAPI.pagination?.newest}
+												oldest={CAPI.pagination?.oldest}
+												newer={CAPI.pagination?.newer}
+												older={CAPI.pagination?.older}
+												format={format}
+											/>
+										)}
+									<ArticleBody
+										format={format}
+										palette={palette}
+										blocks={CAPI.blocks}
+										adTargeting={adTargeting}
+										host={host}
+										pageId={CAPI.pageId}
+										webTitle={CAPI.webTitle}
+									/>
+									{CAPI.pagination &&
+										CAPI.pagination.totalPages > 1 && (
+											<Pagination
+												currentPage={
+													CAPI.pagination
+														?.currentPage || 1
+												}
+												totalPages={
+													CAPI.pagination
+														?.totalPages || 1
+												}
+												newest={CAPI.pagination?.newest}
+												oldest={CAPI.pagination?.oldest}
+												newer={CAPI.pagination?.newer}
+												older={CAPI.pagination?.older}
+												format={format}
+											/>
+										)}
+									{showBodyEndSlot && (
+										<div id="slot-body-end" />
+									)}
+									<Lines
+										data-print-layout="hide"
+										count={4}
+										effect="straight"
+									/>
+									<SubMeta
+										palette={palette}
+										format={format}
+										subMetaKeywordLinks={
+											CAPI.subMetaKeywordLinks
+										}
+										subMetaSectionLinks={
+											CAPI.subMetaSectionLinks
+										}
+										pageId={CAPI.pageId}
+										webUrl={CAPI.webURL}
+										webTitle={CAPI.webTitle}
+										showBottomSocialButtons={
+											CAPI.showBottomSocialButtons
+										}
+										badge={CAPI.badge}
+									/>
+								</ArticleContainer>
+							</GridItem>
+							<GridItem area="right-column">
+								<div
+									css={css`
+										padding-top: 6px;
+										height: 100%;
+										${from.desktop} {
+											/* above 980 */
+											margin-left: 20px;
+											margin-right: -20px;
+										}
+										${from.leftCol} {
+											/* above 1140 */
+											margin-left: 0px;
+											margin-right: 0px;
+										}
+									`}
+								>
+									<RightColumn>
+										<AdSlot
+											position="right"
+											display={format.display}
+										/>
+									</RightColumn>
+								</div>
+							</GridItem>
+						</LiveGrid>
+					</ElementContainer>
+				</article>
 
-			<ElementContainer
-				data-print-layout="hide"
-				padded={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot
-					data-print-layout="hide"
-					position="merchandising-high"
-					display={format.display}
-				/>
-			</ElementContainer>
-
-			{/* Onwards (when signed OUT) */}
-			<aside data-print-layout="hide" id="onwards-upper-whensignedout" />
-			{showOnwardsLower && (
 				<ElementContainer
 					data-print-layout="hide"
-					sectionId="onwards-lower-whensignedout"
-					element="aside"
-				/>
-			)}
-
-			{!isPaidContent && showComments && (
-				<ElementContainer
-					data-print-layout="hide"
-					sectionId="comments"
+					padded={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
 					element="aside"
 				>
-					<Discussion
-						discussionApiUrl={CAPI.config.discussionApiUrl}
-						shortUrlId={CAPI.config.shortUrlId}
-						isCommentable={CAPI.isCommentable}
-						pillar={format.theme}
-						palette={palette}
-						discussionD2Uid={CAPI.config.discussionD2Uid}
-						discussionApiClientHeader={
-							CAPI.config.discussionApiClientHeader
-						}
-						enableDiscussionSwitch={false}
-						isAdFreeUser={CAPI.isAdFreeUser}
-						shouldHideAds={CAPI.shouldHideAds}
-						beingHydrated={false}
+					<AdSlot
+						data-print-layout="hide"
+						position="merchandising-high"
 						display={format.display}
 					/>
 				</ElementContainer>
-			)}
 
-			{/* Onwards (when signed IN) */}
-			<aside data-print-layout="hide" id="onwards-upper-whensignedin" />
-			{showOnwardsLower && (
+				{/* Onwards (when signed OUT) */}
+				<aside
+					data-print-layout="hide"
+					id="onwards-upper-whensignedout"
+				/>
+				{showOnwardsLower && (
+					<ElementContainer
+						data-print-layout="hide"
+						sectionId="onwards-lower-whensignedout"
+						element="aside"
+					/>
+				)}
+
+				{!isPaidContent && showComments && (
+					<ElementContainer
+						data-print-layout="hide"
+						sectionId="comments"
+						element="section"
+					>
+						<Discussion
+							discussionApiUrl={CAPI.config.discussionApiUrl}
+							shortUrlId={CAPI.config.shortUrlId}
+							isCommentable={CAPI.isCommentable}
+							format={format}
+							discussionD2Uid={CAPI.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPI.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={false}
+							isAdFreeUser={CAPI.isAdFreeUser}
+							shouldHideAds={CAPI.shouldHideAds}
+							beingHydrated={false}
+						/>
+					</ElementContainer>
+				)}
+
+				{/* Onwards (when signed IN) */}
+				<aside
+					data-print-layout="hide"
+					id="onwards-upper-whensignedin"
+				/>
+				{showOnwardsLower && (
+					<ElementContainer
+						data-print-layout="hide"
+						sectionId="onwards-lower-whensignedin"
+						element="aside"
+					/>
+				)}
+
+				{!isPaidContent && (
+					<ElementContainer
+						data-print-layout="hide"
+						sectionId="most-viewed-footer"
+						element="aside"
+					/>
+				)}
+
 				<ElementContainer
 					data-print-layout="hide"
-					sectionId="onwards-lower-whensignedin"
+					padded={false}
+					showTopBorder={false}
+					showSideBorders={false}
+					backgroundColour={neutral[93]}
 					element="aside"
-				/>
-			)}
-
-			{!isPaidContent && (
-				<ElementContainer
-					data-print-layout="hide"
-					sectionId="most-viewed-footer"
-					element="aside"
-				/>
-			)}
-
-			<ElementContainer
-				data-print-layout="hide"
-				padded={false}
-				showTopBorder={false}
-				showSideBorders={false}
-				backgroundColour={neutral[93]}
-				element="aside"
-			>
-				<AdSlot position="merchandising" display={format.display} />
-			</ElementContainer>
+				>
+					<AdSlot position="merchandising" display={format.display} />
+				</ElementContainer>
+			</main>
 
 			{NAV.subNavSections && (
 				<ElementContainer
@@ -612,7 +641,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						palette={palette}
 						format={format}
 					/>
 				</ElementContainer>
@@ -624,6 +652,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
+				element="footer"
 			>
 				<Footer
 					pageFooter={CAPI.pageFooter}

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { constructQuery } from '@root/src/lib/querystring';
+import { ArticleDesign, getCookie } from '@guardian/libs';
 
 import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
 } from '@frontend/web/components/SignInGate/dismissGate';
-import { getCookie } from '@frontend/web/browser/cookie';
 import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
 
 import { useOnce } from '@frontend/web/lib/useOnce';
@@ -25,9 +25,10 @@ import {
 interface ShowSignInGateProps {
 	setShowGate: React.Dispatch<React.SetStateAction<boolean>>;
 	abTest: CurrentSignInGateABTest;
-	CAPI: CAPIBrowserType;
+	format: ArticleFormat;
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
+	host: string;
 }
 
 const dismissGate = (
@@ -44,12 +45,21 @@ const dismissGate = (
 
 // function to generate the profile.theguardian.com url with tracking params
 // and the return url (link to current article page)
-const generateSignInUrl = (
-	CAPI: CAPIBrowserType,
-	currentTest: CurrentSignInGateABTest,
-) => {
+const generateSignInUrl = ({
+	pageId,
+	pageViewId,
+	idUrl,
+	host,
+	currentTest,
+}: {
+	pageId: string;
+	pageViewId: string;
+	idUrl: string;
+	host: string;
+	currentTest: CurrentSignInGateABTest;
+}) => {
 	// url of the article, return user here after sign in/registration
-	const returnUrl = `${CAPI.config.host}/${CAPI.pageId}`;
+	const returnUrl = `${host}/${pageId}`;
 
 	// set the component event params to be included in the query
 	const queryParams: ComponentEventParams = {
@@ -57,14 +67,13 @@ const generateSignInUrl = (
 		componentId: signInGateTestIdToComponentId[currentTest.id],
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
-		viewId: window.guardian.ophan.viewId,
-		browserId: getCookie('bwid') || undefined,
-		visitId: getCookie('vsid') || undefined,
+		browserId:
+			getCookie({ name: 'bwid', shouldMemoize: true }) || undefined,
+		visitId: getCookie({ name: 'vsid' }) || undefined,
+		viewId: pageViewId,
 	};
 
-	return `${
-		CAPI.config.idUrl
-	}/signin?returnUrl=${returnUrl}&componentEventParams=${encodeURIComponent(
+	return `${idUrl}/signin?returnUrl=${returnUrl}&componentEventParams=${encodeURIComponent(
 		constructQuery(queryParams),
 	)}`;
 };
@@ -73,11 +82,12 @@ const generateSignInUrl = (
 // fires a VIEW ophan component event
 // and show the gate component if it exists
 const ShowSignInGate = ({
-	CAPI,
+	format,
 	abTest,
 	setShowGate,
 	signInUrl,
 	gateVariant,
+	host,
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -95,7 +105,7 @@ const ShowSignInGate = ({
 	// but still fire a view event if they are eligible to see the gate
 	if (gateVariant.gate) {
 		return gateVariant.gate({
-			guUrl: CAPI.config.host || 'https://theguardian.com/',
+			guUrl: host,
 			signInUrl,
 			dismissGate: () => {
 				dismissGate(setShowGate, abTest);
@@ -103,8 +113,8 @@ const ShowSignInGate = ({
 			abTest,
 			ophanComponentId: signInGateTestIdToComponentId[abTest.id],
 			isComment:
-				CAPI.format.design === 'CommentDesign' ||
-				CAPI.format.design === 'EditorialDesign',
+				format.design === ArticleDesign.Comment ||
+				format.design === ArticleDesign.Editorial,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -115,7 +125,16 @@ const ShowSignInGate = ({
 // should be shown on the current page
 export const SignInGateSelector = ({
 	isSignedIn,
-	CAPI,
+	format,
+	contentType,
+	sectionName = '',
+	tags,
+	isPaidContent,
+	isPreview,
+	host = 'https://theguardian.com/',
+	pageId,
+	idUrl = 'https://profile.theguardian.com',
+	pageViewId,
 }: SignInGateSelectorProps) => {
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -152,27 +171,51 @@ export const SignInGateSelector = ({
 		if (gateVariant && currentTest) {
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			gateVariant
-				?.canShow(CAPI, !!isSignedIn, currentTest)
+				?.canShow({
+					isSignedIn: !!isSignedIn,
+					currentTest,
+					contentType,
+					sectionName,
+					tags,
+					isPaidContent,
+					isPreview,
+				})
 				.then(setCanShowGate);
 		}
-	}, [currentTest, gateVariant, CAPI, isSignedIn]);
+	}, [
+		currentTest,
+		gateVariant,
+		isSignedIn,
+		contentType,
+		sectionName,
+		tags,
+		isPaidContent,
+		isPreview,
+	]);
 
 	if (!currentTest || !gateVariant) {
 		return null;
 	}
 
-	const signInUrl = generateSignInUrl(CAPI, currentTest);
+	const signInUrl = generateSignInUrl({
+		pageId,
+		host,
+		pageViewId,
+		idUrl,
+		currentTest,
+	});
 
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
 			{!isGateDismissed && canShowGate && (
 				<ShowSignInGate
-					CAPI={CAPI}
+					format={format}
 					abTest={currentTest}
 					setShowGate={(show) => setIsGateDismissed(!show)}
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
+					host={host}
 				/>
 			)}
 		</>

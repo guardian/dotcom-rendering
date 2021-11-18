@@ -2,11 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticlePillar } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { from } from '@guardian/src-foundations/mq';
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { Design, map, Pillar, withDefault } from '@guardian/types';
-import type { Format, Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { formatDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -16,7 +18,7 @@ import { darkModeCss as darkMode } from 'styles';
 
 interface Props {
 	date: Option<Date>;
-	format: Format;
+	format: ArticleFormat;
 }
 
 const darkStyles = darkMode`
@@ -37,9 +39,9 @@ const commentDatelineStyles = css`
 	${darkStyles}
 `;
 
-const liveblogDatelineStyles = css`
+const blogDatelineStyles = (color: string): SerializedStyles => css`
 	${textSans.xxsmall()}
-	color: ${neutral[100]};
+	color: ${color};
 
 	${from.desktop} {
 		color: ${neutral[20]};
@@ -53,13 +55,15 @@ const liveblogDatelineStyles = css`
 	`}
 `;
 
-const getDatelineStyles = (format: Format): SerializedStyles => {
+const getDatelineStyles = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
-		case Design.LiveBlog:
-			return liveblogDatelineStyles;
+		case ArticleDesign.LiveBlog:
+			return blogDatelineStyles(neutral[100]);
+		case ArticleDesign.DeadBlog:
+			return blogDatelineStyles(neutral[20]);
 		default:
 			switch (format.theme) {
-				case Pillar.Opinion:
+				case ArticlePillar.Opinion:
 					return commentDatelineStyles;
 				default:
 					return styles;

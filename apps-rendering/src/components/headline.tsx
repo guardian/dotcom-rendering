@@ -2,11 +2,11 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { between, from } from '@guardian/src-foundations/mq';
 import { headline, textSans } from '@guardian/src-foundations/typography';
-import type { Format } from '@guardian/types';
-import { Design, Display, Special } from '@guardian/types';
 import StarRating from 'components/starRating';
 import { border } from 'editorialPalette';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
@@ -20,7 +20,7 @@ interface Props {
 	item: Item;
 }
 
-const styles = (format: Format): SerializedStyles => css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.medium()}
 	${headlineTextColour(format)}
     ${headlineBackgroundColour(format)}
@@ -63,7 +63,7 @@ const immersiveStyles = css`
 	}
 `;
 
-const analysisStyles = (format: Format): SerializedStyles => css`
+const analysisStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.medium({ lineHeight: 'regular', fontWeight: 'light' })}
 
 	span {
@@ -112,34 +112,35 @@ const liveblogStyles = css`
 	padding: 0 0 ${remSpace[5]};
 `;
 
-const getStyles = (format: Format): SerializedStyles => {
-	if (format.display === Display.Immersive) {
-		const labs = format.theme === Special.Labs ? immersiveLabs : null;
+const getStyles = (format: ArticleFormat): SerializedStyles => {
+	if (format.display === ArticleDisplay.Immersive) {
+		const labs =
+			format.theme === ArticleSpecial.Labs ? immersiveLabs : null;
 		return css(styles(format), immersiveStyles, labs);
 	}
 
-	if (format.theme === Special.Labs) {
+	if (format.theme === ArticleSpecial.Labs) {
 		return css(styles(format), labsStyles, fontSizeRestriction);
 	}
 
 	switch (format.design) {
-		case Design.Analysis:
+		case ArticleDesign.Analysis:
 			return css(
 				styles(format),
 				analysisStyles(format),
 				fontSizeRestriction,
 			);
-		case Design.Feature:
+		case ArticleDesign.Feature:
 			return css(styles(format), featureStyles, fontSizeRestriction);
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return css(styles(format), commentStyles, fontSizeRestriction);
-		case Design.Media:
+		case ArticleDesign.Media:
 			return css(styles(format), mediaStyles, fontSizeRestriction);
 
-		case Design.LiveBlog:
-		case Design.DeadBlog:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
 			return css(styles(format), fontSizeRestriction, liveblogStyles);
 
 		default:

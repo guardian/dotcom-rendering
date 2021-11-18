@@ -1,14 +1,14 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { background, neutral } from '@guardian/src-foundations/palette';
-import type { Format, Theme } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
 import { adStyles, darkModeCss } from 'styles';
 import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';
 
-const ArticleBodyStyles = (format: Format): SerializedStyles => css`
+const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 	position: relative;
 	clear: both;
 	background: ${background.inverse};
@@ -30,10 +30,10 @@ const ArticleBodyDarkStyles = ({
 `;
 
 interface ArticleBodyProps {
-	theme: Theme;
+	theme: ArticleTheme;
 	className: SerializedStyles[];
 	children: ReactNode[];
-	format: Format;
+	format: ArticleFormat;
 }
 
 const ArticleBodyMedia: FC<ArticleBodyProps> = ({

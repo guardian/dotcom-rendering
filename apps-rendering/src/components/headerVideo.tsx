@@ -2,10 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
-import type { Format } from '@guardian/types';
-import { Design } from '@guardian/types';
 import type { FC } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';
 import type { Video } from 'video';
@@ -19,20 +19,20 @@ const marginAuto = `
     margin-right: auto;
 `;
 
-const backgroundColour = (format: Format): string => {
+const backgroundColour = (format: ArticleFormat): string => {
 	switch (format.design) {
-		case Design.Media:
+		case ArticleDesign.Media:
 			return neutral[20];
-		case Design.Editorial:
-		case Design.Letter:
-		case Design.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
 			return neutral[86];
 		default:
 			return neutral[97];
 	}
 };
 
-const styles = (format: Format): SerializedStyles => css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	margin: 0 0 ${remSpace[3]} 0;
 	position: relative;
 	display: block;
@@ -47,13 +47,13 @@ const styles = (format: Format): SerializedStyles => css`
 	${from.wide} {
 		padding-bottom: ${videoHeight}px;
 		width: ${wideContentWidth}px;
-		${format.design !== Design.LiveBlog ? marginAuto : null}
+		${format.design !== ArticleDesign.LiveBlog ? marginAuto : null}
 	}
 `;
 
 interface Props {
 	video: Video;
-	format: Format;
+	format: ArticleFormat;
 }
 
 const HeaderVideo: FC<Props> = ({ video, format }) => (

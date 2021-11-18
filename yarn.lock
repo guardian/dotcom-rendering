@@ -1639,11 +1639,6 @@
     "@guardian/src-label" "^3.10.3-rc.1"
     "@guardian/src-user-feedback" "^3.10.3-rc.1"
 
-"@guardian/src-svgs@^2.8.2":
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/@guardian/src-svgs/-/src-svgs-2.8.2.tgz#4e05c4f144c8507d39166aa6aa8c146c8a3612ae"
-  integrity sha512-PyZJ6jwUKUMsHdKywz/Pgk7oHjvSDdEqTZq6vkiOPJLTjEraEdyO6amu7L7ynVO58CmgzJ+6SwOOAtilHU/LRw==
-
 "@guardian/src-text-area@^3.10.0":
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-text-area/-/src-text-area-3.11.0.tgz#4b2abd79969706f27c41b68b69fffc8625a0c153"
@@ -1669,10 +1664,10 @@
     "@guardian/src-helpers" "^3.10.3-rc.1"
     "@guardian/src-icons" "^3.10.3-rc.1"
 
-"@guardian/types@^8.0.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-8.1.0.tgz#520e16d93c1a8f2bf36c8f4faff5bea81fb9346d"
-  integrity sha512-6qpQxHW+DwvJqc4aPrWIN0GoErTN8R+WlQ4Cq/NJKiIWROvgOytC4P/2hiLNxoEpla93cT56293Fd1cYRUhnPA==
+"@guardian/types@^9.0.1":
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/types/-/types-9.0.1.tgz#a03682d9c2942560714f9c724a1cd7068f772a93"
+  integrity sha512-JTQe4giki1QYqE5bRkCbYWvelF2DtaQVlGmIbVwO8XWNc62TOQcBOUmqFb2EWpszWqkzBLEBB4rKKArgBZHTeA==
 
 "@hapi/hoek@^9.0.0":
   version "9.2.1"

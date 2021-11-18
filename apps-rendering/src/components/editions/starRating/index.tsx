@@ -1,12 +1,12 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import {
 	brandAltBackground,
 	brandAltLine,
 } from '@guardian/src-foundations/palette';
 import { SvgStar } from '@guardian/src-icons';
-import { Design } from '@guardian/types';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 
@@ -57,7 +57,7 @@ const containerStyles = css`
 `;
 
 const StarRating: FC<Props> = ({ item }) =>
-	item.design === Design.Review ? (
+	item.design === ArticleDesign.Review ? (
 		<div css={containerStyles}>{stars(item.starRating)}</div>
 	) : null;
 

@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Format } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
@@ -10,11 +10,11 @@ import { getThemeStyles } from 'themeStyles';
 // ----- Component ----- //
 
 interface Props {
-	format: Format;
+	format: ArticleFormat;
 	text: string;
 }
 
-const styles = (format: Format): SerializedStyles => {
+const styles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker, inverted } = getThemeStyles(format.theme);
 
 	return css`

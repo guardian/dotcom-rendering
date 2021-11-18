@@ -2,12 +2,14 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { border, neutral } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import type { Format, Option } from '@guardian/types';
-import { Design, map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
@@ -15,7 +17,7 @@ import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
-interface Props extends Format {
+interface Props extends ArticleFormat {
 	count: Option<number>;
 	commentable: boolean;
 }
@@ -43,41 +45,73 @@ const bubbleStyles = (colour: string): SerializedStyles => css`
 	fill: ${colour};
 `;
 
-const getStyles = ({ theme, design }: Format): SerializedStyles => {
+const blogStyles = (color: string): SerializedStyles => css`
+	${styles(color, 'rgba(255, 255, 255, 0.4)', 'rgba(255, 255, 255, 0.4)')}
+
+	${from.desktop} {
+		color: ${neutral[46]};
+		border-left: 1px solid ${neutral[86]};
+	}
+	padding-top: ${remSpace[2]};
+	margin-bottom: ${remSpace[2]};
+`;
+
+const deadblogStyles = css`
+	border-left: none;
+	padding-left: ${remSpace[3]};
+	${from.phablet} {
+		padding-left: ${remSpace[5]};
+	}
+	${from.desktop} {
+		padding-left: 0;
+		border-left: none;
+	}
+`;
+
+const getStyles = ({ theme, design }: ArticleFormat): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
-	if (design === Design.LiveBlog || design === Design.DeadBlog) {
-		return css`
-			${styles(
-				neutral[93],
-				'rgba(255, 255, 255, 0.4)',
-				'rgba(255, 255, 255, 0.4)',
-			)}
-
-			${from.desktop} {
-				color: ${neutral[46]};
-				border-left: 1px solid ${neutral[86]};
-			}
-			margin-bottom: ${remSpace[2]};
-		`;
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return blogStyles(neutral[93]);
+		case ArticleDesign.DeadBlog:
+			return css(blogStyles(colours.link), deadblogStyles);
+		default:
+			return styles(colours.kicker, border.secondary, neutral[20]);
 	}
-
-	return styles(colours.kicker, border.secondary, neutral[20]);
 };
 
-const getBubbleStyles = ({ theme, design }: Format): SerializedStyles => {
+const liveblogBubbleStyles = css`
+	${from.desktop} {
+		fill: ${neutral[46]};
+	}
+`;
+
+const deadblogBubbleStyles = (color: string): SerializedStyles => css`
+	fill: ${color};
+	margin-left: revert;
+	${from.desktop} {
+		fill: ${neutral[46]};
+	}
+`;
+
+const getBubbleStyles = ({
+	theme,
+	design,
+}: ArticleFormat): SerializedStyles => {
 	const colours = getThemeStyles(theme);
 
-	if (design === Design.LiveBlog || design === Design.DeadBlog) {
-		return css`
-			${bubbleStyles(neutral[93])}
-			${from.desktop} {
-				fill: ${neutral[46]};
-			}
-		`;
+	switch (design) {
+		case ArticleDesign.LiveBlog:
+			return css(bubbleStyles(neutral[93]), liveblogBubbleStyles);
+		case ArticleDesign.DeadBlog:
+			return css(
+				bubbleStyles(neutral[93]),
+				deadblogBubbleStyles(colours.link),
+			);
+		default:
+			return bubbleStyles(colours.kicker);
 	}
-
-	return bubbleStyles(colours.kicker);
 };
 
 const CommentCount: FC<Props> = ({ count, commentable, ...format }: Props) => {

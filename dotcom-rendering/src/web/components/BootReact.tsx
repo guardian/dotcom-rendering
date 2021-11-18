@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import { App } from '@root/src/web/components/App';
 import { ABProvider } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
-import { getCookie } from '@frontend/web/browser/cookie';
 import { getForcedParticipationsFromUrl } from '@frontend/web/lib/getAbUrlHash';
 import { getCypressSwitches } from '@frontend/web/experiments/cypress-switches';
 import { loadableReady } from '@loadable/component';
 import { getOphanRecordFunction } from '@root/src/web/browser/ophan/ophan';
+import { getCookie } from '@guardian/libs';
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -16,8 +16,9 @@ type Props = {
 
 export const BootReact = ({ CAPI, NAV }: Props) => {
 	const mvtId = Number(
-		(CAPI.config.isDev && getCookie('GU_mvt_id_local')) || // Simplify localhost testing by creating a different mvt id
-			getCookie('GU_mvt_id'),
+		(CAPI.config.isDev &&
+			getCookie({ name: 'GU_mvt_id_local', shouldMemoize: true })) || // Simplify localhost testing by creating a different mvt id
+			getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 	);
 	if (!mvtId) {
 		// 0 is default and falsy here
