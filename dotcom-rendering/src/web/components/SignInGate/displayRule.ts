@@ -7,7 +7,7 @@ import { onConsentChange } from '@guardian/consent-management-platform';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { getLocale } from '@guardian/libs';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
-import { CurrentSignInGateABTest } from './types';
+import { CanShowGateProps } from './types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {
@@ -33,18 +33,16 @@ export const isIOS9 = (): boolean => {
 };
 
 // hide the sign in gate on article types that are not supported
-export const isValidContentType = (CAPI: CAPIBrowserType): boolean => {
+export const isValidContentType = (contentType: string): boolean => {
 	// It's safer to definitively *include* types as we
 	// know new types will not break the sign-in-gate going forward
 	const validTypes = ['Article'];
 
-	return validTypes.some(
-		(type: string): boolean => CAPI.contentType === type,
-	);
+	return validTypes.some((type: string): boolean => contentType === type);
 };
 
 // hide the sign in gate on certain sections of the site, e.g info, about, help etc.
-export const isValidSection = (CAPI: CAPIBrowserType): boolean => {
+export const isValidSection = (sectionName?: string): boolean => {
 	const invalidSections = [
 		'about',
 		'info',
@@ -57,26 +55,18 @@ export const isValidSection = (CAPI: CAPIBrowserType): boolean => {
 	// we check for invalid section by reducing the above array, and then NOT the result so we know
 	// its a valid section
 	return !invalidSections.some(
-		(section: string): boolean => CAPI.sectionName === section,
+		(section: string): boolean => sectionName === section,
 	);
 };
 
 // hide the sign in gate for certain tags on the site
-export const isValidTag = (CAPI: CAPIBrowserType): boolean => {
+export const isValidTag = (tags: TagType[]): boolean => {
 	const invalidTags = ['info/newsletter-sign-up'];
 
 	return !invalidTags.some((invalidTag) =>
-		CAPI.tags.map((tag) => tag.id).includes(invalidTag),
+		tags.map((tag) => tag.id).includes(invalidTag),
 	);
 };
-
-// hide the sign in gate on isPaidContent
-export const isPaidContent = (CAPI: CAPIBrowserType): boolean =>
-	CAPI.pageType.isPaidContent;
-
-// hide the sign in gate on internal tools preview
-export const isPreview = (CAPI: CAPIBrowserType): boolean =>
-	CAPI.isPreview || false;
 
 export const hasRequiredConsents = (): Promise<boolean> => {
 	const hasConsentedToAll = (state: ConsentState) => {
@@ -114,11 +104,15 @@ export const hasRequiredConsents = (): Promise<boolean> => {
 	});
 };
 
-export const canShowSignInGate = (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentSignInGateABTest,
-): Promise<boolean> =>
+export const canShowSignInGate = ({
+	isSignedIn,
+	currentTest,
+	contentType,
+	sectionName,
+	tags,
+	isPaidContent,
+	isPreview,
+}: CanShowGateProps): Promise<boolean> =>
 	Promise.resolve(
 		!isSignedIn &&
 			!hasUserDismissedGateMoreThanCount(
@@ -127,26 +121,44 @@ export const canShowSignInGate = (
 				5,
 			) &&
 			isNPageOrHigherPageView(3) &&
-			isValidContentType(CAPI) &&
-			isValidSection(CAPI) &&
-			isValidTag(CAPI) &&
-			!isPaidContent(CAPI) &&
-			!isPreview(CAPI) &&
+			isValidContentType(contentType) &&
+			isValidSection(sectionName) &&
+			isValidTag(tags) &&
+			// hide the sign in gate on isPaidContent
+			!isPaidContent &&
+			// hide the sign in gate on internal tools preview &&
+			!isPreview &&
 			!isIOS9(),
 	);
 
-export const canShowMandatoryUs: (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentSignInGateABTest,
-) => Promise<boolean> = async (
-	CAPI: CAPIBrowserType,
-	isSignedIn: boolean,
-	currentTest: CurrentSignInGateABTest,
-) => {
+export const canShowMandatoryUs: ({
+	isSignedIn,
+	currentTest,
+	contentType,
+	sectionName,
+	tags,
+	isPaidContent,
+	isPreview,
+}: CanShowGateProps) => Promise<boolean> = async ({
+	isSignedIn,
+	currentTest,
+	contentType,
+	sectionName,
+	tags,
+	isPaidContent,
+	isPreview,
+}: CanShowGateProps) => {
 	return (
 		(await getLocale()) === 'US' &&
 		(await hasRequiredConsents()) &&
-		(await canShowSignInGate(CAPI, isSignedIn, currentTest))
+		(await canShowSignInGate({
+			isSignedIn,
+			currentTest,
+			contentType,
+			sectionName,
+			tags,
+			isPaidContent,
+			isPreview,
+		}))
 	);
 };
