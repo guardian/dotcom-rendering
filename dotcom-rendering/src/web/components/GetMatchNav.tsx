@@ -27,7 +27,6 @@ export const GetMatchNav = ({ matchUrl }: Props) => {
 		return null;
 	}
 	if (data) {
-		console.log(data);
 		return (
 			<MatchNav
 				homeTeam={data.homeTeam}
