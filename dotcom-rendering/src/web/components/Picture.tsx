@@ -3,6 +3,10 @@ import { ArticleDisplay } from '@guardian/libs';
 
 import { breakpoints } from '@guardian/src-foundations/mq';
 
+/*
+ * Working on this file? Checkout out 027-pictures.md for background information & context!
+ */
+
 type Props = {
 	imageSources: ImageSource[];
 	role: RoleType;
