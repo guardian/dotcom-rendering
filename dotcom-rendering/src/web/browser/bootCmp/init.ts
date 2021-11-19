@@ -52,7 +52,7 @@ const init = async (): Promise<void> => {
 			);
 		})
 		.catch((e) =>
-			console.error(`CMP willShowPrivacyMessage - error: ${e}`),
+			log('dotcom', `CMP willShowPrivacyMessage - error: ${e}`),
 		);
 
 	// Register changes in consent state with Ophan
