@@ -23,12 +23,6 @@ describe('Video', function () {
 	});
 
 	it('Main media youtube video', function () {
-		cy.visit(`/Article?url=${mainMediaVideo}`);
-		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
-		privacySettingsIframe().contains('Privacy settings');
-		privacySettingsIframe().find("[title='Accept all']").click();
-
 		cy.intercept('https://www.youtube.com/embed/S0CE1n-R3OY?*').as(
 			'youtubePlayer',
 		);
@@ -49,24 +43,27 @@ describe('Video', function () {
 			},
 		).as('ophanCall');
 
+		cy.visit(`/Article?url=${mainMediaVideo}`);
+
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe().find("[title='Accept all']").click();
+
 		cy.wait('@youtubePlayer');
 
 		cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
 
 		cy.get(`[daya-cy="youtube-overlay"]`).click();
 
-		cy.wait('@ophanCall');
+		// Upon click, a lot of content is being lazy loaded so it can take longer to
+		// make the Ophan call
+		cy.wait('@ophanCall', { timeout: 15000 });
 
 		cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
 	});
 
 	it('Embed youtube video', function () {
-		cy.visit(`/Article?url=${embedMediaVideo}`);
-		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
-		privacySettingsIframe().contains('Privacy settings');
-		privacySettingsIframe().find("[title='Accept all']").click();
-
 		cy.intercept('https://www.youtube.com/embed/N9Cgy-ke5-s?*').as(
 			'youtubePlayer',
 		);
@@ -85,13 +82,22 @@ describe('Video', function () {
 			},
 		).as('ophanCall');
 
+		cy.visit(`/Article?url=${embedMediaVideo}`);
+
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe().find("[title='Accept all']").click();
+
 		cy.wait('@youtubePlayer');
 
 		cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
 
 		cy.get(`[daya-cy="youtube-overlay"]`).click();
 
-		cy.wait('@ophanCall');
+		// Upon click, a lot of content is being lazy loaded so it can take longer to
+		// make the Ophan call
+		cy.wait('@ophanCall', { timeout: 15000 });
 
 		cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
 	});
