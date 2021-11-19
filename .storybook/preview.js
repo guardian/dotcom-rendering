@@ -4,7 +4,6 @@ import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
 import { getFontsCss } from '@root/src/lib/fonts-css';
-import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 
 import { resets } from '@guardian/src-foundations/utils'
 
@@ -22,17 +21,6 @@ if (isChromatic()) {
 	// https://www.theguardian.com/gnm-press-office/2021/apr/30/the-guardian-celebrates-200-extraordinary-years
 	MockDate.set('Wed May 5 2021 12:00:00 GMT+0000 (Greenwich Mean Time)');
 }
-
-// Inject privacy settings on layout stories
-document.onreadystatechange = () => {
-	if (
-		document.readyState === 'interactive' ||
-		document.readyState === 'complete'
-	) {
-		// Manually updates the footer DOM because it's not hydrated
-		injectPrivacySettingsLink();
-	}
-};
 
 mockRESTCalls();
 
