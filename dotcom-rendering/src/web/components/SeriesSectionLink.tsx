@@ -26,14 +26,37 @@ const sectionLabelLink = css`
 	}
 `;
 
-const rowBelowLeftCol = css`
-	flex-direction: column;
-	display: inline-block;
-	${until.leftCol} {
-		display: flex;
-		flex-direction: row;
+const rowBelowLeftCol = (format: ArticleFormat) => {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
+		return css`
+			display: inline-block;
+			flex-direction: column;
+
+			${from.tablet} {
+				display: flex;
+				flex-direction: row;
+			}
+
+			${from.desktop} {
+				display: flex;
+				flex-direction: column;
+			}
+		`;
 	}
-`;
+
+	return css`
+		flex-direction: column;
+		display: inline-block;
+
+		${until.leftCol} {
+			display: flex;
+			flex-direction: row;
+		}
+	`;
+};
 
 const marginBottom = css`
 	margin-bottom: 5px;
@@ -168,7 +191,7 @@ export const SeriesSectionLink = ({
 						// We have a tag, we're not immersive, show both series and section titles
 						return (
 							// Sometimes the tags/titles are shown inline, sometimes stacked
-							<div css={!badge && rowBelowLeftCol}>
+							<div css={!badge && rowBelowLeftCol(format)}>
 								<a
 									href={`${guardianBaseURL}/${tag.id}`}
 									css={[
@@ -311,7 +334,7 @@ export const SeriesSectionLink = ({
 				// We have a tag, we're not immersive, show both series and section titles
 				return (
 					// Sometimes the tags/titles are shown inline, sometimes stacked
-					<div css={!badge && rowBelowLeftCol}>
+					<div css={!badge && rowBelowLeftCol(format)}>
 						<a
 							href={`${guardianBaseURL}/${tag.id}`}
 							css={[

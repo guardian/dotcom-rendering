@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { constructQuery } from '@root/src/lib/querystring';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, getCookie } from '@guardian/libs';
 
 import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
 } from '@frontend/web/components/SignInGate/dismissGate';
-import { getCookie } from '@frontend/web/browser/cookie';
 import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
 
 import { useOnce } from '@frontend/web/lib/useOnce';
@@ -68,9 +67,10 @@ const generateSignInUrl = ({
 		componentId: signInGateTestIdToComponentId[currentTest.id],
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
+		browserId:
+			getCookie({ name: 'bwid', shouldMemoize: true }) || undefined,
+		visitId: getCookie({ name: 'vsid' }) || undefined,
 		viewId: pageViewId,
-		browserId: getCookie('bwid') || undefined,
-		visitId: getCookie('vsid') || undefined,
 	};
 
 	return `${idUrl}/signin?returnUrl=${returnUrl}&componentEventParams=${encodeURIComponent(

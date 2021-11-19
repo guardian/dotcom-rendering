@@ -10,7 +10,6 @@ import {
 	hasOptedOutOfArticleCount,
 	lazyFetchEmailWithTimeout,
 } from '@root/src/web/lib/contributions';
-import { getCookie } from '@root/src/web/browser/cookie';
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
@@ -19,6 +18,7 @@ import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { useOnce } from '@root/src/web/lib/useOnce';
+import { getCookie } from '@guardian/libs';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -88,7 +88,9 @@ const buildPayload = async ({
 			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
-			mvtId: Number(getCookie('GU_mvt_id')),
+			mvtId: Number(
+				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+			),
 			countryCode,
 			weeklyArticleHistory: await asyncArticleCount,
 			optedOutOfArticleCount,

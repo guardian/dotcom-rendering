@@ -19,6 +19,7 @@ import {
 	lifestyle,
 	culture,
 	labs,
+	palette,
 } from '@guardian/src-foundations';
 
 // Here is the one place where we use `pillarPalette`
@@ -649,6 +650,14 @@ const borderStandfirst = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
+const matchTab = (): string => {
+	return border.secondary;
+};
+
+const activeMatchTab = (): string => {
+	return palette.sport[300];
+};
+
 const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -895,6 +904,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
 			lines: borderLines(format),
+			matchTab: matchTab(),
+			activeMatchTab: activeMatchTab(),
 			pagination: borderPagination(),
 		},
 		topBar: {

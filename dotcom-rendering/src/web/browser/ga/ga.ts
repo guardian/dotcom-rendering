@@ -1,5 +1,5 @@
+import { getCookie } from '@guardian/libs';
 import { getCLS, getFID, getLCP } from 'web-vitals';
-import { getCookie } from './cookie';
 
 interface TrackerConfig {
 	name: string;
@@ -78,7 +78,7 @@ const sendCoreVital = ({ name, delta, id }: CoreVitalsArgsType): void => {
 
 export const sendPageView = (): void => {
 	const { GA } = window.guardian.app.data;
-	const userCookie = getCookie('GU_U');
+	const userCookie = getCookie({ name: 'GU_U', shouldMemoize: true });
 	const { ga } = window;
 
 	ga(set, 'forceSSL', true);

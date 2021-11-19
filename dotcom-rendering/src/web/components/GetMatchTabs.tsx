@@ -2,36 +2,33 @@ import { useApi } from '@root/src/web/lib/useApi';
 
 import { Placeholder } from '@root/src/web/components/Placeholder';
 
-import { MatchNav } from './MatchNav';
+import { MatchTabs } from './MatchTabs';
 
 type Props = {
 	matchUrl: string;
+	format: ArticleFormat;
 };
 
-const Loading = () => <Placeholder height={230} />;
+const Loading = () => <Placeholder height={40} />;
 
-export const GetMatchNav = ({ matchUrl }: Props) => {
+export const GetMatchTabs = ({ matchUrl, format }: Props) => {
 	const { data, error, loading } = useApi<{
-		homeTeam: TeamType;
-		awayTeam: TeamType;
-		comments?: string;
+		reportUrl?: string;
 		minByMinUrl?: string;
-		venue?: string;
 	}>(matchUrl);
-
 	if (loading) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
-		window.guardian.modules.sentry.reportError(error, 'match-nav');
+		window.guardian.modules.sentry.reportError(error, 'match-tabs');
 
 		return null;
 	}
 	if (data) {
 		return (
-			<MatchNav
-				homeTeam={data.homeTeam}
-				awayTeam={data.awayTeam}
-				comments={data.comments}
+			<MatchTabs
+				minByMinUrl={data.minByMinUrl}
+				reportUrl={data.reportUrl}
+				format={format}
 			/>
 		);
 	}
