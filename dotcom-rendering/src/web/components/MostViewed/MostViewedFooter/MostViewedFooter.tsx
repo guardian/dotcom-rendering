@@ -123,19 +123,25 @@ export const MostViewedFooter = ({ sectionName, format, ajaxUrl }: Props) => {
 				>
 					<h2 css={headingStyles}>Most popular</h2>
 				</LeftColumn>
+				{/* We need to respect the side ad slot above desktop. The
+					result is that we need to do some mutation here to make
+					sure components are stacked at the correct breakpoints.
+				*/}
 				<section css={stackBelow('desktop')}>
-					<Hide when="above" breakpoint="leftCol">
-						<h2 css={headingStyles}>Most popular</h2>
-					</Hide>
-					<Lazy margin={300}>
-						<Suspense fallback={<></>}>
-							<MostViewedFooterData
-								sectionName={sectionName}
-								palette={palette}
-								ajaxUrl={ajaxUrl}
-							/>
-						</Suspense>
-					</Lazy>
+					<div css={stackBelow('leftCol')}>
+						<Hide when="above" breakpoint="leftCol">
+							<h2 css={headingStyles}>Most popular</h2>
+						</Hide>
+						<Lazy margin={300}>
+							<Suspense fallback={<></>}>
+								<MostViewedFooterData
+									sectionName={sectionName}
+									palette={palette}
+									ajaxUrl={ajaxUrl}
+								/>
+							</Suspense>
+						</Lazy>
+					</div>
 					<div
 						css={css`
 							margin: 6px 0 0 10px;
