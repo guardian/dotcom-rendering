@@ -1,9 +1,15 @@
 import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
-import { cmp, onConsentChange } from '@guardian/consent-management-platform';
+import {
+	cmp,
+	onConsentChange,
+	getConsentFor,
+} from '@guardian/consent-management-platform';
 import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import { startup } from '@root/src/web/browser/startup';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
+
+import { loadScript } from '@root/src/web/lib/loadScript';
 import {
 	OphanComponentType,
 	OphanAction,
@@ -55,9 +61,10 @@ const init = async (): Promise<void> => {
 			log('dotcom', `CMP willShowPrivacyMessage - error: ${e}`),
 		);
 
-	// Register changes in consent state with Ophan
 	onConsentChange((consentState: ConsentState) => {
 		if (!consentState) return;
+
+		// Register changes in consent state with Ophan
 		const decideConsentString = () => {
 			if (consentState.tcfv2) {
 				return consentState.tcfv2?.tcString;
@@ -78,6 +85,29 @@ const init = async (): Promise<void> => {
 			action,
 		};
 		submitComponentEvent(event);
+
+		// Check if we have consent for GA so that if the reader removes consent for tracking we
+		// remove ga from the page
+		const consentGivenForGA = getConsentFor(
+			'google-analytics',
+			consentState,
+		);
+		if (consentGivenForGA) {
+			Promise.all([
+				loadScript('https://www.google-analytics.com/analytics.js'),
+				loadScript(window.guardian.gaPath),
+			])
+				.then(() => {
+					log('dotcom', 'GA script loaded');
+				})
+				.catch((e) => console.error(`GA - error: ${e}`));
+		} else {
+			// Disable Google Analytics
+			// Note. We should never be able to directly set things to the global window object
+			// but in this case we want to stub things for testing, so it's ok to ignore this rule
+			// @ts-ignore
+			window.ga = null;
+		}
 	});
 
 	document.onreadystatechange = () => {
