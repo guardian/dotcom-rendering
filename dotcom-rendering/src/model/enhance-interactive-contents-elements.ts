@@ -5,6 +5,7 @@ const scriptUrls = [
 	'https://uploads.guim.co.uk/2019/03/20/boot.js',
 	'https://uploads.guim.co.uk/2019/12/11/boot.js',
 	'https://interactive.guim.co.uk/testing/2020/11/voterSlideshow/boot.js',
+	'https://uploads.guim.co.uk/2021/10/15/boot.js',
 ];
 
 const isInteractiveContentsBlockElement = (element: CAPIElement): boolean =>
