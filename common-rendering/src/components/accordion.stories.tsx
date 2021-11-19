@@ -1,7 +1,8 @@
 // ----- Imports ----- //
 
 import Accordion from "./accordion";
-import { css, type SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
+import type { SerializedStyles } from "@emotion/react";
 import { breakpoints, space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { body } from '@guardian/src-foundations/typography';
