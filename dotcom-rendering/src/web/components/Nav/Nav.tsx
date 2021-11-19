@@ -6,7 +6,7 @@ import { GuardianRoundel } from '@root/src/web/components/GuardianRoundel';
 import { space } from '@guardian/src-foundations';
 import { until } from '@guardian/src-foundations/mq';
 import { LinkButton, buttonReaderRevenue } from '@guardian/src-button';
-import { SvgArrowRightStraight } from '@guardian/src-icons';
+import { SvgArrowRightStraight } from '@guardian/source-react-components';
 
 import { Hide } from '@frontend/web/components/Hide';
 

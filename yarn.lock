@@ -1522,6 +1522,11 @@
     "@guardian/src-button" "^3.12.0"
     "@guardian/src-helpers" "^3.12.0"
 
+"@guardian/source-react-components@^4.0.0-rc.2":
+  version "4.0.0-rc.2"
+  resolved "https://registry.npmjs.org/@guardian/source-react-components/-/source-react-components-4.0.0-rc.2.tgz#e306ad26cf155a67b8c26c21c038e8ae99c08065"
+  integrity sha512-H5Y80aAKP9G3pj1Cj3ygd5mP0GbwE6lI91l98yOTh6I1yfcthEzP4faCLKYVn9UvKexHwEhBEjjj8W99YmnfTQ==
+
 "@guardian/src-brand@^3.10.0":
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/@guardian/src-brand/-/src-brand-3.11.0.tgz#474adfbe3c337096f38d44dd88cad32ea0cc830e"
