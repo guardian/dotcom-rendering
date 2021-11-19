@@ -231,7 +231,7 @@ const backgroundStandfirstDark = ({
 					return news[100];
 			}
 		default:
-			return neutral[7];
+			return neutral[10];
 	}
 };
 
