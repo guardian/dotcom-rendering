@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import Accordion from "./accordion";
-import { css } from "@emotion/react";
+import { css, type SerializedStyles } from "@emotion/react";
 import { breakpoints, space } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { body } from '@guardian/src-foundations/typography';
@@ -9,19 +9,19 @@ import type { FC } from "react";
 
 // ----- Stories ----- //
 
-const textStyle = css`
+const textStyle: SerializedStyles = css`
 	${body.medium()};
 	line-height: 150%;
 	margin-bottom: ${space[3]}px;
 `;
 
-const hideAboveTablet = css`
+const hideAboveTablet: SerializedStyles = css`
 	${from.desktop} {
 		display: none;
 	}
 `;
 
-const adviceColourAboveTablet = css`
+const adviceColourAboveTablet: SerializedStyles = css`
 	display: none;
 	${from.desktop} {
 		display: block;
