@@ -126,6 +126,7 @@ type Palette = {
 		headline: Colour;
 		headlineByline: Colour;
 		bullet: Colour;
+		bulletStandfirst: Colour;
 		header: Colour;
 		standfirst: Colour;
 		richLink: Colour;
@@ -158,6 +159,8 @@ type Palette = {
 		navPillar: Colour;
 		article: Colour;
 		lines: Colour;
+		matchTab: Colour;
+		activeMatchTab: Colour;
 		pagination: Colour;
 	};
 	topBar: {

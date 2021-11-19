@@ -31,7 +31,7 @@ const nestedStyles = (palette: Palette) => css`
 		height: ${space[3]}px;
 		width: ${space[3]}px;
 		margin-right: ${space[2]}px;
-		background-color: ${neutral[86]};
+		background-color: ${palette.background.bulletStandfirst};
 		margin-left: -20px;
 	}
 
@@ -50,7 +50,7 @@ const nestedStyles = (palette: Palette) => css`
 		height: 15.2px;
 		width: 15.2px;
 		margin-right: 2px;
-		background-color: ${neutral[86]};
+		background-color: ${palette.background.bulletStandfirst};
 	}
 
 	a {

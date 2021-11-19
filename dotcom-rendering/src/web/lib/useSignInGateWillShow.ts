@@ -2,11 +2,18 @@ import { useEffect, useState } from 'react';
 import {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
-	SignInGateSelectorProps,
 } from '@frontend/web/components/SignInGate/types';
 import { useOnce } from '@frontend/web/lib/useOnce';
 import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
 
+type Props = {
+	isSignedIn?: boolean;
+	contentType: string;
+	sectionName?: string;
+	tags: TagType[];
+	isPaidContent: boolean;
+	isPreview: boolean;
+};
 /**
  * @description
  * A custom hook to determine if a sign in gate will show on the current page
@@ -15,8 +22,12 @@ import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
  * */
 export const useSignInGateWillShow = ({
 	isSignedIn,
-	CAPI,
-}: SignInGateSelectorProps): boolean | undefined => {
+	contentType,
+	sectionName,
+	tags,
+	isPaidContent,
+	isPreview,
+}: Props): boolean | undefined => {
 	const [gateVariant, setGateVariant] = useState<
 		SignInGateComponent | null | undefined
 	>(undefined);
@@ -36,10 +47,27 @@ export const useSignInGateWillShow = ({
 		if (gateVariant && currentTest) {
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			gateVariant
-				?.canShow(CAPI, !!isSignedIn, currentTest)
+				?.canShow({
+					isSignedIn: !!isSignedIn,
+					currentTest,
+					contentType,
+					sectionName,
+					tags,
+					isPaidContent,
+					isPreview,
+				})
 				.then(setCanShowGate);
 		}
-	}, [currentTest, gateVariant, CAPI, isSignedIn]);
+	}, [
+		currentTest,
+		gateVariant,
+		isSignedIn,
+		contentType,
+		sectionName,
+		tags,
+		isPaidContent,
+		isPreview,
+	]);
 
 	return canShowGate && !!gateVariant && !!gateVariant.gate;
 };

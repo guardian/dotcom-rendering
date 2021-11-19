@@ -1,10 +1,19 @@
+export type CanShowGateProps = {
+	isSignedIn: boolean;
+	currentTest: CurrentSignInGateABTest;
+	contentType: string;
+	sectionName?: string;
+	tags: TagType[];
+	isPaidContent: boolean;
+	isPreview?: boolean;
+};
+
 export type SignInGateComponent = {
 	gate?: (props: SignInGateProps) => JSX.Element;
-	canShow: (
-		CAPI: CAPIBrowserType,
-		isSignedIn: boolean,
-		currentTest: CurrentSignInGateABTest,
-	) => Promise<boolean>;
+	canShow: ({
+		isSignedIn,
+		currentTest,
+	}: CanShowGateProps) => Promise<boolean>;
 };
 
 export interface SignInGateProps {
@@ -25,7 +34,16 @@ export type CurrentSignInGateABTest = {
 
 export interface SignInGateSelectorProps {
 	isSignedIn?: boolean;
-	CAPI: CAPIBrowserType;
+	format: ArticleFormat;
+	contentType: string;
+	sectionName?: string;
+	tags: TagType[];
+	isPaidContent: boolean;
+	isPreview: boolean;
+	host?: string;
+	pageId: string;
+	idUrl?: string;
+	pageViewId: string;
 }
 
 export type SignInGateTestMap = { [name: string]: SignInGateComponent };
