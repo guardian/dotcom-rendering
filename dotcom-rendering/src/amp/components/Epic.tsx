@@ -235,11 +235,12 @@ const tickerProgressStyle = css`
 	margin: 0;
 	padding: 0;
 	left: 0;
-	background-color: #c70000;
+	background-color: ${error[400]};
 	height: 100%;
 	width: 100%;
 	transform-origin: left;
 `;
+/* stylelint-disable */
 const tickerBackgroundStyle = css`
 	overflow: hidden;
 	position: relative;
@@ -249,6 +250,7 @@ const tickerBackgroundStyle = css`
 	background-color: #dda7a1;
 	border: none;
 `;
+/* stylelint-enable */
 const topLeftStyle = css`
 	${textSans.small({ fontWeight: 'bold' })};
 `;
