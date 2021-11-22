@@ -4,16 +4,21 @@ import Accordion from "./accordion";
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
 import { breakpoints, space } from '@guardian/src-foundations';
+import { neutral } from "@guardian/src-foundations/palette";
 import { from } from '@guardian/src-foundations/mq';
 import { body } from '@guardian/src-foundations/typography';
 import type { FC } from "react";
+import { darkModeCss } from "../lib";
 
 // ----- Stories ----- //
 
-const textStyle: SerializedStyles = css`
+const textStyle = (supportsDarkMode: boolean): SerializedStyles => css`
 	${body.medium({ lineHeight: 'loose' })};
 	line-height: 150%;
 	margin-bottom: ${space[3]}px;
+	${darkModeCss(supportsDarkMode)`
+		color: ${neutral[86]};
+	`}
 `;
 
 const hideAboveTablet: SerializedStyles = css`
@@ -34,30 +39,46 @@ const adviceColourAboveTablet: SerializedStyles = css`
 	}
 `;
 
+const accordionContent = (supportsDarkMode: boolean) => (
+	<>
+		<p css={[textStyle(supportsDarkMode), adviceColourAboveTablet]}>
+			There's a trick to viewing this - you need to switch the
+			storybook viewport to mobile, phablet or tablet in order to see the
+			accordion.
+		</p>
+		<p css={[textStyle(supportsDarkMode), hideAboveTablet]}>
+			Vaccine passports enjoy substantial support across Europe, a
+			YouGov survey suggests, as a fourth wave of infections prompts
+			a growing number of countries to impose tougher restrictions on
+			people who have not been fully vaccinated.
+		</p>
+		<p css={[textStyle(supportsDarkMode), hideAboveTablet]}>
+			The annual YouGov-Cambridge Globalism Project suggests majorities
+			in all 10 European countries surveyed back compulsory vaccine
+			passes for large events, while in most, more people favour than
+			oppose their use in cafes, restaurants and gyms.
+		</p>
+	</>
+)
+
 const Default: FC = () => (
-		<Accordion
-			supportsDarkMode={false}
-			accordionTitle="Live feed"
-			backgroundBody="white"
-		>
-			<p css={[textStyle, adviceColourAboveTablet]}>
-				There's a trick to viewing this - you need to switch the
-				storybook viewport to mobile, phablet or tablet in order to see the
-				accordion.
-			</p>
-			<p css={[textStyle, hideAboveTablet]}>
-				Vaccine passports enjoy substantial support across Europe, a
-				YouGov survey suggests, as a fourth wave of infections prompts
-				a growing number of countries to impose tougher restrictions on
-				people who have not been fully vaccinated.
-			</p>
-			<p css={[textStyle, hideAboveTablet]}>
-				The annual YouGov-Cambridge Globalism Project suggests majorities
-				in all 10 European countries surveyed back compulsory vaccine
-				passes for large events, while in most, more people favour than
-				oppose their use in cafes, restaurants and gyms.
-			</p>
-		</Accordion>
+	<Accordion
+		supportsDarkMode={false}
+		accordionTitle="Live feed"
+		backgroundBody="white"
+	>
+		{accordionContent(false)}
+	</Accordion>
+);
+
+const Dark: FC = () => (
+	<Accordion
+		supportsDarkMode={true}
+		accordionTitle="Live feed"
+		backgroundBody="white"
+	>
+		{accordionContent(true)}
+	</Accordion>
 );
 
 
@@ -82,5 +103,6 @@ export default {
 
 export {
     Default,
+	Dark,
 }
 

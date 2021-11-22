@@ -50,6 +50,8 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		path {
 			fill: ${neutral[60]};
 		}
+		background-color: ${neutral[10]};
+		border-top: ${neutral[20]} 1px solid;
 	`}
 	${from.phablet} {
 		padding: ${remSpace[1]} ${remSpace[4]} 0 ${remSpace[5]};
@@ -67,13 +69,19 @@ const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
 	`}
 `;
 
-const backgroundColour = (backgroundBody: 'white' | 'grey'): SerializedStyles => {
+const backgroundColour = (
+	backgroundBody: 'white' | 'grey',
+	supportsDarkMode: boolean,
+): SerializedStyles => {
 	if(backgroundBody === 'white') {
 		return css`
 			background-color: ${background.primary};
 			${from.desktop} {
 				background-color: transparent;
 			}
+			${darkModeCss(supportsDarkMode)`
+				background-color: ${neutral[10]};
+			`}
 		`
 	}
 	return css`
@@ -81,7 +89,11 @@ const backgroundColour = (backgroundBody: 'white' | 'grey'): SerializedStyles =>
 		${from.desktop} {
 			background-color: transparent;
 		}
+		${darkModeCss(supportsDarkMode)`
+			background-color: ${neutral[10]};
+		`}
 	`;
+
 };
 
 const paddingBody: SerializedStyles = css`
@@ -111,7 +123,7 @@ const Accordion = ({
 					<SvgChevronUpSingle />
 				</span>
 			</summary>
-			<div css={[backgroundColour(backgroundBody), paddingBody]}>{children}</div>
+			<div css={[backgroundColour(backgroundBody, supportsDarkMode), paddingBody]}>{children}</div>
 		</details>
 	);
 };
