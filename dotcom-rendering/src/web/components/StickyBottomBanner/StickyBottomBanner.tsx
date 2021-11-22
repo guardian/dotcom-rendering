@@ -28,14 +28,20 @@ import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
 type Props = {
 	isSignedIn?: boolean;
 	asyncCountryCode?: Promise<CountryCode | null>;
-	CAPI: CAPIBrowserType;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
 	contentType: string;
 	sectionName?: string;
+	section: string;
 	tags: TagType[];
 	isPaidContent: boolean;
 	isPreview: boolean;
+	shouldHideReaderRevenue: boolean;
+	isMinuteArticle: boolean;
+	isSensitive: boolean;
+	contributionsServiceUrl: string;
+	idApiUrl: string;
+	switches: Switches;
 };
 
 type RRBannerConfig = {
@@ -81,30 +87,55 @@ const buildRRBannerConfigWith = ({
 	canShowFn,
 	isEnabled,
 }: RRBannerConfig) => {
-	return (
-		CAPI: CAPIBrowserType,
-		isSignedIn: boolean,
-		asyncCountryCode: Promise<string>,
-		isPreview: boolean,
-		asyncArticleCount: Promise<WeeklyArticleHistory | undefined>,
-		signInGateWillShow: boolean = false,
-	): CandidateConfig<BannerProps> => {
+	return ({
+		isSignedIn,
+		asyncCountryCode,
+		isPreview,
+		asyncArticleCount,
+		signInGateWillShow = false,
+		contentType,
+		section,
+		shouldHideReaderRevenue,
+		isMinuteArticle,
+		isPaidContent,
+		isSensitive,
+		tags,
+		contributionsServiceUrl,
+		idApiUrl,
+		switches,
+	}: {
+		isSignedIn: boolean;
+		asyncCountryCode: Promise<string>;
+		isPreview: boolean;
+		asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
+		signInGateWillShow?: boolean;
+		contentType: string;
+		section: string;
+		shouldHideReaderRevenue: boolean;
+		isMinuteArticle: boolean;
+		isPaidContent: boolean;
+		isSensitive: boolean;
+		tags: TagType[];
+		contributionsServiceUrl: string;
+		idApiUrl: string;
+		switches: Switches;
+	}): CandidateConfig<BannerProps> => {
 		return {
 			candidate: {
 				id,
 				canShow: () =>
 					canShowFn({
-						remoteBannerConfig: isEnabled(CAPI.config.switches),
+						remoteBannerConfig: isEnabled(switches),
 						isSignedIn,
 						asyncCountryCode,
-						contentType: CAPI.contentType,
-						sectionId: CAPI.config.section,
-						shouldHideReaderRevenue: CAPI.shouldHideReaderRevenue,
-						isMinuteArticle: CAPI.pageType.isMinuteArticle,
-						isPaidContent: CAPI.pageType.isPaidContent,
-						isSensitive: CAPI.config.isSensitive,
-						tags: CAPI.tags,
-						contributionsServiceUrl: CAPI.contributionsServiceUrl,
+						contentType,
+						sectionId: section,
+						shouldHideReaderRevenue,
+						isMinuteArticle,
+						isPaidContent,
+						isSensitive,
+						tags,
+						contributionsServiceUrl,
 						alreadyVisitedCount: getAlreadyVisitedCount(),
 						engagementBannerLastClosedAt: getBannerLastClosedAt(
 							'engagementBannerLastClosedAt',
@@ -112,9 +143,9 @@ const buildRRBannerConfigWith = ({
 						subscriptionBannerLastClosedAt: getBannerLastClosedAt(
 							'subscriptionBannerLastClosedAt',
 						),
-						section: CAPI.config.section,
+						section,
 						isPreview,
-						idApiUrl: CAPI.config.idApiUrl,
+						idApiUrl,
 						signInGateWillShow,
 						asyncArticleCount,
 					}),
@@ -163,14 +194,20 @@ const buildBrazeBanner = (
 export const StickyBottomBanner = ({
 	isSignedIn,
 	asyncCountryCode,
-	CAPI,
 	brazeMessages,
 	asyncArticleCount,
 	contentType,
 	sectionName,
+	section,
 	tags,
 	isPaidContent,
 	isPreview,
+	shouldHideReaderRevenue,
+	isMinuteArticle,
+	isSensitive,
+	contributionsServiceUrl,
+	idApiUrl,
+	switches,
 }: Props) => {
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const signInGateWillShow = useSignInGateWillShow({
@@ -183,23 +220,45 @@ export const StickyBottomBanner = ({
 	});
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
-		const puzzlesBanner = buildPuzzlesBannerConfig(
-			CAPI,
-			isSignedIn as boolean,
-			asyncCountryCode as Promise<string>,
+		const puzzlesBanner = buildPuzzlesBannerConfig({
+			isSignedIn: isSignedIn as boolean,
+			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
-			asyncArticleCount as Promise<WeeklyArticleHistory | undefined>,
-		);
-		const readerRevenue = buildReaderRevenueBannerConfig(
-			CAPI,
-			isSignedIn as boolean,
-			asyncCountryCode as Promise<CountryCode>,
+			asyncArticleCount: asyncArticleCount as Promise<
+				WeeklyArticleHistory | undefined
+			>,
+			contentType,
+			section,
+			shouldHideReaderRevenue,
+			isMinuteArticle,
+			isPaidContent,
+			isSensitive,
+			tags,
+			contributionsServiceUrl,
+			idApiUrl,
+			switches,
+		});
+		const readerRevenue = buildReaderRevenueBannerConfig({
+			isSignedIn: isSignedIn as boolean,
+			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
-			asyncArticleCount as Promise<WeeklyArticleHistory | undefined>,
+			asyncArticleCount: asyncArticleCount as Promise<
+				WeeklyArticleHistory | undefined
+			>,
 			signInGateWillShow,
-		);
+			contentType,
+			section,
+			shouldHideReaderRevenue,
+			isMinuteArticle,
+			isPaidContent,
+			isSensitive,
+			tags,
+			contributionsServiceUrl,
+			idApiUrl,
+			switches,
+		});
 		const brazeArticleContext: BrazeArticleContext = {
-			section: CAPI.sectionName,
+			section: sectionName,
 		};
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as Promise<BrazeMessagesInterface>,
@@ -217,7 +276,7 @@ export const StickyBottomBanner = ({
 			.catch((e) =>
 				console.error(`StickyBottomBanner pickMessage - error: ${e}`),
 			);
-	}, [isSignedIn, asyncCountryCode, CAPI, brazeMessages, asyncArticleCount]);
+	}, [isSignedIn, asyncCountryCode, brazeMessages, asyncArticleCount]);
 
 	if (SelectedBanner) {
 		return <SelectedBanner />;
