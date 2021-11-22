@@ -12,7 +12,7 @@ const base = {
 	edition: 'uk',
 	isHosted: 'false',
 	keywordIds:
-		'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+		'environment/climate-crisis,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
 	pillar,
 	section: 'environment',
 	seriesId: 'testseries',
