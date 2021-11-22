@@ -11,7 +11,7 @@ import type { FC } from "react";
 // ----- Stories ----- //
 
 const textStyle: SerializedStyles = css`
-	${body.medium()};
+	${body.medium({ lineHeight: 'loose' })};
 	line-height: 150%;
 	margin-bottom: ${space[3]}px;
 `;
