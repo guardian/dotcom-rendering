@@ -333,6 +333,51 @@ export const Interview: CAPIType = {
 						],
 					},
 					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
+					},
+					{
+						title: 'Climate crisis',
+						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Football',
+						url: '/football',
+						children: [
+							{
+								title: 'Live scores',
+								url: '/football/live',
+								longTitle: 'football/live',
+							},
+							{
+								title: 'Tables',
+								url: '/football/tables',
+								longTitle: 'football/tables',
+							},
+							{
+								title: 'Fixtures',
+								url: '/football/fixtures',
+								longTitle: 'football/fixtures',
+							},
+							{
+								title: 'Results',
+								url: '/football/results',
+								longTitle: 'football/results',
+							},
+							{
+								title: 'Competitions',
+								url: '/football/competitions',
+								longTitle: 'football/competitions',
+							},
+							{
+								title: 'Clubs',
+								url: '/football/teams',
+								longTitle: 'football/teams',
+							},
+						],
+					},
+					{
 						title: 'Business',
 						url: '/business',
 						children: [
@@ -389,57 +434,12 @@ export const Interview: CAPIType = {
 						],
 					},
 					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-					},
-					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Euro 2020',
-								url: '/football/euro-2020',
-							},
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
-					},
-					{
 						title: 'Environment',
 						url: '/environment',
 						children: [
 							{
-								title: 'Climate change',
-								url: '/environment/climate-change',
+								title: 'Climate crisis',
+								url: '/environment/climate-crisis',
 							},
 							{
 								title: 'Wildlife',
@@ -538,17 +538,9 @@ export const Interview: CAPIType = {
 				iconName: 'home',
 				children: [
 					{
-						title: 'Euro 2020',
-						url: '/football/euro-2020',
-					},
-					{
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: 'Euro 2020',
-								url: '/football/euro-2020',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -794,16 +786,8 @@ export const Interview: CAPIType = {
 						url: '/theguardian/journal',
 					},
 					{
-						title: 'Weekend',
-						url: '/theguardian/weekend',
-					},
-					{
-						title: 'The Guide',
-						url: '/theguardian/theguide',
-					},
-					{
-						title: 'Saturday review',
-						url: '/theguardian/guardianreview',
+						title: 'Saturday',
+						url: '/theguardian/saturday',
 					},
 				],
 			},
@@ -921,6 +905,10 @@ export const Interview: CAPIType = {
 				title: 'Guardian Puzzles app',
 				url: 'https://puzzles.theguardian.com/download',
 			},
+			{
+				title: 'Guardian content licensing site',
+				url: 'https://licensing.theguardian.com/',
+			},
 		],
 		currentNavLinkTitle: 'News',
 		currentPillarTitle: 'News',
@@ -1029,6 +1017,51 @@ export const Interview: CAPIType = {
 					],
 				},
 				{
+					title: 'Coronavirus',
+					url: '/world/coronavirus-outbreak',
+					longTitle: 'Coronavirus',
+				},
+				{
+					title: 'Climate crisis',
+					url: '/environment/climate-crisis',
+				},
+				{
+					title: 'Football',
+					url: '/football',
+					children: [
+						{
+							title: 'Live scores',
+							url: '/football/live',
+							longTitle: 'football/live',
+						},
+						{
+							title: 'Tables',
+							url: '/football/tables',
+							longTitle: 'football/tables',
+						},
+						{
+							title: 'Fixtures',
+							url: '/football/fixtures',
+							longTitle: 'football/fixtures',
+						},
+						{
+							title: 'Results',
+							url: '/football/results',
+							longTitle: 'football/results',
+						},
+						{
+							title: 'Competitions',
+							url: '/football/competitions',
+							longTitle: 'football/competitions',
+						},
+						{
+							title: 'Clubs',
+							url: '/football/teams',
+							longTitle: 'football/teams',
+						},
+					],
+				},
+				{
 					title: 'Business',
 					url: '/business',
 					children: [
@@ -1085,57 +1118,12 @@ export const Interview: CAPIType = {
 					],
 				},
 				{
-					title: 'Coronavirus',
-					url: '/world/coronavirus-outbreak',
-					longTitle: 'Coronavirus',
-				},
-				{
-					title: 'Football',
-					url: '/football',
-					children: [
-						{
-							title: 'Euro 2020',
-							url: '/football/euro-2020',
-						},
-						{
-							title: 'Live scores',
-							url: '/football/live',
-							longTitle: 'football/live',
-						},
-						{
-							title: 'Tables',
-							url: '/football/tables',
-							longTitle: 'football/tables',
-						},
-						{
-							title: 'Fixtures',
-							url: '/football/fixtures',
-							longTitle: 'football/fixtures',
-						},
-						{
-							title: 'Results',
-							url: '/football/results',
-							longTitle: 'football/results',
-						},
-						{
-							title: 'Competitions',
-							url: '/football/competitions',
-							longTitle: 'football/competitions',
-						},
-						{
-							title: 'Clubs',
-							url: '/football/teams',
-							longTitle: 'football/teams',
-						},
-					],
-				},
-				{
 					title: 'Environment',
 					url: '/environment',
 					children: [
 						{
-							title: 'Climate change',
-							url: '/environment/climate-change',
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
 						},
 						{
 							title: 'Wildlife',
@@ -1436,7 +1424,7 @@ export const Interview: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: 'https://uploads.guim.co.uk/2021/07/27/STL_&_GMG_Modern_Slavery_Act_Statement_2021.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1529,6 +1517,7 @@ export const Interview: CAPIType = {
 		'twitter:app:url:iphone':
 			'gnmguardian://global/2020/feb/09/halima-aden-model-activist-hijab-refugee-fashion-we-all-deserve-representation?contenttype=Article&source=twitter',
 	},
+	webPublicationDateDeprecated: '2020-02-09T11:00:04.000Z',
 	pageType: {
 		hasShowcaseMainElement: true,
 		isFront: false,
@@ -1542,6 +1531,7 @@ export const Interview: CAPIType = {
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline:
 		"‘We all deserve representation': hijab-wearing model Halima Aden on the power of fashion",
+	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
@@ -1631,62 +1621,12 @@ export const Interview: CAPIType = {
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=605&quality=85&auto=format&fit=max&s=10797284ab128b95f50508d252d642f9',
-							width: 605,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=700&quality=85&auto=format&fit=max&s=221662c2f45e6ec556ee97ca1a2fe4a3',
+							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=05b8cf2a165ca2fd040caa7efee342b0',
-							width: 1210,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=445&quality=85&auto=format&fit=max&s=71da6cf003fcbbd7d541139403ab496b',
-							width: 445,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48012a14cec43149c3a8deb9b5cad424',
-							width: 890,
-						},
-					],
-				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=140&quality=85&auto=format&fit=max&s=3fecbb04bd3c022fe3a81ff281ce4e92',
-							width: 140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=e3415f361f42ce9ef66f7acbedb2857c',
-							width: 280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=120&quality=85&auto=format&fit=max&s=cc3fe6c682473ad798714b9c4cf1aa42',
-							width: 120,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=b164e866a577fbbcc92c8021e41ced44',
-							width: 240,
-						},
-					],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=380&quality=85&auto=format&fit=max&s=8f4378f78798410f6dc43bfbaa123377',
-							width: 380,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=53256270d8040b88eb75cb2e10977be1',
-							width: 760,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=300&quality=85&auto=format&fit=max&s=dad10ac6e72169e47bf6a77fb4a73ab5',
-							width: 300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=e3d6073c22b1e7d5e40be6238fcaf01f',
-							width: 600,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=1bc3d24320501dfae7f07f384d0496c8',
+							width: 1400,
 						},
 						{
 							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=620&quality=85&auto=format&fit=max&s=d421e89a07d3c1e88dbd1bd93f7bd905',
@@ -1697,22 +1637,30 @@ export const Interview: CAPIType = {
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=605&quality=85&auto=format&fit=max&s=10797284ab128b95f50508d252d642f9',
-							width: 605,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=645&quality=85&auto=format&fit=max&s=11679d9a04f3915e13f92eed62625767',
+							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=05b8cf2a165ca2fd040caa7efee342b0',
-							width: 1210,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b233c6790064a5162ee05263718d45fd',
+							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=445&quality=85&auto=format&fit=max&s=71da6cf003fcbbd7d541139403ab496b',
-							width: 445,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=465&quality=85&auto=format&fit=max&s=2e13e2ed36d9eed2e9a602cf620782f2',
+							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48012a14cec43149c3a8deb9b5cad424',
-							width: 890,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=13221631f112a544cfac82a6f8aab586',
+							width: 930,
 						},
 					],
+				},
+				{
+					weighting: 'thumbnail',
+					srcSet: [],
+				},
+				{
+					weighting: 'supporting',
+					srcSet: [],
 				},
 				{
 					weighting: 'showcase',
@@ -1777,36 +1725,19 @@ export const Interview: CAPIType = {
 				},
 				{
 					weighting: 'halfwidth',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=620&quality=85&auto=format&fit=max&s=d421e89a07d3c1e88dbd1bd93f7bd905',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=aa3050e4eab22a3aa361756d2cd31ec8',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=605&quality=85&auto=format&fit=max&s=10797284ab128b95f50508d252d642f9',
-							width: 605,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=05b8cf2a165ca2fd040caa7efee342b0',
-							width: 1210,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=445&quality=85&auto=format&fit=max&s=71da6cf003fcbbd7d541139403ab496b',
-							width: 445,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=48012a14cec43149c3a8deb9b5cad424',
-							width: 890,
-						},
-					],
+					srcSet: [],
 				},
 				{
 					weighting: 'immersive',
 					srcSet: [
+						{
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=1900&quality=85&auto=format&fit=max&s=eeca9f0af6393610d942b4e5677a19ea',
+							width: 1900,
+						},
+						{
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=78a88db4e62af6db96c02aa4ec757cdc',
+							width: 3800,
+						},
 						{
 							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=1300&quality=85&auto=format&fit=max&s=3a1e25f7ecc09e1b46b766f4e283de85',
 							width: 1300,
@@ -1824,53 +1755,45 @@ export const Interview: CAPIType = {
 							width: 2280,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=1125&quality=85&auto=format&fit=max&s=162336476d99288499043cef6a092419',
-							width: 1125,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=980&quality=85&auto=format&fit=max&s=1b03d348105f0ac3b0bcd792636d6652',
+							width: 980,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=4886c7c7ced1680587b7512e069e702d',
-							width: 2250,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=4d6feffe0989eced709fab3c6e20c291',
+							width: 1960,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=965&quality=85&auto=format&fit=max&s=888a27b105ec3629cfbbdab94a71abe1',
-							width: 965,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=740&quality=85&auto=format&fit=max&s=78004608b93bafdd373af47a3b19447e',
+							width: 740,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=e7160d6bf3243d911fa8c44cf705c67c',
-							width: 1930,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=47cb7dbece8d0e2fd17a5b4e695e846a',
+							width: 1480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=725&quality=85&auto=format&fit=max&s=3fa5100fd3461bd962fbdcc8fec1f92e',
-							width: 725,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=660&quality=85&auto=format&fit=max&s=a18fb9a609a6f86503d00ee2c2fff6ae',
+							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=07ad8eba6afd40651a2284e29d20affe',
-							width: 1450,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=29b4eaa7b665524067624be722d2f1ad',
+							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=645&quality=85&auto=format&fit=max&s=11679d9a04f3915e13f92eed62625767',
-							width: 645,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=480&quality=85&auto=format&fit=max&s=9751c191c4f70532761ed5d1e207e714',
+							width: 480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b233c6790064a5162ee05263718d45fd',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=465&quality=85&auto=format&fit=max&s=2e13e2ed36d9eed2e9a602cf620782f2',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=13221631f112a544cfac82a6f8aab586',
-							width: 930,
+							src: 'https://i.guim.co.uk/img/media/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/master/5480.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=41765569f98bab43e2a8b06e00a010b7',
+							width: 960,
 						},
 					],
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '5d9d2994-b98c-4488-9054-3ad6efd78b51',
+			elementId: '871c8a8c-0101-4703-80c5-2056c0aea406',
 		},
 	],
-	webPublicationDateDeprecated: '2020-02-09T11:00:04.000Z',
+	webPublicationDate: '2020-02-09T11:00:04.000Z',
 	blocks: [
 		{
 			id: '8c447c98-b1ab-43fc-9570-a401998486d3',
@@ -1878,22 +1801,22 @@ export const Interview: CAPIType = {
 				{
 					html: '<p>Halima Aden, then aged 19, became the first contestant in the Miss USA 2016 beauty pageant to wear a hijab and burkini, attracting the attention of French fashion legend <a href="https://www.theguardian.com/fashion/carine-roitfeld" title="">Carine Roitfeld</a>. The following year she became the first hijab-wearing model to sign with a global modelling agency, IMG, and then the first to walk at New York fashion week, for Yeezy, the Kanye West brand. She later became the first hijab-wearing model to make the cover of <em>Vogue</em> – twice (first <em>Vogue Arabia</em>, then British <em>Vogue</em>) – and soon afterwards a <em>Sports Illustrated</em> swimsuit shoot followed. By that point she’d already become a Unicef ambassador, and a go-to voice on diversity in the fashion industry. In 2017 she gave the first <a href="https://www.ted.com/talks/halima_aden_how_i_went_from_child_refugee_to_international_model?language=en" title="">TED</a> talk at a refugee camp in Kakuma, Kenya. <em>Teen Vogue</em> went with her.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'f86c184f-3881-43be-8d54-62f77aad67c7',
+					elementId: '0e0b8315-4041-449d-8684-fac9f18aaa88',
 				},
 				{
 					html: '<p>When we meet, at a hotel near King’s Cross, I ask if it ever gets tiring, being the first in so many different ways, shouldering the burden of representation. “Somebody needs to,” Aden says. “I want my sister, my little nieces, even my nephews to see representations of somebody who wears a hijab in modern ways, in such a way that they can relate to.” We’re sitting side by side on a window seat, Aden holding court before a little audience of PRs, management and her best friend, Lizeth, who has travelled with her from the US. Though she looks very much the high-fashion figure, all in black – sequins and brocade lace, knee-high stiletto boots – she seems younger than her 22 years, gabbing away in the stream-of-conscious slang and asides of a teenager still starstruck by the turns her life has taken.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '37e4e378-aab2-4e62-a098-d357ad2a9e28',
+					elementId: '5f9aceac-ca74-4893-89a5-315d03d724be',
 				},
 				{
 					html: '<p>But on the topics of diversity, representation and sustainability, she speaks with passion and conviction. She has said in the past that, growing up in the US: “The only times I saw somebody dressed like me was on CNN – and they weren’t doing anything I approve of.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '3cf1531b-ac70-4bc7-8b1c-6f5afc655e54',
+					elementId: '449c2f2c-f285-4ebc-91e3-3c26fe824bf7',
 				},
 				{
 					html: '<p>“I feel like we all deserve representation and I didn’t have that,” Aden says now. “I never got to flip through a magazine and see somebody who looks like me.” Lizeth digs out the latest issue of <em>Essence</em> magazine, Aden proud in pink on the cover. Aden takes it from her, somewhat wonderingly. “Sometimes it’s so wild for me,” she says. “I still catch myself… When my friend went and got that from the newsstand, I was like: ‘Oh my God.’”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '79ea00c5-1466-4e85-8551-7f3404fc8aa9',
+					elementId: '4d672a1c-1aa6-4eac-a7de-64d6c6203415',
 				},
 				{
 					media: {
@@ -2070,60 +1993,44 @@ export const Interview: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=1020&quality=85&auto=format&fit=max&s=9c5a70050612184936e70bd311bcef29',
-									width: 1020,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=860&quality=85&auto=format&fit=max&s=c2ed6d2d54726dc108d7ca7981f59af3',
+									width: 860,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=d6400e45e60798b006c3cafcf5e2c489',
-									width: 2040,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=8d472cb97e8677c66b94f1fafcc32e91',
+									width: 1720,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=940&quality=85&auto=format&fit=max&s=304a7da5ac0d886717c2ebce6e4d9f5c',
-									width: 940,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=780&quality=85&auto=format&fit=max&s=0d5d2878a84163eb548c77a938f657e1',
+									width: 780,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c55d9b22218366973430a5ee223c15e5',
-									width: 1880,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=1f3c9a0b935c6def95fb914cb023ff11',
+									width: 1560,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=700&quality=85&auto=format&fit=max&s=accd4fdfc1f8f88e6beda8e18d8afafc',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=620&quality=85&auto=format&fit=max&s=aa0f4548ad3073a8fc26c2f88089cd79',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=936acd243f78fef63e4f3eaf79fbd087',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a44d63000b62d03ccc3b257a276b00a9',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=700&quality=85&auto=format&fit=max&s=accd4fdfc1f8f88e6beda8e18d8afafc',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=605&quality=85&auto=format&fit=max&s=3c7f288da0978fa24225b7e6b940cae9',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=936acd243f78fef63e4f3eaf79fbd087',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=99fd8092e6cd9ae87ef2efe4e90c4806',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=660&quality=85&auto=format&fit=max&s=0bcdbfcb78993e452470f34daef5b410',
-									width: 660,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=445&quality=85&auto=format&fit=max&s=3f5ab2675916e41f98d07706c69972da',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=8f4b06a7843e095a6c345512eafc64b8',
-									width: 1320,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=645&quality=85&auto=format&fit=max&s=122d1586b08f59f017a66edd9db4732c',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e3211ceee12f43e82acc1538320d3edf',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=465&quality=85&auto=format&fit=max&s=0bd6404f6efe4c3e7829572614ea3832',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=8a41907f52ce78852464d0f953fc9324',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=7f2760cde43a58be187b667c474027b6',
+									width: 890,
 								},
 							],
 						},
@@ -2160,86 +2067,54 @@ export const Interview: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=1300&quality=85&auto=format&fit=max&s=b2da1bf6ecb53e1f45a3c3453fbac6d0',
-									width: 1300,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=620&quality=85&auto=format&fit=max&s=aa0f4548ad3073a8fc26c2f88089cd79',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=e281278e633ddc4f93567f4b60c3e86d',
-									width: 2600,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=a44d63000b62d03ccc3b257a276b00a9',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=1140&quality=85&auto=format&fit=max&s=c35a4086bc78173731582d58e5c3bed6',
-									width: 1140,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=605&quality=85&auto=format&fit=max&s=3c7f288da0978fa24225b7e6b940cae9',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=ceda85e5c1127dcb429a04dbcdf14828',
-									width: 2280,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=99fd8092e6cd9ae87ef2efe4e90c4806',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=1125&quality=85&auto=format&fit=max&s=cab33dac3b97ed6051b98911b7de86f5',
-									width: 1125,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=445&quality=85&auto=format&fit=max&s=3f5ab2675916e41f98d07706c69972da',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=8a75312b1e312d9e9cb7714837c6b4e8',
-									width: 2250,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=965&quality=85&auto=format&fit=max&s=bae8c64813a4a46939db434cf8e097c2',
-									width: 965,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=4392dc10acdf2c624bcd5b45a554b0db',
-									width: 1930,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=725&quality=85&auto=format&fit=max&s=72159705b10291ae4d0c8937ffcc4d9e',
-									width: 725,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=ea40aca1638f6422f842ad343ecffe3b',
-									width: 1450,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=645&quality=85&auto=format&fit=max&s=122d1586b08f59f017a66edd9db4732c',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e3211ceee12f43e82acc1538320d3edf',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=465&quality=85&auto=format&fit=max&s=0bd6404f6efe4c3e7829572614ea3832',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=8a41907f52ce78852464d0f953fc9324',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/d66a43e807dfcff365c9f4c8c67a81e7e2e7e0b3/0_673_3473_2084/master/3473.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=7f2760cde43a58be187b667c474027b6',
+									width: 890,
 								},
 							],
 						},
 					],
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'ad569b12-4922-4d62-bfe8-237a122b7820',
+					elementId: '9a81456c-472f-43fd-90ac-6b8ec5e54e4b',
 				},
 				{
 					html: '<p>The fact she has been able to have a global career in fashion at all is proof that the industry is increasingly open to diversity. Aden is 5ft 5in, petite for a model, and a resident of Minnesota, far from the industry capitals of New York, London, Paris or Milan. “And the fact that I’m able to do runway, the fact that I have graced these magazine covers and wear a hijab on top of that, be who I am, have my identity, wear it proudly… I think fashion is doing a beautiful job.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '166e6dba-c534-4db6-a50a-47f0aba90960',
+					elementId: '16c51c6f-3335-4292-a529-cfa77b01e6b6',
 				},
 				{
 					html: '<p>Aden now has her own 47-piece hijab collection, Halima x Modanisa, and her hijab is stipulated as non-negotiable in her contract with IMG. “It’s a big part of my identity,” she says. “It’s not because I don’t think people are going to listen – it’s more so they know what to expect. I always bring extras – my own set of turbans, turtlenecks, tights – because it’s a collaboration. I also recognise that for a lot of people, in my first year especially, I was the only hijab-wearing girl they’d worked with. So they’re not going to necessarily know 100% what to expect, just like I didn’t know what to expect with fashion, because it’s not the world that I come from.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '4f5bd86b-dfa5-42b7-bbcb-8bd6cc8b4305',
+					elementId: '69f4b7b3-0a95-4c8f-af33-7d9701ff7b24',
 				},
 				{
 					html: '<p>She does have certain requirements, such as a pop-up tent in which to change backstage at shows, but she says she’s never been uncomfortably set apart, or made to feel othered. She remembers her experience of walking for Yeezy at New York fashion week in 2017, her breakout year, as a watershed moment. The first outfit she was presented with “was just not going to work,” she says, gesturing above her knee – too short. “Even then I knew: walking away when something doesn’t fit is always better than feeling you need to force something.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'bf7313da-a9c7-4f54-8a31-2c94759694e1',
+					elementId: '1800369e-8ec0-4b87-94a0-bf478971963a',
 				},
 				{
 					html: '<p>She returned to her hotel, disappointed but resolute. “And then, without having to say anything, they called back: ‘We have a second option.’ I tried it on and it was perfect. I just knew it was a pivotal moment in my life. The people who you want to work with, they’re willing to work with you just the way you are.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '01ddbe43-da0b-492f-859f-f7e7b0d51f7a',
+					elementId: 'e1bc58c9-8686-44b1-a411-1a4da441ec70',
 				},
 				{
 					media: {
@@ -2405,60 +2280,44 @@ export const Interview: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=1020&quality=85&auto=format&fit=max&s=d4820a1da45093e0dff4a8a27ab6f909',
-									width: 1020,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=860&quality=85&auto=format&fit=max&s=863d7852bacb8cf7eef8fd41a0e5c0b9',
+									width: 860,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=a8f0246c0112ed2e91e14b06cc38dd26',
-									width: 2040,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=c0a07f2a629cd519357a0ffc5bf63e77',
+									width: 1720,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=940&quality=85&auto=format&fit=max&s=2e7277e1ea2df89f4ff2f916d8e3c3dc',
-									width: 940,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=780&quality=85&auto=format&fit=max&s=e4bd747a07bfebb76b5f5edbc7bc0d2d',
+									width: 780,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=79e5cb633f24b435c331d5708f195cb2',
-									width: 1880,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=339510358593db3cb5849c39a57a935e',
+									width: 1560,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=700&quality=85&auto=format&fit=max&s=6700198bd2834c3477512ed10f9a1d94',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=620&quality=85&auto=format&fit=max&s=bdcee9e7bf0dc2d39fbdb5c52129062e',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=0c4da2b58b9844144e3aaeeae2e5d993',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d57fdaf18589866ea4728c363339f4ca',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=700&quality=85&auto=format&fit=max&s=6700198bd2834c3477512ed10f9a1d94',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=605&quality=85&auto=format&fit=max&s=977233b58157c40446c4f04190d832a1',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=0c4da2b58b9844144e3aaeeae2e5d993',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=82d7c5eedc5e9f8c71e88bb8dd941e4d',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=660&quality=85&auto=format&fit=max&s=39a398e0e5fc257e509bbd03dff96904',
-									width: 660,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=445&quality=85&auto=format&fit=max&s=b44d7283d1fa3527a4c94ba15711a0e3',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=0ffa65688855129b3181d23b06153c0d',
-									width: 1320,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=645&quality=85&auto=format&fit=max&s=7afa5272f18d2587041ec50897fd4773',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=6b9b84c86a439acc480127138776ccc8',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=465&quality=85&auto=format&fit=max&s=b2835de35bf1cc33338eb9a8b8aeabd0',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=08befef7283c0a1333d6ffd9116be47f',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ca808c54b603570484324f142e915e03',
+									width: 890,
 								},
 							],
 						},
@@ -2495,91 +2354,59 @@ export const Interview: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=1300&quality=85&auto=format&fit=max&s=608b4816b330becca6fe59ad727fd47e',
-									width: 1300,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=620&quality=85&auto=format&fit=max&s=bdcee9e7bf0dc2d39fbdb5c52129062e',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=4c170c27dd015661d27723e3ce87e396',
-									width: 2600,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d57fdaf18589866ea4728c363339f4ca',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=1140&quality=85&auto=format&fit=max&s=37f7054646e2d585228e8547cd71f8be',
-									width: 1140,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=605&quality=85&auto=format&fit=max&s=977233b58157c40446c4f04190d832a1',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=77bd87ae99b606ee4f3b739bb675c499',
-									width: 2280,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=82d7c5eedc5e9f8c71e88bb8dd941e4d',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=1125&quality=85&auto=format&fit=max&s=6e73f6a2ebf4fdbf816fff3fb19fcc77',
-									width: 1125,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=445&quality=85&auto=format&fit=max&s=b44d7283d1fa3527a4c94ba15711a0e3',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=86dfa812ecdc11d438fa8b19133c6a01',
-									width: 2250,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=965&quality=85&auto=format&fit=max&s=f1081a7a5402680f7d875eb7616bd741',
-									width: 965,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=b8100a9fc9e7d66701626af99f411362',
-									width: 1930,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=725&quality=85&auto=format&fit=max&s=16452270b5630d5ec9e41f62efe2e3eb',
-									width: 725,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=dc52e057b0969522808b6ea0feaa4743',
-									width: 1450,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=645&quality=85&auto=format&fit=max&s=7afa5272f18d2587041ec50897fd4773',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=6b9b84c86a439acc480127138776ccc8',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=465&quality=85&auto=format&fit=max&s=b2835de35bf1cc33338eb9a8b8aeabd0',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=08befef7283c0a1333d6ffd9116be47f',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/246f3328a0b2fa82a66d6a9efb709d28e569021e/0_0_6176_7420/master/6176.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=ca808c54b603570484324f142e915e03',
+									width: 890,
 								},
 							],
 						},
 					],
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '6cf94f18-1dae-4f7a-8754-0d1a89fb5e1e',
+					elementId: '3a964ef8-7a89-4c6e-84d7-0fd6c6d12862',
 				},
 				{
 					html: '<p>That same year, Aden remembers walking for MaxMara at Milan fashion week in a look that had been designed with her in mind. When she posted it on Instagram, a woman commented: “He keeps you in mind, he keeps us in mind. Now this Muslim shopper will keep MaxMara in mind.” Aden shared it with the brand. “I was like – wink-wink-wink!”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '29b61e0a-3ab4-402c-b2e1-db4b2793e812',
+					elementId: '43837a28-2f5d-47ef-b903-ebd49ed60118',
 				},
 				{
 					html: '<p>It led to an exclusive capsule collection in the Middle East, for which Aden was the face. “It’s a win for designers when they’re diverse; it’s a win for the brand, it’s a win for everybody – we all want to see a little piece of ourselves reflecting back.” And it makes a difference, she says. The year after Aden became the first contestant to wear a hijab in Miss USA, there were seven others. Last year she was one of two hijabi models on the MaxMara catwalk in Milan, and one of three for her second <em>Vogue Arabia</em> cover.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '64f91d82-af13-4576-be5e-7bc733ec6f81',
+					elementId: 'ad73b918-9788-44ae-a987-dbaf65914cc9',
 				},
 				{
 					html: '<p>When Aden was seven, she used to pray for rain – the kind of torrential rain that would wash away her new home in the American Midwest. “I remember thinking: ‘Then our neighbours could come out and play,’” she says. Even the structure of her apartment building felt alienating. “I was like, ‘God, everybody is so isolated.’”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '04bdc97b-ae80-4746-b2b7-bdc4312c7f6e',
+					elementId: '897c2a81-9018-43fe-b1f7-70fb78a75bf4',
 				},
 				{
 					html: '<p>Aden was born a refugee in the United Nations Kakuma camp in northwestern Kenya, where her mother had fled the Somali civil war in 1994. There their house was made of mud, scraps, sticks – anything her mother could find. “It would be normal for me to go to nursery school, come back and find it had washed away,” she says. But then the community would come together to rebuild it, “and then it’s the kids’ time to play around.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'b6a2c891-c419-4f0d-8c33-18b397af40d5',
+					elementId: '8e86622c-88f1-48eb-9aab-2b45839bf5e5',
 				},
 				{
 					html: '<p>The model remembers her childhood in the camp as being joyful and supportive. “There’s no walls keeping you apart from your neighbour,” she says. In her new home in Missouri, where she was relocated with her family in 2004, before moving to Minnesota, where they live today, the barriers stood strong.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '763c0bef-0de4-4b2b-91b5-c25ffd243368',
+					elementId: 'f1cbd429-f739-49ae-92e9-4166015d871d',
 				},
 				{
 					media: {
@@ -2756,60 +2583,44 @@ export const Interview: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=1020&quality=85&auto=format&fit=max&s=6a996449f5e52ea88f31403a9c62a4d7',
-									width: 1020,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=860&quality=85&auto=format&fit=max&s=6f51e0a70b565737221960cfd7b59cd1',
+									width: 860,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=e30f6390b7a727d85f5a731a683178fe',
-									width: 2040,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=54063fb4b8f95de09fdae13db5bb92b4',
+									width: 1720,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=940&quality=85&auto=format&fit=max&s=539b7cb955adb59776487db8da5cb645',
-									width: 940,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=780&quality=85&auto=format&fit=max&s=bf45ac651b44162b9d64acaba6d61af6',
+									width: 780,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=9a1f42dc3a91341938f9477e12c43126',
-									width: 1880,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=5d24ee2348f3facea399f28bbb8c331b',
+									width: 1560,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=edad2ccfef595d1e9b378b93db4db9d0',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=809f32f7d9bf4f951bade74928c400d1',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=93d2468085fca0afa058a92d002e85bb',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=51312ab1b41cac5982ca348ebc240216',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=700&quality=85&auto=format&fit=max&s=edad2ccfef595d1e9b378b93db4db9d0',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=34ff1973a32b9395a7e91293de678d84',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=93d2468085fca0afa058a92d002e85bb',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ae63e0845b6df8c8159e9f2175e57473',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=660&quality=85&auto=format&fit=max&s=425db8b31dad3586c71092d3d8111753',
-									width: 660,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=d97e2b57a290f4035a1549ae8e3ef5f7',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ebbe0bc0cebc1003df1898909e051df8',
-									width: 1320,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=6ed39ace370a88fc3372c64a3eb43a40',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1390f4c37875add57bf0fb7d42b85c75',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=dded8956a79e8b16642473957a23c2dc',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=2452432f21883232ae76030c52840623',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5efefc84f0d55229d05f5ac92a7f29ae',
+									width: 890,
 								},
 							],
 						},
@@ -2846,86 +2657,54 @@ export const Interview: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=1300&quality=85&auto=format&fit=max&s=56c4db7f217408ef4207a42779da8a3c',
-									width: 1300,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=620&quality=85&auto=format&fit=max&s=809f32f7d9bf4f951bade74928c400d1',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=273fa0af2c051603a675fc78f8b2c426',
-									width: 2600,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=51312ab1b41cac5982ca348ebc240216',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=1140&quality=85&auto=format&fit=max&s=b7ddf652f4e82d7c0785d4693b1c971d',
-									width: 1140,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=605&quality=85&auto=format&fit=max&s=34ff1973a32b9395a7e91293de678d84',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=93b2ed77f32f75dd1c9ad53a17ba120d',
-									width: 2280,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ae63e0845b6df8c8159e9f2175e57473',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=1125&quality=85&auto=format&fit=max&s=c781871ef327ab66273f872cbcbe72c4',
-									width: 1125,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=445&quality=85&auto=format&fit=max&s=d97e2b57a290f4035a1549ae8e3ef5f7',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=28c87c97c21034a80210f22caf446e19',
-									width: 2250,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=965&quality=85&auto=format&fit=max&s=c2fd69436231a60853a43eceb80d3881',
-									width: 965,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=aa71a67dc6cf7a7776f2e7497b0f5b7c',
-									width: 1930,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=725&quality=85&auto=format&fit=max&s=549a6f44c0aefadf50ca94b7b44fa55e',
-									width: 725,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=b7f11b0fb6743bbc26f41ee9f36836e1',
-									width: 1450,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=645&quality=85&auto=format&fit=max&s=6ed39ace370a88fc3372c64a3eb43a40',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=1390f4c37875add57bf0fb7d42b85c75',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=465&quality=85&auto=format&fit=max&s=dded8956a79e8b16642473957a23c2dc',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=2452432f21883232ae76030c52840623',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/99e42afdac0d31cb395c009ee9e69cacebd7e7c8/0_0_3000_1800/master/3000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=5efefc84f0d55229d05f5ac92a7f29ae',
+									width: 890,
 								},
 							],
 						},
 					],
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '5a498b08-1cc6-41b1-aae3-80887cc52a38',
+					elementId: '291c476d-a783-408d-847c-ed9d65eaffb5',
 				},
 				{
 					html: '<p>“Kakuma” translates from Swahili as “middle of nowhere”. “Sometimes, when I’m like, ‘I was born in the middle of nowhere,’ people think I’m joking,” Aden says. “But if you actually look at Google Maps…” People tend to think of a refugee camp as being a temporary settlement. But Kakuma is “more of a city of its own,” says Aden, in both permanence and size. Established by the UN in 1992 with a 70,000-person capacity, it has since ballooned to about 192,000 registered refugees and asylum seekers, the vast majority of whom are never resettled (the global figure is less than 1%).</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '57a54984-79c1-4c8f-b6c8-fc60d2adf1f4',
+					elementId: '61513c6c-c7c9-48d9-9761-ff83bfc48f7a',
 				},
 				{
 					html: '<p>As a child, Aden remembers thriving under the collective care of the community, which was two thirds women and children. She was bright – she spoke Somali and Swahili, sometimes translating for the grown-ups – and popular, roaming the camp with up to 30 playmates of mixed ages and ethnicities. (“If you could keep up, you were in the group.”)</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'fa91fb6b-bdca-4ecf-a3f4-f2f89f452c7d',
+					elementId: 'e0d31f04-96c9-47d6-bf02-1b3a00381717',
 				},
 				{
 					html: '<p>Aden is well aware that her happy stories of childhood challenge the stereotype of the “tragic refugee”, though she credits her mother with working hard to shield her young family from hardship. Aden never knew her father. He was lost during the Somali civil war, and assumed dead by her mother; he made contact after they had moved to the US, but died before Aden could develop a relationship. “It was both the scars and the smiles,” she says. “It was a happy childhood and also, we lived in uncertainty.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '06cd669a-e8d0-41d9-a7fd-38df2b520d17',
+					elementId: '013ae60c-8119-460e-a937-962f79f96e47',
 				},
 				{
 					html: '<p>Symbolic of this limbo was a noticeboard that was updated with the names and destinations of those lucky few bound for resettlement. Aden remembers it as larger than life, “like something out of <em>The Hunger Games</em>”: “It would control your entire future – it was literally the difference between life and death. For parents it meant a brand new life: ‘We’re starting over, we won the lottery.’ But for the kids it is: ‘I’m never seeing my friends again’.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'cb6baffa-f5f9-48aa-bbcc-41d6b3b8279f',
+					elementId: '29fc8c90-c713-4a16-b7ca-dea68fdd9c13',
 				},
 				{
 					media: {
@@ -3091,60 +2870,44 @@ export const Interview: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=1020&quality=85&auto=format&fit=max&s=2ef2fa6d3845a2a2fcb7721f7b017afc',
-									width: 1020,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=860&quality=85&auto=format&fit=max&s=028a60b795da923a152491b7e0f370b0',
+									width: 860,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=900c5120008127c7043bd74598fd3c80',
-									width: 2040,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=faac001d3d0f96f42cb551ae976b06f3',
+									width: 1720,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=940&quality=85&auto=format&fit=max&s=84ea81d5ef29121c7d2bf196447534b8',
-									width: 940,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=780&quality=85&auto=format&fit=max&s=0a4a3c52fc44bc548730d06e5ead81c7',
+									width: 780,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=a854059eb1d61441fdf5f7f6c9fed285',
-									width: 1880,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=fb7e87caf9454ec9aeef333d5479bf14',
+									width: 1560,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=700&quality=85&auto=format&fit=max&s=73211c4d4dd910749839fdc48f7506e6',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=620&quality=85&auto=format&fit=max&s=6be26c1ea59c9484204c298f40cf95b3',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f45eaba3601a642cf698a1a6c23fd359',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=30816ab612ec8d9af643400a13e04eb5',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=700&quality=85&auto=format&fit=max&s=73211c4d4dd910749839fdc48f7506e6',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=605&quality=85&auto=format&fit=max&s=de8db855cf911feec46a9641bc176b6b',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=f45eaba3601a642cf698a1a6c23fd359',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=1998c185db20f4de302ad7a3c9272661',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=660&quality=85&auto=format&fit=max&s=9bbfb8b669ff73d9711e657f58d9024e',
-									width: 660,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=445&quality=85&auto=format&fit=max&s=3d2753e0ba6b877d05feba6607205d8a',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=5c9f1251d60d5bdcde67f75dafbf5972',
-									width: 1320,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=645&quality=85&auto=format&fit=max&s=9ecfedac8ca06ed0f52fc0c31de952b7',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=333f98959213ba8bcebddf719647d944',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=465&quality=85&auto=format&fit=max&s=4f0241d614b0eca81615c734e8327a88',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0629b8455027db97de1ae64f51db54c1',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=616670960a8e9edf70da785a4b72ce49',
+									width: 890,
 								},
 							],
 						},
@@ -3181,91 +2944,59 @@ export const Interview: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=1300&quality=85&auto=format&fit=max&s=5dae459f5a2f37dacba69b606c81afcf',
-									width: 1300,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=620&quality=85&auto=format&fit=max&s=6be26c1ea59c9484204c298f40cf95b3',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=89dd9dc647b12e5326c471e71248578e',
-									width: 2600,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=30816ab612ec8d9af643400a13e04eb5',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=1140&quality=85&auto=format&fit=max&s=36ee0ad54933b07a85342d77d7666f71',
-									width: 1140,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=605&quality=85&auto=format&fit=max&s=de8db855cf911feec46a9641bc176b6b',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=db7af10e0a21229cc9fa33338cff40ba',
-									width: 2280,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=1998c185db20f4de302ad7a3c9272661',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=1125&quality=85&auto=format&fit=max&s=501d663a26fd4b881f6e4ec30908efda',
-									width: 1125,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=445&quality=85&auto=format&fit=max&s=3d2753e0ba6b877d05feba6607205d8a',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=b69eb1c37b1edc8a27859d7c582d3e08',
-									width: 2250,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=965&quality=85&auto=format&fit=max&s=6f13eeb4fc4f5749153c6fb38f3411f0',
-									width: 965,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=3ff6543135e8a71033735b8f88786309',
-									width: 1930,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=725&quality=85&auto=format&fit=max&s=57bd14c4461f1c569c5b9b14425133b5',
-									width: 725,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=81deb1106029f2508dbc842b0df8c86d',
-									width: 1450,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=645&quality=85&auto=format&fit=max&s=9ecfedac8ca06ed0f52fc0c31de952b7',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=333f98959213ba8bcebddf719647d944',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=465&quality=85&auto=format&fit=max&s=4f0241d614b0eca81615c734e8327a88',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=0629b8455027db97de1ae64f51db54c1',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/201f00b7e7493e817d0563ce613b82ebebb269b7/0_0_7043_8220/master/7043.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=616670960a8e9edf70da785a4b72ce49',
+									width: 890,
 								},
 							],
 						},
 					],
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'c813abc6-359c-4d90-8940-704f9a3101b1',
+					elementId: '64f978a3-f465-4e2a-a57d-77be86f6782a',
 				},
 				{
 					html: '<p>Another common misconception of being a refugee, Aden says, “is that you get a say where you go”. Her family were relocated to a poverty-stricken, crime-rife neighbourhood in St Louis, Missouri, which – compared to the “nurturing” community of Kakuma – came as a shock. That was when she felt most isolated, when she wished for her house to wash away. It was the first time she’d heard gunshots. “But nonetheless, did I have the fear of malaria? No – so, in a way, it was like trading one obstacle for another.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ffc5ba85-58dd-48d1-8f0b-2311b53d7f18',
+					elementId: 'cba503ff-aea8-420b-9a78-48c0fd627015',
 				},
 				{
 					html: '<p>The biggest hurdle was learning English: Aden’s school in St Louis did not have an English language programme. After two weeks of presenteeism, Aden recalls her mother asking her to read some written English aloud. “I literally started mouthing the words to <a href="https://www.youtube.com/watch?v=8WYHDfJDPDc" title="">Dilemma</a>” – rapper Nelly and Kelly Rowland’s syrupy duet, which she knew from the radio. Aden mimics a haltering recital: “‘No matt-er. Whatido. All I think about. Is you’ – I just couldn’t stand the idea of disappointing her.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '167b9dae-5787-464a-b88f-59b295a1f1da',
+					elementId: 'f6f4a279-dc76-48b7-8d7b-d5d2a7c03b9f',
 				},
 				{
 					html: '<p>Eventually Aden’s mother decided to relocate the family to St Cloud, Minnesota, where they found a community like the one that they had left at the camp. At first they were heavily reliant on it, living on food stamps and even, for six months, in a women’s shelter. Aden remembers the kindness of neighbours, taking the family to the grocery store during the punishing winters, giving her mother lifts when she couldn’t drive. “It’s why I’m so loyal,” she says. “I love my state.” She lives in St Paul now, closer to the airport, but only 40 minutes from her mother, who’s still in St Cloud. Minnesota is known for high taxes, but Aden says she is happy to pay them. “I relied on welfare when I was little... I think of it as my way of paying back.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'd249d477-9812-4be0-bd29-3742695737fb',
+					elementId: '4c6e4be7-896e-4284-ab1c-896e87c23c98',
 				},
 				{
 					html: '<p>Before we meet, Aden’s team is adamant that I don’t ask her about Trump or US politics, so instead I ask her how superficial diversity in fashion tallies with a more fractious, divided world.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '81116497-57e8-405e-909a-a327cae1c890',
+					elementId: 'd86405b1-17d5-4bca-8693-601bba58a396',
 				},
 				{
 					html: '<p>“I don’t even really avoid politics,” she says, “but it’s not something that I’ve needed in order to connect with people. Once I share my story, there’s always some common ground. It doesn’t have to be: ‘I grew up in a refugee camp.’ I get just as many messages, believe it or not, from parents who are not Muslim, who are not black, who say, ‘Thank you for making modesty look cool and young’.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '411dacf2-a0fb-4771-ac3a-6d2946217c29',
+					elementId: 'ed88de35-f182-4a92-baa7-67b73c011ebb',
 				},
 				{
 					media: {
@@ -3431,60 +3162,44 @@ export const Interview: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=1020&quality=85&auto=format&fit=max&s=862dbe98ca768896e866319fc2728b45',
-									width: 1020,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=860&quality=85&auto=format&fit=max&s=b0e7dc792c5d3042b16e1f2644ba55e4',
+									width: 860,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=a728fffb7778df5fff8acc05b830f417',
-									width: 2040,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=68eb4a9b82215f7431ed49cd44ce100f',
+									width: 1720,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=940&quality=85&auto=format&fit=max&s=489f1b26015674a19c5625fc0ab2757f',
-									width: 940,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=780&quality=85&auto=format&fit=max&s=1f84ec83b24c819082a66cd295b29c24',
+									width: 780,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=d85bbb50f8e6322786464457f90a8f02',
-									width: 1880,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=097cd504b469ede1becbce4e2858064b',
+									width: 1560,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=700&quality=85&auto=format&fit=max&s=ece4624e75076243b6d5afc100ce5d86',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=620&quality=85&auto=format&fit=max&s=4c0ac1980d705de67adc5ec3f04daa21',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=0505250429ee6c42b5e61edb95da748a',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=065d98d3a56a4df0bf89d889c6634ec8',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=700&quality=85&auto=format&fit=max&s=ece4624e75076243b6d5afc100ce5d86',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=605&quality=85&auto=format&fit=max&s=14571d7d2f76627db551e11beed83f16',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=0505250429ee6c42b5e61edb95da748a',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=18c5844b95b710956069e898d5e386d5',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=660&quality=85&auto=format&fit=max&s=78ec8f9744d65577bc49dbd6ddfd34c8',
-									width: 660,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=445&quality=85&auto=format&fit=max&s=6279d2ad5df32ad10a4cad98c92a3d5c',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cefe78f0ec584881e4f408b24ed7bacf',
-									width: 1320,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=645&quality=85&auto=format&fit=max&s=ddd07235c41ed230704f4629c92a7d2d',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9118e2faf657f52d8a039fc30c209d77',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=465&quality=85&auto=format&fit=max&s=30dc31b4cd430271d2b1bb913b7685c1',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=676d73c419c64c25d667ea88c8089e78',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f4bf0fff0eb61a2e4c2ecc3659d9d6dd',
+									width: 890,
 								},
 							],
 						},
@@ -3521,126 +3236,94 @@ export const Interview: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=1300&quality=85&auto=format&fit=max&s=9d2bd5d224026976bd6adcd78c9e45b8',
-									width: 1300,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=620&quality=85&auto=format&fit=max&s=4c0ac1980d705de67adc5ec3f04daa21',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=390d069cf3c8899edfb868aea0020b5c',
-									width: 2600,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=065d98d3a56a4df0bf89d889c6634ec8',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=1140&quality=85&auto=format&fit=max&s=2530fc1b0e2c5f9118d12ac2d54d3e2d',
-									width: 1140,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=605&quality=85&auto=format&fit=max&s=14571d7d2f76627db551e11beed83f16',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=faf537c8df2f5c31d7418a6674c8cf33',
-									width: 2280,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=18c5844b95b710956069e898d5e386d5',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=1125&quality=85&auto=format&fit=max&s=2ad0f1a0b3adda2b4ec4d451984c9611',
-									width: 1125,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=445&quality=85&auto=format&fit=max&s=6279d2ad5df32ad10a4cad98c92a3d5c',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=2801d360ecee78d5b89c0febcb4ba3fa',
-									width: 2250,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=965&quality=85&auto=format&fit=max&s=1b5fdfdd2b238808a78f90ca3b15d15b',
-									width: 965,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=3e8cc76e8da74a56e3b1f2bbfd4f6696',
-									width: 1930,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=725&quality=85&auto=format&fit=max&s=a0f182e7e63ad09225317d282255409b',
-									width: 725,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=11e790f95bd6f725c44453575d8ce3e6',
-									width: 1450,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=645&quality=85&auto=format&fit=max&s=ddd07235c41ed230704f4629c92a7d2d',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=9118e2faf657f52d8a039fc30c209d77',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=465&quality=85&auto=format&fit=max&s=30dc31b4cd430271d2b1bb913b7685c1',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=676d73c419c64c25d667ea88c8089e78',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/24791cd81a1670d66e645d472bab3706fcfbdbb5/0_0_6110_8220/master/6110.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f4bf0fff0eb61a2e4c2ecc3659d9d6dd',
+									width: 890,
 								},
 							],
 						},
 					],
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'f2302233-3ab8-4855-9326-97e731243973',
+					elementId: '35c83b80-5e47-4c47-94f9-3979ec4cf2f5',
 				},
 				{
 					html: '<p>When she entered the Miss Minnesota USA pageant in 2016, as a freshman at St Cloud State University, Aden told local media that she wanted to represent Muslim women and counter the image that they were oppressed. “The hijab is a symbol we wear on our heads,” she said. “But I want people to know that it is my choice.” Today she says her motivations for entering were less lofty. “College tuition is expensive in the States, muuuuuucho expensive!” And the top 15 at the pageant were offered scholarships. Did Aden think she’d win? “No, God, no.” She laughs. “But top 15? I was like, ‘I think I could do that’.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'dc2978cd-97bf-4f07-ab24-a9e5e8436ec5',
+					elementId: '9f53875a-ca5e-4616-911b-c916bb24ac8b',
 				},
 				{
 					html: '<p>Aden’s mother was strongly against her entering the pageant, arguing it would distract from her studies, and that the two-piece burkini was too skimpy. Though they have since been able to find common ground through her advocacy and work with Unicef, it can feel like they are from two different cultures sometimes. She didn’t tell her mum about the <em>Sports Illustrated</em> shoot “until it hit newsstands”.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '9a33d826-b7d9-41c7-b96e-9eec62c5305a',
+					elementId: 'ee2f40a7-f11a-45ab-ba79-abfeec9c4258',
 				},
 				{
 					html: '<p>She was also criticised by members of the Muslim community who saw modelling as <em>haram – </em>forbidden by Islamic law. “It was scary to put myself out there, because I didn’t know if I would get backlash, or how bad it was going to be,” she says. Two days before the pageant, Aden almost pulled out. But as she told the newspaper at the time: “You don’t let being the first to do it stop you.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '90d12ce2-0db5-4366-8940-16466fe8f3a0',
+					elementId: '03473011-6796-4567-af8b-6d1d5aba57cf',
 				},
 				{
 					html: '<p>She ended up making the semi-finals, “braces and all. And then IMG came calling – like, ‘Well, well, <em>well</em>… maybe I don’t need school.’” She leans back, for a second jokily triumphant – then seems to feel a chill coming in from across the Atlantic. “I’m kidding. Sorry, Mom!”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'edce3f9e-7f25-49ec-a4fe-e0000f8b7950',
+					elementId: 'f8a4dbe0-3c0d-4aed-a908-919d9b61f32c',
 				},
 				{
 					html: '<p>The global spotlight on Aden caught the eye of Carine Roitfeld, who flew her to New York to shoot the cover of <em><a href="https://www.crfashionbook.com/" title="">CR Fashion Book</a></em> with <a href="https://www.theguardian.com/fashion/gigi-hadid" title="">Gigi Hadid</a>, Paris Jackson and legendary photographer Mario Sorrenti. Aden agonised about asking for a selfie with Gigi (“So cringy,” she says now). As for Sorrenti, though, she had to Google her later.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'e0c45329-e78b-428a-be89-64a10778dfe3',
+					elementId: 'b489baaa-fe7e-42e1-b4d3-2404e71a3bb7',
 				},
 				{
 					html: '<p>His direction to her was, “Give me sexy”, she seems a little abashed to say. “I didn’t know fashion lingo, I didn’t know photographers. I’m a Minnesota girl – very small town.” Even after signing with IMG, she watched all of Tyra Banks’s outlandish reality series <em>America’s Next Top Model</em> “to practise”. Seven months into her modelling career, she was still working part-time as a housekeeper in St Cloud.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '373d1dcf-7c8c-4857-8d79-2a81639ce35a',
+					elementId: '064100d4-1175-4cfc-94f2-caf4b03ba034',
 				},
 				{
 					html: '<p>But rather than asking Aden to change, fashion’s royalty has made room for her as she is. Last week she was back in Kenya for a shoot and “I was just thinking, how crazy is it that, in one lifetime, I’ve gotten to experience both extremes.” Aden says she does not feel angry about the inequality she has seen – partly because she does not find it to be productive. “It’s like when I say: ‘We don’t want your pity.’ Let’s talk about solutions, invite refugees to the table. They’re part of the conversation – no policies should be enacted without their say.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '40c013dc-c042-430c-a5bd-3bc85ecdd6f7',
+					elementId: '57986b30-d0b3-46cc-ba87-a5afcc548813',
 				},
 				{
 					html: '<p>Though she rules out a career in politics (“for now”), in the future she hopes to return to Kakuma with Unicef to inspire hope within the camp for a new life beyond it. “I couldn’t tell you what that would have meant to me as a six or seven-year-old – like, ‘Wait, there’s a life outside these walls?’ Hopefully, it’s not going to be so rare to see kids from the camps grow up and become teachers, lawmakers, presidents and CEOs of Fortune 500 companies. There’s talent everywhere.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'f14fae0a-b372-4d0e-b3e8-1aee2cc2f0f9',
+					elementId: '7708767d-1cad-4c7f-9677-af1cf1d9bd2c',
 				},
 				{
 					html: '<p>For now Aden is pursuing opportunities in “fashion activism”. This month she was announced as the new face of the British accessories brand <a href="https://bottletop.org/" title="">Bottletop</a>, which was ahead of its time in positioning itself as “sustainable luxury” in 2002. Its handbags and clutches, which are made from sustainable leather and upcycled metal ring pulls, help to alleviate poverty in Brazil, Nepal and Kenya. Aden is optimistic in general, but particularly about the potential for consumer choice to be a force for positive change: “I think we’re at a place where people want to support brands and organisations they know are giving back.” She is also an ambassador for Bottletop’s <a href="https://togetherband.org/" title="">#Togetherband</a> campaign, which is tasked with raising awareness of the <a href="https://www.un.org/sustainabledevelopment/sustainable-development-goals/" title="">UN’s Sustainable Development Goals</a>. Aden is probably one of the few celebrities who can “relate personally” to all 17 of them. She has been assigned the eighth goal: “Decent work and economic growth.” The fact that the Swiss multinational bank UBS is a founding partner seems to suggest which way the wind is blowing.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '180a95fb-d939-4601-bf6d-ad5748b24901',
+					elementId: 'e1835136-995c-4735-8901-7c3853f39fd2',
 				},
 				{
 					html: '<p>“My career in fashion is not just, ‘I want to work with this brand, I want to get on that catwalk’ – we’re not sitting here talking about ‘Buy this heel, because this heel will make you feel sexy.’” She kicks up her stiletto boot, knee-high in black patent leather (admittedly very sexy). “I’m proud that I can say I combined fashion and activism. I can’t do one without the other.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'dbc62ca1-572f-4b0a-b5ef-5c04c1c351b0',
+					elementId: 'f7dbd52e-625c-43a9-b013-aa303c4599a6',
 				},
 				{
 					html: '<p>Aden sees that her story, from refugee camp to the cover of <em>Vogue</em>, is an unusual one. But she has had to navigate it herself – down to mentioning, at her very first meeting with IMG as a teenager in New York, that she would like to work with Unicef. “I had to learn, in the beginning especially, that maybe I’d never find another model who I could relate to. But I’m making my own path, and it works perfectly for me.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '556656e5-def2-4afa-aa56-179e2efe153a',
+					elementId: 'c58c8209-33cb-4dd0-92fb-81e1ea49b389',
 				},
 				{
 					html: '<p><em>Fashion editor Jo Jones; photographer’s assistant Dan Ross; fashion assistant Lena Young; makeup by Dina at Frank Agency using Dior Forever and Dior Capture Totale C.E.L.L. Energy; nails by Kim Nkosi at Premier Hair and Makeup using Dior Vernis and Miss Dior Hand Cream; shot at Waddington Studios</em></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '3281c2ea-ef34-4704-abbf-983bcb1c81af',
+					elementId: '5d11ccef-8178-4db7-96ac-e43ab25ff1e1',
 				},
 			],
 			blockCreatedOn: 1580751734000,

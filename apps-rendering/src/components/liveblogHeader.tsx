@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import { neutral, remSpace } from '@guardian/src-foundations';
 import { from } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
@@ -9,7 +10,6 @@ import { Column, Columns, Container } from '@guardian/src-layout';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';
-import { background } from 'editorialPalette';
 import HeaderMedia from 'headerMedia';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
@@ -64,7 +64,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 		<header>
 			<Container
 				element="div"
-				backgroundColor={background.headlinePrimary(format)}
+				backgroundColor={background.headline(format)}
 			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
@@ -77,7 +77,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 			</Container>
 			<Container
 				element="div"
-				backgroundColor={background.standfirstPrimary(format)}
+				backgroundColor={background.standfirst(format)}
 			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
