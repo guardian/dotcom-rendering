@@ -578,6 +578,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<div
 									css={css`
 										padding-top: 6px;
+										padding-left: 10px;
 										height: 100%;
 										${from.desktop} {
 											/* above 980 */
