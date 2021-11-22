@@ -133,7 +133,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 340px;
+					grid-template-columns: 219px 1px 1fr 330px;
 					grid-template-areas:
 						'lines 		border media right-column'
 						'meta  		border media right-column'
