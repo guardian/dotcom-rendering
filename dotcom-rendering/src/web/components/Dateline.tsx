@@ -1,7 +1,8 @@
-import { css, SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/src-foundations/mq';
+import { ArticleDesign } from '@guardian/libs';
 
 const captionFont = css`
 	${textSans.xxsmall()};
@@ -44,19 +45,37 @@ const labelStyles = css`
 	}
 `;
 
+// for liveblog smaller breakpoints article meta is located in the same
+// container as standfirst and needs the same styling as standfirst
+const datelineLiveBlogStyles = (palette: Palette, format: ArticleFormat) => css`
+	${format.design === ArticleDesign.LiveBlog &&
+	css`
+		${until.desktop} {
+			color: ${palette.text.standfirst};
+		}
+	`}
+`;
+
 // At the moment the 'First published on' / 'Last modified on' is passed through on
 // the secondaryDateline (this will be refactored). The current logic checks if the primary
 // date is in the secondary to avoid duplicate dates being shown
 export const Dateline: React.FC<{
 	primaryDateline: string;
 	secondaryDateline: string;
-	cssOverrides?: SerializedStyles;
-}> = ({ primaryDateline, secondaryDateline, cssOverrides }) => {
+	format: ArticleFormat;
+	palette: Palette;
+}> = ({ primaryDateline, secondaryDateline, format, palette }) => {
 	return (
 		<div css={dateline}>
 			{secondaryDateline &&
 			!secondaryDateline.includes(primaryDateline) ? (
-				<div css={[toggleClass, dateline, cssOverrides]}>
+				<div
+					css={[
+						toggleClass,
+						dateline,
+						datelineLiveBlogStyles(palette, format),
+					]}
+				>
 					<label css={labelStyles} htmlFor="dateToggle">
 						{primaryDateline}
 					</label>

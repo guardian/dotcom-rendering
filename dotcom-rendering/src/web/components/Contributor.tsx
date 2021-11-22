@@ -32,7 +32,9 @@ const twitterHandleStyles = (palette: Palette) => css`
 	}
 `;
 
-const bylineColor = (palette: Palette, format: ArticleFormat) => css`
+// for liveblog smaller breakpoints article meta is located in the same
+// container as standfirst and needs the same styling as standfirst
+const bylineColorStyles = (palette: Palette, format: ArticleFormat) => css`
 	color: ${palette.text.byline};
 	${format.design === ArticleDesign.LiveBlog &&
 	css`
@@ -40,21 +42,29 @@ const bylineColor = (palette: Palette, format: ArticleFormat) => css`
 			color: ${palette.text.standfirst};
 		}
 	`};
+
+	a {
+		color: ${palette.text.byline};
+		${format.design === ArticleDesign.LiveBlog &&
+		css`
+			${until.desktop} {
+				color: ${palette.text.standfirst};
+			}
+		`};
+	}
 `;
 
-const bylineStyles = (palette: Palette, format: ArticleFormat) => css`
+const bylineStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
 		? textSans.medium()
 		: headline.xxxsmall()};
 	${format.theme === ArticleSpecial.Labs && 'line-height: 20px;'};
 
-	${bylineColor(palette, format)};
 	padding-bottom: 8px;
 	font-style: italic;
 
 	a {
 		font-weight: 700;
-		${bylineColor(palette, format)};
 		text-decoration: none;
 		font-style: normal;
 		:hover {
@@ -89,7 +99,10 @@ export const Contributor: React.FC<{
 							? interactiveLegacyClasses.byline
 							: ''
 					}
-					css={bylineStyles(palette, format)}
+					css={[
+						bylineStyles(format),
+						bylineColorStyles(palette, format),
+					]}
 				>
 					<BylineLink byline={author.byline} tags={tags} />
 				</div>

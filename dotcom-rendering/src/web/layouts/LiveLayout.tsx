@@ -49,6 +49,7 @@ import {
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { space } from '@guardian/src-foundations';
+import { Hide } from '@guardian/src-layout';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -197,17 +198,6 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 		{children}
 	</div>
 );
-
-const doNotDisplayInWide = css`
-	${from.desktop} {
-		display: none;
-	}
-`;
-const doNotDisplayInNarrow = css`
-	${until.desktop} {
-		display: none;
-	}
-`;
 
 const maxWidth = css`
 	${from.desktop} {
@@ -458,39 +448,43 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<></>
 							</GridItem>
 							<GridItem area="lines">
-								<div css={css(maxWidth, doNotDisplayInWide)}>
-									<div css={stretchLines}>
-										<Lines
-											count={decideLineCount(
-												format.design,
-											)}
-											effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-											color="rgba(255, 255, 255, 0.4)"
-										/>
+								<Hide from="desktop">
+									<div css={css(maxWidth)}>
+										<div css={stretchLines}>
+											<Lines
+												count={decideLineCount(
+													format.design,
+												)}
+												effect={decideLineEffect(
+													format.design,
+													format.theme,
+												)}
+												color="rgba(255, 255, 255, 0.4)"
+											/>
+										</div>
 									</div>
-								</div>
+								</Hide>
 							</GridItem>
 							<GridItem area="meta">
-								<div css={css(maxWidth, doNotDisplayInWide)}>
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										palette={palette}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-										author={CAPI.author}
-										tags={CAPI.tags}
-										primaryDateline={
-											CAPI.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											CAPI.webPublicationSecondaryDateDisplay
-										}
-									/>
-								</div>
+								<Hide from="desktop">
+									<div css={css(maxWidth)}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											palette={palette}
+											pageId={CAPI.pageId}
+											webTitle={CAPI.webTitle}
+											author={CAPI.author}
+											tags={CAPI.tags}
+											primaryDateline={
+												CAPI.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												CAPI.webPublicationSecondaryDateDisplay
+											}
+										/>
+									</div>
+								</Hide>
 							</GridItem>
 						</StandFirstGrid>
 					</ElementContainer>
@@ -530,38 +524,42 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<></>
 							</GridItem>
 							<GridItem area="lines">
-								<div css={css(maxWidth, doNotDisplayInNarrow)}>
-									<div css={stretchLines}>
-										<Lines
-											count={decideLineCount(
-												format.design,
-											)}
-											effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-										/>
+								<Hide until="desktop">
+									<div css={css(maxWidth)}>
+										<div css={stretchLines}>
+											<Lines
+												count={decideLineCount(
+													format.design,
+												)}
+												effect={decideLineEffect(
+													format.design,
+													format.theme,
+												)}
+											/>
+										</div>
 									</div>
-								</div>
+								</Hide>
 							</GridItem>
 							<GridItem area="meta" element="aside">
-								<div css={css(maxWidth, doNotDisplayInNarrow)}>
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										palette={palette}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-										author={CAPI.author}
-										tags={CAPI.tags}
-										primaryDateline={
-											CAPI.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											CAPI.webPublicationSecondaryDateDisplay
-										}
-									/>
-								</div>
+								<Hide until="desktop">
+									<div css={css(maxWidth)}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											palette={palette}
+											pageId={CAPI.pageId}
+											webTitle={CAPI.webTitle}
+											author={CAPI.author}
+											tags={CAPI.tags}
+											primaryDateline={
+												CAPI.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												CAPI.webPublicationSecondaryDateDisplay
+											}
+										/>
+									</div>
+								</Hide>
 							</GridItem>
 							<GridItem area="keyevents">
 								<KeyEventsContainer
