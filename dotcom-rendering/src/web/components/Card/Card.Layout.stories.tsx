@@ -31,7 +31,7 @@ export default {
 export const News = () => (
 	<ElementContainer>
 		<Flex>
-			<LeftColumn showRightBorder={false}>
+			<LeftColumn>
 				<></>
 			</LeftColumn>
 			<ArticleContainer
@@ -245,7 +245,7 @@ News.story = { name: 'News' };
 export const InDepth = () => (
 	<ElementContainer>
 		<Flex>
-			<LeftColumn showRightBorder={false}>
+			<LeftColumn>
 				<></>
 			</LeftColumn>
 			<ArticleContainer
@@ -373,7 +373,7 @@ InDepth.story = { name: 'In Depth' };
 export const Related = () => (
 	<ElementContainer>
 		<Flex>
-			<LeftColumn showRightBorder={false}>
+			<LeftColumn>
 				<></>
 			</LeftColumn>
 			<ArticleContainer
@@ -526,7 +526,7 @@ Related.story = { name: 'Related Stories' };
 export const Spotlight = () => (
 	<ElementContainer>
 		<Flex>
-			<LeftColumn showRightBorder={false}>
+			<LeftColumn>
 				<></>
 			</LeftColumn>
 			<ArticleContainer
@@ -560,7 +560,7 @@ Spotlight.story = { name: 'Spotlight' };
 export const Quad = () => (
 	<ElementContainer>
 		<Flex>
-			<LeftColumn showRightBorder={false}>
+			<LeftColumn>
 				<></>
 			</LeftColumn>
 			<ArticleContainer
@@ -670,7 +670,7 @@ Quad.story = { name: 'Four with image top' };
 export const Media = () => (
 	<ElementContainer>
 		<Flex>
-			<LeftColumn showRightBorder={false}>
+			<LeftColumn>
 				<></>
 			</LeftColumn>
 			<ArticleContainer
@@ -819,7 +819,7 @@ const labsBranding4: Branding = {
 export const Labs = () => (
 	<ElementContainer>
 		<Flex>
-			<LeftColumn showRightBorder={false}>
+			<LeftColumn>
 				<></>
 			</LeftColumn>
 			<ArticleContainer
