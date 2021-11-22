@@ -8,6 +8,7 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 import { Caption } from '@root/src/web/components/Caption';
 import libDebounce from 'lodash.debounce';
 import { interactiveLegacyFigureClasses } from '@root/src/web/layouts/lib/interactiveLegacyStyling';
+import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
 	url?: string;
@@ -16,7 +17,6 @@ type Props = {
 	role?: RoleType;
 	caption?: string;
 	format: ArticleFormat;
-	palette: Palette;
 	elementId?: string;
 };
 
@@ -232,12 +232,12 @@ export const InteractiveBlockComponent = ({
 	role = 'inline',
 	caption,
 	format,
-	palette,
 	elementId = '',
 }: Props) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
 	const [loaded, setLoaded] = useState(false);
+	const palette = decidePalette(format);
 	useOnce(() => {
 		// We've brought the behavior from boot.js into this file to avoid loading 2 extra scripts
 		if (
