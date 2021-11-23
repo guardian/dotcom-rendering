@@ -121,7 +121,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Main content
 					Right Column
 				*/
-				// from desktop define fixed body width
+				/* from desktop define fixed body width */
 				${from.desktop} {
 					grid-column-gap: 20px;
 
@@ -135,7 +135,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'. 			.';
 				}
 
-				// from wide define fixed body width
+				/* from wide define fixed body width */
 				${from.wide} {
 					grid-column-gap: 20px;
 
@@ -149,7 +149,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.			.     right-column';
 				}
 
-				// until desktop define fixed body width
+				/* until desktop define fixed body width */
 				${until.desktop} {
 					grid-template-columns: 700px; /* Main content */
 					grid-template-areas:
@@ -160,7 +160,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'body';
 				}
 
-				// fluid until tablet
+				/* fluid until tablet */
 				${until.tablet} {
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
