@@ -130,7 +130,8 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines		media'
 						'meta		media'
 						'keyevents	media'
-						'.			body'
+						'keyevents	body'
+						'keyevents	body'
 						'. 			.';
 				}
 
@@ -143,7 +144,8 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines 		media right-column'
 						'meta  		media right-column'
 						'keyevents  media right-column'
-						'.  		body  right-column'
+						'keyevents  body  right-column'
+						'keyevents  body  right-column'
 						'.			.     right-column';
 				}
 
@@ -178,6 +180,19 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 700px;
+	}
+`;
+
+const sticky = css`
+	${from.desktop} {
+		position: sticky;
+		top: 10px;
+	}
+`;
+
+const keyEventsTopMarginDesktop = css`
+	${from.desktop} {
+		margin-top: ${space[1]}px;
 	}
 `;
 
@@ -497,10 +512,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="keyevents">
-								<KeyEventsContainer
-									format={format}
-									keyEvents={CAPI.keyEvents}
-								/>
+								<div css={[sticky, keyEventsTopMarginDesktop]}>
+									<KeyEventsContainer
+										format={format}
+										keyEvents={CAPI.keyEvents}
+									/>
+								</div>
 							</GridItem>
 							<GridItem area="body">
 								<ArticleContainer format={format}>
