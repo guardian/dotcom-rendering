@@ -483,14 +483,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											height={230}
 										/>
 									)}
-								{format.design === ArticleDesign.DeadBlog ||
-									(ArticleDesign.LiveBlog &&
-										CAPI.matchUrl && (
-											<Placeholder
-												rootId="match-tabs"
-												height={40}
-											/>
-										))}
 							</div>
 						</GridItem>
 						<GridItem area="matchtabs" element="aside">
