@@ -14,7 +14,6 @@ import { darkModeCss } from "../lib";
 
 const textStyle = (supportsDarkMode: boolean): SerializedStyles => css`
 	${body.medium({ lineHeight: 'loose' })};
-	line-height: 150%;
 	margin-bottom: ${space[3]}px;
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[86]};
