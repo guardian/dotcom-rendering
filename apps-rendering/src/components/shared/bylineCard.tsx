@@ -14,6 +14,7 @@ import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
+import {from} from "@guardian/src-foundations/mq";
 
 interface Props {
 	relatedItem: RelatedItem;
@@ -26,13 +27,11 @@ const borderColor = (format: ArticleFormat): SerializedStyles => {
 const listStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		background: white;
-		margin-right: ${remSpace[3]};
-		flex: 0 0 15rem;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
+		margin-right: ${remSpace[2]};
+		flex: 0 0 42vw;
 		justify-content: space-between;
 		border-top: ${borderColor(format)};
+		max-width: 10rem;
 
 		&.fade {
 			opacity: 0.7;
@@ -41,6 +40,19 @@ const listStyles = (format: ArticleFormat): SerializedStyles => {
 		${darkModeCss`
             background: ${neutral[7]};
         `}
+
+        ${from.tablet} {
+        	margin-right: ${remSpace[5]};
+		}
+
+		${from.desktop} {
+			max-width: 13.75rem;
+		}
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+
 	`;
 };
 
@@ -49,12 +61,11 @@ const bylineImage = css`
 	right: 0.625rem;
 	top: 0.375rem;
 	overflow: hidden;
-	height: 8.25rem;
-	width: 8.25rem;
+	height: 4.75rem;
+	width: 4.75rem;
 	contain: paint;
 	background-color: ${opinion[400]};
 	float: right;
-	margin: 0 ${remSpace[3]} 0 0;
 	position: relative;
 
 	img {
@@ -63,31 +74,48 @@ const bylineImage = css`
 		top: 0;
 		bottom: 0;
 		right: 0;
-		height: 8.25rem;
+		height: 4.75rem;
 		left: -0.625rem;
+
+		${from.desktop} {
+			height: 8.25rem;
+		}
 	}
+
+	${from.desktop} {
+		width: 8.25rem;
+		height: 8.25rem;
+	}
+
 `;
 
 const anchorStyles = css`
 	color: ${neutral[7]};
 	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 	${darkModeCss`
         color: ${neutral[86]};
     `}
 `;
 
 const headingWrapperStyles = css`
-	padding: ${remSpace[3]};
-	min-height: 10rem;
+	padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
+	flex-grow: 1;
 `;
 
 const headingStyles: SerializedStyles = css`
-	${headline.xxsmall()}
-	margin: 0 0 ${remSpace[3]} 0;
+	${headline.xxxsmall()}
+	margin: 0;
+
+	${from.desktop} {
+		${headline.xxsmall()}
+	}
 `;
 
 const cardStyles: SerializedStyles = css`
-	background-color: ${opinion[800]};
+	background-color: ${neutral[100]};
 	${headline.xxsmall()}
 `;
 

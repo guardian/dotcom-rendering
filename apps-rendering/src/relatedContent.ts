@@ -14,6 +14,7 @@ import {
 	isVideo,
 } from 'item';
 import { pipe } from 'lib';
+import {TagType} from "@guardian/content-api-models/v1/tagType";
 
 const parseRelatedItemType = (content: Content): RelatedItemType => {
 	const { tags } = content;

@@ -259,7 +259,7 @@ const cardStyles = (
 
 		case RelatedItemType.COMMENT: {
 			return css`
-				background-color: ${opinion[800]};
+				background-color: ${neutral[100]};
 				${headline.xxsmall()}
 			`;
 		}
