@@ -43,7 +43,6 @@ Source sets are formatted like: `<source srcset="https://url.to/image 300w, http
 ### DPR?!
 
 DPR originates from the concept that the pixel widths which we use for CSS media queries is often different from the actual resolution of a devices display.
-
 For example imagine a phone with a super high resolution 1200px wide (2400px high) screen. Following our breakpoint sizes, we'd try and render a desktop type experience for this user. However, the reality is this screen is only maybe 5 inches across, so the site would be totally unusable.
 
 CSS Pixels & DPR to the rescue! Our browser can use a different width for calculating breakpoints, media queries, etc than the real resolution of the screen. This is CSS pixels. So let's say for the sake of argument the browser uses 300px for our CSS pixel width - Wohoo, we're displaying a mobile experience, all is well. The DPR is the ratio between CSS pixels and actual resolution, so 1200 / 300 gives us a DPR of 4. Why this is important will be discussed later.

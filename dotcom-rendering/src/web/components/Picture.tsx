@@ -271,7 +271,6 @@ export const Picture = ({
 								hdpiSourceSets,
 								'hdpi',
 							)}
-							sizes={`${desiredWidth}px`}
 							media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
 						/>
 					)}
@@ -282,7 +281,6 @@ export const Picture = ({
 							mdpiSourceSets,
 							'mdpi',
 						)}
-						sizes={`${desiredWidth}px`}
 						media={`(min-width: ${breakpoint}px)`}
 					/>
 				</>
