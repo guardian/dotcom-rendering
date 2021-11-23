@@ -583,7 +583,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<GridItem area="right-column">
 								<div
 									css={css`
-										padding-top: 6px;
 										height: 100%;
 										${from.desktop} {
 											/* above 980 */
