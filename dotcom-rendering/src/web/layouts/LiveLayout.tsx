@@ -113,7 +113,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				width: 100%;
 				margin-left: 0;
 
-				grid-column-gap: 10px;
+				grid-column-gap: 0px;
 
 				/*
 					Explanation of each unit of grid-template-columns
@@ -122,8 +122,11 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Empty border for spacing
 					Right Column
 				*/
+				// from desktop define fixed body width
 				${from.desktop} {
-					grid-template-columns: 219px 1px 1fr;
+					grid-column-gap: 10px;
+
+					grid-template-columns: 219px 1px 700px;
 					grid-template-areas:
 						'lines		border media'
 						'meta		border media'
@@ -132,8 +135,11 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'. 			border .';
 				}
 
+				// from wide define fixed body width
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 330px;
+					grid-column-gap: 10px;
+
+					grid-template-columns: 219px 1px 700px 1fr;
 					grid-template-areas:
 						'lines 		border media right-column'
 						'meta  		border media right-column'
@@ -142,8 +148,9 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'.			border .     right-column';
 				}
 
+				// until desktop we define fixed body width
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 700px; /* Main content */
 					grid-template-areas:
 						'media'
 						'lines'
@@ -152,9 +159,8 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'body';
 				}
 
+				// fluid until tablet
 				${until.tablet} {
-					grid-column-gap: 0px;
-
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
 						'media'
@@ -578,7 +584,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<div
 									css={css`
 										padding-top: 6px;
-										padding-left: 10px;
 										height: 100%;
 										${from.desktop} {
 											/* above 980 */
@@ -586,8 +591,10 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											margin-right: -20px;
 										}
 										${from.leftCol} {
-											/* above 1140 */
-											margin-left: 0px;
+											/* above 1140 we need 20px between
+											body and ad slot, grid column gap
+											is only 10px */
+											margin-left: 10px;
 											margin-right: 0px;
 										}
 									`}
