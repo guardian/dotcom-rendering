@@ -6,7 +6,6 @@ import {
 	brandBackground,
 	brandLine,
 	brandBorder,
-	brandAlt,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import type { ArticleFormat } from '@guardian/libs';
