@@ -74,22 +74,18 @@ Lets look at a simplified example (with only 1 source per breakpoint):
 <picture>
     <source
         media="min-width: 980px"
-        sizes="620px"
         srcset="https://xxx.png?width=620px 620w"
     />
     <source
         media="min-width: 660px"
-        sizes="620px"
         srcset="https://xxx.png?width=620px 620w"
     />
     <source
         media="min-width: 480px"
-        sizes="480px"
         srcset="https://xxx.png?width=480px 480w"
     />
     <source
         media="min-width: 375px"
-        sizes="420px"
         srcset="https://xxx.png?width=420px 420w"
     />
 </picture>
@@ -97,7 +93,7 @@ Lets look at a simplified example (with only 1 source per breakpoint):
 
 In this example, we have the logic that usually would have been in our sizes attribute (`sizes="(min-width: 660px) 620px, 100vw"`) extrapolated into individual source elements. All our breakpoint which are 660px or larger offer only 1 choice, the 620px source. The lower breakpoints have looked for sources which are closest to their own size, as a replacement for `100vw`.
 
-This solves our DPR problem because, the `media` attribute uses CSS pixels, and because we only offer 1 image source for each of these elements, once the browser has picked its source element, we basically strong arm it into which source to use. Even if it multiplies the size it gets from `sizes`, it still has to use the source we give as it's the only available option.
+This solves our DPR problem because, the `media` attribute uses CSS pixels, and because we only offer 1 image source for each of these elements, once the browser has picked its source element, we basically strong arm it into which source to use.
 
 ## What does DCR do?
 
@@ -113,20 +109,20 @@ For Example:
 
 ```html
 <picture>
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=45&;auto=format&;fit=max&;dpr=2&; 1240w" sizes="620px" media="(min-width: 980px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 980px) and (min-resolution: 120dpi)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=85&;auto=format&;fit=max&; 620w" sizes="620px" media="(min-width: 980px)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=700&;quality=45&;auto=format&;fit=max&;dpr=2&; 1400w" sizes="680px" media="(min-width: 740px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 740px) and (min-resolution: 120dpi)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=700&;quality=85&;auto=format&;fit=max&; 700w" sizes="680px" media="(min-width: 740px)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=45&;auto=format&;fit=max&;dpr=2&; 1240w" sizes="620px" media="(min-width: 660px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 660px) and (min-resolution: 120dpi)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=85&;auto=format&;fit=max&; 620w" sizes="620px" media="(min-width: 660px)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=45&;auto=format&;fit=max&;dpr=2&; 1240w" sizes="480px" media="(min-width: 480px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 480px) and (min-resolution: 120dpi)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=85&;auto=format&;fit=max&; 620w" sizes="480px" media="(min-width: 480px)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=45&;auto=format&;fit=max&;dpr=2&; 930w" sizes="375px" media="(min-width: 375px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 375px) and (min-resolution: 120dpi)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=85&;auto=format&;fit=max&; 465w" sizes="375px" media="(min-width: 375px)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=45&;auto=format&;fit=max&;dpr=2&; 930w" sizes="320px" media="(min-width: 320px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 320px) and (min-resolution: 120dpi)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=85&;auto=format&;fit=max&; 465w" sizes="320px" media="(min-width: 320px)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=45&;auto=format&;fit=max&;dpr=2&; 930w" sizes="0px" media="(min-width: 0px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 0px) and (min-resolution: 120dpi)">
-    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=85&;auto=format&;fit=max&; 465w" sizes="0px" media="(min-width: 0px)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=45&;auto=format&;fit=max&;dpr=2&; 1240w" media="(min-width: 980px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 980px) and (min-resolution: 120dpi)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=85&;auto=format&;fit=max&; 620w" media="(min-width: 980px)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=700&;quality=45&;auto=format&;fit=max&;dpr=2&; 1400w" media="(min-width: 740px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 740px) and (min-resolution: 120dpi)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=700&;quality=85&;auto=format&;fit=max&; 700w" media="(min-width: 740px)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=45&;auto=format&;fit=max&;dpr=2&; 1240w" media="(min-width: 660px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 660px) and (min-resolution: 120dpi)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=85&;auto=format&;fit=max&; 620w" media="(min-width: 660px)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=45&;auto=format&;fit=max&;dpr=2&; 1240w" media="(min-width: 480px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 480px) and (min-resolution: 120dpi)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=620&;quality=85&;auto=format&;fit=max&; 620w" media="(min-width: 480px)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=45&;auto=format&;fit=max&;dpr=2&; 930w" media="(min-width: 375px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 375px) and (min-resolution: 120dpi)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=85&;auto=format&;fit=max&; 465w" media="(min-width: 375px)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=45&;auto=format&;fit=max&;dpr=2&; 930w" media="(min-width: 320px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 320px) and (min-resolution: 120dpi)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=85&;auto=format&;fit=max&; 465w" media="(min-width: 320px)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=45&;auto=format&;fit=max&;dpr=2&; 930w" media="(min-width: 0px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: 0px) and (min-resolution: 120dpi)">
+    <source srcset="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=85&;auto=format&;fit=max&; 465w" media="(min-width: 0px)">
     <img alt="The Palace Theatre, London, showing Harry Potter and the Cursed Child" src="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=45&;auto=format&;fit=max&;dpr=2&;s=0492ab78e73c5167d8b4b841e601fbd4" height="1200" width="2000" class="dcr-b5pnrc-css">
 </picture>
 ```
