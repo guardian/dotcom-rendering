@@ -492,14 +492,14 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</GridItem>
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
-								{format.design === ArticleDesign.DeadBlog ||
-									(ArticleDesign.LiveBlog &&
-										CAPI.matchUrl && (
-											<Placeholder
-												rootId="match-tabs"
-												height={40}
-											/>
-										))}
+								{(format.design === ArticleDesign.DeadBlog ||
+									format.design === ArticleDesign.LiveBlog) &&
+									CAPI.matchUrl && (
+										<Placeholder
+											rootId="match-tabs"
+											height={40}
+										/>
+									)}
 							</div>
 						</GridItem>
 						<GridItem area="headline">
