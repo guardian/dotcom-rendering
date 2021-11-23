@@ -187,7 +187,7 @@ const sticky = css`
 
 const keyEventsTopMarginDesktop = css`
 	${from.desktop} {
-		margin-top: ${space[4]}px;
+		margin-top: ${space[1]}px;
 	}
 `;
 
