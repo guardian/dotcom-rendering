@@ -6,6 +6,7 @@ import {
 	brandBackground,
 	brandLine,
 	brandBorder,
+	brandAlt,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
 import type { ArticleFormat } from '@guardian/libs';
@@ -51,6 +52,7 @@ import {
 import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Placeholder } from '../components/Placeholder';
+import { Hide } from '../components/Hide';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -125,7 +127,8 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				${from.desktop} {
 					grid-template-columns: 219px 1px 1fr;
 					grid-template-areas:
-						'lines		border media'
+						'lines		border matchtabs'
+						'meta		border media'
 						'meta		border media'
 						'keyevents	border media'
 						'.			border body'
@@ -135,16 +138,18 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				${from.wide} {
 					grid-template-columns: 219px 1px 1fr 340px;
 					grid-template-areas:
-						'lines 		border media right-column'
-						'meta  		border media right-column'
-						'keyevents  border media right-column'
-						'.  		border body  right-column'
-						'.			border .     right-column';
+						'lines 		border matchtabs right-column'
+						'meta 		border media 	 right-column'
+						'meta  		border media     right-column'
+						'keyevents  border media     right-column'
+						'.  		border body      right-column'
+						'.			border .         right-column';
 				}
 
 				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
+						'matchtabs'
 						'media'
 						'lines'
 						'meta'
@@ -157,6 +162,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
+						'matchtabs'
 						'media'
 						'lines'
 						'meta'
@@ -219,6 +225,10 @@ const ageWarningMargins = css`
 		margin-left: -10px;
 		margin-top: 0;
 	}
+`;
+
+const yellowBackground = css`
+	background: ${brandAlt[400]};
 `;
 
 interface Props {
@@ -350,13 +360,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 			<main>
 				<article>
-					<ElementContainer
-						showTopBorder={false}
-						backgroundColour={palette.background.header}
-						borderColour={palette.border.headline}
-					>
-						<HeadlineGrid>
-							<GridItem area="title">
+					{CAPI.matchUrl ? (
+						<ContainerLayout
+							showTopBorder={false}
+							backgroundColour={palette.background.matchNav}
+							borderColour={palette.border.headline}
+							leftContent={
 								<ArticleTitle
 									format={format}
 									palette={palette}
@@ -366,51 +375,98 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									guardianBaseURL={CAPI.guardianBaseURL}
 									badge={CAPI.badge}
 								/>
-							</GridItem>
-							<GridItem area="headline">
-								{CAPI.matchUrl && showMatchTabs && (
-									<Placeholder
-										rootId="match-tabs"
-										height={40}
+							}
+							leftColSize="wide"
+							sideBorders={true}
+							padContent={false}
+							verticalMargins={false}
+						>
+							<Hide when="above" breakpoint="leftCol">
+								<ArticleTitle
+									format={format}
+									palette={palette}
+									tags={CAPI.tags}
+									sectionLabel={CAPI.sectionLabel}
+									sectionUrl={CAPI.sectionUrl}
+									guardianBaseURL={CAPI.guardianBaseURL}
+									badge={CAPI.badge}
+								/>
+							</Hide>
+							<Placeholder
+								shouldShimmer={false}
+								rootId="match-nav"
+								height={230}
+							/>
+						</ContainerLayout>
+					) : (
+						<ElementContainer
+							showTopBorder={false}
+							backgroundColour={palette.background.header}
+							borderColour={palette.border.headline}
+						>
+							<HeadlineGrid>
+								<GridItem area="title">
+									<ArticleTitle
+										format={format}
+										palette={palette}
+										tags={CAPI.tags}
+										sectionLabel={CAPI.sectionLabel}
+										sectionUrl={CAPI.sectionUrl}
+										guardianBaseURL={CAPI.guardianBaseURL}
+										badge={CAPI.badge}
 									/>
-								)}
-								<div css={maxWidth}>
-									<ArticleHeadlinePadding
-										design={format.design}
-									>
-										{age && (
-											<div css={ageWarningMargins}>
-												<AgeWarning age={age} />
-											</div>
-										)}
-										<ArticleHeadline
-											format={format}
-											headlineString={CAPI.headline}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
-											palette={palette}
-										/>
-										{age && (
-											<AgeWarning
-												age={age}
-												isScreenReader={true}
+								</GridItem>
+								<GridItem area="headline">
+									<div css={maxWidth}>
+										{CAPI.matchUrl && (
+											<Placeholder
+												rootId="match-nav2"
+												height={230}
 											/>
 										)}
-									</ArticleHeadlinePadding>
-								</div>
-								{CAPI.starRating || CAPI.starRating === 0 ? (
-									<div css={starWrapper}>
-										<StarRating
-											rating={CAPI.starRating}
-											size="large"
-										/>
+
+										<ArticleHeadlinePadding
+											design={format.design}
+										>
+											{age && (
+												<div css={ageWarningMargins}>
+													<AgeWarning age={age} />
+												</div>
+											)}
+											{!CAPI.matchUrl && (
+												<ArticleHeadline
+													format={format}
+													headlineString={
+														CAPI.headline
+													}
+													tags={CAPI.tags}
+													byline={CAPI.author.byline}
+													palette={palette}
+												/>
+											)}
+											{age && (
+												<AgeWarning
+													age={age}
+													isScreenReader={true}
+												/>
+											)}
+										</ArticleHeadlinePadding>
 									</div>
-								) : (
-									<></>
-								)}
-							</GridItem>
-						</HeadlineGrid>
-					</ElementContainer>
+									{CAPI.starRating ||
+									CAPI.starRating === 0 ? (
+										<div css={starWrapper}>
+											<StarRating
+												rating={CAPI.starRating}
+												size="large"
+											/>
+										</div>
+									) : (
+										<></>
+									)}
+								</GridItem>
+							</HeadlineGrid>
+						</ElementContainer>
+					)}
 
 					<ContainerLayout
 						showTopBorder={false}
@@ -444,6 +500,16 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						borderColour={palette.border.article}
 					>
 						<LiveGrid>
+							<GridItem area="matchtabs" element="aside">
+								<div css={maxWidth}>
+									{CAPI.matchUrl && showMatchTabs && (
+										<Placeholder
+											rootId="match-tabs"
+											height={40}
+										/>
+									)}
+								</div>
+							</GridItem>
 							<GridItem area="media">
 								<div css={maxWidth}>
 									<MainMedia

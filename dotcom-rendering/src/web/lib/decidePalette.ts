@@ -658,6 +658,10 @@ const activeMatchTab = (): string => {
 	return palette.sport[300];
 };
 
+const backgroundMatchNav = (): string => {
+	return brandAlt[400];
+};
+
 const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -881,6 +885,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			carouselDotFocus: backgroundCarouselDotFocus(format),
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
+			matchNav: backgroundMatchNav(),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
