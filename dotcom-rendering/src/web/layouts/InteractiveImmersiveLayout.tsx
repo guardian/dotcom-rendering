@@ -446,7 +446,6 @@ export const InteractiveImmersiveLayout = ({
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						palette={palette}
 						format={format}
 					/>
 				</ElementContainer>

@@ -337,6 +337,51 @@ export const PrintShop: CAPIType = {
 						],
 					},
 					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
+					},
+					{
+						title: 'Climate crisis',
+						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Football',
+						url: '/football',
+						children: [
+							{
+								title: 'Live scores',
+								url: '/football/live',
+								longTitle: 'football/live',
+							},
+							{
+								title: 'Tables',
+								url: '/football/tables',
+								longTitle: 'football/tables',
+							},
+							{
+								title: 'Fixtures',
+								url: '/football/fixtures',
+								longTitle: 'football/fixtures',
+							},
+							{
+								title: 'Results',
+								url: '/football/results',
+								longTitle: 'football/results',
+							},
+							{
+								title: 'Competitions',
+								url: '/football/competitions',
+								longTitle: 'football/competitions',
+							},
+							{
+								title: 'Clubs',
+								url: '/football/teams',
+								longTitle: 'football/teams',
+							},
+						],
+					},
+					{
 						title: 'Business',
 						url: '/business',
 						children: [
@@ -393,57 +438,12 @@ export const PrintShop: CAPIType = {
 						],
 					},
 					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-					},
-					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Euro 2020',
-								url: '/football/euro-2020',
-							},
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
-					},
-					{
 						title: 'Environment',
 						url: '/environment',
 						children: [
 							{
-								title: 'Climate change',
-								url: '/environment/climate-change',
+								title: 'Climate crisis',
+								url: '/environment/climate-crisis',
 							},
 							{
 								title: 'Wildlife',
@@ -542,17 +542,9 @@ export const PrintShop: CAPIType = {
 				iconName: 'home',
 				children: [
 					{
-						title: 'Euro 2020',
-						url: '/football/euro-2020',
-					},
-					{
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: 'Euro 2020',
-								url: '/football/euro-2020',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -798,16 +790,8 @@ export const PrintShop: CAPIType = {
 						url: '/theguardian/journal',
 					},
 					{
-						title: 'Weekend',
-						url: '/theguardian/weekend',
-					},
-					{
-						title: 'The Guide',
-						url: '/theguardian/theguide',
-					},
-					{
-						title: 'Saturday review',
-						url: '/theguardian/guardianreview',
+						title: 'Saturday',
+						url: '/theguardian/saturday',
 					},
 				],
 			},
@@ -924,6 +908,10 @@ export const PrintShop: CAPIType = {
 			{
 				title: 'Guardian Puzzles app',
 				url: 'https://puzzles.theguardian.com/download',
+			},
+			{
+				title: 'Guardian content licensing site',
+				url: 'https://licensing.theguardian.com/',
 			},
 		],
 		currentNavLinkTitle: 'Art & design',
@@ -1189,7 +1177,7 @@ export const PrintShop: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: 'https://uploads.guim.co.uk/2021/07/27/STL_&_GMG_Modern_Slavery_Act_Statement_2021.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1283,6 +1271,7 @@ export const PrintShop: CAPIType = {
 			'gnmguardian://artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore?contenttype=Article&source=twitter',
 	},
 	sectionName: 'artanddesign',
+	webPublicationDateDeprecated: '2020-12-17T09:07:18.000Z',
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -1295,9 +1284,10 @@ export const PrintShop: CAPIType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
+	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [],
-	webPublicationDateDeprecated: '2020-12-17T09:07:18.000Z',
+	webPublicationDate: '2020-12-17T09:07:18.000Z',
 	blocks: [
 		{
 			id: '5dc05a8c8f0809525b6f5f10',
@@ -1474,60 +1464,52 @@ export const PrintShop: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1020&quality=85&auto=format&fit=max&s=82a3e9ebc6d72eee76a60817eeea3a6b',
-									width: 1020,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=880&quality=85&auto=format&fit=max&s=d3eb868d1ac2ab1a4e58b798f3379675',
+									width: 880,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=d6dfb0a278aece2eef08d0cf73e7a09d',
-									width: 2040,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=e496e97d3a3ff33cf68f7151b9e8f095',
+									width: 1760,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=940&quality=85&auto=format&fit=max&s=2ba0b2e2b6ca94bab622216e78f3d65e',
-									width: 940,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=800&quality=85&auto=format&fit=max&s=9a830773d1c8f99d0c70a001696f071f',
+									width: 800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=01b35ec4082b385e533b1d45b1e58279',
-									width: 1880,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=800&quality=45&auto=format&fit=max&dpr=2&s=86038d55ccefaaa3313ff532c20c79c2',
+									width: 1600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=85&auto=format&fit=max&s=4c198eeefd44d800fee26ccef91266c5',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=640&quality=85&auto=format&fit=max&s=7c566345e6fe8ad520369602a6332125',
+									width: 640,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=59426683743484a3a8e8bfb785e2e65f',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=640&quality=45&auto=format&fit=max&dpr=2&s=d48ecc8431cb7355029dde914583c879',
+									width: 1280,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=85&auto=format&fit=max&s=4c198eeefd44d800fee26ccef91266c5',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=85&auto=format&fit=max&s=bba40694a98781f33e77ee6f38845e5a',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=59426683743484a3a8e8bfb785e2e65f',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=24dffbbab5032c4a4bad680c98154c03',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=660&quality=85&auto=format&fit=max&s=123df7010bb21fa1c962339ebce5a94f',
-									width: 660,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=85&auto=format&fit=max&s=b5b98d12bcaa700decb0f558f52b30fa',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=20798c142854fd13114526e1b0402887',
-									width: 1320,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=93e2625dfaef1d4f82649f44a0e92eab',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=645&quality=85&auto=format&fit=max&s=2301f0a29faaa49376d15f796d22aef7',
-									width: 645,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=85&auto=format&fit=max&s=28985b33fa3553745288a43a0ff55f1e',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=b8363e95989341572c4ef963f865b1ed',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=465&quality=85&auto=format&fit=max&s=eff47ab66424efca5e4f9060cde815bd',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=37d11078a8141f9781d64de9d24e3f27',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/927e52b001a18c4f7130953d6bc8fb6f1060d765/0_0_3855_2755/master/3855.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=6abf07f5e1108f9825df71f8ca94474f',
+									width: 890,
 								},
 							],
 						},
@@ -1623,47 +1605,47 @@ export const PrintShop: CAPIType = {
 						},
 					],
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'b6574d3a-0285-4c7e-90ed-994b78741adc',
+					elementId: '361e1d69-44af-48e3-8772-86b7dcee2847',
 				},
 				{
 					html: '<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '3a20347f-c3cf-46e9-b3c1-3d374778bc1d',
+					elementId: '9c468916-fb40-4da4-a06f-da747b792033',
 				},
 				{
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '82362883-6c90-4a4f-8de3-d561f07a641e',
+					elementId: '33010010-a952-4103-b64d-a1378b33facf',
 				},
 				{
 					html: '<p><em>Words: Jonny Weeks</em></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c7180f54-ea48-4117-aadf-272c26a43aeb',
+					elementId: '25a4286b-459f-48f2-bb62-a1a551f59637',
 				},
 				{
 					html: '<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '14f4f99a-2c30-4f20-8688-ea22446cc5e8',
+					elementId: 'ba125da8-9308-49ec-9561-3ab91741371f',
 				},
 				{
 					html: '<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '57d4ed99-80d5-410b-b8bc-3ed8df81ab15',
+					elementId: 'bd41dd6e-162e-4c5b-ade5-4a015fea8a83',
 				},
 				{
 					html: '<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'f8c5bd4d-ad17-4e14-a67c-2660efd58574',
+					elementId: '7dac5f48-3581-444c-928c-b9deba26cc7d',
 				},
 				{
 					html: '<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '72429e15-61a8-406e-84a3-214206a5cc33',
+					elementId: '4123ae5a-590d-456b-89f3-4944fac688ee',
 				},
 				{
 					html: '<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '1f4982ba-dcbb-4ca4-9fc9-adbdd7098b75',
+					elementId: 'd2683106-b3e0-4e0f-b5e4-5a1448503440',
 				},
 			],
 			blockCreatedOn: 1572887180000,

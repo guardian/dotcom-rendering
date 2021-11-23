@@ -31,12 +31,12 @@ import { renderElement } from '../lib/renderElement';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
+import { decidePalette } from '../lib/decidePalette';
 
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
 const Renderer: React.FC<{
@@ -110,7 +110,7 @@ const Renderer: React.FC<{
 	return <div css={adStyles}>{output}</div>;
 };
 
-const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
+const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 	// Typically immersives use the slim nav, but this switch is used to force
 	// the full nav - typically during special events such as Project 200, or
 	// the Euros. The motivation is to better onboard new visitors; interactives
@@ -227,7 +227,6 @@ const NavHeader = ({ CAPI, NAV, format, palette }: Props): JSX.Element => {
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						palette={palette}
 						format={format}
 					/>
 				</ElementContainer>
@@ -240,11 +239,12 @@ export const FullPageInteractiveLayout = ({
 	CAPI,
 	NAV,
 	format,
-	palette,
 }: Props): JSX.Element => {
 	const {
 		config: { host },
 	} = CAPI;
+
+	const palette = decidePalette(format);
 
 	return (
 		<>
@@ -256,12 +256,7 @@ export const FullPageInteractiveLayout = ({
 					background-color: ${palette.background.article};
 				`}
 			>
-				<NavHeader
-					CAPI={CAPI}
-					NAV={NAV}
-					format={format}
-					palette={palette}
-				/>
+				<NavHeader CAPI={CAPI} NAV={NAV} format={format} />
 
 				{format.theme === ArticleSpecial.Labs && (
 					<Stuck>
@@ -308,7 +303,6 @@ export const FullPageInteractiveLayout = ({
 					<SubNav
 						subNavSections={NAV.subNavSections}
 						currentNavLink={NAV.currentNavLink}
-						palette={palette}
 						format={format}
 					/>
 				</ElementContainer>

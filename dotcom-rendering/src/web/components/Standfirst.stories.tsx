@@ -119,7 +119,7 @@ export const LiveBlog = () => {
 					design: ArticleDesign.LiveBlog,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how LiveBlog standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="<p>This is how a Liveblog with bullets looks. Aut explicabo officia delectus omnis repellendus voluptas</p><ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -148,7 +148,7 @@ export const DeadBlog = () => {
 					design: ArticleDesign.DeadBlog,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how DeadBlog standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="<p>This is how a Deadblog with bullets looks. Aut explicabo officia delectus omnis repellendus voluptas</p><ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);

@@ -11,6 +11,10 @@ type Props = {
 
 const articleWidth = (format: ArticleFormat) => {
 	switch (format.design) {
+		case ArticleDesign.Interactive: {
+			// These articles use a special template which manages it's own width
+			return null;
+		}
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return css`

@@ -116,6 +116,7 @@ type Palette = {
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		overlayedCaption: Colour;
+		pagination: Colour;
 	};
 	background: {
 		article: Colour;
@@ -126,6 +127,7 @@ type Palette = {
 		headline: Colour;
 		headlineByline: Colour;
 		bullet: Colour;
+		bulletStandfirst: Colour;
 		header: Colour;
 		standfirst: Colour;
 		richLink: Colour;
@@ -158,12 +160,16 @@ type Palette = {
 		navPillar: Colour;
 		article: Colour;
 		lines: Colour;
+		matchTab: Colour;
+		activeMatchTab: Colour;
+		pagination: Colour;
 	};
 	topBar: {
 		card: Colour;
 	};
 	hover: {
 		headlineByline: Colour;
+		pagination: Colour;
 	};
 };
 
@@ -419,7 +425,7 @@ interface CAPIType {
 	 * @TJS-format date-time
 	 */
 	webPublicationDateDeprecated: string;
-
+	webPublicationDate: string;
 	webPublicationDateDisplay: string;
 	webPublicationSecondaryDateDisplay: string;
 	editionLongForm: string;
@@ -633,6 +639,7 @@ type MatchReportType = {
 	venue: string;
 	comments: string;
 	minByMinUrl: string;
+	reportUrl: string;
 };
 
 /**

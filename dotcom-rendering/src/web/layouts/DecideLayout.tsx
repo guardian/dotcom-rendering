@@ -44,7 +44,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 							CAPI={CAPI}
 							NAV={NAV}
 							format={format}
-							palette={palette}
 						/>
 					);
 				}
