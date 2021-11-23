@@ -91,6 +91,7 @@ import {
 import { trackPerformance } from '../browser/ga/ga';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
+import { GetMatchTabs } from './GetMatchTabs';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -897,6 +898,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
 				</Portal>
 			)}
+			{CAPI.matchUrl && (
+				<Portal rootId="match-tabs">
+					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />
+				</Portal>
+			)}
 			{/*
 				Rules for when to show <ContributionSlot />:
 				1. shouldHideReaderRevenue is false ("Prevent membership/contribution appeals" is not checked in Composer)
@@ -1345,14 +1351,20 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				<StickyBottomBanner
 					isSignedIn={isSignedIn}
 					asyncCountryCode={asyncCountryCode}
-					CAPI={CAPI}
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
+					section={CAPI.config.section}
 					tags={CAPI.tags}
 					isPaidContent={CAPI.pageType.isPaidContent}
 					isPreview={!!CAPI.isPreview}
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isMinuteArticle={CAPI.pageType.isMinuteArticle}
+					isSensitive={CAPI.config.isSensitive}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					idApiUrl={CAPI.config.idApiUrl}
+					switches={CAPI.config.switches}
 				/>
 			</Portal>
 		</React.StrictMode>

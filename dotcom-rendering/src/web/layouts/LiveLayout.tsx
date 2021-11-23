@@ -50,6 +50,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { space } from '@guardian/src-foundations';
 import { Hide } from '@guardian/src-layout';
+import { Placeholder } from '../components/Placeholder';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -156,7 +157,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 309px 1px 1fr;
+					grid-template-columns: 219px 1px 1fr;
 					grid-template-areas:
 						'lines		border media'
 						'meta		border media'
@@ -165,7 +166,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'. 			border .';
 				}
 				${from.wide} {
-					grid-template-columns: 309px 1px 1fr 340px;
+					grid-template-columns: 219px 1px 1fr 340px;
 					grid-template-areas:
 						'lines 		border media right-column'
 						'meta  		border media right-column'
@@ -284,6 +285,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const showComments = CAPI.isCommentable;
 
+	const showMatchTabs = CAPI.matchUrl;
+
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
@@ -391,6 +394,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 							</GridItem>
 							<GridItem area="headline">
+								{CAPI.matchUrl && showMatchTabs && (
+									<Placeholder
+										rootId="match-tabs"
+										height={40}
+									/>
+								)}
 								<div css={maxWidth}>
 									<ArticleHeadlinePadding
 										design={format.design}

@@ -159,6 +159,8 @@ type Palette = {
 		navPillar: Colour;
 		article: Colour;
 		lines: Colour;
+		matchTab: Colour;
+		activeMatchTab: Colour;
 		pagination: Colour;
 	};
 	topBar: {
@@ -422,7 +424,7 @@ interface CAPIType {
 	 * @TJS-format date-time
 	 */
 	webPublicationDateDeprecated: string;
-
+	webPublicationDate: string;
 	webPublicationDateDisplay: string;
 	webPublicationSecondaryDateDisplay: string;
 	editionLongForm: string;
@@ -636,6 +638,7 @@ type MatchReportType = {
 	venue: string;
 	comments: string;
 	minByMinUrl: string;
+	reportUrl: string;
 };
 
 /**

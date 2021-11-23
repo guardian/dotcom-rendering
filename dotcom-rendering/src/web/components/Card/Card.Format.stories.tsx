@@ -21,7 +21,7 @@ export const Format =
 		(
 			<ElementContainer>
 				<Flex>
-					<LeftColumn showRightBorder={false}>
+					<LeftColumn>
 						<></>
 					</LeftColumn>
 					<ArticleContainer

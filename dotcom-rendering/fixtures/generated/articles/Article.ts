@@ -16,8 +16,8 @@ export const Article: CAPIType = {
 	main: '<figure class="element element-image" data-media-id="82cf4777db1bc8aee728f88202118ec67f535156"> <img src="https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/1000.jpg" alt="A digitally manipulated image showing a flooded Rotterdam." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A digitally manipulated image showing a flooded Rotterdam.</span> <span class="element-image__credit">Photograph: Alexandre Rotenberg/Alamy</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/environment/climate-change',
-			title: 'Climate change',
+			url: '/environment/climate-crisis',
+			title: 'Climate crisis',
 		},
 	],
 	commercialProperties: {
@@ -40,12 +40,9 @@ export const Article: CAPIType = {
 					value: ['news'],
 				},
 				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
 					name: 'k',
 					value: [
+						'climate-crisis',
 						'eu',
 						'flooding',
 						'world',
@@ -53,10 +50,13 @@ export const Article: CAPIType = {
 						'natural-disasters',
 						'science',
 						'environment',
-						'climate-change',
 						'wildfires',
 						'scienceofclimatechange',
 					],
+				},
+				{
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'ct',
@@ -87,12 +87,9 @@ export const Article: CAPIType = {
 					value: ['news'],
 				},
 				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
 					name: 'k',
 					value: [
+						'climate-crisis',
 						'eu',
 						'flooding',
 						'world',
@@ -100,10 +97,13 @@ export const Article: CAPIType = {
 						'natural-disasters',
 						'science',
 						'environment',
-						'climate-change',
 						'wildfires',
 						'scienceofclimatechange',
 					],
+				},
+				{
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'ct',
@@ -138,12 +138,9 @@ export const Article: CAPIType = {
 					value: ['news'],
 				},
 				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
 					name: 'k',
 					value: [
+						'climate-crisis',
 						'eu',
 						'flooding',
 						'world',
@@ -151,10 +148,13 @@ export const Article: CAPIType = {
 						'natural-disasters',
 						'science',
 						'environment',
-						'climate-change',
 						'wildfires',
 						'scienceofclimatechange',
 					],
+				},
+				{
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'ct',
@@ -189,16 +189,9 @@ export const Article: CAPIType = {
 					value: ['news'],
 				},
 				{
-					name: 'edition',
-					value: 'int',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
 					name: 'k',
 					value: [
+						'climate-crisis',
 						'eu',
 						'flooding',
 						'world',
@@ -206,10 +199,17 @@ export const Article: CAPIType = {
 						'natural-disasters',
 						'science',
 						'environment',
-						'climate-change',
 						'wildfires',
 						'scienceofclimatechange',
 					],
+				},
+				{
+					name: 'edition',
+					value: 'int',
+				},
+				{
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'ct',
@@ -228,13 +228,17 @@ export const Article: CAPIType = {
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Thu 14 May 2020 16.35 BST',
+		'Last modified on Wed 25 Aug 2021 14.46 BST',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
 	publication: 'theguardian.com',
 	trailText:
 		'Without urgent action, rising sea levels by end of century could leave cities under water',
 	subMetaKeywordLinks: [
+		{
+			url: '/science/scienceofclimatechange',
+			title: 'Climate science',
+		},
 		{
 			url: '/world/eu',
 			title: 'European Union',
@@ -262,7 +266,7 @@ export const Article: CAPIType = {
 	],
 	contentType: 'Article',
 	nav: {
-		currentUrl: '/environment/climate-change',
+		currentUrl: '/environment/climate-crisis',
 		pillars: [
 			{
 				title: 'News',
@@ -373,6 +377,51 @@ export const Article: CAPIType = {
 						],
 					},
 					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
+					},
+					{
+						title: 'Climate crisis',
+						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Football',
+						url: '/football',
+						children: [
+							{
+								title: 'Live scores',
+								url: '/football/live',
+								longTitle: 'football/live',
+							},
+							{
+								title: 'Tables',
+								url: '/football/tables',
+								longTitle: 'football/tables',
+							},
+							{
+								title: 'Fixtures',
+								url: '/football/fixtures',
+								longTitle: 'football/fixtures',
+							},
+							{
+								title: 'Results',
+								url: '/football/results',
+								longTitle: 'football/results',
+							},
+							{
+								title: 'Competitions',
+								url: '/football/competitions',
+								longTitle: 'football/competitions',
+							},
+							{
+								title: 'Clubs',
+								url: '/football/teams',
+								longTitle: 'football/teams',
+							},
+						],
+					},
+					{
 						title: 'Business',
 						url: '/business',
 						children: [
@@ -429,57 +478,12 @@ export const Article: CAPIType = {
 						],
 					},
 					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-					},
-					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Euro 2020',
-								url: '/football/euro-2020',
-							},
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
-					},
-					{
 						title: 'Environment',
 						url: '/environment',
 						children: [
 							{
-								title: 'Climate change',
-								url: '/environment/climate-change',
+								title: 'Climate crisis',
+								url: '/environment/climate-crisis',
 							},
 							{
 								title: 'Wildlife',
@@ -578,17 +582,9 @@ export const Article: CAPIType = {
 				iconName: 'home',
 				children: [
 					{
-						title: 'Euro 2020',
-						url: '/football/euro-2020',
-					},
-					{
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: 'Euro 2020',
-								url: '/football/euro-2020',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -834,16 +830,8 @@ export const Article: CAPIType = {
 						url: '/theguardian/journal',
 					},
 					{
-						title: 'Weekend',
-						url: '/theguardian/weekend',
-					},
-					{
-						title: 'The Guide',
-						url: '/theguardian/theguide',
-					},
-					{
-						title: 'Saturday review',
-						url: '/theguardian/guardianreview',
+						title: 'Saturday',
+						url: '/theguardian/saturday',
 					},
 				],
 			},
@@ -961,48 +949,285 @@ export const Article: CAPIType = {
 				title: 'Guardian Puzzles app',
 				url: 'https://puzzles.theguardian.com/download',
 			},
+			{
+				title: 'Guardian content licensing site',
+				url: 'https://licensing.theguardian.com/',
+			},
 		],
-		currentNavLinkTitle: 'Climate change',
+		currentNavLinkTitle: 'Climate crisis',
 		currentPillarTitle: 'News',
 		subNavSections: {
-			parent: {
-				title: 'Environment',
-				url: '/environment',
-				children: [
-					{
-						title: 'Climate change',
-						url: '/environment/climate-change',
-					},
-					{
-						title: 'Wildlife',
-						url: '/environment/wildlife',
-					},
-					{
-						title: 'Energy',
-						url: '/environment/energy',
-					},
-					{
-						title: 'Pollution',
-						url: '/environment/pollution',
-					},
-				],
-			},
 			links: [
 				{
-					title: 'Climate change',
-					url: '/environment/climate-change',
+					title: 'UK',
+					url: '/uk-news',
+					longTitle: 'UK news',
+					children: [
+						{
+							title: 'UK politics',
+							url: '/politics',
+						},
+						{
+							title: 'Education',
+							url: '/education',
+							children: [
+								{
+									title: 'Schools',
+									url: '/education/schools',
+								},
+								{
+									title: 'Teachers',
+									url: '/teacher-network',
+								},
+								{
+									title: 'Universities',
+									url: '/education/universities',
+								},
+								{
+									title: 'Students',
+									url: '/education/students',
+								},
+							],
+						},
+						{
+							title: 'Media',
+							url: '/media',
+						},
+						{
+							title: 'Society',
+							url: '/society',
+						},
+						{
+							title: 'Law',
+							url: '/law',
+						},
+						{
+							title: 'Scotland',
+							url: '/uk/scotland',
+						},
+						{
+							title: 'Wales',
+							url: '/uk/wales',
+						},
+						{
+							title: 'Northern Ireland',
+							url: '/uk/northernireland',
+						},
+					],
 				},
 				{
-					title: 'Wildlife',
-					url: '/environment/wildlife',
+					title: 'World',
+					url: '/world',
+					longTitle: 'World news',
+					children: [
+						{
+							title: 'Europe',
+							url: '/world/europe-news',
+						},
+						{
+							title: 'US',
+							url: '/us-news',
+							longTitle: 'US news',
+						},
+						{
+							title: 'Americas',
+							url: '/world/americas',
+						},
+						{
+							title: 'Asia',
+							url: '/world/asia',
+						},
+						{
+							title: 'Australia',
+							url: '/australia-news',
+							longTitle: 'Australia news',
+						},
+						{
+							title: 'Middle East',
+							url: '/world/middleeast',
+						},
+						{
+							title: 'Africa',
+							url: '/world/africa',
+						},
+						{
+							title: 'Inequality',
+							url: '/inequality',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+					],
 				},
 				{
-					title: 'Energy',
-					url: '/environment/energy',
+					title: 'Coronavirus',
+					url: '/world/coronavirus-outbreak',
+					longTitle: 'Coronavirus',
 				},
 				{
-					title: 'Pollution',
-					url: '/environment/pollution',
+					title: 'Climate crisis',
+					url: '/environment/climate-crisis',
+				},
+				{
+					title: 'Football',
+					url: '/football',
+					children: [
+						{
+							title: 'Live scores',
+							url: '/football/live',
+							longTitle: 'football/live',
+						},
+						{
+							title: 'Tables',
+							url: '/football/tables',
+							longTitle: 'football/tables',
+						},
+						{
+							title: 'Fixtures',
+							url: '/football/fixtures',
+							longTitle: 'football/fixtures',
+						},
+						{
+							title: 'Results',
+							url: '/football/results',
+							longTitle: 'football/results',
+						},
+						{
+							title: 'Competitions',
+							url: '/football/competitions',
+							longTitle: 'football/competitions',
+						},
+						{
+							title: 'Clubs',
+							url: '/football/teams',
+							longTitle: 'football/teams',
+						},
+					],
+				},
+				{
+					title: 'Business',
+					url: '/business',
+					children: [
+						{
+							title: 'Economics',
+							url: '/business/economics',
+						},
+						{
+							title: 'Banking',
+							url: '/business/banking',
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+								},
+							],
+						},
+						{
+							title: 'Markets',
+							url: '/business/stock-markets',
+						},
+						{
+							title: 'Project Syndicate',
+							url: '/business/series/project-syndicate-economists',
+						},
+						{
+							title: 'B2B',
+							url: '/business-to-business',
+						},
+						{
+							title: 'Retail',
+							url: '/business/retail',
+						},
+					],
+				},
+				{
+					title: 'Environment',
+					url: '/environment',
+					children: [
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Wildlife',
+							url: '/environment/wildlife',
+						},
+						{
+							title: 'Energy',
+							url: '/environment/energy',
+						},
+						{
+							title: 'Pollution',
+							url: '/environment/pollution',
+						},
+					],
+				},
+				{
+					title: 'UK politics',
+					url: '/politics',
+				},
+				{
+					title: 'Education',
+					url: '/education',
+					children: [
+						{
+							title: 'Schools',
+							url: '/education/schools',
+						},
+						{
+							title: 'Teachers',
+							url: '/teacher-network',
+						},
+						{
+							title: 'Universities',
+							url: '/education/universities',
+						},
+						{
+							title: 'Students',
+							url: '/education/students',
+						},
+					],
+				},
+				{
+					title: 'Society',
+					url: '/society',
+				},
+				{
+					title: 'Science',
+					url: '/science',
+				},
+				{
+					title: 'Tech',
+					url: '/technology',
+				},
+				{
+					title: 'Global development',
+					url: '/global-development',
+				},
+				{
+					title: 'Obituaries',
+					url: '/tone/obituaries',
 				},
 			],
 		},
@@ -1092,19 +1317,19 @@ export const Article: CAPIType = {
 			'Fires and floods: maps of Europe predict scale of climate catastrophe',
 		'fb:app_id': '180444840287',
 		'article:tag':
-			'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+			'Climate crisis,Environment,Climate science,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-05-14T15:35:37.000Z',
+		'article:modified_time': '2021-08-25T13:46:46.000Z',
 	},
-	sectionUrl: 'environment/climate-change',
+	sectionUrl: 'environment/climate-crisis',
 	pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 	version: 3,
 	tags: [
 		{
-			id: 'environment/climate-change',
+			id: 'environment/climate-crisis',
 			type: 'Keyword',
-			title: 'Climate change',
+			title: 'Climate crisis',
 		},
 		{
 			id: 'environment/environment',
@@ -1114,7 +1339,7 @@ export const Article: CAPIType = {
 		{
 			id: 'science/scienceofclimatechange',
 			type: 'Keyword',
-			title: 'Climate change',
+			title: 'Climate science',
 		},
 		{
 			id: 'science/science',
@@ -1178,7 +1403,7 @@ export const Article: CAPIType = {
 	webURL: 'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 	showBottomSocialButtons: true,
 	isImmersive: false,
-	sectionLabel: 'Climate change',
+	sectionLabel: 'Climate crisis',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1254,7 +1479,7 @@ export const Article: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: 'https://uploads.guim.co.uk/2021/07/27/STL_&_GMG_Modern_Slavery_Act_Statement_2021.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1348,6 +1573,7 @@ export const Article: CAPIType = {
 			'gnmguardian://environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe?contenttype=Article&source=twitter',
 	},
 	sectionName: 'environment',
+	webPublicationDateDeprecated: '2020-02-10T06:00:27.000Z',
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -1361,6 +1587,7 @@ export const Article: CAPIType = {
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline:
 		'Fires and floods: maps of Europe predict scale of climate catastrophe',
+	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
@@ -1451,62 +1678,12 @@ export const Article: CAPIType = {
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=605&quality=85&auto=format&fit=max&s=f3070c0cc506b391d93c56f2648b9024',
-							width: 605,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=700&quality=85&auto=format&fit=max&s=e1ec3e93858c4f22308cd9d9a114bb13',
+							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d091e519be0255251e7c2046e6240ffc',
-							width: 1210,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=445&quality=85&auto=format&fit=max&s=e23ad5cef09373a4158c9c43fef36949',
-							width: 445,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=2f020b7ee5e1207f1f33dd4125dd4690',
-							width: 890,
-						},
-					],
-				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=140&quality=85&auto=format&fit=max&s=16ebd37ddf2967e7ba7b01635b82b974',
-							width: 140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=387dec1d156051a440cdd0b0df4247be',
-							width: 280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=120&quality=85&auto=format&fit=max&s=0e5ee844176768078917f3dc56f0505e',
-							width: 120,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=f4d9ddd3ed70326003c8a7a80108bf8a',
-							width: 240,
-						},
-					],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=380&quality=85&auto=format&fit=max&s=67a51d59c25da203b89858d8f35845c0',
-							width: 380,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=f8fe1004f34df6f84eac98a6ae5a2fa5',
-							width: 760,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=300&quality=85&auto=format&fit=max&s=a8dceed7442f4f3a7e9c31f4c65be56b',
-							width: 300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=4b53d99dd7319346a50944a6e3c5193c',
-							width: 600,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d80745c0d7f99b0037cff31324f70595',
+							width: 1400,
 						},
 						{
 							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=620&quality=85&auto=format&fit=max&s=4f5deafccee04d1b998dd507bcbc4bf1',
@@ -1517,22 +1694,30 @@ export const Article: CAPIType = {
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=605&quality=85&auto=format&fit=max&s=f3070c0cc506b391d93c56f2648b9024',
-							width: 605,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=645&quality=85&auto=format&fit=max&s=c0d3ca6cf1db11e43ba219ac13c7b8c2',
+							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d091e519be0255251e7c2046e6240ffc',
-							width: 1210,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=f0a6b6cf1fe08564c81a5564d4a3f011',
+							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=445&quality=85&auto=format&fit=max&s=e23ad5cef09373a4158c9c43fef36949',
-							width: 445,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=465&quality=85&auto=format&fit=max&s=dbe9477881a8f9fee4077153810d4656',
+							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=2f020b7ee5e1207f1f33dd4125dd4690',
-							width: 890,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=18ff3455f67aa188aefd7aceed1b1bc2',
+							width: 930,
 						},
 					],
+				},
+				{
+					weighting: 'thumbnail',
+					srcSet: [],
+				},
+				{
+					weighting: 'supporting',
+					srcSet: [],
 				},
 				{
 					weighting: 'showcase',
@@ -1597,36 +1782,19 @@ export const Article: CAPIType = {
 				},
 				{
 					weighting: 'halfwidth',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=620&quality=85&auto=format&fit=max&s=4f5deafccee04d1b998dd507bcbc4bf1',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=923022dc82d7813a0a390b98ec51d943',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=605&quality=85&auto=format&fit=max&s=f3070c0cc506b391d93c56f2648b9024',
-							width: 605,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d091e519be0255251e7c2046e6240ffc',
-							width: 1210,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=445&quality=85&auto=format&fit=max&s=e23ad5cef09373a4158c9c43fef36949',
-							width: 445,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=2f020b7ee5e1207f1f33dd4125dd4690',
-							width: 890,
-						},
-					],
+					srcSet: [],
 				},
 				{
 					weighting: 'immersive',
 					srcSet: [
+						{
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1900&quality=85&auto=format&fit=max&s=5597f9ec1044138bc22265512e12b310',
+							width: 1900,
+						},
+						{
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=09107b3d9a9ec7bbefdd1c50fbb206dc',
+							width: 3800,
+						},
 						{
 							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1300&quality=85&auto=format&fit=max&s=0f7cbfd1814eddc1a2574610d00f4a70',
 							width: 1300,
@@ -1644,53 +1812,45 @@ export const Article: CAPIType = {
 							width: 2280,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1125&quality=85&auto=format&fit=max&s=1f73ed1cbca31445d4c900eb3526814f',
-							width: 1125,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=980&quality=85&auto=format&fit=max&s=b6191f25e1b34c785662c530164e71e4',
+							width: 980,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=6807c1935b8085d5429019c011a9a4c9',
-							width: 2250,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=92a201abd35b3ffe1520ce35c3100bbd',
+							width: 1960,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=965&quality=85&auto=format&fit=max&s=0afe274086aee4f3e5435329ef02a46f',
-							width: 965,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=740&quality=85&auto=format&fit=max&s=e1fbaa5a68c680cfee73f85a772e6e52',
+							width: 740,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=afb0ffab2dcecef2af131c043836289d',
-							width: 1930,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=7cf455a1aa41bd7b26f56fb6fd2815e1',
+							width: 1480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=725&quality=85&auto=format&fit=max&s=fc887882bcf4137bbe0d849ad090df31',
-							width: 725,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=660&quality=85&auto=format&fit=max&s=99b46ee78b5a3748dc9b68bb7ec979e2',
+							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=5668f37a6a3d1256b2eea1ff78016b35',
-							width: 1450,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=6fd73e1aa11c58d960372691c1a37ef3',
+							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=645&quality=85&auto=format&fit=max&s=c0d3ca6cf1db11e43ba219ac13c7b8c2',
-							width: 645,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=480&quality=85&auto=format&fit=max&s=f8820055c81c3f7281b7cea88bfe7d9d',
+							width: 480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=f0a6b6cf1fe08564c81a5564d4a3f011',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=465&quality=85&auto=format&fit=max&s=dbe9477881a8f9fee4077153810d4656',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=18ff3455f67aa188aefd7aceed1b1bc2',
-							width: 930,
+							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=2f8c9f1d655fca169c4cee954c52da92',
+							width: 960,
 						},
 					],
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '61ed6463-adc6-4583-9f3c-a6d53a470f6c',
+			elementId: 'dd7623ed-267f-4539-b819-1110795a16e1',
 		},
 	],
-	webPublicationDateDeprecated: '2020-02-10T06:00:27.000Z',
+	webPublicationDate: '2020-02-10T06:00:27.000Z',
 	blocks: [
 		{
 			id: '5e3d3b488f086a28115a74be',
@@ -1698,47 +1858,47 @@ export const Article: CAPIType = {
 				{
 					html: '<p>A <a href="https://experience.arcgis.com/stemapp/5f6596de6c4445a58aec956532b9813d">series of detailed maps</a> have laid bare the scale of possible forest fires, floods, droughts and deluges that Europe could face by the end of the century without urgent action to adapt to and confront global heating.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'f27b919c-9a17-4fcc-81b6-4440e5bffd00',
+					elementId: '2061eb45-d645-4e43-80a9-92dd9c57180e',
 				},
 				{
 					html: '<p>An average one-metre rise in sea levels by the end of the century – without any flood prevention action – would mean 90% of the surface of Hull would be under water, according to the European Environment Agency.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ce3e44f2-2ae4-480e-8f4e-e09a5b7f1554',
+					elementId: '6b980d9a-7e79-405a-9a87-7c15e42b939a',
 				},
 				{
 					html: '<p>English cities including Norwich, Margate, Southend-on-Sea, Runcorn and Blackpool could also experience flooding covering more than 40% of the urban area.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '818019cf-154d-4576-a212-43bb3597cfdf',
+					elementId: '8ccc3c8f-904b-479f-95d1-9d20948111bb',
 				},
 				{
 					html: '<p>Across the North Sea, Dutch cities including the Hague, Rotterdam and Leiden were predicted to face severe floods from an average one metre sea-level rise, which is forecast if emissions rise enough to cause an increase in global temperature of 4C–6C above pre-industrial levels.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c6ed2117-bb24-42b9-becf-f9435c61a17c',
+					elementId: '7cf3271f-84e7-4301-b70d-520ae249fff4',
 				},
 				{
 					html: '<p>The model does not account for the Netherlands’ extensive flood-prevention measures, although many other countries have not taken such action.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '3c9faab1-fbaa-46c9-85ee-13e9bdb1109e',
+					elementId: '4414c1ec-b2b7-4393-8bea-aeb146117896',
 				},
 				{
 					html: '<p>Meanwhile, large areas of Spain, Portugal and France would be grappling with desertification, with the worst-affected zones experiencing a two and half-fold increase in droughts under the worst-case scenario.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'f51da416-655b-4935-aee5-53846a75a4db',
+					elementId: 'eaf16e3c-8b8f-4d89-b197-c380abd7f8d1',
 				},
 				{
 					html: '<p>Hotter summers increase the risk of forest fires, which <a href="https://www.theguardian.com/world/2018/jul/18/sweden-calls-for-help-as-arctic-circle-hit-by-wildfires">hit record levels in Sweden in 2018</a>. If emissions exceed 4C, France, southern Germany, the Balkans and the Arctic Circle could experience a greatly increased fire risk. However, the absolute fire danger would remain highest in southern European countries, which are already prone to blazes.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '36df3618-b956-4799-9ae4-96ea0beb77a9',
+					elementId: '858d239f-73ee-49de-a439-aa904489a7e2',
 				},
 				{
 					html: '<p>Further north, winters are becoming wetter. Failure to limit global heating below 2C could mean a swath of central and eastern Europe, from Bratislava in the west to Yaroslavl in the east, will be in line for sharp increase in “heavy rain events” during autumn and winter by the end of the century.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '2a90c5c0-4d57-4882-9318-73286c9bdd0d',
+					elementId: 'da07a11f-e975-4474-88f8-4d73f96fa81d',
 				},
 				{
 					html: '<p>In some areas of central and eastern Europe there is predicted to be a 35% increase in heavy rain events, meaning torrential downpours would be more frequent.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '5dc95d35-a5d4-4885-bffb-bf3d88bf544e',
+					elementId: '8aa20d04-c7cb-463c-8461-b014598567a8',
 				},
 				{
 					media: {
@@ -1903,60 +2063,44 @@ export const Article: CAPIType = {
 							weighting: 'showcase',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=1020&quality=85&auto=format&fit=max&s=032599e9e1bc204c5e811ffc99fd81e2',
-									width: 1020,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=860&quality=85&auto=format&fit=max&s=e2235a8e77054fa178a264b9a4e6c5e3',
+									width: 860,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=0363fe6d188885293c31ca41adeb14ca',
-									width: 2040,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=d1d9e34ce780a26a57faf85ca66b08fb',
+									width: 1720,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=940&quality=85&auto=format&fit=max&s=dc941dfb526989cb275ace90f76d11a8',
-									width: 940,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=780&quality=85&auto=format&fit=max&s=36b642ed636934b9874f056789e2b5d4',
+									width: 780,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=80807e237840f06dd73d44e115c429ef',
-									width: 1880,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=6abf9506b1e82a8290d0c50e88756005',
+									width: 1560,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=700&quality=85&auto=format&fit=max&s=27fe5842c22fed708d902b1431956537',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=85&auto=format&fit=max&s=c58fef8ad9e72a87e58f2d73ed6acc84',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=5d4faf595741503122a932ae20cd0263',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f6179afd121c35be1908bdebf6561954',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=700&quality=85&auto=format&fit=max&s=27fe5842c22fed708d902b1431956537',
-									width: 700,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=85&auto=format&fit=max&s=4e13cf8e32551479aeee22395bfd03d8',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=5d4faf595741503122a932ae20cd0263',
-									width: 1400,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=463580da8cc89d1b393017f53583d521',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=660&quality=85&auto=format&fit=max&s=1b93b6a802fde3f60108664d42464652',
-									width: 660,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=85&auto=format&fit=max&s=da702a200c52b5dbabc04e1daadfa16b',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=93629177093978a3c975acb4fd3d3003',
-									width: 1320,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=645&quality=85&auto=format&fit=max&s=a16807aea722e36a5ebf07f6ed2207d7',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=781db18b0521dc043cf69b1707afccb6',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=465&quality=85&auto=format&fit=max&s=f9cc7a4dfff149d584702ec7c710424e',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=4b5694a692ba05ebdd2228980cc86514',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3406fc0dce3ddbebfe368de214049eca',
+									width: 890,
 								},
 							],
 						},
@@ -1993,121 +2137,89 @@ export const Article: CAPIType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=1300&quality=85&auto=format&fit=max&s=aafa2e45e6f8cd7db14643f2fa895a85',
-									width: 1300,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=85&auto=format&fit=max&s=c58fef8ad9e72a87e58f2d73ed6acc84',
+									width: 620,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=cc3c4c7b47209f44f4cb9314037bd77c',
-									width: 2600,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f6179afd121c35be1908bdebf6561954',
+									width: 1240,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=1140&quality=85&auto=format&fit=max&s=fa4c0359c24003f7a270f0c9aeddb742',
-									width: 1140,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=85&auto=format&fit=max&s=4e13cf8e32551479aeee22395bfd03d8',
+									width: 605,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=7897b73abfe093c15000ee0843bc68cd',
-									width: 2280,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=463580da8cc89d1b393017f53583d521',
+									width: 1210,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=1125&quality=85&auto=format&fit=max&s=f4dd1b3ecb4a412aeea13d3d546faa34',
-									width: 1125,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=85&auto=format&fit=max&s=da702a200c52b5dbabc04e1daadfa16b',
+									width: 445,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=8526550cbd6d3a7bcfb13d9549c28aaf',
-									width: 2250,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=965&quality=85&auto=format&fit=max&s=f634bafa6d47604ddf7a0ccdb533bc6b',
-									width: 965,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=b045375350ad262915fe26c259becf1d',
-									width: 1930,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=725&quality=85&auto=format&fit=max&s=4a35b24060b60ddf65592efa1b354577',
-									width: 725,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=7325a5bd85afd37fb656b7b211dfdec3',
-									width: 1450,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=645&quality=85&auto=format&fit=max&s=a16807aea722e36a5ebf07f6ed2207d7',
-									width: 645,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=781db18b0521dc043cf69b1707afccb6',
-									width: 1290,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=465&quality=85&auto=format&fit=max&s=f9cc7a4dfff149d584702ec7c710424e',
-									width: 465,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=4b5694a692ba05ebdd2228980cc86514',
-									width: 930,
+									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3406fc0dce3ddbebfe368de214049eca',
+									width: 890,
 								},
 							],
 						},
 					],
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '193d75dd-7eb7-44e7-9861-258d270b3b5b',
+					elementId: '50e5745b-0b10-40da-a50b-243a7c1dcc5c',
 				},
 				{
 					html: '<p>While the climate data has been published before, this is the first time the EU-agency has presented it using detailed maps on one site. Users can zoom in on small areas, for example, to discover that one-third of the London borough of Hammersmith and Fulham could be exposed to flooding by 2071.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'a7d9cb46-d937-4139-b943-fc343b4c330a',
+					elementId: '8ca88274-ccd4-4c5e-b577-35e753dfc49f',
 				},
 				{
 					html: '<p>The Copenhagen-based agency hopes the maps will reach decision-makers in governments and EU institutions, who would not usually read a lengthy EEA report on the impact of the climate emergency.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '63da57ef-e0fd-4fe1-b362-4aafe1bd1608',
+					elementId: '433c151f-42e3-4cb7-b74f-0919f2d03bde',
 				},
 				{
 					html: '<p>“It’s very urgent and we need to act now,” said Blaž Kurnik, an EEA expert in climate change impacts and adaptation.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '5e23fd73-588b-43f4-9acb-da816df89266',
+					elementId: '32c63416-53ee-4433-8de5-da3311c2592b',
 				},
 				{
 					html: '<p>Even if countries succeed in restricting global temperature rise, existing CO<strong><sub>2</sub></strong> in the atmosphere would still have an impact, he said.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '092d8c5d-c2a7-47d2-86c1-670797f8679b',
+					elementId: '8d42a101-4c5a-4aea-a684-704b64f0cfd0',
 				},
 				{
 					html: '<p>“The number of extreme events and sea level rise will still continue to increase for the next decades to a century,” Kurnik said. “Sea level rise, especially, can be problematic, because it is still increasing because of past emissions and the current concentration of greenhouse gases.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'deab73cd-a54b-4d1b-b72f-62d60074d4ab',
+					elementId: '14f77122-2dfe-4749-a44a-bcb1a5cca825',
 				},
 				{
 					html: '<p>The agency wants governments to focus on adapting to unavoidable global heating. “Adaptation is crucial in the next decades of the century. Even if we are able to increase the temperature by 2C, adaptation is crucial for the next decades.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'd3c51db9-04fd-4fd1-a514-261a53ebc63b',
+					elementId: 'a5ef1300-5e12-488b-9e8b-260cf6539e65',
 				},
 				{
 					html: '<p>The EEA has concluded it is <a href="https://www.eea.europa.eu/data-and-maps/indicators/atmospheric-greenhouse-gas-concentrations-6/assessment-1">possible to limit the rise in global temperatures to 2C above pre-industrial levels</a>, as long as greenhouse gas concentrations peak during the next 15 to 29 years.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '1de5d76e-4424-43fb-bc8b-1d7060fe9834',
+					elementId: '0fce2401-a193-42bf-83ab-b7c99326f060',
 				},
 				{
 					html: '<p>Meeting a more demanding<a href="https://www.theguardian.com/environment/2018/oct/08/global-warming-must-not-exceed-15c-warns-landmark-un-report"> 1.5C limit</a> requires concentrations to peak in the next three to 13 years. Under both scenarios, there is a 50% chance of overshooting the temperature.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '4ee7f528-c9c1-491e-961d-e9efd829c673',
+					elementId: '1354abb4-e153-46d0-a787-7bb358cd05ad',
 				},
 				{
 					html: '<p>• This article was amended on 10 February and 14 May 2020. An earlier version said that the EEA concluded “it is possible to keep global temperatures 2C below pre-industrial levels, as long as emissions peak during the next 15 to 29 years”. That meant to say greenhouse gas concentrations, not emissions; and the 2C referred to a rise in temperature above pre-industrial levels, not the temperature below pre-industrial levels. This article was further amended because an earlier version omitted “enough to cause an increase in global temperature of” from the sentence: “… an average one metre sea-level rise, which is forecast if emissions rise enough to cause an increase in global temperature of 4C–6C above pre-industrial levels”. This has been corrected.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '19de66d1-e7df-48b0-9cd3-8aae6fb18d69',
+					elementId: '67e4327e-25c5-497e-8315-f2cadf7568b6',
 				},
 			],
-			blockCreatedOn: 1581071176000,
-			blockCreatedOnDisplay: '10.26 GMT',
+			blockCreatedOn: 1581314427000,
+			blockCreatedOnDisplay: '06.00 GMT',
 			blockLastUpdated: 1589470537000,
 			blockLastUpdatedDisplay: '16.35 BST',
-			blockFirstPublished: 1581071177000,
-			blockFirstPublishedDisplay: '10.26 GMT',
+			blockFirstPublished: 1581314427000,
+			blockFirstPublishedDisplay: '06.00 GMT',
 			primaryDateLine: 'Mon 10 Feb 2020 06.00 GMT',
-			secondaryDateLine: 'Last modified on Thu 14 May 2020 16.35 BST',
+			secondaryDateLine: 'Last modified on Wed 25 Aug 2021 14.46 BST',
 		},
 	],
 	linkedData: [
@@ -2155,7 +2267,7 @@ export const Article: CAPIType = {
 			datePublished: '2020-02-10T06:00:27.000Z',
 			headline:
 				'Fires and floods: maps of Europe predict scale of climate catastrophe',
-			dateModified: '2020-05-14T15:35:37.000Z',
+			dateModified: '2021-08-25T13:46:46.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 		},
