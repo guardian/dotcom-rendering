@@ -38,7 +38,7 @@ For example `<source sizes="(min-width: 660px) 620px, 100vw">` tells the browser
 
 Source sets work as our final piece of the puzzle. Our browser has already picked a `source` element, and has used `sizes` to figure out what size (in width only) image it is looking for. Our source set allows us to provide a list of URLs & the width of the image for each one, which the browser will then use to look for the best fitting image from.
 
-Source sets are formatted like: `<source srcset="https://url.to/image 300w, https://url.to/larger/image 600w">` Our comma separated list of sources specifies first the URL to a given image source, then the width (where `w` is, from what I can tell just `px`) for that image. In our case where we use fastly image optimiser, the only thing changing between these image urls is in the query parameters, e.g `?width=300` and `?width=600`.
+Source sets are formatted like: `<source srcset="https://url.to/image 300w, https://url.to/larger/image 600w">` Our comma separated list of sources specifies first the URL to a given image source, then the real pixel width for that image. The unit `w` is used, to distinguish pixels inside the image from CCS `px` on the screen–there are many pixels per CSS `px` on high DPI screens. In our case where we use Fastly image optimiser, the only thing changing between these image urls is in the query parameters, e.g `?dpr=2` or `?width=300` and `?width=600`.
 
 ### DPR?!
 
