@@ -32,7 +32,7 @@ export const ArticleStory = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -58,7 +58,7 @@ export const Feature = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -84,7 +84,7 @@ export const ShowcaseInterview = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -125,7 +125,7 @@ export const ShowcaseInterviewNobyline = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -168,7 +168,7 @@ export const Interview = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -207,7 +207,7 @@ export const InterviewSpecialReport = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -248,7 +248,7 @@ export const InterviewNoByline = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -289,7 +289,7 @@ export const Comment = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -315,7 +315,7 @@ export const Analysis = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -341,7 +341,7 @@ export const Media = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -367,7 +367,7 @@ export const Review = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -393,7 +393,7 @@ export const PhotoEssay = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -419,7 +419,7 @@ export const Quiz = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -445,7 +445,7 @@ export const Recipe = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -471,7 +471,7 @@ export const Immersive = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -497,7 +497,7 @@ export const ImmersiveNoMainMedia = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -527,7 +527,7 @@ export const ImmersiveComment = () => {
 			backgroundColour="orange"
 		>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -553,7 +553,7 @@ export const Editorial = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -579,7 +579,7 @@ export const MatchReport = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -605,7 +605,7 @@ export const SpecialReport = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -631,7 +631,7 @@ export const LiveBlog = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -670,7 +670,7 @@ export const DeadBlog = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>

@@ -52,6 +52,49 @@ import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Placeholder } from '../components/Placeholder';
 
+const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			/* IE Fallback */
+			display: flex;
+			flex-direction: column;
+			${until.desktop} {
+				margin-left: 0px;
+			}
+			${from.desktop} {
+				margin-left: 320px;
+			}
+			@supports (display: grid) {
+				display: grid;
+				width: 100%;
+				margin-left: 0;
+				grid-column-gap: 10px;
+				/*
+					Explanation of each unit of grid-template-columns
+					Main content
+					Empty border for spacing
+					Right Column
+				*/
+				${from.desktop} {
+					grid-template-columns: 309px 1px 1fr;
+					grid-template-areas: 'title	border headline';
+				}
+				${until.desktop} {
+					grid-template-columns: 1fr; /* Main content */
+					grid-template-areas:
+						'title'
+						'headline';
+				}
+				${until.tablet} {
+					grid-column-gap: 0px;
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -80,22 +123,24 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 309px 1px 1fr;
+					grid-template-columns: 219px 1px 1fr;
 					grid-template-areas:
 						'lines		border media'
 						'meta		border media'
 						'keyevents	border media'
-						'.			border body'
+						'keyevents	border body'
+						'keyevents	border body'
 						'. 			border .';
 				}
 
 				${from.wide} {
-					grid-template-columns: 309px 1px 1fr 340px;
+					grid-template-columns: 219px 1px 1fr 340px;
 					grid-template-areas:
 						'lines 		border media right-column'
 						'meta  		border media right-column'
 						'keyevents  border media right-column'
-						'.  		border body  right-column'
+						'keyevents  border body  right-column'
+						'keyevents  border body  right-column'
 						'.			border .     right-column';
 				}
 
@@ -130,6 +175,19 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 700px;
+	}
+`;
+
+const sticky = css`
+	${from.desktop} {
+		position: sticky;
+		top: 10px;
+	}
+`;
+
+const keyEventsTopMarginDesktop = css`
+	${from.desktop} {
+		margin-top: ${space[1]}px;
 	}
 `;
 
@@ -307,61 +365,68 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 			<main>
 				<article>
-					<ContainerLayout
+					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={palette.background.header}
 						borderColour={palette.border.headline}
-						sideBorders={true}
-						leftColSize="wide"
-						leftContent={
-							// eslint-disable-next-line react/jsx-wrap-multilines
-							<ArticleTitle
-								format={format}
-								palette={palette}
-								tags={CAPI.tags}
-								sectionLabel={CAPI.sectionLabel}
-								sectionUrl={CAPI.sectionUrl}
-								guardianBaseURL={CAPI.guardianBaseURL}
-								badge={CAPI.badge}
-							/>
-						}
 					>
-						{CAPI.matchUrl && showMatchTabs && (
-							<Placeholder rootId="match-tabs" height={40} />
-						)}
-						<div css={maxWidth}>
-							<ArticleHeadlinePadding design={format.design}>
-								{age && (
-									<div css={ageWarningMargins}>
-										<AgeWarning age={age} />
-									</div>
-								)}
-								<ArticleHeadline
+						<HeadlineGrid>
+							<GridItem area="title">
+								<ArticleTitle
 									format={format}
-									headlineString={CAPI.headline}
-									tags={CAPI.tags}
-									byline={CAPI.author.byline}
 									palette={palette}
+									tags={CAPI.tags}
+									sectionLabel={CAPI.sectionLabel}
+									sectionUrl={CAPI.sectionUrl}
+									guardianBaseURL={CAPI.guardianBaseURL}
+									badge={CAPI.badge}
 								/>
-								{age && (
-									<AgeWarning
-										age={age}
-										isScreenReader={true}
+							</GridItem>
+							<GridItem area="headline">
+								{CAPI.matchUrl && showMatchTabs && (
+									<Placeholder
+										rootId="match-tabs"
+										height={40}
 									/>
 								)}
-							</ArticleHeadlinePadding>
-						</div>
-						{CAPI.starRating || CAPI.starRating === 0 ? (
-							<div css={starWrapper}>
-								<StarRating
-									rating={CAPI.starRating}
-									size="large"
-								/>
-							</div>
-						) : (
-							<></>
-						)}
-					</ContainerLayout>
+								<div css={maxWidth}>
+									<ArticleHeadlinePadding
+										design={format.design}
+									>
+										{age && (
+											<div css={ageWarningMargins}>
+												<AgeWarning age={age} />
+											</div>
+										)}
+										<ArticleHeadline
+											format={format}
+											headlineString={CAPI.headline}
+											tags={CAPI.tags}
+											byline={CAPI.author.byline}
+											palette={palette}
+										/>
+										{age && (
+											<AgeWarning
+												age={age}
+												isScreenReader={true}
+											/>
+										)}
+									</ArticleHeadlinePadding>
+								</div>
+								{CAPI.starRating || CAPI.starRating === 0 ? (
+									<div css={starWrapper}>
+										<StarRating
+											rating={CAPI.starRating}
+											size="large"
+										/>
+									</div>
+								) : (
+									<></>
+								)}
+							</GridItem>
+						</HeadlineGrid>
+					</ElementContainer>
+
 					<ContainerLayout
 						showTopBorder={false}
 						backgroundColour={palette.background.standfirst}
@@ -445,10 +510,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="keyevents">
-								<KeyEventsContainer
-									format={format}
-									keyEvents={CAPI.keyEvents}
-								/>
+								<div css={[sticky, keyEventsTopMarginDesktop]}>
+									<KeyEventsContainer
+										format={format}
+										keyEvents={CAPI.keyEvents}
+									/>
+								</div>
 							</GridItem>
 							<GridItem area="body">
 								<ArticleContainer format={format}>

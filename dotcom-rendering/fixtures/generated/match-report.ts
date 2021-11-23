@@ -503,4 +503,6 @@ export const matchReport: MatchReportType = {
 	comments: '',
 	minByMinUrl:
 		'https://www.theguardian.com/football/live/2021/feb/28/leicester-city-v-arsenal-premier-league-live',
+	reportUrl:
+		'https://www.theguardian.com/football/2021/feb/28/leicester-arsenal-premier-league-match-report',
 };

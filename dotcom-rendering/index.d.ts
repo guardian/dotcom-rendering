@@ -424,7 +424,7 @@ interface CAPIType {
 	 * @TJS-format date-time
 	 */
 	webPublicationDateDeprecated: string;
-
+	webPublicationDate: string;
 	webPublicationDateDisplay: string;
 	webPublicationSecondaryDateDisplay: string;
 	editionLongForm: string;
@@ -638,6 +638,7 @@ type MatchReportType = {
 	venue: string;
 	comments: string;
 	minByMinUrl: string;
+	reportUrl: string;
 };
 
 /**
