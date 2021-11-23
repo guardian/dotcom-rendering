@@ -227,10 +227,6 @@ const ageWarningMargins = css`
 	}
 `;
 
-const yellowBackground = css`
-	background: ${brandAlt[400]};
-`;
-
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
