@@ -61,7 +61,7 @@ const keyEventWrapperStyles = (
 
 	${from.desktop} {
 		border-top: #CDCDCD 1px solid;
-		padding-top: ${remSpace[1]};
+		padding-top: ${remSpace[2]};
 	}
 
 	${darkModeCss(supportsDarkMode)`
