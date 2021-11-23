@@ -19,6 +19,7 @@ type Props = {
 	palette: Palette;
 	format: ArticleFormat;
 	size: ShareIconSize;
+	context?: 'ArticleMeta' | 'default';
 };
 
 const ulStyles = css`
@@ -39,23 +40,17 @@ const topMarginStlyes = css`
 	margin-top: 3px;
 `;
 
-const iconsColor = (palette: Palette, format: ArticleFormat) => css`
-	fill: ${palette.fill.shareIcon};
-	${format.design === ArticleDesign.LiveBlog &&
-	css`
-		${until.desktop} {
-			fill: ${palette.text.standfirst};
-		}
-	`};
+const articleMetaIconColor = (palette: Palette) => css`
+	${until.desktop} {
+		fill: ${palette.text.standfirst};
+	}
 `;
 
 const iconStyles = ({
 	palette,
-	format,
 	size,
 }: {
 	palette: Palette;
-	format: ArticleFormat;
 	size: ShareIconSize;
 }) => css`
 	border: 1px solid ${palette.border.article};
@@ -71,7 +66,7 @@ const iconStyles = ({
 	vertical-align: middle;
 	position: relative;
 	box-sizing: content-box;
-	${iconsColor(palette, format)};
+	fill: ${palette.fill.shareIcon};
 
 	svg {
 		height: 88%;
@@ -105,6 +100,7 @@ export const ShareIcons = ({
 	palette,
 	format,
 	size,
+	context = 'default',
 }: Props) => {
 	return (
 		<ul css={ulStyles}>
@@ -120,7 +116,14 @@ export const ShareIcons = ({
 						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, format, size })}>
+						<span
+							css={[
+								iconStyles({ palette, size }),
+								format.design === ArticleDesign.LiveBlog &&
+									context === 'ArticleMeta' &&
+									articleMetaIconColor(palette),
+							]}
+						>
 							<FacebookIcon />
 						</span>
 					</a>
@@ -139,7 +142,14 @@ export const ShareIcons = ({
 						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, format, size })}>
+						<span
+							css={[
+								iconStyles({ palette, size }),
+								format.design === ArticleDesign.LiveBlog &&
+									context === 'ArticleMeta' &&
+									articleMetaIconColor(palette),
+							]}
+						>
 							<TwitterIconPadded />
 						</span>
 					</a>
@@ -157,7 +167,14 @@ export const ShareIcons = ({
 						target="_blank"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, format, size })}>
+						<span
+							css={[
+								iconStyles({ palette, size }),
+								format.design === ArticleDesign.LiveBlog &&
+									context === 'ArticleMeta' &&
+									articleMetaIconColor(palette),
+							]}
+						>
 							<EmailIcon />
 						</span>
 					</a>
@@ -176,7 +193,14 @@ export const ShareIcons = ({
 						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, format, size })}>
+						<span
+							css={[
+								iconStyles({ palette, size }),
+								format.design === ArticleDesign.LiveBlog &&
+									context === 'ArticleMeta' &&
+									articleMetaIconColor(palette),
+							]}
+						>
 							<LinkedInIcon />
 						</span>
 					</a>
@@ -196,7 +220,14 @@ export const ShareIcons = ({
 							rel="noreferrer"
 							data-ignore="global-link-styling"
 						>
-							<span css={iconStyles({ palette, format, size })}>
+							<span
+								css={[
+									iconStyles({ palette, size }),
+									format.design === ArticleDesign.LiveBlog &&
+										context === 'ArticleMeta' &&
+										articleMetaIconColor(palette),
+								]}
+							>
 								<WhatsAppIcon />
 							</span>
 						</a>
@@ -217,7 +248,14 @@ export const ShareIcons = ({
 							rel="noreferrer"
 							data-ignore="global-link-styling"
 						>
-							<span css={iconStyles({ palette, format, size })}>
+							<span
+								css={[
+									iconStyles({ palette, size }),
+									format.design === ArticleDesign.LiveBlog &&
+										context === 'ArticleMeta' &&
+										articleMetaIconColor(palette),
+								]}
+							>
 								<MessengerIcon />
 							</span>
 						</a>

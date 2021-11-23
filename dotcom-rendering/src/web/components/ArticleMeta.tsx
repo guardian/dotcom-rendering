@@ -350,6 +350,7 @@ export const ArticleMeta = ({
 							format={format}
 							displayIcons={['facebook', 'twitter', 'email']}
 							size="medium"
+							context="ArticleMeta"
 						/>
 					</div>
 					<div css={metaNumbers(palette)}>
