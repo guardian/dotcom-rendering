@@ -458,7 +458,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="lines">
 								<Hide from="desktop">
-									<div css={css(maxWidth)}>
+									<div css={maxWidth}>
 										<div css={stretchLines}>
 											<Lines
 												count={decideLineCount(
@@ -476,7 +476,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="meta">
 								<Hide from="desktop">
-									<div css={css(maxWidth)}>
+									<div css={maxWidth}>
 										<ArticleMeta
 											branding={branding}
 											format={format}
@@ -534,7 +534,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="lines">
 								<Hide until="desktop">
-									<div css={css(maxWidth)}>
+									<div css={maxWidth}>
 										<div css={stretchLines}>
 											<Lines
 												count={decideLineCount(
@@ -551,7 +551,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="meta" element="aside">
 								<Hide until="desktop">
-									<div css={css(maxWidth)}>
+									<div css={maxWidth}>
 										<ArticleMeta
 											branding={branding}
 											format={format}
