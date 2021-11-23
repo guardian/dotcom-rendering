@@ -107,7 +107,15 @@ export const ImmersiveHeader = ({
 		config: { host },
 	} = CAPI;
 
-	const adTargeting: AdTargeting = buildAdTargeting(CAPI);
+	const adTargeting: AdTargeting = buildAdTargeting({
+		isAdFreeUser: CAPI.isAdFreeUser,
+		isSensitive: CAPI.config.isSensitive,
+		videoDuration: CAPI.config.videoDuration,
+		edition: CAPI.config.edition,
+		section: CAPI.config.section,
+		sharedAdTargeting: CAPI.config.sharedAdTargeting,
+		adUnit: CAPI.config.adUnit,
+	});
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
