@@ -119,36 +119,35 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					Explanation of each unit of grid-template-columns
 
 					Main content
-					Empty border for spacing
 					Right Column
 				*/
 				// from desktop define fixed body width
 				${from.desktop} {
-					grid-column-gap: 10px;
+					grid-column-gap: 20px;
 
-					grid-template-columns: 219px 1px 700px;
+					grid-template-columns: 220px 700px;
 					grid-template-areas:
-						'lines		border media'
-						'meta		border media'
-						'keyevents	border media'
-						'.			border body'
-						'. 			border .';
+						'lines		media'
+						'meta		media'
+						'keyevents	media'
+						'.			body'
+						'. 			.';
 				}
 
 				// from wide define fixed body width
 				${from.wide} {
-					grid-column-gap: 10px;
+					grid-column-gap: 20px;
 
-					grid-template-columns: 219px 1px 700px 1fr;
+					grid-template-columns: 220px 700px 1fr;
 					grid-template-areas:
-						'lines 		border media right-column'
-						'meta  		border media right-column'
-						'keyevents  border media right-column'
-						'.  		border body  right-column'
-						'.			border .     right-column';
+						'lines 		media right-column'
+						'meta  		media right-column'
+						'keyevents  media right-column'
+						'.  		body  right-column'
+						'.			.     right-column';
 				}
 
-				// until desktop we define fixed body width
+				// until desktop define fixed body width
 				${until.desktop} {
 					grid-template-columns: 700px; /* Main content */
 					grid-template-areas:
@@ -463,9 +462,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									/>
 								</div>
 							</GridItem>
-							<GridItem area="border">
-								<></>
-							</GridItem>
 							<GridItem area="lines">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
@@ -590,10 +586,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											margin-right: -20px;
 										}
 										${from.leftCol} {
-											/* above 1140 we need 20px between
-											body and ad slot, grid column gap
-											is only 10px */
-											margin-left: 10px;
+											/* above 1140 */
+											margin-left: 0px;
 											margin-right: 0px;
 										}
 									`}
