@@ -61,7 +61,8 @@ const keyEventWrapperStyles = (
 	width: 100%;
 
 	${from.desktop} {
-		width: 13.75rem;
+		border-top: #CDCDCD 1px solid;
+		padding-top: ${remSpace[1]};
 	}
 
 	${darkModeCss(supportsDarkMode)`
@@ -132,6 +133,7 @@ const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 
 	${from.desktop} {
 		margin: ${remSpace[1]} 0 0;
+		width: 13.75rem;
 	}
 
 	li::before {
