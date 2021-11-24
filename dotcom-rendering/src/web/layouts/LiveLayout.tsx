@@ -113,37 +113,45 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				width: 100%;
 				margin-left: 0;
 
-				grid-column-gap: 10px;
+				grid-column-gap: 0px;
 
 				/*
 					Explanation of each unit of grid-template-columns
 
 					Main content
-					Empty border for spacing
 					Right Column
 				*/
+				/* from desktop define fixed body width */
 				${from.desktop} {
-					grid-template-columns: 309px 1px 1fr;
+					grid-column-gap: 20px;
+
+					grid-template-columns: 220px 700px;
 					grid-template-areas:
-						'lines		border media'
-						'meta		border media'
-						'keyevents	border media'
-						'.			border body'
-						'. 			border .';
+						'lines		media'
+						'meta		media'
+						'keyevents	media'
+						'keyevents	body'
+						'keyevents	body'
+						'. 			.';
 				}
 
+				/* from wide define fixed body width */
 				${from.wide} {
-					grid-template-columns: 309px 1px 1fr 340px;
+					grid-column-gap: 20px;
+
+					grid-template-columns: 220px 700px 1fr;
 					grid-template-areas:
-						'lines 		border media right-column'
-						'meta  		border media right-column'
-						'keyevents  border media right-column'
-						'.  		border body  right-column'
-						'.			border .     right-column';
+						'lines 		media right-column'
+						'meta  		media right-column'
+						'keyevents  media right-column'
+						'keyevents  body  right-column'
+						'keyevents  body  right-column'
+						'.			.     right-column';
 				}
 
+				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 700px; /* Main content */
 					grid-template-areas:
 						'media'
 						'lines'
@@ -152,9 +160,8 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'body';
 				}
 
+				/* fluid until tablet */
 				${until.tablet} {
-					grid-column-gap: 0px;
-
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
 						'media'
@@ -173,6 +180,19 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 const maxWidth = css`
 	${from.desktop} {
 		max-width: 700px;
+	}
+`;
+
+const sticky = css`
+	${from.desktop} {
+		position: sticky;
+		top: 10px;
+	}
+`;
+
+const keyEventsTopMarginDesktop = css`
+	${from.desktop} {
+		margin-top: ${space[1]}px;
 	}
 `;
 
@@ -457,9 +477,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									/>
 								</div>
 							</GridItem>
-							<GridItem area="border">
-								<></>
-							</GridItem>
 							<GridItem area="lines">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
@@ -495,10 +512,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="keyevents">
-								<KeyEventsContainer
-									format={format}
-									keyEvents={CAPI.keyEvents}
-								/>
+								<div css={[sticky, keyEventsTopMarginDesktop]}>
+									<KeyEventsContainer
+										format={format}
+										keyEvents={CAPI.keyEvents}
+									/>
+								</div>
 							</GridItem>
 							<GridItem area="body">
 								<ArticleContainer format={format}>
@@ -577,7 +596,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<GridItem area="right-column">
 								<div
 									css={css`
-										padding-top: 6px;
 										height: 100%;
 										${from.desktop} {
 											/* above 980 */
