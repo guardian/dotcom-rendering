@@ -62,22 +62,21 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 				margin-left: 0px;
 			}
 			${from.desktop} {
-				margin-left: 320px;
+				margin-left: 240px;
 			}
 			@supports (display: grid) {
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-				grid-column-gap: 10px;
+				grid-column-gap: 20px;
 				/*
 					Explanation of each unit of grid-template-columns
 					Main content
-					Empty border for spacing
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 309px 1px 1fr;
-					grid-template-areas: 'title	border headline';
+					grid-template-columns: 220px 1fr;
+					grid-template-areas: 'title	headline';
 				}
 				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
