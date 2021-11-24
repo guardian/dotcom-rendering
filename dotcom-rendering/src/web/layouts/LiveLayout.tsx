@@ -607,6 +607,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											margin-left: 0px;
 											margin-right: 0px;
 										}
+										${from.wide} {
+											display: block;
+										}
 									`}
 								>
 									<RightColumn>
