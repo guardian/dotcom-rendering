@@ -163,7 +163,7 @@ const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 			<Accordion
 				supportsDarkMode={supportsDarkMode}
 				accordionTitle="Key events"
-				backgroundBody="white"
+				context="keyEvents"
 			>
 				<ul css={listStyles(supportsDarkMode)}>
 					{keyEvents.slice(0, 7).map((event, index) => (

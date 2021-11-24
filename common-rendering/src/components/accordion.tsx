@@ -16,7 +16,7 @@ interface AccordionProps {
 	children: React.ReactNode;
 	supportsDarkMode: boolean;
 	accordionTitle: string;
-	backgroundBody: 'white' | 'grey';
+	context: 'keyEvents' | 'liveFeed';
 }
 
 const detailsStyles: SerializedStyles = css`
@@ -70,10 +70,10 @@ const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
 `;
 
 const backgroundColour = (
-	backgroundBody: 'white' | 'grey',
+	context: 'keyEvents' | 'liveFeed',
 	supportsDarkMode: boolean,
 ): SerializedStyles => {
-	if(backgroundBody === 'white') {
+	if(context === 'keyEvents') {
 		return css`
 			background-color: ${background.primary};
 			${from.desktop} {
@@ -110,7 +110,7 @@ const Accordion = ({
 	children,
 	supportsDarkMode,
 	accordionTitle,
-	backgroundBody,
+	context,
 }: AccordionProps) => {
 	return (
 		<details open css={detailsStyles}>

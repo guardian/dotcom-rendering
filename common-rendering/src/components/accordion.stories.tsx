@@ -64,7 +64,7 @@ const Default: FC = () => (
 	<Accordion
 		supportsDarkMode={false}
 		accordionTitle="Live feed"
-		backgroundBody="white"
+		context="keyEvents"
 	>
 		{accordionContent(false)}
 	</Accordion>
@@ -74,7 +74,7 @@ const Dark: FC = () => (
 	<Accordion
 		supportsDarkMode={true}
 		accordionTitle="Live feed"
-		backgroundBody="white"
+		context="keyEvents"
 	>
 		{accordionContent(true)}
 	</Accordion>
