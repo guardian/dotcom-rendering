@@ -123,7 +123,9 @@ const Accordion = ({
 					<SvgChevronUpSingle />
 				</span>
 			</summary>
-			<div css={[backgroundColour(backgroundBody, supportsDarkMode), paddingBody]}>{children}</div>
+			<div css={[backgroundColour(context, supportsDarkMode), paddingBody]}>
+				{children}
+			</div>
 		</details>
 	);
 };
