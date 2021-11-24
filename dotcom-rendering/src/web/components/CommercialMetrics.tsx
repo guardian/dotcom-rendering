@@ -26,7 +26,7 @@ export const CommercialMetrics: React.FC<{
 		const testsToForceMetrics: ABTest[] = [
 			prebidTimeout,
 			integrateCriteo,
-			integrateSmart
+			integrateSmart,
 		];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
