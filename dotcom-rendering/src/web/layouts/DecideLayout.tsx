@@ -13,6 +13,7 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
+import { InteractiveImmersiveLayout } from './InteractiveImmersiveLayout';
 
 type Props = {
 	CAPI: CAPIType;
@@ -35,15 +36,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		case ArticleDisplay.Immersive: {
 			switch (design) {
 				case ArticleDesign.Interactive: {
-					// Render all 'immersive interactives' until switchover date as 'FullPageInteractive'
-					// TBD: After 'immersive interactive' changes to CAPI are merged, add logic here to either use
-					// 'InteractiveImmersiveLayout' if published after switchover date, or 'FullPageInteractiveLayout'
-					// if published before.
+					// CAPI changes have gone through, so now format Immersive (display) + Interactive (design)
+					// points to InteractiveImmersiveLayout which is the "new" layout. Articles that use the
+					// "old" layout are now formatted as Standard (display) + FullPage (design), as at line 108.
 					return (
-						<FullPageInteractiveLayout
+						<InteractiveImmersiveLayout
 							CAPI={CAPI}
 							NAV={NAV}
 							format={format}
+							palette={palette}
 						/>
 					);
 				}
