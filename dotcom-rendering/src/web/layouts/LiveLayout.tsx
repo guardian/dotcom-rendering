@@ -600,11 +600,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											/* above 980 */
 											margin-left: 20px;
 											margin-right: -20px;
+											display: none;
 										}
 										${from.leftCol} {
 											/* above 1140 */
 											margin-left: 0px;
 											margin-right: 0px;
+										}
+										${from.wide} {
+											display: block;
 										}
 									`}
 								>
