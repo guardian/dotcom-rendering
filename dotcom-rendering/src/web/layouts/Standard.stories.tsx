@@ -187,7 +187,12 @@ LiveStory.story = {
 	name: 'LiveBlog',
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.tablet, breakpoints.wide],
+			viewports: [
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
 		},
 	},
 };
@@ -207,7 +212,12 @@ DeadStory.story = {
 	name: 'DeadBlog',
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.tablet, breakpoints.wide],
+			viewports: [
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
 		},
 	},
 };
