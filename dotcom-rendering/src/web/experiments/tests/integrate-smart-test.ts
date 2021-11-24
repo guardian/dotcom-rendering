@@ -1,0 +1,20 @@
+import type { ABTest } from '@guardian/ab-core';
+
+export const integrateSmart: ABTest = {
+	id: 'IntegrateSmart',
+	author: 'Fred OBrien (@frederickobrien)',
+	start: '2021-11-23',
+	expiry: '2022-01-10',
+	audience: 2 / 100,
+	audienceOffset: 98 / 100,
+	audienceCriteria: 'All users',
+	description:
+		'Integrate new Prebid bidder and measure revenue uplift / impact of commercial performance metrics',
+	successMeasure:
+		'Revenue uplift with no significant impact on performance metrics',
+	variants: [
+		{ id: 'control', test: (): void => {} },
+		{ id: 'variant', test: (): void => {} },
+	],
+	canRun: () => true,
+};
