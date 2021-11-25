@@ -7,12 +7,12 @@ const leftWidth = (size: LeftColSize) => {
 		case 'wide': {
 			return css`
 				padding-right: 10px;
-				${until.desktop} {
+				${until.leftCol} {
 					/* below 980 */
 					display: none;
 				}
 
-				${from.desktop} {
+				${from.leftCol} {
 					/* above 980 */
 					flex-basis: 230px;
 					flex-grow: 0;
