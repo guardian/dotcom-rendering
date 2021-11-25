@@ -230,6 +230,7 @@ export const SubMeta = ({
 						pageId={pageId}
 						webTitle={webTitle}
 						palette={palette}
+						format={format}
 						displayIcons={[
 							'facebook',
 							'twitter',
@@ -239,6 +240,7 @@ export const SubMeta = ({
 							'messenger',
 						]}
 						size="medium"
+						context="SubMeta"
 					/>
 					<div css={syndicationButtonOverrides(palette)}>
 						{format.design === ArticleDesign.Interactive ? null : (
