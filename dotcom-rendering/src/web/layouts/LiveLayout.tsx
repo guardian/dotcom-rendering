@@ -62,22 +62,21 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 				margin-left: 0px;
 			}
 			${from.desktop} {
-				margin-left: 320px;
+				margin-left: 240px;
 			}
 			@supports (display: grid) {
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-				grid-column-gap: 10px;
+				grid-column-gap: 20px;
 				/*
 					Explanation of each unit of grid-template-columns
 					Main content
-					Empty border for spacing
 					Right Column
 				*/
 				${from.desktop} {
-					grid-template-columns: 309px 1px 1fr;
-					grid-template-areas: 'title	border headline';
+					grid-template-columns: 220px 1fr;
+					grid-template-areas: 'title	headline';
 				}
 				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
@@ -149,35 +148,39 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-				grid-column-gap: 10px;
+				grid-column-gap: 0px;
 				/*
 					Explanation of each unit of grid-template-columns
 					Main content
-					Empty border for spacing
 					Right Column
 				*/
+				/* from desktop define fixed body width */
 				${from.desktop} {
-					grid-template-columns: 219px 1px 1fr;
+					grid-column-gap: 20px;
+					grid-template-columns: 220px 700px;
 					grid-template-areas:
-						'lines		border media'
-						'meta		border media'
-						'keyevents	border media'
-						'keyevents	border body'
-						'keyevents	border body'
-						'. 			border .';
+						'lines		media'
+						'meta		media'
+						'keyevents	media'
+						'keyevents	body'
+						'keyevents	body'
+						'. 			.';
 				}
+				/* from wide define fixed body width */
 				${from.wide} {
-					grid-template-columns: 219px 1px 1fr 340px;
+					grid-column-gap: 20px;
+					grid-template-columns: 220px 700px 1fr;
 					grid-template-areas:
-						'lines 		border media right-column'
-						'meta  		border media right-column'
-						'keyevents  border media right-column'
-						'keyevents  border body  right-column'
-						'keyevents  border body  right-column'
-						'.			border .     right-column';
+						'lines 		media right-column'
+						'meta  		media right-column'
+						'keyevents  media right-column'
+						'keyevents  body  right-column'
+						'keyevents  body  right-column'
+						'.			.     right-column';
 				}
+				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 700px; /* Main content */
 					grid-template-areas:
 						'media'
 						'lines'
@@ -185,8 +188,8 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'keyevents'
 						'body';
 				}
+				/* fluid until tablet */
 				${until.tablet} {
-					grid-column-gap: 0px;
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
 						'media'
@@ -544,9 +547,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									/>
 								</div>
 							</GridItem>
-							<GridItem area="border">
-								<></>
-							</GridItem>
 							<GridItem area="lines">
 								<Hide until="desktop">
 									<div css={maxWidth}>
@@ -670,17 +670,20 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<GridItem area="right-column">
 								<div
 									css={css`
-										padding-top: 6px;
 										height: 100%;
 										${from.desktop} {
 											/* above 980 */
 											margin-left: 20px;
 											margin-right: -20px;
+											display: none;
 										}
 										${from.leftCol} {
 											/* above 1140 */
 											margin-left: 0px;
 											margin-right: 0px;
+										}
+										${from.wide} {
+											display: block;
 										}
 									`}
 								>

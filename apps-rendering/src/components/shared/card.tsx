@@ -443,10 +443,13 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
 	const img = cardImage(image, relatedItem);
 	const { type, title, mediaDuration, link, byline } = relatedItem;
 
-	const lastModified = relatedItem.lastModified?.iso8601;
+	const webPublicationDate = relatedItem.webPublicationDate?.iso8601;
 	const date =
-		lastModified && type !== RelatedItemType.ADVERTISEMENT_FEATURE
-			? relativeFirstPublished(fromNullable(new Date(lastModified)), type)
+		webPublicationDate && type !== RelatedItemType.ADVERTISEMENT_FEATURE
+			? relativeFirstPublished(
+					fromNullable(new Date(webPublicationDate)),
+					type,
+			  )
 			: null;
 	const starRating =
 		relatedItem.starRating &&
