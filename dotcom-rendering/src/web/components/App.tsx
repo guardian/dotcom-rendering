@@ -1351,14 +1351,20 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				<StickyBottomBanner
 					isSignedIn={isSignedIn}
 					asyncCountryCode={asyncCountryCode}
-					CAPI={CAPI}
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
+					section={CAPI.config.section}
 					tags={CAPI.tags}
 					isPaidContent={CAPI.pageType.isPaidContent}
 					isPreview={!!CAPI.isPreview}
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isMinuteArticle={CAPI.pageType.isMinuteArticle}
+					isSensitive={CAPI.config.isSensitive}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					idApiUrl={CAPI.config.idApiUrl}
+					switches={CAPI.config.switches}
 				/>
 			</Portal>
 		</React.StrictMode>
