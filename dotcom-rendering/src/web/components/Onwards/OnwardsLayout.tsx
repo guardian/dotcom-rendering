@@ -5,7 +5,7 @@ import { Hide } from '@frontend/web/components/Hide';
 import { useComments } from '@root/src/web/lib/useComments';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDisplay } from '@guardian/libs';
 import { ContainerTitle } from '../ContainerTitle';
 import { OnwardsContainer } from './OnwardsContainer';
 import { MoreThanFive } from './MoreThanFive';
@@ -31,10 +31,7 @@ const decideLayout = (trails: TrailType[]) => {
 	}
 };
 
-export const OnwardsLayout: React.FC<OnwardsType> = (
-	data: OnwardsType,
-	format: ArticleFormat,
-) => {
+export const OnwardsLayout: React.FC<OnwardsType> = (data: OnwardsType) => {
 	const sections = useComments([data]);
 
 	/**
@@ -72,15 +69,7 @@ export const OnwardsLayout: React.FC<OnwardsType> = (
 		<>
 			{sectionsForcedToStandard.map((section, index) => (
 				<Flex key={`${section.heading}-${index}`}>
-					<LeftColumn
-						borderType="partial"
-						size={
-							format.design === ArticleDesign.LiveBlog ||
-							format.design === ArticleDesign.DeadBlog
-								? 'wide'
-								: 'compact'
-						}
-					>
+					<LeftColumn borderType="partial">
 						<ContainerTitle
 							title={section.heading}
 							description={section.description}

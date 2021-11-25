@@ -560,7 +560,7 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 type ShareIconSize = 'small' | 'medium';
 
-type LeftColSize = 'compact' | 'wide' | 'wide-onwards';
+type LeftColSize = 'compact' | 'wide';
 
 type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
 

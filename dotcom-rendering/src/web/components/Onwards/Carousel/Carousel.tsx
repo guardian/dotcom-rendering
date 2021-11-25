@@ -592,12 +592,12 @@ export const Carousel: React.FC<OnwardsType> = ({
 		>
 			<LeftColumn
 				borderType="partial"
-				size={
-					format.design === ArticleDesign.LiveBlog ||
-					format.design === ArticleDesign.DeadBlog
-						? 'wide'
-						: 'compact'
-				}
+				// size={
+				// 	format.design === ArticleDesign.LiveBlog ||
+				// 	format.design === ArticleDesign.DeadBlog
+				// 		? 'wide'
+				// 		: 'compact'
+				// }
 			>
 				<HeaderAndNav
 					heading={heading}

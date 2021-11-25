@@ -11,7 +11,6 @@ import { Lazy } from '@root/src/web/components/Lazy';
 
 import { useAB } from '@guardian/ab-react';
 import { abTestTest } from '@frontend/web/experiments/tests/ab-test-test';
-import { ArticleDesign } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { Hide } from '../../Hide';
 import { LeftColumn } from '../../LeftColumn';
@@ -113,14 +112,7 @@ export const MostViewedFooter = ({ sectionName, format, ajaxUrl }: Props) => {
 				data-cy-ab-user-in-variant={abTestCypressDataAttr}
 				data-cy-ab-runnable-test={variantFromRunnable}
 			>
-				<LeftColumn
-					size={
-						format.design === ArticleDesign.LiveBlog ||
-						format.design === ArticleDesign.DeadBlog
-							? 'wide-onwards'
-							: 'compact'
-					}
-				>
+				<LeftColumn>
 					<h2 css={headingStyles}>Most popular</h2>
 				</LeftColumn>
 				{/* We need to respect the side ad slot above desktop. The
