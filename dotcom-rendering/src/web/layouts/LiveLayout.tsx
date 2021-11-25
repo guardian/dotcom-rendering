@@ -53,7 +53,6 @@ import { space } from '@guardian/src-foundations';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Placeholder } from '../components/Placeholder';
 
-
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -485,9 +484,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<GridItem area="lines">
 								<div css={[maxWidth, sidePaddingDesktop]}>
 									<Lines
-										count={decideLineCount(
-											format.design,
-										)}
+										count={decideLineCount(format.design)}
 										effect={decideLineEffect(
 											format.design,
 											format.theme,
@@ -496,11 +493,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="meta" element="aside">
-								<div css={[
-									maxWidth,
-									sidePaddingDesktop,
-									sidePaddingMobile,
-								]}>
+								<div
+									css={[
+										maxWidth,
+										sidePaddingDesktop,
+										sidePaddingMobile,
+									]}
+								>
 									<ArticleMeta
 										branding={branding}
 										format={format}
@@ -519,11 +518,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="keyevents">
-								<div css={[
-									sticky,
-									keyEventsMargin,
-									sidePaddingDesktop,
-								]}>
+								<div
+									css={[
+										sticky,
+										keyEventsMargin,
+										sidePaddingDesktop,
+									]}
+								>
 									<KeyEventsContainer
 										format={format}
 										keyEvents={CAPI.keyEvents}
@@ -536,26 +537,41 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										supportsDarkMode={false}
 										accordionTitle="Live feed"
 										context="liveFeed"
-								>
+									>
 										<ArticleContainer format={format}>
 											{CAPI.pagination &&
-										CAPI.pagination.currentPage !== 1 && (
-											<Pagination
-												currentPage={
-													CAPI.pagination
-														?.currentPage || 1
-												}
-												totalPages={
-													CAPI.pagination
-														?.totalPages || 1
-												}
-												newest={CAPI.pagination?.newest}
-												oldest={CAPI.pagination?.oldest}
-												newer={CAPI.pagination?.newer}
-												older={CAPI.pagination?.older}
-												format={format}
-											/>
-										)}
+												CAPI.pagination.currentPage !==
+													1 && (
+													<Pagination
+														currentPage={
+															CAPI.pagination
+																?.currentPage ||
+															1
+														}
+														totalPages={
+															CAPI.pagination
+																?.totalPages ||
+															1
+														}
+														newest={
+															CAPI.pagination
+																?.newest
+														}
+														oldest={
+															CAPI.pagination
+																?.oldest
+														}
+														newer={
+															CAPI.pagination
+																?.newer
+														}
+														older={
+															CAPI.pagination
+																?.older
+														}
+														format={format}
+													/>
+												)}
 											<ArticleBody
 												format={format}
 												palette={palette}
@@ -564,50 +580,65 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												host={host}
 												pageId={CAPI.pageId}
 												webTitle={CAPI.webTitle}
-									/>
-											{CAPI.pagination &&
-										CAPI.pagination.totalPages > 1 && (
-											<Pagination
-												currentPage={
-													CAPI.pagination
-														?.currentPage || 1
-												}
-												totalPages={
-													CAPI.pagination
-														?.totalPages || 1
-												}
-												newest={CAPI.pagination?.newest}
-												oldest={CAPI.pagination?.oldest}
-												newer={CAPI.pagination?.newer}
-												older={CAPI.pagination?.older}
-												format={format}
 											/>
-										)}
+											{CAPI.pagination &&
+												CAPI.pagination.totalPages >
+													1 && (
+													<Pagination
+														currentPage={
+															CAPI.pagination
+																?.currentPage ||
+															1
+														}
+														totalPages={
+															CAPI.pagination
+																?.totalPages ||
+															1
+														}
+														newest={
+															CAPI.pagination
+																?.newest
+														}
+														oldest={
+															CAPI.pagination
+																?.oldest
+														}
+														newer={
+															CAPI.pagination
+																?.newer
+														}
+														older={
+															CAPI.pagination
+																?.older
+														}
+														format={format}
+													/>
+												)}
 											{showBodyEndSlot && (
-											<div id="slot-body-end" />
-									)}
+												<div id="slot-body-end" />
+											)}
 											<Lines
 												data-print-layout="hide"
 												count={4}
 												effect="straight"
-									/>
+											/>
 											<SubMeta
 												palette={palette}
 												format={format}
 												subMetaKeywordLinks={
-											CAPI.subMetaKeywordLinks
-										}
+													CAPI.subMetaKeywordLinks
+												}
 												subMetaSectionLinks={
-											CAPI.subMetaSectionLinks
-										}
+													CAPI.subMetaSectionLinks
+												}
 												pageId={CAPI.pageId}
 												webUrl={CAPI.webURL}
 												webTitle={CAPI.webTitle}
 												showBottomSocialButtons={
-											CAPI.showBottomSocialButtons
-										}
+													CAPI.showBottomSocialButtons
+												}
 												badge={CAPI.badge}
-									/>
+											/>
 										</ArticleContainer>
 									</Accordion>
 								</div>
