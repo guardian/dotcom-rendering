@@ -436,7 +436,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						backgroundColour={palette.background.standfirst}
 						borderColour={palette.border.standfirst}
 						sideBorders={true}
-						leftColSize="wide"
+						leftColSize="standard"
 						verticalMargins={false}
 						format={format}
 					>

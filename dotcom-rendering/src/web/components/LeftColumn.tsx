@@ -8,11 +8,27 @@ const leftWidth = (size: LeftColSize) => {
 			return css`
 				padding-right: 10px;
 				${until.leftCol} {
-					/* below 980 */
+					/* below 1140 */
 					display: none;
 				}
 
 				${from.leftCol} {
+					/* above 1140 */
+					flex-basis: 230px;
+					flex-grow: 0;
+					flex-shrink: 0;
+				}
+			`;
+		}
+		case 'standard': {
+			return css`
+				padding-right: 10px;
+				${until.desktop} {
+					/* below 980 */
+					display: none;
+				}
+
+				${from.desktop} {
 					/* above 980 */
 					flex-basis: 230px;
 					flex-grow: 0;
