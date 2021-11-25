@@ -11,13 +11,6 @@ const secondPage =
 	'https://www.theguardian.com/environment/2020/nov/19/blue-whale-sightings-off-south-georgia-raise-hopes-of-recovery';
 
 describe('Consent tests', function () {
-	const waitForAnalyticsToInit = () => {
-		// Waiting is sad but we need to ensure the init script has executed which occurs
-		// after the pageLoadEvent has fired
-		// eslint-disable-next-line cypress/no-unnecessary-waiting
-		cy.wait(300);
-	};
-
 	beforeEach(function () {
 		setLocalBaseUrl();
 		storage.local.set('gu.geo.override', 'GB');
@@ -25,7 +18,6 @@ describe('Consent tests', function () {
 
 	it('should make calls to Google Analytics after the reader consents', function () {
 		cy.visit(`Article?url=${firstPage}`);
-		waitForAnalyticsToInit();
 		cy.window().its('ga').should('not.exist');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
@@ -49,7 +41,6 @@ describe('Consent tests', function () {
 			}
 		});
 		cy.visit(`Article?url=${firstPage}`);
-		waitForAnalyticsToInit();
 		cy.window().its('ga').should('not.exist');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
@@ -60,25 +51,7 @@ describe('Consent tests', function () {
 		// Make a second page load now that we have the CMP cookies set to reject tracking and check
 		// to see if the ga property was set by Google on the window object
 		cy.visit(`Article?url=${secondPage}`);
-		waitForAnalyticsToInit();
 		// We force window.ga to be null on consent rejection to prevent subsequent requests
-		cy.window().its('ga').should('equal', null);
-	});
-
-	it('should add GA tracking scripts onto the window object after the reader accepts consent', function () {
-		cy.visit(`Article?url=${firstPage}`);
-		waitForAnalyticsToInit();
-		cy.window().its('ga').should('not.exist');
-		// Open the Privacy setting dialogue
-		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
-		// Reject tracking cookies
-		privacySettingsIframe().contains('Privacy settings');
-		privacySettingsIframe().find("[title='Accept all']").click();
-		// Make a second page load now that we have the CMP cookies set to reject tracking and check
-		// to see if the ga property was set by Google on the window object
-		cy.visit(`Article?url=${secondPage}`);
-		waitForAnalyticsToInit();
-		cy.window().its('ga').should('exist');
+		cy.window().its('ga', { timeout: 30000 }).should('equal', null);
 	});
 });

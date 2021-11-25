@@ -1,8 +1,6 @@
-const { siteName } = require('../frontend/config');
-
 module.exports = () => ({
 	entry: {
-		[`${siteName}.server`]: './src/app/server.ts',
+		'frontend.server': './src/app/server.ts',
 	},
 	output: {
 		filename: `[name].js`,

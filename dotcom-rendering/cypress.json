@@ -1,9 +1,9 @@
 {
     "viewportWidth": 1500,
     "viewportHeight": 860,
-    "baseUrl": "http://localhost:3030/",
+    "baseUrl": "http://localhost:9000/",
     "video": false,
     "chromeWebSecurity": false,
     "blockHosts": "*ophan.theguardian.com",
-    "retries": 2
+    "retries": 5
 }

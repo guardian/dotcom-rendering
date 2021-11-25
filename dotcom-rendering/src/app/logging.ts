@@ -8,7 +8,7 @@ import {
 } from 'log4js';
 
 const logLocation =
-	process.env.NODE_ENV === 'production'
+	process.env.NODE_ENV === 'production' && !process.env.CI
 		? '/var/log/dotcom-rendering/dotcom-rendering.log'
 		: `${path.resolve('logs')}/dotcom-rendering.log`;
 
