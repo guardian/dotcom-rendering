@@ -104,13 +104,13 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 				margin-left: 0px;
 			}
 			${from.desktop} {
-				margin-left: 320px;
+				margin-left: 240px;
 			}
 			@supports (display: grid) {
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-				grid-column-gap: 10px;
+				grid-column-gap: 20px;
 				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
@@ -119,8 +119,8 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 						'meta';
 				}
 				${from.desktop} {
-					grid-template-columns: 309px 1px 1fr;
-					grid-template-areas: 'lastupdated	border	standfirst';
+					grid-template-columns: 220px 1fr;
+					grid-template-areas: 'lastupdated standfirst';
 				}
 				${until.tablet} {
 					grid-column-gap: 0px;
@@ -469,9 +469,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 							</GridItem>
 							<GridItem area="lastupdated">
-								<></>
-							</GridItem>
-							<GridItem area="border">
 								<></>
 							</GridItem>
 							<GridItem area="lines">
