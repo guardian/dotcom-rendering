@@ -28,13 +28,10 @@ export const Medium = () => {
 				'twitter',
 				'whatsApp',
 			]}
-			palette={decidePalette({
-				theme: ArticlePillar.News,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			})}
+			palette={decidePalette(defaultFormat)}
 			format={defaultFormat}
 			size="medium"
+			context="LiveBlock"
 		/>
 	);
 };
@@ -53,13 +50,10 @@ export const Small = () => {
 				'twitter',
 				'whatsApp',
 			]}
-			palette={decidePalette({
-				theme: ArticlePillar.News,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			})}
+			palette={decidePalette(defaultFormat)}
 			format={defaultFormat}
 			size="small"
+			context="LiveBlock"
 		/>
 	);
 };

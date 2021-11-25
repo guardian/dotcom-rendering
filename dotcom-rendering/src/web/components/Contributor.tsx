@@ -34,25 +34,32 @@ const twitterHandleStyles = (palette: Palette) => css`
 
 // for liveblog smaller breakpoints article meta is located in the same
 // container as standfirst and needs the same styling as standfirst
-const bylineColorStyles = (palette: Palette, format: ArticleFormat) => css`
-	color: ${palette.text.byline};
-	${format.design === ArticleDesign.LiveBlog &&
-	css`
-		${until.desktop} {
-			color: ${palette.text.standfirst};
+const bylineColorStyles = (palette: Palette, format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog: {
+			return css`
+				color: ${palette.text.byline};
+				${until.desktop} {
+					color: ${palette.text.standfirst};
+				}
+				a {
+					color: ${palette.text.byline};
+					${until.desktop} {
+						color: ${palette.text.standfirst};
+					}
+				}
+			`;
 		}
-	`};
-
-	a {
-		color: ${palette.text.byline};
-		${format.design === ArticleDesign.LiveBlog &&
-		css`
-			${until.desktop} {
-				color: ${palette.text.standfirst};
-			}
-		`};
+		default: {
+			return css`
+				color: ${palette.text.byline};
+				a {
+					color: ${palette.text.byline};
+				}
+			`;
+		}
 	}
-`;
+};
 
 const bylineStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs

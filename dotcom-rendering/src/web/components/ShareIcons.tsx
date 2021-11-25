@@ -12,6 +12,8 @@ import MessengerIcon from '@frontend/static/icons/messenger.svg';
 import { ArticleDesign } from '@guardian/libs';
 import { Hide } from './Hide';
 
+type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
+
 type Props = {
 	pageId: string;
 	webTitle: string;
@@ -19,7 +21,7 @@ type Props = {
 	palette: Palette;
 	format: ArticleFormat;
 	size: ShareIconSize;
-	context?: 'ArticleMeta' | 'default';
+	context: Context;
 };
 
 const ulStyles = css`
@@ -40,11 +42,23 @@ const topMarginStlyes = css`
 	margin-top: 3px;
 `;
 
-const articleMetaIconColor = (palette: Palette) => css`
-	${until.desktop} {
-		fill: ${palette.text.standfirst};
+const decideIconColor = (
+	palette: Palette,
+	format: ArticleFormat,
+	context: Context,
+) => {
+	if (format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta') {
+		return css`
+			fill: ${palette.fill.shareIcon};
+			${until.desktop} {
+				fill: ${palette.text.standfirst};
+			}
+		`;
 	}
-`;
+	return css`
+		fill: ${palette.fill.shareIcon};
+	`;
+};
 
 const iconStyles = ({
 	palette,
@@ -66,7 +80,6 @@ const iconStyles = ({
 	vertical-align: middle;
 	position: relative;
 	box-sizing: content-box;
-	fill: ${palette.fill.shareIcon};
 
 	svg {
 		height: 88%;
@@ -100,7 +113,7 @@ export const ShareIcons = ({
 	palette,
 	format,
 	size,
-	context = 'default',
+	context,
 }: Props) => {
 	return (
 		<ul css={ulStyles}>
@@ -121,7 +134,7 @@ export const ShareIcons = ({
 								iconStyles({ palette, size }),
 								format.design === ArticleDesign.LiveBlog &&
 									context === 'ArticleMeta' &&
-									articleMetaIconColor(palette),
+									decideIconColor(palette, format, context),
 							]}
 						>
 							<FacebookIcon />
@@ -145,9 +158,7 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								format.design === ArticleDesign.LiveBlog &&
-									context === 'ArticleMeta' &&
-									articleMetaIconColor(palette),
+								decideIconColor(palette, format, context),
 							]}
 						>
 							<TwitterIconPadded />
@@ -170,9 +181,7 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								format.design === ArticleDesign.LiveBlog &&
-									context === 'ArticleMeta' &&
-									articleMetaIconColor(palette),
+								decideIconColor(palette, format, context),
 							]}
 						>
 							<EmailIcon />
@@ -196,9 +205,7 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								format.design === ArticleDesign.LiveBlog &&
-									context === 'ArticleMeta' &&
-									articleMetaIconColor(palette),
+								decideIconColor(palette, format, context),
 							]}
 						>
 							<LinkedInIcon />
@@ -223,9 +230,7 @@ export const ShareIcons = ({
 							<span
 								css={[
 									iconStyles({ palette, size }),
-									format.design === ArticleDesign.LiveBlog &&
-										context === 'ArticleMeta' &&
-										articleMetaIconColor(palette),
+									decideIconColor(palette, format, context),
 								]}
 							>
 								<WhatsAppIcon />
@@ -251,9 +256,7 @@ export const ShareIcons = ({
 							<span
 								css={[
 									iconStyles({ palette, size }),
-									format.design === ArticleDesign.LiveBlog &&
-										context === 'ArticleMeta' &&
-										articleMetaIconColor(palette),
+									decideIconColor(palette, format, context),
 								]}
 							>
 								<MessengerIcon />

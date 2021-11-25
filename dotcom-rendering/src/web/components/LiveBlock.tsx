@@ -109,6 +109,7 @@ export const LiveBlock = ({
 							palette={palette}
 							format={format}
 							size="small"
+							context="LiveBlock"
 						/>
 						{showLastUpdated &&
 							block.blockLastUpdated &&

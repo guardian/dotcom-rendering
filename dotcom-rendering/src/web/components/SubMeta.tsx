@@ -240,6 +240,7 @@ export const SubMeta = ({
 							'messenger',
 						]}
 						size="medium"
+						context="SubMeta"
 					/>
 					<div css={syndicationButtonOverrides(palette)}>
 						{format.design === ArticleDesign.Interactive ? null : (

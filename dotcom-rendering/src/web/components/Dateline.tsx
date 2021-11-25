@@ -3,15 +3,14 @@ import { text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
 import { from, until } from '@guardian/src-foundations/mq';
 import { ArticleDesign } from '@guardian/libs';
+import { decidePalette } from '../lib/decidePalette';
 
 const captionFont = css`
 	${textSans.xxsmall()};
 	color: ${text.supporting};
 `;
 
-const dateline = css`
-	${captionFont};
-
+const datelineSpace = css`
 	padding-top: 2px;
 	margin-bottom: 6px;
 `;
@@ -47,13 +46,10 @@ const labelStyles = css`
 
 // for liveblog smaller breakpoints article meta is located in the same
 // container as standfirst and needs the same styling as standfirst
-const datelineLiveBlogStyles = (palette: Palette, format: ArticleFormat) => css`
-	${format.design === ArticleDesign.LiveBlog &&
-	css`
-		${until.desktop} {
-			color: ${palette.text.standfirst};
-		}
-	`}
+const standfirstColouring = (palette: Palette) => css`
+	${until.desktop} {
+		color: ${palette.text.standfirst};
+	}
 `;
 
 // At the moment the 'First published on' / 'Last modified on' is passed through on
@@ -63,17 +59,26 @@ export const Dateline: React.FC<{
 	primaryDateline: string;
 	secondaryDateline: string;
 	format: ArticleFormat;
-	palette: Palette;
-}> = ({ primaryDateline, secondaryDateline, format, palette }) => {
+}> = ({ primaryDateline, secondaryDateline, format }) => {
+	const palette = decidePalette(format);
 	return (
-		<div css={dateline}>
+		<div
+			css={[
+				datelineSpace,
+				captionFont,
+				format.design === ArticleDesign.LiveBlog &&
+					standfirstColouring(palette),
+			]}
+		>
 			{secondaryDateline &&
 			!secondaryDateline.includes(primaryDateline) ? (
 				<div
 					css={[
 						toggleClass,
-						dateline,
-						datelineLiveBlogStyles(palette, format),
+						datelineSpace,
+						captionFont,
+						format.design === ArticleDesign.LiveBlog &&
+							standfirstColouring(palette),
 					]}
 				>
 					<label css={labelStyles} htmlFor="dateToggle">

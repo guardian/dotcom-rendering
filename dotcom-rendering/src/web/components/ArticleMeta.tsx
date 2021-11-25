@@ -328,7 +328,6 @@ export const ArticleMeta = ({
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}
-								palette={palette}
 								format={format}
 							/>
 						</div>
