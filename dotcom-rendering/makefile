@@ -37,8 +37,8 @@ build: clean-dist install
 start: install
 	@NODE_ENV=production node dist/frontend.server.js
 
-start-ci:
-	NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
+start-ci: install
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
 
 # dev #########################################
 
@@ -50,9 +50,9 @@ dev: clear clean-dist install
 
 percy: clear clean-dist install
 
-cypress: clear clean-dist install
-	$(call log, "starting frontend DEV server for Cypress")
-	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'cypress run --spec "cypress/integration/**/*"'
+cypress: clear clean-dist install build
+	$(call log, "starting frontend PROD server for Cypress")
+	@NODE_ENV=production start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/integration/**/*"'
 
 ampValidation: clean-dist install build
 	$(call log, "starting frontend PROD server for AMP Validation")
