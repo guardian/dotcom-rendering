@@ -132,9 +132,7 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								format.design === ArticleDesign.LiveBlog &&
-									context === 'ArticleMeta' &&
-									decideIconColor(palette, format, context),
+								decideIconColor(palette, format, context),
 							]}
 						>
 							<FacebookIcon />
