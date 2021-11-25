@@ -8,6 +8,7 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { css } from '@emotion/react';
+import { breakpoints } from '@guardian/src-foundations';
 import { decidePalette } from '../lib/decidePalette';
 
 export default {
@@ -270,3 +271,34 @@ export const OverlayedWithStars = () => (
 	</ElementContainer>
 );
 OverlayedWithStars.story = { name: 'when overlayed on stars' };
+
+export const VideoCaption = () => (
+	<ElementContainer showTopBorder={false} showSideBorders={false}>
+		<Caption
+			captionText="This is how an Article caption looks"
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
+			palette={decidePalette({
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			})}
+			mediaType="Video"
+		/>
+	</ElementContainer>
+);
+VideoCaption.story = {
+	name: 'for videos',
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.mobileLandscape,
+				breakpoints.phablet,
+			],
+		},
+	},
+};
