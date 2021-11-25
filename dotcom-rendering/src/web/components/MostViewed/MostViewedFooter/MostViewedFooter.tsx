@@ -117,7 +117,7 @@ export const MostViewedFooter = ({ sectionName, format, ajaxUrl }: Props) => {
 					size={
 						format.design === ArticleDesign.LiveBlog ||
 						format.design === ArticleDesign.DeadBlog
-							? 'wide'
+							? 'wide-onwards'
 							: 'compact'
 					}
 				>
