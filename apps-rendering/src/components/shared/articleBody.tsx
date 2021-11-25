@@ -7,7 +7,7 @@ import type { FC, ReactNode } from 'react';
 import { adStyles, darkModeCss } from 'styles';
 
 interface ArticleBodyProps {
-	className?: SerializedStyles[];
+	className: SerializedStyles[];
 	children: ReactNode[];
 	format: ArticleFormat;
 }
@@ -45,19 +45,10 @@ const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
     }
 `;
 
-const ArticleBody: FC<ArticleBodyProps> = ({ className, children, format }) => {
-	const classNames = className ? className : [];
-	return (
-		<div
-			css={[
-				ArticleBodyStyles(format),
-				ArticleBodyDarkStyles,
-				...classNames,
-			]}
-		>
-			{children}
-		</div>
-	);
-};
+const ArticleBody: FC<ArticleBodyProps> = ({ className, children, format }) => (
+	<div css={[ArticleBodyStyles(format), ArticleBodyDarkStyles, ...className]}>
+		{children}
+	</div>
+);
 
 export default ArticleBody;

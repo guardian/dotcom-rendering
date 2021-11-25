@@ -11,8 +11,8 @@ import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
+import { InteractiveImmersiveLayout } from './InteractiveImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
-import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 
 type Props = {
 	CAPI: CAPIType;
@@ -33,31 +33,24 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 	// TODO we can probably better express this as data
 	switch (display) {
 		case ArticleDisplay.Immersive: {
-			switch (design) {
-				case ArticleDesign.Interactive: {
-					// Render all 'immersive interactives' until switchover date as 'FullPageInteractive'
-					// TBD: After 'immersive interactive' changes to CAPI are merged, add logic here to either use
-					// 'InteractiveImmersiveLayout' if published after switchover date, or 'FullPageInteractiveLayout'
-					// if published before.
-					return (
-						<FullPageInteractiveLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							format={format}
-						/>
-					);
-				}
-				default: {
-					return (
-						<ImmersiveLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							palette={palette}
-							format={format}
-						/>
-					);
-				}
+			if (design === ArticleDesign.Interactive) {
+				return (
+					<InteractiveImmersiveLayout
+						CAPI={CAPI}
+						NAV={NAV}
+						format={format}
+					/>
+				);
 			}
+
+			return (
+				<ImmersiveLayout
+					CAPI={CAPI}
+					NAV={NAV}
+					palette={palette}
+					format={format}
+				/>
+			);
 		}
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
@@ -106,15 +99,6 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 							palette={palette}
 						/>
 					);
-				case ArticleDesign.FullPageInteractive: {
-					return (
-						<FullPageInteractiveLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							format={format}
-						/>
-					);
-				}
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
