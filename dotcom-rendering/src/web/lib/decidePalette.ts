@@ -98,6 +98,11 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 const textSectionTitle = textSeriesTitle;
 
 const textByline = (format: ArticleFormat): string => {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	)
+		return pillarPalette[format.theme].dark;
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
@@ -539,6 +544,11 @@ const fillCommentCount = (format: ArticleFormat): string => {
 };
 
 const fillShareIcon = (format: ArticleFormat): string => {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	)
+		return pillarPalette[format.theme].dark;
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];

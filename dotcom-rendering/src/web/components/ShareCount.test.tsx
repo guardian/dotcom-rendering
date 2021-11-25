@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 
 import { useApi as useApi_ } from '@root/src/web/lib/useApi';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ShareCount } from './ShareCount';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,6 +16,12 @@ describe('ShareCount', () => {
 	const pageId =
 		'/environment/2020/jan/25/court-probe-carrie-symonds-influence-boris-johnson-badger-cull';
 
+	const defaultFormat = {
+		theme: ArticlePillar.Opinion,
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+	};
+
 	beforeEach(() => {
 		useApi.mockReset();
 	});
@@ -25,7 +32,11 @@ describe('ShareCount', () => {
 		});
 
 		const { container } = render(
-			<ShareCount ajaxUrl={ajaxUrl} pageId={pageId} />,
+			<ShareCount
+				ajaxUrl={ajaxUrl}
+				pageId={pageId}
+				format={defaultFormat}
+			/>,
 		);
 
 		expect(container.firstChild).toBeNull();
@@ -35,7 +46,11 @@ describe('ShareCount', () => {
 		useApi.mockReturnValue({ error: { message: 'Bad' } });
 
 		const { container } = render(
-			<ShareCount ajaxUrl={ajaxUrl} pageId={pageId} />,
+			<ShareCount
+				ajaxUrl={ajaxUrl}
+				pageId={pageId}
+				format={defaultFormat}
+			/>,
 		);
 
 		expect(container.firstChild).toBeNull();
@@ -45,7 +60,11 @@ describe('ShareCount', () => {
 		useApi.mockReturnValue({ data: { share_count: 25001 } });
 
 		const { getByTestId } = render(
-			<ShareCount ajaxUrl={ajaxUrl} pageId={pageId} />,
+			<ShareCount
+				ajaxUrl={ajaxUrl}
+				pageId={pageId}
+				format={defaultFormat}
+			/>,
 		);
 
 		expect(getByTestId('long-share-count').innerHTML).toBe('25,001');

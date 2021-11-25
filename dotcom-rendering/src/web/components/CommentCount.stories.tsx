@@ -5,6 +5,7 @@ import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
+	ArticleFormat,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
@@ -15,6 +16,24 @@ import { decidePalette } from '../lib/decidePalette';
 export default {
 	component: CommentCount,
 	title: 'Components/CommentCount',
+};
+
+const opinionFormat = {
+	theme: ArticlePillar.Opinion,
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+};
+
+const specialReportFormat: ArticleFormat = {
+	theme: ArticleSpecial.SpecialReport,
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+};
+
+const newsFormat: ArticleFormat = {
+	theme: ArticlePillar.News,
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
 };
 
 export const SpecialReportStory = () => {
@@ -30,11 +49,8 @@ export const SpecialReportStory = () => {
 				isCommentable={true}
 				setIsExpanded={() => {}}
 				commentCount={306}
-				palette={decidePalette({
-					theme: ArticleSpecial.SpecialReport,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
+				palette={decidePalette(specialReportFormat)}
+				format={specialReportFormat}
 			/>
 		</div>
 	);
@@ -54,11 +70,8 @@ export const NewsStory = () => {
 				isCommentable={true}
 				setIsExpanded={() => {}}
 				commentCount={36}
-				palette={decidePalette({
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
+				palette={decidePalette(newsFormat)}
+				format={newsFormat}
 			/>
 		</div>
 	);
@@ -78,11 +91,8 @@ export const LargeNumber = () => {
 				isCommentable={true}
 				setIsExpanded={() => {}}
 				commentCount={10836}
-				palette={decidePalette({
-					theme: ArticlePillar.Opinion,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
+				palette={decidePalette(opinionFormat)}
+				format={opinionFormat}
 			/>
 		</div>
 	);
@@ -102,11 +112,8 @@ export const Zero = () => {
 				isCommentable={true}
 				setIsExpanded={() => {}}
 				commentCount={0}
-				palette={decidePalette({
-					theme: ArticlePillar.Opinion,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
+				palette={decidePalette(opinionFormat)}
+				format={opinionFormat}
 			/>
 		</div>
 	);
@@ -125,11 +132,8 @@ export const Undefined = () => {
 			<CommentCount
 				isCommentable={true}
 				setIsExpanded={() => {}}
-				palette={decidePalette({
-					theme: ArticlePillar.Opinion,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
+				palette={decidePalette(opinionFormat)}
+				format={opinionFormat}
 			/>
 		</div>
 	);

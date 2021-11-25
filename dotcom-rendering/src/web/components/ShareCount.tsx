@@ -2,17 +2,19 @@ import { css } from '@emotion/react';
 
 import { neutral, text } from '@guardian/src-foundations/palette';
 import { textSans } from '@guardian/src-foundations/typography';
-import { between } from '@guardian/src-foundations/mq';
+import { between, until } from '@guardian/src-foundations/mq';
 
 import ShareIcon from '@frontend/static/icons/share.svg';
 
 import { useApi } from '@root/src/web/lib/useApi';
 import { formatCount } from '@root/src/web/lib/formatCount';
 import { joinUrl } from '@root/src/lib/joinUrl';
+import { ArticleDesign } from '@guardian/libs';
 
 type Props = {
 	ajaxUrl: string;
 	pageId: string;
+	format: ArticleFormat;
 };
 
 type ShareCountType = {
@@ -30,6 +32,12 @@ const containerStyles = css`
 	color: ${text.supporting};
 `;
 
+const liveblogColourStyles = css`
+	${until.desktop} {
+		color: ${neutral[100]};
+	}
+`;
+
 const iconContainerStyles = css`
 	height: 15px;
 	margin: 0;
@@ -39,6 +47,10 @@ const iconContainerStyles = css`
 
 const iconStyles = css`
 	fill: ${neutral[46]};
+`;
+
+const liveblogIconStyles = css`
+	fill: ${neutral[100]};
 `;
 
 const longStyles = css`
@@ -57,7 +69,7 @@ const shortStyles = css`
 	}
 `;
 
-export const ShareCount = ({ ajaxUrl, pageId }: Props) => {
+export const ShareCount = ({ ajaxUrl, pageId, format }: Props) => {
 	const shareUrl = joinUrl([ajaxUrl, 'sharecount', `${pageId}.json`]);
 	const { data: shareData, error: shareError } =
 		useApi<ShareCountType>(shareUrl);
@@ -72,12 +84,22 @@ export const ShareCount = ({ ajaxUrl, pageId }: Props) => {
 
 	return (
 		<div
-			css={containerStyles}
+			css={[
+				containerStyles,
+				format.design === ArticleDesign.LiveBlog &&
+					liveblogColourStyles,
+			]}
 			aria-label={`${short} Shares`}
 			data-cy="share-counts"
 		>
 			<div css={iconContainerStyles}>
-				<ShareIcon css={iconStyles} />
+				<ShareIcon
+					css={[
+						iconStyles,
+						format.design === ArticleDesign.LiveBlog &&
+							liveblogIconStyles,
+					]}
+				/>
 			</div>
 			<div
 				data-testid="long-share-count"

@@ -8,7 +8,7 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -483,7 +483,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													format.design,
 													format.theme,
 												)}
-												color="rgba(255, 255, 255, 0.4)"
+												color={
+													format.design ===
+													ArticleDesign.LiveBlog
+														? 'rgba(255, 255, 255, 0.4)'
+														: undefined
+												}
 											/>
 										</div>
 									</div>

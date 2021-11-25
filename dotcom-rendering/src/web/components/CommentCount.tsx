@@ -1,13 +1,16 @@
 import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/src-foundations/typography';
-import { between } from '@guardian/src-foundations/mq';
+import { between, until } from '@guardian/src-foundations/mq';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 import CommentIcon from '@frontend/static/icons/comment.svg';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import { neutral } from '@guardian/src-foundations';
 
 type Props = {
 	palette: Palette;
+	format: ArticleFormat;
 	isCommentable: boolean;
 	commentCount?: number;
 	setIsExpanded: (isExpanded: boolean) => void;
@@ -23,6 +26,12 @@ const containerStyles = (palette: Palette) => css`
 	padding-top: 5px;
 `;
 
+const liveblogContainerColourStyles = css`
+	${until.desktop} {
+		color: ${neutral[100]};
+	}
+`;
+
 const iconContainerStyles = css`
 	height: 15px;
 	margin: 0;
@@ -36,6 +45,12 @@ const iconContainerStyles = css`
 
 const iconStyles = (palette: Palette) => css`
 	fill: ${palette.fill.commentCount};
+`;
+
+const liveblogIconStyles = css`
+	${until.desktop} {
+		fill: ${neutral[100]};
+	}
 `;
 
 const longStyles = css`
@@ -69,6 +84,7 @@ export const CommentCount = ({
 	isCommentable,
 	commentCount,
 	palette,
+	format,
 	setIsExpanded,
 }: Props) => {
 	if (!isCommentable) return null;
@@ -77,7 +93,11 @@ export const CommentCount = ({
 
 	return (
 		<data
-			css={containerStyles(palette)}
+			css={[
+				containerStyles(palette),
+				format.design === ArticleDesign.LiveBlog &&
+					liveblogContainerColourStyles,
+			]}
 			data-cy="comment-counts"
 			value={`${long} comments on this article`}
 		>
@@ -87,7 +107,13 @@ export const CommentCount = ({
 				aria-label={`${short} Comments`}
 				onClick={() => setIsExpanded(true)}
 			>
-				<div css={iconContainerStyles}>
+				<div
+					css={[
+						iconContainerStyles,
+						format.design === ArticleDesign.LiveBlog &&
+							liveblogIconStyles,
+					]}
+				>
 					<CommentIcon css={iconStyles(palette)} />
 				</div>
 				<div

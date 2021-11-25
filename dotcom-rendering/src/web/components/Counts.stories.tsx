@@ -24,6 +24,12 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const format = {
+	theme: ArticlePillar.News,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+};
+
 export const Both = () => {
 	fetchMock
 		.restore()
@@ -48,17 +54,15 @@ export const Both = () => {
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={format}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						isCommentable={true}
 						commentCount={239}
-						palette={decidePalette({
-							theme: ArticlePillar.News,
-							design: ArticleDesign.Standard,
-							display: ArticleDisplay.Standard,
-						})}
+						palette={decidePalette(format)}
+						format={format}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -92,17 +96,15 @@ export const ShareOnly = () => {
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={format}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						isCommentable={false}
 						commentCount={239}
-						palette={decidePalette({
-							theme: ArticlePillar.News,
-							design: ArticleDesign.Standard,
-							display: ArticleDisplay.Standard,
-						})}
+						palette={decidePalette(format)}
+						format={format}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -136,17 +138,15 @@ export const CommentOnly = () => {
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={format}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						isCommentable={true}
 						commentCount={239}
-						palette={decidePalette({
-							theme: ArticlePillar.News,
-							design: ArticleDesign.Standard,
-							display: ArticleDisplay.Standard,
-						})}
+						palette={decidePalette(format)}
+						format={format}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -180,17 +180,15 @@ export const ZeroComments = () => {
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={format}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						isCommentable={true}
 						commentCount={0}
-						palette={decidePalette({
-							theme: ArticlePillar.News,
-							design: ArticleDesign.Standard,
-							display: ArticleDisplay.Standard,
-						})}
+						palette={decidePalette(format)}
+						format={format}
 						setIsExpanded={() => {}}
 					/>
 				</div>
@@ -224,17 +222,15 @@ export const BigNumbers = () => {
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 						pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={format}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
 						isCommentable={true}
 						commentCount={4320}
-						palette={decidePalette({
-							theme: ArticlePillar.News,
-							design: ArticleDesign.Standard,
-							display: ArticleDisplay.Standard,
-						})}
+						palette={decidePalette(format)}
+						format={format}
 						setIsExpanded={() => {}}
 					/>
 				</div>
