@@ -159,7 +159,11 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 
 const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 	return (
-		<div css={keyEventWrapperStyles(supportsDarkMode)}>
+		<nav
+			id="keyevents"
+			css={keyEventWrapperStyles(supportsDarkMode)}
+			aria-label="Key Events"
+		>
 			<Accordion
 				supportsDarkMode={supportsDarkMode}
 				accordionTitle="Key events"
@@ -176,7 +180,7 @@ const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 					))}
 				</ul>
 			</Accordion>
-		</div>
+		</nav>
 	);
 };
 

@@ -22,6 +22,7 @@ export const htmlTemplate = ({
 	keywords,
 	skipToMainContent,
 	skipToNavigation,
+	skipToKeyEvents,
 }: {
 	title?: string;
 	description: string;
@@ -40,6 +41,7 @@ export const htmlTemplate = ({
 	keywords: string;
 	skipToMainContent: string;
 	skipToNavigation: string;
+	skipToKeyEvents?: string;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -293,6 +295,7 @@ https://workforus.theguardian.com/careers/product-engineering/
             <body>
 				${skipToMainContent}
 				${skipToNavigation}
+				${skipToKeyEvents || ''}
                 <div id="react-root"></div>
                 ${html}
                 ${[...lowPriorityScriptTags].join('\n')}
