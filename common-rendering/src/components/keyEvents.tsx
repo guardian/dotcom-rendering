@@ -60,7 +60,7 @@ const keyEventWrapperStyles = (
 	width: 100%;
 
 	${from.desktop} {
-		border-top: #CDCDCD 1px solid;
+		border-top: #cdcdcd 1px solid;
 		padding-top: ${remSpace[2]};
 	}
 
