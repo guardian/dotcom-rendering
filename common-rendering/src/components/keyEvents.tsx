@@ -160,6 +160,8 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 	return (
 		<nav
+			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+			tabIndex={0}
 			id="keyevents"
 			css={keyEventWrapperStyles(supportsDarkMode)}
 			aria-label="Key Events"
