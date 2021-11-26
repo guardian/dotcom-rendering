@@ -4,6 +4,7 @@ import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { ABProvider } from '@guardian/ab-react';
 
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
+import { breakpoints } from '@guardian/src-foundations';
 import {
 	responseWithTwoTabs,
 	responseWithOneTab,
@@ -16,7 +17,14 @@ export default {
 	component: MostViewedFooter,
 	title: 'Components/MostViewedFooter',
 	parameters: {
-		chromatic: { diffThreshold: 0.2 },
+		chromatic: {
+			diffThreshold: 0.2,
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.wide,
+			],
+		},
 	},
 };
 
