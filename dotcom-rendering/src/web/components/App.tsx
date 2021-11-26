@@ -1234,7 +1234,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					isSignedIn={isSignedIn}
 					countryCode={countryCode}
 					contentType={CAPI.contentType}
-					sectionName={CAPI.sectionName}
 					sectionId={CAPI.config.section}
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 					isMinuteArticle={CAPI.pageType.isMinuteArticle}

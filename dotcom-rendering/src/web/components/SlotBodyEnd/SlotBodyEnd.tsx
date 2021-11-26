@@ -82,7 +82,6 @@ export const SlotBodyEnd = ({
 	isSignedIn,
 	countryCode,
 	contentType,
-	sectionName,
 	sectionId,
 	shouldHideReaderRevenue,
 	isMinuteArticle,
@@ -115,7 +114,7 @@ export const SlotBodyEnd = ({
 			browserId,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
-			section: sectionName,
+			section: sectionId,
 		};
 		const brazeEpic = buildBrazeEpicConfig(
 			brazeMessages as Promise<BrazeMessagesInterface>,
