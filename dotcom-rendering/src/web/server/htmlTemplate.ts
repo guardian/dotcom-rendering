@@ -288,11 +288,10 @@ https://workforus.theguardian.com/careers/product-engineering/
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>
                 <style>${resets.resetCSS}${css}</style>
+				<link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
+			</head>
 
-                <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
-            </head>
-
-            <body>
+			<body>
 				${skipToMainContent}
 				${skipToNavigation}
 				${skipToKeyEvents || ''}
