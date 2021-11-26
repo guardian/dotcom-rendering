@@ -179,11 +179,9 @@ const sticky = css`
 	}
 `;
 
-const keyEventsMargin = css`
-	margin-bottom: ${space[3]}px;
+const keyEventsTopMargin = css`
 	${from.desktop} {
 		margin-top: ${space[1]}px;
-		margin-bottom: 0;
 	}
 `;
 
@@ -193,14 +191,8 @@ const sidePaddingDesktop = css`
 	}
 `;
 
-const sidePaddingMobile = css`
-	${until.desktop} {
-		padding-left: 10px;
-	}
-`;
-
 const accordionBottomMargin = css`
-	margin-bottom: ${space[2]}px;
+	margin-bottom: ${space[3]}px;
 	${from.desktop} {
 		margin-bottom: 0;
 	}
@@ -493,13 +485,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="meta" element="aside">
-								<div
-									css={[
-										maxWidth,
-										sidePaddingDesktop,
-										sidePaddingMobile,
-									]}
-								>
+								<div css={[maxWidth, sidePaddingDesktop]}>
 									<ArticleMeta
 										branding={branding}
 										format={format}
@@ -521,8 +507,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<div
 									css={[
 										sticky,
-										keyEventsMargin,
+										keyEventsTopMargin,
 										sidePaddingDesktop,
+										accordionBottomMargin,
 									]}
 								>
 									<KeyEventsContainer
