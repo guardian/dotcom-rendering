@@ -323,6 +323,15 @@ export const document = ({ data }: Props): string => {
 	const skipToNavigation = renderToString(
 		<SkipTo id="navigation" label="Skip to navigation" />,
 	);
+	let skipToKeyEvents;
+	if (
+		CAPI.format.design === 'LiveBlogDesign' ||
+		CAPI.format.design === 'DeadBlogDesign'
+	) {
+		skipToKeyEvents = renderToString(
+			<SkipTo id="keyevents" label="Skip to key events" />,
+		);
+	}
 
 	return htmlTemplate({
 		linkedData,
@@ -342,5 +351,6 @@ export const document = ({ data }: Props): string => {
 		keywords,
 		skipToMainContent,
 		skipToNavigation,
+		skipToKeyEvents,
 	});
 };
