@@ -531,6 +531,10 @@ const backgroundSpeechBubble = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundLiveblogMobile = (): string => {
+	return '#DCDCDC';
+};
+
 const fillCommentCount = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -881,6 +885,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			carouselDotFocus: backgroundCarouselDotFocus(format),
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
+			liveBlogMobile: backgroundLiveblogMobile(),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
