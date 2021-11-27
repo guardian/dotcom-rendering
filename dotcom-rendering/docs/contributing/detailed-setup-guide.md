@@ -4,16 +4,16 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [High level diagram](#high-level-diagram)
-- [Developing](#developing)
-  - [Setup](#setup)
-  - [Start](#start)
-  - [Previewing article on local](#previewing-article-on-local)
-  - [Previewing AMP on local](#previewing-amp-on-local)
-  - [Note on rebasing vs merging](#note-on-rebasing-vs-merging)
-  - [Debugging tools](#debugging-tools)
-  - [Running alongside identity](#running-alongside-identity)
-- [Production](#production)
+-   [High level diagram](#high-level-diagram)
+-   [Developing](#developing)
+    -   [Setup](#setup)
+    -   [Start](#start)
+    -   [Previewing article on local](#previewing-article-on-local)
+    -   [Previewing AMP on local](#previewing-amp-on-local)
+    -   [Note on rebasing vs merging](#note-on-rebasing-vs-merging)
+    -   [Debugging tools](#debugging-tools)
+    -   [Running alongside identity](#running-alongside-identity)
+-   [Production](#production)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -89,16 +89,13 @@ You may want local identity cookies to be available in `dotcom-rendering`. To en
 
 -   `make build` creates production-ready bundles.
 -   `make start` starts the production server.
--   `make stop` stops the production server.
 
 You may need to run these with `sudo`
 
-Production environment uses `pm2`. More scripts can be found in the `makefile` [scripts](https://github.com/guardian/dotcom-rendering/blob/e2c020f7e0ed24751ea729eec93f1271d37e3b50/makefile#L31)
-
-The production port default is 9000 for deployment, but to run locally alongside frontend, you will need to manually override in `scripts/frontend/config.js`. To hit the server, add 
+The production port default is 9000 for deployment, but to run locally alongside frontend, you will need to manually override in `scripts/frontend/config.js`. To hit the server, add
 
 ```
 rendering.endpoint = "http://localhost:${port}/Article"
-``` 
+```
 
 with the overide port number to `frontend.conf` and run frontend locally.
