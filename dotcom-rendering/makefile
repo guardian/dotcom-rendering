@@ -37,7 +37,7 @@ build: clean-dist install
 start: install
 	@NODE_ENV=production node dist/frontend.server.js
 
-start-ci:
+start-ci: install
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
 
 # dev #########################################
