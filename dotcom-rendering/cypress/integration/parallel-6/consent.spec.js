@@ -52,6 +52,8 @@ describe('Consent tests', function () {
 		// to see if the ga property was set by Google on the window object
 		cy.visit(`Article?url=${secondPage}`);
 		// We force window.ga to be null on consent rejection to prevent subsequent requests
-		cy.window().its('ga', { timeout: 30000 }).should('equal', null);
+		cy.waitUntil(() => cy.window().then((win) => win.ga === null), {
+			errorMsg: 'Error waiting for window.ga to be null',
+		});
 	});
 });
