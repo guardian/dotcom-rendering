@@ -45,13 +45,13 @@ describe('Consent tests', function () {
 		// Reject tracking cookies
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Reject all']").click();
+		// Intercept calls to this tcf endpoint so we can wait for them later
+		cy.intercept('GET', '**/tcfv2/**').as('tcfRequest');
 		// Make a second page load now that we have the CMP cookies set to reject tracking and check
-		// to see if the ga property was set by Google on the window object
+		// to see if the ga property was correctly unset, preventing further requests
 		cy.reload();
+		cy.wait('@tcfRequest');
 		// We force window.ga to be null on consent rejection to prevent subsequent requests
-		cy.waitUntil(() => cy.window().then((win) => win.ga === null), {
-			errorMsg: 'Error waiting for window.ga to be null',
-			timeout: 30000,
-		});
+		cy.window().its('ga', { timeout: 30000 }).should('equal', null);
 	});
 });
