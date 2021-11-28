@@ -7,9 +7,6 @@ import { storage } from '@guardian/libs';
 const firstPage =
 	'https://www.theguardian.com/environment/2020/aug/01/plan-to-curb-englands-most-polluted-spot-divides-residents';
 
-const secondPage =
-	'https://www.theguardian.com/environment/2020/nov/19/blue-whale-sightings-off-south-georgia-raise-hopes-of-recovery';
-
 describe('Consent tests', function () {
 	beforeEach(function () {
 		setLocalBaseUrl();
@@ -26,7 +23,7 @@ describe('Consent tests', function () {
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Accept all']").click();
 		// Make a second page load now that we have the CMP cookies set to accept tracking
-		cy.visit(`Article?url=${secondPage}`);
+		cy.reload();
 		// Wait for a call to Google Analytics to be made - we expect this to happen
 		cy.intercept('POST', 'https://www.google-analytics.com/**');
 	});
@@ -50,10 +47,11 @@ describe('Consent tests', function () {
 		privacySettingsIframe().find("[title='Reject all']").click();
 		// Make a second page load now that we have the CMP cookies set to reject tracking and check
 		// to see if the ga property was set by Google on the window object
-		cy.visit(`Article?url=${secondPage}`);
+		cy.reload();
 		// We force window.ga to be null on consent rejection to prevent subsequent requests
 		cy.waitUntil(() => cy.window().then((win) => win.ga === null), {
 			errorMsg: 'Error waiting for window.ga to be null',
+			timeout: 30000,
 		});
 	});
 });
