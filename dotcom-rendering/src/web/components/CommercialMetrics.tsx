@@ -7,6 +7,7 @@ import { prebidTimeout } from '@frontend/web/experiments/tests/prebid-timeout-te
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { integrateCriteo } from '../experiments/tests/integrate-criteo-test';
+import { integrateSmart } from '../experiments/tests/integrate-smart-test';
 
 // TODO disallow undefined browserIds by placing conditional in App.tsx
 // so that we wait to render this component until browserId is defined.
@@ -22,7 +23,11 @@ export const CommercialMetrics: React.FC<{
 	const isHidden = visibilityState === 'hidden' || undefined;
 
 	useOnce(() => {
-		const testsToForceMetrics: ABTest[] = [prebidTimeout, integrateCriteo];
+		const testsToForceMetrics: ABTest[] = [
+			prebidTimeout,
+			integrateCriteo,
+			integrateSmart,
+		];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
