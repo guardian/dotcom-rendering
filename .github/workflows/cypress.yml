@@ -28,7 +28,7 @@ jobs:
           start: make start-ci
           working-directory: dotcom-rendering
           wait-on: "http://localhost:9000"
-          wait-on-timeout: 240
+          wait-on-timeout: 30
           quiet: true
           browser: chrome
           spec: cypress/integration/parallel-${{ matrix.group }}/*.js
