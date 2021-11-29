@@ -48,8 +48,6 @@ dev: clear clean-dist install
 
 # tests #####################################
 
-percy: clear clean-dist install
-
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
 	@NODE_ENV=production start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/integration/**/*"'
