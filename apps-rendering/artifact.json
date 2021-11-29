@@ -14,7 +14,7 @@
     },
     {
       "action": "mobile-apps-rendering-cfn",
-      "path": "config/cloudformation.yaml",
+      "path": "cdk/cdk.out/MobileAppsRendering.template.json",
       "compress": false
     }
   ]

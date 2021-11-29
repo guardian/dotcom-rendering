@@ -36,7 +36,7 @@ else
     yarn --silent
 
     cd apps-rendering
-
+	cdk/script/ci
     npm ci
     npm run test
     npm run build:client:prod
@@ -44,5 +44,4 @@ else
     npm run copy-manifest
     npm run copy-fonts
     npm run upload
-
 fi

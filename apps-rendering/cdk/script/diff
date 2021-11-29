@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+set -e
+
+printHelp() {
+>&2 cat << EOF
+  Usage: ${0} -s AWS stack name -p AWS profile
+
+  Compare a CDK template with a running CloudFormation stack.
+    -s AWS stack name   Name of a deployed AWS CloudFormation stack.
+    -p AWS profile      AWS profile to use.
+    -h                  Displays this help message.
+EOF
+exit 1
+}
+
+checkCredentials() {
+  STATUS=$(aws sts get-caller-identity --profile ${PROFILE} 2>&1 || true)
+
+  if [[ ${STATUS} =~ (ExpiredToken) ]]; then
+    echo "Credentials for profile '${PROFILE}' have expired. Fetch new credentials."
+    exit 1
+  elif [[ ${STATUS} =~ ("could not be found") ]]; then
+    echo "Credentials for profile '${PROFILE}' are missing. Fetch credentials."
+    exit 1
+  fi
+}
+
+while getopts s:p:h FLAG; do
+  case $FLAG in
+    s)
+      STACK_NAME=$OPTARG
+      ;;
+    p)
+      PROFILE=$OPTARG
+      ;;
+    h)
+      printHelp
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${STACK_NAME}" ]; then
+  echo "stack name is missing"
+  printHelp
+fi
+
+if [ -z "${PROFILE}" ]; then
+  echo "profile is missing"
+  printHelp
+fi
+
+checkCredentials
+
+export GU_CFN_STACK_NAME=${STACK_NAME}
+export AWS_PROFILE=${PROFILE}
+
+yarn diff
