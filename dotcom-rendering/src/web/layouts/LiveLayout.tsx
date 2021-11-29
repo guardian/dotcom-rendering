@@ -158,7 +158,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				/* from desktop define fixed body width */
 				${from.desktop} {
 					grid-column-gap: 20px;
-          			grid-template-columns: 240px 700px;
+					grid-template-columns: 240px 700px;
 					grid-template-areas:
 						'lines		media'
 						'meta		media'
@@ -469,14 +469,14 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									<div css={sidePaddingDesktop}>
 										<Lines
 											count={decideLineCount(
-													format.design,
-												)}
+												format.design,
+											)}
 											effect={decideLineEffect(
-													format.design,
-													format.theme,
-												)}
+												format.design,
+												format.theme,
+											)}
 											color="rgba(255, 255, 255, 0.4)"
-											/>
+										/>
 									</div>
 								</Hide>
 							</GridItem>
@@ -544,13 +544,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									<div css={[maxWidth, sidePaddingDesktop]}>
 										<Lines
 											count={decideLineCount(
-                        format.design,
-                      )}
+												format.design,
+											)}
 											effect={decideLineEffect(
-                        format.design,
-                        format.theme,
-                      )}
-                    />
+												format.design,
+												format.theme,
+											)}
+										/>
 									</div>
 								</Hide>
 							</GridItem>
