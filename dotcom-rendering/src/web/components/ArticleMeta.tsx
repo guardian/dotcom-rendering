@@ -333,6 +333,7 @@ export const ArticleMeta = ({
 							<Dateline
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}
+								format={format}
 							/>
 						</div>
 					</>
@@ -350,8 +351,10 @@ export const ArticleMeta = ({
 							pageId={pageId}
 							webTitle={webTitle}
 							palette={palette}
+							format={format}
 							displayIcons={['facebook', 'twitter', 'email']}
 							size="medium"
+							context="ArticleMeta"
 						/>
 					</div>
 					<div css={metaNumbers(palette)}>

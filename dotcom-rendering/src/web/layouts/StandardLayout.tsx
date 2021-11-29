@@ -97,7 +97,7 @@ const StandardGrid = ({
 									'title  border  matchNav     right-column'
 									'title  border  matchtabs    right-column'
 									'.      border  headline     right-column'
-									'.      border  standfirst    right-column'
+									'.      border  standfirst   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -106,7 +106,7 @@ const StandardGrid = ({
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
-									'.      border  standfirst    right-column'
+									'.      border  standfirst   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -140,7 +140,7 @@ const StandardGrid = ({
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
-									'.      border  standfirst    right-column'
+									'.      border  standfirst   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -492,12 +492,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</GridItem>
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
-								{CAPI.matchUrl && (
-									<Placeholder
-										rootId="match-tabs"
-										height={40}
-									/>
-								)}
+								{format.design === ArticleDesign.MatchReport &&
+									CAPI.matchUrl && (
+										<Placeholder
+											rootId="match-tabs"
+											height={40}
+										/>
+									)}
 							</div>
 						</GridItem>
 						<GridItem area="headline">

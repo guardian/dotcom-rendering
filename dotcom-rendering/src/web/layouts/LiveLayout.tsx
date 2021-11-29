@@ -50,7 +50,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { space } from '@guardian/src-foundations';
-import { ContainerLayout } from '../components/ContainerLayout';
+import { Hide } from '@guardian/src-layout';
 import { Placeholder } from '../components/Placeholder';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -95,6 +95,44 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			/* IE Fallback */
+			display: flex;
+			flex-direction: column;
+			${until.desktop} {
+				margin-left: 0px;
+			}
+			${from.desktop} {
+				margin-left: 240px;
+			}
+			@supports (display: grid) {
+				display: grid;
+				width: 100%;
+				margin-left: 0;
+				grid-column-gap: 20px;
+				${until.desktop} {
+					grid-template-columns: 1fr; /* Main content */
+					grid-template-areas:
+						'standfirst'
+						'lines'
+						'meta';
+				}
+				${from.desktop} {
+					grid-template-columns: 220px 1fr;
+					grid-template-areas: 'lastupdated standfirst';
+				}
+				${until.tablet} {
+					grid-column-gap: 0px;
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -107,25 +145,20 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 			${from.desktop} {
 				margin-left: 320px;
 			}
-
 			@supports (display: grid) {
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-
 				grid-column-gap: 0px;
-
 				/*
 					Explanation of each unit of grid-template-columns
-
 					Main content
 					Right Column
 				*/
 				/* from desktop define fixed body width */
 				${from.desktop} {
 					grid-column-gap: 20px;
-
-					grid-template-columns: 240px 700px;
+          grid-template-columns: 240px 700px;
 					grid-template-areas:
 						'lines		media'
 						'meta		media'
@@ -134,11 +167,9 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'keyevents	body'
 						'. 			.';
 				}
-
 				/* from wide define fixed body width */
 				${from.wide} {
 					grid-column-gap: 20px;
-
 					grid-template-columns: 240px 700px 1fr;
 					grid-template-areas:
 						'lines 		media right-column'
@@ -148,7 +179,6 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'keyevents  body  right-column'
 						'.			.     right-column';
 				}
-
 				/* until desktop define fixed body width */
 				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
@@ -203,7 +233,6 @@ const starWrapper = css`
 	margin-top: 6px;
 	background-color: ${brandAltBackground.primary};
 	display: inline-block;
-
 	${until.phablet} {
 		padding-left: 20px;
 		margin-left: -20px;
@@ -212,7 +241,6 @@ const starWrapper = css`
 		padding-left: 0px;
 		margin-left: -0px;
 	}
-
 	padding-left: 10px;
 	margin-left: -10px;
 `;
@@ -221,11 +249,9 @@ const ageWarningMargins = css`
 	margin-top: 12px;
 	margin-left: -10px;
 	margin-bottom: 6px;
-
 	${from.tablet} {
 		margin-left: -20px;
 	}
-
 	${from.leftCol} {
 		margin-left: -10px;
 		margin-top: 0;
@@ -423,20 +449,62 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</HeadlineGrid>
 					</ElementContainer>
 
-					<ContainerLayout
+					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={palette.background.standfirst}
 						borderColour={palette.border.standfirst}
-						sideBorders={true}
-						leftColSize="wide"
-						verticalMargins={false}
-						format={format}
 					>
-						<Standfirst
-							format={format}
-							standfirst={CAPI.standfirst}
-						/>
-					</ContainerLayout>
+						<StandFirstGrid>
+							<GridItem area="standfirst">
+								<Standfirst
+									format={format}
+									standfirst={CAPI.standfirst}
+								/>
+							</GridItem>
+							<GridItem area="lastupdated">
+								<></>
+							</GridItem>
+							<GridItem area="lines">
+								<Hide from="desktop">
+									<div css={maxWidth}>
+										<div css={stretchLines}>
+											<Lines
+												count={decideLineCount(
+													format.design,
+												)}
+												effect={decideLineEffect(
+													format.design,
+													format.theme,
+												)}
+												color="rgba(255, 255, 255, 0.4)"
+											/>
+										</div>
+									</div>
+								</Hide>
+							</GridItem>
+							<GridItem area="meta">
+								<Hide from="desktop">
+									<div css={maxWidth}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											palette={palette}
+											pageId={CAPI.pageId}
+											webTitle={CAPI.webTitle}
+											author={CAPI.author}
+											tags={CAPI.tags}
+											primaryDateline={
+												CAPI.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												CAPI.webPublicationSecondaryDateDisplay
+											}
+										/>
+									</div>
+								</Hide>
+							</GridItem>
+						</StandFirstGrid>
+					</ElementContainer>
 
 					<ElementContainer
 						showTopBorder={false}
@@ -474,34 +542,40 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="lines">
-								<div css={[maxWidth, sidePaddingDesktop]}>
-									<Lines
-										count={decideLineCount(format.design)}
-										effect={decideLineEffect(
-											format.design,
-											format.theme,
-										)}
-									/>
-								</div>
+								<Hide until="desktop">
+									<div css={[maxWidth, sidePaddingDesktop]}>
+                    <Lines
+                      count={decideLineCount(
+                        format.design,
+                      )}
+                      effect={decideLineEffect(
+                        format.design,
+                        format.theme,
+                      )}
+                    />
+									</div>
+								</Hide>
 							</GridItem>
 							<GridItem area="meta" element="aside">
-								<div css={[maxWidth, sidePaddingDesktop]}>
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										palette={palette}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-										author={CAPI.author}
-										tags={CAPI.tags}
-										primaryDateline={
-											CAPI.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											CAPI.webPublicationSecondaryDateDisplay
-										}
-									/>
-								</div>
+								<Hide until="desktop">
+									<div css={[maxWidth, sidePaddingDesktop]}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											palette={palette}
+											pageId={CAPI.pageId}
+											webTitle={CAPI.webTitle}
+											author={CAPI.author}
+											tags={CAPI.tags}
+											primaryDateline={
+												CAPI.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												CAPI.webPublicationSecondaryDateDisplay
+											}
+										/>
+									</div>
+								</Hide>
 							</GridItem>
 							<GridItem area="keyevents">
 								<div

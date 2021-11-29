@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from, until } from '@guardian/src-foundations/mq';
+import { between, from, until } from '@guardian/src-foundations/mq';
 import { textSans } from '@guardian/src-foundations/typography';
 import { space } from '@guardian/src-foundations';
 import {
@@ -114,6 +114,15 @@ const captionPadding = css`
 	padding-right: 8px;
 `;
 
+const videoPadding = css`
+	${until.mobileLandscape} {
+		margin-left: 10px;
+	}
+	${between.mobileLandscape.and.phablet} {
+		margin-left: ${space[5]}px;
+	}
+`;
+
 const bigLeftMargin = css`
 	width: inherit;
 	margin-left: ${space[9]}px;
@@ -218,6 +227,7 @@ export const Caption = ({
 				!isOverlayed && bottomMargin,
 				isOverlayed && overlayedStyles(palette, format),
 				padCaption && captionPadding,
+				mediaType === 'Video' && videoPadding,
 			]}
 		>
 			{mediaType === 'Video' ? (
