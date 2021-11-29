@@ -5,7 +5,7 @@ import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
 const firstPage =
-	'https://www.theguardian.com/environment/2020/aug/01/plan-to-curb-englands-most-polluted-spot-divides-residents';
+	'https://www.theguardian.com/uk-news/2021/jun/04/police-flabbergasted-at-time-it-took-london-bridge-terrorist-to-die-inquest-hears';
 
 describe('Consent tests', function () {
 	beforeEach(function () {
