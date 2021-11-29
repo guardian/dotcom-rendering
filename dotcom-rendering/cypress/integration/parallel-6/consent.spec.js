@@ -38,15 +38,12 @@ describe('Consent tests', function () {
 		});
 		cy.visit(`Article?url=${firstPage}`);
 		cy.window().its('ga').should('not.exist');
-		// Intercept calls to this tcf endpoint so we can wait for them later
-		cy.intercept('GET', '**/tcfv2/**').as('tcfRequest');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
 		cmpIframe().find("[title='Manage my cookies']").click();
 		// Reject tracking cookies
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Reject all']").click();
-		cy.wait('@tcfRequest');
 		// We force window.ga to be null upon consent rejection to prevent subsequent requests
 		cy.window().its('ga').should('equal', null);
 		// Make a second page load now that we have the CMP cookies set to reject tracking and check

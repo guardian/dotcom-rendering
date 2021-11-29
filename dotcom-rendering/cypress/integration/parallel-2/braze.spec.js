@@ -48,7 +48,7 @@ describe('Braze messaging', function () {
 		cy.visit(
 			'/Article?url=https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 		);
-		cy.intercept('GET', '**/tcfv2/**').as('tcfRequest');
+		cy.intercept('POST', '**/tcfv2/**').as('tcfRequest');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
 		cmpIframe().find(`[title="Yes, I’m happy"]`).click();
@@ -80,7 +80,7 @@ describe('Braze messaging', function () {
 			'/Article?url=https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 		);
 
-		cy.intercept('GET', '**/tcfv2/**').as('tcfRequest');
+		cy.intercept('POST', '**/tcfv2/**').as('tcfRequest');
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
 		cmpIframe().find(`[title="Yes, I’m happy"]`).click();
