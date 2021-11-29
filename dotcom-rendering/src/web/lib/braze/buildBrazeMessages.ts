@@ -99,7 +99,8 @@ export const buildBrazeMessages = async (
 		appboy.openSession();
 
 		return brazeMessages;
-	} catch {
+	} catch (e) {
+		console.error('Error initialising Braze', e);
 		return new NullBrazeMessages();
 	}
 };
