@@ -1,0 +1,22 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+changedFiles="$(git diff-tree -r --name-only --no-commit-id HEAD@{1} HEAD)"
+changedLock="$(echo "$changedFiles" | { grep -E 'yarn.lock|package-lock.json' || :; })"
+changedNode="$(echo "$changedFiles" | { grep '.nvmrc' || :; })"
+
+echo "Checking Dependencies ..."
+echo $changedFiles
+echo $changedLock
+echo $changedNode
+
+if [[ ! -z $changedLock ]]
+then
+	echo "This application has new dependencies. Running `yarn`..."
+	yarn
+fi
+
+if [[ ! -z $changedNode ]]
+then
+	echo "This project now uses a new version of node. Please use 'nvm use' & run 'yarn'"
+fi
