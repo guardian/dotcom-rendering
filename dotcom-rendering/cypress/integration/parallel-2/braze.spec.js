@@ -25,6 +25,7 @@ const cmpIframe = () => {
 
 describe('Braze messaging', function () {
 	beforeEach(function () {
+		cy.clearLocalStorage();
 		handleGuCookieError();
 		setLocalBaseUrl();
 	});
