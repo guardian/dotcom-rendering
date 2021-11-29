@@ -20,22 +20,6 @@ const leftWidth = (size: LeftColSize) => {
 				}
 			`;
 		}
-		case 'standard': {
-			return css`
-				padding-right: 10px;
-				${until.desktop} {
-					/* below 980 */
-					display: none;
-				}
-
-				${from.desktop} {
-					/* above 980 */
-					flex-basis: 230px;
-					flex-grow: 0;
-					flex-shrink: 0;
-				}
-			`;
-		}
 		case 'compact':
 		default: {
 			return css`
