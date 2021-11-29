@@ -54,7 +54,7 @@ describe('Braze messaging', function () {
 		cy.visit(
 			'/Article?url=https://theguardian.com/games/2018/aug/23/nier-automata-yoko-taro-interview',
 		);
-		cy.scrollTo('bottom');
+
 		cy.waitUntil(() => localStorage.getItem('gu.brazeUserSet') === 'true', {
 			errorMsg: 'Error waiting for gu.brazeUserSet to be "true"',
 			timeout: 30000,
@@ -85,7 +85,6 @@ describe('Braze messaging', function () {
 
 		// Make second page load with consent
 		cy.reload();
-		cy.scrollTo('bottom');
 
 		cy.waitUntil(() => localStorage.getItem('gu.brazeUserSet') === 'true', {
 			errorMsg: 'Error waiting for gu.brazeUserSet to be "true"',
