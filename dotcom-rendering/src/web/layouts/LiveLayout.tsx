@@ -158,7 +158,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				/* from desktop define fixed body width */
 				${from.desktop} {
 					grid-column-gap: 20px;
-          grid-template-columns: 240px 700px;
+          			grid-template-columns: 240px 700px;
 					grid-template-areas:
 						'lines		media'
 						'meta		media'
@@ -466,25 +466,23 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="lines">
 								<Hide from="desktop">
-									<div css={maxWidth}>
-										<div css={stretchLines}>
-											<Lines
-												count={decideLineCount(
+									<div css={sidePaddingDesktop}>
+										<Lines
+											count={decideLineCount(
 													format.design,
 												)}
-												effect={decideLineEffect(
+											effect={decideLineEffect(
 													format.design,
 													format.theme,
 												)}
-												color="rgba(255, 255, 255, 0.4)"
+											color="rgba(255, 255, 255, 0.4)"
 											/>
-										</div>
 									</div>
 								</Hide>
 							</GridItem>
 							<GridItem area="meta">
 								<Hide from="desktop">
-									<div css={maxWidth}>
+									<div css={sidePaddingDesktop}>
 										<ArticleMeta
 											branding={branding}
 											format={format}
@@ -544,11 +542,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<GridItem area="lines">
 								<Hide until="desktop">
 									<div css={[maxWidth, sidePaddingDesktop]}>
-                    <Lines
-                      count={decideLineCount(
+										<Lines
+											count={decideLineCount(
                         format.design,
                       )}
-                      effect={decideLineEffect(
+											effect={decideLineEffect(
                         format.design,
                         format.theme,
                       )}
@@ -558,7 +556,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="meta" element="aside">
 								<Hide until="desktop">
-									<div css={[maxWidth, sidePaddingDesktop]}>
+									<div css={sidePaddingDesktop}>
 										<ArticleMeta
 											branding={branding}
 											format={format}
