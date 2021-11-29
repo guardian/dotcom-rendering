@@ -6,7 +6,7 @@ const path = require('path');
 const cpy = require('cpy');
 const { warn, log } = require('../env/log');
 
-const target = path.resolve(__dirname, 'target');
+const target = path.resolve(__dirname, '../..', 'target');
 
 // This task generates the riff-raff bundle. It creates the following
 // directory layout under target/
