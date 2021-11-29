@@ -5,5 +5,5 @@
     "video": false,
     "chromeWebSecurity": false,
     "blockHosts": "*ophan.theguardian.com",
-    "retries": 5
+    "retries": 2
 }
