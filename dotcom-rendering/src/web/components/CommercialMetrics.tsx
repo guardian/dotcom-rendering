@@ -3,7 +3,6 @@ import { tests } from '@frontend/web/experiments/ab-tests';
 import { sendCommercialMetrics } from '@guardian/commercial-core';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { useAB } from '@guardian/ab-react';
-import { prebidTimeout } from '@frontend/web/experiments/tests/prebid-timeout-test';
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { integrateCriteo } from '../experiments/tests/integrate-criteo-test';
@@ -24,7 +23,7 @@ export const CommercialMetrics: React.FC<{
 
 	useOnce(() => {
 		const testsToForceMetrics: ABTest[] = [
-			prebidTimeout,
+			/* keep array multi-line */
 			integrateCriteo,
 			integrateSmart,
 		];
