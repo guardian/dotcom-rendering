@@ -98,6 +98,9 @@ describe('Braze messaging', function () {
 			// Make a third call when logged out
 			cy.reload();
 
+			// eslint-disable-next-line cypress/no-unnecessary-waiting
+			cy.wait(2000);
+
 			cy.waitUntil(
 				() => localStorage.getItem('gu.brazeUserSet') !== 'true',
 				{

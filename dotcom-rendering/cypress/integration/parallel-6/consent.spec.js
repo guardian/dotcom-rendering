@@ -50,6 +50,10 @@ describe('Consent tests', function () {
 		// Make a second page load now that we have the CMP cookies set to reject tracking and check
 		// to see if the ga property was correctly unset, preventing further requests
 		cy.reload();
+
+		// eslint-disable-next-line cypress/no-unnecessary-waiting
+		cy.wait(2000);
+
 		cy.wait('@tcfRequest');
 		// We force window.ga to be null on consent rejection to prevent subsequent requests
 		cy.window().its('ga', { timeout: 30000 }).should('equal', null);
