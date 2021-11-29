@@ -35,7 +35,7 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	align-items: center;
 	border-top: ${line.primary} 1px solid;
 	background-color: ${background.primary};
-	padding: ${remSpace[1]} ${remSpace[2]} ${remSpace[2]} ${remSpace[3]};
+	padding: ${remSpace[2]} ${remSpace[2]} ${remSpace[2]} ${remSpace[3]};
 	&:focus {
 		${focusHalo};
 	}
@@ -53,7 +53,7 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		border-top: ${neutral[20]} 1px solid;
 	`}
 	${from.phablet} {
-		padding: ${remSpace[1]} ${remSpace[4]} ${remSpace[2]} ${remSpace[5]};
+		padding: ${remSpace[2]} ${remSpace[4]} ${remSpace[2]} ${remSpace[5]};
 	}
 	${from.desktop} {
 		display: none;
@@ -70,8 +70,12 @@ const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
 
 const arrowPosition: SerializedStyles = css`
 	position: absolute;
-	right: 10px;
-	top: 0;
+	right: ${remSpace[1]};
+	top: ${remSpace[1]};
+
+	${from.phablet} {
+		right: ${remSpace[4]};
+	}
 `;
 
 const backgroundColour = (
