@@ -27,4 +27,31 @@ describe('Consent tests', function () {
 		// Wait for a call to Google Analytics to be made - we expect this to happen
 		cy.intercept('POST', 'https://www.google-analytics.com/**');
 	});
+
+	it('should not add GA tracking scripts onto the window object after the reader rejects consent', function () {
+		// TODO: handle unhandled promise rejection
+		cy.on('uncaught:exception', (err, runnable, promise) => {
+			// return false to prevent the error from failing this test
+			if (promise) {
+				return false;
+			}
+		});
+		cy.visit(`Article?url=${firstPage}`);
+		cy.window().its('ga').should('not.exist');
+		// Intercept calls to this tcf endpoint so we can wait for them later
+		cy.intercept('GET', '**/tcfv2/**').as('tcfRequest');
+		// Open the Privacy setting dialogue
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		// Reject tracking cookies
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe().find("[title='Reject all']").click();
+		cy.wait('@tcfRequest');
+		// We force window.ga to be null upon consent rejection to prevent subsequent requests
+		cy.window().its('ga').should('equal', null);
+		// Make a second page load now that we have the CMP cookies set to reject tracking and check
+		// to see if the ga property remains correctly unset
+		cy.reload();
+		cy.window().its('ga').should('equal', null);
+	});
 });
