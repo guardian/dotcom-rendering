@@ -4,6 +4,18 @@
     "baseUrl": "http://localhost:9000/",
     "video": false,
     "chromeWebSecurity": false,
-    "blockHosts": "*ophan.theguardian.com",
+    "blockHosts": [
+		"*ophan.theguardian.com",
+		"pixel.adsafeprotected.com",
+		"*permutive.com",
+		"*adnxs.com",
+		"*adsystem.com",
+		"*casalemedia.com",
+		"*pubmatic.com",
+		"*360yield.com",
+		"*omnitagjs.com",
+		"*the-ozone-project.com",
+		"*openx.net"
+	],
     "retries": 2
 }

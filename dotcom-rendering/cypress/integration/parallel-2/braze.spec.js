@@ -95,24 +95,6 @@ describe('Braze messaging', function () {
 			cy.clearCookie('GU_U');
 			cy.intercept('GET', '**/user/me/identifiers', { statusCode: 403 });
 
-			// Agressively stub out the ad calls that will be triggered when we reload after
-			// logging out
-			cy.intercept('POST', '**/*/**', 'stubbed');
-			cy.intercept('POST', '**google**', 'stubbed');
-			cy.intercept('POST', '**ads**', 'stubbed');
-			cy.intercept('GET', '**/services/**', 'stubbed');
-			cy.intercept('GET', '**/pixel.adsafeprotected.com/**', 'stubbed');
-			cy.intercept('GET', '**/cygnus/**', 'stubbed');
-			cy.intercept('GET', '**/gampad/**', 'stubbed');
-			cy.intercept('GET', '**/hb/**', 'stubbed');
-			cy.intercept('GET', '**/e/**', 'stubbed');
-			cy.on('uncaught:exception', (err, runnable) => {
-				// Such agressive stubbing breaks a tonne of things. Is this ideal? Not
-				// really. But we're only interested in ensuring the Braze data is cleared
-				// and having all these network requests is making this test flakey on
-				// CI
-				return false;
-			});
 			// Make a third call when logged out
 			cy.reload();
 
