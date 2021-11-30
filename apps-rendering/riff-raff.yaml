@@ -9,7 +9,7 @@ deployments:
       amiTags:
         Recipe: bionic-mobile-node-ARM
         AmigoStage: PROD
-      templatePath: cloudformation.yaml
+      templatePath: MobileAppsRendering.template.json
   mobile-apps-rendering:
     type: autoscaling
     parameters:
