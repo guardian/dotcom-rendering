@@ -7,18 +7,17 @@ import type { FC, ReactNode } from 'react';
 // ----- Component ----- //
 
 const styles = (area: string): SerializedStyles => css`
-    grid-area: ${area};
+	grid-area: ${area};
 `;
 
 interface Props {
-    area: string;
-    children: ReactNode;
+	area: string;
+	children: ReactNode;
 }
 
-const GridItem: FC<Props> = ({ area, children }) =>
-    <div css={styles(area)}>
-        {children}
-    </div>
+const GridItem: FC<Props> = ({ area, children }) => (
+	<div css={styles(area)}>{children}</div>
+);
 
 // ----- Exports ----- //
 

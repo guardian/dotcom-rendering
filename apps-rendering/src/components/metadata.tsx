@@ -18,9 +18,7 @@ import Follow from 'components/follow';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { useState } from 'react';
-import {
-	darkModeCss,
-} from 'styles';
+import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
@@ -84,7 +82,7 @@ const toggleStyles = css`
 const liveBlogPadding = css`
 	padding-left: ${remSpace[3]};
 	padding-right: ${remSpace[3]};
-	
+
 	${from.mobileLandscape} {
 		padding-left: 0;
 		padding-right: 0;
@@ -223,9 +221,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 		>
 			<BlogLines {...item} />
 			<Avatar {...item} />
-			<div
-				css={css(textStyles, withBylineTextStyles, liveBlogPadding)}
-			>
+			<div css={css(textStyles, withBylineTextStyles, liveBlogPadding)}>
 				<div css={liveBylineStyles}>
 					<Byline {...item} />
 				</div>

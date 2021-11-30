@@ -125,7 +125,7 @@ const getSizes = ({ display, design }: ArticleFormat, image: Image): Sizes => {
 			return {
 				mediaQueries: [{ breakpoint: 'tablet', size: '700px' }],
 				default: '100vw',
-			}
+			};
 	}
 	switch (display) {
 		case ArticleDisplay.Immersive:
