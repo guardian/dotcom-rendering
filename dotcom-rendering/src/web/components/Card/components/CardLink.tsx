@@ -54,7 +54,7 @@ const linkStyles = (format: ArticleFormat, palette: Palette) => {
 				${baseLinkStyles};
 				:hover {
 					/* TODO: This colour is hard coded here because it does not yet
-                           exist in src-foundation. Once it's been added, please
+                           exist in source-foundations. Once it's been added, please
                            remove this. @siadcock is aware. */
 					/* stylelint-disable-next-line color-no-hex */
 					background-color: #fdf0e8;
