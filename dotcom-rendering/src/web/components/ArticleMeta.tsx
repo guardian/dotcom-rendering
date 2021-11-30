@@ -155,6 +155,8 @@ const metaContainer = (format: ArticleFormat) => {
 				case ArticleDesign.DeadBlog: {
 					return '';
 				}
+				default:
+					return defaultMargins;
 			}
 		}
 	}
