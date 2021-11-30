@@ -71,7 +71,7 @@ export const MainMedia: React.FC<{
 	pageId,
 	webTitle,
 }) => {
-	const isImmersive = format.design === ArticleDisplay.Immersive;
+	const isImmersive = format.display === ArticleDisplay.Immersive;
 	const isLiveOrDeadBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
