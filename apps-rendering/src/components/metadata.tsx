@@ -60,7 +60,6 @@ const blogStyles = css`
 	${from.desktop} {
 		padding: 0;
 		width: 100%;
-		margin-bottom: ${remSpace[2]};
 	}
 `;
 
@@ -82,6 +81,7 @@ const toggleStyles = css`
 const liveBlogPadding = css`
 	padding-left: ${remSpace[3]};
 	padding-right: ${remSpace[3]};
+	padding-bottom: ${remSpace[2]};
 
 	${from.mobileLandscape} {
 		padding-left: 0;
