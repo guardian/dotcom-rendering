@@ -8,7 +8,7 @@ import {
 	Lines,
 	ToggleSwitch,
 } from '@guardian/source-react-components-development-kitchen';
-import { neutral, remSpace } from '@guardian/src-foundations';
+import { breakpoints, neutral, remSpace } from '@guardian/src-foundations';
 import { from, until } from '@guardian/src-foundations/mq';
 import Avatar from 'components/avatar';
 import Byline from 'components/byline';
@@ -20,9 +20,6 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import {
 	darkModeCss,
-	liveblogPhabletSidePadding,
-	sidePadding,
-	wideColumnWidth,
 } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
@@ -52,8 +49,20 @@ const withBylineTextStyles = css`
 const blogStyles = css`
 	display: block;
 	margin-bottom: 0;
+
+	${from.mobileLandscape} {
+		padding: 0 ${remSpace[5]};
+	}
+
+	${from.tablet} {
+		width: ${breakpoints.tablet}px;
+		margin: 0 auto;
+	}
+
 	${from.desktop} {
-		width: ${wideColumnWidth}px;
+		padding: 0;
+		width: 100%;
+		margin-bottom: ${remSpace[2]};
 	}
 `;
 
@@ -72,14 +81,11 @@ const toggleStyles = css`
 	flex-grow: 1;
 `;
 
-const liveblogSidePadding = css`
-	${sidePadding}
-
-	padding-bottom: ${remSpace[2]};
-
-	${liveblogPhabletSidePadding}
-
-	${from.desktop} {
+const liveBlogPadding = css`
+	padding-left: ${remSpace[3]};
+	padding-right: ${remSpace[3]};
+	
+	${from.mobileLandscape} {
 		padding-left: 0;
 		padding-right: 0;
 	}
@@ -218,7 +224,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 			<BlogLines {...item} />
 			<Avatar {...item} />
 			<div
-				css={css(textStyles, withBylineTextStyles, liveblogSidePadding)}
+				css={css(textStyles, withBylineTextStyles, liveBlogPadding)}
 			>
 				<div css={liveBylineStyles}>
 					<Byline {...item} />
@@ -228,7 +234,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 			</div>
 			<div css={metaBottomStyles(isLive(design))}>
 				{isLive(design) && (
-					<div css={css(toggleStyles, liveblogSidePadding)}>
+					<div css={css(toggleStyles, liveBlogPadding)}>
 						<ToggleSwitch
 							checked={checked}
 							label={'Get alerts on this story'}
