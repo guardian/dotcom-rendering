@@ -4,7 +4,7 @@ import { textSans } from '@guardian/src-foundations/typography';
 import { regionClasses } from '../lib/region-classes';
 import { RegionalAdProps, RegionalAd } from './Ad';
 
-// This CSS should be imported and added to global styles in amp/server/document.tsx to add the Advertisment label to the sticky
+// This CSS should be imported and added to global styles in amp/server/document.tsx to add the Advertisement label to the sticky
 export const stickyAdLabelCss = `
 amp-sticky-ad:before {
 	content: 'Advertisement';
