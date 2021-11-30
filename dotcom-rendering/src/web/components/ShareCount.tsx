@@ -10,6 +10,7 @@ import { useApi } from '@root/src/web/lib/useApi';
 import { formatCount } from '@root/src/web/lib/formatCount';
 import { joinUrl } from '@root/src/lib/joinUrl';
 import { ArticleDesign } from '@guardian/libs';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	ajaxUrl: string;
@@ -32,9 +33,11 @@ const containerStyles = css`
 	color: ${text.supporting};
 `;
 
-const liveblogColourStyles = css`
+// for liveblog smaller breakpoints article meta is located in the same
+// container as standfirst and needs the same styling as standfirst
+const standfirstColouring = (palette: Palette) => css`
 	${until.desktop} {
-		color: ${neutral[100]};
+		color: ${palette.text.standfirst};
 	}
 `;
 
@@ -71,6 +74,7 @@ const shortStyles = css`
 
 export const ShareCount = ({ ajaxUrl, pageId, format }: Props) => {
 	const shareUrl = joinUrl([ajaxUrl, 'sharecount', `${pageId}.json`]);
+	const palette = decidePalette(format);
 	const { data: shareData, error: shareError } =
 		useApi<ShareCountType>(shareUrl);
 	if (shareError) {
@@ -87,7 +91,7 @@ export const ShareCount = ({ ajaxUrl, pageId, format }: Props) => {
 			css={[
 				containerStyles,
 				format.design === ArticleDesign.LiveBlog &&
-					liveblogColourStyles,
+					standfirstColouring(palette),
 			]}
 			aria-label={`${short} Shares`}
 			data-cy="share-counts"

@@ -537,6 +537,11 @@ const backgroundSpeechBubble = (format: ArticleFormat): string => {
 };
 
 const fillCommentCount = (format: ArticleFormat): string => {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	)
+		return pillarPalette[format.theme].dark;
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];

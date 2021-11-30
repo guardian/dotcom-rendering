@@ -26,9 +26,11 @@ const containerStyles = (palette: Palette) => css`
 	padding-top: 5px;
 `;
 
-const liveblogContainerColourStyles = css`
+// for liveblog smaller breakpoints article meta is located in the same
+// container as standfirst and needs the same styling as standfirst
+const standfirstColouring = (palette: Palette) => css`
 	${until.desktop} {
-		color: ${neutral[100]};
+		color: ${palette.text.standfirst};
 	}
 `;
 
@@ -96,7 +98,7 @@ export const CommentCount = ({
 			css={[
 				containerStyles(palette),
 				format.design === ArticleDesign.LiveBlog &&
-					liveblogContainerColourStyles,
+					standfirstColouring(palette),
 			]}
 			data-cy="comment-counts"
 			value={`${long} comments on this article`}

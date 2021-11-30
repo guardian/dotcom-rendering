@@ -117,13 +117,11 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 						'standfirst'
 						'lines'
 						'meta';
+					grid-column-gap: 0px;
 				}
 				${from.desktop} {
 					grid-template-columns: 220px 1fr;
 					grid-template-areas: 'lastupdated standfirst';
-				}
-				${until.tablet} {
-					grid-column-gap: 0px;
 				}
 			}
 		`}
