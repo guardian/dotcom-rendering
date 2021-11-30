@@ -27,10 +27,7 @@ export const defaultStory = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn
-					showPartialRightBorder={true}
-					showRightBorder={false}
-				>
+				<LeftColumn borderType="partial">
 					<></>
 				</LeftColumn>
 				<ArticleContainer

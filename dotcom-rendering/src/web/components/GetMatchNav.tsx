@@ -16,6 +16,7 @@ export const GetMatchNav = ({ matchUrl }: Props) => {
 		awayTeam: TeamType;
 		comments?: string;
 		minByMinUrl?: string;
+		venue?: string;
 	}>(matchUrl);
 
 	if (loading) return <Loading />;
@@ -31,7 +32,6 @@ export const GetMatchNav = ({ matchUrl }: Props) => {
 				homeTeam={data.homeTeam}
 				awayTeam={data.awayTeam}
 				comments={data.comments}
-				minByMinUrl={data.minByMinUrl}
 			/>
 		);
 	}

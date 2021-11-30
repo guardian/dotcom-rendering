@@ -345,6 +345,51 @@ export const Quiz: CAPIType = {
 						],
 					},
 					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
+					},
+					{
+						title: 'Climate crisis',
+						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Football',
+						url: '/football',
+						children: [
+							{
+								title: 'Live scores',
+								url: '/football/live',
+								longTitle: 'football/live',
+							},
+							{
+								title: 'Tables',
+								url: '/football/tables',
+								longTitle: 'football/tables',
+							},
+							{
+								title: 'Fixtures',
+								url: '/football/fixtures',
+								longTitle: 'football/fixtures',
+							},
+							{
+								title: 'Results',
+								url: '/football/results',
+								longTitle: 'football/results',
+							},
+							{
+								title: 'Competitions',
+								url: '/football/competitions',
+								longTitle: 'football/competitions',
+							},
+							{
+								title: 'Clubs',
+								url: '/football/teams',
+								longTitle: 'football/teams',
+							},
+						],
+					},
+					{
 						title: 'Business',
 						url: '/business',
 						children: [
@@ -401,57 +446,12 @@ export const Quiz: CAPIType = {
 						],
 					},
 					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-					},
-					{
-						title: 'Football',
-						url: '/football',
-						children: [
-							{
-								title: 'Euro 2020',
-								url: '/football/euro-2020',
-							},
-							{
-								title: 'Live scores',
-								url: '/football/live',
-								longTitle: 'football/live',
-							},
-							{
-								title: 'Tables',
-								url: '/football/tables',
-								longTitle: 'football/tables',
-							},
-							{
-								title: 'Fixtures',
-								url: '/football/fixtures',
-								longTitle: 'football/fixtures',
-							},
-							{
-								title: 'Results',
-								url: '/football/results',
-								longTitle: 'football/results',
-							},
-							{
-								title: 'Competitions',
-								url: '/football/competitions',
-								longTitle: 'football/competitions',
-							},
-							{
-								title: 'Clubs',
-								url: '/football/teams',
-								longTitle: 'football/teams',
-							},
-						],
-					},
-					{
 						title: 'Environment',
 						url: '/environment',
 						children: [
 							{
-								title: 'Climate change',
-								url: '/environment/climate-change',
+								title: 'Climate crisis',
+								url: '/environment/climate-crisis',
 							},
 							{
 								title: 'Wildlife',
@@ -550,17 +550,9 @@ export const Quiz: CAPIType = {
 				iconName: 'home',
 				children: [
 					{
-						title: 'Euro 2020',
-						url: '/football/euro-2020',
-					},
-					{
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: 'Euro 2020',
-								url: '/football/euro-2020',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -806,16 +798,8 @@ export const Quiz: CAPIType = {
 						url: '/theguardian/journal',
 					},
 					{
-						title: 'Weekend',
-						url: '/theguardian/weekend',
-					},
-					{
-						title: 'The Guide',
-						url: '/theguardian/theguide',
-					},
-					{
-						title: 'Saturday review',
-						url: '/theguardian/guardianreview',
+						title: 'Saturday',
+						url: '/theguardian/saturday',
 					},
 				],
 			},
@@ -933,6 +917,10 @@ export const Quiz: CAPIType = {
 				title: 'Guardian Puzzles app',
 				url: 'https://puzzles.theguardian.com/download',
 			},
+			{
+				title: 'Guardian content licensing site',
+				url: 'https://licensing.theguardian.com/',
+			},
 		],
 		currentNavLinkTitle: 'Football',
 		currentPillarTitle: 'Sport',
@@ -941,10 +929,6 @@ export const Quiz: CAPIType = {
 				title: 'Football',
 				url: '/football',
 				children: [
-					{
-						title: 'Euro 2020',
-						url: '/football/euro-2020',
-					},
 					{
 						title: 'Live scores',
 						url: '/football/live',
@@ -978,10 +962,6 @@ export const Quiz: CAPIType = {
 				],
 			},
 			links: [
-				{
-					title: 'Euro 2020',
-					url: '/football/euro-2020',
-				},
 				{
 					title: 'Live scores',
 					url: '/football/live',
@@ -1228,7 +1208,7 @@ export const Quiz: CAPIType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: '/info/2016/jul/27/modern-slavery-and-our-supply-chains?INTCMP=NGW_FOOTER_UK_GU_MODERN_SLAVERY_ACT',
+					url: 'https://uploads.guim.co.uk/2021/07/27/STL_&_GMG_Modern_Slavery_Act_Statement_2021.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1322,6 +1302,7 @@ export const Quiz: CAPIType = {
 			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=twitter',
 	},
 	sectionName: 'football',
+	webPublicationDateDeprecated: '2020-06-12T09:09:24.000Z',
 	pageType: {
 		hasShowcaseMainElement: true,
 		isFront: false,
@@ -1334,6 +1315,7 @@ export const Quiz: CAPIType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline: 'Sports quiz: football in the 1980s',
+	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
@@ -1423,62 +1405,12 @@ export const Quiz: CAPIType = {
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=85&auto=format&fit=max&s=80197e8eda11940bf4a98995dc21b427',
-							width: 605,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=85&auto=format&fit=max&s=4a0d6b8f0d00baff599bba2677658952',
+							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=59d4a88c81779335939a856cbf0c7d5d',
-							width: 1210,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=85&auto=format&fit=max&s=a2d4526b829ba0bf9ee3c9b581dd2064',
-							width: 445,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=190ca7bcf672f8ceb453bffb9279aff3',
-							width: 890,
-						},
-					],
-				},
-				{
-					weighting: 'thumbnail',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=140&quality=85&auto=format&fit=max&s=1131df57cc83f112b199558ab9333089',
-							width: 140,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=61953cf410eeff93698c8cc6f15f810a',
-							width: 280,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=120&quality=85&auto=format&fit=max&s=547c614424ff3161c418d362fb4bce4f',
-							width: 120,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=42d601a8cd539e7603f5baf856e73090',
-							width: 240,
-						},
-					],
-				},
-				{
-					weighting: 'supporting',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=380&quality=85&auto=format&fit=max&s=f5d47c1ede2183ae111ffd6ea00955c0',
-							width: 380,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=3ab07742f92e681a2876aa773ff1d7df',
-							width: 760,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=300&quality=85&auto=format&fit=max&s=7d216e0794ec32f80f0abb72056c3dd0',
-							width: 300,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=8b77afda159b860b2bcc4513f1112b0e',
-							width: 600,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=a2191cad923ec3ee7ac0e38fc5ae14df',
+							width: 1400,
 						},
 						{
 							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
@@ -1489,22 +1421,30 @@ export const Quiz: CAPIType = {
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=85&auto=format&fit=max&s=80197e8eda11940bf4a98995dc21b427',
-							width: 605,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=85&auto=format&fit=max&s=2ab576ce1f053f23b2354c2fb2349ad6',
+							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=59d4a88c81779335939a856cbf0c7d5d',
-							width: 1210,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=834cec1a66c2853d6971de4146edaae8',
+							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=85&auto=format&fit=max&s=a2d4526b829ba0bf9ee3c9b581dd2064',
-							width: 445,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=85&auto=format&fit=max&s=772296f353024f019a0fd61bd2850607',
+							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=190ca7bcf672f8ceb453bffb9279aff3',
-							width: 890,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=ccdc3536e3c99dcc1a43ac6f1239baf0',
+							width: 930,
 						},
 					],
+				},
+				{
+					weighting: 'thumbnail',
+					srcSet: [],
+				},
+				{
+					weighting: 'supporting',
+					srcSet: [],
 				},
 				{
 					weighting: 'showcase',
@@ -1569,36 +1509,19 @@ export const Quiz: CAPIType = {
 				},
 				{
 					weighting: 'halfwidth',
-					srcSet: [
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=85&auto=format&fit=max&s=944465773910d98abd3d2537ab6bbe28',
-							width: 620,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=455c1caca2cd5d5e53438ab5acae7aeb',
-							width: 1240,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=85&auto=format&fit=max&s=80197e8eda11940bf4a98995dc21b427',
-							width: 605,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=59d4a88c81779335939a856cbf0c7d5d',
-							width: 1210,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=85&auto=format&fit=max&s=a2d4526b829ba0bf9ee3c9b581dd2064',
-							width: 445,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=190ca7bcf672f8ceb453bffb9279aff3',
-							width: 890,
-						},
-					],
+					srcSet: [],
 				},
 				{
 					weighting: 'immersive',
 					srcSet: [
+						{
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1900&quality=85&auto=format&fit=max&s=797496234e6746b413752a6bdb9ec99a',
+							width: 1900,
+						},
+						{
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=dc5f48cab9881c72130bcd13ac45d586',
+							width: 3800,
+						},
 						{
 							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1300&quality=85&auto=format&fit=max&s=6942bb5fd934c057f1abd0e59cd6807a',
 							width: 1300,
@@ -1616,53 +1539,45 @@ export const Quiz: CAPIType = {
 							width: 2280,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1125&quality=85&auto=format&fit=max&s=793113adf6645711f64e9f286558d16b',
-							width: 1125,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=980&quality=85&auto=format&fit=max&s=0f07c8fab16cf627e3a06ae2e6f738f3',
+							width: 980,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1125&quality=45&auto=format&fit=max&dpr=2&s=e9740ae7c19b36bdcb56a0d359f3ef81',
-							width: 2250,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=ef053995f1f90c5d469f88d40a924484',
+							width: 1960,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=965&quality=85&auto=format&fit=max&s=faee23085ae3293e02dfe2ff680de59c',
-							width: 965,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=740&quality=85&auto=format&fit=max&s=b0025a8f8e09f2e444c24c27c47a8fbd',
+							width: 740,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=965&quality=45&auto=format&fit=max&dpr=2&s=005faaac26b415cb40650efe6171c86f',
-							width: 1930,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=6293eba2447a396b3a4cadf63f6e2889',
+							width: 1480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=725&quality=85&auto=format&fit=max&s=e370b5c011fa0e3ba17bacef3dc2f092',
-							width: 725,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=85&auto=format&fit=max&s=1e11e11b4e26e9a4d2285b48bddc04c6',
+							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=725&quality=45&auto=format&fit=max&dpr=2&s=434ed91fda3d7484228575a4898fe34c',
-							width: 1450,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=ddf05ee6f3cbe8fb6ad4f9065cc4bca9',
+							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=85&auto=format&fit=max&s=2ab576ce1f053f23b2354c2fb2349ad6',
-							width: 645,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=480&quality=85&auto=format&fit=max&s=69722aa748d9ed4df5e616e12232c908',
+							width: 480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=834cec1a66c2853d6971de4146edaae8',
-							width: 1290,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=85&auto=format&fit=max&s=772296f353024f019a0fd61bd2850607',
-							width: 465,
-						},
-						{
-							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=ccdc3536e3c99dcc1a43ac6f1239baf0',
-							width: 930,
+							src: 'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=970f8ac70ba38f1c3f539ec570d90264',
+							width: 960,
 						},
 					],
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: 'af46fef8-e15c-44c6-a36b-291497ac3ec8',
+			elementId: 'b2dadec7-7768-40f0-a7c1-a7324b1b8ffd',
 		},
 	],
-	webPublicationDateDeprecated: '2020-06-12T09:09:24.000Z',
+	webPublicationDate: '2020-06-12T09:09:24.000Z',
 	blocks: [
 		{
 			id: '5ee1f3138f0875833522a23a',
@@ -2272,7 +2187,7 @@ export const Quiz: CAPIType = {
 						},
 					],
 					_type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-					elementId: 'fac89896-5408-4c1e-9993-12c070694b29',
+					elementId: 'cb05f906-4e4b-4020-9b7d-c71e5b0a0eb1',
 				},
 			],
 			blockCreatedOn: 1591866131000,

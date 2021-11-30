@@ -7,6 +7,7 @@ import { Hide } from '@root/src/web/components/Hide';
 import { Flex } from '@root/src/web/components/Flex';
 
 import { space, from } from '@guardian/source-foundations';
+import { ArticleFormat, ArticleDesign } from '@guardian/libs';
 
 type Props = {
 	title?: string;
@@ -26,6 +27,7 @@ type Props = {
 	children?: React.ReactNode;
 	stretchRight?: boolean;
 	leftColSize?: LeftColSize;
+	format?: ArticleFormat;
 };
 
 const containerStyles = css`
@@ -50,25 +52,41 @@ const rightMargin = css`
 	}
 `;
 
-const padding = css`
-	padding: 0 10px;
-`;
+const padding = (format?: ArticleFormat) => {
+	switch (format?.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return css`
+				padding: 0;
+
+				${from.desktop} {
+					padding: 0 10px;
+				}
+			`;
+		default:
+			return css`
+				padding: 0 10px;
+			`;
+	}
+};
 
 const Container = ({
 	children,
 	padded,
 	verticalMargins,
 	stretchRight,
+	format,
 }: {
 	children: React.ReactNode;
 	padded: boolean;
 	verticalMargins: boolean;
 	stretchRight: boolean;
+	format?: ArticleFormat;
 }) => (
 	<div
 		css={[
 			containerStyles,
-			padded && padding,
+			padded && padding(format),
 			verticalMargins && margins,
 			!stretchRight && rightMargin,
 		]}
@@ -95,6 +113,7 @@ export const ContainerLayout = ({
 	leftContent,
 	stretchRight = false,
 	leftColSize,
+	format,
 }: Props) => (
 	<ElementContainer
 		sectionId={sectionId}
@@ -106,9 +125,8 @@ export const ContainerLayout = ({
 	>
 		<Flex>
 			<LeftColumn
-				showRightBorder={centralBorder === 'full'}
+				borderType={centralBorder}
 				borderColour={borderColour}
-				showPartialRightBorder={centralBorder === 'partial'}
 				size={leftColSize}
 			>
 				<>
@@ -125,6 +143,7 @@ export const ContainerLayout = ({
 				padded={padContent}
 				verticalMargins={verticalMargins}
 				stretchRight={stretchRight}
+				format={format}
 			>
 				<Hide when="above" breakpoint="leftCol">
 					<ContainerTitle

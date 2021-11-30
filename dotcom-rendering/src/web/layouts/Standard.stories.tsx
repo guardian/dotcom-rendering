@@ -183,7 +183,19 @@ export const LiveStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(LiveBlog);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-LiveStory.story = { name: 'LiveBlog' };
+LiveStory.story = {
+	name: 'LiveBlog',
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
+	},
+};
 
 export const DeadStory = (): React.ReactNode => {
 	const DeadBlog = {
@@ -196,7 +208,19 @@ export const DeadStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(DeadBlog);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
-DeadStory.story = { name: 'DeadBlog' };
+DeadStory.story = {
+	name: 'DeadBlog',
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
+	},
+};
 
 export const EditorialStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Editorial);

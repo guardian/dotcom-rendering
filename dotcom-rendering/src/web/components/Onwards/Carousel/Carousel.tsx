@@ -72,31 +72,55 @@ const wrapperStyle = (length: number) => css`
 const isLastCardShowing = (index: number, totalStories: number) =>
 	index >= totalStories - 4;
 
+const containerMargins = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
+			return css`
+				margin-top: 6px;
+				margin-bottom: 24px;
+
+				margin-left: 0px;
+				margin-right: 0px;
+
+				${from.leftCol} {
+					margin-left: -1px;
+					margin-right: -10px;
+					margin-top: 6px;
+				}
+			`;
+		}
+		default: {
+			return css`
+				margin-top: 6px;
+				margin-bottom: 24px;
+
+				margin-left: 0px;
+				margin-right: 0px;
+
+				${from.tablet} {
+					/* Shrink the container to remove the leading and
+       				   trailing side margins from the list of cards */
+					margin-left: -10px;
+					margin-right: -10px;
+				}
+
+				${from.leftCol} {
+					margin-left: -1px;
+					margin-right: -10px;
+					margin-top: 6px;
+				}
+			`;
+		}
+	}
+};
+
 const containerStyles = css`
 	display: flex;
 	flex-direction: column;
 	position: relative;
 
 	overflow: hidden; /* Needed for scrolling to work */
-
-	margin-top: 6px;
-	margin-bottom: 24px;
-
-	margin-left: 0px;
-	margin-right: 0px;
-
-	${from.tablet} {
-		/* Shrink the container to remove the leading and
-       trailing side margins from the list of cards */
-		margin-left: -10px;
-		margin-right: -10px;
-	}
-
-	${from.leftCol} {
-		margin-left: -1px;
-		margin-right: -10px;
-		margin-top: 6px;
-	}
 `;
 
 const carouselStyle = (isFullCardImage?: boolean) => css`
@@ -198,15 +222,29 @@ const buttonContainerStyle = css`
 		display: none;
 	}
 `;
-const prevButtonContainerStyle = css`
-	${from.leftCol} {
-		left: 120px;
-	}
+const prevButtonContainerStyle = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
+			return css`
+				${from.leftCol} {
+					left: 205px;
+				}
+			`;
+		}
+		default: {
+			return css`
+				${from.leftCol} {
+					left: 120px;
+				}
 
-	${from.wide} {
-		left: 205px;
+				${from.wide} {
+					left: 205px;
+				}
+			`;
+		}
 	}
-`;
+};
 
 const nextButtonContainerStyle = css`
 	right: 10px;
@@ -557,7 +595,15 @@ export const Carousel: React.FC<OnwardsType> = ({
 			css={wrapperStyle(trails.length)}
 			data-link-name={formatAttrString(heading)}
 		>
-			<LeftColumn showRightBorder={false} showPartialRightBorder={true}>
+			<LeftColumn
+				borderType="partial"
+				size={
+					format.design === ArticleDesign.LiveBlog ||
+					format.design === ArticleDesign.DeadBlog
+						? 'wide'
+						: 'compact'
+				}
+			>
 				<HeaderAndNav
 					heading={heading}
 					trails={trails}
@@ -568,7 +614,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
-			<div css={[buttonContainerStyle, prevButtonContainerStyle]}>
+			<div css={[buttonContainerStyle, prevButtonContainerStyle(format)]}>
 				<button
 					onClick={prev}
 					aria-label="Move carousel backwards"
@@ -590,7 +636,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</button>
 			</div>
 			<div
-				css={containerStyles}
+				css={[containerStyles, containerMargins(format)]}
 				data-component={ophanComponentName}
 				data-link={formatAttrString(heading)}
 			>

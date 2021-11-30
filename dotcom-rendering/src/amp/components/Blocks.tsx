@@ -125,12 +125,14 @@ export const Blocks: React.FunctionComponent<{
 		switches: {
 			ampPrebid: switches.ampPrebid,
 			permutive: switches.permutive,
+			ampAmazon: switches.ampAmazon,
 		},
 	};
 
 	const adConfig = {
 		usePrebid: adInfo.switches.ampPrebid,
 		usePermutive: adInfo.switches.permutive,
+		useAmazon: adInfo.switches.ampAmazon,
 	};
 	return (
 		<>

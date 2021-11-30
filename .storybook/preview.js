@@ -1,3 +1,5 @@
+import { setCookie } from '@guardian/libs';
+
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
@@ -8,7 +10,6 @@ import { resets } from '@guardian/source-foundations'
 import { Lazy } from '@root/src/web/components/Lazy';
 import { Picture } from '@root/src/web/components/Picture';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
-import { addCookie } from '@root/src/web/browser/cookie';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -45,7 +46,7 @@ window.guardian = {
 		}
 	},
 }
-addCookie('bwid', 'mockBrowserId');
+setCookie({name:'bwid', value: 'mockBrowserId'});
 
 const guardianViewports = {
 	mobileMedium: {

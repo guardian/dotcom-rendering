@@ -2,14 +2,16 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	background,
 	headline,
 	neutral,
 	remSpace,
-	text,
 	textSans,
 } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
@@ -26,12 +28,12 @@ interface Props {
 	item: Item;
 }
 
-const darkStyles: SerializedStyles = darkMode`
-    background: ${background.inverse};
-    color: ${neutral[60]};
+const darkStyles = (format: ArticleFormat): SerializedStyles => darkMode`
+    background: ${background.standfirstDark(format)};
+    color: ${text.standfirstDark(format)};
 
     a {
-        color: ${neutral[60]};
+        color: ${text.standfirstDark(format)};
         border-bottom: 0.0625rem solid ${neutral[46]};
     }
 `;
@@ -42,7 +44,8 @@ const isNotBlog = (format: ArticleFormat): boolean =>
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	margin-bottom: ${remSpace[3]};
-	color: ${text.primary};
+	color: ${text.standfirst(format)};
+	background-color: ${background.standfirst(format)};
 
 	p,
 	ul {
@@ -53,7 +56,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 		font-style: normal;
 	}
 
-	${isNotBlog(format) && darkStyles}
+	${isNotBlog(format) && darkStyles(format)}
 `;
 
 const normalHeadline = css`
@@ -76,7 +79,6 @@ const immersiveLabs: SerializedStyles = css`
 `;
 
 const liveblogStyles: SerializedStyles = css`
-	color: ${neutral[100]};
 	${headline.xxxsmall()};
 	margin-bottom: 0;
 	padding-bottom: ${remSpace[3]};
@@ -91,8 +93,8 @@ const liveblogStyles: SerializedStyles = css`
 	}
 `;
 
-const media = css`
-	color: ${neutral[86]};
+const media = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.standfirst(format)};
 	p,
 	ul,
 	li {
@@ -126,7 +128,7 @@ const getStyles = (item: Item): SerializedStyles => {
 		case ArticleDesign.Comment:
 			return css(styles(format), thinHeadline);
 		case ArticleDesign.Media:
-			return media;
+			return media(format);
 
 		default:
 			return css(styles(format), normalHeadline);

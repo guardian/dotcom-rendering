@@ -42,6 +42,8 @@ export const decideDesign = (format: CAPIFormat): ArticleDesign => {
 			return ArticleDesign.PrintShop;
 		case 'ObituaryDesign':
 			return ArticleDesign.Obituary;
+		case 'FullPageInteractiveDesign':
+			return ArticleDesign.FullPageInteractive;
 		default:
 			return ArticleDesign.Standard;
 	}

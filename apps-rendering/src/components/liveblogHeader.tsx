@@ -5,11 +5,11 @@ import type { SerializedStyles } from '@emotion/react';
 import {
 	from,
 	neutral,
-	news,
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
 import { Column, Columns, Container } from '@guardian/source-react-components';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';
@@ -21,7 +21,7 @@ import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';
 import Series from './series';
 
-// // ----- Styles ----- //
+// ----- Component ----- //
 
 const headerBackgroundStyles = ({
 	liveblogBackground,
@@ -65,7 +65,10 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 
 	return (
 		<header>
-			<Container element="div" backgroundColor={news[300]}>
+			<Container
+				element="div"
+				backgroundColor={background.headline(format)}
+			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Series item={item} />
@@ -75,7 +78,10 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 					</Column>
 				</Columns>
 			</Container>
-			<Container element="div" backgroundColor={news[200]}>
+			<Container
+				element="div"
+				backgroundColor={background.standfirst(format)}
+			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<time css={timestampStyles}>

@@ -31,6 +31,7 @@ const FirstPublished = ({
 		>
 			<time
 				dateTime={publishedDate.toISOString()}
+				data-relativeformat="med"
 				css={css`
 					color: ${neutral[46]};
 					font-weight: bold;

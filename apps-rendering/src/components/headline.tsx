@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { border } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -13,7 +14,6 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import StarRating from 'components/starRating';
-import { border } from 'editorialPalette';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import type { ReactElement } from 'react';
@@ -72,7 +72,7 @@ const analysisStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.medium({ lineHeight: 'regular', fontWeight: 'light' })}
 
 	span {
-		box-shadow: inset 0 -0.025rem ${border.primary(format)};
+		box-shadow: inset 0 -0.025rem ${border.articleLink(format)};
 		padding-bottom: 0.2rem;
 
 		${darkModeCss`

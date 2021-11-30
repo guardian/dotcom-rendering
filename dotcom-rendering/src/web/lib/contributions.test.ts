@@ -1,5 +1,5 @@
+import { setCookie } from '@guardian/libs';
 import { getIdApiUserData } from '@root/src/web/lib/getIdapiUserData';
-import { addCookie } from '../browser/cookie';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecentOneOffContributor,
@@ -42,7 +42,10 @@ describe('getLastOneOffContributionDate', () => {
 
 	it('returns date from attributes cookie if only cookie found', () => {
 		const somePastDate = '2020-01-28';
-		addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, somePastDate);
+		setCookie({
+			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
+			value: somePastDate,
+		});
 		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
 
 		// Our function will convert YYYY-MM-DD into a timestamp
@@ -52,25 +55,40 @@ describe('getLastOneOffContributionDate', () => {
 
 	it('returns a support cookie date if only cookie found', () => {
 		const somePastDate = 1582567969093;
-		addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, String(somePastDate));
+		setCookie({
+			name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
+			value: String(somePastDate),
+		});
 		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
 		expect(lastOneOffContributionDate).toBe(somePastDate);
 	});
 
 	it('returns the most recent date if both cookies present', () => {
 		const muchLongerAgo = '2020-01-28';
-		addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, muchLongerAgo);
+		setCookie({
+			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
+			value: muchLongerAgo,
+		});
 
 		const notSoLongAgo = 1582567969093;
-		addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, String(notSoLongAgo));
+		setCookie({
+			name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
+			value: String(notSoLongAgo),
+		});
 
 		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
 		expect(lastOneOffContributionDate).toBe(notSoLongAgo);
 	});
 
 	it('returns an empty string if no dates can be parsed correctly', () => {
-		addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, 'CANT_TOUCH_THIS');
-		addCookie(SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE, 'OR_THIS');
+		setCookie({
+			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
+			value: 'CANT_TOUCH_THIS',
+		});
+		setCookie({
+			name: SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
+			value: 'OR_THIS',
+		});
 
 		const lastOneOffContributionDate = getLastOneOffContributionTimestamp();
 		expect(lastOneOffContributionDate).toBeUndefined();
@@ -91,19 +109,28 @@ describe('isRecentOneOffContributor', () => {
 	});
 
 	it('returns true if there are 5 days between the last contribution date and now', () => {
-		addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, '2018-08-01');
+		setCookie({
+			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
+			value: '2018-08-01',
+		});
 		global.Date.now = jest.fn(() => Date.parse('2018-08-07T10:50:34'));
 		expect(isRecentOneOffContributor()).toBe(true);
 	});
 
 	it('returns true if there are 0 days between the last contribution date and now', () => {
-		addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, '2018-08-01');
+		setCookie({
+			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
+			value: '2018-08-01',
+		});
 		global.Date.now = jest.fn(() => Date.parse('2018-08-01T13:00:30'));
 		expect(isRecentOneOffContributor()).toBe(true);
 	});
 
 	it('returns false if the one-off contribution was more than 3 months ago', () => {
-		addCookie(ONE_OFF_CONTRIBUTION_DATE_COOKIE, '2018-08-01');
+		setCookie({
+			name: ONE_OFF_CONTRIBUTION_DATE_COOKIE,
+			value: '2018-08-01',
+		});
 		global.Date.now = jest.fn(() => Date.parse('2019-08-01T13:00:30'));
 		expect(isRecentOneOffContributor()).toBe(false);
 	});

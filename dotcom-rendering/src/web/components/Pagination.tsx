@@ -38,17 +38,17 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Section = ({
-	isFirst = false,
+	hide = false,
 	children,
 }: {
-	isFirst?: boolean;
+	hide?: boolean;
 	children: React.ReactNode;
 }) => (
 	<section
 		css={css`
 			display: flex;
 			align-items: center;
-			visibility: ${isFirst ? 'hidden' : 'visible'};
+			visibility: ${hide ? 'hidden' : 'visible'};
 		`}
 	>
 		{children}
@@ -113,7 +113,7 @@ export const Pagination = ({
 
 	return (
 		<Container>
-			<Section isFirst={currentPage === 1}>
+			<Section hide={currentPage === 1}>
 				<Hide when="above" breakpoint="phablet">
 					<LinkButton
 						size="small"
@@ -158,7 +158,7 @@ export const Pagination = ({
 					<Bold>{totalPages}</Bold>
 				</Position>
 			</Section>
-			<Section>
+			<Section hide={currentPage === totalPages}>
 				<LinkButton
 					size="small"
 					priority="tertiary"

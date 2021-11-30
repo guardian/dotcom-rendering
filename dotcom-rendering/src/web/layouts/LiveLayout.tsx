@@ -50,7 +50,88 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { ContainerLayout } from '../components/ContainerLayout';
+import { Hide } from '@guardian/src-layout';
+import { Placeholder } from '../components/Placeholder';
+
+const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			/* IE Fallback */
+			display: flex;
+			flex-direction: column;
+			${until.desktop} {
+				margin-left: 0px;
+			}
+			${from.desktop} {
+				margin-left: 240px;
+			}
+			@supports (display: grid) {
+				display: grid;
+				width: 100%;
+				margin-left: 0;
+				grid-column-gap: 20px;
+				/*
+					Explanation of each unit of grid-template-columns
+					Main content
+					Right Column
+				*/
+				${from.desktop} {
+					grid-template-columns: 220px 1fr;
+					grid-template-areas: 'title	headline';
+				}
+				${until.desktop} {
+					grid-template-columns: 1fr; /* Main content */
+					grid-template-areas:
+						'title'
+						'headline';
+				}
+				${until.tablet} {
+					grid-column-gap: 0px;
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
+const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			/* IE Fallback */
+			display: flex;
+			flex-direction: column;
+			${until.desktop} {
+				margin-left: 0px;
+			}
+			${from.desktop} {
+				margin-left: 240px;
+			}
+			@supports (display: grid) {
+				display: grid;
+				width: 100%;
+				margin-left: 0;
+				grid-column-gap: 20px;
+				${until.desktop} {
+					grid-template-columns: 1fr; /* Main content */
+					grid-template-areas:
+						'standfirst'
+						'lines'
+						'meta';
+				}
+				${from.desktop} {
+					grid-template-columns: 220px 1fr;
+					grid-template-areas: 'lastupdated standfirst';
+				}
+				${until.tablet} {
+					grid-column-gap: 0px;
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
 
 const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -64,43 +145,43 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 			${from.desktop} {
 				margin-left: 320px;
 			}
-
 			@supports (display: grid) {
 				display: grid;
 				width: 100%;
 				margin-left: 0;
-
-				grid-column-gap: 10px;
-
+				grid-column-gap: 0px;
 				/*
 					Explanation of each unit of grid-template-columns
-
 					Main content
-					Empty border for spacing
 					Right Column
 				*/
+				/* from desktop define fixed body width */
 				${from.desktop} {
-					grid-template-columns: 309px 1px 1fr;
+					grid-column-gap: 20px;
+					grid-template-columns: 220px 700px;
 					grid-template-areas:
-						'lines		border media'
-						'meta		border media'
-						'keyevents	border media'
-						'.			border body'
-						'. 			border .';
+						'lines		media'
+						'meta		media'
+						'keyevents	media'
+						'keyevents	body'
+						'keyevents	body'
+						'. 			.';
 				}
-
+				/* from wide define fixed body width */
 				${from.wide} {
-					grid-template-columns: 309px 1px 1fr 340px;
+					grid-column-gap: 20px;
+					grid-template-columns: 220px 700px 1fr;
 					grid-template-areas:
-						'lines 		border media right-column'
-						'meta  		border media right-column'
-						'keyevents  border media right-column'
-						'.  		border body  right-column'
-						'.			border .     right-column';
+						'lines 		media right-column'
+						'meta  		media right-column'
+						'keyevents  media right-column'
+						'keyevents  body  right-column'
+						'keyevents  body  right-column'
+						'.			.     right-column';
 				}
-
+				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 700px; /* Main content */
 					grid-template-areas:
 						'media'
 						'lines'
@@ -108,10 +189,8 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'keyevents'
 						'body';
 				}
-
+				/* fluid until tablet */
 				${until.tablet} {
-					grid-column-gap: 0px;
-
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
 						'media'
@@ -133,6 +212,19 @@ const maxWidth = css`
 	}
 `;
 
+const sticky = css`
+	${from.desktop} {
+		position: sticky;
+		top: 10px;
+	}
+`;
+
+const keyEventsTopMarginDesktop = css`
+	${from.desktop} {
+		margin-top: ${space[1]}px;
+	}
+`;
+
 const stretchLines = css`
 	${until.phablet} {
 		margin-left: -20px;
@@ -149,7 +241,6 @@ const starWrapper = css`
 	margin-top: 6px;
 	background-color: ${brandAltBackground.primary};
 	display: inline-block;
-
 	${until.phablet} {
 		padding-left: 20px;
 		margin-left: -20px;
@@ -158,7 +249,6 @@ const starWrapper = css`
 		padding-left: 0px;
 		margin-left: -0px;
 	}
-
 	padding-left: 10px;
 	margin-left: -10px;
 `;
@@ -167,11 +257,9 @@ const ageWarningMargins = css`
 	margin-top: 12px;
 	margin-left: -10px;
 	margin-bottom: 6px;
-
 	${from.tablet} {
 		margin-left: -20px;
 	}
-
 	${from.leftCol} {
 		margin-left: -10px;
 		margin-top: 0;
@@ -215,6 +303,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
 	const showComments = CAPI.isCommentable;
+
+	const showMatchTabs = CAPI.matchUrl;
 
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
@@ -305,71 +395,124 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 			<main>
 				<article>
-					<ContainerLayout
+					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={palette.background.header}
 						borderColour={palette.border.headline}
-						sideBorders={true}
-						leftColSize="wide"
-						leftContent={
-							// eslint-disable-next-line react/jsx-wrap-multilines
-							<ArticleTitle
-								format={format}
-								palette={palette}
-								tags={CAPI.tags}
-								sectionLabel={CAPI.sectionLabel}
-								sectionUrl={CAPI.sectionUrl}
-								guardianBaseURL={CAPI.guardianBaseURL}
-								badge={CAPI.badge}
-							/>
-						}
 					>
-						<div css={maxWidth}>
-							<ArticleHeadlinePadding design={format.design}>
-								{age && (
-									<div css={ageWarningMargins}>
-										<AgeWarning age={age} />
-									</div>
-								)}
-								<ArticleHeadline
+						<HeadlineGrid>
+							<GridItem area="title">
+								<ArticleTitle
 									format={format}
-									headlineString={CAPI.headline}
-									tags={CAPI.tags}
-									byline={CAPI.author.byline}
 									palette={palette}
+									tags={CAPI.tags}
+									sectionLabel={CAPI.sectionLabel}
+									sectionUrl={CAPI.sectionUrl}
+									guardianBaseURL={CAPI.guardianBaseURL}
+									badge={CAPI.badge}
 								/>
-								{age && (
-									<AgeWarning
-										age={age}
-										isScreenReader={true}
+							</GridItem>
+							<GridItem area="headline">
+								{CAPI.matchUrl && showMatchTabs && (
+									<Placeholder
+										rootId="match-tabs"
+										height={40}
 									/>
 								)}
-							</ArticleHeadlinePadding>
-						</div>
-						{CAPI.starRating || CAPI.starRating === 0 ? (
-							<div css={starWrapper}>
-								<StarRating
-									rating={CAPI.starRating}
-									size="large"
-								/>
-							</div>
-						) : (
-							<></>
-						)}
-					</ContainerLayout>
-					<ContainerLayout
+								<div css={maxWidth}>
+									<ArticleHeadlinePadding
+										design={format.design}
+									>
+										{age && (
+											<div css={ageWarningMargins}>
+												<AgeWarning age={age} />
+											</div>
+										)}
+										<ArticleHeadline
+											format={format}
+											headlineString={CAPI.headline}
+											tags={CAPI.tags}
+											byline={CAPI.author.byline}
+											palette={palette}
+										/>
+										{age && (
+											<AgeWarning
+												age={age}
+												isScreenReader={true}
+											/>
+										)}
+									</ArticleHeadlinePadding>
+								</div>
+								{CAPI.starRating || CAPI.starRating === 0 ? (
+									<div css={starWrapper}>
+										<StarRating
+											rating={CAPI.starRating}
+											size="large"
+										/>
+									</div>
+								) : (
+									<></>
+								)}
+							</GridItem>
+						</HeadlineGrid>
+					</ElementContainer>
+
+					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={palette.background.standfirst}
 						borderColour={palette.border.standfirst}
-						sideBorders={true}
-						leftColSize="wide"
-						verticalMargins={false}
 					>
-						<Standfirst
-							format={format}
-							standfirst={CAPI.standfirst}
-						/>
-					</ContainerLayout>
+						<StandFirstGrid>
+							<GridItem area="standfirst">
+								<Standfirst
+									format={format}
+									standfirst={CAPI.standfirst}
+								/>
+							</GridItem>
+							<GridItem area="lastupdated">
+								<></>
+							</GridItem>
+							<GridItem area="lines">
+								<Hide from="desktop">
+									<div css={maxWidth}>
+										<div css={stretchLines}>
+											<Lines
+												count={decideLineCount(
+													format.design,
+												)}
+												effect={decideLineEffect(
+													format.design,
+													format.theme,
+												)}
+												color="rgba(255, 255, 255, 0.4)"
+											/>
+										</div>
+									</div>
+								</Hide>
+							</GridItem>
+							<GridItem area="meta">
+								<Hide from="desktop">
+									<div css={maxWidth}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											palette={palette}
+											pageId={CAPI.pageId}
+											webTitle={CAPI.webTitle}
+											author={CAPI.author}
+											tags={CAPI.tags}
+											primaryDateline={
+												CAPI.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												CAPI.webPublicationSecondaryDateDisplay
+											}
+										/>
+									</div>
+								</Hide>
+							</GridItem>
+						</StandFirstGrid>
+					</ElementContainer>
 
 					<ElementContainer
 						showTopBorder={false}
@@ -402,48 +545,51 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									/>
 								</div>
 							</GridItem>
-							<GridItem area="border">
-								<></>
-							</GridItem>
 							<GridItem area="lines">
-								<div css={maxWidth}>
-									<div css={stretchLines}>
-										<Lines
-											count={decideLineCount(
-												format.design,
-											)}
-											effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-										/>
+								<Hide until="desktop">
+									<div css={maxWidth}>
+										<div css={stretchLines}>
+											<Lines
+												count={decideLineCount(
+													format.design,
+												)}
+												effect={decideLineEffect(
+													format.design,
+													format.theme,
+												)}
+											/>
+										</div>
 									</div>
-								</div>
+								</Hide>
 							</GridItem>
 							<GridItem area="meta" element="aside">
-								<div css={maxWidth}>
-									<ArticleMeta
-										branding={branding}
-										format={format}
-										palette={palette}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-										author={CAPI.author}
-										tags={CAPI.tags}
-										primaryDateline={
-											CAPI.webPublicationDateDisplay
-										}
-										secondaryDateline={
-											CAPI.webPublicationSecondaryDateDisplay
-										}
-									/>
-								</div>
+								<Hide until="desktop">
+									<div css={maxWidth}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											palette={palette}
+											pageId={CAPI.pageId}
+											webTitle={CAPI.webTitle}
+											author={CAPI.author}
+											tags={CAPI.tags}
+											primaryDateline={
+												CAPI.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												CAPI.webPublicationSecondaryDateDisplay
+											}
+										/>
+									</div>
+								</Hide>
 							</GridItem>
 							<GridItem area="keyevents">
-								<KeyEventsContainer
-									format={format}
-									keyEvents={CAPI.keyEvents}
-								/>
+								<div css={[sticky, keyEventsTopMarginDesktop]}>
+									<KeyEventsContainer
+										format={format}
+										keyEvents={CAPI.keyEvents}
+									/>
+								</div>
 							</GridItem>
 							<GridItem area="body">
 								<ArticleContainer format={format}>
@@ -522,17 +668,20 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<GridItem area="right-column">
 								<div
 									css={css`
-										padding-top: 6px;
 										height: 100%;
 										${from.desktop} {
 											/* above 980 */
 											margin-left: 20px;
 											margin-right: -20px;
+											display: none;
 										}
 										${from.leftCol} {
 											/* above 1140 */
 											margin-left: 0px;
 											margin-right: 0px;
+										}
+										${from.wide} {
+											display: block;
 										}
 									`}
 								>

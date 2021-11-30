@@ -20,8 +20,11 @@ import {
 	shouldHideSupportMessaging,
 } from '@root/src/web/lib/contributions';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
-import { getCookie } from '@root/src/web/browser/cookie';
-import type { OphanComponentEvent, OphanABTestMeta } from '@guardian/libs';
+import {
+	OphanComponentEvent,
+	OphanABTestMeta,
+	getCookie,
+} from '@guardian/libs';
 import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
 import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
 import {
@@ -207,7 +210,9 @@ const ReaderRevenueLinksRemote: React.FC<{
 				edition,
 				countryCode,
 				modulesVersion: MODULES_VERSION,
-				mvtId: Number(getCookie('GU_mvt_id')),
+				mvtId: Number(
+					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+				),
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
 			},
 		};

@@ -436,6 +436,7 @@ export const ArticleHeadline = ({
 								standardFont,
 								css`
 									color: ${palette.text.headline};
+									padding-bottom: ${space[9]}px;
 								`,
 							]}
 						>

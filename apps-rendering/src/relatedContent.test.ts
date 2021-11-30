@@ -1,6 +1,5 @@
 import { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
-import { ContentFields } from '@guardian/content-api-models/v1/contentFields';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { ContentType } from '@guardian/content-api-models/v1/contentType';
 import { parseRelatedContent } from 'relatedContent';
@@ -81,19 +80,16 @@ describe('parseRelatedContent', () => {
 		expect(actual.relatedItems[0].pillar.name).toEqual('news');
 	});
 
-	it('returns lastModified DateTime in response given content has lastModified field', () => {
+	it('returns webPublicationDate DateTime in response given content has webPublicationDate field', () => {
 		const capiDateTime: CapiDateTime = {
 			dateTime: new Int64(6545664),
 			iso8601: 'iso',
 		};
-		const contentFields: ContentFields = {
-			lastModified: capiDateTime,
-		};
-		defaultContent.fields = contentFields;
+		defaultContent.webPublicationDate = capiDateTime;
 
 		const actual = parseRelatedContent([defaultContent]);
 
-		expect(actual.relatedItems[0].lastModified).toEqual(capiDateTime);
+		expect(actual.relatedItems[0].webPublicationDate).toEqual(capiDateTime);
 	});
 
 	it('returns the first 4 related content given more than 4 content items', () => {

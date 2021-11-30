@@ -21,7 +21,7 @@ const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 				? [
 						...events,
 						{
-							time: block.firstPublished.value.toUTCString(),
+							date: block.firstPublished.value,
 							text: block.title,
 							url: `#block-${block.id}`,
 						},

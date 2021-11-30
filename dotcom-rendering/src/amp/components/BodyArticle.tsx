@@ -129,12 +129,14 @@ export const Body: React.FC<{
 		switches: {
 			ampPrebid: config.switches.ampPrebid,
 			permutive: config.switches.permutive,
+			ampAmazon: config.switches.ampAmazon,
 		},
 	};
 
 	const adConfig = {
 		usePrebid: adInfo.switches.ampPrebid,
 		usePermutive: adInfo.switches.permutive,
+		useAmazon: adInfo.switches.ampAmazon,
 	};
 	const elements = data.shouldHideAds ? (
 		<>{elementsWithoutAds}</>

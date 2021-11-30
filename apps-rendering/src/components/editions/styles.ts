@@ -1,5 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { Colour } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
@@ -14,6 +15,7 @@ import {
 	sport,
 } from '@guardian/source-foundations';
 import type { Colour } from 'editorialPalette';
+import * as Palette from '@guardian/src-foundations/palette';
 
 export const tabletContentWidth = 526;
 export const wideContentWidth = 545;

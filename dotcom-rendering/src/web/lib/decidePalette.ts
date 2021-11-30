@@ -384,7 +384,7 @@ const backgroundArticle = (format: ArticleFormat): string => {
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
 	)
-		return neutral[93];
+		return neutral[97];
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === ArticleDesign.Letter) return opinion[800];
 	if (format.design === ArticleDesign.Comment) return opinion[800];
@@ -649,6 +649,14 @@ const borderStandfirst = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
+const matchTab = (): string => {
+	return border.secondary;
+};
+
+const activeMatchTab = (): string => {
+	return palette.sport[300];
+};
+
 const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -895,6 +903,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
 			lines: borderLines(format),
+			matchTab: matchTab(),
+			activeMatchTab: activeMatchTab(),
 			pagination: borderPagination(),
 		},
 		topBar: {

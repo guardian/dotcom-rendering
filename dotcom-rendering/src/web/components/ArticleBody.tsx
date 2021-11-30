@@ -87,7 +87,12 @@ export const ArticleBody = ({
 		format.design === ArticleDesign.DeadBlog
 	) {
 		return (
-			<div css={[globalStrongStyles, globalLinkStyles(palette)]}>
+			<div
+				// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+				tabIndex={0}
+				id="maincontent"
+				css={[globalStrongStyles, globalLinkStyles(palette)]}
+			>
 				<LiveBlogRenderer
 					format={format}
 					blocks={blocks}

@@ -24,12 +24,12 @@ const triangleStyles = (
 	format: ArticleFormat,
 	supportsDarkMode: boolean
 ): SerializedStyles => css`
-	fill: ${fill.iconPrimary(format)};
+	fill: ${fill.icon(format)};
 	height: 0.8em;
 	padding-right: ${remSpace[1]};
 
 	${darkModeCss(supportsDarkMode)`
-        fill: ${fill.iconPrimaryInverse(format)};
+        fill: ${fill.iconDark(format)};
     `}
 `;
 
