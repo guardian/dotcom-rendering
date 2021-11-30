@@ -191,7 +191,7 @@ export const Body: React.FC<{
 			{epic}
 
 			<StickyAd
-				adRegion="US"
+				adRegion="ROW"
 				edition={data.editionId}
 				section={data.sectionName || ''}
 				contentType={adInfo.contentType}
