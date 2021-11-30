@@ -95,6 +95,7 @@ module.exports = ({ isLegacyJS }) => ({
 											},
 									  ],
 							],
+							compact: true,
 						},
 					},
 					{

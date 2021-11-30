@@ -103,11 +103,4 @@ describe('The web document renders with the correct meta and analytics elements 
 		getExists(`[data-link-name="footer"]`);
 		getExists(`[data-link-name="footer : primary : Opinion"]`);
 	});
-
-	it('Sample of script tags have the correct attributes', function () {
-		getExists(`script[type="module"][src$="/assets/react.js"]`);
-		getExists(`script[defer][nomodule][src$="/assets/react.legacy.js"]`);
-		getExists(`script[type="module"][src$="/assets/ophan.js"]`);
-		getExists(`script[defer][nomodule][src$="/assets/ophan.legacy.js"]`);
-	});
 });

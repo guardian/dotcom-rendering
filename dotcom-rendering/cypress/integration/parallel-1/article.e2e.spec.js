@@ -74,7 +74,7 @@ describe('E2E Page rendering', function () {
 			// We test 99 here for the MVT cookie (set by Fastly usually) as expecting it to return
 			// the 'variant' of the A/B test
 			// See https://ab-tests.netlify.app/ for help caluclating buckets
-			cy.setCookie('GU_mvt_id_local', '99', {
+			cy.setCookie('GU_mvt_id', '99', {
 				log: true,
 			});
 
@@ -97,7 +97,7 @@ describe('E2E Page rendering', function () {
 		it('should not edit the page if not in an AB test', function () {
 			// See explanation above
 			// The test runs from 0-100 MVT IDs, so 500 should force user not to be in the test
-			cy.setCookie('GU_mvt_id_local', '500', {
+			cy.setCookie('GU_mvt_id', '500', {
 				log: true,
 			});
 
