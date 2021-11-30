@@ -16,5 +16,6 @@ fi
 
 if [[ ! -z $changedNode ]]
 then
-	echo "${RED}This project now uses a new version of node. Please use 'nvm use' & run 'yarn'${ENDCOLOR}"
+	version="$(cat .nvmrc)"
+	echo "${RED}This project now uses node version "$version". Please use 'nvm use' & run 'yarn'${ENDCOLOR}"
 fi
