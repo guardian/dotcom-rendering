@@ -43,6 +43,7 @@ module.exports = ({ isLegacyJS }) => ({
 		coreVitals: scriptPath('coreVitals'),
 		embedIframe: scriptPath('embedIframe'),
 		newsletterEmbedIframe: scriptPath('newsletterEmbedIframe'),
+		relativeTime: scriptPath('relativeTime'),
 	},
 	output: {
 		filename: generateName(isLegacyJS),
