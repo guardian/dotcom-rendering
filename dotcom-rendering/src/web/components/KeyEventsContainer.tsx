@@ -16,7 +16,7 @@ export const KeyEventsContainer = ({ keyEvents, format }: Props) => {
 			return {
 				text: keyEvent.title || '', // We fallback to '' here purely to keep ts happy
 				url: `?page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
-				time: keyEvent.blockFirstPublishedDisplay || '', // We fallback to '' here purely to keep ts happy
+				date: new Date(keyEvent.blockFirstPublished || ''), // We fallback to '' here purely to keep ts happy
 			};
 		});
 
