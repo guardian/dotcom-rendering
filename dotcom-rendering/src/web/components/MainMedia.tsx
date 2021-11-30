@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { until } from '@guardian/src-foundations/mq';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
@@ -71,7 +71,7 @@ export const MainMedia: React.FC<{
 	pageId,
 	webTitle,
 }) => {
-	const isInteractive = format.design === ArticleDesign.Interactive;
+	const isImmersive = format.design === ArticleDisplay.Immersive;
 	const isLiveOrDeadBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
@@ -79,8 +79,8 @@ export const MainMedia: React.FC<{
 		<div
 			css={[
 				mainMedia,
-				isInteractive && immersiveWrapper,
-				!isInteractive && !isLiveOrDeadBlog && noGutters,
+				isImmersive && immersiveWrapper,
+				(!isImmersive && !isLiveOrDeadBlog) && noGutters,
 			]}
 		>
 			{elements.map((element, index) =>
