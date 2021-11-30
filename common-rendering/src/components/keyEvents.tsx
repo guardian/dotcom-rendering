@@ -13,7 +13,7 @@ import {
 	opinion,
 } from "@guardian/src-foundations/palette";
 import { Link } from "@guardian/src-link";
-import { ArticlePillar, ArticleTheme } from "@guardian/libs";
+import { ArticlePillar, ArticleTheme, timeAgo } from "@guardian/libs";
 import { from } from "@guardian/src-foundations/mq";
 import { darkModeCss } from "../lib";
 import Accordion from "./accordion";
@@ -22,7 +22,7 @@ import Accordion from "./accordion";
 type paletteId = 300 | 400 | 500;
 
 interface KeyEvent {
-	time: string;
+	date: Date;
 	text: string;
 	url: string;
 }
@@ -144,7 +144,14 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 	return (
 		<li css={listItemStyles(supportsDarkMode)}>
 			<div css={timeTextWrapperStyles}>
-				<time css={timeStyles(supportsDarkMode)}>{keyEvent.time}</time>
+				<time
+					dateTime={keyEvent.date.toISOString()}
+					data-relativeformat="long"
+					title={keyEvent.date.toLocaleTimeString()}
+					css={timeStyles(supportsDarkMode)}
+				>
+					{timeAgo(keyEvent.date.getTime(), { verbose: true })}
+				</time>
 				<Link
 					priority="secondary"
 					css={textStyles(theme, supportsDarkMode)}
