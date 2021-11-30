@@ -80,7 +80,7 @@ export const MainMedia: React.FC<{
 			css={[
 				mainMedia,
 				isImmersive && immersiveWrapper,
-				(!isImmersive && !isLiveOrDeadBlog) && noGutters,
+				!isImmersive && !isLiveOrDeadBlog && noGutters,
 			]}
 		>
 			{elements.map((element, index) =>
