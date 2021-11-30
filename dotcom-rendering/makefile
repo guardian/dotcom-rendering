@@ -34,11 +34,28 @@ build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
 
-start: install
-	@NODE_ENV=production node dist/frontend.server.js
-
 start-ci: install
+	$(call log, "starting PROD server...")
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
+
+start: install
+	$(call log, "starting PROD server...")
+	@echo '' # just a spacer
+	@NODE_ENV=production pm2 start dist/frontend.server.js
+	@echo '' # just a spacer
+	$(call log, "PROD server is running")
+	@pm2 logs
+
+stop:
+	@pm2 kill
+
+monitor:
+	@pm2 monit
+
+logs:
+	@pm2 logs
+
+run: stop build start
 
 # dev #########################################
 
