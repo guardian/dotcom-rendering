@@ -14,8 +14,6 @@ import {
 	remSpace,
 	sport,
 } from '@guardian/source-foundations';
-import type { Colour } from 'editorialPalette';
-import * as Palette from '@guardian/src-foundations/palette';
 
 export const tabletContentWidth = 526;
 export const wideContentWidth = 545;

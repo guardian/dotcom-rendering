@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import {
 	from,
 	neutral,
@@ -9,7 +10,6 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { Column, Columns, Container } from '@guardian/source-react-components';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import Headline from 'components/headline';
 import Metadata from 'components/metadata';
 import Standfirst from 'components/standfirst';
