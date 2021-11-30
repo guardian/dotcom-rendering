@@ -36,7 +36,10 @@ else
     yarn --silent
 
     cd apps-rendering
-	cdk/script/ci
+ 	(
+    	cd cdk
+    	./script/ci
+    )
     npm ci
     npm run test
     npm run build:client:prod
