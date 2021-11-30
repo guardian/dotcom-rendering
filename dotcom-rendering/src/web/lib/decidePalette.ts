@@ -654,7 +654,7 @@ const matchTab = (): string => {
 };
 
 const activeMatchTab = (): string => {
-	return palette.sport[300];
+	return sport[300];
 };
 
 const borderArticleLinkHover = (format: ArticleFormat): string => {

@@ -50,7 +50,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Hide } from '@guardian/src-layout';
+import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (

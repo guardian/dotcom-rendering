@@ -7,7 +7,7 @@ import { BylineLink } from '@frontend/web/components/BylineLink';
 
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
-import { until } from '@guardian/src-foundations/mq';
+import { until } from '@guardian/source-foundations';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 const twitterHandleStyles = (palette: Palette) => css`

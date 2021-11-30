@@ -7,7 +7,7 @@ import {
 	border,
 	brandLine,
 	neutral,
-} from '@guardian/src-foundations/palette';
+} from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
 import { Footer } from '@root/src/web/components/Footer';
@@ -26,7 +26,7 @@ import { getZIndex } from '@frontend/web/lib/getZIndex';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 
-import { from, until } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/source-foundations';
 import { renderElement } from '../lib/renderElement';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
