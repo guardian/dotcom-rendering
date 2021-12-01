@@ -79,14 +79,14 @@ const LiveBlocks = ({ item }: LiveBlocksProps) => {
 								>
 									<div>TODO: share icons</div>
 
-									{showLastUpdated &&
+									{block.lastModified.kind === OptionKind.Some &&
+										block.firstPublished.kind === OptionKind.Some &&
+										block.lastModified.value > block.firstPublished.value &&
 											<LastUpdated
-												lastUpdated={block.blockLastUpdated}
-												lastUpdatedDisplay={
-													block.blockLastUpdatedDisplay
-												}
+												lastUpdated={Number(block.lastModified.value)}
+												lastUpdatedDisplay={'17:22 GMT'}
 											/>
-										)}
+										}
 								</footer>
 							</Hide>
 						</div>
