@@ -5,7 +5,6 @@ import { FirstPublished } from '@guardian/common-rendering/src/components/FirstP
 import { LastUpdated } from '@guardian/common-rendering/src/components/LastUpdated';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import { headline, space } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
 import { OptionKind, partition } from '@guardian/types';
 import type { DeadBlog, LiveBlog } from 'item';
 import { renderAll } from 'renderer';
@@ -37,18 +36,11 @@ const LiveBlocks = ({ item }: LiveBlocksProps) => {
 				// TODO: get page number
 				const blockLink = `${1}#block-${block.id}`;
 
-				const showLastUpdated: boolean =
-					// if last modified some && first pub some then last mod > first pub
-					block.lastModified.kind === OptionKind.Some &&
-					block.firstPublished.kind === OptionKind.Some &&
-					block.lastModified.value > block.firstPublished.value
-
 				return (
 					<LiveBlockContainer
 						id={block.id}
 						borderColour={'black'}
 					>
-						{/* Header */}
 						<header
 							css={css`
 								padding-right: ${space[3]}px;
@@ -65,31 +57,24 @@ const LiveBlocks = ({ item }: LiveBlocksProps) => {
 							{block.title && <BlockTitle title={block.title} />}
 						</header>
 
-						{/* render block body */}
 						{renderAll(item, partition(block.body).oks)}
 
-						{/* Footer */}
-						<div>
-							<Hide until="phablet">
-								<footer
-									css={css`
-										display: flex;
-										justify-content: space-between;
-									`}
-								>
-									<div>TODO: share icons</div>
-
-									{block.lastModified.kind === OptionKind.Some &&
-										block.firstPublished.kind === OptionKind.Some &&
-										block.lastModified.value > block.firstPublished.value &&
-											<LastUpdated
-												lastUpdated={Number(block.lastModified.value)}
-												lastUpdatedDisplay={'17:22 GMT'}
-											/>
-										}
-								</footer>
-							</Hide>
-						</div>
+						<footer
+							css={css`
+								display: flex;
+								justify-content: space-between;
+							`}
+						>
+							{
+								block.lastModified.kind === OptionKind.Some &&
+								block.firstPublished.kind === OptionKind.Some &&
+								block.lastModified.value > block.firstPublished.value &&
+									<LastUpdated
+										lastUpdated={Number(block.lastModified.value)}
+										lastUpdatedDisplay={'17:22 GMT'}
+									/>
+								}
+						</footer>
 					</LiveBlockContainer>
 				)
 			})}

@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
@@ -45,6 +45,11 @@ const richLinkPillarStyles = (kicker: string, inverted: string): string => {
 	`;
 };
 
+const liveBlogRichLinkStyles = css`
+	float: none;
+	width: auto;
+`;
+
 const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker: newsKicker, inverted: newsInverted } = getThemeStyles(
 		ArticlePillar.News,
@@ -60,6 +65,8 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	);
 	const { kicker: lifestyleKicker, inverted: lifestyleInverted } =
 		getThemeStyles(ArticlePillar.Lifestyle);
+
+
 
 	return css`
 		background: ${backgroundColor(format)};
@@ -156,6 +163,7 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
             }
         `}
 	`;
+
 };
 
 const RichLink = (props: {
@@ -171,7 +179,7 @@ const RichLink = (props: {
 		: {};
 
 	const attributes = {
-		css: richLinkStyles(format),
+		css: [richLinkStyles(format), format.design === ArticleDesign.DeadBlog && liveBlogRichLinkStyles],
 		className: 'js-rich-link',
 		...articleId,
 	};
