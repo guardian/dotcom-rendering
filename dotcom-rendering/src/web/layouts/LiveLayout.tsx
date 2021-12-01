@@ -51,7 +51,6 @@ import {
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import Accordion from '@guardian/common-rendering/src/components/accordion';
-import { space } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
 

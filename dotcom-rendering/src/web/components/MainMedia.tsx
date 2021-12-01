@@ -64,8 +64,7 @@ const chooseWrapper = (format: ArticleFormat) => {
 			}
 		}
 	}
-
-}
+};
 
 export const MainMedia: React.FC<{
 	format: ArticleFormat;
@@ -89,12 +88,7 @@ export const MainMedia: React.FC<{
 	webTitle,
 }) => {
 	return (
-		<div
-			css={[
-				mainMedia,
-				chooseWrapper(format),
-			]}
-		>
+		<div css={[mainMedia, chooseWrapper(format)]}>
 			{elements.map((element, index) =>
 				renderArticleElement({
 					format,
