@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { brandAlt } from '@guardian/src-foundations';
+import { brandAlt } from '@guardian/source-foundations';
 
 import { Star } from '@frontend/static/icons/Star';
 

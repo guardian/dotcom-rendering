@@ -1,10 +1,14 @@
 import { css } from '@emotion/react';
 
-import { space } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { LinkButton } from '@guardian/src-button';
+import {
+	space,
+	headline,
+	textSans,
+	until,
+	from,
+} from '@guardian/source-foundations';
+import { LinkButton } from '@guardian/source-react-components';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { until, from } from '@guardian/src-foundations/mq';
 
 import { ShareIcons } from '@frontend/web/components/ShareIcons';
 import { Badge } from '@frontend/web/components/Badge';

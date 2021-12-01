@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/source-foundations';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';

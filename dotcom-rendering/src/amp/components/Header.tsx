@@ -1,10 +1,15 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { neutral, brand, brandAlt } from '@guardian/src-foundations';
-import { headline } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
-import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+import {
+	neutral,
+	brand,
+	brandAlt,
+	headline,
+	from,
+	until,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 
 import Logo from '@frontend/static/logos/guardian-anniversary-logo.svg';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';

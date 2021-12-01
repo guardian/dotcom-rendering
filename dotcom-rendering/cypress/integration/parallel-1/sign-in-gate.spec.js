@@ -25,7 +25,7 @@ describe('Sign In Gate Tests', function () {
 	};
 
 	const setMvtCookie = (str) => {
-		cy.setCookie('GU_mvt_id_local', str, {
+		cy.setCookie('GU_mvt_id', str, {
 			log: true,
 		});
 	};

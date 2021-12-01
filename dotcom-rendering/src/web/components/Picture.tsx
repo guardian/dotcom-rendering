@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 
-import { breakpoints } from '@guardian/src-foundations/mq';
+import { breakpoints } from '@guardian/source-foundations';
 
 /*
  * Working on this file? Checkout out 027-pictures.md for background information & context!

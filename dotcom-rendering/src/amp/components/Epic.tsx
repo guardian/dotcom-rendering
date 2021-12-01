@@ -7,15 +7,17 @@ import {
 	MoustacheTemplate,
 	moustacheVariable,
 } from '@root/src/amp/components/moustache';
-import { headline, body, textSans } from '@guardian/src-foundations/typography';
 import {
+	headline,
+	body,
+	textSans,
 	brand,
 	brandAlt,
 	neutral,
 	error,
 	brandBackground,
 	border,
-} from '@guardian/src-foundations/palette';
+} from '@guardian/source-foundations';
 
 export const epicChoiceCardCss = `
 	.epicChoiceCard {

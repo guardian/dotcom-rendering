@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-import { text } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
+import { text, textSans, from, until } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 

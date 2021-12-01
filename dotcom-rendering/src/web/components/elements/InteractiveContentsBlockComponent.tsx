@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
-import { from, until } from '@guardian/src-foundations/mq';
-import { space } from '@guardian/src-foundations';
-import { neutral, border } from '@guardian/src-foundations/palette';
-import { SvgChevronDownSingle } from '@guardian/src-icons';
-import { headline } from '@guardian/src-foundations/typography';
+import {
+	from,
+	until,
+	space,
+	neutral,
+	border,
+	headline,
+} from '@guardian/source-foundations';
+import { SvgChevronDownSingle } from '@guardian/source-react-components';
 
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 

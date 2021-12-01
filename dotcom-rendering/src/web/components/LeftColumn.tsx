@@ -1,19 +1,18 @@
 import { css } from '@emotion/react';
-import { border } from '@guardian/src-foundations/palette';
-import { from, between, until } from '@guardian/src-foundations/mq';
+import { border, from, between, until } from '@guardian/source-foundations';
 
 const leftWidth = (size: LeftColSize) => {
 	switch (size) {
 		case 'wide': {
 			return css`
 				padding-right: 10px;
-				${until.desktop} {
-					/* below 980 */
+				${until.leftCol} {
+					/* below 1140 */
 					display: none;
 				}
 
-				${from.desktop} {
-					/* above 1300 */
+				${from.leftCol} {
+					/* above 1140 */
 					flex-basis: 230px;
 					flex-grow: 0;
 					flex-shrink: 0;

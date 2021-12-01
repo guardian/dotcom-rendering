@@ -2,7 +2,7 @@
 // stylelint-disable color-no-hex
 
 import { css } from '@emotion/react';
-import { space } from '@guardian/src-foundations';
+import { space } from '@guardian/source-foundations';
 
 type Props = {
 	code: string;

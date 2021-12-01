@@ -1,9 +1,8 @@
 import { useRef, useState } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { css } from '@emotion/react';
-import { body, textSans } from '@guardian/src-foundations/typography';
+import { body, textSans, space } from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
-import { space } from '@guardian/src-foundations';
 import { Placeholder } from '@root/src/web/components/Placeholder';
 import { Caption } from '@root/src/web/components/Caption';
 import libDebounce from 'lodash.debounce';

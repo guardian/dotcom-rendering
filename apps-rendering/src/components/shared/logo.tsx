@@ -2,8 +2,12 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, remSpace, text } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
+import {
+	neutral,
+	remSpace,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import Anchor from 'components/anchor';
 import { getFormat } from 'item';

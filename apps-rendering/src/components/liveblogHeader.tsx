@@ -2,9 +2,11 @@
 
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
-import { neutral } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
-import { Column, Columns, Container } from '@guardian/src-layout';
+import {
+	neutral,
+	textSans,
+} from '@guardian/source-foundations';
+import { Column, Columns, Container } from '@guardian/source-react-components';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import type { DeadBlog, LiveBlog } from 'item';

@@ -8,9 +8,12 @@ import {
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	headline,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';

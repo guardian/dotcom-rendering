@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/source-foundations';
 
 const imageStyles = css`
 	height: 9.375rem;

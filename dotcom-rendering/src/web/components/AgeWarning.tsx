@@ -2,13 +2,13 @@ import { css } from '@emotion/react';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
 
-import { from } from '@guardian/src-foundations/mq';
 import {
+	from,
 	brandAltText,
 	brandAltBackground,
-} from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+	textSans,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 
 type Props = {
 	age: string;

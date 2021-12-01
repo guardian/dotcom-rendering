@@ -10,7 +10,7 @@ import { LeftColumn } from '@frontend/web/components/LeftColumn';
 import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
-import { breakpoints } from '@guardian/src-foundations/mq';
+import { breakpoints } from '@guardian/source-foundations';
 
 import { Figure } from './Figure';
 

@@ -1,15 +1,15 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/react';
-import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { brandAlt, neutral } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { SvgCamera } from '@guardian/src-icons';
-import { Option, OptionKind } from '@guardian/types';
-import { withDefault } from '@guardian/types';
-import { darkModeCss } from '@guardian/common-rendering/src/lib';
-import type { FC } from 'react';
+import type { SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
+import { remSpace } from "@guardian/source-foundations";
+import { brandAlt, neutral } from "@guardian/source-foundations";
+import { textSans } from "@guardian/source-foundations";
+import { SvgCamera } from "@guardian/source-react-components";
+import { Option, OptionKind } from "@guardian/types";
+import { withDefault } from "@guardian/types";
+import { darkModeCss } from "@guardian/common-rendering/src/lib";
+import type { FC } from "react";
 
 // ----- Component ----- //
 
@@ -102,12 +102,12 @@ const ImageDetails: FC<Props> = ({
 					</span>
 				</summary>
 				<span id={id}>
-					{withDefault('')(caption)} {withDefault('')(credit)}
+					{withDefault("")(caption)} {withDefault("")(credit)}
 				</span>
 			</details>
 		</figcaption>
 	);
-}
+};
 
 // ----- Exports ----- //
 

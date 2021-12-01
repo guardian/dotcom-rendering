@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
 
-import { textSans } from '@guardian/src-foundations/typography';
+import { textSans, until } from '@guardian/source-foundations';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
-
-import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
 	format: ArticleFormat;
@@ -60,7 +58,9 @@ export const CardAge = ({
 		<span css={ageStyles(format, palette)}>
 			<span>
 				{showClock && <ClockIcon />}
-				<time dateTime={webPublicationDate}>{displayString}</time>
+				<time dateTime={webPublicationDate} data-relativeformat="med">
+					{displayString}
+				</time>
 			</span>
 		</span>
 	);
