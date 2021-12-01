@@ -63,6 +63,8 @@ const chooseWrapper = (format: ArticleFormat) => {
 					return noGutters;
 			}
 		}
+		default:
+			return noGutters;
 	}
 };
 
