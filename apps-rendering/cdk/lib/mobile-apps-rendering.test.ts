@@ -12,3 +12,13 @@ describe('The MobileAppsRendering stack', () => {
 		expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
 	});
 });
+
+describe('The MobileAppsRenderingPreview stack', () => {
+  it('matches the snapshot', () => {
+    const app = new App();
+    const stack = new MobileAppsRendering(app, 'MobileAppsRenderingPreview', {
+      stack: 'mobile-preview',
+    });
+    expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+  });
+});
