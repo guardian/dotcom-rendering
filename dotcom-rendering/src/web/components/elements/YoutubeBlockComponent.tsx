@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 
-import { space } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
-import { body } from '@guardian/src-foundations/typography';
-import { SvgAlertRound } from '@guardian/src-icons';
+import { space, neutral, body } from '@guardian/source-foundations';
+import { SvgAlertRound } from '@guardian/source-react-components';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 

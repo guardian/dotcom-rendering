@@ -3,8 +3,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
+import { remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';

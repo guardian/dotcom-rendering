@@ -2,8 +2,8 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { textSans, headline } from "@guardian/src-foundations/typography";
-import { remSpace } from "@guardian/src-foundations";
+import { textSans, headline } from "@guardian/source-foundations";
+import { remSpace } from "@guardian/source-foundations";
 import {
 	culture,
 	lifestyle,
@@ -11,10 +11,10 @@ import {
 	news,
 	sport,
 	opinion,
-} from "@guardian/src-foundations/palette";
-import { Link } from "@guardian/src-link";
+} from "@guardian/source-foundations";
+import { Link } from "@guardian/source-react-components";
 import { ArticlePillar, ArticleTheme, timeAgo } from "@guardian/libs";
-import { from } from "@guardian/src-foundations/mq";
+import { from } from "@guardian/source-foundations";
 import { darkModeCss } from "../lib";
 import Accordion from "./accordion";
 

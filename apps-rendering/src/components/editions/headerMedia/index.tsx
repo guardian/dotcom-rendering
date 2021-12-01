@@ -6,8 +6,7 @@ import Img from '@guardian/common-rendering/src/components/img';
 import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { brandAltBackground } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { brandAltBackground, from } from '@guardian/source-foundations';
 import { none, some } from '@guardian/types';
 import HeaderImageCaption, {
 	captionId,

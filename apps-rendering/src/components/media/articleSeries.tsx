@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import type { Series } from 'capi';

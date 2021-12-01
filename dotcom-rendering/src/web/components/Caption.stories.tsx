@@ -8,7 +8,7 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { css } from '@emotion/react';
-import { breakpoints } from '@guardian/src-foundations';
+import { breakpoints } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 
 export default {

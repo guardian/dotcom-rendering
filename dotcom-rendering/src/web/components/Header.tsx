@@ -4,7 +4,7 @@ import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { Hide } from '@root/src/web/components/Hide';
 import { Logo } from '@frontend/web/components/Logo';
 import { Links } from '@frontend/web/components/Links';
-import { brand } from '@guardian/src-foundations';
+import { brand } from '@guardian/source-foundations';
 
 const headerStyles = css`
 	/* Ensure header height contains it's children */

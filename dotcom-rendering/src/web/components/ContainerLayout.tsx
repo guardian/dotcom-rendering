@@ -6,8 +6,7 @@ import { ContainerTitle } from '@root/src/web/components/ContainerTitle';
 import { Hide } from '@root/src/web/components/Hide';
 import { Flex } from '@root/src/web/components/Flex';
 
-import { space } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { space, from } from '@guardian/source-foundations';
 import { ArticleFormat, ArticleDesign } from '@guardian/libs';
 
 type Props = {

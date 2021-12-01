@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
 
-import { textSans } from '@guardian/src-foundations/typography';
+import { textSans, until } from '@guardian/source-foundations';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 
 import ClockIcon from '@frontend/static/icons/clock.svg';
-
-import { until } from '@guardian/src-foundations/mq';
 
 type Props = {
 	format: ArticleFormat;

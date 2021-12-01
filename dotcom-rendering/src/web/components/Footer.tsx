@@ -5,9 +5,10 @@ import {
 	brandText,
 	brandAlt,
 	brandBackground,
-} from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
+	textSans,
+	from,
+	until,
+} from '@guardian/source-foundations';
 
 import { clearFix } from '@root/src/lib/mixins';
 import { ArticleDisplay } from '@guardian/libs';

@@ -1,10 +1,13 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { breakpoints, from } from '@guardian/src-foundations/mq';
-import { neutral } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import {
+	breakpoints,
+	from,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import FooterContent from 'components/footerContent';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';

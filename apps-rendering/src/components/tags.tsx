@@ -4,9 +4,12 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { background, neutral } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import {
+	background,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
