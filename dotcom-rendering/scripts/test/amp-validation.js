@@ -2,7 +2,7 @@
 const amphtmlValidator = require('amphtml-validator');
 const http = require('http');
 
-const domain = 'http://localhost:3030';
+const domain = 'http://localhost:9000';
 
 console.log(`Testing AMP validation on ${domain}`);
 amphtmlValidator.getInstance().then((validator) => {

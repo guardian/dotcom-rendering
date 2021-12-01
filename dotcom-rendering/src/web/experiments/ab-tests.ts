@@ -6,7 +6,6 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from '@frontend/web/experiments/tests/newsletter-merch-unit-test';
-import { prebidTimeout } from '@frontend/web/experiments/tests/prebid-timeout-test';
 import { integrateCriteo } from './tests/integrate-criteo-test';
 import { integrateSmart } from './tests/integrate-smart-test';
 
@@ -18,7 +17,6 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
-	prebidTimeout,
 	integrateCriteo,
 	integrateSmart,
 ];

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/source-foundations';
 
 const linkStyles = (format: ArticleFormat, palette: Palette) => {
 	const baseLinkStyles = css`
@@ -54,7 +54,7 @@ const linkStyles = (format: ArticleFormat, palette: Palette) => {
 				${baseLinkStyles};
 				:hover {
 					/* TODO: This colour is hard coded here because it does not yet
-                           exist in src-foundation. Once it's been added, please
+                           exist in source-foundations. Once it's been added, please
                            remove this. @siadcock is aware. */
 					/* stylelint-disable-next-line color-no-hex */
 					background-color: #fdf0e8;

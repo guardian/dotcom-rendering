@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
-import { neutral } from "@guardian/src-foundations";
-import { textSans } from "@guardian/src-foundations/typography";
+import { neutral, textSans } from "@guardian/source-foundations";
 
 const LastUpdated = ({
 	lastUpdatedDisplay,

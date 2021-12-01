@@ -3,15 +3,19 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { neutral, remSpace } from '@guardian/src-foundations';
 import type {
 	FontStyle,
 	FontWeight,
 	LineHeight,
-} from '@guardian/src-foundations/dist/types/typography/types';
-import { from } from '@guardian/src-foundations/mq';
-import { border } from '@guardian/src-foundations/palette';
-import { body, headline } from '@guardian/src-foundations/typography';
+} from '@guardian/source-foundations';
+import {
+	body,
+	border,
+	from,
+	headline,
+	neutral,
+	remSpace,
+} from '@guardian/source-foundations';
 import { OptionKind } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';

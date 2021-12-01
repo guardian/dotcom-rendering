@@ -2,8 +2,7 @@ import React from 'react';
 import { JSDOM } from 'jsdom';
 import { css } from '@emotion/react';
 
-import { neutral } from '@guardian/src-foundations';
-import { body } from '@guardian/src-foundations/typography';
+import { neutral, body } from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
 

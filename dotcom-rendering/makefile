@@ -34,8 +34,11 @@ build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
 
+start-ci: install
+	$(call log, "starting PROD server...")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
+
 start: install
-	@make stop
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
 	@NODE_ENV=production pm2 start dist/frontend.server.js
@@ -62,15 +65,13 @@ dev: clear clean-dist install
 
 # tests #####################################
 
-percy: clear clean-dist install
+cypress: clear clean-dist install build
+	$(call log, "starting frontend PROD server for Cypress")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/integration/**/*"'
 
-cypress: clear clean-dist install
-	$(call log, "starting frontend DEV server for Cypress")
-	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'cypress run --spec "cypress/integration/**/*"'
-
-ampValidation: clean-dist install
-	$(call log, "starting frontend DEV server for AMP Validation")
-	@NODE_ENV=development start-server-and-test 'node scripts/frontend/dev-server' 3030 'node scripts/test/amp-validation.js'
+ampValidation: clean-dist install build
+	$(call log, "starting frontend PROD server for AMP Validation")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'node scripts/test/amp-validation.js'
 
 buildCheck:
 	$(call log, "checking build files")

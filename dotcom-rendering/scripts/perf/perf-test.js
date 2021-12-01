@@ -1,5 +1,5 @@
-const { warn, log } = require('../env/log');
 const execa = require('execa');
+const { warn, log } = require('../env/log');
 
 const run = async () => {
 	try {
@@ -7,8 +7,6 @@ const run = async () => {
 		const { stdout } = await execa('fast', [
 			'--start-cmd',
 			'make build;make start',
-			'--stop-cmd',
-			'make stop',
 			'--target-url',
 			'http://localhost:9000/ArticlePerfTest',
 			'--append',

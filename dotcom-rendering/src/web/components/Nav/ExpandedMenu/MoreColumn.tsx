@@ -1,8 +1,13 @@
 import { css } from '@emotion/react';
 
-import { brand, brandText, brandAlt } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
+import {
+	brand,
+	brandText,
+	brandAlt,
+	textSans,
+	from,
+	until,
+} from '@guardian/source-foundations';
 
 const pillarHeight = 42;
 

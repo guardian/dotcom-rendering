@@ -5,9 +5,13 @@ import {
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';
-import { until } from '@guardian/src-foundations/mq';
-import { text, neutral, opinion } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import {
+	until,
+	text,
+	neutral,
+	opinion,
+	textSans,
+} from '@guardian/source-foundations';
 
 import { Elements } from '@root/src/amp/components/Elements';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';

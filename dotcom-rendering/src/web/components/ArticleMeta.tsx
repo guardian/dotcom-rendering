@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { between, from, until } from '@guardian/src-foundations/mq';
+import {
+	between,
+	from,
+	until,
+	border,
+	space,
+} from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
@@ -8,7 +14,6 @@ import { Avatar } from '@root/src/web/components/Avatar';
 import { Counts } from '@root/src/web/components/Counts';
 import { Branding } from '@root/src/web/components/Branding';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { border, space } from '@guardian/src-foundations';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';

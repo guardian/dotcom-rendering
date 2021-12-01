@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
-import { until } from '@guardian/src-foundations/mq';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { until } from '@guardian/source-foundations';
+import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
