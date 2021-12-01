@@ -1,8 +1,12 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	neutral,
+	headline,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 
 import { BylineLink } from '@frontend/web/components/BylineLink';
 
@@ -31,18 +35,46 @@ const twitterHandleStyles = (palette: Palette) => css`
 	}
 `;
 
-const bylineStyles = (palette: Palette, format: ArticleFormat) => css`
+// for liveblog smaller breakpoints article meta is located in the same
+// container as standfirst and needs the same styling as standfirst
+const bylineColorStyles = (palette: Palette, format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog: {
+			return css`
+				color: ${palette.text.byline};
+				${until.desktop} {
+					color: ${palette.text.standfirst};
+				}
+				a {
+					color: ${palette.text.byline};
+					${until.desktop} {
+						color: ${palette.text.standfirst};
+					}
+				}
+			`;
+		}
+		default: {
+			return css`
+				color: ${palette.text.byline};
+				a {
+					color: ${palette.text.byline};
+				}
+			`;
+		}
+	}
+};
+
+const bylineStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
 		? textSans.medium()
 		: headline.xxxsmall()};
 	${format.theme === ArticleSpecial.Labs && 'line-height: 20px;'};
-	color: ${palette.text.byline};
+
 	padding-bottom: 8px;
 	font-style: italic;
 
 	a {
 		font-weight: 700;
-		color: ${palette.text.byline};
 		text-decoration: none;
 		font-style: normal;
 		:hover {
@@ -77,7 +109,10 @@ export const Contributor: React.FC<{
 							? interactiveLegacyClasses.byline
 							: ''
 					}
-					css={bylineStyles(palette, format)}
+					css={[
+						bylineStyles(format),
+						bylineColorStyles(palette, format),
+					]}
 				>
 					<BylineLink byline={author.byline} tags={tags} />
 				</div>

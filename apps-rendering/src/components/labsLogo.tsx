@@ -1,6 +1,11 @@
 import { css } from '@emotion/react';
-import { labs, neutral, remSpace, text } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
+import {
+	labs,
+	neutral,
+	remSpace,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
 import type { Logo as LogoImage } from 'capi';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';

@@ -2,8 +2,8 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { textSans, headline } from "@guardian/src-foundations/typography";
-import { remSpace } from "@guardian/src-foundations";
+import { textSans, headline } from "@guardian/source-foundations";
+import { remSpace } from "@guardian/source-foundations";
 import {
 	culture,
 	lifestyle,
@@ -11,10 +11,10 @@ import {
 	news,
 	sport,
 	opinion,
-} from "@guardian/src-foundations/palette";
-import { Link } from "@guardian/src-link";
-import { ArticlePillar, ArticleTheme } from "@guardian/libs";
-import { from } from "@guardian/src-foundations/mq";
+} from "@guardian/source-foundations";
+import { Link } from "@guardian/source-react-components";
+import { ArticlePillar, ArticleTheme, timeAgo } from "@guardian/libs";
+import { from } from "@guardian/source-foundations";
 import { darkModeCss } from "../lib";
 import Accordion from "./accordion";
 
@@ -22,7 +22,7 @@ import Accordion from "./accordion";
 type paletteId = 300 | 400 | 500;
 
 interface KeyEvent {
-	time: string;
+	date: Date;
 	text: string;
 	url: string;
 }
@@ -60,7 +60,7 @@ const keyEventWrapperStyles = (
 	width: 100%;
 
 	${from.desktop} {
-		border-top: #CDCDCD 1px solid;
+		border-top: #cdcdcd 1px solid;
 		padding-top: ${remSpace[2]};
 	}
 
@@ -144,7 +144,14 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 	return (
 		<li css={listItemStyles(supportsDarkMode)}>
 			<div css={timeTextWrapperStyles}>
-				<time css={timeStyles(supportsDarkMode)}>{keyEvent.time}</time>
+				<time
+					dateTime={keyEvent.date.toISOString()}
+					data-relativeformat="long"
+					title={keyEvent.date.toLocaleTimeString()}
+					css={timeStyles(supportsDarkMode)}
+				>
+					{timeAgo(keyEvent.date.getTime(), { verbose: true })}
+				</time>
 				<Link
 					priority="secondary"
 					css={textStyles(theme, supportsDarkMode)}
@@ -159,7 +166,13 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 
 const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 	return (
-		<div css={keyEventWrapperStyles(supportsDarkMode)}>
+		<nav
+			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+			tabIndex={0}
+			id="keyevents"
+			css={keyEventWrapperStyles(supportsDarkMode)}
+			aria-label="Key Events"
+		>
 			<Accordion
 				supportsDarkMode={supportsDarkMode}
 				accordionTitle="Key events"
@@ -176,7 +189,7 @@ const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 					))}
 				</ul>
 			</Accordion>
-		</div>
+		</nav>
 	);
 };
 

@@ -1,14 +1,15 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { remSpace } from '@guardian/src-foundations';
-import { breakpoints, from } from '@guardian/src-foundations/mq';
 import {
 	background,
+	breakpoints,
+	from,
 	neutral,
 	opinion,
-} from '@guardian/src-foundations/palette';
+	remSpace,
+} from '@guardian/source-foundations';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
 import Byline from 'components/byline';
 import Cutout from 'components/cutout';
 import Footer from 'components/footer';

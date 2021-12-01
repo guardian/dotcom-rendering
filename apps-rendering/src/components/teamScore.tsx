@@ -1,10 +1,13 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	from,
+	headline,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import { TeamLocation } from 'football';
 import type { FC } from 'react';
 

@@ -1,7 +1,11 @@
 import { css } from '@emotion/react';
-import { brandAltBackground } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { space } from '@guardian/src-foundations';
+import {
+	brandAltBackground,
+	headline,
+	textSans,
+	space,
+	until,
+} from '@guardian/source-foundations';
 
 import { BylineLink } from '@root/src/web/components/BylineLink';
 import {
@@ -11,7 +15,6 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { until } from '@guardian/src-foundations/mq';
 
 const wrapperStyles = css`
 	margin-left: 6px;

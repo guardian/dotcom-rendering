@@ -5,7 +5,8 @@ const execa = require('execa');
 const path = require('path');
 const cpy = require('cpy');
 const { warn, log } = require('../env/log');
-const { siteName, root, dist, target } = require('../frontend/config');
+
+const target = path.resolve(__dirname, '../..', 'target');
 
 // This task generates the riff-raff bundle. It creates the following
 // directory layout under target/
@@ -30,16 +31,16 @@ const { siteName, root, dist, target } = require('../frontend/config');
 
 const copyCfn = () => {
 	log(' - copying cloudformation config');
-	return cpy([`cloudformation.yml`], path.resolve(target, `${siteName}-cfn`));
+	return cpy([`cloudformation.yml`], path.resolve(target, 'frontend-cfn'));
 };
 
 const copyStatic = () => {
 	log(' - copying static');
 	return cpy(
 		['**/*'],
-		path.resolve(target, `${siteName}-static`, 'static', siteName),
+		path.resolve(target, 'frontend-static', 'static', 'frontend'),
 		{
-			cwd: path.resolve(root, 'src/static'),
+			cwd: path.resolve(__dirname, '../..', 'src/static'),
 			parents: true,
 			nodir: true,
 		},
@@ -50,9 +51,9 @@ const copyDist = () => {
 	log(' - copying dist');
 	return cpy(
 		['**/*.!(html|json)'],
-		path.resolve(target, `${siteName}-static`, 'assets'),
+		path.resolve(target, 'frontend-static', 'assets'),
 		{
-			cwd: path.resolve(dist),
+			cwd: path.resolve(__dirname, '../../dist'),
 			parents: true,
 			nodir: true,
 		},

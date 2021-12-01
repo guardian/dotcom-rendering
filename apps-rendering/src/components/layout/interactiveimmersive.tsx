@@ -1,9 +1,13 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import {
+	background,
+	breakpoints,
+	from,
+	neutral,
+} from '@guardian/source-foundations';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { breakpoints, from } from '@guardian/src-foundations/mq';
-import { background, neutral } from '@guardian/src-foundations/palette';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';

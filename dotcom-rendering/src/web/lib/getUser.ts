@@ -19,7 +19,7 @@ const callApi = (url: string) => {
 };
 
 export const getUser = async (ajaxUrl: string): Promise<UserProfile | void> => {
-	const url = joinUrl([ajaxUrl, 'profile/me']);
+	const url = joinUrl([ajaxUrl, 'profile/me?strict_sanctions_check=false']);
 	return callApi(url)
 		.catch((error) => {
 			window.guardian.modules.sentry.reportError(error, 'get-user');

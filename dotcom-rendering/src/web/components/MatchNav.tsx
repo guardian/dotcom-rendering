@@ -1,10 +1,14 @@
 import { css } from '@emotion/react';
 
-import { brandAlt, background } from '@guardian/src-foundations/palette';
+import {
+	brandAlt,
+	background,
+	headline,
+	textSans,
+	space,
+	until,
+} from '@guardian/source-foundations';
 
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { space } from '@guardian/src-foundations';
-import { until } from '@guardian/src-foundations/mq';
 import { Score } from '@frontend/web/components/Score';
 
 type Props = {

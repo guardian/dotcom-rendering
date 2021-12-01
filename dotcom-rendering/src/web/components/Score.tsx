@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { text } from '@guardian/src-foundations/palette';
+import { text } from '@guardian/source-foundations';
 
 import { Zero } from '@root/src/web/components/numbers/Zero';
 import { One } from '@root/src/web/components/numbers/One';

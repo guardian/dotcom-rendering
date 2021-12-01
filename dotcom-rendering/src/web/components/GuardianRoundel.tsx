@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { brand, neutral } from '@guardian/src-foundations/palette';
+import { brand, neutral } from '@guardian/source-foundations';
 
 export const GuardianRoundel = () => {
 	return (

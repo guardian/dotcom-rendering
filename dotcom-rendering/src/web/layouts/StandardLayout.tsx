@@ -8,8 +8,9 @@ import {
 	brandLine,
 	labs,
 	border,
-} from '@guardian/src-foundations/palette';
-import { from, until } from '@guardian/src-foundations/mq';
+	from,
+	until,
+} from '@guardian/source-foundations';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
@@ -97,7 +98,7 @@ const StandardGrid = ({
 									'title  border  matchNav     right-column'
 									'title  border  matchtabs    right-column'
 									'.      border  headline     right-column'
-									'.      border  standfirst    right-column'
+									'.      border  standfirst   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -106,7 +107,7 @@ const StandardGrid = ({
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
-									'.      border  standfirst    right-column'
+									'.      border  standfirst   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -140,7 +141,7 @@ const StandardGrid = ({
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
-									'.      border  standfirst    right-column'
+									'.      border  standfirst   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -492,12 +493,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						</GridItem>
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
-								{CAPI.matchUrl && (
-									<Placeholder
-										rootId="match-tabs"
-										height={40}
-									/>
-								)}
+								{format.design === ArticleDesign.MatchReport &&
+									CAPI.matchUrl && (
+										<Placeholder
+											rootId="match-tabs"
+											height={40}
+										/>
+									)}
 							</div>
 						</GridItem>
 						<GridItem area="headline">
