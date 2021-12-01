@@ -8,3 +8,8 @@ new MobileAppsRendering(app, 'MobileAppsRendering', {
 	stack: 'mobile',
 	cloudFormationStackName,
 });
+
+new MobileAppsRendering(app, 'MobileAppsRenderingPreview', {
+  stack: 'mobile-preview',
+  cloudFormationStackName,
+});
