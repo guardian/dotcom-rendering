@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import { neutral, textSans } from '@guardian/source-foundations';
 import { MatchStatusKind } from 'football';
 import type { MatchStatus } from 'football';
 import type { FC } from 'react';

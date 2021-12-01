@@ -4,10 +4,14 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { labs, neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	from,
+	headline,
+	labs,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { pipe } from 'lib';

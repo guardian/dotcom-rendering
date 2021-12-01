@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import { neutral, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { headline } from '@guardian/src-foundations/typography';
+import {
+	from,
+	headline,
+	neutral,
+	remSpace,
+} from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import BylineCard from 'components/shared/bylineCard';

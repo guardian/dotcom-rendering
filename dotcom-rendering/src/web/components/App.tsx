@@ -48,7 +48,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
-import { FocusStyleManager } from '@guardian/src-foundations/utils';
+import { FocusStyleManager } from '@guardian/source-foundations';
 import {
 	ArticleDisplay,
 	ArticleDesign,

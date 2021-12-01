@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { border } from '@guardian/src-foundations/palette';
+import { border } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;

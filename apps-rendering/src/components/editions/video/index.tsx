@@ -1,10 +1,12 @@
 // ----- Imports ----- //
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import * as Palette from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { SvgOfflineCloud } from '@guardian/src-icons';
+import {
+	from,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
+import { SvgOfflineCloud } from '@guardian/source-react-components';
 import type { FC } from 'react';
 import { useOnlineStatus } from '../utils/useOnlineStatus';
 
@@ -31,8 +33,8 @@ const styles = css`
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: ${Palette.neutral[20]};
-		color: ${Palette.neutral[97]};
+		background-color: ${neutral[20]};
+		color: ${neutral[97]};
 		padding-bottom: 0;
 	}
 
@@ -54,8 +56,8 @@ const styles = css`
 
 		svg {
 			height: 33px;
-			fill: ${Palette.neutral[97]};
-			stroke: ${Palette.neutral[97]};
+			fill: ${neutral[97]};
+			stroke: ${neutral[97]};
 		}
 	}
 

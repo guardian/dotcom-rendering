@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 
-import { textSans } from '@guardian/src-foundations/typography';
-import { neutral } from '@guardian/src-foundations/palette';
-import { Button } from '@guardian/src-button';
+import { textSans, neutral } from '@guardian/source-foundations';
+import { Button } from '@guardian/source-react-components';
 
 import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
