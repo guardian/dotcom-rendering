@@ -3,9 +3,7 @@
 import { css } from '@emotion/react';
 import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
 import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { neutral, news } from '@guardian/src-foundations/palette';
+import { from, neutral, news, remSpace } from '@guardian/source-foundations';
 import { OptionKind } from '@guardian/types';
 import Footer from 'components/footer';
 import GridItem from 'components/gridItem';

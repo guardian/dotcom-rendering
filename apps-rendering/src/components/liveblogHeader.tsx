@@ -3,9 +3,7 @@
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import {
-	from,
 	neutral,
-	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
 import { Column, Columns, Container } from '@guardian/source-react-components';
