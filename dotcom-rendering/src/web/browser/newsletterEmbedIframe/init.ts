@@ -5,7 +5,7 @@ type NewsletterHeightEventType = { source: { location: { href: string } } };
 
 const init = (): Promise<void> => {
 	const allIframes: HTMLIFrameElement[] = [].slice.call(
-		document.querySelectorAll('.email-sub__iframe'),
+		document.querySelectorAll('.email-sub__iframe, #footer__email-form'),
 	);
 
 	window.addEventListener('message', (event) => {
