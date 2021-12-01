@@ -532,7 +532,7 @@ const backgroundSpeechBubble = (format: ArticleFormat): string => {
 };
 
 const backgroundLiveblogMobile = (): string => {
-	return '#DCDCDC';
+	return neutral[86];
 };
 
 const fillCommentCount = (format: ArticleFormat): string => {

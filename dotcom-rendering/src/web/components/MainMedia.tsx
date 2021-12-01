@@ -50,6 +50,23 @@ const immersiveWrapper = css`
     overflow: hidden;
 `;
 
+const chooseWrapper = (format: ArticleFormat) => {
+	switch (format.display) {
+		case ArticleDisplay.Immersive:
+			return immersiveWrapper;
+		case ArticleDisplay.Standard: {
+			switch (format.design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return '';
+				default:
+					return noGutters;
+			}
+		}
+	}
+
+}
+
 export const MainMedia: React.FC<{
 	format: ArticleFormat;
 	palette: Palette;
@@ -71,16 +88,11 @@ export const MainMedia: React.FC<{
 	pageId,
 	webTitle,
 }) => {
-	const isImmersive = format.display === ArticleDisplay.Immersive;
-	const isLiveOrDeadBlog =
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog;
 	return (
 		<div
 			css={[
 				mainMedia,
-				isImmersive && immersiveWrapper,
-				!isImmersive && !isLiveOrDeadBlog && noGutters,
+				chooseWrapper(format),
 			]}
 		>
 			{elements.map((element, index) =>
