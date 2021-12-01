@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/src-foundations';
-import { headline } from '@guardian/src-foundations/typography';
+import { space, headline } from '@guardian/source-foundations';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {

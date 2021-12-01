@@ -20,7 +20,7 @@ import {
 	neutral,
 	brand,
 	brandAltBackground,
-} from '@guardian/src-foundations/palette';
+} from '@guardian/source-foundations';
 
 import {
 	images,

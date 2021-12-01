@@ -4,8 +4,8 @@ import {
 	brandBackground,
 	labs,
 	border,
-} from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
+	from,
+} from '@guardian/source-foundations';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 

@@ -1,4 +1,4 @@
-import { breakpoints } from '@guardian/src-foundations/mq';
+import { breakpoints } from '@guardian/source-foundations';
 import type { DesiredWidth } from './Picture';
 import { getBestSourceForDesiredWidth, removeRedundantWidths } from './Picture';
 

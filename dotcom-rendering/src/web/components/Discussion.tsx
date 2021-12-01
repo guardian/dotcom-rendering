@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 
-import { space } from '@guardian/src-foundations';
+import { space, from } from '@guardian/source-foundations';
 import { CommentCount } from '@frontend/web/components/CommentCount';
 import { RightColumn } from '@frontend/web/components/RightColumn';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 import { App as Comments } from '@guardian/discussion-rendering';
-import { from } from '@guardian/src-foundations/mq';
 
 import { Portal } from '@frontend/web/components/Portal';
 import { Lazy } from '@frontend/web/components/Lazy';

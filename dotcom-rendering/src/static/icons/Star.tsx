@@ -1,4 +1,4 @@
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/source-foundations';
 
 export const Star = ({
 	starId,

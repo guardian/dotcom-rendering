@@ -6,9 +6,11 @@ import {
 	brandBackground,
 	brandLine,
 	brandBorder,
-} from '@guardian/src-foundations/palette';
-import { from, until } from '@guardian/src-foundations/mq';
-import { ArticleFormat } from '@guardian/libs';
+	from,
+	until,
+	space,
+} from '@guardian/source-foundations';
+import type { ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -49,8 +51,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { space } from '@guardian/src-foundations';
-import { Hide } from '@guardian/src-layout';
+import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (

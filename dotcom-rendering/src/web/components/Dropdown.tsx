@@ -8,10 +8,11 @@ import {
 	brandText,
 	brandAlt,
 	news,
-} from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
-import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+	textSans,
+	from,
+	until,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
 
 export interface DropdownLinkType {

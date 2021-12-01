@@ -19,8 +19,7 @@ import {
 	lifestyle,
 	culture,
 	labs,
-	palette,
-} from '@guardian/src-foundations';
+} from '@guardian/source-foundations';
 
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '@root/src/lib/pillars';
@@ -670,7 +669,7 @@ const matchTab = (): string => {
 };
 
 const activeMatchTab = (): string => {
-	return palette.sport[300];
+	return sport[300];
 };
 
 const borderArticleLinkHover = (format: ArticleFormat): string => {

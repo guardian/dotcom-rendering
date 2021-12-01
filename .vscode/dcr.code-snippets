@@ -17,7 +17,7 @@
     // }
     "Import neutral": {
         "prefix": "neutral",
-        "body": ["import { neutral } from '@guardian/src-foundations/palette';"],
+        "body": ["import { neutral } from '@guardian/source-foundations';"],
         "description": "Import for neutral"
     },
     "React wrapper component": {
