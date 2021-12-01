@@ -60,7 +60,7 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		background-color: ${neutral[10]};
 		border-top: ${neutral[20]} 1px solid;
 	`}
-	${from.phablet} {
+	${from.mobileLandscape} {
 		padding: ${remSpace[1]} ${remSpace[4]} 0 ${remSpace[5]};
 	}
 	${from.desktop} {
@@ -104,7 +104,7 @@ const backgroundColour = (
 
 const paddingBody: SerializedStyles = css`
 	padding: ${remSpace[3]};
-	${from.phablet} {
+	${from.mobileLandscape} {
 		padding: ${remSpace[3]} ${remSpace[5]};
 	}
 	${from.desktop} {
