@@ -66,6 +66,12 @@ const stretchLines = css`
 	}
 `;
 
+const metaBorderTopStandfirstStyling = css`
+	${until.desktop} {
+		border-top: 1px solid rgba(255, 255, 255, 0.4);
+	}
+`;
+
 const metaExtras = (palette: Palette) => css`
 	border-top: 1px solid ${palette.border.article};
 	flex-grow: 1;
@@ -340,7 +346,11 @@ export const ArticleMeta = ({
 								? interactiveLegacyClasses.shareIcons
 								: ''
 						}
-						css={metaExtras(palette)}
+						css={[
+							metaExtras(palette),
+							format.design === ArticleDesign.LiveBlog &&
+								metaBorderTopStandfirstStyling,
+						]}
 					>
 						<ShareIcons
 							pageId={pageId}
@@ -352,8 +362,14 @@ export const ArticleMeta = ({
 							context="ArticleMeta"
 						/>
 					</div>
-					<div css={metaNumbers(palette)}>
-						<Counts>
+					<div
+						css={[
+							metaNumbers(palette),
+							format.design === ArticleDesign.LiveBlog &&
+								metaBorderTopStandfirstStyling,
+						]}
+					>
+						<Counts format={format}>
 							{/* The meta-number css is needed by Counts.tsx */}
 							<div
 								className="meta-number"

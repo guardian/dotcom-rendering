@@ -8,7 +8,7 @@ import {
 	brandBorder,
 } from '@guardian/src-foundations/palette';
 import { from, until } from '@guardian/src-foundations/mq';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import { ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -39,6 +39,7 @@ import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
+	decideLineColour,
 	decideLineCount,
 	decideLineEffect,
 	getCurrentPillar,
@@ -481,12 +482,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													format.design,
 													format.theme,
 												)}
-												color={
-													format.design ===
-													ArticleDesign.LiveBlog
-														? 'rgba(255, 255, 255, 0.4)'
-														: undefined
-												}
+												color={decideLineColour(
+													format.design,
+												)}
 											/>
 										</div>
 									</div>

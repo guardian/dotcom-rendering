@@ -6,7 +6,6 @@ import { between, until } from '@guardian/src-foundations/mq';
 import { formatCount } from '@root/src/web/lib/formatCount';
 import CommentIcon from '@frontend/static/icons/comment.svg';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
-import { neutral } from '@guardian/src-foundations';
 
 type Props = {
 	palette: Palette;
@@ -49,9 +48,9 @@ const iconStyles = (palette: Palette) => css`
 	fill: ${palette.fill.commentCount};
 `;
 
-const liveblogIconStyles = css`
+const standfirstIconColouring = (palette: Palette) => css`
 	${until.desktop} {
-		fill: ${neutral[100]};
+		fill: ${palette.text.standfirst};
 	}
 `;
 
@@ -109,14 +108,14 @@ export const CommentCount = ({
 				aria-label={`${short} Comments`}
 				onClick={() => setIsExpanded(true)}
 			>
-				<div
-					css={[
-						iconContainerStyles,
-						format.design === ArticleDesign.LiveBlog &&
-							liveblogIconStyles,
-					]}
-				>
-					<CommentIcon css={iconStyles(palette)} />
+				<div css={iconContainerStyles}>
+					<CommentIcon
+						css={[
+							iconStyles(palette),
+							format.design === ArticleDesign.LiveBlog &&
+								standfirstIconColouring(palette),
+						]}
+					/>
 				</div>
 				<div
 					data-testid="long-comment-count"

@@ -49,7 +49,7 @@ export const Both = () => {
 
 	return (
 		<Container>
-			<Counts>
+			<Counts format={format}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -91,7 +91,7 @@ export const ShareOnly = () => {
 
 	return (
 		<Container>
-			<Counts>
+			<Counts format={format}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -133,7 +133,7 @@ export const CommentOnly = () => {
 
 	return (
 		<Container>
-			<Counts>
+			<Counts format={format}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -175,7 +175,7 @@ export const ZeroComments = () => {
 
 	return (
 		<Container>
-			<Counts>
+			<Counts format={format}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
@@ -217,7 +217,7 @@ export const BigNumbers = () => {
 
 	return (
 		<Container>
-			<Counts>
+			<Counts format={format}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"

@@ -52,8 +52,8 @@ const iconStyles = css`
 	fill: ${neutral[46]};
 `;
 
-const liveblogIconStyles = css`
-	fill: ${neutral[100]};
+const standfirstIconColouring = (palette: Palette) => css`
+	fill: ${palette.text.standfirst};
 `;
 
 const longStyles = css`
@@ -101,7 +101,7 @@ export const ShareCount = ({ ajaxUrl, pageId, format }: Props) => {
 					css={[
 						iconStyles,
 						format.design === ArticleDesign.LiveBlog &&
-							liveblogIconStyles,
+							standfirstIconColouring(palette),
 					]}
 				/>
 			</div>

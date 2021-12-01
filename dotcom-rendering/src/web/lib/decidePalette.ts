@@ -541,7 +541,7 @@ const fillCommentCount = (format: ArticleFormat): string => {
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
 	)
-		return pillarPalette[format.theme].dark;
+		return neutral[46];
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
