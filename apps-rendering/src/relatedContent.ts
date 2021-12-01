@@ -3,7 +3,7 @@ import type { RelatedContent } from '@guardian/apps-rendering-api-models/related
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import { andThen, fromNullable, map, OptionKind } from '@guardian/types';
-import { articleMainImage, isAnalysis, isFeature, isReview } from 'capi';
+import {articleContributors, articleMainImage, isAnalysis, isFeature, isReview} from 'capi';
 import {
 	isAudio,
 	isComment,
@@ -13,8 +13,8 @@ import {
 	isLive,
 	isVideo,
 } from 'item';
-import { pipe } from 'lib';
-import {TagType} from "@guardian/content-api-models/v1/tagType";
+import {compose, index, pipe} from 'lib';
+import {withDefault} from "@guardian/types/dist";
 
 const parseRelatedItemType = (content: Content): RelatedItemType => {
 	const { tags } = content;
@@ -69,13 +69,7 @@ const parseHeaderImage = (content: Content): Image | undefined => {
 	}
 };
 
-const getBylineImage = (content: Content): string | undefined => {
-	const contributors = content.tags.filter(tag => tag.type === TagType.CONTRIBUTOR);
-
-	if (contributors.length > 0) {
-		return contributors[0].bylineLargeImageUrl
-	}
-};
+const getContributor = compose(index(0), articleContributors);
 
 const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 	return {
@@ -83,7 +77,7 @@ const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 		relatedItems: relatedContent
 			.map((content) => {
 				return {
-					title: content.webTitle,
+					title: content.fields?.headline ?? content.webTitle,
 					lastModified: content.fields?.lastModified,
 					headerImage: parseHeaderImage(content),
 					link: content.id,
@@ -94,7 +88,14 @@ const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 						sectionIds: [],
 					},
 					starRating: content.fields?.starRating?.toString(),
-					bylineImage: getBylineImage(content)
+					byline: pipe(
+						getContributor(content),
+						map(t => t.webTitle),
+						withDefault<string | undefined>(undefined),),
+					bylineImage: pipe(
+						getContributor(content),
+						map(t => t.bylineLargeImageUrl),
+						withDefault<string | undefined>(undefined),),
 				};
 			})
 			.slice(0, 4),

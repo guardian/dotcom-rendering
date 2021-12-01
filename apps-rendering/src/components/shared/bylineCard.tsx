@@ -121,21 +121,28 @@ const cardStyles: SerializedStyles = css`
 
 const commentIconStyle = (): SerializedStyles => {
 	return css`
-		width: 2rem;
-		height: 1.4375rem;
+		width: 1.5rem;
+		height: 1.5rem;
 		display: inline-block;
 		fill: ${opinion[400]};
-		vertical-align: text-top;
-		margin-top: -3px;
-		margin-right: -2px;
+		vertical-align: text-bottom;
+		margin-bottom: -3px;
+		margin-left: -3px;
+
+		${from.desktop} {
+			width: 1.688rem;
+			height: 1.688rem;
+		}
 	`;
 };
 
 const bylineStyles: SerializedStyles = css`
 	color: ${opinion[400]};
+	font-style: italic;
 `;
 
 const byline = (relatedItem: RelatedItem): ReactElement | null => {
+	console.log(`Related item byline: ${relatedItem.byline}`);
 	return pipe(
 		fromNullable(relatedItem.byline),
 		map((byline) => {
@@ -169,6 +176,7 @@ const dateStyles = css`
 	float: right;
 	margin-right: ${remSpace[3]};
 	align-self: flex-end;
+	font-weight: 700;
 `;
 
 const lineStyles = css`
@@ -206,7 +214,7 @@ const footerStyles = css`
 `;
 
 const BylineCard: FC<Props> = ({ relatedItem }) => {
-	const { link, pillar, lastModified } = relatedItem;
+	const { title, link, pillar, lastModified } = relatedItem;
 	const format = {
 		theme: themeFromString(pillar.id),
 		design: ArticleDesign.Standard,
@@ -229,7 +237,7 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
 						<span css={commentIconStyle}>
 							<SvgQuote />
 						</span>
-						{relatedItem.title}
+						{title}
 						{byline(relatedItem)}
 					</h3>
 				</section>
