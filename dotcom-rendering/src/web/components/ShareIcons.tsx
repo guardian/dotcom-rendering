@@ -49,10 +49,15 @@ const decideIconColor = (
 ) => {
 	if (format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta') {
 		return css`
-			fill: ${palette.fill.shareIcon};
+			fill: ${palette.fill.shareIconDark};
 			${until.desktop} {
 				fill: ${palette.text.standfirst};
 			}
+		`;
+	}
+	if (format.design === ArticleDesign.DeadBlog && context === 'ArticleMeta') {
+		return css`
+			fill: ${palette.fill.shareIconDark};
 		`;
 	}
 	return css`
