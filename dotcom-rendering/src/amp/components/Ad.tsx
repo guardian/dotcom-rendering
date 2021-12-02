@@ -50,7 +50,7 @@ const amazonConfig = {
  * @returns The placement id for an ad, depending on its ad region and whether
  * it is sticky
  */
-const getPlacementId = (isSticky: boolean, adRegion: AdRegion): number => {
+const getPlacementId = (isSticky: boolean, adRegion?: AdRegion): number => {
 	if (isSticky) return 14351413;
 	switch (adRegion) {
 		case 'US':
@@ -64,10 +64,10 @@ const getPlacementId = (isSticky: boolean, adRegion: AdRegion): number => {
 
 const realTimeConfig = (
 	isSticky: boolean,
-	adRegion: AdRegion,
 	usePrebid: boolean,
 	usePermutive: boolean,
 	useAmazon: boolean,
+	adRegion?: AdRegion,
 ): string => {
 	const placementID = getPlacementId(isSticky, adRegion);
 	const prebidURL = [
@@ -120,7 +120,7 @@ export interface AdProps {
 }
 
 export interface RegionalAdProps extends AdProps {
-	adRegion: AdRegion;
+	adRegion?: AdRegion;
 }
 
 export const RegionalAd = ({
@@ -158,10 +158,10 @@ export const RegionalAd = ({
 			data-slot={ampData(section, contentType)}
 			rtc-config={realTimeConfig(
 				isSticky,
-				adRegion,
 				config.usePrebid,
 				config.usePermutive,
 				config.useAmazon,
+				adRegion,
 			)}
 		/>
 	);
