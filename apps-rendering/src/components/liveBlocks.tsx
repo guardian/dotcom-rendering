@@ -42,7 +42,6 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ item }) => {
 				const blockLink = `${1}#block-${block.id}`;
 
 				return (
-					// <div key={block.id}>
 					<LiveBlockContainer
 						key={block.id}
 						id={block.id}
@@ -87,7 +86,6 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ item }) => {
 								)}
 						</footer>
 					</LiveBlockContainer>
-					// </div>
 				);
 			})}
 		</div>
