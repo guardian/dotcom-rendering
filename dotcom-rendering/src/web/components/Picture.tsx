@@ -117,9 +117,6 @@ const getDesiredWidthForBreakpoint = (
 	isMainMedia: boolean,
 	format: ArticleFormat,
 ): Pixel => {
-	if (format.display === ArticleDisplay.Immersive && isMainMedia)
-		return breakpoint;
-
 	if (
 		(format.display === ArticleDisplay.Showcase ||
 			format.display === ArticleDisplay.NumberedList) &&
@@ -181,7 +178,7 @@ const getSourceForDesiredWidth = (
 
 // Create sourcesets for portrait immersive
 // TODO: In a future PR this system will be updated to solve scaling issues with DPR
-const portraitImmersiveSource = (
+const portraitImmersiveMainMediaSource = (
 	sources: SrcSetItem[],
 	resolution: ResolutionType,
 ) => (
@@ -203,6 +200,41 @@ const portraitImmersiveSource = (
 			.join(',')}
 	/>
 );
+
+// Create sourcesets for landscape immersive
+const landscapeImmersiveMainMediaSource = (
+	sources: SrcSetItem[],
+	resolution: ResolutionType,
+) => {
+	const sortedSources = sources.slice().sort((a, b) => b.width - a.width);
+
+	const getMedia = (sourceWidth: number, isLast: boolean): string => {
+		const width = resolution === 'hdpi' ? sourceWidth / 2 : sourceWidth;
+		const breakpoint = isLast ? 0 : width;
+
+		return resolution === 'hdpi'
+			? `(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`
+			: `(min-width: ${breakpoint}px)`;
+	};
+
+	return (
+		<>
+			{/* For immersive main media, images will always take up 100% of the screen width,
+				therefor it is more beneficial to loop through all the image sources, instead of the breakpoints.
+				This means that we are not limited to sources within the boundaries of the breakpoints, and can provide
+				more appropriately sized images where applicable. */}
+			{sortedSources.map((sourceSet, index) => (
+				<source
+					srcSet={`${sourceSet.src} ${sourceSet.width}w`}
+					media={getMedia(
+						sourceSet.width,
+						index === sortedSources.length - 1,
+					)}
+				/>
+			))}
+		</>
+	);
+};
 
 export const Picture = ({
 	imageSources,
@@ -252,39 +284,48 @@ export const Picture = ({
 	const desiredWidths: DesiredWidth[] =
 		removeRedundantWidths(allDesiredWidths);
 
+	const isImmersiveMainMedia =
+		format.display === ArticleDisplay.Immersive && isMainMedia;
+
 	return (
 		<picture itemProp="contentUrl">
-			{format.display === ArticleDisplay.Immersive && isMainMedia && (
+			{/* Rendering for Immersive Main Media! */}
+			{isImmersiveMainMedia && (
 				<>
-					{portraitImmersiveSource(hdpiSourceSets, 'hdpi')}
-					{portraitImmersiveSource(mdpiSourceSets, 'mdpi')}
+					{portraitImmersiveMainMediaSource(hdpiSourceSets, 'hdpi')}
+					{portraitImmersiveMainMediaSource(mdpiSourceSets, 'mdpi')}
+
+					{landscapeImmersiveMainMediaSource(hdpiSourceSets, 'hdpi')}
+					{landscapeImmersiveMainMediaSource(mdpiSourceSets, 'mdpi')}
 				</>
 			)}
 
-			{desiredWidths.map(({ breakpoint, width: desiredWidth }) => (
-				<>
-					{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
-					{hdpiSourceSets.length > 0 && (
+			{/* rendering for all other image types */}
+			{!isImmersiveMainMedia &&
+				desiredWidths.map(({ breakpoint, width: desiredWidth }) => (
+					<>
+						{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
+						{hdpiSourceSets.length > 0 && (
+							<source
+								srcSet={getSourceForDesiredWidth(
+									desiredWidth,
+									hdpiSourceSets,
+									'hdpi',
+								)}
+								media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
+							/>
+						)}
+						{/* MDPI Source - images in this srcset have `quality=85` in the url */}
 						<source
 							srcSet={getSourceForDesiredWidth(
 								desiredWidth,
-								hdpiSourceSets,
-								'hdpi',
+								mdpiSourceSets,
+								'mdpi',
 							)}
-							media={`(min-width: ${breakpoint}px) and (-webkit-min-device-pixel-ratio: 1.25), (min-width: ${breakpoint}px) and (min-resolution: 120dpi)`}
+							media={`(min-width: ${breakpoint}px)`}
 						/>
-					)}
-					{/* MDPI Source - images in this srcset have `quality=85` in the url */}
-					<source
-						srcSet={getSourceForDesiredWidth(
-							desiredWidth,
-							mdpiSourceSets,
-							'mdpi',
-						)}
-						media={`(min-width: ${breakpoint}px)`}
-					/>
-				</>
-			))}
+					</>
+				))}
 
 			<img
 				alt={alt}
