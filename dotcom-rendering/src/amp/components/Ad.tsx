@@ -51,7 +51,7 @@ const amazonConfig = {
  * it is sticky
  */
 const getPlacementId = (isSticky: boolean, adRegion?: AdRegion): number => {
-	if (isSticky) return 14351413;
+	if (isSticky) return 9;
 	switch (adRegion) {
 		case 'US':
 			return 7;
