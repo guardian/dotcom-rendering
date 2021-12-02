@@ -1,9 +1,13 @@
 import { css } from '@emotion/react';
 
-import { from, until } from '@guardian/src-foundations/mq';
-import { space } from '@guardian/src-foundations';
-import { border } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	from,
+	until,
+	space,
+	border,
+	headline,
+	textSans,
+} from '@guardian/source-foundations';
 
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Hide } from '@root/src/web/components/Hide';

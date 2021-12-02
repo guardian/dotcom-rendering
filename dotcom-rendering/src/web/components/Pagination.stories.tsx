@@ -4,7 +4,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/src-foundations';
+import { breakpoints } from '@guardian/source-foundations';
 import { Pagination } from './Pagination';
 
 export default {

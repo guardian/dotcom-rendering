@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { neutral } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
+import { neutral, textSans } from '@guardian/source-foundations';
 import type { ReactElement } from 'react';
 
 interface FileInputProps {

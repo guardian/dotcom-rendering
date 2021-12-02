@@ -10,13 +10,13 @@ type Props = {
 export const KeyEventsContainer = ({ keyEvents, format }: Props) => {
 	const transformedKeyEvents: KeyEvent[] = keyEvents
 		.filter((keyEvent) => {
-			return keyEvent.title && keyEvent.blockFirstPublishedDisplay;
+			return keyEvent.title && keyEvent.blockFirstPublished;
 		})
 		.map((keyEvent) => {
 			return {
 				text: keyEvent.title || '', // We fallback to '' here purely to keep ts happy
 				url: `?page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
-				time: keyEvent.blockFirstPublishedDisplay || '', // We fallback to '' here purely to keep ts happy
+				date: new Date(keyEvent.blockFirstPublished || ''), // We fallback to '' here purely to keep ts happy
 			};
 		});
 

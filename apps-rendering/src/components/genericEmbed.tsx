@@ -1,9 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { text } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import { remSpace, text, textSans } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
 import type { EmailSignup, Generic, TikTok } from 'embed';
 import { EmbedKind } from 'embed';

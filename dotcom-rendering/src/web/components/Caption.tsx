@@ -1,8 +1,12 @@
 import { css } from '@emotion/react';
 
-import { between, from, until } from '@guardian/src-foundations/mq';
-import { textSans } from '@guardian/src-foundations/typography';
-import { space } from '@guardian/src-foundations';
+import {
+	between,
+	from,
+	until,
+	textSans,
+	space,
+} from '@guardian/source-foundations';
 import {
 	ArticleDisplay,
 	ArticleDesign,

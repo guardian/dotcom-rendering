@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { neutral } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { from, neutral } from '@guardian/source-foundations';
 import { deadBlog, live } from 'fixtures/live';
 import type { FC } from 'react';
 import Metadata from './metadata';

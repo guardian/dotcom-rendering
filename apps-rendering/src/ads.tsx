@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@emotion/react';
-import { Button, buttonBrandAlt } from '@guardian/src-button';
+import { Button, buttonThemeBrandAlt } from '@guardian/source-react-components';
 import Paragraph from 'components/paragraph';
 import type { ReactElement, ReactNode } from 'react';
 import { createElement as h, isValidElement } from 'react';
@@ -42,7 +42,7 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 				'div',
 				{ className: 'upgrade-banner' },
 				h('h1', null, 'Upgrade to Premium and enjoy the app ad-free.'),
-				<ThemeProvider theme={buttonBrandAlt}>
+				<ThemeProvider theme={buttonThemeBrandAlt}>
 					<Button>Upgrade to Premium</Button>
 				</ThemeProvider>,
 			),

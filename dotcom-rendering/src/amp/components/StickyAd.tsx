@@ -1,5 +1,4 @@
-import { text } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import { text, textSans } from '@guardian/source-foundations';
 import { RegionalAdProps, RegionalAd } from './Ad';
 
 // This CSS should be imported and added to global styles in amp/server/document.tsx to add the Advertisement label to the sticky

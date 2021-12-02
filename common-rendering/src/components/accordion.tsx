@@ -2,12 +2,19 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { neutral, line, background } from "@guardian/src-foundations/palette";
-import { headline } from "@guardian/src-foundations/typography";
-import { remSpace } from "@guardian/src-foundations";
-import { focusHalo } from "@guardian/src-foundations/accessibility";
-import { SvgChevronUpSingle, SvgChevronDownSingle } from "@guardian/src-icons";
-import { from } from "@guardian/src-foundations/mq";
+import {
+	neutral,
+	line,
+	background,
+	headline,
+	remSpace,
+	focusHalo,
+	from,
+} from "@guardian/source-foundations";
+import {
+	SvgChevronUpSingle,
+	SvgChevronDownSingle,
+} from "@guardian/source-react-components";
 import { darkModeCss } from "../lib";
 
 // ----- Component ----- //
@@ -16,7 +23,7 @@ interface AccordionProps {
 	children: React.ReactNode;
 	supportsDarkMode: boolean;
 	accordionTitle: string;
-	context: 'keyEvents' | 'liveFeed';
+	context: "keyEvents" | "liveFeed";
 }
 
 const detailsStyles: SerializedStyles = css`
@@ -53,7 +60,7 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		background-color: ${neutral[10]};
 		border-top: ${neutral[20]} 1px solid;
 	`}
-	${from.phablet} {
+	${from.mobileLandscape} {
 		padding: ${remSpace[1]} ${remSpace[4]} 0 ${remSpace[5]};
 	}
 	${from.desktop} {
@@ -70,10 +77,10 @@ const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
 `;
 
 const backgroundColour = (
-	context: 'keyEvents' | 'liveFeed',
-	supportsDarkMode: boolean,
+	context: "keyEvents" | "liveFeed",
+	supportsDarkMode: boolean
 ): SerializedStyles => {
-	if(context === 'keyEvents') {
+	if (context === "keyEvents") {
 		return css`
 			background-color: ${background.primary};
 			${from.desktop} {
@@ -82,7 +89,7 @@ const backgroundColour = (
 			${darkModeCss(supportsDarkMode)`
 				background-color: ${neutral[10]};
 			`}
-		`
+		`;
 	}
 	return css`
 		background-color: ${neutral[97]};
@@ -93,12 +100,11 @@ const backgroundColour = (
 			background-color: ${neutral[10]};
 		`}
 	`;
-
 };
 
 const paddingBody: SerializedStyles = css`
 	padding: ${remSpace[3]};
-	${from.phablet} {
+	${from.mobileLandscape} {
 		padding: ${remSpace[3]} ${remSpace[5]};
 	}
 	${from.desktop} {
@@ -123,7 +129,9 @@ const Accordion = ({
 					<SvgChevronUpSingle />
 				</span>
 			</summary>
-			<div css={[backgroundColour(context, supportsDarkMode), paddingBody]}>
+			<div
+				css={[backgroundColour(context, supportsDarkMode), paddingBody]}
+			>
 				{children}
 			</div>
 		</details>

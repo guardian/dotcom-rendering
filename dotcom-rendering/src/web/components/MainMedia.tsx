@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { until } from '@guardian/src-foundations/mq';
+import { until } from '@guardian/source-foundations';
 import { ArticleDisplay } from '@guardian/libs';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';

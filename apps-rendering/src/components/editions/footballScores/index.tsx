@@ -2,10 +2,12 @@
 
 import { css } from '@emotion/react';
 import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { brandAltBackground } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import {
+	brandAltBackground,
+	from,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import { MatchStatusKind, TeamLocation } from 'football';
 import type { FC } from 'react';
 import { tabletContentWidth, wideContentWidth } from '../styles';

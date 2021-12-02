@@ -5,9 +5,10 @@ import {
 	neutral,
 	brandBackground,
 	brandBorder,
-} from '@guardian/src-foundations/palette';
-import { from, until } from '@guardian/src-foundations/mq';
-import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
+	from,
+	until,
+} from '@guardian/source-foundations';
+import { ArticleFormat, ArticleSpecial, ArticleDesign } from '@guardian/libs';
 
 import { Footer } from '@root/src/web/components/Footer';
 import { SubNav } from '@root/src/web/components/SubNav/SubNav';

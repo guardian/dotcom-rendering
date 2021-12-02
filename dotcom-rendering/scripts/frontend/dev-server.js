@@ -10,8 +10,6 @@ const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 
 const bodyParser = require('body-parser');
 
-const { siteName, root } = require('./config');
-
 function buildUrlFromQueryParam(req) {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (!req.query.url) {
@@ -39,8 +37,8 @@ const go = () => {
 	app.use(bodyParser.json({ limit: '10mb' }));
 
 	app.use(
-		`/static/${siteName}`,
-		express.static(path.join(root, 'src', 'static')),
+		'/static/frontend',
+		express.static(path.join(__dirname, '../..', 'src', 'static')),
 	);
 
 	app.use(
@@ -85,7 +83,7 @@ const go = () => {
 			}
 		},
 		webpackHotServerMiddleware(compiler, {
-			chunkName: `${siteName}.server`,
+			chunkName: 'frontend.server',
 			serverRendererOptions: { path: '/Article' },
 		}),
 	);
@@ -93,7 +91,7 @@ const go = () => {
 	app.post(
 		'/Article',
 		webpackHotServerMiddleware(compiler, {
-			chunkName: `${siteName}.server`,
+			chunkName: 'frontend.server',
 			serverRendererOptions: { path: '/Article' },
 		}),
 	);
@@ -115,7 +113,7 @@ const go = () => {
 			}
 		},
 		webpackHotServerMiddleware(compiler, {
-			chunkName: `${siteName}.server`,
+			chunkName: 'frontend.server',
 			serverRendererOptions: { path: '/ArticleJson' },
 		}),
 	);
@@ -136,7 +134,7 @@ const go = () => {
 			}
 		},
 		webpackHotServerMiddleware(compiler, {
-			chunkName: `${siteName}.server`,
+			chunkName: 'frontend.server',
 			serverRendererOptions: { path: '/AMPArticle' },
 		}),
 	);
@@ -144,7 +142,7 @@ const go = () => {
 	app.post(
 		'/AMPArticle',
 		webpackHotServerMiddleware(compiler, {
-			chunkName: `${siteName}.server`,
+			chunkName: 'frontend.server',
 			serverRendererOptions: { path: '/AMPArticle' },
 		}),
 	);
@@ -166,7 +164,7 @@ const go = () => {
 			}
 		},
 		webpackHotServerMiddleware(compiler, {
-			chunkName: `${siteName}.server`,
+			chunkName: 'frontend.server',
 			serverRendererOptions: { path: '/Interactive' },
 		}),
 	);
@@ -174,7 +172,7 @@ const go = () => {
 	app.post(
 		'/Interactive',
 		webpackHotServerMiddleware(compiler, {
-			chunkName: `${siteName}.server`,
+			chunkName: 'frontend.server',
 			serverRendererOptions: { path: '/Interactive' },
 		}),
 	);
@@ -195,7 +193,7 @@ const go = () => {
 			}
 		},
 		webpackHotServerMiddleware(compiler, {
-			chunkName: `${siteName}.server`,
+			chunkName: 'frontend.server',
 			serverRendererOptions: { path: '/AMPInteractive' },
 		}),
 	);
@@ -203,14 +201,14 @@ const go = () => {
 	app.post(
 		'/AMPInteractive',
 		webpackHotServerMiddleware(compiler, {
-			chunkName: `${siteName}.server`,
+			chunkName: 'frontend.server',
 			serverRendererOptions: { path: '/AMPInteractive' },
 		}),
 	);
 
 	app.get('/', (req, res) => {
 		res.sendFile(
-			path.join(root, 'scripts', 'frontend', 'landing', 'index.html'),
+			path.join(__dirname, '..', 'frontend', 'landing', 'index.html'),
 		);
 	});
 

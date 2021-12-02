@@ -5,9 +5,9 @@ const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
-const { dist } = require('../frontend/config');
 
 const PROD = process.env.NODE_ENV === 'production';
+const dist = path.resolve(__dirname, '..', '..', 'dist');
 
 const commonConfigs = ({ platform }) => ({
 	name: platform,

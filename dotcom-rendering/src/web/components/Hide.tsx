@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { until, from, Breakpoint } from '@guardian/src-foundations/mq';
+import { until, from, Breakpoint } from '@guardian/source-foundations';
 
 interface Props {
 	children: React.ReactNode;
