@@ -7,6 +7,7 @@ import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBl
 import { headline, space } from '@guardian/source-foundations';
 import { OptionKind, partition } from '@guardian/types';
 import type { DeadBlog, LiveBlog } from 'item';
+import type { FC } from 'react';
 import { renderAll } from 'renderer';
 
 // ----- Component ----- //
@@ -14,7 +15,11 @@ interface LiveBlocksProps {
 	item: DeadBlog | LiveBlog;
 }
 
-const BlockTitle = ({ title }: { title: string }) => {
+interface BlockTitleProps {
+	title: string;
+}
+
+const BlockTitle: FC<BlockTitleProps> = ({ title }) => {
 	return (
 		<h2
 			css={css`
@@ -27,7 +32,7 @@ const BlockTitle = ({ title }: { title: string }) => {
 	);
 };
 
-const LiveBlocks = ({ item }: LiveBlocksProps) => {
+const LiveBlocks: FC<LiveBlocksProps> = ({ item }) => {
 	return (
 		<div>
 			{/* Accordion? */}
@@ -37,7 +42,9 @@ const LiveBlocks = ({ item }: LiveBlocksProps) => {
 				const blockLink = `${1}#block-${block.id}`;
 
 				return (
+					// <div key={block.id}>
 					<LiveBlockContainer
+						key={block.id}
 						id={block.id}
 						borderColour={'black'}
 					>
@@ -50,7 +57,9 @@ const LiveBlocks = ({ item }: LiveBlocksProps) => {
 						>
 							{block.firstPublished.kind === OptionKind.Some && (
 								<FirstPublished
-									firstPublished={Number(block.firstPublished.value)}
+									firstPublished={Number(
+										block.firstPublished.value,
+									)}
 									blockLink={blockLink}
 								/>
 							)}
@@ -65,18 +74,21 @@ const LiveBlocks = ({ item }: LiveBlocksProps) => {
 								justify-content: space-between;
 							`}
 						>
-							{
-								block.lastModified.kind === OptionKind.Some &&
+							{block.lastModified.kind === OptionKind.Some &&
 								block.firstPublished.kind === OptionKind.Some &&
-								block.lastModified.value > block.firstPublished.value &&
+								block.lastModified.value >
+									block.firstPublished.value && (
 									<LastUpdated
-										lastUpdated={Number(block.lastModified.value)}
+										lastUpdated={Number(
+											block.lastModified.value,
+										)}
 										lastUpdatedDisplay={'17:22 GMT'}
 									/>
-								}
+								)}
 						</footer>
 					</LiveBlockContainer>
-				)
+					// </div>
+				);
 			})}
 		</div>
 	);
