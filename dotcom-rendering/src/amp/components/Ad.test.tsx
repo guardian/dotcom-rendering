@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
-import { Ad } from '@root/src/amp/components/Ad';
+import { RegionalAd } from '@root/src/amp/components/Ad';
 
-describe('Ad', () => {
+describe('RegionalAd', () => {
 	const permutiveURL =
 		'https://guardian.amp.permutive.com/rtc?type=doubleclick';
 	const usPrebidURL =
@@ -13,7 +13,7 @@ describe('Ad', () => {
 
 	it('rtc-config contains permutive and prebid URLs when `usePermutive` and `usePrebid` flags are set to true', () => {
 		const { container } = render(
-			<Ad
+			<RegionalAd
 				edition="UK"
 				section=""
 				contentType=""
@@ -55,7 +55,7 @@ describe('Ad', () => {
 
 	it('rtc-config contains just the prebid URL when `usePermutive` is false and `usePrebid` is true', () => {
 		const { container } = render(
-			<Ad
+			<RegionalAd
 				edition="UK"
 				section=""
 				contentType=""
@@ -94,7 +94,7 @@ describe('Ad', () => {
 
 	it('rtc-config contains just the permutive URL when `usePermutive` is true and `usePrebid` is false', () => {
 		const { container } = render(
-			<Ad
+			<RegionalAd
 				edition="UK"
 				section=""
 				contentType=""
@@ -133,7 +133,7 @@ describe('Ad', () => {
 
 	it('rtc-config contains no URLs when `usePermutive` and `usePrebid` flags are both set to false', () => {
 		const { container } = render(
-			<Ad
+			<RegionalAd
 				edition="UK"
 				section=""
 				contentType=""
@@ -172,7 +172,7 @@ describe('Ad', () => {
 
 	it('rtc-config contains the correct vendor config when `useAmazon` is set to true', () => {
 		const { container } = render(
-			<Ad
+			<RegionalAd
 				edition="UK"
 				section=""
 				contentType=""
@@ -215,7 +215,7 @@ describe('Ad', () => {
 
 	it('rtc-config contains no vendor config when `useAmazon` is set to false', () => {
 		const { container } = render(
-			<Ad
+			<RegionalAd
 				edition="UK"
 				section=""
 				contentType=""

@@ -123,7 +123,7 @@ export interface RegionalAdProps extends AdProps {
 	adRegion?: AdRegion;
 }
 
-export const RegionalAd = ({
+export const Ad = ({
 	isSticky = false,
 	adRegion,
 	edition,
@@ -167,7 +167,14 @@ export const RegionalAd = ({
 	);
 };
 
-export const Ad = ({
+/**
+ * Ad slot component whose config differs based on region.
+ * For each adRegion, create an Ad component with styling so that all but the component for the
+ * user's region are hidden
+ * @param AdProps
+ * @returns
+ */
+export const RegionalAd = ({
 	isSticky,
 	edition,
 	section,
@@ -186,7 +193,7 @@ export const Ad = ({
 							`,
 						)}
 					>
-						<RegionalAd
+						<Ad
 							adRegion={adRegion}
 							isSticky={isSticky}
 							edition={edition}

@@ -7,7 +7,7 @@ import { Elements } from '@root/src/amp/components/Elements';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { blockLink } from '@root/src/amp/lib/block-link';
 import { findBlockAdSlots } from '@root/src/amp/lib/find-adslots';
-import { Ad } from '@root/src/amp/components/Ad';
+import { RegionalAd } from '@root/src/amp/components/Ad';
 
 const adStyle = css`
 	background: ${neutral[93]};
@@ -146,7 +146,7 @@ export const Blocks: React.FunctionComponent<{
 								data-sort-time="1"
 								css={adStyle}
 							>
-								<Ad
+								<RegionalAd
 									edition={edition}
 									section={section || ''}
 									contentType={contentType}
