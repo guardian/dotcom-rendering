@@ -5,7 +5,6 @@ import { space, headline } from '@guardian/source-foundations';
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
-import { Hide } from '@root/src/web/components/Hide';
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import { FirstPublished } from '@guardian/common-rendering/src/components/FirstPublished';
@@ -93,36 +92,30 @@ export const LiveBlock = ({
 					webTitle,
 				}),
 			)}
-			<div>
-				<Hide when="below" breakpoint="phablet">
-					<footer
-						css={css`
-							display: flex;
-							justify-content: space-between;
-						`}
-					>
-						<ShareIcons
-							pageId={pageId}
-							webTitle={webTitle}
-							displayIcons={['facebook', 'twitter']}
-							palette={palette}
-							format={format}
-							size="small"
-							context="LiveBlock"
+			<footer
+				css={css`
+					display: flex;
+					justify-content: space-between;
+				`}
+			>
+				<ShareIcons
+					pageId={pageId}
+					webTitle={webTitle}
+					displayIcons={['facebook', 'twitter']}
+					palette={palette}
+					format={format}
+					size="small"
+					context="LiveBlock"
+				/>
+				{showLastUpdated &&
+					block.blockLastUpdated &&
+					block.blockLastUpdatedDisplay && (
+						<LastUpdated
+							lastUpdated={block.blockLastUpdated}
+							lastUpdatedDisplay={block.blockLastUpdatedDisplay}
 						/>
-						{showLastUpdated &&
-							block.blockLastUpdated &&
-							block.blockLastUpdatedDisplay && (
-								<LastUpdated
-									lastUpdated={block.blockLastUpdated}
-									lastUpdatedDisplay={
-										block.blockLastUpdatedDisplay
-									}
-								/>
-							)}
-					</footer>
-				</Hide>
-			</div>
+					)}
+			</footer>
 		</LiveBlockContainer>
 	);
 };
