@@ -34,7 +34,7 @@ jobs:
             - name: install
               run: npm ci
               working-directory: apps-rendering
-              
+
             - name: install
               run: npm ci
               working-directory: apps-rendering/cdk
