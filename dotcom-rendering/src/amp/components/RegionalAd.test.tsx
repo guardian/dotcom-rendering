@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { RegionalAd } from '@root/src/amp/components/Ad';
+import { RegionalAd } from '@root/src/amp/components/RegionalAd';
 
 describe('RegionalAd', () => {
 	const permutiveURL =

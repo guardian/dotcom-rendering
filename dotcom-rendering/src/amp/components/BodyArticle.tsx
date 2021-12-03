@@ -18,7 +18,7 @@ import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMeta } from '@root/src/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
-import { RegionalAd } from '@root/src/amp/components/Ad';
+import { RegionalAd } from '@root/src/amp/components/RegionalAd';
 import { StickyAd } from '@root/src/amp/components/StickyAd';
 import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
