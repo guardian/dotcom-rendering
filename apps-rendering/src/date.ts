@@ -7,6 +7,9 @@ import { pipe } from 'lib';
 // ----- Setup ----- //
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+const fullDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 const months = [
 	'Jan',
 	'Feb',
@@ -20,6 +23,21 @@ const months = [
 	'Oct',
 	'Nov',
 	'Dec',
+];
+
+const fullMonths = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December',
 ];
 
 // ----- Functions ----- //
@@ -93,12 +111,19 @@ function makeRelativeDate(date: Date): string | null {
 
 const day = (date: Date): string => days[date.getUTCDay()];
 
+const fullDay = (date: Date): string => fullDays[date.getUTCDay()];
+
 const month = (date: Date): string => months[date.getUTCMonth()];
+
+const fullMonth = (date: Date): string => fullMonths[date.getUTCMonth()];
 
 const padZero = (n: number): string => (n < 10 ? `0${n}` : n.toString());
 
 const time = (date: Date): string =>
 	`${padZero(date.getUTCHours())}.${padZero(date.getUTCMinutes())}`;
+
+const timeWithColon = (date: Date): string =>
+`${padZero(date.getUTCHours())}:${padZero(date.getUTCMinutes())}`;
 
 const localTime = (date: Date): string =>
 	`${padZero(date.getHours())}.${padZero(date.getMinutes())}`;
@@ -110,6 +135,11 @@ const format = (date: Date): string =>
 	`${day(date)} ${date.getUTCDate()} ${month(
 		date,
 	)} ${date.getUTCFullYear()} ${time(date)} UTC`;
+
+const fullyFormat = (date: Date): string =>
+	`${timeWithColon(date)} ${fullDay(
+		date)}, ${date.getDate()} ${fullMonth(
+			date)} ${date.getUTCFullYear()}`;
 
 const formatLocal = (date: Date): string =>
 	`${localDay(date)} ${date.getDate()} ${localMonth(
@@ -164,6 +194,7 @@ const dateToString = (date: Option<Date>): string =>
 export {
 	makeRelativeDate,
 	format as formatDate,
+	fullyFormat as fullyFormatDate,
 	isValidDate,
 	fromString,
 	formatSeconds,
