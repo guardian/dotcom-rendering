@@ -8,7 +8,15 @@ import { pipe } from 'lib';
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-const fullDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const fullDays = [
+	'Sunday',
+	'Monday',
+	'Tuesday',
+	'Wednesday',
+	'Thursday',
+	'Friday',
+	'Saturday',
+];
 
 const months = [
 	'Jan',
@@ -120,7 +128,9 @@ const fullMonth = (date: Date): string => fullMonths[date.getUTCMonth()];
 const padZero = (n: number): string => (n < 10 ? `0${n}` : n.toString());
 
 const time = (date: Date, separator: string): string =>
-`${padZero(date.getUTCHours())}${separator}${padZero(date.getUTCMinutes())}`;
+	`${padZero(date.getUTCHours())}${separator}${padZero(
+		date.getUTCMinutes(),
+	)}`;
 
 const localTime = (date: Date): string =>
 	`${padZero(date.getHours())}.${padZero(date.getMinutes())}`;
@@ -134,9 +144,9 @@ const format = (date: Date): string =>
 	)} ${date.getUTCFullYear()} ${time(date, '.')} UTC`;
 
 const fullyFormat = (date: Date): string =>
-	`${time(date, ':')} ${fullDay(
-		date)}, ${date.getDate()} ${fullMonth(
-			date)} ${date.getUTCFullYear()}`;
+	`${time(date, ':')} ${fullDay(date)}, ${date.getDate()} ${fullMonth(
+		date,
+	)} ${date.getUTCFullYear()}`;
 
 const formatLocal = (date: Date): string =>
 	`${localDay(date)} ${date.getDate()} ${localMonth(
