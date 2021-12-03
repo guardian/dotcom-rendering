@@ -98,29 +98,25 @@ export const realTimeConfig = (
 	return JSON.stringify(data);
 };
 
-interface CommercialConfig {
+export interface CommercialConfig {
 	usePrebid: boolean;
 	usePermutive: boolean;
 	useAmazon: boolean;
 }
 
-interface BaseAdProps {
+export interface BaseAdProps {
 	edition: Edition;
 	section: string;
 	contentType: string;
 	commercialProperties: CommercialProperties;
 }
 
-export interface AdProps extends BaseAdProps {
+interface AdProps extends BaseAdProps {
 	isSticky?: boolean;
 	rtcConfig: string;
 }
 
-export interface RegionalAdProps extends BaseAdProps {
-	config: CommercialConfig;
-}
-
-export interface StickyAdProps extends BaseAdProps {
+interface RegionalAdProps extends BaseAdProps {
 	config: CommercialConfig;
 }
 
