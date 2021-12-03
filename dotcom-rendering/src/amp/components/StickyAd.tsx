@@ -17,7 +17,7 @@ amp-sticky-ad:before {
 
 const mobileStickyPlacementId = 9;
 
-export interface StickyAdProps extends BaseAdProps {
+interface StickyAdProps extends BaseAdProps {
 	config: CommercialConfig;
 }
 
