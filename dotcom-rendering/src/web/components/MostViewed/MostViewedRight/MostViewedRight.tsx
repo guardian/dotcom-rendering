@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { headline } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/source-foundations';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 import { useApi } from '@root/src/web/lib/useApi';

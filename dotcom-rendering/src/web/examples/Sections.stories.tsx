@@ -18,7 +18,7 @@ import {
 	background,
 	brandAltBackground,
 	neutral,
-} from '@guardian/src-foundations/palette';
+} from '@guardian/source-foundations';
 
 import { NAV, pageFooter } from './Example.mocks';
 

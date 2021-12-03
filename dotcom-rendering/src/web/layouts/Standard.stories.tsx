@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { breakpoints } from '@guardian/src-foundations/mq';
+import { breakpoints } from '@guardian/source-foundations';
 
 import {
 	makeGuardianBrowserCAPI,
@@ -87,46 +87,11 @@ export const ArticleStory = (): React.ReactNode => {
 };
 ArticleStory.story = { name: 'Article' };
 
-export const ArticlePrintStory = (): React.ReactNode => {
-	const ServerCAPI = convertToStandard(Article);
-	return (
-		<HydratedLayout
-			ServerCAPI={ServerCAPI}
-			modifyPage={() => {
-				const styleTag = document.createElement('link');
-				styleTag.setAttribute('href', '/css/print.css');
-				styleTag.setAttribute('rel', 'stylesheet');
-				document.getElementById('root')?.prepend(styleTag);
-			}}
-		/>
-	);
-};
-ArticlePrintStory.story = {
-	name: 'Article Print',
-};
-
-ArticlePrintStory.parameters = {
-	viewport: {
-		defaultViewport: 'tablet',
-	},
-	chromatic: { viewports: [740] },
-};
-
 export const ReviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(Review);
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;
 };
 ReviewStory.story = { name: 'Review' };
-
-export const ReviewNoStarStory = (): React.ReactNode => {
-	const ReviewWithoutStars = {
-		...Review,
-		starRating: undefined,
-	};
-	const ServerCAPI = convertToStandard(ReviewWithoutStars);
-	return <HydratedLayout ServerCAPI={ServerCAPI} />;
-};
-ReviewNoStarStory.story = { name: 'Review without stars' };
 
 export const PrintShopStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard(PrintShop);

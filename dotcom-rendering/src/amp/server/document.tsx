@@ -5,7 +5,7 @@ import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
 import he from 'he';
 
-import { resets } from '@guardian/src-foundations/utils';
+import { resets } from '@guardian/source-foundations';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { stickyAdLabelCss } from '@root/src/amp/components/StickyAd';
 import { epicChoiceCardCss } from '@root/src/amp/components/Epic';

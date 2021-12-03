@@ -3,9 +3,17 @@ import { css } from '@emotion/react';
 import type { Colour } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import * as Palette from '@guardian/src-foundations/palette';
+import {
+	brandAlt,
+	culture,
+	from,
+	lifestyle,
+	neutral,
+	news,
+	opinion,
+	remSpace,
+	sport,
+} from '@guardian/source-foundations';
 
 export const tabletContentWidth = 526;
 export const wideContentWidth = 545;
@@ -85,55 +93,55 @@ export const articlePaddingStyles: SerializedStyles = css`
 
 export const headerBackgroundColour = (format: ArticleFormat): Colour => {
 	if (format.display === ArticleDisplay.Immersive) {
-		return Palette.neutral[7];
+		return neutral[7];
 	}
 
 	if (format.design === ArticleDesign.Analysis) {
-		return Palette.neutral[97];
+		return neutral[97];
 	}
 
 	if (format.design === ArticleDesign.Media) {
-		return Palette.neutral[7];
+		return neutral[7];
 	}
 
 	if (format.design === ArticleDesign.Comment) {
 		switch (format.theme) {
 			case ArticlePillar.Culture:
-				return Palette.culture[800];
+				return culture[800];
 			case ArticlePillar.Sport:
-				return Palette.sport[800];
+				return sport[800];
 			case ArticlePillar.News:
-				return Palette.news[800];
+				return news[800];
 			case ArticlePillar.Lifestyle:
-				return Palette.lifestyle[800];
+				return lifestyle[800];
 			case ArticlePillar.Opinion:
-				return Palette.opinion[800];
+				return opinion[800];
 			default:
-				return Palette.neutral[100];
+				return neutral[100];
 		}
 	}
 
 	if (format.design === ArticleDesign.Review) {
 		switch (format.theme) {
 			case ArticlePillar.Culture:
-				return Palette.culture[800];
+				return culture[800];
 			default:
-				return Palette.neutral[100];
+				return neutral[100];
 		}
 	}
 
-	return Palette.neutral[100];
+	return neutral[100];
 };
 
 export const interviewBackgroundColour = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.Sport:
-			return Palette.brandAlt[400];
+			return brandAlt[400];
 		case ArticlePillar.Culture:
-			return Palette.culture[600];
+			return culture[600];
 		case ArticlePillar.Lifestyle:
-			return Palette.lifestyle[800];
+			return lifestyle[800];
 		default:
-			return Palette.neutral[100];
+			return neutral[100];
 	}
 };

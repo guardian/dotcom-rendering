@@ -1,8 +1,12 @@
 import { ClassNames } from '@emotion/react';
 
-import { neutral } from '@guardian/src-foundations/palette';
-import { body, textSans } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
+import {
+	neutral,
+	body,
+	textSans,
+	from,
+	until,
+} from '@guardian/source-foundations';
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 import { unwrapHtml } from '@root/src/model/unwrapHtml';

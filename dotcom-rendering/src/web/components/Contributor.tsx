@@ -1,14 +1,17 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	neutral,
+	headline,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 
 import { BylineLink } from '@frontend/web/components/BylineLink';
 
 import TwitterIcon from '@frontend/static/icons/twitter.svg';
 
-import { until } from '@guardian/src-foundations/mq';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 const twitterHandleStyles = (palette: Palette) => css`

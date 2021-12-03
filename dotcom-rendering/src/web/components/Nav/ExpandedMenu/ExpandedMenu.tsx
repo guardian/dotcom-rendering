@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
 
-import { brandBackground } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
+import {
+	brandBackground,
+	textSans,
+	from,
+	until,
+} from '@guardian/source-foundations';
 
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { ArticleDisplay } from '@guardian/libs';

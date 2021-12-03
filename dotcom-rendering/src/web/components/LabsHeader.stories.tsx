@@ -1,4 +1,4 @@
-import { border, labs } from '@guardian/src-foundations';
+import { border, labs } from '@guardian/source-foundations';
 
 import { LabsHeader } from './LabsHeader';
 import { ElementContainer } from './ElementContainer';

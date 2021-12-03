@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from } from '@guardian/src-foundations/mq';
+import { from } from '@guardian/source-foundations';
 
 export const center = css`
 	position: relative;

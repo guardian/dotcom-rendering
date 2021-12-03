@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { body } from '@guardian/src-foundations/typography';
+import { body } from '@guardian/source-foundations';
 
 import { DropCap } from './DropCap';
 
