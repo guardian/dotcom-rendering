@@ -166,6 +166,16 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	`;
 };
 
+const styles = (format: ArticleFormat): SerializedStyles => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return css(richLinkStyles(format), liveBlogRichLinkStyles);
+		default:
+			return richLinkStyles(format);
+	}
+};
+
 const RichLink = (props: {
 	url: string;
 	linkText: string;
@@ -179,12 +189,7 @@ const RichLink = (props: {
 		: {};
 
 	const attributes = {
-		css: [
-			richLinkStyles(format),
-			(format.design === ArticleDesign.LiveBlog ||
-				format.design === ArticleDesign.DeadBlog) &&
-				liveBlogRichLinkStyles,
-		],
+		css: styles(format),
 		className: 'js-rich-link',
 		...articleId,
 	};

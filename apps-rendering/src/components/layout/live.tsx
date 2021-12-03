@@ -102,7 +102,7 @@ const Live: FC<Props> = ({ item }) => (
 				<HeaderMedia item={item} />
 			</GridItem>
 			<GridItem area="live-blocks">
-				<LiveBlocks item={item} />
+				<LiveBlocks blocks={item.blocks} format={item} />
 			</GridItem>
 		</main>
 		<section css={articleWidthStyles}>

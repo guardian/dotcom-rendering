@@ -4,15 +4,18 @@ import { css } from '@emotion/react';
 import { FirstPublished } from '@guardian/common-rendering/src/components/FirstPublished';
 import { LastUpdated } from '@guardian/common-rendering/src/components/LastUpdated';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
-import { headline, space } from '@guardian/source-foundations';
+import type { ArticleFormat } from '@guardian/libs';
+import { headline, remSpace } from '@guardian/source-foundations';
 import { OptionKind, partition } from '@guardian/types';
-import type { DeadBlog, LiveBlog } from 'item';
+import { maybeRender } from 'lib';
+import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
 
 // ----- Component ----- //
 interface LiveBlocksProps {
-	item: DeadBlog | LiveBlog;
+	blocks: LiveBlock[];
+	format: ArticleFormat;
 }
 
 interface BlockTitleProps {
@@ -24,7 +27,7 @@ const BlockTitle: FC<BlockTitleProps> = ({ title }) => {
 		<h2
 			css={css`
 				${headline.xxsmall({ fontWeight: 'bold' })}
-				margin-bottom: ${space[2]}px;
+				margin-bottom: ${remSpace[2]}px;
 			`}
 		>
 			{title}
@@ -32,12 +35,12 @@ const BlockTitle: FC<BlockTitleProps> = ({ title }) => {
 	);
 };
 
-const LiveBlocks: FC<LiveBlocksProps> = ({ item }) => {
+const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 	return (
 		<div>
 			{/* Accordion? */}
 			{/* Pagination? */}
-			{item.blocks.map((block) => {
+			{blocks.map((block) => {
 				// TODO: get page number
 				const blockLink = `${1}#block-${block.id}`;
 
@@ -45,27 +48,30 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ item }) => {
 					<LiveBlockContainer
 						key={block.id}
 						id={block.id}
-						borderColour={'black'}
+						borderColour="black"
 					>
 						<header
 							css={css`
-								padding-right: ${space[3]}px;
+								padding-right: ${remSpace[3]}px;
 								display: flex;
 								flex-direction: column;
 							`}
 						>
-							{block.firstPublished.kind === OptionKind.Some && (
-								<FirstPublished
-									firstPublished={Number(
-										block.firstPublished.value,
-									)}
-									blockLink={blockLink}
-								/>
+							{maybeRender(
+								block.firstPublished,
+								(firstPublished) => (
+									<FirstPublished
+										firstPublished={Number(firstPublished)}
+										blockLink={blockLink}
+									/>
+								),
 							)}
-							{block.title && <BlockTitle title={block.title} />}
+							{block.title !== '' ? (
+								<BlockTitle title={block.title} />
+							) : null}
 						</header>
 
-						{renderAll(item, partition(block.body).oks)}
+						{renderAll(format, partition(block.body).oks)}
 
 						<footer
 							css={css`
