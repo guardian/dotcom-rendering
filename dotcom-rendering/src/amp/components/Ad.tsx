@@ -120,6 +120,10 @@ export interface RegionalAdProps extends BaseAdProps {
 	config: CommercialConfig;
 }
 
+export interface StickyAdProps extends BaseAdProps {
+	config: CommercialConfig;
+}
+
 export const Ad = ({
 	isSticky = false,
 	edition,
