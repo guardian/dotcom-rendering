@@ -581,7 +581,7 @@ Object {
             "Ref": "DefaultVpcSecurityGroup",
           },
           Object {
-            "Ref": "WazuhSecurityGroup",
+            "Ref": "WazuhSecurityGroupNew",
           },
         ],
         "UserData": Object {
@@ -857,7 +857,7 @@ export ASSETS_MANIFEST=\\"/opt/\${App}/manifest.json\\"
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
     },
-    "WazuhSecurityGroup": Object {
+    "WazuhSecurityGroupNew": Object {
       "Properties": Object {
         "GroupDescription": "Allow outbound traffic from wazuh agent to manager",
         "SecurityGroupEgress": Array [
@@ -1479,7 +1479,7 @@ Object {
             "Ref": "DefaultVpcSecurityGroup",
           },
           Object {
-            "Ref": "WazuhSecurityGroup",
+            "Ref": "WazuhSecurityGroupNew",
           },
         ],
         "UserData": Object {
@@ -1755,7 +1755,7 @@ export ASSETS_MANIFEST=\\"/opt/\${App}/manifest.json\\"
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
     },
-    "WazuhSecurityGroup": Object {
+    "WazuhSecurityGroupNew": Object {
       "Properties": Object {
         "GroupDescription": "Allow outbound traffic from wazuh agent to manager",
         "SecurityGroupEgress": Array [
