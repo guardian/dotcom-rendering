@@ -56,4 +56,4 @@ checkCredentials
 export GU_CFN_STACK_NAME=${STACK_NAME}
 export AWS_PROFILE=${PROFILE}
 
-yarn diff
+npm run diff

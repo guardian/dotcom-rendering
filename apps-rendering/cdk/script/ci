@@ -2,7 +2,7 @@
 
 set -e
 
-yarn install --frozen-lockfile
+npm ci
 
-yarn test
-yarn synth
+npm run test
+npm run synth
