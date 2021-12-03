@@ -10,6 +10,6 @@ new MobileAppsRendering(app, 'MobileAppsRendering', {
 });
 
 new MobileAppsRendering(app, 'MobileAppsRenderingPreview', {
-  stack: 'mobile-preview',
-  cloudFormationStackName,
+	stack: 'mobile-preview',
+	cloudFormationStackName,
 });
