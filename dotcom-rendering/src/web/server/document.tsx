@@ -73,11 +73,7 @@ export const document = ({ data }: Props): string => {
 		theme: decideTheme(CAPI.format),
 	};
 
-	const {
-		html,
-		css: extractedCss,
-		ids: cssIDs,
-	}: RenderToStringResult = extractCritical(
+	const { html, css: extractedCss }: RenderToStringResult = extractCritical(
 		renderToString(
 			<Page cache={cache} format={format}>
 				<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
@@ -304,9 +300,7 @@ export const document = ({ data }: Props): string => {
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
 	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(makeWindowGuardian(data, cssIDs)),
-	);
+	const windowGuardian = escapeData(JSON.stringify(makeWindowGuardian(data)));
 
 	const hasAmpInteractiveTag = CAPI.tags.some(
 		(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
