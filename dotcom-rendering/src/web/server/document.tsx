@@ -3,6 +3,10 @@ import { renderToString } from 'react-dom/server';
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
 
+import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
+
 import { Page } from '@root/src/web/components/Page';
 
 import { escapeData } from '@root/src/lib/escapeData';
@@ -18,8 +22,6 @@ import { ChunkExtractor } from '@loadable/server';
 import { ArticlePillar } from '@guardian/libs';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
-import { decideTheme } from '../lib/decideTheme';
-import { SkipTo } from '../components/SkipTo';
 
 interface RenderToStringResult {
 	html: string;
@@ -65,14 +67,20 @@ export const document = ({ data }: Props): string => {
 	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const { extractCritical } = createEmotionServer(cache);
 
+	const format: ArticleFormat = {
+		display: decideDisplay(CAPI.format),
+		design: decideDesign(CAPI.format),
+		theme: decideTheme(CAPI.format),
+	};
+
 	const {
 		html,
 		css: extractedCss,
 		ids: cssIDs,
 	}: RenderToStringResult = extractCritical(
 		renderToString(
-			<Page cache={cache}>
-				<DecideLayout CAPI={CAPI} NAV={NAV} />
+			<Page cache={cache} format={format}>
+				<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
 			</Page>,
 		),
 	);
@@ -318,22 +326,6 @@ export const document = ({ data }: Props): string => {
 			? ''
 			: CAPI.config.keywords;
 
-	const skipToMainContent = renderToString(
-		<SkipTo id="maincontent" label="Skip to main content" />,
-	);
-	const skipToNavigation = renderToString(
-		<SkipTo id="navigation" label="Skip to navigation" />,
-	);
-	let skipToKeyEvents;
-	if (
-		CAPI.format.design === 'LiveBlogDesign' ||
-		CAPI.format.design === 'DeadBlogDesign'
-	) {
-		skipToKeyEvents = renderToString(
-			<SkipTo id="keyevents" label="Skip to key events" />,
-		);
-	}
-
 	return htmlTemplate({
 		linkedData,
 		loadableConfigScripts,
@@ -350,8 +342,5 @@ export const document = ({ data }: Props): string => {
 		openGraphData,
 		twitterData,
 		keywords,
-		skipToMainContent,
-		skipToNavigation,
-		skipToKeyEvents,
 	});
 };

@@ -2,10 +2,13 @@ import React, { StrictMode } from 'react';
 import { EmotionCache } from '@emotion/cache';
 import { CacheProvider, Global, css } from '@emotion/react';
 import { focusHalo } from '@guardian/source-foundations';
+import { SkipTo } from '../components/SkipTo';
+import { ArticleDesign } from '@guardian/libs';
 
 type Props = {
 	children: React.ReactNode;
 	cache: EmotionCache;
+	format: ArticleFormat;
 };
 
 /**
@@ -15,8 +18,9 @@ type Props = {
  *
  * @param {ReactNode} children - What gets rendered on the page
  * @param {EmotionCache} cache - Provides the Emotion cache
+ * @param {ArticleFormat} format - The format model for the article
  * */
-export const Page = ({ children, cache }: Props) => {
+export const Page = ({ children, cache, format }: Props) => {
 	return (
 		<CacheProvider value={cache}>
 			<StrictMode>
@@ -29,6 +33,13 @@ export const Page = ({ children, cache }: Props) => {
 						}
 					`}
 				/>
+				<SkipTo id="maincontent" label="Skip to main content" />
+				<SkipTo id="navigation" label="Skip to navigation" />
+				{format.design === ArticleDesign.LiveBlog ||
+					(format.design === ArticleDesign.DeadBlog && (
+						<SkipTo id="keyevents" label="Skip to key events" />
+					))}
+				<div id="react-root"></div>
 				{children}
 			</StrictMode>
 		</CacheProvider>
