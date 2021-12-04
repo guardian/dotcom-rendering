@@ -1,5 +1,5 @@
+import { CacheProvider } from '@emotion/react';
 import { renderToString } from 'react-dom/server';
-
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
 
@@ -23,10 +23,8 @@ import { ArticlePillar } from '@guardian/libs';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 
-interface RenderToStringResult {
-	html: string;
-	css: string;
-	ids: string[];
+interface Props {
+	data: DCRServerDocumentData;
 }
 
 const generateScriptTags = (
@@ -45,10 +43,6 @@ const generateScriptTags = (
 		];
 	}, [] as string[]);
 
-interface Props {
-	data: DCRServerDocumentData;
-}
-
 const decideTitle = (CAPI: CAPIType): string => {
 	if (
 		decideTheme(CAPI.format) === ArticlePillar.Opinion &&
@@ -64,8 +58,9 @@ export const document = ({ data }: Props): string => {
 	const title = decideTitle(CAPI);
 	const key = 'dcr';
 	const cache = createCache({ key });
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const { extractCritical } = createEmotionServer(cache);
+
+	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
+		createEmotionServer(cache);
 
 	const format: ArticleFormat = {
 		display: decideDisplay(CAPI.format),
@@ -73,13 +68,16 @@ export const document = ({ data }: Props): string => {
 		theme: decideTheme(CAPI.format),
 	};
 
-	const { html, css: extractedCss }: RenderToStringResult = extractCritical(
-		renderToString(
-			<Page cache={cache} format={format}>
+	const html = renderToString(
+		<CacheProvider value={cache}>
+			<Page format={format}>
 				<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
-			</Page>,
-		),
+			</Page>
+		</CacheProvider>,
 	);
+
+	const chunks = extractCriticalToChunks(html);
+	const extractedCss = constructStyleTagsFromChunks(chunks);
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const loadableExtractor = new ChunkExtractor({

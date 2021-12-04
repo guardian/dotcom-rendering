@@ -280,7 +280,8 @@ https://workforus.theguardian.com/careers/product-engineering/
                 ${loadableConfigScripts.join('\n')}
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>
-                <style>${resets.resetCSS}${css}</style>
+                <style>${resets.resetCSS}</style>
+				${css}
 				<link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
 			</head>
 
