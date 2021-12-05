@@ -1,11 +1,13 @@
-import React, { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import { Global, css } from '@emotion/react';
 import { focusHalo } from '@guardian/source-foundations';
-import { SkipTo } from '../components/SkipTo';
 import { ArticleDesign } from '@guardian/libs';
+import { SkipTo } from '../components/SkipTo';
+import { DecideLayout } from '../layouts/DecideLayout';
 
 type Props = {
-	children: React.ReactNode;
+	CAPI: CAPIType;
+	NAV: NavType;
 	format: ArticleFormat;
 };
 
@@ -13,10 +15,11 @@ type Props = {
  * @description
  * Page is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
  *
- * @param {ReactNode} children - What gets rendered on the page
+ * @param {CAPIType} CAPI - The article JSON data
+ * @param {NAVType} NAV - The article JSON data
  * @param {ArticleFormat} format - The format model for the article
  * */
-export const Page = ({ children, format }: Props) => {
+export const Page = ({ CAPI, NAV, format }: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -35,7 +38,7 @@ export const Page = ({ children, format }: Props) => {
 					<SkipTo id="keyevents" label="Skip to key events" />
 				))}
 			<div id="react-root"></div>
-			{children}
+			<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
 		</StrictMode>
 	);
 };

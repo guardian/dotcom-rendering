@@ -20,7 +20,6 @@ import {
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
 import { ArticlePillar } from '@guardian/libs';
-import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
 
 interface Props {
@@ -70,9 +69,7 @@ export const document = ({ data }: Props): string => {
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<Page format={format}>
-				<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
-			</Page>
+			<Page format={format} CAPI={CAPI} NAV={NAV} />
 		</CacheProvider>,
 	);
 
