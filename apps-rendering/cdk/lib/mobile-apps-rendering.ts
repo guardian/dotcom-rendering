@@ -21,21 +21,21 @@ export class MobileAppsRendering extends GuStack {
     const domainNameProperties = this.stack === "mobile" ?
       {
         [Stage.CODE]: {
-          domainName: "mobile-rendering.mobile-aws.code.dev-guardianapis.com.",
+          domainName: "mobile-rendering.mobile-aws.code.dev-guardianapis.com",
           hostedZoneId: "Z6PRU8YR6TQDK",
         },
         [Stage.PROD]: {
-          domainName: "mobile-rendering.mobile-aws.guardianapis.com.",
+          domainName: "mobile-rendering.mobile-aws.guardianapis.com",
           hostedZoneId: "Z1EYB4AREPXE3B",
         },
       } :
       {
         [Stage.CODE]: {
-          domainName: "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com.",
+          domainName: "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com",
           hostedZoneId: "Z6PRU8YR6TQDK",
         },
         [Stage.PROD]: {
-          domainName: "mobile-preview-rendering.mobile-aws.guardianapis.com.",
+          domainName: "mobile-preview-rendering.mobile-aws.guardianapis.com",
           hostedZoneId: "Z1EYB4AREPXE3B",
         },
       };

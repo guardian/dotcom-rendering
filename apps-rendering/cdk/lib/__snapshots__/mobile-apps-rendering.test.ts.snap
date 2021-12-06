@@ -38,13 +38,13 @@ Object {
     },
     "mobileappsrendering": Object {
       "CODE": Object {
-        "domainName": "mobile-rendering.mobile-aws.code.dev-guardianapis.com.",
+        "domainName": "mobile-rendering.mobile-aws.code.dev-guardianapis.com",
         "hostedZoneId": "Z6PRU8YR6TQDK",
         "maxInstances": 2,
         "minInstances": 1,
       },
       "PROD": Object {
-        "domainName": "mobile-rendering.mobile-aws.guardianapis.com.",
+        "domainName": "mobile-rendering.mobile-aws.guardianapis.com",
         "hostedZoneId": "Z1EYB4AREPXE3B",
         "maxInstances": 6,
         "minInstances": 3,
@@ -1820,13 +1820,13 @@ Object {
     },
     "mobileappsrendering": Object {
       "CODE": Object {
-        "domainName": "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com.",
+        "domainName": "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com",
         "hostedZoneId": "Z6PRU8YR6TQDK",
         "maxInstances": 2,
         "minInstances": 1,
       },
       "PROD": Object {
-        "domainName": "mobile-preview-rendering.mobile-aws.guardianapis.com.",
+        "domainName": "mobile-preview-rendering.mobile-aws.guardianapis.com",
         "hostedZoneId": "Z1EYB4AREPXE3B",
         "maxInstances": 6,
         "minInstances": 3,
