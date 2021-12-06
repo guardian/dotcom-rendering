@@ -1,7 +1,4 @@
-import { ClassNames } from '@emotion/react';
-
 import { adJson, stringify } from '@root/src/amp/lib/ad-json';
-import { regionClasses } from '@root/src/amp/lib/region-classes';
 
 // Largest size first
 const inlineSizes = [
@@ -12,11 +9,6 @@ const inlineSizes = [
 
 // Note: amp-sticky-ad has max height of 100
 const stickySizes = [{ width: 320, height: 50 }]; // Mobile Leaderboard
-
-type AdRegion = 'US' | 'AU' | 'ROW';
-
-// Array of possible ad regions
-const adRegions: AdRegion[] = ['US', 'AU', 'ROW'];
 
 const dfpAdUnitRoot = 'theguardian.com';
 
@@ -36,41 +28,12 @@ const amazonConfig = {
 	aps: { PUB_ID: '3722', PARAMS: { amp: '1' } },
 };
 
-/**
- * Determine the Placement ID that is used to look up a given stored bid request
- *
- * Stored bid requests are stored by the prebid server instance and each is
- * keyed by a placement ID. This placement ID corresponds to the tag id parameter
- * provided on the client
- *
- * @param isSticky Whether the ad is sticky - sticky ads have stored bid requests
- * containing different SSP ids to non-sticky ads
- * @param adRegion The advertising region - different regions are covered by different
- * stored bid requests
- * @returns The placement id for an ad, depending on its ad region and whether
- * it is sticky
- */
-const getPlacementId = (isSticky: boolean, adRegion: AdRegion): number => {
-	switch (adRegion) {
-		case 'US': {
-			// In the US use different placement IDs depending on whether ad is sticky
-			return isSticky ? 22138171 : 7;
-		}
-		case 'AU':
-			return 6;
-		default:
-			return 4;
-	}
-};
-
-const realTimeConfig = (
-	isSticky: boolean,
-	adRegion: AdRegion,
+export const realTimeConfig = (
 	usePrebid: boolean,
 	usePermutive: boolean,
 	useAmazon: boolean,
+	placementID: number,
 ): string => {
-	const placementID = getPlacementId(isSticky, adRegion);
 	const prebidURL = [
 		// The tag_id in the URL is used to look up the bulk of the request
 		// In this case it corresponds to the placement ID of the bid requests
@@ -105,34 +68,32 @@ const realTimeConfig = (
 	return JSON.stringify(data);
 };
 
-interface CommercialConfig {
+export interface CommercialConfig {
 	usePrebid: boolean;
 	usePermutive: boolean;
 	useAmazon: boolean;
 }
 
-export interface AdProps {
-	isSticky?: boolean;
+export interface BaseAdProps {
 	edition: Edition;
 	section: string;
 	contentType: string;
-	config: CommercialConfig;
 	commercialProperties: CommercialProperties;
 }
 
-export interface RegionalAdProps extends AdProps {
-	adRegion: AdRegion;
+interface AdProps extends BaseAdProps {
+	isSticky?: boolean;
+	rtcConfig: string;
 }
 
-export const RegionalAd = ({
+export const Ad = ({
 	isSticky = false,
-	adRegion,
 	edition,
 	section,
 	contentType,
-	config,
 	commercialProperties,
-}: RegionalAdProps) => {
+	rtcConfig,
+}: AdProps) => {
 	const adSizes = isSticky ? stickySizes : inlineSizes;
 	// Set Primary ad size as first element (should be the largest)
 	const [{ width, height }] = adSizes;
@@ -157,48 +118,7 @@ export const RegionalAd = ({
 			type="doubleclick"
 			json={stringify(adJson(commercialProperties[edition].adTargeting))}
 			data-slot={ampData(section, contentType)}
-			rtc-config={realTimeConfig(
-				isSticky,
-				adRegion,
-				config.usePrebid,
-				config.usePermutive,
-				config.useAmazon,
-			)}
+			rtc-config={rtcConfig}
 		/>
 	);
 };
-
-export const Ad = ({
-	isSticky,
-	edition,
-	section,
-	contentType,
-	config,
-	commercialProperties,
-}: AdProps) => (
-	<>
-		{adRegions.map((adRegion) => (
-			<ClassNames key={adRegion}>
-				{({ css, cx }) => (
-					<div
-						className={cx(
-							css`
-								${regionClasses[adRegion].styles}
-							`,
-						)}
-					>
-						<RegionalAd
-							adRegion={adRegion}
-							isSticky={isSticky}
-							edition={edition}
-							section={section}
-							contentType={contentType}
-							config={config}
-							commercialProperties={commercialProperties}
-						/>
-					</div>
-				)}
-			</ClassNames>
-		))}
-	</>
-);
