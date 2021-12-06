@@ -2,26 +2,26 @@ stacks: [mobile, mobile-preview]
 regions: [eu-west-1]
 templates:
   cloudformation:
-     type: cloud-formation
-     app: mobile-apps-rendering
-     parameters:
+    type: cloud-formation
+    app: mobile-apps-rendering
+    parameters:
       amiEncrypted: true
       amiTags:
         Recipe: bionic-mobile-node-ARM
         AmigoStage: PROD
 deployments:
   mobile-apps-rendering-cfn:
-     template: cloudformation
-     stacks:
-         - mobile
-     parameters:
-       templatePath: MobileAppsRendering.template.json
+    template: cloudformation
+    stacks:
+        - mobile
+    parameters:
+      templatePath: MobileAppsRendering.template.json
   mobile-apps-rendering-preview-cfn:
     template: cloudformation
     stacks:
         - mobile-preview
     parameters:
-          templatePath: MobileAppsRenderingPreview.template.json
+      templatePath: MobileAppsRenderingPreview.template.json
   mobile-apps-rendering:
     type: autoscaling
     parameters:
