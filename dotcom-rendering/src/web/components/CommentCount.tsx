@@ -4,11 +4,9 @@ import { textSans, between, until } from '@guardian/source-foundations';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 import CommentIcon from '@frontend/static/icons/comment.svg';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 
 type Props = {
 	palette: Palette;
-	format: ArticleFormat;
 	isCommentable: boolean;
 	commentCount?: number;
 	setIsExpanded: (isExpanded: boolean) => void;
@@ -22,13 +20,9 @@ const containerStyles = (palette: Palette) => css`
 	font-weight: bold;
 	color: ${palette.fill.commentCount};
 	padding-top: 5px;
-`;
 
-// for liveblog smaller breakpoints article meta is located in the same
-// container as standfirst and needs the same styling as standfirst
-const standfirstColouring = (palette: Palette) => css`
 	${until.desktop} {
-		color: ${palette.text.standfirst};
+		color: ${palette.fill.commentCountUntilDesktop};
 	}
 `;
 
@@ -45,11 +39,8 @@ const iconContainerStyles = css`
 
 const iconStyles = (palette: Palette) => css`
 	fill: ${palette.fill.commentCount};
-`;
-
-const standfirstIconColouring = (palette: Palette) => css`
 	${until.desktop} {
-		fill: ${palette.text.standfirst};
+		fill: ${palette.fill.commentCountUntilDesktop};
 	}
 `;
 
@@ -84,7 +75,6 @@ export const CommentCount = ({
 	isCommentable,
 	commentCount,
 	palette,
-	format,
 	setIsExpanded,
 }: Props) => {
 	if (!isCommentable) return null;
@@ -93,11 +83,7 @@ export const CommentCount = ({
 
 	return (
 		<data
-			css={[
-				containerStyles(palette),
-				format.design === ArticleDesign.LiveBlog &&
-					standfirstColouring(palette),
-			]}
+			css={[containerStyles(palette)]}
 			data-cy="comment-counts"
 			value={`${long} comments on this article`}
 		>
@@ -108,13 +94,7 @@ export const CommentCount = ({
 				onClick={() => setIsExpanded(true)}
 			>
 				<div css={iconContainerStyles}>
-					<CommentIcon
-						css={[
-							iconStyles(palette),
-							format.design === ArticleDesign.LiveBlog &&
-								standfirstIconColouring(palette),
-						]}
-					/>
+					<CommentIcon css={iconStyles(palette)} />
 				</div>
 				<div
 					data-testid="long-comment-count"

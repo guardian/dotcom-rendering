@@ -547,6 +547,12 @@ const fillCommentCount = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	return fillCommentCount(format);
+};
+
 const fillShareIcon = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -897,6 +903,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
+			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
 			shareIcon: fillShareIcon(format),
 			shareIconGrayBackground: fillShareIconGrayBackground(format),
 			cameraCaptionIcon: fillCaptionCamera(format),

@@ -50,7 +50,6 @@ export const SpecialReportStory = () => {
 				setIsExpanded={() => {}}
 				commentCount={306}
 				palette={decidePalette(specialReportFormat)}
-				format={specialReportFormat}
 			/>
 		</div>
 	);
@@ -71,7 +70,6 @@ export const NewsStory = () => {
 				setIsExpanded={() => {}}
 				commentCount={36}
 				palette={decidePalette(newsFormat)}
-				format={newsFormat}
 			/>
 		</div>
 	);
@@ -92,7 +90,6 @@ export const LargeNumber = () => {
 				setIsExpanded={() => {}}
 				commentCount={10836}
 				palette={decidePalette(opinionFormat)}
-				format={opinionFormat}
 			/>
 		</div>
 	);
@@ -113,7 +110,6 @@ export const Zero = () => {
 				setIsExpanded={() => {}}
 				commentCount={0}
 				palette={decidePalette(opinionFormat)}
-				format={opinionFormat}
 			/>
 		</div>
 	);
@@ -133,7 +129,6 @@ export const Undefined = () => {
 				isCommentable={true}
 				setIsExpanded={() => {}}
 				palette={decidePalette(opinionFormat)}
-				format={opinionFormat}
 			/>
 		</div>
 	);

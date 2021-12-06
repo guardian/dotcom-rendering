@@ -17,7 +17,6 @@ describe('CommentCount', () => {
 				isCommentable={false}
 				commentCount={123}
 				palette={decidePalette(format)}
-				format={format}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -31,7 +30,6 @@ describe('CommentCount', () => {
 				isCommentable={true}
 				commentCount={123}
 				palette={decidePalette(format)}
-				format={format}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -46,7 +44,6 @@ describe('CommentCount', () => {
 				isCommentable={true}
 				commentCount={92878}
 				palette={decidePalette(format)}
-				format={format}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -61,7 +58,6 @@ describe('CommentCount', () => {
 				isCommentable={true}
 				commentCount={0}
 				palette={decidePalette(format)}
-				format={format}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -75,7 +71,6 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				palette={decidePalette(format)}
-				format={format}
 				setIsExpanded={() => {}}
 			/>,
 		);

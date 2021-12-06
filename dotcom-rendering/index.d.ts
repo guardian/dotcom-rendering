@@ -140,6 +140,7 @@ type Palette = {
 	};
 	fill: {
 		commentCount: Colour;
+		commentCountUntilDesktop: Colour;
 		shareIcon: Colour;
 		shareIconGrayBackground: Colour;
 		cameraCaptionIcon: Colour;
