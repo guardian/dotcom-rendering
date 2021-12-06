@@ -47,7 +47,7 @@
     "@guardian/atoms-rendering": "^22.1.1",
     "@guardian/automat-contributions": "^0.4.3",
     "@guardian/braze-components": "^5.0.0-0",
-    "@guardian/commercial-core": "^0.26.0",
+    "@guardian/commercial-core": "^0.31.0",
     "@guardian/consent-management-platform": "~6.11.5",
     "@guardian/discussion-rendering": "^9.0.0",
     "@guardian/libs": "^3.4.1",

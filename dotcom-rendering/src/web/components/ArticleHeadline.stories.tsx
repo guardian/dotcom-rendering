@@ -17,6 +17,7 @@ import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
 import { mainMediaElements } from './ArticleHeadline.mocks';
 import { decidePalette } from '../lib/decidePalette';
+import { ArticleHeadlinePadding } from './ArticleHeadlinePadding';
 
 export default {
 	component: ArticleHeadline,
@@ -686,3 +687,39 @@ export const DeadBlog = () => {
 	);
 };
 DeadBlog.story = { name: 'DeadBlog' };
+
+export const ReviewWithoutStars = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Review,
+		theme: ArticlePillar.Culture,
+	};
+	return (
+		<ElementContainer>
+			<Flex>
+				<LeftColumn borderType="full">
+					<></>
+				</LeftColumn>
+				<ArticleContainer format={format}>
+					<ArticleHeadlinePadding
+						design={format.design}
+						starRating={undefined}
+					>
+						<ArticleHeadline
+							headlineString="This is a Review headline."
+							palette={decidePalette(format)}
+							format={format}
+							tags={[]}
+							byline="Byline text"
+						/>
+					</ArticleHeadlinePadding>
+					<Standfirst
+						format={format}
+						standfirst="This is the standfirst text. We include here to demonstrate we have the correct amount of padding below the headline when there are no stars."
+					/>
+				</ArticleContainer>
+			</Flex>
+		</ElementContainer>
+	);
+};
+ReviewWithoutStars.story = { name: 'Review without stars' };
