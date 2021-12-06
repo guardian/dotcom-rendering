@@ -22,8 +22,7 @@ describe('KeyEventsContainer', () => {
 				keyEvents={[
 					{
 						...baseProperties,
-						blockFirstPublishedDisplay:
-							'blockFirstPublishedDisplay',
+						blockFirstPublished: 1638279933000,
 						title: 'title',
 					},
 				]}
@@ -32,7 +31,7 @@ describe('KeyEventsContainer', () => {
 		expect(container).toHaveTextContent('title');
 	});
 
-	it('It should not render events without a blockFirstPublishedDisplay property', () => {
+	it('It should not render events without a blockFirstPublished property', () => {
 		const { container } = render(
 			<KeyEventsContainer
 				format={{
@@ -43,8 +42,7 @@ describe('KeyEventsContainer', () => {
 				keyEvents={[
 					{
 						...baseProperties,
-						blockFirstPublishedDisplay:
-							'blockFirstPublishedDisplay',
+						blockFirstPublished: 1638279933000,
 						title: 'title',
 					},
 					{ ...baseProperties, title: 'should not exist' },
@@ -66,17 +64,17 @@ describe('KeyEventsContainer', () => {
 				keyEvents={[
 					{
 						...baseProperties,
-						blockFirstPublishedDisplay: 'should exist',
+						blockFirstPublished: 1638279933000,
 						title: 'title',
 					},
 					{
 						...baseProperties,
-						blockFirstPublishedDisplay: 'should not exist',
+						blockFirstPublished: 1638279933000,
 					},
 				]}
 			/>,
 		);
 		expect(container).toHaveTextContent('title');
-		expect(container).not.toHaveTextContent('should not exist');
+		expect(container.getElementsByTagName('time')).toHaveLength(1);
 	});
 });

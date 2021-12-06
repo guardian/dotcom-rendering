@@ -77,8 +77,8 @@ const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 		relatedItems: relatedContent
 			.map((content) => {
 				return {
-					title: content.fields?.headline ?? content.webTitle,
-					lastModified: content.fields?.lastModified,
+					title: content.fields?.headline ?? content.webTitle,,
+					webPublicationDate: content.webPublicationDate,
 					headerImage: parseHeaderImage(content),
 					link: content.id,
 					type: parseRelatedItemType(content),

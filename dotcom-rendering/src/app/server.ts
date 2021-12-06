@@ -1,11 +1,9 @@
-import * as path from 'path';
 import express, { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import responseTime from 'response-time';
 
 import compression from 'compression';
 
-import { dist, port, siteName, statik } from '@root/scripts/frontend/config';
 import { log, warn } from '@root/scripts/env/log';
 import {
 	render as renderAMPArticle,
@@ -97,12 +95,9 @@ if (process.env.NODE_ENV === 'production') {
 
 	// if running prod server locally, serve local assets
 	if (!process.env.GU_PUBLIC) {
-		app.use(
-			`/static/${siteName}`,
-			express.static(path.relative(__dirname, statik)),
-		);
+		app.use('/static/frontend', express.static(__dirname));
 
-		app.use('/assets', express.static(path.relative(__dirname, dist)));
+		app.use('/assets', express.static(__dirname));
 	}
 
 	app.post('/Article', logRenderTime, renderArticle);
@@ -189,6 +184,7 @@ if (process.env.NODE_ENV === 'production') {
 		}, 10 * 1000);
 	}
 
+	const port = process.env.PORT || 9000;
 	app.listen(port);
 	// eslint-disable-next-line no-console
 	console.log(`Started production server on port ${port}\nready`);

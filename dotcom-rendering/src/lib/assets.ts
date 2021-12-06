@@ -24,7 +24,7 @@ const stage =
 
 export const CDN = stage
 	? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
-	: 'http://localhost:3030/';
+	: '/';
 export const loadableManifestJson = loadableManifest;
 
 export const getScriptArrayFromFilename = (

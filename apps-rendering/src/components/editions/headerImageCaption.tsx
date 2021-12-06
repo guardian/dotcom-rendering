@@ -1,9 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { brandAlt, neutral } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { SvgCamera } from '@guardian/src-icons';
+import {
+	brandAlt,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
+import { SvgCamera } from '@guardian/source-react-components';
 import type { Option } from '@guardian/types';
 import { map, OptionKind, withDefault } from '@guardian/types';
 import { pipe } from 'lib';

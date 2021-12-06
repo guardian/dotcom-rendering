@@ -1,9 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from } from '@guardian/src-foundations/mq';
-import { headline } from '@guardian/src-foundations/typography';
-import { SvgQuote } from '@guardian/src-icons';
+import { from, headline } from '@guardian/source-foundations';
+import { SvgQuote } from '@guardian/source-react-components';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';

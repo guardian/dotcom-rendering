@@ -3,12 +3,12 @@
 import {
   culture,
   lifestyle,
-  neutral,
   news,
+  neutral,
   opinion,
   specialReport,
   sport,
-} from "@guardian/src-foundations/palette";
+} from "@guardian/source-foundations";
 import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar, ArticleSpecial } from "@guardian/libs";
 
 // ----- Types ----- //
