@@ -457,7 +457,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="headline">
 									<div css={maxWidth}>
-										
 										<ArticleHeadlinePadding
 											design={format.design}
 										>
