@@ -7,6 +7,11 @@
 # Include all folders
 !/**/*/
 
+# Ignore build files
+dist
+jsconfig.json
+target
+
 # But exclude node_modules folders anywhere
 node_modules/
 

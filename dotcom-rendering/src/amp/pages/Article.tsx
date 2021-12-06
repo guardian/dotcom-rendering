@@ -11,7 +11,7 @@ import { Sidebar } from '@root/src/amp/components/Sidebar';
 import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
 import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
 import { AnalyticsIframe } from '@root/src/amp/components/AnalyticsIframe';
-import { neutral } from '@guardian/src-foundations';
+import { neutral } from '@guardian/source-foundations';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { AmpExperimentComponent } from '@root/src/amp/components/AmpExperiment';
 import { AmpExperiments } from '@root/src/amp/server/ampExperimentCache';

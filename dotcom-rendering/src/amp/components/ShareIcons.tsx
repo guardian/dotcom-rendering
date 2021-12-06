@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+import { visuallyHidden } from '@guardian/source-foundations';
 
 import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
 import FacebookIcon from '@frontend/static/icons/facebook.svg';

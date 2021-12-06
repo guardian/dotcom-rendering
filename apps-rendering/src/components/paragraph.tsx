@@ -4,8 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { body, textSans } from '@guardian/src-foundations/typography';
+import { body, remSpace, textSans } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
 
 // ----- Component ----- //

@@ -2,9 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { string as curly } from 'curlyquotes';
 
-import { neutral } from '@guardian/src-foundations';
-import { headline } from '@guardian/src-foundations/typography';
-import { until } from '@guardian/src-foundations/mq';
+import { neutral, headline, until } from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';

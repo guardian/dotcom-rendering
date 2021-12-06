@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
-import { neutral, space } from '@guardian/src-foundations';
-import { headline, body } from '@guardian/src-foundations/typography';
+import { neutral, space, headline, body } from '@guardian/source-foundations';
 
 // Wrapper Styles
 const wrapperStyles = css`

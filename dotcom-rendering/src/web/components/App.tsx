@@ -48,7 +48,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
-import { FocusStyleManager } from '@guardian/src-foundations/utils';
+import { FocusStyleManager } from '@guardian/source-foundations';
 import {
 	ArticleDisplay,
 	ArticleDesign,
@@ -1235,6 +1235,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					countryCode={countryCode}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
+					sectionId={CAPI.config.section}
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 					isMinuteArticle={CAPI.pageType.isMinuteArticle}
 					isPaidContent={CAPI.pageType.isPaidContent}

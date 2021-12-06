@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
-import { TextArea as SourceTextArea } from '@guardian/src-text-area';
-import { space } from '@guardian/src-foundations';
+import { TextArea as SourceTextArea } from '@guardian/source-react-components';
+import { space } from '@guardian/source-foundations';
 
 const textAreaStyles = css`
 	width: 100%;

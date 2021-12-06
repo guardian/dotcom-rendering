@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { textSans } from '@guardian/src-foundations/typography';
+import { textSans } from '@guardian/source-foundations';
 
 import Audio from '@frontend/static/icons/audio.svg';
 import Photo from '@frontend/static/icons/photo.svg';

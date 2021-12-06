@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
+import { remSpace } from '@guardian/source-foundations';
 import { partition } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';

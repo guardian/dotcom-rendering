@@ -1,9 +1,7 @@
 import React, { Suspense } from 'react';
 import { css } from '@emotion/react';
 
-import { text } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
-import { from, Breakpoint } from '@guardian/src-foundations/mq';
+import { text, headline, from, Breakpoint } from '@guardian/source-foundations';
 
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';

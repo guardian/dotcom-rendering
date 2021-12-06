@@ -3,12 +3,21 @@ import { css } from '@emotion/react';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
-import { Button } from '@guardian/src-button';
-import { neutral, remSpace, text } from '@guardian/src-foundations';
-import { body, headline, textSans } from '@guardian/src-foundations/typography';
-import { SvgMinus, SvgPlus } from '@guardian/src-icons';
-import { TextArea } from '@guardian/src-text-area';
-import { TextInput } from '@guardian/src-text-input';
+import {
+	body,
+	headline,
+	neutral,
+	remSpace,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
+import {
+	Button,
+	SvgMinus,
+	SvgPlus,
+	TextArea,
+	TextInput,
+} from '@guardian/source-react-components';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';

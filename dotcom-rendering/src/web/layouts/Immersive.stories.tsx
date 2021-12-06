@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { breakpoints } from '@guardian/src-foundations/mq';
+import { breakpoints } from '@guardian/source-foundations';
 
 import {
 	makeGuardianBrowserCAPI,
@@ -99,13 +99,6 @@ ArticleStory.story = {
 		],
 	},
 };
-
-export const ArticleWithNoBylineStory = (): React.ReactNode => {
-	const ServerCAPI = convertToImmersive(Article);
-	ServerCAPI.author.byline = '';
-	return <HydratedLayout ServerCAPI={ServerCAPI} />;
-};
-ArticleWithNoBylineStory.story = { name: 'Article with no byline' };
 
 export const ReviewStory = (): React.ReactNode => {
 	const ServerCAPI = convertToImmersive(Review);

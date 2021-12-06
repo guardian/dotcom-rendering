@@ -1,7 +1,6 @@
-import { resets } from '@guardian/src-foundations/utils';
+import { resets, brandBackground } from '@guardian/source-foundations';
 import { getFontsCss } from '@root/src/lib/fonts-css';
 import { CDN } from '@root/src/lib/assets';
-import { brandBackground } from '@guardian/src-foundations/palette';
 import he from 'he';
 
 export const htmlTemplate = ({
@@ -22,6 +21,7 @@ export const htmlTemplate = ({
 	keywords,
 	skipToMainContent,
 	skipToNavigation,
+	skipToKeyEvents,
 }: {
 	title?: string;
 	description: string;
@@ -40,6 +40,7 @@ export const htmlTemplate = ({
 	keywords: string;
 	skipToMainContent: string;
 	skipToNavigation: string;
+	skipToKeyEvents?: string;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -286,13 +287,13 @@ https://workforus.theguardian.com/careers/product-engineering/
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>
                 <style>${resets.resetCSS}${css}</style>
+				<link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
+			</head>
 
-                <link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
-            </head>
-
-            <body>
+			<body>
 				${skipToMainContent}
 				${skipToNavigation}
+				${skipToKeyEvents || ''}
                 <div id="react-root"></div>
                 ${html}
                 ${[...lowPriorityScriptTags].join('\n')}
