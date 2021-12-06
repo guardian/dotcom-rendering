@@ -51,7 +51,7 @@ export const HydrateOnce = ({ rootId, children, waitFor = [] }: Props) => {
 	if (!element) return null;
 	start();
 	ReactDOM.hydrate(children, element, () => {
-		element.setAttribute('data-cy-hydrated', 'true');
+		element.setAttribute('data-gu-hydrated', 'true');
 		end();
 	});
 	setAlreadyHydrated(true);
