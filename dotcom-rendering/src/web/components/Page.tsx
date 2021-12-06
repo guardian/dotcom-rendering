@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { Global, css } from '@emotion/react';
 import { focusHalo } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
-import { SkipTo } from '../components/SkipTo';
+import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
 
 type Props = {
@@ -37,7 +37,7 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 				(format.design === ArticleDesign.DeadBlog && (
 					<SkipTo id="keyevents" label="Skip to key events" />
 				))}
-			<div id="react-root"></div>
+			<div id="react-root" />
 			<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
 		</StrictMode>
 	);
