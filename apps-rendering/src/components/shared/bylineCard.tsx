@@ -20,7 +20,6 @@ import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
-import {from} from "@guardian/src-foundations/mq";
 
 interface Props {
 	relatedItem: RelatedItem;
