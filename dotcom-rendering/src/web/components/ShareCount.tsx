@@ -1,19 +1,12 @@
 import { css } from '@emotion/react';
 
-import {
-	neutral,
-	text,
-	textSans,
-	between,
-	until,
-} from '@guardian/source-foundations';
+import { textSans, between, until } from '@guardian/source-foundations';
 
 import ShareIcon from '@frontend/static/icons/share.svg';
 
 import { useApi } from '@root/src/web/lib/useApi';
 import { formatCount } from '@root/src/web/lib/formatCount';
 import { joinUrl } from '@root/src/lib/joinUrl';
-import { ArticleDesign } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
@@ -28,20 +21,16 @@ type ShareCountType = {
 	refreshStatus: boolean;
 };
 
-const containerStyles = css`
+const containerStyles = (palette: Palette) => css`
 	display: flex;
 	align-self: flex-end;
 	flex-direction: column;
 	${textSans.medium()};
 	font-weight: bold;
-	color: ${text.supporting};
-`;
+	color: ${palette.text.shareCount};
 
-// for liveblog smaller breakpoints article meta is located in the same
-// container as standfirst and needs the same styling as standfirst
-const standfirstColouring = (palette: Palette) => css`
 	${until.desktop} {
-		color: ${palette.text.standfirst};
+		color: ${palette.text.shareCountUntilDesktop};
 	}
 `;
 
@@ -52,12 +41,11 @@ const iconContainerStyles = css`
 	margin-bottom: 3px;
 `;
 
-const iconStyles = css`
-	fill: ${neutral[46]};
-`;
-
-const standfirstIconColouring = (palette: Palette) => css`
-	fill: ${palette.text.standfirst};
+const iconStyles = (palette: Palette) => css`
+	fill: ${palette.fill.shareCountIcon};
+	${until.desktop} {
+		fill: ${palette.fill.shareCountIconUntilDesktop};
+	}
 `;
 
 const longStyles = css`
@@ -92,22 +80,12 @@ export const ShareCount = ({ ajaxUrl, pageId, format }: Props) => {
 
 	return (
 		<div
-			css={[
-				containerStyles,
-				format.design === ArticleDesign.LiveBlog &&
-					standfirstColouring(palette),
-			]}
+			css={containerStyles(palette)}
 			aria-label={`${short} Shares`}
 			data-cy="share-counts"
 		>
 			<div css={iconContainerStyles}>
-				<ShareIcon
-					css={[
-						iconStyles,
-						format.design === ArticleDesign.LiveBlog &&
-							standfirstIconColouring(palette),
-					]}
-				/>
+				<ShareIcon css={iconStyles(palette)} />
 			</div>
 			<div
 				data-testid="long-share-count"
