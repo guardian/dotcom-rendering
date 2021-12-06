@@ -530,7 +530,7 @@ const backgroundSpeechBubble = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const backgroundLiveblogMobile = (): string => {
+const backgroundAccordionDivider = (): string => {
 	return neutral[86];
 };
 
@@ -884,7 +884,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			carouselDotFocus: backgroundCarouselDotFocus(format),
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
-			liveBlogMobile: backgroundLiveblogMobile(),
+			accordionDivider: backgroundAccordionDivider(),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

@@ -522,7 +522,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						backgroundColour={palette.background.article}
 						borderColour={palette.border.article}
 						backgroundColourMobile={
-							palette.background.liveBlogMobile
+							palette.background.accordionDivider
 						}
 						padded={false}
 					>
