@@ -58,6 +58,7 @@ export const document = ({ data }: Props): string => {
 	const key = 'dcr';
 	const cache = createCache({ key });
 
+	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
 		createEmotionServer(cache);
 
