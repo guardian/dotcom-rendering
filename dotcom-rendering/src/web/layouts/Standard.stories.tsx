@@ -6,6 +6,11 @@ import {
 	makeGuardianBrowserCAPI,
 	makeGuardianBrowserNav,
 } from '@root/src/model/window-guardian';
+
+import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
+
 import { Article } from '@root/fixtures/generated/articles/Article';
 import { PhotoEssay } from '@root/fixtures/generated/articles/PhotoEssay';
 import { Review } from '@root/fixtures/generated/articles/Review';
@@ -67,6 +72,11 @@ const HydratedLayout = ({
 }) => {
 	fireAndResetHydrationState();
 	const NAV = extractNAV(ServerCAPI.nav);
+	const format: ArticleFormat = {
+		display: decideDisplay(ServerCAPI.format),
+		design: decideDesign(ServerCAPI.format),
+		theme: decideTheme(ServerCAPI.format),
+	};
 
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
@@ -78,7 +88,7 @@ const HydratedLayout = ({
 	if (modifyPage) {
 		modifyPage();
 	}
-	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} format={format} />;
 };
 
 export const ArticleStory = (): React.ReactNode => {
