@@ -4,6 +4,7 @@ import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedIte
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
+	from,
 	headline,
 	neutral,
 	opinion,
@@ -46,8 +47,8 @@ const listStyles = (format: ArticleFormat): SerializedStyles => {
             background: ${neutral[7]};
         `}
 
-        ${from.tablet} {
-        	margin-right: ${remSpace[5]};
+		${from.tablet} {
+			margin-right: ${remSpace[5]};
 		}
 
 		${from.desktop} {
@@ -57,7 +58,6 @@ const listStyles = (format: ArticleFormat): SerializedStyles => {
 		&:last-of-type {
 			margin-right: 0;
 		}
-
 	`;
 };
 
@@ -91,7 +91,6 @@ const bylineImage = css`
 		width: 8.25rem;
 		height: 8.25rem;
 	}
-
 `;
 
 const anchorStyles = css`
@@ -147,7 +146,6 @@ const bylineStyles: SerializedStyles = css`
 `;
 
 const byline = (relatedItem: RelatedItem): ReactElement | null => {
-	console.log(`Related item byline: ${relatedItem.byline}`);
 	return pipe(
 		fromNullable(relatedItem.byline),
 		map((byline) => {

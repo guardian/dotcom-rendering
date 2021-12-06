@@ -3,7 +3,14 @@ import type { RelatedContent } from '@guardian/apps-rendering-api-models/related
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import { andThen, fromNullable, map, OptionKind } from '@guardian/types';
-import {articleContributors, articleMainImage, isAnalysis, isFeature, isReview} from 'capi';
+import { withDefault } from '@guardian/types/dist';
+import {
+	articleContributors,
+	articleMainImage,
+	isAnalysis,
+	isFeature,
+	isReview,
+} from 'capi';
 import {
 	isAudio,
 	isComment,
@@ -13,8 +20,7 @@ import {
 	isLive,
 	isVideo,
 } from 'item';
-import {compose, index, pipe} from 'lib';
-import {withDefault} from "@guardian/types/dist";
+import { compose, index, pipe } from 'lib';
 
 const parseRelatedItemType = (content: Content): RelatedItemType => {
 	const { tags } = content;
@@ -77,7 +83,7 @@ const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 		relatedItems: relatedContent
 			.map((content) => {
 				return {
-					title: content.fields?.headline ?? content.webTitle,,
+					title: content.fields?.headline ?? content.webTitle,
 					webPublicationDate: content.webPublicationDate,
 					headerImage: parseHeaderImage(content),
 					link: content.id,
@@ -90,12 +96,14 @@ const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 					starRating: content.fields?.starRating?.toString(),
 					byline: pipe(
 						getContributor(content),
-						map(t => t.webTitle),
-						withDefault<string | undefined>(undefined),),
+						map((t) => t.webTitle),
+						withDefault<string | undefined>(undefined),
+					),
 					bylineImage: pipe(
 						getContributor(content),
-						map(t => t.bylineLargeImageUrl),
-						withDefault<string | undefined>(undefined),),
+						map((t) => t.bylineLargeImageUrl),
+						withDefault<string | undefined>(undefined),
+					),
 				};
 			})
 			.slice(0, 4),
