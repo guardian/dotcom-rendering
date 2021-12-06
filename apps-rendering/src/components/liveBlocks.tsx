@@ -37,7 +37,7 @@ const BlockTitle: FC<BlockTitleProps> = ({ title }) => {
 
 const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 	return (
-		<div>
+		<>
 			{/* Accordion? */}
 			{/* Pagination? */}
 			{blocks.map((block) => {
@@ -94,7 +94,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 					</LiveBlockContainer>
 				);
 			})}
-		</div>
+		</>
 	);
 };
 
