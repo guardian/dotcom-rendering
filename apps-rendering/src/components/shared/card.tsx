@@ -366,6 +366,7 @@ const metadataStyles: SerializedStyles = css`
 
 const bylineStyles: SerializedStyles = css`
 	color: ${opinion[400]};
+	font-style: italic;
 `;
 
 const durationMedia = (
