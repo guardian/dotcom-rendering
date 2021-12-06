@@ -52,7 +52,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
-import { ContainerLayout } from './ContainerLayout';
+import { ContainerLayout } from '../components/ContainerLayout';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -161,25 +161,25 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 20px;
 					grid-template-columns: 220px 700px;
 					grid-template-areas:
-						'lines		border matchtabs'
-						'meta		border media'
-						'meta		border media'
-						'keyevents	border media'
-						'keyevents	border body'
-						'keyevents	border body'
-						'. 			border .';
+						'lines		 matchtabs'
+						'meta		 media'
+						'meta		 media'
+						'keyevents	 media'
+						'keyevents	 body'
+						'keyevents	 body'
+						'. 			 .';
 				}
 				/* from wide define fixed body width */
 				${from.wide} {
 					grid-column-gap: 20px;
 					grid-template-columns: 220px 700px 1fr;
 					grid-template-areas:
-						'lines 		border matchtabs right-column'
-						'meta  		border media right-column'
-						'keyevents  border media right-column'
-						'keyevents  border body  right-column'
-						'keyevents  border body  right-column'
-						'.			border .     right-column';
+						'lines 		 matchtabs right-column'
+						'meta  		 media     right-column'
+						'keyevents   media 	   right-column'
+						'keyevents   body      right-column'
+						'keyevents   body      right-column'
+						'.			 .         right-column';
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {
@@ -420,7 +420,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							padContent={false}
 							verticalMargins={false}
 						>
-							<Hide when="above" breakpoint="leftCol">
+							<Hide above="leftCol">
 								<ArticleTitle
 									format={format}
 									palette={palette}
