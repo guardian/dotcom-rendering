@@ -119,8 +119,11 @@ const fullMonth = (date: Date): string => fullMonths[date.getUTCMonth()];
 
 const padZero = (n: number): string => (n < 10 ? `0${n}` : n.toString());
 
-const time = (date: Date, separator: string): string =>
-`${padZero(date.getUTCHours())}${separator}${padZero(date.getUTCMinutes())}`;
+const time = (date: Date): string =>
+	`${padZero(date.getUTCHours())}.${padZero(date.getUTCMinutes())}`;
+
+const timeWithColon = (date: Date): string =>
+`${padZero(date.getUTCHours())}:${padZero(date.getUTCMinutes())}`;
 
 const localTime = (date: Date): string =>
 	`${padZero(date.getHours())}.${padZero(date.getMinutes())}`;
@@ -131,10 +134,10 @@ const localTimeZone = (date: Date): string =>
 const format = (date: Date): string =>
 	`${day(date)} ${date.getUTCDate()} ${month(
 		date,
-	)} ${date.getUTCFullYear()} ${time(date, '.')} UTC`;
+	)} ${date.getUTCFullYear()} ${time(date)} UTC`;
 
 const fullyFormat = (date: Date): string =>
-	`${time(date, ':')} ${fullDay(
+	`${timeWithColon(date)} ${fullDay(
 		date)}, ${date.getDate()} ${fullMonth(
 			date)} ${date.getUTCFullYear()}`;
 
