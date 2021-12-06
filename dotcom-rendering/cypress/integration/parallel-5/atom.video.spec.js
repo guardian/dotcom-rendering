@@ -33,7 +33,7 @@ describe('YouTube Atom', function () {
 		cmpIframe().find("[title='Manage my cookies']").click();
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe()
-			.find("[title='Accept all']", { timeout: 12000 })
+			.find("[title='Accept all']", { timeout: 12_000 })
 			.click();
 
 		// Wait for hydration
@@ -51,7 +51,7 @@ describe('YouTube Atom', function () {
 
 		// Wait for youtube to be initialised
 		cy.window()
-			.its('onYouTubeIframeAPIReady', { timeout: 30000 })
+			.its('onYouTubeIframeAPIReady', { timeout: 30_000 })
 			.should('exist');
 
 		// YouTube was initialised but the overlay is still showing
@@ -65,7 +65,7 @@ describe('YouTube Atom', function () {
 		// Play video
 		cy.get(`[data-cy="youtube-overlay"]`).click();
 
-		cy.wait('@ophanCall', { timeout: 30000 });
+		cy.wait('@ophanCall', { timeout: 30_000 });
 
 		// Video is playing, overlay is gone
 		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
@@ -80,7 +80,7 @@ describe('YouTube Atom', function () {
 		cmpIframe().find("[title='Manage my cookies']").click();
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe()
-			.find("[title='Accept all']", { timeout: 12000 })
+			.find("[title='Accept all']", { timeout: 12_000 })
 			.click();
 
 		// Wait for hydration
@@ -106,7 +106,7 @@ describe('YouTube Atom', function () {
 		// Play video
 		cy.get(`[data-cy="youtube-overlay"]`).click();
 
-		cy.wait('@ophanCall', { timeout: 30000 });
+		cy.wait('@ophanCall', { timeout: 30_000 });
 
 		// // Video is playing, overlay is gone
 		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
@@ -120,7 +120,7 @@ describe('YouTube Atom', function () {
 		cmpIframe().find("[title='Manage my cookies']").click();
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe()
-			.find("[title='Reject all']", { timeout: 12000 })
+			.find("[title='Reject all']", { timeout: 12_000 })
 			.click();
 
 		// Wait for hydration
@@ -145,7 +145,7 @@ describe('YouTube Atom', function () {
 		// Play video
 		cy.get(`[data-cy="youtube-overlay"]`).click();
 
-		cy.wait('@ophanCall', { timeout: 30000 });
+		cy.wait('@ophanCall', { timeout: 30_000 });
 
 		// Video is playing, overlay is gone
 		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
@@ -159,7 +159,7 @@ describe('YouTube Atom', function () {
 		cmpIframe().find("[title='Manage my cookies']").click();
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe()
-			.find("[title='Accept all']", { timeout: 12000 })
+			.find("[title='Accept all']", { timeout: 12_000 })
 			.click();
 
 		// Wait for hydration
@@ -175,7 +175,7 @@ describe('YouTube Atom', function () {
 		// Play video (without triggering any pre load events)
 		cy.get(`[data-cy="youtube-overlay"]`).trigger('click');
 
-		cy.wait('@ophanCall', { timeout: 30000 });
+		cy.wait('@ophanCall', { timeout: 30_000 });
 
 		// Video is playing, overlay is gone
 		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
