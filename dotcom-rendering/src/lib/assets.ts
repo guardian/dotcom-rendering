@@ -15,16 +15,24 @@ try {
 	// do nothing
 }
 
-// TODO: this should be removed in favour of `frontendAssetsFullURL` defined in CAPI
-// GU_STAGE is set in cloudformation.yml, so will be undefined locally
-const stage =
-	typeof process.env.GU_STAGE === 'string'
-		? process.env.GU_STAGE.toUpperCase()
-		: undefined;
+/**
+ * Decides the url to use for fetching assets
+ *
+ * @param stage {'PROD' | 'CODE' | undefined} the environment code is executing in
+ * @returns
+ */
+const decideCDN = (stage: string | undefined): string => {
+	switch (stage) {
+		case 'PROD':
+			return '//assets.guim.co.uk/';
+		case 'CODE':
+			return '//assets-code.guim.co.uk/';
+		default:
+			return '/';
+	}
+};
+export const CDN = decideCDN(process.env.GU_STAGE);
 
-export const CDN = stage
-	? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
-	: '/';
 export const loadableManifestJson = loadableManifest;
 
 export const getScriptArrayFromFilename = (
