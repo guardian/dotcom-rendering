@@ -33,10 +33,10 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			{format.design === ArticleDesign.LiveBlog ||
-				(format.design === ArticleDesign.DeadBlog && (
-					<SkipTo id="keyevents" label="Skip to key events" />
-				))}
+			{(format.design === ArticleDesign.LiveBlog ||
+				format.design === ArticleDesign.DeadBlog) && (
+				<SkipTo id="keyevents" label="Skip to key events" />
+			)}
 			<div id="react-root" />
 			<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
 		</StrictMode>
