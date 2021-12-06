@@ -1,7 +1,7 @@
 stacks: [mobile, mobile-preview]
 regions: [eu-west-1]
-deployments:
-  mobile-apps-rendering-cfn:
+templates:
+  cloudformation:
     type: cloud-formation
     app: mobile-apps-rendering
     parameters:
@@ -9,12 +9,24 @@ deployments:
       amiTags:
         Recipe: bionic-mobile-node-ARM
         AmigoStage: PROD
-      templatePath: cloudformation.yaml
+deployments:
+  mobile-apps-rendering-cfn:
+    template: cloudformation
+    stacks:
+        - mobile
+    parameters:
+      templatePath: MobileAppsRendering.template.json
+  mobile-apps-rendering-preview-cfn:
+    template: cloudformation
+    stacks:
+        - mobile-preview
+    parameters:
+      templatePath: MobileAppsRenderingPreview.template.json
   mobile-apps-rendering:
     type: autoscaling
     parameters:
       bucket: mobile-apps-api-dist
-    dependencies: [mobile-apps-rendering-cfn]
+    dependencies: [mobile-apps-rendering-cfn, mobile-apps-rendering-preview-cfn]
   mobile-assets:
     type: aws-s3
     parameters:

@@ -7,8 +7,7 @@ import Img from '@guardian/common-rendering/src/components/img';
 import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { between, from, remSpace } from '@guardian/source-foundations';
 import { some } from '@guardian/types';
 import type { Image } from 'image';
 import type { FC } from 'react';
@@ -55,9 +54,11 @@ const styles = css`
 `;
 
 const liveStyles = css`
-	${from.wide} {
-		margin-left: 0;
-		margin-right: 0;
+	margin-bottom: ${remSpace[4]};
+	position: relative;
+
+	${between.tablet.and.desktop} {
+		margin-top: ${remSpace[3]};
 	}
 `;
 
@@ -78,20 +79,6 @@ const imgStyles = (width: number, height: number): SerializedStyles => css`
 	}
 `;
 
-const liveblogImgStyles = (
-	width: number,
-	height: number,
-): SerializedStyles => css`
-	display: block;
-	width: 100%;
-	height: calc(100vw * ${height / width});
-
-	${from.desktop} {
-		width: 700px;
-		height: ${(700 * height) / width}px;
-	}
-`;
-
 const immersiveImgStyles = css`
 	display: block;
 	height: 80vh;
@@ -102,7 +89,8 @@ const immersiveImgStyles = css`
 const getStyles = ({ design, display }: ArticleFormat): SerializedStyles => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
-			return css(styles, liveStyles);
+		case ArticleDesign.DeadBlog:
+			return liveStyles;
 		default:
 			if (display === ArticleDisplay.Immersive) {
 				return immersiveStyles;
@@ -119,7 +107,7 @@ const getImgStyles = (
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
-			return liveblogImgStyles(image.width, image.height);
+			return css();
 		default:
 			switch (format.display) {
 				case ArticleDisplay.Immersive:
@@ -130,7 +118,15 @@ const getImgStyles = (
 	}
 };
 
-const getSizes = ({ display }: ArticleFormat, image: Image): Sizes => {
+const getSizes = ({ display, design }: ArticleFormat, image: Image): Sizes => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.LiveBlog:
+			return {
+				mediaQueries: [{ breakpoint: 'tablet', size: '700px' }],
+				default: '100vw',
+			};
+	}
 	switch (display) {
 		case ArticleDisplay.Immersive:
 			return {

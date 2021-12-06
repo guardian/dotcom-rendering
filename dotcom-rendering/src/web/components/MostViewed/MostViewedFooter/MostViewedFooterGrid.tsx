@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { css } from '@emotion/react';
-import { neutral, border } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
-import { from, until } from '@guardian/src-foundations/mq';
-import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+import {
+	neutral,
+	border,
+	headline,
+	from,
+	until,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 

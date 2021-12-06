@@ -1,7 +1,10 @@
 import { ThemeProvider } from '@emotion/react';
 import { PurchaseScreenReason } from '@guardian/bridget/PurchaseScreenReason';
-import { Button, buttonReaderRevenue } from '@guardian/src-button';
-import { SvgArrowRightStraight } from '@guardian/src-icons';
+import {
+	Button,
+	buttonThemeReaderRevenue,
+	SvgArrowRightStraight,
+} from '@guardian/source-react-components';
 import { acquisitionsClient } from 'native/nativeApi';
 import { useEffect, useRef, useState } from 'react';
 
@@ -81,7 +84,7 @@ function EpicContent({
 			<h1 dangerouslySetInnerHTML={{ __html: title }}></h1>
 			<div dangerouslySetInnerHTML={{ __html: body }}></div>
 			<div className="button-container">
-				<ThemeProvider theme={buttonReaderRevenue}>
+				<ThemeProvider theme={buttonThemeReaderRevenue}>
 					{epicButton(firstButton, () =>
 						acquisitionsClient.launchPurchaseScreen(
 							PurchaseScreenReason.epic,

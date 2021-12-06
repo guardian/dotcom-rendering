@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { neutral } from '@guardian/src-foundations/palette';
+import { neutral } from '@guardian/source-foundations';
 import { toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';

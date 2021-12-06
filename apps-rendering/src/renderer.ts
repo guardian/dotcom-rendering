@@ -15,11 +15,15 @@ import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { until } from '@guardian/src-foundations/mq';
-import type { Breakpoint } from '@guardian/src-foundations/mq';
-import { labs, neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import type { Breakpoint } from '@guardian/source-foundations';
+import {
+	headline,
+	labs,
+	neutral,
+	remSpace,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import {
 	andThen,
 	fromNullable,

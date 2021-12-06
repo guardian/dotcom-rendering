@@ -67,7 +67,7 @@ export type CanShowData = {
 	isSignedIn?: boolean;
 	countryCode?: string;
 	contentType: string;
-	sectionName?: string;
+	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
 	isPaidContent: boolean;
@@ -90,7 +90,7 @@ const buildPayload = async (data: CanShowData): Promise<Metadata> => {
 		},
 		targeting: {
 			contentType: data.contentType,
-			sectionName: data.sectionName || '', // TODO update client to reflect that this is optional
+			sectionId: data.sectionId,
 			shouldHideReaderRevenue: data.shouldHideReaderRevenue,
 			isMinuteArticle: data.isMinuteArticle,
 			isPaidContent: data.isPaidContent,

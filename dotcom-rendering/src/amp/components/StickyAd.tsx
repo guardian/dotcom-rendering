@@ -1,10 +1,7 @@
-import { ClassNames } from '@emotion/react';
-import { text } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
-import { regionClasses } from '../lib/region-classes';
-import { RegionalAdProps, RegionalAd } from './Ad';
+import { text, textSans } from '@guardian/source-foundations';
+import { realTimeConfig, BaseAdProps, CommercialConfig, Ad } from './Ad';
 
-// This CSS should be imported and added to global styles in amp/server/document.tsx to add the Advertisment label to the sticky
+// This CSS should be imported and added to global styles in amp/server/document.tsx to add the Advertisement label to the sticky
 export const stickyAdLabelCss = `
 amp-sticky-ad:before {
 	content: 'Advertisement';
@@ -18,37 +15,34 @@ amp-sticky-ad:before {
 	font-size: 0.75rem;
 }`;
 
+const mobileStickyPlacementId = 9;
+
+interface StickyAdProps extends BaseAdProps {
+	config: CommercialConfig;
+}
+
 export const StickyAd = ({
-	adRegion,
 	edition,
 	section,
 	contentType,
 	config,
 	commercialProperties,
-}: RegionalAdProps) => {
+}: StickyAdProps) => {
 	return (
-		<ClassNames>
-			{({ css, cx }) => (
-				<div
-					className={cx(
-						css`
-							${regionClasses[adRegion].styles}
-						`,
-					)}
-				>
-					<amp-sticky-ad layout="nodisplay">
-						<RegionalAd
-							isSticky={true}
-							adRegion={adRegion}
-							edition={edition}
-							section={section}
-							contentType={contentType}
-							config={config}
-							commercialProperties={commercialProperties}
-						/>
-					</amp-sticky-ad>
-				</div>
-			)}
-		</ClassNames>
+		<amp-sticky-ad layout="nodisplay">
+			<Ad
+				isSticky={true}
+				edition={edition}
+				section={section}
+				contentType={contentType}
+				commercialProperties={commercialProperties}
+				rtcConfig={realTimeConfig(
+					config.usePrebid,
+					config.usePermutive,
+					config.useAmazon,
+					mobileStickyPlacementId,
+				)}
+			/>
+		</amp-sticky-ad>
 	);
 };

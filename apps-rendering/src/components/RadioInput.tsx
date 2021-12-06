@@ -1,9 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { FormOption } from '@guardian/apps-rendering-api-models/formOption';
-import { remSpace } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
-import { Radio, RadioGroup } from '@guardian/src-radio';
+import { remSpace, textSans } from '@guardian/source-foundations';
+import { Radio, RadioGroup } from '@guardian/source-react-components';
 import type { ReactElement } from 'react';
 
 interface RadioInputProps {

@@ -1,104 +1,183 @@
-/* eslint-disable mocha/no-setup-in-describe */
 import { cmpIframe } from '../../lib/cmpIframe';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
-const mainMediaVideo =
-	'https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents';
-const mainMediaPlayEvent = {
-	id: 'gu-video-youtube-2b33a7b7-e639-4232-9ecd-0fb920fa8147',
-	eventType: 'video:content:play',
+const interceptPlayEvent = (id) => {
+	return cy.intercept(
+		{
+			url: 'http://ophan.theguardian.com/img/2?**',
+			query: {
+				video: /(.*)eventType\":\"video:content:play(.*)/,
+			},
+		},
+		function (req) {
+			const url = new URL(req.url);
+			const videoValue = url.searchParams.get('video');
+			expect(JSON.parse(videoValue)).to.deep.equal({
+				id,
+				eventType: 'video:content:play',
+			});
+		},
+	);
 };
-
-const embedMediaVideo =
-	'https://www.theguardian.com/us-news/2020/oct/29/lordstown-ohio-trump-gm-plant-election';
-const embedPlayEvent = {
-	id: 'gu-video-youtube-35f9a38f-c0c5-4bbd-9395-e338c9e97d30',
-	eventType: 'video:content:play',
-};
-
-describe('Video', function () {
+describe('YouTube Atom', function () {
 	beforeEach(function () {
 		storage.local.set('gu.geo.override', 'GB');
 	});
 
-	it('Main media youtube video', function () {
-		cy.intercept('https://www.youtube.com/embed/S0CE1n-R3OY?*').as(
-			'youtubePlayer',
+	it('plays main media videos', function () {
+		cy.visit(
+			'/Article?url=https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
 		);
-
-		cy.intercept(
-			{
-				url: 'http://ophan.theguardian.com/img/2?*',
-				query: {
-					video: /(.*)eventType\":\"video:content:play(.*)/,
-				},
-			},
-			function (req) {
-				const url = new URL(req.url);
-				const videoValue = url.searchParams.get('video');
-				expect(JSON.parse(videoValue)).to.deep.equal(
-					mainMediaPlayEvent,
-				);
-			},
-		).as('ophanCall');
-
-		cy.visit(`/Article?url=${mainMediaVideo}`);
-
 		cmpIframe().contains("It's your choice");
 		cmpIframe().find("[title='Manage my cookies']").click();
 		privacySettingsIframe().contains('Privacy settings');
-		privacySettingsIframe().find("[title='Accept all']").click();
+		privacySettingsIframe()
+			.find("[title='Accept all']", { timeout: 12000 })
+			.click();
 
-		cy.wait('@youtubePlayer');
+		// Wait for hydration
+		cy.get('[data-component=youtube-atom]')
+			.parent()
+			.should('have.attr', 'data-gu-hydrated', 'true');
 
-		cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+		// Make sure overlay is displayed
+		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
 
-		cy.get(`[daya-cy="youtube-overlay"]`).click();
+		// Trigger mouseenter event
+		cy.window().its('onYouTubeIframeAPIReady').should('not.exist');
 
-		// Upon click, a lot of content is being lazy loaded so it can take longer to
-		// make the Ophan call
-		cy.wait('@ophanCall', { timeout: 15000 });
+		cy.get(`[data-cy="youtube-overlay"]`).trigger('mouseenter');
 
-		cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
+		// Wait for youtube to be initialised
+		cy.window()
+			.its('onYouTubeIframeAPIReady', { timeout: 30000 })
+			.should('exist');
+
+		// YouTube was initialised but the overlay is still showing
+		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
+
+		// Listen for the ophan call made when the video is played
+		interceptPlayEvent(
+			'gu-video-youtube-2b33a7b7-e639-4232-9ecd-0fb920fa8147',
+		).as('ophanCall');
+
+		// Play video
+		cy.get(`[data-cy="youtube-overlay"]`).click();
+
+		cy.wait('@ophanCall', { timeout: 30000 });
+
+		// Video is playing, overlay is gone
+		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
 	});
 
-	it('Embed youtube video', function () {
-		cy.intercept('https://www.youtube.com/embed/N9Cgy-ke5-s?*').as(
-			'youtubePlayer',
+	it('plays in body videos', function () {
+		// cy.intercept('**youtube**').as('callToYouTube');
+		cy.visit(
+			'/Article?url=https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
 		);
-
-		cy.intercept(
-			{
-				url: 'http://ophan.theguardian.com/img/2?*',
-				query: {
-					video: /(.*)eventType\":\"video:content:play(.*)/,
-				},
-			},
-			function (req) {
-				const url = new URL(req.url);
-				const videoValue = url.searchParams.get('video');
-				expect(JSON.parse(videoValue)).to.deep.equal(embedPlayEvent);
-			},
-		).as('ophanCall');
-
-		cy.visit(`/Article?url=${embedMediaVideo}`);
-
 		cmpIframe().contains("It's your choice");
 		cmpIframe().find("[title='Manage my cookies']").click();
 		privacySettingsIframe().contains('Privacy settings');
-		privacySettingsIframe().find("[title='Accept all']").click();
+		privacySettingsIframe()
+			.find("[title='Accept all']", { timeout: 12000 })
+			.click();
 
-		cy.wait('@youtubePlayer');
+		// Wait for hydration
+		cy.get('[data-component=youtube-atom]')
+			.parent()
+			.should('have.attr', 'data-gu-hydrated', 'true');
 
-		cy.get(`[daya-cy="youtube-overlay"]`).should('be.visible');
+		// Make sure overlay is displayed
+		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
 
-		cy.get(`[daya-cy="youtube-overlay"]`).click();
+		// Trigger mouseenter event
+		cy.get(`[data-cy="youtube-overlay"]`).trigger('touchstart');
+		// cy.wait('@callToYouTube');
 
-		// Upon click, a lot of content is being lazy loaded so it can take longer to
-		// make the Ophan call
-		cy.wait('@ophanCall', { timeout: 15000 });
+		// The youtube files were loaded by the overlay is still showing
+		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
 
-		cy.get(`[daya-cy="youtube-overlay"]`).should('not.be.visible');
+		// Listen for the ophan call made when the video is played
+		interceptPlayEvent(
+			'gu-video-youtube-2bc6f709-865e-49ae-b01b-8fc38eb4e9a7',
+		).as('ophanCall');
+
+		// Play video
+		cy.get(`[data-cy="youtube-overlay"]`).click();
+
+		cy.wait('@ophanCall', { timeout: 30000 });
+
+		// // Video is playing, overlay is gone
+		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
+	});
+
+	it('still plays the video if the reader rejects consent', function () {
+		cy.visit(
+			'/Article?url=https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
+		);
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe()
+			.find("[title='Reject all']", { timeout: 12000 })
+			.click();
+
+		// Wait for hydration
+		cy.get('[data-component=youtube-atom]')
+			.parent()
+			.should('have.attr', 'data-gu-hydrated', 'true');
+
+		// Make sure overlay is displayed
+		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
+
+		// Trigger mouseenter event
+		cy.get(`[data-cy="youtube-overlay"]`).trigger('mouseenter');
+
+		// The youtube files were loaded by the overlay is still showing
+		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
+
+		// Listen for the ophan call made when the video is played
+		interceptPlayEvent(
+			'gu-video-youtube-2bc6f709-865e-49ae-b01b-8fc38eb4e9a7',
+		).as('ophanCall');
+
+		// Play video
+		cy.get(`[data-cy="youtube-overlay"]`).click();
+
+		cy.wait('@ophanCall', { timeout: 30000 });
+
+		// Video is playing, overlay is gone
+		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
+	});
+
+	it('still plays the video even if it was not preloaded', function () {
+		cy.visit(
+			'/Article?url=https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
+		);
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe()
+			.find("[title='Accept all']", { timeout: 12000 })
+			.click();
+
+		// Wait for hydration
+		cy.get('[data-component=youtube-atom]')
+			.parent()
+			.should('have.attr', 'data-gu-hydrated', 'true');
+
+		// Listen for the ophan call made when the video is played
+		interceptPlayEvent(
+			'gu-video-youtube-2b33a7b7-e639-4232-9ecd-0fb920fa8147',
+		).as('ophanCall');
+
+		// Play video (without triggering any pre load events)
+		cy.get(`[data-cy="youtube-overlay"]`).trigger('click');
+
+		cy.wait('@ophanCall', { timeout: 30000 });
+
+		// Video is playing, overlay is gone
+		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
 	});
 });

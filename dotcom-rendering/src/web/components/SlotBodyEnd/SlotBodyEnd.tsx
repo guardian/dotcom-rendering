@@ -26,6 +26,7 @@ type Props = {
 	countryCode?: string;
 	contentType: string;
 	sectionName?: string;
+	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
 	isPaidContent: boolean;
@@ -82,6 +83,7 @@ export const SlotBodyEnd = ({
 	countryCode,
 	contentType,
 	sectionName,
+	sectionId,
 	shouldHideReaderRevenue,
 	isMinuteArticle,
 	isPaidContent,
@@ -99,7 +101,7 @@ export const SlotBodyEnd = ({
 			isSignedIn,
 			countryCode,
 			contentType,
-			sectionName,
+			sectionId,
 			shouldHideReaderRevenue,
 			isMinuteArticle,
 			isPaidContent,

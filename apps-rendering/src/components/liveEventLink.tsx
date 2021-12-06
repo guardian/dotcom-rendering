@@ -1,8 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { SvgGuardianLiveLogo } from '@guardian/src-brand';
-import { neutral, remSpace } from '@guardian/src-foundations';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	headline,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
+import { SvgGuardianLiveLogo } from '@guardian/source-react-components';
 import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 

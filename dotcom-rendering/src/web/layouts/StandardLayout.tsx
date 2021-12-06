@@ -8,8 +8,9 @@ import {
 	brandLine,
 	labs,
 	border,
-} from '@guardian/src-foundations/palette';
-import { from, until } from '@guardian/src-foundations/mq';
+	from,
+	until,
+} from '@guardian/source-foundations';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
@@ -95,8 +96,9 @@ const StandardGrid = ({
 						? css`
 								grid-template-areas:
 									'title  border  matchNav     right-column'
+									'title  border  matchtabs    right-column'
 									'.      border  headline     right-column'
-									'.      border  standfirst    right-column'
+									'.      border  standfirst   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -105,7 +107,7 @@ const StandardGrid = ({
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
-									'.      border  standfirst    right-column'
+									'.      border  standfirst   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -128,6 +130,7 @@ const StandardGrid = ({
 						? css`
 								grid-template-areas:
 									'title  border  matchNav     right-column'
+									'title  border  matchtabs    right-column'
 									'.      border  headline     right-column'
 									'.      border  standfirst   right-column'
 									'lines  border  media        right-column'
@@ -138,7 +141,7 @@ const StandardGrid = ({
 						: css`
 								grid-template-areas:
 									'title  border  headline     right-column'
-									'.      border  standfirst    right-column'
+									'.      border  standfirst   right-column'
 									'lines  border  media        right-column'
 									'meta   border  media        right-column'
 									'meta   border  body         right-column'
@@ -158,6 +161,7 @@ const StandardGrid = ({
 						? css`
 								grid-template-areas:
 									'matchNav      right-column'
+									'matchtabs	   right-column'
 									'title         right-column'
 									'headline      right-column'
 									'standfirst    right-column'
@@ -186,6 +190,7 @@ const StandardGrid = ({
 						? css`
 								grid-template-areas:
 									'matchNav'
+									'matchtabs'
 									'title'
 									'headline'
 									'standfirst'
@@ -214,6 +219,7 @@ const StandardGrid = ({
 						? css`
 								grid-template-areas:
 									'matchNav'
+									'matchtabs'
 									'media'
 									'title'
 									'headline'
@@ -481,6 +487,17 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										<Placeholder
 											rootId="match-nav"
 											height={230}
+										/>
+									)}
+							</div>
+						</GridItem>
+						<GridItem area="matchtabs" element="aside">
+							<div css={maxWidth}>
+								{format.design === ArticleDesign.MatchReport &&
+									CAPI.matchUrl && (
+										<Placeholder
+											rootId="match-tabs"
+											height={40}
 										/>
 									)}
 							</div>

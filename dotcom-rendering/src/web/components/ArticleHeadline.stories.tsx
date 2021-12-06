@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { news } from '@guardian/src-foundations';
+import { news } from '@guardian/source-foundations';
 import {
 	ArticleDisplay,
 	ArticleDesign,
@@ -17,6 +17,7 @@ import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
 import { mainMediaElements } from './ArticleHeadline.mocks';
 import { decidePalette } from '../lib/decidePalette';
+import { ArticleHeadlinePadding } from './ArticleHeadlinePadding';
 
 export default {
 	component: ArticleHeadline,
@@ -32,7 +33,7 @@ export const ArticleStory = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -58,7 +59,7 @@ export const Feature = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -84,7 +85,7 @@ export const ShowcaseInterview = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -125,7 +126,7 @@ export const ShowcaseInterviewNobyline = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -168,7 +169,7 @@ export const Interview = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -207,7 +208,7 @@ export const InterviewSpecialReport = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -248,7 +249,7 @@ export const InterviewNoByline = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -289,7 +290,7 @@ export const Comment = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -315,7 +316,7 @@ export const Analysis = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -341,7 +342,7 @@ export const Media = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -367,7 +368,7 @@ export const Review = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -393,7 +394,7 @@ export const PhotoEssay = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -419,7 +420,7 @@ export const Quiz = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -445,7 +446,7 @@ export const Recipe = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -471,7 +472,7 @@ export const Immersive = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -497,7 +498,7 @@ export const ImmersiveNoMainMedia = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -527,7 +528,7 @@ export const ImmersiveComment = () => {
 			backgroundColour="orange"
 		>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -553,7 +554,7 @@ export const Editorial = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -579,7 +580,7 @@ export const MatchReport = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -605,7 +606,7 @@ export const SpecialReport = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -631,7 +632,7 @@ export const LiveBlog = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -670,7 +671,7 @@ export const DeadBlog = () => {
 	return (
 		<ElementContainer>
 			<Flex>
-				<LeftColumn>
+				<LeftColumn borderType="full">
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
@@ -686,3 +687,39 @@ export const DeadBlog = () => {
 	);
 };
 DeadBlog.story = { name: 'DeadBlog' };
+
+export const ReviewWithoutStars = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Review,
+		theme: ArticlePillar.Culture,
+	};
+	return (
+		<ElementContainer>
+			<Flex>
+				<LeftColumn borderType="full">
+					<></>
+				</LeftColumn>
+				<ArticleContainer format={format}>
+					<ArticleHeadlinePadding
+						design={format.design}
+						starRating={undefined}
+					>
+						<ArticleHeadline
+							headlineString="This is a Review headline."
+							palette={decidePalette(format)}
+							format={format}
+							tags={[]}
+							byline="Byline text"
+						/>
+					</ArticleHeadlinePadding>
+					<Standfirst
+						format={format}
+						standfirst="This is the standfirst text. We include here to demonstrate we have the correct amount of padding below the headline when there are no stars."
+					/>
+				</ArticleContainer>
+			</Flex>
+		</ElementContainer>
+	);
+};
+ReviewWithoutStars.story = { name: 'Review without stars' };

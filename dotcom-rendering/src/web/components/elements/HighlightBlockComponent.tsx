@@ -1,9 +1,8 @@
 import { ClassNames } from '@emotion/react';
 
-import { body } from '@guardian/src-foundations/typography';
+import { body, background } from '@guardian/source-foundations';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
 import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
-import { background } from '@guardian/src-foundations/palette';
 
 type Props = {
 	html: string;

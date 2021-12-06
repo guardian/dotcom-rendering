@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { headline } from '@guardian/src-foundations/typography';
+import { headline } from '@guardian/source-foundations';
 
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 

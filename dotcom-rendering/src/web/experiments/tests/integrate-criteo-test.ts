@@ -1,0 +1,20 @@
+import type { ABTest } from '@guardian/ab-core';
+
+export const integrateCriteo: ABTest = {
+	id: 'IntegrateCriteo',
+	author: 'Chris Jones (@chrislomaxjones)',
+	start: '2021-11-22',
+	expiry: '2022-01-10',
+	audience: 2 / 100,
+	audienceOffset: 96 / 100,
+	audienceCriteria: 'All users',
+	description:
+		'Integrate new Prebid bidder and measure revenue uplift / impact of commercial performance metrics',
+	successMeasure:
+		'Revenue uplift with no significant impact on performance metrics',
+	variants: [
+		{ id: 'control', test: (): void => {} },
+		{ id: 'variant', test: (): void => {} },
+	],
+	canRun: () => true,
+};

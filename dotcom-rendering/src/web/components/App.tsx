@@ -47,7 +47,7 @@ import { initPerf } from '@root/src/web/browser/initPerf';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
-import { FocusStyleManager } from '@guardian/src-foundations/utils';
+import { FocusStyleManager } from '@guardian/source-foundations';
 import {
 	ArticleDisplay,
 	ArticleDesign,
@@ -79,6 +79,7 @@ import {
 } from '../browser/ophan/ophan';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
+import { GetMatchTabs } from './GetMatchTabs';
 
 // *******************************
 // ****** Dynamic imports ********
@@ -787,6 +788,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
 				</Portal>
 			)}
+			{CAPI.matchUrl && (
+				<Portal rootId="match-tabs">
+					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />
+				</Portal>
+			)}
 			{/*
 				Rules for when to show <ContributionSlot />:
 				1. shouldHideReaderRevenue is false ("Prevent membership/contribution appeals" is not checked in Composer)
@@ -1119,6 +1125,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					countryCode={countryCode}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
+					sectionId={CAPI.config.section}
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 					isMinuteArticle={CAPI.pageType.isMinuteArticle}
 					isPaidContent={CAPI.pageType.isPaidContent}
@@ -1235,14 +1242,20 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				<StickyBottomBanner
 					isSignedIn={isSignedIn}
 					asyncCountryCode={asyncCountryCode}
-					CAPI={CAPI}
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
+					section={CAPI.config.section}
 					tags={CAPI.tags}
 					isPaidContent={CAPI.pageType.isPaidContent}
 					isPreview={!!CAPI.isPreview}
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isMinuteArticle={CAPI.pageType.isMinuteArticle}
+					isSensitive={CAPI.config.isSensitive}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					idApiUrl={CAPI.config.idApiUrl}
+					switches={CAPI.config.switches}
 				/>
 			</Portal>
 		</React.StrictMode>

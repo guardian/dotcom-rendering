@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { brandBackground } from '@guardian/src-foundations/palette';
+import { brandBackground } from '@guardian/source-foundations';
 
 import { Dropdown } from '@frontend/web/components/Dropdown';
 

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { brandAltBackground } from '@guardian/src-foundations/palette';
+import { brandAltBackground } from '@guardian/source-foundations';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 

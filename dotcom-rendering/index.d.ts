@@ -43,7 +43,8 @@ type CAPIDesign =
 	| 'InteractiveDesign'
 	| 'PhotoEssayDesign'
 	| 'PrintShopDesign'
-	| 'ObituaryDesign';
+	| 'ObituaryDesign'
+	| 'FullPageInteractiveDesign';
 
 // CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
@@ -159,6 +160,8 @@ type Palette = {
 		navPillar: Colour;
 		article: Colour;
 		lines: Colour;
+		matchTab: Colour;
+		activeMatchTab: Colour;
 		pagination: Colour;
 	};
 	topBar: {
@@ -422,7 +425,7 @@ interface CAPIType {
 	 * @TJS-format date-time
 	 */
 	webPublicationDateDeprecated: string;
-
+	webPublicationDate: string;
 	webPublicationDateDisplay: string;
 	webPublicationSecondaryDateDisplay: string;
 	editionLongForm: string;
@@ -636,6 +639,7 @@ type MatchReportType = {
 	venue: string;
 	comments: string;
 	minByMinUrl: string;
+	reportUrl: string;
 };
 
 /**

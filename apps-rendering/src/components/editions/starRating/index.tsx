@@ -2,11 +2,8 @@
 
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	brandAltBackground,
-	brandAltLine,
-} from '@guardian/src-foundations/palette';
-import { SvgStar } from '@guardian/src-icons';
+import { brandAltBackground, brandAltLine } from '@guardian/source-foundations';
+import { SvgStar } from '@guardian/source-react-components';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, remSpace } from '@guardian/src-foundations';
+import { neutral, remSpace } from '@guardian/source-foundations';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 

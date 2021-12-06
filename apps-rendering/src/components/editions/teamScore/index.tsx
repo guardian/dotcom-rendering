@@ -2,10 +2,13 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
 import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
-import { neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	from,
+	headline,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import { fromNullable } from '@guardian/types';
 import { TeamLocation } from 'football';
 import { maybeRender } from 'lib';
