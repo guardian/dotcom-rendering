@@ -21,7 +21,7 @@ try {
  * @param stage {'PROD' | 'CODE' | undefined} the environment code is executing in
  * @returns
  */
-const decideCDN = (stage: string | undefined): string => {
+const decideAssetOrigin = (stage: string | undefined): string => {
 	switch (stage) {
 		case 'PROD':
 			return '//assets.guim.co.uk/';
@@ -31,7 +31,7 @@ const decideCDN = (stage: string | undefined): string => {
 			return '/';
 	}
 };
-export const CDN = decideCDN(process.env.GU_STAGE);
+export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
 
 export const loadableManifestJson = loadableManifest;
 
@@ -44,8 +44,8 @@ export const getScriptArrayFromFilename = (
 		loadableManifestLegacy.assetsByChunkName[chunkName];
 	const legacyFilename = chunks && chunks.length > 0 && chunks[0];
 	return [
-		{ src: `${CDN}assets/${filename}`, legacy: false },
-		{ src: `${CDN}assets/${legacyFilename}`, legacy: true },
+		{ src: `${ASSET_ORIGIN}assets/${filename}`, legacy: false },
+		{ src: `${ASSET_ORIGIN}assets/${legacyFilename}`, legacy: true },
 	];
 };
 
