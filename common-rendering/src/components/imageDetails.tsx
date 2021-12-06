@@ -60,7 +60,7 @@ const iconStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	`}
 
 	${between.mobileLandscape.and.tablet} {
-		right: 20px;
+		right: ${remSpace[5]};
 	}
 `;
 
