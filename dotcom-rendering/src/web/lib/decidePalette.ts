@@ -554,7 +554,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const fillShareIconDark = (format: ArticleFormat): string => {
+const fillShareIconGrayBackground = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
@@ -898,7 +898,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		fill: {
 			commentCount: fillCommentCount(format),
 			shareIcon: fillShareIcon(format),
-			shareIconDark: fillShareIconDark(format),
+			shareIconGrayBackground: fillShareIconGrayBackground(format),
 			cameraCaptionIcon: fillCaptionCamera(format),
 			cardIcon: fillCardIcon(format),
 			richLink: fillRichLink(format),
