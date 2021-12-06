@@ -39,7 +39,7 @@ describe('YouTube Atom', function () {
 		// Wait for hydration
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.should('have.attr', 'data-hydrated', 'true');
+			.should('have.attr', 'data-cy-hydrated', 'true');
 
 		// Make sure overlay is displayed
 		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
@@ -86,7 +86,7 @@ describe('YouTube Atom', function () {
 		// Wait for hydration
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.should('have.attr', 'data-hydrated', 'true');
+			.should('have.attr', 'data-cy-hydrated', 'true');
 
 		// Make sure overlay is displayed
 		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
@@ -126,7 +126,7 @@ describe('YouTube Atom', function () {
 		// Wait for hydration
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.should('have.attr', 'data-hydrated', 'true');
+			.should('have.attr', 'data-cy-hydrated', 'true');
 
 		// Make sure overlay is displayed
 		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
@@ -165,7 +165,7 @@ describe('YouTube Atom', function () {
 		// Wait for hydration
 		cy.get('[data-component=youtube-atom]')
 			.parent()
-			.should('have.attr', 'data-hydrated', 'true');
+			.should('have.attr', 'data-cy-hydrated', 'true');
 
 		// Listen for the ophan call made when the video is played
 		interceptPlayEvent(
