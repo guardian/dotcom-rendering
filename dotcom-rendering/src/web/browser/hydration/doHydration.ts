@@ -20,6 +20,7 @@ export const doHydration = (name: string, data: any, marker: HTMLElement) => {
 		)
 		.then((module) => {
 			hydrate(h(module[name], data), marker);
+			marker.setAttribute('data-gu-hydrated', 'true');
 			end();
 		})
 		.catch((error) => {
