@@ -52,7 +52,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
-import { Hide } from '../components/Hide';
+import { ContainerLayout } from './ContainerLayout';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
