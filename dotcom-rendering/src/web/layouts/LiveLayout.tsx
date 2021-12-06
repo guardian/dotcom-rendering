@@ -378,6 +378,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
 								format={format}
+								palette={palette}
 							/>
 						</ElementContainer>
 					)}
