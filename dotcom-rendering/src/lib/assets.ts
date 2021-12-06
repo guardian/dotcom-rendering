@@ -24,9 +24,9 @@ try {
 const decideAssetOrigin = (stage: string | undefined): string => {
 	switch (stage) {
 		case 'PROD':
-			return '//assets.guim.co.uk/';
+			return 'https://assets.guim.co.uk/';
 		case 'CODE':
-			return '//assets-code.guim.co.uk/';
+			return 'https://assets-code.guim.co.uk/';
 		default:
 			return '/';
 	}
