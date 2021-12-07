@@ -27,7 +27,7 @@
 		"react-dom": "^17.0.2"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.15.0",
+		"@babel/core": "^7.16.0",
 		"@guardian/eslint-plugin-source-react-components": "^4.0.0-rc.2",
 		"@guardian/source-foundations": "^4.0.0-rc.3",
 		"@guardian/source-react-components": "^4.0.0-rc.2",
