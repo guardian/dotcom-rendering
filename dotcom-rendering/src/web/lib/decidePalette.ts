@@ -658,7 +658,7 @@ const activeMatchTab = (): string => {
 };
 
 const backgroundMatchNav = (): string => {
-	return sport[300];
+	return '#FFE500';
 };
 
 const borderArticleLinkHover = (format: ArticleFormat): string => {
