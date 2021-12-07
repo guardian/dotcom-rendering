@@ -217,7 +217,7 @@ Resources:
             Statement:
               - Action: s3:GetObject
                 Effect: Allow
-                Resource: arn:aws:s3:::mobile-apps-api-dist/*
+                Resource: arn:aws:s3:::mobile-dist/*
               - Action:
                   - ec2:DescribeTags
                   - ec2:DescribeInstances
@@ -343,7 +343,7 @@ Resources:
           export Stage=${Stage}
           export NODE_ENV=production
 
-          aws --region ${AWS::Region} s3 cp s3://mobile-apps-api-dist/${Stack}/${Stage}/${App}/${App}.zip /tmp
+          aws --region ${AWS::Region} s3 cp s3://mobile-dist/${Stack}/${Stage}/${App}/${App}.zip /tmp
           mkdir -p /opt/${App}
           unzip /tmp/${App}.zip -d /opt/${App}
           chown -R ${App}:mapi /opt/${App}

@@ -64,7 +64,7 @@ export Stack=${this.stack}
 export Stage=${this.stage}
 export NODE_ENV=production
 
-aws s3 cp s3://mobile-apps-api-dist/${this.stack}/${this.stage}/${appName}/${appName}.zip /tmp
+aws s3 cp s3://mobile-dist/${this.stack}/${this.stage}/${appName}/${appName}.zip /tmp
 mkdir -p /opt/${appName}
 unzip /tmp/${appName}.zip -d /opt/${appName}
 chown -R ${appName}:mapi /opt/${appName}
