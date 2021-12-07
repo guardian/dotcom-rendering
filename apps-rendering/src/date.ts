@@ -132,6 +132,9 @@ function fromString(date: string): Option<Date> {
 	}
 }
 
+const formatLocalTimeDateTz = (date: Date): string =>
+	`${date.getDate()}`;
+
 function formatSeconds(seconds: string): Option<string> {
 	const secondsInt = parseInt(seconds);
 
@@ -168,6 +171,7 @@ export {
 	fromString,
 	formatSeconds,
 	formatLocal,
+	formatLocalTimeDateTz,
 	dateToString,
 	padZero,
 };
