@@ -282,6 +282,11 @@ Object {
             "Value": "guardian/dotcom-rendering",
           },
           Object {
+            "Key": "gu:riffraff:new-asg",
+            "PropagateAtLaunch": true,
+            "Value": "true",
+          },
+          Object {
             "Key": "Name",
             "PropagateAtLaunch": true,
             "Value": "MobileAppsRendering/AutoScalingGroupMobileappsrendering",
@@ -2062,6 +2067,11 @@ Object {
             "Key": "gu:repo",
             "PropagateAtLaunch": true,
             "Value": "guardian/dotcom-rendering",
+          },
+          Object {
+            "Key": "gu:riffraff:new-asg",
+            "PropagateAtLaunch": true,
+            "Value": "true",
           },
           Object {
             "Key": "Name",

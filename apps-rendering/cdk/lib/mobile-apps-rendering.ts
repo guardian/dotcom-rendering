@@ -1,5 +1,5 @@
 import { CfnInclude } from '@aws-cdk/cloudformation-include';
-import { App } from '@aws-cdk/core';
+import { App, Tags } from '@aws-cdk/core';
 import { AccessScope, GuEc2App } from '@guardian/cdk';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack, GuStageParameter } from '@guardian/cdk/lib/constructs/core';
@@ -46,7 +46,7 @@ export class MobileAppsRendering extends GuStack {
         Stage: GuStageParameter.getInstance(this),
       },
     });
-    new GuEc2App(this, {
+    const appsRenderingApp = new GuEc2App(this, {
       applicationPort: 3040,
       app: "mobile-apps-rendering",
       access: { scope: AccessScope.INTERNAL, cidrRanges: [Peer.ipv4("10.0.0.0/8")] },
@@ -81,5 +81,12 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${this.region} mobile-log-aggregation-${this.stage} '/var/log/${appName}/*'
 /usr/local/node/pm2 logrotate -u ${appName}`
     });
+
+    /*
+      Tag the new ASG to allow RiffRaff to deploy to both this and the current one at the same time.
+      See https://github.com/guardian/riff-raff/pull/632
+    */
+    const asg = appsRenderingApp.autoScalingGroup;
+    Tags.of(asg).add("gu:riffraff:new-asg", "true");
   }
 }
