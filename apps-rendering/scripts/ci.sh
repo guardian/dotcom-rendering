@@ -35,7 +35,6 @@ else
     npm run build:server:prod
     npm run copy-manifest
     npm run copy-fonts
-	npm run synth
     npm run upload
 
 fi
