@@ -17,7 +17,10 @@ const LastUpdated = ({
 				color: ${neutral[46]};
 			`}
 		>
-			<time dateTime={new Date(lastUpdated).toISOString()}>
+			<time
+				data-last-updated={new Date(lastUpdated).toISOString()}
+				dateTime={new Date(lastUpdated).toISOString()}
+			>
 				{`Updated: ${lastUpdatedDisplay}`}
 			</time>
 		</div>

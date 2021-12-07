@@ -47,6 +47,7 @@ const scriptName = ({ design, display }: ArticleFormat): Option<string> => {
 			return display !== ArticleDisplay.Immersive
 				? some('article.js')
 				: none;
+		case ArticleDesign.DeadBlog:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
