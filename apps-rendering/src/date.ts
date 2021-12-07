@@ -110,7 +110,8 @@ const localTime12Hr = (date: Date): string =>
 			minute: 'numeric',
 			hour12: true,
 		})
-		.replace(' ', '');
+		.replace(' ', '')
+		.toLowerCase();
 
 const localTimeZone = (date: Date): string =>
 	/\(.*?\)$/.exec(date.toTimeString())?.pop() ?? '';
