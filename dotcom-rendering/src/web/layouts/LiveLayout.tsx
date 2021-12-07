@@ -151,6 +151,81 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				width: 100%;
 				margin-left: 0;
 				grid-column-gap: 0px;
+
+				/*
+					Explanation of each unit of grid-template-columns
+					Main content
+					Right Column
+				*/
+				/* from desktop define fixed body width */
+				${from.desktop} {
+					grid-column-gap: 20px;
+					grid-template-columns: 220px 700px;
+					grid-template-areas:
+						'lines		 media'
+						'meta		 media'
+						'keyevents	 media'
+						'keyevents	 body'
+						'keyevents	 body'
+						'. 			 .';
+				}
+				/* from wide define fixed body width */
+				${from.wide} {
+					grid-column-gap: 20px;
+					grid-template-columns: 220px 700px 1fr;
+					grid-template-areas:
+						'lines 		 media	   right-column'
+						'meta  		 media     right-column'
+						'keyevents   media 	   right-column'
+						'keyevents   body      right-column'
+						'keyevents   body      right-column'
+						'.			 .         right-column';
+				}
+				/* until desktop define fixed body width */
+				${until.desktop} {
+					grid-template-columns: 700px; /* Main content */
+					grid-template-areas:
+						'media'
+						'lines'
+						'meta'
+						'keyevents'
+						'body';
+				}
+				/* fluid until tablet */
+				${until.tablet} {
+					grid-template-columns: 1fr; /* Main content */
+					grid-template-areas:
+						'media'
+						'lines'
+						'meta'
+						'keyevents'
+						'body';
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
+
+const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			/* IE Fallback */
+			display: flex;
+			flex-direction: column;
+			${until.desktop} {
+				margin-left: 0px;
+			}
+			${from.desktop} {
+				margin-left: 320px;
+			}
+			@supports (display: grid) {
+				display: grid;
+				width: 100%;
+				margin-left: 0;
+				grid-column-gap: 0px;
+
 				/*
 					Explanation of each unit of grid-template-columns
 					Main content
@@ -431,6 +506,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									badge={CAPI.badge}
 								/>
 							</Hide>
+
 							<Placeholder
 								shouldShimmer={false}
 								rootId="match-nav"
@@ -574,179 +650,389 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						backgroundColour={palette.background.article}
 						borderColour={palette.border.article}
 					>
-						<LiveGrid>
-							<GridItem area="matchtabs" element="aside">
-								<div css={maxWidth}>
-									{CAPI.matchUrl && showMatchTabs && (
-										<Placeholder
-											rootId="match-tabs"
-											height={40}
-										/>
-									)}
-								</div>
-							</GridItem>
-							<GridItem area="media">
-								<div css={maxWidth}>
-									<MainMedia
-										format={format}
-										palette={palette}
-										elements={CAPI.mainMediaElements}
-										adTargeting={adTargeting}
-										host={host}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-									/>
-								</div>
-							</GridItem>
-							<GridItem area="lines">
-								<Hide until="desktop">
+						{CAPI.matchUrl ? (
+							<LiveGridSport>
+								<GridItem area="matchtabs" element="aside">
 									<div css={maxWidth}>
-										<div css={stretchLines}>
-											<Lines
-												count={decideLineCount(
-													format.design,
-												)}
-												effect={decideLineEffect(
-													format.design,
-													format.theme,
-												)}
+										{CAPI.matchUrl && showMatchTabs && (
+											<Placeholder
+												rootId="match-tabs"
+												height={40}
 											/>
-										</div>
+										)}
 									</div>
-								</Hide>
-							</GridItem>
-							<GridItem area="meta" element="aside">
-								<Hide until="desktop">
+								</GridItem>
+								<GridItem area="media">
 									<div css={maxWidth}>
-										<ArticleMeta
-											branding={branding}
+										<MainMedia
 											format={format}
 											palette={palette}
+											elements={CAPI.mainMediaElements}
+											adTargeting={adTargeting}
+											host={host}
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
-											author={CAPI.author}
-											tags={CAPI.tags}
-											primaryDateline={
-												CAPI.webPublicationDateDisplay
-											}
-											secondaryDateline={
-												CAPI.webPublicationSecondaryDateDisplay
-											}
 										/>
 									</div>
-								</Hide>
-							</GridItem>
-							<GridItem area="keyevents">
-								<div css={[sticky, keyEventsTopMarginDesktop]}>
-									<KeyEventsContainer
-										format={format}
-										keyEvents={CAPI.keyEvents}
-									/>
-								</div>
-							</GridItem>
-							<GridItem area="body">
-								<ArticleContainer format={format}>
-									{CAPI.pagination &&
-										CAPI.pagination.currentPage !== 1 && (
-											<Pagination
-												currentPage={
-													CAPI.pagination
-														?.currentPage || 1
-												}
-												totalPages={
-													CAPI.pagination
-														?.totalPages || 1
-												}
-												newest={CAPI.pagination?.newest}
-												oldest={CAPI.pagination?.oldest}
-												newer={CAPI.pagination?.newer}
-												older={CAPI.pagination?.older}
+								</GridItem>
+								<GridItem area="lines">
+									<Hide until="desktop">
+										<div css={maxWidth}>
+											<div css={stretchLines}>
+												<Lines
+													count={decideLineCount(
+														format.design,
+													)}
+													effect={decideLineEffect(
+														format.design,
+														format.theme,
+													)}
+												/>
+											</div>
+										</div>
+									</Hide>
+								</GridItem>
+								<GridItem area="meta" element="aside">
+									<Hide until="desktop">
+										<div css={maxWidth}>
+											<ArticleMeta
+												branding={branding}
 												format={format}
-											/>
-										)}
-									<ArticleBody
-										format={format}
-										palette={palette}
-										blocks={CAPI.blocks}
-										adTargeting={adTargeting}
-										host={host}
-										pageId={CAPI.pageId}
-										webTitle={CAPI.webTitle}
-									/>
-									{CAPI.pagination &&
-										CAPI.pagination.totalPages > 1 && (
-											<Pagination
-												currentPage={
-													CAPI.pagination
-														?.currentPage || 1
+												palette={palette}
+												pageId={CAPI.pageId}
+												webTitle={CAPI.webTitle}
+												author={CAPI.author}
+												tags={CAPI.tags}
+												primaryDateline={
+													CAPI.webPublicationDateDisplay
 												}
-												totalPages={
-													CAPI.pagination
-														?.totalPages || 1
+												secondaryDateline={
+													CAPI.webPublicationSecondaryDateDisplay
 												}
-												newest={CAPI.pagination?.newest}
-												oldest={CAPI.pagination?.oldest}
-												newer={CAPI.pagination?.newer}
-												older={CAPI.pagination?.older}
-												format={format}
 											/>
-										)}
-									{showBodyEndSlot && (
-										<div id="slot-body-end" />
-									)}
-									<Lines
-										data-print-layout="hide"
-										count={4}
-										effect="straight"
-									/>
-									<SubMeta
-										palette={palette}
-										format={format}
-										subMetaKeywordLinks={
-											CAPI.subMetaKeywordLinks
-										}
-										subMetaSectionLinks={
-											CAPI.subMetaSectionLinks
-										}
-										pageId={CAPI.pageId}
-										webUrl={CAPI.webURL}
-										webTitle={CAPI.webTitle}
-										showBottomSocialButtons={
-											CAPI.showBottomSocialButtons
-										}
-										badge={CAPI.badge}
-									/>
-								</ArticleContainer>
-							</GridItem>
-							<GridItem area="right-column">
-								<div
-									css={css`
-										height: 100%;
-										${from.desktop} {
-											/* above 980 */
-											margin-left: 20px;
-											margin-right: -20px;
-											display: none;
-										}
-										${from.leftCol} {
-											/* above 1140 */
-											margin-left: 0px;
-											margin-right: 0px;
-										}
-										${from.wide} {
-											display: block;
-										}
-									`}
-								>
-									<RightColumn>
-										<AdSlot
-											position="right"
-											display={format.display}
+										</div>
+									</Hide>
+								</GridItem>
+								<GridItem area="keyevents">
+									<div
+										css={[
+											sticky,
+											keyEventsTopMarginDesktop,
+										]}
+									>
+										<KeyEventsContainer
+											format={format}
+											keyEvents={CAPI.keyEvents}
 										/>
-									</RightColumn>
-								</div>
-							</GridItem>
-						</LiveGrid>
+									</div>
+								</GridItem>
+								<GridItem area="body">
+									<ArticleContainer format={format}>
+										{CAPI.pagination &&
+											CAPI.pagination.currentPage !==
+												1 && (
+												<Pagination
+													currentPage={
+														CAPI.pagination
+															?.currentPage || 1
+													}
+													totalPages={
+														CAPI.pagination
+															?.totalPages || 1
+													}
+													newest={
+														CAPI.pagination?.newest
+													}
+													oldest={
+														CAPI.pagination?.oldest
+													}
+													newer={
+														CAPI.pagination?.newer
+													}
+													older={
+														CAPI.pagination?.older
+													}
+													format={format}
+												/>
+											)}
+										<ArticleBody
+											format={format}
+											palette={palette}
+											blocks={CAPI.blocks}
+											adTargeting={adTargeting}
+											host={host}
+											pageId={CAPI.pageId}
+											webTitle={CAPI.webTitle}
+										/>
+										{CAPI.pagination &&
+											CAPI.pagination.totalPages > 1 && (
+												<Pagination
+													currentPage={
+														CAPI.pagination
+															?.currentPage || 1
+													}
+													totalPages={
+														CAPI.pagination
+															?.totalPages || 1
+													}
+													newest={
+														CAPI.pagination?.newest
+													}
+													oldest={
+														CAPI.pagination?.oldest
+													}
+													newer={
+														CAPI.pagination?.newer
+													}
+													older={
+														CAPI.pagination?.older
+													}
+													format={format}
+												/>
+											)}
+										{showBodyEndSlot && (
+											<div id="slot-body-end" />
+										)}
+										<Lines
+											data-print-layout="hide"
+											count={4}
+											effect="straight"
+										/>
+										<SubMeta
+											palette={palette}
+											format={format}
+											subMetaKeywordLinks={
+												CAPI.subMetaKeywordLinks
+											}
+											subMetaSectionLinks={
+												CAPI.subMetaSectionLinks
+											}
+											pageId={CAPI.pageId}
+											webUrl={CAPI.webURL}
+											webTitle={CAPI.webTitle}
+											showBottomSocialButtons={
+												CAPI.showBottomSocialButtons
+											}
+											badge={CAPI.badge}
+										/>
+									</ArticleContainer>
+								</GridItem>
+								<GridItem area="right-column">
+									<div
+										css={css`
+											height: 100%;
+											${from.desktop} {
+												/* above 980 */
+												margin-left: 20px;
+												margin-right: -20px;
+												display: none;
+											}
+											${from.leftCol} {
+												/* above 1140 */
+												margin-left: 0px;
+												margin-right: 0px;
+											}
+											${from.wide} {
+												display: block;
+											}
+										`}
+									>
+										<RightColumn>
+											<AdSlot
+												position="right"
+												display={format.display}
+											/>
+										</RightColumn>
+									</div>
+								</GridItem>
+							</LiveGridSport>
+						) : (
+							<LiveGrid>
+								<GridItem area="media">
+									<div css={maxWidth}>
+										<MainMedia
+											format={format}
+											palette={palette}
+											elements={CAPI.mainMediaElements}
+											adTargeting={adTargeting}
+											host={host}
+											pageId={CAPI.pageId}
+											webTitle={CAPI.webTitle}
+										/>
+									</div>
+								</GridItem>
+								<GridItem area="lines">
+									<Hide until="desktop">
+										<div css={maxWidth}>
+											<div css={stretchLines}>
+												<Lines
+													count={decideLineCount(
+														format.design,
+													)}
+													effect={decideLineEffect(
+														format.design,
+														format.theme,
+													)}
+												/>
+											</div>
+										</div>
+									</Hide>
+								</GridItem>
+								<GridItem area="meta" element="aside">
+									<Hide until="desktop">
+										<div css={maxWidth}>
+											<ArticleMeta
+												branding={branding}
+												format={format}
+												palette={palette}
+												pageId={CAPI.pageId}
+												webTitle={CAPI.webTitle}
+												author={CAPI.author}
+												tags={CAPI.tags}
+												primaryDateline={
+													CAPI.webPublicationDateDisplay
+												}
+												secondaryDateline={
+													CAPI.webPublicationSecondaryDateDisplay
+												}
+											/>
+										</div>
+									</Hide>
+								</GridItem>
+								<GridItem area="keyevents">
+									<div
+										css={[
+											sticky,
+											keyEventsTopMarginDesktop,
+										]}
+									>
+										<KeyEventsContainer
+											format={format}
+											keyEvents={CAPI.keyEvents}
+										/>
+									</div>
+								</GridItem>
+								<GridItem area="body">
+									<ArticleContainer format={format}>
+										{CAPI.pagination &&
+											CAPI.pagination.currentPage !==
+												1 && (
+												<Pagination
+													currentPage={
+														CAPI.pagination
+															?.currentPage || 1
+													}
+													totalPages={
+														CAPI.pagination
+															?.totalPages || 1
+													}
+													newest={
+														CAPI.pagination?.newest
+													}
+													oldest={
+														CAPI.pagination?.oldest
+													}
+													newer={
+														CAPI.pagination?.newer
+													}
+													older={
+														CAPI.pagination?.older
+													}
+													format={format}
+												/>
+											)}
+										<ArticleBody
+											format={format}
+											palette={palette}
+											blocks={CAPI.blocks}
+											adTargeting={adTargeting}
+											host={host}
+											pageId={CAPI.pageId}
+											webTitle={CAPI.webTitle}
+										/>
+										{CAPI.pagination &&
+											CAPI.pagination.totalPages > 1 && (
+												<Pagination
+													currentPage={
+														CAPI.pagination
+															?.currentPage || 1
+													}
+													totalPages={
+														CAPI.pagination
+															?.totalPages || 1
+													}
+													newest={
+														CAPI.pagination?.newest
+													}
+													oldest={
+														CAPI.pagination?.oldest
+													}
+													newer={
+														CAPI.pagination?.newer
+													}
+													older={
+														CAPI.pagination?.older
+													}
+													format={format}
+												/>
+											)}
+										{showBodyEndSlot && (
+											<div id="slot-body-end" />
+										)}
+										<Lines
+											data-print-layout="hide"
+											count={4}
+											effect="straight"
+										/>
+										<SubMeta
+											palette={palette}
+											format={format}
+											subMetaKeywordLinks={
+												CAPI.subMetaKeywordLinks
+											}
+											subMetaSectionLinks={
+												CAPI.subMetaSectionLinks
+											}
+											pageId={CAPI.pageId}
+											webUrl={CAPI.webURL}
+											webTitle={CAPI.webTitle}
+											showBottomSocialButtons={
+												CAPI.showBottomSocialButtons
+											}
+											badge={CAPI.badge}
+										/>
+									</ArticleContainer>
+								</GridItem>
+								<GridItem area="right-column">
+									<div
+										css={css`
+											height: 100%;
+											${from.desktop} {
+												/* above 980 */
+												margin-left: 20px;
+												margin-right: -20px;
+												display: none;
+											}
+											${from.leftCol} {
+												/* above 1140 */
+												margin-left: 0px;
+												margin-right: 0px;
+											}
+											${from.wide} {
+												display: block;
+											}
+										`}
+									>
+										<RightColumn>
+											<AdSlot
+												position="right"
+												display={format.display}
+											/>
+										</RightColumn>
+									</div>
+								</GridItem>
+							</LiveGrid>
+						)}
 					</ElementContainer>
 				</article>
 
