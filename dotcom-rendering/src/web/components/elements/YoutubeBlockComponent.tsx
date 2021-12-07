@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 
 import { space, neutral, body } from '@guardian/source-foundations';
@@ -13,7 +13,6 @@ import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
 
 import { Caption } from '@root/src/web/components/Caption';
-import { useOnce } from '@root/src/web/lib/useOnce';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
@@ -94,7 +93,7 @@ export const YoutubeBlockComponent = ({
 		undefined,
 	);
 
-	useOnce(() => {
+	useEffect(() => {
 		import(
 			/* webpackChunkName: "cmp" */ '@guardian/consent-management-platform'
 		)
