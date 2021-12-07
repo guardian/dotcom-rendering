@@ -103,8 +103,22 @@ const time = (date: Date): string =>
 const localTime = (date: Date): string =>
 	`${padZero(date.getHours())}.${padZero(date.getMinutes())}`;
 
+const localTime12Hr = (date: Date): string =>
+	date
+		.toLocaleString([], {
+			hour: 'numeric',
+			minute: 'numeric',
+			hour12: true,
+		})
+		.replace(' ', '');
+
 const localTimeZone = (date: Date): string =>
 	/\(.*?\)$/.exec(date.toTimeString())?.pop() ?? '';
+
+const localTimeZoneAbbr = (date: Date): string =>
+	/([^\s]+)$/
+	.exec(date.toLocaleString([], { timeZoneName: 'short' }))
+	?.pop() ?? '';
 
 const format = (date: Date): string =>
 	`${day(date)} ${date.getUTCDate()} ${month(
@@ -115,6 +129,11 @@ const formatLocal = (date: Date): string =>
 	`${localDay(date)} ${date.getDate()} ${localMonth(
 		date,
 	)} ${date.getFullYear()} ${localTime(date)} ${localTimeZone(date)}`;
+
+const formatLocalTimeDateTz = (date: Date): string =>
+	`${localTime12Hr(date)} ${date.getDate()} ${localMonth(
+		date,
+	)} ${date.getFullYear()} ${localTimeZoneAbbr(date)}`;
 
 const localDay = (date: Date): string => days[date.getDay()];
 
@@ -131,9 +150,6 @@ function fromString(date: string): Option<Date> {
 		return none;
 	}
 }
-
-const formatLocalTimeDateTz = (date: Date): string =>
-	`${date.getDate()}`;
 
 function formatSeconds(seconds: string): Option<string> {
 	const secondsInt = parseInt(seconds);
