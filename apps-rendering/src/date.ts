@@ -118,8 +118,8 @@ const localTimeZone = (date: Date): string =>
 
 const localTimeZoneAbbr = (date: Date): string =>
 	/([^\s]+)$/
-	.exec(date.toLocaleString([], { timeZoneName: 'short' }))
-	?.pop() ?? '';
+		.exec(date.toLocaleString([], { timeZoneName: 'short' }))
+		?.pop() ?? '';
 
 const format = (date: Date): string =>
 	`${day(date)} ${date.getUTCDate()} ${month(

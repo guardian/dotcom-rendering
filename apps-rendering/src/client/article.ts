@@ -24,7 +24,8 @@ import {
 	formatLocal,
 	formatLocalTimeDateTz,
 	isValidDate,
-} from 'date';import { handleErrors, isObject } from 'lib';
+} from 'date';
+import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
 	commercialClient,
