@@ -2,6 +2,7 @@
 
 import Audio from 'components/audio';
 import GenericEmbed from 'components/genericEmbed';
+import EmailSignupEmbed from 'components/emailSignup';
 import Instagram from 'components/instagram';
 import Video from 'components/video';
 import { EmbedKind, youtubeUrl } from 'embed';
@@ -45,6 +46,7 @@ const EmbedComponent: FC<Props> = ({ embed, editions }) => {
 			) : null;
 
 		case EmbedKind.EmailSignup:
+			return !editions ? <EmailSignupEmbed embed={embed} /> : null;
 		case EmbedKind.TikTok:
 			return !editions ? <GenericEmbed embed={embed} /> : null;
 
