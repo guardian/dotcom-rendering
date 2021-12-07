@@ -28,10 +28,13 @@
   "license": "ISC",
   "prettier": "@guardian/prettier",
   "dependencies": {
+    "@aws-cdk/cloudformation-include": "1.132.0",
+    "@aws-cdk/core": "1.132.0",
     "@creditkarma/thrift-server-core": "^0.16.1",
     "@guardian/apps-rendering-api-models": "^0.12.0",
     "@guardian/atoms-rendering": "^22.0.0",
     "@guardian/bridget": "^1.11.0",
+    "@guardian/cdk": "31.0.0",
     "@guardian/content-api-models": "^17.1.1",
     "@guardian/content-atom-model": "^3.2.4",
     "@guardian/discussion-rendering": "^9.0.0",
@@ -62,6 +65,7 @@
     "typescript": "^4.4.3"
   },
   "devDependencies": {
+    "@aws-cdk/assert": "1.132.0",
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "@emotion/jest": "^11.3.0",
@@ -80,6 +84,7 @@
     "@types/webpack-manifest-plugin": "^3.0.5",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
+    "aws-cdk": "1.132.0",
     "babel-loader": "^8.2.2",
     "clean-css": "^5.2.0",
     "eslint": "^7.32.0",
