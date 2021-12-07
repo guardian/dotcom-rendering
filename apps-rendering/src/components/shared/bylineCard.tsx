@@ -225,7 +225,9 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
 
 	const img = cardImage(relatedItem);
 	const date = webPublicationDate
-		? relativeFirstPublished(fromNullable(new Date(webPublicationDate.iso8601)))
+		? relativeFirstPublished(
+				fromNullable(new Date(webPublicationDate.iso8601)),
+		  )
 		: null;
 	return (
 		<li
