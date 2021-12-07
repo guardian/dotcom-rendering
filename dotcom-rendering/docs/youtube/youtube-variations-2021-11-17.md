@@ -2,7 +2,7 @@
 
 As of 17th November 2021
 
-**Platform**|**Type<sup>1</sup>**|**Content / Element Type**|**Player Modules**|**adsConfig Modules**|**Domain from CAPI?**|**Domain<sup>2</sup>**|**Example**
+**Platform**|**Type<sup>1</sup>**|**Content / Element Type**|**Player Modules**|**adsConfig Modules**|**Domain from CAPI?**|**Domain<sup>2</sup>**|**Example<sup>4</sup>**
 :-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----
 DCR|First party| |[YoutubeAtom](https://github.com/guardian/atoms-rendering/blob/main/src/YoutubeAtom.tsx)|[ad-targeting.ts](https://github.com/guardian/dotcom-rendering/blob/34eee2a6f38f802ed30eb764a8bd7df1e54b07b5/dotcom-rendering/src/lib/ad-targeting.ts)<br />[ad-targeting-youtube.ts](https://github.com/guardian/commercial-core/blob/9ed6f909d9b612241effc213d7a40342b1da96d3/src/ad-targeting-youtube.ts)| |youtube.com|[link](https://www.theguardian.com/world/2021/jun/24/hong-kong-apple-daily-queue-final-edition-newspaper)
 | |Third party| |[YoutubeEmbedBlockComponent](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/components/elements/YoutubeEmbedBlockComponent.tsx)|n/a| Y|youtube-nocookie.com|[link](https://www.theguardian.com/music/musicblog/2015/may/27/stone-roses-spike-island-the-reality)
@@ -29,3 +29,4 @@ Editions (via Frontend) |First party| |[youtube-player.ts](https://github.com/gu
 
 <sup>3</sup> Frontend's `youtube-player.ts` will default to the domain `youtube-nocookie.com` and no `adsConfig` object if an 'ad-free' setting is detected or if consent is not given.
 
+<sup>4</sup> To view the underlying CAPI object for an article first install [Teleporter](https://sites.google.com/a/guardian.co.uk/composer-blog/section-three/introducing-gustaf) and then click the 'content-api live' link.
