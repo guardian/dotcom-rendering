@@ -101,17 +101,13 @@ export const YoutubeBlockComponent = ({
 			.then(
 				(module: { onConsentChange: (callback: Callback) => void }) => {
 					module.onConsentChange((newConsent: ConsentState) => {
-						console.log('consent changed, new', newConsent);
 						setConsentState(newConsent);
 					});
 				},
 			)
 			.catch((error) => {
-				const msg = `Error: ${error}`;
-				// eslint-disable-next-line no-console
-				console.log(msg);
 				window.guardian.modules.sentry.reportError(
-					new Error(msg),
+					new Error(`Error: ${error}`),
 					'youtube-consent',
 				);
 			});
