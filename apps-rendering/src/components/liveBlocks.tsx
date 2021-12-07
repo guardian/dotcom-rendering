@@ -7,6 +7,7 @@ import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBl
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
 import { OptionKind, partition } from '@guardian/types';
+import { formatLocalTimeDateTz } from 'date';
 import { maybeRender } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
@@ -76,7 +77,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 						<footer
 							css={css`
 								display: flex;
-								justify-content: space-between;
+								justify-content: end;
 							`}
 						>
 							{block.lastModified.kind === OptionKind.Some &&
@@ -87,7 +88,9 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 										lastUpdated={Number(
 											block.lastModified.value,
 										)}
-										lastUpdatedDisplay={'17:22 GMT'}
+										lastUpdatedDisplay={formatLocalTimeDateTz(
+											block.lastModified.value,
+										)}
 									/>
 								)}
 						</footer>

@@ -18,7 +18,7 @@ const LastUpdated = ({
 			`}
 		>
 			<time dateTime={new Date(lastUpdated).toISOString()}>
-				{`Updated at ${lastUpdatedDisplay}`}
+				{`Updated: ${lastUpdatedDisplay}`}
 			</time>
 		</div>
 	);
