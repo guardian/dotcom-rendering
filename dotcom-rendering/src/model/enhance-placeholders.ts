@@ -1,6 +1,3 @@
-import { ArticleDesign } from '@guardian/libs';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
-
 export const replacePlaceholders = (
 	elem: InteractiveAtomBlockElement,
 	variables: Map<string, string>,
@@ -53,14 +50,13 @@ const buildPlaceholders = (data: CAPIType): Map<string, string> => {
  * Variables are wrapped in square brackets, e.g. [[ webPublicationDate ]].
  * Surrounding whitespace is ignored. E.g. [[webPublicationDate    ]] is fine.
  */
-export const enhancePlaceholders = (data: CAPIType): CAPIType => {
-	const design: ArticleDesign = decideDesign(data.format);
+export const enhancePlaceholders = (
+	blocks: Block[],
+	format: CAPIFormat,
+): Block[] => {
+	if (format.design !== 'InteractiveDesign') return blocks;
 
-	if (design !== ArticleDesign.Interactive) {
-		return data;
-	}
-
-	const enhancedBlocks = data.blocks.map((block: Block) => {
+	return blocks.map((block: Block) => {
 		return {
 			...block,
 			elements: block.elements.map((el) => {
@@ -68,17 +64,13 @@ export const enhancePlaceholders = (data: CAPIType): CAPIType => {
 					el._type ===
 					'model.dotcomrendering.pageElements.InteractiveAtomBlockElement'
 				) {
-					const variables = buildPlaceholders(data);
-					return replacePlaceholders(el, variables);
+					// const variables = buildPlaceholders(data);
+					// return replacePlaceholders(el, variables);
+					return el;
 				}
 
 				return el;
 			}),
 		};
 	});
-
-	return {
-		...data,
-		blocks: enhancedBlocks,
-	} as CAPIType;
 };

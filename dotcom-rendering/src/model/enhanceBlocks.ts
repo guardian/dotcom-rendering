@@ -1,7 +1,5 @@
-import { validateAsCAPIType } from '@root/src/model/validate';
 import { addDividers } from '@root/src/model/add-dividers';
 import { enhanceDots } from '@root/src/model/add-dots';
-import { setIsDev } from '@root/src/model/set-is-dev';
 import { enhanceImages } from '@root/src/model/enhance-images';
 import { enhanceInteractiveContentsElements } from '@root/src/model/enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';
@@ -9,60 +7,52 @@ import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
 import { enhanceEmbeds } from '@root/src/model/enhance-embeds';
 import { enhancePlaceholders } from '@root/src/model/enhance-placeholders';
 
-class CAPIEnhancer {
-	capi: CAPIType;
+class BlockEnhancer {
+	blocks: Block[];
+	format: CAPIFormat;
 
-	constructor(capi: CAPIType) {
-		this.capi = capi;
+	constructor(blocks: Block[], format: CAPIFormat) {
+		this.blocks = blocks;
+		this.format = format;
 	}
 
 	addDividers() {
-		this.capi = addDividers(this.capi);
+		this.blocks = addDividers(this.blocks);
 		return this;
 	}
 
 	enhanceDots() {
-		this.capi = enhanceDots(this.capi);
+		this.blocks = enhanceDots(this.blocks);
 		return this;
 	}
 
 	enhanceInteractiveContentsElements() {
-		this.capi = enhanceInteractiveContentsElements(this.capi);
+		this.blocks = enhanceInteractiveContentsElements(this.blocks);
 		return this;
 	}
 
 	enhanceImages() {
-		this.capi = enhanceImages(this.capi);
+		this.blocks = enhanceImages(this.blocks, this.format);
 		return this;
 	}
 
 	enhanceNumberedLists() {
-		this.capi = enhanceNumberedLists(this.capi);
+		this.blocks = enhanceNumberedLists(this.blocks, this.format);
 		return this;
 	}
 
 	enhanceBlockquotes() {
-		this.capi = enhanceBlockquotes(this.capi);
+		this.blocks = enhanceBlockquotes(this.blocks, this.format);
 		return this;
 	}
 
 	enhanceEmbeds() {
-		this.capi = enhanceEmbeds(this.capi);
-		return this;
-	}
-
-	validateAsCAPIType() {
-		this.capi = validateAsCAPIType(this.capi);
-		return this;
-	}
-
-	setIsDev() {
-		this.capi = setIsDev(this.capi);
+		this.blocks = enhanceEmbeds(this.blocks);
 		return this;
 	}
 
 	enhancePlaceholders() {
-		this.capi = enhancePlaceholders(this.capi);
+		this.blocks = enhancePlaceholders(this.blocks, this.format);
 		return this;
 	}
 }
@@ -70,9 +60,8 @@ class CAPIEnhancer {
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
 // exmaple: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
 // as they both effect SubheadingBlockElement
-export const enhanceCAPI = (body: CAPIType): CAPIType => {
-	return new CAPIEnhancer(body)
-		.validateAsCAPIType()
+export const enhanceBlocks = (blocks: Block[], format: CAPIFormat): Block[] => {
+	return new BlockEnhancer(blocks, format)
 		.addDividers()
 		.enhanceInteractiveContentsElements()
 		.enhanceBlockquotes()
@@ -80,5 +69,5 @@ export const enhanceCAPI = (body: CAPIType): CAPIType => {
 		.enhanceImages()
 		.enhanceNumberedLists()
 		.enhancePlaceholders()
-		.enhanceEmbeds().capi;
+		.enhanceEmbeds().blocks;
 };

@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import { enhanceBlocks } from './enhanceBlocks';
 
 const isFalseH3 = (element: CAPIElement): boolean => {
 	if (!element) return false;
@@ -416,22 +417,20 @@ const enhance = (
 	);
 };
 
-export const enhanceNumberedLists = (data: CAPIType): CAPIType => {
-	const isNumberedList = data.format.display === 'NumberedListDisplay';
+export const enhanceNumberedLists = (
+	blocks: Block[],
+	format: CAPIFormat,
+): Block[] => {
+	const isNumberedList = format.display === 'NumberedListDisplay';
 
 	if (!isNumberedList) {
-		return data;
+		return blocks;
 	}
 
-	const enhancedBlocks = data.blocks.map((block: Block) => {
+	return blocks.map((block: Block) => {
 		return {
 			...block,
-			elements: enhance(block.elements, data.format),
+			elements: enhance(block.elements, format),
 		};
 	});
-
-	return {
-		...data,
-		blocks: enhancedBlocks,
-	} as CAPIType;
 };

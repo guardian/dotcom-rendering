@@ -29,16 +29,10 @@ const addTitleToIframe = (elements: CAPIElement[]): CAPIElement[] => {
 	return enhanced;
 };
 
-export const enhanceEmbeds = (data: CAPIType): CAPIType => {
-	const enhancedBlocks = data.blocks.map((block: Block) => {
+export const enhanceEmbeds = (blocks: Block[]): Block[] =>
+	blocks.map((block: Block) => {
 		return {
 			...block,
 			elements: addTitleToIframe(block.elements),
 		};
 	});
-
-	return {
-		...data,
-		blocks: enhancedBlocks,
-	} as CAPIType;
-};

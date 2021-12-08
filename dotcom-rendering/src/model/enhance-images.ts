@@ -351,18 +351,13 @@ const enhance = (
 	);
 };
 
-export const enhanceImages = (data: CAPIType): CAPIType => {
-	const isPhotoEssay = data.format.design === 'PhotoEssayDesign';
+export const enhanceImages = (blocks: Block[], format: CAPIFormat): Block[] => {
+	const isPhotoEssay = format.design === 'PhotoEssayDesign';
 
-	const enhancedBlocks = data.blocks.map((block: Block) => {
+	return blocks.map((block: Block) => {
 		return {
 			...block,
 			elements: enhance(block.elements, isPhotoEssay),
 		};
 	});
-
-	return {
-		...data,
-		blocks: enhancedBlocks,
-	} as CAPIType;
 };
