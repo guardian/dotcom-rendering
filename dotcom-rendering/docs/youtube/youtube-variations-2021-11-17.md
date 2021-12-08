@@ -52,7 +52,7 @@ YouTube embeds (for third party videos) are inserted by pasting the video URL in
 
 <span>
 <img src="./youtubeimages-2021/composer-embed-menu.png" height="25%"/>
-<img src="./youtubeimages-2021/composer-embed-dialog.png" height="15%"/>
+<img src="./youtubeimages-2021/composer-embed-dialog.png" height="20%"/>
 <img src="./youtubeimages-2021/composer-youtube-embed.png" height="25%"/>
 </span>
 
@@ -62,8 +62,8 @@ Generic embeds (for third party videos) are inserted by pasting the embed code d
 
 Composer will warn the author that they should however use the YouTube URL to insert the embed.
 
-<img src="./youtubeimages-2021/composer-generic-embed-code.png" width="50%"/>
-<img src="./youtubeimages-2021/composer-youtube-embed-generic.png" width="50%"/>
+<img src="./youtubeimages-2021/composer-generic-embed-code.png" width="75%"/>
+<img src="./youtubeimages-2021/composer-youtube-embed-generic.png" height="75%"/>
 
 ## Composer and YouTube Domains
 
