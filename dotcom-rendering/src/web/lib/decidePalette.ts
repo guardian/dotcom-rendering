@@ -27,6 +27,17 @@ import { pillarPalette_DO_NOT_USE as pillarPalette } from '@root/src/lib/pillars
 const WHITE = neutral[100];
 const BLACK = neutral[7];
 
+const deadBlogsPalette = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+			return pillarPalette[format.theme].main;
+		default:
+			return pillarPalette[format.theme].dark;
+	}
+};
+
 const textHeadline = (format: ArticleFormat): string => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -84,6 +95,8 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 						default:
 							return WHITE;
 					}
+				case ArticleDesign.DeadBlog:
+					return deadBlogsPalette(format);
 				case ArticleDesign.MatchReport:
 					return BLACK;
 				default:
@@ -164,6 +177,8 @@ const textSubMeta = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
+	if (format.design === ArticleDesign.DeadBlog)
+		return deadBlogsPalette(format);
 	return pillarPalette[format.theme].main;
 };
 

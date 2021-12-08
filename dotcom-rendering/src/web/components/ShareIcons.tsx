@@ -53,15 +53,36 @@ const decideIconColor = (
 			${until.desktop} {
 				fill: ${palette.text.standfirst};
 			}
+
+			:hover {
+				background-color: ${palette.fill.shareIcon};
+				border-color: ${palette.fill.shareIcon};
+				fill: white;
+			}
 		`;
 	}
-	if (format.design === ArticleDesign.DeadBlog && context === 'ArticleMeta') {
+	if (
+		format.design === ArticleDesign.DeadBlog &&
+		(context === 'SubMeta' || context === 'ArticleMeta')
+	) {
 		return css`
 			fill: ${palette.fill.shareIconGrayBackground};
+
+			:hover {
+				background-color: ${palette.fill.shareIconGrayBackground};
+				border-color: ${palette.fill.shareIconGrayBackground};
+				fill: white;
+			}
 		`;
 	}
 	return css`
 		fill: ${palette.fill.shareIcon};
+
+		:hover {
+			background-color: ${palette.fill.shareIcon};
+			border-color: ${palette.fill.shareIcon};
+			fill: white;
+		}
 	`;
 };
 
@@ -95,12 +116,6 @@ const iconStyles = ({
 		left: 0;
 		margin: auto;
 		position: absolute;
-	}
-
-	:hover {
-		background-color: ${palette.fill.shareIcon};
-		border-color: ${palette.fill.shareIcon};
-		fill: white;
 	}
 `;
 
@@ -232,7 +247,10 @@ export const ShareIcons = ({
 						>
 							<span
 								css={[
-									iconStyles({ palette, size }),
+									iconStyles({
+										palette,
+										size,
+									}),
 									decideIconColor(palette, format, context),
 								]}
 							>
@@ -258,7 +276,10 @@ export const ShareIcons = ({
 						>
 							<span
 								css={[
-									iconStyles({ palette, size }),
+									iconStyles({
+										palette,
+										size,
+									}),
 									decideIconColor(palette, format, context),
 								]}
 							>
