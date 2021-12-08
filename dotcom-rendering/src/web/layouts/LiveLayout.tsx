@@ -50,6 +50,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
+import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
@@ -160,7 +161,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				/* from desktop define fixed body width */
 				${from.desktop} {
 					grid-column-gap: 20px;
-					grid-template-columns: 220px 700px;
+					grid-template-columns: 240px 700px;
 					grid-template-areas:
 						'lines		 media'
 						'meta		 media'
@@ -172,7 +173,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				/* from wide define fixed body width */
 				${from.wide} {
 					grid-column-gap: 20px;
-					grid-template-columns: 220px 700px 1fr;
+					grid-template-columns: 240px 700px 1fr;
 					grid-template-areas:
 						'lines 		 media	   right-column'
 						'meta  		 media     right-column'
@@ -183,16 +184,6 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: 700px; /* Main content */
-					grid-template-areas:
-						'media'
-						'lines'
-						'meta'
-						'keyevents'
-						'body';
-				}
-				/* fluid until tablet */
-				${until.tablet} {
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
 						'media'
@@ -298,20 +289,22 @@ const sticky = css`
 	}
 `;
 
-const keyEventsTopMarginDesktop = css`
+const keyEventsTopMargin = css`
 	${from.desktop} {
 		margin-top: ${space[1]}px;
 	}
 `;
 
-const stretchLines = css`
-	${until.phablet} {
-		margin-left: -20px;
-		margin-right: -20px;
+const sidePaddingDesktop = css`
+	${from.desktop} {
+		padding-left: ${space[5]}px;
 	}
-	${until.mobileLandscape} {
-		margin-left: -10px;
-		margin-right: -10px;
+`;
+
+const accordionBottomMargin = css`
+	margin-bottom: ${space[3]}px;
+	${from.desktop} {
+		margin-bottom: 0;
 	}
 `;
 
@@ -593,25 +586,23 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="lines">
 								<Hide from="desktop">
-									<div css={maxWidth}>
-										<div css={stretchLines}>
-											<Lines
-												count={decideLineCount(
-													format.design,
-												)}
-												effect={decideLineEffect(
-													format.design,
-													format.theme,
-												)}
-												color="rgba(255, 255, 255, 0.4)"
-											/>
-										</div>
+									<div css={sidePaddingDesktop}>
+										<Lines
+											count={decideLineCount(
+												format.design,
+											)}
+											effect={decideLineEffect(
+												format.design,
+												format.theme,
+											)}
+											color="rgba(255, 255, 255, 0.4)"
+										/>
 									</div>
 								</Hide>
 							</GridItem>
 							<GridItem area="meta">
 								<Hide from="desktop">
-									<div css={maxWidth}>
+									<div css={sidePaddingDesktop}>
 										<ArticleMeta
 											branding={branding}
 											format={format}
@@ -649,6 +640,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						showTopBorder={false}
 						backgroundColour={palette.background.article}
 						borderColour={palette.border.article}
+						padded={false}
 					>
 						{CAPI.matchUrl ? (
 							<LiveGridSport>
@@ -677,18 +669,18 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="lines">
 									<Hide until="desktop">
-										<div css={maxWidth}>
-											<div css={stretchLines}>
-												<Lines
-													count={decideLineCount(
-														format.design,
-													)}
-													effect={decideLineEffect(
-														format.design,
-														format.theme,
-													)}
-												/>
-											</div>
+										<div
+											css={[maxWidth, sidePaddingDesktop]}
+										>
+											<Lines
+												count={decideLineCount(
+													format.design,
+												)}
+												effect={decideLineEffect(
+													format.design,
+													format.theme,
+												)}
+											/>
 										</div>
 									</Hide>
 								</GridItem>
@@ -717,7 +709,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									<div
 										css={[
 											sticky,
-											keyEventsTopMarginDesktop,
+											keyEventsTopMargin,
+											sidePaddingDesktop,
+											accordionBottomMargin,
 										]}
 									>
 										<KeyEventsContainer
@@ -863,24 +857,24 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="lines">
 									<Hide until="desktop">
-										<div css={maxWidth}>
-											<div css={stretchLines}>
-												<Lines
-													count={decideLineCount(
-														format.design,
-													)}
-													effect={decideLineEffect(
-														format.design,
-														format.theme,
-													)}
-												/>
-											</div>
+										<div
+											css={[maxWidth, sidePaddingDesktop]}
+										>
+											<Lines
+												count={decideLineCount(
+													format.design,
+												)}
+												effect={decideLineEffect(
+													format.design,
+													format.theme,
+												)}
+											/>
 										</div>
 									</Hide>
 								</GridItem>
 								<GridItem area="meta" element="aside">
 									<Hide until="desktop">
-										<div css={maxWidth}>
+										<div css={sidePaddingDesktop}>
 											<ArticleMeta
 												branding={branding}
 												format={format}
@@ -903,7 +897,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									<div
 										css={[
 											sticky,
-											keyEventsTopMarginDesktop,
+											keyEventsTopMargin,
+											sidePaddingDesktop,
+											accordionBottomMargin,
 										]}
 									>
 										<KeyEventsContainer
@@ -913,95 +909,116 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									</div>
 								</GridItem>
 								<GridItem area="body">
-									<ArticleContainer format={format}>
-										{CAPI.pagination &&
-											CAPI.pagination.currentPage !==
-												1 && (
-												<Pagination
-													currentPage={
-														CAPI.pagination
-															?.currentPage || 1
-													}
-													totalPages={
-														CAPI.pagination
-															?.totalPages || 1
-													}
-													newest={
-														CAPI.pagination?.newest
-													}
-													oldest={
-														CAPI.pagination?.oldest
-													}
-													newer={
-														CAPI.pagination?.newer
-													}
-													older={
-														CAPI.pagination?.older
-													}
+									<div css={accordionBottomMargin}>
+										<Accordion
+											supportsDarkMode={false}
+											accordionTitle="Live feed"
+											context="liveFeed"
+										>
+											<ArticleContainer format={format}>
+												{CAPI.pagination &&
+													CAPI.pagination
+														.currentPage !== 1 && (
+														<Pagination
+															currentPage={
+																CAPI.pagination
+																	?.currentPage ||
+																1
+															}
+															totalPages={
+																CAPI.pagination
+																	?.totalPages ||
+																1
+															}
+															newest={
+																CAPI.pagination
+																	?.newest
+															}
+															oldest={
+																CAPI.pagination
+																	?.oldest
+															}
+															newer={
+																CAPI.pagination
+																	?.newer
+															}
+															older={
+																CAPI.pagination
+																	?.older
+															}
+															format={format}
+														/>
+													)}
+												<ArticleBody
 													format={format}
+													palette={palette}
+													blocks={CAPI.blocks}
+													adTargeting={adTargeting}
+													host={host}
+													pageId={CAPI.pageId}
+													webTitle={CAPI.webTitle}
 												/>
-											)}
-										<ArticleBody
-											format={format}
-											palette={palette}
-											blocks={CAPI.blocks}
-											adTargeting={adTargeting}
-											host={host}
-											pageId={CAPI.pageId}
-											webTitle={CAPI.webTitle}
-										/>
-										{CAPI.pagination &&
-											CAPI.pagination.totalPages > 1 && (
-												<Pagination
-													currentPage={
-														CAPI.pagination
-															?.currentPage || 1
-													}
-													totalPages={
-														CAPI.pagination
-															?.totalPages || 1
-													}
-													newest={
-														CAPI.pagination?.newest
-													}
-													oldest={
-														CAPI.pagination?.oldest
-													}
-													newer={
-														CAPI.pagination?.newer
-													}
-													older={
-														CAPI.pagination?.older
-													}
+												{CAPI.pagination &&
+													CAPI.pagination.totalPages >
+														1 && (
+														<Pagination
+															currentPage={
+																CAPI.pagination
+																	?.currentPage ||
+																1
+															}
+															totalPages={
+																CAPI.pagination
+																	?.totalPages ||
+																1
+															}
+															newest={
+																CAPI.pagination
+																	?.newest
+															}
+															oldest={
+																CAPI.pagination
+																	?.oldest
+															}
+															newer={
+																CAPI.pagination
+																	?.newer
+															}
+															older={
+																CAPI.pagination
+																	?.older
+															}
+															format={format}
+														/>
+													)}
+												{showBodyEndSlot && (
+													<div id="slot-body-end" />
+												)}
+												<Lines
+													data-print-layout="hide"
+													count={4}
+													effect="straight"
+												/>
+												<SubMeta
+													palette={palette}
 													format={format}
+													subMetaKeywordLinks={
+														CAPI.subMetaKeywordLinks
+													}
+													subMetaSectionLinks={
+														CAPI.subMetaSectionLinks
+													}
+													pageId={CAPI.pageId}
+													webUrl={CAPI.webURL}
+													webTitle={CAPI.webTitle}
+													showBottomSocialButtons={
+														CAPI.showBottomSocialButtons
+													}
+													badge={CAPI.badge}
 												/>
-											)}
-										{showBodyEndSlot && (
-											<div id="slot-body-end" />
-										)}
-										<Lines
-											data-print-layout="hide"
-											count={4}
-											effect="straight"
-										/>
-										<SubMeta
-											palette={palette}
-											format={format}
-											subMetaKeywordLinks={
-												CAPI.subMetaKeywordLinks
-											}
-											subMetaSectionLinks={
-												CAPI.subMetaSectionLinks
-											}
-											pageId={CAPI.pageId}
-											webUrl={CAPI.webURL}
-											webTitle={CAPI.webTitle}
-											showBottomSocialButtons={
-												CAPI.showBottomSocialButtons
-											}
-											badge={CAPI.badge}
-										/>
-									</ArticleContainer>
+											</ArticleContainer>
+										</Accordion>
+									</div>
 								</GridItem>
 								<GridItem area="right-column">
 									<div
