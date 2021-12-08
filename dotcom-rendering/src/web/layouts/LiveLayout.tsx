@@ -858,15 +858,17 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="lines">
 									<Hide until="desktop">
-										<div css={[maxWidth, sidePaddingDesktop]}>
+										<div
+											css={[maxWidth, sidePaddingDesktop]}
+										>
 											<Lines
 												count={decideLineCount(
-														format.design,
-													)}
+													format.design,
+												)}
 												effect={decideLineEffect(
-														format.design,
-														format.theme,
-													)}
+													format.design,
+													format.theme,
+												)}
 											/>
 										</div>
 									</Hide>
@@ -916,28 +918,34 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										>
 											<ArticleContainer format={format}>
 												{CAPI.pagination &&
-													CAPI.pagination.currentPage !==
-														1 && (
+													CAPI.pagination
+														.currentPage !== 1 && (
 														<Pagination
 															currentPage={
 																CAPI.pagination
-																	?.currentPage || 1
+																	?.currentPage ||
+																1
 															}
 															totalPages={
 																CAPI.pagination
-																	?.totalPages || 1
+																	?.totalPages ||
+																1
 															}
 															newest={
-																CAPI.pagination?.newest
+																CAPI.pagination
+																	?.newest
 															}
 															oldest={
-																CAPI.pagination?.oldest
+																CAPI.pagination
+																	?.oldest
 															}
 															newer={
-																CAPI.pagination?.newer
+																CAPI.pagination
+																	?.newer
 															}
 															older={
-																CAPI.pagination?.older
+																CAPI.pagination
+																	?.older
 															}
 															format={format}
 														/>
@@ -952,27 +960,34 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													webTitle={CAPI.webTitle}
 												/>
 												{CAPI.pagination &&
-													CAPI.pagination.totalPages > 1 && (
+													CAPI.pagination.totalPages >
+														1 && (
 														<Pagination
 															currentPage={
 																CAPI.pagination
-																	?.currentPage || 1
+																	?.currentPage ||
+																1
 															}
 															totalPages={
 																CAPI.pagination
-																	?.totalPages || 1
+																	?.totalPages ||
+																1
 															}
 															newest={
-																CAPI.pagination?.newest
+																CAPI.pagination
+																	?.newest
 															}
 															oldest={
-																CAPI.pagination?.oldest
+																CAPI.pagination
+																	?.oldest
 															}
 															newer={
-																CAPI.pagination?.newer
+																CAPI.pagination
+																	?.newer
 															}
 															older={
-																CAPI.pagination?.older
+																CAPI.pagination
+																	?.older
 															}
 															format={format}
 														/>
