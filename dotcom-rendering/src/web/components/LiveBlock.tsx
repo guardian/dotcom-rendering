@@ -111,7 +111,7 @@ export const LiveBlock = ({
 					block.blockLastUpdated &&
 					block.blockLastUpdatedDisplay && (
 						<LastUpdated
-							lastUpdated={block.blockLastUpdated}
+							lastUpdated={new Date(block.blockLastUpdated)}
 							lastUpdatedDisplay={block.blockLastUpdatedDisplay}
 						/>
 					)}

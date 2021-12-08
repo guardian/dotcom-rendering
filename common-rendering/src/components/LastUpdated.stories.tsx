@@ -7,7 +7,7 @@ import { LastUpdated } from "./LastUpdated";
 // ----- Stories ----- //
 
 const Default: FC = () => (
-	<LastUpdated lastUpdated={1613763519000} lastUpdatedDisplay={"19.38 GMT"} />
+	<LastUpdated lastUpdated={new Date(1613763519000)} lastUpdatedDisplay={"19.38 GMT"} />
 );
 
 // ----- Exports ----- //
