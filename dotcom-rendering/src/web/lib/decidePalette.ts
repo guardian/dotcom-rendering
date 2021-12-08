@@ -661,6 +661,10 @@ const activeMatchTab = (): string => {
 	return sport[300];
 };
 
+const backgroundMatchNav = (): string => {
+	return '#FFE500';
+};
+
 const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -885,6 +889,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			accordionDivider: backgroundAccordionDivider(),
+			matchNav: backgroundMatchNav(),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

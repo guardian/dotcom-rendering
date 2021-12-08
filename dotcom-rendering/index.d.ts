@@ -138,6 +138,7 @@ type Palette = {
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		accordionDivider: Colour;
+		matchNav: Colour;
 	};
 	fill: {
 		commentCount: Colour;

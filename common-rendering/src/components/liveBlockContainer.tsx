@@ -19,6 +19,7 @@ const LiveBlockContainer = ({
 	return (
 		<article
 			id={`block-${id}`}
+			key={id}
 			css={css`
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;
