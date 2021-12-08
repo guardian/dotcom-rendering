@@ -481,7 +481,9 @@ function hydrateClickToView(): void {
 function resizeEmailSignups(): void {
 	const isIframe = (elem: Element): elem is HTMLIFrameElement =>
 		elem.tagName === 'IFRAME';
-	const emailSignupIframes = document.querySelectorAll('.js-email-signup > iframe');
+	const emailSignupIframes = document.querySelectorAll(
+		'.js-email-signup > iframe',
+	);
 	Array.from(emailSignupIframes).forEach((emailSignupIframe) => {
 		if (isIframe(emailSignupIframe)) {
 			emailSignupIframe.style.width = '100%';

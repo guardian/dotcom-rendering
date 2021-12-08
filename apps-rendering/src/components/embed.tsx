@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import Audio from 'components/audio';
-import GenericEmbed from 'components/genericEmbed';
 import EmailSignupEmbed from 'components/emailSignup';
+import GenericEmbed from 'components/genericEmbed';
 import Instagram from 'components/instagram';
 import Video from 'components/video';
 import { EmbedKind, youtubeUrl } from 'embed';

@@ -1,9 +1,14 @@
-import type { EmailSignup } from 'embed'
-import type { FC } from 'react'
-import { darkModeCss } from 'styles';
 import { css } from '@emotion/react';
-import { remSpace, text, textSans, background } from '@guardian/source-foundations';
+import {
+	background,
+	remSpace,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
+import type { EmailSignup } from 'embed';
 import { maybeRender } from 'lib';
+import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 interface Props {
 	embed: EmailSignup;
@@ -23,13 +28,16 @@ const captionStyles = css`
 	color: ${text.supporting};
 `;
 
-const EmailSignupEmbed: FC<Props> = ({embed}) => (
+const EmailSignupEmbed: FC<Props> = ({ embed }) => (
 	<figure css={styles}>
-		<div className='js-email-signup' dangerouslySetInnerHTML={{__html: embed.html}}></div>
+		<div
+			className="js-email-signup"
+			dangerouslySetInnerHTML={{ __html: embed.html }}
+		></div>
 		{maybeRender(embed.alt, (alt) => (
 			<figcaption css={captionStyles}>{alt}</figcaption>
 		))}
 	</figure>
 );
 
-export default EmailSignupEmbed
+export default EmailSignupEmbed;
