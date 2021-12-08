@@ -9,6 +9,7 @@ import { ElementKind } from 'bodyElement';
 import type { ThirdPartyEmbeds } from 'capi';
 import type { Item } from 'item';
 import { compose, pipe } from 'lib';
+import { Stage } from './appIdentity';
 
 // ----- Types ----- //
 
@@ -116,6 +117,8 @@ const buildCsp = (
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com'
 			: ''
+	} ${Stage !== 'PROD' ? 'https://m.code.dev-theguardian.com' : ''} ${
+		Stage === 'DEV' ? 'http://localhost:9000 http://localhost:3000' : ''
 	};
     font-src 'self' https://interactive.guim.co.uk;
     connect-src 'self' https://discussion.theguardian.com/discussion-api/ https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
