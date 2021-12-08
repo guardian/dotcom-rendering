@@ -146,6 +146,11 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};
+
+						a:hover {
+							border-bottom: solid 0.0625rem
+								${palette.hover.liveBlogStandfirst};
+						}
 					`;
 				default:
 					switch (format.theme) {

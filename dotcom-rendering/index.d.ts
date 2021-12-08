@@ -171,6 +171,7 @@ type Palette = {
 	hover: {
 		headlineByline: Colour;
 		pagination: Colour;
+		liveBlogStandfirst: Colour;
 	};
 };
 
