@@ -137,7 +137,6 @@ type Palette = {
 		carouselDotFocus: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
-		accordionDivider: Colour;
 		matchNav: Colour;
 	};
 	fill: {
