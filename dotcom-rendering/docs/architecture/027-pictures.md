@@ -142,7 +142,7 @@ For regular images, we'll loop through each breakpoint and pick an appropriate s
 
 Our largest breakpoint is 1300px, for a full-width image we then know we'd want a 1300px image. But what if we have a scren larger than that? Say 2000px? Even if we had a 2000px source available to us, we couldn't use it because our largest breakpoint was 1300px.
 
-The solution to this is that rather than looping through each breakpoint, and picking an appropriate image source, we can instead loop through each image source we have (provided by frontend) and use its own width as the breakpoints. This is what you can see in `landscapeImmersiveMainMediaSource` in `Picture.tsx` - by doing this we're taking advantage of the full range of images sources offered to us by Frontend, improving image quality available to larger displays.
+The solution to this is that rather than looping through each breakpoint, and picking an appropriate image source, we can instead loop through each image source we have (provided by frontend) and use its own width as the breakpoints. This is what you can see in `landscapeImmersiveMainMediaSource` in `Picture.tsx` - by doing this we're taking advantage of the full range of image sources offered to us by Frontend, improving image quality available to larger displays.
 
 #### Mobile / Portrait
 
