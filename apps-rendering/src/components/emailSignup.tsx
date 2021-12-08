@@ -2,7 +2,7 @@ import type { EmailSignup } from 'embed'
 import type { FC } from 'react'
 import { darkModeCss } from 'styles';
 import { css } from '@emotion/react';
-import { remSpace, text, textSans } from '@guardian/source-foundations';
+import { remSpace, text, textSans, background } from '@guardian/source-foundations';
 import { maybeRender } from 'lib';
 
 interface Props {
@@ -13,7 +13,7 @@ const styles = css`
 	margin: ${remSpace[4]} 0;
 
 	${darkModeCss`
-        background: white;
+        background: ${background.inverse};
         padding: ${remSpace[3]};
     `}
 `;
@@ -25,9 +25,7 @@ const captionStyles = css`
 
 const EmailSignupEmbed: FC<Props> = ({embed}) => (
 	<figure css={styles}>
-		<div className='js-email-signup'>
-			{embed.html}
-		</div>
+		<div className='js-email-signup' dangerouslySetInnerHTML={{__html: embed.html}}></div>
 		{maybeRender(embed.alt, (alt) => (
 			<figcaption css={captionStyles}>{alt}</figcaption>
 		))}
