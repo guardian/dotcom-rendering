@@ -672,18 +672,18 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="lines">
 									<Hide until="desktop">
-										<div css={maxWidth}>
-											<div css={stretchLines}>
-												<Lines
-													count={decideLineCount(
+										<div
+											css={[maxWidth, sidePaddingDesktop]}
+										>
+											<Lines
+												count={decideLineCount(
 														format.design,
 													)}
-													effect={decideLineEffect(
+												effect={decideLineEffect(
 														format.design,
 														format.theme,
 													)}
 												/>
-											</div>
 										</div>
 									</Hide>
 								</GridItem>
@@ -712,7 +712,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									<div
 										css={[
 											sticky,
-											keyEventsTopMarginDesktop,
+											keyEventsTopMargin,
+											sidePaddingDesktop,
+											accordionBottomMargin,
 										]}
 									>
 										<KeyEventsContainer
