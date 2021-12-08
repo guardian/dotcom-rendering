@@ -257,6 +257,18 @@ const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const metaExtrasLiveBlog = css`
+	${until.phablet} {
+		margin-right: 0;
+	}
+`;
+
+const metaNumbersExtrasLiveBlog = css`
+	${until.phablet} {
+		margin-left: 0;
+	}
+`;
+
 export const ArticleMeta = ({
 	branding,
 	format,
@@ -354,7 +366,10 @@ export const ArticleMeta = ({
 						css={[
 							metaExtras(palette),
 							format.design === ArticleDesign.LiveBlog &&
-								metaBorderTopStandfirstStyling,
+								css(
+									metaBorderTopStandfirstStyling,
+									metaExtrasLiveBlog,
+								),
 						]}
 					>
 						<ShareIcons
@@ -371,7 +386,10 @@ export const ArticleMeta = ({
 						css={[
 							metaNumbers(palette),
 							format.design === ArticleDesign.LiveBlog &&
-								metaBorderTopStandfirstStyling,
+								css(
+									metaBorderTopStandfirstStyling,
+									metaNumbersExtrasLiveBlog,
+								),
 						]}
 					>
 						<Counts format={format}>
