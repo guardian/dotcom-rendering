@@ -220,7 +220,7 @@ const landscapeImmersiveMainMediaSource = (
 	return (
 		<>
 			{/* For immersive main media, images will always take up 100% of the screen width,
-				therefor it is more beneficial to loop through all the image sources, instead of the breakpoints.
+				therefore it is more beneficial to loop through all the image sources, instead of the breakpoints.
 				This means that we are not limited to sources within the boundaries of the breakpoints, and can provide
 				more appropriately sized images where applicable. */}
 			{sortedSources.map((sourceSet, index) => (
