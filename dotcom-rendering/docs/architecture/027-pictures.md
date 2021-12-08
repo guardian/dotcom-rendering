@@ -134,7 +134,7 @@ Immersive main media gets special treatment for images ~ due to 2 unique qualiti
 1. Desktop full width - The images will always fill 100vw on all desktop breakpoints
 2. Portrait full height- On portrait devices, filling 100vh must be handled differently
 
-Each of these specific cases are not not handled optimally by the original solution handled above, however immserive main media images can often hold more value in content, as they're often the only thing on screen when an article loads, so getting them right is important.
+Each of these specific cases are not handled optimally by the original solution. However, immersive main media images often have more content value as they're sometimes the only thing on screen when an article loads, so getting them right is important.
 
 #### Desktop
 
