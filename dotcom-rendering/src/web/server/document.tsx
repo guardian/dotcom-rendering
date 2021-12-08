@@ -1,7 +1,11 @@
+import { CacheProvider } from '@emotion/react';
 import { renderToString } from 'react-dom/server';
-
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
+
+import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 
 import { Page } from '@root/src/web/components/Page';
 
@@ -16,15 +20,10 @@ import {
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
 import { ArticlePillar } from '@guardian/libs';
-import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
-import { decideTheme } from '../lib/decideTheme';
-import { SkipTo } from '../components/SkipTo';
 
-interface RenderToStringResult {
-	html: string;
-	css: string;
-	ids: string[];
+interface Props {
+	data: DCRServerDocumentData;
 }
 
 const generateScriptTags = (
@@ -43,10 +42,6 @@ const generateScriptTags = (
 		];
 	}, [] as string[]);
 
-interface Props {
-	data: DCRServerDocumentData;
-}
-
 const decideTitle = (CAPI: CAPIType): string => {
 	if (
 		decideTheme(CAPI.format) === ArticlePillar.Opinion &&
@@ -62,20 +57,25 @@ export const document = ({ data }: Props): string => {
 	const title = decideTitle(CAPI);
 	const key = 'dcr';
 	const cache = createCache({ key });
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const { extractCritical } = createEmotionServer(cache);
 
-	const {
-		html,
-		css: extractedCss,
-		ids: cssIDs,
-	}: RenderToStringResult = extractCritical(
-		renderToString(
-			<Page cache={cache}>
-				<DecideLayout CAPI={CAPI} NAV={NAV} />
-			</Page>,
-		),
+	// eslint-disable-next-line @typescript-eslint/unbound-method
+	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
+		createEmotionServer(cache);
+
+	const format: ArticleFormat = {
+		display: decideDisplay(CAPI.format),
+		design: decideDesign(CAPI.format),
+		theme: decideTheme(CAPI.format),
+	};
+
+	const html = renderToString(
+		<CacheProvider value={cache}>
+			<Page format={format} CAPI={CAPI} NAV={NAV} />
+		</CacheProvider>,
 	);
+
+	const chunks = extractCriticalToChunks(html);
+	const extractedCss = constructStyleTagsFromChunks(chunks);
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const loadableExtractor = new ChunkExtractor({
@@ -296,9 +296,7 @@ export const document = ({ data }: Props): string => {
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
 	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(makeWindowGuardian(data, cssIDs)),
-	);
+	const windowGuardian = escapeData(JSON.stringify(makeWindowGuardian(data)));
 
 	const hasAmpInteractiveTag = CAPI.tags.some(
 		(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
@@ -318,22 +316,6 @@ export const document = ({ data }: Props): string => {
 			? ''
 			: CAPI.config.keywords;
 
-	const skipToMainContent = renderToString(
-		<SkipTo id="maincontent" label="Skip to main content" />,
-	);
-	const skipToNavigation = renderToString(
-		<SkipTo id="navigation" label="Skip to navigation" />,
-	);
-	let skipToKeyEvents;
-	if (
-		CAPI.format.design === 'LiveBlogDesign' ||
-		CAPI.format.design === 'DeadBlogDesign'
-	) {
-		skipToKeyEvents = renderToString(
-			<SkipTo id="keyevents" label="Skip to key events" />,
-		);
-	}
-
 	return htmlTemplate({
 		linkedData,
 		loadableConfigScripts,
@@ -350,8 +332,5 @@ export const document = ({ data }: Props): string => {
 		openGraphData,
 		twitterData,
 		keywords,
-		skipToMainContent,
-		skipToNavigation,
-		skipToKeyEvents,
 	});
 };

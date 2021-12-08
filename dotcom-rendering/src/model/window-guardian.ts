@@ -223,7 +223,6 @@ export interface WindowGuardian {
 	// for performance reasons
 	app: {
 		data: DCRBrowserDocumentData;
-		cssIDs: string[];
 	};
 
 	// The 'config' attribute is derived from DCRServerDocumentData and contains
@@ -249,11 +248,9 @@ export const makeGuardianBrowserNav = (nav: NavType): BrowserNavType => {
 
 export const makeWindowGuardian = (
 	dcrDocumentData: DCRServerDocumentData,
-	cssIDs: string[],
 ): WindowGuardian => {
 	return {
 		app: {
-			cssIDs,
 			data: {
 				...dcrDocumentData,
 				NAV: makeGuardianBrowserNav(dcrDocumentData.NAV),
