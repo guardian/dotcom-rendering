@@ -148,8 +148,8 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						color: ${palette.text.standfirst};
 
 						a:hover {
-							border-bottom: solid 0.0625rem
-								${palette.hover.liveBlogStandfirst};
+							border-bottom: solid 1px
+								${palette.hover.standfirstLink};
 						}
 					`;
 				default:

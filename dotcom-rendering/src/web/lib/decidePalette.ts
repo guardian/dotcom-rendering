@@ -687,10 +687,7 @@ const textRichLink: (format: ArticleFormat) => string = (format) => {
 };
 
 const hoverLiveblog = (format: ArticleFormat): string => {
-	if (format) {
-		return pillarPalette[format.theme].main;
-	}
-	return pillarPalette[ArticlePillar.News][400];
+	return pillarPalette[format.theme].main;
 };
 
 const borderRichLink: (format: ArticleFormat) => string = (format) => {
@@ -925,7 +922,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
 			pagination: hoverPagination(format),
-			liveBlogStandfirst: hoverLiveblog(format),
+			standfirstLink: hoverLiveblog(format),
 		},
 	};
 };
