@@ -640,9 +640,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						showTopBorder={false}
 						backgroundColour={palette.background.article}
 						borderColour={palette.border.article}
-						backgroundColourMobile={
-							palette.background.accordionDivider
-						}
 						padded={false}
 					>
 						{CAPI.matchUrl ? (
@@ -677,13 +674,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										>
 											<Lines
 												count={decideLineCount(
-														format.design,
-													)}
+													format.design,
+												)}
 												effect={decideLineEffect(
-														format.design,
-														format.theme,
-													)}
-												/>
+													format.design,
+													format.theme,
+												)}
+											/>
 										</div>
 									</Hide>
 								</GridItem>

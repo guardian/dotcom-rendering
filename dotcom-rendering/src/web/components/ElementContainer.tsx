@@ -29,19 +29,12 @@ const setBackgroundColour = (colour: string) => emoCss`
 	background-color: ${colour};
 `;
 
-const setBackgroundColourMobile = (colour: string) => emoCss`
-	${until.desktop} {
-		background-color: ${colour};
-	}
-`;
-
 type Props = {
 	sectionId?: string;
 	showSideBorders?: boolean;
 	showTopBorder?: boolean;
 	padded?: boolean;
 	backgroundColour?: string;
-	backgroundColourMobile?: string;
 	borderColour?: string;
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
@@ -64,7 +57,6 @@ export const ElementContainer = ({
 	padded = true,
 	borderColour = border.secondary,
 	backgroundColour,
-	backgroundColourMobile,
 	shouldCenter = true,
 	children,
 	element = 'div',
@@ -87,8 +79,6 @@ export const ElementContainer = ({
 			);
 			const style = css`
 				${backgroundColour && setBackgroundColour(backgroundColour)};
-				${backgroundColourMobile &&
-				setBackgroundColourMobile(backgroundColourMobile)};
 			`;
 			// Create a react element from the tagName passed in OR
 			// default to <div>
