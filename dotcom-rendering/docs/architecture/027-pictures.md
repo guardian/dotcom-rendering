@@ -129,7 +129,7 @@ For Example:
 
 ### Immersive Main Media
 
-Immersive main media gets special treatment for images ~ due to 2 unique qualities not found elsewhere in other images:
+Immersive main media gets special treatment for images ~ due to 2 unique qualities:
 
 1. Desktop full width - The images will always fill 100vw on all desktop breakpoints
 2. Portrait full height- On portrait devices, filling 100vh must be handled differently
