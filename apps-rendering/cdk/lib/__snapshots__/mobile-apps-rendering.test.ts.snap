@@ -728,7 +728,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
         "ResourceRecords": Array [
           Object {
             "Fn::GetAtt": Array [
-              "LoadBalancer",
+              "LoadBalancerMobileappsrenderingB8B00ACB",
               "DNSName",
             ],
           },
@@ -2562,7 +2562,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
         "ResourceRecords": Array [
           Object {
             "Fn::GetAtt": Array [
-              "LoadBalancer",
+              "LoadBalancerMobileappsrenderingB8B00ACB",
               "DNSName",
             ],
           },
