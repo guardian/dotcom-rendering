@@ -1,5 +1,7 @@
 // ----- Imports ----- //
 
+import './liveblog';
+
 import 'regenerator-runtime/runtime.js';
 import { AudioAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
@@ -19,12 +21,7 @@ import { createEmbedComponentFromProps } from 'components/embedWrapper';
 import FollowStatus from 'components/followStatus';
 import FooterContent from 'components/footerContent';
 import EpicContent from 'components/shared/epicContent';
-import {
-	formatDate,
-	formatLocal,
-	formatLocalTimeDateTz,
-	isValidDate,
-} from 'date';
+import { formatDate, formatLocal, isValidDate } from 'date';
 import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
@@ -408,26 +405,6 @@ function localDates(): void {
 	}
 }
 
-function lastUpdatedDates(): void {
-	Array.from(document.querySelectorAll('time[data-last-updated]')).forEach(
-		(time) => {
-			const isoDateTimeString = time.getAttribute('data-last-updated');
-			try {
-				if (isoDateTimeString) {
-					time.textContent = `Updated: ${formatLocalTimeDateTz(
-						new Date(isoDateTimeString),
-					)}`;
-				}
-			} catch (e) {
-				const message =
-					isoDateTimeString ??
-					'because the data-date attribute was empty';
-				logger.error(`Unable to parse and format date ${message}`, e);
-			}
-		},
-	);
-}
-
 function richLinks(): void {
 	document
 		.querySelectorAll('.js-rich-link[data-article-id]')
@@ -524,6 +501,5 @@ hasSeenCards();
 initAudioAtoms();
 hydrateAtoms();
 localDates();
-lastUpdatedDates();
 richLinks();
 hydrateClickToView();

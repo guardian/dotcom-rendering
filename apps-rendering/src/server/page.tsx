@@ -41,13 +41,12 @@ const emotionServer = createEmotionServer(emotionCache);
 
 const scriptName = ({ design, display }: ArticleFormat): Option<string> => {
 	switch (design) {
-		case ArticleDesign.LiveBlog:
-			return some('liveblog.js');
 		case ArticleDesign.Interactive:
 			return display !== ArticleDisplay.Immersive
 				? some('article.js')
 				: none;
 		case ArticleDesign.DeadBlog:
+		case ArticleDesign.LiveBlog:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
