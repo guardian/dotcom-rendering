@@ -22,7 +22,7 @@ try {
  * @returns
  */
 const decideAssetOrigin = (stage: string | undefined): string => {
-	switch (stage) {
+	switch (stage?.toUpperCase()) {
 		case 'PROD':
 			return 'https://assets.guim.co.uk/';
 		case 'CODE':
