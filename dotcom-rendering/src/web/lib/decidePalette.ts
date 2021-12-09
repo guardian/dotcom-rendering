@@ -27,7 +27,7 @@ import { pillarPalette_DO_NOT_USE as pillarPalette } from '@root/src/lib/pillars
 const WHITE = neutral[100];
 const BLACK = neutral[7];
 
-const deadBlogsPalette = (format: ArticleFormat): string => {
+const blogsGrayBackgroundPalette = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 		case ArticlePillar.Lifestyle:
@@ -96,7 +96,7 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 							return WHITE;
 					}
 				case ArticleDesign.DeadBlog:
-					return deadBlogsPalette(format);
+					return blogsGrayBackgroundPalette(format);
 				case ArticleDesign.MatchReport:
 					return BLACK;
 				default:
@@ -114,7 +114,7 @@ const textByline = (format: ArticleFormat): string => {
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
 	)
-		return pillarPalette[format.theme].dark;
+		return blogsGrayBackgroundPalette(format);
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
@@ -178,7 +178,7 @@ const textSubMeta = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
 	if (format.design === ArticleDesign.DeadBlog)
-		return deadBlogsPalette(format);
+		return blogsGrayBackgroundPalette(format);
 	return pillarPalette[format.theme].main;
 };
 
@@ -585,7 +585,13 @@ const fillShareCountIconUntilDesktop = (format: ArticleFormat): string => {
 };
 
 const fillShareIconGrayBackground = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme].dark;
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return blogsGrayBackgroundPalette(format);
+		default:
+			return pillarPalette[format.theme].dark;
+	}
 };
 
 const fillCaptionCamera = (format: ArticleFormat): string =>
@@ -842,14 +848,7 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 };
 
 const textPagination = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-		case ArticlePillar.Lifestyle:
-		case ArticlePillar.Sport:
-			return pillarPalette[format.theme][400];
-		default:
-			return pillarPalette[format.theme][300];
-	}
+	return blogsGrayBackgroundPalette(format);
 };
 
 const textShareCount = (): string => {
@@ -867,14 +866,7 @@ const borderPagination = (): string => {
 };
 
 const hoverPagination = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-		case ArticlePillar.Lifestyle:
-		case ArticlePillar.Sport:
-			return pillarPalette[format.theme][400];
-		default:
-			return pillarPalette[format.theme][300];
-	}
+	return blogsGrayBackgroundPalette(format);
 };
 
 export const decidePalette = (format: ArticleFormat): Palette => {
