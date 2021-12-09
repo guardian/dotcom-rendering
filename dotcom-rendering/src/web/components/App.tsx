@@ -696,6 +696,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					<ShareCount
 						ajaxUrl={CAPI.config.ajaxUrl}
 						pageId={CAPI.pageId}
+						format={format}
 					/>
 				</Portal>
 			)}
