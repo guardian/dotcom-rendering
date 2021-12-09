@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 
 import { useApi as useApi_ } from '@root/src/web/lib/useApi';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ShareCount } from './ShareCount';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,7 +26,15 @@ describe('ShareCount', () => {
 		});
 
 		const { container } = render(
-			<ShareCount ajaxUrl={ajaxUrl} pageId={pageId} />,
+			<ShareCount
+				ajaxUrl={ajaxUrl}
+				pageId={pageId}
+				format={{
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+				}}
+			/>,
 		);
 
 		expect(container.firstChild).toBeNull();
@@ -35,7 +44,15 @@ describe('ShareCount', () => {
 		useApi.mockReturnValue({ error: { message: 'Bad' } });
 
 		const { container } = render(
-			<ShareCount ajaxUrl={ajaxUrl} pageId={pageId} />,
+			<ShareCount
+				ajaxUrl={ajaxUrl}
+				pageId={pageId}
+				format={{
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+				}}
+			/>,
 		);
 
 		expect(container.firstChild).toBeNull();
@@ -45,7 +62,15 @@ describe('ShareCount', () => {
 		useApi.mockReturnValue({ data: { share_count: 25001 } });
 
 		const { getByTestId } = render(
-			<ShareCount ajaxUrl={ajaxUrl} pageId={pageId} />,
+			<ShareCount
+				ajaxUrl={ajaxUrl}
+				pageId={pageId}
+				format={{
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+				}}
+			/>,
 		);
 
 		expect(getByTestId('long-share-count').innerHTML).toBe('25,001');
