@@ -29,7 +29,7 @@ const LiveBlockContainer = ({
 					padding: ${space[2]}px ${SIDE_MARGIN}px;
 					padding-left: ${LEFT_MARGIN_DESKTOP}px;
 				}
-				border-bottom: inset;
+				border-bottom: 1px solid ${neutral[86]};
 			`}
 		>
 			{children}
