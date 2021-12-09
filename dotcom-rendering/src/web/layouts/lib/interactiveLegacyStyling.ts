@@ -35,6 +35,7 @@ export const interactiveLegacyClasses = {
 	standFirst: 'content__standfirst',
 	byline: 'byline',
 	shareIcons: 'meta__social',
+	countIcons: 'meta__comment',
 
 	// some legacy interactives do not use the content--interactive container
 	// to ensure all editorial content has correct font, we need to target this too

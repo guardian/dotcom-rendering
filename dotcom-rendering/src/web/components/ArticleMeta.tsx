@@ -361,7 +361,14 @@ export const ArticleMeta = ({
 							context="ArticleMeta"
 						/>
 					</div>
-					<div css={metaNumbers(palette)}>
+					<div
+						className={
+							isInteractive
+								? interactiveLegacyClasses.countIcons
+								: ''
+						}
+						css={metaNumbers(palette)}
+					>
 						<Counts>
 							{/* The meta-number css is needed by Counts.tsx */}
 							<div
