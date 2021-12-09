@@ -688,6 +688,11 @@ interface CommercialConfigType {
 	ampIframeUrl: string;
 }
 
+type ServerSideTests = {
+    [k: `${string}Variant`]: "variant";
+    [k: `${string}Control`]: "control";
+};
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
@@ -700,7 +705,7 @@ interface ConfigType extends CommercialConfigType {
 	sentryHost: string;
 	dcrSentryDsn: string;
 	switches: { [key: string]: boolean };
-	abTests: Record<string, 'control' | 'variant'>;
+	abTests: ServerSideTests;
 	dfpAccountId: string;
 	commercialBundleUrl: string;
 	revisionNumber: string;
