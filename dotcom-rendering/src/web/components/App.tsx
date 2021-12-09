@@ -1215,7 +1215,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
-					isSignedIn={isSignedIn}
 					asyncCountryCode={asyncCountryCode}
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}
