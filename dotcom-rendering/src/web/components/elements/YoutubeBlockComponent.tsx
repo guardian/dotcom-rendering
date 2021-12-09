@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 
 import { space, neutral, body } from '@guardian/source-foundations';
@@ -13,7 +13,6 @@ import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
 
 import { Caption } from '@root/src/web/components/Caption';
-import { useOnce } from '@root/src/web/lib/useOnce';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 type Props = {
@@ -94,24 +93,20 @@ export const YoutubeBlockComponent = ({
 		undefined,
 	);
 
-	useOnce(() => {
+	useEffect(() => {
 		import(
 			/* webpackChunkName: "cmp" */ '@guardian/consent-management-platform'
 		)
 			.then(
 				(module: { onConsentChange: (callback: Callback) => void }) => {
 					module.onConsentChange((newConsent: ConsentState) => {
-						console.log('consent changed, new', newConsent);
 						setConsentState(newConsent);
 					});
 				},
 			)
 			.catch((error) => {
-				const msg = `Error: ${error}`;
-				// eslint-disable-next-line no-console
-				console.log(msg);
 				window.guardian.modules.sentry.reportError(
-					new Error(msg),
+					new Error(`Error: ${error}`),
 					'youtube-consent',
 				);
 			});
