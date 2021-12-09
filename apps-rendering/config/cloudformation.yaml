@@ -376,11 +376,3 @@ Resources:
       Cooldown: 400
       ScalingAdjustment: 100
 
-  DnsRecord:
-    Type: AWS::Route53::RecordSet
-    Properties:
-      HostedZoneName: !Ref HostedZone
-      Name: !Ref DomainName
-      Type: CNAME
-      TTL: 3600
-      ResourceRecords: [!GetAtt LoadBalancer.DNSName]

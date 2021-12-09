@@ -38,12 +38,14 @@ Object {
     },
     "mobileappsrendering": Object {
       "CODE": Object {
+        "domain": "mobile-aws.code.dev-guardianapis.com",
         "domainName": "mobile-rendering.mobile-aws.code.dev-guardianapis.com",
         "hostedZoneId": "Z6PRU8YR6TQDK",
         "maxInstances": 2,
         "minInstances": 1,
       },
       "PROD": Object {
+        "domain": "mobile-aws.guardianapis.com",
         "domainName": "mobile-rendering.mobile-aws.guardianapis.com",
         "hostedZoneId": "Z1EYB4AREPXE3B",
         "maxInstances": 6,
@@ -696,15 +698,48 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
     },
     "DnsRecord": Object {
       "Properties": Object {
-        "HostedZoneName": Object {
-          "Ref": "HostedZone",
+        "HostedZoneId": Object {
+          "Fn::FindInMap": Array [
+            "mobileappsrendering",
+            Object {
+              "Ref": "Stage",
+            },
+            "hostedZoneId",
+          ],
         },
         "Name": Object {
-          "Ref": "DomainName",
+          "Fn::Join": Array [
+            "",
+            Array [
+              Object {
+                "Fn::FindInMap": Array [
+                  "mobileappsrendering",
+                  Object {
+                    "Ref": "Stage",
+                  },
+                  "domainName",
+                ],
+              },
+              ".",
+              Object {
+                "Fn::FindInMap": Array [
+                  "mobileappsrendering",
+                  Object {
+                    "Ref": "Stage",
+                  },
+                  "domain",
+                ],
+              },
+              ".",
+            ],
+          ],
         },
         "ResourceRecords": Array [
           Object {
-            "Fn::GetAtt": "LoadBalancer.DNSName",
+            "Fn::GetAtt": Array [
+              "LoadBalancer",
+              "DNSName",
+            ],
           },
         ],
         "TTL": "3600",
@@ -1825,12 +1860,14 @@ Object {
     },
     "mobileappsrendering": Object {
       "CODE": Object {
+        "domain": "mobile-aws.code.dev-guardianapis.com",
         "domainName": "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com",
         "hostedZoneId": "Z6PRU8YR6TQDK",
         "maxInstances": 2,
         "minInstances": 1,
       },
       "PROD": Object {
+        "domain": "mobile-aws.guardianapis.com",
         "domainName": "mobile-preview-rendering.mobile-aws.guardianapis.com",
         "hostedZoneId": "Z1EYB4AREPXE3B",
         "maxInstances": 6,
@@ -2483,15 +2520,48 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
     },
     "DnsRecord": Object {
       "Properties": Object {
-        "HostedZoneName": Object {
-          "Ref": "HostedZone",
+        "HostedZoneId": Object {
+          "Fn::FindInMap": Array [
+            "mobileappsrendering",
+            Object {
+              "Ref": "Stage",
+            },
+            "hostedZoneId",
+          ],
         },
         "Name": Object {
-          "Ref": "DomainName",
+          "Fn::Join": Array [
+            "",
+            Array [
+              Object {
+                "Fn::FindInMap": Array [
+                  "mobileappsrendering",
+                  Object {
+                    "Ref": "Stage",
+                  },
+                  "domainName",
+                ],
+              },
+              ".",
+              Object {
+                "Fn::FindInMap": Array [
+                  "mobileappsrendering",
+                  Object {
+                    "Ref": "Stage",
+                  },
+                  "domain",
+                ],
+              },
+              ".",
+            ],
+          ],
         },
         "ResourceRecords": Array [
           Object {
-            "Fn::GetAtt": "LoadBalancer.DNSName",
+            "Fn::GetAtt": Array [
+              "LoadBalancer",
+              "DNSName",
+            ],
           },
         ],
         "TTL": "3600",

@@ -1,14 +1,20 @@
 import { CfnInclude } from '@aws-cdk/cloudformation-include';
-import { App, Tags } from '@aws-cdk/core';
+import { App, CfnElement, Duration, Tags } from '@aws-cdk/core';
 import { AccessScope, GuEc2App } from '@guardian/cdk';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack, GuStageParameter } from '@guardian/cdk/lib/constructs/core';
 import { join } from 'path';
 import { InstanceClass, InstanceSize, InstanceType, Peer, Port } from "@aws-cdk/aws-ec2";
 import { Stage } from "@guardian/cdk/lib/constants";
+import { RecordSet, RecordType, HostedZone, RecordTarget } from '@aws-cdk/aws-route53';
+import { CfnLoadBalancer } from '@aws-cdk/aws-elasticloadbalancing'
+
+interface AppsStackProps extends GuStackProps {
+  recordPrefix: string;
+}
 
 export class MobileAppsRendering extends GuStack {
-  constructor(scope: App, id: string, props: GuStackProps) {
+  constructor(scope: App, id: string, props: AppsStackProps) {
     super(scope, id, props);
     const yamlTemplateFilePath = join(
       __dirname,
@@ -18,29 +24,41 @@ export class MobileAppsRendering extends GuStack {
 
     const appName = "mobile-apps-rendering"
 
-    const domainNameProperties = this.stack === "mobile" ?
-      {
-        [Stage.CODE]: {
-          domainName: "mobile-rendering.mobile-aws.code.dev-guardianapis.com",
-          hostedZoneId: "Z6PRU8YR6TQDK",
-        },
-        [Stage.PROD]: {
-          domainName: "mobile-rendering.mobile-aws.guardianapis.com",
-          hostedZoneId: "Z1EYB4AREPXE3B",
-        },
-      } :
-      {
-        [Stage.CODE]: {
-          domainName: "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com",
-          hostedZoneId: "Z6PRU8YR6TQDK",
-        },
-        [Stage.PROD]: {
-          domainName: "mobile-preview-rendering.mobile-aws.guardianapis.com",
-          hostedZoneId: "Z1EYB4AREPXE3B",
-        },
-      };
+    const appsRenderingDomain = this.withStageDependentValue({
+      variableName: "domain",
+      app: appName,
+      stageValues: {
+        CODE: "mobile-aws.code.dev-guardianapis.com",
+        PROD: "mobile-aws.guardianapis.com",
+      },
+    });
 
-    new CfnInclude(this, 'YamlTemplate', {
+    const codeDomainName = `${props.recordPrefix}.mobile-aws.code.dev-guardianapis.com`
+    const prodDomainName = `${props.recordPrefix}.mobile-aws.guardianapis.com`
+
+    const appsRenderingDomainName = this.withStageDependentValue<string>({
+      variableName: "domainName",
+      app: appName,
+      stageValues: {
+        CODE: codeDomainName,
+        PROD: prodDomainName,
+      },
+    });
+    const hostedZoneIdCode = "Z6PRU8YR6TQDK"
+    const hostedZoneIdProd = "Z1EYB4AREPXE3B"
+    const hostedZone = HostedZone.fromHostedZoneAttributes(this, "HostedZone", {
+      zoneName: appsRenderingDomain,
+      hostedZoneId: this.withStageDependentValue({
+        variableName: "hostedZoneId",
+        app: appName,
+        stageValues: {
+          CODE: hostedZoneIdCode,
+          PROD: hostedZoneIdProd,
+        },
+      }),
+    });
+
+    const cfnTemplate = new CfnInclude(this, 'YamlTemplate', {
       templateFile: yamlTemplateFilePath,
       parameters: {
         Stage: GuStageParameter.getInstance(this),
@@ -51,7 +69,10 @@ export class MobileAppsRendering extends GuStack {
       app: "mobile-apps-rendering",
       access: { scope: AccessScope.INTERNAL, cidrRanges: [Peer.ipv4("10.0.0.0/8")] },
       instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MICRO),
-      certificateProps: domainNameProperties,
+      certificateProps: {
+        CODE: { domainName: codeDomainName, hostedZoneId: hostedZoneIdCode},
+        PROD: { domainName: prodDomainName, hostedZoneId: hostedZoneIdProd},
+      },
       monitoringConfiguration: {
         noMonitoring: true
       },
@@ -88,5 +109,18 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
     */
     const asg = appsRenderingApp.autoScalingGroup;
     Tags.of(asg).add("gu:riffraff:new-asg", "true");
+
+    const oldBalancer = cfnTemplate.getResource('LoadBalancer') as CfnLoadBalancer;
+
+    const recordSet = new RecordSet(this, 'DnsRecord', {
+      recordType: RecordType.CNAME,
+      target: RecordTarget.fromValues(oldBalancer.attrDnsName),
+      // TODO: revisit this part.  Just hardcode the CODE environment
+      zone: hostedZone,
+      recordName: appsRenderingDomainName,
+      ttl: Duration.minutes(60)
+    });
+    const defaultChild = recordSet.node.defaultChild as CfnElement;
+    defaultChild.overrideLogicalId('DnsRecord');
   }
 }

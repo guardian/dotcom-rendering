@@ -8,6 +8,7 @@ describe('The MobileAppsRendering stack', () => {
 		const app = new App();
 		const stack = new MobileAppsRendering(app, 'MobileAppsRendering', {
 			stack: 'mobile',
+      recordPrefix: "mobile-rendering",
 		});
 		expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
 	});
@@ -18,6 +19,7 @@ describe('The MobileAppsRenderingPreview stack', () => {
     const app = new App();
     const stack = new MobileAppsRendering(app, 'MobileAppsRenderingPreview', {
       stack: 'mobile-preview',
+      recordPrefix: "mobile-preview-rendering",
     });
     expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
   });
