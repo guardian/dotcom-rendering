@@ -14,6 +14,7 @@ import { Article } from '@root/fixtures/generated/articles/Article';
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
+import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 
 import { extractNAV } from '@root/src/model/extract-nav';
 import { fireAndResetHydrationState } from '@root/src/web/components/HydrateOnce';
@@ -57,6 +58,8 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);
+		// Manually updates the footer DOM because it's not hydrated
+		injectPrivacySettingsLink();
 	}, [ServerCAPI, NAV]);
 	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} format={format} />;
 };
