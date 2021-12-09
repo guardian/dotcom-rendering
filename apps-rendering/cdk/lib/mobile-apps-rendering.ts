@@ -141,7 +141,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 
 		const recordSet = new RecordSet(this, 'DnsRecord', {
 			recordType: RecordType.CNAME,
-			target: RecordTarget.fromValues(oldBalancer.attrDnsName),
+			target: RecordTarget.fromValues(appsRenderingApp.loadBalancer.loadBalancerDnsName),
 			zone: hostedZone,
 			recordName: props.recordPrefix,
 			ttl: Duration.minutes(1),
