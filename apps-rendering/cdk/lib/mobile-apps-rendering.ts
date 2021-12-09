@@ -116,7 +116,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
       recordType: RecordType.CNAME,
       target: RecordTarget.fromValues(oldBalancer.attrDnsName),
       zone: hostedZone,
-      recordName: appsRenderingDomainName,
+      recordName: props.recordPrefix,
       ttl: Duration.minutes(1)
     });
     const defaultChild = recordSet.node.defaultChild as CfnElement;

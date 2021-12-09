@@ -711,16 +711,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           "Fn::Join": Array [
             "",
             Array [
-              Object {
-                "Fn::FindInMap": Array [
-                  "mobileappsrendering",
-                  Object {
-                    "Ref": "Stage",
-                  },
-                  "domainName",
-                ],
-              },
-              ".",
+              "mobile-rendering.",
               Object {
                 "Fn::FindInMap": Array [
                   "mobileappsrendering",
@@ -2533,16 +2524,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           "Fn::Join": Array [
             "",
             Array [
-              Object {
-                "Fn::FindInMap": Array [
-                  "mobileappsrendering",
-                  Object {
-                    "Ref": "Stage",
-                  },
-                  "domainName",
-                ],
-              },
-              ".",
+              "mobile-preview-rendering.",
               Object {
                 "Fn::FindInMap": Array [
                   "mobileappsrendering",
