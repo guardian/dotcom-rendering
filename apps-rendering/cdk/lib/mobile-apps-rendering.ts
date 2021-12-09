@@ -115,10 +115,9 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
     const recordSet = new RecordSet(this, 'DnsRecord', {
       recordType: RecordType.CNAME,
       target: RecordTarget.fromValues(oldBalancer.attrDnsName),
-      // TODO: revisit this part.  Just hardcode the CODE environment
       zone: hostedZone,
       recordName: appsRenderingDomainName,
-      ttl: Duration.minutes(60)
+      ttl: Duration.minutes(1)
     });
     const defaultChild = recordSet.node.defaultChild as CfnElement;
     defaultChild.overrideLogicalId('DnsRecord');
