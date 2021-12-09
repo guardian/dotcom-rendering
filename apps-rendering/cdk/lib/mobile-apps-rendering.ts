@@ -8,6 +8,7 @@ import { InstanceClass, InstanceSize, InstanceType, Peer, Port } from "@aws-cdk/
 import { Stage } from "@guardian/cdk/lib/constants";
 import { RecordSet, RecordType, HostedZone, RecordTarget } from '@aws-cdk/aws-route53';
 import { CfnLoadBalancer } from '@aws-cdk/aws-elasticloadbalancing'
+import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 
 interface AppsStackProps extends GuStackProps {
   recordPrefix: string;
@@ -75,6 +76,15 @@ export class MobileAppsRendering extends GuStack {
       },
       monitoringConfiguration: {
         noMonitoring: true
+      },
+      roleConfiguration: {
+        additionalPolicies: [
+          // Get the list of regions.
+          new GuAllowPolicy(this, 'GetParametersByPath', {
+            resources: ['*'],
+            actions: ['ssm:GetParametersByPath'],
+          }),
+        ],
       },
       userData: `#!/bin/bash -ev
 groupadd mapi

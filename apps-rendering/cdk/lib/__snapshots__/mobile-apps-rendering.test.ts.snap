@@ -774,6 +774,27 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
       },
       "Type": "AWS::IAM::Policy",
     },
+    "GetParametersByPath37B32C62": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "ssm:GetParametersByPath",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GetParametersByPath37B32C62",
+        "Roles": Array [
+          Object {
+            "Ref": "InstanceRoleMobileappsrenderingEC64402A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
     "GuHttpsEgressSecurityGroupMobileappsrendering089F1660": Object {
       "Properties": Object {
         "GroupDescription": "Allow all outbound HTTPS traffic",
@@ -2579,6 +2600,27 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           "Version": "2012-10-17",
         },
         "PolicyName": "GetDistributablePolicyMobileappsrendering8E649036",
+        "Roles": Array [
+          Object {
+            "Ref": "InstanceRoleMobileappsrenderingEC64402A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "GetParametersByPath37B32C62": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "ssm:GetParametersByPath",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "GetParametersByPath37B32C62",
         "Roles": Array [
           Object {
             "Ref": "InstanceRoleMobileappsrenderingEC64402A",
