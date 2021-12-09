@@ -265,7 +265,7 @@ const cardStyles = (
 
 		case RelatedItemType.COMMENT: {
 			return css`
-				background-color: ${opinion[800]};
+				background-color: ${neutral[100]};
 				${headline.xxsmall()}
 			`;
 		}
@@ -302,13 +302,18 @@ const iconStyles = (format: ArticleFormat): SerializedStyles => {
 };
 
 const commentIconStyle: SerializedStyles = css`
-	width: 2rem;
-	height: 1.4375rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	display: inline-block;
 	fill: ${opinion[400]};
-	vertical-align: text-top;
-	margin-top: -3px;
-	margin-right: -2px;
+	vertical-align: text-bottom;
+	margin-bottom: -3px;
+	margin-left: -3px;
+
+	${from.desktop} {
+		width: 1.688rem;
+		height: 1.688rem;
+	}
 `;
 
 const icon = (
@@ -361,6 +366,7 @@ const metadataStyles: SerializedStyles = css`
 
 const bylineStyles: SerializedStyles = css`
 	color: ${opinion[400]};
+	font-style: italic;
 `;
 
 const durationMedia = (
