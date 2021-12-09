@@ -117,6 +117,8 @@ type Palette = {
 		numberedPosition: Colour;
 		overlayedCaption: Colour;
 		pagination: Colour;
+		shareCount: Colour;
+		shareCountUntilDesktop: Colour;
 	};
 	background: {
 		article: Colour;
@@ -137,10 +139,15 @@ type Palette = {
 		carouselDotFocus: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
+		matchNav: Colour;
 	};
 	fill: {
 		commentCount: Colour;
+		commentCountUntilDesktop: Colour;
+		shareCountIcon: Colour;
+		shareCountIconUntilDesktop: Colour;
 		shareIcon: Colour;
+		shareIconGrayBackground: Colour;
 		cameraCaptionIcon: Colour;
 		cardIcon: Colour;
 		richLink: Colour;

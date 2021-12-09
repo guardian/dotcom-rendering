@@ -42,7 +42,6 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
-import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
@@ -63,13 +62,6 @@ import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
-
-import {
-	cmp,
-	onConsentChange,
-	getConsentFor,
-} from '@guardian/consent-management-platform';
-import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import { LabsHeader } from '@root/src/web/components/LabsHeader';
@@ -78,17 +70,13 @@ import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/Uns
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
-import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 
 import {
-	OphanComponentType,
-	OphanAction,
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
-import { trackPerformance } from '../browser/ga/ga';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
@@ -165,10 +153,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	// executing their canShow logic until countryCode is available):
 	const [asyncCountryCode, setAsyncCountryCode] =
 		useState<Promise<CountryCode | null>>();
-
-	const [consentState, setConsentState] = useState<ConsentState | undefined>(
-		undefined,
-	);
 
 	const [brazeMessages, setBrazeMessages] =
 		useState<Promise<BrazeMessagesInterface>>();
@@ -320,96 +304,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			};
 		}
 	}, [CAPI.shouldHideReaderRevenue]);
-
-	// kick off the CMP...
-	useOnce(() => {
-		if (!CAPI.config.switches.consentManagement) return; // CMP turned off!
-
-		// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
-		// mark: CONSENT_TIMING
-		cmp.willShowPrivacyMessage()
-			.then((willShow) => {
-				trackPerformance(
-					'consent',
-					'acquired',
-					willShow ? 'new' : 'existing',
-				);
-			})
-			.catch((e) =>
-				console.error(`CMP willShowPrivacyMessage - error: ${e}`),
-			);
-
-		// Run each time consent is submitted
-		onConsentChange((newConsent) => {
-			setConsentState(newConsent);
-			log('dotcom', 'State: consentState set');
-		});
-
-		// manually updates the footer DOM because it's not hydrated
-		injectPrivacySettingsLink();
-
-		// the UI is injected automatically into the page,
-		// and is not a react component, so it's
-		// handled in here.
-		cmp.init({
-			country: countryCode,
-			pubData: {
-				platform: 'next-gen',
-				browserId: browserId ?? undefined, // if `undefined`, the resulting consent signal cannot be joined to a page view.
-				pageViewId,
-			},
-		});
-		log('dotcom', 'CMP initialised');
-	}, [countryCode, pageViewId, browserId]);
-
-	// This code is executed at first render and then again each time consentState is set
-	useEffect(() => {
-		if (!consentState) return;
-		// Register changes in consent state
-		const decideConsentString = () => {
-			if (consentState.tcfv2) {
-				return consentState.tcfv2?.tcString;
-			}
-			return '';
-		};
-		const componentType: OphanComponentType = 'CONSENT';
-		const consentUUID = getCookie({ name: 'consentUUID' }) || '';
-		const consentString = decideConsentString();
-		const action: OphanAction = 'MANAGE_CONSENT'; // I am using MANAGE_CONSENT as the default action while we develop this code.
-		const event = {
-			component: {
-				componentType,
-				products: [],
-				labels: [consentUUID, consentString],
-			},
-			action,
-		};
-		submitComponentEvent(event);
-	}, [consentState]);
-
-	// ************************
-	// *   Google Analytics   *
-	// ************************
-	useEffect(() => {
-		onConsentChange((state: ConsentState) => {
-			const consentGiven = getConsentFor('google-analytics', state);
-			if (consentGiven) {
-				Promise.all([
-					loadScript('https://www.google-analytics.com/analytics.js'),
-					loadScript(window.guardian.gaPath),
-				])
-					.then(() => {
-						log('dotcom', 'GA script loaded');
-					})
-					.catch((e) => console.error(`GA - error: ${e}`));
-			} else {
-				// We should never be able to directly set things to the global window object.
-				// But in this case we want to stub things for testing, so it's ok to ignore this rule
-				// @ts-ignore
-				window.ga = null;
-			}
-		});
-	}, []);
 
 	useOnce(() => {
 		setBrazeMessages(
@@ -802,21 +696,18 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					<ShareCount
 						ajaxUrl={CAPI.config.ajaxUrl}
 						pageId={CAPI.pageId}
+						format={format}
 					/>
 				</Portal>
 			)}
 			{youTubeAtoms.map((youTubeAtom) => (
-				<HydrateOnce
-					rootId={youTubeAtom.elementId}
-					waitFor={[consentState]}
-				>
+				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
 						format={format}
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
 						adTargeting={adTargeting}
-						consentState={consentState}
 						isMainMedia={false}
 						id={youTubeAtom.id}
 						assetId={youTubeAtom.assetId}

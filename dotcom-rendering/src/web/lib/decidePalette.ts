@@ -97,6 +97,11 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 const textSectionTitle = textSeriesTitle;
 
 const textByline = (format: ArticleFormat): string => {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	)
+		return pillarPalette[format.theme].dark;
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
@@ -531,10 +536,21 @@ const backgroundSpeechBubble = (format: ArticleFormat): string => {
 };
 
 const fillCommentCount = (format: ArticleFormat): string => {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	)
+		return neutral[46];
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	return pillarPalette[format.theme].main;
+};
+
+const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	return fillCommentCount(format);
 };
 
 const fillShareIcon = (format: ArticleFormat): string => {
@@ -542,6 +558,19 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	return pillarPalette[format.theme].main;
+};
+
+const fillShareCountIcon = (): string => {
+	return neutral[46];
+};
+
+const fillShareCountIconUntilDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+	return fillShareCountIcon();
+};
+
+const fillShareIconGrayBackground = (format: ArticleFormat): string => {
+	return pillarPalette[format.theme].dark;
 };
 
 const fillCaptionCamera = (format: ArticleFormat): string =>
@@ -655,6 +684,10 @@ const matchTab = (): string => {
 
 const activeMatchTab = (): string => {
 	return sport[300];
+};
+
+const backgroundMatchNav = (): string => {
+	return '#FFE500';
 };
 
 const borderArticleLinkHover = (format: ArticleFormat): string => {
@@ -804,6 +837,16 @@ const textPagination = (format: ArticleFormat): string => {
 	}
 };
 
+const textShareCount = (): string => {
+	return text.supporting;
+};
+
+const textShareCountUntilDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	return text.supporting;
+};
+
 const borderPagination = (): string => {
 	return neutral[86];
 };
@@ -860,6 +903,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			numberedPosition: textNumberedPosition(),
 			overlayedCaption: textOverlayed(),
 			pagination: textPagination(format),
+			shareCount: textShareCount(),
+			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -880,10 +925,15 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			carouselDotFocus: backgroundCarouselDotFocus(format),
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
+			matchNav: backgroundMatchNav(),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
+			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
 			shareIcon: fillShareIcon(format),
+			shareCountIcon: fillShareCountIcon(),
+			shareCountIconUntilDesktop: fillShareCountIconUntilDesktop(format),
+			shareIconGrayBackground: fillShareIconGrayBackground(format),
 			cameraCaptionIcon: fillCaptionCamera(format),
 			cardIcon: fillCardIcon(format),
 			richLink: fillRichLink(format),

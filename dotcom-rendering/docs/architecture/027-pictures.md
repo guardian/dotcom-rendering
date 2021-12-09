@@ -126,3 +126,24 @@ For Example:
     <img alt="The Palace Theatre, London, showing Harry Potter and the Cursed Child" src="https://i.guim.co.uk/img/media/picture.jpg?width=465&;quality=45&;auto=format&;fit=max&;dpr=2&;s=0492ab78e73c5167d8b4b841e601fbd4" height="1200" width="2000" class="dcr-b5pnrc-css">
 </picture>
 ```
+
+### Immersive Main Media
+
+Immersive main media gets special treatment for images ~ due to 2 unique qualities:
+
+1. Desktop full width - The images will always fill 100vw on all desktop breakpoints
+2. Portrait full height- On portrait devices, filling 100vh must be handled differently
+
+Each of these specific cases are not handled optimally by the original solution. However, immersive main media images often have more content value as they're sometimes the only thing on screen when an article loads, so getting them right is important.
+
+#### Desktop
+
+For regular images, we'll loop through each breakpoint and pick an appropriate source based on the desired width at that breakpoint. This works well on non-responsive (e.g fixed width images) because we know exactly what size image we want at each breakpoint. A side-effect of this is that we always use image sources which exist within the confines of our breakpoints, which can cause a problem for higher screen resolutions.
+
+Our largest breakpoint is 1300px, for a full-width image we then know we'd want a 1300px image. But what if we have a scren larger than that? Say 2000px? Even if we had a 2000px source available to us, we couldn't use it because our largest breakpoint was 1300px.
+
+The solution to this is that rather than looping through each breakpoint, and picking an appropriate image source, we can instead loop through each image source we have (provided by frontend) and use its own width as the breakpoints. This is what you can see in `landscapeImmersiveMainMediaSource` in `Picture.tsx` - by doing this we're taking advantage of the full range of image sources offered to us by Frontend, improving image quality available to larger displays.
+
+#### Mobile / Portrait
+
+Coming soon

@@ -50,4 +50,5 @@ module.exports = {
 	moduleDirectories: ['node_modules', 'src'],
 	snapshotSerializers: ['@emotion/jest/serializer'],
 	transformIgnorePatterns: ['node_modules/(?!@guardian)'],
+	testPathIgnorePatterns: ['cdk/', 'node_modules/'],
 };

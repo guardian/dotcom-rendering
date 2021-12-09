@@ -19,9 +19,6 @@ export const htmlTemplate = ({
 	openGraphData,
 	twitterData,
 	keywords,
-	skipToMainContent,
-	skipToNavigation,
-	skipToKeyEvents,
 }: {
 	title?: string;
 	description: string;
@@ -38,9 +35,6 @@ export const htmlTemplate = ({
 	openGraphData: { [key: string]: string };
 	twitterData: { [key: string]: string };
 	keywords: string;
-	skipToMainContent: string;
-	skipToNavigation: string;
-	skipToKeyEvents?: string;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -286,15 +280,12 @@ https://workforus.theguardian.com/careers/product-engineering/
                 ${loadableConfigScripts.join('\n')}
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>
-                <style>${resets.resetCSS}${css}</style>
+                <style>${resets.resetCSS}</style>
+				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
 			</head>
 
 			<body>
-				${skipToMainContent}
-				${skipToNavigation}
-				${skipToKeyEvents || ''}
-                <div id="react-root"></div>
                 ${html}
                 ${[...lowPriorityScriptTags].join('\n')}
             </body>

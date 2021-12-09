@@ -78,7 +78,7 @@ export const ElementContainer = ({
 				</div>
 			);
 			const style = css`
-				${backgroundColour && setBackgroundColour(backgroundColour)}
+				${backgroundColour && setBackgroundColour(backgroundColour)};
 			`;
 			// Create a react element from the tagName passed in OR
 			// default to <div>
