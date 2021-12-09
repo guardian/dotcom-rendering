@@ -58,6 +58,7 @@ const makeWindowGuardianConfig = (
 			googletag: config.googletagUrl,
 		},
 		switches: config.switches,
+		tests: config.abTests || {},
 		ophan: {
 			pageViewId: '',
 			browserId: '',
