@@ -2,7 +2,13 @@ import type { Image } from '@guardian/apps-rendering-api-models/image';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import { withDefault, andThen, fromNullable, map, OptionKind } from '@guardian/types';
+import {
+	andThen,
+	fromNullable,
+	map,
+	OptionKind,
+	withDefault,
+} from '@guardian/types';
 import {
 	articleContributors,
 	articleMainImage,
