@@ -220,7 +220,7 @@ export const StickyBottomBanner = ({
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
 		const puzzlesBanner = buildPuzzlesBannerConfig({
-			isSignedIn: isSignedIn as boolean,
+			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
 			asyncArticleCount: asyncArticleCount as Promise<
@@ -238,7 +238,7 @@ export const StickyBottomBanner = ({
 			switches,
 		});
 		const readerRevenue = buildReaderRevenueBannerConfig({
-			isSignedIn: isSignedIn as boolean,
+			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
 			asyncArticleCount: asyncArticleCount as Promise<
