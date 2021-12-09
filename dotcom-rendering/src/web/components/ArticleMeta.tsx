@@ -389,7 +389,7 @@ export const ArticleMeta = ({
 					<div
 						className={
 							isInteractive
-								? interactiveLegacyClasses.countIcons
+								? interactiveLegacyClasses.shareAndCommentCounts
 								: ''
 						}
 						css={[
