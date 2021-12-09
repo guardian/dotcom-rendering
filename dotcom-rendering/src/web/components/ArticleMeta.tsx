@@ -387,6 +387,11 @@ export const ArticleMeta = ({
 						/>
 					</div>
 					<div
+						className={
+							isInteractive
+								? interactiveLegacyClasses.shareAndCommentCounts
+								: ''
+						}
 						css={[
 							metaNumbers(palette),
 							format.design === ArticleDesign.LiveBlog &&
