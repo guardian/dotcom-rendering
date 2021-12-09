@@ -6,7 +6,7 @@ import { CommentCount } from './CommentCount';
 import { decidePalette } from '../lib/decidePalette';
 
 describe('CommentCount', () => {
-	const format = {
+	const standardNewsFormat = {
 		theme: ArticlePillar.News,
 		design: ArticleDesign.Standard,
 		display: ArticleDisplay.Standard,
@@ -16,7 +16,7 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={false}
 				commentCount={123}
-				palette={decidePalette(format)}
+				palette={decidePalette(standardNewsFormat)}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -29,7 +29,7 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				commentCount={123}
-				palette={decidePalette(format)}
+				palette={decidePalette(standardNewsFormat)}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -43,7 +43,7 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				commentCount={92878}
-				palette={decidePalette(format)}
+				palette={decidePalette(standardNewsFormat)}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -57,7 +57,7 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				commentCount={0}
-				palette={decidePalette(format)}
+				palette={decidePalette(standardNewsFormat)}
 				setIsExpanded={() => {}}
 			/>,
 		);
@@ -70,7 +70,7 @@ describe('CommentCount', () => {
 		const { getByTestId } = render(
 			<CommentCount
 				isCommentable={true}
-				palette={decidePalette(format)}
+				palette={decidePalette(standardNewsFormat)}
 				setIsExpanded={() => {}}
 			/>,
 		);

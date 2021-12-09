@@ -71,7 +71,7 @@ const stretchLines = css`
 	}
 `;
 
-const metaBorderTopStandfirstStyling = css`
+const borderColourWhenBackgroundDark = css`
 	${until.desktop} {
 		border-top: 1px solid rgba(255, 255, 255, 0.4);
 	}
@@ -367,7 +367,7 @@ export const ArticleMeta = ({
 							metaExtras(palette),
 							format.design === ArticleDesign.LiveBlog &&
 								css(
-									metaBorderTopStandfirstStyling,
+									borderColourWhenBackgroundDark,
 									metaExtrasLiveBlog,
 								),
 						]}
@@ -387,7 +387,7 @@ export const ArticleMeta = ({
 							metaNumbers(palette),
 							format.design === ArticleDesign.LiveBlog &&
 								css(
-									metaBorderTopStandfirstStyling,
+									borderColourWhenBackgroundDark,
 									metaNumbersExtrasLiveBlog,
 								),
 						]}

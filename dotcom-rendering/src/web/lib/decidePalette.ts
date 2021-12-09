@@ -560,11 +560,13 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const fillShareCountIcon = neutral[46];
+const fillShareCountIcon = (): string => {
+	return neutral[46];
+};
 
 const fillShareCountIconUntilDesktop = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
-	return fillShareCountIcon;
+	return fillShareCountIcon();
 };
 
 const fillShareIconGrayBackground = (format: ArticleFormat): string => {
@@ -831,7 +833,9 @@ const textPagination = (format: ArticleFormat): string => {
 	}
 };
 
-const textShareCount = text.supporting;
+const textShareCount = (): string => {
+	return text.supporting;
+};
 
 const textShareCountUntilDesktop = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
@@ -895,7 +899,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			numberedPosition: textNumberedPosition(),
 			overlayedCaption: textOverlayed(),
 			pagination: textPagination(format),
-			shareCount: textShareCount,
+			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 		},
 		background: {
@@ -922,7 +926,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			commentCount: fillCommentCount(format),
 			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
 			shareIcon: fillShareIcon(format),
-			shareCountIcon: fillShareCountIcon,
+			shareCountIcon: fillShareCountIcon(),
 			shareCountIconUntilDesktop: fillShareCountIconUntilDesktop(format),
 			shareIconGrayBackground: fillShareIconGrayBackground(format),
 			cameraCaptionIcon: fillCaptionCamera(format),

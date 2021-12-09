@@ -25,15 +25,6 @@ export const decideLineCount = (design?: ArticleDesign): 8 | 4 => {
 	return 4;
 };
 
-export const decideLineColour = (
-	design?: ArticleDesign,
-): string | undefined => {
-	if (design === ArticleDesign.LiveBlog) {
-		return 'rgba(255, 255, 255, 0.4)';
-	}
-	return undefined;
-};
-
 export const getCurrentPillar = (CAPI: CAPIType): ArticleTheme => {
 	const currentPillar =
 		(CAPI.nav.currentPillarTitle &&

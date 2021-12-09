@@ -16,12 +16,6 @@ describe('ShareCount', () => {
 	const pageId =
 		'/environment/2020/jan/25/court-probe-carrie-symonds-influence-boris-johnson-badger-cull';
 
-	const defaultFormat = {
-		theme: ArticlePillar.Opinion,
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-	};
-
 	beforeEach(() => {
 		useApi.mockReset();
 	});
@@ -35,7 +29,11 @@ describe('ShareCount', () => {
 			<ShareCount
 				ajaxUrl={ajaxUrl}
 				pageId={pageId}
-				format={defaultFormat}
+				format={{
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+				}}
 			/>,
 		);
 
@@ -49,7 +47,11 @@ describe('ShareCount', () => {
 			<ShareCount
 				ajaxUrl={ajaxUrl}
 				pageId={pageId}
-				format={defaultFormat}
+				format={{
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+				}}
 			/>,
 		);
 
@@ -63,7 +65,11 @@ describe('ShareCount', () => {
 			<ShareCount
 				ajaxUrl={ajaxUrl}
 				pageId={pageId}
-				format={defaultFormat}
+				format={{
+					theme: ArticlePillar.Opinion,
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+				}}
 			/>,
 		);
 

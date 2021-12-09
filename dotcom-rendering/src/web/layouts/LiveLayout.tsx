@@ -10,7 +10,7 @@ import {
 	until,
 	space,
 } from '@guardian/source-foundations';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -41,7 +41,6 @@ import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
-	decideLineColour,
 	decideLineCount,
 	decideLineEffect,
 	getCurrentPillar,
@@ -119,7 +118,6 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 						'standfirst'
 						'lines'
 						'meta';
-					grid-column-gap: 0px;
 				}
 				${from.desktop} {
 					grid-template-columns: 220px 1fr;
@@ -483,9 +481,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													format.design,
 													format.theme,
 												)}
-												color={decideLineColour(
-													format.design,
-												)}
+												color={
+													format.design ===
+													ArticleDesign.LiveBlog
+														? 'rgba(255, 255, 255, 0.4)'
+														: undefined
+												}
 											/>
 										</div>
 									</div>
