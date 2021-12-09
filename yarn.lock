@@ -2247,10 +2247,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^22.0.1":
-  version "22.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-22.0.1.tgz#b6b30b0fd28db606b377940e6ffb679787cbace8"
-  integrity sha512-qmrJHhjoQofJ6lLmuxJU5tdfH8dA0W1V+Whxejlk7PlbwiKMuC3ayT8P41D7ZFLRe3Fh1ukMtCqM6dOIrdX2Ww==
+"@guardian/atoms-rendering@^22.1.1":
+  version "22.1.1"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-22.1.1.tgz#a9a8df829ce3fbe12241a593e8f6da739fb0e429"
+  integrity sha512-6a+ZaBqYG8D/I0xwHYY5uEtwY7gRJHAxy1KsgZLSGhKqISYPJRMWfBNK/fOYBQGcoG0Nn8JeVF2FhFsrEBaNyw==
   dependencies:
     youtube-player "^5.5.2"
 
@@ -2264,10 +2264,10 @@
   resolved "https://registry.npmjs.org/@guardian/braze-components/-/braze-components-5.0.0-0.tgz#d2406b55448d6090e957a59fbe7d294f321c3075"
   integrity sha512-0rBJQwjtJxtoQjsO3wJvEH+L/y9kqb+A6pu+VmaDHysA0EsHlTfIhGXf9BSCzPjS4S2grj7lYYA/d8qrlvr0Cw==
 
-"@guardian/commercial-core@^0.26.0":
-  version "0.26.1"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-0.26.1.tgz#e93d900dc31b80678c5d12af3d2811c4563de02f"
-  integrity sha512-VpwN7I/2uZ5TsxJWMQHZ5buT/dkHdCA7RtwGnaoPy6YyjlipR1SjNAUxEeBbZ4+Sz8YPBDmAFAL8+3m/9gnokw==
+"@guardian/commercial-core@^0.32.0":
+  version "0.32.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-0.32.0.tgz#c6cbbd2072e59ac75e0f511e87b26dd762fac3dd"
+  integrity sha512-wPEPy7m2lAk3anNWJl1LjOnE55SDzkbbUKWUuxSA7QoJRdkSr5s0lexnKnANa7wLNiZGcoepoIiqftj1xacuWQ==
 
 "@guardian/consent-management-platform@~6.11.5":
   version "6.11.5"
@@ -4522,7 +4522,7 @@
 
 "@types/serve-static@*":
   version "1.13.10"
-  resolved "https://registry.npmjs.org/@types/serve-static/-/serve-static-1.13.10.tgz#f5e0ce8797d2d7cc5ebeda48a52c96c4fa47a8d9"
+  resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.13.10.tgz#f5e0ce8797d2d7cc5ebeda48a52c96c4fa47a8d9"
   integrity sha512-nCkHGI4w7ZgAdNkrEu0bv+4xNV/XDqW+DydknebMOQwkpDGx8G+HTlj7R7ABI8i8nKxVw0wtKPi1D+lPOkh4YQ==
   dependencies:
     "@types/mime" "^1"

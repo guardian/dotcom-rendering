@@ -162,6 +162,10 @@ const metaContainer = (format: ArticleFormat) => {
 									margin-left: 40px;
 								}
 						  `;
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog: {
+					return '';
+				}
 				default:
 					return defaultMargins;
 			}

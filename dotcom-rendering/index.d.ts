@@ -139,6 +139,7 @@ type Palette = {
 		carouselDotFocus: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
+		matchNav: Colour;
 	};
 	fill: {
 		commentCount: Colour;

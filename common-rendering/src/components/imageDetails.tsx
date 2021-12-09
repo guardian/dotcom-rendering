@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from "@emotion/react";
 import { css } from "@emotion/react";
-import { remSpace } from "@guardian/source-foundations";
+import { between, remSpace } from "@guardian/source-foundations";
 import { brandAlt, neutral } from "@guardian/source-foundations";
 import { textSans } from "@guardian/source-foundations";
 import { SvgCamera } from "@guardian/source-react-components";
@@ -58,6 +58,10 @@ const iconStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	${darkModeCss(supportsDarkMode)`
 		background-color: ${neutral[93]};
 	`}
+
+	${between.mobileLandscape.and.tablet} {
+		right: ${remSpace[5]};
+	}
 `;
 
 const svgStyles: SerializedStyles = css`
