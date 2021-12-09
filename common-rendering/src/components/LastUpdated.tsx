@@ -6,7 +6,7 @@ const LastUpdated = ({
 	lastUpdated,
 }: {
 	lastUpdatedDisplay: string;
-	lastUpdated: number;
+	lastUpdated: Date;
 }) => {
 	return (
 		<div
@@ -18,8 +18,8 @@ const LastUpdated = ({
 			`}
 		>
 			<time
-				data-last-updated={new Date(lastUpdated).toISOString()}
-				dateTime={new Date(lastUpdated).toISOString()}
+				data-last-updated={lastUpdated.toISOString()}
+				dateTime={lastUpdated.toISOString()}
 			>
 				{`Updated: ${lastUpdatedDisplay}`}
 			</time>

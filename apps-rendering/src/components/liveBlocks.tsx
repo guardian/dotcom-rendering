@@ -85,9 +85,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 								block.lastModified.value >
 									block.firstPublished.value && (
 									<LastUpdated
-										lastUpdated={Number(
-											block.lastModified.value,
-										)}
+										lastUpdated={block.lastModified.value}
 										lastUpdatedDisplay={formatLocalTimeDateTz(
 											block.lastModified.value,
 										)}
