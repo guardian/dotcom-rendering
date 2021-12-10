@@ -146,11 +146,6 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};
-
-						a:hover {
-							border-bottom: solid 1px
-								${palette.hover.standfirstLink};
-						}
 					`;
 				default:
 					switch (format.theme) {
@@ -163,9 +158,6 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 								a {
 									color: ${neutral[7]};
 									border-bottom: 1px solid ${neutral[60]};
-								}
-								a:hover {
-									border-bottom: 1px solid ${neutral[7]};
 								}
 							`;
 						default:
@@ -184,13 +176,25 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 	}
 };
 
+const hoverStyles = (palette: Palette) => {
+	return css`
+		a:hover {
+			border-bottom: solid 1px ${palette.hover.standfirstLink};
+		}
+	`;
+};
+
 export const Standfirst = ({ format, standfirst }: Props) => {
 	const palette = decidePalette(format);
 
 	return (
 		<div
 			data-print-layout="hide"
-			css={[nestedStyles(palette), standfirstStyles(format, palette)]}
+			css={[
+				nestedStyles(palette),
+				standfirstStyles(format, palette),
+				hoverStyles(palette),
+			]}
 			className={
 				format.design === ArticleDesign.Interactive
 					? interactiveLegacyClasses.standFirst

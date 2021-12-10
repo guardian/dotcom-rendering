@@ -687,7 +687,14 @@ const textRichLink: (format: ArticleFormat) => string = (format) => {
 };
 
 const hoverStandfirstLink = (format: ArticleFormat): string => {
-	return pillarPalette[format.theme].main;
+	if (format.design === ArticleDesign.DeadBlog)
+		return pillarPalette[format.theme].main;
+	if (format.design === ArticleDesign.LiveBlog) {
+		return pillarPalette[format.theme].dark;
+	}
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[400];
+	return border.secondary;
 };
 
 const borderRichLink: (format: ArticleFormat) => string = (format) => {
