@@ -6,7 +6,10 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { getAllThemes } from '../../../fixtures/manual/articles';
+import {
+	getAllThemes,
+	getThemeFromFormat,
+} from '../../../fixtures/manual/articles';
 import { decidePalette } from '../lib/decidePalette';
 
 import { ArticleTitle } from './ArticleTitle';
@@ -426,19 +429,24 @@ export const ArticleDeadBlogTitle = () => {
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
-				<ArticleTitle
-					// eslint-disable-next-line react/jsx-props-no-spreading
-					{...CAPI}
-					format={format}
-					palette={decidePalette(format)}
-					tags={[
-						{
-							id: '',
-							title: 'Deadblog title',
-							type: 'Blog',
-						},
-					]}
-				/>
+				<div>
+					<p>{getThemeFromFormat(format)}</p>
+					<ArticleTitle
+						// eslint-disable-next-line react/jsx-props-no-spreading
+						{...CAPI}
+						format={format}
+						palette={decidePalette(format)}
+						tags={[
+							{
+								id: '',
+								title: 'Deadblog title',
+								type: 'Blog',
+							},
+						]}
+					/>
+					<br />
+					<br />
+				</div>
 			))}
 		</>
 	);

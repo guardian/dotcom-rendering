@@ -8,7 +8,10 @@ import {
 } from '@guardian/libs';
 import { ArticleMeta } from './ArticleMeta';
 import { decidePalette } from '../lib/decidePalette';
-import { getAllThemes } from '../../../fixtures/manual/articles';
+import {
+	getAllThemes,
+	getThemeFromFormat,
+} from '../../../fixtures/manual/articles';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -310,6 +313,7 @@ export const DeadBlogStory = () => {
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
 				<Container>
+					<p>{getThemeFromFormat(format)}</p>
 					<ArticleMeta
 						format={format}
 						palette={decidePalette(format)}

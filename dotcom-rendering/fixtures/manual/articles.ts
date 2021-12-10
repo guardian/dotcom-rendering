@@ -20,3 +20,9 @@ export const getAllThemes = (format: {
 		{ ...format, theme: ArticleSpecial.Labs },
 	];
 };
+
+export const getThemeFromFormat = (format: ArticleFormat): string => {
+	return format.theme < 5
+		? ArticlePillar[format.theme]
+		: ArticleSpecial[format.theme];
+};
