@@ -10,8 +10,8 @@ function checkForErrors(response: Response) {
 	return response;
 }
 
-const fetcher = (url: string) =>
-	fetch(url)
+const fetcher = (url: string, init?: RequestInit) =>
+	fetch(url, init)
 		.then(checkForErrors)
 		.then((res) => res.json());
 
@@ -27,10 +27,12 @@ interface ApiResponse<T> {
  * returns { loading, error, data }
  * @param {String} url - The url to fetch
  * @param {SWRConfiguration} options - The SWR config object - https://swr.vercel.app/docs/options
+ * @param {RequestInit} init - The fetch init object - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options
  * */
 export const useApi = <T,>(
 	url: string,
 	options?: SWRConfiguration,
+	init?: RequestInit,
 ): ApiResponse<T> => {
 	const { data, error } = useSWR(url, fetcher, options);
 
