@@ -11,7 +11,7 @@ import { WhenAdBlockInUse } from '@frontend/web/components/WhenAdBlockInUse';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
-import { Discussion } from '@frontend/web/components/Discussion';
+import { DiscussionContainer } from '@frontend/web/components/DiscussionContainer';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
@@ -45,7 +45,6 @@ import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
-import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
 import {
@@ -143,7 +142,6 @@ let renderCount = 0;
 export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 	const [isSignedIn, setIsSignedIn] = useState<boolean>();
-	const [user, setUser] = useState<UserProfile | null>();
 	const [countryCode, setCountryCode] = useState<string>();
 	// This is an async version of the countryCode state value defined above.
 	// This can be used where you've got logic which depends on countryCode but
@@ -202,23 +200,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		setIsSignedIn(!!getCookie({ name: 'GU_U', shouldMemoize: true }));
 		log('dotcom', 'State: isSignedIn set');
 	}, []);
-
-	useOnce(() => {
-		// useOnce means this code will only run once isSignedIn is defined, and only
-		// run one time
-		if (isSignedIn) {
-			getUser(CAPI.config.discussionApiUrl)
-				.then((theUser) => {
-					if (theUser) {
-						setUser(theUser);
-						log('dotcom', 'State: user set');
-					}
-				})
-				.catch((e) => console.error(`getUser - error: ${e}`));
-		} else {
-			setUser(null);
-		}
-	}, [isSignedIn, CAPI.config.discussionApiUrl]);
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -674,12 +655,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			<HydrateOnce rootId="links-root" waitFor={[user]}>
+			<HydrateOnce rootId="links-root">
 				<Links
 					supporterCTA={CAPI.nav.readerRevenueLinks.header.supporter}
-					userId={user ? user.userId : undefined}
 					idUrl={CAPI.config.idUrl}
 					mmaUrl={CAPI.config.mmaUrl}
+					discussionApiUrl={CAPI.config.discussionApiUrl}
 				/>
 			</HydrateOnce>
 			<HydrateOnce rootId="edition-root">
@@ -1200,13 +1181,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					pageViewId={pageViewId}
 				/>
 			</Portal>
-			<HydrateOnce rootId="comments" waitFor={[user]}>
-				<Discussion
+			<HydrateOnce rootId="comments">
+				<DiscussionContainer
 					format={format}
 					discussionApiUrl={CAPI.config.discussionApiUrl}
 					shortUrlId={CAPI.config.shortUrlId}
 					isCommentable={CAPI.isCommentable}
-					user={user || undefined}
 					discussionD2Uid={CAPI.config.discussionD2Uid}
 					discussionApiClientHeader={
 						CAPI.config.discussionApiClientHeader

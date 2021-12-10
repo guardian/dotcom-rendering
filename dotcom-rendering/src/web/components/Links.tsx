@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useApi } from '@root/src/web/lib/useApi';
 import { css } from '@emotion/react';
 
 import SearchIcon from '@frontend/static/icons/search.svg';
@@ -15,15 +15,14 @@ import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
-import { useOnce } from '@frontend/web/lib/useOnce';
-import { getCookie } from '@guardian/libs';
+import { getCookie, joinUrl } from '@guardian/libs';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
 	supporterCTA: string;
-	userId?: string;
 	idUrl?: string;
 	mmaUrl?: string;
+	discussionApiUrl?: string;
 };
 
 const linkStyles = css`
@@ -135,34 +134,21 @@ const linksStyles = css`
 	}
 `;
 
-export const Links = ({
-	userId,
-	supporterCTA,
-	idUrl: idUrlFromConfig,
-	mmaUrl: mmaUrlFromConfig,
-}: Props) => {
-	const [showSupporterCTA, setShowSupporterCTA] = useState<boolean>();
-	const [userIsDefined, setUserIsDefined] = useState<boolean>();
+const MyAccount = ({
+	mmaUrl,
+	idUrl,
+	discussionApiUrl,
+}: {
+	mmaUrl: string;
+	idUrl: string;
+	discussionApiUrl: string;
+}) => {
+	const { data } = useApi<UserProfile>(
+		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
+	);
 
-	// show supporter CTA if support messaging isn't shown
-	useEffect(() => {
-		setShowSupporterCTA(
-			getCookie({
-				name: 'gu_hide_support_messaging',
-				shouldMemoize: true,
-			}) === 'true',
-		);
-	}, []);
-
-	// we intentionally re-render here because we know the DOM structure could be different
-	// from the server rendered version. This forces a full validation
-	useOnce(() => {
-		setUserIsDefined(!!userId);
-	}, [userId]);
-
-	// Fall back on prod URLs just in case these aren't set for any reason
-	const idUrl = idUrlFromConfig || 'https://profile.theguardian.com';
-	const mmaUrl = mmaUrlFromConfig || 'https://manage.theguardian.com';
+	// Handle loading state
+	if (!data) return null;
 
 	const identityLinks: DropdownLinkType[] = [
 		{
@@ -191,7 +177,7 @@ export const Links = ({
 			dataLinkName: 'nav2 : topbar : help',
 		},
 		{
-			url: `${idUrl}/user/id/${userId}`,
+			url: `${idUrl}/user/id/${data.userId}`,
 			title: 'Comments & replies',
 			dataLinkName: 'nav2 : topbar : comment activity',
 		},
@@ -201,6 +187,35 @@ export const Links = ({
 			dataLinkName: 'nav2 : topbar : sign out',
 		},
 	];
+
+	return (
+		<div css={linkStyles}>
+			<ProfileIcon />
+			<Dropdown
+				label="My account"
+				links={identityLinks}
+				id="my-account"
+				dataLinkName="nav2 : topbar: my account"
+			/>
+		</div>
+	);
+};
+
+export const Links = ({
+	supporterCTA,
+	idUrl = 'https://profile.theguardian.com',
+	mmaUrl = 'https://manage.theguardian.com',
+	discussionApiUrl = 'https://discussion.theguardian.com/discussion-api',
+}: Props) => {
+	// show supporter CTA if support messaging isn't shown
+	const showSupporterCTA =
+		getCookie({
+			name: 'gu_hide_support_messaging',
+			shouldMemoize: true,
+		}) === 'true';
+
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+
 	return (
 		<div data-print-layout="hide" css={linksStyles}>
 			{showSupporterCTA && supporterCTA !== '' && (
@@ -226,16 +241,12 @@ export const Links = ({
 			</a>
 			<div css={seperatorHideStyles} />
 
-			{userIsDefined ? (
-				<div css={linkStyles}>
-					<ProfileIcon />
-					<Dropdown
-						label="My account"
-						links={identityLinks}
-						id="my-account"
-						dataLinkName="nav2 : topbar: my account"
-					/>
-				</div>
+			{isSignedIn ? (
+				<MyAccount
+					mmaUrl={mmaUrl}
+					idUrl={idUrl}
+					discussionApiUrl={discussionApiUrl}
+				/>
 			) : (
 				<a
 					css={linkStyles}

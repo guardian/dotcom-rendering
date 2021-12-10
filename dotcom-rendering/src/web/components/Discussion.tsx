@@ -18,7 +18,7 @@ import { joinUrl } from '@root/src/lib/joinUrl';
 import { useDiscussion } from '@root/src/web/lib/useDiscussion';
 import { decidePalette } from '../lib/decidePalette';
 
-type Props = {
+export type Props = {
 	format: ArticleFormat;
 	discussionApiUrl: string;
 	shortUrlId: string;
