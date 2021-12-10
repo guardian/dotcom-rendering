@@ -51,7 +51,13 @@ type CommentType = {
 };
 
 export const useDiscussion = (url: string) => {
-	const { data } = useApi<DiscussionResponse>(url);
+	const { data } = useApi<DiscussionResponse>(
+		url,
+		{},
+		{
+			credentials: 'include',
+		},
+	);
 
 	return {
 		commentCount: data?.discussion?.commentCount,
