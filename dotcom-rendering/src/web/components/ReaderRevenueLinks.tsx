@@ -269,7 +269,18 @@ const ReaderRevenueLinksRemote: React.FC<{
 	return null;
 };
 
-const ReaderRevenueLinksNative: React.FC<Props> = ({
+const ReaderRevenueLinksNative: React.FC<{
+	edition: Edition;
+	dataLinkNamePrefix: string;
+	inHeader: boolean;
+	urls: {
+		subscribe: string;
+		support: string;
+		contribute: string;
+	};
+	ophanRecord: OphanRecordFunction;
+	pageViewId: string;
+}> = ({
 	edition,
 	dataLinkNamePrefix,
 	inHeader,
@@ -406,12 +417,9 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 	return (
 		<ReaderRevenueLinksNative
 			edition={edition}
-			countryCode={countryCode}
 			dataLinkNamePrefix={dataLinkNamePrefix}
 			inHeader={inHeader}
-			remoteHeaderEnabled={remoteHeaderEnabled}
 			urls={urls}
-			contributionsServiceUrl={contributionsServiceUrl}
 			ophanRecord={ophanRecord}
 			pageViewId={pageViewId}
 		/>
