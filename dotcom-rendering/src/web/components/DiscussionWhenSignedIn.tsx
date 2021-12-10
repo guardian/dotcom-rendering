@@ -1,8 +1,9 @@
+import { joinUrl } from '@guardian/libs';
 import { Discussion } from '@frontend/web/components/Discussion';
 import type { Props as DiscussionProps } from '@frontend/web/components/Discussion';
 import { useApi } from '../lib/useApi';
-import { joinUrl } from '@guardian/libs';
 
+// eslint-disable-next-line react/destructuring-assignment
 export const DiscussionWhenSignedIn = (props: DiscussionProps) => {
 	const { data } = useApi<UserProfile>(
 		joinUrl(
