@@ -8,6 +8,10 @@ export const DiscussionWhenSignedIn = (props: DiscussionProps) => {
 	const { discussionApiUrl } = props;
 	const { data } = useApi<UserProfile>(
 		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
+		{},
+		{
+			credentials: 'include',
+		},
 	);
 	if (!data) return null;
 	// eslint-disable-next-line react/jsx-props-no-spreading

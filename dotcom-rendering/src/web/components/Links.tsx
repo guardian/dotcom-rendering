@@ -145,6 +145,10 @@ const MyAccount = ({
 }) => {
 	const { data } = useApi<UserProfile>(
 		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
+		{},
+		{
+			credentials: 'include',
+		},
 	);
 
 	// Handle loading state
