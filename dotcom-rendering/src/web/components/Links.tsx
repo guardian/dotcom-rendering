@@ -143,13 +143,14 @@ const MyAccount = ({
 	idUrl: string;
 	discussionApiUrl: string;
 }) => {
-	const { data } = useApi<UserProfile>(
+	const { data, loading, error } = useApi<UserProfile>(
 		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
 		{},
 		{
 			credentials: 'include',
 		},
 	);
+	console.log({ loading, error, data });
 
 	// Handle loading state
 	if (!data) return null;
@@ -192,6 +193,8 @@ const MyAccount = ({
 		},
 	];
 
+	console.log('identityLinks', identityLinks);
+
 	return (
 		<div css={linkStyles}>
 			<ProfileIcon />
@@ -222,6 +225,8 @@ export const Links = ({
 
 	const isSignedIn =
 		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
+
+	console.log('isSignedIn', isSignedIn);
 
 	return (
 		<div data-print-layout="hide" css={linksStyles}>
