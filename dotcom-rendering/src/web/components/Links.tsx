@@ -208,13 +208,16 @@ export const Links = ({
 	discussionApiUrl = 'https://discussion.theguardian.com/discussion-api',
 }: Props) => {
 	// show supporter CTA if support messaging isn't shown
+	const isServer = typeof window === 'undefined';
 	const showSupporterCTA =
+		!isServer &&
 		getCookie({
 			name: 'gu_hide_support_messaging',
 			shouldMemoize: true,
 		}) === 'true';
 
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn =
+		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
 	return (
 		<div data-print-layout="hide" css={linksStyles}>
