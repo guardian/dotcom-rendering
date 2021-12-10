@@ -3,6 +3,7 @@
 import { metrics } from 'client/metrics';
 import { metricsClient } from 'native/nativeApi';
 import interactives from './interactives';
+import newsletterEmbedIframe from '@guardian/common-rendering/src/newsletterEmbedIframe';
 
 // ----- Procedures ----- //
 
@@ -39,11 +40,16 @@ function platformCSS(): void {
 	document.body.classList.add(getPlatformClass());
 }
 
+function setupNewsletterEmbedIframeResizeListener(): void {
+	newsletterEmbedIframe('.email-sub__iframe')();
+}
+
 function setup(): void {
 	performanceMetrics();
 	interactives();
 	twitter();
 	platformCSS();
+	setupNewsletterEmbedIframeResizeListener();
 }
 
 // ----- Exports ----- //
