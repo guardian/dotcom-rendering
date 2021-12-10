@@ -144,7 +144,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [user, setUser] = useState<UserProfile | null>();
-	const [countryCode, setCountryCode] = useState<string>();
 	// This is an async version of the countryCode state value defined above.
 	// This can be used where you've got logic which depends on countryCode but
 	// don't want to block on it becoming available, as you would with the
@@ -209,14 +208,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		const callFetch = () => {
 			const countryCodePromise = getLocaleCode();
 			setAsyncCountryCode(countryCodePromise);
-			countryCodePromise
-				.then((cc) => {
-					setCountryCode(cc || '');
-					log('dotcom', 'State: countryCode set');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${e}`),
-				);
 		};
 		callFetch();
 	}, []);
@@ -643,7 +634,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
-					countryCode={countryCode}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
 					remoteHeaderEnabled={CAPI.config.remoteHeader}
@@ -1099,7 +1089,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			)}
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
-					countryCode={countryCode}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
 					sectionId={CAPI.config.section}
@@ -1203,7 +1192,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					<ReaderRevenueLinks
 						urls={CAPI.nav.readerRevenueLinks.footer}
 						edition={CAPI.editionId}
-						countryCode={countryCode}
 						dataLinkNamePrefix="footer : "
 						inHeader={false}
 						remoteHeaderEnabled={false}

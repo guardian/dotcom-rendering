@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { css } from '@emotion/react';
 
+import { getLocaleCode } from '@root/src/web/lib/getCountryCode';
 import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import {
 	space,
@@ -36,7 +37,6 @@ import { useOnce } from '@root/src/web/lib/useOnce';
 
 type Props = {
 	edition: Edition;
-	countryCode?: string;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
 	remoteHeaderEnabled: boolean;
@@ -394,7 +394,6 @@ const ReaderRevenueLinksNative: React.FC<{
 
 export const ReaderRevenueLinks: React.FC<Props> = ({
 	edition,
-	countryCode,
 	dataLinkNamePrefix,
 	inHeader,
 	remoteHeaderEnabled,
@@ -403,6 +402,21 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 	ophanRecord,
 	pageViewId = '',
 }: Props) => {
+	const [countryCode, setCountryCode] = useState<string>();
+
+	useEffect(() => {
+		const callFetch = () => {
+			getLocaleCode()
+				.then((cc) => {
+					setCountryCode(cc || '');
+				})
+				.catch((e) =>
+					console.error(`countryCodePromise - error: ${e}`),
+				);
+		};
+		callFetch();
+	}, []);
+
 	if (inHeader && remoteHeaderEnabled) {
 		return (
 			<ReaderRevenueLinksRemote
