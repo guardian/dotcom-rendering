@@ -5,11 +5,9 @@ import { useApi } from '../lib/useApi';
 
 // eslint-disable-next-line react/destructuring-assignment
 export const DiscussionWhenSignedIn = (props: DiscussionProps) => {
+	const { discussionApiUrl } = props;
 	const { data } = useApi<UserProfile>(
-		joinUrl(
-			props.discussionApiUrl,
-			'profile/me?strict_sanctions_check=false',
-		),
+		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
 	);
 	if (!data) return null;
 	// eslint-disable-next-line react/jsx-props-no-spreading
