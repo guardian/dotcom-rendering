@@ -306,10 +306,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	}, [CAPI.shouldHideReaderRevenue]);
 
 	useOnce(() => {
-		setBrazeMessages(
-			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
-		);
-	}, [isSignedIn, CAPI.config.idApiUrl]);
+		setBrazeMessages(buildBrazeMessages(CAPI.config.idApiUrl));
+	}, [CAPI.config.idApiUrl]);
 
 	const display: ArticleDisplay = decideDisplay(CAPI.format);
 	const design: ArticleDesign = decideDesign(CAPI.format);
