@@ -11,5 +11,6 @@ export const DiscussionWhenSignedIn = (props: DiscussionProps) => {
 		),
 	);
 	if (!data) return null;
+	// eslint-disable-next-line react/jsx-props-no-spreading
 	return <Discussion user={data} {...props} />;
 };
