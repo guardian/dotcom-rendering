@@ -1,9 +1,9 @@
 // ----- Imports ----- //
 
+import newsletterEmbedIframe from '@guardian/common-rendering/src/newsletterEmbedIframe';
 import { metrics } from 'client/metrics';
 import { metricsClient } from 'native/nativeApi';
 import interactives from './interactives';
-import newsletterEmbedIframe from '@guardian/common-rendering/src/newsletterEmbedIframe';
 
 // ----- Procedures ----- //
 
@@ -41,7 +41,7 @@ function platformCSS(): void {
 }
 
 function setupNewsletterEmbedIframeResizeListener(): void {
-	newsletterEmbedIframe('.email-sub__iframe')();
+	void newsletterEmbedIframe('.email-sub__iframe')();
 }
 
 function setup(): void {
