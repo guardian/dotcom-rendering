@@ -143,7 +143,7 @@ const MyAccount = ({
 	idUrl: string;
 	discussionApiUrl: string;
 }) => {
-	const { data } = useApi<UserProfile>(
+	const { data } = useApi<{ userProfile: UserProfile }>(
 		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
 		{},
 		{
@@ -181,7 +181,7 @@ const MyAccount = ({
 			dataLinkName: 'nav2 : topbar : help',
 		},
 		{
-			url: `${idUrl}/user/id/${data.userId}`,
+			url: `${idUrl}/user/id/${data.userProfile.userId}`,
 			title: 'Comments & replies',
 			dataLinkName: 'nav2 : topbar : comment activity',
 		},
