@@ -8,6 +8,7 @@ import {
 
 import { css } from '@emotion/react';
 import { decidePalette } from '../lib/decidePalette';
+import { getAllThemes } from '../../../fixtures/manual/articles';
 
 import { SubMeta } from './SubMeta';
 
@@ -242,3 +243,28 @@ export const SpecialReport = () => {
 	);
 };
 SpecialReport.story = { name: 'SpecialReport' };
+
+export const DeadBlogStory = () => {
+	return (
+		<>
+			{getAllThemes({
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+			}).map((format) => (
+				<Container>
+					<SubMeta
+						palette={decidePalette(format)}
+						format={format}
+						subMetaKeywordLinks={subMetaKeywordLinks}
+						subMetaSectionLinks={subMetaSectionLinks}
+						pageId=""
+						webUrl=""
+						webTitle=""
+						showBottomSocialButtons={true}
+					/>
+				</Container>
+			))}
+		</>
+	);
+};
+DeadBlogStory.story = { name: 'Deadblog - All pillars' };
