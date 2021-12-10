@@ -269,7 +269,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 	return null;
 };
 
-export const ReaderRevenueLinksNative: React.FC<Props> = ({
+const ReaderRevenueLinksNative: React.FC<Props> = ({
 	edition,
 	dataLinkNamePrefix,
 	inHeader,
