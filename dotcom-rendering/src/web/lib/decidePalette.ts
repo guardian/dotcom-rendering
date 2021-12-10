@@ -715,6 +715,17 @@ const textRichLink: (format: ArticleFormat) => string = (format) => {
 	return pillarPalette[ArticlePillar.News][400];
 };
 
+const hoverStandfirstLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.DeadBlog)
+		return pillarPalette[format.theme].main;
+	if (format.design === ArticleDesign.LiveBlog) {
+		return pillarPalette[format.theme].dark;
+	}
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[400];
+	return border.secondary;
+};
+
 const borderRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
 		return pillarPalette[format.theme].main;
@@ -963,6 +974,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
 			pagination: hoverPagination(format),
+			standfirstLink: hoverStandfirstLink(format),
 		},
 	};
 };
