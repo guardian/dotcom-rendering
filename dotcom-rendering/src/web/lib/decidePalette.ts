@@ -564,6 +564,8 @@ const fillCommentCount = (format: ArticleFormat): string => {
 
 const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+	if (format.design === ArticleDesign.DeadBlog)
+		return blogsGrayBackgroundPalette(format);
 
 	return fillCommentCount(format);
 };
