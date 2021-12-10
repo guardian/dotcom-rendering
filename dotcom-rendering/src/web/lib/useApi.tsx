@@ -1,5 +1,4 @@
 import useSWR, { SWRConfiguration } from 'swr';
-import { Fetcher } from 'swr/dist/types';
 
 function checkForErrors(response: Response) {
 	if (!response.ok) {
@@ -11,7 +10,7 @@ function checkForErrors(response: Response) {
 	return response;
 }
 
-const fetcher = (url: string, init?: RequestInit) =>
+const fetcher = (init?: RequestInit) => (url: string) =>
 	fetch(url, init)
 		.then(checkForErrors)
 		.then((res) => res.json());
@@ -35,11 +34,7 @@ export const useApi = <T,>(
 	options?: SWRConfiguration,
 	init?: RequestInit,
 ): ApiResponse<T> => {
-	const fetcherWithInit =
-		(init?: RequestInit): Fetcher<T> =>
-		(url: string) =>
-			fetcher(url, init);
-	const { data, error } = useSWR(url, fetcherWithInit(init), options);
+	const { data, error } = useSWR(url, fetcher(init), options);
 
 	return {
 		data,
