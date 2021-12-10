@@ -2286,21 +2286,21 @@
     react-focus-lock "^2.2.1"
     timeago.js "^4.0.2"
 
-"@guardian/eslint-plugin-source-foundations@^4.0.0-rc.2":
-  version "4.0.0-rc.2"
-  resolved "https://registry.npmjs.org/@guardian/eslint-plugin-source-foundations/-/eslint-plugin-source-foundations-4.0.0-rc.2.tgz#d23cea44f813359ff17b0ce112e91fc8ec64039d"
-  integrity sha512-/8RG90FYsJeSmJBEO6fd//9m06ZFE0wB0RtaenZ/zCnoy+YrfY1x0y/mV7s9UN6NrzqI8WuDRZmDRDV5li3DNQ==
+"@guardian/eslint-plugin-source-foundations@^4.0.0-rc.3":
+  version "4.0.0-rc.3"
+  resolved "https://registry.npmjs.org/@guardian/eslint-plugin-source-foundations/-/eslint-plugin-source-foundations-4.0.0-rc.3.tgz#9465ce8d316499c1d1f46ead04d9abfdc680d130"
+  integrity sha512-zLCBDIkP7ollMlnDopI2EiSGn0Tsn+K75wOxBk62UQPZuWqyMD+RRhGuQ8NdYjPdy7EuzRt7jHF1K0F3TeysBw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "4.33.0"
     "@typescript-eslint/parser" "4.29.2"
     eslint-plugin-import "2.24.0"
 
-"@guardian/eslint-plugin-source-react-components@^4.0.0-rc.2":
-  version "4.0.0-rc.2"
-  resolved "https://registry.npmjs.org/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-4.0.0-rc.2.tgz#93254bbcda6ff2a73a62f371e1a6bcd96e8a5380"
-  integrity sha512-Bpxs1OmMsca3Z8ERcby5E9VZ2+qGpJttc8p8MX01glbxfSfwNmS491Jfbju8glW3SrYNbF9tbap340WlBRTWnQ==
+"@guardian/eslint-plugin-source-react-components@^4.0.0-rc.3":
+  version "4.0.0-rc.3"
+  resolved "https://registry.npmjs.org/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-4.0.0-rc.3.tgz#97e044b9bcf4ac430f2d9f0b4837ac1db3a787fb"
+  integrity sha512-QLoy7NqgKG4puiXHCtAB8sjYe/wP/XaRgjNtIOJuFmdZ2HR/xfECf0sBcoVodKsSxb9EKHdag/GmspDWpcojrQ==
   dependencies:
-    "@guardian/eslint-plugin-source-foundations" "^4.0.0-rc.2"
+    "@guardian/eslint-plugin-source-foundations" "^4.0.0-rc.3"
     "@typescript-eslint/eslint-plugin" "4.29.2"
     "@typescript-eslint/parser" "4.29.2"
 
@@ -2326,10 +2326,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@guardian/source-foundations@^4.0.0-rc.3":
-  version "4.0.0-rc.3"
-  resolved "https://registry.npmjs.org/@guardian/source-foundations/-/source-foundations-4.0.0-rc.3.tgz#f3410e809541bee328d8d4936328dc3aa2572ea1"
-  integrity sha512-NEz7RAtUE6qCFyTgFCYvya7YkXLVzyMnCMe+SJzA4n6guFEmUWWLNzmc1c4FULzDaInt10F4wTaMDTGfRxvzpw==
+"@guardian/source-foundations@^4.0.0-rc.5":
+  version "4.0.0-rc.5"
+  resolved "https://registry.npmjs.org/@guardian/source-foundations/-/source-foundations-4.0.0-rc.5.tgz#be6648111b14943a3f212004e324534b41941282"
+  integrity sha512-XGgcpP2BAHCeEog7UjUlvzPpNcZGHMUnD9NQS8F1+w35yQ5lz6fG0te/ZZm5y5i6a0Jq5utJ2ppFC7y94fjmTA==
   dependencies:
     mini-svg-data-uri "^1.3.3"
 
@@ -2338,10 +2338,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-1.0.0-rc.1.tgz#399fe021d1575fa86d036c305e96494a180ae0d1"
   integrity sha512-2oDvN7z7JLTEtbkf2hXFQ9BpOABRTOiH/HhgMRr7KmwBkFFP5y01E+/MZ7m8F63KrXMoseLPA1DtZYAZBaeZ/g==
 
-"@guardian/source-react-components@^4.0.0-rc.2":
-  version "4.0.0-rc.2"
-  resolved "https://registry.npmjs.org/@guardian/source-react-components/-/source-react-components-4.0.0-rc.2.tgz#e306ad26cf155a67b8c26c21c038e8ae99c08065"
-  integrity sha512-H5Y80aAKP9G3pj1Cj3ygd5mP0GbwE6lI91l98yOTh6I1yfcthEzP4faCLKYVn9UvKexHwEhBEjjj8W99YmnfTQ==
+"@guardian/source-react-components@^4.0.0-rc.3":
+  version "4.0.0-rc.3"
+  resolved "https://registry.npmjs.org/@guardian/source-react-components/-/source-react-components-4.0.0-rc.3.tgz#ef1faccad3e6a9816472e8546864fe72fd4d2780"
+  integrity sha512-QBpfqS4TqnEzDHmebtZDPj1kof8RVizyu5jTC0JWuv0n1lja9385bQkVwMQyr2av1f8JvOE+LHv8lUdagtJgPw==
 
 "@guardian/types@^9.0.1":
   version "9.0.1"
