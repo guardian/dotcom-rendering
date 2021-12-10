@@ -7,7 +7,6 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
-import { WhenAdBlockInUse } from '@frontend/web/components/WhenAdBlockInUse';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
@@ -802,15 +801,13 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				Note. We specifically say isSignedIn === false so that we prevent render until the cookie has been
 				checked to avoid flashing this content
 			*/}
-			{!CAPI.shouldHideReaderRevenue &&
-				!CAPI.pageType.isPaidContent &&
-				isSignedIn === false && (
-					<WhenAdBlockInUse>
-						<Portal rootId="top-right-ad-slot">
-							<ContributionSlot />
-						</Portal>
-					</WhenAdBlockInUse>
-				)}
+
+			<Portal rootId="top-right-ad-slot">
+				<ContributionSlot
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isPaidContent={CAPI.pageType.isPaidContent}
+				/>
+			</Portal>
 			{richLinks.map((richLink, index) => (
 				<Portal rootId={richLink.elementId}>
 					<RichLinkComponent
