@@ -11,6 +11,7 @@ import {
 
 import { CommentCount } from './CommentCount';
 import { decidePalette } from '../lib/decidePalette';
+import { getAllThemes } from '../../../fixtures/manual/articles';
 
 export default {
 	component: CommentCount,
@@ -135,3 +136,36 @@ export const Undefined = () => {
 	);
 };
 Undefined.story = { name: 'with count undefined' };
+
+export const DeadBlog = () => {
+	return (
+		<>
+			{getAllThemes({
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+			}).map((format) => (
+				<div
+					css={css`
+						display: flex;
+						flex-direction: row;
+						align-items: flex-start;
+						width: 480px;
+					`}
+				>
+					<CommentCount
+						isCommentable={true}
+						setIsExpanded={() => {}}
+						commentCount={1154}
+						palette={decidePalette(format)}
+					/>
+				</div>
+			))}
+		</>
+	);
+};
+DeadBlog.story = {
+	name: 'Deadblog - All pillars',
+	viewport: {
+		defaultViewport: 'tablet',
+	},
+};
