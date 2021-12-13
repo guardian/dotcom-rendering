@@ -34,7 +34,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { DiscussionContainer } from '@frontend/web/components/DiscussionContainer';
+import { Discussion } from '@frontend/web/components/Discussion';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -622,7 +622,7 @@ export const CommentLayout = ({
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">
-						<DiscussionContainer
+						<Discussion
 							discussionApiUrl={CAPI.config.discussionApiUrl}
 							shortUrlId={CAPI.config.shortUrlId}
 							isCommentable={CAPI.isCommentable}
@@ -631,9 +631,7 @@ export const CommentLayout = ({
 							discussionApiClientHeader={
 								CAPI.config.discussionApiClientHeader
 							}
-							enableDiscussionSwitch={
-								CAPI.config.switches.enableDiscussionSwitch
-							}
+							enableDiscussionSwitch={false}
 							isAdFreeUser={CAPI.isAdFreeUser}
 							shouldHideAds={CAPI.shouldHideAds}
 							beingHydrated={false}

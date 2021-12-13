@@ -27,7 +27,7 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Caption } from '@root/src/web/components/Caption';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
-import { DiscussionContainer } from '@frontend/web/components/DiscussionContainer';
+import { Discussion } from '@frontend/web/components/Discussion';
 import { Hide } from '@root/src/web/components/Hide';
 import { GuardianLabsLines } from '@frontend/web/components/GuardianLabsLines';
 
@@ -456,7 +456,7 @@ export const ImmersiveLayout = ({
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">
-						<DiscussionContainer
+						<Discussion
 							discussionApiUrl={CAPI.config.discussionApiUrl}
 							shortUrlId={CAPI.config.shortUrlId}
 							isCommentable={CAPI.isCommentable}
@@ -465,9 +465,7 @@ export const ImmersiveLayout = ({
 							discussionApiClientHeader={
 								CAPI.config.discussionApiClientHeader
 							}
-							enableDiscussionSwitch={
-								CAPI.config.switches.enableDiscussionSwitch
-							}
+							enableDiscussionSwitch={false}
 							isAdFreeUser={CAPI.isAdFreeUser}
 							shouldHideAds={CAPI.shouldHideAds}
 							beingHydrated={false}

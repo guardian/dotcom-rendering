@@ -36,7 +36,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { DiscussionContainer } from '@frontend/web/components/DiscussionContainer';
+import { Discussion } from '@frontend/web/components/Discussion';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
@@ -572,7 +572,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						sectionId="comments"
 						element="section"
 					>
-						<DiscussionContainer
+						<Discussion
 							discussionApiUrl={CAPI.config.discussionApiUrl}
 							shortUrlId={CAPI.config.shortUrlId}
 							isCommentable={CAPI.isCommentable}
@@ -581,9 +581,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							discussionApiClientHeader={
 								CAPI.config.discussionApiClientHeader
 							}
-							enableDiscussionSwitch={
-								CAPI.config.switches.enableDiscussionSwitch
-							}
+							enableDiscussionSwitch={false}
 							isAdFreeUser={CAPI.isAdFreeUser}
 							shouldHideAds={CAPI.shouldHideAds}
 							beingHydrated={false}

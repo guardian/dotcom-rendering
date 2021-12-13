@@ -5,9 +5,7 @@ import type { Props as DiscussionProps } from '@frontend/web/components/Discussi
 
 // eslint-disable-next-line react/destructuring-assignment
 export const DiscussionContainer = (props: DiscussionProps) => {
-	const isSignedIn =
-		typeof window !== 'undefined' &&
-		!!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	// eslint-disable-next-line react/jsx-props-no-spreading
 	if (isSignedIn) return <DiscussionWhenSignedIn {...props} />;
 	// eslint-disable-next-line react/jsx-props-no-spreading
