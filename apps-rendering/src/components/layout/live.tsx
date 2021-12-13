@@ -62,6 +62,14 @@ const metadataWrapperStyles = css`
 	background-color: ${news[200]};
 `;
 
+const keyEventsWrapperStyles = css`
+	${from.desktop} {
+		position: sticky;
+		top: 10px;
+		margin-bottom: 12px;
+	}
+`;
+
 const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 	blocks.reduce<KeyEvent[]>(
 		(events, block) =>
@@ -92,11 +100,13 @@ const Live: FC<Props> = ({ item }) => (
 				</div>
 			</GridItem>
 			<GridItem area="key-events">
-				<KeyEvents
-					keyEvents={keyEvents(item.blocks)}
-					theme={item.theme}
-					supportsDarkMode
-				/>
+				<div css={keyEventsWrapperStyles}>
+					<KeyEvents
+						keyEvents={keyEvents(item.blocks)}
+						theme={item.theme}
+						supportsDarkMode
+					/>
+				</div>
 			</GridItem>
 			<GridItem area="main-media">
 				<HeaderMedia item={item} />

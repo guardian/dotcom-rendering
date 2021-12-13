@@ -117,6 +117,8 @@ type Palette = {
 		numberedPosition: Colour;
 		overlayedCaption: Colour;
 		pagination: Colour;
+		shareCount: Colour;
+		shareCountUntilDesktop: Colour;
 	};
 	background: {
 		article: Colour;
@@ -141,7 +143,11 @@ type Palette = {
 	};
 	fill: {
 		commentCount: Colour;
+		commentCountUntilDesktop: Colour;
+		shareCountIcon: Colour;
+		shareCountIconUntilDesktop: Colour;
 		shareIcon: Colour;
+		shareIconGrayBackground: Colour;
 		cameraCaptionIcon: Colour;
 		cardIcon: Colour;
 		richLink: Colour;
@@ -171,6 +177,7 @@ type Palette = {
 	hover: {
 		headlineByline: Colour;
 		pagination: Colour;
+		standfirstLink: Colour;
 	};
 };
 
@@ -682,6 +689,11 @@ interface CommercialConfigType {
 	ampIframeUrl: string;
 }
 
+type ServerSideTests = {
+    [k: `${string}Variant`]: "variant";
+    [k: `${string}Control`]: "control";
+};
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
@@ -694,7 +706,7 @@ interface ConfigType extends CommercialConfigType {
 	sentryHost: string;
 	dcrSentryDsn: string;
 	switches: { [key: string]: boolean };
-	abTests: Record<string, 'control' | 'variant'>;
+	abTests: ServerSideTests;
 	dfpAccountId: string;
 	commercialBundleUrl: string;
 	revisionNumber: string;

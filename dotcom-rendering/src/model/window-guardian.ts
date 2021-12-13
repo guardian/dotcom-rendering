@@ -23,7 +23,7 @@ export interface WindowGuardianConfig {
 		googletag: string;
 	};
 	switches: { [key: string]: boolean };
-	tests?: { [key: string]: string };
+	tests: ServerSideTests;
 	ophan: {
 		pageViewId: string;
 		browserId: string;
@@ -58,6 +58,7 @@ const makeWindowGuardianConfig = (
 			googletag: config.googletagUrl,
 		},
 		switches: config.switches,
+		tests: config.abTests,
 		ophan: {
 			pageViewId: '',
 			browserId: '',
