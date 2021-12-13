@@ -152,21 +152,36 @@ export const Discussion = ({
 				</Portal>
 			)}
 
+			{beingHydrated && (
+				<>
+					<Portal rootId="signed-in-as-above-leftcol">
+						<SignedInAs
+							palette={palette}
+							enableDiscussionSwitch={enableDiscussionSwitch}
+							user={user}
+							commentCount={commentCount}
+							isClosedForComments={isClosedForComments}
+						/>
+					</Portal>
+
+					<Portal rootId="signed-in-as-below-leftcol">
+						<SignedInAs
+							palette={palette}
+							enableDiscussionSwitch={enableDiscussionSwitch}
+							user={user}
+							commentCount={commentCount}
+							isClosedForComments={isClosedForComments}
+						/>
+					</Portal>
+				</>
+			)}
+
 			<ContainerLayout
 				padSides={false}
 				padContent={false}
 				// If we're not hiding an advert stretch to the right
 				stretchRight={!hideAd}
-				leftContent={
-					// eslint-disable-next-line react/jsx-wrap-multilines
-					<SignedInAs
-						palette={palette}
-						enableDiscussionSwitch={enableDiscussionSwitch}
-						user={user}
-						commentCount={commentCount}
-						isClosedForComments={isClosedForComments}
-					/>
-				}
+				leftContent={<div id="signed-in-as-above-leftcol" />}
 			>
 				<Flex>
 					<div
@@ -184,15 +199,7 @@ export const Discussion = ({
 									padding-bottom: ${space[2]}px;
 								`}
 							>
-								<SignedInAs
-									palette={palette}
-									enableDiscussionSwitch={
-										enableDiscussionSwitch
-									}
-									user={user}
-									commentCount={commentCount}
-									isClosedForComments={isClosedForComments}
-								/>
+								<div id="signed-in-as-below-leftcol" />
 							</div>
 						</Hide>
 
