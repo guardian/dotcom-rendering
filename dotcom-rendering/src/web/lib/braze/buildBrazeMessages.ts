@@ -50,6 +50,8 @@ export const buildBrazeMessages = async (
 		return new NullBrazeMessages();
 	}
 
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+
 	const dependenciesResult = await checkBrazeDependencies(
 		isSignedIn,
 		idApiUrl,

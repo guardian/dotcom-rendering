@@ -141,7 +141,7 @@ type Props = {
 let renderCount = 0;
 export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
-	const [isSignedIn, setIsSignedIn] = useState<boolean>();
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [user, setUser] = useState<UserProfile | null>();
 	const [countryCode, setCountryCode] = useState<string>();
 	// This is an async version of the countryCode state value defined above.
@@ -157,16 +157,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		useState<Promise<BrazeMessagesInterface>>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-	// [string] for the actual id;
-	// [null] for when the cookie does not exist;
-	// [undefined] for when the cookie has not been read yet
-	const [browserId, setBrowserId] = useState<string | null | undefined>(
-		undefined,
-	);
-	useOnce(() => {
-		setBrowserId(getCookie({ name: 'bwid', shouldMemoize: true }));
-		log('dotcom', 'State: browserId set');
-	}, []);
 
 	const componentEventHandler =
 		(componentType: any, id: any, action: any) => () => {
@@ -196,11 +186,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		ABTestAPI.registerCompleteEvents(allRunnableTests);
 		log('dotcom', 'AB tests initialised');
 	}, [ABTestAPI]);
-
-	useEffect(() => {
-		setIsSignedIn(!!getCookie({ name: 'GU_U', shouldMemoize: true }));
-		log('dotcom', 'State: isSignedIn set');
-	}, []);
 
 	useOnce(() => {
 		// useOnce means this code will only run once isSignedIn is defined, and only
@@ -652,12 +637,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			{[
 				CAPI.config.switches.commercialMetrics,
 				window.guardian.config?.ophan !== undefined,
-			].every(Boolean) && (
-				<CommercialMetrics
-					browserId={browserId ?? undefined}
-					pageViewId={pageViewId}
-				/>
-			)}
+			].every(Boolean) && <CommercialMetrics pageViewId={pageViewId} />}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
@@ -1117,7 +1097,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			)}
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
-					isSignedIn={isSignedIn}
 					countryCode={countryCode}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
@@ -1131,7 +1110,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
 					asyncArticleCount={asyncArticleCount}
-					browserId={browserId || undefined}
 				/>
 			</Portal>
 			<Portal
@@ -1182,7 +1160,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			</Portal>
 			<Portal rootId="sign-in-gate">
 				<SignInGateSelector
-					isSignedIn={isSignedIn}
 					format={format}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
@@ -1236,7 +1213,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
-					isSignedIn={isSignedIn}
 					asyncCountryCode={asyncCountryCode}
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}

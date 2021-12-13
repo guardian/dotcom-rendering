@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
+import { getCookie } from '@guardian/libs';
 
 import {
 	pickMessage,
@@ -22,7 +23,6 @@ import {
 import { MaybeBrazeEpic, canShowBrazeEpic } from './BrazeEpic';
 
 type Props = {
-	isSignedIn?: boolean;
 	countryCode?: string;
 	contentType: string;
 	sectionName?: string;
@@ -36,7 +36,6 @@ type Props = {
 	idApiUrl: string;
 	stage: string;
 	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
-	browserId?: string;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -79,7 +78,6 @@ const buildBrazeEpicConfig = (
 };
 
 export const SlotBodyEnd = ({
-	isSignedIn,
 	countryCode,
 	contentType,
 	sectionName,
@@ -93,8 +91,9 @@ export const SlotBodyEnd = ({
 	idApiUrl,
 	stage,
 	asyncArticleCount,
-	browserId,
 }: Props) => {
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
 	useOnce(() => {
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
@@ -112,7 +111,7 @@ export const SlotBodyEnd = ({
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
 			>,
-			browserId,
+			browserId: browserId || undefined,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionName,
