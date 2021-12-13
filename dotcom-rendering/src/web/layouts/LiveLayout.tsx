@@ -12,7 +12,6 @@ import {
 } from '@guardian/source-foundations';
 import type { ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -52,6 +51,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
+import {FilterKeyEventsToggle} from "@root/src/web/components/FilterKeyEventsToggle";
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -163,6 +163,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines		media'
 						'meta		media'
 						'keyevents	media'
+						'keyevents  filter'
 						'keyevents	body'
 						'keyevents	body'
 						'. 			.';
@@ -172,12 +173,13 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 20px;
 					grid-template-columns: 220px 700px 1fr;
 					grid-template-areas:
-						'lines 		media right-column'
-						'meta  		media right-column'
-						'keyevents  media right-column'
-						'keyevents  body  right-column'
-						'keyevents  body  right-column'
-						'.			.     right-column';
+						'lines 		media   right-column'
+						'meta  		media   right-column'
+						'keyevents  media   right-column'
+						'keyevents  filter  right-column'
+						'keyevents  body    right-column'
+						'keyevents  body    right-column'
+						'.			.       right-column';
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {
@@ -187,6 +189,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
+						'filter'
 						'body';
 				}
 				/* fluid until tablet */
@@ -197,6 +200,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
+						'filter'
 						'body';
 				}
 			}
@@ -532,6 +536,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						borderColour={palette.border.article}
 					>
 						<LiveGrid>
+							<GridItem area="filter">
+								<div css={maxWidth}>
+									<FilterKeyEventsToggle />
+								</div>
+							</GridItem>
 							<GridItem area="media">
 								<div css={maxWidth}>
 									<MainMedia
