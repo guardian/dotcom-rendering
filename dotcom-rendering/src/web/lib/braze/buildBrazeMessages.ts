@@ -11,7 +11,7 @@ import {
 	LocalMessageCache,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
-import { log, storage } from '@guardian/libs';
+import { getCookie, log, storage } from '@guardian/libs';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { getInitialisedAppboy } from './initialiseAppboy';
 
@@ -42,12 +42,15 @@ const maybeWipeUserData = async (
 };
 
 export const buildBrazeMessages = async (
-	isSignedIn: boolean,
 	idApiUrl: string,
 ): Promise<BrazeMessagesInterface> => {
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
+
 	if (!storage.local.isAvailable()) {
 		return new NullBrazeMessages();
 	}
+
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
 	const dependenciesResult = await checkBrazeDependencies(
 		isSignedIn,

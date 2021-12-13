@@ -7,7 +7,6 @@ import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewed
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
-import { WhenAdBlockInUse } from '@frontend/web/components/WhenAdBlockInUse';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
 import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
@@ -42,7 +41,6 @@ import { Placeholder } from '@root/src/web/components/Placeholder';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
-import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
@@ -63,13 +61,6 @@ import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
-
-import {
-	cmp,
-	onConsentChange,
-	getConsentFor,
-} from '@guardian/consent-management-platform';
-import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import { LabsHeader } from '@root/src/web/components/LabsHeader';
@@ -78,17 +69,13 @@ import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/Uns
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
-import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 
 import {
-	OphanComponentType,
-	OphanAction,
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
-import { trackPerformance } from '../browser/ga/ga';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
@@ -154,7 +141,7 @@ type Props = {
 let renderCount = 0;
 export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
-	const [isSignedIn, setIsSignedIn] = useState<boolean>();
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [user, setUser] = useState<UserProfile | null>();
 	const [countryCode, setCountryCode] = useState<string>();
 	// This is an async version of the countryCode state value defined above.
@@ -166,24 +153,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	const [asyncCountryCode, setAsyncCountryCode] =
 		useState<Promise<CountryCode | null>>();
 
-	const [consentState, setConsentState] = useState<ConsentState | undefined>(
-		undefined,
-	);
-
 	const [brazeMessages, setBrazeMessages] =
 		useState<Promise<BrazeMessagesInterface>>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-	// [string] for the actual id;
-	// [null] for when the cookie does not exist;
-	// [undefined] for when the cookie has not been read yet
-	const [browserId, setBrowserId] = useState<string | null | undefined>(
-		undefined,
-	);
-	useOnce(() => {
-		setBrowserId(getCookie({ name: 'bwid', shouldMemoize: true }));
-		log('dotcom', 'State: browserId set');
-	}, []);
 
 	const componentEventHandler =
 		(componentType: any, id: any, action: any) => () => {
@@ -213,11 +186,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		ABTestAPI.registerCompleteEvents(allRunnableTests);
 		log('dotcom', 'AB tests initialised');
 	}, [ABTestAPI]);
-
-	useEffect(() => {
-		setIsSignedIn(!!getCookie({ name: 'GU_U', shouldMemoize: true }));
-		log('dotcom', 'State: isSignedIn set');
-	}, []);
 
 	useOnce(() => {
 		// useOnce means this code will only run once isSignedIn is defined, and only
@@ -321,101 +289,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		}
 	}, [CAPI.shouldHideReaderRevenue]);
 
-	// kick off the CMP...
 	useOnce(() => {
-		if (!CAPI.config.switches.consentManagement) return; // CMP turned off!
-
-		// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
-		// mark: CONSENT_TIMING
-		cmp.willShowPrivacyMessage()
-			.then((willShow) => {
-				trackPerformance(
-					'consent',
-					'acquired',
-					willShow ? 'new' : 'existing',
-				);
-			})
-			.catch((e) =>
-				console.error(`CMP willShowPrivacyMessage - error: ${e}`),
-			);
-
-		// Run each time consent is submitted
-		onConsentChange((newConsent) => {
-			setConsentState(newConsent);
-			log('dotcom', 'State: consentState set');
-		});
-
-		// manually updates the footer DOM because it's not hydrated
-		injectPrivacySettingsLink();
-
-		// the UI is injected automatically into the page,
-		// and is not a react component, so it's
-		// handled in here.
-		cmp.init({
-			country: countryCode,
-			pubData: {
-				platform: 'next-gen',
-				browserId: browserId ?? undefined, // if `undefined`, the resulting consent signal cannot be joined to a page view.
-				pageViewId,
-			},
-		});
-		log('dotcom', 'CMP initialised');
-	}, [countryCode, pageViewId, browserId]);
-
-	// This code is executed at first render and then again each time consentState is set
-	useEffect(() => {
-		if (!consentState) return;
-		// Register changes in consent state
-		const decideConsentString = () => {
-			if (consentState.tcfv2) {
-				return consentState.tcfv2?.tcString;
-			}
-			return '';
-		};
-		const componentType: OphanComponentType = 'CONSENT';
-		const consentUUID = getCookie({ name: 'consentUUID' }) || '';
-		const consentString = decideConsentString();
-		const action: OphanAction = 'MANAGE_CONSENT'; // I am using MANAGE_CONSENT as the default action while we develop this code.
-		const event = {
-			component: {
-				componentType,
-				products: [],
-				labels: [consentUUID, consentString],
-			},
-			action,
-		};
-		submitComponentEvent(event);
-	}, [consentState]);
-
-	// ************************
-	// *   Google Analytics   *
-	// ************************
-	useEffect(() => {
-		onConsentChange((state: ConsentState) => {
-			const consentGiven = getConsentFor('google-analytics', state);
-			if (consentGiven) {
-				Promise.all([
-					loadScript('https://www.google-analytics.com/analytics.js'),
-					loadScript(window.guardian.gaPath),
-				])
-					.then(() => {
-						log('dotcom', 'GA script loaded');
-					})
-					.catch((e) => console.error(`GA - error: ${e}`));
-			} else {
-				// We should never be able to directly set things to the global window object.
-				// But in this case we want to stub things for testing, so it's ok to ignore this rule
-				// @ts-ignore
-				window.ga = null;
-			}
-		});
-	}, []);
-
-	useOnce(() => {
-		setBrazeMessages(
-			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
-		);
-	}, [isSignedIn, CAPI.config.idApiUrl]);
+		setBrazeMessages(buildBrazeMessages(CAPI.config.idApiUrl));
+	}, [CAPI.config.idApiUrl]);
 
 	const display: ArticleDisplay = decideDisplay(CAPI.format);
 	const design: ArticleDesign = decideDesign(CAPI.format);
@@ -761,12 +637,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			{[
 				CAPI.config.switches.commercialMetrics,
 				window.guardian.config?.ophan !== undefined,
-			].every(Boolean) && (
-				<CommercialMetrics
-					browserId={browserId ?? undefined}
-					pageViewId={pageViewId}
-				/>
-			)}
+			].every(Boolean) && <CommercialMetrics pageViewId={pageViewId} />}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
@@ -802,21 +673,18 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					<ShareCount
 						ajaxUrl={CAPI.config.ajaxUrl}
 						pageId={CAPI.pageId}
+						format={format}
 					/>
 				</Portal>
 			)}
 			{youTubeAtoms.map((youTubeAtom) => (
-				<HydrateOnce
-					rootId={youTubeAtom.elementId}
-					waitFor={[consentState]}
-				>
+				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
 						format={format}
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
 						adTargeting={adTargeting}
-						consentState={consentState}
 						isMainMedia={false}
 						id={youTubeAtom.id}
 						assetId={youTubeAtom.assetId}
@@ -913,15 +781,13 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				Note. We specifically say isSignedIn === false so that we prevent render until the cookie has been
 				checked to avoid flashing this content
 			*/}
-			{!CAPI.shouldHideReaderRevenue &&
-				!CAPI.pageType.isPaidContent &&
-				isSignedIn === false && (
-					<WhenAdBlockInUse>
-						<Portal rootId="top-right-ad-slot">
-							<ContributionSlot />
-						</Portal>
-					</WhenAdBlockInUse>
-				)}
+
+			<Portal rootId="top-right-ad-slot">
+				<ContributionSlot
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isPaidContent={CAPI.pageType.isPaidContent}
+				/>
+			</Portal>
 			{richLinks.map((richLink, index) => (
 				<Portal rootId={richLink.elementId}>
 					<RichLinkComponent
@@ -1231,7 +1097,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			)}
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
-					isSignedIn={isSignedIn}
 					countryCode={countryCode}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
@@ -1245,7 +1110,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
 					asyncArticleCount={asyncArticleCount}
-					browserId={browserId || undefined}
 				/>
 			</Portal>
 			<Portal
@@ -1296,7 +1160,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			</Portal>
 			<Portal rootId="sign-in-gate">
 				<SignInGateSelector
-					isSignedIn={isSignedIn}
 					format={format}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
@@ -1350,7 +1213,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
-					isSignedIn={isSignedIn}
 					asyncCountryCode={asyncCountryCode}
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}

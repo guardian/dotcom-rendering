@@ -36,7 +36,7 @@ else
     yarn --silent
 
     cd apps-rendering
- 	(
+    (
     	cd cdk
     	./script/ci
     )

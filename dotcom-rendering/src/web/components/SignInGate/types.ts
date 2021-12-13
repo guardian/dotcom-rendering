@@ -33,7 +33,6 @@ export type CurrentSignInGateABTest = {
 };
 
 export interface SignInGateSelectorProps {
-	isSignedIn?: boolean;
 	format: ArticleFormat;
 	contentType: string;
 	sectionName?: string;

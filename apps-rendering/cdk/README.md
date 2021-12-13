@@ -14,10 +14,4 @@ find useful scripts within the [`script`](./script) directory for common tasks.
 - `./script/diff` to print the diff between a CDK stack and a running CloudFormation stack
 - `./script/ci` to run tests and synthesise the CDK template in CI
 
-There are also some other commands defined in `package.json`, including:
-
-- `yarn lint --fix` attempt to autofix any linter errors
-- `yarn format` format the code using Prettier
-- `yarn watch` watch for changes and compile
-
 However, it's advised you configure your IDE to format on save to avoid horrible "correct linting" commits.

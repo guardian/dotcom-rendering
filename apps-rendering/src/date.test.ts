@@ -6,6 +6,7 @@ import {
 	formatLocal,
 	formatSeconds,
 	fromString,
+	fullyFormatDate,
 	isValidDate,
 	makeRelativeDate,
 } from './date';
@@ -22,6 +23,14 @@ describe('formatDate', () => {
 	it('formats zeroes correctly', () => {
 		expect(formatDate(new Date('2005-01-02T02:01:23'))).toBe(
 			'Sun 2 Jan 2005 02.01 UTC',
+		);
+	});
+});
+
+describe('fullyFormatDate', () => {
+	it('formats a given date in UTC correctly', () => {
+		expect(fullyFormatDate(new Date('2020-03-11T17:25:00'))).toBe(
+			'17:25 Wednesday, 11 March 2020',
 		);
 	});
 });
