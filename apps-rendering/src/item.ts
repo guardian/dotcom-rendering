@@ -323,7 +323,7 @@ const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog =
 	(context: Context) =>
-	(request: RenderingRequest): LiveBlog | DeadBlog => {
+	(request: RenderingRequest, page: Option<string>): LiveBlog | DeadBlog => {
 		const { content } = request;
 		const body = content.blocks?.body ?? [];
 
@@ -340,7 +340,7 @@ const fromCapiLiveBlog =
 
 const fromCapi =
 	(context: Context) =>
-	(request: RenderingRequest): Item => {
+	(request: RenderingRequest, page: Option<string>): Item => {
 		const { content } = request;
 		const { tags, fields } = content;
 
@@ -408,7 +408,7 @@ const fromCapi =
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isLive(tags)) {
-			return fromCapiLiveBlog(context)(request);
+			return fromCapiLiveBlog(context)(request, page);
 		} else if (isRecipe(tags)) {
 			return {
 				design: ArticleDesign.Recipe,

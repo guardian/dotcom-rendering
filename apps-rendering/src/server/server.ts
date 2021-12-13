@@ -11,6 +11,7 @@ import type { Option, Result } from '@guardian/types';
 import {
 	either,
 	err,
+	fromNullable,
 	map,
 	none,
 	ok,
@@ -159,16 +160,18 @@ function serveArticleSwitch(
 	res: ExpressResponse,
 	isEditions: boolean,
 	themeOverride: Option<ArticleTheme>,
+	page: Option<string>,
 ): Promise<void> {
 	if (isEditions) {
 		return serveEditionsArticle(renderingRequest, res, themeOverride);
 	}
-	return serveArticle(renderingRequest, res);
+	return serveArticle(renderingRequest, res, page);
 }
 
 async function serveArticle(
 	request: RenderingRequest,
 	res: ExpressResponse,
+	page: Option<string>,
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 
@@ -176,7 +179,12 @@ async function serveArticle(
 		throw new Error('Could not get image salt');
 	}
 
-	const { html, clientScript } = render(imageSalt, request, getAssetLocation);
+	const { html, clientScript } = render(
+		imageSalt,
+		request,
+		getAssetLocation,
+		page,
+	);
 
 	res.set('Link', getPrefetchHeader(resourceList(clientScript)));
 	res.write(html);
@@ -218,7 +226,10 @@ async function serveRichLinkDetails(
 	}
 
 	const docParser = JSDOM.fragment.bind(null);
-	const item = fromCapi({ docParser, salt: imageSalt })(renderingRequest);
+	const item = fromCapi({ docParser, salt: imageSalt })(
+		renderingRequest,
+		none,
+	);
 
 	const image =
 		item.mainMedia.kind === OptionKind.Some &&
@@ -240,6 +251,13 @@ async function serveRichLinkDetails(
 	res.status(200).json(response);
 }
 
+export const getPageId = (query: qs.ParsedQs): Option<string> => {
+	if (typeof query.page === 'string') {
+		return fromNullable(query.page.split('with:block-')[1]);
+	}
+	return none;
+};
+
 async function serveArticlePost(
 	req: Request,
 	res: ExpressResponse,
@@ -249,16 +267,19 @@ async function serveArticlePost(
 		const renderingRequest = await mapiDecoder(req.body);
 		const richLinkDetails = req.query.richlink === '';
 		const isEditions = req.query.editions === '';
+
 		const themeOverride = themeFromUnknown(req.query.theme);
 
 		if (richLinkDetails) {
 			await serveRichLinkDetails(renderingRequest, res);
 		} else {
+			const page: Option<string> = getPageId(req.query);
 			await serveArticleSwitch(
 				renderingRequest,
 				res,
 				isEditions,
 				themeOverride,
+				page,
 			);
 		}
 	} catch (e) {
@@ -329,6 +350,7 @@ async function serveArticleGet(
 						res,
 						isEditions,
 						themeOverride,
+						none,
 					);
 				}
 			},
