@@ -146,7 +146,7 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 			<div css={timeTextWrapperStyles}>
 				<time
 					dateTime={keyEvent.date.toISOString()}
-					data-relativeformat="long"
+					data-relativeformat="med"
 					title={keyEvent.date.toLocaleTimeString()}
 					css={timeStyles(supportsDarkMode)}
 				>
