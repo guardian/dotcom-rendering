@@ -7,11 +7,11 @@ const cloudFormationStackName = process.env.GU_CFN_STACK_NAME;
 new MobileAppsRendering(app, 'MobileAppsRendering', {
 	stack: 'mobile',
 	cloudFormationStackName,
-  recordPrefix: "mobile-rendering",
+	recordPrefix: 'mobile-rendering',
 });
 
 new MobileAppsRendering(app, 'MobileAppsRenderingPreview', {
-  stack: 'mobile-preview',
-  cloudFormationStackName,
-  recordPrefix: "mobile-preview-rendering",
+	stack: 'mobile-preview',
+	cloudFormationStackName,
+	recordPrefix: 'mobile-preview-rendering',
 });
