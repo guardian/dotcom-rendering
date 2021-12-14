@@ -10,7 +10,7 @@ import { css } from '@emotion/react';
 import { decidePalette } from '../lib/decidePalette';
 import {
 	getAllThemes,
-	getThemeFromFormat,
+	getThemeNameAsString,
 } from '../../../fixtures/manual/articles';
 
 import { SubMeta } from './SubMeta';
@@ -255,7 +255,7 @@ export const DeadBlogStory = () => {
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
 				<Container>
-					<p>{getThemeFromFormat(format)}</p>
+					<p>{getThemeNameAsString(format)}</p>
 					<SubMeta
 						palette={decidePalette(format)}
 						format={format}

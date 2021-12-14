@@ -10,7 +10,7 @@ import { ArticleMeta } from './ArticleMeta';
 import { decidePalette } from '../lib/decidePalette';
 import {
 	getAllThemes,
-	getThemeFromFormat,
+	getThemeNameAsString,
 } from '../../../fixtures/manual/articles';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
@@ -313,7 +313,7 @@ export const DeadBlogStory = () => {
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
 				<Container>
-					<p>{getThemeFromFormat(format)}</p>
+					<p>{getThemeNameAsString(format)}</p>
 					<ArticleMeta
 						format={format}
 						palette={decidePalette(format)}

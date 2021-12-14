@@ -8,7 +8,7 @@ import {
 } from '@guardian/libs';
 import {
 	getAllThemes,
-	getThemeFromFormat,
+	getThemeNameAsString,
 } from '../../../fixtures/manual/articles';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -430,7 +430,7 @@ export const ArticleDeadBlogTitle = () => {
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
 				<div>
-					<p>{getThemeFromFormat(format)}</p>
+					<p>{getThemeNameAsString(format)}</p>
 					<ArticleTitle
 						// eslint-disable-next-line react/jsx-props-no-spreading
 						{...CAPI}
