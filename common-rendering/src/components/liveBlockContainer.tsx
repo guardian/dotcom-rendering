@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
-import { neutral, from, remSpace, headline } from '@guardian/source-foundations';
+import { neutral, from, space, remSpace, headline } from '@guardian/source-foundations';
 import { FirstPublished } from './FirstPublished';
 
 const LEFT_MARGIN_DESKTOP = 60;
-const SIDE_MARGIN = remSpace[5];
+const SIDE_MARGIN = space[5];
 const SIDE_MARGIN_MOBILE = 10;
 
 const Header = ({ children }: { children: React.ReactNode }) => {
