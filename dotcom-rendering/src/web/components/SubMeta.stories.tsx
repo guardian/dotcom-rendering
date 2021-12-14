@@ -11,7 +11,7 @@ import { decidePalette } from '../lib/decidePalette';
 import {
 	getAllThemes,
 	getThemeNameAsString,
-} from '../../../fixtures/manual/articles';
+} from '../../../../common-rendering/src/fixtures/article';
 
 import { SubMeta } from './SubMeta';
 

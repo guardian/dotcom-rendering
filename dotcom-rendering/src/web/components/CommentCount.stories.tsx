@@ -11,7 +11,7 @@ import {
 
 import { CommentCount } from './CommentCount';
 import { decidePalette } from '../lib/decidePalette';
-import { getAllThemes } from '../../../fixtures/manual/articles';
+import { getAllThemes } from '../../../../common-rendering/src/fixtures/article';
 
 export default {
 	component: CommentCount,

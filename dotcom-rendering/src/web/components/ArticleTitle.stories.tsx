@@ -9,7 +9,7 @@ import {
 import {
 	getAllThemes,
 	getThemeNameAsString,
-} from '../../../fixtures/manual/articles';
+} from '../../../../common-rendering/src/fixtures/article';
 import { decidePalette } from '../lib/decidePalette';
 
 import { ArticleTitle } from './ArticleTitle';
