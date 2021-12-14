@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { neutral, from, space, remSpace, headline } from '@guardian/source-foundations';
+import { neutral, from, space, headline } from '@guardian/source-foundations';
 import { FirstPublished } from './FirstPublished';
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -10,7 +10,7 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<header
 			css={css`
-				padding-right: ${remSpace[3]};
+				padding-right: ${space[3]}px;
 				display: flex;
 				flex-direction: column;
 			`}
@@ -25,7 +25,7 @@ const BlockTitle = ({ title }: { title: string }) => {
 		<h2
 			css={css`
 				${headline.xxsmall({ fontWeight: 'bold' })}
-				margin-bottom: ${remSpace[2]};
+				margin-bottom: ${space[2]}px;
 			`}
 		>
 			{title}
@@ -53,12 +53,12 @@ const LiveBlockContainer = ({
 			id={`block-${id}`}
 			key={id}
 			css={css`
-				padding: ${remSpace[2]} ${SIDE_MARGIN_MOBILE}px;
-				margin-bottom: ${remSpace[3]};
+				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
+				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
 				border-top: 1px solid ${borderColour};
 				${from.tablet} {
-					padding: ${remSpace[2]} ${SIDE_MARGIN}px;
+					padding: ${space[2]}px ${SIDE_MARGIN}px;
 					padding-left: ${LEFT_MARGIN_DESKTOP}px;
 				}
 			`}
