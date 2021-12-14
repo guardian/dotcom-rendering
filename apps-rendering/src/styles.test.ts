@@ -14,6 +14,7 @@ describe('helper functions return correct styles', () => {
 			liveblogDarkBackground: "#660505",
 			liveblogKicker: "#FFBAC8",
 			deadblogKicker: "#C70000",
+			deadblogStandfirstLink: "#C70000",
 			link: '#AB0613',
 		};
 		expect(pillarStyles).toEqual(expectedNewsPillarStyles);
