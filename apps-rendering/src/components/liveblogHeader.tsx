@@ -14,7 +14,7 @@ import Series from './series';
 // ----- Component ----- //
 
 const timestampStyles = css`
-	color: ${neutral[100]};
+	color: ${neutral[0]};
 	${textSans.xxsmall({ lineHeight: 'tight' })}
 `;
 

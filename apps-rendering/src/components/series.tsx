@@ -66,6 +66,12 @@ const liveLinkStyles = (theme: ArticleTheme): SerializedStyles => css`
 	text-decoration: none;
 `;
 
+const deadBlogLinkStyles = (theme: ArticleTheme): SerializedStyles => css`
+	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
+	color: ${getThemeStyles(theme).deadblogKicker};
+	text-decoration: none;
+`;
+
 const getLinkStyles = ({
 	design,
 	display,
@@ -83,11 +89,12 @@ const getLinkStyles = ({
 		return labsLinkStyles(theme);
 	}
 
-	if (
-		design === ArticleDesign.LiveBlog ||
-		design === ArticleDesign.DeadBlog
-	) {
+	if (design === ArticleDesign.LiveBlog) {
 		return liveLinkStyles(theme);
+	}
+
+	if(design === ArticleDesign.DeadBlog) {
+		return deadBlogLinkStyles(theme);
 	}
 
 	return standardLinkStyles(theme);
