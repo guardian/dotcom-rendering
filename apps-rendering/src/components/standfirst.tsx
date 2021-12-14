@@ -108,9 +108,9 @@ const deadblogStyles = (format: ArticleFormat): SerializedStyles => css`
 
 	a:hover {
 		color: ${getThemeStyles(format.theme).deadblogStandfirstLink};
-		border-bottom: 1px solid ${getThemeStyles(format.theme).deadblogStandfirstLink};
+		border-bottom: 1px solid
+			${getThemeStyles(format.theme).deadblogStandfirstLink};
 	}
-
 `;
 
 const media = (format: ArticleFormat): SerializedStyles => css`

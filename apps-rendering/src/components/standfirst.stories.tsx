@@ -6,8 +6,11 @@ import { article, comment, feature, review } from 'fixtures/item';
 import { deadBlog } from 'fixtures/live';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
+import {
+	getAllThemes,
+	getThemeNameAsString,
+} from '../../../common-rendering/src/fixtures/article';
 import Standfirst from './standfirst';
-import { getAllThemes, getThemeNameAsString } from '../../../common-rendering/src/fixtures/article';
 
 // ----- Stories ----- //
 
@@ -65,8 +68,8 @@ const Deadblog = (): ReactElement => {
 			{getAllThemes({
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
-			}).map(format => (
-				<div>
+			}).map((format) => (
+				<div key={format.theme}>
 					<p>{getThemeNameAsString(format)}</p>
 					<Standfirst
 						item={{
@@ -75,10 +78,7 @@ const Deadblog = (): ReactElement => {
 						}}
 					/>
 				</div>
-			))
-
-			}
-
+			))}
 		</>
 	);
 };

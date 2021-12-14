@@ -93,7 +93,7 @@ const getLinkStyles = ({
 		return liveLinkStyles(theme);
 	}
 
-	if(design === ArticleDesign.DeadBlog) {
+	if (design === ArticleDesign.DeadBlog) {
 		return deadBlogLinkStyles(theme);
 	}
 
