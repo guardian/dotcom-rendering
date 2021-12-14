@@ -12,6 +12,10 @@ node_modules
 .vscode/*
 !.vscode/extensions.json
 .metals/
+.bloop/
+project/.bloop/
+project/metals.sbt
+.bsp/
 
 # System files
 .DS_Store
