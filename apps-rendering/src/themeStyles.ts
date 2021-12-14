@@ -20,6 +20,7 @@ interface ThemeStyles {
 	liveblogBackground: string;
 	liveblogDarkBackground: string;
 	deadblogKicker: string;
+	deadblogStandfirstLink: string;
 	link: string;
 	cameraIcon: string;
 	cameraIconBackground: string;
@@ -37,6 +38,7 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: news[200],
 		liveblogDarkBackground: news[100],
 		deadblogKicker: news[400],
+		deadblogStandfirstLink: news[400],
 		link: news[300],
 		cameraIcon: news[800],
 		cameraIconBackground: news[400],
@@ -48,6 +50,7 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: opinion[200],
 		liveblogDarkBackground: opinion[100],
 		deadblogKicker: opinion[300],
+		deadblogStandfirstLink: opinion[300],
 		link: opinion[300],
 		cameraIcon: opinion[800],
 		cameraIconBackground: opinion[400],
@@ -59,6 +62,7 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: sport[200],
 		liveblogDarkBackground: sport[100],
 		deadblogKicker: sport[400],
+		deadblogStandfirstLink: sport[400],
 		link: sport[300],
 		cameraIcon: sport[800],
 		cameraIconBackground: sport[400],
@@ -70,6 +74,7 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: culture[200],
 		liveblogDarkBackground: culture[100],
 		deadblogKicker: culture[300],
+		deadblogStandfirstLink: culture[300],
 		link: culture[300],
 		cameraIcon: culture[800],
 		cameraIconBackground: culture[400],
@@ -81,6 +86,7 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: lifestyle[200],
 		liveblogDarkBackground: lifestyle[100],
 		deadblogKicker: lifestyle[400],
+		deadblogStandfirstLink: lifestyle[400],
 		link: lifestyle[300],
 		cameraIcon: lifestyle[800],
 		cameraIconBackground: lifestyle[400],
@@ -92,6 +98,7 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: specialReport[200],
 		liveblogDarkBackground: specialReport[100],
 		deadblogKicker: specialReport[300],
+		deadblogStandfirstLink: specialReport[300],
 		link: specialReport[300],
 		cameraIcon: specialReport[800],
 		cameraIconBackground: specialReport[400],
@@ -103,6 +110,7 @@ export const themeColours: ThemeColours = {
 		liveblogBackground: specialReport[200],
 		liveblogDarkBackground: specialReport[100],
 		deadblogKicker: specialReport[300],
+		deadblogStandfirstLink: specialReport[300],
 		link: specialReport[300],
 		cameraIcon: specialReport[800],
 		cameraIconBackground: specialReport[400],

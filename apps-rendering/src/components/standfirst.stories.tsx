@@ -1,11 +1,13 @@
 // ----- Imports ----- //
 
-import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { article, comment, feature, review } from 'fixtures/item';
+import { deadBlog } from 'fixtures/live';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Standfirst from './standfirst';
+import { getAllThemes, getThemeNameAsString } from '../../../common-rendering/src/fixtures/article';
 
 // ----- Stories ----- //
 
@@ -57,7 +59,29 @@ const Comment = (): ReactElement => (
 	/>
 );
 
-// ----- Exports ----- //
+const Deadblog = (): ReactElement => {
+	return (
+		<>
+			{getAllThemes({
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+			}).map(format => (
+				<div>
+					<p>{getThemeNameAsString(format)}</p>
+					<Standfirst
+						item={{
+							...deadBlog,
+							theme: format.theme,
+						}}
+					/>
+				</div>
+			))
+
+			}
+
+		</>
+	);
+};
 
 export default {
 	component: Standfirst,
@@ -65,4 +89,4 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default, Review, Feature, Comment };
+export { Default, Review, Feature, Comment, Deadblog };
