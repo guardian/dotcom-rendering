@@ -14,10 +14,7 @@ function lastUpdatedDates(): void {
 					date.value,
 				)}`;
 			} else {
-				const message =
-					isoDateTimeString ??
-					'because the data-date attribute was empty';
-				logger.warn(`Unable to parse and format date ${message}`);
+				logger.warn(`Unable to parse and format date: ${date.err}`);
 			}
 		},
 	);
