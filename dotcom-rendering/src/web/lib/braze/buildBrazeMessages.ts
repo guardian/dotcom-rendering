@@ -44,8 +44,6 @@ const maybeWipeUserData = async (
 export const buildBrazeMessages = async (
 	idApiUrl: string,
 ): Promise<BrazeMessagesInterface> => {
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-
 	if (!storage.local.isAvailable()) {
 		return new NullBrazeMessages();
 	}
