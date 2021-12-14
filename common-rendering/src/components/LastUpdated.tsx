@@ -10,14 +10,15 @@ const LastUpdated = ({
 }) => {
 	return (
 		<div
-			css={css`
+		css={css`
 				display: flex;
 				align-items: flex-end;
 				${textSans.xxsmall()};
 				color: ${neutral[46]};
-			`}
+				`}
 		>
 			<time
+				className="js-last-updated-time"
 				data-last-updated={lastUpdated.toISOString()}
 				dateTime={lastUpdated.toISOString()}
 			>
