@@ -142,7 +142,7 @@ const getStyles = (item: Item): SerializedStyles => {
 		case ArticleDesign.LiveBlog:
 			return css(styles(format), liveblogStyles);
 		case ArticleDesign.DeadBlog:
-			return css(deadblogStyles(format));
+			return css(styles(format), liveblogStyles, deadblogStyles(format));
 		case ArticleDesign.Review:
 		case ArticleDesign.Feature:
 		case ArticleDesign.Editorial:
