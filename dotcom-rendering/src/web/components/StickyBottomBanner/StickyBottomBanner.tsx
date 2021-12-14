@@ -16,7 +16,8 @@ import {
 	MaybeFC,
 	CandidateConfig,
 } from '@root/src/web/lib/messagePicker';
-import { CountryCode, getCookie } from '@guardian/libs';
+import { getLocaleCode } from '@root/src/web/lib/getCountryCode';
+import { getCookie } from '@guardian/libs';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
@@ -26,7 +27,6 @@ import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/t
 import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
-	asyncCountryCode?: Promise<CountryCode | null>;
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
 	contentType: string;
@@ -191,7 +191,6 @@ const buildBrazeBanner = (
 });
 
 export const StickyBottomBanner = ({
-	asyncCountryCode,
 	brazeMessages,
 	asyncArticleCount,
 	contentType,
@@ -207,6 +206,7 @@ export const StickyBottomBanner = ({
 	idApiUrl,
 	switches,
 }: Props) => {
+	const asyncCountryCode = getLocaleCode;
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const signInGateWillShow = useSignInGateWillShow({
@@ -221,7 +221,7 @@ export const StickyBottomBanner = ({
 		const CMP = buildCmpBannerConfig();
 		const puzzlesBanner = buildPuzzlesBannerConfig({
 			isSignedIn,
-			asyncCountryCode: asyncCountryCode as Promise<string>,
+			asyncCountryCode: asyncCountryCode as unknown as Promise<string>,
 			isPreview,
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
@@ -239,7 +239,7 @@ export const StickyBottomBanner = ({
 		});
 		const readerRevenue = buildReaderRevenueBannerConfig({
 			isSignedIn,
-			asyncCountryCode: asyncCountryCode as Promise<string>,
+			asyncCountryCode: asyncCountryCode as unknown as Promise<string>,
 			isPreview,
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined

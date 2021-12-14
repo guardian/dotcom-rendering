@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
+import { getLocaleCode } from '@root/src/web/lib/getCountryCode';
 import { getCookie } from '@guardian/libs';
 
 import {
@@ -23,7 +24,6 @@ import {
 import { MaybeBrazeEpic, canShowBrazeEpic } from './BrazeEpic';
 
 type Props = {
-	countryCode?: string;
 	contentType: string;
 	sectionName?: string;
 	sectionId: string;
@@ -78,7 +78,6 @@ const buildBrazeEpicConfig = (
 };
 
 export const SlotBodyEnd = ({
-	countryCode,
 	contentType,
 	sectionName,
 	sectionId,
@@ -92,9 +91,24 @@ export const SlotBodyEnd = ({
 	stage,
 	asyncArticleCount,
 }: Props) => {
+	const [countryCode, setCountryCode] = useState<string>();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
+
+	useEffect(() => {
+		const callFetch = () => {
+			getLocaleCode()
+				.then((cc) => {
+					setCountryCode(cc || '');
+				})
+				.catch((e) =>
+					console.error(`countryCodePromise - error: ${e}`),
+				);
+		};
+		callFetch();
+	}, []);
+
 	useOnce(() => {
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
 			isSignedIn,

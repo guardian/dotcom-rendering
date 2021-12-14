@@ -43,7 +43,6 @@ import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
@@ -54,7 +53,7 @@ import {
 	log,
 	getCookie,
 } from '@guardian/libs';
-import type { ArticleFormat, CountryCode } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
@@ -143,15 +142,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [user, setUser] = useState<UserProfile | null>();
-	const [countryCode, setCountryCode] = useState<string>();
-	// This is an async version of the countryCode state value defined above.
-	// This can be used where you've got logic which depends on countryCode but
-	// don't want to block on it becoming available, as you would with the
-	// non-async version (this is the case in the banner picker where some
-	// banners need countryCode but we don't want to block all banners from
-	// executing their canShow logic until countryCode is available):
-	const [asyncCountryCode, setAsyncCountryCode] =
-		useState<Promise<CountryCode | null>>();
 
 	const [brazeMessages, setBrazeMessages] =
 		useState<Promise<BrazeMessagesInterface>>();
@@ -203,22 +193,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			setUser(null);
 		}
 	}, [isSignedIn, CAPI.config.discussionApiUrl]);
-
-	useEffect(() => {
-		const callFetch = () => {
-			const countryCodePromise = getLocaleCode();
-			setAsyncCountryCode(countryCodePromise);
-			countryCodePromise
-				.then((cc) => {
-					setCountryCode(cc || '');
-					log('dotcom', 'State: countryCode set');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${e}`),
-				);
-		};
-		callFetch();
-	}, []);
 
 	useEffect(() => {
 		incrementAlreadyVisited();
@@ -642,7 +616,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
-					countryCode={countryCode}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
 					remoteHeaderEnabled={CAPI.config.remoteHeader}
@@ -1097,7 +1070,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			)}
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
-					countryCode={countryCode}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
 					sectionId={CAPI.config.section}
@@ -1201,7 +1173,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					<ReaderRevenueLinks
 						urls={CAPI.nav.readerRevenueLinks.footer}
 						edition={CAPI.editionId}
-						countryCode={countryCode}
 						dataLinkNamePrefix="footer : "
 						inHeader={false}
 						remoteHeaderEnabled={false}
@@ -1213,7 +1184,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
-					asyncCountryCode={asyncCountryCode}
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}
 					contentType={CAPI.contentType}

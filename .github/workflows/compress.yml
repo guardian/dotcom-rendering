@@ -1,22 +1,19 @@
 name: DCR Compressed Size
 on:
-    pull_request:
-        paths-ignore:
-            - "apps-rendering/**"
+  pull_request:
+    paths-ignore:
+      - "apps-rendering/**"
 
 jobs:
-    compressed_size:
-        name: DCR Compressed Size
-        runs-on: ubuntu-latest
+  compressed_size:
+    name: DCR Compressed Size
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v2
-            - uses: guardian/actions-setup-node@main
+    steps:
+      - uses: actions/checkout@v2
+      - uses: guardian/actions-setup-node@main
 
-            # Make sure we install dependencies in the root directory
-            - uses: bahmutov/npm-install@v1
-
-            - uses: preactjs/compressed-size-action@v2
-              with:
-                  repo-token: "${{ secrets.GITHUB_TOKEN }}"
-                  build-script: build:dcr
+      - uses: preactjs/compressed-size-action@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          build-script: build:dcr
