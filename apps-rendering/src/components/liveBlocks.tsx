@@ -4,7 +4,8 @@ import { css } from '@emotion/react';
 import { LastUpdated } from '@guardian/common-rendering/src/components/LastUpdated';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { ArticleFormat } from '@guardian/libs';
-import { OptionKind, partition } from '@guardian/types';
+import { map, OptionKind, partition } from '@guardian/types';
+import { pipe, toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
@@ -23,9 +24,11 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 			{blocks.map((block) => {
 				// TODO: get page number
 				const blockLink = `${1}#block-${block.id}`;
-				const blockFirstPublished = block.firstPublished.kind === OptionKind.Some
-					? Number(block.firstPublished.value)
-					: undefined;
+				const blockFirstPublished = pipe(
+					block.firstPublished,
+					map(Number),
+					toNullable,
+				);
 
 				return (
 					<LiveBlockContainer
@@ -36,7 +39,6 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 						blockFirstPublished={blockFirstPublished}
 						blockLink={blockLink}
 					>
-
 						{renderAll(format, partition(block.body).oks)}
 
 						<footer

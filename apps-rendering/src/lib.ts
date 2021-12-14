@@ -134,6 +134,9 @@ const fold =
 		return withDefault(ifNone)(map(f)(opt));
 	};
 
+const toNullable = <A>(opt: Option<A>): A | undefined =>
+	withDefault<A | undefined>(undefined)(opt);
+
 // ----- Exports ----- //
 
 export {
@@ -155,4 +158,5 @@ export {
 	resultMap3,
 	resultToNullable,
 	fold,
+	toNullable,
 };
