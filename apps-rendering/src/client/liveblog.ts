@@ -1,21 +1,23 @@
+import { ResultKind } from '@guardian/types';
 import { formatLocalTimeDateTz } from 'date';
+import { dateParser, parse } from 'parser';
 import { logger } from '../logger';
 
 function lastUpdatedDates(): void {
-	Array.from(document.querySelectorAll('time[data-last-updated]')).forEach(
+	Array.from(document.getElementsByClassName('js-last-updated-time')).forEach(
 		(time) => {
 			const isoDateTimeString = time.getAttribute('data-last-updated');
-			try {
-				if (isoDateTimeString) {
-					time.textContent = `Updated: ${formatLocalTimeDateTz(
-						new Date(isoDateTimeString),
-					)}`;
-				}
-			} catch (e) {
+			const date = parse(dateParser)(isoDateTimeString);
+
+			if (date.kind === ResultKind.Ok) {
+				time.textContent = `Updated: ${formatLocalTimeDateTz(
+					date.value,
+				)}`;
+			} else {
 				const message =
 					isoDateTimeString ??
 					'because the data-date attribute was empty';
-				logger.error(`Unable to parse and format date ${message}`, e);
+				logger.warn(`Unable to parse and format date ${message}`);
 			}
 		},
 	);
