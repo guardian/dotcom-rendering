@@ -20,20 +20,34 @@ export type LiveBlogCurrentPage = {
 	pagination: Pagination;
 };
 
-const getFirstPage = (blocks: LiveBlock[], pageSize: number, pageNumber: number): PageReference => {
-	const { remainder } = getPages(pageSize, blocks)
-	console.log(getPages(pageSize, blocks))
+type PaginationData = {
+	firstPageLength: number;
+	length: number;
+	numberOfPages: number;
+	remainder: number;
+};
+
+const getFirstPage = (
+	blocks: LiveBlock[],
+	pageSize: number,
+	pageNumber: number,
+): PageReference => {
+	const { remainder } = getPages(pageSize, blocks);
+	console.log(getPages(pageSize, blocks));
 	const sliceAt = remainder + pageSize;
 
 	return {
-		blocks:  blocks.slice(0, sliceAt),
+		blocks: blocks.slice(0, sliceAt),
 		pageNumber,
 		suffix: '',
 		isArchivePage: false,
 	};
-}
+};
 
-const getOldestPage = (blocks: LiveBlock[], pageSize: number): PageReference | undefined => {
+const getOldestPage = (
+	blocks: LiveBlock[],
+	pageSize: number,
+): PageReference | undefined => {
 	const { numberOfPages } = getPages(pageSize, blocks);
 
 	if (numberOfPages === 1) return undefined;
@@ -43,12 +57,15 @@ const getOldestPage = (blocks: LiveBlock[], pageSize: number): PageReference | u
 		pageNumber: numberOfPages,
 		suffix: '',
 		isArchivePage: false,
-	}
-}
+	};
+};
 
-const getOlderPage = (blocks: LiveBlock[], pageSize: number, pageNumber: number): PageReference | undefined => {
-
-	const { firstPageLength, numberOfPages } = getPages(pageSize, blocks)
+const getOlderPage = (
+	blocks: LiveBlock[],
+	pageSize: number,
+	pageNumber: number,
+): PageReference | undefined => {
+	const { firstPageLength, numberOfPages } = getPages(pageSize, blocks);
 	// start slice from: end of the current page -> how many blocks first page has
 	// end slice at: end of current page + page size
 
@@ -59,8 +76,8 @@ const getOlderPage = (blocks: LiveBlock[], pageSize: number, pageNumber: number)
 		pageNumber,
 		suffix: '',
 		isArchivePage: false,
-	}
-}
+	};
+};
 
 // const firstPage = (
 // 	blocks: LiveBlock[],
@@ -74,16 +91,14 @@ const getOlderPage = (blocks: LiveBlock[], pageSize: number, pageNumber: number)
 // 	};
 // };
 
-
-
-const getPages = (pageSize: number, blocks: LiveBlock[]) => {
+const getPages = (pageSize: number, blocks: LiveBlock[]): PaginationData => {
 	const remainder = blocks.length % pageSize;
 	return {
-		length : blocks.length,
+		firstPageLength: pageSize + remainder,
+		length: blocks.length,
+		numberOfPages: getNumberOfPages(pageSize, blocks),
 		remainder,
-		numberOfPages : getNumberOfPages(pageSize, blocks),
-		firstPageLength : pageSize + remainder,
-	}
+	};
 };
 
 const getNumberOfPages = (pageSize: number, blocks: LiveBlock[]): number => {
@@ -97,7 +112,7 @@ export const getCurrentPage = (
 	pageSize: number,
 	blocks: LiveBlock[],
 ): LiveBlogCurrentPage => {
-	let currentPage = 1;
+	const currentPage = 1;
 
 	return {
 		currentPage: getFirstPage(blocks, pageSize, currentPage),
