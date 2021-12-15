@@ -122,30 +122,29 @@ const getPages = (
 		blocks.length,
 	);
 
-	const liveblog2DArray: LiveBlock[][] = [];
-
-	restOfPages.reduce(function (arr, block) {
-		if (arr.length === 0) {
-			arr.push([block]);
-		}
-
-		if (arr[0].length < pageSize) {
-			arr[0].push(block);
-		} else {
-			arr.push([block]);
-		}
-
-		return arr;
-	}, liveblog2DArray);
-
+	const liveblog2DArray = [firstPage];
+	for (let i = 0; i < restOfPages.length; i += pageSize) {
+		const chunk = restOfPages.slice(i, i + pageSize);
+		liveblog2DArray.push(chunk);
+	}
 	return liveblog2DArray;
 };
 
 const getCurrentPage = (
 	pageSize: number,
-	blocks: LiveBlock[],
+	blocks: LiveBlock[][],
 	blockId?: string,
 ): PageReference => {
+	for (let i = 0; i < blocks.length; i += 1) {
+		if (blocks[i].some((x) => x.id === blockId)) {
+			return {
+				blocks: blocks[i],
+				pageNumber: i + 1,
+				suffix: '',
+				isArchivePage: false,
+			};
+		}
+	}
 	return {
 		blocks: [],
 		pageNumber: 1,
@@ -159,12 +158,10 @@ export const getPagedBlocks = (
 	blocks: LiveBlock[],
 	blockId?: string,
 ): LiveBlogCurrentPage => {
-	const currentPage = getCurrentPage(pageSize, blocks, blockId);
 	const pages = getPages(pageSize, blocks, getPageDetails(pageSize, blocks));
-	console.log('pages: ');
-	console.log(pages);
+	const currentPage = getCurrentPage(pageSize, pages, blockId);
 	return {
-		currentPage: getFirstPage(blocks, pageSize, currentPage.pageNumber),
+		currentPage: currentPage, //getFirstPage(blocks, pageSize, currentPage.pageNumber),
 		pagination: {
 			older: getOlderPage(blocks, pageSize, currentPage.pageNumber + 1),
 			oldest: getOldestPage(blocks, pageSize),

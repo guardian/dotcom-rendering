@@ -154,7 +154,7 @@ describe('pagination', () => {
 
 		it('should return expected currentPage object', () => {
 			const expectedCurrentPage: PageReference = {
-				blocks: blocks,
+				blocks: blocks.slice(10, 20),
 				pageNumber: 2,
 				suffix: '',
 				isArchivePage: false,
@@ -165,7 +165,7 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				numberOfPages: 1,
+				numberOfPages: 2,
 			};
 
 			expect(result.pagination).toEqual(expectedPagination);
