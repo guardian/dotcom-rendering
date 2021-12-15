@@ -189,7 +189,6 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 
 	return (
 		<div
-			data-print-layout="hide"
 			css={[
 				nestedStyles(palette),
 				standfirstStyles(format, palette),
