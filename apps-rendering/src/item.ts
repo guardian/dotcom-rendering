@@ -334,7 +334,7 @@ const fromCapiLiveBlog =
 			: 10;
 
 		const parsedBlocks = parseLiveBlocks(body)(context);
-		const currentPage = getCurrentPage(pageSize, parsedBlocks);
+		const currentPage = getPagedBlocks(pageSize, parsedBlocks);
 		return {
 			design:
 				content.fields?.liveBloggingNow === true
