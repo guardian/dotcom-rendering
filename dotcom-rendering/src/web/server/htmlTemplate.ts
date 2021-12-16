@@ -1,6 +1,6 @@
 import { resets, brandBackground } from '@guardian/source-foundations';
 import { getFontsCss } from '@root/src/lib/fonts-css';
-import { CDN } from '@root/src/lib/assets';
+import { ASSET_ORIGIN } from '@root/src/lib/assets';
 import he from 'he';
 
 export const htmlTemplate = ({
@@ -82,7 +82,7 @@ export const htmlTemplate = ({
 	// More information on prefetching:
 	// https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
 	const staticPreconnectUrls = [
-		`${CDN}`,
+		`${ASSET_ORIGIN}`,
 		`https://i.guim.co.uk`,
 		`https://j.ophan.co.uk`,
 		`https://ophan.theguardian.com`,
@@ -265,7 +265,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 				<script>
 					window.curlConfig = {
-						baseUrl: '${CDN}assets',
+						baseUrl: '${ASSET_ORIGIN}assets',
 						apiName: 'require'
 					};
 					window.curl = window.curlConfig;
@@ -282,7 +282,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <style class="webfont">${getFontsCss()}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
-				<link rel="stylesheet" media="print" href="${CDN}static/frontend/css/print.css">
+				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
 			</head>
 
 			<body>

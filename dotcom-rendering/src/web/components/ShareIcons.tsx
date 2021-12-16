@@ -49,14 +49,50 @@ const decideIconColor = (
 ) => {
 	if (format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta') {
 		return css`
-			fill: ${palette.fill.shareIcon};
+			fill: ${palette.fill.shareIconGrayBackground};
 			${until.desktop} {
 				fill: ${palette.text.standfirst};
 			}
 		`;
 	}
+	if (
+		format.design === ArticleDesign.DeadBlog &&
+		(context === 'SubMeta' || context === 'ArticleMeta')
+	) {
+		return css`
+			fill: ${palette.fill.shareIconGrayBackground};
+		`;
+	}
 	return css`
 		fill: ${palette.fill.shareIcon};
+	`;
+};
+
+const decideIconColorOnHover = (
+	palette: Palette,
+	format: ArticleFormat,
+	context: Context,
+) => {
+	if (
+		(format.design === ArticleDesign.LiveBlog ||
+			format.design === ArticleDesign.DeadBlog) &&
+		(context === 'ArticleMeta' || context === 'SubMeta')
+	) {
+		return css`
+			:hover {
+				background-color: ${palette.fill.shareIconGrayBackground};
+				border-color: ${palette.fill.shareIconGrayBackground};
+				fill: white;
+			}
+		`;
+	}
+
+	return css`
+		:hover {
+			background-color: ${palette.fill.shareIcon};
+			border-color: ${palette.fill.shareIcon};
+			fill: white;
+		}
 	`;
 };
 
@@ -90,12 +126,6 @@ const iconStyles = ({
 		left: 0;
 		margin: auto;
 		position: absolute;
-	}
-
-	:hover {
-		background-color: ${palette.fill.shareIcon};
-		border-color: ${palette.fill.shareIcon};
-		fill: white;
 	}
 `;
 
@@ -133,6 +163,11 @@ export const ShareIcons = ({
 							css={[
 								iconStyles({ palette, size }),
 								decideIconColor(palette, format, context),
+								decideIconColorOnHover(
+									palette,
+									format,
+									context,
+								),
 							]}
 						>
 							<FacebookIcon />
@@ -157,6 +192,11 @@ export const ShareIcons = ({
 							css={[
 								iconStyles({ palette, size }),
 								decideIconColor(palette, format, context),
+								decideIconColorOnHover(
+									palette,
+									format,
+									context,
+								),
 							]}
 						>
 							<TwitterIconPadded />
@@ -180,6 +220,11 @@ export const ShareIcons = ({
 							css={[
 								iconStyles({ palette, size }),
 								decideIconColor(palette, format, context),
+								decideIconColorOnHover(
+									palette,
+									format,
+									context,
+								),
 							]}
 						>
 							<EmailIcon />
@@ -204,6 +249,11 @@ export const ShareIcons = ({
 							css={[
 								iconStyles({ palette, size }),
 								decideIconColor(palette, format, context),
+								decideIconColorOnHover(
+									palette,
+									format,
+									context,
+								),
 							]}
 						>
 							<LinkedInIcon />
@@ -229,6 +279,11 @@ export const ShareIcons = ({
 								css={[
 									iconStyles({ palette, size }),
 									decideIconColor(palette, format, context),
+									decideIconColorOnHover(
+										palette,
+										format,
+										context,
+									),
 								]}
 							>
 								<WhatsAppIcon />
@@ -255,6 +310,11 @@ export const ShareIcons = ({
 								css={[
 									iconStyles({ palette, size }),
 									decideIconColor(palette, format, context),
+									decideIconColorOnHover(
+										palette,
+										format,
+										context,
+									),
 								]}
 							>
 								<MessengerIcon />

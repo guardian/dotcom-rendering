@@ -10,7 +10,7 @@ import {
 	until,
 	space,
 } from '@guardian/source-foundations';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
@@ -120,13 +120,11 @@ const StandFirstGrid = ({ children }: { children: React.ReactNode }) => (
 						'standfirst'
 						'lines'
 						'meta';
+					grid-column-gap: 0px;
 				}
 				${from.desktop} {
 					grid-template-columns: 220px 1fr;
 					grid-template-areas: 'lastupdated standfirst';
-				}
-				${until.tablet} {
-					grid-column-gap: 0px;
 				}
 			}
 		`}
@@ -595,7 +593,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												format.design,
 												format.theme,
 											)}
-											color="rgba(255, 255, 255, 0.4)"
+											color={
+												format.design ===
+												ArticleDesign.LiveBlog
+													? 'rgba(255, 255, 255, 0.4)'
+													: undefined
+											}
 										/>
 									</div>
 								</Hide>

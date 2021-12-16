@@ -11,7 +11,7 @@ import { Page } from '@root/src/web/components/Page';
 
 import { escapeData } from '@root/src/lib/escapeData';
 import {
-	CDN,
+	ASSET_ORIGIN,
 	getScriptArrayFromFilename,
 	getScriptArrayFromChunkName,
 	loadableManifestJson,
@@ -261,8 +261,9 @@ export const document = ({ data }: Props): string => {
 			...getScriptArrayFromChunkName('coreVitals'),
 			...getScriptArrayFromChunkName('dynamicImport'),
 			pageHasNonBootInteractiveElements && {
-				src: `${CDN}static/frontend/js/curl-with-js-and-domReady.js`,
+				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
+			...getScriptArrayFromChunkName('hydration'),
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
 		].filter(isDefined), // We use the TypeGuard to keep TS happy
 	);

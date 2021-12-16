@@ -1,11 +1,7 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticlePillar,
-	ArticleSpecial,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { Pagination } from './Pagination';
+import { getAllThemes } from '../../../../common-rendering/src/fixtures/article';
 
 export default {
 	component: Pagination,
@@ -16,20 +12,10 @@ export default {
 	},
 };
 
-const defaultFormat = {
+const formats = getAllThemes({
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-};
-
-const formats = [
-	{ ...defaultFormat, theme: ArticlePillar.News },
-	{ ...defaultFormat, theme: ArticlePillar.Sport },
-	{ ...defaultFormat, theme: ArticlePillar.Culture },
-	{ ...defaultFormat, theme: ArticlePillar.Lifestyle },
-	{ ...defaultFormat, theme: ArticlePillar.Opinion },
-	{ ...defaultFormat, theme: ArticleSpecial.SpecialReport },
-	{ ...defaultFormat, theme: ArticleSpecial.Labs },
-];
+});
 
 export const notFirstPage = () => {
 	return (

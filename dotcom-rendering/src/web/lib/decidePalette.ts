@@ -27,6 +27,17 @@ import { pillarPalette_DO_NOT_USE as pillarPalette } from '@root/src/lib/pillars
 const WHITE = neutral[100];
 const BLACK = neutral[7];
 
+const blogsGrayBackgroundPalette = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+			return pillarPalette[format.theme].main;
+		default:
+			return pillarPalette[format.theme].dark;
+	}
+};
+
 const textHeadline = (format: ArticleFormat): string => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -84,6 +95,8 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 						default:
 							return WHITE;
 					}
+				case ArticleDesign.DeadBlog:
+					return blogsGrayBackgroundPalette(format);
 				case ArticleDesign.MatchReport:
 					return BLACK;
 				default:
@@ -97,6 +110,11 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 const textSectionTitle = textSeriesTitle;
 
 const textByline = (format: ArticleFormat): string => {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	)
+		return blogsGrayBackgroundPalette(format);
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
@@ -159,6 +177,8 @@ const textSubMeta = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
+	if (format.design === ArticleDesign.DeadBlog)
+		return blogsGrayBackgroundPalette(format);
 	return pillarPalette[format.theme].main;
 };
 
@@ -531,10 +551,21 @@ const backgroundSpeechBubble = (format: ArticleFormat): string => {
 };
 
 const fillCommentCount = (format: ArticleFormat): string => {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	)
+		return neutral[46];
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	return pillarPalette[format.theme].main;
+};
+
+const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	return fillCommentCount(format);
 };
 
 const fillShareIcon = (format: ArticleFormat): string => {
@@ -542,6 +573,25 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	return pillarPalette[format.theme].main;
+};
+
+const fillShareCountIcon = (): string => {
+	return neutral[46];
+};
+
+const fillShareCountIconUntilDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+	return fillShareCountIcon();
+};
+
+const fillShareIconGrayBackground = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return blogsGrayBackgroundPalette(format);
+		default:
+			return pillarPalette[format.theme].dark;
+	}
 };
 
 const fillCaptionCamera = (format: ArticleFormat): string =>
@@ -686,6 +736,17 @@ const textRichLink: (format: ArticleFormat) => string = (format) => {
 	return pillarPalette[ArticlePillar.News][400];
 };
 
+const hoverStandfirstLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.DeadBlog)
+		return pillarPalette[format.theme].main;
+	if (format.design === ArticleDesign.LiveBlog) {
+		return pillarPalette[format.theme].dark;
+	}
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[400];
+	return border.secondary;
+};
+
 const borderRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
 		return pillarPalette[format.theme].main;
@@ -798,14 +859,17 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 };
 
 const textPagination = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-		case ArticlePillar.Lifestyle:
-		case ArticlePillar.Sport:
-			return pillarPalette[format.theme][400];
-		default:
-			return pillarPalette[format.theme][300];
-	}
+	return blogsGrayBackgroundPalette(format);
+};
+
+const textShareCount = (): string => {
+	return text.supporting;
+};
+
+const textShareCountUntilDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	return text.supporting;
 };
 
 const borderPagination = (): string => {
@@ -813,14 +877,7 @@ const borderPagination = (): string => {
 };
 
 const hoverPagination = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-		case ArticlePillar.Lifestyle:
-		case ArticlePillar.Sport:
-			return pillarPalette[format.theme][400];
-		default:
-			return pillarPalette[format.theme][300];
-	}
+	return blogsGrayBackgroundPalette(format);
 };
 
 export const decidePalette = (format: ArticleFormat): Palette => {
@@ -864,6 +921,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			numberedPosition: textNumberedPosition(),
 			overlayedCaption: textOverlayed(),
 			pagination: textPagination(format),
+			shareCount: textShareCount(),
+			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -888,7 +947,11 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
+			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
 			shareIcon: fillShareIcon(format),
+			shareCountIcon: fillShareCountIcon(),
+			shareCountIconUntilDesktop: fillShareCountIconUntilDesktop(format),
+			shareIconGrayBackground: fillShareIconGrayBackground(format),
 			cameraCaptionIcon: fillCaptionCamera(format),
 			cardIcon: fillCardIcon(format),
 			richLink: fillRichLink(format),
@@ -918,6 +981,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
 			pagination: hoverPagination(format),
+			standfirstLink: hoverStandfirstLink(format),
 		},
 	};
 };
