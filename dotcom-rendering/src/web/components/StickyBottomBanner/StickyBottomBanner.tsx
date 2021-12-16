@@ -206,7 +206,7 @@ export const StickyBottomBanner = ({
 	idApiUrl,
 	switches,
 }: Props) => {
-	const asyncCountryCode = getLocaleCode;
+	const asyncCountryCode = getLocaleCode();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const signInGateWillShow = useSignInGateWillShow({
@@ -221,7 +221,7 @@ export const StickyBottomBanner = ({
 		const CMP = buildCmpBannerConfig();
 		const puzzlesBanner = buildPuzzlesBannerConfig({
 			isSignedIn,
-			asyncCountryCode: asyncCountryCode as unknown as Promise<string>,
+			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
@@ -239,7 +239,7 @@ export const StickyBottomBanner = ({
 		});
 		const readerRevenue = buildReaderRevenueBannerConfig({
 			isSignedIn,
-			asyncCountryCode: asyncCountryCode as unknown as Promise<string>,
+			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
