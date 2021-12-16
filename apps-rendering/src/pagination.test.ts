@@ -216,7 +216,7 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: some(`?page=with:block-0`),
+					newer: some(`?`),
 					newest: some(`?`),
 					older: none,
 					oldest: none,
@@ -245,7 +245,7 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: some(`?page=with:block-0`),
+					newer: some(`?`),
 					newest: some(`?`),
 					older: some(`?page=with:block-24`),
 					oldest: some(`?page=with:block-34`),

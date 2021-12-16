@@ -49,9 +49,13 @@ const getNewerPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
 ): Option<string> => {
-	if (pageNumber > 1) {
+	if (pageNumber > 2) {
 		const blocks = pages[pageNumber - 2];
 		return some(`?page=with:block-${blocks[0].id}`);
+	}
+
+	if (pageNumber === 2) {
+		return some(`?`);
 	}
 
 	return none;
