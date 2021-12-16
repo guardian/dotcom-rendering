@@ -1062,3 +1062,14 @@ interface PerformanceEntry {
 	loadTime: number;
 	renderTime: number;
 }
+
+declare namespace JSX {
+	interface IntrinsicElements {
+		'gu-hydrate': {
+			name: string;
+			when?: 'immediate' | 'idle' | 'visible';
+			props: any;
+			children: React.ReactNode;
+		};
+	}
+}
