@@ -13,11 +13,10 @@ import { initPerf } from '../initPerf';
 export const doHydration = (name: string, data: any, marker: HTMLElement) => {
 	const { start, end } = initPerf(`hydrate-${name}`);
 	start();
-	window
-		.guardianPolyfilledImport(
-			/* webpackInclude: /\.importable\.(tsx|jsx)$/ */
-			`../../components/${name}.importable`,
-		)
+	import(
+		/* webpackInclude: /\.importable\.(tsx|jsx)$/ */
+		`../../components/${name}.importable`
+	)
 		.then((module) => {
 			hydrate(h(module[name], data), marker);
 			marker.setAttribute('data-gu-hydrated', 'true');
