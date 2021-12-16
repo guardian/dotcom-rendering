@@ -9,7 +9,7 @@ import { selectPillar } from 'storybookHelpers';
 import {
 	getAllThemes,
 	getThemeNameAsString,
-} from '../../../common-rendering/src/fixtures/article';
+} from '@guardian/common-rendering/src/fixtures/article';
 import Standfirst from './standfirst';
 
 // ----- Stories ----- //
@@ -77,6 +77,7 @@ const Deadblog = (): ReactElement => {
 							theme: format.theme,
 						}}
 					/>
+					<br/>
 				</div>
 			))}
 		</>
