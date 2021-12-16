@@ -345,12 +345,13 @@ async function serveArticleGet(
 				if (richLinkDetails) {
 					await serveRichLinkDetails(mockedRenderingRequest, res);
 				} else {
+					const page: Option<string> = getPageId(req.query);
 					await serveArticleSwitch(
 						mockedRenderingRequest,
 						res,
 						isEditions,
 						themeOverride,
-						none,
+						page,
 					);
 				}
 			},

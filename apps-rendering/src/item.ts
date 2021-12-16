@@ -40,8 +40,8 @@ import { parseCardImage } from 'image';
 import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { parseMany as parseLiveBlocks } from 'liveBlock';
-import type { LiveBlogCurrentPage } from 'pagination';
-import { getCurrentPage } from 'pagination';
+import type { LiveBlogPagedBlocks } from 'pagination';
+import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { themeFromString } from 'themeStyles';
 
@@ -87,7 +87,7 @@ interface DeadBlog extends Fields {
 	design: ArticleDesign.DeadBlog;
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
-	currentPage: LiveBlogCurrentPage;
+	pagedBlocks: LiveBlogPagedBlocks;
 }
 
 interface Review extends Fields {
@@ -326,7 +326,10 @@ const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog =
 	(context: Context) =>
-	(request: RenderingRequest, page: Option<string>): LiveBlog | DeadBlog => {
+	(
+		request: RenderingRequest,
+		blockId: Option<string>,
+	): LiveBlog | DeadBlog => {
 		const { content } = request;
 		const body = content.blocks?.body ?? [];
 		const pageSize = content.tags.map((c) => c.id).includes('sport/sport')
@@ -334,14 +337,15 @@ const fromCapiLiveBlog =
 			: 10;
 
 		const parsedBlocks = parseLiveBlocks(body)(context);
-		const currentPage = getPagedBlocks(pageSize, parsedBlocks);
+		const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
+		console.log(pagedBlocks)
 		return {
 			design:
 				content.fields?.liveBloggingNow === true
 					? ArticleDesign.LiveBlog
 					: ArticleDesign.DeadBlog,
 			blocks: parsedBlocks,
-			currentPage: currentPage,
+			pagedBlocks,
 			totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
 			...itemFields(context, request),
 		};

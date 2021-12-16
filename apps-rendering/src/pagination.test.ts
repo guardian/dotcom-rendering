@@ -1,4 +1,4 @@
-import { some } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import { LiveBlock } from 'liveBlock';
 import { getPagedBlocks, Pagination, PageReference } from 'pagination';
 
@@ -25,7 +25,7 @@ describe('pagination', () => {
 		describe('given no block id', () => {
 			const blocks = generateBlocks(4);
 			const pageSize = 10;
-			const result = getPagedBlocks(pageSize, blocks);
+			const result = getPagedBlocks(pageSize, blocks, none);
 
 			it('should return expected currentPage object', () => {
 				const expectedCurrentPage: PageReference = {
@@ -40,6 +40,10 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
+					newer: none,
+					newest: none,
+					older: none,
+					oldest: none,
 					numberOfPages: 1,
 				};
 
@@ -50,7 +54,7 @@ describe('pagination', () => {
 		describe('given block if is not found', () => {
 			const blocks = generateBlocks(4);
 			const pageSize = 10;
-			const result = getPagedBlocks(pageSize, blocks, 'jhgjgh');
+			const result = getPagedBlocks(pageSize, blocks, some('jhgjgh'));
 
 			it('should return expected currentPage object', () => {
 				const expectedCurrentPage: PageReference = {
@@ -65,6 +69,10 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
+					newer: none,
+					newest: none,
+					older: none,
+					oldest: none,
 					numberOfPages: 1,
 				};
 
@@ -75,7 +83,7 @@ describe('pagination', () => {
 		describe('given total number of blocks is less than page size', () => {
 			const blocks = generateBlocks(4);
 			const pageSize = 10;
-			const result = getPagedBlocks(pageSize, blocks, '2');
+			const result = getPagedBlocks(pageSize, blocks, some('2'));
 
 			it('should return expected currentPage object', () => {
 				const expectedCurrentPage: PageReference = {
@@ -90,6 +98,10 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
+					newer: none,
+					newest: none,
+					older: none,
+					oldest: none,
 					numberOfPages: 1,
 				};
 
@@ -100,7 +112,7 @@ describe('pagination', () => {
 		describe('given total number of blocks is greater than page size (only 1 page)', () => {
 			const blocks = generateBlocks(15);
 			const pageSize = 10;
-			const result = getPagedBlocks(pageSize, blocks, '12');
+			const result = getPagedBlocks(pageSize, blocks, some('12'));
 
 			it('should return expected currentPage object', () => {
 				const expectedCurrentPage: PageReference = {
@@ -115,6 +127,10 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
+					newer: none,
+					newest: none,
+					older: none,
+					oldest: none,
 					numberOfPages: 1,
 				};
 
@@ -125,7 +141,7 @@ describe('pagination', () => {
 		describe('given total number of blocks is greater than page size (2 pages)', () => {
 			const blocks = generateBlocks(29);
 			const pageSize = 10;
-			const result = getPagedBlocks(pageSize, blocks, '12');
+			const result = getPagedBlocks(pageSize, blocks, some('12'));
 
 			it('should return expected currentPage object', () => {
 				const expectedCurrentPage: PageReference = {
@@ -140,18 +156,20 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					oldest: {
+					newer: none,
+					newest: none,
+					oldest: some({
 						blocks: blocks.slice(19, 29),
 						pageNumber: 2,
 						suffix: '',
 						isArchivePage: false,
-					},
-					older: {
+					}),
+					older: some({
 						blocks: blocks.slice(19, 29),
 						pageNumber: 2,
 						suffix: '',
 						isArchivePage: false,
-					},
+					}),
 					numberOfPages: 2,
 				};
 
@@ -162,7 +180,7 @@ describe('pagination', () => {
 		describe('given total number of blocks is greater than page size (3 pages)', () => {
 			const blocks = generateBlocks(35);
 			const pageSize = 10;
-			const result = getPagedBlocks(pageSize, blocks, '1');
+			const result = getPagedBlocks(pageSize, blocks, some('1'));
 
 			it('should return expected currentPage object', () => {
 				const expectedCurrentPage: PageReference = {
@@ -177,18 +195,20 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					oldest: {
+					newer: none,
+					newest: none,
+					oldest: some({
 						blocks: blocks.slice(25, 35),
 						pageNumber: 3,
 						suffix: '',
 						isArchivePage: false,
-					},
-					older: {
+					}),
+					older: some({
 						blocks: blocks.slice(15, 25),
 						pageNumber: 2,
 						suffix: '',
 						isArchivePage: false,
-					},
+					}),
 					numberOfPages: 3,
 				};
 
@@ -202,7 +222,7 @@ describe('pagination', () => {
 		describe('given second page is the last page', () => {
 			const blocks = generateBlocks(20);
 			const pageSize = 10;
-			const result = getPagedBlocks(pageSize, blocks, '14');
+			const result = getPagedBlocks(pageSize, blocks, some('14'));
 
 			it('should return expected currentPage object', () => {
 				const expectedCurrentPage: PageReference = {
@@ -217,18 +237,20 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: {
+					newer: some({
 						blocks: blocks.slice(0, 10),
 						pageNumber: 1,
 						suffix: '',
 						isArchivePage: false,
-					},
-					newest: {
+					}),
+					newest: some({
 						blocks: blocks.slice(0, 10),
 						pageNumber: 1,
 						suffix: '',
 						isArchivePage: false,
-					},
+					}),
+					older: none,
+					oldest: none,
 					numberOfPages: 2,
 				};
 
@@ -239,7 +261,7 @@ describe('pagination', () => {
 		describe('given second page is not the last page', () => {
 			const blocks = generateBlocks(44);
 			const pageSize = 10;
-			const result = getPagedBlocks(pageSize, blocks, '15');
+			const result = getPagedBlocks(pageSize, blocks, some('15'));
 
 			it('should return expected currentPage object', () => {
 				const expectedCurrentPage: PageReference = {
@@ -254,30 +276,30 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: {
+					newer: some({
 						blocks: blocks.slice(0, 14),
 						pageNumber: 1,
 						suffix: '',
 						isArchivePage: false,
-					},
-					newest: {
+					}),
+					newest: some({
 						blocks: blocks.slice(0, 14),
 						pageNumber: 1,
 						suffix: '',
 						isArchivePage: false,
-					},
-					older: {
+					}),
+					older: some({
 						blocks: blocks.slice(24, 34),
 						pageNumber: 3,
 						suffix: '',
 						isArchivePage: false,
-					},
-					oldest: {
+					}),
+					oldest: some({
 						blocks: blocks.slice(34, 44),
 						pageNumber: 4,
 						suffix: '',
 						isArchivePage: false,
-					},
+					}),
 					numberOfPages: 4,
 				};
 
@@ -290,7 +312,7 @@ describe('pagination', () => {
 	describe('middle page', () => {
 		const blocks = generateBlocks(54);
 		const pageSize = 10;
-		const result = getPagedBlocks(pageSize, blocks, '25');
+		const result = getPagedBlocks(pageSize, blocks, some('25'));
 
 		it('should return expected currentPage object', () => {
 			const expectedCurrentPage: PageReference = {
@@ -305,30 +327,30 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				newer: {
+				newer: some({
 					blocks: blocks.slice(14, 24),
 					pageNumber: 2,
 					suffix: '',
 					isArchivePage: false,
-				},
-				newest: {
+				}),
+				newest: some({
 					blocks: blocks.slice(0, 14),
 					pageNumber: 1,
 					suffix: '',
 					isArchivePage: false,
-				},
-				older: {
+				}),
+				older: some({
 					blocks: blocks.slice(34, 44),
 					pageNumber: 4,
 					suffix: '',
 					isArchivePage: false,
-				},
-				oldest: {
+				}),
+				oldest: some({
 					blocks: blocks.slice(44, 54),
 					pageNumber: 5,
 					suffix: '',
 					isArchivePage: false,
-				},
+				}),
 				numberOfPages: 5,
 			};
 
@@ -339,7 +361,7 @@ describe('pagination', () => {
 	describe('penultimate page', () => {
 		const blocks = generateBlocks(54);
 		const pageSize = 10;
-		const result = getPagedBlocks(pageSize, blocks, '37');
+		const result = getPagedBlocks(pageSize, blocks, some('37'));
 
 		it('should return expected currentPage object', () => {
 			const expectedCurrentPage: PageReference = {
@@ -354,30 +376,30 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				newer: {
+				newer: some({
 					blocks: blocks.slice(24, 34),
 					pageNumber: 3,
 					suffix: '',
 					isArchivePage: false,
-				},
-				newest: {
+				}),
+				newest: some({
 					blocks: blocks.slice(0, 14),
 					pageNumber: 1,
 					suffix: '',
 					isArchivePage: false,
-				},
-				older: {
+				}),
+				older: some({
 					blocks: blocks.slice(44, 54),
 					pageNumber: 5,
 					suffix: '',
 					isArchivePage: false,
-				},
-				oldest: {
+				}),
+				oldest: some({
 					blocks: blocks.slice(44, 54),
 					pageNumber: 5,
 					suffix: '',
 					isArchivePage: false,
-				},
+				}),
 				numberOfPages: 5,
 			};
 
@@ -388,7 +410,7 @@ describe('pagination', () => {
 	describe('final page', () => {
 		const blocks = generateBlocks(54);
 		const pageSize = 10;
-		const result = getPagedBlocks(pageSize, blocks, '53');
+		const result = getPagedBlocks(pageSize, blocks, some('53'));
 
 		it('should return expected currentPage object', () => {
 			const expectedCurrentPage: PageReference = {
@@ -403,22 +425,52 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				newer: {
+				older: none,
+				oldest: none,
+				newer: some({
 					blocks: blocks.slice(34, 44),
 					pageNumber: 4,
 					suffix: '',
 					isArchivePage: false,
-				},
-				newest: {
+				}),
+				newest: some({
 					blocks: blocks.slice(0, 14),
 					pageNumber: 1,
 					suffix: '',
 					isArchivePage: false,
-				},
+				}),
 				numberOfPages: 5,
 			};
 
 			expect(result.pagination).toEqual(expectedPagination);
 		});
 	});
+
+	describe('blog with no blocks', () => {
+		const pageSize = 10;
+		const result = getPagedBlocks(pageSize, [], none);
+
+		it('should return expected current page', () => {
+			const expectedCurrentPage: PageReference = {
+				blocks: [],
+				pageNumber: 1,
+				suffix: '',
+				isArchivePage: false,
+			};
+
+			expect(result.currentPage).toEqual(expectedCurrentPage);
+		});
+
+		it('should return expected pagination object', () => {
+			const expectedPagination: Pagination = {
+				newer: none,
+				newest: none,
+				older: none,
+				oldest: none,
+				numberOfPages: 1,
+			};
+
+			expect(result.pagination).toEqual(expectedPagination);
+		});
+	})
 });

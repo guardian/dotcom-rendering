@@ -1,3 +1,6 @@
+import { map, none, some, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 
 export type PageReference = {
@@ -8,158 +11,104 @@ export type PageReference = {
 };
 
 export type Pagination = {
-	newest?: PageReference;
-	newer?: PageReference;
-	oldest?: PageReference;
-	older?: PageReference;
+	newest: Option<PageReference>;
+	newer: Option<PageReference>;
+	oldest: Option<PageReference>;
+	older: Option<PageReference>;
 	numberOfPages: number;
 };
 
-export type LiveBlogCurrentPage = {
+export type LiveBlogPagedBlocks = {
 	currentPage: PageReference;
 	pagination: Pagination;
 };
 
-type PaginationData = {
-	firstPageLength: number;
-	length: number;
-	numberOfPages: number;
-	remainder: number;
-};
-
-// const getFirstPage = (
-// 	blocks: LiveBlock[],
-// 	pageSize: number,
-// 	pageNumber: number,
-// ): PageReference => {
-// 	const { remainder } = getPageDetails(pageSize, blocks);
-// 	console.log(getPageDetails(pageSize, blocks));
-// 	const sliceAt = remainder + pageSize;
-
-// 	return {
-// 		blocks: blocks.slice(0, sliceAt),
-// 		pageNumber,
-// 		suffix: '',
-// 		isArchivePage: false,
-// 	};
-// };
-
 const getOldestPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
-): PageReference | undefined => {
-	if (pageNumber === pages.length) return undefined;
+): Option<PageReference> => {
+	if (pageNumber >= pages.length) return none;
 
-	return {
+	return some({
 		blocks: pages[pages.length - 1],
 		pageNumber: pages.length,
 		suffix: '',
 		isArchivePage: false,
-	};
+	});
 };
 
 const getOlderPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
-): PageReference | undefined => {
+): Option<PageReference> => {
 	if (pageNumber < pages.length) {
-		return {
+		return some({
 			blocks: pages[pageNumber],
 			pageNumber: pageNumber + 1,
 			suffix: '',
 			isArchivePage: false,
-		};
+		});
 	}
 
-	return undefined;
+	return none;
 };
 
 const getNewerPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
-): PageReference | undefined => {
+): Option<PageReference> => {
 	if (pageNumber > 1) {
-		return {
+		return some({
 			blocks: pages[pageNumber - 2],
 			pageNumber: pageNumber - 1,
 			suffix: '',
 			isArchivePage: false,
-		};
+		});
 	}
 
-	return undefined;
+	return none;
 };
 
 const getNewestPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
-): PageReference | undefined => {
+): Option<PageReference> => {
 	if (pageNumber > 1) {
-		return {
+		return some({
 			blocks: pages[0],
 			pageNumber: 1,
 			suffix: '',
 			isArchivePage: false,
-		};
+		});
 	}
 
-	return undefined;
+	return none;
 };
 
-// const firstPage = (
-// 	blocks: LiveBlock[],
-// 	filterKeyEvents: boolean,
-// ): PageReference => {
-// 	return {
-// 		blocks: blocks,
-// 		pageNumber: 1,
-// 		suffix: `?filterKeyEvents=${filterKeyEvents}`,
-// 		isArchivePage: false,
-// 	};
-// };
-
-const getPageDetails = (
-	pageSize: number,
-	blocks: LiveBlock[],
-): PaginationData => {
+const getFirstPageLength = (pageSize: number, blocks: LiveBlock[]): number => {
 	const remainder = blocks.length % pageSize;
-	return {
-		firstPageLength: pageSize + remainder,
-		length: blocks.length,
-		numberOfPages: getNumberOfPages(pageSize, blocks),
-		remainder,
-	};
-};
-
-const getNumberOfPages = (pageSize: number, blocks: LiveBlock[]): number => {
-	const noPages = Math.floor(blocks.length / pageSize);
-
-	if (noPages < 1) return 1;
-	return noPages;
+	return pageSize + remainder;
 };
 
 const getPages = (
 	pageSize: number,
 	blocks: LiveBlock[],
-	paginationDetail: PaginationData,
+	firstPageLength: number,
 ): LiveBlock[][] => {
-	const firstPage = blocks.slice(0, paginationDetail.firstPageLength);
-	const restOfPages = blocks.slice(
-		paginationDetail.firstPageLength,
-		blocks.length,
-	);
+	const firstPage = blocks.slice(0, firstPageLength);
+	const restOfPages = blocks.slice(firstPageLength, blocks.length);
 
-	const liveblog2DArray = [firstPage];
+	const pages = [firstPage];
 	for (let i = 0; i < restOfPages.length; i += pageSize) {
-		const chunk = restOfPages.slice(i, i + pageSize);
-		liveblog2DArray.push(chunk);
+		const page = restOfPages.slice(i, i + pageSize);
+		pages.push(page);
 	}
-	return liveblog2DArray;
+	return pages;
 };
 
 const getCurrentPage = (
 	pages: LiveBlock[][],
-	blockId?: string,
+	blockId: Option<string>,
 ): PageReference => {
 	const firstPage = {
 		blocks: pages[0],
@@ -167,37 +116,45 @@ const getCurrentPage = (
 		suffix: '',
 		isArchivePage: false,
 	};
-	if (!blockId) {
-		return firstPage;
-	}
-	for (let i = 0; i < pages.length; i += 1) {
-		if (pages[i].some((x) => x.id === blockId)) {
-			return {
-				blocks: pages[i],
-				pageNumber: i + 1,
-				suffix: '',
-				isArchivePage: false,
-			};
-		}
-	}
-	return firstPage;
+
+	return pipe(
+		blockId,
+		map((id) => {
+			for (let i = 0; i < pages.length; i += 1) {
+				if (pages[i].some((x) => x.id === id)) {
+					return {
+						blocks: pages[i],
+						pageNumber: i + 1,
+						suffix: '',
+						isArchivePage: false,
+					};
+				}
+			}
+			return firstPage;
+		}),
+		withDefault(firstPage),
+	);
 };
 
 export const getPagedBlocks = (
 	pageSize: number,
 	blocks: LiveBlock[],
-	blockId?: string,
-): LiveBlogCurrentPage => {
-	const pages = getPages(pageSize, blocks, getPageDetails(pageSize, blocks));
+	blockId: Option<string>,
+): LiveBlogPagedBlocks => {
+	const pages = getPages(
+		pageSize,
+		blocks,
+		getFirstPageLength(pageSize, blocks),
+	);
 	const currentPage = getCurrentPage(pages, blockId);
 	return {
-		currentPage: currentPage,
+		currentPage,
 		pagination: {
 			newer: getNewerPage(pages, currentPage.pageNumber),
 			newest: getNewestPage(pages, currentPage.pageNumber),
 			older: getOlderPage(pages, currentPage.pageNumber),
 			oldest: getOldestPage(pages, currentPage.pageNumber),
-			numberOfPages: getNumberOfPages(pageSize, blocks),
+			numberOfPages: pages.length,
 		},
 	};
 };
