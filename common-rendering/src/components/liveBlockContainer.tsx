@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
-import { neutral, from, space, headline } from '@guardian/source-foundations';
-import { FirstPublished } from './FirstPublished';
+import { neutral, from, space, headline } from "@guardian/source-foundations";
+import { FirstPublished } from "./FirstPublished";
 
 const LEFT_MARGIN_DESKTOP = 60;
 const SIDE_MARGIN = space[5];
@@ -24,7 +24,7 @@ const BlockTitle = ({ title }: { title: string }) => {
 	return (
 		<h2
 			css={css`
-				${headline.xxsmall({ fontWeight: 'bold' })}
+				${headline.xxsmall({ fontWeight: "bold" })}
 				margin-bottom: ${space[2]}px;
 			`}
 		>
@@ -52,6 +52,7 @@ const LiveBlockContainer = ({
 		<article
 			id={`block-${id}`}
 			key={id}
+			className="block"
 			css={css`
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;

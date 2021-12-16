@@ -91,6 +91,8 @@ export const ArticleBody = ({
 				// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 				tabIndex={0}
 				id="maincontent"
+				// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
+				className="js-liveblog-body"
 				css={[globalStrongStyles, globalLinkStyles(palette)]}
 			>
 				<LiveBlogRenderer
