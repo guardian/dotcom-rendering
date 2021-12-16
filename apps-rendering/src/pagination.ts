@@ -11,10 +11,10 @@ export type PageReference = {
 };
 
 export type Pagination = {
-	newest: Option<PageReference>;
-	newer: Option<PageReference>;
-	oldest: Option<PageReference>;
-	older: Option<PageReference>;
+	newest: Option<string>;
+	newer: Option<string>;
+	oldest: Option<string>;
+	older: Option<string>;
 	numberOfPages: number;
 };
 
@@ -26,28 +26,20 @@ export type LiveBlogPagedBlocks = {
 const getOldestPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
-): Option<PageReference> => {
+): Option<string> => {
 	if (pageNumber >= pages.length) return none;
 
-	return some({
-		blocks: pages[pages.length - 1],
-		pageNumber: pages.length,
-		suffix: '',
-		isArchivePage: false,
-	});
+	const blocks = pages[pages.length - 1];
+	return some(`?page=with:block-${blocks[0].id}`);
 };
 
 const getOlderPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
-): Option<PageReference> => {
+): Option<string> => {
 	if (pageNumber < pages.length) {
-		return some({
-			blocks: pages[pageNumber],
-			pageNumber: pageNumber + 1,
-			suffix: '',
-			isArchivePage: false,
-		});
+		const blocks = pages[pageNumber];
+		return some(`?page=with:block-${blocks[0].id}`);
 	}
 
 	return none;
@@ -56,14 +48,10 @@ const getOlderPage = (
 const getNewerPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
-): Option<PageReference> => {
+): Option<string> => {
 	if (pageNumber > 1) {
-		return some({
-			blocks: pages[pageNumber - 2],
-			pageNumber: pageNumber - 1,
-			suffix: '',
-			isArchivePage: false,
-		});
+		const blocks = pages[pageNumber - 2];
+		return some(`?page=with:block-${blocks[0].id}`);
 	}
 
 	return none;
@@ -72,14 +60,9 @@ const getNewerPage = (
 const getNewestPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
-): Option<PageReference> => {
+): Option<string> => {
 	if (pageNumber > 1) {
-		return some({
-			blocks: pages[0],
-			pageNumber: 1,
-			suffix: '',
-			isArchivePage: false,
-		});
+		return some(`?`);
 	}
 
 	return none;

@@ -158,18 +158,8 @@ describe('pagination', () => {
 				const expectedPagination: Pagination = {
 					newer: none,
 					newest: none,
-					oldest: some({
-						blocks: blocks.slice(19, 29),
-						pageNumber: 2,
-						suffix: '',
-						isArchivePage: false,
-					}),
-					older: some({
-						blocks: blocks.slice(19, 29),
-						pageNumber: 2,
-						suffix: '',
-						isArchivePage: false,
-					}),
+					oldest: some(`?page=with:block-19`),
+					older: some(`?page=with:block-19`),
 					numberOfPages: 2,
 				};
 
@@ -197,18 +187,8 @@ describe('pagination', () => {
 				const expectedPagination: Pagination = {
 					newer: none,
 					newest: none,
-					oldest: some({
-						blocks: blocks.slice(25, 35),
-						pageNumber: 3,
-						suffix: '',
-						isArchivePage: false,
-					}),
-					older: some({
-						blocks: blocks.slice(15, 25),
-						pageNumber: 2,
-						suffix: '',
-						isArchivePage: false,
-					}),
+					oldest: some(`?page=with:block-25`),
+					older: some(`?page=with:block-15`),
 					numberOfPages: 3,
 				};
 
@@ -218,7 +198,6 @@ describe('pagination', () => {
 	});
 
 	describe('second page', () => {
-
 		describe('given second page is the last page', () => {
 			const blocks = generateBlocks(20);
 			const pageSize = 10;
@@ -237,18 +216,8 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: some({
-						blocks: blocks.slice(0, 10),
-						pageNumber: 1,
-						suffix: '',
-						isArchivePage: false,
-					}),
-					newest: some({
-						blocks: blocks.slice(0, 10),
-						pageNumber: 1,
-						suffix: '',
-						isArchivePage: false,
-					}),
+					newer: some(`?page=with:block-0`),
+					newest: some(`?`),
 					older: none,
 					oldest: none,
 					numberOfPages: 2,
@@ -276,37 +245,16 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: some({
-						blocks: blocks.slice(0, 14),
-						pageNumber: 1,
-						suffix: '',
-						isArchivePage: false,
-					}),
-					newest: some({
-						blocks: blocks.slice(0, 14),
-						pageNumber: 1,
-						suffix: '',
-						isArchivePage: false,
-					}),
-					older: some({
-						blocks: blocks.slice(24, 34),
-						pageNumber: 3,
-						suffix: '',
-						isArchivePage: false,
-					}),
-					oldest: some({
-						blocks: blocks.slice(34, 44),
-						pageNumber: 4,
-						suffix: '',
-						isArchivePage: false,
-					}),
+					newer: some(`?page=with:block-0`),
+					newest: some(`?`),
+					older: some(`?page=with:block-24`),
+					oldest: some(`?page=with:block-34`),
 					numberOfPages: 4,
 				};
 
 				expect(result.pagination).toEqual(expectedPagination);
 			});
 		});
-
 	});
 
 	describe('middle page', () => {
@@ -327,30 +275,10 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				newer: some({
-					blocks: blocks.slice(14, 24),
-					pageNumber: 2,
-					suffix: '',
-					isArchivePage: false,
-				}),
-				newest: some({
-					blocks: blocks.slice(0, 14),
-					pageNumber: 1,
-					suffix: '',
-					isArchivePage: false,
-				}),
-				older: some({
-					blocks: blocks.slice(34, 44),
-					pageNumber: 4,
-					suffix: '',
-					isArchivePage: false,
-				}),
-				oldest: some({
-					blocks: blocks.slice(44, 54),
-					pageNumber: 5,
-					suffix: '',
-					isArchivePage: false,
-				}),
+				newer: some(`?page=with:block-14`),
+				newest: some(`?`),
+				older: some(`?page=with:block-34`),
+				oldest: some(`?page=with:block-44`),
 				numberOfPages: 5,
 			};
 
@@ -376,30 +304,10 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				newer: some({
-					blocks: blocks.slice(24, 34),
-					pageNumber: 3,
-					suffix: '',
-					isArchivePage: false,
-				}),
-				newest: some({
-					blocks: blocks.slice(0, 14),
-					pageNumber: 1,
-					suffix: '',
-					isArchivePage: false,
-				}),
-				older: some({
-					blocks: blocks.slice(44, 54),
-					pageNumber: 5,
-					suffix: '',
-					isArchivePage: false,
-				}),
-				oldest: some({
-					blocks: blocks.slice(44, 54),
-					pageNumber: 5,
-					suffix: '',
-					isArchivePage: false,
-				}),
+				newer: some(`?page=with:block-24`),
+				newest: some(`?`),
+				older: some(`?page=with:block-44`),
+				oldest: some(`?page=with:block-44`),
 				numberOfPages: 5,
 			};
 
@@ -427,18 +335,8 @@ describe('pagination', () => {
 			const expectedPagination: Pagination = {
 				older: none,
 				oldest: none,
-				newer: some({
-					blocks: blocks.slice(34, 44),
-					pageNumber: 4,
-					suffix: '',
-					isArchivePage: false,
-				}),
-				newest: some({
-					blocks: blocks.slice(0, 14),
-					pageNumber: 1,
-					suffix: '',
-					isArchivePage: false,
-				}),
+				newer: some(`?page=with:block-34`),
+				newest: some(`?`),
 				numberOfPages: 5,
 			};
 
@@ -472,5 +370,5 @@ describe('pagination', () => {
 
 			expect(result.pagination).toEqual(expectedPagination);
 		});
-	})
+	});
 });
