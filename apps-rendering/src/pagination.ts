@@ -62,13 +62,42 @@ const getOlderPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
 ): PageReference | undefined => {
-	console.log('pages: ');
-	console.log(pages.length);
-	console.log(pageNumber);
 	if (pageNumber < pages.length) {
 		return {
 			blocks: pages[pageNumber],
 			pageNumber: pageNumber + 1,
+			suffix: '',
+			isArchivePage: false,
+		};
+	}
+
+	return undefined;
+};
+
+const getNewerPage = (
+	pages: LiveBlock[][],
+	pageNumber: number,
+): PageReference | undefined => {
+	if (pageNumber > 1) {
+		return {
+			blocks: pages[pageNumber - 2],
+			pageNumber: pageNumber - 1,
+			suffix: '',
+			isArchivePage: false,
+		};
+	}
+
+	return undefined;
+};
+
+const getNewestPage = (
+	pages: LiveBlock[][],
+	pageNumber: number,
+): PageReference | undefined => {
+	if (pageNumber > 1) {
+		return {
+			blocks: pages[0],
+			pageNumber: 1,
 			suffix: '',
 			isArchivePage: false,
 		};
@@ -164,6 +193,8 @@ export const getPagedBlocks = (
 	return {
 		currentPage: currentPage,
 		pagination: {
+			newer: getNewerPage(pages, currentPage.pageNumber),
+			newest: getNewestPage(pages, currentPage.pageNumber),
 			older: getOlderPage(pages, currentPage.pageNumber),
 			oldest: getOldestPage(pages, currentPage.pageNumber),
 			numberOfPages: getNumberOfPages(pageSize, blocks),

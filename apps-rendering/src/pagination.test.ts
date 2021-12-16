@@ -198,14 +198,104 @@ describe('pagination', () => {
 	});
 
 	describe('second page', () => {
-		const blocks = generateBlocks(20);
+
+		describe('given second page is the last page', () => {
+			const blocks = generateBlocks(20);
+			const pageSize = 10;
+			const result = getPagedBlocks(pageSize, blocks, '14');
+
+			it('should return expected currentPage object', () => {
+				const expectedCurrentPage: PageReference = {
+					blocks: blocks.slice(10, 20),
+					pageNumber: 2,
+					suffix: '',
+					isArchivePage: false,
+				};
+
+				expect(result.currentPage).toEqual(expectedCurrentPage);
+			});
+
+			it('should return expected pagination object', () => {
+				const expectedPagination: Pagination = {
+					newer: {
+						blocks: blocks.slice(0, 10),
+						pageNumber: 1,
+						suffix: '',
+						isArchivePage: false,
+					},
+					newest: {
+						blocks: blocks.slice(0, 10),
+						pageNumber: 1,
+						suffix: '',
+						isArchivePage: false,
+					},
+					numberOfPages: 2,
+				};
+
+				expect(result.pagination).toEqual(expectedPagination);
+			});
+		});
+
+		describe('given second page is not the last page', () => {
+			const blocks = generateBlocks(44);
+			const pageSize = 10;
+			const result = getPagedBlocks(pageSize, blocks, '15');
+
+			it('should return expected currentPage object', () => {
+				const expectedCurrentPage: PageReference = {
+					blocks: blocks.slice(14, 24),
+					pageNumber: 2,
+					suffix: '',
+					isArchivePage: false,
+				};
+
+				expect(result.currentPage).toEqual(expectedCurrentPage);
+			});
+
+			it('should return expected pagination object', () => {
+				const expectedPagination: Pagination = {
+					newer: {
+						blocks: blocks.slice(0, 14),
+						pageNumber: 1,
+						suffix: '',
+						isArchivePage: false,
+					},
+					newest: {
+						blocks: blocks.slice(0, 14),
+						pageNumber: 1,
+						suffix: '',
+						isArchivePage: false,
+					},
+					older: {
+						blocks: blocks.slice(24, 34),
+						pageNumber: 3,
+						suffix: '',
+						isArchivePage: false,
+					},
+					oldest: {
+						blocks: blocks.slice(34, 44),
+						pageNumber: 4,
+						suffix: '',
+						isArchivePage: false,
+					},
+					numberOfPages: 4,
+				};
+
+				expect(result.pagination).toEqual(expectedPagination);
+			});
+		});
+
+	});
+
+	describe('middle page', () => {
+		const blocks = generateBlocks(54);
 		const pageSize = 10;
-		const result = getPagedBlocks(pageSize, blocks, '14');
+		const result = getPagedBlocks(pageSize, blocks, '25');
 
 		it('should return expected currentPage object', () => {
 			const expectedCurrentPage: PageReference = {
-				blocks: blocks.slice(10, 20),
-				pageNumber: 2,
+				blocks: blocks.slice(24, 34),
+				pageNumber: 3,
 				suffix: '',
 				isArchivePage: false,
 			};
@@ -215,7 +305,117 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				numberOfPages: 2,
+				newer: {
+					blocks: blocks.slice(14, 24),
+					pageNumber: 2,
+					suffix: '',
+					isArchivePage: false,
+				},
+				newest: {
+					blocks: blocks.slice(0, 14),
+					pageNumber: 1,
+					suffix: '',
+					isArchivePage: false,
+				},
+				older: {
+					blocks: blocks.slice(34, 44),
+					pageNumber: 4,
+					suffix: '',
+					isArchivePage: false,
+				},
+				oldest: {
+					blocks: blocks.slice(44, 54),
+					pageNumber: 5,
+					suffix: '',
+					isArchivePage: false,
+				},
+				numberOfPages: 5,
+			};
+
+			expect(result.pagination).toEqual(expectedPagination);
+		});
+	});
+
+	describe('penultimate page', () => {
+		const blocks = generateBlocks(54);
+		const pageSize = 10;
+		const result = getPagedBlocks(pageSize, blocks, '37');
+
+		it('should return expected currentPage object', () => {
+			const expectedCurrentPage: PageReference = {
+				blocks: blocks.slice(34, 44),
+				pageNumber: 4,
+				suffix: '',
+				isArchivePage: false,
+			};
+
+			expect(result.currentPage).toEqual(expectedCurrentPage);
+		});
+
+		it('should return expected pagination object', () => {
+			const expectedPagination: Pagination = {
+				newer: {
+					blocks: blocks.slice(24, 34),
+					pageNumber: 3,
+					suffix: '',
+					isArchivePage: false,
+				},
+				newest: {
+					blocks: blocks.slice(0, 14),
+					pageNumber: 1,
+					suffix: '',
+					isArchivePage: false,
+				},
+				older: {
+					blocks: blocks.slice(44, 54),
+					pageNumber: 5,
+					suffix: '',
+					isArchivePage: false,
+				},
+				oldest: {
+					blocks: blocks.slice(44, 54),
+					pageNumber: 5,
+					suffix: '',
+					isArchivePage: false,
+				},
+				numberOfPages: 5,
+			};
+
+			expect(result.pagination).toEqual(expectedPagination);
+		});
+	});
+
+	describe('final page', () => {
+		const blocks = generateBlocks(54);
+		const pageSize = 10;
+		const result = getPagedBlocks(pageSize, blocks, '53');
+
+		it('should return expected currentPage object', () => {
+			const expectedCurrentPage: PageReference = {
+				blocks: blocks.slice(44, 54),
+				pageNumber: 5,
+				suffix: '',
+				isArchivePage: false,
+			};
+
+			expect(result.currentPage).toEqual(expectedCurrentPage);
+		});
+
+		it('should return expected pagination object', () => {
+			const expectedPagination: Pagination = {
+				newer: {
+					blocks: blocks.slice(34, 44),
+					pageNumber: 4,
+					suffix: '',
+					isArchivePage: false,
+				},
+				newest: {
+					blocks: blocks.slice(0, 14),
+					pageNumber: 1,
+					suffix: '',
+					isArchivePage: false,
+				},
+				numberOfPages: 5,
 			};
 
 			expect(result.pagination).toEqual(expectedPagination);
