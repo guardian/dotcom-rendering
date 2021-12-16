@@ -21,7 +21,6 @@ import { pipe } from 'lib';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss as darkMode } from 'styles';
-import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
@@ -94,24 +93,30 @@ const liveblogStyles: SerializedStyles = css`
 	}
 `;
 
-const deadblogStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxxsmall({ fontWeight: 'bold' })};
+const deadblogStyles = (format: ArticleFormat): SerializedStyles => {
+	const colour = text.standfirstLink(format);
 
-	a {
-		text-decoration: none;
-	}
+	return css`
+		${headline.xxxsmall({ fontWeight: 'bold' })};
 
-	a:link {
-		color: ${getThemeStyles(format.theme).deadblogStandfirstLink};
-		border-bottom: 1px solid ${neutral[86]};
-	}
+		a {
+			text-decoration: none;
+		}
 
-	a:hover {
-		color: ${getThemeStyles(format.theme).deadblogStandfirstLink};
-		border-bottom: 1px solid
-			${getThemeStyles(format.theme).deadblogStandfirstLink};
-	}
-`;
+		a:link {
+			color: ${colour};
+			border-bottom: 1px solid ${neutral[86]};
+		}
+
+		a:hover {
+			color: ${colour};
+			border-bottom: 1px solid
+				${colour};
+		}
+	`;
+}
+
+
 
 const media = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.standfirst(format)};

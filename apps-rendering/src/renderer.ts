@@ -18,7 +18,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
 import {
 	headline,
-	labs,
 	neutral,
 	remSpace,
 	textSans,
@@ -81,6 +80,7 @@ import {
 	themeToPillar,
 	themeToPillarString,
 } from 'themeStyles';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Renderer ----- //
 
@@ -276,19 +276,6 @@ const isBlog = (format: ArticleFormat): boolean =>
 	format.design === ArticleDesign.LiveBlog ||
 	format.design === ArticleDesign.DeadBlog;
 
-const linkColourFromFormat = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) {
-		return labs[300];
-	}
-
-	if (isBlog(format)) {
-		return neutral[100];
-	}
-
-	const { kicker, inverted } = getThemeStyles(format.theme);
-	return format.design === ArticleDesign.Media ? inverted : kicker;
-};
-
 const borderFromFormat = (format: ArticleFormat): string => {
 	const { liveblogKicker } = getThemeStyles(format.theme);
 
@@ -321,7 +308,7 @@ const standfirstTextElement =
 				return h(ListItem, { format, children });
 			case 'A': {
 				const styles = css`
-					color: ${linkColourFromFormat(format)};
+					color: ${text.standfirstLink(format)};
 					${borderFromFormat(format)};
 				`;
 				const url = withDefault('')(getHref(node));
@@ -335,7 +322,7 @@ const standfirstTextElement =
 		}
 	};
 
-const text = (
+const renderText = (
 	doc: DocumentFragment,
 	format: ArticleFormat,
 	isEditions = false,
@@ -477,7 +464,7 @@ const textRenderer = (
 ): ReactNode => {
 	return excludeStyles
 		? Array.from(element.doc.childNodes).map(plainTextElement)
-		: text(element.doc, format, isEditions);
+		: renderText(element.doc, format, isEditions);
 };
 
 const guideAtomRenderer = (
@@ -797,7 +784,7 @@ export {
 	renderAll,
 	renderEditionsAll,
 	renderAllWithoutStyles,
-	text as renderText,
+	renderText,
 	textElement as renderTextElement,
 	standfirstText as renderStandfirstText,
 	getHref,

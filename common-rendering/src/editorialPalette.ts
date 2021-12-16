@@ -8,8 +8,10 @@ import {
   opinion,
   specialReport,
   sport,
+  labs,
 } from "@guardian/source-foundations";
 import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar, ArticleSpecial } from "@guardian/libs";
+import { getThemeStyles } from 'themeStyles';
 
 // ----- Types ----- //
 
@@ -21,6 +23,7 @@ interface Palette {
 		headlineDark: Colour;
 		standfirst: Colour;
 		standfirstDark: Colour;
+		standfirstLink: Colour;
 	};
 	background: {
 		headline: Colour;
@@ -107,6 +110,43 @@ const textStandfirstDark = ({ design }: ArticleFormat): Colour => {
 			return neutral[60];
 	}
 };
+
+const blogsGrayBackgroundPalette = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
+};
+
+const textStandfirstLink = (format: ArticleFormat): Colour => {
+
+	switch(format.design) {
+		case ArticleDesign.LiveBlog:
+			return neutral[100];
+		case ArticleDesign.DeadBlog:
+			return blogsGrayBackgroundPalette(format);
+		default: {
+			if(format.theme == ArticleSpecial.Labs)
+				return labs[300];
+
+			const { kicker, inverted } = getThemeStyles(format.theme);
+
+			return format.design === ArticleDesign.Media ? inverted : kicker;
+		}
+	}
+}
 
 const backgroundHeadline = (format: ArticleFormat): Colour => {
 	if (format.display === ArticleDisplay.Immersive) {
@@ -278,6 +318,8 @@ const text = {
 	headlineDark: textHeadlineDark,
 	standfirst: textStandfirst,
 	standfirstDark: textStandfirstDark,
+	standfirstLink: textStandfirstLink,
+
 };
 
 const background = {
@@ -303,6 +345,7 @@ const palette = (format: ArticleFormat): Palette => ({
 		headlineDark: text.headlineDark(format),
 		standfirst: text.standfirst(format),
 		standfirstDark: text.standfirstDark(format),
+		standfirstLink: text.standfirstLink(format),
 	},
 	background: {
 		headline: background.headline(format),
