@@ -15,7 +15,6 @@ import type { DeadBlog, LiveBlog } from 'item';
 import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { LiveBlogPagedBlocks } from 'pagination';
-import { getPagedBlocks } from 'pagination';
 
 const parser = new DOMParser();
 const parseHtml = parse(parser);
