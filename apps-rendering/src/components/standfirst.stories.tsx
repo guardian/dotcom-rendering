@@ -1,15 +1,15 @@
 // ----- Imports ----- //
 
+import {
+	getAllThemes,
+	getThemeNameAsString,
+} from '@guardian/common-rendering/src/fixtures/article';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { article, comment, feature, review } from 'fixtures/item';
 import { deadBlog } from 'fixtures/live';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
-import {
-	getAllThemes,
-	getThemeNameAsString,
-} from '@guardian/common-rendering/src/fixtures/article';
 import Standfirst from './standfirst';
 
 // ----- Stories ----- //
@@ -77,7 +77,7 @@ const Deadblog = (): ReactElement => {
 							theme: format.theme,
 						}}
 					/>
-					<br/>
+					<br />
 				</div>
 			))}
 		</>

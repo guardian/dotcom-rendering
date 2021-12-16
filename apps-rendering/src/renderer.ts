@@ -13,6 +13,7 @@ import {
 } from '@guardian/atoms-rendering';
 import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
@@ -80,7 +81,6 @@ import {
 	themeToPillar,
 	themeToPillarString,
 } from 'themeStyles';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Renderer ----- //
 

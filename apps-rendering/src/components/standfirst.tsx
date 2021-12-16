@@ -110,13 +110,10 @@ const deadblogStyles = (format: ArticleFormat): SerializedStyles => {
 
 		a:hover {
 			color: ${colour};
-			border-bottom: 1px solid
-				${colour};
+			border-bottom: 1px solid ${colour};
 		}
 	`;
-}
-
-
+};
 
 const media = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.standfirst(format)};
