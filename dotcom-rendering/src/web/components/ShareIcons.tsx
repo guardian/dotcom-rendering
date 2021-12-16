@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from } from '@guardian/src-foundations/mq';
+import { from, until } from '@guardian/source-foundations';
 
 import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
 import FacebookIcon from '@frontend/static/icons/facebook.svg';
@@ -9,14 +9,19 @@ import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
 import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
 import MessengerIcon from '@frontend/static/icons/messenger.svg';
 
+import { ArticleDesign } from '@guardian/libs';
 import { Hide } from './Hide';
+
+type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
 
 type Props = {
 	pageId: string;
 	webTitle: string;
 	displayIcons: SharePlatform[];
 	palette: Palette;
+	format: ArticleFormat;
 	size: ShareIconSize;
+	context: Context;
 };
 
 const ulStyles = css`
@@ -36,6 +41,29 @@ const liStyles = (size: ShareIconSize) => css`
 const topMarginStlyes = css`
 	margin-top: 3px;
 `;
+
+const decideIconColor = (
+	palette: Palette,
+	format: ArticleFormat,
+	context: Context,
+) => {
+	if (format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta') {
+		return css`
+			fill: ${palette.fill.shareIconGrayBackground};
+			${until.desktop} {
+				fill: ${palette.text.standfirst};
+			}
+		`;
+	}
+	if (format.design === ArticleDesign.DeadBlog && context === 'ArticleMeta') {
+		return css`
+			fill: ${palette.fill.shareIconGrayBackground};
+		`;
+	}
+	return css`
+		fill: ${palette.fill.shareIcon};
+	`;
+};
 
 const iconStyles = ({
 	palette,
@@ -57,7 +85,6 @@ const iconStyles = ({
 	vertical-align: middle;
 	position: relative;
 	box-sizing: content-box;
-	fill: ${palette.fill.shareIcon};
 
 	svg {
 		height: 88%;
@@ -89,7 +116,9 @@ export const ShareIcons = ({
 	webTitle,
 	displayIcons,
 	palette,
+	format,
 	size,
+	context,
 }: Props) => {
 	return (
 		<ul css={ulStyles}>
@@ -105,7 +134,12 @@ export const ShareIcons = ({
 						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, size })}>
+						<span
+							css={[
+								iconStyles({ palette, size }),
+								decideIconColor(palette, format, context),
+							]}
+						>
 							<FacebookIcon />
 						</span>
 					</a>
@@ -124,7 +158,12 @@ export const ShareIcons = ({
 						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, size })}>
+						<span
+							css={[
+								iconStyles({ palette, size }),
+								decideIconColor(palette, format, context),
+							]}
+						>
 							<TwitterIconPadded />
 						</span>
 					</a>
@@ -142,7 +181,12 @@ export const ShareIcons = ({
 						target="_blank"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, size })}>
+						<span
+							css={[
+								iconStyles({ palette, size }),
+								decideIconColor(palette, format, context),
+							]}
+						>
 							<EmailIcon />
 						</span>
 					</a>
@@ -161,7 +205,12 @@ export const ShareIcons = ({
 						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
-						<span css={iconStyles({ palette, size })}>
+						<span
+							css={[
+								iconStyles({ palette, size }),
+								decideIconColor(palette, format, context),
+							]}
+						>
 							<LinkedInIcon />
 						</span>
 					</a>
@@ -181,7 +230,12 @@ export const ShareIcons = ({
 							rel="noreferrer"
 							data-ignore="global-link-styling"
 						>
-							<span css={iconStyles({ palette, size })}>
+							<span
+								css={[
+									iconStyles({ palette, size }),
+									decideIconColor(palette, format, context),
+								]}
+							>
 								<WhatsAppIcon />
 							</span>
 						</a>
@@ -202,7 +256,12 @@ export const ShareIcons = ({
 							rel="noreferrer"
 							data-ignore="global-link-styling"
 						>
-							<span css={iconStyles({ palette, size })}>
+							<span
+								css={[
+									iconStyles({ palette, size }),
+									decideIconColor(palette, format, context),
+								]}
+							>
 								<MessengerIcon />
 							</span>
 						</a>

@@ -1,32 +1,33 @@
 name: DCR cypress
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
+  push:
+    paths-ignore:
+      - "apps-rendering/**"
 jobs:
-    cypress:
-        name: DCR Cypress
-        runs-on: ubuntu-20.04
-        strategy:
-            fail-fast: false
-            matrix:
-                group: [1, 2, 3, 4, 5, 6]
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v1
+  cypress:
+    name: DCR Cypress
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [1, 2, 3, 4, 5, 6]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
 
-            # Make sure we install dependencies in the root directory
-            - uses: bahmutov/npm-install@v1
+      - name: Install Node
+        uses: guardian/actions-setup-node@main
 
-            - name: Cypress run
-              uses: cypress-io/github-action@v2
-              env:
-                  NODE_ENV: development
-              with:
-                  start: node scripts/frontend/dev-server
-                  working-directory: dotcom-rendering
-                  wait-on: "http://localhost:3030"
-                  wait-on-timeout: 180
-                  quiet: true
-                  browser: chrome
-                  spec: cypress/integration/parallel-${{ matrix.group }}/*.js
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: make start-ci
+          working-directory: dotcom-rendering
+          wait-on: "http://localhost:9000"
+          wait-on-timeout: 30
+          browser: chrome
+          spec: cypress/integration/parallel-${{ matrix.group }}/*.js

@@ -5,7 +5,7 @@ import MockDate from 'mockdate';
 
 import { getFontsCss } from '@root/src/lib/fonts-css';
 
-import { resets } from '@guardian/src-foundations/utils'
+import { resets } from '@guardian/source-foundations'
 
 import { Lazy } from '@root/src/web/components/Lazy';
 import { Picture } from '@root/src/web/components/Picture';

@@ -1,15 +1,13 @@
 import { SerializedStyles, css } from '@emotion/react';
 
-import { space } from '@guardian/src-foundations';
-import { LinkButton } from '@guardian/src-button';
-import { textSans } from '@guardian/src-foundations/typography';
+import { space, textSans, until } from '@guardian/source-foundations';
 import {
+	LinkButton,
 	SvgChevronLeftSingle,
 	SvgChevronLeftDouble,
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
-} from '@guardian/src-icons';
-import { until } from '@guardian/src-foundations/mq';
+} from '@guardian/source-react-components';
 import { Hide } from './Hide';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -40,17 +38,17 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Section = ({
-	isFirst = false,
+	hide = false,
 	children,
 }: {
-	isFirst?: boolean;
+	hide?: boolean;
 	children: React.ReactNode;
 }) => (
 	<section
 		css={css`
 			display: flex;
 			align-items: center;
-			visibility: ${isFirst ? 'hidden' : 'visible'};
+			visibility: ${hide ? 'hidden' : 'visible'};
 		`}
 	>
 		{children}
@@ -115,7 +113,7 @@ export const Pagination = ({
 
 	return (
 		<Container>
-			<Section isFirst={currentPage === 1}>
+			<Section hide={currentPage === 1}>
 				<Hide when="above" breakpoint="phablet">
 					<LinkButton
 						size="small"
@@ -160,7 +158,7 @@ export const Pagination = ({
 					<Bold>{totalPages}</Bold>
 				</Position>
 			</Section>
-			<Section>
+			<Section hide={currentPage === totalPages}>
 				<LinkButton
 					size="small"
 					priority="tertiary"

@@ -5,16 +5,20 @@ import {
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';
-import { until } from '@guardian/src-foundations/mq';
-import { text, neutral, opinion } from '@guardian/src-foundations/palette';
-import { textSans } from '@guardian/src-foundations/typography';
+import {
+	until,
+	text,
+	neutral,
+	opinion,
+	textSans,
+} from '@guardian/source-foundations';
 
 import { Elements } from '@root/src/amp/components/Elements';
 import { ArticleModel } from '@root/src/amp/types/ArticleModel';
 import { TopMeta } from '@root/src/amp/components/topMeta/TopMeta';
 import { SubMeta } from '@root/src/amp/components/SubMeta';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
-import { Ad } from '@root/src/amp/components/Ad';
+import { RegionalAd } from '@root/src/amp/components/RegionalAd';
 import { StickyAd } from '@root/src/amp/components/StickyAd';
 import { findAdSlots } from '@root/src/amp/lib/find-adslots';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
@@ -148,7 +152,7 @@ export const Body: React.FC<{
 								data-sort-time="1"
 								css={adStyle}
 							>
-								<Ad
+								<RegionalAd
 									edition={data.editionId}
 									section={data.sectionName || ''}
 									contentType={adInfo.contentType}
@@ -191,7 +195,6 @@ export const Body: React.FC<{
 			{epic}
 
 			<StickyAd
-				adRegion="US"
 				edition={data.editionId}
 				section={data.sectionName || ''}
 				contentType={adInfo.contentType}

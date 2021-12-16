@@ -3,10 +3,16 @@ import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { neutral, opinion, text } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { SvgQuote } from '@guardian/src-icons';
+import {
+	from,
+	headline,
+	neutral,
+	opinion,
+	remSpace,
+	text,
+	textSans,
+} from '@guardian/source-foundations';
+import { SvgQuote } from '@guardian/source-react-components';
 import type { Option } from '@guardian/types';
 import { fromNullable, map, withDefault } from '@guardian/types';
 import { makeRelativeDate } from 'date';
@@ -26,13 +32,11 @@ const borderColor = (format: ArticleFormat): SerializedStyles => {
 const listStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		background: white;
-		margin-right: ${remSpace[3]};
-		flex: 0 0 15rem;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
+		margin-right: ${remSpace[2]};
+		flex: 0 0 42vw;
 		justify-content: space-between;
 		border-top: ${borderColor(format)};
+		max-width: 10rem;
 
 		&.fade {
 			opacity: 0.7;
@@ -41,6 +45,18 @@ const listStyles = (format: ArticleFormat): SerializedStyles => {
 		${darkModeCss`
             background: ${neutral[7]};
         `}
+
+		${from.tablet} {
+			margin-right: ${remSpace[5]};
+		}
+
+		${from.desktop} {
+			max-width: 13.75rem;
+		}
+
+		&:last-of-type {
+			margin-right: 0;
+		}
 	`;
 };
 
@@ -49,12 +65,11 @@ const bylineImage = css`
 	right: 0.625rem;
 	top: 0.375rem;
 	overflow: hidden;
-	height: 8.25rem;
-	width: 8.25rem;
+	height: 4.75rem;
+	width: 4.75rem;
 	contain: paint;
 	background-color: ${opinion[400]};
 	float: right;
-	margin: 0 ${remSpace[3]} 0 0;
 	position: relative;
 
 	img {
@@ -63,48 +78,70 @@ const bylineImage = css`
 		top: 0;
 		bottom: 0;
 		right: 0;
-		height: 8.25rem;
+		height: 4.75rem;
 		left: -0.625rem;
+
+		${from.desktop} {
+			height: 8.25rem;
+		}
+	}
+
+	${from.desktop} {
+		width: 8.25rem;
+		height: 8.25rem;
 	}
 `;
 
 const anchorStyles = css`
 	color: ${neutral[7]};
 	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 	${darkModeCss`
         color: ${neutral[86]};
     `}
 `;
 
 const headingWrapperStyles = css`
-	padding: ${remSpace[3]};
-	min-height: 10rem;
+	padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
+	flex-grow: 1;
 `;
 
 const headingStyles: SerializedStyles = css`
-	${headline.xxsmall()}
-	margin: 0 0 ${remSpace[3]} 0;
+	${headline.xxxsmall()}
+	margin: 0;
+
+	${from.desktop} {
+		${headline.xxsmall()}
+	}
 `;
 
 const cardStyles: SerializedStyles = css`
-	background-color: ${opinion[800]};
+	background-color: ${neutral[100]};
 	${headline.xxsmall()}
 `;
 
 const commentIconStyle = (): SerializedStyles => {
 	return css`
-		width: 2rem;
-		height: 1.4375rem;
+		width: 1.5rem;
+		height: 1.5rem;
 		display: inline-block;
 		fill: ${opinion[400]};
-		vertical-align: text-top;
-		margin-top: -3px;
-		margin-right: -2px;
+		vertical-align: text-bottom;
+		margin-bottom: -3px;
+		margin-left: -3px;
+
+		${from.desktop} {
+			width: 1.688rem;
+			height: 1.688rem;
+		}
 	`;
 };
 
 const bylineStyles: SerializedStyles = css`
 	color: ${opinion[400]};
+	font-style: italic;
 `;
 
 const byline = (relatedItem: RelatedItem): ReactElement | null => {
@@ -141,6 +178,7 @@ const dateStyles = css`
 	float: right;
 	margin-right: ${remSpace[3]};
 	align-self: flex-end;
+	font-weight: 700;
 `;
 
 const lineStyles = css`
@@ -178,7 +216,7 @@ const footerStyles = css`
 `;
 
 const BylineCard: FC<Props> = ({ relatedItem }) => {
-	const { link, pillar, lastModified } = relatedItem;
+	const { title, link, pillar, webPublicationDate } = relatedItem;
 	const format = {
 		theme: themeFromString(pillar.id),
 		design: ArticleDesign.Standard,
@@ -186,8 +224,10 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
 	};
 
 	const img = cardImage(relatedItem);
-	const date = lastModified
-		? relativeFirstPublished(fromNullable(new Date(lastModified.iso8601)))
+	const date = webPublicationDate
+		? relativeFirstPublished(
+				fromNullable(new Date(webPublicationDate.iso8601)),
+		  )
 		: null;
 	return (
 		<li
@@ -201,7 +241,7 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
 						<span css={commentIconStyle}>
 							<SvgQuote />
 						</span>
-						{relatedItem.title}
+						{title}
 						{byline(relatedItem)}
 					</h3>
 				</section>

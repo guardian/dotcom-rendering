@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
-import { headline } from '@guardian/src-foundations/typography';
-import { text } from '@guardian/src-foundations/palette';
+import { headline, text } from '@guardian/source-foundations';
 
 import { isLight } from '@frontend/web/lib/isLight';
 

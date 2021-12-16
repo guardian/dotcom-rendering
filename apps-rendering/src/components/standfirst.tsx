@@ -2,13 +2,19 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
+import {
+	headline,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
-import { background, text } from 'editorialPalette';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe } from 'lib';
@@ -23,11 +29,11 @@ interface Props {
 }
 
 const darkStyles = (format: ArticleFormat): SerializedStyles => darkMode`
-    background: ${background.standfirstPrimaryInverse(format)};
-    color: ${text.standfirstPrimaryInverse(format)};
+    background: ${background.standfirstDark(format)};
+    color: ${text.standfirstDark(format)};
 
     a {
-        color: ${text.standfirstPrimaryInverse(format)};
+        color: ${text.standfirstDark(format)};
         border-bottom: 0.0625rem solid ${neutral[46]};
     }
 `;
@@ -38,8 +44,8 @@ const isNotBlog = (format: ArticleFormat): boolean =>
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	margin-bottom: ${remSpace[3]};
-	color: ${text.standfirstPrimary(format)};
-	background-color: ${background.standfirstPrimary(format)};
+	color: ${text.standfirst(format)};
+	background-color: ${background.standfirst(format)};
 
 	p,
 	ul {
@@ -88,7 +94,7 @@ const liveblogStyles: SerializedStyles = css`
 `;
 
 const media = (format: ArticleFormat): SerializedStyles => css`
-	color: ${text.standfirstPrimary(format)};
+	color: ${text.standfirst(format)};
 	p,
 	ul,
 	li {

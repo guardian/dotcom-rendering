@@ -4,13 +4,15 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { neutral, remSpace, text } from '@guardian/src-foundations';
-import type {
-	FontWeight,
-	LineHeight,
-} from '@guardian/src-foundations/dist/types/typography/types';
-import { from } from '@guardian/src-foundations/mq';
-import { body, headline } from '@guardian/src-foundations/typography';
+import type { FontWeight, LineHeight } from '@guardian/source-foundations';
+import {
+	body,
+	from,
+	headline,
+	neutral,
+	remSpace,
+	text,
+} from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';

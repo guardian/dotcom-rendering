@@ -1,11 +1,13 @@
+import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 
-import { space } from '@guardian/src-foundations';
-import { neutral } from '@guardian/src-foundations/palette';
-import { body } from '@guardian/src-foundations/typography';
-import { SvgAlertRound } from '@guardian/src-icons';
+import { space, neutral, body } from '@guardian/source-foundations';
+import { SvgAlertRound } from '@guardian/source-react-components';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type {
+	Callback,
+	ConsentState,
+} from '@guardian/consent-management-platform/dist/types';
 
 import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
 import { record } from '@root/src/web/browser/ophan/ophan';
@@ -28,7 +30,6 @@ type Props = {
 		width: number;
 	}[];
 	adTargeting?: AdTargeting;
-	consentState?: ConsentState;
 	isMainMedia?: boolean;
 	height?: number;
 	width?: number;
@@ -82,13 +83,35 @@ export const YoutubeBlockComponent = ({
 	expired,
 	role,
 	adTargeting,
-	consentState,
 	isMainMedia,
 	height = 259,
 	width = 460,
 	duration,
 	origin,
 }: Props): JSX.Element => {
+	const [consentState, setConsentState] = useState<ConsentState | undefined>(
+		undefined,
+	);
+
+	useEffect(() => {
+		import(
+			/* webpackChunkName: "cmp" */ '@guardian/consent-management-platform'
+		)
+			.then(
+				(module: { onConsentChange: (callback: Callback) => void }) => {
+					module.onConsentChange((newConsent: ConsentState) => {
+						setConsentState(newConsent);
+					});
+				},
+			)
+			.catch((error) => {
+				window.guardian.modules.sentry.reportError(
+					new Error(`Error: ${error}`),
+					'youtube-consent',
+				);
+			});
+	}, []);
+
 	const palette = decidePalette(format);
 	const shouldLimitWidth =
 		!isMainMedia &&

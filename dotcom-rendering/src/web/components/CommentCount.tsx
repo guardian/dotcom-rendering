@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
-import { textSans } from '@guardian/src-foundations/typography';
-import { between } from '@guardian/src-foundations/mq';
+import { textSans, between, until } from '@guardian/source-foundations';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 import CommentIcon from '@frontend/static/icons/comment.svg';
@@ -21,6 +20,10 @@ const containerStyles = (palette: Palette) => css`
 	font-weight: bold;
 	color: ${palette.fill.commentCount};
 	padding-top: 5px;
+
+	${until.desktop} {
+		color: ${palette.fill.commentCountUntilDesktop};
+	}
 `;
 
 const iconContainerStyles = css`
@@ -36,6 +39,9 @@ const iconContainerStyles = css`
 
 const iconStyles = (palette: Palette) => css`
 	fill: ${palette.fill.commentCount};
+	${until.desktop} {
+		fill: ${palette.fill.commentCountUntilDesktop};
+	}
 `;
 
 const longStyles = css`

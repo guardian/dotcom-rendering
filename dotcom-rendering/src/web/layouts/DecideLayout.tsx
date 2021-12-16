@@ -1,60 +1,57 @@
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
 
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
-import { InteractiveImmersiveLayout } from './InteractiveImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
+import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 
 type Props = {
 	CAPI: CAPIType;
 	NAV: NavType;
+	format: ArticleFormat;
 };
 
-export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
-	const display: ArticleDisplay = decideDisplay(CAPI.format);
-	const design: ArticleDesign = decideDesign(CAPI.format);
-	const theme: ArticlePillar = decideTheme(CAPI.format);
-	const format: ArticleFormat = {
-		display,
-		design,
-		theme,
-	};
+export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 	const palette = decidePalette(format);
 
 	// TODO we can probably better express this as data
-	switch (display) {
+	switch (format.display) {
 		case ArticleDisplay.Immersive: {
-			if (design === ArticleDesign.Interactive) {
-				return (
-					<InteractiveImmersiveLayout
-						CAPI={CAPI}
-						NAV={NAV}
-						format={format}
-					/>
-				);
+			switch (format.design) {
+				case ArticleDesign.Interactive: {
+					// Render all 'immersive interactives' until switchover date as 'FullPageInteractive'
+					// TBD: After 'immersive interactive' changes to CAPI are merged, add logic here to either use
+					// 'InteractiveImmersiveLayout' if published after switchover date, or 'FullPageInteractiveLayout'
+					// if published before.
+					return (
+						<FullPageInteractiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+						/>
+					);
+				}
+				default: {
+					return (
+						<ImmersiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							palette={palette}
+							format={format}
+						/>
+					);
+				}
 			}
-
-			return (
-				<ImmersiveLayout
-					CAPI={CAPI}
-					NAV={NAV}
-					palette={palette}
-					format={format}
-				/>
-			);
 		}
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Showcase: {
-			switch (design) {
+			switch (format.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
@@ -89,7 +86,7 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 		}
 		case ArticleDisplay.Standard:
 		default: {
-			switch (design) {
+			switch (format.design) {
 				case ArticleDesign.Interactive:
 					return (
 						<InteractiveLayout
@@ -99,6 +96,15 @@ export const DecideLayout = ({ CAPI, NAV }: Props): JSX.Element => {
 							palette={palette}
 						/>
 					);
+				case ArticleDesign.FullPageInteractive: {
+					return (
+						<FullPageInteractiveLayout
+							CAPI={CAPI}
+							NAV={NAV}
+							format={format}
+						/>
+					);
+				}
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (

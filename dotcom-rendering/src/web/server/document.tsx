@@ -1,13 +1,17 @@
+import { CacheProvider } from '@emotion/react';
 import { renderToString } from 'react-dom/server';
-
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
+
+import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 
 import { Page } from '@root/src/web/components/Page';
 
 import { escapeData } from '@root/src/lib/escapeData';
 import {
-	CDN,
+	ASSET_ORIGIN,
 	getScriptArrayFromFilename,
 	getScriptArrayFromChunkName,
 	loadableManifestJson,
@@ -16,15 +20,10 @@ import {
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
 import { ArticlePillar } from '@guardian/libs';
-import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
-import { decideTheme } from '../lib/decideTheme';
-import { SkipTo } from '../components/SkipTo';
 
-interface RenderToStringResult {
-	html: string;
-	css: string;
-	ids: string[];
+interface Props {
+	data: DCRServerDocumentData;
 }
 
 const generateScriptTags = (
@@ -43,10 +42,6 @@ const generateScriptTags = (
 		];
 	}, [] as string[]);
 
-interface Props {
-	data: DCRServerDocumentData;
-}
-
 const decideTitle = (CAPI: CAPIType): string => {
 	if (
 		decideTheme(CAPI.format) === ArticlePillar.Opinion &&
@@ -62,20 +57,25 @@ export const document = ({ data }: Props): string => {
 	const title = decideTitle(CAPI);
 	const key = 'dcr';
 	const cache = createCache({ key });
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const { extractCritical } = createEmotionServer(cache);
 
-	const {
-		html,
-		css: extractedCss,
-		ids: cssIDs,
-	}: RenderToStringResult = extractCritical(
-		renderToString(
-			<Page cache={cache}>
-				<DecideLayout CAPI={CAPI} NAV={NAV} />
-			</Page>,
-		),
+	// eslint-disable-next-line @typescript-eslint/unbound-method
+	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
+		createEmotionServer(cache);
+
+	const format: ArticleFormat = {
+		display: decideDisplay(CAPI.format),
+		design: decideDesign(CAPI.format),
+		theme: decideTheme(CAPI.format),
+	};
+
+	const html = renderToString(
+		<CacheProvider value={cache}>
+			<Page format={format} CAPI={CAPI} NAV={NAV} />
+		</CacheProvider>,
 	);
+
+	const chunks = extractCriticalToChunks(html);
+	const extractedCss = constructStyleTagsFromChunks(chunks);
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const loadableExtractor = new ChunkExtractor({
@@ -254,13 +254,14 @@ export const document = ({ data }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
+			...getScriptArrayFromChunkName('bootCmp'),
 			...getScriptArrayFromChunkName('ophan'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
 			...getScriptArrayFromChunkName('sentryLoader'),
 			...getScriptArrayFromChunkName('coreVitals'),
 			...getScriptArrayFromChunkName('dynamicImport'),
 			pageHasNonBootInteractiveElements && {
-				src: `${CDN}static/frontend/js/curl-with-js-and-domReady.js`,
+				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
 			...getScriptArrayFromChunkName('hydration'),
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
@@ -278,6 +279,7 @@ export const document = ({ data }: Props): string => {
 		...getScriptArrayFromChunkName('atomIframe'),
 		...getScriptArrayFromChunkName('embedIframe'),
 		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
+		...getScriptArrayFromChunkName('relativeTime'),
 	]);
 
 	const gaChunk = getScriptArrayFromChunkName('ga');
@@ -296,9 +298,7 @@ export const document = ({ data }: Props): string => {
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
 	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(makeWindowGuardian(data, cssIDs)),
-	);
+	const windowGuardian = escapeData(JSON.stringify(makeWindowGuardian(data)));
 
 	const hasAmpInteractiveTag = CAPI.tags.some(
 		(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
@@ -318,13 +318,6 @@ export const document = ({ data }: Props): string => {
 			? ''
 			: CAPI.config.keywords;
 
-	const skipToMainContent = renderToString(
-		<SkipTo id="maincontent" label="Skip to main content" />,
-	);
-	const skipToNavigation = renderToString(
-		<SkipTo id="navigation" label="Skip to navigation" />,
-	);
-
 	return htmlTemplate({
 		linkedData,
 		loadableConfigScripts,
@@ -341,7 +334,5 @@ export const document = ({ data }: Props): string => {
 		openGraphData,
 		twitterData,
 		keywords,
-		skipToMainContent,
-		skipToNavigation,
 	});
 };

@@ -14,8 +14,13 @@
     },
     {
       "action": "mobile-apps-rendering-cfn",
-      "path": "config/cloudformation.yaml",
+      "path": "cdk/cdk.out/MobileAppsRendering.template.json",
       "compress": false
-    }
+    },
+	{
+	  "action": "mobile-apps-rendering-preview-cfn",
+	  "path": "cdk/cdk.out/MobileAppsRenderingPreview.template.json",
+	  "compress": false
+	}
   ]
 }

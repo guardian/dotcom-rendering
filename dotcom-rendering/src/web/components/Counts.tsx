@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
-
-import { border } from '@guardian/src-foundations/palette';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import { border, until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
+	format: ArticleFormat;
 };
 const containerStyles = css`
 	display: flex;
@@ -20,8 +21,21 @@ const containerStyles = css`
 	}
 `;
 
-export const Counts = ({ children }: Props) => (
-	<div css={containerStyles}>
+const standfirstColouring = css`
+	${until.desktop} {
+		.meta-number:not(:empty) + .meta-number:not(:empty) {
+			border-left: 1px solid rgba(255, 255, 255, 0.4);
+		}
+	}
+`;
+
+export const Counts = ({ children, format }: Props) => (
+	<div
+		css={[
+			containerStyles,
+			format.design === ArticleDesign.LiveBlog && standfirstColouring,
+		]}
+	>
 		{/* The containerStyles css is expecting children to be two divs with the
             'meta-number' class */}
 		{children}

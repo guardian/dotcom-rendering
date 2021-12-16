@@ -3,19 +3,26 @@ import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import Img from '@guardian/common-rendering/src/components/img';
+import { border } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import {
 	background,
+	from,
+	headline,
 	labs,
 	neutral,
 	opinion,
+	remSpace,
 	text,
-} from '@guardian/src-foundations/palette';
-import { headline, textSans } from '@guardian/src-foundations/typography';
-import { SvgAudio, SvgCamera, SvgQuote, SvgVideo } from '@guardian/src-icons';
+	textSans,
+} from '@guardian/source-foundations';
+import {
+	SvgAudio,
+	SvgCamera,
+	SvgQuote,
+	SvgVideo,
+} from '@guardian/source-react-components';
 import {
 	fromNullable,
 	map,
@@ -26,7 +33,6 @@ import {
 import type { Option } from '@guardian/types';
 import { stars } from 'components/starRating';
 import { formatSeconds, makeRelativeDate } from 'date';
-import { border } from 'editorialPalette';
 import type { Image } from 'image';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -210,7 +216,7 @@ const cardStyles = (
 					fontWeight: 'light',
 				})};
 				h3 {
-					box-shadow: inset 0 -0.025rem ${border.primary(format)};
+					box-shadow: inset 0 -0.025rem ${border.articleLink(format)};
 					display: inline;
 
 					${darkModeCss`
@@ -259,7 +265,7 @@ const cardStyles = (
 
 		case RelatedItemType.COMMENT: {
 			return css`
-				background-color: ${opinion[800]};
+				background-color: ${neutral[100]};
 				${headline.xxsmall()}
 			`;
 		}
@@ -296,13 +302,18 @@ const iconStyles = (format: ArticleFormat): SerializedStyles => {
 };
 
 const commentIconStyle: SerializedStyles = css`
-	width: 2rem;
-	height: 1.4375rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	display: inline-block;
 	fill: ${opinion[400]};
-	vertical-align: text-top;
-	margin-top: -3px;
-	margin-right: -2px;
+	vertical-align: text-bottom;
+	margin-bottom: -3px;
+	margin-left: -3px;
+
+	${from.desktop} {
+		width: 1.688rem;
+		height: 1.688rem;
+	}
 `;
 
 const icon = (
@@ -355,6 +366,7 @@ const metadataStyles: SerializedStyles = css`
 
 const bylineStyles: SerializedStyles = css`
 	color: ${opinion[400]};
+	font-style: italic;
 `;
 
 const durationMedia = (
@@ -443,10 +455,13 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
 	const img = cardImage(image, relatedItem);
 	const { type, title, mediaDuration, link, byline } = relatedItem;
 
-	const lastModified = relatedItem.lastModified?.iso8601;
+	const webPublicationDate = relatedItem.webPublicationDate?.iso8601;
 	const date =
-		lastModified && type !== RelatedItemType.ADVERTISEMENT_FEATURE
-			? relativeFirstPublished(fromNullable(new Date(lastModified)), type)
+		webPublicationDate && type !== RelatedItemType.ADVERTISEMENT_FEATURE
+			? relativeFirstPublished(
+					fromNullable(new Date(webPublicationDate)),
+					type,
+			  )
 			: null;
 	const starRating =
 		relatedItem.starRating &&

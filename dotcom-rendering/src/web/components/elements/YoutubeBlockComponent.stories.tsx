@@ -17,7 +17,7 @@ export default {
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<ElementContainer showTopBorder={false}>
 		<Flex>
-			<LeftColumn>
+			<LeftColumn borderType="full">
 				<></>
 			</LeftColumn>
 			<div

@@ -2,14 +2,16 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
 import {
+	body,
 	brandAlt,
 	brandAltBackground,
+	from,
+	headline,
 	neutral,
-} from '@guardian/src-foundations/palette';
-import { body, headline, textSans } from '@guardian/src-foundations/typography';
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
 
 // ----- Styles ----- //

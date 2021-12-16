@@ -15,16 +15,24 @@ try {
 	// do nothing
 }
 
-// TODO: this should be removed in favour of `frontendAssetsFullURL` defined in CAPI
-// GU_STAGE is set in cloudformation.yml, so will be undefined locally
-const stage =
-	typeof process.env.GU_STAGE === 'string'
-		? process.env.GU_STAGE.toUpperCase()
-		: undefined;
+/**
+ * Decides the url to use for fetching assets
+ *
+ * @param stage {'PROD' | 'CODE' | undefined} the environment code is executing in
+ * @returns
+ */
+const decideAssetOrigin = (stage: string | undefined): string => {
+	switch (stage?.toUpperCase()) {
+		case 'PROD':
+			return 'https://assets.guim.co.uk/';
+		case 'CODE':
+			return 'https://assets-code.guim.co.uk/';
+		default:
+			return '/';
+	}
+};
+export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
 
-export const CDN = stage
-	? `//assets${stage === 'CODE' ? '-code' : ''}.guim.co.uk/`
-	: 'http://localhost:3030/';
 export const loadableManifestJson = loadableManifest;
 
 export const getScriptArrayFromFilename = (
@@ -36,8 +44,8 @@ export const getScriptArrayFromFilename = (
 		loadableManifestLegacy.assetsByChunkName[chunkName];
 	const legacyFilename = chunks && chunks.length > 0 && chunks[0];
 	return [
-		{ src: `${CDN}assets/${filename}`, legacy: false },
-		{ src: `${CDN}assets/${legacyFilename}`, legacy: true },
+		{ src: `${ASSET_ORIGIN}assets/${filename}`, legacy: false },
+		{ src: `${ASSET_ORIGIN}assets/${legacyFilename}`, legacy: true },
 	];
 };
 

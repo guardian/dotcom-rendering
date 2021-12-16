@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/src-foundations';
-import { textSans } from '@guardian/src-foundations/typography';
-import { visuallyHidden } from '@guardian/src-foundations/accessibility';
+import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
 import { decideLogo } from '@root/src/web/lib/decideLogo';
 
 type Props = {

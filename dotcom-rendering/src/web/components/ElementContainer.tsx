@@ -1,7 +1,6 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
 
-import { border } from '@guardian/src-foundations/palette';
-import { from } from '@guardian/src-foundations/mq';
+import { border, from } from '@guardian/source-foundations';
 import { center } from '@root/src/web/lib/center';
 // @ts-ignore-start
 import { jsx as _jsx } from 'react/jsx-runtime';
@@ -79,7 +78,7 @@ export const ElementContainer = ({
 				</div>
 			);
 			const style = css`
-				${backgroundColour && setBackgroundColour(backgroundColour)}
+				${backgroundColour && setBackgroundColour(backgroundColour)};
 			`;
 			// Create a react element from the tagName passed in OR
 			// default to <div>

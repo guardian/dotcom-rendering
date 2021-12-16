@@ -148,6 +148,14 @@ describe('Elements', function () {
 		});
 
 		it('should render the interactive using a non-boot.js', function () {
+			cy.on('uncaught:exception', (err) => {
+				if (err.message.includes('window.require')) {
+					// This error is unrelated to the test in question so return  false to prevent
+					// this error from failing this test
+					return false;
+				}
+			});
+
 			const getIframeBody = () => {
 				return cy
 					.get(

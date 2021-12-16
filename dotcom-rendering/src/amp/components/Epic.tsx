@@ -7,15 +7,17 @@ import {
 	MoustacheTemplate,
 	moustacheVariable,
 } from '@root/src/amp/components/moustache';
-import { headline, body, textSans } from '@guardian/src-foundations/typography';
 import {
+	headline,
+	body,
+	textSans,
 	brand,
 	brandAlt,
 	neutral,
 	error,
 	brandBackground,
 	border,
-} from '@guardian/src-foundations/palette';
+} from '@guardian/source-foundations';
 
 export const epicChoiceCardCss = `
 	.epicChoiceCard {
@@ -235,28 +237,30 @@ const tickerProgressStyle = css`
 	margin: 0;
 	padding: 0;
 	left: 0;
-	background-color: ${brandAlt[400]};
+	background-color: ${error[400]};
 	height: 100%;
 	width: 100%;
 	transform-origin: left;
 `;
+/* stylelint-disable */
 const tickerBackgroundStyle = css`
 	overflow: hidden;
 	position: relative;
 	margin: 5px 0;
 	height: 10px;
 	width: 100%;
-	background-color: ${neutral[86]};
+	background-color: #dda7a1;
 	border: none;
 `;
+/* stylelint-enable */
 const topLeftStyle = css`
-	${headline.xsmall({ fontWeight: 'bold' })}
+	${textSans.small({ fontWeight: 'bold' })};
 `;
 const topRightStyle = css`
-	${headline.xxxsmall({ fontWeight: 'bold' })}
+	${textSans.small({ fontWeight: 'bold' })};
 `;
 const labelStyle = css`
-	${body.small({ fontStyle: 'italic' })};
+	${textSans.small()};
 `;
 const goalExceededMarkerStyle = css`
 	width: 1px;

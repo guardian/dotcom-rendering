@@ -35,6 +35,7 @@ struct RelatedItem {
     8: optional string starRating
     9: optional string byline
     10: optional string bylineImage
+    11: optional v1.CapiDateTime webPublicationDate
 }
 
 struct RelatedContent {

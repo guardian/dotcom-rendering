@@ -4,8 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { neutral, remSpace } from '@guardian/src-foundations';
-import { from } from '@guardian/src-foundations/mq';
+import { from, neutral, remSpace } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';
 import type { Video } from 'video';
@@ -47,10 +46,12 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	${from.wide} {
 		padding-bottom: ${videoHeight}px;
 		width: ${wideContentWidth}px;
-		${format.design !== ArticleDesign.LiveBlog ? marginAuto : null}
+		${format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+			? null
+			: marginAuto}
 	}
 `;
-
 interface Props {
 	video: Video;
 	format: ArticleFormat;

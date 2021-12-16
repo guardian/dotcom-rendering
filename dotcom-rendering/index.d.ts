@@ -43,7 +43,8 @@ type CAPIDesign =
 	| 'InteractiveDesign'
 	| 'PhotoEssayDesign'
 	| 'PrintShopDesign'
-	| 'ObituaryDesign';
+	| 'ObituaryDesign'
+	| 'FullPageInteractiveDesign';
 
 // CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
@@ -116,6 +117,8 @@ type Palette = {
 		numberedPosition: Colour;
 		overlayedCaption: Colour;
 		pagination: Colour;
+		shareCount: Colour;
+		shareCountUntilDesktop: Colour;
 	};
 	background: {
 		article: Colour;
@@ -136,10 +139,15 @@ type Palette = {
 		carouselDotFocus: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
+		matchNav: Colour;
 	};
 	fill: {
 		commentCount: Colour;
+		commentCountUntilDesktop: Colour;
+		shareCountIcon: Colour;
+		shareCountIconUntilDesktop: Colour;
 		shareIcon: Colour;
+		shareIconGrayBackground: Colour;
 		cameraCaptionIcon: Colour;
 		cardIcon: Colour;
 		richLink: Colour;
@@ -169,6 +177,7 @@ type Palette = {
 	hover: {
 		headlineByline: Colour;
 		pagination: Colour;
+		standfirstLink: Colour;
 	};
 };
 
@@ -424,7 +433,7 @@ interface CAPIType {
 	 * @TJS-format date-time
 	 */
 	webPublicationDateDeprecated: string;
-
+	webPublicationDate: string;
 	webPublicationDateDisplay: string;
 	webPublicationSecondaryDateDisplay: string;
 	editionLongForm: string;
@@ -638,6 +647,7 @@ type MatchReportType = {
 	venue: string;
 	comments: string;
 	minByMinUrl: string;
+	reportUrl: string;
 };
 
 /**
@@ -679,6 +689,11 @@ interface CommercialConfigType {
 	ampIframeUrl: string;
 }
 
+type ServerSideTests = {
+    [k: `${string}Variant`]: "variant";
+    [k: `${string}Control`]: "control";
+};
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
@@ -691,7 +706,7 @@ interface ConfigType extends CommercialConfigType {
 	sentryHost: string;
 	dcrSentryDsn: string;
 	switches: { [key: string]: boolean };
-	abTests: Record<string, 'control' | 'variant'>;
+	abTests: ServerSideTests;
 	dfpAccountId: string;
 	commercialBundleUrl: string;
 	revisionNumber: string;

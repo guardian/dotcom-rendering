@@ -10,7 +10,7 @@ import {
 	specialReport,
 	labs,
 	border,
-} from '@guardian/src-foundations/palette';
+} from '@guardian/source-foundations';
 
 type ColourType = string;
 

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { brandBackground } from '@guardian/src-foundations/palette';
+import { brandBackground } from '@guardian/source-foundations';
 import { ABProvider } from '@guardian/ab-react';
 
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';

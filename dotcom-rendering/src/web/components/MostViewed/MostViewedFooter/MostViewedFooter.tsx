@@ -1,9 +1,7 @@
 import React, { Suspense } from 'react';
 import { css } from '@emotion/react';
 
-import { text } from '@guardian/src-foundations/palette';
-import { headline } from '@guardian/src-foundations/typography';
-import { from, between, Breakpoint } from '@guardian/src-foundations/mq';
+import { text, headline, from, Breakpoint } from '@guardian/source-foundations';
 
 import { initPerf } from '@root/src/web/browser/initPerf';
 import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
@@ -11,7 +9,10 @@ import { Lazy } from '@root/src/web/components/Lazy';
 
 import { useAB } from '@guardian/ab-react';
 import { abTestTest } from '@frontend/web/experiments/tests/ab-test-test';
+import { ArticleDesign } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { Hide } from '../../Hide';
+import { LeftColumn } from '../../LeftColumn';
 
 const MostViewedFooterData = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedFooterData');
@@ -30,22 +31,6 @@ const stackBelow = (breakpoint: Breakpoint) => css`
 
 	${from[breakpoint]} {
 		flex-direction: row;
-	}
-`;
-
-const asideWidth = css`
-	${between.leftCol.and.wide} {
-		/* above 1140, below 1300 */
-		flex-basis: 151px;
-		flex-grow: 0;
-		flex-shrink: 0;
-	}
-
-	${from.wide} {
-		/* above 1300 */
-		flex-basis: 230px;
-		flex-grow: 0;
-		flex-shrink: 0;
 	}
 `;
 
@@ -126,19 +111,35 @@ export const MostViewedFooter = ({ sectionName, format, ajaxUrl }: Props) => {
 				data-cy-ab-user-in-variant={abTestCypressDataAttr}
 				data-cy-ab-runnable-test={variantFromRunnable}
 			>
-				<section css={asideWidth}>
+				<LeftColumn
+					size={
+						format.design === ArticleDesign.LiveBlog ||
+						format.design === ArticleDesign.DeadBlog
+							? 'wide'
+							: 'compact'
+					}
+				>
 					<h2 css={headingStyles}>Most popular</h2>
-				</section>
+				</LeftColumn>
+				{/* We need to respect the side ad slot above desktop. The
+					result is that we need to do some mutation here to make
+					sure components are stacked at the correct breakpoints.
+				*/}
 				<section css={stackBelow('desktop')}>
-					<Lazy margin={300}>
-						<Suspense fallback={<></>}>
-							<MostViewedFooterData
-								sectionName={sectionName}
-								palette={palette}
-								ajaxUrl={ajaxUrl}
-							/>
-						</Suspense>
-					</Lazy>
+					<div css={stackBelow('leftCol')}>
+						<Hide when="above" breakpoint="leftCol">
+							<h2 css={headingStyles}>Most popular</h2>
+						</Hide>
+						<Lazy margin={300}>
+							<Suspense fallback={<></>}>
+								<MostViewedFooterData
+									sectionName={sectionName}
+									palette={palette}
+									ajaxUrl={ajaxUrl}
+								/>
+							</Suspense>
+						</Lazy>
+					</div>
 					<div
 						css={css`
 							margin: 6px 0 0 10px;

@@ -44,6 +44,7 @@ const fileExists = async (glob) => {
 
 	[
 		'sentryLoader',
+		'bootCmp',
 		'ga',
 		'ophan',
 		'hydration',
@@ -52,6 +53,7 @@ const fileExists = async (glob) => {
 		'atomIframe',
 		'embedIframe',
 		'newsletterEmbedIframe',
+		'relativeTime',
 	].map((name) => {
 		if (loadableManifest.assetsByChunkName[name]) {
 			console.log(`Loadable manifest returned value ${name}`);
