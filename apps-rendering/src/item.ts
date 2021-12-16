@@ -81,6 +81,7 @@ interface LiveBlog extends Fields {
 	design: ArticleDesign.LiveBlog;
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
+	pagedBlocks: LiveBlogPagedBlocks;
 }
 
 interface DeadBlog extends Fields {
@@ -338,7 +339,6 @@ const fromCapiLiveBlog =
 
 		const parsedBlocks = parseLiveBlocks(body)(context);
 		const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
-		console.log(pagedBlocks)
 		return {
 			design:
 				content.fields?.liveBloggingNow === true
