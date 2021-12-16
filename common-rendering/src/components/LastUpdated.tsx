@@ -19,7 +19,6 @@ const LastUpdated = ({
 		>
 			<time
 				className="js-last-updated-time"
-				data-last-updated={lastUpdated.toISOString()}
 				dateTime={lastUpdated.toISOString()}
 			>
 				{`Updated: ${lastUpdatedDisplay}`}

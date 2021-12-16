@@ -6,7 +6,7 @@ import { logger } from '../logger';
 function lastUpdatedDates(): void {
 	Array.from(document.getElementsByClassName('js-last-updated-time')).forEach(
 		(time) => {
-			const isoDateTimeString = time.getAttribute('data-last-updated');
+			const isoDateTimeString = time.getAttribute('dateTime');
 			const date = parse(dateParser)(isoDateTimeString);
 
 			if (date.kind === ResultKind.Ok) {
