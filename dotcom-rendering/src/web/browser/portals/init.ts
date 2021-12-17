@@ -2,11 +2,11 @@ import '../webpackPublicPath';
 
 import { startup } from '@root/src/web/browser/startup';
 import { log } from '@guardian/libs';
-import { whenVisible } from '../hydration/whenVisible';
-import { whenIdle } from '../hydration/whenIdle';
+import { whenVisible } from '../whenVisible';
+import { whenIdle } from '../whenIdle';
 import { doRender } from './doRender';
-import { getName } from '../hydration/getName';
-import { getProps } from '../hydration/getProps';
+import { getName } from '../getName';
+import { getProps } from '../getProps';
 
 const init = () => {
 	/**
