@@ -36,7 +36,7 @@ const tab = (palette: Palette) => css`
 
 const activeTab = (palette: Palette) => css`
 	border-top: 3px solid ${palette.border.activeMatchTab};
-`
+`;
 
 const tabLink = (palette: Palette) => css`
 	color: ${palette.border.activeMatchTab};
@@ -64,7 +64,13 @@ export const MatchTabs = ({ minByMinUrl, reportUrl, format }: Props) => {
 	return (
 		<div>
 			<ul css={tabsContainer(palette)}>
-				<li css={[tab(palette), format.design===ArticleDesign.MatchReport && activeTab(palette)]}>
+				<li
+					css={[
+						tab(palette),
+						format.design === ArticleDesign.MatchReport &&
+							activeTab(palette),
+					]}
+				>
 					<a
 						href={reportUrl}
 						data-link-name="report"
@@ -74,7 +80,14 @@ export const MatchTabs = ({ minByMinUrl, reportUrl, format }: Props) => {
 					</a>
 				</li>
 				<GreyBorder palette={palette} />
-				<li css={[tab(palette), (format.design===ArticleDesign.DeadBlog || format.design===ArticleDesign.LiveBlog) && activeTab(palette)]}>
+				<li
+					css={[
+						tab(palette),
+						(format.design === ArticleDesign.DeadBlog ||
+							format.design === ArticleDesign.LiveBlog) &&
+							activeTab(palette),
+					]}
+				>
 					<a
 						href={minByMinUrl}
 						data-link-name="Min-by-min"
