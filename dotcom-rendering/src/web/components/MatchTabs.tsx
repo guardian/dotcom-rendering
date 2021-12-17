@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import { space, headline } from '@guardian/source-foundations';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
@@ -31,11 +32,11 @@ const tab = (palette: Palette) => css`
 	flex-basis: 50%;
 	height: 40px;
 	border-top: 3px solid ${palette.border.matchTab};
-
-	:nth-child(1) {
-		border-top: 3px solid ${palette.border.activeMatchTab};
-	}
 `;
+
+const activeTab = (palette: Palette) => css`
+	border-top: 3px solid ${palette.border.activeMatchTab};
+`
 
 const tabLink = (palette: Palette) => css`
 	color: ${palette.border.activeMatchTab};
@@ -63,7 +64,7 @@ export const MatchTabs = ({ minByMinUrl, reportUrl, format }: Props) => {
 	return (
 		<div>
 			<ul css={tabsContainer(palette)}>
-				<li css={tab(palette)}>
+				<li css={[tab(palette), format.design===ArticleDesign.MatchReport && activeTab(palette)]}>
 					<a
 						href={reportUrl}
 						data-link-name="report"
@@ -73,7 +74,7 @@ export const MatchTabs = ({ minByMinUrl, reportUrl, format }: Props) => {
 					</a>
 				</li>
 				<GreyBorder palette={palette} />
-				<li css={tab(palette)}>
+				<li css={[tab(palette), (format.design===ArticleDesign.DeadBlog || format.design===ArticleDesign.LiveBlog) && activeTab(palette)]}>
 					<a
 						href={minByMinUrl}
 						data-link-name="Min-by-min"
