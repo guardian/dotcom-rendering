@@ -9,7 +9,8 @@ export default (selector: string) => (): Promise<void> => {
 	// Tell the iframes to resize once this script is loaded
 	// Otherwise, earlier resize events might be missed
 	allIframes.forEach((iframe) => {
-		iframe.contentWindow.postMessage("resize", "*");
+		if (iframe && iframe.contentWindow)
+			iframe.contentWindow.postMessage("resize", "*");
 	});
 
 	window.addEventListener("message", (event) => {
