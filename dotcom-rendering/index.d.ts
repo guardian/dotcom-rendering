@@ -690,8 +690,8 @@ interface CommercialConfigType {
 }
 
 type ServerSideTests = {
-    [k: `${string}Variant`]: "variant";
-    [k: `${string}Control`]: "control";
+	[k: `${string}Variant`]: 'variant';
+	[k: `${string}Control`]: 'control';
 };
 
 /**
@@ -1066,6 +1066,12 @@ interface PerformanceEntry {
 declare namespace JSX {
 	interface IntrinsicElements {
 		'gu-hydrate': {
+			name: string;
+			when?: 'immediate' | 'idle' | 'visible';
+			props: any;
+			children: React.ReactNode;
+		};
+		'gu-portal': {
 			name: string;
 			when?: 'immediate' | 'idle' | 'visible';
 			props: any;
