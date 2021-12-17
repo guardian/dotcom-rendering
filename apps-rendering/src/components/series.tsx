@@ -61,15 +61,11 @@ const immersiveLabsLinkStyles = css`
 	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
 `;
 
-const liveLinkStyles = (theme: ArticleTheme): SerializedStyles => css`
+const blogLinkStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
-	color: ${getThemeStyles(theme).liveblogKicker};
-	text-decoration: none;
-`;
-
-const deadBlogLinkStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
-	color: ${text.series(format)};
+	color: ${format.design === ArticleDesign.LiveBlog
+		? getThemeStyles(format.theme).liveblogKicker
+		: text.series(format)};
 	text-decoration: none;
 `;
 
@@ -90,12 +86,11 @@ const getLinkStyles = ({
 		return labsLinkStyles(theme);
 	}
 
-	if (design === ArticleDesign.LiveBlog) {
-		return liveLinkStyles(theme);
-	}
-
-	if (design === ArticleDesign.DeadBlog) {
-		return deadBlogLinkStyles({ design, display, theme });
+	if (
+		design === ArticleDesign.LiveBlog ||
+		design === ArticleDesign.DeadBlog
+	) {
+		return blogLinkStyles({ design, display, theme });
 	}
 
 	return standardLinkStyles(theme);
