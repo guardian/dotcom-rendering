@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, until } from '@guardian/source-foundations';
+import { from, neutral, space, until } from '@guardian/source-foundations';
 
 import { labelStyles, carrotAdStyles } from '@root/src/web/components/AdSlot';
 
@@ -62,7 +62,8 @@ const articleAdStyles = css`
 			width: auto;
 		}
 	}
-	.ad-slot--inline {
+	.ad-slot--inline,
+	.ad-slot-liveblog--inline {
 		width: 300px;
 		margin: 12px auto;
 		min-width: 160px;
@@ -99,7 +100,6 @@ const articleAdStyles = css`
 		${from.tablet} {
 			margin-left: 0;
 			width: 100%;
-
 			.ad-slot__label {
 				margin-left: 35px;
 				margin-right: 35px;
@@ -108,6 +108,41 @@ const articleAdStyles = css`
 	}
 	.ad-slot--fluid {
 		width: 100%;
+	}
+	.ad-slot--liveblog-inline {
+		margin: 0 auto ${space[3]}px;
+
+		.ad-slot__label {
+			color: ${neutral[46]};
+			border-top-color: ${neutral[86]};
+		}
+
+		&.ad-slot--outstream {
+			${from.tablet} {
+				width: 620px;
+			}
+		}
+
+		&:not(.ad-slot--outstream) {
+			width: 300px;
+			background-color: ${neutral[93]};
+
+			${from.tablet} {
+				width: 100%;
+				padding-bottom: ${space[6]}px;
+
+				& > div:not(.ad-slot__label) {
+					width: 300px;
+					margin-left: auto;
+					margin-right: auto;
+				}
+			}
+		}
+
+		&.ad-slot--fluid {
+			background-color: green;
+			width: 100%;
+		}
 	}
 `;
 
