@@ -18,33 +18,33 @@ const init = () => {
 	 * when - Used to optionally defer insertion
 	 * name - The name of the component. Used to dynamically import the code
 	 * props - The data for the component that has been serialised in the dom
-	 * marker - The `gu-portal` custom element
+	 * element - The `gu-portal` custom element
 	 */
-	document.querySelectorAll('gu-portal').forEach((marker) => {
-		if (marker instanceof HTMLElement) {
-			const name = getName(marker);
-			const props = getProps(marker);
+	document.querySelectorAll('gu-portal').forEach((element) => {
+		if (element instanceof HTMLElement) {
+			const name = getName(element);
+			const props = getProps(element);
 
 			if (!name) return;
 			log('dotcom', `Inserting portal ${name}`);
 
-			const when = marker.getAttribute('when');
+			const when = element.getAttribute('when');
 			switch (when) {
 				case 'idle': {
 					whenIdle(() => {
-						doRender(name, props, marker);
+						doRender(name, props, element);
 					});
 					break;
 				}
 				case 'visible': {
-					whenVisible(marker, () => {
-						doRender(name, props, marker);
+					whenVisible(element, () => {
+						doRender(name, props, element);
 					});
 					break;
 				}
 				case 'immediate':
 				default: {
-					doRender(name, props, marker);
+					doRender(name, props, element);
 				}
 			}
 		}
