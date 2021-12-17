@@ -6,6 +6,12 @@ export default (selector: string) => (): Promise<void> => {
 		document.querySelectorAll(selector)
 	);
 
+	// Tell the iframes to resize once this script is loaded
+	// Otherwise, earlier resize events might be missed
+	allIframes.forEach((iframe) => {
+		iframe.contentWindow.postMessage("resize", "*");
+	});
+
 	window.addEventListener("message", (event) => {
 		if (
 			!allowedOrigins.includes(
