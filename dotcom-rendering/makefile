@@ -57,6 +57,9 @@ logs:
 
 run: stop build start
 
+run-ci: stop build start-ci
+
+
 # dev #########################################
 
 dev: clear clean-dist install
