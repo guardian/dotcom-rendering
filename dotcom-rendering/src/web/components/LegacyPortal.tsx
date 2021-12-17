@@ -10,7 +10,7 @@ type Props = {
 // that will not cause the child component being passed in to be mounted
 // again. Instead it is simply rerendered
 // https://github.com/preactjs/preact/blob/df748d106fb78fbd46d14563b4712f921ccf0300/compat/src/portals.js
-export const Portal = ({ rootId, children }: Props) => {
+export const LegacyPortal = ({ rootId, children }: Props) => {
 	const element = document.getElementById(rootId);
 	if (!element) return null;
 	// First remove any placeholder. Why? Because we sometimes server side render Placeholders in

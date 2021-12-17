@@ -30,7 +30,7 @@ import {
 
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
 
-import { Portal } from '@frontend/web/components/Portal';
+import { LegacyPortal } from '@frontend/web/components/LegacyPortal';
 import {
 	HydrateOnce,
 	HydrateInteractiveOnce,
@@ -612,7 +612,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				CAPI.config.switches.commercialMetrics,
 				window.guardian.config?.ophan !== undefined,
 			].every(Boolean) && <CommercialMetrics pageViewId={pageViewId} />}
-			<Portal rootId="reader-revenue-links-header">
+			<LegacyPortal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
@@ -623,7 +623,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 					ophanRecord={ophanRecord}
 				/>
-			</Portal>
+			</LegacyPortal>
 			<HydrateOnce rootId="links-root" waitFor={[user]}>
 				<Links
 					supporterCTA={CAPI.nav.readerRevenueLinks.header.supporter}
@@ -642,13 +642,13 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				<LabsHeader />
 			</HydrateOnce>
 			{CAPI.config.switches.serverShareCounts && (
-				<Portal rootId="share-count-root">
+				<LegacyPortal rootId="share-count-root">
 					<ShareCount
 						ajaxUrl={CAPI.config.ajaxUrl}
 						pageId={CAPI.pageId}
 						format={format}
 					/>
-				</Portal>
+				</LegacyPortal>
 			)}
 			{youTubeAtoms.map((youTubeAtom) => (
 				<HydrateOnce rootId={youTubeAtom.elementId}>
@@ -735,14 +735,14 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</HydrateOnce>
 			)}
 			{CAPI.matchUrl && (
-				<Portal rootId="match-nav">
+				<LegacyPortal rootId="match-nav">
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
-				</Portal>
+				</LegacyPortal>
 			)}
 			{CAPI.matchUrl && (
-				<Portal rootId="match-tabs">
+				<LegacyPortal rootId="match-tabs">
 					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />
-				</Portal>
+				</LegacyPortal>
 			)}
 			{/*
 				Rules for when to show <ContributionSlot />:
@@ -755,20 +755,20 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				checked to avoid flashing this content
 			*/}
 
-			<Portal rootId="top-right-ad-slot">
+			<LegacyPortal rootId="top-right-ad-slot">
 				<ContributionSlot
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 					isPaidContent={CAPI.pageType.isPaidContent}
 				/>
-			</Portal>
+			</LegacyPortal>
 			{richLinks.map((richLink, index) => (
-				<Portal rootId={richLink.elementId}>
+				<LegacyPortal rootId={richLink.elementId}>
 					<RichLinkComponent
 						element={richLink}
 						ajaxEndpoint={CAPI.config.ajaxUrl}
 						richLinkIndex={index}
 					/>
-				</Portal>
+				</LegacyPortal>
 			))}
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
@@ -1050,7 +1050,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			<Portal rootId="most-viewed-right">
+			<LegacyPortal rootId="most-viewed-right">
 				<Lazy margin={100}>
 					<Suspense fallback={<></>}>
 						<MostViewedRightWrapper
@@ -1058,17 +1058,17 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						/>
 					</Suspense>
 				</Lazy>
-			</Portal>
+			</LegacyPortal>
 			{CAPI.matchUrl && (
-				<Portal rootId="match-stats">
+				<LegacyPortal rootId="match-stats">
 					<Lazy margin={300}>
 						<Suspense fallback={<Placeholder height={800} />}>
 							<GetMatchStats matchUrl={CAPI.matchUrl} />
 						</Suspense>
 					</Lazy>
-				</Portal>
+				</LegacyPortal>
 			)}
-			<Portal rootId="slot-body-end">
+			<LegacyPortal rootId="slot-body-end">
 				<SlotBodyEnd
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
@@ -1083,8 +1083,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					stage={CAPI.stage}
 					asyncArticleCount={asyncArticleCount}
 				/>
-			</Portal>
-			<Portal
+			</LegacyPortal>
+			<LegacyPortal
 				rootId={
 					isSignedIn
 						? 'onwards-upper-whensignedin'
@@ -1111,8 +1111,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						/>
 					</Suspense>
 				</Lazy>
-			</Portal>
-			<Portal
+			</LegacyPortal>
+			<LegacyPortal
 				rootId={
 					isSignedIn
 						? 'onwards-lower-whensignedin'
@@ -1129,8 +1129,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						/>
 					</Suspense>
 				</Lazy>
-			</Portal>
-			<Portal rootId="sign-in-gate">
+			</LegacyPortal>
+			<LegacyPortal rootId="sign-in-gate">
 				<SignInGateSelector
 					format={format}
 					contentType={CAPI.contentType}
@@ -1143,7 +1143,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					idUrl={CAPI.config.idUrl}
 					pageViewId={pageViewId}
 				/>
-			</Portal>
+			</LegacyPortal>
 			<HydrateOnce rootId="comments" waitFor={[user]}>
 				<Discussion
 					format={format}
@@ -1161,14 +1161,14 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					beingHydrated={true}
 				/>
 			</HydrateOnce>
-			<Portal rootId="most-viewed-footer">
+			<LegacyPortal rootId="most-viewed-footer">
 				<MostViewedFooter
 					format={format}
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 				/>
-			</Portal>
-			<Portal rootId="reader-revenue-links-footer">
+			</LegacyPortal>
+			<LegacyPortal rootId="reader-revenue-links-footer">
 				<Lazy margin={300}>
 					<ReaderRevenueLinks
 						urls={CAPI.nav.readerRevenueLinks.footer}
@@ -1181,8 +1181,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						ophanRecord={ophanRecord}
 					/>
 				</Lazy>
-			</Portal>
-			<Portal rootId="bottom-banner">
+			</LegacyPortal>
+			<LegacyPortal rootId="bottom-banner">
 				<StickyBottomBanner
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}
@@ -1199,7 +1199,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					idApiUrl={CAPI.config.idApiUrl}
 					switches={CAPI.config.switches}
 				/>
-			</Portal>
+			</LegacyPortal>
 		</React.StrictMode>
 	);
 };

@@ -7,7 +7,7 @@ import { RightColumn } from '@frontend/web/components/RightColumn';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 import { App as Comments } from '@guardian/discussion-rendering';
 
-import { Portal } from '@frontend/web/components/Portal';
+import { LegacyPortal } from '@root/src/web/components/LegacyPortal';
 import { Lazy } from '@frontend/web/components/Lazy';
 import { Flex } from '@frontend/web/components/Flex';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
@@ -142,14 +142,14 @@ export const Discussion = ({
 	return (
 		<>
 			{commentCount !== undefined && beingHydrated && (
-				<Portal rootId="comment-count-root">
+				<LegacyPortal rootId="comment-count-root">
 					<CommentCount
 						isCommentable={isCommentable}
 						commentCount={commentCount}
 						palette={palette}
 						setIsExpanded={setIsExpanded}
 					/>
-				</Portal>
+				</LegacyPortal>
 			)}
 
 			<ContainerLayout
