@@ -11,7 +11,7 @@ import {
 import { ArticleFormat, ArticleSpecial, ArticleDesign } from '@guardian/libs';
 
 import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav/SubNav';
+import { SubNav } from '@root/src/web/components/SubNav.importable';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import {
 	MobileStickyContainer,
@@ -35,6 +35,7 @@ import { HeadlineByline } from '../components/HeadlineByline';
 import { decideLineEffect, decideLineCount } from '../lib/layoutHelpers';
 import { Standfirst } from '../components/Standfirst';
 import { Caption } from '../components/Caption';
+import { Hydrate } from '../components/Hydrate';
 
 const InteractiveImmersiveGrid = ({
 	children,
@@ -440,15 +441,16 @@ export const InteractiveImmersiveLayout = ({
 			{NAV.subNavSections && (
 				<ElementContainer
 					padded={false}
-					sectionId="sub-nav-root"
 					backgroundColour={neutral[100]}
-					element="nav"
+					element="aside"
 				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						format={format}
-					/>
+					<Hydrate when="visible">
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							format={format}
+						/>
+					</Hydrate>
 				</ElementContainer>
 			)}
 

@@ -25,7 +25,7 @@ import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav/SubNav';
+import { SubNav } from '@root/src/web/components/SubNav.importable';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
@@ -50,6 +50,7 @@ import {
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { Hydrate } from '../components/Hydrate';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -327,14 +328,15 @@ export const ShowcaseLayout = ({
 										palette.background.article
 									}
 									padded={false}
-									sectionId="sub-nav-root"
 									element="aside"
 								>
-									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
-										format={format}
-									/>
+									<Hydrate when="idle">
+										<SubNav
+											subNavSections={NAV.subNavSections}
+											currentNavLink={NAV.currentNavLink}
+											format={format}
+										/>
+									</Hydrate>
 								</ElementContainer>
 							)}
 
@@ -644,16 +646,14 @@ export const ShowcaseLayout = ({
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer
-					padded={false}
-					sectionId="sub-nav-root"
-					element="nav"
-				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						format={format}
-					/>
+				<ElementContainer padded={false} element="aside">
+					<Hydrate when="visible">
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							format={format}
+						/>
+					</Hydrate>
 				</ElementContainer>
 			)}
 

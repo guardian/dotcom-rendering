@@ -240,7 +240,7 @@ export interface WindowGuardian {
 	};
 }
 
-export const makeGuardianBrowserNav = (nav: NavType): BrowserNavType => {
+const makeGuardianBrowserNav = (nav: NavType): BrowserNavType => {
 	return {
 		currentNavLink: nav.currentNavLink,
 		subNavSections: nav.subNavSections,

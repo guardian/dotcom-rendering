@@ -26,7 +26,7 @@ import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadline
 import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav/SubNav';
+import { SubNav } from '@root/src/web/components/SubNav.importable';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
@@ -54,6 +54,7 @@ import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
+import { Hydrate } from '../components/Hydrate';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -440,15 +441,16 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<ElementContainer
 							backgroundColour={palette.background.article}
 							padded={false}
-							sectionId="sub-nav-root"
 							borderColour={palette.border.article}
 							element="aside"
 						>
-							<SubNav
-								subNavSections={NAV.subNavSections}
-								currentNavLink={NAV.currentNavLink}
-								format={format}
-							/>
+							<Hydrate when="idle">
+								<SubNav
+									subNavSections={NAV.subNavSections}
+									currentNavLink={NAV.currentNavLink}
+									format={format}
+								/>
+							</Hydrate>
 						</ElementContainer>
 					)}
 
@@ -1144,14 +1146,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<ElementContainer
 					data-print-layout="hide"
 					padded={false}
-					sectionId="sub-nav-root"
-					element="nav"
+					element="aside"
 				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						format={format}
-					/>
+					<Hydrate when="visible">
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							format={format}
+						/>
+					</Hydrate>
 				</ElementContainer>
 			)}
 
