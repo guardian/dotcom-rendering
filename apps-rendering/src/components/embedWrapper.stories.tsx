@@ -1,9 +1,3 @@
-// I'm disabling the requirement for a return type because that doesnt make sense here 🤷. It
-// popped up after I removed the FC type which was causing problems when I tried to set parameters
-// on an individual story. Ideally, we'd use the type from Storybook directly
-// but https://github.com/storybookjs/storybook/issues/13486
-// eslint-disable @typescript-eslint/explicit-function-return-type -- because 👆
-
 // ----- Imports ----- //
 
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
@@ -13,6 +7,11 @@ import { EmbedKind } from 'embed';
 import { EmbedComponentWrapper } from './embedWrapper';
 
 // ----- Stories ----- //
+// I'm disabling the requirement for a return type because that doesnt make sense here 🤷. It
+// popped up after I removed the FC type which was causing problems when I tried to set parameters
+// on an individual story. Ideally, we'd use the type from Storybook directly
+// but https://github.com/storybookjs/storybook/issues/13486
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- because 👆
 const Generic = () => (
 	<div>
 		<p>
@@ -57,6 +56,11 @@ Generic.story = {
 	},
 };
 
+// I'm disabling the requirement for a return type because that doesnt make sense here 🤷. It
+// popped up after I removed the FC type which was causing problems when I tried to set parameters
+// on an individual story. Ideally, we'd use the type from Storybook directly
+// but https://github.com/storybookjs/storybook/issues/13486
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- because 👆
 const Youtube = () => (
 	<div>
 		<p>
@@ -95,6 +99,11 @@ Youtube.story = {
 	},
 };
 
+// I'm disabling the requirement for a return type because that doesnt make sense here 🤷. It
+// popped up after I removed the FC type which was causing problems when I tried to set parameters
+// on an individual story. Ideally, we'd use the type from Storybook directly
+// but https://github.com/storybookjs/storybook/issues/13486
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- because 👆
 const Spotify = () => (
 	<div>
 		<p>
@@ -133,6 +142,11 @@ Spotify.story = {
 	},
 };
 
+// I'm disabling the requirement for a return type because that doesnt make sense here 🤷. It
+// popped up after I removed the FC type which was causing problems when I tried to set parameters
+// on an individual story. Ideally, we'd use the type from Storybook directly
+// but https://github.com/storybookjs/storybook/issues/13486
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- because 👆
 const Instagram = () => (
 	<div>
 		<p>
