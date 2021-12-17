@@ -3,11 +3,11 @@
  *
  * We expect the element to always be a `gu-*` custom element
  *
- * @param marker : The html element that we want to read the props attribute from;
+ * @param element : The html element that we want to read the props attribute from;
  * @returns
  */
-export const getProps = (marker: HTMLElement): Record<string, unknown> => {
-	const serialised = marker.getAttribute('props');
+export const getProps = (element: HTMLElement): Record<string, unknown> => {
+	const serialised = element.getAttribute('props');
 	let props: Record<string, unknown>;
 	try {
 		props = serialised && JSON.parse(serialised);
