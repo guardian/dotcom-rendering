@@ -53,10 +53,13 @@ const decideTitle = (CAPI: CAPIType): string => {
 };
 
 export const document = ({ data }: Props): string => {
+	console.log(0);
 	const { CAPI, NAV, linkedData } = data;
 	const title = decideTitle(CAPI);
 	const key = 'dcr';
 	const cache = createCache({ key });
+
+	console.log(1);
 
 	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
@@ -68,20 +71,28 @@ export const document = ({ data }: Props): string => {
 		theme: decideTheme(CAPI.format),
 	};
 
+	console.log(2);
+
 	const html = renderToString(
 		<CacheProvider value={cache}>
 			<Page format={format} CAPI={CAPI} NAV={NAV} />
 		</CacheProvider>,
 	);
 
+	console.log(3);
+
 	const chunks = extractCriticalToChunks(html);
 	const extractedCss = constructStyleTagsFromChunks(chunks);
+
+	console.log(4);
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const loadableExtractor = new ChunkExtractor({
 		stats: loadableManifestJson,
 		entrypoints: ['react'],
 	});
+
+	console.log(5);
 
 	// The lodable-components docs want us to use extractor.collectChunks() but
 	// we don't have the traditional same <App /> rendered on server and client.
@@ -290,7 +301,7 @@ export const document = ({ data }: Props): string => {
 	)[0];
 	const gaPath = {
 		modern: modernScript.src,
-		legacy: legacyScript.src,
+		legacy: legacyScript && legacyScript.src,
 	};
 
 	/**

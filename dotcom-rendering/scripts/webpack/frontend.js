@@ -7,6 +7,7 @@ const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
+const DEV = process.env.NODE_ENV === 'development';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
 
 const commonConfigs = ({ platform }) => ({
@@ -67,14 +68,15 @@ module.exports = [
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compliation
-	merge(
-		commonConfigs({
-			platform: 'browser.legacy',
-		}),
-		require(`./browser`)({
-			isLegacyJS: true,
-		}),
-	),
+	!DEV && // Don't build legacy bundle for dev mode
+		merge(
+			commonConfigs({
+				platform: 'browser.legacy',
+			}),
+			require(`./browser`)({
+				isLegacyJS: true,
+			}),
+		),
 	merge(
 		commonConfigs({
 			platform: 'browser',
@@ -83,4 +85,4 @@ module.exports = [
 			isLegacyJS: false,
 		}),
 	),
-];
+].filter(Boolean);

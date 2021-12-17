@@ -41,11 +41,11 @@ export const getScriptArrayFromFilename = (
 	// 'ophan.87b473fc83e9ca6250fc.js' -> 'ophan'
 	const chunkName = filename.split('.')[0];
 	const chunks: string[] | undefined =
-		loadableManifestLegacy.assetsByChunkName[chunkName];
+		loadableManifest.assetsByChunkName[chunkName];
 	const legacyFilename = chunks && chunks.length > 0 && chunks[0];
 	return [
 		{ src: `${ASSET_ORIGIN}assets/${filename}`, legacy: false },
-		{ src: `${ASSET_ORIGIN}assets/${legacyFilename}`, legacy: true },
+		// { src: `${ASSET_ORIGIN}assets/${legacyFilename}`, legacy: true },
 	];
 };
 
