@@ -1,11 +1,19 @@
-type NewsletterHeightEventType = { source: object };
+type NewsletterHeightEventType = { source: object; origin: string };
 
+const allowedOrigins = ["https://www.theguardian.com"];
 export default (selector: string) => (): Promise<void> => {
 	const allIframes: HTMLIFrameElement[] = [].slice.call(
 		document.querySelectorAll(selector)
 	);
 
 	window.addEventListener("message", (event) => {
+		if (
+			!allowedOrigins.includes(
+				(event as NewsletterHeightEventType).origin
+			)
+		)
+			return;
+
 		const iframes: HTMLIFrameElement[] = allIframes.filter((i) => {
 			try {
 				return (
@@ -23,8 +31,11 @@ export default (selector: string) => (): Promise<void> => {
 				);
 				switch (message.type) {
 					case "set-height":
+						const value = parseInt(message.value);
+						if (!Number.isInteger(value)) return;
+
 						iframes.forEach((iframe) => {
-							iframe.height = message.value;
+							iframe.height = `${value}`;
 						});
 						break;
 					default:
