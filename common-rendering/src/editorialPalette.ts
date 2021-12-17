@@ -11,7 +11,7 @@ import {
   labs,
 } from "@guardian/source-foundations";
 import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar, ArticleSpecial } from "@guardian/libs";
-import { getThemeStyles } from 'themeStyles';
+import { getThemeStyles } from '../../apps-rendering/src/themeStyles';
 
 // ----- Types ----- //
 
@@ -24,6 +24,7 @@ interface Palette {
 		standfirst: Colour;
 		standfirstDark: Colour;
 		standfirstLink: Colour;
+		series: Colour;
 	};
 	background: {
 		headline: Colour;
@@ -146,6 +147,10 @@ const textStandfirstLink = (format: ArticleFormat): Colour => {
 			return format.design === ArticleDesign.Media ? inverted : kicker;
 		}
 	}
+}
+
+const textSeries = (format: ArticleFormat): Colour => {
+	return blogsGrayBackgroundPalette(format);
 }
 
 const backgroundHeadline = (format: ArticleFormat): Colour => {
@@ -319,7 +324,7 @@ const text = {
 	standfirst: textStandfirst,
 	standfirstDark: textStandfirstDark,
 	standfirstLink: textStandfirstLink,
-
+	series: textSeries,
 };
 
 const background = {
@@ -346,6 +351,7 @@ const palette = (format: ArticleFormat): Palette => ({
 		standfirst: text.standfirst(format),
 		standfirstDark: text.standfirstDark(format),
 		standfirstLink: text.standfirstLink(format),
+		series: text.series(format),
 	},
 	background: {
 		headline: background.headline(format),

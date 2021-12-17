@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -66,9 +67,9 @@ const liveLinkStyles = (theme: ArticleTheme): SerializedStyles => css`
 	text-decoration: none;
 `;
 
-const deadBlogLinkStyles = (theme: ArticleTheme): SerializedStyles => css`
+const deadBlogLinkStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
-	color: ${getThemeStyles(theme).deadblogKicker};
+	color: ${text.series(format)};
 	text-decoration: none;
 `;
 
@@ -94,7 +95,7 @@ const getLinkStyles = ({
 	}
 
 	if (design === ArticleDesign.DeadBlog) {
-		return deadBlogLinkStyles(theme);
+		return deadBlogLinkStyles({ design, display, theme });
 	}
 
 	return standardLinkStyles(theme);
