@@ -4,11 +4,10 @@ import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType
 import { some } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
 import { EmbedKind } from 'embed';
-import type { FC } from 'react';
 import { EmbedComponentWrapper } from './embedWrapper';
 
 // ----- Stories ----- //
-const Generic: FC = () => (
+const Generic = () => (
 	<div>
 		<p>
 			This is an example of the embed wrapper rendering a Spotify
@@ -46,8 +45,13 @@ const Generic: FC = () => (
 		/>
 	</div>
 );
+Generic.story = {
+	parameters: {
+		chromatic: { disable: true },
+	},
+};
 
-const Youtube: FC = () => (
+const Youtube = () => (
 	<div>
 		<p>
 			This is an example of the embed wrapper rendering a YouTube
@@ -79,8 +83,13 @@ const Youtube: FC = () => (
 		/>
 	</div>
 );
+Youtube.story = {
+	parameters: {
+		chromatic: { disable: true },
+	},
+};
 
-const Spotify: FC = () => (
+const Spotify = () => (
 	<div>
 		<p>
 			This is an example of the embed wrapper rendering a spotify
@@ -112,12 +121,12 @@ const Spotify: FC = () => (
 		/>
 	</div>
 );
+Spotify.story = {
+	parameters: {
+		chromatic: { disable: true },
+	},
+};
 
-// I'm disabling the requirement for a return type because that doesnt make sense here 🤷. It
-// popped up after I removed the FC type which was causing problems when I tried to set parameters
-// on an individual story. Ideally, we'd use the type from Storybook directly
-// but https://github.com/storybookjs/storybook/issues/13486
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- because 👆
 const Instagram = () => (
 	<div>
 		<p>
