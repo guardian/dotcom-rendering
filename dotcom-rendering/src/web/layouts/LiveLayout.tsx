@@ -689,7 +689,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="meta" element="aside">
 									<Hide until="desktop">
-										<div css={maxWidth}>
+										<div
+											css={[maxWidth, sidePaddingDesktop]}
+										>
 											<ArticleMeta
 												branding={branding}
 												format={format}
