@@ -25,7 +25,6 @@ type Props = {
 	isSignedIn?: boolean;
 	countryCode?: string;
 	contentType: string;
-	sectionName?: string;
 	sectionId: string;
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
