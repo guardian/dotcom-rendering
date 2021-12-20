@@ -258,7 +258,7 @@ export const StickyBottomBanner = ({
 			switches,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
-			section
+			section,
 		};
 		const brazeBanner = buildBrazeBanner(
 			brazeMessages as Promise<BrazeMessagesInterface>,
