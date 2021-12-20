@@ -1,4 +1,8 @@
-type NewsletterHeightEventType = { source: object; origin: string };
+type NewsletterHeightEventType = { source: MessageEventSource; origin: string };
+type MessageType = {
+	type: string;
+	value: string;
+};
 
 const allowedOrigins = ['https://www.theguardian.com'];
 export default (): Promise<void> => {
@@ -10,8 +14,7 @@ export default (): Promise<void> => {
 	// Otherwise, earlier resize events might be missed
 	// So we don't have to load this script as a priority on each load
 	allIframes.forEach((iframe) => {
-		if (iframe && iframe.contentWindow)
-			iframe.contentWindow.postMessage('resize', '*');
+		iframe.contentWindow?.postMessage('resize', '*');
 	});
 
 	window.addEventListener('message', (event) => {
@@ -34,11 +37,11 @@ export default (): Promise<void> => {
 		});
 		if (iframes.length !== 0) {
 			try {
-				const message: { [key: string]: string } = JSON.parse(
+				const message: MessageType = JSON.parse(
 					event.data,
-				);
+				) as MessageType;
 				switch (message.type) {
-					case 'set-height':
+					case 'set-height': {
 						const value = parseInt(message.value);
 						if (!Number.isInteger(value)) return;
 
@@ -46,9 +49,10 @@ export default (): Promise<void> => {
 							iframe.height = `${value}`;
 						});
 						break;
+					}
 					default:
 				}
-				// eslint-disable-next-line no-empty
+				// eslint-disable-next-line no-empty -- No action required
 			} catch (e) {}
 		}
 	});

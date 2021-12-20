@@ -1,9 +1,9 @@
 // ----- Imports ----- //
 
-import newsletterEmbeds from './newsletterEmbeds';
 import { metrics } from 'client/metrics';
 import { metricsClient } from 'native/nativeApi';
 import interactives from './interactives';
+import newsletterEmbeds from './newsletterEmbeds';
 
 // ----- Procedures ----- //
 
@@ -45,7 +45,7 @@ function setup(): void {
 	interactives();
 	twitter();
 	platformCSS();
-	newsletterEmbeds();
+	void newsletterEmbeds();
 }
 
 // ----- Exports ----- //
