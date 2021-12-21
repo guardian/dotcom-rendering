@@ -11,7 +11,6 @@ import {
   labs,
 } from "@guardian/source-foundations";
 import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar, ArticleSpecial } from "@guardian/libs";
-import { getThemeStyles } from '../../apps-rendering/src/themeStyles';
 
 // ----- Types ----- //
 
@@ -21,6 +20,8 @@ interface Palette {
 	text: {
 		headline: Colour;
 		headlineDark: Colour;
+		kicker: Colour;
+		inverted: Colour;
 		standfirst: Colour;
 		standfirstDark: Colour;
 		standfirstLink: Colour;
@@ -91,6 +92,44 @@ const textHeadlineDark = (format: ArticleFormat): Colour => {
 	}
 };
 
+const textKicker = (format: ArticleFormat): Colour => {
+	switch(format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+}
+
+const textInverted = (format: ArticleFormat): Colour => {
+	switch(format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return specialReport[500];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+}
+
 const textStandfirst = ({ design }: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -142,7 +181,8 @@ const textStandfirstLink = (format: ArticleFormat): Colour => {
 			if(format.theme == ArticleSpecial.Labs)
 				return labs[300];
 
-			const { kicker, inverted } = getThemeStyles(format.theme);
+			const kicker = textKicker(format);
+			const inverted = textInverted(format);
 
 			return format.design === ArticleDesign.Media ? inverted : kicker;
 		}
@@ -321,6 +361,8 @@ const fillIconDark = (format: ArticleFormat): Colour => {
 const text = {
 	headline: textHeadline,
 	headlineDark: textHeadlineDark,
+	kicker: textKicker,
+	inverted: textInverted,
 	standfirst: textStandfirst,
 	standfirstDark: textStandfirstDark,
 	standfirstLink: textStandfirstLink,
@@ -348,6 +390,8 @@ const palette = (format: ArticleFormat): Palette => ({
 	text: {
 		headline: text.headline(format),
 		headlineDark: text.headlineDark(format),
+		kicker: text.kicker(format),
+		inverted: text.inverted(format),
 		standfirst: text.standfirst(format),
 		standfirstDark: text.standfirstDark(format),
 		standfirstLink: text.standfirstLink(format),
