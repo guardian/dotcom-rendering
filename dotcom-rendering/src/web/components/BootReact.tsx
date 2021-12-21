@@ -11,10 +11,9 @@ import { getCookie } from '@guardian/libs';
 
 type Props = {
 	CAPI: CAPIBrowserType;
-	NAV: BrowserNavType;
 };
 
-export const BootReact = ({ CAPI, NAV }: Props) => {
+export const BootReact = ({ CAPI }: Props) => {
 	const mvtId = Number(
 		(CAPI.config.isDev &&
 			getCookie({ name: 'GU_mvt_id_local', shouldMemoize: true })) || // Simplify localhost testing by creating a different mvt id
@@ -48,7 +47,7 @@ export const BootReact = ({ CAPI, NAV }: Props) => {
 				ophanRecord={ophanRecord}
 				forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
 			>
-				<App CAPI={CAPI} NAV={NAV} ophanRecord={ophanRecord} />
+				<App CAPI={CAPI} ophanRecord={ophanRecord} />
 			</ABProvider>,
 
 			document.getElementById('react-root'),

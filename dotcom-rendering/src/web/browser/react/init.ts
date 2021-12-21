@@ -6,11 +6,11 @@ import { BootReact } from '@root/src/web/components/BootReact';
 
 const init = (): Promise<void> => {
 	const {
-		data: { CAPI, NAV },
+		data: { CAPI },
 	} = window.guardian.app;
 
 	// Partially hydrate the client using a combination of islands and portals
-	BootReact({ CAPI, NAV });
+	BootReact({ CAPI });
 
 	return Promise.resolve();
 };

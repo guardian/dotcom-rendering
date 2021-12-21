@@ -20,7 +20,7 @@ import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
 import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav/SubNav';
+import { SubNav } from '@root/src/web/components/SubNav.importable';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
@@ -41,6 +41,7 @@ import {
 } from '@root/src/web/lib/layoutHelpers';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
+import { Hydrate } from '../components/Hydrate';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -501,16 +502,14 @@ export const ImmersiveLayout = ({
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer
-					padded={false}
-					sectionId="sub-nav-root"
-					element="nav"
-				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						format={format}
-					/>
+				<ElementContainer padded={false} element="aside">
+					<Hydrate when="visible">
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							format={format}
+						/>
+					</Hydrate>
 				</ElementContainer>
 			)}
 

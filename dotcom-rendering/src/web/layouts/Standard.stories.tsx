@@ -2,10 +2,7 @@ import { useEffect } from 'react';
 
 import { breakpoints } from '@guardian/source-foundations';
 
-import {
-	makeGuardianBrowserCAPI,
-	makeGuardianBrowserNav,
-} from '@root/src/model/window-guardian';
+import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
@@ -81,13 +78,13 @@ const HydratedLayout = ({
 
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-		BootReact({ CAPI, NAV: makeGuardianBrowserNav(NAV) });
+		BootReact({ CAPI });
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);
 		// Manually updates the footer DOM because it's not hydrated
 		injectPrivacySettingsLink();
-	}, [ServerCAPI, NAV]);
+	}, [ServerCAPI]);
 	if (modifyPage) {
 		modifyPage();
 	}
