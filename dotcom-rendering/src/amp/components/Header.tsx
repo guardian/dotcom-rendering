@@ -11,7 +11,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 
-import Logo from '@frontend/static/logos/guardian-anniversary-logo.svg';
+import Logo from '@frontend/static/logos/the-guardian.svg';
 import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
 import { ReaderRevenueButton } from '@root/src/amp/components/ReaderRevenueButton';
 

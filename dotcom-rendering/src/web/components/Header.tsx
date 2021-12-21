@@ -18,10 +18,9 @@ type Props = {
 	edition: Edition;
 	idUrl?: string;
 	mmaUrl?: string;
-	isAnniversary?: boolean; // Temporary for G200 anniversary
 };
 
-export const Header = ({ edition, idUrl, mmaUrl, isAnniversary }: Props) => (
+export const Header = ({ edition, idUrl, mmaUrl }: Props) => (
 	<div css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
 			<div id="edition-root">
@@ -31,7 +30,7 @@ export const Header = ({ edition, idUrl, mmaUrl, isAnniversary }: Props) => (
 				/>
 			</div>
 		</Hide>
-		<Logo isAnniversary={isAnniversary} edition={edition} />
+		<Logo />
 		<div id="reader-revenue-links-header" />
 		<div id="links-root">
 			<Links supporterCTA="" idUrl={idUrl} mmaUrl={mmaUrl} />
