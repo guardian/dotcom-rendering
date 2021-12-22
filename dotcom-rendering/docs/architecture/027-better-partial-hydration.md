@@ -27,7 +27,7 @@ To create a new island you had to:
 
 ### After
 
-[This PR](https://github.com/guardian/dotcom-rendering/pull/3629 & https://github.com/guardian/dotcom-rendering/pull/3784) simplifies the process of partial hydration by moving the logic out of a React app and into a simple script tag. This removes the need to manage re-renders, can use standard dynamic imports and reduces the effort needed to use.
+PRs #3629 & #3784 simplify the process of partial hydration by moving the logic out of a React app and into a simple script tag. This removes the need to manage re-renders, can use standard dynamic imports and reduces the effort needed to use.
 
 To create a new island you now:
 
