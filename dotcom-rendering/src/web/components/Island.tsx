@@ -11,7 +11,7 @@ interface HydrateProps {
 	children: JSX.Element;
 }
 
-interface PortalProps {
+interface ClientOnlyProps {
 	deferUntil?: When;
 	clientOnly: true;
 	placeholderHeight: number;
@@ -25,7 +25,7 @@ interface PortalProps {
  * flag is set to true, then you must supply placeholderHeight. If clientOnly is false or
  * not supplied, then placeholderHeight must not be given
  */
-type Props = HydrateProps | PortalProps;
+type Props = HydrateProps | ClientOnlyProps;
 
 const decideChildren = (
 	children: JSX.Element,
