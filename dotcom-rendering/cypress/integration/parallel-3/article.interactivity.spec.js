@@ -160,6 +160,7 @@ describe('Interactivity', function () {
 				cy.visit(`/Article?url=${articleUrl}`);
 				// Wait for hydration
 				cy.get('[data-cy=sub-nav]')
+					.first()
 					.parent()
 					.should('have.attr', 'data-gu-hydrated', 'true');
 				// Click Show in the first sub nav
