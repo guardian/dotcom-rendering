@@ -47,7 +47,7 @@ const fileExists = async (glob) => {
 		'bootCmp',
 		'ga',
 		'ophan',
-		'hydration',
+		'islands',
 		'react',
 		'dynamicImport',
 		'atomIframe',

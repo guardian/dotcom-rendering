@@ -52,4 +52,4 @@ const init = () => {
 	return Promise.resolve();
 };
 
-startup('hydration', null, init);
+startup('islands', null, init);
