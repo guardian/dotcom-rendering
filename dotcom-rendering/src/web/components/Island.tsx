@@ -14,16 +14,15 @@ interface HydrateProps {
 interface ClientOnlyProps {
 	deferUntil?: When;
 	clientOnly: true;
-	placeholderHeight: number;
+	placeholderHeight?: number;
 	children: JSX.Element;
 }
 
 /**
  * Props
  *
- * We use a union type here to support conditional typing. This means if the clientOnly
- * flag is set to true, then you must supply placeholderHeight. If clientOnly is false or
- * not supplied, then placeholderHeight must not be given
+ * We use a union type here to support conditional typing. This means you
+ * can only supply placeholderHeight if clientOnly is true.
  */
 type Props = HydrateProps | ClientOnlyProps;
 
@@ -47,7 +46,7 @@ const decideChildren = (
  * 		- idle - Execute when browser idle
  * 		- visible - Execute when component appears in viewport
  * @param clientOnly - Should the component be server side rendered
- * @param placeholderHeight - The height for the placeholder element. Required if clientOnly is true
+ * @param placeholderHeight - The height for the placeholder element
  * @param children - The component being inserted. Must be a single React Element
  *
  */
