@@ -33,7 +33,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
-import { Hydrate } from '../components/Hydrate';
+import { Island } from '../components/Island';
 
 interface Props {
 	CAPI: CAPIType;
@@ -225,13 +225,13 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 					padded={false}
 					element="aside"
 				>
-					<Hydrate when="idle">
+					<Island when="idle">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							format={format}
 						/>
-					</Hydrate>
+					</Island>
 				</ElementContainer>
 			)}
 		</section>
@@ -302,13 +302,13 @@ export const FullPageInteractiveLayout = ({
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
-					<Hydrate when="visible">
+					<Island when="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							format={format}
 						/>
-					</Hydrate>
+					</Island>
 				</ElementContainer>
 			)}
 

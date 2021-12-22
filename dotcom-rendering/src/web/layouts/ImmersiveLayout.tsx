@@ -41,7 +41,7 @@ import {
 } from '@root/src/web/lib/layoutHelpers';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
-import { Hydrate } from '../components/Hydrate';
+import { Island } from '../components/Island';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -503,13 +503,13 @@ export const ImmersiveLayout = ({
 
 			{NAV.subNavSections && (
 				<ElementContainer padded={false} element="aside">
-					<Hydrate when="visible">
+					<Island when="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							format={format}
 						/>
-					</Hydrate>
+					</Island>
 				</ElementContainer>
 			)}
 

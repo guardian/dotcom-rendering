@@ -51,7 +51,7 @@ import {
 } from '@root/src/web/lib/layoutHelpers';
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { Hydrate } from '../components/Hydrate';
+import { Island } from '../components/Island';
 
 const StandardGrid = ({
 	children,
@@ -414,13 +414,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									padded={false}
 									element="aside"
 								>
-									<Hydrate when="idle">
+									<Island when="idle">
 										<SubNav
 											subNavSections={NAV.subNavSections}
 											currentNavLink={NAV.currentNavLink}
 											format={format}
 										/>
-									</Hydrate>
+									</Island>
 								</ElementContainer>
 								<ElementContainer
 									backgroundColour={
@@ -762,13 +762,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					padded={false}
 					element="aside"
 				>
-					<Hydrate when="visible">
+					<Island when="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							format={format}
 						/>
-					</Hydrate>
+					</Island>
 				</ElementContainer>
 			)}
 

@@ -54,7 +54,7 @@ import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
-import { Hydrate } from '../components/Hydrate';
+import { Island } from '../components/Island';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -444,13 +444,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							borderColour={palette.border.article}
 							element="aside"
 						>
-							<Hydrate when="idle">
+							<Island when="idle">
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
 									format={format}
 								/>
-							</Hydrate>
+							</Island>
 						</ElementContainer>
 					)}
 
@@ -1150,13 +1150,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					padded={false}
 					element="aside"
 				>
-					<Hydrate when="visible">
+					<Island when="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							format={format}
 						/>
-					</Hydrate>
+					</Island>
 				</ElementContainer>
 			)}
 

@@ -17,7 +17,7 @@ interface Props {
  * @param children - What you want hydrated.
  *
  */
-export const Hydrate = ({ when = 'immediate', children }: Props) => (
+export const Island = ({ when = 'immediate', children }: Props) => (
 	<gu-hydrate
 		name={children.type.name}
 		when={when}

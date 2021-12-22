@@ -45,7 +45,7 @@ import {
 	SendToBack,
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
-import { Hydrate } from '../components/Hydrate';
+import { Island } from '../components/Island';
 
 const StandardGrid = ({
 	children,
@@ -388,13 +388,13 @@ export const CommentLayout = ({
 							padded={false}
 							element="aside"
 						>
-							<Hydrate when="idle">
+							<Island when="idle">
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
 									format={format}
 								/>
-							</Hydrate>
+							</Island>
 						</ElementContainer>
 					)}
 
@@ -670,13 +670,13 @@ export const CommentLayout = ({
 
 			{NAV.subNavSections && (
 				<ElementContainer padded={false} element="aside">
-					<Hydrate when="visible">
+					<Island when="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							format={format}
 						/>
-					</Hydrate>
+					</Island>
 				</ElementContainer>
 			)}
 

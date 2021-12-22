@@ -52,7 +52,7 @@ import {
 	interactiveGlobalStyles,
 	interactiveLegacyClasses,
 } from './lib/interactiveLegacyStyling';
-import { Hydrate } from '../components/Hydrate';
+import { Island } from '../components/Island';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -332,13 +332,13 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						padded={false}
 						element="aside"
 					>
-						<Hydrate when="idle">
+						<Island when="idle">
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
 								format={format}
 							/>
-						</Hydrate>
+						</Island>
 					</ElementContainer>
 				)}
 
@@ -630,13 +630,13 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					padded={false}
 					element="aside"
 				>
-					<Hydrate when="visible">
+					<Island when="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							format={format}
 						/>
-					</Hydrate>
+					</Island>
 				</ElementContainer>
 			)}
 
