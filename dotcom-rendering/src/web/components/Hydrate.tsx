@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-interface HydrateProps {
+interface Props {
 	when?: 'immediate' | 'idle' | 'visible';
 	children: JSX.Element;
 }
@@ -17,7 +17,7 @@ interface HydrateProps {
  * @param children - What you want hydrated.
  *
  */
-export const Hydrate = ({ when = 'immediate', children }: HydrateProps) => (
+export const Hydrate = ({ when = 'immediate', children }: Props) => (
 	<gu-hydrate
 		name={children.type.name}
 		when={when}
