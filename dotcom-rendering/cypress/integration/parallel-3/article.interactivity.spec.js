@@ -154,6 +154,15 @@ describe('Interactivity', function () {
 					'column-collapse-sublink-The Guardian view',
 				);
 			});
+
+			it('should expand the subnav when "More" is clicked', function () {
+				cy.viewport('iphone-x');
+				cy.visit(`/Article?url=${articleUrl}`);
+				cy.get('[data-cy=subnav-toggle]').click();
+				cy.get('[data-cy=sub-nav]')
+					.contains('Obituaries')
+					.should('be.visible');
+			});
 		});
 	});
 });
