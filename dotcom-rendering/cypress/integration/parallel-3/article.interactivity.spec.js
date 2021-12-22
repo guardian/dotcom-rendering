@@ -163,9 +163,20 @@ describe('Interactivity', function () {
 					.first()
 					.parent()
 					.should('have.attr', 'data-gu-hydrated', 'true');
-				// Click Show in the first sub nav
+				// Both subnav buttons show 'More'
+				cy.get('[data-cy=subnav-toggle]').first().contains('More');
+				cy.get('[data-cy=subnav-toggle]').last().contains('More');
+				// Click Show more in the first sub nav
 				cy.get('[data-cy=subnav-toggle]').first().click();
-				cy.get('[data-cy=last-subnav-item]').should('be.visible');
+				// The first button now shows 'Less'
+				cy.get('[data-cy=subnav-toggle]').first().contains('Less');
+				// The other subnav still shows 'More'
+				cy.get('[data-cy=subnav-toggle]').last().contains('More');
+				// Click Show more on the last sub nav
+				cy.get('[data-cy=subnav-toggle]').last().click();
+				// Both subnav buttons show 'Less'
+				cy.get('[data-cy=subnav-toggle]').first().contains('Less');
+				cy.get('[data-cy=subnav-toggle]').last().contains('Less');
 			});
 		});
 	});
