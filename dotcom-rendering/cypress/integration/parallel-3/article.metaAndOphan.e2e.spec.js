@@ -7,14 +7,13 @@ describe('The web document renders with the correct meta and analytics elements 
 		setLocalBaseUrl();
 	});
 
-	const getExists = (selector) => cy.get(selector).should('have.length', 1);
-
 	it(`Has a head element`, function () {
 		cy.visit(
 			`/Article?url=https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
 		);
 		// cy.get(`head`).should('have.length', 1);
-		getExists(`head`);
+
+		cy.get(`head`).should('have.length', 1);
 	});
 	it(`Required meta SEO fields exist`, function () {
 		const metaTags = [
@@ -45,26 +44,35 @@ describe('The web document renders with the correct meta and analytics elements 
 			'article:author',
 		];
 
-		names.map((name) => getExists(`head meta[property="${name}"]`));
+		names
+			.map((name) => cy.get(`head meta[property="${name}"]`))
+			.should('have.length', 1);
 	});
 
 	it('that the most important twitter meta tags exist', function () {
 		const names = ['card', 'image', 'site'];
 
-		names.map((name) => getExists(`head meta[name="twitter:${name}"]`));
+		names
+			.map((name) => cy.get(`head meta[name="twitter:${name}"]`))
+			.should('have.length', 1);
 	});
 
 	it('that all the required links exist', function () {
 		const names = ['amphtml'];
 
-		names.map((name) => getExists(`head link[rel="${name}"]`));
+		names
+			.map((name) => cy.get(`head link[rel="${name}"]`))
+			.should('have.length', 1);
 	});
 
 	it('Pillar ophan data-link-name exists with correct value', function () {
-		getExists(`a[data-link-name="nav2 : primary : Opinion"]`);
+		cy.get(`a[data-link-name="nav2 : primary : Opinion"]`).should(
+			'have.length',
+			1,
+		);
 	});
 
-	it('Subnav ophan data-link-name exists with correct value', function () {
+	it.only('Subnav ophan data-link-name exists with correct value', function () {
 		cy.get(`a[data-link-name="nav2 : subnav : money/pensions"]`).should(
 			'have.length',
 			2,
@@ -77,9 +85,12 @@ describe('The web document renders with the correct meta and analytics elements 
 	});
 
 	it('Meta ophan data-attributes exist, content and attributes are correct', function () {
-		getExists(`address[data-component="meta-byline"]`);
+		cy.get(`address[data-component="meta-byline"]`).should(
+			'have.length',
+			1,
+		);
 
-		getExists(`address[data-link-name="byline"]`);
+		cy.get(`address[data-link-name="byline"]`).should('have.length', 1);
 
 		cy.get(`a[rel="author"]`)
 			.contains('Zoe Williams')
@@ -91,16 +102,23 @@ describe('The web document renders with the correct meta and analytics elements 
 	});
 
 	it('Section and Series ophan data-attributes exist', function () {
-		getExists(`[data-component="section"]`);
-		getExists(`[data-link-name="article section"]`);
+		cy.get(`[data-component="section"]`).should('have.length', 1);
 
-		getExists(`[data-component="series"]`);
-		getExists(`[data-link-name="article series"]`);
+		cy.get(`[data-link-name="article section"]`).should('have.length', 1);
+
+		cy.get(`a[data-component="series"]`).should('have.length', 1);
+
+		cy.get(`a[data-link-name="article series"]`).should('have.length', 1);
 	});
 
 	it('Footer ophan data-attributes exist', function () {
-		getExists(`[data-component="footer"]`);
-		getExists(`[data-link-name="footer"]`);
-		getExists(`[data-link-name="footer : primary : Opinion"]`);
+		cy.get(`[data-component="footer"]`).should('have.length', 1);
+
+		cy.get(`[data-link-name="footer"]`).should('have.length', 1);
+
+		cy.get(`[data-link-name="footer : primary : Opinion"]`).should(
+			'have.length',
+			1,
+		);
 	});
 });
