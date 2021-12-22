@@ -160,7 +160,7 @@ describe('Interactivity', function () {
 				cy.visit(`/Article?url=${articleUrl}`);
 				cy.get('[data-cy=subnav-toggle]').first().click();
 				cy.get('[data-cy=sub-nav]')
-					.contains('Obituaries')
+					.contains('Tech')
 					.should('be.visible');
 			});
 		});
