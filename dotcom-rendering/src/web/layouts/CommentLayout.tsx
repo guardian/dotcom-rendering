@@ -388,7 +388,7 @@ export const CommentLayout = ({
 							padded={false}
 							element="aside"
 						>
-							<Island when="idle">
+							<Island defer="idle">
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
@@ -670,7 +670,7 @@ export const CommentLayout = ({
 
 			{NAV.subNavSections && (
 				<ElementContainer padded={false} element="aside">
-					<Island when="visible">
+					<Island defer="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}

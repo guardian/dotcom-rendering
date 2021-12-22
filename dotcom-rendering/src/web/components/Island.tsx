@@ -1,26 +1,25 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 interface Props {
-	when?: 'immediate' | 'idle' | 'visible';
+	defer?: 'idle' | 'visible';
 	children: JSX.Element;
 }
 
 /**
- * Hydrates a component in the client by async loading the exported component.
+ * Adds interactivity to the client by either hydrating or inserting content
  *
- * Note. The component being hydrated must follow the [MyComponent].importable.tsx
+ * Note. The component passed as children must follow the [MyComponent].importable.tsx
  * namimg convention
  *
- * @param when - When hydration should take place.
- * 		- immediate - Hydrate without delay
- * 		- idle - Hydrate when browser idle
- * 		- visible - Hydrate when component appears in viewport
- * @param children - What you want hydrated.
+ * @param defer - Delay when client code should execute
+ * 		- idle - Execute when browser idle
+ * 		- visible - Execute when component appears in viewport
+ * @param children - The component being inserted. Must be a single React Element
  *
  */
-export const Island = ({ when = 'immediate', children }: Props) => (
+export const Island = ({ defer, children }: Props) => (
 	<gu-island
 		name={children.type.name}
-		when={when}
+		defer={defer}
 		props={JSON.stringify(children.props)}
 	>
 		{children}

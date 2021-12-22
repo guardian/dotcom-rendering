@@ -1067,7 +1067,7 @@ declare namespace JSX {
 	interface IntrinsicElements {
 		'gu-island': {
 			name: string;
-			when?: 'immediate' | 'idle' | 'visible';
+			defer?: 'idle' | 'visible';
 			props: any;
 			children: React.ReactNode;
 		};

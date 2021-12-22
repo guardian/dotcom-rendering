@@ -225,7 +225,7 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 					padded={false}
 					element="aside"
 				>
-					<Island when="idle">
+					<Island defer="idle">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -302,7 +302,7 @@ export const FullPageInteractiveLayout = ({
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
-					<Island when="visible">
+					<Island defer="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}

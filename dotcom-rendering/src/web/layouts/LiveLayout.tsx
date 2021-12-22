@@ -444,7 +444,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							borderColour={palette.border.article}
 							element="aside"
 						>
-							<Island when="idle">
+							<Island defer="idle">
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
@@ -1150,7 +1150,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					padded={false}
 					element="aside"
 				>
-					<Island when="visible">
+					<Island defer="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}

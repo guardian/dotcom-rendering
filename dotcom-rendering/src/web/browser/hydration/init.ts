@@ -15,7 +15,7 @@ const init = () => {
 	 * The code here looks for parts of the dom that have been marked using the `gu-island`
 	 * marker, hydrating each one using the following properties:
 	 *
-	 * when - Used to optionally defer hydration
+	 * defer - Used to optionally defer execution
 	 * name - The name of the component. Used to dynamically import the code
 	 * props - The data for the component that has been serialised in the dom
 	 * marker - The `gu-island` custom element which is wrapping the content
@@ -29,8 +29,8 @@ const init = () => {
 			if (!name) return;
 			log('dotcom', `Hydrating ${name}`);
 
-			const when = marker.getAttribute('when');
-			switch (when) {
+			const defer = marker.getAttribute('defer');
+			switch (defer) {
 				case 'idle': {
 					whenIdle(() => {
 						doHydration(name, props, marker);
@@ -43,7 +43,6 @@ const init = () => {
 					});
 					break;
 				}
-				case 'immediate':
 				default: {
 					doHydration(name, props, marker);
 				}
