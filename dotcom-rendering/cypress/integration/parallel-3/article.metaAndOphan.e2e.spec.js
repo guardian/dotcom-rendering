@@ -58,8 +58,7 @@ describe('The web document renders with the correct meta and analytics elements 
 		);
 		// Only the top subnav is initially rendered so the count here is one
 		cy.get(`a[data-link-name="nav2 : subnav : money/pensions"]`).should(
-			'have.length',
-			1,
+			'be.visible',
 		);
 		// Ensure we don't parse in an accidental slash
 		cy.get(`a[data-link-name="nav2 : subnav : /money/pensions"]`).should(
