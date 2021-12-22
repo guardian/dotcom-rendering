@@ -18,32 +18,32 @@ const init = () => {
 	 * defer - Used to optionally defer execution
 	 * name - The name of the component. Used to dynamically import the code
 	 * props - The data for the component that has been serialised in the dom
-	 * marker - The `gu-island` custom element which is wrapping the content
+	 * element - The `gu-island` custom element which is wrapping the content
 	 */
-	document.querySelectorAll('gu-island').forEach((marker) => {
-		if (marker instanceof HTMLElement) {
-			const name = getName(marker);
-			const props = getProps(marker);
+	document.querySelectorAll('gu-island').forEach((element) => {
+		if (element instanceof HTMLElement) {
+			const name = getName(element);
+			const props = getProps(element);
 
 			if (!name) return;
 			log('dotcom', `Hydrating ${name}`);
 
-			const defer = marker.getAttribute('defer');
+			const defer = element.getAttribute('defer');
 			switch (defer) {
 				case 'idle': {
 					whenIdle(() => {
-						doHydration(name, props, marker);
+						doHydration(name, props, element);
 					});
 					break;
 				}
 				case 'visible': {
-					whenVisible(marker, () => {
-						doHydration(name, props, marker);
+					whenVisible(element, () => {
+						doHydration(name, props, element);
 					});
 					break;
 				}
 				default: {
-					doHydration(name, props, marker);
+					doHydration(name, props, element);
 				}
 			}
 		}
