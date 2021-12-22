@@ -155,7 +155,7 @@ describe('Interactivity', function () {
 				);
 			});
 
-			it.only('should expand the subnav when "More" is clicked', function () {
+			it('should expand the subnav when "More" is clicked', function () {
 				cy.viewport('iphone-x');
 				cy.visit(`/Article?url=${articleUrl}`);
 				// Wait for hydration
