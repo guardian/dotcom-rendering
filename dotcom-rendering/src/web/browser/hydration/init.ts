@@ -12,15 +12,15 @@ const init = () => {
 	/**
 	 * Partial Hydration
 	 *
-	 * The code here looks for parts of the dom that have been marked using the `gu-hydrate`
+	 * The code here looks for parts of the dom that have been marked using the `gu-island`
 	 * marker, hydrating each one using the following properties:
 	 *
 	 * when - Used to optionally defer hydration
 	 * name - The name of the component. Used to dynamically import the code
 	 * props - The data for the component that has been serialised in the dom
-	 * marker - The `gu-hydrate` custom element which is wrapping the content
+	 * marker - The `gu-island` custom element which is wrapping the content
 	 */
-	const hydrationMarkers = document.querySelectorAll('gu-hydrate');
+	const hydrationMarkers = document.querySelectorAll('gu-island');
 	hydrationMarkers.forEach((marker) => {
 		if (marker instanceof HTMLElement) {
 			const name = getName(marker);

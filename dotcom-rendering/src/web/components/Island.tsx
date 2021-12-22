@@ -18,11 +18,11 @@ interface Props {
  *
  */
 export const Island = ({ when = 'immediate', children }: Props) => (
-	<gu-hydrate
+	<gu-island
 		name={children.type.name}
 		when={when}
 		props={JSON.stringify(children.props)}
 	>
 		{children}
-	</gu-hydrate>
+	</gu-island>
 );
