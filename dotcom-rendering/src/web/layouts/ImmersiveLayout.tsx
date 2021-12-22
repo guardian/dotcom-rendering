@@ -503,7 +503,7 @@ export const ImmersiveLayout = ({
 
 			{NAV.subNavSections && (
 				<ElementContainer padded={false} element="aside">
-					<Island defer="visible">
+					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}

@@ -444,7 +444,7 @@ export const InteractiveImmersiveLayout = ({
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
-					<Island defer="visible">
+					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}

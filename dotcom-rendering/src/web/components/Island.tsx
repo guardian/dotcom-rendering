@@ -2,17 +2,17 @@
 
 import { Placeholder } from './Placeholder';
 
-type Defer = 'idle' | 'visible';
+type When = 'idle' | 'visible';
 
 interface HydrateProps {
-	defer?: Defer;
+	deferUntil?: When;
 	clientOnly?: false;
 	placeholderHeight?: undefined;
 	children: JSX.Element;
 }
 
 interface PortalProps {
-	defer?: Defer;
+	deferUntil?: When;
 	clientOnly: true;
 	placeholderHeight: number;
 	children: JSX.Element;
@@ -43,7 +43,7 @@ const decideChildren = (
  * Note. The component passed as children must follow the [MyComponent].importable.tsx
  * namimg convention
  *
- * @param defer - Delay when client code should execute
+ * @param deferUntil - Delay when client code should execute
  * 		- idle - Execute when browser idle
  * 		- visible - Execute when component appears in viewport
  * @param clientOnly - Should the component be server side rendered
@@ -52,14 +52,14 @@ const decideChildren = (
  *
  */
 export const Island = ({
-	defer,
+	deferUntil,
 	clientOnly,
 	placeholderHeight,
 	children,
 }: Props) => (
 	<gu-island
 		name={children.type.name}
-		defer={defer}
+		deferUntil={deferUntil}
 		props={JSON.stringify(children.props)}
 	>
 		{decideChildren(children, clientOnly, placeholderHeight)}

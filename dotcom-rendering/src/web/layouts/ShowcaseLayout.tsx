@@ -330,7 +330,7 @@ export const ShowcaseLayout = ({
 									padded={false}
 									element="aside"
 								>
-									<Island defer="idle">
+									<Island deferUntil="idle">
 										<SubNav
 											subNavSections={NAV.subNavSections}
 											currentNavLink={NAV.currentNavLink}
@@ -647,7 +647,7 @@ export const ShowcaseLayout = ({
 
 			{NAV.subNavSections && (
 				<ElementContainer padded={false} element="aside">
-					<Island defer="visible">
+					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}

@@ -414,7 +414,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									padded={false}
 									element="aside"
 								>
-									<Island defer="idle">
+									<Island deferUntil="idle">
 										<SubNav
 											subNavSections={NAV.subNavSections}
 											currentNavLink={NAV.currentNavLink}
@@ -762,7 +762,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					padded={false}
 					element="aside"
 				>
-					<Island defer="visible">
+					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
