@@ -6,14 +6,14 @@ type Defer = 'idle' | 'visible';
 
 interface HydrateProps {
 	defer?: Defer;
-	ssr?: true;
+	clientOnly?: false;
 	placeholderHeight?: undefined;
 	children: JSX.Element;
 }
 
 interface PortalProps {
 	defer?: Defer;
-	ssr: false;
+	clientOnly: true;
 	placeholderHeight: number;
 	children: JSX.Element;
 }
@@ -21,11 +21,21 @@ interface PortalProps {
 /**
  * Props
  *
- * We use a union type here to support conditional typing. This means if the ssr
- * flag is set to false, then you must supply placeholderHeight. If ssr is true or
+ * We use a union type here to support conditional typing. This means if the clientOnly
+ * flag is set to true, then you must supply placeholderHeight. If clientOnly is false or
  * not supplied, then placeholderHeight must not be given
  */
 type Props = HydrateProps | PortalProps;
+
+const decideChildren = (
+	children: JSX.Element,
+	clientOnly?: boolean,
+	placeholderHeight?: number,
+) => {
+	if (!clientOnly) return children; // Server side rendering
+	if (placeholderHeight) return <Placeholder height={placeholderHeight} />; // Portal using placeholder
+	return null; // Portal not using placeholder (this also includes placeholderHeight === 0 - this is intentional)
+};
 
 /**
  * Adds interactivity to the client by either hydrating or inserting content
@@ -36,18 +46,22 @@ type Props = HydrateProps | PortalProps;
  * @param defer - Delay when client code should execute
  * 		- idle - Execute when browser idle
  * 		- visible - Execute when component appears in viewport
- * @param ssr - Should the component be server side rendered
- * @param placeholderHeight - The height for the placeholder element. Required if ssr is false
+ * @param clientOnly - Should the component be server side rendered
+ * @param placeholderHeight - The height for the placeholder element. Required if clientOnly is true
  * @param children - The component being inserted. Must be a single React Element
  *
  */
-export const Island = ({ defer, ssr, placeholderHeight, children }: Props) => (
+export const Island = ({
+	defer,
+	clientOnly,
+	placeholderHeight,
+	children,
+}: Props) => (
 	<gu-island
 		name={children.type.name}
 		defer={defer}
 		props={JSON.stringify(children.props)}
 	>
-		{ssr && children}
-		{placeholderHeight && <Placeholder height={placeholderHeight} />}
+		{decideChildren(children, clientOnly, placeholderHeight)}
 	</gu-island>
 );
