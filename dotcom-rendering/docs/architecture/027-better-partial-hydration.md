@@ -27,11 +27,11 @@ To create a new island you had to:
 
 ### After
 
-[This PR](https://github.com/guardian/dotcom-rendering/pull/3629) simplifies the process of partial hydration by moving the logic out of a React app and into a simple script tag. This removes the need to manage re-renders, can use standard dynamic imports and reduces the effort needed to use.
+[This PR](https://github.com/guardian/dotcom-rendering/pull/3629 & https://github.com/guardian/dotcom-rendering/pull/3784) simplifies the process of partial hydration by moving the logic out of a React app and into a simple script tag. This removes the need to manage re-renders, can use standard dynamic imports and reduces the effort needed to use.
 
 To create a new island you now:
 
-1. Wrap you component on the server with `Hydrate`.
+1. Wrap you component on the server with `Island`.
 2. Add `.importable` to the component filname. Eg: `[MyThing].importable.tsx`
 
 This is simpler to use, harder to make mistakes with and is certain to only ever send the data to the client that is required.
