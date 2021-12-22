@@ -158,7 +158,7 @@ describe('Interactivity', function () {
 			it('should expand the subnav when "More" is clicked', function () {
 				cy.viewport('iphone-x');
 				cy.visit(`/Article?url=${articleUrl}`);
-				cy.get('[data-cy=subnav-toggle]').click({ multiple: true });
+				cy.get('[data-cy=subnav-toggle]').first().click();
 				cy.get('[data-cy=sub-nav]')
 					.contains('Obituaries')
 					.should('be.visible');
