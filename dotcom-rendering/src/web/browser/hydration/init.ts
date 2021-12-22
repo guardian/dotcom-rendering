@@ -20,8 +20,7 @@ const init = () => {
 	 * props - The data for the component that has been serialised in the dom
 	 * marker - The `gu-island` custom element which is wrapping the content
 	 */
-	const hydrationMarkers = document.querySelectorAll('gu-island');
-	hydrationMarkers.forEach((marker) => {
+	document.querySelectorAll('gu-island').forEach((marker) => {
 		if (marker instanceof HTMLElement) {
 			const name = getName(marker);
 			const props = getProps(marker);
