@@ -165,10 +165,7 @@ describe('Interactivity', function () {
 					.should('have.attr', 'data-gu-hydrated', 'true');
 				// Click Show in the first sub nav
 				cy.get('[data-cy=subnav-toggle]').first().click();
-				cy.get('[data-cy=sub-nav]')
-					.first()
-					.contains('Tech')
-					.should('be.visible');
+				cy.get('[data-cy=last-subnav-item]').should('be.visible');
 			});
 		});
 	});

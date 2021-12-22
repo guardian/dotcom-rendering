@@ -202,7 +202,7 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 						</a>
 					</li>
 				)}
-				{subNavSections.links.map((link) => (
+				{subNavSections.links.map((link, index) => (
 					<li key={link.url}>
 						<a
 							css={linkStyle(palette)}
@@ -211,6 +211,13 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 							data-link-name={`nav2 : subnav : ${trimLeadingSlash(
 								link.url,
 							)}`}
+							// Mark the last element so we can use Cypress to check if it
+							// is visible when More is clicked
+							data-cy={
+								subNavSections.links.length === index + 1
+									? 'last-subnav-item'
+									: ''
+							}
 						>
 							{link.title === currentNavLink ? (
 								<span css={selected}>{link.title}</span>
