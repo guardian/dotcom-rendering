@@ -61,15 +61,17 @@ describe('The web document renders with the correct meta and analytics elements 
 		cy.visit(
 			`/Article?url=https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
 		);
+		// Only the top subnav is initially rendered so the count here is one
 		cy.get(`a[data-link-name="nav2 : subnav : money/pensions"]`).should(
 			'have.length',
-			2,
-		); // Top and bottom pillar nav
+			1,
+		);
 
+		// Ensure we don't parse in an accidental slash
 		cy.get(`a[data-link-name="nav2 : subnav : /money/pensions"]`).should(
 			'have.length',
 			0,
-		); // Ensure we don't parse in an accidental slash
+		);
 	});
 
 	it('Meta ophan data-attributes exist, content and attributes are correct', function () {
