@@ -175,7 +175,7 @@ function render(
 		display: withDefault(item.display)(formatOverride.display)
 	};
 
-	const body = renderBody(newItem);
+	const body = renderBody(newItem as any);
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 
 	const head = renderHead(
