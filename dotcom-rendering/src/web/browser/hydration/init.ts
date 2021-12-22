@@ -10,10 +10,10 @@ import { getProps } from './getProps';
 
 const init = () => {
 	/**
-	 * Partial Hydration
+	 * Partial Hydration / React Islands
 	 *
 	 * The code here looks for parts of the dom that have been marked using the `gu-island`
-	 * marker, hydrating each one using the following properties:
+	 * marker, hydrating/rendering each one using the following properties:
 	 *
 	 * defer - Used to optionally defer execution
 	 * name - The name of the component. Used to dynamically import the code
