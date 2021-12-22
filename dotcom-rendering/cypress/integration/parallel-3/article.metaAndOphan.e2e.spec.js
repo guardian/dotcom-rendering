@@ -87,7 +87,7 @@ describe('The web document renders with the correct meta and analytics elements 
 			);
 	});
 
-	it('Section and Series ophan data-attributes exist', function () {
+	it('Section, Footer and Series ophan data-attributes exist', function () {
 		cy.visit(
 			`/Article?url=https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
 		);
@@ -98,12 +98,6 @@ describe('The web document renders with the correct meta and analytics elements 
 		cy.get(`a[data-component="series"]`).should('have.length', 1);
 
 		cy.get(`a[data-link-name="article series"]`).should('have.length', 1);
-	});
-
-	it('Footer ophan data-attributes exist', function () {
-		cy.visit(
-			`/Article?url=https://www.theguardian.com/lifeandstyle/2021/jan/21/never-conduct-any-business-naked-how-to-work-from-bed-without-getting-sacked`,
-		);
 		cy.get(`[data-component="footer"]`).should('have.length', 1);
 
 		cy.get(`[data-link-name="footer"]`).should('have.length', 1);
