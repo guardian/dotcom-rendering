@@ -6,6 +6,9 @@ import { initPerf } from '../initPerf';
  * This function dynamically imports and then hydrates a specific component in
  * a specific part of the page
  *
+ * If the content being hydrated is not present in the dom then React renders
+ * it. This is how portals (non server side rendered content) work
+ *
  * @param name The name of the component we want to hydrate
  * @param data The deserialised props we want to use for hydration
  * @param marker The location on the DOM where the component to hydrate exists
