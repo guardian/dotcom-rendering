@@ -16,7 +16,11 @@ export default {
 
 export const Default = () => {
 	return (
-		<MatchStats home={matchReport.homeTeam} away={matchReport.awayTeam} />
+		<MatchStats home={matchReport.homeTeam} away={matchReport.awayTeam} format={{
+			display: ArticleDisplay.Standard,
+			design: ArticleDesign.Standard,
+			theme: ArticlePillar.News,
+		}} />
 	);
 };
 Default.story = { name: 'default' };
@@ -38,6 +42,11 @@ export const InContext = () => {
 					<MatchStats
 						home={matchReport.homeTeam}
 						away={matchReport.awayTeam}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</ArticleContainer>
 				<RightColumn>
