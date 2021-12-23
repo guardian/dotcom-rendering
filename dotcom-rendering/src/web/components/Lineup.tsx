@@ -81,20 +81,16 @@ export const Lineup = ({ players }: Props) => {
 						>
 							{player.shirtNumber}
 						</div>
-						<div
-							css={css`
-								left: 40px;
-							`}
-						>
-							<Row>
-								{player.name}
-								{player.events.map((event: EventType) => (
-									<Event
-										type={event.eventType}
-										time={event.eventTime}
+						<div>
+							<span>
+								{player.name}{' '}
+							</span>
+							{player.events.map((event: EventType) => (
+								<Event
+									type={event.eventType}
+									time={event.eventTime}
 										/>
 								))}
-							</Row>
 						</div>
 					</Row>
 				</li>

@@ -39,7 +39,7 @@ const StatsGrid = ({ children, format }: { children: React.ReactNode, format:Art
 					@supports (display: grid) {
 						display: grid;
 
-						${from.leftCol} {
+						${from.desktop} {
 							grid-template-columns: 100%;
 							grid-template-areas:
 							    'title'
@@ -52,7 +52,7 @@ const StatsGrid = ({ children, format }: { children: React.ReactNode, format:Art
 								'away';
 						}
 
-						${until.leftCol} {
+						${until.desktop} {
 							grid-template-columns: 50% 50%;
 							grid-template-areas:
 								'title          .'
@@ -194,6 +194,11 @@ const RightBorder = ({ children }: { children: React.ReactNode }) => (
 			}
 			margin-right: 10px;
 			padding-right: 10px;
+			${from.desktop} {
+				margin-right:0;
+				padding-right:0;
+				border-right: 0;
+			}
 		`}
 	>
 		{children}
@@ -227,22 +232,24 @@ export const MatchStats = ({ home, away, format }: Props) => (
 				<ShiftLeft>
 					{/* Don't show the right border if this text was
                         shifted into the left column */}
-					<Hide when="above" breakpoint="leftCol">
+					<Hide when="above" breakpoint="desktop">
 						<RightBorder>
 							<H3>Match Stats</H3>
 						</RightBorder>
 					</Hide>
-					<Hide when="below" breakpoint="leftCol">
+					<Hide when="below" breakpoint="desktop">
 						<H3>Match Stats</H3>
 					</Hide>
 				</ShiftLeft>
 			</GridItem>
 			<GridItem area="possession">
-				<RightBorder>
-					<H4>Possession</H4>
-					<Center>
-						<Doughnut
-							sections={[
+
+				<Hide when="above" breakpoint="desktop">
+					<RightBorder>
+						<H4>Possession</H4>
+						<Center>
+							<Doughnut
+								sections={[
 								{
 									value: home.possession,
 									label: home.codename,
@@ -255,9 +262,35 @@ export const MatchStats = ({ home, away, format }: Props) => (
 								},
 							].reverse()}
 						/>
-					</Center>
-					<br />
-				</RightBorder>
+						</Center>
+					</RightBorder>
+				</Hide>
+				<Hide when="below" breakpoint="desktop">
+					<RightBorder>
+						<H4>Possession</H4>
+						<Center>
+							<Doughnut
+								sections={[
+								{
+									value: home.possession,
+									label: home.codename,
+									color: home.colours,
+								},
+								{
+									value: away.possession,
+									label: away.codename,
+									color: away.colours,
+								},
+							].reverse()}
+								width={200}
+								height={200}
+						/>
+						</Center>
+					</RightBorder>
+				</Hide>
+
+				<br />
+
 			</GridItem>
 			<GridItem area="attempts">
 				<H4>Attempts</H4>
@@ -306,12 +339,12 @@ export const MatchStats = ({ home, away, format }: Props) => (
 				<ShiftLeft>
 					{/* Don't show the right border if this text was
                         shifted into the left column */}
-					<Hide when="above" breakpoint="leftCol">
+					<Hide when="above" breakpoint="desktop">
 						<RightBorder>
 							<H3>Lineups</H3>
 						</RightBorder>
 					</Hide>
-					<Hide when="below" breakpoint="leftCol">
+					<Hide when="below" breakpoint="desktop">
 						<H3>Lineups</H3>
 					</Hide>
 				</ShiftLeft>
