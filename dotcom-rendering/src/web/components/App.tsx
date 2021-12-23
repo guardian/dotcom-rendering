@@ -35,7 +35,6 @@ import {
 	HydrateInteractiveOnce,
 } from '@frontend/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
-import { Placeholder } from '@root/src/web/components/Placeholder';
 
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
@@ -117,16 +116,6 @@ const OnwardsLower = React.lazy(() => {
 	).then((module) => {
 		end();
 		return { default: module.OnwardsLower };
-	});
-});
-const GetMatchStats = React.lazy(() => {
-	const { start, end } = initPerf('GetMatchStats');
-	start();
-	return import(
-		/* webpackChunkName: "GetMatchStats" */ '@frontend/web/components/GetMatchStats'
-	).then((module) => {
-		end();
-		return { default: module.GetMatchStats };
 	});
 });
 
@@ -1046,15 +1035,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					</Suspense>
 				</Lazy>
 			</Portal>
-			{CAPI.matchUrl && (
-				<Portal rootId="match-stats">
-					<Lazy margin={300}>
-						<Suspense fallback={<Placeholder height={800} />}>
-							<GetMatchStats matchUrl={CAPI.matchUrl} />
-						</Suspense>
-					</Lazy>
-				</Portal>
-			)}
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
 					contentType={CAPI.contentType}

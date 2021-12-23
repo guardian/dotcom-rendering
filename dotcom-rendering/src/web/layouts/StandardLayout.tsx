@@ -52,6 +52,7 @@ import {
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Island } from '../components/Island';
+import { GetMatchStats } from '../components/GetMatchStats.importable';
 
 const StandardGrid = ({
 	children,
@@ -612,7 +613,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
-								{isMatchReport && <div id="match-stats" />}
+								{format.design === ArticleDesign.MatchReport && !!CAPI.matchUrl && <Island deferUntil="visible" clientOnly={true} placeholderHeight={800}><GetMatchStats matchUrl={CAPI.matchUrl} format={format}/></Island> }
 
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines

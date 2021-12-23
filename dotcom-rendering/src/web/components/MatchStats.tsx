@@ -16,64 +16,111 @@ import { Doughnut } from '@frontend/web/components/Doughnut';
 import { Distribution } from '@frontend/web/components/Distribution';
 import { GoalAttempts } from '@frontend/web/components/GoalAttempts';
 import { Lineup } from '@frontend/web/components/Lineup';
+import { ArticleDesign } from '@guardian/libs';
 
 type Props = {
 	home: TeamType;
 	away: TeamType;
+	format: ArticleFormat;
 };
 
 const BACKGROUND_COLOUR = '#d9edf6';
 
-const StatsGrid = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			/* IE Fallback */
-			display: flex;
-			flex-direction: column;
+const StatsGrid = ({ children, format }: { children: React.ReactNode, format:ArticleFormat }) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:{
+			return(<div
+				css={css`
+					/* IE Fallback */
+					display: flex;
+					flex-direction: column;
 
-			@supports (display: grid) {
-				display: grid;
+					@supports (display: grid) {
+						display: grid;
 
-				${from.wide} {
-					grid-template-columns: 50% 50%;
-					grid-template-areas:
-						'title          .'
-						'possession     attempts'
-						'possession     corners'
-						'possession     fouls'
-						'subtitle       .'
-						'home           away';
-				}
+						${from.leftCol} {
+							grid-template-columns: 100%;
+							grid-template-areas:
+							    'title'
+								'possession'
+								'attempts'
+								'corners'
+								'fouls'
+								'subtitle'
+								'home'
+								'away';
+						}
 
-				${until.wide} {
-					grid-template-columns: 50% 50%;
-					grid-template-areas:
-						'title          .'
-						'possession     attempts'
-						'possession     corners'
-						'possession     fouls'
-						'subtitle       .'
-						'home           away';
-				}
+						${until.leftCol} {
+							grid-template-columns: 50% 50%;
+							grid-template-areas:
+								'title          .'
+								'possession     attempts'
+								'possession     corners'
+								'possession     fouls'
+								'subtitle       .'
+								'home           away';
+						}
+					}
+				`}
+			>
+				{children}
+			</div>)
+		}
+		default: {
+			return (<div
+				css={css`
+					/* IE Fallback */
+					display: flex;
+					flex-direction: column;
 
-				${until.phablet} {
-					grid-template-columns: 100%;
-					grid-template-areas:
-						'title'
-						'possession'
-						'attempts'
-						'corners'
-						'fouls'
-						'subtitle'
-						'home'
-						'away';
-				}
-			}
-		`}
-	>
-		{children}
-	</div>
-);
+					@supports (display: grid) {
+						display: grid;
+
+						${from.wide} {
+							grid-template-columns: 50% 50%;
+							grid-template-areas:
+								'title          .'
+								'possession     attempts'
+								'possession     corners'
+								'possession     fouls'
+								'subtitle       .'
+								'home           away';
+						}
+
+						${until.wide} {
+							grid-template-columns: 50% 50%;
+							grid-template-areas:
+								'title          .'
+								'possession     attempts'
+								'possession     corners'
+								'possession     fouls'
+								'subtitle       .'
+								'home           away';
+						}
+
+						${until.phablet} {
+							grid-template-columns: 100%;
+							grid-template-areas:
+								'title'
+								'possession'
+								'attempts'
+								'corners'
+								'fouls'
+								'subtitle'
+								'home'
+								'away';
+						}
+					}
+				`}
+			>
+				{children}
+			</div>)
+		}
+	}
+}
+
 
 const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -173,9 +220,9 @@ const H4 = ({ children }: { children: React.ReactNode }) => (
 	</h4>
 );
 
-export const MatchStats = ({ home, away }: Props) => (
+export const MatchStats = ({ home, away, format }: Props) => (
 	<StretchBackground>
-		<StatsGrid>
+		<StatsGrid format={format}>
 			<GridItem area="title" element="aside">
 				<ShiftLeft>
 					{/* Don't show the right border if this text was
