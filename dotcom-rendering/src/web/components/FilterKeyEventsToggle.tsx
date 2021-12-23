@@ -1,13 +1,23 @@
-import {ToggleSwitch} from "@guardian/source-react-components-development-kitchen";
+import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
 
-const shouldFilterByKeyEvents = typeof window !== 'undefined' && window.location.search.includes('filterKeyEvents=true')
+const handleClick = (shouldFilterByKeyEvents: boolean) => {
+	const param = `?filterKeyEvents=${
+		shouldFilterByKeyEvents ? 'false' : 'true'
+	}#maincontent`;
+
+	window.location.assign(`${window.location.pathname}${param}`);
+};
 
 export const FilterKeyEventsToggle = () => {
-	return(
+	const shouldFilterByKeyEvents =
+		typeof window !== 'undefined' &&
+		window.location.search.includes('filterKeyEvents=true');
+
+	return (
 		<ToggleSwitch
-			label='Show key events only'
+			label="Show key events only"
 			defaultChecked={shouldFilterByKeyEvents}
-			onClick={() => console.log('shouldFilterByKeyEvents >>', shouldFilterByKeyEvents)}
+			onClick={() => handleClick(shouldFilterByKeyEvents)}
 		/>
-	)
-}
+	);
+};

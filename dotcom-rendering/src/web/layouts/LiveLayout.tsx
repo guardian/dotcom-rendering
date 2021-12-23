@@ -35,6 +35,7 @@ import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Pagination } from '@frontend/web/components/Pagination';
 import { KeyEventsContainer } from '@frontend/web/components/KeyEventsContainer';
+import { Island } from '@root/src/web/components/Island';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -165,6 +166,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines		 media'
 						'meta		 media'
 						'keyevents	 media'
+						'keyevents   filter'
 						'keyevents	 body'
 						'keyevents	 body'
 						'. 			 .';
@@ -177,6 +179,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines 		 media	   right-column'
 						'meta  		 media     right-column'
 						'keyevents   media 	   right-column'
+						'keyevents   filter    right-column'
 						'keyevents   body      right-column'
 						'keyevents   body      right-column'
 						'.			 .         right-column';
@@ -189,6 +192,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
+						'filter'
 						'body';
 				}
 			}
@@ -655,7 +659,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<LiveGridSport>
 								<GridItem area="filter">
 									<div css={maxWidth}>
-										<FilterKeyEventsToggle />
+										<Island>
+											<FilterKeyEventsToggle />
+										</Island>
 									</div>
 								</GridItem>
 								<GridItem area="matchtabs" element="aside">
