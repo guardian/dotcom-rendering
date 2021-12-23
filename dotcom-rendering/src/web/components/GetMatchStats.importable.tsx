@@ -26,7 +26,13 @@ export const GetMatchStats = ({ matchUrl, format }: Props) => {
 		return null;
 	}
 	if (data) {
-		return <MatchStats home={data.homeTeam} away={data.awayTeam} format={format} />;
+		return (
+			<MatchStats
+				home={data.homeTeam}
+				away={data.awayTeam}
+				format={format}
+			/>
+		);
 	}
 
 	return null;

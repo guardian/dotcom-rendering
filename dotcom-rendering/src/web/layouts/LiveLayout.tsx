@@ -731,7 +731,18 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									</div>
 								</GridItem>
 								<GridItem area="matchstats">
-									{CAPI.matchUrl && <Island deferUntil="visible" clientOnly={true} placeholderHeight={800}><GetMatchStats matchUrl={CAPI.matchUrl} format={format} /></Island> }
+									{CAPI.matchUrl && (
+										<Island
+											deferUntil="visible"
+											clientOnly={true}
+											placeholderHeight={800}
+										>
+											<GetMatchStats
+												matchUrl={CAPI.matchUrl}
+												format={format}
+											/>
+										</Island>
+									)}
 								</GridItem>
 								<GridItem area="body">
 									<ArticleContainer format={format}>

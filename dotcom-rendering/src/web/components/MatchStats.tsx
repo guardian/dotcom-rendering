@@ -26,101 +26,110 @@ type Props = {
 
 const BACKGROUND_COLOUR = '#d9edf6';
 
-const StatsGrid = ({ children, format }: { children: React.ReactNode, format:ArticleFormat }) => {
+const StatsGrid = ({
+	children,
+	format,
+}: {
+	children: React.ReactNode;
+	format: ArticleFormat;
+}) => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:{
-			return(<div
-				css={css`
-					/* IE Fallback */
-					display: flex;
-					flex-direction: column;
+		case ArticleDesign.DeadBlog: {
+			return (
+				<div
+					css={css`
+						/* IE Fallback */
+						display: flex;
+						flex-direction: column;
 
-					@supports (display: grid) {
-						display: grid;
+						@supports (display: grid) {
+							display: grid;
 
-						${from.desktop} {
-							grid-template-columns: 100%;
-							grid-template-areas:
-							    'title'
-								'possession'
-								'attempts'
-								'corners'
-								'fouls'
-								'subtitle'
-								'home'
-								'away';
+							${from.desktop} {
+								grid-template-columns: 100%;
+								grid-template-areas:
+									'title'
+									'possession'
+									'attempts'
+									'corners'
+									'fouls'
+									'subtitle'
+									'home'
+									'away';
+							}
+
+							${until.desktop} {
+								grid-template-columns: 50% 50%;
+								grid-template-areas:
+									'title          .'
+									'possession     attempts'
+									'possession     corners'
+									'possession     fouls'
+									'subtitle       .'
+									'home           away';
+							}
 						}
-
-						${until.desktop} {
-							grid-template-columns: 50% 50%;
-							grid-template-areas:
-								'title          .'
-								'possession     attempts'
-								'possession     corners'
-								'possession     fouls'
-								'subtitle       .'
-								'home           away';
-						}
-					}
-				`}
-			>
-				{children}
-			</div>)
+					`}
+				>
+					{children}
+				</div>
+			);
 		}
 		default: {
-			return (<div
-				css={css`
-					/* IE Fallback */
-					display: flex;
-					flex-direction: column;
+			return (
+				<div
+					css={css`
+						/* IE Fallback */
+						display: flex;
+						flex-direction: column;
 
-					@supports (display: grid) {
-						display: grid;
+						@supports (display: grid) {
+							display: grid;
 
-						${from.wide} {
-							grid-template-columns: 50% 50%;
-							grid-template-areas:
-								'title          .'
-								'possession     attempts'
-								'possession     corners'
-								'possession     fouls'
-								'subtitle       .'
-								'home           away';
+							${from.wide} {
+								grid-template-columns: 50% 50%;
+								grid-template-areas:
+									'title          .'
+									'possession     attempts'
+									'possession     corners'
+									'possession     fouls'
+									'subtitle       .'
+									'home           away';
+							}
+
+							${until.wide} {
+								grid-template-columns: 50% 50%;
+								grid-template-areas:
+									'title          .'
+									'possession     attempts'
+									'possession     corners'
+									'possession     fouls'
+									'subtitle       .'
+									'home           away';
+							}
+
+							${until.phablet} {
+								grid-template-columns: 100%;
+								grid-template-areas:
+									'title'
+									'possession'
+									'attempts'
+									'corners'
+									'fouls'
+									'subtitle'
+									'home'
+									'away';
+							}
 						}
-
-						${until.wide} {
-							grid-template-columns: 50% 50%;
-							grid-template-areas:
-								'title          .'
-								'possession     attempts'
-								'possession     corners'
-								'possession     fouls'
-								'subtitle       .'
-								'home           away';
-						}
-
-						${until.phablet} {
-							grid-template-columns: 100%;
-							grid-template-areas:
-								'title'
-								'possession'
-								'attempts'
-								'corners'
-								'fouls'
-								'subtitle'
-								'home'
-								'away';
-						}
-					}
-				`}
-			>
-				{children}
-			</div>)
+					`}
+				>
+					{children}
+				</div>
+			);
 		}
 	}
-}
-
+};
 
 const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -195,8 +204,8 @@ const RightBorder = ({ children }: { children: React.ReactNode }) => (
 			margin-right: 10px;
 			padding-right: 10px;
 			${from.desktop} {
-				margin-right:0;
-				padding-right:0;
+				margin-right: 0;
+				padding-right: 0;
 				border-right: 0;
 			}
 		`}
@@ -243,25 +252,24 @@ export const MatchStats = ({ home, away, format }: Props) => (
 				</ShiftLeft>
 			</GridItem>
 			<GridItem area="possession">
-
 				<Hide when="above" breakpoint="desktop">
 					<RightBorder>
 						<H4>Possession</H4>
 						<Center>
 							<Doughnut
 								sections={[
-								{
-									value: home.possession,
-									label: home.codename,
-									color: home.colours,
-								},
-								{
-									value: away.possession,
-									label: away.codename,
-									color: away.colours,
-								},
-							].reverse()}
-						/>
+									{
+										value: home.possession,
+										label: home.codename,
+										color: home.colours,
+									},
+									{
+										value: away.possession,
+										label: away.codename,
+										color: away.colours,
+									},
+								].reverse()}
+							/>
 						</Center>
 					</RightBorder>
 				</Hide>
@@ -271,26 +279,25 @@ export const MatchStats = ({ home, away, format }: Props) => (
 						<Center>
 							<Doughnut
 								sections={[
-								{
-									value: home.possession,
-									label: home.codename,
-									color: home.colours,
-								},
-								{
-									value: away.possession,
-									label: away.codename,
-									color: away.colours,
-								},
-							].reverse()}
+									{
+										value: home.possession,
+										label: home.codename,
+										color: home.colours,
+									},
+									{
+										value: away.possession,
+										label: away.codename,
+										color: away.colours,
+									},
+								].reverse()}
 								width={200}
 								height={200}
-						/>
+							/>
 						</Center>
 					</RightBorder>
 				</Hide>
 
 				<br />
-
 			</GridItem>
 			<GridItem area="attempts">
 				<H4>Attempts</H4>
