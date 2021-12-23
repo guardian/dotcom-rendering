@@ -50,7 +50,7 @@ import {
 	BannerWrapper,
 } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { Hydrate } from '../components/Hydrate';
+import { Island } from '../components/Island';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -330,13 +330,13 @@ export const ShowcaseLayout = ({
 									padded={false}
 									element="aside"
 								>
-									<Hydrate when="idle">
+									<Island deferUntil="idle">
 										<SubNav
 											subNavSections={NAV.subNavSections}
 											currentNavLink={NAV.currentNavLink}
 											format={format}
 										/>
-									</Hydrate>
+									</Island>
 								</ElementContainer>
 							)}
 
@@ -647,13 +647,13 @@ export const ShowcaseLayout = ({
 
 			{NAV.subNavSections && (
 				<ElementContainer padded={false} element="aside">
-					<Hydrate when="visible">
+					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							format={format}
 						/>
-					</Hydrate>
+					</Island>
 				</ElementContainer>
 			)}
 
