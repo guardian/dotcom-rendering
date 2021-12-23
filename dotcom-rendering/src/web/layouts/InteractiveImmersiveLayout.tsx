@@ -35,7 +35,7 @@ import { HeadlineByline } from '../components/HeadlineByline';
 import { decideLineEffect, decideLineCount } from '../lib/layoutHelpers';
 import { Standfirst } from '../components/Standfirst';
 import { Caption } from '../components/Caption';
-import { Hydrate } from '../components/Hydrate';
+import { Island } from '../components/Island';
 
 const InteractiveImmersiveGrid = ({
 	children,
@@ -444,13 +444,13 @@ export const InteractiveImmersiveLayout = ({
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
-					<Hydrate when="visible">
+					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							format={format}
 						/>
-					</Hydrate>
+					</Island>
 				</ElementContainer>
 			)}
 

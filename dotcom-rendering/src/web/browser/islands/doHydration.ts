@@ -6,11 +6,14 @@ import { initPerf } from '../initPerf';
  * This function dynamically imports and then hydrates a specific component in
  * a specific part of the page
  *
+ * If the content being hydrated is not present in the dom then React renders
+ * it. This is how portals (non server side rendered content) work
+ *
  * @param name The name of the component we want to hydrate
  * @param data The deserialised props we want to use for hydration
- * @param marker The location on the DOM where the component to hydrate exists
+ * @param element The location on the DOM where the component to hydrate exists
  */
-export const doHydration = (name: string, data: any, marker: HTMLElement) => {
+export const doHydration = (name: string, data: any, element: HTMLElement) => {
 	const { start, end } = initPerf(`hydrate-${name}`);
 	start();
 	import(
@@ -18,8 +21,8 @@ export const doHydration = (name: string, data: any, marker: HTMLElement) => {
 		`../../components/${name}.importable`
 	)
 		.then((module) => {
-			hydrate(h(module[name], data), marker);
-			marker.setAttribute('data-gu-hydrated', 'true');
+			hydrate(h(module[name], data), element);
+			element.setAttribute('data-gu-hydrated', 'true');
 			end();
 		})
 		.catch((error) => {

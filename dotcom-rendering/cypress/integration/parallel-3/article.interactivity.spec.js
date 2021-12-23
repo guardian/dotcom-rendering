@@ -154,6 +154,30 @@ describe('Interactivity', function () {
 					'column-collapse-sublink-The Guardian view',
 				);
 			});
+
+			it('should expand the subnav when "More" is clicked', function () {
+				cy.viewport('iphone-x');
+				cy.visit(`/Article?url=${articleUrl}`);
+				// Wait for hydration
+				cy.get('[data-cy=sub-nav]')
+					.first()
+					.parent()
+					.should('have.attr', 'data-gu-hydrated', 'true');
+				// Both subnav buttons show 'More'
+				cy.get('[data-cy=subnav-toggle]').first().contains('More');
+				cy.get('[data-cy=subnav-toggle]').last().contains('More');
+				// Click Show more in the first sub nav
+				cy.get('[data-cy=subnav-toggle]').first().click();
+				// The first button now shows 'Less'
+				cy.get('[data-cy=subnav-toggle]').first().contains('Less');
+				// The other subnav still shows 'More'
+				cy.get('[data-cy=subnav-toggle]').last().contains('More');
+				// Click Show more on the last sub nav
+				cy.get('[data-cy=subnav-toggle]').last().click();
+				// Both subnav buttons show 'Less'
+				cy.get('[data-cy=subnav-toggle]').first().contains('Less');
+				cy.get('[data-cy=subnav-toggle]').last().contains('Less');
+			});
 		});
 	});
 });
