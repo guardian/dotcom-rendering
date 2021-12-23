@@ -52,10 +52,9 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { Hide } from '@guardian/source-react-components';
-import { FilterKeyEventsToggle } from '@root/src/web/components/FilterKeyEventsToggle';
+import { FilterKeyEventsToggle } from '@root/src/web/components/FilterKeyEventsToggle.importable';
 import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
-import { Island } from '../components/Island';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -659,7 +658,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<LiveGridSport>
 								<GridItem area="filter">
 									<div css={maxWidth}>
-										<Island>
+										<Island deferUntil="idle">
 											<FilterKeyEventsToggle />
 										</Island>
 									</div>
@@ -866,7 +865,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<LiveGrid>
 								<GridItem area="filter">
 									<div css={maxWidth}>
-										<FilterKeyEventsToggle />
+										<Island deferUntil="idle">
+											<FilterKeyEventsToggle />
+										</Island>
 									</div>
 								</GridItem>
 								<GridItem area="media">

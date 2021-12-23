@@ -1,11 +1,15 @@
 import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
 
 const handleClick = (shouldFilterByKeyEvents: boolean) => {
-	const param = `?filterKeyEvents=${
-		shouldFilterByKeyEvents ? 'false' : 'true'
-	}#maincontent`;
+	const urlParams = new URLSearchParams(window.location.search);
 
-	window.location.assign(`${window.location.pathname}${param}`);
+	urlParams.set(
+		'filterKeyEvents',
+		shouldFilterByKeyEvents ? 'false' : 'true',
+	);
+
+	window.location.search = urlParams.toString();
+	window.location.hash = 'maincontent';
 };
 
 export const FilterKeyEventsToggle = () => {
@@ -16,7 +20,7 @@ export const FilterKeyEventsToggle = () => {
 	return (
 		<ToggleSwitch
 			label="Show key events only"
-			defaultChecked={shouldFilterByKeyEvents}
+			checked={shouldFilterByKeyEvents}
 			onClick={() => handleClick(shouldFilterByKeyEvents)}
 		/>
 	);
