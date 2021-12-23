@@ -23,7 +23,7 @@ export interface WindowGuardianConfig {
 		googletag: string;
 	};
 	switches: { [key: string]: boolean };
-	tests?: { [key: string]: string };
+	tests: ServerSideTests;
 	ophan: {
 		pageViewId: string;
 		browserId: string;
@@ -58,6 +58,7 @@ const makeWindowGuardianConfig = (
 			googletag: config.googletagUrl,
 		},
 		switches: config.switches,
+		tests: config.abTests,
 		ophan: {
 			pageViewId: '',
 			browserId: '',
@@ -223,7 +224,6 @@ export interface WindowGuardian {
 	// for performance reasons
 	app: {
 		data: DCRBrowserDocumentData;
-		cssIDs: string[];
 	};
 
 	// The 'config' attribute is derived from DCRServerDocumentData and contains
@@ -240,7 +240,7 @@ export interface WindowGuardian {
 	};
 }
 
-export const makeGuardianBrowserNav = (nav: NavType): BrowserNavType => {
+const makeGuardianBrowserNav = (nav: NavType): BrowserNavType => {
 	return {
 		currentNavLink: nav.currentNavLink,
 		subNavSections: nav.subNavSections,
@@ -249,11 +249,9 @@ export const makeGuardianBrowserNav = (nav: NavType): BrowserNavType => {
 
 export const makeWindowGuardian = (
 	dcrDocumentData: DCRServerDocumentData,
-	cssIDs: string[],
 ): WindowGuardian => {
 	return {
 		app: {
-			cssIDs,
 			data: {
 				...dcrDocumentData,
 				NAV: makeGuardianBrowserNav(dcrDocumentData.NAV),

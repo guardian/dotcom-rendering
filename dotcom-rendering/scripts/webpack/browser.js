@@ -35,8 +35,10 @@ const scriptPath = (dcrPackage) =>
 module.exports = ({ isLegacyJS }) => ({
 	entry: {
 		sentryLoader: scriptPath('sentryLoader'),
+		bootCmp: scriptPath('bootCmp'),
 		ga: scriptPath('ga'),
 		ophan: scriptPath('ophan'),
+		hydration: scriptPath('hydration'),
 		react: scriptPath('react'),
 		dynamicImport: scriptPath('dynamicImport'),
 		atomIframe: scriptPath('atomIframe'),

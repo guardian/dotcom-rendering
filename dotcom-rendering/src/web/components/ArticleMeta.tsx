@@ -71,6 +71,12 @@ const stretchLines = css`
 	}
 `;
 
+const borderColourWhenBackgroundDark = css`
+	${until.desktop} {
+		border-top: 1px solid rgba(255, 255, 255, 0.4);
+	}
+`;
+
 const metaExtras = (palette: Palette) => css`
 	border-top: 1px solid ${palette.border.article};
 	flex-grow: 1;
@@ -156,6 +162,10 @@ const metaContainer = (format: ArticleFormat) => {
 									margin-left: 40px;
 								}
 						  `;
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog: {
+					return '';
+				}
 				default:
 					return defaultMargins;
 			}
@@ -251,6 +261,18 @@ const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const metaExtrasLiveBlog = css`
+	${until.phablet} {
+		margin-right: 0;
+	}
+`;
+
+const metaNumbersExtrasLiveBlog = css`
+	${until.phablet} {
+		margin-left: 0;
+	}
+`;
+
 export const ArticleMeta = ({
 	branding,
 	format,
@@ -345,7 +367,14 @@ export const ArticleMeta = ({
 								? interactiveLegacyClasses.shareIcons
 								: ''
 						}
-						css={metaExtras(palette)}
+						css={[
+							metaExtras(palette),
+							format.design === ArticleDesign.LiveBlog &&
+								css(
+									borderColourWhenBackgroundDark,
+									metaExtrasLiveBlog,
+								),
+						]}
 					>
 						<ShareIcons
 							pageId={pageId}
@@ -357,8 +386,22 @@ export const ArticleMeta = ({
 							context="ArticleMeta"
 						/>
 					</div>
-					<div css={metaNumbers(palette)}>
-						<Counts>
+					<div
+						className={
+							isInteractive
+								? interactiveLegacyClasses.shareAndCommentCounts
+								: ''
+						}
+						css={[
+							metaNumbers(palette),
+							format.design === ArticleDesign.LiveBlog &&
+								css(
+									borderColourWhenBackgroundDark,
+									metaNumbersExtrasLiveBlog,
+								),
+						]}
+					>
+						<Counts format={format}>
 							{/* The meta-number css is needed by Counts.tsx */}
 							<div
 								className="meta-number"

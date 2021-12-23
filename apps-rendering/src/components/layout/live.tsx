@@ -7,6 +7,7 @@ import { from, neutral, news, remSpace } from '@guardian/source-foundations';
 import { OptionKind } from '@guardian/types';
 import Footer from 'components/footer';
 import GridItem from 'components/gridItem';
+import LiveBlocks from 'components/liveBlocks';
 import LiveblogHeader from 'components/liveblogHeader';
 import Metadata from 'components/metadata';
 import RelatedContent from 'components/shared/relatedContent';
@@ -61,6 +62,14 @@ const metadataWrapperStyles = css`
 	background-color: ${news[200]};
 `;
 
+const keyEventsWrapperStyles = css`
+	${from.desktop} {
+		position: sticky;
+		top: 10px;
+		margin-bottom: 12px;
+	}
+`;
+
 const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 	blocks.reduce<KeyEvent[]>(
 		(events, block) =>
@@ -91,16 +100,20 @@ const Live: FC<Props> = ({ item }) => (
 				</div>
 			</GridItem>
 			<GridItem area="key-events">
-				<KeyEvents
-					keyEvents={keyEvents(item.blocks)}
-					theme={item.theme}
-					supportsDarkMode
-				/>
+				<div css={keyEventsWrapperStyles}>
+					<KeyEvents
+						keyEvents={keyEvents(item.blocks)}
+						theme={item.theme}
+						supportsDarkMode
+					/>
+				</div>
 			</GridItem>
 			<GridItem area="main-media">
 				<HeaderMedia item={item} />
 			</GridItem>
-			<GridItem area="live-blocks">TODO: Live blocks</GridItem>
+			<GridItem area="live-blocks">
+				<LiveBlocks blocks={item.blocks} format={item} />
+			</GridItem>
 		</main>
 		<section css={articleWidthStyles}>
 			<Tags tags={item.tags} format={item} />

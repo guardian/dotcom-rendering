@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
 
-import {
-	makeGuardianBrowserCAPI,
-	makeGuardianBrowserNav,
-} from '@root/src/model/window-guardian';
+import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
+
+import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
+
 import { Article } from '@root/fixtures/generated/articles/Article';
 
 import { BootReact } from '@root/src/web/components/BootReact';
 import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
+import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 
 import { extractNAV } from '@root/src/model/extract-nav';
 import { fireAndResetHydrationState } from '@root/src/web/components/HydrateOnce';
@@ -40,15 +43,22 @@ const convertToInteractiveImmersive = (CAPI: CAPIType) => {
 const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 	fireAndResetHydrationState();
 	const NAV = extractNAV(ServerCAPI.nav);
+	const format: ArticleFormat = {
+		display: decideDisplay(ServerCAPI.format),
+		design: decideDesign(ServerCAPI.format),
+		theme: decideTheme(ServerCAPI.format),
+	};
 
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-		BootReact({ CAPI, NAV: makeGuardianBrowserNav(NAV) });
+		BootReact({ CAPI });
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);
-	}, [ServerCAPI, NAV]);
-	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} />;
+		// Manually updates the footer DOM because it's not hydrated
+		injectPrivacySettingsLink();
+	}, [ServerCAPI]);
+	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} format={format} />;
 };
 
 export const ArticleStory = (): React.ReactNode => {

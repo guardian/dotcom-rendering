@@ -13,7 +13,7 @@ import {
 import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
 import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav/SubNav';
+import { SubNav } from '@root/src/web/components/SubNav.importable';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import {
@@ -33,6 +33,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { Hydrate } from '../components/Hydrate';
 
 interface Props {
 	CAPI: CAPIType;
@@ -222,14 +223,15 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				<ElementContainer
 					backgroundColour={neutral[100]}
 					padded={false}
-					sectionId="sub-nav-root"
 					element="aside"
 				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						format={format}
-					/>
+					<Hydrate when="idle">
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							format={format}
+						/>
+					</Hydrate>
 				</ElementContainer>
 			)}
 		</section>
@@ -297,15 +299,16 @@ export const FullPageInteractiveLayout = ({
 			{NAV.subNavSections && (
 				<ElementContainer
 					padded={false}
-					sectionId="sub-nav-root"
 					backgroundColour={neutral[100]}
-					element="nav"
+					element="aside"
 				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						format={format}
-					/>
+					<Hydrate when="visible">
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							format={format}
+						/>
+					</Hydrate>
 				</ElementContainer>
 			)}
 

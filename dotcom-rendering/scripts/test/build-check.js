@@ -44,8 +44,10 @@ const fileExists = async (glob) => {
 
 	[
 		'sentryLoader',
+		'bootCmp',
 		'ga',
 		'ophan',
+		'hydration',
 		'react',
 		'dynamicImport',
 		'atomIframe',
