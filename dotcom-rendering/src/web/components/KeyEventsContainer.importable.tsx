@@ -1,6 +1,7 @@
 import KeyEvents, {
 	KeyEvent,
 } from '@guardian/common-rendering/src/components/keyEvents';
+import { useEffect, useState } from 'react';
 
 type Props = {
 	keyEvents: Block[];
@@ -8,9 +9,13 @@ type Props = {
 };
 
 export const KeyEventsContainer = ({ keyEvents, format }: Props) => {
-	const shouldFilterByKeyEvents =
-		typeof window !== 'undefined' &&
-		window.location.search.includes('filterKeyEvents=true');
+	const [filterKeyEvents, setFilterKeyEvents] = useState(false);
+
+	useEffect(() => {
+		setFilterKeyEvents(
+			window.location.search.includes('filterKeyEvents=true'),
+		);
+	}, [setFilterKeyEvents]);
 
 	const transformedKeyEvents: KeyEvent[] = keyEvents
 		.filter((keyEvent) => {
@@ -19,7 +24,7 @@ export const KeyEventsContainer = ({ keyEvents, format }: Props) => {
 		.map((keyEvent) => {
 			return {
 				text: keyEvent.title || '', // We fallback to '' here purely to keep ts happy
-				url: `?page=with:block-${keyEvent.id}#block-${keyEvent.id}&filterKeyEvents=${shouldFilterByKeyEvents}`,
+				url: `?page=with:block-${keyEvent.id}#block-${keyEvent.id}&filterKeyEvents=${filterKeyEvents}`,
 				date: new Date(keyEvent.blockFirstPublished || ''), // We fallback to '' here purely to keep ts happy
 			};
 		});

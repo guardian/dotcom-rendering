@@ -34,7 +34,7 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { Pagination } from '@frontend/web/components/Pagination';
-import { KeyEventsContainer } from '@frontend/web/components/KeyEventsContainer';
+import { KeyEventsContainer } from '@root/src/web/components/KeyEventsContainer.importable';
 import { Island } from '@root/src/web/components/Island';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -735,10 +735,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											accordionBottomMargin,
 										]}
 									>
-										<KeyEventsContainer
-											format={format}
-											keyEvents={CAPI.keyEvents}
-										/>
+										<Island deferUntil="idle">
+											<KeyEventsContainer
+												format={format}
+												keyEvents={CAPI.keyEvents}
+											/>
+										</Island>
 									</div>
 								</GridItem>
 								<GridItem area="body">
@@ -930,10 +932,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											accordionBottomMargin,
 										]}
 									>
-										<KeyEventsContainer
-											format={format}
-											keyEvents={CAPI.keyEvents}
-										/>
+										<Island deferUntil="idle">
+											<KeyEventsContainer
+												format={format}
+												keyEvents={CAPI.keyEvents}
+											/>
+										</Island>
 									</div>
 								</GridItem>
 								<GridItem area="body">
