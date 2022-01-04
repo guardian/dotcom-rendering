@@ -656,13 +656,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					>
 						{CAPI.matchUrl ? (
 							<LiveGridSport>
-								<GridItem area="filter">
-									<div css={maxWidth}>
-										<Island deferUntil="idle">
-											<FilterKeyEventsToggle />
-										</Island>
-									</div>
-								</GridItem>
+								<Hide below="tablet">
+									<GridItem area="filter">
+										<div css={maxWidth}>
+											<Island deferUntil="idle">
+												<FilterKeyEventsToggle />
+											</Island>
+										</div>
+									</GridItem>
+								</Hide>
 								<GridItem area="matchtabs" element="aside">
 									<div css={maxWidth}>
 										{CAPI.matchUrl && showMatchTabs && (
@@ -865,13 +867,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</LiveGridSport>
 						) : (
 							<LiveGrid>
-								<GridItem area="filter">
-									<div css={maxWidth}>
-										<Island deferUntil="idle">
-											<FilterKeyEventsToggle />
-										</Island>
-									</div>
-								</GridItem>
+								<Hide below="tablet">
+									<GridItem area="filter">
+										<div css={maxWidth}>
+											<Island deferUntil="idle">
+												<FilterKeyEventsToggle />
+											</Island>
+										</div>
+									</GridItem>
+								</Hide>
 								<GridItem area="media">
 									<div css={maxWidth}>
 										<MainMedia

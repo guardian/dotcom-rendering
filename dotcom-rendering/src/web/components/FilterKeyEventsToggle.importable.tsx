@@ -1,5 +1,21 @@
+import { css } from '@emotion/react';
 import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
+
+const cssOverrides = css`
+	button {
+		width: 2.75rem;
+		height: 1.5rem;
+		display: flex;
+		align-items: center;
+	}
+
+	button::after {
+		height: 1.125rem;
+		width: 1.125rem;
+		box-shadow: none;
+	}
+`;
 
 export const FilterKeyEventsToggle = () => {
 	const [checked, setChecked] = useState(false);
@@ -23,6 +39,7 @@ export const FilterKeyEventsToggle = () => {
 			label="Show key events only"
 			checked={checked}
 			onClick={() => handleClick()}
+			cssOverrides={cssOverrides}
 		/>
 	);
 };
