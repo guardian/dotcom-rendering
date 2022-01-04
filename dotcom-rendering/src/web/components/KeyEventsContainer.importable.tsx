@@ -24,7 +24,7 @@ export const KeyEventsContainer = ({ keyEvents, format }: Props) => {
 		.map((keyEvent) => {
 			return {
 				text: keyEvent.title || '', // We fallback to '' here purely to keep ts happy
-				url: `?page=with:block-${keyEvent.id}#block-${keyEvent.id}&filterKeyEvents=${filterKeyEvents}`,
+				url: `?filterKeyEvents=${filterKeyEvents}&page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
 				date: new Date(keyEvent.blockFirstPublished || ''), // We fallback to '' here purely to keep ts happy
 			};
 		});
