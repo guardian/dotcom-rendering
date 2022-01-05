@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	background,
@@ -40,7 +39,7 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { themeToPillarString } from 'themeStyles';
+import { getThemeStyles, themeToPillarString } from 'themeStyles';
 
 // ----- Styles ----- //
 
@@ -63,13 +62,7 @@ const BorderStyles = css`
 `;
 
 const itemStyles = (item: Item): SerializedStyles => {
-	const format = {
-		theme: item.theme,
-		design: item.design,
-		display: item.display,
-	};
-	const kicker = text.kicker(format);
-	const inverted = text.inverted(format);
+	const { kicker, inverted } = getThemeStyles(item.theme);
 
 	switch (item.display) {
 		case ArticleDisplay.Immersive:

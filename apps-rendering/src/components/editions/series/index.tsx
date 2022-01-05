@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	from,
@@ -14,6 +13,7 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
+import { getThemeStyles } from 'themeStyles';
 import { kickerPicker } from '../kickerPicker';
 
 // ----- Component ----- //
@@ -46,7 +46,7 @@ interface Props {
 
 const getStyles = (item: Item): SerializedStyles => {
 	const format = getFormat(item);
-	const kicker = text.kicker(format);
+	const { kicker } = getThemeStyles(format.theme);
 	if (
 		item.design === ArticleDesign.Interview ||
 		item.display === ArticleDisplay.Immersive

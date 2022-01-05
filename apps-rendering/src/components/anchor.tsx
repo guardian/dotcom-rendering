@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { labs, neutral } from '@guardian/source-foundations';
@@ -30,8 +29,7 @@ const styles = (isEditions: boolean): SerializedStyles => css`
 `;
 
 const colour = (format: ArticleFormat): SerializedStyles => {
-	const inverted = text.inverted(format);
-	const { link } = getThemeStyles(format.theme);
+	const { link, inverted } = getThemeStyles(format.theme);
 	if (format.theme === ArticleSpecial.Labs) {
 		return css`
 			color: ${labs[300]};

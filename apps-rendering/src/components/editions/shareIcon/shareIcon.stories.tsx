@@ -2,10 +2,11 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
 import { withKnobs } from '@storybook/addon-knobs';
 import type { ReactElement } from 'react';
+import { selectPillar } from 'storybookHelpers';
+import { getThemeStyles } from 'themeStyles';
 import ShareIcon from '.';
 
 // ----- Setup ----- //
@@ -32,11 +33,8 @@ const styles = (kickerColor: string): SerializedStyles => {
 // ----- Stories ----- //
 
 const Default = (): ReactElement => {
-	const kicker = text.kicker({
-		theme: ArticlePillar.News,
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-	});
+	const theme = selectPillar(ArticlePillar.News);
+	const { kicker } = getThemeStyles(theme);
 
 	return (
 		<div css={styles(kicker)}>

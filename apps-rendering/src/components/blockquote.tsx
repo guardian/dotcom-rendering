@@ -2,12 +2,12 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
+import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
@@ -17,8 +17,7 @@ interface Props {
 }
 
 const styles = (format: ArticleFormat): SerializedStyles => {
-	const kicker = text.kicker(format);
-
+	const { kicker } = getThemeStyles(format.theme);
 	return css`
 		font-style: italic;
 		position: relative;

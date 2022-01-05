@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
-import { text as textPalette } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	neutral,
@@ -16,6 +15,7 @@ import type { Item } from 'item';
 import { pipe } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
+import { getThemeStyles } from 'themeStyles';
 
 interface Props {
 	branding: Branding;
@@ -27,8 +27,7 @@ const styles = (
 	lightModeImage: string,
 	darkModeImage?: string,
 ): SerializedStyles => {
-	const kicker = textPalette.kicker(format);
-	const inverted = textPalette.inverted(format);
+	const { kicker, inverted } = getThemeStyles(format.theme);
 	return css`
 		margin: ${remSpace[9]} 0;
 		${textSans.small()}

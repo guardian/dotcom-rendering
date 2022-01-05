@@ -1,7 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
-import { text as textPalette } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
@@ -20,14 +19,14 @@ import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
-import { themeFromString } from 'themeStyles';
+import { getThemeStyles, themeFromString } from 'themeStyles';
 
 interface Props {
 	relatedItem: RelatedItem;
 }
 
 const borderColor = (format: ArticleFormat): SerializedStyles => {
-	return css`1px solid ${textPalette.kicker(format)}`;
+	return css`1px solid ${getThemeStyles(format.theme).kicker}`;
 };
 
 const listStyles = (format: ArticleFormat): SerializedStyles => {

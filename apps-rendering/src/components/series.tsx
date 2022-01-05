@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
@@ -26,9 +26,8 @@ interface Props {
 	item: Item;
 }
 
-const standardLinkStyles = (format: ArticleFormat): SerializedStyles => {
-	const kicker = text.kicker(format);
-	const inverted = text.inverted(format);
+const standardLinkStyles = (theme: ArticleTheme): SerializedStyles => {
+	const { kicker, inverted } = getThemeStyles(theme);
 
 	return css`
 		${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
@@ -41,13 +40,13 @@ const standardLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	`;
 };
 
-const labsLinkStyles = (format: ArticleFormat): SerializedStyles => css`
+const labsLinkStyles = (theme: ArticleTheme): SerializedStyles => css`
 	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
 	color: ${labs[300]};
 	text-decoration: none;
 
 	${darkModeCss`
-		color: ${text.inverted(format)};
+		color: ${getThemeStyles(theme).inverted};
 	`}
 `;
 
@@ -84,11 +83,7 @@ const getLinkStyles = ({
 	}
 
 	if (theme === ArticleSpecial.Labs) {
-		return labsLinkStyles({
-			design,
-			display,
-			theme,
-		});
+		return labsLinkStyles(theme);
 	}
 
 	if (
@@ -98,18 +93,14 @@ const getLinkStyles = ({
 		return blogLinkStyles({ design, display, theme });
 	}
 
-	return standardLinkStyles({
-		design,
-		display,
-		theme,
-	});
+	return standardLinkStyles(theme);
 };
 
-const immersiveStyles = (format: ArticleFormat): SerializedStyles => css`
+const immersiveStyles = (theme: ArticleTheme): SerializedStyles => css`
 	padding: ${remSpace[1]} ${remSpace[3]};
-	background-color: ${format.theme === ArticleSpecial.Labs
+	background-color: ${theme === ArticleSpecial.Labs
 		? labs[300]
-		: text.kicker(format)};
+		: getThemeStyles(theme).kicker};
 	position: absolute;
 	left: 0;
 	transform: translateY(-100%);
@@ -138,13 +129,7 @@ const getStyles = ({
 	theme,
 }: ArticleFormat): SerializedStyles => {
 	if (display === ArticleDisplay.Immersive) {
-		return css(
-			immersiveStyles({
-				design,
-				display,
-				theme,
-			}),
-		);
+		return css(immersiveStyles(theme));
 	}
 
 	if (
