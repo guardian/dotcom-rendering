@@ -17,6 +17,8 @@ import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { CommentCount } from './CommentCount.importable';
+import { Island } from './Island';
 
 type Props = {
 	format: ArticleFormat;
@@ -28,6 +30,9 @@ type Props = {
 	primaryDateline: string;
 	secondaryDateline: string;
 	branding?: Branding;
+	discussionApiUrl: string;
+	shortUrlId: string;
+	isCommentable: boolean;
 };
 
 const meta = css`
@@ -283,6 +288,9 @@ export const ArticleMeta = ({
 	tags,
 	primaryDateline,
 	secondaryDateline,
+	discussionApiUrl,
+	shortUrlId,
+	isCommentable,
 }: Props) => {
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
@@ -407,10 +415,17 @@ export const ArticleMeta = ({
 								className="meta-number"
 								id="share-count-root"
 							/>
-							<div
-								className="meta-number"
-								id="comment-count-root"
-							/>
+							<div className="meta-number">
+								{isCommentable && (
+									<Island clientOnly={true}>
+										<CommentCount
+											discussionApiUrl={discussionApiUrl}
+											shortUrlId={shortUrlId}
+											format={format}
+										/>
+									</Island>
+								)}
+							</div>
 						</Counts>
 					</div>
 				</div>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 
 import { space, from } from '@guardian/source-foundations';
-import { CommentCount } from '@frontend/web/components/CommentCount';
+import { CommentCount } from 'src/web/components/CommentCount.importable';
 import { RightColumn } from '@frontend/web/components/RightColumn';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 import { App as Comments } from '@guardian/discussion-rendering';
@@ -141,16 +141,6 @@ export const Discussion = ({
 
 	return (
 		<>
-			{isCommentable && commentCount !== undefined && beingHydrated && (
-				<Portal rootId="comment-count-root">
-					<CommentCount
-						discussionApiUrl={discussionApiUrl}
-						shortUrlId={shortUrlId}
-						format={format}
-					/>
-				</Portal>
-			)}
-
 			<ContainerLayout
 				padSides={false}
 				padContent={false}

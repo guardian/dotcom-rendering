@@ -10,7 +10,7 @@ import {
 
 import { Counts } from './Counts';
 import { ShareCount } from './ShareCount';
-import { CommentCount } from './CommentCount';
+import { CommentCount } from './CommentCount.importable';
 
 export default {
 	component: Counts,

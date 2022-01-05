@@ -598,6 +598,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									secondaryDateline={
 										CAPI.webPublicationSecondaryDateDisplay
 									}
+									isCommentable={CAPI.isCommentable}
+									discussionApiUrl={
+										CAPI.config.discussionApiUrl
+									}
+									shortUrlId={CAPI.config.shortUrlId}
 								/>
 							</div>
 						</GridItem>
