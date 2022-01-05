@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -115,7 +116,9 @@ const labsAnchorStyles = css`
 `;
 
 const getStyles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker, link, inverted } = getThemeStyles(format.theme);
+	const kicker = text.kicker(format);
+	const inverted = text.inverted(format);
+	const { link } = getThemeStyles(format.theme);
 
 	if (format.theme === ArticleSpecial.Labs) {
 		return labsStyles;
@@ -136,7 +139,9 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 };
 
 const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker, inverted, link } = getThemeStyles(format.theme);
+	const kicker = text.kicker(format);
+	const inverted = text.inverted(format);
+	const { link } = getThemeStyles(format.theme);
 	if (format.theme === ArticleSpecial.Labs) {
 		return labsAnchorStyles;
 	}

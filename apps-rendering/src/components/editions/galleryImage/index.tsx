@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import Img from '@guardian/common-rendering/src/components/img';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -14,7 +15,6 @@ import { map, none, OptionKind, some, withDefault } from '@guardian/types';
 import type { Image } from 'bodyElement';
 import { maybeRender, pipe } from 'lib';
 import type { FC } from 'react';
-import { getThemeStyles } from 'themeStyles';
 
 const width = '100%';
 
@@ -148,7 +148,7 @@ const CaptionDescription: FC<{ description: string[] }> = ({ description }) => {
 };
 
 const GalleryImageCaption: FC<CaptionProps> = ({ details, format }) => {
-	const { kicker } = getThemeStyles(format.theme);
+	const kicker = text.kicker(format);
 	const tabletWidth = '170px';
 	const styles = css`
 		${from.tablet} {

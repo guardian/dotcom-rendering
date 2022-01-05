@@ -2,6 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
+import { text as textPalette } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	body,
@@ -23,7 +24,6 @@ import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';
 import { plainTextElement } from 'renderer';
 import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
 
 export interface CalloutProps {
 	campaign: Campaign;
@@ -187,7 +187,7 @@ const renderField = ({
 
 const CalloutForm: FC<CalloutProps> = (props: CalloutProps) => {
 	const { campaign, format, description } = props;
-	const { kicker } = getThemeStyles(format.theme);
+	const kicker = textPalette.kicker(format);
 
 	return (
 		<details className="js-callout" css={calloutStyles}>

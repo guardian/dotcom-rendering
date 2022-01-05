@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
@@ -16,7 +17,6 @@ import type { Item } from 'item';
 import { isPicture } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
-import { getThemeStyles } from 'themeStyles';
 import Header from '../header';
 import {
 	articleMarginStyles,
@@ -124,7 +124,11 @@ const headerBackgroundStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const itemStyles = (item: Item): SerializedStyles => {
-	const { kicker } = getThemeStyles(item.theme);
+	const kicker = text.kicker({
+		design: item.design,
+		display: item.display,
+		theme: item.theme,
+	});
 
 	switch (item.display) {
 		case ArticleDisplay.Immersive:

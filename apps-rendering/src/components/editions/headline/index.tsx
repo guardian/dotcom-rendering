@@ -2,9 +2,9 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import type { FontWeight, LineHeight } from '@guardian/source-foundations';
 import {
 	border,
 	from,
@@ -12,6 +12,7 @@ import {
 	neutral,
 	remSpace,
 } from '@guardian/source-foundations';
+import type { FontWeight, LineHeight } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import { OptionKind } from '@guardian/types';
 import { editionsHeadlineTextColour } from 'editorialStyles';
@@ -20,7 +21,6 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index } from 'lib';
 import type { FC } from 'react';
-import { getThemeStyles } from 'themeStyles';
 import Series from '../series';
 import {
 	articleWidthStyles,
@@ -152,7 +152,7 @@ const getSharedStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const getQuoteStyles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker } = getThemeStyles(format.theme);
+	const kicker = text.kicker(format);
 
 	return css`
 		margin: 0;
@@ -263,7 +263,7 @@ interface Props {
 
 const Headline: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
-	const { kicker: kickerColor } = getThemeStyles(format.theme);
+	const kicker = text.kicker(format);
 	const contributor = index(0)(item.contributors);
 
 	const hasImage =
@@ -284,7 +284,7 @@ const Headline: FC<Props> = ({ item }) => {
 					<Series item={item} />
 				</div>
 			)}
-			<h1 css={getHeadlineStyles(format, kickerColor, hasImage)}>
+			<h1 css={getHeadlineStyles(format, kicker, hasImage)}>
 				{getDecorativeStyles(item)}
 			</h1>
 		</div>

@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text as textPalette } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { FontWeight, LineHeight } from '@guardian/source-foundations';
@@ -17,7 +18,6 @@ import type { Item } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
-import { getThemeStyles } from 'themeStyles';
 import ShareIcon from '../shareIcon';
 import { articleWidthStyles, sidePadding } from '../styles';
 
@@ -90,38 +90,35 @@ const textContainerStyles = css`
 `;
 
 const getStyles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker: kickerColor } = getThemeStyles(format.theme);
+	const kicker = textPalette.kicker(format);
 
 	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
 	if (format.display === ArticleDisplay.Immersive) {
 		return css(
-			styles(kickerColor),
+			styles(kicker),
 			getFontStyles(neutral[100], 'tight', 'bold'),
 		);
 	}
 	if (format.design === ArticleDesign.Interview) {
-		return css(styles(kickerColor), interviewStyles);
+		return css(styles(kicker), interviewStyles);
 	}
 	if (
 		format.design === ArticleDesign.Analysis ||
 		format.design === ArticleDesign.Letter
 	) {
-		return css(
-			styles(kickerColor),
-			getFontStyles(neutral[46], 'tight', 'bold'),
-		);
+		return css(styles(kicker), getFontStyles(neutral[46], 'tight', 'bold'));
 	}
 	if (
 		format.design === ArticleDesign.Comment ||
 		format.display === ArticleDisplay.Showcase
 	) {
-		return css(styles(kickerColor), getFontStyles(neutral[20], 'tight'));
+		return css(styles(kicker), getFontStyles(neutral[20], 'tight'));
 	}
 
 	if (format.design === ArticleDesign.Media) {
-		return css(styles(kickerColor), galleryStyles);
+		return css(styles(kicker), galleryStyles);
 	}
-	return styles(kickerColor);
+	return styles(kicker);
 };
 
 // ----- Component ----- //

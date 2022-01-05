@@ -3,7 +3,10 @@ import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import Img from '@guardian/common-rendering/src/components/img';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
+import {
+	border,
+	text as textPalette,
+} from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -51,7 +54,7 @@ const borderColor = (
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
 		return css`1px solid ${labs[300]}`;
 	} else {
-		return css`1px solid ${getThemeStyles(format.theme).kicker}`;
+		return css`1px solid ${textPalette.kicker(format)}`;
 	}
 };
 
@@ -199,7 +202,7 @@ const cardStyles = (
 ): SerializedStyles => {
 	switch (type) {
 		case RelatedItemType.FEATURE: {
-			const { kicker } = getThemeStyles(format.theme);
+			const kicker = textPalette.kicker(format);
 
 			return css`
 				h2 {
@@ -290,7 +293,7 @@ const parentIconStyles: SerializedStyles = css`
 `;
 
 const iconStyles = (format: ArticleFormat): SerializedStyles => {
-	const { inverted } = getThemeStyles(format.theme);
+	const inverted = textPalette.inverted(format);
 	return css`
 		width: 1.5rem;
 		height: 1.5rem;

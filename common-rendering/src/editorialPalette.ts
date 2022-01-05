@@ -178,7 +178,7 @@ const textStandfirstLink = (format: ArticleFormat): Colour => {
 		case ArticleDesign.DeadBlog:
 			return blogsGrayBackgroundPalette(format);
 		default: {
-			if(format.theme == ArticleSpecial.Labs)
+			if(format.theme === ArticleSpecial.Labs)
 				return labs[300];
 
 			const kicker = textKicker(format);
