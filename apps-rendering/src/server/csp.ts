@@ -119,7 +119,7 @@ const buildCsp = (
 			: ''
 	} ${
 		Stage !== 'PROD'
-			? 'https://m.code.dev-theguardian.com http://localhost:9000 http://localhost:3000'
+			? 'https://m.code.dev-theguardian.com'
 			: ''
 	};
     font-src 'self' https://interactive.guim.co.uk;
