@@ -147,7 +147,6 @@ export const Discussion = ({
 						isCommentable={isCommentable}
 						commentCount={commentCount}
 						palette={palette}
-						setIsExpanded={setIsExpanded}
 					/>
 				</Portal>
 			)}
