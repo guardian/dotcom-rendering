@@ -20,7 +20,6 @@ type Props = {
 	format: ArticleFormat;
 	discussionApiUrl: string;
 	shortUrlId: string;
-	isCommentable: boolean;
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
@@ -56,7 +55,6 @@ export const Discussion = ({
 	format,
 	discussionApiUrl,
 	shortUrlId,
-	isCommentable,
 	user,
 	discussionD2Uid,
 	discussionApiClientHeader,

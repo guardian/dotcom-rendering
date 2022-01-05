@@ -714,7 +714,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<Discussion
 							discussionApiUrl={CAPI.config.discussionApiUrl}
 							shortUrlId={CAPI.config.shortUrlId}
-							isCommentable={CAPI.isCommentable}
 							format={format}
 							discussionD2Uid={CAPI.config.discussionD2Uid}
 							discussionApiClientHeader={

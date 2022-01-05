@@ -1136,7 +1136,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					format={format}
 					discussionApiUrl={CAPI.config.discussionApiUrl}
 					shortUrlId={CAPI.config.shortUrlId}
-					isCommentable={CAPI.isCommentable}
 					user={user || undefined}
 					discussionD2Uid={CAPI.config.discussionD2Uid}
 					discussionApiClientHeader={
