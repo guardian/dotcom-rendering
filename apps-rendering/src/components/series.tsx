@@ -65,7 +65,7 @@ const blogLinkStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
 	color: ${format.design === ArticleDesign.LiveBlog
 		? getThemeStyles(format.theme).liveblogKicker
-		: text.series(format)};
+		: text.seriesTitle(format)};
 	text-decoration: none;
 `;
 
