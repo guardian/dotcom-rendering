@@ -48,27 +48,7 @@ const statusStyles = ({ theme }: ArticleFormat): SerializedStyles => {
 			margin-bottom: -0.375rem;
 		}
 
-		.follow-icon {
-			circle {
-				fill: ${kicker};
-			}
-
-			path {
-				fill: #fff;
-			}
-
-			${darkModeCss`
-				circle {
-					fill: ${inverted};
-				}
-
-				path {
-					fill: ${neutral[7]};
-				}
-			`}
-		}
-
-		.following-icon {
+		.icon {
 			fill: ${kicker};
 
 			${darkModeCss`

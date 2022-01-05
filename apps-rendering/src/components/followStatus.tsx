@@ -19,7 +19,7 @@ const FollowIcon: FC<IconProps> = ({ isFollowing }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			className={isFollowing ? 'following-icon' : 'follow-icon'}
+			className={isFollowing ? 'icon following' : 'icon follow'}
 			viewBox="0 0 24 24"
 		>
 			<path
