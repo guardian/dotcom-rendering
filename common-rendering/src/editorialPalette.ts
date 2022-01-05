@@ -145,7 +145,7 @@ const textStandfirstLink = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Opinion:
 					return opinion[500];
 				case ArticleSpecial.Labs:
-					return specialReport[500];
+					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[500];
 			}
@@ -162,7 +162,7 @@ const textStandfirstLink = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Opinion:
 					return opinion[400];
 				case ArticleSpecial.Labs:
-					return labs[400];
+					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
 			}
