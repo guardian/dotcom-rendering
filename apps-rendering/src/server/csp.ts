@@ -117,11 +117,7 @@ const buildCsp = (
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://syndication.twitter.com https://twitter.com'
 			: ''
-	} ${
-		Stage !== 'PROD'
-			? 'https://m.code.dev-theguardian.com'
-			: ''
-	};
+	} ${Stage !== 'PROD' ? 'https://m.code.dev-theguardian.com' : ''};
     font-src 'self' https://interactive.guim.co.uk;
     connect-src 'self' https://discussion.theguardian.com/discussion-api/ https://callouts.code.dev-guardianapis.com/formstack-campaign/submit https://interactive.guim.co.uk https://sf-hs-sg.ibytedtos.com/ https://gdn-cdn.s3.amazonaws.com/;
     media-src 'self' https://audio.guim.co.uk/
