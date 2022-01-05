@@ -143,7 +143,11 @@ export const Discussion = ({
 		<>
 			{isCommentable && commentCount !== undefined && beingHydrated && (
 				<Portal rootId="comment-count-root">
-					<CommentCount commentCount={commentCount} format={format} />
+					<CommentCount
+						discussionApiUrl={discussionApiUrl}
+						shortUrlId={shortUrlId}
+						format={format}
+					/>
 				</Portal>
 			)}
 

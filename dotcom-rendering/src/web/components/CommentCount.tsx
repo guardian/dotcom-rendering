@@ -1,14 +1,17 @@
 import { css } from '@emotion/react';
 
+import { joinUrl } from '@guardian/libs';
 import { textSans, between, until } from '@guardian/source-foundations';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 import CommentIcon from '@frontend/static/icons/comment.svg';
 import { decidePalette } from '../lib/decidePalette';
+import { useDiscussion } from '../lib/useDiscussion';
 
 type Props = {
 	format: ArticleFormat;
-	commentCount?: number;
+	discussionApiUrl: string;
+	shortUrlId: string;
 };
 
 const containerStyles = (palette: Palette) => css`
@@ -70,7 +73,17 @@ const linkStyles = css`
 	}
 `;
 
-export const CommentCount = ({ commentCount, format }: Props) => {
+export const CommentCount = ({
+	format,
+	discussionApiUrl,
+	shortUrlId,
+}: Props) => {
+	const { commentCount } = useDiscussion(
+		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
+	);
+
+	if (!commentCount) return null;
+
 	const { short, long } = formatCount(commentCount);
 	const palette = decidePalette(format);
 
