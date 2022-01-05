@@ -3,8 +3,6 @@ import fetchMock from 'fetch-mock';
 
 import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
 
-import { decidePalette } from '../lib/decidePalette';
-
 import { Counts } from './Counts';
 import { ShareCount } from './ShareCount';
 import { CommentCount } from './CommentCount';
@@ -58,10 +56,7 @@ export const Both = () => {
 					/>
 				</div>
 				<div className="meta-number">
-					<CommentCount
-						commentCount={239}
-						palette={decidePalette(format)}
-					/>
+					<CommentCount commentCount={239} format={format} />
 				</div>
 			</Counts>
 		</Container>
@@ -97,10 +92,7 @@ export const CommentOnly = () => {
 					/>
 				</div>
 				<div className="meta-number">
-					<CommentCount
-						commentCount={239}
-						palette={decidePalette(format)}
-					/>
+					<CommentCount commentCount={239} format={format} />
 				</div>
 			</Counts>
 		</Container>
@@ -136,10 +128,7 @@ export const ZeroComments = () => {
 					/>
 				</div>
 				<div className="meta-number">
-					<CommentCount
-						commentCount={0}
-						palette={decidePalette(format)}
-					/>
+					<CommentCount commentCount={0} format={format} />
 				</div>
 			</Counts>
 		</Container>
@@ -175,10 +164,7 @@ export const BigNumbers = () => {
 					/>
 				</div>
 				<div className="meta-number">
-					<CommentCount
-						commentCount={4320}
-						palette={decidePalette(format)}
-					/>
+					<CommentCount commentCount={4320} format={format} />
 				</div>
 			</Counts>
 		</Container>

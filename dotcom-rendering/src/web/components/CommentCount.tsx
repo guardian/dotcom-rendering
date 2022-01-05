@@ -4,9 +4,10 @@ import { textSans, between, until } from '@guardian/source-foundations';
 
 import { formatCount } from '@root/src/web/lib/formatCount';
 import CommentIcon from '@frontend/static/icons/comment.svg';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
-	palette: Palette;
+	format: ArticleFormat;
 	commentCount?: number;
 };
 
@@ -69,8 +70,9 @@ const linkStyles = css`
 	}
 `;
 
-export const CommentCount = ({ commentCount, palette }: Props) => {
+export const CommentCount = ({ commentCount, format }: Props) => {
 	const { short, long } = formatCount(commentCount);
+	const palette = decidePalette(format);
 
 	return (
 		<data

@@ -10,7 +10,6 @@ import {
 } from '@guardian/libs';
 
 import { CommentCount } from './CommentCount';
-import { decidePalette } from '../lib/decidePalette';
 
 export default {
 	component: CommentCount,
@@ -28,11 +27,11 @@ export const SpecialReportStory = () => {
 		>
 			<CommentCount
 				commentCount={306}
-				palette={decidePalette({
+				format={{
 					theme: ArticleSpecial.SpecialReport,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-				})}
+				}}
 			/>
 		</div>
 	);
@@ -50,11 +49,11 @@ export const NewsStory = () => {
 		>
 			<CommentCount
 				commentCount={36}
-				palette={decidePalette({
+				format={{
 					theme: ArticlePillar.News,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-				})}
+				}}
 			/>
 		</div>
 	);
@@ -72,11 +71,11 @@ export const LargeNumber = () => {
 		>
 			<CommentCount
 				commentCount={10836}
-				palette={decidePalette({
+				format={{
 					theme: ArticlePillar.Opinion,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-				})}
+				}}
 			/>
 		</div>
 	);
@@ -94,11 +93,11 @@ export const Zero = () => {
 		>
 			<CommentCount
 				commentCount={0}
-				palette={decidePalette({
+				format={{
 					theme: ArticlePillar.Opinion,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-				})}
+				}}
 			/>
 		</div>
 	);
@@ -115,11 +114,11 @@ export const Undefined = () => {
 			`}
 		>
 			<CommentCount
-				palette={decidePalette({
+				format={{
 					theme: ArticlePillar.Opinion,
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
-				})}
+				}}
 			/>
 		</div>
 	);

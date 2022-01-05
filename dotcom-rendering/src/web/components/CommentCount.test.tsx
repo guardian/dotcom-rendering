@@ -3,7 +3,6 @@ import { render } from '@testing-library/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { CommentCount } from './CommentCount';
-import { decidePalette } from '../lib/decidePalette';
 
 describe('CommentCount', () => {
 	const standardNewsFormat = {
@@ -14,10 +13,7 @@ describe('CommentCount', () => {
 
 	it('It should render counts as expected', () => {
 		const { getByTestId } = render(
-			<CommentCount
-				commentCount={123}
-				palette={decidePalette(standardNewsFormat)}
-			/>,
+			<CommentCount commentCount={123} format={standardNewsFormat} />,
 		);
 
 		expect(getByTestId('long-comment-count').innerHTML).toBe('123');
@@ -26,10 +22,7 @@ describe('CommentCount', () => {
 
 	it('It should format big numbers', () => {
 		const { getByTestId } = render(
-			<CommentCount
-				commentCount={92878}
-				palette={decidePalette(standardNewsFormat)}
-			/>,
+			<CommentCount commentCount={92878} format={standardNewsFormat} />,
 		);
 
 		expect(getByTestId('long-comment-count').innerHTML).toBe('92,878');
@@ -38,10 +31,7 @@ describe('CommentCount', () => {
 
 	it('It should render 0 when there are zero comments', () => {
 		const { getByTestId } = render(
-			<CommentCount
-				commentCount={0}
-				palette={decidePalette(standardNewsFormat)}
-			/>,
+			<CommentCount commentCount={0} format={standardNewsFormat} />,
 		);
 
 		expect(getByTestId('long-comment-count').innerHTML).toBe('0');
@@ -50,7 +40,7 @@ describe('CommentCount', () => {
 
 	it('It should render an elipsis when the comment count is not defined', () => {
 		const { getByTestId } = render(
-			<CommentCount palette={decidePalette(standardNewsFormat)} />,
+			<CommentCount format={standardNewsFormat} />,
 		);
 
 		expect(getByTestId('long-comment-count').innerHTML).toBe('…');
