@@ -27,7 +27,6 @@ export const SpecialReportStory = () => {
 			`}
 		>
 			<CommentCount
-				isCommentable={true}
 				commentCount={306}
 				palette={decidePalette({
 					theme: ArticleSpecial.SpecialReport,
@@ -50,7 +49,6 @@ export const NewsStory = () => {
 			`}
 		>
 			<CommentCount
-				isCommentable={true}
 				commentCount={36}
 				palette={decidePalette({
 					theme: ArticlePillar.News,
@@ -73,7 +71,6 @@ export const LargeNumber = () => {
 			`}
 		>
 			<CommentCount
-				isCommentable={true}
 				commentCount={10836}
 				palette={decidePalette({
 					theme: ArticlePillar.Opinion,
@@ -96,7 +93,6 @@ export const Zero = () => {
 			`}
 		>
 			<CommentCount
-				isCommentable={true}
 				commentCount={0}
 				palette={decidePalette({
 					theme: ArticlePillar.Opinion,
@@ -119,7 +115,6 @@ export const Undefined = () => {
 			`}
 		>
 			<CommentCount
-				isCommentable={true}
 				palette={decidePalette({
 					theme: ArticlePillar.Opinion,
 					display: ArticleDisplay.Standard,

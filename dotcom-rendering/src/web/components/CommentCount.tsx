@@ -7,7 +7,6 @@ import CommentIcon from '@frontend/static/icons/comment.svg';
 
 type Props = {
 	palette: Palette;
-	isCommentable: boolean;
 	commentCount?: number;
 };
 
@@ -70,13 +69,7 @@ const linkStyles = css`
 	}
 `;
 
-export const CommentCount = ({
-	isCommentable,
-	commentCount,
-	palette,
-}: Props) => {
-	if (!isCommentable) return null;
-
+export const CommentCount = ({ commentCount, palette }: Props) => {
 	const { short, long } = formatCount(commentCount);
 
 	return (

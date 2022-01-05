@@ -59,7 +59,6 @@ export const Both = () => {
 				</div>
 				<div className="meta-number">
 					<CommentCount
-						isCommentable={true}
 						commentCount={239}
 						palette={decidePalette(format)}
 					/>
@@ -69,46 +68,6 @@ export const Both = () => {
 	);
 };
 Both.story = { name: 'with both results' };
-
-export const ShareOnly = () => {
-	fetchMock
-		.restore()
-		// Share count
-		.getOnce(
-			'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
-			{
-				status: 200,
-				body: {
-					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
-					share_count: 273,
-					refreshStatus: true,
-				},
-			},
-			{ overwriteRoutes: false },
-		);
-
-	return (
-		<Container>
-			<Counts format={format}>
-				<div className="meta-number">
-					<ShareCount
-						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-						pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={format}
-					/>
-				</div>
-				<div className="meta-number">
-					<CommentCount
-						isCommentable={false}
-						commentCount={239}
-						palette={decidePalette(format)}
-					/>
-				</div>
-			</Counts>
-		</Container>
-	);
-};
-ShareOnly.story = { name: 'with comments disabled' };
 
 export const CommentOnly = () => {
 	fetchMock
@@ -139,7 +98,6 @@ export const CommentOnly = () => {
 				</div>
 				<div className="meta-number">
 					<CommentCount
-						isCommentable={true}
 						commentCount={239}
 						palette={decidePalette(format)}
 					/>
@@ -179,7 +137,6 @@ export const ZeroComments = () => {
 				</div>
 				<div className="meta-number">
 					<CommentCount
-						isCommentable={true}
 						commentCount={0}
 						palette={decidePalette(format)}
 					/>
@@ -219,7 +176,6 @@ export const BigNumbers = () => {
 				</div>
 				<div className="meta-number">
 					<CommentCount
-						isCommentable={true}
 						commentCount={4320}
 						palette={decidePalette(format)}
 					/>

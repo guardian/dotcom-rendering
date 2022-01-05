@@ -11,22 +11,10 @@ describe('CommentCount', () => {
 		design: ArticleDesign.Standard,
 		display: ArticleDisplay.Standard,
 	};
-	it('It should render null if comments are disabled', () => {
-		const { container } = render(
-			<CommentCount
-				isCommentable={false}
-				commentCount={123}
-				palette={decidePalette(standardNewsFormat)}
-			/>,
-		);
-
-		expect(container.firstChild).toBeNull();
-	});
 
 	it('It should render counts as expected', () => {
 		const { getByTestId } = render(
 			<CommentCount
-				isCommentable={true}
 				commentCount={123}
 				palette={decidePalette(standardNewsFormat)}
 			/>,
@@ -39,7 +27,6 @@ describe('CommentCount', () => {
 	it('It should format big numbers', () => {
 		const { getByTestId } = render(
 			<CommentCount
-				isCommentable={true}
 				commentCount={92878}
 				palette={decidePalette(standardNewsFormat)}
 			/>,
@@ -52,7 +39,6 @@ describe('CommentCount', () => {
 	it('It should render 0 when there are zero comments', () => {
 		const { getByTestId } = render(
 			<CommentCount
-				isCommentable={true}
 				commentCount={0}
 				palette={decidePalette(standardNewsFormat)}
 			/>,
@@ -64,10 +50,7 @@ describe('CommentCount', () => {
 
 	it('It should render an elipsis when the comment count is not defined', () => {
 		const { getByTestId } = render(
-			<CommentCount
-				isCommentable={true}
-				palette={decidePalette(standardNewsFormat)}
-			/>,
+			<CommentCount palette={decidePalette(standardNewsFormat)} />,
 		);
 
 		expect(getByTestId('long-comment-count').innerHTML).toBe('…');
