@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import { remSpace, textSans } from '@guardian/source-foundations';
 import FollowStatus from 'components/followStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
