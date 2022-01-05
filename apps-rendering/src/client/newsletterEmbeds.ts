@@ -42,7 +42,7 @@ export default (): Promise<void> => {
 				) as MessageType;
 				switch (message.type) {
 					case 'set-height': {
-						const value = parseInt(message.value);
+						const value = parseInt(message.value, 10);
 						if (!Number.isInteger(value)) return;
 
 						iframes.forEach((iframe) => {
