@@ -10,7 +10,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	headline,
-	neutral,
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
