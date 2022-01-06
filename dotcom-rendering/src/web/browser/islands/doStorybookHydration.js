@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { getName } from '@root/src/web/browser/islands/getName';
-import { getProps } from '@root/src/web/browser/islands/getProps';
+import { getName } from './getName';
+import { getProps } from './getProps';
 
 /**
  * This is a cut down version of the islands/doHydration function that is

@@ -32,7 +32,7 @@ import { extractNAV } from '@root/src/model/extract-nav';
 import { fireAndResetHydrationState } from '@root/src/web/components/HydrateOnce';
 import { breakpoints } from '@guardian/source-foundations';
 import { DecideLayout } from './DecideLayout';
-import { doStorybookHydration } from '../lib/doStorybookHydration';
+import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 
 mockRESTCalls();
 
