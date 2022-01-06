@@ -1,0 +1,40 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import { getName } from '@root/src/web/browser/islands/getName';
+import { getProps } from '@root/src/web/browser/islands/getProps';
+
+/**
+ * This is a cut down version of the islands/doHydration function that is
+ * used as part of the Islands flow for hydrating DCR pages.
+ *
+ * We don't use that specific function directly for two reasons:
+ *
+ * 1) We need to use React here, not Preact. Otherwise we get errors about
+ *    conflicting versions of React
+ *
+ * 2) We don't want to defer hydration as this could affect our Chromatic
+ *    snapshots
+ */
+export const doStorybookHydration = () => {
+	document.querySelectorAll('gu-island').forEach((element) => {
+		if (element instanceof HTMLElement) {
+			const name = getName(element);
+			const props = getProps(element);
+
+			if (!name) return;
+
+			// eslint-disable-next-line @typescript-eslint/no-floating-promises
+			import(
+				/* webpackInclude: /\.importable\.(tsx|jsx)$/ */
+				`../components/${name}.importable`
+			).then((module) => {
+				ReactDOM.hydrate(
+					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+					React.createElement(module[name], props),
+					element,
+				);
+			});
+		}
+	});
+};
