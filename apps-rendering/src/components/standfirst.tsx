@@ -30,7 +30,7 @@ const darkStyles = (format: ArticleFormat): SerializedStyles => darkMode`
 
     a {
         color: ${text.standfirstDark(format)};
-		border-bottom: 1px solid ${border.standfirstLinkDark(format)};
+		border-bottom: 0.0625rem solid ${border.standfirstLinkDark(format)};
     }
 `;
 
