@@ -54,7 +54,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 	a {
 		text-decoration: none;
-		border-bottom: 1px solid ${border.standfirstLink(format)};
+		border-bottom: 0.0625rem solid ${border.standfirstLink(format)};
 	}
 
 	${isNotBlog(format) && darkStyles(format)}
