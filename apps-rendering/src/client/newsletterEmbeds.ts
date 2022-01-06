@@ -1,4 +1,3 @@
-type NewsletterHeightEventType = { source: MessageEventSource; origin: string };
 type MessageType = {
 	type: string;
 	value: string;
@@ -21,19 +20,11 @@ export default (): Promise<void> => {
 	});
 
 	window.addEventListener('message', (event) => {
-		if (
-			!allowedOrigins.includes(
-				(event as NewsletterHeightEventType).origin,
-			)
-		)
-			return;
+		if (!allowedOrigins.includes(event.origin)) return;
 
 		const iframes: HTMLIFrameElement[] = allIframes.filter((i) => {
 			try {
-				return (
-					i.contentWindow ===
-					(event as NewsletterHeightEventType).source
-				);
+				return i.contentWindow === event.source;
 			} catch (e) {
 				return false;
 			}

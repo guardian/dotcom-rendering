@@ -1,8 +1,6 @@
 import '../webpackPublicPath';
 import { startup } from '@root/src/web/browser/startup';
 
-type NewsletterHeightEventType = { source: MessageEventSource; origin: string };
-
 // No trailing slash!
 const allowedOrigins = ['https://www.theguardian.com'];
 const init = (): Promise<void> => {
@@ -22,19 +20,11 @@ const init = (): Promise<void> => {
 	});
 
 	window.addEventListener('message', (event) => {
-		if (
-			!allowedOrigins.includes(
-				(event as NewsletterHeightEventType).origin,
-			)
-		)
-			return;
+		if (!allowedOrigins.includes(event.origin)) return;
 
 		const iframes: HTMLIFrameElement[] = allIframes.filter((i) => {
 			try {
-				return (
-					i.contentWindow ===
-					(event as NewsletterHeightEventType).source
-				);
+				return i.contentWindow === event.source;
 			} catch (e) {
 				return false;
 			}
