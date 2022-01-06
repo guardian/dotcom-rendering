@@ -184,7 +184,7 @@ const borderArticleLink = (format: ArticleFormat): Colour => {
 
 const borderArticleLinkDark = borderArticleLink;
 
-const borderStandfirstLink = (format: ArticleFormat): string => {
+const borderStandfirstLink = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.LiveBlog) {
 		return neutral[100];
 	}
