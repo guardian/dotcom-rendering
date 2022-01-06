@@ -4,6 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
 	background,
+	border,
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
@@ -29,6 +30,7 @@ const darkStyles = (format: ArticleFormat): SerializedStyles => darkMode`
 
     a {
         color: ${text.standfirstDark(format)};
+		border-bottom: 1px solid ${border.standfirstLinkDark(format)};
     }
 `;
 
@@ -48,6 +50,11 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 	address {
 		font-style: normal;
+	}
+
+	a {
+		text-decoration: none;
+		border-bottom: 1px solid ${border.standfirstLink(format)};
 	}
 
 	${isNotBlog(format) && darkStyles(format)}

@@ -31,6 +31,8 @@ interface Palette {
 	border: {
 		articleLink: Colour;
 		articleLinkDark: Colour;
+		standfirstLink: Colour;
+		standfirstLinkDark: Colour;
 	};
   fill: {
     icon: Colour;
@@ -182,6 +184,20 @@ const borderArticleLink = (format: ArticleFormat): Colour => {
 
 const borderArticleLinkDark = borderArticleLink;
 
+const borderStandfirstLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) {
+		return neutral[100];
+	}
+	if (format.theme === ArticleSpecial.SpecialReport) {
+		return specialReport[400];
+	}
+	return neutral[86];
+};
+
+const borderStandfirstLinkDark = (format: ArticleFormat): Colour => {
+	return neutral[46];
+}
+
 const backgroundStandfirst = ({
 	design,
 	theme,
@@ -290,6 +306,8 @@ const background = {
 const border = {
 	articleLink: borderArticleLink,
 	articleLinkDark: borderArticleLinkDark,
+	standfirstLink: borderStandfirstLink,
+	standfirstLinkDark: borderStandfirstLinkDark,
 };
 
 const fill = {
@@ -313,6 +331,8 @@ const palette = (format: ArticleFormat): Palette => ({
 	border: {
 		articleLink: border.articleLink(format),
 		articleLinkDark: border.articleLinkDark(format),
+		standfirstLink: border.standfirstLink(format),
+		standfirstLinkDark: border.standfirstLinkDark(format),
 	},
   fill: {
     icon: fill.icon(format),
