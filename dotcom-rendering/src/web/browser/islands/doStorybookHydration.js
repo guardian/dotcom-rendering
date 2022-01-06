@@ -27,7 +27,7 @@ export const doStorybookHydration = () => {
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			import(
 				/* webpackInclude: /\.importable\.(tsx|jsx)$/ */
-				`../components/${name}.importable`
+				`../../components/${name}.importable`
 			).then((module) => {
 				ReactDOM.hydrate(
 					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
