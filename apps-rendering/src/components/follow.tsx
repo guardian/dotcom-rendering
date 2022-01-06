@@ -24,37 +24,26 @@ const styles = ({ theme }: ArticleFormat): SerializedStyles => {
 	return css`
 		${textSans.small()}
 		color: ${kicker};
-		display: block;
+		display: flex;
+		align-items: center;
+		// TODO: check if the gap is needed
+		column-gap: 0.2em;
 		padding: 0;
 		border: none;
 		background: none;
 		margin-left: 0;
 		margin-top: ${remSpace[1]};
-		min-height: 1.5rem;
+		min-height: ${remSpace[6]};
+
+		svg {
+			width: ${remSpace[6]};
+			height: ${remSpace[6]};
+			fill: currentColor;
+		}
 
 		${darkModeCss`
 			color: ${inverted};
 		`}
-	`;
-};
-
-const statusStyles = ({ theme }: ArticleFormat): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(theme);
-
-	return css`
-		svg {
-			width: ${remSpace[6]};
-			height: ${remSpace[6]};
-			margin-bottom: -0.375rem;
-		}
-
-		.icon {
-			fill: ${kicker};
-
-			${darkModeCss`
-				fill: ${inverted};
-			`}
-		}
 	`;
 };
 
@@ -73,11 +62,7 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
 				data-id={contributor.id}
 				data-display-name={contributor.name}
 			>
-				<span className="js-follow-status" css={statusStyles(format)}>
-					<FollowStatus isFollowing={false} />
-				</span>
-
-				{contributor.name}
+				<FollowStatus isFollowing={false} /> {contributor.name}
 			</button>
 		);
 	}
