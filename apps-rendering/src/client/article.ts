@@ -479,12 +479,16 @@ function hydrateClickToView(): void {
 }
 
 function resizeEmailSignups(): void {
+	const isIframe = (elem: Element): elem is HTMLIFrameElement =>
+		elem.tagName === 'IFRAME';
 	const emailSignupIframes = document.querySelectorAll(
 		'.js-email-signup > iframe',
 	);
-	Array.from(emailSignupIframes).forEach((emailSignupIframe) => {
-		(emailSignupIframe as HTMLIFrameElement).style.width = '100%';
-	});
+	Array.from(emailSignupIframes)
+		.filter(isIframe)
+		.forEach((emailSignupIframe) => {
+			emailSignupIframe.style.width = '100%';
+		});
 }
 
 setup();
