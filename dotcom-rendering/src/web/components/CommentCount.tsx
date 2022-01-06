@@ -9,7 +9,6 @@ type Props = {
 	palette: Palette;
 	isCommentable: boolean;
 	commentCount?: number;
-	setIsExpanded: (isExpanded: boolean) => void;
 };
 
 const containerStyles = (palette: Palette) => css`
@@ -75,7 +74,6 @@ export const CommentCount = ({
 	isCommentable,
 	commentCount,
 	palette,
-	setIsExpanded,
 }: Props) => {
 	if (!isCommentable) return null;
 
@@ -91,7 +89,6 @@ export const CommentCount = ({
 				href="#comments"
 				css={linkStyles}
 				aria-label={`${short} Comments`}
-				onClick={() => setIsExpanded(true)}
 			>
 				<div css={iconContainerStyles}>
 					<CommentIcon css={iconStyles(palette)} />
