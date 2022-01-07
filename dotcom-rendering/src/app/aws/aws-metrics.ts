@@ -1,11 +1,13 @@
-import { CloudWatchClient, PutMetricDataCommand } from "@aws-sdk/client-cloudwatch";
+import {
+	CloudWatchClient,
+	PutMetricDataCommand,
+} from '@aws-sdk/client-cloudwatch';
 
 interface Metric {
 	send: () => void;
 }
 
 process.env.AWS_PROFILE = 'frontend';
-
 
 // how frequently we send metrics to aws in ms
 const METRICS_TIME_RESOLUTION = 60 * 1000;

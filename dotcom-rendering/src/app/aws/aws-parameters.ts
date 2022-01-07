@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { Parameter } from 'aws-sdk/clients/ssm';
-import { PromiseResult } from 'aws-sdk/lib/request';
-import { GetParametersByPathCommand, SSMClient } from "@aws-sdk/client-ssm";
+import { GetParametersByPathCommand, SSMClient } from '@aws-sdk/client-ssm';
 
 process.env.AWS_PROFILE = 'frontend';
 
-
 const STACK = 'frontend';
-
 
 interface ConfigMap {
 	[key: string]: any;
@@ -35,7 +31,7 @@ const getParams = function getAWSParameterStoreParameters(
 		NextToken: token,
 	};
 
-	const command =  new GetParametersByPathCommand(params);
+	const command = new GetParametersByPathCommand(params);
 	return ssm.send(command);
 };
 
@@ -43,9 +39,10 @@ const getParams = function getAWSParameterStoreParameters(
 
 const getAllParams = function getGuardianConfigurationRecursiveStep(
 	stage: string,
-	params: Parameter[] = [],
+	params: any[] = [], // change type
 	token: string | undefined = undefined,
-): Promise<Parameter[]> {
+): Promise<any[]> {
+	// change type
 	return getParams(stage, token).then((response) => {
 		if (!response.NextToken) {
 			return params;
