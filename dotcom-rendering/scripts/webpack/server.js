@@ -32,38 +32,31 @@ module.exports = () => ({
 	module: {
 		rules: [
 			{
-				test: /(\.tsx|\.js|\.ts)$/,
-				exclude: {
-					and: [/node_modules/],
-					not: [/@guardian/, /dynamic-import-polyfill/],
-				},
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							presets: [
-								// TODO: remove @babel/preset-react once we stop using JSX in server folder
-								'@babel/preset-react',
-								[
-									'@babel/preset-env',
-									{
-										targets: {
-											node: 'current',
-										},
-									},
-								],
-							],
-							compact: true,
-						},
-					},
-					{
-						loader: 'ts-loader',
-						options: {
-							configFile: 'tsconfig.build.json',
-							transpileOnly: true,
-						},
-					},
-				],
+				test: /\.js?$/,
+				loader: 'esbuild-loader',
+				exclude: module.exports.babelExclude,
+				options: {
+					loader: 'js',  // Or 'ts' if you don't need tsx
+					target: 'esnext',
+				}
+			},
+			{
+				test: /\.ts?$/,
+				loader: 'esbuild-loader',
+				exclude: module.exports.babelExclude,
+				options: {
+					loader: 'ts',  // Or 'ts' if you don't need tsx
+					target: 'esnext',
+				}
+			},
+			{
+				test: /\.tsx?$/,
+				loader: 'esbuild-loader',
+				exclude: module.exports.babelExclude,
+				options: {
+					loader: 'tsx',  // Or 'ts' if you don't need tsx
+					target: 'esnext',
+				}
 			},
 			// TODO: find a way to remove
 			{

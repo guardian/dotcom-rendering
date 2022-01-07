@@ -4,17 +4,17 @@ import responseTime from 'response-time';
 
 import compression from 'compression';
 
-import { log, warn } from '@root/scripts/env/log';
+import { log, warn } from '../../scripts/env/log';
 import {
 	render as renderAMPArticle,
 	renderPerfTest as renderAMPArticlePerfTest,
-} from '@root/src/amp/server/render';
+} from '../amp/server/render';
 import {
 	renderArticle,
 	renderPerfTest as renderArticlePerfTest,
 	renderArticleJson,
 	renderInteractive,
-} from '@root/src/web/server/render';
+} from '../web/server/render';
 
 import {
 	getGuardianConfiguration,

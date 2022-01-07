@@ -2,6 +2,7 @@
 const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
 
 const friendlyErrorsWebpackPlugin = () =>
 	new FriendlyErrorsWebpackPlugin({
@@ -29,7 +30,7 @@ const scriptPath = (dcrPackage) =>
 	[
 		`./src/web/browser/${dcrPackage}/init.ts`,
 		DEV &&
-			'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
+			'webpack-hot-middleware/client?name=browser&overlayWarnings=true&reload=true',
 	].filter(Boolean);
 
 module.exports = ({ isLegacyJS }) => ({
@@ -54,61 +55,48 @@ module.exports = ({ isLegacyJS }) => ({
 	},
 	// fix for known issue with webpack dynamic imports
 	optimization: {
-		splitChunks: { cacheGroups: { default: false } },
+	  minimizer: [
+	    new ESBuildMinifyPlugin({
+	      target: 'esnext'  // Syntax to compile to (see options below for possible values)
+	    })
+	  ]
 	},
 	plugins: [
 		DEV && new webpack.HotModuleReplacementPlugin(),
 		DEV && friendlyErrorsWebpackPlugin(),
 		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
 		// [...].filter(Boolean) why it is used
+
 	].filter(Boolean),
 	module: {
 		rules: [
-			{
-				test: /\.[jt]sx?|mjs$/,
-				exclude: module.exports.babelExclude,
-
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							presets: [
-								'@babel/preset-react',
-								// @babel/preset-env is used for legacy browsers
-								// @babel/preset-modules is used for modern browsers
-								// this allows us to reduce bundle sizes
-								isLegacyJS
-									? [
-											'@babel/preset-env',
-											{
-												targets: {
-													ie: '11',
-												},
-												modules: false,
-											},
-									  ]
-									: [
-											'@babel/preset-env',
-											{
-												bugfixes: true,
-												targets: {
-													esmodules: true,
-												},
-											},
-									  ],
-							],
-							compact: true,
-						},
-					},
-					{
-						loader: 'ts-loader',
-						options: {
-							configFile: 'tsconfig.build.json',
-							transpileOnly: true,
-						},
-					},
-				],
-			},
+				{
+					test: /\.[jt]sx?|mjs$/,
+					loader: 'esbuild-loader',
+					exclude: module.exports.babelExclude,
+					options: {
+						loader: 'jsx',  // Remove this if you're not using JSX
+						target: 'esnext'  // Syntax to compile to (see options below for possible values)
+					}
+				},
+				{
+					test: /\.tsx?$/,
+					loader: 'esbuild-loader',
+					exclude: module.exports.babelExclude,
+					options: {
+						loader: 'tsx',  // Or 'ts' if you don't need tsx
+						target: 'esnext',
+					}
+				},
+				{
+					test: /\.ts?$/,
+					loader: 'esbuild-loader',
+					exclude: module.exports.babelExclude,
+					options: {
+						loader: 'ts',
+						target: 'esnext',
+					}
+				},
 			{
 				test: /\.css$/,
 				use: ['to-string-loader', 'css-loader'],
