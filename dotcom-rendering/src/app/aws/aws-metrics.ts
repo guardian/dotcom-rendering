@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk';
+import { CloudWatchClient, PutMetricDataCommand } from "@aws-sdk/client-cloudwatch";
 
 interface Metric {
 	send: () => void;
@@ -6,7 +6,6 @@ interface Metric {
 
 process.env.AWS_PROFILE = 'frontend';
 
-AWS.config.update({ region: 'eu-west-1' });
 
 // how frequently we send metrics to aws in ms
 const METRICS_TIME_RESOLUTION = 60 * 1000;
@@ -16,16 +15,19 @@ const sendMetric = (m: any[]) => {
 		return;
 	}
 
-	const cloudWatchClient = new AWS.CloudWatch();
+	const cloudWatchClient = new CloudWatchClient({ region: 'eu-west-1' });
 
 	const params = {
 		MetricData: m,
 		Namespace: 'Application',
 	};
 
-	cloudWatchClient.putMetricData(params, (err) => {
+	const command = new PutMetricDataCommand(params);
+
+	cloudWatchClient.send(command, (err) => {
 		if (err) {
 			// eslint-disable-next-line no-console
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			console.error(err, err.stack);
 		}
 	});

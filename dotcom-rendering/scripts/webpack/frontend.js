@@ -8,8 +8,14 @@ const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 
-const commonConfigs = ({ platform }) => ({
+const smp = new SpeedMeasurePlugin({
+	outputFormat: "humanVerbose",
+	loaderTopFiles: 50,
+  });
+
+const commonConfigs = ({ platform }) => smp.wrap(({
 	name: platform,
 	mode: process.env.NODE_ENV,
 	output: {
@@ -55,7 +61,7 @@ const commonConfigs = ({ platform }) => ({
 		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
 		// [...].filter(Boolean) why it is used
 	].filter(Boolean),
-});
+}));
 
 module.exports = [
 	// server bundle config

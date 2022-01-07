@@ -1,15 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Parameter } from 'aws-sdk/clients/ssm';
 import { PromiseResult } from 'aws-sdk/lib/request';
-
-import AWS from 'aws-sdk';
+import { GetParametersByPathCommand, SSMClient } from "@aws-sdk/client-ssm";
 
 process.env.AWS_PROFILE = 'frontend';
 
-AWS.config.update({ region: 'eu-west-1' });
 
 const STACK = 'frontend';
 
-const ssm = new AWS.SSM();
 
 interface ConfigMap {
 	[key: string]: any;
@@ -27,7 +25,9 @@ interface GuardianConfiguration {
 const getParams = function getAWSParameterStoreParameters(
 	stage: string,
 	token: string | undefined = undefined,
-): Promise<PromiseResult<AWS.SSM.GetParametersByPathResult, AWS.AWSError>> {
+): Promise<any> {
+	const ssm = new SSMClient({ region: 'eu-west-1' });
+
 	const params = {
 		Path: `/${STACK}/${stage}/`,
 		Recursive: true,
@@ -35,7 +35,8 @@ const getParams = function getAWSParameterStoreParameters(
 		NextToken: token,
 	};
 
-	return ssm.getParametersByPath(params).promise();
+	const command =  new GetParametersByPathCommand(params);
+	return ssm.send(command);
 };
 
 // a recursive function to retrieve all pages of guardian configuration
