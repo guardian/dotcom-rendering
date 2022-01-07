@@ -97,7 +97,9 @@ const BrazeBannerWithSatisfiedDependencies = ({
 		submitComponentEvent({
 			component: {
 				componentType: 'RETENTION_ENGAGEMENT_BANNER',
-				id: meta.dataFromBraze.componentName,
+				id:
+					meta.dataFromBraze.ophanComponentId ??
+					meta.dataFromBraze.componentName,
 			},
 			action: 'VIEW',
 		});

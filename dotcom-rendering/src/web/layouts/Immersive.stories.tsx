@@ -34,6 +34,7 @@ import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettin
 import { extractNAV } from '@root/src/model/extract-nav';
 import { fireAndResetHydrationState } from '@root/src/web/components/HydrateOnce';
 import { DecideLayout } from './DecideLayout';
+import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 
 mockRESTCalls();
 
@@ -86,6 +87,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 		);
 		// Manually updates the footer DOM because it's not hydrated
 		injectPrivacySettingsLink();
+		doStorybookHydration();
 	}, [ServerCAPI]);
 	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} format={format} />;
 };

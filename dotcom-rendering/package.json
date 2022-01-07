@@ -49,7 +49,7 @@
     "@guardian/braze-components": "^5.1.0",
     "@guardian/commercial-core": "^0.32.0",
     "@guardian/consent-management-platform": "~6.11.5",
-    "@guardian/discussion-rendering": "^9.0.0",
+    "@guardian/discussion-rendering": "^9.1.0",
     "@guardian/libs": "^3.4.1",
     "@guardian/shimport": "^1.0.2",
     "@hkdobrev/run-if-changed": "^0.3.1",
