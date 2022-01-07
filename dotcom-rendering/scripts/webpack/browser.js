@@ -30,7 +30,7 @@ const scriptPath = (dcrPackage) =>
 	[
 		`./src/web/browser/${dcrPackage}/init.ts`,
 		DEV &&
-			'webpack-hot-middleware/client?name=browser&overlayWarnings=true&reload=true',
+			'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
 	].filter(Boolean);
 
 module.exports = ({ isLegacyJS }) => ({
@@ -55,48 +55,48 @@ module.exports = ({ isLegacyJS }) => ({
 	},
 	// fix for known issue with webpack dynamic imports
 	optimization: {
-	  minimizer: [
-	    new ESBuildMinifyPlugin({
-	      target: 'esnext'  // Syntax to compile to (see options below for possible values)
-	    })
-	  ]
+		splitChunks: { cacheGroups: { default: false } },
+		minimizer: [
+			new ESBuildMinifyPlugin({
+				target: 'esnext', // Syntax to compile to (see options below for possible values)
+			}),
+		],
 	},
 	plugins: [
 		DEV && new webpack.HotModuleReplacementPlugin(),
 		DEV && friendlyErrorsWebpackPlugin(),
 		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
 		// [...].filter(Boolean) why it is used
-
 	].filter(Boolean),
 	module: {
 		rules: [
-				{
-					test: /\.[jt]sx?|mjs$/,
-					loader: 'esbuild-loader',
-					exclude: module.exports.babelExclude,
-					options: {
-						loader: 'jsx',  // Remove this if you're not using JSX
-						target: 'esnext'  // Syntax to compile to (see options below for possible values)
-					}
+			{
+				test: /\.[jt]sx?|mjs$/,
+				loader: 'esbuild-loader',
+				exclude: module.exports.babelExclude,
+				options: {
+					loader: 'jsx',
+					target: 'esnext',
 				},
-				{
-					test: /\.tsx?$/,
-					loader: 'esbuild-loader',
-					exclude: module.exports.babelExclude,
-					options: {
-						loader: 'tsx',  // Or 'ts' if you don't need tsx
-						target: 'esnext',
-					}
+			},
+			{
+				test: /\.tsx?$/,
+				loader: 'esbuild-loader',
+				exclude: module.exports.babelExclude,
+				options: {
+					loader: 'tsx',
+					target: 'esnext',
 				},
-				{
-					test: /\.ts?$/,
-					loader: 'esbuild-loader',
-					exclude: module.exports.babelExclude,
-					options: {
-						loader: 'ts',
-						target: 'esnext',
-					}
+			},
+			{
+				test: /\.ts?$/,
+				loader: 'esbuild-loader',
+				exclude: module.exports.babelExclude,
+				options: {
+					loader: 'ts',
+					target: 'esnext',
 				},
+			},
 			{
 				test: /\.css$/,
 				use: ['to-string-loader', 'css-loader'],

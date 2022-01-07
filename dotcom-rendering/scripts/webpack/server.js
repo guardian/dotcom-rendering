@@ -36,27 +36,27 @@ module.exports = () => ({
 				loader: 'esbuild-loader',
 				exclude: module.exports.babelExclude,
 				options: {
-					loader: 'js',  // Or 'ts' if you don't need tsx
+					loader: 'js',
 					target: 'esnext',
-				}
+				},
 			},
 			{
 				test: /\.ts?$/,
 				loader: 'esbuild-loader',
 				exclude: module.exports.babelExclude,
 				options: {
-					loader: 'ts',  // Or 'ts' if you don't need tsx
+					loader: 'ts',
 					target: 'esnext',
-				}
+				},
 			},
 			{
 				test: /\.tsx?$/,
 				loader: 'esbuild-loader',
 				exclude: module.exports.babelExclude,
 				options: {
-					loader: 'tsx',  // Or 'ts' if you don't need tsx
+					loader: 'tsx',
 					target: 'esnext',
-				}
+				},
 			},
 			// TODO: find a way to remove
 			{

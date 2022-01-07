@@ -62,7 +62,6 @@ export const Both = () => {
 						isCommentable={true}
 						commentCount={239}
 						palette={decidePalette(format)}
-						setIsExpanded={() => {}}
 					/>
 				</div>
 			</Counts>
@@ -103,7 +102,6 @@ export const ShareOnly = () => {
 						isCommentable={false}
 						commentCount={239}
 						palette={decidePalette(format)}
-						setIsExpanded={() => {}}
 					/>
 				</div>
 			</Counts>
@@ -144,7 +142,6 @@ export const CommentOnly = () => {
 						isCommentable={true}
 						commentCount={239}
 						palette={decidePalette(format)}
-						setIsExpanded={() => {}}
 					/>
 				</div>
 			</Counts>
@@ -185,7 +182,6 @@ export const ZeroComments = () => {
 						isCommentable={true}
 						commentCount={0}
 						palette={decidePalette(format)}
-						setIsExpanded={() => {}}
 					/>
 				</div>
 			</Counts>
@@ -226,7 +222,6 @@ export const BigNumbers = () => {
 						isCommentable={true}
 						commentCount={4320}
 						palette={decidePalette(format)}
-						setIsExpanded={() => {}}
 					/>
 				</div>
 			</Counts>
