@@ -26,7 +26,6 @@ const styles = ({ theme }: ArticleFormat): SerializedStyles => {
 		color: ${kicker};
 		display: flex;
 		align-items: center;
-		// TODO: check if the gap is needed
 		column-gap: 0.2em;
 		padding: 0;
 		border: none;
