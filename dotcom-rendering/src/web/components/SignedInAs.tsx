@@ -125,7 +125,6 @@ export const SignedInAs = ({
 		// Discussion disabled sitewide and user logged out
 		return (
 			<div css={containerStyles}>
-				<CommentCount count={commentCount} />
 				<span css={headlineStyles}>
 					Commenting has been disabled at this time
 				</span>
