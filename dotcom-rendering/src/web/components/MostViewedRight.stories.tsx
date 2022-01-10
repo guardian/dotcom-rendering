@@ -7,7 +7,7 @@ import { LeftColumn } from '@root/src/web/components/LeftColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
 
-import { mockTab1 } from '../MostViewed.mocks';
+import { mockTab1 } from './MostViewed/MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 
 export default {

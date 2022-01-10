@@ -89,16 +89,6 @@ const EditionDropdown = loadable(
 	},
 );
 
-const MostViewedRightWrapper = React.lazy(() => {
-	const { start, end } = initPerf('MostViewedRightWrapper');
-	start();
-	return import(
-		/* webpackChunkName: "MostViewedRightWrapper" */ '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper'
-	).then((module) => {
-		end();
-		return { default: module.MostViewedRightWrapper };
-	});
-});
 const OnwardsUpper = React.lazy(() => {
 	const { start, end } = initPerf('OnwardsUpper');
 	start();
@@ -1037,15 +1027,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			<Portal rootId="most-viewed-right">
-				<Lazy margin={100}>
-					<Suspense fallback={<></>}>
-						<MostViewedRightWrapper
-							isAdFreeUser={CAPI.isAdFreeUser}
-						/>
-					</Suspense>
-				</Lazy>
-			</Portal>
 			{CAPI.matchUrl && (
 				<Portal rootId="match-stats">
 					<Lazy margin={300}>
