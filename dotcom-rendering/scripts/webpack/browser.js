@@ -70,42 +70,7 @@ module.exports = ({ isLegacyJS }) => ({
 
 				use: [
 					{
-						loader: 'babel-loader',
-						options: {
-							presets: [
-								'@babel/preset-react',
-								// @babel/preset-env is used for legacy browsers
-								// @babel/preset-modules is used for modern browsers
-								// this allows us to reduce bundle sizes
-								isLegacyJS
-									? [
-											'@babel/preset-env',
-											{
-												targets: {
-													ie: '11',
-												},
-												modules: false,
-											},
-									  ]
-									: [
-											'@babel/preset-env',
-											{
-												bugfixes: true,
-												targets: {
-													esmodules: true,
-												},
-											},
-									  ],
-							],
-							compact: true,
-						},
-					},
-					{
-						loader: 'ts-loader',
-						options: {
-							configFile: 'tsconfig.build.json',
-							transpileOnly: true,
-						},
+						loader: 'swc-loader',
 					},
 				],
 			},

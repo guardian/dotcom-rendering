@@ -24,13 +24,6 @@ const commonConfigs = ({ platform }) => smp.wrap({
 			? 'source-map'
 			: 'eval-cheap-module-source-map',
 	resolve: {
-		alias: {
-			'@root': path.resolve(__dirname, '.'),
-			'@frontend': path.resolve(__dirname, 'src'),
-			react: 'preact/compat',
-			'react-dom/test-utils': 'preact/test-utils',
-			'react-dom': 'preact/compat',
-		},
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		symlinks: false,
 	},
