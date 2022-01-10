@@ -6,6 +6,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const smp = new SpeedMeasurePlugin();
 
@@ -24,6 +25,14 @@ const commonConfigs = ({ platform }) => smp.wrap({
 			? 'source-map'
 			: 'eval-cheap-module-source-map',
 	resolve: {
+		alias: {
+			// '@root': path.resolve(__dirname, '.'),
+			// '@frontend': path.resolve(__dirname, 'src'),
+			react: 'preact/compat',
+			'react-dom/test-utils': 'preact/test-utils',
+			'react-dom': 'preact/compat',
+		},
+		plugins: [new TsconfigPathsPlugin({})],
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		symlinks: false,
 	},

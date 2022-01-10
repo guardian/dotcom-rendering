@@ -1,16 +1,8 @@
 {
   "jsc": {
 	"baseUrl": ".",
-	"paths": {
-		"@root/*": ["./*"],
-		"@frontend/*": ["./src/*"],
-		"react": ["preact/compat"],
-		"react-dom/test-utils": ["preact/test-utils"],
-		"react-dom": ["preact/compat"]
-	},
     "parser": {
       "syntax": "typescript",
-	  "jsx": true,
       "tsx": true,
       "decorators": false,
       "dynamicImport": true

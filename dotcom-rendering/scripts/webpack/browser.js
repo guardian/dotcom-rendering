@@ -67,12 +67,7 @@ module.exports = ({ isLegacyJS }) => ({
 			{
 				test: /\.[jt]sx?|mjs$/,
 				exclude: module.exports.babelExclude,
-
-				use: [
-					{
-						loader: 'swc-loader',
-					},
-				],
+				loader: 'swc-loader',
 			},
 			{
 				test: /\.css$/,
