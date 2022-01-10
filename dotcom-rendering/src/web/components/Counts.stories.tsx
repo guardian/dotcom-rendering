@@ -404,3 +404,38 @@ export const BigNumbers = () => {
 	);
 };
 BigNumbers.story = { name: 'with long numbers' };
+
+export const CommentsOff = () => {
+	fetchMock
+		.restore()
+		// Share count
+		.getOnce(
+			'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
+			{
+				status: 200,
+				body: {
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					share_count: 60,
+					refreshStatus: true,
+				},
+			},
+			{ overwriteRoutes: false },
+		);
+
+	return (
+		<Container>
+			<Counts format={format}>
+				<div className="meta-number">
+					<ShareCount
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						pageId="money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+						format={format}
+					/>
+				</div>
+				{/* When commenting is off the CommentCount component won't render at all */}
+				<div className="meta-number" />
+			</Counts>
+		</Container>
+	);
+};
+CommentsOff.story = { name: 'with commentting off' };
