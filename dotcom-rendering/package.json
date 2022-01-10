@@ -193,6 +193,7 @@
     "rimraf": "^3.0.2",
     "simple-progress-webpack-plugin": "^1.1.2",
     "snyk": "^1.639.0",
+    "speed-measure-webpack-plugin": "^1.5.0",
     "start-server-and-test": "^1.12.1",
     "storybook-addon-turbo-build": "^1.0.0-beta.0",
     "stylelint-config-standard": "^20.0.0",
