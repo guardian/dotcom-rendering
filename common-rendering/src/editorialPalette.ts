@@ -20,6 +20,8 @@ interface Palette {
 	text: {
 		headline: Colour;
 		headlineDark: Colour;
+		byline: Colour;
+		invertedByline: Colour;
 		standfirst: Colour;
 		standfirstDark: Colour;
 		standfirstLink: Colour;
@@ -91,6 +93,81 @@ const textHeadlineDark = (format: ArticleFormat): Colour => {
 			return neutral[86];
 	}
 };
+
+const textByline = (format: ArticleFormat): Colour => {
+	switch(format.design) {
+		case ArticleDesign.DeadBlog:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[300];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+			}
+		case ArticleDesign.LiveBlog:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[300];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[300];
+				case ArticlePillar.Sport:
+					return sport[300];
+				case ArticlePillar.Culture:
+					return culture[300];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+			}
+		default:
+			switch(format.theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticleSpecial.Labs:
+					return labs[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[400];
+			}
+	}
+}
+
+const textInvertedByline = (format: ArticleFormat): Colour => {
+	switch(format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return specialReport[500];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+}
 
 const textStandfirst = ({ design }: ArticleFormat): Colour => {
 	switch (design) {
@@ -373,6 +450,8 @@ const fillIconDark = (format: ArticleFormat): Colour => {
 const text = {
 	headline: textHeadline,
 	headlineDark: textHeadlineDark,
+	byline: textByline,
+	invertedByline: textInvertedByline,
 	standfirst: textStandfirst,
 	standfirstDark: textStandfirstDark,
 	standfirstLink: textStandfirstLink,
@@ -402,6 +481,8 @@ const palette = (format: ArticleFormat): Palette => ({
 	text: {
 		headline: text.headline(format),
 		headlineDark: text.headlineDark(format),
+		byline: text.byline(format),
+		invertedByline: text.invertedByline(format),
 		standfirst: text.standfirst(format),
 		standfirstDark: text.standfirstDark(format),
 		standfirstLink: text.standfirstLink(format),
