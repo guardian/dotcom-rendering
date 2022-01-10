@@ -5,11 +5,14 @@ const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+
+const smp = new SpeedMeasurePlugin();
 
 const PROD = process.env.NODE_ENV === 'production';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
 
-const commonConfigs = ({ platform }) => ({
+const commonConfigs = ({ platform }) => smp.wrap({
 	name: platform,
 	mode: process.env.NODE_ENV,
 	output: {
