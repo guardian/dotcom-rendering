@@ -1,3 +1,5 @@
+import { isObject } from 'lib';
+
 const allowedOrigins = ['https://www.theguardian.com'];
 export default (): Promise<void> => {
 	const allIframes: HTMLIFrameElement[] = [].slice.call(
@@ -26,24 +28,23 @@ export default (): Promise<void> => {
 		});
 		if (iframes.length !== 0) {
 			try {
-				const message = JSON.parse(event.data);
-				if (!message) return;
-				if (typeof message.type !== 'string') return;
+				const message: unknown = JSON.parse(event.data);
+				if (!isObject(message) || typeof message.type !== 'string')
+					return;
 
 				switch (message.type) {
 					case 'set-height': {
-						if (
-							typeof message.value !== 'number' &&
-							typeof message.value !== 'string'
-						)
-							return;
-
-						const value = parseInt(message.value, 10);
-						if (!Number.isInteger(value)) return;
-
 						iframes.forEach((iframe) => {
-							iframe.height = `${value}`;
+							if (typeof message.value === 'number') {
+								iframe.height = `${message.value}`;
+							} else if (typeof message.value === 'string') {
+								const value = parseInt(message.value, 10);
+								if (Number.isInteger(value)) {
+									iframe.height = `${value}`;
+								}
+							}
 						});
+
 						break;
 					}
 					default:
