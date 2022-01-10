@@ -1,6 +1,7 @@
 import { isObject } from 'lib';
 
 const allowedOrigins = ['https://www.theguardian.com'];
+
 export default (): Promise<void> => {
 	const allIframes: HTMLIFrameElement[] = [].slice.call(
 		document.querySelectorAll('.email-sub__iframe'),
@@ -21,7 +22,9 @@ export default (): Promise<void> => {
 
 		const iframes: HTMLIFrameElement[] = allIframes.filter((i) => {
 			try {
-				return i.contentWindow === event.source;
+				if (i.contentWindow && event.source) {
+					return i.contentWindow === event.source;
+				}
 			} catch (e) {
 				return false;
 			}
