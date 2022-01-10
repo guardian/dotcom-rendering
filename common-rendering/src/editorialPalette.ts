@@ -21,7 +21,9 @@ interface Palette {
 		headline: Colour;
 		headlineDark: Colour;
 		byline: Colour;
+		follow: Colour;
 		invertedByline: Colour;
+		invertedFollow: Colour;
 		standfirst: Colour;
 		standfirstDark: Colour;
 		standfirstLink: Colour;
@@ -150,7 +152,45 @@ const textByline = (format: ArticleFormat): Colour => {
 	}
 }
 
+const textFollow = (format: ArticleFormat): Colour => {
+	switch(format.theme) {
+		case ArticlePillar.News:
+				return news[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Culture:
+				return culture[300];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return labs[300];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[300];
+	}
+}
+
 const textInvertedByline = (format: ArticleFormat): Colour => {
+	switch(format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return specialReport[500];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+}
+
+const textInvertedFollow = (format: ArticleFormat): Colour => {
 	switch(format.theme) {
 		case ArticlePillar.News:
 			return news[500];
@@ -451,7 +491,9 @@ const text = {
 	headline: textHeadline,
 	headlineDark: textHeadlineDark,
 	byline: textByline,
+	follow: textFollow,
 	invertedByline: textInvertedByline,
+	invertedFollow: textInvertedFollow,
 	standfirst: textStandfirst,
 	standfirstDark: textStandfirstDark,
 	standfirstLink: textStandfirstLink,
@@ -482,7 +524,9 @@ const palette = (format: ArticleFormat): Palette => ({
 		headline: text.headline(format),
 		headlineDark: text.headlineDark(format),
 		byline: text.byline(format),
+		follow: text.follow(format),
 		invertedByline: text.invertedByline(format),
+		invertedFollow: text.invertedFollow(format),
 		standfirst: text.standfirst(format),
 		standfirstDark: text.standfirstDark(format),
 		standfirstLink: text.standfirstLink(format),
