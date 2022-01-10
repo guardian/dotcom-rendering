@@ -42,6 +42,7 @@ interface Palette {
 		standfirstLinkDark: Colour;
 	};
   fill: {
+	commentCount: Colour;
     icon: Colour;
     iconDark: Colour;
   }
@@ -449,6 +450,25 @@ const backgroundStandfirstDark = ({
 	}
 };
 
+const fillCommentCount = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
+}
+
 const fillIcon = (format: ArticleFormat): Colour => {
   switch (format.theme) {
     case ArticlePillar.Opinion:
@@ -515,6 +535,7 @@ const border = {
 };
 
 const fill = {
+  commentCount: fillCommentCount,
   icon: fillIcon,
   iconDark: fillIconDark,
 };
@@ -545,6 +566,7 @@ const palette = (format: ArticleFormat): Palette => ({
 		standfirstLinkDark: border.standfirstLinkDark(format),
 	},
   fill: {
+	commentCount: fill.commentCount(format),
     icon: fill.icon(format),
     iconDark: fill.iconDark(format),
   }
