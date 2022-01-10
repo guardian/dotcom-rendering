@@ -31,11 +31,21 @@ export default (): Promise<void> => {
 		});
 		if (iframes.length !== 0) {
 			try {
-				const message: MessageType = JSON.parse(
-					event.data,
-				) as MessageType;
+				// const message: MessageType = JSON.parse(
+				// 	event.data,
+				// ) as MessageType;
+				const message = JSON.parse(event.data);
+				if (!message) return;
+				if (typeof message.type !== 'string') return;
+
 				switch (message.type) {
 					case 'set-height': {
+						if (
+							typeof message.value !== 'number' ||
+							typeof message.value !== 'string'
+						)
+							return;
+
 						const value = parseInt(message.value, 10);
 						if (!Number.isInteger(value)) return;
 
