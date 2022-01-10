@@ -1,8 +1,3 @@
-type MessageType = {
-	type: string;
-	value: string;
-};
-
 const allowedOrigins = ['https://www.theguardian.com'];
 export default (): Promise<void> => {
 	const allIframes: HTMLIFrameElement[] = [].slice.call(
@@ -31,9 +26,6 @@ export default (): Promise<void> => {
 		});
 		if (iframes.length !== 0) {
 			try {
-				// const message: MessageType = JSON.parse(
-				// 	event.data,
-				// ) as MessageType;
 				const message = JSON.parse(event.data);
 				if (!message) return;
 				if (typeof message.type !== 'string') return;
@@ -41,7 +33,7 @@ export default (): Promise<void> => {
 				switch (message.type) {
 					case 'set-height': {
 						if (
-							typeof message.value !== 'number' ||
+							typeof message.value !== 'number' &&
 							typeof message.value !== 'string'
 						)
 							return;
