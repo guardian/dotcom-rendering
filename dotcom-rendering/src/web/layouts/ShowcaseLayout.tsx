@@ -618,15 +618,6 @@ export const ShowcaseLayout = ({
 					</ElementContainer>
 				)}
 
-				{/* Onwards (when signed IN) */}
-				<aside id="onwards-upper-whensignedin" />
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower-whensignedin"
-						element="aside"
-					/>
-				)}
-
 				{!isPaidContent && (
 					<ElementContainer
 						sectionId="most-viewed-footer"

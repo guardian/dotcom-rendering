@@ -1058,13 +1058,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-upper-whensignedin'
-						: 'onwards-upper-whensignedout'
-				}
-			>
+			<Portal rootId="onwards-upper-whensignedout">
 				<Lazy margin={300}>
 					<Suspense fallback={<></>}>
 						<OnwardsUpper
@@ -1086,13 +1080,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					</Suspense>
 				</Lazy>
 			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-lower-whensignedin'
-						: 'onwards-lower-whensignedout'
-				}
-			>
+			<Portal rootId="onwards-lower-whensignedout">
 				<Lazy margin={300}>
 					<Suspense fallback={<></>}>
 						<OnwardsLower
