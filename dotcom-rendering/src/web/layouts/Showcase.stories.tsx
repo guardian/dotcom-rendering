@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 
-import {
-	makeGuardianBrowserCAPI,
-	makeGuardianBrowserNav,
-} from '@root/src/model/window-guardian';
+import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
 
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
@@ -35,6 +32,7 @@ import { extractNAV } from '@root/src/model/extract-nav';
 import { fireAndResetHydrationState } from '@root/src/web/components/HydrateOnce';
 import { breakpoints } from '@guardian/source-foundations';
 import { DecideLayout } from './DecideLayout';
+import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 
 mockRESTCalls();
 
@@ -69,13 +67,14 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-		BootReact({ CAPI, NAV: makeGuardianBrowserNav(NAV) });
+		BootReact({ CAPI });
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);
 		// Manually updates the footer DOM because it's not hydrated
 		injectPrivacySettingsLink();
-	}, [ServerCAPI, NAV]);
+		doStorybookHydration();
+	}, [ServerCAPI]);
 	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} format={format} />;
 };
 

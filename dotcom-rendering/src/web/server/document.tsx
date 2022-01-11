@@ -92,7 +92,6 @@ export const document = ({ data }: Props): string => {
 	// However, this does actually suit our architecture as we can use the CAPI
 	// component reference.
 	const allChunks: LoadableComponents = [
-		{ chunkName: 'EditionDropdown', addWhen: 'always' },
 		{
 			chunkName: 'elements-YoutubeBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
@@ -148,13 +147,12 @@ export const document = ({ data }: Props): string => {
 		.flat();
 	const { mainMediaElements } = CAPI;
 	// Filter the chunks defined above by whether
-	// the 'addWhen' value is 'always' or matches
-	// any elements in the body or main media element
+	// the 'addWhen' value matches any elements
+	// in the body or main media element
 	// arrays for the page request.
 	const chunksForPage = allChunks.filter((chunk) =>
 		[...CAPIElements, ...mainMediaElements].some(
-			(block) =>
-				chunk.addWhen === 'always' || block._type === chunk.addWhen,
+			(block) => block._type === chunk.addWhen,
 		),
 	);
 	// Once we have the chunks for the page, we can add them directly to the loadableExtractor
@@ -263,6 +261,7 @@ export const document = ({ data }: Props): string => {
 			pageHasNonBootInteractiveElements && {
 				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
+			...getScriptArrayFromChunkName('islands'),
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
 		].filter(isDefined), // We use the TypeGuard to keep TS happy
 	);

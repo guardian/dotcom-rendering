@@ -8,7 +8,6 @@ import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks'
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
-import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
@@ -43,7 +42,6 @@ import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
@@ -54,7 +52,7 @@ import {
 	log,
 	getCookie,
 } from '@guardian/libs';
-import type { ArticleFormat, CountryCode } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
@@ -83,13 +81,6 @@ import { GetMatchTabs } from './GetMatchTabs';
 // *******************************
 // ****** Dynamic imports ********
 // *******************************
-
-const EditionDropdown = loadable(
-	() => import('@frontend/web/components/EditionDropdown'),
-	{
-		resolveComponent: (module) => module.EditionDropdown,
-	},
-);
 
 const MostViewedRightWrapper = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedRightWrapper');
@@ -134,39 +125,19 @@ const GetMatchStats = React.lazy(() => {
 
 type Props = {
 	CAPI: CAPIBrowserType;
-	NAV: BrowserNavType;
 	ophanRecord: OphanRecordFunction;
 };
 
 let renderCount = 0;
-export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
+export const App = ({ CAPI, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
-	const [isSignedIn, setIsSignedIn] = useState<boolean>();
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [user, setUser] = useState<UserProfile | null>();
-	const [countryCode, setCountryCode] = useState<string>();
-	// This is an async version of the countryCode state value defined above.
-	// This can be used where you've got logic which depends on countryCode but
-	// don't want to block on it becoming available, as you would with the
-	// non-async version (this is the case in the banner picker where some
-	// banners need countryCode but we don't want to block all banners from
-	// executing their canShow logic until countryCode is available):
-	const [asyncCountryCode, setAsyncCountryCode] =
-		useState<Promise<CountryCode | null>>();
 
 	const [brazeMessages, setBrazeMessages] =
 		useState<Promise<BrazeMessagesInterface>>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-	// [string] for the actual id;
-	// [null] for when the cookie does not exist;
-	// [undefined] for when the cookie has not been read yet
-	const [browserId, setBrowserId] = useState<string | null | undefined>(
-		undefined,
-	);
-	useOnce(() => {
-		setBrowserId(getCookie({ name: 'bwid', shouldMemoize: true }));
-		log('dotcom', 'State: browserId set');
-	}, []);
 
 	const componentEventHandler =
 		(componentType: any, id: any, action: any) => () => {
@@ -197,11 +168,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		log('dotcom', 'AB tests initialised');
 	}, [ABTestAPI]);
 
-	useEffect(() => {
-		setIsSignedIn(!!getCookie({ name: 'GU_U', shouldMemoize: true }));
-		log('dotcom', 'State: isSignedIn set');
-	}, []);
-
 	useOnce(() => {
 		// useOnce means this code will only run once isSignedIn is defined, and only
 		// run one time
@@ -218,22 +184,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			setUser(null);
 		}
 	}, [isSignedIn, CAPI.config.discussionApiUrl]);
-
-	useEffect(() => {
-		const callFetch = () => {
-			const countryCodePromise = getLocaleCode();
-			setAsyncCountryCode(countryCodePromise);
-			countryCodePromise
-				.then((cc) => {
-					setCountryCode(cc || '');
-					log('dotcom', 'State: countryCode set');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${e}`),
-				);
-		};
-		callFetch();
-	}, []);
 
 	useEffect(() => {
 		incrementAlreadyVisited();
@@ -652,17 +602,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			{[
 				CAPI.config.switches.commercialMetrics,
 				window.guardian.config?.ophan !== undefined,
-			].every(Boolean) && (
-				<CommercialMetrics
-					browserId={browserId ?? undefined}
-					pageViewId={pageViewId}
-				/>
-			)}
+			].every(Boolean) && <CommercialMetrics pageViewId={pageViewId} />}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
-					countryCode={countryCode}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
 					remoteHeaderEnabled={CAPI.config.remoteHeader}
@@ -677,12 +621,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					userId={user ? user.userId : undefined}
 					idUrl={CAPI.config.idUrl}
 					mmaUrl={CAPI.config.mmaUrl}
-				/>
-			</HydrateOnce>
-			<HydrateOnce rootId="edition-root">
-				<EditionDropdown
-					edition={CAPI.editionId}
-					dataLinkName="nav2 : topbar : edition-picker: toggle"
 				/>
 			</HydrateOnce>
 			<HydrateOnce rootId="labs-header">
@@ -770,17 +708,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</HydrateOnce>
 			))}
 
-			{NAV.subNavSections && (
-				<HydrateOnce rootId="sub-nav-root">
-					<>
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							format={format}
-						/>
-					</>
-				</HydrateOnce>
-			)}
 			{CAPI.matchUrl && (
 				<Portal rootId="match-nav">
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
@@ -1117,8 +1044,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			)}
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
-					isSignedIn={isSignedIn}
-					countryCode={countryCode}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
 					sectionId={CAPI.config.section}
@@ -1131,7 +1056,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
 					asyncArticleCount={asyncArticleCount}
-					browserId={browserId || undefined}
 				/>
 			</Portal>
 			<Portal
@@ -1182,7 +1106,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			</Portal>
 			<Portal rootId="sign-in-gate">
 				<SignInGateSelector
-					isSignedIn={isSignedIn}
 					format={format}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
@@ -1224,7 +1147,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					<ReaderRevenueLinks
 						urls={CAPI.nav.readerRevenueLinks.footer}
 						edition={CAPI.editionId}
-						countryCode={countryCode}
 						dataLinkNamePrefix="footer : "
 						inHeader={false}
 						remoteHeaderEnabled={false}
@@ -1236,8 +1158,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
-					isSignedIn={isSignedIn}
-					asyncCountryCode={asyncCountryCode}
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}
 					contentType={CAPI.contentType}

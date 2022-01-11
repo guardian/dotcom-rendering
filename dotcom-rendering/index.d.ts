@@ -690,8 +690,8 @@ interface CommercialConfigType {
 }
 
 type ServerSideTests = {
-    [k: `${string}Variant`]: "variant";
-    [k: `${string}Control`]: "control";
+	[k: `${string}Variant`]: 'variant';
+	[k: `${string}Control`]: 'control';
 };
 
 /**
@@ -831,10 +831,6 @@ interface ComponentNameChunkMap {
 	chunkName: string;
 	addWhen: BlockElementType | 'always';
 }
-interface EditionDropdownLoadable extends ComponentNameChunkMap {
-	chunkName: 'EditionDropdown';
-	addWhen: 'always';
-}
 interface YoutubeBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'elements-YoutubeBlockComponent';
 	addWhen: YoutubeBlockElement['_type'];
@@ -891,7 +887,6 @@ interface InstagramBlockLoadable extends ComponentNameChunkMap {
 
 // There are docs on loadable in ./docs/loadable-components.md
 type LoadableComponents = [
-	EditionDropdownLoadable,
 	YoutubeBlockLoadable,
 	RichLinkBlockLoadable,
 	InteractiveBlockLoadable,
@@ -1061,4 +1056,15 @@ declare module '*.svg' {
 interface PerformanceEntry {
 	loadTime: number;
 	renderTime: number;
+}
+
+declare namespace JSX {
+	interface IntrinsicElements {
+		'gu-island': {
+			name: string;
+			deferUntil?: 'idle' | 'visible';
+			props: any;
+			children: React.ReactNode;
+		};
+	}
 }

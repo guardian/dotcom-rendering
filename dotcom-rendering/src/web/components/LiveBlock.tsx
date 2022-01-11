@@ -1,13 +1,10 @@
 import { css } from '@emotion/react';
 
-import { space, headline } from '@guardian/source-foundations';
-
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
-import { FirstPublished } from '@guardian/common-rendering/src/components/FirstPublished';
 import { LastUpdated } from '@guardian/common-rendering/src/components/LastUpdated';
 
 type Props = {
@@ -17,33 +14,6 @@ type Props = {
 	webTitle: string;
 	adTargeting: AdTargeting;
 	host?: string;
-};
-
-const Header = ({ children }: { children: React.ReactNode }) => {
-	return (
-		<header
-			css={css`
-				padding-right: ${space[3]}px;
-				display: flex;
-				flex-direction: column;
-			`}
-		>
-			{children}
-		</header>
-	);
-};
-
-const BlockTitle = ({ title }: { title: string }) => {
-	return (
-		<h2
-			css={css`
-				${headline.xxsmall({ fontWeight: 'bold' })}
-				margin-bottom: ${space[2]}px;
-			`}
-		>
-			{title}
-		</h2>
-	);
 };
 
 export const LiveBlock = ({
@@ -69,16 +39,10 @@ export const LiveBlock = ({
 		<LiveBlockContainer
 			id={block.id}
 			borderColour={palette.border.liveBlock}
+			blockTitle={block.title}
+			blockFirstPublished={block.blockFirstPublished}
+			blockLink={blockLink}
 		>
-			<Header>
-				{block.blockFirstPublished && (
-					<FirstPublished
-						firstPublished={block.blockFirstPublished}
-						blockLink={blockLink}
-					/>
-				)}
-				{block.title && <BlockTitle title={block.title} />}
-			</Header>
 			{block.elements.map((element, index) =>
 				renderArticleElement({
 					format,

@@ -93,6 +93,28 @@ const liveblogStyles: SerializedStyles = css`
 	}
 `;
 
+const deadblogStyles = (format: ArticleFormat): SerializedStyles => {
+	const colour = text.standfirstLink(format);
+
+	return css`
+		${headline.xxxsmall({ fontWeight: 'bold' })};
+
+		a {
+			text-decoration: none;
+		}
+
+		a:link {
+			color: ${colour};
+			border-bottom: 1px solid ${neutral[86]};
+		}
+
+		a:hover {
+			color: ${colour};
+			border-bottom: 1px solid ${colour};
+		}
+	`;
+};
+
 const media = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.standfirst(format)};
 	p,
@@ -121,6 +143,8 @@ const getStyles = (item: Item): SerializedStyles => {
 	switch (item.design) {
 		case ArticleDesign.LiveBlog:
 			return css(styles(format), liveblogStyles);
+		case ArticleDesign.DeadBlog:
+			return css(styles(format), liveblogStyles, deadblogStyles(format));
 		case ArticleDesign.Review:
 		case ArticleDesign.Feature:
 		case ArticleDesign.Editorial:

@@ -23,7 +23,7 @@ export const GetMatchTabs = ({ matchUrl, format }: Props) => {
 
 		return null;
 	}
-	if (data) {
+	if (data && data.minByMinUrl && data.reportUrl) {
 		return (
 			<MatchTabs
 				minByMinUrl={data.minByMinUrl}

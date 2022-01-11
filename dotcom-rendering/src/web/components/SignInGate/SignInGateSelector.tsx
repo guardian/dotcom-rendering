@@ -124,7 +124,6 @@ const ShowSignInGate = ({
 // component with conditional logic which determines if a sign in gate
 // should be shown on the current page
 export const SignInGateSelector = ({
-	isSignedIn,
 	format,
 	contentType,
 	sectionName = '',
@@ -136,6 +135,7 @@ export const SignInGateSelector = ({
 	idUrl = 'https://profile.theguardian.com',
 	pageViewId,
 }: SignInGateSelectorProps) => {
+	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
 	);

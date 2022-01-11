@@ -109,17 +109,38 @@ const timeTextWrapperStyles: SerializedStyles = css`
 	margin-left: ${remSpace[4]};
 `;
 
+const keyEventsTextGrayBackground = (theme: ArticleTheme): string => {
+	switch (theme) {
+		case ArticlePillar.News:
+		case ArticlePillar.Lifestyle:
+		case ArticlePillar.Sport:
+			return getColor(theme, 400);
+		default:
+			return getColor(theme, 300);
+	}
+};
+
 const textStyles = (
 	theme: ArticleTheme,
 	supportsDarkMode: boolean
 ): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
-	color: ${getColor(theme, 300)};
+	color: ${getColor(theme, 400)};
+
 	text-decoration: none;
 
 	&:hover {
-		color: ${getColor(theme, 300)};
+		color: ${getColor(theme, 400)};
 		text-decoration: underline;
+	}
+
+	${from.desktop} {
+		color: ${keyEventsTextGrayBackground(theme)};
+
+		&:hover {
+			color: ${keyEventsTextGrayBackground(theme)};
+			text-decoration: underline;
+		}
 	}
 
 	${darkModeCss(supportsDarkMode)`
@@ -128,6 +149,7 @@ const textStyles = (
 			color: ${getColor(theme, 500)};
 		}
 	`}
+
 `;
 
 const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
@@ -146,7 +168,7 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 			<div css={timeTextWrapperStyles}>
 				<time
 					dateTime={keyEvent.date.toISOString()}
-					data-relativeformat="long"
+					data-relativeformat="med"
 					title={keyEvent.date.toLocaleTimeString()}
 					css={timeStyles(supportsDarkMode)}
 				>
