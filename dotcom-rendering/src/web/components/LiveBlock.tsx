@@ -77,7 +77,7 @@ export const LiveBlock = ({
 						<LastUpdated
 							lastUpdated={new Date(block.blockLastUpdated)}
 							lastUpdatedDisplay={block.blockLastUpdatedDisplay}
-							relativeFormat='edition'
+							localFormat={false}
 						/>
 					)}
 			</footer>
