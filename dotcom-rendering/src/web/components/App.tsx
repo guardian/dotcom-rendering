@@ -81,14 +81,6 @@ import { GetMatchTabs } from './GetMatchTabs';
 // *******************************
 // ****** Dynamic imports ********
 // *******************************
-
-const EditionDropdown = loadable(
-	() => import('@frontend/web/components/EditionDropdown'),
-	{
-		resolveComponent: (module) => module.EditionDropdown,
-	},
-);
-
 const OnwardsUpper = React.lazy(() => {
 	const { start, end } = initPerf('OnwardsUpper');
 	start();
@@ -618,12 +610,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					userId={user ? user.userId : undefined}
 					idUrl={CAPI.config.idUrl}
 					mmaUrl={CAPI.config.mmaUrl}
-				/>
-			</HydrateOnce>
-			<HydrateOnce rootId="edition-root">
-				<EditionDropdown
-					edition={CAPI.editionId}
-					dataLinkName="nav2 : topbar : edition-picker: toggle"
 				/>
 			</HydrateOnce>
 			<HydrateOnce rootId="labs-header">
