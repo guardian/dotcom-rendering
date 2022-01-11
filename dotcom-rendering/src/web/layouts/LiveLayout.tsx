@@ -1076,14 +1076,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</ElementContainer>
 
 				{/* Onwards (when signed OUT) */}
-				<aside
-					data-print-layout="hide"
-					id="onwards-upper-whensignedout"
-				/>
+				<aside data-print-layout="hide" id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer
 						data-print-layout="hide"
-						sectionId="onwards-lower-whensignedout"
+						sectionId="onwards-lower"
 						element="aside"
 					/>
 				)}

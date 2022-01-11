@@ -614,10 +614,10 @@ export const CommentLayout = ({
 				</ElementContainer>
 
 				{/* Onwards (when signed OUT) */}
-				<div id="onwards-upper-whensignedout" />
+				<div id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer
-						sectionId="onwards-lower-whensignedout"
+						sectionId="onwards-lower"
 						element="section"
 					/>
 				)}
