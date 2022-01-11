@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	background,
-	remSpace,
-	text,
-	textSans,
-} from '@guardian/source-foundations';
+import { remSpace, text, textSans } from '@guardian/source-foundations';
 import type { EmailSignup } from 'embed';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
@@ -18,7 +13,7 @@ const styles = css`
 	margin: ${remSpace[4]} 0;
 
 	${darkModeCss`
-        background: ${background.inverse};
+        background: white;
         padding: ${remSpace[3]};
     `}
 `;
