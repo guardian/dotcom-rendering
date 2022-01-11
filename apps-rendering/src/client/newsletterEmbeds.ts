@@ -28,6 +28,7 @@ export default (): Promise<void> => {
 			} catch (e) {
 				return false;
 			}
+			return false;
 		});
 		if (iframes.length !== 0) {
 			try {
