@@ -24,6 +24,8 @@ interface Palette {
 		follow: Colour;
 		invertedByline: Colour;
 		invertedFollow: Colour;
+		invertedLink: Colour;
+		articleLink: Colour;
 		standfirst: Colour;
 		standfirstDark: Colour;
 		standfirstLink: Colour;
@@ -38,6 +40,7 @@ interface Palette {
 	border: {
 		articleLink: Colour;
 		articleLinkDark: Colour;
+		liveBlock: Colour;
 		standfirstLink: Colour;
 		standfirstLinkDark: Colour;
 	};
@@ -207,6 +210,65 @@ const textInvertedFollow = (format: ArticleFormat): Colour => {
 			return specialReport[500];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+	}
+}
+
+const textInvertedLink = (format: ArticleFormat): Colour => {
+	switch(format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return specialReport[500];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+}
+
+const textArticleLink = (format: ArticleFormat): Colour => {
+	switch(format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			switch(format.theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticleSpecial.Labs:
+					return specialReport[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[400];
+			}
+		default:
+			switch(format.theme) {
+				case ArticlePillar.News:
+					return news[300];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[300];
+				case ArticlePillar.Sport:
+					return sport[300];
+				case ArticlePillar.Culture:
+					return culture[300];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticleSpecial.Labs:
+					return specialReport[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+			}
 	}
 }
 
@@ -383,6 +445,25 @@ const borderArticleLink = (format: ArticleFormat): Colour => {
 
 const borderArticleLinkDark = borderArticleLink;
 
+const borderLiveBlock = (format: ArticleFormat): Colour => {
+	switch(format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+}
+
 const borderStandfirstLink = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.LiveBlog) {
 		return neutral[100];
@@ -514,6 +595,8 @@ const text = {
 	follow: textFollow,
 	invertedByline: textInvertedByline,
 	invertedFollow: textInvertedFollow,
+	invertedLink: textInvertedLink,
+	articleLink: textArticleLink,
 	standfirst: textStandfirst,
 	standfirstDark: textStandfirstDark,
 	standfirstLink: textStandfirstLink,
@@ -530,6 +613,7 @@ const background = {
 const border = {
 	articleLink: borderArticleLink,
 	articleLinkDark: borderArticleLinkDark,
+	liveBlock: borderLiveBlock,
 	standfirstLink: borderStandfirstLink,
 	standfirstLinkDark: borderStandfirstLinkDark,
 };
@@ -548,6 +632,8 @@ const palette = (format: ArticleFormat): Palette => ({
 		follow: text.follow(format),
 		invertedByline: text.invertedByline(format),
 		invertedFollow: text.invertedFollow(format),
+		invertedLink: text.invertedLink(format),
+		articleLink: text.articleLink(format),
 		standfirst: text.standfirst(format),
 		standfirstDark: text.standfirstDark(format),
 		standfirstLink: text.standfirstLink(format),
@@ -562,6 +648,7 @@ const palette = (format: ArticleFormat): Palette => ({
 	border: {
 		articleLink: border.articleLink(format),
 		articleLinkDark: border.articleLinkDark(format),
+		liveBlock: border.liveBlock(format),
 		standfirstLink: border.standfirstLink(format),
 		standfirstLinkDark: border.standfirstLinkDark(format),
 	},
