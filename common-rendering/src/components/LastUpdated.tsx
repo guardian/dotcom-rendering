@@ -4,9 +4,11 @@ import { neutral, textSans } from "@guardian/source-foundations";
 const LastUpdated = ({
 	lastUpdatedDisplay,
 	lastUpdated,
+	relativeFormat,
 }: {
 	lastUpdatedDisplay: string;
 	lastUpdated: Date;
+	relativeFormat: "local" | "edition";
 }) => {
 	return (
 		<div
@@ -18,7 +20,7 @@ const LastUpdated = ({
 				`}
 		>
 			<time
-				className="js-last-updated-time"
+				data-relativeformat={relativeFormat}
 				dateTime={lastUpdated.toISOString()}
 			>
 				{`Updated: ${lastUpdatedDisplay}`}

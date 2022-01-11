@@ -57,6 +57,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 										lastUpdatedDisplay={formatLocalTimeDateTz(
 											block.lastModified.value,
 										)}
+										relativeFormat='local'
 									/>
 								)}
 						</footer>

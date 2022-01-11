@@ -23,6 +23,10 @@ export const updateTimeElements = (): void => {
 							verbose: true,
 						});
 						break;
+					case 'edition':
+						// We don't need to update on client side. Date time is
+						// provided by Frontend in correct format by edition.
+						break;
 				}
 				const oldTime = element.innerText;
 				if (newTime && newTime !== oldTime) element.innerHTML = newTime;

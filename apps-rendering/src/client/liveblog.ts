@@ -4,17 +4,24 @@ import { dateParser, parse } from 'parser';
 import { logger } from '../logger';
 
 function lastUpdatedDates(): void {
-	Array.from(document.getElementsByClassName('js-last-updated-time')).forEach(
-		(time) => {
-			const isoDateTimeString = time.getAttribute('dateTime');
-			const date = parse(dateParser)(isoDateTimeString);
+	Array.from(document.querySelectorAll('time[data-relativeformat]'))
+		.forEach((element) => {
+			if (element instanceof HTMLElement) {
+				const { relativeformat : relativeFormat } = element.dataset;
+				const isoDateTimeString = element.getAttribute('dateTime');
+				const date = parse(dateParser)(isoDateTimeString);
 
-			if (date.kind === ResultKind.Ok) {
-				time.textContent = `Updated: ${formatLocalTimeDateTz(
-					date.value,
-				)}`;
-			} else {
-				logger.warn(`Unable to parse and format date: ${date.err}`);
+				switch (relativeFormat) {
+					case 'local':
+						if (date.kind === ResultKind.Ok) {
+							element.textContent = `Updated: ${formatLocalTimeDateTz(
+								date.value,
+							)}`;
+						} else {
+							logger.warn(`Unable to parse and format date: ${date.err}`);
+						}
+						break;
+				}
 			}
 		},
 	);
