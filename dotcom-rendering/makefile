@@ -1,4 +1,4 @@
-.PHONY: install dev build clean-dist start stop monitor clear
+.PHONY: install dev dev-legacy build clean-dist start stop monitor clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -62,6 +62,10 @@ run: stop build start
 dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
 	@NODE_ENV=development nodemon scripts/frontend/dev-server -- --max-old-space-size=7168
+
+dev-legacy: clear clean-dist install
+	$(call log, "starting frontend DEV server (Legacy support ENABLED)")
+	@NODE_ENV=development INCLUDE_LEGACY=true nodemon scripts/frontend/dev-server -- --max-old-space-size=7168
 
 # tests #####################################
 

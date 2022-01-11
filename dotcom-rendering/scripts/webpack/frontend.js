@@ -8,7 +8,7 @@ const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
-const INCLUDE_LEGACY = DEV && process.env.INCLUDE_LEGACY === true;
+const INCLUDE_LEGACY = DEV && process.env.INCLUDE_LEGACY === 'true';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
 
 const commonConfigs = ({ platform }) => ({
