@@ -126,6 +126,7 @@ const articleAdStyles = css`
 		&:not(.ad-slot--outstream) {
 			width: 300px;
 			background-color: ${neutral[93]};
+			text-align: center;
 
 			${from.tablet} {
 				width: 100%;
