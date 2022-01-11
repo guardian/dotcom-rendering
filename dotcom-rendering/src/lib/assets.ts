@@ -38,15 +38,24 @@ export const loadableManifestJson = loadableManifest;
 export const getScriptArrayFromFilename = (
 	filename: string,
 ): { src: string; legacy: boolean }[] => {
+	// Get legacy file name if one's available
 	// 'ophan.87b473fc83e9ca6250fc.js' -> 'ophan'
 	const chunkName = filename.split('.')[0];
 	const chunks: string[] | undefined =
-		loadableManifest.assetsByChunkName[chunkName];
+		loadableManifestLegacy.assetsByChunkName?.[chunkName];
 	const legacyFilename = chunks && chunks.length > 0 && chunks[0];
-	return [
+
+	const scripts = [
 		{ src: `${ASSET_ORIGIN}assets/${filename}`, legacy: false },
-		// { src: `${ASSET_ORIGIN}assets/${legacyFilename}`, legacy: true },
 	];
+
+	if (legacyFilename)
+		scripts.push({
+			src: `${ASSET_ORIGIN}assets/${legacyFilename}`,
+			legacy: true,
+		});
+
+	return scripts;
 };
 
 export const getScriptArrayFromChunkName = (
