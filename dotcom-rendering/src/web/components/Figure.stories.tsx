@@ -7,7 +7,7 @@ import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ElementContainer } from '@frontend/web/components/ElementContainer';
 import { LeftColumn } from '@frontend/web/components/LeftColumn';
-import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
+import { TextBlockComponent } from '@frontend/web/components/TextBlockComponent';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
 import { breakpoints } from '@guardian/source-foundations';

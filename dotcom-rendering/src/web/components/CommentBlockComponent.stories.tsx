@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { CommentBlockComponent } from '@frontend/web/components/elements/CommentBlockComponent';
+import { CommentBlockComponent } from '@frontend/web/components/CommentBlockComponent';
 
 export default {
 	component: CommentBlockComponent,
