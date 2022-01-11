@@ -13,12 +13,12 @@ import {
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
-import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
-import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
+import { BannerPayload, WeeklyArticleHistory } from '@sdc/dotcom/dist/dotcom/src/types';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { getCookie } from '@guardian/libs';
+import { getBanner, getPuzzlesBanner, ModuleData, ModuleDataResponse } from "@sdc/dotcom";
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -60,7 +60,6 @@ export type CanShowFunctionType<T> = (
 	props: CanShowProps,
 ) => Promise<CanShowResult<T>>;
 
-// TODO specify return type (need to update client to provide this first)
 const buildPayload = async ({
 	isSignedIn,
 	shouldHideReaderRevenue,
@@ -73,7 +72,7 @@ const buildPayload = async ({
 	asyncArticleCount,
 	sectionId,
 	tags,
-}: BuildPayloadProps) => {
+}: BuildPayloadProps): Promise<BannerPayload> => {
 	return {
 		tracking: {
 			ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -93,32 +92,12 @@ const buildPayload = async ({
 			),
 			countryCode,
 			weeklyArticleHistory: await asyncArticleCount,
-			optedOutOfArticleCount,
+			hasOptedOutOfArticleCount: optedOutOfArticleCount,
 			modulesVersion: MODULES_VERSION,
 			sectionId,
 			tagIds: tags.map((tag) => tag.id),
 		},
 	};
-};
-
-// TODO replace this with an imported version from the client lib
-const getBanner = (meta: { [key: string]: any }, url: string): Promise<any> => {
-	const json = JSON.stringify(meta);
-	return fetch(url, {
-		method: 'post',
-		headers: { 'Content-Type': 'application/json' },
-		body: json,
-	})
-		.then((response: Response) => {
-			if (!response.ok) {
-				throw Error(
-					response.statusText ||
-						`SlotBanner | An api call returned HTTP status ${response.status}`,
-				);
-			}
-			return response;
-		})
-		.then((response) => response.json());
 };
 
 export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
@@ -180,21 +159,16 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		optedOutOfArticleCount,
 		asyncArticleCount,
 	});
-	const forcedVariant = getForcedVariant('banner');
-	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
 
-	const json: { data?: any } = await getBanner(
-		bannerPayload,
-		`${contributionsServiceUrl}/banner${queryString}`,
-	);
-	if (!json.data) {
+	const response: ModuleDataResponse = await getBanner(contributionsServiceUrl, bannerPayload)
+	if (!response.data) {
 		if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
 			setLocalNoBannerCachePeriod();
 		}
 		return { show: false };
 	}
 
-	const { module, meta } = json.data;
+	const { module, meta } = response.data;
 
 	const fetchEmail = isSignedIn
 		? lazyFetchEmailWithTimeout(idApiUrl)
@@ -250,16 +224,15 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 			optedOutOfArticleCount,
 			asyncArticleCount,
 		});
-		return getBanner(
+		return getPuzzlesBanner(
+			contributionsServiceUrl,
 			bannerPayload,
-			`${contributionsServiceUrl}/puzzles`,
-		).then((json: { data?: any }) => {
-			if (!json.data) {
+		).then((response: ModuleDataResponse) => {
+			if (!response.data) {
 				return { show: false };
 			}
 
-			const { module, meta } = json.data;
-
+			const { module, meta } = response.data;
 			return { show: true, meta: { module, meta } };
 		});
 	}
@@ -269,7 +242,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 
 export type BannerProps = {
 	meta: any;
-	module: { url: string; name: string; props: any[] };
+	module: ModuleData;
 	fetchEmail?: () => Promise<string | null>;
 };
 

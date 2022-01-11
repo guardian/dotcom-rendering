@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
-import { getEpicMeta, getViewLog } from '@guardian/automat-contributions';
 import {
 	isRecurringContributor,
 	getLastOneOffContributionTimestamp,
@@ -12,29 +11,20 @@ import {
 	lazyFetchEmailWithTimeout,
 	hasCmpConsentForBrowserId,
 } from '@root/src/web/lib/contributions';
-import { getForcedVariant } from '@root/src/web/lib/readerRevenueDevUtils';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { initPerf } from '@root/src/web/browser/initPerf';
 import {
 	OphanComponentEvent,
 	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
-import {
-	Metadata,
-	WeeklyArticleHistory,
-} from '@guardian/automat-contributions/dist/lib/types';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
+import { getEpic, getEpicViewLog, ModuleDataResponse, ModuleData} from '@sdc/dotcom';
+import { EpicPayload, WeeklyArticleHistory } from '@sdc/dotcom/dist/dotcom/src/types';
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie, storage } from '@guardian/libs';
 
-type PreEpicConfig = {
-	module: {
-		url: string;
-		props: { [key: string]: any };
-	};
-};
-
-export type EpicConfig = PreEpicConfig & {
+export type EpicConfig = {
+	module: ModuleData;
 	fetchEmail?: () => Promise<string | null>;
 	hasConsentForArticleCount: boolean;
 	stage: string;
@@ -47,16 +37,6 @@ type EpicProps = {
 	hasConsentForArticleCount: boolean;
 	stage: string;
 	// Also anything specified by support-dotcom-components
-};
-
-const checkForErrors = (response: Response) => {
-	if (!response.ok) {
-		throw Error(
-			response.statusText ||
-				`ReaderRevenueEpic | An api call returned HTTP status ${response.status}`,
-		);
-	}
-	return response;
 };
 
 const wrapperMargins = css`
@@ -79,44 +59,41 @@ export type CanShowData = {
 	browserId?: string;
 };
 
-const buildPayload = async (data: CanShowData): Promise<Metadata> => {
-	return {
-		tracking: {
-			ophanPageId: window.guardian.config.ophan.pageViewId,
-			ophanComponentId: '', // TODO: Remove ophanComponentId from @guardian/automat-client/dist/types.d.ts Tracking type
-			platformId: 'GUARDIAN_WEB',
-			clientName: 'dcr',
-			referrerUrl: window.location.origin + window.location.pathname,
+const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
+	tracking: {
+		ophanPageId: window.guardian.config.ophan.pageViewId,
+		platformId: 'GUARDIAN_WEB',
+		clientName: 'dcr',
+		referrerUrl: window.location.origin + window.location.pathname,
+	},
+	targeting: {
+		contentType: data.contentType,
+		sectionId: data.sectionId,
+		shouldHideReaderRevenue: data.shouldHideReaderRevenue,
+		isMinuteArticle: data.isMinuteArticle,
+		isPaidContent: data.isPaidContent,
+		tags: data.tags,
+		showSupportMessaging: !shouldHideSupportMessaging(
+			data.isSignedIn || false,
+		),
+		isRecurringContributor: isRecurringContributor(
+			data.isSignedIn || false,
+		),
+		lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
+		epicViewLog: getEpicViewLog(storage.local),
+		weeklyArticleHistory: await data.asyncArticleCount,
+		hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
+		mvtId: Number(
+			getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+		),
+		countryCode: data.countryCode,
+		modulesVersion: MODULES_VERSION,
+		url: window.location.origin + window.location.pathname,
+		browserId: (await hasCmpConsentForBrowserId())
+			? data.browserId
+			: undefined,
 		},
-		targeting: {
-			contentType: data.contentType,
-			sectionId: data.sectionId,
-			shouldHideReaderRevenue: data.shouldHideReaderRevenue,
-			isMinuteArticle: data.isMinuteArticle,
-			isPaidContent: data.isPaidContent,
-			tags: data.tags,
-			showSupportMessaging: !shouldHideSupportMessaging(
-				data.isSignedIn || false,
-			),
-			isRecurringContributor: isRecurringContributor(
-				data.isSignedIn || false,
-			),
-			lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
-			epicViewLog: getViewLog(storage.local),
-			weeklyArticleHistory: await data.asyncArticleCount,
-			hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
-			mvtId: Number(
-				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
-			),
-			countryCode: data.countryCode,
-			modulesVersion: MODULES_VERSION,
-			url: window.location.origin + window.location.pathname,
-			browserId: (await hasCmpConsentForBrowserId())
-				? data.browserId
-				: undefined,
-		},
-	} as Metadata; // Metadata type incorrectly does not include required hasOptedOutOfArticleCount property
-};
+});
 
 export const canShowReaderRevenueEpic = async (
 	data: CanShowData,
@@ -137,21 +114,12 @@ export const canShowReaderRevenueEpic = async (
 	const dataPerf = initPerf('contributions-epic-data');
 	dataPerf.start();
 
-	const forcedVariant = getForcedVariant('epic');
-	const queryString = forcedVariant ? `?force=${forcedVariant}` : '';
-
 	const contributionsPayload = await buildPayload(data);
 
-	const response = await getEpicMeta(
-		contributionsPayload,
-		`${contributionsServiceUrl}/epic${queryString}`,
-	);
+	const response: ModuleDataResponse = await getEpic(contributionsServiceUrl, contributionsPayload);
+	const module: ModuleData | undefined = response.data?.module;
 
-	checkForErrors(response);
-
-	const json: { data?: PreEpicConfig } = await response.json();
-
-	if (!json.data) {
+	if (!module) {
 		return { show: false };
 	}
 
@@ -161,7 +129,6 @@ export const canShowReaderRevenueEpic = async (
 
 	const hasConsentForArticleCount = await hasCmpConsentForArticleCount();
 
-	const { module } = json.data;
 	return {
 		show: true,
 		meta: {

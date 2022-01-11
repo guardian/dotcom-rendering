@@ -23,7 +23,7 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
-import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
+import { WeeklyArticleHistory } from "@sdc/dotcom/dist/dotcom/src/types";
 import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {

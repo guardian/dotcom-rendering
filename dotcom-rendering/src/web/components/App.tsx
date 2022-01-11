@@ -14,10 +14,6 @@ import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import {
-	getWeeklyArticleHistory,
-	incrementWeeklyArticleCount,
-} from '@guardian/automat-contributions';
-import {
 	QandaAtom,
 	GuideAtom,
 	ProfileAtom,
@@ -67,9 +63,8 @@ import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/Uns
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
-
-import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
-
+import { getWeeklyArticleHistory, incrementWeeklyArticleCount } from "@sdc/dotcom";
+import {WeeklyArticleHistory} from "@sdc/dotcom/dist/dotcom/src/types";
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
