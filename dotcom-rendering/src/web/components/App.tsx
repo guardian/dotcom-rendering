@@ -8,7 +8,6 @@ import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks'
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { Links } from '@frontend/web/components/Links';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
-import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
@@ -83,13 +82,6 @@ import { GetMatchTabs } from './GetMatchTabs';
 // ****** Dynamic imports ********
 // *******************************
 
-const EditionDropdown = loadable(
-	() => import('@frontend/web/components/EditionDropdown'),
-	{
-		resolveComponent: (module) => module.EditionDropdown,
-	},
-);
-
 const MostViewedRightWrapper = React.lazy(() => {
 	const { start, end } = initPerf('MostViewedRightWrapper');
 	start();
@@ -133,12 +125,11 @@ const GetMatchStats = React.lazy(() => {
 
 type Props = {
 	CAPI: CAPIBrowserType;
-	NAV: BrowserNavType;
 	ophanRecord: OphanRecordFunction;
 };
 
 let renderCount = 0;
-export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
+export const App = ({ CAPI, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [user, setUser] = useState<UserProfile | null>();
@@ -632,12 +623,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					mmaUrl={CAPI.config.mmaUrl}
 				/>
 			</HydrateOnce>
-			<HydrateOnce rootId="edition-root">
-				<EditionDropdown
-					edition={CAPI.editionId}
-					dataLinkName="nav2 : topbar : edition-picker: toggle"
-				/>
-			</HydrateOnce>
 			<HydrateOnce rootId="labs-header">
 				<LabsHeader />
 			</HydrateOnce>
@@ -723,17 +708,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</HydrateOnce>
 			))}
 
-			{NAV.subNavSections && (
-				<HydrateOnce rootId="sub-nav-root">
-					<>
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							format={format}
-						/>
-					</>
-				</HydrateOnce>
-			)}
 			{CAPI.matchUrl && (
 				<Portal rootId="match-nav">
 					<GetMatchNav matchUrl={CAPI.matchUrl} />

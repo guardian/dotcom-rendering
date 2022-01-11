@@ -226,6 +226,7 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 					onClick={() => setIsExpanded(!isExpanded)}
 					css={showMoreStyle}
 					data-link-name="nav2 : subnav-toggle"
+					data-cy="subnav-toggle"
 				>
 					{isExpanded ? 'Less' : 'More'}
 				</button>

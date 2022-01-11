@@ -17,7 +17,6 @@ describe('CommentCount', () => {
 				isCommentable={false}
 				commentCount={123}
 				palette={decidePalette(standardNewsFormat)}
-				setIsExpanded={() => {}}
 			/>,
 		);
 
@@ -30,7 +29,6 @@ describe('CommentCount', () => {
 				isCommentable={true}
 				commentCount={123}
 				palette={decidePalette(standardNewsFormat)}
-				setIsExpanded={() => {}}
 			/>,
 		);
 
@@ -44,7 +42,6 @@ describe('CommentCount', () => {
 				isCommentable={true}
 				commentCount={92878}
 				palette={decidePalette(standardNewsFormat)}
-				setIsExpanded={() => {}}
 			/>,
 		);
 
@@ -58,7 +55,6 @@ describe('CommentCount', () => {
 				isCommentable={true}
 				commentCount={0}
 				palette={decidePalette(standardNewsFormat)}
-				setIsExpanded={() => {}}
 			/>,
 		);
 
@@ -71,7 +67,6 @@ describe('CommentCount', () => {
 			<CommentCount
 				isCommentable={true}
 				palette={decidePalette(standardNewsFormat)}
-				setIsExpanded={() => {}}
 			/>,
 		);
 
