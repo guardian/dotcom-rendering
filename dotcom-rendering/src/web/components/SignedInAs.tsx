@@ -125,8 +125,27 @@ export const SignedInAs = ({
 		// Discussion disabled sitewide and user logged out
 		return (
 			<div css={containerStyles}>
+				<CommentCount count={commentCount} />
 				<span css={headlineStyles}>
-					Commenting has been disabled at this time
+					Commenting has been disabled at this time but you can still{' '}
+					<a
+						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
+							'signin_to_comment',
+						)}`}
+						css={linkStyles(palette)}
+					>
+						sign in
+					</a>{' '}
+					or{' '}
+					<a
+						href={`https://profile.theguardian.com/register?INTCMP=DOTCOM_COMMENTS_REG&${createAuthenticationEventParams(
+							'register_to_comment',
+						)}`}
+						css={linkStyles(palette)}
+					>
+						create your Guardian account
+					</a>{' '}
+					to join the discussion when it&apos;s back
 				</span>
 			</div>
 		);
