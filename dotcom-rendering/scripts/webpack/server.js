@@ -37,33 +37,7 @@ module.exports = () => ({
 					and: [/node_modules/],
 					not: [/@guardian/, /dynamic-import-polyfill/],
 				},
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							presets: [
-								// TODO: remove @babel/preset-react once we stop using JSX in server folder
-								'@babel/preset-react',
-								[
-									'@babel/preset-env',
-									{
-										targets: {
-											node: 'current',
-										},
-									},
-								],
-							],
-							compact: true,
-						},
-					},
-					{
-						loader: 'ts-loader',
-						options: {
-							configFile: 'tsconfig.build.json',
-							transpileOnly: true,
-						},
-					},
-				],
+				use: 'swc-loader',
 			},
 			// TODO: find a way to remove
 			{
