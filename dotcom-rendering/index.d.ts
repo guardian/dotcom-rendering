@@ -831,10 +831,6 @@ interface ComponentNameChunkMap {
 	chunkName: string;
 	addWhen: BlockElementType | 'always';
 }
-interface EditionDropdownLoadable extends ComponentNameChunkMap {
-	chunkName: 'EditionDropdown';
-	addWhen: 'always';
-}
 interface YoutubeBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'elements-YoutubeBlockComponent';
 	addWhen: YoutubeBlockElement['_type'];
@@ -891,7 +887,6 @@ interface InstagramBlockLoadable extends ComponentNameChunkMap {
 
 // There are docs on loadable in ./docs/loadable-components.md
 type LoadableComponents = [
-	EditionDropdownLoadable,
 	YoutubeBlockLoadable,
 	RichLinkBlockLoadable,
 	InteractiveBlockLoadable,
