@@ -50,6 +50,7 @@ interface Palette {
 	commentCount: Colour;
     icon: Colour;
     iconDark: Colour;
+	blockquoteIcon: Colour;
   }
 }
 
@@ -626,6 +627,47 @@ const fillIconDark = (format: ArticleFormat): Colour => {
   }
 };
 
+const fillBlockquoteIcon = (format: ArticleFormat): Colour => {
+	switch(format.design) {
+		case ArticleDesign.DeadBlog:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[350];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+			}
+		default:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticleSpecial.Labs:
+					return labs[400];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[400];
+			}
+	}
+
+
+}
+
 // ----- API ----- //
 
 const text = {
@@ -664,6 +706,7 @@ const fill = {
   commentCount: fillCommentCount,
   icon: fillIcon,
   iconDark: fillIconDark,
+  blockquoteIcon: fillBlockquoteIcon,
 };
 
 const palette = (format: ArticleFormat): Palette => ({
@@ -700,6 +743,7 @@ const palette = (format: ArticleFormat): Palette => ({
 	commentCount: fill.commentCount(format),
     icon: fill.icon(format),
     iconDark: fill.iconDark(format),
+	blockquoteIcon: fill.blockquoteIcon(format),
   }
 });
 
