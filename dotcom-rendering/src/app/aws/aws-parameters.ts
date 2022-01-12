@@ -7,7 +7,7 @@ import {
 } from '@aws-sdk/client-ssm';
 
 process.env.AWS_PROFILE = 'frontend';
-
+const ssm = new SSMClient({ region: 'eu-west-1' });
 const STACK = 'frontend';
 
 interface ConfigMap {
@@ -27,8 +27,6 @@ const getParams = function getAWSParameterStoreParameters(
 	stage: string,
 	token: string | undefined = undefined,
 ): Promise<GetParametersByPathCommandOutput> {
-	const ssm = new SSMClient({ region: 'eu-west-1' });
-
 	const params: GetParametersByPathRequest = {
 		Path: `/${STACK}/${stage}/`,
 		Recursive: true,
