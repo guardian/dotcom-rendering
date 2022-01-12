@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { GetParametersByPathCommand, SSMClient, GetParametersByPathCommandOutput } from '@aws-sdk/client-ssm';
+import {
+	GetParametersByPathCommand,
+	SSMClient,
+	GetParametersByPathCommandOutput,
+} from '@aws-sdk/client-ssm';
 
 process.env.AWS_PROFILE = 'frontend';
 
