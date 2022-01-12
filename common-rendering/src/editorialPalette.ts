@@ -18,14 +18,16 @@ type Colour = string;
 
 interface Palette {
 	text: {
-		headline: Colour;
-		headlineDark: Colour;
+		articleLink: Colour;
 		byline: Colour;
 		follow: Colour;
+		headline: Colour;
+		headlineDark: Colour;
 		invertedByline: Colour;
 		invertedFollow: Colour;
 		invertedLink: Colour;
-		articleLink: Colour;
+		keyEventsWhiteBackground: Colour;
+		keyEventsGrayBackground: Colour;
 		standfirst: Colour;
 		standfirstDark: Colour;
 		standfirstLink: Colour;
@@ -269,6 +271,44 @@ const textArticleLink = (format: ArticleFormat): Colour => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
 			}
+	}
+}
+
+const textKeyEventsWhiteBackground = ({theme}: ArticleFormat): Colour => {
+	switch (theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[350];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+}
+
+const textKeyEventsGrayBackground = ({theme} : ArticleFormat): Colour => {
+	switch (theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
 	}
 }
 
@@ -589,14 +629,16 @@ const fillIconDark = (format: ArticleFormat): Colour => {
 // ----- API ----- //
 
 const text = {
-	headline: textHeadline,
-	headlineDark: textHeadlineDark,
+	articleLink: textArticleLink,
 	byline: textByline,
 	follow: textFollow,
+	headline: textHeadline,
+	headlineDark: textHeadlineDark,
 	invertedByline: textInvertedByline,
 	invertedFollow: textInvertedFollow,
 	invertedLink: textInvertedLink,
-	articleLink: textArticleLink,
+	keyEventsWhiteBackground: textKeyEventsWhiteBackground,
+	keyEventsGrayBackground: textKeyEventsGrayBackground,
 	standfirst: textStandfirst,
 	standfirstDark: textStandfirstDark,
 	standfirstLink: textStandfirstLink,
@@ -626,14 +668,16 @@ const fill = {
 
 const palette = (format: ArticleFormat): Palette => ({
 	text: {
-		headline: text.headline(format),
-		headlineDark: text.headlineDark(format),
+		articleLink: text.articleLink(format),
 		byline: text.byline(format),
 		follow: text.follow(format),
+		headline: text.headline(format),
+		headlineDark: text.headlineDark(format),
 		invertedByline: text.invertedByline(format),
 		invertedFollow: text.invertedFollow(format),
 		invertedLink: text.invertedLink(format),
-		articleLink: text.articleLink(format),
+		keyEventsWhiteBackground: text.keyEventsWhiteBackground(format),
+		keyEventsGrayBackground: text.keyEventsGrayBackground(format),
 		standfirst: text.standfirst(format),
 		standfirstDark: text.standfirstDark(format),
 		standfirstLink: text.standfirstLink(format),

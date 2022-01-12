@@ -2,25 +2,19 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { textSans, headline, specialReport, labs } from "@guardian/source-foundations";
+import { textSans, headline } from "@guardian/source-foundations";
 import { remSpace } from "@guardian/source-foundations";
 import {
-	culture,
-	lifestyle,
 	neutral,
-	news,
-	sport,
-	opinion,
 } from "@guardian/source-foundations";
 import { Link } from "@guardian/source-react-components";
-import { ArticlePillar, ArticleSpecial, ArticleTheme, timeAgo } from "@guardian/libs";
+import { ArticleFormat, timeAgo } from "@guardian/libs";
 import { from } from "@guardian/source-foundations";
 import { darkModeCss } from "../lib";
 import Accordion from "./accordion";
+import { text } from "../editorialPalette";
 
 // ----- Component ----- //
-type paletteId = 300 | 400 | 500;
-
 interface KeyEvent {
 	date: Date;
 	text: string;
@@ -29,30 +23,15 @@ interface KeyEvent {
 
 interface KeyEventsProps {
 	keyEvents: KeyEvent[];
-	theme: ArticleTheme;
+	format: ArticleFormat;
 	supportsDarkMode: boolean;
 }
 
 interface ListItemProps {
 	keyEvent: KeyEvent;
-	theme: ArticleTheme;
+	format: ArticleFormat;
 	supportsDarkMode: boolean;
 }
-
-const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
-	switch (theme) {
-		case ArticlePillar.Sport:
-			return sport[paletteId];
-		case ArticlePillar.Culture:
-			return culture[paletteId];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[paletteId];
-		case ArticlePillar.Opinion:
-			return opinion[paletteId];
-		default:
-			return news[paletteId];
-	}
-};
 
 const keyEventWrapperStyles = (
 	supportsDarkMode: boolean
@@ -109,71 +88,34 @@ const timeTextWrapperStyles: SerializedStyles = css`
 	margin-left: ${remSpace[4]};
 `;
 
-const keyEventsTextGrayBackground = (theme: ArticleTheme): string => {
-	switch (theme) {
-		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
-		case ArticlePillar.Culture:
-			return culture[300];
-		case ArticlePillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
-	}
-};
-
-const keyEventsTextWhiteBackground = (theme: ArticleTheme): string => {
-	switch (theme) {
-		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
-		case ArticlePillar.Culture:
-			return culture[350];
-		case ArticlePillar.Opinion:
-			return opinion[300];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-	}
-}
 
 const textStyles = (
-	theme: ArticleTheme,
+	format: ArticleFormat,
 	supportsDarkMode: boolean
 ): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
-	color: ${keyEventsTextWhiteBackground(theme)};
+	color: ${text.keyEventsWhiteBackground(format)};
 
 	text-decoration: none;
 
 	&:hover {
-		color: ${getColor(theme, 400)};
+		color: ${text.keyEventsWhiteBackground(format)};
 		text-decoration: underline;
 	}
 
 	${from.desktop} {
-		color: ${keyEventsTextGrayBackground(theme)};
+		color: ${text.keyEventsGrayBackground(format)};
 
 		&:hover {
-			color: ${keyEventsTextGrayBackground(theme)};
+			color: ${text.keyEventsGrayBackground(format)};
 			text-decoration: underline;
 		}
 	}
 
 	${darkModeCss(supportsDarkMode)`
-		color: ${getColor(theme, 500)};
+		color: ${text.invertedLink(format)};
 		&:hover {
-			color: ${getColor(theme, 500)};
+			color: ${text.invertedLink(format)};
 		}
 	`}
 
@@ -189,7 +131,7 @@ const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	`}
 `;
 
-const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
+const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
 	return (
 		<li css={listItemStyles(supportsDarkMode)}>
 			<div css={timeTextWrapperStyles}>
@@ -203,7 +145,7 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 				</time>
 				<Link
 					priority="secondary"
-					css={textStyles(theme, supportsDarkMode)}
+					css={textStyles(format, supportsDarkMode)}
 					href={keyEvent.url}
 				>
 					{keyEvent.text}
@@ -213,7 +155,7 @@ const ListItem = ({ keyEvent, theme, supportsDarkMode }: ListItemProps) => {
 	);
 };
 
-const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
+const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
 	return (
 		<nav
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
@@ -232,7 +174,7 @@ const KeyEvents = ({ keyEvents, theme, supportsDarkMode }: KeyEventsProps) => {
 						<ListItem
 							key={`${event.url}${index}`}
 							keyEvent={event}
-							theme={theme}
+							format={format}
 							supportsDarkMode={supportsDarkMode}
 						/>
 					))}

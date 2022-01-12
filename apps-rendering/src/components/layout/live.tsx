@@ -115,7 +115,7 @@ const Live: FC<Props> = ({ item }) => (
 				<div css={keyEventsWrapperStyles}>
 					<KeyEvents
 						keyEvents={keyEvents(item.blocks)}
-						theme={item.theme}
+						format={item}
 						supportsDarkMode
 					/>
 				</div>
