@@ -135,7 +135,9 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 		const asg = appsRenderingApp.autoScalingGroup;
 		Tags.of(asg).add('gu:riffraff:new-asg', 'true');
 
-		const oldBalancer = cfnTemplate.getResource('LoadBalancer');
+		const oldBalancer = cfnTemplate.getResource(
+      'LoadBalancer'
+    ) as CfnLoadBalancer;
 
 		const recordSet = new RecordSet(this, 'DnsRecord', {
 			recordType: RecordType.CNAME,
@@ -146,7 +148,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 			recordName: props.recordPrefix,
 			ttl: Duration.minutes(1),
 		});
-		const defaultChild = recordSet.node.defaultChild;
+		const defaultChild = recordSet.node.defaultChild as CfnLoadBalancer;
 		defaultChild.overrideLogicalId('DnsRecord');
 	}
 }
