@@ -832,57 +832,52 @@ interface ComponentNameChunkMap {
 	addWhen: BlockElementType | 'always';
 }
 interface YoutubeBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-YoutubeBlockComponent';
+	chunkName: 'YoutubeBlockComponent';
 	addWhen: YoutubeBlockElement['_type'];
 }
 
 interface RichLinkBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-RichLinkComponent';
+	chunkName: 'RichLinkComponent';
 	addWhen: RichLinkBlockElement['_type'];
 }
 
 interface InteractiveBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-InteractiveBlockComponent';
+	chunkName: 'InteractiveBlockComponent';
 	addWhen: InteractiveBlockElement['_type'];
 }
 
 interface InteractiveContentsBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-InteractiveContentsBlockComponent';
+	chunkName: 'InteractiveContentsBlockComponent';
 	addWhen: InteractiveContentsBlockElement['_type'];
 }
 
 interface CalloutBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-CalloutBlockComponent';
+	chunkName: 'CalloutBlockComponent';
 	addWhen: CalloutBlockElement['_type'];
 }
 
 interface DocumentBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-DocumentBlockComponent';
+	chunkName: 'DocumentBlockComponent';
 	addWhen: DocumentBlockElement['_type'];
 }
 
 interface MapBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-MapEmbedBlockComponent';
+	chunkName: 'MapEmbedBlockComponent';
 	addWhen: MapBlockElement['_type'];
 }
 
 interface SpotifyBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-SpotifyBlockComponent';
+	chunkName: 'SpotifyBlockComponent';
 	addWhen: SpotifyBlockElement['_type'];
 }
 
 interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-VideoFacebookBlockComponent';
+	chunkName: 'VideoFacebookBlockComponent';
 	addWhen: VideoFacebookBlockElement['_type'];
 }
 interface VineBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-VineBlockComponent';
+	chunkName: 'VineBlockComponent';
 	addWhen: VineBlockElement['_type'];
-}
-
-interface InstagramBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-InstagramBlockComponent';
-	addWhen: InstagramBlockElement['_type'];
 }
 
 // There are docs on loadable in ./docs/loadable-components.md
@@ -897,7 +892,6 @@ type LoadableComponents = [
 	SpotifyBlockLoadable,
 	FacebookVideoBlockLoadable,
 	VineBlockLoadable,
-	InstagramBlockLoadable,
 ];
 
 interface CarouselImagesMap {

@@ -10,7 +10,7 @@ import {
 import { sanitise } from '@frontend/lib/sanitise-html';
 
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
-import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
+import { RewrappedComponent } from '@root/src/web/components/RewrappedComponent';
 
 import { DropCap } from '@frontend/web/components/DropCap';
 import {

@@ -51,7 +51,11 @@ type CommentType = {
 };
 
 export const useDiscussion = (url: string) => {
-	const { data } = useApi<DiscussionResponse>(url);
+	const { data } = useApi<DiscussionResponse>(url, {
+		// The default for dedupingInterval is 2 seconds but we want to wait longer here because the cache time
+		// for a discussion is at least 15 seconds
+		dedupingInterval: 8000,
+	});
 
 	return {
 		commentCount: data?.discussion?.commentCount,

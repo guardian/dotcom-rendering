@@ -52,6 +52,7 @@ import {
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Island } from '../components/Island';
+import { GetMatchStats } from '../components/GetMatchStats.importable';
 
 const StandardGrid = ({
 	children,
@@ -598,6 +599,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									secondaryDateline={
 										CAPI.webPublicationSecondaryDateDisplay
 									}
+									isCommentable={CAPI.isCommentable}
+									discussionApiUrl={
+										CAPI.config.discussionApiUrl
+									}
+									shortUrlId={CAPI.config.shortUrlId}
 								/>
 							</div>
 						</GridItem>
@@ -612,7 +618,17 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
-								{isMatchReport && <div id="match-stats" />}
+								{isMatchReport && CAPI.matchUrl && (
+									<Island
+										clientOnly={true}
+										placeholderHeight={800}
+										deferUntil="visible"
+									>
+										<GetMatchStats
+											matchUrl={CAPI.matchUrl}
+										/>
+									</Island>
+								)}
 
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines
@@ -709,7 +725,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<Discussion
 							discussionApiUrl={CAPI.config.discussionApiUrl}
 							shortUrlId={CAPI.config.shortUrlId}
-							isCommentable={CAPI.isCommentable}
 							format={format}
 							discussionD2Uid={CAPI.config.discussionD2Uid}
 							discussionApiClientHeader={
