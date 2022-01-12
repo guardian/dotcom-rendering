@@ -79,6 +79,9 @@ export const ArticleStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -124,6 +127,9 @@ export const BrandingStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -154,6 +160,9 @@ export const FeatureStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -183,6 +192,9 @@ export const SpecialReportStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -212,6 +224,9 @@ export const CommentStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -241,6 +256,9 @@ export const InterviewStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -270,6 +288,9 @@ export const ImmersiveStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -299,6 +320,9 @@ export const TwoContributorsStory = () => {
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -326,6 +350,9 @@ export const DeadBlogStory = () => {
 						tags={tagsWithByTwoContributors}
 						primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 						secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+						isCommentable={false}
+						discussionApiUrl=""
+						shortUrlId=""
 					/>
 				</Container>
 			))}

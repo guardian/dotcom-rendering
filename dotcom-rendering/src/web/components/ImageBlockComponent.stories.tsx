@@ -4,11 +4,11 @@ import { css } from '@emotion/react';
 
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { ElementContainer } from '../ElementContainer';
-import { Flex } from '../Flex';
-import { LeftColumn } from '../LeftColumn';
-import { RightColumn } from '../RightColumn';
-import { Figure } from '../Figure';
+import { ElementContainer } from './ElementContainer';
+import { Flex } from './Flex';
+import { LeftColumn } from './LeftColumn';
+import { RightColumn } from './RightColumn';
+import { Figure } from './Figure';
 
 import { ImageBlockComponent } from './ImageBlockComponent';
 
