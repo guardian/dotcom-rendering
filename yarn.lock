@@ -6527,11 +6527,6 @@ babel-plugin-polyfill-regenerator@^0.3.0:
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.3.0"
 
-babel-plugin-prismjs@^2.0.1:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-prismjs/-/babel-plugin-prismjs-2.1.0.tgz#ade627896106326ad04d6d77fba92877618de571"
-  integrity sha512-ehzSKYfeAz4U78zi/sfwsjDPlq0LvDKxNefcZTJ/iKBu+plsHsLqZhUeGf1+82LAcA35UZGbU6ksEx2Utphc/g==
-
 "babel-plugin-px-to-rem@https://github.com/guardian/babel-plugin-px-to-rem#v0.1.0":
   version "0.1.0"
   resolved "https://github.com/guardian/babel-plugin-px-to-rem#548c5f5bfdfdfc317b86103d27565868bd7d381c"
