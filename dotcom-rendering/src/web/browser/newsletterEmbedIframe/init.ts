@@ -1,10 +1,6 @@
 import '../webpackPublicPath';
 import { startup } from '@root/src/web/browser/startup';
-
-type MessageType = {
-	type: string;
-	value: string | number;
-};
+import { isObject } from '@guardian/libs';
 
 // No trailing slash!
 const allowedOrigins = ['https://www.theguardian.com'];
@@ -39,13 +35,16 @@ const init = (): Promise<void> => {
 		});
 		if (iframes.length !== 0) {
 			try {
-				const message: MessageType = JSON.parse(event.data);
+				const message: unknown = JSON.parse(event.data);
+				if (!isObject(message) || typeof message.type !== 'string')
+					return;
+
 				switch (message.type) {
 					case 'set-height':
 						iframes.forEach((iframe) => {
 							if (typeof message.value === 'number') {
 								iframe.height = `${message.value}`;
-							} else {
+							} else if (typeof message.value === 'string') {
 								const value = parseInt(message.value, 10);
 								if (Number.isInteger(value)) {
 									iframe.height = `${value}`;
