@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {
 	GetParametersByPathCommand,
 	SSMClient,
 	GetParametersByPathCommandOutput,
 	Parameter,
+	GetParametersByPathRequest,
 } from '@aws-sdk/client-ssm';
 
 process.env.AWS_PROFILE = 'frontend';
@@ -29,7 +29,7 @@ const getParams = function getAWSParameterStoreParameters(
 ): Promise<GetParametersByPathCommandOutput> {
 	const ssm = new SSMClient({ region: 'eu-west-1' });
 
-	const params = {
+	const params: GetParametersByPathRequest = {
 		Path: `/${STACK}/${stage}/`,
 		Recursive: true,
 		WithDecryption: true,

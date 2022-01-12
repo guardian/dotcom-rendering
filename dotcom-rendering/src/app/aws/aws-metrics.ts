@@ -1,6 +1,7 @@
 import {
 	CloudWatchClient,
 	PutMetricDataCommand,
+	PutMetricDataInput,
 } from '@aws-sdk/client-cloudwatch';
 
 interface Metric {
@@ -19,7 +20,7 @@ const sendMetric = (m: any[]) => {
 
 	const cloudWatchClient = new CloudWatchClient({ region: 'eu-west-1' });
 
-	const params = {
+	const params: PutMetricDataInput = {
 		MetricData: m,
 		Namespace: 'Application',
 	};
@@ -28,6 +29,8 @@ const sendMetric = (m: any[]) => {
 
 	cloudWatchClient.send(command, (err: any) => {
 		if (err) {
+			// `err` is typed as `any` in the library:
+			// https://github.com/aws/aws-sdk-js-v3/blob/main/packages/smithy-client/src/client.ts#L41-L43
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			console.error(err, err.stack);
 		}
