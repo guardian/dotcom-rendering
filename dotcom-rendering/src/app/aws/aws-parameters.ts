@@ -3,6 +3,7 @@ import {
 	GetParametersByPathCommand,
 	SSMClient,
 	GetParametersByPathCommandOutput,
+	Parameter,
 } from '@aws-sdk/client-ssm';
 
 process.env.AWS_PROFILE = 'frontend';
@@ -43,10 +44,9 @@ const getParams = function getAWSParameterStoreParameters(
 
 const getAllParams = function getGuardianConfigurationRecursiveStep(
 	stage: string,
-	params: any[] = [], // change type
+	params: Parameter[] = [],
 	token: string | undefined = undefined,
-): Promise<any[]> {
-	// change type
+): Promise<Parameter[]> {
 	return getParams(stage, token).then((response) => {
 		if (!response.NextToken) {
 			return params;
