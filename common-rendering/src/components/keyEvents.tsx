@@ -2,7 +2,7 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { textSans, headline } from "@guardian/source-foundations";
+import { textSans, headline, specialReport, labs } from "@guardian/source-foundations";
 import { remSpace } from "@guardian/source-foundations";
 import {
 	culture,
@@ -13,7 +13,7 @@ import {
 	opinion,
 } from "@guardian/source-foundations";
 import { Link } from "@guardian/source-react-components";
-import { ArticlePillar, ArticleTheme, timeAgo } from "@guardian/libs";
+import { ArticlePillar, ArticleSpecial, ArticleTheme, timeAgo } from "@guardian/libs";
 import { from } from "@guardian/source-foundations";
 import { darkModeCss } from "../lib";
 import Accordion from "./accordion";
@@ -112,20 +112,47 @@ const timeTextWrapperStyles: SerializedStyles = css`
 const keyEventsTextGrayBackground = (theme: ArticleTheme): string => {
 	switch (theme) {
 		case ArticlePillar.News:
-		case ArticlePillar.Lifestyle:
+			return news[400];
 		case ArticlePillar.Sport:
-			return getColor(theme, 400);
-		default:
-			return getColor(theme, 300);
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
 	}
 };
+
+const keyEventsTextWhiteBackground = (theme: ArticleTheme): string => {
+	switch (theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[350];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+}
 
 const textStyles = (
 	theme: ArticleTheme,
 	supportsDarkMode: boolean
 ): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
-	color: ${getColor(theme, 400)};
+	color: ${keyEventsTextWhiteBackground(theme)};
 
 	text-decoration: none;
 
