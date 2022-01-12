@@ -133,16 +133,12 @@ const time = (date: Date, separator: string): string =>
 	)}`;
 
 const time12hr = (date: Date, separator: string): string => {
-	let period = 'am';
-	let time12hr = date.getUTCHours();
-	if (time12hr > 12) {
-		time12hr -= 12;
-		period = 'pm';
-	}
-
-	return `${padZero(time12hr)}${separator}${padZero(
-		date.getUTCMinutes(),
-	)}${period}`;
+	const utcHours = date.getUTCHours();
+	return `${padZero(
+		utcHours > 12 ? utcHours - 12 : utcHours,
+	)}${separator}${padZero(date.getUTCMinutes())}${
+		utcHours > 12 ? 'pm' : 'am'
+	}`;
 };
 
 const localTime = (date: Date): string =>

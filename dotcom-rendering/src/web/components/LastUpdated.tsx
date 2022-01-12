@@ -1,5 +1,5 @@
-import { css } from "@emotion/react";
-import { neutral, textSans } from "@guardian/source-foundations";
+import { css } from '@emotion/react';
+import { neutral, textSans } from '@guardian/source-foundations';
 
 const LastUpdated = ({
 	lastUpdatedDisplay,
@@ -15,7 +15,7 @@ const LastUpdated = ({
 				align-items: flex-end;
 				${textSans.xxsmall()};
 				color: ${neutral[46]};
-				`}
+			`}
 		>
 			<time dateTime={new Date(lastUpdated).toISOString()}>
 				{`Updated at ${lastUpdatedDisplay}`}
