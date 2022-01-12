@@ -149,6 +149,6 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 			ttl: Duration.minutes(1),
 		});
 		const defaultChild = recordSet.node.defaultChild as CfnElement;
-    defaultChild.overrideLogicalId('DnsRecord');
+		defaultChild.overrideLogicalId('DnsRecord');
 	}
 }
