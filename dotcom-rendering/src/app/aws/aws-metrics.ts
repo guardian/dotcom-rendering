@@ -10,6 +10,8 @@ interface Metric {
 
 process.env.AWS_PROFILE = 'frontend';
 
+const cloudWatchClient = new CloudWatchClient({ region: 'eu-west-1' });
+
 // how frequently we send metrics to aws in ms
 const METRICS_TIME_RESOLUTION = 60 * 1000;
 
@@ -17,8 +19,6 @@ const sendMetric = (m: any[]) => {
 	if (m.length === 0) {
 		return;
 	}
-
-	const cloudWatchClient = new CloudWatchClient({ region: 'eu-west-1' });
 
 	const params: PutMetricDataInput = {
 		MetricData: m,
