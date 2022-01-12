@@ -2,9 +2,9 @@
 
 import { css } from '@emotion/react';
 
-import { InteractiveBlockComponent } from '@frontend/web/components/elements/InteractiveBlockComponent';
+import { InteractiveBlockComponent } from '@frontend/web/components/InteractiveBlockComponent';
 import { Figure } from '@frontend/web/components/Figure';
-import { TextBlockComponent } from '@frontend/web/components/elements/TextBlockComponent';
+import { TextBlockComponent } from '@frontend/web/components/TextBlockComponent';
 import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
 
 export default {

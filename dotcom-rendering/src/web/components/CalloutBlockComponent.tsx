@@ -8,7 +8,7 @@ import PlusIcon from '@frontend/static/icons/plus.svg';
 import MinusIcon from '@frontend/static/icons/minus.svg';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { Form } from '../Callout/Form';
+import { Form } from './Callout/Form';
 
 const wrapperStyles = css`
 	margin-bottom: 26px;

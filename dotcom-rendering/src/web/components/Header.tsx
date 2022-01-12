@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 
-import { EditionDropdown } from '@frontend/web/components/EditionDropdown';
 import { Hide } from '@root/src/web/components/Hide';
 import { Logo } from '@frontend/web/components/Logo';
 import { Links } from '@frontend/web/components/Links';
 import { brand } from '@guardian/source-foundations';
+import { Island } from './Island';
+import { EditionDropdown } from './EditionDropdown.importable';
 
 const headerStyles = css`
 	/* Ensure header height contains it's children */
@@ -24,12 +25,12 @@ type Props = {
 export const Header = ({ edition, idUrl, mmaUrl, isAnniversary }: Props) => (
 	<div css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
-			<div id="edition-root">
+			<Island deferUntil="idle">
 				<EditionDropdown
 					edition={edition}
 					dataLinkName="nav2 : topbar : edition-picker: toggle"
 				/>
-			</div>
+			</Island>
 		</Hide>
 		<Logo isAnniversary={isAnniversary} edition={edition} />
 		<div id="reader-revenue-links-header" />

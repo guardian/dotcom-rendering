@@ -9,14 +9,14 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
-import { EmbedBlockComponent } from './elements/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from './elements/UnsafeEmbedBlockComponent';
-import { SpotifyBlockComponent } from './elements/SpotifyBlockComponent';
-import { VimeoBlockComponent } from './elements/VimeoBlockComponent';
-import { DocumentBlockComponent } from './elements/DocumentBlockComponent';
-import { SoundcloudBlockComponent } from './elements/SoundcloudBlockComponent';
-import { TweetBlockComponent } from './elements/TweetBlockComponent';
-import { InstagramBlockComponent } from './elements/InstagramBlockComponent';
+import { EmbedBlockComponent } from './EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
+import { SpotifyBlockComponent } from './SpotifyBlockComponent';
+import { VimeoBlockComponent } from './VimeoBlockComponent';
+import { DocumentBlockComponent } from './DocumentBlockComponent';
+import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
+import { TweetBlockComponent } from './TweetBlockComponent';
+import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
 
 import { ClickToView } from './ClickToView';
 
@@ -1039,23 +1039,12 @@ export const InstagramBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
-						isTracking={true}
-						source={instagramInstramEmbed.source}
-						sourceDomain={instagramInstramEmbed.sourceDomain}
-						role="inline"
-						onAccept={() =>
-							updateIframeHeight(
-								'iframe[name="instagram-embed-1"]',
-							)
-						}
-					>
-						<InstagramBlockComponent
-							key={1}
-							element={instagramInstramEmbed}
-							index={1}
-						/>
-					</ClickToView>
+					<InstagramBlockComponent
+						key={1}
+						element={instagramInstramEmbed}
+						index={1}
+						isMainMedia={false}
+					/>
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>

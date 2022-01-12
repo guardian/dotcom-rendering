@@ -6,9 +6,9 @@ import {
 } from '@guardian/libs';
 
 import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { PullQuoteBlockComponent } from '@root/src/web/components/elements/PullQuoteBlockComponent';
+import { PullQuoteBlockComponent } from '@root/src/web/components/PullQuoteBlockComponent';
 
-import { ContainerLayout } from '../ContainerLayout';
+import { ContainerLayout } from './ContainerLayout';
 
 export default {
 	component: PullQuoteBlockComponent,

@@ -18,6 +18,19 @@ module.exports = {
 			name: "storybook-addon-turbo-build",
 			options: {
 				optimizationLevel: 1,
+				// We're explicitly setting the minification options below because
+				// we want to turn off `minifyIdentifiers`. Why? Because it breaks
+				// Islands hydration. When you minify the component filenames
+				// the dynamic imports fail to find them.
+				// See: https://github.com/privatenumber/esbuild-loader#minify
+				//    & https://esbuild.github.io/api/#minify
+				esbuildMinifyOptions: {
+					target: "es2015",
+					minify: false,
+					minifyWhitespace: true,
+					minifyIdentifiers: false,
+					minifySyntax: true,
+				},
 			},
 		},
 	],
