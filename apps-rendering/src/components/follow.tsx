@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import { remSpace, textSans } from '@guardian/source-foundations';
 import FollowStatus from 'components/followStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
@@ -24,57 +24,25 @@ const styles = ({ theme }: ArticleFormat): SerializedStyles => {
 	return css`
 		${textSans.small()}
 		color: ${kicker};
-		display: block;
+		display: flex;
+		align-items: center;
+		column-gap: 0.2em;
 		padding: 0;
 		border: none;
 		background: none;
 		margin-left: 0;
 		margin-top: ${remSpace[1]};
-		min-height: 1.5rem;
+		min-height: ${remSpace[6]};
+
+		svg {
+			width: ${remSpace[6]};
+			height: ${remSpace[6]};
+			fill: currentColor;
+		}
 
 		${darkModeCss`
 			color: ${inverted};
 		`}
-	`;
-};
-
-const statusStyles = ({ theme }: ArticleFormat): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(theme);
-
-	return css`
-		svg {
-			width: ${remSpace[6]};
-			height: ${remSpace[6]};
-			margin-bottom: -0.375rem;
-		}
-
-		.follow-icon {
-			circle {
-				fill: ${kicker};
-			}
-
-			path {
-				fill: #fff;
-			}
-
-			${darkModeCss`
-				circle {
-					fill: ${inverted};
-				}
-
-				path {
-					fill: ${neutral[7]};
-				}
-			`}
-		}
-
-		.following-icon {
-			fill: ${kicker};
-
-			${darkModeCss`
-				fill: ${inverted};
-			`}
-		}
 	`;
 };
 
@@ -93,11 +61,7 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
 				data-id={contributor.id}
 				data-display-name={contributor.name}
 			>
-				<span className="js-follow-status" css={statusStyles(format)}>
-					<FollowStatus isFollowing={false} />
-				</span>
-
-				{contributor.name}
+				<FollowStatus isFollowing={false} /> {contributor.name}
 			</button>
 		);
 	}

@@ -62,8 +62,8 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import { LabsHeader } from '@root/src/web/components/LabsHeader';
-import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
+import { EmbedBlockComponent } from '@root/src/web/components/EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from '@root/src/web/components/UnsafeEmbedBlockComponent';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
@@ -277,9 +277,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.YoutubeBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/elements/YoutubeBlockComponent'
-				);
+				return import('@frontend/web/components/YoutubeBlockComponent');
 			}
 			return Promise.reject();
 		},
@@ -297,9 +295,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.RichLinkBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/elements/RichLinkComponent'
-				);
+				return import('@frontend/web/components/RichLinkComponent');
 			}
 			return Promise.reject();
 		},
@@ -318,7 +314,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/InteractiveBlockComponent'
+					'@frontend/web/components/InteractiveBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -338,7 +334,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/InteractiveContentsBlockComponent'
+					'@frontend/web/components/InteractiveContentsBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -358,9 +354,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.CalloutBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/elements/CalloutBlockComponent'
-				);
+				return import('@frontend/web/components/CalloutBlockComponent');
 			}
 			return Promise.reject();
 		},
@@ -379,7 +373,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/DocumentBlockComponent'
+					'@frontend/web/components/DocumentBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -399,7 +393,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/MapEmbedBlockComponent'
+					'@frontend/web/components/MapEmbedBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -418,9 +412,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.SpotifyBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/elements/SpotifyBlockComponent'
-				);
+				return import('@frontend/web/components/SpotifyBlockComponent');
 			}
 			return Promise.reject();
 		},
@@ -439,7 +431,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/VideoFacebookBlockComponent'
+					'@frontend/web/components/VideoFacebookBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -458,9 +450,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.VineBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/elements/VineBlockComponent'
-				);
+				return import('@frontend/web/components/VineBlockComponent');
 			}
 			return Promise.reject();
 		},
@@ -479,7 +469,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/InstagramBlockComponent'
+					'@frontend/web/components/InstagramBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -1103,7 +1093,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					format={format}
 					discussionApiUrl={CAPI.config.discussionApiUrl}
 					shortUrlId={CAPI.config.shortUrlId}
-					isCommentable={CAPI.isCommentable}
 					user={user || undefined}
 					discussionD2Uid={CAPI.config.discussionD2Uid}
 					discussionApiClientHeader={

@@ -509,6 +509,11 @@ export const ShowcaseLayout = ({
 									secondaryDateline={
 										CAPI.webPublicationSecondaryDateDisplay
 									}
+									isCommentable={CAPI.isCommentable}
+									discussionApiUrl={
+										CAPI.config.discussionApiUrl
+									}
+									shortUrlId={CAPI.config.shortUrlId}
 								/>
 							</div>
 						</GridItem>
@@ -611,7 +616,6 @@ export const ShowcaseLayout = ({
 						<Discussion
 							discussionApiUrl={CAPI.config.discussionApiUrl}
 							shortUrlId={CAPI.config.shortUrlId}
-							isCommentable={CAPI.isCommentable}
 							format={format}
 							discussionD2Uid={CAPI.config.discussionD2Uid}
 							discussionApiClientHeader={

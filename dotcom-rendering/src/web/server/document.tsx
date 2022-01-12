@@ -93,50 +93,50 @@ export const document = ({ data }: Props): string => {
 	// component reference.
 	const allChunks: LoadableComponents = [
 		{
-			chunkName: 'elements-YoutubeBlockComponent',
+			chunkName: 'YoutubeBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 		},
 		{
-			chunkName: 'elements-RichLinkComponent',
+			chunkName: 'RichLinkComponent',
 			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
 		},
 		{
-			chunkName: 'elements-InteractiveBlockComponent',
+			chunkName: 'InteractiveBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveBlockElement',
 		},
 		{
-			chunkName: 'elements-InteractiveContentsBlockComponent',
+			chunkName: 'InteractiveContentsBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 		},
 		{
-			chunkName: 'elements-CalloutBlockComponent',
+			chunkName: 'CalloutBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.CalloutBlockElement',
 		},
 		{
-			chunkName: 'elements-DocumentBlockComponent',
+			chunkName: 'DocumentBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.DocumentBlockElement',
 		},
 		{
-			chunkName: 'elements-MapEmbedBlockComponent',
+			chunkName: 'MapEmbedBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.MapBlockElement',
 		},
 		{
-			chunkName: 'elements-SpotifyBlockComponent',
+			chunkName: 'SpotifyBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.SpotifyBlockElement',
 		},
 		{
-			chunkName: 'elements-VideoFacebookBlockComponent',
+			chunkName: 'VideoFacebookBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
 		},
 		{
-			chunkName: 'elements-VineBlockComponent',
+			chunkName: 'VineBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.VineBlockElement',
 		},
 		{
-			chunkName: 'elements-InstagramBlockComponent',
+			chunkName: 'InstagramBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.InstagramBlockElement',
 		},
 	];
