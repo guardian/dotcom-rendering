@@ -25,7 +25,7 @@ const init = (): Promise<void> => {
 
 		const iframes: HTMLIFrameElement[] = allIframes.filter((i) => {
 			try {
-				if (i.contentWindow && event.source) {
+				if (i.contentWindow !== null && event.source !== null) {
 					return i.contentWindow === event.source;
 				}
 			} catch (e) {
