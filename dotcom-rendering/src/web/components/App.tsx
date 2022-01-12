@@ -458,26 +458,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const InstagramBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.InstagramBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/InstagramBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.InstagramBlockComponent,
-		},
-	);
-
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
@@ -530,10 +510,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const embeds = elementsByType<EmbedBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.EmbedBlockElement',
-	);
-	const instas = elementsByType<InstagramBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.InstagramBlockElement',
 	);
 	const maps = elementsByType<MapBlockElement>(
 		CAPI.elementsToHydrate,
@@ -906,26 +882,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 							/>
 						</ClickToView>
 					)}
-				</HydrateOnce>
-			))}
-			{instas.map((insta, index) => (
-				<HydrateOnce rootId={insta.elementId}>
-					<ClickToView
-						role={insta.role}
-						isTracking={insta.isThirdPartyTracking}
-						source={insta.source}
-						sourceDomain={insta.sourceDomain}
-						onAccept={() =>
-							updateIframeHeight(
-								`iframe[name="instagram-embed-${index}"]`,
-							)
-						}
-					>
-						<InstagramBlockComponent
-							element={insta}
-							index={index}
-						/>
-					</ClickToView>
 				</HydrateOnce>
 			))}
 			{maps.map((map) => (

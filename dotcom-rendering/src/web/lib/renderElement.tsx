@@ -12,7 +12,7 @@ import { UnsafeEmbedBlockComponent } from '@root/src/web/components/UnsafeEmbedB
 import { GuVideoBlockComponent } from '@root/src/web/components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '@root/src/web/components/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/ImageBlockComponent';
-import { InstagramBlockComponent } from '@root/src/web/components/InstagramBlockComponent';
+import { InstagramBlockComponent } from '@root/src/web/components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '@root/src/web/components/InteractiveBlockComponent';
 import { ItemLinkBlockElement } from '@root/src/web/components/ItemLinkBlockElement';
 import { InteractiveContentsBlockComponent } from '@root/src/web/components/InteractiveContentsBlockComponent';
@@ -60,6 +60,7 @@ import {
 	isInteractive,
 	interactiveLegacyFigureClasses,
 } from '../layouts/lib/interactiveLegacyStyling';
+import { Island } from '../components/Island';
 
 type Props = {
 	format: ArticleFormat;
@@ -327,19 +328,14 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<InstagramBlockComponent
 						key={index}
 						element={element}
 						index={index}
+						isMainMedia={isMainMedia}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
 			if (format.design === ArticleDesign.Interactive) {
