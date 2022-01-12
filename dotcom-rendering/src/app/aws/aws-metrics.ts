@@ -26,9 +26,8 @@ const sendMetric = (m: any[]) => {
 
 	const command = new PutMetricDataCommand(params);
 
-	cloudWatchClient.send(command, (err) => {
+	cloudWatchClient.send(command, (err: any) => {
 		if (err) {
-			// eslint-disable-next-line no-console
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			console.error(err, err.stack);
 		}

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { GetParametersByPathCommand, SSMClient } from '@aws-sdk/client-ssm';
+import { GetParametersByPathCommand, SSMClient, GetParametersByPathCommandOutput } from '@aws-sdk/client-ssm';
 
 process.env.AWS_PROFILE = 'frontend';
 
@@ -21,7 +21,7 @@ interface GuardianConfiguration {
 const getParams = function getAWSParameterStoreParameters(
 	stage: string,
 	token: string | undefined = undefined,
-): Promise<any> {
+): Promise<GetParametersByPathCommandOutput> {
 	const ssm = new SSMClient({ region: 'eu-west-1' });
 
 	const params = {
