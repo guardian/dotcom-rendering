@@ -12,7 +12,6 @@ import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import { renederedItemsAssetsCss } from './config/rendered-items-assets-styles';
 import { WebpackPluginInstance } from 'webpack';
 
-
 // ----- Plugins ----- //
 
 class LaunchServerPlugin {
@@ -64,12 +63,6 @@ const clientResolveProd = resolve('clientProd', true);
 const serverConfig = (
 	env: Record<string, boolean | undefined>,
 ): Configuration => {
-	const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-	const smp = new SpeedMeasurePlugin({
-		outputFormat: "humanVerbose",
-		loaderTopFiles: 50,
-	  });
-
 	const isProd = env?.production;
 	const isWatch = env?.watch;
 	// Does not try to require the 'canvas' package,
@@ -83,7 +76,7 @@ const serverConfig = (
 
 	const mode = isProd ? 'production' : 'development';
 
-	return smp.wrap({
+	return {
 		name: 'server',
 		mode,
 		entry: 'server/server.ts',
@@ -119,7 +112,7 @@ const serverConfig = (
 			minimize: false,
 		},
 		devtool: 'inline-cheap-source-map',
-	});
+	};
 };
 
 export const clientConfig: Configuration = {
