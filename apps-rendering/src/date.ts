@@ -132,17 +132,31 @@ const time = (date: Date, separator: string): string =>
 		date.getUTCMinutes(),
 	)}`;
 
+const time12hr = (date: Date, separator: string): string => {
+	let period = 'am';
+	let time12hr = date.getUTCHours();
+	if (time12hr > 12) {
+		time12hr -= 12;
+		period = 'pm';
+	}
+
+	return `${padZero(time12hr)}${separator}${padZero(
+		date.getUTCMinutes(),
+	)}${period}`;
+};
+
 const localTime = (date: Date): string =>
 	`${padZero(date.getHours())}.${padZero(date.getMinutes())}`;
 
 const localTime12Hr = (date: Date): string =>
 	date
 		.toLocaleString([], {
-			hour: 'numeric',
-			minute: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit',
 			hour12: true,
 		})
 		.replace(' ', '')
+		.replace(':', '.')
 		.toLowerCase();
 
 const localTimeZone = (date: Date): string =>
@@ -172,6 +186,11 @@ const formatLocalTimeDateTz = (date: Date): string =>
 	`${localTime12Hr(date)} ${date.getDate()} ${localMonth(
 		date,
 	)} ${date.getFullYear()} ${localTimeZoneAbbr(date)}`;
+
+const formatUTCTimeDateTz = (date: Date): string =>
+	`${time12hr(date, '.')} ${date.getUTCDate()} ${month(
+		date,
+	)} ${date.getFullYear()} UTC`;
 
 const localDay = (date: Date): string => days[date.getDay()];
 
@@ -227,6 +246,7 @@ export {
 	formatSeconds,
 	formatLocal,
 	formatLocalTimeDateTz,
+	formatUTCTimeDateTz,
 	dateToString,
 	padZero,
 };

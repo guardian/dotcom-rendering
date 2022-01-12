@@ -4,26 +4,21 @@ import { neutral, textSans } from "@guardian/source-foundations";
 const LastUpdated = ({
 	lastUpdatedDisplay,
 	lastUpdated,
-	localFormat,
 }: {
 	lastUpdatedDisplay: string;
-	lastUpdated: Date;
-	localFormat: boolean;
+	lastUpdated: number;
 }) => {
 	return (
 		<div
-		css={css`
+			css={css`
 				display: flex;
 				align-items: flex-end;
 				${textSans.xxsmall()};
 				color: ${neutral[46]};
 				`}
 		>
-			<time
-				data-localFormat={localFormat}
-				dateTime={lastUpdated.toISOString()}
-			>
-				{`Updated: ${lastUpdatedDisplay}`}
+			<time dateTime={new Date(lastUpdated).toISOString()}>
+				{`Updated at ${lastUpdatedDisplay}`}
 			</time>
 		</div>
 	);

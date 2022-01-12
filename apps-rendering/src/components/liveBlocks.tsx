@@ -1,11 +1,11 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { LastUpdated } from '@guardian/common-rendering/src/components/LastUpdated';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { ArticleFormat } from '@guardian/libs';
 import { map, OptionKind, partition } from '@guardian/types';
-import { formatLocalTimeDateTz } from 'date';
+import { LastUpdated } from 'components/lastUpdated';
+import { formatUTCTimeDateTz } from 'date';
 import { pipe, toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
@@ -54,10 +54,9 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 									block.firstPublished.value && (
 									<LastUpdated
 										lastUpdated={block.lastModified.value}
-										lastUpdatedDisplay={formatLocalTimeDateTz(
+										lastUpdatedDisplay={formatUTCTimeDateTz(
 											block.lastModified.value,
 										)}
-										localFormat={true}
 									/>
 								)}
 						</footer>

@@ -6,6 +6,7 @@ import {
 	formatLocal,
 	formatSeconds,
 	formatLocalTimeDateTz,
+	formatUTCTimeDateTz,
 	fromString,
 	fullyFormatDate,
 	isValidDate,
@@ -95,13 +96,27 @@ describe('formatLocal', () => {
 describe('formatLocalTimeDateTz', () => {
 	test('returns correct local time zone (local timezone is Europe/London set in TZ global variable)', () => {
 		expect(formatLocalTimeDateTz(new Date('2020-03-11T17:25:00'))).toBe(
-			'5:25pm 11 Mar 2020 GMT',
+			'05.25pm 11 Mar 2020 GMT',
 		);
 	});
 
 	test('returns Europe/London local time for non UTC time', () => {
 		expect(formatLocalTimeDateTz(new Date('2012/02/10 10:10:30 +0180'))).toBe(
-			'7:50am 10 Feb 2012 GMT',
+			'07.50am 10 Feb 2012 GMT',
+		);
+	});
+});
+
+describe('formatUTCTimeDateTz', () => {
+	test('returns correct UTC time (local timezone is Europe/London set in TZ global variable)', () => {
+		expect(formatUTCTimeDateTz(new Date('2020-03-11T17:25:00'))).toBe(
+			'05.25pm 11 Mar 2020 UTC',
+		);
+	});
+
+	test('returns UTC time for non UTC time', () => {
+		expect(formatUTCTimeDateTz(new Date('2012/02/10 10:10:30 +0180'))).toBe(
+			'07.50am 10 Feb 2012 UTC',
 		);
 	});
 });
