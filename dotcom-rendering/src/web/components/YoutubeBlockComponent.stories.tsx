@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
-import { ElementContainer } from '../ElementContainer';
-import { Flex } from '../Flex';
-import { LeftColumn } from '../LeftColumn';
-import { RightColumn } from '../RightColumn';
+import { ElementContainer } from './ElementContainer';
+import { Flex } from './Flex';
+import { LeftColumn } from './LeftColumn';
+import { RightColumn } from './RightColumn';
 
 import { YoutubeBlockComponent } from './YoutubeBlockComponent';
 

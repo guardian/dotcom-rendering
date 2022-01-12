@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { BlockquoteBlockComponent } from '@frontend/web/components/elements/BlockquoteBlockComponent';
+import { BlockquoteBlockComponent } from '@frontend/web/components/BlockquoteBlockComponent';
 import {
 	ArticleDisplay,
 	ArticleDesign,
