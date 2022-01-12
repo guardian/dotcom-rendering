@@ -1,4 +1,4 @@
-import { StarRatingBlockComponent } from '@root/src/web/components/elements/StarRatingBlockComponent';
+import { StarRatingBlockComponent } from '@root/src/web/components/StarRatingBlockComponent';
 
 export default {
 	component: StarRatingBlockComponent,

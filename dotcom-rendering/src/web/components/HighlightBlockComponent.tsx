@@ -2,7 +2,7 @@ import { ClassNames } from '@emotion/react';
 
 import { body, background } from '@guardian/source-foundations';
 import { unwrapHtml } from '@root/src/model/unwrapHtml';
-import { RewrappedComponent } from '@root/src/web/components/elements/RewrappedComponent';
+import { RewrappedComponent } from '@root/src/web/components/RewrappedComponent';
 
 type Props = {
 	html: string;
