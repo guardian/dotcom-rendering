@@ -2,19 +2,20 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { textSans, headline } from "@guardian/source-foundations";
+import { textSans, headline, sport, culture, lifestyle, opinion, news } from "@guardian/source-foundations";
 import { remSpace } from "@guardian/source-foundations";
 import {
 	neutral,
 } from "@guardian/source-foundations";
 import { Link } from "@guardian/source-react-components";
-import { ArticleFormat, timeAgo } from "@guardian/libs";
+import { ArticleFormat, ArticlePillar, ArticleTheme, timeAgo } from "@guardian/libs";
 import { from } from "@guardian/source-foundations";
 import { darkModeCss } from "../lib";
 import Accordion from "./accordion";
 import { text } from "../editorialPalette";
 
 // ----- Component ----- //
+type paletteId = 300 | 400 | 500;
 interface KeyEvent {
 	date: Date;
 	text: string;
@@ -32,6 +33,21 @@ interface ListItemProps {
 	format: ArticleFormat;
 	supportsDarkMode: boolean;
 }
+
+const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
+	switch (theme) {
+		case ArticlePillar.Sport:
+			return sport[paletteId];
+		case ArticlePillar.Culture:
+			return culture[paletteId];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[paletteId];
+		case ArticlePillar.Opinion:
+			return opinion[paletteId];
+		default:
+			return news[paletteId];
+	}
+};
 
 const keyEventWrapperStyles = (
 	supportsDarkMode: boolean
@@ -113,9 +129,9 @@ const textStyles = (
 	}
 
 	${darkModeCss(supportsDarkMode)`
-		color: ${text.invertedLink(format)};
+		color: ${getColor(format.theme, 500)};
 		&:hover {
-			color: ${text.invertedLink(format)};
+			color: ${getColor(format.theme, 500)};
 		}
 	`}
 
