@@ -52,6 +52,7 @@ const LiveBlockContainer = ({
 		<article
 			id={`block-${id}`}
 			key={id}
+			// This classname is used by Spacefinder as a possible candidate before which it can insert an inline ad
 			className="block"
 			css={css`
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
