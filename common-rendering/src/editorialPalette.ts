@@ -342,9 +342,9 @@ const textStandfirstLink = (format: ArticleFormat): Colour => {
 				case ArticlePillar.News:
 					return news[400];
 				case ArticlePillar.Lifestyle:
-					return lifestyle[400];
+					return lifestyle[300];
 				case ArticlePillar.Sport:
-					return sport[400];
+					return sport[300];
 				case ArticlePillar.Culture:
 					return culture[300];
 				case ArticlePillar.Opinion:
