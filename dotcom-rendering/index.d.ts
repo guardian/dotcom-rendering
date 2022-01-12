@@ -880,11 +880,6 @@ interface VineBlockLoadable extends ComponentNameChunkMap {
 	addWhen: VineBlockElement['_type'];
 }
 
-interface InstagramBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'InstagramBlockComponent';
-	addWhen: InstagramBlockElement['_type'];
-}
-
 // There are docs on loadable in ./docs/loadable-components.md
 type LoadableComponents = [
 	YoutubeBlockLoadable,
@@ -897,7 +892,6 @@ type LoadableComponents = [
 	SpotifyBlockLoadable,
 	FacebookVideoBlockLoadable,
 	VineBlockLoadable,
-	InstagramBlockLoadable,
 ];
 
 interface CarouselImagesMap {
