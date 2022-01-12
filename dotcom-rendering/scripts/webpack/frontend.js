@@ -8,61 +8,54 @@ const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 
-const smp = new SpeedMeasurePlugin({
-	outputFormat: 'humanVerbose',
-	loaderTopFiles: 50,
+const commonConfigs = ({ platform }) => ({
+	name: platform,
+	mode: process.env.NODE_ENV,
+	output: {
+		path: dist,
+	},
+	stats: 'errors-only',
+	devtool:
+		process.env.NODE_ENV === 'production'
+			? 'source-map'
+			: 'eval-cheap-module-source-map',
+	resolve: {
+		alias: {
+			'@root': path.resolve(__dirname, '.'),
+			'@frontend': path.resolve(__dirname, 'src'),
+			react: 'preact/compat',
+			'react-dom/test-utils': 'preact/test-utils',
+			'react-dom': 'preact/compat',
+		},
+		extensions: ['.js', '.ts', '.tsx', '.jsx'],
+		symlinks: false,
+	},
+	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+		}),
+		new FilterWarningsPlugin({
+			exclude: /export .* was not found in/,
+		}),
+		new LoadablePlugin({
+			writeToDisk: true,
+			filename: `loadable-manifest-${platform}.json`,
+		}),
+		// Does not try to require the 'canvas' package,
+		// an optional dependency of jsdom that we aren't using.
+		new webpack.IgnorePlugin({ resourceRegExp: /^canvas$/ }),
+		PROD &&
+			new BundleAnalyzerPlugin({
+				reportFilename: path.join(dist, `${platform}-bundles.html`),
+				analyzerMode: 'static',
+				openAnalyzer: false,
+				logLevel: 'warn',
+			}),
+		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
+		// [...].filter(Boolean) why it is used
+	].filter(Boolean),
 });
-
-const commonConfigs = ({ platform }) =>
-	smp.wrap({
-		name: platform,
-		mode: process.env.NODE_ENV,
-		output: {
-			path: dist,
-		},
-		stats: 'errors-only',
-		devtool:
-			process.env.NODE_ENV === 'production'
-				? 'source-map'
-				: 'eval-cheap-module-source-map',
-		resolve: {
-			alias: {
-				'@root': path.resolve(__dirname, '.'),
-				'@frontend': path.resolve(__dirname, 'src'),
-				react: 'preact/compat',
-				'react-dom/test-utils': 'preact/test-utils',
-				'react-dom': 'preact/compat',
-			},
-			extensions: ['.js', '.ts', '.tsx', '.jsx'],
-			symlinks: false,
-		},
-		plugins: [
-			new webpack.DefinePlugin({
-				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-			}),
-			new FilterWarningsPlugin({
-				exclude: /export .* was not found in/,
-			}),
-			new LoadablePlugin({
-				writeToDisk: true,
-				filename: `loadable-manifest-${platform}.json`,
-			}),
-			// Does not try to require the 'canvas' package,
-			// an optional dependency of jsdom that we aren't using.
-			new webpack.IgnorePlugin({ resourceRegExp: /^canvas$/ }),
-			PROD &&
-				new BundleAnalyzerPlugin({
-					reportFilename: path.join(dist, `${platform}-bundles.html`),
-					analyzerMode: 'static',
-					openAnalyzer: false,
-					logLevel: 'warn',
-				}),
-			// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
-			// [...].filter(Boolean) why it is used
-		].filter(Boolean),
-	});
 
 module.exports = [
 	// server bundle config
