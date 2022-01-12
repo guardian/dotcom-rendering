@@ -1,16 +1,21 @@
 import os from 'os';
 import { BytesMetric, collectAndSendAWSMetrics } from './aws-metrics';
 
-const maxHeapMemory = BytesMetric('rendering', 'CODE', 'max-heap-memory');
-const usedHeapMemory = BytesMetric('rendering', 'CODE', 'used-heap-memory');
+const stage =
+	typeof process.env.GU_STAGE === 'string'
+		? process.env.GU_STAGE.toUpperCase()
+		: 'DEV';
+
+const maxHeapMemory = BytesMetric('rendering', stage, 'max-heap-memory');
+const usedHeapMemory = BytesMetric('rendering', stage, 'used-heap-memory');
 const freePhysicalMemory = BytesMetric(
 	'rendering',
-	'CODE',
+	stage,
 	'free-physical-memory',
 );
 const totalPhysicalMemory = BytesMetric(
 	'rendering',
-	'CODE',
+	stage,
 	'total-physical-memory',
 );
 
