@@ -136,8 +136,8 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 		Tags.of(asg).add('gu:riffraff:new-asg', 'true');
 
 		const oldBalancer = cfnTemplate.getResource(
-      'LoadBalancer'
-    ) as CfnLoadBalancer;
+			'LoadBalancer',
+		) as CfnLoadBalancer;
 
 		const recordSet = new RecordSet(this, 'DnsRecord', {
 			recordType: RecordType.CNAME,
@@ -148,7 +148,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 			recordName: props.recordPrefix,
 			ttl: Duration.minutes(1),
 		});
-		const defaultChild = recordSet.node.defaultChild as CfnLoadBalancer;
-		defaultChild.overrideLogicalId('DnsRecord');
+		const defaultChild = recordSet.node.defaultChild as CfnElement;
+    defaultChild.overrideLogicalId('DnsRecord');
 	}
 }
