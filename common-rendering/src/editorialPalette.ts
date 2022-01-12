@@ -494,9 +494,9 @@ const borderLiveBlock = (format: ArticleFormat): Colour => {
 		case ArticlePillar.Sport:
 			return sport[400];
 		case ArticlePillar.Culture:
-			return culture[400];
+			return culture[350];
 		case ArticlePillar.Opinion:
-			return opinion[400];
+			return opinion[300];
 		case ArticleSpecial.Labs:
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
