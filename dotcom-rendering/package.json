@@ -40,6 +40,8 @@
     "*": "lint"
   },
   "dependencies": {
+    "@aws-sdk/client-cloudwatch": "^3.45.0",
+    "@aws-sdk/client-ssm": "^3.45.0",
     "@braze/web-sdk-core": "3.3.0",
     "@cypress/skip-test": "^2.6.0",
     "@guardian/ab-core": "^2.0.0",
@@ -64,7 +66,6 @@
     "@types/sanitize-html": "^1.27.1",
     "ajv": "^8.1.0",
     "ajv-formats": "^2.0.2",
-    "aws-sdk": "2.814.0",
     "chalk": "^4.1.0",
     "compose-function": "^3.0.3",
     "compression": "^1.7.3",
