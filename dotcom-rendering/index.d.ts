@@ -829,7 +829,7 @@ interface DCRBrowserDocumentData {
 type BlockElementType = string;
 interface ComponentNameChunkMap {
 	chunkName: string;
-	addWhen: BlockElementType | 'always';
+	addWhen: BlockElementType;
 }
 interface YoutubeBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'YoutubeBlockComponent';
