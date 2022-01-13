@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { Caption } from '@root/src/web/components/Caption';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { ClickToView } from './ClickToView';
+
 /**
  * https://www.theguardian.com/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue
  */
@@ -13,7 +15,27 @@ export const SpotifyBlockComponent: React.FC<{
 	format: ArticleFormat;
 	caption?: string;
 	credit?: string;
-}> = ({ embedUrl, width, height, title, format, caption, credit }) => {
+	role?: RoleType;
+	isTracking: boolean;
+	isMainMedia: boolean;
+	source?: string;
+	sourceDomain?: string;
+}> = ({
+	embedUrl,
+	width,
+	height,
+	title,
+	format,
+	caption,
+	credit,
+	role,
+	isTracking,
+	isMainMedia,
+	source,
+	sourceDomain,
+}) => {
+	if (!embedUrl || !title || !width || !height) return null;
+
 	const embedContainer = css`
 		iframe {
 			width: 100%;
@@ -24,26 +46,30 @@ export const SpotifyBlockComponent: React.FC<{
 	const palette = decidePalette(format);
 
 	return (
-		<>
-			{embedUrl && title && width && height && (
-				<div css={embedContainer} data-cy="spotify-embed">
-					<iframe
-						src={embedUrl}
-						title={title}
-						height={height}
-						width={width}
-						allowFullScreen={true}
+		<ClickToView
+			role={role}
+			isTracking={isTracking}
+			isMainMedia={isMainMedia}
+			source={source}
+			sourceDomain={sourceDomain}
+		>
+			<div css={embedContainer} data-cy="spotify-embed">
+				<iframe
+					src={embedUrl}
+					title={title}
+					height={height}
+					width={width}
+					allowFullScreen={true}
+				/>
+				{caption && (
+					<Caption
+						captionText={caption}
+						format={format}
+						palette={palette}
+						credit={credit}
 					/>
-					{caption && (
-						<Caption
-							captionText={caption}
-							format={format}
-							palette={palette}
-							credit={credit}
-						/>
-					)}
-				</div>
-			)}
-		</>
+				)}
+			</div>
+		</ClickToView>
 	);
 };

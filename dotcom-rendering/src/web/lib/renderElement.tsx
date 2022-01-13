@@ -514,13 +514,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<SpotifyBlockComponent
 						embedUrl={element.embedUrl}
 						height={element.height}
@@ -529,8 +523,13 @@ export const renderElement = ({
 						format={format}
 						caption={element.caption}
 						credit="Spotify"
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.StarRatingBlockElement':
 			return [

@@ -961,6 +961,9 @@ export const SpotifyBlockComponentStory = () => {
 								design: ArticleDesign.Standard,
 							}}
 							credit="Spotify"
+							role="inline"
+							isTracking={false}
+							isMainMedia={false}
 						/>
 					</ClickToView>
 				</Figure>
