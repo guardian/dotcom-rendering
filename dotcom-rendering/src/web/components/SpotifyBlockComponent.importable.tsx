@@ -8,7 +8,7 @@ import { ClickToView } from './ClickToView';
  * https://www.theguardian.com/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue
  */
 
-export const SpotifyBlockComponent: React.FC<{
+type Props = {
 	embedUrl?: string;
 	height?: number;
 	width?: number;
@@ -21,7 +21,9 @@ export const SpotifyBlockComponent: React.FC<{
 	isMainMedia: boolean;
 	source?: string;
 	sourceDomain?: string;
-}> = ({
+};
+
+export const SpotifyBlockComponent = ({
 	embedUrl,
 	width,
 	height,
@@ -34,7 +36,7 @@ export const SpotifyBlockComponent: React.FC<{
 	isMainMedia,
 	source,
 	sourceDomain,
-}) => {
+}: Props) => {
 	if (!embedUrl || !title || !width || !height) return null;
 
 	const embedContainer = css`
