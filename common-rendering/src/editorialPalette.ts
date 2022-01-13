@@ -19,7 +19,8 @@ type Colour = string;
 interface Palette {
 	text: {
 		articleLink: Colour;
-		byline: Colour;
+		bylineLightGrayBackground: Colour;
+		bylineDarkGrayBackground: Colour;
 		follow: Colour;
 		headline: Colour;
 		headlineDark: Colour;
@@ -103,16 +104,16 @@ const textHeadlineDark = (format: ArticleFormat): Colour => {
 	}
 };
 
-const textByline = (format: ArticleFormat): Colour => {
+const textBylineLightGrayBackground = (format: ArticleFormat): Colour => {
 	switch(format.design) {
 		case ArticleDesign.DeadBlog:
 			switch (format.theme) {
 				case ArticlePillar.News:
 					return news[400];
 				case ArticlePillar.Lifestyle:
-					return lifestyle[400];
+					return lifestyle[300];
 				case ArticlePillar.Sport:
-					return sport[400];
+					return sport[300];
 				case ArticlePillar.Culture:
 					return culture[300];
 				case ArticlePillar.Opinion:
@@ -159,24 +160,44 @@ const textByline = (format: ArticleFormat): Colour => {
 	}
 }
 
-const textFollow = (format: ArticleFormat): Colour => {
+const textBylineDarkGrayBackground = (format: ArticleFormat): Colour => {
 	switch(format.theme) {
 		case ArticlePillar.News:
 				return news[400];
 			case ArticlePillar.Lifestyle:
-				return lifestyle[400];
+				return lifestyle[300];
 			case ArticlePillar.Sport:
-				return sport[400];
+				return sport[300];
 			case ArticlePillar.Culture:
 				return culture[300];
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[200];
 			case ArticleSpecial.Labs:
 				return labs[300];
 			case ArticleSpecial.SpecialReport:
 				return specialReport[300];
 	}
 }
+
+const textFollow = (format: ArticleFormat): Colour => {
+	switch(format.theme) {
+		case ArticlePillar.News:
+				return news[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[300];
+			case ArticlePillar.Sport:
+				return sport[300];
+			case ArticlePillar.Culture:
+				return culture[300];
+			case ArticlePillar.Opinion:
+				return opinion[200];
+			case ArticleSpecial.Labs:
+				return labs[300];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[300];
+	}
+}
+
 
 const textInvertedByline = (format: ArticleFormat): Colour => {
 	switch(format.theme) {
@@ -299,9 +320,9 @@ const textKeyEventsGrayBackground = ({theme} : ArticleFormat): Colour => {
 		case ArticlePillar.News:
 			return news[400];
 		case ArticlePillar.Sport:
-			return sport[400];
+			return sport[300];
 		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
+			return lifestyle[300];
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Opinion:
@@ -577,13 +598,13 @@ const fillCommentCount = (format: ArticleFormat): Colour => {
 		case ArticlePillar.News:
 			return news[400];
 		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
+			return lifestyle[300];
 		case ArticlePillar.Sport:
-			return sport[400];
+			return sport[300];
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[200];
 		case ArticleSpecial.Labs:
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
@@ -672,7 +693,8 @@ const fillBlockquoteIcon = (format: ArticleFormat): Colour => {
 
 const text = {
 	articleLink: textArticleLink,
-	byline: textByline,
+	bylineLightGrayBackground: textBylineLightGrayBackground,
+	bylineDarkGrayBackground: textBylineDarkGrayBackground,
 	follow: textFollow,
 	headline: textHeadline,
 	headlineDark: textHeadlineDark,
@@ -712,7 +734,8 @@ const fill = {
 const palette = (format: ArticleFormat): Palette => ({
 	text: {
 		articleLink: text.articleLink(format),
-		byline: text.byline(format),
+		bylineLightGrayBackground: text.bylineLightGrayBackground(format),
+		bylineDarkGrayBackground: text.bylineDarkGrayBackground(format),
 		follow: text.follow(format),
 		headline: text.headline(format),
 		headlineDark: text.headlineDark(format),

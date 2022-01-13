@@ -116,7 +116,8 @@ const labsAnchorStyles = css`
 `;
 
 const getStyles = (format: ArticleFormat): SerializedStyles => {
-	const byline = text.byline(format);
+	const bylineLightGrayBackground = text.bylineLightGrayBackground(format);
+	const bylineDarkGrayBackground = text.bylineDarkGrayBackground(format);
 	const invertedByline = text.invertedByline(format);
 
 	if (format.theme === ArticleSpecial.Labs) {
@@ -127,22 +128,34 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.LiveBlog:
 			return css(
 				blogStyles,
-				blogColor(neutral[100], byline, invertedByline),
+				blogColor(
+					neutral[100],
+					bylineLightGrayBackground,
+					invertedByline,
+				),
 			);
 		case ArticleDesign.DeadBlog:
-			return css(blogStyles, blogColor(byline, byline, neutral[93]));
+			return css(
+				blogStyles,
+				blogColor(
+					bylineDarkGrayBackground,
+					bylineLightGrayBackground,
+					neutral[93],
+				),
+			);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
-			return commentStyles(byline);
+			return commentStyles(bylineLightGrayBackground);
 		default:
-			return styles(byline);
+			return styles(bylineLightGrayBackground);
 	}
 };
 
 const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker, inverted, link } = getThemeStyles(format.theme);
-	const byline = text.byline(format);
+	const bylineWhiteGrayBackground = text.bylineLightGrayBackground(format);
+	const bylineDarkGrayBackground = text.bylineDarkGrayBackground(format);
 	const invertedByline = text.invertedByline(format);
 
 	if (format.theme === ArticleSpecial.Labs) {
@@ -157,7 +170,11 @@ const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.DeadBlog:
 			return css(
 				blogAnchorStyles,
-				blogColor(byline, byline, invertedByline),
+				blogColor(
+					bylineDarkGrayBackground,
+					bylineWhiteGrayBackground,
+					invertedByline,
+				),
 			);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:

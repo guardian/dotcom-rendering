@@ -19,7 +19,6 @@ interface Props {
 const styles = (format: ArticleFormat): SerializedStyles => {
 	const blockquoteFill = fill.blockquoteIcon(format);
 
-
 	return css`
 		font-style: italic;
 		position: relative;
