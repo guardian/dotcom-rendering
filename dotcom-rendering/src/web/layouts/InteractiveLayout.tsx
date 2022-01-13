@@ -461,6 +461,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										host={host}
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
+										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
 								</div>
 							</GridItem>
@@ -513,6 +514,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										host={host}
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
+										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
 
 									{/* <Lines data-print-layout="hide" count={4} /> */}

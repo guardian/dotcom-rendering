@@ -3,7 +3,7 @@ import { CalloutBlockComponent } from '@root/src/web/components/CalloutBlockComp
 import { CaptionBlockComponent } from '@root/src/web/components/CaptionBlockComponent';
 import { CommentBlockComponent } from '@root/src/web/components/CommentBlockComponent';
 import { CodeBlockComponent } from '@root/src/web/components/CodeBlockComponent';
-import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
+import { RichLinkComponent } from '@root/src/web/components/RichLinkComponent.importable';
 import { DocumentBlockComponent } from '@root/src/web/components/DocumentBlockComponent';
 import { DisclaimerBlockComponent } from '@root/src/web/components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/DividerBlockComponent';
@@ -74,14 +74,12 @@ type Props = {
 	starRating?: number;
 	pageId: string;
 	webTitle: string;
+	ajaxUrl: string;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
 // article types.
-export const updateRole = (
-	el: CAPIElement,
-	format: ArticleFormat,
-): CAPIElement => {
+const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
 	const isLiveBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
@@ -127,6 +125,7 @@ export const renderElement = ({
 	starRating,
 	pageId,
 	webTitle,
+	ajaxUrl,
 }: Props): [boolean, JSX.Element] => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -502,12 +501,13 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
 			return [
 				true,
-				<DefaultRichLink
-					index={index}
-					headlineText={element.text}
-					url={element.url}
-					isPlaceholder={true}
-				/>,
+				<Island clientOnly={true} deferUntil="visible">
+					<RichLinkComponent
+						richLinkIndex={index}
+						element={element}
+						ajaxUrl={ajaxUrl}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
 			return [true, <SoundcloudBlockComponent element={element} />];
@@ -748,6 +748,7 @@ export const renderArticleElement = ({
 	palette,
 	element,
 	adTargeting,
+	ajaxUrl,
 	host,
 	index,
 	hideCaption,
@@ -763,6 +764,7 @@ export const renderArticleElement = ({
 		palette,
 		element: withUpdatedRole,
 		adTargeting,
+		ajaxUrl,
 		host,
 		index,
 		isMainMedia,

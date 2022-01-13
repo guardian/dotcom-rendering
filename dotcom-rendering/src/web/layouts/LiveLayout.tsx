@@ -674,6 +674,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											host={host}
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
+											ajaxUrl={CAPI.config.ajaxUrl}
 										/>
 									</div>
 								</GridItem>
@@ -778,6 +779,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											host={host}
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
+											ajaxUrl={CAPI.config.ajaxUrl}
 										/>
 										{CAPI.pagination &&
 											CAPI.pagination.totalPages > 1 && (
@@ -873,6 +875,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											host={host}
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
+											ajaxUrl={CAPI.config.ajaxUrl}
 										/>
 									</div>
 								</GridItem>
@@ -987,6 +990,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													host={host}
 													pageId={CAPI.pageId}
 													webTitle={CAPI.webTitle}
+													ajaxUrl={
+														CAPI.config.ajaxUrl
+													}
 												/>
 												{CAPI.pagination &&
 													CAPI.pagination.totalPages >

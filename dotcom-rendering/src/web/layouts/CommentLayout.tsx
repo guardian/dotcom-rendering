@@ -509,6 +509,7 @@ export const CommentLayout = ({
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
+									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
 							</div>
 						</GridItem>
@@ -547,6 +548,7 @@ export const CommentLayout = ({
 										host={host}
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
+										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
 									{showBodyEndSlot && (
 										<div id="slot-body-end" />

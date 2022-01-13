@@ -8,7 +8,7 @@ import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 type Props = {
 	element: RichLinkBlockElement;
-	ajaxEndpoint: string;
+	ajaxUrl: string;
 	richLinkIndex: number;
 };
 
@@ -53,10 +53,10 @@ const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
 
 export const RichLinkComponent = ({
 	element,
-	ajaxEndpoint,
+	ajaxUrl,
 	richLinkIndex,
 }: Props) => {
-	const url = buildUrl(element, ajaxEndpoint);
+	const url = buildUrl(element, ajaxUrl);
 	const { data, loading, error } = useApi<CAPIRichLinkType>(url);
 
 	if (error) {

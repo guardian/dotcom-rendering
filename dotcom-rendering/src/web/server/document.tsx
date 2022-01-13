@@ -97,10 +97,6 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 		},
 		{
-			chunkName: 'RichLinkComponent',
-			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-		},
-		{
 			chunkName: 'InteractiveBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveBlockElement',

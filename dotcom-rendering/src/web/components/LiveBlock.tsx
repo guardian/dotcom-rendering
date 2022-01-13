@@ -14,6 +14,7 @@ type Props = {
 	webTitle: string;
 	adTargeting: AdTargeting;
 	host?: string;
+	ajaxUrl: string;
 };
 
 export const LiveBlock = ({
@@ -23,6 +24,7 @@ export const LiveBlock = ({
 	webTitle,
 	adTargeting,
 	host,
+	ajaxUrl,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -51,6 +53,7 @@ export const LiveBlock = ({
 					isMainMedia: false,
 					host,
 					adTargeting,
+					ajaxUrl,
 					index,
 					pageId,
 					webTitle,

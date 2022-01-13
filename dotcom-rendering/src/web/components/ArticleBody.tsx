@@ -14,6 +14,7 @@ type Props = {
 	host?: string;
 	pageId: string;
 	webTitle: string;
+	ajaxUrl: string;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -79,6 +80,7 @@ export const ArticleBody = ({
 	host,
 	pageId,
 	webTitle,
+	ajaxUrl,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
@@ -102,6 +104,7 @@ export const ArticleBody = ({
 					host={host}
 					pageId={pageId}
 					webTitle={webTitle}
+					ajaxUrl={ajaxUrl}
 				/>
 			</div>
 		);
@@ -128,6 +131,7 @@ export const ArticleBody = ({
 				host={host}
 				pageId={pageId}
 				webTitle={webTitle}
+				ajaxUrl={ajaxUrl}
 			/>
 		</div>
 	);
