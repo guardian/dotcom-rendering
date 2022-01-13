@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, textSans, until } from '@guardian/source-foundations';
+import { remSpace, textSans } from '@guardian/source-foundations';
 import FollowStatus from 'components/followStatus';
 import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
