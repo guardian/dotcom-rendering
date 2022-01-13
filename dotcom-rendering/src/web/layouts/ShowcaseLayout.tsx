@@ -18,7 +18,6 @@ import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
@@ -51,6 +50,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Island } from '../components/Island';
+import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -572,7 +572,14 @@ export const ShowcaseLayout = ({
 										display={format.display}
 									/>
 									{!isPaidContent ? (
-										<MostViewedRightIsland />
+										<Island
+											clientOnly={true}
+											deferUntil="visible"
+										>
+											<MostViewedRightWrapper
+												isAdFreeUser={CAPI.isAdFreeUser}
+											/>
+										</Island>
 									) : (
 										<></>
 									)}
