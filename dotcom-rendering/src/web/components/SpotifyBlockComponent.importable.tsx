@@ -4,6 +4,7 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { ClickToView } from './ClickToView';
 
 /**
+ * Example article
  * https://www.theguardian.com/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue
  */
 
