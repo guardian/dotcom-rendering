@@ -60,12 +60,14 @@ export const RichLinkComponent = ({
 	richLinkIndex,
 }: Props) => {
 	const url = buildUrl(element, ajaxUrl);
-	const { data, loading, error } = useApi<CAPIRichLinkType>(url);
+	const { data, error } = useApi<CAPIRichLinkType>(url);
 
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
 		window.guardian.modules.sentry.reportError(error, 'rich-link');
+	}
 
+	if (!data) {
 		return (
 			<DefaultRichLink
 				index={richLinkIndex}
@@ -75,10 +77,6 @@ export const RichLinkComponent = ({
 		);
 	}
 
-	if (loading || !data) {
-		// Only render once data is available
-		return null;
-	}
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
