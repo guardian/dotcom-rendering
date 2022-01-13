@@ -5,9 +5,11 @@ import { useApi } from '@root/src/web/lib/useApi';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { ArticleDesign } from '@guardian/libs';
 
 type Props = {
 	element: RichLinkBlockElement;
+	format: ArticleFormat;
 	ajaxUrl: string;
 	richLinkIndex: number;
 };
@@ -53,6 +55,7 @@ const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
 
 export const RichLinkComponent = ({
 	element,
+	format,
 	ajaxUrl,
 	richLinkIndex,
 }: Props) => {
@@ -76,13 +79,18 @@ export const RichLinkComponent = ({
 		// Only render once data is available
 		return null;
 	}
+	const isBlog =
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
 
-	const richLinkImageData: RichLinkImageData = {
-		thumbnailUrl: data.thumbnailUrl,
-		altText: data.imageAsset?.fields.altText,
-		width: data.imageAsset?.fields.width,
-		height: data.imageAsset?.fields.height,
-	};
+	const richLinkImageData: RichLinkImageData | undefined = isBlog
+		? undefined
+		: {
+				thumbnailUrl: data.thumbnailUrl,
+				altText: data.imageAsset?.fields.altText,
+				width: data.imageAsset?.fields.width,
+				height: data.imageAsset?.fields.height,
+		  };
 
 	return (
 		<RichLink

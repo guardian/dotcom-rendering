@@ -21,7 +21,7 @@ import { Avatar } from '@frontend/web/components/Avatar';
 interface Props {
 	richLinkIndex: number;
 	cardStyle: RichLinkCardType;
-	imageData: RichLinkImageData;
+	imageData?: RichLinkImageData;
 	headlineText: string;
 	contentType: ContentType;
 	url: string;
