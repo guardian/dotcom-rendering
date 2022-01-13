@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { Caption } from '@root/src/web/components/Caption';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
+/**
+ * https://www.theguardian.com/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue
+ */
 
 export const SpotifyBlockComponent: React.FC<{
 	embedUrl?: string;
