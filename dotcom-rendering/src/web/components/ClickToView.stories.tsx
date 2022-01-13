@@ -11,7 +11,7 @@ import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
 import { EmbedBlockComponent } from './EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
-import { SpotifyBlockComponent } from './SpotifyBlockComponent';
+import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 import { DocumentBlockComponent } from './DocumentBlockComponent';
 import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';

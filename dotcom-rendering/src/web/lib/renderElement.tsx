@@ -22,7 +22,7 @@ import { MapEmbedBlockComponent } from '@root/src/web/components/MapEmbedBlockCo
 import { MultiImageBlockComponent } from '@root/src/web/components/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/SoundcloudBlockComponent';
-import { SpotifyBlockComponent } from '@root/src/web/components/SpotifyBlockComponent';
+import { SpotifyBlockComponent } from '@root/src/web/components/SpotifyBlockComponent.importable';
 import { StarRatingBlockComponent } from '@root/src/web/components/StarRatingBlockComponent';
 import { SubheadingBlockComponent } from '@root/src/web/components/SubheadingBlockComponent';
 import { TableBlockComponent } from '@root/src/web/components/TableBlockComponent';
