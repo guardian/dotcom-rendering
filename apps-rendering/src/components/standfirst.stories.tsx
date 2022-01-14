@@ -6,7 +6,13 @@ import {
 } from '@guardian/common-rendering/src/fixtures/article';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import { article, comment, feature, review } from 'fixtures/item';
+import {
+	article,
+	articleWithStandfirstLink,
+	comment,
+	feature,
+	review,
+} from 'fixtures/item';
 import { deadBlog } from 'fixtures/live';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
@@ -62,6 +68,16 @@ const Comment = (): ReactElement => (
 	/>
 );
 
+const Link = (): ReactElement => (
+	<Standfirst
+		item={{
+			...articleWithStandfirstLink,
+			display: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.News),
+		}}
+	/>
+);
+
 const Deadblog = (): ReactElement => {
 	return (
 		<>
@@ -84,10 +100,12 @@ const Deadblog = (): ReactElement => {
 	);
 };
 
+// ----- Exports ----- //
+
 export default {
 	component: Standfirst,
 	title: 'AR/Standfirst',
 	decorators: [withKnobs],
 };
 
-export { Default, Review, Feature, Comment, Deadblog };
+export { Default, Review, Feature, Comment, Link, Deadblog };
