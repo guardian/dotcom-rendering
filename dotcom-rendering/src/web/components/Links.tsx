@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { css } from '@emotion/react';
 
 import SearchIcon from '@frontend/static/icons/search.svg';
@@ -16,7 +16,6 @@ import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 import { useOnce } from '@frontend/web/lib/useOnce';
-import { getCookie } from '@guardian/libs';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
@@ -141,18 +140,7 @@ export const Links = ({
 	idUrl: idUrlFromConfig,
 	mmaUrl: mmaUrlFromConfig,
 }: Props) => {
-	const [showSupporterCTA, setShowSupporterCTA] = useState<boolean>();
 	const [userIsDefined, setUserIsDefined] = useState<boolean>();
-
-	// show supporter CTA if support messaging isn't shown
-	useEffect(() => {
-		setShowSupporterCTA(
-			getCookie({
-				name: 'gu_hide_support_messaging',
-				shouldMemoize: true,
-			}) === 'true',
-		);
-	}, []);
 
 	// we intentionally re-render here because we know the DOM structure could be different
 	// from the server rendered version. This forces a full validation
@@ -203,10 +191,12 @@ export const Links = ({
 	];
 	return (
 		<div data-print-layout="hide" css={linksStyles}>
-			 <div css={seperatorStyles} />
+			<div css={seperatorStyles} />
 			<a
 				href="https://support.theguardian.com/subscribe/weekly?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_supporter_cta%22%7D"
-				css={[linkTablet({ showAtTablet: false }), linkStyles]} data-link-name="nav2 : supporter-cta">
+				css={[linkTablet({ showAtTablet: false }), linkStyles]}
+				data-link-name="nav2 : supporter-cta"
+			>
 				Print subscriptions
 			</a>
 
