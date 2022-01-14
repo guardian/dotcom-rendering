@@ -829,7 +829,7 @@ interface DCRBrowserDocumentData {
 type BlockElementType = string;
 interface ComponentNameChunkMap {
 	chunkName: string;
-	addWhen: BlockElementType | 'always';
+	addWhen: BlockElementType;
 }
 interface YoutubeBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'YoutubeBlockComponent';
@@ -866,11 +866,6 @@ interface MapBlockLoadable extends ComponentNameChunkMap {
 	addWhen: MapBlockElement['_type'];
 }
 
-interface SpotifyBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'SpotifyBlockComponent';
-	addWhen: SpotifyBlockElement['_type'];
-}
-
 interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'VideoFacebookBlockComponent';
 	addWhen: VideoFacebookBlockElement['_type'];
@@ -889,7 +884,6 @@ type LoadableComponents = [
 	CalloutBlockLoadable,
 	DocumentBlockLoadable,
 	MapBlockLoadable,
-	SpotifyBlockLoadable,
 	FacebookVideoBlockLoadable,
 	VineBlockLoadable,
 ];

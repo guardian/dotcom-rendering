@@ -391,24 +391,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const SpotifyBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.SpotifyBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/SpotifyBlockComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.SpotifyBlockComponent,
-		},
-	);
-
 	const VideoFacebookBlockComponent = loadable(
 		() => {
 			if (
@@ -503,10 +485,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const maps = elementsByType<MapBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.MapBlockElement',
-	);
-	const spotifies = elementsByType<SpotifyBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.SpotifyBlockElement',
 	);
 	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
 		CAPI.elementsToHydrate,
@@ -889,26 +867,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 							caption={map.caption}
 							credit={map.source}
 							title={map.title}
-						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
-			{spotifies.map((spotify) => (
-				<HydrateOnce rootId={spotify.elementId}>
-					<ClickToView
-						role={spotify.role}
-						isTracking={spotify.isThirdPartyTracking}
-						source={spotify.source}
-						sourceDomain={spotify.sourceDomain}
-					>
-						<SpotifyBlockComponent
-							embedUrl={spotify.embedUrl}
-							height={spotify.height}
-							width={spotify.width}
-							title={spotify.title}
-							format={format}
-							caption={spotify.caption}
-							credit="Spotify"
 						/>
 					</ClickToView>
 				</HydrateOnce>
