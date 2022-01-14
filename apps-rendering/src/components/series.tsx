@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -60,9 +61,11 @@ const immersiveLabsLinkStyles = css`
 	${textSans.medium({ lineHeight: 'loose', fontWeight: 'bold' })}
 `;
 
-const liveLinkStyles = (theme: ArticleTheme): SerializedStyles => css`
+const blogLinkStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
-	color: ${getThemeStyles(theme).liveblogKicker};
+	color: ${format.design === ArticleDesign.LiveBlog
+		? getThemeStyles(format.theme).liveblogKicker
+		: text.seriesTitle(format)};
 	text-decoration: none;
 `;
 
@@ -87,7 +90,7 @@ const getLinkStyles = ({
 		design === ArticleDesign.LiveBlog ||
 		design === ArticleDesign.DeadBlog
 	) {
-		return liveLinkStyles(theme);
+		return blogLinkStyles({ design, display, theme });
 	}
 
 	return standardLinkStyles(theme);

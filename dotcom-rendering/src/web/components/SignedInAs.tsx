@@ -83,7 +83,7 @@ const rowUntilDesktop = css`
 	}
 `;
 
-const CommentCount = ({ count }: { count?: number }) => {
+const Heading = ({ count }: { count?: number }) => {
 	return (
 		<h2 css={headingStyles}>
 			comments{' '}
@@ -115,7 +115,7 @@ export const SignedInAs = ({
 		if (user) {
 			return (
 				<div css={containerStyles}>
-					<CommentCount count={commentCount} />
+					<Heading count={commentCount} />
 					<span css={headlineStyles}>
 						Commenting has been disabled at this time
 					</span>
@@ -125,7 +125,7 @@ export const SignedInAs = ({
 		// Discussion disabled sitewide and user logged out
 		return (
 			<div css={containerStyles}>
-				<CommentCount count={commentCount} />
+				<Heading count={commentCount} />
 				<span css={headlineStyles}>
 					Commenting has been disabled at this time but you can still{' '}
 					<a
@@ -155,7 +155,7 @@ export const SignedInAs = ({
 		// User is banned
 		return (
 			<div css={containerStyles}>
-				<CommentCount count={commentCount} />
+				<Heading count={commentCount} />
 				<span css={headlineStyles}>
 					Commenting has been disabled for this account (
 					<a
@@ -174,7 +174,7 @@ export const SignedInAs = ({
 		// The reader is logged in but the discussion is closed
 		return (
 			<div css={containerStyles}>
-				<CommentCount count={commentCount} />
+				<Heading count={commentCount} />
 				<span css={headlineStyles}>
 					This discussion is closed for comments
 				</span>
@@ -186,7 +186,7 @@ export const SignedInAs = ({
 		// The discussion is closed and the reader is not logged in
 		return (
 			<div css={containerStyles}>
-				<CommentCount count={commentCount} />
+				<Heading count={commentCount} />
 				<span css={headlineStyles}>
 					This discussion is now closed for comments but you can still{' '}
 					<a
@@ -216,7 +216,7 @@ export const SignedInAs = ({
 		// The discussion is open but the reader is not logged in
 		return (
 			<div css={containerStyles}>
-				<CommentCount count={commentCount} />
+				<Heading count={commentCount} />
 				<span css={headlineStyles}>
 					<a
 						href={`https://profile.theguardian.com/signin?INTCMP=DOTCOM_COMMENTS_SIGNIN&${createAuthenticationEventParams(
@@ -244,7 +244,7 @@ export const SignedInAs = ({
 	// Discussion open and user logged in
 	return (
 		<div css={containerStyles}>
-			<CommentCount count={commentCount} />
+			<Heading count={commentCount} />
 			<div css={rowUntilDesktop}>
 				<div css={imageWrapper}>
 					<img

@@ -5,7 +5,7 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
-import { LastUpdated } from '@guardian/common-rendering/src/components/LastUpdated';
+import { LastUpdated } from '@root/src/web/components/LastUpdated';
 
 type Props = {
 	format: ArticleFormat;

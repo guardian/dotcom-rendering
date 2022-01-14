@@ -12,7 +12,6 @@ export const Basic = () => {
 			<Discussion
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/4v8kk"
-				isCommentable={true}
 				format={{
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
