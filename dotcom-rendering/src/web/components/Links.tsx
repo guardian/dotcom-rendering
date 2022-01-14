@@ -191,14 +191,18 @@ export const Links = ({
 	];
 	return (
 		<div data-print-layout="hide" css={linksStyles}>
-			<div css={seperatorStyles} />
-			<a
-				href="https://support.theguardian.com/subscribe/weekly?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_supporter_cta%22%7D"
-				css={[linkTablet({ showAtTablet: false }), linkStyles]}
-				data-link-name="nav2 : supporter-cta"
-			>
-				Print subscriptions
-			</a>
+			{supporterCTA !== '' && (
+				<>
+					<div css={seperatorStyles} />
+					<a
+						href="https://support.theguardian.com/subscribe/weekly?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_supporter_cta%22%7D"
+						css={[linkTablet({ showAtTablet: false }), linkStyles]}
+						data-link-name="nav2 : supporter-cta"
+					>
+						Print subscriptions
+					</a>
+				</>
+			)}
 
 			<div css={seperatorStyles} />
 			<a
