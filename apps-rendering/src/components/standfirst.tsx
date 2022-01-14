@@ -9,7 +9,7 @@ import {
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { headline, remSpace, textSans } from '@guardian/source-foundations';
+import { headline, neutral, remSpace, textSans } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
