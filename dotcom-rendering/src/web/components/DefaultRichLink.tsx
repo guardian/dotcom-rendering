@@ -33,6 +33,8 @@ export const DefaultRichLink: React.FC<DefaultProps> = ({
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
+				// We default to SpecialReport here purely because the greys of this theme
+				// look better as the defaults
 				theme: ArticleSpecial.SpecialReport,
 			}}
 			tags={[]}
