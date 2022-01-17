@@ -69,10 +69,10 @@ export const Discussion = ({
 					'profile/me?strict_sanctions_check=false',
 			  )
 			: '',
-		// {},
-		// {
-		// 	credentials: 'include',
-		// },
+		{},
+		{
+			credentials: 'include',
+		},
 	);
 
 	const palette = decidePalette(format);
