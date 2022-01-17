@@ -5,8 +5,10 @@ const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const StatsReportPlugin = require('./stats-report-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
+const DEV = process.env.NODE_ENV === 'development';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
 
 const commonConfigs = ({ platform }) => ({
@@ -45,6 +47,7 @@ const commonConfigs = ({ platform }) => ({
 		// Does not try to require the 'canvas' package,
 		// an optional dependency of jsdom that we aren't using.
 		new webpack.IgnorePlugin({ resourceRegExp: /^canvas$/ }),
+		DEV && new StatsReportPlugin(),
 		PROD &&
 			new BundleAnalyzerPlugin({
 				reportFilename: path.join(dist, `${platform}-bundles.html`),
