@@ -7,7 +7,6 @@ export type PageReference = {
 	blocks: LiveBlock[];
 	pageNumber: number;
 	suffix: string;
-	isArchivePage: boolean;
 };
 
 export type Pagination = {
@@ -23,6 +22,8 @@ export type LiveBlogPagedBlocks = {
 	pagination: Pagination;
 };
 
+const navContainerId = 'liveblog-navigation';
+
 const getOldestPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
@@ -30,7 +31,7 @@ const getOldestPage = (
 	if (pageNumber >= pages.length) return none;
 
 	const blocks = pages[pages.length - 1];
-	return some(`?page=with:block-${blocks[0].id}`);
+	return some(`?page=with:block-${blocks[0].id}#${navContainerId}`);
 };
 
 const getOlderPage = (
@@ -39,7 +40,7 @@ const getOlderPage = (
 ): Option<string> => {
 	if (pageNumber < pages.length) {
 		const blocks = pages[pageNumber];
-		return some(`?page=with:block-${blocks[0].id}`);
+		return some(`?page=with:block-${blocks[0].id}#${navContainerId}`);
 	}
 
 	return none;
@@ -51,7 +52,7 @@ const getNewerPage = (
 ): Option<string> => {
 	if (pageNumber > 2) {
 		const blocks = pages[pageNumber - 2];
-		return some(`?page=with:block-${blocks[0].id}`);
+		return some(`?page=with:block-${blocks[0].id}#${navContainerId}`);
 	}
 
 	if (pageNumber === 2) {
@@ -101,7 +102,6 @@ const getCurrentPage = (
 		blocks: pages[0],
 		pageNumber: 1,
 		suffix: '',
-		isArchivePage: false,
 	};
 
 	return pipe(
@@ -113,7 +113,6 @@ const getCurrentPage = (
 						blocks: pages[i],
 						pageNumber: i + 1,
 						suffix: '',
-						isArchivePage: false,
 					};
 				}
 			}
