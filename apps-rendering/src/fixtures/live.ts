@@ -307,7 +307,6 @@ const pagedBlocks: LiveBlogPagedBlocks = {
 		blocks: blocks,
 		pageNumber: 1,
 		suffix: '',
-		isArchivePage: false,
 	},
 	pagination: {
 		older: none,
