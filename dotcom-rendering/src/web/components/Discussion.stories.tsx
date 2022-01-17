@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
-import { Discussion } from './Discussion';
+import { Discussion } from './Discussion.importable';
 
 export default {
 	component: Discussion,
