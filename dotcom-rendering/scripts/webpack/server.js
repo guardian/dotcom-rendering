@@ -18,9 +18,11 @@ module.exports = () => ({
 		require('webpack-node-externals')({
 			allowlist: [/^@guardian/],
 		}),
+		// @aws-sdk modules are only used in CODE/PROD, so we don't need to
+		// include them in the development bundle
 		({ request }, callback) => {
 			return process.env.NODE_ENV === 'development' &&
-				/^(@aws-.+\/).*/i.test(request)
+				request.startsWith('@aws-sdk')
 				? callback(null, `commonjs ${request}`)
 				: callback();
 		},
