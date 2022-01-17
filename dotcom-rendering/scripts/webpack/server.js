@@ -19,7 +19,7 @@ module.exports = () => ({
 			allowlist: [/^@guardian/],
 		}),
 		({ request }, callback) => {
-			return !process.env.DISABLE_LOGGING_AND_METRICS &&
+			return process.env.NODE_ENV === 'development' &&
 				/^(@aws-.+\/).*/i.test(request)
 				? callback(null, `commonjs ${request}`)
 				: callback();
