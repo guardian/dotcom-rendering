@@ -289,7 +289,7 @@ export const document = ({ data }: Props): string => {
 	)[0];
 	const gaPath = {
 		modern: modernScript.src,
-		legacy: legacyScript && legacyScript.src,
+		legacy: legacyScript?.src,
 	};
 
 	/**
