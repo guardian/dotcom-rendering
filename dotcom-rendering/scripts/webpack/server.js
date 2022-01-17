@@ -19,6 +19,12 @@ module.exports = () => ({
 			allowlist: [/^@guardian/],
 		}),
 		({ request }, callback) => {
+			return !process.env.DISABLE_LOGGING_AND_METRICS &&
+				/^(@aws-.+\/).*/i.test(request)
+				? callback(null, `commonjs ${request}`)
+				: callback();
+		},
+		({ request }, callback) => {
 			return request.endsWith('loadable-manifest-browser.json')
 				? callback(null, `commonjs ${request}`)
 				: callback();
