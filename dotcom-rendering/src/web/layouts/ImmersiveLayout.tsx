@@ -476,7 +476,6 @@ export const ImmersiveLayout = ({
 								}
 								isAdFreeUser={CAPI.isAdFreeUser}
 								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
 							/>
 						</Island>
 					</ElementContainer>

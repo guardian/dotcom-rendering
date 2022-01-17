@@ -1128,7 +1128,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								enableDiscussionSwitch={false}
 								isAdFreeUser={CAPI.isAdFreeUser}
 								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
 							/>
 						</Island>
 					</ElementContainer>

@@ -648,7 +648,6 @@ export const CommentLayout = ({
 								enableDiscussionSwitch={false}
 								isAdFreeUser={CAPI.isAdFreeUser}
 								shouldHideAds={CAPI.shouldHideAds}
-								beingHydrated={false}
 							/>
 						</Island>
 					</ElementContainer>

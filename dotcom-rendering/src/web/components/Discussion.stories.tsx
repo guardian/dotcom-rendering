@@ -22,7 +22,6 @@ export const Basic = () => {
 				enableDiscussionSwitch={true}
 				isAdFreeUser={false}
 				shouldHideAds={false}
-				beingHydrated={true}
 			/>
 		</div>
 	);
