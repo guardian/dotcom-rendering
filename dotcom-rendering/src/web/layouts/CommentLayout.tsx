@@ -33,7 +33,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@root/src/web/components/Discussion.importable';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -637,7 +637,7 @@ export const CommentLayout = ({
 				{!isPaidContent && showComments && (
 					<ElementContainer element="aside">
 						<Island clientOnly={true} deferUntil="idle">
-							<Discussion
+							<DiscussionContainer
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
 								format={format}

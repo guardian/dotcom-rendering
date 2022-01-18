@@ -33,7 +33,7 @@ import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@root/src/web/components/Discussion.importable';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { Pagination } from '@frontend/web/components/Pagination';
 import { KeyEventsContainer } from '@frontend/web/components/KeyEventsContainer';
 
@@ -1117,7 +1117,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						element="section"
 					>
 						<Island clientOnly={true} deferUntil="idle">
-							<Discussion
+							<DiscussionContainer
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
 								format={format}

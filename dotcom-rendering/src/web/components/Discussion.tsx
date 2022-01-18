@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 
-import { getCookie, joinUrl } from '@guardian/libs';
+import { joinUrl } from '@guardian/libs';
 import { space, from } from '@guardian/source-foundations';
 import { RightColumn } from '@frontend/web/components/RightColumn';
 import { AdSlot } from '@root/src/web/components/AdSlot';
@@ -14,9 +14,8 @@ import { Hide } from '@frontend/web/components/Hide';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
 import { useDiscussion } from '@root/src/web/lib/useDiscussion';
 import { decidePalette } from '../lib/decidePalette';
-import { useApi } from '../lib/useApi';
 
-type Props = {
+export type Props = {
 	format: ArticleFormat;
 	discussionApiUrl: string;
 	shortUrlId: string;
@@ -25,6 +24,7 @@ type Props = {
 	enableDiscussionSwitch: boolean;
 	isAdFreeUser: boolean;
 	shouldHideAds: boolean;
+	user?: UserProfile;
 };
 
 const commentIdFromUrl = () => {
@@ -45,6 +45,7 @@ export const Discussion = ({
 	enableDiscussionSwitch,
 	isAdFreeUser,
 	shouldHideAds,
+	user,
 }: Props) => {
 	const [commentPage, setCommentPage] = useState<number>();
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
@@ -58,21 +59,6 @@ export const Discussion = ({
 
 	const { commentCount, isClosedForComments } = useDiscussion(
 		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
-	);
-
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-
-	const { data: user } = useApi<{ userProfile: UserProfile }>(
-		isSignedIn
-			? joinUrl(
-					discussionApiUrl,
-					'profile/me?strict_sanctions_check=false',
-			  )
-			: '',
-		{},
-		{
-			credentials: 'include',
-		},
 	);
 
 	const palette = decidePalette(format);
@@ -145,7 +131,7 @@ export const Discussion = ({
 					<SignedInAs
 						palette={palette}
 						enableDiscussionSwitch={enableDiscussionSwitch}
-						user={user && user.userProfile}
+						user={user}
 						commentCount={commentCount}
 						isClosedForComments={isClosedForComments}
 					/>
@@ -172,14 +158,14 @@ export const Discussion = ({
 									enableDiscussionSwitch={
 										enableDiscussionSwitch
 									}
-									user={user && user.userProfile}
+									user={user}
 									commentCount={commentCount}
 									isClosedForComments={isClosedForComments}
 								/>
 							</div>
 						</Hide>
 						<Comments
-							user={user && user.userProfile}
+							user={user}
 							baseUrl={discussionApiUrl}
 							pillar={format.theme}
 							initialPage={commentPage}

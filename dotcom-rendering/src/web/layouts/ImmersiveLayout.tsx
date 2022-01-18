@@ -27,7 +27,7 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Caption } from '@root/src/web/components/Caption';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
-import { Discussion } from '@root/src/web/components/Discussion.importable';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { Hide } from '@root/src/web/components/Hide';
 import { GuardianLabsLines } from '@frontend/web/components/GuardianLabsLines';
 
@@ -463,7 +463,7 @@ export const ImmersiveLayout = ({
 				{!isPaidContent && showComments && (
 					<ElementContainer element="aside">
 						<Island clientOnly={true} deferUntil="idle">
-							<Discussion
+							<DiscussionContainer
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
 								format={format}

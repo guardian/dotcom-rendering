@@ -32,7 +32,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@root/src/web/components/Discussion.importable';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -614,7 +614,7 @@ export const ShowcaseLayout = ({
 				{!isPaidContent && showComments && (
 					<ElementContainer element="section">
 						<Island clientOnly={true} deferUntil="idle">
-							<Discussion
+							<DiscussionContainer
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
 								format={format}

@@ -36,7 +36,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@root/src/web/components/Discussion.importable';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
@@ -579,7 +579,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						element="section"
 					>
 						<Island clientOnly={true} deferUntil="idle">
-							<Discussion
+							<DiscussionContainer
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
 								format={format}
