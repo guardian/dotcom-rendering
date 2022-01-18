@@ -57,12 +57,15 @@ export const RichLinkComponent = ({
 	richLinkIndex,
 }: Props) => {
 	const url = buildUrl(element, ajaxEndpoint);
-	const { data, loading, error } = useApi<CAPIRichLinkType>(url);
+	const { data, error } = useApi<CAPIRichLinkType>(url);
 
 	if (error) {
-		// Send the error to Sentry and then prevent the element from rendering
+		// Send the error to Sentry
 		window.guardian.modules.sentry.reportError(error, 'rich-link');
+	}
 
+	if (!data) {
+		// Continue to return the default (server side rendered) version of the richlink
 		return (
 			<DefaultRichLink
 				index={richLinkIndex}
@@ -70,11 +73,6 @@ export const RichLinkComponent = ({
 				url={element.url}
 			/>
 		);
-	}
-
-	if (loading || !data) {
-		// Only render once data is available
-		return null;
 	}
 
 	const richLinkImageData: RichLinkImageData = {
