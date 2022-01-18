@@ -155,7 +155,7 @@ const MyAccount = ({
 	idUrl: string;
 	discussionApiUrl: string;
 }) => {
-	const { data } = useApi<{ userProfile: UserProfile }>(
+	const { data, error } = useApi<{ userProfile: UserProfile }>(
 		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
 		{},
 		{
@@ -163,8 +163,9 @@ const MyAccount = ({
 		},
 	);
 
-	// If we don't have user data display sign in to the user. SWR will retry in the background if the request failed
-	if (!data?.userProfile?.userId) return <SignIn idUrl={idUrl} />;
+	// If we encounter an error or don't have user data display sign in to the user.
+	// SWR will retry in the background if the request failed
+	if (error || !data?.userProfile?.userId) return <SignIn idUrl={idUrl} />;
 
 	const identityLinks: DropdownLinkType[] = [
 		{
