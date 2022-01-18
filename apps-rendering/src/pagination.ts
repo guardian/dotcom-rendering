@@ -22,8 +22,6 @@ export type LiveBlogPagedBlocks = {
 	pagination: Pagination;
 };
 
-const navContainerId = 'liveblog-navigation';
-
 const getOldestPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
@@ -31,7 +29,7 @@ const getOldestPage = (
 	if (pageNumber >= pages.length) return none;
 
 	const blocks = pages[pages.length - 1];
-	return some(`?page=with:block-${blocks[0].id}#${navContainerId}`);
+	return some(`?page=with:block-${blocks[0].id}`);
 };
 
 const getOlderPage = (
@@ -40,7 +38,7 @@ const getOlderPage = (
 ): Option<string> => {
 	if (pageNumber < pages.length) {
 		const blocks = pages[pageNumber];
-		return some(`?page=with:block-${blocks[0].id}#${navContainerId}`);
+		return some(`?page=with:block-${blocks[0].id}`);
 	}
 
 	return none;
@@ -52,11 +50,11 @@ const getNewerPage = (
 ): Option<string> => {
 	if (pageNumber > 2) {
 		const blocks = pages[pageNumber - 2];
-		return some(`?page=with:block-${blocks[0].id}#${navContainerId}`);
+		return some(`?page=with:block-${blocks[0].id}`);
 	}
 
 	if (pageNumber === 2) {
-		return some(`?`);
+		return some('');
 	}
 
 	return none;
@@ -67,7 +65,7 @@ const getNewestPage = (
 	pageNumber: number,
 ): Option<string> => {
 	if (pageNumber > 1) {
-		return some(`?`);
+		return some('');
 	}
 
 	return none;

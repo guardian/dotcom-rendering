@@ -153,8 +153,8 @@ describe('pagination', () => {
 				const expectedPagination: Pagination = {
 					newer: none,
 					newest: none,
-					oldest: some(`?page=with:block-19#liveblog-navigation`),
-					older: some(`?page=with:block-19#liveblog-navigation`),
+					oldest: some(`?page=with:block-19`),
+					older: some(`?page=with:block-19`),
 					numberOfPages: 2,
 				};
 
@@ -181,8 +181,8 @@ describe('pagination', () => {
 				const expectedPagination: Pagination = {
 					newer: none,
 					newest: none,
-					oldest: some(`?page=with:block-25#liveblog-navigation`),
-					older: some(`?page=with:block-15#liveblog-navigation`),
+					oldest: some(`?page=with:block-25`),
+					older: some(`?page=with:block-15`),
 					numberOfPages: 3,
 				};
 
@@ -209,8 +209,8 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: some(`?`),
-					newest: some(`?`),
+					newer: some(''),
+					newest: some(''),
 					older: none,
 					oldest: none,
 					numberOfPages: 2,
@@ -237,10 +237,10 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: some(`?`),
-					newest: some(`?`),
-					older: some(`?page=with:block-24#liveblog-navigation`),
-					oldest: some(`?page=with:block-34#liveblog-navigation`),
+					newer: some(''),
+					newest: some(''),
+					older: some(`?page=with:block-24`),
+					oldest: some(`?page=with:block-34`),
 					numberOfPages: 4,
 				};
 
@@ -266,10 +266,10 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				newer: some(`?page=with:block-14#liveblog-navigation`),
-				newest: some(`?`),
-				older: some(`?page=with:block-34#liveblog-navigation`),
-				oldest: some(`?page=with:block-44#liveblog-navigation`),
+				newer: some(`?page=with:block-14`),
+				newest: some(''),
+				older: some(`?page=with:block-34`),
+				oldest: some(`?page=with:block-44`),
 				numberOfPages: 5,
 			};
 
@@ -294,10 +294,10 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				newer: some(`?page=with:block-24#liveblog-navigation`),
-				newest: some(`?`),
-				older: some(`?page=with:block-44#liveblog-navigation`),
-				oldest: some(`?page=with:block-44#liveblog-navigation`),
+				newer: some(`?page=with:block-24`),
+				newest: some(''),
+				older: some(`?page=with:block-44`),
+				oldest: some(`?page=with:block-44`),
 				numberOfPages: 5,
 			};
 
@@ -324,8 +324,8 @@ describe('pagination', () => {
 			const expectedPagination: Pagination = {
 				older: none,
 				oldest: none,
-				newer: some(`?page=with:block-34#liveblog-navigation`),
-				newest: some(`?`),
+				newer: some(`?page=with:block-34`),
+				newest: some(''),
 				numberOfPages: 5,
 			};
 
