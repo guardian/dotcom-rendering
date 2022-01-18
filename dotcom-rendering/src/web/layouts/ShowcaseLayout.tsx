@@ -595,7 +595,6 @@ export const ShowcaseLayout = ({
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
 				<aside id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer

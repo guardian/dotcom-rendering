@@ -560,7 +560,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
 				<aside data-print-layout="hide" id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer

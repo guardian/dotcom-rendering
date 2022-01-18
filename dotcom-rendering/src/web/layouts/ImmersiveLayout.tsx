@@ -451,7 +451,6 @@ export const ImmersiveLayout = ({
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
 				<aside id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer

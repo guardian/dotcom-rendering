@@ -618,7 +618,6 @@ export const CommentLayout = ({
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
 				<div id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer
