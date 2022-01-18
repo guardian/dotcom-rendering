@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
 import SearchIcon from '@frontend/static/icons/search.svg';
@@ -15,13 +14,13 @@ import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
 
 import ProfileIcon from '@frontend/static/icons/profile.svg';
 import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
-import { useOnce } from '@frontend/web/lib/useOnce';
-import { getCookie } from '@guardian/libs';
+import { getCookie, joinUrl } from '@guardian/libs';
+import { useApi } from '@root/src/web/lib/useApi';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
 	supporterCTA: string;
-	userId?: string;
+	discussionApiUrl: string;
 	idUrl?: string;
 	mmaUrl?: string;
 };
@@ -135,34 +134,38 @@ const linksStyles = css`
 	}
 `;
 
-export const Links = ({
-	userId,
-	supporterCTA,
-	idUrl: idUrlFromConfig,
-	mmaUrl: mmaUrlFromConfig,
-}: Props) => {
-	const [showSupporterCTA, setShowSupporterCTA] = useState<boolean>();
-	const [userIsDefined, setUserIsDefined] = useState<boolean>();
+const SignIn = ({ idUrl }: { idUrl: string }) => (
+	<a
+		css={linkStyles}
+		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
+			'guardian_signin_header',
+		)}`}
+		data-link-name="nav2 : topbar : signin"
+	>
+		<ProfileIcon /> Sign in
+	</a>
+);
 
-	// show supporter CTA if support messaging isn't shown
-	useEffect(() => {
-		setShowSupporterCTA(
-			getCookie({
-				name: 'gu_hide_support_messaging',
-				shouldMemoize: true,
-			}) === 'true',
-		);
-	}, []);
+const MyAccount = ({
+	mmaUrl,
+	idUrl,
+	discussionApiUrl,
+}: {
+	mmaUrl: string;
+	idUrl: string;
+	discussionApiUrl: string;
+}) => {
+	const { data, error } = useApi<{ userProfile: UserProfile }>(
+		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
+		{},
+		{
+			credentials: 'include',
+		},
+	);
 
-	// we intentionally re-render here because we know the DOM structure could be different
-	// from the server rendered version. This forces a full validation
-	useOnce(() => {
-		setUserIsDefined(!!userId);
-	}, [userId]);
-
-	// Fall back on prod URLs just in case these aren't set for any reason
-	const idUrl = idUrlFromConfig || 'https://profile.theguardian.com';
-	const mmaUrl = mmaUrlFromConfig || 'https://manage.theguardian.com';
+	// If we encounter an error or don't have user data display sign in to the user.
+	// SWR will retry in the background if the request failed
+	if (error || !data?.userProfile?.userId) return <SignIn idUrl={idUrl} />;
 
 	const identityLinks: DropdownLinkType[] = [
 		{
@@ -191,7 +194,7 @@ export const Links = ({
 			dataLinkName: 'nav2 : topbar : help',
 		},
 		{
-			url: `${idUrl}/user/id/${userId}`,
+			url: `${idUrl}/user/id/${data.userProfile.userId}`,
 			title: 'Comments & replies',
 			dataLinkName: 'nav2 : topbar : comment activity',
 		},
@@ -201,6 +204,45 @@ export const Links = ({
 			dataLinkName: 'nav2 : topbar : sign out',
 		},
 	];
+
+	return (
+		<div css={linkStyles}>
+			<ProfileIcon />
+			<Dropdown
+				label="My account"
+				links={identityLinks}
+				id="my-account"
+				dataLinkName="nav2 : topbar: my account"
+			/>
+		</div>
+	);
+};
+
+export const Links = ({
+	supporterCTA,
+	discussionApiUrl: discussionApiUrlFromConfig,
+	idUrl: idUrlServerFromConfig,
+	mmaUrl: mmaUrlServerFromConfig,
+}: Props) => {
+	// Fall back on prod URLs just in case these aren't set for any reason
+	const discussionApiUrl =
+		discussionApiUrlFromConfig ||
+		'https://discussion.theguardian.com/discussion-api';
+	const idUrl = idUrlServerFromConfig || 'https://profile.theguardian.com';
+	const mmaUrl = mmaUrlServerFromConfig || 'https://manage.theguardian.com';
+
+	const isServer = typeof window === 'undefined';
+
+	const showSupporterCTA =
+		!isServer &&
+		getCookie({
+			name: 'gu_hide_support_messaging',
+			shouldMemoize: true,
+		}) === 'true';
+
+	const isSignedIn =
+		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
+
 	return (
 		<div data-print-layout="hide" css={linksStyles}>
 			{showSupporterCTA && supporterCTA !== '' && (
@@ -226,26 +268,14 @@ export const Links = ({
 			</a>
 			<div css={seperatorHideStyles} />
 
-			{userIsDefined ? (
-				<div css={linkStyles}>
-					<ProfileIcon />
-					<Dropdown
-						label="My account"
-						links={identityLinks}
-						id="my-account"
-						dataLinkName="nav2 : topbar: my account"
-					/>
-				</div>
+			{isSignedIn ? (
+				<MyAccount
+					mmaUrl={mmaUrl}
+					idUrl={idUrl}
+					discussionApiUrl={discussionApiUrl}
+				/>
 			) : (
-				<a
-					css={linkStyles}
-					href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
-						'guardian_signin_header',
-					)}`}
-					data-link-name="nav2 : topbar : signin"
-				>
-					<ProfileIcon /> Sign in
-				</a>
+				<SignIn idUrl={idUrl} />
 			)}
 
 			<Search
