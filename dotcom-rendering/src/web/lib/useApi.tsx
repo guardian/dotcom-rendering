@@ -29,7 +29,7 @@ interface ApiResponse<T> {
  * @param {SWRConfiguration} options - The SWR config object - https://swr.vercel.app/docs/options
  * @param {RequestInit} init - The fetch init object - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options
  * */
-export const useApi = <T,>(
+export const useApi = <T extends unknown>(
 	url: string,
 	options?: SWRConfiguration,
 	init?: RequestInit,
