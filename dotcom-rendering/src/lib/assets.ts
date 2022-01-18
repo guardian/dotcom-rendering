@@ -39,6 +39,7 @@ export const getScriptArrayFromFilename = (
 	filename: string,
 ): { src: string; legacy: boolean }[] => {
 	// Get legacy file name if one's available
+	// Builds with the SKIP_LEGACY flag will not include legacy bundles, this aids build performance.
 	// 'ophan.87b473fc83e9ca6250fc.js' -> 'ophan'
 	const chunkName = filename.split('.')[0];
 	const chunks: string[] | undefined =
