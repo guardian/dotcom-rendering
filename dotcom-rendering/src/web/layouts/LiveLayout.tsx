@@ -1116,7 +1116,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						data-print-layout="hide"
 						element="section"
 					>
-						<Island clientOnly={true} deferUntil="idle">
+						<Island clientOnly={true} deferUntil="visible">
 							<DiscussionContainer
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}

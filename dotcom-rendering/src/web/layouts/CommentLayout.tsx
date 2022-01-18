@@ -636,7 +636,7 @@ export const CommentLayout = ({
 
 				{!isPaidContent && showComments && (
 					<ElementContainer element="aside">
-						<Island clientOnly={true} deferUntil="idle">
+						<Island clientOnly={true} deferUntil="visible">
 							<DiscussionContainer
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								shortUrlId={CAPI.config.shortUrlId}
