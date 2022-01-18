@@ -34,7 +34,7 @@ export const useApi = <T extends unknown>(
 	options?: SWRConfiguration,
 	init?: RequestInit,
 ): ApiResponse<T> => {
-	const { data, error } = useSWR(url, fetcher(init), options);
+	const { data, error } = useSWR<T, Error>(url, fetcher(init), options);
 
 	return {
 		data,
