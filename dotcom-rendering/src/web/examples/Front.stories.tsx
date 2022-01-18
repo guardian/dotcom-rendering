@@ -49,7 +49,12 @@ export const Front = () => (
 			padded={false}
 			backgroundColour={brandBackground.primary}
 		>
-			<Header edition="UK" isAnniversary={true} />
+			<Header
+				edition="UK"
+				isAnniversary={true}
+				discussionApiUrl=""
+				supporterCTA=""
+			/>
 		</ElementContainer>
 		<ElementContainer
 			showSideBorders={true}
@@ -548,7 +553,12 @@ export const Front2 = () => (
 			padded={false}
 			backgroundColour={brandBackground.primary}
 		>
-			<Header edition="US" isAnniversary={true} />
+			<Header
+				edition="US"
+				isAnniversary={true}
+				discussionApiUrl=""
+				supporterCTA=""
+			/>
 		</ElementContainer>
 		<ElementContainer
 			showSideBorders={true}
