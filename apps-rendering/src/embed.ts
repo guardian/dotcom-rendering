@@ -8,7 +8,9 @@ import {
 	err,
 	fromNullable,
 	fromUnsafe,
+	ok,
 	resultAndThen,
+	ResultKind,
 	resultMap,
 	withDefault,
 } from '@guardian/types';
@@ -68,8 +70,10 @@ interface TikTok extends GenericFields {
 	kind: EmbedKind.TikTok;
 }
 
-interface EmailSignup extends GenericFields {
+interface EmailSignup {
 	kind: EmbedKind.EmailSignup;
+	alt: Option<string>;
+	src: string;
 }
 
 /**
@@ -164,14 +168,13 @@ const genericHeight = (parser: DocParser): ((html: string) => number) =>
 		parseIframe(parser),
 	);
 
-const isEmailSignUp = (parser: DocParser): ((html: string) => boolean) =>
-	compose(
-		either(
-			(_) => false,
-			(attrs: IFrame) => attrs.component.includes('email-embed'),
-		),
-		parseIframe(parser),
-	);
+const isGuardianDomain = (href: string): boolean => {
+	try {
+		return new URL(href).origin === 'https://www.theguardian.com';
+	} catch (e) {
+		return false;
+	}
+};
 
 const extractVideoUrl = (element: BlockElement): Result<string, string> =>
 	resultFromNullable("I can't find a 'url' field for this video embed")(
@@ -311,14 +314,9 @@ const parseInstagram = (element: BlockElement): Result<string, Embed> => {
 const parseGenericEmbedKind =
 	(parser: DocParser) =>
 	(element: BlockElement) =>
-	(
-		html: string,
-	): EmbedKind.TikTok | EmbedKind.EmailSignup | EmbedKind.Generic => {
+	(html: string): EmbedKind.TikTok | EmbedKind.Generic => {
 		if (element.embedTypeData?.source === 'TikTok') {
 			return EmbedKind.TikTok;
-		}
-		if (isEmailSignUp(parser)(html)) {
-			return EmbedKind.EmailSignup;
 		}
 		return EmbedKind.Generic;
 	};
@@ -356,6 +354,33 @@ const parseGenericInstagram =
 			),
 		);
 
+const emailFromIframe =
+	(element: BlockElement) =>
+	(iframe: IFrame): Result<string, EmailSignup> => {
+		if (
+			iframe.component.includes('email-embed') &&
+			isGuardianDomain(iframe.src)
+		) {
+			return ok({
+				kind: EmbedKind.EmailSignup,
+				src: iframe.src,
+				alt: fromNullable(element.embedTypeData?.alt),
+			});
+		} else {
+			return err('element is not an email signup');
+		}
+	};
+
+const parseEmailSignup =
+	(parser: DocParser) =>
+	(element: BlockElement): Result<string, EmailSignup> =>
+		pipe(
+			element,
+			extractGenericHtml,
+			resultAndThen(parseIframe(parser)),
+			resultAndThen(emailFromIframe(element)),
+		);
+
 const parseGeneric =
 	(parser: DocParser) =>
 	(element: BlockElement): Result<string, Embed> => {
@@ -369,7 +394,12 @@ const parseGeneric =
 			return parseGenericInstagram(parser)(element);
 		}
 
-		return resultMap((html: string): Generic | EmailSignup | TikTok => ({
+		const emailSignup = parseEmailSignup(parser)(element);
+		if (emailSignup.kind === ResultKind.Ok) {
+			return emailSignup;
+		}
+
+		return resultMap((html: string): Generic | TikTok => ({
 			kind: parseGenericEmbedKind(parser)(element)(html),
 			alt: fromNullable(element.embedTypeData?.alt),
 			html,
