@@ -11,12 +11,12 @@ import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
 import { EmbedBlockComponent } from './EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
-import { SpotifyBlockComponent } from './SpotifyBlockComponent';
+import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 import { DocumentBlockComponent } from './DocumentBlockComponent';
 import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
 import { TweetBlockComponent } from './TweetBlockComponent';
-import { InstagramBlockComponent } from './InstagramBlockComponent';
+import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
 
 import { ClickToView } from './ClickToView';
 
@@ -961,6 +961,9 @@ export const SpotifyBlockComponentStory = () => {
 								design: ArticleDesign.Standard,
 							}}
 							credit="Spotify"
+							role="inline"
+							isTracking={false}
+							isMainMedia={false}
 						/>
 					</ClickToView>
 				</Figure>
@@ -1039,23 +1042,12 @@ export const InstagramBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
-						isTracking={true}
-						source={instagramInstramEmbed.source}
-						sourceDomain={instagramInstramEmbed.sourceDomain}
-						role="inline"
-						onAccept={() =>
-							updateIframeHeight(
-								'iframe[name="instagram-embed-1"]',
-							)
-						}
-					>
-						<InstagramBlockComponent
-							key={1}
-							element={instagramInstramEmbed}
-							index={1}
-						/>
-					</ClickToView>
+					<InstagramBlockComponent
+						key={1}
+						element={instagramInstramEmbed}
+						index={1}
+						isMainMedia={false}
+					/>
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>

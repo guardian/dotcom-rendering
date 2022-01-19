@@ -73,7 +73,7 @@ export const Writers = (): React.ReactNode => (
 			padded={false}
 			backgroundColour={brandBackground.primary}
 		>
-			<Header edition="UK" />
+			<Header edition="UK" discussionApiUrl="" supporterCTA="" />
 		</ElementContainer>
 		<ElementContainer
 			showSideBorders={true}

@@ -123,10 +123,6 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.MapBlockElement',
 		},
 		{
-			chunkName: 'SpotifyBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.SpotifyBlockElement',
-		},
-		{
 			chunkName: 'VideoFacebookBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
@@ -134,10 +130,6 @@ export const document = ({ data }: Props): string => {
 		{
 			chunkName: 'VineBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.VineBlockElement',
-		},
-		{
-			chunkName: 'InstagramBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.InstagramBlockElement',
 		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view

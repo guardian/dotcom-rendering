@@ -12,7 +12,7 @@ import { UnsafeEmbedBlockComponent } from '@root/src/web/components/UnsafeEmbedB
 import { GuVideoBlockComponent } from '@root/src/web/components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '@root/src/web/components/HighlightBlockComponent';
 import { ImageBlockComponent } from '@root/src/web/components/ImageBlockComponent';
-import { InstagramBlockComponent } from '@root/src/web/components/InstagramBlockComponent';
+import { InstagramBlockComponent } from '@root/src/web/components/InstagramBlockComponent.importable';
 import { InteractiveBlockComponent } from '@root/src/web/components/InteractiveBlockComponent';
 import { ItemLinkBlockElement } from '@root/src/web/components/ItemLinkBlockElement';
 import { InteractiveContentsBlockComponent } from '@root/src/web/components/InteractiveContentsBlockComponent';
@@ -22,7 +22,7 @@ import { MapEmbedBlockComponent } from '@root/src/web/components/MapEmbedBlockCo
 import { MultiImageBlockComponent } from '@root/src/web/components/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/SoundcloudBlockComponent';
-import { SpotifyBlockComponent } from '@root/src/web/components/SpotifyBlockComponent';
+import { SpotifyBlockComponent } from '@root/src/web/components/SpotifyBlockComponent.importable';
 import { StarRatingBlockComponent } from '@root/src/web/components/StarRatingBlockComponent';
 import { SubheadingBlockComponent } from '@root/src/web/components/SubheadingBlockComponent';
 import { TableBlockComponent } from '@root/src/web/components/TableBlockComponent';
@@ -60,6 +60,7 @@ import {
 	isInteractive,
 	interactiveLegacyFigureClasses,
 } from '../layouts/lib/interactiveLegacyStyling';
+import { Island } from '../components/Island';
 
 type Props = {
 	format: ArticleFormat;
@@ -327,19 +328,14 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<InstagramBlockComponent
 						key={index}
 						element={element}
 						index={index}
+						isMainMedia={isMainMedia}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
 			if (format.design === ArticleDesign.Interactive) {
@@ -518,13 +514,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<SpotifyBlockComponent
 						embedUrl={element.embedUrl}
 						height={element.height}
@@ -533,8 +523,13 @@ export const renderElement = ({
 						format={format}
 						caption={element.caption}
 						credit="Spotify"
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.StarRatingBlockElement':
 			return [

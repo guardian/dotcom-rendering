@@ -20,7 +20,6 @@ import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
@@ -52,6 +51,8 @@ import {
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Island } from '../components/Island';
+import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
+import { GetMatchStats } from '../components/GetMatchStats.importable';
 
 const StandardGrid = ({
 	children,
@@ -381,6 +382,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								supporterCTA={
+									CAPI.nav.readerRevenueLinks.header.supporter
+								}
+								discussionApiUrl={CAPI.config.discussionApiUrl}
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
 								}
@@ -617,7 +622,17 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 								/>
-								{isMatchReport && <div id="match-stats" />}
+								{isMatchReport && CAPI.matchUrl && (
+									<Island
+										clientOnly={true}
+										placeholderHeight={800}
+										deferUntil="visible"
+									>
+										<GetMatchStats
+											matchUrl={CAPI.matchUrl}
+										/>
+									</Island>
+								)}
 
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines
@@ -667,7 +682,14 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										display={format.display}
 									/>
 									{!isPaidContent ? (
-										<MostViewedRightIsland />
+										<Island
+											clientOnly={true}
+											deferUntil="visible"
+										>
+											<MostViewedRightWrapper
+												isAdFreeUser={CAPI.isAdFreeUser}
+											/>
+										</Island>
 									) : (
 										<></>
 									)}
