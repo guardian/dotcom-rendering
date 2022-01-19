@@ -629,11 +629,10 @@ export const CommentLayout = ({
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
-				<div id="onwards-upper-whensignedout" />
+				<div id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer
-						sectionId="onwards-lower-whensignedout"
+						sectionId="onwards-lower"
 						element="section"
 					/>
 				)}
@@ -654,15 +653,6 @@ export const CommentLayout = ({
 							beingHydrated={false}
 						/>
 					</ElementContainer>
-				)}
-
-				{/* Onwards (when signed IN) */}
-				<aside id="onwards-upper-whensignedin" />
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower-whensignedin"
-						element="aside"
-					/>
 				)}
 
 				{!isPaidContent && (
