@@ -499,25 +499,9 @@ export const renderElement = ({
 				</>,
 			];
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-			if (
-				format.design === ArticleDesign.LiveBlog ||
-				format.design === ArticleDesign.DeadBlog
-			) {
-				return [
-					true,
-					<Island clientOnly={false} deferUntil="visible">
-						<RichLinkComponent
-							richLinkIndex={index}
-							element={element}
-							format={format}
-							ajaxUrl={ajaxUrl}
-						/>
-					</Island>,
-				];
-			}
 			return [
 				true,
-				<Island clientOnly={true} deferUntil="visible">
+				<Island deferUntil="idle">
 					<RichLinkComponent
 						richLinkIndex={index}
 						element={element}
