@@ -1,6 +1,12 @@
-import { map, none, some, withDefault } from '@guardian/types';
+import {
+	andThen,
+	map,
+	none,
+	some,
+	withDefault,
+} from '@guardian/types';
 import type { Option } from '@guardian/types';
-import { pipe } from 'lib';
+import { compose, index, pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 
 export type PageReference = {
@@ -22,14 +28,30 @@ export type LiveBlogPagedBlocks = {
 	pagination: Pagination;
 };
 
+const maybePageRef = (
+	pageNo: number,
+	pages: LiveBlock[][],
+): Option<string> => {
+	const maybeBlocks = (pageNo: number): Option<LiveBlock[]> =>
+		index(pageNo)(pages);
+	const maybeFirstBlock = (blocks: LiveBlock[]): Option<LiveBlock> =>
+		index(0)(blocks);
+	const pageRef = (block: LiveBlock): string =>
+		`?page=with:block-${block.id}`;
+
+	const firstBlock = compose(andThen(maybeFirstBlock), maybeBlocks)(pageNo);
+	return map(pageRef)(firstBlock);
+};
+
 const getOldestPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
 ): Option<string> => {
-	if (pageNumber >= pages.length) return none;
+	if (pageNumber < pages.length) {
+		return maybePageRef(pages.length - 1, pages);
+	}
 
-	const blocks = pages[pages.length - 1];
-	return some(`?page=with:block-${blocks[0].id}`);
+	return none;
 };
 
 const getOlderPage = (
@@ -37,8 +59,7 @@ const getOlderPage = (
 	pageNumber: number,
 ): Option<string> => {
 	if (pageNumber < pages.length) {
-		const blocks = pages[pageNumber];
-		return some(`?page=with:block-${blocks[0].id}`);
+		return maybePageRef(pageNumber, pages);
 	}
 
 	return none;
@@ -49,8 +70,7 @@ const getNewerPage = (
 	pageNumber: number,
 ): Option<string> => {
 	if (pageNumber > 2) {
-		const blocks = pages[pageNumber - 2];
-		return some(`?page=with:block-${blocks[0].id}`);
+		return maybePageRef(pageNumber - 2, pages);
 	}
 
 	if (pageNumber === 2) {
@@ -60,10 +80,7 @@ const getNewerPage = (
 	return none;
 };
 
-const getNewestPage = (
-	pages: LiveBlock[][],
-	pageNumber: number,
-): Option<string> => {
+const getNewestPage = (pageNumber: number): Option<string> => {
 	if (pageNumber > 1) {
 		return some('');
 	}
@@ -135,7 +152,7 @@ export const getPagedBlocks = (
 		currentPage,
 		pagination: {
 			newer: getNewerPage(pages, currentPage.pageNumber),
-			newest: getNewestPage(pages, currentPage.pageNumber),
+			newest: getNewestPage(currentPage.pageNumber),
 			older: getOlderPage(pages, currentPage.pageNumber),
 			oldest: getOldestPage(pages, currentPage.pageNumber),
 			numberOfPages: pages.length,
