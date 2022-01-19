@@ -77,6 +77,10 @@ export const RichLinkComponent = ({
 		);
 	}
 
+	// We don't display images on blogs because
+	// 1) the link is stretched full width so the image would be huge and
+	// 2) because we load the image in on the client and don't want to cause
+	//    CLS
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
