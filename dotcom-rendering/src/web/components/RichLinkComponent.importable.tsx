@@ -63,7 +63,7 @@ export const RichLinkComponent = ({
 	const { data, error } = useApi<CAPIRichLinkType>(url);
 
 	if (error) {
-		// Send the error to Sentry and then prevent the element from rendering
+		// Send the error to Sentry
 		window?.guardian?.modules?.sentry?.reportError(error, 'rich-link');
 	}
 
