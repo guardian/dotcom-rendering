@@ -119,10 +119,6 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.MapBlockElement',
 		},
 		{
-			chunkName: 'SpotifyBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.SpotifyBlockElement',
-		},
-		{
 			chunkName: 'VideoFacebookBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',

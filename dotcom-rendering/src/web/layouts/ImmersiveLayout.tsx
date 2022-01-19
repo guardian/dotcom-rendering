@@ -452,11 +452,10 @@ export const ImmersiveLayout = ({
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
-				<aside id="onwards-upper-whensignedout" />
+				<aside id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer
-						sectionId="onwards-lower-whensignedout"
+						sectionId="onwards-lower"
 						element="section"
 					/>
 				)}
@@ -477,15 +476,6 @@ export const ImmersiveLayout = ({
 							beingHydrated={false}
 						/>
 					</ElementContainer>
-				)}
-
-				{/* Onwards (when signed IN) */}
-				<aside id="onwards-upper-whensignedin" />
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower-whensignedin"
-						element="aside"
-					/>
 				)}
 
 				{!isPaidContent && (

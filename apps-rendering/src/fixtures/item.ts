@@ -35,6 +35,11 @@ const standfirst: Option<DocumentFragment> = pipe(
 	toOption,
 );
 
+const standfirstWithLink: Option<DocumentFragment> = pipe(
+	'<p>Boris Johnson’s spokesperson says ‘it’s deeply regrettable that this took place at a time of national mourning’</p><ul><li><a href="https://www.theguardian.com/world/series/coronavirus-live/latest">Coronavirus – latest updates</a></li><li><a href="https://www.theguardian.com/world/coronavirus-outbreak">See all our coronavirus coverage</a></li></ul>',
+	parseHtml,
+	toOption,
+);
 const bylineHtml: Option<DocumentFragment> = pipe(
 	'<a href="https://theguardian.com">Jane Smith</a> Editor of things',
 	parseHtml,
@@ -273,6 +278,12 @@ const article: Item = {
 	...fields,
 };
 
+const articleWithStandfirstLink: Item = {
+	design: ArticleDesign.Standard,
+	...fields,
+	standfirst: standfirstWithLink,
+};
+
 const analysis: Item = {
 	design: ArticleDesign.Analysis,
 	...fields,
@@ -342,6 +353,7 @@ const correction: Item = {
 
 export {
 	article,
+	articleWithStandfirstLink,
 	analysis,
 	feature,
 	review,

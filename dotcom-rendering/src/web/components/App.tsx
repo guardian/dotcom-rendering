@@ -6,7 +6,6 @@ import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
-import { Links } from '@frontend/web/components/Links';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { Discussion } from '@frontend/web/components/Discussion';
@@ -373,24 +372,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const SpotifyBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.SpotifyBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/SpotifyBlockComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.SpotifyBlockComponent,
-		},
-	);
-
 	const VideoFacebookBlockComponent = loadable(
 		() => {
 			if (
@@ -486,10 +467,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.MapBlockElement',
 	);
-	const spotifies = elementsByType<SpotifyBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.SpotifyBlockElement',
-	);
 	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
@@ -536,14 +513,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			<HydrateOnce rootId="links-root" waitFor={[user]}>
-				<Links
-					supporterCTA={CAPI.nav.readerRevenueLinks.header.supporter}
-					userId={user ? user.userId : undefined}
-					idUrl={CAPI.config.idUrl}
-					mmaUrl={CAPI.config.mmaUrl}
-				/>
-			</HydrateOnce>
 			<HydrateOnce rootId="labs-header">
 				<LabsHeader />
 			</HydrateOnce>
@@ -862,26 +831,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			{spotifies.map((spotify) => (
-				<HydrateOnce rootId={spotify.elementId}>
-					<ClickToView
-						role={spotify.role}
-						isTracking={spotify.isThirdPartyTracking}
-						source={spotify.source}
-						sourceDomain={spotify.sourceDomain}
-					>
-						<SpotifyBlockComponent
-							embedUrl={spotify.embedUrl}
-							height={spotify.height}
-							width={spotify.width}
-							title={spotify.title}
-							format={format}
-							caption={spotify.caption}
-							credit="Spotify"
-						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
 			{facebookVideos.map((facebookVideo) => (
 				<HydrateOnce rootId={facebookVideo.elementId}>
 					<ClickToView
@@ -932,13 +881,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-upper-whensignedin'
-						: 'onwards-upper-whensignedout'
-				}
-			>
+			<Portal rootId="onwards-upper">
 				<Lazy margin={300}>
 					<Suspense fallback={<></>}>
 						<OnwardsUpper
@@ -960,13 +903,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					</Suspense>
 				</Lazy>
 			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-lower-whensignedin'
-						: 'onwards-lower-whensignedout'
-				}
-			>
+			<Portal rootId="onwards-lower">
 				<Lazy margin={300}>
 					<Suspense fallback={<></>}>
 						<OnwardsLower

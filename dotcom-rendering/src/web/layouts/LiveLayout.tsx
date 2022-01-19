@@ -410,6 +410,10 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							edition={CAPI.editionId}
 							idUrl={CAPI.config.idUrl}
 							mmaUrl={CAPI.config.mmaUrl}
+							supporterCTA={
+								CAPI.nav.readerRevenueLinks.header.supporter
+							}
+							discussionApiUrl={CAPI.config.discussionApiUrl}
 							isAnniversary={
 								CAPI.config.switches.anniversaryHeaderSvg
 							}
@@ -1104,15 +1108,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
-				<aside
-					data-print-layout="hide"
-					id="onwards-upper-whensignedout"
-				/>
+				<aside data-print-layout="hide" id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer
 						data-print-layout="hide"
-						sectionId="onwards-lower-whensignedout"
+						sectionId="onwards-lower"
 						element="aside"
 					/>
 				)}
@@ -1137,19 +1137,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							beingHydrated={false}
 						/>
 					</ElementContainer>
-				)}
-
-				{/* Onwards (when signed IN) */}
-				<aside
-					data-print-layout="hide"
-					id="onwards-upper-whensignedin"
-				/>
-				{showOnwardsLower && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="onwards-lower-whensignedin"
-						element="aside"
-					/>
 				)}
 
 				{!isPaidContent && (

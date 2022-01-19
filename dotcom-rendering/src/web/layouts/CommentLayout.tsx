@@ -354,6 +354,10 @@ export const CommentLayout = ({
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								supporterCTA={
+									CAPI.nav.readerRevenueLinks.header.supporter
+								}
+								discussionApiUrl={CAPI.config.discussionApiUrl}
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
 								}
@@ -627,11 +631,10 @@ export const CommentLayout = ({
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
-				<div id="onwards-upper-whensignedout" />
+				<div id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer
-						sectionId="onwards-lower-whensignedout"
+						sectionId="onwards-lower"
 						element="section"
 					/>
 				)}
@@ -652,15 +655,6 @@ export const CommentLayout = ({
 							beingHydrated={false}
 						/>
 					</ElementContainer>
-				)}
-
-				{/* Onwards (when signed IN) */}
-				<aside id="onwards-upper-whensignedin" />
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower-whensignedin"
-						element="aside"
-					/>
 				)}
 
 				{!isPaidContent && (
