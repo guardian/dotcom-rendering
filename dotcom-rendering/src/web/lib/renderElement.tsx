@@ -505,7 +505,6 @@ export const renderElement = ({
 					<RichLinkComponent
 						richLinkIndex={index}
 						element={element}
-						format={format}
 						ajaxUrl={ajaxUrl}
 					/>
 				</Island>,

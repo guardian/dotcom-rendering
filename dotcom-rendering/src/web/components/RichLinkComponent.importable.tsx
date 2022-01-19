@@ -5,11 +5,9 @@ import { useApi } from '@root/src/web/lib/useApi';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { ArticleDesign } from '@guardian/libs';
 
 type Props = {
 	element: RichLinkBlockElement;
-	format: ArticleFormat;
 	ajaxUrl: string;
 	richLinkIndex: number;
 };
@@ -55,7 +53,6 @@ const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
 
 export const RichLinkComponent = ({
 	element,
-	format,
 	ajaxUrl,
 	richLinkIndex,
 }: Props) => {
@@ -77,22 +74,12 @@ export const RichLinkComponent = ({
 		);
 	}
 
-	// We don't display images on blogs because
-	// 1) the link is stretched full width so the image would be huge and
-	// 2) because we load the image in on the client and don't want to cause
-	//    CLS
-	const isBlog =
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog;
-
-	const richLinkImageData: RichLinkImageData | undefined = isBlog
-		? undefined
-		: {
-				thumbnailUrl: data.thumbnailUrl,
-				altText: data.imageAsset?.fields.altText,
-				width: data.imageAsset?.fields.width,
-				height: data.imageAsset?.fields.height,
-		  };
+	const richLinkImageData: RichLinkImageData = {
+		thumbnailUrl: data.thumbnailUrl,
+		altText: data.imageAsset?.fields.altText,
+		width: data.imageAsset?.fields.width,
+		height: data.imageAsset?.fields.height,
+	};
 
 	return (
 		<RichLink
