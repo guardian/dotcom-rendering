@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 
 import { RichLink } from '@root/src/web/components/RichLink';
 
@@ -33,7 +33,9 @@ export const DefaultRichLink: React.FC<DefaultProps> = ({
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
+				// We default to SpecialReport here purely because the greys of this theme
+				// look better as the defaults
+				theme: ArticleSpecial.SpecialReport,
 			}}
 			tags={[]}
 			sponsorName=""
