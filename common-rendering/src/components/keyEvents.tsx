@@ -110,20 +110,20 @@ const textStyles = (
 	supportsDarkMode: boolean
 ): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
-	color: ${text.keyEventsWhiteBackground(format)};
+	color: ${text.keyEventsInline(format)};
 
 	text-decoration: none;
 
 	&:hover {
-		color: ${text.keyEventsWhiteBackground(format)};
+		color: ${text.keyEventsInline(format)};
 		text-decoration: underline;
 	}
 
 	${from.desktop} {
-		color: ${text.keyEventsGrayBackground(format)};
+		color: ${text.keyEventsLeftColumn(format)};
 
 		&:hover {
-			color: ${text.keyEventsGrayBackground(format)};
+			color: ${text.keyEventsLeftColumn(format)};
 			text-decoration: underline;
 		}
 	}

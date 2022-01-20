@@ -20,7 +20,7 @@ interface Props extends ArticleFormat {
 
 const styles = (format: ArticleFormat): SerializedStyles => {
 	const follow = text.follow(format);
-	const invertedFollow = text.invertedFollow(format);
+	const followDark = text.followDark(format);
 
 	return css`
 		${textSans.small()}
@@ -42,7 +42,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 		}
 
 		${darkModeCss`
-			color: ${invertedFollow};
+			color: ${followDark};
 		`}
 	`;
 };

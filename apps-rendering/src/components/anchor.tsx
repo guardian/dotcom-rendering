@@ -29,7 +29,7 @@ const styles = (isEditions: boolean): SerializedStyles => css`
 `;
 
 const colour = (format: ArticleFormat): SerializedStyles => {
-	const inverted = text.invertedLink(format);
+	const linkDark = text.linkDark(format);
 	const link = text.articleLink(format);
 
 	if (format.theme === ArticleSpecial.Labs) {
@@ -45,7 +45,7 @@ const colour = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.Media:
 			return css`
-				color: ${inverted};
+				color: ${linkDark};
 				border-bottom: 0.0625rem solid ${neutral[20]};
 			`;
 		default:

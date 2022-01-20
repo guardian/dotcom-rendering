@@ -19,16 +19,16 @@ type Colour = string;
 interface Palette {
 	text: {
 		articleLink: Colour;
-		bylineLightGrayBackground: Colour;
-		bylineDarkGrayBackground: Colour;
+		bylineLeftColumn: Colour;
+		bylineInline: Colour;
+		bylineDark: Colour;
 		follow: Colour;
+		followDark: Colour;
 		headline: Colour;
 		headlineDark: Colour;
-		invertedByline: Colour;
-		invertedFollow: Colour;
-		invertedLink: Colour;
-		keyEventsWhiteBackground: Colour;
-		keyEventsGrayBackground: Colour;
+		keyEventsInline: Colour;
+		keyEventsLeftColumn: Colour;
+		linkDark: Colour;
 		standfirst: Colour;
 		standfirstDark: Colour;
 		standfirstLink: Colour;
@@ -104,7 +104,7 @@ const textHeadlineDark = (format: ArticleFormat): Colour => {
 	}
 };
 
-const textBylineLightGrayBackground = (format: ArticleFormat): Colour => {
+const textBylineLeftColumn = (format: ArticleFormat): Colour => {
 	switch(format.design) {
 		case ArticleDesign.DeadBlog:
 			switch (format.theme) {
@@ -160,7 +160,7 @@ const textBylineLightGrayBackground = (format: ArticleFormat): Colour => {
 	}
 }
 
-const textBylineDarkGrayBackground = (format: ArticleFormat): Colour => {
+const textBylineInline = (format: ArticleFormat): Colour => {
 	switch(format.theme) {
 		case ArticlePillar.News:
 				return news[400];
@@ -199,7 +199,7 @@ const textFollow = (format: ArticleFormat): Colour => {
 }
 
 
-const textInvertedByline = (format: ArticleFormat): Colour => {
+const textBylineDark = (format: ArticleFormat): Colour => {
 	switch(format.theme) {
 		case ArticlePillar.News:
 			return news[500];
@@ -218,7 +218,7 @@ const textInvertedByline = (format: ArticleFormat): Colour => {
 	}
 }
 
-const textInvertedFollow = (format: ArticleFormat): Colour => {
+const textFollowDark = (format: ArticleFormat): Colour => {
 	switch(format.theme) {
 		case ArticlePillar.News:
 			return news[500];
@@ -237,7 +237,7 @@ const textInvertedFollow = (format: ArticleFormat): Colour => {
 	}
 }
 
-const textInvertedLink = (format: ArticleFormat): Colour => {
+const textLinkDark = (format: ArticleFormat): Colour => {
 	switch(format.theme) {
 		case ArticlePillar.News:
 			return news[500];
@@ -296,7 +296,7 @@ const textArticleLink = (format: ArticleFormat): Colour => {
 	}
 }
 
-const textKeyEventsWhiteBackground = ({theme}: ArticleFormat): Colour => {
+const textKeyEventsInline = ({theme}: ArticleFormat): Colour => {
 	switch (theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -315,7 +315,7 @@ const textKeyEventsWhiteBackground = ({theme}: ArticleFormat): Colour => {
 	}
 }
 
-const textKeyEventsGrayBackground = ({theme} : ArticleFormat): Colour => {
+const textKeyEventsLeftColumn = ({theme} : ArticleFormat): Colour => {
 	switch (theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -512,17 +512,17 @@ const borderLiveBlock = (format: ArticleFormat): Colour => {
 		case ArticlePillar.News:
 			return news[400];
 		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
+			return lifestyle[300];
 		case ArticlePillar.Sport:
-			return sport[400];
+			return sport[300];
 		case ArticlePillar.Culture:
-			return culture[350];
+			return culture[300];
 		case ArticlePillar.Opinion:
 			return opinion[300];
 		case ArticleSpecial.Labs:
-			return labs[400];
+			return labs[300];
 		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
+			return specialReport[300];
 	}
 }
 
@@ -693,16 +693,16 @@ const fillBlockquoteIcon = (format: ArticleFormat): Colour => {
 
 const text = {
 	articleLink: textArticleLink,
-	bylineLightGrayBackground: textBylineLightGrayBackground,
-	bylineDarkGrayBackground: textBylineDarkGrayBackground,
+	bylineLeftColumn: textBylineLeftColumn,
+	bylineInline: textBylineInline,
+	bylineDark: textBylineDark,
 	follow: textFollow,
+	followDark: textFollowDark,
 	headline: textHeadline,
 	headlineDark: textHeadlineDark,
-	invertedByline: textInvertedByline,
-	invertedFollow: textInvertedFollow,
-	invertedLink: textInvertedLink,
-	keyEventsWhiteBackground: textKeyEventsWhiteBackground,
-	keyEventsGrayBackground: textKeyEventsGrayBackground,
+	keyEventsInline: textKeyEventsInline,
+	keyEventsLeftColumn: textKeyEventsLeftColumn,
+	linkDark: textLinkDark,
 	standfirst: textStandfirst,
 	standfirstDark: textStandfirstDark,
 	standfirstLink: textStandfirstLink,
@@ -734,16 +734,16 @@ const fill = {
 const palette = (format: ArticleFormat): Palette => ({
 	text: {
 		articleLink: text.articleLink(format),
-		bylineLightGrayBackground: text.bylineLightGrayBackground(format),
-		bylineDarkGrayBackground: text.bylineDarkGrayBackground(format),
+		bylineLeftColumn: text.bylineLeftColumn(format),
+		bylineInline: text.bylineInline(format),
+		bylineDark: text.bylineDark(format),
 		follow: text.follow(format),
+		followDark: text.followDark(format),
 		headline: text.headline(format),
 		headlineDark: text.headlineDark(format),
-		invertedByline: text.invertedByline(format),
-		invertedFollow: text.invertedFollow(format),
-		invertedLink: text.invertedLink(format),
-		keyEventsWhiteBackground: text.keyEventsWhiteBackground(format),
-		keyEventsGrayBackground: text.keyEventsGrayBackground(format),
+		keyEventsInline: text.keyEventsInline(format),
+		keyEventsLeftColumn: text.keyEventsLeftColumn(format),
+		linkDark: text.linkDark(format),
 		standfirst: text.standfirst(format),
 		standfirstDark: text.standfirstDark(format),
 		standfirstLink: text.standfirstLink(format),

@@ -116,9 +116,9 @@ const labsAnchorStyles = css`
 `;
 
 const getStyles = (format: ArticleFormat): SerializedStyles => {
-	const bylineLightGrayBackground = text.bylineLightGrayBackground(format);
-	const bylineDarkGrayBackground = text.bylineDarkGrayBackground(format);
-	const invertedByline = text.invertedByline(format);
+	const bylineLeftColumn = text.bylineLeftColumn(format);
+	const bylineInline = text.bylineInline(format);
+	const bylineDark = text.bylineDark(format);
 
 	if (format.theme === ArticleSpecial.Labs) {
 		return labsStyles;
@@ -128,35 +128,27 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.LiveBlog:
 			return css(
 				blogStyles,
-				blogColor(
-					neutral[100],
-					bylineLightGrayBackground,
-					invertedByline,
-				),
+				blogColor(neutral[100], bylineLeftColumn, bylineDark),
 			);
 		case ArticleDesign.DeadBlog:
 			return css(
 				blogStyles,
-				blogColor(
-					bylineDarkGrayBackground,
-					bylineLightGrayBackground,
-					neutral[93],
-				),
+				blogColor(bylineInline, bylineLeftColumn, neutral[93]),
 			);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
-			return commentStyles(bylineLightGrayBackground);
+			return commentStyles(bylineLeftColumn);
 		default:
-			return styles(bylineLightGrayBackground);
+			return styles(bylineLeftColumn);
 	}
 };
 
 const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker, inverted, link } = getThemeStyles(format.theme);
-	const bylineWhiteGrayBackground = text.bylineLightGrayBackground(format);
-	const bylineDarkGrayBackground = text.bylineDarkGrayBackground(format);
-	const invertedByline = text.invertedByline(format);
+	const bylineLeftColumn = text.bylineLeftColumn(format);
+	const bylineInline = text.bylineInline(format);
+	const bylineDark = text.bylineDark(format);
 
 	if (format.theme === ArticleSpecial.Labs) {
 		return labsAnchorStyles;
@@ -170,11 +162,7 @@ const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.DeadBlog:
 			return css(
 				blogAnchorStyles,
-				blogColor(
-					bylineDarkGrayBackground,
-					bylineWhiteGrayBackground,
-					invertedByline,
-				),
+				blogColor(bylineInline, bylineLeftColumn, bylineDark),
 			);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
