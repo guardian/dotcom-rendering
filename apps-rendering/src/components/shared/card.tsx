@@ -142,10 +142,24 @@ const anchorStyles = css`
 	height: 100%;
 `;
 
-const headingWrapperStyles = css`
-	padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
-	flex-grow: 1;
-`;
+const headingWrapperStyles = (type: RelatedItemType) => {
+	switch (type) {
+		case RelatedItemType.VIDEO:
+		case RelatedItemType.AUDIO:
+		case RelatedItemType.GALLERY: {
+			return css`
+			padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
+			flex-grow: 1;
+			`;
+		}
+		default: {
+			return css`
+			padding: 0.125rem 0 ${remSpace[4]} 0;
+			flex-grow: 1;
+			`
+		}
+	}
+}
 
 const headingStyles = (type: RelatedItemType): SerializedStyles => {
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
@@ -470,7 +484,7 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
 			css={[listStyles(type, format), cardStyles(type, format)]}
 		>
 			<a css={anchorStyles} href={`https://theguardian.com/${link}`}>
-				<section css={headingWrapperStyles}>
+				<section css={headingWrapperStyles(type)}>
 					<h3 css={headingStyles(type)}>
 						{quotationComment(type, format)}
 						{title}
