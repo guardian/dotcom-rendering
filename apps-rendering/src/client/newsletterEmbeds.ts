@@ -4,7 +4,7 @@ const allowedOrigins = ['https://www.theguardian.com'];
 
 export default (): Promise<void> => {
 	const allIframes: HTMLIFrameElement[] = [].slice.call(
-		document.querySelectorAll('.email-sub__iframe'),
+		document.querySelectorAll('.js-email-signup'),
 	);
 
 	// Tell the iframes to resize once this script is loaded

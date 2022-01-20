@@ -478,12 +478,11 @@ function hydrateClickToView(): void {
 		);
 }
 
+const isIframe = (elem: Element): elem is HTMLIFrameElement =>
+	elem.tagName === 'IFRAME';
+
 function resizeEmailSignups(): void {
-	const isIframe = (elem: Element): elem is HTMLIFrameElement =>
-		elem.tagName === 'IFRAME';
-	const emailSignupIframes = document.querySelectorAll(
-		'.js-email-signup > iframe',
-	);
+	const emailSignupIframes = document.querySelectorAll('.js-email-signup');
 	Array.from(emailSignupIframes)
 		.filter(isIframe)
 		.forEach((emailSignupIframe) => {

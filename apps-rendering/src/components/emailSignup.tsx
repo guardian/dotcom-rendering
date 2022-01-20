@@ -25,10 +25,7 @@ const captionStyles = css`
 
 const EmailSignupEmbed: FC<Props> = ({ embed }) => (
 	<figure css={styles}>
-		<div
-			className="js-email-signup"
-			dangerouslySetInnerHTML={{ __html: embed.html }}
-		></div>
+		<iframe src={embed.src} className="js-email-signup"></iframe>
 		{maybeRender(embed.alt, (alt) => (
 			<figcaption css={captionStyles}>{alt}</figcaption>
 		))}
