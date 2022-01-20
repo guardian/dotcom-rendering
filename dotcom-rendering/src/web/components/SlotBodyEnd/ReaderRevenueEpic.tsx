@@ -18,8 +18,14 @@ import {
 	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
-import { getEpic, getEpicViewLog, ModuleDataResponse, ModuleData} from '@sdc/dotcom';
-import { EpicPayload, WeeklyArticleHistory } from '@sdc/dotcom/dist/dotcom/src/types';
+import {
+	getEpic,
+	getEpicViewLog,
+	ModuleDataResponse,
+	ModuleData,
+	EpicPayload,
+	WeeklyArticleHistory,
+} from '@guardian/support-dotcom-components';
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie, storage } from '@guardian/libs';
 
@@ -83,16 +89,14 @@ const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
 		epicViewLog: getEpicViewLog(storage.local),
 		weeklyArticleHistory: await data.asyncArticleCount,
 		hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
-		mvtId: Number(
-			getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
-		),
+		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
 		countryCode: data.countryCode,
 		modulesVersion: MODULES_VERSION,
 		url: window.location.origin + window.location.pathname,
 		browserId: (await hasCmpConsentForBrowserId())
 			? data.browserId
 			: undefined,
-		},
+	},
 });
 
 export const canShowReaderRevenueEpic = async (
@@ -116,7 +120,10 @@ export const canShowReaderRevenueEpic = async (
 
 	const contributionsPayload = await buildPayload(data);
 
-	const response: ModuleDataResponse = await getEpic(contributionsServiceUrl, contributionsPayload);
+	const response: ModuleDataResponse = await getEpic(
+		contributionsServiceUrl,
+		contributionsPayload,
+	);
 	const module: ModuleData | undefined = response.data?.module;
 
 	if (!module) {

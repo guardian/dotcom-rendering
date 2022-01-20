@@ -63,8 +63,11 @@ import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/Uns
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
-import { getWeeklyArticleHistory, incrementWeeklyArticleCount } from "@sdc/dotcom";
-import {WeeklyArticleHistory} from "@sdc/dotcom/dist/dotcom/src/types";
+import {
+	getWeeklyArticleHistory,
+	incrementWeeklyArticleCount,
+	WeeklyArticleHistory,
+} from '@guardian/support-dotcom-components';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,

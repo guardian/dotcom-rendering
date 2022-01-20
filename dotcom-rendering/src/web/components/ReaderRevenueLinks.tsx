@@ -34,8 +34,12 @@ import {
 	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 import { useOnce } from '@root/src/web/lib/useOnce';
-import { getHeader, ModuleData, ModuleDataResponse } from "@sdc/dotcom";
-import { HeaderPayload } from "@sdc/dotcom/dist/shared/src/types/payloads";
+import {
+	getHeader,
+	ModuleData,
+	ModuleDataResponse,
+	HeaderPayload,
+} from '@guardian/support-dotcom-components';
 
 type Props = {
 	edition: Edition;
@@ -171,8 +175,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 }) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
-	const [SupportHeader, setSupportHeader] =
-		useState<React.FC | null>(null);
+	const [SupportHeader, setSupportHeader] = useState<React.FC | null>(null);
 
 	useOnce((): void => {
 		setAutomat();
@@ -228,9 +231,9 @@ const ReaderRevenueLinksRemote: React.FC<{
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<SupportHeader
 					// @ts-ignore
-					submitComponentEvent={(componentEvent: OphanComponentEvent) =>
-						submitComponentEvent(componentEvent, ophanRecord)
-					}
+					submitComponentEvent={(
+						componentEvent: OphanComponentEvent,
+					) => submitComponentEvent(componentEvent, ophanRecord)}
 					{...supportHeaderResponse.props}
 				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}

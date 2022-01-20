@@ -13,12 +13,18 @@ import {
 import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
-import { BannerPayload, WeeklyArticleHistory } from '@sdc/dotcom/dist/dotcom/src/types';
 import { CanShowResult } from '@root/src/web/lib/messagePicker';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { getCookie } from '@guardian/libs';
-import { getBanner, getPuzzlesBanner, ModuleData, ModuleDataResponse } from "@sdc/dotcom";
+import {
+	getBanner,
+	getPuzzlesBanner,
+	ModuleData,
+	ModuleDataResponse,
+	BannerPayload,
+	WeeklyArticleHistory,
+} from '@guardian/support-dotcom-components';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -160,7 +166,10 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		asyncArticleCount,
 	});
 
-	const response: ModuleDataResponse = await getBanner(contributionsServiceUrl, bannerPayload)
+	const response: ModuleDataResponse = await getBanner(
+		contributionsServiceUrl,
+		bannerPayload,
+	);
 	if (!response.data) {
 		if (engagementBannerLastClosedAt && subscriptionBannerLastClosedAt) {
 			setLocalNoBannerCachePeriod();
@@ -224,17 +233,16 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 			optedOutOfArticleCount,
 			asyncArticleCount,
 		});
-		return getPuzzlesBanner(
-			contributionsServiceUrl,
-			bannerPayload,
-		).then((response: ModuleDataResponse) => {
-			if (!response.data) {
-				return { show: false };
-			}
+		return getPuzzlesBanner(contributionsServiceUrl, bannerPayload).then(
+			(response: ModuleDataResponse) => {
+				if (!response.data) {
+					return { show: false };
+				}
 
-			const { module, meta } = response.data;
-			return { show: true, meta: { module, meta } };
-		});
+				const { module, meta } = response.data;
+				return { show: true, meta: { module, meta } };
+			},
+		);
 	}
 
 	return { show: false };
