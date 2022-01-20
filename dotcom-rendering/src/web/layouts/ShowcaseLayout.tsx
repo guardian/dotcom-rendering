@@ -619,7 +619,7 @@ export const ShowcaseLayout = ({
 				)}
 
 				{!isPaidContent && showComments && (
-					<ElementContainer element="section">
+					<ElementContainer sectionId="comments" element="section">
 						<Island clientOnly={true} deferUntil="visible">
 							<DiscussionContainer
 								discussionApiUrl={CAPI.config.discussionApiUrl}

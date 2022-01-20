@@ -729,6 +729,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 				{!isPaidContent && showComments && (
 					<ElementContainer
+						sectionId="comments"
 						data-print-layout="hide"
 						element="section"
 					>

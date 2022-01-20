@@ -461,7 +461,7 @@ export const ImmersiveLayout = ({
 				)}
 
 				{!isPaidContent && showComments && (
-					<ElementContainer element="aside">
+					<ElementContainer sectionId="comments" element="aside">
 						<Island clientOnly={true} deferUntil="visible">
 							<DiscussionContainer
 								discussionApiUrl={CAPI.config.discussionApiUrl}
