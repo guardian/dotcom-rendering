@@ -62,7 +62,11 @@ const RoleStory = ({
 					level. Truffaut street art edison bulb, banh mi cliche
 					post-ironic mixtape
 				</p>
-				<Figure isMainMedia={false} role={role}>
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role={role}>
 					<ClickToView
 						role={role}
 						isTracking={true}
@@ -453,7 +457,11 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={facebookEmbed.source}
@@ -474,7 +482,11 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={vimeoEmbedEmbed.source}
@@ -495,7 +507,11 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={youtubeEmbedEmbed.source}
@@ -516,7 +532,11 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={spotifyEmbedEmbed.source}
@@ -537,7 +557,11 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={bandcampEmbedEmbed.source}
@@ -558,7 +582,11 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={ourworldindataEmbedEmbed.source}
@@ -579,7 +607,11 @@ export const EmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={bbcEmbedEmbed.source}
@@ -624,7 +656,11 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={instagramEmbedEmbed.source}
@@ -648,7 +684,11 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={formStackEmbed.source}
@@ -673,7 +713,11 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={scribdEmbedEmbed.source}
@@ -698,7 +742,11 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={tiktokEmbedEmbed.source}
@@ -723,7 +771,11 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={twitterEmbedEmbed.source}
@@ -773,7 +825,11 @@ export const VimeoBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={vimeoVideoEmbed.source}
@@ -832,7 +888,11 @@ export const DocumentBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={scribdDocumentEmbed.source}
@@ -879,7 +939,11 @@ export const SoundCloudBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={soundcloudAudioEmbed.source}
@@ -898,7 +962,11 @@ export const SoundCloudBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={soundcloudEmbedEmbed.source}
@@ -942,7 +1010,11 @@ export const SpotifyBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={spotifyAudioEmbed.source}
@@ -1000,7 +1072,11 @@ export const TweetBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<ClickToView
 						isTracking={true}
 						source={twitterTweetEmbed.source}
@@ -1041,7 +1117,11 @@ export const InstagramBlockComponentStory = () => {
 						here
 					</a>
 				</p>
-				<Figure isMainMedia={false} role="inline">
+				<Figure format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}} isMainMedia={false} role="inline">
 					<InstagramBlockComponent
 						key={1}
 						element={instagramInstramEmbed}

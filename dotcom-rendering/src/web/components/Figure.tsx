@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 
 import { from, until, space } from '@guardian/source-foundations';
 
@@ -149,6 +150,7 @@ type Props = {
 	id?: string;
 	isNumberedListTitle?: boolean;
 	className?: string;
+	format: ArticleFormat;
 };
 
 const mainMediaFigureStyles = css`
@@ -162,7 +164,15 @@ export const Figure = ({
 	isMainMedia,
 	isNumberedListTitle = false,
 	className = '',
+	format,
 }: Props) => {
+	if (format.design === ArticleDesign.Interactive) {
+		return (
+			<figure id={id} key={id}>
+				{children}
+			</figure>
+		)
+	}
 	if (isMainMedia) {
 		// Don't add in-body styles for main media elements
 		// TODO: If we want to support other element types having role position, such

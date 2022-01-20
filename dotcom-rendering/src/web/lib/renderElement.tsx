@@ -783,6 +783,7 @@ export const renderArticleElement = ({
 			isMainMedia={isMainMedia}
 			id={'elementId' in element ? element.elementId : undefined}
 			role={role}
+			format={format}
 			className={
 				isInteractive(format.design)
 					? interactiveLegacyFigureClasses(element._type, role)
