@@ -1,0 +1,51 @@
+import { css } from '@emotion/react';
+
+import { DividerBlockComponent } from '@frontend/web/components/DividerBlockComponent';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+
+import { TextBlockComponent } from '@root/src/web/components/TextBlockComponent';
+
+export default {
+	component: DividerBlockComponent,
+	title: 'Components/DividerBlockComponent',
+};
+
+const format = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.News,
+};
+
+const lorem =
+	"<p>I'm baby bespoke neutra austin, banjo affogato man braid cardigan kombucha ugh semiotics letterpress direct trade twee literally tofu. Tousled bitters banjo, messenger bag williamsburg farm-to-table celiac church-key pork belly. Master cleanse af snackwave occupy hashtag offal hexagon squid. Letterpress normcore hoodie, echo park edison bulb poke lyft knausgaard iceland next level fingerstache jianbing af pabst. Iceland semiotics helvetica tumeric schlitz gluten-free taiyaki air plant yuccie single-origin coffee bicycle rights typewriter</p>";
+
+export const Default = () => {
+	return (
+		<div
+			css={css`
+				padding: 20px;
+			`}
+		>
+			<TextBlockComponent
+				html={lorem}
+				format={format}
+				isFirstParagraph={true}
+			/>
+			<DividerBlockComponent />
+			<p>Partial (default)</p>
+			<TextBlockComponent
+				html={lorem}
+				format={format}
+				isFirstParagraph={false}
+			/>
+			<DividerBlockComponent size="full" />
+			<p>Full</p>
+			<TextBlockComponent
+				html={lorem}
+				format={format}
+				isFirstParagraph={false}
+			/>
+		</div>
+	);
+};
+Default.story = { name: 'default' };

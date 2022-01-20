@@ -30,6 +30,9 @@ describe('ArticleMeta', () => {
 				]}
 				primaryDateline="primary date line"
 				secondaryDateline="secondary date line"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>,
 		);
 
@@ -66,6 +69,9 @@ describe('ArticleMeta', () => {
 				]}
 				primaryDateline="primary date line"
 				secondaryDateline="secondary date line"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>,
 		);
 

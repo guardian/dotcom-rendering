@@ -6,7 +6,6 @@ import { getCookie } from '@guardian/libs';
 import { useAB } from '@guardian/ab-react';
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
-import { integrateCriteo } from '../experiments/tests/integrate-criteo-test';
 
 // TODO disallow undefined browserIds by placing conditional in App.tsx
 // so that we wait to render this component until browserId is defined.
@@ -24,7 +23,6 @@ export const CommercialMetrics: React.FC<{
 	useOnce(() => {
 		const testsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
-			integrateCriteo,
 		];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),

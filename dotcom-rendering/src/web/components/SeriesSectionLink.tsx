@@ -178,7 +178,8 @@ export const SeriesSectionLink = ({
 		(thisTag) =>
 			thisTag.type === 'Blog' ||
 			thisTag.type === 'Series' ||
-			thisTag.title === 'The Observer',
+			(thisTag.type === 'Publication' &&
+				thisTag.title === 'The Observer'),
 	);
 
 	const hasSeriesTag = tag && tag.type === 'Series';

@@ -18,7 +18,6 @@ import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
@@ -51,6 +50,7 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Island } from '../components/Island';
+import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -294,6 +294,13 @@ export const ShowcaseLayout = ({
 									edition={CAPI.editionId}
 									idUrl={CAPI.config.idUrl}
 									mmaUrl={CAPI.config.mmaUrl}
+									supporterCTA={
+										CAPI.nav.readerRevenueLinks.header
+											.supporter
+									}
+									discussionApiUrl={
+										CAPI.config.discussionApiUrl
+									}
 									isAnniversary={
 										CAPI.config.switches
 											.anniversaryHeaderSvg
@@ -509,6 +516,11 @@ export const ShowcaseLayout = ({
 									secondaryDateline={
 										CAPI.webPublicationSecondaryDateDisplay
 									}
+									isCommentable={CAPI.isCommentable}
+									discussionApiUrl={
+										CAPI.config.discussionApiUrl
+									}
+									shortUrlId={CAPI.config.shortUrlId}
 								/>
 							</div>
 						</GridItem>
@@ -567,7 +579,14 @@ export const ShowcaseLayout = ({
 										display={format.display}
 									/>
 									{!isPaidContent ? (
-										<MostViewedRightIsland />
+										<Island
+											clientOnly={true}
+											deferUntil="visible"
+										>
+											<MostViewedRightWrapper
+												isAdFreeUser={CAPI.isAdFreeUser}
+											/>
+										</Island>
 									) : (
 										<></>
 									)}
@@ -590,11 +609,10 @@ export const ShowcaseLayout = ({
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
-				<aside id="onwards-upper-whensignedout" />
+				<aside id="onwards-upper" />
 				{showOnwardsLower && (
 					<ElementContainer
-						sectionId="onwards-lower-whensignedout"
+						sectionId="onwards-lower"
 						element="aside"
 					/>
 				)}
@@ -604,7 +622,6 @@ export const ShowcaseLayout = ({
 						<Discussion
 							discussionApiUrl={CAPI.config.discussionApiUrl}
 							shortUrlId={CAPI.config.shortUrlId}
-							isCommentable={CAPI.isCommentable}
 							format={format}
 							discussionD2Uid={CAPI.config.discussionD2Uid}
 							discussionApiClientHeader={
@@ -616,15 +633,6 @@ export const ShowcaseLayout = ({
 							beingHydrated={false}
 						/>
 					</ElementContainer>
-				)}
-
-				{/* Onwards (when signed IN) */}
-				<aside id="onwards-upper-whensignedin" />
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower-whensignedin"
-						element="aside"
-					/>
 				)}
 
 				{!isPaidContent && (
