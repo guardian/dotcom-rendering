@@ -201,7 +201,7 @@ describe('pagination', () => {
 				const expectedCurrentPage: PageReference = {
 					blocks: blocks.slice(10, 20),
 					pageNumber: 2,
-					suffix: '',
+					suffix: '?page=with:block-10',
 				};
 
 				expect(result.currentPage).toEqual(expectedCurrentPage);
@@ -229,7 +229,7 @@ describe('pagination', () => {
 				const expectedCurrentPage: PageReference = {
 					blocks: blocks.slice(14, 24),
 					pageNumber: 2,
-					suffix: '',
+					suffix: '?page=with:block-14',
 				};
 
 				expect(result.currentPage).toEqual(expectedCurrentPage);
@@ -258,7 +258,7 @@ describe('pagination', () => {
 			const expectedCurrentPage: PageReference = {
 				blocks: blocks.slice(24, 34),
 				pageNumber: 3,
-				suffix: '',
+				suffix: '?page=with:block-24',
 			};
 
 			expect(result.currentPage).toEqual(expectedCurrentPage);
@@ -286,7 +286,7 @@ describe('pagination', () => {
 			const expectedCurrentPage: PageReference = {
 				blocks: blocks.slice(34, 44),
 				pageNumber: 4,
-				suffix: '',
+				suffix: '?page=with:block-34',
 			};
 
 			expect(result.currentPage).toEqual(expectedCurrentPage);
@@ -314,7 +314,7 @@ describe('pagination', () => {
 			const expectedCurrentPage: PageReference = {
 				blocks: blocks.slice(44, 54),
 				pageNumber: 5,
-				suffix: '',
+				suffix: '?page=with:block-44',
 			};
 
 			expect(result.currentPage).toEqual(expectedCurrentPage);

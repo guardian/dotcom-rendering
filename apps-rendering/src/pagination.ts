@@ -1,10 +1,4 @@
-import {
-	andThen,
-	map,
-	none,
-	some,
-	withDefault,
-} from '@guardian/types';
+import { andThen, map, none, some, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { compose, index, pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
@@ -29,18 +23,29 @@ export type LiveBlogPagedBlocks = {
 };
 
 const maybePageRef = (
-	pageNo: number,
+	pageIndex: number,
 	pages: LiveBlock[][],
 ): Option<string> => {
-	const maybeBlocks = (pageNo: number): Option<LiveBlock[]> =>
-		index(pageNo)(pages);
+	const maybeBlocks = (pageIndex: number): Option<LiveBlock[]> =>
+		index(pageIndex)(pages);
 	const maybeFirstBlock = (blocks: LiveBlock[]): Option<LiveBlock> =>
 		index(0)(blocks);
 	const pageRef = (block: LiveBlock): string =>
 		`?page=with:block-${block.id}`;
 
-	const firstBlock = compose(andThen(maybeFirstBlock), maybeBlocks)(pageNo);
+	const firstBlock = compose(
+		andThen(maybeFirstBlock),
+		maybeBlocks,
+	)(pageIndex);
 	return map(pageRef)(firstBlock);
+};
+
+const currentPageRef = (blocks: LiveBlock[][], pageIndex: number): string => {
+	if (pageIndex === 0) {
+		return '';
+	}
+
+	return withDefault('')(maybePageRef(pageIndex, blocks));
 };
 
 const getOldestPage = (
@@ -113,8 +118,9 @@ const getCurrentPage = (
 	pages: LiveBlock[][],
 	blockId: Option<string>,
 ): PageReference => {
+	const emptyLiveBlocks: LiveBlock[] = [];
 	const firstPage = {
-		blocks: pages[0],
+		blocks: withDefault(emptyLiveBlocks)(index(0)(pages)),
 		pageNumber: 1,
 		suffix: '',
 	};
@@ -123,11 +129,12 @@ const getCurrentPage = (
 		blockId,
 		map((id) => {
 			for (let i = 0; i < pages.length; i += 1) {
-				if (pages[i].some((x) => x.id === id)) {
+				const blocks = withDefault(emptyLiveBlocks)(index(i)(pages));
+				if (blocks.some((x) => x.id === id)) {
 					return {
-						blocks: pages[i],
+						blocks,
 						pageNumber: i + 1,
-						suffix: '',
+						suffix: currentPageRef(pages, i),
 					};
 				}
 			}
