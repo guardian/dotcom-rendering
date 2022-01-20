@@ -301,6 +301,16 @@ const keyEventsTopMargin = css`
 	}
 `;
 
+const keyEventsToggleMargin = css`
+	margin-top: -${space[3]}px;
+	margin-bottom: ${space[2]}px;
+
+	${from.desktop} {
+		margin-top: -${space[1]}px;
+		margin-bottom: ${space[1]}px;
+	}
+`;
+
 const sidePaddingDesktop = css`
 	${from.desktop} {
 		padding-left: ${space[5]}px;
@@ -665,9 +675,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					>
 						{CAPI.matchUrl ? (
 							<LiveGridSport>
-								<Hide below="tablet">
+								<Hide below="desktop">
 									<GridItem area="filter">
-										<div css={maxWidth}>
+										<div css={keyEventsToggleMargin}>
 											<Island deferUntil="idle">
 												<FilterKeyEventsToggle />
 											</Island>
@@ -764,6 +774,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									</div>
 								</GridItem>
 								<GridItem area="body">
+									<Hide above="desktop">
+										<GridItem area="filter">
+											<div css={keyEventsToggleMargin}>
+												<Island deferUntil="idle">
+													<FilterKeyEventsToggle />
+												</Island>
+											</div>
+										</GridItem>
+									</Hide>
 									<ArticleContainer format={format}>
 										{CAPI.pagination &&
 											CAPI.pagination.currentPage !==
@@ -885,9 +904,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</LiveGridSport>
 						) : (
 							<LiveGrid>
-								<Hide below="tablet">
+								<Hide below="desktop">
 									<GridItem area="filter">
-										<div css={maxWidth}>
+										<div css={keyEventsToggleMargin}>
 											<Island deferUntil="idle">
 												<FilterKeyEventsToggle />
 											</Island>
@@ -978,6 +997,19 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											accordionTitle="Live feed"
 											context="liveFeed"
 										>
+											<Hide above="desktop">
+												<GridItem area="filter">
+													<div
+														css={
+															keyEventsToggleMargin
+														}
+													>
+														<Island deferUntil="idle">
+															<FilterKeyEventsToggle />
+														</Island>
+													</div>
+												</GridItem>
+											</Hide>
 											<ArticleContainer format={format}>
 												{CAPI.pagination &&
 													CAPI.pagination

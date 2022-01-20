@@ -3,17 +3,8 @@ import { ToggleSwitch } from '@guardian/source-react-components-development-kitc
 import { useEffect, useState } from 'react';
 
 const cssOverrides = css`
-	button {
-		width: 2.75rem;
-		height: 1.5rem;
-		display: flex;
-		align-items: center;
-	}
-
-	button::after {
-		height: 1.125rem;
-		width: 1.125rem;
-		box-shadow: none;
+	&::before {
+		box-sizing: content-box;
 	}
 `;
 
