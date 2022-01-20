@@ -90,7 +90,10 @@ export const VideoAsSecond = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -132,7 +135,10 @@ export const Title = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -195,7 +201,10 @@ export const Video = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -233,7 +242,10 @@ export const RichLink = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -262,7 +274,10 @@ export const FirstImage = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -292,7 +307,10 @@ export const ImaheAndTitle = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -318,7 +336,10 @@ export const Updated = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
