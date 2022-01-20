@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-
 const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
