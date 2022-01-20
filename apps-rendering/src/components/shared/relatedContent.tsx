@@ -84,6 +84,11 @@ const listStyles = css`
 	}
 `;
 
+const styles = css`
+	border-top: 1px solid ${neutral[46]};
+	padding-top: ${remSpace[3]};
+`;
+
 const COMMENT = RelatedItemType.COMMENT;
 
 const RelatedContent: FC<Props> = ({ content }) => {
@@ -95,7 +100,7 @@ const RelatedContent: FC<Props> = ({ content }) => {
 			}
 
 			return (
-				<section>
+				<section css={styles}>
 					<h2 css={headingStyles}>{title}</h2>
 					<ul css={listStyles}>
 						{relatedItems.map((relatedItem, key) => {

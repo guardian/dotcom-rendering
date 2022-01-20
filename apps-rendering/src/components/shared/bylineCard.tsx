@@ -19,23 +19,18 @@ import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles, themeFromString } from 'themeStyles';
+import { themeFromString } from 'themeStyles';
 
 interface Props {
 	relatedItem: RelatedItem;
 }
 
-const borderColor = (format: ArticleFormat): SerializedStyles => {
-	return css`1px solid ${getThemeStyles(format.theme).kicker}`;
-};
-
 const listStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
-		background: white;
 		margin-right: ${remSpace[2]};
 		flex: 0 0 42vw;
 		justify-content: space-between;
-		border-top: ${borderColor(format)};
+		border-top: 1px solid ${neutral[86]};
 		max-width: 10rem;
 
 		&.fade {
@@ -118,7 +113,6 @@ const headingStyles: SerializedStyles = css`
 `;
 
 const cardStyles: SerializedStyles = css`
-	background-color: ${neutral[100]};
 	${headline.xxsmall()}
 `;
 

@@ -28,6 +28,7 @@ import {
 	map,
 	none,
 	OptionKind,
+	some,
 	withDefault,
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
@@ -44,29 +45,18 @@ interface Props {
 	image: Option<Image>;
 }
 
-const borderColor = (
-	type: RelatedItemType,
-	format: ArticleFormat,
-): SerializedStyles => {
-	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
-		return css`1px solid ${labs[300]}`;
-	} else {
-		return css`1px solid ${getThemeStyles(format.theme).kicker}`;
-	}
-};
-
 const listStyles = (
 	type: RelatedItemType,
 	format: ArticleFormat,
 ): SerializedStyles => {
 	return css`
-		background: white;
 		margin-right: ${remSpace[2]};
 		flex: 0 0 42vw;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		border-top: ${borderColor(type, format)};
+		border-top: 1px solid ${neutral[86]};
+		border-radius: 0 0 0.75rem 0.75rem;
 		max-width: 10rem;
 
 		&.fade {
@@ -101,6 +91,10 @@ const fullWidthImage = css`
 
 		position: relative;
 	}
+`;
+
+const imgStyles = css`
+	border-radius: 0.75rem;
 `;
 
 const timeStyles = (type: RelatedItemType): SerializedStyles => {
@@ -432,7 +426,7 @@ const cardImage = (
 							default: '100%',
 						}}
 						format={format}
-						className={none}
+						className={some(imgStyles)}
 						supportsDarkMode
 						lightbox={none}
 					/>
