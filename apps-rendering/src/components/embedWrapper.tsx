@@ -37,9 +37,7 @@ interface Props {
 	editions: boolean;
 }
 
-const genericDivProps = (
-	embed: Generic | TikTok | EmailSignup,
-): Record<string, string> => ({
+const genericDivProps = (embed: Generic | TikTok): Record<string, string> => ({
 	...withDefault({})(
 		map<string, Record<string, string>>((alt) => {
 			return { alt };
@@ -88,7 +86,12 @@ const embedToDivProps = (embed: Embed): Record<string, string> => {
 		case EmbedKind.EmailSignup: {
 			return {
 				kind: EmbedKind.EmailSignup,
-				...genericDivProps(embed),
+				...withDefault({})(
+					map<string, Record<string, string>>((alt) => {
+						return { alt };
+					})(embed.alt),
+				),
+				src: embed.src,
 			};
 		}
 		case EmbedKind.TikTok: {
@@ -292,18 +295,16 @@ const divElementPropsToEmbedComponentProps = (
 						);
 					}
 					case EmbedKind.EmailSignup: {
-						return pipe(
-							elementProps,
-							parseGenericFields,
-							resultMap(
-								(
-									genericFields: GenericFields,
-								): EmailSignup => ({
-									kind: EmbedKind.EmailSignup,
-									...genericFields,
-								}),
-							),
-						);
+						return resultMap<string, EmailSignup>(
+							(src: string): EmailSignup => ({
+								kind: EmbedKind.EmailSignup,
+								src,
+								alt: fromNullable(elementProps['alt']),
+								tracking: parseTrackingParam(
+									elementProps['tracking'],
+								),
+							}),
+						)(requiredStringParam(elementProps, 'src'));
 					}
 				}
 			}),
@@ -356,10 +357,14 @@ const getSourceDetailsForEmbed = (embed: Embed): SourceDetails => {
 			};
 		case EmbedKind.Generic:
 		case EmbedKind.TikTok:
-		case EmbedKind.EmailSignup:
 			return {
 				source: embed.source,
 				sourceDomain: embed.sourceDomain,
+			};
+		case EmbedKind.EmailSignup:
+			return {
+				source: some('Guardian'),
+				sourceDomain: some('www.theguardian.com'),
 			};
 	}
 };

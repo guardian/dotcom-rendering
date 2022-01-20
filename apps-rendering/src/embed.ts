@@ -74,6 +74,7 @@ interface EmailSignup {
 	kind: EmbedKind.EmailSignup;
 	alt: Option<string>;
 	src: string;
+	tracking: EmbedTracksType;
 }
 
 /**
@@ -365,6 +366,8 @@ const emailFromIframe =
 				kind: EmbedKind.EmailSignup,
 				src: iframe.src,
 				alt: fromNullable(element.embedTypeData?.alt),
+				tracking:
+					element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
 			});
 		} else {
 			return err('element is not an email signup');
