@@ -73,11 +73,14 @@ export const InlineStory = () => {
 					}}
 				>
 					<SomeText />
-					<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}} isMainMedia={false}>
+					<Figure
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
+						isMainMedia={false}
+					>
 						<Grey />
 					</Figure>
 					<SomeText />
@@ -107,11 +110,15 @@ export const SupportingStory = () => {
 				>
 					<SomeText />
 					<SomeText />
-					<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}} isMainMedia={false} role="supporting">
+					<Figure
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
+						isMainMedia={false}
+						role="supporting"
+					>
 						<Grey heightInPixels={500} />
 					</Figure>
 					<SomeText />
@@ -144,11 +151,15 @@ export const ImmersiveStory = () => {
 					}}
 				>
 					<SomeText />
-					<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}} isMainMedia={false} role="immersive">
+					<Figure
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
+						isMainMedia={false}
+						role="immersive"
+					>
 						<Grey heightInPixels={700} />
 					</Figure>
 					<SomeText />
@@ -177,11 +188,15 @@ export const ThumbnailStory = () => {
 					}}
 				>
 					<SomeText />
-					<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}} isMainMedia={false} role="thumbnail">
+					<Figure
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
+						isMainMedia={false}
+						role="thumbnail"
+					>
 						<Grey heightInPixels={200} />
 					</Figure>
 					<SomeText />
@@ -211,11 +226,15 @@ export const ShowcaseStory = () => {
 					}}
 				>
 					<SomeText />
-					<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}} isMainMedia={false} role="showcase">
+					<Figure
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
+						isMainMedia={false}
+						role="showcase"
+					>
 						<Grey heightInPixels={500} />
 					</Figure>
 					<SomeText />
@@ -244,11 +263,15 @@ export const HalfWidthStory = () => {
 					}}
 				>
 					<SomeText />
-					<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}} isMainMedia={false} role="halfWidth">
+					<Figure
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
+						isMainMedia={false}
+						role="halfWidth"
+					>
 						<Grey />
 					</Figure>
 					<SomeText />

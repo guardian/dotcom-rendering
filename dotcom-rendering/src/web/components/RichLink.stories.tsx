@@ -31,11 +31,15 @@ export default {
 export const Article = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="news"
@@ -59,11 +63,15 @@ export const Article = () => {
 export const Network = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="special-report"
@@ -93,11 +101,15 @@ Network.story = {
 export const SectionStory = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="live"
@@ -124,11 +136,15 @@ SectionStory.story = {
 export const Inline = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="inline">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="inline"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="external"
@@ -155,11 +171,15 @@ Inline.story = {
 export const ImageContent = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="dead"
@@ -189,11 +209,15 @@ ImageContent.story = {
 export const Interactive = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="feature"
@@ -222,11 +246,15 @@ Interactive.story = {
 export const Gallery = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="comment"
@@ -256,11 +284,15 @@ Gallery.story = {
 export const Video = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="comment"
@@ -291,11 +323,15 @@ Video.story = {
 export const Audio = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="podcast"
@@ -319,11 +355,15 @@ export const Audio = () => {
 export const LiveBlog = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="media"
@@ -353,11 +393,15 @@ LiveBlog.story = {
 export const Tag = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="analysis"
@@ -381,11 +425,15 @@ export const Tag = () => {
 export const Index = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="review"
@@ -416,11 +464,15 @@ export const Index = () => {
 export const Crossword = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="letters"
@@ -444,11 +496,15 @@ export const Crossword = () => {
 export const Survey = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="external"
@@ -472,11 +528,15 @@ export const Survey = () => {
 export const Signup = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="comment"
@@ -501,11 +561,15 @@ export const Signup = () => {
 export const Userid = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="editorial"
@@ -529,11 +593,15 @@ export const Userid = () => {
 export const PaidFor = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.Opinion,
-					}} isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Opinion,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="news"

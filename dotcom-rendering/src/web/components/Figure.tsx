@@ -171,7 +171,7 @@ export const Figure = ({
 			<figure id={id} key={id}>
 				{children}
 			</figure>
-		)
+		);
 	}
 	if (isMainMedia) {
 		// Don't add in-body styles for main media elements
