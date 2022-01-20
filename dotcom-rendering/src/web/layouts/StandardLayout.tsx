@@ -565,6 +565,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
+									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
 							</div>
 						</GridItem>
@@ -621,6 +622,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
+									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
 								{isMatchReport && CAPI.matchUrl && (
 									<Island

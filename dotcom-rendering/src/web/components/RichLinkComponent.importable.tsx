@@ -8,7 +8,7 @@ import { decideTheme } from '@root/src/web/lib/decideTheme';
 
 type Props = {
 	element: RichLinkBlockElement;
-	ajaxEndpoint: string;
+	ajaxUrl: string;
 	richLinkIndex: number;
 };
 
@@ -53,19 +53,18 @@ const buildUrl: (element: RichLinkBlockElement, ajaxUrl: string) => string = (
 
 export const RichLinkComponent = ({
 	element,
-	ajaxEndpoint,
+	ajaxUrl,
 	richLinkIndex,
 }: Props) => {
-	const url = buildUrl(element, ajaxEndpoint);
+	const url = buildUrl(element, ajaxUrl);
 	const { data, error } = useApi<CAPIRichLinkType>(url);
 
 	if (error) {
 		// Send the error to Sentry
-		window.guardian.modules.sentry.reportError(error, 'rich-link');
+		window?.guardian?.modules?.sentry?.reportError(error, 'rich-link');
 	}
 
 	if (!data) {
-		// Continue to return the default (server side rendered) version of the richlink
 		return (
 			<DefaultRichLink
 				index={richLinkIndex}

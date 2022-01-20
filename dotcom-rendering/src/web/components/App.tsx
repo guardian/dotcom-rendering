@@ -273,24 +273,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const RichLinkComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/RichLinkComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.RichLinkComponent,
-		},
-	);
-
 	const InteractiveBlockComponent = loadable(
 		() => {
 			if (
@@ -493,10 +475,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.VineBlockElement',
 	);
-	const richLinks = elementsByType<RichLinkBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.RichLinkBlockElement',
-	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
@@ -647,15 +625,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					isPaidContent={CAPI.pageType.isPaidContent}
 				/>
 			</Portal>
-			{richLinks.map((richLink, index) => (
-				<Portal rootId={richLink.elementId}>
-					<RichLinkComponent
-						element={richLink}
-						ajaxEndpoint={CAPI.config.ajaxUrl}
-						richLinkIndex={index}
-					/>
-				</Portal>
-			))}
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
 					<CalloutBlockComponent callout={callout} format={format} />

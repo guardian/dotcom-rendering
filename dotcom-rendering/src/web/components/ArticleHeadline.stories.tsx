@@ -109,6 +109,7 @@ export const ShowcaseInterview = () => {
 						elements={mainMediaElements}
 						pageId="testID"
 						webTitle="story article"
+						ajaxUrl=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -150,6 +151,7 @@ export const ShowcaseInterviewNobyline = () => {
 						elements={mainMediaElements}
 						pageId="testID"
 						webTitle="story article"
+						ajaxUrl=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -191,6 +193,7 @@ export const Interview = () => {
 						elements={mainMediaElements}
 						pageId="testID"
 						webTitle="story article"
+						ajaxUrl=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -230,6 +233,7 @@ export const InterviewSpecialReport = () => {
 						elements={mainMediaElements}
 						pageId="testID"
 						webTitle="story article"
+						ajaxUrl=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -271,6 +275,7 @@ export const InterviewNoByline = () => {
 						elements={mainMediaElements}
 						pageId="testID"
 						webTitle="story article"
+						ajaxUrl=""
 					/>
 				</ArticleContainer>
 			</Flex>
