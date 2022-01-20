@@ -20,11 +20,13 @@ import { getCookie } from '@guardian/libs';
 import {
 	getBanner,
 	getPuzzlesBanner,
+} from '@guardian/support-dotcom-components';
+import {
 	ModuleData,
 	ModuleDataResponse,
 	BannerPayload,
 	WeeklyArticleHistory,
-} from '@guardian/support-dotcom-components';
+} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 
 type BaseProps = {
 	isSignedIn: boolean;

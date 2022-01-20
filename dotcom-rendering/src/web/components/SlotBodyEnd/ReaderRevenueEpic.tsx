@@ -18,14 +18,13 @@ import {
 	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 import { setAutomat } from '@root/src/web/lib/setAutomat';
+import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import {
-	getEpic,
-	getEpicViewLog,
 	ModuleDataResponse,
 	ModuleData,
 	EpicPayload,
 	WeeklyArticleHistory,
-} from '@guardian/support-dotcom-components';
+} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie, storage } from '@guardian/libs';
 

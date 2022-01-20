@@ -34,12 +34,12 @@ import {
 	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 import { useOnce } from '@root/src/web/lib/useOnce';
+import { getHeader } from '@guardian/support-dotcom-components';
 import {
-	getHeader,
 	ModuleData,
 	ModuleDataResponse,
 	HeaderPayload,
-} from '@guardian/support-dotcom-components';
+} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 
 type Props = {
 	edition: Edition;

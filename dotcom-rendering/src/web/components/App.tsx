@@ -66,8 +66,8 @@ import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import {
 	getWeeklyArticleHistory,
 	incrementWeeklyArticleCount,
-	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components';
+import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
