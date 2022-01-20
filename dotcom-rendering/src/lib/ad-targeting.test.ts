@@ -23,6 +23,17 @@ describe('buildAdTargeting', () => {
 			s: 'money',
 			inskin: 'f',
 			pa: 'f',
+			urlkw: [
+				'ministers',
+				'to',
+				'criminalise',
+				'use',
+				'of',
+				'ticket',
+				'tout',
+				'harvesting',
+				'software',
+			],
 			...sharedAdTargeting,
 		},
 	};
