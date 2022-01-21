@@ -40,13 +40,7 @@ import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	storage,
-	log,
-	getCookie,
-} from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -105,7 +99,6 @@ type Props = {
 let renderCount = 0;
 export const App = ({ CAPI, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
 	const [brazeMessages, setBrazeMessages] =
 		useState<Promise<BrazeMessagesInterface>>();
