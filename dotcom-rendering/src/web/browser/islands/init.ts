@@ -15,7 +15,7 @@ const init = () => {
 	 * The code here looks for parts of the dom that have been marked using the `gu-island`
 	 * marker, hydrating/rendering each one using the following properties:
 	 *
-	 * defer - Used to optionally defer execution
+	 * deferUntil - Used to optionally defer execution
 	 * name - The name of the component. Used to dynamically import the code
 	 * props - The data for the component that has been serialised in the dom
 	 * element - The `gu-island` custom element which is wrapping the content
@@ -28,8 +28,8 @@ const init = () => {
 			if (!name) return;
 			log('dotcom', `Hydrating ${name}`);
 
-			const defer = element.getAttribute('deferuntil');
-			switch (defer) {
+			const deferUntil = element.getAttribute('deferuntil');
+			switch (deferUntil) {
 				case 'idle': {
 					whenIdle(() => {
 						doHydration(name, props, element);

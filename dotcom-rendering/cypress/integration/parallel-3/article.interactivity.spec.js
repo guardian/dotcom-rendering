@@ -52,9 +52,8 @@ describe('Interactivity', function () {
 			it('should change the list of most viewed items when a tab is clicked', function () {
 				cy.visit(`/Article?url=${articleUrl}`);
 				cy.contains('Lifestyle');
-				cy.get('[data-component="most-popular"]').scrollIntoView({
-					offset: { top: 150 },
-				});
+				// Scroll to bottom to trigger hydration
+				cy.scrollTo('bottom', { duration: 300 });
 				cy.wait('@getMostReadGeo');
 				cy.wait('@getMostRead');
 				cy.get('[data-cy=tab-body-0]').should('be.visible');
@@ -170,6 +169,8 @@ describe('Interactivity', function () {
 				cy.get('[data-cy=subnav-toggle]').first().click();
 				// The first button now shows 'Less'
 				cy.get('[data-cy=subnav-toggle]').first().contains('Less');
+				// Scroll to bottom to trigger hydration
+				cy.scrollTo('bottom', { duration: 300 });
 				// The other subnav still shows 'More'
 				cy.get('[data-cy=subnav-toggle]').last().contains('More');
 				// Click Show more on the last sub nav

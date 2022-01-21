@@ -40,6 +40,7 @@ describe('Signed in readers', function () {
 
 	it('should not display signed in texts when users are not signed in', function () {
 		cy.visit(`Article?url=${articleUrl}`);
+		cy.scrollTo('bottom', { duration: 300 });
 		// Check that the page is showing the reader as signed out
 		cy.contains('sign in or create');
 	});
