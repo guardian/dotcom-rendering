@@ -61,7 +61,7 @@ describe('Elements', function () {
 			let hasElementTooWide = false;
 
 			cy.visit(
-				'Article?url=https://www.theguardian.com/commentisfree/2020/jun/30/conservatives-cowboy-builders-boris-johnson',
+				'Article?url=https://www.theguardian.com/politics/2022/jan/21/blackmail-allegations-need-to-be-investigated-says-kwasi-kwarteng',
 			);
 
 			const pageHasXOverflow = (docWidth) => {
