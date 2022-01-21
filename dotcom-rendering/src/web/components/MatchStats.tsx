@@ -154,24 +154,18 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 			min-height: 800px;
 			background-color: ${BACKGROUND_COLOUR};
 
-			:before {
-				content: '';
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				/* Always stretch left */
-				left: -100vw;
-				/* Only stretch right below desktop */
-				right: 0;
-				${until.desktop} {
-					right: -20px;
+			${from.leftCol} {
+				:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					/* stretch left */
+					left: -100vw;
+					right: 0;
+					background-color: ${BACKGROUND_COLOUR};
+					z-index: -1;
 				}
-				${until.mobileLandscape} {
-					right: -10px;
-				}
-
-				background-color: ${BACKGROUND_COLOUR};
-				z-index: -1;
 			}
 		`}
 	>
@@ -266,7 +260,7 @@ const DecideDoughnut = ({
 			label: away.codename,
 			color: away.colours,
 		},
-	].reverse()
+	].reverse();
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
@@ -318,11 +312,7 @@ const DecideDoughnut = ({
 			);
 		}
 		default:
-			return (
-				<Doughnut
-					sections={sections}
-						/>
-			);
+			return <Doughnut sections={sections} />;
 	}
 };
 
@@ -347,7 +337,11 @@ export const MatchStats = ({ home, away, format }: Props) => (
 				<RightBorder>
 					<H4>Possession</H4>
 					<Center>
-						<DecideDoughnut home={home} away={away} format={format} />
+						<DecideDoughnut
+							home={home}
+							away={away}
+							format={format}
+						/>
 					</Center>
 				</RightBorder>
 				<br />
