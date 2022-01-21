@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { remSpace, text, textSans } from '@guardian/source-foundations';
+import { withDefault } from '@guardian/types';
 import type { EmailSignup } from 'embed';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
@@ -29,6 +30,7 @@ const EmailSignupEmbed: FC<Props> = ({ embed }) => (
 			src={embed.src}
 			className="js-email-signup"
 			height="52"
+			title={withDefault('Email newsletter signup embed')(embed.alt)}
 		></iframe>
 		{maybeRender(embed.alt, (alt) => (
 			<figcaption css={captionStyles}>{alt}</figcaption>
