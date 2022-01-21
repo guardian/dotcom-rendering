@@ -73,6 +73,7 @@ interface TikTok extends GenericFields {
 interface EmailSignup {
 	kind: EmbedKind.EmailSignup;
 	alt: Option<string>;
+	caption: Option<string>;
 	src: string;
 	tracking: EmbedTracksType;
 }
@@ -366,6 +367,7 @@ const emailFromIframe =
 				kind: EmbedKind.EmailSignup,
 				src: iframe.src,
 				alt: fromNullable(element.embedTypeData?.alt),
+				caption: fromNullable(element.embedTypeData?.caption),
 				tracking:
 					element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
 			});

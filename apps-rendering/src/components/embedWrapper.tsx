@@ -300,6 +300,7 @@ const divElementPropsToEmbedComponentProps = (
 								kind: EmbedKind.EmailSignup,
 								src,
 								alt: fromNullable(elementProps['alt']),
+								caption: fromNullable(elementProps['caption']),
 								tracking: parseTrackingParam(
 									elementProps['tracking'],
 								),
