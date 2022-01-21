@@ -28,7 +28,7 @@ const init = () => {
 			if (!name) return;
 			log('dotcom', `Hydrating ${name}`);
 
-			const defer = element.getAttribute('defer');
+			const defer = element.getAttribute('deferuntil');
 			switch (defer) {
 				case 'idle': {
 					whenIdle(() => {
