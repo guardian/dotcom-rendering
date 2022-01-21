@@ -7,6 +7,7 @@ import {
 	border,
 	headline,
 	textSans,
+	between,
 } from '@guardian/source-foundations';
 
 import { GridItem } from '@root/src/web/components/GridItem';
@@ -60,6 +61,7 @@ const StatsGrid = ({
 							${from.desktop} {
 								grid-template-columns: 100%;
 								grid-template-areas:
+									'title'
 									'possession'
 									'attempts'
 									'corners'
@@ -244,6 +246,86 @@ const H4 = ({ children }: { children: React.ReactNode }) => (
 	</h4>
 );
 
+const DecideDoughnut = ({
+	home,
+	away,
+	format,
+}: {
+	home: TeamType;
+	away: TeamType;
+	format: ArticleFormat;
+}) => {
+	const sections = [
+		{
+			value: home.possession,
+			label: home.codename,
+			color: home.colours,
+		},
+		{
+			value: away.possession,
+			label: away.codename,
+			color: away.colours,
+		},
+	].reverse()
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
+			return (
+				<>
+					{/* This represents the stats component being within the main body on a liveblog */}
+					<div
+						css={css`
+							${from.mobileMedium} {
+								display: none;
+							}
+						`}
+					>
+						<Doughnut
+							sections={sections}
+							width={200}
+							height={200}
+						/>
+					</div>
+					<div
+						css={css`
+							display: none;
+							${between.mobileMedium.and.desktop} {
+								display: block;
+							}
+						`}
+					>
+						<Doughnut
+							sections={sections}
+							width={300}
+							height={300}
+						/>
+					</div>
+					{/* This represents the stats component being within the left column on a liveblog */}
+					<div
+						css={css`
+							${until.desktop} {
+								display: none;
+							}
+						`}
+					>
+						<Doughnut
+							sections={sections}
+							width={200}
+							height={200}
+						/>
+					</div>
+				</>
+			);
+		}
+		default:
+			return (
+				<Doughnut
+					sections={sections}
+						/>
+			);
+	}
+};
+
 export const MatchStats = ({ home, away, format }: Props) => (
 	<StretchBackground>
 		<StatsGrid format={format}>
@@ -262,51 +344,12 @@ export const MatchStats = ({ home, away, format }: Props) => (
 				</ShiftLeft>
 			</GridItem>
 			<GridItem area="possession">
-				<Hide when="above" breakpoint="desktop">
-					<RightBorder>
-						<H4>Possession</H4>
-						<Center>
-							<Doughnut
-								sections={[
-									{
-										value: home.possession,
-										label: home.codename,
-										color: home.colours,
-									},
-									{
-										value: away.possession,
-										label: away.codename,
-										color: away.colours,
-									},
-								].reverse()}
-							/>
-						</Center>
-					</RightBorder>
-				</Hide>
-				<Hide when="below" breakpoint="desktop">
-					<RightBorder>
-						<H4>Possession</H4>
-						<Center>
-							<Doughnut
-								sections={[
-									{
-										value: home.possession,
-										label: home.codename,
-										color: home.colours,
-									},
-									{
-										value: away.possession,
-										label: away.codename,
-										color: away.colours,
-									},
-								].reverse()}
-								width={200}
-								height={200}
-							/>
-						</Center>
-					</RightBorder>
-				</Hide>
-
+				<RightBorder>
+					<H4>Possession</H4>
+					<Center>
+						<DecideDoughnut home={home} away={away} format={format} />
+					</Center>
+				</RightBorder>
 				<br />
 			</GridItem>
 			<GridItem area="attempts">
