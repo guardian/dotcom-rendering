@@ -46,19 +46,6 @@ const StatsGrid = ({
 						@supports (display: grid) {
 							display: grid;
 
-							${from.desktop} {
-								grid-template-columns: 100%;
-								grid-template-areas:
-									'title'
-									'possession'
-									'attempts'
-									'corners'
-									'fouls'
-									'subtitle'
-									'home'
-									'away';
-							}
-
 							${until.desktop} {
 								grid-template-columns: 50% 50%;
 								grid-template-areas:
@@ -68,6 +55,29 @@ const StatsGrid = ({
 									'possession     fouls'
 									'subtitle       .'
 									'home           away';
+							}
+
+							${from.desktop} {
+								grid-template-columns: 100%;
+								grid-template-areas:
+									'possession'
+									'attempts'
+									'corners'
+									'fouls'
+									'subtitle'
+									'home'
+									'away';
+							}
+							${until.phablet} {
+								grid-template-columns: 50% 50%;
+								grid-template-areas:
+									'title			title'
+									'possession		possession'
+									'attempts		attempts'
+									'corners		corners'
+									'fouls			fouls'
+									'subtitle		subtitle'
+									'home			away';
 							}
 						}
 					`}

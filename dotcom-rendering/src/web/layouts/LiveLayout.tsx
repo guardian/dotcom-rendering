@@ -231,7 +231,6 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'meta		 media'
 						'meta		 media'
 						'keyevents	 media'
-						'keyevents	 body'
 						'matchstats	 body'
 						'. 			 .';
 				}
@@ -243,7 +242,6 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'lines 		 matchtabs right-column'
 						'meta  		 media     right-column'
 						'keyevents   media 	   right-column'
-						'keyevents   body      right-column'
 						'matchstats  body      right-column'
 						'.			 .         right-column';
 				}
