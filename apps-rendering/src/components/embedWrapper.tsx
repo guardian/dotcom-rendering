@@ -91,6 +91,11 @@ const embedToDivProps = (embed: Embed): Record<string, string> => {
 						return { alt };
 					})(embed.alt),
 				),
+				...withDefault({})(
+					map<string, Record<string, string>>((caption) => {
+						return { caption };
+					})(embed.caption),
+				),
 				src: embed.src,
 			};
 		}
