@@ -5,7 +5,7 @@ templates:
     type: cloud-formation
     app: mobile-apps-rendering
     parameters:
-	  amiParameter: AMIMobileappsrendering
+      amiParameter: AMIMobileappsrendering
       amiEncrypted: true
       amiTags:
         Recipe: bionic-mobile-node-ARM
