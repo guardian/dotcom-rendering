@@ -8,7 +8,6 @@ import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks'
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
-import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
@@ -39,7 +38,6 @@ import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
 import {
@@ -108,7 +106,6 @@ let renderCount = 0;
 export const App = ({ CAPI, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	const [user, setUser] = useState<UserProfile | null>();
 
 	const [brazeMessages, setBrazeMessages] =
 		useState<Promise<BrazeMessagesInterface>>();
@@ -143,23 +140,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		ABTestAPI.registerCompleteEvents(allRunnableTests);
 		log('dotcom', 'AB tests initialised');
 	}, [ABTestAPI]);
-
-	useOnce(() => {
-		// useOnce means this code will only run once isSignedIn is defined, and only
-		// run one time
-		if (isSignedIn) {
-			getUser(CAPI.config.discussionApiUrl)
-				.then((theUser) => {
-					if (theUser) {
-						setUser(theUser);
-						log('dotcom', 'State: user set');
-					}
-				})
-				.catch((e) => console.error(`getUser - error: ${e}`));
-		} else {
-			setUser(null);
-		}
-	}, [isSignedIn, CAPI.config.discussionApiUrl]);
 
 	useEffect(() => {
 		incrementAlreadyVisited();
@@ -929,22 +909,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					pageViewId={pageViewId}
 				/>
 			</Portal>
-			<HydrateOnce rootId="comments" waitFor={[user]}>
-				<Discussion
-					format={format}
-					discussionApiUrl={CAPI.config.discussionApiUrl}
-					shortUrlId={CAPI.config.shortUrlId}
-					user={user || undefined}
-					discussionD2Uid={CAPI.config.discussionD2Uid}
-					discussionApiClientHeader={
-						CAPI.config.discussionApiClientHeader
-					}
-					enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
-					isAdFreeUser={CAPI.isAdFreeUser}
-					shouldHideAds={CAPI.shouldHideAds}
-					beingHydrated={true}
-				/>
-			</HydrateOnce>
 			<Portal rootId="most-viewed-footer">
 				<MostViewedFooter
 					format={format}
