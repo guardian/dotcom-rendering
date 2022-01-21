@@ -37,11 +37,11 @@ describe('Elements', function () {
 
 		it('should render the counted interactive embed', function () {
 			cy.visit(
-				'AMPArticle?url=https://www.theguardian.com/uk-news/2019/feb/21/teenager-shot-in-fight-on-london-tube-barking-hammersmith-and-city-line',
+				'AMPArticle?url=https://www.theguardian.com/us-news/2015/nov/05/police-tasers-deaths-the-counted',
 			);
 
 			const ampIframeSelector =
-				'amp-iframe[src="https://interactive.guim.co.uk/uploader/embed/2019/02/barking_shooting_map/giv-3902MUY7uM3exkzl/"]';
+				'amp-iframe[src="https://interactive.guim.co.uk/embed/2015/10/2015-10-counted-table/"]';
 
 			cy.get(ampIframeSelector).scrollIntoView({
 				duration: 300,
@@ -49,7 +49,7 @@ describe('Elements', function () {
 			});
 
 			getAmpIframeBody(`${ampIframeSelector} > iframe`).contains(
-				'Upney station',
+				'Deaths after Taser use: the findings',
 			);
 		});
 	});
