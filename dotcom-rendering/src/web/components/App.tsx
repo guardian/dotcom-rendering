@@ -82,7 +82,7 @@ const OnwardsUpper = React.lazy(() => {
 	const { start, end } = initPerf('OnwardsUpper');
 	start();
 	return import(
-		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/Onwards/OnwardsUpper'
+		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/OnwardsUpper'
 	).then((module) => {
 		end();
 		return { default: module.OnwardsUpper };
@@ -92,7 +92,7 @@ const OnwardsLower = React.lazy(() => {
 	const { start, end } = initPerf('OnwardsLower');
 	start();
 	return import(
-		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/Onwards/OnwardsLower'
+		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/OnwardsLower'
 	).then((module) => {
 		end();
 		return { default: module.OnwardsLower };

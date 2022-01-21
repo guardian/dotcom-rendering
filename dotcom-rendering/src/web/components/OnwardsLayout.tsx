@@ -6,7 +6,7 @@ import { useComments } from '@root/src/web/lib/useComments';
 import { formatAttrString } from '@frontend/web/lib/formatAttrString';
 
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { ContainerTitle } from '../ContainerTitle';
+import { ContainerTitle } from './ContainerTitle';
 import { OnwardsContainer } from './OnwardsContainer';
 import { MoreThanFive } from './MoreThanFive';
 import { ExactlyFive } from './ExactlyFive';
