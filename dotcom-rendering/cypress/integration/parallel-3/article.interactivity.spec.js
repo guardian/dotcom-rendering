@@ -161,9 +161,8 @@ describe('Interactivity', function () {
 				cy.viewport('iphone-x');
 				cy.visit(`/Article?url=${articleUrl}`);
 				// Wait for hydration
-				cy.get('[data-cy=sub-nav]')
+				cy.get('gu-island[name=SubNav]')
 					.first()
-					.parent()
 					.should('have.attr', 'data-gu-hydrated', 'true');
 				// Both subnav buttons show 'More'
 				cy.get('[data-cy=subnav-toggle]').first().contains('More');
@@ -174,6 +173,10 @@ describe('Interactivity', function () {
 				cy.get('[data-cy=subnav-toggle]').first().contains('Less');
 				// Scroll to bottom to trigger hydration
 				cy.scrollTo('bottom', { duration: 300 });
+				// Wait for hydration
+				cy.get('gu-island[name=SubNav]')
+					.last()
+					.should('have.attr', 'data-gu-hydrated', 'true');
 				// The other subnav still shows 'More'
 				cy.get('[data-cy=subnav-toggle]').last().contains('More');
 				// Click Show more on the last sub nav
