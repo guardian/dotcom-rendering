@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const os = require('os');
 const { exec } = require('child_process');
+const { v4 } = require('uuid');
 
 class GuStatsReportPlugin {
 	constructor(config) {
@@ -10,30 +11,20 @@ class GuStatsReportPlugin {
 		this.buildCount = 0;
 		this.gitBranch = null;
 		this.gitHash = null;
-		this.machineUsername = null;
-		this.machineHostname = os.hostname();
-		this.fetchMachineUsername();
+		this.sessionId = v4();
+
 		this.fetchGitBranch();
 		this.fetchGitHash();
+
 		if (config.displayDisclaimer)
 			console.log(
-				'[gu-stats-report] This project reports build stats & basic machine information for internal use only. We will use this information to help us improve developer experience for this project.',
+				'[gu-stats-report] This project reports build information, stats & basic machine information for internal use only. We will use this information to help us improve developer experience for this project.',
 			);
 	}
 
 	isValidConfig() {
 		if (!this.buildName || !this.project || !this.team) return false;
 		return true;
-	}
-
-	fetchMachineUsername() {
-		try {
-			// if 'username' is undefied os.userInfo() will throw an error
-			// https://nodejs.org/api/os.html#osuserinfooptions
-			this.machineUsername = os.userInfo().username;
-		} catch {
-			console.error('[gu-stats-report] Failed to get machine username');
-		}
 	}
 
 	fetchGitBranch() {
@@ -81,14 +72,6 @@ class GuStatsReportPlugin {
 							value: 'dotcom',
 						},
 						{
-							name: 'machineUsername',
-							value: this.machineUsername || 'unknown',
-						},
-						{
-							name: 'machineHostname',
-							value: this.machineHostname,
-						},
-						{
 							name: 'buildName',
 							value: this.buildName,
 						},
@@ -103,6 +86,10 @@ class GuStatsReportPlugin {
 						{
 							name: 'gitBranch',
 							value: this.gitBranch || 'unknown',
+						},
+						{
+							name: 'sessionId',
+							value: this.sessionId,
 						},
 						{
 							name: 'cpus',
