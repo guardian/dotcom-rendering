@@ -36,16 +36,50 @@ describe('Interactivity', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
 			cy.get('[data-cy=share-counts]').should('exist');
 		});
-		it('should display all the rich links for an article', function () {
+		it('loads the discussion when you click the comment count', function () {
+			cy.visit(
+				`/Article?url=https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
+			);
+			cy.get('[data-cy=comment-counts]').should('exist');
+			// The discusion is not yet loaded
+			cy.get('[data-component=discussion]').should('not.exist');
+			// Click the comment count
+			cy.get('[data-cy=comment-counts]').click();
+			cy.get('[data-component=discussion]').should('exist');
+		});
+		it('loads the discussion immediately when you use a url ending in #comments', function () {
+			cy.visit(
+				`/Article?url=https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
+			);
+			cy.get('[data-component=discussion]').should('exist');
+		});
+		it.only('loads the discussion immediately when you use a permalink', function () {
+			cy.visit(
+				`/Article?url=https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comment-154433663`,
+			);
+			cy.get('[data-component=discussion]').should('exist');
+		});
+		it('loads the most viwed list onlt after starting to scroll the page', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
-			cy.scrollTo('bottom', { duration: 300 });
+			cy.get('[data-component=geo-most-popular]').should('not.exist');
+			cy.scrollTo('center', { duration: 300 });
+			cy.get('[data-component=geo-most-popular]').should('exist');
+		});
+		it('should display and hydrate all the rich links for an article', function () {
+			cy.visit(`/Article?url=${articleUrl}`);
+			// Verify two links were server rendered
 			cy.get('[data-component=rich-link]')
 				.should('exist')
 				.its('length')
-				// This count of rich links is dependent on the article that we're testing not changing
-				// If this assertion fails then it could be because a link was added or removed in
-				// which case this check should be updated
 				.should('eq', 2);
+			// Verify hydration
+			cy.get('img[alt="Michael Barnier and the EU flag"]').should(
+				'not.exist',
+			);
+			cy.scrollTo('bottom', { duration: 300 });
+			cy.get('img[alt="Michael Barnier and the EU flag"]').should(
+				'be.visible',
+			);
 		});
 		describe('When most viewed is mocked', function () {
 			beforeEach(mockApi);
