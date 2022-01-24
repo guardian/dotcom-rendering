@@ -173,6 +173,10 @@ describe('Interactivity', function () {
 				cy.get('[data-cy=subnav-toggle]').first().contains('Less');
 				// Scroll to bottom to trigger hydration
 				cy.scrollTo('bottom', { duration: 300 });
+				// We need this second call to fix flakiness where content loads in pushing the page
+				// down and preventing the scroll request to actually reach the bottom. We will fix
+				// this later when we've defined fixed heights for these containers, preventing CLS
+				cy.scrollTo('bottom', { duration: 300 });
 				// Wait for hydration
 				cy.get('gu-island[name=SubNav]')
 					.last()
