@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { getLocaleCode } from '@root/src/web/lib/getCountryCode';
 import { getCookie } from '@guardian/libs';
-import { WeeklyArticleHistory } from '@sdc/dotcom/dist/dotcom/src/types';
+import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 
 import {
 	pickMessage,
