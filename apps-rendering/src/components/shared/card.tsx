@@ -67,8 +67,8 @@ const listStyles = (
 				}
 
 				${darkModeCss`
-            background: ${neutral[10]};
-        `}
+					background: ${neutral[10]};
+				`}
 
 				${from.tablet} {
 					margin-right: ${remSpace[5]};
@@ -99,9 +99,9 @@ const listStyles = (
 				}
 
 				${darkModeCss`
-			border-top: 1px solid ${neutral[20]};
-            background: ${neutral[0]};
-        `}
+					border-top: 1px solid ${neutral[20]};
+					background: ${neutral[0]};
+        		`}
 
 				${from.tablet} {
 					margin-right: ${remSpace[5]};
@@ -311,7 +311,7 @@ const cardStyles = (
 
 		case RelatedItemType.COMMENT: {
 			return css`
-				background-color: ${neutral[100]};
+				background-color: ${neutral[97]};
 				${headline.xxsmall()}
 			`;
 		}
