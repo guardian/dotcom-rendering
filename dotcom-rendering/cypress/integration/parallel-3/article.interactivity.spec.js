@@ -93,12 +93,17 @@ describe('Interactivity', function () {
 			it('should change the list of most viewed items when a tab is clicked', function () {
 				cy.visit(`/Article?url=${articleUrl}`);
 				cy.contains('Lifestyle');
-				// Ensure that the Most Popular html hasn't even been rendered yet
-				cy.get('[data-cy=tab-body-0]').should('not.exist');
+				// Make sure the most viewed html isn't even in the dom yet
+				cy.get('[data-cy=mostviewed-footer]').should('not.exist');
 				// Scroll to bottom to trigger hydration
+				cy.scrollTo('bottom', { duration: 300 });
+				// We need this second call to fix flakiness where content loads in pushing the page
+				// down and preventing the scroll request to actually reach the bottom. We will fix
+				// this later when we've defined fixed heights for these containers, preventing CLS
 				cy.scrollTo('bottom', { duration: 300 });
 				cy.wait('@getMostReadGeo');
 				cy.wait('@getMostRead');
+				cy.get('[data-cy=mostviewed-footer]').should('exist');
 				cy.get('[data-cy=tab-body-0]').should('be.visible');
 				cy.get('[data-cy=tab-body-1]').should('not.be.visible');
 				cy.get('[data-cy=tab-heading-1]').click();
@@ -201,9 +206,8 @@ describe('Interactivity', function () {
 				cy.viewport('iphone-x');
 				cy.visit(`/Article?url=${articleUrl}`);
 				// Wait for hydration
-				cy.get('[data-cy=sub-nav]')
+				cy.get('gu-island[name=SubNav]')
 					.first()
-					.parent()
 					.should('have.attr', 'data-gu-hydrated', 'true');
 				// Both subnav buttons show 'More'
 				cy.get('[data-cy=subnav-toggle]').first().contains('More');
@@ -214,6 +218,14 @@ describe('Interactivity', function () {
 				cy.get('[data-cy=subnav-toggle]').first().contains('Less');
 				// Scroll to bottom to trigger hydration
 				cy.scrollTo('bottom', { duration: 300 });
+				// We need this second call to fix flakiness where content loads in pushing the page
+				// down and preventing the scroll request to actually reach the bottom. We will fix
+				// this later when we've defined fixed heights for these containers, preventing CLS
+				cy.scrollTo('bottom', { duration: 300 });
+				// Wait for hydration
+				cy.get('gu-island[name=SubNav]')
+					.last()
+					.should('have.attr', 'data-gu-hydrated', 'true');
 				// The other subnav still shows 'More'
 				cy.get('[data-cy=subnav-toggle]').last().contains('More');
 				// Click Show more on the last sub nav
