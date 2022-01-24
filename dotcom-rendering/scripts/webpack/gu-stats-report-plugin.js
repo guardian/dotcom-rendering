@@ -9,13 +9,16 @@ class GuStatsReportPlugin {
 		this.team = config?.team;
 		this.sessionId = config?.sessionId;
 		this.buildCount = 0;
+
 		this.gitBranch = undefined;
 		this.gitHash = undefined;
 
+		// Since we can't make asynchronous calls in the constructor, we'll call these fetch
+		// methods, and they'll update this.gitBranch and this.gitHash once the data is fetched.
 		this.fetchGitBranch();
 		this.fetchGitHash();
 
-		if (config.displayDisclaimer)
+		if (config?.displayDisclaimer)
 			console.log(
 				'[gu-stats-report] This project reports build information, stats & basic machine information for internal use only. We will use this information to help us improve developer experience for this project.',
 			);
