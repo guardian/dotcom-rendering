@@ -25,8 +25,7 @@ class GuStatsReportPlugin {
 	}
 
 	isValidConfig() {
-		if (!this.buildName || !this.project || !this.team) return false;
-		return true;
+		return !!this.buildName && !!this.project && !!this.team;
 	}
 
 	fetchGitBranch() {
