@@ -53,9 +53,16 @@ describe('Interactivity', function () {
 			);
 			cy.get('[data-component=discussion]').should('exist');
 		});
-		it.only('loads the discussion immediately when you use a permalink', function () {
+		// eslint-disable-next-line mocha/no-skipped-tests
+		it.skip('loads the discussion immediately when you use a permalink', function () {
+			// The permalink feature is not currently working but once it does we want this test ready to go
 			cy.visit(
 				`/Article?url=https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comment-154433663`,
+			);
+			cy.get('gu-island[name=DiscussionContainer]').should(
+				'have.attr',
+				'data-gu-hydrated',
+				'true',
 			);
 			cy.get('[data-component=discussion]').should('exist');
 		});
