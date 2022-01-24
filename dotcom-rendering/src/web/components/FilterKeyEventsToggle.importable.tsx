@@ -1,10 +1,18 @@
 import { css } from '@emotion/react';
+import { from, neutral, remSpace } from '@guardian/source-foundations';
 import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
 import { useEffect, useState } from 'react';
 
 const cssOverrides = css`
-	&::before {
-		box-sizing: content-box;
+	padding: ${remSpace[2]};
+
+	${from.phablet} {
+		padding-left: ${remSpace[5]};
+	}
+
+	${from.desktop} {
+		border-top: 1px solid ${neutral[86]};
+		padding-left: 0;
 	}
 `;
 
