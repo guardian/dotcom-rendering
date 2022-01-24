@@ -7,7 +7,6 @@ import {
 	neutral,
 	remSpace,
 	textSans,
-	until,
 } from '@guardian/source-foundations';
 import FooterContent from 'components/footerContent';
 import type { FC } from 'react';
