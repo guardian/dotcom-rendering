@@ -27,7 +27,7 @@ import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { Caption } from '@root/src/web/components/Caption';
 import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
-import { Discussion } from '@frontend/web/components/Discussion';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { Hide } from '@root/src/web/components/Hide';
 import { GuardianLabsLines } from '@frontend/web/components/GuardianLabsLines';
 
@@ -378,6 +378,7 @@ export const ImmersiveLayout = ({
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
+									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines count={4} effect="straight" />
@@ -461,19 +462,22 @@ export const ImmersiveLayout = ({
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">
-						<Discussion
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							shortUrlId={CAPI.config.shortUrlId}
-							format={format}
-							discussionD2Uid={CAPI.config.discussionD2Uid}
-							discussionApiClientHeader={
-								CAPI.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={false}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							beingHydrated={false}
-						/>
+						<Island clientOnly={true} deferUntil="visible">
+							<DiscussionContainer
+								discussionApiUrl={CAPI.config.discussionApiUrl}
+								shortUrlId={CAPI.config.shortUrlId}
+								format={format}
+								discussionD2Uid={CAPI.config.discussionD2Uid}
+								discussionApiClientHeader={
+									CAPI.config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									CAPI.config.switches.enableDiscussionSwitch
+								}
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+							/>
+						</Island>
 					</ElementContainer>
 				)}
 

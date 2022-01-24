@@ -34,4 +34,4 @@ deployments:
       bucket: mobile-apps-rendering-assets
       cacheControl: public, max-age=315360000
       prefixStack: false
-      publicReadAcl: true
+      publicReadAcl: false

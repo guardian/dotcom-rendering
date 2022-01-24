@@ -33,7 +33,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@frontend/web/components/Discussion';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -513,6 +513,7 @@ export const CommentLayout = ({
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
+									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
 							</div>
 						</GridItem>
@@ -551,6 +552,7 @@ export const CommentLayout = ({
 										host={host}
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
+										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
 									{showBodyEndSlot && (
 										<div id="slot-body-end" />
@@ -639,19 +641,22 @@ export const CommentLayout = ({
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">
-						<Discussion
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							shortUrlId={CAPI.config.shortUrlId}
-							format={format}
-							discussionD2Uid={CAPI.config.discussionD2Uid}
-							discussionApiClientHeader={
-								CAPI.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={false}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							beingHydrated={false}
-						/>
+						<Island clientOnly={true} deferUntil="visible">
+							<DiscussionContainer
+								discussionApiUrl={CAPI.config.discussionApiUrl}
+								shortUrlId={CAPI.config.shortUrlId}
+								format={format}
+								discussionD2Uid={CAPI.config.discussionD2Uid}
+								discussionApiClientHeader={
+									CAPI.config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									CAPI.config.switches.enableDiscussionSwitch
+								}
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+							/>
+						</Island>
 					</ElementContainer>
 				)}
 

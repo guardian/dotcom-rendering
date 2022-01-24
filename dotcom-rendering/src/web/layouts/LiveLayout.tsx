@@ -32,7 +32,7 @@ import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@frontend/web/components/Discussion';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { Pagination } from '@frontend/web/components/Pagination';
 import { KeyEventsContainer } from '@root/src/web/components/KeyEventsContainer.importable';
 import { Island } from '@root/src/web/components/Island';
@@ -704,6 +704,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											host={host}
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
+											ajaxUrl={CAPI.config.ajaxUrl}
 										/>
 									</div>
 								</GridItem>
@@ -819,6 +820,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											host={host}
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
+											ajaxUrl={CAPI.config.ajaxUrl}
 										/>
 										{CAPI.pagination &&
 											CAPI.pagination.totalPages > 1 && (
@@ -923,6 +925,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											host={host}
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
+											ajaxUrl={CAPI.config.ajaxUrl}
 										/>
 									</div>
 								</GridItem>
@@ -1052,6 +1055,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													host={host}
 													pageId={CAPI.pageId}
 													webTitle={CAPI.webTitle}
+													ajaxUrl={
+														CAPI.config.ajaxUrl
+													}
 												/>
 												{CAPI.pagination &&
 													CAPI.pagination.totalPages >
@@ -1174,23 +1180,26 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 				{!isPaidContent && showComments && (
 					<ElementContainer
-						data-print-layout="hide"
 						sectionId="comments"
+						data-print-layout="hide"
 						element="section"
 					>
-						<Discussion
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							shortUrlId={CAPI.config.shortUrlId}
-							format={format}
-							discussionD2Uid={CAPI.config.discussionD2Uid}
-							discussionApiClientHeader={
-								CAPI.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={false}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							beingHydrated={false}
-						/>
+						<Island clientOnly={true} deferUntil="visible">
+							<DiscussionContainer
+								discussionApiUrl={CAPI.config.discussionApiUrl}
+								shortUrlId={CAPI.config.shortUrlId}
+								format={format}
+								discussionD2Uid={CAPI.config.discussionD2Uid}
+								discussionApiClientHeader={
+									CAPI.config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									CAPI.config.switches.enableDiscussionSwitch
+								}
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+							/>
+						</Island>
 					</ElementContainer>
 				)}
 

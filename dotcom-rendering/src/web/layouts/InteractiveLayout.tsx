@@ -36,7 +36,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@frontend/web/components/Discussion';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
@@ -465,6 +465,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										host={host}
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
+										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
 								</div>
 							</GridItem>
@@ -517,6 +518,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										host={host}
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
+										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
 
 									{/* <Lines data-print-layout="hide" count={4} /> */}
@@ -575,23 +577,26 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 				{!isPaidContent && showComments && (
 					<ElementContainer
-						data-print-layout="hide"
 						sectionId="comments"
+						data-print-layout="hide"
 						element="section"
 					>
-						<Discussion
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							shortUrlId={CAPI.config.shortUrlId}
-							format={format}
-							discussionD2Uid={CAPI.config.discussionD2Uid}
-							discussionApiClientHeader={
-								CAPI.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={false}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							beingHydrated={false}
-						/>
+						<Island clientOnly={true} deferUntil="visible">
+							<DiscussionContainer
+								discussionApiUrl={CAPI.config.discussionApiUrl}
+								shortUrlId={CAPI.config.shortUrlId}
+								format={format}
+								discussionD2Uid={CAPI.config.discussionD2Uid}
+								discussionApiClientHeader={
+									CAPI.config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									CAPI.config.switches.enableDiscussionSwitch
+								}
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+							/>
+						</Island>
 					</ElementContainer>
 				)}
 
