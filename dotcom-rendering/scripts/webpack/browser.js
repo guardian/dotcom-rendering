@@ -33,7 +33,7 @@ const scriptPath = (dcrPackage) =>
 			'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
 	].filter(Boolean);
 
-module.exports = ({ isLegacyJS }) => ({
+module.exports = ({ isLegacyJS, sessionId }) => ({
 	entry: {
 		sentryLoader: scriptPath('sentryLoader'),
 		bootCmp: scriptPath('bootCmp'),
@@ -65,6 +65,7 @@ module.exports = ({ isLegacyJS }) => ({
 				buildName: isLegacyJS ? 'client' : 'legacy-client',
 				project: 'dotcom-rendering',
 				team: 'dotcom',
+				sessionId,
 			}),
 		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
 		// [...].filter(Boolean) why it is used

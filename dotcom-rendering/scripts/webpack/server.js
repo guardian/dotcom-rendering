@@ -2,7 +2,7 @@ const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
-module.exports = () => ({
+module.exports = ({ sessionId }) => ({
 	entry: {
 		'frontend.server': './src/app/server.ts',
 	},
@@ -40,6 +40,7 @@ module.exports = () => ({
 				buildName: 'server',
 				project: 'dotcom-rendering',
 				team: 'dotcom',
+				sessionId,
 			}),
 	].filter(Boolean),
 	module: {

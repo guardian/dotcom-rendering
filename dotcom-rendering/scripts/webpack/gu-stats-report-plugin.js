@@ -1,17 +1,16 @@
 const fetch = require('node-fetch');
 const os = require('os');
 const { exec } = require('child_process');
-const { v4 } = require('uuid');
 
 class GuStatsReportPlugin {
 	constructor(config) {
 		this.buildName = config?.buildName;
 		this.project = config?.project;
 		this.team = config?.team;
+		this.sessionId = config?.sessionId;
 		this.buildCount = 0;
 		this.gitBranch = undefined;
 		this.gitHash = undefined;
-		this.sessionId = v4();
 
 		this.fetchGitBranch();
 		this.fetchGitHash();
