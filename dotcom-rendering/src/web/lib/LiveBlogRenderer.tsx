@@ -1,3 +1,4 @@
+import { ArticleDesign } from '@guardian/libs';
 import { LiveBlock } from '../components/LiveBlock';
 
 type Props = {
@@ -21,6 +22,9 @@ export const LiveBlogRenderer = ({
 }: Props) => {
 	return (
 		<>
+			{format.design === ArticleDesign.LiveBlog && (
+				<span data-gu-marker="top-of-blog" />
+			)}
 			{blocks.map((block) => {
 				return (
 					<LiveBlock

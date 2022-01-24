@@ -55,6 +55,7 @@ import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';
+import { Liveness } from '../components/Liveness.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -382,6 +383,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 	return (
 		<>
+			{format.design === ArticleDesign.LiveBlog && (
+				<Island clientOnly={true} deferUntil="idle">
+					<Liveness
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
+						ajaxUrl={CAPI.config.ajaxUrl}
+					/>
+				</Island>
+			)}
 			<div data-print-layout="hide">
 				<Stuck>
 					<ElementContainer
