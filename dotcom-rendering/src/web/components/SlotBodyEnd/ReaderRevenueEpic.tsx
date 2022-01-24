@@ -61,6 +61,7 @@ const checkForErrors = (response: Response) => {
 
 const wrapperMargins = css`
 	margin: 18px 0;
+	clear: both;
 `;
 
 export type CanShowData = {

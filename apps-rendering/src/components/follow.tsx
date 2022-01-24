@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace, textSans } from '@guardian/source-foundations';
@@ -10,7 +11,6 @@ import type { Contributor } from 'contributor';
 import { isSingleContributor } from 'contributor';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
@@ -18,12 +18,13 @@ interface Props extends ArticleFormat {
 	contributors: Contributor[];
 }
 
-const styles = ({ theme }: ArticleFormat): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(theme);
+const styles = (format: ArticleFormat): SerializedStyles => {
+	const follow = text.follow(format);
+	const followDark = text.followDark(format);
 
 	return css`
 		${textSans.small()}
-		color: ${kicker};
+		color: ${follow};
 		display: flex;
 		align-items: center;
 		column-gap: 0.2em;
@@ -41,7 +42,7 @@ const styles = ({ theme }: ArticleFormat): SerializedStyles => {
 		}
 
 		${darkModeCss`
-			color: ${inverted};
+			color: ${followDark};
 		`}
 	`;
 };

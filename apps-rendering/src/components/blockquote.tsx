@@ -2,12 +2,12 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { fill } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
@@ -17,7 +17,8 @@ interface Props {
 }
 
 const styles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker } = getThemeStyles(format.theme);
+	const blockquoteFill = fill.blockquoteIcon(format);
+
 	return css`
 		font-style: italic;
 		position: relative;
@@ -28,7 +29,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 			margin-left: -9.2625px;
 			margin-bottom: -12px;
 			margin-top: 4.4px;
-			fill: ${kicker};
+			fill: ${blockquoteFill};
 		}
 
 		${darkModeCss`

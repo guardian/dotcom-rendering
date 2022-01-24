@@ -48,7 +48,8 @@ const Renderer: React.FC<{
 	host?: string;
 	pageId: string;
 	webTitle: string;
-}> = ({ format, palette, elements, host, pageId, webTitle }) => {
+	ajaxUrl: string;
+}> = ({ format, palette, elements, host, pageId, webTitle, ajaxUrl }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -65,6 +66,7 @@ const Renderer: React.FC<{
 			isMainMedia: false,
 			pageId,
 			webTitle,
+			ajaxUrl,
 		});
 
 		if (ok) {
@@ -191,6 +193,10 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 							edition={CAPI.editionId}
 							idUrl={CAPI.config.idUrl}
 							mmaUrl={CAPI.config.mmaUrl}
+							supporterCTA={
+								CAPI.nav.readerRevenueLinks.header.supporter
+							}
+							discussionApiUrl={CAPI.config.discussionApiUrl}
 							isAnniversary={
 								CAPI.config.switches.anniversaryHeaderSvg
 							}
@@ -292,6 +298,7 @@ export const FullPageInteractiveLayout = ({
 						host={host}
 						pageId={CAPI.pageId}
 						webTitle={CAPI.webTitle}
+						ajaxUrl={CAPI.config.ajaxUrl}
 					/>
 				</article>
 			</ElementContainer>

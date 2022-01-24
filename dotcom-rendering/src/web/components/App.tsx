@@ -6,10 +6,8 @@ import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
-import { Links } from '@frontend/web/components/Links';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
-import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
@@ -40,16 +38,9 @@ import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	storage,
-	log,
-	getCookie,
-} from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -83,7 +74,7 @@ const OnwardsUpper = React.lazy(() => {
 	const { start, end } = initPerf('OnwardsUpper');
 	start();
 	return import(
-		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/Onwards/OnwardsUpper'
+		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/OnwardsUpper'
 	).then((module) => {
 		end();
 		return { default: module.OnwardsUpper };
@@ -93,7 +84,7 @@ const OnwardsLower = React.lazy(() => {
 	const { start, end } = initPerf('OnwardsLower');
 	start();
 	return import(
-		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/Onwards/OnwardsLower'
+		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/OnwardsLower'
 	).then((module) => {
 		end();
 		return { default: module.OnwardsLower };
@@ -108,8 +99,6 @@ type Props = {
 let renderCount = 0;
 export const App = ({ CAPI, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	const [user, setUser] = useState<UserProfile | null>();
 
 	const [brazeMessages, setBrazeMessages] =
 		useState<Promise<BrazeMessagesInterface>>();
@@ -144,23 +133,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		ABTestAPI.registerCompleteEvents(allRunnableTests);
 		log('dotcom', 'AB tests initialised');
 	}, [ABTestAPI]);
-
-	useOnce(() => {
-		// useOnce means this code will only run once isSignedIn is defined, and only
-		// run one time
-		if (isSignedIn) {
-			getUser(CAPI.config.discussionApiUrl)
-				.then((theUser) => {
-					if (theUser) {
-						setUser(theUser);
-						log('dotcom', 'State: user set');
-					}
-				})
-				.catch((e) => console.error(`getUser - error: ${e}`));
-		} else {
-			setUser(null);
-		}
-	}, [isSignedIn, CAPI.config.discussionApiUrl]);
 
 	useEffect(() => {
 		incrementAlreadyVisited();
@@ -271,24 +243,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 		{
 			resolveComponent: (module) => module.YoutubeBlockComponent,
-		},
-	);
-
-	const RichLinkComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/RichLinkComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.RichLinkComponent,
 		},
 	);
 
@@ -494,10 +448,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.VineBlockElement',
 	);
-	const richLinks = elementsByType<RichLinkBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.RichLinkBlockElement',
-	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
@@ -536,14 +486,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			<HydrateOnce rootId="links-root" waitFor={[user]}>
-				<Links
-					supporterCTA={CAPI.nav.readerRevenueLinks.header.supporter}
-					userId={user ? user.userId : undefined}
-					idUrl={CAPI.config.idUrl}
-					mmaUrl={CAPI.config.mmaUrl}
-				/>
-			</HydrateOnce>
 			<HydrateOnce rootId="labs-header">
 				<LabsHeader />
 			</HydrateOnce>
@@ -656,15 +598,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					isPaidContent={CAPI.pageType.isPaidContent}
 				/>
 			</Portal>
-			{richLinks.map((richLink, index) => (
-				<Portal rootId={richLink.elementId}>
-					<RichLinkComponent
-						element={richLink}
-						ajaxEndpoint={CAPI.config.ajaxUrl}
-						richLinkIndex={index}
-					/>
-				</Portal>
-			))}
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
 					<CalloutBlockComponent callout={callout} format={format} />
@@ -921,13 +854,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-upper-whensignedin'
-						: 'onwards-upper-whensignedout'
-				}
-			>
+			<Portal rootId="onwards-upper">
 				<Lazy margin={300}>
 					<Suspense fallback={<></>}>
 						<OnwardsUpper
@@ -949,13 +876,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					</Suspense>
 				</Lazy>
 			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-lower-whensignedin'
-						: 'onwards-lower-whensignedout'
-				}
-			>
+			<Portal rootId="onwards-lower">
 				<Lazy margin={300}>
 					<Suspense fallback={<></>}>
 						<OnwardsLower
@@ -981,42 +902,12 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					pageViewId={pageViewId}
 				/>
 			</Portal>
-			<HydrateOnce rootId="comments" waitFor={[user]}>
-				<Discussion
-					format={format}
-					discussionApiUrl={CAPI.config.discussionApiUrl}
-					shortUrlId={CAPI.config.shortUrlId}
-					user={user || undefined}
-					discussionD2Uid={CAPI.config.discussionD2Uid}
-					discussionApiClientHeader={
-						CAPI.config.discussionApiClientHeader
-					}
-					enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
-					isAdFreeUser={CAPI.isAdFreeUser}
-					shouldHideAds={CAPI.shouldHideAds}
-					beingHydrated={true}
-				/>
-			</HydrateOnce>
 			<Portal rootId="most-viewed-footer">
 				<MostViewedFooter
 					format={format}
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 				/>
-			</Portal>
-			<Portal rootId="reader-revenue-links-footer">
-				<Lazy margin={300}>
-					<ReaderRevenueLinks
-						urls={CAPI.nav.readerRevenueLinks.footer}
-						edition={CAPI.editionId}
-						dataLinkNamePrefix="footer : "
-						inHeader={false}
-						remoteHeaderEnabled={false}
-						pageViewId={pageViewId}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
-						ophanRecord={ophanRecord}
-					/>
-				</Lazy>
 			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
