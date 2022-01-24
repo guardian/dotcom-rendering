@@ -53,6 +53,8 @@ import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Island } from '../components/Island';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
+import { OnwardsLower } from '../components/OnwardsLower.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 
 const StandardGrid = ({
 	children,
@@ -716,13 +718,39 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					/>
 				</ElementContainer>
 
-				<aside data-print-layout="hide" id="onwards-upper" />
+				<Island clientOnly={true} deferUntil="visible">
+					<OnwardsUpper
+						ajaxUrl={CAPI.config.ajaxUrl}
+						hasRelated={CAPI.hasRelated}
+						hasStoryPackage={CAPI.hasStoryPackage}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						pageId={CAPI.pageId}
+						isPaidContent={CAPI.config.isPaidContent || false}
+						showRelatedContent={CAPI.config.showRelatedContent}
+						keywordIds={CAPI.config.keywordIds}
+						contentType={CAPI.contentType}
+						tags={CAPI.tags}
+						format={format}
+						pillar={format.theme}
+						edition={CAPI.editionId}
+						shortUrlId={CAPI.config.shortUrlId}
+					/>
+				</Island>
+
 				{showOnwardsLower && (
 					<ElementContainer
-						data-print-layout="hide"
 						sectionId="onwards-lower"
-						element="aside"
-					/>
+						element="section"
+					>
+						<Island clientOnly={true} deferUntil="visible">
+							<OnwardsLower
+								ajaxUrl={CAPI.config.ajaxUrl}
+								hasStoryPackage={CAPI.hasStoryPackage}
+								tags={CAPI.tags}
+								format={format}
+							/>
+						</Island>
+					</ElementContainer>
 				)}
 
 				{!isPaidContent && showComments && (

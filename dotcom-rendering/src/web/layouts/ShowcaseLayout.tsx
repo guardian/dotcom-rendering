@@ -51,6 +51,8 @@ import {
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Island } from '../components/Island';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
+import { OnwardsLower } from '../components/OnwardsLower.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -611,12 +613,39 @@ export const ShowcaseLayout = ({
 					/>
 				</ElementContainer>
 
-				<aside id="onwards-upper" />
+				<Island clientOnly={true} deferUntil="visible">
+					<OnwardsUpper
+						ajaxUrl={CAPI.config.ajaxUrl}
+						hasRelated={CAPI.hasRelated}
+						hasStoryPackage={CAPI.hasStoryPackage}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						pageId={CAPI.pageId}
+						isPaidContent={CAPI.config.isPaidContent || false}
+						showRelatedContent={CAPI.config.showRelatedContent}
+						keywordIds={CAPI.config.keywordIds}
+						contentType={CAPI.contentType}
+						tags={CAPI.tags}
+						format={format}
+						pillar={format.theme}
+						edition={CAPI.editionId}
+						shortUrlId={CAPI.config.shortUrlId}
+					/>
+				</Island>
+
 				{showOnwardsLower && (
 					<ElementContainer
 						sectionId="onwards-lower"
-						element="aside"
-					/>
+						element="section"
+					>
+						<Island clientOnly={true} deferUntil="visible">
+							<OnwardsLower
+								ajaxUrl={CAPI.config.ajaxUrl}
+								hasStoryPackage={CAPI.hasStoryPackage}
+								tags={CAPI.tags}
+								format={format}
+							/>
+						</Island>
+					</ElementContainer>
 				)}
 
 				{!isPaidContent && showComments && (
