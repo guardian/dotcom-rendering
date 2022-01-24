@@ -97,6 +97,7 @@ const embedToDivProps = (embed: Embed): Record<string, string> => {
 					})(embed.caption),
 				),
 				src: embed.src,
+				...(embed.tracking && { tracking: embed.tracking.toString() }),
 			};
 		}
 		case EmbedKind.TikTok: {
