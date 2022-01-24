@@ -58,16 +58,15 @@ const listStyles = (
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
-				border-top: 1px solid ${neutral[86]};
 				border-radius: 0.75rem;
 				max-width: 10rem;
+				padding-top: 0.125rem;
 
 				&.fade {
 					opacity: 0.7;
 				}
 
 				${darkModeCss`
-			border-top: none;
             background: ${neutral[10]};
         `}
 
