@@ -52,10 +52,13 @@ describe('Interactivity', function () {
 			it('should change the list of most viewed items when a tab is clicked', function () {
 				cy.visit(`/Article?url=${articleUrl}`);
 				cy.contains('Lifestyle');
+				// Make sure the most viewed html isn't even in the dom yet
+				cy.get('[data-cy=mostviewed-footer]').should('not.exist');
 				// Scroll to bottom to trigger hydration
 				cy.scrollTo('bottom', { duration: 300 });
 				cy.wait('@getMostReadGeo');
 				cy.wait('@getMostRead');
+				cy.get('[data-cy=mostviewed-footer]').should('exist');
 				cy.get('[data-cy=tab-body-0]').should('be.visible');
 				cy.get('[data-cy=tab-body-1]').should('not.be.visible');
 				cy.get('[data-cy=tab-heading-1]').click();
