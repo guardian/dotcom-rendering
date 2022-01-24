@@ -1,6 +1,10 @@
 // ----- Imports ----- //
 
 import {
+	getAllThemes,
+	getThemeNameAsString,
+} from '@guardian/common-rendering/src/fixtures/article';
+import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticlePillar,
@@ -63,6 +67,28 @@ const Labs: FC = () => (
 	/>
 );
 
+const Deadblog: FC = () => {
+	return (
+		<>
+			{getAllThemes({
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+			}).map((format) => (
+				<div key={format.theme}>
+					<p>{getThemeNameAsString(format)}</p>
+					<Byline
+						theme={format.theme}
+						design={ArticleDesign.DeadBlog}
+						display={ArticleDisplay.Standard}
+						bylineHtml={mockBylineHtml()}
+					/>
+					<br />
+				</div>
+			))}
+		</>
+	);
+};
+
 // ----- Exports ----- //
 
 export default {
@@ -71,4 +97,4 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default, Comment, Labs };
+export { Default, Comment, Labs, Deadblog };
