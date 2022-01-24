@@ -19,21 +19,29 @@ import { Duration, Tags } from '@aws-cdk/core';
 import { AccessScope, GuEc2App } from '@guardian/cdk';
 import { Stage } from '@guardian/cdk/lib/constants';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
-import { GuStack, GuStageParameter } from '@guardian/cdk/lib/constructs/core';
+import {
+	GuParameter,
+	GuStack,
+	GuStageParameter,
+	GuStringParameter,
+} from '@guardian/cdk/lib/constructs/core';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 
 interface AppsStackProps extends GuStackProps {
 	recordPrefix: string;
+	asgMinSize: {
+		CODE: number;
+		PROD: number;
+	};
+	asgMaxSize: {
+		CODE: number;
+		PROD: number;
+	};
 }
 
 export class MobileAppsRendering extends GuStack {
 	constructor(scope: App, id: string, props: AppsStackProps) {
 		super(scope, id, props);
-		const yamlTemplateFilePath = join(
-			__dirname,
-			'../..',
-			'config/cloudformation.yaml',
-		);
 
 		const appName = 'mobile-apps-rendering';
 
@@ -45,7 +53,6 @@ export class MobileAppsRendering extends GuStack {
 				PROD: 'mobile-aws.guardianapis.com',
 			},
 		});
-
 		const codeDomainName = `${props.recordPrefix}.mobile-aws.code.dev-guardianapis.com`;
 		const prodDomainName = `${props.recordPrefix}.mobile-aws.guardianapis.com`;
 
@@ -71,12 +78,15 @@ export class MobileAppsRendering extends GuStack {
 			}),
 		});
 
-		const cfnTemplate = new CfnInclude(this, 'YamlTemplate', {
-			templateFile: yamlTemplateFilePath,
-			parameters: {
-				Stage: GuStageParameter.getInstance(this),
+		const scalingTargetCpuUtilisation = this.withStageDependentValue<number>({
+			variableName: 'targetCpuUtilisation',
+			app: appName,
+			stageValues: {
+				CODE: 20,
+				PROD: 20,
 			},
 		});
+
 		const appsRenderingApp = new GuEc2App(this, {
 			applicationPort: 3040,
 			app: 'mobile-apps-rendering',
@@ -126,18 +136,22 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 /usr/local/node/pm2 start --name ${appName} --uid ${appName} --gid mapi /opt/${appName}/server.js
 /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${this.region} mobile-log-aggregation-${this.stage} '/var/log/${appName}/*'
 /usr/local/node/pm2 logrotate -u ${appName}`,
+			scaling: {
+				CODE: {
+					minimumInstances: props.asgMinSize.CODE,
+					maximumInstances: props.asgMaxSize.CODE,
+				},
+				PROD: {
+					minimumInstances: props.asgMinSize.CODE,
+					maximumInstances: props.asgMaxSize.CODE,
+				},
+			},
 		});
 
-		/*
-      Tag the new ASG to allow RiffRaff to deploy to both this and the current one at the same time.
-      See https://github.com/guardian/riff-raff/pull/632
-    */
 		const asg = appsRenderingApp.autoScalingGroup;
-		Tags.of(asg).add('gu:riffraff:new-asg', 'true');
-
-		const oldBalancer = cfnTemplate.getResource(
-			'LoadBalancer',
-		) as CfnLoadBalancer;
+		asg.scaleOnCpuUtilization('CpuScalingPolicy', {
+			targetUtilizationPercent: scalingTargetCpuUtilisation,
+		});
 
 		const recordSet = new RecordSet(this, 'DnsRecord', {
 			recordType: RecordType.CNAME,
@@ -146,7 +160,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 			),
 			zone: hostedZone,
 			recordName: props.recordPrefix,
-			ttl: Duration.minutes(1),
+			ttl: Duration.hours(1),
 		});
 		const defaultChild = recordSet.node.defaultChild as CfnElement;
 		defaultChild.overrideLogicalId('DnsRecord');

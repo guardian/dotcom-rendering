@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -115,7 +116,9 @@ const labsAnchorStyles = css`
 `;
 
 const getStyles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker, link, inverted } = getThemeStyles(format.theme);
+	const bylineLeftColumn = text.bylineLeftColumn(format);
+	const bylineInline = text.bylineInline(format);
+	const bylineDark = text.bylineDark(format);
 
 	if (format.theme === ArticleSpecial.Labs) {
 		return labsStyles;
@@ -123,20 +126,30 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
-			return css(blogStyles, blogColor(neutral[100], link, inverted));
+			return css(
+				blogStyles,
+				blogColor(neutral[100], bylineLeftColumn, bylineDark),
+			);
 		case ArticleDesign.DeadBlog:
-			return css(blogStyles, blogColor(link, link, neutral[93]));
+			return css(
+				blogStyles,
+				blogColor(bylineInline, bylineLeftColumn, neutral[93]),
+			);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
-			return commentStyles(kicker);
+			return commentStyles(bylineLeftColumn);
 		default:
-			return styles(kicker);
+			return styles(bylineLeftColumn);
 	}
 };
 
 const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 	const { kicker, inverted, link } = getThemeStyles(format.theme);
+	const bylineLeftColumn = text.bylineLeftColumn(format);
+	const bylineInline = text.bylineInline(format);
+	const bylineDark = text.bylineDark(format);
+
 	if (format.theme === ArticleSpecial.Labs) {
 		return labsAnchorStyles;
 	}
@@ -147,7 +160,10 @@ const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 				blogColor(neutral[100], link, inverted),
 			);
 		case ArticleDesign.DeadBlog:
-			return css(blogAnchorStyles, blogColor(link, link, inverted));
+			return css(
+				blogAnchorStyles,
+				blogColor(bylineInline, bylineLeftColumn, bylineDark),
+			);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:

@@ -2,7 +2,7 @@
 
 import { KeyEvent } from "./keyEvents";
 import KeyEvents from "./keyEvents";
-import { ArticlePillar, ArticleSpecial, ArticleTheme } from "@guardian/libs";
+import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar, ArticleSpecial, ArticleTheme } from "@guardian/libs";
 import { css } from "@emotion/react";
 
 // ----- Stories ----- //
@@ -50,16 +50,24 @@ const events: KeyEvent[] = [
 	},
 ];
 
-const KeyEventComp = (dark: boolean, theme: ArticleTheme, title: string) => (
+const KeyEventComp = (dark: boolean, format: ArticleFormat, title: string) => (
 	<div
 		css={css`
 			flex-grow: 1;
 		`}
 	>
 		<div>{title}</div>
-		<KeyEvents keyEvents={events} theme={theme} supportsDarkMode={dark} />
+		<KeyEvents keyEvents={events} format={format} supportsDarkMode={dark} />
 	</div>
 );
+
+const getFormat = (theme: ArticleTheme) => {
+	return {
+		design: ArticleDesign.Standard,
+		display: ArticleDisplay.Standard,
+		theme: theme,
+	}
+}
 
 const keyEventWithTheme = (dark: boolean) => () =>
 	(
@@ -71,13 +79,13 @@ const keyEventWithTheme = (dark: boolean) => () =>
 				flex-wrap: wrap;
 			`}
 		>
-			{KeyEventComp(dark, ArticlePillar.News, "News")}
-			{KeyEventComp(dark, ArticlePillar.Culture, "Culture")}
-			{KeyEventComp(dark, ArticlePillar.Lifestyle, "Lifestyle")}
-			{KeyEventComp(dark, ArticlePillar.Opinion, "Opinion")}
-			{KeyEventComp(dark, ArticlePillar.Sport, "Sport")}
-			{KeyEventComp(dark, ArticleSpecial.Labs, "Labs")}
-			{KeyEventComp(dark, ArticleSpecial.SpecialReport, "SpecialReport")}
+			{KeyEventComp(dark, getFormat(ArticlePillar.News), "News")}
+			{KeyEventComp(dark, getFormat(ArticlePillar.Culture), "Culture")}
+			{KeyEventComp(dark, getFormat(ArticlePillar.Lifestyle), "Lifestyle")}
+			{KeyEventComp(dark, getFormat(ArticlePillar.Opinion), "Opinion")}
+			{KeyEventComp(dark, getFormat(ArticlePillar.Sport), "Sport")}
+			{KeyEventComp(dark, getFormat(ArticleSpecial.Labs), "Labs")}
+			{KeyEventComp(dark, getFormat(ArticleSpecial.SpecialReport), "SpecialReport")}
 		</div>
 	);
 
