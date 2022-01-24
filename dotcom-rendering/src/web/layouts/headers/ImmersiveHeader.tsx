@@ -216,6 +216,7 @@ export const ImmersiveHeader = ({
 						hideCaption={true}
 						pageId={CAPI.pageId}
 						webTitle={CAPI.webTitle}
+						ajaxUrl={CAPI.config.ajaxUrl}
 					/>
 				</div>
 				{mainMedia && (

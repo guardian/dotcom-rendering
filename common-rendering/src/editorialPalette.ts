@@ -8,6 +8,7 @@ import {
   opinion,
   specialReport,
   sport,
+  labs,
 } from "@guardian/source-foundations";
 import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar, ArticleSpecial } from "@guardian/libs";
 
@@ -21,6 +22,8 @@ interface Palette {
 		headlineDark: Colour;
 		standfirst: Colour;
 		standfirstDark: Colour;
+		standfirstLink: Colour;
+		seriesTitle: Colour;
 	};
 	background: {
 		headline: Colour;
@@ -31,6 +34,8 @@ interface Palette {
 	border: {
 		articleLink: Colour;
 		articleLinkDark: Colour;
+		standfirstLink: Colour;
+		standfirstLinkDark: Colour;
 	};
   fill: {
     icon: Colour;
@@ -108,6 +113,84 @@ const textStandfirstDark = ({ design }: ArticleFormat): Colour => {
 	}
 };
 
+const textStandfirstLink = (format: ArticleFormat): Colour => {
+	switch(format.design) {
+		case ArticleDesign.LiveBlog:
+			return neutral[100];
+		case ArticleDesign.DeadBlog:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Culture:
+					return culture[300];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+			}
+		case ArticleDesign.Media:
+			switch(format.theme) {
+				case ArticlePillar.News:
+					return news[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+			}
+		default: {
+			switch(format.theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Opinion:
+					return opinion[400];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[400];
+			}
+		}
+	}
+}
+
+const textSeriesTitle = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
+}
+
 const backgroundHeadline = (format: ArticleFormat): Colour => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return neutral[7];
@@ -181,6 +264,20 @@ const borderArticleLink = (format: ArticleFormat): Colour => {
 };
 
 const borderArticleLinkDark = borderArticleLink;
+
+const borderStandfirstLink = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.LiveBlog) {
+		return neutral[100];
+	}
+	if (format.theme === ArticleSpecial.SpecialReport) {
+		return specialReport[400];
+	}
+	return neutral[86];
+};
+
+const borderStandfirstLinkDark = (format: ArticleFormat): Colour => {
+	return neutral[46];
+}
 
 const backgroundStandfirst = ({
 	design,
@@ -278,6 +375,8 @@ const text = {
 	headlineDark: textHeadlineDark,
 	standfirst: textStandfirst,
 	standfirstDark: textStandfirstDark,
+	standfirstLink: textStandfirstLink,
+	seriesTitle: textSeriesTitle,
 };
 
 const background = {
@@ -290,6 +389,8 @@ const background = {
 const border = {
 	articleLink: borderArticleLink,
 	articleLinkDark: borderArticleLinkDark,
+	standfirstLink: borderStandfirstLink,
+	standfirstLinkDark: borderStandfirstLinkDark,
 };
 
 const fill = {
@@ -303,6 +404,8 @@ const palette = (format: ArticleFormat): Palette => ({
 		headlineDark: text.headlineDark(format),
 		standfirst: text.standfirst(format),
 		standfirstDark: text.standfirstDark(format),
+		standfirstLink: text.standfirstLink(format),
+		seriesTitle: text.seriesTitle(format),
 	},
 	background: {
 		headline: background.headline(format),
@@ -313,6 +416,8 @@ const palette = (format: ArticleFormat): Palette => ({
 	border: {
 		articleLink: border.articleLink(format),
 		articleLinkDark: border.articleLinkDark(format),
+		standfirstLink: border.standfirstLink(format),
+		standfirstLinkDark: border.standfirstLinkDark(format),
 	},
   fill: {
     icon: fill.icon(format),

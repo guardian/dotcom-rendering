@@ -2,7 +2,10 @@
 
 ## What is the contract?
 
-We place the `article-body-commercial-selector` class on the container element of the article body. (TODO: are there others?)
+We place the following classes on the container element of the article body:
+
+-   `article-body-commercial-selector` on the ArticleRenderer
+-   `js-liveblog-body` on the ArticleBody when rendering a Liveblog/Deadblog
 
 ## Where is it relied upon?
 

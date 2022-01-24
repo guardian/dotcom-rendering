@@ -1,48 +1,30 @@
 import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 
+import { joinUrl } from '@guardian/libs';
 import { space, from } from '@guardian/source-foundations';
-import { CommentCount } from '@frontend/web/components/CommentCount';
 import { RightColumn } from '@frontend/web/components/RightColumn';
 import { AdSlot } from '@root/src/web/components/AdSlot';
 import { App as Comments } from '@guardian/discussion-rendering';
 
-import { Portal } from '@frontend/web/components/Portal';
-import { Lazy } from '@frontend/web/components/Lazy';
 import { Flex } from '@frontend/web/components/Flex';
 import { SignedInAs } from '@frontend/web/components/SignedInAs';
 import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
 import { Hide } from '@frontend/web/components/Hide';
 import { getCommentContext } from '@root/src/web/lib/getCommentContext';
-import { joinUrl } from '@root/src/lib/joinUrl';
 import { useDiscussion } from '@root/src/web/lib/useDiscussion';
 import { decidePalette } from '../lib/decidePalette';
 
-type Props = {
+export type Props = {
 	format: ArticleFormat;
 	discussionApiUrl: string;
 	shortUrlId: string;
-	isCommentable: boolean;
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
 	isAdFreeUser: boolean;
 	shouldHideAds: boolean;
 	user?: UserProfile;
-	// **************************************************************************
-	// beingHydrated?
-	// We use this prop to solve a problem we have with Storybook. If you remove
-	// it then the page will render fine on production but our layout stories
-	// will render two copies of Discussion, side by side. The reason for this
-	// is because we technically server side render these layout stories on the
-	// client, inside the story file itself.
-	//
-	// Yes, it's true, having props purely to solve test implementation problems
-	// is not great. If you feel strongly about this and want to remove this
-	// prop I'm okay with that. If you were able to solve this another way
-	// then thank you!
-	beingHydrated?: boolean;
-	// **************************************************************************
 };
 
 const commentIdFromUrl = () => {
@@ -58,14 +40,12 @@ export const Discussion = ({
 	format,
 	discussionApiUrl,
 	shortUrlId,
-	isCommentable,
-	user,
 	discussionD2Uid,
 	discussionApiClientHeader,
 	enableDiscussionSwitch,
 	isAdFreeUser,
 	shouldHideAds,
-	beingHydrated,
+	user,
 }: Props) => {
 	const [commentPage, setCommentPage] = useState<number>();
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
@@ -78,7 +58,7 @@ export const Discussion = ({
 	);
 
 	const { commentCount, isClosedForComments } = useDiscussion(
-		joinUrl([discussionApiUrl, 'discussion', shortUrlId]),
+		joinUrl(discussionApiUrl, 'discussion', shortUrlId),
 	);
 
 	const palette = decidePalette(format);
@@ -141,17 +121,6 @@ export const Discussion = ({
 
 	return (
 		<>
-			{commentCount !== undefined && beingHydrated && (
-				<Portal rootId="comment-count-root">
-					<CommentCount
-						isCommentable={isCommentable}
-						commentCount={commentCount}
-						palette={palette}
-						setIsExpanded={setIsExpanded}
-					/>
-				</Portal>
-			)}
-
 			<ContainerLayout
 				padSides={false}
 				padContent={false}
@@ -195,62 +164,29 @@ export const Discussion = ({
 								/>
 							</div>
 						</Hide>
-
-						{beingHydrated && isExpanded && (
-							<Comments
-								user={user}
-								baseUrl={discussionApiUrl}
-								pillar={format.theme}
-								initialPage={commentPage}
-								pageSizeOverride={commentPageSize}
-								isClosedForComments={
-									isClosedForComments ||
-									!enableDiscussionSwitch
-								}
-								orderByOverride={commentOrderBy}
-								shortUrl={shortUrlId}
-								additionalHeaders={{
-									'D2-X-UID': discussionD2Uid,
-									'GU-Client': discussionApiClientHeader,
-								}}
-								expanded={isExpanded}
-								commentToScrollTo={hashCommentId}
-								onPermalinkClick={handlePermalink}
-								apiKey="dotcom-rendering"
-								onExpanded={(value) => {
-									handleExpanded(value);
-								}}
-							/>
-						)}
-
-						{beingHydrated && !isExpanded && (
-							<Lazy margin={300} disableFlexStyles={true}>
-								<Comments
-									user={user}
-									baseUrl={discussionApiUrl}
-									pillar={format.theme}
-									initialPage={commentPage}
-									pageSizeOverride={commentPageSize}
-									isClosedForComments={
-										isClosedForComments ||
-										!enableDiscussionSwitch
-									}
-									orderByOverride={commentOrderBy}
-									shortUrl={shortUrlId}
-									additionalHeaders={{
-										'D2-X-UID': discussionD2Uid,
-										'GU-Client': discussionApiClientHeader,
-									}}
-									expanded={isExpanded}
-									commentToScrollTo={hashCommentId}
-									onPermalinkClick={handlePermalink}
-									apiKey="dotcom-rendering"
-									onExpanded={(value) => {
-										handleExpanded(value);
-									}}
-								/>
-							</Lazy>
-						)}
+						<Comments
+							user={user}
+							baseUrl={discussionApiUrl}
+							pillar={format.theme}
+							initialPage={commentPage}
+							pageSizeOverride={commentPageSize}
+							isClosedForComments={
+								isClosedForComments || !enableDiscussionSwitch
+							}
+							orderByOverride={commentOrderBy}
+							shortUrl={shortUrlId}
+							additionalHeaders={{
+								'D2-X-UID': discussionD2Uid,
+								'GU-Client': discussionApiClientHeader,
+							}}
+							expanded={isExpanded}
+							commentToScrollTo={hashCommentId}
+							onPermalinkClick={handlePermalink}
+							apiKey="dotcom-rendering"
+							onExpanded={(value) => {
+								handleExpanded(value);
+							}}
+						/>
 					</div>
 					<>
 						{!hideAd && (

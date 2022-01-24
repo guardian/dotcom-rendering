@@ -5,7 +5,7 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { ShareIcons } from '@root/src/web/components/ShareIcons';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
-import { LastUpdated } from '@guardian/common-rendering/src/components/LastUpdated';
+import { LastUpdated } from '@root/src/web/components/LastUpdated';
 
 type Props = {
 	format: ArticleFormat;
@@ -14,6 +14,7 @@ type Props = {
 	webTitle: string;
 	adTargeting: AdTargeting;
 	host?: string;
+	ajaxUrl: string;
 };
 
 export const LiveBlock = ({
@@ -23,6 +24,7 @@ export const LiveBlock = ({
 	webTitle,
 	adTargeting,
 	host,
+	ajaxUrl,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -51,6 +53,7 @@ export const LiveBlock = ({
 					isMainMedia: false,
 					host,
 					adTargeting,
+					ajaxUrl,
 					index,
 					pageId,
 					webTitle,

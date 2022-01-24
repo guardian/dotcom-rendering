@@ -6,10 +6,8 @@ import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
-import { Links } from '@frontend/web/components/Links';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
-import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
@@ -35,22 +33,14 @@ import {
 	HydrateInteractiveOnce,
 } from '@frontend/web/components/HydrateOnce';
 import { Lazy } from '@frontend/web/components/Lazy';
-
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { initPerf } from '@root/src/web/browser/initPerf';
-import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	storage,
-	log,
-	getCookie,
-} from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -61,8 +51,8 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import { LabsHeader } from '@root/src/web/components/LabsHeader';
-import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
+import { EmbedBlockComponent } from '@root/src/web/components/EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from '@root/src/web/components/UnsafeEmbedBlockComponent';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
@@ -80,29 +70,11 @@ import { GetMatchTabs } from './GetMatchTabs';
 // *******************************
 // ****** Dynamic imports ********
 // *******************************
-
-const EditionDropdown = loadable(
-	() => import('@frontend/web/components/EditionDropdown'),
-	{
-		resolveComponent: (module) => module.EditionDropdown,
-	},
-);
-
-const MostViewedRightWrapper = React.lazy(() => {
-	const { start, end } = initPerf('MostViewedRightWrapper');
-	start();
-	return import(
-		/* webpackChunkName: "MostViewedRightWrapper" */ '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper'
-	).then((module) => {
-		end();
-		return { default: module.MostViewedRightWrapper };
-	});
-});
 const OnwardsUpper = React.lazy(() => {
 	const { start, end } = initPerf('OnwardsUpper');
 	start();
 	return import(
-		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/Onwards/OnwardsUpper'
+		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/OnwardsUpper'
 	).then((module) => {
 		end();
 		return { default: module.OnwardsUpper };
@@ -112,7 +84,7 @@ const OnwardsLower = React.lazy(() => {
 	const { start, end } = initPerf('OnwardsLower');
 	start();
 	return import(
-		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/Onwards/OnwardsLower'
+		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/OnwardsLower'
 	).then((module) => {
 		end();
 		return { default: module.OnwardsLower };
@@ -127,8 +99,6 @@ type Props = {
 let renderCount = 0;
 export const App = ({ CAPI, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	const [user, setUser] = useState<UserProfile | null>();
 
 	const [brazeMessages, setBrazeMessages] =
 		useState<Promise<BrazeMessagesInterface>>();
@@ -163,23 +133,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		ABTestAPI.registerCompleteEvents(allRunnableTests);
 		log('dotcom', 'AB tests initialised');
 	}, [ABTestAPI]);
-
-	useOnce(() => {
-		// useOnce means this code will only run once isSignedIn is defined, and only
-		// run one time
-		if (isSignedIn) {
-			getUser(CAPI.config.discussionApiUrl)
-				.then((theUser) => {
-					if (theUser) {
-						setUser(theUser);
-						log('dotcom', 'State: user set');
-					}
-				})
-				.catch((e) => console.error(`getUser - error: ${e}`));
-		} else {
-			setUser(null);
-		}
-	}, [isSignedIn, CAPI.config.discussionApiUrl]);
 
 	useEffect(() => {
 		incrementAlreadyVisited();
@@ -284,34 +237,12 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.YoutubeBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/elements/YoutubeBlockComponent'
-				);
+				return import('@frontend/web/components/YoutubeBlockComponent');
 			}
 			return Promise.reject();
 		},
 		{
 			resolveComponent: (module) => module.YoutubeBlockComponent,
-		},
-	);
-
-	const RichLinkComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/RichLinkComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.RichLinkComponent,
 		},
 	);
 
@@ -325,7 +256,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/InteractiveBlockComponent'
+					'@frontend/web/components/InteractiveBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -345,7 +276,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/InteractiveContentsBlockComponent'
+					'@frontend/web/components/InteractiveContentsBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -365,9 +296,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.CalloutBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/elements/CalloutBlockComponent'
-				);
+				return import('@frontend/web/components/CalloutBlockComponent');
 			}
 			return Promise.reject();
 		},
@@ -386,7 +315,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/DocumentBlockComponent'
+					'@frontend/web/components/DocumentBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -406,33 +335,13 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/MapEmbedBlockComponent'
+					'@frontend/web/components/MapEmbedBlockComponent'
 				);
 			}
 			return Promise.reject();
 		},
 		{
 			resolveComponent: (module) => module.MapEmbedBlockComponent,
-		},
-	);
-
-	const SpotifyBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.SpotifyBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/SpotifyBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.SpotifyBlockComponent,
 		},
 	);
 
@@ -446,7 +355,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/VideoFacebookBlockComponent'
+					'@frontend/web/components/VideoFacebookBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -465,34 +374,12 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.VineBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/elements/VineBlockComponent'
-				);
+				return import('@frontend/web/components/VineBlockComponent');
 			}
 			return Promise.reject();
 		},
 		{
 			resolveComponent: (module) => module.VineBlockComponent,
-		},
-	);
-
-	const InstagramBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.InstagramBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/InstagramBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.InstagramBlockComponent,
 		},
 	);
 
@@ -549,17 +436,9 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.EmbedBlockElement',
 	);
-	const instas = elementsByType<InstagramBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.InstagramBlockElement',
-	);
 	const maps = elementsByType<MapBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.MapBlockElement',
-	);
-	const spotifies = elementsByType<SpotifyBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.SpotifyBlockElement',
 	);
 	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
 		CAPI.elementsToHydrate,
@@ -568,10 +447,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const vines = elementsByType<VineBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.VineBlockElement',
-	);
-	const richLinks = elementsByType<RichLinkBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.RichLinkBlockElement',
 	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
@@ -611,20 +486,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			<HydrateOnce rootId="links-root" waitFor={[user]}>
-				<Links
-					supporterCTA={CAPI.nav.readerRevenueLinks.header.supporter}
-					userId={user ? user.userId : undefined}
-					idUrl={CAPI.config.idUrl}
-					mmaUrl={CAPI.config.mmaUrl}
-				/>
-			</HydrateOnce>
-			<HydrateOnce rootId="edition-root">
-				<EditionDropdown
-					edition={CAPI.editionId}
-					dataLinkName="nav2 : topbar : edition-picker: toggle"
-				/>
-			</HydrateOnce>
 			<HydrateOnce rootId="labs-header">
 				<LabsHeader />
 			</HydrateOnce>
@@ -737,15 +598,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					isPaidContent={CAPI.pageType.isPaidContent}
 				/>
 			</Portal>
-			{richLinks.map((richLink, index) => (
-				<Portal rootId={richLink.elementId}>
-					<RichLinkComponent
-						element={richLink}
-						ajaxEndpoint={CAPI.config.ajaxUrl}
-						richLinkIndex={index}
-					/>
-				</Portal>
-			))}
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
 					<CalloutBlockComponent callout={callout} format={format} />
@@ -932,26 +784,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					)}
 				</HydrateOnce>
 			))}
-			{instas.map((insta, index) => (
-				<HydrateOnce rootId={insta.elementId}>
-					<ClickToView
-						role={insta.role}
-						isTracking={insta.isThirdPartyTracking}
-						source={insta.source}
-						sourceDomain={insta.sourceDomain}
-						onAccept={() =>
-							updateIframeHeight(
-								`iframe[name="instagram-embed-${index}"]`,
-							)
-						}
-					>
-						<InstagramBlockComponent
-							element={insta}
-							index={index}
-						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
 			{maps.map((map) => (
 				<HydrateOnce rootId={map.elementId}>
 					<ClickToView
@@ -968,26 +800,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 							caption={map.caption}
 							credit={map.source}
 							title={map.title}
-						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
-			{spotifies.map((spotify) => (
-				<HydrateOnce rootId={spotify.elementId}>
-					<ClickToView
-						role={spotify.role}
-						isTracking={spotify.isThirdPartyTracking}
-						source={spotify.source}
-						sourceDomain={spotify.sourceDomain}
-					>
-						<SpotifyBlockComponent
-							embedUrl={spotify.embedUrl}
-							height={spotify.height}
-							width={spotify.width}
-							title={spotify.title}
-							format={format}
-							caption={spotify.caption}
-							credit="Spotify"
 						/>
 					</ClickToView>
 				</HydrateOnce>
@@ -1026,15 +838,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			<Portal rootId="most-viewed-right">
-				<Lazy margin={100}>
-					<Suspense fallback={<></>}>
-						<MostViewedRightWrapper
-							isAdFreeUser={CAPI.isAdFreeUser}
-						/>
-					</Suspense>
-				</Lazy>
-			</Portal>
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
 					contentType={CAPI.contentType}
@@ -1051,13 +854,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-upper-whensignedin'
-						: 'onwards-upper-whensignedout'
-				}
-			>
+			<Portal rootId="onwards-upper">
 				<Lazy margin={300}>
 					<Suspense fallback={<></>}>
 						<OnwardsUpper
@@ -1079,13 +876,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					</Suspense>
 				</Lazy>
 			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-lower-whensignedin'
-						: 'onwards-lower-whensignedout'
-				}
-			>
+			<Portal rootId="onwards-lower">
 				<Lazy margin={300}>
 					<Suspense fallback={<></>}>
 						<OnwardsLower
@@ -1111,43 +902,12 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					pageViewId={pageViewId}
 				/>
 			</Portal>
-			<HydrateOnce rootId="comments" waitFor={[user]}>
-				<Discussion
-					format={format}
-					discussionApiUrl={CAPI.config.discussionApiUrl}
-					shortUrlId={CAPI.config.shortUrlId}
-					isCommentable={CAPI.isCommentable}
-					user={user || undefined}
-					discussionD2Uid={CAPI.config.discussionD2Uid}
-					discussionApiClientHeader={
-						CAPI.config.discussionApiClientHeader
-					}
-					enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
-					isAdFreeUser={CAPI.isAdFreeUser}
-					shouldHideAds={CAPI.shouldHideAds}
-					beingHydrated={true}
-				/>
-			</HydrateOnce>
 			<Portal rootId="most-viewed-footer">
 				<MostViewedFooter
 					format={format}
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 				/>
-			</Portal>
-			<Portal rootId="reader-revenue-links-footer">
-				<Lazy margin={300}>
-					<ReaderRevenueLinks
-						urls={CAPI.nav.readerRevenueLinks.footer}
-						edition={CAPI.editionId}
-						dataLinkNamePrefix="footer : "
-						inHeader={false}
-						remoteHeaderEnabled={false}
-						pageViewId={pageViewId}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
-						ophanRecord={ophanRecord}
-					/>
-				</Lazy>
 			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner

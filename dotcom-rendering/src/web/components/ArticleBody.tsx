@@ -14,6 +14,7 @@ type Props = {
 	host?: string;
 	pageId: string;
 	webTitle: string;
+	ajaxUrl: string;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -79,6 +80,7 @@ export const ArticleBody = ({
 	host,
 	pageId,
 	webTitle,
+	ajaxUrl,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
@@ -91,6 +93,8 @@ export const ArticleBody = ({
 				// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 				tabIndex={0}
 				id="maincontent"
+				// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
+				className="js-liveblog-body"
 				css={[globalStrongStyles, globalLinkStyles(palette)]}
 			>
 				<LiveBlogRenderer
@@ -100,6 +104,7 @@ export const ArticleBody = ({
 					host={host}
 					pageId={pageId}
 					webTitle={webTitle}
+					ajaxUrl={ajaxUrl}
 				/>
 			</div>
 		);
@@ -126,6 +131,7 @@ export const ArticleBody = ({
 				host={host}
 				pageId={pageId}
 				webTitle={webTitle}
+				ajaxUrl={ajaxUrl}
 			/>
 		</div>
 	);

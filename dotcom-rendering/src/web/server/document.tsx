@@ -92,53 +92,40 @@ export const document = ({ data }: Props): string => {
 	// However, this does actually suit our architecture as we can use the CAPI
 	// component reference.
 	const allChunks: LoadableComponents = [
-		{ chunkName: 'EditionDropdown', addWhen: 'always' },
 		{
-			chunkName: 'elements-YoutubeBlockComponent',
+			chunkName: 'YoutubeBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 		},
 		{
-			chunkName: 'elements-RichLinkComponent',
-			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-		},
-		{
-			chunkName: 'elements-InteractiveBlockComponent',
+			chunkName: 'InteractiveBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveBlockElement',
 		},
 		{
-			chunkName: 'elements-InteractiveContentsBlockComponent',
+			chunkName: 'InteractiveContentsBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 		},
 		{
-			chunkName: 'elements-CalloutBlockComponent',
+			chunkName: 'CalloutBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.CalloutBlockElement',
 		},
 		{
-			chunkName: 'elements-DocumentBlockComponent',
+			chunkName: 'DocumentBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.DocumentBlockElement',
 		},
 		{
-			chunkName: 'elements-MapEmbedBlockComponent',
+			chunkName: 'MapEmbedBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.MapBlockElement',
 		},
 		{
-			chunkName: 'elements-SpotifyBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.SpotifyBlockElement',
-		},
-		{
-			chunkName: 'elements-VideoFacebookBlockComponent',
+			chunkName: 'VideoFacebookBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
 		},
 		{
-			chunkName: 'elements-VineBlockComponent',
+			chunkName: 'VineBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.VineBlockElement',
-		},
-		{
-			chunkName: 'elements-InstagramBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.InstagramBlockElement',
 		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -148,13 +135,12 @@ export const document = ({ data }: Props): string => {
 		.flat();
 	const { mainMediaElements } = CAPI;
 	// Filter the chunks defined above by whether
-	// the 'addWhen' value is 'always' or matches
-	// any elements in the body or main media element
+	// the 'addWhen' value matches any elements
+	// in the body or main media element
 	// arrays for the page request.
 	const chunksForPage = allChunks.filter((chunk) =>
 		[...CAPIElements, ...mainMediaElements].some(
-			(block) =>
-				chunk.addWhen === 'always' || block._type === chunk.addWhen,
+			(block) => block._type === chunk.addWhen,
 		),
 	);
 	// Once we have the chunks for the page, we can add them directly to the loadableExtractor
