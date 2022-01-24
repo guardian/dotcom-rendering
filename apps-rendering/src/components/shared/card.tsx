@@ -49,36 +49,76 @@ const listStyles = (
 	type: RelatedItemType,
 	format: ArticleFormat,
 ): SerializedStyles => {
-	return css`
-		margin-right: ${remSpace[2]};
-		flex: 0 0 42vw;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		border-top: 1px solid ${neutral[86]};
-		border-radius: 0 0 0.75rem 0.75rem;
-		max-width: 10rem;
+	switch (type) {
+		case RelatedItemType.VIDEO:
+		case RelatedItemType.AUDIO:
+		case RelatedItemType.GALLERY: {
+			return css`
+				margin-right: ${remSpace[2]};
+				flex: 0 0 42vw;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				border-top: 1px solid ${neutral[86]};
+				border-radius: 0.75rem;
+				max-width: 10rem;
 
-		&.fade {
-			opacity: 0.7;
-		}
+				&.fade {
+					opacity: 0.7;
+				}
 
-		${darkModeCss`
-            background: ${neutral[7]};
+				${darkModeCss`
+			border-top: none;
+            background: ${neutral[10]};
         `}
 
-		${from.tablet} {
-			margin-right: ${remSpace[5]};
-		}
+				${from.tablet} {
+					margin-right: ${remSpace[5]};
+				}
 
-		${from.desktop} {
-			max-width: 13.75rem;
-		}
+				${from.desktop} {
+					max-width: 13.75rem;
+				}
 
-		&:last-of-type {
-			margin-right: 0;
+				&:last-of-type {
+					margin-right: 0;
+				}
+			`;
 		}
-	`;
+		default: {
+			return css`
+				margin-right: ${remSpace[2]};
+				flex: 0 0 42vw;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				border-top: 1px solid ${neutral[86]};
+				border-radius: 0 0 0.75rem 0.75rem;
+				max-width: 10rem;
+
+				&.fade {
+					opacity: 0.7;
+				}
+
+				${darkModeCss`
+			border-top: 1px solid ${neutral[20]};
+            background: ${neutral[0]};
+        `}
+
+				${from.tablet} {
+					margin-right: ${remSpace[5]};
+				}
+
+				${from.desktop} {
+					max-width: 13.75rem;
+				}
+
+				&:last-of-type {
+					margin-right: 0;
+				}
+			`;
+		}
+	}
 };
 
 const fullWidthImage = css`
@@ -148,18 +188,18 @@ const headingWrapperStyles = (type: RelatedItemType) => {
 		case RelatedItemType.AUDIO:
 		case RelatedItemType.GALLERY: {
 			return css`
-			padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
-			flex-grow: 1;
+				padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
+				flex-grow: 1;
 			`;
 		}
 		default: {
 			return css`
-			padding: 0.125rem 0 ${remSpace[4]} 0;
-			flex-grow: 1;
-			`
+				padding: 0.125rem 0 ${remSpace[4]} 0;
+				flex-grow: 1;
+			`;
 		}
 	}
-}
+};
 
 const headingStyles = (type: RelatedItemType): SerializedStyles => {
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {

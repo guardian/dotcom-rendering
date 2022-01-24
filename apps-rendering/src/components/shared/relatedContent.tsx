@@ -5,6 +5,7 @@ import {
 	headline,
 	neutral,
 	remSpace,
+	until,
 } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
@@ -87,6 +88,17 @@ const listStyles = css`
 const styles = css`
 	border-top: 1px solid ${neutral[46]};
 	padding-top: ${remSpace[3]};
+	padding-left: ${remSpace[4]};
+	padding-right: ${remSpace[4]};
+
+	${until.wide} {
+		margin-left: -${remSpace[4]};
+		margin-right: -${remSpace[4]};
+	}
+
+	${darkModeCss`
+		background: ${neutral[0]};
+	`}
 `;
 
 const COMMENT = RelatedItemType.COMMENT;
