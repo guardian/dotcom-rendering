@@ -60,8 +60,8 @@ describe('Interactivity', function () {
 				// down and preventing the scroll request to actually reach the bottom. We will fix
 				// this later when we've defined fixed heights for these containers, preventing CLS
 				cy.scrollTo('bottom', { duration: 300 });
-				cy.wait('@getMostReadGeo', { timeout: 15000 });
-				cy.wait('@getMostRead', { timeout: 15000 });
+				cy.wait('@getMostReadGeo');
+				cy.wait('@getMostRead');
 				cy.get('[data-cy=mostviewed-footer]').should('exist');
 				cy.get('[data-cy=tab-body-0]').should('be.visible');
 				cy.get('[data-cy=tab-body-1]').should('not.be.visible');
