@@ -56,8 +56,8 @@ describe('Interactivity', function () {
 				cy.get('[data-cy=mostviewed-footer]').should('not.exist');
 				// Scroll to bottom to trigger hydration
 				cy.scrollTo('bottom', { duration: 300 });
-				cy.wait('@getMostReadGeo');
-				cy.wait('@getMostRead');
+				cy.wait('@getMostReadGeo', { timeout: 15000 });
+				cy.wait('@getMostRead', { timeout: 15000 });
 				cy.get('[data-cy=mostviewed-footer]').should('exist');
 				cy.get('[data-cy=tab-body-0]').should('be.visible');
 				cy.get('[data-cy=tab-body-1]').should('not.be.visible');
