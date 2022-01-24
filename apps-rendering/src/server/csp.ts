@@ -9,7 +9,6 @@ import { ElementKind } from 'bodyElement';
 import type { ThirdPartyEmbeds } from 'capi';
 import type { Item } from 'item';
 import { compose, pipe } from 'lib';
-import { Stage } from './appIdentity';
 
 // ----- Types ----- //
 
