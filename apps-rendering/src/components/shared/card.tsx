@@ -180,7 +180,7 @@ const anchorStyles = css`
 	height: 100%;
 `;
 
-const headingWrapperStyles = (type: RelatedItemType) => {
+const headingWrapperStyles = (type: RelatedItemType): SerializedStyles => {
 	switch (type) {
 		case RelatedItemType.VIDEO:
 		case RelatedItemType.AUDIO:
