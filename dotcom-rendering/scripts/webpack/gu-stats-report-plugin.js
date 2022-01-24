@@ -9,8 +9,8 @@ class GuStatsReportPlugin {
 		this.project = config?.project;
 		this.team = config?.team;
 		this.buildCount = 0;
-		this.gitBranch = null;
-		this.gitHash = null;
+		this.gitBranch = undefined;
+		this.gitHash = undefined;
 		this.sessionId = v4();
 
 		this.fetchGitBranch();
