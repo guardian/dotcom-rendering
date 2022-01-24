@@ -1,8 +1,11 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
 import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, news, remSpace } from '@guardian/source-foundations';
 import { OptionKind } from '@guardian/types';
 import Footer from 'components/footer';
@@ -58,9 +61,18 @@ const mainStyles = css`
 	}
 `;
 
-const metadataWrapperStyles = css`
-	background-color: ${news[200]};
-`;
+const metadataWrapperStyles = (format: ArticleFormat): SerializedStyles => {
+	switch (format.design) {
+		case ArticleDesign.DeadBlog:
+			return css`
+				background-color: ${neutral[93]};
+			`;
+		default:
+			return css`
+				background-color: ${news[200]};
+			`;
+	}
+};
 
 const keyEventsWrapperStyles = css`
 	${from.desktop} {
@@ -95,7 +107,7 @@ const Live: FC<Props> = ({ item }) => (
 		<LiveblogHeader item={item} />
 		<main css={mainStyles}>
 			<GridItem area="metadata">
-				<div css={metadataWrapperStyles}>
+				<div css={metadataWrapperStyles(item)}>
 					<Metadata item={item} />
 				</div>
 			</GridItem>
@@ -103,7 +115,7 @@ const Live: FC<Props> = ({ item }) => (
 				<div css={keyEventsWrapperStyles}>
 					<KeyEvents
 						keyEvents={keyEvents(item.blocks)}
-						theme={item.theme}
+						format={item}
 						supportsDarkMode
 					/>
 				</div>
