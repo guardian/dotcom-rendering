@@ -10,7 +10,6 @@ import {
 	background,
 	from,
 	headline,
-	labs,
 	neutral,
 	opinion,
 	remSpace,
