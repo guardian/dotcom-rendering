@@ -38,7 +38,8 @@ const listStyles = (format: ArticleFormat): SerializedStyles => {
 		}
 
 		${darkModeCss`
-            background: ${neutral[7]};
+			border-top: 1px solid ${neutral[20]};
+            background: ${neutral[0]};
         `}
 
 		${from.tablet} {
@@ -175,25 +176,6 @@ const dateStyles = css`
 	font-weight: 700;
 `;
 
-const lineStyles = css`
-	background-image: repeating-linear-gradient(
-		${neutral[86]},
-		${neutral[86]} 1px,
-		transparent 1px,
-		transparent 0.25rem
-	);
-	background-repeat: repeat-x;
-	background-position: center top;
-	background-size: 1px calc(0.75rem + 1px);
-	height: calc(0.75rem + 1px);
-	flex-grow: 1;
-	margin-right: ${remSpace[3]};
-	align-self: flex-end;
-	${darkModeCss`
-        background-image: repeating-linear-gradient(${neutral[20]}, ${neutral[20]} 1px, transparent 1px, transparent 0.25rem);
-    `}
-`;
-
 const relativeFirstPublished = (date: Option<Date>): ReactElement | null =>
 	pipe(
 		date,
@@ -242,7 +224,7 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
 				<section>
 					{img}
 					<footer css={footerStyles}>
-						<div css={lineStyles}></div>
+						<div css={dateStyles}></div>
 						{date}
 					</footer>
 				</section>
