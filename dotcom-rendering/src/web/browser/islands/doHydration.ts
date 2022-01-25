@@ -14,6 +14,11 @@ import { initPerf } from '../initPerf';
  * @param element The location on the DOM where the component to hydrate exists
  */
 export const doHydration = (name: string, data: any, element: HTMLElement) => {
+	// If this function has already been run for an element then don't try to
+	// run it a second time
+	const alreadyHydrated = element.dataset.guReady;
+	if (alreadyHydrated) return;
+
 	const { start, end } = initPerf(`hydrate-${name}`);
 	start();
 	import(
