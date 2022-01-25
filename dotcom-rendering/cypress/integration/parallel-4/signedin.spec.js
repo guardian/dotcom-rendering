@@ -45,7 +45,7 @@ describe('Signed in readers', function () {
 		// down and preventing the scroll request to actually reach the bottom. We will fix
 		// this later when we've defined fixed heights for these containers, preventing CLS
 		cy.scrollTo('bottom', { duration: 300 });
-		// Wait for hydration
+		// Wait for the discussion to be loaded
 		cy.get('gu-island[name=DiscussionContainer]').should(
 			'have.attr',
 			'data-gu-ready',
