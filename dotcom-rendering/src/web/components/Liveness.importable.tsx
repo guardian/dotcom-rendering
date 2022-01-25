@@ -40,7 +40,7 @@ function hydrateBlocks() {
 	// where the gu-hydrated data attribute isn't set?
 }
 
-function insertNewBlocks() {
+function insertNewBlocks(html: string) {
 	console.log('insertNewBlocks');
 	// TODO: This is a pure javascript action to insert the content into the dom
 	// We give it a classname causing it to be hidden by default. Unhiding it is
@@ -51,6 +51,14 @@ function insertNewBlocks() {
 	 * action needs to first remove any existing posts with ids the same as the
 	 * batch beforing inserting
 	 */
+
+	const latestBlock = document
+		.getElementById('maincontent')
+		?.querySelectorAll('article')[0];
+
+	if (!latestBlock) return;
+
+	latestBlock.insertAdjacentHTML('beforebegin', `<article>${html}</article>`);
 }
 
 function revealNewBlocks() {
@@ -115,11 +123,11 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 		// onSuccess runs (once) after every successful api call. This is useful because it
 		// allows us to avoid the problems of imperative code being executed multiple times
 		// inside react's declarative structure (things get re-rendered when any state changes)
-		onSuccess: (data: { numNewBlocks: number }) => {
+		onSuccess: (data: { numNewBlocks: number; html: string }) => {
 			// TODO: What if we've made the same call previously?
 			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
 				// Always insert the new blocks in the dom (but hidden)
-				insertNewBlocks();
+				insertNewBlocks(data.html);
 				hydrateBlocks();
 
 				if (topOfBlogVisible()) {
@@ -150,5 +158,16 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 		return <Toast onClick={handleToastClick} noOfNewPosts={noOfNewPosts} />;
 	}
 
-	return null;
+	// Raw CAPI response as a string
+	return (
+		<button
+			onClick={() =>
+				insertNewBlocks(
+					'<p><strong>Conor Burns</strong>, a Northern Ireland minister and one of the arch Johnson loyalists in government, told BBC News that, with the Covid pandemic easing, the PM would “relish getting back to the domestic agenda”. He also said he thought Boris Johnson would see off the threat to his leadership. He said:</p> <blockquote class="quoted"> <p>I believe that there will not be a vote of confidence, I believe that Boris Johnson will be prime minister for many years ahead, and I believe that Boris Johnson will win the next general election.</p> </blockquote> <p>The lack of doubt on show from the Johnson Praetorian Guard today (see Jacob Rees-Mogg this morning at <a href="https://www.theguardian.com/politics/live/2022/jan/25/boris-johnson-birthday-party-live-news-partygate-covid-coronavirus-omicron-politics?page=with:block-61efe2fb8f08f876e67516e2#block-61efe2fb8f08f876e67516e2">11.51am</a> for another example) is certainly a notch or two beyond what we have heard from them in the past. But their public certainty is probably in inverse proportion to the confidence they feel in private about the PM’s chances of survival.</p>  <figure class="element element-image" data-media-id="9662ba450311a7e5986fecadb4d32f0e8fbf5274"> <img src="https://media.guim.co.uk/9662ba450311a7e5986fecadb4d32f0e8fbf5274/0_0_1622_906/1000.jpg" alt="Conor Burns" width="1000" height="559" class="gu-image" /> <figcaption> <span class="element-image__caption">Conor Burns</span> <span class="element-image__credit">Photograph: BBC News</span> </figcaption> </figure>',
+				)
+			}
+		>
+			Click me
+		</button>
+	);
 };
