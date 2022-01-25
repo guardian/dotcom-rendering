@@ -64,7 +64,7 @@ describe('Interactivity', function () {
 				'data-gu-hydrated',
 				'true',
 			);
-			cy.get('[data-cy=discussion]').should('exist');
+			cy.get('[data-cy=discussion]').should('be.visible');
 		});
 		it('loads the most viwed list only after starting to scroll the page', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
