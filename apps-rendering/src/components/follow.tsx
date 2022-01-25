@@ -67,7 +67,10 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
 				data-display-name={contributor.name}
 			>
 				<span className="js-follow-status" css={followStatusStyles}>
-					<FollowStatus isFollowing={false} contributorName={contributor.name} />
+					<FollowStatus
+						isFollowing={false}
+						contributorName={contributor.name}
+					/>
 				</span>
 			</button>
 		);

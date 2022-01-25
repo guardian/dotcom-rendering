@@ -40,7 +40,9 @@ const FollowIcon: FC<IconProps> = ({ isFollowing }) => {
 const FollowStatus: FC<Props> = ({ isFollowing, contributorName }) => (
 	<>
 		<FollowIcon isFollowing={isFollowing} />
-		<span>{isFollowing ? 'Following' : 'Follow'} {contributorName}</span>
+		<span>
+			{isFollowing ? 'Following' : 'Follow'} {contributorName}
+		</span>
 	</>
 );
 

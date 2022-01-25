@@ -73,14 +73,20 @@ function followToggle(topic: Topic): void {
 		if (following) {
 			void notificationsClient.unfollow(topic).then((_) => {
 				ReactDOM.render(
-					h(FollowStatus, { isFollowing: false, contributorName: topic.displayName }),
+					h(FollowStatus, {
+						isFollowing: false,
+						contributorName: topic.displayName,
+					}),
 					followStatus,
 				);
 			});
 		} else {
 			void notificationsClient.follow(topic).then((_) => {
 				ReactDOM.render(
-					h(FollowStatus, { isFollowing: true, contributorName: topic.displayName }),
+					h(FollowStatus, {
+						isFollowing: true,
+						contributorName: topic.displayName,
+					}),
 					followStatus,
 				);
 			});
@@ -108,7 +114,10 @@ function topics(): void {
 		void notificationsClient.isFollowing(topic).then((following) => {
 			if (following && followStatus) {
 				ReactDOM.render(
-					h(FollowStatus, { isFollowing: true, contributorName: topic.displayName }),
+					h(FollowStatus, {
+						isFollowing: true,
+						contributorName: topic.displayName,
+					}),
 					followStatus,
 				);
 			}
