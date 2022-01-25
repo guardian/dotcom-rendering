@@ -146,6 +146,7 @@ export const Discussion = ({
 							width: 100%;
 							max-width: 100%;
 						`}
+						data-cy="discussion"
 					>
 						<Hide when="above" breakpoint="leftCol">
 							<div
