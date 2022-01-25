@@ -2,6 +2,7 @@
 const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
+const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
 const friendlyErrorsWebpackPlugin = () =>
 	new FriendlyErrorsWebpackPlugin({
@@ -32,13 +33,13 @@ const scriptPath = (dcrPackage) =>
 			'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
 	].filter(Boolean);
 
-module.exports = ({ isLegacyJS }) => ({
+module.exports = ({ isLegacyJS, sessionId }) => ({
 	entry: {
 		sentryLoader: scriptPath('sentryLoader'),
 		bootCmp: scriptPath('bootCmp'),
 		ga: scriptPath('ga'),
 		ophan: scriptPath('ophan'),
-		hydration: scriptPath('hydration'),
+		islands: scriptPath('islands'),
 		react: scriptPath('react'),
 		dynamicImport: scriptPath('dynamicImport'),
 		atomIframe: scriptPath('atomIframe'),
@@ -59,6 +60,13 @@ module.exports = ({ isLegacyJS }) => ({
 	plugins: [
 		DEV && new webpack.HotModuleReplacementPlugin(),
 		DEV && friendlyErrorsWebpackPlugin(),
+		DEV &&
+			new GuStatsReportPlugin({
+				buildName: isLegacyJS ? 'client' : 'legacy-client',
+				project: 'dotcom-rendering',
+				team: 'dotcom',
+				sessionId,
+			}),
 		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
 		// [...].filter(Boolean) why it is used
 	].filter(Boolean),

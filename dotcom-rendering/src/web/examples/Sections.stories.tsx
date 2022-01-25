@@ -58,7 +58,7 @@ export const Sections = (): React.ReactNode => (
 			padded={false}
 			backgroundColour={brandBackground.primary}
 		>
-			<Header edition="UK" />
+			<Header edition="UK" supporterCTA="" discussionApiUrl="" />
 		</ElementContainer>
 		<ElementContainer
 			showSideBorders={true}

@@ -35,7 +35,7 @@ import { HeadlineByline } from '../components/HeadlineByline';
 import { decideLineEffect, decideLineCount } from '../lib/layoutHelpers';
 import { Standfirst } from '../components/Standfirst';
 import { Caption } from '../components/Caption';
-import { Hydrate } from '../components/Hydrate';
+import { Island } from '../components/Island';
 
 const InteractiveImmersiveGrid = ({
 	children,
@@ -153,7 +153,8 @@ const Renderer: React.FC<{
 	host?: string;
 	pageId: string;
 	webTitle: string;
-}> = ({ format, palette, elements, host, pageId, webTitle }) => {
+	ajaxUrl: string;
+}> = ({ format, palette, elements, host, pageId, webTitle, ajaxUrl }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -170,6 +171,7 @@ const Renderer: React.FC<{
 			isMainMedia: false,
 			pageId,
 			webTitle,
+			ajaxUrl,
 		});
 
 		if (ok) {
@@ -410,6 +412,11 @@ export const InteractiveImmersiveLayout = ({
 									secondaryDateline={
 										CAPI.webPublicationSecondaryDateDisplay
 									}
+									isCommentable={CAPI.isCommentable}
+									discussionApiUrl={
+										CAPI.config.discussionApiUrl
+									}
+									shortUrlId={CAPI.config.shortUrlId}
 								/>
 							</div>
 						</GridItem>
@@ -433,6 +440,7 @@ export const InteractiveImmersiveLayout = ({
 							host={host}
 							pageId={CAPI.pageId}
 							webTitle={CAPI.webTitle}
+							ajaxUrl={CAPI.config.ajaxUrl}
 						/>
 					</article>
 				</ElementContainer>
@@ -444,13 +452,13 @@ export const InteractiveImmersiveLayout = ({
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
-					<Hydrate when="visible">
+					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
 							format={format}
 						/>
-					</Hydrate>
+					</Island>
 				</ElementContainer>
 			)}
 

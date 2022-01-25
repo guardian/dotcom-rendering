@@ -99,6 +99,7 @@ export const VideoAsSecond = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -140,6 +141,7 @@ export const Title = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -202,6 +204,7 @@ export const Video = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -239,6 +242,7 @@ export const RichLink = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -267,6 +271,7 @@ export const FirstImage = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -296,6 +301,7 @@ export const ImaheAndTitle = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -321,6 +327,7 @@ export const Updated = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);

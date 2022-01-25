@@ -1,13 +1,16 @@
 import { css } from '@emotion/react';
 import fetchMock from 'fetch-mock';
 
-import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
-
-import { decidePalette } from '../lib/decidePalette';
+import {
+	ArticlePillar,
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleSpecial,
+} from '@guardian/libs';
 
 import { Counts } from './Counts';
 import { ShareCount } from './ShareCount';
-import { CommentCount } from './CommentCount';
+import { CommentCount } from './CommentCount.importable';
 
 export default {
 	component: Counts,
@@ -39,9 +42,23 @@ export const Both = () => {
 			{
 				status: 200,
 				body: {
-					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'lifeandstyle/2015/jan/25/deborah-orr-parents-jailers-i-loved',
 					share_count: 80,
 					refreshStatus: true,
+				},
+			},
+			{ overwriteRoutes: false },
+		)
+		// Comment count
+		.getOnce(
+			'begin:https://discussion.theguardian.com/discussion/p/fmmj65',
+			{
+				status: 200,
+				body: {
+					discussion: {
+						commentCount: 239,
+						isClosedForComments: false,
+					},
 				},
 			},
 			{ overwriteRoutes: false },
@@ -53,16 +70,15 @@ export const Both = () => {
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-						pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+						pageId="/lifeandstyle/2015/jan/25/deborah-orr-parents-jailers-i-loved"
 						format={format}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
-						isCommentable={true}
-						commentCount={239}
-						palette={decidePalette(format)}
-						setIsExpanded={() => {}}
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/fmmj65"
+						format={format}
 					/>
 				</div>
 			</Counts>
@@ -71,7 +87,7 @@ export const Both = () => {
 };
 Both.story = { name: 'with both results' };
 
-export const ShareOnly = () => {
+export const Themes = () => {
 	fetchMock
 		.restore()
 		// Share count
@@ -80,9 +96,23 @@ export const ShareOnly = () => {
 			{
 				status: 200,
 				body: {
-					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
-					share_count: 273,
+					path: 'lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved',
+					share_count: 80,
 					refreshStatus: true,
+				},
+			},
+			{ overwriteRoutes: false },
+		)
+		// Comment count
+		.getOnce(
+			'begin:https://discussion.theguardian.com/discussion/p/3bdii8',
+			{
+				status: 200,
+				body: {
+					discussion: {
+						commentCount: 239,
+						isClosedForComments: false,
+					},
 				},
 			},
 			{ overwriteRoutes: false },
@@ -90,27 +120,128 @@ export const ShareOnly = () => {
 
 	return (
 		<Container>
-			<Counts format={format}>
+			<Counts format={{ ...format, theme: ArticlePillar.News }}>
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-						pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
-						format={format}
+						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={{ ...format, theme: ArticlePillar.News }}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
-						isCommentable={false}
-						commentCount={239}
-						palette={decidePalette(format)}
-						setIsExpanded={() => {}}
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/3bdii8"
+						format={{ ...format, theme: ArticlePillar.News }}
+					/>
+				</div>
+			</Counts>
+			<Counts format={{ ...format, theme: ArticlePillar.Culture }}>
+				<div className="meta-number">
+					<ShareCount
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={{ ...format, theme: ArticlePillar.Culture }}
+					/>
+				</div>
+				<div className="meta-number">
+					<CommentCount
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/3bdii8"
+						format={{ ...format, theme: ArticlePillar.Culture }}
+					/>
+				</div>
+			</Counts>
+			<Counts format={{ ...format, theme: ArticlePillar.Sport }}>
+				<div className="meta-number">
+					<ShareCount
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={{ ...format, theme: ArticlePillar.Sport }}
+					/>
+				</div>
+				<div className="meta-number">
+					<CommentCount
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/3bdii8"
+						format={{ ...format, theme: ArticlePillar.Sport }}
+					/>
+				</div>
+			</Counts>
+			<Counts format={{ ...format, theme: ArticlePillar.Lifestyle }}>
+				<div className="meta-number">
+					<ShareCount
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={{ ...format, theme: ArticlePillar.Lifestyle }}
+					/>
+				</div>
+				<div className="meta-number">
+					<CommentCount
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/3bdii8"
+						format={{ ...format, theme: ArticlePillar.Lifestyle }}
+					/>
+				</div>
+			</Counts>
+			<Counts format={{ ...format, theme: ArticlePillar.Opinion }}>
+				<div className="meta-number">
+					<ShareCount
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={{ ...format, theme: ArticlePillar.Opinion }}
+					/>
+				</div>
+				<div className="meta-number">
+					<CommentCount
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/3bdii8"
+						format={{ ...format, theme: ArticlePillar.Opinion }}
+					/>
+				</div>
+			</Counts>
+			<Counts format={{ ...format, theme: ArticleSpecial.Labs }}>
+				<div className="meta-number">
+					<ShareCount
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={{ ...format, theme: ArticleSpecial.Labs }}
+					/>
+				</div>
+				<div className="meta-number">
+					<CommentCount
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/3bdii8"
+						format={{ ...format, theme: ArticleSpecial.Labs }}
+					/>
+				</div>
+			</Counts>
+			<Counts format={{ ...format, theme: ArticleSpecial.SpecialReport }}>
+				<div className="meta-number">
+					<ShareCount
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						pageId="/lifeandstyle/2010/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={{
+							...format,
+							theme: ArticleSpecial.SpecialReport,
+						}}
+					/>
+				</div>
+				<div className="meta-number">
+					<CommentCount
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/3bdii8"
+						format={{
+							...format,
+							theme: ArticleSpecial.SpecialReport,
+						}}
 					/>
 				</div>
 			</Counts>
 		</Container>
 	);
 };
-ShareOnly.story = { name: 'with comments disabled' };
+Themes.story = { name: 'with different themes' };
 
 export const CommentOnly = () => {
 	fetchMock
@@ -121,9 +252,23 @@ export const CommentOnly = () => {
 			{
 				status: 200,
 				body: {
-					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: 'lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved',
 					share_count: 0,
 					refreshStatus: true,
+				},
+			},
+			{ overwriteRoutes: false },
+		)
+		// Comment count
+		.getOnce(
+			'begin:https://discussion.theguardian.com/discussion/p/sd4lki',
+			{
+				status: 200,
+				body: {
+					discussion: {
+						commentCount: 239,
+						isClosedForComments: false,
+					},
 				},
 			},
 			{ overwriteRoutes: false },
@@ -141,10 +286,9 @@ export const CommentOnly = () => {
 				</div>
 				<div className="meta-number">
 					<CommentCount
-						isCommentable={true}
-						commentCount={239}
-						palette={decidePalette(format)}
-						setIsExpanded={() => {}}
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/sd4lki"
+						format={format}
 					/>
 				</div>
 			</Counts>
@@ -168,6 +312,20 @@ export const ZeroComments = () => {
 				},
 			},
 			{ overwriteRoutes: false },
+		)
+		// Comment count
+		.getOnce(
+			'begin:https://discussion.theguardian.com/discussion/p/u7ytrg',
+			{
+				status: 200,
+				body: {
+					discussion: {
+						commentCount: 0,
+						isClosedForComments: false,
+					},
+				},
+			},
+			{ overwriteRoutes: false },
 		);
 
 	return (
@@ -176,16 +334,15 @@ export const ZeroComments = () => {
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-						pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+						pageId="money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
 						format={format}
 					/>
 				</div>
 				<div className="meta-number">
 					<CommentCount
-						isCommentable={true}
-						commentCount={0}
-						palette={decidePalette(format)}
-						setIsExpanded={() => {}}
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/u7ytrg"
+						format={format}
 					/>
 				</div>
 			</Counts>
@@ -203,8 +360,62 @@ export const BigNumbers = () => {
 			{
 				status: 200,
 				body: {
-					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					path: '/lifeandstyle/2019/jan/25/deborah-orr-parents-jailers-i-loved',
 					share_count: 204320,
+					refreshStatus: true,
+				},
+			},
+			{ overwriteRoutes: false },
+		)
+		// Comment count
+		.getOnce(
+			'begin:https://discussion.theguardian.com/discussion/p/bhgyt',
+			{
+				status: 200,
+				body: {
+					discussion: {
+						commentCount: 4320,
+						isClosedForComments: false,
+					},
+				},
+			},
+			{ overwriteRoutes: false },
+		);
+
+	return (
+		<Container>
+			<Counts format={format}>
+				<div className="meta-number">
+					<ShareCount
+						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+						pageId="/lifeandstyle/2019/jan/25/deborah-orr-parents-jailers-i-loved"
+						format={format}
+					/>
+				</div>
+				<div className="meta-number">
+					<CommentCount
+						discussionApiUrl="https://discussion.theguardian.com"
+						shortUrlId="p/bhgyt"
+						format={format}
+					/>
+				</div>
+			</Counts>
+		</Container>
+	);
+};
+BigNumbers.story = { name: 'with long numbers' };
+
+export const CommentsOff = () => {
+	fetchMock
+		.restore()
+		// Share count
+		.getOnce(
+			'begin:https://api.nextgen.guardianapps.co.uk/sharecount/',
+			{
+				status: 200,
+				body: {
+					path: 'money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software',
+					share_count: 60,
 					refreshStatus: true,
 				},
 			},
@@ -217,20 +428,14 @@ export const BigNumbers = () => {
 				<div className="meta-number">
 					<ShareCount
 						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-						pageId="/lifeandstyle/2020/jan/25/deborah-orr-parents-jailers-i-loved"
+						pageId="money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
 						format={format}
 					/>
 				</div>
-				<div className="meta-number">
-					<CommentCount
-						isCommentable={true}
-						commentCount={4320}
-						palette={decidePalette(format)}
-						setIsExpanded={() => {}}
-					/>
-				</div>
+				{/* When commenting is off the CommentCount component won't render at all */}
+				<div className="meta-number" />
 			</Counts>
 		</Container>
 	);
 };
-BigNumbers.story = { name: 'with long numbers' };
+CommentsOff.story = { name: 'with commentting off' };
