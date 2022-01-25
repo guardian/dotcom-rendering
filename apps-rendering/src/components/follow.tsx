@@ -25,9 +25,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		${textSans.small()}
 		color: ${follow};
-		display: flex;
-		align-items: center;
-		column-gap: 0.2em;
+		display: block;
 		padding: 0;
 		border: none;
 		background: none;
@@ -47,6 +45,12 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 	`;
 };
 
+const followStatusStyles = css`
+	display: flex;
+	align-items: center;
+	column-gap: 0.2em;
+`;
+
 const Follow: FC<Props> = ({ contributors, ...format }) => {
 	const [contributor] = contributors;
 
@@ -62,8 +66,8 @@ const Follow: FC<Props> = ({ contributors, ...format }) => {
 				data-id={contributor.id}
 				data-display-name={contributor.name}
 			>
-				<span className="js-follow-status">
-					<FollowStatus isFollowing={false} /> {contributor.name}
+				<span className="js-follow-status" css={followStatusStyles}>
+					<FollowStatus isFollowing={false} contributorName={contributor.name} />
 				</span>
 			</button>
 		);

@@ -6,9 +6,12 @@ import type { FC } from 'react';
 
 interface Props {
 	isFollowing: boolean;
+	contributorName: string;
 }
 
-type IconProps = Props;
+type IconProps = {
+	isFollowing: boolean;
+};
 
 const FollowIcon: FC<IconProps> = ({ isFollowing }) => {
 	const check =
@@ -34,10 +37,10 @@ const FollowIcon: FC<IconProps> = ({ isFollowing }) => {
 	);
 };
 
-const FollowStatus: FC<Props> = ({ isFollowing }) => (
+const FollowStatus: FC<Props> = ({ isFollowing, contributorName }) => (
 	<>
 		<FollowIcon isFollowing={isFollowing} />
-		<span>{isFollowing ? 'Following' : 'Follow'}</span>
+		<span>{isFollowing ? 'Following' : 'Follow'} {contributorName}</span>
 	</>
 );
 
