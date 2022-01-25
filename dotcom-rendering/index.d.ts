@@ -856,11 +856,6 @@ interface DocumentBlockLoadable extends ComponentNameChunkMap {
 	addWhen: DocumentBlockElement['_type'];
 }
 
-interface MapBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'MapEmbedBlockComponent';
-	addWhen: MapBlockElement['_type'];
-}
-
 interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'VideoFacebookBlockComponent';
 	addWhen: VideoFacebookBlockElement['_type'];
@@ -877,7 +872,6 @@ type LoadableComponents = [
 	InteractiveContentsBlockLoadable,
 	CalloutBlockLoadable,
 	DocumentBlockLoadable,
-	MapBlockLoadable,
 	FacebookVideoBlockLoadable,
 	VineBlockLoadable,
 ];

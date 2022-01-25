@@ -18,7 +18,7 @@ import { ItemLinkBlockElement } from '@root/src/web/components/ItemLinkBlockElem
 import { InteractiveContentsBlockComponent } from '@root/src/web/components/InteractiveContentsBlockComponent';
 import { MainMediaEmbedBlockComponent } from '@root/src/web/components/MainMediaEmbedBlockComponent';
 import { NumberedTitleBlockComponent } from '@root/src/web/components/NumberedTitleBlockComponent';
-import { MapEmbedBlockComponent } from '@root/src/web/components/MapEmbedBlockComponent';
+import { MapEmbedBlockComponent } from '@root/src/web/components/MapEmbedBlockComponent.importable';
 import { MultiImageBlockComponent } from '@root/src/web/components/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/SoundcloudBlockComponent';
@@ -386,13 +386,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<MapEmbedBlockComponent
 						format={format}
 						embedUrl={element.embedUrl}
@@ -401,8 +395,13 @@ export const renderElement = ({
 						caption={element.caption}
 						credit={element.source}
 						title={element.title}
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
 			return [
