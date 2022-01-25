@@ -40,6 +40,17 @@ describe('Signed in readers', function () {
 
 	it('should not display signed in texts when users are not signed in', function () {
 		cy.visit(`Article?url=${articleUrl}`);
+		cy.scrollTo('bottom', { duration: 300 });
+		// We need this second call to fix flakiness where content loads in pushing the page
+		// down and preventing the scroll request to actually reach the bottom. We will fix
+		// this later when we've defined fixed heights for these containers, preventing CLS
+		cy.scrollTo('bottom', { duration: 300 });
+		// Wait for hydration
+		cy.get('gu-island[name=DiscussionContainer]').should(
+			'have.attr',
+			'data-gu-hydrated',
+			'true',
+		);
 		// Check that the page is showing the reader as signed out
 		cy.contains('sign in or create');
 	});
