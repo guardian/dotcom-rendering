@@ -266,6 +266,7 @@ export const document = ({ data }: Props): string => {
 		...getScriptArrayFromChunkName('embedIframe'),
 		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
 		...getScriptArrayFromChunkName('relativeTime'),
+		...getScriptArrayFromChunkName('initDiscussion'),
 	]);
 
 	const gaChunk = getScriptArrayFromChunkName('ga');

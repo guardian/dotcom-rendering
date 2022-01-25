@@ -47,6 +47,7 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		embedIframe: scriptPath('embedIframe'),
 		newsletterEmbedIframe: scriptPath('newsletterEmbedIframe'),
 		relativeTime: scriptPath('relativeTime'),
+		initDiscussion: scriptPath('initDiscussion'),
 	},
 	output: {
 		filename: generateName(isLegacyJS),
