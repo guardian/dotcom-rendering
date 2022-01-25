@@ -42,16 +42,16 @@ describe('Interactivity', function () {
 			);
 			cy.get('[data-cy=comment-counts]').should('exist');
 			// The discusion is not yet loaded
-			cy.get('[data-component=discussion]').should('not.exist');
+			cy.get('[data-cy=discussion]').should('not.exist');
 			// Click the comment count
 			cy.get('[data-cy=comment-counts]').click();
-			cy.get('[data-component=discussion]').should('exist');
+			cy.get('[data-cy=discussion]').should('exist');
 		});
 		it('loads the discussion immediately when you use a url ending in #comments', function () {
 			cy.visit(
 				`/Article?url=https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
 			);
-			cy.get('[data-component=discussion]').should('exist');
+			cy.get('[data-cy=discussion]').should('exist');
 		});
 		// eslint-disable-next-line mocha/no-skipped-tests
 		it.skip('loads the discussion immediately when you use a permalink', function () {
@@ -64,7 +64,7 @@ describe('Interactivity', function () {
 				'data-gu-hydrated',
 				'true',
 			);
-			cy.get('[data-component=discussion]').should('exist');
+			cy.get('[data-cy=discussion]').should('exist');
 		});
 		it('loads the most viwed list only after starting to scroll the page', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
