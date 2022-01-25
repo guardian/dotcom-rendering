@@ -2199,6 +2199,11 @@
   resolved "https://registry.npmjs.org/@guardian/source-react-components/-/source-react-components-4.0.0-rc.3.tgz#ef1faccad3e6a9816472e8546864fe72fd4d2780"
   integrity sha512-QBpfqS4TqnEzDHmebtZDPj1kof8RVizyu5jTC0JWuv0n1lja9385bQkVwMQyr2av1f8JvOE+LHv8lUdagtJgPw==
 
+"@guardian/support-dotcom-components@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.0.tgz#802b507de87c4ef120ae9f02d6f44be1fea47353"
+  integrity sha512-zxtDDUYy3RDlizQ3UrYUYIQ2ooojj5gJmtEZjiAPN+SvL8cHlIPDQnX6aaTx6RMoIQUpQ4vVZyAVrLDOuUY37Q==
+
 "@guardian/types@^9.0.1":
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/@guardian/types/-/types-9.0.1.tgz#a03682d9c2942560714f9c724a1cd7068f772a93"
