@@ -58,7 +58,7 @@ class GuStatsReportPlugin {
 					'[gu-stats-report] Unable to report stats - invalid config',
 				);
 
-			const URL = 'https://logs.code.dev-guardianapis.com/log';
+			const URL = 'https://logs.guardianapis.com/log';
 			fetch(URL, {
 				method: 'POST',
 				body: JSON.stringify({

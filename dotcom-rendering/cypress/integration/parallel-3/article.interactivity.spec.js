@@ -167,7 +167,7 @@ describe('Interactivity', function () {
 				// Wait for hydration
 				cy.get('gu-island[name=SubNav]')
 					.first()
-					.should('have.attr', 'data-gu-hydrated', 'true');
+					.should('have.attr', 'data-gu-ready', 'true');
 				// Both subnav buttons show 'More'
 				cy.get('[data-cy=subnav-toggle]').first().contains('More');
 				cy.get('[data-cy=subnav-toggle]').last().contains('More');
@@ -184,7 +184,7 @@ describe('Interactivity', function () {
 				// Wait for hydration
 				cy.get('gu-island[name=SubNav]')
 					.last()
-					.should('have.attr', 'data-gu-hydrated', 'true');
+					.should('have.attr', 'data-gu-ready', 'true');
 				// The other subnav still shows 'More'
 				cy.get('[data-cy=subnav-toggle]').last().contains('More');
 				// Click Show more on the last sub nav

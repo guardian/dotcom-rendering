@@ -48,7 +48,7 @@ describe('Signed in readers', function () {
 		// Wait for hydration
 		cy.get('gu-island[name=DiscussionContainer]').should(
 			'have.attr',
-			'data-gu-hydrated',
+			'data-gu-ready',
 			'true',
 		);
 		// Check that the page is showing the reader as signed out
