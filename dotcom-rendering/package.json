@@ -202,6 +202,7 @@
     "tslint-react": "^4.1.0",
     "tslint-react-a11y": "^1.1.0",
     "typescript-json-schema": "^0.50.0",
+    "uuid": "^8.3.2",
     "webpack-assets-manifest": "^5.0.1",
     "webpack-bundle-analyzer": "^4.4.0",
     "webpack-cli": "^4.5.0",
