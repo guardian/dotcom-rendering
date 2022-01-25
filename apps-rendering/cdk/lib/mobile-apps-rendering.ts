@@ -142,8 +142,8 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 					maximumInstances: props.asgMaxSize.CODE,
 				},
 				PROD: {
-					minimumInstances: props.asgMinSize.CODE,
-					maximumInstances: props.asgMaxSize.CODE,
+					minimumInstances: props.asgMinSize.PROD,
+					maximumInstances: props.asgMaxSize.PROD,
 				},
 			},
 		});
