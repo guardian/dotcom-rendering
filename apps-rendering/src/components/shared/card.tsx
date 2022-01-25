@@ -58,7 +58,7 @@ const listStyles = (
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
-				border-radius: 0.75rem;
+				border-radius: ${remSpace[2]};
 				max-width: 10rem;
 				padding-top: 0.125rem;
 
@@ -91,7 +91,7 @@ const listStyles = (
 				flex-direction: column;
 				justify-content: space-between;
 				border-top: 1px solid ${neutral[86]};
-				border-radius: 0 0 0.75rem 0.75rem;
+				border-radius: 0 0 ${remSpace[2]} ${remSpace[2]};
 				max-width: 10rem;
 
 				&.fade {
@@ -132,7 +132,7 @@ const fullWidthImage = css`
 `;
 
 const imgStyles = css`
-	border-radius: 0.75rem;
+	border-radius: ${remSpace[2]};
 `;
 
 const timeStyles = (type: RelatedItemType): SerializedStyles => {
