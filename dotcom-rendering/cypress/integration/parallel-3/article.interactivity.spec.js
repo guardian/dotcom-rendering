@@ -66,7 +66,7 @@ describe('Interactivity', function () {
 			);
 			cy.get('[data-component=discussion]').should('exist');
 		});
-		it('loads the most viwed list onlt after starting to scroll the page', function () {
+		it('loads the most viwed list only after starting to scroll the page', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
 			cy.get('[data-component=geo-most-popular]').should('not.exist');
 			cy.scrollTo('center', { duration: 300 });
