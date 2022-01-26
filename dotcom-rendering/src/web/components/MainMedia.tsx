@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { until } from '@guardian/source-foundations';
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 
 import { renderArticleElement } from '@root/src/web/lib/renderElement';
 import { getZIndex } from '@frontend/web/lib/getZIndex';
@@ -50,6 +50,24 @@ const immersiveWrapper = css`
     overflow: hidden;
 `;
 
+const chooseWrapper = (format: ArticleFormat) => {
+	switch (format.display) {
+		case ArticleDisplay.Immersive:
+			return immersiveWrapper;
+		case ArticleDisplay.Standard: {
+			switch (format.design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					return '';
+				default:
+					return noGutters;
+			}
+		}
+		default:
+			return noGutters;
+	}
+};
+
 export const MainMedia: React.FC<{
 	format: ArticleFormat;
 	palette: Palette;
@@ -60,6 +78,7 @@ export const MainMedia: React.FC<{
 	host?: string;
 	pageId: string;
 	webTitle: string;
+	ajaxUrl: string;
 }> = ({
 	elements,
 	format,
@@ -70,29 +89,26 @@ export const MainMedia: React.FC<{
 	host,
 	pageId,
 	webTitle,
-}) => (
-	<div
-		css={[
-			mainMedia,
-			format.display === ArticleDisplay.Immersive
-				? immersiveWrapper
-				: noGutters,
-		]}
-	>
-		{elements.map((element, index) =>
-			renderArticleElement({
-				format,
-				palette,
-				element,
-				adTargeting,
-				host,
-				index,
-				isMainMedia: true,
-				starRating,
-				hideCaption,
-				pageId,
-				webTitle,
-			}),
-		)}
-	</div>
-);
+	ajaxUrl,
+}) => {
+	return (
+		<div css={[mainMedia, chooseWrapper(format)]}>
+			{elements.map((element, index) =>
+				renderArticleElement({
+					format,
+					palette,
+					element,
+					adTargeting,
+					ajaxUrl,
+					host,
+					index,
+					isMainMedia: true,
+					starRating,
+					hideCaption,
+					pageId,
+					webTitle,
+				}),
+			)}
+		</div>
+	);
+};

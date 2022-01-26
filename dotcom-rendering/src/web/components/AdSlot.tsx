@@ -301,6 +301,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							css`
 								position: sticky;
 								top: 0;
+								width: 300px;
 							`,
 							adStyles,
 						]}

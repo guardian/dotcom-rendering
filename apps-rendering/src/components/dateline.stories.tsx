@@ -22,6 +22,32 @@ const Default: FC = () => (
 	/>
 );
 
+const LiveBlogDateline: FC = () => (
+	<Dateline
+		format={{
+			design: ArticleDesign.LiveBlog,
+			display: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.News),
+		}}
+		date={some(
+			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
+		)}
+	/>
+);
+
+const DeadBlogDateline: FC = () => (
+	<Dateline
+		format={{
+			design: ArticleDesign.DeadBlog,
+			display: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.Culture),
+		}}
+		date={some(
+			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
+		)}
+	/>
+);
+
 // ----- Exports ----- //
 
 export default {
@@ -30,4 +56,4 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default };
+export { Default, LiveBlogDateline, DeadBlogDateline };

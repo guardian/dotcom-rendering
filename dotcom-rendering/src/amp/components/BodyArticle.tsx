@@ -160,6 +160,7 @@ export const Body: React.FC<{
 									commercialProperties={
 										adInfo.commercialProperties
 									}
+									adTargeting={adTargeting}
 								/>
 							</div>
 						</>
@@ -200,6 +201,7 @@ export const Body: React.FC<{
 				contentType={adInfo.contentType}
 				config={adConfig}
 				commercialProperties={adInfo.commercialProperties}
+				adTargeting={adTargeting}
 			/>
 
 			<SubMeta

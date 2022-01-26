@@ -44,14 +44,17 @@ const fileExists = async (glob) => {
 
 	[
 		'sentryLoader',
+		'bootCmp',
 		'ga',
 		'ophan',
+		'islands',
 		'react',
 		'dynamicImport',
 		'atomIframe',
 		'embedIframe',
 		'newsletterEmbedIframe',
 		'relativeTime',
+		'initDiscussion',
 	].map((name) => {
 		if (loadableManifest.assetsByChunkName[name]) {
 			console.log(`Loadable manifest returned value ${name}`);

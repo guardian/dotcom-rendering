@@ -17,6 +17,8 @@ import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { CommentCount } from './CommentCount.importable';
+import { Island } from './Island';
 
 type Props = {
 	format: ArticleFormat;
@@ -28,6 +30,9 @@ type Props = {
 	primaryDateline: string;
 	secondaryDateline: string;
 	branding?: Branding;
+	discussionApiUrl: string;
+	shortUrlId: string;
+	isCommentable: boolean;
 };
 
 const meta = css`
@@ -68,6 +73,12 @@ const stretchLines = css`
 	${until.mobileLandscape} {
 		margin-left: -10px;
 		margin-right: -10px;
+	}
+`;
+
+const borderColourWhenBackgroundDark = css`
+	${until.desktop} {
+		border-top: 1px solid rgba(255, 255, 255, 0.4);
 	}
 `;
 
@@ -156,6 +167,10 @@ const metaContainer = (format: ArticleFormat) => {
 									margin-left: 40px;
 								}
 						  `;
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog: {
+					return '';
+				}
 				default:
 					return defaultMargins;
 			}
@@ -251,6 +266,18 @@ const RowBelowLeftCol = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const metaExtrasLiveBlog = css`
+	${until.phablet} {
+		margin-right: 0;
+	}
+`;
+
+const metaNumbersExtrasLiveBlog = css`
+	${until.phablet} {
+		margin-left: 0;
+	}
+`;
+
 export const ArticleMeta = ({
 	branding,
 	format,
@@ -261,6 +288,9 @@ export const ArticleMeta = ({
 	tags,
 	primaryDateline,
 	secondaryDateline,
+	discussionApiUrl,
+	shortUrlId,
+	isCommentable,
 }: Props) => {
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
@@ -345,7 +375,14 @@ export const ArticleMeta = ({
 								? interactiveLegacyClasses.shareIcons
 								: ''
 						}
-						css={metaExtras(palette)}
+						css={[
+							metaExtras(palette),
+							format.design === ArticleDesign.LiveBlog &&
+								css(
+									borderColourWhenBackgroundDark,
+									metaExtrasLiveBlog,
+								),
+						]}
 					>
 						<ShareIcons
 							pageId={pageId}
@@ -357,17 +394,38 @@ export const ArticleMeta = ({
 							context="ArticleMeta"
 						/>
 					</div>
-					<div css={metaNumbers(palette)}>
-						<Counts>
+					<div
+						className={
+							isInteractive
+								? interactiveLegacyClasses.shareAndCommentCounts
+								: ''
+						}
+						css={[
+							metaNumbers(palette),
+							format.design === ArticleDesign.LiveBlog &&
+								css(
+									borderColourWhenBackgroundDark,
+									metaNumbersExtrasLiveBlog,
+								),
+						]}
+					>
+						<Counts format={format}>
 							{/* The meta-number css is needed by Counts.tsx */}
 							<div
 								className="meta-number"
 								id="share-count-root"
 							/>
-							<div
-								className="meta-number"
-								id="comment-count-root"
-							/>
+							<div className="meta-number">
+								{isCommentable && (
+									<Island clientOnly={true} deferUntil="idle">
+										<CommentCount
+											discussionApiUrl={discussionApiUrl}
+											shortUrlId={shortUrlId}
+											format={format}
+										/>
+									</Island>
+								)}
+							</div>
 						</Counts>
 					</div>
 				</div>

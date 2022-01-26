@@ -117,6 +117,8 @@ type Palette = {
 		numberedPosition: Colour;
 		overlayedCaption: Colour;
 		pagination: Colour;
+		shareCount: Colour;
+		shareCountUntilDesktop: Colour;
 	};
 	background: {
 		article: Colour;
@@ -137,10 +139,15 @@ type Palette = {
 		carouselDotFocus: Colour;
 		headlineTag: Colour;
 		mostViewedTab: Colour;
+		matchNav: Colour;
 	};
 	fill: {
 		commentCount: Colour;
+		commentCountUntilDesktop: Colour;
+		shareCountIcon: Colour;
+		shareCountIconUntilDesktop: Colour;
 		shareIcon: Colour;
+		shareIconGrayBackground: Colour;
 		cameraCaptionIcon: Colour;
 		cardIcon: Colour;
 		richLink: Colour;
@@ -170,6 +177,7 @@ type Palette = {
 	hover: {
 		headlineByline: Colour;
 		pagination: Colour;
+		standfirstLink: Colour;
 	};
 };
 
@@ -195,6 +203,8 @@ interface AdTargetParam {
 }
 
 type CustomParams = {
+	sens: 't' | 'f';
+	urlkw: string[];
 	[key: string]: string | string[] | number | number[] | boolean | boolean[];
 };
 
@@ -681,6 +691,11 @@ interface CommercialConfigType {
 	ampIframeUrl: string;
 }
 
+type ServerSideTests = {
+	[k: `${string}Variant`]: 'variant';
+	[k: `${string}Control`]: 'control';
+};
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
@@ -693,7 +708,7 @@ interface ConfigType extends CommercialConfigType {
 	sentryHost: string;
 	dcrSentryDsn: string;
 	switches: { [key: string]: boolean };
-	abTests: Record<string, 'control' | 'variant'>;
+	abTests: ServerSideTests;
 	dfpAccountId: string;
 	commercialBundleUrl: string;
 	revisionNumber: string;
@@ -816,80 +831,46 @@ interface DCRBrowserDocumentData {
 type BlockElementType = string;
 interface ComponentNameChunkMap {
 	chunkName: string;
-	addWhen: BlockElementType | 'always';
-}
-interface EditionDropdownLoadable extends ComponentNameChunkMap {
-	chunkName: 'EditionDropdown';
-	addWhen: 'always';
+	addWhen: BlockElementType;
 }
 interface YoutubeBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-YoutubeBlockComponent';
+	chunkName: 'YoutubeBlockComponent';
 	addWhen: YoutubeBlockElement['_type'];
 }
 
-interface RichLinkBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-RichLinkComponent';
-	addWhen: RichLinkBlockElement['_type'];
-}
-
 interface InteractiveBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-InteractiveBlockComponent';
+	chunkName: 'InteractiveBlockComponent';
 	addWhen: InteractiveBlockElement['_type'];
 }
 
 interface InteractiveContentsBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-InteractiveContentsBlockComponent';
+	chunkName: 'InteractiveContentsBlockComponent';
 	addWhen: InteractiveContentsBlockElement['_type'];
 }
 
 interface CalloutBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-CalloutBlockComponent';
+	chunkName: 'CalloutBlockComponent';
 	addWhen: CalloutBlockElement['_type'];
 }
 
 interface DocumentBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-DocumentBlockComponent';
+	chunkName: 'DocumentBlockComponent';
 	addWhen: DocumentBlockElement['_type'];
 }
 
-interface MapBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-MapEmbedBlockComponent';
-	addWhen: MapBlockElement['_type'];
-}
-
-interface SpotifyBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-SpotifyBlockComponent';
-	addWhen: SpotifyBlockElement['_type'];
-}
-
 interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-VideoFacebookBlockComponent';
+	chunkName: 'VideoFacebookBlockComponent';
 	addWhen: VideoFacebookBlockElement['_type'];
-}
-interface VineBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-VineBlockComponent';
-	addWhen: VineBlockElement['_type'];
-}
-
-interface InstagramBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'elements-InstagramBlockComponent';
-	addWhen: InstagramBlockElement['_type'];
 }
 
 // There are docs on loadable in ./docs/loadable-components.md
 type LoadableComponents = [
-	EditionDropdownLoadable,
 	YoutubeBlockLoadable,
-	RichLinkBlockLoadable,
 	InteractiveBlockLoadable,
 	InteractiveContentsBlockLoadable,
 	CalloutBlockLoadable,
 	DocumentBlockLoadable,
-	MapBlockLoadable,
-	SpotifyBlockLoadable,
 	FacebookVideoBlockLoadable,
-	VineBlockLoadable,
-	InstagramBlockLoadable,
 ];
 
 interface CarouselImagesMap {
@@ -1048,4 +1029,15 @@ declare module '*.svg' {
 interface PerformanceEntry {
 	loadTime: number;
 	renderTime: number;
+}
+
+declare namespace JSX {
+	interface IntrinsicElements {
+		'gu-island': {
+			name: string;
+			deferUntil?: 'idle' | 'visible';
+			props: any;
+			children: React.ReactNode;
+		};
+	}
 }

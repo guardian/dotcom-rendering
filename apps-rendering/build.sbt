@@ -28,9 +28,9 @@ lazy val scalaApiModels = project.in(file("api-models") / "scala")
     name := "apps-rendering-api-models",
     description := "Models used by the apps-rendering API",
 
-    scroogeLanguages in Compile := Seq("scala"),
-    scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
-    scroogeThriftDependencies in Compile ++= scroogeDependencies,
+	Compile / scroogeLanguages := Seq("scala"),
+	Compile / scroogeThriftSourceFolder := baseDirectory.value / "../thrift/src/main/thrift",
+	Compile / scroogeThriftDependencies ++= scroogeDependencies,
 
     libraryDependencies ++= Seq(
       "org.apache.thrift" % "libthrift" % "0.12.0",
@@ -80,9 +80,9 @@ lazy val tsApiModels = project.in(file("api-models") / "ts")
     description := "Models used by the apps-rendering API",
 
     scroogeTypescriptPackageLicense := "Apache-2.0",
-    scroogeThriftSourceFolder in Compile := baseDirectory.value / "../thrift/src/main/thrift",
-    scroogeLanguages in Compile := Seq("typescript"),
-    scroogeThriftDependencies in Compile ++= scroogeDependencies,
+	Compile / scroogeThriftSourceFolder := baseDirectory.value / "../thrift/src/main/thrift",
+	Compile / scroogeLanguages := Seq("typescript"),
+	Compile / scroogeThriftDependencies ++= scroogeDependencies,
 
     scroogeTypescriptPackageMapping := Map(
       "content-api-models" -> "@guardian/content-api-models",

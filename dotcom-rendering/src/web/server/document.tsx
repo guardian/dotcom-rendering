@@ -1,13 +1,17 @@
+import { CacheProvider } from '@emotion/react';
 import { renderToString } from 'react-dom/server';
-
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
+
+import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decideDisplay } from '@root/src/web/lib/decideDisplay';
+import { decideDesign } from '@root/src/web/lib/decideDesign';
 
 import { Page } from '@root/src/web/components/Page';
 
 import { escapeData } from '@root/src/lib/escapeData';
 import {
-	CDN,
+	ASSET_ORIGIN,
 	getScriptArrayFromFilename,
 	getScriptArrayFromChunkName,
 	loadableManifestJson,
@@ -16,15 +20,10 @@ import {
 import { makeWindowGuardian } from '@root/src/model/window-guardian';
 import { ChunkExtractor } from '@loadable/server';
 import { ArticlePillar } from '@guardian/libs';
-import { DecideLayout } from '../layouts/DecideLayout';
 import { htmlTemplate } from './htmlTemplate';
-import { decideTheme } from '../lib/decideTheme';
-import { SkipTo } from '../components/SkipTo';
 
-interface RenderToStringResult {
-	html: string;
-	css: string;
-	ids: string[];
+interface Props {
+	data: DCRServerDocumentData;
 }
 
 const generateScriptTags = (
@@ -43,10 +42,6 @@ const generateScriptTags = (
 		];
 	}, [] as string[]);
 
-interface Props {
-	data: DCRServerDocumentData;
-}
-
 const decideTitle = (CAPI: CAPIType): string => {
 	if (
 		decideTheme(CAPI.format) === ArticlePillar.Opinion &&
@@ -62,20 +57,25 @@ export const document = ({ data }: Props): string => {
 	const title = decideTitle(CAPI);
 	const key = 'dcr';
 	const cache = createCache({ key });
-	// eslint-disable-next-line @typescript-eslint/unbound-method
-	const { extractCritical } = createEmotionServer(cache);
 
-	const {
-		html,
-		css: extractedCss,
-		ids: cssIDs,
-	}: RenderToStringResult = extractCritical(
-		renderToString(
-			<Page cache={cache}>
-				<DecideLayout CAPI={CAPI} NAV={NAV} />
-			</Page>,
-		),
+	// eslint-disable-next-line @typescript-eslint/unbound-method
+	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
+		createEmotionServer(cache);
+
+	const format: ArticleFormat = {
+		display: decideDisplay(CAPI.format),
+		design: decideDesign(CAPI.format),
+		theme: decideTheme(CAPI.format),
+	};
+
+	const html = renderToString(
+		<CacheProvider value={cache}>
+			<Page format={format} CAPI={CAPI} NAV={NAV} />
+		</CacheProvider>,
 	);
+
+	const chunks = extractCriticalToChunks(html);
+	const extractedCss = constructStyleTagsFromChunks(chunks);
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const loadableExtractor = new ChunkExtractor({
@@ -92,53 +92,32 @@ export const document = ({ data }: Props): string => {
 	// However, this does actually suit our architecture as we can use the CAPI
 	// component reference.
 	const allChunks: LoadableComponents = [
-		{ chunkName: 'EditionDropdown', addWhen: 'always' },
 		{
-			chunkName: 'elements-YoutubeBlockComponent',
+			chunkName: 'YoutubeBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 		},
 		{
-			chunkName: 'elements-RichLinkComponent',
-			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-		},
-		{
-			chunkName: 'elements-InteractiveBlockComponent',
+			chunkName: 'InteractiveBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveBlockElement',
 		},
 		{
-			chunkName: 'elements-InteractiveContentsBlockComponent',
+			chunkName: 'InteractiveContentsBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 		},
 		{
-			chunkName: 'elements-CalloutBlockComponent',
+			chunkName: 'CalloutBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.CalloutBlockElement',
 		},
 		{
-			chunkName: 'elements-DocumentBlockComponent',
+			chunkName: 'DocumentBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.DocumentBlockElement',
 		},
 		{
-			chunkName: 'elements-MapEmbedBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.MapBlockElement',
-		},
-		{
-			chunkName: 'elements-SpotifyBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.SpotifyBlockElement',
-		},
-		{
-			chunkName: 'elements-VideoFacebookBlockComponent',
+			chunkName: 'VideoFacebookBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-		},
-		{
-			chunkName: 'elements-VineBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.VineBlockElement',
-		},
-		{
-			chunkName: 'elements-InstagramBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.InstagramBlockElement',
 		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -148,13 +127,12 @@ export const document = ({ data }: Props): string => {
 		.flat();
 	const { mainMediaElements } = CAPI;
 	// Filter the chunks defined above by whether
-	// the 'addWhen' value is 'always' or matches
-	// any elements in the body or main media element
+	// the 'addWhen' value matches any elements
+	// in the body or main media element
 	// arrays for the page request.
 	const chunksForPage = allChunks.filter((chunk) =>
 		[...CAPIElements, ...mainMediaElements].some(
-			(block) =>
-				chunk.addWhen === 'always' || block._type === chunk.addWhen,
+			(block) => block._type === chunk.addWhen,
 		),
 	);
 	// Once we have the chunks for the page, we can add them directly to the loadableExtractor
@@ -254,14 +232,16 @@ export const document = ({ data }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
+			...getScriptArrayFromChunkName('bootCmp'),
 			...getScriptArrayFromChunkName('ophan'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
 			...getScriptArrayFromChunkName('sentryLoader'),
 			...getScriptArrayFromChunkName('coreVitals'),
 			...getScriptArrayFromChunkName('dynamicImport'),
 			pageHasNonBootInteractiveElements && {
-				src: `${CDN}static/frontend/js/curl-with-js-and-domReady.js`,
+				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
+			...getScriptArrayFromChunkName('islands'),
 			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
 		].filter(isDefined), // We use the TypeGuard to keep TS happy
 	);
@@ -278,6 +258,7 @@ export const document = ({ data }: Props): string => {
 		...getScriptArrayFromChunkName('embedIframe'),
 		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
 		...getScriptArrayFromChunkName('relativeTime'),
+		...getScriptArrayFromChunkName('initDiscussion'),
 	]);
 
 	const gaChunk = getScriptArrayFromChunkName('ga');
@@ -296,9 +277,7 @@ export const document = ({ data }: Props): string => {
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
 	 */
-	const windowGuardian = escapeData(
-		JSON.stringify(makeWindowGuardian(data, cssIDs)),
-	);
+	const windowGuardian = escapeData(JSON.stringify(makeWindowGuardian(data)));
 
 	const hasAmpInteractiveTag = CAPI.tags.some(
 		(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
@@ -318,22 +297,6 @@ export const document = ({ data }: Props): string => {
 			? ''
 			: CAPI.config.keywords;
 
-	const skipToMainContent = renderToString(
-		<SkipTo id="maincontent" label="Skip to main content" />,
-	);
-	const skipToNavigation = renderToString(
-		<SkipTo id="navigation" label="Skip to navigation" />,
-	);
-	let skipToKeyEvents;
-	if (
-		CAPI.format.design === 'LiveBlogDesign' ||
-		CAPI.format.design === 'DeadBlogDesign'
-	) {
-		skipToKeyEvents = renderToString(
-			<SkipTo id="keyevents" label="Skip to key events" />,
-		);
-	}
-
 	return htmlTemplate({
 		linkedData,
 		loadableConfigScripts,
@@ -350,8 +313,5 @@ export const document = ({ data }: Props): string => {
 		openGraphData,
 		twitterData,
 		keywords,
-		skipToMainContent,
-		skipToNavigation,
-		skipToKeyEvents,
 	});
 };

@@ -8,6 +8,10 @@ import {
 } from '@guardian/libs';
 import { ArticleMeta } from './ArticleMeta';
 import { decidePalette } from '../lib/decidePalette';
+import {
+	getAllThemes,
+	getThemeNameAsString,
+} from '../../../../common-rendering/src/fixtures/article';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -75,6 +79,9 @@ export const ArticleStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -120,6 +127,9 @@ export const BrandingStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -150,6 +160,9 @@ export const FeatureStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -179,6 +192,9 @@ export const SpecialReportStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -208,6 +224,9 @@ export const CommentStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -237,6 +256,9 @@ export const InterviewStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -266,6 +288,9 @@ export const ImmersiveStory = () => {
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
@@ -295,8 +320,43 @@ export const TwoContributorsStory = () => {
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
 			/>
 		</Container>
 	);
 };
 TwoContributorsStory.story = { name: 'Feature, with two contributors' };
+
+export const DeadBlogStory = () => {
+	return (
+		<>
+			{getAllThemes({
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+			}).map((format) => (
+				<Container>
+					<p>{getThemeNameAsString(format)}</p>
+					<ArticleMeta
+						format={format}
+						palette={decidePalette(format)}
+						pageId=""
+						webTitle=""
+						author={{
+							byline: 'Lanre Bakare',
+							twitterHandle: 'lanre_bakare',
+						}}
+						tags={tagsWithByTwoContributors}
+						primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+						secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+						isCommentable={false}
+						discussionApiUrl=""
+						shortUrlId=""
+					/>
+				</Container>
+			))}
+		</>
+	);
+};
+DeadBlogStory.story = { name: 'Deadblog - All pillars' };

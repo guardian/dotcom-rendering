@@ -13,7 +13,7 @@ import {
 import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
 import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav/SubNav';
+import { SubNav } from '@root/src/web/components/SubNav.importable';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { Nav } from '@root/src/web/components/Nav/Nav';
 import {
@@ -33,6 +33,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { Island } from '../components/Island';
 
 interface Props {
 	CAPI: CAPIType;
@@ -47,7 +48,8 @@ const Renderer: React.FC<{
 	host?: string;
 	pageId: string;
 	webTitle: string;
-}> = ({ format, palette, elements, host, pageId, webTitle }) => {
+	ajaxUrl: string;
+}> = ({ format, palette, elements, host, pageId, webTitle, ajaxUrl }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -64,6 +66,7 @@ const Renderer: React.FC<{
 			isMainMedia: false,
 			pageId,
 			webTitle,
+			ajaxUrl,
 		});
 
 		if (ok) {
@@ -190,6 +193,10 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 							edition={CAPI.editionId}
 							idUrl={CAPI.config.idUrl}
 							mmaUrl={CAPI.config.mmaUrl}
+							supporterCTA={
+								CAPI.nav.readerRevenueLinks.header.supporter
+							}
+							discussionApiUrl={CAPI.config.discussionApiUrl}
 							isAnniversary={
 								CAPI.config.switches.anniversaryHeaderSvg
 							}
@@ -222,14 +229,15 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				<ElementContainer
 					backgroundColour={neutral[100]}
 					padded={false}
-					sectionId="sub-nav-root"
 					element="aside"
 				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						format={format}
-					/>
+					<Island deferUntil="idle">
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							format={format}
+						/>
+					</Island>
 				</ElementContainer>
 			)}
 		</section>
@@ -290,6 +298,7 @@ export const FullPageInteractiveLayout = ({
 						host={host}
 						pageId={CAPI.pageId}
 						webTitle={CAPI.webTitle}
+						ajaxUrl={CAPI.config.ajaxUrl}
 					/>
 				</article>
 			</ElementContainer>
@@ -297,15 +306,16 @@ export const FullPageInteractiveLayout = ({
 			{NAV.subNavSections && (
 				<ElementContainer
 					padded={false}
-					sectionId="sub-nav-root"
 					backgroundColour={neutral[100]}
-					element="nav"
+					element="aside"
 				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						format={format}
-					/>
+					<Island deferUntil="visible">
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							format={format}
+						/>
+					</Island>
 				</ElementContainer>
 			)}
 

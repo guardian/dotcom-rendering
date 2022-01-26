@@ -36,27 +36,74 @@ describe('Interactivity', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
 			cy.get('[data-cy=share-counts]').should('exist');
 		});
-		it('should display all the rich links for an article', function () {
+		it('loads the discussion when you click the comment count', function () {
+			cy.visit(
+				`/Article?url=https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster`,
+			);
+			cy.get('[data-cy=comment-counts]').should('exist');
+			// The discusion is not yet loaded
+			cy.get('[data-cy=discussion]').should('not.exist');
+			// Click the comment count
+			cy.get('[data-cy=comment-counts]').click();
+			cy.get('[data-cy=discussion]').should('exist');
+		});
+		it('loads the discussion immediately when you use a url ending in #comments', function () {
+			cy.visit(
+				`/Article?url=https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comments`,
+			);
+			cy.get('[data-cy=discussion]').should('exist');
+		});
+		// eslint-disable-next-line mocha/no-skipped-tests
+		it.skip('loads the discussion immediately when you use a permalink', function () {
+			// The permalink feature is not currently working but once it does we want this test ready to go
+			cy.visit(
+				`/Article?url=https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comment-154433663`,
+			);
+			cy.get('gu-island[name=DiscussionContainer]').should(
+				'have.attr',
+				'data-gu-hydrated',
+				'true',
+			);
+			cy.get('[data-cy=discussion]').should('be.visible');
+		});
+		it('loads the most viwed list only after starting to scroll the page', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
-			cy.scrollTo('bottom', { duration: 300 });
+			cy.get('[data-component=geo-most-popular]').should('not.exist');
+			cy.scrollTo('center', { duration: 300 });
+			cy.get('[data-component=geo-most-popular]').should('exist');
+		});
+		it('should display and hydrate all the rich links for an article', function () {
+			cy.visit(`/Article?url=${articleUrl}`);
+			// Verify two links were server rendered
 			cy.get('[data-component=rich-link]')
 				.should('exist')
 				.its('length')
-				// This count of rich links is dependent on the article that we're testing not changing
-				// If this assertion fails then it could be because a link was added or removed in
-				// which case this check should be updated
 				.should('eq', 2);
+			// Verify hydration
+			cy.get('img[alt="Michael Barnier and the EU flag"]').should(
+				'not.exist',
+			);
+			cy.scrollTo('bottom', { duration: 300 });
+			cy.get('img[alt="Michael Barnier and the EU flag"]').should(
+				'be.visible',
+			);
 		});
 		describe('When most viewed is mocked', function () {
 			beforeEach(mockApi);
 			it('should change the list of most viewed items when a tab is clicked', function () {
 				cy.visit(`/Article?url=${articleUrl}`);
 				cy.contains('Lifestyle');
-				cy.get('[data-component="most-popular"]').scrollIntoView({
-					offset: { top: 150 },
-				});
+				// Make sure the most viewed html isn't even in the dom yet
+				cy.get('[data-cy=mostviewed-footer]').should('not.exist');
+				// Scroll to bottom to trigger hydration
+				cy.scrollTo('bottom', { duration: 300 });
+				// We need this second call to fix flakiness where content loads in pushing the page
+				// down and preventing the scroll request to actually reach the bottom. We will fix
+				// this later when we've defined fixed heights for these containers, preventing CLS
+				cy.scrollTo('bottom', { duration: 300 });
 				cy.wait('@getMostReadGeo');
 				cy.wait('@getMostRead');
+				cy.get('[data-cy=mostviewed-footer]').should('exist');
 				cy.get('[data-cy=tab-body-0]').should('be.visible');
 				cy.get('[data-cy=tab-body-1]').should('not.be.visible');
 				cy.get('[data-cy=tab-heading-1]').click();
@@ -153,6 +200,39 @@ describe('Interactivity', function () {
 					'data-cy',
 					'column-collapse-sublink-The Guardian view',
 				);
+			});
+
+			it('should expand the subnav when "More" is clicked', function () {
+				cy.viewport('iphone-x');
+				cy.visit(`/Article?url=${articleUrl}`);
+				// Wait for hydration
+				cy.get('gu-island[name=SubNav]')
+					.first()
+					.should('have.attr', 'data-gu-ready', 'true');
+				// Both subnav buttons show 'More'
+				cy.get('[data-cy=subnav-toggle]').first().contains('More');
+				cy.get('[data-cy=subnav-toggle]').last().contains('More');
+				// Click Show more in the first sub nav
+				cy.get('[data-cy=subnav-toggle]').first().click();
+				// The first button now shows 'Less'
+				cy.get('[data-cy=subnav-toggle]').first().contains('Less');
+				// Scroll to bottom to trigger hydration
+				cy.scrollTo('bottom', { duration: 300 });
+				// We need this second call to fix flakiness where content loads in pushing the page
+				// down and preventing the scroll request to actually reach the bottom. We will fix
+				// this later when we've defined fixed heights for these containers, preventing CLS
+				cy.scrollTo('bottom', { duration: 300 });
+				// Wait for hydration
+				cy.get('gu-island[name=SubNav]')
+					.last()
+					.should('have.attr', 'data-gu-ready', 'true');
+				// The other subnav still shows 'More'
+				cy.get('[data-cy=subnav-toggle]').last().contains('More');
+				// Click Show more on the last sub nav
+				cy.get('[data-cy=subnav-toggle]').last().click();
+				// Both subnav buttons show 'Less'
+				cy.get('[data-cy=subnav-toggle]').first().contains('Less');
+				cy.get('[data-cy=subnav-toggle]').last().contains('Less');
 			});
 		});
 	});

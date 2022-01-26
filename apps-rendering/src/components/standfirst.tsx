@@ -4,6 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
 	background,
+	border,
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
@@ -34,7 +35,7 @@ const darkStyles = (format: ArticleFormat): SerializedStyles => darkMode`
 
     a {
         color: ${text.standfirstDark(format)};
-        border-bottom: 0.0625rem solid ${neutral[46]};
+		border-bottom: 0.0625rem solid ${border.standfirstLinkDark(format)};
     }
 `;
 
@@ -54,6 +55,11 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 	address {
 		font-style: normal;
+	}
+
+	a {
+		text-decoration: none;
+		border-bottom: 0.0625rem solid ${border.standfirstLink(format)};
 	}
 
 	${isNotBlog(format) && darkStyles(format)}
@@ -93,6 +99,28 @@ const liveblogStyles: SerializedStyles = css`
 	}
 `;
 
+const deadblogStyles = (format: ArticleFormat): SerializedStyles => {
+	const colour = text.standfirstLink(format);
+
+	return css`
+		${headline.xxxsmall({ fontWeight: 'bold' })};
+
+		a {
+			text-decoration: none;
+		}
+
+		a:link {
+			color: ${colour};
+			border-bottom: 1px solid ${neutral[86]};
+		}
+
+		a:hover {
+			color: ${colour};
+			border-bottom: 1px solid ${colour};
+		}
+	`;
+};
+
 const media = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.standfirst(format)};
 	p,
@@ -121,6 +149,8 @@ const getStyles = (item: Item): SerializedStyles => {
 	switch (item.design) {
 		case ArticleDesign.LiveBlog:
 			return css(styles(format), liveblogStyles);
+		case ArticleDesign.DeadBlog:
+			return css(styles(format), liveblogStyles, deadblogStyles(format));
 		case ArticleDesign.Review:
 		case ArticleDesign.Feature:
 		case ArticleDesign.Editorial:

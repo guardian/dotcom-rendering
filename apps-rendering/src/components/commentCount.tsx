@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { fill } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
@@ -71,14 +72,15 @@ const deadblogStyles = css`
 	}
 `;
 
-const getStyles = ({ theme, design }: ArticleFormat): SerializedStyles => {
-	const colours = getThemeStyles(theme);
+const getStyles = (format: ArticleFormat): SerializedStyles => {
+	const colours = getThemeStyles(format.theme);
+	const commentCount = fill.commentCount(format);
 
-	switch (design) {
+	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			return blogStyles(neutral[93]);
 		case ArticleDesign.DeadBlog:
-			return css(blogStyles(colours.link), deadblogStyles);
+			return css(blogStyles(commentCount), deadblogStyles);
 		default:
 			return styles(colours.kicker, border.secondary, neutral[20]);
 	}
@@ -98,19 +100,17 @@ const deadblogBubbleStyles = (color: string): SerializedStyles => css`
 	}
 `;
 
-const getBubbleStyles = ({
-	theme,
-	design,
-}: ArticleFormat): SerializedStyles => {
-	const colours = getThemeStyles(theme);
+const getBubbleStyles = (format: ArticleFormat): SerializedStyles => {
+	const colours = getThemeStyles(format.theme);
+	const commentCount = fill.commentCount(format);
 
-	switch (design) {
+	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			return css(bubbleStyles(neutral[93]), liveblogBubbleStyles);
 		case ArticleDesign.DeadBlog:
 			return css(
 				bubbleStyles(neutral[93]),
-				deadblogBubbleStyles(colours.link),
+				deadblogBubbleStyles(commentCount),
 			);
 		default:
 			return bubbleStyles(colours.kicker);

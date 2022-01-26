@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
@@ -6,12 +6,8 @@ import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
-import { Links } from '@frontend/web/components/Links';
-import { WhenAdBlockInUse } from '@frontend/web/components/WhenAdBlockInUse';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
-import { SubNav } from '@frontend/web/components/SubNav/SubNav';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
-import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
@@ -36,154 +32,52 @@ import {
 	HydrateOnce,
 	HydrateInteractiveOnce,
 } from '@frontend/web/components/HydrateOnce';
-import { Lazy } from '@frontend/web/components/Lazy';
-import { Placeholder } from '@root/src/web/components/Placeholder';
-
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
-import { loadScript } from '@root/src/web/lib/loadScript';
 import { useOnce } from '@root/src/web/lib/useOnce';
-import { initPerf } from '@root/src/web/browser/initPerf';
-import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
-import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	storage,
-	log,
-	getCookie,
-} from '@guardian/libs';
-import type { ArticleFormat, CountryCode } from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
-
-import {
-	cmp,
-	onConsentChange,
-	getConsentFor,
-} from '@guardian/consent-management-platform';
-import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import { LabsHeader } from '@root/src/web/components/LabsHeader';
-import { EmbedBlockComponent } from '@root/src/web/components/elements/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from '@root/src/web/components/elements/UnsafeEmbedBlockComponent';
+import { EmbedBlockComponent } from '@root/src/web/components/EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from '@root/src/web/components/UnsafeEmbedBlockComponent';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
-import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 
 import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 
 import {
-	OphanComponentType,
-	OphanAction,
 	submitComponentEvent,
 	OphanComponentEvent,
 } from '../browser/ophan/ophan';
-import { trackPerformance } from '../browser/ga/ga';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
 
-// *******************************
-// ****** Dynamic imports ********
-// *******************************
-
-const EditionDropdown = loadable(
-	() => import('@frontend/web/components/EditionDropdown'),
-	{
-		resolveComponent: (module) => module.EditionDropdown,
-	},
-);
-
-const MostViewedRightWrapper = React.lazy(() => {
-	const { start, end } = initPerf('MostViewedRightWrapper');
-	start();
-	return import(
-		/* webpackChunkName: "MostViewedRightWrapper" */ '@frontend/web/components/MostViewed/MostViewedRight/MostViewedRightWrapper'
-	).then((module) => {
-		end();
-		return { default: module.MostViewedRightWrapper };
-	});
-});
-const OnwardsUpper = React.lazy(() => {
-	const { start, end } = initPerf('OnwardsUpper');
-	start();
-	return import(
-		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/Onwards/OnwardsUpper'
-	).then((module) => {
-		end();
-		return { default: module.OnwardsUpper };
-	});
-});
-const OnwardsLower = React.lazy(() => {
-	const { start, end } = initPerf('OnwardsLower');
-	start();
-	return import(
-		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/Onwards/OnwardsLower'
-	).then((module) => {
-		end();
-		return { default: module.OnwardsLower };
-	});
-});
-const GetMatchStats = React.lazy(() => {
-	const { start, end } = initPerf('GetMatchStats');
-	start();
-	return import(
-		/* webpackChunkName: "GetMatchStats" */ '@frontend/web/components/GetMatchStats'
-	).then((module) => {
-		end();
-		return { default: module.GetMatchStats };
-	});
-});
-
 type Props = {
 	CAPI: CAPIBrowserType;
-	NAV: BrowserNavType;
 	ophanRecord: OphanRecordFunction;
 };
 
 let renderCount = 0;
-export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
+export const App = ({ CAPI, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
-	const [isSignedIn, setIsSignedIn] = useState<boolean>();
-	const [user, setUser] = useState<UserProfile | null>();
-	const [countryCode, setCountryCode] = useState<string>();
-	// This is an async version of the countryCode state value defined above.
-	// This can be used where you've got logic which depends on countryCode but
-	// don't want to block on it becoming available, as you would with the
-	// non-async version (this is the case in the banner picker where some
-	// banners need countryCode but we don't want to block all banners from
-	// executing their canShow logic until countryCode is available):
-	const [asyncCountryCode, setAsyncCountryCode] =
-		useState<Promise<CountryCode | null>>();
-
-	const [consentState, setConsentState] = useState<ConsentState | undefined>(
-		undefined,
-	);
 
 	const [brazeMessages, setBrazeMessages] =
 		useState<Promise<BrazeMessagesInterface>>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-	// [string] for the actual id;
-	// [null] for when the cookie does not exist;
-	// [undefined] for when the cookie has not been read yet
-	const [browserId, setBrowserId] = useState<string | null | undefined>(
-		undefined,
-	);
-	useOnce(() => {
-		setBrowserId(getCookie({ name: 'bwid', shouldMemoize: true }));
-		log('dotcom', 'State: browserId set');
-	}, []);
 
 	const componentEventHandler =
 		(componentType: any, id: any, action: any) => () => {
@@ -213,44 +107,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		ABTestAPI.registerCompleteEvents(allRunnableTests);
 		log('dotcom', 'AB tests initialised');
 	}, [ABTestAPI]);
-
-	useEffect(() => {
-		setIsSignedIn(!!getCookie({ name: 'GU_U', shouldMemoize: true }));
-		log('dotcom', 'State: isSignedIn set');
-	}, []);
-
-	useOnce(() => {
-		// useOnce means this code will only run once isSignedIn is defined, and only
-		// run one time
-		if (isSignedIn) {
-			getUser(CAPI.config.discussionApiUrl)
-				.then((theUser) => {
-					if (theUser) {
-						setUser(theUser);
-						log('dotcom', 'State: user set');
-					}
-				})
-				.catch((e) => console.error(`getUser - error: ${e}`));
-		} else {
-			setUser(null);
-		}
-	}, [isSignedIn, CAPI.config.discussionApiUrl]);
-
-	useEffect(() => {
-		const callFetch = () => {
-			const countryCodePromise = getLocaleCode();
-			setAsyncCountryCode(countryCodePromise);
-			countryCodePromise
-				.then((cc) => {
-					setCountryCode(cc || '');
-					log('dotcom', 'State: countryCode set');
-				})
-				.catch((e) =>
-					console.error(`countryCodePromise - error: ${e}`),
-				);
-		};
-		callFetch();
-	}, []);
 
 	useEffect(() => {
 		incrementAlreadyVisited();
@@ -321,101 +177,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		}
 	}, [CAPI.shouldHideReaderRevenue]);
 
-	// kick off the CMP...
 	useOnce(() => {
-		if (!CAPI.config.switches.consentManagement) return; // CMP turned off!
-
-		// keep this in sync with CONSENT_TIMING in static/src/javascripts/boot.js in frontend
-		// mark: CONSENT_TIMING
-		cmp.willShowPrivacyMessage()
-			.then((willShow) => {
-				trackPerformance(
-					'consent',
-					'acquired',
-					willShow ? 'new' : 'existing',
-				);
-			})
-			.catch((e) =>
-				console.error(`CMP willShowPrivacyMessage - error: ${e}`),
-			);
-
-		// Run each time consent is submitted
-		onConsentChange((newConsent) => {
-			setConsentState(newConsent);
-			log('dotcom', 'State: consentState set');
-		});
-
-		// manually updates the footer DOM because it's not hydrated
-		injectPrivacySettingsLink();
-
-		// the UI is injected automatically into the page,
-		// and is not a react component, so it's
-		// handled in here.
-		cmp.init({
-			country: countryCode,
-			pubData: {
-				platform: 'next-gen',
-				browserId: browserId ?? undefined, // if `undefined`, the resulting consent signal cannot be joined to a page view.
-				pageViewId,
-			},
-		});
-		log('dotcom', 'CMP initialised');
-	}, [countryCode, pageViewId, browserId]);
-
-	// This code is executed at first render and then again each time consentState is set
-	useEffect(() => {
-		if (!consentState) return;
-		// Register changes in consent state
-		const decideConsentString = () => {
-			if (consentState.tcfv2) {
-				return consentState.tcfv2?.tcString;
-			}
-			return '';
-		};
-		const componentType: OphanComponentType = 'CONSENT';
-		const consentUUID = getCookie({ name: 'consentUUID' }) || '';
-		const consentString = decideConsentString();
-		const action: OphanAction = 'MANAGE_CONSENT'; // I am using MANAGE_CONSENT as the default action while we develop this code.
-		const event = {
-			component: {
-				componentType,
-				products: [],
-				labels: [consentUUID, consentString],
-			},
-			action,
-		};
-		submitComponentEvent(event);
-	}, [consentState]);
-
-	// ************************
-	// *   Google Analytics   *
-	// ************************
-	useEffect(() => {
-		onConsentChange((state: ConsentState) => {
-			const consentGiven = getConsentFor('google-analytics', state);
-			if (consentGiven) {
-				Promise.all([
-					loadScript('https://www.google-analytics.com/analytics.js'),
-					loadScript(window.guardian.gaPath),
-				])
-					.then(() => {
-						log('dotcom', 'GA script loaded');
-					})
-					.catch((e) => console.error(`GA - error: ${e}`));
-			} else {
-				// We should never be able to directly set things to the global window object.
-				// But in this case we want to stub things for testing, so it's ok to ignore this rule
-				// @ts-ignore
-				window.ga = null;
-			}
-		});
-	}, []);
-
-	useOnce(() => {
-		setBrazeMessages(
-			buildBrazeMessages(isSignedIn as boolean, CAPI.config.idApiUrl),
-		);
-	}, [isSignedIn, CAPI.config.idApiUrl]);
+		setBrazeMessages(buildBrazeMessages(CAPI.config.idApiUrl));
+	}, [CAPI.config.idApiUrl]);
 
 	const display: ArticleDisplay = decideDisplay(CAPI.format);
 	const design: ArticleDesign = decideDesign(CAPI.format);
@@ -447,34 +211,12 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.YoutubeBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/elements/YoutubeBlockComponent'
-				);
+				return import('@frontend/web/components/YoutubeBlockComponent');
 			}
 			return Promise.reject();
 		},
 		{
 			resolveComponent: (module) => module.YoutubeBlockComponent,
-		},
-	);
-
-	const RichLinkComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/RichLinkComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.RichLinkComponent,
 		},
 	);
 
@@ -488,7 +230,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/InteractiveBlockComponent'
+					'@frontend/web/components/InteractiveBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -508,7 +250,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/InteractiveContentsBlockComponent'
+					'@frontend/web/components/InteractiveContentsBlockComponent'
 				);
 			}
 			return Promise.reject();
@@ -528,9 +270,7 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.CalloutBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/elements/CalloutBlockComponent'
-				);
+				return import('@frontend/web/components/CalloutBlockComponent');
 			}
 			return Promise.reject();
 		},
@@ -549,53 +289,13 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/DocumentBlockComponent'
+					'@frontend/web/components/DocumentBlockComponent'
 				);
 			}
 			return Promise.reject();
 		},
 		{
 			resolveComponent: (module) => module.DocumentBlockComponent,
-		},
-	);
-
-	const MapEmbedBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.MapBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/MapEmbedBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.MapEmbedBlockComponent,
-		},
-	);
-
-	const SpotifyBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.SpotifyBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/SpotifyBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.SpotifyBlockComponent,
 		},
 	);
 
@@ -609,53 +309,13 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				).length > 0
 			) {
 				return import(
-					'@frontend/web/components/elements/VideoFacebookBlockComponent'
+					'@frontend/web/components/VideoFacebookBlockComponent'
 				);
 			}
 			return Promise.reject();
 		},
 		{
 			resolveComponent: (module) => module.VideoFacebookBlockComponent,
-		},
-	);
-
-	const VineBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.VineBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/VineBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.VineBlockComponent,
-		},
-	);
-
-	const InstagramBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.InstagramBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/elements/InstagramBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.InstagramBlockComponent,
 		},
 	);
 
@@ -712,29 +372,9 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.EmbedBlockElement',
 	);
-	const instas = elementsByType<InstagramBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.InstagramBlockElement',
-	);
-	const maps = elementsByType<MapBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.MapBlockElement',
-	);
-	const spotifies = elementsByType<SpotifyBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.SpotifyBlockElement',
-	);
 	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-	);
-	const vines = elementsByType<VineBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.VineBlockElement',
-	);
-	const richLinks = elementsByType<RichLinkBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.RichLinkBlockElement',
 	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
@@ -761,17 +401,11 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 			{[
 				CAPI.config.switches.commercialMetrics,
 				window.guardian.config?.ophan !== undefined,
-			].every(Boolean) && (
-				<CommercialMetrics
-					browserId={browserId ?? undefined}
-					pageViewId={pageViewId}
-				/>
-			)}
+			].every(Boolean) && <CommercialMetrics pageViewId={pageViewId} />}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
-					countryCode={countryCode}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
 					remoteHeaderEnabled={CAPI.config.remoteHeader}
@@ -780,20 +414,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			<HydrateOnce rootId="links-root" waitFor={[user]}>
-				<Links
-					supporterCTA={CAPI.nav.readerRevenueLinks.header.supporter}
-					userId={user ? user.userId : undefined}
-					idUrl={CAPI.config.idUrl}
-					mmaUrl={CAPI.config.mmaUrl}
-				/>
-			</HydrateOnce>
-			<HydrateOnce rootId="edition-root">
-				<EditionDropdown
-					edition={CAPI.editionId}
-					dataLinkName="nav2 : topbar : edition-picker: toggle"
-				/>
-			</HydrateOnce>
 			<HydrateOnce rootId="labs-header">
 				<LabsHeader />
 			</HydrateOnce>
@@ -802,21 +422,18 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					<ShareCount
 						ajaxUrl={CAPI.config.ajaxUrl}
 						pageId={CAPI.pageId}
+						format={format}
 					/>
 				</Portal>
 			)}
 			{youTubeAtoms.map((youTubeAtom) => (
-				<HydrateOnce
-					rootId={youTubeAtom.elementId}
-					waitFor={[consentState]}
-				>
+				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
 						format={format}
 						hideCaption={false}
 						// eslint-disable-next-line jsx-a11y/aria-role
 						role="inline"
 						adTargeting={adTargeting}
-						consentState={consentState}
 						isMainMedia={false}
 						id={youTubeAtom.id}
 						assetId={youTubeAtom.assetId}
@@ -882,17 +499,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				</HydrateOnce>
 			))}
 
-			{NAV.subNavSections && (
-				<HydrateOnce rootId="sub-nav-root">
-					<>
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							format={format}
-						/>
-					</>
-				</HydrateOnce>
-			)}
 			{CAPI.matchUrl && (
 				<Portal rootId="match-nav">
 					<GetMatchNav matchUrl={CAPI.matchUrl} />
@@ -913,24 +519,13 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 				Note. We specifically say isSignedIn === false so that we prevent render until the cookie has been
 				checked to avoid flashing this content
 			*/}
-			{!CAPI.shouldHideReaderRevenue &&
-				!CAPI.pageType.isPaidContent &&
-				isSignedIn === false && (
-					<WhenAdBlockInUse>
-						<Portal rootId="top-right-ad-slot">
-							<ContributionSlot />
-						</Portal>
-					</WhenAdBlockInUse>
-				)}
-			{richLinks.map((richLink, index) => (
-				<Portal rootId={richLink.elementId}>
-					<RichLinkComponent
-						element={richLink}
-						ajaxEndpoint={CAPI.config.ajaxUrl}
-						richLinkIndex={index}
-					/>
-				</Portal>
-			))}
+
+			<Portal rootId="top-right-ad-slot">
+				<ContributionSlot
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isPaidContent={CAPI.pageType.isPaidContent}
+				/>
+			</Portal>
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
 					<CalloutBlockComponent callout={callout} format={format} />
@@ -1117,66 +712,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					)}
 				</HydrateOnce>
 			))}
-			{instas.map((insta, index) => (
-				<HydrateOnce rootId={insta.elementId}>
-					<ClickToView
-						role={insta.role}
-						isTracking={insta.isThirdPartyTracking}
-						source={insta.source}
-						sourceDomain={insta.sourceDomain}
-						onAccept={() =>
-							updateIframeHeight(
-								`iframe[name="instagram-embed-${index}"]`,
-							)
-						}
-					>
-						<InstagramBlockComponent
-							element={insta}
-							index={index}
-						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
-			{maps.map((map) => (
-				<HydrateOnce rootId={map.elementId}>
-					<ClickToView
-						role={map.role}
-						isTracking={map.isThirdPartyTracking}
-						source={map.source}
-						sourceDomain={map.sourceDomain}
-					>
-						<MapEmbedBlockComponent
-							format={format}
-							embedUrl={map.embedUrl}
-							height={map.height}
-							width={map.width}
-							caption={map.caption}
-							credit={map.source}
-							title={map.title}
-						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
-			{spotifies.map((spotify) => (
-				<HydrateOnce rootId={spotify.elementId}>
-					<ClickToView
-						role={spotify.role}
-						isTracking={spotify.isThirdPartyTracking}
-						source={spotify.source}
-						sourceDomain={spotify.sourceDomain}
-					>
-						<SpotifyBlockComponent
-							embedUrl={spotify.embedUrl}
-							height={spotify.height}
-							width={spotify.width}
-							title={spotify.title}
-							format={format}
-							caption={spotify.caption}
-							credit="Spotify"
-						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
 			{facebookVideos.map((facebookVideo) => (
 				<HydrateOnce rootId={facebookVideo.elementId}>
 					<ClickToView
@@ -1197,42 +732,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			{vines.map((vine) => (
-				<HydrateOnce rootId={vine.elementId}>
-					<ClickToView
-						// No role given by CAPI
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						isTracking={vine.isThirdPartyTracking}
-						source={vine.source}
-						sourceDomain={vine.sourceDomain}
-					>
-						<VineBlockComponent element={vine} />
-					</ClickToView>
-				</HydrateOnce>
-			))}
-			<Portal rootId="most-viewed-right">
-				<Lazy margin={100}>
-					<Suspense fallback={<></>}>
-						<MostViewedRightWrapper
-							isAdFreeUser={CAPI.isAdFreeUser}
-						/>
-					</Suspense>
-				</Lazy>
-			</Portal>
-			{CAPI.matchUrl && (
-				<Portal rootId="match-stats">
-					<Lazy margin={300}>
-						<Suspense fallback={<Placeholder height={800} />}>
-							<GetMatchStats matchUrl={CAPI.matchUrl} />
-						</Suspense>
-					</Lazy>
-				</Portal>
-			)}
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
-					isSignedIn={isSignedIn}
-					countryCode={countryCode}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
 					sectionId={CAPI.config.section}
@@ -1245,58 +746,10 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
 					asyncArticleCount={asyncArticleCount}
-					browserId={browserId || undefined}
 				/>
-			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-upper-whensignedin'
-						: 'onwards-upper-whensignedout'
-				}
-			>
-				<Lazy margin={300}>
-					<Suspense fallback={<></>}>
-						<OnwardsUpper
-							ajaxUrl={CAPI.config.ajaxUrl}
-							hasRelated={CAPI.hasRelated}
-							hasStoryPackage={CAPI.hasStoryPackage}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							pageId={CAPI.pageId}
-							isPaidContent={CAPI.config.isPaidContent || false}
-							showRelatedContent={CAPI.config.showRelatedContent}
-							keywordIds={CAPI.config.keywordIds}
-							contentType={CAPI.contentType}
-							tags={CAPI.tags}
-							format={format}
-							pillar={pillar}
-							edition={CAPI.editionId}
-							shortUrlId={CAPI.config.shortUrlId}
-						/>
-					</Suspense>
-				</Lazy>
-			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-lower-whensignedin'
-						: 'onwards-lower-whensignedout'
-				}
-			>
-				<Lazy margin={300}>
-					<Suspense fallback={<></>}>
-						<OnwardsLower
-							ajaxUrl={CAPI.config.ajaxUrl}
-							hasStoryPackage={CAPI.hasStoryPackage}
-							tags={CAPI.tags}
-							format={format}
-						/>
-					</Suspense>
-				</Lazy>
 			</Portal>
 			<Portal rootId="sign-in-gate">
 				<SignInGateSelector
-					isSignedIn={isSignedIn}
 					format={format}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
@@ -1309,23 +762,6 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					pageViewId={pageViewId}
 				/>
 			</Portal>
-			<HydrateOnce rootId="comments" waitFor={[user]}>
-				<Discussion
-					format={format}
-					discussionApiUrl={CAPI.config.discussionApiUrl}
-					shortUrlId={CAPI.config.shortUrlId}
-					isCommentable={CAPI.isCommentable}
-					user={user || undefined}
-					discussionD2Uid={CAPI.config.discussionD2Uid}
-					discussionApiClientHeader={
-						CAPI.config.discussionApiClientHeader
-					}
-					enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
-					isAdFreeUser={CAPI.isAdFreeUser}
-					shouldHideAds={CAPI.shouldHideAds}
-					beingHydrated={true}
-				/>
-			</HydrateOnce>
 			<Portal rootId="most-viewed-footer">
 				<MostViewedFooter
 					format={format}
@@ -1333,25 +769,8 @@ export const App = ({ CAPI, NAV, ophanRecord }: Props) => {
 					ajaxUrl={CAPI.config.ajaxUrl}
 				/>
 			</Portal>
-			<Portal rootId="reader-revenue-links-footer">
-				<Lazy margin={300}>
-					<ReaderRevenueLinks
-						urls={CAPI.nav.readerRevenueLinks.footer}
-						edition={CAPI.editionId}
-						countryCode={countryCode}
-						dataLinkNamePrefix="footer : "
-						inHeader={false}
-						remoteHeaderEnabled={false}
-						pageViewId={pageViewId}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
-						ophanRecord={ophanRecord}
-					/>
-				</Lazy>
-			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
-					isSignedIn={isSignedIn}
-					asyncCountryCode={asyncCountryCode}
 					brazeMessages={brazeMessages}
 					asyncArticleCount={asyncArticleCount}
 					contentType={CAPI.contentType}

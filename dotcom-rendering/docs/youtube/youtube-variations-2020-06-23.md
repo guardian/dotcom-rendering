@@ -8,19 +8,19 @@ YouTube embed code (an iframe basically)
 
 ### Composer
 
-![Embed Composer Screenshot](./youtubeimages/embedcomposerscreenshot.png)
+![Embed Composer Screenshot](./youtubeimages-2020/embedcomposerscreenshot.png)
 
 ### Frontend
 
-![Frontend Screenshot](./youtubeimages/embedscreenshot.png)
+![Frontend Screenshot](./youtubeimages-2020/embedscreenshot.png)
 
 ### CAPI
 
-![Embed CAPI Json](./youtubeimages/embedcapijson.png)
+![Embed CAPI Json](./youtubeimages-2020/embedcapijson.png)
 
 ### DCR Json
 
-![Embed DCR Json](./youtubeimages/embeddcrjson.png)
+![Embed DCR Json](./youtubeimages-2020/embeddcrjson.png)
 
 ## The 'Structured Data Embed'
 
@@ -28,15 +28,15 @@ Pasted into composer via a YouTube URL, Composer converts it to structured data 
 
 ### Composer
 
-![Structured Data Embed Composer Screenshot](./youtubeimages/structureddataembedcomposer.png)
+![Structured Data Embed Composer Screenshot](./youtubeimages-2020/structureddataembedcomposer.png)
 
 ### Frontend
 
-![Frontend Screenshot](./youtubeimages/structuredataembedscreenshot.png)
+![Frontend Screenshot](./youtubeimages-2020/structuredataembedscreenshot.png)
 
 ### CAPI
 
-![Structured Data  Embed CAPI Json](./youtubeimages/structureddataembedcapijson.png)
+![Structured Data  Embed CAPI Json](./youtubeimages-2020/structureddataembedcapijson.png)
 
 ### DCR Json
 
@@ -48,16 +48,16 @@ Using [Media Atom maker tool](https://video.gutools.co.uk/), embedded into compo
 
 ### Composer
 
-![Media Atom Composer Screenshot](./youtubeimages/mediaatomcomposerscreenshot.png)
+![Media Atom Composer Screenshot](./youtubeimages-2020/mediaatomcomposerscreenshot.png)
 
 ### Frontend
 
-![Frontend Screenshot](./youtubeimages/mediaatomscreenshot.png)
+![Frontend Screenshot](./youtubeimages-2020/mediaatomscreenshot.png)
 
 ### CAPI
 
-![Media Atom CAPI Json](./youtubeimages/mediaatomcapijson.png)
+![Media Atom CAPI Json](./youtubeimages-2020/mediaatomcapijson.png)
 
 ### DCR Json
 
-![Media Atom CAPI Json](./youtubeimages/mediaatomdcrjson.png)
+![Media Atom CAPI Json](./youtubeimages-2020/mediaatomdcrjson.png)

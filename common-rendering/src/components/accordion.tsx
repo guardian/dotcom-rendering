@@ -38,12 +38,11 @@ const detailsStyles: SerializedStyles = css`
 
 const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	position: relative;
-	display: flex;
-	justify-content: space-between;
+	display: block;
 	align-items: center;
 	border-top: ${line.primary} 1px solid;
 	background-color: ${background.primary};
-	padding: ${remSpace[1]} ${remSpace[2]} 0 ${remSpace[3]};
+	padding: ${remSpace[2]} ${remSpace[2]} ${remSpace[2]} ${remSpace[3]};
 	&:focus {
 		${focusHalo};
 	}
@@ -60,8 +59,8 @@ const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		background-color: ${neutral[10]};
 		border-top: ${neutral[20]} 1px solid;
 	`}
-	${from.mobileLandscape} {
-		padding: ${remSpace[1]} ${remSpace[4]} 0 ${remSpace[5]};
+	${from.phablet} {
+		padding: ${remSpace[2]} ${remSpace[4]} ${remSpace[2]} ${remSpace[5]};
 	}
 	${from.desktop} {
 		display: none;
@@ -74,6 +73,16 @@ const titleStyle = (supportsDarkMode: boolean): SerializedStyles => css`
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[86]};
 	`}
+`;
+
+const arrowPosition: SerializedStyles = css`
+	position: absolute;
+	right: ${remSpace[1]};
+	top: ${remSpace[1]};
+
+	${from.phablet} {
+		right: ${remSpace[4]};
+	}
 `;
 
 const backgroundColour = (
@@ -122,10 +131,10 @@ const Accordion = ({
 		<details open css={detailsStyles}>
 			<summary css={titleRowStyles(supportsDarkMode)}>
 				<h2 css={titleStyle(supportsDarkMode)}>{accordionTitle}</h2>
-				<span className="is-off">
+				<span className="is-off" css={arrowPosition}>
 					<SvgChevronDownSingle />
 				</span>
-				<span className="is-on">
+				<span className="is-on" css={arrowPosition}>
 					<SvgChevronUpSingle />
 				</span>
 			</summary>

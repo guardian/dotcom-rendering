@@ -90,7 +90,10 @@ export const VideoAsSecond = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -99,6 +102,7 @@ export const VideoAsSecond = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -131,7 +135,10 @@ export const Title = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -140,6 +147,7 @@ export const Title = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -193,7 +201,10 @@ export const Video = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -202,6 +213,7 @@ export const Video = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -230,7 +242,10 @@ export const RichLink = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -239,6 +254,7 @@ export const RichLink = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -258,7 +274,10 @@ export const FirstImage = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -267,6 +286,7 @@ export const FirstImage = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -287,7 +307,10 @@ export const ImaheAndTitle = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -296,6 +319,7 @@ export const ImaheAndTitle = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);
@@ -312,7 +336,10 @@ export const Updated = () => {
 	return (
 		<Wrapper>
 			<LiveBlock
-				adTargeting={{ adUnit: '', customParams: {} }}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.LiveBlog,
@@ -321,6 +348,7 @@ export const Updated = () => {
 				block={block}
 				pageId=""
 				webTitle=""
+				ajaxUrl=""
 			/>
 		</Wrapper>
 	);

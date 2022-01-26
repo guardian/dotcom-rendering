@@ -29,14 +29,14 @@ import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadline
 import { Standfirst } from '@root/src/web/components/Standfirst';
 import { Header } from '@root/src/web/components/Header';
 import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav/SubNav';
+import { SubNav } from '@root/src/web/components/SubNav.importable';
 import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@frontend/web/components/Discussion';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
@@ -52,6 +52,9 @@ import {
 	interactiveGlobalStyles,
 	interactiveLegacyClasses,
 } from './lib/interactiveLegacyStyling';
+import { Island } from '../components/Island';
+import { OnwardsLower } from '../components/OnwardsLower.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -296,6 +299,10 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								supporterCTA={
+									CAPI.nav.readerRevenueLinks.header.supporter
+								}
+								discussionApiUrl={CAPI.config.discussionApiUrl}
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
 								}
@@ -329,14 +336,15 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<ElementContainer
 						backgroundColour={palette.background.article}
 						padded={false}
-						sectionId="sub-nav-root"
 						element="aside"
 					>
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							format={format}
-						/>
+						<Island deferUntil="idle">
+							<SubNav
+								subNavSections={NAV.subNavSections}
+								currentNavLink={NAV.currentNavLink}
+								format={format}
+							/>
+						</Island>
 					</ElementContainer>
 				)}
 
@@ -459,6 +467,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										host={host}
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
+										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
 								</div>
 							</GridItem>
@@ -493,6 +502,11 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										secondaryDateline={
 											CAPI.webPublicationSecondaryDateDisplay
 										}
+										isCommentable={CAPI.isCommentable}
+										discussionApiUrl={
+											CAPI.config.discussionApiUrl
+										}
+										shortUrlId={CAPI.config.shortUrlId}
 									/>
 								</div>
 							</GridItem>
@@ -506,6 +520,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										host={host}
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
+										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
 
 									{/* <Lines data-print-layout="hide" count={4} /> */}
@@ -553,53 +568,64 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
-				<aside
-					data-print-layout="hide"
-					id="onwards-upper-whensignedout"
-				/>
+				<Island clientOnly={true} deferUntil="visible">
+					<OnwardsUpper
+						ajaxUrl={CAPI.config.ajaxUrl}
+						hasRelated={CAPI.hasRelated}
+						hasStoryPackage={CAPI.hasStoryPackage}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						pageId={CAPI.pageId}
+						isPaidContent={CAPI.config.isPaidContent || false}
+						showRelatedContent={CAPI.config.showRelatedContent}
+						keywordIds={CAPI.config.keywordIds}
+						contentType={CAPI.contentType}
+						tags={CAPI.tags}
+						format={format}
+						pillar={format.theme}
+						edition={CAPI.editionId}
+						shortUrlId={CAPI.config.shortUrlId}
+					/>
+				</Island>
+
 				{showOnwardsLower && (
 					<ElementContainer
-						data-print-layout="hide"
-						sectionId="onwards-lower-whensignedout"
-						element="aside"
-					/>
+						sectionId="onwards-lower"
+						element="section"
+					>
+						<Island clientOnly={true} deferUntil="visible">
+							<OnwardsLower
+								ajaxUrl={CAPI.config.ajaxUrl}
+								hasStoryPackage={CAPI.hasStoryPackage}
+								tags={CAPI.tags}
+								format={format}
+							/>
+						</Island>
+					</ElementContainer>
 				)}
 
 				{!isPaidContent && showComments && (
 					<ElementContainer
-						data-print-layout="hide"
 						sectionId="comments"
+						data-print-layout="hide"
 						element="section"
 					>
-						<Discussion
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							shortUrlId={CAPI.config.shortUrlId}
-							isCommentable={CAPI.isCommentable}
-							format={format}
-							discussionD2Uid={CAPI.config.discussionD2Uid}
-							discussionApiClientHeader={
-								CAPI.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={false}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							beingHydrated={false}
-						/>
+						<Island clientOnly={true} deferUntil="visible">
+							<DiscussionContainer
+								discussionApiUrl={CAPI.config.discussionApiUrl}
+								shortUrlId={CAPI.config.shortUrlId}
+								format={format}
+								discussionD2Uid={CAPI.config.discussionD2Uid}
+								discussionApiClientHeader={
+									CAPI.config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									CAPI.config.switches.enableDiscussionSwitch
+								}
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+							/>
+						</Island>
 					</ElementContainer>
-				)}
-
-				{/* Onwards (when signed IN) */}
-				<aside
-					data-print-layout="hide"
-					id="onwards-upper-whensignedin"
-				/>
-				{showOnwardsLower && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="onwards-lower-whensignedin"
-						element="aside"
-					/>
 				)}
 
 				{!isPaidContent && (
@@ -626,14 +652,15 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				<ElementContainer
 					data-print-layout="hide"
 					padded={false}
-					sectionId="sub-nav-root"
-					element="nav"
+					element="aside"
 				>
-					<SubNav
-						subNavSections={NAV.subNavSections}
-						currentNavLink={NAV.currentNavLink}
-						format={format}
-					/>
+					<Island deferUntil="visible">
+						<SubNav
+							subNavSections={NAV.subNavSections}
+							currentNavLink={NAV.currentNavLink}
+							format={format}
+						/>
+					</Island>
 				</ElementContainer>
 			)}
 
