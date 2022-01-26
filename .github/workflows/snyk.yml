@@ -1,4 +1,4 @@
-# This action runs every day at 6 AM and on every push
+# This action runs every day at 6 AM, on every push not from dependabot, and every pull_request from dependabot
 # If the branch it's running on is main then it will run snyk monitor (reports vulnerabilities to snyk.io)
 # Otherwise it will run snyk test
 name: DCR Snyk
@@ -6,9 +6,17 @@ name: DCR Snyk
 on:
     schedule:
         - cron: '0 6 * * *'
-    push:
+    push: 
         paths-ignore:
             - "apps-rendering/**"
+        # @dependabot push events have readon-only access and CodeQL needs write access
+        # see: https://github.com/guardian/dotcom-rendering/pull/3883
+        branches-ignore:
+            - "dependabot/**"
+    pull_request:
+        # @dependabot pull_request actions have write access for CodeQL to run
+        branches:
+            - "dependabot/**"
     workflow_dispatch:
 
 jobs:
