@@ -32,33 +32,31 @@ export const VineBlockComponent = ({
 			source={source}
 			sourceDomain={sourceDomain}
 		>
-			<>
-				{element.url && element.width && element.height && (
-					<div>
-						<div css={titleStyle}>
-							<p>{element.title}</p>
-						</div>
-
-						<MaintainAspectRatio
-							height={element.height}
-							width={element.width}
-						>
-							<div css="element-vine">
-								<iframe
-									title="vine-embed"
-									src={element.url}
-									height={element.height}
-									width={element.width}
-								/>
-								<script
-									async={true}
-									src="https://platform.vine.co/static/scripts/embed.js"
-								/>
-							</div>
-						</MaintainAspectRatio>
+			{element.url && element.width && element.height && (
+				<div>
+					<div css={titleStyle}>
+						<p>{element.title}</p>
 					</div>
-				)}
-			</>
+
+					<MaintainAspectRatio
+						height={element.height}
+						width={element.width}
+					>
+						<div css="element-vine">
+							<iframe
+								title="vine-embed"
+								src={element.url}
+								height={element.height}
+								width={element.width}
+							/>
+							<script
+								async={true}
+								src="https://platform.vine.co/static/scripts/embed.js"
+							/>
+						</div>
+					</MaintainAspectRatio>
+				</div>
+			)}
 		</ClickToView>
 	);
 };
