@@ -1,8 +1,8 @@
 import express from 'express';
 import { extractNAV } from '@root/src/model/extract-nav';
 import { document } from '@root/src/web/server/document';
-import { enhanceBlocks } from 'src/model/enhanceBlocks';
-import { enhanceStandfirst } from 'src/model/enhanceStandfirst';
+import { enhanceBlocks } from '@root/src/model/enhanceBlocks';
+import { enhanceStandfirst } from '@root/src/model/enhanceStandfirst';
 import { validateAsCAPIType } from '@root/src/model/validate';
 import { extract as extractGA } from '@root/src/model/extract-ga';
 import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
