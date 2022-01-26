@@ -75,4 +75,4 @@ const DefaultInLiveblog = () => {
 		/>
 	);
 };
-DefaultInLiveblog.story = {name: "when placed in a liveblog"};
+DefaultInLiveblog.story = { name: 'when placed in a liveblog' };
