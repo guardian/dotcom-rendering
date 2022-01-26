@@ -146,23 +146,6 @@ if (process.env.NODE_ENV === 'production') {
 		},
 	);
 
-	app.get('/Blocks', logRenderTime, async (req: Request, res: Response) => {
-		// Eg. http://localhost:9000/Blocks?url=https://api.ne....json?lastUpdate=block-61f14b5b8f086...
-		try {
-			const url = `${req}&dcr`;
-			const { blocks, format } = await fetch(url).then((article) =>
-				article.json(),
-			);
-			// TODO: `blocks` above is always empty if you add the `?dcr` flag
-
-			req.body = { blocks, format };
-			return renderBlocks(req, res);
-		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.error(error);
-		}
-	});
-
 	app.use('/ArticlePerfTest', renderArticlePerfTest);
 	app.use('/AMPArticlePerfTest', renderAMPArticlePerfTest);
 	app.use('/ArticleJson', renderArticleJson);
