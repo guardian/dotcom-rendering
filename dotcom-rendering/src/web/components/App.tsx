@@ -325,26 +325,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const MapEmbedBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.MapBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/MapEmbedBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.MapEmbedBlockComponent,
-		},
-	);
-
 	const VideoFacebookBlockComponent = loadable(
 		() => {
 			if (
@@ -435,10 +415,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const embeds = elementsByType<EmbedBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.EmbedBlockElement',
-	);
-	const maps = elementsByType<MapBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.MapBlockElement',
 	);
 	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
 		CAPI.elementsToHydrate,
@@ -782,26 +758,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 							/>
 						</ClickToView>
 					)}
-				</HydrateOnce>
-			))}
-			{maps.map((map) => (
-				<HydrateOnce rootId={map.elementId}>
-					<ClickToView
-						role={map.role}
-						isTracking={map.isThirdPartyTracking}
-						source={map.source}
-						sourceDomain={map.sourceDomain}
-					>
-						<MapEmbedBlockComponent
-							format={format}
-							embedUrl={map.embedUrl}
-							height={map.height}
-							width={map.width}
-							caption={map.caption}
-							credit={map.source}
-							title={map.title}
-						/>
-					</ClickToView>
 				</HydrateOnce>
 			))}
 			{facebookVideos.map((facebookVideo) => (
