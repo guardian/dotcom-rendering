@@ -1,6 +1,5 @@
 import express from 'express';
 import { extractNAV } from '@root/src/model/extract-nav';
-
 import { document } from '@root/src/web/server/document';
 import { enhanceBlocks } from 'src/model/enhanceBlocks';
 import { enhanceStandfirst } from 'src/model/enhanceStandfirst';
@@ -13,7 +12,12 @@ export const renderArticle = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = enhanceCAPI(body);
+		const data = validateAsCAPIType(body);
+		const CAPI = {
+			...body,
+			blocks: enhanceBlocks(data.blocks, data.format),
+			standfirst: enhanceStandfirst(data.standfirst),
+		} as CAPIType;
 		const resp = document({
 			data: {
 				CAPI,
@@ -43,7 +47,7 @@ export const renderArticleJson = (
 			...body,
 			blocks: enhanceBlocks(data.blocks, data.format),
 			standfirst: enhanceStandfirst(data.standfirst),
-		};
+		} as CAPIType;
 		const resp = {
 			data: {
 				CAPI,
@@ -76,7 +80,13 @@ export const renderInteractive = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = enhanceCAPI(body);
+		const data = validateAsCAPIType(body);
+		const CAPI = {
+			...body,
+			blocks: enhanceBlocks(data.blocks, data.format),
+			standfirst: enhanceStandfirst(data.standfirst),
+		} as CAPIType;
+
 		const resp = document({
 			data: {
 				CAPI,
