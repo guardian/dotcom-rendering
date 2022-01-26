@@ -1,5 +1,4 @@
 import { JSDOM } from 'jsdom';
-import { enhanceBlocks } from './enhanceBlocks';
 
 const isFalseH3 = (element: CAPIElement): boolean => {
 	if (!element) return false;
