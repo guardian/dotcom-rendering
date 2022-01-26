@@ -1,11 +1,4 @@
-// Current fix for incorrect use of Middot
-
-export const transformDots = (html: string): string => {
-	return html.replace(
-		new RegExp('[•]', 'g'),
-		'<span data-dcr-style="bullet"></span>',
-	);
-};
+import { transformDots } from './transforDots';
 
 const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 	// Loop over elements and check if a dot is in the TextBlockElement

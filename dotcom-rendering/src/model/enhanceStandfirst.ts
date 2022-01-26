@@ -1,3 +1,3 @@
-import { transformDots } from '@root/src/model/add-dots';
+import { transformDots } from './transforDots';
 
 export const enhanceStandfirst = (html: string): string => transformDots(html);
