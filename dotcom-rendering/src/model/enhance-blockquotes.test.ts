@@ -17,10 +17,10 @@ const formatIsPhotoEssay: CAPIFormat = {
 describe('Enhancing blockquotes', () => {
 	it('creates an identical but new object when no changes are needed', () => {
 		expect(enhanceBlockquotes(example.blocks, example.format)).not.toBe(
-			example,
+			example.blocks,
 		); // We created a new object
 		expect(enhanceBlockquotes(example.blocks, example.format)).toEqual(
-			example,
+			example.blocks,
 		); // The new object is what we expect
 	});
 

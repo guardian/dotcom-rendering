@@ -10,8 +10,8 @@ const metaData = {
 
 describe('Enhance Embeds', () => {
 	it('creates an identical but new object when no changes are needed', () => {
-		expect(enhanceEmbeds(example.blocks)).not.toBe(example); // We created a new object
-		expect(enhanceEmbeds(example.blocks)).toEqual(example); // The new object is what we expect
+		expect(enhanceEmbeds(example.blocks)).not.toBe(example.blocks); // We created a new object
+		expect(enhanceEmbeds(example.blocks)).toEqual(example.blocks); // The new object is what we expect
 	});
 
 	it('sets the divider flag correctly', () => {
