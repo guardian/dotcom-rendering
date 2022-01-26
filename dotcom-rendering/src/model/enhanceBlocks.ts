@@ -5,7 +5,6 @@ import { enhanceInteractiveContentsElements } from '@root/src/model/enhance-inte
 import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';
 import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
 import { enhanceEmbeds } from '@root/src/model/enhance-embeds';
-import { enhancePlaceholders } from '@root/src/model/enhance-placeholders';
 
 class BlockEnhancer {
 	blocks: Block[];
@@ -51,11 +50,6 @@ class BlockEnhancer {
 		this.blocks = enhanceEmbeds(this.blocks);
 		return this;
 	}
-
-	enhancePlaceholders() {
-		this.blocks = enhancePlaceholders(this.blocks, this.format);
-		return this;
-	}
 }
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
@@ -69,6 +63,5 @@ export const enhanceBlocks = (blocks: Block[], format: CAPIFormat): Block[] => {
 		.enhanceDots()
 		.enhanceImages()
 		.enhanceNumberedLists()
-		.enhancePlaceholders()
 		.enhanceEmbeds().blocks;
 };
