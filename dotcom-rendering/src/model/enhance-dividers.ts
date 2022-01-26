@@ -53,7 +53,7 @@ const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
 	return enhanced;
 };
 
-export const addDividers = (blocks: Block[]): Block[] =>
+export const enhanceDividers = (blocks: Block[]): Block[] =>
 	blocks.map((block: Block) => {
 		return {
 			...block,

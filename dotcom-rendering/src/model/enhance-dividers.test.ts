@@ -1,5 +1,5 @@
 import { Article } from '@root/fixtures/generated/articles/Article';
-import { addDividers } from './add-dividers';
+import { enhanceDividers } from './enhance-dividers';
 
 const example = Article;
 
@@ -11,8 +11,8 @@ const blockMetaData = {
 
 describe('Dividers and Drop Caps', () => {
 	it('creates an identical but new object when no changes are needed', () => {
-		expect(addDividers(example.blocks)).not.toBe(example.blocks); // We created a new object
-		expect(addDividers(example.blocks)).toEqual(example.blocks); // The new object is what we expect
+		expect(enhanceDividers(example.blocks)).not.toBe(example.blocks); // We created a new object
+		expect(enhanceDividers(example.blocks)).toEqual(example.blocks); // The new object is what we expect
 	});
 
 	it('sets the divider flag correctly', () => {
@@ -71,7 +71,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 		];
 
-		expect(addDividers(input)).toEqual(expectedOutput);
+		expect(enhanceDividers(input)).toEqual(expectedOutput);
 	});
 
 	it('handles dot dinkuses as text elements', () => {
@@ -120,7 +120,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 		];
 
-		expect(addDividers(input)).toEqual(expectedOutput);
+		expect(enhanceDividers(input)).toEqual(expectedOutput);
 	});
 
 	it('handles when there are no spaces in the dinkus', () => {
@@ -169,7 +169,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 		];
 
-		expect(addDividers(input)).toEqual(expectedOutput);
+		expect(enhanceDividers(input)).toEqual(expectedOutput);
 	});
 
 	it('handles divider flags wrapped in h2 tags', () => {
@@ -228,7 +228,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 		];
 
-		expect(addDividers(input)).toEqual(expectedOutput);
+		expect(enhanceDividers(input)).toEqual(expectedOutput);
 	});
 
 	it('handles multiple divider flags', () => {
@@ -306,7 +306,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 		];
 
-		expect(addDividers(input)).toEqual(expectedOutput);
+		expect(enhanceDividers(input)).toEqual(expectedOutput);
 	});
 
 	it('handles divider flags being put before elements that are not text', () => {
@@ -370,7 +370,7 @@ describe('Dividers and Drop Caps', () => {
 			},
 		];
 
-		expect(addDividers(input)).toEqual(expectedOutput);
+		expect(enhanceDividers(input)).toEqual(expectedOutput);
 	});
 
 	it('handles multiple divider flags in sequence', () => {
@@ -445,6 +445,6 @@ describe('Dividers and Drop Caps', () => {
 			},
 		];
 
-		expect(addDividers(input)).toEqual(expectedOutput);
+		expect(enhanceDividers(input)).toEqual(expectedOutput);
 	});
 });

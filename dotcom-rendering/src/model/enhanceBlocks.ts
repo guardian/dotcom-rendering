@@ -1,4 +1,4 @@
-import { addDividers } from '@root/src/model/add-dividers';
+import { enhanceDividers } from '@root/src/model/enhance-dividers';
 import { enhanceDots } from '@root/src/model/add-dots';
 import { enhanceImages } from '@root/src/model/enhance-images';
 import { enhanceInteractiveContentsElements } from '@root/src/model/enhance-interactive-contents-elements';
@@ -16,8 +16,8 @@ class BlockEnhancer {
 		this.format = format;
 	}
 
-	addDividers() {
-		this.blocks = addDividers(this.blocks);
+	enhanceDividers() {
+		this.blocks = enhanceDividers(this.blocks);
 		return this;
 	}
 
@@ -57,7 +57,7 @@ class BlockEnhancer {
 // as they both effect SubheadingBlockElement
 export const enhanceBlocks = (blocks: Block[], format: CAPIFormat): Block[] => {
 	return new BlockEnhancer(blocks, format)
-		.addDividers()
+		.enhanceDividers()
 		.enhanceInteractiveContentsElements()
 		.enhanceBlockquotes()
 		.enhanceDots()
