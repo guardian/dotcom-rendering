@@ -30,7 +30,7 @@ import { TextBlockComponent } from '@root/src/web/components/TextBlockComponent'
 import { TweetBlockComponent } from '@root/src/web/components/TweetBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/VideoFacebookBlockComponent';
 import { VimeoBlockComponent } from '@root/src/web/components/VimeoBlockComponent';
-import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent';
+import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/YoutubeBlockComponent';
 import {
@@ -628,16 +628,17 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
 			return [
 				true,
-				<ClickToView
-					// No role given by CAPI
-					// eslint-disable-next-line jsx-a11y/aria-role
-					role="inline"
-					isTracking={element.isThirdPartyTracking}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
-					<VineBlockComponent element={element} />
-				</ClickToView>,
+				<Island deferUntil="visible">
+					<VineBlockComponent
+						element={element}
+						// No role given by CAPI
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.WitnessBlockElement': {
 			const witnessType = element.witnessTypeData._type;

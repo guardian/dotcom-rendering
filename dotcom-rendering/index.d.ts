@@ -860,10 +860,6 @@ interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'VideoFacebookBlockComponent';
 	addWhen: VideoFacebookBlockElement['_type'];
 }
-interface VineBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'VineBlockComponent';
-	addWhen: VineBlockElement['_type'];
-}
 
 // There are docs on loadable in ./docs/loadable-components.md
 type LoadableComponents = [
@@ -873,7 +869,6 @@ type LoadableComponents = [
 	CalloutBlockLoadable,
 	DocumentBlockLoadable,
 	FacebookVideoBlockLoadable,
-	VineBlockLoadable,
 ];
 
 interface CarouselImagesMap {
