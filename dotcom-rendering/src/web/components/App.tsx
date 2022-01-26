@@ -345,24 +345,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const VineBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.VineBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/VineBlockComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.VineBlockComponent,
-		},
-	);
-
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
@@ -419,10 +401,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-	);
-	const vines = elementsByType<VineBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.VineBlockElement',
 	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
@@ -777,20 +755,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 							credit={facebookVideo.caption}
 							title={facebookVideo.caption}
 						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
-			{vines.map((vine) => (
-				<HydrateOnce rootId={vine.elementId}>
-					<ClickToView
-						// No role given by CAPI
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						isTracking={vine.isThirdPartyTracking}
-						source={vine.source}
-						sourceDomain={vine.sourceDomain}
-					>
-						<VineBlockComponent element={vine} />
 					</ClickToView>
 				</HydrateOnce>
 			))}

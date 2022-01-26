@@ -18,6 +18,7 @@ import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
 import { TweetBlockComponent } from './TweetBlockComponent';
 import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
 import { MapEmbedBlockComponent } from './MapEmbedBlockComponent.importable';
+import { VineBlockComponent } from './VineBlockComponent.importable';
 
 import { ClickToView } from './ClickToView';
 
@@ -445,6 +446,19 @@ const mapEmbedEmbed: MapBlockElement = {
 	caption: 'Google Maps',
 	source: 'Google',
 	sourceDomain: 'google.com',
+	isThirdPartyTracking: false,
+};
+
+const vineEmbedEmbed: VineBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.VineBlockElement',
+	elementId: 'mockId',
+	url: 'https://vine.co/v/MIH3hdTKujE/embed/simple',
+	originalUrl: 'https://vine.co/v/MIH3hdTKujE',
+	title: 'Joe Hart Wants The Ball',
+	height: 600,
+	width: 600,
+	source: 'Vine',
+	sourceDomain: 'vine.co',
 	isThirdPartyTracking: false,
 };
 
@@ -1128,4 +1142,48 @@ export const MapBlockComponentStory = () => {
 };
 MapBlockComponentStory.story = {
 	name: 'Click to view wrapping MapEmbedBlockComponent',
+};
+export const VineBlockComponentStory = () => {
+	return (
+		<ContainerLayout
+			sideBorders={true}
+			title="Embedded Content"
+			centralBorder="full"
+		>
+			<div
+				css={css`
+					max-width: 620px;
+					clear: left;
+					strong {
+						font-weight: bold;
+					}
+				`}
+			>
+				<p css={paragraphStyle}>
+					Example of a vine embed, the embed source article is{' '}
+					<a href="https://www.theguardian.com/football/2020/feb/13/ballboys-and-ballgirls-football-good-bad-bizarre-memorable-moments">
+						here
+					</a>
+				</p>
+				<Figure isMainMedia={false} role="inline">
+					<ClickToView
+						isTracking={true}
+						source={vineEmbedEmbed.source}
+						sourceDomain={vineEmbedEmbed.sourceDomain}
+						role="inline"
+					>
+						<VineBlockComponent
+							element={vineEmbedEmbed}
+							role="inline"
+							isTracking={false}
+						/>
+					</ClickToView>
+				</Figure>
+				<p css={paragraphStyle}>The end.</p>
+			</div>
+		</ContainerLayout>
+	);
+};
+VineBlockComponentStory.story = {
+	name: 'Click to view wrapping VineBlockComponent',
 };
