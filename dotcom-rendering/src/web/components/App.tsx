@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
@@ -32,12 +32,10 @@ import {
 	HydrateOnce,
 	HydrateInteractiveOnce,
 } from '@frontend/web/components/HydrateOnce';
-import { Lazy } from '@frontend/web/components/Lazy';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
-import { initPerf } from '@root/src/web/browser/initPerf';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
@@ -66,30 +64,6 @@ import {
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
-
-// *******************************
-// ****** Dynamic imports ********
-// *******************************
-const OnwardsUpper = React.lazy(() => {
-	const { start, end } = initPerf('OnwardsUpper');
-	start();
-	return import(
-		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/OnwardsUpper'
-	).then((module) => {
-		end();
-		return { default: module.OnwardsUpper };
-	});
-});
-const OnwardsLower = React.lazy(() => {
-	const { start, end } = initPerf('OnwardsLower');
-	start();
-	return import(
-		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/OnwardsLower'
-	).then((module) => {
-		end();
-		return { default: module.OnwardsLower };
-	});
-});
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -809,40 +783,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					stage={CAPI.stage}
 					asyncArticleCount={asyncArticleCount}
 				/>
-			</Portal>
-			<Portal rootId="onwards-upper">
-				<Lazy margin={300}>
-					<Suspense fallback={<></>}>
-						<OnwardsUpper
-							ajaxUrl={CAPI.config.ajaxUrl}
-							hasRelated={CAPI.hasRelated}
-							hasStoryPackage={CAPI.hasStoryPackage}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							pageId={CAPI.pageId}
-							isPaidContent={CAPI.config.isPaidContent || false}
-							showRelatedContent={CAPI.config.showRelatedContent}
-							keywordIds={CAPI.config.keywordIds}
-							contentType={CAPI.contentType}
-							tags={CAPI.tags}
-							format={format}
-							pillar={pillar}
-							edition={CAPI.editionId}
-							shortUrlId={CAPI.config.shortUrlId}
-						/>
-					</Suspense>
-				</Lazy>
-			</Portal>
-			<Portal rootId="onwards-lower">
-				<Lazy margin={300}>
-					<Suspense fallback={<></>}>
-						<OnwardsLower
-							ajaxUrl={CAPI.config.ajaxUrl}
-							hasStoryPackage={CAPI.hasStoryPackage}
-							tags={CAPI.tags}
-							format={format}
-						/>
-					</Suspense>
-				</Lazy>
 			</Portal>
 			<Portal rootId="sign-in-gate">
 				<SignInGateSelector
