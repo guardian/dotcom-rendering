@@ -105,3 +105,24 @@ export const renderInteractive = (
 		res.status(500).send(`<pre>${e.stack}</pre>`);
 	}
 };
+
+export const renderBlocks = (
+	{ body: { blocks, format } }: express.Request,
+	res: express.Response,
+): void => {
+	try {
+		const resp = {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+			numNewBlocks: blocks.length || 0,
+			mostRecentBlockId: 'TODO',
+			timeline: 'TODO - aka key events',
+			html: enhanceBlocks(blocks, format),
+		};
+
+		res.status(200).send(resp);
+	} catch (e) {
+		// @ts-expect-error
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		res.status(500).send(`<pre>${e.stack}</pre>`);
+	}
+};
