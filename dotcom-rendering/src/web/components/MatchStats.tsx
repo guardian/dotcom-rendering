@@ -173,22 +173,38 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const ShiftLeft = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			${from.leftCol} {
-				position: absolute;
-				left: -160px;
-			}
-			${from.wide} {
-				position: absolute;
-				left: -240px;
-			}
-		`}
-	>
-		{children}
-	</div>
-);
+const ShiftLeft = ({
+	children,
+	format,
+}: {
+	children: React.ReactNode;
+	format: ArticleFormat;
+}) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
+			return <div>{children}</div>;
+		}
+		default: {
+			return (
+				<div
+					css={css`
+						${from.leftCol} {
+							position: absolute;
+							left: -160px;
+						}
+						${from.wide} {
+							position: absolute;
+							left: -240px;
+						}
+					`}
+				>
+					{children}
+				</div>
+			);
+		}
+	}
+};
 
 const Center = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -320,7 +336,7 @@ export const MatchStats = ({ home, away, format }: Props) => (
 	<StretchBackground>
 		<StatsGrid format={format}>
 			<GridItem area="title" element="aside">
-				<ShiftLeft>
+				<ShiftLeft format={format}>
 					{/* Don't show the right border if this text was
                         shifted into the left column */}
 					<Hide when="above" breakpoint="desktop">
@@ -390,7 +406,7 @@ export const MatchStats = ({ home, away, format }: Props) => (
 				<br />
 			</GridItem>
 			<GridItem area="subtitle">
-				<ShiftLeft>
+				<ShiftLeft format={format}>
 					{/* Don't show the right border if this text was
                         shifted into the left column */}
 					<Hide when="above" breakpoint="desktop">
