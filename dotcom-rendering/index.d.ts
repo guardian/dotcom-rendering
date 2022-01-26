@@ -203,6 +203,8 @@ interface AdTargetParam {
 }
 
 type CustomParams = {
+	sens: 't' | 'f';
+	urlkw: string[];
 	[key: string]: string | string[] | number | number[] | boolean | boolean[];
 };
 
