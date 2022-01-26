@@ -71,6 +71,7 @@ export const Blocks: React.FunctionComponent<{
 	commercialProperties: CommercialProperties;
 	url: string;
 	shouldHideAds: boolean;
+	adTargeting: AdTargeting;
 }> = ({
 	blocks,
 	pillar,
@@ -81,6 +82,7 @@ export const Blocks: React.FunctionComponent<{
 	commercialProperties,
 	url,
 	shouldHideAds,
+	adTargeting,
 }) => {
 	// TODO add last updated for blocks to show here
 	const liveBlogBlocks = blocks.map((block) => {
@@ -152,6 +154,7 @@ export const Blocks: React.FunctionComponent<{
 									contentType={contentType}
 									config={adConfig}
 									commercialProperties={commercialProperties}
+									adTargeting={adTargeting}
 								/>
 							</div>
 						</>

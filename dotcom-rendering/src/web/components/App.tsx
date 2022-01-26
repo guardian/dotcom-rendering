@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
@@ -32,12 +32,10 @@ import {
 	HydrateOnce,
 	HydrateInteractiveOnce,
 } from '@frontend/web/components/HydrateOnce';
-import { Lazy } from '@frontend/web/components/Lazy';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
-import { initPerf } from '@root/src/web/browser/initPerf';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
@@ -66,30 +64,6 @@ import {
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
-
-// *******************************
-// ****** Dynamic imports ********
-// *******************************
-const OnwardsUpper = React.lazy(() => {
-	const { start, end } = initPerf('OnwardsUpper');
-	start();
-	return import(
-		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/OnwardsUpper'
-	).then((module) => {
-		end();
-		return { default: module.OnwardsUpper };
-	});
-});
-const OnwardsLower = React.lazy(() => {
-	const { start, end } = initPerf('OnwardsLower');
-	start();
-	return import(
-		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/OnwardsLower'
-	).then((module) => {
-		end();
-		return { default: module.OnwardsLower };
-	});
-});
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -325,26 +299,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const MapEmbedBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.MapBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/MapEmbedBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.MapEmbedBlockComponent,
-		},
-	);
-
 	const VideoFacebookBlockComponent = loadable(
 		() => {
 			if (
@@ -362,24 +316,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 		{
 			resolveComponent: (module) => module.VideoFacebookBlockComponent,
-		},
-	);
-
-	const VineBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.VineBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/VineBlockComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.VineBlockComponent,
 		},
 	);
 
@@ -436,17 +372,9 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.EmbedBlockElement',
 	);
-	const maps = elementsByType<MapBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.MapBlockElement',
-	);
 	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-	);
-	const vines = elementsByType<VineBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.VineBlockElement',
 	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
@@ -784,26 +712,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					)}
 				</HydrateOnce>
 			))}
-			{maps.map((map) => (
-				<HydrateOnce rootId={map.elementId}>
-					<ClickToView
-						role={map.role}
-						isTracking={map.isThirdPartyTracking}
-						source={map.source}
-						sourceDomain={map.sourceDomain}
-					>
-						<MapEmbedBlockComponent
-							format={format}
-							embedUrl={map.embedUrl}
-							height={map.height}
-							width={map.width}
-							caption={map.caption}
-							credit={map.source}
-							title={map.title}
-						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
 			{facebookVideos.map((facebookVideo) => (
 				<HydrateOnce rootId={facebookVideo.elementId}>
 					<ClickToView
@@ -824,20 +732,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			{vines.map((vine) => (
-				<HydrateOnce rootId={vine.elementId}>
-					<ClickToView
-						// No role given by CAPI
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						isTracking={vine.isThirdPartyTracking}
-						source={vine.source}
-						sourceDomain={vine.sourceDomain}
-					>
-						<VineBlockComponent element={vine} />
-					</ClickToView>
-				</HydrateOnce>
-			))}
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
 					contentType={CAPI.contentType}
@@ -853,40 +747,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					stage={CAPI.stage}
 					asyncArticleCount={asyncArticleCount}
 				/>
-			</Portal>
-			<Portal rootId="onwards-upper">
-				<Lazy margin={300}>
-					<Suspense fallback={<></>}>
-						<OnwardsUpper
-							ajaxUrl={CAPI.config.ajaxUrl}
-							hasRelated={CAPI.hasRelated}
-							hasStoryPackage={CAPI.hasStoryPackage}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							pageId={CAPI.pageId}
-							isPaidContent={CAPI.config.isPaidContent || false}
-							showRelatedContent={CAPI.config.showRelatedContent}
-							keywordIds={CAPI.config.keywordIds}
-							contentType={CAPI.contentType}
-							tags={CAPI.tags}
-							format={format}
-							pillar={pillar}
-							edition={CAPI.editionId}
-							shortUrlId={CAPI.config.shortUrlId}
-						/>
-					</Suspense>
-				</Lazy>
-			</Portal>
-			<Portal rootId="onwards-lower">
-				<Lazy margin={300}>
-					<Suspense fallback={<></>}>
-						<OnwardsLower
-							ajaxUrl={CAPI.config.ajaxUrl}
-							hasStoryPackage={CAPI.hasStoryPackage}
-							tags={CAPI.tags}
-							format={format}
-						/>
-					</Suspense>
-				</Lazy>
 			</Portal>
 			<Portal rootId="sign-in-gate">
 				<SignInGateSelector

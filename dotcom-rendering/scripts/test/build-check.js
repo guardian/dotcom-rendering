@@ -54,6 +54,7 @@ const fileExists = async (glob) => {
 		'embedIframe',
 		'newsletterEmbedIframe',
 		'relativeTime',
+		'initDiscussion',
 	].map((name) => {
 		if (loadableManifest.assetsByChunkName[name]) {
 			console.log(`Loadable manifest returned value ${name}`);
