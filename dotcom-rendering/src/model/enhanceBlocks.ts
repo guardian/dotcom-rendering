@@ -9,6 +9,7 @@ import { enhancePlaceholders } from '@root/src/model/enhance-placeholders';
 
 class BlockEnhancer {
 	blocks: Block[];
+
 	format: CAPIFormat;
 
 	constructor(blocks: Block[], format: CAPIFormat) {
