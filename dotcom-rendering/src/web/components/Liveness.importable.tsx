@@ -52,9 +52,7 @@ function insertNewBlocks(html: string) {
 	 * batch beforing inserting
 	 */
 
-	const latestBlock = document
-		.getElementById('maincontent')
-		?.querySelectorAll('article')[0];
+	const latestBlock = document.querySelector('#maincontent :first-child');
 
 	if (!latestBlock) return;
 
@@ -101,9 +99,7 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 
 	const latestBlockId: string =
 		(!isServer &&
-			document
-				.getElementById('maincontent')
-				?.querySelectorAll('article')[0]?.id) ||
+			document.querySelector('#maincontent :first-child')?.id) ||
 		'';
 
 	// TODO: Read `filterKeyEvents` from the url
