@@ -1,5 +1,5 @@
 import { enhanceDividers } from '@root/src/model/enhance-dividers';
-import { enhanceDots } from '@root/src/model/add-dots';
+import { enhanceDots } from '@root/src/model/enhance-dots';
 import { enhanceImages } from '@root/src/model/enhance-images';
 import { enhanceInteractiveContentsElements } from '@root/src/model/enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';

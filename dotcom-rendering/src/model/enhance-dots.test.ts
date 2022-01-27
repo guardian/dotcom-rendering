@@ -1,4 +1,4 @@
-import { enhanceDots } from './add-dots';
+import { enhanceDots } from './enhance-dots';
 
 const blockMetaData = {
 	id: '123',
