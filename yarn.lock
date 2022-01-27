@@ -2758,11 +2758,6 @@
   dependencies:
     youtube-player "^5.5.2"
 
-"@guardian/automat-contributions@^0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@guardian/automat-contributions/-/automat-contributions-0.4.3.tgz#3ef815d637022802cbeac7830813bbdf7326b43d"
-  integrity sha512-zSvPfrswfd0FGx0qfCwORmebeI46RMhkxgQQiZ8uCC6IRUDd+3UYl7/0hAILeGKGZ7qDUC8EwQ6TX0le7+2a1g==
-
 "@guardian/braze-components@^5.3.0":
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-5.3.0.tgz#abe79666e5636ad2a0064cb2f227a64239231d2f"
@@ -2845,6 +2840,11 @@
   version "4.0.0-rc.5"
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-4.0.0-rc.5.tgz#fc38d9c297b44e3c63fc1d0731e935b8f19004e4"
   integrity sha512-DscDPAa4b3pOL0h8LkQ+G8OQEiFwwYe+XOj8mLjfN9BEKCcKpmMrx9Vf4p8xBvRmr3jKvkSj6jZaZMjUtNjqjQ==
+
+"@guardian/support-dotcom-components@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.0.tgz#802b507de87c4ef120ae9f02d6f44be1fea47353"
+  integrity sha512-zxtDDUYy3RDlizQ3UrYUYIQ2ooojj5gJmtEZjiAPN+SvL8cHlIPDQnX6aaTx6RMoIQUpQ4vVZyAVrLDOuUY37Q==
 
 "@guardian/types@^9.0.1":
   version "9.0.1"

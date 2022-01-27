@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { getLocaleCode } from '@root/src/web/lib/getCountryCode';
 import { getCookie } from '@guardian/libs';
+import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 
 import {
 	pickMessage,
@@ -14,7 +15,6 @@ import type {
 	BrazeMessagesInterface,
 	BrazeArticleContext,
 } from '@guardian/braze-components/logic';
-import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
 import {
 	ReaderRevenueEpic,
 	canShowReaderRevenueEpic,
