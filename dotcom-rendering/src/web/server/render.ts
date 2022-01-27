@@ -147,7 +147,6 @@ export const renderBlocks = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		console.log(e);
 		// @ts-expect-error
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		res.status(500).send(`<pre>${e.stack}</pre>`);
