@@ -6,6 +6,7 @@ import { enhanceStandfirst } from '@root/src/model/enhanceStandfirst';
 import { validateAsCAPIType } from '@root/src/model/validate';
 import { extract as extractGA } from '@root/src/model/extract-ga';
 import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
+import { blocksToHtml } from './blocksToHtml';
 
 export const renderArticle = (
 	{ body }: express.Request,
@@ -107,20 +108,46 @@ export const renderInteractive = (
 };
 
 export const renderBlocks = (
-	{ body: { blocks, format } }: express.Request,
+	{ body }: { body: BlocksRequest },
 	res: express.Response,
 ): void => {
 	try {
-		const resp = {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-			numNewBlocks: blocks.length || 0,
-			mostRecentBlockId: 'TODO',
-			timeline: 'TODO - aka key events',
-			html: enhanceBlocks(blocks, format),
-		};
+		const {
+			blocks,
+			format,
+			host,
+			pageId,
+			webTitle,
+			ajaxUrl,
+			isAdFreeUser,
+			isSensitive,
+			videoDuration,
+			edition,
+			section,
+			sharedAdTargeting,
+			adUnit,
+		} = body;
 
-		res.status(200).send(resp);
+		const enhancedBlocks = enhanceBlocks(blocks, format);
+		const html = blocksToHtml({
+			blocks: enhancedBlocks,
+			format,
+			host,
+			pageId,
+			webTitle,
+			ajaxUrl,
+			isAdFreeUser,
+			isSensitive,
+			videoDuration,
+			edition,
+			section,
+			sharedAdTargeting,
+			adUnit,
+		});
+
+		res.status(200).send(html);
 	} catch (e) {
+		console.log(e);
 		// @ts-expect-error
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 		res.status(500).send(`<pre>${e.stack}</pre>`);

@@ -1,0 +1,71 @@
+import { renderToString } from 'react-dom/server';
+import { buildAdTargeting } from 'src/lib/ad-targeting';
+import { decideDesign } from '../lib/decideDesign';
+import { decideDisplay } from '../lib/decideDisplay';
+import { decideTheme } from '../lib/decideTheme';
+import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
+
+/**
+ * blocksToHtml is used by the /Blocks endpoint as part of keeping liveblogs live
+ * It takes an array of json blocks and returns the resulting html string
+ *
+ * @param blocks Block[]
+ * @param format CAPIFormat
+ * @param host string
+ * @param pageId string
+ * @param webTitle string
+ * @param ajaxUrl string
+ * @param isAdFreeUser boolean
+ * @param isSensitive boolean
+ * @param edition string
+ * @param section string
+ * @param sharedAdTargeting Record<string, unknown>
+ * @param adUnit string
+ * @param videoDuration: number | undefined
+ * @returns string (the html)
+ */
+export const blocksToHtml = ({
+	blocks,
+	format: CAPIFormat,
+	host,
+	pageId,
+	webTitle,
+	ajaxUrl,
+	isAdFreeUser,
+	isSensitive,
+	videoDuration,
+	edition,
+	section,
+	sharedAdTargeting,
+	adUnit,
+}: BlocksRequest): string => {
+	const format: ArticleFormat = {
+		display: decideDisplay(CAPIFormat),
+		design: decideDesign(CAPIFormat),
+		theme: decideTheme(CAPIFormat),
+	};
+
+	const adTargeting: AdTargeting = buildAdTargeting({
+		isAdFreeUser,
+		isSensitive,
+		videoDuration,
+		edition,
+		section,
+		sharedAdTargeting,
+		adUnit,
+	});
+
+	const html = renderToString(
+		<LiveBlogRenderer
+			blocks={blocks}
+			format={format}
+			adTargeting={adTargeting}
+			host={host}
+			pageId={pageId}
+			webTitle={webTitle}
+			ajaxUrl={ajaxUrl}
+		/>,
+	);
+
+	return html;
+};

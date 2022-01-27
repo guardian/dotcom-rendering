@@ -551,6 +551,22 @@ interface TagType {
 	bylineImageUrl?: string;
 }
 
+interface BlocksRequest {
+	blocks: Block[];
+	format: CAPIFormat;
+	host?: string;
+	pageId: string;
+	webTitle: string;
+	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	edition: string;
+	section: string;
+	sharedAdTargeting: Record<string, unknown>;
+	adUnit: string;
+	videoDuration?: number | undefined;
+}
+
 interface BadgeType {
 	seriesTag: string;
 	imageUrl: string;
