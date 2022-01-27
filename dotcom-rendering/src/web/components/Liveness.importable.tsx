@@ -40,18 +40,18 @@ function hydrateBlocks() {
 	// where the gu-hydrated data attribute isn't set?
 }
 
+/**
+ * insertNewBlocks takes html and inserts it at the top of the liveblog
+ *
+ * @param html The block html to be inserted
+ * @returns void
+ */
 function insertNewBlocks(html: string) {
-	console.log('insertNewBlocks');
-	// TODO: This is a pure javascript action to insert the content into the dom
-	// We give it a classname causing it to be hidden by default. Unhiding it is
-	// how we achieve animation but it's dependent on scroll position
-
 	/**
 	 * TODO: We need to make the call to get new posts idempotent. As such, this
 	 * action needs to first remove any existing posts with ids the same as the
 	 * batch beforing inserting
 	 */
-
 	const latestBlock = document.querySelector('#maincontent :first-child');
 
 	if (!latestBlock) return;
@@ -59,9 +59,12 @@ function insertNewBlocks(html: string) {
 	latestBlock.insertAdjacentHTML('beforebegin', `<article>${html}</article>`);
 }
 
+/**
+ * revealNewBlocks - style any blocks that have been inserted but are hidden such that
+ * they are revealed
+ */
 function revealNewBlocks() {
 	console.log('revealNewBlocks');
-	// TODO: Search for and style any hidden blocks such that they become visible, fading in
 }
 
 const isServer = typeof window === 'undefined';
