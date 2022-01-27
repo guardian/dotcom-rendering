@@ -14,10 +14,10 @@ export const renderArticle = (
 	try {
 		const data = validateAsCAPIType(body);
 		const CAPI = {
-			...body,
+			...data,
 			blocks: enhanceBlocks(data.blocks, data.format),
 			standfirst: enhanceStandfirst(data.standfirst),
-		} as CAPIType;
+		};
 		const resp = document({
 			data: {
 				CAPI,
