@@ -103,18 +103,21 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 			document.querySelector('#maincontent :first-child')?.id) ||
 		'';
 
-	// TODO: Read `filterKeyEvents` from the url
-	// TODO: Do we need `filterKeyEvents` and `isLivePage` here?
-	const url = `${joinUrl(
-		ajaxUrl,
-		pageId,
-	)}.json?lastUpdate=${latestBlockId}&isLivePage=true&filterKeyEvents=false`;
+	// Read current url to get filterKeyEvents
+	const params = new URLSearchParams(window.location.search);
+	const filterKeyEvents = params.get('filterKeyEvents');
+	// Construct the url to poll
+	const url = new URL(`${pageId}.json`, ajaxUrl);
+	url.searchParams.set('lastUpdate', latestBlockId);
+	url.searchParams.set('isLivePage', 'true');
+	url.searchParams.set('filterKeyEvents', filterKeyEvents ? 'true' : 'false');
+	console.log({ url });
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi<{
 		numNewBlocks: number;
 		html: string;
-	}>(url, {
+	}>(url.href, {
 		refreshInterval: 10000,
 		refreshWhenHidden: true,
 		// onSuccess runs (once) after every successful api call. This is useful because it
