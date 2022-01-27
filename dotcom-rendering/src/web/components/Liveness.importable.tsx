@@ -94,8 +94,6 @@ if (topOfBlog) {
 	observer.observe(topOfBlog);
 }
 
-// TODO: Should we dismiss the toast on escape key press?
-
 export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [noOfNewPosts, setNoOfNewPosts] = useState(0);
