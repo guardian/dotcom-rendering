@@ -862,7 +862,7 @@ const borderRichLink: (format: ArticleFormat) => string = (format) => {
 			case ArticlePillar.Opinion:
 				return opinion[300];
 			case ArticleSpecial.Labs:
-				return BLACK;
+				return labs[400];
 			case ArticleSpecial.SpecialReport:
 				return specialReport[400];
 		}
