@@ -831,7 +831,7 @@ const textRichLink: (format: ArticleFormat) => string = (format) => {
 			case ArticleSpecial.Labs:
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
+				return specialReport[400];
 		}
 	}
 	return pillarPalette[ArticlePillar.News][400];
@@ -864,7 +864,7 @@ const borderRichLink: (format: ArticleFormat) => string = (format) => {
 			case ArticleSpecial.Labs:
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
+				return specialReport[400];
 		}
 	}
 	return pillarPalette[ArticlePillar.News][400];
@@ -909,9 +909,9 @@ const fillRichLink: (format: ArticleFormat) => string = (format) => {
 			case ArticlePillar.Opinion:
 				return opinion[300];
 			case ArticleSpecial.Labs:
-				return BLACK;
+				return labs[400];
 			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
+				return specialReport[400];
 		}
 	}
 	return pillarPalette[ArticlePillar.News][400];
