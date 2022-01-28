@@ -14,6 +14,11 @@ import { initPerf } from '../initPerf';
  * @param element The location on the DOM where the component to hydrate exists
  */
 export const doHydration = (name: string, data: any, element: HTMLElement) => {
+	// If this function has already been run for an element then don't try to
+	// run it a second time
+	const alreadyHydrated = element.dataset.guReady;
+	if (alreadyHydrated) return;
+
 	const { start, end } = initPerf(`hydrate-${name}`);
 	start();
 	import(
@@ -22,13 +27,13 @@ export const doHydration = (name: string, data: any, element: HTMLElement) => {
 	)
 		.then((module) => {
 			hydrate(h(module[name], data), element);
-			element.setAttribute('data-gu-hydrated', 'true');
+			element.setAttribute('data-gu-ready', 'true');
 			end();
 		})
 		.catch((error) => {
 			if (name && error.message.includes(name)) {
 				console.error(
-					`🚨 Error importing ${name}. Did you forget to use the [MyComponent].importable.tsx naming convention? 🚨`,
+					`🚨 Error importing ${name}. Components must live in the root of /components and follow the [MyComponent].importable.tsx naming convention 🚨`,
 				);
 			}
 			throw error;

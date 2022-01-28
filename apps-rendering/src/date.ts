@@ -132,11 +132,36 @@ const time = (date: Date, separator: string): string =>
 		date.getUTCMinutes(),
 	)}`;
 
+const time12hr = (date: Date, separator: string): string => {
+	const utcHours = date.getUTCHours();
+	return `${padZero(
+		utcHours > 12 ? utcHours - 12 : utcHours,
+	)}${separator}${padZero(date.getUTCMinutes())}${
+		utcHours > 12 ? 'pm' : 'am'
+	}`;
+};
+
 const localTime = (date: Date): string =>
 	`${padZero(date.getHours())}.${padZero(date.getMinutes())}`;
 
+const localTime12Hr = (date: Date): string =>
+	date
+		.toLocaleString([], {
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: true,
+		})
+		.replace(' ', '')
+		.replace(':', '.')
+		.toLowerCase();
+
 const localTimeZone = (date: Date): string =>
 	/\(.*?\)$/.exec(date.toTimeString())?.pop() ?? '';
+
+const localTimeZoneAbbr = (date: Date): string =>
+	/([^\s]+)$/
+		.exec(date.toLocaleString([], { timeZoneName: 'short' }))
+		?.pop() ?? '';
 
 const format = (date: Date): string =>
 	`${day(date)} ${date.getUTCDate()} ${month(
@@ -152,6 +177,16 @@ const formatLocal = (date: Date): string =>
 	`${localDay(date)} ${date.getDate()} ${localMonth(
 		date,
 	)} ${date.getFullYear()} ${localTime(date)} ${localTimeZone(date)}`;
+
+const formatLocalTimeDateTz = (date: Date): string =>
+	`${localTime12Hr(date)} ${date.getDate()} ${localMonth(
+		date,
+	)} ${date.getFullYear()} ${localTimeZoneAbbr(date)}`;
+
+const formatUTCTimeDateTz = (date: Date): string =>
+	`${time12hr(date, '.')} ${date.getUTCDate()} ${month(
+		date,
+	)} ${date.getFullYear()} UTC`;
 
 const localDay = (date: Date): string => days[date.getDay()];
 
@@ -206,6 +241,8 @@ export {
 	fromString,
 	formatSeconds,
 	formatLocal,
+	formatLocalTimeDateTz,
+	formatUTCTimeDateTz,
 	dateToString,
 	padZero,
 };

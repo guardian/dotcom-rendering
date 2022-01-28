@@ -9,14 +9,16 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 
 import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
-import { EmbedBlockComponent } from './elements/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from './elements/UnsafeEmbedBlockComponent';
-import { SpotifyBlockComponent } from './elements/SpotifyBlockComponent';
-import { VimeoBlockComponent } from './elements/VimeoBlockComponent';
-import { DocumentBlockComponent } from './elements/DocumentBlockComponent';
-import { SoundcloudBlockComponent } from './elements/SoundcloudBlockComponent';
-import { TweetBlockComponent } from './elements/TweetBlockComponent';
-import { InstagramBlockComponent } from './elements/InstagramBlockComponent';
+import { EmbedBlockComponent } from './EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
+import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
+import { VimeoBlockComponent } from './VimeoBlockComponent';
+import { DocumentBlockComponent } from './DocumentBlockComponent';
+import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
+import { TweetBlockComponent } from './TweetBlockComponent';
+import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
+import { MapEmbedBlockComponent } from './MapEmbedBlockComponent.importable';
+import { VineBlockComponent } from './VineBlockComponent.importable';
 
 import { ClickToView } from './ClickToView';
 
@@ -429,6 +431,35 @@ const bbcEmbedEmbed: EmbedBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
 	html: '<iframe width="fullwidth" height="500" frameborder="0" src="https://www.bbc.co.uk/programmes/p08tfnfb/player"></iframe>',
 	isMandatory: false,
+};
+
+const mapEmbedEmbed: MapBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.MapBlockElement',
+	elementId: 'mockId',
+	embedUrl:
+		'https://www.google.com/maps/d/embed?mid=1e_aGDEcGY9Lu3UMKQKhR-itRBDg&hl=en_US',
+	originalUrl:
+		'https://www.google.com/maps/d/embed?mid=1e_aGDEcGY9Lu3UMKQKhR-itRBDg&hl=en_US',
+	title: "Women's March on London",
+	height: 345,
+	width: 460,
+	caption: 'Google Maps',
+	source: 'Google',
+	sourceDomain: 'google.com',
+	isThirdPartyTracking: false,
+};
+
+const vineEmbedEmbed: VineBlockElement = {
+	_type: 'model.dotcomrendering.pageElements.VineBlockElement',
+	elementId: 'mockId',
+	url: 'https://vine.co/v/MIH3hdTKujE/embed/simple',
+	originalUrl: 'https://vine.co/v/MIH3hdTKujE',
+	title: 'Joe Hart Wants The Ball',
+	height: 600,
+	width: 600,
+	source: 'Vine',
+	sourceDomain: 'vine.co',
+	isThirdPartyTracking: false,
 };
 
 export const EmbedBlockComponentStory = () => {
@@ -961,6 +992,9 @@ export const SpotifyBlockComponentStory = () => {
 								design: ArticleDesign.Standard,
 							}}
 							credit="Spotify"
+							role="inline"
+							isTracking={false}
+							isMainMedia={false}
 						/>
 					</ClickToView>
 				</Figure>
@@ -1039,23 +1073,12 @@ export const InstagramBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
-						isTracking={true}
-						source={instagramInstramEmbed.source}
-						sourceDomain={instagramInstramEmbed.sourceDomain}
-						role="inline"
-						onAccept={() =>
-							updateIframeHeight(
-								'iframe[name="instagram-embed-1"]',
-							)
-						}
-					>
-						<InstagramBlockComponent
-							key={1}
-							element={instagramInstramEmbed}
-							index={1}
-						/>
-					</ClickToView>
+					<InstagramBlockComponent
+						key={1}
+						element={instagramInstramEmbed}
+						index={1}
+						isMainMedia={false}
+					/>
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>
@@ -1064,4 +1087,103 @@ export const InstagramBlockComponentStory = () => {
 };
 InstagramBlockComponentStory.story = {
 	name: 'Click to view wrapping InstagramBlockComponent',
+};
+export const MapBlockComponentStory = () => {
+	return (
+		<ContainerLayout
+			sideBorders={true}
+			title="Embedded Content"
+			centralBorder="full"
+		>
+			<div
+				css={css`
+					max-width: 620px;
+					clear: left;
+					strong {
+						font-weight: bold;
+					}
+				`}
+			>
+				<p css={paragraphStyle}>
+					Example of a map embed, the embed source article is{' '}
+					<a href="https://www.theguardian.com/world/2017/jan/19/womens-marches-across-the-uk-what-you-need-to-know">
+						here
+					</a>
+				</p>
+				<Figure isMainMedia={false} role="inline">
+					<ClickToView
+						isTracking={true}
+						source={mapEmbedEmbed.source}
+						sourceDomain={mapEmbedEmbed.sourceDomain}
+						role="inline"
+					>
+						<MapEmbedBlockComponent
+							embedUrl={mapEmbedEmbed.embedUrl}
+							height={mapEmbedEmbed.height}
+							width={mapEmbedEmbed.width}
+							title={mapEmbedEmbed.title}
+							caption={mapEmbedEmbed.caption}
+							format={{
+								theme: ArticlePillar.News,
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+							}}
+							credit="Google Maps"
+							role="inline"
+							isTracking={false}
+							isMainMedia={false}
+						/>
+					</ClickToView>
+				</Figure>
+				<p css={paragraphStyle}>The end.</p>
+			</div>
+		</ContainerLayout>
+	);
+};
+MapBlockComponentStory.story = {
+	name: 'Click to view wrapping MapEmbedBlockComponent',
+};
+export const VineBlockComponentStory = () => {
+	return (
+		<ContainerLayout
+			sideBorders={true}
+			title="Embedded Content"
+			centralBorder="full"
+		>
+			<div
+				css={css`
+					max-width: 620px;
+					clear: left;
+					strong {
+						font-weight: bold;
+					}
+				`}
+			>
+				<p css={paragraphStyle}>
+					Example of a vine embed, the embed source article is{' '}
+					<a href="https://www.theguardian.com/football/2020/feb/13/ballboys-and-ballgirls-football-good-bad-bizarre-memorable-moments">
+						here
+					</a>
+				</p>
+				<Figure isMainMedia={false} role="inline">
+					<ClickToView
+						isTracking={true}
+						source={vineEmbedEmbed.source}
+						sourceDomain={vineEmbedEmbed.sourceDomain}
+						role="inline"
+					>
+						<VineBlockComponent
+							element={vineEmbedEmbed}
+							role="inline"
+							isTracking={false}
+						/>
+					</ClickToView>
+				</Figure>
+				<p css={paragraphStyle}>The end.</p>
+			</div>
+		</ContainerLayout>
+	);
+};
+VineBlockComponentStory.story = {
+	name: 'Click to view wrapping VineBlockComponent',
 };

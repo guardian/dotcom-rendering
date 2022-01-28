@@ -69,7 +69,6 @@ const makeWindowGuardianConfig = (
 export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 	// We hydrate these elements if they appear on the page
 	const typesThatNeedHydrating: string[] = [
-		'model.dotcomrendering.pageElements.RichLinkBlockElement',
 		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
 		'model.dotcomrendering.pageElements.CalloutBlockElement',
 		'model.dotcomrendering.pageElements.ChartAtomBlockElement',

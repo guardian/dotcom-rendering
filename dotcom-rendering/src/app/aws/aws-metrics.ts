@@ -1,4 +1,8 @@
-import AWS from 'aws-sdk';
+import {
+	CloudWatchClient,
+	PutMetricDataCommand,
+	PutMetricDataInput,
+} from '@aws-sdk/client-cloudwatch';
 
 interface Metric {
 	send: () => void;
@@ -6,7 +10,7 @@ interface Metric {
 
 process.env.AWS_PROFILE = 'frontend';
 
-AWS.config.update({ region: 'eu-west-1' });
+const cloudWatchClient = new CloudWatchClient({ region: 'eu-west-1' });
 
 // how frequently we send metrics to aws in ms
 const METRICS_TIME_RESOLUTION = 60 * 1000;
@@ -16,16 +20,18 @@ const sendMetric = (m: any[]) => {
 		return;
 	}
 
-	const cloudWatchClient = new AWS.CloudWatch();
-
-	const params = {
+	const params: PutMetricDataInput = {
 		MetricData: m,
 		Namespace: 'Application',
 	};
 
-	cloudWatchClient.putMetricData(params, (err) => {
+	const command = new PutMetricDataCommand(params);
+
+	cloudWatchClient.send(command, (err: any) => {
 		if (err) {
-			// eslint-disable-next-line no-console
+			// `err` is typed as `any` in the library:
+			// https://github.com/aws/aws-sdk-js-v3/blob/main/packages/smithy-client/src/client.ts#L41-L43
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 			console.error(err, err.stack);
 		}
 	});

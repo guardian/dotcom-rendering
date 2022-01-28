@@ -20,7 +20,6 @@ import { RightColumn } from '@root/src/web/components/RightColumn';
 import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
 import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
 import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { MostViewedRightIsland } from '@root/src/web/components/MostViewedRightIsland';
 import { SubMeta } from '@root/src/web/components/SubMeta';
 import { MainMedia } from '@root/src/web/components/MainMedia';
 import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
@@ -35,7 +34,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@frontend/web/components/Discussion';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { Placeholder } from '@frontend/web/components/Placeholder';
 import { Nav } from '@frontend/web/components/Nav/Nav';
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
@@ -52,6 +51,10 @@ import {
 import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Island } from '../components/Island';
+import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
+import { GetMatchStats } from '../components/GetMatchStats.importable';
+import { OnwardsLower } from '../components/OnwardsLower.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 
 const StandardGrid = ({
 	children,
@@ -381,6 +384,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								supporterCTA={
+									CAPI.nav.readerRevenueLinks.header.supporter
+								}
+								discussionApiUrl={CAPI.config.discussionApiUrl}
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
 								}
@@ -560,6 +567,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
+									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
 							</div>
 						</GridItem>
@@ -598,6 +606,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									secondaryDateline={
 										CAPI.webPublicationSecondaryDateDisplay
 									}
+									isCommentable={CAPI.isCommentable}
+									discussionApiUrl={
+										CAPI.config.discussionApiUrl
+									}
+									shortUrlId={CAPI.config.shortUrlId}
 								/>
 							</div>
 						</GridItem>
@@ -611,8 +624,19 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
+									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
-								{isMatchReport && <div id="match-stats" />}
+								{isMatchReport && CAPI.matchUrl && (
+									<Island
+										clientOnly={true}
+										placeholderHeight={800}
+										deferUntil="visible"
+									>
+										<GetMatchStats
+											matchUrl={CAPI.matchUrl}
+										/>
+									</Island>
+								)}
 
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines
@@ -662,7 +686,14 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										display={format.display}
 									/>
 									{!isPaidContent ? (
-										<MostViewedRightIsland />
+										<Island
+											clientOnly={true}
+											deferUntil="visible"
+										>
+											<MostViewedRightWrapper
+												isAdFreeUser={CAPI.isAdFreeUser}
+											/>
+										</Island>
 									) : (
 										<></>
 									)}
@@ -687,53 +718,64 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
-				<aside
-					data-print-layout="hide"
-					id="onwards-upper-whensignedout"
-				/>
+				<Island clientOnly={true} deferUntil="visible">
+					<OnwardsUpper
+						ajaxUrl={CAPI.config.ajaxUrl}
+						hasRelated={CAPI.hasRelated}
+						hasStoryPackage={CAPI.hasStoryPackage}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						pageId={CAPI.pageId}
+						isPaidContent={CAPI.config.isPaidContent || false}
+						showRelatedContent={CAPI.config.showRelatedContent}
+						keywordIds={CAPI.config.keywordIds}
+						contentType={CAPI.contentType}
+						tags={CAPI.tags}
+						format={format}
+						pillar={format.theme}
+						edition={CAPI.editionId}
+						shortUrlId={CAPI.config.shortUrlId}
+					/>
+				</Island>
+
 				{showOnwardsLower && (
 					<ElementContainer
-						data-print-layout="hide"
-						sectionId="onwards-lower-whensignedout"
-						element="aside"
-					/>
+						sectionId="onwards-lower"
+						element="section"
+					>
+						<Island clientOnly={true} deferUntil="visible">
+							<OnwardsLower
+								ajaxUrl={CAPI.config.ajaxUrl}
+								hasStoryPackage={CAPI.hasStoryPackage}
+								tags={CAPI.tags}
+								format={format}
+							/>
+						</Island>
+					</ElementContainer>
 				)}
 
 				{!isPaidContent && showComments && (
 					<ElementContainer
-						data-print-layout="hide"
 						sectionId="comments"
+						data-print-layout="hide"
 						element="section"
 					>
-						<Discussion
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							shortUrlId={CAPI.config.shortUrlId}
-							isCommentable={CAPI.isCommentable}
-							format={format}
-							discussionD2Uid={CAPI.config.discussionD2Uid}
-							discussionApiClientHeader={
-								CAPI.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={false}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							beingHydrated={false}
-						/>
+						<Island clientOnly={true} deferUntil="visible">
+							<DiscussionContainer
+								discussionApiUrl={CAPI.config.discussionApiUrl}
+								shortUrlId={CAPI.config.shortUrlId}
+								format={format}
+								discussionD2Uid={CAPI.config.discussionD2Uid}
+								discussionApiClientHeader={
+									CAPI.config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									CAPI.config.switches.enableDiscussionSwitch
+								}
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+							/>
+						</Island>
 					</ElementContainer>
-				)}
-
-				{/* Onwards (when signed IN) */}
-				<aside
-					data-print-layout="hide"
-					id="onwards-upper-whensignedin"
-				/>
-				{showOnwardsLower && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="onwards-lower-whensignedin"
-						element="aside"
-					/>
 				)}
 
 				{!isPaidContent && (

@@ -34,6 +34,12 @@ import {
 	submitComponentEvent,
 } from '@root/src/web/browser/ophan/ophan';
 import { useOnce } from '@root/src/web/lib/useOnce';
+import { getHeader } from '@guardian/support-dotcom-components';
+import {
+	ModuleData,
+	ModuleDataResponse,
+	HeaderPayload,
+} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 
 type Props = {
 	edition: Edition;
@@ -154,32 +160,9 @@ const subMessageStyles = css`
 	margin: 5px 0;
 `;
 
-interface Cta {
-	url: string;
-	text: string;
-}
-interface SupportHeaderProps {
-	content: {
-		heading: string;
-		subheading: string;
-		primaryCta?: Cta;
-		secondaryCta?: Cta;
-	};
-	tracking: OphanABTestMeta;
-	submitComponentEvent?: (componentEvent: OphanComponentEvent) => void;
-}
-interface SupportHeaderData {
-	module: {
-		url: string;
-		name: string;
-		props: SupportHeaderProps;
-	};
-	meta: OphanABTestMeta;
-}
-
 const ReaderRevenueLinksRemote: React.FC<{
 	edition: Edition;
-	countryCode?: string;
+	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
 	ophanRecord: OphanRecordFunction;
@@ -191,14 +174,13 @@ const ReaderRevenueLinksRemote: React.FC<{
 	ophanRecord,
 }) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
-		useState<SupportHeaderData | null>(null);
-	const [SupportHeader, setSupportHeader] =
-		useState<React.FC<SupportHeaderProps> | null>(null);
+		useState<ModuleData | null>(null);
+	const [SupportHeader, setSupportHeader] = useState<React.FC | null>(null);
 
 	useOnce((): void => {
 		setAutomat();
 
-		const requestData = {
+		const requestData: HeaderPayload = {
 			tracking: {
 				ophanPageId: pageViewId,
 				platformId: 'GUARDIAN_WEB',
@@ -216,28 +198,20 @@ const ReaderRevenueLinksRemote: React.FC<{
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
 			},
 		};
-		fetch(`${contributionsServiceUrl}/header`, {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(requestData),
-		})
-			.then((result) => result.json())
-			.then((response: { data?: SupportHeaderData }) => {
+		getHeader(contributionsServiceUrl, requestData)
+			.then((response: ModuleDataResponse) => {
 				if (!response.data) {
 					return null;
 				}
 
-				setSupportHeaderResponse(response.data);
 				const { module } = response.data;
+				setSupportHeaderResponse(module);
+
 				return window
 					.guardianPolyfilledImport(module.url)
-					.then(
-						(headerModule: {
-							Header: React.FC<SupportHeaderProps>;
-						}) => {
-							setSupportHeader(() => headerModule.Header);
-						},
-					);
+					.then((headerModule: { [key: string]: JSX.Element }) => {
+						setSupportHeader(() => headerModule[module.name]);
+					});
 			})
 			.catch((error) => {
 				const msg = `Error importing RR header links: ${error}`;
@@ -256,10 +230,11 @@ const ReaderRevenueLinksRemote: React.FC<{
 			<div css={headerStyles}>
 				{/* eslint-disable react/jsx-props-no-spreading */}
 				<SupportHeader
-					submitComponentEvent={(componentEvent) =>
-						submitComponentEvent(componentEvent, ophanRecord)
-					}
-					{...supportHeaderResponse.module.props}
+					// @ts-ignore
+					submitComponentEvent={(
+						componentEvent: OphanComponentEvent,
+					) => submitComponentEvent(componentEvent, ophanRecord)}
+					{...supportHeaderResponse.props}
 				/>
 				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
@@ -417,25 +392,29 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 		callFetch();
 	}, []);
 
-	if (inHeader && remoteHeaderEnabled) {
+	if (countryCode) {
+		if (inHeader && remoteHeaderEnabled) {
+			return (
+				<ReaderRevenueLinksRemote
+					edition={edition}
+					countryCode={countryCode}
+					pageViewId={pageViewId}
+					contributionsServiceUrl={contributionsServiceUrl}
+					ophanRecord={ophanRecord}
+				/>
+			);
+		}
 		return (
-			<ReaderRevenueLinksRemote
+			<ReaderRevenueLinksNative
 				edition={edition}
-				countryCode={countryCode}
-				pageViewId={pageViewId}
-				contributionsServiceUrl={contributionsServiceUrl}
+				dataLinkNamePrefix={dataLinkNamePrefix}
+				inHeader={inHeader}
+				urls={urls}
 				ophanRecord={ophanRecord}
+				pageViewId={pageViewId}
 			/>
 		);
 	}
-	return (
-		<ReaderRevenueLinksNative
-			edition={edition}
-			dataLinkNamePrefix={dataLinkNamePrefix}
-			inHeader={inHeader}
-			urls={urls}
-			ophanRecord={ophanRecord}
-			pageViewId={pageViewId}
-		/>
-	);
+
+	return null;
 };

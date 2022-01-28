@@ -1,4 +1,8 @@
-module.exports = () => ({
+const GuStatsReportPlugin = require('./gu-stats-report-plugin');
+
+const DEV = process.env.NODE_ENV === 'development';
+
+module.exports = ({ sessionId }) => ({
 	entry: {
 		'frontend.server': './src/app/server.ts',
 	},
@@ -18,6 +22,14 @@ module.exports = () => ({
 		require('webpack-node-externals')({
 			allowlist: [/^@guardian/],
 		}),
+		// @aws-sdk modules are only used in CODE/PROD, so we don't need to
+		// include them in the development bundle
+		({ request }, callback) => {
+			return process.env.NODE_ENV === 'development' &&
+				request.startsWith('@aws-sdk')
+				? callback(null, `commonjs ${request}`)
+				: callback();
+		},
 		({ request }, callback) => {
 			return request.endsWith('loadable-manifest-browser.json')
 				? callback(null, `commonjs ${request}`)
@@ -29,6 +41,16 @@ module.exports = () => ({
 				: callback();
 		},
 	],
+	plugins: [
+		DEV &&
+			new GuStatsReportPlugin({
+				displayDisclaimer: true,
+				buildName: 'server',
+				project: 'dotcom-rendering',
+				team: 'dotcom',
+				sessionId,
+			}),
+	].filter(Boolean),
 	module: {
 		rules: [
 			{

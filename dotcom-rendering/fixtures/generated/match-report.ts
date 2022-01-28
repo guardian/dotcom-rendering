@@ -347,9 +347,9 @@ export const matchReport: MatchReportType = {
 			},
 			{
 				id: '603635',
-				name: 'Emile Smith-Rowe',
+				name: 'Emile Smith Rowe',
 				position: 'Midfielder',
-				lastName: 'Smith-Rowe',
+				lastName: 'Smith Rowe',
 				substitute: false,
 				timeOnPitch: '41:17',
 				shirtNumber: '32',
@@ -447,9 +447,9 @@ export const matchReport: MatchReportType = {
 			},
 			{
 				id: '507070',
-				name: 'Partey Thomas',
+				name: 'Thomas Partey',
 				position: 'Midfielder',
-				lastName: 'Thomas',
+				lastName: 'Partey',
 				substitute: true,
 				timeOnPitch: '31:22',
 				shirtNumber: '18',

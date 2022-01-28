@@ -237,6 +237,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 				{isLive(design) && (
 					<div css={css(toggleStyles, liveBlogPadding)}>
 						<ToggleSwitch
+							platform="ios"
 							checked={checked}
 							label={'Get alerts on this story'}
 							cssOverrides={toggleOverrideStyles}

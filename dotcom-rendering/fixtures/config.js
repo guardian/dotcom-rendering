@@ -24,7 +24,6 @@ module.exports = {
 			extendedMostPopularFronts: true,
 			slotBodyEnd: true,
 			emailInlineInFooter: true,
-			adomik: true,
 			facebookTrackingPixel: true,
 			serviceWorkerEnabled: false,
 			iasAdTargeting: true,

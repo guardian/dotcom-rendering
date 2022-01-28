@@ -93,51 +93,31 @@ export const document = ({ data }: Props): string => {
 	// component reference.
 	const allChunks: LoadableComponents = [
 		{
-			chunkName: 'elements-YoutubeBlockComponent',
+			chunkName: 'YoutubeBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 		},
 		{
-			chunkName: 'elements-RichLinkComponent',
-			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-		},
-		{
-			chunkName: 'elements-InteractiveBlockComponent',
+			chunkName: 'InteractiveBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveBlockElement',
 		},
 		{
-			chunkName: 'elements-InteractiveContentsBlockComponent',
+			chunkName: 'InteractiveContentsBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 		},
 		{
-			chunkName: 'elements-CalloutBlockComponent',
+			chunkName: 'CalloutBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.CalloutBlockElement',
 		},
 		{
-			chunkName: 'elements-DocumentBlockComponent',
+			chunkName: 'DocumentBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.DocumentBlockElement',
 		},
 		{
-			chunkName: 'elements-MapEmbedBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.MapBlockElement',
-		},
-		{
-			chunkName: 'elements-SpotifyBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.SpotifyBlockElement',
-		},
-		{
-			chunkName: 'elements-VideoFacebookBlockComponent',
+			chunkName: 'VideoFacebookBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-		},
-		{
-			chunkName: 'elements-VineBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.VineBlockElement',
-		},
-		{
-			chunkName: 'elements-InstagramBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.InstagramBlockElement',
 		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -278,6 +258,7 @@ export const document = ({ data }: Props): string => {
 		...getScriptArrayFromChunkName('embedIframe'),
 		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
 		...getScriptArrayFromChunkName('relativeTime'),
+		...getScriptArrayFromChunkName('initDiscussion'),
 	]);
 
 	const gaChunk = getScriptArrayFromChunkName('ga');

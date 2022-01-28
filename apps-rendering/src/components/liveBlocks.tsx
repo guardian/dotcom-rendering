@@ -1,10 +1,12 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { LastUpdated } from '@guardian/common-rendering/src/components/LastUpdated';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
+import { border } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { map, OptionKind, partition } from '@guardian/types';
+import { LastUpdated } from 'components/lastUpdated';
+import { formatUTCTimeDateTz } from 'date';
 import { pipe, toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
@@ -24,6 +26,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 			{blocks.map((block) => {
 				// TODO: get page number
 				const blockLink = `${1}#block-${block.id}`;
+				const borderLiveBlock = border.liveBlock(format);
 				const blockFirstPublished = pipe(
 					block.firstPublished,
 					map(Number),
@@ -34,7 +37,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 					<LiveBlockContainer
 						key={block.id}
 						id={block.id}
-						borderColour="black"
+						borderColour={borderLiveBlock}
 						blockTitle={block.title}
 						blockFirstPublished={blockFirstPublished}
 						blockLink={blockLink}
@@ -44,7 +47,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 						<footer
 							css={css`
 								display: flex;
-								justify-content: space-between;
+								justify-content: end;
 							`}
 						>
 							{block.lastModified.kind === OptionKind.Some &&
@@ -52,10 +55,10 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 								block.lastModified.value >
 									block.firstPublished.value && (
 									<LastUpdated
-										lastUpdated={Number(
+										lastUpdated={block.lastModified.value}
+										lastUpdatedDisplay={formatUTCTimeDateTz(
 											block.lastModified.value,
 										)}
-										lastUpdatedDisplay={'17:22 GMT'}
 									/>
 								)}
 						</footer>

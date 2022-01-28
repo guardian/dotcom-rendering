@@ -1,5 +1,7 @@
 // ----- Imports ----- //
 
+import './liveblog';
+
 import 'regenerator-runtime/runtime.js';
 import { AudioAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
@@ -71,14 +73,20 @@ function followToggle(topic: Topic): void {
 		if (following) {
 			void notificationsClient.unfollow(topic).then((_) => {
 				ReactDOM.render(
-					h(FollowStatus, { isFollowing: false }),
+					h(FollowStatus, {
+						isFollowing: false,
+						contributorName: topic.displayName,
+					}),
 					followStatus,
 				);
 			});
 		} else {
 			void notificationsClient.follow(topic).then((_) => {
 				ReactDOM.render(
-					h(FollowStatus, { isFollowing: true }),
+					h(FollowStatus, {
+						isFollowing: true,
+						contributorName: topic.displayName,
+					}),
 					followStatus,
 				);
 			});
@@ -106,7 +114,10 @@ function topics(): void {
 		void notificationsClient.isFollowing(topic).then((following) => {
 			if (following && followStatus) {
 				ReactDOM.render(
-					h(FollowStatus, { isFollowing: true }),
+					h(FollowStatus, {
+						isFollowing: true,
+						contributorName: topic.displayName,
+					}),
 					followStatus,
 				);
 			}

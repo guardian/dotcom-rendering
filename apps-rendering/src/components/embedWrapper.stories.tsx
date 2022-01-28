@@ -11,7 +11,7 @@ import { EmbedComponentWrapper } from './embedWrapper';
 // popped up after I removed the FC type which was causing problems when I tried to set parameters
 // on an individual story. Ideally, we'd use the type from Storybook directly
 // but https://github.com/storybookjs/storybook/issues/13486
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- because 👆
+// eslint-disable-next-line -- because 👆
 const Generic = () => (
 	<div>
 		<p>
@@ -60,7 +60,7 @@ Generic.story = {
 // popped up after I removed the FC type which was causing problems when I tried to set parameters
 // on an individual story. Ideally, we'd use the type from Storybook directly
 // but https://github.com/storybookjs/storybook/issues/13486
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- because 👆
+// eslint-disable-next-line -- because 👆
 const Youtube = () => (
 	<div>
 		<p>
@@ -103,7 +103,7 @@ Youtube.story = {
 // popped up after I removed the FC type which was causing problems when I tried to set parameters
 // on an individual story. Ideally, we'd use the type from Storybook directly
 // but https://github.com/storybookjs/storybook/issues/13486
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- because 👆
+// eslint-disable-next-line -- because 👆
 const Spotify = () => (
 	<div>
 		<p>
@@ -146,7 +146,7 @@ Spotify.story = {
 // popped up after I removed the FC type which was causing problems when I tried to set parameters
 // on an individual story. Ideally, we'd use the type from Storybook directly
 // but https://github.com/storybookjs/storybook/issues/13486
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- because 👆
+// eslint-disable-next-line -- because 👆
 const Instagram = () => (
 	<div>
 		<p>
