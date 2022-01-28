@@ -44,6 +44,31 @@ interface Props {
 	image: Option<Image>;
 }
 
+const listBaseStyles = css`
+	margin-right: ${remSpace[2]};
+	flex: 0 0 42vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-width: 10rem;
+
+	&.fade {
+		opacity: 0.7;
+	}
+
+	${from.tablet} {
+		margin-right: ${remSpace[5]};
+	}
+
+	${from.desktop} {
+		max-width: 13.75rem;
+	}
+
+	&:last-of-type {
+		margin-right: 0;
+	}
+`;
+
 const listStyles = (
 	type: RelatedItemType,
 	format: ArticleFormat,
@@ -53,67 +78,25 @@ const listStyles = (
 		case RelatedItemType.AUDIO:
 		case RelatedItemType.GALLERY: {
 			return css`
-				margin-right: ${remSpace[2]};
-				flex: 0 0 42vw;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
+				${listBaseStyles}
 				border-radius: ${remSpace[2]};
-				max-width: 10rem;
 				padding-top: 0.125rem;
-
-				&.fade {
-					opacity: 0.7;
-				}
 
 				${darkModeCss`
 					background: ${neutral[10]};
 				`}
-
-				${from.tablet} {
-					margin-right: ${remSpace[5]};
-				}
-
-				${from.desktop} {
-					max-width: 13.75rem;
-				}
-
-				&:last-of-type {
-					margin-right: 0;
-				}
 			`;
 		}
 		default: {
 			return css`
-				margin-right: ${remSpace[2]};
-				flex: 0 0 42vw;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
+				${listBaseStyles}
 				border-top: 1px solid ${neutral[86]};
 				border-radius: 0 0 ${remSpace[2]} ${remSpace[2]};
-				max-width: 10rem;
-
-				&.fade {
-					opacity: 0.7;
-				}
 
 				${darkModeCss`
 					border-top: 1px solid ${neutral[20]};
 					background: ${neutral[0]};
         		`}
-
-				${from.tablet} {
-					margin-right: ${remSpace[5]};
-				}
-
-				${from.desktop} {
-					max-width: 13.75rem;
-				}
-
-				&:last-of-type {
-					margin-right: 0;
-				}
 			`;
 		}
 	}
