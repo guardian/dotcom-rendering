@@ -40,7 +40,6 @@ import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
@@ -189,35 +188,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		theme: pillar,
 	};
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: CAPI.isAdFreeUser,
-		isSensitive: CAPI.config.isSensitive,
-		videoDuration: CAPI.config.videoDuration,
-		edition: CAPI.config.edition,
-		section: CAPI.config.section,
-		sharedAdTargeting: CAPI.config.sharedAdTargeting,
-		adUnit: CAPI.config.adUnit,
-	});
-
 	// There are docs on loadable in ./docs/loadable-components.md
-	const YoutubeBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.YoutubeBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/YoutubeBlockComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.YoutubeBlockComponent,
-		},
-	);
-
 	const InteractiveBlockComponent = loadable(
 		() => {
 			if (
@@ -326,10 +297,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		type: string,
 	): T[] => elements.filter((element) => element._type === type) as T[];
 
-	const youTubeAtoms = elementsByType<YoutubeBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.YoutubeBlockElement',
-	);
 	const quizAtoms = elementsByType<QuizAtomBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.QuizAtomBlockElement',
@@ -424,26 +391,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					/>
 				</Portal>
 			)}
-			{youTubeAtoms.map((youTubeAtom) => (
-				<HydrateOnce rootId={youTubeAtom.elementId}>
-					<YoutubeBlockComponent
-						format={format}
-						hideCaption={false}
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						adTargeting={adTargeting}
-						isMainMedia={false}
-						id={youTubeAtom.id}
-						assetId={youTubeAtom.assetId}
-						expired={youTubeAtom.expired}
-						overrideImage={youTubeAtom.overrideImage}
-						posterImage={youTubeAtom.posterImage}
-						duration={youTubeAtom.duration}
-						mediaTitle={youTubeAtom.mediaTitle}
-						altText={youTubeAtom.altText}
-					/>
-				</HydrateOnce>
-			))}
 			{interactiveElements.map((interactiveBlock) => (
 				<HydrateInteractiveOnce rootId={interactiveBlock.elementId}>
 					<InteractiveBlockComponent

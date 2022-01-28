@@ -32,7 +32,7 @@ import { VideoFacebookBlockComponent } from '@root/src/web/components/VideoFaceb
 import { VimeoBlockComponent } from '@root/src/web/components/VimeoBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/YoutubeEmbedBlockComponent';
-import { YoutubeBlockComponent } from '@root/src/web/components/YoutubeBlockComponent';
+import { YoutubeBlockComponent } from '@root/src/web/components/YoutubeBlockComponent.importable';
 import {
 	WitnessVideoBlockComponent,
 	WitnessImageBlockComponent,
@@ -689,24 +689,26 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return [
 				true,
-				<YoutubeBlockComponent
-					format={format}
-					key={index}
-					hideCaption={hideCaption}
-					// eslint-disable-next-line jsx-a11y/aria-role
-					role="inline"
-					adTargeting={adTargeting}
-					isMainMedia={isMainMedia}
-					id={element.id}
-					assetId={element.assetId}
-					expired={element.expired}
-					overrideImage={element.overrideImage}
-					posterImage={element.posterImage}
-					duration={element.duration}
-					mediaTitle={element.mediaTitle}
-					altText={element.altText}
-					origin={host}
-				/>,
+				<Island>
+					<YoutubeBlockComponent
+						format={format}
+						key={index}
+						hideCaption={hideCaption}
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						adTargeting={adTargeting}
+						isMainMedia={isMainMedia}
+						id={element.id}
+						assetId={element.assetId}
+						expired={element.expired}
+						overrideImage={element.overrideImage}
+						posterImage={element.posterImage}
+						duration={element.duration}
+						mediaTitle={element.mediaTitle}
+						altText={element.altText}
+						origin={host}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':

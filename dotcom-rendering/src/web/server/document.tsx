@@ -93,10 +93,6 @@ export const document = ({ data }: Props): string => {
 	// component reference.
 	const allChunks: LoadableComponents = [
 		{
-			chunkName: 'YoutubeBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
-		},
-		{
 			chunkName: 'InteractiveBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveBlockElement',
