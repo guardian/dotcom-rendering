@@ -817,22 +817,7 @@ const hoverHeadlineByline = (format: ArticleFormat): string => {
 
 const textRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
-		switch (format.theme) {
-			case ArticlePillar.News:
-				return news[400];
-			case ArticlePillar.Culture:
-				return culture[350];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			case ArticlePillar.Sport:
-				return sport[400];
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
-		}
+		return pillarPalette[format.theme].main;
 	}
 	return pillarPalette[ArticlePillar.News][400];
 };
@@ -850,22 +835,7 @@ const hoverStandfirstLink = (format: ArticleFormat): string => {
 
 const borderRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
-		switch (format.theme) {
-			case ArticlePillar.News:
-				return news[400];
-			case ArticlePillar.Culture:
-				return culture[350];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			case ArticlePillar.Sport:
-				return sport[400];
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
-		}
+		return pillarPalette[format.theme].main;
 	}
 	return pillarPalette[ArticlePillar.News][400];
 };
@@ -897,22 +867,7 @@ const backgroundRichLink: (format: ArticleFormat) => string = (format) => {
 
 const fillRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
-		switch (format.theme) {
-			case ArticlePillar.News:
-				return news[400];
-			case ArticlePillar.Culture:
-				return culture[350];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			case ArticlePillar.Sport:
-				return sport[400];
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
-		}
+		return pillarPalette[format.theme].main;
 	}
 	return pillarPalette[ArticlePillar.News][400];
 };
