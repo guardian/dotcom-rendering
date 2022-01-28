@@ -28,7 +28,7 @@ import { SubheadingBlockComponent } from '@root/src/web/components/SubheadingBlo
 import { TableBlockComponent } from '@root/src/web/components/TableBlockComponent';
 import { TextBlockComponent } from '@root/src/web/components/TextBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/TweetBlockComponent';
-import { VideoFacebookBlockComponent } from '@root/src/web/components/VideoFacebookBlockComponent';
+import { VideoFacebookBlockComponent } from '@root/src/web/components/VideoFacebookBlockComponent.importable';
 import { VimeoBlockComponent } from '@root/src/web/components/VimeoBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/YoutubeEmbedBlockComponent';
@@ -579,14 +579,13 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island>
 					<VideoFacebookBlockComponent
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 						format={format}
 						embedUrl={element.embedUrl}
 						height={element.height}
@@ -595,7 +594,7 @@ export const renderElement = ({
 						credit={element.caption}
 						title={element.caption}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
 			return [
