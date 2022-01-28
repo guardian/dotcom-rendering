@@ -6,7 +6,7 @@ name: DCR Snyk
 on:
     schedule:
         - cron: '0 6 * * *'
-    push: 
+    push:
         paths-ignore:
             - "apps-rendering/**"
         # @dependabot push events have readon-only access and CodeQL needs write access
