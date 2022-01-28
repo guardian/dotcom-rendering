@@ -90,6 +90,7 @@ const styles = css`
 	padding-top: ${remSpace[3]};
 	padding-left: ${remSpace[4]};
 	padding-right: ${remSpace[4]};
+	margin-top: -0.125rem;
 
 	${until.wide} {
 		margin-left: -${remSpace[4]};
