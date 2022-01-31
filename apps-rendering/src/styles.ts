@@ -111,7 +111,6 @@ export const onwardStyles: SerializedStyles = css`
         background: ${background.inverse};
     `};
 
-	padding: 0.125rem 0 0;
 	${from.wide} {
 		width: 1300px;
 		margin-left: auto;
