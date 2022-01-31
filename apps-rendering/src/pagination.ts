@@ -56,8 +56,8 @@ const maybePageRef = (
 ): Option<string> => {
 	const maybeBlocks = (pageIndex: number): Option<LiveBlock[]> =>
 		index(pageIndex)(pages);
-	const maybeFirstBlock = (blocks: LiveBlock[]): Option<LiveBlock> =>
-		index(0)(blocks);
+	const maybeFirstBlock: (blocks: LiveBlock[]) => Option<LiveBlock> =
+		index(0);
 	const pageRef = (block: LiveBlock): string =>
 		`?page=with:block-${block.id}`;
 
