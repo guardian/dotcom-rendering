@@ -95,8 +95,8 @@ const styles = css`
 	}
 
 	${darkModeCss`
-        background: ${neutral[0]};
-    `}
+		background: ${neutral[0]};
+	`}
 `;
 
 const COMMENT = RelatedItemType.COMMENT;
