@@ -54,18 +54,14 @@ const maybePageRef = (
 	pageIndex: number,
 	pages: LiveBlock[][],
 ): Option<string> => {
-	const maybeBlocks = (pageIndex: number): Option<LiveBlock[]> =>
-		index(pageIndex)(pages);
+	const maybeBlocks: (pages: LiveBlock[][]) => Option<LiveBlock[]> =
+		index(pageIndex);
 	const maybeFirstBlock: (blocks: LiveBlock[]) => Option<LiveBlock> =
 		index(0);
 	const pageRef = (block: LiveBlock): string =>
 		`?page=with:block-${block.id}`;
 
-	const firstBlock = compose(
-		andThen(maybeFirstBlock),
-		maybeBlocks,
-	)(pageIndex);
-	return map(pageRef)(firstBlock);
+	return pipe(pages, maybeBlocks, andThen(maybeFirstBlock), map(pageRef));
 };
 
 const currentPageRef = (blocks: LiveBlock[][], pageIndex: number): string => {
