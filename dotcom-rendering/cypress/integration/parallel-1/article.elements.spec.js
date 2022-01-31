@@ -168,7 +168,7 @@ describe('Elements', function () {
 				'Article?url=https://www.theguardian.com/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
 			);
 
-			getIframeBody().contains('Cookie policy');
+			getIframeBody();
 		});
 
 		it('should render the football embed', function () {
