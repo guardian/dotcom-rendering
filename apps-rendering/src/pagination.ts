@@ -3,12 +3,33 @@ import type { Option } from '@guardian/types';
 import { compose, index, pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 
+/**
+ * This represents the data required to render the requested page of liveblocks.
+ * It contains all the blog posts for a given page, plus some page meta data.
+ * @typedef PageReference
+ * @param blocks An array of liveblocks for the given page
+ * @param pageNumber The page number for the given blog page (1-indexed)
+ * @param suffix The query string for the given blog page
+ */
 export type PageReference = {
 	blocks: LiveBlock[];
 	pageNumber: number;
 	suffix: string;
 };
 
+/**
+ * This data allows us to render the pagination navigation component. It
+ * contains a collection of query strings that, when appended to the liveblog
+ * page url, will allow the user to navigate between 'pages' of a liveblog.
+ * @typedef Pagination
+ * @param newest A query string representing the newest page of the blog
+ * @param newer A query string representing the newer page of the blog
+ * (relative to current page)
+ * @param oldest A query string representing the oldest page of the blog
+ * @param older A query string representing the older page of the blog
+ * (relative to current page)
+ * @param numberOfPages Total number of pages in the blog
+ */
 export type Pagination = {
 	newest: Option<string>;
 	newer: Option<string>;
@@ -17,6 +38,13 @@ export type Pagination = {
 	numberOfPages: number;
 };
 
+/**
+ * This is a paginated representation of a blog. It contains the blog posts
+ * related to the requested page and some additional information about
+ * surrounding pages.
+ * @param PageReference Liveblocks related to the current page
+ * @param Pagination Pagination navigation links
+ */
 export type LiveBlogPagedBlocks = {
 	currentPage: PageReference;
 	pagination: Pagination;
