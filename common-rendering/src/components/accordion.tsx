@@ -112,10 +112,12 @@ const backgroundColour = (
 };
 
 const paddingBody: SerializedStyles = css`
-	padding: ${remSpace[3]};
+	padding: ${remSpace[1]} ${remSpace[3]} ${remSpace[3]};
+
 	${from.mobileLandscape} {
-		padding: ${remSpace[3]} ${remSpace[5]};
+		padding: ${remSpace[1]} ${remSpace[5]} ${remSpace[3]};
 	}
+
 	${from.desktop} {
 		padding: 0;
 	}

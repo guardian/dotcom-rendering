@@ -2826,10 +2826,10 @@
   dependencies:
     mini-svg-data-uri "^1.3.3"
 
-"@guardian/source-react-components-development-kitchen@^0.0.29":
-  version "0.0.29"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-0.0.29.tgz#eeeb6fffadaed05953c58a83d30a0eafeb0b8652"
-  integrity sha512-/y+P2p76a2hhTe7d4Km7YzV/zOILVDj43/c2bQrsDc84nSeoSB9WYUF5uPppgSe9E0co2QpZ3R8+lcOPKPfsRA==
+"@guardian/source-react-components-development-kitchen@^0.0.31":
+  version "0.0.31"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-0.0.31.tgz#da286e41b5ae1ab772291b92c79932305380ff63"
+  integrity sha512-I+KDtz6MISXM8gLzUMsvJvdKsQGrYQTkQnUU4qV3zN3L9fDYoS/Rodq6bFnLyWbLVKrMDTT2+IAwbKAz0aSY7A==
 
 "@guardian/source-react-components@^4.0.1":
   version "4.0.1"

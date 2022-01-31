@@ -883,9 +883,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						) : (
 							<LiveGrid>
 								<GridItem area="filter">
-									<Island deferUntil="idle">
-										<FilterKeyEventsToggle />
-									</Island>
+									<Hide below="desktop">
+										<Island deferUntil="idle">
+											<FilterKeyEventsToggle />
+										</Island>
+									</Hide>
 								</GridItem>
 								<GridItem area="media">
 									<div css={maxWidth}>
@@ -971,6 +973,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											accordionTitle="Live feed"
 											context="liveFeed"
 										>
+											<GridItem area="filter">
+												<Hide above="desktop">
+													<Island deferUntil="idle">
+														<FilterKeyEventsToggle />
+													</Island>
+												</Hide>
+											</GridItem>
 											<ArticleContainer format={format}>
 												{CAPI.pagination &&
 													CAPI.pagination

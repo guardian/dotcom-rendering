@@ -4,15 +4,16 @@ import { ToggleSwitch } from '@guardian/source-react-components-development-kitc
 import { useEffect, useState } from 'react';
 
 const cssOverrides = css`
-	padding: ${remSpace[2]};
+	width: 100%;
+	padding-bottom: ${remSpace[1]};
 
 	${from.phablet} {
-		padding-left: ${remSpace[5]};
+		padding-bottom: ${remSpace[1]};
 	}
 
 	${from.desktop} {
+		padding: ${remSpace[1]} 0;
 		border-top: 1px solid ${neutral[86]};
-		padding-left: 0;
 	}
 `;
 
