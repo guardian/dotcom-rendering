@@ -155,18 +155,18 @@ const getCurrentPage = (
 
 	return pipe(
 		blockId,
-		map((id) => {
+		andThen((id) => {
 			for (let i = 0; i < pages.length; i += 1) {
 				const blocks = withDefault(emptyLiveBlocks)(index(i)(pages));
 				if (blocks.some((x) => x.id === id)) {
-					return {
+					return some({
 						blocks,
 						pageNumber: i + 1,
 						suffix: currentPageRef(pages, i),
-					};
+					});
 				}
 			}
-			return firstPage;
+			return none;
 		}),
 		withDefault(firstPage),
 	);
