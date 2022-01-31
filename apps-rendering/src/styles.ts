@@ -106,7 +106,6 @@ export const lineStyles = css`
 
 export const onwardStyles: SerializedStyles = css`
 	background: ${neutral[97]};
-	margin: 0 ${remSpace[3]};
 
 	${darkModeCss`
         background: ${background.inverse};
