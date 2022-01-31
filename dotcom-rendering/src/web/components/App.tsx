@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
@@ -8,14 +8,9 @@ import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks'
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
-import { Discussion } from '@frontend/web/components/Discussion';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
-import {
-	getWeeklyArticleHistory,
-	incrementWeeklyArticleCount,
-} from '@guardian/automat-contributions';
 import {
 	QandaAtom,
 	GuideAtom,
@@ -33,22 +28,13 @@ import {
 	HydrateOnce,
 	HydrateInteractiveOnce,
 } from '@frontend/web/components/HydrateOnce';
-import { Lazy } from '@frontend/web/components/Lazy';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
-import { initPerf } from '@root/src/web/browser/initPerf';
-import { getUser } from '@root/src/web/lib/getUser';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	storage,
-	log,
-	getCookie,
-} from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
 import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
@@ -64,9 +50,11 @@ import { UnsafeEmbedBlockComponent } from '@root/src/web/components/UnsafeEmbedB
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
-
-import { WeeklyArticleHistory } from '@guardian/automat-contributions/dist/lib/types';
-
+import {
+	getWeeklyArticleHistory,
+	incrementWeeklyArticleCount,
+} from '@guardian/support-dotcom-components';
+import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import {
 	submitComponentEvent,
 	OphanComponentEvent,
@@ -74,30 +62,6 @@ import {
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
-
-// *******************************
-// ****** Dynamic imports ********
-// *******************************
-const OnwardsUpper = React.lazy(() => {
-	const { start, end } = initPerf('OnwardsUpper');
-	start();
-	return import(
-		/* webpackChunkName: "OnwardsUpper" */ '@frontend/web/components/Onwards/OnwardsUpper'
-	).then((module) => {
-		end();
-		return { default: module.OnwardsUpper };
-	});
-});
-const OnwardsLower = React.lazy(() => {
-	const { start, end } = initPerf('OnwardsLower');
-	start();
-	return import(
-		/* webpackChunkName: "OnwardsLower" */ '@frontend/web/components/Onwards/OnwardsLower'
-	).then((module) => {
-		end();
-		return { default: module.OnwardsLower };
-	});
-});
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -107,8 +71,6 @@ type Props = {
 let renderCount = 0;
 export const App = ({ CAPI, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
-	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	const [user, setUser] = useState<UserProfile | null>();
 
 	const [brazeMessages, setBrazeMessages] =
 		useState<Promise<BrazeMessagesInterface>>();
@@ -143,23 +105,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		ABTestAPI.registerCompleteEvents(allRunnableTests);
 		log('dotcom', 'AB tests initialised');
 	}, [ABTestAPI]);
-
-	useOnce(() => {
-		// useOnce means this code will only run once isSignedIn is defined, and only
-		// run one time
-		if (isSignedIn) {
-			getUser(CAPI.config.discussionApiUrl)
-				.then((theUser) => {
-					if (theUser) {
-						setUser(theUser);
-						log('dotcom', 'State: user set');
-					}
-				})
-				.catch((e) => console.error(`getUser - error: ${e}`));
-		} else {
-			setUser(null);
-		}
-	}, [isSignedIn, CAPI.config.discussionApiUrl]);
 
 	useEffect(() => {
 		incrementAlreadyVisited();
@@ -273,24 +218,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const RichLinkComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.RichLinkBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/RichLinkComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.RichLinkComponent,
-		},
-	);
-
 	const InteractiveBlockComponent = loadable(
 		() => {
 			if (
@@ -370,26 +297,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const MapEmbedBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.MapBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/MapEmbedBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.MapEmbedBlockComponent,
-		},
-	);
-
 	const VideoFacebookBlockComponent = loadable(
 		() => {
 			if (
@@ -407,24 +314,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 		{
 			resolveComponent: (module) => module.VideoFacebookBlockComponent,
-		},
-	);
-
-	const VineBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.VineBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/VineBlockComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.VineBlockComponent,
 		},
 	);
 
@@ -481,21 +370,9 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.EmbedBlockElement',
 	);
-	const maps = elementsByType<MapBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.MapBlockElement',
-	);
 	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-	);
-	const vines = elementsByType<VineBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.VineBlockElement',
-	);
-	const richLinks = elementsByType<RichLinkBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.RichLinkBlockElement',
 	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
@@ -647,15 +524,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					isPaidContent={CAPI.pageType.isPaidContent}
 				/>
 			</Portal>
-			{richLinks.map((richLink, index) => (
-				<Portal rootId={richLink.elementId}>
-					<RichLinkComponent
-						element={richLink}
-						ajaxEndpoint={CAPI.config.ajaxUrl}
-						richLinkIndex={index}
-					/>
-				</Portal>
-			))}
 			{callouts.map((callout) => (
 				<HydrateOnce rootId={callout.elementId}>
 					<CalloutBlockComponent callout={callout} format={format} />
@@ -842,26 +710,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					)}
 				</HydrateOnce>
 			))}
-			{maps.map((map) => (
-				<HydrateOnce rootId={map.elementId}>
-					<ClickToView
-						role={map.role}
-						isTracking={map.isThirdPartyTracking}
-						source={map.source}
-						sourceDomain={map.sourceDomain}
-					>
-						<MapEmbedBlockComponent
-							format={format}
-							embedUrl={map.embedUrl}
-							height={map.height}
-							width={map.width}
-							caption={map.caption}
-							credit={map.source}
-							title={map.title}
-						/>
-					</ClickToView>
-				</HydrateOnce>
-			))}
 			{facebookVideos.map((facebookVideo) => (
 				<HydrateOnce rootId={facebookVideo.elementId}>
 					<ClickToView
@@ -882,20 +730,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					</ClickToView>
 				</HydrateOnce>
 			))}
-			{vines.map((vine) => (
-				<HydrateOnce rootId={vine.elementId}>
-					<ClickToView
-						// No role given by CAPI
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						isTracking={vine.isThirdPartyTracking}
-						source={vine.source}
-						sourceDomain={vine.sourceDomain}
-					>
-						<VineBlockComponent element={vine} />
-					</ClickToView>
-				</HydrateOnce>
-			))}
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
 					contentType={CAPI.contentType}
@@ -912,52 +746,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					asyncArticleCount={asyncArticleCount}
 				/>
 			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-upper-whensignedin'
-						: 'onwards-upper-whensignedout'
-				}
-			>
-				<Lazy margin={300}>
-					<Suspense fallback={<></>}>
-						<OnwardsUpper
-							ajaxUrl={CAPI.config.ajaxUrl}
-							hasRelated={CAPI.hasRelated}
-							hasStoryPackage={CAPI.hasStoryPackage}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							pageId={CAPI.pageId}
-							isPaidContent={CAPI.config.isPaidContent || false}
-							showRelatedContent={CAPI.config.showRelatedContent}
-							keywordIds={CAPI.config.keywordIds}
-							contentType={CAPI.contentType}
-							tags={CAPI.tags}
-							format={format}
-							pillar={pillar}
-							edition={CAPI.editionId}
-							shortUrlId={CAPI.config.shortUrlId}
-						/>
-					</Suspense>
-				</Lazy>
-			</Portal>
-			<Portal
-				rootId={
-					isSignedIn
-						? 'onwards-lower-whensignedin'
-						: 'onwards-lower-whensignedout'
-				}
-			>
-				<Lazy margin={300}>
-					<Suspense fallback={<></>}>
-						<OnwardsLower
-							ajaxUrl={CAPI.config.ajaxUrl}
-							hasStoryPackage={CAPI.hasStoryPackage}
-							tags={CAPI.tags}
-							format={format}
-						/>
-					</Suspense>
-				</Lazy>
-			</Portal>
 			<Portal rootId="sign-in-gate">
 				<SignInGateSelector
 					format={format}
@@ -972,42 +760,12 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					pageViewId={pageViewId}
 				/>
 			</Portal>
-			<HydrateOnce rootId="comments" waitFor={[user]}>
-				<Discussion
-					format={format}
-					discussionApiUrl={CAPI.config.discussionApiUrl}
-					shortUrlId={CAPI.config.shortUrlId}
-					user={user || undefined}
-					discussionD2Uid={CAPI.config.discussionD2Uid}
-					discussionApiClientHeader={
-						CAPI.config.discussionApiClientHeader
-					}
-					enableDiscussionSwitch={CAPI.config.enableDiscussionSwitch}
-					isAdFreeUser={CAPI.isAdFreeUser}
-					shouldHideAds={CAPI.shouldHideAds}
-					beingHydrated={true}
-				/>
-			</HydrateOnce>
 			<Portal rootId="most-viewed-footer">
 				<MostViewedFooter
 					format={format}
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
 				/>
-			</Portal>
-			<Portal rootId="reader-revenue-links-footer">
-				<Lazy margin={300}>
-					<ReaderRevenueLinks
-						urls={CAPI.nav.readerRevenueLinks.footer}
-						edition={CAPI.editionId}
-						dataLinkNamePrefix="footer : "
-						inHeader={false}
-						remoteHeaderEnabled={false}
-						pageViewId={pageViewId}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
-						ophanRecord={ophanRecord}
-					/>
-				</Lazy>
 			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner

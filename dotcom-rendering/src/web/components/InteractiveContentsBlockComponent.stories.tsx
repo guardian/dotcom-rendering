@@ -7,7 +7,7 @@ import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockCom
 
 // @ts-ignore: we know that NumberedList fixture has an interactive content block
 const interactiveContentsBlock: InteractiveContentsBlockElement =
-	enhanceInteractiveContentsElements(NumberedList).blocks[0].elements.find(
+	enhanceInteractiveContentsElements(NumberedList.blocks)[0].elements.find(
 		(block) =>
 			block._type ===
 			'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',

@@ -5,7 +5,7 @@ import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { ArticlePillar } from '@guardian/libs';
 
 import { OnwardsData } from './OnwardsData';
-import { Carousel } from './Carousel/Carousel';
+import { Carousel } from './Carousel';
 import { OnwardsLayout } from './OnwardsLayout';
 
 type PillarForContainer =

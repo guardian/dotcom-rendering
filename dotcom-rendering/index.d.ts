@@ -203,6 +203,8 @@ interface AdTargetParam {
 }
 
 type CustomParams = {
+	sens: 't' | 'f';
+	urlkw: string[];
 	[key: string]: string | string[] | number | number[] | boolean | boolean[];
 };
 
@@ -836,11 +838,6 @@ interface YoutubeBlockLoadable extends ComponentNameChunkMap {
 	addWhen: YoutubeBlockElement['_type'];
 }
 
-interface RichLinkBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'RichLinkComponent';
-	addWhen: RichLinkBlockElement['_type'];
-}
-
 interface InteractiveBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'InteractiveBlockComponent';
 	addWhen: InteractiveBlockElement['_type'];
@@ -861,31 +858,19 @@ interface DocumentBlockLoadable extends ComponentNameChunkMap {
 	addWhen: DocumentBlockElement['_type'];
 }
 
-interface MapBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'MapEmbedBlockComponent';
-	addWhen: MapBlockElement['_type'];
-}
-
 interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'VideoFacebookBlockComponent';
 	addWhen: VideoFacebookBlockElement['_type'];
-}
-interface VineBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'VineBlockComponent';
-	addWhen: VineBlockElement['_type'];
 }
 
 // There are docs on loadable in ./docs/loadable-components.md
 type LoadableComponents = [
 	YoutubeBlockLoadable,
-	RichLinkBlockLoadable,
 	InteractiveBlockLoadable,
 	InteractiveContentsBlockLoadable,
 	CalloutBlockLoadable,
 	DocumentBlockLoadable,
-	MapBlockLoadable,
 	FacebookVideoBlockLoadable,
-	VineBlockLoadable,
 ];
 
 interface CarouselImagesMap {

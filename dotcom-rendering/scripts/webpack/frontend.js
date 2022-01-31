@@ -5,9 +5,13 @@ const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const { v4: uuidv4 } = require('uuid');
 
 const PROD = process.env.NODE_ENV === 'production';
+const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
+
+const sessionId = uuidv4();
 
 const commonConfigs = ({ platform }) => ({
 	name: platform,
@@ -63,24 +67,27 @@ module.exports = [
 		commonConfigs({
 			platform: 'server',
 		}),
-		require(`./server`)(),
+		require(`./server`)({ sessionId }),
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compliation
-	merge(
-		commonConfigs({
-			platform: 'browser.legacy',
-		}),
-		require(`./browser`)({
-			isLegacyJS: true,
-		}),
-	),
+	INCLUDE_LEGACY &&
+		merge(
+			commonConfigs({
+				platform: 'browser.legacy',
+			}),
+			require(`./browser`)({
+				isLegacyJS: true,
+				sessionId,
+			}),
+		),
 	merge(
 		commonConfigs({
 			platform: 'browser',
 		}),
 		require(`./browser`)({
 			isLegacyJS: false,
+			sessionId,
 		}),
 	),
-];
+].filter(Boolean);

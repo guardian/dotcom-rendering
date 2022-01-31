@@ -54,13 +54,24 @@ export const ArticleRenderer: React.FC<{
 	host?: string;
 	pageId: string;
 	webTitle: string;
-}> = ({ format, palette, elements, adTargeting, host, pageId, webTitle }) => {
+	ajaxUrl: string;
+}> = ({
+	format,
+	palette,
+	elements,
+	adTargeting,
+	host,
+	pageId,
+	webTitle,
+	ajaxUrl,
+}) => {
 	const output = elements.map((element, index) => {
 		return renderArticleElement({
 			format,
 			palette,
 			element,
 			adTargeting,
+			ajaxUrl,
 			host,
 			index,
 			isMainMedia: false,

@@ -78,6 +78,7 @@ export const MainMedia: React.FC<{
 	host?: string;
 	pageId: string;
 	webTitle: string;
+	ajaxUrl: string;
 }> = ({
 	elements,
 	format,
@@ -88,6 +89,7 @@ export const MainMedia: React.FC<{
 	host,
 	pageId,
 	webTitle,
+	ajaxUrl,
 }) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -97,6 +99,7 @@ export const MainMedia: React.FC<{
 					palette,
 					element,
 					adTargeting,
+					ajaxUrl,
 					host,
 					index,
 					isMainMedia: true,

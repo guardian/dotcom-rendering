@@ -97,10 +97,6 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
 		},
 		{
-			chunkName: 'RichLinkComponent',
-			addWhen: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-		},
-		{
 			chunkName: 'InteractiveBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveBlockElement',
@@ -119,17 +115,9 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.DocumentBlockElement',
 		},
 		{
-			chunkName: 'MapEmbedBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.MapBlockElement',
-		},
-		{
 			chunkName: 'VideoFacebookBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-		},
-		{
-			chunkName: 'VineBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.VineBlockElement',
 		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
@@ -270,6 +258,7 @@ export const document = ({ data }: Props): string => {
 		...getScriptArrayFromChunkName('embedIframe'),
 		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
 		...getScriptArrayFromChunkName('relativeTime'),
+		...getScriptArrayFromChunkName('initDiscussion'),
 	]);
 
 	const gaChunk = getScriptArrayFromChunkName('ga');
@@ -281,7 +270,7 @@ export const document = ({ data }: Props): string => {
 	)[0];
 	const gaPath = {
 		modern: modernScript.src,
-		legacy: legacyScript.src,
+		legacy: legacyScript?.src,
 	};
 
 	/**

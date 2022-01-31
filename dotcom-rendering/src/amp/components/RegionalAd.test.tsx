@@ -28,6 +28,10 @@ describe('RegionalAd', () => {
 					AU: { adTargeting: [] },
 					INT: { adTargeting: [] },
 				}}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 			/>,
 		);
 
@@ -70,6 +74,10 @@ describe('RegionalAd', () => {
 					AU: { adTargeting: [] },
 					INT: { adTargeting: [] },
 				}}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 			/>,
 		);
 
@@ -108,6 +116,10 @@ describe('RegionalAd', () => {
 					US: { adTargeting: [] },
 					AU: { adTargeting: [] },
 					INT: { adTargeting: [] },
+				}}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
 				}}
 			/>,
 		);
@@ -148,6 +160,10 @@ describe('RegionalAd', () => {
 					AU: { adTargeting: [] },
 					INT: { adTargeting: [] },
 				}}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
 			/>,
 		);
 
@@ -186,6 +202,10 @@ describe('RegionalAd', () => {
 					US: { adTargeting: [] },
 					AU: { adTargeting: [] },
 					INT: { adTargeting: [] },
+				}}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
 				}}
 			/>,
 		);
@@ -229,6 +249,10 @@ describe('RegionalAd', () => {
 					US: { adTargeting: [] },
 					AU: { adTargeting: [] },
 					INT: { adTargeting: [] },
+				}}
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
 				}}
 			/>,
 		);
