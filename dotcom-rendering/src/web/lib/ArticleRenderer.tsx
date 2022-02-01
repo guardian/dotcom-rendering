@@ -67,15 +67,15 @@ export const ArticleRenderer: React.FC<{
 }) => {
 	const output = elements.map((element, index) => {
 		return renderArticleElement({
-			format,
-			palette,
-			element,
 			adTargeting,
 			ajaxUrl,
+			element,
+			format,
 			host,
 			index,
 			isMainMedia: false,
 			pageId,
+			palette,
 			webTitle,
 		});
 	});

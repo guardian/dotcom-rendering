@@ -48,13 +48,13 @@ export const useSignInGateWillShow = ({
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			gateVariant
 				?.canShow({
-					isSignedIn: !!isSignedIn,
-					currentTest,
 					contentType,
-					sectionName,
-					tags,
+					currentTest,
 					isPaidContent,
 					isPreview,
+					isSignedIn: !!isSignedIn,
+					sectionName,
+					tags,
 				})
 				.then(setCanShowGate);
 		}

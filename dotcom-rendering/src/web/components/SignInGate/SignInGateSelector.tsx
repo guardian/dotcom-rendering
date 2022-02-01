@@ -63,14 +63,14 @@ const generateSignInUrl = ({
 
 	// set the component event params to be included in the query
 	const queryParams: ComponentEventParams = {
-		componentType: 'signingate',
-		componentId: signInGateTestIdToComponentId[currentTest.id],
 		abTestName: currentTest.name,
 		abTestVariant: currentTest.variant,
 		browserId:
 			getCookie({ name: 'bwid', shouldMemoize: true }) || undefined,
-		visitId: getCookie({ name: 'vsid' }) || undefined,
+		componentId: signInGateTestIdToComponentId[currentTest.id],
+		componentType: 'signingate',
 		viewId: pageViewId,
+		visitId: getCookie({ name: 'vsid' }) || undefined,
 	};
 
 	return `${idUrl}/signin?returnUrl=${returnUrl}&componentEventParams=${encodeURIComponent(
@@ -105,16 +105,16 @@ const ShowSignInGate = ({
 	// but still fire a view event if they are eligible to see the gate
 	if (gateVariant.gate) {
 		return gateVariant.gate({
-			guUrl: host,
-			signInUrl,
+			abTest,
 			dismissGate: () => {
 				dismissGate(setShowGate, abTest);
 			},
-			abTest,
-			ophanComponentId: signInGateTestIdToComponentId[abTest.id],
+			guUrl: host,
 			isComment:
 				format.design === ArticleDesign.Comment ||
 				format.design === ArticleDesign.Editorial,
+			ophanComponentId: signInGateTestIdToComponentId[abTest.id],
+			signInUrl,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -172,13 +172,13 @@ export const SignInGateSelector = ({
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			gateVariant
 				?.canShow({
-					isSignedIn: !!isSignedIn,
-					currentTest,
 					contentType,
-					sectionName,
-					tags,
+					currentTest,
 					isPaidContent,
 					isPreview,
+					isSignedIn: !!isSignedIn,
+					sectionName,
+					tags,
 				})
 				.then(setCanShowGate);
 		}
@@ -198,11 +198,11 @@ export const SignInGateSelector = ({
 	}
 
 	const signInUrl = generateSignInUrl({
-		pageId,
-		host,
-		pageViewId,
-		idUrl,
 		currentTest,
+		host,
+		idUrl,
+		pageId,
+		pageViewId,
 	});
 
 	return (

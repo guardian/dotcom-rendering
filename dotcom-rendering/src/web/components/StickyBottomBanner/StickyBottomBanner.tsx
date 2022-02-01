@@ -124,29 +124,29 @@ const buildRRBannerConfigWith = ({
 				id,
 				canShow: () =>
 					canShowFn({
-						remoteBannerConfig: isEnabled(switches),
-						isSignedIn,
+						alreadyVisitedCount: getAlreadyVisitedCount(),
+						asyncArticleCount,
 						asyncCountryCode,
 						contentType,
-						sectionId: section,
-						shouldHideReaderRevenue,
-						isMinuteArticle,
-						isPaidContent,
-						isSensitive,
-						tags,
 						contributionsServiceUrl,
-						alreadyVisitedCount: getAlreadyVisitedCount(),
 						engagementBannerLastClosedAt: getBannerLastClosedAt(
 							'engagementBannerLastClosedAt',
 						),
+						idApiUrl,
+						isMinuteArticle,
+						isPaidContent,
+						isPreview,
+						isSensitive,
+						isSignedIn,
+						remoteBannerConfig: isEnabled(switches),
+						section,
+						sectionId: section,
+						shouldHideReaderRevenue,
+						signInGateWillShow,
 						subscriptionBannerLastClosedAt: getBannerLastClosedAt(
 							'subscriptionBannerLastClosedAt',
 						),
-						section,
-						isPreview,
-						idApiUrl,
-						signInGateWillShow,
-						asyncArticleCount,
+						tags,
 					}),
 				show:
 					({ meta, module, fetchEmail }: BannerProps) =>
@@ -210,51 +210,51 @@ export const StickyBottomBanner = ({
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const signInGateWillShow = useSignInGateWillShow({
-		isSignedIn,
 		contentType,
-		sectionName,
-		tags,
 		isPaidContent,
 		isPreview,
+		isSignedIn,
+		sectionName,
+		tags,
 	});
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
 		const puzzlesBanner = buildPuzzlesBannerConfig({
-			isSignedIn,
-			asyncCountryCode: asyncCountryCode as Promise<string>,
-			isPreview,
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
 			>,
+			asyncCountryCode: asyncCountryCode as Promise<string>,
 			contentType,
-			section,
-			shouldHideReaderRevenue,
-			isMinuteArticle,
-			isPaidContent,
-			isSensitive,
-			tags,
 			contributionsServiceUrl,
 			idApiUrl,
+			isMinuteArticle,
+			isPaidContent,
+			isPreview,
+			isSensitive,
+			isSignedIn,
+			section,
+			shouldHideReaderRevenue,
 			switches,
+			tags,
 		});
 		const readerRevenue = buildReaderRevenueBannerConfig({
-			isSignedIn,
-			asyncCountryCode: asyncCountryCode as Promise<string>,
-			isPreview,
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
 			>,
-			signInGateWillShow,
+			asyncCountryCode: asyncCountryCode as Promise<string>,
 			contentType,
-			section,
-			shouldHideReaderRevenue,
-			isMinuteArticle,
-			isPaidContent,
-			isSensitive,
-			tags,
 			contributionsServiceUrl,
 			idApiUrl,
+			isMinuteArticle,
+			isPaidContent,
+			isPreview,
+			isSensitive,
+			isSignedIn,
+			section,
+			shouldHideReaderRevenue,
+			signInGateWillShow,
 			switches,
+			tags,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionName,

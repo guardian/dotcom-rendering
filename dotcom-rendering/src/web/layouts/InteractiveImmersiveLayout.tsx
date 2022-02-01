@@ -162,16 +162,16 @@ const Renderer: React.FC<{
 	//    But should be soon.
 	const output = elements.map((element, index) => {
 		const [ok, el] = renderElement({
-			format,
-			palette,
-			element,
 			adTargeting: undefined,
+			ajaxUrl,
+			element,
+			format,
 			host,
 			index,
 			isMainMedia: false,
 			pageId,
+			palette,
 			webTitle,
-			ajaxUrl,
 		});
 
 		if (ok) {

@@ -2,10 +2,10 @@ import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
 import { getIdapiUserIdentifiers } from '@root/src/web/lib/getIdapiUserData';
 
 const userIdentifiers = {
-	id: 'idValue',
 	brazeUuid: 'brazeUuidValue',
-	puzzleId: 'puzzleIdValue',
 	googleTagId: 'googleTagIdValue',
+	id: 'idValue',
+	puzzleId: 'puzzleIdValue',
 };
 
 jest.mock('@root/src/web/lib/getIdapiUserData', () => ({

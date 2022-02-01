@@ -28,13 +28,13 @@ export const addTrackingCodesToUrl = ({
 
 	if (isSupportUrl) {
 		const acquisitionData = {
-			source: 'GUARDIAN_WEB',
+			abTest,
+			campaignCode,
 			componentId,
 			componentType,
-			campaignCode,
-			abTest,
 			referrerPageviewId: pageViewId,
 			referrerUrl,
+			source: 'GUARDIAN_WEB',
 		};
 
 		const params = {

@@ -90,20 +90,18 @@ const buildPayload = async ({
 		},
 		targeting: {
 			alreadyVisitedCount,
-			shouldHideReaderRevenue,
-			isPaidContent,
-			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
-			engagementBannerLastClosedAt,
-			subscriptionBannerLastClosedAt,
-			mvtId: Number(
-				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
-			),
 			countryCode,
-			weeklyArticleHistory: await asyncArticleCount,
+			engagementBannerLastClosedAt,
 			hasOptedOutOfArticleCount: optedOutOfArticleCount,
+			isPaidContent,
 			modulesVersion: MODULES_VERSION,
+			mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),),
 			sectionId,
+			shouldHideReaderRevenue,
+			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
+			subscriptionBannerLastClosedAt,
 			tagIds: tags.map((tag) => tag.id),
+			weeklyArticleHistory: await asyncArticleCount,
 		},
 	};
 };
@@ -151,21 +149,21 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	const countryCode = await asyncCountryCode;
 	const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 	const bannerPayload = await buildPayload({
-		isSignedIn,
-		countryCode,
+		alreadyVisitedCount,
+		asyncArticleCount,
 		contentType,
-		sectionId,
-		shouldHideReaderRevenue,
+		contributionsServiceUrl,
+		countryCode,
+		engagementBannerLastClosedAt,
 		isMinuteArticle,
 		isPaidContent,
-		tags,
-		contributionsServiceUrl,
 		isSensitive,
-		alreadyVisitedCount,
-		engagementBannerLastClosedAt,
-		subscriptionBannerLastClosedAt,
+		isSignedIn,
 		optedOutOfArticleCount,
-		asyncArticleCount,
+		sectionId,
+		shouldHideReaderRevenue,
+		subscriptionBannerLastClosedAt,
+		tags,
 	});
 
 	const response: ModuleDataResponse = await getBanner(
@@ -219,21 +217,21 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 		const countryCode = await asyncCountryCode;
 		const optedOutOfArticleCount = await hasOptedOutOfArticleCount();
 		const bannerPayload = await buildPayload({
-			isSignedIn,
-			countryCode,
+			alreadyVisitedCount,
+			asyncArticleCount,
 			contentType,
-			sectionId,
-			shouldHideReaderRevenue,
+			contributionsServiceUrl,
+			countryCode,
+			engagementBannerLastClosedAt,
 			isMinuteArticle,
 			isPaidContent,
-			tags,
-			contributionsServiceUrl,
 			isSensitive,
-			alreadyVisitedCount,
-			engagementBannerLastClosedAt,
-			subscriptionBannerLastClosedAt,
+			isSignedIn,
 			optedOutOfArticleCount,
-			asyncArticleCount,
+			sectionId,
+			shouldHideReaderRevenue,
+			subscriptionBannerLastClosedAt,
+			tags,
 		});
 		return getPuzzlesBanner(contributionsServiceUrl, bannerPayload).then(
 			(response: ModuleDataResponse) => {

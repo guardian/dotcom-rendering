@@ -314,13 +314,13 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	} = CAPI;
 
 	const adTargeting: AdTargeting = buildAdTargeting({
+		adUnit: CAPI.config.adUnit,
+		edition: CAPI.config.edition,
 		isAdFreeUser: CAPI.isAdFreeUser,
 		isSensitive: CAPI.config.isSensitive,
-		videoDuration: CAPI.config.videoDuration,
-		edition: CAPI.config.edition,
 		section: CAPI.config.section,
 		sharedAdTargeting: CAPI.config.sharedAdTargeting,
-		adUnit: CAPI.config.adUnit,
+		videoDuration: CAPI.config.videoDuration,
 	});
 
 	const showBodyEndSlot =

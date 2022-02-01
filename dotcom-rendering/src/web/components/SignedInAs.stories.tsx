@@ -6,13 +6,14 @@ import { decidePalette } from '@root/src/web/lib/decidePalette';
 import { SignedInAs } from './SignedInAs';
 
 const aUser = {
-	userId: 'abc123',
-	displayName: 'Jane Smith',
-	webUrl: '',
 	apiUrl: '',
 	avatar: '',
-	secureAvatarUrl: '',
 	badge: [],
+	displayName: 'Jane Smith',
+	secureAvatarUrl: '',
+	userId: 'abc123',
+	webUrl: '',
+	// eslint-disable-next-line sort-keys
 	privateFields: {
 		canPostComment: true,
 		isPremoderated: false,

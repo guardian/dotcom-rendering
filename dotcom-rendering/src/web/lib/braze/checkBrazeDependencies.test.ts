@@ -58,11 +58,11 @@ describe('checkBrazeDependecies', () => {
 
 		expect(got.isSuccessful).toEqual(true);
 		expect(got.data).toEqual({
-			brazeSwitch: true,
 			apiKey: 'fake-api-key',
+			brazeSwitch: true,
+			brazeUuid: 'fake-uuid',
 			consent: true,
 			isNotPaidContent: true,
-			brazeUuid: 'fake-uuid',
 		});
 	});
 

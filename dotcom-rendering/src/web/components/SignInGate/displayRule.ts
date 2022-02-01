@@ -152,13 +152,13 @@ export const canShowMandatoryUs: ({
 		(await getLocale()) === 'US' &&
 		(await hasRequiredConsents()) &&
 		(await canShowSignInGate({
-			isSignedIn,
-			currentTest,
 			contentType,
-			sectionName,
-			tags,
+			currentTest,
 			isPaidContent,
 			isPreview,
+			isSignedIn,
+			sectionName,
+			tags,
 		}))
 	);
 };

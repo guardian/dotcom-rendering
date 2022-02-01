@@ -294,20 +294,20 @@ export const document = ({ data }: Props): string => {
 			: CAPI.config.keywords;
 
 	return htmlTemplate({
+		ampLink,
+		css: extractedCss,
+		description: CAPI.trailText,
+		fontFiles,
+		gaPath,
+		html,
+		keywords,
 		linkedData,
 		loadableConfigScripts,
-		priorityScriptTags,
 		lowPriorityScriptTags,
-		css: extractedCss,
-		html,
-		fontFiles,
-		title,
-		description: CAPI.trailText,
-		windowGuardian,
-		gaPath,
-		ampLink,
 		openGraphData,
+		priorityScriptTags,
+		title,
 		twitterData,
-		keywords,
+		windowGuardian,
 	});
 };

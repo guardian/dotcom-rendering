@@ -757,17 +757,17 @@ export const renderArticleElement = ({
 	const withUpdatedRole = updateRole(element, format);
 
 	const [ok, el] = renderElement({
-		format,
-		palette,
-		element: withUpdatedRole,
 		adTargeting,
 		ajaxUrl,
+		element: withUpdatedRole,
+		format,
+		hideCaption,
 		host,
 		index,
 		isMainMedia,
-		hideCaption,
-		starRating,
 		pageId,
+		palette,
+		starRating,
 		webTitle,
 	});
 

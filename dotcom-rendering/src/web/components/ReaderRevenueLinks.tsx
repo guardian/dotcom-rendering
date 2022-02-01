@@ -188,14 +188,14 @@ const ReaderRevenueLinksRemote: React.FC<{
 				clientName: 'dcr',
 			},
 			targeting: {
-				showSupportMessaging: !shouldHideSupportMessaging(),
-				edition,
 				countryCode,
+				edition,
+				lastOneOffContributionDate: getLastOneOffContributionDate(),
 				modulesVersion: MODULES_VERSION,
 				mvtId: Number(
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 				),
-				lastOneOffContributionDate: getLastOneOffContributionDate(),
+				showSupportMessaging: !shouldHideSupportMessaging(),
 			},
 		};
 		getHeader(contributionsServiceUrl, requestData)
@@ -306,14 +306,14 @@ const ReaderRevenueLinksNative: React.FC<{
 	const getUrl = (rrType: 'contribute' | 'subscribe'): string => {
 		if (inHeader) {
 			return addTrackingCodesToUrl({
-				base: `https://support.theguardian.com/${rrType}`,
-				componentType: 'ACQUISITIONS_HEADER',
-				componentId: campaignCode,
-				campaignCode,
 				abTest: {
 					name: testName,
 					variant: 'control',
 				},
+				base: `https://support.theguardian.com/${rrType}`,
+				campaignCode,
+				componentId: campaignCode,
+				componentType: 'ACQUISITIONS_HEADER',
 				pageViewId,
 				referrerUrl: window.location.origin + window.location.pathname,
 			});

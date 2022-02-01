@@ -73,29 +73,29 @@ const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
 		referrerUrl: window.location.origin + window.location.pathname,
 	},
 	targeting: {
+		browserId: (await hasCmpConsentForBrowserId())
+			? data.browserId
+			: undefined,
 		contentType: data.contentType,
-		sectionId: data.sectionId,
-		shouldHideReaderRevenue: data.shouldHideReaderRevenue,
+		countryCode: data.countryCode,
+		epicViewLog: getEpicViewLog(storage.local),
+		hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
 		isMinuteArticle: data.isMinuteArticle,
 		isPaidContent: data.isPaidContent,
-		tags: data.tags,
-		showSupportMessaging: !shouldHideSupportMessaging(
-			data.isSignedIn || false,
-		),
 		isRecurringContributor: isRecurringContributor(
 			data.isSignedIn || false,
 		),
 		lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
-		epicViewLog: getEpicViewLog(storage.local),
-		weeklyArticleHistory: await data.asyncArticleCount,
-		hasOptedOutOfArticleCount: await hasOptedOutOfArticleCount(),
-		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
-		countryCode: data.countryCode,
 		modulesVersion: MODULES_VERSION,
+		mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })),
+		sectionId: data.sectionId,
+		shouldHideReaderRevenue: data.shouldHideReaderRevenue,
+		showSupportMessaging: !shouldHideSupportMessaging(
+			data.isSignedIn || false,
+		),
+		tags: data.tags,
 		url: window.location.origin + window.location.pathname,
-		browserId: (await hasCmpConsentForBrowserId())
-			? data.browserId
-			: undefined,
+		weeklyArticleHistory: await data.asyncArticleCount,
 	},
 });
 

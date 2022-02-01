@@ -111,21 +111,21 @@ export const SlotBodyEnd = ({
 
 	useOnce(() => {
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
-			isSignedIn,
-			countryCode,
-			contentType,
-			sectionId,
-			shouldHideReaderRevenue,
-			isMinuteArticle,
-			isPaidContent,
-			tags,
-			contributionsServiceUrl,
-			idApiUrl,
-			stage,
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
 			>,
 			browserId: browserId || undefined,
+			contentType,
+			contributionsServiceUrl,
+			countryCode,
+			idApiUrl,
+			isMinuteArticle,
+			isPaidContent,
+			isSignedIn,
+			sectionId,
+			shouldHideReaderRevenue,
+			stage,
+			tags,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionName,

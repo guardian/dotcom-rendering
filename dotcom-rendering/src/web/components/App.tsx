@@ -167,8 +167,8 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		if (window && window.guardian) {
 			window.guardian.readerRevenue = {
 				changeGeolocation: loadAndRun('changeGeolocation'),
-				showMeTheEpic: loadAndRun('showMeTheEpic'),
 				showMeTheBanner: loadAndRun('showMeTheBanner'),
+				showMeTheEpic: loadAndRun('showMeTheEpic'),
 				showNextVariant: loadAndRun('showNextVariant'),
 				showPreviousVariant: loadAndRun('showPreviousVariant'),
 			};
@@ -190,13 +190,13 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	};
 
 	const adTargeting: AdTargeting = buildAdTargeting({
+		adUnit: CAPI.config.adUnit,
+		edition: CAPI.config.edition,
 		isAdFreeUser: CAPI.isAdFreeUser,
 		isSensitive: CAPI.config.isSensitive,
-		videoDuration: CAPI.config.videoDuration,
-		edition: CAPI.config.edition,
 		section: CAPI.config.section,
 		sharedAdTargeting: CAPI.config.sharedAdTargeting,
-		adUnit: CAPI.config.adUnit,
+		videoDuration: CAPI.config.videoDuration,
 	});
 
 	// There are docs on loadable in ./docs/loadable-components.md
