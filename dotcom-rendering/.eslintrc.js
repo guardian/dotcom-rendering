@@ -51,6 +51,7 @@ module.exports = {
 		'react/prop-types': [0],
 		'react/jsx-boolean-value': [2, 'always'],
 		'import/prefer-default-export': 'off',
+		'sort-keys': ['warn', 'asc', { natural: true, minKeys: 5 }],
 		// TODO: remove
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
 		'@typescript-eslint/no-unsafe-call': 'off',
