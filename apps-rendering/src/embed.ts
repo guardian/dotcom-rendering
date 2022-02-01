@@ -76,6 +76,8 @@ interface EmailSignup {
 	caption: Option<string>;
 	src: string;
 	tracking: EmbedTracksType;
+	source: Option<string>;
+	sourceDomain: Option<string>;
 }
 
 /**
@@ -370,6 +372,8 @@ const emailFromIframe =
 				caption: fromNullable(element.embedTypeData?.caption),
 				tracking:
 					element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
+				source: fromNullable(element.embedTypeData?.source),
+				sourceDomain: fromNullable(element.embedTypeData?.sourceDomain),
 			});
 		} else {
 			return err('element is not an email signup');

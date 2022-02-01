@@ -98,6 +98,16 @@ const embedToDivProps = (embed: Embed): Record<string, string> => {
 				),
 				src: embed.src,
 				...(embed.tracking && { tracking: embed.tracking.toString() }),
+				...pipe(
+					embed.source,
+					map((source) => ({ source })),
+					withDefault<Record<string, string>>({}),
+				),
+				...pipe(
+					embed.sourceDomain,
+					map((sourceDomain) => ({ sourceDomain })),
+					withDefault<Record<string, string>>({}),
+				),
 			};
 		}
 		case EmbedKind.TikTok: {
@@ -309,6 +319,10 @@ const divElementPropsToEmbedComponentProps = (
 								caption: fromNullable(elementProps['caption']),
 								tracking: parseTrackingParam(
 									elementProps['tracking'],
+								),
+								source: fromNullable(elementProps['source']),
+								sourceDomain: fromNullable(
+									elementProps['sourceDomain'],
 								),
 							}),
 						)(requiredStringParam(elementProps, 'src'));
