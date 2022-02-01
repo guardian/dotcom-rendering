@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys */
+
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 

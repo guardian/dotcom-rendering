@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-var-requires, sort-keys */
 const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');

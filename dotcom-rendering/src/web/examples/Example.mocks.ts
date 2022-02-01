@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys */
+
 import { ArticlePillar } from '@guardian/libs';
 
 export const NAV: NavType = {

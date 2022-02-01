@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys */
+
 import {
 	ArticlePillar,
 	ArticleDesign,

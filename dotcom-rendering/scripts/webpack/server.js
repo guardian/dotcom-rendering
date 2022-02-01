@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';

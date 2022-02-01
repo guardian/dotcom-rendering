@@ -92,12 +92,14 @@ const containerUrls = {
 		AU: 'c45d-318f-896c-3a85',
 		INT: 'd1ad8ec3-5ee2-4673-94c8-cc3f8d261e52',
 	},
+	// eslint-disable-next-line sort-keys
 	opinion: {
 		UK: '3ff78b30-52f5-4d30-ace8-c887113cbe0d',
 		US: '98df412d-b0e7-4d9a-98c2-062642823e94',
 		AU: 'au-alpha/contributors/feature-stories',
 		INT: 'ee3386bb-9430-4a6d-8bca-b99d65790f3b',
 	},
+	// eslint-disable-next-line sort-keys
 	culture: {
 		UK: 'ae511a89-ef38-4ec9-aab1-3a5ebc96d118',
 		US: 'fb59c1f8-72a7-41d5-8365-a4d574809bed',

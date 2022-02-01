@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys */
+
 import express from 'express';
 import { extractNAV } from '@root/src/model/extract-nav';
 import { document } from '@root/src/web/server/document';

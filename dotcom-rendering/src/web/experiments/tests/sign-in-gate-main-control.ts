@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys */
+
 import { ABTest } from '@guardian/ab-core';
 
 export const signInGateMainControl: ABTest = {

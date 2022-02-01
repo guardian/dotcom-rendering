@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys */
+
 import fetchMock from 'fetch-mock';
 
 import { mostRead } from '@root/fixtures/manual/most-read';
