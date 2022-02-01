@@ -68,11 +68,11 @@ run-ci: stop build-ci start-ci
 
 dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
-	@NODE_ENV=development SKIP_LEGACY=true nodemon scripts/frontend/dev-server -- --max-old-space-size=7168
+	@NODE_ENV=development SKIP_LEGACY=true nodemon scripts/dev-server/index -- --max-old-space-size=7168
 
 dev-legacy: clear clean-dist install
 	$(call log, "starting frontend DEV server (Legacy support ENABLED)")
-	@NODE_ENV=development nodemon scripts/dev-server/index.js -- --max-old-space-size=7168
+	@NODE_ENV=development nodemon scripts/dev-server/index -- --max-old-space-size=7168
 
 # tests #####################################
 
