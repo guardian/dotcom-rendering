@@ -95,7 +95,9 @@ const buildPayload = async ({
 			hasOptedOutOfArticleCount: optedOutOfArticleCount,
 			isPaidContent,
 			modulesVersion: MODULES_VERSION,
-			mvtId: Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),),
+			mvtId: Number(
+				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
+			),
 			sectionId,
 			shouldHideReaderRevenue,
 			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
