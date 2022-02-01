@@ -551,6 +551,9 @@ interface TagType {
 	bylineImageUrl?: string;
 }
 
+/**
+ * BlocksRequest is the expected body format for POST requests made to /Blocks
+ */
 interface BlocksRequest {
 	blocks: Block[];
 	format: CAPIFormat;
