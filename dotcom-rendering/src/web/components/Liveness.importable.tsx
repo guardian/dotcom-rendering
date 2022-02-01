@@ -42,7 +42,7 @@ function hydrateBlocks() {
 /**
  * insertNewBlocks takes html and inserts it at the top of the liveblog
  *
- * @param html The block html to be inserted
+ * @param {string} html The block html to be inserted
  * @returns void
  */
 function insertNewBlocks(html: string) {
