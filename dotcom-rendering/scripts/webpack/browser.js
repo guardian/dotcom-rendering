@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const chalk = require('chalk');
 const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
-const friendlyErrorsWebpackPlugin = () =>
+const friendlyErrorsWebpackPlugin = (isLegacyJS) =>
 	new FriendlyErrorsWebpackPlugin({
 		compilationSuccessInfo: {
 			messages: [
-				`DEV server running at ${chalk.blue.underline(
-					'http://localhost:3030',
-				)}`,
+				isLegacyJS
+					? 'Legacy client build complete'
+					: 'Client build complete',
 			],
 		},
 	});

@@ -48,7 +48,9 @@ const commonConfigs = ({ platform }) => ({
 		}),
 		// Does not try to require the 'canvas' package,
 		// an optional dependency of jsdom that we aren't using.
-		new webpack.IgnorePlugin({ resourceRegExp: /^canvas$/ }),
+		new webpack.IgnorePlugin({
+			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
+		}),
 		PROD &&
 			new BundleAnalyzerPlugin({
 				reportFilename: path.join(dist, `${platform}-bundles.html`),

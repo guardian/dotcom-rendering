@@ -1,6 +1,19 @@
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const chalk = require('chalk');
 const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
+
+const friendlyErrorsWebpackPlugin = () =>
+	new FriendlyErrorsWebpackPlugin({
+		compilationSuccessInfo: {
+			messages: [
+				`DEV server running at ${chalk.blue.underline(
+					'http://localhost:3030',
+				)}`,
+			],
+		},
+	});
 
 module.exports = ({ sessionId }) => ({
 	entry: {
@@ -19,6 +32,8 @@ module.exports = ({ sessionId }) => ({
 	},
 	externals: [
 		'@loadable/component',
+		'express',
+		'log4js',
 		require('webpack-node-externals')({
 			allowlist: [/^@guardian/],
 		}),
@@ -42,6 +57,7 @@ module.exports = ({ sessionId }) => ({
 		},
 	],
 	plugins: [
+		DEV && friendlyErrorsWebpackPlugin(),
 		DEV &&
 			new GuStatsReportPlugin({
 				displayDisclaimer: true,
