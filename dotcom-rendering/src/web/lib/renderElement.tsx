@@ -577,7 +577,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 			return [
 				true,
-				<Island>
+				<Island deferUntil="visible">
 					<VideoFacebookBlockComponent
 						role={element.role}
 						isTracking={element.isThirdPartyTracking}
