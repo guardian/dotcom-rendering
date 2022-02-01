@@ -131,7 +131,7 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 		onSuccess: (data: {
 			numNewBlocks: number;
 			html: string;
-			latestBlockId: string;
+			mostRecentBlockId: string;
 		}) => {
 			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
 				// Always insert the new blocks in the dom (but hidden)
@@ -148,7 +148,8 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 				}
 
 				// Update the block id we use for polling
-				if (data.latestBlockId) setLatestBlockId(data.latestBlockId);
+				if (data.mostRecentBlockId)
+					setLatestBlockId(data.mostRecentBlockId);
 			}
 		},
 	});
