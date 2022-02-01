@@ -1,4 +1,8 @@
-module.exports = () => ({
+const GuStatsReportPlugin = require('./gu-stats-report-plugin');
+
+const DEV = process.env.NODE_ENV === 'development';
+
+module.exports = ({ sessionId }) => ({
 	entry: {
 		'frontend.server': './src/app/server.ts',
 	},
@@ -37,6 +41,16 @@ module.exports = () => ({
 				: callback();
 		},
 	],
+	plugins: [
+		DEV &&
+			new GuStatsReportPlugin({
+				displayDisclaimer: true,
+				buildName: 'server',
+				project: 'dotcom-rendering',
+				team: 'dotcom',
+				sessionId,
+			}),
+	].filter(Boolean),
 	module: {
 		rules: [
 			{

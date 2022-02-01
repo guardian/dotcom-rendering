@@ -10,6 +10,11 @@ const shouldHideSupportMessaging: {
 jest.mock('@root/src/web/lib/contributions', () => ({
 	shouldHideSupportMessaging: jest.fn(() => true),
 }));
+jest.mock('@guardian/libs', () => ({
+	getLocale: async () => {
+		return 'GB';
+	},
+}));
 
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';

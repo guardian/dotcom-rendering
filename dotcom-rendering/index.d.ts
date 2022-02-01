@@ -203,6 +203,8 @@ interface AdTargetParam {
 }
 
 type CustomParams = {
+	sens: 't' | 'f';
+	urlkw: string[];
 	[key: string]: string | string[] | number | number[] | boolean | boolean[];
 };
 
@@ -549,6 +551,25 @@ interface TagType {
 	bylineImageUrl?: string;
 }
 
+/**
+ * BlocksRequest is the expected body format for POST requests made to /Blocks
+ */
+interface BlocksRequest {
+	blocks: Block[];
+	format: CAPIFormat;
+	host?: string;
+	pageId: string;
+	webTitle: string;
+	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	edition: string;
+	section: string;
+	sharedAdTargeting: Record<string, unknown>;
+	adUnit: string;
+	videoDuration?: number;
+}
+
 interface BadgeType {
 	seriesTag: string;
 	imageUrl: string;
@@ -851,23 +872,9 @@ interface CalloutBlockLoadable extends ComponentNameChunkMap {
 	addWhen: CalloutBlockElement['_type'];
 }
 
-interface DocumentBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'DocumentBlockComponent';
-	addWhen: DocumentBlockElement['_type'];
-}
-
-interface MapBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'MapEmbedBlockComponent';
-	addWhen: MapBlockElement['_type'];
-}
-
 interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'VideoFacebookBlockComponent';
 	addWhen: VideoFacebookBlockElement['_type'];
-}
-interface VineBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'VineBlockComponent';
-	addWhen: VineBlockElement['_type'];
 }
 
 // There are docs on loadable in ./docs/loadable-components.md
@@ -876,10 +883,7 @@ type LoadableComponents = [
 	InteractiveBlockLoadable,
 	InteractiveContentsBlockLoadable,
 	CalloutBlockLoadable,
-	DocumentBlockLoadable,
-	MapBlockLoadable,
 	FacebookVideoBlockLoadable,
-	VineBlockLoadable,
 ];
 
 interface CarouselImagesMap {

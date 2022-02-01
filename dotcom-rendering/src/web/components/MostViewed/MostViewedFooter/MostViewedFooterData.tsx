@@ -72,6 +72,7 @@ export const MostViewedFooterData = ({
 				css={css`
 					width: 100%;
 				`}
+				data-cy="mostviewed-footer"
 			>
 				<MostViewedFooterGrid
 					data={transformTabs(tabs)}

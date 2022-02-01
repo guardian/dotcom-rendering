@@ -1,4 +1,4 @@
-.PHONY: install dev build clean-dist start stop monitor clear
+.PHONY: install dev dev-legacy build clean-dist start stop monitor clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -34,6 +34,10 @@ build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
 
+build-ci: clean-dist install
+	$(call log, "building production bundles")
+	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/webpack/frontend.js
+
 start-ci: install
 	$(call log, "starting PROD server...")
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
@@ -57,13 +61,17 @@ logs:
 
 run: stop build start
 
-run-ci: stop build start-ci
+run-ci: stop build-ci start-ci
 
 
 # dev #########################################
 
 dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
+	@NODE_ENV=development SKIP_LEGACY=true nodemon scripts/frontend/dev-server -- --max-old-space-size=7168
+
+dev-legacy: clear clean-dist install
+	$(call log, "starting frontend DEV server (Legacy support ENABLED)")
 	@NODE_ENV=development nodemon scripts/frontend/dev-server -- --max-old-space-size=7168
 
 # tests #####################################

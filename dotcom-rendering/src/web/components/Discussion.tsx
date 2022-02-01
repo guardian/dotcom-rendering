@@ -25,6 +25,7 @@ export type Props = {
 	isAdFreeUser: boolean;
 	shouldHideAds: boolean;
 	user?: UserProfile;
+	expanded?: boolean;
 };
 
 const commentIdFromUrl = () => {
@@ -46,13 +47,14 @@ export const Discussion = ({
 	isAdFreeUser,
 	shouldHideAds,
 	user,
+	expanded,
 }: Props) => {
 	const [commentPage, setCommentPage] = useState<number>();
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
 	>();
-	const [isExpanded, setIsExpanded] = useState<boolean>(false);
+	const [isExpanded, setIsExpanded] = useState<boolean>(!!expanded);
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
 	);
@@ -146,6 +148,7 @@ export const Discussion = ({
 							width: 100%;
 							max-width: 100%;
 						`}
+						data-cy="discussion"
 					>
 						<Hide when="above" breakpoint="leftCol">
 							<div

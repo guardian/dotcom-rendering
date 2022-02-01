@@ -46,6 +46,7 @@ export const RegionalAd = ({
 	contentType,
 	commercialProperties,
 	config,
+	adTargeting,
 }: RegionalAdProps) => (
 	<>
 		{adRegions.map((adRegion) => (
@@ -70,6 +71,7 @@ export const RegionalAd = ({
 								config.useAmazon,
 								getPlacementIdByAdRegion(adRegion),
 							)}
+							adTargeting={adTargeting}
 						/>
 					</div>
 				)}
