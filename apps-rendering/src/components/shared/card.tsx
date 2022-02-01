@@ -43,7 +43,7 @@ import { kicker } from './kicker';
 interface Props {
 	relatedItem: RelatedItem;
 	image: Option<Image>;
-	kickerText: string;
+	kickerText: Option<string>;
 }
 
 const listBaseStyles = css`

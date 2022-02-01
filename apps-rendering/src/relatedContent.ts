@@ -92,7 +92,7 @@ const parseRelatedContent = (relatedContent: Content[]): RelatedContent => {
 					webPublicationDate: content.webPublicationDate,
 					headerImage: parseHeaderImage(content),
 					link: content.id,
-					type: parseRelatedItemType(content),
+					type: RelatedItemType.LIVE || parseRelatedItemType(content),
 					pillar: {
 						id: content.pillarId ?? 'pillar/news',
 						name: content.pillarName ?? 'news',

@@ -1,14 +1,15 @@
 import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import type { ArticleFormat } from '@guardian/libs';
-import { some, withDefault } from '@guardian/types';
+import { remSpace } from '@guardian/source-foundations';
+import { OptionKind, some, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import type { ReactElement } from 'react';
 import { getThemeStyles } from 'themeStyles';
 
-const dotStyles = (format: ArticleFormat) => {
-	const { liveblogKicker } = getThemeStyles(format.theme);
+const dotStyles = (colour: string) => {
 	return css`
-		color: ${liveblogKicker};
+		color: ${colour};
 		:before {
 			border-radius: 62.5rem;
 			display: inline-block;
@@ -17,7 +18,7 @@ const dotStyles = (format: ArticleFormat) => {
 			width: 0.75em;
 			height: 0.75em;
 			content: '';
-			margin-right: 0.1875rem;
+			margin-right: ${remSpace[1]};
 			vertical-align: initial;
 		}
 	`;
@@ -25,10 +26,10 @@ const dotStyles = (format: ArticleFormat) => {
 
 const liveDot = (
 	type: RelatedItemType,
-	format: ArticleFormat,
+	colour: string,
 ): ReactElement | null => {
 	if (type === RelatedItemType.LIVE) {
-		return <span css={dotStyles(format)} />;
+		return <span css={dotStyles(colour)} />;
 	} else {
 		return null;
 	}
@@ -58,11 +59,23 @@ const slash = (text: string): ReactElement | null => {
 export const kicker = (
 	type: RelatedItemType,
 	format: ArticleFormat,
-	text: string,
+	text: Option<string>,
 ): ReactElement | null => {
-	const kickerText =
-		type === RelatedItemType.LIVE ? 'Live' : withDefault('')(some(text));
 
+	const getKickerText = (): string | null => {
+		if (text.kind === OptionKind.Some && text.value.length > 0) {
+			return text.value;
+		} else {
+			if (type === RelatedItemType.LIVE) {
+				return 'Live';
+			} else {
+				// No kicker text and not a liveblog card
+				return null;
+			}
+		}
+	};
+
+	const kickerText = getKickerText();
 	if (kickerText) {
 		const { kicker, liveblogKicker } = getThemeStyles(format.theme);
 		const kickerColour = withDefault(kicker)(some(liveblogKicker));
@@ -70,7 +83,7 @@ export const kicker = (
 		return (
 			<>
 				<span css={kickerStyles(kickerColour)}>
-					{liveDot(type, format)}
+					{liveDot(type, kickerColour)}
 					{slash(kickerText)}
 				</span>
 			</>
