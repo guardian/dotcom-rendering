@@ -30,7 +30,7 @@ function ampifyUrl(url) {
 }
 
 const go = () => {
-	const webpackConfig = require('../webpack/frontend');
+	const webpackConfig = require('../webpack/webpack.config');
 	const compiler = webpack(webpackConfig);
 
 	const app = express();
