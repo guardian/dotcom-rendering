@@ -98,12 +98,10 @@ const toggleOverrideStyles = css`
 	padding-right: ${remSpace[1]};
 
 	${until.desktop} {
+		color: ${neutral[100]};
+
 		button[aria-checked='false'] {
 			background-color: rgba(255, 255, 255, 0.5);
-		}
-
-		label {
-			color: ${neutral[100]};
 		}
 	}
 `;
