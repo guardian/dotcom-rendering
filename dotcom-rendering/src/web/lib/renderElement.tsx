@@ -33,6 +33,13 @@ import { VimeoBlockComponent } from '@root/src/web/components/VimeoBlockComponen
 import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/YoutubeBlockComponent';
+
+import { TimelineAtomWrapper } from '@root/src/web/components/TimelineAtomWrapper.importable';
+import { GuideAtomWrapper } from '@root/src/web/components/GuideAtomWrapper.importable';
+import { ChartAtomWrapper } from '@root/src/web/components/ChartAtomWrapper.importable';
+import { ProfileAtomWrapper } from '@root/src/web/components/ProfileAtomWrapper.importable';
+import { QandaAtomWrapper } from '@root/src/web/components/QandaAtomWrapper.importable';
+
 import {
 	WitnessVideoBlockComponent,
 	WitnessImageBlockComponent,
@@ -42,14 +49,9 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import {
 	AudioAtom,
-	ChartAtom,
 	ExplainerAtom,
 	InteractiveAtom,
 	InteractiveLayoutAtom,
-	QandaAtom,
-	GuideAtom,
-	ProfileAtom,
-	TimelineAtom,
 	VideoAtom,
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
@@ -178,7 +180,7 @@ export const renderElement = ({
 			return [
 				true,
 				<Island deferUntil="visible">
-					<ChartAtom id={element.id} html={element.html} />
+					<ChartAtomWrapper id={element.id} html={element.html} />
 				</Island>,
 			];
 
@@ -289,7 +291,7 @@ export const renderElement = ({
 			return [
 				true,
 				<Island deferUntil="visible">
-					<GuideAtom
+					<GuideAtomWrapper
 						id={element.id}
 						title={element.title}
 						html={element.html}
@@ -474,7 +476,7 @@ export const renderElement = ({
 			return [
 				true,
 				<Island deferUntil="visible">
-					<ProfileAtom
+					<ProfileAtomWrapper
 						id={element.id}
 						title={element.title}
 						html={element.html}
@@ -533,7 +535,7 @@ export const renderElement = ({
 			return [
 				true,
 				<Island deferUntil="visible">
-					<QandaAtom
+					<QandaAtomWrapper
 						id={element.id}
 						title={element.title}
 						html={element.html}
@@ -671,7 +673,7 @@ export const renderElement = ({
 			return [
 				true,
 				<Island deferUntil="visible">
-					<TimelineAtom
+					<TimelineAtomWrapper
 						id={element.id}
 						title={element.title}
 						pillar={format.theme}
