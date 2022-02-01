@@ -303,7 +303,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	// guaranteed but TS isn't so sure and needs assurance
 	const elementsByType = <T extends CAPIElement>(
 		elements: CAPIElement[],
-		type: string,
+		type: T['_type'],
 	): T[] => elements.filter((element) => element._type === type) as T[];
 
 	const youTubeAtoms = elementsByType<YoutubeBlockElement>(
