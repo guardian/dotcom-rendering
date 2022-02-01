@@ -87,6 +87,15 @@ const listStyles = (
 				`}
 			`;
 		}
+
+		case RelatedItemType.LIVE: {
+			return css`
+				${listBaseStyles}
+				border-radius: ${remSpace[2]};
+				padding-top: 0.125rem;
+			`;
+		}
+
 		default: {
 			return css`
 				${listBaseStyles}
@@ -163,11 +172,15 @@ const anchorStyles = css`
 	height: 100%;
 `;
 
-const headingWrapperStyles = (type: RelatedItemType): SerializedStyles => {
+const headingWrapperStyles = (
+	type: RelatedItemType,
+	format: ArticleFormat,
+): SerializedStyles => {
 	switch (type) {
 		case RelatedItemType.VIDEO:
 		case RelatedItemType.AUDIO:
-		case RelatedItemType.GALLERY: {
+		case RelatedItemType.GALLERY:
+		case RelatedItemType.LIVE: {
 			return css`
 				padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
 				flex-grow: 1;
@@ -388,6 +401,67 @@ const quotationComment = (
 	}
 };
 
+const dotStyles = (format: ArticleFormat) => {
+	const { liveblogKicker } = getThemeStyles(format.theme);
+	return css`
+		color: ${liveblogKicker};
+		:before {
+			border-radius: 62.5rem;
+			display: inline-block;
+			position: relative;
+			background-color: currentColor;
+			width: 0.75em;
+			height: 0.75em;
+			content: '';
+			margin-right: 0.1875rem;
+			vertical-align: initial;
+		}
+	`;
+};
+
+const liveDot = (
+	type: RelatedItemType,
+	format: ArticleFormat,
+): ReactElement | null => {
+	if (type === RelatedItemType.LIVE) {
+		return <span css={dotStyles(format)} />;
+	} else {
+		return null;
+	}
+};
+
+const kickerStyles = (colour: string) => css`
+	color: ${colour};
+	font-weight: 700;
+	margin-right: 4px;
+`;
+
+const slashStyles = css`
+	&::after {
+		content: '/';
+		display: inline-block;
+		margin-left: 4px;
+	}
+`;
+
+export const kicker = (
+	text: string,
+	showSlash: boolean,
+	type: RelatedItemType,
+	format: ArticleFormat,
+): ReactElement | null => {
+	const { kicker, liveblogKicker } = getThemeStyles(format.theme);
+	const kickerColour = withDefault(kicker)(some(liveblogKicker));
+
+	return (
+		<>
+			<span css={kickerStyles(kickerColour)}>
+				{liveDot(type, format)}
+				<span css={showSlash && slashStyles}>{text}</span>
+			</span>
+		</>
+	);
+};
 const metadataStyles: SerializedStyles = css`
 	padding: 0 ${remSpace[2]} ${remSpace[1]};
 	height: ${remSpace[6]};
@@ -505,9 +579,10 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
 			css={[listStyles(type, format), cardStyles(type, format)]}
 		>
 			<a css={anchorStyles} href={`https://theguardian.com/${link}`}>
-				<section css={headingWrapperStyles(type)}>
+				<section css={headingWrapperStyles(type, format)}>
 					<h3 css={headingStyles(type)}>
 						{quotationComment(type, format)}
+						{kicker('Live', true, type, format)}
 						{title}
 						{cardByline(type, byline)}
 					</h3>
