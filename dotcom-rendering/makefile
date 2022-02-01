@@ -32,11 +32,11 @@ deploy:
 
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
+	@NODE_ENV=production webpack --config ./scripts/frontend/dev-server.js
 
 build-ci: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/webpack/frontend.js
+	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/frontend/dev-server.js
 
 start-ci: install
 	$(call log, "starting PROD server...")
@@ -152,7 +152,7 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
+	@NODE_ENV=production webpack --config ./scripts/frontend/dev-server.js
 
 check-env: # private
 	$(call log, "checking environment")
