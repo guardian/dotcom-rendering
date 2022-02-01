@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { joinUrl } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { useApi } from '../lib/useApi';
 
@@ -76,6 +75,20 @@ function topOfBlogVisible() {
 	return topOfBlog && topOfBlog.classList.contains('in-viewport');
 }
 
+function getKey(
+	pageId: string,
+	ajaxUrl: string,
+	filterKeyEvents: boolean,
+	latestBlockId: string,
+) {
+	// Construct the url to poll
+	const url = new URL(`${pageId}.json`, ajaxUrl);
+	url.searchParams.set('lastUpdate', latestBlockId);
+	url.searchParams.set('isLivePage', 'true');
+	url.searchParams.set('filterKeyEvents', filterKeyEvents ? 'true' : 'false');
+	return url.href;
+}
+
 if (topOfBlog) {
 	const observer = new window.IntersectionObserver(
 		([entry]) => {
@@ -97,34 +110,29 @@ if (topOfBlog) {
 export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [noOfNewPosts, setNoOfNewPosts] = useState(0);
-
-	const latestBlockId: string =
-		(!isServer &&
-			document.querySelector('#maincontent :first-child')?.id) ||
-		'';
+	const [latestBlockId, setLatestBlockId] = useState(
+		document.querySelector('#maincontent :first-child')?.id || '',
+	);
 
 	// Read current url to get filterKeyEvents
 	const params = new URLSearchParams(window.location.search);
-	const filterKeyEvents = params.get('filterKeyEvents');
-	// Construct the url to poll
-	const url = new URL(`${pageId}.json`, ajaxUrl);
-	url.searchParams.set('lastUpdate', latestBlockId);
-	url.searchParams.set('isLivePage', 'true');
-	url.searchParams.set('filterKeyEvents', filterKeyEvents ? 'true' : 'false');
-	console.log({ url });
+	const filterKeyEvents = !!params.get('filterKeyEvents');
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi<{
 		numNewBlocks: number;
 		html: string;
-	}>(url.href, {
+	}>(getKey(pageId, ajaxUrl, filterKeyEvents, latestBlockId), {
 		refreshInterval: 10000,
 		refreshWhenHidden: true,
 		// onSuccess runs (once) after every successful api call. This is useful because it
 		// allows us to avoid the problems of imperative code being executed multiple times
 		// inside react's declarative structure (things get re-rendered when any state changes)
-		onSuccess: (data: { numNewBlocks: number; html: string }) => {
-			// TODO: What if we've made the same call previously?
+		onSuccess: (data: {
+			numNewBlocks: number;
+			html: string;
+			latestBlockId: string;
+		}) => {
 			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
 				// Always insert the new blocks in the dom (but hidden)
 				insertNewBlocks(data.html);
@@ -138,6 +146,9 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 					// Increment the count of new posts
 					setNoOfNewPosts(noOfNewPosts + data.numNewBlocks);
 				}
+
+				// Update the block id we use for polling
+				if (data.latestBlockId) setLatestBlockId(data.latestBlockId);
 			}
 		},
 	});
