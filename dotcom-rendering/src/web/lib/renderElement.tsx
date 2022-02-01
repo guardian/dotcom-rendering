@@ -60,6 +60,9 @@ import {
 	isInteractive,
 	interactiveLegacyFigureClasses,
 } from '../layouts/lib/interactiveLegacyStyling';
+
+import { submitComponentEvent } from '../browser/ophan/ophan';
+
 import { Island } from '../components/Island';
 
 type Props = {
@@ -172,7 +175,13 @@ export const renderElement = ({
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-			return [true, <ChartAtom id={element.id} html={element.html} />];
+			return [
+				true,
+				<Island deferUntil="visible">
+					<ChartAtom id={element.id} html={element.html} />
+				</Island>,
+			];
+
 		case 'model.dotcomrendering.pageElements.CodeBlockElement':
 			return [
 				true,
@@ -279,17 +288,49 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return [
 				true,
-				<GuideAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<GuideAtom
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+						likeHandler={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'GUIDE_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'LIKE',
+							})
+						}
+						dislikeHandler={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'GUIDE_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'DISLIKE',
+							})
+						}
+						expandCallback={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'GUIDE_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'EXPAND',
+							})
+						}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
 			return [
@@ -432,17 +473,49 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
 			return [
 				true,
-				<ProfileAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<ProfileAtom
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+						likeHandler={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'PROFILE_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'LIKE',
+							})
+						}
+						dislikeHandler={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'PROFILE_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'DISLIKE',
+							})
+						}
+						expandCallback={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'PROFILE_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'EXPAND',
+							})
+						}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
 			return [
@@ -459,39 +532,75 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.QABlockElement':
 			return [
 				true,
-				<QandaAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<QandaAtom
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+						likeHandler={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'QANDA_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'LIKE',
+							})
+						}
+						dislikeHandler={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'QANDA_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'DISLIKE',
+							})
+						}
+						expandCallback={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'QANDA_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'EXPAND',
+							})
+						}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return [
 				true,
 				<>
 					{element.quizType === 'personality' && (
-						<PersonalityQuizAtom
-							id={element.id}
-							questions={element.questions}
-							resultBuckets={element.resultBuckets}
-							sharingUrls={getSharingUrls(pageId, webTitle)}
-							theme={format.theme}
-						/>
+						<Island deferUntil="visible">
+							<PersonalityQuizAtom
+								id={element.id}
+								questions={element.questions}
+								resultBuckets={element.resultBuckets}
+								sharingUrls={getSharingUrls(pageId, webTitle)}
+								theme={format.theme}
+							/>
+						</Island>
 					)}
 					{element.quizType === 'knowledge' && (
-						<KnowledgeQuizAtom
-							id={element.id}
-							questions={element.questions}
-							resultGroups={element.resultGroups}
-							sharingUrls={getSharingUrls(pageId, webTitle)}
-							theme={format.theme}
-						/>
+						<Island deferUntil="visible">
+							<KnowledgeQuizAtom
+								id={element.id}
+								questions={element.questions}
+								resultGroups={element.resultGroups}
+								sharingUrls={getSharingUrls(pageId, webTitle)}
+								theme={format.theme}
+							/>
+						</Island>
 					)}
 				</>,
 			];
@@ -561,16 +670,48 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return [
 				true,
-				<TimelineAtom
-					id={element.id}
-					title={element.title}
-					pillar={format.theme}
-					events={element.events}
-					description={element.description}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<TimelineAtom
+						id={element.id}
+						title={element.title}
+						pillar={format.theme}
+						events={element.events}
+						description={element.description}
+						likeHandler={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'TIMELINE_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'LIKE',
+							})
+						}
+						dislikeHandler={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'TIMELINE_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'DISLIKE',
+							})
+						}
+						expandCallback={() =>
+							submitComponentEvent({
+								component: {
+									componentType: 'TIMELINE_ATOM',
+									id: element.id,
+									products: [],
+									labels: [],
+								},
+								action: 'EXPAND',
+							})
+						}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			return [true, <TweetBlockComponent element={element} />];
