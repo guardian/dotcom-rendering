@@ -38,10 +38,12 @@ import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
+import { kicker } from './kicker';
 
 interface Props {
 	relatedItem: RelatedItem;
 	image: Option<Image>;
+	kickerText: string;
 }
 
 const listBaseStyles = css`
@@ -401,67 +403,6 @@ const quotationComment = (
 	}
 };
 
-const dotStyles = (format: ArticleFormat) => {
-	const { liveblogKicker } = getThemeStyles(format.theme);
-	return css`
-		color: ${liveblogKicker};
-		:before {
-			border-radius: 62.5rem;
-			display: inline-block;
-			position: relative;
-			background-color: currentColor;
-			width: 0.75em;
-			height: 0.75em;
-			content: '';
-			margin-right: 0.1875rem;
-			vertical-align: initial;
-		}
-	`;
-};
-
-const liveDot = (
-	type: RelatedItemType,
-	format: ArticleFormat,
-): ReactElement | null => {
-	if (type === RelatedItemType.LIVE) {
-		return <span css={dotStyles(format)} />;
-	} else {
-		return null;
-	}
-};
-
-const kickerStyles = (colour: string) => css`
-	color: ${colour};
-	font-weight: 700;
-	margin-right: 4px;
-`;
-
-const slashStyles = css`
-	&::after {
-		content: '/';
-		display: inline-block;
-		margin-left: 4px;
-	}
-`;
-
-export const kicker = (
-	text: string,
-	showSlash: boolean,
-	type: RelatedItemType,
-	format: ArticleFormat,
-): ReactElement | null => {
-	const { kicker, liveblogKicker } = getThemeStyles(format.theme);
-	const kickerColour = withDefault(kicker)(some(liveblogKicker));
-
-	return (
-		<>
-			<span css={kickerStyles(kickerColour)}>
-				{liveDot(type, format)}
-				<span css={showSlash && slashStyles}>{text}</span>
-			</span>
-		</>
-	);
-};
 const metadataStyles: SerializedStyles = css`
 	padding: 0 ${remSpace[2]} ${remSpace[1]};
 	height: ${remSpace[6]};
@@ -548,7 +489,7 @@ const cardImage = (
 	);
 };
 
-const Card: FC<Props> = ({ relatedItem, image }) => {
+const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 	const format = {
 		theme: themeFromString(relatedItem.pillar.id),
 		design: ArticleDesign.Standard,
@@ -582,7 +523,7 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
 				<section css={headingWrapperStyles(type, format)}>
 					<h3 css={headingStyles(type)}>
 						{quotationComment(type, format)}
-						{kicker('Live', true, type, format)}
+						{kicker(type, format, kickerText)}
 						{title}
 						{cardByline(type, byline)}
 					</h3>
