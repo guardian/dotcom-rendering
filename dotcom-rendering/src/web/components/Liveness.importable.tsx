@@ -55,7 +55,7 @@ function insertNewBlocks(html: string) {
 
 	if (!latestBlock) return;
 
-	latestBlock.insertAdjacentHTML('beforebegin', `<article>${html}</article>`);
+	latestBlock.insertAdjacentHTML('beforebegin', html);
 }
 
 /**
