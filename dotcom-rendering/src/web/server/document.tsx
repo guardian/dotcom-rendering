@@ -111,10 +111,6 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.CalloutBlockElement',
 		},
 		{
-			chunkName: 'DocumentBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.DocumentBlockElement',
-		},
-		{
 			chunkName: 'VideoFacebookBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
@@ -270,7 +266,7 @@ export const document = ({ data }: Props): string => {
 	)[0];
 	const gaPath = {
 		modern: modernScript.src,
-		legacy: legacyScript.src,
+		legacy: legacyScript?.src,
 	};
 
 	/**

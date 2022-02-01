@@ -10,7 +10,6 @@ import {
 	background,
 	from,
 	headline,
-	labs,
 	neutral,
 	opinion,
 	remSpace,
@@ -28,6 +27,7 @@ import {
 	map,
 	none,
 	OptionKind,
+	some,
 	withDefault,
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
@@ -44,51 +44,62 @@ interface Props {
 	image: Option<Image>;
 }
 
-const borderColor = (
-	type: RelatedItemType,
-	format: ArticleFormat,
-): SerializedStyles => {
-	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
-		return css`1px solid ${labs[300]}`;
-	} else {
-		return css`1px solid ${getThemeStyles(format.theme).kicker}`;
+const listBaseStyles = css`
+	margin-right: ${remSpace[2]};
+	flex: 0 0 42vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-width: 10rem;
+
+	&.fade {
+		opacity: 0.7;
 	}
-};
+
+	${from.tablet} {
+		margin-right: ${remSpace[5]};
+	}
+
+	${from.desktop} {
+		max-width: 13.75rem;
+	}
+
+	&:last-of-type {
+		margin-right: 0;
+	}
+`;
 
 const listStyles = (
 	type: RelatedItemType,
 	format: ArticleFormat,
 ): SerializedStyles => {
-	return css`
-		background: white;
-		margin-right: ${remSpace[2]};
-		flex: 0 0 42vw;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		border-top: ${borderColor(type, format)};
-		max-width: 10rem;
+	switch (type) {
+		case RelatedItemType.VIDEO:
+		case RelatedItemType.AUDIO:
+		case RelatedItemType.GALLERY: {
+			return css`
+				${listBaseStyles}
+				border-radius: ${remSpace[2]};
+				padding-top: 0.125rem;
 
-		&.fade {
-			opacity: 0.7;
+				${darkModeCss`
+					background: ${neutral[10]};
+				`}
+			`;
 		}
+		default: {
+			return css`
+				${listBaseStyles}
+				border-top: 1px solid ${neutral[86]};
+				border-radius: 0 0 ${remSpace[2]} ${remSpace[2]};
 
-		${darkModeCss`
-            background: ${neutral[7]};
-        `}
-
-		${from.tablet} {
-			margin-right: ${remSpace[5]};
+				${darkModeCss`
+					border-top: 1px solid ${neutral[20]};
+					background: ${neutral[0]};
+        		`}
+			`;
 		}
-
-		${from.desktop} {
-			max-width: 13.75rem;
-		}
-
-		&:last-of-type {
-			margin-right: 0;
-		}
-	`;
+	}
 };
 
 const fullWidthImage = css`
@@ -101,6 +112,10 @@ const fullWidthImage = css`
 
 		position: relative;
 	}
+`;
+
+const imgStyles = css`
+	border-radius: ${remSpace[2]};
 `;
 
 const timeStyles = (type: RelatedItemType): SerializedStyles => {
@@ -148,10 +163,24 @@ const anchorStyles = css`
 	height: 100%;
 `;
 
-const headingWrapperStyles = css`
-	padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
-	flex-grow: 1;
-`;
+const headingWrapperStyles = (type: RelatedItemType): SerializedStyles => {
+	switch (type) {
+		case RelatedItemType.VIDEO:
+		case RelatedItemType.AUDIO:
+		case RelatedItemType.GALLERY: {
+			return css`
+				padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
+				flex-grow: 1;
+			`;
+		}
+		default: {
+			return css`
+				padding: 0.125rem 0 ${remSpace[4]} 0;
+				flex-grow: 1;
+			`;
+		}
+	}
+};
 
 const headingStyles = (type: RelatedItemType): SerializedStyles => {
 	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
@@ -265,7 +294,7 @@ const cardStyles = (
 
 		case RelatedItemType.COMMENT: {
 			return css`
-				background-color: ${neutral[100]};
+				background-color: ${neutral[97]};
 				${headline.xxsmall()}
 			`;
 		}
@@ -432,7 +461,7 @@ const cardImage = (
 							default: '100%',
 						}}
 						format={format}
-						className={none}
+						className={some(imgStyles)}
 						supportsDarkMode
 						lightbox={none}
 					/>
@@ -476,7 +505,7 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
 			css={[listStyles(type, format), cardStyles(type, format)]}
 		>
 			<a css={anchorStyles} href={`https://theguardian.com/${link}`}>
-				<section css={headingWrapperStyles}>
+				<section css={headingWrapperStyles(type)}>
 					<h3 css={headingStyles(type)}>
 						{quotationComment(type, format)}
 						{title}
