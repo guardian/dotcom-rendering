@@ -14,6 +14,7 @@ import { MainMediaKind } from 'headerMedia';
 import type { DeadBlog, LiveBlog } from 'item';
 import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
+import type { LiveBlogPagedBlocks } from 'pagination';
 
 const parser = new DOMParser();
 const parseHtml = parse(parser);
@@ -301,10 +302,26 @@ const blocks: LiveBlock[] = [
 	},
 ];
 
+const pagedBlocks: LiveBlogPagedBlocks = {
+	currentPage: {
+		blocks: blocks,
+		pageNumber: 1,
+		suffix: '',
+	},
+	pagination: {
+		older: none,
+		oldest: none,
+		newer: none,
+		newest: none,
+		numberOfPages: 1,
+	},
+};
+
 const live: LiveBlog = {
 	design: ArticleDesign.LiveBlog,
 	...fields,
 	blocks: blocks,
+	pagedBlocks,
 	totalBodyBlocks: 5,
 };
 
@@ -312,6 +329,7 @@ const deadBlog: DeadBlog = {
 	design: ArticleDesign.DeadBlog,
 	...fields,
 	blocks: blocks,
+	pagedBlocks,
 	totalBodyBlocks: 5,
 };
 

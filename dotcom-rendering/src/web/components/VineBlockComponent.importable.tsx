@@ -1,6 +1,7 @@
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
+import { ClickToView } from './ClickToView';
 
 const titleStyle = css`
 	p {
@@ -9,11 +10,28 @@ const titleStyle = css`
 	}
 `;
 
-export const VineBlockComponent: React.FC<{
+type Props = {
 	element: VineBlockElement;
-}> = ({ element }) => {
+	role: RoleType;
+	isTracking: boolean;
+	source?: string;
+	sourceDomain?: string;
+};
+
+export const VineBlockComponent = ({
+	element,
+	role,
+	isTracking,
+	source,
+	sourceDomain,
+}: Props) => {
 	return (
-		<>
+		<ClickToView
+			role={role}
+			isTracking={isTracking}
+			source={source}
+			sourceDomain={sourceDomain}
+		>
 			{element.url && element.width && element.height && (
 				<div>
 					<div css={titleStyle}>
@@ -39,6 +57,6 @@ export const VineBlockComponent: React.FC<{
 					</MaintainAspectRatio>
 				</div>
 			)}
-		</>
+		</ClickToView>
 	);
 };

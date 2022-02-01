@@ -4,16 +4,17 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [High level diagram](#high-level-diagram)
-- [Developing](#developing)
-  - [Setup](#setup)
-  - [Start](#start)
-  - [Previewing article on local](#previewing-article-on-local)
-  - [Previewing AMP on local](#previewing-amp-on-local)
-  - [Note on rebasing vs merging](#note-on-rebasing-vs-merging)
-  - [Debugging tools](#debugging-tools)
-  - [Running alongside identity](#running-alongside-identity)
-- [Production](#production)
+- [Detailed setup guide](#detailed-setup-guide)
+	- [High level diagram](#high-level-diagram)
+	- [Developing](#developing)
+		- [Setup](#setup)
+		- [Start](#start)
+		- [Previewing article on local](#previewing-article-on-local)
+		- [Previewing AMP on local](#previewing-amp-on-local)
+		- [Note on rebasing vs merging](#note-on-rebasing-vs-merging)
+		- [Debugging tools](#debugging-tools)
+		- [Running alongside identity](#running-alongside-identity)
+	- [Production](#production)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -45,6 +46,8 @@ make dev
 ```
 
 This will start the development server on port 3030: [http://localhost:3030](http://localhost:3030).
+
+> Note: To run the development server with support for legacy browsers, use `make dev-legacy`
 
 ### Previewing article on local
 

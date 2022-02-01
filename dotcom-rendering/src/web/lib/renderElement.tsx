@@ -4,7 +4,7 @@ import { CaptionBlockComponent } from '@root/src/web/components/CaptionBlockComp
 import { CommentBlockComponent } from '@root/src/web/components/CommentBlockComponent';
 import { CodeBlockComponent } from '@root/src/web/components/CodeBlockComponent';
 import { RichLinkComponent } from '@root/src/web/components/RichLinkComponent.importable';
-import { DocumentBlockComponent } from '@root/src/web/components/DocumentBlockComponent';
+import { DocumentBlockComponent } from '@root/src/web/components/DocumentBlockComponent.importable';
 import { DisclaimerBlockComponent } from '@root/src/web/components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/EmbedBlockComponent';
@@ -18,7 +18,7 @@ import { ItemLinkBlockElement } from '@root/src/web/components/ItemLinkBlockElem
 import { InteractiveContentsBlockComponent } from '@root/src/web/components/InteractiveContentsBlockComponent';
 import { MainMediaEmbedBlockComponent } from '@root/src/web/components/MainMediaEmbedBlockComponent';
 import { NumberedTitleBlockComponent } from '@root/src/web/components/NumberedTitleBlockComponent';
-import { MapEmbedBlockComponent } from '@root/src/web/components/MapEmbedBlockComponent';
+import { MapEmbedBlockComponent } from '@root/src/web/components/MapEmbedBlockComponent.importable';
 import { MultiImageBlockComponent } from '@root/src/web/components/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/SoundcloudBlockComponent';
@@ -30,7 +30,7 @@ import { TextBlockComponent } from '@root/src/web/components/TextBlockComponent'
 import { TweetBlockComponent } from '@root/src/web/components/TweetBlockComponent';
 import { VideoFacebookBlockComponent } from '@root/src/web/components/VideoFacebookBlockComponent';
 import { VimeoBlockComponent } from '@root/src/web/components/VimeoBlockComponent';
-import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent';
+import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/YoutubeBlockComponent';
 import {
@@ -206,21 +206,19 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<DocumentBlockComponent
 						embedUrl={element.embedUrl}
 						height={element.height}
-						width={element.width}
-						title={element.title}
+						isMainMedia={isMainMedia}
+						isTracking={element.isThirdPartyTracking}
+						role={element.role}
 						source={element.source}
+						sourceDomain={element.sourceDomain}
+						title={element.title}
+						width={element.width}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			if (!element.safe) {
@@ -386,13 +384,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<MapEmbedBlockComponent
 						format={format}
 						embedUrl={element.embedUrl}
@@ -401,8 +393,13 @@ export const renderElement = ({
 						caption={element.caption}
 						credit={element.source}
 						title={element.title}
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
 			return [
@@ -629,16 +626,17 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
 			return [
 				true,
-				<ClickToView
-					// No role given by CAPI
-					// eslint-disable-next-line jsx-a11y/aria-role
-					role="inline"
-					isTracking={element.isThirdPartyTracking}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
-					<VineBlockComponent element={element} />
-				</ClickToView>,
+				<Island deferUntil="visible">
+					<VineBlockComponent
+						element={element}
+						// No role given by CAPI
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.WitnessBlockElement': {
 			const witnessType = element.witnessTypeData._type;

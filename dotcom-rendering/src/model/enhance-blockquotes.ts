@@ -44,18 +44,16 @@ const enhance = (
 	return enhanced;
 };
 
-export const enhanceBlockquotes = (data: CAPIType): CAPIType => {
-	const { isPhotoEssay } = data.config;
+export const enhanceBlockquotes = (
+	blocks: Block[],
+	format: CAPIFormat,
+): Block[] => {
+	const isPhotoEssay = format.design === 'PhotoEssayDesign';
 
-	const enhancedBlocks = data.blocks.map((block: Block) => {
+	return blocks.map((block: Block) => {
 		return {
 			...block,
 			elements: enhance(block.elements, isPhotoEssay || false),
 		};
 	});
-
-	return {
-		...data,
-		blocks: enhancedBlocks,
-	} as CAPIType;
 };

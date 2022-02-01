@@ -1,3 +1,15 @@
+import { isString } from '@guardian/libs';
+
+// TODO: this function already exists in commercial-core, consider exporting it to avoid duplication
+const getUrlKeywords = (url: string): string[] => {
+	const lastSegment = url
+		.split('/')
+		.filter(Boolean) // This handles a trailing slash
+		.slice(-1)[0];
+
+	return isString(lastSegment) ? lastSegment.split('-').filter(Boolean) : [];
+};
+
 export const buildAdTargeting = ({
 	isAdFreeUser,
 	isSensitive,
@@ -21,7 +33,7 @@ export const buildAdTargeting = ({
 		};
 	}
 	const customParams = {
-		sens: isSensitive ? 't' : 'f',
+		sens: isSensitive ? ('t' as const) : ('f' as const),
 		si: 'f',
 		vl: videoDuration || 0,
 		cc: edition,
@@ -29,6 +41,7 @@ export const buildAdTargeting = ({
 		inskin: 'f',
 		...sharedAdTargeting,
 		pa: 'f',
+		urlkw: getUrlKeywords(String(sharedAdTargeting.url)),
 	};
 	return {
 		customParams,

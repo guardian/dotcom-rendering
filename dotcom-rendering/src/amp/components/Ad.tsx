@@ -28,6 +28,24 @@ const amazonConfig = {
 	aps: { PUB_ID: '3722', PARAMS: { amp: '1' } },
 };
 
+const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
+	const adTargetingMapped: AdTargetParam[] = [];
+
+	if (!adTargeting.disableAds) {
+		adTargetingMapped.push({
+			name: 'sens',
+			value: adTargeting.customParams.sens,
+		});
+
+		adTargetingMapped.push({
+			name: 'urlkw',
+			value: adTargeting.customParams.urlkw,
+		});
+	}
+
+	return adTargetingMapped;
+};
+
 export const realTimeConfig = (
 	usePrebid: boolean,
 	usePermutive: boolean,
@@ -79,6 +97,7 @@ export interface BaseAdProps {
 	section: string;
 	contentType: string;
 	commercialProperties: CommercialProperties;
+	adTargeting: AdTargeting;
 }
 
 interface AdProps extends BaseAdProps {
@@ -93,6 +112,7 @@ export const Ad = ({
 	contentType,
 	commercialProperties,
 	rtcConfig,
+	adTargeting,
 }: AdProps) => {
 	const adSizes = isSticky ? stickySizes : inlineSizes;
 	// Set Primary ad size as first element (should be the largest)
@@ -116,7 +136,12 @@ export const Ad = ({
 			data-loading-strategy="prefer-viewability-over-views"
 			layout="fixed"
 			type="doubleclick"
-			json={stringify(adJson(commercialProperties[edition].adTargeting))}
+			json={stringify(
+				adJson([
+					...commercialProperties[edition].adTargeting,
+					...mapAdTargeting(adTargeting),
+				]),
+			)}
 			data-slot={ampData(section, contentType)}
 			rtc-config={rtcConfig}
 		/>

@@ -3,8 +3,9 @@ import { css } from '@emotion/react';
 import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
 import { Caption } from '@root/src/web/components/Caption';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { ClickToView } from './ClickToView';
 
-export const MapEmbedBlockComponent: React.FC<{
+type Props = {
 	embedUrl?: string;
 	height: number;
 	width: number;
@@ -12,7 +13,27 @@ export const MapEmbedBlockComponent: React.FC<{
 	caption?: string;
 	format: ArticleFormat;
 	credit?: string;
-}> = ({ embedUrl, title, width, height, caption, format, credit }) => {
+	role?: RoleType;
+	isTracking: boolean;
+	isMainMedia: boolean;
+	source?: string;
+	sourceDomain?: string;
+};
+
+export const MapEmbedBlockComponent = ({
+	embedUrl,
+	title,
+	width,
+	height,
+	caption,
+	format,
+	credit,
+	role,
+	isTracking,
+	isMainMedia,
+	source,
+	sourceDomain,
+}: Props) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
 	// Constrain iframe embeds with a width to their natural width
 	// rather than stretch them to the container using
@@ -33,24 +54,32 @@ export const MapEmbedBlockComponent: React.FC<{
 	const palette = decidePalette(format);
 
 	return (
-		<div css={embedContainer}>
-			<MaintainAspectRatio height={height} width={width}>
-				<iframe
-					src={embedUrl}
-					title={title}
-					height={height}
-					width={width}
-					allowFullScreen={true}
-				/>
-			</MaintainAspectRatio>
-			{hasCaption && (
-				<Caption
-					captionText={caption}
-					format={format}
-					palette={palette}
-					credit={credit}
-				/>
-			)}
-		</div>
+		<ClickToView
+			role={role}
+			isTracking={isTracking}
+			isMainMedia={isMainMedia}
+			source={source}
+			sourceDomain={sourceDomain}
+		>
+			<div css={embedContainer}>
+				<MaintainAspectRatio height={height} width={width}>
+					<iframe
+						src={embedUrl}
+						title={title}
+						height={height}
+						width={width}
+						allowFullScreen={true}
+					/>
+				</MaintainAspectRatio>
+				{hasCaption && (
+					<Caption
+						captionText={caption}
+						format={format}
+						palette={palette}
+						credit={credit}
+					/>
+				)}
+			</div>
+		</ClickToView>
 	);
 };

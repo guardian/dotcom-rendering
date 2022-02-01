@@ -15,6 +15,7 @@ import RefreshIcon from '@frontend/static/icons/refresh.svg';
 import { Pagination } from '@root/src/amp/components/Pagination';
 import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is
@@ -81,6 +82,15 @@ export const Body: React.FC<{
 	data: ArticleModel;
 	config: ConfigType;
 }> = ({ data, config }) => {
+	const adTargeting: AdTargeting = buildAdTargeting({
+		isAdFreeUser: data.isAdFreeUser,
+		isSensitive: config.isSensitive,
+		videoDuration: config.videoDuration,
+		edition: config.edition,
+		section: config.section,
+		sharedAdTargeting: config.sharedAdTargeting,
+		adUnit: config.adUnit,
+	});
 	const pillar = decideTheme(data.format);
 	const url = `${data.guardianBaseURL}/${data.pageId}`;
 	const isFirstPage = data.pagination
@@ -118,6 +128,7 @@ export const Body: React.FC<{
 						commercialProperties={data.commercialProperties}
 						url={url}
 						shouldHideAds={data.shouldHideAds}
+						adTargeting={adTargeting}
 					/>
 				</div>
 			</amp-live-list>
