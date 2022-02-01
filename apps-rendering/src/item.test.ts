@@ -17,11 +17,7 @@ import {
 	toOption,
 	withDefault,
 } from '@guardian/types';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleSpecial,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { pipe } from 'lib';
@@ -68,8 +64,8 @@ const liveblogContent = {
 	type: ContentType.LIVEBLOG,
 	fields: {
 		liveBloggingNow: true,
-	}
-}
+	},
+};
 
 const immersive = {
 	id: '',
@@ -195,7 +191,10 @@ const articleContentWithImageWithoutFile = articleContentWith({
 });
 
 const f = (content: Content) =>
-	fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' })({ content });
+	fromCapi({ docParser: JSDOM.fragment, salt: 'mockSalt' })(
+		{ content },
+		none,
+	);
 
 const getFirstBody = (item: Review | Standard) =>
 	pipe(
@@ -602,8 +601,7 @@ describe('audio elements', () => {
 			type: ElementType.AUDIO,
 			assets: [],
 			audioTypeData: {
-				html:
-					"<iframe src='https://open.spotify.com/embed/track/' width='300' height='300' frameborder='0'></iframe>",
+				html: "<iframe src='https://open.spotify.com/embed/track/' width='300' height='300' frameborder='0'></iframe>",
 				source: 'Spotify',
 			},
 		};
@@ -668,8 +666,7 @@ describe('video elements', () => {
 			type: ElementType.VIDEO,
 			assets: [],
 			videoTypeData: {
-				html:
-					"<iframe height='259' width='460' src='https://www.youtube-nocookie.com/embed/' frameborder='0' allowfullscreen ></iframe>",
+				html: "<iframe height='259' width='460' src='https://www.youtube-nocookie.com/embed/' frameborder='0' allowfullscreen ></iframe>",
 				url: 'https://www.youtube.com/watch?v=mockVideoId',
 			},
 		};

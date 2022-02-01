@@ -40,6 +40,8 @@ import { parseCardImage } from 'image';
 import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { parseMany as parseLiveBlocks } from 'liveBlock';
+import type { LiveBlogPagedBlocks } from 'pagination';
+import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { themeFromString } from 'themeStyles';
 
@@ -79,12 +81,14 @@ interface LiveBlog extends Fields {
 	design: ArticleDesign.LiveBlog;
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
+	pagedBlocks: LiveBlogPagedBlocks;
 }
 
 interface DeadBlog extends Fields {
 	design: ArticleDesign.DeadBlog;
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
+	pagedBlocks: LiveBlogPagedBlocks;
 }
 
 interface Review extends Fields {
@@ -323,16 +327,25 @@ const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog =
 	(context: Context) =>
-	(request: RenderingRequest): LiveBlog | DeadBlog => {
+	(
+		request: RenderingRequest,
+		blockId: Option<string>,
+	): LiveBlog | DeadBlog => {
 		const { content } = request;
 		const body = content.blocks?.body ?? [];
+		const pageSize = content.tags.map((c) => c.id).includes('sport/sport')
+			? 30
+			: 10;
 
+		const parsedBlocks = parseLiveBlocks(body)(context);
+		const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
 		return {
 			design:
 				content.fields?.liveBloggingNow === true
 					? ArticleDesign.LiveBlog
 					: ArticleDesign.DeadBlog,
-			blocks: parseLiveBlocks(body)(context),
+			blocks: parsedBlocks,
+			pagedBlocks,
 			totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
 			...itemFields(context, request),
 		};
@@ -340,7 +353,7 @@ const fromCapiLiveBlog =
 
 const fromCapi =
 	(context: Context) =>
-	(request: RenderingRequest): Item => {
+	(request: RenderingRequest, page: Option<string>): Item => {
 		const { content } = request;
 		const { tags, fields } = content;
 
@@ -408,7 +421,7 @@ const fromCapi =
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isLive(tags)) {
-			return fromCapiLiveBlog(context)(request);
+			return fromCapiLiveBlog(context)(request, page);
 		} else if (isRecipe(tags)) {
 			return {
 				design: ArticleDesign.Recipe,

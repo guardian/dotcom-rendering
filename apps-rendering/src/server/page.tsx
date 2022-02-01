@@ -151,8 +151,9 @@ function render(
 	imageSalt: string,
 	request: RenderingRequest,
 	getAssetLocation: (assetName: string) => string,
+	page: Option<string>,
 ): Page {
-	const item = fromCapi({ docParser, salt: imageSalt })(request);
+	const item = fromCapi({ docParser, salt: imageSalt })(request, page);
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 	const body = renderBody(item, request);

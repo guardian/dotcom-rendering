@@ -277,26 +277,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const DocumentBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.DocumentBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/DocumentBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.DocumentBlockComponent,
-		},
-	);
-
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
@@ -341,10 +321,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const timelineAtoms = elementsByType<TimelineBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.TimelineBlockElement',
-	);
-	const documents = elementsByType<DocumentBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.DocumentBlockElement',
 	);
 	const embeds = elementsByType<EmbedBlockElement>(
 		CAPI.elementsToHydrate,
@@ -630,24 +606,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 							'EXPAND',
 						)}
 					/>
-				</HydrateOnce>
-			))}
-			{documents.map((document) => (
-				<HydrateOnce rootId={document.elementId}>
-					<ClickToView
-						role={document.role}
-						isTracking={document.isThirdPartyTracking}
-						source={document.source}
-						sourceDomain={document.sourceDomain}
-					>
-						<DocumentBlockComponent
-							embedUrl={document.embedUrl}
-							height={document.height}
-							width={document.width}
-							title={document.title}
-							source={document.source}
-						/>
-					</ClickToView>
 				</HydrateOnce>
 			))}
 			{embeds.map((embed, index) => (
