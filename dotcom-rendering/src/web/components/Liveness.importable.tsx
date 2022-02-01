@@ -111,6 +111,7 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [noOfNewPosts, setNoOfNewPosts] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(
+		// By default we use the first (latest) block id on the page
 		document.querySelector('#maincontent :first-child')?.id || '',
 	);
 
