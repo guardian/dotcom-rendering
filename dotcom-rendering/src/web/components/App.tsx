@@ -277,26 +277,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const DocumentBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.DocumentBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/DocumentBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.DocumentBlockComponent,
-		},
-	);
-
 	const VideoFacebookBlockComponent = loadable(
 		() => {
 			if (
@@ -323,7 +303,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	// guaranteed but TS isn't so sure and needs assurance
 	const elementsByType = <T extends CAPIElement>(
 		elements: CAPIElement[],
-		type: string,
+		type: T['_type'],
 	): T[] => elements.filter((element) => element._type === type) as T[];
 
 	const youTubeAtoms = elementsByType<YoutubeBlockElement>(
@@ -361,10 +341,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const timelineAtoms = elementsByType<TimelineBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.TimelineBlockElement',
-	);
-	const documents = elementsByType<DocumentBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.DocumentBlockElement',
 	);
 	const embeds = elementsByType<EmbedBlockElement>(
 		CAPI.elementsToHydrate,
@@ -654,24 +630,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 							'EXPAND',
 						)}
 					/>
-				</HydrateOnce>
-			))}
-			{documents.map((document) => (
-				<HydrateOnce rootId={document.elementId}>
-					<ClickToView
-						role={document.role}
-						isTracking={document.isThirdPartyTracking}
-						source={document.source}
-						sourceDomain={document.sourceDomain}
-					>
-						<DocumentBlockComponent
-							embedUrl={document.embedUrl}
-							height={document.height}
-							width={document.width}
-							title={document.title}
-							source={document.source}
-						/>
-					</ClickToView>
 				</HydrateOnce>
 			))}
 			{embeds.map((embed, index) => (

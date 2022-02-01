@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { DocumentBlockComponent } from './DocumentBlockComponent';
+import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
 
 export default {
 	component: DocumentBlockComponent,
@@ -27,6 +27,8 @@ export const documentEmbed = () => {
 				height={613}
 				width={460}
 				title=""
+				isTracking={false}
+				isMainMedia={false}
 			/>
 			<p>DocumentCloud Document</p>
 			<DocumentBlockComponent
@@ -35,6 +37,8 @@ export const documentEmbed = () => {
 				width={990}
 				title="TEST PDF (Hosted by DocumentCloud)"
 				source="DocumentCloud"
+				isTracking={false}
+				isMainMedia={false}
 			/>
 		</Container>
 	);

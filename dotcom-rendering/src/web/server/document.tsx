@@ -111,10 +111,6 @@ export const document = ({ data }: Props): string => {
 			addWhen: 'model.dotcomrendering.pageElements.CalloutBlockElement',
 		},
 		{
-			chunkName: 'DocumentBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.DocumentBlockElement',
-		},
-		{
 			chunkName: 'VideoFacebookBlockComponent',
 			addWhen:
 				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',

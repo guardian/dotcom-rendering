@@ -4,7 +4,7 @@ import { CaptionBlockComponent } from '@root/src/web/components/CaptionBlockComp
 import { CommentBlockComponent } from '@root/src/web/components/CommentBlockComponent';
 import { CodeBlockComponent } from '@root/src/web/components/CodeBlockComponent';
 import { RichLinkComponent } from '@root/src/web/components/RichLinkComponent.importable';
-import { DocumentBlockComponent } from '@root/src/web/components/DocumentBlockComponent';
+import { DocumentBlockComponent } from '@root/src/web/components/DocumentBlockComponent.importable';
 import { DisclaimerBlockComponent } from '@root/src/web/components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/EmbedBlockComponent';
@@ -206,21 +206,19 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<DocumentBlockComponent
 						embedUrl={element.embedUrl}
 						height={element.height}
-						width={element.width}
-						title={element.title}
+						isMainMedia={isMainMedia}
+						isTracking={element.isThirdPartyTracking}
+						role={element.role}
 						source={element.source}
+						sourceDomain={element.sourceDomain}
+						title={element.title}
+						width={element.width}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			if (!element.safe) {
