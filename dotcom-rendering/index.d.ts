@@ -564,7 +564,7 @@ interface BlocksRequest {
 	section: string;
 	sharedAdTargeting: Record<string, unknown>;
 	adUnit: string;
-	videoDuration?: number | undefined;
+	videoDuration?: number;
 }
 
 interface BadgeType {
