@@ -28,7 +28,7 @@
     "cypress:run": "cypress run",
     "cypress:run:e2e": "cypress run --spec 'cypress/integration/e2e/**/*'",
     "cypress:run:mocked": "cypress run --spec 'cypress/integration/mocked/**/*'",
-    "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/frontend/dev-server.js"
+    "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/webpack.config.js"
   },
   "bundlesize": [
     {
