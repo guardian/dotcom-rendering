@@ -8,6 +8,7 @@ type Props = {
 	ajaxUrl: string;
 };
 
+// TODO: Break this out into its own component
 const Toast = ({
 	onClick,
 	noOfNewPosts,
@@ -31,6 +32,8 @@ const Toast = ({
 		</nav>
 	);
 };
+
+const isServer = typeof window === 'undefined';
 
 function hydrateBlocks() {
 	console.log('hydrateBlocks');
@@ -66,27 +69,38 @@ function revealNewBlocks() {
 	console.log('revealNewBlocks');
 }
 
-const isServer = typeof window === 'undefined';
-
-const topOfBlog: Element | null | false =
-	!isServer && window.document.querySelector('[data-gu-marker=top-of-blog]');
-
-function topOfBlogVisible() {
-	return topOfBlog && topOfBlog.classList.contains('in-viewport');
-}
-
+/**
+ * This abstracts the code to construct the url we use for polling. Of note is the fact
+ * we have put `latestBlockId` in react state; by doing this we are able to change the url
+ * that SWR uses for the request whilst still benefitting from the polling logic
+ *
+ * @returns string
+ */
 function getKey(
 	pageId: string,
 	ajaxUrl: string,
 	filterKeyEvents: boolean,
 	latestBlockId: string,
-) {
+): string {
 	// Construct the url to poll
 	const url = new URL(`${pageId}.json`, ajaxUrl);
 	url.searchParams.set('lastUpdate', latestBlockId);
 	url.searchParams.set('isLivePage', 'true');
 	url.searchParams.set('filterKeyEvents', filterKeyEvents ? 'true' : 'false');
 	return url.href;
+}
+
+const topOfBlog: Element | null | false =
+	!isServer && window.document.querySelector('[data-gu-marker=top-of-blog]');
+
+/**
+ * This allows us to make decisions in javascript based on if the reader
+ * has the top of the blog in view or not
+ *
+ * @returns boolean
+ */
+function topOfBlogVisible(): boolean {
+	return !!topOfBlog && !!topOfBlog.classList.contains('in-viewport');
 }
 
 if (topOfBlog) {
