@@ -64,6 +64,7 @@ const socialBox = (verticalStack = false) => css`
 	${verticalStack &&
 	css`
 		${until.tablet} {
+			/* stylelint-disable-next-line declaration-no-important */
 			padding-right: 0 !important;
 			flex-direction: column;
 			margin-top: ${space[5]}px;
@@ -72,6 +73,7 @@ const socialBox = (verticalStack = false) => css`
 `;
 
 const fakeSocialSignInLink = css`
+	/* stylelint-disable-next-line declaration-no-important */
 	font-weight: bold !important;
 	margin-left: 0;
 `;
@@ -87,9 +89,11 @@ const iconButton = (verticalStack = false) => css`
 	margin-left: ${space[1]}px;
 
 	flex: 1 1 100%;
+	/* stylelint-disable-next-line declaration-no-important */
 	justify-content: center !important;
 
 	${until.mobileMedium} {
+		/* stylelint-disable-next-line declaration-no-important */
 		padding: 0 12px !important;
 	}
 
@@ -98,6 +102,7 @@ const iconButton = (verticalStack = false) => css`
 	}
 
 	${until.tablet} {
+		/* stylelint-disable-next-line declaration-no-important */
 		font-size: 15px !important;
 	}
 
@@ -108,9 +113,11 @@ const iconButton = (verticalStack = false) => css`
 	}
 
 	svg {
+		/* stylelint-disable-next-line declaration-no-important */
 		width: 15px !important;
 
 		${from.mobileMedium} {
+			/* stylelint-disable-next-line declaration-no-important */
 			width: 20px !important;
 		}
 	}

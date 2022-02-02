@@ -340,7 +340,9 @@ export const CalloutBlockComponent = ({
 								css={css`
 									/* TODO: need to find an nicer way of dynamically setting svg dimensions */
 									svg {
+										/* stylelint-disable-next-line declaration-no-important */
 										width: 15px !important;
+										/* stylelint-disable-next-line declaration-no-important */
 										height: 15px !important;
 									}
 								`}
