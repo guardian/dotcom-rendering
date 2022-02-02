@@ -4,17 +4,6 @@ const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
-const friendlyErrorsWebpackPlugin = () =>
-	new FriendlyErrorsWebpackPlugin({
-		compilationSuccessInfo: {
-			messages: [
-				`Server build complete: ${chalk.blue.underline(
-					'http://localhost:3030',
-				)}`,
-			],
-		},
-	});
-
 module.exports = ({ sessionId }) => ({
 	entry: {
 		'frontend.server': './src/app/server.ts',
@@ -60,7 +49,16 @@ module.exports = ({ sessionId }) => ({
 		},
 	],
 	plugins: [
-		DEV && friendlyErrorsWebpackPlugin(),
+		DEV &&
+			new FriendlyErrorsWebpackPlugin({
+				compilationSuccessInfo: {
+					messages: [
+						`Server build complete: ${chalk.blue.underline(
+							'http://localhost:3030',
+						)}`,
+					],
+				},
+			}),
 		DEV &&
 			new GuStatsReportPlugin({
 				displayDisclaimer: true,

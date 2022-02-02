@@ -3,17 +3,6 @@ const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
-const friendlyErrorsWebpackPlugin = (isLegacyJS) =>
-	new FriendlyErrorsWebpackPlugin({
-		compilationSuccessInfo: {
-			messages: [
-				isLegacyJS
-					? 'Legacy client build complete'
-					: 'Client build complete',
-			],
-		},
-	});
-
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const GITHUB = process.env.CI_ENV === 'github';
@@ -59,7 +48,16 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 	},
 	plugins: [
 		DEV && new webpack.HotModuleReplacementPlugin(),
-		DEV && friendlyErrorsWebpackPlugin(),
+		DEV &&
+			new FriendlyErrorsWebpackPlugin({
+				compilationSuccessInfo: {
+					messages: [
+						isLegacyJS
+							? 'Legacy client build complete'
+							: 'Client build complete',
+					],
+				},
+			}),
 		DEV &&
 			new GuStatsReportPlugin({
 				buildName: isLegacyJS ? 'legacy-client' : 'client',
