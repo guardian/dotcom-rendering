@@ -867,17 +867,11 @@ interface InteractiveContentsBlockLoadable extends ComponentNameChunkMap {
 	addWhen: InteractiveContentsBlockElement['_type'];
 }
 
-interface CalloutBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'CalloutBlockComponent';
-	addWhen: CalloutBlockElement['_type'];
-}
-
 // There are docs on loadable in ./docs/loadable-components.md
 type LoadableComponents = [
 	YoutubeBlockLoadable,
 	InteractiveBlockLoadable,
 	InteractiveContentsBlockLoadable,
-	CalloutBlockLoadable,
 ];
 
 interface CarouselImagesMap {
