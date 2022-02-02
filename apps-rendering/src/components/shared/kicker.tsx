@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
+import { text as kickerText } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
-import { OptionKind, some, withDefault } from '@guardian/types';
+import { OptionKind } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { ReactElement } from 'react';
-import { getThemeStyles } from 'themeStyles';
 
 const dotStyles = (colour: string) => {
 	return css`
@@ -61,12 +61,12 @@ export const kicker = (
 	format: ArticleFormat,
 	text: Option<string>,
 ): ReactElement | null => {
-
 	const getKickerText = (): string | null => {
 		if (text.kind === OptionKind.Some && text.value.length > 0) {
 			return text.value;
 		} else {
 			if (type === RelatedItemType.LIVE) {
+				// Liveblogs have their kicker overridden
 				return 'Live';
 			} else {
 				// No kicker text and not a liveblog card
@@ -75,16 +75,14 @@ export const kicker = (
 		}
 	};
 
-	const kickerText = getKickerText();
-	if (kickerText) {
-		const { kicker, liveblogKicker } = getThemeStyles(format.theme);
-		const kickerColour = withDefault(kicker)(some(liveblogKicker));
-
+	const kickerString = getKickerText();
+	if (kickerString) {
+		const kickerColour = kickerText.kicker(format);
 		return (
 			<>
 				<span css={kickerStyles(kickerColour)}>
 					{liveDot(type, kickerColour)}
-					{slash(kickerText)}
+					{slash(kickerString)}
 				</span>
 			</>
 		);
