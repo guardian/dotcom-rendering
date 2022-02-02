@@ -60,7 +60,7 @@ const keyEventWrapperStyles = (
 	width: 100%;
 
 	${from.desktop} {
-		border-top: #cdcdcd 1px solid;
+		border-top: 1px solid ${neutral[86]};
 		padding-top: ${remSpace[2]};
 	}
 
@@ -76,14 +76,14 @@ const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 
 	li::before {
 		content: "";
-		border-color: transparent ${neutral[7]};
-		border-style: solid;
-		border-width: 0.4rem 0 0.4rem 0.5rem;
 		display: block;
-		height: 0;
-		width: 0;
-		top: 0;
 		position: absolute;
+		top: 0;
+		left: -6px;
+		height: 11px;
+		width: 11px;
+		border-radius: 50%;
+		background-color: ${neutral[46]};
 	}
 
 	${darkModeCss(supportsDarkMode)`
@@ -95,8 +95,10 @@ const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 
 const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	padding-bottom: ${remSpace[3]};
-	border-left: 1px solid ${neutral[7]};
+	border-left: 1px solid ${neutral[86]};
 	position: relative;
+	transform: translateY(-1px);
+	margin-left: 4px;
 	${darkModeCss(supportsDarkMode)`
 		border-left: 1px solid ${neutral[60]};
 	`}
@@ -125,6 +127,10 @@ const textStyles = (
 	supportsDarkMode: boolean
 ): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
+	/* TODO update with Source value when it's added */
+	${from.desktop} {
+		font-size:15px;
+	}
 	color: ${getColor(theme, 400)};
 
 	text-decoration: none;
