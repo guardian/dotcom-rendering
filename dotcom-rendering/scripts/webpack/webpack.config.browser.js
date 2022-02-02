@@ -63,7 +63,7 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		DEV && friendlyErrorsWebpackPlugin(),
 		DEV &&
 			new GuStatsReportPlugin({
-				buildName: isLegacyJS ? 'client' : 'legacy-client',
+				buildName: isLegacyJS ? 'legacy-client' : 'client',
 				project: 'dotcom-rendering',
 				team: 'dotcom',
 				sessionId,

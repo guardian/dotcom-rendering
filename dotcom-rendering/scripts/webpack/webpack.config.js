@@ -67,7 +67,7 @@ module.exports = [
 		commonConfigs({
 			platform: 'server',
 		}),
-		require(`./server`)({ sessionId }),
+		require(`./webpack.config.server`)({ sessionId }),
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compliation
@@ -76,7 +76,7 @@ module.exports = [
 			commonConfigs({
 				platform: 'browser.legacy',
 			}),
-			require(`./browser`)({
+			require(`./webpack.config.browser`)({
 				isLegacyJS: true,
 				sessionId,
 			}),
@@ -85,7 +85,7 @@ module.exports = [
 		commonConfigs({
 			platform: 'browser',
 		}),
-		require(`./browser`)({
+		require(`./webpack.config.browser`)({
 			isLegacyJS: false,
 			sessionId,
 		}),
