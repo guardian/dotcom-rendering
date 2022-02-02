@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const chalk = require('chalk');
 const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -55,6 +56,9 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 						isLegacyJS
 							? 'Legacy client build complete'
 							: 'Client build complete',
+						`DEV server available at: ${chalk.blue.underline(
+							'http://localhost:3030',
+						)}`,
 					],
 				},
 			}),

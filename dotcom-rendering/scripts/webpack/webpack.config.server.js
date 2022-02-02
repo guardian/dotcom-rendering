@@ -15,19 +15,23 @@ module.exports = ({ sessionId }) => ({
 		pathinfo: true,
 	},
 	target: 'node',
+	externalsPresets: { node: true },
 	optimization: {
 		minimize: false,
 		runtimeChunk: false,
 	},
 	externals: [
 		'@loadable/component',
-		// 'express' & 'log4js' use expressions in 'require', which is not ideal for webpack
-		// as it does not know what files to bundle. Specifying these (server) dependencies as external
-		// means webpack does not need to bundle them.
-		'express',
-		'log4js',
 		require('webpack-node-externals')({
 			allowlist: [/^@guardian/],
+			additionalModuleDirs: [
+				// Since we use yarn-workspaces for the monorepo, node_modules will be co-located
+				// both in the '(project-root)/dotcom-rendering/node_modules' directory (default for webpack-node-externals)
+				// but also in project root, and any workspaces we link to (like common-rendering).
+				// We want to make sure all of these are removed from the server build.
+				'../node_modules',
+				'../common-rendering/node_modules',
+			],
 		}),
 		// @aws-sdk modules are only used in CODE/PROD, so we don't need to
 		// include them in the development bundle
@@ -53,7 +57,8 @@ module.exports = ({ sessionId }) => ({
 			new FriendlyErrorsWebpackPlugin({
 				compilationSuccessInfo: {
 					messages: [
-						`Server build complete: ${chalk.blue.underline(
+						'Server build complete',
+						`DEV server available at: ${chalk.blue.underline(
 							'http://localhost:3030',
 						)}`,
 					],
