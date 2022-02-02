@@ -112,6 +112,7 @@ export const ArticleBody = ({
 		<div
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 			tabIndex={0}
+			id="maincontent"
 			css={[
 				isInteractive ? null : bodyPadding,
 				globalH2Styles(format.display),
