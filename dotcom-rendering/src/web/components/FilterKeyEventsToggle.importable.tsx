@@ -35,7 +35,7 @@ export const FilterKeyEventsToggle = () => {
 	useEffect(() => {
 		setChecked(window.location.search.includes('filterKeyEvents=true'));
 	}, [setChecked]);
-	// return null;
+
 	return (
 		<div id="maincontent">
 			<ToggleSwitch
