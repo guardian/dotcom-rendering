@@ -751,12 +751,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											sticky,
 											keyEventsTopMargin,
 											sidePaddingDesktop,
+											accordionBottomMargin,
 										]}
 									>
-										<KeyEventsContainer
-											format={format}
-											keyEvents={CAPI.keyEvents}
-										/>
+										<Island deferUntil="idle">
+											<KeyEventsContainer
+												format={format}
+												keyEvents={CAPI.keyEvents}
+											/>
+										</Island>
 									</div>
 								</GridItem>
 								<GridItem area="body">

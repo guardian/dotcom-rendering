@@ -12,6 +12,8 @@ export const KeyEventsContainer = ({ keyEvents, format }: Props) => {
 		typeof window !== 'undefined' &&
 		window.location.search.includes('filterKeyEvents=true');
 
+	console.log(filterKeyEvents);
+
 	const transformedKeyEvents: KeyEvent[] = keyEvents
 		.filter((keyEvent) => {
 			return keyEvent.title && keyEvent.blockFirstPublished;
