@@ -523,7 +523,7 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 				<section css={headingWrapperStyles(type, format)}>
 					<h3 css={headingStyles(type)}>
 						{quotationComment(type, format)}
-						{kicker(type, format, kickerText)}
+						{kicker(format, kickerText)}
 						{title}
 						{cardByline(type, byline)}
 					</h3>
