@@ -32,6 +32,9 @@ module.exports = ({ sessionId }) => ({
 	},
 	externals: [
 		'@loadable/component',
+		// 'express' & 'log4js' use expressions in 'require', which is not ideal for webpack
+		// as it does not know what files to bundle. Specifying these (server) dependencies as external
+		// means webpack does not need to bundle them.
 		'express',
 		'log4js',
 		require('webpack-node-externals')({
