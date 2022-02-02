@@ -63,8 +63,6 @@ import {
 	interactiveLegacyFigureClasses,
 } from '../layouts/lib/interactiveLegacyStyling';
 
-import { submitComponentEvent } from '../browser/ophan/ophan';
-
 import { Island } from '../components/Island';
 
 type Props = {
@@ -298,39 +296,6 @@ export const renderElement = ({
 						image={element.img}
 						credit={element.credit}
 						pillar={format.theme}
-						likeHandler={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'GUIDE_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'LIKE',
-							})
-						}
-						dislikeHandler={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'GUIDE_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'DISLIKE',
-							})
-						}
-						expandCallback={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'GUIDE_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'EXPAND',
-							})
-						}
 					/>
 				</Island>,
 			];
@@ -483,39 +448,6 @@ export const renderElement = ({
 						image={element.img}
 						credit={element.credit}
 						pillar={format.theme}
-						likeHandler={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'PROFILE_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'LIKE',
-							})
-						}
-						dislikeHandler={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'PROFILE_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'DISLIKE',
-							})
-						}
-						expandCallback={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'PROFILE_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'EXPAND',
-							})
-						}
 					/>
 				</Island>,
 			];
@@ -542,39 +474,6 @@ export const renderElement = ({
 						image={element.img}
 						credit={element.credit}
 						pillar={format.theme}
-						likeHandler={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'QANDA_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'LIKE',
-							})
-						}
-						dislikeHandler={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'QANDA_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'DISLIKE',
-							})
-						}
-						expandCallback={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'QANDA_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'EXPAND',
-							})
-						}
 					/>
 				</Island>,
 			];
@@ -679,39 +578,6 @@ export const renderElement = ({
 						pillar={format.theme}
 						events={element.events}
 						description={element.description}
-						likeHandler={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'TIMELINE_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'LIKE',
-							})
-						}
-						dislikeHandler={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'TIMELINE_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'DISLIKE',
-							})
-						}
-						expandCallback={() =>
-							submitComponentEvent({
-								component: {
-									componentType: 'TIMELINE_ATOM',
-									id: element.id,
-									products: [],
-									labels: [],
-								},
-								action: 'EXPAND',
-							})
-						}
 					/>
 				</Island>,
 			];
