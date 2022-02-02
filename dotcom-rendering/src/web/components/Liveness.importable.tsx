@@ -49,15 +49,8 @@ function hydrateBlocks() {
  * @returns void
  */
 function insertNewBlocks(html: string) {
-	/**
-	 * TODO: We need to make the call to get new posts idempotent. As such, this
-	 * action needs to first remove any existing posts with ids the same as the
-	 * batch beforing inserting
-	 */
 	const latestBlock = document.querySelector('#maincontent :first-child');
-
 	if (!latestBlock) return;
-
 	latestBlock.insertAdjacentHTML('beforebegin', html);
 }
 
