@@ -5,6 +5,7 @@
     "stylelint-config-styled-components"
   ],
   "rules": {
+    "declaration-no-important": true,
     "no-duplicate-selectors": null,
     "no-descending-specificity": null,
     "property-disallowed-list": [["font-family"], { "message": "Please use the typography functions from source-foundations"}],

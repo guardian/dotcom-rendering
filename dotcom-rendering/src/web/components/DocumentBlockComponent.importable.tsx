@@ -4,6 +4,7 @@ import { ClickToView } from './ClickToView';
 
 const widthOverride = css`
 	iframe {
+		/* stylelint-disable-next-line declaration-no-important */
 		min-width: 300px !important;
 		max-width: 100%;
 	}
