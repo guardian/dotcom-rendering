@@ -4,17 +4,6 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
 const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
-const friendlyErrorsWebpackPlugin = () =>
-	new FriendlyErrorsWebpackPlugin({
-		compilationSuccessInfo: {
-			messages: [
-				`DEV server running at ${chalk.blue.underline(
-					'http://localhost:3030',
-				)}`,
-			],
-		},
-	});
-
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const GITHUB = process.env.CI_ENV === 'github';
@@ -60,7 +49,19 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 	},
 	plugins: [
 		DEV && new webpack.HotModuleReplacementPlugin(),
-		DEV && friendlyErrorsWebpackPlugin(),
+		DEV &&
+			new FriendlyErrorsWebpackPlugin({
+				compilationSuccessInfo: {
+					messages: [
+						isLegacyJS
+							? 'Legacy client build complete'
+							: 'Client build complete',
+						`DEV server available at: ${chalk.blue.underline(
+							'http://localhost:3030',
+						)}`,
+					],
+				},
+			}),
 		DEV &&
 			new GuStatsReportPlugin({
 				buildName: isLegacyJS ? 'legacy-client' : 'client',

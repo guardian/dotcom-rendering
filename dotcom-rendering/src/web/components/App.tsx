@@ -209,24 +209,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const CalloutBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.CalloutBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/CalloutBlockComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.CalloutBlockComponent,
-		},
-	);
-
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
@@ -239,10 +221,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const youTubeAtoms = elementsByType<YoutubeBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.YoutubeBlockElement',
-	);
-	const callouts = elementsByType<CalloutBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.CalloutBlockElement',
 	);
 	const audioAtoms = elementsByType<AudioAtomBlockElement>(
 		CAPI.elementsToHydrate,
@@ -357,11 +335,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					isPaidContent={CAPI.pageType.isPaidContent}
 				/>
 			</Portal>
-			{callouts.map((callout) => (
-				<HydrateOnce rootId={callout.elementId}>
-					<CalloutBlockComponent callout={callout} format={format} />
-				</HydrateOnce>
-			))}
 			{audioAtoms.map((audioAtom) => (
 				<HydrateOnce rootId={audioAtom.elementId}>
 					<AudioAtomWrapper

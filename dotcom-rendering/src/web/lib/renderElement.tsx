@@ -157,7 +157,9 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
 			return [
 				true,
-				<CalloutBlockComponent callout={element} format={format} />,
+				<Island deferUntil="visible">
+					<CalloutBlockComponent callout={element} format={format} />
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return [
