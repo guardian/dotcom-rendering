@@ -113,7 +113,7 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 		numNewBlocks: number;
 		html: string;
 	}>(getKey(pageId, ajaxUrl, filterKeyEvents, latestBlockId), {
-		refreshInterval: 10000,
+		refreshInterval: 15000,
 		refreshWhenHidden: true,
 		// onSuccess runs (once) after every successful api call. This is useful because it
 		// allows us to avoid the problems of imperative code being executed multiple times
