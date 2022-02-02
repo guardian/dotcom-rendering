@@ -221,15 +221,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 					new Error(msg),
 					'rr-header-links',
 				);
-				submitComponentEvent({
-					component: {
-						// Do not record this as ACQUISITIONS_HEADER to avoid confusing with successful INSERT events
-						componentType: 'ACQUISITIONS_OTHER',
-					},
-					action: 'INSERT',
-					id: 'header-error',
-					value: msg,
-				});
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [countryCode]);
