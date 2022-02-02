@@ -277,33 +277,13 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const VideoFacebookBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/VideoFacebookBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.VideoFacebookBlockComponent,
-		},
-	);
-
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
 	// guaranteed but TS isn't so sure and needs assurance
 	const elementsByType = <T extends CAPIElement>(
 		elements: CAPIElement[],
-		type: string,
+		type: T['_type'],
 	): T[] => elements.filter((element) => element._type === type) as T[];
 
 	const youTubeAtoms = elementsByType<YoutubeBlockElement>(
@@ -345,10 +325,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const embeds = elementsByType<EmbedBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.EmbedBlockElement',
-	);
-	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
 	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
@@ -666,26 +642,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 							/>
 						</ClickToView>
 					)}
-				</HydrateOnce>
-			))}
-			{facebookVideos.map((facebookVideo) => (
-				<HydrateOnce rootId={facebookVideo.elementId}>
-					<ClickToView
-						role={facebookVideo.role}
-						isTracking={facebookVideo.isThirdPartyTracking}
-						source={facebookVideo.source}
-						sourceDomain={facebookVideo.sourceDomain}
-					>
-						<VideoFacebookBlockComponent
-							format={format}
-							embedUrl={facebookVideo.embedUrl}
-							height={facebookVideo.height}
-							width={facebookVideo.width}
-							caption={facebookVideo.caption}
-							credit={facebookVideo.caption}
-							title={facebookVideo.caption}
-						/>
-					</ClickToView>
 				</HydrateOnce>
 			))}
 			<Portal rootId="slot-body-end">
