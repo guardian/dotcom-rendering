@@ -103,24 +103,6 @@ function topOfBlogVisible(): boolean {
 	return !!topOfBlog && !!topOfBlog.classList.contains('in-viewport');
 }
 
-if (topOfBlog) {
-	const observer = new window.IntersectionObserver(
-		([entry]) => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add('in-viewport');
-				return;
-			}
-			entry.target.classList.remove('in-viewport');
-		},
-		{
-			root: null,
-			threshold: 0.1,
-		},
-	);
-
-	observer.observe(topOfBlog);
-}
-
 export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [noOfNewPosts, setNoOfNewPosts] = useState(0);
@@ -173,6 +155,24 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 		document.title =
 			noOfNewPosts > 0 ? `(${noOfNewPosts}) ${webTitle}` : webTitle;
 	}, [noOfNewPosts, webTitle]);
+
+	if (topOfBlog) {
+		const observer = new window.IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('in-viewport');
+					return;
+				}
+				entry.target.classList.remove('in-viewport');
+			},
+			{
+				root: null,
+				threshold: 0.1,
+			},
+		);
+
+		observer.observe(topOfBlog);
+	}
 
 	const handleToastClick = () => {
 		setShowToast(false);
