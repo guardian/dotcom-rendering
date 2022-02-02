@@ -1,7 +1,6 @@
 import KeyEvents, {
 	KeyEvent,
 } from '@guardian/common-rendering/src/components/keyEvents';
-import { useEffect, useState } from 'react';
 
 type Props = {
 	keyEvents: Block[];
@@ -9,13 +8,9 @@ type Props = {
 };
 
 export const KeyEventsContainer = ({ keyEvents, format }: Props) => {
-	const [filterKeyEvents, setFilterKeyEvents] = useState(false);
-
-	useEffect(() => {
-		setFilterKeyEvents(
-			window.location.search.includes('filterKeyEvents=true'),
-		);
-	}, [setFilterKeyEvents]);
+	const filterKeyEvents =
+		typeof window !== 'undefined' &&
+		window.location.search.includes('filterKeyEvents=true');
 
 	const transformedKeyEvents: KeyEvent[] = keyEvents
 		.filter((keyEvent) => {
