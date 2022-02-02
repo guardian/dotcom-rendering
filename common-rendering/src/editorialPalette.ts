@@ -9,7 +9,6 @@ import {
   specialReport,
   sport,
   labs,
-  brandAltText,
   brandAlt,
 } from "@guardian/source-foundations";
 import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar, ArticleSpecial } from "@guardian/libs";
