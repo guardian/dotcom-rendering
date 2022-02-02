@@ -102,11 +102,6 @@ export const document = ({ data }: Props): string => {
 				'model.dotcomrendering.pageElements.InteractiveBlockElement',
 		},
 		{
-			chunkName: 'InteractiveContentsBlockComponent',
-			addWhen:
-				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
-		},
-		{
 			chunkName: 'CalloutBlockComponent',
 			addWhen: 'model.dotcomrendering.pageElements.CalloutBlockElement',
 		},

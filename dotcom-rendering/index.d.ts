@@ -862,11 +862,6 @@ interface InteractiveBlockLoadable extends ComponentNameChunkMap {
 	addWhen: InteractiveBlockElement['_type'];
 }
 
-interface InteractiveContentsBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'InteractiveContentsBlockComponent';
-	addWhen: InteractiveContentsBlockElement['_type'];
-}
-
 interface CalloutBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'CalloutBlockComponent';
 	addWhen: CalloutBlockElement['_type'];
@@ -876,7 +871,6 @@ interface CalloutBlockLoadable extends ComponentNameChunkMap {
 type LoadableComponents = [
 	YoutubeBlockLoadable,
 	InteractiveBlockLoadable,
-	InteractiveContentsBlockLoadable,
 	CalloutBlockLoadable,
 ];
 

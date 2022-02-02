@@ -383,10 +383,12 @@ export const renderElement = ({
 			return [
 				true,
 				<div id={element.elementId}>
-					<InteractiveContentsBlockComponent
-						subheadingLinks={element.subheadingLinks}
-						endDocumentElementId={element.endDocumentElementId}
-					/>
+					<Island deferUntil="visible">
+						<InteractiveContentsBlockComponent
+							subheadingLinks={element.subheadingLinks}
+							endDocumentElementId={element.endDocumentElementId}
+						/>
+					</Island>
 				</div>,
 			];
 		case 'model.dotcomrendering.pageElements.MapBlockElement':

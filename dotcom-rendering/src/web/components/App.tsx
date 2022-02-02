@@ -209,27 +209,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const InteractiveContentsBlockElement = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/InteractiveContentsBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) =>
-				module.InteractiveContentsBlockComponent,
-		},
-	);
-
 	const CalloutBlockComponent = loadable(
 		() => {
 			if (
@@ -277,11 +256,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
 	);
-	const interactiveContentsElement =
-		elementsByType<InteractiveContentsBlockElement>(
-			CAPI.elementsToHydrate,
-			'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
-		);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
@@ -354,16 +328,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						format={format}
 					/>
 				</HydrateInteractiveOnce>
-			))}
-			{interactiveContentsElement.map((interactiveBlock) => (
-				<HydrateOnce rootId={interactiveBlock.elementId}>
-					<InteractiveContentsBlockElement
-						subheadingLinks={interactiveBlock.subheadingLinks}
-						endDocumentElementId={
-							interactiveBlock.endDocumentElementId
-						}
-					/>
-				</HydrateOnce>
 			))}
 
 			{CAPI.matchUrl && (
