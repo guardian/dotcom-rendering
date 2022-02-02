@@ -33,6 +33,13 @@ import { VimeoBlockComponent } from '@root/src/web/components/VimeoBlockComponen
 import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/YoutubeBlockComponent';
+
+import { TimelineAtomWrapper } from '@root/src/web/components/TimelineAtomWrapper.importable';
+import { GuideAtomWrapper } from '@root/src/web/components/GuideAtomWrapper.importable';
+import { ChartAtomWrapper } from '@root/src/web/components/ChartAtomWrapper.importable';
+import { ProfileAtomWrapper } from '@root/src/web/components/ProfileAtomWrapper.importable';
+import { QandaAtomWrapper } from '@root/src/web/components/QandaAtomWrapper.importable';
+
 import {
 	WitnessVideoBlockComponent,
 	WitnessImageBlockComponent,
@@ -42,14 +49,9 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import {
 	AudioAtom,
-	ChartAtom,
 	ExplainerAtom,
 	InteractiveAtom,
 	InteractiveLayoutAtom,
-	QandaAtom,
-	GuideAtom,
-	ProfileAtom,
-	TimelineAtom,
 	VideoAtom,
 	PersonalityQuizAtom,
 	KnowledgeQuizAtom,
@@ -60,6 +62,7 @@ import {
 	isInteractive,
 	interactiveLegacyFigureClasses,
 } from '../layouts/lib/interactiveLegacyStyling';
+
 import { Island } from '../components/Island';
 
 type Props = {
@@ -172,7 +175,13 @@ export const renderElement = ({
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-			return [true, <ChartAtom id={element.id} html={element.html} />];
+			return [
+				true,
+				<Island deferUntil="visible">
+					<ChartAtomWrapper id={element.id} html={element.html} />
+				</Island>,
+			];
+
 		case 'model.dotcomrendering.pageElements.CodeBlockElement':
 			return [
 				true,
@@ -279,17 +288,16 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return [
 				true,
-				<GuideAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<GuideAtomWrapper
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
 			return [
@@ -432,17 +440,16 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
 			return [
 				true,
-				<ProfileAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<ProfileAtomWrapper
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
 			return [
@@ -459,39 +466,42 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.QABlockElement':
 			return [
 				true,
-				<QandaAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<QandaAtomWrapper
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return [
 				true,
 				<>
 					{element.quizType === 'personality' && (
-						<PersonalityQuizAtom
-							id={element.id}
-							questions={element.questions}
-							resultBuckets={element.resultBuckets}
-							sharingUrls={getSharingUrls(pageId, webTitle)}
-							theme={format.theme}
-						/>
+						<Island deferUntil="visible">
+							<PersonalityQuizAtom
+								id={element.id}
+								questions={element.questions}
+								resultBuckets={element.resultBuckets}
+								sharingUrls={getSharingUrls(pageId, webTitle)}
+								theme={format.theme}
+							/>
+						</Island>
 					)}
 					{element.quizType === 'knowledge' && (
-						<KnowledgeQuizAtom
-							id={element.id}
-							questions={element.questions}
-							resultGroups={element.resultGroups}
-							sharingUrls={getSharingUrls(pageId, webTitle)}
-							theme={format.theme}
-						/>
+						<Island deferUntil="visible">
+							<KnowledgeQuizAtom
+								id={element.id}
+								questions={element.questions}
+								resultGroups={element.resultGroups}
+								sharingUrls={getSharingUrls(pageId, webTitle)}
+								theme={format.theme}
+							/>
+						</Island>
 					)}
 				</>,
 			];
@@ -561,16 +571,15 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return [
 				true,
-				<TimelineAtom
-					id={element.id}
-					title={element.title}
-					pillar={format.theme}
-					events={element.events}
-					description={element.description}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<TimelineAtomWrapper
+						id={element.id}
+						title={element.title}
+						pillar={format.theme}
+						events={element.events}
+						description={element.description}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			return [true, <TweetBlockComponent element={element} />];
