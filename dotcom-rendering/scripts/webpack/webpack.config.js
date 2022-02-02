@@ -46,9 +46,11 @@ const commonConfigs = ({ platform }) => ({
 			writeToDisk: true,
 			filename: `loadable-manifest-${platform}.json`,
 		}),
-		// Does not try to require the 'canvas' package,
-		// an optional dependency of jsdom that we aren't using.
-		new webpack.IgnorePlugin({ resourceRegExp: /^canvas$/ }),
+		// Matching modules specified in this regex will not be imported during the webpack build
+		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.
+		new webpack.IgnorePlugin({
+			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
+		}),
 		PROD &&
 			new BundleAnalyzerPlugin({
 				reportFilename: path.join(dist, `${platform}-bundles.html`),
