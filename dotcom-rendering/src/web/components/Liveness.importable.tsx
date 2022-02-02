@@ -162,7 +162,9 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 			},
 			{
 				root: null,
-				threshold: 0.1,
+				// A margin makes more sense because the element we're
+				// observing (topOfBlog) has no height
+				rootMargin: '100px',
 			},
 		);
 
