@@ -4,15 +4,18 @@ import { ToggleSwitch } from '@guardian/source-react-components-development-kitc
 import { useEffect, useState } from 'react';
 
 const cssOverrides = css`
-	width: 100%;
-	padding-bottom: ${remSpace[1]};
+	display: flex; /* this can be removed after source upgrade */
 
-	${from.phablet} {
-		padding-bottom: ${remSpace[1]};
+	padding-bottom: ${remSpace[3]};
+
+	/* this can be removed after source upgrade */
+	button {
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 
 	${from.desktop} {
-		padding: ${remSpace[1]} 0;
+		padding: ${remSpace[3]} 0;
 		border-top: 1px solid ${neutral[86]};
 	}
 `;
@@ -33,7 +36,7 @@ export const FilterKeyEventsToggle = () => {
 	useEffect(() => {
 		setChecked(window.location.search.includes('filterKeyEvents=true'));
 	}, [setChecked]);
-
+	// return null;
 	return (
 		<ToggleSwitch
 			label="Show key events only"
