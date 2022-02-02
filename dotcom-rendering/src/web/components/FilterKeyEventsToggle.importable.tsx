@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 
 const cssOverrides = css`
 	display: flex; /* this can be removed after source upgrade */
-
 	padding-bottom: ${remSpace[3]};
 
 	/* this can be removed after source upgrade */
@@ -38,11 +37,13 @@ export const FilterKeyEventsToggle = () => {
 	}, [setChecked]);
 	// return null;
 	return (
-		<ToggleSwitch
-			label="Show key events only"
-			checked={checked}
-			onClick={() => handleClick()}
-			cssOverrides={cssOverrides}
-		/>
+		<div id="maincontent">
+			<ToggleSwitch
+				label="Show key events only"
+				checked={checked}
+				onClick={() => handleClick()}
+				cssOverrides={cssOverrides}
+			/>
+		</div>
 	);
 };

@@ -113,11 +113,9 @@ const backgroundColour = (
 
 const paddingBody: SerializedStyles = css`
 	padding: ${remSpace[3]};
-
 	${from.mobileLandscape} {
 		padding: ${remSpace[3]} ${remSpace[5]};
 	}
-
 	${from.desktop} {
 		padding: 0;
 	}
