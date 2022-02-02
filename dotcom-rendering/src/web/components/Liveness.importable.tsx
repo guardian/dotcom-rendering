@@ -161,6 +161,8 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 			([entry]) => {
 				if (entry.isIntersecting) {
 					entry.target.classList.add('in-viewport');
+					revealNewBlocks();
+					setNoOfNewPosts(0);
 					return;
 				}
 				entry.target.classList.remove('in-viewport');
