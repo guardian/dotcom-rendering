@@ -79,9 +79,9 @@ const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		display: block;
 		position: absolute;
 		top: 0;
-		left: -6px;
-		height: 11px;
-		width: 11px;
+		left: -0.375rem;
+		height: 0.6875rem;
+		width: 0.6875rem;
 		border-radius: 50%;
 		background-color: ${neutral[46]};
 	}
