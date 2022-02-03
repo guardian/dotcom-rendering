@@ -542,6 +542,10 @@ export const Letter: CAPIType = {
 						],
 					},
 					{
+						title: 'Winter Olympics',
+						url: '/sport/winter-olympics-2022',
+					},
+					{
 						title: 'Cricket',
 						url: '/sport/cricket',
 					},
@@ -1531,7 +1535,7 @@ export const Letter: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: 'bd41d79e-ee66-4138-8ed4-34ae4627ed91',
+			elementId: '6fe1771b-964f-4252-ba51-d3c8e03fa6f0',
 		},
 	],
 	webPublicationDate: '2021-04-05T16:04:21.000Z',
@@ -1542,17 +1546,17 @@ export const Letter: CAPIType = {
 				{
 					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'a06ebecb-57f3-41ac-a48b-736c33499af9',
+					elementId: 'e3a2ccfc-e96b-466b-b1db-ec6a5fbaf9d0',
 				},
 				{
 					html: '<p>• In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '2f489445-a79b-4efa-8ed3-0637696325a6',
+					elementId: '9250e4d4-b32a-4672-bd6d-71c8f292bf40',
 				},
 				{
 					html: '<p>• Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '3ddbda3a-467b-4c5a-9483-4329720cbef8',
+					elementId: '0aecfd0c-166f-4e17-9b9d-22a0eabe2f46',
 				},
 			],
 			blockCreatedOn: 1584705938000,
