@@ -1,10 +1,20 @@
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const chalk = require('chalk');
-const GuStatsReportPlugin = require('./gu-stats-report-plugin');
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import chalk from 'chalk';
+import externals from 'webpack-node-externals';
+import webpack, { WebpackPluginInstance } from 'webpack';
+import GuStatsReportPlugin from './gu-stats-report-plugin';
 
 const DEV = process.env.NODE_ENV === 'development';
 
-module.exports = ({ sessionId }) => ({
+export const isWebpackPluginInstance = (
+	p: boolean | WebpackPluginInstance,
+): p is WebpackPluginInstance => p !== false;
+
+export default ({
+	sessionId,
+}: {
+	sessionId: string;
+}): webpack.Configuration => ({
 	entry: {
 		'frontend.server': './src/app/server.ts',
 	},
@@ -22,7 +32,7 @@ module.exports = ({ sessionId }) => ({
 	},
 	externals: [
 		'@loadable/component',
-		require('webpack-node-externals')({
+		externals({
 			allowlist: [/^@guardian/],
 			additionalModuleDirs: [
 				// Since we use yarn-workspaces for the monorepo, node_modules will be co-located
@@ -36,19 +46,18 @@ module.exports = ({ sessionId }) => ({
 		// @aws-sdk modules are only used in CODE/PROD, so we don't need to
 		// include them in the development bundle
 		({ request }, callback) => {
-			return process.env.NODE_ENV === 'development' &&
-				request.startsWith('@aws-sdk')
-				? callback(null, `commonjs ${request}`)
+			return DEV && request?.startsWith('@aws-sdk')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
-			return request.endsWith('loadable-manifest-browser.json')
-				? callback(null, `commonjs ${request}`)
+			return request?.endsWith('loadable-manifest-browser.json')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
-			return request.endsWith('loadable-manifest-browser.legacy.json')
-				? callback(null, `commonjs ${request}`)
+			return request?.endsWith('loadable-manifest-browser.legacy.json')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 	],
@@ -62,6 +71,7 @@ module.exports = ({ sessionId }) => ({
 							'http://localhost:3030',
 						)}`,
 					],
+					notes: [],
 				},
 			}),
 		DEV &&
@@ -72,7 +82,7 @@ module.exports = ({ sessionId }) => ({
 				team: 'dotcom',
 				sessionId,
 			}),
-	].filter(Boolean),
+	].filter(isWebpackPluginInstance),
 	module: {
 		rules: [
 			{
