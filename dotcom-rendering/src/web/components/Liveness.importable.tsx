@@ -173,7 +173,7 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 
 	const handleToastClick = () => {
 		setShowToast(false);
-		if (topOfBlog) topOfBlog.scrollIntoView();
+		if (!topOfBlog) topOfBlog.scrollIntoView();
 		revealNewBlocks();
 		setNoOfNewPosts(0);
 	};
