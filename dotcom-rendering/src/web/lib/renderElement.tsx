@@ -39,6 +39,8 @@ import { GuideAtomWrapper } from '@root/src/web/components/GuideAtomWrapper.impo
 import { ChartAtomWrapper } from '@root/src/web/components/ChartAtomWrapper.importable';
 import { ProfileAtomWrapper } from '@root/src/web/components/ProfileAtomWrapper.importable';
 import { QandaAtomWrapper } from '@root/src/web/components/QandaAtomWrapper.importable';
+import { PersonalityQuizAtomWrapper } from '@root/src/web/components/PersonalityQuizAtomWrapper.importable';
+import { KnowledgeQuizAtomWrapper } from '@root/src/web/components/KnowledgeQuizAtomWrapper.importable';
 
 import {
 	WitnessVideoBlockComponent,
@@ -53,8 +55,6 @@ import {
 	InteractiveAtom,
 	InteractiveLayoutAtom,
 	VideoAtom,
-	PersonalityQuizAtom,
-	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Figure } from '../components/Figure';
@@ -487,7 +487,7 @@ export const renderElement = ({
 				<>
 					{element.quizType === 'personality' && (
 						<Island deferUntil="visible">
-							<PersonalityQuizAtom
+							<PersonalityQuizAtomWrapper
 								id={element.id}
 								questions={element.questions}
 								resultBuckets={element.resultBuckets}
@@ -498,7 +498,7 @@ export const renderElement = ({
 					)}
 					{element.quizType === 'knowledge' && (
 						<Island deferUntil="visible">
-							<KnowledgeQuizAtom
+							<KnowledgeQuizAtomWrapper
 								id={element.id}
 								questions={element.questions}
 								resultGroups={element.resultGroups}
