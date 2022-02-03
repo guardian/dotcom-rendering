@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import os from 'os';
 import { exec } from 'child_process';
-import { Compiler, Stats } from 'webpack';
+import type { Compiler, Stats } from 'webpack';
 
 type Config = Partial<{
 	displayDisclaimer: boolean;

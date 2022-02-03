@@ -1,20 +1,19 @@
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import chalk from 'chalk';
 import externals from 'webpack-node-externals';
-import webpack, { WebpackPluginInstance } from 'webpack';
+import type { WebpackPluginInstance, Compiler, Configuration } from 'webpack';
 import GuStatsReportPlugin from './gu-stats-report-plugin';
 
 const DEV = process.env.NODE_ENV === 'development';
 
-export const isWebpackPluginInstance = (
-	p: boolean | WebpackPluginInstance,
-): p is WebpackPluginInstance => p !== false;
+type ValidPlugin =
+	| WebpackPluginInstance
+	| ((this: Compiler, compiler: Compiler) => void);
 
-export default ({
-	sessionId,
-}: {
-	sessionId: string;
-}): webpack.Configuration => ({
+export const isWebpackPluginInstance = (p: unknown): p is ValidPlugin =>
+	p !== false;
+
+export default ({ sessionId }: { sessionId: string }): Configuration => ({
 	entry: {
 		'frontend.server': './src/app/server.ts',
 	},

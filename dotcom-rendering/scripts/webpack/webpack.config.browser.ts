@@ -1,3 +1,4 @@
+import type { Configuration } from 'webpack';
 import webpack from 'webpack';
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import chalk from 'chalk';
@@ -42,7 +43,7 @@ export default ({
 }: {
 	isLegacyJS: boolean;
 	sessionId: string;
-}): webpack.Configuration => ({
+}): Configuration => ({
 	entry: {
 		sentryLoader: scriptPath('sentryLoader'),
 		bootCmp: scriptPath('bootCmp'),
