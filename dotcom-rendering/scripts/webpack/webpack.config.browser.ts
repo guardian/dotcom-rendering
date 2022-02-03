@@ -1,28 +1,48 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const webpack = require('webpack');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const chalk = require('chalk');
-const GuStatsReportPlugin = require('./gu-stats-report-plugin');
+import webpack from 'webpack';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import chalk from 'chalk';
+import GuStatsReportPlugin from './gu-stats-report-plugin';
+import 'webpack-dev-server';
+import { isWebpackPluginInstance } from './webpack.config.server';
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const GITHUB = process.env.CI_ENV === 'github';
 
 // We need to distinguish files compiled by @babel/preset-env with the prefix "legacy"
-const generateName = (isLegacyJS) => {
+const generateName = (isLegacyJS: boolean) => {
 	const legacyString = isLegacyJS ? '.legacy' : '';
 	const chunkhashString = PROD && !GITHUB ? '.[chunkhash]' : '';
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
-const scriptPath = (dcrPackage) =>
+const isString = (s: string | false): s is string => s !== false;
+
+const scriptPath = (dcrPackage: string): string[] =>
 	[
 		`./src/web/browser/${dcrPackage}/init.ts`,
 		DEV &&
 			'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
-	].filter(Boolean);
+	].filter(isString);
 
-module.exports = ({ isLegacyJS, sessionId }) => ({
+export const babelExclude = {
+	and: [/node_modules/],
+	not: [
+		// Include all @guardian modules, except automat-modules
+		/@guardian\/(?!(automat-modules))/,
+
+		// Include the dynamic-import-polyfill
+		/dynamic-import-polyfill/,
+	],
+};
+
+export default ({
+	isLegacyJS,
+	sessionId,
+}: {
+	isLegacyJS: boolean;
+	sessionId: string;
+}): webpack.Configuration => ({
 	entry: {
 		sentryLoader: scriptPath('sentryLoader'),
 		bootCmp: scriptPath('bootCmp'),
@@ -60,6 +80,7 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 							'http://localhost:3030',
 						)}`,
 					],
+					notes: [],
 				},
 			}),
 		DEV &&
@@ -71,12 +92,12 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 			}),
 		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
 		// [...].filter(Boolean) why it is used
-	].filter(Boolean),
+	].filter(isWebpackPluginInstance),
 	module: {
 		rules: [
 			{
 				test: /\.[jt]sx?|mjs$/,
-				exclude: module.exports.babelExclude,
+				exclude: babelExclude,
 
 				use: [
 					{
@@ -130,14 +151,3 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		],
 	},
 });
-
-module.exports.babelExclude = {
-	and: [/node_modules/],
-	not: [
-		// Include all @guardian modules, except automat-modules
-		/@guardian\/(?!(automat-modules))/,
-
-		// Include the dynamic-import-polyfill
-		/dynamic-import-polyfill/,
-	],
-};
