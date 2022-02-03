@@ -455,9 +455,13 @@ const textKicker = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Opinion:
 					return opinion[550];
 				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
 				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticleSpecial.Labs:
+					return labs[400];
 				default:
-					return news[400];
+					return news[600];
 			}
 		default:
 			switch (format.theme) {
@@ -471,6 +475,8 @@ const textKicker = (format: ArticleFormat): Colour => {
 					return culture[400];
 				case ArticlePillar.Lifestyle:
 					return lifestyle[400];
+				case ArticleSpecial.Labs:
+					return labs[400];
 				default:
 					return news[400];
 			}
