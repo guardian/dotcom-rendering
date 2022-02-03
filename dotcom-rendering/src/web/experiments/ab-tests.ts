@@ -6,6 +6,7 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from '@frontend/web/experiments/tests/newsletter-merch-unit-test';
+import { spacefinderOkr1FilterNearby } from '@frontend/web/experiments/tests/spacefinder-okr-1-filter-nearby';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -15,4 +16,5 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
+	spacefinderOkr1FilterNearby,
 ];
