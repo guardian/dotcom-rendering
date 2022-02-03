@@ -34,7 +34,7 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { Pagination } from '@frontend/web/components/Pagination';
-import { KeyEventsContainer } from '@root/src/web/components/KeyEventsContainer.importable';
+import { KeyEventsContainer } from '@root/src/web/components/KeyEventsContainer';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -357,6 +357,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
+
+	console.log('LIVE:', CAPI.filterKeyEvents);
 
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPI.isAdFreeUser,
@@ -754,12 +756,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											accordionBottomMargin,
 										]}
 									>
-										<Island deferUntil="idle">
-											<KeyEventsContainer
-												format={format}
-												keyEvents={CAPI.keyEvents}
-											/>
-										</Island>
+										<KeyEventsContainer
+											format={format}
+											keyEvents={CAPI.keyEvents}
+											filterKeyEvents={
+												CAPI.filterKeyEvents
+											}
+										/>
 									</div>
 								</GridItem>
 								<GridItem area="body">
@@ -965,6 +968,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											<KeyEventsContainer
 												format={format}
 												keyEvents={CAPI.keyEvents}
+												filterKeyEvents={
+													CAPI.filterKeyEvents
+												}
 											/>
 										</Island>
 									</div>

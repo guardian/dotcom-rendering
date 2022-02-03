@@ -5,15 +5,14 @@ import KeyEvents, {
 type Props = {
 	keyEvents: Block[];
 	format: ArticleFormat;
+	filterKeyEvents: boolean;
 };
 
-export const KeyEventsContainer = ({ keyEvents, format }: Props) => {
-	const filterKeyEvents =
-		typeof window !== 'undefined' &&
-		window.location.search.includes('filterKeyEvents=true');
-
-	console.log(filterKeyEvents);
-
+export const KeyEventsContainer = ({
+	keyEvents,
+	format,
+	filterKeyEvents,
+}: Props) => {
 	const transformedKeyEvents: KeyEvent[] = keyEvents
 		.filter((keyEvent) => {
 			return keyEvent.title && keyEvent.blockFirstPublished;
