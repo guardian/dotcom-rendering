@@ -933,17 +933,17 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										>
 											<ArticleContainer format={format}>
 												{CAPI.pagination &&
-												CAPI.pagination.currentPage !==
-													1 ? (
+													CAPI.pagination
+														.currentPage !== 1 && (
 														<Pagination
 															currentPage={
 																CAPI.pagination
-																	?.currentPage ||
+																	?.currentPage ??
 																1
 															}
 															totalPages={
 																CAPI.pagination
-																	?.totalPages ||
+																	?.totalPages ??
 																1
 															}
 															newest={
@@ -964,7 +964,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 															}
 															format={format}
 														/>
-												) : null}
+													)}
 												<ArticleBody
 													format={format}
 													palette={palette}
@@ -978,8 +978,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													}
 												/>
 												{CAPI.pagination &&
-												CAPI.pagination.totalPages >
-													1 ? (
+													CAPI.pagination.totalPages >
+														1 && (
 														<Pagination
 															currentPage={
 																CAPI.pagination
@@ -1009,7 +1009,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 															}
 															format={format}
 														/>
-												) : null}
+													)}
 												{showBodyEndSlot ? (
 													<div id="slot-body-end" />
 												) : null}
