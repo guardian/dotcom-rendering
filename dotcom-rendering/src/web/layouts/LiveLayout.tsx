@@ -662,12 +662,10 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<LiveGridSport>
 								<GridItem area="matchtabs" element="aside">
 									<div css={maxWidth}>
-										{CAPI.matchUrl && showMatchTabs && (
-											<Placeholder
-												rootId="match-tabs"
-												height={40}
-											/>
-										)}
+										<Placeholder
+											rootId="match-tabs"
+											height={40}
+										/>
 									</div>
 								</GridItem>
 								<GridItem area="media">
