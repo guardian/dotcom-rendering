@@ -6,6 +6,7 @@ import { enhanceStandfirst } from '@root/src/model/enhanceStandfirst';
 import { validateAsCAPIType } from '@root/src/model/validate';
 import { extract as extractGA } from '@root/src/model/extract-ga';
 import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
+import { blocksToHtml } from './blocksToHtml';
 
 export const renderArticle = (
 	{ body }: express.Request,
@@ -99,6 +100,52 @@ export const renderInteractive = (
 		});
 
 		res.status(200).send(resp);
+	} catch (e) {
+		// @ts-expect-error
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		res.status(500).send(`<pre>${e.stack}</pre>`);
+	}
+};
+
+export const renderBlocks = (
+	{ body }: { body: BlocksRequest },
+	res: express.Response,
+): void => {
+	try {
+		const {
+			blocks,
+			format,
+			host,
+			pageId,
+			webTitle,
+			ajaxUrl,
+			isAdFreeUser,
+			isSensitive,
+			videoDuration,
+			edition,
+			section,
+			sharedAdTargeting,
+			adUnit,
+		} = body;
+
+		const enhancedBlocks = enhanceBlocks(blocks, format);
+		const html = blocksToHtml({
+			blocks: enhancedBlocks,
+			format,
+			host,
+			pageId,
+			webTitle,
+			ajaxUrl,
+			isAdFreeUser,
+			isSensitive,
+			videoDuration,
+			edition,
+			section,
+			sharedAdTargeting,
+			adUnit,
+		});
+
+		res.status(200).send(html);
 	} catch (e) {
 		// @ts-expect-error
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

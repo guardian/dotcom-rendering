@@ -1,0 +1,21 @@
+name: "Stale PR Handler"
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+
+permissions:
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v4.1.0
+        id: stale
+        with:
+          stale-pr-message: "This PR is stale because it has been open 30 days with no activity. Remove stale label or comment or this will be closed in 3 days"
+          days-before-issue-stale: -1
+          days-before-stale: 30
+          days-before-close: 3
+          exempt-pr-labels: "dependencies,DCR Dependency,AR Dependency"

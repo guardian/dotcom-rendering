@@ -32,13 +32,17 @@ const headerWrapper = css`
 // The css overrides here are necessary because ad-takeovers can inject css that breaks the banner
 // Overflow is visible because puzzles banner needs it to render correctly
 const bannerWrapper = css`
+	/* stylelint-disable-next-line declaration-no-important */
 	position: fixed !important;
 	bottom: 0;
 	${getZIndexImportant('banner')}
 	max-height: 100vh;
 	overflow: visible;
+	/* stylelint-disable-next-line declaration-no-important */
 	width: 100% !important;
+	/* stylelint-disable-next-line declaration-no-important */
 	background: none !important;
+	/* stylelint-disable-next-line declaration-no-important */
 	top: auto !important;
 `;
 

@@ -551,6 +551,25 @@ interface TagType {
 	bylineImageUrl?: string;
 }
 
+/**
+ * BlocksRequest is the expected body format for POST requests made to /Blocks
+ */
+interface BlocksRequest {
+	blocks: Block[];
+	format: CAPIFormat;
+	host?: string;
+	pageId: string;
+	webTitle: string;
+	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	edition: string;
+	section: string;
+	sharedAdTargeting: Record<string, unknown>;
+	adUnit: string;
+	videoDuration?: number;
+}
+
 interface BadgeType {
 	seriesTag: string;
 	imageUrl: string;
@@ -844,28 +863,10 @@ interface InteractiveContentsBlockLoadable extends ComponentNameChunkMap {
 	addWhen: InteractiveContentsBlockElement['_type'];
 }
 
-interface CalloutBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'CalloutBlockComponent';
-	addWhen: CalloutBlockElement['_type'];
-}
-
-interface DocumentBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'DocumentBlockComponent';
-	addWhen: DocumentBlockElement['_type'];
-}
-
-interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'VideoFacebookBlockComponent';
-	addWhen: VideoFacebookBlockElement['_type'];
-}
-
 // There are docs on loadable in ./docs/loadable-components.md
 type LoadableComponents = [
 	InteractiveBlockLoadable,
 	InteractiveContentsBlockLoadable,
-	CalloutBlockLoadable,
-	DocumentBlockLoadable,
-	FacebookVideoBlockLoadable,
 ];
 
 interface CarouselImagesMap {

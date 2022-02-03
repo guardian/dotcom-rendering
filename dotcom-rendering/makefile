@@ -1,4 +1,4 @@
-.PHONY: install dev build clean-dist start stop monitor clear
+.PHONY: install dev dev-legacy build clean-dist start stop monitor clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -32,7 +32,11 @@ deploy:
 
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
+	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
+
+build-ci: clean-dist install
+	$(call log, "building production bundles")
+	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
 
 start-ci: install
 	$(call log, "starting PROD server...")
@@ -57,14 +61,18 @@ logs:
 
 run: stop build start
 
-run-ci: stop build start-ci
+run-ci: stop build-ci start-ci
 
 
 # dev #########################################
 
 dev: clear clean-dist install
 	$(call log, "starting frontend DEV server")
-	@NODE_ENV=development nodemon scripts/frontend/dev-server -- --max-old-space-size=7168
+	@NODE_ENV=development SKIP_LEGACY=true nodemon scripts/dev-server/index -- --max-old-space-size=7168
+
+dev-legacy: clear clean-dist install
+	$(call log, "starting frontend DEV server (Legacy support ENABLED)")
+	@NODE_ENV=development nodemon scripts/dev-server/index -- --max-old-space-size=7168
 
 # tests #####################################
 
@@ -144,7 +152,7 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@NODE_ENV=production webpack --config ./scripts/webpack/frontend.js
+	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
 
 check-env: # private
 	$(call log, "checking environment")

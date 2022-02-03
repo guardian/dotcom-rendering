@@ -102,19 +102,6 @@ export const document = ({ data }: Props): string => {
 			addWhen:
 				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 		},
-		{
-			chunkName: 'CalloutBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.CalloutBlockElement',
-		},
-		{
-			chunkName: 'DocumentBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.DocumentBlockElement',
-		},
-		{
-			chunkName: 'VideoFacebookBlockComponent',
-			addWhen:
-				'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-		},
 	];
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
@@ -266,7 +253,7 @@ export const document = ({ data }: Props): string => {
 	)[0];
 	const gaPath = {
 		modern: modernScript.src,
-		legacy: legacyScript.src,
+		legacy: legacyScript?.src,
 	};
 
 	/**

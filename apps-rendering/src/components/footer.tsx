@@ -17,14 +17,16 @@ import { darkModeCss } from 'styles';
 const styles = css`
 	border-width: 0 1px;
 	${textSans.small({ lineHeight: 'regular' })};
-	margin-left: ${remSpace[3]};
-	margin-right: ${remSpace[3]};
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: ${remSpace[3]};
+	padding-right: ${remSpace[3]};
 	padding-top: ${remSpace[4]};
 	padding-bottom: ${remSpace[4]};
 
 	${from.wide} {
-		width: ${breakpoints.wide}px;
 		margin: 0 auto;
+		width: ${breakpoints.wide}px;
 	}
 
 	a {
@@ -35,6 +37,7 @@ const styles = css`
 
 	${darkModeCss`
         color: ${neutral[60]};
+		background: ${neutral[0]};
 
         a {
             color: ${neutral[60]};
