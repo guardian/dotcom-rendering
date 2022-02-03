@@ -8,7 +8,7 @@ import {
 } from '@guardian/source-foundations';
 
 import InfoIcon from '@frontend/static/icons/info.svg';
-import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
+import { YoutubeBlockComponentAMP } from '@root/src/amp/components/elements/YoutubeBlockComponent';
 import { scrsetStringFromImagesSources } from '@root/src/amp/lib/srcset-utils';
 
 const figureStyle = css`
@@ -137,7 +137,7 @@ const asComponent = (
 			return mainImage(element);
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return (
-				<YoutubeBlockComponent
+				<YoutubeBlockComponentAMP
 					element={element}
 					pillar={pillar}
 					adTargeting={adTargeting}

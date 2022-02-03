@@ -17,7 +17,7 @@ import { TimelineBlockComponent } from '@root/src/amp/components/elements/Timeli
 import { TwitterBlockComponent } from '@root/src/amp/components/elements/TwitterBlockComponent';
 import { VideoVimeoBlockComponent } from '@root/src/amp/components/elements/VideoVimeoBlockComponent';
 import { VideoYoutubeBlockComponent } from '@root/src/amp/components/elements/VideoYoutubeBlockComponent';
-import { YoutubeBlockComponent } from '@root/src/amp/components/elements/YoutubeBlockComponent';
+import { YoutubeBlockComponentAMP } from '@root/src/amp/components/elements/YoutubeBlockComponent';
 
 import { enhance } from '@root/src/amp/lib/enhance';
 import { NotRenderableInDCR } from '@root/src/lib/errors/not-renderable-in-dcr';
@@ -212,7 +212,7 @@ export const Elements = (
 				);
 			case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 				return (
-					<YoutubeBlockComponent
+					<YoutubeBlockComponentAMP
 						element={element}
 						pillar={pillar}
 						adTargeting={adTargeting}
