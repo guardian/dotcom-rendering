@@ -1,11 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const LoadablePlugin = require('@loadable/webpack-plugin');
-const { v4: uuidv4 } = require('uuid');
+import path from 'path';
+import webpack from 'webpack';
+import { merge } from 'webpack-merge';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+// @ts-expect-error -- there’s no type definition, yet
+import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
+import LoadablePlugin from '@loadable/webpack-plugin';
+import { v4 as uuidv4 } from 'uuid';
+import webpackConfigServer from './webpack.config.server';
+import webpackConfigBrowser from './webpack.config.browser';
 
 const PROD = process.env.NODE_ENV === 'production';
 const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
@@ -13,17 +15,18 @@ const dist = path.resolve(__dirname, '..', '..', 'dist');
 
 const sessionId = uuidv4();
 
-const commonConfigs = ({ platform }) => ({
+type ConfigParam = {
+	platform: 'server' | 'browser' | 'browser.legacy';
+};
+
+const commonConfigs = ({ platform }: ConfigParam): webpack.Configuration => ({
 	name: platform,
-	mode: process.env.NODE_ENV,
+	mode: PROD ? 'production' : 'development',
 	output: {
 		path: dist,
 	},
 	stats: 'errors-only',
-	devtool:
-		process.env.NODE_ENV === 'production'
-			? 'source-map'
-			: 'eval-cheap-module-source-map',
+	devtool: PROD ? 'source-map' : 'eval-cheap-module-source-map',
 	resolve: {
 		alias: {
 			'@root': path.resolve(__dirname, '.'),
@@ -63,13 +66,13 @@ const commonConfigs = ({ platform }) => ({
 	].filter(Boolean),
 });
 
-module.exports = [
+export default [
 	// server bundle config
 	merge(
 		commonConfigs({
 			platform: 'server',
 		}),
-		require(`./webpack.config.server`)({ sessionId }),
+		webpackConfigServer({ sessionId }),
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compliation
@@ -78,7 +81,7 @@ module.exports = [
 			commonConfigs({
 				platform: 'browser.legacy',
 			}),
-			require(`./webpack.config.browser`)({
+			webpackConfigBrowser({
 				isLegacyJS: true,
 				sessionId,
 			}),
@@ -87,7 +90,7 @@ module.exports = [
 		commonConfigs({
 			platform: 'browser',
 		}),
-		require(`./webpack.config.browser`)({
+		webpackConfigBrowser({
 			isLegacyJS: false,
 			sessionId,
 		}),
