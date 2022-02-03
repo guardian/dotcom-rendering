@@ -98,7 +98,7 @@ const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	border-left: 1px solid ${neutral[86]};
 	position: relative;
 	transform: translateY(-1px);
-	margin-left: 4px;
+	margin-left: ${remSpace[1]};
 	${darkModeCss(supportsDarkMode)`
 		border-left: 1px solid ${neutral[60]};
 	`}
