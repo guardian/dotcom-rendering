@@ -375,10 +375,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-	const showComments = CAPI.isCommentable;
-
-	const showMatchTabs = CAPI.matchUrl;
-
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
@@ -1143,7 +1139,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</ElementContainer>
 				)}
 
-				{!isPaidContent && showComments && (
+				{!isPaidContent && CAPI.isCommentable ? (
 					<ElementContainer
 						sectionId="comments"
 						data-print-layout="hide"
@@ -1166,7 +1162,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</Island>
 					</ElementContainer>
-				)}
+				) : null}
 
 				{!isPaidContent && (
 					<ElementContainer
