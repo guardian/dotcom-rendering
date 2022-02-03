@@ -22,7 +22,7 @@ export const KeyEventsContainer = ({ keyEvents, format }: Props) => {
 
 	return (
 		<KeyEvents
-			theme={format.theme}
+			format={format}
 			keyEvents={transformedKeyEvents}
 			supportsDarkMode={false}
 		/>

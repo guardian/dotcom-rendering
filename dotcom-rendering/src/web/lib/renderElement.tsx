@@ -3,8 +3,8 @@ import { CalloutBlockComponent } from '@root/src/web/components/CalloutBlockComp
 import { CaptionBlockComponent } from '@root/src/web/components/CaptionBlockComponent';
 import { CommentBlockComponent } from '@root/src/web/components/CommentBlockComponent';
 import { CodeBlockComponent } from '@root/src/web/components/CodeBlockComponent';
-import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
-import { DocumentBlockComponent } from '@root/src/web/components/DocumentBlockComponent';
+import { RichLinkComponent } from '@root/src/web/components/RichLinkComponent.importable';
+import { DocumentBlockComponent } from '@root/src/web/components/DocumentBlockComponent.importable';
 import { DisclaimerBlockComponent } from '@root/src/web/components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '@root/src/web/components/DividerBlockComponent';
 import { EmbedBlockComponent } from '@root/src/web/components/EmbedBlockComponent';
@@ -18,7 +18,7 @@ import { ItemLinkBlockElement } from '@root/src/web/components/ItemLinkBlockElem
 import { InteractiveContentsBlockComponent } from '@root/src/web/components/InteractiveContentsBlockComponent';
 import { MainMediaEmbedBlockComponent } from '@root/src/web/components/MainMediaEmbedBlockComponent';
 import { NumberedTitleBlockComponent } from '@root/src/web/components/NumberedTitleBlockComponent';
-import { MapEmbedBlockComponent } from '@root/src/web/components/MapEmbedBlockComponent';
+import { MapEmbedBlockComponent } from '@root/src/web/components/MapEmbedBlockComponent.importable';
 import { MultiImageBlockComponent } from '@root/src/web/components/MultiImageBlockComponent';
 import { PullQuoteBlockComponent } from '@root/src/web/components/PullQuoteBlockComponent';
 import { SoundcloudBlockComponent } from '@root/src/web/components/SoundcloudBlockComponent';
@@ -28,11 +28,20 @@ import { SubheadingBlockComponent } from '@root/src/web/components/SubheadingBlo
 import { TableBlockComponent } from '@root/src/web/components/TableBlockComponent';
 import { TextBlockComponent } from '@root/src/web/components/TextBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/TweetBlockComponent';
-import { VideoFacebookBlockComponent } from '@root/src/web/components/VideoFacebookBlockComponent';
+import { VideoFacebookBlockComponent } from '@root/src/web/components/VideoFacebookBlockComponent.importable';
 import { VimeoBlockComponent } from '@root/src/web/components/VimeoBlockComponent';
-import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent';
+import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/YoutubeBlockComponent';
+
+import { TimelineAtomWrapper } from '@root/src/web/components/TimelineAtomWrapper.importable';
+import { GuideAtomWrapper } from '@root/src/web/components/GuideAtomWrapper.importable';
+import { ChartAtomWrapper } from '@root/src/web/components/ChartAtomWrapper.importable';
+import { ProfileAtomWrapper } from '@root/src/web/components/ProfileAtomWrapper.importable';
+import { QandaAtomWrapper } from '@root/src/web/components/QandaAtomWrapper.importable';
+import { PersonalityQuizAtomWrapper } from '@root/src/web/components/PersonalityQuizAtomWrapper.importable';
+import { KnowledgeQuizAtomWrapper } from '@root/src/web/components/KnowledgeQuizAtomWrapper.importable';
+
 import {
 	WitnessVideoBlockComponent,
 	WitnessImageBlockComponent,
@@ -42,17 +51,10 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import {
 	AudioAtom,
-	ChartAtom,
 	ExplainerAtom,
 	InteractiveAtom,
 	InteractiveLayoutAtom,
-	QandaAtom,
-	GuideAtom,
-	ProfileAtom,
-	TimelineAtom,
 	VideoAtom,
-	PersonalityQuizAtom,
-	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Figure } from '../components/Figure';
@@ -60,6 +62,7 @@ import {
 	isInteractive,
 	interactiveLegacyFigureClasses,
 } from '../layouts/lib/interactiveLegacyStyling';
+
 import { Island } from '../components/Island';
 
 type Props = {
@@ -74,14 +77,12 @@ type Props = {
 	starRating?: number;
 	pageId: string;
 	webTitle: string;
+	ajaxUrl: string;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
 // article types.
-export const updateRole = (
-	el: CAPIElement,
-	format: ArticleFormat,
-): CAPIElement => {
+const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
 	const isLiveBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
@@ -127,6 +128,7 @@ export const renderElement = ({
 	starRating,
 	pageId,
 	webTitle,
+	ajaxUrl,
 }: Props): [boolean, JSX.Element] => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -155,7 +157,9 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
 			return [
 				true,
-				<CalloutBlockComponent callout={element} format={format} />,
+				<Island deferUntil="visible">
+					<CalloutBlockComponent callout={element} format={format} />
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return [
@@ -173,7 +177,13 @@ export const renderElement = ({
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-			return [true, <ChartAtom id={element.id} html={element.html} />];
+			return [
+				true,
+				<Island deferUntil="visible">
+					<ChartAtomWrapper id={element.id} html={element.html} />
+				</Island>,
+			];
+
 		case 'model.dotcomrendering.pageElements.CodeBlockElement':
 			return [
 				true,
@@ -207,21 +217,19 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<DocumentBlockComponent
 						embedUrl={element.embedUrl}
 						height={element.height}
-						width={element.width}
-						title={element.title}
+						isMainMedia={isMainMedia}
+						isTracking={element.isThirdPartyTracking}
+						role={element.role}
 						source={element.source}
+						sourceDomain={element.sourceDomain}
+						title={element.title}
+						width={element.width}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.EmbedBlockElement':
 			if (!element.safe) {
@@ -282,17 +290,16 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return [
 				true,
-				<GuideAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<GuideAtomWrapper
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
 			return [
@@ -378,22 +385,18 @@ export const renderElement = ({
 			return [
 				true,
 				<div id={element.elementId}>
-					<InteractiveContentsBlockComponent
-						subheadingLinks={element.subheadingLinks}
-						endDocumentElementId={element.endDocumentElementId}
-					/>
+					<Island deferUntil="visible">
+						<InteractiveContentsBlockComponent
+							subheadingLinks={element.subheadingLinks}
+							endDocumentElementId={element.endDocumentElementId}
+						/>
+					</Island>
 				</div>,
 			];
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<MapEmbedBlockComponent
 						format={format}
 						embedUrl={element.embedUrl}
@@ -402,8 +405,13 @@ export const renderElement = ({
 						caption={element.caption}
 						credit={element.source}
 						title={element.title}
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.MediaAtomBlockElement':
 			return [
@@ -436,17 +444,16 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
 			return [
 				true,
-				<ProfileAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<ProfileAtomWrapper
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
 			return [
@@ -463,51 +470,55 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.QABlockElement':
 			return [
 				true,
-				<QandaAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<QandaAtomWrapper
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return [
 				true,
 				<>
 					{element.quizType === 'personality' && (
-						<PersonalityQuizAtom
-							id={element.id}
-							questions={element.questions}
-							resultBuckets={element.resultBuckets}
-							sharingUrls={getSharingUrls(pageId, webTitle)}
-							theme={format.theme}
-						/>
+						<Island deferUntil="visible">
+							<PersonalityQuizAtomWrapper
+								id={element.id}
+								questions={element.questions}
+								resultBuckets={element.resultBuckets}
+								sharingUrls={getSharingUrls(pageId, webTitle)}
+								theme={format.theme}
+							/>
+						</Island>
 					)}
 					{element.quizType === 'knowledge' && (
-						<KnowledgeQuizAtom
-							id={element.id}
-							questions={element.questions}
-							resultGroups={element.resultGroups}
-							sharingUrls={getSharingUrls(pageId, webTitle)}
-							theme={format.theme}
-						/>
+						<Island deferUntil="visible">
+							<KnowledgeQuizAtomWrapper
+								id={element.id}
+								questions={element.questions}
+								resultGroups={element.resultGroups}
+								sharingUrls={getSharingUrls(pageId, webTitle)}
+								theme={format.theme}
+							/>
+						</Island>
 					)}
 				</>,
 			];
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
 			return [
 				true,
-				<DefaultRichLink
-					index={index}
-					headlineText={element.text}
-					url={element.url}
-					isPlaceholder={true}
-				/>,
+				<Island deferUntil="idle">
+					<RichLinkComponent
+						richLinkIndex={index}
+						element={element}
+						ajaxUrl={ajaxUrl}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
 			return [true, <SoundcloudBlockComponent element={element} />];
@@ -564,30 +575,28 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return [
 				true,
-				<TimelineAtom
-					id={element.id}
-					title={element.title}
-					pillar={format.theme}
-					events={element.events}
-					description={element.description}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<TimelineAtomWrapper
+						id={element.id}
+						title={element.title}
+						pillar={format.theme}
+						events={element.events}
+						description={element.description}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			return [true, <TweetBlockComponent element={element} />];
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<VideoFacebookBlockComponent
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 						format={format}
 						embedUrl={element.embedUrl}
 						height={element.height}
@@ -596,7 +605,7 @@ export const renderElement = ({
 						credit={element.caption}
 						title={element.caption}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
 			return [
@@ -629,16 +638,17 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
 			return [
 				true,
-				<ClickToView
-					// No role given by CAPI
-					// eslint-disable-next-line jsx-a11y/aria-role
-					role="inline"
-					isTracking={element.isThirdPartyTracking}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
-					<VineBlockComponent element={element} />
-				</ClickToView>,
+				<Island deferUntil="visible">
+					<VineBlockComponent
+						element={element}
+						// No role given by CAPI
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						isTracking={element.isThirdPartyTracking}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.WitnessBlockElement': {
 			const witnessType = element.witnessTypeData._type;
@@ -747,6 +757,7 @@ export const renderArticleElement = ({
 	palette,
 	element,
 	adTargeting,
+	ajaxUrl,
 	host,
 	index,
 	hideCaption,
@@ -762,6 +773,7 @@ export const renderArticleElement = ({
 		palette,
 		element: withUpdatedRole,
 		adTargeting,
+		ajaxUrl,
 		host,
 		index,
 		isMainMedia,

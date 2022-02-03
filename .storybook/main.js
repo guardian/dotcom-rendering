@@ -66,7 +66,7 @@ const dcrWebpack = (config) => {
 	rules.push({
 		test: /\.[jt]sx?|mjs$/,
 		include: path.resolve(__dirname, "../dotcom-rendering"),
-		exclude: require("../dotcom-rendering/scripts/webpack/browser")
+		exclude: require("../dotcom-rendering/scripts/webpack/webpack.config.browser")
 			.babelExclude,
 		use: [
 			{

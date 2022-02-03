@@ -2,17 +2,7 @@
 const webpack = require('webpack');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const chalk = require('chalk');
-
-const friendlyErrorsWebpackPlugin = () =>
-	new FriendlyErrorsWebpackPlugin({
-		compilationSuccessInfo: {
-			messages: [
-				`DEV server running at ${chalk.blue.underline(
-					'http://localhost:3030',
-				)}`,
-			],
-		},
-	});
+const GuStatsReportPlugin = require('./gu-stats-report-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
@@ -32,7 +22,7 @@ const scriptPath = (dcrPackage) =>
 			'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
 	].filter(Boolean);
 
-module.exports = ({ isLegacyJS }) => ({
+module.exports = ({ isLegacyJS, sessionId }) => ({
 	entry: {
 		sentryLoader: scriptPath('sentryLoader'),
 		bootCmp: scriptPath('bootCmp'),
@@ -46,6 +36,7 @@ module.exports = ({ isLegacyJS }) => ({
 		embedIframe: scriptPath('embedIframe'),
 		newsletterEmbedIframe: scriptPath('newsletterEmbedIframe'),
 		relativeTime: scriptPath('relativeTime'),
+		initDiscussion: scriptPath('initDiscussion'),
 	},
 	output: {
 		filename: generateName(isLegacyJS),
@@ -58,7 +49,26 @@ module.exports = ({ isLegacyJS }) => ({
 	},
 	plugins: [
 		DEV && new webpack.HotModuleReplacementPlugin(),
-		DEV && friendlyErrorsWebpackPlugin(),
+		DEV &&
+			new FriendlyErrorsWebpackPlugin({
+				compilationSuccessInfo: {
+					messages: [
+						isLegacyJS
+							? 'Legacy client build complete'
+							: 'Client build complete',
+						`DEV server available at: ${chalk.blue.underline(
+							'http://localhost:3030',
+						)}`,
+					],
+				},
+			}),
+		DEV &&
+			new GuStatsReportPlugin({
+				buildName: isLegacyJS ? 'legacy-client' : 'client',
+				project: 'dotcom-rendering',
+				team: 'dotcom',
+				sessionId,
+			}),
 		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
 		// [...].filter(Boolean) why it is used
 	].filter(Boolean),

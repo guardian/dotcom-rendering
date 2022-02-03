@@ -97,4 +97,14 @@ module.exports = {
 			'babel-module': { extensions: ['.ts', '.tsx', '.js'] },
 		},
 	},
+	overrides: [
+		{
+			files: ['**/**.js'],
+			rules: {
+				'@typescript-eslint/no-var-requires': 'off',
+				'@typescript-eslint/no-unsafe-member-access': 'off',
+				'@typescript-eslint/no-misused-promises': 'off',
+			},
+		},
+	],
 };

@@ -85,18 +85,10 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	return updatedElements.length ? updatedElements : elements;
 };
 
-export const enhanceInteractiveContentsElements = (
-	data: CAPIType,
-): CAPIType => {
-	const enhancedBlocks = data.blocks.map((block: Block) => {
+export const enhanceInteractiveContentsElements = (blocks: Block[]): Block[] =>
+	blocks.map((block: Block) => {
 		return {
 			...block,
 			elements: enhance(block.elements),
 		};
 	});
-
-	return {
-		...data,
-		blocks: enhancedBlocks,
-	} as CAPIType;
-};

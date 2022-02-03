@@ -33,7 +33,7 @@ import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
 import { Border } from '@root/src/web/components/Border';
 import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Discussion } from '@frontend/web/components/Discussion';
+import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -46,6 +46,8 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import { Island } from '../components/Island';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { OnwardsLower } from '../components/OnwardsLower.importable';
 
 const StandardGrid = ({
 	children,
@@ -354,6 +356,10 @@ export const CommentLayout = ({
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								supporterCTA={
+									CAPI.nav.readerRevenueLinks.header.supporter
+								}
+								discussionApiUrl={CAPI.config.discussionApiUrl}
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
 								}
@@ -509,6 +515,7 @@ export const CommentLayout = ({
 									host={host}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
+									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
 							</div>
 						</GridItem>
@@ -547,6 +554,7 @@ export const CommentLayout = ({
 										host={host}
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
+										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
 									{showBodyEndSlot && (
 										<div id="slot-body-end" />
@@ -625,40 +633,60 @@ export const CommentLayout = ({
 					/>
 				</ElementContainer>
 
-				{/* Onwards (when signed OUT) */}
-				<div id="onwards-upper-whensignedout" />
+				<Island clientOnly={true} deferUntil="visible">
+					<OnwardsUpper
+						ajaxUrl={CAPI.config.ajaxUrl}
+						hasRelated={CAPI.hasRelated}
+						hasStoryPackage={CAPI.hasStoryPackage}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						pageId={CAPI.pageId}
+						isPaidContent={CAPI.config.isPaidContent || false}
+						showRelatedContent={CAPI.config.showRelatedContent}
+						keywordIds={CAPI.config.keywordIds}
+						contentType={CAPI.contentType}
+						tags={CAPI.tags}
+						format={format}
+						pillar={format.theme}
+						edition={CAPI.editionId}
+						shortUrlId={CAPI.config.shortUrlId}
+					/>
+				</Island>
+
 				{showOnwardsLower && (
 					<ElementContainer
-						sectionId="onwards-lower-whensignedout"
+						sectionId="onwards-lower"
 						element="section"
-					/>
+					>
+						<Island clientOnly={true} deferUntil="visible">
+							<OnwardsLower
+								ajaxUrl={CAPI.config.ajaxUrl}
+								hasStoryPackage={CAPI.hasStoryPackage}
+								tags={CAPI.tags}
+								format={format}
+							/>
+						</Island>
+					</ElementContainer>
 				)}
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">
-						<Discussion
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							shortUrlId={CAPI.config.shortUrlId}
-							format={format}
-							discussionD2Uid={CAPI.config.discussionD2Uid}
-							discussionApiClientHeader={
-								CAPI.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={false}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-							beingHydrated={false}
-						/>
+						<Island clientOnly={true} deferUntil="visible">
+							<DiscussionContainer
+								discussionApiUrl={CAPI.config.discussionApiUrl}
+								shortUrlId={CAPI.config.shortUrlId}
+								format={format}
+								discussionD2Uid={CAPI.config.discussionD2Uid}
+								discussionApiClientHeader={
+									CAPI.config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									CAPI.config.switches.enableDiscussionSwitch
+								}
+								isAdFreeUser={CAPI.isAdFreeUser}
+								shouldHideAds={CAPI.shouldHideAds}
+							/>
+						</Island>
 					</ElementContainer>
-				)}
-
-				{/* Onwards (when signed IN) */}
-				<aside id="onwards-upper-whensignedin" />
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower-whensignedin"
-						element="aside"
-					/>
 				)}
 
 				{!isPaidContent && (

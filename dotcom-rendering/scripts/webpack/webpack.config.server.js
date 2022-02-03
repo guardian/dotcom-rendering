@@ -1,4 +1,10 @@
-module.exports = () => ({
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const chalk = require('chalk');
+const GuStatsReportPlugin = require('./gu-stats-report-plugin');
+
+const DEV = process.env.NODE_ENV === 'development';
+
+module.exports = ({ sessionId }) => ({
 	entry: {
 		'frontend.server': './src/app/server.ts',
 	},
@@ -9,6 +15,7 @@ module.exports = () => ({
 		pathinfo: true,
 	},
 	target: 'node',
+	externalsPresets: { node: true },
 	optimization: {
 		minimize: false,
 		runtimeChunk: false,
@@ -17,6 +24,14 @@ module.exports = () => ({
 		'@loadable/component',
 		require('webpack-node-externals')({
 			allowlist: [/^@guardian/],
+			additionalModuleDirs: [
+				// Since we use yarn-workspaces for the monorepo, node_modules will be co-located
+				// both in the '(project-root)/dotcom-rendering/node_modules' directory (default for webpack-node-externals)
+				// but also in project root, and any workspaces we link to (like common-rendering).
+				// We want to make sure all of these are removed from the server build.
+				'../node_modules',
+				'../common-rendering/node_modules',
+			],
 		}),
 		// @aws-sdk modules are only used in CODE/PROD, so we don't need to
 		// include them in the development bundle
@@ -37,6 +52,27 @@ module.exports = () => ({
 				: callback();
 		},
 	],
+	plugins: [
+		DEV &&
+			new FriendlyErrorsWebpackPlugin({
+				compilationSuccessInfo: {
+					messages: [
+						'Server build complete',
+						`DEV server available at: ${chalk.blue.underline(
+							'http://localhost:3030',
+						)}`,
+					],
+				},
+			}),
+		DEV &&
+			new GuStatsReportPlugin({
+				displayDisclaimer: true,
+				buildName: 'server',
+				project: 'dotcom-rendering',
+				team: 'dotcom',
+				sessionId,
+			}),
+	].filter(Boolean),
 	module: {
 		rules: [
 			{

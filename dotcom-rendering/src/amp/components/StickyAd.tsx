@@ -27,6 +27,7 @@ export const StickyAd = ({
 	contentType,
 	config,
 	commercialProperties,
+	adTargeting,
 }: StickyAdProps) => {
 	return (
 		<amp-sticky-ad layout="nodisplay">
@@ -42,6 +43,7 @@ export const StickyAd = ({
 					config.useAmazon,
 					mobileStickyPlacementId,
 				)}
+				adTargeting={adTargeting}
 			/>
 		</amp-sticky-ad>
 	);

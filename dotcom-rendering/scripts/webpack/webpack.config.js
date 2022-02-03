@@ -5,9 +5,13 @@ const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const { v4: uuidv4 } = require('uuid');
 
 const PROD = process.env.NODE_ENV === 'production';
+const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
+
+const sessionId = uuidv4();
 
 const commonConfigs = ({ platform }) => ({
 	name: platform,
@@ -42,9 +46,11 @@ const commonConfigs = ({ platform }) => ({
 			writeToDisk: true,
 			filename: `loadable-manifest-${platform}.json`,
 		}),
-		// Does not try to require the 'canvas' package,
-		// an optional dependency of jsdom that we aren't using.
-		new webpack.IgnorePlugin({ resourceRegExp: /^canvas$/ }),
+		// Matching modules specified in this regex will not be imported during the webpack build
+		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.
+		new webpack.IgnorePlugin({
+			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
+		}),
 		PROD &&
 			new BundleAnalyzerPlugin({
 				reportFilename: path.join(dist, `${platform}-bundles.html`),
@@ -63,24 +69,27 @@ module.exports = [
 		commonConfigs({
 			platform: 'server',
 		}),
-		require(`./server`)(),
+		require(`./webpack.config.server`)({ sessionId }),
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compliation
-	merge(
-		commonConfigs({
-			platform: 'browser.legacy',
-		}),
-		require(`./browser`)({
-			isLegacyJS: true,
-		}),
-	),
+	INCLUDE_LEGACY &&
+		merge(
+			commonConfigs({
+				platform: 'browser.legacy',
+			}),
+			require(`./webpack.config.browser`)({
+				isLegacyJS: true,
+				sessionId,
+			}),
+		),
 	merge(
 		commonConfigs({
 			platform: 'browser',
 		}),
-		require(`./browser`)({
+		require(`./webpack.config.browser`)({
 			isLegacyJS: false,
+			sessionId,
 		}),
 	),
-];
+].filter(Boolean);
