@@ -4153,13 +4153,6 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
-"@types/friendly-errors-webpack-plugin@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@types/friendly-errors-webpack-plugin/-/friendly-errors-webpack-plugin-0.1.4.tgz#6e96e6edb0c73e877132853a0469c48c0ab6b581"
-  integrity sha512-HyQ6v5LpJo87RQBu8Ck5o7obQRflmSrkotxzvtHgUBUJdXgDQw+PAF7rSglyRIj4WCcYp0GxqOGs71jY+T1ifA==
-  dependencies:
-    "@types/webpack" "^4"
-
 "@types/gapi.analytics@^0.0.3":
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/@types/gapi.analytics/-/gapi.analytics-0.0.3.tgz#286b8e7e0a7d9674caedd461678ae4fd5de4d31a"
@@ -4295,13 +4288,6 @@
   integrity sha512-LgO5aUQJYFQY5bLuAef4anCZ/SwsEo2hG/D4zfREgUGDXjezBjZCwlUmmpfIQLsR64reLTCijS0m7gsd1k9cKA==
   dependencies:
     "@types/react" "*"
-
-"@types/loadable__webpack-plugin@^5.7.3":
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/@types/loadable__webpack-plugin/-/loadable__webpack-plugin-5.7.3.tgz#e27b42a4364d13fc34ec752d59ea1f8f75c0a881"
-  integrity sha512-jdOgIovGk9xcbU1Kyveiw9RVCBbHfv9U9AKOveop8Jk4JQQOPrafE7WHaNxotza08pH1YG6vHTV84xUL2W2F1Q==
-  dependencies:
-    "@types/webpack" "^4"
 
 "@types/lodash.clonedeep@^4.5.4":
   version "4.5.6"
@@ -4598,7 +4584,7 @@
     "@types/source-list-map" "*"
     source-map "^0.7.3"
 
-"@types/webpack@^4", "@types/webpack@^4.41.26", "@types/webpack@^4.41.8":
+"@types/webpack@^4.41.26", "@types/webpack@^4.41.8":
   version "4.41.32"
   resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.32.tgz#a7bab03b72904070162b2f169415492209e94212"
   integrity sha512-cb+0ioil/7oz5//7tZUSwbrSAN/NWHrQylz5cW8G0dWTcF/g+/dSdMlKVZspBYuMAN1+WnwHrkxiRrLcwd0Heg==

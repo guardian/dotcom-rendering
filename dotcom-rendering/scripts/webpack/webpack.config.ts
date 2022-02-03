@@ -5,6 +5,7 @@ import { merge } from 'webpack-merge';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 // @ts-expect-error -- there’s no type definition, yet
 import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
+// @ts-expect-error -- @types/loadable__webpack-plugin break tsc
 import LoadablePlugin from '@loadable/webpack-plugin';
 import { v4 as uuidv4 } from 'uuid';
 import webpackConfigServer from './webpack.config.server';

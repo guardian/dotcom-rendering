@@ -1,5 +1,6 @@
 import type { Configuration } from 'webpack';
 import webpack from 'webpack';
+// @ts-expect-error -- @types/friendly-errors-webpack-plugin fails tsc
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import chalk from 'chalk';
 import GuStatsReportPlugin from './gu-stats-report-plugin';
