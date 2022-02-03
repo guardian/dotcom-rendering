@@ -39,6 +39,7 @@ import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
 import { kicker } from './kicker';
+import { ArticleSpecial } from '@guardian/libs';
 
 interface Props {
 	relatedItem: RelatedItem;
@@ -489,12 +490,77 @@ const cardImage = (
 	);
 };
 
+const formatFromRelatedItem = (
+	relatedItem: RelatedItemType,
+	pillar: string,
+): ArticleFormat => {
+	switch (relatedItem) {
+		case RelatedItemType.ARTICLE:
+			return {
+				design: ArticleDesign.Standard,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+
+		case RelatedItemType.FEATURE:
+			return {
+				design: ArticleDesign.Feature,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+
+		case RelatedItemType.ANALYSIS:
+			return {
+				design: ArticleDesign.Analysis,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+		case RelatedItemType.SPECIAL:
+			return {
+				design: ArticleDesign.Standard,
+				theme: ArticleSpecial.SpecialReport,
+				display: ArticleDisplay.Standard,
+			};
+		case RelatedItemType.LIVE:
+			return {
+				design: ArticleDesign.LiveBlog,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+
+		case RelatedItemType.GALLERY:
+		case RelatedItemType.AUDIO:
+		case RelatedItemType.VIDEO:
+			return {
+				design: ArticleDesign.Media,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+		case RelatedItemType.REVIEW:
+			return {
+				design: ArticleDesign.Review,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+		case RelatedItemType.ADVERTISEMENT_FEATURE:
+			return {
+				design: ArticleDesign.Standard,
+				theme: ArticleSpecial.Labs,
+				display: ArticleDisplay.Standard,
+			};
+		case RelatedItemType.COMMENT:
+			return {
+				design: ArticleDesign.Comment,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+	}
+};
+
+
 const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
-	const format = {
-		theme: themeFromString(relatedItem.pillar.id),
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-	};
+
+	const format = formatFromRelatedItem(relatedItem.type, relatedItem.pillar.id);
 
 	const img = cardImage(image, relatedItem);
 	const { type, title, mediaDuration, link, byline } = relatedItem;
