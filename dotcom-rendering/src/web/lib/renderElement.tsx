@@ -689,7 +689,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return [
 				true,
-				<Island>
+				<Island deferUntil="idle">
 					<YoutubeBlockComponent
 						format={format}
 						key={index}
