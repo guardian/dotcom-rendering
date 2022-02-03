@@ -384,8 +384,8 @@ const getSourceDetailsForEmbed = (embed: Embed): SourceDetails => {
 			};
 		case EmbedKind.EmailSignup:
 			return {
-				source: some('Guardian'),
-				sourceDomain: some('www.theguardian.com'),
+				source: embed.source,
+				sourceDomain: embed.sourceDomain,
 			};
 	}
 };
