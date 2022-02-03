@@ -490,6 +490,8 @@ const cardImage = (
 	);
 };
 
+// This function is needed because RelatedItemType only exists in the Apps Rendering
+// API model, so we need a way to convert it to ArticleFormat
 const formatFromRelatedItem = (
 	relatedItem: RelatedItemType,
 	pillar: string,
