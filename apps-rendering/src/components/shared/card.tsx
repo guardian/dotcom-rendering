@@ -4,8 +4,8 @@ import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedIte
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import Img from '@guardian/common-rendering/src/components/img';
 import { border } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	background,
 	from,
@@ -39,7 +39,6 @@ import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
 import { kicker } from './kicker';
-import { ArticleSpecial } from '@guardian/libs';
 
 interface Props {
 	relatedItem: RelatedItem;
@@ -559,10 +558,11 @@ const formatFromRelatedItem = (
 	}
 };
 
-
 const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
-
-	const format = formatFromRelatedItem(relatedItem.type, relatedItem.pillar.id);
+	const format = formatFromRelatedItem(
+		relatedItem.type,
+		relatedItem.pillar.id,
+	);
 
 	const img = cardImage(image, relatedItem);
 	const { type, title, mediaDuration, link, byline } = relatedItem;

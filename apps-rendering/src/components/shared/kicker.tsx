@@ -1,12 +1,14 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text as kickerText } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { OptionKind } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { ReactElement } from 'react';
 
-const dotStyles = (colour: string) => {
+const dotStyles = (colour: string): SerializedStyles => {
 	return css`
 		color: ${colour};
 		:before {
@@ -34,7 +36,7 @@ const liveDot = (
 	}
 };
 
-const kickerStyles = (colour: string) => css`
+const kickerStyles = (colour: string): SerializedStyles => css`
 	color: ${colour};
 	font-weight: 700;
 	margin-right: 4px;
