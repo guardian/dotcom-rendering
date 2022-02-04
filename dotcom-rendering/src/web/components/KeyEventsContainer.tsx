@@ -5,7 +5,7 @@ import KeyEvents, {
 type Props = {
 	keyEvents: Block[];
 	format: ArticleFormat;
-	filterKeyEvents: boolean;
+	filterKeyEvents?: boolean; // this is optional until Frontend is updated
 };
 
 export const KeyEventsContainer = ({
