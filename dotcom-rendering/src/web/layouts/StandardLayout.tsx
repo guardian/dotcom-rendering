@@ -626,17 +626,19 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
-								{isMatchReport && CAPI.matchUrl && (
-									<Island
-										clientOnly={true}
-										placeholderHeight={800}
-										deferUntil="visible"
-									>
-										<GetMatchStats
-											matchUrl={CAPI.matchUrl}
-										/>
-									</Island>
-								)}
+								{format.design === ArticleDesign.MatchReport &&
+									!!CAPI.matchUrl && (
+										<Island
+											deferUntil="visible"
+											clientOnly={true}
+											placeholderHeight={800}
+										>
+											<GetMatchStats
+												matchUrl={CAPI.matchUrl}
+												format={format}
+											/>
+										</Island>
+									)}
 
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines

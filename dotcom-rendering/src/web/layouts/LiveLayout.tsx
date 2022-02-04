@@ -55,6 +55,7 @@ import { Hide } from '@guardian/source-react-components';
 import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';
+import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 
@@ -232,8 +233,7 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'meta		 media'
 						'meta		 media'
 						'keyevents	 media'
-						'keyevents	 body'
-						'keyevents	 body'
+						'matchstats	 body'
 						'. 			 .';
 				}
 				/* from wide define fixed body width */
@@ -244,8 +244,7 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'lines 		 matchtabs right-column'
 						'meta  		 media     right-column'
 						'keyevents   media 	   right-column'
-						'keyevents   body      right-column'
-						'keyevents   body      right-column'
+						'matchstats  body      right-column'
 						'.			 .         right-column';
 				}
 				/* until desktop define fixed body width */
@@ -257,6 +256,7 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
+						'matchstats'
 						'body';
 				}
 				/* fluid until tablet */
@@ -268,6 +268,7 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
+						'matchstats'
 						'body';
 				}
 			}
@@ -736,7 +737,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<GridItem area="keyevents">
 									<div
 										css={[
-											sticky,
+											!CAPI.matchUrl && sticky,
 											keyEventsTopMargin,
 											sidePaddingDesktop,
 											accordionBottomMargin,
@@ -747,6 +748,20 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											keyEvents={CAPI.keyEvents}
 										/>
 									</div>
+								</GridItem>
+								<GridItem area="matchstats">
+									{CAPI.matchUrl && (
+										<Island
+											deferUntil="visible"
+											clientOnly={true}
+											placeholderHeight={800}
+										>
+											<GetMatchStats
+												matchUrl={CAPI.matchUrl}
+												format={format}
+											/>
+										</Island>
+									)}
 								</GridItem>
 								<GridItem area="body">
 									<ArticleContainer format={format}>
