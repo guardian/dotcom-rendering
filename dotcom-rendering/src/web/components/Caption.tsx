@@ -150,16 +150,19 @@ const iconStyle = (palette: Palette) => css`
 	fill: ${palette.fill.cameraCaptionIcon};
 	margin-right: ${space[1]}px;
 	display: inline-block;
-	vertical-align: middle;
+	/* vertical-align: middle; */
+	height: 10px;
+    width: 14px;
 	svg {
-		width: 14px;
-		display: inline-block;
+		height: 100%;
+		width: 100%;
 	}
 `;
 
 const videoIconStyle = css`
 	svg {
-		height: 11px;
+		height: 100%;
+		width: 100%;
 	}
 `;
 
