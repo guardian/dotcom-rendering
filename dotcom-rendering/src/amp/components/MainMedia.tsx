@@ -8,7 +8,7 @@ import {
 } from '@guardian/source-foundations';
 
 import InfoIcon from '@frontend/static/icons/info.svg';
-import { YoutubeBlockComponentAMP } from '@root/src/amp/components/elements/YoutubeBlockComponent';
+import { YoutubeBlockComponentAMP } from '@root/src/amp/components/elements/YoutubeBlockComponentAMP';
 import { scrsetStringFromImagesSources } from '@root/src/amp/lib/srcset-utils';
 
 const figureStyle = css`
