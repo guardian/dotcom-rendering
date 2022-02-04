@@ -6,7 +6,7 @@ import {
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { getLocale } from '@guardian/libs';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
-import { guCmp } from 'src/web/lib/guCmp';
+import { guCmp } from '../../lib/guCmp';
 import { CanShowGateProps } from './types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
