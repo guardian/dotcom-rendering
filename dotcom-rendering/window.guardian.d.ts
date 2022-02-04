@@ -65,8 +65,8 @@ declare global {
 		guCmpHotFix: {
 			initialised?: boolean;
 			cmp?: CMP;
-			onConsentChange?: (fn: Callback) => void;
-			getConsentFor?: (fn: Callback) => void;
+			onConsentChange: (fn: Callback) => void;
+			getConsentFor: (fn: Callback) => void;
 		};
 	}
 }
