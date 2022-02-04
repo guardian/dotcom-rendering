@@ -66,9 +66,12 @@ declare global {
 		Cypress: any; // for checking if running within cypress
 		guCmpHotFix: {
 			initialised?: boolean;
-			cmp?: CMP;
+			cmp: CMP;
 			onConsentChange: (fn: Callback) => void;
-			getConsentFor: (vendor: VendorName, consent: ConsentState) => void;
+			getConsentFor: (
+				vendor: VendorName,
+				consent: ConsentState,
+			) => boolean;
 		};
 	}
 }
