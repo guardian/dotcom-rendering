@@ -32,8 +32,8 @@ export const FilterKeyEventsToggle = () => {
 		const urlParams = new URLSearchParams(window.location.search);
 		urlParams.set('filterKeyEvents', checked ? 'false' : 'true');
 
-		window.location.search = urlParams.toString();
 		window.location.hash = 'filter-toggle';
+		window.location.search = urlParams.toString();
 	};
 
 	useEffect(() => {
