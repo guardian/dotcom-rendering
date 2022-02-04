@@ -237,8 +237,6 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'meta		 media'
 						'keyevents	 media'
 						'keyevents   filter'
-						'keyevents	 body'
-						'keyevents	 body'
 						'matchstats	 body'
 						'. 			 .';
 				}
@@ -250,10 +248,8 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'lines 		 matchtabs right-column'
 						'meta  		 media     right-column'
 						'keyevents   media 	   right-column'
-						'keyevents   filter    right-column'
-						'keyevents   body      right-column'
-						'keyevents   body      right-column'
 						'matchstats  body      right-column'
+						'keyevents   filter    right-column'
 						'.			 .         right-column';
 				}
 				/* until desktop define fixed body width */
@@ -265,8 +261,8 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
-						'filter'
 						'matchstats'
+						'filter'
 						'body';
 				}
 				/* fluid until tablet */
@@ -278,8 +274,8 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
-						'filter'
 						'matchstats'
+						'filter'
 						'body';
 				}
 			}
