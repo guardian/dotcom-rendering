@@ -1139,7 +1139,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</ElementContainer>
 				)}
 
-				{!isPaidContent && CAPI.isCommentable ? (
+				{!isPaidContent && CAPI.isCommentable && (
 					<ElementContainer
 						sectionId="comments"
 						data-print-layout="hide"
@@ -1162,7 +1162,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</Island>
 					</ElementContainer>
-				) : null}
+				)}
 
 				{!isPaidContent && (
 					<ElementContainer
