@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AudioAtom } from '@guardian/atoms-rendering';
-import {
-	onConsentChange,
-	getConsentFor,
-} from '@guardian/consent-management-platform';
+import { guCmp } from '../lib/guCmp';
 
 type Props = {
 	id: string;
@@ -33,11 +30,11 @@ export const AudioAtomWrapper = ({
 	// *****************
 	const [shouldUseAcast, setShouldUseAcast] = useState<boolean>(false);
 	useEffect(() => {
-		onConsentChange((state: any) => {
+		guCmp.onConsentChange((state: any) => {
 			// Should we use ad enabled audio? If so, then set the shouldUseAcast
 			// state to true, triggering a rerender of AudioAtom using a new track url
 			// (one with adverts)
-			const consentGiven = getConsentFor('acast', state);
+			const consentGiven = guCmp.getConsentFor('acast', state);
 			if (
 				aCastisEnabled &&
 				consentGiven &&

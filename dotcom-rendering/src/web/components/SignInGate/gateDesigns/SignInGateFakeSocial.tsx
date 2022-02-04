@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import { LinkButton, Link } from '@guardian/source-react-components';
-import { cmp } from '@guardian/consent-management-platform';
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import {
 	headline,
@@ -26,6 +25,7 @@ import {
 	signInGateContainer,
 	signInLink,
 } from './shared';
+import { guCmp } from '../../../lib/guCmp';
 
 const heading = css`
 	${headline.small({ fontWeight: 'bold' })};
@@ -315,7 +315,7 @@ export const SignInGateFakeSocial = ({
 					data-cy="sign-in-gate-fake-social_privacy"
 					css={privacyLink}
 					onClick={() => {
-						cmp.showPrivacyManager();
+						guCmp.cmp.showPrivacyManager();
 						trackLink(ophanComponentId, 'privacy', abTest);
 					}}
 				>

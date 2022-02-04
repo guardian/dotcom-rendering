@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { cmp } from '@guardian/consent-management-platform';
 import {
 	canShowRRBanner,
 	canShowPuzzlesBanner,
@@ -25,6 +24,7 @@ import type {
 import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
+import { guCmp } from '../../lib/guCmp';
 
 type Props = {
 	brazeMessages?: Promise<BrazeMessagesInterface>;
@@ -66,7 +66,7 @@ const buildCmpBannerConfig = (): CandidateConfig<void> => ({
 	candidate: {
 		id: 'cmpUi',
 		canShow: () =>
-			cmp
+			guCmp.cmp
 				.willShowPrivacyMessage()
 				.then((result) =>
 					result ? { show: true, meta: undefined } : { show: false },

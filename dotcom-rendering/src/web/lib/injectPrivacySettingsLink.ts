@@ -1,5 +1,5 @@
-import { cmp } from '@guardian/consent-management-platform';
 import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
+import { guCmp } from './guCmp';
 
 const newPrivacyLinkName = 'privacy-settings';
 
@@ -40,7 +40,7 @@ export const injectPrivacySettingsLink = (): void => {
 
 					newPrivacyLink.addEventListener(
 						'click',
-						cmp.showPrivacyManager,
+						guCmp.cmp.showPrivacyManager,
 					);
 				})
 				.catch((e) => console.error(`privacy settings - error: ${e}`));

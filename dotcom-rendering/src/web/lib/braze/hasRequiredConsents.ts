@@ -1,13 +1,10 @@
-import {
-	getConsentFor,
-	onConsentChange,
-} from '@guardian/consent-management-platform';
+import { guCmp } from '../guCmp';
 
 const hasRequiredConsents = (): Promise<boolean> =>
 	new Promise((resolve, reject) => {
-		onConsentChange((state) => {
+		guCmp.onConsentChange((state) => {
 			try {
-				resolve(getConsentFor('braze', state));
+				resolve(guCmp.getConsentFor('braze', state));
 			} catch (e) {
 				reject(e);
 			}

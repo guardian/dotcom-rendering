@@ -1,5 +1,4 @@
 import { LinkButton, Link } from '@guardian/source-react-components';
-import { cmp } from '@guardian/consent-management-platform';
 
 import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
 import { SignInGateProps } from '@frontend/web/components/SignInGate/types';
@@ -19,6 +18,7 @@ import {
 	signInHeader,
 	signInLink,
 } from './shared';
+import { guCmp } from '../../../lib/guCmp';
 
 export const SignInGateMain = ({
 	signInUrl,
@@ -47,7 +47,7 @@ export const SignInGateMain = ({
 					data-cy="sign-in-gate-main_privacy"
 					css={privacyLink}
 					onClick={() => {
-						cmp.showPrivacyManager();
+						guCmp.cmp.showPrivacyManager();
 						trackLink(ophanComponentId, 'privacy', abTest);
 					}}
 				>

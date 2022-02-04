@@ -25,8 +25,8 @@ import {
 	EpicPayload,
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { cmp } from '@guardian/consent-management-platform';
 import { getCookie, storage } from '@guardian/libs';
+import { guCmp } from '../../lib/guCmp';
 
 export type EpicConfig = {
 	module: ModuleData;
@@ -156,7 +156,7 @@ export const ReaderRevenueEpic = ({
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 
 	const openCmp = () => {
-		cmp.showPrivacyManager();
+		guCmp.cmp.showPrivacyManager();
 	};
 
 	useEffect(() => {

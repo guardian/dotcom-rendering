@@ -3,10 +3,10 @@ import {
 	DailyArticle,
 	getDailyArticleCount,
 } from '@frontend/web/lib/dailyArticleCount';
-import { onConsentChange } from '@guardian/consent-management-platform';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { getLocale } from '@guardian/libs';
 import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
+import { guCmp } from 'src/web/lib/guCmp';
 import { CanShowGateProps } from './types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
@@ -85,7 +85,7 @@ export const hasRequiredConsents = (): Promise<boolean> => {
 	};
 
 	return new Promise((resolve) => {
-		onConsentChange((state) => {
+		guCmp.onConsentChange((state) => {
 			if (state.tcfv2) {
 				return resolve(hasConsentedToAll(state));
 			}
