@@ -167,6 +167,5 @@ module.exports = {
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
-		filterKeyEvents: false,
 	},
 };

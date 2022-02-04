@@ -1660,7 +1660,7 @@ export const Review: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '3f556418-cd01-4407-a110-82d261081ef5',
+			elementId: '96dc3f1d-c28c-436c-bca3-241336555f65',
 		},
 	],
 	webPublicationDate: '2020-01-17T12:00:05.000Z',
@@ -1671,12 +1671,12 @@ export const Review: CAPIType = {
 				{
 					html: '<p>The new season of <a href="https://www.theguardian.com/tv-and-radio/2019/jan/17/sex-education-asa-butterfield-gillian-anderson-netflix">Sex Education</a> (Netflix) opens with a bravura sequence that swiftly takes its place in the pantheon of peen-based comedy greats. Suffice to say that since we left Otis at the end of the <a href="https://www.theguardian.com/tv-and-radio/2019/jan/11/sex-education-review-netflix-asa-butterfield-gillian-anderson">glorious inaugural run</a> having successfully masturbated for the first time, he has taken gleefully to his new hobby and – I don’t know if you know the French expression to encourage reluctant diners, “the appetite comes with eating”? – but we need to come up with the carnal equivalent for his joyful daily pursuits of the big O.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '0dfbc714-fad5-4b09-a84f-dca095aab531',
+					elementId: 'dfcac521-f27d-444b-822f-484f172dd6e7',
 				},
 				{
 					html: '<p>The scene establishes the tone of the new season – furiously fast, furiously funny, and not for the faint of heart any more than the first series was. And, just like the first series, it underpins the comedy arising from the sixth form students’ sexual escapades, experiments and baffled queries (“My cum tastes like kimchi! Why do I have a fermented dick?”) with deeper explorations of the main characters and the emotional pressures engendered by bigger problems.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '6c3ce41e-b125-4a99-a72b-0a6e50ee2daa',
+					elementId: '8bdb0696-bd1d-4aad-bb3d-657bb7e87273',
 				},
 				{
 					url: 'https://www.youtube.com/watch?v=qZhb0Vl_BaM',
@@ -1690,12 +1690,12 @@ export const Review: CAPIType = {
 					source: 'YouTube',
 					sourceDomain: 'youtube-nocookie.com',
 					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
-					elementId: '70e2da30-1cd3-49e0-93a8-b53cef69eb74',
+					elementId: '81d0eab9-8248-454a-8db7-873b7e8c3319',
 				},
 				{
 					html: '<p>With the help of Miss Sands, Maeve (Emma Mackey) finagles her way back into school and the special ability programme. All she has to do thereafter is wrestle with her unwelcoming and far more privileged peers and the return of her errant mother Erin (Anne-Marie Duff), allegedly clean for a year and with a three-year-old half-sister in tow. Otis (<a href="https://www.theguardian.com/tv-and-radio/2019/dec/28/sex-education-asa-butterfield-feel-more-confident-talking-about-sex">Asa Butterfield</a>) must negotiate his new relationship with Ola (Patricia Allison) while his mother Jean (Gillian Anderson, given a whole heap more to do this time round and rightly relishing every moment) throws more spanners in to his sexual works by dating Ola’s dad. Adam – poor beleaguered Adam (Connor Swindells) – is unjustly expelled from military school and sent back home to a dead-end job and his ever more hateful father. Swindells gives an extraordinary performance with what amounts to barely a hundred lines in the entire eight episodes, and if your heart doesn’t break at at least three points for him then I have no use for you. I don’t want to spoil Eric’s storyline because it doesn’t get going until a few episodes in, but <a href="https://www.theguardian.com/culture/2020/jan/05/ncuti-gatwa-i-will-say-yes-to-anything-sex-education">Ncuti Gatwa</a> remains the find of the age and handles everything thrown at him with such deftness and authenticity that you can only boggle at the fact that Laurie Nunn’s creation is his first major role.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '92574c1c-95cb-4278-8214-a9edb4b2f1b0',
+					elementId: '3f1c16df-4dab-481c-a319-7a3a7a18cf03',
 				},
 				{
 					media: {
@@ -1972,17 +1972,17 @@ export const Review: CAPIType = {
 						},
 					],
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: 'd25b5c5a-60aa-4662-9f59-ba063ee00070',
+					elementId: '7cdf4939-1b2e-4a2d-b453-2547c7168905',
 				},
 				{
 					html: '<p>Every performer is wonderful, not least because the script is wonderful, playing the sex for laughs and the search for intimacy as something serious, good and noble. Not a single character is a cipher – even the smallest parts have a sketched backstory and some good gags. It’s all of a piece with the charm and generosity of spirit that suffuses the whole thing. <a href="https://www.theguardian.com/tv-and-radio/sex-education" data-component="auto-linked-tag">Sex Education</a> sets so many conventions cheerily but firmly aside that you feel like an entire forest of received wisdom is being clear-cut. Light floods in, new growth springs up. Such a sense of revelry and optimism abounds that you can feel it doing your heart and soul good as you watch. And all without missing a comic or emotional beat or deviating from its moral core, which urges us all to connect.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'b247aa90-10d4-46f9-a485-052ce6cec85e',
+					elementId: 'dd9afe45-d5ee-45b1-bdcb-b2a144dac949',
 				},
 				{
 					html: '<p>So welcome once more, Otis (and your newly excitable penis), Maeve with her troubles to seek, Jackson (Kedar Williams-Stirling) whose mental health plummets to new lows as his swimming career reaches new heights, Aimee through whose experience on a local bus the issue of sexual assault is channelled, and all the magnificent rest of you. Nobody does it better. In fact, nobody does anything quite like it at all.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '9325c3ef-5f4c-4092-be69-59e95815e66a',
+					elementId: 'ae929069-ec30-41bf-a17b-4c175498b03b',
 				},
 			],
 			blockCreatedOn: 1579021298000,
@@ -2229,6 +2229,5 @@ export const Review: CAPIType = {
 		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
 		webPublicationDate: 1581314427000,
 		discussionD2Uid: 'zHoBy6HNKsk',
-		filterKeyEvents: false,
 	},
 };

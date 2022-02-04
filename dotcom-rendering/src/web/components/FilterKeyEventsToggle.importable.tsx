@@ -29,7 +29,7 @@ export const FilterKeyEventsToggle = () => {
 		urlParams.set('filterKeyEvents', checked ? 'false' : 'true');
 
 		window.location.search = urlParams.toString();
-		window.location.hash = 'maincontent';
+		window.location.hash = 'filter-toggle';
 	};
 
 	useEffect(() => {
@@ -37,13 +37,14 @@ export const FilterKeyEventsToggle = () => {
 	}, [setChecked]);
 
 	return (
-		<div id="maincontent">
+		<>
+			<span id="filter-toggle" />
 			<ToggleSwitch
 				label="Show key events only"
 				checked={checked}
 				onClick={() => handleClick()}
 				cssOverrides={cssOverrides}
 			/>
-		</div>
+		</>
 	);
 };

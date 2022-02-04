@@ -363,8 +363,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		config: { isPaidContent, host },
 	} = CAPI;
 
-	console.log('LIVE:', CAPI.filterKeyEvents);
-
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPI.isAdFreeUser,
 		isSensitive: CAPI.config.isSensitive,
