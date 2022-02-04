@@ -152,7 +152,7 @@ const iconStyle = (palette: Palette) => css`
 	display: inline-block;
 	/* vertical-align: middle; */
 	height: 10px;
-    width: 14px;
+	width: 14px;
 	svg {
 		height: 100%;
 		width: 100%;
