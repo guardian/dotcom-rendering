@@ -4,10 +4,14 @@ import { ToggleSwitch } from '@guardian/source-react-components-development-kitc
 import { useEffect, useState } from 'react';
 
 const cssOverrides = css`
-	display: flex; /* this can be removed after source upgrade */
 	padding-bottom: ${remSpace[3]};
 
-	/* this can be removed after source upgrade */
+	// the "display: flex" and button styles can be
+	// removed after this PR is merged and released:
+	// https://github.com/guardian/source/pull/1255
+
+	display: flex;
+
 	button {
 		margin-top: 0;
 		margin-bottom: 0;

@@ -975,6 +975,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											sticky,
 											keyEventsTopMargin,
 											sidePaddingDesktop,
+											accordionBottomMargin,
 										]}
 									>
 										<KeyEventsContainer
