@@ -586,10 +586,6 @@ export const Quiz: CAPIType = {
 						],
 					},
 					{
-						title: 'Winter Olympics',
-						url: '/sport/winter-olympics-2022',
-					},
-					{
 						title: 'Cricket',
 						url: '/sport/cricket',
 					},
@@ -1578,7 +1574,7 @@ export const Quiz: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '9b95d371-1876-445c-a081-f7c5675ea472',
+			elementId: '174423cd-7205-47bb-887e-3d7aea7ed11a',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2191,7 +2187,7 @@ export const Quiz: CAPIType = {
 						},
 					],
 					_type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-					elementId: '553d7232-23db-409a-b9ba-7122b043f2b9',
+					elementId: '391098de-bfc3-450e-a6bd-f1f7f7af4ca1',
 				},
 			],
 			blockCreatedOn: 1591866131000,

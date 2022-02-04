@@ -634,10 +634,6 @@ export const Editorial: CAPIType = {
 						],
 					},
 					{
-						title: 'Winter Olympics',
-						url: '/sport/winter-olympics-2022',
-					},
-					{
 						title: 'Cricket',
 						url: '/sport/cricket',
 					},
@@ -1074,7 +1070,7 @@ export const Editorial: CAPIType = {
 			'Editorial: Controlling cross-border transmission of Covid cases is far from easy, but the government appears scarcely to have even tried',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjEucG5n&enable=upscale&s=e7c2330f3db61275d41a19075da11728',
+			'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&enable=upscale&s=95a9c39af947732f73b8af9318d3b983',
 		'al:ios:url':
 			'gnmguardian://commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
@@ -1351,7 +1347,7 @@ export const Editorial: CAPIType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjEucG5n&s=3ae71df7698ef52ebb1e0c89bf8574b6',
+			'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&s=9fc1862f6fbfa3747354c59cbfb5dad0',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
 			'gnmguardian://commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one?contenttype=Article&source=twitter',
@@ -1638,7 +1634,7 @@ export const Editorial: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '4ef1f822-1631-4260-828a-286036516b30',
+			elementId: '41c48d0b-44eb-4c01-9baf-9f112e942928',
 		},
 	],
 	webPublicationDate: '2021-02-03T18:54:37.000Z',
@@ -1649,32 +1645,32 @@ export const Editorial: CAPIType = {
 				{
 					html: '<p>The greatest advances in the battle against the coronavirus have been made by modern science, but before there were vaccines, countries had to rely on older techniques: stopping people mingling; preventing new cases of the disease arriving from overseas. Britain’s record with lockdowns is not great (late to implement, premature in lifting), but with quarantine at the border there is barely even a record to defend. For much of last year there was a notional obligation on travellers from various countries to self-isolate on arrival in the UK, but with a shifting roster of places that qualified for “safe” travel corridors.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'cf7249e8-787c-4cb3-a7bd-2363bb821712',
+					elementId: '17b4a3b3-b4db-48f1-8b53-27b0469b1d04',
 				},
 				{
 					html: '<p>There were many categories of exemption. The regulations were unclear and poorly implemented. <a href="https://www.theguardian.com/world/commentisfree/2021/jan/28/uk-covid-travel-quarantine-hotel" title="">Efforts at enforcement have been patchy</a>. Essentially, self-isolation has been self-policed. Only towards the end of last year, as it became clear that mutant strains of the virus were spreading – and that Britain’s approach was persistently failing – did the government start focusing on <a href="https://www.theguardian.com/world/2021/jan/27/how-quarantine-rules-work-and-what-uk-government-is-planning" title="">quarantine as part of the anti-virus arsenal</a>. More travellers are now required to show proof of a negative Covid test and there are tighter restrictions on arrivals from certain “hotspot” countries. That approach is still flawed. People, and the virus they might carry, do not always travel straight from the heart of an outbreak to the UK. Mutations are dispersed along multiple paths.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '577b1d9c-8c16-4aa0-8694-26bbee4f94cc',
+					elementId: '737d9ec5-371f-4a9d-82fe-2f4ebf1cf2eb',
 				},
 				{
 					html: '<p>Ministers have said further border measures are required, but cannot say when they will be applied. The new regime is expected to involve diverting large numbers of arrivals to government-approved hotels for up to 10 days, with an option of getting out sooner with a negative test. The Department for Transport and the Treasury <a href="https://www.theguardian.com/world/2021/feb/03/grant-shapps-resists-blanket-border-controls-to-stem-covid-in-britain" title="">have been squeamish</a> about the cost of such a regime. Passengers would get a bill, but the whole system would still be expensive and inflict another wound on an already injured aviation sector.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'bcead374-004c-4a79-a490-54b632b86d31',
+					elementId: 'ae1c0b4f-86f6-4e5f-9723-f2f39693316f',
 				},
 				{
 					html: '<p>But, as has been demonstrated many times in the pandemic, resisting tighter restrictions to avoid an immediate financial burden is a false economy. Delay allows the disease to spread. The onerous measures are still required and have to be in place for longer. That remains true even as the vaccination programme is rolled out. Not enough is yet known about vaccine resilience in the face of recently discovered coronavirus variants, let alone any future mutations. <a href="https://www.theguardian.com/world/2021/jan/22/covid-vaccines-what-are-the-implications-of-new-variants-of-virus" title="">The risk is not negligible.</a></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'be62c504-53d2-45ba-9803-b655b1357457',
+					elementId: '812ac4a5-d054-4aeb-8eb0-072d54f5b1e5',
 				},
 				{
 					html: '<p>Countries with the strongest records against disease have applied the full range of containment measures quickly and thoroughly, including efficient testing, contact tracing, and a presumption that all new arrivals face quarantine (with some flexibility for humanitarian exceptions, naturally). That principle should be the basis for the UK’s regime. A speedy vaccination roll-out has given Boris Johnson <a href="https://www.theguardian.com/society/2021/jan/31/daily-record-as-600000-people-in-the-uk-receive-covid-jabs-on-saturday" title="">cause to celebrate</a> his government’s accomplishments relative to other countries. Ministerial relief at having something to cheer is palpable, but it must not lead to neglect of other fronts in the battle or feed the culture of impatience and denial that causes many Conservative MPs to demand unwarranted easing of restrictions.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c52cd3cd-4152-46fb-b385-32d2b77c8e97',
+					elementId: '4dc314e1-69c1-4f38-8d0e-813ab4a47938',
 				},
 				{
 					html: '<p>No one should belittle the social, economic and psychological cost of anti-Covid restrictions. Quarantine, like lockdown, is a harsh instrument to be used only as an emergency resort. But we are now a year into such an emergency. The government’s haphazard approach, justified by a pursuit of short-term economic relief, has only prolonged the ordeal. The vaccine programme illuminates a way out. It would be a tragic squandering of that success if overreliance on new technology were to breed complacency regarding older but no less vital methods of protecting the public.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'e148594b-54ff-430e-b564-aad29cf49e58',
+					elementId: 'f774192d-d133-4fe8-b5df-cabc97893375',
 				},
 			],
 			blockCreatedOn: 1584705172000,
@@ -1715,7 +1711,7 @@ export const Editorial: CAPIType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjEucG5n&enable=upscale&s=e7c2330f3db61275d41a19075da11728',
+				'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMucG5n&enable=upscale&s=95a9c39af947732f73b8af9318d3b983',
 				'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=aefabb0b00e0f22e6369e0e289b1d699',
 				'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=7826af58a1f33eca97d979efbeb2fd0e',
 				'https://i.guim.co.uk/img/media/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/master/5322.jpg?width=1200&quality=85&auto=format&fit=max&s=0701f8ecfdb34e888d932a0c334c886e',
