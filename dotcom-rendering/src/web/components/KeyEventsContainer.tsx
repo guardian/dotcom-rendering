@@ -5,7 +5,6 @@ import KeyEvents, {
 type Props = {
 	keyEvents: Block[];
 	format: ArticleFormat;
-
 	// this is optional until Frontend is updated here:
 	// https://github.com/guardian/frontend/pull/24607
 	filterKeyEvents?: boolean;
@@ -16,6 +15,13 @@ export const KeyEventsContainer = ({
 	format,
 	filterKeyEvents,
 }: Props) => {
+	const areKeyEventsFiltered = (): boolean => {
+		return (
+			typeof window !== 'undefined' &&
+			window.location.search.includes('filterKeyEvents=true')
+		);
+	};
+
 	const transformedKeyEvents: KeyEvent[] = keyEvents
 		.filter((keyEvent) => {
 			return keyEvent.title && keyEvent.blockFirstPublished;
@@ -23,7 +29,9 @@ export const KeyEventsContainer = ({
 		.map((keyEvent) => {
 			return {
 				text: keyEvent.title || '', // We fallback to '' here purely to keep ts happy
-				url: `?filterKeyEvents=${filterKeyEvents}&page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
+				url: `?filterKeyEvents=${
+					areKeyEventsFiltered() ? 'true' : 'false'
+				}&page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
 				date: new Date(keyEvent.blockFirstPublished || ''), // We fallback to '' here purely to keep ts happy
 			};
 		});
