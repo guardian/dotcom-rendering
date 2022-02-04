@@ -50,6 +50,7 @@ const articleWrapper = css`
 const articleAdStyles = css`
 	.ad-slot {
 		@media print {
+			/* stylelint-disable-next-line declaration-no-important */
 			display: none !important;
 		}
 		&.ad-slot--collapse {

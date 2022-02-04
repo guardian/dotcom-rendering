@@ -14,6 +14,7 @@ import {
 	renderPerfTest as renderArticlePerfTest,
 	renderArticleJson,
 	renderInteractive,
+	renderBlocks,
 } from '@root/src/web/server/render';
 
 import {
@@ -37,6 +38,8 @@ export default (options: any) => {
 			return renderInteractive;
 		case '/AMPInteractive':
 			return renderAMPArticle;
+		case '/Blocks':
+			return renderBlocks;
 	}
 
 	return renderArticle;
@@ -104,6 +107,7 @@ if (process.env.NODE_ENV === 'production') {
 	app.post('/AMPArticle', logRenderTime, renderAMPArticle);
 	app.post('/Interactive', logRenderTime, renderInteractive);
 	app.post('/AMPInteractive', logRenderTime, renderAMPArticle);
+	app.post('/Blocks', logRenderTime, renderBlocks);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get('/Article', logRenderTime, async (req: Request, res: Response) => {
