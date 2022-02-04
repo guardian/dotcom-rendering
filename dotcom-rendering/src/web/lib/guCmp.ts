@@ -11,7 +11,6 @@
  * @returns the cmp object
  */
 const getCmp = () => {
-	if (typeof window === 'undefined') return undefined;
 	if (!window.guCmpHotFix) {
 		window.guardian.modules.sentry.reportError(
 			new Error(
