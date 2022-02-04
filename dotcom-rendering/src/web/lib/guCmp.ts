@@ -11,6 +11,18 @@
  * @returns the cmp object
  */
 const getCmp = () => {
+	if (typeof window === 'undefined') {
+		// Return a mock guCmp object to make our code server safe
+		return {
+			initialised: true,
+			cmp: {
+				showPrivacyManager: () => {},
+				willShowPrivacyMessage: () => new Promise(() => {}),
+			},
+			onConsentChange: () => {},
+			getConsentFor: () => true,
+		};
+	}
 	if (!window.guCmpHotFix) {
 		window.guardian.modules.sentry.reportError(
 			new Error(
