@@ -486,7 +486,7 @@ export const renderElement = ({
 				true,
 				<>
 					{element.quizType === 'personality' && (
-						<Island deferUntil="visible">
+						<Island>
 							<PersonalityQuizAtomWrapper
 								id={element.id}
 								questions={element.questions}
@@ -497,7 +497,7 @@ export const renderElement = ({
 						</Island>
 					)}
 					{element.quizType === 'knowledge' && (
-						<Island deferUntil="visible">
+						<Island>
 							<KnowledgeQuizAtomWrapper
 								id={element.id}
 								questions={element.questions}
