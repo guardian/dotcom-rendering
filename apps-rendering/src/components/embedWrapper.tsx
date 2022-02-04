@@ -378,10 +378,6 @@ const getSourceDetailsForEmbed = (embed: Embed): SourceDetails => {
 			};
 		case EmbedKind.Generic:
 		case EmbedKind.TikTok:
-			return {
-				source: embed.source,
-				sourceDomain: embed.sourceDomain,
-			};
 		case EmbedKind.EmailSignup:
 			return {
 				source: embed.source,
