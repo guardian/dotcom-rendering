@@ -34,7 +34,14 @@ type Props = {
 	format: ArticleFormat;
 };
 
-function shouldShow(format: ArticleFormat) {
+function shouldShowSlotBodyEnd(
+	format: ArticleFormat,
+	switches: Switches,
+	slotMachineFlags?: string,
+) {
+	if (!switches.slotBodyEnd) return false;
+	if (!parse(slotMachineFlags || '').showBodyEnd) return false;
+
 	switch (format.design) {
 		case ArticleDesign.Interactive:
 		case ArticleDesign.FullPageInteractive:
@@ -97,9 +104,11 @@ export const Braze = ({
 		);
 	}, [pageId, keywordIds]);
 
-	const showBodyEndSlot =
-		(parse(slotMachineFlags || '').showBodyEnd || switches.slotBodyEnd) &&
-		shouldShow(format);
+	const showBodyEndSlot = shouldShowSlotBodyEnd(
+		format,
+		switches,
+		slotMachineFlags,
+	);
 
 	return (
 		<>
