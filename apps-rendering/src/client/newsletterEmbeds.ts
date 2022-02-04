@@ -2,7 +2,7 @@ import { isObject } from 'lib';
 
 const allowedOrigins = ['https://www.theguardian.com'];
 
-export default (): Promise<void> => {
+export default (): void => {
 	const allIframes: HTMLIFrameElement[] = [].slice.call(
 		document.querySelectorAll('.js-email-signup'),
 	);
@@ -57,6 +57,4 @@ export default (): Promise<void> => {
 			} catch (e) {}
 		}
 	});
-
-	return Promise.resolve();
 };

@@ -45,7 +45,7 @@ function setup(): void {
 	interactives();
 	twitter();
 	platformCSS();
-	void newsletterEmbeds();
+	newsletterEmbeds();
 }
 
 // ----- Exports ----- //
