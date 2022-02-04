@@ -439,7 +439,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</ElementContainer>
 
-					{NAV.subNavSections ? (
+					{NAV.subNavSections && (
 						<ElementContainer
 							backgroundColour={palette.background.article}
 							padded={false}
@@ -454,7 +454,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 							</Island>
 						</ElementContainer>
-					) : null}
+					)}
 
 					<ElementContainer
 						backgroundColour={palette.background.article}
@@ -531,12 +531,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										<ArticleHeadlinePadding
 											design={format.design}
 										>
-											{age ? (
+											{age && (
 												<div css={ageWarningMargins}>
 													<AgeWarning age={age} />
 												</div>
-											) : null}
-											{!CAPI.matchUrl ? (
+											)}
+											{!CAPI.matchUrl && (
 												<ArticleHeadline
 													format={format}
 													headlineString={
@@ -546,13 +546,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													byline={CAPI.author.byline}
 													palette={palette}
 												/>
-											) : null}
-											{age ? (
+											)}
+											{age && (
 												<AgeWarning
 													age={age}
 													isScreenReader={true}
 												/>
-											) : null}
+											)}
 										</ArticleHeadlinePadding>
 									</div>
 									{CAPI.starRating ||
@@ -745,23 +745,32 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<GridItem area="body">
 									<ArticleContainer format={format}>
 										{CAPI.pagination &&
-										CAPI.pagination.currentPage !== 1 ? (
-											<Pagination
-												currentPage={
-													CAPI.pagination
-														?.currentPage || 1
-												}
-												totalPages={
-													CAPI.pagination
-														?.totalPages || 1
-												}
-												newest={CAPI.pagination?.newest}
-												oldest={CAPI.pagination?.oldest}
-												newer={CAPI.pagination?.newer}
-												older={CAPI.pagination?.older}
-												format={format}
-											/>
-										) : null}
+											CAPI.pagination.currentPage !==
+												1 && (
+												<Pagination
+													currentPage={
+														CAPI.pagination
+															?.currentPage || 1
+													}
+													totalPages={
+														CAPI.pagination
+															?.totalPages || 1
+													}
+													newest={
+														CAPI.pagination?.newest
+													}
+													oldest={
+														CAPI.pagination?.oldest
+													}
+													newer={
+														CAPI.pagination?.newer
+													}
+													older={
+														CAPI.pagination?.older
+													}
+													format={format}
+												/>
+											)}
 										<ArticleBody
 											format={format}
 											palette={palette}
@@ -773,26 +782,34 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											ajaxUrl={CAPI.config.ajaxUrl}
 										/>
 										{CAPI.pagination &&
-										CAPI.pagination.totalPages > 1 ? (
-											<Pagination
-												currentPage={
-													CAPI.pagination
-														?.currentPage || 1
-												}
-												totalPages={
-													CAPI.pagination
-														?.totalPages || 1
-												}
-												newest={CAPI.pagination?.newest}
-												oldest={CAPI.pagination?.oldest}
-												newer={CAPI.pagination?.newer}
-												older={CAPI.pagination?.older}
-												format={format}
-											/>
-										) : null}
-										{showBodyEndSlot ? (
+											CAPI.pagination.totalPages > 1 && (
+												<Pagination
+													currentPage={
+														CAPI.pagination
+															?.currentPage || 1
+													}
+													totalPages={
+														CAPI.pagination
+															?.totalPages || 1
+													}
+													newest={
+														CAPI.pagination?.newest
+													}
+													oldest={
+														CAPI.pagination?.oldest
+													}
+													newer={
+														CAPI.pagination?.newer
+													}
+													older={
+														CAPI.pagination?.older
+													}
+													format={format}
+												/>
+											)}
+										{showBodyEndSlot && (
 											<div id="slot-body-end" />
-										) : null}
+										)}
 										<Lines
 											data-print-layout="hide"
 											count={4}
@@ -1010,9 +1027,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 															format={format}
 														/>
 													)}
-												{showBodyEndSlot ? (
+												{showBodyEndSlot && (
 													<div id="slot-body-end" />
-												) : null}
+												)}
 												<Lines
 													data-print-layout="hide"
 													count={4}
@@ -1106,7 +1123,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					/>
 				</Island>
 
-				{showOnwardsLower ? (
+				{showOnwardsLower && (
 					<ElementContainer
 						sectionId="onwards-lower"
 						element="section"
@@ -1120,7 +1137,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							/>
 						</Island>
 					</ElementContainer>
-				) : null}
+				)}
 
 				{!isPaidContent && CAPI.isCommentable ? (
 					<ElementContainer
@@ -1147,13 +1164,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</ElementContainer>
 				) : null}
 
-				{!isPaidContent ? (
+				{!isPaidContent && (
 					<ElementContainer
 						data-print-layout="hide"
 						sectionId="most-viewed-footer"
 						element="aside"
 					/>
-				) : null}
+				)}
 
 				<ElementContainer
 					data-print-layout="hide"
@@ -1167,7 +1184,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				</ElementContainer>
 			</main>
 
-			{NAV.subNavSections ? (
+			{NAV.subNavSections && (
 				<ElementContainer
 					data-print-layout="hide"
 					padded={false}
@@ -1181,7 +1198,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						/>
 					</Island>
 				</ElementContainer>
-			) : null}
+			)}
 
 			<ElementContainer
 				data-print-layout="hide"
