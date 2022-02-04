@@ -6,7 +6,7 @@ import {
 	getWeeklyArticleHistory,
 } from '@guardian/support-dotcom-components';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { parse } from 'src/lib/slot-machine-flags';
+import { parse } from '@root/src/lib/slot-machine-flags';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
