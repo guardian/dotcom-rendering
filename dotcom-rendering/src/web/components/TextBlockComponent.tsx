@@ -157,9 +157,9 @@ export const TextBlockComponent = ({
 				li:before {
 					display: inline-block;
 					content: '';
-					border-radius: 6px;
-					height: 12px;
-					width: 12px;
+					border-radius: 50%;
+					height: 13px;
+					width: 13px;
 					margin-right: 8px;
 					background-color: ${neutral[86]};
 					margin-left: -20px;
@@ -185,9 +185,9 @@ export const TextBlockComponent = ({
 				[data-dcr-style='bullet'] {
 					display: inline-block;
 					content: '';
-					border-radius: 100%;
-					height: 15.2px;
-					width: 15.2px;
+					border-radius: 50%;
+					height: 13px;
+					width: 13px;
 					margin-right: 0.2px;
 					background-color: ${decidePalette(format).background
 						.bullet};

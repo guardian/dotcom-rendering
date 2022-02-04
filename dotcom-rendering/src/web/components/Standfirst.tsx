@@ -30,9 +30,9 @@ const nestedStyles = (palette: Palette) => css`
 	li:before {
 		display: inline-block;
 		content: '';
-		border-radius: 6px;
-		height: ${space[3]}px;
-		width: ${space[3]}px;
+		border-radius: 50%;
+		height: 12px;
+		width: 12px;
 		margin-right: ${space[2]}px;
 		background-color: ${palette.background.bulletStandfirst};
 		margin-left: -20px;
@@ -49,9 +49,9 @@ const nestedStyles = (palette: Palette) => css`
 	[data-dcr-style='bullet'] {
 		display: inline-block;
 		content: '';
-		border-radius: 100%;
-		height: 15.2px;
-		width: 15.2px;
+		border-radius: 50%;
+		height: 13px;
+		width: 13px;
 		margin-right: 2px;
 		background-color: ${palette.background.bulletStandfirst};
 	}
@@ -104,6 +104,11 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 							max-width: 460px;
 						}
 						color: ${palette.text.standfirst};
+
+						li:before {
+							height: 17px;
+							width: 17px;
+						}
 					`;
 			}
 
@@ -134,6 +139,10 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};
+						li:before {
+							height: 15px;
+							width: 15px;
+						}
 					`;
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
