@@ -3,6 +3,8 @@ import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import type {
 	Callback,
 	CMP,
+	ConsentState,
+	VendorName,
 } from '@guardian/consent-management-platform/dist/types';
 
 declare global {
@@ -66,7 +68,7 @@ declare global {
 			initialised?: boolean;
 			cmp?: CMP;
 			onConsentChange: (fn: Callback) => void;
-			getConsentFor: (fn: Callback) => void;
+			getConsentFor: (vendor: VendorName, consent: ConsentState) => void;
 		};
 	}
 }
