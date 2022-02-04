@@ -24,7 +24,7 @@ const getCmp = () => {
 		};
 	}
 	if (!window.guCmpHotFix) {
-		window.guardian.modules.sentry.reportError(
+		window?.guardian?.modules?.sentry?.reportError(
 			new Error(
 				`Tried to access window.guCmpHotFix but it was falsy: ${window.guCmpHotFix}. This is indicative of a race condition`,
 			),
