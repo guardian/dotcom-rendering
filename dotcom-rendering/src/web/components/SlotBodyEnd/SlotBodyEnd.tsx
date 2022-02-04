@@ -149,7 +149,14 @@ export const SlotBodyEnd = ({
 	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
 
 	if (SelectedEpic) {
-		return <SelectedEpic />;
+		// The id on this aside element is used to add css in this file
+		// https://github.com/guardian/dotcom-rendering/blob/8f71e12d717f118d095834362f0fed58ea77ee3b/dotcom-rendering/src/web/components/SignInGate/gateDesigns/shared.tsx
+		// It was added here after we removed the old Portal pattern and moved to an Island
+		return (
+			<aside id="slot-body-end">
+				<SelectedEpic />
+			</aside>
+		);
 	}
 
 	return null;

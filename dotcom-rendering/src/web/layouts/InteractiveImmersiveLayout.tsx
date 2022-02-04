@@ -19,7 +19,6 @@ import {
 	labelStyles as adLabelStyles,
 	adCollapseStyles,
 } from '@root/src/web/components/AdSlot';
-import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
@@ -36,6 +35,7 @@ import { decideLineEffect, decideLineCount } from '../lib/layoutHelpers';
 import { Standfirst } from '../components/Standfirst';
 import { Caption } from '../components/Caption';
 import { Island } from '../components/Island';
+import { Braze } from '../components/Braze';
 
 const InteractiveImmersiveGrid = ({
 	children,
@@ -476,7 +476,28 @@ export const InteractiveImmersiveLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<Island clientOnly={true}>
+				<Braze
+					idApiUrl={CAPI.config.idApiUrl}
+					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isMinuteArticle={CAPI.pageType.isMinuteArticle}
+					isPaidContent={CAPI.pageType.isPaidContent}
+					tags={CAPI.tags}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					stage={CAPI.config.stage}
+					section={CAPI.config.section}
+					isPreview={CAPI.pageType.isPreview}
+					isSensitive={CAPI.config.isSensitive}
+					switches={CAPI.config.switches}
+					keywordIds={CAPI.config.keywordIds}
+					pageId={CAPI.pageId}
+					slotMachineFlags={CAPI.slotMachineFlags}
+					format={format}
+				/>
+			</Island>
+
 			<MobileStickyContainer />
 		</>
 	);

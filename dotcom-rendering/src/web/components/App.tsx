@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
-import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
 import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
-import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
@@ -21,14 +19,11 @@ import {
 import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
-import { useOnce } from '@root/src/web/lib/useOnce';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
-import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
-import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
@@ -37,14 +32,7 @@ import { LabsHeader } from '@root/src/web/components/LabsHeader';
 import { EmbedBlockComponent } from '@root/src/web/components/EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from '@root/src/web/components/UnsafeEmbedBlockComponent';
 
-import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
-import {
-	getWeeklyArticleHistory,
-	incrementWeeklyArticleCount,
-} from '@guardian/support-dotcom-components';
-import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
 
@@ -57,13 +45,7 @@ let renderCount = 0;
 export const App = ({ CAPI, ophanRecord }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 
-	const [brazeMessages, setBrazeMessages] =
-		useState<Promise<BrazeMessagesInterface>>();
-
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-
-	const [asyncArticleCount, setAsyncArticleCount] =
-		useState<Promise<WeeklyArticleHistory | undefined>>();
 
 	// *******************************
 	// ** Setup AB Test Tracking *****
@@ -80,30 +62,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	useEffect(() => {
 		incrementAlreadyVisited();
 	}, []);
-
-	// Log an article view using the Slot Machine client lib
-	// This function must be called once per article serving.
-	// We should monitor this function call to ensure it only happens within an
-	// article pages when other pages are supported by DCR.
-	useEffect(() => {
-		const incrementArticleCountsIfConsented = async () => {
-			const hasOptedOut = await hasOptedOutOfArticleCount();
-			if (!hasOptedOut) {
-				incrementDailyArticleCount();
-				incrementWeeklyArticleCount(
-					storage.local,
-					CAPI.pageId,
-					CAPI.config.keywordIds.split(','),
-				);
-			}
-		};
-
-		setAsyncArticleCount(
-			incrementArticleCountsIfConsented().then(() =>
-				getWeeklyArticleHistory(storage.local),
-			),
-		);
-	}, [CAPI.pageId, CAPI.config.keywordIds]);
 
 	// Ensure the focus state of any buttons/inputs in any of the Source
 	// components are only applied when navigating via keyboard.
@@ -145,10 +103,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 			};
 		}
 	}, [CAPI.shouldHideReaderRevenue]);
-
-	useOnce(() => {
-		setBrazeMessages(buildBrazeMessages(CAPI.config.idApiUrl));
-	}, [CAPI.config.idApiUrl]);
 
 	const display: ArticleDisplay = decideDisplay(CAPI.format);
 	const design: ArticleDesign = decideDesign(CAPI.format);
@@ -386,22 +340,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					)}
 				</HydrateOnce>
 			))}
-			<Portal rootId="slot-body-end">
-				<SlotBodyEnd
-					contentType={CAPI.contentType}
-					sectionName={CAPI.sectionName}
-					sectionId={CAPI.config.section}
-					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-					isMinuteArticle={CAPI.pageType.isMinuteArticle}
-					isPaidContent={CAPI.pageType.isPaidContent}
-					tags={CAPI.tags}
-					contributionsServiceUrl={CAPI.contributionsServiceUrl}
-					brazeMessages={brazeMessages}
-					idApiUrl={CAPI.config.idApiUrl}
-					stage={CAPI.stage}
-					asyncArticleCount={asyncArticleCount}
-				/>
-			</Portal>
 			<Portal rootId="sign-in-gate">
 				<SignInGateSelector
 					format={format}
@@ -421,24 +359,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					format={format}
 					sectionName={CAPI.sectionName}
 					ajaxUrl={CAPI.config.ajaxUrl}
-				/>
-			</Portal>
-			<Portal rootId="bottom-banner">
-				<StickyBottomBanner
-					brazeMessages={brazeMessages}
-					asyncArticleCount={asyncArticleCount}
-					contentType={CAPI.contentType}
-					sectionName={CAPI.sectionName}
-					section={CAPI.config.section}
-					tags={CAPI.tags}
-					isPaidContent={CAPI.pageType.isPaidContent}
-					isPreview={!!CAPI.isPreview}
-					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-					isMinuteArticle={CAPI.pageType.isMinuteArticle}
-					isSensitive={CAPI.config.isSensitive}
-					contributionsServiceUrl={CAPI.contributionsServiceUrl}
-					idApiUrl={CAPI.config.idApiUrl}
-					switches={CAPI.config.switches}
 				/>
 			</Portal>
 		</React.StrictMode>

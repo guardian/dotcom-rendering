@@ -47,7 +47,7 @@ import {
 	decideLineEffect,
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
+import { Stuck } from '@root/src/web/layouts/lib/stickiness';
 import {
 	interactiveGlobalStyles,
 	interactiveLegacyClasses,
@@ -55,6 +55,7 @@ import {
 import { Island } from '../components/Island';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { Braze } from '../components/Braze';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -679,7 +680,28 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				/>
 			</ElementContainer>
 
-			<BannerWrapper data-print-layout="hide" />
+			<Island clientOnly={true}>
+				<Braze
+					idApiUrl={CAPI.config.idApiUrl}
+					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isMinuteArticle={CAPI.pageType.isMinuteArticle}
+					isPaidContent={CAPI.pageType.isPaidContent}
+					tags={CAPI.tags}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					stage={CAPI.config.stage}
+					section={CAPI.config.section}
+					isPreview={CAPI.pageType.isPreview}
+					isSensitive={CAPI.config.isSensitive}
+					switches={CAPI.config.switches}
+					keywordIds={CAPI.config.keywordIds}
+					pageId={CAPI.pageId}
+					slotMachineFlags={CAPI.slotMachineFlags}
+					format={format}
+				/>
+			</Island>
+
 			<MobileStickyContainer data-print-layout="hide" />
 		</>
 	);

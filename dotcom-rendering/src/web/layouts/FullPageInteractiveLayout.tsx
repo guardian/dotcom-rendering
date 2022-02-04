@@ -25,7 +25,7 @@ import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
 import { getZIndex } from '@frontend/web/lib/getZIndex';
 
-import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
+import { Stuck } from '@root/src/web/layouts/lib/stickiness';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
 
 import { renderElement } from '../lib/renderElement';
@@ -34,6 +34,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { Island } from '../components/Island';
+import { Braze } from '../components/Braze';
 
 interface Props {
 	CAPI: CAPIType;
@@ -333,7 +334,28 @@ export const FullPageInteractiveLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<Island clientOnly={true}>
+				<Braze
+					idApiUrl={CAPI.config.idApiUrl}
+					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isMinuteArticle={CAPI.pageType.isMinuteArticle}
+					isPaidContent={CAPI.pageType.isPaidContent}
+					tags={CAPI.tags}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					stage={CAPI.config.stage}
+					section={CAPI.config.section}
+					isPreview={CAPI.pageType.isPreview}
+					isSensitive={CAPI.config.isSensitive}
+					switches={CAPI.config.switches}
+					keywordIds={CAPI.config.keywordIds}
+					pageId={CAPI.pageId}
+					slotMachineFlags={CAPI.slotMachineFlags}
+					format={format}
+				/>
+			</Island>
+
 			<MobileStickyContainer />
 		</>
 	);

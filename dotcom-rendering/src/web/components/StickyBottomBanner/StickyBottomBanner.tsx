@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { css } from '@emotion/react';
 import { cmp } from '@guardian/consent-management-platform';
 import {
 	canShowRRBanner,
@@ -22,6 +23,7 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
+import { getZIndexImportant } from '@root/src/web/lib/getZIndex';
 import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
@@ -49,6 +51,23 @@ type RRBannerConfig = {
 	canShowFn: CanShowFunctionType<BannerProps>;
 	isEnabled: (switches: CAPIType['config']['switches']) => boolean;
 };
+
+// The css overrides here are necessary because ad-takeovers can inject css that breaks the banner
+// Overflow is visible because puzzles banner needs it to render correctly
+const bannerWrapper = css`
+	/* stylelint-disable-next-line declaration-no-important */
+	position: fixed !important;
+	bottom: 0;
+	${getZIndexImportant('banner')}
+	max-height: 100vh;
+	overflow: visible;
+	/* stylelint-disable-next-line declaration-no-important */
+	width: 100% !important;
+	/* stylelint-disable-next-line declaration-no-important */
+	background: none !important;
+	/* stylelint-disable-next-line declaration-no-important */
+	top: auto !important;
+`;
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
 	const item = localStorage.getItem(`gu.prefs.${key}`) as undefined | string;
@@ -278,7 +297,11 @@ export const StickyBottomBanner = ({
 	}, [isSignedIn, asyncCountryCode, brazeMessages, asyncArticleCount]);
 
 	if (SelectedBanner) {
-		return <SelectedBanner />;
+		return (
+			<aside id="bottom-banner" css={bannerWrapper}>
+				<SelectedBanner />
+			</aside>
+		);
 	}
 
 	return null;

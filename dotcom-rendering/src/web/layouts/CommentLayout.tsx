@@ -36,18 +36,14 @@ import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
-import {
-	Stuck,
-	SendToBack,
-	BannerWrapper,
-} from '@root/src/web/layouts/lib/stickiness';
+import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
 import { Island } from '../components/Island';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
+import { Braze } from '../components/Braze';
 
 const StandardGrid = ({
 	children,
@@ -299,10 +295,6 @@ export const CommentLayout = ({
 		sharedAdTargeting: CAPI.config.sharedAdTargeting,
 		adUnit: CAPI.config.adUnit,
 	});
-
-	const showBodyEndSlot =
-		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
-		CAPI.config.switches.slotBodyEnd;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -556,9 +548,6 @@ export const CommentLayout = ({
 										webTitle={CAPI.webTitle}
 										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
-									{showBodyEndSlot && (
-										<div id="slot-body-end" />
-									)}
 									<Lines count={4} effect="straight" />
 									<SubMeta
 										palette={palette}
@@ -733,7 +722,28 @@ export const CommentLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<Island clientOnly={true}>
+				<Braze
+					idApiUrl={CAPI.config.idApiUrl}
+					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isMinuteArticle={CAPI.pageType.isMinuteArticle}
+					isPaidContent={CAPI.pageType.isPaidContent}
+					tags={CAPI.tags}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					stage={CAPI.config.stage}
+					section={CAPI.config.section}
+					isPreview={CAPI.pageType.isPreview}
+					isSensitive={CAPI.config.isSensitive}
+					switches={CAPI.config.switches}
+					keywordIds={CAPI.config.keywordIds}
+					pageId={CAPI.pageId}
+					slotMachineFlags={CAPI.slotMachineFlags}
+					format={format}
+				/>
+			</Island>
+
 			<MobileStickyContainer />
 		</>
 	);

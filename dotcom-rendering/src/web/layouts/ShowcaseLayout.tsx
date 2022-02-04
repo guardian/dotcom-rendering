@@ -36,23 +36,19 @@ import { DiscussionContainer } from '@root/src/web/components/DiscussionContaine
 import { LabsHeader } from '@frontend/web/components/LabsHeader';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { parse } from '@frontend/lib/slot-machine-flags';
 import { getAgeWarning } from '@root/src/lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
 	getCurrentPillar,
 } from '@root/src/web/lib/layoutHelpers';
-import {
-	Stuck,
-	SendToBack,
-	BannerWrapper,
-} from '@root/src/web/layouts/lib/stickiness';
+import { Stuck, SendToBack } from '@root/src/web/layouts/lib/stickiness';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Island } from '../components/Island';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { Braze } from '../components/Braze';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -245,10 +241,6 @@ export const ShowcaseLayout = ({
 		sharedAdTargeting: CAPI.config.sharedAdTargeting,
 		adUnit: CAPI.config.adUnit,
 	});
-
-	const showBodyEndSlot =
-		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
-		CAPI.config.switches.slotBodyEnd;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -539,7 +531,6 @@ export const ShowcaseLayout = ({
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
-								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines count={4} effect="straight" />
 								<SubMeta
 									palette={palette}
@@ -713,7 +704,28 @@ export const ShowcaseLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<Island clientOnly={true}>
+				<Braze
+					idApiUrl={CAPI.config.idApiUrl}
+					contentType={CAPI.contentType}
+					sectionName={CAPI.sectionName}
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					isMinuteArticle={CAPI.pageType.isMinuteArticle}
+					isPaidContent={CAPI.pageType.isPaidContent}
+					tags={CAPI.tags}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					stage={CAPI.config.stage}
+					section={CAPI.config.section}
+					isPreview={CAPI.pageType.isPreview}
+					isSensitive={CAPI.config.isSensitive}
+					switches={CAPI.config.switches}
+					keywordIds={CAPI.config.keywordIds}
+					pageId={CAPI.pageId}
+					slotMachineFlags={CAPI.slotMachineFlags}
+					format={format}
+				/>
+			</Island>
+
 			<MobileStickyContainer />
 		</>
 	);
