@@ -119,7 +119,7 @@ const textStyles = (
 		font-size:15px;
 	}
 	color: ${text.keyEventsInline(format)};
-
+	display: block;
 	text-decoration: none;
 
 	&:hover {
