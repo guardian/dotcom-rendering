@@ -6,17 +6,6 @@ import { useEffect, useState } from 'react';
 const cssOverrides = css`
 	padding-bottom: ${remSpace[3]};
 
-	// the "display: flex" and button styles can be
-	// removed after this PR is merged and released:
-	// https://github.com/guardian/source/pull/1255
-
-	display: flex;
-
-	button {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
-
 	${from.desktop} {
 		padding: ${remSpace[3]} 0;
 		border-top: 1px solid ${neutral[86]};
