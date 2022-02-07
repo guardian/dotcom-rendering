@@ -6,7 +6,7 @@ const DEV = process.env.NODE_ENV === 'development';
 
 module.exports = ({ sessionId }) => ({
 	entry: {
-		'frontend.server': './src/app/server.ts',
+		'frontend.server': './src/server/index.ts',
 	},
 	output: {
 		filename: `[name].js`,

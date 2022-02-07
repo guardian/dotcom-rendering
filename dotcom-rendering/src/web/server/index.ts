@@ -1,4 +1,4 @@
-import express from 'express';
+import type express from 'express';
 import { extractNAV } from '@root/src/model/extract-nav';
 import { document } from '@root/src/web/server/document';
 import { enhanceBlocks } from '@root/src/model/enhanceBlocks';
