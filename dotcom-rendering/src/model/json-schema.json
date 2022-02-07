@@ -186,6 +186,9 @@
             "format": "date-time",
             "type": "string"
         },
+        "webPublicationDate": {
+            "type": "string"
+        },
         "webPublicationDateDisplay": {
             "type": "string"
         },
@@ -384,6 +387,9 @@
         },
         "isLegacyInteractive": {
             "type": "boolean"
+        },
+        "filterKeyEvents": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -397,6 +403,7 @@
         "designType",
         "editionId",
         "editionLongForm",
+        "filterKeyEvents",
         "format",
         "guardianBaseURL",
         "hasRelated",
@@ -429,6 +436,7 @@
         "trailText",
         "twitterData",
         "version",
+        "webPublicationDate",
         "webPublicationDateDeprecated",
         "webPublicationDateDisplay",
         "webPublicationSecondaryDateDisplay",
@@ -2104,6 +2112,7 @@
                 "DeadBlogDesign",
                 "EditorialDesign",
                 "FeatureDesign",
+                "FullPageInteractiveDesign",
                 "InteractiveDesign",
                 "InterviewDesign",
                 "LetterDesign",
@@ -3628,7 +3637,7 @@
                     }
                 },
                 "abTests": {
-                    "$ref": "#/definitions/Record<string,\"control\"|\"variant\">"
+                    "type": "object"
                 },
                 "dfpAccountId": {
                     "type": "string"
@@ -3790,9 +3799,6 @@
                 "stage",
                 "switches"
             ]
-        },
-        "Record<string,\"control\"|\"variant\">": {
-            "type": "object"
         },
         "CommercialProperties": {
             "type": "object",
