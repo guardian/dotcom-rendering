@@ -74,9 +74,9 @@ const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		display: block;
 		position: absolute;
 		top: 0;
-		left: -0.375rem;
-		height: 0.6875rem;
-		width: 0.6875rem;
+		left: -0.313rem;
+		height: 0.563rem;
+		width: 0.563rem;
 		border-radius: 50%;
 		background-color: ${neutral[46]};
 	}
@@ -84,6 +84,7 @@ const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	${darkModeCss(supportsDarkMode)`
 		li::before {
 			border-color: transparent ${neutral[60]};
+			background-color: #999999;
 		}
 	`}
 `;
@@ -104,6 +105,7 @@ const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 
 const timeTextWrapperStyles: SerializedStyles = css`
 	margin-left: ${remSpace[4]};
+	margin-left: 0.5rem;
 `;
 
 
@@ -147,6 +149,7 @@ const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	${textSans.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
 	color: ${neutral[7]};
 	display: block;
+	transform: translateY(-2.5px);
 
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[60]};
