@@ -498,10 +498,7 @@ interface CAPIType {
 	// The logic is date-driven. See:
 	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
 	isLegacyInteractive?: boolean;
-
-	// this is optional until Frontend is updated here:
-	// https://github.com/guardian/frontend/pull/24607
-	filterKeyEvents?: boolean;
+	filterKeyEvents: boolean;
 }
 
 // Browser data models. Note the CAPI prefix here means something different to

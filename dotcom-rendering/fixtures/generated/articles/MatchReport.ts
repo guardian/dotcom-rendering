@@ -582,6 +582,10 @@ export const MatchReport: CAPIType = {
 						],
 					},
 					{
+						title: 'Winter Olympics',
+						url: '/sport/winter-olympics-2022',
+					},
+					{
 						title: 'Cricket',
 						url: '/sport/cricket',
 					},
@@ -1585,7 +1589,7 @@ export const MatchReport: CAPIType = {
 				},
 			],
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '714ed9ad-8e98-4f03-a524-0dc5a6bbb7c8',
+			elementId: '205da5a5-8c7c-468b-8929-820ec69be253',
 		},
 	],
 	webPublicationDate: '2021-02-05T22:16:43.000Z',
@@ -1596,17 +1600,17 @@ export const MatchReport: CAPIType = {
 				{
 					html: '<p>When does a blip become something more major? Whatever this sticky patch is for <a href="https://www.theguardian.com/football/norwichcity" data-component="auto-linked-tag">Norwich City</a>, it is impossible to ignore the changing landscape at the top of the Championship after Swansea cut their lead at the summit to two points courtesy of goals by André Ayew and Conor Hourihane.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'ffd924ed-f9b7-4a51-b142-6afdffdca263',
+					elementId: '49f228a3-4e7e-49ee-bd33-ebd1b6466568',
 				},
 				{
 					html: '<p>Norwich may have fired blanks for the fourth successive game but Hourihane is on quite the streak, with a superb strike here his third goal since arriving on loan from Aston Villa a fortnight ago. It looks an increasingly shrewd piece of business.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '86371bcd-7534-4b47-8098-2840843788ae',
+					elementId: '3ed2d8a9-d7b2-4503-a495-5be128b31bfa',
 				},
 				{
 					html: '<p>Swansea have a game in hand on the leaders but Brentford and Reading, both of whom also have games up their sleeve, will be equally encouraged by a Norwich team stuck in a rut. Ayew capitalised on an uncharacteristic error by Tim Krul to open the scoring before Hourihane sent a rasping strike beyond the Norwich goalkeeper from distance after the interval.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '52085d9a-c0f9-41ef-912c-9b4c295ac3a5',
+					elementId: '973d36b7-c519-4896-b27c-49db65928ce7',
 				},
 				{
 					url: 'https://www.theguardian.com/football/football-league-blog/2021/jan/29/tim-krul-way-we-play-norwich-similar-holland-netherlands-goalkeeper',
@@ -1614,37 +1618,37 @@ export const MatchReport: CAPIType = {
 					prefix: 'Related: ',
 					role: 'thumbnail',
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					elementId: '5526889b-0e1b-4e9d-a927-33d188124f32',
+					elementId: 'cba6a6f3-7839-481b-8259-89e746cc2dc3',
 				},
 				{
 					html: '<p>Swansea should have had a late penalty too, but the referee Simon Hooper waved away appeals despite Ben Gibson appearing to fell the substitute Jordan Morris after Grant Hanley collided with the all-action Connor Roberts.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '16fd7ee2-9f05-46ab-abc7-94af64496740',
+					elementId: 'a564d5cf-85b0-4735-b7ef-32f4f2fd30f4',
 				},
 				{
 					html: '<p>On the eve of this game, Swansea’s unpopular American owners gave a rare interview in which they broke their silence on a multitude of longstanding issues but also made a point of stressing they have not been “taking a victory lap” on the back of their impressive start under Steve Cooper.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '1415537d-2201-4467-bdd1-b30340af1860',
+					elementId: '668e6f97-817e-4c10-937b-539da99ed2ae',
 				},
 				{
 					html: '<p>“There were no expectations at the start of the season so I think it would be unfair to start doing it [building them] now with 19 games to go,” Cooper said. “There are clubs not even in the top 10 with much more resources than us but we’re going well and enjoying the journey and that’s how we work.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'da84cd68-967e-419f-938d-7900c52a0d9a',
+					elementId: 'ac9114f3-054c-4193-9a78-5270e33188fe',
 				},
 				{
 					html: '<p>Perhaps it was kidology but Daniel Farke had been at pains to play down the significance of the occasion after stuttering to a point at Millwall on Tuesday. Todd Cantwell, among those of interest to the watching England Under-21s manager Aidy Boothroyd, showed touches of class, setting Teemu Pukki free with a wonderfully weighted pass and later Kenny McLean after twirling away from Matt Grimes but the killer instinct again eluded them.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '63d9677a-c164-4520-b72e-66c97a58f01a',
+					elementId: 'dcc07d24-5c11-4a2a-b12c-4e21ed6ea0a2',
 				},
 				{
 					html: '<p>Swansea seized the advantage three minutes before the interval but the goal was a tragicomedy from a Norwich perspective. Krul flapped at Roberts’ in-swinging corner and when the ball dropped, Marc Guehi, another player on Boothroyd’s radar, scooped the ball away from the Norwich goalkeeper’s grasp, allowing Swansea to feast on the leftovers. Jake Bidwell tried his luck and then Ayew fired in his ninth goal of the season. Farke sought a response and Freddie Woodman saved superbly to keep out Grant Hanley’s header on the brink of the interval after the captain met Przemyslaw Placheta’s free-kick.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '8ca0f41e-841b-4cec-890d-4e0e8f74e074',
+					elementId: '18a8ce9f-027b-4845-8edb-853e8fa1ae48',
 				},
 				{
 					html: '<p>Krul came out early to limber up for the second half but, before Norwich had a chance to write the wrongs, they found themselves two goals down. Jay Fulton gobbled up possession following a loose pass by McLean and played a sliderule pass infield to Hourihane, who joined on loan last month in search of regular game time. The midfielder steadied himself with first touch and then arrowed a piercing left-footed strike into the corner with his second.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '6baabf53-fa89-47f8-9f7b-0daca942d9bd',
+					elementId: '45bc8892-5870-4fac-9088-bdece99033f5',
 				},
 				{
 					html: '<iframe id="the-fiver" name="the-fiver" src="https://www.theguardian.com/email/form/plaintone/the-fiver" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--the-fiver"></iframe>',
@@ -1655,17 +1659,17 @@ export const MatchReport: CAPIType = {
 					source: 'The Guardian',
 					sourceDomain: 'theguardian.com',
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
-					elementId: '70b8a872-65ce-42e1-b28f-cdce2a556b86',
+					elementId: '350b44c4-bee2-4ddd-921c-55c297628cc5',
 				},
 				{
 					html: '<p>“We didn’t think he was going to come in and score three goals in first three league games, but we’ll take it,” said Cooper. “As soon as it fell to Conor I think everybody in the stadium thought ‘there’s a good chance of this going in.’ Once we lost Morgan [Gibbs-White, who returned to Wolves], I felt we needed a player you fancy to get goals. Conor’s numbers are really good.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '56a716a9-24cd-4516-ab7b-768cf47489d2',
+					elementId: '2efece05-204a-4d4e-bc6a-5907ce95f981',
 				},
 				{
 					html: '<p>Krul shook his head in disbelief and Farke admitted his players are hurting. “When you lose such a spotlight game, of course, you are disappointed,” he said. “I will allow my players to be disappointed because it’s important to feel this and be greedy for this next game. We want this winning feeling back.”</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '29afcba6-5529-4ed4-966a-5307ff94db26',
+					elementId: '121f87b6-4c5b-4674-9bbf-77c43cf405de',
 				},
 			],
 			blockCreatedOn: 1612551919000,
@@ -1744,6 +1748,7 @@ export const MatchReport: CAPIType = {
 	isSpecialReport: false,
 	isCommentable: true,
 	keyEvents: [],
+	filterKeyEvents: false,
 	config: {
 		references: [
 			{
