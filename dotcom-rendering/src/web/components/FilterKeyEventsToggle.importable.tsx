@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from, neutral, remSpace } from '@guardian/source-foundations';
 import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const cssOverrides = css`
 	padding-bottom: ${remSpace[3]};
@@ -12,8 +12,12 @@ const cssOverrides = css`
 	}
 `;
 
-export const FilterKeyEventsToggle = () => {
-	const [checked, setChecked] = useState(false);
+interface Props {
+	filterKeyEvents: boolean;
+}
+
+export const FilterKeyEventsToggle = ({ filterKeyEvents }: Props) => {
+	const [checked, setChecked] = useState(filterKeyEvents);
 
 	const handleClick = () => {
 		setChecked(!checked);
@@ -24,10 +28,6 @@ export const FilterKeyEventsToggle = () => {
 		window.location.hash = 'filter-toggle';
 		window.location.search = urlParams.toString();
 	};
-
-	useEffect(() => {
-		setChecked(window.location.search.includes('filterKeyEvents=true'));
-	}, [setChecked]);
 
 	return (
 		<>

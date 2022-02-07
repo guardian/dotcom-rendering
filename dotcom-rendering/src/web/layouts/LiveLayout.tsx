@@ -669,8 +669,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						{CAPI.matchUrl ? (
 							<LiveGridSport>
 								<GridItem area="filter">
-									<Island deferUntil="idle">
-										<FilterKeyEventsToggle />
+									<Island deferUntil="visible">
+										<FilterKeyEventsToggle
+											filterKeyEvents={
+												CAPI.filterKeyEvents
+											}
+										/>
 									</Island>
 								</GridItem>
 								<GridItem area="matchtabs" element="aside">
@@ -903,8 +907,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<LiveGrid>
 								<GridItem area="filter">
 									<Hide below="desktop">
-										<Island deferUntil="idle">
-											<FilterKeyEventsToggle />
+										<Island deferUntil="visible">
+											<FilterKeyEventsToggle
+												filterKeyEvents={
+													CAPI.filterKeyEvents
+												}
+											/>
 										</Island>
 									</Hide>
 								</GridItem>
@@ -996,8 +1004,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										>
 											<GridItem area="filter">
 												<Hide above="desktop">
-													<Island deferUntil="idle">
-														<FilterKeyEventsToggle />
+													<Island deferUntil="visible">
+														<FilterKeyEventsToggle
+															filterKeyEvents={
+																CAPI.filterKeyEvents
+															}
+														/>
 													</Island>
 												</Hide>
 											</GridItem>
