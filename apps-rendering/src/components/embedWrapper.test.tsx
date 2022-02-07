@@ -1,6 +1,13 @@
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import { none, some } from '@guardian/types';
-import type { Embed, Generic, Instagram, Spotify, YouTube } from 'embed';
+import type {
+	EmailSignup,
+	Embed,
+	Generic,
+	Instagram,
+	Spotify,
+	YouTube,
+} from 'embed';
 import { EmbedKind } from 'embed';
 import { matchers } from 'jest-emotion';
 import { render, unmountComponentAtNode } from 'react-dom';
@@ -56,7 +63,7 @@ describe('EmbedComponentWrapper.embedComponentFromWrapperProps', () => {
 				some(expectedWrapperContents),
 			);
 		} else {
-			fail('EmbedComponentWapper was not rendered');
+			fail('EmbedComponentWrapper was not rendered');
 		}
 	};
 
@@ -78,6 +85,25 @@ describe('EmbedComponentWrapper.embedComponentFromWrapperProps', () => {
 		};
 
 		testCreateContentFromProps(genericEmbed, false, sourceDetails);
+	});
+
+	it('should recreate contents of wrapper from wrapper data props for email signup embed', () => {
+		const emailSignupEmbed: EmailSignup = {
+			kind: EmbedKind.EmailSignup,
+			alt: some('some alt text'),
+			caption: some('some caption text'),
+			src: 'http://test.com',
+			source: some('An Embed Provider'),
+			sourceDomain: some('anembedprovider.com'),
+			tracking: EmbedTracksType.TRACKS,
+		};
+
+		const sourceDetails = {
+			source: emailSignupEmbed.source,
+			sourceDomain: emailSignupEmbed.sourceDomain,
+		};
+
+		testCreateContentFromProps(emailSignupEmbed, false, sourceDetails);
 	});
 
 	it('should recreate contents of wrapper from wrapper data props for generic embed without optional parameters', () => {

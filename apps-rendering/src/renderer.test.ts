@@ -359,7 +359,7 @@ describe('Renders different types of elements', () => {
 		const nodes = render(embedElement);
 		const embed = nodes.flat()[0];
 		expect(getHtml(embed)).toContain(
-			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322" class=""></iframe>',
+			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
 		);
 	});
 
@@ -533,7 +533,7 @@ describe('Renders different types of Editions elements', () => {
 		const nodes = renderEditions(embedElement);
 		const embed = nodes.flat()[0];
 		expect(getHtml(embed)).toContain(
-			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322" class=""></iframe>',
+			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
 		);
 	});
 
