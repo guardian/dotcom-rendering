@@ -5,9 +5,7 @@ import KeyEvents, {
 type Props = {
 	keyEvents: Block[];
 	format: ArticleFormat;
-	// this is optional until Frontend is updated here:
-	// https://github.com/guardian/frontend/pull/24607
-	filterKeyEvents?: boolean;
+	filterKeyEvents: boolean;
 };
 
 export const KeyEventsContainer = ({
