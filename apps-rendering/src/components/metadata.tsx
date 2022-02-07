@@ -96,6 +96,7 @@ const liveBlogPadding = css`
 
 const toggleOverrideStyles = css`
 	padding-right: ${remSpace[1]};
+	width: 9.375rem;
 
 	${until.desktop} {
 		color: ${neutral[100]};

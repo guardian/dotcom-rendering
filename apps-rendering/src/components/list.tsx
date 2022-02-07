@@ -16,9 +16,10 @@ const styles: SerializedStyles = css`
 	> li::before {
 		display: inline-block;
 		content: '';
-		border-radius: 0.5rem;
-		height: 1rem;
-		width: 1rem;
+		border-radius: 50%;
+		height: 0.75em;
+		width: 0.75em;
+		transform: translateY(-0.1em);
 		margin-right: ${remSpace[2]};
 		background-color: ${neutral[86]};
 		margin-left: -${remSpace[6]};

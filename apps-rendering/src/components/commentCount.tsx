@@ -37,6 +37,9 @@ const styles = (
 	border-left: 1px solid ${borderColor};
 	padding-top: ${remSpace[3]};
 	color: ${colour};
+	line-height: 1;
+	padding-bottom: 0;
+    padding-right: 0;
 	${darkModeCss`
         border-left: 1px solid ${darkBorderColour};
     `}
