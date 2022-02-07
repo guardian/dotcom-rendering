@@ -20,9 +20,7 @@ export const KeyEventsContainer = ({
 		.map((keyEvent) => {
 			return {
 				text: keyEvent.title || '', // We fallback to '' here purely to keep ts happy
-				url: `?filterKeyEvents=${
-					filterKeyEvents ? 'true' : 'false'
-				}&page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
+				url: `?filterKeyEvents=${filterKeyEvents}&page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
 				date: new Date(keyEvent.blockFirstPublished || ''), // We fallback to '' here purely to keep ts happy
 			};
 		});
