@@ -151,10 +151,10 @@ const iconStyle = (palette: Palette) => css`
 	margin-right: ${space[1]}px;
 	display: inline-block;
 	position: relative;
-    width: 1em;
-    vertical-align: baseline;
+	width: 1em;
+	vertical-align: baseline;
 	::before {
-		content: " ";
+		content: ' ';
 		display: block;
 		padding-top: 72.222%;
 	}
@@ -171,7 +171,7 @@ const iconStyle = (palette: Palette) => css`
 
 const videoIconStyle = css`
 	::before {
-		content: " ";
+		content: ' ';
 		display: block;
 		padding-top: 72.222%;
 	}
