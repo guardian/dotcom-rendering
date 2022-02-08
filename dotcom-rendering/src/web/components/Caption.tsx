@@ -159,7 +159,6 @@ const iconStyle = (palette: Palette) => css`
 	::before {
 		content: ' ';
 		display: block;
-		padding-top: 72.222%;
 		padding-top: ${pictureRatio}%;
 	}
 	svg {
