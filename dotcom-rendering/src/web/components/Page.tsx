@@ -13,6 +13,8 @@ type Props = {
 	format: ArticleFormat;
 };
 
+const isServer = typeof window === 'undefined';
+
 /**
  * @description
  * Page is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
@@ -23,6 +25,7 @@ type Props = {
  * */
 export const Page = ({ CAPI, NAV, format }: Props) => {
 	const renderCommercialMetrics =
+		!isServer &&
 		window.guardian.config?.ophan !== undefined &&
 		CAPI.config.switches.commercialMetrics;
 	return (
