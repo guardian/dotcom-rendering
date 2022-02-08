@@ -158,6 +158,7 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 					entry.target.classList.add('in-viewport');
 					revealNewBlocks();
 					setNoOfNewPosts(0);
+					setShowToast(false);
 					return;
 				}
 				entry.target.classList.remove('in-viewport');
