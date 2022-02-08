@@ -6,7 +6,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-	filterKeyEvents?: boolean;
+	filterKeyEvents: boolean;
 };
 
 // TODO: Break this out into its own component
@@ -74,7 +74,7 @@ function getKey(
 	pageId: string,
 	ajaxUrl: string,
 	latestBlockId: string,
-	filterKeyEvents?: boolean,
+	filterKeyEvents: boolean,
 ): string | undefined {
 	try {
 		// Construct the url to poll
