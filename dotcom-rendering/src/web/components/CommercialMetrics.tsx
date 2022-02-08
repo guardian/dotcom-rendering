@@ -8,8 +8,6 @@ import { spacefinderOkr1FilterNearby } from '@frontend/web/experiments/tests/spa
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 
-// TODO disallow undefined browserIds by placing conditional in App.tsx
-// so that we wait to render this component until browserId is defined.
 export const CommercialMetrics = () => {
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
