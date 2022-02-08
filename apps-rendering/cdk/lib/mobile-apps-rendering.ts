@@ -162,7 +162,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 			recordName: props.recordPrefix,
 			ttl: Duration.hours(1),
 		});
-		const defaultChild = recordSet.node.defaultChild;
+    const defaultChild = recordSet.node.defaultChild as CfnElement;
 		defaultChild.overrideLogicalId('DnsRecord');
 	}
 }
