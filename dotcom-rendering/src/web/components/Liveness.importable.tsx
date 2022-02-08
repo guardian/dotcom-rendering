@@ -74,7 +74,7 @@ function getKey(
 	ajaxUrl: string,
 	filterKeyEvents: boolean,
 	latestBlockId: string,
-): string | null {
+): string | undefined {
 	try {
 		// Construct the url to poll
 		const url = new URL(`${pageId}.json`, ajaxUrl);
@@ -92,7 +92,9 @@ function getKey(
 			),
 			'liveness-getkey',
 		);
-		return null;
+		// Returning undefined here means the request is never made
+		// See: https://swr.vercel.app/docs/conditional-fetching#conditional
+		return undefined;
 	}
 }
 
