@@ -127,10 +127,7 @@ export const Liveness = ({
 	);
 
 	// useApi returns { data, loading, error } but we're not using them here
-	useApi<{
-		numNewBlocks: number;
-		html: string;
-	}>(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
+	useApi(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
 		refreshInterval: 15000,
 		refreshWhenHidden: true,
 		// onSuccess runs (once) after every successful api call. This is useful because it
