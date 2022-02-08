@@ -37,9 +37,10 @@ const styles = (
 	border-left: 1px solid ${borderColor};
 	padding-top: ${remSpace[3]};
 	color: ${colour};
-	line-height: 1;
 	padding-bottom: 0;
     padding-right: 0;
+	line-height: 0.8;
+	height: max-content;
 	${darkModeCss`
         border-left: 1px solid ${darkBorderColour};
     `}
@@ -50,6 +51,7 @@ const bubbleStyles = (colour: string): SerializedStyles => css`
 	display: block;
 	margin-left: auto;
 	fill: ${colour};
+	margin-bottom: ${remSpace[1]};
 `;
 
 const blogStyles = (color: string): SerializedStyles => css`
