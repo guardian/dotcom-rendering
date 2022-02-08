@@ -84,7 +84,7 @@ const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	${darkModeCss(supportsDarkMode)`
 		li::before {
 			border-color: transparent ${neutral[60]};
-			background-color: #999999;
+			background-color: neutral[60];
 		}
 	`}
 `;
