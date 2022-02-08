@@ -44,7 +44,7 @@ import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { Island } from '../components/Island';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooter } from '../components/MostViewed/MostViewedFooter/MostViewedFooter';
+import { MostViewedFooter } from '../components/MostViewedFooter.importable';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div

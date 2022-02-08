@@ -58,7 +58,7 @@ import { Island } from '../components/Island';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooter } from '../components/MostViewed/MostViewedFooter/MostViewedFooter';
+import { MostViewedFooter } from '../components/MostViewedFooter.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div

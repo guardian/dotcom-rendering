@@ -8,9 +8,9 @@ import {
 	responseWithTwoTabs,
 	responseWithOneTab,
 	responseWithMissingImage,
-} from '../MostViewed.mocks';
+} from './MostViewed.mocks';
 
-import { MostViewedFooter } from './MostViewedFooter';
+import { MostViewedFooter } from './MostViewedFooter.importable';
 
 export default {
 	component: MostViewedFooter,

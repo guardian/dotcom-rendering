@@ -53,7 +53,7 @@ import { Island } from '../components/Island';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooter } from '../components/MostViewed/MostViewedFooter/MostViewedFooter';
+import { MostViewedFooter } from '../components/MostViewedFooter.importable';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div

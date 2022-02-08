@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import { useApi as useApi_ } from '../lib/useApi';
 
-import { mockTab1 } from './MostViewed/MostViewed.mocks';
+import { mockTab1 } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 
 const response = { data: mockTab1 };

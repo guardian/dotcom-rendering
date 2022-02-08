@@ -5,7 +5,7 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { useApi as useApi_ } from '@root/src/web/lib/useApi';
 import { decidePalette } from '@root/src/web/lib/decidePalette';
 
-import { responseWithTwoTabs, responseWithOneTab } from '../MostViewed.mocks';
+import { responseWithTwoTabs, responseWithOneTab } from './MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
