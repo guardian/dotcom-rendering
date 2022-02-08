@@ -32,7 +32,7 @@ deploy:
 
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
 
 build-ci: clean-dist install
 	$(call log, "building production bundles")

@@ -1,4 +1,4 @@
-import express from 'express';
+import type express from 'express';
 
 import { document } from '@root/src/amp/server/document';
 import { Article } from '@root/src/amp/pages/Article';
