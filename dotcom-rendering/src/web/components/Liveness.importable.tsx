@@ -74,13 +74,26 @@ function getKey(
 	ajaxUrl: string,
 	filterKeyEvents: boolean,
 	latestBlockId: string,
-): string {
-	// Construct the url to poll
-	const url = new URL(`${pageId}.json`, ajaxUrl);
-	url.searchParams.set('lastUpdate', latestBlockId);
-	url.searchParams.set('isLivePage', 'true');
-	url.searchParams.set('filterKeyEvents', filterKeyEvents ? 'true' : 'false');
-	return url.href;
+): string | null {
+	try {
+		// Construct the url to poll
+		const url = new URL(`${pageId}.json`, ajaxUrl);
+		url.searchParams.set('lastUpdate', latestBlockId);
+		url.searchParams.set('isLivePage', 'true');
+		url.searchParams.set(
+			'filterKeyEvents',
+			filterKeyEvents ? 'true' : 'false',
+		);
+		return url.href;
+	} catch {
+		window.guardian.modules.sentry.reportError(
+			new Error(
+				`An error was thrown trying to construct a URL using pageId: ${pageId} and ajaxUrl: ${ajaxUrl}`,
+			),
+			'liveness-getkey',
+		);
+		return null;
+	}
 }
 
 const topOfBlog: Element | null = !isServer
