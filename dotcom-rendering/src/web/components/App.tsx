@@ -45,7 +45,6 @@ import {
 } from '@guardian/support-dotcom-components';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
-import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
 
 type Props = {
@@ -247,10 +246,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		//
 		// Note: Both require a 'root' element that needs to be server rendered.
 		<React.StrictMode>
-			{[
-				CAPI.config.switches.commercialMetrics,
-				window.guardian.config?.ophan !== undefined,
-			].every(Boolean) && <CommercialMetrics pageViewId={pageViewId} />}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
