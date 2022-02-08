@@ -107,8 +107,6 @@ const dcrWebpack = (config) => {
 
 	config.resolve.alias = {
 		...config.resolve.alias,
-		"@root": path.resolve(__dirname, "../dotcom-rendering"),
-		"@frontend": path.resolve(__dirname, "../dotcom-rendering/src"),
 	};
 
 	return config;
