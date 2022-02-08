@@ -11,10 +11,10 @@ type Props = {
 // TODO: Break this out into its own component
 const Toast = ({
 	onClick,
-	noOfNewPosts,
+	numHiddenBlocks,
 }: {
 	onClick: () => void;
-	noOfNewPosts: number;
+	numHiddenBlocks: number;
 }) => {
 	// TODO: Style and absolute position this component
 	return (
@@ -28,7 +28,7 @@ const Toast = ({
 				align-items: center;
 			`}
 		>
-			<button onClick={onClick}>{`${noOfNewPosts} blah`}</button>
+			<button onClick={onClick}>{`${numHiddenBlocks} blah`}</button>
 		</nav>
 	);
 };
@@ -99,7 +99,7 @@ function topOfBlogVisible(): boolean {
 
 export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 	const [showToast, setShowToast] = useState(false);
-	const [noOfNewPosts, setNoOfNewPosts] = useState(0);
+	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(
 		// By default we use the first (latest) block id on the page
 		document.querySelector('#maincontent :first-child')?.id || '',
@@ -131,11 +131,11 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 
 				if (topOfBlogVisible()) {
 					revealNewBlocks();
-					setNoOfNewPosts(0);
+					setNumHiddenBlocks(0);
 				} else {
 					setShowToast(true);
 					// Increment the count of new posts
-					setNoOfNewPosts(noOfNewPosts + data.numNewBlocks);
+					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
 				}
 
 				// Update the block id we use for polling
@@ -148,8 +148,8 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 
 	useEffect(() => {
 		document.title =
-			noOfNewPosts > 0 ? `(${noOfNewPosts}) ${webTitle}` : webTitle;
-	}, [noOfNewPosts, webTitle]);
+			numHiddenBlocks > 0 ? `(${numHiddenBlocks}) ${webTitle}` : webTitle;
+	}, [numHiddenBlocks, webTitle]);
 
 	if (topOfBlog) {
 		const observer = new window.IntersectionObserver(
@@ -157,7 +157,7 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 				if (entry.isIntersecting) {
 					entry.target.classList.add('in-viewport');
 					revealNewBlocks();
-					setNoOfNewPosts(0);
+					setNumHiddenBlocks(0);
 					setShowToast(false);
 					return;
 				}
@@ -178,11 +178,16 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 		setShowToast(false);
 		topOfBlog?.scrollIntoView();
 		revealNewBlocks();
-		setNoOfNewPosts(0);
+		setNumHiddenBlocks(0);
 	};
 
 	if (showToast) {
-		return <Toast onClick={handleToastClick} noOfNewPosts={noOfNewPosts} />;
+		return (
+			<Toast
+				onClick={handleToastClick}
+				numHiddenBlocks={numHiddenBlocks}
+			/>
+		);
 	}
 
 	return null;
