@@ -146,6 +146,9 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
+const pictureRatio = (13 / 18) * 100;
+const videoRatio = (23 / 36) * 100;
+
 const iconStyle = (palette: Palette) => css`
 	fill: ${palette.fill.cameraCaptionIcon};
 	margin-right: ${space[1]}px;
@@ -157,6 +160,7 @@ const iconStyle = (palette: Palette) => css`
 		content: ' ';
 		display: block;
 		padding-top: 72.222%;
+		padding-top: ${pictureRatio}%;
 	}
 	svg {
 		top: 0px;
@@ -170,19 +174,9 @@ const iconStyle = (palette: Palette) => css`
 `;
 
 const videoIconStyle = css`
+	width: 1.1em;
 	::before {
-		content: ' ';
-		display: block;
-		padding-top: 72.222%;
-	}
-	svg {
-		top: 0px;
-		right: 0px;
-		bottom: 0px;
-		left: 0px;
-		width: 100%;
-		position: absolute;
-		height: 100%;
+		padding-top: ${videoRatio}%;
 	}
 `;
 
