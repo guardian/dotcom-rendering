@@ -38,7 +38,7 @@ const commentDatelineStyles = css`
 `;
 
 const blogDatelineStyles = (color: string): SerializedStyles => css`
-	${textSans.xxsmall({lineHeight: "tight"})}
+	${textSans.xxsmall({ lineHeight: 'tight' })}
 	color: ${color};
 	display: block;
 

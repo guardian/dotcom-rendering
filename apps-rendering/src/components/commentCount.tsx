@@ -38,7 +38,7 @@ const styles = (
 	padding-top: ${remSpace[3]};
 	color: ${colour};
 	padding-bottom: 0;
-    padding-right: 0;
+	padding-right: 0;
 	line-height: 0.8;
 	height: max-content;
 	${darkModeCss`
