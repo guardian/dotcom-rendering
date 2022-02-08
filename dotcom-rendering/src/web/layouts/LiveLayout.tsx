@@ -391,6 +391,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						pageId={CAPI.pageId}
 						webTitle={CAPI.webTitle}
 						ajaxUrl={CAPI.config.ajaxUrl}
+						// TODO: Replace this with the CAPI value once available
+						filterKeyEvents={false}
 					/>
 				</Island>
 			)}

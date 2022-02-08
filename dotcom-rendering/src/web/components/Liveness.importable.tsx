@@ -6,6 +6,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	filterKeyEvents?: boolean;
 };
 
 // TODO: Break this out into its own component
@@ -72,8 +73,8 @@ function revealNewBlocks() {
 function getKey(
 	pageId: string,
 	ajaxUrl: string,
-	filterKeyEvents: boolean,
 	latestBlockId: string,
+	filterKeyEvents?: boolean,
 ): string | undefined {
 	try {
 		// Construct the url to poll
@@ -112,7 +113,12 @@ function topOfBlogVisible(): boolean {
 	return topOfBlog ? topOfBlog.classList.contains('in-viewport') : false;
 }
 
-export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
+export const Liveness = ({
+	pageId,
+	webTitle,
+	ajaxUrl,
+	filterKeyEvents,
+}: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(
@@ -120,15 +126,11 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 		document.querySelector('#maincontent :first-child')?.id || '',
 	);
 
-	// Read current url to get filterKeyEvents
-	const params = new URLSearchParams(window.location.search);
-	const filterKeyEvents = !!params.get('filterKeyEvents');
-
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi<{
 		numNewBlocks: number;
 		html: string;
-	}>(getKey(pageId, ajaxUrl, filterKeyEvents, latestBlockId), {
+	}>(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
 		refreshInterval: 15000,
 		refreshWhenHidden: true,
 		// onSuccess runs (once) after every successful api call. This is useful because it
