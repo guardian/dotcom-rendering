@@ -12,7 +12,7 @@ const cssOverrides = css`
 	}
 `;
 
-const spanStyles = css`
+const toggleWrapperStyles = css`
 	display: flex;
 
 	${from.desktop} {
@@ -39,13 +39,15 @@ export const FilterKeyEventsToggle = ({ filterKeyEvents }: Props) => {
 
 	return (
 		<>
-			<span id="filter-toggle" css={spanStyles} />
-			<ToggleSwitch
-				label="Show key events only"
-				checked={checked}
-				onClick={() => handleClick()}
-				cssOverrides={cssOverrides}
-			/>
+			<span id="filter-toggle" />
+			<div css={toggleWrapperStyles}>
+				<ToggleSwitch
+					label="Show key events only"
+					checked={checked}
+					onClick={() => handleClick()}
+					cssOverrides={cssOverrides}
+				/>
+			</div>
 		</>
 	);
 };
