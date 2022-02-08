@@ -138,8 +138,9 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 				}
 
 				// Update the block id we use for polling
-				if (data.mostRecentBlockId)
+				if (data.mostRecentBlockId) {
 					setLatestBlockId(data.mostRecentBlockId);
+				}
 			}
 		},
 	});
