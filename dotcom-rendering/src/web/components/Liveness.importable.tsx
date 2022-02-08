@@ -83,8 +83,9 @@ function getKey(
 	return url.href;
 }
 
-const topOfBlog: Element | null | false =
-	!isServer && window.document.querySelector('[data-gu-marker=top-of-blog]');
+const topOfBlog: Element | null = !isServer
+	? window.document.querySelector('[data-gu-marker=top-of-blog]')
+	: null;
 
 /**
  * This allows us to make decisions in javascript based on if the reader
@@ -93,7 +94,7 @@ const topOfBlog: Element | null | false =
  * @returns boolean
  */
 function topOfBlogVisible(): boolean {
-	return !!topOfBlog && !!topOfBlog.classList.contains('in-viewport');
+	return topOfBlog ? topOfBlog.classList.contains('in-viewport') : false;
 }
 
 export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
@@ -138,8 +139,9 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 				}
 
 				// Update the block id we use for polling
-				if (data.mostRecentBlockId)
+				if (data.mostRecentBlockId) {
 					setLatestBlockId(data.mostRecentBlockId);
+				}
 			}
 		},
 	});
@@ -173,7 +175,7 @@ export const Liveness = ({ pageId, webTitle, ajaxUrl }: Props) => {
 
 	const handleToastClick = () => {
 		setShowToast(false);
-		if (topOfBlog) topOfBlog.scrollIntoView();
+		topOfBlog?.scrollIntoView();
 		revealNewBlocks();
 		setNoOfNewPosts(0);
 	};
