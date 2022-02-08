@@ -150,19 +150,39 @@ const iconStyle = (palette: Palette) => css`
 	fill: ${palette.fill.cameraCaptionIcon};
 	margin-right: ${space[1]}px;
 	display: inline-block;
-	/* vertical-align: middle; */
-	height: 10px;
-	width: 14px;
+	position: relative;
+    width: 1em;
+    vertical-align: baseline;
+	::before {
+		content: " ";
+		display: block;
+		padding-top: 72.222%;
+	}
 	svg {
-		height: 100%;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		left: 0px;
 		width: 100%;
+		position: absolute;
+		height: 100%;
 	}
 `;
 
 const videoIconStyle = css`
+	::before {
+		content: " ";
+		display: block;
+		padding-top: 72.222%;
+	}
 	svg {
-		height: 100%;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		left: 0px;
 		width: 100%;
+		position: absolute;
+		height: 100%;
 	}
 `;
 
