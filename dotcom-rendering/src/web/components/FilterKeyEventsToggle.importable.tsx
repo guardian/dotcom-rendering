@@ -4,10 +4,18 @@ import { ToggleSwitch } from '@guardian/source-react-components-development-kitc
 import { useState } from 'react';
 
 const cssOverrides = css`
+	display: inline-flex;
 	padding-bottom: ${remSpace[3]};
 
 	${from.desktop} {
 		padding: ${remSpace[3]} 0;
+	}
+`;
+
+const spanStyles = css`
+	display: flex;
+
+	${from.desktop} {
 		border-top: 1px solid ${neutral[86]};
 	}
 `;
@@ -31,7 +39,7 @@ export const FilterKeyEventsToggle = ({ filterKeyEvents }: Props) => {
 
 	return (
 		<>
-			<span id="filter-toggle" />
+			<span id="filter-toggle" css={spanStyles} />
 			<ToggleSwitch
 				label="Show key events only"
 				checked={checked}
