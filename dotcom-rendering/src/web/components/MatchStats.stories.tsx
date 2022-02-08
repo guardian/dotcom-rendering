@@ -16,7 +16,15 @@ export default {
 
 export const Default = () => {
 	return (
-		<MatchStats home={matchReport.homeTeam} away={matchReport.awayTeam} />
+		<MatchStats
+			home={matchReport.homeTeam}
+			away={matchReport.awayTeam}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Standard,
+				theme: ArticlePillar.News,
+			}}
+		/>
 	);
 };
 Default.story = { name: 'default' };
@@ -38,6 +46,11 @@ export const InContext = () => {
 					<MatchStats
 						home={matchReport.homeTeam}
 						away={matchReport.awayTeam}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</ArticleContainer>
 				<RightColumn>
@@ -48,3 +61,18 @@ export const InContext = () => {
 	);
 };
 InContext.story = { name: 'when placed in article context' };
+
+const DefaultInLiveblog = () => {
+	return (
+		<MatchStats
+			home={matchReport.homeTeam}
+			away={matchReport.awayTeam}
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.DeadBlog,
+				theme: ArticlePillar.Sport,
+			}}
+		/>
+	);
+};
+DefaultInLiveblog.story = { name: 'when placed in a liveblog' };

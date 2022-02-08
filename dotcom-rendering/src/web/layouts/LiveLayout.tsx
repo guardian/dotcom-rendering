@@ -12,7 +12,6 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-
 import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleBody } from '@root/src/web/components/ArticleBody';
 import { RightColumn } from '@root/src/web/components/RightColumn';
@@ -35,7 +34,7 @@ import { GridItem } from '@root/src/web/components/GridItem';
 import { AgeWarning } from '@root/src/web/components/AgeWarning';
 import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
 import { Pagination } from '@frontend/web/components/Pagination';
-import { KeyEventsContainer } from '@frontend/web/components/KeyEventsContainer';
+import { KeyEventsContainer } from '@root/src/web/components/KeyEventsContainer';
 
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
 import { parse } from '@frontend/lib/slot-machine-flags';
@@ -52,10 +51,12 @@ import {
 } from '@root/src/web/layouts/lib/stickiness';
 import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { Hide } from '@guardian/source-react-components';
+import { FilterKeyEventsToggle } from '@root/src/web/components/FilterKeyEventsToggle.importable';
 import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';
 import { Liveness } from '../components/Liveness.importable';
+import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 
@@ -168,6 +169,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines		 media'
 						'meta		 media'
 						'keyevents	 media'
+						'keyevents   filter'
 						'keyevents	 body'
 						'keyevents	 body'
 						'. 			 .';
@@ -180,6 +182,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines 		 media	   right-column'
 						'meta  		 media     right-column'
 						'keyevents   media 	   right-column'
+						'keyevents   filter    right-column'
 						'keyevents   body      right-column'
 						'keyevents   body      right-column'
 						'.			 .         right-column';
@@ -192,6 +195,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
+						'filter'
 						'body';
 				}
 			}
@@ -233,8 +237,8 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'meta		 media'
 						'meta		 media'
 						'keyevents	 media'
-						'keyevents	 body'
-						'keyevents	 body'
+						'keyevents   filter'
+						'matchstats	 body'
 						'. 			 .';
 				}
 				/* from wide define fixed body width */
@@ -245,8 +249,8 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'lines 		 matchtabs right-column'
 						'meta  		 media     right-column'
 						'keyevents   media 	   right-column'
-						'keyevents   body      right-column'
-						'keyevents   body      right-column'
+						'matchstats  body      right-column'
+						'keyevents   filter    right-column'
 						'.			 .         right-column';
 				}
 				/* until desktop define fixed body width */
@@ -258,6 +262,8 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
+						'matchstats'
+						'filter'
 						'body';
 				}
 				/* fluid until tablet */
@@ -269,6 +275,8 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
+						'matchstats'
+						'filter'
 						'body';
 				}
 			}
@@ -672,6 +680,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					>
 						{CAPI.matchUrl ? (
 							<LiveGridSport>
+								<GridItem area="filter">
+									<Island deferUntil="visible">
+										<FilterKeyEventsToggle
+											filterKeyEvents={
+												CAPI.filterKeyEvents
+											}
+										/>
+									</Island>
+								</GridItem>
 								<GridItem area="matchtabs" element="aside">
 									<div css={maxWidth}>
 										{CAPI.matchUrl && showMatchTabs && (
@@ -748,7 +765,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<GridItem area="keyevents">
 									<div
 										css={[
-											sticky,
+											!CAPI.matchUrl && sticky,
 											keyEventsTopMargin,
 											sidePaddingDesktop,
 											accordionBottomMargin,
@@ -757,8 +774,25 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										<KeyEventsContainer
 											format={format}
 											keyEvents={CAPI.keyEvents}
+											filterKeyEvents={
+												CAPI.filterKeyEvents
+											}
 										/>
 									</div>
+								</GridItem>
+								<GridItem area="matchstats">
+									{CAPI.matchUrl && (
+										<Island
+											deferUntil="visible"
+											clientOnly={true}
+											placeholderHeight={800}
+										>
+											<GetMatchStats
+												matchUrl={CAPI.matchUrl}
+												format={format}
+											/>
+										</Island>
+									)}
 								</GridItem>
 								<GridItem area="body">
 									<ArticleContainer format={format}>
@@ -883,6 +917,17 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</LiveGridSport>
 						) : (
 							<LiveGrid>
+								<GridItem area="filter">
+									<Hide below="desktop">
+										<Island deferUntil="visible">
+											<FilterKeyEventsToggle
+												filterKeyEvents={
+													CAPI.filterKeyEvents
+												}
+											/>
+										</Island>
+									</Hide>
+								</GridItem>
 								<GridItem area="media">
 									<div css={maxWidth}>
 										<MainMedia
@@ -956,6 +1001,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										<KeyEventsContainer
 											format={format}
 											keyEvents={CAPI.keyEvents}
+											filterKeyEvents={
+												CAPI.filterKeyEvents
+											}
 										/>
 									</div>
 								</GridItem>
@@ -966,6 +1014,17 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											accordionTitle="Live feed"
 											context="liveFeed"
 										>
+											<GridItem area="filter">
+												<Hide above="desktop">
+													<Island deferUntil="visible">
+														<FilterKeyEventsToggle
+															filterKeyEvents={
+																CAPI.filterKeyEvents
+															}
+														/>
+													</Island>
+												</Hide>
+											</GridItem>
 											<ArticleContainer format={format}>
 												{CAPI.pagination &&
 													CAPI.pagination

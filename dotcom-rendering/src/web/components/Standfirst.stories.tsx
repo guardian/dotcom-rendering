@@ -23,7 +23,7 @@ export const Article = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how Article standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Article standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -39,7 +39,7 @@ export const Comment = () => {
 					design: ArticleDesign.Comment,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how Comment standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Comment standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -55,7 +55,7 @@ export const Letter = () => {
 					design: ArticleDesign.Letter,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how Letter standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Letter standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -71,7 +71,7 @@ export const Feature = () => {
 					design: ArticleDesign.Feature,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how Feature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Feature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -87,7 +87,7 @@ export const Immersive = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -103,7 +103,7 @@ export const Review = () => {
 					design: ArticleDesign.Review,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how Review standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Review standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -119,7 +119,7 @@ export const LiveBlog = () => {
 					design: ArticleDesign.LiveBlog,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="<p>This is how a Liveblog with bullets looks. Aut explicabo officia delectus omnis repellendus voluptas</p><ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
+				standfirst="<p>This is how a Liveblog with bullets looks. Aut explicabo officia delectus omnis repellendus voluptas</p> <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -148,7 +148,7 @@ export const DeadBlog = () => {
 					design: ArticleDesign.DeadBlog,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="<p>This is how a Deadblog with bullets looks. Aut explicabo officia delectus omnis repellendus voluptas</p><ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
+				standfirst="<p>This is how a Deadblog with bullets looks. Aut explicabo officia delectus omnis repellendus voluptas</p> <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -164,7 +164,7 @@ export const Interview = () => {
 					design: ArticleDesign.Interview,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how Interview standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Interview standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -180,7 +180,7 @@ export const Analysis = () => {
 					design: ArticleDesign.Analysis,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how Analysis standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Analysis standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -196,7 +196,7 @@ export const Media = () => {
 					design: ArticleDesign.Media,
 					theme: ArticlePillar.Culture,
 				}}
-				standfirst="This is how Media standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Media standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -212,7 +212,7 @@ export const Recipe = () => {
 					design: ArticleDesign.Recipe,
 					theme: ArticlePillar.Lifestyle,
 				}}
-				standfirst="This is how Recipe standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Recipe standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -228,7 +228,7 @@ export const MatchReport = () => {
 					design: ArticleDesign.MatchReport,
 					theme: ArticlePillar.Sport,
 				}}
-				standfirst="This is how MatchReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how MatchReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -244,7 +244,7 @@ export const Quiz = () => {
 					design: ArticleDesign.Quiz,
 					theme: ArticlePillar.Lifestyle,
 				}}
-				standfirst="This is how Quiz standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Quiz standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -260,7 +260,7 @@ export const SpecialReport = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticleSpecial.SpecialReport,
 				}}
-				standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -276,7 +276,7 @@ export const Editorial = () => {
 					design: ArticleDesign.Editorial,
 					theme: ArticlePillar.Opinion,
 				}}
-				standfirst="This is how Editorial standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how Editorial standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
@@ -292,7 +292,7 @@ export const PhotoEssay = () => {
 					design: ArticleDesign.PhotoEssay,
 					theme: ArticlePillar.News,
 				}}
-				standfirst="This is how PhotoEssay standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas"
+				standfirst="This is how PhotoEssay standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);

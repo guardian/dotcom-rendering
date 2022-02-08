@@ -1,23 +1,20 @@
-import '../webpackPublicPath';
-import { startup } from '@root/src/web/browser/startup';
-import { isObject } from '@guardian/libs';
+import { isObject } from 'lib';
 
-// No trailing slash!
 const allowedOrigins = ['https://www.theguardian.com'];
-const init = (): Promise<void> => {
+
+export default (): void => {
 	const allIframes: HTMLIFrameElement[] = [].slice.call(
-		document.querySelectorAll('.email-sub__iframe'),
+		document.querySelectorAll('.js-email-signup'),
 	);
 
 	// Tell the iframes to resize once this script is loaded
 	// Otherwise, earlier resize events might be missed
 	// So we don't have to load this script as a priority on each load
 	allIframes.forEach((iframe) => {
-		if (iframe && iframe.contentWindow)
-			iframe.contentWindow.postMessage(
-				'resize',
-				'https://www.theguardian.com',
-			);
+		iframe.contentWindow?.postMessage(
+			'resize',
+			'https://www.theguardian.com',
+		);
 	});
 
 	window.addEventListener('message', (event) => {
@@ -40,7 +37,7 @@ const init = (): Promise<void> => {
 					return;
 
 				switch (message.type) {
-					case 'set-height':
+					case 'set-height': {
 						iframes.forEach((iframe) => {
 							if (typeof message.value === 'number') {
 								iframe.height = `${message.value}`;
@@ -51,15 +48,13 @@ const init = (): Promise<void> => {
 								}
 							}
 						});
+
 						break;
+					}
 					default:
 				}
-				// eslint-disable-next-line no-empty
+				// eslint-disable-next-line no-empty -- No action required
 			} catch (e) {}
 		}
 	});
-
-	return Promise.resolve();
 };
-
-startup('newsletterEmbedIframe', null, init);

@@ -62,26 +62,33 @@ export const actionButtons = css`
 	margin-bottom: 42px;
 
 	> a {
+		/* stylelint-disable-next-line declaration-no-important */
 		margin-right: ${space[4]}px !important;
 
 		${from.mobileMedium} {
+			/* stylelint-disable-next-line declaration-no-important */
 			margin-right: ${space[9]}px !important;
 		}
 
+		/* stylelint-disable-next-line declaration-no-important */
 		text-decoration: none !important;
 	}
 `;
 
 export const registerButton = css`
+	/* stylelint-disable-next-line declaration-no-important */
 	color: ${text.ctaPrimary} !important;
 `;
 
 export const laterButton = css`
+	/* stylelint-disable-next-line declaration-no-important */
 	color: ${brand[400]} !important;
 `;
 
 export const signInLink = css`
+	/* stylelint-disable-next-line declaration-no-important */
 	color: ${text.anchorPrimary} !important;
+	/* stylelint-disable-next-line declaration-no-important */
 	text-decoration-color: ${line.primary} !important;
 	text-underline-position: under;
 `;

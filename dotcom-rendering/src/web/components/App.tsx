@@ -11,16 +11,6 @@ import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
 import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
 
-import {
-	QandaAtom,
-	GuideAtom,
-	ProfileAtom,
-	TimelineAtom,
-	ChartAtom,
-	PersonalityQuizAtom,
-	KnowledgeQuizAtom,
-} from '@guardian/atoms-rendering';
-
 import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
 
 import { Portal } from '@frontend/web/components/Portal';
@@ -41,7 +31,6 @@ import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount'
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import { LabsHeader } from '@root/src/web/components/LabsHeader';
@@ -55,10 +44,6 @@ import {
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import {
-	submitComponentEvent,
-	OphanComponentEvent,
-} from '../browser/ophan/ophan';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
@@ -76,20 +61,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		useState<Promise<BrazeMessagesInterface>>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-
-	const componentEventHandler =
-		(componentType: any, id: any, action: any) => () => {
-			const componentEvent: OphanComponentEvent = {
-				component: {
-					componentType,
-					id,
-					products: [],
-					labels: [],
-				},
-				action,
-			};
-			submitComponentEvent(componentEvent, ophanRecord);
-		};
 
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
@@ -238,65 +209,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		},
 	);
 
-	const InteractiveContentsBlockElement = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/InteractiveContentsBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) =>
-				module.InteractiveContentsBlockComponent,
-		},
-	);
-
-	const CalloutBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.CalloutBlockElement',
-				).length > 0
-			) {
-				return import('@frontend/web/components/CalloutBlockComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.CalloutBlockComponent,
-		},
-	);
-
-	const VideoFacebookBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-				).length > 0
-			) {
-				return import(
-					'@frontend/web/components/VideoFacebookBlockComponent'
-				);
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.VideoFacebookBlockComponent,
-		},
-	);
-
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
@@ -310,55 +222,18 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.YoutubeBlockElement',
 	);
-	const quizAtoms = elementsByType<QuizAtomBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-	);
-	const callouts = elementsByType<CalloutBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.CalloutBlockElement',
-	);
-	const chartAtoms = elementsByType<ChartAtomBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.ChartAtomBlockElement',
-	);
 	const audioAtoms = elementsByType<AudioAtomBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
-	);
-	const qandaAtoms = elementsByType<QABlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.QABlockElement',
-	);
-	const guideAtoms = elementsByType<GuideAtomBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.GuideAtomBlockElement',
-	);
-	const profileAtoms = elementsByType<ProfileAtomBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
-	);
-	const timelineAtoms = elementsByType<TimelineBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.TimelineBlockElement',
 	);
 	const embeds = elementsByType<EmbedBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.EmbedBlockElement',
 	);
-	const facebookVideos = elementsByType<VideoFacebookBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.VideoFacebookBlockElement',
-	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
 	);
-	const interactiveContentsElement =
-		elementsByType<InteractiveContentsBlockElement>(
-			CAPI.elementsToHydrate,
-			'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
-		);
 
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
@@ -432,46 +307,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					/>
 				</HydrateInteractiveOnce>
 			))}
-			{interactiveContentsElement.map((interactiveBlock) => (
-				<HydrateOnce rootId={interactiveBlock.elementId}>
-					<InteractiveContentsBlockElement
-						subheadingLinks={interactiveBlock.subheadingLinks}
-						endDocumentElementId={
-							interactiveBlock.endDocumentElementId
-						}
-					/>
-				</HydrateOnce>
-			))}
-			{quizAtoms.map((quizAtom) => (
-				<HydrateOnce rootId={quizAtom.elementId}>
-					<>
-						{quizAtom.quizType === 'personality' && (
-							<PersonalityQuizAtom
-								id={quizAtom.id}
-								questions={quizAtom.questions}
-								resultBuckets={quizAtom.resultBuckets}
-								sharingUrls={getSharingUrls(
-									CAPI.pageId,
-									CAPI.webTitle,
-								)}
-								theme={format.theme}
-							/>
-						)}
-						{quizAtom.quizType === 'knowledge' && (
-							<KnowledgeQuizAtom
-								id={quizAtom.id}
-								questions={quizAtom.questions}
-								resultGroups={quizAtom.resultGroups}
-								sharingUrls={getSharingUrls(
-									CAPI.pageId,
-									CAPI.webTitle,
-								)}
-								theme={format.theme}
-							/>
-						)}
-					</>
-				</HydrateOnce>
-			))}
 
 			{CAPI.matchUrl && (
 				<Portal rootId="match-nav">
@@ -500,16 +335,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					isPaidContent={CAPI.pageType.isPaidContent}
 				/>
 			</Portal>
-			{callouts.map((callout) => (
-				<HydrateOnce rootId={callout.elementId}>
-					<CalloutBlockComponent callout={callout} format={format} />
-				</HydrateOnce>
-			))}
-			{chartAtoms.map((chartAtom) => (
-				<HydrateOnce rootId={chartAtom.elementId}>
-					<ChartAtom id={chartAtom.id} html={chartAtom.html} />
-				</HydrateOnce>
-			))}
 			{audioAtoms.map((audioAtom) => (
 				<HydrateOnce rootId={audioAtom.elementId}>
 					<AudioAtomWrapper
@@ -522,113 +347,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						contentIsNotSensitive={!CAPI.config.isSensitive}
 						aCastisEnabled={CAPI.config.switches.acast}
 						readerCanBeShownAds={!CAPI.isAdFreeUser}
-					/>
-				</HydrateOnce>
-			))}
-			{qandaAtoms.map((qandaAtom) => (
-				<HydrateOnce rootId={qandaAtom.elementId}>
-					<QandaAtom
-						id={qandaAtom.id}
-						title={qandaAtom.title}
-						html={qandaAtom.html}
-						image={qandaAtom.img}
-						credit={qandaAtom.credit}
-						pillar={pillar}
-						likeHandler={componentEventHandler(
-							'QANDA_ATOM',
-							qandaAtom.id,
-							'LIKE',
-						)}
-						dislikeHandler={componentEventHandler(
-							'QANDA_ATOM',
-							qandaAtom.id,
-							'DISLIKE',
-						)}
-						expandCallback={componentEventHandler(
-							'QANDA_ATOM',
-							qandaAtom.id,
-							'EXPAND',
-						)}
-					/>
-				</HydrateOnce>
-			))}
-			{guideAtoms.map((guideAtom) => (
-				<HydrateOnce rootId={guideAtom.elementId}>
-					<GuideAtom
-						id={guideAtom.id}
-						title={guideAtom.title}
-						html={guideAtom.html}
-						image={guideAtom.img}
-						credit={guideAtom.credit}
-						pillar={pillar}
-						likeHandler={componentEventHandler(
-							'GUIDE_ATOM',
-							guideAtom.id,
-							'LIKE',
-						)}
-						dislikeHandler={componentEventHandler(
-							'GUIDE_ATOM',
-							guideAtom.id,
-							'DISLIKE',
-						)}
-						expandCallback={componentEventHandler(
-							'GUIDE_ATOM',
-							guideAtom.id,
-							'EXPAND',
-						)}
-					/>
-				</HydrateOnce>
-			))}
-			{profileAtoms.map((profileAtom) => (
-				<HydrateOnce rootId={profileAtom.elementId}>
-					<ProfileAtom
-						id={profileAtom.id}
-						title={profileAtom.title}
-						html={profileAtom.html}
-						image={profileAtom.img}
-						credit={profileAtom.credit}
-						pillar={pillar}
-						likeHandler={componentEventHandler(
-							'PROFILE_ATOM',
-							profileAtom.id,
-							'LIKE',
-						)}
-						dislikeHandler={componentEventHandler(
-							'PROFILE_ATOM',
-							profileAtom.id,
-							'DISLIKE',
-						)}
-						expandCallback={componentEventHandler(
-							'PROFILE_ATOM',
-							profileAtom.id,
-							'EXPAND',
-						)}
-					/>
-				</HydrateOnce>
-			))}
-			{timelineAtoms.map((timelineAtom) => (
-				<HydrateOnce rootId={timelineAtom.elementId}>
-					<TimelineAtom
-						id={timelineAtom.id}
-						title={timelineAtom.title}
-						events={timelineAtom.events}
-						description={timelineAtom.description}
-						pillar={pillar}
-						likeHandler={componentEventHandler(
-							'TIMELINE_ATOM',
-							timelineAtom.id,
-							'LIKE',
-						)}
-						dislikeHandler={componentEventHandler(
-							'TIMELINE_ATOM',
-							timelineAtom.id,
-							'DISLIKE',
-						)}
-						expandCallback={componentEventHandler(
-							'TIMELINE_ATOM',
-							timelineAtom.id,
-							'EXPAND',
-						)}
 					/>
 				</HydrateOnce>
 			))}
@@ -666,26 +384,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 							/>
 						</ClickToView>
 					)}
-				</HydrateOnce>
-			))}
-			{facebookVideos.map((facebookVideo) => (
-				<HydrateOnce rootId={facebookVideo.elementId}>
-					<ClickToView
-						role={facebookVideo.role}
-						isTracking={facebookVideo.isThirdPartyTracking}
-						source={facebookVideo.source}
-						sourceDomain={facebookVideo.sourceDomain}
-					>
-						<VideoFacebookBlockComponent
-							format={format}
-							embedUrl={facebookVideo.embedUrl}
-							height={facebookVideo.height}
-							width={facebookVideo.width}
-							caption={facebookVideo.caption}
-							credit={facebookVideo.caption}
-							title={facebookVideo.caption}
-						/>
-					</ClickToView>
 				</HydrateOnce>
 			))}
 			<Portal rootId="slot-body-end">

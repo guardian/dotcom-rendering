@@ -11,6 +11,9 @@ import webpack from 'webpack';
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
 import { renederedItemsAssetsCss } from './config/rendered-items-assets-styles';
 import { WebpackPluginInstance } from 'webpack';
+// Needed for TS to bring in the webpack-dev-server types, so it can merge
+// the 'devServer` field into the main webpack Configuration type
+import type {} from 'webpack-dev-server';
 
 // ----- Plugins ----- //
 
@@ -136,7 +139,9 @@ export const clientConfig: Configuration = {
 	],
 	resolve: clientResolveDev,
 	devServer: {
-		publicPath: '/assets/',
+		devMiddleware: {
+			publicPath: '/assets/',
+		},
 		proxy: {
 			'**': 'http://localhost:3040',
 		},

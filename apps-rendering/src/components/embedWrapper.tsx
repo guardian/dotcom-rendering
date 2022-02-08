@@ -37,9 +37,7 @@ interface Props {
 	editions: boolean;
 }
 
-const genericDivProps = (
-	embed: Generic | TikTok | EmailSignup,
-): Record<string, string> => ({
+const genericDivProps = (embed: Generic | TikTok): Record<string, string> => ({
 	...withDefault({})(
 		map<string, Record<string, string>>((alt) => {
 			return { alt };
@@ -88,7 +86,28 @@ const embedToDivProps = (embed: Embed): Record<string, string> => {
 		case EmbedKind.EmailSignup: {
 			return {
 				kind: EmbedKind.EmailSignup,
-				...genericDivProps(embed),
+				...withDefault({})(
+					map<string, Record<string, string>>((alt) => {
+						return { alt };
+					})(embed.alt),
+				),
+				...withDefault({})(
+					map<string, Record<string, string>>((caption) => {
+						return { caption };
+					})(embed.caption),
+				),
+				src: embed.src,
+				...(embed.tracking && { tracking: embed.tracking.toString() }),
+				...pipe(
+					embed.source,
+					map((source) => ({ source })),
+					withDefault<Record<string, string>>({}),
+				),
+				...pipe(
+					embed.sourceDomain,
+					map((sourceDomain) => ({ sourceDomain })),
+					withDefault<Record<string, string>>({}),
+				),
 			};
 		}
 		case EmbedKind.TikTok: {
@@ -292,18 +311,21 @@ const divElementPropsToEmbedComponentProps = (
 						);
 					}
 					case EmbedKind.EmailSignup: {
-						return pipe(
-							elementProps,
-							parseGenericFields,
-							resultMap(
-								(
-									genericFields: GenericFields,
-								): EmailSignup => ({
-									kind: EmbedKind.EmailSignup,
-									...genericFields,
-								}),
-							),
-						);
+						return resultMap<string, EmailSignup>(
+							(src: string): EmailSignup => ({
+								kind: EmbedKind.EmailSignup,
+								src,
+								alt: fromNullable(elementProps['alt']),
+								caption: fromNullable(elementProps['caption']),
+								tracking: parseTrackingParam(
+									elementProps['tracking'],
+								),
+								source: fromNullable(elementProps['source']),
+								sourceDomain: fromNullable(
+									elementProps['sourceDomain'],
+								),
+							}),
+						)(requiredStringParam(elementProps, 'src'));
 					}
 				}
 			}),

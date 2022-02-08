@@ -478,19 +478,16 @@ function hydrateClickToView(): void {
 		);
 }
 
+const isIframe = (elem: Element): elem is HTMLIFrameElement =>
+	elem.tagName === 'IFRAME';
+
 function resizeEmailSignups(): void {
-	const isIframe = (elem: Element): elem is HTMLIFrameElement =>
-		elem.tagName === 'IFRAME';
 	const emailSignupIframes = document.querySelectorAll('.js-email-signup');
-	Array.from(emailSignupIframes).forEach((emailSignupIframe) => {
-		if (isIframe(emailSignupIframe)) {
-			const innerIframe =
-				emailSignupIframe.contentDocument?.querySelector('iframe');
-			if (innerIframe) {
-				innerIframe.style.width = '100%';
-			}
-		}
-	});
+	Array.from(emailSignupIframes)
+		.filter(isIframe)
+		.forEach((emailSignupIframe) => {
+			emailSignupIframe.style.width = '100%';
+		});
 }
 
 setup();

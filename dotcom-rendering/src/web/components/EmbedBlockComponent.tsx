@@ -16,6 +16,7 @@ const emailCaptionStyle = css`
 const embedContainer = css`
 	iframe {
 		/* Some embeds can hijack the iframe and calculate an incorrect width, which pushes the body out */
+		/* stylelint-disable-next-line declaration-no-important */
 		width: 100% !important;
 	}
 `;

@@ -1,14 +1,14 @@
-// ----- Imports ----- //
-
 import { css } from '@emotion/react';
 import { remSpace, text, textSans } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
-import type { Generic, TikTok } from 'embed';
+import type { EmailSignup } from 'embed';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
-// ----- Component ----- //
+interface Props {
+	embed: EmailSignup;
+}
 
 const styles = css`
 	margin: ${remSpace[4]} 0;
@@ -24,24 +24,18 @@ const captionStyles = css`
 	color: ${text.supporting};
 `;
 
-interface Props {
-	embed: Generic | TikTok;
-}
-
-const GenericEmbed: FC<Props> = ({ embed }) => (
+const EmailSignupEmbed: FC<Props> = ({ embed }) => (
 	<figure css={styles}>
 		<iframe
-			srcDoc={embed.html}
-			title={withDefault('Embed')(embed.alt)}
-			// Prevents scrollbars: covers body margin and random extra 6px
-			height={embed.height + 22}
-		/>
-		{maybeRender(embed.alt, (alt) => (
-			<figcaption css={captionStyles}>{alt}</figcaption>
+			src={embed.src}
+			className="js-email-signup"
+			height="52"
+			title={withDefault('Email newsletter signup embed')(embed.alt)}
+		></iframe>
+		{maybeRender(embed.caption, (caption) => (
+			<figcaption css={captionStyles}>{caption}</figcaption>
 		))}
 	</figure>
 );
 
-// ----- Exports ----- //
-
-export default GenericEmbed;
+export default EmailSignupEmbed;

@@ -4,6 +4,7 @@ import { sendCommercialMetrics } from '@guardian/commercial-core';
 import { useOnce } from '@root/src/web/lib/useOnce';
 import { getCookie } from '@guardian/libs';
 import { useAB } from '@guardian/ab-react';
+import { spacefinderOkr1FilterNearby } from '@frontend/web/experiments/tests/spacefinder-okr-1-filter-nearby';
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 
@@ -23,6 +24,7 @@ export const CommercialMetrics: React.FC<{
 	useOnce(() => {
 		const testsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
+			spacefinderOkr1FilterNearby,
 		];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),

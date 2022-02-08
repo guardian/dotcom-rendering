@@ -28,11 +28,20 @@ import { SubheadingBlockComponent } from '@root/src/web/components/SubheadingBlo
 import { TableBlockComponent } from '@root/src/web/components/TableBlockComponent';
 import { TextBlockComponent } from '@root/src/web/components/TextBlockComponent';
 import { TweetBlockComponent } from '@root/src/web/components/TweetBlockComponent';
-import { VideoFacebookBlockComponent } from '@root/src/web/components/VideoFacebookBlockComponent';
+import { VideoFacebookBlockComponent } from '@root/src/web/components/VideoFacebookBlockComponent.importable';
 import { VimeoBlockComponent } from '@root/src/web/components/VimeoBlockComponent';
 import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '@root/src/web/components/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '@root/src/web/components/YoutubeBlockComponent';
+
+import { TimelineAtomWrapper } from '@root/src/web/components/TimelineAtomWrapper.importable';
+import { GuideAtomWrapper } from '@root/src/web/components/GuideAtomWrapper.importable';
+import { ChartAtomWrapper } from '@root/src/web/components/ChartAtomWrapper.importable';
+import { ProfileAtomWrapper } from '@root/src/web/components/ProfileAtomWrapper.importable';
+import { QandaAtomWrapper } from '@root/src/web/components/QandaAtomWrapper.importable';
+import { PersonalityQuizAtomWrapper } from '@root/src/web/components/PersonalityQuizAtomWrapper.importable';
+import { KnowledgeQuizAtomWrapper } from '@root/src/web/components/KnowledgeQuizAtomWrapper.importable';
+
 import {
 	WitnessVideoBlockComponent,
 	WitnessImageBlockComponent,
@@ -42,17 +51,10 @@ import { getSharingUrls } from '@root/src/lib/sharing-urls';
 import { ClickToView } from '@root/src/web/components/ClickToView';
 import {
 	AudioAtom,
-	ChartAtom,
 	ExplainerAtom,
 	InteractiveAtom,
 	InteractiveLayoutAtom,
-	QandaAtom,
-	GuideAtom,
-	ProfileAtom,
-	TimelineAtom,
 	VideoAtom,
-	PersonalityQuizAtom,
-	KnowledgeQuizAtom,
 } from '@guardian/atoms-rendering';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Figure } from '../components/Figure';
@@ -60,6 +62,7 @@ import {
 	isInteractive,
 	interactiveLegacyFigureClasses,
 } from '../layouts/lib/interactiveLegacyStyling';
+
 import { Island } from '../components/Island';
 
 type Props = {
@@ -154,7 +157,9 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
 			return [
 				true,
-				<CalloutBlockComponent callout={element} format={format} />,
+				<Island deferUntil="visible">
+					<CalloutBlockComponent callout={element} format={format} />
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
 			return [
@@ -172,7 +177,13 @@ export const renderElement = ({
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-			return [true, <ChartAtom id={element.id} html={element.html} />];
+			return [
+				true,
+				<Island deferUntil="visible">
+					<ChartAtomWrapper id={element.id} html={element.html} />
+				</Island>,
+			];
+
 		case 'model.dotcomrendering.pageElements.CodeBlockElement':
 			return [
 				true,
@@ -279,17 +290,16 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return [
 				true,
-				<GuideAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<GuideAtomWrapper
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
 			return [
@@ -375,10 +385,12 @@ export const renderElement = ({
 			return [
 				true,
 				<div id={element.elementId}>
-					<InteractiveContentsBlockComponent
-						subheadingLinks={element.subheadingLinks}
-						endDocumentElementId={element.endDocumentElementId}
-					/>
+					<Island deferUntil="visible">
+						<InteractiveContentsBlockComponent
+							subheadingLinks={element.subheadingLinks}
+							endDocumentElementId={element.endDocumentElementId}
+						/>
+					</Island>
 				</div>,
 			];
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
@@ -432,17 +444,16 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
 			return [
 				true,
-				<ProfileAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<ProfileAtomWrapper
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
 			return [
@@ -459,39 +470,42 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.QABlockElement':
 			return [
 				true,
-				<QandaAtom
-					id={element.id}
-					title={element.title}
-					html={element.html}
-					image={element.img}
-					credit={element.credit}
-					pillar={format.theme}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<QandaAtomWrapper
+						id={element.id}
+						title={element.title}
+						html={element.html}
+						image={element.img}
+						credit={element.credit}
+						pillar={format.theme}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return [
 				true,
 				<>
 					{element.quizType === 'personality' && (
-						<PersonalityQuizAtom
-							id={element.id}
-							questions={element.questions}
-							resultBuckets={element.resultBuckets}
-							sharingUrls={getSharingUrls(pageId, webTitle)}
-							theme={format.theme}
-						/>
+						<Island>
+							<PersonalityQuizAtomWrapper
+								id={element.id}
+								questions={element.questions}
+								resultBuckets={element.resultBuckets}
+								sharingUrls={getSharingUrls(pageId, webTitle)}
+								theme={format.theme}
+							/>
+						</Island>
 					)}
 					{element.quizType === 'knowledge' && (
-						<KnowledgeQuizAtom
-							id={element.id}
-							questions={element.questions}
-							resultGroups={element.resultGroups}
-							sharingUrls={getSharingUrls(pageId, webTitle)}
-							theme={format.theme}
-						/>
+						<Island>
+							<KnowledgeQuizAtomWrapper
+								id={element.id}
+								questions={element.questions}
+								resultGroups={element.resultGroups}
+								sharingUrls={getSharingUrls(pageId, webTitle)}
+								theme={format.theme}
+							/>
+						</Island>
 					)}
 				</>,
 			];
@@ -561,30 +575,28 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return [
 				true,
-				<TimelineAtom
-					id={element.id}
-					title={element.title}
-					pillar={format.theme}
-					events={element.events}
-					description={element.description}
-					likeHandler={() => {}}
-					dislikeHandler={() => {}}
-					expandCallback={() => {}}
-				/>,
+				<Island deferUntil="visible">
+					<TimelineAtomWrapper
+						id={element.id}
+						title={element.title}
+						pillar={format.theme}
+						events={element.events}
+						description={element.description}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			return [true, <TweetBlockComponent element={element} />];
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<VideoFacebookBlockComponent
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 						format={format}
 						embedUrl={element.embedUrl}
 						height={element.height}
@@ -593,7 +605,7 @@ export const renderElement = ({
 						credit={element.caption}
 						title={element.caption}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
 			return [

@@ -498,6 +498,7 @@ interface CAPIType {
 	// The logic is date-driven. See:
 	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
 	isLegacyInteractive?: boolean;
+	filterKeyEvents: boolean;
 }
 
 // Browser data models. Note the CAPI prefix here means something different to
@@ -862,29 +863,8 @@ interface InteractiveBlockLoadable extends ComponentNameChunkMap {
 	addWhen: InteractiveBlockElement['_type'];
 }
 
-interface InteractiveContentsBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'InteractiveContentsBlockComponent';
-	addWhen: InteractiveContentsBlockElement['_type'];
-}
-
-interface CalloutBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'CalloutBlockComponent';
-	addWhen: CalloutBlockElement['_type'];
-}
-
-interface FacebookVideoBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'VideoFacebookBlockComponent';
-	addWhen: VideoFacebookBlockElement['_type'];
-}
-
 // There are docs on loadable in ./docs/loadable-components.md
-type LoadableComponents = [
-	YoutubeBlockLoadable,
-	InteractiveBlockLoadable,
-	InteractiveContentsBlockLoadable,
-	CalloutBlockLoadable,
-	FacebookVideoBlockLoadable,
-];
+type LoadableComponents = [YoutubeBlockLoadable, InteractiveBlockLoadable];
 
 interface CarouselImagesMap {
 	'300'?: string;
