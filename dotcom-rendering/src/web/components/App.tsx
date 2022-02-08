@@ -3,7 +3,6 @@ import loadable from '@loadable/component';
 import { useAB } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
 import { ShareCount } from '@frontend/web/components/ShareCount';
-import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
 import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
 import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
@@ -414,13 +413,6 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					pageId={CAPI.pageId}
 					idUrl={CAPI.config.idUrl}
 					pageViewId={pageViewId}
-				/>
-			</Portal>
-			<Portal rootId="most-viewed-footer">
-				<MostViewedFooter
-					format={format}
-					sectionName={CAPI.sectionName}
-					ajaxUrl={CAPI.config.ajaxUrl}
 				/>
 			</Portal>
 			<Portal rootId="bottom-banner">
