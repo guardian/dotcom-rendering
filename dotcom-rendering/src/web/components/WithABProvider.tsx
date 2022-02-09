@@ -1,5 +1,6 @@
-import { CoreAPIConfig, OphanAPIConfig } from '@guardian/ab-core/dist/types';
+import { CoreAPIConfig } from '@guardian/ab-core/dist/types';
 import { ABProvider } from '@guardian/ab-react';
+import { getOphanRecordFunction } from '../browser/ophan/ophan';
 import { getCypressSwitches } from '../experiments/cypress-switches';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 
@@ -8,7 +9,6 @@ type Props = {
 	abTestSwitches: CoreAPIConfig['abTestSwitches'];
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];
 	mvtId: CoreAPIConfig['mvtId'];
-	ophanRecord: OphanAPIConfig['ophanRecord'];
 	children: JSX.Element;
 };
 export const WithABProvider = ({
@@ -16,9 +16,9 @@ export const WithABProvider = ({
 	abTestSwitches,
 	pageIsSensitive,
 	mvtId,
-	ophanRecord,
 	children,
 }: Props) => {
+	const ophanRecord = getOphanRecordFunction();
 	const windowHash = window?.location.hash;
 	// Get the forced switches to use for when running within cypress
 	// Is empty object if not in cypress

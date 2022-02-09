@@ -32,7 +32,6 @@ export const BootReact = ({ CAPI }: Props) => {
 				abTestSwitches={CAPI.config.switches}
 				pageIsSensitive={CAPI.config.isSensitive}
 				mvtId={mvtId}
-				ophanRecord={ophanRecord}
 			>
 				<App CAPI={CAPI} ophanRecord={ophanRecord} />
 			</WithABProvider>,
