@@ -4,7 +4,7 @@ import { focusHalo } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
-import { CommercialMetrics } from './CommercialMetrics';
+import { CommercialMetrics } from './CommercialMetrics.importable';
 import { Island } from './Island';
 
 type Props = {
