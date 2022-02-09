@@ -39,14 +39,14 @@ const liveDot = (
 const kickerStyles = (colour: string): SerializedStyles => css`
 	color: ${colour};
 	font-weight: 700;
-	margin-right: 4px;
+	margin-right: ${remSpace[1]};
 `;
 
 const slashStyles = css`
 	&::after {
 		content: '/';
 		display: inline-block;
-		margin-left: 4px;
+		margin-left: ${remSpace[1]};
 	}
 `;
 
