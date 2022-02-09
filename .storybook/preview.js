@@ -3,13 +3,13 @@ import { setCookie } from '@guardian/libs';
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
-import { getFontsCss } from '@root/src/lib/fonts-css';
+import { getFontsCss } from '../dotcom-rendering/src/lib/fonts-css';
 
 import { resets } from '@guardian/source-foundations'
 
-import { Lazy } from '@root/src/web/components/Lazy';
-import { Picture } from '@root/src/web/components/Picture';
-import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
+import { Lazy } from '../dotcom-rendering/src/web/components/Lazy';
+import { Picture } from '../dotcom-rendering/src/web/components/Picture';
+import { mockRESTCalls } from '../dotcom-rendering/src/web/lib/mockRESTCalls';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
