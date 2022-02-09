@@ -1,10 +1,10 @@
 import type { ABTest } from '@guardian/ab-core';
-import { tests } from '@frontend/web/experiments/ab-tests';
 import { sendCommercialMetrics } from '@guardian/commercial-core';
-import { useOnce } from '@root/src/web/lib/useOnce';
 import { getCookie } from '@guardian/libs';
 import { useAB } from '@guardian/ab-react';
-import { spacefinderOkr1FilterNearby } from '@frontend/web/experiments/tests/spacefinder-okr-1-filter-nearby';
+import { useOnce } from '../lib/useOnce';
+import { tests } from '../experiments/ab-tests';
+import { spacefinderOkr1FilterNearby } from '../experiments/tests/spacefinder-okr-1-filter-nearby';
 import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 

@@ -14,8 +14,8 @@ import {
 	ArticleFormat,
 } from '@guardian/libs';
 
-import CameraSvg from '@frontend/static/icons/camera.svg';
-import VideoSvg from '@frontend/static/icons/video-icon.svg';
+import CameraSvg from '../../static/icons/camera.svg';
+import VideoSvg from '../../static/icons/video-icon.svg';
 
 type Props = {
 	captionText?: string;

@@ -10,7 +10,7 @@ import {
 	space,
 	until,
 } from '@guardian/source-foundations';
-import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
+import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 
 type Props = {
 	commentCount?: number;

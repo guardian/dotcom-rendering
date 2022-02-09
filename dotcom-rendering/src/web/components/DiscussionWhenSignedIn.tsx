@@ -1,6 +1,6 @@
 import { joinUrl } from '@guardian/libs';
-import { Discussion } from '@root/src/web/components/Discussion';
 import type { Props as DiscussionProps } from 'src/web/components/Discussion';
+import { Discussion } from './Discussion';
 import { useApi } from '../lib/useApi';
 
 // eslint-disable-next-line react/destructuring-assignment

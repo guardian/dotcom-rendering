@@ -1,8 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Expandable } from '@root/src/amp/components/Expandable';
 import { brandAlt, neutral } from '@guardian/source-foundations';
+import { Expandable } from '../Expandable';
 
 const eventsWrapper = css`
 	margin-left: 8px;

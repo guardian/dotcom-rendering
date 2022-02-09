@@ -1,6 +1,6 @@
-import { useApi } from '@root/src/web/lib/useApi';
+import { useApi } from '../lib/useApi';
 
-import { Placeholder } from '@root/src/web/components/Placeholder';
+import { Placeholder } from './Placeholder';
 
 import { MatchNav } from './MatchNav';
 

@@ -11,35 +11,32 @@ import {
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { ArticleBody } from '@root/src/web/components/ArticleBody';
-import { RightColumn } from '@root/src/web/components/RightColumn';
-import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
-import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { SubMeta } from '@root/src/web/components/SubMeta';
-import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
-import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { Standfirst } from '@root/src/web/components/Standfirst';
-import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav.importable';
-import { ElementContainer } from '@root/src/web/components/ElementContainer';
-import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
-import { Border } from '@root/src/web/components/Border';
-import { GridItem } from '@root/src/web/components/GridItem';
-import { Caption } from '@root/src/web/components/Caption';
-import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
-import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
-import { Hide } from '@root/src/web/components/Hide';
-import { GuardianLabsLines } from '@frontend/web/components/GuardianLabsLines';
-
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { parse } from '@frontend/lib/slot-machine-flags';
-
-import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import {
-	decideLineCount,
-	decideLineEffect,
-} from '@root/src/web/lib/layoutHelpers';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { ArticleBody } from '../components/ArticleBody';
+import { RightColumn } from '../components/RightColumn';
+import { ArticleContainer } from '../components/ArticleContainer';
+import { ArticleMeta } from '../components/ArticleMeta';
+import { SubMeta } from '../components/SubMeta';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { Standfirst } from '../components/Standfirst';
+import { Footer } from '../components/Footer';
+import { SubNav } from '../components/SubNav.importable';
+import { ElementContainer } from '../components/ElementContainer';
+import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
+import { Border } from '../components/Border';
+import { GridItem } from '../components/GridItem';
+import { Caption } from '../components/Caption';
+import { HeadlineByline } from '../components/HeadlineByline';
+import { DiscussionContainer } from '../components/DiscussionContainer.importable';
+import { Hide } from '../components/Hide';
+import { GuardianLabsLines } from '../components/GuardianLabsLines';
+
+import { buildAdTargeting } from '../../lib/ad-targeting';
+import { parse } from '../../lib/slot-machine-flags';
+
+import { BannerWrapper } from './lib/stickiness';
+import { decideLineCount, decideLineEffect } from '../lib/layoutHelpers';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { Island } from '../components/Island';
 import { OnwardsLower } from '../components/OnwardsLower.importable';

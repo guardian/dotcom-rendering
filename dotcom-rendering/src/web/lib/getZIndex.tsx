@@ -12,7 +12,7 @@
  *
  * Eg.
  *
- * import { getZIndex } from '@frontend/web/lib/getZIndex';
+ * import { getZIndex } from './getZIndex';
  *
  * const myCss = css`
  *    color: blue;

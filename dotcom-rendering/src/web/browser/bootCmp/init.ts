@@ -1,15 +1,15 @@
 import { getCookie, log } from '@guardian/libs';
-import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
 import {
 	cmp,
 	onConsentChange,
 	getConsentFor,
 } from '@guardian/consent-management-platform';
-import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
-import { startup } from '@root/src/web/browser/startup';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import { getLocaleCode } from '../../lib/getCountryCode';
+import { injectPrivacySettingsLink } from '../../lib/injectPrivacySettingsLink';
+import { startup } from '../startup';
 
-import { loadScript } from '@root/src/web/lib/loadScript';
+import { loadScript } from '../../lib/loadScript';
 import {
 	OphanComponentType,
 	OphanAction,

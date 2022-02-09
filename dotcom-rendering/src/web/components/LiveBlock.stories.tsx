@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import { from, breakpoints } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { images } from '@root/fixtures/generated/images';
+import { images } from '../../../fixtures/generated/images';
 import { LiveBlock } from './LiveBlock';
 
 const baseBlock: Block = {

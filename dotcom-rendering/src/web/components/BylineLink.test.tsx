@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { getContributorTagsForToken } from '@root/src/lib/byline';
+import { getContributorTagsForToken } from '../../lib/byline';
 import { bylineAsTokens, BylineLink } from './BylineLink';
 
 describe('bylineAsTokens', () => {

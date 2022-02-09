@@ -3,7 +3,7 @@ import fetchMock from 'fetch-mock';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { ABProvider } from '@guardian/ab-react';
 
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
+import { ElementContainer } from '../../ElementContainer';
 import {
 	responseWithTwoTabs,
 	responseWithOneTab,

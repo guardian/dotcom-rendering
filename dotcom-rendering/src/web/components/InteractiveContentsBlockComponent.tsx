@@ -11,7 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { SvgChevronDownSingle } from '@guardian/source-react-components';
 
-import { getZIndex } from '@root/src/web/lib/getZIndex';
+import { getZIndex } from '../lib/getZIndex';
 
 const liStyles = css`
 	border-top: 1px solid ${neutral[86]};

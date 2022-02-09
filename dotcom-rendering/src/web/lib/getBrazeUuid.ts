@@ -1,7 +1,7 @@
 import {
 	getIdapiUserIdentifiers,
 	IdApiUserIdentifiers,
-} from '@root/src/web/lib/getIdapiUserData';
+} from './getIdapiUserData';
 
 export const getBrazeUuid = async (ajaxUrl: string): Promise<string | void> => {
 	return getIdapiUserIdentifiers(ajaxUrl)

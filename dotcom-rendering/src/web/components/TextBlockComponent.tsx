@@ -7,19 +7,19 @@ import {
 	from,
 	until,
 } from '@guardian/source-foundations';
-import { sanitise } from '@frontend/lib/sanitise-html';
-
-import { unwrapHtml } from '@root/src/model/unwrapHtml';
-import { RewrappedComponent } from '@root/src/web/components/RewrappedComponent';
-
-import { DropCap } from '@frontend/web/components/DropCap';
 import {
 	ArticleDisplay,
 	ArticleDesign,
 	ArticleFormat,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { sanitise } from '../../lib/sanitise-html';
+
+import { unwrapHtml } from '../../model/unwrapHtml';
+import { RewrappedComponent } from './RewrappedComponent';
+
+import { DropCap } from './DropCap';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	html: string;

@@ -1,4 +1,4 @@
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
+import { ElementContainer } from '../ElementContainer';
 import { SignInGateSelector } from './SignInGateSelector';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';

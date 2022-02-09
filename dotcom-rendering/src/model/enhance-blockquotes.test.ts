@@ -1,4 +1,4 @@
-import { Article } from '@root/fixtures/generated/articles/Article';
+import { Article } from '../../fixtures/generated/articles/Article';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 
 const example: CAPIType = Article;

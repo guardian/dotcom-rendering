@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
+import { ElementContainer } from './ElementContainer';
 
 import {
 	linkAndDescription,
