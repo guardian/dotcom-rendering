@@ -51,6 +51,9 @@ export const withTwoTabs = () => {
 					}}
 					sectionName="politics"
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					switches={{}}
+					pageIsSensitive={false}
+					isDev={false}
 				/>
 			</ElementContainer>
 		</AbProvider>
@@ -74,6 +77,9 @@ export const withOneTabs = () => {
 						theme: ArticlePillar.News,
 					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					switches={{}}
+					pageIsSensitive={false}
+					isDev={false}
 				/>
 			</ElementContainer>
 		</AbProvider>
@@ -97,6 +103,9 @@ export const withNoMostSharedImage = () => {
 						theme: ArticlePillar.News,
 					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					switches={{}}
+					pageIsSensitive={false}
+					isDev={false}
 				/>
 			</ElementContainer>
 		</AbProvider>

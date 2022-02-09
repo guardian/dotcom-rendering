@@ -673,6 +673,9 @@ export const ShowcaseLayout = ({
 								format={format}
 								sectionName={CAPI.sectionName}
 								ajaxUrl={CAPI.config.ajaxUrl}
+								switches={CAPI.config.switches}
+								pageIsSensitive={CAPI.config.isSensitive}
+								isDev={CAPI.config.isDev}
 							/>
 						</Island>
 					</ElementContainer>

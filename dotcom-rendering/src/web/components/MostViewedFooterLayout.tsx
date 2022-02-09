@@ -66,7 +66,11 @@ interface Props {
 	ajaxUrl: string;
 }
 
-export const MostViewedFooter = ({ sectionName, format, ajaxUrl }: Props) => {
+export const MostViewedFooterLayout = ({
+	sectionName,
+	format,
+	ajaxUrl,
+}: Props) => {
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
 	const ABTestAPI = useAB();
