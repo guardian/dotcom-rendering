@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { css } from '@emotion/react';
 
-import { getLocaleCode } from '@root/src/web/lib/getCountryCode';
-import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
 import {
 	space,
 	brandText,
@@ -14,32 +12,34 @@ import {
 	from,
 	until,
 } from '@guardian/source-foundations';
-
-import {
-	getLastOneOffContributionDate,
-	MODULES_VERSION,
-	shouldHideSupportMessaging,
-} from '@root/src/web/lib/contributions';
-import { setAutomat } from '@root/src/web/lib/setAutomat';
 import {
 	OphanComponentEvent,
 	OphanABTestMeta,
 	getCookie,
 } from '@guardian/libs';
-import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
-import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
-import {
-	OphanRecordFunction,
-	sendOphanComponentEvent,
-	submitComponentEvent,
-} from '@root/src/web/browser/ophan/ophan';
-import { useOnce } from '@root/src/web/lib/useOnce';
 import { getHeader } from '@guardian/support-dotcom-components';
 import {
 	ModuleData,
 	ModuleDataResponse,
 	HeaderPayload,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { getLocaleCode } from '../lib/getCountryCode';
+import ArrowRightIcon from '../../static/icons/arrow-right.svg';
+
+import {
+	getLastOneOffContributionDate,
+	MODULES_VERSION,
+	shouldHideSupportMessaging,
+} from '../lib/contributions';
+import { setAutomat } from '../lib/setAutomat';
+import { useHasBeenSeen } from '../lib/useHasBeenSeen';
+import { addTrackingCodesToUrl } from '../lib/acquisitions';
+import {
+	OphanRecordFunction,
+	sendOphanComponentEvent,
+	submitComponentEvent,
+} from '../browser/ophan/ophan';
+import { useOnce } from '../lib/useOnce';
 
 type Props = {
 	edition: Edition;

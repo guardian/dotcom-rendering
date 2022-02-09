@@ -3,9 +3,9 @@ import { css } from '@emotion/react';
 
 import { text, textSans } from '@guardian/source-foundations';
 
-import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
-import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';
-import TriangleIcon from '@frontend/static/icons/triangle.svg';
+import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
+import { bestFitImage, heightEstimate } from '../../lib/image-fit';
+import TriangleIcon from '../../../static/icons/triangle.svg';
 
 const figureStyle = css`
 	margin-top: 16px;

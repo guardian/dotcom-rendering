@@ -8,9 +8,9 @@ import {
 	until,
 } from '@guardian/source-foundations';
 
-import { BylineLink } from '@frontend/web/components/BylineLink';
+import { BylineLink } from './BylineLink';
 
-import TwitterIcon from '@frontend/static/icons/twitter.svg';
+import TwitterIcon from '../../static/icons/twitter.svg';
 
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 

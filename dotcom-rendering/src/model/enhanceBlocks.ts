@@ -1,10 +1,10 @@
-import { enhanceDividers } from '@root/src/model/enhance-dividers';
-import { enhanceDots } from '@root/src/model/enhance-dots';
-import { enhanceImages } from '@root/src/model/enhance-images';
-import { enhanceInteractiveContentsElements } from '@root/src/model/enhance-interactive-contents-elements';
-import { enhanceNumberedLists } from '@root/src/model/enhance-numbered-lists';
-import { enhanceBlockquotes } from '@root/src/model/enhance-blockquotes';
-import { enhanceEmbeds } from '@root/src/model/enhance-embeds';
+import { enhanceDividers } from './enhance-dividers';
+import { enhanceDots } from './enhance-dots';
+import { enhanceImages } from './enhance-images';
+import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
+import { enhanceNumberedLists } from './enhance-numbered-lists';
+import { enhanceBlockquotes } from './enhance-blockquotes';
+import { enhanceEmbeds } from './enhance-embeds';
 
 class BlockEnhancer {
 	blocks: Block[];

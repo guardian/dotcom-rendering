@@ -1,5 +1,5 @@
 import React from 'react';
-import { NotRenderableInDCR } from '@root/src/lib/errors/not-renderable-in-dcr';
+import { NotRenderableInDCR } from '../../../lib/errors/not-renderable-in-dcr';
 
 export const EmbedBlockComponent: React.FC<{
 	element: EmbedBlockElement;

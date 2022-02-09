@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import {
 	calloutCampaign,
 	calloutCampaignOnlyTwoRadio,
-} from '@root/fixtures/manual/calloutCampaign';
+} from '../../../../fixtures/manual/calloutCampaign';
 import { Form } from './Form';
 
 export default {

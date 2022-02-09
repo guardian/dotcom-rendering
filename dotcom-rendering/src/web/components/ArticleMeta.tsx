@@ -9,11 +9,11 @@ import {
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Contributor } from '@root/src/web/components/Contributor';
-import { Avatar } from '@root/src/web/components/Avatar';
-import { Counts } from '@root/src/web/components/Counts';
-import { Branding } from '@root/src/web/components/Branding';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { Contributor } from './Contributor';
+import { Avatar } from './Avatar';
+import { Counts } from './Counts';
+import { Branding } from './Branding';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';

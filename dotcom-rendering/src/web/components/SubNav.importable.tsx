@@ -8,7 +8,7 @@ import {
 	textSans,
 	from,
 } from '@guardian/source-foundations';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	subNavSections: SubNavType;

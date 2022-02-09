@@ -3,7 +3,7 @@
 
 import '../webpackPublicPath';
 import dynamicImportPolyfill from 'dynamic-import-polyfill';
-import { startup } from '@root/src/web/browser/startup';
+import { startup } from '../startup';
 
 // Provides an import function to use for dynamic imports. **Only works on
 // browsers that cut the mustard (support modules).**

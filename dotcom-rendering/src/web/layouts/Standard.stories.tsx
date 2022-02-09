@@ -2,37 +2,37 @@ import { useEffect } from 'react';
 
 import { breakpoints } from '@guardian/source-foundations';
 
-import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
+import { makeGuardianBrowserCAPI } from '../../model/window-guardian';
 
-import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
+import { decideTheme } from '../lib/decideTheme';
+import { decideDisplay } from '../lib/decideDisplay';
+import { decideDesign } from '../lib/decideDesign';
 
-import { Article } from '@root/fixtures/generated/articles/Article';
-import { PhotoEssay } from '@root/fixtures/generated/articles/PhotoEssay';
-import { Review } from '@root/fixtures/generated/articles/Review';
-import { PrintShop } from '@root/fixtures/generated/articles/PrintShop';
-import { Analysis } from '@root/fixtures/generated/articles/Analysis';
-import { Feature } from '@root/fixtures/generated/articles/Feature';
-import { Live } from '@root/fixtures/generated/articles/Live';
-import { Editorial } from '@root/fixtures/generated/articles/Editorial';
-import { Letter } from '@root/fixtures/generated/articles/Letter';
-import { Interview } from '@root/fixtures/generated/articles/Interview';
-import { Quiz } from '@root/fixtures/generated/articles/Quiz';
-import { Recipe } from '@root/fixtures/generated/articles/Recipe';
-import { Comment } from '@root/fixtures/generated/articles/Comment';
-import { MatchReport } from '@root/fixtures/generated/articles/MatchReport';
-import { Labs } from '@root/fixtures/generated/articles/Labs';
-import { SpecialReport } from '@root/fixtures/generated/articles/SpecialReport';
-import { NumberedList } from '@root/fixtures/generated/articles/NumberedList';
+import { Article } from '../../../fixtures/generated/articles/Article';
+import { PhotoEssay } from '../../../fixtures/generated/articles/PhotoEssay';
+import { Review } from '../../../fixtures/generated/articles/Review';
+import { PrintShop } from '../../../fixtures/generated/articles/PrintShop';
+import { Analysis } from '../../../fixtures/generated/articles/Analysis';
+import { Feature } from '../../../fixtures/generated/articles/Feature';
+import { Live } from '../../../fixtures/generated/articles/Live';
+import { Editorial } from '../../../fixtures/generated/articles/Editorial';
+import { Letter } from '../../../fixtures/generated/articles/Letter';
+import { Interview } from '../../../fixtures/generated/articles/Interview';
+import { Quiz } from '../../../fixtures/generated/articles/Quiz';
+import { Recipe } from '../../../fixtures/generated/articles/Recipe';
+import { Comment } from '../../../fixtures/generated/articles/Comment';
+import { MatchReport } from '../../../fixtures/generated/articles/MatchReport';
+import { Labs } from '../../../fixtures/generated/articles/Labs';
+import { SpecialReport } from '../../../fixtures/generated/articles/SpecialReport';
+import { NumberedList } from '../../../fixtures/generated/articles/NumberedList';
 
-import { BootReact } from '@root/src/web/components/BootReact';
-import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
-import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
-import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
+import { BootReact } from '../components/BootReact';
+import { embedIframe } from '../browser/embedIframe/embedIframe';
+import { mockRESTCalls } from '../lib/mockRESTCalls';
+import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 
-import { extractNAV } from '@root/src/model/extract-nav';
-import { fireAndResetHydrationState } from '@root/src/web/components/HydrateOnce';
+import { extractNAV } from '../../model/extract-nav';
+import { fireAndResetHydrationState } from '../components/HydrateOnce';
 import { DecideLayout } from './DecideLayout';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 

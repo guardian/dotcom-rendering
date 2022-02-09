@@ -1,7 +1,7 @@
 import { resets, brandBackground } from '@guardian/source-foundations';
-import { getFontsCss } from '@root/src/lib/fonts-css';
-import { ASSET_ORIGIN } from '@root/src/lib/assets';
 import he from 'he';
+import { getFontsCss } from '../../lib/fonts-css';
+import { ASSET_ORIGIN } from '../../lib/assets';
 
 export const htmlTemplate = ({
 	title = 'The Guardian',

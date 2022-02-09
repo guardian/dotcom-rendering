@@ -3,14 +3,14 @@ import { css } from '@emotion/react';
 
 import { neutral, headline } from '@guardian/source-foundations';
 
-import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
-import { ArticleModel } from '@root/src/amp/types/ArticleModel';
-import { MainMedia } from '@root/src/amp/components/MainMedia';
-import { Byline } from '@root/src/amp/components/topMeta/Byline';
 import { string as curly } from 'curlyquotes';
-import { TopMetaExtras } from '@root/src/amp/components/topMeta/TopMetaExtras';
-import { getSharingUrls } from '@root/src/lib/sharing-urls';
-import { getAgeWarning } from '@root/src/lib/age-warning';
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '../../../lib/pillars';
+import { ArticleModel } from '../../types/ArticleModel';
+import { MainMedia } from '../MainMedia';
+import { Byline } from './Byline';
+import { TopMetaExtras } from './TopMetaExtras';
+import { getSharingUrls } from '../../../lib/sharing-urls';
+import { getAgeWarning } from '../../../lib/age-warning';
 
 const ListStyle = (iconColour: string) => css`
 	li {

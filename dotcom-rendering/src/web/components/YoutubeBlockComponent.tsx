@@ -9,11 +9,11 @@ import type {
 	ConsentState,
 } from '@guardian/consent-management-platform/dist/types';
 
-import { trackVideoInteraction } from '@root/src/web/browser/ga/ga';
-import { record } from '@root/src/web/browser/ophan/ophan';
+import { trackVideoInteraction } from '../browser/ga/ga';
+import { record } from '../browser/ophan/ophan';
 
-import { Caption } from '@root/src/web/components/Caption';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { Caption } from './Caption';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	id: string;

@@ -2,14 +2,14 @@ import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/source-foundations';
 
-import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
-import FacebookIcon from '@frontend/static/icons/facebook.svg';
-import EmailIcon from '@frontend/static/icons/email.svg';
-import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
-import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
-import MessengerIcon from '@frontend/static/icons/messenger.svg';
-
 import { ArticleDesign } from '@guardian/libs';
+import TwitterIconPadded from '../../static/icons/twitter-padded.svg';
+import FacebookIcon from '../../static/icons/facebook.svg';
+import EmailIcon from '../../static/icons/email.svg';
+import LinkedInIcon from '../../static/icons/linked-in.svg';
+import WhatsAppIcon from '../../static/icons/whatsapp.svg';
+import MessengerIcon from '../../static/icons/messenger.svg';
+
 import { Hide } from './Hide';
 
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';

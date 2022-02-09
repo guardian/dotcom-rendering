@@ -1,19 +1,19 @@
-import { log, warn } from '@root/scripts/env/log';
-import {
-	render as renderAMPArticle,
-	renderPerfTest as renderAMPArticlePerfTest,
-} from '@root/src/amp/server';
+import compression from 'compression';
+import express, { Request, Response } from 'express';
+import fetch from 'node-fetch';
+import responseTime from 'response-time';
 import {
 	renderArticle,
 	renderArticleJson,
 	renderBlocks,
 	renderInteractive,
 	renderPerfTest as renderArticlePerfTest,
-} from '@root/src/web/server';
-import compression from 'compression';
-import express, { Request, Response } from 'express';
-import fetch from 'node-fetch';
-import responseTime from 'response-time';
+} from '../web/server';
+import {
+	render as renderAMPArticle,
+	renderPerfTest as renderAMPArticlePerfTest,
+} from '../amp/server';
+import { log, warn } from '../../scripts/env/log';
 import {
 	getGuardianConfiguration,
 	GuardianConfiguration,

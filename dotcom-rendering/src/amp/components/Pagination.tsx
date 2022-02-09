@@ -2,10 +2,10 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import { neutral, textSans } from '@guardian/source-foundations';
-import ChevronRightSingle from '@frontend/static/icons/chevron-right-single.svg';
-import ChevronRightDouble from '@frontend/static/icons/chevron-right-double.svg';
-import ChevronLeftSingle from '@frontend/static/icons/chevron-left-single.svg';
-import ChevronLeftDouble from '@frontend/static/icons/chevron-left-double.svg';
+import ChevronRightSingle from '../../static/icons/chevron-right-single.svg';
+import ChevronRightDouble from '../../static/icons/chevron-right-double.svg';
+import ChevronLeftSingle from '../../static/icons/chevron-left-single.svg';
+import ChevronLeftDouble from '../../static/icons/chevron-left-double.svg';
 
 const paginationStyle = css`
 	${textSans.xxsmall()};

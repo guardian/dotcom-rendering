@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 
-import { App } from '@root/src/web/components/App';
 import { loadableReady } from '@loadable/component';
+import { App } from './App';
 import { WithABProvider } from './WithABProvider';
 
 type Props = {

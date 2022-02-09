@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { Caption } from '@root/src/web/components/Caption';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { Caption } from './Caption';
+import { decidePalette } from '../lib/decidePalette';
 import { ClickToView } from './ClickToView';
 
 /**

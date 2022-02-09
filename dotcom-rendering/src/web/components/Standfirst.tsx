@@ -8,7 +8,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { sanitise } from '@frontend/lib/sanitise-html';
+import { sanitise } from '../../lib/sanitise-html';
 import { decidePalette } from '../lib/decidePalette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
@@ -20,7 +20,7 @@ type Props = {
 const nestedStyles = (palette: Palette) => css`
 	li {
 		margin-bottom: 6px;
-		padding-left: 20px;
+		padding-left: ${space[6]}px;
 
 		p {
 			display: inline;
@@ -31,11 +31,11 @@ const nestedStyles = (palette: Palette) => css`
 		display: inline-block;
 		content: '';
 		border-radius: 50%;
-		height: 12px;
-		width: 12px;
-		margin-right: ${space[2]}px;
+		height: 0.7em;
+		width: 0.7em;
+		margin-right: 7px;
 		background-color: ${palette.background.bulletStandfirst};
-		margin-left: -20px;
+		margin-left: -${space[6]}px;
 	}
 
 	p {

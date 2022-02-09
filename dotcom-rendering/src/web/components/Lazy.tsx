@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
+import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
 type Props = {
 	children: JSX.Element;

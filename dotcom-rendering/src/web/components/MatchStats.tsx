@@ -10,14 +10,14 @@ import {
 	between,
 } from '@guardian/source-foundations';
 
-import { GridItem } from '@root/src/web/components/GridItem';
-import { Hide } from '@root/src/web/components/Hide';
-
-import { Doughnut } from '@frontend/web/components/Doughnut';
-import { Distribution } from '@frontend/web/components/Distribution';
-import { GoalAttempts } from '@frontend/web/components/GoalAttempts';
-import { Lineup } from '@frontend/web/components/Lineup';
 import { ArticleDesign } from '@guardian/libs';
+import { GridItem } from './GridItem';
+import { Hide } from './Hide';
+
+import { Doughnut } from './Doughnut';
+import { Distribution } from './Distribution';
+import { GoalAttempts } from './GoalAttempts';
+import { Lineup } from './Lineup';
 
 type Props = {
 	home: TeamType;
