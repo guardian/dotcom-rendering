@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { from, until } from '@guardian/source-foundations';
 
-import { verticalDivider } from '@root/src/web/lib/verticalDivider';
+import { verticalDivider } from '../../../lib/verticalDivider';
 
 const liStyles = css`
 	/* This position relative is needed to contain the veritcal divider */

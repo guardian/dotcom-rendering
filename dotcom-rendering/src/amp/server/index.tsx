@@ -1,16 +1,16 @@
 import type express from 'express';
 
-import { document } from '@root/src/amp/server/document';
-import { Article } from '@root/src/amp/pages/Article';
-import { extractScripts } from '@root/src/amp/lib/scripts';
-import { extractNAV } from '@root/src/model/extract-nav';
-import { AnalyticsModel } from '@root/src/amp/components/Analytics';
-import { validateAsCAPIType as validateV2 } from '@root/src/model/validate';
-import { findBySubsection } from '@root/src/model/article-sections';
-import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
-import { generatePermutivePayload } from '@root/src/amp/lib/permutive';
-import { getAmpExperimentCache } from '@root/src/amp/server/ampExperimentCache';
-import { NotRenderableInDCR } from '@root/src/lib/errors/not-renderable-in-dcr';
+import { document } from './document';
+import { Article } from '../pages/Article';
+import { extractScripts } from '../lib/scripts';
+import { extractNAV } from '../../model/extract-nav';
+import { AnalyticsModel } from '../components/Analytics';
+import { validateAsCAPIType as validateV2 } from '../../model/validate';
+import { findBySubsection } from '../../model/article-sections';
+import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
+import { generatePermutivePayload } from '../lib/permutive';
+import { getAmpExperimentCache } from './ampExperimentCache';
+import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
 	try {

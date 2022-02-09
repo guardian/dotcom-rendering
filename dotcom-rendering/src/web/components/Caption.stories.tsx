@@ -1,6 +1,3 @@
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
-import { Caption } from '@frontend/web/components/Caption';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import {
 	ArticleDisplay,
 	ArticleDesign,
@@ -9,6 +6,9 @@ import {
 } from '@guardian/libs';
 import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
+import { ElementContainer } from './ElementContainer';
+import { Caption } from './Caption';
+import { StarRating } from './StarRating/StarRating';
 import { decidePalette } from '../lib/decidePalette';
 
 export default {

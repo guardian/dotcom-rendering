@@ -3,14 +3,14 @@ import { css } from '@emotion/react';
 
 import { text, headline, from, Breakpoint } from '@guardian/source-foundations';
 
-import { initPerf } from '@root/src/web/browser/initPerf';
-import { AdSlot, labelStyles } from '@root/src/web/components/AdSlot';
-import { Lazy } from '@root/src/web/components/Lazy';
-
 import { useAB } from '@guardian/ab-react';
-import { abTestTest } from '@frontend/web/experiments/tests/ab-test-test';
 import { ArticleDesign } from '@guardian/libs';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { initPerf } from '../../../browser/initPerf';
+import { AdSlot, labelStyles } from '../../AdSlot';
+import { Lazy } from '../../Lazy';
+
+import { abTestTest } from '../../../experiments/tests/ab-test-test';
+import { decidePalette } from '../../../lib/decidePalette';
 import { Hide } from '../../Hide';
 import { LeftColumn } from '../../LeftColumn';
 

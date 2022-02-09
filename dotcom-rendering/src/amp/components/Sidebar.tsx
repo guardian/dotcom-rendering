@@ -9,7 +9,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 
-import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
+import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 
 export const Sidebar: React.FC<{ nav: NavType }> = () => {
 	// this next line is necessary cos react has a 'template' object with no 'type' property.

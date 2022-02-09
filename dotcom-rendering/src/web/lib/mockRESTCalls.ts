@@ -1,15 +1,15 @@
 import fetchMock from 'fetch-mock';
 
-import { mostRead } from '@root/fixtures/manual/most-read';
-import { mostReadGeo } from '@root/fixtures/manual/most-read-geo';
-import { related } from '@root/fixtures/manual/related';
-import { discussion } from '@root/fixtures/manual/discussion';
-import { shortDiscussion } from '@root/fixtures/manual/short-discussion';
-import { discussionNoTopComments } from '@root/fixtures/manual/discussion-no-top-comments';
+import { mostRead } from '../../../fixtures/manual/most-read';
+import { mostReadGeo } from '../../../fixtures/manual/most-read-geo';
+import { related } from '../../../fixtures/manual/related';
+import { discussion } from '../../../fixtures/manual/discussion';
+import { shortDiscussion } from '../../../fixtures/manual/short-discussion';
+import { discussionNoTopComments } from '../../../fixtures/manual/discussion-no-top-comments';
 
-import { series } from '@root/fixtures/generated/series';
-import { storyPackage } from '@root/fixtures/generated/story-package';
-import { matchReport } from '@root/fixtures/generated/match-report';
+import { series } from '../../../fixtures/generated/series';
+import { storyPackage } from '../../../fixtures/generated/story-package';
+import { matchReport } from '../../../fixtures/generated/match-report';
 
 const richLinkCard = {
 	tags: [

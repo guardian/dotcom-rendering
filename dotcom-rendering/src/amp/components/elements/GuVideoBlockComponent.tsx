@@ -1,5 +1,5 @@
 import React from 'react';
-import { Caption } from '@root/src/amp/components/Caption';
+import { Caption } from '../Caption';
 
 export const GuVideoBlockComponent: React.FC<{
 	element: GuVideoBlockElement;

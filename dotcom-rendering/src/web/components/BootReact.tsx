@@ -1,13 +1,13 @@
 import ReactDOM from 'react-dom';
 
-import { App } from '@root/src/web/components/App';
 import { ABProvider } from '@guardian/ab-react';
-import { tests } from '@frontend/web/experiments/ab-tests';
-import { getForcedParticipationsFromUrl } from '@frontend/web/lib/getAbUrlHash';
-import { getCypressSwitches } from '@frontend/web/experiments/cypress-switches';
 import { loadableReady } from '@loadable/component';
-import { getOphanRecordFunction } from '@root/src/web/browser/ophan/ophan';
 import { getCookie } from '@guardian/libs';
+import { App } from './App';
+import { tests } from '../experiments/ab-tests';
+import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
+import { getCypressSwitches } from '../experiments/cypress-switches';
+import { getOphanRecordFunction } from '../browser/ophan/ophan';
 
 type Props = {
 	CAPI: CAPIBrowserType;

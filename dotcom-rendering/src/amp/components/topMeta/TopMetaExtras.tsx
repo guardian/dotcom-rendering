@@ -3,14 +3,14 @@ import { css } from '@emotion/react';
 
 import { neutral, text, textSans } from '@guardian/source-foundations';
 
-import ClockIcon from '@frontend/static/icons/clock.svg';
-import { ShareIcons } from '@root/src/amp/components/ShareIcons';
+import ClockIcon from '../../../static/icons/clock.svg';
+import { ShareIcons } from '../ShareIcons';
 import {
 	pillarMap,
 	pillarPalette_DO_NOT_USE,
 	neutralBorder,
-} from '@root/src/lib/pillars';
-import TwitterIcon from '@frontend/static/icons/twitter.svg';
+} from '../../../lib/pillars';
+import TwitterIcon from '../../../static/icons/twitter.svg';
 
 const pillarColours = pillarMap(
 	(pillar) =>

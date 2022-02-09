@@ -8,7 +8,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { sanitise } from '@frontend/lib/sanitise-html';
+import { sanitise } from '../../lib/sanitise-html';
 import { decidePalette } from '../lib/decidePalette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 

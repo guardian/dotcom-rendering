@@ -3,8 +3,8 @@ import { neutral, space, border } from '@guardian/source-foundations';
 import { ArticleDisplay } from '@guardian/libs';
 import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial-core/dist/esm/constants';
 
-import { AdSlot, labelHeight } from '@root/src/web/components/AdSlot';
-import { Hide } from '@root/src/web/components/Hide';
+import { AdSlot, labelHeight } from './AdSlot';
+import { Hide } from './Hide';
 
 const headerWrapper = css`
 	position: static;

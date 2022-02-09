@@ -1,4 +1,4 @@
-import { useApi } from '@root/src/web/lib/useApi';
+import { useApi } from './useApi';
 
 type DiscussionResponse = {
 	status: string;

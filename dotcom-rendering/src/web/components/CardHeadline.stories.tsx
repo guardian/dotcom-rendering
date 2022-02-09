@@ -5,11 +5,11 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
-
-import { CardHeadline } from '@frontend/web/components/CardHeadline';
 import { specialReport } from '@guardian/source-foundations';
+import { ElementContainer } from './ElementContainer';
+import { decidePalette } from '../lib/decidePalette';
+
+import { CardHeadline } from './CardHeadline';
 
 export default {
 	component: CardHeadline,

@@ -2,7 +2,7 @@
 
 import { ArticleDesign } from '@guardian/libs';
 
-import { Card } from '@frontend/web/components/Card/Card';
+import { Card } from './Card/Card';
 
 type Props = {
 	content: TrailType[];

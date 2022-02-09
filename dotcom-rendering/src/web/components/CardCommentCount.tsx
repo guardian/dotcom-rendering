@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { textSans, between } from '@guardian/source-foundations';
 
-import CommentIcon from '@frontend/static/icons/comment.svg';
+import CommentIcon from '../../static/icons/comment.svg';
 
 type Props = {
 	palette: Palette;

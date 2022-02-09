@@ -1,4 +1,4 @@
-import { Caption } from '@frontend/web/components/Caption';
+import { Caption } from './Caption';
 
 type Props = {
 	captionText?: string;

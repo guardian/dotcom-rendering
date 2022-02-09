@@ -1,11 +1,11 @@
 import type express from 'express';
-import { extractNAV } from '@root/src/model/extract-nav';
-import { document } from '@root/src/web/server/document';
-import { enhanceBlocks } from '@root/src/model/enhanceBlocks';
-import { enhanceStandfirst } from '@root/src/model/enhanceStandfirst';
-import { validateAsCAPIType } from '@root/src/model/validate';
-import { extract as extractGA } from '@root/src/model/extract-ga';
-import { Article as ExampleArticle } from '@root/fixtures/generated/articles/Article';
+import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
+import { extractNAV } from '../../model/extract-nav';
+import { document } from './document';
+import { enhanceBlocks } from '../../model/enhanceBlocks';
+import { enhanceStandfirst } from '../../model/enhanceStandfirst';
+import { validateAsCAPIType } from '../../model/validate';
+import { extract as extractGA } from '../../model/extract-ga';
 import { blocksToHtml } from './blocksToHtml';
 
 export const renderArticle = (

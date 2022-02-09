@@ -13,14 +13,14 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 
-import { LeftColumn } from '@frontend/web/components/LeftColumn';
-import { Hide } from '@frontend/web/components/Hide';
-import { formatAttrString } from '@frontend/web/lib/formatAttrString';
-import { Card } from '@frontend/web/components/Card/Card';
-import { LI } from '@frontend/web/components/Card/components/LI';
-import { getZIndex } from '@frontend/web/lib/getZIndex';
+import { LeftColumn } from './LeftColumn';
+import { Hide } from './Hide';
+import { formatAttrString } from '../lib/formatAttrString';
+import { Card } from './Card/Card';
+import { LI } from './Card/components/LI';
+import { getZIndex } from '../lib/getZIndex';
 
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette';
 
 // Carousel icons - need replicating from source for centring
 

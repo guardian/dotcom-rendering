@@ -1,8 +1,5 @@
 import { css } from '@emotion/react';
 
-import { HeadlineTag } from '@root/src/web/components/HeadlineTag';
-import { HeadlineByline } from '@root/src/web/components/HeadlineByline';
-
 import {
 	headline,
 	textSans,
@@ -16,8 +13,11 @@ import {
 	ArticleFormat,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { getZIndex } from '@frontend/web/lib/getZIndex';
-import { interactiveLegacyClasses } from '@root/src/web/layouts/lib/interactiveLegacyStyling';
+import { HeadlineTag } from './HeadlineTag';
+import { HeadlineByline } from './HeadlineByline';
+
+import { getZIndex } from '../lib/getZIndex';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 type Props = {
 	headlineString: string;

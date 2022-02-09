@@ -4,8 +4,8 @@ import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
-import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { updateIframeHeight } from '../browser/updateIframeHeight';
+import { decidePalette } from '../lib/decidePalette';
 
 import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';

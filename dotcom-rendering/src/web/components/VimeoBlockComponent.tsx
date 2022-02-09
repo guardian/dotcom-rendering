@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Caption } from '@root/src/web/components/Caption';
+import { Caption } from './Caption';
 
 const responsiveAspectRatio = (height: number, width: number) => css`
 	/* https://css-tricks.com/aspect-ratio-boxes/ */

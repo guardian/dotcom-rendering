@@ -2,17 +2,17 @@ import { css } from '@emotion/react';
 
 import { text } from '@guardian/source-foundations';
 
-import { Zero } from '@root/src/web/components/numbers/Zero';
-import { One } from '@root/src/web/components/numbers/One';
-import { Two } from '@root/src/web/components/numbers/Two';
-import { Three } from '@root/src/web/components/numbers/Three';
-import { Four } from '@root/src/web/components/numbers/Four';
-import { Five } from '@root/src/web/components/numbers/Five';
-import { Six } from '@root/src/web/components/numbers/Six';
-import { Seven } from '@root/src/web/components/numbers/Seven';
-import { Eight } from '@root/src/web/components/numbers/Eight';
-import { Nine } from '@root/src/web/components/numbers/Nine';
-import { Ten } from '@root/src/web/components/numbers/Ten';
+import { Zero } from './numbers/Zero';
+import { One } from './numbers/One';
+import { Two } from './numbers/Two';
+import { Three } from './numbers/Three';
+import { Four } from './numbers/Four';
+import { Five } from './numbers/Five';
+import { Six } from './numbers/Six';
+import { Seven } from './numbers/Seven';
+import { Eight } from './numbers/Eight';
+import { Nine } from './numbers/Nine';
+import { Ten } from './numbers/Ten';
 
 type Props = {
 	score: number;

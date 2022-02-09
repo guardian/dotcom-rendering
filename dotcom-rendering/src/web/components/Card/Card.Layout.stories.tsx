@@ -7,10 +7,10 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
-import { Flex } from '@frontend/web/components/Flex';
-import { LeftColumn } from '@frontend/web/components/LeftColumn';
-import { ArticleContainer } from '@frontend/web/components/ArticleContainer';
+import { ElementContainer } from '../ElementContainer';
+import { Flex } from '../Flex';
+import { LeftColumn } from '../LeftColumn';
+import { ArticleContainer } from '../ArticleContainer';
 
 import { Card } from './Card';
 import { UL } from './components/UL';

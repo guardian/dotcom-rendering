@@ -2,8 +2,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
-import { useApi as useApi_ } from '@root/src/web/lib/useApi';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { useApi as useApi_ } from '../../../lib/useApi';
+import { decidePalette } from '../../../lib/decidePalette';
 
 import { responseWithTwoTabs, responseWithOneTab } from '../MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData';

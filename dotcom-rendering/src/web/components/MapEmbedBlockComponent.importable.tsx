@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 
-import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
-import { Caption } from '@root/src/web/components/Caption';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { MaintainAspectRatio } from './MaintainAspectRatio';
+import { Caption } from './Caption';
+import { decidePalette } from '../lib/decidePalette';
 import { ClickToView } from './ClickToView';
 
 type Props = {

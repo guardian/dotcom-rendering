@@ -7,8 +7,8 @@ import {
 	headline,
 	textSans,
 } from '@guardian/source-foundations';
-import DownArrow from '@frontend/static/icons/down-arrow.svg';
-import { blockLink } from '@root/src/amp/lib/block-link';
+import DownArrow from '../../static/icons/down-arrow.svg';
+import { blockLink } from '../lib/block-link';
 
 const headingStyle = css`
 	${headline.xxsmall()};

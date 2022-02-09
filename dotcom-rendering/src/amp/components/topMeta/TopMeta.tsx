@@ -2,11 +2,11 @@ import React from 'react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
-import { ArticleModel } from '@root/src/amp/types/ArticleModel';
-import { TopMetaNews } from '@root/src/amp/components/topMeta/TopMetaNews';
-import { TopMetaOpinion } from '@root/src/amp/components/topMeta/TopMetaOpinion';
-import { TopMetaPaidContent } from '@root/src/amp/components/topMeta/TopMetaPaidContent';
-import { TopMetaAnalysis } from '@root/src/amp/components/topMeta/TopMetaAnalysis';
+import { ArticleModel } from '../../types/ArticleModel';
+import { TopMetaNews } from './TopMetaNews';
+import { TopMetaOpinion } from './TopMetaOpinion';
+import { TopMetaPaidContent } from './TopMetaPaidContent';
+import { TopMetaAnalysis } from './TopMetaAnalysis';
 
 export const TopMeta: React.FunctionComponent<{
 	data: ArticleModel;
