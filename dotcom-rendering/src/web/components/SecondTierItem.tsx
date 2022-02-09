@@ -8,11 +8,11 @@ import {
 	from,
 } from '@guardian/source-foundations';
 
-import { AgeWarning } from '../../AgeWarning';
-import { Avatar } from '../../Avatar';
-import { LinkHeadline } from '../../LinkHeadline';
-import { Flex } from '../../Flex';
-import { decidePalette } from '../../../lib/decidePalette';
+import { AgeWarning } from './AgeWarning';
+import { Avatar } from './Avatar';
+import { LinkHeadline } from './LinkHeadline';
+import { Flex } from './Flex';
+import { decidePalette } from '../lib/decidePalette';
 
 const itemStyles = (showRightBorder?: boolean) => css`
 	position: relative;
