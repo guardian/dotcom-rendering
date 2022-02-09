@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { CoreAPIConfig } from '@guardian/ab-core/dist/types';
-import { ABProvider } from '@guardian/ab-react';
-import { getCookie } from '@guardian/libs';
+import { ABProvider, useAB } from '@guardian/ab-react';
+import { getCookie, log } from '@guardian/libs';
 import { tests } from '@frontend/web/experiments/ab-tests';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
 import { getCypressSwitches } from '../experiments/cypress-switches';
@@ -12,6 +13,23 @@ type Props = {
 	isDev: boolean;
 	children: JSX.Element;
 };
+
+const InitialiseAB = ({ children }: { children: JSX.Element }) => {
+	// *******************************
+	// ** Setup AB Test Tracking *****
+	// *******************************
+	const ABTestAPI = useAB();
+	useEffect(() => {
+		const allRunnableTests = ABTestAPI.allRunnableTests(tests);
+		ABTestAPI.trackABTests(allRunnableTests);
+		ABTestAPI.registerImpressionEvents(allRunnableTests);
+		ABTestAPI.registerCompleteEvents(allRunnableTests);
+		log('dotcom', 'AB tests initialised');
+	}, [ABTestAPI]);
+
+	return children;
+};
+
 export const WithABProvider = ({
 	abTestSwitches,
 	pageIsSensitive,
@@ -46,7 +64,7 @@ export const WithABProvider = ({
 			ophanRecord={ophanRecord}
 			forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
 		>
-			{children}
+			<InitialiseAB>{children}</InitialiseAB>
 		</ABProvider>
 	);
 };

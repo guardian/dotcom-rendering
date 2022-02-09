@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
-import { useAB } from '@guardian/ab-react';
-import { tests } from '@frontend/web/experiments/ab-tests';
 import { ShareCount } from '@frontend/web/components/ShareCount';
 import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
 import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
@@ -65,18 +63,6 @@ export const App = ({ CAPI }: Props) => {
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
 	const ophanRecord = getOphanRecordFunction();
-
-	// *******************************
-	// ** Setup AB Test Tracking *****
-	// *******************************
-	const ABTestAPI = useAB();
-	useEffect(() => {
-		const allRunnableTests = ABTestAPI.allRunnableTests(tests);
-		ABTestAPI.trackABTests(allRunnableTests);
-		ABTestAPI.registerImpressionEvents(allRunnableTests);
-		ABTestAPI.registerCompleteEvents(allRunnableTests);
-		log('dotcom', 'AB tests initialised');
-	}, [ABTestAPI]);
 
 	useEffect(() => {
 		incrementAlreadyVisited();
