@@ -20,7 +20,7 @@ interface Props {
 }
 
 const darkStyles = darkMode`
-    color: ${neutral[60]};
+	color: ${neutral[60]};
 `;
 
 const styles = css`
