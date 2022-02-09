@@ -1,4 +1,4 @@
-import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
+import { getBrazeUuid } from '../getBrazeUuid';
 import { hasRequiredConsents } from './hasRequiredConsents';
 
 type SuccessResult = {

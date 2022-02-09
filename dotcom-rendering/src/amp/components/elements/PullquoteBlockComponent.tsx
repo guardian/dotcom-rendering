@@ -2,8 +2,8 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { neutral, body } from '@guardian/source-foundations';
 
-import Quote from '@frontend/static/icons/quote.svg';
-import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
+import Quote from '../../../static/icons/quote.svg';
+import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
 const styles = (pillar: ArticleTheme) => css`
 	background-color: ${neutral[97]};

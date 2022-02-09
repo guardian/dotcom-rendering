@@ -1,4 +1,4 @@
-import { findBySubsection } from '@root/src/model/article-sections';
+import { findBySubsection } from './article-sections';
 
 describe('returns section for each subsection', () => {
 	const testCases = [

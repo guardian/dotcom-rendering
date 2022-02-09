@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 
 import { textSans, between, until } from '@guardian/source-foundations';
 
-import ShareIcon from '@frontend/static/icons/share.svg';
+import ShareIcon from '../../static/icons/share.svg';
 
-import { useApi } from '@root/src/web/lib/useApi';
-import { formatCount } from '@root/src/web/lib/formatCount';
-import { joinUrl } from '@root/src/lib/joinUrl';
+import { useApi } from '../lib/useApi';
+import { formatCount } from '../lib/formatCount';
+import { joinUrl } from '../../lib/joinUrl';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {

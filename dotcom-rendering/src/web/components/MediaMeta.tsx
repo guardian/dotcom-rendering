@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/source-foundations';
 
-import Audio from '@frontend/static/icons/audio.svg';
-import Photo from '@frontend/static/icons/photo.svg';
-import Video from '@frontend/static/icons/video.svg';
+import Audio from '../../static/icons/audio.svg';
+import Photo from '../../static/icons/photo.svg';
+import Video from '../../static/icons/video.svg';
 
 type Props = {
 	mediaType: MediaType;

@@ -2,10 +2,10 @@
 
 import { css } from '@emotion/react';
 
-import { InteractiveBlockComponent } from '@frontend/web/components/InteractiveBlockComponent';
-import { Figure } from '@frontend/web/components/Figure';
-import { TextBlockComponent } from '@frontend/web/components/TextBlockComponent';
 import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { InteractiveBlockComponent } from './InteractiveBlockComponent';
+import { Figure } from './Figure';
+import { TextBlockComponent } from './TextBlockComponent';
 
 export default {
 	component: InteractiveBlockComponent,

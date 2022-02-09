@@ -1,4 +1,4 @@
-import { addTrackingCodesToUrl } from '@root/src/web/lib/acquisitions';
+import { addTrackingCodesToUrl } from './acquisitions';
 
 describe('acquisitions', () => {
 	it('should addTrackingCodesToUrl', () => {

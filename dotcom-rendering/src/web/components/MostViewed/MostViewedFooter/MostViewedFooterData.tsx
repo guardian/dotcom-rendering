@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 
 import { border, from, Breakpoint } from '@guardian/source-foundations';
 
-import { useApi } from '@root/src/web/lib/useApi';
-import { joinUrl } from '@root/src/lib/joinUrl';
-import { decideTrail } from '@root/src/web/lib/decideTrail';
+import { useApi } from '../../../lib/useApi';
+import { joinUrl } from '../../../../lib/joinUrl';
+import { decideTrail } from '../../../lib/decideTrail';
 
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { SecondTierItem } from './SecondTierItem';

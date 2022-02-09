@@ -10,13 +10,13 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
-import ArrowInCircle from '@frontend/static/icons/arrow-in-circle.svg';
+import ArrowInCircle from '../../static/icons/arrow-in-circle.svg';
 
-import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { QuoteIcon } from '@root/src/web/components/QuoteIcon';
-import { Hide } from '@root/src/web/components/Hide';
-import { Avatar } from '@frontend/web/components/Avatar';
+import { decidePalette } from '../lib/decidePalette';
+import { StarRating } from './StarRating/StarRating';
+import { QuoteIcon } from './QuoteIcon';
+import { Hide } from './Hide';
+import { Avatar } from './Avatar';
 
 interface Props {
 	richLinkIndex: number;

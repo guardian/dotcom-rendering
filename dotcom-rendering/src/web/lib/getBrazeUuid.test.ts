@@ -1,5 +1,5 @@
-import { getBrazeUuid } from '@root/src/web/lib/getBrazeUuid';
-import { getIdapiUserIdentifiers } from '@root/src/web/lib/getIdapiUserData';
+import { getBrazeUuid } from './getBrazeUuid';
+import { getIdapiUserIdentifiers } from './getIdapiUserData';
 
 const userIdentifiers = {
 	id: 'idValue',
@@ -8,7 +8,7 @@ const userIdentifiers = {
 	googleTagId: 'googleTagIdValue',
 };
 
-jest.mock('@root/src/web/lib/getIdapiUserData', () => ({
+jest.mock('./getIdapiUserData', () => ({
 	getIdapiUserIdentifiers: jest.fn(() => Promise.resolve(userIdentifiers)),
 }));
 

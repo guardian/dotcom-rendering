@@ -9,11 +9,11 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 
-import { Picture } from '@root/src/web/components/Picture';
-import { Caption } from '@root/src/web/components/Caption';
-import { Hide } from '@root/src/web/components/Hide';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
+import { Picture } from './Picture';
+import { Caption } from './Caption';
+import { Hide } from './Hide';
+import { StarRating } from './StarRating/StarRating';
 
 type Props = {
 	element: ImageBlockElement;

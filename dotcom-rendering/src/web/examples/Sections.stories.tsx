@@ -2,15 +2,8 @@
 
 import { css } from '@emotion/react';
 
-import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
-import { Header } from '@frontend/web/components/Header';
-import { Footer } from '@frontend/web/components/Footer';
-import { Nav } from '@root/src/web/components/Nav/Nav';
-
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
-
 import {
 	brandBorder,
 	brandBackground,
@@ -19,6 +12,11 @@ import {
 	brandAltBackground,
 	neutral,
 } from '@guardian/source-foundations';
+import { ContainerLayout } from '../components/ContainerLayout';
+import { ElementContainer } from '../components/ElementContainer';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
+import { Nav } from '../components/Nav/Nav';
 
 import { NAV, pageFooter } from './Example.mocks';
 

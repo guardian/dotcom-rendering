@@ -3,16 +3,16 @@ import { css } from '@emotion/react';
 
 import { joinUrl } from '@guardian/libs';
 import { space, from } from '@guardian/source-foundations';
-import { RightColumn } from '@frontend/web/components/RightColumn';
-import { AdSlot } from '@root/src/web/components/AdSlot';
 import { App as Comments } from '@guardian/discussion-rendering';
+import { RightColumn } from './RightColumn';
+import { AdSlot } from './AdSlot';
 
-import { Flex } from '@frontend/web/components/Flex';
-import { SignedInAs } from '@frontend/web/components/SignedInAs';
-import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
-import { Hide } from '@frontend/web/components/Hide';
-import { getCommentContext } from '@root/src/web/lib/getCommentContext';
-import { useDiscussion } from '@root/src/web/lib/useDiscussion';
+import { Flex } from './Flex';
+import { SignedInAs } from './SignedInAs';
+import { ContainerLayout } from './ContainerLayout';
+import { Hide } from './Hide';
+import { getCommentContext } from '../lib/getCommentContext';
+import { useDiscussion } from '../lib/useDiscussion';
 import { decidePalette } from '../lib/decidePalette';
 
 export type Props = {

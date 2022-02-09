@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { Flex } from '@root/src/web/components/Flex';
-import { RightColumn } from '@root/src/web/components/RightColumn';
-import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
+import { Flex } from './Flex';
+import { RightColumn } from './RightColumn';
+import { ArticleContainer } from './ArticleContainer';
+import { ElementContainer } from './ElementContainer';
 
 import { LeftColumn } from './LeftColumn';
 import { Placeholder } from './Placeholder';

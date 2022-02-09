@@ -3,9 +3,9 @@ import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 
-import { useApi } from '@root/src/web/lib/useApi';
-import { useAdBlockInUse } from '@root/src/web/lib/useAdBlockInUse';
-import { decideTrail } from '@root/src/web/lib/decideTrail';
+import { useApi } from '../lib/useApi';
+import { useAdBlockInUse } from '../lib/useAdBlockInUse';
+import { decideTrail } from '../lib/decideTrail';
 
 import { MostViewedRightItem } from './MostViewedRightItem';
 

@@ -1,20 +1,20 @@
 import { useEffect } from 'react';
 
-import { makeGuardianBrowserCAPI } from '@root/src/model/window-guardian';
+import { makeGuardianBrowserCAPI } from '../../model/window-guardian';
 
-import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
+import { decideTheme } from '../lib/decideTheme';
+import { decideDisplay } from '../lib/decideDisplay';
+import { decideDesign } from '../lib/decideDesign';
 
-import { Article } from '@root/fixtures/generated/articles/Article';
+import { Article } from '../../../fixtures/generated/articles/Article';
 
-import { BootReact } from '@root/src/web/components/BootReact';
-import { embedIframe } from '@root/src/web/browser/embedIframe/embedIframe';
-import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
-import { injectPrivacySettingsLink } from '@root/src/web/lib/injectPrivacySettingsLink';
+import { BootReact } from '../components/BootReact';
+import { embedIframe } from '../browser/embedIframe/embedIframe';
+import { mockRESTCalls } from '../lib/mockRESTCalls';
+import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 
-import { extractNAV } from '@root/src/model/extract-nav';
-import { fireAndResetHydrationState } from '@root/src/web/components/HydrateOnce';
+import { extractNAV } from '../../model/extract-nav';
+import { fireAndResetHydrationState } from '../components/HydrateOnce';
 import { DecideLayout } from './DecideLayout';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 

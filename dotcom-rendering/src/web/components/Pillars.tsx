@@ -8,7 +8,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette';
 import { navInputCheckboxId } from './Nav/config';
 
 // CSS Vars

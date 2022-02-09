@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
 
-import ClockIcon from '@frontend/static/icons/clock.svg';
-
 import {
 	from,
 	brandAltText,
@@ -9,6 +7,7 @@ import {
 	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
+import ClockIcon from '../../static/icons/clock.svg';
 
 type Props = {
 	age: string;

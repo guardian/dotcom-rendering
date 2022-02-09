@@ -1,21 +1,18 @@
 import {
-	getLocaleCode,
-	overrideCountryCode,
-} from '@root/src/web/lib/getCountryCode';
+	CountryCode,
+	setCookie,
+	getCookie,
+	removeCookie,
+} from '@guardian/libs';
+import { getLocaleCode, overrideCountryCode } from './getCountryCode';
 import {
 	HIDE_SUPPORT_MESSAGING_COOKIE,
 	RECURRING_CONTRIBUTOR_COOKIE,
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 	SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
 	SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE,
-} from '@root/src/web/lib/contributions';
-import { setAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
-import {
-	CountryCode,
-	setCookie,
-	getCookie,
-	removeCookie,
-} from '@guardian/libs';
+} from './contributions';
+import { setAlreadyVisited } from './alreadyVisited';
 
 const readerRevenueCookies = [
 	HIDE_SUPPORT_MESSAGING_COOKIE,

@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { ContainerLayout } from './ContainerLayout';
+import { decidePalette } from '../lib/decidePalette';
 
 import { MultiImageBlockComponent } from './MultiImageBlockComponent';
 import { fourImages } from './MultiImageBlockComponent.mocks';

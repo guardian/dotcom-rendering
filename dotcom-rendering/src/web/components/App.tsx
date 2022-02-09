@@ -1,59 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
-import { useAB } from '@guardian/ab-react';
-import { tests } from '@frontend/web/experiments/ab-tests';
-import { ShareCount } from '@frontend/web/components/ShareCount';
-import { MostViewedFooter } from '@frontend/web/components/MostViewed/MostViewedFooter/MostViewedFooter';
-import { ReaderRevenueLinks } from '@frontend/web/components/ReaderRevenueLinks';
-import { SlotBodyEnd } from '@root/src/web/components/SlotBodyEnd/SlotBodyEnd';
-import { ContributionSlot } from '@frontend/web/components/ContributionSlot';
-import { GetMatchNav } from '@frontend/web/components/GetMatchNav';
-import { StickyBottomBanner } from '@root/src/web/components/StickyBottomBanner/StickyBottomBanner';
-import { SignInGateSelector } from '@root/src/web/components/SignInGate/SignInGateSelector';
-
-import { AudioAtomWrapper } from '@frontend/web/components/AudioAtomWrapper';
-
-import { Portal } from '@frontend/web/components/Portal';
-import {
-	HydrateOnce,
-	HydrateInteractiveOnce,
-} from '@frontend/web/components/HydrateOnce';
-import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
-import { useOnce } from '@root/src/web/lib/useOnce';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
-import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
-import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
-import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
-import { ClickToView } from '@root/src/web/components/ClickToView';
-import { LabsHeader } from '@root/src/web/components/LabsHeader';
-import { EmbedBlockComponent } from '@root/src/web/components/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from '@root/src/web/components/UnsafeEmbedBlockComponent';
-
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import {
 	getWeeklyArticleHistory,
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { ShareCount } from './ShareCount';
+import { MostViewedFooter } from './MostViewed/MostViewedFooter/MostViewedFooter';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
+import { ContributionSlot } from './ContributionSlot';
+import { GetMatchNav } from './GetMatchNav';
+import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
+import { SignInGateSelector } from './SignInGate/SignInGateSelector';
+
+import { AudioAtomWrapper } from './AudioAtomWrapper';
+
+import { Portal } from './Portal';
+import { HydrateOnce, HydrateInteractiveOnce } from './HydrateOnce';
+import { decideTheme } from '../lib/decideTheme';
+import { decideDisplay } from '../lib/decideDisplay';
+import { decideDesign } from '../lib/decideDesign';
+import { useOnce } from '../lib/useOnce';
+
+import { incrementAlreadyVisited } from '../lib/alreadyVisited';
+import { incrementDailyArticleCount } from '../lib/dailyArticleCount';
+import { hasOptedOutOfArticleCount } from '../lib/contributions';
+import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
+import { buildAdTargeting } from '../../lib/ad-targeting';
+import { updateIframeHeight } from '../browser/updateIframeHeight';
+import { ClickToView } from './ClickToView';
+import { LabsHeader } from './LabsHeader';
+import { EmbedBlockComponent } from './EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
+
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { GetMatchTabs } from './GetMatchTabs';
+import { getOphanRecordFunction } from '../browser/ophan/ophan';
 
 type Props = {
 	CAPI: CAPIBrowserType;
-	ophanRecord: OphanRecordFunction;
 };
 
 let renderCount = 0;
-export const App = ({ CAPI, ophanRecord }: Props) => {
+export const App = ({ CAPI }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 
 	const [brazeMessages, setBrazeMessages] =
@@ -64,17 +59,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
-	// *******************************
-	// ** Setup AB Test Tracking *****
-	// *******************************
-	const ABTestAPI = useAB();
-	useEffect(() => {
-		const allRunnableTests = ABTestAPI.allRunnableTests(tests);
-		ABTestAPI.trackABTests(allRunnableTests);
-		ABTestAPI.registerImpressionEvents(allRunnableTests);
-		ABTestAPI.registerCompleteEvents(allRunnableTests);
-		log('dotcom', 'AB tests initialised');
-	}, [ABTestAPI]);
+	const ophanRecord = getOphanRecordFunction();
 
 	useEffect(() => {
 		incrementAlreadyVisited();
@@ -117,7 +102,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 			<K extends keyof ReaderRevenueDevUtils>(key: K) =>
 			(asExistingSupporter: boolean) =>
 				import(
-					/* webpackChunkName: "readerRevenueDevUtils" */ '@frontend/web/lib/readerRevenueDevUtils'
+					/* webpackChunkName: "readerRevenueDevUtils" */ '../lib/readerRevenueDevUtils'
 				)
 					.then((utils) =>
 						utils[key](
@@ -179,7 +164,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.YoutubeBlockElement',
 				).length > 0
 			) {
-				return import('@frontend/web/components/YoutubeBlockComponent');
+				return import('./YoutubeBlockComponent');
 			}
 			return Promise.reject();
 		},
@@ -197,9 +182,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 						'model.dotcomrendering.pageElements.InteractiveBlockElement',
 				).length > 0
 			) {
-				return import(
-					'@frontend/web/components/InteractiveBlockComponent'
-				);
+				return import('./InteractiveBlockComponent');
 			}
 			return Promise.reject();
 		},

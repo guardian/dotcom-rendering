@@ -1,6 +1,6 @@
-import { NumberedList } from '@root/fixtures/generated/articles/NumberedList';
-import { Article } from '@root/fixtures/generated/articles/Article';
-import { images } from '@root/fixtures/generated/images';
+import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
+import { Article } from '../../fixtures/generated/articles/Article';
+import { images } from '../../fixtures/generated/images';
 
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 

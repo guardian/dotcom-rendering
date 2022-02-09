@@ -7,13 +7,13 @@ import {
 	MoustacheVariable,
 	MoustacheTemplate,
 	moustacheVariable,
-} from '@root/src/amp/components/moustache';
-import VideoIcon from '@frontend/static/icons/video-icon.svg';
-import Camera from '@frontend/static/icons/camera.svg';
-import VolumeHigh from '@frontend/static/icons/volume-high.svg';
-import Quote from '@frontend/static/icons/quote.svg';
-import Clock from '@frontend/static/icons/clock.svg';
-import { ShowMoreButton } from '@root/src/amp/components/ShowMoreButton';
+} from './moustache';
+import VideoIcon from '../../static/icons/video-icon.svg';
+import Camera from '../../static/icons/camera.svg';
+import VolumeHigh from '../../static/icons/volume-high.svg';
+import Quote from '../../static/icons/quote.svg';
+import Clock from '../../static/icons/clock.svg';
+import { ShowMoreButton } from './ShowMoreButton';
 
 const inner = css`
 	padding-top: 3px;

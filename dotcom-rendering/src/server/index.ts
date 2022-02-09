@@ -1,10 +1,10 @@
-import { render as renderAMPArticle } from '@root/src/amp/server';
+import { render as renderAMPArticle } from '../amp/server';
 import {
 	renderArticle,
 	renderArticleJson,
 	renderBlocks,
 	renderInteractive,
-} from '@root/src/web/server';
+} from '../web/server';
 import { prodServer } from './prod-server';
 
 // this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server

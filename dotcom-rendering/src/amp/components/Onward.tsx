@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { OnwardContainer } from '@root/src/amp/components/OnwardContainer';
+import { OnwardContainer } from './OnwardContainer';
 
 const wrapper = css`
 	background-color: white;

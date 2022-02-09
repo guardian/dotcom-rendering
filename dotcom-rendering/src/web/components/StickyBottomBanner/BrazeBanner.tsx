@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
-import { getZIndex } from '@root/src/web/lib/getZIndex';
 import type { CommonBannerComponentProps } from '@guardian/braze-components/banner';
-import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { getBrazeMetaFromUrlFragment } from '@root/src/web/lib/braze/forceBrazeMessage';
-import { CanShowResult } from '@root/src/web/lib/messagePicker';
+import { getZIndex } from '../../lib/getZIndex';
+import { submitComponentEvent } from '../../browser/ophan/ophan';
+import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
+import { CanShowResult } from '../../lib/messagePicker';
 
 type Meta = {
 	dataFromBraze: {

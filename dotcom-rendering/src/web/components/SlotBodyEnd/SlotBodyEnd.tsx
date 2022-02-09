@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
-import { useOnce } from '@root/src/web/lib/useOnce';
-import { getLocaleCode } from '@root/src/web/lib/getCountryCode';
 import { getCookie } from '@guardian/libs';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type {
+	BrazeMessagesInterface,
+	BrazeArticleContext,
+} from '@guardian/braze-components/logic';
+import { useOnce } from '../../lib/useOnce';
+import { getLocaleCode } from '../../lib/getCountryCode';
 
 import {
 	pickMessage,
 	SlotConfig,
 	MaybeFC,
 	CandidateConfig,
-} from '@root/src/web/lib/messagePicker';
+} from '../../lib/messagePicker';
 
-import type {
-	BrazeMessagesInterface,
-	BrazeArticleContext,
-} from '@guardian/braze-components/logic';
 import {
 	ReaderRevenueEpic,
 	canShowReaderRevenueEpic,

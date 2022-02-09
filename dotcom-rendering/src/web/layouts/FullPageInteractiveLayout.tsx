@@ -12,21 +12,21 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
-import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav.importable';
-import { ElementContainer } from '@root/src/web/components/ElementContainer';
-import { Nav } from '@root/src/web/components/Nav/Nav';
+import { Footer } from '../components/Footer';
+import { SubNav } from '../components/SubNav.importable';
+import { ElementContainer } from '../components/ElementContainer';
+import { Nav } from '../components/Nav/Nav';
 import {
 	MobileStickyContainer,
 	labelStyles as adLabelStyles,
 	adCollapseStyles,
-} from '@root/src/web/components/AdSlot';
-import { LabsHeader } from '@frontend/web/components/LabsHeader';
+} from '../components/AdSlot';
+import { LabsHeader } from '../components/LabsHeader';
 
-import { getZIndex } from '@frontend/web/lib/getZIndex';
+import { getZIndex } from '../lib/getZIndex';
 
-import { Stuck, BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
+import { Stuck, BannerWrapper } from './lib/stickiness';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 
 import { renderElement } from '../lib/renderElement';
 import { Header } from '../components/Header';

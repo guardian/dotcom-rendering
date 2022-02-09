@@ -1,19 +1,19 @@
 import { css, ThemeProvider } from '@emotion/react';
 
 import { visuallyHidden, space, until } from '@guardian/source-foundations';
-import { Pillars } from '@root/src/web/components/Pillars';
-import { GuardianRoundel } from '@root/src/web/components/GuardianRoundel';
 import {
 	LinkButton,
 	buttonThemeReaderRevenue,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-
-import { Hide } from '@frontend/web/components/Hide';
-
-import { clearFix } from '@root/src/lib/mixins';
-
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { Pillars } from '../Pillars';
+import { GuardianRoundel } from '../GuardianRoundel';
+
+import { Hide } from '../Hide';
+
+import { clearFix } from '../../../lib/mixins';
+
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 

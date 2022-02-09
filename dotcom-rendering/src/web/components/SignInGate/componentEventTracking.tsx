@@ -1,8 +1,5 @@
-import {
-	OphanComponent,
-	OphanComponentEvent,
-} from '@root/src/web/browser/ophan/ophan';
-import { CurrentSignInGateABTest } from '@root/src/web/components/SignInGate/types';
+import { OphanComponent, OphanComponentEvent } from '../../browser/ophan/ophan';
+import { CurrentSignInGateABTest } from './types';
 
 type ABTestVariant = {
 	name: string;

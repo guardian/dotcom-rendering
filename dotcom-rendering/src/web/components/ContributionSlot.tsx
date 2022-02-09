@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { getCookie } from '@guardian/libs';
-import { WhenAdBlockInUse } from '@frontend/web/components/WhenAdBlockInUse';
+import { WhenAdBlockInUse } from './WhenAdBlockInUse';
 
 const params = new URLSearchParams();
 params.set(
