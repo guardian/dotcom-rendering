@@ -2,15 +2,21 @@ import type { ABTest } from '@guardian/ab-core';
 import { sendCommercialMetrics } from '@guardian/commercial-core';
 import { getCookie } from '@guardian/libs';
 import { useAB } from '@guardian/ab-react';
+import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
+import { useAdBlockInUse } from '../lib/useAdBlockInUse';
+import { WithABProvider } from './WithABProvider';
 import { useOnce } from '../lib/useOnce';
 import { tests } from '../experiments/ab-tests';
 import { spacefinderOkr1FilterNearby } from '../experiments/tests/spacefinder-okr-1-filter-nearby';
-import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
-import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 
-type Props = { enabled: boolean };
+type Props = {
+	enabled: boolean;
+	switches: Switches;
+	isSensitive: boolean;
+	isDev?: boolean;
+};
 
-export const CommercialMetrics = ({ enabled }: Props) => {
+const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const ABTestAPI = useAB();
@@ -36,15 +42,6 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 			window.guardian.config.page.isDev ||
 			window.location.hostname.includes('localhost');
 
-		console.log({
-			isDev,
-			shouldForceMetrics,
-			userIsInSamplingGroup,
-			pageViewId,
-			browserId,
-			adBlockerInUse,
-		});
-
 		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
 			sendCommercialMetrics(
 				pageViewId,
@@ -61,3 +58,18 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 	// We don’t render anything
 	return null;
 };
+
+export const CommercialMetrics = ({
+	enabled,
+	switches,
+	isSensitive,
+	isDev,
+}: Props) => (
+	<WithABProvider
+		abTestSwitches={switches}
+		pageIsSensitive={isSensitive}
+		isDev={!!isDev}
+	>
+		<CommercialMetricsWithAB enabled={enabled} />
+	</WithABProvider>
+);

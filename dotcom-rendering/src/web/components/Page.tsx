@@ -38,6 +38,9 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			<Island clientOnly={true} deferUntil="idle">
 				<CommercialMetrics
 					enabled={CAPI.config.switches.commercialMetrics}
+					switches={CAPI.config.switches}
+					isSensitive={CAPI.config.isSensitive}
+					isDev={CAPI.config.isDev}
 				/>
 			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
