@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { CoreAPIConfig } from '@guardian/ab-core/dist/types';
 import { ABProvider, useAB } from '@guardian/ab-react';
 import { getCookie, log } from '@guardian/libs';
-import { tests } from '@frontend/web/experiments/ab-tests';
+import { tests } from '../experiments/ab-tests';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
 import { getCypressSwitches } from '../experiments/cypress-switches';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
