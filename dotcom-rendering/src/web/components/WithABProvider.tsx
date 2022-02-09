@@ -1,19 +1,18 @@
 import { CoreAPIConfig } from '@guardian/ab-core/dist/types';
 import { ABProvider } from '@guardian/ab-react';
 import { getCookie } from '@guardian/libs';
+import { tests } from '@frontend/web/experiments/ab-tests';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
 import { getCypressSwitches } from '../experiments/cypress-switches';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 
 type Props = {
-	arrayOfTestObjects: CoreAPIConfig['arrayOfTestObjects'];
 	abTestSwitches: CoreAPIConfig['abTestSwitches'];
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];
 	isDev: boolean;
 	children: JSX.Element;
 };
 export const WithABProvider = ({
-	arrayOfTestObjects,
 	abTestSwitches,
 	pageIsSensitive,
 	isDev,
@@ -36,7 +35,7 @@ export const WithABProvider = ({
 	const cypressAbSwitches = getCypressSwitches();
 	return (
 		<ABProvider
-			arrayOfTestObjects={arrayOfTestObjects}
+			arrayOfTestObjects={tests}
 			abTestSwitches={{
 				...abTestSwitches,
 				...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress

@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 
 import { App } from '@root/src/web/components/App';
-import { tests } from '@frontend/web/experiments/ab-tests';
 import { loadableReady } from '@loadable/component';
 import { getOphanRecordFunction } from '@root/src/web/browser/ophan/ophan';
 import { WithABProvider } from './WithABProvider';
@@ -16,7 +15,6 @@ export const BootReact = ({ CAPI }: Props) => {
 	loadableReady(() => {
 		ReactDOM.render(
 			<WithABProvider
-				arrayOfTestObjects={tests}
 				abTestSwitches={CAPI.config.switches}
 				pageIsSensitive={CAPI.config.isSensitive}
 				isDev={CAPI.config.isDev}
