@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { headline, textSans, text } from '@guardian/source-foundations';
 
-import { isLight } from '@frontend/web/lib/isLight';
+import { isLight } from '../lib/isLight';
 
 type Props = {
 	left: Section;

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 
-import { useApi as useApi_ } from '@root/src/web/lib/useApi';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { useApi as useApi_ } from '../lib/useApi';
 import { ShareCount } from './ShareCount';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

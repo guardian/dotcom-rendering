@@ -12,46 +12,42 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { ArticleBody } from '@root/src/web/components/ArticleBody';
-import { RightColumn } from '@root/src/web/components/RightColumn';
-import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
-import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
-import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { SubMeta } from '@root/src/web/components/SubMeta';
-import { MainMedia } from '@root/src/web/components/MainMedia';
-import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
-import { Standfirst } from '@root/src/web/components/Standfirst';
-import { Header } from '@root/src/web/components/Header';
-import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav.importable';
-import { ElementContainer } from '@root/src/web/components/ElementContainer';
-import { Nav } from '@root/src/web/components/Nav/Nav';
-import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
-import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
-import { GridItem } from '@root/src/web/components/GridItem';
-import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
-import { Pagination } from '@frontend/web/components/Pagination';
-import { KeyEventsContainer } from '@root/src/web/components/KeyEventsContainer';
+import Accordion from '@guardian/common-rendering/src/components/accordion';
+import { Hide } from '@guardian/source-react-components';
+import { StarRating } from '../components/StarRating/StarRating';
+import { ArticleBody } from '../components/ArticleBody';
+import { RightColumn } from '../components/RightColumn';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { ArticleContainer } from '../components/ArticleContainer';
+import { ArticleMeta } from '../components/ArticleMeta';
+import { SubMeta } from '../components/SubMeta';
+import { MainMedia } from '../components/MainMedia';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleHeadlinePadding } from '../components/ArticleHeadlinePadding';
+import { Standfirst } from '../components/Standfirst';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
+import { SubNav } from '../components/SubNav.importable';
+import { ElementContainer } from '../components/ElementContainer';
+import { Nav } from '../components/Nav/Nav';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
+import { GridItem } from '../components/GridItem';
+import { AgeWarning } from '../components/AgeWarning';
+import { DiscussionContainer } from '../components/DiscussionContainer.importable';
+import { Pagination } from '../components/Pagination';
+import { KeyEventsContainer } from '../components/KeyEventsContainer';
 
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { parse } from '@frontend/lib/slot-machine-flags';
-import { getAgeWarning } from '@root/src/lib/age-warning';
+import { buildAdTargeting } from '../../lib/ad-targeting';
+import { parse } from '../../lib/slot-machine-flags';
+import { getAgeWarning } from '../../lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
 	getCurrentPillar,
-} from '@root/src/web/lib/layoutHelpers';
-import {
-	Stuck,
-	SendToBack,
-	BannerWrapper,
-} from '@root/src/web/layouts/lib/stickiness';
-import Accordion from '@guardian/common-rendering/src/components/accordion';
-import { Hide } from '@guardian/source-react-components';
-import { FilterKeyEventsToggle } from '@root/src/web/components/FilterKeyEventsToggle.importable';
+} from '../lib/layoutHelpers';
+import { Stuck, SendToBack, BannerWrapper } from './lib/stickiness';
+import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
 import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';

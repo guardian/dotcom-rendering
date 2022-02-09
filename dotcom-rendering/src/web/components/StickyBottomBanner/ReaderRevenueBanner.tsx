@@ -1,21 +1,6 @@
 import { useState } from 'react';
 import { css } from '@emotion/react';
 
-import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
-import {
-	shouldHideSupportMessaging,
-	withinLocalNoBannerCachePeriod,
-	setLocalNoBannerCachePeriod,
-	MODULES_VERSION,
-	hasOptedOutOfArticleCount,
-	lazyFetchEmailWithTimeout,
-} from '@root/src/web/lib/contributions';
-import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
-import { getZIndex } from '@root/src/web/lib/getZIndex';
-import { trackNonClickInteraction } from '@root/src/web/browser/ga/ga';
-import { CanShowResult } from '@root/src/web/lib/messagePicker';
-import { setAutomat } from '@root/src/web/lib/setAutomat';
-import { useOnce } from '@root/src/web/lib/useOnce';
 import { getCookie } from '@guardian/libs';
 import {
 	getBanner,
@@ -27,6 +12,21 @@ import {
 	BannerPayload,
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
+import {
+	shouldHideSupportMessaging,
+	withinLocalNoBannerCachePeriod,
+	setLocalNoBannerCachePeriod,
+	MODULES_VERSION,
+	hasOptedOutOfArticleCount,
+	lazyFetchEmailWithTimeout,
+} from '../../lib/contributions';
+import { submitComponentEvent } from '../../browser/ophan/ophan';
+import { getZIndex } from '../../lib/getZIndex';
+import { trackNonClickInteraction } from '../../browser/ga/ga';
+import { CanShowResult } from '../../lib/messagePicker';
+import { setAutomat } from '../../lib/setAutomat';
+import { useOnce } from '../../lib/useOnce';
 
 type BaseProps = {
 	isSignedIn: boolean;

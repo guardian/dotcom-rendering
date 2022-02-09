@@ -1,7 +1,7 @@
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette';
 
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';

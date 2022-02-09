@@ -3,23 +3,23 @@ import { renderToString } from 'react-dom/server';
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
 
-import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
+import { ChunkExtractor } from '@loadable/server';
+import { ArticlePillar } from '@guardian/libs';
+import { decideTheme } from '../lib/decideTheme';
+import { decideDisplay } from '../lib/decideDisplay';
+import { decideDesign } from '../lib/decideDesign';
 
-import { Page } from '@root/src/web/components/Page';
+import { Page } from '../components/Page';
 
-import { escapeData } from '@root/src/lib/escapeData';
+import { escapeData } from '../../lib/escapeData';
 import {
 	ASSET_ORIGIN,
 	getScriptArrayFromFilename,
 	getScriptArrayFromChunkName,
 	loadableManifestJson,
-} from '@root/src/lib/assets';
+} from '../../lib/assets';
 
-import { makeWindowGuardian } from '@root/src/model/window-guardian';
-import { ChunkExtractor } from '@loadable/server';
-import { ArticlePillar } from '@guardian/libs';
+import { makeWindowGuardian } from '../../model/window-guardian';
 import { htmlTemplate } from './htmlTemplate';
 
 interface Props {

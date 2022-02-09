@@ -1,7 +1,7 @@
-import { record } from '@root/src/web/browser/ophan/ophan';
+import { record } from '../browser/ophan/ophan';
 import { pickMessage, CanShowResult, SlotConfig } from './messagePicker';
 
-jest.mock('@root/src/web/browser/ophan/ophan', () => ({
+jest.mock('../browser/ophan/ophan', () => ({
 	record: jest.fn(),
 }));
 

@@ -9,9 +9,9 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
 
-import LabsLogo from '@frontend/static/logos/the-guardian-labs.svg';
-import ArrowRightIcon from '@frontend/static/icons/arrow-right.svg';
-import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
+import LabsLogo from '../../../static/logos/the-guardian-labs.svg';
+import ArrowRightIcon from '../../../static/icons/arrow-right.svg';
+import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
 const headerStyle = css`
 	display: flex;

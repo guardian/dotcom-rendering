@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { matchReport } from '@root/fixtures/generated/match-report';
+import { matchReport } from '../../../fixtures/generated/match-report';
 
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';

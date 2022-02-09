@@ -1,5 +1,5 @@
 import { ClassNames } from '@emotion/react';
-import { regionClasses } from '@root/src/amp/lib/region-classes';
+import { regionClasses } from '../lib/region-classes';
 import { realTimeConfig, BaseAdProps, CommercialConfig, Ad } from './Ad';
 
 type AdRegion = 'US' | 'AU' | 'ROW';

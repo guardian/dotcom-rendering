@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
-} from '@frontend/web/components/SignInGate/types';
-import { useOnce } from '@frontend/web/lib/useOnce';
-import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
+} from '../components/SignInGate/types';
+import { useOnce } from './useOnce';
+import { useSignInGateSelector } from './useSignInGateSelector';
 
 type Props = {
 	isSignedIn?: boolean;

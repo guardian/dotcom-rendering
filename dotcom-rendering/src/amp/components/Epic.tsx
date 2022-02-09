@@ -2,12 +2,6 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 import {
-	MoustacheSection,
-	MoustacheVariable,
-	MoustacheTemplate,
-	moustacheVariable,
-} from '@root/src/amp/components/moustache';
-import {
 	headline,
 	body,
 	textSans,
@@ -18,6 +12,12 @@ import {
 	brandBackground,
 	border,
 } from '@guardian/source-foundations';
+import {
+	MoustacheSection,
+	MoustacheVariable,
+	MoustacheTemplate,
+	moustacheVariable,
+} from './moustache';
 
 export const epicChoiceCardCss = `
 	.epicChoiceCard {

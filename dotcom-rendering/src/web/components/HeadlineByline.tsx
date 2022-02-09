@@ -7,14 +7,14 @@ import {
 	until,
 } from '@guardian/source-foundations';
 
-import { BylineLink } from '@root/src/web/components/BylineLink';
 import {
 	ArticleDisplay,
 	ArticleDesign,
 	ArticleFormat,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { BylineLink } from './BylineLink';
+import { decidePalette } from '../lib/decidePalette';
 
 const wrapperStyles = css`
 	margin-left: 6px;

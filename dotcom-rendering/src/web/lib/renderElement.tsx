@@ -1,54 +1,3 @@
-import { BlockquoteBlockComponent } from '@root/src/web/components/BlockquoteBlockComponent';
-import { CalloutBlockComponent } from '@root/src/web/components/CalloutBlockComponent';
-import { CaptionBlockComponent } from '@root/src/web/components/CaptionBlockComponent';
-import { CommentBlockComponent } from '@root/src/web/components/CommentBlockComponent';
-import { CodeBlockComponent } from '@root/src/web/components/CodeBlockComponent';
-import { RichLinkComponent } from '@root/src/web/components/RichLinkComponent.importable';
-import { DocumentBlockComponent } from '@root/src/web/components/DocumentBlockComponent.importable';
-import { DisclaimerBlockComponent } from '@root/src/web/components/DisclaimerBlockComponent';
-import { DividerBlockComponent } from '@root/src/web/components/DividerBlockComponent';
-import { EmbedBlockComponent } from '@root/src/web/components/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from '@root/src/web/components/UnsafeEmbedBlockComponent';
-import { GuVideoBlockComponent } from '@root/src/web/components/GuVideoBlockComponent';
-import { HighlightBlockComponent } from '@root/src/web/components/HighlightBlockComponent';
-import { ImageBlockComponent } from '@root/src/web/components/ImageBlockComponent';
-import { InstagramBlockComponent } from '@root/src/web/components/InstagramBlockComponent.importable';
-import { InteractiveBlockComponent } from '@root/src/web/components/InteractiveBlockComponent';
-import { ItemLinkBlockElement } from '@root/src/web/components/ItemLinkBlockElement';
-import { InteractiveContentsBlockComponent } from '@root/src/web/components/InteractiveContentsBlockComponent';
-import { MainMediaEmbedBlockComponent } from '@root/src/web/components/MainMediaEmbedBlockComponent';
-import { NumberedTitleBlockComponent } from '@root/src/web/components/NumberedTitleBlockComponent';
-import { MapEmbedBlockComponent } from '@root/src/web/components/MapEmbedBlockComponent.importable';
-import { MultiImageBlockComponent } from '@root/src/web/components/MultiImageBlockComponent';
-import { PullQuoteBlockComponent } from '@root/src/web/components/PullQuoteBlockComponent';
-import { SoundcloudBlockComponent } from '@root/src/web/components/SoundcloudBlockComponent';
-import { SpotifyBlockComponent } from '@root/src/web/components/SpotifyBlockComponent.importable';
-import { StarRatingBlockComponent } from '@root/src/web/components/StarRatingBlockComponent';
-import { SubheadingBlockComponent } from '@root/src/web/components/SubheadingBlockComponent';
-import { TableBlockComponent } from '@root/src/web/components/TableBlockComponent';
-import { TextBlockComponent } from '@root/src/web/components/TextBlockComponent';
-import { TweetBlockComponent } from '@root/src/web/components/TweetBlockComponent';
-import { VideoFacebookBlockComponent } from '@root/src/web/components/VideoFacebookBlockComponent.importable';
-import { VimeoBlockComponent } from '@root/src/web/components/VimeoBlockComponent';
-import { VineBlockComponent } from '@root/src/web/components/VineBlockComponent.importable';
-import { YoutubeEmbedBlockComponent } from '@root/src/web/components/YoutubeEmbedBlockComponent';
-import { YoutubeBlockComponent } from '@root/src/web/components/YoutubeBlockComponent';
-
-import { TimelineAtomWrapper } from '@root/src/web/components/TimelineAtomWrapper.importable';
-import { GuideAtomWrapper } from '@root/src/web/components/GuideAtomWrapper.importable';
-import { ChartAtomWrapper } from '@root/src/web/components/ChartAtomWrapper.importable';
-import { ProfileAtomWrapper } from '@root/src/web/components/ProfileAtomWrapper.importable';
-import { QandaAtomWrapper } from '@root/src/web/components/QandaAtomWrapper.importable';
-import { PersonalityQuizAtomWrapper } from '@root/src/web/components/PersonalityQuizAtomWrapper.importable';
-import { KnowledgeQuizAtomWrapper } from '@root/src/web/components/KnowledgeQuizAtomWrapper.importable';
-
-import {
-	WitnessVideoBlockComponent,
-	WitnessImageBlockComponent,
-	WitnessTextBlockComponent,
-} from '@root/src/web/components/WitnessBlockComponent';
-import { getSharingUrls } from '@root/src/lib/sharing-urls';
-import { ClickToView } from '@root/src/web/components/ClickToView';
 import {
 	AudioAtom,
 	ExplainerAtom,
@@ -57,6 +6,57 @@ import {
 	VideoAtom,
 } from '@guardian/atoms-rendering';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
+import { CalloutBlockComponent } from '../components/CalloutBlockComponent';
+import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
+import { CommentBlockComponent } from '../components/CommentBlockComponent';
+import { CodeBlockComponent } from '../components/CodeBlockComponent';
+import { RichLinkComponent } from '../components/RichLinkComponent.importable';
+import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
+import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
+import { DividerBlockComponent } from '../components/DividerBlockComponent';
+import { EmbedBlockComponent } from '../components/EmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent';
+import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
+import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
+import { ImageBlockComponent } from '../components/ImageBlockComponent';
+import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
+import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent';
+import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
+import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent';
+import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
+import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
+import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
+import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
+import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
+import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
+import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
+import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent';
+import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
+import { TableBlockComponent } from '../components/TableBlockComponent';
+import { TextBlockComponent } from '../components/TextBlockComponent';
+import { TweetBlockComponent } from '../components/TweetBlockComponent';
+import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockComponent.importable';
+import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
+import { VineBlockComponent } from '../components/VineBlockComponent.importable';
+import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
+import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent';
+
+import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
+import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
+import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
+import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
+import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
+import { PersonalityQuizAtomWrapper } from '../components/PersonalityQuizAtomWrapper.importable';
+import { KnowledgeQuizAtomWrapper } from '../components/KnowledgeQuizAtomWrapper.importable';
+
+import {
+	WitnessVideoBlockComponent,
+	WitnessImageBlockComponent,
+	WitnessTextBlockComponent,
+} from '../components/WitnessBlockComponent';
+import { getSharingUrls } from '../../lib/sharing-urls';
+import { ClickToView } from '../components/ClickToView';
 import { Figure } from '../components/Figure';
 import {
 	isInteractive,

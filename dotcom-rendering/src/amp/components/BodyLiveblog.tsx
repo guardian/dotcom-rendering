@@ -1,21 +1,21 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { ArticleModel } from '@root/src/amp/types/ArticleModel';
-import { TopMetaLiveblog } from '@root/src/amp/components/topMeta/TopMetaLiveblog';
-import { SubMeta } from '@root/src/amp/components/SubMeta';
 import {
 	neutral,
 	news,
 	headline,
 	textSans,
 } from '@guardian/source-foundations';
-import { KeyEvents } from '@root/src/amp/components/KeyEvents';
-import { Blocks } from '@root/src/amp/components/Blocks';
-import RefreshIcon from '@frontend/static/icons/refresh.svg';
-import { Pagination } from '@root/src/amp/components/Pagination';
-import { getSharingUrls } from '@root/src/lib/sharing-urls';
-import { decideTheme } from '@root/src/web/lib/decideTheme';
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
+import { ArticleModel } from '../types/ArticleModel';
+import { TopMetaLiveblog } from './topMeta/TopMetaLiveblog';
+import { SubMeta } from './SubMeta';
+import { KeyEvents } from './KeyEvents';
+import { Blocks } from './Blocks';
+import RefreshIcon from '../../static/icons/refresh.svg';
+import { Pagination } from './Pagination';
+import { getSharingUrls } from '../../lib/sharing-urls';
+import { decideTheme } from '../../web/lib/decideTheme';
+import { buildAdTargeting } from '../../lib/ad-targeting';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is

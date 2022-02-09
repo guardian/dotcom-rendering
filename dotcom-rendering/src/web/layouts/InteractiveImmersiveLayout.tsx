@@ -10,17 +10,17 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleFormat, ArticleSpecial, ArticleDesign } from '@guardian/libs';
 
-import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav.importable';
-import { ElementContainer } from '@root/src/web/components/ElementContainer';
+import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { Footer } from '../components/Footer';
+import { SubNav } from '../components/SubNav.importable';
+import { ElementContainer } from '../components/ElementContainer';
 import {
 	MobileStickyContainer,
 	AdSlot,
 	labelStyles as adLabelStyles,
 	adCollapseStyles,
-} from '@root/src/web/components/AdSlot';
-import { BannerWrapper } from '@root/src/web/layouts/lib/stickiness';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+} from '../components/AdSlot';
+import { BannerWrapper } from './lib/stickiness';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { renderElement } from '../lib/renderElement';

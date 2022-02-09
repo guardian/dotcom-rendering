@@ -7,8 +7,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 
-import { getZIndex } from '@root/src/web/lib/getZIndex';
 import { ArticleDisplay } from '@guardian/libs';
+import { getZIndex } from '../../../lib/getZIndex';
 
 import { ShowMoreMenu } from './ShowMoreMenu';
 import { VeggieBurgerMenu } from './VeggieBurgerMenu';

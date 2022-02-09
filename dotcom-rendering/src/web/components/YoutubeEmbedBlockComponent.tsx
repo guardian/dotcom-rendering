@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
-import { Caption } from '@root/src/web/components/Caption';
-import { MaintainAspectRatio } from '@frontend/web/components/MaintainAspectRatio';
+import { Caption } from './Caption';
+import { MaintainAspectRatio } from './MaintainAspectRatio';
 
 export const YoutubeEmbedBlockComponent: React.FC<{
 	format: ArticleFormat;

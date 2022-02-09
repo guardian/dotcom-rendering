@@ -1,10 +1,9 @@
 import ReactDOM from 'react-dom';
-
-import { App } from '@root/src/web/components/App';
-import { tests } from '@frontend/web/experiments/ab-tests';
 import { loadableReady } from '@loadable/component';
-import { getOphanRecordFunction } from '@root/src/web/browser/ophan/ophan';
 import { getCookie } from '@guardian/libs';
+import { getOphanRecordFunction } from '../browser/ophan/ophan';
+import { tests } from '../experiments/ab-tests';
+import { App } from './App';
 import { WithABProvider } from './WithABProvider';
 
 type Props = {

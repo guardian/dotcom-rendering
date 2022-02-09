@@ -2,15 +2,7 @@
 
 import { css } from '@emotion/react';
 
-import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
-import { Footer } from '@frontend/web/components/Footer';
-import { UL } from '@frontend/web/components/Card/components/UL';
-import { LI } from '@frontend/web/components/Card/components/LI';
-import { Nav } from '@root/src/web/components/Nav/Nav';
-
 import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
-
 import {
 	brandBorder,
 	brandBackground,
@@ -18,6 +10,12 @@ import {
 	neutral,
 	headline,
 } from '@guardian/source-foundations';
+import { ContainerLayout } from '../components/ContainerLayout';
+import { ElementContainer } from '../components/ElementContainer';
+import { Footer } from '../components/Footer';
+import { UL } from '../components/Card/components/UL';
+import { LI } from '../components/Card/components/LI';
+import { Nav } from '../components/Nav/Nav';
 
 import { NAV, pageFooter } from './Example.mocks';
 

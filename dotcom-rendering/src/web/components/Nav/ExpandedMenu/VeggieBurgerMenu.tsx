@@ -8,7 +8,7 @@ import {
 } from '@guardian/source-foundations';
 
 import { ArticleDisplay } from '@guardian/libs';
-import { getZIndex } from '@root/src/web/lib/getZIndex';
+import { getZIndex } from '../../../lib/getZIndex';
 import { navInputCheckboxId, veggieBurgerId } from '../config';
 
 const screenReadable = css`

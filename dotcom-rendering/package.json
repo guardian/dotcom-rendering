@@ -242,9 +242,7 @@
     ],
     "moduleNameMapper": {
       "^svgs/(.*)$": "<rootDir>/__mocks__/svgMock.tsx",
-      "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx",
-      "^@root(.*)$": "<rootDir>$1",
-      "^@frontend(.*)$": "<rootDir>/src$1"
+      "^(.*)\\.svg$": "<rootDir>/__mocks__/svgMock.tsx"
     },
     "testResultsProcessor": "jest-teamcity-reporter",
     "transformIgnorePatterns": [

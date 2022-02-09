@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 
 import { css } from '@emotion/react';
-import { unescapeData } from '@root/src/lib/escapeData';
-import { Caption } from '@root/src/web/components/Caption';
+import { unescapeData } from '../../lib/escapeData';
+import { Caption } from './Caption';
 
 export const GuVideoBlockComponent: React.FC<{
 	html: string;

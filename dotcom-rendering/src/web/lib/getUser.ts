@@ -1,4 +1,4 @@
-import { joinUrl } from '@root/src/lib/joinUrl';
+import { joinUrl } from '../../lib/joinUrl';
 
 function checkForErrors(response: Response) {
 	if (!response.ok) {

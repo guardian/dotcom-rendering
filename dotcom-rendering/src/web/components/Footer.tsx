@@ -10,8 +10,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 
-import { clearFix } from '@root/src/lib/mixins';
 import { ArticleDisplay } from '@guardian/libs';
+import { clearFix } from '../../lib/mixins';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 

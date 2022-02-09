@@ -1,13 +1,13 @@
 import { useRef, useState } from 'react';
-import { useOnce } from '@root/src/web/lib/useOnce';
 import { css } from '@emotion/react';
 import { body, textSans, space } from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
-import { Placeholder } from '@root/src/web/components/Placeholder';
-import { Caption } from '@root/src/web/components/Caption';
 import libDebounce from 'lodash.debounce';
-import { interactiveLegacyFigureClasses } from '@root/src/web/layouts/lib/interactiveLegacyStyling';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { Placeholder } from './Placeholder';
+import { Caption } from './Caption';
+import { useOnce } from '../lib/useOnce';
+import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	url?: string;

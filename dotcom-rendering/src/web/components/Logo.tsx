@@ -7,11 +7,11 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 
-import TheGuardianLogoSVG from '@frontend/static/logos/the-guardian.svg';
-import GuardianAnniversaryLogoSVG from '@frontend/static/logos/guardian-anniversary-logo.svg';
-import GuardianAnniversaryLogoUKSVG from '@frontend/static/logos/guardian-anniversary-logo-uk.svg';
+import TheGuardianLogoSVG from '../../static/logos/the-guardian.svg';
+import GuardianAnniversaryLogoSVG from '../../static/logos/guardian-anniversary-logo.svg';
+import GuardianAnniversaryLogoUKSVG from '../../static/logos/guardian-anniversary-logo-uk.svg';
 
-import { getZIndex } from '@frontend/web/lib/getZIndex';
+import { getZIndex } from '../lib/getZIndex';
 
 const link = (isAnniversary?: boolean) => css`
 	float: right;

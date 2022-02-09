@@ -1,5 +1,5 @@
 import { setCookie } from '@guardian/libs';
-import { getIdApiUserData } from '@root/src/web/lib/getIdapiUserData';
+import { getIdApiUserData } from './getIdapiUserData';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecentOneOffContributor,
@@ -27,10 +27,8 @@ const userResponse = {
 	},
 };
 
-jest.mock('@root/src/web/lib/getIdapiUserData', () => {
-	const originalModule = jest.requireActual(
-		'@root/src/web/lib/getIdapiUserData',
-	);
+jest.mock('./getIdapiUserData', () => {
+	const originalModule = jest.requireActual('./getIdapiUserData');
 	return {
 		...originalModule,
 		getIdApiUserData: jest.fn(() => Promise.resolve(userResponse)),

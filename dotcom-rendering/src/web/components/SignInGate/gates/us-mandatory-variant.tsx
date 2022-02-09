@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
-import { Lazy } from '@root/src/web/components/Lazy';
+import { Lazy } from '../../Lazy';
 
-import { SignInGateComponent } from '@frontend/web/components/SignInGate/types';
-import { initPerf } from '@root/src/web/browser/initPerf';
-import { canShowMandatoryUs } from '@root/src/web/components/SignInGate/displayRule';
+import { SignInGateComponent } from '../types';
+import { initPerf } from '../../../browser/initPerf';
+import { canShowMandatoryUs } from '../displayRule';
 
 const SignInGateMain = React.lazy(() => {
 	const { start, end } = initPerf('SignInGateMain');

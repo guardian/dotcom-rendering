@@ -1,20 +1,20 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-import { Footer } from '@root/src/amp/components/Footer';
-import { Body as BodyArticle } from '@root/src/amp/components/BodyArticle';
-import { Body as BodyLiveblog } from '@root/src/amp/components/BodyLiveblog';
-import { Header } from '@root/src/amp/components/Header';
-import { Onward } from '@root/src/amp/components/Onward';
-import { AdConsent } from '@root/src/amp/components/AdConsent';
-import { Sidebar } from '@root/src/amp/components/Sidebar';
-import { Analytics, AnalyticsModel } from '@root/src/amp/components/Analytics';
-import { filterForTagsOfType } from '@root/src/amp/lib/tag-utils';
-import { AnalyticsIframe } from '@root/src/amp/components/AnalyticsIframe';
 import { neutral } from '@guardian/source-foundations';
-import { ArticleModel } from '@root/src/amp/types/ArticleModel';
-import { AmpExperimentComponent } from '@root/src/amp/components/AmpExperiment';
-import { AmpExperiments } from '@root/src/amp/server/ampExperimentCache';
+import { Footer } from '../components/Footer';
+import { Body as BodyArticle } from '../components/BodyArticle';
+import { Body as BodyLiveblog } from '../components/BodyLiveblog';
+import { Header } from '../components/Header';
+import { Onward } from '../components/Onward';
+import { AdConsent } from '../components/AdConsent';
+import { Sidebar } from '../components/Sidebar';
+import { Analytics, AnalyticsModel } from '../components/Analytics';
+import { filterForTagsOfType } from '../lib/tag-utils';
+import { AnalyticsIframe } from '../components/AnalyticsIframe';
+import { ArticleModel } from '../types/ArticleModel';
+import { AmpExperimentComponent } from '../components/AmpExperiment';
+import { AmpExperiments } from '../server/ampExperimentCache';
 
 const containerStyles = css`
 	margin: auto;
