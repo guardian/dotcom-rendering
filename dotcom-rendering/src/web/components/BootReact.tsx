@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom';
 
 import { App } from '@root/src/web/components/App';
 import { loadableReady } from '@loadable/component';
-import { getOphanRecordFunction } from '@root/src/web/browser/ophan/ophan';
 import { WithABProvider } from './WithABProvider';
 
 type Props = {
@@ -10,8 +9,6 @@ type Props = {
 };
 
 export const BootReact = ({ CAPI }: Props) => {
-	const ophanRecord = getOphanRecordFunction();
-
 	loadableReady(() => {
 		ReactDOM.render(
 			<WithABProvider
@@ -19,7 +16,7 @@ export const BootReact = ({ CAPI }: Props) => {
 				pageIsSensitive={CAPI.config.isSensitive}
 				isDev={CAPI.config.isDev}
 			>
-				<App CAPI={CAPI} ophanRecord={ophanRecord} />
+				<App CAPI={CAPI} />
 			</WithABProvider>,
 
 			document.getElementById('react-root'),

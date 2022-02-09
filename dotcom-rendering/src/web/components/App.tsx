@@ -22,6 +22,7 @@ import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
+import { getOphanRecordFunction } from '@root/src/web/browser/ophan/ophan';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
@@ -38,7 +39,6 @@ import { EmbedBlockComponent } from '@root/src/web/components/EmbedBlockComponen
 import { UnsafeEmbedBlockComponent } from '@root/src/web/components/UnsafeEmbedBlockComponent';
 
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import {
 	getWeeklyArticleHistory,
 	incrementWeeklyArticleCount,
@@ -50,11 +50,10 @@ import { GetMatchTabs } from './GetMatchTabs';
 
 type Props = {
 	CAPI: CAPIBrowserType;
-	ophanRecord: OphanRecordFunction;
 };
 
 let renderCount = 0;
-export const App = ({ CAPI, ophanRecord }: Props) => {
+export const App = ({ CAPI }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 
 	const [brazeMessages, setBrazeMessages] =
@@ -64,6 +63,8 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
+
+	const ophanRecord = getOphanRecordFunction();
 
 	// *******************************
 	// ** Setup AB Test Tracking *****
