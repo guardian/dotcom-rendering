@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
-import { useAB } from '@guardian/ab-react';
+
 import { FocusStyleManager } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import { OphanRecordFunction } from '@guardian/ab-core/dist/types';
 import {
 	getWeeklyArticleHistory,
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { tests } from '../experiments/ab-tests';
 import { ShareCount } from './ShareCount';
 import { MostViewedFooter } from './MostViewed/MostViewedFooter/MostViewedFooter';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
@@ -44,14 +42,14 @@ import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
+import { getOphanRecordFunction } from '../browser/ophan/ophan';
 
 type Props = {
 	CAPI: CAPIBrowserType;
-	ophanRecord: OphanRecordFunction;
 };
 
 let renderCount = 0;
-export const App = ({ CAPI, ophanRecord }: Props) => {
+export const App = ({ CAPI }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 
 	const [brazeMessages, setBrazeMessages] =
@@ -62,17 +60,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 
-	// *******************************
-	// ** Setup AB Test Tracking *****
-	// *******************************
-	const ABTestAPI = useAB();
-	useEffect(() => {
-		const allRunnableTests = ABTestAPI.allRunnableTests(tests);
-		ABTestAPI.trackABTests(allRunnableTests);
-		ABTestAPI.registerImpressionEvents(allRunnableTests);
-		ABTestAPI.registerCompleteEvents(allRunnableTests);
-		log('dotcom', 'AB tests initialised');
-	}, [ABTestAPI]);
+	const ophanRecord = getOphanRecordFunction();
 
 	useEffect(() => {
 		incrementAlreadyVisited();
