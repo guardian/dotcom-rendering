@@ -1,13 +1,11 @@
 import ReactDOM from 'react-dom';
 
 import { App } from '@root/src/web/components/App';
-import { ABProvider } from '@guardian/ab-react';
 import { tests } from '@frontend/web/experiments/ab-tests';
-import { getForcedParticipationsFromUrl } from '@frontend/web/lib/getAbUrlHash';
-import { getCypressSwitches } from '@frontend/web/experiments/cypress-switches';
 import { loadableReady } from '@loadable/component';
 import { getOphanRecordFunction } from '@root/src/web/browser/ophan/ophan';
 import { getCookie } from '@guardian/libs';
+import { WithABProvider } from './WithABProvider';
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -27,28 +25,17 @@ export const BootReact = ({ CAPI }: Props) => {
 
 	const ophanRecord = getOphanRecordFunction();
 
-	const windowHash = window && window.location && window.location.hash;
-
-	// Get the forced switches to use for when running within cypress
-	// Is empty object if not in cypress
-	const cypressAbSwitches = getCypressSwitches();
-
 	loadableReady(() => {
 		ReactDOM.render(
-			<ABProvider
+			<WithABProvider
 				arrayOfTestObjects={tests}
-				abTestSwitches={{
-					...CAPI.config.switches,
-					...cypressAbSwitches, // by adding cypress switches below CAPI, we can override any production switch in Cypress
-				}}
+				abTestSwitches={CAPI.config.switches}
 				pageIsSensitive={CAPI.config.isSensitive}
-				mvtMaxValue={1000000}
 				mvtId={mvtId}
 				ophanRecord={ophanRecord}
-				forcedTestVariants={getForcedParticipationsFromUrl(windowHash)}
 			>
 				<App CAPI={CAPI} ophanRecord={ophanRecord} />
-			</ABProvider>,
+			</WithABProvider>,
 
 			document.getElementById('react-root'),
 		);
