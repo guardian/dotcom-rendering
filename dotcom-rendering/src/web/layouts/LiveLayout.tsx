@@ -51,6 +51,7 @@ import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.impor
 import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';
+import { Liveness } from '../components/Liveness.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
@@ -388,6 +389,16 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 	return (
 		<>
+			{format.design === ArticleDesign.LiveBlog && (
+				<Island clientOnly={true} deferUntil="idle">
+					<Liveness
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
+						ajaxUrl={CAPI.config.ajaxUrl}
+						filterKeyEvents={CAPI.filterKeyEvents}
+					/>
+				</Island>
+			)}
 			<div data-print-layout="hide">
 				<Stuck>
 					<ElementContainer
