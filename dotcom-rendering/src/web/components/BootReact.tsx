@@ -5,7 +5,7 @@ import { tests } from '@frontend/web/experiments/ab-tests';
 import { loadableReady } from '@loadable/component';
 import { getOphanRecordFunction } from '@root/src/web/browser/ophan/ophan';
 import { getCookie } from '@guardian/libs';
-import { WithAB } from './WithAB';
+import { WithABProvider } from './WithABProvider';
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -27,7 +27,7 @@ export const BootReact = ({ CAPI }: Props) => {
 
 	loadableReady(() => {
 		ReactDOM.render(
-			<WithAB
+			<WithABProvider
 				arrayOfTestObjects={tests}
 				abTestSwitches={CAPI.config.switches}
 				pageIsSensitive={CAPI.config.isSensitive}
@@ -35,7 +35,7 @@ export const BootReact = ({ CAPI }: Props) => {
 				ophanRecord={ophanRecord}
 			>
 				<App CAPI={CAPI} ophanRecord={ophanRecord} />
-			</WithAB>,
+			</WithABProvider>,
 
 			document.getElementById('react-root'),
 		);

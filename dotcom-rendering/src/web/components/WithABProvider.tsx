@@ -11,7 +11,7 @@ type Props = {
 	ophanRecord: OphanAPIConfig['ophanRecord'];
 	children: JSX.Element;
 };
-export const WithAB = ({
+export const WithABProvider = ({
 	arrayOfTestObjects,
 	abTestSwitches,
 	pageIsSensitive,
