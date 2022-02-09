@@ -20,7 +20,7 @@ import { decideTheme } from '@root/src/web/lib/decideTheme';
 import { decideDisplay } from '@root/src/web/lib/decideDisplay';
 import { decideDesign } from '@root/src/web/lib/decideDesign';
 import { useOnce } from '@root/src/web/lib/useOnce';
-import { getOphanRecordFunction } from '@root/src/web/browser/ophan/ophan';
+import { getOphanRecordFunction } from '../browser/ophan/ophan';
 
 import { FocusStyleManager } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
