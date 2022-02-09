@@ -34,11 +34,11 @@ import type { Option } from '@guardian/types';
 import { stars } from 'components/starRating';
 import { formatSeconds, makeRelativeDate } from 'date';
 import type { Image } from 'image';
-import { pipe } from 'lib';
+import { maybeRender, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
-import { kicker } from './kicker';
+import { Kicker } from './kicker';
 
 interface Props {
 	relatedItem: RelatedItem;
@@ -581,6 +581,8 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 			? stars(parseInt(relatedItem.starRating))
 			: null;
 
+	const isLive = relatedItem.type === RelatedItemType.LIVE;
+
 	return (
 		<li
 			className="js-card"
@@ -591,7 +593,12 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 				<section css={headingWrapperStyles(type, format)}>
 					<h3 css={headingStyles(type)}>
 						{quotationComment(type, format)}
-						{kicker(format, kickerText)}
+						{maybeRender(
+							isLive ? some('Live') : kickerText,
+							(t) => (
+								<Kicker format={format} text={some(t)} />
+							),
+						)}
 						{title}
 						{cardByline(type, byline)}
 					</h3>

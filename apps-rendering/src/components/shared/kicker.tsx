@@ -1,12 +1,17 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text as kickerText } from '@guardian/common-rendering/src/editorialPalette';
+import { text as kickerTextPalette } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
-import { OptionKind } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import type { ReactElement } from 'react';
+import { maybeRender } from 'lib';
+import type { FC, ReactElement } from 'react';
+
+type Props = {
+	format: ArticleFormat;
+	text: Option<string>;
+};
 
 const dotStyles = (colour: string): SerializedStyles => {
 	return css`
@@ -50,44 +55,14 @@ const slashStyles = css`
 	}
 `;
 
-const slash = (text: string): ReactElement | null => {
-	if (text) {
-		return <span css={slashStyles}>{text}</span>;
-	} else {
-		return null;
-	}
-};
-export const kicker = (
-	format: ArticleFormat,
-	text: Option<string>,
-): ReactElement | null => {
-	const getKickerText = (): string | null => {
-		if (text.kind === OptionKind.Some && text.value.length > 0) {
-			return text.value;
-		} else {
-			if (format.design === ArticleDesign.LiveBlog) {
-				// Liveblogs have their kicker overridden
-				return 'Live';
-			} else {
-				// No kicker text and not a liveblog card
-				return null;
-			}
-		}
-	};
-
-	const kickerString = getKickerText();
-
-	if (kickerString) {
-		const kickerColour = kickerText.kicker(format);
+export const Kicker: FC<Props> = ({ format, text }) => {
+	return maybeRender(text, (t) => {
+		const kickerColour = kickerTextPalette.kicker(format);
 		return (
-			<>
-				<span css={kickerStyles(kickerColour)}>
-					{liveDot(format, kickerColour)}
-					{slash(kickerString)}
-				</span>
-			</>
+			<span css={kickerStyles(kickerColour)}>
+				{liveDot(format, kickerColour)}
+				<span css={slashStyles}>{t}</span>
+			</span>
 		);
-	} else {
-		return null;
-	}
+	});
 };
