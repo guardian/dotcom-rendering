@@ -19,7 +19,7 @@ export const WithAB = ({
 	ophanRecord,
 	children,
 }: Props) => {
-	const windowHash = window && window.location && window.location.hash;
+	const windowHash = window?.location.hash;
 	// Get the forced switches to use for when running within cypress
 	// Is empty object if not in cypress
 	const cypressAbSwitches = getCypressSwitches();
