@@ -13,8 +13,6 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const isServer = typeof window === 'undefined';
-
 /**
  * @description
  * Page is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
@@ -24,10 +22,6 @@ const isServer = typeof window === 'undefined';
  * @param {ArticleFormat} format - The format model for the article
  * */
 export const Page = ({ CAPI, NAV, format }: Props) => {
-	const renderCommercialMetrics =
-		!isServer &&
-		window.guardian.config?.ophan !== undefined &&
-		CAPI.config.switches.commercialMetrics;
 	return (
 		<StrictMode>
 			<Global
@@ -41,11 +35,11 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			{renderCommercialMetrics && (
-				<Island clientOnly={true} deferUntil="idle">
-					<CommercialMetrics />
-				</Island>
-			)}
+			<Island clientOnly={true} deferUntil="idle">
+				<CommercialMetrics
+					enabled={CAPI.config.switches.commercialMetrics}
+				/>
+			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id="keyevents" label="Skip to key events" />
