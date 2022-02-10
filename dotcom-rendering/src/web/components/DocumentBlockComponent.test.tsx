@@ -1,4 +1,4 @@
-import { getDocumentCloudAssetUrl } from './DocumentBlockComponent';
+import { getDocumentCloudAssetUrl } from './DocumentBlockComponent.importable';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 describe('DocumentBlockComponent.getDocumentCloudAssetUrl', () => {

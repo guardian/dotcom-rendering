@@ -4,8 +4,8 @@ import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
-import { updateIframeHeight } from '@root/src/web/browser/updateIframeHeight';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { updateIframeHeight } from '../browser/updateIframeHeight';
+import { decidePalette } from '../lib/decidePalette';
 
 import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
@@ -13,7 +13,7 @@ import { EmbedBlockComponent } from './EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
 import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
-import { DocumentBlockComponent } from './DocumentBlockComponent';
+import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
 import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
 import { TweetBlockComponent } from './TweetBlockComponent';
 import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
@@ -875,6 +875,8 @@ export const DocumentBlockComponentStory = () => {
 							height={scribdDocumentEmbed.height}
 							width={scribdDocumentEmbed.width}
 							title={scribdDocumentEmbed.title}
+							isTracking={false}
+							isMainMedia={false}
 						/>
 					</ClickToView>
 				</Figure>

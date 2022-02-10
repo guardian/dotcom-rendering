@@ -1,16 +1,17 @@
-import { useApi } from '@root/src/web/lib/useApi';
+import { useApi } from '../lib/useApi';
 
-import { Placeholder } from '@root/src/web/components/Placeholder';
+import { Placeholder } from './Placeholder';
 
 import { MatchStats } from './MatchStats';
 
 type Props = {
 	matchUrl: string;
+	format: ArticleFormat;
 };
 
 const Loading = () => <Placeholder height={800} />;
 
-export const GetMatchStats = ({ matchUrl }: Props) => {
+export const GetMatchStats = ({ matchUrl, format }: Props) => {
 	const { data, error, loading } = useApi<{
 		id: string;
 		homeTeam: TeamType;
@@ -25,7 +26,13 @@ export const GetMatchStats = ({ matchUrl }: Props) => {
 		return null;
 	}
 	if (data) {
-		return <MatchStats home={data.homeTeam} away={data.awayTeam} />;
+		return (
+			<MatchStats
+				home={data.homeTeam}
+				away={data.awayTeam}
+				format={format}
+			/>
+		);
 	}
 
 	return null;

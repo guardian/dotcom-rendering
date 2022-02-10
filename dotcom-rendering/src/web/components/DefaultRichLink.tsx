@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 
-import { RichLink } from '@root/src/web/components/RichLink';
+import { RichLink } from './RichLink';
 
 type DefaultProps = {
 	index: number;

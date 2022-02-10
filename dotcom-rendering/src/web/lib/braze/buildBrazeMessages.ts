@@ -9,9 +9,9 @@ import {
 	hasCurrentBrazeUser,
 	setHasCurrentBrazeUser,
 	clearHasCurrentBrazeUser,
-} from '@root/src/web/lib/hasCurrentBrazeUser';
-import { initPerf } from '@root/src/web/browser/initPerf';
-import { record } from '@root/src/web/browser/ophan/ophan';
+} from '../hasCurrentBrazeUser';
+import { initPerf } from '../../browser/initPerf';
+import { record } from '../../browser/ophan/ophan';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { getInitialisedAppboy } from './initialiseAppboy';
 

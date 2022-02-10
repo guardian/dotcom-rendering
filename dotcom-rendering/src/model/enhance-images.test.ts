@@ -1,7 +1,7 @@
 import { ArticlePillar } from '@guardian/libs';
-import { PhotoEssay } from '@root/fixtures/generated/articles/PhotoEssay';
-import { Article } from '@root/fixtures/generated/articles/Article';
-import { images } from '@root/fixtures/generated/images';
+import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
+import { Article } from '../../fixtures/generated/articles/Article';
+import { images } from '../../fixtures/generated/images';
 
 import { enhanceImages } from './enhance-images';
 

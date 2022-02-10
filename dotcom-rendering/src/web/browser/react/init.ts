@@ -1,8 +1,8 @@
 import '../webpackPublicPath';
 
-import { startup } from '@root/src/web/browser/startup';
+import { startup } from '../startup';
 
-import { BootReact } from '@root/src/web/components/BootReact';
+import { BootReact } from '../../components/BootReact';
 
 const init = (): Promise<void> => {
 	const {

@@ -1,4 +1,4 @@
-import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
+import { ContainerLayout } from './ContainerLayout';
 
 import { CodeBlockComponent } from './CodeBlockComponent';
 

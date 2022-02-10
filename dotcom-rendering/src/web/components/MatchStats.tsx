@@ -7,73 +7,141 @@ import {
 	border,
 	headline,
 	textSans,
+	between,
 } from '@guardian/source-foundations';
 
-import { GridItem } from '@root/src/web/components/GridItem';
-import { Hide } from '@root/src/web/components/Hide';
+import { ArticleDesign } from '@guardian/libs';
+import { GridItem } from './GridItem';
+import { Hide } from './Hide';
 
-import { Doughnut } from '@frontend/web/components/Doughnut';
-import { Distribution } from '@frontend/web/components/Distribution';
-import { GoalAttempts } from '@frontend/web/components/GoalAttempts';
-import { Lineup } from '@frontend/web/components/Lineup';
+import { Doughnut } from './Doughnut';
+import { Distribution } from './Distribution';
+import { GoalAttempts } from './GoalAttempts';
+import { Lineup } from './Lineup';
 
 type Props = {
 	home: TeamType;
 	away: TeamType;
+	format: ArticleFormat;
 };
 
 const BACKGROUND_COLOUR = '#d9edf6';
 
-const StatsGrid = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			/* IE Fallback */
-			display: flex;
-			flex-direction: column;
+const StatsGrid = ({
+	children,
+	format,
+}: {
+	children: React.ReactNode;
+	format: ArticleFormat;
+}) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
+			return (
+				<div
+					css={css`
+						/* IE Fallback */
+						display: flex;
+						flex-direction: column;
 
-			@supports (display: grid) {
-				display: grid;
+						@supports (display: grid) {
+							display: grid;
 
-				${from.wide} {
-					grid-template-columns: 50% 50%;
-					grid-template-areas:
-						'title          .'
-						'possession     attempts'
-						'possession     corners'
-						'possession     fouls'
-						'subtitle       .'
-						'home           away';
-				}
+							${until.desktop} {
+								grid-template-columns: 50% 50%;
+								grid-template-areas:
+									'title          .'
+									'possession     attempts'
+									'possession     corners'
+									'possession     fouls'
+									'subtitle       .'
+									'home           away';
+							}
 
-				${until.wide} {
-					grid-template-columns: 50% 50%;
-					grid-template-areas:
-						'title          .'
-						'possession     attempts'
-						'possession     corners'
-						'possession     fouls'
-						'subtitle       .'
-						'home           away';
-				}
+							${from.desktop} {
+								grid-template-columns: 100%;
+								grid-template-areas:
+									'title'
+									'possession'
+									'attempts'
+									'corners'
+									'fouls'
+									'subtitle'
+									'home'
+									'away';
+							}
+							${until.phablet} {
+								grid-template-columns: 50% 50%;
+								grid-template-areas:
+									'title			title'
+									'possession		possession'
+									'attempts		attempts'
+									'corners		corners'
+									'fouls			fouls'
+									'subtitle		subtitle'
+									'home			away';
+							}
+						}
+					`}
+				>
+					{children}
+				</div>
+			);
+		}
+		default: {
+			return (
+				<div
+					css={css`
+						/* IE Fallback */
+						display: flex;
+						flex-direction: column;
 
-				${until.phablet} {
-					grid-template-columns: 100%;
-					grid-template-areas:
-						'title'
-						'possession'
-						'attempts'
-						'corners'
-						'fouls'
-						'subtitle'
-						'home'
-						'away';
-				}
-			}
-		`}
-	>
-		{children}
-	</div>
-);
+						@supports (display: grid) {
+							display: grid;
+
+							${from.wide} {
+								grid-template-columns: 50% 50%;
+								grid-template-areas:
+									'title          .'
+									'possession     attempts'
+									'possession     corners'
+									'possession     fouls'
+									'subtitle       .'
+									'home           away';
+							}
+
+							${until.wide} {
+								grid-template-columns: 50% 50%;
+								grid-template-areas:
+									'title          .'
+									'possession     attempts'
+									'possession     corners'
+									'possession     fouls'
+									'subtitle       .'
+									'home           away';
+							}
+
+							${until.phablet} {
+								grid-template-columns: 100%;
+								grid-template-areas:
+									'title'
+									'possession'
+									'attempts'
+									'corners'
+									'fouls'
+									'subtitle'
+									'home'
+									'away';
+							}
+						}
+					`}
+				>
+					{children}
+				</div>
+			);
+		}
+	}
+};
 
 const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -86,47 +154,57 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 			min-height: 800px;
 			background-color: ${BACKGROUND_COLOUR};
 
-			:before {
-				content: '';
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				/* Always stretch left */
-				left: -100vw;
-				/* Only stretch right below desktop */
-				right: 0;
-				${until.desktop} {
-					right: -20px;
-				}
-				${until.mobileLandscape} {
-					right: -10px;
-				}
-
-				background-color: ${BACKGROUND_COLOUR};
-				z-index: -1;
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
-const ShiftLeft = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
 			${from.leftCol} {
-				position: absolute;
-				left: -160px;
-			}
-			${from.wide} {
-				position: absolute;
-				left: -240px;
+				:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					/* stretch left */
+					left: -100vw;
+					right: 0;
+					background-color: ${BACKGROUND_COLOUR};
+					z-index: -1;
+				}
 			}
 		`}
 	>
 		{children}
 	</div>
 );
+
+const ShiftLeft = ({
+	children,
+	format,
+}: {
+	children: React.ReactNode;
+	format: ArticleFormat;
+}) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
+			return <div>{children}</div>;
+		}
+		default: {
+			return (
+				<div
+					css={css`
+						${from.leftCol} {
+							position: absolute;
+							left: -160px;
+						}
+						${from.wide} {
+							position: absolute;
+							left: -240px;
+						}
+					`}
+				>
+					{children}
+				</div>
+			);
+		}
+	}
+};
 
 const Center = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -147,6 +225,11 @@ const RightBorder = ({ children }: { children: React.ReactNode }) => (
 			}
 			margin-right: 10px;
 			padding-right: 10px;
+			${from.desktop} {
+				margin-right: 0;
+				padding-right: 0;
+				border-right: 0;
+			}
 		`}
 	>
 		{children}
@@ -173,19 +256,95 @@ const H4 = ({ children }: { children: React.ReactNode }) => (
 	</h4>
 );
 
-export const MatchStats = ({ home, away }: Props) => (
+const DecideDoughnut = ({
+	home,
+	away,
+	format,
+}: {
+	home: TeamType;
+	away: TeamType;
+	format: ArticleFormat;
+}) => {
+	const sections = [
+		{
+			value: home.possession,
+			label: home.codename,
+			color: home.colours,
+		},
+		{
+			value: away.possession,
+			label: away.codename,
+			color: away.colours,
+		},
+	].reverse();
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog: {
+			return (
+				<>
+					{/* This represents the stats component being within the main body on a liveblog */}
+					<div
+						css={css`
+							${from.mobileMedium} {
+								display: none;
+							}
+						`}
+					>
+						<Doughnut
+							sections={sections}
+							width={200}
+							height={200}
+						/>
+					</div>
+					<div
+						css={css`
+							display: none;
+							${between.mobileMedium.and.desktop} {
+								display: block;
+							}
+						`}
+					>
+						<Doughnut
+							sections={sections}
+							width={300}
+							height={300}
+						/>
+					</div>
+					{/* This represents the stats component being within the left column on a liveblog */}
+					<div
+						css={css`
+							${until.desktop} {
+								display: none;
+							}
+						`}
+					>
+						<Doughnut
+							sections={sections}
+							width={200}
+							height={200}
+						/>
+					</div>
+				</>
+			);
+		}
+		default:
+			return <Doughnut sections={sections} />;
+	}
+};
+
+export const MatchStats = ({ home, away, format }: Props) => (
 	<StretchBackground>
-		<StatsGrid>
+		<StatsGrid format={format}>
 			<GridItem area="title" element="aside">
-				<ShiftLeft>
+				<ShiftLeft format={format}>
 					{/* Don't show the right border if this text was
                         shifted into the left column */}
-					<Hide when="above" breakpoint="leftCol">
+					<Hide when="above" breakpoint="desktop">
 						<RightBorder>
 							<H3>Match Stats</H3>
 						</RightBorder>
 					</Hide>
-					<Hide when="below" breakpoint="leftCol">
+					<Hide when="below" breakpoint="desktop">
 						<H3>Match Stats</H3>
 					</Hide>
 				</ShiftLeft>
@@ -194,23 +353,14 @@ export const MatchStats = ({ home, away }: Props) => (
 				<RightBorder>
 					<H4>Possession</H4>
 					<Center>
-						<Doughnut
-							sections={[
-								{
-									value: home.possession,
-									label: home.codename,
-									color: home.colours,
-								},
-								{
-									value: away.possession,
-									label: away.codename,
-									color: away.colours,
-								},
-							].reverse()}
+						<DecideDoughnut
+							home={home}
+							away={away}
+							format={format}
 						/>
 					</Center>
-					<br />
 				</RightBorder>
+				<br />
 			</GridItem>
 			<GridItem area="attempts">
 				<H4>Attempts</H4>
@@ -256,15 +406,15 @@ export const MatchStats = ({ home, away }: Props) => (
 				<br />
 			</GridItem>
 			<GridItem area="subtitle">
-				<ShiftLeft>
+				<ShiftLeft format={format}>
 					{/* Don't show the right border if this text was
                         shifted into the left column */}
-					<Hide when="above" breakpoint="leftCol">
+					<Hide when="above" breakpoint="desktop">
 						<RightBorder>
 							<H3>Lineups</H3>
 						</RightBorder>
 					</Hide>
-					<Hide when="below" breakpoint="leftCol">
+					<Hide when="below" breakpoint="desktop">
 						<H3>Lineups</H3>
 					</Hide>
 				</ShiftLeft>

@@ -1,46 +1,25 @@
+import compression from 'compression';
 import express, { Request, Response } from 'express';
 import fetch from 'node-fetch';
 import responseTime from 'response-time';
-
-import compression from 'compression';
-
-import { log, warn } from '@root/scripts/env/log';
+import {
+	renderArticle,
+	renderArticleJson,
+	renderBlocks,
+	renderInteractive,
+	renderPerfTest as renderArticlePerfTest,
+} from '../web/server';
 import {
 	render as renderAMPArticle,
 	renderPerfTest as renderAMPArticlePerfTest,
-} from '@root/src/amp/server/render';
-import {
-	renderArticle,
-	renderPerfTest as renderArticlePerfTest,
-	renderArticleJson,
-	renderInteractive,
-} from '@root/src/web/server/render';
-
+} from '../amp/server';
+import { log, warn } from '../../scripts/env/log';
 import {
 	getGuardianConfiguration,
 	GuardianConfiguration,
-} from './aws/aws-parameters';
-import { recordBaselineCloudWatchMetrics } from './aws/metrics-baseline';
-import { logger } from './logging';
-
-// this export is the function used by webpackHotServerMiddleware in /scripts/frontend-dev-server
-export default (options: any) => {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	switch (options.path) {
-		case '/Article':
-			return renderArticle;
-		case '/ArticleJson':
-			return renderArticleJson;
-		case '/AMPArticle':
-			return renderAMPArticle;
-		case '/Interactive':
-			return renderInteractive;
-		case '/AMPInteractive':
-			return renderAMPArticle;
-	}
-
-	return renderArticle;
-};
+} from './lib/aws/aws-parameters';
+import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
+import { logger } from './lib/logging';
 
 const buildUrlFromQueryParam = (req: Request) => {
 	// Supports urls such as:
@@ -69,8 +48,7 @@ const logRenderTime = responseTime(
 	},
 );
 
-// this is the actual production server
-if (process.env.NODE_ENV === 'production') {
+export const prodServer = () => {
 	logger.info('dotcom-rendering is GO.');
 
 	if (process.env.DISABLE_LOGGING_AND_METRICS !== 'true') {
@@ -104,6 +82,7 @@ if (process.env.NODE_ENV === 'production') {
 	app.post('/AMPArticle', logRenderTime, renderAMPArticle);
 	app.post('/Interactive', logRenderTime, renderInteractive);
 	app.post('/AMPInteractive', logRenderTime, renderAMPArticle);
+	app.post('/Blocks', logRenderTime, renderBlocks);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get('/Article', logRenderTime, async (req: Request, res: Response) => {
@@ -188,4 +167,4 @@ if (process.env.NODE_ENV === 'production') {
 	app.listen(port);
 	// eslint-disable-next-line no-console
 	console.log(`Started production server on port ${port}\nready`);
-}
+};

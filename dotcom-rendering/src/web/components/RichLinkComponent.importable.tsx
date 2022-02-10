@@ -1,10 +1,10 @@
-import { RichLink, RichLinkImageData } from '@root/src/web/components/RichLink';
-import { DefaultRichLink } from '@root/src/web/components/DefaultRichLink';
+import { RichLink, RichLinkImageData } from './RichLink';
+import { DefaultRichLink } from './DefaultRichLink';
 
-import { useApi } from '@root/src/web/lib/useApi';
-import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
-import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { useApi } from '../lib/useApi';
+import { decideDisplay } from '../lib/decideDisplay';
+import { decideDesign } from '../lib/decideDesign';
+import { decideTheme } from '../lib/decideTheme';
 
 type Props = {
 	element: RichLinkBlockElement;

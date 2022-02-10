@@ -15,7 +15,7 @@ module.exports = (on, config) => {
 
 	const webpackConfig = webpackPreprocessor.defaultOptions;
 	webpackConfig.webpackOptions.module.rules[0].exclude =
-		require('../../scripts/webpack/browser').babelExclude;
+		require('../../scripts/webpack/webpack.config.browser').babelExclude;
 
 	on('file:preprocessor', webpackPreprocessor(webpackConfig));
 	return config;

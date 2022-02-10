@@ -22,7 +22,7 @@ import {
 } from '@guardian/source-foundations';
 
 // Here is the one place where we use `pillarPalette`
-import { pillarPalette_DO_NOT_USE as pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
@@ -30,8 +30,6 @@ const BLACK = neutral[7];
 const blogsGrayBackgroundPalette = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-		case ArticlePillar.Lifestyle:
-		case ArticlePillar.Sport:
 			return pillarPalette[format.theme].main;
 		default:
 			return pillarPalette[format.theme].dark;
@@ -204,6 +202,25 @@ const textSyndicationButton = (format: ArticleFormat): string => {
 };
 
 const textArticleLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.DeadBlog) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[400];
+			case ArticlePillar.Culture:
+				return culture[350];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return BLACK;
+			case ArticleSpecial.SpecialReport:
+				return specialReport[400];
+		}
+	}
+
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[400];
@@ -234,6 +251,17 @@ const textPullQuote = (format: ArticleFormat): string => {
 
 const textStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+	if (format.design === ArticleDesign.DeadBlog) {
+		switch (format.theme) {
+			case ArticlePillar.Opinion:
+				return opinion[200];
+			case ArticlePillar.News:
+				return news[400];
+			default:
+				return pillarPalette[format.theme].dark;
+		}
+	}
+
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[400];
 	switch (format.theme) {
@@ -251,6 +279,25 @@ const textBranding = (format: ArticleFormat): string => {
 };
 
 const textArticleLinkHover = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.DeadBlog) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[400];
+			case ArticlePillar.Culture:
+				return culture[350];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return BLACK;
+			case ArticleSpecial.SpecialReport:
+				return specialReport[100];
+		}
+	}
+
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
@@ -569,9 +616,29 @@ const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
 };
 
 const fillShareIcon = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.DeadBlog) {
+		switch (format.theme) {
+			case ArticlePillar.Culture:
+				return culture[350];
+			case ArticlePillar.News:
+				return news[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return BLACK;
+			case ArticleSpecial.SpecialReport:
+				return specialReport[300];
+		}
+	}
+
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+
 	return pillarPalette[format.theme].main;
 };
 
@@ -670,6 +737,25 @@ const borderSubNav = (format: ArticleFormat): string => {
 };
 
 const borderLiveBlock = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.DeadBlog) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[400];
+			case ArticlePillar.Culture:
+				return culture[350];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return labs[400];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[400];
+		}
+	}
+
 	return pillarPalette[format.theme].main;
 };
 
@@ -731,7 +817,22 @@ const hoverHeadlineByline = (format: ArticleFormat): string => {
 
 const textRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
-		return pillarPalette[format.theme].main;
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[400];
+			case ArticlePillar.Culture:
+				return culture[350];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[300];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return BLACK;
+			case ArticleSpecial.SpecialReport:
+				return specialReport[400];
+		}
 	}
 	return pillarPalette[ArticlePillar.News][400];
 };
@@ -749,7 +850,22 @@ const hoverStandfirstLink = (format: ArticleFormat): string => {
 
 const borderRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
-		return pillarPalette[format.theme].main;
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[400];
+			case ArticlePillar.Culture:
+				return culture[350];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[300];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return labs[400];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[400];
+		}
 	}
 	return pillarPalette[ArticlePillar.News][400];
 };
@@ -781,7 +897,22 @@ const backgroundRichLink: (format: ArticleFormat) => string = (format) => {
 
 const fillRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
-		return pillarPalette[format.theme].main;
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[400];
+			case ArticlePillar.Culture:
+				return culture[350];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[300];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return labs[400];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[400];
+		}
 	}
 	return pillarPalette[ArticlePillar.News][400];
 };

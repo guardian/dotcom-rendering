@@ -3,8 +3,7 @@
 import { css } from '@emotion/react';
 import { remSpace, text, textSans } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
-import type { EmailSignup, Generic, TikTok } from 'embed';
-import { EmbedKind } from 'embed';
+import type { Generic, TikTok } from 'embed';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
@@ -26,7 +25,7 @@ const captionStyles = css`
 `;
 
 interface Props {
-	embed: Generic | EmailSignup | TikTok;
+	embed: Generic | TikTok;
 }
 
 const GenericEmbed: FC<Props> = ({ embed }) => (
@@ -36,9 +35,6 @@ const GenericEmbed: FC<Props> = ({ embed }) => (
 			title={withDefault('Embed')(embed.alt)}
 			// Prevents scrollbars: covers body margin and random extra 6px
 			height={embed.height + 22}
-			className={
-				embed.kind === EmbedKind.EmailSignup ? 'js-email-signup' : ''
-			}
 		/>
 		{maybeRender(embed.alt, (alt) => (
 			<figcaption css={captionStyles}>{alt}</figcaption>

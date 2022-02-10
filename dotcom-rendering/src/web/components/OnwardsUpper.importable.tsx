@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 
-import { joinUrl } from '@root/src/lib/joinUrl';
-import { ElementContainer } from '@root/src/web/components/ElementContainer';
 import { ArticlePillar } from '@guardian/libs';
+import { joinUrl } from '../../lib/joinUrl';
+import { ElementContainer } from './ElementContainer';
 
 import { OnwardsData } from './OnwardsData';
 import { Carousel } from './Carousel';

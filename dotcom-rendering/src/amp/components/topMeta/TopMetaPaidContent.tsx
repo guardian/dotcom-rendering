@@ -3,15 +3,15 @@ import { css } from '@emotion/react';
 
 import { neutral, text, textSans, body } from '@guardian/source-foundations';
 
-import { ArticleModel } from '@root/src/amp/types/ArticleModel';
-import { MainMedia } from '@root/src/amp/components/MainMedia';
-import { Byline } from '@root/src/amp/components/topMeta/Byline';
-import { TopMetaExtras } from '@root/src/amp/components/topMeta/TopMetaExtras';
-import { Standfirst } from '@root/src/amp/components/topMeta/Standfirst';
-import { PaidForBand } from '@root/src/amp/components/topMeta/PaidForBand';
+import { ArticleModel } from '../../types/ArticleModel';
+import { MainMedia } from '../MainMedia';
+import { Byline } from './Byline';
+import { TopMetaExtras } from './TopMetaExtras';
+import { Standfirst } from './Standfirst';
+import { PaidForBand } from './PaidForBand';
 
-import { getSharingUrls } from '@root/src/lib/sharing-urls';
-import { getAgeWarning } from '@root/src/lib/age-warning';
+import { getSharingUrls } from '../../../lib/sharing-urls';
+import { getAgeWarning } from '../../../lib/age-warning';
 import { BrandingRegionContainer } from './Branding';
 
 const headerStyle = css`

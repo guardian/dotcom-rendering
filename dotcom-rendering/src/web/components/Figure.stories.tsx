@@ -2,15 +2,14 @@
 
 import { css } from '@emotion/react';
 
-import { Flex } from '@root/src/web/components/Flex';
-import { RightColumn } from '@root/src/web/components/RightColumn';
-import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
-import { LeftColumn } from '@frontend/web/components/LeftColumn';
-import { TextBlockComponent } from '@frontend/web/components/TextBlockComponent';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
-
 import { breakpoints } from '@guardian/source-foundations';
+import { Flex } from './Flex';
+import { RightColumn } from './RightColumn';
+import { ArticleContainer } from './ArticleContainer';
+import { ElementContainer } from './ElementContainer';
+import { LeftColumn } from './LeftColumn';
+import { TextBlockComponent } from './TextBlockComponent';
 
 import { Figure } from './Figure';
 

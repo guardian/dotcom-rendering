@@ -97,13 +97,16 @@ const liveBlogPadding = css`
 const toggleOverrideStyles = css`
 	padding-right: ${remSpace[1]};
 
+	button {
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
+
 	${until.desktop} {
+		color: ${neutral[100]};
+
 		button[aria-checked='false'] {
 			background-color: rgba(255, 255, 255, 0.5);
-		}
-
-		label {
-			color: ${neutral[100]};
 		}
 	}
 `;

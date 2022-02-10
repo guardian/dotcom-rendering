@@ -2,7 +2,7 @@
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { ClassNames } from '@emotion/react';
 
-import { unescapeData } from '@root/src/lib/escapeData';
+import { unescapeData } from '../../lib/escapeData';
 
 // Ideally we want to want to avoid an unnecessary 'span' wrapper,
 // which also will cause issues with ads (spacefinder rules). React

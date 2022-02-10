@@ -4,10 +4,10 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
+import { ElementContainer } from './ElementContainer';
 
-import { LinkHeadline } from '@frontend/web/components/LinkHeadline';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { LinkHeadline } from './LinkHeadline';
+import { decidePalette } from '../lib/decidePalette';
 
 export default {
 	component: LinkHeadline,

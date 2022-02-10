@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
-import { NumberedList } from '@root/fixtures/generated/articles/NumberedList';
-import { enhanceInteractiveContentsElements } from '@root/src/model/enhance-interactive-contents-elements';
+import { NumberedList } from '../../../fixtures/generated/articles/NumberedList';
+import { enhanceInteractiveContentsElements } from '../../model/enhance-interactive-contents-elements';
 
 import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent';
 

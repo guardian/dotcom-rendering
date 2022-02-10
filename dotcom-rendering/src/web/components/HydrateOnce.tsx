@@ -1,7 +1,7 @@
 import { useState, SetStateAction } from 'react';
 import ReactDOM from 'react-dom';
 
-import { initPerf } from '@root/src/web/browser/initPerf';
+import { initPerf } from '../browser/initPerf';
 
 type Props = {
 	rootId: string;

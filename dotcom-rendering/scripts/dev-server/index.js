@@ -30,7 +30,7 @@ function ampifyUrl(url) {
 }
 
 const go = () => {
-	const webpackConfig = require('../webpack/frontend');
+	const webpackConfig = require('../webpack/webpack.config');
 	const compiler = webpack(webpackConfig);
 
 	const app = express();
@@ -207,9 +207,7 @@ const go = () => {
 	);
 
 	app.get('/', (req, res) => {
-		res.sendFile(
-			path.join(__dirname, '..', 'frontend', 'landing', 'index.html'),
-		);
+		res.sendFile(path.join(__dirname, 'index.html'));
 	});
 
 	app.get('*', (req, res) => {

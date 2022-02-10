@@ -9,7 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 
-import { Score } from '@frontend/web/components/Score';
+import { Score } from './Score';
 
 type Props = {
 	homeTeam: TeamType;

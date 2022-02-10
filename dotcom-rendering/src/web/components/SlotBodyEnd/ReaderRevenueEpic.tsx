@@ -1,23 +1,6 @@
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
-import {
-	isRecurringContributor,
-	getLastOneOffContributionTimestamp,
-	shouldHideSupportMessaging,
-	hasCmpConsentForArticleCount,
-	MODULES_VERSION,
-	hasOptedOutOfArticleCount,
-	lazyFetchEmailWithTimeout,
-	hasCmpConsentForBrowserId,
-} from '@root/src/web/lib/contributions';
-import { CanShowResult } from '@root/src/web/lib/messagePicker';
-import { initPerf } from '@root/src/web/browser/initPerf';
-import {
-	OphanComponentEvent,
-	submitComponentEvent,
-} from '@root/src/web/browser/ophan/ophan';
-import { setAutomat } from '@root/src/web/lib/setAutomat';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import {
 	ModuleDataResponse,
@@ -27,6 +10,23 @@ import {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie, storage } from '@guardian/libs';
+import {
+	isRecurringContributor,
+	getLastOneOffContributionTimestamp,
+	shouldHideSupportMessaging,
+	hasCmpConsentForArticleCount,
+	MODULES_VERSION,
+	hasOptedOutOfArticleCount,
+	lazyFetchEmailWithTimeout,
+	hasCmpConsentForBrowserId,
+} from '../../lib/contributions';
+import { CanShowResult } from '../../lib/messagePicker';
+import { initPerf } from '../../browser/initPerf';
+import {
+	OphanComponentEvent,
+	submitComponentEvent,
+} from '../../browser/ophan/ophan';
+import { setAutomat } from '../../lib/setAutomat';
 
 export type EpicConfig = {
 	module: ModuleData;

@@ -1,4 +1,4 @@
-import { joinUrl } from '@root/src/lib/joinUrl';
+import { joinUrl } from '../../lib/joinUrl';
 
 // GET http://discussion.guardianapis.com/discussion-api/comment/3519111/context
 // {

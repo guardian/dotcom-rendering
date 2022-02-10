@@ -1,11 +1,11 @@
-import { Flex } from '@frontend/web/components/Flex';
-import { LeftColumn } from '@frontend/web/components/LeftColumn';
-import { Hide } from '@frontend/web/components/Hide';
-
-import { useComments } from '@root/src/web/lib/useComments';
-import { formatAttrString } from '@frontend/web/lib/formatAttrString';
-
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { Flex } from './Flex';
+import { LeftColumn } from './LeftColumn';
+import { Hide } from './Hide';
+
+import { useComments } from '../lib/useComments';
+import { formatAttrString } from '../lib/formatAttrString';
+
 import { ContainerTitle } from './ContainerTitle';
 import { OnwardsContainer } from './OnwardsContainer';
 import { MoreThanFive } from './MoreThanFive';

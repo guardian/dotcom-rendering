@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 
-import { labelStyles, carrotAdStyles } from '@root/src/web/components/AdSlot';
+import { labelStyles, carrotAdStyles } from './AdSlot';
 
 type Props = {
 	format: ArticleFormat;
@@ -50,6 +50,7 @@ const articleWrapper = css`
 const articleAdStyles = css`
 	.ad-slot {
 		@media print {
+			/* stylelint-disable-next-line declaration-no-important */
 			display: none !important;
 		}
 		&.ad-slot--collapse {

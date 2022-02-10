@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { until } from '@guardian/source-foundations';
 
-import { verticalDivider } from '@root/src/web/lib/verticalDivider';
+import { verticalDivider } from '../../../lib/verticalDivider';
 
 const ulStyles = (direction?: 'row' | 'column') => css`
 	position: relative;

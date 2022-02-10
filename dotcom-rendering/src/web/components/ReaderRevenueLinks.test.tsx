@@ -1,13 +1,13 @@
 import { render, wait } from '@testing-library/react';
-import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '@root/src/web/lib/contributions';
 import { ABProvider } from '@guardian/ab-react';
+import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
 const shouldHideSupportMessaging: {
 	[key: string]: any;
 } = shouldHideSupportMessaging_;
 
-jest.mock('@root/src/web/lib/contributions', () => ({
+jest.mock('../lib/contributions', () => ({
 	shouldHideSupportMessaging: jest.fn(() => true),
 }));
 jest.mock('@guardian/libs', () => ({

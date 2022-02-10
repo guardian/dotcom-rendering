@@ -1,5 +1,9 @@
-import { WindowGuardianConfig } from '@root/src/model/window-guardian';
-import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
+import type {
+	Callback,
+	CMP,
+} from '@guardian/consent-management-platform/dist/types';
+import { WindowGuardianConfig } from './src/model/window-guardian';
+import { ReaderRevenueDevUtils } from './src/web/lib/readerRevenueDevUtils';
 
 declare global {
 	/* ~ Here, declare things that go in the global namespace, or augment
@@ -58,6 +62,12 @@ declare global {
 		 */
 		guardianPolyfilledImport: (url: string) => Promise<any>; // can't be nested beyond top level
 		Cypress: any; // for checking if running within cypress
+		guCmpHotFix: {
+			initialised?: boolean;
+			cmp?: CMP;
+			onConsentChange?: (fn: Callback) => void;
+			getConsentFor?: (fn: Callback) => void;
+		};
 	}
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

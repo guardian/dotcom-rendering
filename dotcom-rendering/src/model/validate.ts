@@ -1,7 +1,7 @@
 import Ajv, { Options } from 'ajv';
 import addFormats from 'ajv-formats';
 
-import schema from '@root/src/model/json-schema.json';
+import schema from './json-schema.json';
 
 const options: Options = {
 	verbose: false,
