@@ -15,6 +15,8 @@ const dist = path.resolve(__dirname, '..', '..', 'dist');
 
 const sessionId = uuidv4();
 
+let builds = 0;
+
 const commonConfigs = ({ platform }) => ({
 	name: platform,
 	mode: process.env.NODE_ENV,
@@ -61,6 +63,18 @@ const commonConfigs = ({ platform }) => ({
 		DEV &&
 			new WebpackMessages({
 				name: platform,
+				logger: (message) => {
+					// distinguish between initial and subsequent (re)builds in console output
+					if (builds < module.exports.length * 2) {
+						message = message
+							.replace('Building', 'Building initial')
+							.replace('Completed', 'Completed initial');
+					} else {
+						message = message.replace('Building', 'Rebuilding');
+					}
+					console.log(message);
+					builds += 1;
+				},
 			}),
 	].filter(Boolean),
 	infrastructureLogging: {
