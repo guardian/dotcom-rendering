@@ -21,6 +21,10 @@ type ConfigParam = {
 	platform: 'server' | 'browser' | 'browser.legacy';
 };
 
+const isWebpackConfiguration = (
+	conf: false | Configuration,
+): conf is Configuration => conf !== false;
+
 const commonConfigs = ({ platform }: ConfigParam): Configuration => ({
 	name: platform,
 	mode: PROD ? 'production' : 'development',
