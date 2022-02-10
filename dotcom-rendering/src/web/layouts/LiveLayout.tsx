@@ -378,7 +378,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	// Set a default pagination if it is missing from CAPI
-	const pagination: Pagination | false = CAPI.pagination ?? {
+	const pagination: Pagination = CAPI.pagination ?? {
 		currentPage: 1,
 		totalPages: 1,
 	};
