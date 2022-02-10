@@ -14,7 +14,7 @@ describe('Commercial E2E tests', function () {
 		cy.log(`Opening A long read`);
 		cy.visit(url);
 
-		cy.scrollTo('bottom', { duration: 2500 });
+		cy.scrollTo('bottom', { duration: 500 });
 
 		// We are excluding survey slot as it only appears via cypress tests and only on frontend.
 		// Also, we are waiting *up to* 30 seconds here to give the ads time to load. In most
@@ -30,7 +30,12 @@ describe('Commercial E2E tests', function () {
 			});
 
 		cy.get(`[data-name="right"]`).should('have.length', 1);
+		cy.scrollTo('bottom');
 		cy.get(`[data-name="merchandising-high"]`).should('have.length', 1);
+		// Wait for hydration
+		cy.get('gu-island[name=MostViewedFooter]')
+			.first()
+			.should('have.attr', 'data-gu-ready', 'true');
 		cy.get(`[data-name="mostpop"]`).should('have.length', 1);
 		cy.get(`[data-name="merchandising"]`).should('have.length', 1);
 	};
