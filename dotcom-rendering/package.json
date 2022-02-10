@@ -11,6 +11,7 @@
       "html-minifier/**"
     ]
   },
+	"type": "module",
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx && yarn lint-cypress",
     "lint-cypress": "eslint ./cypress",
