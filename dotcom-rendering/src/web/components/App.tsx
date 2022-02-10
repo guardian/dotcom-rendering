@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 
-import { FocusStyleManager } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
@@ -80,13 +79,6 @@ export const App = ({ CAPI }: Props) => {
 			),
 		);
 	}, [CAPI.pageId, CAPI.config.keywordIds]);
-
-	// Ensure the focus state of any buttons/inputs in any of the Source
-	// components are only applied when navigating via keyboard.
-	// READ: https://www.theguardian.design/2a1e5182b/p/6691bb-accessibility/t/32e9fb
-	useEffect(() => {
-		FocusStyleManager.onlyShowFocusOnTabs();
-	}, []);
 
 	useEffect(() => {
 		// Used internally only, so only import each function on demand
