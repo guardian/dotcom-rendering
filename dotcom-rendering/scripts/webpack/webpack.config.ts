@@ -1,6 +1,6 @@
 import path from 'path';
 import type { Configuration } from 'webpack';
-import { IgnorePlugin, DefinePlugin } from 'webpack';
+import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 // @ts-expect-error -- there’s no type definition, yet
@@ -45,7 +45,7 @@ const commonConfigs = ({ platform }: ConfigParam): Configuration => ({
 		symlinks: false,
 	},
 	plugins: [
-		new DefinePlugin({
+		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 		new FilterWarningsPlugin({
@@ -57,7 +57,7 @@ const commonConfigs = ({ platform }: ConfigParam): Configuration => ({
 		}),
 		// Matching modules specified in this regex will not be imported during the webpack build
 		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.
-		new IgnorePlugin({
+		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
 		PROD &&
