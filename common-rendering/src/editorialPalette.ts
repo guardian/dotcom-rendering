@@ -9,6 +9,7 @@ import {
   specialReport,
   sport,
   labs,
+  brandAlt,
 } from "@guardian/source-foundations";
 import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar, ArticleSpecial } from "@guardian/libs";
 
@@ -28,6 +29,7 @@ interface Palette {
 		headlineDark: Colour;
 		keyEventsInline: Colour;
 		keyEventsLeftColumn: Colour;
+		kicker: Colour;
 		linkDark: Colour;
 		standfirst: Colour;
 		standfirstDark: Colour;
@@ -345,6 +347,7 @@ const textStandfirst = ({ design }: ArticleFormat): Colour => {
 	}
 };
 
+
 const textStandfirstDark = ({ design }: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
@@ -413,6 +416,72 @@ const textStandfirstLink = (format: ArticleFormat): Colour => {
 		}
 	}
 }
+
+const textKicker = (format: ArticleFormat): Colour => {
+	if (
+		format.theme === ArticleSpecial.SpecialReport &&
+		(format.design === ArticleDesign.Comment ||
+			format.design === ArticleDesign.Letter)
+	)
+		return opinion[550];
+
+	if (format.theme === ArticleSpecial.SpecialReport) {
+		return brandAlt[400];
+	}
+
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[600];
+				case ArticlePillar.Sport:
+					return sport[600];
+				case ArticlePillar.Opinion:
+					return neutral[100];
+				case ArticlePillar.Culture:
+					return culture[600];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticleSpecial.Labs:
+				default:
+					return neutral[0];
+			}
+		case ArticleDesign.Media:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[600];
+				case ArticlePillar.Sport:
+					return sport[600];
+				case ArticlePillar.Opinion:
+					return opinion[550];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticleSpecial.Labs:
+					return labs[400];
+				default:
+					return news[600];
+			}
+		default:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Sport:
+					return sport[400];
+				case ArticlePillar.Opinion:
+					return opinion[300];
+				case ArticlePillar.Culture:
+					return culture[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[400];
+				case ArticleSpecial.Labs:
+					return labs[400];
+				default:
+					return news[400];
+			}
+	}
+};
 
 const textSeriesTitle = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
@@ -702,6 +771,7 @@ const text = {
 	headlineDark: textHeadlineDark,
 	keyEventsInline: textKeyEventsInline,
 	keyEventsLeftColumn: textKeyEventsLeftColumn,
+	kicker: textKicker,
 	linkDark: textLinkDark,
 	standfirst: textStandfirst,
 	standfirstDark: textStandfirstDark,
@@ -743,6 +813,7 @@ const palette = (format: ArticleFormat): Palette => ({
 		headlineDark: text.headlineDark(format),
 		keyEventsInline: text.keyEventsInline(format),
 		keyEventsLeftColumn: text.keyEventsLeftColumn(format),
+		kicker: text.kicker(format),
 		linkDark: text.linkDark(format),
 		standfirst: text.standfirst(format),
 		standfirstDark: text.standfirstDark(format),
