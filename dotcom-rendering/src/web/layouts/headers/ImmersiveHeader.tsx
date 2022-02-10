@@ -16,13 +16,14 @@ import { ElementContainer } from '../../components/ElementContainer';
 import { Nav } from '../../components/Nav/Nav';
 import { Caption } from '../../components/Caption';
 import { ContainerLayout } from '../../components/ContainerLayout';
-import { LabsHeader } from '../../components/LabsHeader';
+import { LabsHeader } from '../../components/LabsHeader.importable';
 
 import { buildAdTargeting } from '../../../lib/ad-targeting';
 import { getZIndex } from '../../lib/getZIndex';
 
 import { Stuck } from '../lib/stickiness';
 import { getCurrentPillar } from '../../lib/layoutHelpers';
+import { Island } from '../../components/Island';
 
 const hasMainMediaStyles = css`
 	height: 100vh;
@@ -196,7 +197,9 @@ export const ImmersiveHeader = ({
 								borderColour={border.primary}
 								sectionId="labs-header"
 							>
-								<LabsHeader />
+								<Island deferUntil="idle">
+									<LabsHeader />
+								</Island>
 							</ElementContainer>
 						</Stuck>
 					)}
