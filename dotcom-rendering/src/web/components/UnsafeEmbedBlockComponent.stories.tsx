@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 import { embedIframe } from '../browser/embedIframe/embedIframe';
 
-import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
 
 export default {
 	component: UnsafeEmbedBlockComponent,

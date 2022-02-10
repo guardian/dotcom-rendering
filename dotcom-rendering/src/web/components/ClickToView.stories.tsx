@@ -8,8 +8,8 @@ import { decidePalette } from '../lib/decidePalette';
 
 import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
-import { EmbedBlockComponent } from './EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
+import { EmbedBlockComponent } from './EmbedBlockComponent.importable';
+import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
 import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
