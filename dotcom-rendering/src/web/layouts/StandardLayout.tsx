@@ -620,6 +620,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										CAPI.config.discussionApiUrl
 									}
 									shortUrlId={CAPI.config.shortUrlId}
+									ajaxUrl={CAPI.config.ajaxUrl}
+									showShareCount={
+										CAPI.config.switches.serverShareCounts
+									}
 								/>
 							</div>
 						</GridItem>

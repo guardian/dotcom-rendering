@@ -10,7 +10,6 @@ import {
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { ShareCount } from './ShareCount';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { ContributionSlot } from './ContributionSlot';
@@ -238,15 +237,6 @@ export const App = ({ CAPI }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			{CAPI.config.switches.serverShareCounts && (
-				<Portal rootId="share-count-root">
-					<ShareCount
-						ajaxUrl={CAPI.config.ajaxUrl}
-						pageId={CAPI.pageId}
-						format={format}
-					/>
-				</Portal>
-			)}
 			{youTubeAtoms.map((youTubeAtom) => (
 				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
