@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const webpack = require('webpack');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const chalk = require('chalk');
-const GuStatsReportPlugin = require('./gu-stats-report-plugin');
+const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
@@ -16,11 +13,7 @@ const generateName = (isLegacyJS) => {
 };
 
 const scriptPath = (dcrPackage) =>
-	[
-		`./src/web/browser/${dcrPackage}/init.ts`,
-		DEV &&
-			'webpack-hot-middleware/client?name=browser&overlayWarnings=true',
-	].filter(Boolean);
+	[`./src/web/browser/${dcrPackage}/init.ts`].filter(Boolean);
 
 module.exports = ({ isLegacyJS, sessionId }) => ({
 	entry: {
@@ -48,20 +41,6 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		splitChunks: { cacheGroups: { default: false } },
 	},
 	plugins: [
-		DEV && new webpack.HotModuleReplacementPlugin(),
-		DEV &&
-			new FriendlyErrorsWebpackPlugin({
-				compilationSuccessInfo: {
-					messages: [
-						isLegacyJS
-							? 'Legacy client build complete'
-							: 'Client build complete',
-						`DEV server available at: ${chalk.blue.underline(
-							'http://localhost:3030',
-						)}`,
-					],
-				},
-			}),
 		DEV &&
 			new GuStatsReportPlugin({
 				buildName: isLegacyJS ? 'legacy-client' : 'client',
@@ -69,8 +48,6 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 				team: 'dotcom',
 				sessionId,
 			}),
-		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
-		// [...].filter(Boolean) why it is used
 	].filter(Boolean),
 	module: {
 		rules: [

@@ -6,8 +6,10 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const { v4: uuidv4 } = require('uuid');
+const WebpackMessages = require('webpack-messages');
 
 const PROD = process.env.NODE_ENV === 'production';
+const DEV = process.env.NODE_ENV === 'development';
 const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
 
@@ -19,7 +21,7 @@ const commonConfigs = ({ platform }) => ({
 	output: {
 		path: dist,
 	},
-	stats: 'errors-only',
+	stats: DEV ? 'errors-only' : 'normal',
 	devtool:
 		process.env.NODE_ENV === 'production'
 			? 'source-map'
@@ -56,9 +58,14 @@ const commonConfigs = ({ platform }) => ({
 				openAnalyzer: false,
 				logLevel: 'warn',
 			}),
-		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
-		// [...].filter(Boolean) why it is used
+		DEV &&
+			new WebpackMessages({
+				name: platform,
+			}),
 	].filter(Boolean),
+	infrastructureLogging: {
+		level: PROD ? 'info' : 'warn',
+	},
 });
 
 module.exports = [
@@ -68,6 +75,7 @@ module.exports = [
 			platform: 'server',
 		}),
 		require(`./webpack.config.server`)({ sessionId }),
+		DEV ? require(`./dev/webpack.config.dev-server`) : {},
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compliation
