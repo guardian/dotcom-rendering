@@ -82,6 +82,8 @@ export const ArticleStory = () => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
 			/>
 		</Container>
 	);
@@ -130,6 +132,8 @@ export const BrandingStory = () => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
 			/>
 		</Container>
 	);
@@ -163,6 +167,8 @@ export const FeatureStory = () => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
 			/>
 		</Container>
 	);
@@ -195,6 +201,8 @@ export const SpecialReportStory = () => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
 			/>
 		</Container>
 	);
@@ -227,6 +235,8 @@ export const CommentStory = () => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
 			/>
 		</Container>
 	);
@@ -259,6 +269,8 @@ export const InterviewStory = () => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
 			/>
 		</Container>
 	);
@@ -291,6 +303,8 @@ export const ImmersiveStory = () => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
 			/>
 		</Container>
 	);
@@ -323,6 +337,8 @@ export const TwoContributorsStory = () => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
 			/>
 		</Container>
 	);
@@ -353,6 +369,8 @@ export const DeadBlogStory = () => {
 						isCommentable={false}
 						discussionApiUrl=""
 						shortUrlId=""
+						ajaxUrl=""
+						showShareCount={true}
 					/>
 				</Container>
 			))}

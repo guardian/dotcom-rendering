@@ -56,6 +56,7 @@ import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooter } from '../components/MostViewedFooter.importable';
+import { GetMatchNav } from '../components/GetMatchNav.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -381,11 +382,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-	const showComments = CAPI.isCommentable;
-
-	const showMatchTabs = CAPI.matchUrl;
-
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
+
+	// Set a default pagination if it is missing from CAPI
+	const pagination: Pagination = CAPI.pagination ?? {
+		currentPage: 1,
+		totalPages: 1,
+	};
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 	return (
@@ -522,11 +525,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 							</Hide>
 
-							<Placeholder
-								shouldShimmer={false}
-								rootId="match-nav"
-								height={230}
-							/>
+							<Island
+								deferUntil="visible"
+								clientOnly={true}
+								placeholderHeight={230}
+							>
+								<GetMatchNav matchUrl={CAPI.matchUrl} />
+							</Island>
 						</ContainerLayout>
 					) : (
 						<ElementContainer
@@ -649,6 +654,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												CAPI.config.discussionApiUrl
 											}
 											shortUrlId={CAPI.config.shortUrlId}
+											ajaxUrl={CAPI.config.ajaxUrl}
+											showShareCount={
+												CAPI.config.switches
+													.serverShareCounts
+											}
 										/>
 									</div>
 								</Hide>
@@ -687,12 +697,10 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="matchtabs" element="aside">
 									<div css={maxWidth}>
-										{CAPI.matchUrl && showMatchTabs && (
-											<Placeholder
-												rootId="match-tabs"
-												height={40}
-											/>
-										)}
+										<Placeholder
+											rootId="match-tabs"
+											height={40}
+										/>
 									</div>
 								</GridItem>
 								<GridItem area="media">
@@ -754,6 +762,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												shortUrlId={
 													CAPI.config.shortUrlId
 												}
+												ajaxUrl={CAPI.config.ajaxUrl}
+												showShareCount={
+													CAPI.config.switches
+														.serverShareCounts
+												}
 											/>
 										</div>
 									</Hide>
@@ -792,33 +805,21 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="body">
 									<ArticleContainer format={format}>
-										{CAPI.pagination &&
-											CAPI.pagination.currentPage !==
-												1 && (
-												<Pagination
-													currentPage={
-														CAPI.pagination
-															?.currentPage || 1
-													}
-													totalPages={
-														CAPI.pagination
-															?.totalPages || 1
-													}
-													newest={
-														CAPI.pagination?.newest
-													}
-													oldest={
-														CAPI.pagination?.oldest
-													}
-													newer={
-														CAPI.pagination?.newer
-													}
-													older={
-														CAPI.pagination?.older
-													}
-													format={format}
-												/>
-											)}
+										{pagination.currentPage !== 1 && (
+											<Pagination
+												currentPage={
+													pagination.currentPage
+												}
+												totalPages={
+													pagination.totalPages
+												}
+												newest={pagination.newest}
+												oldest={pagination.oldest}
+												newer={pagination.newer}
+												older={pagination.older}
+												format={format}
+											/>
+										)}
 										<ArticleBody
 											format={format}
 											palette={palette}
@@ -829,32 +830,21 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											webTitle={CAPI.webTitle}
 											ajaxUrl={CAPI.config.ajaxUrl}
 										/>
-										{CAPI.pagination &&
-											CAPI.pagination.totalPages > 1 && (
-												<Pagination
-													currentPage={
-														CAPI.pagination
-															?.currentPage || 1
-													}
-													totalPages={
-														CAPI.pagination
-															?.totalPages || 1
-													}
-													newest={
-														CAPI.pagination?.newest
-													}
-													oldest={
-														CAPI.pagination?.oldest
-													}
-													newer={
-														CAPI.pagination?.newer
-													}
-													older={
-														CAPI.pagination?.older
-													}
-													format={format}
-												/>
-											)}
+										{pagination.totalPages > 1 && (
+											<Pagination
+												currentPage={
+													pagination.currentPage
+												}
+												totalPages={
+													pagination.totalPages
+												}
+												newest={pagination.newest}
+												oldest={pagination.oldest}
+												newer={pagination.newer}
+												older={pagination.older}
+												format={format}
+											/>
+										)}
 										{showBodyEndSlot && (
 											<div id="slot-body-end" />
 										)}
@@ -981,6 +971,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												shortUrlId={
 													CAPI.config.shortUrlId
 												}
+												ajaxUrl={CAPI.config.ajaxUrl}
+												showShareCount={
+													CAPI.config.switches
+														.serverShareCounts
+												}
 											/>
 										</div>
 									</Hide>
@@ -1022,39 +1017,26 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												</Hide>
 											</GridItem>
 											<ArticleContainer format={format}>
-												{CAPI.pagination &&
-													CAPI.pagination
-														.currentPage !== 1 && (
-														<Pagination
-															currentPage={
-																CAPI.pagination
-																	?.currentPage ||
-																1
-															}
-															totalPages={
-																CAPI.pagination
-																	?.totalPages ||
-																1
-															}
-															newest={
-																CAPI.pagination
-																	?.newest
-															}
-															oldest={
-																CAPI.pagination
-																	?.oldest
-															}
-															newer={
-																CAPI.pagination
-																	?.newer
-															}
-															older={
-																CAPI.pagination
-																	?.older
-															}
-															format={format}
-														/>
-													)}
+												{pagination.currentPage !==
+													1 && (
+													<Pagination
+														currentPage={
+															pagination.currentPage
+														}
+														totalPages={
+															pagination.totalPages
+														}
+														newest={
+															pagination.newest
+														}
+														oldest={
+															pagination.oldest
+														}
+														newer={pagination.newer}
+														older={pagination.older}
+														format={format}
+													/>
+												)}
 												<ArticleBody
 													format={format}
 													palette={palette}
@@ -1067,39 +1049,25 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 														CAPI.config.ajaxUrl
 													}
 												/>
-												{CAPI.pagination &&
-													CAPI.pagination.totalPages >
-														1 && (
-														<Pagination
-															currentPage={
-																CAPI.pagination
-																	?.currentPage ||
-																1
-															}
-															totalPages={
-																CAPI.pagination
-																	?.totalPages ||
-																1
-															}
-															newest={
-																CAPI.pagination
-																	?.newest
-															}
-															oldest={
-																CAPI.pagination
-																	?.oldest
-															}
-															newer={
-																CAPI.pagination
-																	?.newer
-															}
-															older={
-																CAPI.pagination
-																	?.older
-															}
-															format={format}
-														/>
-													)}
+												{pagination.totalPages > 1 && (
+													<Pagination
+														currentPage={
+															pagination.currentPage
+														}
+														totalPages={
+															pagination.totalPages
+														}
+														newest={
+															pagination.newest
+														}
+														oldest={
+															pagination.oldest
+														}
+														newer={pagination.newer}
+														older={pagination.older}
+														format={format}
+													/>
+												)}
 												{showBodyEndSlot && (
 													<div id="slot-body-end" />
 												)}
@@ -1212,7 +1180,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</ElementContainer>
 				)}
 
-				{!isPaidContent && showComments && (
+				{!isPaidContent && CAPI.isCommentable && (
 					<ElementContainer
 						sectionId="comments"
 						data-print-layout="hide"

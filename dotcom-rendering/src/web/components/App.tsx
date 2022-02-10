@@ -10,11 +10,9 @@ import {
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { ShareCount } from './ShareCount';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { ContributionSlot } from './ContributionSlot';
-import { GetMatchNav } from './GetMatchNav';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from './SignInGate/SignInGateSelector';
 
@@ -34,7 +32,6 @@ import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { updateIframeHeight } from '../browser/updateIframeHeight';
 import { ClickToView } from './ClickToView';
-import { LabsHeader } from './LabsHeader';
 import { EmbedBlockComponent } from './EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
 
@@ -240,18 +237,6 @@ export const App = ({ CAPI }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			<HydrateOnce rootId="labs-header">
-				<LabsHeader />
-			</HydrateOnce>
-			{CAPI.config.switches.serverShareCounts && (
-				<Portal rootId="share-count-root">
-					<ShareCount
-						ajaxUrl={CAPI.config.ajaxUrl}
-						pageId={CAPI.pageId}
-						format={format}
-					/>
-				</Portal>
-			)}
 			{youTubeAtoms.map((youTubeAtom) => (
 				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
@@ -284,12 +269,6 @@ export const App = ({ CAPI }: Props) => {
 					/>
 				</HydrateInteractiveOnce>
 			))}
-
-			{CAPI.matchUrl && (
-				<Portal rootId="match-nav">
-					<GetMatchNav matchUrl={CAPI.matchUrl} />
-				</Portal>
-			)}
 			{CAPI.matchUrl && (
 				<Portal rootId="match-tabs">
 					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />
