@@ -53,7 +53,7 @@
     "@guardian/discussion-rendering": "^9.1.1",
     "@guardian/libs": "^3.4.1",
     "@guardian/shimport": "^1.0.2",
-    "@guardian/support-dotcom-components": "^1.0.0",
+    "@guardian/support-dotcom-components": "^1.0.1",
     "@hkdobrev/run-if-changed": "^0.3.1",
     "@loadable/component": "^5.14.1",
     "@loadable/server": "^5.14.2",
