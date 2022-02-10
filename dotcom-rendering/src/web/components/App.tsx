@@ -35,7 +35,6 @@ import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { updateIframeHeight } from '../browser/updateIframeHeight';
 import { ClickToView } from './ClickToView';
-import { LabsHeader } from './LabsHeader';
 import { EmbedBlockComponent } from './EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
 
@@ -241,9 +240,6 @@ export const App = ({ CAPI }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			<HydrateOnce rootId="labs-header">
-				<LabsHeader />
-			</HydrateOnce>
 			{CAPI.config.switches.serverShareCounts && (
 				<Portal rootId="share-count-root">
 					<ShareCount

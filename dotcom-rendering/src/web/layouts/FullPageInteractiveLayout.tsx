@@ -21,7 +21,7 @@ import {
 	labelStyles as adLabelStyles,
 	adCollapseStyles,
 } from '../components/AdSlot';
-import { LabsHeader } from '../components/LabsHeader';
+import { LabsHeader } from '../components/LabsHeader.importable';
 
 import { getZIndex } from '../lib/getZIndex';
 
@@ -276,7 +276,9 @@ export const FullPageInteractiveLayout = ({
 							borderColour={border.primary}
 							sectionId="labs-header"
 						>
-							<LabsHeader />
+							<Island deferUntil="idle">
+								<LabsHeader />
+							</Island>
 						</ElementContainer>
 					</Stuck>
 				)}

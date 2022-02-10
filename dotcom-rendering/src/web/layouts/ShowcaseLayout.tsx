@@ -34,7 +34,7 @@ import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionContainer } from '../components/DiscussionContainer.importable';
-import { LabsHeader } from '../components/LabsHeader';
+import { LabsHeader } from '../components/LabsHeader.importable';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
@@ -404,7 +404,9 @@ export const ShowcaseLayout = ({
 							borderColour={border.primary}
 							sectionId="labs-header"
 						>
-							<LabsHeader />
+							<Island deferUntil="idle">
+								<LabsHeader />
+							</Island>
 						</ElementContainer>
 					</Stuck>
 				</>

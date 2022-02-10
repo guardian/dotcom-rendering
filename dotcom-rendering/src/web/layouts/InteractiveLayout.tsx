@@ -38,7 +38,7 @@ import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionContainer } from '../components/DiscussionContainer.importable';
 import { Nav } from '../components/Nav/Nav';
-import { LabsHeader } from '../components/LabsHeader';
+import { LabsHeader } from '../components/LabsHeader.importable';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { getAgeWarning } from '../../lib/age-warning';
@@ -368,7 +368,9 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						borderColour={border.primary}
 						sectionId="labs-header"
 					>
-						<LabsHeader />
+						<Island deferUntil="idle">
+							<LabsHeader />
+						</Island>
 					</ElementContainer>
 				</Stuck>
 			)}
