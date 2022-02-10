@@ -56,6 +56,7 @@ import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooter } from '../components/MostViewedFooter.importable';
+import { GetMatchNav } from '../components/GetMatchNav.importable';
 
 const StandardGrid = ({
 	children,
@@ -496,10 +497,15 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<div css={maxWidth}>
 								{format.design === ArticleDesign.MatchReport &&
 									CAPI.matchUrl && (
-										<Placeholder
-											rootId="match-nav"
-											height={230}
-										/>
+										<Island
+											deferUntil="visible"
+											clientOnly={true}
+											placeholderHeight={230}
+										>
+											<GetMatchNav
+												matchUrl={CAPI.matchUrl}
+											/>
+										</Island>
 									)}
 							</div>
 						</GridItem>

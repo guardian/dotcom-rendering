@@ -14,7 +14,6 @@ import { ShareCount } from './ShareCount';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { ContributionSlot } from './ContributionSlot';
-import { GetMatchNav } from './GetMatchNav';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from './SignInGate/SignInGateSelector';
 
@@ -280,12 +279,6 @@ export const App = ({ CAPI }: Props) => {
 					/>
 				</HydrateInteractiveOnce>
 			))}
-
-			{CAPI.matchUrl && (
-				<Portal rootId="match-nav">
-					<GetMatchNav matchUrl={CAPI.matchUrl} />
-				</Portal>
-			)}
 			{CAPI.matchUrl && (
 				<Portal rootId="match-tabs">
 					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />
