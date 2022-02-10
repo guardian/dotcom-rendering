@@ -14,7 +14,7 @@ describe('Commercial E2E tests', function () {
 		cy.log(`Opening A long read`);
 		cy.visit(url);
 
-		cy.scrollTo('bottom', { duration: 500 });
+		cy.scrollTo('bottom', { duration: 2500 });
 
 		// We are excluding survey slot as it only appears via cypress tests and only on frontend.
 		// Also, we are waiting *up to* 30 seconds here to give the ads time to load. In most
