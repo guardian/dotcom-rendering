@@ -24,7 +24,7 @@ import type {
 } from '@guardian/braze-components/logic';
 import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { DailyArticleCount } from "@root/src/web/lib/dailyArticleCount";
+import { DailyArticleCount } from '@root/src/web/lib/dailyArticleCount';
 import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
@@ -32,9 +32,7 @@ type Props = {
 	asyncWeeklyArticleCount:
 		| Promise<WeeklyArticleHistory | undefined>
 		| undefined;
-	asyncDailyArticleCount:
-		| Promise<DailyArticleCount | undefined>
-		| undefined;
+	asyncDailyArticleCount: Promise<DailyArticleCount | undefined> | undefined;
 	contentType: string;
 	sectionName?: string;
 	section: string;
