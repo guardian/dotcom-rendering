@@ -4,6 +4,8 @@ import { focusHalo } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
+import { CommercialMetrics } from './CommercialMetrics.importable';
+import { Island } from './Island';
 
 type Props = {
 	CAPI: CAPIType;
@@ -33,6 +35,14 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
+			<Island clientOnly={true} deferUntil="idle">
+				<CommercialMetrics
+					enabled={CAPI.config.switches.commercialMetrics}
+					switches={CAPI.config.switches}
+					isSensitive={CAPI.config.isSensitive}
+					isDev={CAPI.config.isDev}
+				/>
+			</Island>
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id="keyevents" label="Skip to key events" />

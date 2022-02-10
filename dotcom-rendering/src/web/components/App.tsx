@@ -40,7 +40,6 @@ import { EmbedBlockComponent } from './EmbedBlockComponent';
 import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
 
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
-import { CommercialMetrics } from './CommercialMetrics';
 import { GetMatchTabs } from './GetMatchTabs';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
 
@@ -230,10 +229,6 @@ export const App = ({ CAPI }: Props) => {
 		//
 		// Note: Both require a 'root' element that needs to be server rendered.
 		<React.StrictMode>
-			{[
-				CAPI.config.switches.commercialMetrics,
-				window.guardian.config?.ophan !== undefined,
-			].every(Boolean) && <CommercialMetrics pageViewId={pageViewId} />}
 			<Portal rootId="reader-revenue-links-header">
 				<ReaderRevenueLinks
 					urls={CAPI.nav.readerRevenueLinks.header}
