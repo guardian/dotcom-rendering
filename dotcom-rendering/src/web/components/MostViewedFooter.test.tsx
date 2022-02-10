@@ -2,16 +2,16 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
-import { useApi as useApi_ } from '../../../lib/useApi';
-import { decidePalette } from '../../../lib/decidePalette';
+import { useApi as useApi_ } from '../lib/useApi';
+import { decidePalette } from '../lib/decidePalette';
 
-import { responseWithTwoTabs, responseWithOneTab } from '../MostViewed.mocks';
+import { responseWithTwoTabs, responseWithOneTab } from './MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useApi: { [key: string]: any } = useApi_;
 
-jest.mock('../../../lib/useApi', () => ({
+jest.mock('../lib/useApi', () => ({
 	useApi: jest.fn(),
 }));
 

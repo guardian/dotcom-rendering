@@ -41,6 +41,7 @@ import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { Island } from '../components/Island';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { MostViewedFooter } from '../components/MostViewedFooter.importable';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -508,10 +509,18 @@ export const ImmersiveLayout = ({
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer
-						sectionId="most-viewed-footer"
-						element="aside"
-					/>
+					<ElementContainer data-print-layout="hide" element="aside">
+						<Island clientOnly={true} deferUntil="visible">
+							<MostViewedFooter
+								format={format}
+								sectionName={CAPI.sectionName}
+								ajaxUrl={CAPI.config.ajaxUrl}
+								switches={CAPI.config.switches}
+								pageIsSensitive={CAPI.config.isSensitive}
+								isDev={CAPI.config.isDev}
+							/>
+						</Island>
+					</ElementContainer>
 				)}
 
 				<ElementContainer

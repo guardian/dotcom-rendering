@@ -11,7 +11,6 @@ import {
 } from '@guardian/support-dotcom-components';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { ShareCount } from './ShareCount';
-import { MostViewedFooter } from './MostViewed/MostViewedFooter/MostViewedFooter';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { ContributionSlot } from './ContributionSlot';
@@ -392,13 +391,6 @@ export const App = ({ CAPI }: Props) => {
 					pageId={CAPI.pageId}
 					idUrl={CAPI.config.idUrl}
 					pageViewId={pageViewId}
-				/>
-			</Portal>
-			<Portal rootId="most-viewed-footer">
-				<MostViewedFooter
-					format={format}
-					sectionName={CAPI.sectionName}
-					ajaxUrl={CAPI.config.ajaxUrl}
 				/>
 			</Portal>
 			<Portal rootId="bottom-banner">

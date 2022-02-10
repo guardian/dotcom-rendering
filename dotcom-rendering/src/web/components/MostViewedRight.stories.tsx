@@ -7,7 +7,7 @@ import { LeftColumn } from './LeftColumn';
 import { ArticleContainer } from './ArticleContainer';
 import { ElementContainer } from './ElementContainer';
 
-import { mockTab1 } from './MostViewed/MostViewed.mocks';
+import { mockTab1 } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 
 export default {

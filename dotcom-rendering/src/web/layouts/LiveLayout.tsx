@@ -55,6 +55,7 @@ import { Liveness } from '../components/Liveness.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { MostViewedFooter } from '../components/MostViewedFooter.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -1237,11 +1238,18 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="most-viewed-footer"
-						element="aside"
-					/>
+					<ElementContainer data-print-layout="hide" element="aside">
+						<Island clientOnly={true} deferUntil="visible">
+							<MostViewedFooter
+								format={format}
+								sectionName={CAPI.sectionName}
+								ajaxUrl={CAPI.config.ajaxUrl}
+								switches={CAPI.config.switches}
+								pageIsSensitive={CAPI.config.isSensitive}
+								isDev={CAPI.config.isDev}
+							/>
+						</Island>
+					</ElementContainer>
 				)}
 
 				<ElementContainer
