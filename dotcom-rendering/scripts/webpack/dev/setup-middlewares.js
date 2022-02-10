@@ -13,7 +13,7 @@ module.exports = (middlewares, devServer) => {
 
 	devServer.app.use(
 		'/static/frontend',
-		express.static(path.join(__dirname, '../..', 'src', 'static')),
+		express.static(path.join(__dirname, '..', '..', '..', 'src', 'static')),
 	);
 
 	devServer.app.use(bodyParser.json({ limit: '10mb' }));
