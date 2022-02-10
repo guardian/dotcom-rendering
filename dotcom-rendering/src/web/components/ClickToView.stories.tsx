@@ -4,7 +4,6 @@ import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
-import { updateIframeHeight } from '../browser/updateIframeHeight';
 import { decidePalette } from '../lib/decidePalette';
 
 import { ContainerLayout } from './ContainerLayout';
@@ -485,18 +484,15 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<EmbedBlockComponent
+						key={1}
+						html={facebookEmbed.html}
+						caption={facebookEmbed.caption}
 						isTracking={true}
 						source={facebookEmbed.source}
 						sourceDomain={facebookEmbed.sourceDomain}
 						role="inline"
-					>
-						<EmbedBlockComponent
-							key={1}
-							html={facebookEmbed.html}
-							caption={facebookEmbed.caption}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>
 					Example of a vimeo embed from &apos;embed&apos; element
@@ -506,18 +502,15 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<EmbedBlockComponent
+						key={1}
+						html={vimeoEmbedEmbed.html}
+						caption={vimeoEmbedEmbed.caption}
 						isTracking={true}
 						source={vimeoEmbedEmbed.source}
 						sourceDomain={vimeoEmbedEmbed.sourceDomain}
 						role="inline"
-					>
-						<EmbedBlockComponent
-							key={1}
-							html={vimeoEmbedEmbed.html}
-							caption={vimeoEmbedEmbed.caption}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>
 					Example of a youtube embed from an &apos;embed&apos; element
@@ -527,18 +520,15 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<EmbedBlockComponent
+						key={1}
+						html={youtubeEmbedEmbed.html}
+						caption={youtubeEmbedEmbed.caption}
 						isTracking={true}
 						source={youtubeEmbedEmbed.source}
 						sourceDomain={youtubeEmbedEmbed.sourceDomain}
 						role="inline"
-					>
-						<EmbedBlockComponent
-							key={1}
-							html={youtubeEmbedEmbed.html}
-							caption={youtubeEmbedEmbed.caption}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>
 					Example of a spotify embed from an &apos;embed&apos; element
@@ -548,18 +538,16 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					]
+					<EmbedBlockComponent
+						key={1}
+						html={spotifyEmbedEmbed.html}
+						caption={spotifyEmbedEmbed.caption}
 						isTracking={true}
 						source={spotifyEmbedEmbed.source}
 						sourceDomain={spotifyEmbedEmbed.sourceDomain}
 						role="inline"
-					>
-						<EmbedBlockComponent
-							key={1}
-							html={spotifyEmbedEmbed.html}
-							caption={spotifyEmbedEmbed.caption}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>
 					Example of a bandcamp embed from an &apos;embed&apos;
@@ -569,18 +557,15 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<EmbedBlockComponent
+						key={1}
+						html={bandcampEmbedEmbed.html}
+						caption={bandcampEmbedEmbed.caption}
 						isTracking={true}
 						source={bandcampEmbedEmbed.source}
 						sourceDomain={bandcampEmbedEmbed.sourceDomain}
 						role="inline"
-					>
-						<EmbedBlockComponent
-							key={1}
-							html={bandcampEmbedEmbed.html}
-							caption={bandcampEmbedEmbed.caption}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>
 					Example of a Our World In Data embed from an
@@ -590,18 +575,15 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<EmbedBlockComponent
+						key={1}
+						html={ourworldindataEmbedEmbed.html}
+						caption={ourworldindataEmbedEmbed.alt}
 						isTracking={true}
 						source={ourworldindataEmbedEmbed.source}
 						sourceDomain={ourworldindataEmbedEmbed.sourceDomain}
 						role="inline"
-					>
-						<EmbedBlockComponent
-							key={1}
-							html={ourworldindataEmbedEmbed.html}
-							caption={ourworldindataEmbedEmbed.alt}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>
 					Example of a BBC embed from an &apos;embed&apos; element
@@ -611,18 +593,15 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<EmbedBlockComponent
+						key={1}
+						html={bbcEmbedEmbed.html}
+						caption={bbcEmbedEmbed.caption}
 						isTracking={true}
 						source={bbcEmbedEmbed.source}
 						sourceDomain={bbcEmbedEmbed.sourceDomain}
 						role="inline"
-					>
-						<EmbedBlockComponent
-							key={1}
-							html={bbcEmbedEmbed.html}
-							caption={bbcEmbedEmbed.caption}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>
@@ -656,22 +635,16 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<UnsafeEmbedBlockComponent
+						key="1"
+						html={instagramEmbedEmbed.html}
+						alt={instagramEmbedEmbed.alt || ''}
+						index={1}
 						isTracking={true}
 						source={instagramEmbedEmbed.source}
 						sourceDomain={instagramEmbedEmbed.sourceDomain}
 						role="inline"
-						onAccept={() =>
-							updateIframeHeight('iframe[name="unsafe-embed-1"]')
-						}
-					>
-						<UnsafeEmbedBlockComponent
-							key="1"
-							html={instagramEmbedEmbed.html}
-							alt={instagramEmbedEmbed.alt || ''}
-							index={1}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>
 					Example of a formstack embed, the source article is{' '}
@@ -680,22 +653,16 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<UnsafeEmbedBlockComponent
+						key="2"
+						html={formStackEmbed.html}
+						alt={formStackEmbed.alt || ''}
+						index={2}
 						isTracking={true}
 						source={formStackEmbed.source}
 						sourceDomain={formStackEmbed.sourceDomain}
 						role="inline"
-						onAccept={() =>
-							updateIframeHeight('iframe[name="unsafe-embed-2"]')
-						}
-					>
-						<UnsafeEmbedBlockComponent
-							key="2"
-							html={formStackEmbed.html}
-							alt={formStackEmbed.alt || ''}
-							index={2}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>
 					Example of a scribd embed from a &apos;embed&apos; element
@@ -705,22 +672,16 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<UnsafeEmbedBlockComponent
+						key="3"
+						html={scribdEmbedEmbed.html}
+						alt={scribdEmbedEmbed.alt || ''}
+						index={3}
 						isTracking={true}
 						source={scribdEmbedEmbed.source}
 						sourceDomain={scribdEmbedEmbed.sourceDomain}
 						role="inline"
-						onAccept={() =>
-							updateIframeHeight('iframe[name="unsafe-embed-3"]')
-						}
-					>
-						<UnsafeEmbedBlockComponent
-							key="3"
-							html={scribdEmbedEmbed.html}
-							alt={scribdEmbedEmbed.alt || ''}
-							index={3}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>
 					Example of a tiktok embed from a &apos;embed&apos; element
@@ -730,22 +691,16 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<UnsafeEmbedBlockComponent
+						key="4"
+						html={tiktokEmbedEmbed.html}
+						alt={tiktokEmbedEmbed.alt || ''}
+						index={4}
 						isTracking={true}
-						source={tiktokEmbedEmbed.source}
-						sourceDomain={tiktokEmbedEmbed.sourceDomain}
+						source={scribdEmbedEmbed.source}
+						sourceDomain={scribdEmbedEmbed.sourceDomain}
 						role="inline"
-						onAccept={() =>
-							updateIframeHeight('iframe[name="unsafe-embed-4"]')
-						}
-					>
-						<UnsafeEmbedBlockComponent
-							key="4"
-							html={tiktokEmbedEmbed.html}
-							alt={tiktokEmbedEmbed.alt || ''}
-							index={4}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>
 					Example of a twitter embed from an &apos;embed&apos; element
@@ -755,22 +710,16 @@ export const UnsafeEmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					<ClickToView
+					<UnsafeEmbedBlockComponent
+						key="5"
+						html={twitterEmbedEmbed.html}
+						alt={twitterEmbedEmbed.alt || ''}
+						index={5}
 						isTracking={true}
-						source={twitterEmbedEmbed.source}
-						sourceDomain={twitterEmbedEmbed.sourceDomain}
+						source={scribdEmbedEmbed.source}
+						sourceDomain={scribdEmbedEmbed.sourceDomain}
 						role="inline"
-						onAccept={() =>
-							updateIframeHeight('iframe[name="unsafe-embed-5"]')
-						}
-					>
-						<UnsafeEmbedBlockComponent
-							key="5"
-							html={twitterEmbedEmbed.html}
-							alt={twitterEmbedEmbed.alt || ''}
-							index={5}
-						/>
-					</ClickToView>
+					/>
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>

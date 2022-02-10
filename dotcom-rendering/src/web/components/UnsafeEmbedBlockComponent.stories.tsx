@@ -28,6 +28,11 @@ export const DefaultStory = () => {
 				alt="Example component"
 				html={html}
 				index={1}
+				isTracking={true}
+				source=""
+				sourceDomain=""
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="inline"
 			/>
 		</div>
 	);

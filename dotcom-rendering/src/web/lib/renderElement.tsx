@@ -56,7 +56,6 @@ import {
 	WitnessTextBlockComponent,
 } from '../components/WitnessBlockComponent';
 import { getSharingUrls } from '../../lib/sharing-urls';
-import { ClickToView } from '../components/ClickToView';
 import { Figure } from '../components/Figure';
 import {
 	isInteractive,
@@ -245,37 +244,35 @@ export const renderElement = ({
 
 				return [
 					true,
-					<ClickToView
-						role={element.role}
-						isTracking={element.isThirdPartyTracking}
-						isMainMedia={isMainMedia}
-						source={element.source}
-						sourceDomain={element.sourceDomain}
-					>
+					<Island deferUntil="visible">
 						<UnsafeEmbedBlockComponent
 							key={index}
 							html={element.html}
 							alt={element.alt || ''}
 							index={index}
+							role={element.role}
+							isTracking={element.isThirdPartyTracking}
+							isMainMedia={isMainMedia}
+							source={element.source}
+							sourceDomain={element.sourceDomain}
 						/>
-					</ClickToView>,
+					</Island>,
 				];
 			}
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<EmbedBlockComponent
 						key={index}
 						html={element.html}
 						caption={element.caption}
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
 			return [

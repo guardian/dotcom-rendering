@@ -30,10 +30,6 @@ import { incrementDailyArticleCount } from '../lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '../lib/contributions';
 import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { updateIframeHeight } from '../browser/updateIframeHeight';
-import { ClickToView } from './ClickToView';
-import { EmbedBlockComponent } from './EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
 
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { GetMatchTabs } from './GetMatchTabs';
@@ -204,10 +200,6 @@ export const App = ({ CAPI }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
 	);
-	const embeds = elementsByType<EmbedBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.EmbedBlockElement',
-	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
@@ -304,42 +296,6 @@ export const App = ({ CAPI }: Props) => {
 						aCastisEnabled={CAPI.config.switches.acast}
 						readerCanBeShownAds={!CAPI.isAdFreeUser}
 					/>
-				</HydrateOnce>
-			))}
-			{embeds.map((embed, index) => (
-				<HydrateOnce rootId={embed.elementId}>
-					{embed.safe ? (
-						<ClickToView
-							role={embed.role}
-							isTracking={embed.isThirdPartyTracking}
-							source={embed.source}
-							sourceDomain={embed.sourceDomain}
-						>
-							<EmbedBlockComponent
-								html={embed.html}
-								caption={embed.caption}
-							/>
-						</ClickToView>
-					) : (
-						<ClickToView
-							role={embed.role}
-							isTracking={embed.isThirdPartyTracking}
-							source={embed.source}
-							sourceDomain={embed.sourceDomain}
-							onAccept={() =>
-								updateIframeHeight(
-									`iframe[name="unsafe-embed-${index}"]`,
-								)
-							}
-						>
-							<UnsafeEmbedBlockComponent
-								key={embed.elementId}
-								html={embed.html}
-								alt={embed.alt || ''}
-								index={index}
-							/>
-						</ClickToView>
-					)}
 				</HydrateOnce>
 			))}
 			<Portal rootId="slot-body-end">
