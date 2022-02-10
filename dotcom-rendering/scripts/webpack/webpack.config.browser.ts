@@ -3,9 +3,8 @@ import webpack from 'webpack';
 // @ts-expect-error -- @types/friendly-errors-webpack-plugin fails tsc
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import chalk from 'chalk';
-import GuStatsReportPlugin from './gu-stats-report-plugin';
-import 'webpack-dev-server';
-import { isWebpackPluginInstance } from './webpack.config.server';
+import GuStatsReportPlugin from './gu-stats-report-plugin.js';
+import { isWebpackPluginInstance } from './webpack.config.server.js';
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';

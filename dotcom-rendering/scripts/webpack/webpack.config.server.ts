@@ -3,7 +3,7 @@ import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import chalk from 'chalk';
 import externals from 'webpack-node-externals';
 import type { WebpackPluginInstance, Compiler, Configuration } from 'webpack';
-import GuStatsReportPlugin from './gu-stats-report-plugin';
+import GuStatsReportPlugin from './gu-stats-report-plugin.js';
 
 const DEV = process.env.NODE_ENV === 'development';
 

@@ -8,12 +8,15 @@ import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
 // @ts-expect-error -- @types/loadable__webpack-plugin break tsc
 import LoadablePlugin from '@loadable/webpack-plugin';
 import { v4 as uuidv4 } from 'uuid';
-import webpackConfigServer from './webpack.config.server';
-import webpackConfigBrowser from './webpack.config.browser';
+import { fileURLToPath } from 'url';
+import webpackConfigServer from './webpack.config.server.js';
+import webpackConfigBrowser from './webpack.config.browser.js';
+
+const dirname = fileURLToPath(import.meta.url);
 
 const PROD = process.env.NODE_ENV === 'production';
 const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
-const dist = path.resolve(__dirname, '..', '..', 'dist');
+const dist = path.resolve(dirname, '..', '..', 'dist');
 
 const sessionId = uuidv4();
 
@@ -35,8 +38,8 @@ const commonConfigs = ({ platform }: ConfigParam): Configuration => ({
 	devtool: PROD ? 'source-map' : 'eval-cheap-module-source-map',
 	resolve: {
 		alias: {
-			'@root': path.resolve(__dirname, '.'),
-			'@frontend': path.resolve(__dirname, 'src'),
+			'@root': path.resolve(dirname, '.'),
+			'@frontend': path.resolve(dirname, 'src'),
 			react: 'preact/compat',
 			'react-dom/test-utils': 'preact/test-utils',
 			'react-dom': 'preact/compat',
@@ -101,4 +104,4 @@ export default [
 			sessionId,
 		}),
 	),
-].filter(Boolean);
+].filter(isWebpackConfiguration);
