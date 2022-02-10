@@ -11,6 +11,10 @@ module.exports = (middlewares, devServer) => {
 		throw new Error('webpack-dev-server is not defined');
 	}
 
+	// it turns out webpack dev server is just an express server
+	// with webpack-dev-middleware, so here we add some other middlewares
+	// of our own
+
 	devServer.app.use(
 		'/static/frontend',
 		express.static(path.join(__dirname, '..', '..', '..', 'src', 'static')),
@@ -18,6 +22,8 @@ module.exports = (middlewares, devServer) => {
 
 	devServer.app.use(bodyParser.json({ limit: '10mb' }));
 
+	// populates req.body with the content data from a production
+	// URL if req.params.url is present
 	devServer.app.use(getContentFromURLMiddleware);
 
 	devServer.app.get('/', (req, res) => {
@@ -34,7 +40,7 @@ module.exports = (middlewares, devServer) => {
 		);
 	});
 
-	// webpackHotServerMiddleware needs to run after  webpack-devserver-middleware
+	// webpack-hot-server-middleware needs to run after webpack-dev-middleware
 	middlewares.push({
 		name: 'server',
 		middleware: webpackHotServerMiddleware(devServer.compiler, {
