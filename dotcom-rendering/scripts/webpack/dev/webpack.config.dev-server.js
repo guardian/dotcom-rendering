@@ -1,10 +1,10 @@
 const chalk = require('chalk');
 
-const DEV_SERVER_PORT = 3030;
+const port = 3030;
 
 console.log(
 	`${chalk.dim('DEV server running on')} ${chalk.blue.underline(
-		`http://localhost:${DEV_SERVER_PORT}`,
+		`http://localhost:${port}`,
 	)}`,
 );
 
@@ -12,7 +12,7 @@ module.exports = {
 	devServer: {
 		compress: false,
 		hot: false,
-		port: DEV_SERVER_PORT,
+		port,
 		liveReload: true,
 		setupMiddlewares: require('./setup-middlewares'),
 		client: {
