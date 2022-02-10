@@ -85,7 +85,7 @@ const buildPayload = async ({
 	tags,
 	contentType,
 }: BuildPayloadProps): Promise<BannerPayload> => {
-	const articleCountToday = asyncDailyArticleCount.then(
+	const articleCountToday: Promise<number | undefined> = asyncDailyArticleCount.then(
 		(history) => history && history[0] && history[0].count,
 	);
 	return {
