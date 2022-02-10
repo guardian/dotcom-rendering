@@ -1,15 +1,19 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
-const express = require('express');
-const fetch = require('node-fetch');
+import path from 'path';
+import express from 'express';
+import fetch from 'node-fetch';
 
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+import webpack from 'webpack';
+// @ts-expect-error -- it’s meant to work
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
+import bodyParser from 'body-parser';
+import { fileURLToPath } from 'url';
 
-const bodyParser = require('body-parser');
+// eslint-disable-next-line import/no-unresolved -- it TS, but ts-node makes it work
+import webpackConfig from '../webpack/webpack.config.js';
 
+const dirname = fileURLToPath(import.meta.url);
 function buildUrlFromQueryParam(req) {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (!req.query.url) {
@@ -38,7 +42,7 @@ const go = () => {
 
 	app.use(
 		'/static/frontend',
-		express.static(path.join(__dirname, '../..', 'src', 'static')),
+		express.static(path.join(dirname, '../..', 'src', 'static')),
 	);
 
 	app.use(
@@ -207,7 +211,7 @@ const go = () => {
 	);
 
 	app.get('/', (req, res) => {
-		res.sendFile(path.join(__dirname, 'index.html'));
+		res.sendFile(path.join(dirname, 'index.html'));
 	});
 
 	app.get('*', (req, res) => {
