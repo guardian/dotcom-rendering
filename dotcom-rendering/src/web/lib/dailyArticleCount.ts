@@ -12,11 +12,12 @@ interface DailyArticleCountLocalStorage {
 
 export const DailyArticleCountKey = 'gu.history.dailyArticleCount';
 
-export const getDailyArticleCount = (): DailyArticleCount => {
+// Returns undefined if no daily article count in local storage
+export const getDailyArticleCount = (): DailyArticleCount | undefined => {
 	const dailyCount = localStorage.getItem(DailyArticleCountKey);
 
 	if (!dailyCount) {
-		return [];
+		return undefined;
 	}
 
 	try {
@@ -31,14 +32,13 @@ export const getDailyArticleCount = (): DailyArticleCount => {
 	} catch (e) {
 		// error parsing the string, so remove the key
 		localStorage.removeItem(DailyArticleCountKey);
-		// return empty array
-		return [];
+		return undefined;
 	}
 };
 
 export const incrementDailyArticleCount = (): void => {
 	// get the daily article count from local storage
-	const dailyArticleCount = getDailyArticleCount();
+	const dailyArticleCount = getDailyArticleCount() || [];
 
 	// calculate days since unix epoch for today date
 	const today = Math.floor(Date.now() / 86400000);

@@ -27,6 +27,7 @@ import {
 	BannerPayload,
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { DailyArticleCount } from '@root/src/web/lib/dailyArticleCount';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -41,13 +42,13 @@ type BaseProps = {
 	alreadyVisitedCount: number;
 	engagementBannerLastClosedAt?: string;
 	subscriptionBannerLastClosedAt?: string;
-	weeklyArticleHistory?: WeeklyArticleHistory;
 };
 
 type BuildPayloadProps = BaseProps & {
 	countryCode: string;
 	optedOutOfArticleCount: boolean;
-	asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
+	asyncWeeklyArticleCount: Promise<WeeklyArticleHistory | undefined>;
+	asyncDailyArticleCount: Promise<DailyArticleCount | undefined>;
 };
 
 type CanShowProps = BaseProps & {
@@ -57,7 +58,8 @@ type CanShowProps = BaseProps & {
 	isPreview: boolean;
 	idApiUrl: string;
 	signInGateWillShow: boolean;
-	asyncArticleCount: Promise<WeeklyArticleHistory | undefined>;
+	asyncWeeklyArticleCount: Promise<WeeklyArticleHistory | undefined>;
+	asyncDailyArticleCount: Promise<DailyArticleCount | undefined>;
 };
 
 type ReaderRevenueComponentType =
@@ -77,10 +79,15 @@ const buildPayload = async ({
 	subscriptionBannerLastClosedAt,
 	countryCode,
 	optedOutOfArticleCount,
-	asyncArticleCount,
+	asyncWeeklyArticleCount,
+	asyncDailyArticleCount,
 	sectionId,
 	tags,
+	contentType,
 }: BuildPayloadProps): Promise<BannerPayload> => {
+	const articleCountToday = asyncDailyArticleCount.then(
+		(history) => history && history[0] && history[0].count,
+	);
 	return {
 		tracking: {
 			ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -99,11 +106,13 @@ const buildPayload = async ({
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 			),
 			countryCode,
-			weeklyArticleHistory: await asyncArticleCount,
+			weeklyArticleHistory: await asyncWeeklyArticleCount,
+			articleCountToday: await articleCountToday,
 			hasOptedOutOfArticleCount: optedOutOfArticleCount,
 			modulesVersion: MODULES_VERSION,
 			sectionId,
 			tagIds: tags.map((tag) => tag.id),
+			contentType,
 		},
 	};
 };
@@ -126,7 +135,8 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	isPreview,
 	idApiUrl,
 	signInGateWillShow,
-	asyncArticleCount,
+	asyncWeeklyArticleCount,
+	asyncDailyArticleCount,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
@@ -165,7 +175,8 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		optedOutOfArticleCount,
-		asyncArticleCount,
+		asyncWeeklyArticleCount,
+		asyncDailyArticleCount,
 	});
 
 	const response: ModuleDataResponse = await getBanner(
@@ -204,7 +215,8 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	section,
-	asyncArticleCount,
+	asyncWeeklyArticleCount,
+	asyncDailyArticleCount,
 }) => {
 	const isPuzzlesPage =
 		section === 'crosswords' ||
@@ -233,7 +245,8 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			optedOutOfArticleCount,
-			asyncArticleCount,
+			asyncWeeklyArticleCount,
+			asyncDailyArticleCount,
 		});
 		return getPuzzlesBanner(contributionsServiceUrl, bannerPayload).then(
 			(response: ModuleDataResponse) => {

@@ -37,7 +37,11 @@ import { FocusStyleManager } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { incrementAlreadyVisited } from '@root/src/web/lib/alreadyVisited';
-import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
+import {
+	DailyArticleCount,
+	getDailyArticleCount,
+	incrementDailyArticleCount,
+} from '@frontend/web/lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '@frontend/web/lib/contributions';
 import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '@root/src/lib/ad-targeting';
@@ -91,8 +95,11 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 			submitComponentEvent(componentEvent, ophanRecord);
 		};
 
-	const [asyncArticleCount, setAsyncArticleCount] =
+	const [asyncWeeklyArticleCount, setAsyncWeeklyArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
+
+	const [asyncDailyArticleCount, setAsyncDailyArticleCount] =
+		useState<Promise<DailyArticleCount | undefined>>();
 
 	// *******************************
 	// ** Setup AB Test Tracking *****
@@ -127,10 +134,14 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 			}
 		};
 
-		setAsyncArticleCount(
-			incrementArticleCountsIfConsented().then(() =>
-				getWeeklyArticleHistory(storage.local),
-			),
+		const incrementResult: Promise<void> =
+			incrementArticleCountsIfConsented();
+
+		setAsyncWeeklyArticleCount(
+			incrementResult.then(() => getWeeklyArticleHistory(storage.local)),
+		);
+		setAsyncDailyArticleCount(
+			incrementResult.then(() => getDailyArticleCount()),
 		);
 	}, [CAPI.pageId, CAPI.config.keywordIds]);
 
@@ -743,7 +754,7 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 					brazeMessages={brazeMessages}
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
-					asyncArticleCount={asyncArticleCount}
+					asyncArticleCount={asyncWeeklyArticleCount}
 				/>
 			</Portal>
 			<Portal rootId="sign-in-gate">
@@ -770,7 +781,8 @@ export const App = ({ CAPI, ophanRecord }: Props) => {
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
 					brazeMessages={brazeMessages}
-					asyncArticleCount={asyncArticleCount}
+					asyncWeeklyArticleCount={asyncWeeklyArticleCount}
+					asyncDailyArticleCount={asyncDailyArticleCount}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
 					section={CAPI.config.section}
