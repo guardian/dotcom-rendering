@@ -85,7 +85,6 @@
     "prettier-eslint": "^11.0.0",
     "pretty-bytes": "^5.6.0",
     "sanitize-html": "^2.3.2",
-    "stylelint": "^13.13.1",
     "swr": "^1.1.2",
     "web-vitals": "^2.1.0",
     "youtube-player": "^5.5.2"
@@ -191,6 +190,7 @@
     "snyk": "^1.639.0",
     "start-server-and-test": "^1.12.1",
     "storybook-addon-turbo-build": "^1.0.0-beta.0",
+    "stylelint": "^13.13.1",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.10.0",
