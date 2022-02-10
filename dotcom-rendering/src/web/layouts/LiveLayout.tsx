@@ -56,6 +56,7 @@ import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooter } from '../components/MostViewedFooter.importable';
+import { GetMatchNav } from '../components/GetMatchNav.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -522,11 +523,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 							</Hide>
 
-							<Placeholder
-								shouldShimmer={false}
-								rootId="match-nav"
-								height={230}
-							/>
+							<Island
+								deferUntil="visible"
+								clientOnly={true}
+								placeholderHeight={230}
+							>
+								<GetMatchNav matchUrl={CAPI.matchUrl} />
+							</Island>
 						</ContainerLayout>
 					) : (
 						<ElementContainer
