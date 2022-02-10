@@ -7,7 +7,7 @@ import { joinUrl } from '../../lib/joinUrl';
 import { decideTrail } from '../lib/decideTrail';
 
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
-import { SecondTierItem } from './SecondTierItem';
+import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
 
 type Props = {
 	sectionName?: string;
@@ -81,7 +81,7 @@ export const MostViewedFooterData = ({
 				/>
 				<div css={[stackBelow('tablet'), secondTierStyles]}>
 					{'mostCommented' in data && (
-						<SecondTierItem
+						<MostViewedFooterSecondTierItem
 							trail={decideTrail(data.mostCommented)}
 							title="Most commented"
 							dataLinkName="comment | group-0 | card-@1" // To match Frontend
@@ -89,7 +89,7 @@ export const MostViewedFooterData = ({
 						/>
 					)}
 					{'mostShared' in data && (
-						<SecondTierItem
+						<MostViewedFooterSecondTierItem
 							trail={decideTrail(data.mostShared)}
 							dataLinkName="news | group-0 | card-@1" // To match Frontend
 							title="Most shared"

@@ -83,7 +83,7 @@ type Props = {
 	dataLinkName: string;
 };
 
-export const SecondTierItem = ({
+export const MostViewedFooterSecondTierItem = ({
 	trail,
 	title,
 	showRightBorder,
