@@ -14,27 +14,33 @@ import { fileURLToPath } from 'url';
 import webpackConfig from '../webpack/webpack.config.js';
 
 const dirname = fileURLToPath(import.meta.url);
+
+/**
+ * @param {import('express').Request} req
+ * @returns {string}
+ */
 function buildUrlFromQueryParam(req) {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	if (!req.query.url) {
 		throw new Error('The url query parameter is mandatory');
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-	const url = new URL(req.query.url);
+	const url = new URL(req.query.url.toString());
 	// searchParams will only work for the first set of query params because 'url' is already a query param itself
-	const searchparams = url.searchParams && url.searchParams.toString();
+	const searchparams = url.searchParams?.toString();
 	// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
 	return `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
 }
 
+/**
+ * @param {string} url
+ * @returns {string}
+ */
 function ampifyUrl(url) {
 	// Take a url and make it work for AMP
 	return url.replace('www', 'amp');
 }
 
 const go = () => {
-	const webpackConfig = require('../webpack/webpack.config');
 	const compiler = webpack(webpackConfig);
 
 	const app = express();
@@ -49,6 +55,11 @@ const go = () => {
 		webpackDevMiddleware(compiler, {
 			serverSideRender: true,
 			publicPath: '/assets/',
+			/**
+			 *
+			 * @param {import('express').Request} req
+			 * @param {import('express').Response} res
+			 */
 			headers: (req, res) => {
 				// Allow any localhost request from accessing the assets
 				if (req.hostname === 'localhost' && req.headers.origin)
@@ -218,11 +229,20 @@ const go = () => {
 		res.redirect('/');
 	});
 
-	// express requires all 4 args here:
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	app.use((err, req, res, next) => {
-		res.status(500).send(`<pre>${err.stack}</pre>`);
-	});
+	app.use(
+		/**
+		 *
+		 * @param {Error} err
+		 * @param {import('express').Request} _req
+		 * @param {import('express').Response} res
+		 * @param {import('express').NextFunction} _next
+		 */
+		// express requires all 4 args here:
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		(err, req, res, next) => {
+			res.status(500).send(`<pre>${err.stack}</pre>`);
+		},
+	);
 
 	const port = process.env.PORT || 3030;
 	app.listen(port);
