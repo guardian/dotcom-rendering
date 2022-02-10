@@ -38,7 +38,7 @@ import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionContainer } from '../components/DiscussionContainer.importable';
 import { Placeholder } from '../components/Placeholder';
 import { Nav } from '../components/Nav/Nav';
-import { LabsHeader } from '../components/LabsHeader';
+import { LabsHeader } from '../components/LabsHeader.importable';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
@@ -454,7 +454,9 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						sectionId="labs-header"
 						element="aside"
 					>
-						<LabsHeader />
+						<Island deferUntil="idle">
+							<LabsHeader />
+						</Island>
 					</ElementContainer>
 				</Stuck>
 			)}
