@@ -3,8 +3,8 @@ const express = require('express');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const bodyParser = require('body-parser');
 const {
-	getConfigFromURLMiddleware,
-} = require('../../../src/server/lib/get-config-from-url');
+	getContentFromURLMiddleware,
+} = require('../../../src/server/lib/get-content-from-url');
 
 module.exports = (middlewares, devServer) => {
 	if (!devServer) {
@@ -18,7 +18,7 @@ module.exports = (middlewares, devServer) => {
 
 	devServer.app.use(bodyParser.json({ limit: '10mb' }));
 
-	devServer.app.use(getConfigFromURLMiddleware);
+	devServer.app.use(getContentFromURLMiddleware);
 
 	devServer.app.get('/', (req, res) => {
 		res.sendFile(

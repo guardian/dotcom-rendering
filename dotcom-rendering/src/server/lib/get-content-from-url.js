@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-async function getConfigFromURL(_url) {
+async function getContentFromURL(_url) {
 	try {
 		if (!_url) {
 			throw new Error('The url query parameter is mandatory');
@@ -25,15 +25,15 @@ async function getConfigFromURL(_url) {
 	}
 }
 
-exports.default = getConfigFromURL;
+exports.default = getContentFromURL;
 
-exports.getConfigFromURLMiddleware = async (req, res, next) => {
+exports.getContentFromURLMiddleware = async (req, res, next) => {
 	if (req.query.url) {
 		let { url } = req.query;
 		if (req.path.startsWith('/AMP')) {
 			url = url.replace('www', 'amp');
 		}
-		req.body = await getConfigFromURL(url);
+		req.body = await getContentFromURL(url);
 	}
 	next();
 };
