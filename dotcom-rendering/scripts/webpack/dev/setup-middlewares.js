@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+const bodyParser = require('body-parser');
 const {
 	getConfigFromURLMiddleware,
 } = require('../../../src/server/lib/get-config-from-url');
@@ -14,6 +15,8 @@ module.exports = (middlewares, devServer) => {
 		'/static/frontend',
 		express.static(path.join(__dirname, '../..', 'src', 'static')),
 	);
+
+	devServer.app.use(bodyParser.json({ limit: '10mb' }));
 
 	devServer.app.use(getConfigFromURLMiddleware);
 
