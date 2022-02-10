@@ -36,8 +36,4 @@ if (messages) {
 }
 
 // exports for modules to use
-module.exports = {
-	log,
-	warn,
-	prompt,
-};
+export { log, warn, prompt };
