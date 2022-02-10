@@ -85,9 +85,10 @@ const buildPayload = async ({
 	tags,
 	contentType,
 }: BuildPayloadProps): Promise<BannerPayload> => {
-	const articleCountToday: Promise<number | undefined> = asyncDailyArticleCount.then(
-		(history) => history && history[0] && history[0].count,
-	);
+	const articleCountToday: Promise<number | undefined> =
+		asyncDailyArticleCount.then(
+			(history) => history && history[0] && history[0].count,
+		);
 	return {
 		tracking: {
 			ophanPageId: window.guardian.config.ophan.pageViewId,
