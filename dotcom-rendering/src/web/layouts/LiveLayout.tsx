@@ -649,6 +649,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												CAPI.config.discussionApiUrl
 											}
 											shortUrlId={CAPI.config.shortUrlId}
+											ajaxUrl={CAPI.config.ajaxUrl}
+											showShareCount={
+												CAPI.config.switches
+													.serverShareCounts
+											}
 										/>
 									</div>
 								</Hide>
@@ -753,6 +758,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												}
 												shortUrlId={
 													CAPI.config.shortUrlId
+												}
+												ajaxUrl={CAPI.config.ajaxUrl}
+												showShareCount={
+													CAPI.config.switches
+														.serverShareCounts
 												}
 											/>
 										</div>
@@ -980,6 +990,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												}
 												shortUrlId={
 													CAPI.config.shortUrlId
+												}
+												ajaxUrl={CAPI.config.ajaxUrl}
+												showShareCount={
+													CAPI.config.switches
+														.serverShareCounts
 												}
 											/>
 										</div>
