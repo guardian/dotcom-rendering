@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 
-import { FocusStyleManager } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
@@ -10,11 +9,9 @@ import {
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { ShareCount } from './ShareCount';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { ContributionSlot } from './ContributionSlot';
-import { GetMatchNav } from './GetMatchNav';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from './SignInGate/SignInGateSelector';
 
@@ -84,13 +81,6 @@ export const App = ({ CAPI }: Props) => {
 			),
 		);
 	}, [CAPI.pageId, CAPI.config.keywordIds]);
-
-	// Ensure the focus state of any buttons/inputs in any of the Source
-	// components are only applied when navigating via keyboard.
-	// READ: https://www.theguardian.design/2a1e5182b/p/6691bb-accessibility/t/32e9fb
-	useEffect(() => {
-		FocusStyleManager.onlyShowFocusOnTabs();
-	}, []);
 
 	useEffect(() => {
 		// Used internally only, so only import each function on demand
@@ -233,15 +223,6 @@ export const App = ({ CAPI }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			{CAPI.config.switches.serverShareCounts && (
-				<Portal rootId="share-count-root">
-					<ShareCount
-						ajaxUrl={CAPI.config.ajaxUrl}
-						pageId={CAPI.pageId}
-						format={format}
-					/>
-				</Portal>
-			)}
 			{youTubeAtoms.map((youTubeAtom) => (
 				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
@@ -274,12 +255,6 @@ export const App = ({ CAPI }: Props) => {
 					/>
 				</HydrateInteractiveOnce>
 			))}
-
-			{CAPI.matchUrl && (
-				<Portal rootId="match-nav">
-					<GetMatchNav matchUrl={CAPI.matchUrl} />
-				</Portal>
-			)}
 			{CAPI.matchUrl && (
 				<Portal rootId="match-tabs">
 					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />

@@ -4,8 +4,8 @@ import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedIte
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import Img from '@guardian/common-rendering/src/components/img';
 import { border } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	background,
 	from,
@@ -34,14 +34,16 @@ import type { Option } from '@guardian/types';
 import { stars } from 'components/starRating';
 import { formatSeconds, makeRelativeDate } from 'date';
 import type { Image } from 'image';
-import { pipe } from 'lib';
+import { maybeRender, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
+import { Kicker } from '../kicker';
 
 interface Props {
 	relatedItem: RelatedItem;
 	image: Option<Image>;
+	kickerText: Option<string>;
 }
 
 const listBaseStyles = css`
@@ -87,6 +89,15 @@ const listStyles = (
 				`}
 			`;
 		}
+
+		case RelatedItemType.LIVE: {
+			return css`
+				${listBaseStyles}
+				border-radius: ${remSpace[2]};
+				padding-top: 0.125rem;
+			`;
+		}
+
 		default: {
 			return css`
 				${listBaseStyles}
@@ -163,11 +174,15 @@ const anchorStyles = css`
 	height: 100%;
 `;
 
-const headingWrapperStyles = (type: RelatedItemType): SerializedStyles => {
+const headingWrapperStyles = (
+	type: RelatedItemType,
+	format: ArticleFormat,
+): SerializedStyles => {
 	switch (type) {
 		case RelatedItemType.VIDEO:
 		case RelatedItemType.AUDIO:
-		case RelatedItemType.GALLERY: {
+		case RelatedItemType.GALLERY:
+		case RelatedItemType.LIVE: {
 			return css`
 				padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
 				flex-grow: 1;
@@ -474,12 +489,80 @@ const cardImage = (
 	);
 };
 
-const Card: FC<Props> = ({ relatedItem, image }) => {
-	const format = {
-		theme: themeFromString(relatedItem.pillar.id),
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-	};
+/** This function is needed because RelatedItemType only exists in the Apps Rendering
+ * API model, so we need a way to convert it to ArticleFormat */
+const formatFromRelatedItem = (
+	relatedItem: RelatedItemType,
+	pillar: string,
+): ArticleFormat => {
+	switch (relatedItem) {
+		case RelatedItemType.ARTICLE:
+			return {
+				design: ArticleDesign.Standard,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+
+		case RelatedItemType.FEATURE:
+			return {
+				design: ArticleDesign.Feature,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+
+		case RelatedItemType.ANALYSIS:
+			return {
+				design: ArticleDesign.Analysis,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+		case RelatedItemType.SPECIAL:
+			return {
+				design: ArticleDesign.Standard,
+				theme: ArticleSpecial.SpecialReport,
+				display: ArticleDisplay.Standard,
+			};
+		case RelatedItemType.LIVE:
+			return {
+				design: ArticleDesign.LiveBlog,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+
+		case RelatedItemType.GALLERY:
+		case RelatedItemType.AUDIO:
+		case RelatedItemType.VIDEO:
+			return {
+				design: ArticleDesign.Media,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+		case RelatedItemType.REVIEW:
+			return {
+				design: ArticleDesign.Review,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+		case RelatedItemType.ADVERTISEMENT_FEATURE:
+			return {
+				design: ArticleDesign.Standard,
+				theme: ArticleSpecial.Labs,
+				display: ArticleDisplay.Standard,
+			};
+		case RelatedItemType.COMMENT:
+			return {
+				design: ArticleDesign.Comment,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
+	}
+};
+
+const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
+	const format = formatFromRelatedItem(
+		relatedItem.type,
+		relatedItem.pillar.id,
+	);
 
 	const img = cardImage(image, relatedItem);
 	const { type, title, mediaDuration, link, byline } = relatedItem;
@@ -498,6 +581,8 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
 			? stars(parseInt(relatedItem.starRating))
 			: null;
 
+	const isLive = relatedItem.type === RelatedItemType.LIVE;
+
 	return (
 		<li
 			className="js-card"
@@ -505,9 +590,15 @@ const Card: FC<Props> = ({ relatedItem, image }) => {
 			css={[listStyles(type, format), cardStyles(type, format)]}
 		>
 			<a css={anchorStyles} href={`https://theguardian.com/${link}`}>
-				<section css={headingWrapperStyles(type)}>
+				<section css={headingWrapperStyles(type, format)}>
 					<h3 css={headingStyles(type)}>
 						{quotationComment(type, format)}
+						{maybeRender(
+							isLive ? some('Live') : kickerText,
+							(t) => (
+								<Kicker format={format} text={some(t)} />
+							),
+						)}
 						{title}
 						{cardByline(type, byline)}
 					</h3>

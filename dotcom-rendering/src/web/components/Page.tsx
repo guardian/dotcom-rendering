@@ -6,6 +6,7 @@ import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { CommercialMetrics } from './CommercialMetrics.importable';
 import { Island } from './Island';
+import { FocusStyles } from './FocusStyles.importable';
 
 type Props = {
 	CAPI: CAPIType;
@@ -35,6 +36,13 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
+			{(format.design === ArticleDesign.LiveBlog ||
+				format.design === ArticleDesign.DeadBlog) && (
+				<SkipTo id="keyevents" label="Skip to key events" />
+			)}
+			<Island clientOnly={true} deferUntil="idle">
+				<FocusStyles />
+			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<CommercialMetrics
 					enabled={CAPI.config.switches.commercialMetrics}
@@ -43,10 +51,6 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 					isDev={CAPI.config.isDev}
 				/>
 			</Island>
-			{(format.design === ArticleDesign.LiveBlog ||
-				format.design === ArticleDesign.DeadBlog) && (
-				<SkipTo id="keyevents" label="Skip to key events" />
-			)}
 			<div id="react-root" />
 			<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
 		</StrictMode>

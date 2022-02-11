@@ -67,12 +67,12 @@ run-ci: stop build-ci start-ci
 # dev #########################################
 
 dev: clear clean-dist install
-	$(call log, "starting frontend DEV server")
-	@NODE_ENV=development SKIP_LEGACY=true nodemon scripts/dev-server/index -- --max-old-space-size=7168
+	$(call log, "starting DEV server")
+	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
 dev-legacy: clear clean-dist install
-	$(call log, "starting frontend DEV server (Legacy support ENABLED)")
-	@NODE_ENV=development nodemon scripts/dev-server/index -- --max-old-space-size=7168
+	$(call log, "starting DEV server")
+	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
 # tests #####################################
 
