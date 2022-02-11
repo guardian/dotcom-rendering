@@ -6,7 +6,7 @@ import { isWebpackPluginInstance } from './utils';
 
 const DEV = process.env.NODE_ENV === 'development';
 
-module.exports = ({ sessionId }: { sessionId: string }): Configuration => ({
+export default ({ sessionId }: { sessionId: string }): Configuration => ({
 	entry: {
 		'frontend.server': './src/server/index.ts',
 	},

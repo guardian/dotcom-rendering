@@ -3,10 +3,18 @@ import type { Configuration } from 'webpack';
 import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
 import LoadablePlugin from '@loadable/webpack-plugin';
 import { v4 as uuidv4 } from 'uuid';
+
+// @ts-ignore -- Webpack can’t find the declaration
+import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
+// @ts-ignore -- Webpack can’t find the declaration
 import WebpackMessages from 'webpack-messages';
+
+import { isWebpackConfiguration, isWebpackPluginInstance } from './utils';
+import webpackConfigBrowser from './webpack.config.browser';
+import webpackConfigServer from './webpack.config.server';
+import webpackConfigDevServer from './dev/webpack.config.dev-server';
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
@@ -20,9 +28,9 @@ let builds = 0;
 type ConfigParam = {
 	platform: 'server' | 'browser' | 'browser.legacy';
 };
-const commonConfigs = ({ platform }: ConfigParam) => ({
+const commonConfigs = ({ platform }: ConfigParam): Configuration => ({
 	name: platform,
-	mode: process.env.NODE_ENV,
+	mode: PROD ? 'production' : 'development',
 	output: {
 		path: dist,
 	},
@@ -103,8 +111,8 @@ const configs: Configuration[] = [
 			platform: 'server',
 		}),
 		// eslint-disable-next-line @typescript-eslint/no-var-requires
-		require(`./webpack.config.server`)({ sessionId }),
-		DEV ? require(`./dev/webpack.config.dev-server`) : {},
+		webpackConfigServer({ sessionId }),
+		DEV ? webpackConfigDevServer : {},
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compilation
@@ -127,7 +135,7 @@ const configs: Configuration[] = [
 			platform: 'browser',
 		}),
 		// eslint-disable-next-line @typescript-eslint/no-var-requires
-		require(`./webpack.config.browser`)({
+		webpackConfigBrowser({
 			isLegacyJS: false,
 			sessionId,
 		}),
