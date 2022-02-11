@@ -159,7 +159,7 @@ const getSectionStyles = (item: ArticleFormat): SerializedStyles[] => {
 	return [headerStyles, articleStyles];
 };
 
-const Article: FC<Props> = ({ item }) => {
+const Layout: FC<Props> = ({ item }) => {
 	if (
 		item.design === ArticleDesign.Analysis ||
 		item.design === ArticleDesign.Standard ||
@@ -211,4 +211,4 @@ const Article: FC<Props> = ({ item }) => {
 
 // ----- Exports ----- //
 
-export default Article;
+export default Layout;
