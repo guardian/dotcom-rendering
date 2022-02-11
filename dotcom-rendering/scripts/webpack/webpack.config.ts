@@ -5,10 +5,7 @@ import { merge } from 'webpack-merge';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import LoadablePlugin from '@loadable/webpack-plugin';
 import { v4 as uuidv4 } from 'uuid';
-
-// @ts-ignore -- Webpack can’t find the declaration
 import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
-// @ts-ignore -- Webpack can’t find the declaration
 import WebpackMessages from 'webpack-messages';
 
 import { isWebpackConfiguration, isWebpackPluginInstance } from './utils';
