@@ -15,11 +15,6 @@ const init = (): Promise<void> => {
 	return Promise.resolve();
 };
 
-// TODO remove this
-if (module.hot) {
-	module.hot.accept();
-}
-
 startup('react', null, init);
 
 try {
