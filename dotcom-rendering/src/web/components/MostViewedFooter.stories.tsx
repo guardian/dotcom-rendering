@@ -10,10 +10,10 @@ import {
 	responseWithMissingImage,
 } from './MostViewed.mocks';
 
-import { MostViewedFooter } from './MostViewedFooter.importable';
+import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 
 export default {
-	component: MostViewedFooter,
+	component: MostViewedFooterLayout,
 	title: 'Components/MostViewedFooter',
 	parameters: {
 		chromatic: { diffThreshold: 0.2 },
@@ -43,7 +43,7 @@ export const withTwoTabs = () => {
 	return (
 		<AbProvider>
 			<ElementContainer>
-				<MostViewedFooter
+				<MostViewedFooterLayout
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -70,7 +70,7 @@ export const withOneTabs = () => {
 	return (
 		<AbProvider>
 			<ElementContainer>
-				<MostViewedFooter
+				<MostViewedFooterLayout
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -96,7 +96,7 @@ export const withNoMostSharedImage = () => {
 	return (
 		<AbProvider>
 			<ElementContainer>
-				<MostViewedFooter
+				<MostViewedFooterLayout
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,

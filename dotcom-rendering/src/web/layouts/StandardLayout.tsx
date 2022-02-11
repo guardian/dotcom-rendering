@@ -55,7 +55,7 @@ import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.imp
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooter } from '../components/MostViewedFooter';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 
 const StandardGrid = ({
@@ -795,7 +795,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 				{!isPaidContent && (
 					<ElementContainer data-print-layout="hide" element="aside">
-						<MostViewedFooter
+						<MostViewedFooterLayout
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}

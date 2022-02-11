@@ -44,7 +44,7 @@ import { Island } from '../components/Island';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
-import { MostViewedFooter } from '../components/MostViewedFooter';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 
 const StandardGrid = ({
 	children,
@@ -692,7 +692,7 @@ export const CommentLayout = ({
 
 				{!isPaidContent && (
 					<ElementContainer data-print-layout="hide" element="aside">
-						<MostViewedFooter
+						<MostViewedFooterLayout
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}

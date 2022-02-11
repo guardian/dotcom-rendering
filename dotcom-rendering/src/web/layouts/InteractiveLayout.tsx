@@ -55,7 +55,7 @@ import {
 import { Island } from '../components/Island';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooter } from '../components/MostViewedFooter';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -638,7 +638,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 				{!isPaidContent && (
 					<ElementContainer data-print-layout="hide" element="aside">
-						<MostViewedFooter
+						<MostViewedFooterLayout
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}

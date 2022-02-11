@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
 import { text, headline, from, Breakpoint } from '@guardian/source-foundations';
-import { useAB } from '@guardian/ab-react';
 import { ArticleDesign } from '@guardian/libs';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
-import { MostViewedFooterData } from './MostViewedFooterData';
+import { MostViewedFooterData } from './MostViewedFooterData.importable';
 import { AdSlot, labelStyles } from './AdSlot';
-import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decidePalette } from '../lib/decidePalette';
+import { Island } from './Island';
 
 const stackBelow = (breakpoint: Breakpoint) => css`
 	display: flex;
@@ -64,26 +63,19 @@ interface Props {
 	sectionName?: string;
 	format: ArticleFormat;
 	ajaxUrl: string;
+	switches: Switches;
+	pageIsSensitive: boolean;
+	isDev?: boolean;
 }
 
 export const MostViewedFooterLayout = ({
 	sectionName,
 	format,
+	switches,
+	pageIsSensitive,
+	isDev,
 	ajaxUrl,
 }: Props) => {
-	// Example usage of AB Tests
-	// Used in the Cypress tests as smoke test of the AB tests framework integration
-	const ABTestAPI = useAB();
-	const abTestCypressDataAttr =
-		(ABTestAPI.isUserInVariant('AbTestTest', 'control') &&
-			'ab-test-control') ||
-		(ABTestAPI.isUserInVariant('AbTestTest', 'variant') &&
-			'ab-test-variant') ||
-		'ab-test-not-in-test';
-	const runnableTest = ABTestAPI.runnableTest(abTestTest);
-	const variantFromRunnable =
-		(runnableTest && runnableTest.variantToRun.id) || 'not-runnable';
-
 	const palette = decidePalette(format);
 
 	return (
@@ -96,8 +88,6 @@ export const MostViewedFooterLayout = ({
 				css={[stackBelow('leftCol'), mostPopularAdStyle]}
 				data-link-name="most-popular"
 				data-component="most-popular"
-				data-cy-ab-user-in-variant={abTestCypressDataAttr}
-				data-cy-ab-runnable-test={variantFromRunnable}
 			>
 				<LeftColumn
 					size={
@@ -118,11 +108,16 @@ export const MostViewedFooterLayout = ({
 						<Hide when="above" breakpoint="leftCol">
 							<h2 css={headingStyles}>Most popular</h2>
 						</Hide>
-						<MostViewedFooterData
-							sectionName={sectionName}
-							palette={palette}
-							ajaxUrl={ajaxUrl}
-						/>
+						<Island clientOnly={true} deferUntil="visible">
+							<MostViewedFooterData
+								sectionName={sectionName}
+								palette={palette}
+								ajaxUrl={ajaxUrl}
+								switches={switches}
+								pageIsSensitive={pageIsSensitive}
+								isDev={isDev}
+							/>
+						</Island>
 					</div>
 					<div
 						css={css`
