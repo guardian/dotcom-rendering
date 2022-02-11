@@ -1,18 +1,36 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
+import type { Configuration, WebpackPluginInstance } from 'webpack';
+// @ts-ignore -- TODO: Convert to Typescript
+import GuStatsReportPlugin from './plugins/gu-stats-report-plugin';
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const GITHUB = process.env.CI_ENV === 'github';
 
 // We need to distinguish files compiled by @babel/preset-env with the prefix "legacy"
-const generateName = (isLegacyJS) => {
+const generateName = (isLegacyJS: boolean) => {
 	const legacyString = isLegacyJS ? '.legacy' : '';
 	const chunkhashString = PROD && !GITHUB ? '.[chunkhash]' : '';
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
-module.exports = ({ isLegacyJS, sessionId }) => ({
+export const babelExclude = {
+	and: [/node_modules/],
+	not: [
+		// Include all @guardian modules, except automat-modules
+		/@guardian\/(?!(automat-modules))/,
+
+		// Include the dynamic-import-polyfill
+		/dynamic-import-polyfill/,
+	],
+};
+
+export default ({
+	isLegacyJS,
+	sessionId,
+}: {
+	isLegacyJS: boolean;
+	sessionId: string;
+}): Configuration => ({
 	entry: {
 		sentryLoader: './src/web/browser/sentryLoader/init.ts',
 		bootCmp: './src/web/browser/bootCmp/init.ts',
@@ -45,14 +63,15 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 					project: 'dotcom-rendering',
 					team: 'dotcom',
 					sessionId,
-				}),
+					// TODO: remove assertion
+				}) as WebpackPluginInstance,
 		  ]
 		: undefined,
 	module: {
 		rules: [
 			{
 				test: /\.[jt]sx?|mjs$/,
-				exclude: module.exports.babelExclude,
+				exclude: babelExclude,
 
 				use: [
 					{
@@ -106,14 +125,3 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		],
 	},
 });
-
-module.exports.babelExclude = {
-	and: [/node_modules/],
-	not: [
-		// Include all @guardian modules, except automat-modules
-		/@guardian\/(?!(automat-modules))/,
-
-		// Include the dynamic-import-polyfill
-		/dynamic-import-polyfill/,
-	],
-};
