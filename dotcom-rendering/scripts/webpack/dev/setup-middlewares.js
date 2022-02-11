@@ -1,5 +1,4 @@
 const path = require('path');
-const express = require('express');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const bodyParser = require('body-parser');
 const {
@@ -14,11 +13,6 @@ module.exports = (middlewares, devServer) => {
 	// it turns out webpack dev server is just an express server
 	// with webpack-dev-middleware, so here we add some other middlewares
 	// of our own
-
-	devServer.app.use(
-		'/static/frontend',
-		express.static(path.join(__dirname, '..', '..', '..', 'src', 'static')),
-	);
 
 	devServer.app.use(bodyParser.json({ limit: '10mb' }));
 

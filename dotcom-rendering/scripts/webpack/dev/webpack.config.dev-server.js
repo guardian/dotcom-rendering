@@ -1,3 +1,4 @@
+const path = require('path');
 const chalk = require('chalk');
 
 const port = 3030;
@@ -18,6 +19,10 @@ module.exports = {
 		client: {
 			logging: 'warn',
 			overlay: true,
+		},
+		static: {
+			directory: path.join(__dirname, '..', '..', '..', 'src', 'static'),
+			publicPath: '/static/frontend',
 		},
 		devMiddleware: {
 			publicPath: '/assets/',
