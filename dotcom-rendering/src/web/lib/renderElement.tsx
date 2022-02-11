@@ -140,17 +140,19 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
 				true,
-				<AudioAtomWrapper
-					id={element.id}
-					trackUrl={element.trackUrl}
-					kicker={element.kicker}
-					title={element.title}
-					duration={element.duration}
-					pillar={format.theme}
-					contentIsNotSensitive={isSensitive}
-					aCastisEnabled={switches.acast}
-					readerCanBeShownAds={isAdFreeUser}
-				/>,
+				<Island>
+					<AudioAtomWrapper
+						id={element.id}
+						trackUrl={element.trackUrl}
+						kicker={element.kicker}
+						title={element.title}
+						duration={element.duration}
+						pillar={format.theme}
+						contentIsNotSensitive={isSensitive}
+						aCastisEnabled={switches.acast}
+						readerCanBeShownAds={isAdFreeUser}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
 			return [
