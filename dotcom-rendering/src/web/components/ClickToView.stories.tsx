@@ -538,7 +538,6 @@ export const EmbedBlockComponentStory = () => {
 					</a>
 				</p>
 				<Figure isMainMedia={false} role="inline">
-					]
 					<EmbedBlockComponent
 						key={1}
 						html={spotifyEmbedEmbed.html}
