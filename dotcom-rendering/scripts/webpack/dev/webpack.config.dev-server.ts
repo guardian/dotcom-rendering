@@ -1,5 +1,7 @@
-const path = require('path');
-const chalk = require('chalk');
+import path from 'path';
+import chalk from 'chalk';
+
+import type { Configuration } from 'webpack-dev-server';
 
 const port = 3030;
 
@@ -9,7 +11,7 @@ console.log(
 	)}`,
 );
 
-module.exports = {
+const config: { devServer: Configuration } = {
 	devServer: {
 		compress: false,
 		hot: false,
@@ -38,3 +40,5 @@ module.exports = {
 		},
 	},
 };
+
+export default config;
