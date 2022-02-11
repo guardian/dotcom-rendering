@@ -1,4 +1,5 @@
-import Ajv, { Options } from 'ajv';
+import { Options } from 'ajv';
+import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 
 import schema from './json-schema.json';
