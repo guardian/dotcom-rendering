@@ -4,7 +4,6 @@ import { headline } from '@guardian/source-foundations';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 
 import { useApi } from '../lib/useApi';
-import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { decideTrail } from '../lib/decideTrail';
 
 import { MostViewedRightItem } from './MostViewedRightItem';
@@ -29,11 +28,14 @@ const headingStyles = css`
 interface Props {
 	limitItems?: number;
 	isAdFreeUser: boolean;
+	adBlockerDetected: boolean;
 }
 
-export const MostViewedRight = ({ limitItems = 5, isAdFreeUser }: Props) => {
-	const adBlockerDetected = useAdBlockInUse();
-
+export const MostViewedRight = ({
+	limitItems = 5,
+	isAdFreeUser,
+	adBlockerDetected,
+}: Props) => {
 	const endpointUrl: string =
 		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
 	const { data, error } = useApi<CAPITrailTabType>(endpointUrl);
