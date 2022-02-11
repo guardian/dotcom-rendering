@@ -11,7 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleDisplay } from '@guardian/libs';
 import { adSizes } from '@guardian/commercial-core';
-import { MaybeShady } from './MaybeShady.importable';
+import { TopRightAdSlot } from './TopRightAdSlot.importable';
 import { Island } from './Island';
 
 type Props = {
@@ -238,7 +238,7 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 				case ArticleDisplay.Standard: {
 					return (
 						<Island>
-							<MaybeShady
+							<TopRightAdSlot
 								shouldHideReaderRevenue={false}
 								isPaidContent={false}
 								adStyles={adStyles}

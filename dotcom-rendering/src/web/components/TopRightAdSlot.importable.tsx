@@ -8,7 +8,7 @@ const isServer = typeof window === 'undefined';
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
 /**
- * MaybeShady decides if we should render the ShadyPie or not
+ * TopRightAdSlot decides if we should render the ShadyPie or not
  *
  * The rules for when to show <ShadyPie /> are:
  *
@@ -19,9 +19,9 @@ const MOSTVIEWED_STICKY_HEIGHT = 1059;
  *  4. The article is not paid content
  *  5. We're not on the server
  *
- * @returns either the ShadyPie image or whatever standard ad slot was passed as children
+ * @returns either the ShadyPie image the standard top right ad slot
  */
-export const MaybeShady = ({
+export const TopRightAdSlot = ({
 	adStyles,
 	shouldHideReaderRevenue,
 	isPaidContent,
