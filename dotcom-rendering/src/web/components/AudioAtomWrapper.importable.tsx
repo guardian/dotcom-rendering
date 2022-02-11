@@ -33,20 +33,22 @@ export const AudioAtomWrapper = ({
 	// *****************
 	const [shouldUseAcast, setShouldUseAcast] = useState<boolean>(false);
 	useEffect(() => {
-		onConsentChange((state: any) => {
-			// Should we use ad enabled audio? If so, then set the shouldUseAcast
-			// state to true, triggering a rerender of AudioAtom using a new track url
-			// (one with adverts)
-			const consentGiven = getConsentFor('acast', state);
-			if (
-				aCastisEnabled &&
-				consentGiven &&
-				readerCanBeShownAds && // Eg. Not a subscriber
-				contentIsNotSensitive
-			) {
-				setShouldUseAcast(true);
-			}
-		});
+		if (typeof window !== 'undefined') {
+			onConsentChange((state: any) => {
+				// Should we use ad enabled audio? If so, then set the shouldUseAcast
+				// state to true, triggering a rerender of AudioAtom using a new track url
+				// (one with adverts)
+				const consentGiven = getConsentFor('acast', state);
+				if (
+					aCastisEnabled &&
+					consentGiven &&
+					readerCanBeShownAds && // Eg. Not a subscriber
+					contentIsNotSensitive
+				) {
+					setShouldUseAcast(true);
+				}
+			});
+		}
 	}, [contentIsNotSensitive, aCastisEnabled, readerCanBeShownAds]);
 
 	return (

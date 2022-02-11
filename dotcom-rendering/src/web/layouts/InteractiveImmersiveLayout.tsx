@@ -154,7 +154,19 @@ const Renderer: React.FC<{
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-}> = ({ format, palette, elements, host, pageId, webTitle, ajaxUrl }) => {
+	config: ConfigType;
+	isAdFreeUser: boolean;
+}> = ({
+	format,
+	palette,
+	elements,
+	host,
+	pageId,
+	webTitle,
+	ajaxUrl,
+	config,
+	isAdFreeUser,
+}) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -172,6 +184,8 @@ const Renderer: React.FC<{
 			pageId,
 			webTitle,
 			ajaxUrl,
+			config,
+			isAdFreeUser,
 		});
 
 		if (ok) {
@@ -441,6 +455,8 @@ export const InteractiveImmersiveLayout = ({
 							pageId={CAPI.pageId}
 							webTitle={CAPI.webTitle}
 							ajaxUrl={CAPI.config.ajaxUrl}
+							config={CAPI.config}
+							isAdFreeUser={CAPI.isAdFreeUser}
 						/>
 					</article>
 				</ElementContainer>

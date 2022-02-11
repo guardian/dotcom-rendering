@@ -1,5 +1,4 @@
 import {
-	AudioAtom,
 	ExplainerAtom,
 	InteractiveAtom,
 	InteractiveLayoutAtom,
@@ -41,6 +40,7 @@ import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
 import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent';
+import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 
 import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -78,6 +78,8 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	config: ConfigType;
+	isAdFreeUser: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -129,18 +131,23 @@ export const renderElement = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	config,
+	isAdFreeUser,
 }: Props): [boolean, JSX.Element] => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
 				true,
-				<AudioAtom
+				<AudioAtomWrapper
 					id={element.id}
 					trackUrl={element.trackUrl}
 					kicker={element.kicker}
 					title={element.title}
 					duration={element.duration}
 					pillar={format.theme}
+					contentIsNotSensitive={config.isSensitive}
+					aCastisEnabled={config.switches.acast}
+					readerCanBeShownAds={isAdFreeUser}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
@@ -765,6 +772,8 @@ export const renderArticleElement = ({
 	starRating,
 	pageId,
 	webTitle,
+	config,
+	isAdFreeUser,
 }: Props): JSX.Element => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -781,6 +790,8 @@ export const renderArticleElement = ({
 		starRating,
 		pageId,
 		webTitle,
+		config,
+		isAdFreeUser,
 	});
 
 	if (!ok) {

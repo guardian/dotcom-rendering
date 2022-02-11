@@ -18,8 +18,6 @@ import { GetMatchNav } from './GetMatchNav';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from './SignInGate/SignInGateSelector';
 
-import { AudioAtomWrapper } from './AudioAtomWrapper';
-
 import { Portal } from './Portal';
 import { HydrateOnce, HydrateInteractiveOnce } from './HydrateOnce';
 import { decideTheme } from '../lib/decideTheme';
@@ -202,10 +200,6 @@ export const App = ({ CAPI }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.YoutubeBlockElement',
 	);
-	const audioAtoms = elementsByType<AudioAtomBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
-	);
 	const embeds = elementsByType<EmbedBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -308,21 +302,6 @@ export const App = ({ CAPI }: Props) => {
 					isPaidContent={CAPI.pageType.isPaidContent}
 				/>
 			</Portal>
-			{audioAtoms.map((audioAtom) => (
-				<HydrateOnce rootId={audioAtom.elementId}>
-					<AudioAtomWrapper
-						id={audioAtom.id}
-						trackUrl={audioAtom.trackUrl}
-						kicker={audioAtom.kicker}
-						title={audioAtom.title}
-						duration={audioAtom.duration}
-						pillar={pillar}
-						contentIsNotSensitive={!CAPI.config.isSensitive}
-						aCastisEnabled={CAPI.config.switches.acast}
-						readerCanBeShownAds={!CAPI.isAdFreeUser}
-					/>
-				</HydrateOnce>
-			))}
 			{embeds.map((embed, index) => (
 				<HydrateOnce rootId={embed.elementId}>
 					{embed.safe ? (
