@@ -32,11 +32,11 @@ deploy:
 
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
+	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.ts --progress
 
 build-ci: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.ts
 
 start-ci: install
 	$(call log, "starting PROD server...")
@@ -68,11 +68,11 @@ run-ci: stop build-ci start-ci
 
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.ts
 
 dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
-	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.ts
 
 # tests #####################################
 
@@ -152,7 +152,7 @@ reinstall: clear clean-deps install
 validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.ts
 
 check-env: # private
 	$(call log, "checking environment")
