@@ -15,8 +15,8 @@ import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
-import { EmbedBlockComponent } from '../components/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent';
+import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
+import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
@@ -56,7 +56,6 @@ import {
 	WitnessTextBlockComponent,
 } from '../components/WitnessBlockComponent';
 import { getSharingUrls } from '../../lib/sharing-urls';
-import { ClickToView } from '../components/ClickToView';
 import { Figure } from '../components/Figure';
 import {
 	isInteractive,
@@ -245,37 +244,35 @@ export const renderElement = ({
 
 				return [
 					true,
-					<ClickToView
-						role={element.role}
-						isTracking={element.isThirdPartyTracking}
-						isMainMedia={isMainMedia}
-						source={element.source}
-						sourceDomain={element.sourceDomain}
-					>
+					<Island deferUntil="visible">
 						<UnsafeEmbedBlockComponent
 							key={index}
 							html={element.html}
 							alt={element.alt || ''}
 							index={index}
+							role={element.role}
+							isTracking={element.isThirdPartyTracking}
+							isMainMedia={isMainMedia}
+							source={element.source}
+							sourceDomain={element.sourceDomain}
 						/>
-					</ClickToView>,
+					</Island>,
 				];
 			}
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<EmbedBlockComponent
 						key={index}
 						html={element.html}
 						caption={element.caption}
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
 			return [

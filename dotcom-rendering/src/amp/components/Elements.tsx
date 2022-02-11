@@ -2,7 +2,7 @@ import { AudioAtomBlockComponent } from './elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from './elements/CommentBlockComponent';
 import { ContentAtomBlockComponent } from './elements/ContentAtomBlockComponent';
 import { DisclaimerBlockComponent } from './elements/DisclaimerBlockComponent';
-import { EmbedBlockComponent } from './elements/EmbedBlockComponent';
+import { EmbedBlockComponentAMP } from './elements/EmbedBlockComponentAMP';
 import { Expandable } from './Expandable';
 import { GuVideoBlockComponent } from './elements/GuVideoBlockComponent';
 import { ImageBlockComponent } from './elements/ImageBlockComponent';
@@ -56,7 +56,7 @@ export const Elements = (
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-				return <EmbedBlockComponent key={i} element={element} />;
+				return <EmbedBlockComponentAMP key={i} element={element} />;
 			case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 				return <InteractiveAtomBlockComponent url={element.url} />;
 			case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
