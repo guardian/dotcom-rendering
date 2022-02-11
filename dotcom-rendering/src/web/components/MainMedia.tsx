@@ -79,6 +79,9 @@ export const MainMedia: React.FC<{
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
 }> = ({
 	elements,
 	format,
@@ -90,6 +93,9 @@ export const MainMedia: React.FC<{
 	pageId,
 	webTitle,
 	ajaxUrl,
+	isAdFreeUser,
+	isSensitive,
+	switches,
 }) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -107,6 +113,9 @@ export const MainMedia: React.FC<{
 					hideCaption,
 					pageId,
 					webTitle,
+					isAdFreeUser,
+					isSensitive,
+					switches,
 				}),
 			)}
 		</div>

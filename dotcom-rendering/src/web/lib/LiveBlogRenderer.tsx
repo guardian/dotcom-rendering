@@ -8,6 +8,9 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
 };
 
 export const LiveBlogRenderer = ({
@@ -18,6 +21,9 @@ export const LiveBlogRenderer = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	switches,
+	isAdFreeUser,
+	isSensitive,
 }: Props) => {
 	return (
 		<>
@@ -31,6 +37,9 @@ export const LiveBlogRenderer = ({
 						adTargeting={adTargeting}
 						host={host}
 						ajaxUrl={ajaxUrl}
+						switches={switches}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
 					/>
 				);
 			})}

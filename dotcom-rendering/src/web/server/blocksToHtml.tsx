@@ -25,6 +25,7 @@ export const blocksToHtml = ({
 	section,
 	sharedAdTargeting,
 	adUnit,
+	switches,
 }: BlocksRequest): string => {
 	const format: ArticleFormat = {
 		display: decideDisplay(CAPIFormat),
@@ -51,6 +52,9 @@ export const blocksToHtml = ({
 			pageId={pageId}
 			webTitle={webTitle}
 			ajaxUrl={ajaxUrl}
+			isSensitive={isSensitive}
+			isAdFreeUser={isAdFreeUser}
+			switches={switches}
 		/>,
 	);
 

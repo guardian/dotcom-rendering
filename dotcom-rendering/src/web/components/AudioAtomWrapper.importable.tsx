@@ -28,6 +28,9 @@ export const AudioAtomWrapper = ({
 	aCastisEnabled,
 	readerCanBeShownAds,
 }: Props) => {
+	// TODO: import from '@guardian/consent-management-platform' cannot be done on the server
+	// wait for fix an implement here.
+
 	// *****************
 	// *     ACast     *
 	// *****************

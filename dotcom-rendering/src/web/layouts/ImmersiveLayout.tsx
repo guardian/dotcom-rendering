@@ -379,6 +379,9 @@ export const ImmersiveLayout = ({
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
+									switches={CAPI.config.switches}
+									isSensitive={CAPI.config.isSensitive}
+									isAdFreeUser={CAPI.isAdFreeUser}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines count={4} effect="straight" />

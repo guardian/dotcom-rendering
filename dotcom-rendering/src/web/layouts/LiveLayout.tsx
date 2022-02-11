@@ -706,6 +706,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
 											ajaxUrl={CAPI.config.ajaxUrl}
+											switches={CAPI.config.switches}
+											isAdFreeUser={CAPI.isAdFreeUser}
+											isSensitive={
+												CAPI.config.isSensitive
+											}
 										/>
 									</div>
 								</GridItem>
@@ -816,6 +821,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
 											ajaxUrl={CAPI.config.ajaxUrl}
+											switches={CAPI.config.switches}
+											isSensitive={
+												CAPI.config.isSensitive
+											}
+											isAdFreeUser={CAPI.isAdFreeUser}
 										/>
 										{pagination.totalPages > 1 && (
 											<Pagination
@@ -912,6 +922,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
 											ajaxUrl={CAPI.config.ajaxUrl}
+											switches={CAPI.config.switches}
+											isAdFreeUser={CAPI.isAdFreeUser}
+											isSensitive={
+												CAPI.config.isSensitive
+											}
 										/>
 									</div>
 								</GridItem>
@@ -1029,6 +1044,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													webTitle={CAPI.webTitle}
 													ajaxUrl={
 														CAPI.config.ajaxUrl
+													}
+													switches={
+														CAPI.config.switches
+													}
+													isSensitive={
+														CAPI.config.isSensitive
+													}
+													isAdFreeUser={
+														CAPI.isAdFreeUser
 													}
 												/>
 												{pagination.totalPages > 1 && (
