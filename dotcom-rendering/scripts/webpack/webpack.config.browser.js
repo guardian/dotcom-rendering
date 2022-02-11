@@ -12,24 +12,22 @@ const generateName = (isLegacyJS) => {
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
-const scriptPath = (dcrPackage) =>
-	[`./src/web/browser/${dcrPackage}/init.ts`].filter(Boolean);
-
 module.exports = ({ isLegacyJS, sessionId }) => ({
 	entry: {
-		sentryLoader: scriptPath('sentryLoader'),
-		bootCmp: scriptPath('bootCmp'),
-		ga: scriptPath('ga'),
-		ophan: scriptPath('ophan'),
-		islands: scriptPath('islands'),
-		react: scriptPath('react'),
-		dynamicImport: scriptPath('dynamicImport'),
-		atomIframe: scriptPath('atomIframe'),
-		coreVitals: scriptPath('coreVitals'),
-		embedIframe: scriptPath('embedIframe'),
-		newsletterEmbedIframe: scriptPath('newsletterEmbedIframe'),
-		relativeTime: scriptPath('relativeTime'),
-		initDiscussion: scriptPath('initDiscussion'),
+		sentryLoader: './src/web/browser/sentryLoader/init.ts',
+		bootCmp: './src/web/browser/bootCmp/init.ts',
+		ga: './src/web/browser/ga/init.ts',
+		ophan: './src/web/browser/ophan/init.ts',
+		islands: './src/web/browser/islands/init.ts',
+		react: './src/web/browser/react/init.ts',
+		dynamicImport: './src/web/browser/dynamicImport/init.ts',
+		atomIframe: './src/web/browser/atomIframe/init.ts',
+		coreVitals: './src/web/browser/coreVitals/init.ts',
+		embedIframe: './src/web/browser/embedIframe/init.ts',
+		newsletterEmbedIframe:
+			'./src/web/browser/newsletterEmbedIframe/init.ts',
+		relativeTime: './src/web/browser/relativeTime/init.ts',
+		initDiscussion: './src/web/browser/initDiscussion/init.ts',
 	},
 	output: {
 		filename: generateName(isLegacyJS),
