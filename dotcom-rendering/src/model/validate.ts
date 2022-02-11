@@ -1,4 +1,4 @@
-import { Options } from 'ajv';
+import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 
