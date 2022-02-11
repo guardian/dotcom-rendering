@@ -78,8 +78,9 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-	config: ConfigType;
 	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -131,8 +132,9 @@ export const renderElement = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
-	config,
 	isAdFreeUser,
+	switches,
+	isSensitive,
 }: Props): [boolean, JSX.Element] => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -145,8 +147,8 @@ export const renderElement = ({
 					title={element.title}
 					duration={element.duration}
 					pillar={format.theme}
-					contentIsNotSensitive={config.isSensitive}
-					aCastisEnabled={config.switches.acast}
+					contentIsNotSensitive={isSensitive}
+					aCastisEnabled={switches.acast}
 					readerCanBeShownAds={isAdFreeUser}
 				/>,
 			];
@@ -772,8 +774,9 @@ export const renderArticleElement = ({
 	starRating,
 	pageId,
 	webTitle,
-	config,
 	isAdFreeUser,
+	isSensitive,
+	switches,
 }: Props): JSX.Element => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -790,8 +793,9 @@ export const renderArticleElement = ({
 		starRating,
 		pageId,
 		webTitle,
-		config,
 		isAdFreeUser,
+		isSensitive,
+		switches,
 	});
 
 	if (!ok) {
