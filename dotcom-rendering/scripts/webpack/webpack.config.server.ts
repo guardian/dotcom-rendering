@@ -1,5 +1,4 @@
 import type { Configuration, WebpackPluginInstance } from 'webpack';
-// @ts-expect-error -- no types exist
 import WebpackNodeExternals from 'webpack-node-externals';
 import GuStatsReportPlugin from './plugins/gu-stats-report-plugin';
 import { isWebpackPluginInstance } from './utils';
