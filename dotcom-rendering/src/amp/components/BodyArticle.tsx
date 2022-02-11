@@ -13,19 +13,19 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 
-import { Elements } from '@root/src/amp/components/Elements';
-import { ArticleModel } from '@root/src/amp/types/ArticleModel';
-import { TopMeta } from '@root/src/amp/components/topMeta/TopMeta';
-import { SubMeta } from '@root/src/amp/components/SubMeta';
-import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
-import { RegionalAd } from '@root/src/amp/components/RegionalAd';
-import { StickyAd } from '@root/src/amp/components/StickyAd';
-import { findAdSlots } from '@root/src/amp/lib/find-adslots';
-import { getSharingUrls } from '@root/src/lib/sharing-urls';
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { Epic } from '@root/src/amp/components/Epic';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
-import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { Elements } from './Elements';
+import { ArticleModel } from '../types/ArticleModel';
+import { TopMeta } from './topMeta/TopMeta';
+import { SubMeta } from './SubMeta';
+import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
+import { RegionalAd } from './RegionalAd';
+import { StickyAd } from './StickyAd';
+import { findAdSlots } from '../lib/find-adslots';
+import { getSharingUrls } from '../../lib/sharing-urls';
+import { buildAdTargeting } from '../../lib/ad-targeting';
+import { Epic } from './Epic';
+import { decideDesign } from '../../web/lib/decideDesign';
+import { decideTheme } from '../../web/lib/decideTheme';
 
 const innerContainerStyles = css`
 	padding-left: 10px;

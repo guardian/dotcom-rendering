@@ -14,8 +14,8 @@ import {
 	ArticleFormat,
 } from '@guardian/libs';
 
-import CameraSvg from '@frontend/static/icons/camera.svg';
-import VideoSvg from '@frontend/static/icons/video-icon.svg';
+import CameraSvg from '../../static/icons/camera.svg';
+import VideoSvg from '../../static/icons/video-icon.svg';
 
 type Props = {
 	captionText?: string;
@@ -146,20 +146,36 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
+const pictureRatio = (13 / 18) * 100;
+const videoRatio = (23 / 36) * 100;
+
 const iconStyle = (palette: Palette) => css`
 	fill: ${palette.fill.cameraCaptionIcon};
 	margin-right: ${space[1]}px;
 	display: inline-block;
-	vertical-align: middle;
+	position: relative;
+	width: 1em;
+	vertical-align: baseline;
+	::before {
+		content: ' ';
+		display: block;
+		padding-top: ${pictureRatio}%;
+	}
 	svg {
-		width: 14px;
-		display: inline-block;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		left: 0px;
+		width: 100%;
+		position: absolute;
+		height: 100%;
 	}
 `;
 
 const videoIconStyle = css`
-	svg {
-		height: 11px;
+	width: 1.1em;
+	::before {
+		padding-top: ${videoRatio}%;
 	}
 `;
 

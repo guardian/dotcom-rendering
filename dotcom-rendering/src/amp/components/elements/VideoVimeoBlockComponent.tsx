@@ -1,6 +1,6 @@
 import React from 'react';
-import { getIdFromUrl } from '@root/src/amp/lib/get-video-id';
-import { Caption } from '@root/src/amp/components/Caption';
+import { getIdFromUrl } from '../../lib/get-video-id';
+import { Caption } from '../Caption';
 
 export const VideoVimeoBlockComponent: React.FC<{
 	element: VideoVimeoBlockElement;

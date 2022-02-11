@@ -9,20 +9,21 @@ import {
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { MainMedia } from '@root/src/web/components/MainMedia';
-import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
-import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ElementContainer } from '@root/src/web/components/ElementContainer';
-import { Nav } from '@root/src/web/components/Nav/Nav';
-import { Caption } from '@root/src/web/components/Caption';
-import { ContainerLayout } from '@root/src/web/components/ContainerLayout';
-import { LabsHeader } from '@frontend/web/components/LabsHeader';
+import { MainMedia } from '../../components/MainMedia';
+import { ArticleTitle } from '../../components/ArticleTitle';
+import { ArticleHeadline } from '../../components/ArticleHeadline';
+import { ElementContainer } from '../../components/ElementContainer';
+import { Nav } from '../../components/Nav/Nav';
+import { Caption } from '../../components/Caption';
+import { ContainerLayout } from '../../components/ContainerLayout';
+import { LabsHeader } from '../../components/LabsHeader.importable';
 
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { getZIndex } from '@frontend/web/lib/getZIndex';
+import { buildAdTargeting } from '../../../lib/ad-targeting';
+import { getZIndex } from '../../lib/getZIndex';
 
-import { Stuck } from '@root/src/web/layouts/lib/stickiness';
-import { getCurrentPillar } from '@root/src/web/lib/layoutHelpers';
+import { Stuck } from '../lib/stickiness';
+import { getCurrentPillar } from '../../lib/layoutHelpers';
+import { Island } from '../../components/Island';
 
 const hasMainMediaStyles = css`
 	height: 100vh;
@@ -196,7 +197,9 @@ export const ImmersiveHeader = ({
 								borderColour={border.primary}
 								sectionId="labs-header"
 							>
-								<LabsHeader />
+								<Island deferUntil="idle">
+									<LabsHeader />
+								</Island>
 							</ElementContainer>
 						</Stuck>
 					)}

@@ -1,4 +1,4 @@
-import { joinUrl } from '@root/src/lib/joinUrl';
+import { joinUrl } from '../../lib/joinUrl';
 import { OnwardsData } from './OnwardsData';
 import { OnwardsLayout } from './OnwardsLayout';
 

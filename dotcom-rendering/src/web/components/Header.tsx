@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 
-import { Hide } from '@root/src/web/components/Hide';
-import { Logo } from '@frontend/web/components/Logo';
-import { Links } from '@root/src/web/components/Links.importable';
 import { brand } from '@guardian/source-foundations';
+import { Hide } from './Hide';
+import { Logo } from './Logo';
+import { Links } from './Links.importable';
 import { Island } from './Island';
 import { EditionDropdown } from './EditionDropdown.importable';
 

@@ -13,8 +13,8 @@ import {
 	footerLinksNew,
 	LinkPlatform,
 	isOnPlatform,
-} from '@root/src/lib/footer-links';
-import { ReaderRevenueButton } from '@root/src/amp/components/ReaderRevenueButton';
+} from '../../lib/footer-links';
+import { ReaderRevenueButton } from './ReaderRevenueButton';
 
 const innerContainerStyles = css`
 	padding-left: 10px;

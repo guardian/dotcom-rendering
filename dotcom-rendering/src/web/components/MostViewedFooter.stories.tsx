@@ -3,14 +3,14 @@ import fetchMock from 'fetch-mock';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { ABProvider } from '@guardian/ab-react';
 
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
+import { ElementContainer } from './ElementContainer';
 import {
 	responseWithTwoTabs,
 	responseWithOneTab,
 	responseWithMissingImage,
-} from '../MostViewed.mocks';
+} from './MostViewed.mocks';
 
-import { MostViewedFooter } from './MostViewedFooter';
+import { MostViewedFooter } from './MostViewedFooter.importable';
 
 export default {
 	component: MostViewedFooter,
@@ -51,6 +51,9 @@ export const withTwoTabs = () => {
 					}}
 					sectionName="politics"
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					switches={{}}
+					pageIsSensitive={false}
+					isDev={false}
 				/>
 			</ElementContainer>
 		</AbProvider>
@@ -74,6 +77,9 @@ export const withOneTabs = () => {
 						theme: ArticlePillar.News,
 					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					switches={{}}
+					pageIsSensitive={false}
+					isDev={false}
 				/>
 			</ElementContainer>
 		</AbProvider>
@@ -97,6 +103,9 @@ export const withNoMostSharedImage = () => {
 						theme: ArticlePillar.News,
 					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+					switches={{}}
+					pageIsSensitive={false}
+					isDev={false}
 				/>
 			</ElementContainer>
 		</AbProvider>

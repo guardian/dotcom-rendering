@@ -6,12 +6,12 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 
-import { getBrazeMetaFromUrlFragment } from '@root/src/web/lib/braze/forceBrazeMessage';
-import { CanShowResult } from '@root/src/web/lib/messagePicker';
-import { useOnce } from '@root/src/web/lib/useOnce';
-import { useHasBeenSeen } from '@root/src/web/lib/useHasBeenSeen';
-import { submitComponentEvent } from '@root/src/web/browser/ophan/ophan';
 import type { CommonEndOfArticleComponentProps } from '@guardian/braze-components/end-of-article';
+import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
+import { CanShowResult } from '../../lib/messagePicker';
+import { useOnce } from '../../lib/useOnce';
+import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
+import { submitComponentEvent } from '../../browser/ophan/ophan';
 
 const wrapperMargins = css`
 	margin: 18px 0;

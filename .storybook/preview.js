@@ -3,13 +3,13 @@ import { setCookie } from '@guardian/libs';
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
-import { getFontsCss } from '@root/src/lib/fonts-css';
+import { getFontsCss } from '../dotcom-rendering/src/lib/fonts-css';
 
 import { resets } from '@guardian/source-foundations'
 
-import { Lazy } from '@root/src/web/components/Lazy';
-import { Picture } from '@root/src/web/components/Picture';
-import { mockRESTCalls } from '@root/src/web/lib/mockRESTCalls';
+import { Lazy } from '../dotcom-rendering/src/web/components/Lazy';
+import { Picture } from '../dotcom-rendering/src/web/components/Picture';
+import { mockRESTCalls } from '../dotcom-rendering/src/web/lib/mockRESTCalls';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -17,9 +17,7 @@ Picture.disableLazyLoading = isChromatic();
 
 if (isChromatic()) {
 	// Fix the date to prevent false negatives
-	// And not just any date... 200 years! 🎉
-	// https://www.theguardian.com/gnm-press-office/2021/apr/30/the-guardian-celebrates-200-extraordinary-years
-	MockDate.set('Wed May 5 2021 12:00:00 GMT+0000 (Greenwich Mean Time)');
+	MockDate.set('Sat Jan 1 2022 12:00:00 GMT+0000 (Greenwich Mean Time)');
 }
 
 mockRESTCalls();

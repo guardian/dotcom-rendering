@@ -9,8 +9,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 
-import { QuoteIcon } from '@frontend/web/components/QuoteIcon';
-import { unescapeData } from '@root/src/lib/escapeData';
+import { QuoteIcon } from './QuoteIcon';
+import { unescapeData } from '../../lib/escapeData';
 
 const partiallyLeft = css`
 	width: 220px;

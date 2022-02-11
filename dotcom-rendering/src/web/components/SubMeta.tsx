@@ -10,8 +10,8 @@ import {
 import { LinkButton } from '@guardian/source-react-components';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
-import { ShareIcons } from '@frontend/web/components/ShareIcons';
-import { Badge } from '@frontend/web/components/Badge';
+import { ShareIcons } from './ShareIcons';
+import { Badge } from './Badge';
 
 const labelStyles = (palette: Palette) => css`
 	${textSans.xxsmall()};

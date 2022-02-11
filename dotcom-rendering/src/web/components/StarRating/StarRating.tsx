@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Star } from '@frontend/static/icons/Star';
+import { Star } from '../../../static/icons/Star';
 
 // https://docs.google.com/spreadsheets/d/1QUa5Kh734J4saFc8ERjCYHZu10_-Hj7llNa2rr8urNg/edit?usp=sharing
 // A list style variations for each breakpoint

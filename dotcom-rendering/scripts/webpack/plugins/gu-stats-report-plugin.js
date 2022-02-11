@@ -1,6 +1,9 @@
 const fetch = require('node-fetch');
 const os = require('os');
 const { exec } = require('child_process');
+const chalk = require('chalk');
+
+const PLUGIN_NAME = 'GuStatsReportPlugin';
 
 class GuStatsReportPlugin {
 	constructor(config) {
@@ -9,6 +12,7 @@ class GuStatsReportPlugin {
 		this.team = config?.team;
 		this.sessionId = config?.sessionId;
 		this.buildCount = 0;
+		this.logger = console;
 
 		this.gitBranch = undefined;
 		this.gitHash = undefined;
@@ -20,7 +24,9 @@ class GuStatsReportPlugin {
 
 		if (config?.displayDisclaimer)
 			console.log(
-				'[gu-stats-report] This project reports build information, stats & basic machine information for internal use only. We will use this information to help us improve developer experience for this project.',
+				chalk.yellow.dim(
+					'This project reports compilation and machine stats to improve the development experience.',
+				),
 			);
 	}
 
@@ -31,31 +37,28 @@ class GuStatsReportPlugin {
 	fetchGitBranch() {
 		exec('git branch --show-current', (err, stdout) => {
 			if (err)
-				return console.error(
-					'[gu-stats-report] Failed to get current git branch',
-				);
+				return this.logger.error('Failed to get current git branch');
 			this.gitBranch = stdout.trim();
 		});
 	}
 
 	fetchGitHash() {
 		exec('git rev-parse --short HEAD', (err, stdout) => {
-			if (err)
-				return console.error(
-					'[gu-stats-report] Failed to get current git hash',
-				);
+			if (err) return this.logger.error('Failed to get current git hash');
 			this.gitHash = stdout.trim();
 		});
 	}
 
 	apply(compiler) {
+		this.logger = compiler.getInfrastructureLogger(PLUGIN_NAME);
+
 		const onDone = (stats) => {
 			// Increment the buildCount
 			this.buildCount += 1;
 
 			if (!this.isValidConfig)
-				return console.log(
-					'[gu-stats-report] Unable to report stats - invalid config',
+				return this.logger.error(
+					'Unable to report stats - invalid config',
 				);
 
 			const URL = 'https://logs.guardianapis.com/log';
@@ -122,22 +125,22 @@ class GuStatsReportPlugin {
 			})
 				.then(({ ok, status }) =>
 					ok
-						? console.log(
-								`[gu-stats-report] Stats reported for '${this.buildName}' build. (Session build count - ${this.buildCount})`,
+						? this.logger.log(
+								`Stats reported for '${this.buildName}' build. (Session build count - ${this.buildCount})`,
 						  )
-						: console.error(
-								`[gu-stats-report] ${this.buildName} (${this.buildCount}): Failed to report stats (${status})`,
+						: this.logger.error(
+								`${this.buildName} (${this.buildCount}): Failed to report stats (${status})`,
 						  ),
 				)
 				.catch(() =>
-					console.error(
-						`[gu-stats-report] ${this.buildName} (${this.buildCount}): Failed to report stats`,
+					this.logger.error(
+						`${this.buildName} (${this.buildCount}): Failed to report stats`,
 					),
 				);
 		};
 
 		if (compiler.hooks) {
-			const plugin = { name: 'GuStatsReportPlugin' };
+			const plugin = { name: PLUGIN_NAME };
 			compiler.hooks.done.tap(plugin, onDone);
 		}
 	}

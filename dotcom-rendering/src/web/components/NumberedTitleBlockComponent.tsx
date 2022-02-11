@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { decideDisplay } from '@root/src/web/lib/decideDisplay';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
-import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decidePalette } from '../lib/decidePalette';
+import { decideDisplay } from '../lib/decideDisplay';
+import { decideDesign } from '../lib/decideDesign';
+import { decideTheme } from '../lib/decideTheme';
 
 type Props = {
 	position: number;

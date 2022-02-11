@@ -3,7 +3,7 @@ import fetchMock from 'fetch-mock';
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
-import { calloutCampaign } from '@root/fixtures/manual/calloutCampaign';
+import { calloutCampaign } from '../../../fixtures/manual/calloutCampaign';
 
 import { CalloutBlockComponent } from './CalloutBlockComponent';
 

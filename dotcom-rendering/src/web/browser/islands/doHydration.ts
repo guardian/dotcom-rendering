@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { hydrate, h } from 'preact';
+import { hydrate, render, h } from 'preact';
 import { initPerf } from '../initPerf';
 
 /**
@@ -26,7 +26,15 @@ export const doHydration = (name: string, data: any, element: HTMLElement) => {
 		`../../components/${name}.importable`
 	)
 		.then((module) => {
-			hydrate(h(module[name], data), element);
+			const clientOnly = element.getAttribute('clientOnly') === 'true';
+
+			if (clientOnly) {
+				element.querySelector('[data-name="placeholder"]')?.remove();
+				render(h(module[name], data), element);
+			} else {
+				hydrate(h(module[name], data), element);
+			}
+
 			element.setAttribute('data-gu-ready', 'true');
 			end();
 		})

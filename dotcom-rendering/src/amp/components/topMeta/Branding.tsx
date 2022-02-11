@@ -1,10 +1,10 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
-import { regionClasses } from '@root/src/amp/lib/region-classes';
+import { regionClasses } from '../../lib/region-classes';
 
-import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
-import { isEdition } from '@root/src/amp/lib/edition';
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '../../../lib/pillars';
+import { isEdition } from '../../lib/edition';
 
 const LinkStyle = (pillar: ArticleTheme) => css`
 	a {

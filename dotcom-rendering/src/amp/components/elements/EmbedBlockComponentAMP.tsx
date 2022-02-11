@@ -1,7 +1,7 @@
 import React from 'react';
-import { NotRenderableInDCR } from '@root/src/lib/errors/not-renderable-in-dcr';
+import { NotRenderableInDCR } from '../../../lib/errors/not-renderable-in-dcr';
 
-export const EmbedBlockComponent: React.FC<{
+export const EmbedBlockComponentAMP: React.FC<{
 	element: EmbedBlockElement;
 }> = ({ element }) => {
 	if (element.isMandatory) {

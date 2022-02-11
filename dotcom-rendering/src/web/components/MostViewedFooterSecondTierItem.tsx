@@ -8,11 +8,11 @@ import {
 	from,
 } from '@guardian/source-foundations';
 
-import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Avatar } from '@root/src/web/components/Avatar';
-import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
-import { Flex } from '@root/src/web/components/Flex';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { AgeWarning } from './AgeWarning';
+import { Avatar } from './Avatar';
+import { LinkHeadline } from './LinkHeadline';
+import { Flex } from './Flex';
+import { decidePalette } from '../lib/decidePalette';
 
 const itemStyles = (showRightBorder?: boolean) => css`
 	position: relative;
@@ -83,7 +83,7 @@ type Props = {
 	dataLinkName: string;
 };
 
-export const SecondTierItem = ({
+export const MostViewedFooterSecondTierItem = ({
 	trail,
 	title,
 	showRightBorder,

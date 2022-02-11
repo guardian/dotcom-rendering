@@ -1,4 +1,4 @@
-import { incrementDailyArticleCount } from '@frontend/web/lib/dailyArticleCount';
+import { incrementDailyArticleCount } from '../../lib/dailyArticleCount';
 import {
 	isNPageOrHigherPageView,
 	isIOS9,

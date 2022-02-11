@@ -11,9 +11,9 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 
-import Logo from '@frontend/static/logos/guardian-anniversary-logo.svg';
-import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
-import { ReaderRevenueButton } from '@root/src/amp/components/ReaderRevenueButton';
+import Logo from '../../static/logos/guardian-anniversary-logo.svg';
+import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
+import { ReaderRevenueButton } from './ReaderRevenueButton';
 
 const headerStyles = css`
 	background-color: ${brand[400]};

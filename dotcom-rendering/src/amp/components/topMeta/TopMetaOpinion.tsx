@@ -3,19 +3,16 @@ import { css } from '@emotion/react';
 
 import { neutral, headline } from '@guardian/source-foundations';
 
-import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
-import { ArticleModel } from '@root/src/amp/types/ArticleModel';
-import { MainMedia } from '@root/src/amp/components/MainMedia';
-import { Byline } from '@root/src/amp/components/topMeta/Byline';
-import { TopMetaExtras } from '@root/src/amp/components/topMeta/TopMetaExtras';
-import { Standfirst } from '@root/src/amp/components/topMeta/Standfirst';
-import { SeriesLink } from '@root/src/amp/components/topMeta/SeriesLink';
-import { getSharingUrls } from '@root/src/lib/sharing-urls';
-import { getAgeWarning } from '@root/src/lib/age-warning';
-import {
-	Branding,
-	BrandingRegionContainer,
-} from '@root/src/amp/components/topMeta/Branding';
+import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
+import { ArticleModel } from '../../types/ArticleModel';
+import { MainMedia } from '../MainMedia';
+import { Byline } from './Byline';
+import { TopMetaExtras } from './TopMetaExtras';
+import { Standfirst } from './Standfirst';
+import { SeriesLink } from './SeriesLink';
+import { getSharingUrls } from '../../../lib/sharing-urls';
+import { getAgeWarning } from '../../../lib/age-warning';
+import { Branding, BrandingRegionContainer } from './Branding';
 
 const headerStyle = css`
 	${headline.small()};

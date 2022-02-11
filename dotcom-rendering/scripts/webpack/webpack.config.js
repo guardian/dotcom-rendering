@@ -6,12 +6,16 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const { v4: uuidv4 } = require('uuid');
+const WebpackMessages = require('webpack-messages');
 
 const PROD = process.env.NODE_ENV === 'production';
+const DEV = process.env.NODE_ENV === 'development';
 const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
 
 const sessionId = uuidv4();
+
+let builds = 0;
 
 const commonConfigs = ({ platform }) => ({
 	name: platform,
@@ -19,15 +23,13 @@ const commonConfigs = ({ platform }) => ({
 	output: {
 		path: dist,
 	},
-	stats: 'errors-only',
+	stats: DEV ? 'errors-only' : 'normal',
 	devtool:
 		process.env.NODE_ENV === 'production'
 			? 'source-map'
 			: 'eval-cheap-module-source-map',
 	resolve: {
 		alias: {
-			'@root': path.resolve(__dirname, '.'),
-			'@frontend': path.resolve(__dirname, 'src'),
 			react: 'preact/compat',
 			'react-dom/test-utils': 'preact/test-utils',
 			'react-dom': 'preact/compat',
@@ -58,9 +60,26 @@ const commonConfigs = ({ platform }) => ({
 				openAnalyzer: false,
 				logLevel: 'warn',
 			}),
-		// https://www.freecodecamp.org/forum/t/algorithm-falsy-bouncer-help-with-how-filter-boolean-works/25089/7
-		// [...].filter(Boolean) why it is used
+		DEV &&
+			new WebpackMessages({
+				name: platform,
+				logger: (message) => {
+					// distinguish between initial and subsequent (re)builds in console output
+					if (builds < module.exports.length * 2) {
+						message = message
+							.replace('Building', 'Building initial')
+							.replace('Completed', 'Completed initial');
+					} else {
+						message = message.replace('Building', 'Rebuilding');
+					}
+					console.log(message);
+					builds += 1;
+				},
+			}),
 	].filter(Boolean),
+	infrastructureLogging: {
+		level: PROD ? 'info' : 'warn',
+	},
 });
 
 module.exports = [
@@ -70,6 +89,7 @@ module.exports = [
 			platform: 'server',
 		}),
 		require(`./webpack.config.server`)({ sessionId }),
+		DEV ? require(`./dev/webpack.config.dev-server`) : {},
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compliation

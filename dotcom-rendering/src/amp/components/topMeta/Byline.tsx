@@ -1,5 +1,5 @@
-import { bylineTokens } from '@root/src/amp/lib/byline-tokens';
-import { getBylineComponentsFromTokens } from '@root/src/lib/byline';
+import { bylineTokens } from '../../lib/byline-tokens';
+import { getBylineComponentsFromTokens } from '../../../lib/byline';
 
 type Props = {
 	byline?: string;

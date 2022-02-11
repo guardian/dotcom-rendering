@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 
 import { neutral, body } from '@guardian/source-foundations';
 
-import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '../../../lib/pillars';
 
 export const ListStyle = (iconColour: string) => css`
 	li {

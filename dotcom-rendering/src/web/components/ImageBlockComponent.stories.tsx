@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';

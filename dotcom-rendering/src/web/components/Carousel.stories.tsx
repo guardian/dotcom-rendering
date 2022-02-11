@@ -1,8 +1,8 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { ElementContainer } from '@root/src/web/components/ElementContainer';
+import { ElementContainer } from './ElementContainer';
 
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette';
 
 import { Carousel } from './Carousel';
 

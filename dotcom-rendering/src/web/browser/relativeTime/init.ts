@@ -1,5 +1,5 @@
 import '../webpackPublicPath';
-import { startup } from '@root/src/web/browser/startup';
+import { startup } from '../startup';
 import { updateTimeElements } from './updateTimeElements';
 
 const init = (): Promise<void> => {

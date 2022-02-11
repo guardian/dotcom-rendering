@@ -1,12 +1,12 @@
 import { ABTest } from '@guardian/ab-core';
 
 // Sign in Gate A/B Tests
-import { signInGateMainVariant } from '@root/src/web/experiments/tests/sign-in-gate-main-variant';
-import { signInGateMainControl } from '@root/src/web/experiments/tests/sign-in-gate-main-control';
+import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
+import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control';
 
 // Sign in Gate Types
-import { signInGateComponent as gateMainVariant } from '@root/src/web/components/SignInGate/gates/main-variant';
-import { signInGateComponent as gateMainControl } from '@root/src/web/components/SignInGate/gates/main-control';
+import { signInGateComponent as gateMainVariant } from './gates/main-variant';
+import { signInGateComponent as gateMainControl } from './gates/main-control';
 import { SignInGateTestMap } from './types';
 
 // component name, should always be sign-in-gate

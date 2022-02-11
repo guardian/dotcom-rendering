@@ -1,5 +1,5 @@
-import { unwrapHtml } from '@root/src/model/unwrapHtml';
-import { RewrappedComponent } from '@root/src/web/components/RewrappedComponent';
+import { unwrapHtml } from '../../model/unwrapHtml';
+import { RewrappedComponent } from './RewrappedComponent';
 
 export const SubheadingBlockComponent: React.FC<{ html: string }> = ({
 	html,
