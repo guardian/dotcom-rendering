@@ -1,7 +1,7 @@
 import path from 'path';
 import chalk from 'chalk';
 
-import type { Configuration } from 'webpack-dev-server';
+import type { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 
 const port = 3030;
 
@@ -11,7 +11,7 @@ console.log(
 	)}`,
 );
 
-const config: { devServer: Configuration } = {
+const config: { devServer: DevServerConfiguration } = {
 	devServer: {
 		compress: false,
 		hot: false,
