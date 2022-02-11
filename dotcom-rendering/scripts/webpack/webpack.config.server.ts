@@ -1,8 +1,12 @@
-const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
+import type { Configuration, WebpackPluginInstance } from 'webpack';
+// @ts-expect-error -- no types there
+import WebpackNodeExternals from 'webpack-node-externals';
+import GuStatsReportPlugin from './plugins/gu-stats-report-plugin';
+import { isWebpackPluginInstance } from './utils';
 
 const DEV = process.env.NODE_ENV === 'development';
 
-module.exports = ({ sessionId }) => ({
+module.exports = ({ sessionId }: { sessionId: string }): Configuration => ({
 	entry: {
 		'frontend.server': './src/server/index.ts',
 	},
@@ -20,7 +24,7 @@ module.exports = ({ sessionId }) => ({
 	},
 	externals: [
 		'@loadable/component',
-		require('webpack-node-externals')({
+		WebpackNodeExternals({
 			allowlist: [/^@guardian/],
 			additionalModuleDirs: [
 				// Since we use yarn-workspaces for the monorepo, node_modules will be co-located
@@ -35,18 +39,18 @@ module.exports = ({ sessionId }) => ({
 		// include them in the development bundle
 		({ request }, callback) => {
 			return process.env.NODE_ENV === 'development' &&
-				request.startsWith('@aws-sdk')
-				? callback(null, `commonjs ${request}`)
+				request?.startsWith('@aws-sdk')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
-			return request.endsWith('loadable-manifest-browser.json')
-				? callback(null, `commonjs ${request}`)
+			return request?.endsWith('loadable-manifest-browser.json')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
-			return request.endsWith('loadable-manifest-browser.legacy.json')
-				? callback(null, `commonjs ${request}`)
+			return request?.endsWith('loadable-manifest-browser.legacy.json')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 	],
