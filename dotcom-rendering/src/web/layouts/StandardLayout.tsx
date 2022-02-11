@@ -699,6 +699,12 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									<AdSlot
 										position="right"
 										display={format.display}
+										shouldHideReaderRevenue={
+											CAPI.shouldHideReaderRevenue
+										}
+										isPaidContent={
+											CAPI.pageType.isPaidContent
+										}
 									/>
 									{!isPaidContent ? (
 										<Island

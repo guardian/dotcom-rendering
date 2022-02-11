@@ -896,6 +896,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											<AdSlot
 												position="right"
 												display={format.display}
+												shouldHideReaderRevenue={
+													CAPI.shouldHideReaderRevenue
+												}
+												isPaidContent={
+													CAPI.pageType.isPaidContent
+												}
 											/>
 										</RightColumn>
 									</div>
@@ -1121,6 +1127,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											<AdSlot
 												position="right"
 												display={format.display}
+												shouldHideReaderRevenue={
+													CAPI.shouldHideReaderRevenue
+												}
+												isPaidContent={
+													CAPI.pageType.isPaidContent
+												}
 											/>
 										</RightColumn>
 									</div>
