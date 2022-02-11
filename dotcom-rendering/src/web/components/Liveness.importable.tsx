@@ -81,6 +81,7 @@ function getKey(
 		const url = new URL(`${pageId}.json`, ajaxUrl);
 		url.searchParams.set('lastUpdate', latestBlockId);
 		url.searchParams.set('isLivePage', 'true');
+		url.searchParams.set('dcr', 'true');
 		url.searchParams.set(
 			'filterKeyEvents',
 			filterKeyEvents ? 'true' : 'false',
