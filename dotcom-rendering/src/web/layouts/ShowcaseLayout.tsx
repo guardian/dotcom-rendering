@@ -584,6 +584,12 @@ export const ShowcaseLayout = ({
 									<AdSlot
 										position="right"
 										display={format.display}
+										shouldHideReaderRevenue={
+											CAPI.shouldHideReaderRevenue
+										}
+										isPaidContent={
+											CAPI.pageType.isPaidContent
+										}
 									/>
 									{!isPaidContent ? (
 										<Island

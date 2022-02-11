@@ -602,6 +602,12 @@ export const CommentLayout = ({
 									<AdSlot
 										position="right"
 										display={format.display}
+										shouldHideReaderRevenue={
+											CAPI.shouldHideReaderRevenue
+										}
+										isPaidContent={
+											CAPI.pageType.isPaidContent
+										}
 									/>
 									{!isPaidContent ? (
 										<Island

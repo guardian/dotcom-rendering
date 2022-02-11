@@ -433,6 +433,13 @@ export const ImmersiveLayout = ({
 												<AdSlot
 													position="right"
 													display={format.display}
+													shouldHideReaderRevenue={
+														CAPI.shouldHideReaderRevenue
+													}
+													isPaidContent={
+														CAPI.pageType
+															.isPaidContent
+													}
 												/>
 											</div>
 										)}

@@ -11,7 +11,6 @@ import {
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
-import { ContributionSlot } from './ContributionSlot';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from './SignInGate/SignInGateSelector';
 
@@ -258,23 +257,6 @@ export const App = ({ CAPI }: Props) => {
 					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />
 				</Portal>
 			)}
-			{/*
-				Rules for when to show <ContributionSlot />:
-				1. shouldHideReaderRevenue is false ("Prevent membership/contribution appeals" is not checked in Composer)
-				2. The article is not paid content
-				3. The reader is not signed in
-				4. An ad blocker has been detected
-
-				Note. We specifically say isSignedIn === false so that we prevent render until the cookie has been
-				checked to avoid flashing this content
-			*/}
-
-			<Portal rootId="top-right-ad-slot">
-				<ContributionSlot
-					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-					isPaidContent={CAPI.pageType.isPaidContent}
-				/>
-			</Portal>
 			{audioAtoms.map((audioAtom) => (
 				<HydrateOnce rootId={audioAtom.elementId}>
 					<AudioAtomWrapper
