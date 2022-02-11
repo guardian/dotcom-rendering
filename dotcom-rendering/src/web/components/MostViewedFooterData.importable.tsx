@@ -13,6 +13,9 @@ type Props = {
 	sectionName?: string;
 	palette: Palette;
 	ajaxUrl: string;
+	switches: Switches;
+	pageIsSensitive: boolean;
+	isDev?: boolean;
 };
 
 const stackBelow = (breakpoint: Breakpoint) => css`
@@ -54,6 +57,12 @@ export const MostViewedFooterData = ({
 	sectionName,
 	palette,
 	ajaxUrl,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	switches,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	pageIsSensitive,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	isDev,
 }: Props) => {
 	const url = buildSectionUrl(ajaxUrl, sectionName);
 	const { data, error } = useApi<
