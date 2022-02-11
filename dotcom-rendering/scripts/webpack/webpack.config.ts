@@ -71,7 +71,8 @@ const commonConfigs = ({ platform }: ConfigParam): Configuration => ({
 						name: platform,
 						logger: (message) => {
 							// distinguish between initial and subsequent (re)builds in console output
-							if (builds < module.exports.length * 2) {
+							// eslint-disable-next-line @typescript-eslint/no-use-before-define -- configs is defined below, but there’s a circular dep
+							if (builds < configs.length * 2) {
 								message = message
 									.replace('Building', 'Building initial')
 									.replace('Completed', 'Completed initial');
