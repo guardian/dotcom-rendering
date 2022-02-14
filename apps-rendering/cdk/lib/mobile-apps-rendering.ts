@@ -66,26 +66,31 @@ export class MobileAppsRendering extends GuStack {
 		});
 		const hostedZoneIdCode = 'Z6PRU8YR6TQDK';
 		const hostedZoneIdProd = 'Z1EYB4AREPXE3B';
-		const hostedZone = HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
-			zoneName: appsRenderingDomain,
-			hostedZoneId: this.withStageDependentValue({
-				variableName: 'hostedZoneId',
+		const hostedZone = HostedZone.fromHostedZoneAttributes(
+			this,
+			'HostedZone',
+			{
+				zoneName: appsRenderingDomain,
+				hostedZoneId: this.withStageDependentValue({
+					variableName: 'hostedZoneId',
+					app: appName,
+					stageValues: {
+						CODE: hostedZoneIdCode,
+						PROD: hostedZoneIdProd,
+					},
+				}),
+			},
+		);
+
+		const scalingTargetCpuUtilisation =
+			this.withStageDependentValue<number>({
+				variableName: 'targetCpuUtilisation',
 				app: appName,
 				stageValues: {
-					CODE: hostedZoneIdCode,
-					PROD: hostedZoneIdProd,
+					CODE: 20,
+					PROD: 20,
 				},
-			}),
-		});
-
-		const scalingTargetCpuUtilisation = this.withStageDependentValue<number>({
-			variableName: 'targetCpuUtilisation',
-			app: appName,
-			stageValues: {
-				CODE: 20,
-				PROD: 20,
-			},
-		});
+			});
 
 		const appsRenderingApp = new GuEc2App(this, {
 			applicationPort: 3040,
@@ -94,10 +99,19 @@ export class MobileAppsRendering extends GuStack {
 				scope: AccessScope.INTERNAL,
 				cidrRanges: [Peer.ipv4('10.0.0.0/8')],
 			},
-			instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MICRO),
+			instanceType: InstanceType.of(
+				InstanceClass.T4G,
+				InstanceSize.MICRO,
+			),
 			certificateProps: {
-				CODE: { domainName: codeDomainName, hostedZoneId: hostedZoneIdCode },
-				PROD: { domainName: prodDomainName, hostedZoneId: hostedZoneIdProd },
+				CODE: {
+					domainName: codeDomainName,
+					hostedZoneId: hostedZoneIdCode,
+				},
+				PROD: {
+					domainName: prodDomainName,
+					hostedZoneId: hostedZoneIdProd,
+				},
 			},
 			monitoringConfiguration: {
 				noMonitoring: true,
