@@ -1,7 +1,6 @@
 import type { Configuration, WebpackPluginInstance } from 'webpack';
 import WebpackNodeExternals from 'webpack-node-externals';
 import GuStatsReportPlugin from './plugins/gu-stats-report-plugin';
-import { isWebpackPluginInstance } from './utils';
 
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -62,7 +61,7 @@ export default ({ sessionId }: { sessionId: string }): Configuration => ({
 					team: 'dotcom',
 					sessionId,
 					// TODO: convert the plugin to TS
-				}),
+				}) as WebpackPluginInstance,
 		  ]
 		: undefined,
 	module: {
