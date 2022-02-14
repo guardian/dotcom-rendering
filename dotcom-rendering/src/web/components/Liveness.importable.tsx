@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { useApi } from '../lib/useApi';
+import { updateTimeElements } from '../browser/relativeTime/updateTimeElements';
 
 type Props = {
 	pageId: string;
@@ -104,6 +105,10 @@ const topOfBlog: Element | null = !isServer
 	? window.document.querySelector('[data-gu-marker=top-of-blog]')
 	: null;
 
+const lastUpdated: Element | null = !isServer
+	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
+	: null;
+
 /**
  * This allows us to make decisions in javascript based on if the reader
  * has the top of the blog in view or not
@@ -143,6 +148,11 @@ export const Liveness = ({
 				// Always insert the new blocks in the dom (but hidden)
 				insertNewBlocks(data.html);
 				hydrateBlocks();
+
+				if (lastUpdated) {
+					lastUpdated.setAttribute('dateTime', new Date().toString());
+					updateTimeElements();
+				}
 
 				if (topOfBlogVisible()) {
 					revealNewBlocks();
