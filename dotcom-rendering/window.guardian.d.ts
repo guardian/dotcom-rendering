@@ -1,6 +1,8 @@
 import type {
 	Callback,
 	CMP,
+	ConsentState,
+	VendorName,
 } from '@guardian/consent-management-platform/dist/types';
 import { WindowGuardianConfig } from './src/model/window-guardian';
 import { ReaderRevenueDevUtils } from './src/web/lib/readerRevenueDevUtils';
@@ -64,9 +66,12 @@ declare global {
 		Cypress: any; // for checking if running within cypress
 		guCmpHotFix: {
 			initialised?: boolean;
-			cmp?: CMP;
-			onConsentChange?: (fn: Callback) => void;
-			getConsentFor?: (fn: Callback) => void;
+			cmp: CMP;
+			onConsentChange: (fn: Callback) => void;
+			getConsentFor: (
+				vendor: VendorName,
+				consent: ConsentState,
+			) => boolean;
 		};
 	}
 }
