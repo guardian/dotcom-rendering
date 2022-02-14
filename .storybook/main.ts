@@ -1,8 +1,9 @@
 import type { StorybookConfig } from "@storybook/core-common";
 import path from "path";
 import webpack from "webpack";
+import { babelExclude } from "../dotcom-rendering/scripts/webpack/webpack.config.browser";
 
-const BaseConfig: StorybookConfig = {
+const config: StorybookConfig = {
 	core: {
 		builder: "webpack5",
 	},
@@ -41,11 +42,11 @@ const BaseConfig: StorybookConfig = {
 		config = arWebpack(config);
 
 		// Global options for webpack
-		config.resolve.extensions.push(".ts", ".tsx");
+		config.resolve?.extensions?.push(".ts", ".tsx");
 
 		// Required as otherwise 'process' will not be defined when included on its own (without .env)
 		// e.g process?.env?.SOME_VAR
-		config.plugins.push(
+		config.plugins?.push(
 			new webpack.DefinePlugin({
 				process: "{}",
 			})
@@ -56,21 +57,22 @@ const BaseConfig: StorybookConfig = {
 };
 
 const dcrWebpack = (config: webpack.Configuration) => {
-	const rules = config.module.rules;
+	const rules = config.module?.rules ?? [];
+
+	if (!config.resolve) config.resolve = {};
 
 	// Mock JSDOM for storybook - it relies on native node.js packages
-	// Allows us to use enhancers in stories for better testing of compoenents & full articles
-	// @ts-expect-error -- it worked in JS
-	config.resolve.alias.jsdom$ = path.resolve(__dirname, "./mocks/jsdom.js");
+	// Allows us to use enhancers in stories for better testing of components & full articles
+	const alias = {
+		jsdom$: path.resolve(__dirname, "./mocks/jsdom.js"),
+	};
 
 	// Support typescript in Storybook
 	// https://storybook.js.org/docs/configurations/typescript-config/
 	rules.push({
 		test: /\.[jt]sx?|mjs$/,
 		include: path.resolve(__dirname, "../dotcom-rendering"),
-		exclude:
-			require("../dotcom-rendering/scripts/webpack/webpack.config.browser")
-				.babelExclude,
+		exclude: babelExclude,
 		use: [
 			{
 				loader: "babel-loader",
@@ -101,9 +103,12 @@ const dcrWebpack = (config: webpack.Configuration) => {
 
 	// modify storybook's file-loader rule to avoid conflicts with our svg
 	// https://stackoverflow.com/questions/54292667/react-storybook-svg-failed-to-execute-createelement-on-document
-	// @ts-expect-error -- it worked in JS
-	const fileLoaderRule = rules.find((rule) => rule.test.test(".svg"));
-	// @ts-expect-error -- it worked in JS
+	const fileLoaderRule = rules.find(
+		(rule) =>
+			rule !== "..." &&
+			rule.test instanceof RegExp &&
+			rule.test.test(".svg")
+	) as webpack.RuleSetRule;
 	fileLoaderRule.exclude = /\.svg$/;
 	rules.push({
 		test: /\.svg$/,
@@ -112,13 +117,14 @@ const dcrWebpack = (config: webpack.Configuration) => {
 
 	config.resolve.alias = {
 		...config.resolve.alias,
+		...alias,
 	};
 
 	return config;
 };
 
 const arWebpack = (config: webpack.Configuration) => {
-	const rules = config.module.rules;
+	const rules = config.module?.rules ?? [];
 
 	rules.push({
 		test: /\.tsx?$/,
@@ -157,14 +163,16 @@ const arWebpack = (config: webpack.Configuration) => {
 		],
 	});
 
+	if (!config.resolve) config.resolve = { modules: [] };
+
 	config.resolve.modules = [
-		...((config && config.resolve && config.resolve.modules) || []),
+		...(config?.resolve?.modules ?? []),
 		path.resolve(__dirname, "../apps-rendering/src"),
 		path.resolve(__dirname, "../common-rendering/src"),
 	];
 
 	config.resolve.alias = {
-		...config.resolve.alias,
+		...config.resolve?.alias,
 		logger: path.resolve(
 			__dirname,
 			`../apps-rendering/src/logger/clientDev`
@@ -175,4 +183,4 @@ const arWebpack = (config: webpack.Configuration) => {
 	return config;
 };
 
-export default BaseConfig;
+export default config;
