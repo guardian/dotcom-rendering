@@ -1,7 +1,8 @@
-const path = require("path");
-const webpack = require("webpack");
+import type { StorybookConfig } from "@storybook/core-common";
+import path from "path";
+import webpack from "webpack";
 
-module.exports = {
+const BaseConfig: StorybookConfig = {
 	core: {
 		builder: "webpack5",
 	},
@@ -54,11 +55,12 @@ module.exports = {
 	},
 };
 
-const dcrWebpack = (config) => {
+const dcrWebpack = (config: webpack.Configuration) => {
 	const rules = config.module.rules;
 
 	// Mock JSDOM for storybook - it relies on native node.js packages
 	// Allows us to use enhancers in stories for better testing of compoenents & full articles
+	// @ts-expect-error -- it worked in JS
 	config.resolve.alias.jsdom$ = path.resolve(__dirname, "./mocks/jsdom.js");
 
 	// Support typescript in Storybook
@@ -66,8 +68,9 @@ const dcrWebpack = (config) => {
 	rules.push({
 		test: /\.[jt]sx?|mjs$/,
 		include: path.resolve(__dirname, "../dotcom-rendering"),
-		exclude: require("../dotcom-rendering/scripts/webpack/webpack.config.browser")
-			.babelExclude,
+		exclude:
+			require("../dotcom-rendering/scripts/webpack/webpack.config.browser")
+				.babelExclude,
 		use: [
 			{
 				loader: "babel-loader",
@@ -98,11 +101,13 @@ const dcrWebpack = (config) => {
 
 	// modify storybook's file-loader rule to avoid conflicts with our svg
 	// https://stackoverflow.com/questions/54292667/react-storybook-svg-failed-to-execute-createelement-on-document
+	// @ts-expect-error -- it worked in JS
 	const fileLoaderRule = rules.find((rule) => rule.test.test(".svg"));
+	// @ts-expect-error -- it worked in JS
 	fileLoaderRule.exclude = /\.svg$/;
 	rules.push({
 		test: /\.svg$/,
-		use: [ "desvg-loader/react", "svg-loader" ],
+		use: ["desvg-loader/react", "svg-loader"],
 	});
 
 	config.resolve.alias = {
@@ -112,7 +117,7 @@ const dcrWebpack = (config) => {
 	return config;
 };
 
-const arWebpack = (config) => {
+const arWebpack = (config: webpack.Configuration) => {
 	const rules = config.module.rules;
 
 	rules.push({
@@ -153,7 +158,7 @@ const arWebpack = (config) => {
 	});
 
 	config.resolve.modules = [
-		...(config && config.resolve && config.resolve.modules || []),
+		...((config && config.resolve && config.resolve.modules) || []),
 		path.resolve(__dirname, "../apps-rendering/src"),
 		path.resolve(__dirname, "../common-rendering/src"),
 	];
@@ -169,3 +174,5 @@ const arWebpack = (config) => {
 
 	return config;
 };
+
+export default BaseConfig;
