@@ -1,12 +1,12 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
-import {
-	DailyArticle,
-	getDailyArticleCount,
-} from '@frontend/web/lib/dailyArticleCount';
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { getLocale } from '@guardian/libs';
-import { hasUserDismissedGateMoreThanCount } from '@root/src/web/components/SignInGate/dismissGate';
+import {
+	DailyArticle,
+	getDailyArticleCount,
+} from '../../lib/dailyArticleCount';
+import { hasUserDismissedGateMoreThanCount } from './dismissGate';
 import { CanShowGateProps } from './types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate

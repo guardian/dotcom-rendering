@@ -1,7 +1,7 @@
 import {
 	getBylineComponentsFromTokens,
 	getContributorTags,
-} from '@root/src/lib/byline';
+} from '../../lib/byline';
 
 type Props = {
 	byline: string;

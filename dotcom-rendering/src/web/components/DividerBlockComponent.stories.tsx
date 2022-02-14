@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 
-import { DividerBlockComponent } from '@frontend/web/components/DividerBlockComponent';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { DividerBlockComponent } from './DividerBlockComponent';
 
-import { TextBlockComponent } from '@root/src/web/components/TextBlockComponent';
+import { TextBlockComponent } from './TextBlockComponent';
 
 export default {
 	component: DividerBlockComponent,

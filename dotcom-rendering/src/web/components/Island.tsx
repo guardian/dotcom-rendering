@@ -60,6 +60,7 @@ export const Island = ({
 		name={children.type.name}
 		deferUntil={deferUntil}
 		props={JSON.stringify(children.props)}
+		clientOnly={clientOnly}
 	>
 		{decideChildren(children, clientOnly, placeholderHeight)}
 	</gu-island>

@@ -1,7 +1,7 @@
 import '../webpackPublicPath';
 
-import { startup } from '@root/src/web/browser/startup';
 import { log } from '@guardian/libs';
+import { startup } from '../startup';
 import { whenVisible } from './whenVisible';
 import { whenIdle } from './whenIdle';
 import { doHydration } from './doHydration';

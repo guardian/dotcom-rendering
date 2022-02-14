@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 
-import { useApi as useApi_ } from '@root/src/web/lib/useApi';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { ShareCount } from './ShareCount';
+import { useApi as useApi_ } from '../lib/useApi';
+import { ShareCount } from './ShareCount.importable';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useApi: { [key: string]: any } = useApi_;

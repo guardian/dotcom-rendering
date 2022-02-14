@@ -1,6 +1,6 @@
 import { border, labs } from '@guardian/source-foundations';
 
-import { LabsHeader } from './LabsHeader';
+import { LabsHeader } from './LabsHeader.importable';
 import { ElementContainer } from './ElementContainer';
 
 export default {

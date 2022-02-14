@@ -7,12 +7,10 @@ describe('Commercial E2E tests', function () {
 		setLocalBaseUrl();
 	});
 
-	const longReadURL =
-		'https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife';
-
-	const runLongReadTestFor = (url) => {
-		cy.log(`Opening A long read`);
-		cy.visit(url);
+	it(`It should load the expected number of ad slots`, function () {
+		cy.visit(
+			`Article?url=https://www.theguardian.com/environment/2020/oct/13/maverick-rewilders-endangered-species-extinction-conservation-uk-wildlife`,
+		);
 
 		cy.scrollTo('bottom', { duration: 500 });
 
@@ -30,19 +28,13 @@ describe('Commercial E2E tests', function () {
 			});
 
 		cy.get(`[data-name="right"]`).should('have.length', 1);
+		cy.scrollTo('bottom');
 		cy.get(`[data-name="merchandising-high"]`).should('have.length', 1);
+		// Wait for hydration
+		cy.get('gu-island[name=MostViewedFooter]')
+			.first()
+			.should('have.attr', 'data-gu-ready', 'true');
 		cy.get(`[data-name="mostpop"]`).should('have.length', 1);
 		cy.get(`[data-name="merchandising"]`).should('have.length', 1);
-	};
-
-	describe('Ad slot Parity between DCR and Frontend for a long read', function () {
-		it(`It should check slots for a long article in DCR`, function () {
-			runLongReadTestFor(`Article?url=${longReadURL}`);
-		});
-
-		it(`It should check slots for a long article in Frontend`, function () {
-			Cypress.config('baseUrl', '');
-			runLongReadTestFor(`${longReadURL}?dcr=false`);
-		});
 	});
 });

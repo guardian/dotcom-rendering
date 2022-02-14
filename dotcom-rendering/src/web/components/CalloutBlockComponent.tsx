@@ -4,10 +4,10 @@ import { css } from '@emotion/react';
 import { textSans, neutral } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 
-import PlusIcon from '@frontend/static/icons/plus.svg';
-import MinusIcon from '@frontend/static/icons/minus.svg';
+import PlusIcon from '../../static/icons/plus.svg';
+import MinusIcon from '../../static/icons/minus.svg';
 
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { decidePalette } from '../lib/decidePalette';
 import { Form } from './Callout/Form';
 
 const wrapperStyles = css`

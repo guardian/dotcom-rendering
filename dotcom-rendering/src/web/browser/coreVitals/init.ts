@@ -3,7 +3,7 @@ import {
 	getCookie,
 	initCoreWebVitals,
 } from '@guardian/libs';
-import { startup } from '@root/src/web/browser/startup';
+import { startup } from '../startup';
 
 const init = (): Promise<void> => {
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });

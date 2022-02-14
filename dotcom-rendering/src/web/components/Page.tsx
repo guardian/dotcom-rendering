@@ -4,6 +4,9 @@ import { focusHalo } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
+import { CommercialMetrics } from './CommercialMetrics.importable';
+import { Island } from './Island';
+import { FocusStyles } from './FocusStyles.importable';
 
 type Props = {
 	CAPI: CAPIType;
@@ -37,6 +40,17 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id="keyevents" label="Skip to key events" />
 			)}
+			<Island clientOnly={true} deferUntil="idle">
+				<FocusStyles />
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<CommercialMetrics
+					enabled={CAPI.config.switches.commercialMetrics}
+					switches={CAPI.config.switches}
+					isSensitive={CAPI.config.isSensitive}
+					isDev={CAPI.config.isDev}
+				/>
+			</Island>
 			<div id="react-root" />
 			<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
 		</StrictMode>

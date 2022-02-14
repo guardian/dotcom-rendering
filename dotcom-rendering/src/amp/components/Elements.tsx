@@ -1,26 +1,26 @@
-import { AudioAtomBlockComponent } from '@root/src/amp/components/elements/AudioAtomBlockComponent';
-import { CommentBlockComponent } from '@root/src/amp/components/elements/CommentBlockComponent';
-import { ContentAtomBlockComponent } from '@root/src/amp/components/elements/ContentAtomBlockComponent';
-import { DisclaimerBlockComponent } from '@root/src/amp/components/elements/DisclaimerBlockComponent';
-import { EmbedBlockComponent } from '@root/src/amp/components/elements/EmbedBlockComponent';
-import { Expandable } from '@root/src/amp/components/Expandable';
-import { GuVideoBlockComponent } from '@root/src/amp/components/elements/GuVideoBlockComponent';
-import { ImageBlockComponent } from '@root/src/amp/components/elements/ImageBlockComponent';
-import { InteractiveAtomBlockComponent } from '@root/src/amp/components/elements/InteractiveAtomBlockComponent';
-import { InteractiveBlockComponent } from '@root/src/amp/components/elements/InteractiveBlockComponent';
-import { PullquoteBlockComponent } from '@root/src/amp/components/elements/PullquoteBlockComponent';
-import { RichLinkBlockComponent } from '@root/src/amp/components/elements/RichLinkBlockComponent';
-import { SoundcloudBlockComponent } from '@root/src/amp/components/elements/SoundcloudBlockComponent';
-import { SubheadingBlockComponent } from '@root/src/amp/components/elements/SubheadingBlockComponent';
-import { TextBlockComponent } from '@root/src/amp/components/elements/TextBlockComponent';
-import { TimelineBlockComponent } from '@root/src/amp/components/elements/TimelineBlockComponent';
-import { TwitterBlockComponent } from '@root/src/amp/components/elements/TwitterBlockComponent';
-import { VideoVimeoBlockComponent } from '@root/src/amp/components/elements/VideoVimeoBlockComponent';
-import { VideoYoutubeBlockComponent } from '@root/src/amp/components/elements/VideoYoutubeBlockComponent';
-import { YoutubeBlockComponentAMP } from '@root/src/amp/components/elements/YoutubeBlockComponentAMP';
+import { AudioAtomBlockComponent } from './elements/AudioAtomBlockComponent';
+import { CommentBlockComponent } from './elements/CommentBlockComponent';
+import { ContentAtomBlockComponent } from './elements/ContentAtomBlockComponent';
+import { DisclaimerBlockComponent } from './elements/DisclaimerBlockComponent';
+import { EmbedBlockComponentAMP } from './elements/EmbedBlockComponentAMP';
+import { Expandable } from './Expandable';
+import { GuVideoBlockComponent } from './elements/GuVideoBlockComponent';
+import { ImageBlockComponent } from './elements/ImageBlockComponent';
+import { InteractiveAtomBlockComponent } from './elements/InteractiveAtomBlockComponent';
+import { InteractiveBlockComponent } from './elements/InteractiveBlockComponent';
+import { PullquoteBlockComponent } from './elements/PullquoteBlockComponent';
+import { RichLinkBlockComponent } from './elements/RichLinkBlockComponent';
+import { SoundcloudBlockComponent } from './elements/SoundcloudBlockComponent';
+import { SubheadingBlockComponent } from './elements/SubheadingBlockComponent';
+import { TextBlockComponent } from './elements/TextBlockComponent';
+import { TimelineBlockComponent } from './elements/TimelineBlockComponent';
+import { TwitterBlockComponent } from './elements/TwitterBlockComponent';
+import { VideoVimeoBlockComponent } from './elements/VideoVimeoBlockComponent';
+import { VideoYoutubeBlockComponent } from './elements/VideoYoutubeBlockComponent';
+import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
 
-import { enhance } from '@root/src/amp/lib/enhance';
-import { NotRenderableInDCR } from '@root/src/lib/errors/not-renderable-in-dcr';
+import { enhance } from '../lib/enhance';
+import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 
 export const Elements = (
 	elements: CAPIElement[],
@@ -56,7 +56,7 @@ export const Elements = (
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-				return <EmbedBlockComponent key={i} element={element} />;
+				return <EmbedBlockComponentAMP key={i} element={element} />;
 			case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 				return <InteractiveAtomBlockComponent url={element.url} />;
 			case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':

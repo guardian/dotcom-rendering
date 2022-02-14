@@ -3,11 +3,11 @@ import { useAB } from '@guardian/ab-react';
 import {
 	SignInGateComponent,
 	CurrentSignInGateABTest,
-} from '@frontend/web/components/SignInGate/types';
+} from '../components/SignInGate/types';
 import {
 	signInGateTests,
 	signInGateTestVariantToGateMapping,
-} from '@frontend/web/components/SignInGate/signInGate';
+} from '../components/SignInGate/signInGate';
 
 /**
  * @description

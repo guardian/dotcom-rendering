@@ -1,5 +1,5 @@
 import { renderToString } from 'react-dom/server';
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
+import { buildAdTargeting } from '../../lib/ad-targeting';
 import { decideDesign } from '../lib/decideDesign';
 import { decideDisplay } from '../lib/decideDisplay';
 import { decideTheme } from '../lib/decideTheme';

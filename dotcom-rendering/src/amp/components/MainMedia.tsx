@@ -1,15 +1,15 @@
 import React from 'react';
-import { bestFitImage, heightEstimate } from '@root/src/amp/lib/image-fit';
 import { css } from '@emotion/react';
 import {
 	neutral,
 	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
+import { bestFitImage, heightEstimate } from '../lib/image-fit';
 
-import InfoIcon from '@frontend/static/icons/info.svg';
-import { YoutubeBlockComponentAMP } from '@root/src/amp/components/elements/YoutubeBlockComponentAMP';
-import { scrsetStringFromImagesSources } from '@root/src/amp/lib/srcset-utils';
+import InfoIcon from '../../static/icons/info.svg';
+import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
+import { scrsetStringFromImagesSources } from '../lib/srcset-utils';
 
 const figureStyle = css`
 	margin: 0 0;

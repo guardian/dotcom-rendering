@@ -1,7 +1,7 @@
 // add some helpful assertions
 import 'jest-dom/extend-expect';
 
-import { WindowGuardianConfig } from '@root/src/model/window-guardian';
+import { WindowGuardianConfig } from '../../src/model/window-guardian';
 
 const windowGuardianConfig = {
 	page: {

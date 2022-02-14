@@ -1,8 +1,8 @@
 import validator from 'amphtml-validator';
-import { Article as CAPI } from '@root/fixtures/generated/articles/Article';
-import { Article } from '@root/src/amp/pages/Article';
-import { extractNAV } from '@root/src/model/extract-nav';
-import { AnalyticsModel } from '@root/src/amp/components/Analytics';
+import { Article as CAPI } from '../../../fixtures/generated/articles/Article';
+import { Article } from '../pages/Article';
+import { extractNAV } from '../../model/extract-nav';
+import { AnalyticsModel } from '../components/Analytics';
 import { document } from './document';
 
 test('rejects invalid AMP doc (to test validator)', async () => {

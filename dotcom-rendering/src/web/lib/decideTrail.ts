@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { decideDesign } from '@root/src/web/lib/decideDesign';
-import { decideTheme } from '@root/src/web/lib/decideTheme';
+import { decideDesign } from './decideDesign';
+import { decideTheme } from './decideTheme';
 import { decideDisplay } from './decideDisplay';
 import { decidePalette } from './decidePalette';
 

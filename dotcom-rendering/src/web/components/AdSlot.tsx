@@ -11,10 +11,14 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleDisplay } from '@guardian/libs';
 import { adSizes } from '@guardian/commercial-core';
+import { TopRightAdSlot } from './TopRightAdSlot.importable';
+import { Island } from './Island';
 
 type Props = {
 	display: ArticleDisplay;
 	position: AdSlotType;
+	shouldHideReaderRevenue?: boolean;
+	isPaidContent?: boolean;
 };
 
 export const labelHeight = 24;
@@ -232,48 +236,14 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					);
 				}
 				case ArticleDisplay.Standard: {
-					const MOSTVIEWED_STICKY_HEIGHT = 1059;
 					return (
-						<div
-							id="top-right-ad-slot"
-							css={css`
-								position: static;
-								height: ${MOSTVIEWED_STICKY_HEIGHT}px;
-							`}
-						>
-							<div
-								id="dfp-ad--right"
-								className={[
-									'js-ad-slot',
-									'ad-slot',
-									'ad-slot--right',
-									'ad-slot--mpu-banner-ad',
-									'ad-slot--rendered',
-									'js-sticky-mpu',
-								].join(' ')}
-								css={[
-									css`
-										position: sticky;
-										top: 0;
-									`,
-									adStyles,
-								]}
-								data-link-name="ad slot right"
-								data-name="right"
-								// mark: 01303e88-ef1f-462d-9b6e-242419435cec
-								data-mobile={[
-									adSizes.outOfPage,
-									adSizes.empty,
-									adSizes.mpu,
-									adSizes.googleCard,
-									adSizes.halfPage,
-									adSizes.fluid,
-								]
-									.map((size) => size.toString())
-									.join('|')}
-								aria-hidden="true"
+						<Island>
+							<TopRightAdSlot
+								shouldHideReaderRevenue={false}
+								isPaidContent={false}
+								adStyles={adStyles}
 							/>
-						</div>
+						</Island>
 					);
 				}
 				default:

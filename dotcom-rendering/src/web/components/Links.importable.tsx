@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
 
-import SearchIcon from '@frontend/static/icons/search.svg';
-
 import {
 	brand,
 	brandText,
@@ -9,13 +7,14 @@ import {
 	textSans,
 	from,
 } from '@guardian/source-foundations';
-
-import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
-
-import ProfileIcon from '@frontend/static/icons/profile.svg';
-import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 import { getCookie, joinUrl } from '@guardian/libs';
-import { useApi } from '@root/src/web/lib/useApi';
+import SearchIcon from '../../static/icons/search.svg';
+
+import { DropdownLinkType, Dropdown } from './Dropdown';
+
+import ProfileIcon from '../../static/icons/profile.svg';
+import { createAuthenticationEventParams } from '../../lib/identity-component-event';
+import { useApi } from '../lib/useApi';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {

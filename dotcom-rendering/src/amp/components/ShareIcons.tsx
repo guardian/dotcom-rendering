@@ -3,17 +3,17 @@ import { css } from '@emotion/react';
 
 import { visuallyHidden } from '@guardian/source-foundations';
 
-import TwitterIconPadded from '@frontend/static/icons/twitter-padded.svg';
-import FacebookIcon from '@frontend/static/icons/facebook.svg';
-import EmailIcon from '@frontend/static/icons/email.svg';
-import LinkedInIcon from '@frontend/static/icons/linked-in.svg';
-import WhatsAppIcon from '@frontend/static/icons/whatsapp.svg';
-import MessengerIcon from '@frontend/static/icons/messenger.svg';
+import TwitterIconPadded from '../../static/icons/twitter-padded.svg';
+import FacebookIcon from '../../static/icons/facebook.svg';
+import EmailIcon from '../../static/icons/email.svg';
+import LinkedInIcon from '../../static/icons/linked-in.svg';
+import WhatsAppIcon from '../../static/icons/whatsapp.svg';
+import MessengerIcon from '../../static/icons/messenger.svg';
 import {
 	pillarMap,
 	pillarPalette_DO_NOT_USE,
 	neutralBorder,
-} from '@root/src/lib/pillars';
+} from '../../lib/pillars';
 
 const pillarFill = pillarMap(
 	(pillar) =>

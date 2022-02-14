@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { textSans, until } from '@guardian/source-foundations';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 
-import ClockIcon from '@frontend/static/icons/clock.svg';
+import ClockIcon from '../../../../static/icons/clock.svg';
 
 type Props = {
 	format: ArticleFormat;

@@ -8,9 +8,9 @@ import {
 	headline,
 } from '@guardian/source-foundations';
 
-import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
-import InfoIcon from '@frontend/static/icons/info.svg';
-import PlusIcon from '@frontend/static/icons/plus.svg';
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '../../lib/pillars';
+import InfoIcon from '../../static/icons/info.svg';
+import PlusIcon from '../../static/icons/plus.svg';
 
 const ListStyle = (iconColour: string) => css`
 	li {

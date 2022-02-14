@@ -1,12 +1,10 @@
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const chalk = require('chalk');
-const GuStatsReportPlugin = require('./gu-stats-report-plugin');
+const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
 module.exports = ({ sessionId }) => ({
 	entry: {
-		'frontend.server': './src/app/server.ts',
+		'frontend.server': './src/server/index.ts',
 	},
 	output: {
 		filename: `[name].js`,
@@ -53,17 +51,6 @@ module.exports = ({ sessionId }) => ({
 		},
 	],
 	plugins: [
-		DEV &&
-			new FriendlyErrorsWebpackPlugin({
-				compilationSuccessInfo: {
-					messages: [
-						'Server build complete',
-						`DEV server available at: ${chalk.blue.underline(
-							'http://localhost:3030',
-						)}`,
-					],
-				},
-			}),
 		DEV &&
 			new GuStatsReportPlugin({
 				displayDisclaimer: true,

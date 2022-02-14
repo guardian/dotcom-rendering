@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 
-import { renderArticleElement } from '@root/src/web/lib/renderElement';
-import { withSignInGateSlot } from '@root/src/web/lib/withSignInGateSlot';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
+import { renderArticleElement } from './renderElement';
+import { withSignInGateSlot } from './withSignInGateSlot';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
 	labelStyles as adLabelStyles,

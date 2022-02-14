@@ -1,4 +1,4 @@
-import { bestFitImage } from '@root/src/amp/lib/image-fit';
+import { bestFitImage } from './image-fit';
 
 const containerWidths: number[] = [600, 800, 1000, 1200, 1600];
 // This distribution of numbers is a balance between providing enough pictures

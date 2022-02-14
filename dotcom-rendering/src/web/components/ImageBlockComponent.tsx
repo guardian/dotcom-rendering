@@ -1,4 +1,4 @@
-import { ImageComponent } from '@root/src/web/components/ImageComponent';
+import { ImageComponent } from './ImageComponent';
 
 type Props = {
 	format: ArticleFormat;
