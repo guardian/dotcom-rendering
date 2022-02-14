@@ -46,14 +46,6 @@ export class MobileAppsRendering extends GuStack {
 		const codeDomainName = `${props.recordPrefix}.mobile-aws.code.dev-guardianapis.com`;
 		const prodDomainName = `${props.recordPrefix}.mobile-aws.guardianapis.com`;
 
-		const appsRenderingDomainName = this.withStageDependentValue<string>({
-			variableName: 'domainName',
-			app: appName,
-			stageValues: {
-				CODE: codeDomainName,
-				PROD: prodDomainName,
-			},
-		});
 		const hostedZoneIdCode = 'Z6PRU8YR6TQDK';
 		const hostedZoneIdProd = 'Z1EYB4AREPXE3B';
 		const hostedZone = HostedZone.fromHostedZoneAttributes(
