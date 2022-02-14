@@ -71,10 +71,10 @@ interface Props {
 export const MostViewedFooterLayout = ({
 	sectionName,
 	format,
+	ajaxUrl,
 	switches,
 	pageIsSensitive,
 	isDev,
-	ajaxUrl,
 }: Props) => {
 	const palette = decidePalette(format);
 

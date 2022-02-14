@@ -12,20 +12,17 @@ import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem
 import { abTestTest } from '../experiments/tests/ab-test-test';
 import { WithABProvider } from './WithABProvider';
 
-type WithABProps = {
+interface WithABProps {
 	sectionName?: string;
 	palette: Palette;
 	ajaxUrl: string;
-};
+}
 
-type Props = {
-	sectionName?: string;
-	palette: Palette;
-	ajaxUrl: string;
+interface Props extends WithABProps {
 	switches: Switches;
 	pageIsSensitive: boolean;
 	isDev?: boolean;
-};
+}
 
 const stackBelow = (breakpoint: Breakpoint) => css`
 	display: flex;
