@@ -114,12 +114,7 @@ const dcrWebpack = (config: webpack.Configuration) => {
 		test: /\.svg$/,
 		use: ["desvg-loader/react", "svg-loader"],
 	});
-
-	config.resolve.alias = {
-		...config.resolve.alias,
-		...alias,
-	};
-
+	config.resolve.alias = { ...config.resolve.alias, ...alias };
 	return config;
 };
 
@@ -148,7 +143,9 @@ const arWebpack = (config: webpack.Configuration) => {
 								useBuiltIns: "usage",
 								corejs: 3,
 								modules: false,
-								targets: { esmodules: true },
+								targets: {
+									esmodules: true,
+								},
 							},
 						],
 					],
@@ -163,7 +160,10 @@ const arWebpack = (config: webpack.Configuration) => {
 		],
 	});
 
-	if (!config.resolve) config.resolve = { modules: [] };
+	if (!config.resolve)
+		config.resolve = {
+			modules: [],
+		};
 
 	config.resolve.modules = [
 		...(config?.resolve?.modules ?? []),
@@ -184,3 +184,7 @@ const arWebpack = (config: webpack.Configuration) => {
 };
 
 export default config;
+
+export const core = {
+	builder: "webpack5",
+};
