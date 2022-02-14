@@ -1,30 +1,20 @@
-import { join } from 'path';
 import {
 	InstanceClass,
 	InstanceSize,
 	InstanceType,
 	Peer,
-	Port,
 } from '@aws-cdk/aws-ec2';
-import type { CfnLoadBalancer } from '@aws-cdk/aws-elasticloadbalancing';
 import {
 	HostedZone,
 	RecordSet,
 	RecordTarget,
 	RecordType,
 } from '@aws-cdk/aws-route53';
-import { CfnInclude } from '@aws-cdk/cloudformation-include';
 import type { App, CfnElement } from '@aws-cdk/core';
-import { Duration, Tags } from '@aws-cdk/core';
+import { Duration } from '@aws-cdk/core';
 import { AccessScope, GuEc2App } from '@guardian/cdk';
-import { Stage } from '@guardian/cdk/lib/constants';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
-import {
-	GuParameter,
-	GuStack,
-	GuStageParameter,
-	GuStringParameter,
-} from '@guardian/cdk/lib/constructs/core';
+import { GuStack } from '@guardian/cdk/lib/constructs/core';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 
 interface AppsStackProps extends GuStackProps {
