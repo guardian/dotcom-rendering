@@ -71,6 +71,7 @@
     },
     "exclude": ["cypress"],
 	"ts-node": {
+		"files": true, 		/* Allows resolution of declaration files */
 		"compilerOptions": {
 			"module": "CommonJS"
 		  }
