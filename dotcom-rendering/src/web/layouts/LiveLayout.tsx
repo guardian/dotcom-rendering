@@ -610,7 +610,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 							</GridItem>
 							<GridItem area="lastupdated">
-								{CAPI.blocks &&
+								{CAPI.blocks.length &&
 									CAPI.blocks[0].blockLastUpdated && (
 										<ArticleLastUpdated
 											format={format}
