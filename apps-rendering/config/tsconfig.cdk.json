@@ -24,8 +24,9 @@
     "inlineSources": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "outDir": "dist"
+    "outDir": "dist",
+    "skipLibCheck": true
   },
-  "include": ["lib/**/*", "bin/**/*"],
-  "exclude": ["lib/**/*.test.ts", "lib/**/__snapshots__/**"]
+  "include": ["../cdk/lib/*", "../cdk/bin/*"],
+  "exclude": ["../cdk/lib/*.test.ts", "../cdk/lib/__snapshots__/**"]
 }
