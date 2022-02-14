@@ -47,7 +47,6 @@
             /* Aliases should also be added to the webpack, babel and jest configurations */
             "*": ["node_modules/@types/*", "*"], // Make sure that yarn linking doesn't confuse things https://github.com/microsoft/TypeScript/issues/11916#issuecomment-257130001
         },
-		"skipLibCheck": true /* Because @types/webpack is targeting Webpack 4 */,
 
         // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
         // "typeRoots": [],                       /* List of folders to include type definitions from. */
@@ -70,7 +69,7 @@
         // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
         // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     },
-    "exclude": ["cypress"],
+    "exclude": ["cypress", "scripts/webpack/@types/@loadable"],
 	"ts-node": {
 		"files": true, 		/* Allows resolution of declaration files */
 		"compilerOptions": {
