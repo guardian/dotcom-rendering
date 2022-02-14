@@ -4941,8 +4941,12 @@
   dependencies:
     "@types/react" "*"
 
-"@types/loadable__webpack-plugin@^5.7.3", "@types/loadable__webpack-plugin@file:./dotcom-rendering/scripts/webpack/@types/@loadable/webpack-plugin":
-  version "0.0.0"
+"@types/loadable__webpack-plugin@", "@types/loadable__webpack-plugin@^5.7.3":
+  version "5.7.3"
+  resolved "https://registry.yarnpkg.com/@types/loadable__webpack-plugin/-/loadable__webpack-plugin-5.7.3.tgz#e27b42a4364d13fc34ec752d59ea1f8f75c0a881"
+  integrity sha512-jdOgIovGk9xcbU1Kyveiw9RVCBbHfv9U9AKOveop8Jk4JQQOPrafE7WHaNxotza08pH1YG6vHTV84xUL2W2F1Q==
+  dependencies:
+    "@types/webpack" "^4"
 
 "@types/lodash.clonedeep@^4.5.4":
   version "4.5.6"
@@ -5254,7 +5258,7 @@
     "@types/node" "*"
     webpack "^5"
 
-"@types/webpack@^4.41.26", "@types/webpack@^4.41.8", "@types/webpack@^5.0.0":
+"@types/webpack@^4", "@types/webpack@^4.41.26", "@types/webpack@^4.41.8", "@types/webpack@^5.0.0":
   version "5.28.0"
   resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-5.28.0.tgz#78dde06212f038d77e54116cfe69e88ae9ed2c03"
   integrity sha512-8cP0CzcxUiFuA9xGJkfeVpqmWTk9nx6CWwamRGCj95ph1SmlRRk9KlCZ6avhCbZd4L68LvYT6l1kpdEnQXrF8w==

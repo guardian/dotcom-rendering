@@ -69,7 +69,7 @@
         // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
         // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     },
-    "exclude": ["cypress", "scripts/webpack/@types/@loadable"],
+    "exclude": ["cypress"],
 	"ts-node": {
 		"files": true, 		/* Allows resolution of declaration files */
 		"compilerOptions": {
