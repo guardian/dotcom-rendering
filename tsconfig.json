@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		/* Visit https://aka.ms/tsconfig.json to read more about this file */
+
+		"target": "ESNext",
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"noEmit": true,
+		"skipLibCheck": true
+	},
+	"ts-node": {
+		"files": true /* Allows resolution of declaration files */
+	}
+}

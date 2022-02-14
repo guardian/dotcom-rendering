@@ -10,8 +10,8 @@
 	],
 	"scripts": {
 		"postinstall": "npm install --prefix ./apps-rendering",
-		"storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./dotcom-rendering/src/static -p 6006",
-		"build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
+		"storybook": "node -r ts-node/register --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./dotcom-rendering/src/static -p 6006",
+		"build-storybook": "node -r ts-node/register --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
 		"build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky install"
@@ -45,6 +45,7 @@
 		"mockdate": "^3.0.5",
 		"svg-loader": "^0.0.2",
 		"ts-loader": "^9.2.5",
+		"ts-node": "^10.5.0",
 		"typescript": "^4.3.5",
 		"webpack": "^5.51.1",
 		"webpack-dev-server": "^4.7.4"
