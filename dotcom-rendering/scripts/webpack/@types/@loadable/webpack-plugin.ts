@@ -30,7 +30,7 @@ declare module '@loadable/webpack-plugin' {
 
 	class LoadablePlugin implements webpack.WebpackPluginInstance {
 		constructor(options?: PluginOptions);
-		apply: (compiler: webpack.Compiler) => void;
+		apply(compiler: webpack.Compiler): void;
 	}
 
 	export default LoadablePlugin;
