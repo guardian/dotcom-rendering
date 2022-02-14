@@ -20,50 +20,7 @@ const dist = path.resolve(__dirname, '..', '..', 'dist');
 
 const sessionId = uuidv4();
 
-type NodeEnv = 'production' | 'development';
-
 let builds = 0;
-
-const getPlugins = (
-	platform: ConfigParam['platform'],
-	nodeEnv: NodeEnv,
-): NonNullable<Configuration['plugins']> => {
-	switch (nodeEnv) {
-		case 'development':
-			return [
-				new WebpackMessages({
-					name: platform,
-					logger: (message: string) => {
-						// distinguish between initial and subsequent (re)builds in console output
-						// eslint-disable-next-line @typescript-eslint/no-use-before-define -- configs is defined below, but there’s a circular dep
-						if (builds < configs.length * 2) {
-							message = message
-								.replace('Building', 'Building initial')
-								.replace('Completed', 'Completed initial');
-						} else {
-							message = message.replace('Building', 'Rebuilding');
-						}
-						console.log(message);
-						builds += 1;
-					},
-				}),
-			];
-
-		case 'production':
-			return [
-				// @ts-expect-error -- the Compiler types don’t overlap
-				new BundleAnalyzerPlugin({
-					reportFilename: path.join(dist, `${platform}-bundles.html`),
-					analyzerMode: 'static',
-					openAnalyzer: false,
-					logLevel: 'warn',
-				}),
-			];
-
-		default:
-			return [];
-	}
-};
 
 type ConfigParam = {
 	platform: 'server' | 'browser' | 'browser.legacy';
@@ -104,7 +61,42 @@ const commonConfigs = ({ platform }: ConfigParam): Configuration => ({
 		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
-		...getPlugins(platform, DEV ? 'development' : 'production'),
+		// @ts-expect-error -- the Compiler type of BundleAnalyzerPlugin doesn’t match
+		...(DEV
+			? // DEV plugins
+			  [
+					new WebpackMessages({
+						name: platform,
+						logger: (message: string) => {
+							// distinguish between initial and subsequent (re)builds in console output
+							// eslint-disable-next-line @typescript-eslint/no-use-before-define -- configs is defined below, but there’s a circular dep
+							if (builds < configs.length * 2) {
+								message = message
+									.replace('Building', 'Building initial')
+									.replace('Completed', 'Completed initial');
+							} else {
+								message = message.replace(
+									'Building',
+									'Rebuilding',
+								);
+							}
+							console.log(message);
+							builds += 1;
+						},
+					}),
+			  ]
+			: // PROD plugins
+			  [
+					new BundleAnalyzerPlugin({
+						reportFilename: path.join(
+							dist,
+							`${platform}-bundles.html`,
+						),
+						analyzerMode: 'static',
+						openAnalyzer: false,
+						logLevel: 'warn',
+					}),
+			  ]),
 	],
 	infrastructureLogging: {
 		level: PROD ? 'info' : 'warn',
