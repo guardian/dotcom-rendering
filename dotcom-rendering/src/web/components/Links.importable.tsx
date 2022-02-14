@@ -232,20 +232,27 @@ export const Links = ({
 
 	const isServer = typeof window === 'undefined';
 
+	const showSupporterCTA =
+		!isServer &&
+		getCookie({
+			name: 'gu_hide_support_messaging',
+			shouldMemoize: true,
+		}) === 'true';
+
 	const isSignedIn =
 		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
 	return (
 		<div data-print-layout="hide" css={linksStyles}>
-			{supporterCTA !== '' && (
+			{showSupporterCTA && supporterCTA !== '' && (
 				<>
 					<div css={seperatorStyles} />
 					<a
-						href="https://support.theguardian.com/subscribe/weekly?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_supporter_cta%22%7D"
+						href={supporterCTA}
 						css={[linkTablet({ showAtTablet: false }), linkStyles]}
 						data-link-name="nav2 : supporter-cta"
 					>
-						Print subscriptions
+						Subscriptions
 					</a>
 				</>
 			)}
