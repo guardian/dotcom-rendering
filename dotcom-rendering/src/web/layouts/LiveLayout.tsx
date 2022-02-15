@@ -614,7 +614,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									CAPI.blocks[0].blockLastUpdated && (
 										<ArticleLastUpdated
 											format={format}
-											palette={palette}
 											lastUpdated={
 												CAPI.blocks[0].blockLastUpdated
 											}

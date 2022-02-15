@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { useApi } from '../lib/useApi';
-import { updateTimeElements } from '../browser/relativeTime/updateTimeElements';
+import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
 
 type Props = {
 	pageId: string;
@@ -151,7 +151,7 @@ export const Liveness = ({
 
 				if (lastUpdated) {
 					lastUpdated.setAttribute('dateTime', new Date().toString());
-					updateTimeElements();
+					updateTimeElement(lastUpdated);
 				}
 
 				if (topOfBlogVisible()) {

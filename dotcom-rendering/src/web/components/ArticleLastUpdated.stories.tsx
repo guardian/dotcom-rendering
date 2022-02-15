@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { css } from '@emotion/react';
 import { ArticleLastUpdated } from './ArticleLastUpdated';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -16,12 +17,12 @@ export const LiveBlog = () => {
 	const palette = decidePalette(format);
 
 	return (
-		<div style={{ background: palette.background.standfirst }}>
-			<ArticleLastUpdated
-				palette={palette}
-				format={format}
-				lastUpdated={1641038370000}
-			/>
+		<div
+			css={css`
+				background: ${palette.background.standfirst};
+			`}
+		>
+			<ArticleLastUpdated format={format} lastUpdated={1641038370000} />
 		</div>
 	);
 };
@@ -35,12 +36,12 @@ export const DeadBlog = () => {
 	const palette = decidePalette(format);
 
 	return (
-		<div style={{ background: palette.background.standfirst }}>
-			<ArticleLastUpdated
-				palette={palette}
-				format={format}
-				lastUpdated={1641038370000}
-			/>
+		<div
+			css={css`
+				background: ${palette.background.standfirst};
+			`}
+		>
+			<ArticleLastUpdated format={format} lastUpdated={1641038370000} />
 		</div>
 	);
 };
