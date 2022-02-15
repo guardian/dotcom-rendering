@@ -33,7 +33,7 @@ else
     nvm use
 
 	npm i -g yarn@1.x
-    yarn --silent
+    yarn --silent --frozen-lockfile
 
     cd dotcom-rendering
 
