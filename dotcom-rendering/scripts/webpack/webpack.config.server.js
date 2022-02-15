@@ -50,16 +50,18 @@ module.exports = ({ sessionId }) => ({
 				: callback();
 		},
 	],
-	plugins: [
-		DEV &&
-			new GuStatsReportPlugin({
-				displayDisclaimer: true,
-				buildName: 'server',
-				project: 'dotcom-rendering',
-				team: 'dotcom',
-				sessionId,
-			}),
-	].filter(Boolean),
+	plugins: DEV
+		? [
+				new GuStatsReportPlugin({
+					displayDisclaimer: true,
+					buildName: 'server',
+					project: 'dotcom-rendering',
+					team: 'dotcom',
+					sessionId,
+					// TODO: convert the plugin to TS
+				}),
+		  ]
+		: undefined,
 	module: {
 		rules: [
 			{
