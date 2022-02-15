@@ -25,28 +25,21 @@ jobs:
             # Root dependencies
             - uses: bahmutov/npm-install@v1
 
-            - uses: actions/cache@v2
-              with:
-                  path: ~/.npm
-                  key: node-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: node-
-
             - name: install
-              run: npm ci
-              working-directory: apps-rendering
+              run: yarn --frozen-lockfile
 
             - name: lint
-              run: npm run lint
               working-directory: apps-rendering
+              run: yarn lint
 
             - name: test
-              run: npm run test
               working-directory: apps-rendering
+              run: yarn test
 
             - name: compile client
-              run: npm run build:client:prod
               working-directory: apps-rendering
+              run: yarn build:client:prod
 
             - name: compile server
-              run: npm run build:server:prod
               working-directory: apps-rendering
+              run: yarn build:server:prod

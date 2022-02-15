@@ -5,7 +5,7 @@ RED='\033[0;31m'
 ENDCOLOR='\033[0m'
 
 changedFiles="$(git diff-tree -r --name-only --no-commit-id HEAD@{1} HEAD)"
-changedLock="$(echo "$changedFiles" | { grep -E 'yarn.lock|package-lock.json' || :; })"
+changedLock="$(echo "$changedFiles" | { grep -E 'yarn.lock' || :; })"
 changedNode="$(echo "$changedFiles" | { grep '.nvmrc' || :; })"
 
 if [[ ! -z $changedLock ]]

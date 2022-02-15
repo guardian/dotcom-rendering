@@ -23,4 +23,4 @@ jobs:
                   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
               with:
                   command: monitor
-                  args: --org=guardian-mobile --project-name=apps-rendering --file=apps-rendering/package-lock.json
+                  args: --org=guardian-mobile --project-name=apps-rendering --file=apps-rendering/yarn.lock

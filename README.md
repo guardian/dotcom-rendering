@@ -7,7 +7,7 @@ Ever thought about joining us?
 
 This repository contains the rendering logic for articles on theguardian.com. It is a monorepo with 3 projects, `apps-rendering`, `common-rendering` and `dotcom-rendering`.
 
-You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `npm run watch` for apps-rendering) except for storybook. Linting, imports, builds and github actions should work as before.
+You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `yarn watch` for apps-rendering) except for storybook. Linting, imports, builds and github actions should work as before.
 
 ## `apps rendering`
 

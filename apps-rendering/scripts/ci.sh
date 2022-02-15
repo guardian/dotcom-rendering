@@ -29,12 +29,12 @@ else
     nvm install
     nvm use
 
-    npm ci
-    npm run test
-    npm run build:client:prod
-    npm run build:server:prod
-    npm run copy-manifest
-    npm run copy-fonts
-    npm run upload
+    yarn --frozen-lockfile
+    yarn test
+    yarn build:client:prod
+    yarn build:server:prod
+    yarn copy-manifest
+    yarn copy-fonts
+    yarn upload
 
 fi
