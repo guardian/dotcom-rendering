@@ -8,10 +8,10 @@ import {
 	headline,
 	until,
 } from '@guardian/source-foundations';
-import { BigNumber } from '../../BigNumber/BigNumber';
-import { AgeWarning } from '../../AgeWarning';
+import { BigNumber } from './BigNumber/BigNumber';
+import { AgeWarning } from './AgeWarning';
 
-import { LinkHeadline } from '../../LinkHeadline';
+import { LinkHeadline } from './LinkHeadline';
 
 const gridItem = (position: number) => css`
 	position: relative;

@@ -32,8 +32,8 @@ const EmailSignupEmbed: FC<Props> = ({ embed }) => (
 			height="52"
 			title={withDefault('Email newsletter signup embed')(embed.alt)}
 		></iframe>
-		{maybeRender(embed.caption, (caption) => (
-			<figcaption css={captionStyles}>{caption}</figcaption>
+		{maybeRender(embed.alt, (alt) => (
+			<figcaption css={captionStyles}>{alt}</figcaption>
 		))}
 	</figure>
 );

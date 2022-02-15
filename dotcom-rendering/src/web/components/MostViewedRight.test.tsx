@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import { useApi as useApi_ } from '../lib/useApi';
 
-import { mockTab1 } from './MostViewed/MostViewed.mocks';
+import { mockTab1 } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 
 const response = { data: mockTab1 };
@@ -20,7 +20,7 @@ describe('MostViewedList', () => {
 		useApi.mockReturnValue(response);
 
 		const { asFragment, getAllByText } = render(
-			<MostViewedRight isAdFreeUser={false} />,
+			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />,
 		);
 
 		// Calls api once only
@@ -61,7 +61,11 @@ describe('MostViewedList', () => {
 		useApi.mockReturnValue(response);
 
 		const { getAllByText } = render(
-			<MostViewedRight limitItems={3} isAdFreeUser={false} />,
+			<MostViewedRight
+				limitItems={3}
+				isAdFreeUser={false}
+				adBlockerDetected={false}
+			/>,
 		);
 
 		// Calls api once only
@@ -80,7 +84,9 @@ describe('MostViewedList', () => {
 	it('should show a byline when this property is set to true', async () => {
 		useApi.mockReturnValue(response);
 
-		const { getByText } = render(<MostViewedRight isAdFreeUser={false} />);
+		const { getByText } = render(
+			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />,
+		);
 
 		expect(
 			getByText('Jennifer Rankin and Daniel Boffey'),

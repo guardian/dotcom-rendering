@@ -38,7 +38,7 @@ import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionContainer } from '../components/DiscussionContainer.importable';
 import { Placeholder } from '../components/Placeholder';
 import { Nav } from '../components/Nav/Nav';
-import { LabsHeader } from '../components/LabsHeader';
+import { LabsHeader } from '../components/LabsHeader.importable';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
@@ -55,6 +55,8 @@ import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.imp
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { GetMatchNav } from '../components/GetMatchNav.importable';
 
 const StandardGrid = ({
 	children,
@@ -453,7 +455,9 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						sectionId="labs-header"
 						element="aside"
 					>
-						<LabsHeader />
+						<Island deferUntil="idle">
+							<LabsHeader />
+						</Island>
 					</ElementContainer>
 				</Stuck>
 			)}
@@ -493,10 +497,15 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<div css={maxWidth}>
 								{format.design === ArticleDesign.MatchReport &&
 									CAPI.matchUrl && (
-										<Placeholder
-											rootId="match-nav"
-											height={230}
-										/>
+										<Island
+											deferUntil="visible"
+											clientOnly={true}
+											placeholderHeight={230}
+										>
+											<GetMatchNav
+												matchUrl={CAPI.matchUrl}
+											/>
+										</Island>
 									)}
 							</div>
 						</GridItem>
@@ -611,6 +620,10 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										CAPI.config.discussionApiUrl
 									}
 									shortUrlId={CAPI.config.shortUrlId}
+									ajaxUrl={CAPI.config.ajaxUrl}
+									showShareCount={
+										CAPI.config.switches.serverShareCounts
+									}
 								/>
 							</div>
 						</GridItem>
@@ -686,6 +699,12 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									<AdSlot
 										position="right"
 										display={format.display}
+										shouldHideReaderRevenue={
+											CAPI.shouldHideReaderRevenue
+										}
+										isPaidContent={
+											CAPI.pageType.isPaidContent
+										}
 									/>
 									{!isPaidContent ? (
 										<Island
@@ -781,11 +800,16 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="most-viewed-footer"
-						element="aside"
-					/>
+					<ElementContainer data-print-layout="hide" element="aside">
+						<MostViewedFooterLayout
+							format={format}
+							sectionName={CAPI.sectionName}
+							ajaxUrl={CAPI.config.ajaxUrl}
+							switches={CAPI.config.switches}
+							pageIsSensitive={CAPI.config.isSensitive}
+							isDev={CAPI.config.isDev}
+						/>
+					</ElementContainer>
 				)}
 
 				<ElementContainer

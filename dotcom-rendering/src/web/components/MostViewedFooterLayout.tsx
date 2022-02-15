@@ -1,29 +1,12 @@
-import React, { Suspense } from 'react';
 import { css } from '@emotion/react';
-
 import { text, headline, from, Breakpoint } from '@guardian/source-foundations';
-
-import { useAB } from '@guardian/ab-react';
 import { ArticleDesign } from '@guardian/libs';
-import { initPerf } from '../../../browser/initPerf';
-import { AdSlot, labelStyles } from '../../AdSlot';
-import { Lazy } from '../../Lazy';
-
-import { abTestTest } from '../../../experiments/tests/ab-test-test';
-import { decidePalette } from '../../../lib/decidePalette';
-import { Hide } from '../../Hide';
-import { LeftColumn } from '../../LeftColumn';
-
-const MostViewedFooterData = React.lazy(() => {
-	const { start, end } = initPerf('MostViewedFooterData');
-	start();
-	return import(
-		/* webpackChunkName: "MostViewedFooterData" */ './MostViewedFooterData'
-	).then((module) => {
-		end();
-		return { default: module.MostViewedFooterData };
-	});
-});
+import { Hide } from './Hide';
+import { LeftColumn } from './LeftColumn';
+import { MostViewedFooterData } from './MostViewedFooterData.importable';
+import { AdSlot, labelStyles } from './AdSlot';
+import { decidePalette } from '../lib/decidePalette';
+import { Island } from './Island';
 
 const stackBelow = (breakpoint: Breakpoint) => css`
 	display: flex;
@@ -80,22 +63,19 @@ interface Props {
 	sectionName?: string;
 	format: ArticleFormat;
 	ajaxUrl: string;
+	switches: Switches;
+	pageIsSensitive: boolean;
+	isDev?: boolean;
 }
 
-export const MostViewedFooter = ({ sectionName, format, ajaxUrl }: Props) => {
-	// Example usage of AB Tests
-	// Used in the Cypress tests as smoke test of the AB tests framework integration
-	const ABTestAPI = useAB();
-	const abTestCypressDataAttr =
-		(ABTestAPI.isUserInVariant('AbTestTest', 'control') &&
-			'ab-test-control') ||
-		(ABTestAPI.isUserInVariant('AbTestTest', 'variant') &&
-			'ab-test-variant') ||
-		'ab-test-not-in-test';
-	const runnableTest = ABTestAPI.runnableTest(abTestTest);
-	const variantFromRunnable =
-		(runnableTest && runnableTest.variantToRun.id) || 'not-runnable';
-
+export const MostViewedFooterLayout = ({
+	sectionName,
+	format,
+	ajaxUrl,
+	switches,
+	pageIsSensitive,
+	isDev,
+}: Props) => {
 	const palette = decidePalette(format);
 
 	return (
@@ -108,8 +88,6 @@ export const MostViewedFooter = ({ sectionName, format, ajaxUrl }: Props) => {
 				css={[stackBelow('leftCol'), mostPopularAdStyle]}
 				data-link-name="most-popular"
 				data-component="most-popular"
-				data-cy-ab-user-in-variant={abTestCypressDataAttr}
-				data-cy-ab-runnable-test={variantFromRunnable}
 			>
 				<LeftColumn
 					size={
@@ -130,15 +108,16 @@ export const MostViewedFooter = ({ sectionName, format, ajaxUrl }: Props) => {
 						<Hide when="above" breakpoint="leftCol">
 							<h2 css={headingStyles}>Most popular</h2>
 						</Hide>
-						<Lazy margin={300}>
-							<Suspense fallback={<></>}>
-								<MostViewedFooterData
-									sectionName={sectionName}
-									palette={palette}
-									ajaxUrl={ajaxUrl}
-								/>
-							</Suspense>
-						</Lazy>
+						<Island clientOnly={true} deferUntil="visible">
+							<MostViewedFooterData
+								sectionName={sectionName}
+								palette={palette}
+								ajaxUrl={ajaxUrl}
+								switches={switches}
+								pageIsSensitive={pageIsSensitive}
+								isDev={isDev}
+							/>
+						</Island>
 					</div>
 					<div
 						css={css`

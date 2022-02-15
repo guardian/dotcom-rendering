@@ -1,10 +1,16 @@
 import { css } from '@emotion/react';
 import { textSans, text } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
+import { ClickToView } from './ClickToView';
 
 type Props = {
 	html: string;
 	caption?: string;
+	role?: RoleType;
+	isTracking: boolean;
+	isMainMedia?: boolean;
+	source?: string;
+	sourceDomain?: string;
 };
 
 const emailCaptionStyle = css`
@@ -21,15 +27,31 @@ const embedContainer = css`
 	}
 `;
 
-export const EmbedBlockComponent = ({ html, caption }: Props) => {
+export const EmbedBlockComponent = ({
+	html,
+	caption,
+	role,
+	isTracking,
+	isMainMedia,
+	source,
+	sourceDomain,
+}: Props) => {
 	// TODO: Email embeds are being turned into atoms, so we can remove this hack when that happens
 	const isEmailEmbed = html.includes('email/form');
 	return (
-		<div data-cy="embed-block" css={embedContainer}>
-			<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
-			{isEmailEmbed && caption && (
-				<div css={emailCaptionStyle}>{caption}</div>
-			)}
-		</div>
+		<ClickToView
+			role={role}
+			isTracking={isTracking}
+			isMainMedia={isMainMedia}
+			source={source}
+			sourceDomain={sourceDomain}
+		>
+			<div data-cy="embed-block" css={embedContainer}>
+				<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
+				{isEmailEmbed && caption && (
+					<div css={emailCaptionStyle}>{caption}</div>
+				)}
+			</div>
+		</ClickToView>
 	);
 };

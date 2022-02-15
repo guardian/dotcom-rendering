@@ -2,16 +2,16 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
-import { useApi as useApi_ } from '../../../lib/useApi';
-import { decidePalette } from '../../../lib/decidePalette';
+import { useApi as useApi_ } from '../lib/useApi';
+import { decidePalette } from '../lib/decidePalette';
 
-import { responseWithTwoTabs, responseWithOneTab } from '../MostViewed.mocks';
-import { MostViewedFooterData } from './MostViewedFooterData';
+import { responseWithTwoTabs, responseWithOneTab } from './MostViewed.mocks';
+import { MostViewedFooterData } from './MostViewedFooterData.importable';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useApi: { [key: string]: any } = useApi_;
 
-jest.mock('../../../lib/useApi', () => ({
+jest.mock('../lib/useApi', () => ({
 	useApi: jest.fn(),
 }));
 
@@ -35,6 +35,9 @@ describe('MostViewedFooterData', () => {
 					display: ArticleDisplay.Standard,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				switches={{}}
+				pageIsSensitive={false}
+				isDev={false}
 			/>,
 		);
 
@@ -71,6 +74,9 @@ describe('MostViewedFooterData', () => {
 					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				switches={{}}
+				pageIsSensitive={false}
+				isDev={false}
 			/>,
 		);
 
@@ -103,6 +109,9 @@ describe('MostViewedFooterData', () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				})}
+				switches={{}}
+				pageIsSensitive={false}
+				isDev={false}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -146,6 +155,9 @@ describe('MostViewedFooterData', () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				})}
+				switches={{}}
+				pageIsSensitive={false}
+				isDev={false}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -188,6 +200,9 @@ describe('MostViewedFooterData', () => {
 					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				switches={{}}
+				pageIsSensitive={false}
+				isDev={false}
 			/>,
 		);
 
@@ -206,6 +221,9 @@ describe('MostViewedFooterData', () => {
 					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				switches={{}}
+				pageIsSensitive={false}
+				isDev={false}
 			/>,
 		);
 

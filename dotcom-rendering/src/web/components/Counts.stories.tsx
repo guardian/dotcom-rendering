@@ -9,7 +9,7 @@ import {
 } from '@guardian/libs';
 
 import { Counts } from './Counts';
-import { ShareCount } from './ShareCount';
+import { ShareCount } from './ShareCount.importable';
 import { CommentCount } from './CommentCount.importable';
 
 export default {

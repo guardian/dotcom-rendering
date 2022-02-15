@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 
 import { embedIframe } from '../browser/embedIframe/embedIframe';
 
-import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
+import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
 
 export default {
 	component: UnsafeEmbedBlockComponent,
@@ -28,6 +28,11 @@ export const DefaultStory = () => {
 				alt="Example component"
 				html={html}
 				index={1}
+				isTracking={true}
+				source=""
+				sourceDomain=""
+				// eslint-disable-next-line jsx-a11y/aria-role
+				role="inline"
 			/>
 		</div>
 	);

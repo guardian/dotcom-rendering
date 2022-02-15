@@ -26,7 +26,7 @@ import {
 import type { Image } from 'image';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
-import Article from '../article';
+import Layout from '.';
 
 // ----- Setup ------ //
 
@@ -88,7 +88,7 @@ const getTag = (id: string, webTitle: string): Tag => ({
 // ----- Stories ----- //
 
 const Default = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...article,
 			...isImmersive(),
@@ -99,7 +99,7 @@ const Default = (): ReactElement => (
 );
 
 const Analysis = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...analysis,
 			...isImmersive(),
@@ -112,7 +112,7 @@ const Analysis = (): ReactElement => (
 );
 
 const Editorial = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...editorial,
 			tags: [getTag('tone/editorials', 'View from the Guardian ')],
@@ -125,7 +125,7 @@ const Editorial = (): ReactElement => (
 );
 
 const Feature = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...feature,
 			...isImmersive(),
@@ -137,7 +137,7 @@ const Feature = (): ReactElement => (
 );
 
 const Review = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...review,
 			...hasShareIcon(),
@@ -148,7 +148,7 @@ const Review = (): ReactElement => (
 );
 
 const Showcase = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...article,
 			...hasShareIcon(),
@@ -160,7 +160,7 @@ const Showcase = (): ReactElement => (
 );
 
 const Interview = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...interview,
 			...hasShareIcon(),
@@ -172,7 +172,7 @@ const Interview = (): ReactElement => (
 );
 
 const Comment = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...comment,
 			...hasShareIcon(),
@@ -184,7 +184,7 @@ const Comment = (): ReactElement => (
 );
 
 const Letter = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...letter,
 			...hasShareIcon(),
@@ -195,7 +195,7 @@ const Letter = (): ReactElement => (
 );
 
 const Correction = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...correction,
 			tags: [
@@ -210,7 +210,7 @@ const Correction = (): ReactElement => (
 );
 
 const MatchReport = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...matchReport,
 			...hasShareIcon(),
@@ -221,7 +221,7 @@ const MatchReport = (): ReactElement => (
 );
 
 const Cartoon = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...cartoon,
 			...hasShareIcon(),
@@ -231,7 +231,7 @@ const Cartoon = (): ReactElement => (
 );
 
 const Gallery = (): ReactElement => (
-	<Article
+	<Layout
 		item={{
 			...media,
 			...hasShareIcon(),
@@ -250,8 +250,8 @@ Gallery.parameters = {
 // ----- Exports ----- //
 
 export default {
-	component: Article,
-	title: 'AR/Editions/Article',
+	component: Layout,
+	title: 'Editions/Layouts',
 	decorators: [withKnobs],
 	parameters: {
 		layout: 'fullscreen',

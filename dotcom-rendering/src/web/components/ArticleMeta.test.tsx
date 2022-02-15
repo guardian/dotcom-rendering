@@ -33,6 +33,8 @@ describe('ArticleMeta', () => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
 			/>,
 		);
 
@@ -72,6 +74,8 @@ describe('ArticleMeta', () => {
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
 			/>,
 		);
 

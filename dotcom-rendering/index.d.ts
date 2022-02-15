@@ -1029,6 +1029,7 @@ declare namespace JSX {
 		'gu-island': {
 			name: string;
 			deferUntil?: 'idle' | 'visible';
+			clientOnly?: boolean;
 			props: any;
 			children: React.ReactNode;
 		};
