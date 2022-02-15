@@ -25,9 +25,6 @@ jobs:
             # Root dependencies
             - uses: bahmutov/npm-install@v1
 
-            - name: install
-              run: yarn --frozen-lockfile
-
             - name: lint
               working-directory: apps-rendering
               run: yarn lint
