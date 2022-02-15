@@ -9,6 +9,9 @@ type Props = {
 	format: ArticleFormat;
 };
 
+/**
+ * A button to scroll to the top when new content exists.
+ */
 export const Toast = ({ count, onClick, format }: Props) => {
 	return (
 		<div
