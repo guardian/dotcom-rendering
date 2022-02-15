@@ -38,14 +38,14 @@ const unstuckStyles = css``;
 
 export const StickyVideo = ({ children }: Props) => {
 	const [stickyVideo, setStickyVideo] = useState(false);
-	const [hasBeenSeen, setRef] = useStickyVideo({
+	const [isIntersecting, setRef] = useStickyVideo({
 		threshold: 0,
 		debounce: true,
 	});
 
 	useEffect(() => {
-		setStickyVideo(hasBeenSeen);
-	}, [hasBeenSeen]);
+		setStickyVideo(isIntersecting);
+	}, [isIntersecting]);
 
 	return (
 		<div css={stickyVideo ? stuckStyles : unstuckStyles} ref={setRef}>

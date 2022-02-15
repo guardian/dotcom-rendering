@@ -15,6 +15,7 @@ import { record } from '../browser/ophan/ophan';
 import { Caption } from './Caption';
 import { decidePalette } from '../lib/decidePalette';
 import { StickyVideo } from './StickyVideo.importable';
+import { Island } from './Island';
 
 type Props = {
 	id: string;
@@ -180,61 +181,63 @@ export const YoutubeBlockComponent = ({
 	};
 
 	return (
-		<StickyVideo>
-			<div data-chromatic="ignore" data-component="youtube-atom">
-				<YoutubeAtom
-					assetId={assetId}
-					overrideImage={
-						overrideImage
-							? [
-									{
-										srcSet: [
-											{
-												src: overrideImage,
-												width: 500, // we do not have width for overlayImage so set a random number
-											},
-										],
-									},
-							  ]
-							: undefined
-					}
-					posterImage={
-						posterImage
-							? [
-									{
-										srcSet: posterImage.map((img) => ({
-											src: img.url,
-											width: img.width,
-										})),
-									},
-							  ]
-							: undefined
-					}
-					role={role}
-					alt={altText || mediaTitle || ''}
-					adTargeting={adTargeting}
-					consentState={consentState}
-					height={height}
-					width={width}
-					title={mediaTitle}
-					duration={duration}
-					eventEmitters={[ophanTracking, gaTracking, playState]}
-					pillar={format.theme}
-					origin={
-						process.env.NODE_ENV === 'development' ? '' : origin
-					}
-				/>
-				{!hideCaption && (
-					<Caption
-						palette={palette}
-						captionText={mediaTitle || ''}
-						format={format}
-						displayCredit={false}
-						shouldLimitWidth={shouldLimitWidth}
-						mediaType="Video"
+		<Island deferUntil="idle">
+			<StickyVideo>
+				<div data-chromatic="ignore" data-component="youtube-atom">
+					<YoutubeAtom
+						assetId={assetId}
+						overrideImage={
+							overrideImage
+								? [
+										{
+											srcSet: [
+												{
+													src: overrideImage,
+													width: 500, // we do not have width for overlayImage so set a random number
+												},
+											],
+										},
+								  ]
+								: undefined
+						}
+						posterImage={
+							posterImage
+								? [
+										{
+											srcSet: posterImage.map((img) => ({
+												src: img.url,
+												width: img.width,
+											})),
+										},
+								  ]
+								: undefined
+						}
+						role={role}
+						alt={altText || mediaTitle || ''}
+						adTargeting={adTargeting}
+						consentState={consentState}
+						height={height}
+						width={width}
+						title={mediaTitle}
+						duration={duration}
+						eventEmitters={[ophanTracking, gaTracking, playState]}
+						pillar={format.theme}
+						origin={
+							process.env.NODE_ENV === 'development' ? '' : origin
+						}
 					/>
-				)}
-			</div>
-		</StickyVideo>
+					{!hideCaption && (
+						<Caption
+							palette={palette}
+							captionText={mediaTitle || ''}
+							format={format}
+							displayCredit={false}
+							shouldLimitWidth={shouldLimitWidth}
+							mediaType="Video"
+						/>
+					)}
+				</div>
+			</StickyVideo>
+		</Island>
 	);
 };
