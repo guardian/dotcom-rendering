@@ -113,10 +113,6 @@ export const YoutubeBlockComponent = ({
 			});
 	}, []);
 
-	useEffect(() => {
-		console.log('here');
-	});
-
 	const palette = decidePalette(format);
 	const shouldLimitWidth =
 		!isMainMedia &&
