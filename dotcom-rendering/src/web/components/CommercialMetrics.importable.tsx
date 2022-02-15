@@ -1,5 +1,8 @@
 import type { ABTest } from '@guardian/ab-core';
-import { initCommercialMetrics, bypassCommercialMetricsSampling } from '@guardian/commercial-core';
+import {
+	initCommercialMetrics,
+	bypassCommercialMetricsSampling,
+} from '@guardian/commercial-core';
 import { getCookie } from '@guardian/libs';
 import { useAB } from '@guardian/ab-react';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
