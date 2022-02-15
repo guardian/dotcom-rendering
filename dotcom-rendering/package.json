@@ -218,7 +218,7 @@
   },
   "resolutions": {
     "@types/serve-static": "^1.13.9",
-		"type-fest": "^2.8.0"
+    "type-fest": "^2.8.0"
   },
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",
