@@ -1,9 +1,5 @@
 declare module '@loadable/webpack-plugin' {
-	// Type definitions for @loadable/webpack-plugin 5.7
-	// Project: https://github.com/smooth-code/loadable-components
-	// Definitions by: Spencer Miskoviak <https://github.com/skovy>
-	// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-	// TypeScript Version: 3.7
+	// Awaiting: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/58719
 
 	import * as webpack from 'webpack';
 
