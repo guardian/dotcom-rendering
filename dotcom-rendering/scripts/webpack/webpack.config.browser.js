@@ -37,15 +37,16 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 	optimization: {
 		splitChunks: { cacheGroups: { default: false } },
 	},
-	plugins: [
-		DEV &&
-			new GuStatsReportPlugin({
-				buildName: isLegacyJS ? 'legacy-client' : 'client',
-				project: 'dotcom-rendering',
-				team: 'dotcom',
-				sessionId,
-			}),
-	].filter(Boolean),
+	plugins: DEV
+		? [
+				new GuStatsReportPlugin({
+					buildName: isLegacyJS ? 'legacy-client' : 'client',
+					project: 'dotcom-rendering',
+					team: 'dotcom',
+					sessionId,
+				}),
+		  ]
+		: undefined,
 	module: {
 		rules: [
 			{
