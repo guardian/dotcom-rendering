@@ -400,6 +400,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						webTitle={CAPI.webTitle}
 						ajaxUrl={CAPI.config.ajaxUrl}
 						filterKeyEvents={CAPI.filterKeyEvents}
+						format={format}
 					/>
 				</Island>
 			)}
