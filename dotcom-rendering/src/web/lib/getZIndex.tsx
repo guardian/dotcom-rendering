@@ -23,7 +23,7 @@
  */
 const indices = [
 	// Modals will go here at the top
-
+	'sticky-video',
 	'banner',
 	'dropdown',
 	'burger',
