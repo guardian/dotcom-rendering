@@ -1,38 +1,14 @@
-import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
+import { Toast } from './Toast';
 
 type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
 	filterKeyEvents: boolean;
-};
-
-// TODO: Break this out into its own component
-const Toast = ({
-	onClick,
-	numHiddenBlocks,
-}: {
-	onClick: () => void;
-	numHiddenBlocks: number;
-}) => {
-	// TODO: Style and absolute position this component
-	return (
-		<nav
-			css={css`
-				position: fixed;
-				top: 20px;
-				left: 50px;
-				display: flex;
-				width: 100%;
-				align-items: center;
-			`}
-		>
-			<button onClick={onClick}>{`${numHiddenBlocks} blah`}</button>
-		</nav>
-	);
+	format: ArticleFormat;
 };
 
 const isServer = typeof window === 'undefined';
@@ -133,6 +109,7 @@ export const Liveness = ({
 	webTitle,
 	ajaxUrl,
 	filterKeyEvents,
+	format,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
@@ -204,7 +181,10 @@ export const Liveness = ({
 
 	const handleToastClick = () => {
 		setShowToast(false);
-		topOfBlog?.scrollIntoView();
+		document.getElementById('maincontent')?.scrollIntoView({
+			behavior: 'smooth',
+		});
+		window.location.href = '#maincontent';
 		revealNewBlocks();
 		setNumHiddenBlocks(0);
 	};
@@ -213,7 +193,8 @@ export const Liveness = ({
 		return (
 			<Toast
 				onClick={handleToastClick}
-				numHiddenBlocks={numHiddenBlocks}
+				count={numHiddenBlocks}
+				format={format}
 			/>
 		);
 	}
