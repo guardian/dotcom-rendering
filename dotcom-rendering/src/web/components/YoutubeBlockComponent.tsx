@@ -175,6 +175,10 @@ export const YoutubeBlockComponent = ({
 		});
 	};
 
+	const playState = (trackingEvent: string) => {
+		console.log(trackingEvent);
+	};
+
 	return (
 		<StickyVideo>
 			<div data-chromatic="ignore" data-component="youtube-atom">
@@ -214,7 +218,7 @@ export const YoutubeBlockComponent = ({
 					width={width}
 					title={mediaTitle}
 					duration={duration}
-					eventEmitters={[ophanTracking, gaTracking]}
+					eventEmitters={[ophanTracking, gaTracking, playState]}
 					pillar={format.theme}
 					origin={
 						process.env.NODE_ENV === 'development' ? '' : origin
