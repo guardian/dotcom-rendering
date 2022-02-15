@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
 import WebpackMessages from 'webpack-messages';
 
-import { isWebpackConfiguration } from './utils';
 import webpackConfigBrowser from './webpack.config.browser';
 import webpackConfigServer from './webpack.config.server';
 import webpackConfigDevServer from './dev/webpack.config.dev-server';
@@ -120,8 +119,7 @@ const configs: Configuration[] = [
 					commonConfigs({
 						platform: 'browser.legacy',
 					}),
-					// eslint-disable-next-line @typescript-eslint/no-var-requires
-					require(`./webpack.config.browser`)({
+					webpackConfigBrowser({
 						isLegacyJS: true,
 						sessionId,
 					}),
