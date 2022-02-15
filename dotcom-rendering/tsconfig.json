@@ -45,7 +45,9 @@
         /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
         "paths": {
             /* Aliases should also be added to the webpack, babel and jest configurations */
-            "*": ["node_modules/@types/*", "*"], // Make sure that yarn linking doesn't confuse things https://github.com/microsoft/TypeScript/issues/11916#issuecomment-257130001
+			// Make sure that yarn linking doesn't confuse things
+			// https://github.com/microsoft/TypeScript/issues/11916#issuecomment-257130001
+            "*": ["node_modules/@types/*", "../node_modules/@types/*", "*"],
         },
         // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
         // "typeRoots": [],                       /* List of folders to include type definitions from. */
