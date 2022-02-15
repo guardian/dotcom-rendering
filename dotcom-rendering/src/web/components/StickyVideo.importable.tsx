@@ -19,7 +19,6 @@ const stuckStyles = css`
 		}
 	}
 
-	height: 500px;
 	position: fixed;
 	bottom: 50px;
 	right: 20px;
