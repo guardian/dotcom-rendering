@@ -109,7 +109,6 @@ const configs: Configuration[] = [
 		commonConfigs({
 			platform: 'server',
 		}),
-		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		webpackConfigServer({ sessionId }),
 		DEV ? webpackConfigDevServer : {},
 	),
@@ -133,7 +132,6 @@ const configs: Configuration[] = [
 		commonConfigs({
 			platform: 'browser',
 		}),
-		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		webpackConfigBrowser({
 			isLegacyJS: false,
 			sessionId,
