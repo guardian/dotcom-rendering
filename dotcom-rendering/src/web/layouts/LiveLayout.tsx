@@ -55,7 +55,7 @@ import { Liveness } from '../components/Liveness.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooter } from '../components/MostViewedFooter.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 
@@ -401,6 +401,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						webTitle={CAPI.webTitle}
 						ajaxUrl={CAPI.config.ajaxUrl}
 						filterKeyEvents={CAPI.filterKeyEvents}
+						format={format}
 					/>
 				</Island>
 			)}
@@ -1231,16 +1232,14 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 				{!isPaidContent && (
 					<ElementContainer data-print-layout="hide" element="aside">
-						<Island clientOnly={true} deferUntil="visible">
-							<MostViewedFooter
-								format={format}
-								sectionName={CAPI.sectionName}
-								ajaxUrl={CAPI.config.ajaxUrl}
-								switches={CAPI.config.switches}
-								pageIsSensitive={CAPI.config.isSensitive}
-								isDev={CAPI.config.isDev}
-							/>
-						</Island>
+						<MostViewedFooterLayout
+							format={format}
+							sectionName={CAPI.sectionName}
+							ajaxUrl={CAPI.config.ajaxUrl}
+							switches={CAPI.config.switches}
+							pageIsSensitive={CAPI.config.isSensitive}
+							isDev={CAPI.config.isDev}
+						/>
 					</ElementContainer>
 				)}
 
