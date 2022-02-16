@@ -5,7 +5,13 @@ const chalk = require('chalk');
 
 const PLUGIN_NAME = 'GuStatsReportPlugin';
 
+/**
+ * @typedef Config
+ * @type {{ buildName : string, project: string, team: string, sessionId: string, displayDisclaimer?: boolean}}
+ */
+
 class GuStatsReportPlugin {
+	/** @type {( config: Config ) => void} */
 	constructor(config) {
 		this.buildName = config?.buildName;
 		this.project = config?.project;
@@ -49,6 +55,7 @@ class GuStatsReportPlugin {
 		});
 	}
 
+	/** @param {import('webpack').Compiler} compiler */
 	apply(compiler) {
 		this.logger = compiler.getInfrastructureLogger(PLUGIN_NAME);
 
@@ -66,6 +73,7 @@ class GuStatsReportPlugin {
 				method: 'POST',
 				body: JSON.stringify({
 					label: 'buildstats',
+					/** @type {Array<{ name: string, value: string}>} */
 					properties: [
 						{
 							name: 'project',
@@ -81,7 +89,7 @@ class GuStatsReportPlugin {
 						},
 						{
 							name: 'buildCount',
-							value: this.buildCount,
+							value: String(this.buildCount),
 						},
 						{
 							name: 'gitHash',
@@ -97,13 +105,14 @@ class GuStatsReportPlugin {
 						},
 						{
 							name: 'cpus',
-							value: os.cpus().length,
+							value: String(os.cpus().length),
 						},
 						{
 							name: 'memoryKb',
-							value: Math.round(os.totalmem() / 1024),
+							value: String(Math.round(os.totalmem() / 1024)),
 						},
 					],
+					/** @type {Array<{ name: string, value: number}>} */
 					metrics: [
 						{
 							name: 'buildTime',

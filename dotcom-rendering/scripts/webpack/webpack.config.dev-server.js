@@ -15,6 +15,7 @@ console.log(
 );
 
 module.exports = {
+	/** @type {import('webpack-dev-server').Configuration} */
 	devServer: {
 		compress: false,
 		hot: false,
