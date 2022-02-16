@@ -16,10 +16,10 @@ class GuStatsReportPlugin implements WebpackPluginInstance {
 
 	protected buildCount = 0;
 
-	protected logger: {
-		error: (...args: unknown[]) => void;
-		log: (...args: unknown[]) => void;
-	} = console;
+	protected logger: Record<
+		'log' | 'warn' | 'error',
+		(...args: unknown[]) => void
+	> = console;
 
 	protected gitBranch: string = 'unknown';
 
@@ -43,7 +43,7 @@ class GuStatsReportPlugin implements WebpackPluginInstance {
 		this.fetchGitHash();
 
 		if (config?.displayDisclaimer)
-			this.logger.log(
+			this.logger.warn(
 				'This project reports compilation and machine stats to improve the development experience.',
 			);
 	}
