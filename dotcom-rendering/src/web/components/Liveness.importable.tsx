@@ -186,7 +186,7 @@ export const Liveness = ({
 	 */
 	useEffect(() => {
 		const handleVisibilityChange = () => {
-			// The blog was either hiiden or has become visible
+			// The blog was either hidden or has become visible
 			if (
 				// If we're returning to a blog that has pending blocks and the reader
 				// is at the top of the page then...
