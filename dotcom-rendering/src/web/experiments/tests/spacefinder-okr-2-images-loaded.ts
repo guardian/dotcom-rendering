@@ -3,9 +3,9 @@ import type { ABTest } from '@guardian/ab-core';
 export const spacefinderOkr2ImagesLoaded: ABTest = {
 	id: 'SpacefinderOkr2ImagesLoaded',
 	author: 'Simon Byford (@simonbyford)',
-	start: '2022-02-14',
+	start: '2022-02-16',
 	expiry: '2022-02-28',
-	audience: 20 / 100,
+	audience: 10 / 100,
 	audienceOffset: 20 / 100,
 	audienceCriteria: 'All pageviews',
 	successMeasure:
