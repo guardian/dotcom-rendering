@@ -30,7 +30,6 @@ import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
-import { GetMatchTabs } from './GetMatchTabs';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
 import { Lazy } from './Lazy';
 
@@ -219,11 +218,6 @@ export const App = ({ CAPI }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-			{CAPI.matchUrl && (
-				<Portal rootId="match-tabs">
-					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />
-				</Portal>
-			)}
 			{audioAtoms.map((audioAtom) => (
 				<HydrateOnce rootId={audioAtom.elementId}>
 					<AudioAtomWrapper
