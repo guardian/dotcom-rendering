@@ -6,11 +6,11 @@ import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
 import LoadablePlugin from '@loadable/webpack-plugin';
 import { v4 as uuidv4 } from 'uuid';
 import WebpackMessages from 'webpack-messages';
+import { fileURLToPath } from 'url';
 
 import webpackConfigBrowser from './webpack.config.browser.js';
 import webpackConfigServer from './webpack.config.server.js';
 import webpackDevServer from './webpack.config.dev-server.js';
-import { fileURLToPath } from 'url';
 
 const __dirname = fileURLToPath(import.meta.url);
 
