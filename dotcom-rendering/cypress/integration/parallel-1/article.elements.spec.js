@@ -125,7 +125,8 @@ describe('Elements', function () {
 				return cy
 					.get(
 						'[data-cypress="interactive-element-LA%20Rams%20dead%20cap%20numbers"]',
-					).scrollIntoView({
+					)
+					.scrollIntoView({
 						duration: 300,
 						offset: { top: -100, left: 0 },
 					})
@@ -157,7 +158,8 @@ describe('Elements', function () {
 				return cy
 					.get(
 						'[data-cypress="interactive-element-pa%20county%20by%20county"]',
-					).scrollIntoView({
+					)
+					.scrollIntoView({
 						duration: 300,
 						offset: { top: -100, left: 0 },
 					})
