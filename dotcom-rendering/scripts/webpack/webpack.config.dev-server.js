@@ -15,13 +15,13 @@ module.exports = {
 		hot: false,
 		port,
 		liveReload: true,
-		setupMiddlewares: require('./setup-middlewares'),
+		setupMiddlewares: require('./dev/setup-middlewares'),
 		client: {
 			logging: 'warn',
 			overlay: true,
 		},
 		static: {
-			directory: path.join(__dirname, '..', '..', '..', 'src', 'static'),
+			directory: path.join(__dirname, '..', '..', 'src', 'static'),
 			publicPath: '/static/frontend',
 		},
 		devMiddleware: {
