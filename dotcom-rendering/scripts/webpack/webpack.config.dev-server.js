@@ -1,83 +1,76 @@
-const path = require('path');
-const chalk = require('chalk');
-const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
-const bodyParser = require('body-parser');
-const {
-	getContentFromURLMiddleware,
-} = require('../../src/server/lib/get-content-from-url');
+import { join } from 'path';
+import { dim, blue } from 'chalk';
+import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
+import { json } from 'body-parser';
+import { getContentFromURLMiddleware } from '../../src/server/lib/get-content-from-url';
 
 const port = 3030;
 
 console.log(
-	`${chalk.dim('DEV server running on')} ${chalk.blue.underline(
+	`${dim('DEV server running on')} ${blue.underline(
 		`http://localhost:${port}`,
 	)}`,
 );
 
-module.exports = {
-	devServer: {
-		compress: false,
-		hot: false,
-		liveReload: true,
-		client: {
-			logging: 'warn',
-			overlay: true,
+export const devServer = {
+	compress: false,
+	hot: false,
+	liveReload: true,
+	client: {
+		logging: 'warn',
+		overlay: true,
+	},
+	port,
+	static: {
+		directory: join(__dirname, '..', '..', 'src', 'static'),
+		publicPath: '/static/frontend',
+	},
+	devMiddleware: {
+		publicPath: '/assets/',
+		serverSideRender: true,
+		headers: (req, res) => {
+			// Allow any localhost request from accessing the assets
+			if (req.hostname === 'localhost' && req.headers.origin)
+				res.setHeader(
+					'Access-Control-Allow-Origin',
+					req.headers.origin);
 		},
-		port,
-		static: {
-			directory: path.join(__dirname, '..', '..', 'src', 'static'),
-			publicPath: '/static/frontend',
-		},
-		devMiddleware: {
-			publicPath: '/assets/',
-			serverSideRender: true,
-			headers: (req, res) => {
-				// Allow any localhost request from accessing the assets
-				if (req.hostname === 'localhost' && req.headers.origin)
-					res.setHeader(
-						'Access-Control-Allow-Origin',
-						req.headers.origin,
-					);
-			},
-		},
-		setupMiddlewares: (middlewares, devServer) => {
-			if (!devServer) {
-				throw new Error('webpack-dev-server is not defined');
-			}
+	},
+	// eslint-disable-next-line @typescript-eslint/no-shadow -- we’ve got devSever in scope
+	setupMiddlewares: (middlewares, devServer) => {
+		if (!devServer) {
+			throw new Error('webpack-dev-server is not defined');
+		}
 
-			// it turns out webpack dev server is just an express server
-			// with webpack-dev-middleware, so here we add some other middlewares
-			// of our own
+		// it turns out webpack dev server is just an express server
+		// with webpack-dev-middleware, so here we add some other middlewares
+		// of our own
+		devServer.app.use(json({ limit: '10mb' }));
 
-			devServer.app.use(bodyParser.json({ limit: '10mb' }));
+		// populates req.body with the content data from a production
+		// URL if req.params.url is present
+		devServer.app.use(getContentFromURLMiddleware);
 
-			// populates req.body with the content data from a production
-			// URL if req.params.url is present
-			devServer.app.use(getContentFromURLMiddleware);
+		devServer.app.get('/', (req, res) => {
+			res.sendFile(
+				join(
+					__dirname,
+					'..',
+					'..',
+					'..',
+					'src',
+					'server',
+					'dev-index.html'));
+		});
 
-			devServer.app.get('/', (req, res) => {
-				res.sendFile(
-					path.join(
-						__dirname,
-						'..',
-						'..',
-						'..',
-						'src',
-						'server',
-						'dev-index.html',
-					),
-				);
-			});
+		// webpack-hot-server-middleware needs to run after webpack-dev-middleware
+		middlewares.push({
+			name: 'server',
+			middleware: webpackHotServerMiddleware(devServer.compiler, {
+				chunkName: 'frontend.server',
+			}),
+		});
 
-			// webpack-hot-server-middleware needs to run after webpack-dev-middleware
-			middlewares.push({
-				name: 'server',
-				middleware: webpackHotServerMiddleware(devServer.compiler, {
-					chunkName: 'frontend.server',
-				}),
-			});
-
-			return middlewares;
-		},
+		return middlewares;
 	},
 };

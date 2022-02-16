@@ -1,8 +1,8 @@
-const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
+import GuStatsReportPlugin from './plugins/gu-stats-report-plugin';
 
 const DEV = process.env.NODE_ENV === 'development';
 
-module.exports = ({ sessionId }) => ({
+export default ({ sessionId }) => ({
 	entry: {
 		'frontend.server': './src/server/index.ts',
 	},

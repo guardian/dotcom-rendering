@@ -1,17 +1,19 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const LoadablePlugin = require('@loadable/webpack-plugin');
-const { v4: uuidv4 } = require('uuid');
-const WebpackMessages = require('webpack-messages');
+import { resolve as _resolve, join } from 'path';
+import { DefinePlugin, IgnorePlugin } from 'webpack';
+import { merge } from 'webpack-merge';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
+import LoadablePlugin from '@loadable/webpack-plugin';
+import { v4 as uuidv4 } from 'uuid';
+import WebpackMessages from 'webpack-messages';
+import webpackConfigBrowser from './webpack.config.browser';
+import webpackConfigDevServer from './webpack.config.dev-server';
+import webpackConfigServer from './webpack.config.server';
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
-const dist = path.resolve(__dirname, '..', '..', 'dist');
+const dist = _resolve(__dirname, '..', '..', 'dist');
 
 const sessionId = uuidv4();
 
@@ -38,7 +40,7 @@ const commonConfigs = ({ platform }) => ({
 		symlinks: false,
 	},
 	plugins: [
-		new webpack.DefinePlugin({
+		new DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 		new FilterWarningsPlugin({
@@ -50,7 +52,7 @@ const commonConfigs = ({ platform }) => ({
 		}),
 		// Matching modules specified in this regex will not be imported during the webpack build
 		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.
-		new webpack.IgnorePlugin({
+		new IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
 		...(DEV
@@ -60,7 +62,8 @@ const commonConfigs = ({ platform }) => ({
 						name: platform,
 						logger: (message) => {
 							// distinguish between initial and subsequent (re)builds in console output
-							if (builds < module.exports.length * 2) {
+							// eslint-disable-next-line @typescript-eslint/no-use-before-define -- circular dependency with configs
+							if (builds < configs.length * 2) {
 								message = message
 									.replace('Building', 'Building initial')
 									.replace('Completed', 'Completed initial');
@@ -78,10 +81,7 @@ const commonConfigs = ({ platform }) => ({
 			: // PROD plugins
 			  [
 					new BundleAnalyzerPlugin({
-						reportFilename: path.join(
-							dist,
-							`${platform}-bundles.html`,
-						),
+						reportFilename: join(dist, `${platform}-bundles.html`),
 						analyzerMode: 'static',
 						openAnalyzer: false,
 						logLevel: 'warn',
@@ -93,14 +93,14 @@ const commonConfigs = ({ platform }) => ({
 	},
 });
 
-module.exports = [
+const configs = [
 	// server bundle config
 	merge(
 		commonConfigs({
 			platform: 'server',
 		}),
-		require(`./webpack.config.server`)({ sessionId }),
-		DEV ? require(`./webpack.config.dev-server`) : {},
+		webpackConfigServer({ sessionId }),
+		DEV ? webpackConfigDevServer : {},
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compilation
@@ -110,7 +110,7 @@ module.exports = [
 					commonConfigs({
 						platform: 'browser.legacy',
 					}),
-					require(`./webpack.config.browser`)({
+					webpackConfigBrowser.default({
 						isLegacyJS: true,
 						sessionId,
 					}),
@@ -121,9 +121,11 @@ module.exports = [
 		commonConfigs({
 			platform: 'browser',
 		}),
-		require(`./webpack.config.browser`)({
+		webpackConfigBrowser.default({
 			isLegacyJS: false,
 			sessionId,
 		}),
 	),
 ];
+
+export default configs;
