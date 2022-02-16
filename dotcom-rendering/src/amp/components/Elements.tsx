@@ -7,7 +7,7 @@ import { Expandable } from './Expandable';
 import { GuVideoBlockComponent } from './elements/GuVideoBlockComponent';
 import { ImageBlockComponent } from './elements/ImageBlockComponent';
 import { InteractiveAtomBlockComponent } from './elements/InteractiveAtomBlockComponent';
-import { InteractiveBlockComponent } from './elements/InteractiveBlockComponent';
+import { InteractiveBlockComponentAMP } from './elements/InteractiveBlockComponentAMP';
 import { PullquoteBlockComponent } from './elements/PullquoteBlockComponent';
 import { RichLinkBlockComponent } from './elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from './elements/SoundcloudBlockComponent';
@@ -102,7 +102,7 @@ export const Elements = (
 				); // element.placeholderUrl
 			case 'model.dotcomrendering.pageElements.InteractiveBlockElement': // Plain Interactive Embeds
 				return (
-					<InteractiveBlockComponent
+					<InteractiveBlockComponentAMP
 						url={element.url}
 						isMandatory={element.isMandatory}
 					/>
