@@ -610,15 +610,18 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 							</GridItem>
 							<GridItem area="lastupdated">
-								{CAPI.blocks.length &&
-									CAPI.blocks[0].blockLastUpdated && (
-										<ArticleLastUpdated
-											format={format}
-											lastUpdated={
-												CAPI.blocks[0].blockLastUpdated
-											}
-										/>
-									)}
+								<Hide until="desktop">
+									{CAPI.blocks.length &&
+										CAPI.blocks[0].blockLastUpdated && (
+											<ArticleLastUpdated
+												format={format}
+												lastUpdated={
+													CAPI.blocks[0]
+														.blockLastUpdated
+												}
+											/>
+										)}
+								</Hide>
 							</GridItem>
 							<GridItem area="lines">
 								<Hide from="desktop">
