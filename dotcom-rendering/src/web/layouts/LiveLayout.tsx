@@ -48,7 +48,6 @@ import {
 } from '../lib/layoutHelpers';
 import { Stuck, SendToBack, BannerWrapper } from './lib/stickiness';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
-import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';
 import { Liveness } from '../components/Liveness.importable';
@@ -58,6 +57,7 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
+import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -710,10 +710,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="matchtabs" element="aside">
 									<div css={maxWidth}>
-										<Placeholder
-											rootId="match-tabs"
-											height={40}
-										/>
+										<Island
+											clientOnly={true}
+											placeholderHeight={40}
+										>
+											<GetMatchTabs
+												matchUrl={CAPI.matchUrl}
+												format={format}
+											/>
+										</Island>
 									</div>
 								</GridItem>
 								<GridItem area="media">

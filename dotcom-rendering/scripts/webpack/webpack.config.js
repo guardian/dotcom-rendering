@@ -53,30 +53,41 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
-		PROD &&
-			new BundleAnalyzerPlugin({
-				reportFilename: path.join(dist, `${platform}-bundles.html`),
-				analyzerMode: 'static',
-				openAnalyzer: false,
-				logLevel: 'warn',
-			}),
-		DEV &&
-			new WebpackMessages({
-				name: platform,
-				logger: (message) => {
-					// distinguish between initial and subsequent (re)builds in console output
-					if (builds < module.exports.length * 2) {
-						message = message
-							.replace('Building', 'Building initial')
-							.replace('Completed', 'Completed initial');
-					} else {
-						message = message.replace('Building', 'Rebuilding');
-					}
-					console.log(message);
-					builds += 1;
-				},
-			}),
-	].filter(Boolean),
+		...(DEV
+			? // DEV plugins
+			  [
+					new WebpackMessages({
+						name: platform,
+						logger: (message) => {
+							// distinguish between initial and subsequent (re)builds in console output
+							if (builds < module.exports.length * 2) {
+								message = message
+									.replace('Building', 'Building initial')
+									.replace('Completed', 'Completed initial');
+							} else {
+								message = message.replace(
+									'Building',
+									'Rebuilding',
+								);
+							}
+							console.log(message);
+							builds += 1;
+						},
+					}),
+			  ]
+			: // PROD plugins
+			  [
+					new BundleAnalyzerPlugin({
+						reportFilename: path.join(
+							dist,
+							`${platform}-bundles.html`,
+						),
+						analyzerMode: 'static',
+						openAnalyzer: false,
+						logLevel: 'warn',
+					}),
+			  ]),
+	],
 	infrastructureLogging: {
 		level: PROD ? 'info' : 'warn',
 	},
@@ -89,20 +100,23 @@ module.exports = [
 			platform: 'server',
 		}),
 		require(`./webpack.config.server`)({ sessionId }),
-		DEV ? require(`./dev/webpack.config.dev-server`) : {},
+		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
 	// browser bundle configs
-	// TODO: ignore static files for legacy compliation
-	INCLUDE_LEGACY &&
-		merge(
-			commonConfigs({
-				platform: 'browser.legacy',
-			}),
-			require(`./webpack.config.browser`)({
-				isLegacyJS: true,
-				sessionId,
-			}),
-		),
+	// TODO: ignore static files for legacy compilation
+	...(INCLUDE_LEGACY
+		? [
+				merge(
+					commonConfigs({
+						platform: 'browser.legacy',
+					}),
+					require(`./webpack.config.browser`)({
+						isLegacyJS: true,
+						sessionId,
+					}),
+				),
+		  ]
+		: []),
 	merge(
 		commonConfigs({
 			platform: 'browser',
@@ -112,4 +126,4 @@ module.exports = [
 			sessionId,
 		}),
 	),
-].filter(Boolean);
+];
