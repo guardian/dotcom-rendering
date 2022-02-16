@@ -1,21 +1,41 @@
-const fetch = require('node-fetch');
-const os = require('os');
-const { exec } = require('child_process');
-const chalk = require('chalk');
+import fetch from 'node-fetch';
+import os from 'os';
+import { exec } from 'child_process';
+import type { Compiler, Stats, WebpackPluginInstance } from 'webpack';
 
 const PLUGIN_NAME = 'GuStatsReportPlugin';
 
-class GuStatsReportPlugin {
-	constructor(config) {
-		this.buildName = config?.buildName;
-		this.project = config?.project;
-		this.team = config?.team;
-		this.sessionId = config?.sessionId;
-		this.buildCount = 0;
-		this.logger = console;
+class GuStatsReportPlugin implements WebpackPluginInstance {
+	protected buildName: string;
 
-		this.gitBranch = undefined;
-		this.gitHash = undefined;
+	protected project: string;
+
+	protected team: string;
+
+	protected sessionId: string;
+
+	protected buildCount = 0;
+
+	protected logger: {
+		error: (...args: unknown[]) => void;
+		log: (...args: unknown[]) => void;
+	} = console;
+
+	protected gitBranch?: string;
+
+	protected gitHash?: string;
+
+	constructor(config?: {
+		team: string;
+		buildName: string;
+		project: string;
+		sessionId: string;
+		displayDisclaimer?: boolean;
+	}) {
+		this.buildName = config?.buildName ?? 'unknown';
+		this.project = config?.project ?? 'unknown';
+		this.team = config?.team ?? 'unknown';
+		this.sessionId = config?.sessionId ?? 'unknown';
 
 		// Since we can't make asynchronous calls in the constructor, we'll call these fetch
 		// methods, and they'll update this.gitBranch and this.gitHash once the data is fetched.
@@ -23,10 +43,8 @@ class GuStatsReportPlugin {
 		this.fetchGitHash();
 
 		if (config?.displayDisclaimer)
-			console.log(
-				chalk.yellow.dim(
-					'This project reports compilation and machine stats to improve the development experience.',
-				),
+			this.logger.log(
+				'This project reports compilation and machine stats to improve the development experience.',
 			);
 	}
 
@@ -49,10 +67,10 @@ class GuStatsReportPlugin {
 		});
 	}
 
-	apply(compiler) {
+	apply(compiler: Compiler) {
 		this.logger = compiler.getInfrastructureLogger(PLUGIN_NAME);
 
-		const onDone = (stats) => {
+		const onDone = (stats: Stats) => {
 			// Increment the buildCount
 			this.buildCount += 1;
 
@@ -60,6 +78,13 @@ class GuStatsReportPlugin {
 				return this.logger.error(
 					'Unable to report stats - invalid config',
 				);
+
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars -- it will be used later
+			type Payload = {
+				label: string;
+				properties: Array<{ name: string; value: string }>;
+				metrics: Array<{ name: string; value: number }>;
+			};
 
 			const URL = 'https://logs.guardianapis.com/log';
 			fetch(URL, {
@@ -81,7 +106,7 @@ class GuStatsReportPlugin {
 						},
 						{
 							name: 'buildCount',
-							value: this.buildCount,
+							value: String(this.buildCount),
 						},
 						{
 							name: 'gitHash',
@@ -97,11 +122,11 @@ class GuStatsReportPlugin {
 						},
 						{
 							name: 'cpus',
-							value: os.cpus().length,
+							value: String(os.cpus().length),
 						},
 						{
 							name: 'memoryKb',
-							value: Math.round(os.totalmem() / 1024),
+							value: String(Math.round(os.totalmem() / 1024)),
 						},
 					],
 					metrics: [
@@ -146,4 +171,4 @@ class GuStatsReportPlugin {
 	}
 }
 
-module.exports = GuStatsReportPlugin;
+export default GuStatsReportPlugin;
