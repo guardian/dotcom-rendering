@@ -1,4 +1,5 @@
-import GuStatsReportPlugin from './plugins/gu-stats-report-plugin';
+import GuStatsReportPlugin from './plugins/gu-stats-report-plugin.js';
+import webpackNodeExternals from 'webpack-node-externals';
 
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -20,7 +21,7 @@ export default ({ sessionId }) => ({
 	},
 	externals: [
 		'@loadable/component',
-		require('webpack-node-externals')({
+		webpackNodeExternals({
 			allowlist: [/^@guardian/],
 			additionalModuleDirs: [
 				// Since we use yarn-workspaces for the monorepo, node_modules will be co-located

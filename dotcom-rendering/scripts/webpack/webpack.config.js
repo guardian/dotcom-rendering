@@ -1,5 +1,5 @@
-import { resolve as _resolve, join } from 'path';
-import { DefinePlugin, IgnorePlugin } from 'webpack';
+import { resolve, join } from 'path';
+import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
@@ -7,14 +7,17 @@ import LoadablePlugin from '@loadable/webpack-plugin';
 import { v4 as uuidv4 } from 'uuid';
 import WebpackMessages from 'webpack-messages';
 
-import webpackConfigBrowser from './webpack.config.browser';
-import webpackConfigDevServer from './webpack.config.dev-server';
-import webpackConfigServer from './webpack.config.server';
+import webpackConfigBrowser from './webpack.config.browser.js';
+import webpackConfigServer from './webpack.config.server.js';
+import webpackDevServer from './webpack.config.dev-server.js';
+import { fileURLToPath } from 'url';
+
+const __dirname = fileURLToPath(import.meta.url);
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
-const dist = _resolve(__dirname, '..', '..', 'dist');
+const dist = resolve(__dirname, '..', '..', 'dist');
 
 const sessionId = uuidv4();
 
@@ -41,7 +44,7 @@ const commonConfigs = ({ platform }) => ({
 		symlinks: false,
 	},
 	plugins: [
-		new DefinePlugin({
+		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
 		new FilterWarningsPlugin({
@@ -53,7 +56,7 @@ const commonConfigs = ({ platform }) => ({
 		}),
 		// Matching modules specified in this regex will not be imported during the webpack build
 		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.
-		new IgnorePlugin({
+		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
 		...(DEV
@@ -101,7 +104,7 @@ const configs = [
 			platform: 'server',
 		}),
 		webpackConfigServer({ sessionId }),
-		DEV ? webpackConfigDevServer : {},
+		DEV ? webpackDevServer : {},
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compilation
@@ -111,7 +114,7 @@ const configs = [
 					commonConfigs({
 						platform: 'browser.legacy',
 					}),
-					webpackConfigBrowser.default({
+					webpackConfigBrowser({
 						isLegacyJS: true,
 						sessionId,
 					}),
@@ -122,7 +125,7 @@ const configs = [
 		commonConfigs({
 			platform: 'browser',
 		}),
-		webpackConfigBrowser.default({
+		webpackConfigBrowser({
 			isLegacyJS: false,
 			sessionId,
 		}),

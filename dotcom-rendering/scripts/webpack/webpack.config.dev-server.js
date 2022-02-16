@@ -1,17 +1,23 @@
 import { join } from 'path';
-import { dim, blue } from 'chalk';
+import chalk from 'chalk';
 import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
-import { json } from 'body-parser';
-import { getContentFromURLMiddleware } from '../../src/server/lib/get-content-from-url';
+import bodyParser from 'body-parser';
+import { fileURLToPath } from 'url';
+
+import { getContentFromURLMiddleware } from '../../src/server/lib/get-content-from-url.js';
 
 const port = 3030;
+const __dirname = fileURLToPath(import.meta.url);
 
 console.log(
-	`${dim('DEV server running on')} ${blue.underline(
+	`${chalk.dim('DEV server running on')} ${chalk.blue.underline(
 		`http://localhost:${port}`,
 	)}`,
 );
 
+/**
+ * @type {import('webpack-dev-server').Configuration}
+ */
 export const devServer = {
 	compress: false,
 	hot: false,
@@ -45,7 +51,7 @@ export const devServer = {
 		// it turns out webpack dev server is just an express server
 		// with webpack-dev-middleware, so here we add some other middlewares
 		// of our own
-		devServer.app.use(json({ limit: '10mb' }));
+		devServer.app.use(bodyParser.json({ limit: '10mb' }));
 
 		// populates req.body with the content data from a production
 		// URL if req.params.url is present
@@ -74,3 +80,5 @@ export const devServer = {
 		return middlewares;
 	},
 };
+
+export default { devServer }
