@@ -1,10 +1,13 @@
 import { promisify } from 'util';
 import { writeFile } from 'fs/promises';
-
 import execa from 'execa';
 import { resolve } from 'path';
 import cpy from 'cpy';
+import { fileURLToPath } from 'url';
+
 import { warn, log } from '../env/log';
+
+const __dirname = fileURLToPath(import.meta.url);
 
 const target = resolve(__dirname, '../..', 'target');
 
