@@ -1,4 +1,4 @@
-import type { Configuration, WebpackPluginInstance } from 'webpack';
+import type { Configuration } from 'webpack';
 import WebpackNodeExternals from 'webpack-node-externals';
 import GuStatsReportPlugin from './plugins/gu-stats-report-plugin';
 
@@ -60,8 +60,7 @@ export default ({ sessionId }: { sessionId: string }): Configuration => ({
 					project: 'dotcom-rendering',
 					team: 'dotcom',
 					sessionId,
-					// TODO: convert the plugin to TS
-				}) as WebpackPluginInstance,
+				}),
 		  ]
 		: undefined,
 	module: {

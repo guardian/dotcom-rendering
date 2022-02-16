@@ -1,5 +1,4 @@
-import type { Configuration, WebpackPluginInstance } from 'webpack';
-// @ts-ignore -- TODO: Convert to Typescript
+import type { Configuration} from 'webpack';
 import GuStatsReportPlugin from './plugins/gu-stats-report-plugin';
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -62,8 +61,7 @@ export default ({
 					project: 'dotcom-rendering',
 					team: 'dotcom',
 					sessionId,
-					// TODO: remove assertion
-				}) as WebpackPluginInstance,
+				}),
 		  ]
 		: undefined,
 	module: {
