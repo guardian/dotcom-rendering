@@ -39,7 +39,8 @@ export const devServer = {
 			if (req.hostname === 'localhost' && req.headers.origin)
 				res.setHeader(
 					'Access-Control-Allow-Origin',
-					req.headers.origin);
+					req.headers.origin,
+				);
 		},
 	},
 	// eslint-disable-next-line @typescript-eslint/no-shadow -- we’ve got devSever in scope
@@ -66,7 +67,9 @@ export const devServer = {
 					'..',
 					'src',
 					'server',
-					'dev-index.html'));
+					'dev-index.html',
+				),
+			);
 		});
 
 		// webpack-hot-server-middleware needs to run after webpack-dev-middleware
@@ -81,4 +84,4 @@ export const devServer = {
 	},
 };
 
-export default { devServer }
+export default { devServer };
