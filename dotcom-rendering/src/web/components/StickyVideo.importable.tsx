@@ -5,16 +5,32 @@ import { useStickyVideo } from '../lib/useStickyVideo';
 import { StickyVideoButton } from './StickyVideoButton';
 
 const stickyStyles = css`
+	@keyframes fade-in-up {
+		from {
+			transform: translateY(100%);
+			opacity: 0;
+		}
+
+		to {
+			transform: translateY(0%);
+			opacity: 1;
+		}
+	}
+
 	position: fixed;
-	bottom: 50px;
-	right: 20px;
-	width: 260px;
+	bottom: 145px;
 	height: 145px;
-	z-index: ${getZIndex('sticky-video')};
+	${getZIndex('sticky-video')};
+	animation: fade-in-up 1s ease forwards;
 
 	figcaption {
 		display: none;
 	}
+
+	/* div {
+		width: 300px;
+		height: 169px;
+	} */
 `;
 
 const containerStyles = (height: number) => css`
@@ -31,8 +47,8 @@ interface Props {
 export const StickyVideo = ({ isPlaying, children, height }: Props) => {
 	const [stickyVideo, setStickyVideo] = useState(false);
 	const [isIntersecting, setRef] = useStickyVideo({
-		threshold: 0.9,
-		debounce: true,
+		threshold: 0.1,
+		debounce: false,
 	});
 
 	useEffect(() => {

@@ -12,7 +12,9 @@ const useStickyVideo = (
 	// Enabling debouncing ensures the target element intersects for at least
 	// 200ms before the callback is executed
 	const intersectionFn: IntersectionObserverCallback = ([entry]) => {
-		if (entry.isIntersecting) {
+		if (entry.boundingClientRect.top > 0) {
+			setIsIntersecting(false);
+		} else {
 			setIsIntersecting(true);
 		}
 	};

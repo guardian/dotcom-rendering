@@ -53,7 +53,10 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 			>
 				<h2>Scroll Down</h2>
 				<BlocksOfText />
+				<BlocksOfText />
 				{children}
+				<BlocksOfText />
+				<BlocksOfText />
 				<BlocksOfText />
 				<h2>Scroll up</h2>
 			</div>
