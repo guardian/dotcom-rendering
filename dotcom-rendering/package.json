@@ -11,7 +11,7 @@
       "html-minifier/**"
     ]
   },
-	"type": "module",
+  "type": "module",
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx && yarn lint-cypress",
     "lint-cypress": "eslint ./cypress",
@@ -255,5 +255,8 @@
   "run-if-changed": {
     "src/lib/content.d.ts": "make gen-schema && make gen-fixtures",
     "src/lib/index.d.ts": "make gen-schema && make gen-fixtures"
+  },
+  "devDependencies": {
+    "@types/semver": "^7.3.9"
   }
 }
