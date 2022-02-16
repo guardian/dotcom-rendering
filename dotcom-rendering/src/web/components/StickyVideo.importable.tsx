@@ -2,12 +2,7 @@ import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { useStickyVideo } from '../lib/useStickyVideo';
-
-interface Props {
-	isPlaying: boolean;
-	height: number;
-	children: React.ReactNode;
-}
+import { StickyVideoButton } from './StickyVideoButton';
 
 const stickyStyles = css`
 	position: fixed;
@@ -24,7 +19,14 @@ const stickyStyles = css`
 
 const containerStyles = (height: number) => css`
 	height: ${height}px;
+	position: relative;
 `;
+
+interface Props {
+	isPlaying: boolean;
+	height: number;
+	children: React.ReactNode;
+}
 
 export const StickyVideo = ({ isPlaying, children, height }: Props) => {
 	const [stickyVideo, setStickyVideo] = useState(false);
@@ -40,16 +42,21 @@ export const StickyVideo = ({ isPlaying, children, height }: Props) => {
 	return (
 		<div css={containerStyles(height)}>
 			{!stickyVideo ? (
-				<div ref={setRef}>{children}</div>
+				<div ref={setRef}>
+					{isPlaying && (
+						<StickyVideoButton
+							onClick={() => setStickyVideo(true)}
+							stickyVideo={stickyVideo}
+						/>
+					)}
+					{children}
+				</div>
 			) : (
 				<div css={stickyStyles}>
-					<button
-						onClick={() => {
-							setStickyVideo(false);
-						}}
-					>
-						Unstick
-					</button>
+					<StickyVideoButton
+						onClick={() => setStickyVideo(false)}
+						stickyVideo={stickyVideo}
+					/>
 					{children}
 				</div>
 			)}

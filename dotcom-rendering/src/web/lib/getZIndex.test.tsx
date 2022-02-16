@@ -2,6 +2,7 @@ import { getZIndex } from './getZIndex';
 
 describe('getZIndex', () => {
 	it('gets the correct zindex for group and sibling', () => {
+		expect(getZIndex('sticky-video-button')).toBe('z-index: 20;');
 		expect(getZIndex('sticky-video')).toBe('z-index: 19;');
 		expect(getZIndex('banner')).toBe('z-index: 18;');
 		expect(getZIndex('dropdown')).toBe('z-index: 17;');
