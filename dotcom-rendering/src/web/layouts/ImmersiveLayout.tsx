@@ -41,6 +41,7 @@ import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { Island } from '../components/Island';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -364,6 +365,10 @@ export const ImmersiveLayout = ({
 										CAPI.config.discussionApiUrl
 									}
 									shortUrlId={CAPI.config.shortUrlId}
+									ajaxUrl={CAPI.config.ajaxUrl}
+									showShareCount={
+										CAPI.config.switches.serverShareCounts
+									}
 								/>
 							</div>
 						</GridItem>
@@ -428,6 +433,13 @@ export const ImmersiveLayout = ({
 												<AdSlot
 													position="right"
 													display={format.display}
+													shouldHideReaderRevenue={
+														CAPI.shouldHideReaderRevenue
+													}
+													isPaidContent={
+														CAPI.pageType
+															.isPaidContent
+													}
 												/>
 											</div>
 										)}
@@ -508,10 +520,16 @@ export const ImmersiveLayout = ({
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer
-						sectionId="most-viewed-footer"
-						element="aside"
-					/>
+					<ElementContainer data-print-layout="hide" element="aside">
+						<MostViewedFooterLayout
+							format={format}
+							sectionName={CAPI.sectionName}
+							ajaxUrl={CAPI.config.ajaxUrl}
+							switches={CAPI.config.switches}
+							pageIsSensitive={CAPI.config.isSensitive}
+							isDev={CAPI.config.isDev}
+						/>
+					</ElementContainer>
 				)}
 
 				<ElementContainer

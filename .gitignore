@@ -1,3 +1,6 @@
+# Environment Variables
+.env
+
 ### Node template
 # Logs
 logs

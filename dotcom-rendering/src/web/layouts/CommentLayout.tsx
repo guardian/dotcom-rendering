@@ -44,6 +44,7 @@ import { Island } from '../components/Island';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 
 const StandardGrid = ({
 	children,
@@ -536,6 +537,10 @@ export const CommentLayout = ({
 										CAPI.config.discussionApiUrl
 									}
 									shortUrlId={CAPI.config.shortUrlId}
+									ajaxUrl={CAPI.config.ajaxUrl}
+									showShareCount={
+										CAPI.config.switches.serverShareCounts
+									}
 								/>
 							</div>
 						</GridItem>
@@ -597,6 +602,12 @@ export const CommentLayout = ({
 									<AdSlot
 										position="right"
 										display={format.display}
+										shouldHideReaderRevenue={
+											CAPI.shouldHideReaderRevenue
+										}
+										isPaidContent={
+											CAPI.pageType.isPaidContent
+										}
 									/>
 									{!isPaidContent ? (
 										<Island
@@ -686,10 +697,16 @@ export const CommentLayout = ({
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer
-						sectionId="most-viewed-footer"
-						element="aside"
-					/>
+					<ElementContainer data-print-layout="hide" element="aside">
+						<MostViewedFooterLayout
+							format={format}
+							sectionName={CAPI.sectionName}
+							ajaxUrl={CAPI.config.ajaxUrl}
+							switches={CAPI.config.switches}
+							pageIsSensitive={CAPI.config.isSensitive}
+							isDev={CAPI.config.isDev}
+						/>
+					</ElementContainer>
 				)}
 
 				<ElementContainer

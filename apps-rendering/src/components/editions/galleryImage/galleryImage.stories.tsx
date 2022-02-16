@@ -5,7 +5,7 @@ import imageFixture from 'fixtures/galleryImage';
 import { article } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
-import { galleryWrapperStyles } from '../article';
+import { galleryWrapperStyles } from '../layout';
 import GalleryImage from './index';
 
 // ----- Stories ----- //

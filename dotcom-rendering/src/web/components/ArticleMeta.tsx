@@ -19,6 +19,7 @@ import { Dateline } from './Dateline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { CommentCount } from './CommentCount.importable';
 import { Island } from './Island';
+import { ShareCount } from './ShareCount.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -33,6 +34,8 @@ type Props = {
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
+	ajaxUrl: string;
+	showShareCount: boolean;
 };
 
 const meta = css`
@@ -291,6 +294,8 @@ export const ArticleMeta = ({
 	discussionApiUrl,
 	shortUrlId,
 	isCommentable,
+	ajaxUrl,
+	showShareCount,
 }: Props) => {
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
@@ -411,10 +416,17 @@ export const ArticleMeta = ({
 					>
 						<Counts format={format}>
 							{/* The meta-number css is needed by Counts.tsx */}
-							<div
-								className="meta-number"
-								id="share-count-root"
-							/>
+							<div className="meta-number">
+								{showShareCount && (
+									<Island clientOnly={true} deferUntil="idle">
+										<ShareCount
+											ajaxUrl={ajaxUrl}
+											pageId={pageId}
+											format={format}
+										/>
+									</Island>
+								)}
+							</div>
 							<div className="meta-number">
 								{isCommentable && (
 									<Island clientOnly={true} deferUntil="idle">
