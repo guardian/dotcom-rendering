@@ -1,8 +1,8 @@
 import { promisify } from 'util';
 import { execFile } from 'child_process';
-const exec = promisify(execFile);
+import { satisfies } from 'semver';
 
-import ensure from './ensure';
+const exec = promisify(execFile);
 
 // Yarn v1.x support .yarnrc, so we can use a local (check-in) copy of yarn
 const YARN_MIN_VERSION = '1.x';
@@ -13,9 +13,7 @@ const YARN_MIN_VERSION = '1.x';
 		// where we install yarn with NPM (mainly for CI)
 		const { stdout: version } = await exec('yarn', ['--version']);
 
-		const [semver] = await ensure('semver');
-
-		if (!semver.satisfies(version, YARN_MIN_VERSION)) {
+		if (!satisfies(version, YARN_MIN_VERSION)) {
 			const { warn, prompt, log } = require('./log').default;
 			warn(
 				`dotcom-rendering requires Yarn >=${YARN_MIN_VERSION}`,

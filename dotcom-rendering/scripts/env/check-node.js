@@ -1,17 +1,15 @@
 import { promisify } from 'util';
 import { join } from 'path';
 import { readFile } from 'fs/promises';
+import { fileURLToPath } from 'url';
+import { satisfies } from 'semver';
 
 import { warn, prompt, log } from './log.js';
-import ensure from './ensure.js';
-import { fileURLToPath } from 'url';
 
 const __dirname = fileURLToPath(import.meta.url);
 
 (async () => {
 	try {
-		const [semver] = await ensure('semver');
-
 		const nodeVersion = /^v(\d+\.\d+\.\d+)/.exec(process.version)[1];
 		const nvmrcVersion = (
 			await readFile(
@@ -20,7 +18,7 @@ const __dirname = fileURLToPath(import.meta.url);
 			)
 		).trim();
 
-		if (!semver.satisfies(nodeVersion, nvmrcVersion)) {
+		if (!satisfies(nodeVersion, nvmrcVersion)) {
 			warn(
 				`dotcom-rendering requires Node v${nvmrcVersion}`,
 				`You are using v${nodeVersion}`,

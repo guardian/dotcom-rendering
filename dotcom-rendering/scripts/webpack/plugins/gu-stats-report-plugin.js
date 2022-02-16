@@ -1,7 +1,7 @@
-const fetch = require('node-fetch');
-const os = require('os');
-const { exec } = require('child_process');
-const chalk = require('chalk');
+import { exec } from 'child_process';
+import chalk from 'chalk';
+import os from 'os';
+import fetch from 'node-fetch';
 
 const PLUGIN_NAME = 'GuStatsReportPlugin';
 
@@ -146,4 +146,4 @@ class GuStatsReportPlugin {
 	}
 }
 
-module.exports = GuStatsReportPlugin;
+export default GuStatsReportPlugin;

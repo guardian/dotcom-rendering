@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
 async function getContentFromURL(_url) {
 	try {
@@ -25,9 +25,9 @@ async function getContentFromURL(_url) {
 	}
 }
 
-exports.default = getContentFromURL;
+export default getContentFromURL;
 
-exports.getContentFromURLMiddleware = async (req, res, next) => {
+export async function getContentFromURLMiddleware(req, res, next) {
 	if (req.query.url) {
 		let { url } = req.query;
 		if (req.path.startsWith('/AMP')) {
@@ -36,4 +36,4 @@ exports.getContentFromURLMiddleware = async (req, res, next) => {
 		req.body = await getContentFromURL(url);
 	}
 	next();
-};
+}
