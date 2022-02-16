@@ -25,24 +25,24 @@ class GuStatsReportPlugin implements WebpackPluginInstance {
 
 	protected gitHash: string = 'unknown';
 
-	constructor(config?: {
+	constructor(config: {
 		team: string;
 		buildName: string;
 		project: string;
 		sessionId: string;
 		displayDisclaimer?: boolean;
 	}) {
-		this.buildName = config?.buildName ?? 'unknown';
-		this.project = config?.project ?? 'unknown';
-		this.team = config?.team ?? 'unknown';
-		this.sessionId = config?.sessionId ?? 'unknown';
+		this.buildName = config.buildName;
+		this.project = config.project;
+		this.team = config.team;
+		this.sessionId = config.sessionId;
 
 		// Since we can't make asynchronous calls in the constructor, we'll call these fetch
 		// methods, and they'll update this.gitBranch and this.gitHash once the data is fetched.
 		this.fetchGitBranch();
 		this.fetchGitHash();
 
-		if (config?.displayDisclaimer)
+		if (config.displayDisclaimer)
 			this.logger.warn(
 				'This project reports compilation and machine stats to improve the development experience.',
 			);
