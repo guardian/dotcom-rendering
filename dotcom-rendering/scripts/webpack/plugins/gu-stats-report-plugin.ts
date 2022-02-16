@@ -21,9 +21,9 @@ class GuStatsReportPlugin implements WebpackPluginInstance {
 		log: (...args: unknown[]) => void;
 	} = console;
 
-	protected gitBranch?: string;
+	protected gitBranch: string = 'unknown';
 
-	protected gitHash?: string;
+	protected gitHash: string = 'unknown';
 
 	constructor(config?: {
 		team: string;
@@ -79,13 +79,6 @@ class GuStatsReportPlugin implements WebpackPluginInstance {
 					'Unable to report stats - invalid config',
 				);
 
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars -- it will be used later
-			type Payload = {
-				label: string;
-				properties: Array<{ name: string; value: string }>;
-				metrics: Array<{ name: string; value: number }>;
-			};
-
 			const URL = 'https://logs.guardianapis.com/log';
 			fetch(URL, {
 				method: 'POST',
@@ -110,11 +103,11 @@ class GuStatsReportPlugin implements WebpackPluginInstance {
 						},
 						{
 							name: 'gitHash',
-							value: this.gitHash || 'unknown',
+							value: this.gitHash,
 						},
 						{
 							name: 'gitBranch',
-							value: this.gitBranch || 'unknown',
+							value: this.gitBranch,
 						},
 						{
 							name: 'sessionId',
