@@ -1,12 +1,12 @@
-const { promisify } = require('util');
-const writeFile = promisify(require('fs').writeFile);
+import { promisify } from 'util';
+import { writeFile } from 'fs/promises';
 
-const execa = require('execa');
-const path = require('path');
-const cpy = require('cpy');
-const { warn, log } = require('../env/log');
+import execa from 'execa';
+import { resolve } from 'path';
+import cpy from 'cpy';
+import { warn, log } from '../env/log';
 
-const target = path.resolve(__dirname, '../..', 'target');
+const target = resolve(__dirname, '../..', 'target');
 
 // This task generates the riff-raff bundle. It creates the following
 // directory layout under target/
@@ -31,16 +31,16 @@ const target = path.resolve(__dirname, '../..', 'target');
 
 const copyCfn = () => {
 	log(' - copying cloudformation config');
-	return cpy([`cloudformation.yml`], path.resolve(target, 'frontend-cfn'));
+	return cpy([`cloudformation.yml`], resolve(target, 'frontend-cfn'));
 };
 
 const copyStatic = () => {
 	log(' - copying static');
 	return cpy(
 		['**/*'],
-		path.resolve(target, 'frontend-static', 'static', 'frontend'),
+		resolve(target, 'frontend-static', 'static', 'frontend'),
 		{
-			cwd: path.resolve(__dirname, '../..', 'src/static'),
+			cwd: resolve(__dirname, '../..', 'src/static'),
 			parents: true,
 			nodir: true,
 		},
@@ -51,9 +51,9 @@ const copyDist = () => {
 	log(' - copying dist');
 	return cpy(
 		['**/*.!(html|json)'],
-		path.resolve(target, 'frontend-static', 'assets'),
+		resolve(target, 'frontend-static', 'assets'),
 		{
-			cwd: path.resolve(__dirname, '../../dist'),
+			cwd: resolve(__dirname, '../../dist'),
 			parents: true,
 			nodir: true,
 		},
@@ -75,7 +75,7 @@ const zipBundle = () => {
 			maxBuffer: 200000000, // increase if you get a maxBuffer exceeded error
 		},
 	).then(() => {
-		cpy(['rendering.zip'], path.resolve(target, 'rendering', 'dist'));
+		cpy(['rendering.zip'], resolve(target, 'rendering', 'dist'));
 	});
 };
 
@@ -91,7 +91,7 @@ const createBuildConfig = () => {
 	};
 
 	return writeFile(
-		path.resolve(target, 'build.json'),
+		resolve(target, 'build.json'),
 		JSON.stringify(buildConfig, null, 2),
 	);
 };

@@ -1,8 +1,12 @@
-const { promisify } = require('util');
-const { join } = require('path');
-const readFile = promisify(require('fs').readFile);
+import { promisify } from 'util';
+import { join } from 'path';
+import { readFile } from 'fs/promises';
 
-const ensure = require('./ensure');
+import { warn, prompt, log } from './log.js';
+import ensure from './ensure.js';
+import { fileURLToPath } from 'url';
+
+const __dirname = fileURLToPath(import.meta.url);
 
 (async () => {
 	try {
@@ -10,11 +14,13 @@ const ensure = require('./ensure');
 
 		const nodeVersion = /^v(\d+\.\d+\.\d+)/.exec(process.version)[1];
 		const nvmrcVersion = (
-			await readFile(join(__dirname, '..', '..', '..', '.nvmrc'), 'utf8')
+			await readFile(
+				join(__dirname, '..', '..', '..', '..', '.nvmrc'),
+				'utf8',
+			)
 		).trim();
 
 		if (!semver.satisfies(nodeVersion, nvmrcVersion)) {
-			const { warn, prompt, log } = require('./log');
 			warn(
 				`dotcom-rendering requires Node v${nvmrcVersion}`,
 				`You are using v${nodeVersion}`,
@@ -31,8 +37,7 @@ const ensure = require('./ensure');
 			process.exit(1);
 		}
 	} catch (e) {
-		// eslint-disable-next-line no-console
-		console.log(e);
+		log(e);
 		process.exit(1);
 	}
 })();

@@ -1,7 +1,8 @@
-const { promisify } = require('util');
-const exec = promisify(require('child_process').execFile);
+import { promisify } from 'util';
+import { execFile } from 'child_process';
+const exec = promisify(execFile);
 
-const ensure = require('./ensure');
+import ensure from './ensure';
 
 // Yarn v1.x support .yarnrc, so we can use a local (check-in) copy of yarn
 const YARN_MIN_VERSION = '1.x';
@@ -15,7 +16,7 @@ const YARN_MIN_VERSION = '1.x';
 		const [semver] = await ensure('semver');
 
 		if (!semver.satisfies(version, YARN_MIN_VERSION)) {
-			const { warn, prompt, log } = require('./log');
+			const { warn, prompt, log } = require('./log').default;
 			warn(
 				`dotcom-rendering requires Yarn >=${YARN_MIN_VERSION}`,
 				`You are using v${version}`,
@@ -26,7 +27,7 @@ const YARN_MIN_VERSION = '1.x';
 			process.exit(1);
 		}
 	} catch (e) {
-		require('./log').log(`Installing yarn`);
+		require('./log').default.log(`Installing yarn`);
 		await exec('npm', ['i', '-g', `yarn@${YARN_MIN_VERSION}`]);
 	}
 })();

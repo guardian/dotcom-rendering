@@ -36,7 +36,7 @@ if (messages) {
 }
 
 // exports for modules to use
-export default {
+export {
 	log,
 	warn,
 	prompt,

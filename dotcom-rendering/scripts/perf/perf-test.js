@@ -1,5 +1,5 @@
-const execa = require('execa');
-const { warn, log } = require('../env/log');
+import execa from 'execa';
+import { warn, log } from '../env/log';
 
 const run = async () => {
 	try {
@@ -19,4 +19,5 @@ const run = async () => {
 	}
 };
 
-run();
+// eslint-disable-next-line no-void -- can’t satisfy both lint rules
+void run();
