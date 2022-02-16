@@ -17,6 +17,10 @@ const sessionId = uuidv4();
 
 let builds = 0;
 
+/**
+ * @param {{ platform: 'server' | 'browser' | 'browser.legacy'}} options
+ * @returns {import('webpack').Configuration}
+ */
 const commonConfigs = ({ platform }) => ({
 	name: platform,
 	mode: process.env.NODE_ENV,
@@ -58,6 +62,7 @@ const commonConfigs = ({ platform }) => ({
 			  [
 					new WebpackMessages({
 						name: platform,
+						/** @type {(message: string) => void} */
 						logger: (message) => {
 							// distinguish between initial and subsequent (re)builds in console output
 							if (builds < module.exports.length * 2) {
