@@ -14,6 +14,8 @@ const useStickyVideo = (
 	const intersectionFn: IntersectionObserverCallback = ([entry]) => {
 		if (entry.isIntersecting) {
 			setIsIntersecting(true);
+		} else {
+			setIsIntersecting(false); // this kind of works but creates a flicker :/
 		}
 	};
 
