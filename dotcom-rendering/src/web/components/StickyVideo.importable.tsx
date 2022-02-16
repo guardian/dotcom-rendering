@@ -4,54 +4,55 @@ import { getZIndex } from '../lib/getZIndex';
 import { useStickyVideo } from '../lib/useStickyVideo';
 
 interface Props {
+	isPlaying: boolean;
+	height: number;
 	children: React.ReactNode;
 }
 
-const stuckStyles = css`
-	@keyframes fade-in-up {
-		from {
-			transform: translateY(100%);
-			opacity: 0;
-		}
-		to {
-			transform: translateY(0%);
-			opacity: 1;
-		}
-	}
-
+const stickyStyles = css`
 	position: fixed;
 	bottom: 50px;
 	right: 20px;
 	width: 260px;
 	height: 145px;
 	z-index: ${getZIndex('sticky-video')};
-	transform: translateY(100%);
-	animation: fade-in-up 0.25s ease forwards;
 
 	figcaption {
 		display: none;
 	}
 `;
 
-const unstuckStyles = css``;
+const containerStyles = (height: number) => css`
+	height: ${height}px;
+`;
 
-export const StickyVideo = ({ children }: Props) => {
+export const StickyVideo = ({ isPlaying, children, height }: Props) => {
 	const [stickyVideo, setStickyVideo] = useState(false);
 	const [isIntersecting, setRef] = useStickyVideo({
-		threshold: 0,
+		threshold: 0.9,
 		debounce: true,
 	});
 
 	useEffect(() => {
-		setStickyVideo(isIntersecting);
-	}, [isIntersecting]);
+		setStickyVideo(isIntersecting && isPlaying);
+	}, [isIntersecting, isPlaying]);
 
 	return (
-		<div css={stickyVideo ? stuckStyles : unstuckStyles} ref={setRef}>
-			{stickyVideo && (
-				<button onClick={() => setStickyVideo(false)}>Unstick</button>
+		<div css={containerStyles(height)}>
+			{!stickyVideo ? (
+				<div ref={setRef}>{children}</div>
+			) : (
+				<div css={stickyStyles}>
+					<button
+						onClick={() => {
+							setStickyVideo(false);
+						}}
+					>
+						Unstick
+					</button>
+					{children}
+				</div>
 			)}
-			{children}
 		</div>
 	);
 };
