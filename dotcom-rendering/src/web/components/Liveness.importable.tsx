@@ -1,38 +1,14 @@
-import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
+import { Toast } from './Toast';
 
 type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
 	filterKeyEvents: boolean;
-};
-
-// TODO: Break this out into its own component
-const Toast = ({
-	onClick,
-	numHiddenBlocks,
-}: {
-	onClick: () => void;
-	numHiddenBlocks: number;
-}) => {
-	// TODO: Style and absolute position this component
-	return (
-		<nav
-			css={css`
-				position: fixed;
-				top: 20px;
-				left: 50px;
-				display: flex;
-				width: 100%;
-				align-items: center;
-			`}
-		>
-			<button onClick={onClick}>{`${numHiddenBlocks} blah`}</button>
-		</nav>
-	);
+	format: ArticleFormat;
 };
 
 const isServer = typeof window === 'undefined';
@@ -141,6 +117,7 @@ export const Liveness = ({
 	webTitle,
 	ajaxUrl,
 	filterKeyEvents,
+	format,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
@@ -165,7 +142,7 @@ export const Liveness = ({
 				// Always insert the new blocks in the dom (but hidden)
 				insert(data.html);
 
-				if (topOfBlogVisible()) {
+				if (topOfBlogVisible() && document.hasFocus()) {
 					revealNewBlocks();
 					setNumHiddenBlocks(0);
 				} else {
@@ -210,9 +187,43 @@ export const Liveness = ({
 		observer.observe(topOfBlog);
 	}
 
+	/**
+	 * This useEffect sets up a listener for when the page is backgrounded or restored. We
+	 * do this so that any new blocks that were fetched while the blog was in the
+	 * background are animated in at the point when focus is restored
+	 */
+	useEffect(() => {
+		const handleVisibilityChange = () => {
+			// The blog was either hidden or has become visible
+			if (
+				// If we're returning to a blog that has pending blocks and the reader
+				// is at the top of the page then...
+				document.visibilityState === 'visible' &&
+				numHiddenBlocks > 0 &&
+				topOfBlogVisible()
+			) {
+				revealNewBlocks();
+				setNumHiddenBlocks(0);
+				setShowToast(false);
+			}
+		};
+
+		window.addEventListener('visibilitychange', handleVisibilityChange);
+
+		return () => {
+			window.removeEventListener(
+				'visibilitychange',
+				handleVisibilityChange,
+			);
+		};
+	}, [numHiddenBlocks]);
+
 	const handleToastClick = () => {
 		setShowToast(false);
-		topOfBlog?.scrollIntoView();
+		document.getElementById('maincontent')?.scrollIntoView({
+			behavior: 'smooth',
+		});
+		window.location.href = '#maincontent';
 		revealNewBlocks();
 		setNumHiddenBlocks(0);
 	};
@@ -221,7 +232,8 @@ export const Liveness = ({
 		return (
 			<Toast
 				onClick={handleToastClick}
-				numHiddenBlocks={numHiddenBlocks}
+				count={numHiddenBlocks}
+				format={format}
 			/>
 		);
 	}
