@@ -31,7 +31,8 @@ const stickyStyles = css`
 `;
 
 const containerStyles = (height: number) => css`
-	height: ${height}px;
+	// this is a hack - how can we calculate this better?
+	height: ${height * 1.43}px;
 	position: relative;
 `;
 
