@@ -15,6 +15,7 @@ type Props = {
 	adTargeting: AdTargeting;
 	host?: string;
 	ajaxUrl: string;
+	hidden?: boolean;
 };
 
 export const LiveBlock = ({
@@ -25,6 +26,7 @@ export const LiveBlock = ({
 	adTargeting,
 	host,
 	ajaxUrl,
+	hidden,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -44,6 +46,7 @@ export const LiveBlock = ({
 			blockTitle={block.title}
 			blockFirstPublished={block.blockFirstPublished}
 			blockLink={blockLink}
+			hidden={hidden}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({
