@@ -18,8 +18,10 @@ const stickyStyles = css`
 	}
 
 	position: fixed;
-	bottom: 145px;
-	height: 145px;
+	right: 50px;
+	bottom: 20px;
+	width: 300px;
+	height: 169px;
 	${getZIndex('sticky-video')};
 	animation: fade-in-up 1s ease forwards;
 
@@ -52,25 +54,21 @@ export const StickyVideo = ({ isPlaying, children, height }: Props) => {
 
 	return (
 		<div css={containerStyles(height)}>
-			{!stickyVideo ? (
-				<div ref={setRef}>
+			<div ref={setRef}>
+				<div css={stickyVideo ? stickyStyles : null}>
 					{isPlaying && (
-						<StickyVideoButton
-							onClick={() => setStickyVideo(true)}
-							stickyVideo={stickyVideo}
-						/>
+						<>
+							<StickyVideoButton
+								onClick={() => {
+									setStickyVideo(!stickyVideo);
+								}}
+								stickyVideo={stickyVideo}
+							/>
+						</>
 					)}
 					{children}
 				</div>
-			) : (
-				<div css={stickyStyles}>
-					<StickyVideoButton
-						onClick={() => setStickyVideo(false)}
-						stickyVideo={stickyVideo}
-					/>
-					{children}
-				</div>
-			)}
+			</div>
 		</div>
 	);
 };

@@ -14,6 +14,7 @@ import { record } from '../browser/ophan/ophan';
 
 import { Caption } from './Caption';
 import { decidePalette } from '../lib/decidePalette';
+import { StickyVideo } from './StickyVideo.importable';
 
 type Props = {
 	id: string;
@@ -92,6 +93,7 @@ export const YoutubeBlockComponent = ({
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
+	const [playing, setPlaying] = useState(false);
 
 	useEffect(() => {
 		import(
@@ -174,58 +176,68 @@ export const YoutubeBlockComponent = ({
 		});
 	};
 
+	const playingState = (trackingEvent: string) => {
+		if (trackingEvent === 'play') {
+			setPlaying(true);
+		}
+	};
+
 	return (
-		<div data-chromatic="ignore" data-component="youtube-atom">
-			<YoutubeAtom
-				assetId={assetId}
-				overrideImage={
-					overrideImage
-						? [
-								{
-									srcSet: [
-										{
-											src: overrideImage,
-											width: 500, // we do not have width for overlayImage so set a random number
-										},
-									],
-								},
-						  ]
-						: undefined
-				}
-				posterImage={
-					posterImage
-						? [
-								{
-									srcSet: posterImage.map((img) => ({
-										src: img.url,
-										width: img.width,
-									})),
-								},
-						  ]
-						: undefined
-				}
-				role={role}
-				alt={altText || mediaTitle || ''}
-				adTargeting={adTargeting}
-				consentState={consentState}
-				height={height}
-				width={width}
-				title={mediaTitle}
-				duration={duration}
-				eventEmitters={[ophanTracking, gaTracking]}
-				pillar={format.theme}
-				origin={process.env.NODE_ENV === 'development' ? '' : origin}
-			/>
-			{!hideCaption && (
-				<Caption
-					palette={palette}
-					captionText={mediaTitle || ''}
-					format={format}
-					displayCredit={false}
-					shouldLimitWidth={shouldLimitWidth}
-					mediaType="Video"
+		<StickyVideo height={height * 1.41} isPlaying={playing}>
+			<div data-chromatic="ignore" data-component="youtube-atom">
+				<YoutubeAtom
+					assetId={assetId}
+					overrideImage={
+						overrideImage
+							? [
+									{
+										srcSet: [
+											{
+												src: overrideImage,
+												width: 500, // we do not have width for overlayImage so set a random number
+											},
+										],
+									},
+							  ]
+							: undefined
+					}
+					posterImage={
+						posterImage
+							? [
+									{
+										srcSet: posterImage.map((img) => ({
+											src: img.url,
+											width: img.width,
+										})),
+									},
+							  ]
+							: undefined
+					}
+					role={role}
+					alt={altText || mediaTitle || ''}
+					adTargeting={adTargeting}
+					consentState={consentState}
+					height={height}
+					width={width}
+					title={mediaTitle}
+					duration={duration}
+					eventEmitters={[ophanTracking, gaTracking, playingState]}
+					pillar={format.theme}
+					origin={
+						process.env.NODE_ENV === 'development' ? '' : origin
+					}
 				/>
-			)}
-		</div>
+				{!hideCaption && (
+					<Caption
+						palette={palette}
+						captionText={mediaTitle || ''}
+						format={format}
+						displayCredit={false}
+						shouldLimitWidth={shouldLimitWidth}
+						mediaType="Video"
+					/>
+				)}
+			</div>
+		</StickyVideo>
 	);
 };
