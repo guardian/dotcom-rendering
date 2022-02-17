@@ -2819,7 +2819,7 @@
   resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-0.32.0.tgz#c6cbbd2072e59ac75e0f511e87b26dd762fac3dd"
   integrity sha512-wPEPy7m2lAk3anNWJl1LjOnE55SDzkbbUKWUuxSA7QoJRdkSr5s0lexnKnANa7wLNiZGcoepoIiqftj1xacuWQ==
 
-"@guardian/consent-management-platform@^10.1.2":
+"@guardian/consent-management-platform@^10.1.1":
   version "10.1.2"
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-10.1.2.tgz#f7ea2ce14c1ee9c5822c8f0fe34aec006adfda89"
   integrity sha512-2rJxMIqAekwWxerxscWai4pbEnOnmf1rrPO5kawLlkppv9AKMS+KpK+9/C8vqqHBC2Niat5JpT845IJJUYv4CA==
@@ -5078,6 +5078,14 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
+"@types/node-fetch@^2.5.10":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.1.tgz#8f127c50481db65886800ef496f20bbf15518975"
+  integrity sha512-oMqjURCaxoSIsHSr1E47QHzbmzNR5rK8McHuNb11BOM9cHcIK3Avy0s/b2JlXHoQGTYS3NsvWzV1M0iK7l0wbA==
+  dependencies:
+    "@types/node" "*"
+    form-data "^3.0.0"
+
 "@types/node-fetch@^2.5.7":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.0.tgz#bf854a36a0d0d99436fd199e06612ef4e73591b6"
@@ -5085,14 +5093,6 @@
   dependencies:
     "@types/node" "*"
     form-data "^2.3.3"
-
-"@types/node-fetch@^2.6.1":
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.1.tgz#8f127c50481db65886800ef496f20bbf15518975"
-  integrity sha512-oMqjURCaxoSIsHSr1E47QHzbmzNR5rK8McHuNb11BOM9cHcIK3Avy0s/b2JlXHoQGTYS3NsvWzV1M0iK7l0wbA==
-  dependencies:
-    "@types/node" "*"
-    form-data "^3.0.0"
 
 "@types/node@*":
   version "17.0.2"
@@ -14248,10 +14248,10 @@ log-update@^4.0.0:
     slice-ansi "^4.0.0"
     wrap-ansi "^6.2.0"
 
-log4js@6.4.1:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/log4js/-/log4js-6.4.1.tgz#9d3a8bf2c31c1e213fe3fc398a6053f7a2bc53e8"
-  integrity sha512-iUiYnXqAmNKiIZ1XSAitQ4TmNs8CdZYTAWINARF3LjnsLN8tY5m0vRwd6uuWj/yNY0YHxeZodnbmxKFUOM2rMg==
+log4js@6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/log4js/-/log4js-6.4.0.tgz#3f63ccfc8033c83cd617a4d2d50e48be5944eae9"
+  integrity sha512-ysc/XUecZJuN8NoKOssk3V0cQ29xY4fra6fnigZa5VwxFsCsvdqsdnEuAxNN89LlHpbE4KUD3zGcn+kFqonSVQ==
   dependencies:
     date-format "^4.0.3"
     debug "^4.3.3"
