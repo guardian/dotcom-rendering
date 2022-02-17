@@ -1,84 +1,23 @@
 import { css } from '@emotion/react';
 
-import { until } from '@guardian/source-foundations';
-
-const quoteStyles = (colour?: string) => css`
-	height: 17px;
-	width: 9px;
-	margin-right: 12px;
-	transform: translateY(-1px);
-	overflow: visible;
-	fill: ${colour && colour};
+const quoteStyles = (colour: string) => css`
+	height: 1em;
+	width: 1.5em;
+	margin-right: 3px;
+	vertical-align: baseline;
+	fill: ${colour};
 `;
-
-const sizeStyles = (size: SmallHeadlineSize) => {
-	const tinySvg = css`
-		svg {
-			height: 13px;
-			width: 7px;
-		}
-	`;
-	const smallSvg = css`
-		svg {
-			height: 16px;
-			width: 8px;
-		}
-	`;
-	const mediumSvg = css`
-		margin-right: 4px;
-		svg {
-			height: 20px;
-			width: 11px;
-		}
-	`;
-	const largeSvg = css`
-		margin-right: 8px;
-		svg {
-			height: 24px;
-			width: 13px;
-		}
-	`;
-	switch (size) {
-		case 'tiny':
-			return css`
-				${tinySvg}
-			`;
-		case 'small':
-			return css`
-				${smallSvg}
-			`;
-		case 'medium':
-			return css`
-				${mediumSvg}
-				${until.desktop} {
-					${smallSvg}
-				}
-			`;
-		case 'large':
-			return css`
-				${largeSvg}
-				${until.desktop} {
-					${mediumSvg}
-				}
-			`;
-	}
-};
 
 type Props = {
 	colour: string;
-	size: SmallHeadlineSize;
 };
 
-export const QuoteIcon = ({ colour, size }: Props) => (
-	<span css={sizeStyles(size)}>
-		<svg
-			width="70"
-			height="49"
-			viewBox="0 0 35 25"
-			css={quoteStyles(colour)}
-			data-testid="quote-icon"
-		>
-			<path d="M69.587.9c-1.842 15.556-3.89 31.316-4.708 48.1H37.043c3.07-16.784 8.391-32.544 17.602-48.1h14.942zM32.949.9c-2.047 15.556-4.094 31.316-4.912 48.1H.2C3.066 32.216 8.592 16.456 17.598.9h15.35z" />
-		</svg>
-	</span>
+/**
+ * An inline quote icon (“) sized to match the font size.
+ */
+export const QuoteIcon = ({ colour }: Props) => (
+	/* This viewBox is narrower than Source’s SvgQuote */
+	<svg viewBox="4 4 24 16" css={quoteStyles(colour)}>
+		<path d="M9.2776 8H14.0473C13.4732 12.5489 12.9653 17.0095 12.7445 22H4C4.79495 17.142 6.4511 12.5489 9.2776 8ZM20.3852 8H25.0887C24.5808 12.5489 24.0067 17.0095 23.7859 22H15.0635C15.9688 17.142 17.5587 12.5489 20.3852 8Z" />
+	</svg>
 );

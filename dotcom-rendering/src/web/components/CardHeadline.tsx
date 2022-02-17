@@ -166,10 +166,7 @@ export const CardHeadline = ({
 						/>
 					)}
 					{showQuotes && (
-						<QuoteIcon
-							colour={palette.text.cardKicker}
-							size={size}
-						/>
+						<QuoteIcon colour={palette.text.cardKicker} />
 					)}
 
 					<span
