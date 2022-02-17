@@ -5135,7 +5135,7 @@
 
 "@types/serve-static@*":
   version "1.13.10"
-  resolved "https://registry.npmjs.org/@types/serve-static/-/serve-static-1.13.10.tgz#f5e0ce8797d2d7cc5ebeda48a52c96c4fa47a8d9"
+  resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.13.10.tgz#f5e0ce8797d2d7cc5ebeda48a52c96c4fa47a8d9"
   integrity sha512-nCkHGI4w7ZgAdNkrEu0bv+4xNV/XDqW+DydknebMOQwkpDGx8G+HTlj7R7ABI8i8nKxVw0wtKPi1D+lPOkh4YQ==
   dependencies:
     "@types/mime" "^1"
@@ -5187,6 +5187,11 @@
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@types/trusted-types/-/trusted-types-2.0.2.tgz#fc25ad9943bcac11cceb8168db4f275e0e72e756"
   integrity sha512-F5DIZ36YVLE+PN+Zwws4kJogq47hNgX3Nx6WyDJ3kcplxyke3XIzB8uK5n/Lpm1HBsbGzd6nmGehL8cPekP+Tg==
+
+"@types/twitter-for-web@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@types/twitter-for-web/-/twitter-for-web-0.0.2.tgz#515a8c1bbbd123e6abed550a7ac64a71032db61e"
+  integrity sha512-fDg882G9KHOkVxyJFkZ1hIOHxgj1vHLZnMJshF9W+8C2f9lzkIc/DeD1Ed2q1SWaHD/hdooaFIWTDhgL8zzpYg==
 
 "@types/uglify-js@*":
   version "3.13.1"

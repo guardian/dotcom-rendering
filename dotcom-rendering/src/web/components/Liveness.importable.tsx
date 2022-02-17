@@ -63,10 +63,18 @@ function insert(html: string) {
 	// Shouldn't we snaitise this html?
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
-	const maincontent = document.querySelector('#maincontent');
+	const maincontent = document.querySelector<HTMLElement>('#maincontent');
 	const latestBlock = document.querySelector('#maincontent :first-child');
 	if (!latestBlock || !maincontent) return;
 	maincontent.insertBefore(fragment, latestBlock);
+
+	// Enhance
+	// -----------
+	const newBlocks = fragment.querySelectorAll('article');
+	// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
+	twttr.ready((twitter) => {
+		twitter.widgets.load(Array.from(newBlocks));
+	});
 }
 
 /**

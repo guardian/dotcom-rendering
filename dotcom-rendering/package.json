@@ -64,6 +64,7 @@
     "@types/lodash.escape": "^4.0.6",
     "@types/node-fetch": "^2.5.10",
     "@types/sanitize-html": "^1.27.1",
+    "@types/twitter-for-web": "^0.0.2",
     "ajv": "^8.1.0",
     "ajv-formats": "^2.0.2",
     "chalk": "^4.1.0",
