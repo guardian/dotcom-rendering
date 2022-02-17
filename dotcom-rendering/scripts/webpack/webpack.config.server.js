@@ -1,3 +1,4 @@
+// @ts-check
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
@@ -37,17 +38,17 @@ module.exports = ({ sessionId }) => ({
 		({ request }, callback) => {
 			return process.env.NODE_ENV === 'development' &&
 				request?.startsWith('@aws-sdk')
-				? callback(null, `commonjs ${request}`)
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
 			return request?.endsWith('loadable-manifest-browser.json')
-				? callback(null, `commonjs ${request}`)
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
 			return request?.endsWith('loadable-manifest-browser.legacy.json')
-				? callback(null, `commonjs ${request}`)
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 	],

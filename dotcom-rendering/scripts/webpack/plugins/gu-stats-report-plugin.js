@@ -1,3 +1,4 @@
+// @ts-check
 const fetch = require('node-fetch');
 const os = require('os');
 const { exec } = require('child_process');
@@ -11,13 +12,14 @@ const PLUGIN_NAME = 'GuStatsReportPlugin';
  */
 
 class GuStatsReportPlugin {
-	/** @type {( config: Config ) => void} */
+	/** @param {Config} config */
 	constructor(config) {
 		this.buildName = config?.buildName;
 		this.project = config?.project;
 		this.team = config?.team;
 		this.sessionId = config?.sessionId;
 		this.buildCount = 0;
+		/** @type {Record<'log' | 'warn' | 'error', (...args: unknown[]) => void>} */
 		this.logger = console;
 
 		this.gitBranch = undefined;
@@ -59,6 +61,7 @@ class GuStatsReportPlugin {
 	apply(compiler) {
 		this.logger = compiler.getInfrastructureLogger(PLUGIN_NAME);
 
+		/** @param {import('webpack').Stats} stats */
 		const onDone = (stats) => {
 			// Increment the buildCount
 			this.buildCount += 1;
@@ -69,6 +72,7 @@ class GuStatsReportPlugin {
 				);
 
 			const URL = 'https://logs.guardianapis.com/log';
+			// @ts-ignore -- the type declaration isn’t playing nice
 			fetch(URL, {
 				method: 'POST',
 				body: JSON.stringify({
@@ -132,14 +136,16 @@ class GuStatsReportPlugin {
 					],
 				}),
 			})
-				.then(({ ok, status }) =>
-					ok
-						? this.logger.log(
-								`Stats reported for '${this.buildName}' build. (Session build count - ${this.buildCount})`,
-						  )
-						: this.logger.error(
-								`${this.buildName} (${this.buildCount}): Failed to report stats (${status})`,
-						  ),
+				.then(
+					/** @param {import('node-fetch').Response} resp */
+					({ ok, status }) =>
+						ok
+							? this.logger.log(
+									`Stats reported for '${this.buildName}' build. (Session build count - ${this.buildCount})`,
+							  )
+							: this.logger.error(
+									`${this.buildName} (${this.buildCount}): Failed to report stats (${status})`,
+							  ),
 				)
 				.catch(() =>
 					this.logger.error(

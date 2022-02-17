@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+// @ts-check
 const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
@@ -23,7 +23,7 @@ let builds = 0;
  */
 const commonConfigs = ({ platform }) => ({
 	name: platform,
-	mode: process.env.NODE_ENV,
+	mode: DEV ? 'development' : 'production',
 	output: {
 		path: dist,
 	},
@@ -45,9 +45,11 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
+		// @ts-ignore -- somehow the type declaration isn’t playing nice
 		new FilterWarningsPlugin({
 			exclude: /export .* was not found in/,
 		}),
+		// @ts-ignore -- somehow the type declaration isn’t playing nice
 		new LoadablePlugin({
 			writeToDisk: true,
 			filename: `loadable-manifest-${platform}.json`,
@@ -60,6 +62,7 @@ const commonConfigs = ({ platform }) => ({
 		...(DEV
 			? // DEV plugins
 			  [
+				  // @ts-ignore -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
 						/** @type {(message: string) => void} */
