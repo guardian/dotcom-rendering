@@ -20,8 +20,6 @@ export const Basic = () => {
 				discussionD2Uid="zHoBy6HNKsk"
 				discussionApiClientHeader="nextgen"
 				enableDiscussionSwitch={true}
-				isAdFreeUser={false}
-				shouldHideAds={false}
 			/>
 		</div>
 	);
