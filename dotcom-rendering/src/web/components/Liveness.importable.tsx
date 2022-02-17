@@ -144,7 +144,7 @@ export const Liveness = ({
 					updateTimeElement(lastUpdated);
 				}
 
-				if (topOfBlogVisible()) {
+				if (topOfBlogVisible() && document.hasFocus()) {
 					revealNewBlocks();
 					setNumHiddenBlocks(0);
 				} else {
@@ -188,6 +188,37 @@ export const Liveness = ({
 
 		observer.observe(topOfBlog);
 	}
+
+	/**
+	 * This useEffect sets up a listener for when the page is backgrounded or restored. We
+	 * do this so that any new blocks that were fetched while the blog was in the
+	 * background are animated in at the point when focus is restored
+	 */
+	useEffect(() => {
+		const handleVisibilityChange = () => {
+			// The blog was either hidden or has become visible
+			if (
+				// If we're returning to a blog that has pending blocks and the reader
+				// is at the top of the page then...
+				document.visibilityState === 'visible' &&
+				numHiddenBlocks > 0 &&
+				topOfBlogVisible()
+			) {
+				revealNewBlocks();
+				setNumHiddenBlocks(0);
+				setShowToast(false);
+			}
+		};
+
+		window.addEventListener('visibilitychange', handleVisibilityChange);
+
+		return () => {
+			window.removeEventListener(
+				'visibilitychange',
+				handleVisibilityChange,
+			);
+		};
+	}, [numHiddenBlocks]);
 
 	const handleToastClick = () => {
 		setShowToast(false);
