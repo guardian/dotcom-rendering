@@ -9,7 +9,7 @@ import type { ConsentState } from '@guardian/consent-management-platform/dist/ty
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
 
-import { guCmp } from '../lib/guCmp';
+import { getCmp } from '../lib/getCmp';
 import { Caption } from './Caption';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -92,7 +92,7 @@ export const YoutubeBlockComponent = ({
 	);
 
 	useEffect(() => {
-		guCmp.onConsentChange((newConsent: ConsentState) => {
+		getCmp().onConsentChange((newConsent: ConsentState) => {
 			setConsentState(newConsent);
 		});
 	}, []);

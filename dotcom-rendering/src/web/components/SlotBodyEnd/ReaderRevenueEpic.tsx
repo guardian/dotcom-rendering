@@ -26,7 +26,7 @@ import {
 	submitComponentEvent,
 } from '../../browser/ophan/ophan';
 import { setAutomat } from '../../lib/setAutomat';
-import { guCmp } from '../../lib/guCmp';
+import { getCmp } from '../../lib/getCmp';
 
 export type EpicConfig = {
 	module: ModuleData;
@@ -156,7 +156,7 @@ export const ReaderRevenueEpic = ({
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 
 	const openCmp = () => {
-		guCmp.cmp.showPrivacyManager();
+		getCmp().cmp.showPrivacyManager();
 	};
 
 	useEffect(() => {

@@ -1,6 +1,6 @@
 import { getCookie } from '@guardian/libs';
 import { getIdApiUserData, IdApiUserData } from './getIdapiUserData';
-import { guCmp } from './guCmp';
+import { getCmp } from './getCmp';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
@@ -159,7 +159,7 @@ export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 		if (getCookie({ name: 'gu-cmp-disabled', shouldMemoize: true })) {
 			resolve(true);
 		}
-		guCmp.onConsentChange(({ ccpa, tcfv2, aus }) => {
+		getCmp().onConsentChange(({ ccpa, tcfv2, aus }) => {
 			if (ccpa || aus) {
 				resolve(true);
 			} else if (tcfv2) {
@@ -187,7 +187,7 @@ export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
 		if (getCookie({ name: 'gu-cmp-disabled', shouldMemoize: true })) {
 			resolve(true);
 		}
-		guCmp.onConsentChange(({ ccpa, tcfv2, aus }) => {
+		getCmp().onConsentChange(({ ccpa, tcfv2, aus }) => {
 			if (ccpa || aus) {
 				resolve(true);
 			} else if (tcfv2) {

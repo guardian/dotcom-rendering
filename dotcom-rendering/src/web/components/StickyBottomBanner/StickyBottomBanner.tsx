@@ -24,7 +24,7 @@ import {
 import { getLocaleCode } from '../../lib/getCountryCode';
 import { useSignInGateWillShow } from '../../lib/useSignInGateWillShow';
 import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
-import { guCmp } from '../../lib/guCmp';
+import { getCmp } from '../../lib/getCmp';
 
 type Props = {
 	brazeMessages?: Promise<BrazeMessagesInterface>;
@@ -66,8 +66,8 @@ const buildCmpBannerConfig = (): CandidateConfig<void> => ({
 	candidate: {
 		id: 'cmpUi',
 		canShow: () =>
-			guCmp.cmp
-				.willShowPrivacyMessage()
+			getCmp()
+				.cmp.willShowPrivacyMessage()
 				.then((result) =>
 					result ? { show: true, meta: undefined } : { show: false },
 				),

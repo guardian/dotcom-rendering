@@ -10,7 +10,7 @@
  *
  * @returns the cmp object
  */
-export const guCmp = () => {
+export const getCmp = () => {
 	if (typeof window === 'undefined') {
 		// Return a mock guCmp object to make our code server safe
 		return {

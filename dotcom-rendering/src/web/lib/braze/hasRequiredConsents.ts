@@ -1,10 +1,10 @@
-import { guCmp } from '../guCmp';
+import { getCmp } from '../getCmp';
 
 const hasRequiredConsents = (): Promise<boolean> =>
 	new Promise((resolve, reject) => {
-		guCmp.onConsentChange((state) => {
+		getCmp().onConsentChange((state) => {
 			try {
-				resolve(guCmp.getConsentFor('braze', state));
+				resolve(getCmp().getConsentFor('braze', state));
 			} catch (e) {
 				reject(e);
 			}

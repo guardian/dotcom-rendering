@@ -25,7 +25,7 @@ import {
 	signInGateContainer,
 	signInLink,
 } from './shared';
-import { guCmp } from '../../../lib/guCmp';
+import { getCmp } from '../../../lib/getCmp';
 
 const heading = css`
 	${headline.small({ fontWeight: 'bold' })};
@@ -315,7 +315,7 @@ export const SignInGateFakeSocial = ({
 					data-cy="sign-in-gate-fake-social_privacy"
 					css={privacyLink}
 					onClick={() => {
-						guCmp.cmp.showPrivacyManager();
+						getCmp().cmp.showPrivacyManager();
 						trackLink(ophanComponentId, 'privacy', abTest);
 					}}
 				>

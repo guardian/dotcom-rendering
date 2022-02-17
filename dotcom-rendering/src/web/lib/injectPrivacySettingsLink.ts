@@ -1,4 +1,4 @@
-import { guCmp } from './guCmp';
+import { getCmp } from './getCmp';
 import { getPrivacyFramework } from './getPrivacyFramework';
 
 const newPrivacyLinkName = 'privacy-settings';
@@ -40,7 +40,7 @@ export const injectPrivacySettingsLink = (): void => {
 
 					newPrivacyLink.addEventListener(
 						'click',
-						guCmp.cmp.showPrivacyManager,
+						getCmp().cmp.showPrivacyManager,
 					);
 				})
 				.catch((e) => console.error(`privacy settings - error: ${e}`));

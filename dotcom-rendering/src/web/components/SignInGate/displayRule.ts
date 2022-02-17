@@ -1,7 +1,7 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { getLocale } from '@guardian/libs';
-import { guCmp } from 'src/web/lib/guCmp';
+import { getCmp } from 'src/web/lib/getCmp';
 import {
 	DailyArticle,
 	getDailyArticleCount,
@@ -85,7 +85,7 @@ export const hasRequiredConsents = (): Promise<boolean> => {
 	};
 
 	return new Promise((resolve) => {
-		guCmp.onConsentChange((state) => {
+		getCmp().onConsentChange((state) => {
 			if (state.tcfv2) {
 				return resolve(hasConsentedToAll(state));
 			}

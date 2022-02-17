@@ -18,7 +18,7 @@ import {
 	signInHeader,
 	signInLink,
 } from './shared';
-import { guCmp } from '../../../lib/guCmp';
+import { getCmp } from '../../../lib/getCmp';
 
 export const SignInGateMain = ({
 	signInUrl,
@@ -47,7 +47,7 @@ export const SignInGateMain = ({
 					data-cy="sign-in-gate-main_privacy"
 					css={privacyLink}
 					onClick={() => {
-						guCmp.cmp.showPrivacyManager();
+						getCmp().cmp.showPrivacyManager();
 						trackLink(ophanComponentId, 'privacy', abTest);
 					}}
 				>
