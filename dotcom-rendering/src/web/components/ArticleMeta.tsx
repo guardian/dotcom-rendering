@@ -19,7 +19,7 @@ import { Dateline } from './Dateline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { CommentCount } from './CommentCount.importable';
 import { Island } from './Island';
-import { ShareCount } from './ShareCount';
+import { ShareCount } from './ShareCount.importable';
 
 type Props = {
 	format: ArticleFormat;

@@ -40,6 +40,9 @@ const indices = [
 	// Edition selector in nav - needs to be below stickyAdWrapper
 	'editionDropdown',
 
+	// Liveblog toast
+	'toast',
+
 	// Onwards Carousel (Related content etc)
 	'onwardsCarousel',
 

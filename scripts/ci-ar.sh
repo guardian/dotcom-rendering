@@ -36,15 +36,12 @@ else
     yarn --silent
 
     cd apps-rendering
-    (
-    	cd cdk
-    	./script/ci
-    )
     npm ci
     npm run test
     npm run build:client:prod
     npm run build:server:prod
     npm run copy-manifest
     npm run copy-fonts
+	npm run synth
     npm run upload
 fi

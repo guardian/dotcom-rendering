@@ -24,14 +24,9 @@
     "inlineSources": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "typeRoots": ["./node_modules/@types"],
-    "outDir": "dist"
+    "outDir": "dist",
+    "skipLibCheck": true
   },
-  "include": ["lib/**/*", "bin/**/*"],
-  "exclude": [
-    "node_modules",
-    "cdk.out",
-    "lib/**/*.test.ts",
-    "lib/**/__snapshots__/**"
-  ]
+  "include": ["../cdk/lib/*", "../cdk/bin/*"],
+  "exclude": ["../cdk/lib/*.test.ts", "../cdk/lib/__snapshots__/**"]
 }
