@@ -5,12 +5,20 @@ const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const GITHUB = process.env.CI_ENV === 'github';
 
+/**
+ * @param {boolean} isLegacyJS
+ * @returns {string}
+ */
 const generateName = (isLegacyJS) => {
 	const legacyString = isLegacyJS ? '.legacy' : '';
 	const chunkhashString = PROD && !GITHUB ? '.[chunkhash]' : '';
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
+/**
+ * @param {{ isLegacyJS: boolean, sessionId: string }} options
+ * @returns {import('webpack').Configuration}
+ */
 module.exports = ({ isLegacyJS, sessionId }) => ({
 	entry: {
 		sentryLoader: './src/web/browser/sentryLoader/init.ts',
