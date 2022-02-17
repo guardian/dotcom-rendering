@@ -1,9 +1,11 @@
 declare module 'webpack-filter-warnings-plugin' {
-	import type { Compiler, WebpackPluginInstance } from 'webpack';
+	import webpack from 'webpack';
 
-	export default class FilterWarningsPlugin implements WebpackPluginInstance {
+	export default class FilterWarningsPlugin
+		implements webpack.WebpackPluginInstance
+	{
 		constructor(options: { exclude: RegExp });
 
-		apply(compiler: Compiler): void;
+		apply(compiler: webpack.Compiler): void;
 	}
 }
