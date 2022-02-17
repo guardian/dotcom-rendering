@@ -62,7 +62,7 @@ const commonConfigs = ({ platform }) => ({
 		...(DEV
 			? // DEV plugins
 			  [
-				  // @ts-ignore -- somehow the type declaration isn’t playing nice
+					// @ts-ignore -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
 						/** @type {(message: string) => void} */
