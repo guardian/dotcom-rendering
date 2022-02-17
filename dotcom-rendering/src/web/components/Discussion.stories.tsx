@@ -1,15 +1,15 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
-import { Discussion } from './Discussion';
+import { DiscussionLayout } from './DiscussionLayout';
 
 export default {
-	component: Discussion,
-	title: 'Components/Discussion',
+	component: DiscussionLayout,
+	title: 'Components/DiscussionLayout',
 };
 export const Basic = () => {
 	return (
 		<div>
-			<Discussion
+			<DiscussionLayout
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/4v8kk"
 				format={{
@@ -20,6 +20,8 @@ export const Basic = () => {
 				discussionD2Uid="zHoBy6HNKsk"
 				discussionApiClientHeader="nextgen"
 				enableDiscussionSwitch={true}
+				isAdFreeUser={false}
+				shouldHideAds={false}
 			/>
 		</div>
 	);

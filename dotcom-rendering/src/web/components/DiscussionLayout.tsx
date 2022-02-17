@@ -6,6 +6,7 @@ import { RightColumn } from './RightColumn';
 import { AdSlot } from './AdSlot';
 import { Island } from './Island';
 import { DiscussionContainer } from './DiscussionContainer.importable';
+import { DiscussionMeta } from './DiscussionMeta.importable';
 
 interface DiscussionLayoutProps {
 	format: ArticleFormat;
@@ -38,8 +39,16 @@ export const DiscussionLayout = ({
 				padContent={false}
 				// If we're not hiding an advert stretch to the right
 				stretchRight={!hideAd}
-				// TODO need to render <SignedInAs /> inside an island
-				leftContent={null}
+				leftContent={
+					<Island clientOnly={true} deferUntil="visible">
+						<DiscussionMeta
+							format={format}
+							discussionApiUrl={discussionApiUrl}
+							shortUrlId={shortUrlId}
+							enableDiscussionSwitch={enableDiscussionSwitch}
+						/>
+					</Island>
+				}
 			>
 				<Flex>
 					<div
