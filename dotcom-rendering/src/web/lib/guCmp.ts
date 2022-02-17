@@ -10,7 +10,7 @@
  *
  * @returns the cmp object
  */
-const getCmp = () => {
+export const guCmp = () => {
 	if (typeof window === 'undefined') {
 		// Return a mock guCmp object to make our code server safe
 		return {
@@ -33,5 +33,3 @@ const getCmp = () => {
 	}
 	return window.guCmpHotFix;
 };
-
-export const guCmp = getCmp();
