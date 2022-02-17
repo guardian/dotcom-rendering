@@ -200,17 +200,12 @@ export const Liveness = ({
 			}
 		};
 
-		window.addEventListener(
-			'visibilitychange',
-			handleVisibilityChange,
-			false,
-		);
+		window.addEventListener('visibilitychange', handleVisibilityChange);
 
 		return () => {
 			window.removeEventListener(
 				'visibilitychange',
 				handleVisibilityChange,
-				false,
 			);
 		};
 	}, [numHiddenBlocks]);
