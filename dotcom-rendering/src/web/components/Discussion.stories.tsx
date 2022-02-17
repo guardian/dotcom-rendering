@@ -11,7 +11,6 @@ const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
 	return <>{children}</>;
 };
 
-
 export default {
 	component: DiscussionLayout,
 	title: 'Components/DiscussionLayout',
