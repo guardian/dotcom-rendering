@@ -114,6 +114,7 @@ export const Discussion = ({
 		<>
 			<Hide when="above" breakpoint="leftCol">
 				<div
+					data-cy="discussion"
 					css={css`
 						padding-bottom: ${space[2]}px;
 					`}

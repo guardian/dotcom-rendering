@@ -38,6 +38,7 @@ export const DiscussionLayout = ({
 				padContent={false}
 				// If we're not hiding an advert stretch to the right
 				stretchRight={!hideAd}
+				// TODO need to render <SignedInAs /> inside an island
 				leftContent={null}
 			>
 				<Flex>
@@ -49,7 +50,6 @@ export const DiscussionLayout = ({
 							width: 100%;
 							max-width: 100%;
 						`}
-						data-cy="discussion"
 					>
 						<Island clientOnly={true} deferUntil="visible">
 							<DiscussionContainer
