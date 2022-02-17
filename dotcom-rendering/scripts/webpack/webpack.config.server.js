@@ -3,6 +3,7 @@ import webpackNodeExternals from 'webpack-node-externals';
 
 const DEV = process.env.NODE_ENV === 'development';
 
+/** @type {(options: { sessionId: string } ) => import('webpack').Configuration} */
 export default ({ sessionId }) => ({
 	entry: {
 		'frontend.server': './src/server/index.ts',
@@ -36,18 +37,18 @@ export default ({ sessionId }) => ({
 		// include them in the development bundle
 		({ request }, callback) => {
 			return process.env.NODE_ENV === 'development' &&
-				request.startsWith('@aws-sdk')
-				? callback(null, `commonjs ${request}`)
+				request?.startsWith('@aws-sdk')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
-			return request.endsWith('loadable-manifest-browser.json')
-				? callback(null, `commonjs ${request}`)
+			return request?.endsWith('loadable-manifest-browser.json')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
-			return request.endsWith('loadable-manifest-browser.legacy.json')
-				? callback(null, `commonjs ${request}`)
+			return request?.endsWith('loadable-manifest-browser.legacy.json')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 	],
@@ -59,7 +60,6 @@ export default ({ sessionId }) => ({
 					project: 'dotcom-rendering',
 					team: 'dotcom',
 					sessionId,
-					// TODO: convert the plugin to TS
 				}),
 		  ]
 		: undefined,

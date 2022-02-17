@@ -4,6 +4,10 @@ const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const GITHUB = process.env.CI_ENV === 'github';
 
+/**
+ * @param {boolean} isLegacyJS
+ * @returns {string}
+ */
 const generateName = (isLegacyJS) => {
 	const legacyString = isLegacyJS ? '.legacy' : '';
 	const chunkhashString = PROD && !GITHUB ? '.[chunkhash]' : '';
@@ -21,6 +25,10 @@ export const babelExclude = {
 	],
 };
 
+/**
+ * @param {{ isLegacyJS: boolean, sessionId: string }} options
+ * @returns {import('webpack').Configuration}
+ */
 export default ({ isLegacyJS, sessionId }) => ({
 	entry: {
 		sentryLoader: './src/web/browser/sentryLoader/init.ts',

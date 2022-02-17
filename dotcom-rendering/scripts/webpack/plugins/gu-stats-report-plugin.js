@@ -1,3 +1,4 @@
+// @ts-check
 import { exec } from 'child_process';
 import chalk from 'chalk';
 import os from 'os';
@@ -5,13 +6,20 @@ import fetch from 'node-fetch';
 
 const PLUGIN_NAME = 'GuStatsReportPlugin';
 
+/**
+ * @typedef Config
+ * @type {{ buildName : string, project: string, team: string, sessionId: string, displayDisclaimer?: boolean}}
+ */
+
 class GuStatsReportPlugin {
+	/** @param {Config} config */
 	constructor(config) {
 		this.buildName = config?.buildName;
 		this.project = config?.project;
 		this.team = config?.team;
 		this.sessionId = config?.sessionId;
 		this.buildCount = 0;
+		/** @type {Record<'log' | 'warn' | 'error', (...args: unknown[]) => void>} */
 		this.logger = console;
 
 		this.gitBranch = undefined;
@@ -49,9 +57,11 @@ class GuStatsReportPlugin {
 		});
 	}
 
+	/** @param {import('webpack').Compiler} compiler */
 	apply(compiler) {
 		this.logger = compiler.getInfrastructureLogger(PLUGIN_NAME);
 
+		/** @param {import('webpack').Stats} stats */
 		const onDone = (stats) => {
 			// Increment the buildCount
 			this.buildCount += 1;
@@ -62,10 +72,12 @@ class GuStatsReportPlugin {
 				);
 
 			const URL = 'https://logs.guardianapis.com/log';
+			// @ts-ignore -- the type declaration isn’t playing nice
 			fetch(URL, {
 				method: 'POST',
 				body: JSON.stringify({
 					label: 'buildstats',
+					/** @type {Array<{ name: string, value: string}>} */
 					properties: [
 						{
 							name: 'project',
@@ -81,7 +93,7 @@ class GuStatsReportPlugin {
 						},
 						{
 							name: 'buildCount',
-							value: this.buildCount,
+							value: String(this.buildCount),
 						},
 						{
 							name: 'gitHash',
@@ -97,13 +109,14 @@ class GuStatsReportPlugin {
 						},
 						{
 							name: 'cpus',
-							value: os.cpus().length,
+							value: String(os.cpus().length),
 						},
 						{
 							name: 'memoryKb',
-							value: Math.round(os.totalmem() / 1024),
+							value: String(Math.round(os.totalmem() / 1024)),
 						},
 					],
+					/** @type {Array<{ name: string, value: number}>} */
 					metrics: [
 						{
 							name: 'buildTime',
@@ -123,14 +136,16 @@ class GuStatsReportPlugin {
 					],
 				}),
 			})
-				.then(({ ok, status }) =>
-					ok
-						? this.logger.log(
-								`Stats reported for '${this.buildName}' build. (Session build count - ${this.buildCount})`,
-						  )
-						: this.logger.error(
-								`${this.buildName} (${this.buildCount}): Failed to report stats (${status})`,
-						  ),
+				.then(
+					/** @param {import('node-fetch').Response} resp */
+					({ ok, status }) =>
+						ok
+							? this.logger.log(
+									`Stats reported for '${this.buildName}' build. (Session build count - ${this.buildCount})`,
+							  )
+							: this.logger.error(
+									`${this.buildName} (${this.buildCount}): Failed to report stats (${status})`,
+							  ),
 				)
 				.catch(() =>
 					this.logger.error(

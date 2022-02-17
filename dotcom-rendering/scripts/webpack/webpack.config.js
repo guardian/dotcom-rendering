@@ -1,3 +1,5 @@
+// @ts-check
+
 import { resolve, join } from 'path';
 import webpack from 'webpack';
 import { merge } from 'webpack-merge';
@@ -23,9 +25,13 @@ const sessionId = uuidv4();
 
 let builds = 0;
 
+/**
+ * @param {{ platform: 'server' | 'browser' | 'browser.legacy'}} options
+ * @returns {import('webpack').Configuration}
+ */
 const commonConfigs = ({ platform }) => ({
 	name: platform,
-	mode: process.env.NODE_ENV,
+	mode: DEV ? 'development' : 'production',
 	output: {
 		path: dist,
 	},
@@ -59,6 +65,7 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
+		// @ts-ignore -- somehow the type declarations are not playing nice together
 		...(DEV
 			? // DEV plugins
 			  [
