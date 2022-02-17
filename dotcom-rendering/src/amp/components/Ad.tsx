@@ -1,4 +1,4 @@
-import { adJson, stringify } from '@root/src/amp/lib/ad-json';
+import { adJson, stringify } from '../lib/ad-json';
 
 // Largest size first
 const inlineSizes = [

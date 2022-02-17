@@ -12,52 +12,51 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import Accordion from '@guardian/common-rendering/src/components/accordion';
+import { Hide } from '@guardian/source-react-components';
+import { StarRating } from '../components/StarRating/StarRating';
+import { ArticleBody } from '../components/ArticleBody';
+import { RightColumn } from '../components/RightColumn';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { ArticleContainer } from '../components/ArticleContainer';
+import { ArticleMeta } from '../components/ArticleMeta';
+import { SubMeta } from '../components/SubMeta';
+import { MainMedia } from '../components/MainMedia';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleHeadlinePadding } from '../components/ArticleHeadlinePadding';
+import { Standfirst } from '../components/Standfirst';
+import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
+import { SubNav } from '../components/SubNav.importable';
+import { ElementContainer } from '../components/ElementContainer';
+import { Nav } from '../components/Nav/Nav';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
+import { GridItem } from '../components/GridItem';
+import { AgeWarning } from '../components/AgeWarning';
+import { DiscussionContainer } from '../components/DiscussionContainer.importable';
+import { Pagination } from '../components/Pagination';
+import { KeyEventsContainer } from '../components/KeyEventsContainer';
 
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { ArticleBody } from '@root/src/web/components/ArticleBody';
-import { RightColumn } from '@root/src/web/components/RightColumn';
-import { ArticleTitle } from '@root/src/web/components/ArticleTitle';
-import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
-import { ArticleMeta } from '@root/src/web/components/ArticleMeta';
-import { SubMeta } from '@root/src/web/components/SubMeta';
-import { MainMedia } from '@root/src/web/components/MainMedia';
-import { ArticleHeadline } from '@root/src/web/components/ArticleHeadline';
-import { ArticleHeadlinePadding } from '@root/src/web/components/ArticleHeadlinePadding';
-import { Standfirst } from '@root/src/web/components/Standfirst';
-import { Header } from '@root/src/web/components/Header';
-import { Footer } from '@root/src/web/components/Footer';
-import { SubNav } from '@root/src/web/components/SubNav.importable';
-import { ElementContainer } from '@root/src/web/components/ElementContainer';
-import { Nav } from '@root/src/web/components/Nav/Nav';
-import { HeaderAdSlot } from '@root/src/web/components/HeaderAdSlot';
-import { MobileStickyContainer, AdSlot } from '@root/src/web/components/AdSlot';
-import { GridItem } from '@root/src/web/components/GridItem';
-import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { DiscussionContainer } from '@root/src/web/components/DiscussionContainer.importable';
-import { Pagination } from '@frontend/web/components/Pagination';
-import { KeyEventsContainer } from '@frontend/web/components/KeyEventsContainer';
-
-import { buildAdTargeting } from '@root/src/lib/ad-targeting';
-import { parse } from '@frontend/lib/slot-machine-flags';
-import { getAgeWarning } from '@root/src/lib/age-warning';
+import { buildAdTargeting } from '../../lib/ad-targeting';
+import { parse } from '../../lib/slot-machine-flags';
+import { getAgeWarning } from '../../lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
 	getCurrentPillar,
-} from '@root/src/web/lib/layoutHelpers';
-import {
-	Stuck,
-	SendToBack,
-	BannerWrapper,
-} from '@root/src/web/layouts/lib/stickiness';
-import Accordion from '@guardian/common-rendering/src/components/accordion';
-import { Hide } from '@guardian/source-react-components';
-import { Placeholder } from '../components/Placeholder';
+} from '../lib/layoutHelpers';
+import { Stuck, SendToBack, BannerWrapper } from './lib/stickiness';
+import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';
+import { Liveness } from '../components/Liveness.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { GetMatchNav } from '../components/GetMatchNav.importable';
+import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -168,6 +167,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines		 media'
 						'meta		 media'
 						'keyevents	 media'
+						'keyevents   filter'
 						'keyevents	 body'
 						'keyevents	 body'
 						'. 			 .';
@@ -180,6 +180,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines 		 media	   right-column'
 						'meta  		 media     right-column'
 						'keyevents   media 	   right-column'
+						'keyevents   filter    right-column'
 						'keyevents   body      right-column'
 						'keyevents   body      right-column'
 						'.			 .         right-column';
@@ -192,6 +193,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 						'lines'
 						'meta'
 						'keyevents'
+						'filter'
 						'body';
 				}
 			}
@@ -233,6 +235,7 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'meta		 media'
 						'meta		 media'
 						'keyevents	 media'
+						'keyevents   filter'
 						'matchstats	 body'
 						'. 			 .';
 				}
@@ -245,6 +248,7 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'meta  		 media     right-column'
 						'keyevents   media 	   right-column'
 						'matchstats  body      right-column'
+						'keyevents   filter    right-column'
 						'.			 .         right-column';
 				}
 				/* until desktop define fixed body width */
@@ -257,6 +261,7 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'meta'
 						'keyevents'
 						'matchstats'
+						'filter'
 						'body';
 				}
 				/* fluid until tablet */
@@ -269,6 +274,7 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 						'meta'
 						'keyevents'
 						'matchstats'
+						'filter'
 						'body';
 				}
 			}
@@ -376,15 +382,28 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
-	const showComments = CAPI.isCommentable;
-
-	const showMatchTabs = CAPI.matchUrl;
-
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
+
+	// Set a default pagination if it is missing from CAPI
+	const pagination: Pagination = CAPI.pagination ?? {
+		currentPage: 1,
+		totalPages: 1,
+	};
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 	return (
 		<>
+			{format.design === ArticleDesign.LiveBlog && (
+				<Island clientOnly={true} deferUntil="idle">
+					<Liveness
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
+						ajaxUrl={CAPI.config.ajaxUrl}
+						filterKeyEvents={CAPI.filterKeyEvents}
+						format={format}
+					/>
+				</Island>
+			)}
 			<div data-print-layout="hide">
 				<Stuck>
 					<ElementContainer
@@ -507,11 +526,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 							</Hide>
 
-							<Placeholder
-								shouldShimmer={false}
-								rootId="match-nav"
-								height={230}
-							/>
+							<Island
+								deferUntil="visible"
+								clientOnly={true}
+								placeholderHeight={230}
+							>
+								<GetMatchNav matchUrl={CAPI.matchUrl} />
+							</Island>
 						</ContainerLayout>
 					) : (
 						<ElementContainer
@@ -634,6 +655,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												CAPI.config.discussionApiUrl
 											}
 											shortUrlId={CAPI.config.shortUrlId}
+											ajaxUrl={CAPI.config.ajaxUrl}
+											showShareCount={
+												CAPI.config.switches
+													.serverShareCounts
+											}
 										/>
 									</div>
 								</Hide>
@@ -661,14 +687,26 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					>
 						{CAPI.matchUrl ? (
 							<LiveGridSport>
+								<GridItem area="filter">
+									<Island deferUntil="visible">
+										<FilterKeyEventsToggle
+											filterKeyEvents={
+												CAPI.filterKeyEvents
+											}
+										/>
+									</Island>
+								</GridItem>
 								<GridItem area="matchtabs" element="aside">
 									<div css={maxWidth}>
-										{CAPI.matchUrl && showMatchTabs && (
-											<Placeholder
-												rootId="match-tabs"
-												height={40}
+										<Island
+											clientOnly={true}
+											placeholderHeight={40}
+										>
+											<GetMatchTabs
+												matchUrl={CAPI.matchUrl}
+												format={format}
 											/>
-										)}
+										</Island>
 									</div>
 								</GridItem>
 								<GridItem area="media">
@@ -730,6 +768,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												shortUrlId={
 													CAPI.config.shortUrlId
 												}
+												ajaxUrl={CAPI.config.ajaxUrl}
+												showShareCount={
+													CAPI.config.switches
+														.serverShareCounts
+												}
 											/>
 										</div>
 									</Hide>
@@ -746,6 +789,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										<KeyEventsContainer
 											format={format}
 											keyEvents={CAPI.keyEvents}
+											filterKeyEvents={
+												CAPI.filterKeyEvents
+											}
 										/>
 									</div>
 								</GridItem>
@@ -765,33 +811,21 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="body">
 									<ArticleContainer format={format}>
-										{CAPI.pagination &&
-											CAPI.pagination.currentPage !==
-												1 && (
-												<Pagination
-													currentPage={
-														CAPI.pagination
-															?.currentPage || 1
-													}
-													totalPages={
-														CAPI.pagination
-															?.totalPages || 1
-													}
-													newest={
-														CAPI.pagination?.newest
-													}
-													oldest={
-														CAPI.pagination?.oldest
-													}
-													newer={
-														CAPI.pagination?.newer
-													}
-													older={
-														CAPI.pagination?.older
-													}
-													format={format}
-												/>
-											)}
+										{pagination.currentPage !== 1 && (
+											<Pagination
+												currentPage={
+													pagination.currentPage
+												}
+												totalPages={
+													pagination.totalPages
+												}
+												newest={pagination.newest}
+												oldest={pagination.oldest}
+												newer={pagination.newer}
+												older={pagination.older}
+												format={format}
+											/>
+										)}
 										<ArticleBody
 											format={format}
 											palette={palette}
@@ -802,32 +836,21 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											webTitle={CAPI.webTitle}
 											ajaxUrl={CAPI.config.ajaxUrl}
 										/>
-										{CAPI.pagination &&
-											CAPI.pagination.totalPages > 1 && (
-												<Pagination
-													currentPage={
-														CAPI.pagination
-															?.currentPage || 1
-													}
-													totalPages={
-														CAPI.pagination
-															?.totalPages || 1
-													}
-													newest={
-														CAPI.pagination?.newest
-													}
-													oldest={
-														CAPI.pagination?.oldest
-													}
-													newer={
-														CAPI.pagination?.newer
-													}
-													older={
-														CAPI.pagination?.older
-													}
-													format={format}
-												/>
-											)}
+										{pagination.totalPages > 1 && (
+											<Pagination
+												currentPage={
+													pagination.currentPage
+												}
+												totalPages={
+													pagination.totalPages
+												}
+												newest={pagination.newest}
+												oldest={pagination.oldest}
+												newer={pagination.newer}
+												older={pagination.older}
+												format={format}
+											/>
+										)}
 										{showBodyEndSlot && (
 											<div id="slot-body-end" />
 										)}
@@ -879,6 +902,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											<AdSlot
 												position="right"
 												display={format.display}
+												shouldHideReaderRevenue={
+													CAPI.shouldHideReaderRevenue
+												}
+												isPaidContent={
+													CAPI.pageType.isPaidContent
+												}
 											/>
 										</RightColumn>
 									</div>
@@ -886,6 +915,17 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</LiveGridSport>
 						) : (
 							<LiveGrid>
+								<GridItem area="filter">
+									<Hide below="desktop">
+										<Island deferUntil="visible">
+											<FilterKeyEventsToggle
+												filterKeyEvents={
+													CAPI.filterKeyEvents
+												}
+											/>
+										</Island>
+									</Hide>
+								</GridItem>
 								<GridItem area="media">
 									<div css={maxWidth}>
 										<MainMedia
@@ -943,6 +983,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												shortUrlId={
 													CAPI.config.shortUrlId
 												}
+												ajaxUrl={CAPI.config.ajaxUrl}
+												showShareCount={
+													CAPI.config.switches
+														.serverShareCounts
+												}
 											/>
 										</div>
 									</Hide>
@@ -959,6 +1004,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										<KeyEventsContainer
 											format={format}
 											keyEvents={CAPI.keyEvents}
+											filterKeyEvents={
+												CAPI.filterKeyEvents
+											}
 										/>
 									</div>
 								</GridItem>
@@ -969,40 +1017,38 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											accordionTitle="Live feed"
 											context="liveFeed"
 										>
-											<ArticleContainer format={format}>
-												{CAPI.pagination &&
-													CAPI.pagination
-														.currentPage !== 1 && (
-														<Pagination
-															currentPage={
-																CAPI.pagination
-																	?.currentPage ||
-																1
+											<GridItem area="filter">
+												<Hide above="desktop">
+													<Island deferUntil="visible">
+														<FilterKeyEventsToggle
+															filterKeyEvents={
+																CAPI.filterKeyEvents
 															}
-															totalPages={
-																CAPI.pagination
-																	?.totalPages ||
-																1
-															}
-															newest={
-																CAPI.pagination
-																	?.newest
-															}
-															oldest={
-																CAPI.pagination
-																	?.oldest
-															}
-															newer={
-																CAPI.pagination
-																	?.newer
-															}
-															older={
-																CAPI.pagination
-																	?.older
-															}
-															format={format}
 														/>
-													)}
+													</Island>
+												</Hide>
+											</GridItem>
+											<ArticleContainer format={format}>
+												{pagination.currentPage !==
+													1 && (
+													<Pagination
+														currentPage={
+															pagination.currentPage
+														}
+														totalPages={
+															pagination.totalPages
+														}
+														newest={
+															pagination.newest
+														}
+														oldest={
+															pagination.oldest
+														}
+														newer={pagination.newer}
+														older={pagination.older}
+														format={format}
+													/>
+												)}
 												<ArticleBody
 													format={format}
 													palette={palette}
@@ -1015,39 +1061,25 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 														CAPI.config.ajaxUrl
 													}
 												/>
-												{CAPI.pagination &&
-													CAPI.pagination.totalPages >
-														1 && (
-														<Pagination
-															currentPage={
-																CAPI.pagination
-																	?.currentPage ||
-																1
-															}
-															totalPages={
-																CAPI.pagination
-																	?.totalPages ||
-																1
-															}
-															newest={
-																CAPI.pagination
-																	?.newest
-															}
-															oldest={
-																CAPI.pagination
-																	?.oldest
-															}
-															newer={
-																CAPI.pagination
-																	?.newer
-															}
-															older={
-																CAPI.pagination
-																	?.older
-															}
-															format={format}
-														/>
-													)}
+												{pagination.totalPages > 1 && (
+													<Pagination
+														currentPage={
+															pagination.currentPage
+														}
+														totalPages={
+															pagination.totalPages
+														}
+														newest={
+															pagination.newest
+														}
+														oldest={
+															pagination.oldest
+														}
+														newer={pagination.newer}
+														older={pagination.older}
+														format={format}
+													/>
+												)}
 												{showBodyEndSlot && (
 													<div id="slot-body-end" />
 												)}
@@ -1101,6 +1133,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											<AdSlot
 												position="right"
 												display={format.display}
+												shouldHideReaderRevenue={
+													CAPI.shouldHideReaderRevenue
+												}
+												isPaidContent={
+													CAPI.pageType.isPaidContent
+												}
 											/>
 										</RightColumn>
 									</div>
@@ -1160,7 +1198,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					</ElementContainer>
 				)}
 
-				{!isPaidContent && showComments && (
+				{!isPaidContent && CAPI.isCommentable && (
 					<ElementContainer
 						sectionId="comments"
 						data-print-layout="hide"
@@ -1186,11 +1224,16 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="most-viewed-footer"
-						element="aside"
-					/>
+					<ElementContainer data-print-layout="hide" element="aside">
+						<MostViewedFooterLayout
+							format={format}
+							sectionName={CAPI.sectionName}
+							ajaxUrl={CAPI.config.ajaxUrl}
+							switches={CAPI.config.switches}
+							pageIsSensitive={CAPI.config.isSensitive}
+							isDev={CAPI.config.isDev}
+						/>
+					</ElementContainer>
 				)}
 
 				<ElementContainer

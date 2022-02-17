@@ -1,13 +1,13 @@
 import fetchMock from 'fetch-mock';
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { Flex } from '@root/src/web/components/Flex';
-import { RightColumn } from '@root/src/web/components/RightColumn';
-import { LeftColumn } from '@root/src/web/components/LeftColumn';
-import { ArticleContainer } from '@root/src/web/components/ArticleContainer';
-import { ElementContainer } from '@frontend/web/components/ElementContainer';
+import { Flex } from './Flex';
+import { RightColumn } from './RightColumn';
+import { LeftColumn } from './LeftColumn';
+import { ArticleContainer } from './ArticleContainer';
+import { ElementContainer } from './ElementContainer';
 
-import { mockTab1 } from './MostViewed/MostViewed.mocks';
+import { mockTab1 } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 
 export default {
@@ -45,7 +45,10 @@ export const defaultStory = () => {
 						showTopBorder={false}
 						padded={false}
 					>
-						<MostViewedRight isAdFreeUser={false} />
+						<MostViewedRight
+							isAdFreeUser={false}
+							adBlockerDetected={false}
+						/>
 					</ElementContainer>
 				</RightColumn>
 			</Flex>
@@ -81,7 +84,11 @@ export const limitItemsStory = () => {
 						showTopBorder={false}
 						padded={false}
 					>
-						<MostViewedRight limitItems={3} isAdFreeUser={false} />
+						<MostViewedRight
+							limitItems={3}
+							isAdFreeUser={false}
+							adBlockerDetected={false}
+						/>
 					</ElementContainer>
 				</RightColumn>
 			</Flex>
@@ -98,7 +105,7 @@ export const outsideContextStory = () => {
 
 	return (
 		<ElementContainer>
-			<MostViewedRight isAdFreeUser={false} />
+			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />
 		</ElementContainer>
 	);
 };

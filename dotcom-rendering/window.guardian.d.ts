@@ -1,11 +1,11 @@
-import { WindowGuardianConfig } from '@root/src/model/window-guardian';
-import { ReaderRevenueDevUtils } from '@root/src/web/lib/readerRevenueDevUtils';
 import type {
 	Callback,
 	CMP,
 	ConsentState,
 	VendorName,
 } from '@guardian/consent-management-platform/dist/types';
+import { WindowGuardianConfig } from './src/model/window-guardian';
+import { ReaderRevenueDevUtils } from './src/web/lib/readerRevenueDevUtils';
 
 declare global {
 	/* ~ Here, declare things that go in the global namespace, or augment

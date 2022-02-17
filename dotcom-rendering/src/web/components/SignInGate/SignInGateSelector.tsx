@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { constructQuery } from '@root/src/lib/querystring';
 import { ArticleDesign, getCookie } from '@guardian/libs';
+import { constructQuery } from '../../../lib/querystring';
 
 import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
-} from '@frontend/web/components/SignInGate/dismissGate';
-import { useSignInGateSelector } from '@frontend/web/lib/useSignInGateSelector';
+} from './dismissGate';
+import { useSignInGateSelector } from '../../lib/useSignInGateSelector';
 
-import { useOnce } from '@frontend/web/lib/useOnce';
+import { useOnce } from '../../lib/useOnce';
 import {
 	ComponentEventParams,
 	submitViewEventTracking,

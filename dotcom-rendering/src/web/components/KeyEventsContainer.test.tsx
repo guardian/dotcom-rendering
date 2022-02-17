@@ -26,6 +26,7 @@ describe('KeyEventsContainer', () => {
 						title: 'title',
 					},
 				]}
+				filterKeyEvents={true}
 			/>,
 		);
 		expect(container).toHaveTextContent('title');
@@ -47,6 +48,7 @@ describe('KeyEventsContainer', () => {
 					},
 					{ ...baseProperties, title: 'should not exist' },
 				]}
+				filterKeyEvents={true}
 			/>,
 		);
 		expect(container).toHaveTextContent('title');
@@ -72,6 +74,7 @@ describe('KeyEventsContainer', () => {
 						blockFirstPublished: 1638279933000,
 					},
 				]}
+				filterKeyEvents={true}
 			/>,
 		);
 		expect(container).toHaveTextContent('title');

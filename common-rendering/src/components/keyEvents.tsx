@@ -55,7 +55,7 @@ const keyEventWrapperStyles = (
 	width: 100%;
 
 	${from.desktop} {
-		border-top: #cdcdcd 1px solid;
+		border-top: 1px solid ${neutral[86]};
 		padding-top: ${remSpace[2]};
 	}
 
@@ -71,27 +71,30 @@ const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 
 	li::before {
 		content: "";
-		border-color: transparent ${neutral[7]};
-		border-style: solid;
-		border-width: 0.4rem 0 0.4rem 0.5rem;
 		display: block;
-		height: 0;
-		width: 0;
-		top: 0;
 		position: absolute;
+		top: 0;
+		left: -0.313rem;
+		height: 0.563rem;
+		width: 0.563rem;
+		border-radius: 50%;
+		background-color: ${neutral[46]};
 	}
 
 	${darkModeCss(supportsDarkMode)`
 		li::before {
 			border-color: transparent ${neutral[60]};
+			background-color: neutral[60];
 		}
 	`}
 `;
 
 const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	padding-bottom: ${remSpace[3]};
-	border-left: 1px solid ${neutral[7]};
+	border-left: 1px solid ${neutral[86]};
 	position: relative;
+	transform: translateY(-1px);
+	margin-left: ${remSpace[1]};
 	${darkModeCss(supportsDarkMode)`
 		border-left: 1px solid ${neutral[60]};
 	`}
@@ -102,6 +105,7 @@ const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 
 const timeTextWrapperStyles: SerializedStyles = css`
 	margin-left: ${remSpace[4]};
+	margin-left: 0.5rem;
 `;
 
 
@@ -110,8 +114,12 @@ const textStyles = (
 	supportsDarkMode: boolean
 ): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
+	/* TODO update with Source value when it's added */
+	${from.desktop} {
+		font-size:15px;
+	}
 	color: ${text.keyEventsInline(format)};
-
+	display: block;
 	text-decoration: none;
 
 	&:hover {
@@ -141,6 +149,7 @@ const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	${textSans.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
 	color: ${neutral[7]};
 	display: block;
+	transform: translateY(-2.5px);
 
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[60]};

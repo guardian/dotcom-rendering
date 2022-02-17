@@ -1,4 +1,4 @@
-import { getLocaleCode } from '@frontend/web/lib/getCountryCode';
+import { getLocaleCode } from './getCountryCode';
 
 let frameworks: undefined | Record<string, boolean>;
 

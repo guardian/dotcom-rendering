@@ -8,7 +8,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { sanitise } from '@frontend/lib/sanitise-html';
+import { sanitise } from '../../lib/sanitise-html';
 import { decidePalette } from '../lib/decidePalette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
@@ -20,7 +20,7 @@ type Props = {
 const nestedStyles = (palette: Palette) => css`
 	li {
 		margin-bottom: 6px;
-		padding-left: 20px;
+		padding-left: ${space[6]}px;
 
 		p {
 			display: inline;
@@ -30,12 +30,12 @@ const nestedStyles = (palette: Palette) => css`
 	li:before {
 		display: inline-block;
 		content: '';
-		border-radius: 6px;
-		height: ${space[3]}px;
-		width: ${space[3]}px;
-		margin-right: ${space[2]}px;
+		border-radius: 50%;
+		height: 0.7em;
+		width: 0.7em;
+		margin-right: 7px;
 		background-color: ${palette.background.bulletStandfirst};
-		margin-left: -20px;
+		margin-left: -${space[6]}px;
 	}
 
 	p {
@@ -49,9 +49,9 @@ const nestedStyles = (palette: Palette) => css`
 	[data-dcr-style='bullet'] {
 		display: inline-block;
 		content: '';
-		border-radius: 100%;
-		height: 15.2px;
-		width: 15.2px;
+		border-radius: 50%;
+		height: 13px;
+		width: 13px;
 		margin-right: 2px;
 		background-color: ${palette.background.bulletStandfirst};
 	}
@@ -104,6 +104,11 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 							max-width: 460px;
 						}
 						color: ${palette.text.standfirst};
+
+						li:before {
+							height: 17px;
+							width: 17px;
+						}
 					`;
 			}
 
@@ -134,6 +139,10 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};
+						li:before {
+							height: 15px;
+							width: 15px;
+						}
 					`;
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:

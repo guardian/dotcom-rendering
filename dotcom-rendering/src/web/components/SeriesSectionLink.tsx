@@ -8,10 +8,10 @@ import {
 	space,
 } from '@guardian/source-foundations';
 
-import { Hide } from '@frontend/web/components/Hide';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { Badge } from '@frontend/web/components/Badge';
-import { interactiveLegacyClasses } from '@root/src/web/layouts/lib/interactiveLegacyStyling';
+import { Hide } from './Hide';
+import { Badge } from './Badge';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 type Props = {
 	format: ArticleFormat;

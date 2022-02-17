@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { Caption } from '@root/src/amp/components/Caption';
-import { constructQuery } from '@root/src/lib/querystring';
+import { Caption } from '../Caption';
+import { constructQuery } from '../../../lib/querystring';
 
 type EmbedConfig = {
 	adsConfig:

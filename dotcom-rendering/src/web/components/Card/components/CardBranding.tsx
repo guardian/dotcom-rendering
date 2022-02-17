@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
-import { decideLogo } from '@root/src/web/lib/decideLogo';
+import { decideLogo } from '../../../lib/decideLogo';
 
 type Props = {
 	branding: Branding;

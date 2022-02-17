@@ -8,7 +8,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
-import { map, withDefault } from '@guardian/types';
+import { map, none, withDefault } from '@guardian/types';
 import BylineCard from 'components/shared/bylineCard';
 import Card from 'components/shared/card';
 import type { ResizedRelatedContent } from 'item';
@@ -125,6 +125,7 @@ const RelatedContent: FC<Props> = ({ content }) => {
 									key={key}
 									relatedItem={relatedItem}
 									image={resizedImages[key]}
+									kickerText={none}
 								/>
 							);
 						})}

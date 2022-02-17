@@ -1,10 +1,10 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
 
 import { border, from } from '@guardian/source-foundations';
-import { center } from '@root/src/web/lib/center';
 // @ts-ignore-start
 import { jsx as _jsx } from 'react/jsx-runtime';
 // @ts-ignore-end
+import { center } from '../lib/center';
 
 const padding = emoCss`
 	padding: 0 10px;

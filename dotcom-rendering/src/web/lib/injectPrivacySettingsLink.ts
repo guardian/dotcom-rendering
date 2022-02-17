@@ -1,5 +1,5 @@
-import { getPrivacyFramework } from '@root/src/web/lib/getPrivacyFramework';
 import { guCmp } from './guCmp';
+import { getPrivacyFramework } from './getPrivacyFramework';
 
 const newPrivacyLinkName = 'privacy-settings';
 

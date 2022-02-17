@@ -7,8 +7,8 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 
-import { Figure } from '@frontend/web/components/Figure';
-import { ContainerLayout } from '@frontend/web/components/ContainerLayout';
+import { Figure } from './Figure';
+import { ContainerLayout } from './ContainerLayout';
 
 import { RichLink } from './RichLink';
 

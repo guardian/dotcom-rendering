@@ -3,16 +3,16 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/source-foundations';
 
-import { StarRating } from '@root/src/web/components/StarRating/StarRating';
-import { CardHeadline } from '@frontend/web/components/CardHeadline';
-import { Avatar } from '@frontend/web/components/Avatar';
-import { Flex } from '@frontend/web/components/Flex';
-import { Hide } from '@frontend/web/components/Hide';
-import { MediaMeta } from '@frontend/web/components/MediaMeta';
-import { CardCommentCount } from '@frontend/web/components/CardCommentCount';
+import { StarRating } from '../StarRating/StarRating';
+import { CardHeadline } from '../CardHeadline';
+import { Avatar } from '../Avatar';
+import { Flex } from '../Flex';
+import { Hide } from '../Hide';
+import { MediaMeta } from '../MediaMeta';
+import { CardCommentCount } from '../CardCommentCount';
 
-import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { formatCount } from '@root/src/web/lib/formatCount';
+import { decidePalette } from '../../lib/decidePalette';
+import { formatCount } from '../../lib/formatCount';
 
 import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';

@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
 
-import SearchIcon from '@frontend/static/icons/search.svg';
-
 import {
 	brand,
 	brandText,
@@ -9,13 +7,14 @@ import {
 	textSans,
 	from,
 } from '@guardian/source-foundations';
-
-import { DropdownLinkType, Dropdown } from '@root/src/web/components/Dropdown';
-
-import ProfileIcon from '@frontend/static/icons/profile.svg';
-import { createAuthenticationEventParams } from '@root/src/lib/identity-component-event';
 import { getCookie, joinUrl } from '@guardian/libs';
-import { useApi } from '@root/src/web/lib/useApi';
+import SearchIcon from '../../static/icons/search.svg';
+
+import { DropdownLinkType, Dropdown } from './Dropdown';
+
+import ProfileIcon from '../../static/icons/profile.svg';
+import { createAuthenticationEventParams } from '../../lib/identity-component-event';
+import { useApi } from '../lib/useApi';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
@@ -233,20 +232,27 @@ export const Links = ({
 
 	const isServer = typeof window === 'undefined';
 
+	const showSupporterCTA =
+		!isServer &&
+		getCookie({
+			name: 'gu_hide_support_messaging',
+			shouldMemoize: true,
+		}) === 'true';
+
 	const isSignedIn =
 		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
 	return (
 		<div data-print-layout="hide" css={linksStyles}>
-			{supporterCTA !== '' && (
+			{showSupporterCTA && supporterCTA !== '' && (
 				<>
 					<div css={seperatorStyles} />
 					<a
-						href="https://support.theguardian.com/subscribe/weekly?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_supporter_cta%22%7D"
+						href={supporterCTA}
 						css={[linkTablet({ showAtTablet: false }), linkStyles]}
 						data-link-name="nav2 : supporter-cta"
 					>
-						Print subscriptions
+						Subscriptions
 					</a>
 				</>
 			)}

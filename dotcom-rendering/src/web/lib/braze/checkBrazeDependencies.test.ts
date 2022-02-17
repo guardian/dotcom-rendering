@@ -1,7 +1,7 @@
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 
 let mockBrazeUuid: string | null;
-jest.mock('@root/src/web/lib/getBrazeUuid', () => ({
+jest.mock('../getBrazeUuid', () => ({
 	getBrazeUuid: () => {
 		return Promise.resolve(mockBrazeUuid);
 	},

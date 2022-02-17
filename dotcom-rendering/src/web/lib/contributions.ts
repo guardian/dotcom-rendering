@@ -1,8 +1,5 @@
 import { getCookie } from '@guardian/libs';
-import {
-	getIdApiUserData,
-	IdApiUserData,
-} from '@root/src/web/lib/getIdapiUserData';
+import { getIdApiUserData, IdApiUserData } from './getIdapiUserData';
 import { guCmp } from './guCmp';
 
 // User Atributes API cookies (dropped on sign-in)

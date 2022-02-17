@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { useApi } from '@root/src/web/lib/useApi';
+import { useApi } from './useApi';
 
 type CommentType = {
 	id: string;

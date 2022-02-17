@@ -1,4 +1,4 @@
-import { constructQuery } from '@root/src/lib/querystring';
+import { constructQuery } from './querystring';
 
 export type AuthenticationComponentId =
 	| 'amp_sidebar_signin'

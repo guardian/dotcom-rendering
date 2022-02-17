@@ -1,28 +1,28 @@
 import { useState } from 'react';
 import {
+	BrazeMessagesInterface,
+	BrazeArticleContext,
+} from '@guardian/braze-components';
+import { getCookie } from '@guardian/libs';
+import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import {
 	canShowRRBanner,
 	canShowPuzzlesBanner,
 	ReaderRevenueBanner,
 	PuzzlesBanner,
 	BannerProps,
 	CanShowFunctionType,
-} from '@root/src/web/components/StickyBottomBanner/ReaderRevenueBanner';
-import { getAlreadyVisitedCount } from '@root/src/web/lib/alreadyVisited';
-import { useOnce } from '@root/src/web/lib/useOnce';
+} from './ReaderRevenueBanner';
+import { getAlreadyVisitedCount } from '../../lib/alreadyVisited';
+import { useOnce } from '../../lib/useOnce';
 import {
 	pickMessage,
 	SlotConfig,
 	MaybeFC,
 	CandidateConfig,
-} from '@root/src/web/lib/messagePicker';
-import { getLocaleCode } from '@root/src/web/lib/getCountryCode';
-import { getCookie } from '@guardian/libs';
-import type {
-	BrazeArticleContext,
-	BrazeMessagesInterface,
-} from '@guardian/braze-components/logic';
-import { useSignInGateWillShow } from '@root/src/web/lib/useSignInGateWillShow';
-import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+} from '../../lib/messagePicker';
+import { getLocaleCode } from '../../lib/getCountryCode';
+import { useSignInGateWillShow } from '../../lib/useSignInGateWillShow';
 import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
 import { guCmp } from '../../lib/guCmp';
 

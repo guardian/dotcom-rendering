@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
+import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
+import {
+	ModuleDataResponse,
+	ModuleData,
+	EpicPayload,
+	WeeklyArticleHistory,
+} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { getCookie, storage } from '@guardian/libs';
 import {
 	isRecurringContributor,
 	getLastOneOffContributionTimestamp,
@@ -10,22 +18,14 @@ import {
 	hasOptedOutOfArticleCount,
 	lazyFetchEmailWithTimeout,
 	hasCmpConsentForBrowserId,
-} from '@root/src/web/lib/contributions';
-import { CanShowResult } from '@root/src/web/lib/messagePicker';
-import { initPerf } from '@root/src/web/browser/initPerf';
+} from '../../lib/contributions';
+import { CanShowResult } from '../../lib/messagePicker';
+import { initPerf } from '../../browser/initPerf';
 import {
 	OphanComponentEvent,
 	submitComponentEvent,
-} from '@root/src/web/browser/ophan/ophan';
-import { setAutomat } from '@root/src/web/lib/setAutomat';
-import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
-import {
-	ModuleDataResponse,
-	ModuleData,
-	EpicPayload,
-	WeeklyArticleHistory,
-} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { getCookie, storage } from '@guardian/libs';
+} from '../../browser/ophan/ophan';
+import { setAutomat } from '../../lib/setAutomat';
 import { guCmp } from '../../lib/guCmp';
 
 export type EpicConfig = {

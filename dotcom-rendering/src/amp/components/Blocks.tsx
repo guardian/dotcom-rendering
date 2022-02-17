@@ -3,11 +3,11 @@ import { css } from '@emotion/react';
 
 import { text, neutral, textSans } from '@guardian/source-foundations';
 
-import { Elements } from '@root/src/amp/components/Elements';
-import { pillarPalette_DO_NOT_USE } from '@root/src/lib/pillars';
-import { blockLink } from '@root/src/amp/lib/block-link';
-import { findBlockAdSlots } from '@root/src/amp/lib/find-adslots';
-import { RegionalAd } from '@root/src/amp/components/RegionalAd';
+import { Elements } from './Elements';
+import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
+import { blockLink } from '../lib/block-link';
+import { findBlockAdSlots } from '../lib/find-adslots';
+import { RegionalAd } from './RegionalAd';
 
 const adStyle = css`
 	background: ${neutral[93]};

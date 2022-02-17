@@ -22,7 +22,7 @@ import {
 } from '@guardian/source-foundations';
 
 // Here is the one place where we use `pillarPalette`
-import { pillarPalette_DO_NOT_USE as pillarPalette } from '@root/src/lib/pillars';
+import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];

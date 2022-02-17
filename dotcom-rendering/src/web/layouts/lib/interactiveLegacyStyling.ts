@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
 
-import { center } from '@root/src/web/lib/center';
+import { center } from '../../lib/center';
 
 export const isInteractive = (design: ArticleDesign): boolean =>
 	design === ArticleDesign.Interactive;

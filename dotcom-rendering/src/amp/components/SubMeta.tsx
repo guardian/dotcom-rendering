@@ -3,9 +3,9 @@ import { css } from '@emotion/react';
 
 import { text, neutral, textSans, body } from '@guardian/source-foundations';
 
-import { pillarPalette_DO_NOT_USE, neutralBorder } from '@root/src/lib/pillars';
-import { ShareIcons } from '@root/src/amp/components/ShareIcons';
-import CommentIcon from '@frontend/static/icons/comment.svg';
+import { pillarPalette_DO_NOT_USE, neutralBorder } from '../../lib/pillars';
+import { ShareIcons } from './ShareIcons';
+import CommentIcon from '../../static/icons/comment.svg';
 
 const guardianLines = (pillar: ArticleTheme) => css`
 	background-image: repeating-linear-gradient(

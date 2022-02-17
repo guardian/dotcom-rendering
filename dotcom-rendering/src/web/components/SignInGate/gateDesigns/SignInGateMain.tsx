@@ -1,7 +1,7 @@
 import { LinkButton, Link } from '@guardian/source-react-components';
 
-import { trackLink } from '@frontend/web/components/SignInGate/componentEventTracking';
-import { SignInGateProps } from '@frontend/web/components/SignInGate/types';
+import { trackLink } from '../componentEventTracking';
+import { SignInGateProps } from '../types';
 import {
 	actionButtons,
 	bodyBold,

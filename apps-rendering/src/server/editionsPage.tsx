@@ -11,7 +11,7 @@ import type { Option } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
 import { getThirdPartyEmbeds } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
-import Article from 'components/editions/article';
+import Layout from 'components/editions/layout';
 import { atomCss, atomScript } from 'components/interactiveAtom';
 import Meta from 'components/meta';
 import Scripts from 'components/scripts';
@@ -133,7 +133,7 @@ const renderBody = (item: Item): EmotionCritical =>
 		renderToString,
 	)(
 		<CacheProvider value={cache}>
-			<Article item={item} />
+			<Layout item={item} />
 		</CacheProvider>,
 	);
 

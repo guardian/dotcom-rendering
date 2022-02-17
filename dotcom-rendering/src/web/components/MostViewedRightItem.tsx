@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 
 import { neutral, border, text, headline } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
-import { AgeWarning } from '@root/src/web/components/AgeWarning';
-import { Avatar } from '@root/src/web/components/Avatar';
-import { LinkHeadline } from '@root/src/web/components/LinkHeadline';
-import { useHover } from '@root/src/web/lib/useHover';
-import { decidePalette } from '@root/src/web/lib/decidePalette';
+import { AgeWarning } from './AgeWarning';
+import { Avatar } from './Avatar';
+import { LinkHeadline } from './LinkHeadline';
+import { useHover } from '../lib/useHover';
+import { decidePalette } from '../lib/decidePalette';
 
 const listItemStyles = css`
 	list-style: none;

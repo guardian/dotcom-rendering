@@ -1,6 +1,6 @@
-import { useApi } from '@root/src/web/lib/useApi';
+import { useApi } from '../lib/useApi';
 
-import { decideTrail } from '@root/src/web/lib/decideTrail';
+import { decideTrail } from '../lib/decideTrail';
 
 type Props = {
 	url: string;

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { border, body } from '@guardian/source-foundations';
-import { unescapeData } from '@root/src/lib/escapeData';
+import { unescapeData } from '../../lib/escapeData';
 
 // fallback styling for when JS is disabled
 const noJSStyling = css`

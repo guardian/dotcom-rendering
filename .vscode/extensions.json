@@ -6,7 +6,7 @@
         "editorconfig.editorconfig",
         "dbaeumer.vscode-eslint",
         "stkb.rewrap",
-        "jpoissonnier.vscode-styled-components",
+        "styled-components.vscode-styled-components",
         "stylelint.vscode-stylelint",
         "eamodio.gitlens",
         "streetsidesoftware.code-spell-checker"

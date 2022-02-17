@@ -5,8 +5,8 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 
-import { decidePalette } from '@root/src/web/lib/decidePalette';
-import { PullQuoteBlockComponent } from '@root/src/web/components/PullQuoteBlockComponent';
+import { decidePalette } from '../lib/decidePalette';
+import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
 
 import { ContainerLayout } from './ContainerLayout';
 
