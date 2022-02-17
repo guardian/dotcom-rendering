@@ -7,8 +7,8 @@ import Standfirst from 'components/standfirst';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
-import Series from './series';
 import LiveDateline from './liveDateline';
+import Series from './series';
 
 // ----- Component ----- //
 

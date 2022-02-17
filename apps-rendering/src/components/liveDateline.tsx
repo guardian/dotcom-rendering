@@ -1,12 +1,13 @@
 // ----- Imports ----- //
 
 import { css, keyframes } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { neutral, pxToRem, textSans } from '@guardian/source-foundations';
-import type { FC } from 'react';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import { maybeRender } from 'lib';
 import { makeRelativeDate } from 'date';
+import { maybeRender } from 'lib';
+import type { FC } from 'react';
 
 // ----- Component ----- //
 
@@ -17,7 +18,7 @@ const livePulse = keyframes`
     100% {opacity: 1;}
 `;
 
-const timestampStyles = (isDeadBlog: boolean = false) => css`
+const timestampStyles = (isDeadBlog = false): ReturnType<typeof css> => css`
 	color: ${isDeadBlog ? neutral[7] : neutral[100]};
 	${textSans.xxsmall({ lineHeight: 'tight' })}
 `;
