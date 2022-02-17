@@ -26,11 +26,6 @@ const stickyStyles = css`
 	figcaption {
 		display: none;
 	}
-
-	/* div {
-		width: 300px;
-		height: 169px;
-	} */
 `;
 
 const containerStyles = (height: number) => css`

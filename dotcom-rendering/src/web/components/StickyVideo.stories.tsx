@@ -16,7 +16,7 @@ export default {
 const html =
 	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesquepharetra libero nec varius feugiat. Nulla commodo sagittis erat amalesuada. Ut iaculis interdum eros, et tristique ex. In veldignissim arcu. Nulla nisi urna, laoreet a aliquam at, viverra eueros. Proin imperdiet pellentesque turpis sed luctus. Donecdignissim lacus in risus fermentum maximus eu vel justo. Duis nontortor ac elit dapibus imperdiet ut at risus. Etiam pretium, odioeget accumsan venenatis, tortor mi aliquet nisl, vel ullamcorperneque nulla vel elit. Etiam porta mauris nec sagittis luctus.</p>';
 
-const Text = () => (
+const TextBlock = () => (
 	<TextBlockComponent
 		html={html}
 		format={{
@@ -28,11 +28,11 @@ const Text = () => (
 	/>
 );
 
-const BlocksOfText = () => (
+const MultipleTextBlocks = ({ number }: { number: number }) => (
 	<>
-		<Text />
-		<Text />
-		<Text />
+		{[...Array(number)].map((e, i) => (
+			<TextBlock key={i} />
+		))}
 	</>
 );
 
@@ -52,12 +52,9 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 				`}
 			>
 				<h2>Scroll Down</h2>
-				<BlocksOfText />
-				<BlocksOfText />
+				<MultipleTextBlocks number={10} />
 				{children}
-				<BlocksOfText />
-				<BlocksOfText />
-				<BlocksOfText />
+				<MultipleTextBlocks number={10} />
 				<h2>Scroll up</h2>
 			</div>
 			<RightColumn>

@@ -174,10 +174,6 @@ export const YoutubeBlockComponent = ({
 		});
 	};
 
-	const playState = (trackingEvent: string) => {
-		console.log(trackingEvent);
-	};
-
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
@@ -216,7 +212,7 @@ export const YoutubeBlockComponent = ({
 				width={width}
 				title={mediaTitle}
 				duration={duration}
-				eventEmitters={[ophanTracking, gaTracking, playState]}
+				eventEmitters={[ophanTracking, gaTracking]}
 				pillar={format.theme}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 			/>
