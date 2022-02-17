@@ -28,7 +28,7 @@ import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
 import { Caption } from '../components/Caption';
 import { HeadlineByline } from '../components/HeadlineByline';
-import { DiscussionContainer } from '../components/DiscussionContainer';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Hide } from '../components/Hide';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 
@@ -500,7 +500,7 @@ export const ImmersiveLayout = ({
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">
-						<DiscussionContainer
+						<DiscussionLayout
 							discussionApiUrl={CAPI.config.discussionApiUrl}
 							shortUrlId={CAPI.config.shortUrlId}
 							format={format}
