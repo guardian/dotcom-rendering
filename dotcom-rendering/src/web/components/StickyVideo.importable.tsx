@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
-import { useStickyVideo } from '../lib/useStickyVideo';
+import { useStickyElementHeight } from '../lib/useStickyElementHeight';
+import { useStickyElementMargin } from '../lib/useStickyElementMargin';
+import { useStickyObserver } from '../lib/useStickyObserver';
 import { StickyVideoButton } from './StickyVideoButton';
 
-const stickyStyles = (marginRight: number) => css`
+const stickyStyles = (right: number) => css`
 	@keyframes fade-in-up {
 		from {
 			transform: translateY(100%);
@@ -18,7 +20,7 @@ const stickyStyles = (marginRight: number) => css`
 	}
 
 	position: fixed;
-	right: ${marginRight}px;
+	right: ${right - 15}px;
 	bottom: 20px;
 	width: 300px;
 	height: 169px;
@@ -31,49 +33,41 @@ const stickyStyles = (marginRight: number) => css`
 `;
 
 const containerStyles = (height: number) => css`
-	// this is a hack - how can we calculate this better?
-	height: ${height * 1.43}px;
+	height: ${height}px;
 	position: relative;
 `;
 
 interface Props {
 	isPlaying: boolean;
-	height: number;
 	children: React.ReactNode;
 }
 
-export const StickyVideo = ({ isPlaying, children, height }: Props) => {
-	const ref = useRef<HTMLDivElement>(null);
-	const [stickyVideo, setStickyVideo] = useState(false);
-	const [marginRight, setMarginRight] = useState(0);
-	const [isIntersecting, setRef] = useStickyVideo({
+export const StickyVideo = ({ isPlaying, children }: Props) => {
+	const heightRef = useRef<HTMLDivElement>(null);
+	const marginRef = useRef<HTMLDivElement>(null);
+
+	const [isSticky, setIsSticky] = useState(false);
+	const [height] = useStickyElementHeight(heightRef);
+	const [right] = useStickyElementMargin(marginRef);
+	const [isIntersecting, setRef] = useStickyObserver({
 		threshold: 0.1,
-		debounce: false,
 	});
 
 	useEffect(() => {
-		setStickyVideo(isIntersecting && isPlaying);
-
-		if (ref.current) {
-			const width = window.innerWidth;
-			const right = ref.current?.getBoundingClientRect().right;
-			setMarginRight(width - right - 15);
-		}
+		setIsSticky(isIntersecting && isPlaying);
 	}, [isIntersecting, isPlaying]);
 
 	return (
-		<div css={containerStyles(height)} ref={ref}>
+		<div css={containerStyles(height)} ref={marginRef}>
 			<div ref={setRef}>
-				<div css={stickyVideo ? stickyStyles(marginRight) : null}>
+				<div ref={heightRef} css={isSticky && stickyStyles(right)}>
 					{isPlaying && (
-						<>
-							<StickyVideoButton
-								onClick={() => {
-									setStickyVideo(!stickyVideo);
-								}}
-								stickyVideo={stickyVideo}
-							/>
-						</>
+						<StickyVideoButton
+							onClick={() => {
+								setIsSticky(!isSticky);
+							}}
+							isSticky={isSticky}
+						/>
 					)}
 					{children}
 				</div>

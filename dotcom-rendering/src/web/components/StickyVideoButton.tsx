@@ -14,15 +14,12 @@ enum ButtonText {
 }
 
 interface StickyVideoProps {
-	stickyVideo: boolean;
+	isSticky: boolean;
 	onClick: () => void;
 }
 
-export const StickyVideoButton = ({
-	stickyVideo,
-	onClick,
-}: StickyVideoProps) => (
+export const StickyVideoButton = ({ isSticky, onClick }: StickyVideoProps) => (
 	<button css={buttonStyles} onClick={onClick}>
-		{stickyVideo ? ButtonText.UnStick : ButtonText.Stick}
+		{isSticky ? ButtonText.UnStick : ButtonText.Stick}
 	</button>
 );
