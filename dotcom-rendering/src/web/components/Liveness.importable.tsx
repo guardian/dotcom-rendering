@@ -9,6 +9,7 @@ type Props = {
 	ajaxUrl: string;
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
+	switches: Switches;
 };
 
 const isServer = typeof window === 'undefined';
@@ -22,7 +23,7 @@ const isServer = typeof window === 'undefined';
  * @param {string} html The block html to be inserted
  * @returns void
  */
-function insert(html: string) {
+function insert(html: string, switches: Switches) {
 	// Create
 	// ------
 	const template = document.createElement('template');
@@ -46,11 +47,14 @@ function insert(html: string) {
 
 	// Enhance
 	// -----------
-	const pandingBlocks = maincontent.querySelectorAll<HTMLElement>('.pending');
-	// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
-	twttr.ready((twitter) => {
-		twitter.widgets.load(Array.from(pandingBlocks));
-	});
+	if (switches.enhaceTweets) {
+		const pandingBlocks =
+			maincontent.querySelectorAll<HTMLElement>('.pending');
+		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
+		twttr.ready((twitter) => {
+			twitter.widgets.load(Array.from(pandingBlocks));
+		});
+	}
 }
 
 /**
@@ -118,6 +122,7 @@ export const Liveness = ({
 	ajaxUrl,
 	filterKeyEvents,
 	format,
+	switches,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
@@ -140,7 +145,7 @@ export const Liveness = ({
 		}) => {
 			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
 				// Always insert the new blocks in the dom (but hidden)
-				insert(data.html);
+				insert(data.html, switches);
 
 				if (topOfBlogVisible() && document.hasFocus()) {
 					revealNewBlocks();

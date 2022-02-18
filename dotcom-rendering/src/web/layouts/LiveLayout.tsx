@@ -401,6 +401,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						ajaxUrl={CAPI.config.ajaxUrl}
 						filterKeyEvents={CAPI.filterKeyEvents}
 						format={format}
+						switches={CAPI.config.switches}
 					/>
 				</Island>
 			)}
