@@ -8,7 +8,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-	hidden?: boolean;
+	isLiveUpdate?: boolean;
 };
 
 export const LiveBlogRenderer = ({
@@ -19,7 +19,7 @@ export const LiveBlogRenderer = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
-	hidden,
+	isLiveUpdate,
 }: Props) => {
 	return (
 		<>
@@ -33,7 +33,7 @@ export const LiveBlogRenderer = ({
 						adTargeting={adTargeting}
 						host={host}
 						ajaxUrl={ajaxUrl}
-						hidden={hidden}
+						isLiveUpdate={isLiveUpdate}
 					/>
 				);
 			})}

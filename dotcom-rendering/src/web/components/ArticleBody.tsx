@@ -109,7 +109,7 @@ export const ArticleBody = ({
 						pageId={pageId}
 						webTitle={webTitle}
 						ajaxUrl={ajaxUrl}
-						hidden={false}
+						isLiveUpdate={false}
 					/>
 				</div>
 			</>

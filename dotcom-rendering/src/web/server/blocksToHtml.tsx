@@ -51,7 +51,7 @@ export const blocksToHtml = ({
 			pageId={pageId}
 			webTitle={webTitle}
 			ajaxUrl={ajaxUrl}
-			hidden={true}
+			isLiveUpdate={true}
 		/>,
 	);
 
