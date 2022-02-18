@@ -1,7 +1,12 @@
 // ----- Imports ----- //
 
 import { background } from '@guardian/common-rendering/src/editorialPalette';
-import { Column, Columns, Container } from '@guardian/source-react-components';
+import {
+	Column,
+	Columns,
+	Container,
+	Hide,
+} from '@guardian/source-react-components';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import type { DeadBlog, LiveBlog } from 'item';
@@ -40,7 +45,12 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
-						<LiveDateline date={item.publishDate} format={format} />
+						<Hide below="desktop">
+							<LiveDateline
+								date={item.publishDate}
+								format={format}
+							/>
+						</Hide>
 					</Column>
 					<Column span={8}>
 						<Standfirst item={item} />
