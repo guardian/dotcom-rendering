@@ -94,6 +94,10 @@ const headingTextHeaderStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}
 `;
 
+const descriptionStyles = css`
+	${textSans.xxsmall({ fontWeight: 'bold' })}
+`;
+
 const headingTextStyles = (palette: Palette) => css`
 	a {
 		color: ${palette.text.calloutHeading};
@@ -327,6 +331,7 @@ export const CalloutBlockComponent = ({
 							<h4 css={headingTextHeaderStyles}>{title}</h4>
 							{description && (
 								<div
+									css={descriptionStyles}
 									dangerouslySetInnerHTML={{
 										__html: description,
 									}}
