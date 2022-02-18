@@ -46,10 +46,10 @@ function insert(html: string) {
 
 	// Enhance
 	// -----------
-	const newBlocks = fragment.querySelectorAll('article');
+	const pandingBlocks = maincontent.querySelectorAll<HTMLElement>('.pending');
 	// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
 	twttr.ready((twitter) => {
-		twitter.widgets.load(Array.from(newBlocks));
+		twitter.widgets.load(Array.from(pandingBlocks));
 	});
 }
 
