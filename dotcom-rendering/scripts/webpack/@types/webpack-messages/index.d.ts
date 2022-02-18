@@ -1,12 +1,19 @@
 declare module 'webpack-messages' {
-	import type { Compiler, WebpackPluginInstance } from 'webpack';
+	import * as webpack from 'webpack';
 
-	export default class WebpackMessages implements WebpackPluginInstance {
-		constructor(options: {
-			name: string;
-			logger: (message: string) => void;
-		});
+	type Options = {
+		name: string;
+		onComplete?: (...args: unknown[]) => void;
+		logger?: (msg: string) => void;
+	};
 
-		apply(compiler: Compiler): void;
+	class WebpackMessages implements webpack.WebpackPluginInstance {
+		constructor(options: Options);
+
+		printError(str: string, arr: string[]): void;
+
+		apply(compiler: webpack.Compiler): void;
 	}
+
+	export default WebpackMessages;
 }
