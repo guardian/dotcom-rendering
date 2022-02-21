@@ -24,7 +24,7 @@ const stickyStyles = (right: number) => css`
 	}
 
 	position: fixed;
-	right: ${right - 15}px;
+	right: ${right}px;
 	bottom: 20px;
 	width: 300px;
 	height: 169px;
@@ -56,15 +56,17 @@ export const StickyVideo = ({ isPlaying, children }: Props) => {
 		threshold: 0.1,
 	});
 
-	useEffect(() => {
-		if (!ref.current) return;
+	const { current } = ref;
 
-		const { right, height } = ref.current.getBoundingClientRect();
+	useEffect(() => {
+		if (!current) return;
+
+		const { right, height } = current.getBoundingClientRect();
 		const { innerWidth } = window;
 
 		setRightMargin(innerWidth - right);
 		setContainerHeight(height);
-	}, [ref]);
+	}, [current]);
 
 	useEffect(() => {
 		if (isPlaying) setIsSticky(isIntersecting);
