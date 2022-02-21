@@ -1,22 +1,21 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
-import { neutral, textSans } from '@guardian/source-foundations';
-import { Column, Columns, Container } from '@guardian/source-react-components';
+import {
+	Column,
+	Columns,
+	Container,
+	Hide,
+} from '@guardian/source-react-components';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
+import LiveDateline from './liveDateline';
 import Series from './series';
 
 // ----- Component ----- //
-
-const timestampStyles = css`
-	color: ${neutral[100]};
-	${textSans.xxsmall({ lineHeight: 'tight' })}
-`;
 
 interface Props {
 	item: LiveBlog | DeadBlog;
@@ -46,9 +45,12 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 			>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
-						<time css={timestampStyles}>
-							TODO: Updated timestamp
-						</time>
+						<Hide below="desktop">
+							<LiveDateline
+								date={item.publishDate}
+								format={format}
+							/>
+						</Hide>
 					</Column>
 					<Column span={8}>
 						<Standfirst item={item} />
