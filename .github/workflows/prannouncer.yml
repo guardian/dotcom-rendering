@@ -6,7 +6,7 @@ on:
     - cron: "0 6 * * MON-FRI"
 
 jobs:
-  prannouncer:
+  prnouncer:
     runs-on: ubuntu-latest
     steps:
       - uses: guardian/google-chats-pr-announcer@main
