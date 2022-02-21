@@ -10,6 +10,8 @@ type Props = {
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
 	switches: Switches;
+	onFirstPage: boolean;
+	webURL: string;
 };
 
 const isServer = typeof window === 'undefined';
@@ -123,6 +125,8 @@ export const Liveness = ({
 	filterKeyEvents,
 	format,
 	switches,
+	onFirstPage,
+	webURL,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
@@ -147,7 +151,7 @@ export const Liveness = ({
 				// Always insert the new blocks in the dom (but hidden)
 				insert(data.html, switches);
 
-				if (topOfBlogVisible() && document.hasFocus()) {
+				if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
 					revealNewBlocks();
 					setNumHiddenBlocks(0);
 				} else {
@@ -169,7 +173,7 @@ export const Liveness = ({
 			numHiddenBlocks > 0 ? `(${numHiddenBlocks}) ${webTitle}` : webTitle;
 	}, [numHiddenBlocks, webTitle]);
 
-	if (topOfBlog) {
+	if (onFirstPage && topOfBlog) {
 		const observer = new window.IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting) {
@@ -202,10 +206,11 @@ export const Liveness = ({
 			// The blog was either hidden or has become visible
 			if (
 				// If we're returning to a blog that has pending blocks and the reader
-				// is at the top of the page then...
+				// is at the top of the first page then...
 				document.visibilityState === 'visible' &&
 				numHiddenBlocks > 0 &&
-				topOfBlogVisible()
+				topOfBlogVisible() &&
+				onFirstPage
 			) {
 				revealNewBlocks();
 				setNumHiddenBlocks(0);
@@ -221,16 +226,20 @@ export const Liveness = ({
 				handleVisibilityChange,
 			);
 		};
-	}, [numHiddenBlocks]);
+	}, [numHiddenBlocks, onFirstPage]);
 
 	const handleToastClick = () => {
-		setShowToast(false);
-		document.getElementById('maincontent')?.scrollIntoView({
-			behavior: 'smooth',
-		});
-		window.location.href = '#maincontent';
-		revealNewBlocks();
-		setNumHiddenBlocks(0);
+		if (onFirstPage) {
+			setShowToast(false);
+			document.getElementById('maincontent')?.scrollIntoView({
+				behavior: 'smooth',
+			});
+			window.location.href = '#maincontent';
+			revealNewBlocks();
+			setNumHiddenBlocks(0);
+		} else {
+			window.location.href = `${webURL}#maincontent`;
+		}
 	};
 
 	if (showToast) {
