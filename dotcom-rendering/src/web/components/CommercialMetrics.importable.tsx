@@ -1,7 +1,7 @@
 import type { ABTest } from '@guardian/ab-core';
 import {
 	initCommercialMetrics,
-	bypassCommercialMetricsSampling,
+	bypassCommercialMetricsSampling as switchOffSampling,
 } from '@guardian/commercial-core';
 import { getCookie } from '@guardian/libs';
 import { useAB } from '@guardian/ab-react';
@@ -52,7 +52,8 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 		// See https://git.io/JP68Q in `frontend`
 
 		if (shouldForceMetrics) {
-			bypassCommercialMetricsSampling();
+			// TODO: rename this in commercial-core and update here
+			switchOffSampling();
 		}
 	}, [ABTestAPI, pageViewId, adBlockerInUse, enabled]);
 
