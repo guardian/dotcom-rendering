@@ -19,14 +19,15 @@ type Props = {
 	isDev?: boolean;
 };
 
-const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
-	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
-	const ABTestAPI = useAB();
 
+const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
+	const ABTestAPI = useAB();
 	const adBlockerInUse = useAdBlockInUse();
 
 	useOnce(() => {
+		const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+		const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
+
 		// Only send metrics if the switch is enabled
 		if (!enabled) return;
 
