@@ -47,9 +47,9 @@ function insert(html: string, switches: Switches) {
 
 	// Enhance
 	// -----------
-	if (switches.enhaceTweets) {
 		const pandingBlocks =
 			maincontent.querySelectorAll<HTMLElement>('.pending');
+	if (switches.enhanceTweets) {
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
 		twttr.ready((twitter) => {
 			twitter.widgets.load(Array.from(pandingBlocks));
