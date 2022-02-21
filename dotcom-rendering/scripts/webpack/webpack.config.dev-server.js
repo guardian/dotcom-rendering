@@ -63,7 +63,6 @@ module.exports = {
 						__dirname,
 						'..',
 						'..',
-						'..',
 						'src',
 						'server',
 						'dev-index.html',
