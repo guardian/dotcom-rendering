@@ -5,6 +5,7 @@ import {
 	renderArticleJson,
 	renderBlocks,
 	renderInteractive,
+	renderKeyEvents,
 } from '../web/server';
 
 // see https://www.npmjs.com/package/webpack-hot-server-Middleware
@@ -24,6 +25,8 @@ export const devServer = () => {
 				return renderAMPArticle(req, res);
 			case '/Blocks':
 				return renderBlocks(req, res);
+			case '/KeyEvents':
+				return renderKeyEvents(req, res);
 			default:
 				next();
 		}

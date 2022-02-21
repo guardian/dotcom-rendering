@@ -19,8 +19,8 @@ const isServer = typeof window === 'undefined';
 /**
  * insert
  *
- * Takes html, parses and hydrates it, and then inserts the resulting blocks
- * at the top of the liveblog
+ * Takes html, parses and hydrates it, inserts the resulting blocks
+ * at the top of the liveblog, and then enhances any tweets
  *
  * @param {string} html The block html to be inserted
  * @returns void
@@ -39,7 +39,7 @@ function insert(html: string, switches: Switches) {
 
 	// Insert
 	// ------
-	// Shouldn't we snaitise this html?
+	// Shouldn't we sanitise this html?
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
 	const maincontent = document.querySelector<HTMLElement>('#maincontent');
@@ -49,22 +49,29 @@ function insert(html: string, switches: Switches) {
 
 	// Enhance
 	// -----------
-	if (switches.enhaceTweets) {
-		const pandingBlocks =
-			maincontent.querySelectorAll<HTMLElement>('.pending');
+	if (switches.enhanceTweets) {
+		const pendingBlocks = maincontent.querySelectorAll<HTMLElement>(
+			'article .pending.block',
+		);
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
 		twttr.ready((twitter) => {
-			twitter.widgets.load(Array.from(pandingBlocks));
+			twitter.widgets.load(Array.from(pendingBlocks));
 		});
 	}
 }
 
 /**
- * revealNewBlocks - style any blocks that have been inserted but are hidden such that
- * they are revealed
+ * reveal any blocks that have been inserted but are still hidden
  */
-function revealNewBlocks() {
-	console.log('revealNewBlocks');
+function revealPendingBlocks() {
+	const maincontent = document.querySelector<HTMLElement>('#maincontent');
+	const pendingBlocks = maincontent?.querySelectorAll<HTMLElement>(
+		'article .pending.block',
+	);
+	pendingBlocks?.forEach((block) => {
+		block.classList.add('reveal');
+		block.classList.remove('pending');
+	});
 }
 
 /**
@@ -152,7 +159,7 @@ export const Liveness = ({
 				insert(data.html, switches);
 
 				if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
-					revealNewBlocks();
+					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 				} else {
 					setShowToast(true);
@@ -178,7 +185,7 @@ export const Liveness = ({
 			([entry]) => {
 				if (entry.isIntersecting) {
 					entry.target.classList.add('in-viewport');
-					revealNewBlocks();
+					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 					setShowToast(false);
 					return;
@@ -212,7 +219,7 @@ export const Liveness = ({
 				topOfBlogVisible() &&
 				onFirstPage
 			) {
-				revealNewBlocks();
+				revealPendingBlocks();
 				setNumHiddenBlocks(0);
 				setShowToast(false);
 			}
@@ -235,7 +242,7 @@ export const Liveness = ({
 				behavior: 'smooth',
 			});
 			window.location.href = '#maincontent';
-			revealNewBlocks();
+			revealPendingBlocks();
 			setNumHiddenBlocks(0);
 		} else {
 			window.location.href = `${webURL}#maincontent`;
