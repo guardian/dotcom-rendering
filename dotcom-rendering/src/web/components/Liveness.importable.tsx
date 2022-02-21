@@ -37,7 +37,7 @@ function insert(html: string, switches: Switches) {
 
 	// Insert
 	// ------
-	// Shouldn't we snaitise this html?
+	// Shouldn't we sanitise this html?
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
 	const maincontent = document.querySelector<HTMLElement>('#maincontent');
