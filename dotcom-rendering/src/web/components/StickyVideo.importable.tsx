@@ -47,10 +47,9 @@ interface Props {
 }
 
 export const StickyVideo = ({ isPlaying, children }: Props) => {
-	const heightRef = useRef<HTMLDivElement>(null);
-	const rightRef = useRef<HTMLDivElement>(null);
+	const ref = useRef<HTMLDivElement>(null);
 
-	const [height, setHeight] = useState(0);
+	const [containerHeight, setContainerHeight] = useState(0);
 	const [rightMargin, setRightMargin] = useState(0);
 	const [isSticky, setIsSticky] = useState(false);
 	const [isIntersecting, setRef] = useStickyObserver({
@@ -58,41 +57,31 @@ export const StickyVideo = ({ isPlaying, children }: Props) => {
 	});
 
 	useEffect(() => {
-		if (!rightRef.current) return;
+		if (!ref.current) return;
 
-		const { right } = rightRef.current.getBoundingClientRect();
+		const { right, height } = ref.current.getBoundingClientRect();
 		const { innerWidth } = window;
 
 		setRightMargin(innerWidth - right);
-	}, [rightRef]);
-
-	useEffect(() => {
-		if (!heightRef.current) return;
-
-		setHeight(heightRef.current.clientHeight);
-	}, [heightRef]);
+		setContainerHeight(height);
+	}, [ref]);
 
 	useEffect(() => {
 		if (isPlaying) setIsSticky(isIntersecting);
 	}, [isIntersecting, isPlaying]);
 
 	return (
-		<div css={containerStyles(height)} ref={rightRef}>
-			<div ref={setRef}>
-				<div
-					ref={heightRef}
-					css={isSticky && stickyStyles(rightMargin)}
-				>
-					{isSticky && (
-						<button
-							css={buttonStyles}
-							onClick={() => setIsSticky(false)}
-						>
-							Unstick
-						</button>
-					)}
-					{children}
-				</div>
+		<div ref={setRef} css={containerStyles(containerHeight)}>
+			<div ref={ref} css={isSticky && stickyStyles(rightMargin)}>
+				{isSticky && (
+					<button
+						css={buttonStyles}
+						onClick={() => setIsSticky(false)}
+					>
+						Unstick
+					</button>
+				)}
+				{children}
 			</div>
 		</div>
 	);
