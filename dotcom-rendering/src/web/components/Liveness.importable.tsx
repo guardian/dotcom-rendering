@@ -47,12 +47,12 @@ function insert(html: string, switches: Switches) {
 
 	// Enhance
 	// -----------
-		const pandingBlocks =
-			maincontent.querySelectorAll<HTMLElement>('.pending');
 	if (switches.enhanceTweets) {
+		const pendingBlocks =
+			maincontent.querySelectorAll<HTMLElement>('.pending');
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
 		twttr.ready((twitter) => {
-			twitter.widgets.load(Array.from(pandingBlocks));
+			twitter.widgets.load(Array.from(pendingBlocks));
 		});
 	}
 }
