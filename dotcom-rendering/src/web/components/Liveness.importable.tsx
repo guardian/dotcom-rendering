@@ -17,8 +17,8 @@ const isServer = typeof window === 'undefined';
 /**
  * insert
  *
- * Takes html, parses and hydrates it, and then inserts the resulting blocks
- * at the top of the liveblog
+ * Takes html, parses and hydrates it, inserts the resulting blocks
+ * at the top of the liveblog, and then enhances any tweets
  *
  * @param {string} html The block html to be inserted
  * @returns void
