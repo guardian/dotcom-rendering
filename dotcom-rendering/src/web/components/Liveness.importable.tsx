@@ -61,8 +61,8 @@ function insert(html: string, switches: Switches) {
  * revealNewBlocks - style any blocks that have been inserted but are hidden such that
  * they are revealed
  */
-function revealNewBlocks() {
 	console.log('revealNewBlocks');
+function revealPendingBlocks() {
 }
 
 /**
@@ -148,7 +148,7 @@ export const Liveness = ({
 				insert(data.html, switches);
 
 				if (topOfBlogVisible() && document.hasFocus()) {
-					revealNewBlocks();
+					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 				} else {
 					setShowToast(true);
@@ -174,7 +174,7 @@ export const Liveness = ({
 			([entry]) => {
 				if (entry.isIntersecting) {
 					entry.target.classList.add('in-viewport');
-					revealNewBlocks();
+					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 					setShowToast(false);
 					return;
@@ -207,7 +207,7 @@ export const Liveness = ({
 				numHiddenBlocks > 0 &&
 				topOfBlogVisible()
 			) {
-				revealNewBlocks();
+				revealPendingBlocks();
 				setNumHiddenBlocks(0);
 				setShowToast(false);
 			}
@@ -229,7 +229,7 @@ export const Liveness = ({
 			behavior: 'smooth',
 		});
 		window.location.href = '#maincontent';
-		revealNewBlocks();
+		revealPendingBlocks();
 		setNumHiddenBlocks(0);
 	};
 
