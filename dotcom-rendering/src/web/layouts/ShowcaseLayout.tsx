@@ -33,7 +33,7 @@ import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
-import { DiscussionContainer } from '../components/DiscussionContainer.importable';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { LabsHeader } from '../components/LabsHeader.importable';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
@@ -659,22 +659,20 @@ export const ShowcaseLayout = ({
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="section">
-						<Island clientOnly={true} deferUntil="visible">
-							<DiscussionContainer
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								format={format}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={
-									CAPI.config.switches.enableDiscussionSwitch
-								}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-							/>
-						</Island>
+						<DiscussionLayout
+							discussionApiUrl={CAPI.config.discussionApiUrl}
+							shortUrlId={CAPI.config.shortUrlId}
+							format={format}
+							discussionD2Uid={CAPI.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPI.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								CAPI.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={CAPI.isAdFreeUser}
+							shouldHideAds={CAPI.shouldHideAds}
+						/>
 					</ElementContainer>
 				)}
 

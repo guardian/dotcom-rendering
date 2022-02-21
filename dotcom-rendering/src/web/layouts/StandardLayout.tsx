@@ -35,8 +35,7 @@ import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
-import { DiscussionContainer } from '../components/DiscussionContainer.importable';
-import { Placeholder } from '../components/Placeholder';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Nav } from '../components/Nav/Nav';
 import { LabsHeader } from '../components/LabsHeader.importable';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -57,6 +56,7 @@ import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
+import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 
 const StandardGrid = ({
 	children,
@@ -513,10 +513,15 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<div css={maxWidth}>
 								{format.design === ArticleDesign.MatchReport &&
 									CAPI.matchUrl && (
-										<Placeholder
-											rootId="match-tabs"
-											height={40}
-										/>
+										<Island
+											clientOnly={true}
+											placeholderHeight={40}
+										>
+											<GetMatchTabs
+												matchUrl={CAPI.matchUrl}
+												format={format}
+											/>
+										</Island>
 									)}
 							</div>
 						</GridItem>
@@ -780,22 +785,20 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						data-print-layout="hide"
 						element="section"
 					>
-						<Island clientOnly={true} deferUntil="visible">
-							<DiscussionContainer
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								format={format}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={
-									CAPI.config.switches.enableDiscussionSwitch
-								}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-							/>
-						</Island>
+						<DiscussionLayout
+							discussionApiUrl={CAPI.config.discussionApiUrl}
+							shortUrlId={CAPI.config.shortUrlId}
+							format={format}
+							discussionD2Uid={CAPI.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPI.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								CAPI.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={CAPI.isAdFreeUser}
+							shouldHideAds={CAPI.shouldHideAds}
+						/>
 					</ElementContainer>
 				)}
 

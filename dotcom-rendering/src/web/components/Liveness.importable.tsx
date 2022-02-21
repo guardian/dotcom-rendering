@@ -9,6 +9,7 @@ type Props = {
 	ajaxUrl: string;
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
+	switches: Switches;
 };
 
 const isServer = typeof window === 'undefined';
@@ -22,7 +23,7 @@ const isServer = typeof window === 'undefined';
  * @param {string} html The block html to be inserted
  * @returns void
  */
-function insert(html: string) {
+function insert(html: string, switches: Switches) {
 	// Create
 	// ------
 	const template = document.createElement('template');
@@ -39,10 +40,21 @@ function insert(html: string) {
 	// Shouldn't we snaitise this html?
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
-	const maincontent = document.querySelector('#maincontent');
+	const maincontent = document.querySelector<HTMLElement>('#maincontent');
 	const latestBlock = document.querySelector('#maincontent :first-child');
 	if (!latestBlock || !maincontent) return;
 	maincontent.insertBefore(fragment, latestBlock);
+
+	// Enhance
+	// -----------
+	if (switches.enhaceTweets) {
+		const pandingBlocks =
+			maincontent.querySelectorAll<HTMLElement>('.pending');
+		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
+		twttr.ready((twitter) => {
+			twitter.widgets.load(Array.from(pandingBlocks));
+		});
+	}
 }
 
 /**
@@ -110,6 +122,7 @@ export const Liveness = ({
 	ajaxUrl,
 	filterKeyEvents,
 	format,
+	switches,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
@@ -120,7 +133,7 @@ export const Liveness = ({
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
-		refreshInterval: 15000,
+		refreshInterval: 15_000,
 		refreshWhenHidden: true,
 		// onSuccess runs (once) after every successful api call. This is useful because it
 		// allows us to avoid the problems of imperative code being executed multiple times
@@ -132,9 +145,9 @@ export const Liveness = ({
 		}) => {
 			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
 				// Always insert the new blocks in the dom (but hidden)
-				insert(data.html);
+				insert(data.html, switches);
 
-				if (topOfBlogVisible()) {
+				if (topOfBlogVisible() && document.hasFocus()) {
 					revealNewBlocks();
 					setNumHiddenBlocks(0);
 				} else {
@@ -178,6 +191,37 @@ export const Liveness = ({
 
 		observer.observe(topOfBlog);
 	}
+
+	/**
+	 * This useEffect sets up a listener for when the page is backgrounded or restored. We
+	 * do this so that any new blocks that were fetched while the blog was in the
+	 * background are animated in at the point when focus is restored
+	 */
+	useEffect(() => {
+		const handleVisibilityChange = () => {
+			// The blog was either hidden or has become visible
+			if (
+				// If we're returning to a blog that has pending blocks and the reader
+				// is at the top of the page then...
+				document.visibilityState === 'visible' &&
+				numHiddenBlocks > 0 &&
+				topOfBlogVisible()
+			) {
+				revealNewBlocks();
+				setNumHiddenBlocks(0);
+				setShowToast(false);
+			}
+		};
+
+		window.addEventListener('visibilitychange', handleVisibilityChange);
+
+		return () => {
+			window.removeEventListener(
+				'visibilitychange',
+				handleVisibilityChange,
+			);
+		};
+	}, [numHiddenBlocks]);
 
 	const handleToastClick = () => {
 		setShowToast(false);

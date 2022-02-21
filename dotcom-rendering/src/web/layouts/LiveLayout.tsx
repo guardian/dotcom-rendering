@@ -34,7 +34,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
-import { DiscussionContainer } from '../components/DiscussionContainer.importable';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Pagination } from '../components/Pagination';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 
@@ -48,7 +48,6 @@ import {
 } from '../lib/layoutHelpers';
 import { Stuck, SendToBack, BannerWrapper } from './lib/stickiness';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
-import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';
 import { Liveness } from '../components/Liveness.importable';
@@ -57,6 +56,7 @@ import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
+import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -401,6 +401,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						ajaxUrl={CAPI.config.ajaxUrl}
 						filterKeyEvents={CAPI.filterKeyEvents}
 						format={format}
+						switches={CAPI.config.switches}
 					/>
 				</Island>
 			)}
@@ -698,10 +699,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="matchtabs" element="aside">
 									<div css={maxWidth}>
-										<Placeholder
-											rootId="match-tabs"
-											height={40}
-										/>
+										<Island
+											clientOnly={true}
+											placeholderHeight={40}
+										>
+											<GetMatchTabs
+												matchUrl={CAPI.matchUrl}
+												format={format}
+											/>
+										</Island>
 									</div>
 								</GridItem>
 								<GridItem area="media">
@@ -1199,22 +1205,20 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						data-print-layout="hide"
 						element="section"
 					>
-						<Island clientOnly={true} deferUntil="visible">
-							<DiscussionContainer
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								format={format}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={
-									CAPI.config.switches.enableDiscussionSwitch
-								}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-							/>
-						</Island>
+						<DiscussionLayout
+							discussionApiUrl={CAPI.config.discussionApiUrl}
+							shortUrlId={CAPI.config.shortUrlId}
+							format={format}
+							discussionD2Uid={CAPI.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPI.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								CAPI.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={CAPI.isAdFreeUser}
+							shouldHideAds={CAPI.shouldHideAds}
+						/>
 					</ElementContainer>
 				)}
 

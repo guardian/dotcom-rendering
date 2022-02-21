@@ -28,7 +28,7 @@ import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
 import { Caption } from '../components/Caption';
 import { HeadlineByline } from '../components/HeadlineByline';
-import { DiscussionContainer } from '../components/DiscussionContainer.importable';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Hide } from '../components/Hide';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 
@@ -500,22 +500,20 @@ export const ImmersiveLayout = ({
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">
-						<Island clientOnly={true} deferUntil="visible">
-							<DiscussionContainer
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								format={format}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={
-									CAPI.config.switches.enableDiscussionSwitch
-								}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-							/>
-						</Island>
+						<DiscussionLayout
+							discussionApiUrl={CAPI.config.discussionApiUrl}
+							shortUrlId={CAPI.config.shortUrlId}
+							format={format}
+							discussionD2Uid={CAPI.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPI.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								CAPI.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={CAPI.isAdFreeUser}
+							shouldHideAds={CAPI.shouldHideAds}
+						/>
 					</ElementContainer>
 				)}
 
