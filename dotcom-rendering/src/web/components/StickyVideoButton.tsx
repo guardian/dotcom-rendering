@@ -8,18 +8,18 @@ const buttonStyles = css`
 	${getZIndex('sticky-video-button')};
 `;
 
-enum ButtonText {
-	Stick = 'Stick',
-	UnStick = 'Unstick',
-}
-
 interface StickyVideoProps {
-	isSticky: boolean;
 	onClick: () => void;
 }
 
-export const StickyVideoButton = ({ isSticky, onClick }: StickyVideoProps) => (
+// TODO this needs updating to match designs
+// https://trello.com/c/4vnkOOiD/246-sticky-video-add-close-dismiss-button-to-wrapper-in-dcr
+
+// TODO we need to track the button clicks
+// https://trello.com/c/23UEZRvN/235-sticky-video-track-if-users-close-dismiss-video-and-how-long-it-was-in-sticky-mode
+
+export const StickyVideoButton = ({ onClick }: StickyVideoProps) => (
 	<button css={buttonStyles} onClick={onClick}>
-		{isSticky ? ButtonText.UnStick : ButtonText.Stick}
+		Unstick
 	</button>
 );

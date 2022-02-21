@@ -61,12 +61,11 @@ export const StickyVideo = ({ isPlaying, children }: Props) => {
 		<div css={containerStyles(height)} ref={marginRef}>
 			<div ref={setRef}>
 				<div ref={heightRef} css={isSticky && stickyStyles(right)}>
-					{isPlaying && (
+					{isSticky && (
 						<StickyVideoButton
 							onClick={() => {
-								setIsSticky(!isSticky);
+								setIsSticky(false);
 							}}
-							isSticky={isSticky}
 						/>
 					)}
 					{children}
