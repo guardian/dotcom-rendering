@@ -1,10 +1,14 @@
 import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
-import { useStickyElementHeight } from '../lib/useStickyElementHeight';
-import { useStickyElementMargin } from '../lib/useStickyElementMargin';
 import { useStickyObserver } from '../lib/useStickyObserver';
-import { StickyVideoButton } from './StickyVideoButton';
+
+const buttonStyles = css`
+	position: absolute;
+	left: 0;
+	top: 0;
+	${getZIndex('sticky-video-button')};
+`;
 
 const stickyStyles = (right: number) => css`
 	@keyframes fade-in-up {
@@ -44,29 +48,48 @@ interface Props {
 
 export const StickyVideo = ({ isPlaying, children }: Props) => {
 	const heightRef = useRef<HTMLDivElement>(null);
-	const marginRef = useRef<HTMLDivElement>(null);
+	const rightRef = useRef<HTMLDivElement>(null);
 
+	const [height, setHeight] = useState(0);
+	const [rightMargin, setRightMargin] = useState(0);
 	const [isSticky, setIsSticky] = useState(false);
-	const [height] = useStickyElementHeight(heightRef);
-	const [right] = useStickyElementMargin(marginRef);
 	const [isIntersecting, setRef] = useStickyObserver({
 		threshold: 0.1,
 	});
 
 	useEffect(() => {
-		setIsSticky(isIntersecting && isPlaying);
+		if (!rightRef.current) return;
+
+		const { right } = rightRef.current.getBoundingClientRect();
+		const { innerWidth } = window;
+
+		setRightMargin(innerWidth - right);
+	}, [rightRef]);
+
+	useEffect(() => {
+		if (!heightRef.current) return;
+
+		setHeight(heightRef.current.clientHeight);
+	}, [heightRef]);
+
+	useEffect(() => {
+		if (isPlaying) setIsSticky(isIntersecting);
 	}, [isIntersecting, isPlaying]);
 
 	return (
-		<div css={containerStyles(height)} ref={marginRef}>
+		<div css={containerStyles(height)} ref={rightRef}>
 			<div ref={setRef}>
-				<div ref={heightRef} css={isSticky && stickyStyles(right)}>
+				<div
+					ref={heightRef}
+					css={isSticky && stickyStyles(rightMargin)}
+				>
 					{isSticky && (
-						<StickyVideoButton
-							onClick={() => {
-								setIsSticky(false);
-							}}
-						/>
+						<button
+							css={buttonStyles}
+							onClick={() => setIsSticky(false)}
+						>
+							Unstick
+						</button>
 					)}
 					{children}
 				</div>
