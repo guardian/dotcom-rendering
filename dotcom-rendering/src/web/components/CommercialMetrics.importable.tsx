@@ -19,7 +19,6 @@ type Props = {
 	isDev?: boolean;
 };
 
-
 const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 	const ABTestAPI = useAB();
 	const adBlockerInUse = useAdBlockInUse();
