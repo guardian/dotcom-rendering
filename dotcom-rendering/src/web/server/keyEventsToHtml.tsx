@@ -5,7 +5,7 @@ import { decideDisplay } from '../lib/decideDisplay';
 import { decideTheme } from '../lib/decideTheme';
 
 /**
- * keyEventsToHtml is used by the /keyEvents endpoint as part of keeping liveblogs live
+ * keyEventsToHtml is used by the /KeyEvents endpoint as part of keeping liveblogs live
  * It takes an array of json key-event blocks and returns the resulting html string
  *
  * @returns string (the html)

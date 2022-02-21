@@ -572,7 +572,7 @@ interface BlocksRequest {
 }
 
 /**
- * KeyEventsRequest is the expected body format for POST requests made to /keyEvents
+ * KeyEventsRequest is the expected body format for POST requests made to /KeyEvents
  */
 interface KeyEventsRequest {
 	keyEvents: Block[];
