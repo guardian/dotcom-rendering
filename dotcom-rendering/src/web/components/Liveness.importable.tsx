@@ -48,8 +48,9 @@ function insert(html: string, switches: Switches) {
 	// Enhance
 	// -----------
 	if (switches.enhanceTweets) {
-		const pendingBlocks =
-			maincontent.querySelectorAll<HTMLElement>('.pending');
+		const pendingBlocks = maincontent.querySelectorAll<HTMLElement>(
+			'article .pending.block',
+		);
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
 		twttr.ready((twitter) => {
 			twitter.widgets.load(Array.from(pendingBlocks));
@@ -58,11 +59,17 @@ function insert(html: string, switches: Switches) {
 }
 
 /**
- * revealNewBlocks - style any blocks that have been inserted but are hidden such that
- * they are revealed
+ * reveal any blocks that have been inserted but are still hidden
  */
-	console.log('revealNewBlocks');
 function revealPendingBlocks() {
+	const maincontent = document.querySelector<HTMLElement>('#maincontent');
+	const pendingBlocks = maincontent?.querySelectorAll<HTMLElement>(
+		'article .pending.block',
+	);
+	pendingBlocks?.forEach((block) => {
+		block.classList.add('reveal');
+		block.classList.remove('pending');
+	});
 }
 
 /**
