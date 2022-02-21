@@ -11,4 +11,4 @@ jobs:
     steps:
       - uses: guardian/google-chats-pr-announcer@main
         with:
-          google-webhook-url: ${{ secret.GOOGLE_WEBHOOK_URL }}
+          google-webhook-url: ${{ secrets.GOOGLE_WEBHOOK_URL }}
