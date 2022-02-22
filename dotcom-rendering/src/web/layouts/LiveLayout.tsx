@@ -402,6 +402,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						filterKeyEvents={CAPI.filterKeyEvents}
 						format={format}
 						switches={CAPI.config.switches}
+						onFirstPage={pagination.currentPage === 1}
+						webURL={CAPI.webURL}
 					/>
 				</Island>
 			)}
