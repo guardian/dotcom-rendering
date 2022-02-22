@@ -16,7 +16,6 @@ import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
 import { mainMediaElements } from './ArticleHeadline.mocks';
-import { decidePalette } from '../lib/decidePalette';
 import { ArticleHeadlinePadding } from './ArticleHeadlinePadding';
 
 export default {
@@ -101,7 +100,6 @@ export const ShowcaseInterview = () => {
 					</div>
 					<MainMedia
 						format={format}
-						palette={decidePalette(format)}
 						hideCaption={true}
 						elements={mainMediaElements}
 						pageId="testID"
@@ -142,7 +140,6 @@ export const ShowcaseInterviewNobyline = () => {
 					</div>
 					<MainMedia
 						format={format}
-						palette={decidePalette(format)}
 						hideCaption={true}
 						elements={mainMediaElements}
 						pageId="testID"
@@ -183,7 +180,6 @@ export const Interview = () => {
 					/>
 					<MainMedia
 						format={format}
-						palette={decidePalette(format)}
 						hideCaption={true}
 						elements={mainMediaElements}
 						pageId="testID"
@@ -222,7 +218,6 @@ export const InterviewSpecialReport = () => {
 					/>
 					<MainMedia
 						format={format}
-						palette={decidePalette(format)}
 						hideCaption={true}
 						elements={mainMediaElements}
 						pageId="testID"
@@ -263,7 +258,6 @@ export const InterviewNoByline = () => {
 					/>
 					<MainMedia
 						format={format}
-						palette={decidePalette(format)}
 						hideCaption={true}
 						elements={mainMediaElements}
 						pageId="testID"
