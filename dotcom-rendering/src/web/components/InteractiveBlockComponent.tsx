@@ -316,7 +316,6 @@ export const InteractiveBlockComponent = ({
 				<Caption
 					captionText={caption}
 					format={format}
-					palette={palette}
 				/>
 			)}
 		</>

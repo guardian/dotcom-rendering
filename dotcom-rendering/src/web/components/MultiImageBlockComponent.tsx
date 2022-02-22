@@ -121,7 +121,6 @@ export const MultiImageBlockComponent = ({
 					/>
 					{caption && (
 						<Caption
-							palette={palette}
 							format={format}
 							captionText={caption}
 							shouldLimitWidth={false}
@@ -164,7 +163,6 @@ export const MultiImageBlockComponent = ({
 					</SideBySideGrid>
 					{caption && (
 						<Caption
-							palette={palette}
 							captionText={caption}
 							format={format}
 							shouldLimitWidth={false}
@@ -216,7 +214,6 @@ export const MultiImageBlockComponent = ({
 					</OneAboveTwoGrid>
 					{caption && (
 						<Caption
-							palette={palette}
 							captionText={caption}
 							format={format}
 							shouldLimitWidth={false}
@@ -276,7 +273,6 @@ export const MultiImageBlockComponent = ({
 					</GridOfFour>
 					{caption && (
 						<Caption
-							palette={palette}
 							captionText={caption}
 							format={format}
 							shouldLimitWidth={false}

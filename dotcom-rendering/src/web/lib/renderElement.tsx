@@ -166,7 +166,6 @@ export const renderElement = ({
 				<CaptionBlockComponent
 					key={index}
 					format={format}
-					palette={palette}
 					captionText={element.captionText}
 					padCaption={element.padCaption}
 					credit={element.credit}
@@ -304,7 +303,6 @@ export const renderElement = ({
 				<GuVideoBlockComponent
 					html={element.html}
 					format={format}
-					palette={palette}
 					credit={element.source}
 					caption={element.caption}
 				/>,
@@ -609,7 +607,6 @@ export const renderElement = ({
 				true,
 				<VimeoBlockComponent
 					format={format}
-					palette={palette}
 					embedUrl={element.embedUrl}
 					height={element.height}
 					width={element.width}

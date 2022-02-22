@@ -16,11 +16,11 @@ import {
 
 import CameraSvg from '../../static/icons/camera.svg';
 import VideoSvg from '../../static/icons/video-icon.svg';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	captionText?: string;
 	format: ArticleFormat;
-	palette: Palette;
 	padCaption?: boolean;
 	credit?: string;
 	displayCredit?: boolean;
@@ -224,7 +224,6 @@ const VideoIcon = ({ palette, format }: IconProps) => {
 export const Caption = ({
 	captionText,
 	format,
-	palette,
 	padCaption = false,
 	credit,
 	displayCredit = true,
@@ -238,6 +237,8 @@ export const Caption = ({
 	const noCredit = !credit;
 	const hideCredit = !displayCredit;
 	if (noCaption && (noCredit || hideCredit)) return null;
+
+	const palette = decidePalette(format);
 
 	const defaultCaption = (
 		<figcaption

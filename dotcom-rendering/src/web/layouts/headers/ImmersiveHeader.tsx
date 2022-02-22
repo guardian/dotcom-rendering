@@ -136,7 +136,6 @@ export const ImmersiveHeader = ({
 			`}
 		>
 			<Caption
-				palette={palette}
 				captionText={captionText}
 				format={format}
 				shouldLimitWidth={true}

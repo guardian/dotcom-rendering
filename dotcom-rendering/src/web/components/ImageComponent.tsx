@@ -363,7 +363,6 @@ export const ImageComponent = ({
 									<Caption
 										captionText={element.data.caption || ''}
 										format={format}
-										palette={palette}
 										credit={element.data.credit}
 										displayCredit={element.displayCredit}
 										shouldLimitWidth={shouldLimitWidth}
@@ -384,7 +383,6 @@ export const ImageComponent = ({
 					<Caption
 						captionText={element.data.caption || ''}
 						format={format}
-						palette={palette}
 						credit={element.data.credit}
 						displayCredit={element.displayCredit}
 						shouldLimitWidth={shouldLimitWidth}
@@ -394,7 +392,6 @@ export const ImageComponent = ({
 				<Caption
 					captionText={element.data.caption || ''}
 					format={format}
-					palette={palette}
 					credit={element.data.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={shouldLimitWidth}

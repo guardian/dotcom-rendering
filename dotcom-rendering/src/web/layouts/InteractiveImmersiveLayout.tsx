@@ -296,7 +296,6 @@ export const InteractiveImmersiveLayout = ({
 						<GridItem area="caption">
 							<Hide when="above" breakpoint="leftCol">
 								<Caption
-									palette={palette}
 									captionText={captionText}
 									format={format}
 									shouldLimitWidth={false}
