@@ -311,7 +311,7 @@ export const LiveBlogSizes = () => (
 		/>
 	</ElementContainer>
 );
-LiveBlogSizes.story = { name: 'with various sizes (live)' };
+LiveBlogSizes.story = { name: 'With various sizes (live)' };
 
 export const DeadBlogSizes = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
@@ -385,14 +385,14 @@ export const DeadBlogSizes = () => (
 				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
-			kickerText="Tiny live"
+			kickerText="Tiny dead"
 			showSlash={true}
 			showPulsingDot={false}
 			size="tiny"
 		/>
 	</ElementContainer>
 );
-DeadBlogSizes.story = { name: 'with various sizes (dead)' };
+DeadBlogSizes.story = { name: 'With various sizes (dead)' };
 
 export const Updated = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
