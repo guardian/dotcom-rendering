@@ -84,16 +84,18 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const underlinedStyles = (size: SmallHeadlineSize) => {
+const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
+	const transparentColour = `${colour}88`;
+
 	function generateUnderlinedCss(baseSize: number) {
 		return css`
 			background-image: linear-gradient(
 				to bottom,
 				transparent,
 				transparent ${baseSize - 1}px,
-				rgba(199, 0, 0, 0.5)
+				${transparentColour}
 			);
-			line-height: ${baseSize - 1}px;
+			line-height: ${baseSize}px;
 			background-size: 1px ${baseSize}px;
 			background-origin: content-box;
 			background-clip: content-box;
@@ -148,7 +150,8 @@ export const CardHeadline = ({
 						? labTextStyles(size)
 						: fontStyles(size),
 					format.design === ArticleDesign.Analysis &&
-						underlinedStyles(size),
+						// TODO: are we overloading the cardKicker colour?
+						underlinedStyles(size, palette.text.cardKicker),
 					isFullCardImage &&
 						css`
 							line-height: 1; /* Reset line height in full image carousel */
