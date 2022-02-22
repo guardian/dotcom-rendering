@@ -1,15 +1,24 @@
+import { useEffect } from 'react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
-import { Discussion } from './Discussion';
+import { DiscussionLayout } from './DiscussionLayout';
+import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
+
+const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
+	useEffect(() => {
+		doStorybookHydration();
+	});
+	return <>{children}</>;
+};
 
 export default {
-	component: Discussion,
-	title: 'Components/Discussion',
+	component: DiscussionLayout,
+	title: 'Components/DiscussionLayout',
 };
 export const Basic = () => {
 	return (
-		<div>
-			<Discussion
+		<HydratedLayout>
+			<DiscussionLayout
 				discussionApiUrl="https://discussion.theguardian.com/discussion-api"
 				shortUrlId="/p/4v8kk"
 				format={{
@@ -23,7 +32,7 @@ export const Basic = () => {
 				isAdFreeUser={false}
 				shouldHideAds={false}
 			/>
-		</div>
+		</HydratedLayout>
 	);
 };
 

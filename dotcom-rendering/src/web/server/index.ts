@@ -7,6 +7,7 @@ import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { validateAsCAPIType } from '../../model/validate';
 import { extract as extractGA } from '../../model/extract-ga';
 import { blocksToHtml } from './blocksToHtml';
+import { keyEventsToHtml } from './keyEventsToHtml';
 
 export const renderArticle = (
 	{ body }: express.Request,
@@ -143,6 +144,27 @@ export const renderBlocks = (
 			section,
 			sharedAdTargeting,
 			adUnit,
+		});
+
+		res.status(200).send(html);
+	} catch (e) {
+		// @ts-expect-error
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+		res.status(500).send(`<pre>${e.stack}</pre>`);
+	}
+};
+
+export const renderKeyEvents = (
+	{ body }: { body: KeyEventsRequest },
+	res: express.Response,
+): void => {
+	try {
+		const { keyEvents, format, filterKeyEvents } = body;
+
+		const html = keyEventsToHtml({
+			keyEvents,
+			format,
+			filterKeyEvents,
 		});
 
 		res.status(200).send(html);

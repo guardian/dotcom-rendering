@@ -5,7 +5,7 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { calloutCampaign } from '../../../fixtures/manual/calloutCampaign';
 
-import { CalloutBlockComponent } from './CalloutBlockComponent';
+import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
 export default {
 	component: CalloutBlockComponent,
