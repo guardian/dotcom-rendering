@@ -104,27 +104,13 @@ export const LinkHeadline = ({
 				>
 					{headlineText}
 				</a>
-				{byline && (
-					<Byline
-						text={byline}
-						palette={palette}
-						format={format}
-						size={size}
-					/>
-				)}
+				{byline && <Byline text={byline} format={format} size={size} />}
 			</>
 		) : (
 			// We don't have a link so simply use a span here
 			<>
 				<span>{headlineText}</span>
-				{byline && (
-					<Byline
-						text={byline}
-						size={size}
-						palette={palette}
-						format={format}
-					/>
-				)}
+				{byline && <Byline text={byline} size={size} format={format} />}
 			</>
 		)}
 	</h4>
