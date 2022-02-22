@@ -182,11 +182,7 @@ export const CardHeadline = ({
 				</span>
 			</h4>
 			{byline && showByline && (
-				<Byline
-					text={byline}
-					format={format}
-					size={size}
-				/>
+				<Byline text={byline} format={format} size={size} />
 			)}
 		</>
 	);

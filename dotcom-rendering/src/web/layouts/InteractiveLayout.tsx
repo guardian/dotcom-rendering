@@ -398,7 +398,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								>
 									<ArticleTitle
 										format={format}
-										palette={palette}
 										tags={CAPI.tags}
 										sectionLabel={CAPI.sectionLabel}
 										sectionUrl={CAPI.sectionUrl}
@@ -433,7 +432,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											headlineString={CAPI.headline}
 											tags={CAPI.tags}
 											byline={CAPI.author.byline}
-											palette={palette}
 										/>
 										{age && (
 											<AgeWarning
@@ -464,7 +462,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<div css={maxWidth}>
 									<MainMedia
 										format={format}
-										palette={palette}
 										elements={CAPI.mainMediaElements}
 										adTargeting={adTargeting}
 										host={host}

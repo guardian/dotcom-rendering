@@ -148,13 +148,12 @@ const InteractiveImmersiveGrid = ({
 
 const Renderer: React.FC<{
 	format: ArticleFormat;
-	palette: Palette;
 	elements: CAPIElement[];
 	host?: string;
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-}> = ({ format, palette, elements, host, pageId, webTitle, ajaxUrl }) => {
+}> = ({ format, elements, host, pageId, webTitle, ajaxUrl }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -163,7 +162,6 @@ const Renderer: React.FC<{
 	const output = elements.map((element, index) => {
 		const [ok, el] = renderElement({
 			format,
-			palette,
 			element,
 			adTargeting: undefined,
 			host,
@@ -328,7 +326,6 @@ export const InteractiveImmersiveLayout = ({
 									>
 										<ArticleTitle
 											format={format}
-											palette={palette}
 											tags={CAPI.tags}
 											sectionLabel={CAPI.sectionLabel}
 											sectionUrl={CAPI.sectionUrl}
@@ -348,7 +345,6 @@ export const InteractiveImmersiveLayout = ({
 										<ArticleHeadline
 											format={format}
 											headlineString={CAPI.headline}
-											palette={palette}
 											tags={CAPI.tags}
 											byline={CAPI.author.byline}
 										/>
@@ -437,7 +433,6 @@ export const InteractiveImmersiveLayout = ({
 					<article>
 						<Renderer
 							format={format}
-							palette={palette}
 							elements={
 								CAPI.blocks[0] ? CAPI.blocks[0].elements : []
 							}

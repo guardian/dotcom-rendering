@@ -421,7 +421,6 @@ export const CommentLayout = ({
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
-								palette={palette}
 								tags={CAPI.tags}
 								sectionLabel={CAPI.sectionLabel}
 								sectionUrl={CAPI.sectionUrl}
@@ -450,7 +449,6 @@ export const CommentLayout = ({
 										<ArticleHeadline
 											format={format}
 											headlineString={CAPI.headline}
-											palette={palette}
 											tags={CAPI.tags}
 											byline={CAPI.author.byline}
 										/>
@@ -499,7 +497,6 @@ export const CommentLayout = ({
 							>
 								<MainMedia
 									format={format}
-									palette={palette}
 									elements={CAPI.mainMediaElements}
 									adTargeting={adTargeting}
 									starRating={

@@ -276,7 +276,6 @@ export const ImmersiveLayout = ({
 									>
 										<ArticleTitle
 											format={format}
-											palette={palette}
 											tags={CAPI.tags}
 											sectionLabel={CAPI.sectionLabel}
 											sectionUrl={CAPI.sectionUrl}
@@ -296,7 +295,6 @@ export const ImmersiveLayout = ({
 										<ArticleHeadline
 											format={format}
 											headlineString={CAPI.headline}
-											palette={palette}
 											tags={CAPI.tags}
 											byline={CAPI.author.byline}
 										/>
