@@ -22,7 +22,7 @@ const interceptPlayEvent = (id) => {
 };
 
 const getOverlaySelector = (videoId) =>
-	`[data-cy="youtube-overlay-${videoId}"]`
+	`[data-cy="youtube-overlay-${videoId}"]`;
 
 describe('YouTube Atom', function () {
 	beforeEach(function () {
@@ -128,37 +128,6 @@ describe('YouTube Atom', function () {
 
 		// Play video
 		cy.get(overlaySelector).click();
-
-		cy.wait('@ophanCall', { timeout: 30000 });
-
-		// Video is playing, overlay is gone
-		cy.get(overlaySelector).should('not.exist');
-	});
-
-	it('still plays the video even if it was not preloaded', function () {
-		cy.visit(
-			'/Article?url=https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
-		);
-		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
-		privacySettingsIframe().contains('Privacy settings');
-		privacySettingsIframe()
-			.find("[title='Accept all']", { timeout: 12000 })
-			.click();
-
-		// Wait for hydration
-		cy.get('[data-component=youtube-atom]')
-			.parent()
-			.should('have.attr', 'data-gu-ready', 'true');
-
-		// Listen for the ophan call made when the video is played
-		interceptPlayEvent(
-			'gu-video-youtube-2b33a7b7-e639-4232-9ecd-0fb920fa8147',
-		).as('ophanCall');
-
-		// Play video (without triggering any pre load events)
-		const overlaySelector = getOverlaySelector('S0CE1n-R3OY');
-		cy.get(overlaySelector).trigger('click');
 
 		cy.wait('@ophanCall', { timeout: 30000 });
 
