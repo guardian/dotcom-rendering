@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+// @ts-check
 const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
@@ -17,9 +17,13 @@ const sessionId = uuidv4();
 
 let builds = 0;
 
+/**
+ * @param {{ platform: 'server' | 'browser' | 'browser.legacy'}} options
+ * @returns {import('webpack').Configuration}
+ */
 const commonConfigs = ({ platform }) => ({
 	name: platform,
-	mode: process.env.NODE_ENV,
+	mode: DEV ? 'development' : 'production',
 	output: {
 		path: dist,
 	},
@@ -41,9 +45,11 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
+		// @ts-ignore -- somehow the type declaration isn’t playing nice
 		new FilterWarningsPlugin({
 			exclude: /export .* was not found in/,
 		}),
+		// @ts-ignore -- somehow the type declaration isn’t playing nice
 		new LoadablePlugin({
 			writeToDisk: true,
 			filename: `loadable-manifest-${platform}.json`,
@@ -53,30 +59,43 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
-		PROD &&
-			new BundleAnalyzerPlugin({
-				reportFilename: path.join(dist, `${platform}-bundles.html`),
-				analyzerMode: 'static',
-				openAnalyzer: false,
-				logLevel: 'warn',
-			}),
-		DEV &&
-			new WebpackMessages({
-				name: platform,
-				logger: (message) => {
-					// distinguish between initial and subsequent (re)builds in console output
-					if (builds < module.exports.length * 2) {
-						message = message
-							.replace('Building', 'Building initial')
-							.replace('Completed', 'Completed initial');
-					} else {
-						message = message.replace('Building', 'Rebuilding');
-					}
-					console.log(message);
-					builds += 1;
-				},
-			}),
-	].filter(Boolean),
+		...(DEV
+			? // DEV plugins
+			  [
+					// @ts-ignore -- somehow the type declaration isn’t playing nice
+					new WebpackMessages({
+						name: platform,
+						/** @type {(message: string) => void} */
+						logger: (message) => {
+							// distinguish between initial and subsequent (re)builds in console output
+							if (builds < module.exports.length * 2) {
+								message = message
+									.replace('Building', 'Building initial')
+									.replace('Completed', 'Completed initial');
+							} else {
+								message = message.replace(
+									'Building',
+									'Rebuilding',
+								);
+							}
+							console.log(message);
+							builds += 1;
+						},
+					}),
+			  ]
+			: // PROD plugins
+			  [
+					new BundleAnalyzerPlugin({
+						reportFilename: path.join(
+							dist,
+							`${platform}-bundles.html`,
+						),
+						analyzerMode: 'static',
+						openAnalyzer: false,
+						logLevel: 'warn',
+					}),
+			  ]),
+	],
 	infrastructureLogging: {
 		level: PROD ? 'info' : 'warn',
 	},
@@ -89,20 +108,23 @@ module.exports = [
 			platform: 'server',
 		}),
 		require(`./webpack.config.server`)({ sessionId }),
-		DEV ? require(`./dev/webpack.config.dev-server`) : {},
+		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
 	// browser bundle configs
-	// TODO: ignore static files for legacy compliation
-	INCLUDE_LEGACY &&
-		merge(
-			commonConfigs({
-				platform: 'browser.legacy',
-			}),
-			require(`./webpack.config.browser`)({
-				isLegacyJS: true,
-				sessionId,
-			}),
-		),
+	// TODO: ignore static files for legacy compilation
+	...(INCLUDE_LEGACY
+		? [
+				merge(
+					commonConfigs({
+						platform: 'browser.legacy',
+					}),
+					require(`./webpack.config.browser`)({
+						isLegacyJS: true,
+						sessionId,
+					}),
+				),
+		  ]
+		: []),
 	merge(
 		commonConfigs({
 			platform: 'browser',
@@ -112,4 +134,4 @@ module.exports = [
 			sessionId,
 		}),
 	),
-].filter(Boolean);
+];

@@ -311,8 +311,8 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 };
 
 const textCardHeadline = (format: ArticleFormat): string => {
-	if (format.display === ArticleDisplay.Immersive) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
+	if (format.display === ArticleDisplay.Immersive) return BLACK;
 	switch (format.design) {
 		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:

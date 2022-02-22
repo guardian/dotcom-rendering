@@ -34,7 +34,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
-import { DiscussionContainer } from '../components/DiscussionContainer.importable';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Pagination } from '../components/Pagination';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 
@@ -48,15 +48,15 @@ import {
 } from '../lib/layoutHelpers';
 import { Stuck, SendToBack, BannerWrapper } from './lib/stickiness';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
-import { Placeholder } from '../components/Placeholder';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';
 import { Liveness } from '../components/Liveness.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooter } from '../components/MostViewedFooter.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
+import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -400,6 +400,10 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						webTitle={CAPI.webTitle}
 						ajaxUrl={CAPI.config.ajaxUrl}
 						filterKeyEvents={CAPI.filterKeyEvents}
+						format={format}
+						switches={CAPI.config.switches}
+						onFirstPage={pagination.currentPage === 1}
+						webURL={CAPI.webURL}
 					/>
 				</Island>
 			)}
@@ -697,10 +701,15 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								</GridItem>
 								<GridItem area="matchtabs" element="aside">
 									<div css={maxWidth}>
-										<Placeholder
-											rootId="match-tabs"
-											height={40}
-										/>
+										<Island
+											clientOnly={true}
+											placeholderHeight={40}
+										>
+											<GetMatchTabs
+												matchUrl={CAPI.matchUrl}
+												format={format}
+											/>
+										</Island>
 									</div>
 								</GridItem>
 								<GridItem area="media">
@@ -1198,37 +1207,33 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						data-print-layout="hide"
 						element="section"
 					>
-						<Island clientOnly={true} deferUntil="visible">
-							<DiscussionContainer
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								format={format}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={
-									CAPI.config.switches.enableDiscussionSwitch
-								}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-							/>
-						</Island>
+						<DiscussionLayout
+							discussionApiUrl={CAPI.config.discussionApiUrl}
+							shortUrlId={CAPI.config.shortUrlId}
+							format={format}
+							discussionD2Uid={CAPI.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPI.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								CAPI.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={CAPI.isAdFreeUser}
+							shouldHideAds={CAPI.shouldHideAds}
+						/>
 					</ElementContainer>
 				)}
 
 				{!isPaidContent && (
 					<ElementContainer data-print-layout="hide" element="aside">
-						<Island clientOnly={true} deferUntil="visible">
-							<MostViewedFooter
-								format={format}
-								sectionName={CAPI.sectionName}
-								ajaxUrl={CAPI.config.ajaxUrl}
-								switches={CAPI.config.switches}
-								pageIsSensitive={CAPI.config.isSensitive}
-								isDev={CAPI.config.isDev}
-							/>
-						</Island>
+						<MostViewedFooterLayout
+							format={format}
+							sectionName={CAPI.sectionName}
+							ajaxUrl={CAPI.config.ajaxUrl}
+							switches={CAPI.config.switches}
+							pageIsSensitive={CAPI.config.isSensitive}
+							isDev={CAPI.config.isDev}
+						/>
 					</ElementContainer>
 				)}
 

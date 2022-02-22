@@ -19,11 +19,12 @@ const emailCaptionStyle = css`
 	color: ${text.supporting};
 `;
 
-const embedContainer = css`
+const embedContainerStyles = (isEmailEmbed: boolean) => css`
 	iframe {
 		/* Some embeds can hijack the iframe and calculate an incorrect width, which pushes the body out */
 		/* stylelint-disable-next-line declaration-no-important */
 		width: 100% !important;
+		${isEmailEmbed && `min-height: 60px;`}
 	}
 `;
 
@@ -46,7 +47,7 @@ export const EmbedBlockComponent = ({
 			source={source}
 			sourceDomain={sourceDomain}
 		>
-			<div data-cy="embed-block" css={embedContainer}>
+			<div data-cy="embed-block" css={embedContainerStyles(isEmailEmbed)}>
 				<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
 				{isEmailEmbed && caption && (
 					<div css={emailCaptionStyle}>{caption}</div>

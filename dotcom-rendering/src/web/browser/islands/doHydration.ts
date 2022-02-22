@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { log } from '@guardian/libs';
 import { hydrate, render, h } from 'preact';
 import { initPerf } from '../initPerf';
 
@@ -30,8 +31,10 @@ export const doHydration = (name: string, data: any, element: HTMLElement) => {
 
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
+				log('dotcom', `Rendering island ${name}`);
 				render(h(module[name], data), element);
 			} else {
+				log('dotcom', `Hydrating island ${name}`);
 				hydrate(h(module[name], data), element);
 			}
 

@@ -7,7 +7,7 @@ import {
 } from '@guardian/atoms-rendering';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
-import { CalloutBlockComponent } from '../components/CalloutBlockComponent';
+import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';

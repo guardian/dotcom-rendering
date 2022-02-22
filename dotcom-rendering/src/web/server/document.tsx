@@ -291,5 +291,6 @@ export const document = ({ data }: Props): string => {
 		openGraphData,
 		twitterData,
 		keywords,
+		format,
 	});
 };

@@ -1,66 +1,77 @@
-import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
+import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
+import { Toast } from './Toast';
 
 type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
 	filterKeyEvents: boolean;
-};
-
-// TODO: Break this out into its own component
-const Toast = ({
-	onClick,
-	numHiddenBlocks,
-}: {
-	onClick: () => void;
-	numHiddenBlocks: number;
-}) => {
-	// TODO: Style and absolute position this component
-	return (
-		<nav
-			css={css`
-				position: fixed;
-				top: 20px;
-				left: 50px;
-				display: flex;
-				width: 100%;
-				align-items: center;
-			`}
-		>
-			<button onClick={onClick}>{`${numHiddenBlocks} blah`}</button>
-		</nav>
-	);
+	format: ArticleFormat;
+	switches: Switches;
+	onFirstPage: boolean;
+	webURL: string;
 };
 
 const isServer = typeof window === 'undefined';
 
-function hydrateBlocks() {
-	console.log('hydrateBlocks');
-	// TODO Call existing hydration solution targetted to these elements
-	// Maybe we can make doHydration work for all gu-islands things
-	// where the gu-hydrated data attribute isn't set?
-}
-
 /**
- * insertNewBlocks takes html and inserts it at the top of the liveblog
+ * insert
+ *
+ * Takes html, parses and hydrates it, inserts the resulting blocks
+ * at the top of the liveblog, and then enhances any tweets
  *
  * @param {string} html The block html to be inserted
  * @returns void
  */
-function insertNewBlocks(html: string) {
+function insert(html: string, switches: Switches) {
+	// Create
+	// ------
+	const template = document.createElement('template');
+	template.innerHTML = html;
+	const fragment = template.content;
+
+	// Hydrate
+	// -------
+	const islands = fragment.querySelectorAll('gu-island');
+	initHydration(islands);
+
+	// Insert
+	// ------
+	// Shouldn't we sanitise this html?
+	// We're being sent this string by our own backend, not reader input, so we
+	// trust that the tags and attributes it contains are safe and intentional
+	const maincontent = document.querySelector<HTMLElement>('#maincontent');
 	const latestBlock = document.querySelector('#maincontent :first-child');
-	if (!latestBlock) return;
-	latestBlock.insertAdjacentHTML('beforebegin', html);
+	if (!latestBlock || !maincontent) return;
+	maincontent.insertBefore(fragment, latestBlock);
+
+	// Enhance
+	// -----------
+	if (switches.enhanceTweets) {
+		const pendingBlocks = maincontent.querySelectorAll<HTMLElement>(
+			'article .pending.block',
+		);
+		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
+		twttr.ready((twitter) => {
+			twitter.widgets.load(Array.from(pendingBlocks));
+		});
+	}
 }
 
 /**
- * revealNewBlocks - style any blocks that have been inserted but are hidden such that
- * they are revealed
+ * reveal any blocks that have been inserted but are still hidden
  */
-function revealNewBlocks() {
-	console.log('revealNewBlocks');
+function revealPendingBlocks() {
+	const maincontent = document.querySelector<HTMLElement>('#maincontent');
+	const pendingBlocks = maincontent?.querySelectorAll<HTMLElement>(
+		'article .pending.block',
+	);
+	pendingBlocks?.forEach((block) => {
+		block.classList.add('reveal');
+		block.classList.remove('pending');
+	});
 }
 
 /**
@@ -119,6 +130,10 @@ export const Liveness = ({
 	webTitle,
 	ajaxUrl,
 	filterKeyEvents,
+	format,
+	switches,
+	onFirstPage,
+	webURL,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
@@ -129,7 +144,7 @@ export const Liveness = ({
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
-		refreshInterval: 15000,
+		refreshInterval: 15_000,
 		refreshWhenHidden: true,
 		// onSuccess runs (once) after every successful api call. This is useful because it
 		// allows us to avoid the problems of imperative code being executed multiple times
@@ -141,11 +156,10 @@ export const Liveness = ({
 		}) => {
 			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
 				// Always insert the new blocks in the dom (but hidden)
-				insertNewBlocks(data.html);
-				hydrateBlocks();
+				insert(data.html, switches);
 
-				if (topOfBlogVisible()) {
-					revealNewBlocks();
+				if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
+					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 				} else {
 					setShowToast(true);
@@ -166,12 +180,12 @@ export const Liveness = ({
 			numHiddenBlocks > 0 ? `(${numHiddenBlocks}) ${webTitle}` : webTitle;
 	}, [numHiddenBlocks, webTitle]);
 
-	if (topOfBlog) {
+	if (onFirstPage && topOfBlog) {
 		const observer = new window.IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting) {
 					entry.target.classList.add('in-viewport');
-					revealNewBlocks();
+					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 					setShowToast(false);
 					return;
@@ -189,18 +203,58 @@ export const Liveness = ({
 		observer.observe(topOfBlog);
 	}
 
+	/**
+	 * This useEffect sets up a listener for when the page is backgrounded or restored. We
+	 * do this so that any new blocks that were fetched while the blog was in the
+	 * background are animated in at the point when focus is restored
+	 */
+	useEffect(() => {
+		const handleVisibilityChange = () => {
+			// The blog was either hidden or has become visible
+			if (
+				// If we're returning to a blog that has pending blocks and the reader
+				// is at the top of the first page then...
+				document.visibilityState === 'visible' &&
+				numHiddenBlocks > 0 &&
+				topOfBlogVisible() &&
+				onFirstPage
+			) {
+				revealPendingBlocks();
+				setNumHiddenBlocks(0);
+				setShowToast(false);
+			}
+		};
+
+		window.addEventListener('visibilitychange', handleVisibilityChange);
+
+		return () => {
+			window.removeEventListener(
+				'visibilitychange',
+				handleVisibilityChange,
+			);
+		};
+	}, [numHiddenBlocks, onFirstPage]);
+
 	const handleToastClick = () => {
-		setShowToast(false);
-		topOfBlog?.scrollIntoView();
-		revealNewBlocks();
-		setNumHiddenBlocks(0);
+		if (onFirstPage) {
+			setShowToast(false);
+			document.getElementById('maincontent')?.scrollIntoView({
+				behavior: 'smooth',
+			});
+			window.location.href = '#maincontent';
+			revealPendingBlocks();
+			setNumHiddenBlocks(0);
+		} else {
+			window.location.href = `${webURL}#maincontent`;
+		}
 	};
 
 	if (showToast) {
 		return (
 			<Toast
 				onClick={handleToastClick}
-				numHiddenBlocks={numHiddenBlocks}
+				count={numHiddenBlocks}
+				format={format}
 			/>
 		);
 	}
