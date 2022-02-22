@@ -20,6 +20,10 @@ const interceptPlayEvent = (id) => {
 		},
 	);
 };
+
+const getOverlaySelector = (videoId) =>
+	`[data-cy="youtube-overlay-${videoId}"]`
+
 describe('YouTube Atom', function () {
 	beforeEach(function () {
 		storage.local.set('gu.geo.override', 'GB');
@@ -42,20 +46,11 @@ describe('YouTube Atom', function () {
 			.should('have.attr', 'data-gu-ready', 'true');
 
 		// Make sure overlay is displayed
-		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
+		const overlaySelector = getOverlaySelector('S0CE1n-R3OY');
+		cy.get(overlaySelector).should('be.visible');
 
-		// Trigger mouseenter event
+		// YouTube has not initialised
 		cy.window().its('onYouTubeIframeAPIReady').should('not.exist');
-
-		cy.get(`[data-cy="youtube-overlay"]`).trigger('mouseenter');
-
-		// Wait for youtube to be initialised
-		cy.window()
-			.its('onYouTubeIframeAPIReady', { timeout: 30000 })
-			.should('exist');
-
-		// YouTube was initialised but the overlay is still showing
-		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
 		interceptPlayEvent(
@@ -63,12 +58,12 @@ describe('YouTube Atom', function () {
 		).as('ophanCall');
 
 		// Play video
-		cy.get(`[data-cy="youtube-overlay"]`).click();
+		cy.get(overlaySelector).click();
 
 		cy.wait('@ophanCall', { timeout: 30000 });
 
 		// Video is playing, overlay is gone
-		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
+		cy.get(overlaySelector).should('not.exist');
 	});
 
 	it('plays in body videos', function () {
@@ -89,14 +84,8 @@ describe('YouTube Atom', function () {
 			.should('have.attr', 'data-gu-ready', 'true');
 
 		// Make sure overlay is displayed
-		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
-
-		// Trigger mouseenter event
-		cy.get(`[data-cy="youtube-overlay"]`).trigger('touchstart');
-		// cy.wait('@callToYouTube');
-
-		// The youtube files were loaded by the overlay is still showing
-		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
+		const overlaySelector = getOverlaySelector('NtN-a6inr1E');
+		cy.get(overlaySelector).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
 		interceptPlayEvent(
@@ -104,12 +93,12 @@ describe('YouTube Atom', function () {
 		).as('ophanCall');
 
 		// Play video
-		cy.get(`[data-cy="youtube-overlay"]`).click();
+		cy.get(overlaySelector).click();
 
 		cy.wait('@ophanCall', { timeout: 30000 });
 
 		// // Video is playing, overlay is gone
-		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
+		cy.get(overlaySelector).should('not.exist');
 	});
 
 	it('still plays the video if the reader rejects consent', function () {
@@ -129,13 +118,8 @@ describe('YouTube Atom', function () {
 			.should('have.attr', 'data-gu-ready', 'true');
 
 		// Make sure overlay is displayed
-		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
-
-		// Trigger mouseenter event
-		cy.get(`[data-cy="youtube-overlay"]`).trigger('mouseenter');
-
-		// The youtube files were loaded by the overlay is still showing
-		cy.get(`[data-cy="youtube-overlay"]`).should('be.visible');
+		const overlaySelector = getOverlaySelector('NtN-a6inr1E');
+		cy.get(overlaySelector).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
 		interceptPlayEvent(
@@ -143,12 +127,12 @@ describe('YouTube Atom', function () {
 		).as('ophanCall');
 
 		// Play video
-		cy.get(`[data-cy="youtube-overlay"]`).click();
+		cy.get(overlaySelector).click();
 
 		cy.wait('@ophanCall', { timeout: 30000 });
 
 		// Video is playing, overlay is gone
-		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
+		cy.get(overlaySelector).should('not.exist');
 	});
 
 	it('still plays the video even if it was not preloaded', function () {
@@ -173,11 +157,12 @@ describe('YouTube Atom', function () {
 		).as('ophanCall');
 
 		// Play video (without triggering any pre load events)
-		cy.get(`[data-cy="youtube-overlay"]`).trigger('click');
+		const overlaySelector = getOverlaySelector('S0CE1n-R3OY');
+		cy.get(overlaySelector).trigger('click');
 
 		cy.wait('@ophanCall', { timeout: 30000 });
 
 		// Video is playing, overlay is gone
-		cy.get(`[data-cy="youtube-overlay"]`).should('not.exist');
+		cy.get(overlaySelector).should('not.exist');
 	});
 });
