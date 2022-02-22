@@ -13,6 +13,7 @@ import { QuoteIcon } from './QuoteIcon';
 import { Kicker } from './Kicker';
 import { Byline } from './Byline';
 import { decidePalette } from '../lib/decidePalette';
+import { transparentColour } from '../lib/transparentColour';
 
 type Props = {
 	headlineText: string; // The text shown
@@ -85,15 +86,13 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 };
 
 const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
-	const transparentColour = `${colour}88`;
-
 	function generateUnderlinedCss(baseSize: number) {
 		return css`
 			background-image: linear-gradient(
 				to bottom,
 				transparent,
 				transparent ${baseSize - 1}px,
-				${transparentColour}
+				${transparentColour(colour)}
 			);
 			line-height: ${baseSize}px;
 			background-size: 1px ${baseSize}px;

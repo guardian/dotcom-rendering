@@ -55,10 +55,7 @@ export const Analysis = () => (
 			</div>
 		))}
 		<br />
-		<ElementContainer
-			showTopBorder={false}
-			showSideBorders={false}
-		>
+		<ElementContainer showTopBorder={false} showSideBorders={false}>
 			<CardHeadline
 				headlineText="This is how an Sport Analysis card headline looks"
 				format={{
@@ -69,10 +66,7 @@ export const Analysis = () => (
 			/>
 		</ElementContainer>
 		<br />
-		<ElementContainer
-			showTopBorder={false}
-			showSideBorders={false}
-		>
+		<ElementContainer showTopBorder={false} showSideBorders={false}>
 			<CardHeadline
 				headlineText="This is how an Culture Analysis card headline looks"
 				format={{
@@ -83,10 +77,7 @@ export const Analysis = () => (
 			/>
 		</ElementContainer>
 		<br />
-		<ElementContainer
-			showTopBorder={false}
-			showSideBorders={false}
-		>
+		<ElementContainer showTopBorder={false} showSideBorders={false}>
 			<CardHeadline
 				headlineText="This is how an Opinion Analysis card headline looks"
 				format={{
@@ -97,10 +88,7 @@ export const Analysis = () => (
 			/>
 		</ElementContainer>
 		<br />
-		<ElementContainer
-			showTopBorder={false}
-			showSideBorders={false}
-		>
+		<ElementContainer showTopBorder={false} showSideBorders={false}>
 			<CardHeadline
 				headlineText="This is how an Lifestyle Analysis card headline looks"
 				format={{
