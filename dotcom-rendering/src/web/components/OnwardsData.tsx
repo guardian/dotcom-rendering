@@ -13,7 +13,7 @@ type Props = {
 };
 
 type OnwardsResponse = {
-	trails: [];
+	trails: CAPITrailType[];
 	heading: string;
 	displayname: string;
 	description: string;
