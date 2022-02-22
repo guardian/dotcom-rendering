@@ -93,6 +93,7 @@ type Palette = {
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		cardHeadline: Colour;
+		cardByline: Colour;
 		cardKicker: Colour;
 		linkKicker: Colour;
 		cardStandfirst: Colour;

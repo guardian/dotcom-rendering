@@ -78,7 +78,7 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 
 const colourStyles = (palette: Palette) => {
 	return css`
-		color: ${palette.text.byline};
+		color: ${palette.text.cardByline};
 	`;
 };
 
