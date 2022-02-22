@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
@@ -10,7 +10,7 @@ const buttonStyles = css`
 	${getZIndex('sticky-video-button')};
 `;
 
-const stickyStyles = (right: number) => css`
+const stickyStyles = css`
 	@keyframes fade-in-up {
 		from {
 			transform: translateY(100%);
@@ -24,7 +24,6 @@ const stickyStyles = (right: number) => css`
 	}
 
 	position: fixed;
-	right: ${right}px;
 	bottom: 20px;
 	width: 300px;
 	height: 169px;
@@ -36,46 +35,33 @@ const stickyStyles = (right: number) => css`
 	}
 `;
 
-const containerStyles = (height: number) => css`
-	height: ${height}px;
+const stickyContainerStyles = (height: number) => css`
+	height: ${height * 1.5}px;
 	position: relative;
+	display: flex;
+	justify-content: flex-end;
 `;
 
 interface Props {
 	isPlaying: boolean;
+	height: number;
 	children: React.ReactNode;
 }
 
-export const StickyVideo = ({ isPlaying, children }: Props) => {
-	const ref = useRef<HTMLDivElement>(null);
-
-	const [containerHeight, setContainerHeight] = useState(0);
-	const [rightMargin, setRightMargin] = useState(0);
+export const StickyVideo = ({ isPlaying, height, children }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
 	const [isIntersecting, setRef] = useHasBeenSeen({
 		threshold: 0.1,
 		repeat: true,
 	});
 
-	const { current } = ref;
-
-	useEffect(() => {
-		if (!current) return;
-
-		const { right, height } = current.getBoundingClientRect();
-		const { innerWidth } = window;
-
-		setRightMargin(innerWidth - right);
-		setContainerHeight(height);
-	}, [current]);
-
 	useEffect(() => {
 		if (isPlaying) setIsSticky(isIntersecting);
 	}, [isIntersecting, isPlaying]);
 
 	return (
-		<div ref={setRef} css={containerStyles(containerHeight)}>
-			<div ref={ref} css={isSticky && stickyStyles(rightMargin)}>
+		<div ref={setRef} css={isSticky && stickyContainerStyles(height)}>
+			<div css={isSticky && stickyStyles}>
 				{isSticky && (
 					<button
 						css={buttonStyles}
