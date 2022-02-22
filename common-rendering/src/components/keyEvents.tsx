@@ -2,14 +2,25 @@
 
 import { css } from "@emotion/react";
 import type { SerializedStyles } from "@emotion/react";
-import { textSans, headline, sport, culture, lifestyle, opinion, news } from "@guardian/source-foundations";
-import { remSpace } from "@guardian/source-foundations";
 import {
+	textSans,
+	headline,
+	sport,
+	culture,
+	lifestyle,
+	opinion,
+	news,
 	neutral,
+	remSpace,
+	from,
 } from "@guardian/source-foundations";
 import { Link } from "@guardian/source-react-components";
-import { ArticleFormat, ArticlePillar, ArticleTheme, timeAgo } from "@guardian/libs";
-import { from } from "@guardian/source-foundations";
+import {
+	ArticleFormat,
+	ArticlePillar,
+	ArticleTheme,
+	timeAgo,
+} from "@guardian/libs";
 import { darkModeCss } from "../lib";
 import Accordion from "./accordion";
 import { text } from "../editorialPalette";
@@ -104,7 +115,6 @@ const timeTextWrapperStyles: SerializedStyles = css`
 	margin-left: 0.5rem;
 `;
 
-
 const textStyles = (
 	format: ArticleFormat,
 	supportsDarkMode: boolean
@@ -112,7 +122,7 @@ const textStyles = (
 	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
 	/* TODO update with Source value when it's added */
 	${from.desktop} {
-		font-size:15px;
+		font-size: 15px;
 	}
 	color: ${text.keyEventsInline(format)};
 	display: block;
@@ -138,7 +148,6 @@ const textStyles = (
 			color: ${getColor(format.theme, 500)};
 		}
 	`}
-
 `;
 
 const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
