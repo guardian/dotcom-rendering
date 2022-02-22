@@ -176,7 +176,7 @@
     "@types/webpack-env": "^1.16.0",
     "@types/webpack-node-externals": "^2.5.3",
     "@types/youtube": "^0.0.41",
-    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/eslint-plugin-tslint": "^4.22.0",
     "@typescript-eslint/parser": "^4.21.0",
     "ajv": "^8.1.0",
