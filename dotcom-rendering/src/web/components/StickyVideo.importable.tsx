@@ -43,7 +43,7 @@ const stickyContainerStyles = (height: number) => css`
 	justify-content: flex-end;
 
 	${from.tablet} {
-		height: ${height * 1.25}px;
+		height: ${height * 1.5}px;
 	}
 `;
 
@@ -61,7 +61,7 @@ export const StickyVideo = ({ isPlaying, height, children }: Props) => {
 	});
 
 	useEffect(() => {
-		if (isPlaying) setIsSticky(isIntersecting);
+		setIsSticky(isIntersecting && isPlaying);
 	}, [isIntersecting, isPlaying]);
 
 	return (
