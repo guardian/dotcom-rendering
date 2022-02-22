@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { from } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
@@ -36,10 +37,14 @@ const stickyStyles = css`
 `;
 
 const stickyContainerStyles = (height: number) => css`
-	height: ${height * 1.5}px;
+	height: ${height * 0.75}px;
 	position: relative;
 	display: flex;
 	justify-content: flex-end;
+
+	${from.tablet} {
+		height: ${height * 1.25}px;
+	}
 `;
 
 interface Props {
