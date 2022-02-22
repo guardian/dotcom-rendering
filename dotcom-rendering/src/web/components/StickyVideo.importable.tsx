@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
-import { useStickyObserver } from '../lib/useStickyObserver';
+import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
 const buttonStyles = css`
 	position: absolute;
@@ -52,8 +52,9 @@ export const StickyVideo = ({ isPlaying, children }: Props) => {
 	const [containerHeight, setContainerHeight] = useState(0);
 	const [rightMargin, setRightMargin] = useState(0);
 	const [isSticky, setIsSticky] = useState(false);
-	const [isIntersecting, setRef] = useStickyObserver({
+	const [isIntersecting, setRef] = useHasBeenSeen({
 		threshold: 0.1,
+		repeat: true,
 	});
 
 	const { current } = ref;
