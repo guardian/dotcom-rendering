@@ -518,7 +518,6 @@ export const CommentLayout = ({
 								<ArticleMeta
 									branding={branding}
 									format={format}
-									palette={palette}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									author={CAPI.author}

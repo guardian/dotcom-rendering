@@ -504,7 +504,6 @@ export const ShowcaseLayout = ({
 								<ArticleMeta
 									branding={branding}
 									format={format}
-									palette={palette}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									author={CAPI.author}

@@ -3,7 +3,6 @@ import { render } from '@testing-library/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { ArticleMeta } from './ArticleMeta';
-import { decidePalette } from '../lib/decidePalette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 describe('ArticleMeta', () => {
@@ -17,7 +16,6 @@ describe('ArticleMeta', () => {
 		const { container } = render(
 			<ArticleMeta
 				format={format}
-				palette={decidePalette(format)}
 				pageId="1234"
 				webTitle="A title"
 				author={{ byline: 'Observer writers' }}
@@ -58,7 +56,6 @@ describe('ArticleMeta', () => {
 		const { container } = render(
 			<ArticleMeta
 				format={format}
-				palette={decidePalette(format)}
 				pageId="1234"
 				webTitle="A title"
 				author={{ byline: 'Observer writers' }}

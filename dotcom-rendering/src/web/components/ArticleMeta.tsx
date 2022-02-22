@@ -20,10 +20,10 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import { CommentCount } from './CommentCount.importable';
 import { Island } from './Island';
 import { ShareCount } from './ShareCount.importable';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	pageId: string;
 	webTitle: string;
 	author: AuthorType;
@@ -284,7 +284,6 @@ const metaNumbersExtrasLiveBlog = css`
 export const ArticleMeta = ({
 	branding,
 	format,
-	palette,
 	pageId,
 	webTitle,
 	author,
@@ -319,6 +318,9 @@ export const ArticleMeta = ({
 		showAvatarFromAuthor() &&
 		shouldShowAvatar(format);
 	const isInteractive = format.design === ArticleDesign.Interactive;
+
+	const palette = decidePalette(format);
+
 	return (
 		<div
 			className={
