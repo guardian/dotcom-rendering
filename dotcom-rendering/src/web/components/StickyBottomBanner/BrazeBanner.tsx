@@ -44,7 +44,7 @@ const containerStyles = css`
 export const canShowBrazeBanner = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
 	brazeArticleContext: BrazeArticleContext,
-): Promise<CanShowResult<any>> => {
+): Promise<CanShowResult<Meta>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
 		return {
@@ -68,13 +68,17 @@ export const canShowBrazeBanner = async (
 			message.logImpression();
 		};
 
-		const meta = {
-			dataFromBraze: message.extras,
-			logImpressionWithBraze,
-			logButtonClickWithBraze,
-		};
+		if (message.extras) {
+			const meta = {
+				dataFromBraze: message.extras,
+				logImpressionWithBraze,
+				logButtonClickWithBraze,
+			};
 
-		return { show: true, meta };
+			return { show: true, meta };
+		}
+
+		return { show: false };
 	} catch (e) {
 		return { show: false };
 	}
