@@ -63,10 +63,10 @@ import {
 } from '../layouts/lib/interactiveLegacyStyling';
 
 import { Island } from '../components/Island';
+import { decidePalette } from './decidePalette';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	element: CAPIElement;
 	adTargeting?: AdTargeting;
 	host?: string;
@@ -117,7 +117,6 @@ const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
 // inspection.
 export const renderElement = ({
 	format,
-	palette,
 	element,
 	adTargeting,
 	host,
@@ -129,6 +128,7 @@ export const renderElement = ({
 	webTitle,
 	ajaxUrl,
 }: Props): [boolean, JSX.Element] => {
+	const palette = decidePalette(format);
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
@@ -751,7 +751,6 @@ const bareElements = new Set([
 // types.
 export const renderArticleElement = ({
 	format,
-	palette,
 	element,
 	adTargeting,
 	ajaxUrl,
@@ -767,7 +766,6 @@ export const renderArticleElement = ({
 
 	const [ok, el] = renderElement({
 		format,
-		palette,
 		element: withUpdatedRole,
 		adTargeting,
 		ajaxUrl,
