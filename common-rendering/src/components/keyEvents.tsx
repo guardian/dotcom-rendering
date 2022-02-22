@@ -65,10 +65,6 @@ const keyEventWrapperStyles = (
 `;
 
 const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
-	${from.desktop} {
-		width: 13.75rem;
-	}
-
 	li::before {
 		content: "";
 		display: block;
