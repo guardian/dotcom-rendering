@@ -17,17 +17,8 @@ interface TestContext {
 	group: TestGroup | undefined;
 }
 
-export const getGroup = (shortUrlId: string): TestGroup | undefined => {
-	const hashedShortUrlId = sha256(shortUrlId).words.reduce(
-		(acc, w) => acc + w,
-		0,
-	);
-
-	// Do we need a BigInt?
-	// console.log(
-	// 	num,
-	// 	hash.words.reduce<bigint>((acc, w) => acc + BigInt(w), 0n),
-	// );
+const getGroup = (shortUrlId: string): TestGroup | undefined => {
+	const hashedShortUrlId = sha256(shortUrlId).words[0];
 
 	const group = Math.abs(hashedShortUrlId % NUM_GROUPS);
 
