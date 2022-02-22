@@ -37,18 +37,97 @@ export const Article = () => (
 Article.story = { name: 'Article' };
 
 export const Analysis = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
-		<CardHeadline
-			headlineText="This is how an Analysis card headline looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Analysis,
-				theme: ArticlePillar.News,
-			}}
-		/>
-	</ElementContainer>
+	<>
+		{smallHeadlineSizes.map((size) => (
+			<div key={size}>
+				<ElementContainer showTopBorder={false} showSideBorders={false}>
+					<CardHeadline
+						headlineText={`This is how a ${size} Analysis card headline looks`}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Analysis,
+							theme: ArticlePillar.News,
+						}}
+						size={size}
+					/>
+				</ElementContainer>
+				<br />
+			</div>
+		))}
+		<br />
+		<ElementContainer
+			showTopBorder={false}
+			showSideBorders={false}
+		>
+			<CardHeadline
+				headlineText="This is how an Sport Analysis card headline looks"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: ArticlePillar.Sport,
+				}}
+			/>
+		</ElementContainer>
+		<br />
+		<ElementContainer
+			showTopBorder={false}
+			showSideBorders={false}
+		>
+			<CardHeadline
+				headlineText="This is how an Culture Analysis card headline looks"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: ArticlePillar.Culture,
+				}}
+			/>
+		</ElementContainer>
+		<br />
+		<ElementContainer
+			showTopBorder={false}
+			showSideBorders={false}
+		>
+			<CardHeadline
+				headlineText="This is how an Opinion Analysis card headline looks"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: ArticlePillar.Opinion,
+				}}
+			/>
+		</ElementContainer>
+		<br />
+		<ElementContainer
+			showTopBorder={false}
+			showSideBorders={false}
+		>
+			<CardHeadline
+				headlineText="This is how an Lifestyle Analysis card headline looks"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: ArticlePillar.Lifestyle,
+				}}
+			/>
+		</ElementContainer>
+		<br />
+		<ElementContainer
+			showTopBorder={false}
+			showSideBorders={false}
+			backgroundColour={specialReport[300]}
+		>
+			<CardHeadline
+				headlineText="This is how an Special Report Analysis card headline looks"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Analysis,
+					theme: ArticleSpecial.SpecialReport,
+				}}
+			/>
+		</ElementContainer>
+	</>
 );
-Analysis.story = { name: 'Analysis' };
+Analysis.story = { name: 'Analysis (Underline)' };
 
 export const Feature = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
@@ -148,22 +227,7 @@ export const cultureVariant = () => (
 );
 cultureVariant.story = { name: 'With a culture kicker' };
 
-export const AnalysisXSmall = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
-		<CardHeadline
-			headlineText="Xsmall card headline for an Analysis article"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Analysis,
-				theme: ArticlePillar.Lifestyle,
-			}}
-			size="large"
-		/>
-	</ElementContainer>
-);
-AnalysisXSmall.story = { name: 'Underlined | large' };
-
-export const opinionxxxsmall = () => (
+export const Opinion = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
 			headlineText="This is how small card headline for opinion articles look"
@@ -177,7 +241,7 @@ export const opinionxxxsmall = () => (
 		/>
 	</ElementContainer>
 );
-opinionxxxsmall.story = { name: 'Quotes | small' };
+Opinion.story = { name: 'Opinion (Quotes)' };
 
 export const OpinionKicker = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
@@ -215,7 +279,7 @@ export const SpecialReport = () => (
 		/>
 	</ElementContainer>
 );
-SpecialReport.story = { name: 'with theme SpecialReport' };
+SpecialReport.story = { name: 'With theme SpecialReport' };
 
 export const Busy = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
