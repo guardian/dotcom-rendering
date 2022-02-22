@@ -20,6 +20,7 @@ import type { Image } from 'image';
 import type { Item, Review } from 'item';
 import { pipe } from 'lib';
 import { galleryBody } from './galleryBody';
+import { relatedContent } from './relatedContent';
 
 // ----- Fixture ----- //
 
@@ -267,7 +268,7 @@ const fields = {
 	branding: none,
 	internalShortId: none,
 	commentCount: none,
-	relatedContent: none,
+	relatedContent: relatedContent,
 	footballContent: none,
 	logo: none,
 	webUrl: '',
