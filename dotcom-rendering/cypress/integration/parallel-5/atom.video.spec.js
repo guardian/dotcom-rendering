@@ -21,9 +21,6 @@ const interceptPlayEvent = (id) => {
 	);
 };
 
-const getOverlaySelector = (videoId) =>
-	`[data-cy="youtube-overlay-${videoId}"]`;
-
 describe('YouTube Atom', function () {
 	beforeEach(function () {
 		storage.local.set('gu.geo.override', 'GB');
@@ -46,7 +43,7 @@ describe('YouTube Atom', function () {
 			.should('have.attr', 'data-gu-ready', 'true');
 
 		// Make sure overlay is displayed
-		const overlaySelector = getOverlaySelector('S0CE1n-R3OY');
+		const overlaySelector = `[data-cy="youtube-overlay-S0CE1n-R3OY"]`;
 		cy.get(overlaySelector).should('be.visible');
 
 		// YouTube has not initialised
@@ -84,7 +81,7 @@ describe('YouTube Atom', function () {
 			.should('have.attr', 'data-gu-ready', 'true');
 
 		// Make sure overlay is displayed
-		const overlaySelector = getOverlaySelector('NtN-a6inr1E');
+		const overlaySelector = `[data-cy="youtube-overlay-NtN-a6inr1E"]`;
 		cy.get(overlaySelector).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
@@ -118,7 +115,7 @@ describe('YouTube Atom', function () {
 			.should('have.attr', 'data-gu-ready', 'true');
 
 		// Make sure overlay is displayed
-		const overlaySelector = getOverlaySelector('NtN-a6inr1E');
+		const overlaySelector = `[data-cy="youtube-overlay-NtN-a6inr1E"]`;
 		cy.get(overlaySelector).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
