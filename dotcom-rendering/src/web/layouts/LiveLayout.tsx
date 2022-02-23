@@ -177,14 +177,6 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: 700px; /* Main content */
-					grid-template-areas:
-						'media'
-						'info'
-						'body';
-				}
-				/* fluid until tablet */
-				${until.tablet} {
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
 						'media'
