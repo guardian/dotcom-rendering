@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { Caption } from './Caption';
-import { decidePalette } from '../lib/decidePalette';
 import { ClickToView } from './ClickToView';
 
 /**
@@ -46,8 +45,6 @@ export const SpotifyBlockComponent = ({
 		margin-bottom: 16px;
 	`;
 
-	const palette = decidePalette(format);
-
 	return (
 		<ClickToView
 			role={role}
@@ -68,7 +65,6 @@ export const SpotifyBlockComponent = ({
 					<Caption
 						captionText={caption}
 						format={format}
-						palette={palette}
 						credit={credit}
 					/>
 				)}

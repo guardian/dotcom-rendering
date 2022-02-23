@@ -14,12 +14,12 @@ import { Picture } from './Picture';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
 import { StarRating } from './StarRating/StarRating';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	element: ImageBlockElement;
 	role: RoleType;
 	format: ArticleFormat;
-	palette: Palette;
 	hideCaption?: boolean;
 	isMainMedia?: boolean;
 	starRating?: number;
@@ -212,7 +212,6 @@ const CaptionToggle = () => (
 export const ImageComponent = ({
 	element,
 	format,
-	palette,
 	hideCaption,
 	role,
 	isMainMedia,
@@ -242,6 +241,8 @@ export const ImageComponent = ({
 			element.media.allImages[0] &&
 			element.media.allImages[0].fields.height) ||
 		'372';
+
+	const palette = decidePalette(format);
 
 	if (
 		isMainMedia &&
@@ -363,7 +364,6 @@ export const ImageComponent = ({
 									<Caption
 										captionText={element.data.caption || ''}
 										format={format}
-										palette={palette}
 										credit={element.data.credit}
 										displayCredit={element.displayCredit}
 										shouldLimitWidth={shouldLimitWidth}
@@ -384,7 +384,6 @@ export const ImageComponent = ({
 					<Caption
 						captionText={element.data.caption || ''}
 						format={format}
-						palette={palette}
 						credit={element.data.credit}
 						displayCredit={element.displayCredit}
 						shouldLimitWidth={shouldLimitWidth}
@@ -394,7 +393,6 @@ export const ImageComponent = ({
 				<Caption
 					captionText={element.data.caption || ''}
 					format={format}
-					palette={palette}
 					credit={element.data.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={shouldLimitWidth}

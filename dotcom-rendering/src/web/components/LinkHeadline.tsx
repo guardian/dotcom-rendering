@@ -5,10 +5,10 @@ import { headline } from '@guardian/source-foundations';
 import { QuoteIcon } from './QuoteIcon';
 import { Kicker } from './Kicker';
 import { Byline } from './Byline';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	headlineText: string; // The text shown
-	palette: Palette; // Used to colour the headline and the kicker
 	format: ArticleFormat;
 	showUnderline?: boolean; // Some headlines have text-decoration underlined when hovered
 	kickerText?: string;
@@ -63,7 +63,6 @@ const visitedStyles = (visitedColour: string) => css`
 
 export const LinkHeadline = ({
 	headlineText,
-	palette,
 	format,
 	showUnderline = false,
 	kickerText,
@@ -73,59 +72,54 @@ export const LinkHeadline = ({
 	size = 'medium',
 	link,
 	byline,
-}: Props) => (
-	<h4 css={fontStyles(size)}>
-		{kickerText && (
-			<Kicker
-				text={kickerText}
-				palette={palette}
-				showPulsingDot={showPulsingDot}
-				showSlash={showSlash}
-			/>
-		)}
-		{showQuotes && (
-			<QuoteIcon colour={palette.text.linkKicker} size={size} />
-		)}
-		{link ? (
-			// We were passed a link object so headline should be a link, with link styling
-			<>
-				<a
-					css={[
-						// Composed styles - order matters for colours
-						linkStyles,
-						showUnderline && textDecorationUnderline,
-						link.visitedColour && visitedStyles(link.visitedColour),
-					]}
-					href={link.to}
-					// If link.preventFocus is true, set tabIndex to -1 to ensure this
-					// link is not tabbed to. Useful if there is an outer link to the same
-					// place, such as with MostViewed
-					tabIndex={link.preventFocus ? -1 : undefined}
-				>
-					{headlineText}
-				</a>
-				{byline && (
-					<Byline
-						text={byline}
-						palette={palette}
-						format={format}
-						size={size}
-					/>
-				)}
-			</>
-		) : (
-			// We don't have a link so simply use a span here
-			<>
-				<span>{headlineText}</span>
-				{byline && (
-					<Byline
-						text={byline}
-						size={size}
-						palette={palette}
-						format={format}
-					/>
-				)}
-			</>
-		)}
-	</h4>
-);
+}: Props) => {
+	const palette = decidePalette(format);
+
+	return (
+		<h4 css={fontStyles(size)}>
+			{kickerText && (
+				<Kicker
+					text={kickerText}
+					palette={palette}
+					showPulsingDot={showPulsingDot}
+					showSlash={showSlash}
+				/>
+			)}
+			{showQuotes && (
+				<QuoteIcon colour={palette.text.linkKicker} size={size} />
+			)}
+			{link ? (
+				// We were passed a link object so headline should be a link, with link styling
+				<>
+					<a
+						css={[
+							// Composed styles - order matters for colours
+							linkStyles,
+							showUnderline && textDecorationUnderline,
+							link.visitedColour &&
+								visitedStyles(link.visitedColour),
+						]}
+						href={link.to}
+						// If link.preventFocus is true, set tabIndex to -1 to ensure this
+						// link is not tabbed to. Useful if there is an outer link to the same
+						// place, such as with MostViewed
+						tabIndex={link.preventFocus ? -1 : undefined}
+					>
+						{headlineText}
+					</a>
+					{byline && (
+						<Byline text={byline} format={format} size={size} />
+					)}
+				</>
+			) : (
+				// We don't have a link so simply use a span here
+				<>
+					<span>{headlineText}</span>
+					{byline && (
+						<Byline text={byline} size={size} format={format} />
+					)}
+				</>
+			)}
+		</h4>
+	);
+};

@@ -12,6 +12,9 @@ import { incrementDailyArticleCount } from '../web/lib/dailyArticleCount';
 export const getArticleCount = async (pageId: string, keywordIds: string) => {
 	const hasOptedOut = await hasOptedOutOfArticleCount();
 
+	// hasOptedOut could potentially be moved into the scope of the below if condition
+	// but this could potentially (?) create a race condition where whilst one invocation of getArticleCount
+	// is waiting for hasOptedOut another invocation might receive it and increment the article count.
 	if (!window.guardian.articleCount) {
 		if (!hasOptedOut) {
 			incrementDailyArticleCount();

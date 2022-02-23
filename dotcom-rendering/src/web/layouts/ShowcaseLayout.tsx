@@ -423,7 +423,6 @@ export const ShowcaseLayout = ({
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
-								palette={palette}
 								tags={CAPI.tags}
 								sectionLabel={CAPI.sectionLabel}
 								sectionUrl={CAPI.sectionUrl}
@@ -449,7 +448,6 @@ export const ShowcaseLayout = ({
 									<ArticleHeadline
 										format={format}
 										headlineString={CAPI.headline}
-										palette={palette}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>
@@ -466,7 +464,6 @@ export const ShowcaseLayout = ({
 							<div css={mainMediaWrapper}>
 								<MainMedia
 									format={format}
-									palette={palette}
 									elements={CAPI.mainMediaElements}
 									adTargeting={adTargeting}
 									starRating={
@@ -507,7 +504,6 @@ export const ShowcaseLayout = ({
 								<ArticleMeta
 									branding={branding}
 									format={format}
-									palette={palette}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									author={CAPI.author}

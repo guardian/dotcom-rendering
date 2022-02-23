@@ -151,7 +151,6 @@ export const ArticleBody = ({
 		>
 			<ArticleRenderer
 				format={format}
-				palette={palette}
 				elements={blocks[0] ? blocks[0].elements : []}
 				adTargeting={adTargeting}
 				host={host}

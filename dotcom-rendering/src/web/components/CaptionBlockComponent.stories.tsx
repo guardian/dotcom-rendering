@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -60,11 +59,6 @@ export const StandardArticle = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 			/>
 		</Container>
 	);
@@ -83,11 +77,6 @@ export const PhotoEssay = () => {
 					design: ArticleDesign.PhotoEssay,
 					theme: ArticlePillar.Lifestyle,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.PhotoEssay,
-					theme: ArticlePillar.Lifestyle,
-				})}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -111,11 +100,6 @@ export const PhotoEssayHTML = () => {
 					design: ArticleDesign.PhotoEssay,
 					theme: ArticlePillar.Sport,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.PhotoEssay,
-					theme: ArticlePillar.Sport,
-				})}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -139,11 +123,6 @@ export const Padded = () => {
 					design: ArticleDesign.Analysis,
 					theme: ArticlePillar.Culture,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Analysis,
-					theme: ArticlePillar.Culture,
-				})}
 				padCaption={true}
 				credit="Credit text"
 				displayCredit={false}
@@ -167,11 +146,6 @@ export const WidthLimited = () => {
 					design: ArticleDesign.Review,
 					theme: ArticlePillar.Culture,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Review,
-					theme: ArticlePillar.Culture,
-				})}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}
@@ -195,11 +169,6 @@ export const Credited = () => {
 					design: ArticleDesign.MatchReport,
 					theme: ArticlePillar.Culture,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.MatchReport,
-					theme: ArticlePillar.Culture,
-				})}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={true}
@@ -223,11 +192,6 @@ export const Overlayed = () => {
 					design: ArticleDesign.Comment,
 					theme: ArticlePillar.Sport,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Showcase,
-					design: ArticleDesign.Comment,
-					theme: ArticlePillar.Sport,
-				})}
 				padCaption={false}
 				credit="Credit text"
 				displayCredit={false}

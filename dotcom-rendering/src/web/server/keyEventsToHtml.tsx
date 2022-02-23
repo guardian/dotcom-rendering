@@ -1,8 +1,6 @@
 import { renderToString } from 'react-dom/server';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
-import { decideDesign } from '../lib/decideDesign';
-import { decideDisplay } from '../lib/decideDisplay';
-import { decideTheme } from '../lib/decideTheme';
+import { decideFormat } from '../lib/decideFormat';
 
 /**
  * keyEventsToHtml is used by the /KeyEvents endpoint as part of keeping liveblogs live
@@ -15,16 +13,10 @@ export const keyEventsToHtml = ({
 	format: CAPIFormat,
 	filterKeyEvents,
 }: KeyEventsRequest): string => {
-	const format: ArticleFormat = {
-		display: decideDisplay(CAPIFormat),
-		design: decideDesign(CAPIFormat),
-		theme: decideTheme(CAPIFormat),
-	};
-
 	const html = renderToString(
 		<KeyEventsContainer
 			keyEvents={keyEvents}
-			format={format}
+			format={decideFormat(CAPIFormat)}
 			filterKeyEvents={filterKeyEvents}
 		/>,
 	);

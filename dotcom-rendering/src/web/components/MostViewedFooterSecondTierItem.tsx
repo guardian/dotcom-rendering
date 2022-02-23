@@ -94,7 +94,6 @@ export const MostViewedFooterSecondTierItem = ({
 		avatarUrl,
 		image,
 		format,
-		palette,
 		byline,
 		showByline,
 		ageWarning,
@@ -111,7 +110,6 @@ export const MostViewedFooterSecondTierItem = ({
 						<div css={titleStyles}>{title}</div>
 						<LinkHeadline
 							headlineText={headlineText}
-							palette={palette}
 							format={format}
 							size="small"
 							byline={showByline ? byline : undefined}

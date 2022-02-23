@@ -18,13 +18,13 @@ import { HeadlineByline } from './HeadlineByline';
 
 import { getZIndex } from '../lib/getZIndex';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	headlineString: string;
 	format: ArticleFormat;
 	byline?: string;
 	tags: TagType[];
-	palette: Palette;
 };
 
 const curly = (x: any) => x;
@@ -225,8 +225,8 @@ export const ArticleHeadline = ({
 	format,
 	tags,
 	byline,
-	palette,
 }: Props) => {
+	const palette = decidePalette(format);
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {

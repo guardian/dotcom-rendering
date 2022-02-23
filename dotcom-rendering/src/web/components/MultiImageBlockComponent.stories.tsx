@@ -1,6 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ContainerLayout } from './ContainerLayout';
-import { decidePalette } from '../lib/decidePalette';
 
 import { MultiImageBlockComponent } from './MultiImageBlockComponent';
 import { fourImages } from './MultiImageBlockComponent.mocks';
@@ -24,11 +23,6 @@ export const SingleImage = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				images={oneImage}
 			/>
 		</ContainerLayout>
@@ -47,11 +41,6 @@ export const SingleImageWithCaption = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				images={oneImage}
 				caption="This is the caption for a single image"
 			/>
@@ -71,11 +60,6 @@ export const SideBySide = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				images={twoImages}
 			/>
 		</ContainerLayout>
@@ -94,11 +78,6 @@ export const SideBySideWithCaption = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				images={twoImages}
 				caption="This is the caption for side by side"
 			/>
@@ -118,11 +97,6 @@ export const OneAboveTwo = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				images={threeImages}
 			/>
 		</ContainerLayout>
@@ -141,11 +115,6 @@ export const OneAboveTwoWithCaption = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				images={threeImages}
 				caption="This is the caption for one above two"
 			/>
@@ -165,11 +134,6 @@ export const GridOfFour = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				images={fourImages}
 			/>
 		</ContainerLayout>
@@ -188,11 +152,6 @@ export const GridOfFourWithCaption = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				images={fourImages}
 				caption="This is the caption for grid of four"
 			/>

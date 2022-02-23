@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 
 import { headline, textSans, until } from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	text: string;
-	palette: Palette;
 	format: ArticleFormat;
 	size: SmallHeadlineSize;
 };
@@ -82,8 +82,10 @@ const colourStyles = (palette: Palette) => {
 	`;
 };
 
-export const Byline = ({ text, palette, format, size }: Props) => (
-	<span css={[bylineStyles(size, format), colourStyles(palette)]}>
+export const Byline = ({ text, format, size }: Props) => (
+	<span
+		css={[bylineStyles(size, format), colourStyles(decidePalette(format))]}
+	>
 		{text}
 	</span>
 );

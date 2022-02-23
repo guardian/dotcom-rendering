@@ -3,7 +3,6 @@ import { render } from '@testing-library/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { Contributor } from './Contributor';
-import { decidePalette } from '../lib/decidePalette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
 describe('Contributor', () => {
@@ -17,7 +16,6 @@ describe('Contributor', () => {
 		const { container } = render(
 			<Contributor
 				format={format}
-				palette={decidePalette(format)}
 				author={{ byline: 'Observer writers' }}
 				tags={[
 					{
@@ -44,7 +42,6 @@ describe('Contributor', () => {
 		const { container } = render(
 			<Contributor
 				format={format}
-				palette={decidePalette(format)}
 				author={{ byline: 'Observer writers' }}
 				tags={[
 					{
