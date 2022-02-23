@@ -317,7 +317,6 @@ export const renderElement = ({
 				true,
 				<ImageBlockComponent
 					format={format}
-					palette={palette}
 					key={index}
 					element={element}
 					hideCaption={hideCaption}
@@ -421,7 +420,6 @@ export const renderElement = ({
 				true,
 				<MultiImageBlockComponent
 					format={format}
-					palette={palette}
 					key={index}
 					images={element.images}
 					caption={element.caption}
