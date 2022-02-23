@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 
-import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import {
-	getWeeklyArticleHistory,
-	incrementWeeklyArticleCount,
-} from '@guardian/support-dotcom-components';
-import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
@@ -24,8 +19,6 @@ import { decideDesign } from '../lib/decideDesign';
 import { useOnce } from '../lib/useOnce';
 
 import { incrementAlreadyVisited } from '../lib/alreadyVisited';
-import { incrementDailyArticleCount } from '../lib/dailyArticleCount';
-import { hasOptedOutOfArticleCount } from '../lib/contributions';
 import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 
@@ -46,38 +39,11 @@ export const App = ({ CAPI }: Props) => {
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 
-	const [asyncArticleCount, setAsyncArticleCount] =
-		useState<Promise<WeeklyArticleHistory | undefined>>();
-
 	const ophanRecord = getOphanRecordFunction();
 
 	useEffect(() => {
 		incrementAlreadyVisited();
 	}, []);
-
-	// Log an article view using the Slot Machine client lib
-	// This function must be called once per article serving.
-	// We should monitor this function call to ensure it only happens within an
-	// article pages when other pages are supported by DCR.
-	useEffect(() => {
-		const incrementArticleCountsIfConsented = async () => {
-			const hasOptedOut = await hasOptedOutOfArticleCount();
-			if (!hasOptedOut) {
-				incrementDailyArticleCount();
-				incrementWeeklyArticleCount(
-					storage.local,
-					CAPI.pageId,
-					CAPI.config.keywordIds.split(','),
-				);
-			}
-		};
-
-		setAsyncArticleCount(
-			incrementArticleCountsIfConsented().then(() =>
-				getWeeklyArticleHistory(storage.local),
-			),
-		);
-	}, [CAPI.pageId, CAPI.config.keywordIds]);
 
 	useEffect(() => {
 		// Used internally only, so only import each function on demand
@@ -281,7 +247,8 @@ export const App = ({ CAPI }: Props) => {
 					brazeMessages={brazeMessages}
 					idApiUrl={CAPI.config.idApiUrl}
 					stage={CAPI.stage}
-					asyncArticleCount={asyncArticleCount}
+					pageId={CAPI.pageId}
+					keywordsId={CAPI.config.keywordIds}
 				/>
 			</Portal>
 			<Portal rootId="sign-in-gate">
@@ -315,7 +282,6 @@ export const App = ({ CAPI }: Props) => {
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
 					brazeMessages={brazeMessages}
-					asyncArticleCount={asyncArticleCount}
 					contentType={CAPI.contentType}
 					sectionName={CAPI.sectionName}
 					section={CAPI.config.section}
@@ -328,6 +294,8 @@ export const App = ({ CAPI }: Props) => {
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 					idApiUrl={CAPI.config.idApiUrl}
 					switches={CAPI.config.switches}
+					pageId={CAPI.pageId}
+					keywordsId={CAPI.config.keywordIds}
 				/>
 			</Portal>
 		</React.StrictMode>

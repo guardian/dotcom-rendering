@@ -2,6 +2,7 @@ import type {
 	Callback,
 	CMP,
 } from '@guardian/consent-management-platform/dist/types';
+import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { WindowGuardianConfig } from './src/model/window-guardian';
 import { ReaderRevenueDevUtils } from './src/web/lib/readerRevenueDevUtils';
 
@@ -47,6 +48,7 @@ declare global {
 			};
 			readerRevenue: ReaderRevenueDevUtils;
 			gaPath: string;
+			articleCount: WeeklyArticleHistory | undefined;
 		};
 		GoogleAnalyticsObject: string;
 		ga: UniversalAnalytics.ga | null;
