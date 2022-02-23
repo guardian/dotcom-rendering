@@ -1,6 +1,7 @@
 import { cmpIframe } from '../../lib/cmpIframe';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
+import { reject } from 'lodash';
 
 const interceptPlayEvent = (id) => {
 	return cy.intercept(
@@ -21,11 +22,64 @@ const interceptPlayEvent = (id) => {
 	);
 };
 
+const parseCustParams = (custParamsString) => {
+	const custParams = decodeURIComponent(custParamsString);
+	const custParamsItems = custParams.split('&');
+	return custParamsItems.reduce((newParams, cpi) => {
+		const [key, value] = cpi.split('=');
+		if (value.includes(',')) {
+			newParams[key] = value.split(',').map(decodeURIComponent);
+		} else {
+			newParams[key] = decodeURIComponent(value);
+		}
+		return newParams;
+	}, {});
+};
+
+const interceptYouTubeEmbed = ({ videoId, adUnit, pageUrl, rejectAll }) => {
+	return cy.intercept(
+		{
+			url: `https://www.youtube.com/embed/${videoId}?**`,
+		},
+		function (req) {
+			// https://guardian.github.io/commercial-request-parser/ is useful to parse YouTube requests
+			const url = new URL(req.url);
+			const embedConfig = JSON.parse(
+				url.searchParams.get('embed_config'),
+			);
+			const adsConfig = embedConfig.adsConfig;
+			const adTagParameters = adsConfig.adTagParameters;
+			const custParams = parseCustParams(adTagParameters.cust_params);
+			// check consent related properties
+			// cmpGdpr = consentState.tcfv2.gdprApplies
+			expect(adTagParameters.cmpGdpr).to.equal(1);
+			// cmpVcd = consentState.tcfv2.tcString
+			expect(adTagParameters.cmpVcd).to.not.be.undefined;
+			if (rejectAll) {
+				// user has NOT consented to all purposes
+				expect(adsConfig.nonPersonalizedAd).to.equal(true);
+				// cmpGvcd = consentState.tcfv2.addtlConsent
+				expect(adTagParameters.cmpGvcd).to.equal('1~');
+			} else {
+				// user has consented to all purposes
+				expect(adsConfig.nonPersonalizedAd).to.equal(false);
+				// cmpGvcd = consentState.tcfv2.addtlConsent
+				expect(adTagParameters.cmpGvcd).to.not.be.undefined;
+			}
+			// check adunit to check adTagParameters
+			expect(adTagParameters.iu).to.equal(adUnit);
+			// check url to check custParams
+			expect(custParams.url).to.equal(pageUrl);
+		},
+	);
+};
+
 describe('YouTube Atom', function () {
 	beforeEach(function () {
 		storage.local.set('gu.geo.override', 'GB');
 	});
 
+	// eslint-disable-next-line mocha/no-exclusive-tests
 	it('plays main media videos', function () {
 		cy.visit(
 			'/Article?url=https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
@@ -54,10 +108,21 @@ describe('YouTube Atom', function () {
 			'gu-video-youtube-2b33a7b7-e639-4232-9ecd-0fb920fa8147',
 		).as('ophanCall');
 
+		// Listen for the YouTube embed call made when the video is played
+		interceptYouTubeEmbed({
+			videoId: 'S0CE1n-R3OY',
+			adUnit: '/59666047/theguardian.com/uk-news/article/ng',
+			pageUrl:
+				'/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
+			rejectAll: false,
+		}).as('youtubeEmbed');
+
 		// Play video
 		cy.get(overlaySelector).click();
 
 		cy.wait('@ophanCall', { timeout: 30000 });
+
+		cy.wait('@youtubeEmbed', { timeout: 30000 });
 
 		// Video is playing, overlay is gone
 		cy.get(overlaySelector).should('not.exist');
@@ -89,10 +154,21 @@ describe('YouTube Atom', function () {
 			'gu-video-youtube-2bc6f709-865e-49ae-b01b-8fc38eb4e9a7',
 		).as('ophanCall');
 
+		// Listen for the YouTube embed call made when the video is played
+		interceptYouTubeEmbed({
+			videoId: 'NtN-a6inr1E',
+			adUnit: '/59666047/theguardian.com/environment/article/ng',
+			pageUrl:
+				'/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
+			rejectAll: false,
+		}).as('youtubeEmbed');
+
 		// Play video
 		cy.get(overlaySelector).click();
 
 		cy.wait('@ophanCall', { timeout: 30000 });
+
+		cy.wait('@youtubeEmbed', { timeout: 30000 });
 
 		// // Video is playing, overlay is gone
 		cy.get(overlaySelector).should('not.exist');
@@ -123,10 +199,21 @@ describe('YouTube Atom', function () {
 			'gu-video-youtube-2bc6f709-865e-49ae-b01b-8fc38eb4e9a7',
 		).as('ophanCall');
 
+		// Listen for the YouTube embed call made when the video is played
+		interceptYouTubeEmbed({
+			videoId: 'NtN-a6inr1E',
+			adUnit: '/59666047/theguardian.com/environment/article/ng',
+			pageUrl:
+				'/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
+			rejectAll: true,
+		}).as('youtubeEmbed');
+
 		// Play video
 		cy.get(overlaySelector).click();
 
 		cy.wait('@ophanCall', { timeout: 30000 });
+
+		cy.wait('@youtubeEmbed', { timeout: 30000 });
 
 		// Video is playing, overlay is gone
 		cy.get(overlaySelector).should('not.exist');
