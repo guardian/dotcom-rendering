@@ -364,7 +364,6 @@ export const ArticleMeta = ({
 									author={author}
 									tags={tags}
 									format={format}
-									palette={palette}
 								/>
 							)}
 							<Dateline
