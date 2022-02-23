@@ -59,9 +59,9 @@ export const YoutubeBlockComponent: React.FC<{
 	};
 
 	if (adTargeting) {
-		attributes['data-param-embed_config'] = attributes[
-			'data-param-embed_config'
-		] = JSON.stringify(buildEmbedConfig(adTargeting));
+		attributes['data-param-embed_config'] = JSON.stringify(
+			buildEmbedConfig(adTargeting),
+		);
 	}
 
 	if (element.channelId) {
