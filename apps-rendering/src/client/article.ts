@@ -20,7 +20,7 @@ import setup from 'client/setup';
 import { createEmbedComponentFromProps } from 'components/embedWrapper';
 import FollowStatus from 'components/followStatus';
 import FooterContent from 'components/footerContent';
-import EpicContent from 'components/shared/epicContent';
+import EpicContent from 'components/epicContent';
 import { formatDate, formatLocal, isValidDate } from 'date';
 import { handleErrors, isObject } from 'lib';
 import {

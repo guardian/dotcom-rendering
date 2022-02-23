@@ -9,8 +9,8 @@ import {
 } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, none, withDefault } from '@guardian/types';
-import BylineCard from 'components/shared/bylineCard';
-import Card from 'components/shared/card';
+import BylineCard from 'components/bylineCard';
+import Card from 'components/card';
 import type { ResizedRelatedContent } from 'item';
 import { pipe } from 'lib';
 import type { FC } from 'react';
