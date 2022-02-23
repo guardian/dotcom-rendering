@@ -2,7 +2,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { partition } from '@guardian/types';
-import { withKnobs } from '@storybook/addon-knobs';
 import Standard from 'components/layout/standard';
 import { article, matchReport, review } from 'fixtures/item';
 import { renderAll } from 'renderer';
@@ -33,7 +32,7 @@ export const Review = (): React.ReactNode => {
 			{renderAll(
 				{
 					theme: ArticlePillar.Culture,
-					design: ArticleDesign.Standard,
+					design: ArticleDesign.Review,
 					display,
 				},
 				partition(review.body).oks,
@@ -61,7 +60,6 @@ MatchReport.story = { name: 'Match Report' };
 
 export default {
 	title: 'AR/Layouts/Standard',
-	decorators: [withKnobs],
 	parameters: {
 		layout: 'fullscreen',
 		chromatic: {
