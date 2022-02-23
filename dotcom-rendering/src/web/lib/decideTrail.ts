@@ -2,7 +2,6 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { decideDesign } from './decideDesign';
 import { decideTheme } from './decideTheme';
 import { decideDisplay } from './decideDisplay';
-import { decidePalette } from './decidePalette';
 
 export const decideTrail = (trail: CAPITrailType): TrailType => {
 	const format: ArticleFormat = trail.format
@@ -17,11 +16,8 @@ export const decideTrail = (trail: CAPITrailType): TrailType => {
 				design: ArticleDesign.Standard,
 		  };
 
-	const palette = decidePalette(format);
-
 	return {
 		...trail,
 		format,
-		palette,
 	};
 };

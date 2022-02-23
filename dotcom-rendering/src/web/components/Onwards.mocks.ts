@@ -7,7 +7,6 @@ import {
 
 import { decideDesign } from '../lib/decideDesign';
 import { decideTheme } from '../lib/decideTheme';
-import { decidePalette } from '../lib/decidePalette';
 import { decideDisplay } from '../lib/decideDisplay';
 
 const CAPITrails: CAPITrailType[] = [
@@ -166,12 +165,7 @@ const trails: TrailType[] = CAPITrails.map((thisTrail) => {
 			display,
 			theme,
 			design,
-		},
-		palette: decidePalette({
-			display,
-			theme,
-			design,
-		}),
+		}
 	};
 });
 
