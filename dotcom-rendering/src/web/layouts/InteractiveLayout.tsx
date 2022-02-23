@@ -36,9 +36,9 @@ import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
-import { DiscussionContainer } from '../components/DiscussionContainer.importable';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Nav } from '../components/Nav/Nav';
-import { LabsHeader } from '../components/LabsHeader';
+import { LabsHeader } from '../components/LabsHeader.importable';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { getAgeWarning } from '../../lib/age-warning';
@@ -55,6 +55,7 @@ import {
 import { Island } from '../components/Island';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -368,7 +369,9 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						borderColour={border.primary}
 						sectionId="labs-header"
 					>
-						<LabsHeader />
+						<Island deferUntil="idle">
+							<LabsHeader />
+						</Island>
 					</ElementContainer>
 				</Stuck>
 			)}
@@ -507,6 +510,11 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											CAPI.config.discussionApiUrl
 										}
 										shortUrlId={CAPI.config.shortUrlId}
+										ajaxUrl={CAPI.config.ajaxUrl}
+										showShareCount={
+											CAPI.config.switches
+												.serverShareCounts
+										}
 									/>
 								</div>
 							</GridItem>
@@ -609,31 +617,34 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						data-print-layout="hide"
 						element="section"
 					>
-						<Island clientOnly={true} deferUntil="visible">
-							<DiscussionContainer
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								format={format}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={
-									CAPI.config.switches.enableDiscussionSwitch
-								}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-							/>
-						</Island>
+						<DiscussionLayout
+							discussionApiUrl={CAPI.config.discussionApiUrl}
+							shortUrlId={CAPI.config.shortUrlId}
+							format={format}
+							discussionD2Uid={CAPI.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPI.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								CAPI.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={CAPI.isAdFreeUser}
+							shouldHideAds={CAPI.shouldHideAds}
+						/>
 					</ElementContainer>
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer
-						data-print-layout="hide"
-						sectionId="most-viewed-footer"
-						element="aside"
-					/>
+					<ElementContainer data-print-layout="hide" element="aside">
+						<MostViewedFooterLayout
+							format={format}
+							sectionName={CAPI.sectionName}
+							ajaxUrl={CAPI.config.ajaxUrl}
+							switches={CAPI.config.switches}
+							pageIsSensitive={CAPI.config.isSensitive}
+							isDev={CAPI.config.isDev}
+						/>
+					</ElementContainer>
 				)}
 
 				<ElementContainer

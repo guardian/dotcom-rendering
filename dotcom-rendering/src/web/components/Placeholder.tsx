@@ -46,9 +46,9 @@ export const Placeholder = ({
 		css={css`
 			flex-grow: 1;
 		`}
+		data-name="placeholder"
 	>
 		<div
-			data-name="placeholder"
 			css={css`
 				height: ${height}px;
 				width: ${width ? `${width}px` : '100%'};

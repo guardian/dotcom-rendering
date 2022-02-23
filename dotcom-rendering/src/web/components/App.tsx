@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 
-import { FocusStyleManager } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
@@ -10,12 +9,8 @@ import {
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { ShareCount } from './ShareCount';
-import { MostViewedFooter } from './MostViewed/MostViewedFooter/MostViewedFooter';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
-import { ContributionSlot } from './ContributionSlot';
-import { GetMatchNav } from './GetMatchNav';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from './SignInGate/SignInGateSelector';
 
@@ -33,15 +28,10 @@ import { getDailyArticleCount, incrementDailyArticleCount, DailyArticleCount } f
 import { hasOptedOutOfArticleCount } from '../lib/contributions';
 import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { updateIframeHeight } from '../browser/updateIframeHeight';
-import { ClickToView } from './ClickToView';
-import { LabsHeader } from './LabsHeader';
-import { EmbedBlockComponent } from './EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent';
 
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
-import { GetMatchTabs } from './GetMatchTabs';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
+import { Lazy } from './Lazy';
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -95,13 +85,6 @@ export const App = ({ CAPI }: Props) => {
 			incrementResult.then(() => getDailyArticleCount()),
 		);
 	}, [CAPI.pageId, CAPI.config.keywordIds]);
-
-	// Ensure the focus state of any buttons/inputs in any of the Source
-	// components are only applied when navigating via keyboard.
-	// READ: https://www.theguardian.design/2a1e5182b/p/6691bb-accessibility/t/32e9fb
-	useEffect(() => {
-		FocusStyleManager.onlyShowFocusOnTabs();
-	}, []);
 
 	useEffect(() => {
 		// Used internally only, so only import each function on demand
@@ -215,10 +198,6 @@ export const App = ({ CAPI }: Props) => {
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
 	);
-	const embeds = elementsByType<EmbedBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.EmbedBlockElement',
-	);
 	const interactiveElements = elementsByType<InteractiveBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.InteractiveBlockElement',
@@ -248,18 +227,6 @@ export const App = ({ CAPI }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			<HydrateOnce rootId="labs-header">
-				<LabsHeader />
-			</HydrateOnce>
-			{CAPI.config.switches.serverShareCounts && (
-				<Portal rootId="share-count-root">
-					<ShareCount
-						ajaxUrl={CAPI.config.ajaxUrl}
-						pageId={CAPI.pageId}
-						format={format}
-					/>
-				</Portal>
-			)}
 			{youTubeAtoms.map((youTubeAtom) => (
 				<HydrateOnce rootId={youTubeAtom.elementId}>
 					<YoutubeBlockComponent
@@ -293,33 +260,6 @@ export const App = ({ CAPI }: Props) => {
 				</HydrateInteractiveOnce>
 			))}
 
-			{CAPI.matchUrl && (
-				<Portal rootId="match-nav">
-					<GetMatchNav matchUrl={CAPI.matchUrl} />
-				</Portal>
-			)}
-			{CAPI.matchUrl && (
-				<Portal rootId="match-tabs">
-					<GetMatchTabs matchUrl={CAPI.matchUrl} format={format} />
-				</Portal>
-			)}
-			{/*
-				Rules for when to show <ContributionSlot />:
-				1. shouldHideReaderRevenue is false ("Prevent membership/contribution appeals" is not checked in Composer)
-				2. The article is not paid content
-				3. The reader is not signed in
-				4. An ad blocker has been detected
-
-				Note. We specifically say isSignedIn === false so that we prevent render until the cookie has been
-				checked to avoid flashing this content
-			*/}
-
-			<Portal rootId="top-right-ad-slot">
-				<ContributionSlot
-					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-					isPaidContent={CAPI.pageType.isPaidContent}
-				/>
-			</Portal>
 			{audioAtoms.map((audioAtom) => (
 				<HydrateOnce rootId={audioAtom.elementId}>
 					<AudioAtomWrapper
@@ -333,42 +273,6 @@ export const App = ({ CAPI }: Props) => {
 						aCastisEnabled={CAPI.config.switches.acast}
 						readerCanBeShownAds={!CAPI.isAdFreeUser}
 					/>
-				</HydrateOnce>
-			))}
-			{embeds.map((embed, index) => (
-				<HydrateOnce rootId={embed.elementId}>
-					{embed.safe ? (
-						<ClickToView
-							role={embed.role}
-							isTracking={embed.isThirdPartyTracking}
-							source={embed.source}
-							sourceDomain={embed.sourceDomain}
-						>
-							<EmbedBlockComponent
-								html={embed.html}
-								caption={embed.caption}
-							/>
-						</ClickToView>
-					) : (
-						<ClickToView
-							role={embed.role}
-							isTracking={embed.isThirdPartyTracking}
-							source={embed.source}
-							sourceDomain={embed.sourceDomain}
-							onAccept={() =>
-								updateIframeHeight(
-									`iframe[name="unsafe-embed-${index}"]`,
-								)
-							}
-						>
-							<UnsafeEmbedBlockComponent
-								key={embed.elementId}
-								html={embed.html}
-								alt={embed.alt || ''}
-								index={index}
-							/>
-						</ClickToView>
-					)}
 				</HydrateOnce>
 			))}
 			<Portal rootId="slot-body-end">
@@ -401,12 +305,19 @@ export const App = ({ CAPI }: Props) => {
 					pageViewId={pageViewId}
 				/>
 			</Portal>
-			<Portal rootId="most-viewed-footer">
-				<MostViewedFooter
-					format={format}
-					sectionName={CAPI.sectionName}
-					ajaxUrl={CAPI.config.ajaxUrl}
-				/>
+			<Portal rootId="reader-revenue-links-footer">
+				<Lazy margin={300}>
+					<ReaderRevenueLinks
+						urls={CAPI.nav.readerRevenueLinks.footer}
+						edition={CAPI.editionId}
+						dataLinkNamePrefix="footer : "
+						inHeader={false}
+						remoteHeaderEnabled={false}
+						pageViewId={pageViewId}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						ophanRecord={ophanRecord}
+					/>
+				</Lazy>
 			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner

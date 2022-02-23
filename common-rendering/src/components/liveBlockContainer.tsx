@@ -40,6 +40,7 @@ const LiveBlockContainer = ({
 	blockTitle,
 	blockFirstPublished,
 	blockLink,
+	isLiveUpdate,
 }: {
 	id: string;
 	children: React.ReactNode;
@@ -47,13 +48,20 @@ const LiveBlockContainer = ({
 	blockTitle?: string;
 	blockFirstPublished?: number;
 	blockLink: string;
+	isLiveUpdate?: boolean;
 }) => {
 	return (
 		<article
 			id={`block-${id}`}
 			key={id}
-			// This classname is used by Spacefinder as a possible candidate before which it can insert an inline ad
-			className="block"
+			/**
+			 *   Classnames
+			 *   ----------
+			 * - 'block' is used by Spacefinder as a possible candidate before which it can insert an inline ad
+			 * - 'pending' is used to mark blocks that have been inserted as part of a live update. We use this
+			 *    to animate the reveal as well as for enhancing twitter embeds
+			 */
+			className={`block ${isLiveUpdate && "pending"}`}
 			css={css`
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;

@@ -1,6 +1,5 @@
 import { getCookie } from '@guardian/libs';
-import type { Props as DiscussionProps } from 'src/web/components/Discussion';
-import { Discussion } from './Discussion';
+import { Discussion, Props as DiscussionProps } from './Discussion';
 import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
 
 /**

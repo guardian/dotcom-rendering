@@ -106,6 +106,13 @@ describe('Elements', function () {
 				'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
 			);
 
+			cy.scrollTo(0, 4500);
+
+			// Wait for hydration
+			cy.get('gu-island[name=EmbedBlockComponent]', { timeout: 30000 })
+				.first()
+				.should('have.attr', 'data-gu-ready', 'true');
+
 			cy.contains('hosted on wnyc.org');
 
 			cy.get('button[data-cy="click-to-view-button"]').click();

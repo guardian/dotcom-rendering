@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, RefObject } from 'react';
 import { css } from '@emotion/react';
 
 import { MostViewedRight } from './MostViewedRight';
+import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 
 type Props = {
 	limitItems?: number;
@@ -13,16 +14,19 @@ const HEIGHT_REQUIRED = 482 + 24 + 24;
 
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
-// Styling the data island root so it stretches to cover the full height available in the container.
-// Requires us to subtract the height of its sibling in the container (StickyAd).
-const stretchWrapperHeight = css`
-	height: ${`calc(100% - ${MOSTVIEWED_STICKY_HEIGHT}px)`};
-`;
-
 // Wrapping MostViewedRight so we can determine whether or not there's enough vertical space in the container to render it.
 export const MostViewedRightWrapper = ({ limitItems, isAdFreeUser }: Props) => {
+	const adBlockerDetected = useAdBlockInUse();
 	const bodyRef = useRef<HTMLDivElement>(null);
 	const [heightIsAvailable, setHeightIsAvailable] = useState<boolean>(false);
+
+	// Styling the data island root so it stretches to cover the full height available in the container.
+	// Requires us to subtract the height of its sibling in the container (StickyAd).
+	const stretchWrapperHeight = css`
+		height: ${adBlockerDetected
+			? `calc(100% - 300px)`
+			: `calc(100% - ${MOSTVIEWED_STICKY_HEIGHT}px)`};
+	`;
 
 	useEffect(() => {
 		const checkHeight = (ref: RefObject<HTMLDivElement>) => {
@@ -52,6 +56,7 @@ export const MostViewedRightWrapper = ({ limitItems, isAdFreeUser }: Props) => {
 				<MostViewedRight
 					limitItems={limitItems}
 					isAdFreeUser={isAdFreeUser}
+					adBlockerDetected={!!adBlockerDetected}
 				/>
 			) : null}
 		</div>

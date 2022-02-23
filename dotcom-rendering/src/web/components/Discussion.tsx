@@ -2,14 +2,9 @@ import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 
 import { joinUrl } from '@guardian/libs';
-import { space, from } from '@guardian/source-foundations';
+import { space } from '@guardian/source-foundations';
 import { App as Comments } from '@guardian/discussion-rendering';
-import { RightColumn } from './RightColumn';
-import { AdSlot } from './AdSlot';
-
-import { Flex } from './Flex';
 import { SignedInAs } from './SignedInAs';
-import { ContainerLayout } from './ContainerLayout';
 import { Hide } from './Hide';
 import { getCommentContext } from '../lib/getCommentContext';
 import { useDiscussion } from '../lib/useDiscussion';
@@ -22,8 +17,6 @@ export type Props = {
 	discussionD2Uid: string;
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
-	isAdFreeUser: boolean;
-	shouldHideAds: boolean;
 	user?: UserProfile;
 	expanded?: boolean;
 };
@@ -44,8 +37,6 @@ export const Discussion = ({
 	discussionD2Uid,
 	discussionApiClientHeader,
 	enableDiscussionSwitch,
-	isAdFreeUser,
-	shouldHideAds,
 	user,
 	expanded,
 }: Props) => {
@@ -119,17 +110,15 @@ export const Discussion = ({
 		}
 	}, [hasCommentsHash]);
 
-	const hideAd = isAdFreeUser || shouldHideAds;
-
 	return (
 		<>
-			<ContainerLayout
-				padSides={false}
-				padContent={false}
-				// If we're not hiding an advert stretch to the right
-				stretchRight={!hideAd}
-				leftContent={
-					// eslint-disable-next-line react/jsx-wrap-multilines
+			<Hide when="above" breakpoint="leftCol">
+				<div
+					data-cy="discussion"
+					css={css`
+						padding-bottom: ${space[2]}px;
+					`}
+				>
 					<SignedInAs
 						palette={palette}
 						enableDiscussionSwitch={enableDiscussionSwitch}
@@ -137,80 +126,31 @@ export const Discussion = ({
 						commentCount={commentCount}
 						isClosedForComments={isClosedForComments}
 					/>
+				</div>
+			</Hide>
+			<Comments
+				user={user}
+				baseUrl={discussionApiUrl}
+				pillar={format.theme}
+				initialPage={commentPage}
+				pageSizeOverride={commentPageSize}
+				isClosedForComments={
+					isClosedForComments || !enableDiscussionSwitch
 				}
-			>
-				<Flex>
-					<div
-						css={css`
-							${from.leftCol} {
-								padding-left: 10px;
-							}
-							width: 100%;
-							max-width: 100%;
-						`}
-						data-cy="discussion"
-					>
-						<Hide when="above" breakpoint="leftCol">
-							<div
-								css={css`
-									padding-bottom: ${space[2]}px;
-								`}
-							>
-								<SignedInAs
-									palette={palette}
-									enableDiscussionSwitch={
-										enableDiscussionSwitch
-									}
-									user={user}
-									commentCount={commentCount}
-									isClosedForComments={isClosedForComments}
-								/>
-							</div>
-						</Hide>
-						<Comments
-							user={user}
-							baseUrl={discussionApiUrl}
-							pillar={format.theme}
-							initialPage={commentPage}
-							pageSizeOverride={commentPageSize}
-							isClosedForComments={
-								isClosedForComments || !enableDiscussionSwitch
-							}
-							orderByOverride={commentOrderBy}
-							shortUrl={shortUrlId}
-							additionalHeaders={{
-								'D2-X-UID': discussionD2Uid,
-								'GU-Client': discussionApiClientHeader,
-							}}
-							expanded={isExpanded}
-							commentToScrollTo={hashCommentId}
-							onPermalinkClick={handlePermalink}
-							apiKey="dotcom-rendering"
-							onExpanded={(value) => {
-								handleExpanded(value);
-							}}
-						/>
-					</div>
-					<>
-						{!hideAd && (
-							<RightColumn>
-								<div
-									css={css`
-										position: static;
-										height: 100%;
-										padding-left: 20px;
-									`}
-								>
-									<AdSlot
-										position="comments"
-										display={format.display}
-									/>
-								</div>
-							</RightColumn>
-						)}
-					</>
-				</Flex>
-			</ContainerLayout>
+				orderByOverride={commentOrderBy}
+				shortUrl={shortUrlId}
+				additionalHeaders={{
+					'D2-X-UID': discussionD2Uid,
+					'GU-Client': discussionApiClientHeader,
+				}}
+				expanded={isExpanded}
+				commentToScrollTo={hashCommentId}
+				onPermalinkClick={handlePermalink}
+				apiKey="dotcom-rendering"
+				onExpanded={(value) => {
+					handleExpanded(value);
+				}}
+			/>
 		</>
 	);
 };

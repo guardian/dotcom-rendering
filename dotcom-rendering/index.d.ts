@@ -571,6 +571,15 @@ interface BlocksRequest {
 	videoDuration?: number;
 }
 
+/**
+ * KeyEventsRequest is the expected body format for POST requests made to /KeyEvents
+ */
+interface KeyEventsRequest {
+	keyEvents: Block[];
+	format: CAPIFormat;
+	filterKeyEvents: boolean;
+}
+
 interface BadgeType {
 	seriesTag: string;
 	imageUrl: string;
@@ -1029,6 +1038,7 @@ declare namespace JSX {
 		'gu-island': {
 			name: string;
 			deferUntil?: 'idle' | 'visible';
+			clientOnly?: boolean;
 			props: any;
 			children: React.ReactNode;
 		};

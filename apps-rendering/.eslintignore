@@ -2,3 +2,4 @@
 node_modules
 api-models
 webpack.config.ts
+cdk.out
