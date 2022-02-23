@@ -10,6 +10,9 @@ type Props = {
 	ajaxUrl: string;
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
+	switches: Switches;
+	onFirstPage: boolean;
+	webURL: string;
 };
 
 const isServer = typeof window === 'undefined';
@@ -17,13 +20,13 @@ const isServer = typeof window === 'undefined';
 /**
  * insert
  *
- * Takes html, parses and hydrates it, and then inserts the resulting blocks
- * at the top of the liveblog
+ * Takes html, parses and hydrates it, inserts the resulting blocks
+ * at the top of the liveblog, and then enhances any tweets
  *
  * @param {string} html The block html to be inserted
  * @returns void
  */
-function insert(html: string) {
+function insert(html: string, switches: Switches) {
 	// Create
 	// ------
 	const template = document.createElement('template');
@@ -37,21 +40,39 @@ function insert(html: string) {
 
 	// Insert
 	// ------
-	// Shouldn't we snaitise this html?
+	// Shouldn't we sanitise this html?
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
-	const maincontent = document.querySelector('#maincontent');
+	const maincontent = document.querySelector<HTMLElement>('#maincontent');
 	const latestBlock = document.querySelector('#maincontent :first-child');
 	if (!latestBlock || !maincontent) return;
 	maincontent.insertBefore(fragment, latestBlock);
+
+	// Enhance
+	// -----------
+	if (switches.enhanceTweets) {
+		const pendingBlocks = maincontent.querySelectorAll<HTMLElement>(
+			'article .pending.block',
+		);
+		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
+		twttr.ready((twitter) => {
+			twitter.widgets.load(Array.from(pendingBlocks));
+		});
+	}
 }
 
 /**
- * revealNewBlocks - style any blocks that have been inserted but are hidden such that
- * they are revealed
+ * reveal any blocks that have been inserted but are still hidden
  */
-function revealNewBlocks() {
-	console.log('revealNewBlocks');
+function revealPendingBlocks() {
+	const maincontent = document.querySelector<HTMLElement>('#maincontent');
+	const pendingBlocks = maincontent?.querySelectorAll<HTMLElement>(
+		'article .pending.block',
+	);
+	pendingBlocks?.forEach((block) => {
+		block.classList.add('reveal');
+		block.classList.remove('pending');
+	});
 }
 
 /**
@@ -115,6 +136,9 @@ export const Liveness = ({
 	ajaxUrl,
 	filterKeyEvents,
 	format,
+	switches,
+	onFirstPage,
+	webURL,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
@@ -125,7 +149,7 @@ export const Liveness = ({
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
-		refreshInterval: 15000,
+		refreshInterval: 15_000,
 		refreshWhenHidden: true,
 		// onSuccess runs (once) after every successful api call. This is useful because it
 		// allows us to avoid the problems of imperative code being executed multiple times
@@ -137,15 +161,15 @@ export const Liveness = ({
 		}) => {
 			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
 				// Always insert the new blocks in the dom (but hidden)
-				insert(data.html);
+				insert(data.html, switches);
 
 				if (lastUpdated) {
 					lastUpdated.setAttribute('dateTime', new Date().toString());
 					updateTimeElement(lastUpdated);
 				}
 
-				if (topOfBlogVisible() && document.hasFocus()) {
-					revealNewBlocks();
+				if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
+					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 				} else {
 					setShowToast(true);
@@ -166,12 +190,12 @@ export const Liveness = ({
 			numHiddenBlocks > 0 ? `(${numHiddenBlocks}) ${webTitle}` : webTitle;
 	}, [numHiddenBlocks, webTitle]);
 
-	if (topOfBlog) {
+	if (onFirstPage && topOfBlog) {
 		const observer = new window.IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting) {
 					entry.target.classList.add('in-viewport');
-					revealNewBlocks();
+					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 					setShowToast(false);
 					return;
@@ -199,12 +223,13 @@ export const Liveness = ({
 			// The blog was either hidden or has become visible
 			if (
 				// If we're returning to a blog that has pending blocks and the reader
-				// is at the top of the page then...
+				// is at the top of the first page then...
 				document.visibilityState === 'visible' &&
 				numHiddenBlocks > 0 &&
-				topOfBlogVisible()
+				topOfBlogVisible() &&
+				onFirstPage
 			) {
-				revealNewBlocks();
+				revealPendingBlocks();
 				setNumHiddenBlocks(0);
 				setShowToast(false);
 			}
@@ -218,16 +243,20 @@ export const Liveness = ({
 				handleVisibilityChange,
 			);
 		};
-	}, [numHiddenBlocks]);
+	}, [numHiddenBlocks, onFirstPage]);
 
 	const handleToastClick = () => {
-		setShowToast(false);
-		document.getElementById('maincontent')?.scrollIntoView({
-			behavior: 'smooth',
-		});
-		window.location.href = '#maincontent';
-		revealNewBlocks();
-		setNumHiddenBlocks(0);
+		if (onFirstPage) {
+			setShowToast(false);
+			document.getElementById('maincontent')?.scrollIntoView({
+				behavior: 'smooth',
+			});
+			window.location.href = '#maincontent';
+			revealPendingBlocks();
+			setNumHiddenBlocks(0);
+		} else {
+			window.location.href = `${webURL}#maincontent`;
+		}
 	};
 
 	if (showToast) {

@@ -13,6 +13,10 @@ interface Props {
 const styles = css`
 	margin: ${remSpace[4]} 0;
 
+	iframe {
+		min-height: 60px;
+	}
+
 	${darkModeCss`
         background: white;
         padding: ${remSpace[3]};
@@ -29,7 +33,7 @@ const EmailSignupEmbed: FC<Props> = ({ embed }) => (
 		<iframe
 			src={embed.src}
 			className="js-email-signup"
-			height="52"
+			height="60"
 			title={withDefault('Email newsletter signup embed')(embed.alt)}
 		></iframe>
 		{maybeRender(embed.caption, (caption) => (

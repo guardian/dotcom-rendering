@@ -7,6 +7,7 @@ import {
 	renderArticleJson,
 	renderBlocks,
 	renderInteractive,
+	renderKeyEvents,
 	renderPerfTest as renderArticlePerfTest,
 } from '../web/server';
 import {
@@ -83,6 +84,7 @@ export const prodServer = () => {
 	app.post('/Interactive', logRenderTime, renderInteractive);
 	app.post('/AMPInteractive', logRenderTime, renderAMPArticle);
 	app.post('/Blocks', logRenderTime, renderBlocks);
+	app.post('/KeyEvents', logRenderTime, renderKeyEvents);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get('/Article', logRenderTime, async (req: Request, res: Response) => {
