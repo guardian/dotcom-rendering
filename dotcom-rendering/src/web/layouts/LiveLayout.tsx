@@ -504,7 +504,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							leftContent={
 								<ArticleTitle
 									format={format}
-									palette={palette}
 									tags={CAPI.tags}
 									sectionLabel={CAPI.sectionLabel}
 									sectionUrl={CAPI.sectionUrl}
@@ -520,7 +519,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<Hide above="leftCol">
 								<ArticleTitle
 									format={format}
-									palette={palette}
 									tags={CAPI.tags}
 									sectionLabel={CAPI.sectionLabel}
 									sectionUrl={CAPI.sectionUrl}
@@ -547,7 +545,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<GridItem area="title">
 									<ArticleTitle
 										format={format}
-										palette={palette}
 										tags={CAPI.tags}
 										sectionLabel={CAPI.sectionLabel}
 										sectionUrl={CAPI.sectionUrl}
@@ -573,7 +570,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													}
 													tags={CAPI.tags}
 													byline={CAPI.author.byline}
-													palette={palette}
 												/>
 											)}
 											{age && (
@@ -642,7 +638,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										<ArticleMeta
 											branding={branding}
 											format={format}
-											palette={palette}
 											pageId={CAPI.pageId}
 											webTitle={CAPI.webTitle}
 											author={CAPI.author}
@@ -716,7 +711,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									<div css={maxWidth}>
 										<MainMedia
 											format={format}
-											palette={palette}
 											elements={CAPI.mainMediaElements}
 											adTargeting={adTargeting}
 											host={host}
@@ -751,7 +745,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											<ArticleMeta
 												branding={branding}
 												format={format}
-												palette={palette}
 												pageId={CAPI.pageId}
 												webTitle={CAPI.webTitle}
 												author={CAPI.author}
@@ -933,7 +926,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									<div css={maxWidth}>
 										<MainMedia
 											format={format}
-											palette={palette}
 											elements={CAPI.mainMediaElements}
 											adTargeting={adTargeting}
 											host={host}
@@ -966,7 +958,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											<ArticleMeta
 												branding={branding}
 												format={format}
-												palette={palette}
 												pageId={CAPI.pageId}
 												webTitle={CAPI.webTitle}
 												author={CAPI.author}

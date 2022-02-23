@@ -70,7 +70,6 @@ const chooseWrapper = (format: ArticleFormat) => {
 
 export const MainMedia: React.FC<{
 	format: ArticleFormat;
-	palette: Palette;
 	elements: CAPIElement[];
 	hideCaption?: boolean;
 	adTargeting?: AdTargeting;
@@ -82,7 +81,6 @@ export const MainMedia: React.FC<{
 }> = ({
 	elements,
 	format,
-	palette,
 	hideCaption,
 	adTargeting,
 	starRating,
@@ -96,7 +94,6 @@ export const MainMedia: React.FC<{
 			{elements.map((element, index) =>
 				renderArticleElement({
 					format,
-					palette,
 					element,
 					adTargeting,
 					ajaxUrl,

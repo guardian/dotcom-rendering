@@ -2,7 +2,6 @@ import { ImageComponent } from './ImageComponent';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	element: ImageBlockElement;
 	hideCaption?: boolean;
 	title?: string;
@@ -13,7 +12,6 @@ type Props = {
 
 export const ImageBlockComponent = ({
 	format,
-	palette,
 	element,
 	hideCaption,
 	title,
@@ -26,7 +24,6 @@ export const ImageBlockComponent = ({
 		<ImageComponent
 			element={element}
 			format={format}
-			palette={palette}
 			hideCaption={hideCaption}
 			isMainMedia={isMainMedia}
 			starRating={starRating}

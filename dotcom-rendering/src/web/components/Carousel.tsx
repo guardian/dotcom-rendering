@@ -363,7 +363,6 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 		return {
 			...trail,
 			format,
-			palette: decidePalette(format),
 		};
 	});
 };

@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 
 import { MaintainAspectRatio } from './MaintainAspectRatio';
 import { Caption } from './Caption';
-import { decidePalette } from '../lib/decidePalette';
 import { ClickToView } from './ClickToView';
 
 type Props = {
@@ -51,8 +50,6 @@ export const MapEmbedBlockComponent = ({
 		margin-bottom: ${hasCaption ? `0px` : `6px`};
 	`;
 
-	const palette = decidePalette(format);
-
 	return (
 		<ClickToView
 			role={role}
@@ -75,7 +72,6 @@ export const MapEmbedBlockComponent = ({
 					<Caption
 						captionText={caption}
 						format={format}
-						palette={palette}
 						credit={credit}
 					/>
 				)}

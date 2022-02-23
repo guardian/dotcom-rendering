@@ -12,10 +12,10 @@ import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { Hide } from './Hide';
 import { Badge } from './Badge';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	tags: TagType[];
 	sectionLabel: string;
 	sectionUrl: string;
@@ -166,7 +166,6 @@ const immersiveTitleBadgeStyle = (palette: Palette) => css`
 
 export const SeriesSectionLink = ({
 	format,
-	palette,
 	tags,
 	sectionLabel,
 	sectionUrl,
@@ -185,6 +184,8 @@ export const SeriesSectionLink = ({
 	const hasSeriesTag = tag && tag.type === 'Series';
 
 	const isLabs = format.theme === ArticleSpecial.Labs;
+
+	const palette = decidePalette(format);
 
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
