@@ -1,14 +1,46 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import { from, neutral } from '@guardian/source-foundations';
+import { SvgCross } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { useHasBeenSeen } from '../lib/useHasBeenSeen';
 
 const buttonStyles = css`
 	position: absolute;
-	left: 0;
+	left: -36px;
 	top: 0;
 	${getZIndex('sticky-video-button')};
+	background-color: ${neutral[7]};
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	transition: transform 0.2s; /* Animation */
+
+	&:hover {
+		transform: scale(1.2);
+	}
+
+	svg {
+		fill: ${neutral[100]};
+	}
+`;
+
+const hoverAreaStyles = css`
+	position: absolute;
+	left: -40px;
+	top: 0;
+	bottom: 0;
+	right: 100%;
+
+	&:hover button {
+		display: flex;
+	}
 `;
 
 const stickyStyles = css`
@@ -26,10 +58,17 @@ const stickyStyles = css`
 
 	position: fixed;
 	bottom: 20px;
-	width: 300px;
-	height: 169px;
+	width: 216px;
 	${getZIndex('sticky-video')};
 	animation: fade-in-up 1s ease forwards;
+
+	&:hover button {
+		display: flex;
+	}
+
+	${from.tablet} {
+		width: 300px;
+	}
 
 	figcaption {
 		display: none;
@@ -67,12 +106,13 @@ export const StickyVideo = ({ isPlaying, height, children }: Props) => {
 	return (
 		<div ref={setRef} css={isSticky && stickyContainerStyles(height)}>
 			<div css={isSticky && stickyStyles}>
+				<span css={hoverAreaStyles} />
 				{isSticky && (
 					<button
 						css={buttonStyles}
 						onClick={() => setIsSticky(false)}
 					>
-						Unstick
+						<SvgCross size="medium" />
 					</button>
 				)}
 				{children}
