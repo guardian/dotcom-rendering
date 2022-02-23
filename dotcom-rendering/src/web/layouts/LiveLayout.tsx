@@ -231,7 +231,6 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 20px;
 					grid-template-columns: 220px 700px;
 					grid-template-areas:
-						'info		matchtabs'
 						'info		media'
 						'info		filter'
 						'info		body';
@@ -241,7 +240,6 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 					grid-column-gap: 20px;
 					grid-template-columns: 220px 700px 1fr;
 					grid-template-areas:
-						'info  		 matchtabs right-column'
 						'info  		 media     right-column'
 						'info		 filter    right-column'
 						'info		 body      right-column';
@@ -250,7 +248,6 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 				${until.desktop} {
 					grid-template-columns: 700px; /* Main content */
 					grid-template-areas:
-						'matchtabs'
 						'media'
 						'info'
 						'filter'
@@ -260,7 +257,6 @@ const LiveGridSport = ({ children }: { children: React.ReactNode }) => (
 				${until.tablet} {
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
-						'matchtabs'
 						'media'
 						'info'
 						'filter'
@@ -683,21 +679,19 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										/>
 									</Island>
 								</GridItem>
-								<GridItem area="matchtabs" element="aside">
-									<div css={maxWidth}>
-										<Island
-											clientOnly={true}
-											placeholderHeight={40}
-										>
-											<GetMatchTabs
-												matchUrl={CAPI.matchUrl}
-												format={format}
-											/>
-										</Island>
-									</div>
-								</GridItem>
 								<GridItem area="media">
 									<div css={maxWidth}>
+										{CAPI.matchUrl && (
+											<Island
+												clientOnly={true}
+												placeholderHeight={40}
+											>
+												<GetMatchTabs
+													matchUrl={CAPI.matchUrl}
+													format={format}
+												/>
+											</Island>
+										)}
 										<MainMedia
 											format={format}
 											elements={CAPI.mainMediaElements}
