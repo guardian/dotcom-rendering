@@ -10,9 +10,8 @@ export const VideoVimeoBlockComponent: React.FC<{
 	// which is used in composer.
 	// see: https://github.com/guardian/dotcom-rendering/issues/4057
 	// We should remove this once ☝️ is fixed.
-	const url = element.url === '' ? (element.originalUrl ?? '') : element.url;
+	const url = element.url === '' ? element.originalUrl ?? '' : element.url;
 	const vimeoId = getIdFromUrl(url, '(\\d+)($|\\/)', true);
-
 
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>
@@ -26,4 +25,3 @@ export const VideoVimeoBlockComponent: React.FC<{
 		</Caption>
 	);
 };
-
