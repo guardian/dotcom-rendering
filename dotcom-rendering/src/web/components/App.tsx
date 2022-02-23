@@ -24,7 +24,11 @@ import { decideDesign } from '../lib/decideDesign';
 import { useOnce } from '../lib/useOnce';
 
 import { incrementAlreadyVisited } from '../lib/alreadyVisited';
-import { getDailyArticleCount, incrementDailyArticleCount, DailyArticleCount } from '../lib/dailyArticleCount';
+import {
+	getDailyArticleCount,
+	incrementDailyArticleCount,
+	DailyArticleCount,
+} from '../lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '../lib/contributions';
 import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 import { buildAdTargeting } from '../../lib/ad-targeting';
