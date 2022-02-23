@@ -20,10 +20,10 @@ const buttonStyles = css`
 	display: none;
 	justify-content: center;
 	align-items: center;
-	transition: transform 0.2s; /* Animation */
+	transition: transform 0.2s;
 
 	&:hover {
-		transform: scale(1.2);
+		transform: scale(1.15);
 	}
 
 	svg {
@@ -31,12 +31,14 @@ const buttonStyles = css`
 	}
 `;
 
+// This extended hover area allows users
+// to click the close video button more easily
 const hoverAreaStyles = css`
 	position: absolute;
-	left: -40px;
 	top: 0;
 	bottom: 0;
-	right: 100%;
+	left: -36px;
+	width: 36px;
 
 	&:hover button {
 		display: flex;
