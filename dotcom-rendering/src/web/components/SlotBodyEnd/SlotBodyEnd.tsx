@@ -98,7 +98,8 @@ export const SlotBodyEnd = ({
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
-	const [asyncArticleCount, setAsyncArticleCount] = useState<Promise<WeeklyArticleHistory | undefined>>();
+	const [asyncArticleCount, setAsyncArticleCount] =
+		useState<Promise<WeeklyArticleHistory | undefined>>();
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -131,7 +132,9 @@ export const SlotBodyEnd = ({
 			idApiUrl,
 			stage,
 			// useOnce makes sure that all deps aren't undefined making it safe to cast this.
-			asyncArticleCount: asyncArticleCount as Promise<WeeklyArticleHistory | undefined>,
+			asyncArticleCount: asyncArticleCount as Promise<
+				WeeklyArticleHistory | undefined
+			>,
 			browserId: browserId || undefined,
 		});
 		const brazeArticleContext: BrazeArticleContext = {

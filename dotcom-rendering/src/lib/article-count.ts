@@ -1,7 +1,10 @@
-import { storage } from "@guardian/libs";
-import { getWeeklyArticleHistory, incrementWeeklyArticleCount } from "@guardian/support-dotcom-components";
-import { hasOptedOutOfArticleCount } from "../web/lib/contributions";
-import { incrementDailyArticleCount } from "../web/lib/dailyArticleCount";
+import { storage } from '@guardian/libs';
+import {
+	getWeeklyArticleHistory,
+	incrementWeeklyArticleCount,
+} from '@guardian/support-dotcom-components';
+import { hasOptedOutOfArticleCount } from '../web/lib/contributions';
+import { incrementDailyArticleCount } from '../web/lib/dailyArticleCount';
 
 // Log an article view using the Slot Machine client lib
 // We should monitor this function call to ensure it only happens within an
@@ -23,4 +26,4 @@ export const getArticleCount = async (pageId: string, keywordIds: string) => {
 	}
 
 	return window.guardian.articleCount;
-}
+};

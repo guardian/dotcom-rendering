@@ -212,7 +212,8 @@ export const StickyBottomBanner = ({
 	const asyncCountryCode = getLocaleCode();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
-	const [asyncArticleCount, setAsyncArticleCount] = useState<Promise<WeeklyArticleHistory | undefined>>();
+	const [asyncArticleCount, setAsyncArticleCount] =
+		useState<Promise<WeeklyArticleHistory | undefined>>();
 	const signInGateWillShow = useSignInGateWillShow({
 		isSignedIn,
 		contentType,
