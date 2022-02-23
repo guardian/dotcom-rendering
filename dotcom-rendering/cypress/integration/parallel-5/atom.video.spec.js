@@ -21,20 +21,6 @@ const interceptPlayEvent = (id) => {
 	);
 };
 
-const parseCustParams = (custParamsString) => {
-	const custParams = decodeURIComponent(custParamsString);
-	const custParamsItems = custParams.split('&');
-	return custParamsItems.reduce((newParams, cpi) => {
-		const [key, value] = cpi.split('=');
-		if (value.includes(',')) {
-			newParams[key] = value.split(',').map(decodeURIComponent);
-		} else {
-			newParams[key] = decodeURIComponent(value);
-		}
-		return newParams;
-	}, {});
-};
-
 const interceptYouTubeEmbed = ({ videoId, adUnit, pageUrl, rejectAll }) => {
 	return cy.intercept(
 		{
@@ -48,7 +34,10 @@ const interceptYouTubeEmbed = ({ videoId, adUnit, pageUrl, rejectAll }) => {
 			);
 			const adsConfig = embedConfig.adsConfig;
 			const adTagParameters = adsConfig.adTagParameters;
-			const custParams = parseCustParams(adTagParameters.cust_params);
+			// cust_params is double encoded
+			const custParams = new URLSearchParams(
+				decodeURIComponent(adTagParameters.cust_params),
+			);
 			// check consent related properties
 			// cmpGdpr = consentState.tcfv2.gdprApplies
 			expect(adTagParameters.cmpGdpr, 'check GDPR applies').to.equal(1);
@@ -81,7 +70,7 @@ const interceptYouTubeEmbed = ({ videoId, adUnit, pageUrl, rejectAll }) => {
 			// check adunit
 			expect(adTagParameters.iu, 'check adUnit').to.equal(adUnit);
 			// check url to check custParams is present
-			expect(custParams.url, 'check url').to.equal(pageUrl);
+			expect(custParams.get('url'), 'check url').to.equal(pageUrl);
 		},
 	);
 };
