@@ -1,7 +1,6 @@
 import { cmpIframe } from '../../lib/cmpIframe';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
-import { reject } from 'lodash';
 
 const interceptPlayEvent = (id) => {
 	return cy.intercept(
@@ -52,24 +51,37 @@ const interceptYouTubeEmbed = ({ videoId, adUnit, pageUrl, rejectAll }) => {
 			const custParams = parseCustParams(adTagParameters.cust_params);
 			// check consent related properties
 			// cmpGdpr = consentState.tcfv2.gdprApplies
-			expect(adTagParameters.cmpGdpr).to.equal(1);
+			expect(adTagParameters.cmpGdpr, 'check GDPR applies').to.equal(1);
 			// cmpVcd = consentState.tcfv2.tcString
-			expect(adTagParameters.cmpVcd).to.not.be.undefined;
+			expect(adTagParameters.cmpVcd, 'check TCFV2 tcString').to.not.be
+				.undefined;
 			if (rejectAll) {
 				// user has NOT consented to all purposes
-				expect(adsConfig.nonPersonalizedAd).to.equal(true);
+				expect(
+					adsConfig.nonPersonalizedAd,
+					'check nonPersonalisation is TRUE',
+				).to.equal(true);
 				// cmpGvcd = consentState.tcfv2.addtlConsent
-				expect(adTagParameters.cmpGvcd).to.equal('1~');
+				expect(
+					adTagParameters.cmpGvcd,
+					'check TCFV2 additional consent',
+				).to.equal('1~');
 			} else {
 				// user has consented to all purposes
-				expect(adsConfig.nonPersonalizedAd).to.equal(false);
+				expect(
+					adsConfig.nonPersonalizedAd,
+					'check nonPersonalisation is FALSE',
+				).to.equal(false);
 				// cmpGvcd = consentState.tcfv2.addtlConsent
-				expect(adTagParameters.cmpGvcd).to.not.be.undefined;
+				expect(
+					adTagParameters.cmpGvcd,
+					'check TCFV2 additional consent',
+				).to.not.be.undefined;
 			}
-			// check adunit to check adTagParameters
-			expect(adTagParameters.iu).to.equal(adUnit);
-			// check url to check custParams
-			expect(custParams.url).to.equal(pageUrl);
+			// check adunit
+			expect(adTagParameters.iu, 'check adUnit').to.equal(adUnit);
+			// check url to check custParams is present
+			expect(custParams.url, 'check url').to.equal(pageUrl);
 		},
 	);
 };
@@ -79,7 +91,6 @@ describe('YouTube Atom', function () {
 		storage.local.set('gu.geo.override', 'GB');
 	});
 
-	// eslint-disable-next-line mocha/no-exclusive-tests
 	it('plays main media videos', function () {
 		cy.visit(
 			'/Article?url=https://www.theguardian.com/uk-news/2020/dec/04/edinburgh-hit-by-thundersnow-as-sonic-boom-wakes-residents',
