@@ -8,7 +8,7 @@ import Body from 'components/media/articleBody';
 import Series from 'components/media/articleSeries';
 import Byline from 'components/media/byline';
 import Tags from 'components/media/tags';
-import RelatedContent from 'components/shared/relatedContent';
+import RelatedContent from 'components/relatedContent';
 import Standfirst from 'components/standfirst';
 import HeaderMedia from 'headerMedia';
 import type { Item } from 'item';
