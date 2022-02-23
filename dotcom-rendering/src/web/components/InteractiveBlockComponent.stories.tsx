@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 
 import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { InteractiveBlockComponent } from './InteractiveBlockComponent';
+import { InteractiveBlockComponent } from './InteractiveBlockComponent.importable';
 import { Figure } from './Figure';
 import { TextBlockComponent } from './TextBlockComponent';
 
