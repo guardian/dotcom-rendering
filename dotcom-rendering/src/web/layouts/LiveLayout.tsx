@@ -56,6 +56,7 @@ import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
+import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -598,7 +599,18 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								/>
 							</GridItem>
 							<GridItem area="lastupdated">
-								<></>
+								<Hide until="desktop">
+									{CAPI.blocks.length &&
+										CAPI.blocks[0].blockLastUpdated && (
+											<ArticleLastUpdated
+												format={format}
+												lastUpdated={
+													CAPI.blocks[0]
+														.blockLastUpdated
+												}
+											/>
+										)}
+								</Hide>
 							</GridItem>
 							<GridItem area="lines">
 								<Hide from="desktop">
