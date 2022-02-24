@@ -91,16 +91,21 @@ export const YoutubeBlockComponent = ({
 	);
 
 	useEffect(() => {
-		try {
-			window.guCmpHotFix.onConsentChange((newConsent: ConsentState) => {
+		const defineConsentState = async () => {
+			const { onConsentChange } = await import(
+				'@guardian/consent-management-platform'
+			);
+			onConsentChange((newConsent: ConsentState) => {
 				setConsentState(newConsent);
 			});
-		} catch (error) {
+		};
+
+		defineConsentState().catch((error) => {
 			window.guardian.modules.sentry.reportError(
 				new Error(`Error: ${error}`),
 				'youtube-consent',
 			);
-		}
+		});
 	}, []);
 
 	const palette = decidePalette(format);
