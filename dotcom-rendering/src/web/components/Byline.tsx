@@ -8,6 +8,7 @@ type Props = {
 	text: string;
 	format: ArticleFormat;
 	size: SmallHeadlineSize;
+	isCard?: boolean;
 };
 
 const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
@@ -76,15 +77,18 @@ const bylineStyles = (size: SmallHeadlineSize, format: ArticleFormat) => {
 	}
 };
 
-const colourStyles = (palette: Palette) => {
+const colourStyles = (palette: Palette, isCard: Props['isCard']) => {
 	return css`
-		color: ${palette.text.cardByline};
+		color: ${isCard ? palette.text.cardByline : palette.text.byline};
 	`;
 };
 
-export const Byline = ({ text, format, size }: Props) => (
+export const Byline = ({ text, format, size, isCard }: Props) => (
 	<span
-		css={[bylineStyles(size, format), colourStyles(decidePalette(format))]}
+		css={[
+			bylineStyles(size, format),
+			colourStyles(decidePalette(format), isCard),
+		]}
 	>
 		{text}
 	</span>
