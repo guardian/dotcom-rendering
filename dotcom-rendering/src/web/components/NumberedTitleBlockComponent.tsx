@@ -1,9 +1,7 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
-import { decideDisplay } from '../lib/decideDisplay';
-import { decideDesign } from '../lib/decideDesign';
-import { decideTheme } from '../lib/decideTheme';
+import { decideFormat } from '../lib/decideFormat';
 
 type Props = {
 	position: number;
@@ -34,12 +32,7 @@ export const NumberedTitleBlockComponent = ({
 	html,
 	format,
 }: Props) => {
-	const dcrFormat = {
-		display: decideDisplay(format),
-		design: decideDesign(format),
-		theme: decideTheme(format),
-	};
-	const palette = decidePalette(dcrFormat);
+	const palette = decidePalette(decideFormat(format));
 	return (
 		<div
 			css={css`

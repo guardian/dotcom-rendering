@@ -1,3 +1,4 @@
+// @ts-check
 const path = require('path');
 const chalk = require('chalk');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
@@ -15,6 +16,7 @@ console.log(
 );
 
 module.exports = {
+	/** @type {import('webpack-dev-server').Configuration} */
 	devServer: {
 		compress: false,
 		hot: false,
@@ -41,7 +43,7 @@ module.exports = {
 			},
 		},
 		setupMiddlewares: (middlewares, devServer) => {
-			if (!devServer) {
+			if (!devServer?.app) {
 				throw new Error('webpack-dev-server is not defined');
 			}
 
@@ -61,7 +63,6 @@ module.exports = {
 						__dirname,
 						'..',
 						'..',
-						'..',
 						'src',
 						'server',
 						'dev-index.html',
@@ -72,6 +73,7 @@ module.exports = {
 			// webpack-hot-server-middleware needs to run after webpack-dev-middleware
 			middlewares.push({
 				name: 'server',
+				// @ts-expect-error -- it’s a MultiCompiler
 				middleware: webpackHotServerMiddleware(devServer.compiler, {
 					chunkName: 'frontend.server',
 				}),

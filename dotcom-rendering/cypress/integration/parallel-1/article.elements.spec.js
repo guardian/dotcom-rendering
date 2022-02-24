@@ -109,7 +109,7 @@ describe('Elements', function () {
 			cy.scrollTo(0, 4500);
 
 			// Wait for hydration
-			cy.get('gu-island[name=EmbedBlockComponent]')
+			cy.get('gu-island[name=EmbedBlockComponent]', { timeout: 30000 })
 				.first()
 				.should('have.attr', 'data-gu-ready', 'true');
 

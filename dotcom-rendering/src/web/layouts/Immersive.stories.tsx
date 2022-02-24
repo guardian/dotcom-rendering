@@ -4,9 +4,7 @@ import { breakpoints } from '@guardian/source-foundations';
 
 import { makeGuardianBrowserCAPI } from '../../model/window-guardian';
 
-import { decideTheme } from '../lib/decideTheme';
-import { decideDisplay } from '../lib/decideDisplay';
-import { decideDesign } from '../lib/decideDesign';
+import { decideFormat } from '../lib/decideFormat';
 
 import { Article } from '../../../fixtures/generated/articles/Article';
 import { PhotoEssay } from '../../../fixtures/generated/articles/PhotoEssay';
@@ -74,11 +72,7 @@ const convertToImmersive = (CAPI: CAPIType) => ({
 const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 	fireAndResetHydrationState();
 	const NAV = extractNAV(ServerCAPI.nav);
-	const format: ArticleFormat = {
-		display: decideDisplay(ServerCAPI.format),
-		design: decideDesign(ServerCAPI.format),
-		theme: decideTheme(ServerCAPI.format),
-	};
+	const format: ArticleFormat = decideFormat(ServerCAPI.format);
 	useEffect(() => {
 		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
 		BootReact({ CAPI });

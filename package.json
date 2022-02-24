@@ -16,6 +16,9 @@
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky install"
 	},
+	"resolutions": {
+		"@types/webpack": "^5.0.0"
+	},
 	"dependencies": {
 		"@babel/core": "^7.16.12",
 		"@emotion/cache": "^11.4.0",
@@ -32,7 +35,7 @@
 		"@storybook/manager-webpack5": "^6.3.7",
 		"@storybook/react": "^6.3.7",
 		"babel-loader": "^8.2.2",
-		"chromatic": "^6.0.6",
+		"chromatic": "^6.5.1",
 		"desvg-loader": "^0.1.0",
 		"friendly-errors-webpack-plugin": "^1.7.0",
 		"husky": "^7.0.0",

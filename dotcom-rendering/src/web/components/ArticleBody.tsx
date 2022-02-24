@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 
 import { headline, body, between, space } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
@@ -72,6 +72,20 @@ const globalLinkStyles = (palette: Palette) => css`
 	}
 `;
 
+const revealStyles = css`
+	/* We're using classnames here because we add and remove these classes
+	   using plain javascript */
+	.reveal {
+		animation: ${keyframes`
+			0% { opacity: 0; }
+			100% { opacity: 1; }
+		`} 4s ease-out;
+	}
+	.pending {
+		display: none;
+	}
+`;
+
 export const ArticleBody = ({
 	format,
 	palette,
@@ -99,7 +113,13 @@ export const ArticleBody = ({
 					id="maincontent"
 					// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
 					className="js-liveblog-body"
-					css={[globalStrongStyles, globalLinkStyles(palette)]}
+					css={[
+						globalStrongStyles,
+						globalLinkStyles(palette),
+						// revealStyles is used to animate the reveal of new blocks
+						format.design === ArticleDesign.LiveBlog &&
+							revealStyles,
+					]}
 				>
 					<LiveBlogRenderer
 						format={format}
@@ -109,6 +129,7 @@ export const ArticleBody = ({
 						pageId={pageId}
 						webTitle={webTitle}
 						ajaxUrl={ajaxUrl}
+						isLiveUpdate={false}
 					/>
 				</div>
 			</>
@@ -130,7 +151,6 @@ export const ArticleBody = ({
 		>
 			<ArticleRenderer
 				format={format}
-				palette={palette}
 				elements={blocks[0] ? blocks[0].elements : []}
 				adTargeting={adTargeting}
 				host={host}

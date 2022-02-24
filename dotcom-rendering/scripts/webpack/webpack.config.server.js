@@ -1,7 +1,9 @@
+// @ts-check
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
+/** @type {(options: { sessionId: string } ) => import('webpack').Configuration} */
 module.exports = ({ sessionId }) => ({
 	entry: {
 		'frontend.server': './src/server/index.ts',
@@ -35,18 +37,18 @@ module.exports = ({ sessionId }) => ({
 		// include them in the development bundle
 		({ request }, callback) => {
 			return process.env.NODE_ENV === 'development' &&
-				request.startsWith('@aws-sdk')
-				? callback(null, `commonjs ${request}`)
+				request?.startsWith('@aws-sdk')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
-			return request.endsWith('loadable-manifest-browser.json')
-				? callback(null, `commonjs ${request}`)
+			return request?.endsWith('loadable-manifest-browser.json')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
-			return request.endsWith('loadable-manifest-browser.legacy.json')
-				? callback(null, `commonjs ${request}`)
+			return request?.endsWith('loadable-manifest-browser.legacy.json')
+				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 	],
@@ -58,7 +60,6 @@ module.exports = ({ sessionId }) => ({
 					project: 'dotcom-rendering',
 					team: 'dotcom',
 					sessionId,
-					// TODO: convert the plugin to TS
 				}),
 		  ]
 		: undefined,
