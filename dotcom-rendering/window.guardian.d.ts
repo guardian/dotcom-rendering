@@ -68,6 +68,11 @@ declare global {
 			onConsentChange?: (fn: Callback) => void;
 			getConsentFor?: (fn: Callback) => void;
 		};
+		mockLiveUpdate: (data: {
+			numNewBlocks: number;
+			html: string;
+			mostRecentBlockId: string;
+		}) => void;
 	}
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

@@ -138,37 +138,52 @@ export const Liveness = ({
 		document.querySelector('#maincontent :first-child')?.id || '',
 	);
 
+	/**
+	 * This function runs (once) after every successful useApi call. This is useful because it
+	 * allows us to avoid the problems of imperative code being executed multiple times
+	 * inside react's declarative structure (things get re-rendered when any state changes)
+	 */
+	function onSuccess(data: {
+		numNewBlocks: number;
+		html: string;
+		mostRecentBlockId: string;
+	}) {
+		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
+			console.log('html', data.html);
+			// Always insert the new blocks in the dom (but hidden)
+			insert(data.html, switches);
+
+			if (topOfBlogVisible() && document.hasFocus()) {
+				revealPendingBlocks();
+				setNumHiddenBlocks(0);
+			} else {
+				setShowToast(true);
+				// Increment the count of new posts
+				setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
+			}
+
+			// Update the block id we use for polling
+			if (data.mostRecentBlockId) {
+				setLatestBlockId(data.mostRecentBlockId);
+			}
+		}
+	}
+
+	/**
+	 * This is a utility used by our Cypress end to end tests
+	 *
+	 * Rather than expect these scripts to depend on polling, we
+	 * expose this function to allow Cypress to manually trigger
+	 * updates with whatever html and properties it wants
+	 *
+	 */
+	window.mockLiveUpdate = onSuccess;
+
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
 		refreshInterval: 15_000,
 		refreshWhenHidden: true,
-		// onSuccess runs (once) after every successful api call. This is useful because it
-		// allows us to avoid the problems of imperative code being executed multiple times
-		// inside react's declarative structure (things get re-rendered when any state changes)
-		onSuccess: (data: {
-			numNewBlocks: number;
-			html: string;
-			mostRecentBlockId: string;
-		}) => {
-			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
-				// Always insert the new blocks in the dom (but hidden)
-				insert(data.html, switches);
-
-				if (topOfBlogVisible() && document.hasFocus()) {
-					revealPendingBlocks();
-					setNumHiddenBlocks(0);
-				} else {
-					setShowToast(true);
-					// Increment the count of new posts
-					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
-				}
-
-				// Update the block id we use for polling
-				if (data.mostRecentBlockId) {
-					setLatestBlockId(data.mostRecentBlockId);
-				}
-			}
-		},
+		onSuccess,
 	});
 
 	useEffect(() => {
