@@ -323,7 +323,7 @@ export const Analysis = () => {
 							</LeftColumn>
 							<ArticleContainer format={format(theme)}>
 								<ArticleHeadline
-									headlineString={`This is an Analysis headline, it's underlined. ${themeName} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor`}
+									headlineString={`This is an Analysis headline in ${themeName}, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor`}
 									format={format(theme)}
 									tags={[]}
 								/>
