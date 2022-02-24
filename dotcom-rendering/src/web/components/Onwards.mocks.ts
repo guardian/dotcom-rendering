@@ -5,10 +5,7 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 
-import { decideDesign } from '../lib/decideDesign';
-import { decideTheme } from '../lib/decideTheme';
-import { decidePalette } from '../lib/decidePalette';
-import { decideDisplay } from '../lib/decideDisplay';
+import { decideFormat } from '../lib/decideFormat';
 
 const CAPITrails: CAPITrailType[] = [
 	{
@@ -149,9 +146,7 @@ const CAPITrails: CAPITrailType[] = [
 ];
 
 const trails: TrailType[] = CAPITrails.map((thisTrail) => {
-	const display = decideDisplay(thisTrail.format);
-	const design = decideDesign(thisTrail.format);
-	const theme = decideTheme(thisTrail.format);
+	const format = decideFormat(thisTrail.format);
 	return {
 		url: thisTrail.url,
 		headline: thisTrail.headline,
@@ -162,16 +157,7 @@ const trails: TrailType[] = CAPITrails.map((thisTrail) => {
 		webPublicationDate: thisTrail.webPublicationDate,
 		mediaType: thisTrail.mediaType,
 		mediaDuration: thisTrail.mediaDuration,
-		format: {
-			display,
-			theme,
-			design,
-		},
-		palette: decidePalette({
-			display,
-			theme,
-			design,
-		}),
+		format,
 	};
 });
 

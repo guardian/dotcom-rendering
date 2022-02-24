@@ -6,8 +6,7 @@ import createCache from '@emotion/cache';
 import { ChunkExtractor } from '@loadable/server';
 import { ArticlePillar } from '@guardian/libs';
 import { decideTheme } from '../lib/decideTheme';
-import { decideDisplay } from '../lib/decideDisplay';
-import { decideDesign } from '../lib/decideDesign';
+import { decideFormat } from '../lib/decideFormat';
 
 import { Page } from '../components/Page';
 
@@ -62,11 +61,7 @@ export const document = ({ data }: Props): string => {
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
 		createEmotionServer(cache);
 
-	const format: ArticleFormat = {
-		display: decideDisplay(CAPI.format),
-		design: decideDesign(CAPI.format),
-		theme: decideTheme(CAPI.format),
-	};
+	const format: ArticleFormat = decideFormat(CAPI.format);
 
 	const html = renderToString(
 		<CacheProvider value={cache}>

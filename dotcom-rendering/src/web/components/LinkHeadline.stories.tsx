@@ -7,7 +7,6 @@ import {
 import { ElementContainer } from './ElementContainer';
 
 import { LinkHeadline } from './LinkHeadline';
-import { decidePalette } from '../lib/decidePalette';
 
 export default {
 	component: LinkHeadline,
@@ -18,11 +17,6 @@ export const xsmallStory = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a large headline link looks"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
@@ -38,11 +32,6 @@ export const liveStory = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with a live kicker looks"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
@@ -58,11 +47,6 @@ export const noSlash = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with no kicker slash looks"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
@@ -79,11 +63,6 @@ export const pulsingDot = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with a pulsing dot looks"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
@@ -100,11 +79,6 @@ export const cultureVariant = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline with the culture pillar looks"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Culture,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
@@ -120,11 +94,6 @@ export const opinionxxxsmall = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how small links to opinion articles look"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: ArticlePillar.Opinion,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Comment,
@@ -142,11 +111,6 @@ export const OpinionKicker = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how an opinion headline with a kicker looks"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: ArticlePillar.Opinion,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Comment,
@@ -164,11 +128,6 @@ export const SpecialReport = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a Special Report headline with a kicker looks"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: ArticleSpecial.SpecialReport,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Comment,
@@ -186,11 +145,6 @@ export const InUnderlinedState = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is the underlined state when showUnderline is true"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
@@ -212,11 +166,6 @@ export const linkStory = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="This is how a headline looks as a link"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Sport,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.Standard,
@@ -236,11 +185,6 @@ export const LiveBlogSizes = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.LiveBlog,
@@ -255,11 +199,6 @@ export const LiveBlogSizes = () => (
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.LiveBlog,
@@ -274,11 +213,6 @@ export const LiveBlogSizes = () => (
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.LiveBlog,
@@ -293,11 +227,6 @@ export const LiveBlogSizes = () => (
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.LiveBlog,
@@ -311,98 +240,73 @@ export const LiveBlogSizes = () => (
 		/>
 	</ElementContainer>
 );
-LiveBlogSizes.story = { name: 'with various sizes' };
+LiveBlogSizes.story = { name: 'With various sizes (live)' };
 
 export const DeadBlogSizes = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
-			kickerText="Large live"
+			kickerText="Large dead"
 			showSlash={true}
-			showPulsingDot={true}
+			showPulsingDot={false}
 			size="large"
 		/>
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
-			kickerText="Medium live"
+			kickerText="Medium dead"
 			showSlash={true}
-			showPulsingDot={true}
+			showPulsingDot={false}
 			size="medium"
 		/>
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
-			kickerText="Small live"
+			kickerText="Small dead"
 			showSlash={true}
-			showPulsingDot={true}
+			showPulsingDot={false}
 			size="small"
 		/>
 		<br />
 		<LinkHeadline
 			headlineText="Revealed: how US and UK spy agencies defeat internet privacy and security"
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.DeadBlog,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 				theme: ArticlePillar.News,
 			}}
 			showQuotes={true}
-			kickerText="Tiny live"
+			kickerText="Tiny dead"
 			showSlash={true}
-			showPulsingDot={true}
+			showPulsingDot={false}
 			size="tiny"
 		/>
 	</ElementContainer>
 );
-DeadBlogSizes.story = { name: 'with various sizes' };
+DeadBlogSizes.story = { name: 'With various sizes (dead)' };
 
 export const Updated = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<LinkHeadline
 			headlineText=""
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.LiveBlog,
-				theme: ArticlePillar.News,
-			})}
 			format={{
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.LiveBlog,

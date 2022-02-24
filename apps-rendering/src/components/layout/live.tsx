@@ -13,7 +13,7 @@ import GridItem from 'components/gridItem';
 import LiveBlocks from 'components/liveBlocks';
 import LiveblogHeader from 'components/liveblogHeader';
 import Metadata from 'components/metadata';
-import RelatedContent from 'components/shared/relatedContent';
+import RelatedContent from 'components/relatedContent';
 import Tags from 'components/tags';
 import HeaderMedia from 'headerMedia';
 import type { DeadBlog, LiveBlog } from 'item';

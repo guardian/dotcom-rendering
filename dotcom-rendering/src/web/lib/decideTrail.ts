@@ -1,27 +1,10 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { decideDesign } from './decideDesign';
-import { decideTheme } from './decideTheme';
-import { decideDisplay } from './decideDisplay';
-import { decidePalette } from './decidePalette';
+import { decideFormat } from './decideFormat';
 
 export const decideTrail = (trail: CAPITrailType): TrailType => {
-	const format: ArticleFormat = trail.format
-		? {
-				display: decideDisplay(trail.format),
-				theme: decideTheme(trail.format),
-				design: decideDesign(trail.format),
-		  }
-		: {
-				display: ArticleDisplay.Standard,
-				theme: ArticlePillar.News,
-				design: ArticleDesign.Standard,
-		  };
-
-	const palette = decidePalette(format);
+	const format: ArticleFormat = decideFormat(trail.format);
 
 	return {
 		...trail,
 		format,
-		palette,
 	};
 };

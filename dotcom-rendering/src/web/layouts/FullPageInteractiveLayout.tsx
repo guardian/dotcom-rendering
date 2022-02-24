@@ -43,13 +43,12 @@ interface Props {
 
 const Renderer: React.FC<{
 	format: ArticleFormat;
-	palette: Palette;
 	elements: CAPIElement[];
 	host?: string;
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-}> = ({ format, palette, elements, host, pageId, webTitle, ajaxUrl }) => {
+}> = ({ format, elements, host, pageId, webTitle, ajaxUrl }) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -58,7 +57,7 @@ const Renderer: React.FC<{
 	const output = elements.map((element, index) => {
 		const [ok, el] = renderElement({
 			format,
-			palette,
+
 			element,
 			adTargeting: undefined,
 			host,
@@ -295,7 +294,6 @@ export const FullPageInteractiveLayout = ({
 				<article>
 					<Renderer
 						format={format}
-						palette={palette}
 						elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
 						host={host}
 						pageId={CAPI.pageId}
