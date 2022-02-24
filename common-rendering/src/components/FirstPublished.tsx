@@ -22,6 +22,7 @@ const FirstPublished = ({
 				margin-bottom: ${space[1]}px;
 				padding-top: ${space[1]}px;
 				display: flex;
+				width: fit-content;
 				flex-direction: row;
 				text-decoration: none;
 				:hover {
