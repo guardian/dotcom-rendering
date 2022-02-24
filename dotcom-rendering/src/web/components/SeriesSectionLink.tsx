@@ -84,13 +84,6 @@ const invertedStyle = css`
 	padding-right: ${space[1]}px;
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[3]}px;
-	padding-left: ${space[3]}px;
-	${from.mobileLandscape} {
-		padding-left: ${space[5]}px;
-	}
-	${from.tablet} {
-		padding-left: ${space[1]}px;
-	}
 `;
 
 const fontStyles = (format: ArticleFormat) => {
@@ -148,6 +141,16 @@ const titleBadgeWrapper = css`
 	margin-bottom: ${space[1]}px;
 	margin-top: ${space[1]}px;
 	margin-right: ${space[2]}px;
+`;
+
+const sectionPadding = css`
+	padding-left: 10px;
+	${from.mobileLandscape} {
+		padding-left: 18px;
+	}
+	${from.tablet} {
+		padding-left: ${space[1]}px;
+	}
 `;
 
 const immersiveTitleBadgeStyle = (palette: Palette) => css`
@@ -292,7 +295,12 @@ export const SeriesSectionLink = ({
 								css={badge && immersiveTitleBadgeStyle(palette)}
 							>
 								{badge && (
-									<div css={titleBadgeWrapper}>
+									<div
+										css={[
+											titleBadgeWrapper,
+											sectionPadding,
+										]}
+									>
 										<Badge
 											imageUrl={badge.imageUrl}
 											seriesTag={badge.seriesTag}
@@ -306,6 +314,7 @@ export const SeriesSectionLink = ({
 										fontStyles(format),
 										invertedStyle,
 										breakWord,
+										!badge && sectionPadding,
 										css`
 											color: ${palette.text.seriesTitle};
 											background-color: ${palette
