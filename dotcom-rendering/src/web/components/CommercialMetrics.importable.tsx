@@ -24,8 +24,8 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 	const adBlockerInUse = useAdBlockInUse();
 
 	useOnce(() => {
-		const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 		const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
+		const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 
 		// Only send metrics if the switch is enabled
 		if (!enabled) return;
@@ -57,7 +57,7 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 			// TODO: rename this in commercial-core and update here
 			switchOffSampling();
 		}
-	}, [ABTestAPI, pageViewId, adBlockerInUse, enabled]);
+	}, [ABTestAPI, adBlockerInUse, enabled]);
 
 	// We don’t render anything
 	return null;
