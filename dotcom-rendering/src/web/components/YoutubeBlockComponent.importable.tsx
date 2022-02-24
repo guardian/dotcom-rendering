@@ -4,10 +4,7 @@ import { css } from '@emotion/react';
 import { space, neutral, body } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
-import type {
-	Callback,
-	ConsentState,
-} from '@guardian/consent-management-platform/dist/types';
+import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
@@ -93,22 +90,21 @@ export const YoutubeBlockComponent = ({
 	);
 
 	useEffect(() => {
-		import(
-			/* webpackChunkName: "cmp" */ '@guardian/consent-management-platform'
-		)
-			.then(
-				(module: { onConsentChange: (callback: Callback) => void }) => {
-					module.onConsentChange((newConsent: ConsentState) => {
-						setConsentState(newConsent);
-					});
-				},
-			)
-			.catch((error) => {
-				window.guardian.modules.sentry.reportError(
-					new Error(`Error: ${error}`),
-					'youtube-consent',
-				);
+		const defineConsentState = async () => {
+			const { onConsentChange } = await import(
+				'@guardian/consent-management-platform'
+			);
+			onConsentChange((newConsent: ConsentState) => {
+				setConsentState(newConsent);
 			});
+		};
+
+		defineConsentState().catch((error) => {
+			window.guardian.modules.sentry.reportError(
+				new Error(`Error: ${error}`),
+				'youtube-consent',
+			);
+		});
 	}, []);
 
 	const shouldLimitWidth =

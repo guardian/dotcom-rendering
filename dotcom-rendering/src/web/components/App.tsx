@@ -26,7 +26,6 @@ import { incrementAlreadyVisited } from '../lib/alreadyVisited';
 import { incrementDailyArticleCount } from '../lib/dailyArticleCount';
 import { hasOptedOutOfArticleCount } from '../lib/contributions';
 import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
-import { buildAdTargeting } from '../../lib/ad-targeting';
 
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
@@ -120,35 +119,7 @@ export const App = ({ CAPI }: Props) => {
 
 	const format: ArticleFormat = decideFormat(CAPI.format);
 
-	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: CAPI.isAdFreeUser,
-		isSensitive: CAPI.config.isSensitive,
-		videoDuration: CAPI.config.videoDuration,
-		edition: CAPI.config.edition,
-		section: CAPI.config.section,
-		sharedAdTargeting: CAPI.config.sharedAdTargeting,
-		adUnit: CAPI.config.adUnit,
-	});
-
 	// There are docs on loadable in ./docs/loadable-components.md
-	const YoutubeBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.YoutubeBlockElement',
-				).length > 0
-			) {
-				return import('./YoutubeBlockComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.YoutubeBlockComponent,
-		},
-	);
-
 	const InteractiveBlockComponent = loadable(
 		() => {
 			if (
@@ -176,10 +147,6 @@ export const App = ({ CAPI }: Props) => {
 		type: T['_type'],
 	): T[] => elements.filter((element) => element._type === type) as T[];
 
-	const youTubeAtoms = elementsByType<YoutubeBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.YoutubeBlockElement',
-	);
 	const audioAtoms = elementsByType<AudioAtomBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
@@ -213,26 +180,6 @@ export const App = ({ CAPI }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			{youTubeAtoms.map((youTubeAtom) => (
-				<HydrateOnce rootId={youTubeAtom.elementId}>
-					<YoutubeBlockComponent
-						format={format}
-						hideCaption={false}
-						// eslint-disable-next-line jsx-a11y/aria-role
-						role="inline"
-						adTargeting={adTargeting}
-						isMainMedia={false}
-						id={youTubeAtom.id}
-						assetId={youTubeAtom.assetId}
-						expired={youTubeAtom.expired}
-						overrideImage={youTubeAtom.overrideImage}
-						posterImage={youTubeAtom.posterImage}
-						duration={youTubeAtom.duration}
-						mediaTitle={youTubeAtom.mediaTitle}
-						altText={youTubeAtom.altText}
-					/>
-				</HydrateOnce>
-			))}
 			{interactiveElements.map((interactiveBlock) => (
 				<HydrateInteractiveOnce rootId={interactiveBlock.elementId}>
 					<InteractiveBlockComponent
