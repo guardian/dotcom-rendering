@@ -148,7 +148,6 @@ export const CardHeadline = ({
 						? labTextStyles(size)
 						: fontStyles(size),
 					format.design === ArticleDesign.Analysis &&
-						// TODO: are we overloading the cardKicker colour?
 						underlinedStyles(size, palette.background.underline),
 					isFullCardImage &&
 						css`
