@@ -10,7 +10,6 @@ import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
 
 import { Caption } from './Caption';
-import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	id: string;
@@ -108,7 +107,6 @@ export const YoutubeBlockComponent = ({
 		});
 	}, []);
 
-	const palette = decidePalette(format);
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
@@ -141,7 +139,6 @@ export const YoutubeBlockComponent = ({
 				</div>
 				{!hideCaption && (
 					<Caption
-						palette={palette}
 						captionText={mediaTitle || ''}
 						format={format}
 						displayCredit={false}
@@ -214,7 +211,6 @@ export const YoutubeBlockComponent = ({
 			/>
 			{!hideCaption && (
 				<Caption
-					palette={palette}
 					captionText={mediaTitle || ''}
 					format={format}
 					displayCredit={false}

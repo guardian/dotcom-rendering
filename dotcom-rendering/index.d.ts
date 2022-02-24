@@ -896,7 +896,7 @@ interface BaseTrailType {
 	branding?: Branding;
 }
 interface TrailType extends BaseTrailType {
-	palette: Palette;
+	palette?: never;
 	format: ArticleFormat;
 }
 

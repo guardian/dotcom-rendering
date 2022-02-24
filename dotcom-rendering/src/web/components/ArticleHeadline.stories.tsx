@@ -16,7 +16,6 @@ import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
 import { mainMediaElements } from './ArticleHeadline.mocks';
-import { decidePalette } from '../lib/decidePalette';
 import { ArticleHeadlinePadding } from './ArticleHeadlinePadding';
 
 export default {
@@ -39,7 +38,6 @@ export const ArticleStory = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is how the default headline looks"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -65,7 +63,6 @@ export const Feature = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is a Feature headline, it has colour applied based on pillar"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -96,7 +93,6 @@ export const ShowcaseInterview = () => {
 					>
 						<ArticleHeadline
 							headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-							palette={decidePalette(format)}
 							format={format}
 							tags={[]}
 							byline="Byline text"
@@ -104,7 +100,6 @@ export const ShowcaseInterview = () => {
 					</div>
 					<MainMedia
 						format={format}
-						palette={decidePalette(format)}
 						hideCaption={true}
 						elements={mainMediaElements}
 						pageId="testID"
@@ -138,7 +133,6 @@ export const ShowcaseInterviewNobyline = () => {
 					>
 						<ArticleHeadline
 							headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-							palette={decidePalette(format)}
 							format={format}
 							tags={[]}
 							byline=""
@@ -146,7 +140,6 @@ export const ShowcaseInterviewNobyline = () => {
 					</div>
 					<MainMedia
 						format={format}
-						palette={decidePalette(format)}
 						hideCaption={true}
 						elements={mainMediaElements}
 						pageId="testID"
@@ -177,7 +170,6 @@ export const Interview = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 						byline="Byline text"
@@ -188,7 +180,6 @@ export const Interview = () => {
 					/>
 					<MainMedia
 						format={format}
-						palette={decidePalette(format)}
 						hideCaption={true}
 						elements={mainMediaElements}
 						pageId="testID"
@@ -217,7 +208,6 @@ export const InterviewSpecialReport = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 						byline="Byline text"
@@ -228,7 +218,6 @@ export const InterviewSpecialReport = () => {
 					/>
 					<MainMedia
 						format={format}
-						palette={decidePalette(format)}
 						hideCaption={true}
 						elements={mainMediaElements}
 						pageId="testID"
@@ -259,7 +248,6 @@ export const InterviewNoByline = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 						byline=""
@@ -270,7 +258,6 @@ export const InterviewNoByline = () => {
 					/>
 					<MainMedia
 						format={format}
-						palette={decidePalette(format)}
 						hideCaption={true}
 						elements={mainMediaElements}
 						pageId="testID"
@@ -301,7 +288,6 @@ export const Comment = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="Yes, the billionaire club is one we really need to shut down"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -327,7 +313,6 @@ export const Analysis = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is an Analysis headline, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -353,7 +338,6 @@ export const Media = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Media"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -379,7 +363,6 @@ export const Review = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Review"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -405,7 +388,6 @@ export const PhotoEssay = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is PhotoEssay"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -431,7 +413,6 @@ export const Quiz = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Quiz"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -457,7 +438,6 @@ export const Recipe = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Recipe"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -483,7 +463,6 @@ export const Immersive = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when display type is Immersive"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -509,7 +488,6 @@ export const ImmersiveNoMainMedia = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is PrintShop, which has no main media"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -539,7 +517,6 @@ export const ImmersiveComment = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when display type is Immersive and design Comment"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -565,7 +542,6 @@ export const Editorial = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is Editorial"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -591,7 +567,6 @@ export const MatchReport = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is MatchReport"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -617,7 +592,6 @@ export const SpecialReport = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when pillar is SpecialReport"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -643,7 +617,6 @@ export const LiveBlog = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is LiveBlog"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -682,7 +655,6 @@ export const DeadBlog = () => {
 				<ArticleContainer format={format}>
 					<ArticleHeadline
 						headlineString="This is the headline you see when design type is DeadBlog"
-						palette={decidePalette(format)}
 						format={format}
 						tags={[]}
 					/>
@@ -712,7 +684,6 @@ export const ReviewWithoutStars = () => {
 					>
 						<ArticleHeadline
 							headlineString="This is a Review headline."
-							palette={decidePalette(format)}
 							format={format}
 							tags={[]}
 							byline="Byline text"

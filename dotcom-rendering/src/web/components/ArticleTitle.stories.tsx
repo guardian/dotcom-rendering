@@ -10,7 +10,6 @@ import {
 	getAllThemes,
 	getThemeNameAsString,
 } from '../../../../common-rendering/src/fixtures/article';
-import { decidePalette } from '../lib/decidePalette';
 
 import { ArticleTitle } from './ArticleTitle';
 
@@ -74,11 +73,6 @@ export const defaultStory = () => {
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
-					design: ArticleDesign.Standard,
-				})}
 			/>
 		</Container>
 	);
@@ -96,11 +90,6 @@ export const beyondTheBlade = () => {
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
-					design: ArticleDesign.Standard,
-				})}
 			/>
 		</Container>
 	);
@@ -123,11 +112,6 @@ export const immersiveComment = () => {
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Comment,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Immersive,
-					theme: ArticlePillar.Sport,
-					design: ArticleDesign.Comment,
-				})}
 			/>
 		</div>
 	);
@@ -150,11 +134,6 @@ export const immersiveCommentTag = () => {
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Comment,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Immersive,
-					theme: ArticlePillar.Sport,
-					design: ArticleDesign.Comment,
-				})}
 				tags={[
 					{
 						id: '',
@@ -179,11 +158,6 @@ export const ImmersiveSeriesTag = () => {
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Review,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Immersive,
-					theme: ArticlePillar.Sport,
-					design: ArticleDesign.Review,
-				})}
 				tags={[
 					{
 						id: '',
@@ -208,11 +182,6 @@ export const ArticleBlogTag = () => {
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
-					design: ArticleDesign.Standard,
-				})}
 				tags={[
 					{
 						id: '',
@@ -237,11 +206,6 @@ export const ArticleOpinionTag = () => {
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
-					design: ArticleDesign.Standard,
-				})}
 				tags={[
 					{
 						id: '',
@@ -266,11 +230,6 @@ export const ArticleSeriesTag = () => {
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
-					design: ArticleDesign.Standard,
-				})}
 				tags={[
 					{
 						id: '',
@@ -295,11 +254,6 @@ export const SpecialReportTitle = () => {
 					theme: ArticleSpecial.SpecialReport,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					theme: ArticleSpecial.SpecialReport,
-					design: ArticleDesign.Standard,
-				})}
 				tags={[
 					{
 						id: '',
@@ -324,11 +278,6 @@ export const ArticleNoTags = () => {
 					theme: ArticlePillar.Culture,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Culture,
-					design: ArticleDesign.Standard,
-				})}
 			/>
 		</Container>
 	);
@@ -346,11 +295,6 @@ export const LabsStory = () => {
 					theme: ArticleSpecial.Labs,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					theme: ArticleSpecial.Labs,
-					design: ArticleDesign.Standard,
-				})}
 				tags={[
 					{
 						id: '',
@@ -375,11 +319,6 @@ export const LongStory = () => {
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
-					design: ArticleDesign.Standard,
-				})}
 				tags={[
 					{
 						id: '',
@@ -404,11 +343,6 @@ export const LongWord = () => {
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.News,
-					design: ArticleDesign.Standard,
-				})}
 				tags={[
 					{
 						id: '',
@@ -435,7 +369,6 @@ export const ArticleDeadBlogTitle = () => {
 						// eslint-disable-next-line react/jsx-props-no-spreading
 						{...CAPI}
 						format={format}
-						palette={decidePalette(format)}
 						tags={[
 							{
 								id: '',

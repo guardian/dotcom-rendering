@@ -8,15 +8,15 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import Body from 'components/articleBody';
+import Epic from 'components/epic';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';
+import OptionalLogo from 'components/logo';
 import Metadata from 'components/metadata';
+import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
-import Body from 'components/shared/articleBody';
-import Epic from 'components/shared/epic';
-import OptionalLogo from 'components/shared/logo';
-import RelatedContent from 'components/shared/relatedContent';
 import Standfirst from 'components/standfirst';
 import Tags from 'components/tags';
 import HeaderMedia from 'headerMedia';

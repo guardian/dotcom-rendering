@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 
-import { ArticleDisplay, ArticleDesign, storage, log } from '@guardian/libs';
+import { storage, log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import {
@@ -19,8 +19,7 @@ import { AudioAtomWrapper } from './AudioAtomWrapper';
 import { Portal } from './Portal';
 import { HydrateOnce, HydrateInteractiveOnce } from './HydrateOnce';
 import { decideTheme } from '../lib/decideTheme';
-import { decideDisplay } from '../lib/decideDisplay';
-import { decideDesign } from '../lib/decideDesign';
+import { decideFormat } from '../lib/decideFormat';
 import { useOnce } from '../lib/useOnce';
 
 import { incrementAlreadyVisited } from '../lib/alreadyVisited';
@@ -116,15 +115,9 @@ export const App = ({ CAPI }: Props) => {
 		setBrazeMessages(buildBrazeMessages(CAPI.config.idApiUrl));
 	}, [CAPI.config.idApiUrl]);
 
-	const display: ArticleDisplay = decideDisplay(CAPI.format);
-	const design: ArticleDesign = decideDesign(CAPI.format);
 	const pillar: ArticleTheme = decideTheme(CAPI.format);
 
-	const format: ArticleFormat = {
-		display,
-		design,
-		theme: pillar,
-	};
+	const format: ArticleFormat = decideFormat(CAPI.format);
 
 	// There are docs on loadable in ./docs/loadable-components.md
 	const InteractiveBlockComponent = loadable(

@@ -156,7 +156,7 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					]}
 				>
-					<QuoteIcon colour={palette.fill.quoteIcon} size="medium" />
+					<QuoteIcon colour={palette.fill.quoteIcon} />
 					<blockquote
 						css={css`
 							display: inline;
@@ -189,7 +189,7 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					]}
 				>
-					<QuoteIcon colour={palette.fill.quoteIcon} size="large" />
+					<QuoteIcon colour={palette.fill.quoteIcon} />
 					<blockquote
 						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{
@@ -235,7 +235,7 @@ export const PullQuoteBlockComponent: React.FC<{
 						`,
 					]}
 				>
-					<QuoteIcon colour={palette.fill.quoteIcon} size="medium" />
+					<QuoteIcon colour={palette.fill.quoteIcon} />
 					<blockquote
 						css={css`
 							display: inline;
