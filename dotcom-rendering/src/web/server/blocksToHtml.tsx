@@ -1,8 +1,6 @@
 import { renderToString } from 'react-dom/server';
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { decideDesign } from '../lib/decideDesign';
-import { decideDisplay } from '../lib/decideDisplay';
-import { decideTheme } from '../lib/decideTheme';
+import { decideFormat } from '../lib/decideFormat';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 
 /**
@@ -26,11 +24,7 @@ export const blocksToHtml = ({
 	sharedAdTargeting,
 	adUnit,
 }: BlocksRequest): string => {
-	const format: ArticleFormat = {
-		display: decideDisplay(CAPIFormat),
-		design: decideDesign(CAPIFormat),
-		theme: decideTheme(CAPIFormat),
-	};
+	const format: ArticleFormat = decideFormat(CAPIFormat);
 
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser,

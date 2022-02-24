@@ -3,7 +3,6 @@
 import { css } from '@emotion/react';
 
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
@@ -65,11 +64,6 @@ export const StandardArticle = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 		</Container>
@@ -90,11 +84,6 @@ export const Immersive = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 		</Container>
@@ -115,11 +104,6 @@ export const Showcase = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 		</Container>
@@ -140,11 +124,6 @@ export const Thumbnail = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 		</Container>
@@ -165,11 +144,6 @@ export const Supporting = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 		</Container>
@@ -190,11 +164,6 @@ export const HideCaption = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 					hideCaption={true}
 				/>
 			</Figure>
@@ -216,11 +185,6 @@ export const InlineTitle = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -247,11 +211,6 @@ export const InlineTitleMobile = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -278,11 +237,6 @@ export const ImmersiveTitle = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -305,11 +259,6 @@ export const ShowcaseTitle = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 					title="This is the title text"
 					hideCaption={true}
 				/>
@@ -356,11 +305,6 @@ export const HalfWidth = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 			<p>
@@ -421,11 +365,6 @@ export const HalfWidthMobile = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 			<p>
@@ -486,11 +425,6 @@ export const HalfWidthWide = () => {
 						design: ArticleDesign.Standard,
 						theme: ArticlePillar.News,
 					}}
-					palette={decidePalette({
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					})}
 				/>
 			</Figure>
 			<p>

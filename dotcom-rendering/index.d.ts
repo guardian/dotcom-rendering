@@ -900,7 +900,7 @@ interface BaseTrailType {
 	branding?: Branding;
 }
 interface TrailType extends BaseTrailType {
-	palette: Palette;
+	palette?: never;
 	format: ArticleFormat;
 }
 
@@ -929,6 +929,15 @@ interface MostViewedFooterPayloadType {
 	mostCommented: CAPITrailType;
 	mostShared: CAPITrailType;
 }
+
+// ------------
+// Liveblogs //
+// ------------
+type LiveUpdateType = {
+	numNewBlocks: number;
+	html: string;
+	mostRecentBlockId: string;
+};
 
 // ------------
 // RichLinks //

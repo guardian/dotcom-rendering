@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
+import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
 import { Toast } from './Toast';
 
 type Props = {
@@ -10,6 +11,8 @@ type Props = {
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
 	switches: Switches;
+	onFirstPage: boolean;
+	webURL: string;
 };
 
 const isServer = typeof window === 'undefined';
@@ -113,6 +116,10 @@ const topOfBlog: Element | null = !isServer
 	? window.document.querySelector('[data-gu-marker=top-of-blog]')
 	: null;
 
+const lastUpdated: Element | null = !isServer
+	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
+	: null;
+
 /**
  * This allows us to make decisions in javascript based on if the reader
  * has the top of the blog in view or not
@@ -130,6 +137,8 @@ export const Liveness = ({
 	filterKeyEvents,
 	format,
 	switches,
+	onFirstPage,
+	webURL,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
@@ -143,17 +152,17 @@ export const Liveness = ({
 	 * allows us to avoid the problems of imperative code being executed multiple times
 	 * inside react's declarative structure (things get re-rendered when any state changes)
 	 */
-	function onSuccess(data: {
-		numNewBlocks: number;
-		html: string;
-		mostRecentBlockId: string;
-	}) {
+	function onSuccess(data: LiveUpdateType) {
 		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
-			console.log('html', data.html);
 			// Always insert the new blocks in the dom (but hidden)
 			insert(data.html, switches);
 
-			if (topOfBlogVisible() && document.hasFocus()) {
+			if (lastUpdated) {
+				lastUpdated.setAttribute('dateTime', new Date().toString());
+				updateTimeElement(lastUpdated);
+			}
+
+			if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
 				revealPendingBlocks();
 				setNumHiddenBlocks(0);
 			} else {
@@ -181,7 +190,7 @@ export const Liveness = ({
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
-		refreshInterval: 15_000,
+		refreshInterval: 10_000,
 		refreshWhenHidden: true,
 		onSuccess,
 	});
@@ -191,7 +200,7 @@ export const Liveness = ({
 			numHiddenBlocks > 0 ? `(${numHiddenBlocks}) ${webTitle}` : webTitle;
 	}, [numHiddenBlocks, webTitle]);
 
-	if (topOfBlog) {
+	if (onFirstPage && topOfBlog) {
 		const observer = new window.IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting) {
@@ -224,10 +233,11 @@ export const Liveness = ({
 			// The blog was either hidden or has become visible
 			if (
 				// If we're returning to a blog that has pending blocks and the reader
-				// is at the top of the page then...
+				// is at the top of the first page then...
 				document.visibilityState === 'visible' &&
 				numHiddenBlocks > 0 &&
-				topOfBlogVisible()
+				topOfBlogVisible() &&
+				onFirstPage
 			) {
 				revealPendingBlocks();
 				setNumHiddenBlocks(0);
@@ -243,16 +253,20 @@ export const Liveness = ({
 				handleVisibilityChange,
 			);
 		};
-	}, [numHiddenBlocks]);
+	}, [numHiddenBlocks, onFirstPage]);
 
 	const handleToastClick = () => {
-		setShowToast(false);
-		document.getElementById('maincontent')?.scrollIntoView({
-			behavior: 'smooth',
-		});
-		window.location.href = '#maincontent';
-		revealPendingBlocks();
-		setNumHiddenBlocks(0);
+		if (onFirstPage) {
+			setShowToast(false);
+			document.getElementById('maincontent')?.scrollIntoView({
+				behavior: 'smooth',
+			});
+			window.location.href = '#maincontent';
+			revealPendingBlocks();
+			setNumHiddenBlocks(0);
+		} else {
+			window.location.href = `${webURL}#maincontent`;
+		}
 	};
 
 	if (showToast) {

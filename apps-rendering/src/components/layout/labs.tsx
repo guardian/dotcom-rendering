@@ -9,13 +9,13 @@ import {
 } from '@guardian/source-foundations';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { map, withDefault } from '@guardian/types';
+import Body from 'components/articleBody';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
 import Logo from 'components/labsLogo';
 import Metadata from 'components/metadata';
+import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
-import Body from 'components/shared/articleBody';
-import RelatedContent from 'components/shared/relatedContent';
 import Standfirst from 'components/standfirst';
 import HeaderMedia from 'headerMedia';
 import type { Item } from 'item';
