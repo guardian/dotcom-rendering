@@ -45,7 +45,7 @@ const interceptYouTubeEmbed = ({ videoId, adUnit, pageUrl, rejectAll }) => {
 			expect(adTagParameters.cmpVcd, 'check TCFV2 tcString').to.not.be
 				.undefined;
 			if (rejectAll) {
-				// user has NOT consented to all purposes
+				// user has not given consent for any purpose
 				expect(
 					adsConfig.nonPersonalizedAd,
 					'check nonPersonalisation is TRUE',
