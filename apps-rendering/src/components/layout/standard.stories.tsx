@@ -1,24 +1,39 @@
 // ----- Imports ----- //
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { ArticleDisplay, ArticleFormat } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { partition } from '@guardian/types';
+import { Option, OptionKind, partition, some } from '@guardian/types';
+import Comment from 'components/layout/comment';
 import Standard from 'components/layout/standard';
-import { article, matchReport, review } from 'fixtures/item';
+import { analysis, article, comment, editorial, interview, letter, matchReport, review } from 'fixtures/item';
+import { Item } from 'item';
 import { renderAll } from 'renderer';
+import { deadBlog, live } from 'fixtures/live';
+import { ReactElement } from 'react';
+import Live from './live';
+
+
+// ----- Functions ----- //
+
+const formatFromItem = (
+	item: Item,
+	forceDisplay: Option<ArticleDisplay>,
+): ArticleFormat => ({
+	theme: item.theme,
+	design: item.design,
+	display:
+		forceDisplay.kind === OptionKind.Some
+			? forceDisplay.value
+			: item.display,
+});
 
 // ----- Stories ----- //
 
-const display = ArticleDisplay.Standard;
 
 export const Article = (): React.ReactNode => {
 	return (
 		<Standard item={article}>
 			{renderAll(
-				{
-					theme: ArticlePillar.News,
-					design: ArticleDesign.Standard,
-					display,
-				},
+formatFromItem(article, some(ArticleDisplay.Standard)),
 				partition(article.body).oks,
 			)}
 		</Standard>
@@ -30,11 +45,7 @@ export const Review = (): React.ReactNode => {
 	return (
 		<Standard item={review}>
 			{renderAll(
-				{
-					theme: ArticlePillar.Culture,
-					design: ArticleDesign.Review,
-					display,
-				},
+formatFromItem(review, some(ArticleDisplay.Standard)),
 				partition(review.body).oks,
 			)}
 		</Standard>
@@ -46,17 +57,69 @@ export const MatchReport = (): React.ReactNode => {
 	return (
 		<Standard item={matchReport}>
 			{renderAll(
-				{
-					theme: ArticlePillar.Sport,
-					design: ArticleDesign.MatchReport,
-					display,
-				},
+formatFromItem(matchReport, some(ArticleDisplay.Standard)),
 				partition(matchReport.body).oks,
 			)}
 		</Standard>
 	);
 };
 MatchReport.story = { name: 'Match Report' };
+
+
+export const CommentItem = (): React.ReactNode => {
+	return (
+		<Comment item={comment}>
+			{renderAll(
+formatFromItem(comment, some(ArticleDisplay.Standard)),
+				partition(comment.body).oks,
+			)}
+		</Comment>
+	);
+};
+CommentItem.story = { name: 'Comment' };
+
+export const Letter = (): React.ReactNode => {
+	return (
+		<Comment item={letter}>
+			{renderAll(
+				formatFromItem(letter, some(ArticleDisplay.Standard)),
+				partition(letter.body).oks,
+			)}
+		</Comment>
+	);
+};
+Letter.story = { name: 'Letter' };
+
+export const Editorial = (): React.ReactNode => {
+	return (
+		<Comment item={editorial}>
+			{renderAll(
+				formatFromItem(editorial, some(ArticleDisplay.Standard)),
+				partition(editorial.body).oks,
+			)}
+		</Comment>
+	);
+};
+Editorial.story = { name: 'Editorial' };
+
+export const Analysis = (): React.ReactNode => {
+	return (
+		<Standard item={analysis}>
+			{renderAll(
+				formatFromItem(analysis, some(ArticleDisplay.Standard)),
+				partition(analysis.body).oks,
+			)}
+		</Standard>
+	);
+};
+Analysis.story = { name: 'Analysis' };
+
+export const LiveBlog = (): ReactElement => <Live item={{ ...live, display: ArticleDisplay.Standard }} />;
+LiveBlog.story = { name: 'LiveBlog '}
+
+export const DeadBlog = (): ReactElement => <Live item={{ ...deadBlog, display: ArticleDisplay.Standard }} />;
+DeadBlog.story = { name: 'DeadBlog '}
+
 
 export default {
 	title: 'AR/Layouts/Standard',

@@ -354,7 +354,7 @@ const articleWithStandfirstLink: Item = {
 	standfirst: standfirstWithLink,
 };
 
-const analysis: Item = {
+const analysis: Standard = {
 	design: ArticleDesign.Analysis,
 	...fields,
 };
