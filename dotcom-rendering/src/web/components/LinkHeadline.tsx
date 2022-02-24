@@ -85,9 +85,7 @@ export const LinkHeadline = ({
 					showSlash={showSlash}
 				/>
 			)}
-			{showQuotes && (
-				<QuoteIcon colour={palette.text.linkKicker} size={size} />
-			)}
+			{showQuotes && <QuoteIcon colour={palette.text.linkKicker} />}
 			{link ? (
 				// We were passed a link object so headline should be a link, with link styling
 				<>
