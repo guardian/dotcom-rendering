@@ -8,16 +8,14 @@ import { renderAll } from 'renderer';
 
 // ----- Stories ----- //
 
-const display = ArticleDisplay.Standard;
-
 export const CommentItem = (): React.ReactNode => {
 	return (
 		<Comment item={comment}>
 			{renderAll(
 				{
-					theme: ArticlePillar.Opinion,
-					design: ArticleDesign.Comment,
-					display,
+					theme: comment.theme,
+					design: comment.design,
+					display: comment.display,
 				},
 				partition(comment.body).oks,
 			)}
@@ -31,9 +29,9 @@ export const Letter = (): React.ReactNode => {
 		<Comment item={letter}>
 			{renderAll(
 				{
-					theme: ArticlePillar.Opinion,
-					design: ArticleDesign.Letter,
-					display,
+					theme: letter.theme,
+					design: letter.design,
+					display: letter.display,
 				},
 				partition(letter.body).oks,
 			)}
@@ -47,9 +45,9 @@ export const Editorial = (): React.ReactNode => {
 		<Comment item={editorial}>
 			{renderAll(
 				{
-					theme: ArticlePillar.Opinion,
-					design: ArticleDesign.Editorial,
-					display,
+					theme: editorial.theme,
+					design: editorial.design,
+					display: editorial.display,
 				},
 				partition(editorial.body).oks,
 			)}
