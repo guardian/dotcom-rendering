@@ -20,7 +20,7 @@ interface TestContext {
 const getGroup = (shortUrlId: string): TestGroup | undefined => {
 	const hashedShortUrlId = sha256(shortUrlId).words[0];
 
-	const group = Math.abs(hashedShortUrlId % NUM_GROUPS);
+	const group = Math.abs(hashedShortUrlId) % NUM_GROUPS;
 
 	if (group in TestGroup) {
 		switch (group) {
