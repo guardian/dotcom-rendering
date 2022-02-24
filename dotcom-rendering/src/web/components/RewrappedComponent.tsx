@@ -4,6 +4,7 @@ import { ClassNames } from '@emotion/react';
 
 import type { HTMLTag } from 'src/model/unwrapHtml';
 import { unescapeData } from '../../lib/escapeData';
+import { recordLog } from '../lib/logging';
 
 /**
  * React requires a wrapping element for `dangerouslySetInnerHTML` so we
@@ -27,6 +28,19 @@ export const RewrappedComponent = ({
 }) => (
 	<ClassNames>
 		{({ css }) => {
+			if (!isUnwrapped) {
+				const isDev = process.env.NODE_ENV !== 'production';
+				recordLog({
+					label: 'dotcom.dcr.isUnwrapped',
+					isDev,
+					properties: {
+						isUnwrapped: 'false',
+						html,
+						tagName,
+					},
+				});
+			}
+
 			const element: HTMLTag = isUnwrapped ? tagName : 'span';
 
 			// If we implement a span, we want to apply the CSS to the inner element
