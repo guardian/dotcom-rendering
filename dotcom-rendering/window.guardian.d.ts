@@ -68,7 +68,7 @@ declare global {
 			onConsentChange?: (fn: Callback) => void;
 			getConsentFor?: (fn: Callback) => void;
 		};
-		mockLiveUpdate: typeof onSuccess
+		mockLiveUpdate: (data: LiveUpdateType) => void;
 	}
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

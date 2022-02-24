@@ -931,6 +931,15 @@ interface MostViewedFooterPayloadType {
 }
 
 // ------------
+// Liveblogs //
+// ------------
+type LiveUpdateType = {
+	numNewBlocks: number;
+	html: string;
+	mostRecentBlockId: string;
+};
+
+// ------------
 // RichLinks //
 // ------------
 type RichLinkCardType =

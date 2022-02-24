@@ -152,11 +152,7 @@ export const Liveness = ({
 	 * allows us to avoid the problems of imperative code being executed multiple times
 	 * inside react's declarative structure (things get re-rendered when any state changes)
 	 */
-	function onSuccess(data: {
-		numNewBlocks: number;
-		html: string;
-		mostRecentBlockId: string;
-	}) {
+	function onSuccess(data: LiveUpdateType) {
 		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
 			// Always insert the new blocks in the dom (but hidden)
 			insert(data.html, switches);
