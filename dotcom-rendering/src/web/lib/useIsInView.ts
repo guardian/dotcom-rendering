@@ -17,8 +17,7 @@ const useIsInView = (
 	const intersectionFn: IntersectionObserverCallback = ([entry]) => {
 		if (entry.isIntersecting) {
 			setIsInView(true);
-		}
-		if (options.repeat && !entry.isIntersecting) {
+		} else if (options.repeat) {
 			setIsInView(false);
 		}
 	};
