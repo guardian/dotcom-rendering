@@ -13,20 +13,18 @@ export const getArticleCount = async (
 	pageId: string,
 	keywordIds: string,
 ): Promise<WeeklyArticleHistory | undefined> => {
-	const hasOptedOut = await hasOptedOutOfArticleCount();
+	if (await hasOptedOutOfArticleCount()) return;
 
 	// hasOptedOut needs to be done before we check if articleCount is set in the window
 	// This is because a potential race condition where one invocation of getArticleCount
 	// is waiting for hasOptedOut another invocation might receive it and increment the article count.
 	if (!window.guardian.articleCount) {
-		if (!hasOptedOut) {
-			incrementDailyArticleCount();
-			incrementWeeklyArticleCount(
-				storage.local,
-				pageId,
-				keywordIds.split(','),
-			);
-		}
+		incrementDailyArticleCount();
+		incrementWeeklyArticleCount(
+			storage.local,
+			pageId,
+			keywordIds.split(','),
+		);
 
 		window.guardian.articleCount = getWeeklyArticleHistory(storage.local);
 	}
