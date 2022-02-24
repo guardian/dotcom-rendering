@@ -124,6 +124,10 @@ const richLinkCard = {
 export const mockRESTCalls = (): void => {
 	fetchMock
 		.restore()
+		// Intercept Logs
+		.post(/logs\.(code.dev-)?guardianapis\.com\/log/, {
+			status: 204,
+		})
 		// Most read by Geo
 		.get(
 			/.*api.nextgen.guardianapps.co.uk\/most-read-geo.*/,
