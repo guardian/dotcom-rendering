@@ -13,7 +13,6 @@ import { QuoteIcon } from './QuoteIcon';
 import { Kicker } from './Kicker';
 import { Byline } from './Byline';
 import { decidePalette } from '../lib/decidePalette';
-import { transparentColour } from '../lib/transparentColour';
 
 type Props = {
 	headlineText: string; // The text shown
@@ -92,7 +91,7 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 				to bottom,
 				transparent,
 				transparent ${baseSize - 1}px,
-				${transparentColour(colour)}
+				${colour}
 			);
 			line-height: ${baseSize}px;
 			background-size: 1px ${baseSize}px;
@@ -150,7 +149,7 @@ export const CardHeadline = ({
 						: fontStyles(size),
 					format.design === ArticleDesign.Analysis &&
 						// TODO: are we overloading the cardKicker colour?
-						underlinedStyles(size, palette.text.cardKicker),
+						underlinedStyles(size, palette.background.underline),
 					isFullCardImage &&
 						css`
 							line-height: 1; /* Reset line height in full image carousel */
