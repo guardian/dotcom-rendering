@@ -15,14 +15,13 @@ const responsiveAspectRatio = (height: number, width: number) => css`
 `;
 export const VimeoBlockComponent: React.FC<{
 	format: ArticleFormat;
-	palette: Palette;
 	embedUrl?: string;
 	height: number;
 	width: number;
 	caption?: string;
 	credit?: string;
 	title?: string;
-}> = ({ embedUrl, caption, title, format, palette, width, height, credit }) => {
+}> = ({ embedUrl, caption, title, format, width, height, credit }) => {
 	// 812 is the full height on an iphone X. This ensures that the embed doesn't display any larger than the available viewport
 	// Constrain iframe embeds with a width to their natural width
 	// rather than stretch them to the container using
@@ -53,7 +52,6 @@ export const VimeoBlockComponent: React.FC<{
 				<Caption
 					captionText={caption}
 					format={format}
-					palette={palette}
 					credit={credit}
 					mediaType="Video"
 				/>

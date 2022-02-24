@@ -261,13 +261,11 @@ export const RichLink = ({
 										<Hide when="above" breakpoint="wide">
 											<QuoteIcon
 												colour={palette.fill.quoteIcon}
-												size="small"
 											/>
 										</Hide>
 										<Hide when="below" breakpoint="wide">
 											<QuoteIcon
 												colour={palette.fill.quoteIcon}
-												size="medium"
 											/>
 										</Hide>
 									</>

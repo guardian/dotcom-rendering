@@ -571,6 +571,15 @@ interface BlocksRequest {
 	videoDuration?: number;
 }
 
+/**
+ * KeyEventsRequest is the expected body format for POST requests made to /KeyEvents
+ */
+interface KeyEventsRequest {
+	keyEvents: Block[];
+	format: CAPIFormat;
+	filterKeyEvents: boolean;
+}
+
 interface BadgeType {
 	seriesTag: string;
 	imageUrl: string;
@@ -891,7 +900,7 @@ interface BaseTrailType {
 	branding?: Branding;
 }
 interface TrailType extends BaseTrailType {
-	palette: Palette;
+	palette?: never;
 	format: ArticleFormat;
 }
 

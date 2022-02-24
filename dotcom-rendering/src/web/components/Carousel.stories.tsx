@@ -2,8 +2,6 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { ElementContainer } from './ElementContainer';
 
-import { decidePalette } from '../lib/decidePalette';
-
 import { Carousel } from './Carousel';
 
 export default {
@@ -29,7 +27,6 @@ const convertToImmersive = (trails: TrailType[]): TrailType[] => {
 		return {
 			...trail,
 			format,
-			palette: decidePalette(format),
 		};
 	});
 };
@@ -52,11 +49,6 @@ const trails: TrailType[] = [
 			theme: ArticlePillar.News,
 			design: ArticleDesign.LiveBlog,
 		},
-		palette: decidePalette({
-			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
-			design: ArticleDesign.LiveBlog,
-		}),
 		webPublicationDate: '2021-02-17T12:45:05.000Z',
 		headline:
 			'UK Covid live: England lockdown to be eased in stages, says PM, amid reports of nationwide mass testing',
@@ -79,11 +71,6 @@ const trails: TrailType[] = [
 			theme: ArticlePillar.News,
 			design: ArticleDesign.Standard,
 		},
-		palette: decidePalette({
-			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
-			design: ArticleDesign.Standard,
-		}),
 		webPublicationDate: '2021-02-17T10:03:02.000Z',
 		headline:
 			'UK to infect up to 90 healthy volunteers with Covid in world first trial',
@@ -106,11 +93,6 @@ const trails: TrailType[] = [
 			theme: ArticlePillar.News,
 			design: ArticleDesign.Standard,
 		},
-		palette: decidePalette({
-			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
-			design: ArticleDesign.Standard,
-		}),
 		webPublicationDate: '2021-02-17T11:11:43.000Z',
 		headline:
 			'Scottish government inadequately prepared for Covid, says watchdog',
@@ -133,11 +115,6 @@ const trails: TrailType[] = [
 			theme: ArticlePillar.News,
 			design: ArticleDesign.Standard,
 		},
-		palette: decidePalette({
-			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
-			design: ArticleDesign.Standard,
-		}),
 		webPublicationDate: '2021-02-16T16:00:55.000Z',
 		headline:
 			'‘Encouraging’ signs for Covid vaccine as over-80s deaths fall in England',
@@ -160,11 +137,6 @@ const trails: TrailType[] = [
 			theme: ArticlePillar.News,
 			design: ArticleDesign.Standard,
 		},
-		palette: decidePalette({
-			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
-			design: ArticleDesign.Standard,
-		}),
 		webPublicationDate: '2021-02-16T18:22:53.000Z',
 		headline:
 			'Contact tracing alone has little impact on curbing Covid spread, report finds',
@@ -187,11 +159,6 @@ const trails: TrailType[] = [
 			theme: ArticlePillar.News,
 			design: ArticleDesign.Standard,
 		},
-		palette: decidePalette({
-			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
-			design: ArticleDesign.Standard,
-		}),
 		webPublicationDate: '2021-02-16T16:35:45.000Z',
 		headline:
 			'Ethnicity and poverty are Covid risk factors, new Oxford modelling tool shows',
@@ -214,11 +181,6 @@ const trails: TrailType[] = [
 			theme: ArticlePillar.News,
 			design: ArticleDesign.LiveBlog,
 		},
-		palette: decidePalette({
-			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
-			design: ArticleDesign.LiveBlog,
-		}),
 		webPublicationDate: '2021-02-16T17:00:15.000Z',
 		headline:
 			'UK Covid: 799 more deaths and 10,625 new cases reported; Scottish schools in phased return from Monday – as it happened',
@@ -241,11 +203,6 @@ const trails: TrailType[] = [
 			theme: ArticlePillar.News,
 			design: ArticleDesign.Analysis,
 		},
-		palette: decidePalette({
-			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
-			design: ArticleDesign.Analysis,
-		}),
 		webPublicationDate: '2021-02-16T18:42:44.000Z',
 		headline:
 			'QCovid: how improved algorithm can identify more higher-risk adults',

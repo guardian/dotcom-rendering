@@ -312,13 +312,7 @@ export const InteractiveBlockComponent = ({
 					</>
 				)}
 			</figure>
-			{caption && (
-				<Caption
-					captionText={caption}
-					format={format}
-					palette={palette}
-				/>
-			)}
+			{caption && <Caption captionText={caption} format={format} />}
 		</>
 	);
 };

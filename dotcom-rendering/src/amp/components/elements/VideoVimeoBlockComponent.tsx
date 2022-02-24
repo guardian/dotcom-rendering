@@ -6,7 +6,12 @@ export const VideoVimeoBlockComponent: React.FC<{
 	element: VideoVimeoBlockElement;
 	pillar: ArticleTheme;
 }> = ({ element, pillar }) => {
-	const vimeoId = getIdFromUrl(element.url, '(\\d+)($|\\/)', true);
+	// This is a hack as `url` is coming through as `""` from the embed.ly oembed endpoint
+	// which is used in composer.
+	// see: https://github.com/guardian/dotcom-rendering/issues/4057
+	// We should remove this once ☝️ is fixed.
+	const url = element.url === '' ? element.originalUrl ?? '' : element.url;
+	const vimeoId = getIdFromUrl(url, '(\\d+)($|\\/)', true);
 
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>

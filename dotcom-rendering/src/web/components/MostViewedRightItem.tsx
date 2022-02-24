@@ -94,7 +94,6 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 						{trail.format.design === ArticleDesign.LiveBlog ? (
 							<LinkHeadline
 								headlineText={trail.headline}
-								palette={trail.palette}
 								format={trail.format}
 								size="small"
 								showUnderline={isHovered}
@@ -108,7 +107,6 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 						) : (
 							<LinkHeadline
 								headlineText={trail.headline}
-								palette={trail.palette}
 								format={trail.format}
 								size="small"
 								showUnderline={isHovered}

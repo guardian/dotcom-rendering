@@ -2802,10 +2802,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^22.2.0":
-  version "22.2.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-22.2.0.tgz#ee2549bb57893bdddf87feccf2c4317e7ddb9db0"
-  integrity sha512-p4h19meQlZfC5X1ra1zuOF5J75Upe0Gipe5l9K0uo/L1LoWgXNxj+D8zIb5c3y4USh1fZ+Gmkg97uy3DVdbPjA==
+"@guardian/atoms-rendering@^22.3.0":
+  version "22.3.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-22.3.0.tgz#9472f7ed8bfbd791b4afd1aa239e6f06852b2a49"
+  integrity sha512-LMmNXATyxVxUtD2jYcJ6meJCqjTbAv4N+kG537igv0OwjpFF2W1URy+w9Jp2XJ0ukBcTOQuCRk3EQFzrwzlMqw==
   dependencies:
     youtube-player "^5.5.2"
 
@@ -5078,14 +5078,6 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
-"@types/node-fetch@^2.5.10":
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.1.tgz#8f127c50481db65886800ef496f20bbf15518975"
-  integrity sha512-oMqjURCaxoSIsHSr1E47QHzbmzNR5rK8McHuNb11BOM9cHcIK3Avy0s/b2JlXHoQGTYS3NsvWzV1M0iK7l0wbA==
-  dependencies:
-    "@types/node" "*"
-    form-data "^3.0.0"
-
 "@types/node-fetch@^2.5.7":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.0.tgz#bf854a36a0d0d99436fd199e06612ef4e73591b6"
@@ -5093,6 +5085,14 @@
   dependencies:
     "@types/node" "*"
     form-data "^2.3.3"
+
+"@types/node-fetch@^2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.1.tgz#8f127c50481db65886800ef496f20bbf15518975"
+  integrity sha512-oMqjURCaxoSIsHSr1E47QHzbmzNR5rK8McHuNb11BOM9cHcIK3Avy0s/b2JlXHoQGTYS3NsvWzV1M0iK7l0wbA==
+  dependencies:
+    "@types/node" "*"
+    form-data "^3.0.0"
 
 "@types/node@*":
   version "17.0.2"
@@ -7648,10 +7648,10 @@ chownr@^2.0.0:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-2.0.0.tgz#15bfbe53d2eab4cf70f18a8cd68ebe5b3cb1dece"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
 
-chromatic@^6.0.6:
-  version "6.0.6"
-  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-6.0.6.tgz#f0e6343c322ca6b838f61b1559f25ff0d4df7a8c"
-  integrity sha512-px0i8VDjCCMtAq8Oxo++tQb8/ADuE54Cy3VCAMpdYyT/4Vly8nmJbdxDx/YzJwhSD+w1uUurh18DA9AZQ/xW0A==
+chromatic@^6.5.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/chromatic/-/chromatic-6.5.1.tgz#9efd2d19b4a9596ba4ea66f622823f4533df05b3"
+  integrity sha512-TASnx9apJAokwpnTZvmLzd0+xDMkByEa4i89rrP27cqriI0aLqvGt/ckocGOk6UrVBn/e2pdwPeTLtkGMxCQHQ==
 
 chrome-launcher@^0.13.4:
   version "0.13.4"
@@ -14248,10 +14248,10 @@ log-update@^4.0.0:
     slice-ansi "^4.0.0"
     wrap-ansi "^6.2.0"
 
-log4js@6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/log4js/-/log4js-6.4.0.tgz#3f63ccfc8033c83cd617a4d2d50e48be5944eae9"
-  integrity sha512-ysc/XUecZJuN8NoKOssk3V0cQ29xY4fra6fnigZa5VwxFsCsvdqsdnEuAxNN89LlHpbE4KUD3zGcn+kFqonSVQ==
+log4js@6.4.1:
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/log4js/-/log4js-6.4.1.tgz#9d3a8bf2c31c1e213fe3fc398a6053f7a2bc53e8"
+  integrity sha512-iUiYnXqAmNKiIZ1XSAitQ4TmNs8CdZYTAWINARF3LjnsLN8tY5m0vRwd6uuWj/yNY0YHxeZodnbmxKFUOM2rMg==
   dependencies:
     date-format "^4.0.3"
     debug "^4.3.3"
