@@ -131,7 +131,6 @@ export const SlotBodyEnd = ({
 			contributionsServiceUrl,
 			idApiUrl,
 			stage,
-			// useOnce makes sure that all deps aren't undefined making it safe to cast this.
 			asyncArticleCount: asyncArticleCount as Promise<
 				WeeklyArticleHistory | undefined
 			>,
