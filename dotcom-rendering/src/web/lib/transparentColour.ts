@@ -37,7 +37,7 @@ export const transparentColour = (
 	const g = getColour(colour.slice(1 + hex, 1 + hex * 2));
 	const b = getColour(colour.slice(1 + hex * 2, 1 + hex * 3));
 
-	if([r,g,b].some(Number.isNaN)) return fallback;
+	if ([r, g, b].some(Number.isNaN)) return fallback;
 
 	return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 };
