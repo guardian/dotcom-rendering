@@ -1,3 +1,16 @@
+const getColour = (string: string) => {
+	switch (string.length) {
+		case 2:
+			return parseInt(string, 16);
+		case 1:
+			return parseInt(string + string, 16);
+		default:
+			return 127;
+	}
+};
+
+const fallback = 'rgba(127, 127, 127, 0.5)';
+
 /**
  * Transforms a hex colour to a transparent one of the same colour.
  *
@@ -14,10 +27,17 @@ export const transparentColour = (
 	colour: string,
 	opacity = 0.5,
 ): `rgba(${number}, ${number}, ${number}, ${number})` => {
-	// extract hex colours as numbers
-	const r = parseInt(colour.slice(1, 3), 16);
-	const g = parseInt(colour.slice(3, 5), 16);
-	const b = parseInt(colour.slice(5, 7), 16);
+	// if we have an invalid string,
+	if (colour.charAt(0) !== '#' || ![4, 7].includes(colour.length))
+		return fallback;
+
+	const hex = colour.length === 7 ? 2 : 1;
+
+	const r = getColour(colour.slice(1, 1 + hex));
+	const g = getColour(colour.slice(1 + hex, 1 + hex * 2));
+	const b = getColour(colour.slice(1 + hex * 2, 1 + hex * 3));
+
+	if([r,g,b].some(Number.isNaN)) return fallback;
 
 	return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 };
