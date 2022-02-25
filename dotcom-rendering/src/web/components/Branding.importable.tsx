@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { neutral, until, textSans } from '@guardian/source-foundations';
-import {trackSponsorLogoLinkClick} from "../browser/ga/ga";
+import { trackSponsorLogoLinkClick } from '../browser/ga/ga';
 
 const brandingStyle = css`
 	padding-bottom: 10px;
@@ -33,7 +33,6 @@ const brandingAboutLink = (palette: Palette) => css`
 	}
 `;
 
-
 export const Branding: React.FC<{
 	branding: Branding;
 	palette: Palette;
@@ -48,7 +47,12 @@ export const Branding: React.FC<{
 					data-sponsor={branding.sponsorName.toLowerCase()}
 					rel="nofollow"
 					aria-label={`Visit the ${branding.sponsorName} website`}
-					onClick={() => trackSponsorLogoLinkClick(branding.sponsorName.toLocaleLowerCase())}
+					onClick={() =>
+						trackSponsorLogoLinkClick(
+							branding.sponsorName.toLocaleLowerCase(),
+						)
+					}
+					data-cy="branding-logo"
 				>
 					<img src={branding.logo.src} alt={branding.sponsorName} />
 				</a>
