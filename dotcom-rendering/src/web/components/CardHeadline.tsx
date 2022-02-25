@@ -102,13 +102,13 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	}
 	switch (size) {
 		case 'small':
-			return generateUnderlinedCss(21);
+			return generateUnderlinedCss(22);
 		case 'medium':
-			return generateUnderlinedCss(24);
+			return generateUnderlinedCss(25);
 		case 'large':
-			return generateUnderlinedCss(28);
+			return generateUnderlinedCss(29);
 		default:
-			return generateUnderlinedCss(23);
+			return generateUnderlinedCss(24);
 	}
 };
 
