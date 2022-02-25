@@ -3,7 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
-import { OptionKind, partition, some, withDefault } from '@guardian/types';
+import { partition, some, withDefault } from '@guardian/types';
 import Comment from 'components/layout/comment';
 import Standard from 'components/layout/standard';
 import {
