@@ -13,6 +13,7 @@ type Props = {
 	switches: Switches;
 	onFirstPage: boolean;
 	webURL: string;
+	mostRecentBlockId: string;
 };
 
 const isServer = typeof window === 'undefined';
@@ -139,13 +140,11 @@ export const Liveness = ({
 	switches,
 	onFirstPage,
 	webURL,
+	mostRecentBlockId,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
-	const [latestBlockId, setLatestBlockId] = useState(
-		// By default we use the first (latest) block id on the page
-		document.querySelector('#maincontent :first-child')?.id || '',
-	);
+	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 
 	/**
 	 * This function runs (once) after every successful useApi call. This is useful because it

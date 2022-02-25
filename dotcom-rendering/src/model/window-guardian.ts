@@ -213,6 +213,7 @@ export const makeGuardianBrowserCAPI = (CAPI: CAPIType): CAPIBrowserType => {
 			.concat(CAPI.mainMediaElements)
 			// Filter for elements that need hydrating -> [h,h]
 			.filter((element) => needsHydrating(element)),
+		mostRecentBlockId: CAPI.mostRecentBlockId,
 	};
 };
 
