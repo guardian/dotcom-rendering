@@ -18,7 +18,7 @@ export interface ArticleCounts {
 
 // We should monitor this function call to ensure it only happens within an
 // article pages when other pages are supported by DCR.
-export const getArticleCount = async (
+export const getArticleCounts = async (
 	pageId: string,
 	keywordIds: string,
 ): Promise<ArticleCounts> => {
@@ -29,7 +29,7 @@ export const getArticleCount = async (
 		};
 
 	// hasOptedOut needs to be done before we check if articleCount is set in the window
-	// This is because a potential race condition where one invocation of getArticleCount
+	// This is because a potential race condition where one invocation of getArticleCounts
 	// is waiting for hasOptedOut another invocation might receive it and increment the article count.
 	if (!window.guardian.weeklyArticleCount) {
 		incrementWeeklyArticleCount(

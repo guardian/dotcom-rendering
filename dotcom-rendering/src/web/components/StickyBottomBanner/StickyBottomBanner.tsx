@@ -5,7 +5,7 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { ArticleCounts, getArticleCount } from '../../../lib/article-count';
+import { ArticleCounts, getArticleCounts } from '../../../lib/article-count';
 import {
 	canShowRRBanner,
 	canShowPuzzlesBanner,
@@ -223,7 +223,7 @@ export const StickyBottomBanner = ({
 	});
 
 	useEffect(() => {
-		setAsyncArticleCounts(getArticleCount(pageId, keywordsId));
+		setAsyncArticleCounts(getArticleCounts(pageId, keywordsId));
 	}, [pageId, keywordsId]);
 
 	useOnce(() => {
