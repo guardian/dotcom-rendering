@@ -1,7 +1,7 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
-import { onConsentChange } from '@guardian/consent-management-platform';
-import { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { getLocale } from '@guardian/libs';
+import { getCmpAsync } from '../../lib/getCmp';
 import {
 	DailyArticle,
 	getDailyArticleCount,
@@ -68,7 +68,7 @@ export const isValidTag = (tags: TagType[]): boolean => {
 	);
 };
 
-export const hasRequiredConsents = (): Promise<boolean> => {
+export const hasRequiredConsents = async (): Promise<boolean> => {
 	const hasConsentedToAll = (state: ConsentState) => {
 		const consentFlags = state.tcfv2?.consents
 			? Object.values(state.tcfv2.consents)
@@ -83,6 +83,8 @@ export const hasRequiredConsents = (): Promise<boolean> => {
 			!isEmpty && [...consentFlags, ...vendorConsentFlags].every(Boolean)
 		);
 	};
+
+	const { onConsentChange } = await getCmpAsync();
 
 	return new Promise((resolve) => {
 		onConsentChange((state) => {

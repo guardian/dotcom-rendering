@@ -1,6 +1,6 @@
-import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import { getIdApiUserData, IdApiUserData } from './getIdapiUserData';
+import { getCmpAsync } from './getCmp';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
@@ -159,21 +159,26 @@ export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 		if (getCookie({ name: 'gu-cmp-disabled', shouldMemoize: true })) {
 			resolve(true);
 		}
-		onConsentChange(({ ccpa, tcfv2, aus }) => {
-			if (ccpa || aus) {
-				resolve(true);
-			} else if (tcfv2) {
-				const hasRequiredConsents =
-					REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
-						(consent) => tcfv2.consents[consent],
-					);
 
-				if (!hasRequiredConsents) {
-					removeArticleCountsFromLocalStorage();
-				}
-				resolve(hasRequiredConsents);
-			}
-		});
+		getCmpAsync()
+			.then(({ onConsentChange }) => {
+				onConsentChange(({ ccpa, tcfv2, aus }) => {
+					if (ccpa || aus) {
+						resolve(true);
+					} else if (tcfv2) {
+						const hasRequiredConsents =
+							REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
+								(consent) => tcfv2.consents[consent],
+							);
+
+						if (!hasRequiredConsents) {
+							removeArticleCountsFromLocalStorage();
+						}
+						resolve(hasRequiredConsents);
+					}
+				});
+			})
+			.catch(() => resolve(false));
 	});
 };
 
@@ -187,17 +192,22 @@ export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
 		if (getCookie({ name: 'gu-cmp-disabled', shouldMemoize: true })) {
 			resolve(true);
 		}
-		onConsentChange(({ ccpa, tcfv2, aus }) => {
-			if (ccpa || aus) {
-				resolve(true);
-			} else if (tcfv2) {
-				const hasRequiredConsents =
-					REQUIRED_CONSENTS_FOR_BROWSER_ID.every(
-						(consent) => tcfv2.consents[consent],
-					);
-				resolve(hasRequiredConsents);
-			}
-		});
+
+		getCmpAsync()
+			.then((guCmpHotFix) => {
+				guCmpHotFix.onConsentChange(({ ccpa, tcfv2, aus }) => {
+					if (ccpa || aus) {
+						resolve(true);
+					} else if (tcfv2) {
+						const hasRequiredConsents =
+							REQUIRED_CONSENTS_FOR_BROWSER_ID.every(
+								(consent) => tcfv2.consents[consent],
+							);
+						resolve(hasRequiredConsents);
+					}
+				});
+			})
+			.catch(() => resolve(false));
 	});
 
 const twentyMins = 20 * 60000;

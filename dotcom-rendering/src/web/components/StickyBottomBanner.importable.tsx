@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { cmp } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { getArticleCount } from '../../../lib/article-count';
+import useSWR from 'swr';
+import { getCmpAsync } from '../lib/getCmp';
+import { getArticleCount } from '../../lib/article-count';
 import {
 	canShowRRBanner,
 	canShowPuzzlesBanner,
@@ -14,21 +15,24 @@ import {
 	PuzzlesBanner,
 	BannerProps,
 	CanShowFunctionType,
-} from './ReaderRevenueBanner';
-import { getAlreadyVisitedCount } from '../../lib/alreadyVisited';
-import { useOnce } from '../../lib/useOnce';
+} from './StickyBottomBanner/ReaderRevenueBanner';
+import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
+import { useOnce } from '../lib/useOnce';
 import {
 	pickMessage,
 	SlotConfig,
 	MaybeFC,
 	CandidateConfig,
-} from '../../lib/messagePicker';
-import { getLocaleCode } from '../../lib/getCountryCode';
-import { useSignInGateWillShow } from '../../lib/useSignInGateWillShow';
-import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
+} from '../lib/messagePicker';
+import { getLocaleCode } from '../lib/getCountryCode';
+import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
+import {
+	BrazeBanner,
+	canShowBrazeBanner,
+} from './StickyBottomBanner/BrazeBanner';
+import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 
 type Props = {
-	brazeMessages?: Promise<BrazeMessagesInterface>;
 	contentType: string;
 	sectionName?: string;
 	section: string;
@@ -68,8 +72,8 @@ const buildCmpBannerConfig = (): CandidateConfig<void> => ({
 	candidate: {
 		id: 'cmpUi',
 		canShow: () =>
-			cmp
-				.willShowPrivacyMessage()
+			getCmpAsync()
+				.then(({ cmp }) => cmp.willShowPrivacyMessage())
 				.then((result) =>
 					result ? { show: true, meta: undefined } : { show: false },
 				),
@@ -193,7 +197,6 @@ const buildBrazeBanner = (
 });
 
 export const StickyBottomBanner = ({
-	brazeMessages,
 	contentType,
 	sectionName,
 	section,
@@ -209,6 +212,19 @@ export const StickyBottomBanner = ({
 	pageId,
 	keywordsId,
 }: Props) => {
+	const [brazeMessages, setBrazeMessages] = useState<
+		Promise<BrazeMessagesInterface> | undefined
+	>();
+
+	useSWR('braze-message', () => buildBrazeMessages(idApiUrl), {
+		onSuccess: (data) => {
+			setBrazeMessages(Promise.resolve(data));
+		},
+		onError: () => {
+			setBrazeMessages(Promise.reject());
+		},
+	});
+
 	const asyncCountryCode = getLocaleCode();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);

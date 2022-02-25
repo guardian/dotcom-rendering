@@ -8,8 +8,8 @@ import {
 	EpicPayload,
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { cmp } from '@guardian/consent-management-platform';
 import { getCookie, storage } from '@guardian/libs';
+import { getCmpAsync } from '../../lib/getCmp';
 import {
 	isRecurringContributor,
 	getLastOneOffContributionTimestamp,
@@ -156,7 +156,9 @@ export const ReaderRevenueEpic = ({
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 
 	const openCmp = () => {
-		cmp.showPrivacyManager();
+		getCmpAsync()
+			.then(({ cmp }) => cmp.showPrivacyManager())
+			.catch((e) => console.error('Failed to open privacy manager', e));
 	};
 
 	useEffect(() => {

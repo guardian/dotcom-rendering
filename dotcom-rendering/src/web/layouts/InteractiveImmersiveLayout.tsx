@@ -36,6 +36,7 @@ import { decideLineEffect, decideLineCount } from '../lib/layoutHelpers';
 import { Standfirst } from '../components/Standfirst';
 import { Caption } from '../components/Caption';
 import { Island } from '../components/Island';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 const InteractiveImmersiveGrid = ({
 	children,
@@ -473,7 +474,26 @@ export const InteractiveImmersiveLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<BannerWrapper>
+				<Island clientOnly={true}>
+					<StickyBottomBanner
+						contentType={CAPI.contentType}
+						sectionName={CAPI.sectionName}
+						section={CAPI.config.section}
+						tags={CAPI.tags}
+						isPaidContent={CAPI.pageType.isPaidContent}
+						isPreview={!!CAPI.config.isPreview}
+						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						isMinuteArticle={CAPI.pageType.isMinuteArticle}
+						isSensitive={CAPI.config.isSensitive}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						idApiUrl={CAPI.config.idApiUrl}
+						switches={CAPI.config.switches}
+						pageId={CAPI.pageId}
+						keywordsId={CAPI.config.keywordIds}
+					/>
+				</Island>
+			</BannerWrapper>
 			<MobileStickyContainer />
 		</>
 	);

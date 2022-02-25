@@ -22,3 +22,23 @@ export const getCmp = () => {
 	}
 	return window.guCmpHotFix;
 };
+
+export const getCmpAsync = (
+	timeout: number = 30_000,
+): Promise<typeof window.guCmpHotFix> =>
+	new Promise((resolve, reject) => {
+		if (typeof window === 'undefined') return reject();
+
+		const interval = setInterval(() => {
+			const cmp = getCmp();
+			if (cmp) {
+				clearInterval(interval);
+				return resolve(cmp);
+			}
+		}, 200);
+
+		setTimeout(() => {
+			clearInterval(interval);
+			return reject();
+		}, timeout);
+	});
