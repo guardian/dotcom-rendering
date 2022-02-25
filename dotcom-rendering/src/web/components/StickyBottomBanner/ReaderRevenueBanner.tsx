@@ -10,10 +10,8 @@ import {
 	ModuleData,
 	ModuleDataResponse,
 	BannerPayload,
-	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { DailyArticleCount } from '../../lib/dailyArticleCount';
-import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
+import { useIsInView } from '../../lib/useIsInView';
 import {
 	shouldHideSupportMessaging,
 	withinLocalNoBannerCachePeriod,
@@ -28,6 +26,7 @@ import { trackNonClickInteraction } from '../../browser/ga/ga';
 import { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
 import { useOnce } from '../../lib/useOnce';
+import { ArticleCounts } from '../../../lib/article-count';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -47,8 +46,7 @@ type BaseProps = {
 type BuildPayloadProps = BaseProps & {
 	countryCode: string;
 	optedOutOfArticleCount: boolean;
-	asyncWeeklyArticleCount: Promise<WeeklyArticleHistory | undefined>;
-	asyncDailyArticleCount: Promise<DailyArticleCount | undefined>;
+	asyncArticleCounts: Promise<ArticleCounts>;
 };
 
 type CanShowProps = BaseProps & {
@@ -58,8 +56,7 @@ type CanShowProps = BaseProps & {
 	isPreview: boolean;
 	idApiUrl: string;
 	signInGateWillShow: boolean;
-	asyncWeeklyArticleCount: Promise<WeeklyArticleHistory | undefined>;
-	asyncDailyArticleCount: Promise<DailyArticleCount | undefined>;
+	asyncArticleCounts: Promise<ArticleCounts>;
 };
 
 type ReaderRevenueComponentType =
@@ -79,16 +76,18 @@ const buildPayload = async ({
 	subscriptionBannerLastClosedAt,
 	countryCode,
 	optedOutOfArticleCount,
-	asyncWeeklyArticleCount,
-	asyncDailyArticleCount,
+	asyncArticleCounts,
 	sectionId,
 	tags,
 	contentType,
 }: BuildPayloadProps): Promise<BannerPayload> => {
-	const articleCountToday: Promise<number | undefined> =
-		asyncDailyArticleCount.then(
-			(history) => history && history[0] && history[0].count,
-		);
+	const { weeklyArticleHistory, dailyArticleHistory } =
+		await asyncArticleCounts;
+	const articleCountToday: number | undefined =
+		dailyArticleHistory &&
+		dailyArticleHistory[0] &&
+		dailyArticleHistory[0].count;
+
 	return {
 		tracking: {
 			ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -107,8 +106,8 @@ const buildPayload = async ({
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 			),
 			countryCode,
-			weeklyArticleHistory: await asyncWeeklyArticleCount,
-			articleCountToday: await articleCountToday,
+			weeklyArticleHistory,
+			articleCountToday,
 			hasOptedOutOfArticleCount: optedOutOfArticleCount,
 			modulesVersion: MODULES_VERSION,
 			sectionId,
@@ -136,8 +135,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	isPreview,
 	idApiUrl,
 	signInGateWillShow,
-	asyncWeeklyArticleCount,
-	asyncDailyArticleCount,
+	asyncArticleCounts,
 }) => {
 	if (!remoteBannerConfig) return { show: false };
 
@@ -176,8 +174,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
 		optedOutOfArticleCount,
-		asyncWeeklyArticleCount,
-		asyncDailyArticleCount,
+		asyncArticleCounts,
 	});
 
 	const response: ModuleDataResponse = await getBanner(
@@ -216,8 +213,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
 	section,
-	asyncWeeklyArticleCount,
-	asyncDailyArticleCount,
+	asyncArticleCounts,
 }) => {
 	const isPuzzlesPage =
 		section === 'crosswords' ||
@@ -246,8 +242,7 @@ export const canShowPuzzlesBanner: CanShowFunctionType<BannerProps> = async ({
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
 			optedOutOfArticleCount,
-			asyncWeeklyArticleCount,
-			asyncDailyArticleCount,
+			asyncArticleCounts,
 		});
 		return getPuzzlesBanner(contributionsServiceUrl, bannerPayload).then(
 			(response: ModuleDataResponse) => {
@@ -284,7 +279,7 @@ const RemoteBanner = ({
 }: RemoteBannerProps) => {
 	const [Banner, setBanner] = useState<React.FC>();
 
-	const [hasBeenSeen, setNode] = useHasBeenSeen({
+	const [hasBeenSeen, setNode] = useIsInView({
 		threshold: 0,
 		debounce: true,
 	});

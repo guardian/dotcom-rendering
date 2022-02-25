@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { useHasBeenSeen } from '../lib/useHasBeenSeen';
+import { useIsInView } from '../lib/useIsInView';
 
 type Props = {
 	children: JSX.Element;
@@ -16,7 +16,7 @@ const flexGrowStyles = css`
 `;
 
 export const Lazy = ({ children, margin, disableFlexStyles }: Props) => {
-	const [hasBeenSeen, setRef] = useHasBeenSeen({
+	const [hasBeenSeen, setRef] = useIsInView({
 		rootMargin: `${margin}px`,
 	});
 

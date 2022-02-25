@@ -633,6 +633,10 @@ const backgroundStandfirst = ({
 		}
 	}
 
+	if (design === ArticleDesign.Comment) {
+		return opinion[800];
+	}
+
 	return neutral[100];
 };
 

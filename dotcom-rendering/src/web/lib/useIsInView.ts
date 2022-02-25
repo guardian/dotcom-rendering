@@ -1,10 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import libDebounce from 'lodash.debounce';
 
-const useHasBeenSeen = (
-	options: IntersectionObserverInit & { debounce?: boolean },
+const useIsInView = (
+	options: IntersectionObserverInit & {
+		debounce?: boolean;
+		repeat?: boolean;
+	},
 ): [boolean, React.Dispatch<React.SetStateAction<HTMLElement | null>>] => {
-	const [hasBeenSeen, setHasBeenSeen] = useState<boolean>(false);
+	const [isInView, setIsInView] = useState<boolean>(false);
 	const [node, setNode] = useState<HTMLElement | null>(null);
 
 	const observer = useRef<IntersectionObserver | null>(null);
@@ -13,7 +16,9 @@ const useHasBeenSeen = (
 	// 200ms before the callback is executed
 	const intersectionFn: IntersectionObserverCallback = ([entry]) => {
 		if (entry.isIntersecting) {
-			setHasBeenSeen(true);
+			setIsInView(true);
+		} else if (options.repeat) {
+			setIsInView(false);
 		}
 	};
 	const intersectionCallback = options.debounce
@@ -41,7 +46,7 @@ const useHasBeenSeen = (
 		}
 	}, [node, options, intersectionCallback]);
 
-	return [hasBeenSeen, setNode];
+	return [isInView, setNode];
 };
 
-export { useHasBeenSeen };
+export { useIsInView };

@@ -15,7 +15,7 @@ const DeadBlog = (): ReactElement => <Live item={{ ...deadBlog }} />;
 
 export default {
 	component: Live,
-	title: 'AR/LiveBlog Prototype',
+	title: 'AR/Layouts/LiveBlog',
 	decorators: [withKnobs],
 	parameters: {
 		layout: 'fullscreen',

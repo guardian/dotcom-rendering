@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { DailyArticleCount } from '../../lib/dailyArticleCount';
+import { ArticleCounts, getArticleCount } from '../../../lib/article-count';
 import {
 	canShowRRBanner,
 	canShowPuzzlesBanner,
@@ -29,10 +28,6 @@ import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
 	brazeMessages?: Promise<BrazeMessagesInterface>;
-	asyncWeeklyArticleCount:
-		| Promise<WeeklyArticleHistory | undefined>
-		| undefined;
-	asyncDailyArticleCount: Promise<DailyArticleCount | undefined> | undefined;
 	contentType: string;
 	sectionName?: string;
 	section: string;
@@ -45,6 +40,8 @@ type Props = {
 	contributionsServiceUrl: string;
 	idApiUrl: string;
 	switches: Switches;
+	pageId: string;
+	keywordsId: string;
 };
 
 type RRBannerConfig = {
@@ -94,8 +91,7 @@ const buildRRBannerConfigWith = ({
 		isSignedIn,
 		asyncCountryCode,
 		isPreview,
-		asyncWeeklyArticleCount,
-		asyncDailyArticleCount,
+		asyncArticleCounts,
 		signInGateWillShow = false,
 		contentType,
 		section,
@@ -111,8 +107,7 @@ const buildRRBannerConfigWith = ({
 		isSignedIn: boolean;
 		asyncCountryCode: Promise<string>;
 		isPreview: boolean;
-		asyncWeeklyArticleCount: Promise<WeeklyArticleHistory | undefined>;
-		asyncDailyArticleCount: Promise<DailyArticleCount | undefined>;
+		asyncArticleCounts: Promise<ArticleCounts>;
 		signInGateWillShow?: boolean;
 		contentType: string;
 		section: string;
@@ -152,8 +147,7 @@ const buildRRBannerConfigWith = ({
 						isPreview,
 						idApiUrl,
 						signInGateWillShow,
-						asyncWeeklyArticleCount,
-						asyncDailyArticleCount,
+						asyncArticleCounts,
 					}),
 				show:
 					({ meta, module, fetchEmail }: BannerProps) =>
@@ -199,8 +193,6 @@ const buildBrazeBanner = (
 
 export const StickyBottomBanner = ({
 	brazeMessages,
-	asyncWeeklyArticleCount,
-	asyncDailyArticleCount,
 	contentType,
 	sectionName,
 	section,
@@ -213,10 +205,14 @@ export const StickyBottomBanner = ({
 	contributionsServiceUrl,
 	idApiUrl,
 	switches,
+	pageId,
+	keywordsId,
 }: Props) => {
 	const asyncCountryCode = getLocaleCode();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
+	const [asyncArticleCounts, setAsyncArticleCounts] =
+		useState<Promise<ArticleCounts>>();
 	const signInGateWillShow = useSignInGateWillShow({
 		isSignedIn,
 		contentType,
@@ -225,18 +221,18 @@ export const StickyBottomBanner = ({
 		isPaidContent,
 		isPreview,
 	});
+
+	useEffect(() => {
+		setAsyncArticleCounts(getArticleCount(pageId, keywordsId));
+	}, [pageId, keywordsId]);
+
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
 		const puzzlesBanner = buildPuzzlesBannerConfig({
 			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
-			asyncWeeklyArticleCount: asyncWeeklyArticleCount as Promise<
-				WeeklyArticleHistory | undefined
-			>,
-			asyncDailyArticleCount: asyncDailyArticleCount as Promise<
-				DailyArticleCount | undefined
-			>,
+			asyncArticleCounts: asyncArticleCounts as Promise<ArticleCounts>,
 			contentType,
 			section,
 			shouldHideReaderRevenue,
@@ -252,12 +248,7 @@ export const StickyBottomBanner = ({
 			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
-			asyncWeeklyArticleCount: asyncWeeklyArticleCount as Promise<
-				WeeklyArticleHistory | undefined
-			>,
-			asyncDailyArticleCount: asyncDailyArticleCount as Promise<
-				DailyArticleCount | undefined
-			>,
+			asyncArticleCounts: asyncArticleCounts as Promise<ArticleCounts>,
 			signInGateWillShow,
 			contentType,
 			section,
@@ -289,7 +280,7 @@ export const StickyBottomBanner = ({
 			.catch((e) =>
 				console.error(`StickyBottomBanner pickMessage - error: ${e}`),
 			);
-	}, [isSignedIn, asyncCountryCode, brazeMessages, asyncWeeklyArticleCount]);
+	}, [isSignedIn, asyncCountryCode, brazeMessages, asyncArticleCounts]);
 
 	if (SelectedBanner) {
 		return <SelectedBanner />;

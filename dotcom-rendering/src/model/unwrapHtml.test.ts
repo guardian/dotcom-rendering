@@ -1,9 +1,11 @@
 import { unwrapHtml } from './unwrapHtml';
 
+type Params = Parameters<typeof unwrapHtml>[0];
+
 describe('unwrapHtml', () => {
 	it('Returns unwrapped HTML if prefix and suffix match', () => {
 		// Blockquote, elements inside
-		const bqUnwrap = {
+		const bqUnwrap: Params = {
 			html: '<blockquote class="quote"><p>inner</p></blockquote>',
 			fixes: [
 				{
@@ -17,7 +19,7 @@ describe('unwrapHtml', () => {
 			unwrapHtml(bqUnwrap);
 
 		// Paragraph, no elements inside
-		const pUnwrap = {
+		const pUnwrap: Params = {
 			html: '<p>inner</p>',
 			fixes: [
 				{
@@ -37,7 +39,7 @@ describe('unwrapHtml', () => {
 	});
 
 	it('Returns non-unwrapped HTML if prefix and suffix do not match', () => {
-		const bqUnwrap = {
+		const bqUnwrap: Params = {
 			html: '<blockquote><p>inner</p></blockquote>',
 			fixes: [
 				{
@@ -53,7 +55,7 @@ describe('unwrapHtml', () => {
 	});
 
 	it('Returns wrapped HTML if prefix and suffix of one "fix" match from multiple options', () => {
-		const bqUnwrap = {
+		const bqUnwrap: Params = {
 			html: '<blockquote><p>inner</p></blockquote>',
 			fixes: [
 				{
@@ -75,7 +77,7 @@ describe('unwrapHtml', () => {
 			unwrappedElement: bqUnwrappedElement,
 		} = unwrapHtml(bqUnwrap);
 
-		const pUnwrap = {
+		const pUnwrap: Params = {
 			html: '<p>inner</p>',
 			fixes: [
 				{
@@ -96,7 +98,7 @@ describe('unwrapHtml', () => {
 			unwrappedElement: pUnwrappedElement,
 		} = unwrapHtml(pUnwrap);
 
-		const ulUnwrap = {
+		const ulUnwrap: Params = {
 			html: '<ul><li>Test</li><li>test2</li></ul>',
 			fixes: [
 				{

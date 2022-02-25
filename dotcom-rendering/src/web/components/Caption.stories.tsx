@@ -9,7 +9,6 @@ import { breakpoints } from '@guardian/source-foundations';
 import { ElementContainer } from './ElementContainer';
 import { Caption } from './Caption';
 import { StarRating } from './StarRating/StarRating';
-import { decidePalette } from '../lib/decidePalette';
 
 export default {
 	component: Caption,
@@ -37,11 +36,6 @@ export const Article = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 		/>
 	</ElementContainer>
 );
@@ -56,11 +50,6 @@ export const Analysis = () => (
 				design: ArticleDesign.Analysis,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Analysis,
-				theme: ArticlePillar.News,
-			})}
 		/>
 	</ElementContainer>
 );
@@ -75,11 +64,6 @@ export const PhotoEssay = () => (
 				design: ArticleDesign.PhotoEssay,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Immersive,
-				design: ArticleDesign.PhotoEssay,
-				theme: ArticlePillar.News,
-			})}
 		/>
 	</ElementContainer>
 );
@@ -94,11 +78,6 @@ export const SpecialReport = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticleSpecial.SpecialReport,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticleSpecial.SpecialReport,
-			})}
 		/>
 	</ElementContainer>
 );
@@ -113,11 +92,6 @@ export const PhotoEssayLimitedWidth = () => (
 				design: ArticleDesign.PhotoEssay,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Immersive,
-				design: ArticleDesign.PhotoEssay,
-				theme: ArticlePillar.News,
-			})}
 			shouldLimitWidth={true}
 		/>
 	</ElementContainer>
@@ -133,11 +107,6 @@ export const Credit = () => (
 				design: ArticleDesign.Feature,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Feature,
-				theme: ArticlePillar.News,
-			})}
 			credit="Credited to Able Jones"
 			displayCredit={true}
 		/>
@@ -154,11 +123,6 @@ export const WidthLimited = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			shouldLimitWidth={true}
 		/>
 	</ElementContainer>
@@ -174,11 +138,6 @@ export const Padded = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			padCaption={true}
 		/>
 	</ElementContainer>
@@ -212,11 +171,6 @@ export const Overlayed = () => (
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				padCaption={true}
 			/>
 		</div>
@@ -251,11 +205,6 @@ export const OverlayedWithStars = () => (
 					design: ArticleDesign.Review,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Showcase,
-					design: ArticleDesign.Review,
-					theme: ArticlePillar.News,
-				})}
 				padCaption={true}
 			/>
 			<div
@@ -281,11 +230,6 @@ export const VideoCaption = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			mediaType="Video"
 		/>
 	</ElementContainer>

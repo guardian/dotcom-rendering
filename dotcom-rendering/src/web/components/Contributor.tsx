@@ -13,6 +13,7 @@ import { BylineLink } from './BylineLink';
 import TwitterIcon from '../../static/icons/twitter.svg';
 
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { decidePalette } from '../lib/decidePalette';
 
 const twitterHandleStyles = (palette: Palette) => css`
 	${textSans.xxsmall()};
@@ -87,11 +88,12 @@ export const Contributor: React.FC<{
 	author: AuthorType;
 	tags: TagType[];
 	format: ArticleFormat;
-	palette: Palette;
-}> = ({ author, tags, format, palette }) => {
+}> = ({ author, tags, format }) => {
 	if (!author.byline) {
 		return null;
 	}
+
+	const palette = decidePalette(format);
 
 	const onlyOneContributor: boolean =
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;

@@ -1,5 +1,5 @@
 import {
-	DailyArticleCount,
+	DailyArticleHistory,
 	DailyArticleCountKey,
 	getDailyArticleCount,
 	incrementDailyArticleCount,
@@ -7,7 +7,7 @@ import {
 
 const today = Math.floor(Date.now() / 86400000);
 
-const validDailyArticleCount: DailyArticleCount = [
+const validDailyArticleCount: DailyArticleHistory = [
 	{
 		day: today,
 		count: 3,
@@ -125,7 +125,7 @@ describe('dailyArticleCount', () => {
 	it('increments daily article for today if it does not exist, and removes any older than 60 days', () => {
 		// valid daily article count with some older than 60 days
 		const [, ...withoutToday] = validDailyArticleCount;
-		const mocked: DailyArticleCount = [
+		const mocked: DailyArticleHistory = [
 			...withoutToday,
 			...[
 				{ day: today - 61, count: 1 },

@@ -7,7 +7,6 @@ import { SeriesSectionLink } from './SeriesSectionLink';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	tags: TagType[];
 	sectionLabel: string;
 	sectionUrl: string;
@@ -59,7 +58,6 @@ const immersiveMargins = css`
 
 export const ArticleTitle = ({
 	format,
-	palette,
 	tags,
 	sectionLabel,
 	sectionUrl,
@@ -82,7 +80,6 @@ export const ArticleTitle = ({
 		>
 			<SeriesSectionLink
 				format={format}
-				palette={palette}
 				tags={tags}
 				sectionLabel={sectionLabel}
 				sectionUrl={sectionUrl}

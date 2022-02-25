@@ -3,17 +3,17 @@ export interface DailyArticle {
 	count: number;
 }
 
-export type DailyArticleCount = Array<DailyArticle>;
+export type DailyArticleHistory = Array<DailyArticle>;
 
 // in localStorage, has format {"value":[{"day":18459,"count":1},{"day":18457,"count":1},{"day":18446,"count":1}]} to match frontend
 interface DailyArticleCountLocalStorage {
-	value: DailyArticleCount;
+	value: DailyArticleHistory;
 }
 
 export const DailyArticleCountKey = 'gu.history.dailyArticleCount';
 
 // Returns undefined if no daily article count in local storage
-export const getDailyArticleCount = (): DailyArticleCount | undefined => {
+export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
 	const dailyCount = localStorage.getItem(DailyArticleCountKey);
 
 	if (!dailyCount) {

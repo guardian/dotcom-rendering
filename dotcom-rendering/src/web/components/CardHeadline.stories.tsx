@@ -7,7 +7,6 @@ import {
 
 import { specialReport } from '@guardian/source-foundations';
 import { ElementContainer } from './ElementContainer';
-import { decidePalette } from '../lib/decidePalette';
 
 import { CardHeadline } from './CardHeadline';
 
@@ -15,6 +14,13 @@ export default {
 	component: CardHeadline,
 	title: 'Components/CardHeadline',
 };
+
+const smallHeadlineSizes: SmallHeadlineSize[] = [
+	'large',
+	'medium',
+	'small',
+	'tiny',
+];
 
 export const Article = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
@@ -25,11 +31,6 @@ export const Article = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 		/>
 	</ElementContainer>
 );
@@ -44,11 +45,6 @@ export const Analysis = () => (
 				design: ArticleDesign.Analysis,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Analysis,
-				theme: ArticlePillar.News,
-			})}
 		/>
 	</ElementContainer>
 );
@@ -63,35 +59,32 @@ export const Feature = () => (
 				design: ArticleDesign.Feature,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Feature,
-				theme: ArticlePillar.News,
-			})}
 		/>
 	</ElementContainer>
 );
 Feature.story = { name: 'Feature' };
 
-export const xsmallStory = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
-		<CardHeadline
-			headlineText="This is how a large card headline looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
-			size="large"
-		/>
-	</ElementContainer>
+export const Size = () => (
+	<>
+		{smallHeadlineSizes.map((size) => (
+			<div key={size}>
+				<ElementContainer showTopBorder={false} showSideBorders={false}>
+					<CardHeadline
+						headlineText={`This is how a ${size} card headline looks`}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
+						size={size}
+					/>
+				</ElementContainer>
+				<br />
+			</div>
+		))}
+	</>
 );
-xsmallStory.story = { name: 'Size | large' };
+Size.story = { name: 'Size' };
 
 export const liveStory = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
@@ -102,11 +95,6 @@ export const liveStory = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			kickerText="Live"
 		/>
 	</ElementContainer>
@@ -122,11 +110,6 @@ export const noSlash = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			kickerText="Live"
 			showSlash={false}
 		/>
@@ -143,11 +126,6 @@ export const pulsingDot = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticlePillar.News,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			})}
 			kickerText="Live"
 			showPulsingDot={true}
 		/>
@@ -164,11 +142,6 @@ export const cultureVariant = () => (
 				design: ArticleDesign.Feature,
 				theme: ArticlePillar.Culture,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Feature,
-				theme: ArticlePillar.Culture,
-			})}
 			kickerText="Art and stuff"
 		/>
 	</ElementContainer>
@@ -184,11 +157,6 @@ export const AnalysisXSmall = () => (
 				design: ArticleDesign.Analysis,
 				theme: ArticlePillar.Lifestyle,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Analysis,
-				theme: ArticlePillar.Lifestyle,
-			})}
 			size="large"
 		/>
 	</ElementContainer>
@@ -204,11 +172,6 @@ export const opinionxxxsmall = () => (
 				design: ArticleDesign.Comment,
 				theme: ArticlePillar.Opinion,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Comment,
-				theme: ArticlePillar.Opinion,
-			})}
 			showQuotes={true}
 			size="small"
 		/>
@@ -225,11 +188,6 @@ export const OpinionKicker = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticlePillar.Opinion,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Opinion,
-			})}
 			showQuotes={true}
 			kickerText="George Monbiot"
 			showSlash={true}
@@ -251,11 +209,6 @@ export const SpecialReport = () => (
 				design: ArticleDesign.Standard,
 				theme: ArticleSpecial.SpecialReport,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticleSpecial.SpecialReport,
-			})}
 			showQuotes={true}
 			kickerText="Special Report"
 			showSlash={true}
@@ -273,11 +226,6 @@ export const Busy = () => (
 				design: ArticleDesign.Feature,
 				theme: ArticlePillar.Lifestyle,
 			}}
-			palette={decidePalette({
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Feature,
-				theme: ArticlePillar.Lifestyle,
-			})}
 			showQuotes={true}
 			kickerText="Aerial Yoga"
 			showSlash={true}
@@ -296,11 +244,6 @@ export const Byline = () => (
 					design: ArticleDesign.Feature,
 					theme: ArticleSpecial.Labs,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticleSpecial.Labs,
-				})}
 				byline="Labs byline"
 				showByline={true}
 			/>
@@ -314,11 +257,6 @@ export const Byline = () => (
 					design: ArticleDesign.Feature,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticlePillar.News,
-				})}
 				byline="News byline"
 				showByline={true}
 			/>
@@ -332,11 +270,6 @@ export const Byline = () => (
 					design: ArticleDesign.Feature,
 					theme: ArticlePillar.Sport,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Sport,
-				})}
 				byline="Sport byline"
 				showByline={true}
 			/>
@@ -350,11 +283,6 @@ export const Byline = () => (
 					design: ArticleDesign.Feature,
 					theme: ArticlePillar.Culture,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Culture,
-				})}
 				byline="Culture byline"
 				showByline={true}
 			/>
@@ -368,11 +296,6 @@ export const Byline = () => (
 					design: ArticleDesign.Feature,
 					theme: ArticlePillar.Lifestyle,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Lifestyle,
-				})}
 				byline="Lifestyle byline"
 				showByline={true}
 			/>
@@ -386,11 +309,6 @@ export const Byline = () => (
 					design: ArticleDesign.Feature,
 					theme: ArticlePillar.Opinion,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Opinion,
-				})}
 				byline="Opinion byline"
 				showByline={true}
 			/>
@@ -408,11 +326,6 @@ export const Byline = () => (
 					design: ArticleDesign.Feature,
 					theme: ArticleSpecial.SpecialReport,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticleSpecial.SpecialReport,
-				})}
 				byline="SpecialReport byline"
 				showByline={true}
 			/>
