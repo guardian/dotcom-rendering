@@ -175,7 +175,6 @@ export const Figure = ({
 			</figure>
 		);
 	}
-
 	return (
 		<figure
 			id={id}
