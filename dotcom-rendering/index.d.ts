@@ -93,6 +93,7 @@ type Palette = {
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		cardHeadline: Colour;
+		cardByline: Colour;
 		cardKicker: Colour;
 		linkKicker: Colour;
 		cardStandfirst: Colour;
@@ -499,6 +500,9 @@ interface CAPIType {
 	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
 	isLegacyInteractive?: boolean;
 	filterKeyEvents: boolean;
+
+	// Included on live and dead blogs. Used when polling
+	mostRecentBlockId?: string;
 }
 
 // Browser data models. Note the CAPI prefix here means something different to
@@ -541,6 +545,7 @@ type CAPIBrowserType = {
 	isPreview?: boolean;
 	webTitle: string;
 	stage: string;
+	mostRecentBlockId?: string;
 };
 
 interface TagType {
@@ -862,10 +867,6 @@ interface ComponentNameChunkMap {
 	chunkName: string;
 	addWhen: BlockElementType;
 }
-interface YoutubeBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'YoutubeBlockComponent';
-	addWhen: YoutubeBlockElement['_type'];
-}
 
 interface InteractiveBlockLoadable extends ComponentNameChunkMap {
 	chunkName: 'InteractiveBlockComponent';
@@ -873,7 +874,7 @@ interface InteractiveBlockLoadable extends ComponentNameChunkMap {
 }
 
 // There are docs on loadable in ./docs/loadable-components.md
-type LoadableComponents = [YoutubeBlockLoadable, InteractiveBlockLoadable];
+type LoadableComponents = [InteractiveBlockLoadable];
 
 interface CarouselImagesMap {
 	'300'?: string;

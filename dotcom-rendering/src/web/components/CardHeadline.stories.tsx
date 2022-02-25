@@ -15,6 +15,13 @@ export default {
 	title: 'Components/CardHeadline',
 };
 
+const smallHeadlineSizes: SmallHeadlineSize[] = [
+	'large',
+	'medium',
+	'small',
+	'tiny',
+];
+
 export const Article = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<CardHeadline
@@ -57,20 +64,27 @@ export const Feature = () => (
 );
 Feature.story = { name: 'Feature' };
 
-export const xsmallStory = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
-		<CardHeadline
-			headlineText="This is how a large card headline looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.News,
-			}}
-			size="large"
-		/>
-	</ElementContainer>
+export const Size = () => (
+	<>
+		{smallHeadlineSizes.map((size) => (
+			<div key={size}>
+				<ElementContainer showTopBorder={false} showSideBorders={false}>
+					<CardHeadline
+						headlineText={`This is how a ${size} card headline looks`}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
+						size={size}
+					/>
+				</ElementContainer>
+				<br />
+			</div>
+		))}
+	</>
 );
-xsmallStory.story = { name: 'Size | large' };
+Size.story = { name: 'Size' };
 
 export const liveStory = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>

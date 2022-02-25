@@ -311,6 +311,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						switches={CAPI.config.switches}
 						onFirstPage={pagination.currentPage === 1}
 						webURL={CAPI.webURL}
+						// We default to string here because the property is optional but we
+						// know it will exist for all blogs
+						mostRecentBlockId={CAPI.mostRecentBlockId || ''}
 					/>
 				</Island>
 			)}

@@ -165,7 +165,15 @@ SpecialReportStory.story = {
 };
 SpecialReportStory.parameters = {
 	// Wait for the interactives to load
-	chromatic: { delay: 1000 },
+	chromatic: {
+		delay: 1000,
+		viewports: [
+			breakpoints.mobile,
+			breakpoints.mobileLandscape,
+			breakpoints.phablet,
+			breakpoints.wide,
+		],
+	},
 };
 
 export const FeatureStory = (): React.ReactNode => {

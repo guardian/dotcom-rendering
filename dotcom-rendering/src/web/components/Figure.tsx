@@ -175,13 +175,20 @@ export const Figure = ({
 			</figure>
 		);
 	}
+
+	// See 001-commercial-selectors.md for details on `data-spacefinder-component`
+	let spacefinderComponent: 'rich-link' | 'numbered-list-title' | undefined;
+	if (role === 'richLink') {
+		spacefinderComponent = 'rich-link';
+	} else if (isNumberedListTitle) {
+		spacefinderComponent = 'numbered-list-title';
+	}
+
 	return (
 		<figure
 			id={id}
 			css={defaultRoleStyles(role)}
-			data-spacefinder-ignore={
-				isNumberedListTitle ? 'numbered-list-title' : null
-			}
+			data-spacefinder-component={spacefinderComponent}
 			className={className}
 		>
 			{children}
