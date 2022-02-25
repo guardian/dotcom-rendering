@@ -500,6 +500,9 @@ interface CAPIType {
 	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
 	isLegacyInteractive?: boolean;
 	filterKeyEvents: boolean;
+
+	// Included on live and dead blogs. Used when polling
+	mostRecentBlockId?: string;
 }
 
 // Browser data models. Note the CAPI prefix here means something different to
@@ -542,6 +545,7 @@ type CAPIBrowserType = {
 	isPreview?: boolean;
 	webTitle: string;
 	stage: string;
+	mostRecentBlockId?: string;
 };
 
 interface TagType {
