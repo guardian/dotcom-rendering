@@ -1,5 +1,11 @@
 import { css } from "@emotion/react";
-import { neutral, from, space, headline } from "@guardian/source-foundations";
+import {
+	neutral,
+	from,
+	space,
+	headline,
+	body,
+} from "@guardian/source-foundations";
 import { FirstPublished } from "./FirstPublished";
 
 type BlockContributor = {
@@ -84,10 +90,10 @@ const BlockByline = ({
 			)}
 			<span
 				css={css`
+					${body.medium()}
 					display: flex;
 					align-items: center;
 					padding-left: ${imageUrl ? space[1] : 0}px;
-					font-size: 19px;
 				`}
 			>
 				{name}
