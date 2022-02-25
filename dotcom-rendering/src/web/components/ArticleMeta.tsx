@@ -13,7 +13,7 @@ import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Contributor } from './Contributor';
 import { Avatar } from './Avatar';
 import { Counts } from './Counts';
-import { Branding } from './Branding';
+import { Branding } from './Branding.importable';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
@@ -329,7 +329,14 @@ export const ArticleMeta = ({
 			css={metaContainer(format)}
 		>
 			<div css={meta}>
-				{branding && <Branding branding={branding} palette={palette} />}
+				{branding && (
+					<Island deferUntil="visible">
+						<Branding
+							branding={branding}
+							palette={palette}
+						/>
+					</Island>
+				)}
 				{format.theme === ArticleSpecial.Labs ? (
 					<div css={stretchLines}>
 						<Lines
