@@ -1088,7 +1088,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			matchNav: backgroundMatchNav(),
-			underline: backgroundUnderline(format),
+			analysisUnderline: backgroundUnderline(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

@@ -148,7 +148,10 @@ export const CardHeadline = ({
 						? labTextStyles(size)
 						: fontStyles(size),
 					format.design === ArticleDesign.Analysis &&
-						underlinedStyles(size, palette.background.underline),
+						underlinedStyles(
+							size,
+							palette.background.analysisUnderline,
+						),
 					isFullCardImage &&
 						css`
 							line-height: 1; /* Reset line height in full image carousel */

@@ -381,7 +381,9 @@ export const ArticleHeadline = ({
 							css={[
 								standardFont,
 								topPadding,
-								underlinedStyles(palette.background.underline),
+								underlinedStyles(
+									palette.background.analysisUnderline,
+								),
 								css`
 									color: ${palette.text.headline};
 								`,
