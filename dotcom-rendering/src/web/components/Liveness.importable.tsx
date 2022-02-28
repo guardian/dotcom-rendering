@@ -200,33 +200,37 @@ export const Liveness = ({
 	}, [numHiddenBlocks, webTitle]);
 
 	useEffect(() => {
-		if (topOfBlog) {
-			const observer = new window.IntersectionObserver(
-				([entry]) => {
-					const topOfBlogShowing = entry.isIntersecting;
+		if (!topOfBlog) return () => {};
 
-					if (topOfBlogShowing) {
-						entry.target.classList.add('in-viewport');
-					} else {
-						entry.target.classList.remove('in-viewport');
-					}
+		const observer = new window.IntersectionObserver(
+			([entry]) => {
+				const topOfBlogShowing = entry.isIntersecting;
 
-					if (topOfBlogShowing && onFirstPage) {
-						revealPendingBlocks();
-						setNumHiddenBlocks(0);
-						setShowToast(false);
-					}
-				},
-				{
-					root: null,
-					// A margin makes more sense because the element we're
-					// observing (topOfBlog) has no height
-					rootMargin: '100px',
-				},
-			);
+				if (topOfBlogShowing) {
+					entry.target.classList.add('in-viewport');
+				} else {
+					entry.target.classList.remove('in-viewport');
+				}
 
-			observer.observe(topOfBlog);
-		}
+				if (topOfBlogShowing && onFirstPage) {
+					revealPendingBlocks();
+					setNumHiddenBlocks(0);
+					setShowToast(false);
+				}
+			},
+			{
+				root: null,
+				// A margin makes more sense because the element we're
+				// observing (topOfBlog) has no height
+				rootMargin: '100px',
+			},
+		);
+
+		observer.observe(topOfBlog);
+
+		return () => {
+			observer.disconnect();
+		};
 	}, [onFirstPage]);
 
 	/**
