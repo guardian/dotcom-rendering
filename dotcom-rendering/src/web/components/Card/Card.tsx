@@ -182,7 +182,6 @@ export const Card = ({
 		<CardLink
 			linkTo={linkTo}
 			format={format}
-			palette={cardPalette}
 			dataLinkName={dataLinkName}
 		>
 			<TopBar palette={cardPalette} isFullCardImage={isFullCardImage}>
@@ -318,7 +317,6 @@ export const Card = ({
 										branding ? (
 											<CardBranding
 												branding={branding}
-												palette={cardPalette}
 												format={format}
 											/>
 										) : undefined
