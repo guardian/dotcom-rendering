@@ -39,7 +39,6 @@ const button = css`
 	background: ${news[300]};
 	padding: ${remSpace[2]} 0 ${remSpace[6]} 0;
 	cursor: pointer;
-	z-index: 999999;
 	outline: none;
 	border: 0;
 	border-radius: 1rem;
@@ -53,6 +52,9 @@ const button = css`
 
 	&:focus div {
 		${focusHalo};
+	}
+	&:hover {
+		background: ${news[400]};
 	}
 `;
 
