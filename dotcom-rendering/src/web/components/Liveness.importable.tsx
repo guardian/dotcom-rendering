@@ -143,6 +143,7 @@ export const Liveness = ({
 	mostRecentBlockId,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
+	const [stickToast, setStickToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 
@@ -199,28 +200,30 @@ export const Liveness = ({
 			numHiddenBlocks > 0 ? `(${numHiddenBlocks}) ${webTitle}` : webTitle;
 	}, [numHiddenBlocks, webTitle]);
 
-	if (onFirstPage && topOfBlog) {
-		const observer = new window.IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
+	useEffect(() => {
+		if (topOfBlog) {
+			const observer = new window.IntersectionObserver(([entry]) => {
+				const belowTopOfBlog = entry.boundingClientRect.top < 0;
+				const topOfBlogShowing = entry.isIntersecting;
+
+				if (topOfBlogShowing) {
 					entry.target.classList.add('in-viewport');
+					setStickToast(false);
+				} else {
+					entry.target.classList.remove('in-viewport');
+					if (belowTopOfBlog) setStickToast(true);
+				}
+
+				if (topOfBlogShowing && onFirstPage) {
 					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 					setShowToast(false);
-					return;
 				}
-				entry.target.classList.remove('in-viewport');
-			},
-			{
-				root: null,
-				// A margin makes more sense because the element we're
-				// observing (topOfBlog) has no height
-				rootMargin: '100px',
-			},
-		);
+			});
 
-		observer.observe(topOfBlog);
-	}
+			observer.observe(topOfBlog);
+		}
+	}, [onFirstPage]);
 
 	/**
 	 * This useEffect sets up a listener for when the page is backgrounded or restored. We
@@ -274,6 +277,7 @@ export const Liveness = ({
 				onClick={handleToastClick}
 				count={numHiddenBlocks}
 				format={format}
+				stuck={stickToast}
 			/>
 		);
 	}

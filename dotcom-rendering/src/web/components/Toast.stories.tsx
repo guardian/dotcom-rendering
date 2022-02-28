@@ -23,6 +23,7 @@ export const Default = () => {
 			}}
 			count={3}
 			onClick={() => {}}
+			stuck={false}
 		/>
 	);
 };
@@ -43,6 +44,7 @@ export const Sport = () => {
 			}}
 			count={3}
 			onClick={() => {}}
+			stuck={false}
 		/>
 	);
 };
@@ -63,6 +65,7 @@ export const Special = () => {
 			}}
 			count={17}
 			onClick={() => {}}
+			stuck={false}
 		/>
 	);
 };
@@ -83,6 +86,7 @@ export const One = () => {
 			}}
 			count={1}
 			onClick={() => {}}
+			stuck={false}
 		/>
 	);
 };
@@ -103,6 +107,7 @@ export const Lots = () => {
 			}}
 			count={239}
 			onClick={() => {}}
+			stuck={false}
 		/>
 	);
 };
@@ -123,6 +128,7 @@ export const Mobile = () => {
 			}}
 			count={3}
 			onClick={() => {}}
+			stuck={false}
 		/>
 	);
 };

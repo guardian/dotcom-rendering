@@ -104,9 +104,6 @@ export const ArticleBody = ({
 	) {
 		return (
 			<>
-				{format.design === ArticleDesign.LiveBlog && (
-					<span data-gu-marker="top-of-blog" />
-				)}
 				<div
 					// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 					tabIndex={0}
