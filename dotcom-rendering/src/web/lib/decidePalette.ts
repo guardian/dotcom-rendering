@@ -690,7 +690,6 @@ const fillCardIcon = (format: ArticleFormat): string => {
 				default:
 					return neutral[46];
 			}
-			return lifestyle[500];
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
 				case ArticlePillar.News:
@@ -729,7 +728,7 @@ const fillCardIcon = (format: ArticleFormat): string => {
 		default:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
-					return brandAltBackground.primary;
+					return brandAlt[400];
 				default:
 					return neutral[46];
 			}
