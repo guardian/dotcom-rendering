@@ -37,23 +37,22 @@ const stickyStyles = css`
 `;
 
 const stickyContainerStyles = (height: number) => css`
-	height: ${height * 0.75}px;
+	height: ${height}px;
 	position: relative;
 	display: flex;
 	justify-content: flex-end;
 
 	${from.tablet} {
-		height: ${height * 1.5}px;
+		height: ${height * 2}px;
 	}
 `;
 
 interface Props {
 	isPlaying: boolean;
-	height: number;
 	children: React.ReactNode;
 }
 
-export const StickyVideo = ({ isPlaying, height, children }: Props) => {
+export const StickyVideo = ({ isPlaying, children }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.1,
@@ -65,7 +64,7 @@ export const StickyVideo = ({ isPlaying, height, children }: Props) => {
 	}, [isIntersecting, isPlaying]);
 
 	return (
-		<div ref={setRef} css={isSticky && stickyContainerStyles(height)}>
+		<div ref={setRef} css={isSticky && stickyContainerStyles(192)}>
 			<div css={isSticky && stickyStyles}>
 				{isSticky && (
 					<button
