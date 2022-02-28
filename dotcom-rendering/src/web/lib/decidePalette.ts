@@ -678,7 +678,13 @@ const fillBlockquoteIcon = (format: ArticleFormat): string =>
 
 const fillCardIcon = (format: ArticleFormat): string => {
 	// Setting Card clock colour for immersive cards to all be dark grey
-	if (format.display === ArticleDisplay.Immersive) return neutral[60];
+	// Except ArticleSpecial.SpecialReport
+	if (
+		format.display === ArticleDisplay.Immersive &&
+		format.theme !== ArticleSpecial.SpecialReport
+	) {
+		return neutral[60];
+	}
 	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
@@ -690,7 +696,6 @@ const fillCardIcon = (format: ArticleFormat): string => {
 				default:
 					return neutral[46];
 			}
-			return lifestyle[500];
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
 				case ArticlePillar.News:
@@ -729,7 +734,7 @@ const fillCardIcon = (format: ArticleFormat): string => {
 		default:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
-					return brandAltBackground.primary;
+					return brandAlt[400];
 				default:
 					return neutral[46];
 			}
