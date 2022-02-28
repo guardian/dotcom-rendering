@@ -32,6 +32,13 @@ describe('Paid content tests', function () {
 			'https://www.google-analytics.com/collect?v=1**',
 		).as('gaRequest');
 
+		cy.get('gu-island[name=Branding]').should(
+			'have.attr',
+			'data-gu-ready',
+			'true',
+		);
+
+		cy.get('[data-cy=branding-logo]').should('be.visible');
 		cy.get('[data-cy=branding-logo]', { timeout: 10000 }).click();
 
 		// Make sure the call to Google Analytics contains the info we want
