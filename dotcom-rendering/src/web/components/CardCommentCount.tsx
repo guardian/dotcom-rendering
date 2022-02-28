@@ -25,7 +25,7 @@ const svgStyles = (palette: Palette) => css`
 		height: 14px;
 		width: 14px;
 		margin-right: 2px;
-		fill: ${palette.fill.cardIcon};
+		fill: ${palette.text.cardFooter};
 	}
 `;
 

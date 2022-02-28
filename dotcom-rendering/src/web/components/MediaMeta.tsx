@@ -15,7 +15,7 @@ type Props = {
 const iconWrapperStyles = (mediaType: MediaType, palette: Palette) => css`
 	width: 24px;
 	height: 23px;
-	background-color: ${palette.fill.cardIcon};
+	background-color: ${palette.text.cardFooter};
 	border-radius: 50%;
 	display: inline-block;
 
