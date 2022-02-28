@@ -96,7 +96,7 @@ export const Playing = () => {
 export const NotPlaying = () => {
 	return (
 		<Container>
-			<StickyVideo isPlaying={false} height={259}>
+			<StickyVideo isPlaying={false}>
 				<MockYoutubeComponent />
 			</StickyVideo>
 		</Container>
