@@ -23,6 +23,7 @@ export const Toast = ({ count, onClick, format }: Props) => {
 				width: 100%;
 				justify-content: center;
 			`}
+			data-cy="toast"
 		>
 			<Hide above="phablet">
 				<EditorialButton
