@@ -14,6 +14,9 @@ import { ArticleDisplay } from '@guardian/libs';
 import { clearFix } from '../../lib/mixins';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
+import { Island } from './Island';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
+import { getOphanRecordFunction } from '../browser/ophan/ophan';
 
 // CSS vars
 const emailSignupSideMargins = 10;
@@ -181,9 +184,19 @@ const bttPosition = css`
 	right: 20px;
 `;
 
-const FooterLinks: React.FC<{
+type Props = {
 	pageFooter: FooterType;
-}> = ({ pageFooter }) => {
+	header: ReaderRevenueCategories;
+	edition: Edition;
+	contributionsServiceUrl: string;
+};
+
+const FooterLinks: React.FC<Props> = ({
+	pageFooter,
+	header,
+	edition,
+	contributionsServiceUrl,
+}: Props) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
 		const linkList = linkGroup.map((l: FooterLink, index: number) => (
 			<li key={`${l.url}${index}`}>
@@ -202,7 +215,23 @@ const FooterLinks: React.FC<{
 
 	const rrLinks = (
 		<div css={readerRevenueLinks}>
-			<div id="reader-revenue-links-footer" />
+			<div id="reader-revenue-links-footer">
+				<Island deferUntil="idle">
+					<ReaderRevenueLinks
+						urls={header}
+						edition={edition}
+						dataLinkNamePrefix="nav2 : "
+						inHeader={true}
+						remoteHeaderEnabled={
+							window.guardian?.app?.data?.CAPI?.config
+								?.remoteHeader
+						}
+						pageViewId={window.guardian?.config?.ophan?.pageViewId}
+						contributionsServiceUrl={contributionsServiceUrl}
+						ophanRecord={getOphanRecordFunction()}
+					/>
+				</Island>
+			</div>
 		</div>
 	);
 
@@ -220,7 +249,17 @@ export const Footer: React.FC<{
 	pillars: PillarType[];
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
-}> = ({ pillars, pillar, pageFooter }) => (
+	header: ReaderRevenueCategories;
+	edition: Edition;
+	contributionsServiceUrl: string;
+}> = ({
+	pillars,
+	pillar,
+	pageFooter,
+	header,
+	edition,
+	contributionsServiceUrl,
+}) => (
 	<div
 		data-print-layout="hide"
 		css={footer}
@@ -247,7 +286,12 @@ export const Footer: React.FC<{
 				height="100"
 			/>
 
-			<FooterLinks pageFooter={pageFooter} />
+			<FooterLinks
+				pageFooter={pageFooter}
+				header={header}
+				edition={edition}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>
 			<div css={bttPosition}>
 				<BackToTop />
 			</div>

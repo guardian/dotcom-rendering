@@ -152,6 +152,14 @@ export const Sections = (): React.ReactNode => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
+				header={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				edition="UK"
+				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 	</>
