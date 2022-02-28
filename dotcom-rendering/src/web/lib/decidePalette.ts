@@ -23,6 +23,7 @@ import {
 
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
+import { transparentColour } from './transparentColour';
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
@@ -805,6 +806,9 @@ const backgroundMatchNav = (): string => {
 	return '#FFE500';
 };
 
+const backgroundUnderline = (format: ArticleFormat): string =>
+	transparentColour(textCardKicker(format));
+
 const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -1084,6 +1088,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			matchNav: backgroundMatchNav(),
+			analysisUnderline: backgroundUnderline(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

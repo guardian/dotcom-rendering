@@ -153,8 +153,8 @@ export const Liveness = ({
 	 */
 	function onSuccess(data: LiveUpdateType) {
 		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
-			// Always insert the new blocks in the dom (but hidden)
-			insert(data.html, switches);
+			// Insert the new blocks in the dom (but hidden)
+			if (onFirstPage) insert(data.html, switches);
 
 			if (lastUpdated) {
 				lastUpdated.setAttribute('dateTime', new Date().toString());

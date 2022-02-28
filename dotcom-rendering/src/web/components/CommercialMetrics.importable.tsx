@@ -45,12 +45,12 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 			window.guardian.config.page.isDev ||
 			window.location.hostname.includes('localhost');
 
-		initCommercialMetrics(
+		initCommercialMetrics({
 			pageViewId,
-			browserId || undefined,
+			browserId: browserId || undefined,
 			isDev,
 			adBlockerInUse,
-		);
+		});
 		// TODO: capture CWV also, to ensure commercial performance
 		// doesn’t come at the expense of user experience.
 		// See https://git.io/JP68Q in `frontend`
