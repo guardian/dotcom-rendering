@@ -158,6 +158,7 @@ check-env: # private
 	$(call log, "checking environment")
 	@node scripts/env/check-node.js
 	@node scripts/env/check-yarn.js
+	@node scripts/env/check-deps.js
 
 clear: # private
 	@clear

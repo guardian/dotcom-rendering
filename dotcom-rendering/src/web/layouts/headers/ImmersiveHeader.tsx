@@ -136,7 +136,6 @@ export const ImmersiveHeader = ({
 			`}
 		>
 			<Caption
-				palette={palette}
 				captionText={captionText}
 				format={format}
 				shouldLimitWidth={true}
@@ -206,7 +205,6 @@ export const ImmersiveHeader = ({
 
 					<MainMedia
 						format={format}
-						palette={palette}
 						elements={CAPI.mainMediaElements}
 						adTargeting={adTargeting}
 						starRating={
@@ -244,7 +242,6 @@ export const ImmersiveHeader = ({
 							>
 								<ArticleTitle
 									format={format}
-									palette={palette}
 									tags={CAPI.tags}
 									sectionLabel={CAPI.sectionLabel}
 									sectionUrl={CAPI.sectionUrl}
@@ -261,7 +258,6 @@ export const ImmersiveHeader = ({
 									<ArticleHeadline
 										format={format}
 										headlineString={CAPI.headline}
-										palette={palette}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>

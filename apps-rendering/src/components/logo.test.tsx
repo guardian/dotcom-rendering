@@ -1,4 +1,4 @@
-import { cleanImageUrl } from 'components/shared/logo';
+import { cleanImageUrl } from 'components/logo';
 
 describe('Logo component', () => {
 	it('Reformats logo url correctly for css content', () => {

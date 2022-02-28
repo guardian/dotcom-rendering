@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
+import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
 import { Toast } from './Toast';
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
 	switches: Switches;
 	onFirstPage: boolean;
 	webURL: string;
+	mostRecentBlockId: string;
 };
 
 const isServer = typeof window === 'undefined';
@@ -115,6 +117,10 @@ const topOfBlog: Element | null = !isServer
 	? window.document.querySelector('[data-gu-marker=top-of-blog]')
 	: null;
 
+const lastUpdated: Element | null = !isServer
+	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
+	: null;
+
 /**
  * This allows us to make decisions in javascript based on if the reader
  * has the top of the blog in view or not
@@ -134,45 +140,58 @@ export const Liveness = ({
 	switches,
 	onFirstPage,
 	webURL,
+	mostRecentBlockId,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
-	const [latestBlockId, setLatestBlockId] = useState(
-		// By default we use the first (latest) block id on the page
-		document.querySelector('#maincontent :first-child')?.id || '',
-	);
+	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
+
+	/**
+	 * This function runs (once) after every successful useApi call. This is useful because it
+	 * allows us to avoid the problems of imperative code being executed multiple times
+	 * inside react's declarative structure (things get re-rendered when any state changes)
+	 */
+	function onSuccess(data: LiveUpdateType) {
+		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
+			// Always insert the new blocks in the dom (but hidden)
+			insert(data.html, switches);
+
+			if (lastUpdated) {
+				lastUpdated.setAttribute('dateTime', new Date().toString());
+				updateTimeElement(lastUpdated);
+			}
+
+			if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
+				revealPendingBlocks();
+				setNumHiddenBlocks(0);
+			} else {
+				setShowToast(true);
+				// Increment the count of new posts
+				setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
+			}
+
+			// Update the block id we use for polling
+			if (data.mostRecentBlockId) {
+				setLatestBlockId(data.mostRecentBlockId);
+			}
+		}
+	}
+
+	/**
+	 * This is a utility used by our Cypress end to end tests
+	 *
+	 * Rather than expect these scripts to depend on polling, we
+	 * expose this function to allow Cypress to manually trigger
+	 * updates with whatever html and properties it wants
+	 *
+	 */
+	window.mockLiveUpdate = onSuccess;
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
-		refreshInterval: 15_000,
+		refreshInterval: 10_000,
 		refreshWhenHidden: true,
-		// onSuccess runs (once) after every successful api call. This is useful because it
-		// allows us to avoid the problems of imperative code being executed multiple times
-		// inside react's declarative structure (things get re-rendered when any state changes)
-		onSuccess: (data: {
-			numNewBlocks: number;
-			html: string;
-			mostRecentBlockId: string;
-		}) => {
-			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
-				// Always insert the new blocks in the dom (but hidden)
-				insert(data.html, switches);
-
-				if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
-					revealPendingBlocks();
-					setNumHiddenBlocks(0);
-				} else {
-					setShowToast(true);
-					// Increment the count of new posts
-					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
-				}
-
-				// Update the block id we use for polling
-				if (data.mostRecentBlockId) {
-					setLatestBlockId(data.mostRecentBlockId);
-				}
-			}
-		},
+		onSuccess,
 	});
 
 	useEffect(() => {

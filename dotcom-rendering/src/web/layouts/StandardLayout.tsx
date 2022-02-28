@@ -478,7 +478,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
-								palette={palette}
 								tags={CAPI.tags}
 								sectionLabel={CAPI.sectionLabel}
 								sectionUrl={CAPI.sectionUrl}
@@ -544,7 +543,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										headlineString={CAPI.headline}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
-										palette={palette}
 									/>
 									{age && (
 										<AgeWarning
@@ -575,7 +573,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<div css={maxWidth}>
 								<MainMedia
 									format={format}
-									palette={palette}
 									elements={CAPI.mainMediaElements}
 									adTargeting={adTargeting}
 									host={host}
@@ -609,7 +606,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<ArticleMeta
 									branding={branding}
 									format={format}
-									palette={palette}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									author={CAPI.author}

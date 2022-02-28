@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 
 import { Caption } from './Caption';
 import { MaintainAspectRatio } from './MaintainAspectRatio';
-import { decidePalette } from '../lib/decidePalette';
 import { ClickToView } from './ClickToView';
 
 type Props = {
@@ -49,8 +48,6 @@ export const VideoFacebookBlockComponent = ({
 		margin-bottom: ${caption ? `0px` : `6px`};
 	`;
 
-	const palette = decidePalette(format);
-
 	return (
 		<ClickToView
 			role={role}
@@ -73,7 +70,6 @@ export const VideoFacebookBlockComponent = ({
 					<Caption
 						captionText={caption}
 						format={format}
-						palette={palette}
 						credit={credit}
 						mediaType="Video"
 					/>

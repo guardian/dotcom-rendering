@@ -51,7 +51,6 @@ export const LiveBlock = ({
 			{block.elements.map((element, index) =>
 				renderArticleElement({
 					format,
-					palette,
 					element,
 					isMainMedia: false,
 					host,

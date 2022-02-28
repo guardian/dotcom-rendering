@@ -246,7 +246,6 @@ export const ImmersiveLayout = ({
 						<GridItem area="caption">
 							<Hide when="above" breakpoint="leftCol">
 								<Caption
-									palette={palette}
 									captionText={captionText}
 									format={format}
 									shouldLimitWidth={false}
@@ -276,7 +275,6 @@ export const ImmersiveLayout = ({
 									>
 										<ArticleTitle
 											format={format}
-											palette={palette}
 											tags={CAPI.tags}
 											sectionLabel={CAPI.sectionLabel}
 											sectionUrl={CAPI.sectionUrl}
@@ -296,7 +294,6 @@ export const ImmersiveLayout = ({
 										<ArticleHeadline
 											format={format}
 											headlineString={CAPI.headline}
-											palette={palette}
 											tags={CAPI.tags}
 											byline={CAPI.author.byline}
 										/>
@@ -349,7 +346,6 @@ export const ImmersiveLayout = ({
 								<ArticleMeta
 									branding={branding}
 									format={format}
-									palette={palette}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									author={CAPI.author}

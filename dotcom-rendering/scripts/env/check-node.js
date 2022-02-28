@@ -4,6 +4,7 @@ const readFile = promisify(require('fs').readFile);
 
 const ensure = require('./ensure');
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async () => {
 	try {
 		const [semver] = await ensure('semver');

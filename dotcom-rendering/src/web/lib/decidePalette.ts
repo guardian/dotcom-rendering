@@ -338,6 +338,14 @@ const textCardHeadline = (format: ArticleFormat): string => {
 
 const textCardStandfirst = textCardHeadline;
 
+/** same as textByline except for SpecialReport */
+const textCardByline = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[700];
+
+	return textByline(format);
+};
+
 const textCardKicker = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.SpecialReport &&
@@ -1028,6 +1036,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline: textCardHeadline(format),
+			cardByline: textCardByline(format),
 			cardKicker: textCardKicker(format),
 			linkKicker: textLinkKicker(format),
 			cardStandfirst: textCardStandfirst(format),

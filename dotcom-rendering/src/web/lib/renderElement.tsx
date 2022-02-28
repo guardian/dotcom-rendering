@@ -40,7 +40,7 @@ import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockCom
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
-import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent';
+import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.importable';
 
 import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -63,10 +63,10 @@ import {
 } from '../layouts/lib/interactiveLegacyStyling';
 
 import { Island } from '../components/Island';
+import { decidePalette } from './decidePalette';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	element: CAPIElement;
 	adTargeting?: AdTargeting;
 	host?: string;
@@ -117,7 +117,6 @@ const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
 // inspection.
 export const renderElement = ({
 	format,
-	palette,
 	element,
 	adTargeting,
 	host,
@@ -129,6 +128,7 @@ export const renderElement = ({
 	webTitle,
 	ajaxUrl,
 }: Props): [boolean, JSX.Element] => {
+	const palette = decidePalette(format);
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
@@ -166,7 +166,6 @@ export const renderElement = ({
 				<CaptionBlockComponent
 					key={index}
 					format={format}
-					palette={palette}
 					captionText={element.captionText}
 					padCaption={element.padCaption}
 					credit={element.credit}
@@ -304,7 +303,6 @@ export const renderElement = ({
 				<GuVideoBlockComponent
 					html={element.html}
 					format={format}
-					palette={palette}
 					credit={element.source}
 					caption={element.caption}
 				/>,
@@ -319,7 +317,6 @@ export const renderElement = ({
 				true,
 				<ImageBlockComponent
 					format={format}
-					palette={palette}
 					key={index}
 					element={element}
 					hideCaption={hideCaption}
@@ -423,7 +420,6 @@ export const renderElement = ({
 				true,
 				<MultiImageBlockComponent
 					format={format}
-					palette={palette}
 					key={index}
 					images={element.images}
 					caption={element.caption}
@@ -609,7 +605,6 @@ export const renderElement = ({
 				true,
 				<VimeoBlockComponent
 					format={format}
-					palette={palette}
 					embedUrl={element.embedUrl}
 					height={element.height}
 					width={element.width}
@@ -696,24 +691,26 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return [
 				true,
-				<YoutubeBlockComponent
-					format={format}
-					key={index}
-					hideCaption={hideCaption}
-					// eslint-disable-next-line jsx-a11y/aria-role
-					role="inline"
-					adTargeting={adTargeting}
-					isMainMedia={isMainMedia}
-					id={element.id}
-					assetId={element.assetId}
-					expired={element.expired}
-					overrideImage={element.overrideImage}
-					posterImage={element.posterImage}
-					duration={element.duration}
-					mediaTitle={element.mediaTitle}
-					altText={element.altText}
-					origin={host}
-				/>,
+				<Island>
+					<YoutubeBlockComponent
+						format={format}
+						key={index}
+						hideCaption={hideCaption}
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						adTargeting={adTargeting}
+						isMainMedia={isMainMedia}
+						id={element.id}
+						assetId={element.assetId}
+						expired={element.expired}
+						overrideImage={element.overrideImage}
+						posterImage={element.posterImage}
+						duration={element.duration}
+						mediaTitle={element.mediaTitle}
+						altText={element.altText}
+						origin={host}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
@@ -751,7 +748,6 @@ const bareElements = new Set([
 // types.
 export const renderArticleElement = ({
 	format,
-	palette,
 	element,
 	adTargeting,
 	ajaxUrl,
@@ -767,7 +763,6 @@ export const renderArticleElement = ({
 
 	const [ok, el] = renderElement({
 		format,
-		palette,
 		element: withUpdatedRole,
 		adTargeting,
 		ajaxUrl,

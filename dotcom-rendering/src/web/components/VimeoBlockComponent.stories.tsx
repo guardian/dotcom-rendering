@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 
 export default {
@@ -36,11 +35,6 @@ export const smallAspectRatio = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 			/>
 			<p>abc</p>
 		</Container>
@@ -64,11 +58,6 @@ export const largeAspectRatio = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 			/>
 			<p>abc</p>
 		</Container>
@@ -92,11 +81,6 @@ export const verticalAspectRatio = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 			/>
 			<p>abc</p>
 		</Container>

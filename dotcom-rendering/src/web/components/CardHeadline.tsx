@@ -12,11 +12,11 @@ import {
 import { QuoteIcon } from './QuoteIcon';
 import { Kicker } from './Kicker';
 import { Byline } from './Byline';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	headlineText: string; // The text shown
 	format: ArticleFormat; // Used to decide when to add type specific styles
-	palette: Palette; // Used to colour the headline and the kicker
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
@@ -130,7 +130,6 @@ const fullCardImageTextStyles = css`
 export const CardHeadline = ({
 	headlineText,
 	format,
-	palette,
 	showQuotes,
 	kickerText,
 	showPulsingDot,
@@ -139,51 +138,54 @@ export const CardHeadline = ({
 	byline,
 	showByline,
 	isFullCardImage,
-}: Props) => (
-	<>
-		<h4
-			css={[
-				format.theme === ArticleSpecial.Labs
-					? labTextStyles(size)
-					: fontStyles(size),
-				format.design === ArticleDesign.Analysis &&
-					underlinedStyles(size),
-				isFullCardImage &&
-					css`
-						line-height: 1; /* Reset line height in full image carousel */
-					`,
-			]}
-		>
-			<span css={isFullCardImage && fullCardImageTextStyles}>
-				{kickerText && (
-					<Kicker
-						text={kickerText}
-						palette={palette}
-						showPulsingDot={showPulsingDot}
-						showSlash={showSlash}
-						inCard={true}
-					/>
-				)}
-				{showQuotes && (
-					<QuoteIcon colour={palette.text.cardKicker} size={size} />
-				)}
+}: Props) => {
+	const palette = decidePalette(format);
+	return (
+		<>
+			<h4
+				css={[
+					format.theme === ArticleSpecial.Labs
+						? labTextStyles(size)
+						: fontStyles(size),
+					format.design === ArticleDesign.Analysis &&
+						underlinedStyles(size),
+					isFullCardImage &&
+						css`
+							line-height: 1; /* Reset line height in full image carousel */
+						`,
+				]}
+			>
+				<span css={isFullCardImage && fullCardImageTextStyles}>
+					{kickerText && (
+						<Kicker
+							text={kickerText}
+							palette={palette}
+							showPulsingDot={showPulsingDot}
+							showSlash={showSlash}
+							inCard={true}
+						/>
+					)}
+					{showQuotes && (
+						<QuoteIcon colour={palette.text.cardKicker} />
+					)}
 
-				<span
-					css={css`
-						color: ${palette.text.cardHeadline};
-					`}
-				>
-					{headlineText}
+					<span
+						css={css`
+							color: ${palette.text.cardHeadline};
+						`}
+					>
+						{headlineText}
+					</span>
 				</span>
-			</span>
-		</h4>
-		{byline && showByline && (
-			<Byline
-				text={byline}
-				palette={palette}
-				format={format}
-				size={size}
-			/>
-		)}
-	</>
-);
+			</h4>
+			{byline && showByline && (
+				<Byline
+					text={byline}
+					format={format}
+					size={size}
+					isCard={true}
+				/>
+			)}
+		</>
+	);
+};

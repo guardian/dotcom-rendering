@@ -4,8 +4,6 @@ import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
-import { decidePalette } from '../lib/decidePalette';
-
 import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
 import { EmbedBlockComponent } from './EmbedBlockComponent.importable';
@@ -765,11 +763,6 @@ export const VimeoBlockComponentStory = () => {
 								display: ArticleDisplay.Standard,
 								design: ArticleDesign.Standard,
 							}}
-							palette={decidePalette({
-								theme: ArticlePillar.News,
-								display: ArticleDisplay.Standard,
-								design: ArticleDesign.Standard,
-							})}
 							embedUrl={vimeoVideoEmbed.embedUrl}
 							height={vimeoVideoEmbed.height}
 							width={vimeoVideoEmbed.width}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type {
@@ -6,6 +6,7 @@ import type {
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { getArticleCount } from '../../../lib/article-count';
 import {
 	canShowRRBanner,
 	canShowPuzzlesBanner,
@@ -28,7 +29,6 @@ import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
 
 type Props = {
 	brazeMessages?: Promise<BrazeMessagesInterface>;
-	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
 	contentType: string;
 	sectionName?: string;
 	section: string;
@@ -41,6 +41,8 @@ type Props = {
 	contributionsServiceUrl: string;
 	idApiUrl: string;
 	switches: Switches;
+	pageId: string;
+	keywordsId: string;
 };
 
 type RRBannerConfig = {
@@ -192,7 +194,6 @@ const buildBrazeBanner = (
 
 export const StickyBottomBanner = ({
 	brazeMessages,
-	asyncArticleCount,
 	contentType,
 	sectionName,
 	section,
@@ -205,10 +206,14 @@ export const StickyBottomBanner = ({
 	contributionsServiceUrl,
 	idApiUrl,
 	switches,
+	pageId,
+	keywordsId,
 }: Props) => {
 	const asyncCountryCode = getLocaleCode();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
+	const [asyncArticleCount, setAsyncArticleCount] =
+		useState<Promise<WeeklyArticleHistory | undefined>>();
 	const signInGateWillShow = useSignInGateWillShow({
 		isSignedIn,
 		contentType,
@@ -217,6 +222,11 @@ export const StickyBottomBanner = ({
 		isPaidContent,
 		isPreview,
 	});
+
+	useEffect(() => {
+		setAsyncArticleCount(getArticleCount(pageId, keywordsId));
+	}, [pageId, keywordsId]);
+
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
 		const puzzlesBanner = buildPuzzlesBannerConfig({

@@ -1,8 +1,14 @@
 import { ArticleDesign } from '@guardian/libs';
 
-export const decideDesign = (format: CAPIFormat): ArticleDesign => {
-	const designType: CAPIDesign = format.design;
-	switch (designType) {
+/**
+ * NOTE: Immersive Opinion pieces are not supported,
+ * i.e. when `CommentDesign` and `ImmersiveDisplay` are used jointly.
+ */
+export const decideDesign = ({
+	design,
+	display,
+}: Partial<CAPIFormat>): ArticleDesign => {
+	switch (design) {
 		case 'ArticleDesign':
 			return ArticleDesign.Standard;
 		case 'MediaDesign':
@@ -13,7 +19,7 @@ export const decideDesign = (format: CAPIFormat): ArticleDesign => {
 			return ArticleDesign.Analysis;
 		case 'CommentDesign':
 			// Temporary hack until we can handle Immersive Opinion pieces
-			return format.display === 'ImmersiveDisplay'
+			return display === 'ImmersiveDisplay'
 				? ArticleDesign.Standard
 				: ArticleDesign.Comment;
 		case 'LetterDesign':

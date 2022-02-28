@@ -7,7 +7,6 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { ArticleMeta } from './ArticleMeta';
-import { decidePalette } from '../lib/decidePalette';
 import {
 	getAllThemes,
 	getThemeNameAsString,
@@ -65,11 +64,6 @@ export const ArticleStory = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -115,11 +109,6 @@ export const BrandingStory = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -150,11 +139,6 @@ export const FeatureStory = () => {
 					design: ArticleDesign.Feature,
 					theme: ArticlePillar.Culture,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Culture,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -184,11 +168,6 @@ export const SpecialReportStory = () => {
 					design: ArticleDesign.Feature,
 					theme: ArticleSpecial.SpecialReport,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticleSpecial.SpecialReport,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -218,11 +197,6 @@ export const CommentStory = () => {
 					design: ArticleDesign.Comment,
 					theme: ArticlePillar.Opinion,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Comment,
-					theme: ArticlePillar.Opinion,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -252,11 +226,6 @@ export const InterviewStory = () => {
 					design: ArticleDesign.Interview,
 					theme: ArticlePillar.Lifestyle,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Interview,
-					theme: ArticlePillar.Lifestyle,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -286,11 +255,6 @@ export const ImmersiveStory = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -320,11 +284,6 @@ export const TwoContributorsStory = () => {
 					design: ArticleDesign.Feature,
 					theme: ArticlePillar.Sport,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Sport,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -356,7 +315,6 @@ export const DeadBlogStory = () => {
 					<p>{getThemeNameAsString(format)}</p>
 					<ArticleMeta
 						format={format}
-						palette={decidePalette(format)}
 						pageId=""
 						webTitle=""
 						author={{
