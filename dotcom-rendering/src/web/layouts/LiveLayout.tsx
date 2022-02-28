@@ -221,7 +221,6 @@ const sidePaddingDesktop = css`
 `;
 
 const bodyWrapper = css`
-	position: relative;
 	margin-bottom: ${space[3]}px;
 	${from.desktop} {
 		margin-bottom: 0;
