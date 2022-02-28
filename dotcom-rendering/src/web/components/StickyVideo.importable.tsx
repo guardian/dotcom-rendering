@@ -29,7 +29,7 @@ const stickyStyles = css`
 	width: 300px;
 	height: 169px;
 	${getZIndex('sticky-video')};
-	animation: fade-in-up 1s ease forwards;
+	animation: fade-in-up 1s ease both;
 
 	figcaption {
 		display: none;
