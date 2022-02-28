@@ -288,7 +288,10 @@ export const InteractiveBlockComponent = ({
 			<figure
 				id={elementId} // boot scripts use id when inserting interactive content
 				ref={wrapperRef}
-				css={[defaultRoleStyles(role), wrapperStyle({ format, role, loaded, palette })]}
+				css={[
+					defaultRoleStyles(role),
+					wrapperStyle({ format, role, loaded, palette }),
+				]}
 				className={interactiveLegacyFigureClasses(
 					'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					role,
