@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
-import { useHasBeenSeen } from '../lib/useHasBeenSeen';
+import { useIsInView } from '../lib/useIsInView';
 
 const buttonStyles = css`
 	position: absolute;
@@ -55,7 +55,7 @@ interface Props {
 
 export const StickyVideo = ({ isPlaying, height, children }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
-	const [isIntersecting, setRef] = useHasBeenSeen({
+	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.1,
 		repeat: true,
 	});

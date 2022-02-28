@@ -6,7 +6,7 @@ import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
 import { StickyVideo } from './StickyVideo.importable';
 import { TextBlockComponent } from './TextBlockComponent';
-import { YoutubeBlockComponent } from './YoutubeBlockComponent';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export default {
 	component: StickyVideo,
