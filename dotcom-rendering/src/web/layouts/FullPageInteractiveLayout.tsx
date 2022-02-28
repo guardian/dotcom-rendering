@@ -199,6 +199,10 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 							isAnniversary={
 								CAPI.config.switches.anniversaryHeaderSvg
 							}
+							header={CAPI.nav.readerRevenueLinks.header}
+							contributionsServiceUrl={
+								CAPI.contributionsServiceUrl
+							}
 						/>
 					</ElementContainer>
 				</div>

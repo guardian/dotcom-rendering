@@ -4,7 +4,7 @@ import loadable from '@loadable/component';
 import { log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from './SignInGate/SignInGateSelector';
@@ -134,18 +134,6 @@ export const App = ({ CAPI }: Props) => {
 		//
 		// Note: Both require a 'root' element that needs to be server rendered.
 		<React.StrictMode>
-			<Portal rootId="reader-revenue-links-header">
-				<ReaderRevenueLinks
-					urls={CAPI.nav.readerRevenueLinks.header}
-					edition={CAPI.editionId}
-					dataLinkNamePrefix="nav2 : "
-					inHeader={true}
-					remoteHeaderEnabled={CAPI.config.remoteHeader}
-					pageViewId={pageViewId}
-					contributionsServiceUrl={CAPI.contributionsServiceUrl}
-					ophanRecord={ophanRecord}
-				/>
-			</Portal>
 			{interactiveElements.map((interactiveBlock) => (
 				<HydrateInteractiveOnce rootId={interactiveBlock.elementId}>
 					<InteractiveBlockComponent

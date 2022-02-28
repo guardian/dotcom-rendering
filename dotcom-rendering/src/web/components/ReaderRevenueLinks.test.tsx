@@ -1,7 +1,7 @@
 import { render, wait } from '@testing-library/react';
 import { ABProvider } from '@guardian/ab-react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 const shouldHideSupportMessaging: {
 	[key: string]: any;

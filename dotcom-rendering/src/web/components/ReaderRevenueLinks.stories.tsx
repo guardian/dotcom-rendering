@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { brandBackground } from '@guardian/source-foundations';
 import { ABProvider } from '@guardian/ab-react';
 
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 export default {
 	component: ReaderRevenueLinks,

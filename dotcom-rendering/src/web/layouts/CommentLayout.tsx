@@ -360,6 +360,10 @@ export const CommentLayout = ({
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
 								}
+								header={CAPI.nav.readerRevenueLinks.header}
+								contributionsServiceUrl={
+									CAPI.contributionsServiceUrl
+								}
 							/>
 						</ElementContainer>
 					)}

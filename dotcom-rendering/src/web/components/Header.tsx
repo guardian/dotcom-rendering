@@ -6,6 +6,8 @@ import { Logo } from './Logo';
 import { Links } from './Links.importable';
 import { Island } from './Island';
 import { EditionDropdown } from './EditionDropdown.importable';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
+import { getOphanRecordFunction } from '../browser/ophan/ophan';
 
 const headerStyles = css`
 	/* Ensure header height contains it's children */
@@ -22,6 +24,8 @@ type Props = {
 	isAnniversary?: boolean; // Temporary for G200 anniversary
 	supporterCTA: string;
 	discussionApiUrl: string;
+	header: ReaderRevenueCategories;
+	contributionsServiceUrl: string;
 };
 
 export const Header = ({
@@ -31,6 +35,8 @@ export const Header = ({
 	isAnniversary,
 	supporterCTA,
 	discussionApiUrl,
+	header,
+	contributionsServiceUrl,
 }: Props) => (
 	<div css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
@@ -42,7 +48,22 @@ export const Header = ({
 			</Island>
 		</Hide>
 		<Logo isAnniversary={isAnniversary} edition={edition} />
-		<div id="reader-revenue-links-header" />
+		<div id="reader-revenue-links-header">
+			<Island deferUntil="idle">
+				<ReaderRevenueLinks
+					urls={header}
+					edition={edition}
+					dataLinkNamePrefix="nav2 : "
+					inHeader={true}
+					remoteHeaderEnabled={
+						window.guardian?.app?.data?.CAPI?.config?.remoteHeader
+					}
+					pageViewId={window.guardian?.config?.ophan?.pageViewId}
+					contributionsServiceUrl={contributionsServiceUrl}
+					ophanRecord={getOphanRecordFunction()}
+				/>
+			</Island>
+		</div>
 		<div id="links-root">
 			<Island>
 				<Links

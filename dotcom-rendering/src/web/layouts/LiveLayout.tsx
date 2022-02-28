@@ -352,6 +352,10 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							isAnniversary={
 								CAPI.config.switches.anniversaryHeaderSvg
 							}
+							header={CAPI.nav.readerRevenueLinks.header}
+							contributionsServiceUrl={
+								CAPI.contributionsServiceUrl
+							}
 						/>
 					</ElementContainer>
 
