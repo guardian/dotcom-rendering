@@ -5,7 +5,7 @@ import { neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 
 const linkStyles = (format: ArticleFormat) => {
-	const palette = decidePalette(format)
+	const palette = decidePalette(format);
 	const baseLinkStyles = css`
 		display: flex;
 		/* a tag specific styles */
@@ -93,11 +93,7 @@ export const CardLink = ({
 	format,
 	dataLinkName = 'article',
 }: Props) => (
-	<a
-		href={linkTo}
-		css={linkStyles(format)}
-		data-link-name={dataLinkName}
-	>
+	<a href={linkTo} css={linkStyles(format)} data-link-name={dataLinkName}>
 		{children}
 	</a>
 );

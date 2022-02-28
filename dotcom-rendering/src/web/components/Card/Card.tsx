@@ -179,11 +179,7 @@ export const Card = ({
 	const cardPalette = decidePalette(format);
 
 	return (
-		<CardLink
-			linkTo={linkTo}
-			format={format}
-			dataLinkName={dataLinkName}
-		>
+		<CardLink linkTo={linkTo} format={format} dataLinkName={dataLinkName}>
 			<TopBar palette={cardPalette} isFullCardImage={isFullCardImage}>
 				<CardLayout
 					imagePosition={imagePosition}
