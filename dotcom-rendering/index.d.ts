@@ -211,13 +211,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
+		adUnit: string;
+		customParams: CustomParams;
+		disableAds?: false;
+	}
 	| {
-			disableAds: true;
-	  };
+		disableAds: true;
+	};
 
 interface SectionNielsenAPI {
 	name: string;
@@ -435,6 +435,7 @@ interface CAPIType {
 	main: string;
 	keyEvents: Block[];
 	blocks: Block[];
+	pinnedPost?: Block;
 	pagination?: Pagination;
 	author: AuthorType;
 

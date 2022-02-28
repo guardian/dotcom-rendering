@@ -3,6 +3,7 @@ import { LiveBlock } from '../components/LiveBlock';
 type Props = {
 	format: ArticleFormat;
 	blocks: Block[];
+	pinnedPost?: Block;
 	adTargeting: AdTargeting;
 	host?: string;
 	pageId: string;
@@ -14,6 +15,7 @@ type Props = {
 export const LiveBlogRenderer = ({
 	format,
 	blocks,
+	pinnedPost,
 	adTargeting,
 	host,
 	pageId,
@@ -21,6 +23,7 @@ export const LiveBlogRenderer = ({
 	ajaxUrl,
 	isLiveUpdate,
 }: Props) => {
+	console.log('pinnedPost', pinnedPost);
 	return (
 		<>
 			{blocks.map((block) => {
