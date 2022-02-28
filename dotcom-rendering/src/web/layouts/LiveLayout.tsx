@@ -690,7 +690,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								)}
 							</GridItem>
 							<GridItem area="body">
-								<div css={bodyWrapper}>
+								<div id="maincontent" css={bodyWrapper}>
 									<span data-gu-marker="top-of-blog" />
 									{format.design ===
 										ArticleDesign.LiveBlog && (
