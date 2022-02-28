@@ -141,6 +141,7 @@ type Palette = {
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		matchNav: Colour;
+		analysisUnderline: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -322,6 +323,11 @@ interface AuthorType {
 	email?: string;
 }
 
+interface BlockContributor {
+	name: string;
+	imageUrl?: string;
+}
+
 interface Block {
 	id: string;
 	elements: CAPIElement[];
@@ -340,6 +346,7 @@ interface Block {
 	lastUpdatedDisplay?: string;
 	firstPublished?: number;
 	firstPublishedDisplay?: string;
+	contributors?: BlockContributor[];
 }
 
 interface Pagination {

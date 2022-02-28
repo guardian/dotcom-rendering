@@ -1,6 +1,29 @@
 import { css } from "@emotion/react";
-import { neutral, from, space, headline } from "@guardian/source-foundations";
+import {
+	neutral,
+	from,
+	space,
+	headline,
+	body,
+} from "@guardian/source-foundations";
 import { FirstPublished } from "./FirstPublished";
+
+type BlockContributor = {
+	name: string;
+	imageUrl?: string;
+};
+
+type Props = {
+	id: string;
+	children: React.ReactNode;
+	borderColour: string;
+	blockTitle?: string;
+	blockFirstPublished?: number;
+	blockLink: string;
+	isLiveUpdate?: boolean;
+	contributors?: BlockContributor[];
+	avatarBackgroundColor?: string;
+};
 
 const LEFT_MARGIN_DESKTOP = 60;
 const SIDE_MARGIN = space[5];
@@ -33,6 +56,52 @@ const BlockTitle = ({ title }: { title: string }) => {
 	);
 };
 
+const BlockByline = ({
+	name,
+	imageUrl,
+	avatarBackgroundColor,
+}: {
+	name: string;
+	imageUrl?: string;
+	avatarBackgroundColor?: string;
+}) => {
+	return (
+		<div
+			css={css`
+				display: flex;
+				flex-direction: row;
+				padding-bottom: ${space[1]}px;
+			`}
+		>
+			{imageUrl && (
+				<div style={{ width: "36px", height: "36px" }}>
+					<img
+						src={imageUrl}
+						alt={name}
+						css={css`
+							border-radius: 100%;
+							object-fit: cover;
+							height: 100%;
+							width: 100%;
+							background-color: ${avatarBackgroundColor};
+						`}
+					/>
+				</div>
+			)}
+			<span
+				css={css`
+					${body.medium()}
+					display: flex;
+					align-items: center;
+					padding-left: ${imageUrl ? space[1] : 0}px;
+				`}
+			>
+				{name}
+			</span>
+		</div>
+	);
+};
+
 const LiveBlockContainer = ({
 	id,
 	children,
@@ -41,15 +110,9 @@ const LiveBlockContainer = ({
 	blockFirstPublished,
 	blockLink,
 	isLiveUpdate,
-}: {
-	id: string;
-	children: React.ReactNode;
-	borderColour: string;
-	blockTitle?: string;
-	blockFirstPublished?: number;
-	blockLink: string;
-	isLiveUpdate?: boolean;
-}) => {
+	contributors,
+	avatarBackgroundColor,
+}: Props) => {
 	return (
 		<article
 			id={`block-${id}`}
@@ -82,6 +145,14 @@ const LiveBlockContainer = ({
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}
+				{contributors &&
+					contributors.map((contributor) => (
+						<BlockByline
+							name={contributor.name}
+							imageUrl={contributor.imageUrl}
+							avatarBackgroundColor={avatarBackgroundColor}
+						/>
+					))}
 			</Header>
 			{children}
 		</article>

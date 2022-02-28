@@ -29,6 +29,7 @@ export const Toast = ({ count, onClick, format, stuck }: Props) => {
 				text-align: center;
 				${getZIndex('toast')};
 			`}
+			data-cy="toast"
 		>
 			<Hide above="phablet">
 				<EditorialButton

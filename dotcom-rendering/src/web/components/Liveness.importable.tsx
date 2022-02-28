@@ -121,16 +121,6 @@ const lastUpdated: Element | null = !isServer
 	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
 	: null;
 
-/**
- * This allows us to make decisions in javascript based on if the reader
- * has the top of the blog in view or not
- *
- * @returns boolean
- */
-function topOfBlogVisible(): boolean {
-	return topOfBlog ? topOfBlog.classList.contains('in-viewport') : false;
-}
-
 export const Liveness = ({
 	pageId,
 	webTitle,
@@ -144,6 +134,9 @@ export const Liveness = ({
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [stickToast, setStickToast] = useState(false);
+	const [topOfBlogVisible, setTopOfBlogVisible] = useState<
+		boolean | undefined
+	>();
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 
@@ -154,15 +147,15 @@ export const Liveness = ({
 	 */
 	function onSuccess(data: LiveUpdateType) {
 		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
-			// Always insert the new blocks in the dom (but hidden)
-			insert(data.html, switches);
+			// Insert the new blocks in the dom (but hidden)
+			if (onFirstPage) insert(data.html, switches);
 
 			if (lastUpdated) {
 				lastUpdated.setAttribute('dateTime', new Date().toString());
 				updateTimeElement(lastUpdated);
 			}
 
-			if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
+			if (onFirstPage && topOfBlogVisible && document.hasFocus()) {
 				revealPendingBlocks();
 				setNumHiddenBlocks(0);
 			} else {
@@ -201,28 +194,33 @@ export const Liveness = ({
 	}, [numHiddenBlocks, webTitle]);
 
 	useEffect(() => {
-		if (topOfBlog) {
-			const observer = new window.IntersectionObserver(([entry]) => {
-				const belowTopOfBlog = entry.boundingClientRect.top < 0;
-				const topOfBlogShowing = entry.isIntersecting;
+		if (!topOfBlog) return () => {};
 
-				if (topOfBlogShowing) {
-					entry.target.classList.add('in-viewport');
-					setStickToast(false);
-				} else {
-					entry.target.classList.remove('in-viewport');
-					if (belowTopOfBlog) setStickToast(true);
-				}
+		const observer = new window.IntersectionObserver(([entry]) => {
+			const belowTopOfBlog = entry.boundingClientRect.top < 0;
 
-				if (topOfBlogShowing && onFirstPage) {
+			if (entry.isIntersecting) {
+				setTopOfBlogVisible(true);
+				// If on first page, reveal blocks
+				if (onFirstPage) {
 					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 					setShowToast(false);
 				}
-			});
+			} else {
+				setTopOfBlogVisible(false);
+				// If we're scrolling down make the toast sticky
+				if (belowTopOfBlog) {
+					setStickToast(true);
+				}
+			}
+		});
 
-			observer.observe(topOfBlog);
-		}
+		observer.observe(topOfBlog);
+
+		return () => {
+			observer.disconnect();
+		};
 	}, [onFirstPage]);
 
 	/**
@@ -238,7 +236,7 @@ export const Liveness = ({
 				// is at the top of the first page then...
 				document.visibilityState === 'visible' &&
 				numHiddenBlocks > 0 &&
-				topOfBlogVisible() &&
+				topOfBlogVisible &&
 				onFirstPage
 			) {
 				revealPendingBlocks();
@@ -255,7 +253,7 @@ export const Liveness = ({
 				handleVisibilityChange,
 			);
 		};
-	}, [numHiddenBlocks, onFirstPage]);
+	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
 
 	const handleToastClick = () => {
 		if (onFirstPage) {
