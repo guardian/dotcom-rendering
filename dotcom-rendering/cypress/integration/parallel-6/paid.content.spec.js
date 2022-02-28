@@ -32,7 +32,7 @@ describe('Paid content tests', function () {
 			'https://www.google-analytics.com/collect?v=1**',
 		).as('gaRequest');
 
-		cy.get('[data-cy=branding-logo]').click();
+		cy.get('[data-cy=branding-logo]', { timeout: 10000 }).click();
 
 		// Make sure the call to Google Analytics contains the info we want
 		cy.wait('@gaRequest').then((interception) => {
