@@ -37,9 +37,10 @@ describe('Paid content tests', function () {
 
 		// Make sure the call to Google Analytics contains the info we want
 		cy.wait('@gaRequest').then((interception) => {
-			expect(interception.request.url).to.include('ec', 'click');
-			expect(interception.request.url).to.include('ea', 'sponsor logo');
-			expect(interception.request.url).to.include('el', 'ocado');
+			let requestURL = interception.request.url;
+			expect(requestURL).to.include('ec=click');
+			expect(requestURL).to.include('ea=sponsor%20logo');
+			expect(requestURL).to.include('el=ocado');
 		});
 	});
 });
