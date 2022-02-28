@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
 import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
@@ -151,31 +151,34 @@ export const Liveness = ({
 	 * allows us to avoid the problems of imperative code being executed multiple times
 	 * inside react's declarative structure (things get re-rendered when any state changes)
 	 */
-	function onSuccess(data: LiveUpdateType) {
-		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
-			// Always insert the new blocks in the dom (but hidden)
-			insert(data.html, switches);
+	const onSuccess = useCallback(
+		(data: LiveUpdateType) => {
+			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
+				// Always insert the new blocks in the dom (but hidden)
+				insert(data.html, switches);
 
-			if (lastUpdated) {
-				lastUpdated.setAttribute('dateTime', new Date().toString());
-				updateTimeElement(lastUpdated);
-			}
+				if (lastUpdated) {
+					lastUpdated.setAttribute('dateTime', new Date().toString());
+					updateTimeElement(lastUpdated);
+				}
 
-			if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
-				revealPendingBlocks();
-				setNumHiddenBlocks(0);
-			} else {
-				setShowToast(true);
-				// Increment the count of new posts
-				setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
-			}
+				if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
+					revealPendingBlocks();
+					setNumHiddenBlocks(0);
+				} else {
+					setShowToast(true);
+					// Increment the count of new posts
+					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
+				}
 
-			// Update the block id we use for polling
-			if (data.mostRecentBlockId) {
-				setLatestBlockId(data.mostRecentBlockId);
+				// Update the block id we use for polling
+				if (data.mostRecentBlockId) {
+					setLatestBlockId(data.mostRecentBlockId);
+				}
 			}
-		}
-	}
+		},
+		[numHiddenBlocks, onFirstPage, switches],
+	);
 
 	/**
 	 * This is a utility used by our Cypress end to end tests
@@ -254,7 +257,7 @@ export const Liveness = ({
 		};
 	}, [numHiddenBlocks, onFirstPage]);
 
-	const handleToastClick = () => {
+	const handleToastClick = useCallback(() => {
 		if (onFirstPage) {
 			setShowToast(false);
 			document.getElementById('maincontent')?.scrollIntoView({
@@ -266,7 +269,7 @@ export const Liveness = ({
 		} else {
 			window.location.href = `${webURL}#maincontent`;
 		}
-	};
+	}, [onFirstPage, webURL]);
 
 	if (showToast) {
 		return (
