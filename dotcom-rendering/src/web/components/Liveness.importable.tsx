@@ -250,7 +250,7 @@ export const Liveness = ({
 				handleVisibilityChange,
 			);
 		};
-	}, [numHiddenBlocks, onFirstPage]);
+	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
 
 	const handleToastClick = () => {
 		if (onFirstPage) {
