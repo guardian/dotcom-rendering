@@ -19,13 +19,13 @@ import PlusIcon from '../../static/icons/plus.svg';
 import { LiveBlock } from './LiveBlock';
 
 const pinnedPostContainer = css`
-	border: 1px solid ${news[400]};
+	border: 1px solid ${news[300]};
 	margin-bottom: ${space[6]}px;
 	position: relative;
 `;
 
 const pinnedPostRow = css`
-	background: ${news[400]};
+	background: ${news[300]};
 	height: 2rem;
 	display: flex;
 	align-items: center;
@@ -36,7 +36,7 @@ const button = css`
 	width: 20%;
 	justify-content: space-between;
 	align-items: center;
-	background: ${news[400]};
+	background: ${news[300]};
 	padding: ${remSpace[2]} 0 ${remSpace[6]} 0;
 	cursor: pointer;
 	z-index: 999999;
