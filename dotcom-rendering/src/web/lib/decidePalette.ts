@@ -678,7 +678,13 @@ const fillBlockquoteIcon = (format: ArticleFormat): string =>
 
 const fillCardIcon = (format: ArticleFormat): string => {
 	// Setting Card clock colour for immersive cards to all be dark grey
-	if (format.display === ArticleDisplay.Immersive) return neutral[60];
+	// Except ArticleSpecial.SpecialReport
+	if (
+		format.display === ArticleDisplay.Immersive &&
+		format.theme !== ArticleSpecial.SpecialReport
+	) {
+		return neutral[60];
+	}
 	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
