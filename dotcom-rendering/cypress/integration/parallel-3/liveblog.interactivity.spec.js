@@ -11,11 +11,13 @@ import { tweetBlock } from '../../fixtures/manual/tweet-block';
 const blogUrl =
 	'https://www.theguardian.com/australia-news/live/2022/feb/22/australia-news-live-updates-scott-morrison-nsw-trains-coronavirus-covid-omicron-weather';
 
+/**
+ * 	Thrown by the twitter lib. This error is unrelated to the test in question
+ *  so return false to prevent this error from failing this test
+ */
 const ignoreTwitterError = () => {
 	cy.on('uncaught:exception', (err) => {
 		if (err.message.includes('Illegal invocation')) {
-			// Thrown by the twitter lib. This error is unrelated to the test in question
-			// so return false to prevent this error from failing this test
 			return false;
 		}
 	});
