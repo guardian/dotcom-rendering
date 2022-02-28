@@ -40,7 +40,7 @@ import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockCom
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
-import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent';
+import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.importable';
 
 import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -693,24 +693,26 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return [
 				true,
-				<YoutubeBlockComponent
-					format={format}
-					key={index}
-					hideCaption={hideCaption}
-					// eslint-disable-next-line jsx-a11y/aria-role
-					role="inline"
-					adTargeting={adTargeting}
-					isMainMedia={isMainMedia}
-					id={element.id}
-					assetId={element.assetId}
-					expired={element.expired}
-					overrideImage={element.overrideImage}
-					posterImage={element.posterImage}
-					duration={element.duration}
-					mediaTitle={element.mediaTitle}
-					altText={element.altText}
-					origin={host}
-				/>,
+				<Island>
+					<YoutubeBlockComponent
+						format={format}
+						key={index}
+						hideCaption={hideCaption}
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						adTargeting={adTargeting}
+						isMainMedia={isMainMedia}
+						id={element.id}
+						assetId={element.assetId}
+						expired={element.expired}
+						overrideImage={element.overrideImage}
+						posterImage={element.posterImage}
+						duration={element.duration}
+						mediaTitle={element.mediaTitle}
+						altText={element.altText}
+						origin={host}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
