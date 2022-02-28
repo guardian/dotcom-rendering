@@ -14,7 +14,7 @@ export enum TestGroup {
 const NUM_GROUPS = Object.values(TestGroup).filter(isString).length;
 
 interface TestContext {
-	group: TestGroup | undefined;
+	group: TestGroup;
 }
 
 /**
