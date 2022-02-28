@@ -121,16 +121,6 @@ const lastUpdated: Element | null = !isServer
 	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
 	: null;
 
-/**
- * This allows us to make decisions in javascript based on if the reader
- * has the top of the blog in view or not
- *
- * @returns boolean
- */
-function topOfBlogVisible(): boolean {
-	return topOfBlog ? topOfBlog.classList.contains('in-viewport') : false;
-}
-
 export const Liveness = ({
 	pageId,
 	webTitle,
@@ -143,6 +133,9 @@ export const Liveness = ({
 	mostRecentBlockId,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
+	const [topOfBlogVisible, setTopOfBlogVisible] = useState<
+		boolean | undefined
+	>();
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 
@@ -161,7 +154,7 @@ export const Liveness = ({
 				updateTimeElement(lastUpdated);
 			}
 
-			if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
+			if (onFirstPage && topOfBlogVisible && document.hasFocus()) {
 				revealPendingBlocks();
 				setNumHiddenBlocks(0);
 			} else {
@@ -207,9 +200,9 @@ export const Liveness = ({
 				const topOfBlogShowing = entry.isIntersecting;
 
 				if (topOfBlogShowing) {
-					entry.target.classList.add('in-viewport');
+					setTopOfBlogVisible(true);
 				} else {
-					entry.target.classList.remove('in-viewport');
+					setTopOfBlogVisible(false);
 				}
 
 				if (topOfBlogShowing && onFirstPage) {
@@ -246,7 +239,7 @@ export const Liveness = ({
 				// is at the top of the first page then...
 				document.visibilityState === 'visible' &&
 				numHiddenBlocks > 0 &&
-				topOfBlogVisible() &&
+				topOfBlogVisible &&
 				onFirstPage
 			) {
 				revealPendingBlocks();
