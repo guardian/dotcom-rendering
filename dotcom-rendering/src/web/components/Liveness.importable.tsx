@@ -133,7 +133,6 @@ export const Liveness = ({
 	mostRecentBlockId,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
-	const [stickToast, setStickToast] = useState(false);
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<
 		boolean | undefined
 	>();
@@ -197,23 +196,13 @@ export const Liveness = ({
 		if (!topOfBlog) return () => {};
 
 		const observer = new window.IntersectionObserver(([entry]) => {
-			const belowTopOfBlog = entry.boundingClientRect.top < 0;
+			setTopOfBlogVisible(entry.isIntersecting);
 
-			if (entry.isIntersecting) {
-				setTopOfBlogVisible(true);
-				setStickToast(false);
+			if (entry.isIntersecting && onFirstPage) {
 				// If on first page, reveal blocks
-				if (onFirstPage) {
-					revealPendingBlocks();
-					setNumHiddenBlocks(0);
-					setShowToast(false);
-				}
-			} else {
-				setTopOfBlogVisible(false);
-				// If we're scrolling down make the toast sticky
-				if (belowTopOfBlog) {
-					setStickToast(true);
-				}
+				revealPendingBlocks();
+				setNumHiddenBlocks(0);
+				setShowToast(false);
 			}
 		});
 
@@ -276,7 +265,6 @@ export const Liveness = ({
 				onClick={handleToastClick}
 				count={numHiddenBlocks}
 				format={format}
-				stuck={stickToast}
 			/>
 		);
 	}
