@@ -197,15 +197,9 @@ export const Liveness = ({
 
 		const observer = new window.IntersectionObserver(
 			([entry]) => {
-				const topOfBlogShowing = entry.isIntersecting;
+				setTopOfBlogVisible(entry.isIntersecting);
 
-				if (topOfBlogShowing) {
-					setTopOfBlogVisible(true);
-				} else {
-					setTopOfBlogVisible(false);
-				}
-
-				if (topOfBlogShowing && onFirstPage) {
+				if (entry.isIntersecting && onFirstPage) {
 					revealPendingBlocks();
 					setNumHiddenBlocks(0);
 					setShowToast(false);
