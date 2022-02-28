@@ -23,7 +23,7 @@ describe('Paid content tests', function () {
 		// Accept tracking cookies
 		privacySettingsIframe().contains('Privacy settings');
 		privacySettingsIframe().find("[title='Accept all']").click();
-		cy.reload();
+		cy.reload({ timeout: 10000 });
 
 		cy.window().its('ga').should('exist');
 
