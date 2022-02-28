@@ -31,7 +31,6 @@ test('returns a valid group ID when used inside of a provider', () => {
 		</TestProvider>,
 	);
 
-	// We don't care into which bucket the content has been placed
-	// Just that it has been placed in one
+	// Check content has been placed into one of the possible groups
 	expect(container).toHaveTextContent(/0|1|2|3/);
 });
