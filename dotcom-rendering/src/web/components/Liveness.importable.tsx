@@ -201,6 +201,7 @@ export const Liveness = ({
 
 			if (entry.isIntersecting) {
 				setTopOfBlogVisible(true);
+				setStickToast(false);
 				// If on first page, reveal blocks
 				if (onFirstPage) {
 					revealPendingBlocks();
