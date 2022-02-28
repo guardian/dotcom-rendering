@@ -14,7 +14,7 @@ export enum TestGroup {
 const NUM_GROUPS = Object.values(TestGroup).filter(isString).length;
 
 interface TestContext {
-	group: TestGroup;
+	group?: TestGroup;
 }
 
 /**
@@ -55,14 +55,19 @@ const getGroup = (shortUrlId: string): TestGroup => {
 const Context = React.createContext<TestContext | undefined>(undefined);
 
 export const TestProvider = ({
+	switches,
 	shortUrlId,
 	children,
 }: {
+	switches: Switches;
 	shortUrlId: string;
 	children: React.ReactNode;
 }) => {
 	const group = getGroup(shortUrlId);
-	return <Context.Provider value={{ group }}>{children}</Context.Provider>;
+	const providerValue = switches.ampContentABTesting ? { group } : {};
+	return (
+		<Context.Provider value={providerValue}>{children}</Context.Provider>
+	);
 };
 
 /**
