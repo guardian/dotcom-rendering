@@ -4,6 +4,14 @@ import { cmpIframe } from '../../lib/cmpIframe';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
+// It is important to use this article for this test because its commercialProperties
+// coming from the CAPI object are the same for all editions. This way we are making sure
+// the Branding island the test expects will be in the DOM. If an article with different
+// commercialProperties across editions were to be used, the test would have different outcome
+// when running locally (UK edition) and when running in CI. For example, it could be US edition if
+// the CI server runs in US. The best way to deal with this would be to control the edition
+// in the test whether by setting the GU_EDITION cookie or by selecting the edition in the UI.
+// Unfortunately, this is not possible at this point of the migration.
 const paidContentPage =
 	'https://www.theguardian.com/welcome-to-ontario/2022/jan/20/bracing-boat-trips-dinosaurs-and-cherry-pie-the-best-things-to-do-with-kids-in-ontario';
 
