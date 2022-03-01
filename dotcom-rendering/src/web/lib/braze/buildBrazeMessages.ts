@@ -1,7 +1,7 @@
 import { getCookie, log, storage } from '@guardian/libs';
+import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import {
 	BrazeMessages,
-	BrazeMessagesInterface,
 	LocalMessageCache,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';

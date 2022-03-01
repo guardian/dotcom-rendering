@@ -1,4 +1,5 @@
 // @ts-check
+const path = require('path');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
@@ -22,8 +23,14 @@ module.exports = ({ sessionId }) => ({
 	},
 	resolve: {
 		alias: {
-			'@guardian/consent-management-platform':
-				'../../../src/server/cmp-dummy',
+			'@guardian/consent-management-platform': path.resolve(
+				__dirname,
+				'..',
+				'..',
+				'src',
+				'server',
+				'cmp-dummy',
+			),
 		},
 	},
 	externals: [

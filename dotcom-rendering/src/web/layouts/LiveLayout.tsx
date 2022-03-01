@@ -59,6 +59,8 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -782,7 +784,56 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												/>
 											)}
 											{showBodyEndSlot && (
-												<div id="slot-body-end" />
+												<Island clientOnly={true}>
+													<SlotBodyEnd
+														abTestSwitches={
+															CAPI.config.switches
+														}
+														contentType={
+															CAPI.contentType
+														}
+														contributionsServiceUrl={
+															CAPI.contributionsServiceUrl
+														}
+														idApiUrl={
+															CAPI.config.idApiUrl
+														}
+														isDev={
+															CAPI.config.isDev ??
+															false
+														}
+														isMinuteArticle={
+															CAPI.pageType
+																.isMinuteArticle
+														}
+														isPaidContent={
+															CAPI.pageType
+																.isPaidContent
+														}
+														keywordsId={
+															CAPI.config
+																.keywordIds
+														}
+														pageId={CAPI.pageId}
+														pageIsSensitive={
+															CAPI.config
+																.isSensitive
+														}
+														sectionId={
+															CAPI.config.section
+														}
+														sectionName={
+															CAPI.sectionName
+														}
+														shouldHideReaderRevenue={
+															CAPI.shouldHideReaderRevenue
+														}
+														stage={
+															CAPI.config.stage
+														}
+														tags={CAPI.tags}
+													/>
+												</Island>
 											)}
 											<Lines
 												data-print-layout="hide"
@@ -977,7 +1028,27 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 				/>
 			</ElementContainer>
 
-			<BannerWrapper data-print-layout="hide" />
+			<BannerWrapper data-print-layout="hide">
+				<Island clientOnly={true}>
+					<StickyBottomBanner
+						abTestSwitches={CAPI.config.switches}
+						contentType={CAPI.contentType}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						idApiUrl={CAPI.config.idApiUrl}
+						isDev={CAPI.config.isDev ?? false}
+						isMinuteArticle={CAPI.pageType.isMinuteArticle}
+						isPaidContent={CAPI.pageType.isPaidContent}
+						isPreview={!!CAPI.config.isPreview}
+						keywordsId={CAPI.config.keywordIds}
+						pageId={CAPI.pageId}
+						pageIsSensitive={CAPI.config.isSensitive}
+						section={CAPI.config.section}
+						sectionName={CAPI.sectionName}
+						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						tags={CAPI.tags}
+					/>
+				</Island>
+			</BannerWrapper>
 			<MobileStickyContainer data-print-layout="hide" />
 		</>
 	);

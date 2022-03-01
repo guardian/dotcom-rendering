@@ -17,6 +17,7 @@ import { ArticleBody } from '../components/ArticleBody';
 import { RightColumn } from '../components/RightColumn';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { ArticleContainer } from '../components/ArticleContainer';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { SubMeta } from '../components/SubMeta';
 import { MainMedia } from '../components/MainMedia';
@@ -45,6 +46,7 @@ import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.imp
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 const StandardGrid = ({
 	children,
@@ -554,7 +556,42 @@ export const CommentLayout = ({
 										ajaxUrl={CAPI.config.ajaxUrl}
 									/>
 									{showBodyEndSlot && (
-										<div id="slot-body-end" />
+										<Island clientOnly={true}>
+											<SlotBodyEnd
+												abTestSwitches={
+													CAPI.config.switches
+												}
+												contentType={CAPI.contentType}
+												contributionsServiceUrl={
+													CAPI.contributionsServiceUrl
+												}
+												idApiUrl={CAPI.config.idApiUrl}
+												isDev={
+													CAPI.config.isDev ?? false
+												}
+												isMinuteArticle={
+													CAPI.pageType
+														.isMinuteArticle
+												}
+												isPaidContent={
+													CAPI.pageType.isPaidContent
+												}
+												keywordsId={
+													CAPI.config.keywordIds
+												}
+												pageId={CAPI.pageId}
+												pageIsSensitive={
+													CAPI.config.isSensitive
+												}
+												sectionId={CAPI.config.section}
+												sectionName={CAPI.sectionName}
+												shouldHideReaderRevenue={
+													CAPI.shouldHideReaderRevenue
+												}
+												stage={CAPI.config.stage}
+												tags={CAPI.tags}
+											/>
+										</Island>
 									)}
 									<Lines count={4} effect="straight" />
 									<SubMeta
@@ -740,7 +777,27 @@ export const CommentLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<BannerWrapper>
+				<Island clientOnly={true}>
+					<StickyBottomBanner
+						abTestSwitches={CAPI.config.switches}
+						contentType={CAPI.contentType}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						idApiUrl={CAPI.config.idApiUrl}
+						isDev={CAPI.config.isDev ?? false}
+						isMinuteArticle={CAPI.pageType.isMinuteArticle}
+						isPaidContent={CAPI.pageType.isPaidContent}
+						isPreview={!!CAPI.config.isPreview}
+						keywordsId={CAPI.config.keywordIds}
+						pageId={CAPI.pageId}
+						pageIsSensitive={CAPI.config.isSensitive}
+						section={CAPI.config.section}
+						sectionName={CAPI.sectionName}
+						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						tags={CAPI.tags}
+					/>
+				</Island>
+			</BannerWrapper>
 			<MobileStickyContainer />
 		</>
 	);
