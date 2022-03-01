@@ -5,7 +5,6 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import useSWR from 'swr';
 import type { ArticleCounts } from '../../lib/article-count';
 import { getArticleCounts } from '../../lib/article-count';
 import {
@@ -30,8 +29,8 @@ import {
 	BrazeBanner,
 	canShowBrazeBanner,
 } from './StickyBottomBanner/BrazeBanner';
-import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { ABProps, WithABProvider } from './WithABProvider';
+import { useBraze } from '../lib/useBraze';
 
 type Props = {
 	contentType: string;
@@ -216,18 +215,7 @@ const StickyBottomBannerWithAB = ({
 	switches: Switches;
 	isSensitive: boolean;
 }) => {
-	const [brazeMessages, setBrazeMessages] = useState<
-		Promise<BrazeMessagesInterface> | undefined
-	>();
-
-	useSWR('braze-message', () => buildBrazeMessages(idApiUrl), {
-		onSuccess: (data) => {
-			setBrazeMessages(Promise.resolve(data));
-		},
-		onError: () => {
-			setBrazeMessages(Promise.reject());
-		},
-	});
+	const brazeMessages = useBraze(idApiUrl);
 
 	const asyncCountryCode = getLocaleCode();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
@@ -290,7 +278,7 @@ const StickyBottomBannerWithAB = ({
 			section: sectionName,
 		};
 		const brazeBanner = buildBrazeBanner(
-			brazeMessages as Promise<BrazeMessagesInterface>,
+			brazeMessages,
 			brazeArticleContext,
 		);
 		const bannerConfig: SlotConfig = {

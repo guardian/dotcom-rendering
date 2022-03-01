@@ -5,8 +5,6 @@ import type {
 	BrazeMessagesInterface,
 	BrazeArticleContext,
 } from '@guardian/braze-components/logic';
-import useSWR from 'swr';
-import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { getArticleCounts } from '../../lib/article-count';
 import { useOnce } from '../lib/useOnce';
 import { getLocaleCode } from '../lib/getCountryCode';
@@ -26,6 +24,7 @@ import {
 } from './SlotBodyEnd/ReaderRevenueEpic';
 import { MaybeBrazeEpic, canShowBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import { ABProps, WithABProvider } from './WithABProvider';
+import { useBraze } from '../lib/useBraze';
 
 type Props = {
 	contentType: string;
@@ -95,18 +94,7 @@ const SlotBodyEndWithAB = ({
 	pageId,
 	keywordsId,
 }: Props) => {
-	const [brazeMessages, setBrazeMessages] = useState<
-		Promise<BrazeMessagesInterface> | undefined
-	>();
-
-	useSWR('braze-message', () => buildBrazeMessages(idApiUrl), {
-		onSuccess: (data) => {
-			setBrazeMessages(Promise.resolve(data));
-		},
-		onError: () => {
-			setBrazeMessages(Promise.reject());
-		},
-	});
+	const brazeMessages = useBraze(idApiUrl);
 
 	const [countryCode, setCountryCode] = useState<string>();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
@@ -158,7 +146,7 @@ const SlotBodyEndWithAB = ({
 			section: sectionName,
 		};
 		const brazeEpic = buildBrazeEpicConfig(
-			brazeMessages as Promise<BrazeMessagesInterface>,
+			brazeMessages,
 			countryCode as string,
 			idApiUrl,
 			brazeArticleContext,
