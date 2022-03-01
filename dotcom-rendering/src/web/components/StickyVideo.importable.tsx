@@ -101,7 +101,7 @@ export const StickyVideo = ({ isPlaying, children }: Props) => {
 	});
 
 	useEffect(() => {
-		if (isPlaying) setIsSticky(!isIntersecting);
+		setIsSticky(isPlaying && !isIntersecting);
 	}, [isIntersecting, isPlaying]);
 
 	return (
