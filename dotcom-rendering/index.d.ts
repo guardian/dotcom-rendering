@@ -117,7 +117,6 @@ type Palette = {
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		overlayedCaption: Colour;
-		pagination: Colour;
 		shareCount: Colour;
 		shareCountUntilDesktop: Colour;
 	};
@@ -171,14 +170,14 @@ type Palette = {
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;
-		pagination: Colour;
+
 	};
 	topBar: {
 		card: Colour;
 	};
 	hover: {
 		headlineByline: Colour;
-		pagination: Colour;
+
 		standfirstLink: Colour;
 	};
 };
