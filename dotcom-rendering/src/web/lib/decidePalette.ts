@@ -446,7 +446,7 @@ const textCardFooter = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport:
 					return brandAltBackground.primary;
 				default:
-					return neutral[60];
+					return neutral[46];
 			}
 	}
 };
