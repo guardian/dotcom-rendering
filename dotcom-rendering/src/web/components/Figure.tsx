@@ -149,6 +149,7 @@ type Props = {
 	id?: string;
 	isNumberedListTitle?: boolean;
 	className?: string;
+	type?: CAPIElement['_type'];
 };
 
 const mainMediaFigureStyles = css`
@@ -162,6 +163,7 @@ export const Figure = ({
 	isMainMedia,
 	isNumberedListTitle = false,
 	className = '',
+	type,
 }: Props) => {
 	if (isMainMedia) {
 		// Don't add in-body styles for main media elements
@@ -176,6 +178,9 @@ export const Figure = ({
 		);
 	}
 
+	// TODO: isNumberedListTitle is not used
+	// TODO: Any usage of data-spacefinder-component can be replaced with data-spacefinder-type
+	//       Once this has been done we can remove this attribute
 	// See 001-commercial-selectors.md for details on `data-spacefinder-component`
 	let spacefinderComponent: 'rich-link' | 'numbered-list-title' | undefined;
 	if (role === 'richLink') {
@@ -189,6 +194,8 @@ export const Figure = ({
 			id={id}
 			css={defaultRoleStyles(role)}
 			data-spacefinder-component={spacefinderComponent}
+			data-spacefinder-role={role}
+			data-spacefinder-type={type}
 			className={className}
 		>
 			{children}
