@@ -10,6 +10,7 @@ const paidContentPage =
 describe('Paid content tests', function () {
 	beforeEach(function () {
 		setLocalBaseUrl();
+		cy.setCookie('GU_EDITION', 'UK');
 		storage.local.set('gu.geo.override', 'GB');
 	});
 
