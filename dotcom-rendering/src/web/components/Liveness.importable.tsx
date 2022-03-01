@@ -45,7 +45,7 @@ function insert(html: string, switches: Switches) {
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
-	const latestBlock = document.querySelector('#liveblog-body :first-child');
+	const latestBlock = blogBody?.querySelector('#liveblog-body :first-child');
 	if (!latestBlock || !blogBody) return;
 	blogBody.insertBefore(fragment, latestBlock);
 
