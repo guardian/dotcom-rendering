@@ -1,6 +1,5 @@
 import compression from 'compression';
 import express, { Request, Response } from 'express';
-import fetch from 'node-fetch';
 import responseTime from 'response-time';
 import {
 	renderArticle,
@@ -21,20 +20,7 @@ import {
 } from './lib/aws/aws-parameters';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';
-
-const buildUrlFromQueryParam = (req: Request) => {
-	// Supports urls such as:
-	// http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/2020/feb/08/hungary-now-for-the-new-right-what-venezuela-once-was-for-the-left
-	// Note. This is the same as how dev-server.js works
-	const DEFAULT_URL =
-		'https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software';
-	const query = req.query as { url?: string } | undefined;
-	const url = new URL((query && query.url) || DEFAULT_URL);
-	// searchParams will only work for the first set of query params because 'url' is already a query param itself
-	const searchparams = url.searchParams && url.searchParams.toString();
-	// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
-	return `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
-};
+import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
@@ -87,34 +73,26 @@ export const prodServer = () => {
 	app.post('/KeyEvents', logRenderTime, renderKeyEvents);
 
 	// These GET's are for checking any given URL directly from PROD
-	app.get('/Article', logRenderTime, async (req: Request, res: Response) => {
-		// Eg. http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/...
-		try {
-			const url = buildUrlFromQueryParam(req);
-			const { html, ...config } = await fetch(url).then((article) =>
-				article.json(),
-			);
-
-			req.body = config;
-			return renderArticle(req, res);
-		} catch (error) {
-			// eslint-disable-next-line no-console
-			console.error(error);
-		}
-	});
+	app.get(
+		'/Article',
+		[logRenderTime, getContentFromURLMiddleware],
+		async (req: Request, res: Response) => {
+			// Eg. http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/...
+			try {
+				return renderArticle(req, res);
+			} catch (error) {
+				// eslint-disable-next-line no-console
+				console.error(error);
+			}
+		},
+	);
 
 	app.get(
 		'/AMPArticle',
-		logRenderTime,
+		[logRenderTime, getContentFromURLMiddleware],
 		async (req: Request, res: Response) => {
 			// Eg. http://localhost:9000/AMPArticle?url=https://www.theguardian.com/commentisfree/...
 			try {
-				const url = buildUrlFromQueryParam(req);
-				const { html, ...config } = await fetch(url).then((article) =>
-					article.json(),
-				);
-
-				req.body = config;
 				return renderAMPArticle(req, res);
 			} catch (error) {
 				// eslint-disable-next-line no-console
