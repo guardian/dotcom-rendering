@@ -75,7 +75,8 @@ export const prodServer = () => {
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
 		'/Article',
-		[logRenderTime, getContentFromURLMiddleware],
+		logRenderTime,
+		getContentFromURLMiddleware,
 		async (req: Request, res: Response) => {
 			// Eg. http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/...
 			try {
@@ -89,7 +90,8 @@ export const prodServer = () => {
 
 	app.get(
 		'/AMPArticle',
-		[logRenderTime, getContentFromURLMiddleware],
+		logRenderTime,
+		getContentFromURLMiddleware,
 		async (req: Request, res: Response) => {
 			// Eg. http://localhost:9000/AMPArticle?url=https://www.theguardian.com/commentisfree/...
 			try {
