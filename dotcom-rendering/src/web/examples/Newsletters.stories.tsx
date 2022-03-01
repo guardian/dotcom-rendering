@@ -160,6 +160,7 @@ export const Newsletters = (): React.ReactNode => (
 					supporter: '',
 				}}
 				edition="UK"
+				remoteHeader={false}
 				contributionsServiceUrl=""
 			/>
 		</ElementContainer>

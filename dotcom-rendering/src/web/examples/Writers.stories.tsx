@@ -81,6 +81,7 @@ export const Writers = (): React.ReactNode => (
 					support: '',
 					supporter: '',
 				}}
+				remoteHeader={false}
 				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
@@ -282,6 +283,7 @@ export const Writers = (): React.ReactNode => (
 					supporter: '',
 				}}
 				edition="UK"
+				remoteHeader={false}
 				contributionsServiceUrl=""
 			/>
 		</ElementContainer>

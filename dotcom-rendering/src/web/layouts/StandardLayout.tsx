@@ -394,6 +394,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									CAPI.config.switches.anniversaryHeaderSvg
 								}
 								header={CAPI.nav.readerRevenueLinks.header}
+								remoteHeader={CAPI.config.switches.remoteHeader}
 								contributionsServiceUrl={
 									CAPI.contributionsServiceUrl
 								}
@@ -857,6 +858,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					pillars={NAV.pillars}
 					header={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
+					remoteHeader={CAPI.config.switches.remoteHeader}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>

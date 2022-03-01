@@ -57,7 +57,7 @@ export const Header = () => {
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={true}
-				remoteHeaderEnabled={false}
+				remoteHeader={false}
 				pageViewId="page-view-id"
 				contributionsServiceUrl={contributionsServiceUrl}
 				ophanRecord={ophanRecord}
@@ -81,7 +81,7 @@ export const HeaderMobile = () => {
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={true}
-				remoteHeaderEnabled={false}
+				remoteHeader={false}
 				pageViewId="page-view-id"
 				contributionsServiceUrl={contributionsServiceUrl}
 				ophanRecord={ophanRecord}
@@ -105,7 +105,7 @@ export const Footer = () => {
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={false}
-				remoteHeaderEnabled={false}
+				remoteHeader={false}
 				pageViewId="page-view-id"
 				contributionsServiceUrl={contributionsServiceUrl}
 				ophanRecord={ophanRecord}
@@ -129,7 +129,7 @@ export const FooterMobile = () => {
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={false}
-				remoteHeaderEnabled={false}
+				remoteHeader={false}
 				pageViewId="page-view-id"
 				contributionsServiceUrl={contributionsServiceUrl}
 				ophanRecord={ophanRecord}

@@ -45,7 +45,7 @@ type Props = {
 	edition: Edition;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
-	remoteHeaderEnabled: boolean;
+	remoteHeader: boolean;
 	contributionsServiceUrl: string;
 	pageViewId: string;
 	ophanRecord: OphanRecordFunction;
@@ -371,7 +371,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 	edition,
 	dataLinkNamePrefix,
 	inHeader,
-	remoteHeaderEnabled,
+	remoteHeader,
 	urls,
 	contributionsServiceUrl,
 	ophanRecord,
@@ -393,7 +393,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 	}, []);
 
 	if (countryCode) {
-		if (inHeader && remoteHeaderEnabled) {
+		if (inHeader && remoteHeader) {
 			return (
 				<ReaderRevenueLinksRemote
 					edition={edition}

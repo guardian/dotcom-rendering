@@ -4,7 +4,6 @@ import loadable from '@loadable/component';
 import { log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from './SignInGate/SignInGateSelector';
@@ -21,8 +20,6 @@ import { incrementAlreadyVisited } from '../lib/alreadyVisited';
 import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
-import { getOphanRecordFunction } from '../browser/ophan/ophan';
-import { Lazy } from './Lazy';
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -36,8 +33,6 @@ export const App = ({ CAPI }: Props) => {
 		useState<Promise<BrazeMessagesInterface>>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-
-	const ophanRecord = getOphanRecordFunction();
 
 	useEffect(() => {
 		incrementAlreadyVisited();

@@ -25,6 +25,7 @@ type Props = {
 	supporterCTA: string;
 	discussionApiUrl: string;
 	header: ReaderRevenueCategories;
+	remoteHeader: boolean;
 	contributionsServiceUrl: string;
 };
 
@@ -36,6 +37,7 @@ export const Header = ({
 	supporterCTA,
 	discussionApiUrl,
 	header,
+	remoteHeader,
 	contributionsServiceUrl,
 }: Props) => (
 	<div css={headerStyles}>
@@ -49,15 +51,13 @@ export const Header = ({
 		</Hide>
 		<Logo isAnniversary={isAnniversary} edition={edition} />
 		<div id="reader-revenue-links-header">
-			<Island deferUntil="idle">
+			<Island deferUntil="idle" clientOnly={true}>
 				<ReaderRevenueLinks
 					urls={header}
 					edition={edition}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					remoteHeaderEnabled={
-						window.guardian?.app?.data?.CAPI?.config?.remoteHeader
-					}
+					remoteHeader={remoteHeader}
 					pageViewId={window.guardian?.config?.ophan?.pageViewId}
 					contributionsServiceUrl={contributionsServiceUrl}
 					ophanRecord={getOphanRecordFunction()}
