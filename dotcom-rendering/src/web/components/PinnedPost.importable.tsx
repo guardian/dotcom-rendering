@@ -151,8 +151,6 @@ export const PinnedPost = ({
 		setIsBrowser(true);
 	}, []);
 
-	// const publishedDate = new Date(pinnedPost.blockFirstPublished);
-
 	if (isBrowser) {
 		return (
 			<div css={pinnedPostContainer}>
