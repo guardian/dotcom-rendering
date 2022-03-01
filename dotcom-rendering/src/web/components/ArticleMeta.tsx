@@ -330,7 +330,7 @@ export const ArticleMeta = ({
 		>
 			<div css={meta}>
 				{branding && (
-					<Island deferUntil="visible">
+					<Island deferUntil="idle">
 						<Branding branding={branding} palette={palette} />
 					</Island>
 				)}

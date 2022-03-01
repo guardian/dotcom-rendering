@@ -52,12 +52,9 @@ export const Branding: React.FC<{
 							branding.sponsorName.toLocaleLowerCase(),
 						)
 					}
+					data-cy="branding-logo"
 				>
-					<img
-						src={branding.logo.src}
-						alt={branding.sponsorName}
-						data-cy="branding-logo"
-					/>
+					<img src={branding.logo.src} alt={branding.sponsorName} />
 				</a>
 			</div>
 
