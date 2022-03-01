@@ -123,6 +123,7 @@ export const PinnedPost = ({
 	const collapse = () => setExpanded(false);
 	const expand = () => setExpanded(true);
 	const [isBrowser, setIsBrowser] = useState(false);
+	const [showButton, setShowButton] = useState(false);
 	function handleClick() {
 		if (expanded) {
 			collapse();
@@ -130,6 +131,15 @@ export const PinnedPost = ({
 			expand();
 		}
 	}
+
+	useEffect(() => {
+		if (
+			document.documentElement.scrollHeight >
+			document.documentElement.clientHeight
+		) {
+			setShowButton(true);
+		}
+	}, []);
 
 	useEffect(() => {
 		// if js is disabled during time in browser, will this break?
@@ -163,17 +173,19 @@ export const PinnedPost = ({
 						isLiveUpdate={isLiveUpdate}
 					/>
 				</div>
-				<button
-					type="button"
-					aria-expanded={expanded}
-					onClick={handleClick}
-					css={() => [button, toggleIcon]}
-				>
-					{expanded ? <SvgMinus /> : <SvgPlus />}
-					<span css={toggleLabel}>
-						{expanded ? 'Show Less' : 'Show More'}
-					</span>
-				</button>
+				{showButton && (
+					<button
+						type="button"
+						aria-expanded={expanded}
+						onClick={handleClick}
+						css={() => [button, toggleIcon]}
+					>
+						{expanded ? <SvgMinus /> : <SvgPlus />}
+						<span css={toggleLabel}>
+							{expanded ? 'Show Less' : 'Show More'}
+						</span>
+					</button>
+				)}
 				{/* {!expanded && <div css={overlay} />} */}
 			</div>
 		);
