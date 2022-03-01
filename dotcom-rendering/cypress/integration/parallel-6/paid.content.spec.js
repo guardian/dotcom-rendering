@@ -32,7 +32,7 @@ describe('Paid content tests', function () {
 			'https://www.google-analytics.com/collect?v=1**',
 		).as('gaRequest');
 
-		cy.get('gu-island[name=Branding]', { timeout: 15000 }).should(
+		cy.get('gu-island[name=Branding]', { timeout: 30000 }).should(
 			'have.attr',
 			'data-gu-ready',
 			'true',
