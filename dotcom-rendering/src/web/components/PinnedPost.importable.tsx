@@ -2,24 +2,21 @@ import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import {
 	neutral,
 	focusHalo,
-	remSpace,
 	space,
 	textSans,
-	transitions,
-	until,
-	visuallyHidden,
 	news,
+	from,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { HTMLAttributes } from 'react';
 import { Props, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { css } from '@emotion/react';
-import PlusIcon from '../../static/icons/plus.svg';
+import PinIcon from '../../static/icons/pin.svg';
 import { LiveBlock } from './LiveBlock';
 
 const pinnedPostContainer = css`
-	border: 1px solid ${news[300]};
+	border: 3px solid ${news[300]};
 	margin-bottom: ${space[6]}px;
 	position: relative;
 `;
@@ -29,26 +26,44 @@ const pinnedPostRow = css`
 	height: 2rem;
 	display: flex;
 	align-items: center;
+	svg {
+		fill: ${neutral[100]};
+		width: 18px;
+		height: 24px;
+	}
 `;
 
+const timeAgoText = css`
+	${textSans.small({ fontWeight: 'bold' })};
+	color: ${neutral[100]};
+	margin-left: 2.6rem;
+`;
+// const overlay = css`
+// 	height: 7rem;
+// 	background-image: linear-gradient(
+// 		0deg,
+// 		#ffffff,
+// 		#ffffff,
+// 		40%,
+// 		rgba(255, 255, 255, 0)
+// 	);
+// 	z-index: 1;
+// `;
+
 const button = css`
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 	position: absolute;
 	width: 20%;
-	justify-content: space-between;
-	align-items: center;
 	background: ${news[300]};
-	padding: ${remSpace[2]} 0 ${remSpace[6]} 0;
 	cursor: pointer;
 	outline: none;
 	border: 0;
 	border-radius: 1rem;
-	text-align: left;
-	font-weight: bold;
-	font-size: 15px;
-	color: white;
 	height: 2rem;
-	display: flex;
 	bottom: -1rem;
+	margin-left: 0.625rem;
 
 	&:focus div {
 		${focusHalo};
@@ -56,101 +71,35 @@ const button = css`
 	&:hover {
 		background: ${news[400]};
 	}
+	${from.tablet} {
+		margin-left: 3.75rem;
+	}
 `;
 
-// const labelText = css`
-// 	${headline.xxxsmall({ fontWeight: 'bold' })};
-// 	margin-right: ${remSpace[4]};
-// `;
-
-const expandedBodyStyles = css`
-	/*
-	TODO:
-	Hardcoded max-height because auto is invalid.
-	If content is longer, we'll need to set overflow: auto
-	but only after max-height has been reached.
-	Otherwise, for short content we'll always see a flash
-	of a scrollbar as the row height is transitioning
-	*/
-	transition: max-height ${transitions.medium};
+const expandedBody = css`
 	overflow: hidden;
 	height: auto;
 `;
 
-const expandedBody = css`
-	${expandedBodyStyles};
-`;
-
-const collapsedBodyStyles = css`
-	min-height: 50px;
-	max-height: 50px;
-
-	/*
-	TODO:
-	This transition is being ignored as the hidden
-	attribute is applied immediately
-	transition: max-height ${transitions.short};
-	*/
+const collapsedBody = css`
+	max-height: 40vh;
 	overflow: hidden;
 `;
-const collapsedBody = css`
-	${collapsedBodyStyles};
-`;
 
-// const noJsInput = css`
-// 	${visuallyHidden};
-// 	&:focus + [data-target='label'] > [data-target='toggle'] {
-// 		${focusHalo};
-// 	}
-// 	&:not(:checked) ~ [data-target='body'] {
-// 		${collapsedBodyStyles};
-// 		display: none;
-// 	}
-// 	&:checked ~ [data-target='body'] {
-// 		${expandedBodyStyles};
-// 	}
-// 	&:not(:checked) + [data-target='label'] [data-target='toggle-label-hide'] {
-// 		display: none;
-// 	}
-// 	&:checked + [data-target='label'] [data-target='toggle-label-show'] {
-// 		display: none;
-// 	}
-// `;
-
-const toggle = css`
-	width: auto;
-	display: flex;
-	align-items: center;
-`;
-
-const toggleLabel = css`
-	${textSans.small({ fontWeight: 'bold' })};
-	${until.tablet} {
-		${visuallyHidden}
-	}
-`;
-
-const toggleIconWithLabel = css`
+const toggleIcon = css`
 	svg {
+		fill: ${neutral[100]};
 		width: 18px;
 		height: 18px;
 	}
 `;
+const toggleLabel = css`
+	${textSans.small({ fontWeight: 'bold', lineHeight: 'tight' })};
+	color: ${neutral[100]};
+`;
 
-export interface PinnedPostProps
-	extends Omit<HTMLAttributes<HTMLDivElement>, 'onClick'>,
-		Props {
+export interface PinnedPostProps extends Props {
 	pinnedPost: Block;
-	/**
-	 * A line of text to summarise the information that lies within the expanded state.
-	 * Appears in the collapsed state, as well as prominently at the top of the expanded state.
-	 */
-	label?: string;
-
-	/**
-	 * @ignore passed down by the parent <Accordion />
-	 */
-	hideToggleLabel?: boolean;
 	format: ArticleFormat;
 	pageId: string;
 	webTitle: string;
@@ -160,15 +109,8 @@ export interface PinnedPostProps
 	isLiveUpdate?: boolean;
 }
 
-/**
- * [Storybook](https://guardian.github.io/source/?path=/docs/packages-source-react-components-accordion--playground) •
- * [Design System](https://theguardian.design/2a1e5182b/p/38c5aa-accordion/b/92b71e) •
- * [GitHub](https://github.com/guardian/source/blob/main/packages/@guardian/source-react-components/src/accordion/AccordionRow.tsx) •
- * [NPM](https://www.npmjs.com/package/@guardian/source-react-components)
- */
 export const PinnedPost = ({
 	pinnedPost,
-	hideToggleLabel = false,
 	format,
 	pageId,
 	webTitle,
@@ -183,17 +125,16 @@ export const PinnedPost = ({
 	const [isBrowser, setIsBrowser] = useState(false);
 	function handleClick() {
 		if (expanded) {
-			console.log('collapsed');
 			collapse();
 		} else {
-			console.log('expanded');
 			expand();
 		}
 	}
 
 	useEffect(() => {
+		// if js is disabled during time in browser, will this break?
 		setIsBrowser(true);
-	});
+	}, []);
 
 	// const publishedDate = new Date(pinnedPost.blockFirstPublished);
 
@@ -201,22 +142,13 @@ export const PinnedPost = ({
 		return (
 			<div css={pinnedPostContainer}>
 				<div css={pinnedPostRow}>
-					<PlusIcon height="2rem" width="2rem" fill="white" />
+					<PinIcon fill="white" />
 
-					<time
-						data-relativeformat="med"
-						css={css`
-							color: ${neutral[46]};
-							font-weight: bold;
-							margin: 0 ${space[6]}px;
-						`}
-					>
-						{pinnedPost.blockFirstPublished && (
-							<p>
-								from {timeAgo(pinnedPost.blockFirstPublished)}
-							</p>
-						)}
-					</time>
+					{pinnedPost.blockFirstPublished && (
+						<time data-relativeformat="med" css={timeAgoText}>
+							From {timeAgo(pinnedPost.blockFirstPublished)}
+						</time>
+					)}
 				</div>
 
 				<div css={expanded ? expandedBody : collapsedBody}>
@@ -231,26 +163,21 @@ export const PinnedPost = ({
 						isLiveUpdate={isLiveUpdate}
 					/>
 				</div>
-
 				<button
 					type="button"
 					aria-expanded={expanded}
 					onClick={handleClick}
-					css={() => [
-						button,
-						!hideToggleLabel ? toggleIconWithLabel : '',
-					]}
+					css={() => [button, toggleIcon]}
 				>
-					<div css={toggle}>
-						{expanded ? <SvgPlus /> : <SvgMinus />}
-						<span css={toggleLabel}>
-							{expanded ? 'Show Less' : 'Show More'}
-						</span>
-					</div>
+					{expanded ? <SvgMinus /> : <SvgPlus />}
+					<span css={toggleLabel}>
+						{expanded ? 'Show Less' : 'Show More'}
+					</span>
 				</button>
+				{/* {!expanded && <div css={overlay} />} */}
 			</div>
 		);
 	}
 
-	return <div>no js</div>;
+	return <div>js is disabled</div>;
 };
