@@ -404,7 +404,7 @@ const textCardFooter = (format: ArticleFormat): string => {
 					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
 					return '#ff9941';
 				default:
-					return neutral[60];
+					return neutral[46];
 			}
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
