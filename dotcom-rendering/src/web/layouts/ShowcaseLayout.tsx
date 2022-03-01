@@ -543,26 +543,33 @@ export const ShowcaseLayout = ({
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
-											contentType={CAPI.contentType}
-											sectionName={CAPI.sectionName}
-											sectionId={CAPI.config.section}
-											shouldHideReaderRevenue={
-												CAPI.shouldHideReaderRevenue
+											abTestSwitches={
+												CAPI.config.switches
 											}
+											contentType={CAPI.contentType}
+											contributionsServiceUrl={
+												CAPI.contributionsServiceUrl
+											}
+											idApiUrl={CAPI.config.idApiUrl}
+											isDev={CAPI.config.isDev ?? false}
 											isMinuteArticle={
 												CAPI.pageType.isMinuteArticle
 											}
 											isPaidContent={
 												CAPI.pageType.isPaidContent
 											}
-											tags={CAPI.tags}
-											contributionsServiceUrl={
-												CAPI.contributionsServiceUrl
-											}
-											idApiUrl={CAPI.config.idApiUrl}
-											stage={CAPI.config.stage}
-											pageId={CAPI.pageId}
 											keywordsId={CAPI.config.keywordIds}
+											pageId={CAPI.pageId}
+											pageIsSensitive={
+												CAPI.config.isSensitive
+											}
+											sectionId={CAPI.config.section}
+											sectionName={CAPI.sectionName}
+											shouldHideReaderRevenue={
+												CAPI.shouldHideReaderRevenue
+											}
+											stage={CAPI.config.stage}
+											tags={CAPI.tags}
 										/>
 									</Island>
 								)}
@@ -752,20 +759,21 @@ export const ShowcaseLayout = ({
 			<BannerWrapper>
 				<Island clientOnly={true}>
 					<StickyBottomBanner
+						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						sectionName={CAPI.sectionName}
-						section={CAPI.config.section}
-						tags={CAPI.tags}
-						isPaidContent={CAPI.pageType.isPaidContent}
-						isPreview={!!CAPI.config.isPreview}
-						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-						isMinuteArticle={CAPI.pageType.isMinuteArticle}
-						isSensitive={CAPI.config.isSensitive}
 						contributionsServiceUrl={CAPI.contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
-						switches={CAPI.config.switches}
-						pageId={CAPI.pageId}
+						isDev={CAPI.config.isDev ?? false}
+						isMinuteArticle={CAPI.pageType.isMinuteArticle}
+						isPaidContent={CAPI.pageType.isPaidContent}
+						isPreview={!!CAPI.config.isPreview}
 						keywordsId={CAPI.config.keywordIds}
+						pageId={CAPI.pageId}
+						pageIsSensitive={CAPI.config.isSensitive}
+						section={CAPI.config.section}
+						sectionName={CAPI.sectionName}
+						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						tags={CAPI.tags}
 					/>
 				</Island>
 			</BannerWrapper>

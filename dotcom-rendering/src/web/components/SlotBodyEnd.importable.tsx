@@ -25,6 +25,7 @@ import {
 	EpicConfig as RREpicConfig,
 } from './SlotBodyEnd/ReaderRevenueEpic';
 import { MaybeBrazeEpic, canShowBrazeEpic } from './SlotBodyEnd/BrazeEpic';
+import { ABProps, WithABProvider } from './WithABProvider';
 
 type Props = {
 	contentType: string;
@@ -80,7 +81,7 @@ const buildBrazeEpicConfig = (
 	};
 };
 
-export const SlotBodyEnd = ({
+const SlotBodyEndWithAB = ({
 	contentType,
 	sectionName,
 	sectionId,
@@ -179,4 +180,45 @@ export const SlotBodyEnd = ({
 	}
 
 	return null;
+};
+
+export const SlotBodyEnd = ({
+	abTestSwitches,
+	contentType,
+	contributionsServiceUrl,
+	idApiUrl,
+	isDev,
+	isMinuteArticle,
+	isPaidContent,
+	keywordsId,
+	pageId,
+	pageIsSensitive,
+	sectionId,
+	sectionName,
+	shouldHideReaderRevenue,
+	stage,
+	tags,
+}: Props & ABProps) => {
+	return (
+		<WithABProvider
+			abTestSwitches={abTestSwitches}
+			pageIsSensitive={pageIsSensitive}
+			isDev={isDev}
+		>
+			<SlotBodyEndWithAB
+				contentType={contentType}
+				sectionName={sectionName}
+				sectionId={sectionId}
+				shouldHideReaderRevenue={shouldHideReaderRevenue}
+				isMinuteArticle={isMinuteArticle}
+				isPaidContent={isPaidContent}
+				tags={tags}
+				contributionsServiceUrl={contributionsServiceUrl}
+				idApiUrl={idApiUrl}
+				stage={stage}
+				pageId={pageId}
+				keywordsId={keywordsId}
+			/>
+		</WithABProvider>
+	);
 };
