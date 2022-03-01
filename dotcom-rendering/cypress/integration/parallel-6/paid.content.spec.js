@@ -32,6 +32,10 @@ describe('Paid content tests', function () {
 			'https://www.google-analytics.com/collect?v=1**',
 		).as('gaRequest');
 
+		cy.get('gu-island[name=Branding]').scrollIntoView({
+			duration: 300,
+		});
+
 		cy.get('gu-island[name=Branding]', { timeout: 30000 }).should(
 			'have.attr',
 			'data-gu-ready',
@@ -46,7 +50,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			// expect(requestURL).to.include('el=ocado');
+			expect(requestURL).to.include('el=destination%20ontario');
 		});
 	});
 });
