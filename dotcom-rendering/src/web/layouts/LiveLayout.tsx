@@ -205,11 +205,9 @@ const sticky = css`
 `;
 
 const keyEventsMargins = css`
-	${from.desktop} {
-		margin-top: ${space[1]}px;
-	}
 	margin-bottom: ${space[3]}px;
 	${from.desktop} {
+		margin-top: ${space[1]}px;
 		margin-bottom: 0;
 	}
 `;
