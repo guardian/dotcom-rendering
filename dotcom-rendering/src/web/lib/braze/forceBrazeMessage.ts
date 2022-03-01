@@ -1,7 +1,7 @@
 const FORCE_BRAZE_ALLOWLIST = [
 	'preview.gutools.co.uk',
 	'preview.code.dev-gutools.co.uk',
-	process.env.DEVELOPMENT_HOSTNAME || 'localhost',
+	process.env.HOSTNAME || 'localhost',
 	'm.thegulocal.com',
 ];
 

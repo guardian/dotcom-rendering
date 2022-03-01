@@ -44,7 +44,7 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 		const isDev =
 			window.guardian.config.page.isDev ||
 			window.location.hostname.includes(
-				process.env.DEVELOPMENT_HOSTNAME || 'localhost',
+				process.env.HOSTNAME || 'localhost',
 			);
 
 		initCommercialMetrics(
