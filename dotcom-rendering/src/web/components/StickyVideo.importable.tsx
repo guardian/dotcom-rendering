@@ -27,7 +27,6 @@ const stickyStyles = css`
 	position: fixed;
 	bottom: 20px;
 	width: 300px;
-	height: 169px;
 	${getZIndex('sticky-video')};
 	animation: fade-in-up 1s ease both;
 
@@ -55,12 +54,12 @@ interface Props {
 export const StickyVideo = ({ isPlaying, children }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
 	const [isIntersecting, setRef] = useIsInView({
-		threshold: 0.1,
+		threshold: 0.5,
 		repeat: true,
 	});
 
 	useEffect(() => {
-		setIsSticky(isIntersecting && isPlaying);
+		setIsSticky(isPlaying && !isIntersecting);
 	}, [isIntersecting, isPlaying]);
 
 	return (
