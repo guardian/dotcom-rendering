@@ -10,7 +10,7 @@ import type { CommonEndOfArticleComponentProps } from '@guardian/braze-component
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { CanShowResult } from '../../lib/messagePicker';
 import { useOnce } from '../../lib/useOnce';
-import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
+import { useIsInView } from '../../lib/useIsInView';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 
 const wrapperMargins = css`
@@ -75,7 +75,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	countryCode,
 	idApiUrl,
 }: InnerProps) => {
-	const [hasBeenSeen, setNode] = useHasBeenSeen({
+	const [hasBeenSeen, setNode] = useIsInView({
 		rootMargin: '-18px',
 		threshold: 0,
 		debounce: true,

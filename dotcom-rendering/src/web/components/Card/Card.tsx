@@ -223,7 +223,6 @@ export const Card = ({
 									<CardHeadline
 										headlineText={headlineText}
 										format={format}
-										palette={cardPalette}
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
@@ -286,7 +285,6 @@ export const Card = ({
 										webPublicationDate ? (
 											<CardAge
 												format={format}
-												palette={cardPalette}
 												webPublicationDate={
 													webPublicationDate
 												}

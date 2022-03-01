@@ -23,6 +23,7 @@ import {
 
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
+import { transparentColour } from './transparentColour';
 
 const WHITE = neutral[100];
 const BLACK = neutral[7];
@@ -337,6 +338,14 @@ const textCardHeadline = (format: ArticleFormat): string => {
 };
 
 const textCardStandfirst = textCardHeadline;
+
+/** same as textByline except for SpecialReport */
+const textCardByline = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[700];
+
+	return textByline(format);
+};
 
 const textCardKicker = (format: ArticleFormat): string => {
 	if (
@@ -669,7 +678,13 @@ const fillBlockquoteIcon = (format: ArticleFormat): string =>
 
 const fillCardIcon = (format: ArticleFormat): string => {
 	// Setting Card clock colour for immersive cards to all be dark grey
-	if (format.display === ArticleDisplay.Immersive) return neutral[60];
+	// Except ArticleSpecial.SpecialReport
+	if (
+		format.display === ArticleDisplay.Immersive &&
+		format.theme !== ArticleSpecial.SpecialReport
+	) {
+		return neutral[60];
+	}
 	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
@@ -681,7 +696,6 @@ const fillCardIcon = (format: ArticleFormat): string => {
 				default:
 					return neutral[46];
 			}
-			return lifestyle[500];
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
 				case ArticlePillar.News:
@@ -720,7 +734,7 @@ const fillCardIcon = (format: ArticleFormat): string => {
 		default:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
-					return brandAltBackground.primary;
+					return brandAlt[400];
 				default:
 					return neutral[46];
 			}
@@ -796,6 +810,9 @@ const activeMatchTab = (): string => {
 const backgroundMatchNav = (): string => {
 	return '#FFE500';
 };
+
+const backgroundUnderline = (format: ArticleFormat): string =>
+	transparentColour(textCardKicker(format));
 
 const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
@@ -1028,6 +1045,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline: textCardHeadline(format),
+			cardByline: textCardByline(format),
 			cardKicker: textCardKicker(format),
 			linkKicker: textLinkKicker(format),
 			cardStandfirst: textCardStandfirst(format),
@@ -1075,6 +1093,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headlineTag: backgroundHeadlineTag(format),
 			mostViewedTab: backgroundMostViewedTab(format),
 			matchNav: backgroundMatchNav(),
+			analysisUnderline: backgroundUnderline(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

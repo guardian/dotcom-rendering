@@ -12,7 +12,7 @@ import {
 	BannerPayload,
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
+import { useIsInView } from '../../lib/useIsInView';
 import {
 	shouldHideSupportMessaging,
 	withinLocalNoBannerCachePeriod,
@@ -270,7 +270,7 @@ const RemoteBanner = ({
 }: RemoteBannerProps) => {
 	const [Banner, setBanner] = useState<React.FC>();
 
-	const [hasBeenSeen, setNode] = useHasBeenSeen({
+	const [hasBeenSeen, setNode] = useIsInView({
 		threshold: 0,
 		debounce: true,
 	});

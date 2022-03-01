@@ -3,16 +3,17 @@ import { css } from '@emotion/react';
 import { textSans, until } from '@guardian/source-foundations';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
 
+import { decidePalette } from '../../../lib/decidePalette';
 import ClockIcon from '../../../../static/icons/clock.svg';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	webPublicationDate: string;
 	showClock?: boolean;
 };
 
-const ageStyles = (format: ArticleFormat, palette: Palette) => {
+const ageStyles = (format: ArticleFormat) => {
+	const palette = decidePalette(format);
 	return css`
 		${textSans.xxsmall()};
 		color: ${palette.text.cardFooter};
@@ -42,12 +43,7 @@ const ageStyles = (format: ArticleFormat, palette: Palette) => {
 	`;
 };
 
-export const CardAge = ({
-	format,
-	palette,
-	webPublicationDate,
-	showClock,
-}: Props) => {
+export const CardAge = ({ format, webPublicationDate, showClock }: Props) => {
 	const displayString = timeAgo(new Date(webPublicationDate).getTime());
 
 	if (!displayString) {
@@ -55,7 +51,7 @@ export const CardAge = ({
 	}
 
 	return (
-		<span css={ageStyles(format, palette)}>
+		<span css={ageStyles(format)}>
 			<span>
 				{showClock && <ClockIcon />}
 				<time dateTime={webPublicationDate} data-relativeformat="med">

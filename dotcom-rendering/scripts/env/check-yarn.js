@@ -6,6 +6,7 @@ const ensure = require('./ensure');
 // Yarn v1.x support .yarnrc, so we can use a local (check-in) copy of yarn
 const YARN_MIN_VERSION = '1.x';
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async () => {
 	try {
 		// This will fail if yarn isn't installed, and force into the catch,

@@ -1,5 +1,7 @@
 // ----- Imports ----- //
 
+import type { Tag } from '@guardian/content-api-models/v1/tag';
+import { TagType } from '@guardian/content-api-models/v1/tagType';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -17,9 +19,18 @@ import type { MatchScores } from 'football';
 import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
-import type { Item, Review } from 'item';
+import type {
+	Comment,
+	Editorial,
+	Item,
+	Letter,
+	MatchReport,
+	Review,
+	Standard,
+} from 'item';
 import { pipe } from 'lib';
 import { galleryBody } from './galleryBody';
+import { relatedContent } from './relatedContent';
 
 // ----- Fixture ----- //
 
@@ -242,6 +253,65 @@ const matchScores: MatchScores = {
 	},
 };
 
+const tags: Tag[] = [
+	{
+		id: 'world/refugees',
+		type: TagType.SERIES,
+		webTitle: 'Refugees',
+		webUrl: 'https://www.theguardian.com/world/refugees',
+		apiUrl: 'https://content.guardianapis.com/world/refugees',
+		references: [],
+	},
+	{
+		id: 'uk/immigration',
+		type: TagType.KEYWORD,
+		webTitle: 'Immigration and asylum',
+		webUrl: 'https://www.theguardian.com/uk/immigration',
+		apiUrl: 'https://content.guardianapis.com/uk/immigration',
+		references: [],
+	},
+	{
+		id: 'uk/uk',
+		type: TagType.KEYWORD,
+		webTitle: 'UK news',
+		webUrl: 'https://www.theguardian.com/uk/uk',
+		apiUrl: 'https://content.guardianapis.com/uk/uk',
+		references: [],
+	},
+	{
+		id: 'world/world',
+		type: TagType.KEYWORD,
+		webTitle: 'World news',
+		webUrl: 'https://www.theguardian.com/world/world',
+		apiUrl: 'https://content.guardianapis.com/world/world',
+		references: [],
+	},
+	{
+		id: 'society/youngpeople',
+		type: TagType.KEYWORD,
+		webTitle: 'Young people',
+		webUrl: 'https://www.theguardian.com/society/youngpeople',
+		apiUrl: 'https://content.guardianapis.com/society/youngpeople"',
+		references: [],
+	},
+	{
+		id: 'profile/lukeharding',
+		type: TagType.CONTRIBUTOR,
+		webTitle: 'Luke Harding',
+		webUrl: 'https://www.theguardian.com/profile/lukeharding',
+		apiUrl: 'https://content.guardianapis.com/profile/lukeharding',
+		references: [],
+	},
+	{
+		id: 'tracking/commissioningdesk/saturday-magazine',
+		type: TagType.TRACKING,
+		webTitle: 'Saturday Magazine',
+		webUrl: 'https://www.theguardian.com/tracking/commissioningdesk/saturday-magazine',
+		apiUrl: 'https://content.guardianapis.com/tracking/commissioningdesk/saturday-magazine',
+		references: [],
+	},
+];
+
 const fields = {
 	theme: ArticlePillar.News,
 	display: ArticleDisplay.Standard,
@@ -262,18 +332,18 @@ const fields = {
 		references: [],
 	}),
 	commentable: false,
-	tags: [],
+	tags: tags,
 	shouldHideReaderRevenue: false,
 	branding: none,
 	internalShortId: none,
 	commentCount: none,
-	relatedContent: none,
+	relatedContent: relatedContent,
 	footballContent: none,
 	logo: none,
 	webUrl: '',
 };
 
-const article: Item = {
+const article: Standard = {
 	design: ArticleDesign.Standard,
 	...fields,
 };
@@ -284,7 +354,7 @@ const articleWithStandfirstLink: Item = {
 	standfirst: standfirstWithLink,
 };
 
-const analysis: Item = {
+const analysis: Standard = {
 	design: ArticleDesign.Analysis,
 	...fields,
 };
@@ -298,6 +368,7 @@ const review: Review = {
 	design: ArticleDesign.Review,
 	starRating: 4,
 	...fields,
+	theme: ArticlePillar.Culture,
 };
 
 const labs: Item = {
@@ -306,19 +377,22 @@ const labs: Item = {
 	theme: ArticleSpecial.Labs,
 };
 
-const comment: Item = {
+const comment: Comment = {
 	design: ArticleDesign.Comment,
 	...fields,
+	theme: ArticlePillar.Opinion,
 };
 
-const letter: Item = {
+const letter: Letter = {
 	design: ArticleDesign.Letter,
 	...fields,
+	theme: ArticlePillar.Opinion,
 };
 
-const editorial: Item = {
+const editorial: Editorial = {
 	design: ArticleDesign.Editorial,
 	...fields,
+	theme: ArticlePillar.Opinion,
 };
 
 const interview: Item = {
@@ -338,10 +412,11 @@ const cartoon: Item = {
 	body: [],
 };
 
-const matchReport: Item = {
+const matchReport: MatchReport = {
 	design: ArticleDesign.MatchReport,
 	football: some(matchScores),
 	...fields,
+	theme: ArticlePillar.Sport,
 	body: galleryBody,
 };
 

@@ -8,7 +8,7 @@ import {
 import { bestFitImage, heightEstimate } from '../lib/image-fit';
 
 import InfoIcon from '../../static/icons/info.svg';
-import { YoutubeBlockComponent } from './elements/YoutubeBlockComponent';
+import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
 import { scrsetStringFromImagesSources } from '../lib/srcset-utils';
 
 const figureStyle = css`
@@ -137,7 +137,7 @@ const asComponent = (
 			return mainImage(element);
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return (
-				<YoutubeBlockComponent
+				<YoutubeBlockComponentAMP
 					element={element}
 					pillar={pillar}
 					adTargeting={adTargeting}

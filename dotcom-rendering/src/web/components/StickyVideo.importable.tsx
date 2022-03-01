@@ -3,7 +3,7 @@ import { from, neutral } from '@guardian/source-foundations';
 import { SvgCross } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
-import { useHasBeenSeen } from '../lib/useHasBeenSeen';
+import { useIsInView } from '../lib/useIsInView';
 
 const buttonStyles = css`
 	position: absolute;
@@ -62,7 +62,7 @@ const stickyStyles = css`
 	bottom: 20px;
 	width: 216px;
 	${getZIndex('sticky-video')};
-	animation: fade-in-up 1s ease forwards;
+	animation: fade-in-up 1s ease both;
 
 	&:hover button {
 		display: flex;
@@ -78,25 +78,24 @@ const stickyStyles = css`
 `;
 
 const stickyContainerStyles = (height: number) => css`
-	height: ${height * 0.75}px;
+	height: ${height}px;
 	position: relative;
 	display: flex;
 	justify-content: flex-end;
 
 	${from.tablet} {
-		height: ${height * 1.5}px;
+		height: ${height * 2}px;
 	}
 `;
 
 interface Props {
 	isPlaying: boolean;
-	height: number;
 	children: React.ReactNode;
 }
 
-export const StickyVideo = ({ isPlaying, height, children }: Props) => {
+export const StickyVideo = ({ isPlaying, children }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
-	const [isIntersecting, setRef] = useHasBeenSeen({
+	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.1,
 		repeat: true,
 	});
@@ -106,7 +105,7 @@ export const StickyVideo = ({ isPlaying, height, children }: Props) => {
 	}, [isIntersecting, isPlaying]);
 
 	return (
-		<div ref={setRef} css={isSticky && stickyContainerStyles(height)}>
+		<div ref={setRef} css={isSticky && stickyContainerStyles(192)}>
 			<div css={isSticky && stickyStyles}>
 				<span css={hoverAreaStyles} />
 				{isSticky && (

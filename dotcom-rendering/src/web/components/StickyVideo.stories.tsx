@@ -6,7 +6,7 @@ import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
 import { StickyVideo } from './StickyVideo.importable';
 import { TextBlockComponent } from './TextBlockComponent';
-import { YoutubeBlockComponent } from './YoutubeBlockComponent';
+import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export default {
 	component: StickyVideo,
@@ -86,7 +86,7 @@ const MockYoutubeComponent = () => (
 export const Playing = () => {
 	return (
 		<Container>
-			<StickyVideo isPlaying={true} height={259}>
+			<StickyVideo isPlaying={true}>
 				<MockYoutubeComponent />
 			</StickyVideo>
 		</Container>
@@ -96,7 +96,7 @@ export const Playing = () => {
 export const NotPlaying = () => {
 	return (
 		<Container>
-			<StickyVideo isPlaying={false} height={259}>
+			<StickyVideo isPlaying={false}>
 				<MockYoutubeComponent />
 			</StickyVideo>
 		</Container>

@@ -47,11 +47,12 @@ export const LiveBlock = ({
 			blockFirstPublished={block.blockFirstPublished}
 			blockLink={blockLink}
 			isLiveUpdate={isLiveUpdate}
+			contributors={block.contributors}
+			avatarBackgroundColor={palette.background.avatar}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({
 					format,
-					palette,
 					element,
 					isMainMedia: false,
 					host,

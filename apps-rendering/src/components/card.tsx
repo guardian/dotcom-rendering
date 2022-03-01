@@ -38,7 +38,7 @@ import { maybeRender, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles, themeFromString } from 'themeStyles';
-import { Kicker } from '../kicker';
+import { Kicker } from './kicker';
 
 interface Props {
 	relatedItem: RelatedItem;

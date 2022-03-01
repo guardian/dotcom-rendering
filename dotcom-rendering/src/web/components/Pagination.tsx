@@ -2,13 +2,13 @@ import { SerializedStyles, css } from '@emotion/react';
 
 import { space, textSans, until } from '@guardian/source-foundations';
 import {
+	Hide,
 	LinkButton,
 	SvgChevronLeftSingle,
 	SvgChevronLeftDouble,
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
-import { Hide } from './Hide';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
@@ -114,7 +114,7 @@ export const Pagination = ({
 	return (
 		<Container>
 			<Section hide={currentPage === 1}>
-				<Hide when="above" breakpoint="phablet">
+				<Hide above="phablet">
 					<LinkButton
 						size="small"
 						priority="tertiary"
@@ -127,7 +127,7 @@ export const Pagination = ({
 						Newest
 					</LinkButton>
 				</Hide>
-				<Hide when="below" breakpoint="phablet">
+				<Hide below="phablet">
 					<LinkButton
 						size="small"
 						priority="tertiary"
@@ -170,7 +170,7 @@ export const Pagination = ({
 					Next
 				</LinkButton>
 				<Space />
-				<Hide when="above" breakpoint="phablet">
+				<Hide above="phablet">
 					<LinkButton
 						size="small"
 						priority="tertiary"
@@ -183,7 +183,7 @@ export const Pagination = ({
 						Oldest
 					</LinkButton>
 				</Hide>
-				<Hide when="below" breakpoint="phablet">
+				<Hide below="phablet">
 					<LinkButton
 						size="small"
 						priority="tertiary"
