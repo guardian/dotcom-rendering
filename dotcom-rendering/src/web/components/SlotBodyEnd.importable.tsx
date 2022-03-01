@@ -5,24 +5,26 @@ import type {
 	BrazeMessagesInterface,
 	BrazeArticleContext,
 } from '@guardian/braze-components/logic';
-import { getArticleCounts } from '../../../lib/article-count';
-import { useOnce } from '../../lib/useOnce';
-import { getLocaleCode } from '../../lib/getCountryCode';
+import useSWR from 'swr';
+import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
+import { getArticleCounts } from '../../lib/article-count';
+import { useOnce } from '../lib/useOnce';
+import { getLocaleCode } from '../lib/getCountryCode';
 
 import {
 	pickMessage,
 	SlotConfig,
 	MaybeFC,
 	CandidateConfig,
-} from '../../lib/messagePicker';
+} from '../lib/messagePicker';
 
 import {
 	ReaderRevenueEpic,
 	canShowReaderRevenueEpic,
 	CanShowData as RRCanShowData,
 	EpicConfig as RREpicConfig,
-} from './ReaderRevenueEpic';
-import { MaybeBrazeEpic, canShowBrazeEpic } from './BrazeEpic';
+} from './SlotBodyEnd/ReaderRevenueEpic';
+import { MaybeBrazeEpic, canShowBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 
 type Props = {
 	contentType: string;
@@ -33,7 +35,6 @@ type Props = {
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
-	brazeMessages?: Promise<BrazeMessagesInterface>;
 	idApiUrl: string;
 	stage: string;
 	pageId: string;
@@ -88,12 +89,24 @@ export const SlotBodyEnd = ({
 	isPaidContent,
 	tags,
 	contributionsServiceUrl,
-	brazeMessages,
 	idApiUrl,
 	stage,
 	pageId,
 	keywordsId,
 }: Props) => {
+	const [brazeMessages, setBrazeMessages] = useState<
+		Promise<BrazeMessagesInterface> | undefined
+	>();
+
+	useSWR('braze-message', () => buildBrazeMessages(idApiUrl), {
+		onSuccess: (data) => {
+			setBrazeMessages(Promise.resolve(data));
+		},
+		onError: () => {
+			setBrazeMessages(Promise.reject());
+		},
+	});
+
 	const [countryCode, setCountryCode] = useState<string>();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });

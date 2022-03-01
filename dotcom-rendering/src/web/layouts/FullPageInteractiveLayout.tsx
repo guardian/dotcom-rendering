@@ -34,6 +34,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { Island } from '../components/Island';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 interface Props {
 	CAPI: CAPIType;
@@ -333,7 +334,26 @@ export const FullPageInteractiveLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<BannerWrapper>
+				<Island clientOnly={true}>
+					<StickyBottomBanner
+						contentType={CAPI.contentType}
+						sectionName={CAPI.sectionName}
+						section={CAPI.config.section}
+						tags={CAPI.tags}
+						isPaidContent={CAPI.pageType.isPaidContent}
+						isPreview={!!CAPI.config.isPreview}
+						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						isMinuteArticle={CAPI.pageType.isMinuteArticle}
+						isSensitive={CAPI.config.isSensitive}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						idApiUrl={CAPI.config.idApiUrl}
+						switches={CAPI.config.switches}
+						pageId={CAPI.pageId}
+						keywordsId={CAPI.config.keywordIds}
+					/>
+				</Island>
+			</BannerWrapper>
 			<MobileStickyContainer />
 		</>
 	);

@@ -21,6 +21,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Standfirst } from '../components/Standfirst';
 import { Footer } from '../components/Footer';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { ElementContainer } from '../components/ElementContainer';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
@@ -42,6 +43,7 @@ import { Island } from '../components/Island';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -380,7 +382,32 @@ export const ImmersiveLayout = ({
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
 								/>
-								{showBodyEndSlot && <div id="slot-body-end" />}
+								{showBodyEndSlot && (
+									<Island clientOnly={true}>
+										<SlotBodyEnd
+											contentType={CAPI.contentType}
+											sectionName={CAPI.sectionName}
+											sectionId={CAPI.config.section}
+											shouldHideReaderRevenue={
+												CAPI.shouldHideReaderRevenue
+											}
+											isMinuteArticle={
+												CAPI.pageType.isMinuteArticle
+											}
+											isPaidContent={
+												CAPI.pageType.isPaidContent
+											}
+											tags={CAPI.tags}
+											contributionsServiceUrl={
+												CAPI.contributionsServiceUrl
+											}
+											idApiUrl={CAPI.config.idApiUrl}
+											stage={CAPI.config.stage}
+											pageId={CAPI.pageId}
+											keywordsId={CAPI.config.keywordIds}
+										/>
+									</Island>
+								)}
 								<Lines count={4} effect="straight" />
 								<SubMeta
 									palette={palette}
@@ -563,7 +590,26 @@ export const ImmersiveLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<BannerWrapper>
+				<Island clientOnly={true}>
+					<StickyBottomBanner
+						contentType={CAPI.contentType}
+						sectionName={CAPI.sectionName}
+						section={CAPI.config.section}
+						tags={CAPI.tags}
+						isPaidContent={CAPI.pageType.isPaidContent}
+						isPreview={!!CAPI.config.isPreview}
+						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						isMinuteArticle={CAPI.pageType.isMinuteArticle}
+						isSensitive={CAPI.config.isSensitive}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						idApiUrl={CAPI.config.idApiUrl}
+						switches={CAPI.config.switches}
+						pageId={CAPI.pageId}
+						keywordsId={CAPI.config.keywordIds}
+					/>
+				</Island>
+			</BannerWrapper>
 			<MobileStickyContainer />
 		</>
 	);

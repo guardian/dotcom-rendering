@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import loadable from '@loadable/component';
 
 import { log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
-import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
-import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
 import { SignInGateSelector } from './SignInGate/SignInGateSelector';
 
 import { AudioAtomWrapper } from './AudioAtomWrapper';
@@ -15,12 +12,10 @@ import { Portal } from './Portal';
 import { HydrateOnce, HydrateInteractiveOnce } from './HydrateOnce';
 import { decideTheme } from '../lib/decideTheme';
 import { decideFormat } from '../lib/decideFormat';
-import { useOnce } from '../lib/useOnce';
 
 import { incrementAlreadyVisited } from '../lib/alreadyVisited';
 import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 
-import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
 import { Lazy } from './Lazy';
 
@@ -31,9 +26,6 @@ type Props = {
 let renderCount = 0;
 export const App = ({ CAPI }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
-
-	const [brazeMessages, setBrazeMessages] =
-		useState<Promise<BrazeMessagesInterface>>();
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
 
@@ -76,10 +68,6 @@ export const App = ({ CAPI }: Props) => {
 			};
 		}
 	}, [CAPI.shouldHideReaderRevenue]);
-
-	useOnce(() => {
-		setBrazeMessages(buildBrazeMessages(CAPI.config.idApiUrl));
-	}, [CAPI.config.idApiUrl]);
 
 	const pillar: ArticleTheme = decideTheme(CAPI.format);
 
@@ -174,23 +162,6 @@ export const App = ({ CAPI }: Props) => {
 					/>
 				</HydrateOnce>
 			))}
-			<Portal rootId="slot-body-end">
-				<SlotBodyEnd
-					contentType={CAPI.contentType}
-					sectionName={CAPI.sectionName}
-					sectionId={CAPI.config.section}
-					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-					isMinuteArticle={CAPI.pageType.isMinuteArticle}
-					isPaidContent={CAPI.pageType.isPaidContent}
-					tags={CAPI.tags}
-					contributionsServiceUrl={CAPI.contributionsServiceUrl}
-					brazeMessages={brazeMessages}
-					idApiUrl={CAPI.config.idApiUrl}
-					stage={CAPI.stage}
-					pageId={CAPI.pageId}
-					keywordsId={CAPI.config.keywordIds}
-				/>
-			</Portal>
 			<Portal rootId="sign-in-gate">
 				<SignInGateSelector
 					format={format}
@@ -218,25 +189,6 @@ export const App = ({ CAPI }: Props) => {
 						ophanRecord={ophanRecord}
 					/>
 				</Lazy>
-			</Portal>
-			<Portal rootId="bottom-banner">
-				<StickyBottomBanner
-					brazeMessages={brazeMessages}
-					contentType={CAPI.contentType}
-					sectionName={CAPI.sectionName}
-					section={CAPI.config.section}
-					tags={CAPI.tags}
-					isPaidContent={CAPI.pageType.isPaidContent}
-					isPreview={!!CAPI.isPreview}
-					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-					isMinuteArticle={CAPI.pageType.isMinuteArticle}
-					isSensitive={CAPI.config.isSensitive}
-					contributionsServiceUrl={CAPI.contributionsServiceUrl}
-					idApiUrl={CAPI.config.idApiUrl}
-					switches={CAPI.config.switches}
-					pageId={CAPI.pageId}
-					keywordsId={CAPI.config.keywordIds}
-				/>
 			</Portal>
 		</React.StrictMode>
 	);
