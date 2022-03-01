@@ -38,17 +38,20 @@ const timeAgoText = css`
 	color: ${neutral[100]};
 	margin-left: 2.6rem;
 `;
-// const overlay = css`
-// 	height: 7rem;
-// 	background-image: linear-gradient(
-// 		0deg,
-// 		#ffffff,
-// 		#ffffff,
-// 		40%,
-// 		rgba(255, 255, 255, 0)
-// 	);
-// 	z-index: 1;
-// `;
+
+const overlay = css`
+	background-image: linear-gradient(
+		0deg,
+		${neutral[100]},
+		${neutral[100]} 40%,
+		rgba(255, 255, 255, 0)
+	);
+	height: 5rem;
+	z-index: 1;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+`;
 
 const button = css`
 	display: flex;
@@ -64,6 +67,7 @@ const button = css`
 	height: 2rem;
 	bottom: -1rem;
 	margin-left: 0.625rem;
+	z-index: 2;
 
 	&:focus div {
 		${focusHalo};
@@ -123,7 +127,8 @@ export const PinnedPost = ({
 	const collapse = () => setExpanded(false);
 	const expand = () => setExpanded(true);
 	const [isBrowser, setIsBrowser] = useState(false);
-	const [showButton, setShowButton] = useState(false);
+	// TODO SET BACK TO false AFTER TESTING
+	const [showButton, setShowButton] = useState(true);
 	function handleClick() {
 		if (expanded) {
 			collapse();
@@ -187,7 +192,7 @@ export const PinnedPost = ({
 						</span>
 					</button>
 				)}
-				{/* {!expanded && <div css={overlay} />} */}
+				{!expanded && <div css={overlay} />}
 			</div>
 		);
 	}

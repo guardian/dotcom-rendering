@@ -113,7 +113,7 @@ const LiveBlockContainer = ({
 	isLiveUpdate,
 	contributors,
 	avatarBackgroundColor,
-	isPinnedBlock = false,
+	isPinnedBlock,
 }: Props) => {
 	return (
 		<article
