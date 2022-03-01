@@ -84,16 +84,16 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const underlinedStyles = (size: SmallHeadlineSize) => {
+const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	function generateUnderlinedCss(baseSize: number) {
 		return css`
 			background-image: linear-gradient(
 				to bottom,
 				transparent,
 				transparent ${baseSize - 1}px,
-				rgba(199, 0, 0, 0.5)
+				${colour}
 			);
-			line-height: ${baseSize - 1}px;
+			line-height: ${baseSize}px;
 			background-size: 1px ${baseSize}px;
 			background-origin: content-box;
 			background-clip: content-box;
@@ -102,13 +102,13 @@ const underlinedStyles = (size: SmallHeadlineSize) => {
 	}
 	switch (size) {
 		case 'small':
-			return generateUnderlinedCss(21);
+			return generateUnderlinedCss(22);
 		case 'medium':
-			return generateUnderlinedCss(24);
+			return generateUnderlinedCss(25);
 		case 'large':
-			return generateUnderlinedCss(28);
+			return generateUnderlinedCss(29);
 		default:
-			return generateUnderlinedCss(23);
+			return generateUnderlinedCss(24);
 	}
 };
 
@@ -148,7 +148,10 @@ export const CardHeadline = ({
 						? labTextStyles(size)
 						: fontStyles(size),
 					format.design === ArticleDesign.Analysis &&
-						underlinedStyles(size),
+						underlinedStyles(
+							size,
+							palette.background.analysisUnderline,
+						),
 					isFullCardImage &&
 						css`
 							line-height: 1; /* Reset line height in full image carousel */

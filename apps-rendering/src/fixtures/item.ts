@@ -19,7 +19,15 @@ import type { MatchScores } from 'football';
 import type { MainMedia } from 'headerMedia';
 import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
-import type { Item, MatchReport, Review, Standard } from 'item';
+import type {
+	Comment,
+	Editorial,
+	Item,
+	Letter,
+	MatchReport,
+	Review,
+	Standard,
+} from 'item';
 import { pipe } from 'lib';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
@@ -346,7 +354,7 @@ const articleWithStandfirstLink: Item = {
 	standfirst: standfirstWithLink,
 };
 
-const analysis: Item = {
+const analysis: Standard = {
 	design: ArticleDesign.Analysis,
 	...fields,
 };
@@ -369,19 +377,22 @@ const labs: Item = {
 	theme: ArticleSpecial.Labs,
 };
 
-const comment: Item = {
+const comment: Comment = {
 	design: ArticleDesign.Comment,
 	...fields,
+	theme: ArticlePillar.Opinion,
 };
 
-const letter: Item = {
+const letter: Letter = {
 	design: ArticleDesign.Letter,
 	...fields,
+	theme: ArticlePillar.Opinion,
 };
 
-const editorial: Item = {
+const editorial: Editorial = {
 	design: ArticleDesign.Editorial,
 	...fields,
+	theme: ArticlePillar.Opinion,
 };
 
 const interview: Item = {
