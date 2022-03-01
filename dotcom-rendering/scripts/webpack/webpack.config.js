@@ -44,6 +44,7 @@ const commonConfigs = ({ platform }) => ({
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
 		}),
 		// @ts-ignore -- somehow the type declaration isn’t playing nice
 		new FilterWarningsPlugin({
