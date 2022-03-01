@@ -4,7 +4,7 @@ import { CaptureConsole } from '@sentry/integrations';
 // Only send errors matching these regexes
 const whitelistUrls = [
 	/webpack-internal/,
-	/localhost/,
+	new RegExp(`/$(process.env.DEVELOPMENT_HOSTNAME || 'localhost')/`),
 	/assets\.guim\.co\.uk/,
 	/ophan\.co\.uk/,
 ];

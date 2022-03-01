@@ -56,6 +56,19 @@ You can view the JSON representation of an article, as per the model sent to the
 
 http://localhost:3030/ArticleJson?url=https://www.theguardian.com/sport/2019/jul/28/tour-de-france-key-moments-egan-bernal-yellow-jersey
 
+### Environment Variables
+
+| Name                          | Description                                                                                                                                               |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DEVELOPMENT_HOSTNAME`                   | Defaults to `localhost`. If running behind a reverse proxy (Github Codespaces / Ngrok) this needs to be set to the hostname used to access DCR |
+| `NODE_ENV`                    | `production` or `development`. Toggles features such as hot reloading, compression, localhost access, etc                                                 |
+| `GU_STAGE`                    | `PROD` or `DEV`. Typically used to decide if DCR should call Production downstream API's or CODE downstream API's                                         |
+| `GU_PUBLIC`                   | Any value, undefined will disable. Toggles serving assets on the `/assets/` endpoint                                                                      |
+| `DISABLE_LOGGING_AND_METRICS` | Boolean. Toggle for enabling Log4js                                                                                                                       |
+| `SKIP_LEGACY`                 | Boolean. Toggles building Legacy browser bundles                                                                                                          |
+
+Most of these variables are set by the make scripts and you do not need to worry about them.
+
 ### Detailed Setup
 
 If you're new to JavaScript projects, if you're trying to integrate with other applications or if you prefer to take things slow, we also have a more [detailed setup guide](docs/contributing/detailed-setup-guide.md).

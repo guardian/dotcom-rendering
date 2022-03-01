@@ -8,9 +8,11 @@ import { startup } from '../startup';
 const init = (): Promise<void> => {
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
+
 	const isDev =
 		window.location.hostname === 'm.code.dev-theguardian.com' ||
-		window.location.hostname === 'localhost' ||
+		window.location.hostname ===
+			(process.env.DEVELOPMENT_HOSTNAME || 'localhost') ||
 		window.location.hostname === 'preview.gutools.co.uk';
 	const sampling = 1 / 100;
 
@@ -22,7 +24,10 @@ const init = (): Promise<void> => {
 		team: 'dotcom',
 	});
 
-	if (window.location.hostname === 'localhost')
+	if (
+		window.location.hostname ===
+		(process.env.DEVELOPMENT_HOSTNAME || 'localhost')
+	)
 		bypassCoreWebVitalsSampling('dotcom');
 
 	return Promise.resolve();
