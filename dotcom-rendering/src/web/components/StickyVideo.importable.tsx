@@ -96,12 +96,12 @@ interface Props {
 export const StickyVideo = ({ isPlaying, children }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
 	const [isIntersecting, setRef] = useIsInView({
-		threshold: 0.1,
+		threshold: 0.5,
 		repeat: true,
 	});
 
 	useEffect(() => {
-		setIsSticky(isIntersecting && isPlaying);
+		if (isPlaying) setIsSticky(!isIntersecting);
 	}, [isIntersecting, isPlaying]);
 
 	return (
