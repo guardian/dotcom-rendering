@@ -12,7 +12,7 @@ const FirstPublished = ({
 }: {
 	firstPublished: number;
 	blockLink: string;
-	showTimeAgo: boolean;
+	showTimeAgo?: boolean;
 }) => {
 	const publishedDate = new Date(firstPublished);
 	return (

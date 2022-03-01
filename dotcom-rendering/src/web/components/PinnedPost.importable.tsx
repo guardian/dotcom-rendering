@@ -8,7 +8,6 @@ import {
 	from,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import type { HTMLAttributes } from 'react';
 import { Props, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { css } from '@emotion/react';
@@ -19,6 +18,7 @@ const pinnedPostContainer = css`
 	border: 3px solid ${news[300]};
 	margin-bottom: ${space[6]}px;
 	position: relative;
+	background: ${neutral[100]};
 `;
 
 const pinnedPostRow = css`
@@ -171,6 +171,7 @@ export const PinnedPost = ({
 						host={host}
 						ajaxUrl={ajaxUrl}
 						isLiveUpdate={isLiveUpdate}
+						isPinnedBlock={true}
 					/>
 				</div>
 				{showButton && (

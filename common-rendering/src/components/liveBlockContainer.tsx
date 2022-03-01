@@ -23,6 +23,7 @@ type Props = {
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
 	avatarBackgroundColor?: string;
+	isPinnedBlock?: boolean;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -112,6 +113,7 @@ const LiveBlockContainer = ({
 	isLiveUpdate,
 	contributors,
 	avatarBackgroundColor,
+	isPinnedBlock = false,
 }: Props) => {
 	return (
 		<article
@@ -129,12 +131,15 @@ const LiveBlockContainer = ({
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
-				border-top: 1px solid ${borderColour};
+				border-top: ${isPinnedBlock ? 0 : `1px solid ${borderColour}`};
+				border-bottom: ${isPinnedBlock
+					? 0
+					: `1px solid ${neutral[86]}`};
+
 				${from.tablet} {
 					padding: ${space[2]}px ${SIDE_MARGIN}px;
 					padding-left: ${LEFT_MARGIN_DESKTOP}px;
 				}
-				border-bottom: 1px solid ${neutral[86]};
 			`}
 		>
 			<Header>
@@ -142,6 +147,7 @@ const LiveBlockContainer = ({
 					<FirstPublished
 						firstPublished={blockFirstPublished}
 						blockLink={blockLink}
+						showTimeAgo={isPinnedBlock ? false : true}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}
