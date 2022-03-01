@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 
 import { textSans } from '@guardian/source-foundations';
-
-import Audio from '../../static/icons/audio.svg';
-import Photo from '../../static/icons/photo.svg';
-import Video from '../../static/icons/video.svg';
+import {
+	SvgAudio,
+	SvgCamera,
+	SvgVideo,
+} from '@guardian/source-react-components';
 
 type Props = {
 	mediaType: MediaType;
@@ -12,21 +13,22 @@ type Props = {
 	mediaDuration?: number;
 };
 
-const iconWrapperStyles = (mediaType: MediaType, palette: Palette) => css`
+const iconWrapperStyles = (palette: Palette) => css`
 	width: 24px;
-	height: 23px;
+	height: 24px;
+	/* We’re using the text colour for the icon badge */
 	background-color: ${palette.text.cardFooter};
 	border-radius: 50%;
 	display: inline-block;
 
 	> svg {
-		width: 14px;
-		height: auto;
+		width: 20px;
+		height: 20px;
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 6px;
+		margin-top: 2px;
 		display: block;
-		transform: ${mediaType === 'Video' ? `translateY(0.0625rem)` : ``};
+		fill: ${palette.background.card};
 	}
 `;
 
@@ -68,11 +70,11 @@ export function secondsToDuration(secs?: number): string {
 const Icon = ({ mediaType }: { mediaType: MediaType }) => {
 	switch (mediaType) {
 		case 'Gallery':
-			return <Photo />;
+			return <SvgCamera />;
 		case 'Video':
-			return <Video />;
+			return <SvgVideo />;
 		case 'Audio':
-			return <Audio />;
+			return <SvgAudio />;
 	}
 };
 
@@ -83,7 +85,7 @@ const MediaIcon = ({
 	mediaType: MediaType;
 	palette: Palette;
 }) => (
-	<span css={iconWrapperStyles(mediaType, palette)}>
+	<span css={iconWrapperStyles(palette)}>
 		<Icon mediaType={mediaType} />
 	</span>
 );
