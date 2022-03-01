@@ -193,20 +193,6 @@ export const App = ({ CAPI }: Props) => {
 					pageViewId={pageViewId}
 				/>
 			</Portal>
-			<Portal rootId="reader-revenue-links-footer">
-				<Lazy margin={300}>
-					<ReaderRevenueLinks
-						urls={CAPI.nav.readerRevenueLinks.footer}
-						edition={CAPI.editionId}
-						dataLinkNamePrefix="footer : "
-						inHeader={false}
-						remoteHeaderEnabled={false}
-						pageViewId={pageViewId}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
-						ophanRecord={ophanRecord}
-					/>
-				</Lazy>
-			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
 					brazeMessages={brazeMessages}
