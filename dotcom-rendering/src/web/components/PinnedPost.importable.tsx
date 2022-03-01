@@ -47,7 +47,6 @@ const overlay = css`
 		rgba(255, 255, 255, 0)
 	);
 	height: 5rem;
-	z-index: 1;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -67,7 +66,6 @@ const button = css`
 	height: 2rem;
 	bottom: -1rem;
 	margin-left: 0.625rem;
-	z-index: 2;
 
 	&:focus div {
 		${focusHalo};
@@ -177,6 +175,7 @@ export const PinnedPost = ({
 						isPinnedBlock={true}
 					/>
 				</div>
+				{!expanded && <div css={overlay} />}
 				{showButton && (
 					<button
 						type="button"
@@ -190,7 +189,6 @@ export const PinnedPost = ({
 						</span>
 					</button>
 				)}
-				{!expanded && <div css={overlay} />}
 			</div>
 		);
 	}
