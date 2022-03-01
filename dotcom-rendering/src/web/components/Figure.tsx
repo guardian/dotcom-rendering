@@ -190,6 +190,7 @@ export const Figure = ({
 			css={defaultRoleStyles(role)}
 			data-spacefinder-component={spacefinderComponent}
 			className={className}
+			data-spacefinder-role={role}
 		>
 			{children}
 		</figure>
