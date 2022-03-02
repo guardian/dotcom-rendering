@@ -107,7 +107,7 @@ const buildRRBannerConfigWith = ({
 		isSignedIn: boolean;
 		asyncCountryCode: Promise<string>;
 		isPreview: boolean;
-		asyncArticleCounts: Promise<ArticleCounts>;
+		asyncArticleCounts: Promise<ArticleCounts | undefined>;
 		signInGateWillShow?: boolean;
 		contentType: string;
 		section: string;
@@ -212,7 +212,7 @@ export const StickyBottomBanner = ({
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
-		useState<Promise<ArticleCounts>>();
+		useState<Promise<ArticleCounts | undefined>>();
 	const signInGateWillShow = useSignInGateWillShow({
 		isSignedIn,
 		contentType,
@@ -232,7 +232,9 @@ export const StickyBottomBanner = ({
 			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
-			asyncArticleCounts: asyncArticleCounts as Promise<ArticleCounts>,
+			asyncArticleCounts: asyncArticleCounts as Promise<
+				ArticleCounts | undefined
+			>,
 			contentType,
 			section,
 			shouldHideReaderRevenue,
@@ -248,7 +250,9 @@ export const StickyBottomBanner = ({
 			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
-			asyncArticleCounts: asyncArticleCounts as Promise<ArticleCounts>,
+			asyncArticleCounts: asyncArticleCounts as Promise<
+				ArticleCounts | undefined
+			>,
 			signInGateWillShow,
 			contentType,
 			section,

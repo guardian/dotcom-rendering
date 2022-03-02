@@ -117,7 +117,7 @@ export const SlotBodyEnd = ({
 	useEffect(() => {
 		setAsyncArticleCount(
 			getArticleCounts(pageId, keywordsId).then(
-				(counts) => counts.weeklyArticleHistory,
+				(counts) => counts?.weeklyArticleHistory,
 			),
 		);
 	}, [pageId, keywordsId]);

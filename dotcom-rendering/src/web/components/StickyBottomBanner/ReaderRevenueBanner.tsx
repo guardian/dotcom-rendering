@@ -46,7 +46,7 @@ type BaseProps = {
 type BuildPayloadProps = BaseProps & {
 	countryCode: string;
 	optedOutOfArticleCount: boolean;
-	asyncArticleCounts: Promise<ArticleCounts>;
+	asyncArticleCounts: Promise<ArticleCounts | undefined>;
 };
 
 type CanShowProps = BaseProps & {
@@ -56,7 +56,7 @@ type CanShowProps = BaseProps & {
 	isPreview: boolean;
 	idApiUrl: string;
 	signInGateWillShow: boolean;
-	asyncArticleCounts: Promise<ArticleCounts>;
+	asyncArticleCounts: Promise<ArticleCounts | undefined>;
 };
 
 type ReaderRevenueComponentType =
@@ -66,6 +66,18 @@ type ReaderRevenueComponentType =
 export type CanShowFunctionType<T> = (
 	props: CanShowProps,
 ) => Promise<CanShowResult<T>>;
+
+const getArticleCountToday = (
+	articleCounts: ArticleCounts | undefined,
+): number | undefined => {
+	if (articleCounts) {
+		return (
+			articleCounts.dailyArticleHistory[0] &&
+			articleCounts.dailyArticleHistory[0].count
+		);
+	}
+	return undefined;
+};
 
 const buildPayload = async ({
 	isSignedIn,
@@ -81,12 +93,9 @@ const buildPayload = async ({
 	tags,
 	contentType,
 }: BuildPayloadProps): Promise<BannerPayload> => {
-	const { weeklyArticleHistory, dailyArticleHistory } =
-		await asyncArticleCounts;
-	const articleCountToday: number | undefined =
-		dailyArticleHistory &&
-		dailyArticleHistory[0] &&
-		dailyArticleHistory[0].count;
+	const articleCounts = await asyncArticleCounts;
+	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
+	const articleCountToday = getArticleCountToday(articleCounts);
 
 	return {
 		tracking: {
