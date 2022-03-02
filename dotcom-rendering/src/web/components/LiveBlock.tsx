@@ -16,7 +16,7 @@ type Props = {
 	host?: string;
 	ajaxUrl: string;
 	isLiveUpdate?: boolean;
-	switches: Switches;
+	switches?: Switches;
 };
 
 export const LiveBlock = ({

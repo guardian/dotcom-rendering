@@ -15,7 +15,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-	switches: Switches;
+	switches?: Switches;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`

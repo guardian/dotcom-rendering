@@ -9,7 +9,7 @@ type Props = {
 	webTitle: string;
 	ajaxUrl: string;
 	isLiveUpdate?: boolean;
-	switches: Switches;
+	switches?: Switches;
 };
 
 export const LiveBlogRenderer = ({

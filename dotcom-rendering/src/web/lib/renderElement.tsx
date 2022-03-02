@@ -77,7 +77,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-	switches: Switches;
+	switches?: Switches;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most

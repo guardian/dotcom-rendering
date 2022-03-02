@@ -31,7 +31,7 @@ type Props = {
 	width?: number;
 	duration?: number; // in seconds
 	origin?: string;
-	stickyVideos: boolean;
+	stickyVideos?: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage: string) => css`
