@@ -12,7 +12,6 @@ import { Props, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { css } from '@emotion/react';
 import PinIcon from '../../static/icons/pin.svg';
-import { LiveBlock } from './LiveBlock';
 
 const pinnedPostContainer = css`
 	border: 3px solid ${news[300]};
