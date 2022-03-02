@@ -151,7 +151,6 @@ type Palette = {
 		shareIcon: Colour;
 		shareIconGrayBackground: Colour;
 		cameraCaptionIcon: Colour;
-		cardIcon: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
