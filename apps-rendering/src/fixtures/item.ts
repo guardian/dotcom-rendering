@@ -22,6 +22,7 @@ import type { Image } from 'image';
 import type {
 	Comment,
 	Editorial,
+	Feature,
 	Interview,
 	Item,
 	Letter,
@@ -364,7 +365,7 @@ const analysis: Standard = {
 	...fields,
 };
 
-const feature: Standard = {
+const feature: Feature = {
 	design: ArticleDesign.Feature,
 	...fields,
 };
