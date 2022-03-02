@@ -49,7 +49,7 @@ export const Branding: React.FC<{
 					aria-label={`Visit the ${branding.sponsorName} website`}
 					onClick={() =>
 						trackSponsorLogoLinkClick(
-							branding.sponsorName.toLocaleLowerCase(),
+							branding.sponsorName.toLowerCase(),
 						)
 					}
 					data-cy="branding-logo"

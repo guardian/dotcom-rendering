@@ -52,7 +52,7 @@ export const CardBranding = ({ branding, format, palette }: Props) => {
 				aria-label={`Visit the ${branding.sponsorName} website`}
 				onClick={() =>
 					trackSponsorLogoLinkClick(
-						branding.sponsorName.toLocaleLowerCase(),
+						branding.sponsorName.toLowerCase(),
 					)
 				}
 				data-cy="card-branding-logo"

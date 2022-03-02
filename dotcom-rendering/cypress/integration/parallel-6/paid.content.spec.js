@@ -11,8 +11,8 @@ import { storage } from '@guardian/libs';
 // outcome when running locally (UK edition) and when running in CI. For example,
 // it could be US edition if the CI server runs in US. The best way to deal with
 // this would be to control the edition in the test whether by setting the GU_EDITION
-// cookie or by selecting the edition in the UI. Unfortunately, this is not possible
-// at this point of the migration.
+// cookie or by selecting the edition in the UI. Unfortunately, the first solution did
+// not work and the second one is not possible at this point of the migration.
 const paidContentPage =
 	'https://www.theguardian.com/welcome-to-ontario/2022/jan/20/bracing-boat-trips-dinosaurs-and-cherry-pie-the-best-things-to-do-with-kids-in-ontario';
 
