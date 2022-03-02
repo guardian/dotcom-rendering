@@ -12,6 +12,7 @@ import { Props, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { css } from '@emotion/react';
 import PinIcon from '../../static/icons/pin.svg';
+import { ServerSideOnly } from './ServerSideOnly';
 
 const pinnedPostContainer = css`
 	border: 3px solid ${news[300]};
@@ -106,7 +107,6 @@ export const PinnedPost = ({
 }: PinnedPostProps): EmotionJSX.Element => {
 	const [expanded, setExpanded] = useState(false);
 	const [showButton, setShowButton] = useState(false);
-	const isClientOnly = typeof window !== 'undefined';
 
 	useEffect(() => {
 		if (
@@ -128,18 +128,10 @@ export const PinnedPost = ({
 				)}
 			</div>
 
-			{isClientOnly == false && (
-				<div css={expanded ? expandedBody : collapsedBody}>
-					{children}
-				</div>
-			)}
+			<div css={expanded ? expandedBody : collapsedBody}>
+				<ServerSideOnly>{children}</ServerSideOnly>
+			</div>
 
-			{isClientOnly && (
-				<div
-					css={expanded ? expandedBody : collapsedBody}
-					dangerouslySetInnerHTML={{ __html: '' }}
-				/>
-			)}
 			{!expanded && <div css={overlay} />}
 			{showButton && (
 				<button
