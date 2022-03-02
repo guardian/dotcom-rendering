@@ -9,6 +9,7 @@ import {
 import { spacefinderOkr1FilterNearby } from './tests/spacefinder-okr-1-filter-nearby';
 import { spacefinderOkr2ImagesLoaded } from './tests/spacefinder-okr-2-images-loaded';
 import { spacefinderOkr3RichLinks } from './tests/spacefinder-okr-3-rich-links';
+import { spacefinderOkr4ListItems } from './tests/spacefinder-okr-4-list-items';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -21,4 +22,5 @@ export const tests: ABTest[] = [
 	spacefinderOkr1FilterNearby,
 	spacefinderOkr2ImagesLoaded,
 	spacefinderOkr3RichLinks,
+	spacefinderOkr4ListItems,
 ];

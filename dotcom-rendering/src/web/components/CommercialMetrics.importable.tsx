@@ -12,6 +12,7 @@ import { tests } from '../experiments/ab-tests';
 import { spacefinderOkr1FilterNearby } from '../experiments/tests/spacefinder-okr-1-filter-nearby';
 import { spacefinderOkr2ImagesLoaded } from '../experiments/tests/spacefinder-okr-2-images-loaded';
 import { spacefinderOkr3RichLinks } from '../experiments/tests/spacefinder-okr-3-rich-links';
+import { spacefinderOkr4ListItems } from '../experiments/tests/spacefinder-okr-4-list-items';
 
 type Props = {
 	enabled: boolean;
@@ -36,6 +37,7 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 			spacefinderOkr1FilterNearby,
 			spacefinderOkr2ImagesLoaded,
 			spacefinderOkr3RichLinks,
+			spacefinderOkr4ListItems,
 		];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
