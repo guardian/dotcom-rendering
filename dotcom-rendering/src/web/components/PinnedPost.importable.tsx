@@ -121,10 +121,6 @@ export const PinnedPost = ({
 	const [isBrowser, setIsBrowser] = useState(false);
 	const [showButton, setShowButton] = useState(false);
 
-	const collapse = () => setExpanded(false);
-	const expand = () => setExpanded(true);
-	const handleClick = () => (expanded ? collapse() : expand());
-
 	useEffect(() => {
 		if (
 			document.documentElement.scrollHeight >
@@ -168,13 +164,13 @@ export const PinnedPost = ({
 					<button
 						type="button"
 						aria-expanded={expanded}
-						onClick={handleClick}
+						onClick={() => setExpanded(!expanded)}
 						css={button}
 					>
 						{expanded ? (
-							<>
+							<span>
 								<SvgMinus /> Show Less
-							</>
+							</span>
 						) : (
 							<>
 								<SvgPlus /> Show More
@@ -186,6 +182,7 @@ export const PinnedPost = ({
 		);
 	}
 
-	// When a user doesn't have JS enabled we should use a pure css/html accordion instead
+	// TODO: When a user doesn't have JS enabled we should use a pure css/html accordion instead
+	// See ticket: https://trello.com/c/J8siXSp2/261-create-non-js-version-of-accordian-container
 	return <div>js is disabled</div>;
 };
