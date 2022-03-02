@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { from, neutral } from '@guardian/source-foundations';
 import { SvgCross } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import { OphanAction, submitComponentEvent } from '../browser/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 
@@ -91,10 +92,12 @@ const stickyContainerStyles = (height: number) => css`
 interface Props {
 	isPlaying: boolean;
 	children: React.ReactNode;
+	id: string;
 }
 
-export const StickyVideo = ({ isPlaying, children }: Props) => {
+export const StickyVideo = ({ isPlaying, children, id }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
+	const [isClosed, setIsClosed] = useState(false);
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.5,
 		repeat: true,
@@ -104,6 +107,34 @@ export const StickyVideo = ({ isPlaying, children }: Props) => {
 		setIsSticky(isPlaying && !isIntersecting);
 	}, [isIntersecting, isPlaying]);
 
+	useEffect(() => {
+		console.log(`isSticky: ${isSticky}`);
+		console.log(`isClosed: ${isClosed}`);
+
+		const ophanTracking = (trackingEvent: OphanAction) => {
+			if (!id) return;
+			submitComponentEvent({
+				component: {
+					componentType: 'TIMELINE_ATOM',
+					id,
+				},
+				action: trackingEvent,
+			});
+		};
+
+		if (isSticky) {
+			console.log('tracking: STICK');
+			ophanTracking('INSERT');
+		} else if (isClosed) {
+			console.log('tracking: CLOSE');
+			// ophanTracking('CLOSE');
+			setIsClosed(false);
+		} else {
+			console.log('tracking: RETURN');
+			// ophanTracking('RETURN');
+		}
+	}, [isSticky, isClosed, id]);
+
 	return (
 		<div ref={setRef} css={isSticky && stickyContainerStyles(192)}>
 			<div css={isSticky && stickyStyles}>
@@ -111,7 +142,10 @@ export const StickyVideo = ({ isPlaying, children }: Props) => {
 				{isSticky && (
 					<button
 						css={buttonStyles}
-						onClick={() => setIsSticky(false)}
+						onClick={() => {
+							setIsClosed(true);
+							setIsSticky(false);
+						}}
 					>
 						<SvgCross size="medium" />
 					</button>
