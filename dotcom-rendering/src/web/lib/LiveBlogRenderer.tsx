@@ -39,6 +39,7 @@ export const LiveBlogRenderer = ({
 							host={host}
 							ajaxUrl={ajaxUrl}
 							isLiveUpdate={isLiveUpdate}
+							isPinnedPost={true}
 						/>
 					</PinnedPost>
 				</Island>
