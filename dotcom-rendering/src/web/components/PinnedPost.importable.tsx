@@ -118,11 +118,11 @@ export const PinnedPost = ({
 	isLiveUpdate,
 }: PinnedPostProps): EmotionJSX.Element => {
 	const [expanded, setExpanded] = useState(false);
-	const collapse = () => setExpanded(false);
-	const expand = () => setExpanded(true);
 	const [isBrowser, setIsBrowser] = useState(false);
 	const [showButton, setShowButton] = useState(false);
 
+	const collapse = () => setExpanded(false);
+	const expand = () => setExpanded(true);
 	const handleClick = () => (expanded ? collapse() : expand());
 
 	useEffect(() => {
@@ -136,14 +136,13 @@ export const PinnedPost = ({
 
 	useEffect(() => {
 		setIsBrowser(true);
-	});
+	}, []);
 
 	if (isBrowser) {
 		return (
 			<div css={pinnedPostContainer}>
 				<div css={pinnedPostRow}>
 					<PinIcon fill="white" />
-
 					{pinnedPost.blockFirstPublished && (
 						<time data-relativeformat="med" css={timeAgoText}>
 							From {timeAgo(pinnedPost.blockFirstPublished)}
@@ -187,5 +186,6 @@ export const PinnedPost = ({
 		);
 	}
 
+	// When a user doesn't have JS enabled we should use a pure css/html accordion instead
 	return <div>js is disabled</div>;
 };
