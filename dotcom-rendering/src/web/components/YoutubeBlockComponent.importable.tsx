@@ -31,6 +31,7 @@ type Props = {
 	width?: number;
 	duration?: number; // in seconds
 	origin?: string;
+	stickyVideos: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage: string) => css`
@@ -84,10 +85,15 @@ export const YoutubeBlockComponent = ({
 	width = 460,
 	duration,
 	origin,
+	stickyVideos,
 }: Props): JSX.Element => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
+
+	// TODO: connect StickyVideo wrapper once
+	// feature flag is operational
+	console.log('Videos should stick', stickyVideos);
 
 	useEffect(() => {
 		const defineConsentState = async () => {

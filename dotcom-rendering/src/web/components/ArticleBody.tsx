@@ -15,6 +15,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	switches: Switches;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -95,6 +96,7 @@ export const ArticleBody = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	switches,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
@@ -127,6 +129,7 @@ export const ArticleBody = ({
 						webTitle={webTitle}
 						ajaxUrl={ajaxUrl}
 						isLiveUpdate={false}
+						switches={switches}
 					/>
 				</div>
 			</>

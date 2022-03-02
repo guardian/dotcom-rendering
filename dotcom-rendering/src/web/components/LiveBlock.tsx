@@ -16,6 +16,7 @@ type Props = {
 	host?: string;
 	ajaxUrl: string;
 	isLiveUpdate?: boolean;
+	switches: Switches;
 };
 
 export const LiveBlock = ({
@@ -27,6 +28,7 @@ export const LiveBlock = ({
 	host,
 	ajaxUrl,
 	isLiveUpdate,
+	switches,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -61,6 +63,7 @@ export const LiveBlock = ({
 					index,
 					pageId,
 					webTitle,
+					switches,
 				}),
 			)}
 			<footer

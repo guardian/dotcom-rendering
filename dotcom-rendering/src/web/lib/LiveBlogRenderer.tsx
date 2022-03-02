@@ -9,6 +9,7 @@ type Props = {
 	webTitle: string;
 	ajaxUrl: string;
 	isLiveUpdate?: boolean;
+	switches: Switches;
 };
 
 export const LiveBlogRenderer = ({
@@ -20,6 +21,7 @@ export const LiveBlogRenderer = ({
 	webTitle,
 	ajaxUrl,
 	isLiveUpdate,
+	switches,
 }: Props) => {
 	return (
 		<>
@@ -34,6 +36,7 @@ export const LiveBlogRenderer = ({
 						host={host}
 						ajaxUrl={ajaxUrl}
 						isLiveUpdate={isLiveUpdate}
+						switches={switches}
 					/>
 				);
 			})}

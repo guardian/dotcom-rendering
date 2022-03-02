@@ -764,6 +764,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												pageId={CAPI.pageId}
 												webTitle={CAPI.webTitle}
 												ajaxUrl={CAPI.config.ajaxUrl}
+												switches={CAPI.config.switches}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination

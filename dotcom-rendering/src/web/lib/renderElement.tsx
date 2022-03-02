@@ -77,6 +77,7 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	switches: Switches;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -127,6 +128,7 @@ export const renderElement = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	switches,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 	switch (element._type) {
@@ -709,6 +711,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
+						stickyVideos={switches?.stickyVideos}
 					/>
 				</Island>,
 			];
@@ -758,6 +761,7 @@ export const renderArticleElement = ({
 	starRating,
 	pageId,
 	webTitle,
+	switches,
 }: Props): JSX.Element => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -773,6 +777,7 @@ export const renderArticleElement = ({
 		starRating,
 		pageId,
 		webTitle,
+		switches,
 	});
 
 	if (!ok) {
