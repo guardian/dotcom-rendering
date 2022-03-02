@@ -63,6 +63,8 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 	</ElementContainer>
 );
 
+const videoId = 'c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28';
+
 const MockYoutubeComponent = () => (
 	<YoutubeBlockComponent
 		format={{
@@ -86,7 +88,7 @@ const MockYoutubeComponent = () => (
 export const Playing = () => {
 	return (
 		<Container>
-			<StickyVideo isPlaying={true}>
+			<StickyVideo isPlaying={true} id={videoId}>
 				<MockYoutubeComponent />
 			</StickyVideo>
 		</Container>
@@ -96,7 +98,7 @@ export const Playing = () => {
 export const NotPlaying = () => {
 	return (
 		<Container>
-			<StickyVideo isPlaying={false}>
+			<StickyVideo isPlaying={false} id={videoId}>
 				<MockYoutubeComponent />
 			</StickyVideo>
 		</Container>
