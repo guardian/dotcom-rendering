@@ -29,16 +29,18 @@ export const LiveBlogRenderer = ({
 		<>
 			{pinnedPost && (
 				<Island>
-					<PinnedPost
-						pinnedPost={pinnedPost}
-						format={format}
-						pageId={pageId}
-						webTitle={webTitle}
-						adTargeting={adTargeting}
-						host={host}
-						ajaxUrl={ajaxUrl}
-						isLiveUpdate={isLiveUpdate}
-					/>
+					<PinnedPost pinnedPost={pinnedPost}>
+						<LiveBlock
+							format={format}
+							block={pinnedPost}
+							pageId={pageId}
+							webTitle={webTitle}
+							adTargeting={adTargeting}
+							host={host}
+							ajaxUrl={ajaxUrl}
+							isLiveUpdate={isLiveUpdate}
+						/>
+					</PinnedPost>
 				</Island>
 			)}
 			{blocks.map((block) => {

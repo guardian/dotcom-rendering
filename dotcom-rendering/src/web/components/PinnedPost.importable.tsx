@@ -12,7 +12,6 @@ import { Props, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { css } from '@emotion/react';
 import PinIcon from '../../static/icons/pin.svg';
-import { LiveBlock } from './LiveBlock';
 
 const pinnedPostContainer = css`
 	border: 3px solid ${news[300]};
@@ -98,28 +97,16 @@ const collapsedBody = css`
 
 export interface PinnedPostProps extends Props {
 	pinnedPost: Block;
-	format: ArticleFormat;
-	pageId: string;
-	webTitle: string;
-	adTargeting: AdTargeting;
-	host?: string;
-	ajaxUrl: string;
-	isLiveUpdate?: boolean;
+	children: React.ReactNode;
 }
 
 export const PinnedPost = ({
 	pinnedPost,
-	format,
-	pageId,
-	webTitle,
-	adTargeting,
-	host,
-	ajaxUrl,
-	isLiveUpdate,
+	children,
 }: PinnedPostProps): EmotionJSX.Element => {
 	const [expanded, setExpanded] = useState(false);
-	const [isBrowser, setIsBrowser] = useState(false);
 	const [showButton, setShowButton] = useState(false);
+	const isClientOnly = typeof window !== 'undefined';
 
 	useEffect(() => {
 		if (
@@ -130,59 +117,52 @@ export const PinnedPost = ({
 		}
 	}, []);
 
-	useEffect(() => {
-		setIsBrowser(true);
-	}, []);
-
-	if (isBrowser) {
-		return (
-			<div css={pinnedPostContainer}>
-				<div css={pinnedPostRow}>
-					<PinIcon fill="white" />
-					{pinnedPost.blockFirstPublished && (
-						<time data-relativeformat="med" css={timeAgoText}>
-							From {timeAgo(pinnedPost.blockFirstPublished)}
-						</time>
-					)}
-				</div>
-
-				<div css={expanded ? expandedBody : collapsedBody}>
-					<LiveBlock
-						format={format}
-						block={pinnedPost}
-						pageId={pageId}
-						webTitle={webTitle}
-						adTargeting={adTargeting}
-						host={host}
-						ajaxUrl={ajaxUrl}
-						isLiveUpdate={isLiveUpdate}
-						isPinnedPost={true}
-					/>
-				</div>
-				{!expanded && <div css={overlay} />}
-				{showButton && (
-					<button
-						type="button"
-						aria-expanded={expanded}
-						onClick={() => setExpanded(!expanded)}
-						css={button}
-					>
-						{expanded ? (
-							<span>
-								<SvgMinus /> Show Less
-							</span>
-						) : (
-							<>
-								<SvgPlus /> Show More
-							</>
-						)}
-					</button>
+	return (
+		<div css={pinnedPostContainer}>
+			<div css={pinnedPostRow}>
+				<PinIcon fill="white" />
+				{pinnedPost.blockFirstPublished && (
+					<time data-relativeformat="med" css={timeAgoText}>
+						From {timeAgo(pinnedPost.blockFirstPublished)}
+					</time>
 				)}
 			</div>
-		);
-	}
 
-	// TODO: When a user doesn't have JS enabled we should use a pure css/html accordion instead
-	// See ticket: https://trello.com/c/J8siXSp2/261-create-non-js-version-of-accordian-container
-	return <div>js is disabled</div>;
+			{isClientOnly == false && (
+				<div css={expanded ? expandedBody : collapsedBody}>
+					{children}
+				</div>
+			)}
+
+			{isClientOnly && (
+				<div
+					css={expanded ? expandedBody : collapsedBody}
+					dangerouslySetInnerHTML={{ __html: '' }}
+				/>
+			)}
+			{!expanded && <div css={overlay} />}
+			{showButton && (
+				<button
+					type="button"
+					aria-expanded={expanded}
+					onClick={() => setExpanded(!expanded)}
+					css={button}
+				>
+					{expanded ? (
+						<>
+							<SvgMinus /> Show Less
+						</>
+					) : (
+						<>
+							<SvgPlus /> Show More
+						</>
+					)}
+				</button>
+			)}
+		</div>
+	);
 };
+
+// TODO: When a user doesn't have JS enabled we should use a pure css/html accordion instead
+// See ticket: https://trello.com/c/J8siXSp2/261-create-non-js-version-of-accordian-container
+// return <div>js is disabled</div>;
