@@ -7,7 +7,7 @@ import {
 	news,
 	from,
 } from '@guardian/source-foundations';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Props, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { css } from '@emotion/react';
@@ -106,16 +106,11 @@ export const PinnedPost = ({
 	children,
 }: PinnedPostProps): EmotionJSX.Element => {
 	const [expanded, setExpanded] = useState(false);
-	const [showButton, setShowButton] = useState(false);
-
-	useEffect(() => {
-		if (
-			document.documentElement.scrollHeight >
-			document.documentElement.clientHeight
-		) {
-			setShowButton(true);
-		}
-	}, []);
+	const isClient = typeof window !== 'undefined';
+	const showButton =
+		isClient &&
+		document.documentElement.scrollHeight >
+			document.documentElement.clientHeight;
 
 	return (
 		<div css={pinnedPostContainer}>
@@ -140,15 +135,8 @@ export const PinnedPost = ({
 					onClick={() => setExpanded(!expanded)}
 					css={button}
 				>
-					{expanded ? (
-						<>
-							<SvgMinus /> Show Less
-						</>
-					) : (
-						<>
-							<SvgPlus /> Show More
-						</>
-					)}
+					{expanded ? <SvgMinus /> : <SvgPlus />}
+					{expanded ? 'Show Less' : 'Show More'}
 				</button>
 			)}
 		</div>
@@ -157,4 +145,3 @@ export const PinnedPost = ({
 
 // TODO: When a user doesn't have JS enabled we should use a pure css/html accordion instead
 // See ticket: https://trello.com/c/J8siXSp2/261-create-non-js-version-of-accordian-container
-// return <div>js is disabled</div>;
