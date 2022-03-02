@@ -54,7 +54,7 @@ const overlay = css`
 
 const button = css`
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
 	position: absolute;
 	width: 20%;
@@ -66,6 +66,8 @@ const button = css`
 	height: 2rem;
 	bottom: -1rem;
 	margin-left: 0.625rem;
+	${textSans.small({ fontWeight: 'bold', lineHeight: 'tight' })};
+	color: ${neutral[100]};
 
 	&:focus div {
 		${focusHalo};
@@ -75,6 +77,12 @@ const button = css`
 	}
 	${from.tablet} {
 		margin-left: 3.75rem;
+	}
+	svg {
+		margin-right: 5px;
+		fill: ${neutral[100]};
+		width: 18px;
+		height: 18px;
 	}
 `;
 
@@ -86,18 +94,6 @@ const expandedBody = css`
 const collapsedBody = css`
 	max-height: 40vh;
 	overflow: hidden;
-`;
-
-const toggleIcon = css`
-	svg {
-		fill: ${neutral[100]};
-		width: 18px;
-		height: 18px;
-	}
-`;
-const toggleLabel = css`
-	${textSans.small({ fontWeight: 'bold', lineHeight: 'tight' })};
-	color: ${neutral[100]};
 `;
 
 export interface PinnedPostProps extends Props {
@@ -125,15 +121,9 @@ export const PinnedPost = ({
 	const collapse = () => setExpanded(false);
 	const expand = () => setExpanded(true);
 	const [isBrowser, setIsBrowser] = useState(false);
-	// TODO SET BACK TO false AFTER TESTING
-	const [showButton, setShowButton] = useState(true);
-	function handleClick() {
-		if (expanded) {
-			collapse();
-		} else {
-			expand();
-		}
-	}
+	const [showButton, setShowButton] = useState(false);
+
+	const handleClick = () => (expanded ? collapse() : expand());
 
 	useEffect(() => {
 		if (
@@ -145,9 +135,8 @@ export const PinnedPost = ({
 	}, []);
 
 	useEffect(() => {
-		// if js is disabled during time in browser, will this break?
 		setIsBrowser(true);
-	}, []);
+	});
 
 	if (isBrowser) {
 		return (
@@ -172,7 +161,7 @@ export const PinnedPost = ({
 						host={host}
 						ajaxUrl={ajaxUrl}
 						isLiveUpdate={isLiveUpdate}
-						isPinnedBlock={true}
+						isPinnedPost={true}
 					/>
 				</div>
 				{!expanded && <div css={overlay} />}
@@ -181,12 +170,17 @@ export const PinnedPost = ({
 						type="button"
 						aria-expanded={expanded}
 						onClick={handleClick}
-						css={() => [button, toggleIcon]}
+						css={button}
 					>
-						{expanded ? <SvgMinus /> : <SvgPlus />}
-						<span css={toggleLabel}>
-							{expanded ? 'Show Less' : 'Show More'}
-						</span>
+						{expanded ? (
+							<>
+								<SvgMinus /> Show Less
+							</>
+						) : (
+							<>
+								<SvgPlus /> Show More
+							</>
+						)}
 					</button>
 				)}
 			</div>
