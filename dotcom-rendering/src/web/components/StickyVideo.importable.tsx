@@ -35,10 +35,10 @@ const buttonStyles = css`
 // to click the close video button more easily
 const hoverAreaStyles = css`
 	position: absolute;
-	top: 0;
+	top: -4px;
 	bottom: 0;
-	left: -36px;
-	width: 36px;
+	left: -${32 * 1.15}px;
+	width: ${32 * 1.15}px;
 
 	&:hover button {
 		display: flex;
