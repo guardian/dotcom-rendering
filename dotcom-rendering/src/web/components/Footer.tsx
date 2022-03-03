@@ -16,7 +16,6 @@ import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
-import { Lazy } from './Lazy.importable';
 
 // CSS vars
 const emailSignupSideMargins = 10;
@@ -217,16 +216,14 @@ const FooterLinks: React.FC<Props> = ({
 		<div css={readerRevenueLinks}>
 			<div id="reader-revenue-links-footer">
 				<Island deferUntil="idle" clientOnly={true}>
-					<Lazy margin={300}>
-						<ReaderRevenueLinks
-							urls={header}
-							edition={edition}
-							dataLinkNamePrefix="footer : "
-							inHeader={false}
-							remoteHeader={false}
-							contributionsServiceUrl={contributionsServiceUrl}
-						/>
-					</Lazy>
+					<ReaderRevenueLinks
+						urls={header}
+						edition={edition}
+						dataLinkNamePrefix="footer : "
+						inHeader={false}
+						remoteHeader={false}
+						contributionsServiceUrl={contributionsServiceUrl}
+					/>
 				</Island>
 			</div>
 		</div>
