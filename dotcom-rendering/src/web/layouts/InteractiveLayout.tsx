@@ -690,7 +690,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					pillars={NAV.pillars}
 					header={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
-					remoteHeader={CAPI.config.switches.remoteHeader}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>

@@ -19,8 +19,6 @@ jest.mock('@guardian/libs', () => ({
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';
 
-const ophanRecord = () => {};
-
 const AbProvider: React.FC = ({ children }) => {
 	return (
 		<ABProvider
@@ -54,9 +52,7 @@ describe('ReaderRevenueLinks', () => {
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
 					remoteHeader={false}
-					pageViewId="page-view-id"
 					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophanRecord}
 				/>
 			</AbProvider>,
 		);
@@ -75,9 +71,7 @@ describe('ReaderRevenueLinks', () => {
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
 					remoteHeader={false}
-					pageViewId="page-view-id"
 					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophanRecord}
 				/>
 				,
 			</AbProvider>,

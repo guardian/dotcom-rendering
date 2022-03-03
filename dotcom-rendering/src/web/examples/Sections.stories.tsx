@@ -160,7 +160,6 @@ export const Sections = (): React.ReactNode => (
 					supporter: '',
 				}}
 				edition="UK"
-				remoteHeader={false}
 				contributionsServiceUrl=""
 			/>
 		</ElementContainer>

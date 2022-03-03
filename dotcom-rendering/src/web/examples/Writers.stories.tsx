@@ -283,7 +283,6 @@ export const Writers = (): React.ReactNode => (
 					supporter: '',
 				}}
 				edition="UK"
-				remoteHeader={false}
 				contributionsServiceUrl=""
 			/>
 		</ElementContainer>

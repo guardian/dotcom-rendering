@@ -7,7 +7,6 @@ import { Links } from './Links.importable';
 import { Island } from './Island';
 import { EditionDropdown } from './EditionDropdown.importable';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
-import { getOphanRecordFunction } from '../browser/ophan/ophan';
 
 const headerStyles = css`
 	/* Ensure header height contains it's children */
@@ -58,9 +57,7 @@ export const Header = ({
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
 					remoteHeader={remoteHeader}
-					pageViewId={window.guardian?.config?.ophan?.pageViewId}
 					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={getOphanRecordFunction()}
 				/>
 			</Island>
 		</div>

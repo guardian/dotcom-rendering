@@ -551,7 +551,6 @@ export const Front = () => (
 					supporter: '',
 				}}
 				edition="UK"
-				remoteHeader={false}
 				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
@@ -1072,7 +1071,6 @@ export const Front2 = () => (
 					supporter: '',
 				}}
 				edition="UK"
-				remoteHeader={false}
 				contributionsServiceUrl=""
 			/>
 		</ElementContainer>

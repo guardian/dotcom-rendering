@@ -33,8 +33,6 @@ const revenueUrls = {
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';
 
-const ophanRecord = () => {};
-
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -58,9 +56,7 @@ export const Header = () => {
 				dataLinkNamePrefix=""
 				inHeader={true}
 				remoteHeader={false}
-				pageViewId="page-view-id"
 				contributionsServiceUrl={contributionsServiceUrl}
-				ophanRecord={ophanRecord}
 			/>
 		</Container>
 	);
@@ -82,9 +78,7 @@ export const HeaderMobile = () => {
 				dataLinkNamePrefix=""
 				inHeader={true}
 				remoteHeader={false}
-				pageViewId="page-view-id"
 				contributionsServiceUrl={contributionsServiceUrl}
-				ophanRecord={ophanRecord}
 			/>
 		</Container>
 	);
@@ -106,9 +100,7 @@ export const Footer = () => {
 				dataLinkNamePrefix=""
 				inHeader={false}
 				remoteHeader={false}
-				pageViewId="page-view-id"
 				contributionsServiceUrl={contributionsServiceUrl}
-				ophanRecord={ophanRecord}
 			/>
 		</Container>
 	);
@@ -130,9 +122,7 @@ export const FooterMobile = () => {
 				dataLinkNamePrefix=""
 				inHeader={false}
 				remoteHeader={false}
-				pageViewId="page-view-id"
 				contributionsServiceUrl={contributionsServiceUrl}
-				ophanRecord={ophanRecord}
 			/>
 		</Container>
 	);

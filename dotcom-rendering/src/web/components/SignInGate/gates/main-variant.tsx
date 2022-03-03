@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Lazy } from '../../Lazy';
+import { Lazy } from '../../Lazy.importable';
 
 import { SignInGateComponent } from '../types';
 import { canShowSignInGate } from '../displayRule';
