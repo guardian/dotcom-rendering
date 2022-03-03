@@ -10,14 +10,14 @@ import {
 	sport,
 	labs,
 	brandAlt,
-} from "@guardian/source-foundations";
+} from '@guardian/source-foundations';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleFormat,
 	ArticlePillar,
 	ArticleSpecial,
-} from "@guardian/libs";
+} from '@guardian/libs';
 
 // ----- Types ----- //
 

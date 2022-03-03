@@ -1,6 +1,6 @@
-import { SerializedStyles, css } from "@emotion/react";
+import { SerializedStyles, css } from '@emotion/react';
 
-import { space, textSans, until } from "@guardian/source-foundations";
+import { space, textSans, until } from '@guardian/source-foundations';
 import {
 	Hide,
 	LinkButton,
@@ -8,10 +8,10 @@ import {
 	SvgChevronLeftDouble,
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
-} from "@guardian/source-react-components";
+} from '@guardian/source-react-components';
 
-import { border, hover, text } from "../editorialPalette";
-import type { ArticleFormat } from "@guardian/libs";
+import { border, hover, text } from '../editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 
 type Props = {
 	currentPage: number;
@@ -50,7 +50,7 @@ const Section = ({
 		css={css`
 			display: flex;
 			align-items: center;
-			visibility: ${hide ? "hidden" : "visible"};
+			visibility: ${hide ? 'hidden' : 'visible'};
 		`}
 	>
 		{children}
@@ -200,4 +200,4 @@ const Pagination = ({
 	);
 };
 
-export default Pagination;
+export { Pagination };

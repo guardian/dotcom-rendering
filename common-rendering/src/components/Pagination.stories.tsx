@@ -1,13 +1,13 @@
-import { ArticleDesign, ArticleDisplay } from "@guardian/libs";
-import { breakpoints } from "@guardian/source-foundations";
-import Pagination from "./Pagination";
-import { getAllThemes } from "../fixtures/article";
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { breakpoints } from '@guardian/source-foundations';
+import { Pagination } from './Pagination';
+import { getAllThemes } from '../fixtures/article';
 
 export default {
 	component: Pagination,
-	title: "Components/Pagination",
+	title: 'Components/Pagination',
 	parameters: {
-		layout: "padded",
+		layout: 'padded',
 		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },
 	},
 };
@@ -27,7 +27,7 @@ export const notFirstPage = () => {
 	);
 };
 notFirstPage.story = {
-	name: "Not first page",
+	name: 'Not first page',
 };
 
 export const firstPageStory = () => {
@@ -40,5 +40,5 @@ export const firstPageStory = () => {
 	);
 };
 firstPageStory.story = {
-	name: "First page",
+	name: 'First page',
 };
