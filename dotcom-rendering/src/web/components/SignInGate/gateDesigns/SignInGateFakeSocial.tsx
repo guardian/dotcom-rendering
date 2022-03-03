@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { LinkButton, Link } from '@guardian/source-react-components';
+import { LinkButton, Link, Button } from '@guardian/source-react-components';
 import { cmp } from '@guardian/consent-management-platform';
 import {
 	headline,
@@ -338,7 +338,7 @@ export const SignInGateFakeSocial = ({
 					Register for free
 				</LinkButton>
 
-				<LinkButton
+				<Button
 					data-cy="sign-in-gate-fake-social_dismiss"
 					data-ignore="global-link-styling"
 					css={laterButton}
@@ -350,7 +350,7 @@ export const SignInGateFakeSocial = ({
 					}}
 				>
 					I’ll do it later
-				</LinkButton>
+				</Button>
 			</div>
 
 			<p css={[bodySeparator, bodyBold, signInHeader, bodyPadding]}>
