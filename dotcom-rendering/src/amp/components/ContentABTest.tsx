@@ -58,7 +58,7 @@ export const ContentABTestProvider = ({
 	children: React.ReactNode;
 }) => {
 	const group = getGroup(pageId);
-	const providerValue = switches.ampContentABTesting ? { group } : {};
+	const providerValue = switches.ampContentAbTesting ? { group } : {};
 	return (
 		<Context.Provider value={providerValue}>{children}</Context.Provider>
 	);

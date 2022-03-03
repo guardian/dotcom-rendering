@@ -53,7 +53,7 @@ test('returns a valid group ID when used inside of a provider', () => {
 
 	const { container } = render(
 		<ContentABTestProvider
-			switches={{ ampContentABTesting: true }}
+			switches={{ ampContentAbTesting: true }}
 			pageId={pageId}
 		>
 			<Component />
