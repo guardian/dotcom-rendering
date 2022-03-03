@@ -12,7 +12,7 @@ import { CanShowGateProps } from './types';
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {
 	// get daily read article count array from local storage
-	const [dailyCount = {} as DailyArticle] = getDailyArticleCount();
+	const [dailyCount = {} as DailyArticle] = getDailyArticleCount() || [];
 
 	const { count = 0 } = dailyCount;
 

@@ -2809,10 +2809,10 @@
   dependencies:
     youtube-player "^5.5.2"
 
-"@guardian/braze-components@^5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-5.3.0.tgz#abe79666e5636ad2a0064cb2f227a64239231d2f"
-  integrity sha512-3tljnI79cIR2e3RrnXMc0liSPAuFjezDZ50MCpXw9Y3KX8jD92AqWDAfjsC0XrpGj946ZB149Z/EarhrSRQ/hg==
+"@guardian/braze-components@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-6.0.0.tgz#031515e7ee5db8c96e42ace0b9a89bb8b1020219"
+  integrity sha512-oQf1TqrQM1DomUI1LwzWYlgj029vTgLYjIFAANgOoOJ6v5bDB71kAR0b3IGPCiZmmUR+dePWzYye4fwBXW8uUA==
 
 "@guardian/commercial-core@^3.0.0":
   version "3.0.0"
@@ -2882,10 +2882,10 @@
   resolved "https://registry.npmjs.org/@guardian/source-react-components/-/source-react-components-4.0.2.tgz#840c7355c358d8e4c3f6bd80b6eb75d2efd80798"
   integrity sha512-0/+IY/5Btp/3pirLob5SbCez3ip5fG4Pz8TkFQI+4fx05dPmPLJhQt7nPrvoOFHRz/moKS7Y78PsQ2oRNayM1Q==
 
-"@guardian/support-dotcom-components@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.0.tgz#802b507de87c4ef120ae9f02d6f44be1fea47353"
-  integrity sha512-zxtDDUYy3RDlizQ3UrYUYIQ2ooojj5gJmtEZjiAPN+SvL8cHlIPDQnX6aaTx6RMoIQUpQ4vVZyAVrLDOuUY37Q==
+"@guardian/support-dotcom-components@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.1.tgz#a6f51ce1c93efbaac705989a9d63a601bbf80328"
+  integrity sha512-zoxBAQIRUiz3iMi+wgutSi36igLjpGUI66JT+ByxHgFkTELiqsflG6Htn1ynYy4j5q80LyEIwahLqtuFFWq+YQ==
 
 "@guardian/types@^9.0.1":
   version "9.0.1"
