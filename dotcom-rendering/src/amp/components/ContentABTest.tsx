@@ -26,13 +26,13 @@ const isTestGroup = (n: number): n is TestGroup =>
 /**
  * Compute which test group to place the current page in
  *
- * @param shortUrlId The data that is used to assign a certain piece of content into a bucket
+ * @param pageId The data that is used to assign a certain piece of content into a bucket
  * @returns The test group the content is placed in
  */
-const getGroup = (shortUrlId: string): TestGroup => {
-	const hashedShortUrlId = sha256(shortUrlId).words[0];
+const getGroup = (pageId: string): TestGroup => {
+	const hashedPageId = sha256(pageId).words[0];
 
-	const group = Math.abs(hashedShortUrlId) % NUM_GROUPS;
+	const group = Math.abs(hashedPageId) % NUM_GROUPS;
 
 	if (isTestGroup(group)) {
 		return group;
@@ -49,14 +49,14 @@ const Context = React.createContext<TestContext | undefined>(undefined);
 
 export const TestProvider = ({
 	switches,
-	shortUrlId,
+	pageId,
 	children,
 }: {
 	switches: Switches;
-	shortUrlId: string;
+	pageId: string;
 	children: React.ReactNode;
 }) => {
-	const group = getGroup(shortUrlId);
+	const group = getGroup(pageId);
 	const providerValue = switches.ampContentABTesting ? { group } : {};
 	return (
 		<Context.Provider value={providerValue}>{children}</Context.Provider>

@@ -13,7 +13,7 @@ test('throws error when used outside of provider', () => {
 });
 
 test('returns undefined group when switched off', () => {
-	const shortUrlId = '/abc';
+	const pageId = '/abc';
 
 	const Component = () => {
 		const { group } = useTestGroup();
@@ -26,7 +26,7 @@ test('returns undefined group when switched off', () => {
 	};
 
 	const { container } = render(
-		<TestProvider switches={{}} shortUrlId={shortUrlId}>
+		<TestProvider switches={{}} pageId={pageId}>
 			<Component />
 		</TestProvider>,
 	);
@@ -35,7 +35,7 @@ test('returns undefined group when switched off', () => {
 });
 
 test('returns a valid group ID when used inside of a provider', () => {
-	const shortUrlId = '/abc';
+	const pageId = '/abc';
 
 	const Component = () => {
 		const { group } = useTestGroup();
@@ -48,10 +48,7 @@ test('returns a valid group ID when used inside of a provider', () => {
 	};
 
 	const { container } = render(
-		<TestProvider
-			switches={{ ampContentABTesting: true }}
-			shortUrlId={shortUrlId}
-		>
+		<TestProvider switches={{ ampContentABTesting: true }} pageId={pageId}>
 			<Component />
 		</TestProvider>,
 	);
