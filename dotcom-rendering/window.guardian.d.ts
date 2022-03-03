@@ -7,6 +7,7 @@ import type {
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { WindowGuardianConfig } from './src/model/window-guardian';
 import { ReaderRevenueDevUtils } from './src/web/lib/readerRevenueDevUtils';
+import { DailyArticleHistory } from "./src/web/lib/dailyArticleCount";
 
 declare global {
 	/* ~ Here, declare things that go in the global namespace, or augment
@@ -50,7 +51,8 @@ declare global {
 			};
 			readerRevenue: ReaderRevenueDevUtils;
 			gaPath: string;
-			articleCount: WeeklyArticleHistory | undefined;
+			weeklyArticleCount: WeeklyArticleHistory | undefined;
+			dailyArticleCount: DailyArticleHistory | undefined;
 		};
 		GoogleAnalyticsObject: string;
 		ga: UniversalAnalytics.ga | null;
