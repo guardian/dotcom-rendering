@@ -13,7 +13,8 @@ test('throws error when used outside of provider', () => {
 });
 
 test('returns undefined group when switched off', () => {
-	const pageId = '/abc';
+	const pageId =
+		'food/2022/feb/15/air-fryers-miraculous-kitchen-must-have-or-just-a-load-of-hot-air';
 
 	const Component = () => {
 		const { group } = useContentABTestGroup();
@@ -35,7 +36,8 @@ test('returns undefined group when switched off', () => {
 });
 
 test('returns a valid group ID when used inside of a provider', () => {
-	const pageId = '/abc';
+	const pageId =
+		'food/2022/feb/15/air-fryers-miraculous-kitchen-must-have-or-just-a-load-of-hot-air';
 
 	const Component = () => {
 		const { group } = useContentABTestGroup();
