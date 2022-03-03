@@ -9,7 +9,9 @@ test('throws error when used outside of provider', () => {
 		};
 
 		render(<Component />);
-	}).toThrow('useTestGroup must be used within the TestProvider');
+	}).toThrow(
+		'useContentABTestGroup must be used within the ContentABTestProvider',
+	);
 });
 
 test('returns undefined group when switched off', () => {

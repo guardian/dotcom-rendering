@@ -85,7 +85,9 @@ export const useContentABTestGroup = () => {
 	const context = React.useContext(Context);
 
 	if (context === undefined) {
-		throw Error('useTestGroup must be used within the TestProvider');
+		throw Error(
+			'useContentABTestGroup must be used within the ContentABTestProvider',
+		);
 	}
 
 	return context;
