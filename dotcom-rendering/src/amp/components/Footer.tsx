@@ -15,6 +15,7 @@ import {
 	isOnPlatform,
 } from '../../lib/footer-links';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
+import { useTestGroup } from './ContentABTest';
 
 const innerContainerStyles = css`
 	padding-left: 10px;
@@ -183,6 +184,11 @@ const FooterLinks: React.FC<{
 	);
 };
 
+const TestGroupInFooter = () => {
+	const { group } = useTestGroup();
+	return group !== undefined ? <>({group})</> : null;
+};
+
 export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => (
 	<footer css={footer}>
 		<div css={innerContainerStyles}>
@@ -199,7 +205,7 @@ export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => (
 			</a>
 			<div css={copyright}>
 				© {year} Guardian News & Media Limited or its affiliated
-				companies. All rights reserved.
+				companies. All rights reserved. <TestGroupInFooter />
 			</div>
 		</div>
 	</footer>
