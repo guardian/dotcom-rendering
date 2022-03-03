@@ -1,21 +1,27 @@
 import React from 'react';
 import sha256 from 'crypto-js/sha256';
-import { isString } from '@guardian/libs';
 
-export enum TestGroup {
-	A = 0,
-	B = 1,
-	C = 2,
-	D = 3,
-}
+const NUM_GROUPS = 12;
 
-// Compute the total number of groups from the enum above
-// Note we have to filter out numbers due to the transpiled implementation of enums with numeric values
-const NUM_GROUPS = Object.values(TestGroup).filter(isString).length;
+type TestGroup = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
 interface TestContext {
 	group?: TestGroup;
 }
+
+const isTestGroup = (n: number): n is TestGroup =>
+	n === 0 ||
+	n === 1 ||
+	n === 2 ||
+	n === 3 ||
+	n === 4 ||
+	n === 5 ||
+	n === 6 ||
+	n === 7 ||
+	n === 8 ||
+	n === 9 ||
+	n === 10 ||
+	n === 11;
 
 /**
  * Compute which test group to place the current page in
@@ -28,26 +34,13 @@ const getGroup = (shortUrlId: string): TestGroup => {
 
 	const group = Math.abs(hashedShortUrlId) % NUM_GROUPS;
 
-	if (group in TestGroup) {
-		switch (group) {
-			case 0: {
-				return TestGroup.A;
-			}
-			case 1: {
-				return TestGroup.B;
-			}
-			case 2: {
-				return TestGroup.C;
-			}
-			case 3: {
-				return TestGroup.D;
-			}
-		}
+	if (isTestGroup(group)) {
+		return group;
 	}
 
 	// This should be unreachable
 	// Report and throw an error if it isn't
-	const error = new Error('Failed to put AMP content into bucket');
+	const error = new Error('Failed to put AMP content into group');
 	window.guardian.modules.sentry.reportError(error, 'commercial');
 	throw error;
 };

@@ -22,7 +22,7 @@ test('returns undefined group when switched off', () => {
 			return null;
 		}
 
-		return <span>{group.toString()}</span>;
+		return <span>{group}</span>;
 	};
 
 	const { container } = render(
@@ -31,7 +31,7 @@ test('returns undefined group when switched off', () => {
 		</TestProvider>,
 	);
 
-	expect(container).not.toHaveTextContent(/0|1|2|3/);
+	expect(container).not.toHaveTextContent(/0|1|2|3|4|5|6|7|8|9|10|11/);
 });
 
 test('returns a valid group ID when used inside of a provider', () => {
@@ -44,7 +44,7 @@ test('returns a valid group ID when used inside of a provider', () => {
 			return null;
 		}
 
-		return <span>{group.toString()}</span>;
+		return <span>{group}</span>;
 	};
 
 	const { container } = render(
@@ -57,5 +57,5 @@ test('returns a valid group ID when used inside of a provider', () => {
 	);
 
 	// Check content has been placed into one of the possible groups
-	expect(container).toHaveTextContent(/0|1|2|3/);
+	expect(container).toHaveTextContent(/0|1|2|3|4|5|6|7|8|9|10|11/);
 });
