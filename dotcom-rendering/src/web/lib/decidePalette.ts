@@ -941,10 +941,6 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
-const textPagination = (format: ArticleFormat): string => {
-	return blogsGrayBackgroundPalette(format);
-};
-
 const textShareCount = (): string => {
 	return text.supporting;
 };
@@ -953,14 +949,6 @@ const textShareCountUntilDesktop = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
 
 	return text.supporting;
-};
-
-const borderPagination = (): string => {
-	return neutral[86];
-};
-
-const hoverPagination = (format: ArticleFormat): string => {
-	return blogsGrayBackgroundPalette(format);
 };
 
 export const decidePalette = (format: ArticleFormat): Palette => {
@@ -1004,7 +992,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			overlayedCaption: textOverlayed(),
-			pagination: textPagination(format),
 			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 		},
@@ -1057,14 +1044,12 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			lines: borderLines(format),
 			matchTab: matchTab(),
 			activeMatchTab: activeMatchTab(),
-			pagination: borderPagination(),
 		},
 		topBar: {
 			card: topBarCard(format),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
-			pagination: hoverPagination(format),
 			standfirstLink: hoverStandfirstLink(format),
 		},
 	};
