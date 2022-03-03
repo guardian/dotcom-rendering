@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
-import { TestProvider, useTestGroup } from './ContentABTest';
+import { ContentABTestProvider, useContentABTestGroup } from './ContentABTest';
 
 test('throws error when used outside of provider', () => {
 	expect(() => {
 		const Component = () => {
-			useTestGroup();
+			useContentABTestGroup();
 			return null;
 		};
 
@@ -16,7 +16,7 @@ test('returns undefined group when switched off', () => {
 	const pageId = '/abc';
 
 	const Component = () => {
-		const { group } = useTestGroup();
+		const { group } = useContentABTestGroup();
 
 		if (group === undefined) {
 			return null;
@@ -26,9 +26,9 @@ test('returns undefined group when switched off', () => {
 	};
 
 	const { container } = render(
-		<TestProvider switches={{}} pageId={pageId}>
+		<ContentABTestProvider switches={{}} pageId={pageId}>
 			<Component />
-		</TestProvider>,
+		</ContentABTestProvider>,
 	);
 
 	expect(container).not.toHaveTextContent(/0|1|2|3|4|5|6|7|8|9|10|11/);
@@ -38,7 +38,7 @@ test('returns a valid group ID when used inside of a provider', () => {
 	const pageId = '/abc';
 
 	const Component = () => {
-		const { group } = useTestGroup();
+		const { group } = useContentABTestGroup();
 
 		if (group === undefined) {
 			return null;
@@ -48,9 +48,12 @@ test('returns a valid group ID when used inside of a provider', () => {
 	};
 
 	const { container } = render(
-		<TestProvider switches={{ ampContentABTesting: true }} pageId={pageId}>
+		<ContentABTestProvider
+			switches={{ ampContentABTesting: true }}
+			pageId={pageId}
+		>
 			<Component />
-		</TestProvider>,
+		</ContentABTestProvider>,
 	);
 
 	// Check content has been placed into one of the possible groups

@@ -1,15 +1,15 @@
 import React from 'react';
 import sha256 from 'crypto-js/sha256';
 
-const NUM_GROUPS = 12;
+type ContentABTestGroup = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
 
-type TestGroup = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
-
-interface TestContext {
-	group?: TestGroup;
+interface ContentABTestContext {
+	group?: ContentABTestGroup;
 }
 
-const isTestGroup = (n: number): n is TestGroup =>
+const NUM_GROUPS = 12;
+
+const isContentABTestGroup = (n: number): n is ContentABTestGroup =>
 	n === 0 ||
 	n === 1 ||
 	n === 2 ||
@@ -29,12 +29,11 @@ const isTestGroup = (n: number): n is TestGroup =>
  * @param pageId The data that is used to assign a certain piece of content into a bucket
  * @returns The test group the content is placed in
  */
-export const getGroup = (pageId: string): TestGroup => {
+export const getGroup = (pageId: string): ContentABTestGroup => {
 	const hashedPageId = sha256(`/${pageId}`).words[0];
-
 	const group = Math.abs(hashedPageId) % NUM_GROUPS;
 
-	if (isTestGroup(group)) {
+	if (isContentABTestGroup(group)) {
 		return group;
 	}
 
@@ -45,9 +44,11 @@ export const getGroup = (pageId: string): TestGroup => {
 	throw error;
 };
 
-const Context = React.createContext<TestContext | undefined>(undefined);
+const Context = React.createContext<ContentABTestContext | undefined>(
+	undefined,
+);
 
-export const TestProvider = ({
+export const ContentABTestProvider = ({
 	switches,
 	pageId,
 	children,
@@ -67,7 +68,7 @@ export const TestProvider = ({
  * Obtain the current test group
  *
  * @example
- * const { group } = useTestGroup();
+ * const { group } = useContentABTestGroup();
  *
  *	switch(group) {
  *    case (0): {
@@ -80,7 +81,7 @@ export const TestProvider = ({
  *  }
  *
  */
-export const useTestGroup = () => {
+export const useContentABTestGroup = () => {
 	const context = React.useContext(Context);
 
 	if (context === undefined) {

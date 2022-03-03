@@ -15,7 +15,7 @@ import {
 	isOnPlatform,
 } from '../../lib/footer-links';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
-import { useTestGroup } from './ContentABTest';
+import { useContentABTestGroup } from './ContentABTest';
 
 const innerContainerStyles = css`
 	padding-left: 10px;
@@ -185,7 +185,7 @@ const FooterLinks: React.FC<{
 };
 
 export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => {
-	const { group } = useTestGroup();
+	const { group } = useContentABTestGroup();
 	return (
 		<footer data-content-test-group={group} css={footer}>
 			<div css={innerContainerStyles}>

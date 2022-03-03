@@ -15,7 +15,7 @@ import { AnalyticsIframe } from '../components/AnalyticsIframe';
 import { ArticleModel } from '../types/ArticleModel';
 import { AmpExperimentComponent } from '../components/AmpExperiment';
 import { AmpExperiments } from '../server/ampExperimentCache';
-import { TestProvider } from '../components/ContentABTest';
+import { ContentABTestProvider } from '../components/ContentABTest';
 
 const containerStyles = css`
 	margin: auto;
@@ -49,7 +49,10 @@ export const Article: React.FC<{
 	analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics, experimentsData }) => {
 	return (
-		<TestProvider switches={config.switches} pageId={config.pageId}>
+		<ContentABTestProvider
+			switches={config.switches}
+			pageId={config.pageId}
+		>
 			<Analytics key="analytics" analytics={analytics} />
 			<AnalyticsIframe url={config.ampIframeUrl} />
 			<AdConsent />
@@ -78,6 +81,6 @@ export const Article: React.FC<{
 			{/* The sidebar has to live here unfortunately to be valid AMP
             but note the click handler lives in the Header. */}
 			<Sidebar key="sidebar" nav={nav} />
-		</TestProvider>
+		</ContentABTestProvider>
 	);
 };
