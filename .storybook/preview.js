@@ -7,7 +7,7 @@ import { getFontsCss } from '../dotcom-rendering/src/lib/fonts-css';
 
 import { resets } from '@guardian/source-foundations'
 
-import { Lazy } from '../dotcom-rendering/src/web/components/Lazy';
+import { Lazy } from '../dotcom-rendering/src/web/components/Lazy.importable';
 import { Picture } from '../dotcom-rendering/src/web/components/Picture';
 import { mockRESTCalls } from '../dotcom-rendering/src/web/lib/mockRESTCalls';
 
