@@ -89,11 +89,11 @@ const stickyContainerStyles = (height: number) => css`
 `;
 
 interface Props {
-	isPlaying: boolean;
+	isActive: boolean;
 	children: React.ReactNode;
 }
 
-export const StickyVideo = ({ isPlaying, children }: Props) => {
+export const StickyVideo = ({ isActive, children }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.5,
@@ -101,8 +101,8 @@ export const StickyVideo = ({ isPlaying, children }: Props) => {
 	});
 
 	useEffect(() => {
-		setIsSticky(isPlaying && !isIntersecting);
-	}, [isIntersecting, isPlaying]);
+		setIsSticky(isActive && isIntersecting);
+	}, [isIntersecting, isActive]);
 
 	return (
 		<div ref={setRef} css={isSticky && stickyContainerStyles(192)}>

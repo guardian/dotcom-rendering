@@ -86,7 +86,7 @@ const MockYoutubeComponent = () => (
 export const Playing = () => {
 	return (
 		<Container>
-			<StickyVideo isPlaying={true}>
+			<StickyVideo isActive={true}>
 				<MockYoutubeComponent />
 			</StickyVideo>
 		</Container>
@@ -96,7 +96,7 @@ export const Playing = () => {
 export const NotPlaying = () => {
 	return (
 		<Container>
-			<StickyVideo isPlaying={false}>
+			<StickyVideo isActive={false}>
 				<MockYoutubeComponent />
 			</StickyVideo>
 		</Container>
