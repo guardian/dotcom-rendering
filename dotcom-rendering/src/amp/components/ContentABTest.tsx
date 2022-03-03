@@ -29,8 +29,8 @@ const isTestGroup = (n: number): n is TestGroup =>
  * @param pageId The data that is used to assign a certain piece of content into a bucket
  * @returns The test group the content is placed in
  */
-const getGroup = (pageId: string): TestGroup => {
-	const hashedPageId = sha256(pageId).words[0];
+export const getGroup = (pageId: string): TestGroup => {
+	const hashedPageId = sha256(`/${pageId}`).words[0];
 
 	const group = Math.abs(hashedPageId) % NUM_GROUPS;
 
@@ -70,7 +70,10 @@ export const TestProvider = ({
  * const { group } = useTestGroup();
  *
  *	switch(group) {
- *    case (TestGroup.A) {
+ *    case (0): {
+ * 		// ...
+ *    }
+ *    case (1): {
  * 		// ...
  *    }
  *    // Handle other groups

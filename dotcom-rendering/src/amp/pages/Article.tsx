@@ -49,7 +49,7 @@ export const Article: React.FC<{
 	analytics: AnalyticsModel;
 }> = ({ nav, articleData, config, analytics, experimentsData }) => {
 	return (
-		<TestProvider switches={config.switches} shortUrlId={config.shortUrlId}>
+		<TestProvider switches={config.switches} pageId={config.pageId}>
 			<Analytics key="analytics" analytics={analytics} />
 			<AnalyticsIframe url={config.ampIframeUrl} />
 			<AdConsent />
