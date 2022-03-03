@@ -64,11 +64,10 @@ const indices = [
 
 	// Main media
 	'mainMedia',
-];
+] as const;
 
-//
-// Implementation code  - you don't need to change this to get a new index
-type ZIndex = typeof indices[number];
+// Implementation code - you don't need to change this to get a new index
+export type ZIndex = typeof indices[number];
 
 function reverseArray(array: any[]) {
 	return array.map((item, index) => array[array.length - 1 - index]);
