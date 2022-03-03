@@ -145,7 +145,7 @@ describe('Liveblogs', function () {
 			},
 			(req) => {
 				expect(req.query.lastUpdate).to.equal(
-					'62148e2d8f081f9e465d1bb7',
+					'block-62148e2d8f081f9e465d1bb7',
 				);
 			},
 		).as('updateCall');
