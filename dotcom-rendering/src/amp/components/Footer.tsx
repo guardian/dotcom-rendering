@@ -184,29 +184,27 @@ const FooterLinks: React.FC<{
 	);
 };
 
-const TestGroupInFooter = () => {
+export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => {
 	const { group } = useTestGroup();
-	return group !== undefined ? <>({group})</> : null;
+	return (
+		<footer data-content-test-group={group} css={footer}>
+			<div css={innerContainerStyles}>
+				<div css={footerInner}>
+					<FooterLinks links={footerLinksNew} nav={nav} />
+				</div>
+			</div>
+			<div css={[copyrightContainer, innerContainerStyles]}>
+				<a css={backToTopLink} href="#top">
+					<span css={backToTopText}>Back to top</span>
+					<span css={iconContainer}>
+						<i css={icon} />
+					</span>
+				</a>
+				<div css={copyright}>
+					© {year} Guardian News & Media Limited or its affiliated
+					companies. All rights reserved.
+				</div>
+			</div>
+		</footer>
+	);
 };
-
-export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => (
-	<footer css={footer}>
-		<div css={innerContainerStyles}>
-			<div css={footerInner}>
-				<FooterLinks links={footerLinksNew} nav={nav} />
-			</div>
-		</div>
-		<div css={[copyrightContainer, innerContainerStyles]}>
-			<a css={backToTopLink} href="#top">
-				<span css={backToTopText}>Back to top</span>
-				<span css={iconContainer}>
-					<i css={icon} />
-				</span>
-			</a>
-			<div css={copyright}>
-				© {year} Guardian News & Media Limited or its affiliated
-				companies. All rights reserved. <TestGroupInFooter />
-			</div>
-		</div>
-	</footer>
-);
