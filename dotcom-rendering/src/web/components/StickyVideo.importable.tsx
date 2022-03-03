@@ -95,22 +95,30 @@ interface Props {
 	id: string;
 }
 
+interface StickyState {
+	isSticky: boolean;
+	isClosed: boolean;
+}
+
 export const StickyVideo = ({ isPlaying, children, id }: Props) => {
-	const [isSticky, setIsSticky] = useState(false);
-	const [isClosed, setIsClosed] = useState(false);
+	const [stickyState, setStickyState] = useState<StickyState>({
+		isSticky: false,
+		isClosed: false,
+	});
+
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.5,
 		repeat: true,
 	});
 
 	useEffect(() => {
-		setIsSticky(isPlaying && !isIntersecting);
+		setStickyState({
+			isSticky: isPlaying && !isIntersecting,
+			isClosed: false,
+		});
 	}, [isIntersecting, isPlaying]);
 
 	useEffect(() => {
-		console.log(`isSticky: ${isSticky}`);
-		console.log(`isClosed: ${isClosed}`);
-
 		const ophanTracking = (trackingEvent: OphanAction) => {
 			if (!id) return;
 			submitComponentEvent({
@@ -122,29 +130,31 @@ export const StickyVideo = ({ isPlaying, children, id }: Props) => {
 			});
 		};
 
-		if (isSticky) {
-			console.log('tracking: STICK');
-			ophanTracking('INSERT');
-		} else if (isClosed) {
-			console.log('tracking: CLOSE');
-			// ophanTracking('CLOSE');
-			setIsClosed(false);
+		if (stickyState.isSticky) {
+			ophanTracking('STICK');
+		} else if (stickyState.isClosed) {
+			ophanTracking('CLOSE');
 		} else {
-			console.log('tracking: RETURN');
-			// ophanTracking('RETURN');
+			ophanTracking('RETURN');
 		}
-	}, [isSticky, isClosed, id]);
+	}, [stickyState, id]);
 
 	return (
-		<div ref={setRef} css={isSticky && stickyContainerStyles(192)}>
-			<div css={isSticky && stickyStyles}>
+		<div
+			ref={setRef}
+			css={stickyState.isSticky && stickyContainerStyles(192)}
+		>
+			<div css={stickyState.isSticky && stickyStyles}>
 				<span css={hoverAreaStyles} />
-				{isSticky && (
+				{stickyState.isSticky && (
 					<button
 						css={buttonStyles}
 						onClick={() => {
-							setIsClosed(true);
-							setIsSticky(false);
+							isPlaying = false;
+							setStickyState({
+								isSticky: false,
+								isClosed: true,
+							});
 						}}
 					>
 						<SvgCross size="medium" />
