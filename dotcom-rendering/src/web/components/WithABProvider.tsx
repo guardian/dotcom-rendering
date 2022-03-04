@@ -47,6 +47,12 @@ export const WithABProvider = ({
 		// eslint-disable-next-line no-console
 		console.log('There is no MVT ID set, see WithABProvider.tsx');
 	}
+	if (Object.keys(abTestSwitches).some((key) => !key.startsWith('ab'))) {
+		console.warn(
+			'Unused switches passed. Make sure you use filterABTestSwitches',
+		);
+	}
+
 	const ophanRecord = getOphanRecordFunction();
 	const windowHash = window?.location.hash;
 	// Get the forced switches to use for when running within cypress
