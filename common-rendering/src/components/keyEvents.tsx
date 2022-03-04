@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import { css } from "@emotion/react";
-import type { SerializedStyles } from "@emotion/react";
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import {
 	textSans,
 	headline,
@@ -13,17 +13,17 @@ import {
 	neutral,
 	remSpace,
 	from,
-} from "@guardian/source-foundations";
-import { Link } from "@guardian/source-react-components";
+} from '@guardian/source-foundations';
+import { Link } from '@guardian/source-react-components';
 import {
 	ArticleFormat,
 	ArticlePillar,
 	ArticleTheme,
 	timeAgo,
-} from "@guardian/libs";
-import { darkModeCss } from "../lib";
-import Accordion from "./accordion";
-import { text } from "../editorialPalette";
+} from '@guardian/libs';
+import { darkModeCss } from '../lib';
+import Accordion from './accordion';
+import { text } from '../editorialPalette';
 
 // ----- Component ----- //
 type paletteId = 300 | 400 | 500;
@@ -61,7 +61,7 @@ const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
 };
 
 const keyEventWrapperStyles = (
-	supportsDarkMode: boolean
+	supportsDarkMode: boolean,
 ): SerializedStyles => css`
 	width: 100%;
 
@@ -77,7 +77,7 @@ const keyEventWrapperStyles = (
 
 const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	li::before {
-		content: "";
+		content: '';
 		display: block;
 		position: absolute;
 		top: 0;
@@ -117,9 +117,9 @@ const timeTextWrapperStyles: SerializedStyles = css`
 
 const textStyles = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean
+	supportsDarkMode: boolean,
 ): SerializedStyles => css`
-	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
+	${headline.xxxsmall({ fontWeight: 'regular', lineHeight: 'regular' })};
 	/* TODO update with Source value when it's added */
 	${from.desktop} {
 		font-size: 15px;
@@ -151,7 +151,7 @@ const textStyles = (
 `;
 
 const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
-	${textSans.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
+	${textSans.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${neutral[7]};
 	display: block;
 	transform: translateY(-2.5px);
