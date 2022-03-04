@@ -193,6 +193,22 @@ export const trackNonClickInteraction = (actionName: string): void => {
 	}
 };
 
+export const trackSponsorLogoLinkClick = (sponsorName: string): void => {
+	const { ga } = window;
+
+	if (ga) {
+		ga(send, 'event', 'click', 'sponsor logo', sponsorName, {
+			nonInteraction: true,
+		});
+	} else {
+		const error = new Error("window.ga doesn't exist");
+		window.guardian.modules.sentry.reportError(
+			error,
+			'trackSponsorLogoLinkClick',
+		);
+	}
+};
+
 export const trackVideoInteraction = ({
 	trackingEvent,
 	elementId,
