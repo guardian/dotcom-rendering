@@ -6,9 +6,10 @@ import { tests } from '../experiments/ab-tests';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
 import { getCypressSwitches } from '../experiments/cypress-switches';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
+import type { ABTestSwitches } from '../lib/filterSwitches';
 
 type Props = {
-	abTestSwitches: CoreAPIConfig['abTestSwitches'];
+	abTestSwitches: ABTestSwitches;
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];
 	isDev: boolean;
 	children: JSX.Element;
@@ -68,3 +69,5 @@ export const WithABProvider = ({
 		</ABProvider>
 	);
 };
+
+export type ABProps = Omit<Props, 'children'>;
