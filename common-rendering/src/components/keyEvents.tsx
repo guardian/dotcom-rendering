@@ -171,7 +171,7 @@ const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
 					title={keyEvent.date.toLocaleTimeString()}
 					css={timeStyles(supportsDarkMode)}
 				>
-					{timeAgo(keyEvent.date.getTime(), { verbose: true })}
+					{timeAgo(keyEvent.date.getTime())}
 				</time>
 				<Link
 					priority="secondary"
