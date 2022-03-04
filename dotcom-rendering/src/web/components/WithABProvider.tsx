@@ -68,3 +68,5 @@ export const WithABProvider = ({
 		</ABProvider>
 	);
 };
+
+export type ABProps = Omit<Props, 'children'>;

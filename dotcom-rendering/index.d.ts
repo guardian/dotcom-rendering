@@ -1056,6 +1056,7 @@ declare namespace JSX {
 			clientOnly?: boolean;
 			props: any;
 			children: React.ReactNode;
+			providers?: string;
 		};
 	}
 }

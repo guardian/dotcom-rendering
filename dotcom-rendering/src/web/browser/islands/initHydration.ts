@@ -3,6 +3,7 @@ import { whenIdle } from './whenIdle';
 import { doHydration } from './doHydration';
 import { getName } from './getName';
 import { getProps } from './getProps';
+import { getProviders } from './getProviders';
 
 export const initHydration = (elements: NodeListOf<Element>) => {
 	/**
@@ -20,6 +21,7 @@ export const initHydration = (elements: NodeListOf<Element>) => {
 		if (element instanceof HTMLElement) {
 			const name = getName(element);
 			const props = getProps(element);
+			const providers = getProviders(element);
 
 			if (!name) return;
 
@@ -27,18 +29,18 @@ export const initHydration = (elements: NodeListOf<Element>) => {
 			switch (deferUntil) {
 				case 'idle': {
 					whenIdle(() => {
-						doHydration(name, props, element);
+						doHydration(name, props, element, providers);
 					});
 					break;
 				}
 				case 'visible': {
 					whenVisible(element, () => {
-						doHydration(name, props, element);
+						doHydration(name, props, element, providers);
 					});
 					break;
 				}
 				default: {
-					doHydration(name, props, element);
+					doHydration(name, props, element, providers);
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
+import { Provider } from '../browser/islands/getProviders';
 import { Placeholder } from './Placeholder';
 
 type When = 'idle' | 'visible';
@@ -9,6 +10,7 @@ interface HydrateProps {
 	clientOnly?: false;
 	placeholderHeight?: undefined;
 	children: JSX.Element;
+	providers?: undefined;
 }
 
 interface ClientOnlyProps {
@@ -16,6 +18,7 @@ interface ClientOnlyProps {
 	clientOnly: true;
 	placeholderHeight?: number;
 	children: JSX.Element;
+	providers?: Provider[];
 }
 
 /**
@@ -55,12 +58,14 @@ export const Island = ({
 	clientOnly,
 	placeholderHeight,
 	children,
+	providers,
 }: Props) => (
 	<gu-island
 		name={children.type.name}
 		deferUntil={deferUntil}
 		props={JSON.stringify(children.props)}
 		clientOnly={clientOnly}
+		providers={providers?.join('')}
 	>
 		{decideChildren(children, clientOnly, placeholderHeight)}
 	</gu-island>
