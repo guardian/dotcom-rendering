@@ -63,18 +63,12 @@ interface Props {
 	sectionName?: string;
 	format: ArticleFormat;
 	ajaxUrl: string;
-	switches: Switches;
-	pageIsSensitive: boolean;
-	isDev?: boolean;
 }
 
 export const MostViewedFooterLayout = ({
 	sectionName,
 	format,
 	ajaxUrl,
-	switches,
-	pageIsSensitive,
-	isDev,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -108,14 +102,15 @@ export const MostViewedFooterLayout = ({
 						<Hide when="above" breakpoint="leftCol">
 							<h2 css={headingStyles}>Most popular</h2>
 						</Hide>
-						<Island clientOnly={true} deferUntil="visible">
+						<Island
+							clientOnly={true}
+							deferUntil="visible"
+							providers={['WithABProvider']}
+						>
 							<MostViewedFooterData
 								sectionName={sectionName}
 								palette={palette}
 								ajaxUrl={ajaxUrl}
-								switches={switches}
-								pageIsSensitive={pageIsSensitive}
-								isDev={isDev}
 							/>
 						</Island>
 					</div>
