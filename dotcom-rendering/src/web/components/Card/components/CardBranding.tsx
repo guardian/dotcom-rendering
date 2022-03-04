@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
+import { decidePalette } from '../../../lib/decidePalette';
 import { decideLogo } from '../../../lib/decideLogo';
 import { trackSponsorLogoLinkClick } from '../../../browser/ga/ga';
 
 type Props = {
 	branding: Branding;
 	format: ArticleFormat;
-	palette: Palette;
 };
 
 const logoImageStyle = css`
@@ -31,8 +31,9 @@ const labelStyle = (palette: Palette) => {
 	`;
 };
 
-export const CardBranding = ({ branding, format, palette }: Props) => {
+export const CardBranding = ({ branding, format }: Props) => {
 	const logo = decideLogo(format, branding);
+	const palette = decidePalette(format);
 	return (
 		<div css={brandingWrapperStyle}>
 			<div css={labelStyle(palette)}>{logo.label}</div>

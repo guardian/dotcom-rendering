@@ -27,14 +27,6 @@ module.exports = {
 	globalSetup: './config/jestglobalSetup.js',
 	globals: {
 		'ts-jest': {
-			babelConfig: {
-				presets: [
-					[
-						'@babel/preset-env',
-						{ targets: { node: '12' }, modules: 'cjs' },
-					],
-				],
-			},
 			tsconfig: 'config/tsconfig.test.json',
 		},
 	},

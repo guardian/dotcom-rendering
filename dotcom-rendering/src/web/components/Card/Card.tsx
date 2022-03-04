@@ -179,12 +179,7 @@ export const Card = ({
 	const cardPalette = decidePalette(format);
 
 	return (
-		<CardLink
-			linkTo={linkTo}
-			format={format}
-			palette={cardPalette}
-			dataLinkName={dataLinkName}
-		>
+		<CardLink linkTo={linkTo} format={format} dataLinkName={dataLinkName}>
 			<TopBar palette={cardPalette} isFullCardImage={isFullCardImage}>
 				<CardLayout
 					imagePosition={imagePosition}
@@ -318,7 +313,6 @@ export const Card = ({
 										branding ? (
 											<CardBranding
 												branding={branding}
-												palette={cardPalette}
 												format={format}
 											/>
 										) : undefined

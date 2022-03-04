@@ -12,6 +12,7 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { Hide } from '@guardian/source-react-components';
 import { StarRating } from '../components/StarRating/StarRating';
@@ -35,7 +36,7 @@ import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { Pagination } from '../components/Pagination';
+
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
@@ -204,9 +205,11 @@ const sticky = css`
 	}
 `;
 
-const keyEventsTopMargin = css`
+const keyEventsMargins = css`
+	margin-bottom: ${space[3]}px;
 	${from.desktop} {
 		margin-top: ${space[1]}px;
+		margin-bottom: 0;
 	}
 `;
 
@@ -216,7 +219,7 @@ const sidePaddingDesktop = css`
 	}
 `;
 
-const accordionBottomMargin = css`
+const bodyWrapper = css`
 	margin-bottom: ${space[3]}px;
 	${from.desktop} {
 		margin-bottom: 0;
@@ -300,23 +303,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 	return (
 		<>
-			{format.design === ArticleDesign.LiveBlog && (
-				<Island clientOnly={true} deferUntil="idle">
-					<Liveness
-						pageId={CAPI.pageId}
-						webTitle={CAPI.webTitle}
-						ajaxUrl={CAPI.config.ajaxUrl}
-						filterKeyEvents={CAPI.filterKeyEvents}
-						format={format}
-						switches={CAPI.config.switches}
-						onFirstPage={pagination.currentPage === 1}
-						webURL={CAPI.webURL}
-						// We default to string here because the property is optional but we
-						// know it will exist for all blogs
-						mostRecentBlockId={CAPI.mostRecentBlockId || ''}
-					/>
-				</Island>
-			)}
 			<div data-print-layout="hide">
 				<Stuck>
 					<ElementContainer
@@ -677,9 +663,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<div
 									css={[
 										!CAPI.matchUrl && sticky,
-										keyEventsTopMargin,
+										keyEventsMargins,
 										sidePaddingDesktop,
-										accordionBottomMargin,
 									]}
 								>
 									<KeyEventsContainer
@@ -703,7 +688,35 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								)}
 							</GridItem>
 							<GridItem area="body">
-								<div css={accordionBottomMargin}>
+								<div id="maincontent" css={bodyWrapper}>
+									<span data-gu-marker="top-of-blog" />
+									{format.design ===
+										ArticleDesign.LiveBlog && (
+										<Island
+											clientOnly={true}
+											deferUntil="idle"
+										>
+											<Liveness
+												pageId={CAPI.pageId}
+												webTitle={CAPI.webTitle}
+												ajaxUrl={CAPI.config.ajaxUrl}
+												filterKeyEvents={
+													CAPI.filterKeyEvents
+												}
+												format={format}
+												switches={CAPI.config.switches}
+												onFirstPage={
+													pagination.currentPage === 1
+												}
+												webURL={CAPI.webURL}
+												// We default to string here because the property is optional but we
+												// know it will exist for all blogs
+												mostRecentBlockId={
+													CAPI.mostRecentBlockId || ''
+												}
+											/>
+										</Island>
+									)}
 									<Hide below="desktop">
 										<Island deferUntil="visible">
 											<FilterKeyEventsToggle

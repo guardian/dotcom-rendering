@@ -5,7 +5,7 @@ import type {
 	BrazeMessagesInterface,
 	BrazeArticleContext,
 } from '@guardian/braze-components/logic';
-import { getArticleCount } from '../../../lib/article-count';
+import { getArticleCounts } from '../../../lib/article-count';
 import { useOnce } from '../../lib/useOnce';
 import { getLocaleCode } from '../../lib/getCountryCode';
 
@@ -115,7 +115,11 @@ export const SlotBodyEnd = ({
 	}, []);
 
 	useEffect(() => {
-		setAsyncArticleCount(getArticleCount(pageId, keywordsId));
+		setAsyncArticleCount(
+			getArticleCounts(pageId, keywordsId).then(
+				(counts) => counts?.weeklyArticleHistory,
+			),
+		);
 	}, [pageId, keywordsId]);
 
 	useOnce(() => {

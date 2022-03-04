@@ -27,7 +27,7 @@ const ageStyles = (format: ArticleFormat) => {
 		}
 
 		svg {
-			fill: ${palette.fill.cardIcon};
+			fill: ${palette.text.cardFooter};
 			margin-bottom: -1px;
 			height: 11px;
 			width: 11px;
