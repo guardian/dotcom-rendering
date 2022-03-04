@@ -7,6 +7,7 @@ import { MostViewedFooterData } from './MostViewedFooterData.importable';
 import { AdSlot, labelStyles } from './AdSlot';
 import { decidePalette } from '../lib/decidePalette';
 import { Island } from './Island';
+import { ABProps } from './WithABProvider';
 
 const stackBelow = (breakpoint: Breakpoint) => css`
 	display: flex;
@@ -63,19 +64,16 @@ interface Props {
 	sectionName?: string;
 	format: ArticleFormat;
 	ajaxUrl: string;
-	switches: Switches;
-	pageIsSensitive: boolean;
-	isDev?: boolean;
 }
 
 export const MostViewedFooterLayout = ({
 	sectionName,
 	format,
 	ajaxUrl,
-	switches,
+	abTestSwitches,
 	pageIsSensitive,
 	isDev,
-}: Props) => {
+}: Props & ABProps) => {
 	const palette = decidePalette(format);
 
 	return (
@@ -113,9 +111,9 @@ export const MostViewedFooterLayout = ({
 								sectionName={sectionName}
 								palette={palette}
 								ajaxUrl={ajaxUrl}
-								switches={switches}
+								abTestSwitches={abTestSwitches}
 								pageIsSensitive={pageIsSensitive}
-								isDev={isDev}
+								isDev={!!isDev}
 							/>
 						</Island>
 					</div>

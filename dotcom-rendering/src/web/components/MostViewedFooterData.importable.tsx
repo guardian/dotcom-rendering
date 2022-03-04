@@ -10,18 +10,12 @@ import { decideTrail } from '../lib/decideTrail';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
 import { abTestTest } from '../experiments/tests/ab-test-test';
-import { WithABProvider } from './WithABProvider';
+import { ABProps, WithABProvider } from './WithABProvider';
 
-interface WithABProps {
+interface Props {
 	sectionName?: string;
 	palette: Palette;
 	ajaxUrl: string;
-}
-
-interface Props extends WithABProps {
-	switches: Switches;
-	pageIsSensitive: boolean;
-	isDev?: boolean;
 }
 
 const stackBelow = (breakpoint: Breakpoint) => css`
@@ -63,7 +57,7 @@ const MostViewedFooterDataWithAB = ({
 	sectionName,
 	palette,
 	ajaxUrl,
-}: WithABProps) => {
+}: Props) => {
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
 	const ABTestAPI = useAB();
@@ -131,12 +125,12 @@ export const MostViewedFooterData = ({
 	sectionName,
 	palette,
 	ajaxUrl,
-	switches,
+	abTestSwitches,
 	pageIsSensitive,
 	isDev,
-}: Props) => (
+}: Props & ABProps) => (
 	<WithABProvider
-		abTestSwitches={switches}
+		abTestSwitches={abTestSwitches}
 		pageIsSensitive={pageIsSensitive}
 		isDev={!!isDev}
 	>

@@ -6,7 +6,7 @@ import {
 import { getCookie } from '@guardian/libs';
 import { useAB } from '@guardian/ab-react';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
-import { WithABProvider } from './WithABProvider';
+import { ABProps, WithABProvider } from './WithABProvider';
 import { useOnce } from '../lib/useOnce';
 import { tests } from '../experiments/ab-tests';
 import { spacefinderOkr3RichLinks } from '../experiments/tests/spacefinder-okr-3-rich-links';
@@ -14,9 +14,6 @@ import { spacefinderOkrMegaTest } from '../experiments/tests/spacefinder-okr-meg
 
 type Props = {
 	enabled: boolean;
-	switches: Switches;
-	isSensitive: boolean;
-	isDev?: boolean;
 };
 
 const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
@@ -67,13 +64,13 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 
 export const CommercialMetrics = ({
 	enabled,
-	switches,
-	isSensitive,
+	abTestSwitches,
+	pageIsSensitive,
 	isDev,
-}: Props) => (
+}: Props & ABProps) => (
 	<WithABProvider
-		abTestSwitches={switches}
-		pageIsSensitive={isSensitive}
+		abTestSwitches={abTestSwitches}
+		pageIsSensitive={pageIsSensitive}
 		isDev={!!isDev}
 	>
 		<CommercialMetricsWithAB enabled={enabled} />

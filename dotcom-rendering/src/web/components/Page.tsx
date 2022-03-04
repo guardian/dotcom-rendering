@@ -7,6 +7,7 @@ import { DecideLayout } from '../layouts/DecideLayout';
 import { CommercialMetrics } from './CommercialMetrics.importable';
 import { Island } from './Island';
 import { FocusStyles } from './FocusStyles.importable';
+import { filterABTestSwitches } from '../lib/filterSwitches';
 
 type Props = {
 	CAPI: CAPIType;
@@ -46,9 +47,9 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			<Island clientOnly={true} deferUntil="idle">
 				<CommercialMetrics
 					enabled={CAPI.config.switches.commercialMetrics}
-					switches={CAPI.config.switches}
-					isSensitive={CAPI.config.isSensitive}
-					isDev={CAPI.config.isDev}
+					abTestSwitches={filterABTestSwitches(CAPI.config.switches)}
+					pageIsSensitive={CAPI.config.isSensitive}
+					isDev={!!CAPI.config.isDev}
 				/>
 			</Island>
 			<div id="react-root" />

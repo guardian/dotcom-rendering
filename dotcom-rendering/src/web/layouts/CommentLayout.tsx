@@ -45,6 +45,7 @@ import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.imp
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { filterABTestSwitches } from '../lib/filterSwitches';
 
 const StandardGrid = ({
 	children,
@@ -696,9 +697,11 @@ export const CommentLayout = ({
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}
-							switches={CAPI.config.switches}
+							abTestSwitches={filterABTestSwitches(
+								CAPI.config.switches,
+							)}
 							pageIsSensitive={CAPI.config.isSensitive}
-							isDev={CAPI.config.isDev}
+							isDev={!!CAPI.config.isDev}
 						/>
 					</ElementContainer>
 				)}

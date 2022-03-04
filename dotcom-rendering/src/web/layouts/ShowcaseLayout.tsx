@@ -50,6 +50,7 @@ import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.imp
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { filterABTestSwitches } from '../lib/filterSwitches';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -678,9 +679,11 @@ export const ShowcaseLayout = ({
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}
-							switches={CAPI.config.switches}
+							abTestSwitches={filterABTestSwitches(
+								CAPI.config.switches,
+							)}
 							pageIsSensitive={CAPI.config.isSensitive}
-							isDev={CAPI.config.isDev}
+							isDev={!!CAPI.config.isDev}
 						/>
 					</ElementContainer>
 				)}

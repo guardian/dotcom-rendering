@@ -57,6 +57,7 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { filterABTestSwitches } from '../lib/filterSwitches';
 
 const StandardGrid = ({
 	children,
@@ -804,9 +805,11 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}
-							switches={CAPI.config.switches}
+							abTestSwitches={filterABTestSwitches(
+								CAPI.config.switches,
+							)}
 							pageIsSensitive={CAPI.config.isSensitive}
-							isDev={CAPI.config.isDev}
+							isDev={!!CAPI.config.isDev}
 						/>
 					</ElementContainer>
 				)}

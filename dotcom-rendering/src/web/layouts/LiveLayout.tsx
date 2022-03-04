@@ -59,6 +59,7 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { filterABTestSwitches } from '../lib/filterSwitches';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -927,9 +928,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}
-							switches={CAPI.config.switches}
+							abTestSwitches={filterABTestSwitches(
+								CAPI.config.switches,
+							)}
 							pageIsSensitive={CAPI.config.isSensitive}
-							isDev={CAPI.config.isDev}
+							isDev={!!CAPI.config.isDev}
 						/>
 					</ElementContainer>
 				)}
