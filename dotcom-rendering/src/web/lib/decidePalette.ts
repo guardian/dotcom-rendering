@@ -596,7 +596,7 @@ const backgroundStandfirst = (format: ArticleFormat): string => {
 				case ArticlePillar.Culture:
 					return culture[200];
 				case ArticlePillar.Sport:
-					return sport[200];
+					return sport[100];
 				case ArticlePillar.Lifestyle:
 					return lifestyle[200];
 				case ArticlePillar.Opinion:
