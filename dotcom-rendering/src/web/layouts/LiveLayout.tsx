@@ -565,7 +565,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												CAPI.config.switches
 													.serverShareCounts
 											}
-											context="Standfirst"
 										/>
 									</div>
 								</Hide>
@@ -657,7 +656,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												CAPI.config.switches
 													.serverShareCounts
 											}
-											context="LeftColumn"
 										/>
 									</div>
 								</Hide>

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { text, textSans, from, until } from '@guardian/source-foundations';
+import { text, textSans, until } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -8,35 +8,14 @@ const captionFont = css`
 	color: ${text.supporting};
 `;
 
-const datelineSpace = css`
+const datelineStyles = css`
 	padding-top: 2px;
 	margin-bottom: 6px;
 `;
 
-// We use the 'Checkbox Hack' for the show-hide functionality of the secondary date line.
-// https://css-tricks.com/the-checkbox-hack/
-const toggleClass = css`
-	input[type='checkbox'] {
-		display: none;
-	}
-
-	input[type='checkbox']:checked ~ p {
-		max-height: 80px;
-	}
-`;
-
-const pStyle = css`
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.4s ease;
-	${from.leftCol} {
-		width: 90%;
-	}
-`;
-
-const labelStyles = css`
+const primaryStyles = css`
+	list-style: none;
 	cursor: pointer;
-
 	:hover {
 		text-decoration: underline;
 	}
@@ -57,40 +36,28 @@ export const Dateline: React.FC<{
 	primaryDateline: string;
 	secondaryDateline: string;
 	format: ArticleFormat;
-	context?: 'Standfirst' | 'LeftColumn';
-}> = ({ primaryDateline, secondaryDateline, format, context }) => {
+}> = ({ primaryDateline, secondaryDateline, format }) => {
 	const palette = decidePalette(format);
-	// We're using a calculated id here because the `ArticleMeta` appears in two places on the page
-	// for liveblogs and we want to ensure unique id strings are used
-	const inputId =
-		context === 'Standfirst'
-			? 'datetoggle-in-standfirst'
-			: 'datetoggle-in-leftcolumn';
 
 	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
 		return (
-			<div
+			<details
 				css={[
-					toggleClass,
-					datelineSpace,
+					datelineStyles,
 					captionFont,
 					format.design === ArticleDesign.LiveBlog &&
 						standfirstColouring(palette),
 				]}
 			>
-				<label css={labelStyles} htmlFor={inputId}>
-					{primaryDateline}
-				</label>
-
-				<input css={toggleClass} type="checkbox" id={inputId} />
-				<p css={pStyle}>{secondaryDateline}</p>
-			</div>
+				<summary css={primaryStyles}>{primaryDateline}</summary>
+				{secondaryDateline}
+			</details>
 		);
 	}
 	return (
 		<div
 			css={[
-				datelineSpace,
+				datelineStyles,
 				captionFont,
 				format.design === ArticleDesign.LiveBlog &&
 					standfirstColouring(palette),

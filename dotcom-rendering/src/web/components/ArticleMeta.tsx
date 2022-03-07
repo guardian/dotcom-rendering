@@ -36,7 +36,6 @@ type Props = {
 	isCommentable: boolean;
 	ajaxUrl: string;
 	showShareCount: boolean;
-	context?: 'Standfirst' | 'LeftColumn';
 };
 
 const meta = css`
@@ -81,7 +80,9 @@ const stretchLines = css`
 `;
 
 const borderColourWhenBackgroundDark = css`
-	border-top: 1px solid rgba(255, 255, 255, 0.4);
+	${until.desktop} {
+		border-top: 1px solid rgba(255, 255, 255, 0.4);
+	}
 `;
 
 const metaExtras = (palette: Palette) => css`
@@ -294,7 +295,6 @@ export const ArticleMeta = ({
 	isCommentable,
 	ajaxUrl,
 	showShareCount,
-	context,
 }: Props) => {
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
@@ -374,7 +374,6 @@ export const ArticleMeta = ({
 								primaryDateline={primaryDateline}
 								secondaryDateline={secondaryDateline}
 								format={format}
-								context={context}
 							/>
 						</div>
 					</>
@@ -389,10 +388,10 @@ export const ArticleMeta = ({
 						css={[
 							metaExtras(palette),
 							format.design === ArticleDesign.LiveBlog &&
-								context === 'Standfirst' &&
-								borderColourWhenBackgroundDark,
-							format.design === ArticleDesign.LiveBlog &&
-								metaExtrasLiveBlog,
+								css(
+									borderColourWhenBackgroundDark,
+									metaExtrasLiveBlog,
+								),
 						]}
 					>
 						<ShareIcons
@@ -413,12 +412,11 @@ export const ArticleMeta = ({
 						}
 						css={[
 							metaNumbers(palette),
-
 							format.design === ArticleDesign.LiveBlog &&
-								context === 'Standfirst' &&
-								borderColourWhenBackgroundDark,
-							format.design === ArticleDesign.LiveBlog &&
-								metaNumbersExtrasLiveBlog,
+								css(
+									borderColourWhenBackgroundDark,
+									metaNumbersExtrasLiveBlog,
+								),
 						]}
 					>
 						<Counts format={format}>
