@@ -375,6 +375,53 @@ export const ImageRoles = () => {
 };
 ImageRoles.story = { name: 'with images at different roles' };
 
+export const Thumbnail = () => {
+	const block: Block = {
+		...baseBlock,
+		elements: [
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>eos his vis cetero dicta usu eu duo officiis ei eleifend sed repudiandae consequat vitae splendide pretium est partiendo semper ne uonsetetur ipsum aliquam per leo odio inimicus eam his tincidunt et ne semper amet et voluptua mauris qui eum nec inimicus sed aenean eu mea odio vitae at.</p>',
+			},
+			{
+				...images[0],
+				role: 'thumbnail',
+			},
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>eos his vis cetero dicta usu eu duo officiis ei eleifend sed repudiandae consequat vitae splendide pretium est partiendo semper ne uonsetetur ipsum aliquam per leo odio inimicus eam his tincidunt et ne semper amet et voluptua mauris qui eum nec inimicus sed aenean eu mea odio vitae at.</p>',
+			},
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>eos his vis cetero dicta usu eu duo officiis ei eleifend sed repudiandae consequat vitae splendide pretium est partiendo semper ne uonsetetur ipsum aliquam per leo odio inimicus eam his tincidunt et ne semper amet et voluptua mauris qui eum nec inimicus sed aenean eu mea odio vitae at.</p>',
+			},
+		],
+	};
+	return (
+		<Wrapper>
+			<LiveBlock
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
+				format={{
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
+				}}
+				block={block}
+				pageId=""
+				webTitle=""
+				ajaxUrl=""
+			/>
+		</Wrapper>
+	);
+};
+Thumbnail.story = { name: 'with a thumbnail image surrounded by text' };
+
 export const ImageAndTitle = () => {
 	const block: Block = {
 		...baseBlock,
