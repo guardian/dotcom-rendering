@@ -581,7 +581,7 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 const backgroundHeader = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
-			return pillarPalette[format.theme][400];
+			return pillarPalette[format.theme][300];
 		default:
 			return backgroundArticle(format);
 	}
@@ -590,7 +590,23 @@ const backgroundHeader = (format: ArticleFormat): string => {
 const backgroundStandfirst = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
-			return pillarPalette[format.theme][300];
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[200];
+				case ArticlePillar.Culture:
+					return culture[200];
+				case ArticlePillar.Sport:
+					return sport[200];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[200];
+				case ArticlePillar.Opinion:
+					return opinion[200];
+				case ArticleSpecial.Labs:
+					return labs[200];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[200];
+			}
+			break;
 		case ArticleDesign.DeadBlog:
 			return neutral[93];
 		default:
