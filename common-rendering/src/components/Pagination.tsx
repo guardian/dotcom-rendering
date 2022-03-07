@@ -9,7 +9,9 @@ import {
 	SvgChevronRightDouble,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
-import { decidePalette } from '../lib/decidePalette';
+
+import { border, hover, text } from '../editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 
 type Props = {
 	currentPage: number;
@@ -90,17 +92,17 @@ const Space = () => (
 	/>
 );
 
-const decidePaginationCss = (palette: Palette): SerializedStyles => {
+const decidePaginationCss = (format: ArticleFormat): SerializedStyles => {
 	return css`
-		color: ${palette.text.pagination};
-		border: 1px solid ${palette.border.pagination};
+		color: ${text.pagination(format)};
+		border: 1px solid ${border.pagination(format)};
 		:hover {
-			border: 1px solid ${palette.hover.pagination};
+			border: 1px solid ${hover.pagination(format)};
 		}
 	`;
 };
 
-export const Pagination = ({
+const Pagination = ({
 	currentPage,
 	totalPages,
 	oldest,
@@ -109,8 +111,6 @@ export const Pagination = ({
 	newer,
 	format,
 }: Props) => {
-	const palette = decidePalette(format);
-
 	return (
 		<Container>
 			<Section hide={currentPage === 1}>
@@ -122,7 +122,7 @@ export const Pagination = ({
 						iconSide="left"
 						hideLabel={true}
 						href={newest}
-						cssOverrides={decidePaginationCss(palette)}
+						cssOverrides={decidePaginationCss(format)}
 					>
 						Newest
 					</LinkButton>
@@ -134,7 +134,7 @@ export const Pagination = ({
 						icon={<SvgChevronLeftDouble />}
 						iconSide="left"
 						href={newest}
-						cssOverrides={decidePaginationCss(palette)}
+						cssOverrides={decidePaginationCss(format)}
 					>
 						Newest
 					</LinkButton>
@@ -146,7 +146,7 @@ export const Pagination = ({
 					icon={<SvgChevronLeftSingle />}
 					hideLabel={true}
 					href={newer}
-					cssOverrides={decidePaginationCss(palette)}
+					cssOverrides={decidePaginationCss(format)}
 				>
 					Previous
 				</LinkButton>
@@ -165,7 +165,7 @@ export const Pagination = ({
 					icon={<SvgChevronRightSingle />}
 					hideLabel={true}
 					href={older}
-					cssOverrides={decidePaginationCss(palette)}
+					cssOverrides={decidePaginationCss(format)}
 				>
 					Next
 				</LinkButton>
@@ -178,7 +178,7 @@ export const Pagination = ({
 						iconSide="right"
 						href={oldest}
 						hideLabel={true}
-						cssOverrides={decidePaginationCss(palette)}
+						cssOverrides={decidePaginationCss(format)}
 					>
 						Oldest
 					</LinkButton>
@@ -190,7 +190,7 @@ export const Pagination = ({
 						icon={<SvgChevronRightDouble />}
 						iconSide="right"
 						href={oldest}
-						cssOverrides={decidePaginationCss(palette)}
+						cssOverrides={decidePaginationCss(format)}
 					>
 						Oldest
 					</LinkButton>
@@ -199,3 +199,5 @@ export const Pagination = ({
 		</Container>
 	);
 };
+
+export { Pagination };

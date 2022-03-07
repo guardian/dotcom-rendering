@@ -12,7 +12,8 @@ import {
 } from '@aws-cdk/aws-route53';
 import type { App, CfnElement } from '@aws-cdk/core';
 import { Duration } from '@aws-cdk/core';
-import { AccessScope, GuEc2App } from '@guardian/cdk';
+import { GuEc2App } from '@guardian/cdk';
+import { AccessScope } from '@guardian/cdk/lib/constants/access';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack } from '@guardian/cdk/lib/constructs/core';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
