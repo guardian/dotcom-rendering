@@ -57,8 +57,15 @@ export const Dateline: React.FC<{
 	primaryDateline: string;
 	secondaryDateline: string;
 	format: ArticleFormat;
-}> = ({ primaryDateline, secondaryDateline, format }) => {
+	context?: 'Standfirst' | 'LeftColumn';
+}> = ({ primaryDateline, secondaryDateline, format, context }) => {
 	const palette = decidePalette(format);
+	// We're using a calculated id here because the `ArticleMeta` appears in two places on the page
+	// for liveblogs and we want to ensure unique id strings are used
+	const inputId =
+		context === 'Standfirst'
+			? 'datetoggle-in-standfirst'
+			: 'datetoggle-in-leftcolumn';
 
 	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
 		return (
@@ -71,11 +78,11 @@ export const Dateline: React.FC<{
 						standfirstColouring(palette),
 				]}
 			>
-				<label css={labelStyles} htmlFor="dateToggle">
+				<label css={labelStyles} htmlFor={inputId}>
 					{primaryDateline}
 				</label>
 
-				<input css={toggleClass} type="checkbox" id="dateToggle" />
+				<input css={toggleClass} type="checkbox" id={inputId} />
 				<p css={pStyle}>{secondaryDateline}</p>
 			</div>
 		);
