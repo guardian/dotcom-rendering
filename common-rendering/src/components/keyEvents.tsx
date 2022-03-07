@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
-import { css } from "@emotion/react";
-import type { SerializedStyles } from "@emotion/react";
+import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import {
 	textSans,
 	headline,
@@ -13,17 +13,17 @@ import {
 	neutral,
 	remSpace,
 	from,
-} from "@guardian/source-foundations";
-import { Link } from "@guardian/source-react-components";
+} from '@guardian/source-foundations';
+import { Link } from '@guardian/source-react-components';
 import {
 	ArticleFormat,
 	ArticlePillar,
 	ArticleTheme,
 	timeAgo,
-} from "@guardian/libs";
-import { darkModeCss } from "../lib";
-import Accordion from "./accordion";
-import { text } from "../editorialPalette";
+} from '@guardian/libs';
+import { darkModeCss } from '../lib';
+import Accordion from './accordion';
+import { text } from '../editorialPalette';
 
 // ----- Component ----- //
 type paletteId = 300 | 400 | 500;
@@ -61,7 +61,7 @@ const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
 };
 
 const keyEventWrapperStyles = (
-	supportsDarkMode: boolean
+	supportsDarkMode: boolean,
 ): SerializedStyles => css`
 	width: 100%;
 
@@ -75,6 +75,30 @@ const keyEventWrapperStyles = (
 	`}
 `;
 
+<<<<<<< HEAD
+=======
+const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+	li::before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		left: -0.313rem;
+		height: 0.563rem;
+		width: 0.563rem;
+		border-radius: 50%;
+		background-color: ${neutral[46]};
+	}
+
+	${darkModeCss(supportsDarkMode)`
+		li::before {
+			border-color: transparent ${neutral[60]};
+			background-color: neutral[60];
+		}
+	`}
+`;
+
+>>>>>>> 650cd85e5ee20b6bc71ba22c1a81be961672af43
 const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	padding-bottom: ${remSpace[3]};
 	border-left: 1px solid ${neutral[86]};
@@ -137,9 +161,9 @@ const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 
 const textStyles = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean
+	supportsDarkMode: boolean,
 ): SerializedStyles => css`
-	${headline.xxxsmall({ fontWeight: "regular", lineHeight: "regular" })};
+	${headline.xxxsmall({ fontWeight: 'regular', lineHeight: 'regular' })};
 	/* TODO update with Source value when it's added */
 	${from.desktop} {
 		font-size: 15px;

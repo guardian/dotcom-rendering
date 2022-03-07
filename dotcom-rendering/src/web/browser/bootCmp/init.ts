@@ -63,27 +63,75 @@ const init = async (): Promise<void> => {
 
 	onConsentChange((consentState: ConsentState) => {
 		if (!consentState) return;
-
 		// Register changes in consent state with Ophan
-		const decideConsentString = () => {
+
+		/*
+			(Date: February 2022. Author: Pascal. This is a work in progress...)
+
+			### General Context
+
+			We are sending consent data from the client side to the datalake through Ophan, using Ophan Component Events.
+
+			We are using Ophan Component Events because consent events do not have a first class type in the Ophan pipeline
+			(this may change in the future)
+
+			At the moment we are using MANAGE_CONSENT as the default action while we develop this code.
+
+			### Encoding Conventions
+
+			At the moment, the payload is essentially contained in the `labels` attribute (an array of strings) of the
+			component object. We are going to encode consent data for more than one jusridiction. To make this unambiguous
+			we are going to use a specific convention.
+
+			Each element of the array represents a particular attribute. Note that the collection of attributes is different
+			from one jurisdiction to another. To have an unambiguous reading we prefix each attribute value with a code
+			that helps identify the attribute type.
+
+			An element of the array is then always of the form "<code>:<value>"
+
+			Codes:
+				01: Specify the jurisdiction. Accepted values: "TCF.v2" and "CCPA"
+				02: TCF.v2 Consent UUID
+				03: TCF.v2 Consent string
+				04: CCPA (Consent) UUID
+				05: Do not sell, boolean, with the serialization: true -> "true", false -> "false"
+
+			For TCF.v2, an exmaple of array is ["01:TCF.v2", "02:<consent UUID>"", "03:<consent string>""]
+			For CCPA,   an exmaple of array is ["01:CCPA", "04:<consent UUID>", "05:true"]
+
+			Note: it is possible to deprecate CODES, but they cannot the reused.
+		*/
+
+		const decideConsentCarrierLabels = () => {
 			if (consentState.tcfv2) {
-				return consentState.tcfv2?.tcString;
+				const consentUUID = getCookie({ name: 'consentUUID' }) || '';
+				const consentString = consentState.tcfv2?.tcString;
+				return [
+					'01:TCF.v2',
+					`02:${consentUUID}`,
+					`03:${consentString}`,
+				];
 			}
-			return '';
+			if (consentState.ccpa) {
+				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
+				const flag = consentState.ccpa?.doNotSell ? 'true' : 'false';
+				return ['01:CCPA', `04:${ccpaUUID}`, `05:${flag}`];
+			}
+			return [];
 		};
+
 		const componentType: OphanComponentType = 'CONSENT';
-		const consentUUID = getCookie({ name: 'consentUUID' }) || '';
-		const consentString = decideConsentString();
-		// I am using MANAGE_CONSENT as the default action while we develop this code (Pascal).
+
 		const action: OphanAction = 'MANAGE_CONSENT';
 		const event = {
 			component: {
 				componentType,
 				products: [],
-				labels: [consentUUID, consentString],
+				labels: decideConsentCarrierLabels(),
 			},
 			action,
 		};
+
 		submitComponentEvent(event);
 
 		// Check if we have consent for GA so that if the reader removes consent for tracking we

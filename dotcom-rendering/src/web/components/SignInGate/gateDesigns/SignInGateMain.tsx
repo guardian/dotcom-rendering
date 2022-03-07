@@ -1,4 +1,4 @@
-import { LinkButton, Link } from '@guardian/source-react-components';
+import { LinkButton, Link, Button } from '@guardian/source-react-components';
 import { cmp } from '@guardian/consent-management-platform';
 
 import { trackLink } from '../componentEventTracking';
@@ -70,7 +70,7 @@ export const SignInGateMain = ({
 					Register for free
 				</LinkButton>
 				{!isMandatory && (
-					<LinkButton
+					<Button
 						data-cy="sign-in-gate-main_dismiss"
 						data-ignore="global-link-styling"
 						css={laterButton}
@@ -82,7 +82,7 @@ export const SignInGateMain = ({
 						}}
 					>
 						I’ll do it later
-					</LinkButton>
+					</Button>
 				)}
 			</div>
 

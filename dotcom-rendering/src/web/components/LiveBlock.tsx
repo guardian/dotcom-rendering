@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
+import { joinUrl } from '@guardian/libs';
 import { renderArticleElement } from '../lib/renderElement';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -24,13 +25,13 @@ export const LiveBlock = ({
 	pageId,
 	webTitle,
 	adTargeting,
-	host,
+	host = 'https://www.theguardian.com',
 	ajaxUrl,
 	isLiveUpdate,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
-	const blockLink = `${pageId}#block-${block.id}`;
+	const blockLink = `${joinUrl(host, pageId)}#block-${block.id}`;
 
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
@@ -47,6 +48,8 @@ export const LiveBlock = ({
 			blockFirstPublished={block.blockFirstPublished}
 			blockLink={blockLink}
 			isLiveUpdate={isLiveUpdate}
+			contributors={block.contributors}
+			avatarBackgroundColor={palette.background.avatar}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({
