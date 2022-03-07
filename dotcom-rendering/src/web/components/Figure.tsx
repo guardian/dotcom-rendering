@@ -4,6 +4,7 @@ import { from, until, space } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
+	format: ArticleFormat;
 	isMainMedia: boolean;
 	role?: RoleType | 'richLink';
 	id?: string;
@@ -158,6 +159,7 @@ const mainMediaFigureStyles = css`
 
 export const Figure = ({
 	role = 'inline',
+	format,
 	children,
 	id,
 	isMainMedia,
