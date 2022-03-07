@@ -95,16 +95,9 @@ interface Props {
 	videoId: string;
 }
 
-interface StickyState {
-	isSticky: boolean;
-	isClosed: boolean;
-}
-
 export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
-	const [stickyState, setStickyState] = useState<StickyState>({
-		isSticky: false,
-		isClosed: false,
-	});
+	const [isSticky, setIsSticky] = useState(false);
+	const [isClosed, setIsClosed] = useState(false);
 
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.5,
@@ -112,14 +105,12 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 	});
 
 	useEffect(() => {
-		setStickyState({
-			isSticky: isPlaying && !isIntersecting,
-			isClosed: false,
-		});
+		setIsSticky(isPlaying && !isIntersecting);
+		setIsClosed(false);
 	}, [isIntersecting, isPlaying]);
 
 	useEffect(() => {
-		if (stickyState.isSticky) {
+		if (isSticky) {
 			submitComponentEvent({
 				component: {
 					componentType: 'STICKY_VIDEO',
@@ -127,7 +118,7 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 				},
 				action: 'STICK',
 			});
-		} else if (stickyState.isClosed) {
+		} else if (isClosed) {
 			submitComponentEvent({
 				component: {
 					componentType: 'STICKY_VIDEO',
@@ -144,25 +135,20 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 				action: 'RETURN',
 			});
 		}
-	}, [stickyState, videoId]);
+	}, [isSticky, isClosed, videoId]);
 
 	if (!videoId) return null;
 
 	return (
-		<div
-			ref={setRef}
-			css={stickyState.isSticky && stickyContainerStyles(192)}
-		>
-			<div css={stickyState.isSticky && stickyStyles}>
+		<div ref={setRef} css={isSticky && stickyContainerStyles(192)}>
+			<div css={isSticky && stickyStyles}>
 				<span css={hoverAreaStyles} />
-				{stickyState.isSticky && (
+				{isSticky && (
 					<button
 						css={buttonStyles}
 						onClick={() => {
-							setStickyState({
-								isSticky: false,
-								isClosed: true,
-							});
+							setIsClosed(true);
+							setIsSticky(false);
 						}}
 					>
 						<SvgCross size="medium" />
