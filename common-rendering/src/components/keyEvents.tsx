@@ -75,30 +75,6 @@ const keyEventWrapperStyles = (
 	`}
 `;
 
-<<<<<<< HEAD
-=======
-const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
-	li::before {
-		content: '';
-		display: block;
-		position: absolute;
-		top: 0;
-		left: -0.313rem;
-		height: 0.563rem;
-		width: 0.563rem;
-		border-radius: 50%;
-		background-color: ${neutral[46]};
-	}
-
-	${darkModeCss(supportsDarkMode)`
-		li::before {
-			border-color: transparent ${neutral[60]};
-			background-color: neutral[60];
-		}
-	`}
-`;
-
->>>>>>> 650cd85e5ee20b6bc71ba22c1a81be961672af43
 const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	padding-bottom: ${remSpace[3]};
 	border-left: 1px solid ${neutral[86]};
