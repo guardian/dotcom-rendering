@@ -2,6 +2,16 @@ import { css } from '@emotion/react';
 
 import { from, until, space } from '@guardian/source-foundations';
 
+type Props = {
+	children: React.ReactNode;
+	isMainMedia: boolean;
+	role?: RoleType | 'richLink';
+	id?: string;
+	isNumberedListTitle?: boolean;
+	className?: string;
+	type?: CAPIElement['_type'];
+};
+
 const roleCss = {
 	inline: css`
 		margin-top: ${space[3]}px;
@@ -140,16 +150,6 @@ export const defaultRoleStyles = (role: RoleType | 'richLink') => {
 		default:
 			return roleCss.inline;
 	}
-};
-
-type Props = {
-	children: React.ReactNode;
-	isMainMedia: boolean;
-	role?: RoleType | 'richLink';
-	id?: string;
-	isNumberedListTitle?: boolean;
-	className?: string;
-	type?: CAPIElement['_type'];
 };
 
 const mainMediaFigureStyles = css`
