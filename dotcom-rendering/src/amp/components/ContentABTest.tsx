@@ -21,8 +21,14 @@ interface ContentABTestContext {
  * @returns The test group the content is placed in
  */
 export const getGroup = (pageId: string): ContentABTestGroup => {
-	const hashedPageId = sha256(`/${pageId}`).words[0];
-	const group = Math.abs(hashedPageId) % NUM_GROUPS;
+	// Apply a SHA-256 hash to the page ID
+	// Add the leading slash as this will be present when we apply the equivalent algorithm at the analysis stage
+	const hashedPageId = sha256(`/${pageId}`);
+	// Take the last 4 bytes of the hash
+	const lastFourBytes = hashedPageId.words[hashedPageId.words.length - 1];
+	// Assign the group by applying mod base 12
+	// Mod can return negative values so we apply `Math.abs` to avoid negative groups
+	const group = Math.abs(lastFourBytes) % NUM_GROUPS;
 
 	if (isContentABTestGroup(group)) {
 		return group;
