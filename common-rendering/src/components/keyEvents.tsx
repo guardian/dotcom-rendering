@@ -129,6 +129,7 @@ const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	color: ${neutral[7]};
 	display: block;
 	top: -${remSpace[1]};
+	position: relative;
 
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[60]};
