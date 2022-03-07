@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { from, neutral } from '@guardian/source-foundations';
 import { SvgCross } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import { OphanAction, submitComponentEvent } from '../browser/ophan/ophan';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 
@@ -92,7 +92,7 @@ const stickyContainerStyles = (height: number) => css`
 interface Props {
 	isPlaying: boolean;
 	children: React.ReactNode;
-	id: string;
+	videoId: string;
 }
 
 interface StickyState {
@@ -100,7 +100,7 @@ interface StickyState {
 	isClosed: boolean;
 }
 
-export const StickyVideo = ({ isPlaying, children, id }: Props) => {
+export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 	const [stickyState, setStickyState] = useState<StickyState>({
 		isSticky: false,
 		isClosed: false,
@@ -119,25 +119,34 @@ export const StickyVideo = ({ isPlaying, children, id }: Props) => {
 	}, [isIntersecting, isPlaying]);
 
 	useEffect(() => {
-		const ophanTracking = (trackingEvent: OphanAction) => {
-			if (!id) return;
+		if (stickyState.isSticky) {
 			submitComponentEvent({
 				component: {
-					componentType: 'TIMELINE_ATOM',
-					id,
+					componentType: 'STICKY_VIDEO',
+					id: videoId,
 				},
-				action: trackingEvent,
+				action: 'STICK',
 			});
-		};
-
-		if (stickyState.isSticky) {
-			ophanTracking('STICK');
 		} else if (stickyState.isClosed) {
-			ophanTracking('CLOSE');
+			submitComponentEvent({
+				component: {
+					componentType: 'STICKY_VIDEO',
+					id: videoId,
+				},
+				action: 'CLOSE',
+			});
 		} else {
-			ophanTracking('RETURN');
+			submitComponentEvent({
+				component: {
+					componentType: 'STICKY_VIDEO',
+					id: videoId,
+				},
+				action: 'RETURN',
+			});
 		}
-	}, [stickyState, id]);
+	}, [stickyState, videoId]);
+
+	if (!videoId) return null;
 
 	return (
 		<div
@@ -150,7 +159,6 @@ export const StickyVideo = ({ isPlaying, children, id }: Props) => {
 					<button
 						css={buttonStyles}
 						onClick={() => {
-							isPlaying = false;
 							setStickyState({
 								isSticky: false,
 								isClosed: true,
