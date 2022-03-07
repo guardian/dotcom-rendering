@@ -293,6 +293,88 @@ export const FirstImage = () => {
 };
 FirstImage.story = { name: 'with an image as the first element' };
 
+export const ImageRoles = () => {
+	const block: Block = {
+		...baseBlock,
+		elements: [
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>Inline</p>',
+			},
+			{
+				...images[0],
+				role: 'inline',
+			},
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>Thumbnail</p>',
+			},
+			{
+				...images[0],
+				role: 'thumbnail',
+			},
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>Immersive</p>',
+			},
+			{
+				...images[0],
+				role: 'immersive',
+			},
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>Supporting</p>',
+			},
+			{
+				...images[0],
+				role: 'supporting',
+			},
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>Showcase</p>',
+			},
+			{
+				...images[0],
+				role: 'showcase',
+			},
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>Half width</p>',
+			},
+			{
+				...images[0],
+				role: 'halfWidth',
+			},
+		],
+	};
+	return (
+		<Wrapper>
+			<LiveBlock
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
+				format={{
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
+				}}
+				block={block}
+				pageId=""
+				webTitle=""
+				ajaxUrl=""
+			/>
+		</Wrapper>
+	);
+};
+ImageRoles.story = { name: 'with images at different roles' };
+
 export const ImageAndTitle = () => {
 	const block: Block = {
 		...baseBlock,
