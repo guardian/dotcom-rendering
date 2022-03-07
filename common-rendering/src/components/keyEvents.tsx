@@ -67,7 +67,7 @@ const keyEventWrapperStyles = (
 
 	${from.desktop} {
 		border-top: 1px solid ${neutral[86]};
-		padding-top: ${remSpace[2]};
+		padding-top: ${remSpace[3]};
 	}
 
 	${darkModeCss(supportsDarkMode)`
@@ -75,32 +75,10 @@ const keyEventWrapperStyles = (
 	`}
 `;
 
-const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
-	li::before {
-		content: "";
-		display: block;
-		position: absolute;
-		top: 0;
-		left: -0.313rem;
-		height: 0.563rem;
-		width: 0.563rem;
-		border-radius: 50%;
-		background-color: ${neutral[46]};
-	}
-
-	${darkModeCss(supportsDarkMode)`
-		li::before {
-			border-color: transparent ${neutral[60]};
-			background-color: neutral[60];
-		}
-	`}
-`;
-
 const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	padding-bottom: ${remSpace[3]};
 	border-left: 1px solid ${neutral[86]};
 	position: relative;
-	transform: translateY(-1px);
 	margin-left: ${remSpace[1]};
 	${darkModeCss(supportsDarkMode)`
 		border-left: 1px solid ${neutral[60]};
@@ -112,7 +90,49 @@ const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 
 const timeTextWrapperStyles: SerializedStyles = css`
 	margin-left: ${remSpace[4]};
-	margin-left: 0.5rem;
+`;
+
+const linkStyles = (
+	supportsDarkMode: boolean
+): SerializedStyles => css`
+	text-decoration: none;
+
+	&:hover:before {
+		background-color: ${neutral[46]};
+	}
+
+	&:before {
+		border-radius: 62.5rem;
+		display: block;
+		position: absolute;
+		content: ' ';
+		top: -${remSpace[1]};
+		left: -0.46875rem;
+		width: 0.9375rem;
+		height: 0.9375rem;
+		background-color: ${neutral[86]};
+	}
+
+	${darkModeCss(supportsDarkMode)`
+		&:hover:before {
+			background-color: ${neutral[86]};
+		}
+
+		&:before {
+			background-color: ${neutral[46]};
+		}
+	`}
+`;
+
+const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+	${textSans.xsmall({ fontWeight: "bold", lineHeight: "tight" })};
+	color: ${neutral[7]};
+	display: block;
+	top: -${remSpace[1]};
+
+	${darkModeCss(supportsDarkMode)`
+		color: ${neutral[60]};
+	`}
 `;
 
 const textStyles = (
@@ -150,37 +170,26 @@ const textStyles = (
 	`}
 `;
 
-const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
-	${textSans.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
-	color: ${neutral[7]};
-	display: block;
-	transform: translateY(-2.5px);
-
-	${darkModeCss(supportsDarkMode)`
-		color: ${neutral[60]};
-	`}
-`;
-
 const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
 	return (
 		<li css={listItemStyles(supportsDarkMode)}>
-			<div css={timeTextWrapperStyles}>
-				<time
-					dateTime={keyEvent.date.toISOString()}
-					data-relativeformat="med"
-					title={keyEvent.date.toLocaleTimeString()}
-					css={timeStyles(supportsDarkMode)}
-				>
-					{timeAgo(keyEvent.date.getTime(), { verbose: true })}
-				</time>
-				<Link
-					priority="secondary"
-					css={textStyles(format, supportsDarkMode)}
-					href={keyEvent.url}
-				>
-					{keyEvent.text}
-				</Link>
-			</div>
+			<Link
+				priority="secondary"
+				css={linkStyles(supportsDarkMode)}
+				href={keyEvent.url}
+			>
+				<div css={timeTextWrapperStyles}>
+					<time
+						dateTime={keyEvent.date.toISOString()}
+						data-relativeformat="med"
+						title={keyEvent.date.toLocaleTimeString()}
+						css={timeStyles(supportsDarkMode)}
+					>
+						{timeAgo(keyEvent.date.getTime(), { verbose: true })}
+					</time>
+					<span css={textStyles(format, supportsDarkMode)} >{keyEvent.text}</span>
+				</div>
+			</Link>
 		</li>
 	);
 };
@@ -199,7 +208,7 @@ const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
 				accordionTitle="Key events"
 				context="keyEvents"
 			>
-				<ul css={listStyles(supportsDarkMode)}>
+				<ul>
 					{keyEvents.slice(0, 7).map((event, index) => (
 						<ListItem
 							key={`${event.url}${index}`}
