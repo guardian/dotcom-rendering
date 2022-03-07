@@ -59,6 +59,27 @@ export const Dateline: React.FC<{
 	format: ArticleFormat;
 }> = ({ primaryDateline, secondaryDateline, format }) => {
 	const palette = decidePalette(format);
+
+	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
+		return (
+			<div
+				css={[
+					toggleClass,
+					datelineSpace,
+					captionFont,
+					format.design === ArticleDesign.LiveBlog &&
+						standfirstColouring(palette),
+				]}
+			>
+				<label css={labelStyles} htmlFor="dateToggle">
+					{primaryDateline}
+				</label>
+
+				<input css={toggleClass} type="checkbox" id="dateToggle" />
+				<p css={pStyle}>{secondaryDateline}</p>
+			</div>
+		);
+	}
 	return (
 		<div
 			css={[
@@ -68,27 +89,7 @@ export const Dateline: React.FC<{
 					standfirstColouring(palette),
 			]}
 		>
-			{secondaryDateline &&
-			!secondaryDateline.includes(primaryDateline) ? (
-				<div
-					css={[
-						toggleClass,
-						datelineSpace,
-						captionFont,
-						format.design === ArticleDesign.LiveBlog &&
-							standfirstColouring(palette),
-					]}
-				>
-					<label css={labelStyles} htmlFor="dateToggle">
-						{primaryDateline}
-					</label>
-
-					<input css={toggleClass} type="checkbox" id="dateToggle" />
-					<p css={pStyle}>{secondaryDateline}</p>
-				</div>
-			) : (
-				primaryDateline
-			)}
+			{primaryDateline}
 		</div>
 	);
 };
