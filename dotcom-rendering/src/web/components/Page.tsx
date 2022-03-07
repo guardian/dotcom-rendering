@@ -77,6 +77,13 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 				/>
 			</Island>
+			<Island clientOnly={true}>
+				<SetABTests
+					abTestSwitches={CAPI.config.switches}
+					pageIsSensitive={CAPI.config.isSensitive}
+					isDev={!!CAPI.config.isDev}
+				/>
+			</Island>
 			<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
 		</StrictMode>
 	);
