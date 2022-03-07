@@ -1,22 +1,30 @@
-import type { EmotionJSX } from '@emotion/react/types/jsx-namespace';
 import {
 	neutral,
-	focusHalo,
 	space,
 	textSans,
 	news,
 	from,
 } from '@guardian/source-foundations';
 import { useState } from 'react';
-import { Props, SvgMinus, SvgPlus } from '@guardian/source-react-components';
+import {
+	Button,
+	Props,
+	SvgMinus,
+	SvgPlus,
+} from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { css } from '@emotion/react';
+
+// TODO: replace with source pinned icon once this has been merged and released.
+// See PR here: https://github.com/guardian/source/pull/1292
+// See Ticket here: https://trello.com/c/xZr6SP9H/272-pinned-post-replace-local-pinned-svg-with-source
 import PinIcon from '../../static/icons/pin.svg';
 import { ServerSideOnly } from './ServerSideOnly';
 
 const pinnedPostContainer = css`
 	border: 3px solid ${news[300]};
-	margin-bottom: ${space[6]}px;
+	padding-bottom: ${space[1]}px;
+	margin-bottom: ${space[9]}px;
 	position: relative;
 	background: ${neutral[100]};
 `;
@@ -53,36 +61,17 @@ const overlay = css`
 `;
 
 const button = css`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	width: 20%;
 	background: ${news[300]};
-	cursor: pointer;
-	outline: none;
-	border: 0;
-	border-radius: 1rem;
-	height: 2rem;
-	bottom: -1rem;
 	margin-left: 0.625rem;
-	${textSans.small({ fontWeight: 'bold', lineHeight: 'tight' })};
-	color: ${neutral[100]};
+	position: absolute;
+	bottom: -1.5rem;
 
-	&:focus div {
-		${focusHalo};
-	}
 	&:hover {
 		background: ${news[400]};
 	}
+
 	${from.tablet} {
 		margin-left: 3.75rem;
-	}
-	svg {
-		margin-right: 5px;
-		fill: ${neutral[100]};
-		width: 18px;
-		height: 18px;
 	}
 `;
 
@@ -101,10 +90,7 @@ export interface PinnedPostProps extends Props {
 	children: React.ReactNode;
 }
 
-export const PinnedPost = ({
-	pinnedPost,
-	children,
-}: PinnedPostProps): EmotionJSX.Element => {
+export const PinnedPost = ({ pinnedPost, children }: PinnedPostProps) => {
 	const [expanded, setExpanded] = useState(false);
 	const isClient = typeof window !== 'undefined';
 	const showButton =
@@ -129,15 +115,15 @@ export const PinnedPost = ({
 
 			{!expanded && <div css={overlay} />}
 			{showButton && (
-				<button
-					type="button"
+				<Button
 					aria-expanded={expanded}
+					cssOverrides={button}
+					iconSide="left"
+					icon={expanded ? <SvgMinus /> : <SvgPlus />}
 					onClick={() => setExpanded(!expanded)}
-					css={button}
 				>
-					{expanded ? <SvgMinus /> : <SvgPlus />}
 					{expanded ? 'Show Less' : 'Show More'}
-				</button>
+				</Button>
 			)}
 		</div>
 	);
