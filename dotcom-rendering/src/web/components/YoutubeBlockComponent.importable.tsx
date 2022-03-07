@@ -88,14 +88,10 @@ export const YoutubeBlockComponent = ({
 	origin,
 	stickyVideos,
 }: Props): JSX.Element => {
-	const [isPlaying, setIsPlaying] = useState(false);
+	let isPlaying: boolean = false;
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
-
-	// TODO: connect StickyVideo wrapper once
-	// feature flag is operational
-	console.log('Videos should stick', stickyVideos);
 
 	useEffect(() => {
 		const defineConsentState = async () => {
@@ -177,9 +173,9 @@ export const YoutubeBlockComponent = ({
 
 	const videoState = (trackingEvent: string) => {
 		if (trackingEvent === 'play') {
-			setIsPlaying(true);
+			isPlaying = true;
 		} else if (trackingEvent === 'end') {
-			setIsPlaying(false);
+			isPlaying = false;
 		}
 	};
 
