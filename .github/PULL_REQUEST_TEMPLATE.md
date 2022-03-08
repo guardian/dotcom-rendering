@@ -3,6 +3,8 @@
 
 ## Why?
 
-### Before
+## Screenshots
 
-### After
+| **Before** | **After** |
+|------------|-----------|
+| Image      | Image     |
