@@ -1,4 +1,5 @@
 import { adJson, stringify } from '../lib/ad-json';
+import { RTCParameters } from '../lib/real-time-config';
 
 // Largest size first
 const inlineSizes = [
@@ -103,7 +104,7 @@ export interface BaseAdProps {
 
 interface AdProps extends BaseAdProps {
 	isSticky?: boolean;
-	placementId: number;
+	rtcParameters: RTCParameters;
 }
 
 export const Ad = ({
@@ -114,7 +115,7 @@ export const Ad = ({
 	commercialProperties,
 	adTargeting,
 	config: { useAmazon, usePrebid, usePermutive },
-	placementId,
+	rtcParameters,
 }: AdProps) => {
 	const adSizes = isSticky ? stickySizes : inlineSizes;
 	// Set Primary ad size as first element (should be the largest)
@@ -149,7 +150,7 @@ export const Ad = ({
 				usePrebid,
 				usePermutive,
 				useAmazon,
-				placementId,
+				rtcParameters.placementId,
 			)}
 		/>
 	);
