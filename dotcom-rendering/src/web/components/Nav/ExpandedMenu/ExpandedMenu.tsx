@@ -119,7 +119,7 @@ export const ExpandedMenu: React.FC<{
 					data-testid="expanded-menu"
 					data-cy="expanded-menu"
 				>
-					<Columns nav={nav} />
+					<Columns display={display} nav={nav} />
 				</div>
 			</div>
 		</div>

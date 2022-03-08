@@ -9,11 +9,12 @@ import {
 	from,
 } from '@guardian/source-foundations';
 
+import { ArticleDisplay } from '@guardian/libs';
 import { Column } from './Column';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { MoreColumn } from './MoreColumn';
 
-const columnsStyle = css`
+const columnsStyle = (display: ArticleDisplay) => css`
 	box-sizing: border-box;
 	max-width: none;
 	${from.desktop} {
@@ -22,8 +23,12 @@ const columnsStyle = css`
 		position: relative;
 		margin: 0 auto;
 		display: flex;
-		border-left: 1px solid ${brand[600]};
-		border-right: 1px solid ${brand[600]};
+		border-left: ${display === ArticleDisplay.Immersive
+			? 'none'
+			: `1px solid ${brand[600]}`};
+		border-right: ${display === ArticleDisplay.Immersive
+			? 'none'
+			: `1px solid ${brand[600]}`};
 		border-top: 1px solid ${brand[600]};
 	}
 	${from.leftCol} {
@@ -112,9 +117,10 @@ const brandExtensionLink = css`
 `;
 
 export const Columns: React.FC<{
+	display: ArticleDisplay;
 	nav: NavType;
-}> = ({ nav }) => (
-	<ul css={columnsStyle} role="menubar" data-cy="nav-menu-columns">
+}> = ({ display, nav }) => (
+	<ul css={columnsStyle(display)} role="menubar" data-cy="nav-menu-columns">
 		{nav.pillars.map((column, i) => (
 			<Column
 				column={column}
