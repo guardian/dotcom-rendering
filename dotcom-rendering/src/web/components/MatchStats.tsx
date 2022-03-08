@@ -33,7 +33,6 @@ const StatsGrid = ({
 	children: React.ReactNode;
 	format: ArticleFormat;
 }) => {
-
 	const palette = decidePalette(format);
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:

@@ -957,7 +957,7 @@ const backgroundMatchStats = (format: ArticleFormat): string => {
 		case ArticleDesign.DeadBlog:
 			return neutral[97];
 		default:
-			return "#d9edf6";
+			return '#d9edf6';
 	}
 };
 
