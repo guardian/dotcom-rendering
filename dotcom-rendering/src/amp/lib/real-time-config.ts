@@ -9,6 +9,9 @@ type Config =
 
 export type RTCParameters = {
 	placementId: number;
+	tagId: string;
+	profileId: string;
+	pubId: string;
 };
 
 /**
@@ -36,8 +39,37 @@ const getPlacementId = (config: Config): number => {
 	}
 };
 
+const getTagId = (config: Config): string => {
+	if (!config.isSticky) {
+		switch (config.adRegion) {
+			case 'UK':
+				return '6214ca675cf18e70cbaeef37_6214c9a4b73a6613d4aeef2f';
+			case 'US':
+				return '6214cb381a577cd525aeef3f_6214caacb52b565527aeef39';
+			case 'AU':
+				return '6214cbe6a24103508faeef45_6214cb50aac9c1160daeef40';
+			// Do the same as for sticky
+			default:
+				break;
+		}
+	}
+	return '6214ca56243f4ff4f5aeef36_6214c723c70856442e4d79f2';
+};
+
+const getPubAndProfileIds = ({}: Config): {
+	pubId: string;
+	profileId: string;
+} => {
+	return {
+		profileId: '6611',
+		pubId: '157207',
+	};
+};
+
 export const getRTCParameters = (config: Config): RTCParameters => ({
 	placementId: getPlacementId(config),
+	tagId: getTagId(config),
+	...getPubAndProfileIds(config),
 });
 
 const permutiveURL = 'https://guardian.amp.permutive.com/rtc?type=doubleclick';
@@ -53,11 +85,13 @@ export const realTimeConfig = ({
 	url = undefined,
 	usePermutive = false,
 	useAmazon = false,
+	timeoutMillis,
 }: {
 	vendors?: Record<string, unknown>;
 	url?: string;
 	usePermutive?: boolean;
 	useAmazon?: boolean;
+	timeoutMillis?: number;
 }): string => {
 	const data = {
 		urls: [url, usePermutive ? permutiveURL : undefined].filter(
@@ -67,6 +101,7 @@ export const realTimeConfig = ({
 			...vendors,
 			...(useAmazon ? amazonConfig : {}),
 		},
+		...(timeoutMillis ? { timeoutMillis: 1000 } : {}),
 	};
 	return JSON.stringify(data);
 };

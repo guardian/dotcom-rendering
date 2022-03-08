@@ -1,5 +1,6 @@
 import { adJson, stringify } from '../lib/ad-json';
 import { realTimeConfig, RTCParameters } from '../lib/real-time-config';
+import { useContentABTestGroup } from './ContentABTest';
 
 // Largest size first
 const inlineSizes = [
@@ -25,6 +26,8 @@ const ampData = (section: string, contentType: string): string => {
 
 const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
 
+const relevantYieldURLPrefix = 'https://pbs.relevant-digital.com/openrtb2/amp';
+
 const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	const adTargetingMapped: AdTargetParam[] = [];
 
@@ -47,32 +50,71 @@ const useRealTimeConfig = (
 	usePrebid: boolean,
 	usePermutive: boolean,
 	useAmazon: boolean,
-	{ placementId }: RTCParameters,
+	{ placementId, tagId, profileId, pubId }: RTCParameters,
 ): string => {
-	const prebidURL = [
-		// The tag_id in the URL is used to look up the bulk of the request
-		// In this case it corresponds to the placement ID of the bid requests
-		// on the prebid server
-		`${preBidServerPrefix}?tag_id=${placementId}`,
-		'w=ATTR(width)',
-		'h=ATTR(height)',
-		'ow=ATTR(data-override-width)',
-		'oh=ATTR(data-override-height)',
-		'ms=ATTR(data-multi-size)',
-		'slot=ATTR(data-slot)',
-		'targeting=TGT',
-		'curl=CANONICAL_URL',
-		'timeout=TIMEOUT',
-		'adcid=ADCID',
-		'purl=HREF',
-		'gdpr_consent=CONSENT_STRING',
-	].join('&');
+	const { group } = useContentABTestGroup();
 
-	return realTimeConfig({
-		url: usePrebid ? prebidURL : undefined,
-		usePermutive,
-		useAmazon,
-	});
+	// Control variant / Testing not enabled
+	if (group === undefined || [0, 1, 2, 3].includes(group)) {
+		const prebidURL = [
+			// The tag_id in the URL is used to look up the bulk of the request
+			// In this case it corresponds to the placement ID of the bid requests
+			// on the prebid server
+			`${preBidServerPrefix}?tag_id=${placementId}`,
+			'w=ATTR(width)',
+			'h=ATTR(height)',
+			'ow=ATTR(data-override-width)',
+			'oh=ATTR(data-override-height)',
+			'ms=ATTR(data-multi-size)',
+			'slot=ATTR(data-slot)',
+			'targeting=TGT',
+			'curl=CANONICAL_URL',
+			'timeout=TIMEOUT',
+			'adcid=ADCID',
+			'purl=HREF',
+			'gdpr_consent=CONSENT_STRING',
+		].join('&');
+
+		return realTimeConfig({
+			url: usePrebid ? prebidURL : undefined,
+			usePermutive,
+			useAmazon,
+		});
+	}
+
+	// Relevant Yield variant
+	if ([4, 5, 6, 7].includes(group)) {
+		const relevantYieldURL = [
+			`${relevantYieldURLPrefix}?tag_id=${tagId}`,
+			'tgt_pfx=rv',
+			'gdpr_consent=CONSENT_STRING',
+		].join('&');
+
+		return realTimeConfig({
+			url: usePrebid ? relevantYieldURL : undefined,
+			usePermutive,
+			useAmazon,
+		});
+	}
+
+	// Pubmatic variant
+	if ([8, 9, 10, 11].includes(group)) {
+		const pubmaticConfig = {
+			openwrap: {
+				PROFILE_ID: profileId,
+				PUB_ID: pubId,
+			},
+		};
+
+		return realTimeConfig({
+			vendors: usePrebid ? pubmaticConfig : {},
+			usePermutive,
+			useAmazon,
+			timeoutMillis: 1000,
+		});
+	}
+
+	throw Error(':(');
 };
 
 interface CommercialConfig {
@@ -111,6 +153,13 @@ export const Ad = ({
 	// Secondary ad sizes
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
 
+	const rtcConfig = useRealTimeConfig(
+		usePrebid,
+		usePermutive,
+		useAmazon,
+		rtcParameters,
+	);
+
 	return (
 		<amp-ad
 			data-block-on-consent=""
@@ -134,12 +183,7 @@ export const Ad = ({
 				]),
 			)}
 			data-slot={ampData(section, contentType)}
-			rtc-config={useRealTimeConfig(
-				usePrebid,
-				usePermutive,
-				useAmazon,
-				rtcParameters,
-			)}
+			rtc-config={rtcConfig}
 		/>
 	);
 };
