@@ -1,6 +1,18 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 
 import { from, until, space } from '@guardian/source-foundations';
+
+type Props = {
+	children: React.ReactNode;
+	format: ArticleFormat;
+	isMainMedia: boolean;
+	role?: RoleType | 'richLink';
+	id?: string;
+	isNumberedListTitle?: boolean;
+	className?: string;
+	type?: CAPIElement['_type'];
+};
 
 const roleCss = {
 	inline: css`
@@ -121,7 +133,10 @@ const roleCss = {
 };
 
 // Used for vast majority of layouts.
-export const defaultRoleStyles = (role: RoleType | 'richLink') => {
+export const defaultRoleStyles = (
+	role: RoleType | 'richLink',
+	format: ArticleFormat,
+) => {
 	switch (role) {
 		case 'inline':
 			return roleCss.inline;
@@ -132,7 +147,20 @@ export const defaultRoleStyles = (role: RoleType | 'richLink') => {
 		case 'showcase':
 			return roleCss.showcase;
 		case 'thumbnail':
-			return roleCss.thumbnail;
+			switch (format.design) {
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					// In blogs we don't want to use negative left margins
+					return css`
+						${roleCss.thumbnail}
+						/* It's important we use the media query here to ensure we override the default values */
+						${from.leftCol} {
+							margin-left: 0px;
+						}
+					`;
+				default:
+					return roleCss.thumbnail;
+			}
 		case 'richLink':
 			return roleCss.richLink;
 		case 'halfWidth':
@@ -142,22 +170,13 @@ export const defaultRoleStyles = (role: RoleType | 'richLink') => {
 	}
 };
 
-type Props = {
-	children: React.ReactNode;
-	isMainMedia: boolean;
-	role?: RoleType | 'richLink';
-	id?: string;
-	isNumberedListTitle?: boolean;
-	className?: string;
-	type?: CAPIElement['_type'];
-};
-
 const mainMediaFigureStyles = css`
 	height: 100%;
 `;
 
 export const Figure = ({
 	role = 'inline',
+	format,
 	children,
 	id,
 	isMainMedia,
@@ -192,7 +211,7 @@ export const Figure = ({
 	return (
 		<figure
 			id={id}
-			css={defaultRoleStyles(role)}
+			css={defaultRoleStyles(role, format)}
 			data-spacefinder-component={spacefinderComponent}
 			data-spacefinder-role={role}
 			data-spacefinder-type={type}
