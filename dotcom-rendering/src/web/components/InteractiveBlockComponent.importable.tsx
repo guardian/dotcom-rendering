@@ -289,7 +289,7 @@ export const InteractiveBlockComponent = ({
 				id={elementId} // boot scripts use id when inserting interactive content
 				ref={wrapperRef}
 				css={[
-					defaultRoleStyles(role),
+					defaultRoleStyles(role, format),
 					wrapperStyle({ format, role, loaded, palette }),
 				]}
 				className={interactiveLegacyFigureClasses(
