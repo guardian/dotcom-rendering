@@ -146,40 +146,44 @@ const StatsGrid = ({
 };
 
 const StretchBackground = ({
-	palette,
+	format,
 	children,
 }: {
-	palette: Palette;
+	format: ArticleFormat;
 	children: React.ReactNode;
-}) => (
-	<div
-		css={css`
-			clear: left;
-			position: relative;
-			flex-grow: 1;
-			padding: ${space[2]}px 10px;
-			/* We use min-height to help reduce our CLS value */
-			min-height: 800px;
-			background-color: ${palette.background.matchStats};
+}) => {
+	const palette = decidePalette(format);
 
-			${from.leftCol} {
-				:before {
-					content: '';
-					position: absolute;
-					top: 0;
-					bottom: 0;
-					/* stretch left */
-					left: -100vw;
-					right: 0;
-					background-color: ${palette.background.matchStats};
-					z-index: -1;
+	return (
+		<div
+			css={css`
+				clear: left;
+				position: relative;
+				flex-grow: 1;
+				padding: ${space[2]}px 10px;
+				/* We use min-height to help reduce our CLS value */
+				min-height: 800px;
+				background-color: ${palette.background.matchStats};
+
+				${from.leftCol} {
+					:before {
+						content: '';
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						/* stretch left */
+						left: -100vw;
+						right: 0;
+						background-color: ${palette.background.matchStats};
+						z-index: -1;
+					}
 				}
-			}
-		`}
-	>
-		{children}
-	</div>
-);
+			`}
+		>
+			{children}
+		</div>
+	);
+};
 
 const ShiftLeft = ({
 	children,
@@ -341,10 +345,8 @@ const DecideDoughnut = ({
 };
 
 export const MatchStats = ({ home, away, format }: Props) => {
-	const palette = decidePalette(format);
-
 	return (
-		<StretchBackground palette={palette}>
+		<StretchBackground format={format}>
 			<StatsGrid format={format}>
 				<GridItem area="title" element="aside">
 					<ShiftLeft format={format}>
@@ -386,7 +388,7 @@ export const MatchStats = ({ home, away, format }: Props) => {
 							offTarget: away.shotsOff,
 							color: away.colours,
 						}}
-						palette={palette}
+						format={format}
 					/>
 				</GridItem>
 				<GridItem area="corners">
