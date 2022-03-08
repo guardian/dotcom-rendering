@@ -298,58 +298,34 @@ export const ImageRoles = () => {
 		...baseBlock,
 		elements: [
 			{
-				elementId: '1',
-				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				html: '<p>Inline</p>',
-			},
-			{
 				...images[0],
 				role: 'inline',
-			},
-			{
-				elementId: '1',
-				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				html: '<p>Thumbnail</p>',
+				title: 'Inline',
 			},
 			{
 				...images[0],
 				role: 'thumbnail',
-			},
-			{
-				elementId: '1',
-				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				html: '<p>Immersive</p>',
+				title: 'Thumbnail',
 			},
 			{
 				...images[0],
 				role: 'immersive',
-			},
-			{
-				elementId: '1',
-				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				html: '<p>Supporting</p>',
+				title: 'Immersive',
 			},
 			{
 				...images[0],
 				role: 'supporting',
-			},
-			{
-				elementId: '1',
-				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				html: '<p>Showcase</p>',
+				title: 'Supporting',
 			},
 			{
 				...images[0],
 				role: 'showcase',
-			},
-			{
-				elementId: '1',
-				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-				html: '<p>Half width</p>',
+				title: 'Showcase',
 			},
 			{
 				...images[0],
 				role: 'halfWidth',
+				title: 'Half width',
 			},
 		],
 	};
