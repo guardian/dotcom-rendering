@@ -97,7 +97,7 @@ interface Props {
 
 export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
-	const [isClosed, setIsClosed] = useState(false);
+	const [wasClosed, setWasClosed] = useState(false);
 
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.5,
@@ -106,7 +106,7 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 
 	useEffect(() => {
 		setIsSticky(isPlaying && !isIntersecting);
-		setIsClosed(false);
+		setWasClosed(false);
 	}, [isIntersecting, isPlaying]);
 
 	useEffect(() => {
@@ -118,7 +118,7 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 				},
 				action: 'STICK',
 			});
-		} else if (isClosed) {
+		} else if (wasClosed) {
 			submitComponentEvent({
 				component: {
 					componentType: 'STICKY_VIDEO',
@@ -135,7 +135,7 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 				action: 'RETURN',
 			});
 		}
-	}, [isSticky, isClosed, videoId]);
+	}, [isSticky, wasClosed, videoId]);
 
 	return (
 		<div ref={setRef} css={isSticky && stickyContainerStyles(192)}>
@@ -145,7 +145,7 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 					<button
 						css={buttonStyles}
 						onClick={() => {
-							setIsClosed(true);
+							setWasClosed(true);
 							setIsSticky(false);
 						}}
 					>
