@@ -1,5 +1,5 @@
 import { adJson, stringify } from '../lib/ad-json';
-import { RTCParameters } from '../lib/real-time-config';
+import { realTimeConfig, RTCParameters } from '../lib/real-time-config';
 
 // Largest size first
 const inlineSizes = [
@@ -24,10 +24,6 @@ const ampData = (section: string, contentType: string): string => {
 };
 
 const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
-const permutiveURL = 'https://guardian.amp.permutive.com/rtc?type=doubleclick';
-const amazonConfig = {
-	aps: { PUB_ID: '3722', PARAMS: { amp: '1' } },
-};
 
 const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	const adTargetingMapped: AdTargetParam[] = [];
@@ -47,17 +43,17 @@ const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	return adTargetingMapped;
 };
 
-const realTimeConfig = (
+const useRealTimeConfig = (
 	usePrebid: boolean,
 	usePermutive: boolean,
 	useAmazon: boolean,
-	placementID: number,
+	{ placementId }: RTCParameters,
 ): string => {
 	const prebidURL = [
 		// The tag_id in the URL is used to look up the bulk of the request
 		// In this case it corresponds to the placement ID of the bid requests
 		// on the prebid server
-		`${preBidServerPrefix}?tag_id=${placementID}`,
+		`${preBidServerPrefix}?tag_id=${placementId}`,
 		'w=ATTR(width)',
 		'h=ATTR(height)',
 		'ow=ATTR(data-override-width)',
@@ -72,19 +68,11 @@ const realTimeConfig = (
 		'gdpr_consent=CONSENT_STRING',
 	].join('&');
 
-	const urls = [
-		usePrebid ? prebidURL : '',
-		usePermutive ? permutiveURL : '',
-	].filter(Boolean); // remove empty strings, which are falsey
-
-	const vendors = useAmazon ? amazonConfig : {};
-
-	const data = {
-		urls,
-		vendors,
-	};
-
-	return JSON.stringify(data);
+	return realTimeConfig({
+		url: usePrebid ? prebidURL : undefined,
+		usePermutive,
+		useAmazon,
+	});
 };
 
 interface CommercialConfig {
@@ -146,11 +134,11 @@ export const Ad = ({
 				]),
 			)}
 			data-slot={ampData(section, contentType)}
-			rtc-config={realTimeConfig(
+			rtc-config={useRealTimeConfig(
 				usePrebid,
 				usePermutive,
 				useAmazon,
-				rtcParameters.placementId,
+				rtcParameters,
 			)}
 		/>
 	);

@@ -39,3 +39,34 @@ const getPlacementId = (config: Config): number => {
 export const getRTCParameters = (config: Config): RTCParameters => ({
 	placementId: getPlacementId(config),
 });
+
+const permutiveURL = 'https://guardian.amp.permutive.com/rtc?type=doubleclick';
+
+const amazonConfig = {
+	aps: { PUB_ID: '3722', PARAMS: { amp: '1' } },
+};
+
+const notUndefined = <T>(x: T | undefined): x is T => x !== undefined;
+
+export const realTimeConfig = ({
+	vendors = {},
+	url = undefined,
+	usePermutive = false,
+	useAmazon = false,
+}: {
+	vendors?: Record<string, unknown>;
+	url?: string;
+	usePermutive?: boolean;
+	useAmazon?: boolean;
+}): string => {
+	const data = {
+		urls: [url, usePermutive ? permutiveURL : undefined].filter(
+			notUndefined,
+		),
+		vendors: {
+			...vendors,
+			...(useAmazon ? amazonConfig : {}),
+		},
+	};
+	return JSON.stringify(data);
+};
