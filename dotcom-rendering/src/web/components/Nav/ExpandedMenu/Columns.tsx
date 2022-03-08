@@ -24,6 +24,7 @@ const columnsStyle = css`
 		display: flex;
 		border-left: 1px solid ${brand[600]};
 		border-right: 1px solid ${brand[600]};
+		border-top: 1px solid ${brand[600]};
 	}
 	${from.leftCol} {
 		max-width: 1140px;
