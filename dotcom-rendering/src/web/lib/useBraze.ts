@@ -1,4 +1,5 @@
-import { BrazeMessagesInterface } from '@guardian/braze-components';
+import type { BrazeMessagesInterface } from '@guardian/braze-components';
+import { NullBrazeMessages } from '@guardian/braze-components/logic';
 import useSWRImmutable from 'swr/immutable';
 import { buildBrazeMessages } from './braze/buildBrazeMessages';
 
@@ -12,27 +13,16 @@ import { buildBrazeMessages } from './braze/buildBrazeMessages';
  *
  * [doc]: https://swr.vercel.app/docs/revalidation#disable-automatic-revalidations
  */
-export const useBraze = (idApiUrl: string): Promise<BrazeMessagesInterface> => {
-	let resolver: (
-		value: BrazeMessagesInterface | PromiseLike<BrazeMessagesInterface>,
-	) => void;
-	let rejecter: (reason?: string) => void;
-
-	const promise: Promise<BrazeMessagesInterface> = new Promise(
-		(resolve, reject) => {
-			resolver = resolve;
-			rejecter = reject;
-		},
+export const useBraze = (
+	idApiUrl: string,
+): BrazeMessagesInterface | undefined => {
+	const { data, error } = useSWRImmutable('braze-message', () =>
+		buildBrazeMessages(idApiUrl),
 	);
 
-	useSWRImmutable('braze-message', () => buildBrazeMessages(idApiUrl), {
-		onSuccess: (data: BrazeMessagesInterface) => {
-			resolver(data);
-		},
-		onError: () => {
-			rejecter('Failed to run buildBrazeMessages');
-		},
-	});
+	if (error) {
+		return new NullBrazeMessages();
+	}
 
-	return promise;
+	return data;
 };

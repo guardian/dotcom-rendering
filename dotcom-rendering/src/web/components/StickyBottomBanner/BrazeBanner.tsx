@@ -42,7 +42,7 @@ const containerStyles = css`
 // OR
 // - The force-braze-message query string arg is passed
 export const canShowBrazeBanner = async (
-	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
+	brazeMessages: BrazeMessagesInterface,
 	brazeArticleContext: BrazeArticleContext,
 ): Promise<CanShowResult<Meta>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
@@ -54,7 +54,6 @@ export const canShowBrazeBanner = async (
 	}
 
 	try {
-		const brazeMessages = await brazeMessagesPromise;
 		const message = await brazeMessages.getMessageForBanner(
 			brazeArticleContext,
 		);

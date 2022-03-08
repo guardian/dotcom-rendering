@@ -185,7 +185,7 @@ const buildReaderRevenueBannerConfig = buildRRBannerConfigWith({
 });
 
 const buildBrazeBanner = (
-	brazeMessages: Promise<BrazeMessagesInterface>,
+	brazeMessages: BrazeMessagesInterface,
 	brazeArticleContext: BrazeArticleContext,
 ): CandidateConfig<any> => ({
 	candidate: {
@@ -278,7 +278,7 @@ const StickyBottomBannerWithAB = ({
 			section: sectionName,
 		};
 		const brazeBanner = buildBrazeBanner(
-			brazeMessages,
+			brazeMessages as BrazeMessagesInterface,
 			brazeArticleContext,
 		);
 		const bannerConfig: SlotConfig = {

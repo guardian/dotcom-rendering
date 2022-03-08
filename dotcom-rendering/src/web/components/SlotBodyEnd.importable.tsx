@@ -58,7 +58,7 @@ const buildReaderRevenueEpicConfig = (
 };
 
 const buildBrazeEpicConfig = (
-	brazeMessages: Promise<BrazeMessagesInterface>,
+	brazeMessages: BrazeMessagesInterface,
 	countryCode: string,
 	idApiUrl: string,
 	brazeArticleContext: BrazeArticleContext,
@@ -146,7 +146,7 @@ const SlotBodyEndWithAB = ({
 			section: sectionName,
 		};
 		const brazeEpic = buildBrazeEpicConfig(
-			brazeMessages,
+			brazeMessages as BrazeMessagesInterface,
 			countryCode as string,
 			idApiUrl,
 			brazeArticleContext,
