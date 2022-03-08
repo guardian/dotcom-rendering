@@ -137,8 +137,6 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 		}
 	}, [isSticky, isClosed, videoId]);
 
-	if (!videoId) return null;
-
 	return (
 		<div ref={setRef} css={isSticky && stickyContainerStyles(192)}>
 			<div css={isSticky && stickyStyles}>
