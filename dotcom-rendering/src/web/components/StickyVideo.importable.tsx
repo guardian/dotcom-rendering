@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { VideoControls } from '@guardian/atoms-rendering/dist/types/types';
 import { from, neutral } from '@guardian/source-foundations';
 import { SvgCross } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
@@ -91,9 +92,14 @@ const stickyContainerStyles = (height: number) => css`
 interface Props {
 	isActive: boolean;
 	children: React.ReactNode;
+	setVideoControls: (arg: VideoControls) => void;
 }
 
-export const StickyVideo = ({ isActive, children }: Props) => {
+export const StickyVideo = ({
+	isActive,
+	children,
+	setVideoControls,
+}: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.5,
@@ -101,7 +107,7 @@ export const StickyVideo = ({ isActive, children }: Props) => {
 	});
 
 	useEffect(() => {
-		setIsSticky(isActive && isIntersecting);
+		setIsSticky(isActive && !isIntersecting);
 	}, [isIntersecting, isActive]);
 
 	return (
@@ -111,7 +117,10 @@ export const StickyVideo = ({ isActive, children }: Props) => {
 				{isSticky && (
 					<button
 						css={buttonStyles}
-						onClick={() => setIsSticky(false)}
+						onClick={() => {
+							setIsSticky(false);
+							setVideoControls('stop');
+						}}
 					>
 						<SvgCross size="medium" />
 					</button>

@@ -6,6 +6,7 @@ import { SvgAlertRound } from '@guardian/source-react-components';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 
+import { VideoControls } from '@guardian/atoms-rendering/dist/types/types';
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
 
@@ -88,10 +89,15 @@ export const YoutubeBlockComponent = ({
 	origin,
 	stickyVideos,
 }: Props): JSX.Element => {
-	let isPlaying: boolean = false;
+	const [isPlaying, setIsPlaying] = useState<boolean>(false);
+	const [videoControls, setVideoControls] = useState<VideoControls>();
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
+
+	useEffect(() => {
+		setVideoControls(undefined);
+	}, [videoControls]);
 
 	useEffect(() => {
 		const defineConsentState = async () => {
@@ -172,17 +178,26 @@ export const YoutubeBlockComponent = ({
 	};
 
 	const videoState = (trackingEvent: string) => {
-		if (trackingEvent === 'play') {
-			isPlaying = true;
-		} else if (trackingEvent === 'end') {
-			isPlaying = false;
+		switch (trackingEvent) {
+			case 'play':
+			case 'resume':
+				return setIsPlaying(true);
+			case 'cued':
+			case 'end':
+			case 'paused':
+			default:
+				return setIsPlaying(false);
 		}
 	};
 
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
-			<StickyVideo isActive={isPlaying && !!stickyVideos}>
+			<StickyVideo
+				isActive={isPlaying && !!stickyVideos}
+				setVideoControls={setVideoControls}
+			>
 				<YoutubeAtom
+					videoControls={videoControls}
 					assetId={assetId}
 					overrideImage={
 						overrideImage
