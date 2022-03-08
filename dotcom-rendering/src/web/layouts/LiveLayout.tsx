@@ -12,6 +12,7 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { Hide } from '@guardian/source-react-components';
 import { StarRating } from '../components/StarRating/StarRating';
@@ -35,7 +36,7 @@ import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { Pagination } from '../components/Pagination';
+
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';

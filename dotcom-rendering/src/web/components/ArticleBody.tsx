@@ -112,6 +112,8 @@ export const ArticleBody = ({
 					className="js-liveblog-body"
 					css={[
 						globalStrongStyles,
+						globalH2Styles(format.display),
+						globalH3Styles(format.display),
 						globalLinkStyles(palette),
 						// revealStyles is used to animate the reveal of new blocks
 						format.design === ArticleDesign.LiveBlog &&

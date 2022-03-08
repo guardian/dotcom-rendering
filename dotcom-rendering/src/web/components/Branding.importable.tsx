@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-
 import { neutral, until, textSans } from '@guardian/source-foundations';
+import { trackSponsorLogoLinkClick } from '../browser/ga/ga';
 
 const brandingStyle = css`
 	padding-bottom: 10px;
@@ -47,6 +47,12 @@ export const Branding: React.FC<{
 					data-sponsor={branding.sponsorName.toLowerCase()}
 					rel="nofollow"
 					aria-label={`Visit the ${branding.sponsorName} website`}
+					onClick={() =>
+						trackSponsorLogoLinkClick(
+							branding.sponsorName.toLowerCase(),
+						)
+					}
+					data-cy="branding-logo"
 				>
 					<img src={branding.logo.src} alt={branding.sponsorName} />
 				</a>

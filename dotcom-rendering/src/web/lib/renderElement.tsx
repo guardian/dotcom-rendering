@@ -793,6 +793,7 @@ export const renderArticleElement = ({
 					: ''
 			}
 			type={element._type}
+			format={format}
 		>
 			{el}
 		</Figure>

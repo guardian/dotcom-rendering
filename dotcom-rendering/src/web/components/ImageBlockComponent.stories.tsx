@@ -56,7 +56,15 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 export const StandardArticle = () => {
 	return (
 		<Container>
-			<Figure isMainMedia={false} role="inline">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="inline"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
@@ -76,7 +84,15 @@ StandardArticle.story = {
 export const Immersive = () => {
 	return (
 		<Container>
-			<Figure isMainMedia={false} role="immersive">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="immersive"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'immersive' }}
 					format={{
@@ -96,7 +112,15 @@ Immersive.story = {
 export const Showcase = () => {
 	return (
 		<Container>
-			<Figure isMainMedia={false} role="showcase">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="showcase"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'showcase' }}
 					format={{
@@ -116,7 +140,15 @@ Showcase.story = {
 export const Thumbnail = () => {
 	return (
 		<Container>
-			<Figure isMainMedia={false} role="thumbnail">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="thumbnail"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'thumbnail' }}
 					format={{
@@ -136,7 +168,15 @@ Thumbnail.story = {
 export const Supporting = () => {
 	return (
 		<Container>
-			<Figure isMainMedia={false} role="supporting">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="supporting"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'supporting' }}
 					format={{
@@ -156,7 +196,15 @@ Supporting.story = {
 export const HideCaption = () => {
 	return (
 		<Container>
-			<Figure isMainMedia={false} role="inline">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="inline"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
@@ -177,7 +225,15 @@ HideCaption.story = {
 export const InlineTitle = () => {
 	return (
 		<Container>
-			<Figure isMainMedia={false} role="inline">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="inline"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
@@ -203,7 +259,15 @@ InlineTitle.story = {
 export const InlineTitleMobile = () => {
 	return (
 		<Container>
-			<Figure isMainMedia={false} role="inline">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="inline"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'inline' }}
 					format={{
@@ -229,7 +293,15 @@ InlineTitleMobile.story = {
 export const ImmersiveTitle = () => {
 	return (
 		<Container>
-			<Figure isMainMedia={false} role="immersive">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="immersive"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'immersive' }}
 					format={{
@@ -251,7 +323,15 @@ ImmersiveTitle.story = {
 export const ShowcaseTitle = () => {
 	return (
 		<Container>
-			<Figure isMainMedia={false} role="showcase">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="showcase"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'showcase' }}
 					format={{
@@ -297,7 +377,15 @@ export const HalfWidth = () => {
 				cupidatat non proident, sunt in culpa qui officia deserunt
 				mollit anim id est laborum.
 			</p>
-			<Figure isMainMedia={false} role="halfWidth">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="halfWidth"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'halfWidth' }}
 					format={{
@@ -357,7 +445,15 @@ export const HalfWidthMobile = () => {
 				cupidatat non proident, sunt in culpa qui officia deserunt
 				mollit anim id est laborum.
 			</p>
-			<Figure isMainMedia={false} role="halfWidth">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="halfWidth"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'halfWidth' }}
 					format={{
@@ -417,7 +513,15 @@ export const HalfWidthWide = () => {
 				sint occaecat cupidatat non proident, sunt in culpa qui officia
 				deserunt mollit anim id est laborum.
 			</p>
-			<Figure isMainMedia={false} role="halfWidth">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="halfWidth"
+			>
 				<ImageBlockComponent
 					element={{ ...image, role: 'halfWidth' }}
 					format={{

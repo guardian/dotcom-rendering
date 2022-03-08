@@ -98,20 +98,19 @@ const getNewerPage = (
 	pages: LiveBlock[][],
 	pageNumber: number,
 ): Option<string> => {
-	if (pageNumber > 2) {
+	if (pageNumber > 1) {
 		return maybePageRef(pageNumber - 2, pages);
-	}
-
-	if (pageNumber === 2) {
-		return some('');
 	}
 
 	return none;
 };
 
-const getNewestPage = (pageNumber: number): Option<string> => {
+const getNewestPage = (
+	pages: LiveBlock[][],
+	pageNumber: number,
+): Option<string> => {
 	if (pageNumber > 1) {
-		return some('');
+		return maybePageRef(0, pages);
 	}
 
 	return none;
@@ -183,7 +182,7 @@ export const getPagedBlocks = (
 		currentPage,
 		pagination: {
 			newer: getNewerPage(pages, currentPage.pageNumber),
-			newest: getNewestPage(currentPage.pageNumber),
+			newest: getNewestPage(pages, currentPage.pageNumber),
 			older: getOlderPage(pages, currentPage.pageNumber),
 			oldest: getOldestPage(pages, currentPage.pageNumber),
 			numberOfPages: pages.length,
