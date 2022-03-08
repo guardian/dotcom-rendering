@@ -951,6 +951,16 @@ const textShareCountUntilDesktop = (format: ArticleFormat): string => {
 	return text.supporting;
 };
 
+const backgroundMatchStats = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return neutral[97];
+		default:
+			return "#d9edf6";
+	}
+};
+
 export const decidePalette = (format: ArticleFormat): Palette => {
 	return {
 		text: {
@@ -1016,6 +1026,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			mostViewedTab: backgroundMostViewedTab(format),
 			matchNav: backgroundMatchNav(),
 			analysisUnderline: backgroundUnderline(format),
+			matchStats: backgroundMatchStats(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

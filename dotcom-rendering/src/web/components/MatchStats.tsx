@@ -18,14 +18,13 @@ import { Doughnut } from './Doughnut';
 import { Distribution } from './Distribution';
 import { GoalAttempts } from './GoalAttempts';
 import { Lineup } from './Lineup';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	home: TeamType;
 	away: TeamType;
 	format: ArticleFormat;
 };
-
-const BACKGROUND_COLOUR = '#d9edf6';
 
 const StatsGrid = ({
 	children,
@@ -34,6 +33,8 @@ const StatsGrid = ({
 	children: React.ReactNode;
 	format: ArticleFormat;
 }) => {
+
+	const palette = decidePalette(format);
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
@@ -44,6 +45,7 @@ const StatsGrid = ({
 						display: flex;
 						flex-direction: column;
 
+						background-color: ${palette.background.matchStats};
 						@supports (display: grid) {
 							display: grid;
 
@@ -96,6 +98,7 @@ const StatsGrid = ({
 						display: flex;
 						flex-direction: column;
 
+						background-color: ${palette.background.matchStats};
 						@supports (display: grid) {
 							display: grid;
 
@@ -143,7 +146,13 @@ const StatsGrid = ({
 	}
 };
 
-const StretchBackground = ({ children }: { children: React.ReactNode }) => (
+const StretchBackground = ({
+	palette,
+	children,
+}: {
+	palette: Palette;
+	children: React.ReactNode;
+}) => (
 	<div
 		css={css`
 			clear: left;
@@ -152,7 +161,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 			padding: ${space[2]}px 10px;
 			/* We use min-height to help reduce our CLS value */
 			min-height: 800px;
-			background-color: ${BACKGROUND_COLOUR};
+			background-color: ${palette.background.matchStats};
 
 			${from.leftCol} {
 				:before {
@@ -163,7 +172,7 @@ const StretchBackground = ({ children }: { children: React.ReactNode }) => (
 					/* stretch left */
 					left: -100vw;
 					right: 0;
-					background-color: ${BACKGROUND_COLOUR};
+					background-color: ${palette.background.matchStats};
 					z-index: -1;
 				}
 			}
@@ -332,125 +341,131 @@ const DecideDoughnut = ({
 	}
 };
 
-export const MatchStats = ({ home, away, format }: Props) => (
-	<StretchBackground>
-		<StatsGrid format={format}>
-			<GridItem area="title" element="aside">
-				<ShiftLeft format={format}>
-					{/* Don't show the right border if this text was
+export const MatchStats = ({ home, away, format }: Props) => {
+	const palette = decidePalette(format);
+
+	return (
+		<StretchBackground palette={palette}>
+			<StatsGrid format={format}>
+				<GridItem area="title" element="aside">
+					<ShiftLeft format={format}>
+						{/* Don't show the right border if this text was
                         shifted into the left column */}
-					<Hide when="above" breakpoint="desktop">
-						<RightBorder>
+						<Hide when="above" breakpoint="desktop">
+							<RightBorder>
+								<H3>Match Stats</H3>
+							</RightBorder>
+						</Hide>
+						<Hide when="below" breakpoint="desktop">
 							<H3>Match Stats</H3>
-						</RightBorder>
-					</Hide>
-					<Hide when="below" breakpoint="desktop">
-						<H3>Match Stats</H3>
-					</Hide>
-				</ShiftLeft>
-			</GridItem>
-			<GridItem area="possession">
-				<RightBorder>
-					<H4>Possession</H4>
-					<Center>
-						<DecideDoughnut
-							home={home}
-							away={away}
-							format={format}
-						/>
-					</Center>
-				</RightBorder>
-				<br />
-			</GridItem>
-			<GridItem area="attempts">
-				<H4>Attempts</H4>
-				<GoalAttempts
-					left={{
-						onTarget: home.shotsOn,
-						offTarget: home.shotsOff,
-						color: home.colours,
-					}}
-					right={{
-						onTarget: away.shotsOn,
-						offTarget: away.shotsOff,
-						color: away.colours,
-					}}
-					backgroundColour={BACKGROUND_COLOUR}
-				/>
-			</GridItem>
-			<GridItem area="corners">
-				<H4>Corners</H4>
-				<Distribution
-					left={{
-						value: home.corners,
-						color: home.colours,
-					}}
-					right={{
-						value: away.corners,
-						color: away.colours,
-					}}
-				/>
-			</GridItem>
-			<GridItem area="fouls">
-				<H4>Fouls</H4>
-				<Distribution
-					left={{
-						value: home.fouls,
-						color: home.colours,
-					}}
-					right={{
-						value: away.fouls,
-						color: away.colours,
-					}}
-				/>
-				<br />
-			</GridItem>
-			<GridItem area="subtitle">
-				<ShiftLeft format={format}>
-					{/* Don't show the right border if this text was
+						</Hide>
+					</ShiftLeft>
+				</GridItem>
+				<GridItem area="possession">
+					<RightBorder>
+						<H4>Possession</H4>
+						<Center>
+							<DecideDoughnut
+								home={home}
+								away={away}
+								format={format}
+							/>
+						</Center>
+					</RightBorder>
+					<br />
+				</GridItem>
+				<GridItem area="attempts">
+					<H4>Attempts</H4>
+					<GoalAttempts
+						left={{
+							onTarget: home.shotsOn,
+							offTarget: home.shotsOff,
+							color: home.colours,
+						}}
+						right={{
+							onTarget: away.shotsOn,
+							offTarget: away.shotsOff,
+							color: away.colours,
+						}}
+						palette={palette}
+					/>
+				</GridItem>
+				<GridItem area="corners">
+					<H4>Corners</H4>
+					<Distribution
+						left={{
+							value: home.corners,
+							color: home.colours,
+						}}
+						right={{
+							value: away.corners,
+							color: away.colours,
+						}}
+					/>
+				</GridItem>
+				<GridItem area="fouls">
+					<H4>Fouls</H4>
+					<Distribution
+						left={{
+							value: home.fouls,
+							color: home.colours,
+						}}
+						right={{
+							value: away.fouls,
+							color: away.colours,
+						}}
+					/>
+					<br />
+				</GridItem>
+				<GridItem area="subtitle">
+					<ShiftLeft format={format}>
+						{/* Don't show the right border if this text was
                         shifted into the left column */}
-					<Hide when="above" breakpoint="desktop">
-						<RightBorder>
+						<Hide when="above" breakpoint="desktop">
+							<RightBorder>
+								<H3>Lineups</H3>
+							</RightBorder>
+						</Hide>
+						<Hide when="below" breakpoint="desktop">
 							<H3>Lineups</H3>
-						</RightBorder>
-					</Hide>
-					<Hide when="below" breakpoint="desktop">
-						<H3>Lineups</H3>
-					</Hide>
-				</ShiftLeft>
-			</GridItem>
-			<GridItem area="home">
-				<RightBorder>
-					<H4>{home.name}</H4>
+						</Hide>
+					</ShiftLeft>
+				</GridItem>
+				<GridItem area="home">
+					<RightBorder>
+						<H4>{home.name}</H4>
+						<Lineup
+							players={home.players.filter(
+								(player) => !player.substitute,
+							)}
+						/>
+						<br />
+						<H4>Substitutes</H4>
+						<Lineup
+							players={home.players.filter(
+								(player) => player.substitute,
+							)}
+						/>
+						<br />
+					</RightBorder>
+				</GridItem>
+				<GridItem area="away">
+					<H4>{away.name}</H4>
 					<Lineup
-						players={home.players.filter(
+						players={away.players.filter(
 							(player) => !player.substitute,
 						)}
 					/>
 					<br />
 					<H4>Substitutes</H4>
 					<Lineup
-						players={home.players.filter(
+						players={away.players.filter(
 							(player) => player.substitute,
 						)}
 					/>
 					<br />
-				</RightBorder>
-			</GridItem>
-			<GridItem area="away">
-				<H4>{away.name}</H4>
-				<Lineup
-					players={away.players.filter(
-						(player) => !player.substitute,
-					)}
-				/>
-				<br />
-				<H4>Substitutes</H4>
-				<Lineup
-					players={away.players.filter((player) => player.substitute)}
-				/>
-				<br />
-			</GridItem>
-		</StatsGrid>
-	</StretchBackground>
-);
+				</GridItem>
+			</StatsGrid>
+		</StretchBackground>
+	);
+};

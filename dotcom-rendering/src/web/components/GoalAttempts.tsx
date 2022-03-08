@@ -7,7 +7,7 @@ import { isLight } from '../lib/isLight';
 type Props = {
 	left: Section;
 	right: Section;
-	backgroundColour: string;
+	palette: Palette;
 };
 
 type Section = {
@@ -36,13 +36,13 @@ const Side = ({
 	onTarget,
 	teamColours,
 	position,
-	backgroundColour,
+	palette,
 }: {
 	offTarget: number;
 	onTarget: number;
 	teamColours: string;
 	position: 'left' | 'right';
-	backgroundColour: string;
+	palette: Palette;
 }) => (
 	<div
 		css={css`
@@ -96,11 +96,11 @@ const Side = ({
 				height: 70px;
 				width: 92px;
 
-				border-top: 8px solid ${backgroundColour};
+				border-top: 8px solid ${palette.background.matchStats};
 				border-left: ${position === 'left' &&
-				`8px solid ${backgroundColour}`};
+				`8px solid ${palette.background.matchStats}`};
 				border-right: ${position === 'right' &&
-				`8px solid ${backgroundColour}`};
+				`8px solid ${palette.background.matchStats}`};
 			`}
 		>
 			{onTarget}
@@ -116,7 +116,7 @@ const Side = ({
 	</div>
 );
 
-export const GoalAttempts = ({ left, right, backgroundColour }: Props) => {
+export const GoalAttempts = ({ left, right, palette }: Props) => {
 	return (
 		<Row>
 			<Side
@@ -124,14 +124,14 @@ export const GoalAttempts = ({ left, right, backgroundColour }: Props) => {
 				offTarget={left.offTarget}
 				onTarget={left.onTarget}
 				teamColours={left.color}
-				backgroundColour={backgroundColour}
+				palette={palette}
 			/>
 			<Side
 				position="right"
 				offTarget={right.offTarget}
 				onTarget={right.onTarget}
 				teamColours={right.color}
-				backgroundColour={backgroundColour}
+				palette={palette}
 			/>
 		</Row>
 	);
