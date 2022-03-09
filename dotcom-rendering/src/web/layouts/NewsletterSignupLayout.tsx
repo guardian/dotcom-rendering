@@ -34,15 +34,11 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
-import { AgeWarning } from '../components/AgeWarning';
-import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Nav } from '../components/Nav/Nav';
 import { LabsHeader } from '../components/LabsHeader.importable';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
-
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import { getAgeWarning } from '../../lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
@@ -57,14 +53,9 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { NewsLetterSignupGrid } from '../components/NewsLetterSignupGrid';
 
-const StandardGrid = ({
-	children,
-	isMatchReport,
-}: {
-	children: React.ReactNode;
-	isMatchReport: boolean;
-}) => (
+const StandardGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			/* IE Fallback */
@@ -98,27 +89,13 @@ const StandardGrid = ({
 				${from.wide} {
 					grid-template-columns: 219px 1px 1fr 300px;
 
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
+					grid-template-areas:
+						'title  border  headline     right-column'
+						'.      border  standfirst   right-column'
+						'lines  border  media        right-column'
+						'meta   border  media        right-column'
+						'meta   border  body         right-column'
+						'.      border  .            right-column';
 				}
 
 				/*
@@ -131,28 +108,13 @@ const StandardGrid = ({
 				*/
 				${until.wide} {
 					grid-template-columns: 140px 1px 1fr 300px;
-
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'title  border  matchNav     right-column'
-									'title  border  matchtabs    right-column'
-									'.      border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title  border  headline     right-column'
-									'.      border  standfirst   right-column'
-									'lines  border  media        right-column'
-									'meta   border  media        right-column'
-									'meta   border  body         right-column'
-									'.      border  .            right-column';
-						  `}
+					grid-template-areas:
+						'title  border  headline     right-column'
+						'.      border  standfirst   right-column'
+						'lines  border  media        right-column'
+						'meta   border  media        right-column'
+						'meta   border  body         right-column'
+						'.      border  .            right-column';
 				}
 
 				/*
@@ -163,87 +125,41 @@ const StandardGrid = ({
 				*/
 				${until.leftCol} {
 					grid-template-columns: 1fr 300px;
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav      right-column'
-									'matchtabs	   right-column'
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `
-						: css`
-								grid-template-areas:
-									'title         right-column'
-									'headline      right-column'
-									'standfirst    right-column'
-									'media         right-column'
-									'lines         right-column'
-									'meta          right-column'
-									'body          right-column'
-									'.             right-column';
-						  `}
+					grid-template-areas:
+						'title         right-column'
+						'headline      right-column'
+						'standfirst    right-column'
+						'media         right-column'
+						'lines         right-column'
+						'meta          right-column'
+						'body          right-column'
+						'.             right-column';
 				}
 
 				${until.desktop} {
 					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'matchtabs'
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'title'
-									'headline'
-									'standfirst'
-									'media'
-									'lines'
-									'meta'
-									'body';
-						  `}
+					grid-template-areas:
+						'title'
+						'headline'
+						'standfirst'
+						'media'
+						'lines'
+						'meta'
+						'body';
 				}
 
 				${until.tablet} {
 					grid-column-gap: 0px;
 
 					grid-template-columns: 1fr; /* Main content */
-					${isMatchReport
-						? css`
-								grid-template-areas:
-									'matchNav'
-									'matchtabs'
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `
-						: css`
-								grid-template-areas:
-									'media'
-									'title'
-									'headline'
-									'standfirst'
-									'lines'
-									'meta'
-									'body';
-						  `}
+					grid-template-areas:
+						'media'
+						'title'
+						'headline'
+						'standfirst'
+						'lines'
+						'meta'
+						'body';
 				}
 			}
 		`}
@@ -288,21 +204,6 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
-const ageWarningMargins = css`
-	margin-top: 12px;
-	margin-left: -10px;
-	margin-bottom: 6px;
-
-	${from.tablet} {
-		margin-left: -20px;
-	}
-
-	${from.leftCol} {
-		margin-left: -10px;
-		margin-top: 0;
-	}
-`;
-
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
@@ -310,7 +211,12 @@ interface Props {
 	palette: Palette;
 }
 
-export const NewsletterSignupLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const NewsletterSignupLayout = ({
+	CAPI,
+	NAV,
+	format,
+	palette,
+}: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -338,13 +244,6 @@ export const NewsletterSignupLayout = ({ CAPI, NAV, format, palette }: Props) =>
 	);
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
-
-	const isMatchReport =
-		format.design === ArticleDesign.MatchReport && !!CAPI.matchUrl;
-
-	const showComments = CAPI.isCommentable;
-
-	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
@@ -467,6 +366,11 @@ export const NewsletterSignupLayout = ({ CAPI, NAV, format, palette }: Props) =>
 			)}
 
 			<main>
+
+				<ElementContainer padded={false}>
+					<NewsLetterSignupGrid  format={format} palette={palette} CAPI={CAPI} />
+				</ElementContainer>
+
 				<ElementContainer
 					data-print-layout="hide"
 					showTopBorder={false}
@@ -474,7 +378,7 @@ export const NewsletterSignupLayout = ({ CAPI, NAV, format, palette }: Props) =>
 					borderColour={palette.border.article}
 					element="article"
 				>
-					<StandardGrid isMatchReport={isMatchReport}>
+					<StandardGrid>
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
@@ -539,12 +443,6 @@ export const NewsletterSignupLayout = ({ CAPI, NAV, format, palette }: Props) =>
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
 									/>
-									{age && (
-										<AgeWarning
-											age={age}
-											isScreenReader={true}
-										/>
-									)}
 								</ArticleHeadlinePadding>
 							</div>
 							{CAPI.starRating || CAPI.starRating === 0 ? (
@@ -767,29 +665,6 @@ export const NewsletterSignupLayout = ({ CAPI, NAV, format, palette }: Props) =>
 								format={format}
 							/>
 						</Island>
-					</ElementContainer>
-				)}
-
-				{!isPaidContent && showComments && (
-					<ElementContainer
-						sectionId="comments"
-						data-print-layout="hide"
-						element="section"
-					>
-						<DiscussionLayout
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							shortUrlId={CAPI.config.shortUrlId}
-							format={format}
-							discussionD2Uid={CAPI.config.discussionD2Uid}
-							discussionApiClientHeader={
-								CAPI.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={
-								CAPI.config.switches.enableDiscussionSwitch
-							}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
-						/>
 					</ElementContainer>
 				)}
 
