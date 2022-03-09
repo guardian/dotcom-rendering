@@ -9,7 +9,7 @@ type Props = {
  * 	Once on the client, it will render a <div> with an empty dangerouslySetInnerHTML. This communicates to (p)react that there
  * 	should be HTML in the <div>, but because it's set with dangerouslySetInnerHTML, (p)react will not parse it as part of hydration.
  *
- * When do I need this? DCR will only hyrdrate code that lives within islands -
+ * When do I need this? DCR will only hydrate code that lives within islands -
  * 	you should only need to use this component if you have specific code within an island you do not want to be hydrated.
  *
  * Note: Keep in mind this function prevents hydration, but does not prevent code from being included in the webpack bundle.
