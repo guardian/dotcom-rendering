@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from, neutral } from '@guardian/source-foundations';
 import { SvgCross } from '@guardian/source-react-components';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../browser/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
@@ -97,8 +97,7 @@ interface Props {
 
 export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
-	const [wasClosed, setWasClosed] = useState(false);
-	const isFirstSticky = useRef(true);
+	const [wasClosed, setWasClosed] = useState(true);
 
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.5,
@@ -107,14 +106,11 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 
 	useEffect(() => {
 		setIsSticky(isPlaying && !isIntersecting);
-		if (isPlaying && wasClosed) {
-			setWasClosed(false);
-		}
-	}, [isIntersecting, isPlaying, wasClosed]);
+	}, [isIntersecting, isPlaying]);
 
 	useEffect(() => {
-		if (isSticky && isFirstSticky.current) {
-			isFirstSticky.current = false;
+		if (isSticky && wasClosed) {
+			setWasClosed(false);
 			submitComponentEvent({
 				component: {
 					componentType: 'STICKY_VIDEO',
@@ -143,7 +139,6 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 						onClick={() => {
 							setWasClosed(true);
 							setIsSticky(false);
-							isFirstSticky.current = true;
 						}}
 					>
 						<SvgCross size="medium" />
