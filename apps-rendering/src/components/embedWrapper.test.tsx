@@ -1,3 +1,4 @@
+import { matchers } from '@emotion/jest';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import { none, some } from '@guardian/types';
 import type {
@@ -9,7 +10,6 @@ import type {
 	YouTube,
 } from 'embed';
 import { EmbedKind } from 'embed';
-import { matchers } from '@emotion/jest';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import type { SourceDetails } from './embedWrapper';
