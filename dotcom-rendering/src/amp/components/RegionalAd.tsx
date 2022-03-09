@@ -1,15 +1,11 @@
 import { ClassNames } from '@emotion/react';
 import { regionClasses } from '../lib/region-classes';
-import { realTimeConfig, BaseAdProps, CommercialConfig, Ad } from './Ad';
+import { BaseAdProps, Ad } from './Ad';
 
 type AdRegion = 'US' | 'AU' | 'ROW';
 
 // Array of possible ad regions
 const adRegions: AdRegion[] = ['US', 'AU', 'ROW'];
-
-interface RegionalAdProps extends BaseAdProps {
-	config: CommercialConfig;
-}
 
 /**
  * Determine the Placement ID that is used to look up a given stored bid request
@@ -47,7 +43,7 @@ export const RegionalAd = ({
 	commercialProperties,
 	config,
 	adTargeting,
-}: RegionalAdProps) => (
+}: BaseAdProps) => (
 	<>
 		{adRegions.map((adRegion) => (
 			<ClassNames key={adRegion}>
@@ -65,12 +61,8 @@ export const RegionalAd = ({
 							section={section}
 							contentType={contentType}
 							commercialProperties={commercialProperties}
-							rtcConfig={realTimeConfig(
-								config.usePrebid,
-								config.usePermutive,
-								config.useAmazon,
-								getPlacementIdByAdRegion(adRegion),
-							)}
+							config={config}
+							placementId={getPlacementIdByAdRegion(adRegion)}
 							adTargeting={adTargeting}
 						/>
 					</div>

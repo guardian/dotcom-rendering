@@ -42,6 +42,8 @@ export const initPerf = (
 
 	const clear = () => {
 		perf.clearMarks(startKey);
+		perf.clearMarks(endKey);
+		perf.clearMeasures(name);
 	};
 
 	return {

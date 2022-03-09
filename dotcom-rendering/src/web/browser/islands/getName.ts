@@ -1,5 +1,5 @@
 /**
- * getName takes the given html element and returns its name attibute
+ * getName takes the given html element and returns its name attribute
  *
  * We expect the element to always be a `gu-*` custom element
  *
