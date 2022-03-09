@@ -3,20 +3,21 @@ export interface DailyArticle {
 	count: number;
 }
 
-export type DailyArticleCount = Array<DailyArticle>;
+export type DailyArticleHistory = Array<DailyArticle>;
 
 // in localStorage, has format {"value":[{"day":18459,"count":1},{"day":18457,"count":1},{"day":18446,"count":1}]} to match frontend
 interface DailyArticleCountLocalStorage {
-	value: DailyArticleCount;
+	value: DailyArticleHistory;
 }
 
 export const DailyArticleCountKey = 'gu.history.dailyArticleCount';
 
-export const getDailyArticleCount = (): DailyArticleCount => {
+// Returns undefined if no daily article count in local storage
+export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
 	const dailyCount = localStorage.getItem(DailyArticleCountKey);
 
 	if (!dailyCount) {
-		return [];
+		return undefined;
 	}
 
 	try {
@@ -31,14 +32,13 @@ export const getDailyArticleCount = (): DailyArticleCount => {
 	} catch (e) {
 		// error parsing the string, so remove the key
 		localStorage.removeItem(DailyArticleCountKey);
-		// return empty array
-		return [];
+		return undefined;
 	}
 };
 
 export const incrementDailyArticleCount = (): void => {
 	// get the daily article count from local storage
-	const dailyArticleCount = getDailyArticleCount();
+	const dailyArticleCount = getDailyArticleCount() || [];
 
 	// calculate days since unix epoch for today date
 	const today = Math.floor(Date.now() / 86400000);

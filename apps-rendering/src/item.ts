@@ -126,7 +126,33 @@ interface Correction extends Fields {
 	design: ArticleDesign.Correction;
 	body: Body;
 }
+interface Interview extends Fields {
+	design: ArticleDesign.Interview;
+	body: Body;
+}
 
+interface Quiz extends Fields {
+	design: ArticleDesign.Quiz;
+	body: Body;
+}
+interface Recipe extends Fields {
+	design: ArticleDesign.Recipe;
+	body: Body;
+}
+
+interface Feature extends Fields {
+	design: ArticleDesign.Feature;
+	body: Body;
+}
+interface PhotoEssay extends Fields {
+	design: ArticleDesign.PhotoEssay;
+	body: Body;
+}
+
+interface PrintShop extends Fields {
+	design: ArticleDesign.PrintShop;
+	body: Body;
+}
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each ArticleDesign type.
 interface Standard extends Fields {
@@ -467,6 +493,12 @@ export {
 	ResizedRelatedContent,
 	Letter,
 	Editorial,
+	Interview,
+	Recipe,
+	Quiz,
+	PhotoEssay,
+	Feature,
+	PrintShop,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,

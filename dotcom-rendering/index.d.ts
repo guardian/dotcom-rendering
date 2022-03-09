@@ -117,7 +117,6 @@ type Palette = {
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		overlayedCaption: Colour;
-		pagination: Colour;
 		shareCount: Colour;
 		shareCountUntilDesktop: Colour;
 	};
@@ -141,6 +140,7 @@ type Palette = {
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		matchNav: Colour;
+		analysisUnderline: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -150,7 +150,6 @@ type Palette = {
 		shareIcon: Colour;
 		shareIconGrayBackground: Colour;
 		cameraCaptionIcon: Colour;
-		cardIcon: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
@@ -170,14 +169,14 @@ type Palette = {
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;
-		pagination: Colour;
+
 	};
 	topBar: {
 		card: Colour;
 	};
 	hover: {
 		headlineByline: Colour;
-		pagination: Colour;
+
 		standfirstLink: Colour;
 	};
 };

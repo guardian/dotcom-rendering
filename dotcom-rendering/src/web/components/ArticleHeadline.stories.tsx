@@ -299,26 +299,41 @@ export const Comment = () => {
 Comment.story = { name: 'Comment' };
 
 export const Analysis = () => {
-	const format = {
+	const themes: [string, ArticleTheme][] = [
+		['News', ArticlePillar.News],
+		['Opinion', ArticlePillar.Opinion],
+		['Sport', ArticlePillar.Sport],
+		['Culture', ArticlePillar.Culture],
+		['Lifestyle', ArticlePillar.Lifestyle],
+	];
+	const format = (theme: ArticleTheme): ArticleFormat => ({
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Analysis,
-		theme: ArticlePillar.News,
-	};
+		theme,
+	});
+
 	return (
-		<ElementContainer>
-			<Flex>
-				<LeftColumn borderType="full">
-					<></>
-				</LeftColumn>
-				<ArticleContainer format={format}>
-					<ArticleHeadline
-						headlineString="This is an Analysis headline, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-						format={format}
-						tags={[]}
-					/>
-				</ArticleContainer>
-			</Flex>
-		</ElementContainer>
+		<>
+			{themes.map(([themeName, theme]) => (
+				<>
+					<ElementContainer>
+						<Flex>
+							<LeftColumn borderType="full">
+								<></>
+							</LeftColumn>
+							<ArticleContainer format={format(theme)}>
+								<ArticleHeadline
+									headlineString={`This is an Analysis headline in ${themeName}, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor`}
+									format={format(theme)}
+									tags={[]}
+								/>
+							</ArticleContainer>
+						</Flex>
+					</ElementContainer>
+					<br />
+				</>
+			))}
+		</>
 	);
 };
 Analysis.story = { name: 'Analysis' };

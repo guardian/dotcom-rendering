@@ -22,9 +22,15 @@ import type { Image } from 'image';
 import type {
 	Comment,
 	Editorial,
+	Feature,
+	Interview,
 	Item,
 	Letter,
 	MatchReport,
+	PhotoEssay,
+	PrintShop,
+	Quiz,
+	Recipe,
 	Review,
 	Standard,
 } from 'item';
@@ -359,7 +365,7 @@ const analysis: Standard = {
 	...fields,
 };
 
-const feature: Item = {
+const feature: Feature = {
 	design: ArticleDesign.Feature,
 	...fields,
 };
@@ -395,7 +401,7 @@ const editorial: Editorial = {
 	theme: ArticlePillar.Opinion,
 };
 
-const interview: Item = {
+const interview: Interview = {
 	design: ArticleDesign.Interview,
 	...fields,
 };
@@ -424,6 +430,29 @@ const correction: Item = {
 	design: ArticleDesign.Correction,
 	...fields,
 };
+
+const printShop: PrintShop = {
+	design: ArticleDesign.PrintShop,
+	...fields,
+};
+
+const photoEssay: PhotoEssay = {
+	design: ArticleDesign.PhotoEssay,
+	...fields,
+};
+
+const recipe: Recipe = {
+	design: ArticleDesign.Recipe,
+	...fields,
+	theme: ArticlePillar.Lifestyle,
+};
+
+const quiz: Quiz = {
+	design: ArticleDesign.Quiz,
+	...fields,
+	theme: ArticlePillar.Sport,
+};
+
 // ----- Exports ----- //
 
 export {
@@ -441,4 +470,8 @@ export {
 	matchReport,
 	cartoon,
 	correction,
+	printShop,
+	photoEssay,
+	recipe,
+	quiz,
 };

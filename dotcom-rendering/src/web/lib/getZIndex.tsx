@@ -24,6 +24,9 @@
 const indices = [
 	// Modals will go here at the top
 
+	// Sticky video and button need to be above everything
+	'sticky-video-button',
+	'sticky-video',
 	'banner',
 	'dropdown',
 	'burger',
@@ -61,22 +64,15 @@ const indices = [
 
 	// Main media
 	'mainMedia',
-];
+] as const;
 
-//
-// Implementation code  - you don't need to change this to get a new index
-type ZIndex = typeof indices[number];
+// Implementation code - you don't need to change this to get a new index
+export type ZIndex = typeof indices[number];
 
-function reverseArray(array: any[]) {
-	return array.map((item, index) => array[array.length - 1 - index]);
-}
-
-const decideIndex = (name: string): number | null => {
-	let decided;
-	reverseArray(indices).forEach((item, index) => {
-		if (item === name) decided = index + 1;
-	});
-	return decided || null;
+const decideIndex = (name: ZIndex): number | null => {
+	const index = indices.indexOf(name);
+	if (index === -1) return null; // indexOf returns -1 if there is no match
+	return indices.length - index; // reverse the indices: last item gets 1
 };
 
 export const getZIndex = (zIndex: ZIndex): string =>

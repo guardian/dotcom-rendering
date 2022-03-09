@@ -792,6 +792,8 @@ export const renderArticleElement = ({
 					? interactiveLegacyFigureClasses(element._type, role)
 					: ''
 			}
+			type={element._type}
+			format={format}
 		>
 			{el}
 		</Figure>

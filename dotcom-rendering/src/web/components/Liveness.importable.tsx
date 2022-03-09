@@ -44,15 +44,15 @@ function insert(html: string, switches: Switches) {
 	// Shouldn't we sanitise this html?
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
-	const maincontent = document.querySelector<HTMLElement>('#maincontent');
-	const latestBlock = document.querySelector('#maincontent :first-child');
-	if (!latestBlock || !maincontent) return;
-	maincontent.insertBefore(fragment, latestBlock);
+	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
+	const latestBlock = blogBody?.querySelector('#liveblog-body :first-child');
+	if (!latestBlock || !blogBody) return;
+	blogBody.insertBefore(fragment, latestBlock);
 
 	// Enhance
 	// -----------
 	if (switches.enhanceTweets) {
-		const pendingBlocks = maincontent.querySelectorAll<HTMLElement>(
+		const pendingBlocks = blogBody.querySelectorAll<HTMLElement>(
 			'article .pending.block',
 		);
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
@@ -66,8 +66,8 @@ function insert(html: string, switches: Switches) {
  * reveal any blocks that have been inserted but are still hidden
  */
 function revealPendingBlocks() {
-	const maincontent = document.querySelector<HTMLElement>('#maincontent');
-	const pendingBlocks = maincontent?.querySelectorAll<HTMLElement>(
+	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
+	const pendingBlocks = blogBody?.querySelectorAll<HTMLElement>(
 		'article .pending.block',
 	);
 	pendingBlocks?.forEach((block) => {
@@ -121,16 +121,6 @@ const lastUpdated: Element | null = !isServer
 	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
 	: null;
 
-/**
- * This allows us to make decisions in javascript based on if the reader
- * has the top of the blog in view or not
- *
- * @returns boolean
- */
-function topOfBlogVisible(): boolean {
-	return topOfBlog ? topOfBlog.classList.contains('in-viewport') : false;
-}
-
 export const Liveness = ({
 	pageId,
 	webTitle,
@@ -143,6 +133,9 @@ export const Liveness = ({
 	mostRecentBlockId,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
+	const [topOfBlogVisible, setTopOfBlogVisible] = useState<
+		boolean | undefined
+	>();
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 
@@ -161,7 +154,7 @@ export const Liveness = ({
 				updateTimeElement(lastUpdated);
 			}
 
-			if (onFirstPage && topOfBlogVisible() && document.hasFocus()) {
+			if (onFirstPage && topOfBlogVisible && document.hasFocus()) {
 				revealPendingBlocks();
 				setNumHiddenBlocks(0);
 			} else {
@@ -199,28 +192,26 @@ export const Liveness = ({
 			numHiddenBlocks > 0 ? `(${numHiddenBlocks}) ${webTitle}` : webTitle;
 	}, [numHiddenBlocks, webTitle]);
 
-	if (onFirstPage && topOfBlog) {
-		const observer = new window.IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('in-viewport');
-					revealPendingBlocks();
-					setNumHiddenBlocks(0);
-					setShowToast(false);
-					return;
-				}
-				entry.target.classList.remove('in-viewport');
-			},
-			{
-				root: null,
-				// A margin makes more sense because the element we're
-				// observing (topOfBlog) has no height
-				rootMargin: '100px',
-			},
-		);
+	useEffect(() => {
+		if (!topOfBlog) return () => {};
+
+		const observer = new window.IntersectionObserver(([entry]) => {
+			setTopOfBlogVisible(entry.isIntersecting);
+
+			if (entry.isIntersecting && onFirstPage) {
+				// If on first page, reveal blocks
+				revealPendingBlocks();
+				setNumHiddenBlocks(0);
+				setShowToast(false);
+			}
+		});
 
 		observer.observe(topOfBlog);
-	}
+
+		return () => {
+			observer.disconnect();
+		};
+	}, [onFirstPage]);
 
 	/**
 	 * This useEffect sets up a listener for when the page is backgrounded or restored. We
@@ -235,7 +226,7 @@ export const Liveness = ({
 				// is at the top of the first page then...
 				document.visibilityState === 'visible' &&
 				numHiddenBlocks > 0 &&
-				topOfBlogVisible() &&
+				topOfBlogVisible &&
 				onFirstPage
 			) {
 				revealPendingBlocks();
@@ -252,7 +243,7 @@ export const Liveness = ({
 				handleVisibilityChange,
 			);
 		};
-	}, [numHiddenBlocks, onFirstPage]);
+	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
 
 	const handleToastClick = () => {
 		if (onFirstPage) {
