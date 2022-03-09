@@ -58,6 +58,7 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { PinnedPostLiveness } from '../components/PinnedPostLiveness.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -300,6 +301,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 	return (
 		<>
+			<Island clientOnly={true} deferUntil="idle">
+				<PinnedPostLiveness />
+			</Island>
 			{format.design === ArticleDesign.LiveBlog && (
 				<Island clientOnly={true} deferUntil="idle">
 					<Liveness
