@@ -404,7 +404,7 @@ const textCardFooter = (format: ArticleFormat): string => {
 					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
 					return '#ff9941';
 				default:
-					return neutral[60];
+					return neutral[46];
 			}
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
@@ -446,7 +446,7 @@ const textCardFooter = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport:
 					return brandAltBackground.primary;
 				default:
-					return neutral[60];
+					return neutral[46];
 			}
 	}
 };
@@ -675,71 +675,6 @@ const fillCaptionCamera = (format: ArticleFormat): string =>
 
 const fillBlockquoteIcon = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
-
-const fillCardIcon = (format: ArticleFormat): string => {
-	// Setting Card clock colour for immersive cards to all be dark grey
-	// Except ArticleSpecial.SpecialReport
-	if (
-		format.display === ArticleDisplay.Immersive &&
-		format.theme !== ArticleSpecial.SpecialReport
-	) {
-		return neutral[60];
-	}
-	switch (format.design) {
-		case ArticleDesign.Comment:
-		case ArticleDesign.Letter:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport:
-					// TODO: Pull this in from source once we see it here:
-					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
-					return '#ff9941';
-				default:
-					return neutral[46];
-			}
-		case ArticleDesign.LiveBlog:
-			switch (format.theme) {
-				case ArticlePillar.News:
-					return news[600];
-				case ArticlePillar.Sport:
-					return sport[600];
-				case ArticlePillar.Opinion:
-					return WHITE;
-				case ArticlePillar.Culture:
-					return culture[600];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[500];
-				case ArticleSpecial.SpecialReport:
-					return brandAlt[400];
-				case ArticleSpecial.Labs:
-				default:
-					return BLACK;
-			}
-		case ArticleDesign.Media:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport:
-					return brandAlt[400];
-				case ArticlePillar.News:
-					return news[600];
-				case ArticlePillar.Sport:
-					return sport[600];
-				case ArticlePillar.Opinion:
-					// TODO: Pull this in from source as opinion[550]
-					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
-					return '#ff9941';
-				case ArticlePillar.Lifestyle:
-				case ArticlePillar.Culture:
-				default:
-					return pillarPalette[format.theme][500];
-			}
-		default:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport:
-					return brandAlt[400];
-				default:
-					return neutral[46];
-			}
-	}
-};
 
 const borderSyndicationButton = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
@@ -1006,10 +941,6 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
-const textPagination = (format: ArticleFormat): string => {
-	return blogsGrayBackgroundPalette(format);
-};
-
 const textShareCount = (): string => {
 	return text.supporting;
 };
@@ -1018,14 +949,6 @@ const textShareCountUntilDesktop = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
 
 	return text.supporting;
-};
-
-const borderPagination = (): string => {
-	return neutral[86];
-};
-
-const hoverPagination = (format: ArticleFormat): string => {
-	return blogsGrayBackgroundPalette(format);
 };
 
 export const decidePalette = (format: ArticleFormat): Palette => {
@@ -1069,7 +992,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			overlayedCaption: textOverlayed(),
-			pagination: textPagination(format),
 			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 		},
@@ -1103,7 +1025,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			shareCountIconUntilDesktop: fillShareCountIconUntilDesktop(format),
 			shareIconGrayBackground: fillShareIconGrayBackground(format),
 			cameraCaptionIcon: fillCaptionCamera(format),
-			cardIcon: fillCardIcon(format),
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),
@@ -1123,14 +1044,12 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			lines: borderLines(format),
 			matchTab: matchTab(),
 			activeMatchTab: activeMatchTab(),
-			pagination: borderPagination(),
 		},
 		topBar: {
 			card: topBarCard(format),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
-			pagination: hoverPagination(format),
 			standfirstLink: hoverStandfirstLink(format),
 		},
 	};

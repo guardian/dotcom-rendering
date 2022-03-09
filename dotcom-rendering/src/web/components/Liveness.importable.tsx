@@ -44,15 +44,15 @@ function insert(html: string, switches: Switches) {
 	// Shouldn't we sanitise this html?
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
-	const maincontent = document.querySelector<HTMLElement>('#maincontent');
-	const latestBlock = document.querySelector('#maincontent :first-child');
-	if (!latestBlock || !maincontent) return;
-	maincontent.insertBefore(fragment, latestBlock);
+	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
+	const latestBlock = blogBody?.querySelector('#liveblog-body :first-child');
+	if (!latestBlock || !blogBody) return;
+	blogBody.insertBefore(fragment, latestBlock);
 
 	// Enhance
 	// -----------
 	if (switches.enhanceTweets) {
-		const pendingBlocks = maincontent.querySelectorAll<HTMLElement>(
+		const pendingBlocks = blogBody.querySelectorAll<HTMLElement>(
 			'article .pending.block',
 		);
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
@@ -66,8 +66,8 @@ function insert(html: string, switches: Switches) {
  * reveal any blocks that have been inserted but are still hidden
  */
 function revealPendingBlocks() {
-	const maincontent = document.querySelector<HTMLElement>('#maincontent');
-	const pendingBlocks = maincontent?.querySelectorAll<HTMLElement>(
+	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
+	const pendingBlocks = blogBody?.querySelectorAll<HTMLElement>(
 		'article .pending.block',
 	);
 	pendingBlocks?.forEach((block) => {
@@ -195,23 +195,16 @@ export const Liveness = ({
 	useEffect(() => {
 		if (!topOfBlog) return () => {};
 
-		const observer = new window.IntersectionObserver(
-			([entry]) => {
-				setTopOfBlogVisible(entry.isIntersecting);
+		const observer = new window.IntersectionObserver(([entry]) => {
+			setTopOfBlogVisible(entry.isIntersecting);
 
-				if (entry.isIntersecting && onFirstPage) {
-					revealPendingBlocks();
-					setNumHiddenBlocks(0);
-					setShowToast(false);
-				}
-			},
-			{
-				root: null,
-				// A margin makes more sense because the element we're
-				// observing (topOfBlog) has no height
-				rootMargin: '100px',
-			},
-		);
+			if (entry.isIntersecting && onFirstPage) {
+				// If on first page, reveal blocks
+				revealPendingBlocks();
+				setNumHiddenBlocks(0);
+				setShowToast(false);
+			}
+		});
 
 		observer.observe(topOfBlog);
 

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { Hide } from '@guardian/source-react-components';
+import { space } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
@@ -33,35 +34,41 @@ export const Toast = ({ count, onClick, format }: Props) => {
 	return (
 		<div
 			css={css`
-				position: fixed;
-				top: 20px;
-				display: flex;
+				position: sticky;
+				top: 0;
 				${getZIndex('toast')};
-				width: 100%;
+				display: flex;
 				justify-content: center;
 			`}
 			data-cy="toast"
 		>
-			<Hide above="phablet">
-				<EditorialButton
-					size="xsmall" // <-- Mobile version is xsmall
-					onClick={onClick}
-					format={format}
-					icon={<SvgReload size={30} />}
-				>{`${count} new update${
-					count === 1 ? '' : 's'
-				}`}</EditorialButton>
-			</Hide>
-			<Hide below="phablet">
-				<EditorialButton
-					size="small" // <-- Desktop version is small
-					onClick={onClick}
-					format={format}
-					icon={<SvgReload size={30} />}
-				>{`${count} new update${
-					count === 1 ? '' : 's'
-				}`}</EditorialButton>
-			</Hide>
+			<div
+				css={css`
+					position: absolute;
+					top: ${space[2]}px;
+				`}
+			>
+				<Hide above="phablet">
+					<EditorialButton
+						size="xsmall" // <-- Mobile version is xsmall
+						onClick={onClick}
+						format={format}
+						icon={<SvgReload size={30} />}
+					>{`${count} new update${
+						count === 1 ? '' : 's'
+					}`}</EditorialButton>
+				</Hide>
+				<Hide below="phablet">
+					<EditorialButton
+						size="small" // <-- Desktop version is small
+						onClick={onClick}
+						format={format}
+						icon={<SvgReload size={30} />}
+					>{`${count} new update${
+						count === 1 ? '' : 's'
+					}`}</EditorialButton>
+				</Hide>
+			</div>
 		</div>
 	);
 };
