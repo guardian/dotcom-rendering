@@ -8,9 +8,11 @@ const padString = (time: number) => (time < 10 ? `0${time}` : time);
 const FirstPublished = ({
 	firstPublished,
 	blockLink,
+	showTimeAgo = true,
 }: {
 	firstPublished: number;
 	blockLink: string;
+	showTimeAgo?: boolean;
 }) => {
 	const publishedDate = new Date(firstPublished);
 	return (
@@ -30,17 +32,19 @@ const FirstPublished = ({
 				}
 			`}
 		>
-			<time
-				dateTime={publishedDate.toISOString()}
-				data-relativeformat="med"
-				css={css`
-					color: ${neutral[46]};
-					font-weight: bold;
-					margin-right: ${space[2]}px;
-				`}
-			>
-				{timeAgo(firstPublished)}
-			</time>
+			{showTimeAgo && (
+				<time
+					dateTime={publishedDate.toISOString()}
+					data-relativeformat="med"
+					css={css`
+						color: ${neutral[46]};
+						font-weight: bold;
+						margin-right: ${space[2]}px;
+					`}
+				>
+					{timeAgo(firstPublished)}
+				</time>
+			)}
 			<span
 				css={css`
 					${textSans.xxsmall()};

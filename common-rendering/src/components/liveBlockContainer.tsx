@@ -144,6 +144,7 @@ const LiveBlockContainer = ({
 					<FirstPublished
 						firstPublished={blockFirstPublished}
 						blockLink={blockLink}
+						showTimeAgo={isPinnedPost ? false : true}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}
