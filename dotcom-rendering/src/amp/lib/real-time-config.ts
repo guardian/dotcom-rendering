@@ -1,12 +1,22 @@
 import { AdRegion } from './region-classes';
 
-type Config =
+/**
+ * Type of AMP ad
+ *
+ * These values determine the computed RTC parameters
+ */
+type AdType =
 	| { isSticky: true }
 	| {
 			isSticky?: false;
 			adRegion: AdRegion;
 	  };
 
+/**
+ * The properties required by different Prebid URLS / vendors
+ *
+ * These can be computed from the Config type above
+ */
 export type RTCParameters = {
 	placementId: number;
 	tagId: string;
@@ -15,21 +25,18 @@ export type RTCParameters = {
 };
 
 /**
- * Determine the Placement ID that is used to look up a given stored bid request
+ * Determine the Xandr Placement ID that is used to look up a given stored bid request
  *
  * Stored bid requests are stored by the prebid server instance and each is
  * keyed by a placement ID. This placement ID corresponds to the tag id parameter
  * provided on the client
  *
- * @param adRegion The advertising region - different regions are covered by different
- * stored bid requests
- * @returns The placement id for an ad, depending on its ad region
  */
-const getPlacementId = (config: Config): number => {
-	if (config.isSticky) {
+const getPlacementId = (adType: AdType): number => {
+	if (adType.isSticky) {
 		return 9;
 	}
-	switch (config.adRegion) {
+	switch (adType.adRegion) {
 		case 'US':
 			return 7;
 		case 'AU':
@@ -39,16 +46,19 @@ const getPlacementId = (config: Config): number => {
 	}
 };
 
-const getTagId = (config: Config): string => {
-	if (!config.isSticky) {
-		switch (config.adRegion) {
+/**
+ * Determine the Relevant Yield tag id that is used to look up a given stored bid request
+ */
+const getTagId = (adType: AdType): string => {
+	if (!adType.isSticky) {
+		switch (adType.adRegion) {
 			case 'UK':
 				return '6214ca675cf18e70cbaeef37_6214c9a4b73a6613d4aeef2f';
 			case 'US':
 				return '6214cb381a577cd525aeef3f_6214caacb52b565527aeef39';
 			case 'AU':
 				return '6214cbe6a24103508faeef45_6214cb50aac9c1160daeef40';
-			// Do the same as for sticky
+			// 'INT' same as sticky
 			default:
 				break;
 		}
@@ -56,20 +66,26 @@ const getTagId = (config: Config): string => {
 	return '6214ca56243f4ff4f5aeef36_6214c723c70856442e4d79f2';
 };
 
-const getPubAndProfileIds = ({}: Config): {
+/**
+ * Determine the pub id and profile id required by Pubmatic to construct an RTC vendor
+ *
+ * TODO in the future these values will depend up `AdType`
+ */
+const getPubAndProfileIds = (): {
 	pubId: string;
 	profileId: string;
-} => {
-	return {
-		profileId: '6611',
-		pubId: '157207',
-	};
-};
+} => ({
+	profileId: '6611',
+	pubId: '157207',
+});
 
-export const getRTCParameters = (config: Config): RTCParameters => ({
-	placementId: getPlacementId(config),
-	tagId: getTagId(config),
-	...getPubAndProfileIds(config),
+/**
+ * Compute the full set of RTC parameters from a given ad type
+ */
+export const getRTCParameters = (adType: AdType): RTCParameters => ({
+	placementId: getPlacementId(adType),
+	tagId: getTagId(adType),
+	...getPubAndProfileIds(),
 });
 
 const permutiveURL = 'https://guardian.amp.permutive.com/rtc?type=doubleclick';
@@ -80,6 +96,10 @@ const amazonConfig = {
 
 const notUndefined = <T>(x: T | undefined): x is T => x !== undefined;
 
+/**
+ * Build a generic Real Time Config string from a possible URL,
+ * optional vendors and whether to enable Permutive and Amazon
+ */
 export const realTimeConfig = ({
 	vendors = {},
 	url = undefined,
@@ -93,15 +113,19 @@ export const realTimeConfig = ({
 	useAmazon?: boolean;
 	timeoutMillis?: number;
 }): string => {
+	const urls = [url, usePermutive ? permutiveURL : undefined].filter(
+		notUndefined,
+	);
+
+	const options = timeoutMillis ? { timeoutMillis } : {};
+
 	const data = {
-		urls: [url, usePermutive ? permutiveURL : undefined].filter(
-			notUndefined,
-		),
+		urls,
 		vendors: {
 			...vendors,
 			...(useAmazon ? amazonConfig : {}),
 		},
-		...(timeoutMillis ? { timeoutMillis: 1000 } : {}),
+		...options,
 	};
 	return JSON.stringify(data);
 };

@@ -46,6 +46,20 @@ const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	return adTargetingMapped;
 };
 
+// Variants for the Prebid server test
+// Assign each variant 4 groups e.g. 33.3% of content types each
+const variants = {
+	control: new Set([0, 1, 2, 3]),
+	'relevant-yield': new Set([4, 5, 6, 7]),
+	pubmatic: new Set([8, 9, 10, 11]),
+};
+
+// Determine participation in a variant from group
+const isInVariant = (
+	variantName: 'control' | 'relevant-yield' | 'pubmatic',
+	group: number | undefined,
+) => group !== undefined && variants[variantName].has(group);
+
 const useRealTimeConfig = (
 	usePrebid: boolean,
 	usePermutive: boolean,
@@ -54,36 +68,8 @@ const useRealTimeConfig = (
 ): string => {
 	const { group } = useContentABTestGroup();
 
-	// Control variant / Testing not enabled
-	if (group === undefined || [0, 1, 2, 3].includes(group)) {
-		const prebidURL = [
-			// The tag_id in the URL is used to look up the bulk of the request
-			// In this case it corresponds to the placement ID of the bid requests
-			// on the prebid server
-			`${preBidServerPrefix}?tag_id=${placementId}`,
-			'w=ATTR(width)',
-			'h=ATTR(height)',
-			'ow=ATTR(data-override-width)',
-			'oh=ATTR(data-override-height)',
-			'ms=ATTR(data-multi-size)',
-			'slot=ATTR(data-slot)',
-			'targeting=TGT',
-			'curl=CANONICAL_URL',
-			'timeout=TIMEOUT',
-			'adcid=ADCID',
-			'purl=HREF',
-			'gdpr_consent=CONSENT_STRING',
-		].join('&');
-
-		return realTimeConfig({
-			url: usePrebid ? prebidURL : undefined,
-			usePermutive,
-			useAmazon,
-		});
-	}
-
 	// Relevant Yield variant
-	if ([4, 5, 6, 7].includes(group)) {
+	if (isInVariant('relevant-yield', group)) {
 		const relevantYieldURL = [
 			`${relevantYieldURLPrefix}?tag_id=${tagId}`,
 			'tgt_pfx=rv',
@@ -98,7 +84,7 @@ const useRealTimeConfig = (
 	}
 
 	// Pubmatic variant
-	if ([8, 9, 10, 11].includes(group)) {
+	if (isInVariant('pubmatic', group)) {
 		const pubmaticConfig = {
 			openwrap: {
 				PROFILE_ID: profileId,
@@ -114,7 +100,32 @@ const useRealTimeConfig = (
 		});
 	}
 
-	throw Error(':(');
+	// Control / AB testing not enabled
+
+	const prebidURL = [
+		// The tag_id in the URL is used to look up the bulk of the request
+		// In this case it corresponds to the placement ID of the bid requests
+		// on the prebid server
+		`${preBidServerPrefix}?tag_id=${placementId}`,
+		'w=ATTR(width)',
+		'h=ATTR(height)',
+		'ow=ATTR(data-override-width)',
+		'oh=ATTR(data-override-height)',
+		'ms=ATTR(data-multi-size)',
+		'slot=ATTR(data-slot)',
+		'targeting=TGT',
+		'curl=CANONICAL_URL',
+		'timeout=TIMEOUT',
+		'adcid=ADCID',
+		'purl=HREF',
+		'gdpr_consent=CONSENT_STRING',
+	].join('&');
+
+	return realTimeConfig({
+		url: usePrebid ? prebidURL : undefined,
+		usePermutive,
+		useAmazon,
+	});
 };
 
 interface CommercialConfig {
