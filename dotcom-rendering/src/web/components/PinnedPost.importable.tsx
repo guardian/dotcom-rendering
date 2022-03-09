@@ -5,7 +5,7 @@ import {
 	news,
 	from,
 } from '@guardian/source-foundations';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
 	Button,
 	Props,
@@ -20,6 +20,9 @@ import { css } from '@emotion/react';
 // See Ticket here: https://trello.com/c/xZr6SP9H/272-pinned-post-replace-local-pinned-svg-with-source
 import PinIcon from '../../static/icons/pin.svg';
 import { ServerSideOnly } from './ServerSideOnly';
+import { useIsInView } from '../lib/useIsInView';
+import { initPerf } from '../browser/initPerf';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 
 const pinnedPostContainer = css`
 	border: 3px solid ${news[300]};
@@ -98,8 +101,43 @@ export const PinnedPost = ({ pinnedPost, children }: PinnedPostProps) => {
 		document.documentElement.scrollHeight >
 			document.documentElement.clientHeight;
 
+	const hasBeenSeen = useRef(false);
+	const timingRef = useRef<{
+		start: () => void;
+		end: () => number;
+		clear: () => void;
+	} | null>(null);
+
+	const [isIntersecting, setRef] = useIsInView({
+		threshold: 0.5,
+		repeat: true,
+	});
+
+	useEffect(() => {
+		if (!timingRef.current) {
+			timingRef.current = initPerf('pinned-post-view-duration');
+		}
+
+		if (isIntersecting) {
+			hasBeenSeen.current = true;
+			timingRef.current.clear();
+			timingRef.current.start();
+		} else if (hasBeenSeen.current) {
+			const duration = timingRef.current.end() / 1000;
+			console.log(`event sent with dutration ${duration}`);
+			submitComponentEvent({
+				component: {
+					componentType: 'CONSENT',
+					id: pinnedPost.id,
+				},
+				action: 'VIEW',
+				value: duration.toString(),
+			});
+		}
+	}, [isIntersecting, pinnedPost.id]);
+
 	return (
-		<div css={pinnedPostContainer}>
+		<div ref={setRef} css={pinnedPostContainer}>
 			<div css={pinnedPostRow}>
 				<PinIcon fill="white" />
 				{pinnedPost.blockFirstPublished && (
