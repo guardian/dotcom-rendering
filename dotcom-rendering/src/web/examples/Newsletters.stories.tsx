@@ -153,7 +153,7 @@ export const Newsletters = (): React.ReactNode => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
-				header={{
+				urls={{
 					contribute: '',
 					subscribe: '',
 					support: '',

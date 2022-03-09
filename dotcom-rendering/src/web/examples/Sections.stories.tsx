@@ -60,7 +60,7 @@ export const Sections = (): React.ReactNode => (
 				edition="UK"
 				supporterCTA=""
 				discussionApiUrl=""
-				header={{
+				urls={{
 					contribute: '',
 					subscribe: '',
 					support: '',
@@ -153,7 +153,7 @@ export const Sections = (): React.ReactNode => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
-				header={{
+				urls={{
 					contribute: '',
 					subscribe: '',
 					support: '',

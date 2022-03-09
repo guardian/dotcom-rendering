@@ -304,7 +304,7 @@ export const ShowcaseLayout = ({
 										CAPI.config.switches
 											.anniversaryHeaderSvg
 									}
-									header={CAPI.nav.readerRevenueLinks.header}
+									urls={CAPI.nav.readerRevenueLinks.header}
 									remoteHeader={
 										CAPI.config.switches.remoteHeader
 									}
@@ -726,7 +726,7 @@ export const ShowcaseLayout = ({
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					header={CAPI.nav.readerRevenueLinks.header}
+					urls={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>

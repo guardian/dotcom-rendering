@@ -75,7 +75,7 @@ export const Writers = (): React.ReactNode => (
 				edition="UK"
 				discussionApiUrl=""
 				supporterCTA=""
-				header={{
+				urls={{
 					contribute: '',
 					subscribe: '',
 					support: '',
@@ -276,7 +276,7 @@ export const Writers = (): React.ReactNode => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
-				header={{
+				urls={{
 					contribute: '',
 					subscribe: '',
 					support: '',

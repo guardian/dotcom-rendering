@@ -52,7 +52,7 @@ export const Front = () => (
 				isAnniversary={true}
 				discussionApiUrl=""
 				supporterCTA=""
-				header={{
+				urls={{
 					contribute: '',
 					subscribe: '',
 					support: '',
@@ -544,7 +544,7 @@ export const Front = () => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
-				header={{
+				urls={{
 					contribute: '',
 					subscribe: '',
 					support: '',
@@ -572,7 +572,7 @@ export const Front2 = () => (
 				isAnniversary={true}
 				discussionApiUrl=""
 				supporterCTA=""
-				header={{
+				urls={{
 					contribute: '',
 					subscribe: '',
 					support: '',
@@ -1064,7 +1064,7 @@ export const Front2 = () => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
-				header={{
+				urls={{
 					contribute: '',
 					subscribe: '',
 					support: '',

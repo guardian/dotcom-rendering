@@ -393,7 +393,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
 								}
-								header={CAPI.nav.readerRevenueLinks.header}
+								urls={CAPI.nav.readerRevenueLinks.header}
 								remoteHeader={CAPI.config.switches.remoteHeader}
 								contributionsServiceUrl={
 									CAPI.contributionsServiceUrl
@@ -856,7 +856,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					header={CAPI.nav.readerRevenueLinks.header}
+					urls={CAPI.nav.readerRevenueLinks.header}
 					edition={CAPI.editionId}
 					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>

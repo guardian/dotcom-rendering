@@ -185,14 +185,14 @@ const bttPosition = css`
 
 type Props = {
 	pageFooter: FooterType;
-	header: ReaderRevenueCategories;
+	urls: ReaderRevenueCategories;
 	edition: Edition;
 	contributionsServiceUrl: string;
 };
 
 const FooterLinks: React.FC<Props> = ({
 	pageFooter,
-	header,
+	urls,
 	edition,
 	contributionsServiceUrl,
 }: Props) => {
@@ -217,7 +217,7 @@ const FooterLinks: React.FC<Props> = ({
 			<div id="reader-revenue-links-footer">
 				<Island deferUntil="idle" clientOnly={true}>
 					<ReaderRevenueLinks
-						urls={header}
+						urls={urls}
 						edition={edition}
 						dataLinkNamePrefix="footer : "
 						inHeader={false}
@@ -243,14 +243,14 @@ export const Footer: React.FC<{
 	pillars: PillarType[];
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
-	header: ReaderRevenueCategories;
+	urls: ReaderRevenueCategories;
 	edition: Edition;
 	contributionsServiceUrl: string;
 }> = ({
 	pillars,
 	pillar,
 	pageFooter,
-	header,
+	urls,
 	edition,
 	contributionsServiceUrl,
 }) => (
@@ -282,7 +282,7 @@ export const Footer: React.FC<{
 
 			<FooterLinks
 				pageFooter={pageFooter}
-				header={header}
+				urls={urls}
 				edition={edition}
 				contributionsServiceUrl={contributionsServiceUrl}
 			/>
