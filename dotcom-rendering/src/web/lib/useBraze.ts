@@ -15,14 +15,14 @@ import { buildBrazeMessages } from './braze/buildBrazeMessages';
  */
 export const useBraze = (
 	idApiUrl: string,
-): BrazeMessagesInterface | undefined => {
+): { data: BrazeMessagesInterface | undefined } => {
 	const { data, error } = useSWRImmutable('braze-message', () =>
 		buildBrazeMessages(idApiUrl),
 	);
 
 	if (error) {
-		return new NullBrazeMessages();
+		return { data: new NullBrazeMessages() };
 	}
 
-	return data;
+	return { data };
 };

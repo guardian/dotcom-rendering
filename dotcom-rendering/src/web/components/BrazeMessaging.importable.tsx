@@ -11,7 +11,7 @@ type Props = {
  */
 export const BrazeMessaging = ({ idApiUrl }: Props) => {
 	// eslint-disable-next-line no-void -- we don’t use this promise
-	const data = useBraze(idApiUrl);
+	const { data } = useBraze(idApiUrl);
 
 	if (data) {
 		log('tx', 'Braze Messages Interface loaded', data);
