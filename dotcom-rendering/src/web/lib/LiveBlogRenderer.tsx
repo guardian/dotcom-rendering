@@ -4,6 +4,7 @@ type Props = {
 	format: ArticleFormat;
 	blocks: Block[];
 	adTargeting: AdTargeting;
+	pinnedPost?: Block;
 	host?: string;
 	pageId: string;
 	webTitle: string;
@@ -14,6 +15,7 @@ type Props = {
 export const LiveBlogRenderer = ({
 	format,
 	blocks,
+	pinnedPost,
 	adTargeting,
 	host,
 	pageId,
@@ -34,6 +36,7 @@ export const LiveBlogRenderer = ({
 						host={host}
 						ajaxUrl={ajaxUrl}
 						isLiveUpdate={isLiveUpdate}
+						isPinnedPost={true}
 					/>
 				);
 			})}

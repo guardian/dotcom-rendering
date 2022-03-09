@@ -747,6 +747,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												format={format}
 												palette={palette}
 												blocks={CAPI.blocks}
+												pinnedPost={CAPI.pinnedPost}
 												adTargeting={adTargeting}
 												host={host}
 												pageId={CAPI.pageId}

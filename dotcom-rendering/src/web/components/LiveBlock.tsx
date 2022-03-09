@@ -16,6 +16,7 @@ type Props = {
 	host?: string;
 	ajaxUrl: string;
 	isLiveUpdate?: boolean;
+	isPinnedPost?: boolean;
 };
 
 export const LiveBlock = ({
@@ -27,6 +28,7 @@ export const LiveBlock = ({
 	host,
 	ajaxUrl,
 	isLiveUpdate,
+	isPinnedPost,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -49,6 +51,7 @@ export const LiveBlock = ({
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
 			avatarBackgroundColor={palette.background.avatar}
+			isPinnedPost={isPinnedPost}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({

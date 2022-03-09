@@ -10,6 +10,7 @@ type Props = {
 	format: ArticleFormat;
 	palette: Palette;
 	blocks: Block[];
+	pinnedPost?: Block;
 	adTargeting: AdTargeting;
 	host?: string;
 	pageId: string;
@@ -90,6 +91,7 @@ export const ArticleBody = ({
 	format,
 	palette,
 	blocks,
+	pinnedPost,
 	adTargeting,
 	host,
 	pageId,
@@ -124,6 +126,7 @@ export const ArticleBody = ({
 					<LiveBlogRenderer
 						format={format}
 						blocks={blocks}
+						pinnedPost={pinnedPost}
 						adTargeting={adTargeting}
 						host={host}
 						pageId={pageId}
