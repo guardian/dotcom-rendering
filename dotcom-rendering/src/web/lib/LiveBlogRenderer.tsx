@@ -1,4 +1,5 @@
 import { LiveBlock } from '../components/LiveBlock';
+import { PinnedPost } from '../components/PinnedPost';
 
 type Props = {
 	format: ArticleFormat;
@@ -25,6 +26,21 @@ export const LiveBlogRenderer = ({
 }: Props) => {
 	return (
 		<>
+			{pinnedPost && (
+				<PinnedPost pinnedPost={pinnedPost}>
+					<LiveBlock
+						format={format}
+						block={pinnedPost}
+						pageId={pageId}
+						webTitle={webTitle}
+						adTargeting={adTargeting}
+						host={host}
+						ajaxUrl={ajaxUrl}
+						isLiveUpdate={isLiveUpdate}
+						isPinnedPost={true}
+					/>
+				</PinnedPost>
+			)}
 			{blocks.map((block) => {
 				return (
 					<LiveBlock
