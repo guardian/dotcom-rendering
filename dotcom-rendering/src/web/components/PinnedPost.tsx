@@ -83,7 +83,6 @@ const button = css`
 	align-items: center;
 	box-sizing: border-box;
 	border: none;
-	background: transparent;
 	cursor: pointer;
 	transition: ${transitions.medium};
 	text-decoration: none;
@@ -115,7 +114,7 @@ const collapsibleBody = css`
 	overflow: hidden;
 `;
 
-const buttonsvg = css`
+const buttonIcon = css`
 	svg {
 		flex: 0 0 auto;
 		display: block;
@@ -153,20 +152,20 @@ export const PinnedPost = ({ pinnedPost, children }: PinnedPostProps) => {
 					</time>
 				)}
 			</div>
-			<div id="collapsible-body" css={[collapsibleBody]}>
+			<div id="collapsible-body" css={collapsibleBody}>
 				{children}
 			</div>
 			<div id="overlay" css={overlay} />
 			<label
 				css={button}
 				htmlFor="pinned-post-checkbox"
-				id="pinned-block-button"
+				id="pinned-post-button"
 			>
 				<div>
-					<span id="svgminus" css={buttonsvg}>
+					<span id="svgminus" css={buttonIcon}>
 						<SvgMinus />
 					</span>
-					<span id="svgplus" css={buttonsvg}>
+					<span id="svgplus" css={buttonIcon}>
 						<SvgPlus />
 					</span>
 				</div>

@@ -15,7 +15,7 @@ const pinnedPostCheckBox: Element | null = !isServer
  */
 function hideShowMore() {
 	const pinnedPostButton = document.querySelector<HTMLElement>(
-		'#pinned-block-button',
+		'#pinned-post-button',
 	);
 	if (pinnedPostButton) pinnedPostButton.style.display = 'none';
 }

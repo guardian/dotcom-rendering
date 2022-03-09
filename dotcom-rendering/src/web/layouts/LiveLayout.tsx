@@ -690,9 +690,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-                  <Island clientOnly={true} deferUntil="idle">
-				            <PinnedPostLiveness />
-			            </Island>
+									<Island clientOnly={true} deferUntil="idle">
+										<PinnedPostLiveness />
+									</Island>
 									<span data-gu-marker="top-of-blog" />
 									{format.design ===
 										ArticleDesign.LiveBlog && (
