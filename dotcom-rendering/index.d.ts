@@ -873,7 +873,6 @@ interface ComponentNameChunkMap {
 	addWhen: BlockElementType;
 }
 
-// There are docs on loadable in ./docs/loadable-components.md
 interface CarouselImagesMap {
 	'300'?: string;
 	'460'?: string;
