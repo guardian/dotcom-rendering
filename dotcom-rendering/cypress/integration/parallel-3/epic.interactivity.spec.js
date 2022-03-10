@@ -19,12 +19,18 @@ const stubUpdates = () => {
 
 describe('Epics', function () {
 	beforeEach(function () {
+		cy.clearCookie('gu-cmp-disabled', {
+			log: true,
+		});
+		cy.clearLocalStorage();
 		setLocalBaseUrl();
 		mockApi();
 	});
 
 	it('should render the liveblog epic in the list of blocks', function () {
 		stubUpdates();
+		// Set browser id
+		cy.setCookie('bwid', 'myBrowserId');
 		storage.local.set('gu.geo.override', 'GB');
 		cy.visit(`/Article?url=${blogUrl}?live=true&force-liveblog-epic=true`);
 		cmpIframe().contains('Yes, I’m happy').click();
