@@ -217,6 +217,9 @@ describe('Liveblogs', function () {
 	});
 
 	it('should render the liveblog epic in the list of blocks', function () {
+		cy.removeCookie('gu-cmp-disabled', {
+			log: true,
+		});
 		stubUpdates();
 		cy.visit(`/Article?url=${blogUrl}?live=true&force-liveblog-epic=true`);
 		cmpIframe().contains('Yes, I’m happy').click();
