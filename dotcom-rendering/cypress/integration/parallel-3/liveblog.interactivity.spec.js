@@ -7,8 +7,6 @@ import { mockApi } from '../../lib/mocks';
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { tweetBlock } from '../../fixtures/manual/tweet-block';
-import { cmpIframe } from '../../lib/cmpIframe';
-import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 
 const blogUrl =
 	'https://www.theguardian.com/australia-news/live/2022/feb/22/australia-news-live-updates-scott-morrison-nsw-trains-coronavirus-covid-omicron-weather';
