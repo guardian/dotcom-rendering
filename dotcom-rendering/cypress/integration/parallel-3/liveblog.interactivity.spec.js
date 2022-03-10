@@ -219,12 +219,7 @@ describe('Liveblogs', function () {
 	it('should render the liveblog epic in the list of blocks', function () {
 		stubUpdates();
 		cy.visit(`/Article?url=${blogUrl}?live=true&force-liveblog-epic=true`);
-		cmpIframe().contains("It's your choice");
-		cmpIframe().find("[title='Manage my cookies']").click();
-		privacySettingsIframe().contains('Privacy settings');
-		privacySettingsIframe()
-			.find("[title='Accept all']", { timeout: 12000 })
-			.click();
+		cmpIframe().contains('Yes, I’m happy').click();
 
 		// Wait for hydration of the Epic
 		cy.get('gu-island[name=LiveEpic]')
