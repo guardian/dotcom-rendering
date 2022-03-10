@@ -22,7 +22,6 @@ import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 
 import { buildBrazeMessages } from '../lib/braze/buildBrazeMessages';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
-import { Lazy } from './Lazy';
 
 type Props = {
 	CAPI: CAPIBrowserType;
@@ -204,20 +203,6 @@ export const App = ({ CAPI }: Props) => {
 					idUrl={CAPI.config.idUrl}
 					pageViewId={pageViewId}
 				/>
-			</Portal>
-			<Portal rootId="reader-revenue-links-footer">
-				<Lazy margin={300}>
-					<ReaderRevenueLinks
-						urls={CAPI.nav.readerRevenueLinks.footer}
-						edition={CAPI.editionId}
-						dataLinkNamePrefix="footer : "
-						inHeader={false}
-						remoteHeaderEnabled={false}
-						pageViewId={pageViewId}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
-						ophanRecord={ophanRecord}
-					/>
-				</Lazy>
 			</Portal>
 			<Portal rootId="bottom-banner">
 				<StickyBottomBanner
