@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable func-names */
+import { storage } from '@guardian/libs';
 import { mockApi } from '../../lib/mocks';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { cmpIframe } from '../../lib/cmpIframe';
