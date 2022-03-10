@@ -874,14 +874,6 @@ interface ComponentNameChunkMap {
 	addWhen: BlockElementType;
 }
 
-interface InteractiveBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'InteractiveBlockComponent';
-	addWhen: InteractiveBlockElement['_type'];
-}
-
-// There are docs on loadable in ./docs/loadable-components.md
-type LoadableComponents = [InteractiveBlockLoadable];
-
 interface CarouselImagesMap {
 	'300'?: string;
 	'460'?: string;
