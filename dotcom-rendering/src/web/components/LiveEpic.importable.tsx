@@ -187,9 +187,6 @@ const Render = ({
 			css={css`
 				margin-bottom: ${space[3]}px;
 			`}
-			// TODO: Remove (or change) this once this PR has been merged
-			// https://github.com/guardian/support-dotcom-components/pull/646
-			data-cy="contributions-liveblog-epic"
 		>
 			{/* eslint-disable-next-line react/jsx-props-no-spreading */}
 			<Epic {...props} />
