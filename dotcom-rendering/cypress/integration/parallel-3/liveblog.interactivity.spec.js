@@ -217,7 +217,7 @@ describe('Liveblogs', function () {
 	});
 
 	it('should render the liveblog epic in the list of blocks', function () {
-		cy.removeCookie('gu-cmp-disabled', {
+		cy.clearCookie('gu-cmp-disabled', {
 			log: true,
 		});
 		stubUpdates();
