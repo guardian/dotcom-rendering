@@ -36,7 +36,6 @@ export const LiveBlogRenderer = ({
 	const thereAreMoreThanFourBlocks = blocks.length > 4;
 	const positionToInsertEpic = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
 
-	console.log({});
 	return (
 		<>
 			{blocks.map((block, index) => {
