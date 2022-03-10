@@ -7,6 +7,8 @@ import { mockApi } from '../../lib/mocks';
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { tweetBlock } from '../../fixtures/manual/tweet-block';
+import { cmpIframe } from '../../lib/cmpIframe';
+import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 
 const blogUrl =
 	'https://www.theguardian.com/australia-news/live/2022/feb/22/australia-news-live-updates-scott-morrison-nsw-trains-coronavirus-covid-omicron-weather';
@@ -34,13 +36,13 @@ const stubUpdates = () => {
 
 describe('Liveblogs', function () {
 	beforeEach(function () {
-		disableCMP();
 		setLocalBaseUrl();
 		mockApi();
 		ignoreTwitterError();
 	});
 
 	it('should show the toast, incrementing the count as new updates are sent', function () {
+		disableCMP();
 		stubUpdates();
 		cy.visit(`/Article?url=${blogUrl}?live=true`);
 		// Wait for hydration
@@ -69,6 +71,7 @@ describe('Liveblogs', function () {
 	});
 
 	it('should insert the html from the update call', function () {
+		disableCMP();
 		stubUpdates();
 		cy.visit(`/Article?url=${blogUrl}?live=true`);
 		// Wait for hydration
@@ -86,6 +89,7 @@ describe('Liveblogs', function () {
 	});
 
 	it('should scroll the page to the top and reveal content when the toast is clicked', function () {
+		disableCMP();
 		stubUpdates();
 		cy.visit(`/Article?url=${blogUrl}?live=true`);
 		// Wait for hydration
@@ -107,6 +111,7 @@ describe('Liveblogs', function () {
 	});
 
 	it('should enhance tweets after they have been inserted', function () {
+		disableCMP();
 		const getTwitterIframe = () => {
 			return cy
 				.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e iframe', {
@@ -139,6 +144,7 @@ describe('Liveblogs', function () {
 	});
 
 	it('should use the right block id when polling from the second page', function () {
+		disableCMP();
 		cy.intercept(
 			{
 				url: /\?lastUpdate=.*/,
@@ -156,6 +162,7 @@ describe('Liveblogs', function () {
 	});
 
 	it.skip('should handle when the toast is clicked from the second page', function () {
+		disableCMP();
 		stubUpdates();
 		cy.visit(
 			`/Article?url=${blogUrl}?live=true&page=with:block-6214732b8f08f86d89ef68d6&filterKeyEvents=false#liveblog-navigation`,
@@ -185,6 +192,7 @@ describe('Liveblogs', function () {
 	});
 
 	it('should initially hide new blocks, only revealing them when the top of blog is in view', function () {
+		disableCMP();
 		stubUpdates();
 		cy.visit(`/Article?url=${blogUrl}?live=true`);
 		// Wait for hydration
@@ -206,5 +214,23 @@ describe('Liveblogs', function () {
 				'be.visible',
 			);
 		});
+	});
+
+	it('should render the liveblog epic in the list of blocks', function () {
+		stubUpdates();
+		cy.visit(`/Article?url=${blogUrl}?live=true&force-liveblog-epic=true`);
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe()
+			.find("[title='Accept all']", { timeout: 12000 })
+			.click();
+
+		// Wait for hydration of the Epic
+		cy.get('gu-island[name=LiveEpic]')
+			.first()
+			.should('have.attr', 'data-gu-ready', 'true');
+		cy.get('[data-cy=contributions-liveblog-epic]').scrollIntoView();
+		cy.get('[data-cy=contributions-liveblog-epic]').should('be.visible');
 	});
 });

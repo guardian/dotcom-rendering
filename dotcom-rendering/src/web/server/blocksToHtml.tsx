@@ -23,6 +23,10 @@ export const blocksToHtml = ({
 	section,
 	sharedAdTargeting,
 	adUnit,
+	shouldHideReaderRevenue,
+	tags,
+	isPaidContent,
+	contributionsServiceUrl,
 }: BlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(CAPIFormat);
 
@@ -46,6 +50,11 @@ export const blocksToHtml = ({
 			webTitle={webTitle}
 			ajaxUrl={ajaxUrl}
 			isLiveUpdate={true}
+			section={section}
+			shouldHideReaderRevenue={shouldHideReaderRevenue}
+			tags={tags}
+			isPaidContent={isPaidContent}
+			contributionsServiceUrl={contributionsServiceUrl}
 		/>,
 	);
 
