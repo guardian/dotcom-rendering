@@ -19,9 +19,6 @@ const stubUpdates = () => {
 
 describe('Epics', function () {
 	beforeEach(function () {
-		cy.clearCookie('gu-cmp-disabled', {
-			log: true,
-		});
 		cy.clearLocalStorage();
 		setLocalBaseUrl();
 		mockApi();
