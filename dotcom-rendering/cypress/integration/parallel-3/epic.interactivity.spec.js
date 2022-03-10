@@ -22,7 +22,6 @@ describe('Epics', function () {
 		cy.clearCookie('gu-cmp-disabled', {
 			log: true,
 		});
-		cy.clearLocalStorage();
 		setLocalBaseUrl();
 		mockApi();
 	});
