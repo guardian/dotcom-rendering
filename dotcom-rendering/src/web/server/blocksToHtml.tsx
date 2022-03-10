@@ -23,10 +23,6 @@ export const blocksToHtml = ({
 	section,
 	sharedAdTargeting,
 	adUnit,
-	shouldHideReaderRevenue,
-	tags,
-	isPaidContent,
-	contributionsServiceUrl,
 }: BlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(CAPIFormat);
 
@@ -51,10 +47,11 @@ export const blocksToHtml = ({
 			ajaxUrl={ajaxUrl}
 			isLiveUpdate={true}
 			section={section}
-			shouldHideReaderRevenue={shouldHideReaderRevenue}
-			tags={tags}
-			isPaidContent={isPaidContent}
-			contributionsServiceUrl={contributionsServiceUrl}
+			// The props below are never used because isLiveUpdate is true but, typescript...
+			shouldHideReaderRevenue={false}
+			tags={[]}
+			isPaidContent={false}
+			contributionsServiceUrl=""
 		/>,
 	);
 

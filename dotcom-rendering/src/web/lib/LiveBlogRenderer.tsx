@@ -12,10 +12,10 @@ type Props = {
 	ajaxUrl: string;
 	isLiveUpdate?: boolean;
 	section: string;
-	shouldHideReaderRevenue?: boolean;
-	tags?: TagType[];
-	isPaidContent?: boolean;
-	contributionsServiceUrl?: string;
+	shouldHideReaderRevenue: boolean;
+	tags: TagType[];
+	isPaidContent: boolean;
+	contributionsServiceUrl: string;
 };
 
 export const LiveBlogRenderer = ({
@@ -33,20 +33,16 @@ export const LiveBlogRenderer = ({
 	isPaidContent,
 	contributionsServiceUrl,
 }: Props) => {
-	const hasEpicProps =
-		shouldHideReaderRevenue &&
-		tags &&
-		isPaidContent &&
-		contributionsServiceUrl;
 	const thereAreMoreThanFourBlocks = blocks.length > 4;
 	const positionToInsertEpic = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
+
+	console.log({});
 	return (
 		<>
 			{blocks.map((block, index) => {
 				return (
 					<>
 						{!isLiveUpdate &&
-							hasEpicProps &&
 							thereAreMoreThanFourBlocks &&
 							index === positionToInsertEpic && (
 								<Island clientOnly={true}>

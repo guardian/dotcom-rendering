@@ -127,10 +127,6 @@ export const renderBlocks = (
 			section,
 			sharedAdTargeting,
 			adUnit,
-			shouldHideReaderRevenue,
-			tags,
-			isPaidContent,
-			contributionsServiceUrl,
 		} = body;
 
 		const enhancedBlocks = enhanceBlocks(blocks, format);
@@ -148,10 +144,6 @@ export const renderBlocks = (
 			section,
 			sharedAdTargeting,
 			adUnit,
-			shouldHideReaderRevenue,
-			tags,
-			isPaidContent,
-			contributionsServiceUrl,
 		});
 
 		res.status(200).send(html);

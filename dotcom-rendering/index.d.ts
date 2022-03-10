@@ -579,10 +579,6 @@ interface BlocksRequest {
 	sharedAdTargeting: Record<string, unknown>;
 	adUnit: string;
 	videoDuration?: number;
-	shouldHideReaderRevenue: boolean;
-	tags: TagType[];
-	isPaidContent: boolean;
-	contributionsServiceUrl: string;
 }
 
 /**
