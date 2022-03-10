@@ -19,7 +19,6 @@ const stubUpdates = () => {
 
 describe('Epics', function () {
 	beforeEach(function () {
-		cy.clearLocalStorage();
 		setLocalBaseUrl();
 		mockApi();
 	});
