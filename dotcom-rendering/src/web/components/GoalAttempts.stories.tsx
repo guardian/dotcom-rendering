@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 import { GoalAttempts } from './GoalAttempts';
 
@@ -33,7 +34,11 @@ export const Default = () => {
 					offTarget: 4,
 					color: '#e3f45a',
 				}}
-				backgroundColour="lightgray"
+				format={{
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.Sport,
+					display: ArticleDisplay.Standard,
+				}}
 			/>
 		</Container>
 	);

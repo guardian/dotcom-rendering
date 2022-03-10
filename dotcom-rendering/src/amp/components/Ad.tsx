@@ -46,7 +46,7 @@ const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	return adTargetingMapped;
 };
 
-export const realTimeConfig = (
+const realTimeConfig = (
 	usePrebid: boolean,
 	usePermutive: boolean,
 	useAmazon: boolean,
@@ -86,7 +86,7 @@ export const realTimeConfig = (
 	return JSON.stringify(data);
 };
 
-export interface CommercialConfig {
+interface CommercialConfig {
 	usePrebid: boolean;
 	usePermutive: boolean;
 	useAmazon: boolean;
@@ -98,11 +98,12 @@ export interface BaseAdProps {
 	contentType: string;
 	commercialProperties: CommercialProperties;
 	adTargeting: AdTargeting;
+	config: CommercialConfig;
 }
 
 interface AdProps extends BaseAdProps {
 	isSticky?: boolean;
-	rtcConfig: string;
+	placementId: number;
 }
 
 export const Ad = ({
@@ -111,8 +112,9 @@ export const Ad = ({
 	section,
 	contentType,
 	commercialProperties,
-	rtcConfig,
 	adTargeting,
+	config: { useAmazon, usePrebid, usePermutive },
+	placementId,
 }: AdProps) => {
 	const adSizes = isSticky ? stickySizes : inlineSizes;
 	// Set Primary ad size as first element (should be the largest)
@@ -143,7 +145,12 @@ export const Ad = ({
 				]),
 			)}
 			data-slot={ampData(section, contentType)}
-			rtc-config={rtcConfig}
+			rtc-config={realTimeConfig(
+				usePrebid,
+				usePermutive,
+				useAmazon,
+				placementId,
+			)}
 		/>
 	);
 };

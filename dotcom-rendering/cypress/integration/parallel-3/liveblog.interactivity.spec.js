@@ -161,7 +161,7 @@ describe('Liveblogs', function () {
 		cy.wait('@updateCall');
 	});
 
-	it.skip('should handle when the toast is clicked from the second page', function () {
+	it('should handle when the toast is clicked from the second page', function () {
 		disableCMP();
 		stubUpdates();
 		cy.visit(
