@@ -30,7 +30,7 @@ describe('Epics', function () {
 		cmpIframe().contains('Yes, I’m happy').click();
 
 		// Wait for hydration of the Epic
-		cy.get('gu-island[name=LiveEpic]')
+		cy.get('gu-island[name=LiveBlogEpic]')
 			.first()
 			.should('have.attr', 'data-gu-ready', 'true');
 		cy.get('[data-cy=contributions-liveblog-epic]').scrollIntoView();

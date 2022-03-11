@@ -131,9 +131,9 @@ const usePayload = ({
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
 	if (!consent) return;
-	log('dotcom', 'LiveEpic has consent state');
+	log('dotcom', 'LiveBlogEpic has consent state');
 	if (!countryCode) return;
-	log('dotcom', 'LiveEpic has countryCode');
+	log('dotcom', 'LiveBlogEpic has countryCode');
 
 	return {
 		tracking: {
@@ -187,7 +187,7 @@ const Render = ({
 	const { Epic } = useEpic({ url, name });
 
 	if (!Epic) return null;
-	log('dotcom', 'LiveEpic has the Epic');
+	log('dotcom', 'LiveBlogEpic has the Epic');
 
 	return (
 		<aside
@@ -239,7 +239,7 @@ const Fetch = ({
 	if (!response || !response.data || Object.keys(response).length === 0) {
 		return null;
 	}
-	log('dotcom', 'LiveEpic has a module');
+	log('dotcom', 'LiveBlogEpic has a module');
 
 	// Take any returned module and render it
 	return (
@@ -268,7 +268,7 @@ export const LiveBlogEpic = ({
 	tags,
 	contributionsServiceUrl,
 }: Props) => {
-	log('dotcom', 'LiveEpic started');
+	log('dotcom', 'LiveBlogEpic started');
 	// First construct the payload
 	const payload = usePayload({
 		shouldHideReaderRevenue,
