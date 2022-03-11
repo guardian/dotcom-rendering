@@ -47,6 +47,11 @@ export const Article = () => {
 					headlineText="Rich link headline"
 					contentType="article"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -79,6 +84,11 @@ export const Network = () => {
 					headlineText="Rich link headline"
 					contentType="network"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -117,6 +127,11 @@ export const SectionStory = () => {
 					headlineText="Rich link headline"
 					contentType="section"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Sport,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -152,6 +167,11 @@ export const Inline = () => {
 					headlineText="Rich link when inline"
 					contentType="section"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Lifestyle,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -187,6 +207,11 @@ export const ImageContent = () => {
 					headlineText="Rich link headline"
 					contentType="imageContent"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -225,6 +250,11 @@ export const Interactive = () => {
 					headlineText="Rich link headline"
 					contentType="interactive"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Lifestyle,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -262,6 +292,11 @@ export const Gallery = () => {
 					headlineText="Rich link headline"
 					contentType="gallery"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticleSpecial.Labs,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -300,6 +335,11 @@ export const Video = () => {
 					headlineText="Rich link headline"
 					contentType="video"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -339,6 +379,11 @@ export const Audio = () => {
 					headlineText="Rich link headline"
 					contentType="audio"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -371,6 +416,11 @@ export const LiveBlog = () => {
 					headlineText="Rich link headline"
 					contentType="liveBlog"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Sport,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -409,6 +459,11 @@ export const Tag = () => {
 					headlineText="Rich link headline"
 					contentType="tag"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -441,6 +496,11 @@ export const Index = () => {
 					headlineText="Rich link headline"
 					contentType="index"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Opinion,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -480,6 +540,11 @@ export const Crossword = () => {
 					headlineText="Rich link headline"
 					contentType="crossword"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Opinion,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -512,6 +577,11 @@ export const Survey = () => {
 					headlineText="Rich link headline"
 					contentType="survey"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -544,6 +614,11 @@ export const Signup = () => {
 					headlineText="Rich link headline"
 					contentType="signup"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -577,6 +652,11 @@ export const Userid = () => {
 					headlineText="Rich link headline"
 					contentType="userid"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -609,6 +689,11 @@ export const PaidFor = () => {
 					headlineText="Rich link headline"
 					contentType="userid"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
