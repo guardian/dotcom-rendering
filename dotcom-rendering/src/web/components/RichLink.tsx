@@ -303,7 +303,7 @@ export const RichLink = ({
 								<Avatar
 									imageSrc={contributorImage}
 									imageAlt={mainContributor}
-									palette={decidePalette(linkFormat)}
+									palette={palette}
 								/>
 							</div>
 						)}
