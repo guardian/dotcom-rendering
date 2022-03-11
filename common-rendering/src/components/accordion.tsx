@@ -37,6 +37,7 @@ const detailsStyles: SerializedStyles = css`
 `;
 
 const titleRowStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+	cursor: pointer;
 	position: relative;
 	display: block;
 	align-items: center;
