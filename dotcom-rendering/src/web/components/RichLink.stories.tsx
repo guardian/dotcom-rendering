@@ -403,7 +403,7 @@ export const LiveBlog = () => {
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
+					design: ArticleDesign.LiveBlog,
 					theme: ArticlePillar.News,
 				}}
 				isMainMedia={false}
@@ -418,12 +418,12 @@ export const LiveBlog = () => {
 					url=""
 					linkFormat={{
 						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
+						design: ArticleDesign.LiveBlog,
 						theme: ArticlePillar.Sport,
 					}}
 					format={{
 						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
+						design: ArticleDesign.LiveBlog,
 						theme: ArticlePillar.Sport,
 					}}
 					tags={[]}
