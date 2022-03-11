@@ -11,7 +11,6 @@ import {
 } from '@guardian/source-foundations';
 
 import { ArticleDesign } from '@guardian/libs';
-import { getSharingUrls } from 'src/lib/sharing-urls';
 import { GridItem } from './GridItem';
 import { Hide } from './Hide';
 import { Border } from './Border';
@@ -61,52 +60,55 @@ const MyGrid = ({
 								grid-template-columns: 239px 1px 1fr 1fr;
 
 								grid-template-areas:
-									'banner banner  banner    banner'
-									'title  border  content   image'
-									'.      border  privacy   privacy'
-									'promo  promo   promo     promo';
+									'title      border  content       image'
+									'.          border  privacy       privacy'
+									'promo      promo   promo         promo'
+									'recotitle  border2  recocontent   recocontent';
 							}
 
 							${until.wide} {
 								grid-template-columns: 160px 1px 1fr 1fr;
 								grid-template-areas:
-									'banner banner  banner    banner'
 									'title  border  content   image'
 									'.      border  privacy   privacy'
-									'promo  promo   promo     promo';
+									'promo  promo   promo     promo'
+									'recotitle  border2  recocontent   recocontent';
 							}
 
 							${until.leftCol} {
 								grid-template-columns: 1fr 1fr;
 								grid-template-areas:
-									'banner     banner'
-									'title      title'
-									'content    image'
-									'privacy    privacy'
-									'promo      promo';
+									'title       title'
+									'content     image'
+									'privacy     privacy'
+									'promo       promo'
+									'recotitle   recotitle'
+									'recocontent recocontent';
 							}
 
 							${until.desktop} {
 								grid-template-columns: 1fr;
 								grid-template-areas:
-									'banner'
 									'title'
 									'content'
 									'image'
 									'privacy'
-									'promo';
+									'promo'
+									'recotitle'
+									'recocontent';
 							}
 
 							${until.tablet} {
 								grid-column-gap: 0px;
 								grid-template-columns: 1fr;
 								grid-template-areas:
-									'banner'
 									'title'
 									'content'
 									'image'
 									'privacy'
-									'promo';
+									'promo'
+									'recotitle'
+									'recocontent';
 							}
 						}
 					`}
@@ -127,9 +129,6 @@ const bannerStyle = css`
 
 export const NewsLetterSignupGrid = ({ format, palette, CAPI }: Props) => (
 	<MyGrid format={format}>
-		<GridItem area="banner">
-			<div css={bannerStyle}>NEWSLETTERS</div>
-		</GridItem>
 		<GridItem area="title" element="aside">
 			<p>UK Focused</p>
 		</GridItem>
@@ -183,7 +182,19 @@ export const NewsLetterSignupGrid = ({ format, palette, CAPI }: Props) => (
 		</GridItem>
 
 		<GridItem area="promo">
-			<div css={bannerStyle}>YOU MAY ALSO LIKE:</div>
+			<div css={bannerStyle}>YOU ALSO MIGHT ENJOY:</div>
+		</GridItem>
+
+		<GridItem area="recotitle">
+			<h2>Other popular newsletters</h2>
+		</GridItem>
+		<GridItem area="border2">
+			<Border palette={palette} />
+		</GridItem>
+		<GridItem area="recocontent">
+			<p>long read</p>
+			<p>pushing buttons</p>
+			<p>hear here</p>
 		</GridItem>
 	</MyGrid>
 );

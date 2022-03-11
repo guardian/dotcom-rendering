@@ -54,6 +54,7 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { NewsLetterSignupGrid } from '../components/NewsLetterSignupGrid';
+import { NewsLetterSignupBanner } from '../components/NewsLetterSignupBanner';
 
 const StandardGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -367,6 +368,9 @@ export const NewsletterSignupLayout = ({
 
 			<main>
 
+				<ElementContainer padded={false}>
+					<NewsLetterSignupBanner format={format} palette={palette}/>
+				</ElementContainer>
 				<ElementContainer padded={false}>
 					<NewsLetterSignupGrid  format={format} palette={palette} CAPI={CAPI} />
 				</ElementContainer>
