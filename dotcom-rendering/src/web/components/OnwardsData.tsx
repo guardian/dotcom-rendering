@@ -10,6 +10,7 @@ type Props = {
 	format: ArticleFormat;
 	isCuratedContent?: boolean;
 	isFullCardImage?: boolean;
+	customHeading?: string
 };
 
 type OnwardsResponse = {
@@ -27,6 +28,7 @@ export const OnwardsData = ({
 	format,
 	isCuratedContent,
 	isFullCardImage,
+	customHeading,
 }: Props) => {
 	const { data } = useApi<OnwardsResponse>(url);
 
@@ -40,7 +42,7 @@ export const OnwardsData = ({
 	if (data && data.trails) {
 		return (
 			<Container
-				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
+				heading={customHeading || data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
 				trails={buildTrails(data.trails, limit)}
 				description={data.description}
 				ophanComponentName={ophanComponentName}

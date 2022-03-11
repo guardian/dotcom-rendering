@@ -379,6 +379,27 @@ export const NewsletterSignupLayout = ({
 					/>
 				</ElementContainer>
 
+				<Island clientOnly={true} deferUntil="idle">
+					<OnwardsUpper
+						ajaxUrl={CAPI.config.ajaxUrl}
+						hasRelated={CAPI.hasRelated}
+						hasStoryPackage={CAPI.hasStoryPackage}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						pageId={CAPI.pageId}
+						isPaidContent={CAPI.config.isPaidContent || false}
+						showRelatedContent={CAPI.config.showRelatedContent}
+						keywordIds={CAPI.config.keywordIds}
+						contentType={CAPI.contentType}
+						tags={CAPI.tags}
+						format={format}
+						pillar={format.theme}
+						edition={CAPI.editionId}
+						shortUrlId={CAPI.config.shortUrlId}
+						alsoShowCuratedContent={false}
+						customHeading="Other popular newsletters"
+					/>
+				</Island>
+
 				<ElementContainer
 					data-print-layout="hide"
 					showTopBorder={false}

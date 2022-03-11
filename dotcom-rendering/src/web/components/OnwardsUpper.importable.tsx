@@ -176,6 +176,8 @@ type Props = {
 	edition: Edition;
 	pillar: ArticleTheme;
 	shortUrlId: string;
+	alsoShowCuratedContent?: boolean;
+	customHeading?: string;
 };
 
 export const OnwardsUpper = ({
@@ -193,6 +195,8 @@ export const OnwardsUpper = ({
 	pillar,
 	edition,
 	shortUrlId,
+	alsoShowCuratedContent = true,
+	customHeading,
 }: Props) => {
 	// Related content can be a collection of articles based on
 	// two things, 1: A popular tag, or 2: A generic text match
@@ -268,7 +272,7 @@ export const OnwardsUpper = ({
 		ophanComponentName = 'related-stories';
 	}
 
-	const curatedDataUrl = showRelatedContent
+	const curatedDataUrl = (showRelatedContent && alsoShowCuratedContent)
 		? getContainerDataUrl(pillar, edition, ajaxUrl)
 		: null;
 
@@ -282,6 +286,7 @@ export const OnwardsUpper = ({
 						ophanComponentName={ophanComponentName}
 						Container={isPaidContent ? OnwardsLayout : Carousel}
 						format={format}
+						customHeading={customHeading}
 					/>
 				</ElementContainer>
 			)}
