@@ -235,9 +235,10 @@ const Fetch = ({
 	);
 
 	// If we didn't get a module in response (or we're still waiting) do nothing. If
-	// no epic should be shown data is equal to {}, hence the Object.keys
-	if (!response || !response.data || Object.keys(response).length === 0)
+	// no epic should be shown the response is equal to {}, hence the Object.keys
+	if (!response || !response.data || Object.keys(response).length === 0) {
 		return null;
+	}
 	log('dotcom', 'LiveEpic has a module');
 
 	// Take any returned module and render it
