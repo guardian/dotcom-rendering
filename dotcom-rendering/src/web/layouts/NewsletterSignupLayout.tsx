@@ -163,7 +163,7 @@ export const NewsletterSignupLayout = ({
 
 			<main>
 				<ElementContainer padded={false}>
-					<NewsLetterSignupBanner format={format} palette={palette} />
+					<NewsLetterSignupBanner />
 				</ElementContainer>
 
 				<ElementContainer padded={true}>

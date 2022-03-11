@@ -10,6 +10,7 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
+import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 
 type Props = {
 	CAPI: CAPIType;
@@ -17,8 +18,21 @@ type Props = {
 	format: ArticleFormat;
 };
 
+const hackToNewsletterSignupLayout = true;
+
 export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 	const palette = decidePalette(format);
+
+	if (hackToNewsletterSignupLayout) {
+		return (
+			<NewsletterSignupLayout
+				CAPI={CAPI}
+				NAV={NAV}
+				format={format}
+				palette={palette}
+			/>
+		);
+	}
 
 	// TODO we can probably better express this as data
 	switch (format.display) {

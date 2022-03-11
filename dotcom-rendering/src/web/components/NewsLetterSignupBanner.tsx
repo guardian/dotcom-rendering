@@ -1,22 +1,42 @@
 import { css } from '@emotion/react';
+import { from, until } from '@guardian/source-foundations';
 
-
+import Logo from '../../static/logos/guardian-newsletters-logo.svg';
 
 type Props = {
-	format: ArticleFormat;
-	palette: Palette;
 };
 
 const bannerStyle = css`
-	background-color: blue;
+	background-color: #052962;
 	color: yellow;
 	padding: 10px 0;
 	font-weight: bold;
 `;
 
-export const NewsLetterSignupBanner = ({ }: Props) => (
+const wrapperStyle = css`
+	padding-left: 16px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 
+	${from.wide} {
+		width: 250px;
+	}
 
-	<div css={bannerStyle}>NEWSLETTERS</div>
+	${until.wide} {
+		width: 170px;
+	}
 
+	${until.desktop} {
+		justify-content: flex-start;
+		width: 100%;
+	}
+`;
+
+export const NewsLetterSignupBanner = ({}: Props) => (
+	<div css={bannerStyle}>
+		<div css={wrapperStyle}>
+			<Logo />
+		</div>
+	</div>
 );
