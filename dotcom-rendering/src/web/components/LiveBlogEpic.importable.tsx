@@ -236,7 +236,7 @@ const Fetch = ({
 	);
 
 	// If we didn't get a module in response (or we're still waiting) do nothing. If
-	// no banner should be shown data is equal to {}, hence the Object.keys
+	// no epic should be shown data is equal to {}, hence the Object.keys
 	if (!data || Object.keys(data).length === 0) return null;
 	log('dotcom', 'LiveEpic has a module');
 
@@ -251,7 +251,7 @@ const Fetch = ({
 };
 
 /**
- * LiveEpic is the Support the Guardian banner which appears in-between blocks in blogs
+ * LiveBlogEpic is the support epic which appears in-between blocks in blogs
  *
  * There are three main steps to create this epic:
  *
