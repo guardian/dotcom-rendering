@@ -183,19 +183,17 @@ const bttPosition = css`
 	right: 20px;
 `;
 
-type Props = {
-	pageFooter: FooterType;
-	urls: ReaderRevenueCategories;
-	edition: Edition;
-	contributionsServiceUrl: string;
-};
-
-const FooterLinks: React.FC<Props> = ({
+const FooterLinks = ({
 	pageFooter,
 	urls,
 	edition,
 	contributionsServiceUrl,
-}: Props) => {
+}: {
+	pageFooter: FooterType;
+	urls: ReaderRevenueCategories;
+	edition: Edition;
+	contributionsServiceUrl: string;
+}) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
 		const linkList = linkGroup.map((l: FooterLink, index: number) => (
 			<li key={`${l.url}${index}`}>
@@ -239,20 +237,20 @@ const FooterLinks: React.FC<Props> = ({
 
 const year = new Date().getFullYear();
 
-export const Footer: React.FC<{
-	pillars: PillarType[];
-	pillar: ArticleTheme;
-	pageFooter: FooterType;
-	urls: ReaderRevenueCategories;
-	edition: Edition;
-	contributionsServiceUrl: string;
-}> = ({
+export const Footer = ({
 	pillars,
 	pillar,
 	pageFooter,
 	urls,
 	edition,
 	contributionsServiceUrl,
+}: {
+	pillars: PillarType[];
+	pillar: ArticleTheme;
+	pageFooter: FooterType;
+	urls: ReaderRevenueCategories;
+	edition: Edition;
+	contributionsServiceUrl: string;
 }) => (
 	<div
 		data-print-layout="hide"
