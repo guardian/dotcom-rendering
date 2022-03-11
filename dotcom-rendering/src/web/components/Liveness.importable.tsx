@@ -74,6 +74,8 @@ function revealPendingBlocks() {
 		block.classList.add('reveal');
 		block.classList.remove('pending');
 	});
+	// Notify commercial that new blocks are available and they can re-run spacefinder
+	document.dispatchEvent(new CustomEvent('liveblog:blocks-updated'));
 }
 
 /**
