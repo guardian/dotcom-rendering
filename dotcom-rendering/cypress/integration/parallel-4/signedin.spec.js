@@ -38,6 +38,38 @@ describe('Signed in readers', function () {
 		cy.contains('My account');
 	});
 
+	it('should have the correct urls for the header links', function () {
+		cy.setCookie('GU_U', 'true', {
+			log: true,
+		});
+		cy.setCookie('gu_hide_support_messaging', 'true', {
+			log: true,
+		});
+		// Mock call to 'profile/me'
+		cy.intercept(
+			'GET',
+			'**/profile/me?strict_sanctions_check=false',
+			profileResponse,
+		);
+		cy.visit(`Article?url=${articleUrl}`);
+
+		cy.get('a[data-link-name="nav2 : supporter-cta"]')
+			.should('have.attr', 'href')
+			.and('contain', 'support.theguardian.com');
+
+		cy.get('a[data-link-name="nav2 : job-cta"]').should(
+			'have.attr',
+			'href',
+			'https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader',
+		);
+		cy.get('button[data-link-name="nav2 : topbar: my account"]');
+		cy.get('a[data-link-name="nav2 : search"]').should(
+			'have.attr',
+			'href',
+			'https://www.google.co.uk/advanced_search?q=site:www.theguardian.com',
+		);
+	});
+
 	it('should not display signed in texts when users are not signed in', function () {
 		cy.visit(`Article?url=${articleUrl}`);
 		cy.scrollTo('bottom', { duration: 300 });
