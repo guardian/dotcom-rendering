@@ -8,6 +8,7 @@ import { ModuleDataResponse } from '@guardian/support-dotcom-components';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecurringContributor,
+	REQUIRED_CONSENTS_FOR_ARTICLE_COUNT,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
@@ -82,7 +83,6 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 };
 
 function consentGivenForArticleCounts(consent: ConsentState): boolean {
-	const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 	const { ccpa, tcfv2, aus } = consent;
 
 	if (ccpa || aus) {
