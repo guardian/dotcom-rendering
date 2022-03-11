@@ -11,11 +11,13 @@ import {
 } from '@guardian/source-foundations';
 
 import { ArticleDesign } from '@guardian/libs';
+import { SvgEnvelope } from '@guardian/source-react-components';
 import { GridItem } from './GridItem';
 import { Hide } from './Hide';
 import { Border } from './Border';
 import { MainMedia } from './MainMedia';
 import { ShareIcons } from './ShareIcons';
+import { ArticleHeadline } from './ArticleHeadline';
 
 type Props = {
 	format: ArticleFormat;
@@ -23,7 +25,7 @@ type Props = {
 	CAPI: CAPIType;
 };
 
-const MyGrid = ({
+const NewsletterContentGrid = ({
 	children,
 	format,
 }: {
@@ -107,11 +109,89 @@ const MyGrid = ({
 	}
 };
 
+const newsletterFactStyle = (
+	params: { color?: string; padding?: string } = {},
+) => css`
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: ${params.padding || '0'};
+
+	figure {
+		background-color: #ffe500;
+		padding: 6px;
+		border-radius: 50%;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		margin-right: 3px;
+	}
+
+	span {
+		${textSans.medium({ fontWeight: 'bold' })}
+		color: ${params.color || '#121212'};
+	}
+`;
+
+const privacyStyles = css`
+	${textSans.xsmall()}
+	margin-bottom: 16px;
+
+	b {
+		font-weight: 700;
+	}
+
+	a,
+	a:visited,
+	a:active {
+		color: inherit;
+		text-decoration: underline;
+	}
+`;
+
+const shareSectionStyles = css`
+	display: flex;
+	padding: 16px 0;
+
+	h2 {
+		${textSans.large({ fontWeight: 'bold' })}
+		padding-right: 16px
+	}
+`;
+
+const contentPlaceHolderStyle = css`
+	background: yellow;
+	padding: 16px 0;
+	border: 4px dashed red;
+
+	p {
+		margin-bottom: 8px;
+	}
+`;
+
+function findFirstParagraphForDemo(CAPI: CAPIType): string {
+	const textElement = CAPI.blocks[0].elements.find(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.TextBlockElement',
+	);
+
+	if (textElement) {
+		return (textElement as TextBlockElement).html;
+	}
+
+	return '<p>NO CONTENT FOUND</p>';
+}
 
 export const NewsLetterSignupContent = ({ format, palette, CAPI }: Props) => (
-	<MyGrid format={format}>
+	<NewsletterContentGrid format={format}>
 		<GridItem area="title" element="aside">
-			<p>UK Focused</p>
+			<div css={newsletterFactStyle({ padding: '16px 0' })}>
+				<figure aria-label="newsletter type">
+					<SvgEnvelope size="small" />
+				</figure>
+				<span>UK Focused</span>
+			</div>
 		</GridItem>
 
 		<GridItem area="border">
@@ -119,15 +199,24 @@ export const NewsLetterSignupContent = ({ format, palette, CAPI }: Props) => (
 		</GridItem>
 
 		<GridItem area="content" element="main">
-			<div
-				css={css`
-					background-color: pink;
-				`}
-			>
-				<p>{CAPI.headline}</p>
-				<p>{CAPI.standfirst}</p>
+			<ArticleHeadline
+				headlineString={CAPI.headline}
+				format={format}
+				tags={[]}
+			/>
+			<div css={contentPlaceHolderStyle}>
+				<p>THIS IS WILL BE THE FORMATTED ARTICLE BODY AS DEFINED IN COMPOSER</p>
+				<p>WHICH SHOULD INCLUDE A SIGN-UP EMBED</p>
+				<div dangerouslySetInnerHTML={{ __html: CAPI.standfirst }} />
+				<div
+					dangerouslySetInnerHTML={{
+						__html: findFirstParagraphForDemo(CAPI),
+					}}
+				/>
+			</div>
 
-				<p>Share with your friends</p>
+			<div css={shareSectionStyles}>
+				<h2>Tell your friends</h2>
 
 				<ShareIcons
 					pageId={CAPI.pageId}
@@ -136,7 +225,7 @@ export const NewsLetterSignupContent = ({ format, palette, CAPI }: Props) => (
 					palette={palette}
 					format={format}
 					size="medium"
-					context="LiveBlock"
+					context="ArticleMeta"
 				/>
 			</div>
 		</GridItem>
@@ -152,14 +241,35 @@ export const NewsLetterSignupContent = ({ format, palette, CAPI }: Props) => (
 		</GridItem>
 
 		<GridItem area="privacy">
-			<p>
-				<b>Privacy Notice:</b> We thought you should know this
-				newsletter may also contain information about Guardian products,
-				services and chosen charities or online advertisements.
-				Newsletters may also contain content funded by outside parties.
-				See privacy policy here. This site is protected by reCAPTCHA and
-				the Google PrIvacy Policy and Terms of Services apply.
-			</p>
+			<div css={privacyStyles}>
+				<p>
+					<b>Privacy Notice:</b> We thought you should know this
+					newsletter may also contain information about Guardian
+					products, services and chosen charities or online
+					advertisements. Newsletters may also contain content funded
+					by outside parties.{' '}
+					<a target="_blank" href="/help/privacy-policy">
+						See privacy policy here.
+					</a>{' '}
+					This site is protected by reCAPTCHA and the{' '}
+					<a
+						href="https://policies.google.com/privacy"
+						target="_blank"
+						aria-label="google's privacy policy"
+					>
+						Google Privacy Policy
+					</a>{' '}
+					and{' '}
+					<a
+						href="https://policies.google.com/terms"
+						target="_blank"
+						aria-label="google's terms of service"
+					>
+						Terms of Services
+					</a>{' '}
+					apply.
+				</p>
+			</div>
 		</GridItem>
-	</MyGrid>
+	</NewsletterContentGrid>
 );
