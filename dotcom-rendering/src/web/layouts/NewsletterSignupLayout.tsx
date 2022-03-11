@@ -53,7 +53,7 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
-import { NewsLetterSignupGrid } from '../components/NewsLetterSignupGrid';
+import { NewsLetterSignupContent } from '../components/NewsLetterSignupContent';
 import { NewsLetterSignupBanner } from '../components/NewsLetterSignupBanner';
 
 const StandardGrid = ({ children }: { children: React.ReactNode }) => (
@@ -367,12 +367,16 @@ export const NewsletterSignupLayout = ({
 			)}
 
 			<main>
-
 				<ElementContainer padded={false}>
-					<NewsLetterSignupBanner format={format} palette={palette}/>
+					<NewsLetterSignupBanner format={format} palette={palette} />
 				</ElementContainer>
-				<ElementContainer padded={false}>
-					<NewsLetterSignupGrid  format={format} palette={palette} CAPI={CAPI} />
+
+				<ElementContainer padded={true}>
+					<NewsLetterSignupContent
+						format={format}
+						palette={palette}
+						CAPI={CAPI}
+					/>
 				</ElementContainer>
 
 				<ElementContainer

@@ -57,22 +57,18 @@ const MyGrid = ({
 							grid-column-gap: 10px;
 
 							${from.wide} {
-								grid-template-columns: 239px 1px 1fr 1fr;
+								grid-template-columns: 219px 1px 1fr 1fr;
 
 								grid-template-areas:
 									'title      border  content       image'
-									'.          border  privacy       privacy'
-									'promo      promo   promo         promo'
-									'recotitle  border2  recocontent   recocontent';
+									'.          border  privacy       privacy';
 							}
 
 							${until.wide} {
-								grid-template-columns: 160px 1px 1fr 1fr;
+								grid-template-columns: 140px 1px 1fr 1fr;
 								grid-template-areas:
 									'title  border  content   image'
-									'.      border  privacy   privacy'
-									'promo  promo   promo     promo'
-									'recotitle  border2  recocontent   recocontent';
+									'.      border  privacy   privacy';
 							}
 
 							${until.leftCol} {
@@ -80,10 +76,7 @@ const MyGrid = ({
 								grid-template-areas:
 									'title       title'
 									'content     image'
-									'privacy     privacy'
-									'promo       promo'
-									'recotitle   recotitle'
-									'recocontent recocontent';
+									'privacy     privacy';
 							}
 
 							${until.desktop} {
@@ -92,10 +85,7 @@ const MyGrid = ({
 									'title'
 									'content'
 									'image'
-									'privacy'
-									'promo'
-									'recotitle'
-									'recocontent';
+									'privacy';
 							}
 
 							${until.tablet} {
@@ -105,10 +95,7 @@ const MyGrid = ({
 									'title'
 									'content'
 									'image'
-									'privacy'
-									'promo'
-									'recotitle'
-									'recocontent';
+									'privacy';
 							}
 						}
 					`}
@@ -120,14 +107,8 @@ const MyGrid = ({
 	}
 };
 
-const bannerStyle = css`
-	background-color: blue;
-	color: yellow;
-	padding: 10px 0;
-	font-weight: bold;
-`;
 
-export const NewsLetterSignupGrid = ({ format, palette, CAPI }: Props) => (
+export const NewsLetterSignupContent = ({ format, palette, CAPI }: Props) => (
 	<MyGrid format={format}>
 		<GridItem area="title" element="aside">
 			<p>UK Focused</p>
@@ -179,22 +160,6 @@ export const NewsLetterSignupGrid = ({ format, palette, CAPI }: Props) => (
 				See privacy policy here. This site is protected by reCAPTCHA and
 				the Google PrIvacy Policy and Terms of Services apply.
 			</p>
-		</GridItem>
-
-		<GridItem area="promo">
-			<div css={bannerStyle}>YOU ALSO MIGHT ENJOY:</div>
-		</GridItem>
-
-		<GridItem area="recotitle">
-			<h2>Other popular newsletters</h2>
-		</GridItem>
-		<GridItem area="border2">
-			<Border palette={palette} />
-		</GridItem>
-		<GridItem area="recocontent">
-			<p>long read</p>
-			<p>pushing buttons</p>
-			<p>hear here</p>
 		</GridItem>
 	</MyGrid>
 );
