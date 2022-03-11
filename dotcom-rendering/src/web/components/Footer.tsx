@@ -212,18 +212,16 @@ const FooterLinks = ({
 
 	const rrLinks = (
 		<div css={readerRevenueLinks}>
-			<div id="reader-revenue-links-footer">
-				<Island deferUntil="idle" clientOnly={true}>
-					<ReaderRevenueLinks
-						urls={urls}
-						edition={edition}
-						dataLinkNamePrefix="footer : "
-						inHeader={false}
-						remoteHeader={false}
-						contributionsServiceUrl={contributionsServiceUrl}
-					/>
-				</Island>
-			</div>
+			<Island deferUntil="idle" clientOnly={true}>
+				<ReaderRevenueLinks
+					urls={urls}
+					edition={edition}
+					dataLinkNamePrefix="footer : "
+					inHeader={false}
+					remoteHeader={false}
+					contributionsServiceUrl={contributionsServiceUrl}
+				/>
+			</Island>
 		</div>
 	);
 

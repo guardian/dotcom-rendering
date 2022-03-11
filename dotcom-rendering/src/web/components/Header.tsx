@@ -49,18 +49,16 @@ export const Header = ({
 			</Island>
 		</Hide>
 		<Logo isAnniversary={isAnniversary} edition={edition} />
-		<div id="reader-revenue-links-header">
-			<Island deferUntil="idle" clientOnly={true}>
-				<ReaderRevenueLinks
-					urls={urls}
-					edition={edition}
-					dataLinkNamePrefix="nav2 : "
-					inHeader={true}
-					remoteHeader={remoteHeader}
-					contributionsServiceUrl={contributionsServiceUrl}
-				/>
-			</Island>
-		</div>
+		<Island deferUntil="idle" clientOnly={true}>
+			<ReaderRevenueLinks
+				urls={urls}
+				edition={edition}
+				dataLinkNamePrefix="nav2 : "
+				inHeader={true}
+				remoteHeader={remoteHeader}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>
+		</Island>
 		<div id="links-root">
 			<Island>
 				<Links
