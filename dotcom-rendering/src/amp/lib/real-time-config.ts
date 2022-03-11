@@ -69,15 +69,27 @@ const getTagId = (adType: AdType): string => {
 /**
  * Determine the pub id and profile id required by Pubmatic to construct an RTC vendor
  *
- * TODO in the future these values will depend up `AdType`
  */
-const getPubAndProfileIds = (): {
+const getPubAndProfileIds = (
+	adType: AdType,
+): {
 	pubId: string;
 	profileId: string;
-} => ({
-	profileId: '6611',
-	pubId: '157207',
-});
+} => {
+	if (!adType.isSticky) {
+		switch (adType.adRegion) {
+			case 'AU':
+				return { profileId: '6697', pubId: '157203' };
+			case 'US':
+				return { profileId: '6696', pubId: '157206' };
+		}
+	}
+	// Sticky, International and UK
+	return {
+		profileId: '6611',
+		pubId: '157207',
+	};
+};
 
 /**
  * Compute the full set of RTC parameters from a given ad type
@@ -85,7 +97,7 @@ const getPubAndProfileIds = (): {
 export const getRTCParameters = (adType: AdType): RTCParameters => ({
 	placementId: getPlacementId(adType),
 	tagId: getTagId(adType),
-	...getPubAndProfileIds(),
+	...getPubAndProfileIds(adType),
 });
 
 const permutiveURL = 'https://guardian.amp.permutive.com/rtc?type=doubleclick';

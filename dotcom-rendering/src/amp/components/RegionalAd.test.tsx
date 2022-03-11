@@ -12,8 +12,8 @@ describe('RegionalAd', () => {
 		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=7&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING';
 	const auPrebidURL =
 		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=6&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING';
-	// UK and International have same tag_id
-	const intPrebidURL = ukPrebidURL;
+	const intPrebidURL =
+		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=4&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING';
 
 	const ukRelevantYieldURL =
 		'https://pbs.relevant-digital.com/openrtb2/amp?tag_id=6214ca675cf18e70cbaeef37_6214c9a4b73a6613d4aeef2f&tgt_pfx=rv&gdpr_consent=CONSENT_STRING';
@@ -34,9 +34,24 @@ describe('RegionalAd', () => {
 			PUB_ID: '157207',
 		},
 	};
-	const usPubmaticVendorObj = ukPubmaticVendorObj;
-	const auPubmaticVendorObj = usPubmaticVendorObj;
-	const intPubmaticVendorObj = auPubmaticVendorObj;
+	const usPubmaticVendorObj = {
+		openwrap: {
+			PROFILE_ID: '6696',
+			PUB_ID: '157206',
+		},
+	};
+	const auPubmaticVendorObj = {
+		openwrap: {
+			PROFILE_ID: '6697',
+			PUB_ID: '157203',
+		},
+	};
+	const intPubmaticVendorObj = {
+		openwrap: {
+			PROFILE_ID: '6611',
+			PUB_ID: '157207',
+		},
+	};
 
 	it('with no ab test running rtc-config contains permutive and prebid URLs when `usePermutive` and `usePrebid` flags are set to true', () => {
 		const { container } = render(
