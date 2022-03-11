@@ -45,14 +45,6 @@ describe('Signed in readers', function () {
 		cy.setCookie('gu_hide_support_messaging', 'true', {
 			log: true,
 		});
-		cy.on('uncaught:exception', (err, runnable) => {
-			// When we set the `GU_U` cookie this is causing the commercial bundle to try and do
-			// something with the url which is failing in Cypress with a malformed URI error
-			expect(err.message).to.include('URI malformed');
-			// This error is unrelated to the test in question so return  false to prevent
-			// this commercial error from failing this test
-			return false;
-		});
 		// Mock call to 'profile/me'
 		cy.intercept(
 			'GET',
