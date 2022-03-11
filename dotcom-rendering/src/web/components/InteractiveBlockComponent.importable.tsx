@@ -250,7 +250,7 @@ export const InteractiveBlockComponent = ({
 			iframe.style.width = '100%';
 			iframe.style.border = 'none';
 			iframe.height = decideHeight(role).toString();
-			iframe.src = url;
+			iframe.src = url.replace('http:', 'https:');
 
 			setupWindowListeners(iframe);
 
