@@ -260,7 +260,7 @@ const Fetch = ({
  * 3. Render - Take the url, props and name data we got in response to our fetch and dynamically import
  *    and render the Epic component using it
  */
-export const LiveEpic = ({
+export const LiveBlogEpic = ({
 	section,
 	shouldHideReaderRevenue,
 	isPaidContent,

@@ -1,6 +1,6 @@
 import { Island } from '../components/Island';
 import { LiveBlock } from '../components/LiveBlock';
-import { LiveEpic } from '../components/LiveEpic.importable';
+import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -45,7 +45,7 @@ export const LiveBlogRenderer = ({
 							thereAreMoreThanFourBlocks &&
 							index === positionToInsertEpic && (
 								<Island clientOnly={true}>
-									<LiveEpic
+									<LiveBlogEpic
 										section={section}
 										shouldHideReaderRevenue={
 											shouldHideReaderRevenue
