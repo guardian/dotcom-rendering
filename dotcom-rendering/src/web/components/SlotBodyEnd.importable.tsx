@@ -94,7 +94,7 @@ const SlotBodyEndWithAB = ({
 	pageId,
 	keywordsId,
 }: Props) => {
-	const { data: brazeMessages } = useBraze(idApiUrl);
+	const { brazeMessages } = useBraze(idApiUrl);
 
 	const [countryCode, setCountryCode] = useState<string>();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });

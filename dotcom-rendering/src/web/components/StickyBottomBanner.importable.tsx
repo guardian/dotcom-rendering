@@ -215,7 +215,7 @@ const StickyBottomBannerWithAB = ({
 	switches: Switches;
 	isSensitive: boolean;
 }) => {
-	const { data: brazeMessages } = useBraze(idApiUrl);
+	const { brazeMessages } = useBraze(idApiUrl);
 
 	const asyncCountryCode = getLocaleCode();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
