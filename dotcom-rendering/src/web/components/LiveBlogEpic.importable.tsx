@@ -55,6 +55,31 @@ const useCountryCode = () => {
 	return countryCode;
 };
 
+const useEpic = ({ url, name }: { url: string; name: string }) => {
+	// Using state here to store the Epic component that gets imported allows
+	// us to render it with React (instead of inserting it into the dom manually)
+	const [Epic, setEpic] = useState<React.FC<{ [key: string]: unknown }>>();
+
+	useEffect(() => {
+		setAutomat();
+		window
+			.guardianPolyfilledImport(url)
+			.then((epicModule) => {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+				setEpic(() => epicModule[name]); // useState requires functions to be wrapped
+			})
+			.catch((err) => {
+				const msg = `Error importing LiveBlog epic: ${err}`;
+				window.guardian.modules.sentry.reportError(
+					new Error(msg),
+					'liveblog-epic',
+				);
+			});
+	}, [url, name]);
+
+	return { Epic };
+};
+
 function consentGivenForArticleCounts(consent: ConsentState): boolean {
 	const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 	const { ccpa, tcfv2, aus } = consent;
@@ -158,26 +183,7 @@ const Render = ({
 	name: string;
 	props: { [key: string]: unknown };
 }) => {
-	// Using state here to store the Epic component that gets imported allows
-	// us to render it with React (instead of inserting it into the dom manually)
-	const [Epic, setEpic] = useState<React.FC<{ [key: string]: unknown }>>();
-
-	useEffect(() => {
-		setAutomat();
-		window
-			.guardianPolyfilledImport(url)
-			.then((epicModule) => {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-				setEpic(() => epicModule[name]); // useState requires functions to be wrapped
-			})
-			.catch((err) => {
-				const msg = `Error importing LiveBlog epic: ${err}`;
-				window.guardian.modules.sentry.reportError(
-					new Error(msg),
-					'liveblog-epic',
-				);
-			});
-	}, [url, name]);
+	const { Epic } = useEpic({ url, name });
 
 	if (!Epic) return null;
 	log('dotcom', 'LiveEpic has the Epic');
