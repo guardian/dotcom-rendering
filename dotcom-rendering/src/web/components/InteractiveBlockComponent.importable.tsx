@@ -8,6 +8,7 @@ import { Caption } from './Caption';
 import { useOnce } from '../lib/useOnce';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { defaultRoleStyles } from './Figure';
 
 type Props = {
 	url?: string;
@@ -287,7 +288,10 @@ export const InteractiveBlockComponent = ({
 			<figure
 				id={elementId} // boot scripts use id when inserting interactive content
 				ref={wrapperRef}
-				css={wrapperStyle({ format, role, loaded, palette })}
+				css={[
+					defaultRoleStyles(role, format),
+					wrapperStyle({ format, role, loaded, palette }),
+				]}
 				className={interactiveLegacyFigureClasses(
 					'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					role,

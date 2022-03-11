@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { text, textSans, from, until } from '@guardian/source-foundations';
+import { text, textSans, until } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -8,35 +8,14 @@ const captionFont = css`
 	color: ${text.supporting};
 `;
 
-const datelineSpace = css`
+const datelineStyles = css`
 	padding-top: 2px;
 	margin-bottom: 6px;
 `;
 
-// We use the 'Checkbox Hack' for the show-hide functionality of the secondary date line.
-// https://css-tricks.com/the-checkbox-hack/
-const toggleClass = css`
-	input[type='checkbox'] {
-		display: none;
-	}
-
-	input[type='checkbox']:checked ~ p {
-		max-height: 80px;
-	}
-`;
-
-const pStyle = css`
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.4s ease;
-	${from.leftCol} {
-		width: 90%;
-	}
-`;
-
-const labelStyles = css`
+const primaryStyles = css`
+	list-style: none;
 	cursor: pointer;
-
 	:hover {
 		text-decoration: underline;
 	}
@@ -59,36 +38,32 @@ export const Dateline: React.FC<{
 	format: ArticleFormat;
 }> = ({ primaryDateline, secondaryDateline, format }) => {
 	const palette = decidePalette(format);
+
+	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {
+		return (
+			<details
+				css={[
+					datelineStyles,
+					captionFont,
+					format.design === ArticleDesign.LiveBlog &&
+						standfirstColouring(palette),
+				]}
+			>
+				<summary css={primaryStyles}>{primaryDateline}</summary>
+				{secondaryDateline}
+			</details>
+		);
+	}
 	return (
 		<div
 			css={[
-				datelineSpace,
+				datelineStyles,
 				captionFont,
 				format.design === ArticleDesign.LiveBlog &&
 					standfirstColouring(palette),
 			]}
 		>
-			{secondaryDateline &&
-			!secondaryDateline.includes(primaryDateline) ? (
-				<div
-					css={[
-						toggleClass,
-						datelineSpace,
-						captionFont,
-						format.design === ArticleDesign.LiveBlog &&
-							standfirstColouring(palette),
-					]}
-				>
-					<label css={labelStyles} htmlFor="dateToggle">
-						{primaryDateline}
-					</label>
-
-					<input css={toggleClass} type="checkbox" id="dateToggle" />
-					<p css={pStyle}>{secondaryDateline}</p>
-				</div>
-			) : (
-				primaryDateline
-			)}
+			{primaryDateline}
 		</div>
 	);
 };

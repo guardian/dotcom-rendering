@@ -8,6 +8,7 @@ type Props = {
 	element: RichLinkBlockElement;
 	ajaxUrl: string;
 	richLinkIndex: number;
+	format: ArticleFormat;
 };
 
 interface CAPIRichLinkType {
@@ -53,6 +54,7 @@ export const RichLinkComponent = ({
 	element,
 	ajaxUrl,
 	richLinkIndex,
+	format,
 }: Props) => {
 	const url = buildUrl(element, ajaxUrl);
 	const { data, error } = useApi<CAPIRichLinkType>(url);
@@ -88,7 +90,8 @@ export const RichLinkComponent = ({
 			contentType={data.contentType}
 			url={data.url}
 			starRating={data.starRating}
-			format={decideFormat(data.format)}
+			linkFormat={decideFormat(data.format)}
+			format={format}
 			tags={data.tags}
 			sponsorName={data.sponsorName}
 			contributorImage={data.contributorImage}

@@ -31,7 +31,15 @@ export default {
 export const Article = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="news"
@@ -39,6 +47,11 @@ export const Article = () => {
 					headlineText="Rich link headline"
 					contentType="article"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -55,7 +68,15 @@ export const Article = () => {
 export const Network = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="special-report"
@@ -63,6 +84,11 @@ export const Network = () => {
 					headlineText="Rich link headline"
 					contentType="network"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -85,7 +111,15 @@ Network.story = {
 export const SectionStory = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="live"
@@ -93,6 +127,11 @@ export const SectionStory = () => {
 					headlineText="Rich link headline"
 					contentType="section"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Sport,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -112,7 +151,15 @@ SectionStory.story = {
 export const Inline = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="inline">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="inline"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="external"
@@ -120,6 +167,11 @@ export const Inline = () => {
 					headlineText="Rich link when inline"
 					contentType="section"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Lifestyle,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -139,7 +191,15 @@ Inline.story = {
 export const ImageContent = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="dead"
@@ -147,6 +207,11 @@ export const ImageContent = () => {
 					headlineText="Rich link headline"
 					contentType="imageContent"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -169,7 +234,15 @@ ImageContent.story = {
 export const Interactive = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="feature"
@@ -177,6 +250,11 @@ export const Interactive = () => {
 					headlineText="Rich link headline"
 					contentType="interactive"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Lifestyle,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -198,7 +276,15 @@ Interactive.story = {
 export const Gallery = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="comment"
@@ -206,6 +292,11 @@ export const Gallery = () => {
 					headlineText="Rich link headline"
 					contentType="gallery"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticleSpecial.Labs,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -228,7 +319,15 @@ Gallery.story = {
 export const Video = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="comment"
@@ -236,6 +335,11 @@ export const Video = () => {
 					headlineText="Rich link headline"
 					contentType="video"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -259,7 +363,15 @@ Video.story = {
 export const Audio = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="podcast"
@@ -267,6 +379,11 @@ export const Audio = () => {
 					headlineText="Rich link headline"
 					contentType="audio"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -283,7 +400,15 @@ export const Audio = () => {
 export const LiveBlog = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="media"
@@ -291,9 +416,14 @@ export const LiveBlog = () => {
 					headlineText="Rich link headline"
 					contentType="liveBlog"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.LiveBlog,
+						theme: ArticlePillar.Sport,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
+						design: ArticleDesign.LiveBlog,
 						theme: ArticlePillar.Sport,
 					}}
 					tags={[]}
@@ -313,7 +443,15 @@ LiveBlog.story = {
 export const Tag = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="analysis"
@@ -321,6 +459,11 @@ export const Tag = () => {
 					headlineText="Rich link headline"
 					contentType="tag"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -337,7 +480,15 @@ export const Tag = () => {
 export const Index = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="review"
@@ -345,6 +496,11 @@ export const Index = () => {
 					headlineText="Rich link headline"
 					contentType="index"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Opinion,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -368,7 +524,15 @@ export const Index = () => {
 export const Crossword = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="letters"
@@ -376,6 +540,11 @@ export const Crossword = () => {
 					headlineText="Rich link headline"
 					contentType="crossword"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Opinion,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -392,7 +561,15 @@ export const Crossword = () => {
 export const Survey = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="external"
@@ -400,6 +577,11 @@ export const Survey = () => {
 					headlineText="Rich link headline"
 					contentType="survey"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -416,7 +598,15 @@ export const Survey = () => {
 export const Signup = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="comment"
@@ -424,6 +614,11 @@ export const Signup = () => {
 					headlineText="Rich link headline"
 					contentType="signup"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -441,7 +636,15 @@ export const Signup = () => {
 export const Userid = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="editorial"
@@ -449,6 +652,11 @@ export const Userid = () => {
 					headlineText="Rich link headline"
 					contentType="userid"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
@@ -465,7 +673,15 @@ export const Userid = () => {
 export const PaidFor = () => {
 	return (
 		<ContainerLayout centralBorder="full">
-			<Figure isMainMedia={false} role="richLink">
+			<Figure
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				isMainMedia={false}
+				role="richLink"
+			>
 				<RichLink
 					richLinkIndex={1}
 					cardStyle="news"
@@ -473,6 +689,11 @@ export const PaidFor = () => {
 					headlineText="Rich link headline"
 					contentType="userid"
 					url=""
+					linkFormat={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.Culture,
+					}}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Standard,
