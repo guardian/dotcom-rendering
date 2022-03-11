@@ -4,6 +4,7 @@ import { space } from '@guardian/source-foundations';
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { CountryCode, getCookie, joinUrl, log, storage } from '@guardian/libs';
+import { ModuleDataResponse } from '@guardian/support-dotcom-components';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecurringContributor,
@@ -216,15 +217,7 @@ const Fetch = ({
 	}
 
 	// Send the payload to Contributions to request a module
-	const { data } = useApi<{
-		data: {
-			module: {
-				url: string;
-				name: string;
-				props: { [key: string]: unknown };
-			};
-		};
-	}>(
+	const { data: response } = useApi<ModuleDataResponse>(
 		url,
 		{
 			revalidateIfStale: false,
@@ -243,15 +236,16 @@ const Fetch = ({
 
 	// If we didn't get a module in response (or we're still waiting) do nothing. If
 	// no epic should be shown data is equal to {}, hence the Object.keys
-	if (!data || Object.keys(data).length === 0) return null;
+	if (!response || !response.data || Object.keys(response).length === 0)
+		return null;
 	log('dotcom', 'LiveEpic has a module');
 
 	// Take any returned module and render it
 	return (
 		<Render
-			url={data.data.module.url}
-			name={data.data.module.name}
-			props={data.data.module.props}
+			url={response.data.module.url}
+			name={response.data.module.name}
+			props={response.data.module.props}
 		/>
 	);
 };
