@@ -42,12 +42,5 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 		return false;
 	}
 
-	if (
-		err.message.includes("Cannot read properties of null (reading '__H')")
-	) {
-		console.warn(err);
-		return false;
-	}
-
 	return true;
 });
