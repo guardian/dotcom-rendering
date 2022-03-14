@@ -16,7 +16,7 @@ export const BootReact = ({ CAPI }: Props) => {
 				pageIsSensitive={CAPI.config.isSensitive}
 				isDev={CAPI.config.isDev}
 			>
-				<App CAPI={CAPI} />
+				<App />
 			</WithABProvider>,
 
 			document.getElementById('react-root'),
