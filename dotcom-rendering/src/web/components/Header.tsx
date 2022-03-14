@@ -6,6 +6,7 @@ import { Logo } from './Logo';
 import { Links } from './Links.importable';
 import { Island } from './Island';
 import { EditionDropdown } from './EditionDropdown.importable';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 const headerStyles = css`
 	/* Ensure header height contains it's children */
@@ -22,6 +23,9 @@ type Props = {
 	isAnniversary?: boolean; // Temporary for G200 anniversary
 	supporterCTA: string;
 	discussionApiUrl: string;
+	urls: ReaderRevenueCategories;
+	remoteHeader: boolean;
+	contributionsServiceUrl: string;
 };
 
 export const Header = ({
@@ -31,6 +35,9 @@ export const Header = ({
 	isAnniversary,
 	supporterCTA,
 	discussionApiUrl,
+	urls,
+	remoteHeader,
+	contributionsServiceUrl,
 }: Props) => (
 	<div css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
@@ -42,7 +49,16 @@ export const Header = ({
 			</Island>
 		</Hide>
 		<Logo isAnniversary={isAnniversary} edition={edition} />
-		<div id="reader-revenue-links-header" />
+		<Island deferUntil="idle" clientOnly={true}>
+			<ReaderRevenueLinks
+				urls={urls}
+				edition={edition}
+				dataLinkNamePrefix="nav2 : "
+				inHeader={true}
+				remoteHeader={remoteHeader}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>
+		</Island>
 		<div id="links-root">
 			<Island>
 				<Links

@@ -1,7 +1,7 @@
 import { render, wait } from '@testing-library/react';
 import { ABProvider } from '@guardian/ab-react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 const shouldHideSupportMessaging: {
 	[key: string]: any;
@@ -18,8 +18,6 @@ jest.mock('@guardian/libs', () => ({
 
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';
-
-const ophanRecord = () => {};
 
 const AbProvider: React.FC = ({ children }) => {
 	return (
@@ -53,10 +51,8 @@ describe('ReaderRevenueLinks', () => {
 					edition="US"
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					remoteHeaderEnabled={false}
-					pageViewId="page-view-id"
+					remoteHeader={false}
 					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophanRecord}
 				/>
 			</AbProvider>,
 		);
@@ -74,10 +70,8 @@ describe('ReaderRevenueLinks', () => {
 					edition={edition}
 					dataLinkNamePrefix="nav2 : "
 					inHeader={true}
-					remoteHeaderEnabled={false}
-					pageViewId="page-view-id"
+					remoteHeader={false}
 					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophanRecord}
 				/>
 				,
 			</AbProvider>,

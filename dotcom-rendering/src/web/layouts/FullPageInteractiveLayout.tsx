@@ -200,6 +200,11 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 							isAnniversary={
 								CAPI.config.switches.anniversaryHeaderSvg
 							}
+							urls={CAPI.nav.readerRevenueLinks.header}
+							remoteHeader={CAPI.config.switches.remoteHeader}
+							contributionsServiceUrl={
+								CAPI.contributionsServiceUrl
+							}
 						/>
 					</ElementContainer>
 				</div>
@@ -331,6 +336,9 @@ export const FullPageInteractiveLayout = ({
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 

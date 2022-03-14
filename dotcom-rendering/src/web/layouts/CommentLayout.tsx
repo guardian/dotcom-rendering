@@ -362,6 +362,11 @@ export const CommentLayout = ({
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
 								}
+								urls={CAPI.nav.readerRevenueLinks.header}
+								remoteHeader={CAPI.config.switches.remoteHeader}
+								contributionsServiceUrl={
+									CAPI.contributionsServiceUrl
+								}
 							/>
 						</ElementContainer>
 					)}
@@ -774,6 +779,9 @@ export const CommentLayout = ({
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 

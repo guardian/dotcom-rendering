@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 import { log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SignInGateSelector } from './SignInGate/SignInGateSelector';
 
 import { AudioAtomWrapper } from './AudioAtomWrapper';
@@ -15,9 +14,6 @@ import { decideFormat } from '../lib/decideFormat';
 import { incrementAlreadyVisited } from '../lib/alreadyVisited';
 import { ReaderRevenueDevUtils } from '../lib/readerRevenueDevUtils';
 
-import { getOphanRecordFunction } from '../browser/ophan/ophan';
-import { Lazy } from './Lazy';
-
 type Props = {
 	CAPI: CAPIBrowserType;
 };
@@ -27,8 +23,6 @@ export const App = ({ CAPI }: Props) => {
 	log('dotcom', `App.tsx render #${(renderCount += 1)}`);
 
 	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-
-	const ophanRecord = getOphanRecordFunction();
 
 	useEffect(() => {
 		incrementAlreadyVisited();
@@ -98,18 +92,6 @@ export const App = ({ CAPI }: Props) => {
 		//
 		// Note: Both require a 'root' element that needs to be server rendered.
 		<React.StrictMode>
-			<Portal rootId="reader-revenue-links-header">
-				<ReaderRevenueLinks
-					urls={CAPI.nav.readerRevenueLinks.header}
-					edition={CAPI.editionId}
-					dataLinkNamePrefix="nav2 : "
-					inHeader={true}
-					remoteHeaderEnabled={CAPI.config.remoteHeader}
-					pageViewId={pageViewId}
-					contributionsServiceUrl={CAPI.contributionsServiceUrl}
-					ophanRecord={ophanRecord}
-				/>
-			</Portal>
 			{audioAtoms.map((audioAtom) => (
 				<HydrateOnce rootId={audioAtom.elementId}>
 					<AudioAtomWrapper
@@ -138,20 +120,6 @@ export const App = ({ CAPI }: Props) => {
 					idUrl={CAPI.config.idUrl}
 					pageViewId={pageViewId}
 				/>
-			</Portal>
-			<Portal rootId="reader-revenue-links-footer">
-				<Lazy margin={300}>
-					<ReaderRevenueLinks
-						urls={CAPI.nav.readerRevenueLinks.footer}
-						edition={CAPI.editionId}
-						dataLinkNamePrefix="footer : "
-						inHeader={false}
-						remoteHeaderEnabled={false}
-						pageViewId={pageViewId}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
-						ophanRecord={ophanRecord}
-					/>
-				</Lazy>
 			</Portal>
 		</React.StrictMode>
 	);
