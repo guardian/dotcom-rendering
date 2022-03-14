@@ -45,7 +45,7 @@
     "@guardian/cdk": "37.0.0",
     "@guardian/content-api-models": "^17.1.1",
     "@guardian/content-atom-model": "^3.2.4",
-    "@guardian/discussion-rendering": "^9.0.0",
+    "@guardian/discussion-rendering": "^9.1.1",
     "@guardian/eslint-config-typescript": "^0.7.0",
     "@guardian/libs": "^3.8.1",
     "@guardian/node-riffraff-artifact": "^0.2.2",
