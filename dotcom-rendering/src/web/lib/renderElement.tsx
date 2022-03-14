@@ -1,5 +1,4 @@
 import {
-	AudioAtom,
 	ExplainerAtom,
 	InteractiveAtom,
 	InteractiveLayoutAtom,
@@ -40,6 +39,7 @@ import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockCom
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
+import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.importable';
 
 import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
@@ -77,6 +77,9 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -127,20 +130,28 @@ export const renderElement = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	isAdFreeUser,
+	switches,
+	isSensitive,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
 				true,
-				<AudioAtom
-					id={element.id}
-					trackUrl={element.trackUrl}
-					kicker={element.kicker}
-					title={element.title}
-					duration={element.duration}
-					pillar={format.theme}
-				/>,
+				<Island>
+					<AudioAtomWrapper
+						id={element.id}
+						trackUrl={element.trackUrl}
+						kicker={element.kicker}
+						title={element.title}
+						duration={element.duration}
+						pillar={format.theme}
+						contentIsNotSensitive={!isSensitive}
+						aCastisEnabled={switches.acast}
+						readerCanBeShownAds={!isAdFreeUser}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
 			return [
@@ -756,6 +767,9 @@ export const renderArticleElement = ({
 	starRating,
 	pageId,
 	webTitle,
+	isAdFreeUser,
+	isSensitive,
+	switches,
 }: Props): JSX.Element => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -771,6 +785,9 @@ export const renderArticleElement = ({
 		starRating,
 		pageId,
 		webTitle,
+		isAdFreeUser,
+		isSensitive,
+		switches,
 	});
 
 	if (!ok) {

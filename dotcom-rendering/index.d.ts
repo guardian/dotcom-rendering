@@ -170,7 +170,6 @@ type Palette = {
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;
-
 	};
 	topBar: {
 		card: Colour;
@@ -580,6 +579,7 @@ interface BlocksRequest {
 	sharedAdTargeting: Record<string, unknown>;
 	adUnit: string;
 	videoDuration?: number;
+	switches: { [key: string]: boolean };
 }
 
 /**

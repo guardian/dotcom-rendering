@@ -586,6 +586,9 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
+									switches={CAPI.config.switches}
+									isAdFreeUser={CAPI.isAdFreeUser}
+									isSensitive={CAPI.config.isSensitive}
 								/>
 							</div>
 						</GridItem>
@@ -646,6 +649,23 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
+									switches={CAPI.config.switches}
+									isSensitive={CAPI.config.isSensitive}
+									isAdFreeUser={CAPI.isAdFreeUser}
+									section={CAPI.config.section}
+									shouldHideReaderRevenue={
+										CAPI.shouldHideReaderRevenue
+									}
+									tags={CAPI.tags}
+									isPaidContent={!!CAPI.config.isPaidContent}
+									contributionsServiceUrl={
+										CAPI.contributionsServiceUrl
+									}
+									contentType={CAPI.contentType}
+									sectionName={CAPI.sectionName || ''}
+									isPreview={CAPI.config.isPreview}
+									idUrl={CAPI.config.idUrl || ''}
+									isDev={!!CAPI.config.isDev}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!CAPI.matchUrl && (

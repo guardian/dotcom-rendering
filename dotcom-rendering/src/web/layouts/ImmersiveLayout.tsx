@@ -381,6 +381,23 @@ export const ImmersiveLayout = ({
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
+									switches={CAPI.config.switches}
+									isSensitive={CAPI.config.isSensitive}
+									isAdFreeUser={CAPI.isAdFreeUser}
+									section={CAPI.config.section}
+									shouldHideReaderRevenue={
+										CAPI.shouldHideReaderRevenue
+									}
+									tags={CAPI.tags}
+									isPaidContent={!!CAPI.config.isPaidContent}
+									contributionsServiceUrl={
+										CAPI.contributionsServiceUrl
+									}
+									contentType={CAPI.contentType}
+									sectionName={CAPI.sectionName || ''}
+									isPreview={CAPI.config.isPreview}
+									idUrl={CAPI.config.idUrl || ''}
+									isDev={!!CAPI.config.isDev}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>

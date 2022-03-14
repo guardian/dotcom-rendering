@@ -1,5 +1,5 @@
 import { ElementContainer } from '../ElementContainer';
-import { SignInGateSelector } from './SignInGateSelector';
+import { SignInGateSelector } from '../SignInGateSelector.importable';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 
