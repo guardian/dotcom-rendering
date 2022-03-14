@@ -6,7 +6,6 @@ type Props = {
 };
 
 export const ReaderRevenueDev = ({ shouldHideReaderRevenue }: Props) => {
-	console.log('hydrating reader r dev');
 	useEffect(() => {
 		// Used internally only, so only import each function on demand
 		const loadAndRun =
