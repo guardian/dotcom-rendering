@@ -360,6 +360,9 @@ export const ImageRoles = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				switches={{}}
+				isAdFreeUser={false}
+				isSensitive={false}
 			/>
 		</Wrapper>
 	);
@@ -407,6 +410,9 @@ export const Thumbnail = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				switches={{}}
+				isAdFreeUser={false}
+				isSensitive={false}
 			/>
 		</Wrapper>
 	);
@@ -510,6 +516,9 @@ export const Contributor = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				switches={{}}
+				isAdFreeUser={false}
+				isSensitive={false}
 			/>
 		</Wrapper>
 	);
@@ -541,6 +550,9 @@ export const NoAvatar = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				switches={{}}
+				isAdFreeUser={false}
+				isSensitive={false}
 			/>
 		</Wrapper>
 	);
@@ -575,6 +587,9 @@ export const TitleAndContributor = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				switches={{}}
+				isAdFreeUser={false}
+				isSensitive={false}
 			/>
 		</Wrapper>
 	);
