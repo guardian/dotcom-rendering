@@ -16,6 +16,14 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
+	section: string;
+	shouldHideReaderRevenue: boolean;
+	tags: TagType[];
+	isPaidContent: boolean;
+	contributionsServiceUrl: string;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -97,6 +105,14 @@ export const ArticleBody = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	switches,
+	isAdFreeUser,
+	isSensitive,
+	section,
+	shouldHideReaderRevenue,
+	tags,
+	isPaidContent,
+	contributionsServiceUrl,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
@@ -131,7 +147,15 @@ export const ArticleBody = ({
 						pageId={pageId}
 						webTitle={webTitle}
 						ajaxUrl={ajaxUrl}
+						switches={switches}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
 						isLiveUpdate={false}
+						section={section}
+						shouldHideReaderRevenue={shouldHideReaderRevenue}
+						tags={tags}
+						isPaidContent={isPaidContent}
+						contributionsServiceUrl={contributionsServiceUrl}
 					/>
 				</div>
 			</>
@@ -159,6 +183,9 @@ export const ArticleBody = ({
 				pageId={pageId}
 				webTitle={webTitle}
 				ajaxUrl={ajaxUrl}
+				switches={switches}
+				isAdFreeUser={isAdFreeUser}
+				isSensitive={isSensitive}
 			/>
 		</div>
 	);

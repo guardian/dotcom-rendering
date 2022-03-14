@@ -16,6 +16,9 @@ type Props = {
 	adTargeting: AdTargeting;
 	host?: string;
 	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
 	isLiveUpdate?: boolean;
 	isPinnedPost?: boolean;
 };
@@ -28,6 +31,9 @@ export const LiveBlock = ({
 	adTargeting,
 	host = 'https://www.theguardian.com',
 	ajaxUrl,
+	isAdFreeUser,
+	isSensitive,
+	switches,
 	isLiveUpdate,
 	isPinnedPost,
 }: Props) => {
@@ -65,6 +71,9 @@ export const LiveBlock = ({
 					index,
 					pageId,
 					webTitle,
+					isAdFreeUser,
+					isSensitive,
+					switches,
 				}),
 			)}
 			<footer

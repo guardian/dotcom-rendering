@@ -103,6 +103,9 @@ export const VideoAsSecond = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				isAdFreeUser={false}
+				isSensitive={false}
+				switches={{}}
 			/>
 		</Wrapper>
 	);
@@ -148,6 +151,9 @@ export const Title = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				isAdFreeUser={false}
+				isSensitive={false}
+				switches={{}}
 			/>
 		</Wrapper>
 	);
@@ -214,6 +220,9 @@ export const Video = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				isAdFreeUser={false}
+				isSensitive={false}
+				switches={{}}
 			/>
 		</Wrapper>
 	);
@@ -255,6 +264,9 @@ export const RichLink = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				isAdFreeUser={false}
+				isSensitive={false}
+				switches={{}}
 			/>
 		</Wrapper>
 	);
@@ -287,6 +299,9 @@ export const FirstImage = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				isAdFreeUser={false}
+				isSensitive={false}
+				switches={{}}
 			/>
 		</Wrapper>
 	);
@@ -345,6 +360,9 @@ export const ImageRoles = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				switches={{}}
+				isAdFreeUser={false}
+				isSensitive={false}
 			/>
 		</Wrapper>
 	);
@@ -392,6 +410,9 @@ export const Thumbnail = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				switches={{}}
+				isAdFreeUser={false}
+				isSensitive={false}
 			/>
 		</Wrapper>
 	);
@@ -425,6 +446,9 @@ export const ImageAndTitle = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				isAdFreeUser={false}
+				isSensitive={false}
+				switches={{}}
 			/>
 		</Wrapper>
 	);
@@ -454,6 +478,9 @@ export const Updated = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				isAdFreeUser={false}
+				isSensitive={false}
+				switches={{}}
 			/>
 		</Wrapper>
 	);
@@ -489,6 +516,9 @@ export const Contributor = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				switches={{}}
+				isAdFreeUser={false}
+				isSensitive={false}
 			/>
 		</Wrapper>
 	);
@@ -520,6 +550,9 @@ export const NoAvatar = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				switches={{}}
+				isAdFreeUser={false}
+				isSensitive={false}
 			/>
 		</Wrapper>
 	);
@@ -554,6 +587,9 @@ export const TitleAndContributor = () => {
 				pageId=""
 				webTitle=""
 				ajaxUrl=""
+				switches={{}}
+				isAdFreeUser={false}
+				isSensitive={false}
 			/>
 		</Wrapper>
 	);

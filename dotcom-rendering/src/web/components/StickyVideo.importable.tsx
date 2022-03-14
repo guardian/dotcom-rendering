@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { from, neutral } from '@guardian/source-foundations';
 import { SvgCross } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { useIsInView } from '../lib/useIsInView';
 
@@ -91,28 +92,53 @@ const stickyContainerStyles = (height: number) => css`
 interface Props {
 	isPlaying: boolean;
 	children: React.ReactNode;
+	videoId: string;
 }
 
-export const StickyVideo = ({ isPlaying, children }: Props) => {
+export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
+	const [stickEventAlreadySent, setStickEventAlreadySent] = useState(false);
+
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.5,
 		repeat: true,
 	});
 
+	const handleCloseClick = () => {
+		submitComponentEvent({
+			component: {
+				componentType: 'STICKY_VIDEO',
+				id: videoId,
+			},
+			action: 'CLOSE',
+		});
+		setIsSticky(false);
+		setStickEventAlreadySent(false);
+	};
+
 	useEffect(() => {
 		setIsSticky(isPlaying && !isIntersecting);
 	}, [isIntersecting, isPlaying]);
+
+	useEffect(() => {
+		if (isSticky && !stickEventAlreadySent) {
+			submitComponentEvent({
+				component: {
+					componentType: 'STICKY_VIDEO',
+					id: videoId,
+				},
+				action: 'STICK',
+			});
+			setStickEventAlreadySent(true);
+		}
+	}, [isSticky, stickEventAlreadySent, videoId]);
 
 	return (
 		<div ref={setRef} css={isSticky && stickyContainerStyles(192)}>
 			<div css={isSticky && stickyStyles}>
 				<span css={hoverAreaStyles} />
 				{isSticky && (
-					<button
-						css={buttonStyles}
-						onClick={() => setIsSticky(false)}
-					>
+					<button css={buttonStyles} onClick={handleCloseClick}>
 						<SvgCross size="medium" />
 					</button>
 				)}

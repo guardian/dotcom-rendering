@@ -613,6 +613,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
 										ajaxUrl={CAPI.config.ajaxUrl}
+										switches={CAPI.config.switches}
+										isSensitive={CAPI.config.isSensitive}
+										isAdFreeUser={CAPI.isAdFreeUser}
 									/>
 								</div>
 							</GridItem>
@@ -770,6 +773,22 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												pageId={CAPI.pageId}
 												webTitle={CAPI.webTitle}
 												ajaxUrl={CAPI.config.ajaxUrl}
+												section={CAPI.config.section}
+												switches={CAPI.config.switches}
+												isSensitive={
+													CAPI.config.isSensitive
+												}
+												isAdFreeUser={CAPI.isAdFreeUser}
+												shouldHideReaderRevenue={
+													CAPI.shouldHideReaderRevenue
+												}
+												tags={CAPI.tags}
+												isPaidContent={
+													!!CAPI.config.isPaidContent
+												}
+												contributionsServiceUrl={
+													CAPI.contributionsServiceUrl
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination

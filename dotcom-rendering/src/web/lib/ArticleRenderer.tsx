@@ -54,7 +54,21 @@ export const ArticleRenderer: React.FC<{
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-}> = ({ format, elements, adTargeting, host, pageId, webTitle, ajaxUrl }) => {
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
+}> = ({
+	format,
+	elements,
+	adTargeting,
+	host,
+	pageId,
+	webTitle,
+	ajaxUrl,
+	isAdFreeUser,
+	isSensitive,
+	switches,
+}) => {
 	const output = elements.map((element, index) => {
 		return renderArticleElement({
 			format,
@@ -66,6 +80,9 @@ export const ArticleRenderer: React.FC<{
 			isMainMedia: false,
 			pageId,
 			webTitle,
+			isAdFreeUser,
+			isSensitive,
+			switches,
 		});
 	});
 
