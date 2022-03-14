@@ -569,6 +569,11 @@ export const CommentLayout = ({
 										contributionsServiceUrl={
 											CAPI.contributionsServiceUrl
 										}
+										contentType={CAPI.contentType}
+										sectionName={CAPI.sectionName || ''}
+										isPreview={CAPI.config.isPreview}
+										idUrl={CAPI.config.idUrl || ''}
+										isDev={!!CAPI.config.isDev}
 									/>
 									{showBodyEndSlot && (
 										<div id="slot-body-end" />

@@ -391,6 +391,11 @@ export const ImmersiveLayout = ({
 									contributionsServiceUrl={
 										CAPI.contributionsServiceUrl
 									}
+									contentType={CAPI.contentType}
+									sectionName={CAPI.sectionName || ''}
+									isPreview={CAPI.config.isPreview}
+									idUrl={CAPI.config.idUrl || ''}
+									isDev={!!CAPI.config.isDev}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines count={4} effect="straight" />
