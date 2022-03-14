@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import loadable from '@loadable/component';
 
 import { log } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -12,7 +11,7 @@ import { SignInGateSelector } from './SignInGate/SignInGateSelector';
 import { AudioAtomWrapper } from './AudioAtomWrapper';
 
 import { Portal } from './Portal';
-import { HydrateOnce, HydrateInteractiveOnce } from './HydrateOnce';
+import { HydrateOnce } from './HydrateOnce';
 import { decideTheme } from '../lib/decideTheme';
 import { decideFormat } from '../lib/decideFormat';
 import { useOnce } from '../lib/useOnce';
@@ -85,25 +84,6 @@ export const App = ({ CAPI }: Props) => {
 
 	const format: ArticleFormat = decideFormat(CAPI.format);
 
-	// There are docs on loadable in ./docs/loadable-components.md
-	const InteractiveBlockComponent = loadable(
-		() => {
-			if (
-				CAPI.elementsToHydrate.filter(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.InteractiveBlockElement',
-				).length > 0
-			) {
-				return import('./InteractiveBlockComponent');
-			}
-			return Promise.reject();
-		},
-		{
-			resolveComponent: (module) => module.InteractiveBlockComponent,
-		},
-	);
-
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
 	// content because *we* know that if _type equals a thing then the type is
@@ -116,10 +96,6 @@ export const App = ({ CAPI }: Props) => {
 	const audioAtoms = elementsByType<AudioAtomBlockElement>(
 		CAPI.elementsToHydrate,
 		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
-	);
-	const interactiveElements = elementsByType<InteractiveBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.InteractiveBlockElement',
 	);
 
 	return (
@@ -146,19 +122,6 @@ export const App = ({ CAPI }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			{interactiveElements.map((interactiveBlock) => (
-				<HydrateInteractiveOnce rootId={interactiveBlock.elementId}>
-					<InteractiveBlockComponent
-						url={interactiveBlock.url}
-						scriptUrl={interactiveBlock.scriptUrl}
-						alt={interactiveBlock.alt}
-						role={interactiveBlock.role}
-						caption={interactiveBlock.caption}
-						format={format}
-					/>
-				</HydrateInteractiveOnce>
-			))}
-
 			{audioAtoms.map((audioAtom) => (
 				<HydrateOnce rootId={audioAtom.elementId}>
 					<AudioAtomWrapper

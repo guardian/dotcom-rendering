@@ -147,6 +147,7 @@ export const MostViewedFooterGrid = ({ data, sectionName, palette }: Props) => {
 								data-cy={`tab-heading-${i}`}
 								key={`tabs-popular-${i}-tab`}
 								data-link-name={tab.heading}
+								data-chromatic="ignore"
 							>
 								<button
 									css={tabButton}

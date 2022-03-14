@@ -639,6 +639,15 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
+									section={CAPI.config.section}
+									shouldHideReaderRevenue={
+										CAPI.shouldHideReaderRevenue
+									}
+									tags={CAPI.tags}
+									isPaidContent={!!CAPI.config.isPaidContent}
+									contributionsServiceUrl={
+										CAPI.contributionsServiceUrl
+									}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!CAPI.matchUrl && (

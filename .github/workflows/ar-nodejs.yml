@@ -18,7 +18,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v2.4.0
+            - uses: actions/checkout@v3
             - uses: guardian/actions-setup-node@main
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install

@@ -765,6 +765,17 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												pageId={CAPI.pageId}
 												webTitle={CAPI.webTitle}
 												ajaxUrl={CAPI.config.ajaxUrl}
+												section={CAPI.config.section}
+												shouldHideReaderRevenue={
+													CAPI.shouldHideReaderRevenue
+												}
+												tags={CAPI.tags}
+												isPaidContent={
+													!!CAPI.config.isPaidContent
+												}
+												contributionsServiceUrl={
+													CAPI.contributionsServiceUrl
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination

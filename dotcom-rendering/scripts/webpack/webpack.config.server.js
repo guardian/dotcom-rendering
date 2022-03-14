@@ -20,12 +20,6 @@ module.exports = ({ sessionId }) => ({
 		minimize: false,
 		runtimeChunk: false,
 	},
-	resolve: {
-		alias: {
-			'@guardian/consent-management-platform':
-				'../../../src/server/cmp-dummy',
-		},
-	},
 	externals: [
 		'@loadable/component',
 		require('webpack-node-externals')({
