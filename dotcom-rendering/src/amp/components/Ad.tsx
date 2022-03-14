@@ -74,6 +74,7 @@ const useRealTimeConfig = (
 			`${relevantYieldURLPrefix}?tag_id=${tagId}`,
 			'tgt_pfx=rv',
 			'gdpr_consent=CONSENT_STRING',
+			'dummy_param=ATTR(data-amp-slot-index)',
 		].join('&');
 
 		return realTimeConfig({
