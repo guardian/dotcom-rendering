@@ -1,4 +1,6 @@
+import { Island } from '../components/Island';
 import { LiveBlock } from '../components/LiveBlock';
+import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -9,6 +11,11 @@ type Props = {
 	webTitle: string;
 	ajaxUrl: string;
 	isLiveUpdate?: boolean;
+	section: string;
+	shouldHideReaderRevenue: boolean;
+	tags: TagType[];
+	isPaidContent: boolean;
+	contributionsServiceUrl: string;
 };
 
 export const LiveBlogRenderer = ({
@@ -20,21 +27,48 @@ export const LiveBlogRenderer = ({
 	webTitle,
 	ajaxUrl,
 	isLiveUpdate,
+	section,
+	shouldHideReaderRevenue,
+	tags,
+	isPaidContent,
+	contributionsServiceUrl,
 }: Props) => {
+	const thereAreMoreThanFourBlocks = blocks.length > 4;
+	const positionToInsertEpic = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
+
 	return (
 		<>
-			{blocks.map((block) => {
+			{blocks.map((block, index) => {
 				return (
-					<LiveBlock
-						format={format}
-						block={block}
-						pageId={pageId}
-						webTitle={webTitle}
-						adTargeting={adTargeting}
-						host={host}
-						ajaxUrl={ajaxUrl}
-						isLiveUpdate={isLiveUpdate}
-					/>
+					<>
+						{!isLiveUpdate &&
+							thereAreMoreThanFourBlocks &&
+							index === positionToInsertEpic && (
+								<Island clientOnly={true}>
+									<LiveBlogEpic
+										section={section}
+										shouldHideReaderRevenue={
+											shouldHideReaderRevenue
+										}
+										tags={tags}
+										isPaidContent={isPaidContent}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+									/>
+								</Island>
+							)}
+						<LiveBlock
+							format={format}
+							block={block}
+							pageId={pageId}
+							webTitle={webTitle}
+							adTargeting={adTargeting}
+							host={host}
+							ajaxUrl={ajaxUrl}
+							isLiveUpdate={isLiveUpdate}
+						/>
+					</>
 				);
 			})}
 		</>

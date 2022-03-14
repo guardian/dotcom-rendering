@@ -46,6 +46,12 @@ export const blocksToHtml = ({
 			webTitle={webTitle}
 			ajaxUrl={ajaxUrl}
 			isLiveUpdate={true}
+			section={section}
+			// The props below are never used because isLiveUpdate is true but, typescript...
+			shouldHideReaderRevenue={false}
+			tags={[]}
+			isPaidContent={false}
+			contributionsServiceUrl=""
 		/>,
 	);
 

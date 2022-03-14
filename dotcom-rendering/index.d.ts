@@ -170,7 +170,6 @@ type Palette = {
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;
-
 	};
 	topBar: {
 		card: Colour;
