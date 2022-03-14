@@ -28,6 +28,18 @@ interface Props {
 	palette: Palette;
 }
 
+const newslettersSubNav: SubNavType = {
+	links: [
+		{
+			url: '/email-newsletters',
+			title: 'Email newsletters',
+			longTitle: 'Email newsletters',
+		},
+	],
+};
+
+const THERE_SHOULD_BE_MERCH_AD_SLOTS = false;
+
 export const NewsletterSignupLayout = ({
 	CAPI,
 	NAV,
@@ -94,30 +106,27 @@ export const NewsletterSignupLayout = ({
 							edition={CAPI.editionId}
 						/>
 					</ElementContainer>
-					{NAV.subNavSections && (
-						<>
-							<ElementContainer
-								backgroundColour={palette.background.article}
-								padded={false}
-								element="aside"
-							>
-								<Island deferUntil="idle">
-									<SubNav
-										subNavSections={NAV.subNavSections}
-										currentNavLink={NAV.currentNavLink}
-										format={format}
-									/>
-								</Island>
-							</ElementContainer>
-							<ElementContainer
-								backgroundColour={palette.background.article}
-								padded={false}
-								showTopBorder={false}
-							>
-								<Lines count={4} effect="straight" />
-							</ElementContainer>
-						</>
-					)}
+
+					<ElementContainer
+						backgroundColour={palette.background.article}
+						padded={false}
+						element="aside"
+					>
+						<Island deferUntil="idle">
+							<SubNav
+								subNavSections={newslettersSubNav}
+								currentNavLink={NAV.currentNavLink}
+								format={format}
+							/>
+						</Island>
+					</ElementContainer>
+					<ElementContainer
+						backgroundColour={palette.background.article}
+						padded={false}
+						showTopBorder={false}
+					>
+						<Lines count={4} effect="straight" />
+					</ElementContainer>
 				</>
 			</div>
 
@@ -163,48 +172,39 @@ export const NewsletterSignupLayout = ({
 					/>
 				</Island>
 
-				<ElementContainer
-					data-print-layout="hide"
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						data-print-layout="hide"
-						position="merchandising-high"
-						display={format.display}
-					/>
-				</ElementContainer>
+				{THERE_SHOULD_BE_MERCH_AD_SLOTS && (
+					<>
+						<ElementContainer
+							data-print-layout="hide"
+							padded={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={neutral[93]}
+							element="aside"
+						>
+							<AdSlot
+								data-print-layout="hide"
+								position="merchandising-high"
+								display={format.display}
+							/>
+						</ElementContainer>
 
-				<ElementContainer
-					data-print-layout="hide"
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot position="merchandising" display={format.display} />
-				</ElementContainer>
+						<ElementContainer
+							data-print-layout="hide"
+							padded={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={neutral[93]}
+							element="aside"
+						>
+							<AdSlot
+								position="merchandising"
+								display={format.display}
+							/>
+						</ElementContainer>
+					</>
+				)}
 			</main>
-
-			{NAV.subNavSections && (
-				<ElementContainer
-					data-print-layout="hide"
-					padded={false}
-					element="aside"
-				>
-					<Island deferUntil="visible">
-						<SubNav
-							subNavSections={NAV.subNavSections}
-							currentNavLink={NAV.currentNavLink}
-							format={format}
-						/>
-					</Island>
-				</ElementContainer>
-			)}
 
 			<ElementContainer
 				data-print-layout="hide"
