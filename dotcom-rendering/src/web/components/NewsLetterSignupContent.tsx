@@ -1,10 +1,6 @@
 import { css } from '@emotion/react';
 
-import {
-	from,
-	until,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, until, textSans } from '@guardian/source-foundations';
 
 import { ArticleDesign } from '@guardian/libs';
 import { SvgEnvelope } from '@guardian/source-react-components';
@@ -13,11 +9,13 @@ import { Border } from './Border';
 import { MainMedia } from './MainMedia';
 import { ShareIcons } from './ShareIcons';
 import { ArticleHeadline } from './ArticleHeadline';
+import type { NewsletterData } from '../layouts/NewsletterSignupLayout';
 
 type Props = {
 	format: ArticleFormat;
 	palette: Palette;
 	CAPI: CAPIType;
+	newsletterData: NewsletterData;
 };
 
 const NewsletterContentGrid = ({
@@ -178,6 +176,18 @@ const contentPlaceHolderStyle = css`
 	}
 `;
 
+const imageWrapperLinkStyle = css`
+	border-radius: 10px;
+	overflow: hidden;
+	text-decoration: none;
+	display: inline-block;
+
+	p {
+		background-color: #ffe500;
+		padding: 5px 10px;
+	}
+`;
+
 function findFirstParagraphForDemo(CAPI: CAPIType): string {
 	const textElement = CAPI.blocks[0].elements.find(
 		(element) =>
@@ -192,96 +202,106 @@ function findFirstParagraphForDemo(CAPI: CAPIType): string {
 	return '<p>NO CONTENT FOUND</p>';
 }
 
-export const NewsLetterSignupContent = ({ format, palette, CAPI }: Props) => (
-	<NewsletterContentGrid format={format}>
-		<GridItem area="title" element="aside">
-			<div css={newsletterFactStyle({ padUntilLeftCol: 16 })}>
-				<figure aria-label="newsletter type">
-					<SvgEnvelope size="small" />
-				</figure>
-				<span>UK Focused</span>
-			</div>
-		</GridItem>
+export const NewsLetterSignupContent = ({ format, palette, CAPI, newsletterData }: Props) => {
 
-		<GridItem area="border">
-			<Border palette={palette} />
-		</GridItem>
+	return (
+		<NewsletterContentGrid format={format}>
+			<GridItem area="title" element="aside">
+				<div css={newsletterFactStyle({ padUntilLeftCol: 16 })}>
+					<figure aria-label="newsletter type">
+						<SvgEnvelope size="small" />
+					</figure>
+					<span>UK Focused</span>
+				</div>
+			</GridItem>
 
-		<GridItem area="content" element="main">
-			<ArticleHeadline
-				headlineString={CAPI.headline}
-				format={format}
-				tags={[]}
-			/>
-			<div css={contentPlaceHolderStyle}>
-				<p>
-					THIS IS WILL BE THE FORMATTED ARTICLE BODY AS DEFINED IN
-					COMPOSER
-				</p>
-				<p>WHICH SHOULD INCLUDE A SIGN-UP EMBED</p>
-				<div dangerouslySetInnerHTML={{ __html: CAPI.standfirst }} />
-				<div
-					dangerouslySetInnerHTML={{
-						__html: findFirstParagraphForDemo(CAPI),
-					}}
-				/>
-			</div>
+			<GridItem area="border">
+				<Border palette={palette} />
+			</GridItem>
 
-			<div css={shareSectionStyles}>
-				<h2>Tell your friends</h2>
-
-				<ShareIcons
-					pageId={CAPI.pageId}
-					webTitle={CAPI.webTitle}
-					displayIcons={['facebook', 'twitter', 'email']}
-					palette={palette}
+			<GridItem area="content" element="main">
+				<ArticleHeadline
+					headlineString={CAPI.headline}
 					format={format}
-					size="medium"
-					context="ArticleMeta"
+					tags={[]}
 				/>
-			</div>
-		</GridItem>
+				<div css={contentPlaceHolderStyle}>
+					<p>
+						THIS IS WILL BE THE FORMATTED ARTICLE BODY AS DEFINED IN
+						COMPOSER
+					</p>
+					<p>WHICH SHOULD INCLUDE A SIGN-UP EMBED</p>
+					<div
+						dangerouslySetInnerHTML={{ __html: CAPI.standfirst }}
+					/>
+					<div
+						dangerouslySetInnerHTML={{
+							__html: findFirstParagraphForDemo(CAPI),
+						}}
+					/>
+				</div>
 
-		<GridItem area="image" element="aside">
-			<MainMedia
-				format={format}
-				elements={CAPI.mainMediaElements}
-				pageId={CAPI.pageId}
-				webTitle={CAPI.webTitle}
-				ajaxUrl={CAPI.config.ajaxUrl}
-			/>
-		</GridItem>
+				<div css={shareSectionStyles}>
+					<h2>Tell your friends</h2>
 
-		<GridItem area="privacy">
-			<div css={privacyStyles}>
-				<p>
-					<b>Privacy Notice:</b> We thought you should know this
-					newsletter may also contain information about Guardian
-					products, services and chosen charities or online
-					advertisements. Newsletters may also contain content funded
-					by outside parties.{' '}
-					<a target="_blank" href="/help/privacy-policy">
-						See privacy policy here.
-					</a>{' '}
-					This site is protected by reCAPTCHA and the{' '}
-					<a
-						href="https://policies.google.com/privacy"
-						target="_blank"
-						aria-label="google's privacy policy"
-					>
-						Google Privacy Policy
-					</a>{' '}
-					and{' '}
-					<a
-						href="https://policies.google.com/terms"
-						target="_blank"
-						aria-label="google's terms of service"
-					>
-						Terms of Services
-					</a>{' '}
-					apply.
-				</p>
-			</div>
-		</GridItem>
-	</NewsletterContentGrid>
-);
+					<ShareIcons
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
+						displayIcons={['facebook', 'twitter', 'email']}
+						palette={palette}
+						format={format}
+						size="medium"
+						context="ArticleMeta"
+					/>
+				</div>
+			</GridItem>
+
+			<GridItem area="image" element="aside">
+				{CAPI.mainMediaElements.length > 0 && (
+					<a href={newsletterData.previewHref} css={imageWrapperLinkStyle} aria-label="preview this newsletter">
+						<MainMedia
+							format={format}
+							elements={CAPI.mainMediaElements}
+							pageId={CAPI.pageId}
+							webTitle={CAPI.webTitle}
+							ajaxUrl={CAPI.config.ajaxUrl}
+							hideCaption={true}
+						/>
+					</a>
+				)}
+			</GridItem>
+
+			<GridItem area="privacy">
+				<div css={privacyStyles}>
+					<p>
+						<b>Privacy Notice:</b> We thought you should know this
+						newsletter may also contain information about Guardian
+						products, services and chosen charities or online
+						advertisements. Newsletters may also contain content
+						funded by outside parties.{' '}
+						<a target="_blank" href="/help/privacy-policy">
+							See privacy policy here.
+						</a>{' '}
+						This site is protected by reCAPTCHA and the{' '}
+						<a
+							href="https://policies.google.com/privacy"
+							target="_blank"
+							aria-label="google's privacy policy"
+						>
+							Google Privacy Policy
+						</a>{' '}
+						and{' '}
+						<a
+							href="https://policies.google.com/terms"
+							target="_blank"
+							aria-label="google's terms of service"
+						>
+							Terms of Services
+						</a>{' '}
+						apply.
+					</p>
+				</div>
+			</GridItem>
+		</NewsletterContentGrid>
+	);
+};

@@ -40,6 +40,15 @@ const newslettersSubNav: SubNavType = {
 
 const THERE_SHOULD_BE_MERCH_AD_SLOTS = false;
 
+export interface NewsletterData {
+	previewHref: string
+}
+function getNewsletterDataForDemo():NewsletterData {
+	return {
+		previewHref: "https://www.theguardian.com/world/series/guardian-morning-briefing/latest/email"
+	}
+}
+
 export const NewsletterSignupLayout = ({
 	CAPI,
 	NAV,
@@ -50,6 +59,8 @@ export const NewsletterSignupLayout = ({
 		...format,
 		theme: getCurrentPillar(CAPI),
 	};
+
+	const newsletterData = getNewsletterDataForDemo()
 
 	return (
 		<>
@@ -144,6 +155,7 @@ export const NewsletterSignupLayout = ({
 						format={format}
 						palette={palette}
 						CAPI={CAPI}
+						newsletterData={newsletterData}
 					/>
 				</ElementContainer>
 
