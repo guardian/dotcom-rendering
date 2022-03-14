@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { initPerf } from '../browser/initPerf';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 
 const isServer = typeof window === 'undefined';
 
@@ -30,12 +31,25 @@ export const PinnedPostLiveness = ({}) => {
 
 	useEffect(() => {
 		const handleClickTracking = () => {
-			// TODO: ADD OPHAN CLICK TRACKING
 			if (pinnedPostCheckBox instanceof HTMLInputElement) {
 				if (pinnedPostCheckBox.checked) {
-					console.log('checked');
+					submitComponentEvent({
+						component: {
+							componentType: 'LIVE_BLOG_PINNED_POST',
+							id: pinnedPost?.id,
+						},
+						action: 'CLICK',
+						value: 'show-less',
+					});
 				} else {
-					console.log('un-checked');
+					submitComponentEvent({
+						component: {
+							componentType: 'LIVE_BLOG_PINNED_POST',
+							id: pinnedPost?.id,
+						},
+						action: 'CLICK',
+						value: 'show-more',
+					});
 				}
 			}
 		};
@@ -49,6 +63,8 @@ export const PinnedPostLiveness = ({}) => {
 		};
 	}, []);
 
+	// calculate duration when user is viewing pinned post
+	// and emit ophan events when the pinned post goes out of view
 	useEffect(() => {
 		if (!pinnedPost) return () => {};
 
@@ -64,9 +80,14 @@ export const PinnedPostLiveness = ({}) => {
 					const timeTaken = pinnedPostTiming.end();
 					if (timeTaken) {
 						const timeTakenInSeconds = timeTaken / 1000;
-						console.log(
-							`duration ${timeTakenInSeconds} was emitted`,
-						);
+						submitComponentEvent({
+							component: {
+								componentType: 'LIVE_BLOG_PINNED_POST',
+								id: pinnedPost?.id,
+							},
+							action: 'VIEW',
+							value: timeTakenInSeconds.toString(),
+						});
 					}
 				}
 			},
