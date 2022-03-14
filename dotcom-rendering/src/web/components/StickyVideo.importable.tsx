@@ -97,20 +97,31 @@ interface Props {
 
 export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 	const [isSticky, setIsSticky] = useState(false);
-	const [wasClosed, setWasClosed] = useState(true);
+	const [stickEventAlreadySent, setStickEventAlreadySent] = useState(false);
 
 	const [isIntersecting, setRef] = useIsInView({
 		threshold: 0.5,
 		repeat: true,
 	});
 
+	const handleCloseClick = () => {
+		submitComponentEvent({
+			component: {
+				componentType: 'STICKY_VIDEO',
+				id: videoId,
+			},
+			action: 'CLOSE',
+		});
+		setIsSticky(false);
+		setStickEventAlreadySent(false);
+	};
+
 	useEffect(() => {
 		setIsSticky(isPlaying && !isIntersecting);
 	}, [isIntersecting, isPlaying]);
 
 	useEffect(() => {
-		if (isSticky && wasClosed) {
-			setWasClosed(false);
+		if (isSticky && !stickEventAlreadySent) {
 			submitComponentEvent({
 				component: {
 					componentType: 'STICKY_VIDEO',
@@ -118,29 +129,16 @@ export const StickyVideo = ({ isPlaying, children, videoId }: Props) => {
 				},
 				action: 'STICK',
 			});
-		} else if (wasClosed) {
-			submitComponentEvent({
-				component: {
-					componentType: 'STICKY_VIDEO',
-					id: videoId,
-				},
-				action: 'CLOSE',
-			});
+			setStickEventAlreadySent(true);
 		}
-	}, [isSticky, wasClosed, videoId]);
+	}, [isSticky, stickEventAlreadySent, videoId]);
 
 	return (
 		<div ref={setRef} css={isSticky && stickyContainerStyles(192)}>
 			<div css={isSticky && stickyStyles}>
 				<span css={hoverAreaStyles} />
 				{isSticky && (
-					<button
-						css={buttonStyles}
-						onClick={() => {
-							setWasClosed(true);
-							setIsSticky(false);
-						}}
-					>
+					<button css={buttonStyles} onClick={handleCloseClick}>
 						<SvgCross size="medium" />
 					</button>
 				)}
