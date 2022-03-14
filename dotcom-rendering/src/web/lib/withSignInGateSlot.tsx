@@ -1,17 +1,65 @@
 // This placeholder div is used by the SignInGate component to insert the sign in gate into the appropriate location within body of an article,
 // if the SignInGateSelector determines a gate should be rendered.
 
-const SignInGateSlot = <div id="sign-in-gate" />;
+import { Island } from '../components/Island';
+import { SignInGateSelector } from '../components/SignInGateSelector.importable';
 
-export const withSignInGateSlot = (
-	articleElements: (JSX.Element | null | undefined)[],
-): React.ReactNode => {
-	return articleElements.map((element, i) => {
+type Props = {
+	renderedElements: (JSX.Element | null | undefined)[];
+	format: ArticleFormat;
+	contentType: string;
+	sectionName: string;
+	tags: TagType[];
+	isPaidContent: boolean;
+	isPreview?: boolean;
+	host?: string;
+	pageId: string;
+	idUrl: string;
+	switches: Switches;
+	pageIsSensitive: boolean;
+	isDev: boolean;
+};
+
+export const withSignInGateSlot = ({
+	renderedElements,
+	format,
+	contentType,
+	sectionName,
+	tags,
+	isPaidContent,
+	isPreview,
+	host,
+	pageId,
+	idUrl,
+	switches,
+	pageIsSensitive,
+	isDev,
+}: Props): React.ReactNode => {
+	return renderedElements.map((element, i) => {
 		return (
 			<>
 				{element}
 				{/* Add the placeholder div after the second article element */}
-				{i === 1 && SignInGateSlot}
+				{i === 1 && (
+					<div id="sign-in-gate">
+						<Island clientOnly={true}>
+							<SignInGateSelector
+								format={format}
+								contentType={contentType}
+								sectionName={sectionName}
+								tags={tags}
+								isPaidContent={isPaidContent}
+								isPreview={!!isPreview}
+								host={host}
+								pageId={pageId}
+								idUrl={idUrl}
+								switches={switches}
+								pageIsSensitive={pageIsSensitive}
+								isDev={isDev}
+							/>
+						</Island>
+					</div>
+				)}
 			</>
 		);
 	});

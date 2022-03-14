@@ -546,6 +546,13 @@ export const ShowcaseLayout = ({
 									contributionsServiceUrl={
 										CAPI.contributionsServiceUrl
 									}
+									contentType={CAPI.contentType}
+									sectionName={CAPI.sectionName || ''}
+									isPreview={CAPI.config.isPreview}
+									idUrl={CAPI.config.idUrl || ''}
+									switches={CAPI.config.switches}
+									pageIsSensitive={CAPI.config.isSensitive}
+									isDev={!!CAPI.config.isDev}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}
 								<Lines count={4} effect="straight" />

@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
 import { log } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
-import { SignInGateSelector } from './SignInGate/SignInGateSelector';
 
 import { AudioAtomWrapper } from './AudioAtomWrapper';
 
 import { Portal } from './Portal';
 import { HydrateOnce } from './HydrateOnce';
 import { decideTheme } from '../lib/decideTheme';
-import { decideFormat } from '../lib/decideFormat';
 import { useOnce } from '../lib/useOnce';
 
 import { incrementAlreadyVisited } from '../lib/alreadyVisited';
@@ -81,8 +78,6 @@ export const App = ({ CAPI }: Props) => {
 	}, [CAPI.config.idApiUrl]);
 
 	const pillar: ArticleTheme = decideTheme(CAPI.format);
-
-	const format: ArticleFormat = decideFormat(CAPI.format);
 
 	// We use this function to filter the elementsToHydrate array by a particular
 	// type so that we can hydrate them. We use T to force the type and keep TS
@@ -152,20 +147,6 @@ export const App = ({ CAPI }: Props) => {
 					stage={CAPI.stage}
 					pageId={CAPI.pageId}
 					keywordsId={CAPI.config.keywordIds}
-				/>
-			</Portal>
-			<Portal rootId="sign-in-gate">
-				<SignInGateSelector
-					format={format}
-					contentType={CAPI.contentType}
-					sectionName={CAPI.sectionName}
-					tags={CAPI.tags}
-					isPaidContent={CAPI.pageType.isPaidContent}
-					isPreview={!!CAPI.isPreview}
-					host={CAPI.config.host}
-					pageId={CAPI.pageId}
-					idUrl={CAPI.config.idUrl}
-					pageViewId={pageViewId}
 				/>
 			</Portal>
 			<Portal rootId="reader-revenue-links-footer">

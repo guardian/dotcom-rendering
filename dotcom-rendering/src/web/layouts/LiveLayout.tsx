@@ -776,6 +776,19 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												contributionsServiceUrl={
 													CAPI.contributionsServiceUrl
 												}
+												contentType={CAPI.contentType}
+												sectionName={
+													CAPI.sectionName || ''
+												}
+												isPreview={
+													CAPI.config.isPreview
+												}
+												idUrl={CAPI.config.idUrl || ''}
+												switches={CAPI.config.switches}
+												pageIsSensitive={
+													CAPI.config.isSensitive
+												}
+												isDev={!!CAPI.config.isDev}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
