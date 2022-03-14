@@ -1,4 +1,4 @@
-import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
 import { decidePalette } from '../lib/decidePalette';
@@ -21,18 +21,25 @@ type Props = {
 const hackToNewsletterSignupLayout = true;
 
 export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
-	const palette = decidePalette(format);
-
 	if (hackToNewsletterSignupLayout) {
+		const newsletterFormat: ArticleFormat = {
+			theme: ArticlePillar.News,
+			design: ArticleDesign.NewsletterSignup,
+			display: ArticleDisplay.Standard,
+		};
+		const newsletterPalette = decidePalette(newsletterFormat);
+
 		return (
 			<NewsletterSignupLayout
 				CAPI={CAPI}
 				NAV={NAV}
-				format={format}
-				palette={palette}
+				format={newsletterFormat}
+				palette={newsletterPalette}
 			/>
 		);
 	}
+
+	const palette = decidePalette(format);
 
 	// TODO we can probably better express this as data
 	switch (format.display) {
