@@ -3,17 +3,12 @@ import { css } from '@emotion/react';
 import {
 	from,
 	until,
-	space,
-	border,
-	headline,
 	textSans,
-	between,
 } from '@guardian/source-foundations';
 
 import { ArticleDesign } from '@guardian/libs';
 import { SvgEnvelope } from '@guardian/source-react-components';
 import { GridItem } from './GridItem';
-import { Hide } from './Hide';
 import { Border } from './Border';
 import { MainMedia } from './MainMedia';
 import { ShareIcons } from './ShareIcons';
@@ -100,6 +95,13 @@ const NewsletterContentGrid = ({
 									'privacy';
 							}
 						}
+
+						& > aside,
+						& > main {
+							${from.leftCol} {
+								padding-top: 16px;
+							}
+						}
 					`}
 				>
 					{children}
@@ -110,12 +112,19 @@ const NewsletterContentGrid = ({
 };
 
 const newsletterFactStyle = (
-	params: { color?: string; padding?: string } = {},
+	params: { color?: string; padUntilLeftCol?: number } = {},
 ) => css`
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	padding: ${params.padding || '0'};
+
+	${params.padUntilLeftCol
+		? `
+		${until.leftCol} {
+			padding : ${params.padUntilLeftCol}px 0;
+		}
+	`
+		: ''}
 
 	figure {
 		background-color: #ffe500;
@@ -186,7 +195,7 @@ function findFirstParagraphForDemo(CAPI: CAPIType): string {
 export const NewsLetterSignupContent = ({ format, palette, CAPI }: Props) => (
 	<NewsletterContentGrid format={format}>
 		<GridItem area="title" element="aside">
-			<div css={newsletterFactStyle({ padding: '16px 0' })}>
+			<div css={newsletterFactStyle({ padUntilLeftCol: 16 })}>
 				<figure aria-label="newsletter type">
 					<SvgEnvelope size="small" />
 				</figure>
@@ -205,7 +214,10 @@ export const NewsLetterSignupContent = ({ format, palette, CAPI }: Props) => (
 				tags={[]}
 			/>
 			<div css={contentPlaceHolderStyle}>
-				<p>THIS IS WILL BE THE FORMATTED ARTICLE BODY AS DEFINED IN COMPOSER</p>
+				<p>
+					THIS IS WILL BE THE FORMATTED ARTICLE BODY AS DEFINED IN
+					COMPOSER
+				</p>
 				<p>WHICH SHOULD INCLUDE A SIGN-UP EMBED</p>
 				<div dangerouslySetInnerHTML={{ __html: CAPI.standfirst }} />
 				<div
