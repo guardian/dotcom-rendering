@@ -9,6 +9,7 @@ import { Island } from './Island';
 import { FocusStyles } from './FocusStyles.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
+import { AlreadyVisited } from './AlreadyVisited.importable';
 
 type Props = {
 	CAPI: CAPIType;
@@ -42,6 +43,9 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id="keyevents" label="Skip to key events" />
 			)}
+			<Island clientOnly={true} deferUntil="idle">
+				<AlreadyVisited />
+			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
 			</Island>
