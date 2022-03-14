@@ -23,6 +23,7 @@ export const blocksToHtml = ({
 	section,
 	sharedAdTargeting,
 	adUnit,
+	switches,
 }: BlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(CAPIFormat);
 
@@ -45,6 +46,9 @@ export const blocksToHtml = ({
 			pageId={pageId}
 			webTitle={webTitle}
 			ajaxUrl={ajaxUrl}
+			isSensitive={isSensitive}
+			isAdFreeUser={isAdFreeUser}
+			switches={switches}
 			isLiveUpdate={true}
 			section={section}
 			// The props below are never used because isLiveUpdate is true but, typescript...

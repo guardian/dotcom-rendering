@@ -61,8 +61,9 @@ export const ArticleRenderer: React.FC<{
 	isPreview?: boolean;
 	idUrl: string;
 	switches: Switches;
-	pageIsSensitive: boolean;
 	isDev: boolean;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
 }> = ({
 	format,
 	elements,
@@ -78,7 +79,8 @@ export const ArticleRenderer: React.FC<{
 	isPreview,
 	idUrl,
 	switches,
-	pageIsSensitive,
+	isAdFreeUser,
+	isSensitive,
 	isDev,
 }) => {
 	const renderedElements = elements.map((element, index) => {
@@ -92,6 +94,9 @@ export const ArticleRenderer: React.FC<{
 			isMainMedia: false,
 			pageId,
 			webTitle,
+			isAdFreeUser,
+			isSensitive,
+			switches,
 		});
 	});
 
@@ -127,7 +132,7 @@ export const ArticleRenderer: React.FC<{
 				pageId,
 				idUrl,
 				switches,
-				pageIsSensitive,
+				isSensitive,
 				isDev,
 			})}
 		</div>

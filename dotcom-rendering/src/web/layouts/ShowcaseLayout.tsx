@@ -477,6 +477,9 @@ export const ShowcaseLayout = ({
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
+									switches={CAPI.config.switches}
+									isAdFreeUser={CAPI.isAdFreeUser}
+									isSensitive={CAPI.config.isSensitive}
 								/>
 							</div>
 						</GridItem>
@@ -537,6 +540,9 @@ export const ShowcaseLayout = ({
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
+									switches={CAPI.config.switches}
+									isSensitive={CAPI.config.isSensitive}
+									isAdFreeUser={CAPI.isAdFreeUser}
 									section={CAPI.config.section}
 									shouldHideReaderRevenue={
 										CAPI.shouldHideReaderRevenue

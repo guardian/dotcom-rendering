@@ -6,11 +6,7 @@ import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { SlotBodyEnd } from './SlotBodyEnd/SlotBodyEnd';
 import { StickyBottomBanner } from './StickyBottomBanner/StickyBottomBanner';
 
-import { AudioAtomWrapper } from './AudioAtomWrapper';
-
 import { Portal } from './Portal';
-import { HydrateOnce } from './HydrateOnce';
-import { decideTheme } from '../lib/decideTheme';
 import { useOnce } from '../lib/useOnce';
 
 import { incrementAlreadyVisited } from '../lib/alreadyVisited';
@@ -77,22 +73,6 @@ export const App = ({ CAPI }: Props) => {
 		setBrazeMessages(buildBrazeMessages(CAPI.config.idApiUrl));
 	}, [CAPI.config.idApiUrl]);
 
-	const pillar: ArticleTheme = decideTheme(CAPI.format);
-
-	// We use this function to filter the elementsToHydrate array by a particular
-	// type so that we can hydrate them. We use T to force the type and keep TS
-	// content because *we* know that if _type equals a thing then the type is
-	// guaranteed but TS isn't so sure and needs assurance
-	const elementsByType = <T extends CAPIElement>(
-		elements: CAPIElement[],
-		type: T['_type'],
-	): T[] => elements.filter((element) => element._type === type) as T[];
-
-	const audioAtoms = elementsByType<AudioAtomBlockElement>(
-		CAPI.elementsToHydrate,
-		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
-	);
-
 	return (
 		// Do you need to HydrateOnce or do you want a Portal?
 		//
@@ -117,21 +97,6 @@ export const App = ({ CAPI }: Props) => {
 					ophanRecord={ophanRecord}
 				/>
 			</Portal>
-			{audioAtoms.map((audioAtom) => (
-				<HydrateOnce rootId={audioAtom.elementId}>
-					<AudioAtomWrapper
-						id={audioAtom.id}
-						trackUrl={audioAtom.trackUrl}
-						kicker={audioAtom.kicker}
-						title={audioAtom.title}
-						duration={audioAtom.duration}
-						pillar={pillar}
-						contentIsNotSensitive={!CAPI.config.isSensitive}
-						aCastisEnabled={CAPI.config.switches.acast}
-						readerCanBeShownAds={!CAPI.isAdFreeUser}
-					/>
-				</HydrateOnce>
-			))}
 			<Portal rootId="slot-body-end">
 				<SlotBodyEnd
 					contentType={CAPI.contentType}

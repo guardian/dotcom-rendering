@@ -10,6 +10,9 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
 	isLiveUpdate?: boolean;
 	section: string;
 	shouldHideReaderRevenue: boolean;
@@ -26,6 +29,9 @@ export const LiveBlogRenderer = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	switches,
+	isAdFreeUser,
+	isSensitive,
 	isLiveUpdate,
 	section,
 	shouldHideReaderRevenue,
@@ -67,6 +73,9 @@ export const LiveBlogRenderer = ({
 							host={host}
 							ajaxUrl={ajaxUrl}
 							isLiveUpdate={isLiveUpdate}
+							switches={switches}
+							isAdFreeUser={isAdFreeUser}
+							isSensitive={isSensitive}
 						/>
 					</>
 				);
