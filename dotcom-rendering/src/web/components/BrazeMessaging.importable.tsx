@@ -6,7 +6,7 @@ type Props = {
 };
 
 /**
- * This component ensure we call buildBrazeMessaging at least once
+ * This component ensures we call buildBrazeMessaging at least once
  * on every page
  */
 export const BrazeMessaging = ({ idApiUrl }: Props) => {
