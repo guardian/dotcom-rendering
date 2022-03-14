@@ -77,6 +77,9 @@ export const Expandable = () => {
 					pageId=""
 					webTitle=""
 					ajaxUrl=""
+					isAdFreeUser={false}
+					isSensitive={false}
+					switches={{}}
 					isPinnedPost={true}
 				/>
 			</PinnedPost>
