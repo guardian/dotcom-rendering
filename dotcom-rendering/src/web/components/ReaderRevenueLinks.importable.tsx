@@ -177,6 +177,8 @@ const ReaderRevenueLinksRemote: React.FC<{
 	const [SupportHeader, setSupportHeader] = useState<React.FC | null>(null);
 
 	useOnce((): void => {
+		setAutomat();
+
 		const requestData: HeaderPayload = {
 			tracking: {
 				ophanPageId: pageViewId,
@@ -204,7 +206,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 				const { module } = response.data;
 				setSupportHeaderResponse(module);
 
-				setAutomat();
 				return window
 					.guardianPolyfilledImport(module.url)
 					.then((headerModule: { [key: string]: JSX.Element }) => {
