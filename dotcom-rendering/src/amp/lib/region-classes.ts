@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
 
+// Array of possible ad regions
+export const adRegions = ['UK', 'US', 'AU', 'INT'] as const;
+
+export type AdRegion = typeof adRegions[number];
+
 /**
  * Class that will display an element if the user accesses the AMP page
  * from Great Britain

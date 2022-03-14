@@ -1,4 +1,6 @@
 import { adJson, stringify } from '../lib/ad-json';
+import { realTimeConfig, RTCParameters } from '../lib/real-time-config';
+import { useContentABTestGroup } from './ContentABTest';
 
 // Largest size first
 const inlineSizes = [
@@ -23,10 +25,23 @@ const ampData = (section: string, contentType: string): string => {
 };
 
 const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
-const permutiveURL = 'https://guardian.amp.permutive.com/rtc?type=doubleclick';
-const amazonConfig = {
-	aps: { PUB_ID: '3722', PARAMS: { amp: '1' } },
-};
+
+const relevantYieldURLPrefix = 'https://pbs.relevant-digital.com/openrtb2/amp';
+
+const commonPrebidUrlParams = [
+	'w=ATTR(width)',
+	'h=ATTR(height)',
+	'ow=ATTR(data-override-width)',
+	'oh=ATTR(data-override-height)',
+	'ms=ATTR(data-multi-size)',
+	'slot=ATTR(data-slot)',
+	'targeting=TGT',
+	'curl=CANONICAL_URL',
+	'timeout=TIMEOUT',
+	'adcid=ADCID',
+	'purl=HREF',
+	'gdpr_consent=CONSENT_STRING',
+];
 
 const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	const adTargetingMapped: AdTargetParam[] = [];
@@ -46,44 +61,76 @@ const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	return adTargetingMapped;
 };
 
-const realTimeConfig = (
+// Variants for the Prebid server test
+// Assign each variant 4 groups e.g. 33.3% of content types each
+const variants = {
+	control: new Set([0, 1, 2, 3]),
+	'relevant-yield': new Set([4, 5, 6, 7]),
+	pubmatic: new Set([8, 9, 10, 11]),
+};
+
+// Determine participation in a variant from group
+const isInVariant = (
+	variantName: 'control' | 'relevant-yield' | 'pubmatic',
+	group: number | undefined,
+) => group !== undefined && variants[variantName].has(group);
+
+const useRealTimeConfig = (
 	usePrebid: boolean,
 	usePermutive: boolean,
 	useAmazon: boolean,
-	placementID: number,
+	{ placementId, tagId, profileId, pubId }: RTCParameters,
 ): string => {
+	const { group } = useContentABTestGroup();
+
+	// Relevant Yield variant
+	if (isInVariant('relevant-yield', group)) {
+		const relevantYieldURL = [
+			`${relevantYieldURLPrefix}?tag_id=${tagId}`,
+			...commonPrebidUrlParams,
+			'tgt_pfx=rv',
+			'dummy_param=ATTR(data-amp-slot-index)',
+		].join('&');
+
+		return realTimeConfig({
+			url: usePrebid ? relevantYieldURL : undefined,
+			usePermutive,
+			useAmazon,
+		});
+	}
+
+	// Pubmatic variant
+	if (isInVariant('pubmatic', group)) {
+		const pubmaticConfig = {
+			openwrap: {
+				PROFILE_ID: profileId,
+				PUB_ID: pubId,
+			},
+		};
+
+		return realTimeConfig({
+			vendors: usePrebid ? pubmaticConfig : {},
+			usePermutive,
+			useAmazon,
+			timeoutMillis: 1000,
+		});
+	}
+
+	// Control / AB testing not enabled
+
 	const prebidURL = [
 		// The tag_id in the URL is used to look up the bulk of the request
 		// In this case it corresponds to the placement ID of the bid requests
 		// on the prebid server
-		`${preBidServerPrefix}?tag_id=${placementID}`,
-		'w=ATTR(width)',
-		'h=ATTR(height)',
-		'ow=ATTR(data-override-width)',
-		'oh=ATTR(data-override-height)',
-		'ms=ATTR(data-multi-size)',
-		'slot=ATTR(data-slot)',
-		'targeting=TGT',
-		'curl=CANONICAL_URL',
-		'timeout=TIMEOUT',
-		'adcid=ADCID',
-		'purl=HREF',
-		'gdpr_consent=CONSENT_STRING',
+		`${preBidServerPrefix}?tag_id=${placementId}`,
+		...commonPrebidUrlParams,
 	].join('&');
 
-	const urls = [
-		usePrebid ? prebidURL : '',
-		usePermutive ? permutiveURL : '',
-	].filter(Boolean); // remove empty strings, which are falsey
-
-	const vendors = useAmazon ? amazonConfig : {};
-
-	const data = {
-		urls,
-		vendors,
-	};
-
-	return JSON.stringify(data);
+	return realTimeConfig({
+		url: usePrebid ? prebidURL : undefined,
+		usePermutive,
+		useAmazon,
+	});
 };
 
 interface CommercialConfig {
@@ -103,7 +150,7 @@ export interface BaseAdProps {
 
 interface AdProps extends BaseAdProps {
 	isSticky?: boolean;
-	placementId: number;
+	rtcParameters: RTCParameters;
 }
 
 export const Ad = ({
@@ -114,13 +161,20 @@ export const Ad = ({
 	commercialProperties,
 	adTargeting,
 	config: { useAmazon, usePrebid, usePermutive },
-	placementId,
+	rtcParameters,
 }: AdProps) => {
 	const adSizes = isSticky ? stickySizes : inlineSizes;
 	// Set Primary ad size as first element (should be the largest)
 	const [{ width, height }] = adSizes;
 	// Secondary ad sizes
 	const multiSizes = adSizes.map((e) => `${e.width}x${e.height}`).join(',');
+
+	const rtcConfig = useRealTimeConfig(
+		usePrebid,
+		usePermutive,
+		useAmazon,
+		rtcParameters,
+	);
 
 	return (
 		<amp-ad
@@ -145,12 +199,7 @@ export const Ad = ({
 				]),
 			)}
 			data-slot={ampData(section, contentType)}
-			rtc-config={realTimeConfig(
-				usePrebid,
-				usePermutive,
-				useAmazon,
-				placementId,
-			)}
+			rtc-config={rtcConfig}
 		/>
 	);
 };
