@@ -28,30 +28,25 @@ export const AudioAtomWrapper = ({
 	aCastisEnabled,
 	readerCanBeShownAds,
 }: Props) => {
-	// TODO: import from '@guardian/consent-management-platform' cannot be done on the server
-	// wait for fix an implement here.
-
 	// *****************
 	// *     ACast     *
 	// *****************
 	const [shouldUseAcast, setShouldUseAcast] = useState<boolean>(false);
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
-			onConsentChange((state: any) => {
-				// Should we use ad enabled audio? If so, then set the shouldUseAcast
-				// state to true, triggering a rerender of AudioAtom using a new track url
-				// (one with adverts)
-				const consentGiven = getConsentFor('acast', state);
-				if (
-					aCastisEnabled &&
-					consentGiven &&
-					readerCanBeShownAds && // Eg. Not a subscriber
-					contentIsNotSensitive
-				) {
-					setShouldUseAcast(true);
-				}
-			});
-		}
+		onConsentChange((state: any) => {
+			// Should we use ad enabled audio? If so, then set the shouldUseAcast
+			// state to true, triggering a rerender of AudioAtom using a new track url
+			// (one with adverts)
+			const consentGiven = getConsentFor('acast', state);
+			if (
+				aCastisEnabled &&
+				consentGiven &&
+				readerCanBeShownAds && // Eg. Not a subscriber
+				contentIsNotSensitive
+			) {
+				setShouldUseAcast(true);
+			}
+		});
 	}, [contentIsNotSensitive, aCastisEnabled, readerCanBeShownAds]);
 
 	return (
