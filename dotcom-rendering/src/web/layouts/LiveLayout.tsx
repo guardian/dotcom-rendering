@@ -1065,7 +1065,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 			</ElementContainer>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island clientOnly={true}>
+				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}

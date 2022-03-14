@@ -618,7 +618,7 @@ export const ImmersiveLayout = ({
 			</ElementContainer>
 
 			<BannerWrapper>
-				<Island clientOnly={true}>
+				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
