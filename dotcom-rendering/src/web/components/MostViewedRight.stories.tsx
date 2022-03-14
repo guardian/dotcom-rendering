@@ -45,7 +45,10 @@ export const defaultStory = () => {
 						showTopBorder={false}
 						padded={false}
 					>
-						<MostViewedRight isAdFreeUser={false} />
+						<MostViewedRight
+							isAdFreeUser={false}
+							adBlockerDetected={false}
+						/>
 					</ElementContainer>
 				</RightColumn>
 			</Flex>
@@ -81,7 +84,11 @@ export const limitItemsStory = () => {
 						showTopBorder={false}
 						padded={false}
 					>
-						<MostViewedRight limitItems={3} isAdFreeUser={false} />
+						<MostViewedRight
+							limitItems={3}
+							isAdFreeUser={false}
+							adBlockerDetected={false}
+						/>
 					</ElementContainer>
 				</RightColumn>
 			</Flex>
@@ -98,7 +105,7 @@ export const outsideContextStory = () => {
 
 	return (
 		<ElementContainer>
-			<MostViewedRight isAdFreeUser={false} />
+			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />
 		</ElementContainer>
 	);
 };

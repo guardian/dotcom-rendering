@@ -6,7 +6,7 @@ import {
 } from '@guardian/atoms-rendering';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
-import { CalloutBlockComponent } from '../components/CalloutBlockComponent';
+import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
@@ -14,13 +14,13 @@ import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
-import { EmbedBlockComponent } from '../components/EmbedBlockComponent';
-import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent';
+import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
+import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
-import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent';
+import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
@@ -39,8 +39,8 @@ import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockCom
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
-import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
+import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.importable';
 
 import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -56,7 +56,6 @@ import {
 	WitnessTextBlockComponent,
 } from '../components/WitnessBlockComponent';
 import { getSharingUrls } from '../../lib/sharing-urls';
-import { ClickToView } from '../components/ClickToView';
 import { Figure } from '../components/Figure';
 import {
 	isInteractive,
@@ -64,10 +63,10 @@ import {
 } from '../layouts/lib/interactiveLegacyStyling';
 
 import { Island } from '../components/Island';
+import { decidePalette } from './decidePalette';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	element: CAPIElement;
 	adTargeting?: AdTargeting;
 	host?: string;
@@ -121,7 +120,6 @@ const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
 // inspection.
 export const renderElement = ({
 	format,
-	palette,
 	element,
 	adTargeting,
 	host,
@@ -136,6 +134,7 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 }: Props): [boolean, JSX.Element] => {
+	const palette = decidePalette(format);
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
@@ -178,7 +177,6 @@ export const renderElement = ({
 				<CaptionBlockComponent
 					key={index}
 					format={format}
-					palette={palette}
 					captionText={element.captionText}
 					padCaption={element.padCaption}
 					credit={element.credit}
@@ -256,37 +254,35 @@ export const renderElement = ({
 
 				return [
 					true,
-					<ClickToView
-						role={element.role}
-						isTracking={element.isThirdPartyTracking}
-						isMainMedia={isMainMedia}
-						source={element.source}
-						sourceDomain={element.sourceDomain}
-					>
+					<Island deferUntil="visible">
 						<UnsafeEmbedBlockComponent
 							key={index}
 							html={element.html}
 							alt={element.alt || ''}
 							index={index}
+							role={element.role}
+							isTracking={element.isThirdPartyTracking}
+							isMainMedia={isMainMedia}
+							source={element.source}
+							sourceDomain={element.sourceDomain}
 						/>
-					</ClickToView>,
+					</Island>,
 				];
 			}
 			return [
 				true,
-				<ClickToView
-					role={element.role}
-					isTracking={element.isThirdPartyTracking}
-					isMainMedia={isMainMedia}
-					source={element.source}
-					sourceDomain={element.sourceDomain}
-				>
+				<Island deferUntil="visible">
 					<EmbedBlockComponent
 						key={index}
 						html={element.html}
 						caption={element.caption}
+						role={element.role}
+						isTracking={element.isThirdPartyTracking}
+						isMainMedia={isMainMedia}
+						source={element.source}
+						sourceDomain={element.sourceDomain}
 					/>
-				</ClickToView>,
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.ExplainerAtomBlockElement':
 			return [
@@ -318,7 +314,6 @@ export const renderElement = ({
 				<GuVideoBlockComponent
 					html={element.html}
 					format={format}
-					palette={palette}
 					credit={element.source}
 					caption={element.caption}
 				/>,
@@ -333,7 +328,6 @@ export const renderElement = ({
 				true,
 				<ImageBlockComponent
 					format={format}
-					palette={palette}
 					key={index}
 					element={element}
 					hideCaption={hideCaption}
@@ -381,14 +375,16 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return [
 				true,
-				<InteractiveBlockComponent
-					url={element.url}
-					scriptUrl={element.scriptUrl}
-					alt={element.alt}
-					role={element.role}
-					format={format}
-					elementId={element.elementId}
-				/>,
+				<Island deferUntil="visible">
+					<InteractiveBlockComponent
+						url={element.url}
+						scriptUrl={element.scriptUrl}
+						alt={element.alt}
+						role={element.role}
+						format={format}
+						elementId={element.elementId}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.ItemLinkBlockElement':
 			return [true, <ItemLinkBlockElement html={element.html} />];
@@ -437,7 +433,6 @@ export const renderElement = ({
 				true,
 				<MultiImageBlockComponent
 					format={format}
-					palette={palette}
 					key={index}
 					images={element.images}
 					caption={element.caption}
@@ -528,6 +523,7 @@ export const renderElement = ({
 						richLinkIndex={index}
 						element={element}
 						ajaxUrl={ajaxUrl}
+						format={format}
 					/>
 				</Island>,
 			];
@@ -623,7 +619,6 @@ export const renderElement = ({
 				true,
 				<VimeoBlockComponent
 					format={format}
-					palette={palette}
 					embedUrl={element.embedUrl}
 					height={element.height}
 					width={element.width}
@@ -710,24 +705,26 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return [
 				true,
-				<YoutubeBlockComponent
-					format={format}
-					key={index}
-					hideCaption={hideCaption}
-					// eslint-disable-next-line jsx-a11y/aria-role
-					role="inline"
-					adTargeting={adTargeting}
-					isMainMedia={isMainMedia}
-					id={element.id}
-					assetId={element.assetId}
-					expired={element.expired}
-					overrideImage={element.overrideImage}
-					posterImage={element.posterImage}
-					duration={element.duration}
-					mediaTitle={element.mediaTitle}
-					altText={element.altText}
-					origin={host}
-				/>,
+				<Island>
+					<YoutubeBlockComponent
+						format={format}
+						key={index}
+						hideCaption={hideCaption}
+						// eslint-disable-next-line jsx-a11y/aria-role
+						role="inline"
+						adTargeting={adTargeting}
+						isMainMedia={isMainMedia}
+						id={element.id}
+						assetId={element.assetId}
+						expired={element.expired}
+						overrideImage={element.overrideImage}
+						posterImage={element.posterImage}
+						duration={element.duration}
+						mediaTitle={element.mediaTitle}
+						altText={element.altText}
+						origin={host}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.AudioBlockElement':
 		case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
@@ -741,12 +738,6 @@ export const renderElement = ({
 // bareElements is the set of element types that don't get wrapped in a Figure
 // for most article types, either because they don't need it or because they
 // add the figure themselves.
-// We might assume that InteractiveBlockElement should be included in this list,
-// however we can't do this while we maintain the current component abstraction.
-// If no outer figure, then HydrateOnce uses the component's figure as the root
-// for hydration. For InteractiveBlockElements, the result is that the state that
-// determines height is never updated leaving an empty placeholder space in the
-// article even after the interactive content has loaded.
 const bareElements = new Set([
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 	'model.dotcomrendering.pageElements.CaptionBlockElement',
@@ -758,6 +749,7 @@ const bareElements = new Set([
 	'model.dotcomrendering.pageElements.SubheadingBlockElement',
 	'model.dotcomrendering.pageElements.TextBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+	'model.dotcomrendering.pageElements.InteractiveBlockElement',
 ]);
 
 // renderArticleElement is a wrapper for renderElement that wraps elements in a
@@ -765,7 +757,6 @@ const bareElements = new Set([
 // types.
 export const renderArticleElement = ({
 	format,
-	palette,
 	element,
 	adTargeting,
 	ajaxUrl,
@@ -784,7 +775,6 @@ export const renderArticleElement = ({
 
 	const [ok, el] = renderElement({
 		format,
-		palette,
 		element: withUpdatedRole,
 		adTargeting,
 		ajaxUrl,
@@ -817,6 +807,8 @@ export const renderArticleElement = ({
 					? interactiveLegacyFigureClasses(element._type, role)
 					: ''
 			}
+			type={element._type}
+			format={format}
 		>
 			{el}
 		</Figure>

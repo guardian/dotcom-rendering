@@ -35,8 +35,7 @@ import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
-import { DiscussionContainer } from '../components/DiscussionContainer.importable';
-import { Placeholder } from '../components/Placeholder';
+import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Nav } from '../components/Nav/Nav';
 import { LabsHeader } from '../components/LabsHeader.importable';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -55,8 +54,9 @@ import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.imp
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooter } from '../components/MostViewedFooter.importable';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
+import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 
 const StandardGrid = ({
 	children,
@@ -478,7 +478,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						<GridItem area="title" element="aside">
 							<ArticleTitle
 								format={format}
-								palette={palette}
 								tags={CAPI.tags}
 								sectionLabel={CAPI.sectionLabel}
 								sectionUrl={CAPI.sectionUrl}
@@ -513,10 +512,15 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<div css={maxWidth}>
 								{format.design === ArticleDesign.MatchReport &&
 									CAPI.matchUrl && (
-										<Placeholder
-											rootId="match-tabs"
-											height={40}
-										/>
+										<Island
+											clientOnly={true}
+											placeholderHeight={40}
+										>
+											<GetMatchTabs
+												matchUrl={CAPI.matchUrl}
+												format={format}
+											/>
+										</Island>
 									)}
 							</div>
 						</GridItem>
@@ -539,7 +543,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										headlineString={CAPI.headline}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
-										palette={palette}
 									/>
 									{age && (
 										<AgeWarning
@@ -570,7 +573,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<div css={maxWidth}>
 								<MainMedia
 									format={format}
-									palette={palette}
 									elements={CAPI.mainMediaElements}
 									adTargeting={adTargeting}
 									host={host}
@@ -607,7 +609,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<ArticleMeta
 									branding={branding}
 									format={format}
-									palette={palette}
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									author={CAPI.author}
@@ -644,6 +645,15 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									switches={CAPI.config.switches}
 									isSensitive={CAPI.config.isSensitive}
 									isAdFreeUser={CAPI.isAdFreeUser}
+									section={CAPI.config.section}
+									shouldHideReaderRevenue={
+										CAPI.shouldHideReaderRevenue
+									}
+									tags={CAPI.tags}
+									isPaidContent={!!CAPI.config.isPaidContent}
+									contributionsServiceUrl={
+										CAPI.contributionsServiceUrl
+									}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!CAPI.matchUrl && (
@@ -705,6 +715,12 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									<AdSlot
 										position="right"
 										display={format.display}
+										shouldHideReaderRevenue={
+											CAPI.shouldHideReaderRevenue
+										}
+										isPaidContent={
+											CAPI.pageType.isPaidContent
+										}
 									/>
 									{!isPaidContent ? (
 										<Island
@@ -780,37 +796,33 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						data-print-layout="hide"
 						element="section"
 					>
-						<Island clientOnly={true} deferUntil="visible">
-							<DiscussionContainer
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								shortUrlId={CAPI.config.shortUrlId}
-								format={format}
-								discussionD2Uid={CAPI.config.discussionD2Uid}
-								discussionApiClientHeader={
-									CAPI.config.discussionApiClientHeader
-								}
-								enableDiscussionSwitch={
-									CAPI.config.switches.enableDiscussionSwitch
-								}
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
-							/>
-						</Island>
+						<DiscussionLayout
+							discussionApiUrl={CAPI.config.discussionApiUrl}
+							shortUrlId={CAPI.config.shortUrlId}
+							format={format}
+							discussionD2Uid={CAPI.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPI.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								CAPI.config.switches.enableDiscussionSwitch
+							}
+							isAdFreeUser={CAPI.isAdFreeUser}
+							shouldHideAds={CAPI.shouldHideAds}
+						/>
 					</ElementContainer>
 				)}
 
 				{!isPaidContent && (
 					<ElementContainer data-print-layout="hide" element="aside">
-						<Island clientOnly={true} deferUntil="visible">
-							<MostViewedFooter
-								format={format}
-								sectionName={CAPI.sectionName}
-								ajaxUrl={CAPI.config.ajaxUrl}
-								switches={CAPI.config.switches}
-								pageIsSensitive={CAPI.config.isSensitive}
-								isDev={CAPI.config.isDev}
-							/>
-						</Island>
+						<MostViewedFooterLayout
+							format={format}
+							sectionName={CAPI.sectionName}
+							ajaxUrl={CAPI.config.ajaxUrl}
+							switches={CAPI.config.switches}
+							pageIsSensitive={CAPI.config.isSensitive}
+							isDev={CAPI.config.isDev}
+						/>
 					</ElementContainer>
 				)}
 

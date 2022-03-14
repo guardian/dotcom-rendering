@@ -15,6 +15,7 @@ import {
 	isOnPlatform,
 } from '../../lib/footer-links';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
+import { useContentABTestGroup } from './ContentABTest';
 
 const innerContainerStyles = css`
 	padding-left: 10px;
@@ -183,24 +184,27 @@ const FooterLinks: React.FC<{
 	);
 };
 
-export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => (
-	<footer css={footer}>
-		<div css={innerContainerStyles}>
-			<div css={footerInner}>
-				<FooterLinks links={footerLinksNew} nav={nav} />
+export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => {
+	const { group } = useContentABTestGroup();
+	return (
+		<footer data-content-test-group={group} css={footer}>
+			<div css={innerContainerStyles}>
+				<div css={footerInner}>
+					<FooterLinks links={footerLinksNew} nav={nav} />
+				</div>
 			</div>
-		</div>
-		<div css={[copyrightContainer, innerContainerStyles]}>
-			<a css={backToTopLink} href="#top">
-				<span css={backToTopText}>Back to top</span>
-				<span css={iconContainer}>
-					<i css={icon} />
-				</span>
-			</a>
-			<div css={copyright}>
-				© {year} Guardian News & Media Limited or its affiliated
-				companies. All rights reserved.
+			<div css={[copyrightContainer, innerContainerStyles]}>
+				<a css={backToTopLink} href="#top">
+					<span css={backToTopText}>Back to top</span>
+					<span css={iconContainer}>
+						<i css={icon} />
+					</span>
+				</a>
+				<div css={copyright}>
+					© {year} Guardian News & Media Limited or its affiliated
+					companies. All rights reserved.
+				</div>
 			</div>
-		</div>
-	</footer>
-);
+		</footer>
+	);
+};

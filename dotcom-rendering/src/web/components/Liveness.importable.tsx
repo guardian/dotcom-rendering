@@ -1,66 +1,81 @@
-import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
+import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
+import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
+import { Toast } from './Toast';
 
 type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
 	filterKeyEvents: boolean;
-};
-
-// TODO: Break this out into its own component
-const Toast = ({
-	onClick,
-	numHiddenBlocks,
-}: {
-	onClick: () => void;
-	numHiddenBlocks: number;
-}) => {
-	// TODO: Style and absolute position this component
-	return (
-		<nav
-			css={css`
-				position: fixed;
-				top: 20px;
-				left: 50px;
-				display: flex;
-				width: 100%;
-				align-items: center;
-			`}
-		>
-			<button onClick={onClick}>{`${numHiddenBlocks} blah`}</button>
-		</nav>
-	);
+	format: ArticleFormat;
+	switches: Switches;
+	onFirstPage: boolean;
+	webURL: string;
+	mostRecentBlockId: string;
 };
 
 const isServer = typeof window === 'undefined';
 
-function hydrateBlocks() {
-	console.log('hydrateBlocks');
-	// TODO Call existing hydration solution targetted to these elements
-	// Maybe we can make doHydration work for all gu-islands things
-	// where the gu-hydrated data attribute isn't set?
-}
-
 /**
- * insertNewBlocks takes html and inserts it at the top of the liveblog
+ * insert
+ *
+ * Takes html, parses and hydrates it, inserts the resulting blocks
+ * at the top of the liveblog, and then enhances any tweets
  *
  * @param {string} html The block html to be inserted
  * @returns void
  */
-function insertNewBlocks(html: string) {
-	const latestBlock = document.querySelector('#maincontent :first-child');
-	if (!latestBlock) return;
-	latestBlock.insertAdjacentHTML('beforebegin', html);
+function insert(html: string, switches: Switches) {
+	// Create
+	// ------
+	const template = document.createElement('template');
+	template.innerHTML = html;
+	const fragment = template.content;
+
+	// Hydrate
+	// -------
+	const islands = fragment.querySelectorAll('gu-island');
+	initHydration(islands);
+
+	// Insert
+	// ------
+	// Shouldn't we sanitise this html?
+	// We're being sent this string by our own backend, not reader input, so we
+	// trust that the tags and attributes it contains are safe and intentional
+	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
+	const latestBlock = blogBody?.querySelector('#liveblog-body :first-child');
+	if (!latestBlock || !blogBody) return;
+	blogBody.insertBefore(fragment, latestBlock);
+
+	// Enhance
+	// -----------
+	if (switches.enhanceTweets) {
+		const pendingBlocks = blogBody.querySelectorAll<HTMLElement>(
+			'article .pending.block',
+		);
+		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
+		twttr.ready((twitter) => {
+			twitter.widgets.load(Array.from(pendingBlocks));
+		});
+	}
 }
 
 /**
- * revealNewBlocks - style any blocks that have been inserted but are hidden such that
- * they are revealed
+ * reveal any blocks that have been inserted but are still hidden
  */
-function revealNewBlocks() {
-	console.log('revealNewBlocks');
+function revealPendingBlocks() {
+	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
+	const pendingBlocks = blogBody?.querySelectorAll<HTMLElement>(
+		'article .pending.block',
+	);
+	pendingBlocks?.forEach((block) => {
+		block.classList.add('reveal');
+		block.classList.remove('pending');
+	});
+	// Notify commercial that new blocks are available and they can re-run spacefinder
+	document.dispatchEvent(new CustomEvent('liveblog:blocks-updated'));
 }
 
 /**
@@ -81,6 +96,7 @@ function getKey(
 		const url = new URL(`${pageId}.json`, ajaxUrl);
 		url.searchParams.set('lastUpdate', latestBlockId);
 		url.searchParams.set('isLivePage', 'true');
+		url.searchParams.set('dcr', 'true');
 		url.searchParams.set(
 			'filterKeyEvents',
 			filterKeyEvents ? 'true' : 'false',
@@ -103,61 +119,74 @@ const topOfBlog: Element | null = !isServer
 	? window.document.querySelector('[data-gu-marker=top-of-blog]')
 	: null;
 
-/**
- * This allows us to make decisions in javascript based on if the reader
- * has the top of the blog in view or not
- *
- * @returns boolean
- */
-function topOfBlogVisible(): boolean {
-	return topOfBlog ? topOfBlog.classList.contains('in-viewport') : false;
-}
+const lastUpdated: Element | null = !isServer
+	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
+	: null;
 
 export const Liveness = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
 	filterKeyEvents,
+	format,
+	switches,
+	onFirstPage,
+	webURL,
+	mostRecentBlockId,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
+	const [topOfBlogVisible, setTopOfBlogVisible] = useState<
+		boolean | undefined
+	>();
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
-	const [latestBlockId, setLatestBlockId] = useState(
-		// By default we use the first (latest) block id on the page
-		document.querySelector('#maincontent :first-child')?.id || '',
-	);
+	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
+
+	/**
+	 * This function runs (once) after every successful useApi call. This is useful because it
+	 * allows us to avoid the problems of imperative code being executed multiple times
+	 * inside react's declarative structure (things get re-rendered when any state changes)
+	 */
+	function onSuccess(data: LiveUpdateType) {
+		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
+			// Insert the new blocks in the dom (but hidden)
+			if (onFirstPage) insert(data.html, switches);
+
+			if (lastUpdated) {
+				lastUpdated.setAttribute('dateTime', new Date().toString());
+				updateTimeElement(lastUpdated);
+			}
+
+			if (onFirstPage && topOfBlogVisible && document.hasFocus()) {
+				revealPendingBlocks();
+				setNumHiddenBlocks(0);
+			} else {
+				setShowToast(true);
+				// Increment the count of new posts
+				setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
+			}
+
+			// Update the block id we use for polling
+			if (data.mostRecentBlockId) {
+				setLatestBlockId(data.mostRecentBlockId);
+			}
+		}
+	}
+
+	/**
+	 * This is a utility used by our Cypress end to end tests
+	 *
+	 * Rather than expect these scripts to depend on polling, we
+	 * expose this function to allow Cypress to manually trigger
+	 * updates with whatever html and properties it wants
+	 *
+	 */
+	window.mockLiveUpdate = onSuccess;
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
-		refreshInterval: 15000,
+		refreshInterval: 10_000,
 		refreshWhenHidden: true,
-		// onSuccess runs (once) after every successful api call. This is useful because it
-		// allows us to avoid the problems of imperative code being executed multiple times
-		// inside react's declarative structure (things get re-rendered when any state changes)
-		onSuccess: (data: {
-			numNewBlocks: number;
-			html: string;
-			mostRecentBlockId: string;
-		}) => {
-			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
-				// Always insert the new blocks in the dom (but hidden)
-				insertNewBlocks(data.html);
-				hydrateBlocks();
-
-				if (topOfBlogVisible()) {
-					revealNewBlocks();
-					setNumHiddenBlocks(0);
-				} else {
-					setShowToast(true);
-					// Increment the count of new posts
-					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
-				}
-
-				// Update the block id we use for polling
-				if (data.mostRecentBlockId) {
-					setLatestBlockId(data.mostRecentBlockId);
-				}
-			}
-		},
+		onSuccess,
 	});
 
 	useEffect(() => {
@@ -165,41 +194,79 @@ export const Liveness = ({
 			numHiddenBlocks > 0 ? `(${numHiddenBlocks}) ${webTitle}` : webTitle;
 	}, [numHiddenBlocks, webTitle]);
 
-	if (topOfBlog) {
-		const observer = new window.IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('in-viewport');
-					revealNewBlocks();
-					setNumHiddenBlocks(0);
-					setShowToast(false);
-					return;
-				}
-				entry.target.classList.remove('in-viewport');
-			},
-			{
-				root: null,
-				// A margin makes more sense because the element we're
-				// observing (topOfBlog) has no height
-				rootMargin: '100px',
-			},
-		);
+	useEffect(() => {
+		if (!topOfBlog) return () => {};
+
+		const observer = new window.IntersectionObserver(([entry]) => {
+			setTopOfBlogVisible(entry.isIntersecting);
+
+			if (entry.isIntersecting && onFirstPage) {
+				// If on first page, reveal blocks
+				revealPendingBlocks();
+				setNumHiddenBlocks(0);
+				setShowToast(false);
+			}
+		});
 
 		observer.observe(topOfBlog);
-	}
+
+		return () => {
+			observer.disconnect();
+		};
+	}, [onFirstPage]);
+
+	/**
+	 * This useEffect sets up a listener for when the page is backgrounded or restored. We
+	 * do this so that any new blocks that were fetched while the blog was in the
+	 * background are animated in at the point when focus is restored
+	 */
+	useEffect(() => {
+		const handleVisibilityChange = () => {
+			// The blog was either hidden or has become visible
+			if (
+				// If we're returning to a blog that has pending blocks and the reader
+				// is at the top of the first page then...
+				document.visibilityState === 'visible' &&
+				numHiddenBlocks > 0 &&
+				topOfBlogVisible &&
+				onFirstPage
+			) {
+				revealPendingBlocks();
+				setNumHiddenBlocks(0);
+				setShowToast(false);
+			}
+		};
+
+		window.addEventListener('visibilitychange', handleVisibilityChange);
+
+		return () => {
+			window.removeEventListener(
+				'visibilitychange',
+				handleVisibilityChange,
+			);
+		};
+	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
 
 	const handleToastClick = () => {
-		setShowToast(false);
-		topOfBlog?.scrollIntoView();
-		revealNewBlocks();
-		setNumHiddenBlocks(0);
+		if (onFirstPage) {
+			setShowToast(false);
+			document.getElementById('maincontent')?.scrollIntoView({
+				behavior: 'smooth',
+			});
+			window.location.href = '#maincontent';
+			revealPendingBlocks();
+			setNumHiddenBlocks(0);
+		} else {
+			window.location.href = `${webURL}#maincontent`;
+		}
 	};
 
 	if (showToast) {
 		return (
 			<Toast
 				onClick={handleToastClick}
-				numHiddenBlocks={numHiddenBlocks}
+				count={numHiddenBlocks}
+				format={format}
 			/>
 		);
 	}

@@ -48,7 +48,6 @@ const adStylesDynamic = css`
 
 export const ArticleRenderer: React.FC<{
 	format: ArticleFormat;
-	palette: Palette;
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
 	host?: string;
@@ -60,7 +59,6 @@ export const ArticleRenderer: React.FC<{
 	switches: { [key: string]: boolean };
 }> = ({
 	format,
-	palette,
 	elements,
 	adTargeting,
 	host,
@@ -74,7 +72,6 @@ export const ArticleRenderer: React.FC<{
 	const output = elements.map((element, index) => {
 		return renderArticleElement({
 			format,
-			palette,
 			element,
 			adTargeting,
 			ajaxUrl,

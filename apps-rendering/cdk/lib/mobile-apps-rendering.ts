@@ -1,30 +1,21 @@
-import { join } from 'path';
 import {
 	InstanceClass,
 	InstanceSize,
 	InstanceType,
 	Peer,
-	Port,
 } from '@aws-cdk/aws-ec2';
-import type { CfnLoadBalancer } from '@aws-cdk/aws-elasticloadbalancing';
 import {
 	HostedZone,
 	RecordSet,
 	RecordTarget,
 	RecordType,
 } from '@aws-cdk/aws-route53';
-import { CfnInclude } from '@aws-cdk/cloudformation-include';
 import type { App, CfnElement } from '@aws-cdk/core';
-import { Duration, Tags } from '@aws-cdk/core';
-import { AccessScope, GuEc2App } from '@guardian/cdk';
-import { Stage } from '@guardian/cdk/lib/constants';
+import { Duration } from '@aws-cdk/core';
+import { GuEc2App } from '@guardian/cdk';
+import { AccessScope } from '@guardian/cdk/lib/constants/access';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
-import {
-	GuParameter,
-	GuStack,
-	GuStageParameter,
-	GuStringParameter,
-} from '@guardian/cdk/lib/constructs/core';
+import { GuStack } from '@guardian/cdk/lib/constructs/core';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 
 interface AppsStackProps extends GuStackProps {
@@ -56,36 +47,33 @@ export class MobileAppsRendering extends GuStack {
 		const codeDomainName = `${props.recordPrefix}.mobile-aws.code.dev-guardianapis.com`;
 		const prodDomainName = `${props.recordPrefix}.mobile-aws.guardianapis.com`;
 
-		const appsRenderingDomainName = this.withStageDependentValue<string>({
-			variableName: 'domainName',
-			app: appName,
-			stageValues: {
-				CODE: codeDomainName,
-				PROD: prodDomainName,
-			},
-		});
 		const hostedZoneIdCode = 'Z6PRU8YR6TQDK';
 		const hostedZoneIdProd = 'Z1EYB4AREPXE3B';
-		const hostedZone = HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
-			zoneName: appsRenderingDomain,
-			hostedZoneId: this.withStageDependentValue({
-				variableName: 'hostedZoneId',
+		const hostedZone = HostedZone.fromHostedZoneAttributes(
+			this,
+			'HostedZone',
+			{
+				zoneName: appsRenderingDomain,
+				hostedZoneId: this.withStageDependentValue({
+					variableName: 'hostedZoneId',
+					app: appName,
+					stageValues: {
+						CODE: hostedZoneIdCode,
+						PROD: hostedZoneIdProd,
+					},
+				}),
+			},
+		);
+
+		const scalingTargetCpuUtilisation =
+			this.withStageDependentValue<number>({
+				variableName: 'targetCpuUtilisation',
 				app: appName,
 				stageValues: {
-					CODE: hostedZoneIdCode,
-					PROD: hostedZoneIdProd,
+					CODE: 20,
+					PROD: 20,
 				},
-			}),
-		});
-
-		const scalingTargetCpuUtilisation = this.withStageDependentValue<number>({
-			variableName: 'targetCpuUtilisation',
-			app: appName,
-			stageValues: {
-				CODE: 20,
-				PROD: 20,
-			},
-		});
+			});
 
 		const appsRenderingApp = new GuEc2App(this, {
 			applicationPort: 3040,
@@ -94,10 +82,19 @@ export class MobileAppsRendering extends GuStack {
 				scope: AccessScope.INTERNAL,
 				cidrRanges: [Peer.ipv4('10.0.0.0/8')],
 			},
-			instanceType: InstanceType.of(InstanceClass.T4G, InstanceSize.MICRO),
+			instanceType: InstanceType.of(
+				InstanceClass.T4G,
+				InstanceSize.MICRO,
+			),
 			certificateProps: {
-				CODE: { domainName: codeDomainName, hostedZoneId: hostedZoneIdCode },
-				PROD: { domainName: prodDomainName, hostedZoneId: hostedZoneIdProd },
+				CODE: {
+					domainName: codeDomainName,
+					hostedZoneId: hostedZoneIdCode,
+				},
+				PROD: {
+					domainName: prodDomainName,
+					hostedZoneId: hostedZoneIdProd,
+				},
 			},
 			monitoringConfiguration: {
 				noMonitoring: true,

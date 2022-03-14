@@ -2,12 +2,12 @@ import { AudioAtomBlockComponent } from './elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from './elements/CommentBlockComponent';
 import { ContentAtomBlockComponent } from './elements/ContentAtomBlockComponent';
 import { DisclaimerBlockComponent } from './elements/DisclaimerBlockComponent';
-import { EmbedBlockComponent } from './elements/EmbedBlockComponent';
+import { EmbedBlockComponentAMP } from './elements/EmbedBlockComponentAMP';
 import { Expandable } from './Expandable';
 import { GuVideoBlockComponent } from './elements/GuVideoBlockComponent';
 import { ImageBlockComponent } from './elements/ImageBlockComponent';
 import { InteractiveAtomBlockComponent } from './elements/InteractiveAtomBlockComponent';
-import { InteractiveBlockComponent } from './elements/InteractiveBlockComponent';
+import { InteractiveBlockComponentAMP } from './elements/InteractiveBlockComponentAMP';
 import { PullquoteBlockComponent } from './elements/PullquoteBlockComponent';
 import { RichLinkBlockComponent } from './elements/RichLinkBlockComponent';
 import { SoundcloudBlockComponent } from './elements/SoundcloudBlockComponent';
@@ -17,7 +17,7 @@ import { TimelineBlockComponent } from './elements/TimelineBlockComponent';
 import { TwitterBlockComponent } from './elements/TwitterBlockComponent';
 import { VideoVimeoBlockComponent } from './elements/VideoVimeoBlockComponent';
 import { VideoYoutubeBlockComponent } from './elements/VideoYoutubeBlockComponent';
-import { YoutubeBlockComponent } from './elements/YoutubeBlockComponent';
+import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
 
 import { enhance } from '../lib/enhance';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
@@ -56,7 +56,7 @@ export const Elements = (
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-				return <EmbedBlockComponent key={i} element={element} />;
+				return <EmbedBlockComponentAMP key={i} element={element} />;
 			case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
 				return <InteractiveAtomBlockComponent url={element.url} />;
 			case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
@@ -102,7 +102,7 @@ export const Elements = (
 				); // element.placeholderUrl
 			case 'model.dotcomrendering.pageElements.InteractiveBlockElement': // Plain Interactive Embeds
 				return (
-					<InteractiveBlockComponent
+					<InteractiveBlockComponentAMP
 						url={element.url}
 						isMandatory={element.isMandatory}
 					/>
@@ -212,7 +212,7 @@ export const Elements = (
 				);
 			case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 				return (
-					<YoutubeBlockComponent
+					<YoutubeBlockComponentAMP
 						element={element}
 						pillar={pillar}
 						adTargeting={adTargeting}

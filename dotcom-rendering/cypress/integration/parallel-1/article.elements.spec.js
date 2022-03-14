@@ -106,6 +106,13 @@ describe('Elements', function () {
 				'Article?url=https://www.theguardian.com/sport/blog/2015/dec/02/the-joy-of-six-sports-radio-documentaries',
 			);
 
+			cy.scrollTo(0, 4500);
+
+			// Wait for hydration
+			cy.get('gu-island[name=EmbedBlockComponent]', { timeout: 30000 })
+				.first()
+				.should('have.attr', 'data-gu-ready', 'true');
+
 			cy.contains('hosted on wnyc.org');
 
 			cy.get('button[data-cy="click-to-view-button"]').click();
@@ -116,6 +123,13 @@ describe('Elements', function () {
 		it('should render the interactive using a boot.js', function () {
 			const getIframeBody = () => {
 				return cy
+					.get(
+						'[data-cypress="interactive-element-LA%20Rams%20dead%20cap%20numbers"]',
+					)
+					.scrollIntoView({
+						duration: 300,
+						offset: { top: -100, left: 0 },
+					})
 					.get(
 						'[data-cypress="interactive-element-LA%20Rams%20dead%20cap%20numbers"] > iframe',
 					)
@@ -142,6 +156,13 @@ describe('Elements', function () {
 
 			const getIframeBody = () => {
 				return cy
+					.get(
+						'[data-cypress="interactive-element-pa%20county%20by%20county"]',
+					)
+					.scrollIntoView({
+						duration: 300,
+						offset: { top: -100, left: 0 },
+					})
 					.get(
 						'[data-cypress="interactive-element-pa%20county%20by%20county"] > iframe',
 					)

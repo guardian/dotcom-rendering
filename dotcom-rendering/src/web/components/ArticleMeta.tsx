@@ -13,17 +13,17 @@ import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Contributor } from './Contributor';
 import { Avatar } from './Avatar';
 import { Counts } from './Counts';
-import { Branding } from './Branding';
+import { Branding } from './Branding.importable';
 import { ShareIcons } from './ShareIcons';
 import { Dateline } from './Dateline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { CommentCount } from './CommentCount.importable';
 import { Island } from './Island';
-import { ShareCount } from './ShareCount';
+import { ShareCount } from './ShareCount.importable';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	pageId: string;
 	webTitle: string;
 	author: AuthorType;
@@ -284,7 +284,6 @@ const metaNumbersExtrasLiveBlog = css`
 export const ArticleMeta = ({
 	branding,
 	format,
-	palette,
 	pageId,
 	webTitle,
 	author,
@@ -319,6 +318,9 @@ export const ArticleMeta = ({
 		showAvatarFromAuthor() &&
 		shouldShowAvatar(format);
 	const isInteractive = format.design === ArticleDesign.Interactive;
+
+	const palette = decidePalette(format);
+
 	return (
 		<div
 			className={
@@ -327,7 +329,11 @@ export const ArticleMeta = ({
 			css={metaContainer(format)}
 		>
 			<div css={meta}>
-				{branding && <Branding branding={branding} palette={palette} />}
+				{branding && (
+					<Island deferUntil="visible">
+						<Branding branding={branding} palette={palette} />
+					</Island>
+				)}
 				{format.theme === ArticleSpecial.Labs ? (
 					<div css={stretchLines}>
 						<Lines
@@ -362,7 +368,6 @@ export const ArticleMeta = ({
 									author={author}
 									tags={tags}
 									format={format}
-									palette={palette}
 								/>
 							)}
 							<Dateline

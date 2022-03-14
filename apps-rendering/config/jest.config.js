@@ -23,17 +23,10 @@ module.exports = {
 	collectCoverage: true,
 	preset: 'ts-jest/presets/js-with-ts',
 	rootDir: '../',
+	setupFilesAfterEnv: ['./config/jestSetup.js'],
 	globalSetup: './config/jestglobalSetup.js',
 	globals: {
 		'ts-jest': {
-			babelConfig: {
-				presets: [
-					[
-						'@babel/preset-env',
-						{ targets: { node: '12' }, modules: 'cjs' },
-					],
-				],
-			},
 			tsconfig: 'config/tsconfig.test.json',
 		},
 	},
@@ -50,5 +43,5 @@ module.exports = {
 	moduleDirectories: ['node_modules', 'src'],
 	snapshotSerializers: ['@emotion/jest/serializer'],
 	transformIgnorePatterns: ['node_modules/(?!@guardian)'],
-	testPathIgnorePatterns: ['cdk/', 'node_modules/'],
+	testPathIgnorePatterns: ['node_modules/'],
 };

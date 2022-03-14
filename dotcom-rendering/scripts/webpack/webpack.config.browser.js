@@ -5,13 +5,20 @@ const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const GITHUB = process.env.CI_ENV === 'github';
 
-// We need to distinguish files compiled by @babel/preset-env with the prefix "legacy"
+/**
+ * @param {boolean} isLegacyJS
+ * @returns {string}
+ */
 const generateName = (isLegacyJS) => {
 	const legacyString = isLegacyJS ? '.legacy' : '';
 	const chunkhashString = PROD && !GITHUB ? '.[chunkhash]' : '';
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
+/**
+ * @param {{ isLegacyJS: boolean, sessionId: string }} options
+ * @returns {import('webpack').Configuration}
+ */
 module.exports = ({ isLegacyJS, sessionId }) => ({
 	entry: {
 		sentryLoader: './src/web/browser/sentryLoader/init.ts',
@@ -38,15 +45,16 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 	optimization: {
 		splitChunks: { cacheGroups: { default: false } },
 	},
-	plugins: [
-		DEV &&
-			new GuStatsReportPlugin({
-				buildName: isLegacyJS ? 'legacy-client' : 'client',
-				project: 'dotcom-rendering',
-				team: 'dotcom',
-				sessionId,
-			}),
-	].filter(Boolean),
+	plugins: DEV
+		? [
+				new GuStatsReportPlugin({
+					buildName: isLegacyJS ? 'legacy-client' : 'client',
+					project: 'dotcom-rendering',
+					team: 'dotcom',
+					sessionId,
+				}),
+		  ]
+		: undefined,
 	module: {
 		rules: [
 			{
@@ -59,9 +67,6 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 						options: {
 							presets: [
 								'@babel/preset-react',
-								// @babel/preset-env is used for legacy browsers
-								// @babel/preset-modules is used for modern browsers
-								// this allows us to reduce bundle sizes
 								isLegacyJS
 									? [
 											'@babel/preset-env',

@@ -98,9 +98,6 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 
 						max-width: 280px;
 						${from.tablet} {
-							max-width: 400px;
-						}
-						${from.tablet} {
 							max-width: 460px;
 						}
 						color: ${palette.text.standfirst};

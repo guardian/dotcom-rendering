@@ -1,8 +1,6 @@
 import { renderToString } from 'react-dom/server';
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { decideDesign } from '../lib/decideDesign';
-import { decideDisplay } from '../lib/decideDisplay';
-import { decideTheme } from '../lib/decideTheme';
+import { decideFormat } from '../lib/decideFormat';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 
 /**
@@ -27,11 +25,7 @@ export const blocksToHtml = ({
 	adUnit,
 	switches,
 }: BlocksRequest): string => {
-	const format: ArticleFormat = {
-		display: decideDisplay(CAPIFormat),
-		design: decideDesign(CAPIFormat),
-		theme: decideTheme(CAPIFormat),
-	};
+	const format: ArticleFormat = decideFormat(CAPIFormat);
 
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser,
@@ -55,6 +49,13 @@ export const blocksToHtml = ({
 			isSensitive={isSensitive}
 			isAdFreeUser={isAdFreeUser}
 			switches={switches}
+			isLiveUpdate={true}
+			section={section}
+			// The props below are never used because isLiveUpdate is true but, typescript...
+			shouldHideReaderRevenue={false}
+			tags={[]}
+			isPaidContent={false}
+			contributionsServiceUrl=""
 		/>,
 	);
 

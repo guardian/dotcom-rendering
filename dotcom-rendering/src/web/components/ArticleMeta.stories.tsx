@@ -7,7 +7,6 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { ArticleMeta } from './ArticleMeta';
-import { decidePalette } from '../lib/decidePalette';
 import {
 	getAllThemes,
 	getThemeNameAsString,
@@ -65,11 +64,6 @@ export const ArticleStory = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -78,7 +72,7 @@ export const ArticleStory = () => {
 				}}
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
@@ -115,11 +109,6 @@ export const BrandingStory = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -128,7 +117,7 @@ export const BrandingStory = () => {
 				}}
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
@@ -150,11 +139,6 @@ export const FeatureStory = () => {
 					design: ArticleDesign.Feature,
 					theme: ArticlePillar.Culture,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Culture,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -163,7 +147,7 @@ export const FeatureStory = () => {
 				}}
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
@@ -184,11 +168,6 @@ export const SpecialReportStory = () => {
 					design: ArticleDesign.Feature,
 					theme: ArticleSpecial.SpecialReport,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticleSpecial.SpecialReport,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -197,7 +176,7 @@ export const SpecialReportStory = () => {
 				}}
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
@@ -218,11 +197,6 @@ export const CommentStory = () => {
 					design: ArticleDesign.Comment,
 					theme: ArticlePillar.Opinion,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Comment,
-					theme: ArticlePillar.Opinion,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -231,7 +205,7 @@ export const CommentStory = () => {
 				}}
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
@@ -252,11 +226,6 @@ export const InterviewStory = () => {
 					design: ArticleDesign.Interview,
 					theme: ArticlePillar.Lifestyle,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Interview,
-					theme: ArticlePillar.Lifestyle,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -265,7 +234,7 @@ export const InterviewStory = () => {
 				}}
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
@@ -286,11 +255,6 @@ export const ImmersiveStory = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Immersive,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -299,7 +263,7 @@ export const ImmersiveStory = () => {
 				}}
 				tags={tagsWithBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
@@ -320,11 +284,6 @@ export const TwoContributorsStory = () => {
 					design: ArticleDesign.Feature,
 					theme: ArticlePillar.Sport,
 				}}
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Feature,
-					theme: ArticlePillar.Sport,
-				})}
 				pageId=""
 				webTitle=""
 				author={{
@@ -333,7 +292,7 @@ export const TwoContributorsStory = () => {
 				}}
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-				secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
 				isCommentable={false}
 				discussionApiUrl=""
 				shortUrlId=""
@@ -356,7 +315,6 @@ export const DeadBlogStory = () => {
 					<p>{getThemeNameAsString(format)}</p>
 					<ArticleMeta
 						format={format}
-						palette={decidePalette(format)}
 						pageId=""
 						webTitle=""
 						author={{
@@ -365,7 +323,7 @@ export const DeadBlogStory = () => {
 						}}
 						tags={tagsWithByTwoContributors}
 						primaryDateline="Sun 12 Jan 2020 18.00 GMT"
-						secondaryDateline="Sun 12 Jan 2020 21.00 GMT"
+						secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
 						isCommentable={false}
 						discussionApiUrl=""
 						shortUrlId=""
@@ -378,3 +336,32 @@ export const DeadBlogStory = () => {
 	);
 };
 DeadBlogStory.story = { name: 'Deadblog - All pillars' };
+
+export const Dateline = () => {
+	return (
+		<Container>
+			<ArticleMeta
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				pageId=""
+				webTitle=""
+				author={{
+					byline: 'Lanre Bakare',
+					twitterHandle: 'lanre_bakare',
+				}}
+				tags={tagsWithBylineImage}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline=""
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
+			/>
+		</Container>
+	);
+};
+Dateline.story = { name: 'With no secondary dateline' };

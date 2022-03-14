@@ -12,11 +12,11 @@ import {
 import { QuoteIcon } from './QuoteIcon';
 import { Kicker } from './Kicker';
 import { Byline } from './Byline';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	headlineText: string; // The text shown
 	format: ArticleFormat; // Used to decide when to add type specific styles
-	palette: Palette; // Used to colour the headline and the kicker
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
@@ -84,16 +84,16 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const underlinedStyles = (size: SmallHeadlineSize) => {
+const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	function generateUnderlinedCss(baseSize: number) {
 		return css`
 			background-image: linear-gradient(
 				to bottom,
 				transparent,
 				transparent ${baseSize - 1}px,
-				rgba(199, 0, 0, 0.5)
+				${colour}
 			);
-			line-height: ${baseSize - 1}px;
+			line-height: ${baseSize}px;
 			background-size: 1px ${baseSize}px;
 			background-origin: content-box;
 			background-clip: content-box;
@@ -102,13 +102,13 @@ const underlinedStyles = (size: SmallHeadlineSize) => {
 	}
 	switch (size) {
 		case 'small':
-			return generateUnderlinedCss(21);
+			return generateUnderlinedCss(22);
 		case 'medium':
-			return generateUnderlinedCss(24);
+			return generateUnderlinedCss(25);
 		case 'large':
-			return generateUnderlinedCss(28);
+			return generateUnderlinedCss(29);
 		default:
-			return generateUnderlinedCss(23);
+			return generateUnderlinedCss(24);
 	}
 };
 
@@ -130,7 +130,6 @@ const fullCardImageTextStyles = css`
 export const CardHeadline = ({
 	headlineText,
 	format,
-	palette,
 	showQuotes,
 	kickerText,
 	showPulsingDot,
@@ -139,51 +138,57 @@ export const CardHeadline = ({
 	byline,
 	showByline,
 	isFullCardImage,
-}: Props) => (
-	<>
-		<h4
-			css={[
-				format.theme === ArticleSpecial.Labs
-					? labTextStyles(size)
-					: fontStyles(size),
-				format.design === ArticleDesign.Analysis &&
-					underlinedStyles(size),
-				isFullCardImage &&
-					css`
-						line-height: 1; /* Reset line height in full image carousel */
-					`,
-			]}
-		>
-			<span css={isFullCardImage && fullCardImageTextStyles}>
-				{kickerText && (
-					<Kicker
-						text={kickerText}
-						palette={palette}
-						showPulsingDot={showPulsingDot}
-						showSlash={showSlash}
-						inCard={true}
-					/>
-				)}
-				{showQuotes && (
-					<QuoteIcon colour={palette.text.cardKicker} size={size} />
-				)}
+}: Props) => {
+	const palette = decidePalette(format);
+	return (
+		<>
+			<h4
+				css={[
+					format.theme === ArticleSpecial.Labs
+						? labTextStyles(size)
+						: fontStyles(size),
+					format.design === ArticleDesign.Analysis &&
+						underlinedStyles(
+							size,
+							palette.background.analysisUnderline,
+						),
+					isFullCardImage &&
+						css`
+							line-height: 1; /* Reset line height in full image carousel */
+						`,
+				]}
+			>
+				<span css={isFullCardImage && fullCardImageTextStyles}>
+					{kickerText && (
+						<Kicker
+							text={kickerText}
+							palette={palette}
+							showPulsingDot={showPulsingDot}
+							showSlash={showSlash}
+							inCard={true}
+						/>
+					)}
+					{showQuotes && (
+						<QuoteIcon colour={palette.text.cardKicker} />
+					)}
 
-				<span
-					css={css`
-						color: ${palette.text.cardHeadline};
-					`}
-				>
-					{headlineText}
+					<span
+						css={css`
+							color: ${palette.text.cardHeadline};
+						`}
+					>
+						{headlineText}
+					</span>
 				</span>
-			</span>
-		</h4>
-		{byline && showByline && (
-			<Byline
-				text={byline}
-				palette={palette}
-				format={format}
-				size={size}
-			/>
-		)}
-	</>
-);
+			</h4>
+			{byline && showByline && (
+				<Byline
+					text={byline}
+					format={format}
+					size={size}
+					isCard={true}
+				/>
+			)}
+		</>
+	);
+};

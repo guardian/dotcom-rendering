@@ -93,6 +93,7 @@ type Palette = {
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		cardHeadline: Colour;
+		cardByline: Colour;
 		cardKicker: Colour;
 		linkKicker: Colour;
 		cardStandfirst: Colour;
@@ -116,7 +117,6 @@ type Palette = {
 		numberedTitle: Colour;
 		numberedPosition: Colour;
 		overlayedCaption: Colour;
-		pagination: Colour;
 		shareCount: Colour;
 		shareCountUntilDesktop: Colour;
 	};
@@ -140,6 +140,8 @@ type Palette = {
 		headlineTag: Colour;
 		mostViewedTab: Colour;
 		matchNav: Colour;
+		analysisUnderline: Colour;
+		matchStats: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -149,7 +151,6 @@ type Palette = {
 		shareIcon: Colour;
 		shareIconGrayBackground: Colour;
 		cameraCaptionIcon: Colour;
-		cardIcon: Colour;
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
@@ -169,14 +170,13 @@ type Palette = {
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;
-		pagination: Colour;
 	};
 	topBar: {
 		card: Colour;
 	};
 	hover: {
 		headlineByline: Colour;
-		pagination: Colour;
+
 		standfirstLink: Colour;
 	};
 };
@@ -321,6 +321,11 @@ interface AuthorType {
 	email?: string;
 }
 
+interface BlockContributor {
+	name: string;
+	imageUrl?: string;
+}
+
 interface Block {
 	id: string;
 	elements: CAPIElement[];
@@ -339,6 +344,7 @@ interface Block {
 	lastUpdatedDisplay?: string;
 	firstPublished?: number;
 	firstPublishedDisplay?: string;
+	contributors?: BlockContributor[];
 }
 
 interface Pagination {
@@ -499,6 +505,9 @@ interface CAPIType {
 	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
 	isLegacyInteractive?: boolean;
 	filterKeyEvents: boolean;
+
+	// Included on live and dead blogs. Used when polling
+	mostRecentBlockId?: string;
 }
 
 // Browser data models. Note the CAPI prefix here means something different to
@@ -541,6 +550,7 @@ type CAPIBrowserType = {
 	isPreview?: boolean;
 	webTitle: string;
 	stage: string;
+	mostRecentBlockId?: string;
 };
 
 interface TagType {
@@ -570,6 +580,15 @@ interface BlocksRequest {
 	adUnit: string;
 	videoDuration?: number;
 	switches: { [key: string]: boolean };
+}
+
+/**
+ * KeyEventsRequest is the expected body format for POST requests made to /KeyEvents
+ */
+interface KeyEventsRequest {
+	keyEvents: Block[];
+	format: CAPIFormat;
+	filterKeyEvents: boolean;
 }
 
 interface BadgeType {
@@ -854,18 +873,6 @@ interface ComponentNameChunkMap {
 	chunkName: string;
 	addWhen: BlockElementType;
 }
-interface YoutubeBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'YoutubeBlockComponent';
-	addWhen: YoutubeBlockElement['_type'];
-}
-
-interface InteractiveBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'InteractiveBlockComponent';
-	addWhen: InteractiveBlockElement['_type'];
-}
-
-// There are docs on loadable in ./docs/loadable-components.md
-type LoadableComponents = [YoutubeBlockLoadable, InteractiveBlockLoadable];
 
 interface CarouselImagesMap {
 	'300'?: string;
@@ -892,7 +899,7 @@ interface BaseTrailType {
 	branding?: Branding;
 }
 interface TrailType extends BaseTrailType {
-	palette: Palette;
+	palette?: never;
 	format: ArticleFormat;
 }
 
@@ -921,6 +928,15 @@ interface MostViewedFooterPayloadType {
 	mostCommented: CAPITrailType;
 	mostShared: CAPITrailType;
 }
+
+// ------------
+// Liveblogs //
+// ------------
+type LiveUpdateType = {
+	numNewBlocks: number;
+	html: string;
+	mostRecentBlockId: string;
+};
 
 // ------------
 // RichLinks //
@@ -1030,6 +1046,7 @@ declare namespace JSX {
 		'gu-island': {
 			name: string;
 			deferUntil?: 'idle' | 'visible';
+			clientOnly?: boolean;
 			props: any;
 			children: React.ReactNode;
 		};

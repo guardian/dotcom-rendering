@@ -2,14 +2,13 @@ import { RichLink, RichLinkImageData } from './RichLink';
 import { DefaultRichLink } from './DefaultRichLink';
 
 import { useApi } from '../lib/useApi';
-import { decideDisplay } from '../lib/decideDisplay';
-import { decideDesign } from '../lib/decideDesign';
-import { decideTheme } from '../lib/decideTheme';
+import { decideFormat } from '../lib/decideFormat';
 
 type Props = {
 	element: RichLinkBlockElement;
 	ajaxUrl: string;
 	richLinkIndex: number;
+	format: ArticleFormat;
 };
 
 interface CAPIRichLinkType {
@@ -55,6 +54,7 @@ export const RichLinkComponent = ({
 	element,
 	ajaxUrl,
 	richLinkIndex,
+	format,
 }: Props) => {
 	const url = buildUrl(element, ajaxUrl);
 	const { data, error } = useApi<CAPIRichLinkType>(url);
@@ -90,11 +90,8 @@ export const RichLinkComponent = ({
 			contentType={data.contentType}
 			url={data.url}
 			starRating={data.starRating}
-			format={{
-				display: decideDisplay(data.format),
-				design: decideDesign(data.format),
-				theme: decideTheme(data.format),
-			}}
+			linkFormat={decideFormat(data.format)}
+			format={format}
 			tags={data.tags}
 			sponsorName={data.sponsorName}
 			contributorImage={data.contributorImage}

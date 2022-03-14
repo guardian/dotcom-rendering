@@ -179,12 +179,7 @@ export const Card = ({
 	const cardPalette = decidePalette(format);
 
 	return (
-		<CardLink
-			linkTo={linkTo}
-			format={format}
-			palette={cardPalette}
-			dataLinkName={dataLinkName}
-		>
+		<CardLink linkTo={linkTo} format={format} dataLinkName={dataLinkName}>
 			<TopBar palette={cardPalette} isFullCardImage={isFullCardImage}>
 				<CardLayout
 					imagePosition={imagePosition}
@@ -223,7 +218,6 @@ export const Card = ({
 									<CardHeadline
 										headlineText={headlineText}
 										format={format}
-										palette={cardPalette}
 										size={headlineSize}
 										showQuotes={showQuotes}
 										kickerText={
@@ -286,7 +280,6 @@ export const Card = ({
 										webPublicationDate ? (
 											<CardAge
 												format={format}
-												palette={cardPalette}
 												webPublicationDate={
 													webPublicationDate
 												}
@@ -320,7 +313,6 @@ export const Card = ({
 										branding ? (
 											<CardBranding
 												branding={branding}
-												palette={cardPalette}
 												format={format}
 											/>
 										) : undefined

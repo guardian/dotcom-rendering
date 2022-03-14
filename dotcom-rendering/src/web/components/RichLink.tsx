@@ -8,7 +8,7 @@ import {
 	textSans,
 	from,
 } from '@guardian/source-foundations';
-import { ArticleFormat, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 
 import ArrowInCircle from '../../static/icons/arrow-in-circle.svg';
 
@@ -26,6 +26,7 @@ interface Props {
 	contentType: ContentType;
 	url: string;
 	starRating?: number;
+	linkFormat: ArticleFormat;
 	format: ArticleFormat;
 	tags: TagType[];
 	sponsorName: string;
@@ -207,27 +208,33 @@ export const RichLink = ({
 	contentType,
 	url,
 	starRating,
+	linkFormat,
 	format,
 	tags,
 	sponsorName,
 	contributorImage,
 	isPlaceholder,
 }: Props) => {
-	const palette = decidePalette(format);
+	const palette = decidePalette(linkFormat);
 	const linkText =
 		cardStyle === 'letters' ? `${headlineText} | Letters ` : headlineText;
 
 	const imageCardStyles = ['news', 'letters', 'media', 'feature'];
+	const parentIsBlog =
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
+
 	const showImage =
 		imageData &&
 		imageData.thumbnailUrl &&
-		imageCardStyles.includes(cardStyle);
+		imageCardStyles.includes(cardStyle) &&
+		!parentIsBlog;
 	const isPaidContent = tags
 		? tags.filter((t) => t.id === 'tone/advertisement-features').length > 0
 		: false;
 	const isOpinion = cardStyle === 'comment';
 	const mainContributor = getMainContributor(tags);
-	const isLabs = format.theme === ArticleSpecial.Labs;
+	const isLabs = linkFormat.theme === ArticleSpecial.Labs;
 
 	return (
 		<div
@@ -261,13 +268,11 @@ export const RichLink = ({
 										<Hide when="above" breakpoint="wide">
 											<QuoteIcon
 												colour={palette.fill.quoteIcon}
-												size="small"
 											/>
 										</Hide>
 										<Hide when="below" breakpoint="wide">
 											<QuoteIcon
 												colour={palette.fill.quoteIcon}
-												size="medium"
 											/>
 										</Hide>
 									</>
@@ -298,7 +303,7 @@ export const RichLink = ({
 								<Avatar
 									imageSrc={contributorImage}
 									imageAlt={mainContributor}
-									palette={decidePalette(format)}
+									palette={palette}
 								/>
 							</div>
 						)}

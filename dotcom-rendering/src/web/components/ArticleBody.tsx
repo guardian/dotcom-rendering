@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 
 import { headline, body, between, space } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
@@ -18,6 +18,11 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
+	section: string;
+	shouldHideReaderRevenue: boolean;
+	tags: TagType[];
+	isPaidContent: boolean;
+	contributionsServiceUrl: string;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -75,6 +80,20 @@ const globalLinkStyles = (palette: Palette) => css`
 	}
 `;
 
+const revealStyles = css`
+	/* We're using classnames here because we add and remove these classes
+	   using plain javascript */
+	.reveal {
+		animation: ${keyframes`
+			0% { opacity: 0; }
+			100% { opacity: 1; }
+		`} 4s ease-out;
+	}
+	.pending {
+		display: none;
+	}
+`;
+
 export const ArticleBody = ({
 	format,
 	palette,
@@ -87,6 +106,11 @@ export const ArticleBody = ({
 	switches,
 	isAdFreeUser,
 	isSensitive,
+	section,
+	shouldHideReaderRevenue,
+	tags,
+	isPaidContent,
+	contributionsServiceUrl,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
@@ -96,16 +120,21 @@ export const ArticleBody = ({
 	) {
 		return (
 			<>
-				{format.design === ArticleDesign.LiveBlog && (
-					<span data-gu-marker="top-of-blog" />
-				)}
 				<div
 					// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 					tabIndex={0}
-					id="maincontent"
+					id="liveblog-body"
 					// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
 					className="js-liveblog-body"
-					css={[globalStrongStyles, globalLinkStyles(palette)]}
+					css={[
+						globalStrongStyles,
+						globalH2Styles(format.display),
+						globalH3Styles(format.display),
+						globalLinkStyles(palette),
+						// revealStyles is used to animate the reveal of new blocks
+						format.design === ArticleDesign.LiveBlog &&
+							revealStyles,
+					]}
 				>
 					<LiveBlogRenderer
 						format={format}
@@ -118,6 +147,12 @@ export const ArticleBody = ({
 						switches={switches}
 						isAdFreeUser={isAdFreeUser}
 						isSensitive={isSensitive}
+						isLiveUpdate={false}
+						section={section}
+						shouldHideReaderRevenue={shouldHideReaderRevenue}
+						tags={tags}
+						isPaidContent={isPaidContent}
+						contributionsServiceUrl={contributionsServiceUrl}
 					/>
 				</div>
 			</>
@@ -139,7 +174,6 @@ export const ArticleBody = ({
 		>
 			<ArticleRenderer
 				format={format}
-				palette={palette}
 				elements={blocks[0] ? blocks[0].elements : []}
 				adTargeting={adTargeting}
 				host={host}

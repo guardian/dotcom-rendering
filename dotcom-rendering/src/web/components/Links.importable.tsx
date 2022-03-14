@@ -110,6 +110,10 @@ const Search = ({
 	</a>
 );
 
+const linkWrapperStyles = css`
+	display: inline;
+`;
+
 const linksStyles = css`
 	position: absolute;
 	left: 10px;
@@ -232,23 +236,37 @@ export const Links = ({
 
 	const isServer = typeof window === 'undefined';
 
+	const showSupporterCTA =
+		!isServer &&
+		getCookie({
+			name: 'gu_hide_support_messaging',
+			shouldMemoize: true,
+		}) === 'true';
+
 	const isSignedIn =
 		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
 	return (
 		<div data-print-layout="hide" css={linksStyles}>
-			{supporterCTA !== '' && (
-				<>
-					<div css={seperatorStyles} />
-					<a
-						href="https://support.theguardian.com/subscribe/weekly?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_supporter_cta%22%7D"
-						css={[linkTablet({ showAtTablet: false }), linkStyles]}
-						data-link-name="nav2 : supporter-cta"
-					>
-						Print subscriptions
-					</a>
-				</>
-			)}
+			{/* Since 'subscriptions' is only rendered on the client, rendering it within
+				a div is required to prevent DOM elements getting mis-matched during hydration  */}
+			<div css={linkWrapperStyles}>
+				{showSupporterCTA && supporterCTA !== '' && (
+					<>
+						<div css={seperatorStyles} id="supporter" />
+						<a
+							href={supporterCTA}
+							css={[
+								linkTablet({ showAtTablet: false }),
+								linkStyles,
+							]}
+							data-link-name="nav2 : supporter-cta"
+						>
+							Subscriptions
+						</a>
+					</>
+				)}
+			</div>
 
 			<div css={seperatorStyles} />
 			<a
@@ -260,15 +278,19 @@ export const Links = ({
 			</a>
 			<div css={seperatorHideStyles} />
 
-			{isSignedIn ? (
-				<MyAccount
-					mmaUrl={mmaUrl}
-					idUrl={idUrl}
-					discussionApiUrl={discussionApiUrl}
-				/>
-			) : (
-				<SignIn idUrl={idUrl} />
-			)}
+			{/* Since we switch from SignIn to MyAccount between SSR & hydration (if the user is logged in), we need to wrap
+				the conditional in a div so preact knows where the old component was & is able to swap it out. */}
+			<div css={linkWrapperStyles}>
+				{isSignedIn ? (
+					<MyAccount
+						mmaUrl={mmaUrl}
+						idUrl={idUrl}
+						discussionApiUrl={discussionApiUrl}
+					/>
+				) : (
+					<SignIn idUrl={idUrl} />
+				)}
+			</div>
 
 			<Search
 				href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"

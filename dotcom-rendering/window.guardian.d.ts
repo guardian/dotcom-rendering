@@ -1,9 +1,13 @@
 import type {
 	Callback,
 	CMP,
+	ConsentState,
+	VendorName,
 } from '@guardian/consent-management-platform/dist/types';
+import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { WindowGuardianConfig } from './src/model/window-guardian';
 import { ReaderRevenueDevUtils } from './src/web/lib/readerRevenueDevUtils';
+import { DailyArticleHistory } from "./src/web/lib/dailyArticleCount";
 
 declare global {
 	/* ~ Here, declare things that go in the global namespace, or augment
@@ -47,6 +51,8 @@ declare global {
 			};
 			readerRevenue: ReaderRevenueDevUtils;
 			gaPath: string;
+			weeklyArticleCount: WeeklyArticleHistory | undefined;
+			dailyArticleCount: DailyArticleHistory | undefined;
 		};
 		GoogleAnalyticsObject: string;
 		ga: UniversalAnalytics.ga | null;
@@ -64,10 +70,14 @@ declare global {
 		Cypress: any; // for checking if running within cypress
 		guCmpHotFix: {
 			initialised?: boolean;
-			cmp?: CMP;
-			onConsentChange?: (fn: Callback) => void;
-			getConsentFor?: (fn: Callback) => void;
+			cmp: CMP;
+			onConsentChange: (fn: Callback) => void;
+			getConsentFor: (
+				vendor: VendorName,
+				consent: ConsentState,
+			) => boolean;
 		};
+		mockLiveUpdate: (data: LiveUpdateType) => void;
 	}
 }
 /* ~ this line is required as per TypeScript's global-modifying-module.d.ts instructions */

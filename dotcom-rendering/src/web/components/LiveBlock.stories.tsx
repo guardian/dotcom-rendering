@@ -308,7 +308,112 @@ export const FirstImage = () => {
 };
 FirstImage.story = { name: 'with an image as the first element' };
 
-export const ImaheAndTitle = () => {
+export const ImageRoles = () => {
+	const block: Block = {
+		...baseBlock,
+		elements: [
+			{
+				...images[0],
+				role: 'inline',
+				title: 'Inline',
+			},
+			{
+				...images[0],
+				role: 'thumbnail',
+				title: 'Thumbnail',
+			},
+			{
+				...images[0],
+				role: 'immersive',
+				title: 'Immersive',
+			},
+			{
+				...images[0],
+				role: 'supporting',
+				title: 'Supporting',
+			},
+			{
+				...images[0],
+				role: 'showcase',
+				title: 'Showcase',
+			},
+			{
+				...images[0],
+				role: 'halfWidth',
+				title: 'Half width',
+			},
+		],
+	};
+	return (
+		<Wrapper>
+			<LiveBlock
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
+				format={{
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
+				}}
+				block={block}
+				pageId=""
+				webTitle=""
+				ajaxUrl=""
+			/>
+		</Wrapper>
+	);
+};
+ImageRoles.story = { name: 'with images at different roles' };
+
+export const Thumbnail = () => {
+	const block: Block = {
+		...baseBlock,
+		elements: [
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>eos his vis cetero dicta usu eu duo officiis ei eleifend sed repudiandae consequat vitae splendide pretium est partiendo semper ne uonsetetur ipsum aliquam per leo odio inimicus eam his tincidunt et ne semper amet et voluptua mauris qui eum nec inimicus sed aenean eu mea odio vitae at.</p>',
+			},
+			{
+				...images[0],
+				role: 'thumbnail',
+			},
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>eos his vis cetero dicta usu eu duo officiis ei eleifend sed repudiandae consequat vitae splendide pretium est partiendo semper ne uonsetetur ipsum aliquam per leo odio inimicus eam his tincidunt et ne semper amet et voluptua mauris qui eum nec inimicus sed aenean eu mea odio vitae at.</p>',
+			},
+			{
+				elementId: '1',
+				_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+				html: '<p>eos his vis cetero dicta usu eu duo officiis ei eleifend sed repudiandae consequat vitae splendide pretium est partiendo semper ne uonsetetur ipsum aliquam per leo odio inimicus eam his tincidunt et ne semper amet et voluptua mauris qui eum nec inimicus sed aenean eu mea odio vitae at.</p>',
+			},
+		],
+	};
+	return (
+		<Wrapper>
+			<LiveBlock
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
+				format={{
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
+				}}
+				block={block}
+				pageId=""
+				webTitle=""
+				ajaxUrl=""
+			/>
+		</Wrapper>
+	);
+};
+Thumbnail.story = { name: 'with a thumbnail image surrounded by text' };
+
+export const ImageAndTitle = () => {
 	const block: Block = {
 		...baseBlock,
 		title: 'Afternoon summary',
@@ -342,7 +447,7 @@ export const ImaheAndTitle = () => {
 		</Wrapper>
 	);
 };
-ImaheAndTitle.story = { name: 'with only a title and an image' };
+ImageAndTitle.story = { name: 'with only a title and an image' };
 
 export const Updated = () => {
 	const publishedDate: number = baseBlock.blockFirstPublished || 999999;
@@ -377,3 +482,101 @@ export const Updated = () => {
 Updated.story = {
 	name: 'with updated time showing',
 };
+
+export const Contributor = () => {
+	const block: Block = {
+		...baseBlock,
+		contributors: [
+			{
+				name: 'Andrew Roth',
+				imageUrl:
+					'https://i.guim.co.uk/img/uploads/2019/06/07/Andrew_Roth,_L.png?width=300&quality=85&auto=format&fit=max&s=b43b83c4998787fd8c68631b800cb8f7',
+			},
+		],
+	};
+	return (
+		<Wrapper>
+			<LiveBlock
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
+				format={{
+					theme: ArticlePillar.News,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
+				}}
+				block={block}
+				pageId=""
+				webTitle=""
+				ajaxUrl=""
+			/>
+		</Wrapper>
+	);
+};
+Contributor.story = { name: 'with a contributor' };
+
+export const NoAvatar = () => {
+	const block: Block = {
+		...baseBlock,
+		contributors: [
+			{
+				name: 'Andrew Roth',
+			},
+		],
+	};
+	return (
+		<Wrapper>
+			<LiveBlock
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
+				format={{
+					theme: ArticlePillar.Opinion,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
+				}}
+				block={block}
+				pageId=""
+				webTitle=""
+				ajaxUrl=""
+			/>
+		</Wrapper>
+	);
+};
+NoAvatar.story = { name: 'with a contributor but no avatar' };
+
+export const TitleAndContributor = () => {
+	const block: Block = {
+		...baseBlock,
+		title: 'Afternoon summary',
+		contributors: [
+			{
+				name: 'Andrew Roth',
+				imageUrl:
+					'https://i.guim.co.uk/img/uploads/2019/06/07/Andrew_Roth,_L.png?width=300&quality=85&auto=format&fit=max&s=b43b83c4998787fd8c68631b800cb8f7',
+			},
+		],
+	};
+	return (
+		<Wrapper>
+			<LiveBlock
+				adTargeting={{
+					customParams: { sens: 'f', urlkw: [] },
+					adUnit: '',
+				}}
+				format={{
+					theme: ArticlePillar.Sport,
+					design: ArticleDesign.LiveBlog,
+					display: ArticleDisplay.Standard,
+				}}
+				block={block}
+				pageId=""
+				webTitle=""
+				ajaxUrl=""
+			/>
+		</Wrapper>
+	);
+};
+TitleAndContributor.story = { name: 'with a contributor and a title' };

@@ -32,7 +32,7 @@ import {
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
 import { setAutomat } from '../lib/setAutomat';
-import { useHasBeenSeen } from '../lib/useHasBeenSeen';
+import { useIsInView } from '../lib/useIsInView';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import {
 	OphanRecordFunction,
@@ -275,7 +275,7 @@ const ReaderRevenueLinksNative: React.FC<{
 		campaignCode,
 	};
 
-	const [hasBeenSeen, setNode] = useHasBeenSeen({
+	const [hasBeenSeen, setNode] = useIsInView({
 		threshold: 0,
 		debounce: true,
 	});

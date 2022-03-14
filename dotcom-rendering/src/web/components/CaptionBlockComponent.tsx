@@ -3,7 +3,6 @@ import { Caption } from './Caption';
 type Props = {
 	captionText?: string;
 	format: ArticleFormat;
-	palette: Palette;
 	padCaption?: boolean;
 	credit?: string;
 	displayCredit?: boolean;
@@ -14,7 +13,6 @@ type Props = {
 export const CaptionBlockComponent = ({
 	captionText,
 	format,
-	palette,
 	padCaption = false,
 	credit,
 	displayCredit = true,
@@ -23,7 +21,6 @@ export const CaptionBlockComponent = ({
 }: Props) => (
 	<Caption
 		format={format}
-		palette={palette}
 		captionText={captionText}
 		padCaption={padCaption}
 		credit={credit}

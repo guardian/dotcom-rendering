@@ -10,7 +10,7 @@ import type { CommonEndOfArticleComponentProps } from '@guardian/braze-component
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
 import { CanShowResult } from '../../lib/messagePicker';
 import { useOnce } from '../../lib/useOnce';
-import { useHasBeenSeen } from '../../lib/useHasBeenSeen';
+import { useIsInView } from '../../lib/useIsInView';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 
 const wrapperMargins = css`
@@ -20,8 +20,9 @@ const wrapperMargins = css`
 const COMPONENT_TYPE = 'RETENTION_EPIC';
 
 type Meta = {
-	dataFromBraze?: { [key: string]: string };
+	dataFromBraze: { [key: string]: string };
 	logImpressionWithBraze: () => void;
+	logButtonClickWithBraze: (id: number) => void;
 };
 
 type EpicConfig = {
@@ -33,7 +34,7 @@ type EpicConfig = {
 export const canShowBrazeEpic = async (
 	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
 	brazeArticleContext: BrazeArticleContext,
-): Promise<CanShowResult<any>> => {
+): Promise<CanShowResult<Meta>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
 		return {
@@ -48,15 +49,22 @@ export const canShowBrazeEpic = async (
 			brazeArticleContext,
 		);
 
-		return {
-			show: true,
-			meta: {
-				dataFromBraze: message.extras,
-				logImpressionWithBraze: () => {
-					message.logImpression();
+		if (message.extras) {
+			return {
+				show: true,
+				meta: {
+					dataFromBraze: message.extras,
+					logImpressionWithBraze: () => {
+						message.logImpression();
+					},
+					logButtonClickWithBraze: (internalButtonId: number) => {
+						message.logButtonClick(internalButtonId);
+					},
 				},
-			},
-		};
+			};
+		}
+
+		return { show: false };
 	} catch (e) {
 		return { show: false };
 	}
@@ -75,7 +83,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 	countryCode,
 	idApiUrl,
 }: InnerProps) => {
-	const [hasBeenSeen, setNode] = useHasBeenSeen({
+	const [hasBeenSeen, setNode] = useIsInView({
 		rootMargin: '-18px',
 		threshold: 0,
 		debounce: true,
@@ -87,52 +95,50 @@ const BrazeEpicWithSatisfiedDependencies = ({
 		submitComponentEvent({
 			component: {
 				componentType: COMPONENT_TYPE,
-				id: meta.dataFromBraze?.ophanComponentId,
+				id: meta.dataFromBraze.ophanComponentId,
 			},
 			action: 'INSERT',
 		});
-	}, [meta?.dataFromBraze, epicRef.current]);
+	}, [meta.dataFromBraze, epicRef.current]);
 
 	useEffect(() => {
-		if (hasBeenSeen && meta && meta.dataFromBraze) {
+		if (hasBeenSeen) {
 			meta.logImpressionWithBraze();
 
 			// Log VIEW event with Ophan
 			submitComponentEvent({
 				component: {
 					componentType: COMPONENT_TYPE,
-					id: meta.dataFromBraze?.ophanComponentId,
+					id: meta.dataFromBraze.ophanComponentId,
 				},
 				action: 'VIEW',
 			});
 		}
 	}, [hasBeenSeen, meta]);
 
-	if (meta.dataFromBraze) {
-		return (
-			<div ref={setNode} css={wrapperMargins}>
-				<div ref={epicRef}>
-					<BrazeComponent
-						componentName={meta.dataFromBraze.componentName}
-						brazeMessageProps={meta.dataFromBraze}
-						subscribeToNewsletter={async (newsletterId) => {
-							await fetch(`${idApiUrl}/users/me/newsletters`, {
-								method: 'PATCH',
-								body: JSON.stringify({
-									id: newsletterId,
-									subscribed: true,
-								}),
-								credentials: 'include',
-							});
-						}}
-						countryCode={countryCode}
-					/>
-				</div>
+	return (
+		<div ref={setNode} css={wrapperMargins}>
+			<div ref={epicRef}>
+				<BrazeComponent
+					componentName={meta.dataFromBraze.componentName}
+					brazeMessageProps={meta.dataFromBraze}
+					subscribeToNewsletter={async (newsletterId) => {
+						await fetch(`${idApiUrl}/users/me/newsletters`, {
+							method: 'PATCH',
+							body: JSON.stringify({
+								id: newsletterId,
+								subscribed: true,
+							}),
+							credentials: 'include',
+						});
+					}}
+					countryCode={countryCode}
+					logButtonClickWithBraze={meta.logButtonClickWithBraze}
+					submitComponentEvent={submitComponentEvent}
+				/>
 			</div>
-		);
-	}
-
-	return null;
+		</div>
+	);
 };
 
 export const MaybeBrazeEpic = ({ meta, countryCode, idApiUrl }: EpicConfig) => {

@@ -17,10 +17,7 @@ export const Portal = ({ rootId, children }: Props) => {
 	// the root divs where the Portal is being inserted so the page is rendered with the placeholder
 	// showing (to reduce jank). But ReactDOM.createPortal won't replace content so we need to
 	// manually remove it here.
-	const placeholderElement = element.querySelector(
-		'[data-name="placeholder"]',
-	);
-	if (placeholderElement) placeholderElement.remove();
+	element.firstChild?.remove();
 	const result = ReactDOM.createPortal(children, element);
 	return result;
 };

@@ -43,7 +43,6 @@ interface Props {
 
 const Renderer: React.FC<{
 	format: ArticleFormat;
-	palette: Palette;
 	elements: CAPIElement[];
 	host?: string;
 	pageId: string;
@@ -54,7 +53,6 @@ const Renderer: React.FC<{
 	switches: { [key: string]: boolean };
 }> = ({
 	format,
-	palette,
 	elements,
 	host,
 	pageId,
@@ -72,7 +70,7 @@ const Renderer: React.FC<{
 	const output = elements.map((element, index) => {
 		const [ok, el] = renderElement({
 			format,
-			palette,
+
 			element,
 			adTargeting: undefined,
 			host,
@@ -312,7 +310,6 @@ export const FullPageInteractiveLayout = ({
 				<article>
 					<Renderer
 						format={format}
-						palette={palette}
 						elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
 						host={host}
 						pageId={CAPI.pageId}

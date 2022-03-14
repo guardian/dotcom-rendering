@@ -11,6 +11,7 @@ export const HeadlineWrapper = ({ children, isFullCardImage }: Props) => (
 			padding-bottom: ${isFullCardImage ? 0 : 8}px;
 			padding-left: ${isFullCardImage ? 0 : 5}px;
 			padding-right: 5px;
+			flex-grow: 1;
 		`}
 	>
 		{children}

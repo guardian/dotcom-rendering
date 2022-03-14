@@ -5,6 +5,7 @@ import type {
 	BrazeMessagesInterface,
 	BrazeArticleContext,
 } from '@guardian/braze-components/logic';
+import { getArticleCounts } from '../../../lib/article-count';
 import { useOnce } from '../../lib/useOnce';
 import { getLocaleCode } from '../../lib/getCountryCode';
 
@@ -35,7 +36,8 @@ type Props = {
 	brazeMessages?: Promise<BrazeMessagesInterface>;
 	idApiUrl: string;
 	stage: string;
-	asyncArticleCount?: Promise<WeeklyArticleHistory | undefined>;
+	pageId: string;
+	keywordsId: string;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -89,12 +91,15 @@ export const SlotBodyEnd = ({
 	brazeMessages,
 	idApiUrl,
 	stage,
-	asyncArticleCount,
+	pageId,
+	keywordsId,
 }: Props) => {
 	const [countryCode, setCountryCode] = useState<string>();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
+	const [asyncArticleCount, setAsyncArticleCount] =
+		useState<Promise<WeeklyArticleHistory | undefined>>();
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -108,6 +113,14 @@ export const SlotBodyEnd = ({
 		};
 		callFetch();
 	}, []);
+
+	useEffect(() => {
+		setAsyncArticleCount(
+			getArticleCounts(pageId, keywordsId).then(
+				(counts) => counts?.weeklyArticleHistory,
+			),
+		);
+	}, [pageId, keywordsId]);
 
 	useOnce(() => {
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({

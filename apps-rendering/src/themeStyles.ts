@@ -1,3 +1,6 @@
+/**
+ * @deprecated Use the `editorialPalette` module from `common-rendering` instead
+ */
 // ----- Imports ----- //
 
 import type { ArticleTheme } from '@guardian/libs';
@@ -13,6 +16,9 @@ import {
 
 // ----- Types ----- //
 
+/**
+ * @deprecated Use the `editorialPalette` module from `common-rendering` instead
+ */
 interface ThemeStyles {
 	kicker: string;
 	inverted: string;
@@ -28,6 +34,9 @@ type ThemeColours = {
 	[theme in ArticleTheme]: ThemeStyles;
 };
 
+/**
+ * @deprecated Use the `editorialPalette` module from `common-rendering` instead
+ */
 export const themeColours: ThemeColours = {
 	[ArticlePillar.News]: {
 		kicker: news[400],
@@ -101,6 +110,9 @@ export const themeColours: ThemeColours = {
 	},
 };
 
+/**
+ * @deprecated Use the `editorialPalette` module from `common-rendering` instead
+ */
 const getThemeStyles = (theme: ArticleTheme): ThemeStyles =>
 	themeColours[theme];
 

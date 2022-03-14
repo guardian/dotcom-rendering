@@ -1,13 +1,16 @@
 import type { ABTest } from '@guardian/ab-core';
-import { sendCommercialMetrics } from '@guardian/commercial-core';
+import {
+	initCommercialMetrics,
+	bypassCommercialMetricsSampling as switchOffSampling,
+} from '@guardian/commercial-core';
 import { getCookie } from '@guardian/libs';
 import { useAB } from '@guardian/ab-react';
-import { useDocumentVisibilityState } from '../lib/useDocumentHidden';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { WithABProvider } from './WithABProvider';
 import { useOnce } from '../lib/useOnce';
 import { tests } from '../experiments/ab-tests';
-import { spacefinderOkr1FilterNearby } from '../experiments/tests/spacefinder-okr-1-filter-nearby';
+import { spacefinderOkr3RichLinks } from '../experiments/tests/spacefinder-okr-3-rich-links';
+import { spacefinderOkrMegaTest } from '../experiments/tests/spacefinder-okr-mega-test';
 
 type Props = {
 	enabled: boolean;
@@ -17,43 +20,46 @@ type Props = {
 };
 
 const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
-	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
-	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const ABTestAPI = useAB();
-	const visibilityState = useDocumentVisibilityState();
-
 	const adBlockerInUse = useAdBlockInUse();
-	// only send metrics when visibility state changes to hidden;
-	const isHidden = visibilityState === 'hidden' || undefined;
 
 	useOnce(() => {
+		const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
+		const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+
 		// Only send metrics if the switch is enabled
 		if (!enabled) return;
 
 		const testsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
-			spacefinderOkr1FilterNearby,
+			spacefinderOkr3RichLinks,
+			spacefinderOkrMegaTest,
 		];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
-		const userIsInSamplingGroup = Math.random() <= 1 / 100;
+
 		const isDev =
 			window.guardian.config.page.isDev ||
-			window.location.hostname.includes('localhost');
-
-		if (isDev || shouldForceMetrics || userIsInSamplingGroup) {
-			sendCommercialMetrics(
-				pageViewId,
-				browserId || undefined,
-				isDev,
-				adBlockerInUse,
+			window.location.hostname.includes(
+				process.env.HOSTNAME || 'localhost',
 			);
-			// TODO: capture CWV also, to ensure commercial performance
-			// doesn’t come at the expense of user experience.
-			// See https://git.io/JP68Q in `frontend`
+
+		initCommercialMetrics({
+			pageViewId,
+			browserId: browserId || undefined,
+			isDev,
+			adBlockerInUse,
+		});
+		// TODO: capture CWV also, to ensure commercial performance
+		// doesn’t come at the expense of user experience.
+		// See https://git.io/JP68Q in `frontend`
+
+		if (shouldForceMetrics) {
+			// TODO: rename this in commercial-core and update here
+			switchOffSampling();
 		}
-	}, [ABTestAPI, pageViewId, adBlockerInUse, isHidden, enabled]);
+	}, [ABTestAPI, adBlockerInUse, enabled]);
 
 	// We don’t render anything
 	return null;

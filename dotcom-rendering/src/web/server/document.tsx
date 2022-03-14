@@ -6,8 +6,7 @@ import createCache from '@emotion/cache';
 import { ChunkExtractor } from '@loadable/server';
 import { ArticlePillar } from '@guardian/libs';
 import { decideTheme } from '../lib/decideTheme';
-import { decideDisplay } from '../lib/decideDisplay';
-import { decideDesign } from '../lib/decideDesign';
+import { decideFormat } from '../lib/decideFormat';
 
 import { Page } from '../components/Page';
 
@@ -62,11 +61,7 @@ export const document = ({ data }: Props): string => {
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
 		createEmotionServer(cache);
 
-	const format: ArticleFormat = {
-		display: decideDisplay(CAPI.format),
-		design: decideDesign(CAPI.format),
-		theme: decideTheme(CAPI.format),
-	};
+	const format: ArticleFormat = decideFormat(CAPI.format);
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
@@ -83,46 +78,11 @@ export const document = ({ data }: Props): string => {
 		entrypoints: ['react'],
 	});
 
-	// The lodable-components docs want us to use extractor.collectChunks() but
-	// we don't have the traditional same <App /> rendered on server and client.
-	// Our data structure is vastly different (CAPIType vs CAPIBrowserType) and
-	// our architecture expects src/web/App to be client-side only, therefore
-	// it is difficult for us to use collectChunks to automatically extract the
-	// component splits that we want.
-	// However, this does actually suit our architecture as we can use the CAPI
-	// component reference.
-	const allChunks: LoadableComponents = [
-		{
-			chunkName: 'YoutubeBlockComponent',
-			addWhen: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
-		},
-		{
-			chunkName: 'InteractiveBlockComponent',
-			addWhen:
-				'model.dotcomrendering.pageElements.InteractiveBlockElement',
-		},
-	];
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
 	const CAPIElements: CAPIElement[] = CAPI.blocks
 		.map((block) => block.elements)
 		.flat();
-	const { mainMediaElements } = CAPI;
-	// Filter the chunks defined above by whether
-	// the 'addWhen' value matches any elements
-	// in the body or main media element
-	// arrays for the page request.
-	const chunksForPage = allChunks.filter((chunk) =>
-		[...CAPIElements, ...mainMediaElements].some(
-			(block) => block._type === chunk.addWhen,
-		),
-	);
-	// Once we have the chunks for the page, we can add them directly to the loadableExtractor
-	chunksForPage.forEach((chunk) => {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		loadableExtractor.addChunk(chunk.chunkName); // addChunk is *undocumented* and not in TS types. It allows manually adding chunks to extractor.
-	});
 
 	let arrayOfLoadableScriptObjects: {
 		src: string;
@@ -295,5 +255,6 @@ export const document = ({ data }: Props): string => {
 		openGraphData,
 		twitterData,
 		keywords,
+		format,
 	});
 };

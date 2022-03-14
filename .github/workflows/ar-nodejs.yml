@@ -18,7 +18,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v3
             - uses: guardian/actions-setup-node@main
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
@@ -34,10 +34,6 @@ jobs:
             - name: install
               run: npm ci
               working-directory: apps-rendering
-
-            - name: install
-              run: npm ci
-              working-directory: apps-rendering/cdk
 
             - name: lint
               run: npm run lint

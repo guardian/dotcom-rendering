@@ -18,13 +18,13 @@ import { HeadlineByline } from './HeadlineByline';
 
 import { getZIndex } from '../lib/getZIndex';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	headlineString: string;
 	format: ArticleFormat;
 	byline?: string;
 	tags: TagType[];
-	palette: Palette;
 };
 
 const curly = (x: any) => x;
@@ -95,12 +95,12 @@ const lightFont = css`
 	}
 `;
 
-const underlinedStyles = css`
+const underlinedStyles = (colour: string) => css`
 	background-image: repeating-linear-gradient(
 		to bottom,
 		transparent,
 		transparent 47px,
-		rgba(171, 6, 19, 0.5)
+		${colour}
 	);
 	line-height: 48px;
 	background-size: 1rem 48px;
@@ -109,7 +109,7 @@ const underlinedStyles = css`
 			to bottom,
 			transparent,
 			transparent 39px,
-			rgba(171, 6, 19, 0.5)
+			${colour}
 		);
 		line-height: 40px;
 		background-size: 1px 40px;
@@ -225,8 +225,8 @@ export const ArticleHeadline = ({
 	format,
 	tags,
 	byline,
-	palette,
 }: Props) => {
+	const palette = decidePalette(format);
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
@@ -381,7 +381,9 @@ export const ArticleHeadline = ({
 							css={[
 								standardFont,
 								topPadding,
-								underlinedStyles,
+								underlinedStyles(
+									palette.background.analysisUnderline,
+								),
 								css`
 									color: ${palette.text.headline};
 								`,
