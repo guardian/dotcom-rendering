@@ -579,6 +579,7 @@ interface BlocksRequest {
 	sharedAdTargeting: Record<string, unknown>;
 	adUnit: string;
 	videoDuration?: number;
+	switches: { [key: string]: boolean };
 }
 
 /**

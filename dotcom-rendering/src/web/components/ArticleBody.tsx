@@ -15,6 +15,9 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
 	section: string;
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];
@@ -100,6 +103,9 @@ export const ArticleBody = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	switches,
+	isAdFreeUser,
+	isSensitive,
 	section,
 	shouldHideReaderRevenue,
 	tags,
@@ -138,6 +144,9 @@ export const ArticleBody = ({
 						pageId={pageId}
 						webTitle={webTitle}
 						ajaxUrl={ajaxUrl}
+						switches={switches}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
 						isLiveUpdate={false}
 						section={section}
 						shouldHideReaderRevenue={shouldHideReaderRevenue}
@@ -171,6 +180,9 @@ export const ArticleBody = ({
 				pageId={pageId}
 				webTitle={webTitle}
 				ajaxUrl={ajaxUrl}
+				switches={switches}
+				isAdFreeUser={isAdFreeUser}
+				isSensitive={isSensitive}
 			/>
 		</div>
 	);
