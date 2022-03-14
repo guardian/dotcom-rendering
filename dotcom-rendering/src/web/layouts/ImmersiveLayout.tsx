@@ -395,8 +395,6 @@ export const ImmersiveLayout = ({
 									sectionName={CAPI.sectionName || ''}
 									isPreview={CAPI.config.isPreview}
 									idUrl={CAPI.config.idUrl || ''}
-									switches={CAPI.config.switches}
-									pageIsSensitive={CAPI.config.isSensitive}
 									isDev={!!CAPI.config.isDev}
 								/>
 								{showBodyEndSlot && <div id="slot-body-end" />}

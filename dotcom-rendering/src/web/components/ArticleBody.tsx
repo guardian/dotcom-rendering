@@ -16,7 +16,6 @@ type Props = {
 	webTitle: string;
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
-	isSensitive: boolean;
 	switches: { [key: string]: boolean };
 	section: string;
 	shouldHideReaderRevenue: boolean;
@@ -27,8 +26,7 @@ type Props = {
 	sectionName: string;
 	isPreview?: boolean;
 	idUrl: string;
-	switches: Switches;
-	pageIsSensitive: boolean;
+	isSensitive: boolean;
 	isDev: boolean;
 };
 
@@ -112,7 +110,6 @@ export const ArticleBody = ({
 	ajaxUrl,
 	switches,
 	isAdFreeUser,
-	isSensitive,
 	section,
 	shouldHideReaderRevenue,
 	tags,
@@ -122,8 +119,7 @@ export const ArticleBody = ({
 	sectionName,
 	isPreview,
 	idUrl,
-	switches,
-	pageIsSensitive,
+	isSensitive,
 	isDev,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
