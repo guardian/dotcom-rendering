@@ -577,7 +577,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						borderColour={palette.border.article}
 						backgroundColour={palette.background.article}
 					>
-						<Hide until="tablet">
+						<Hide until="desktop">
 							<div
 								css={css`
 									height: ${space[4]}px;
