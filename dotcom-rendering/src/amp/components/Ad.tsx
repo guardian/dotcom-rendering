@@ -28,6 +28,21 @@ const preBidServerPrefix = 'https://prebid.adnxs.com/pbs/v1/openrtb2/amp';
 
 const relevantYieldURLPrefix = 'https://pbs.relevant-digital.com/openrtb2/amp';
 
+const commonPrebidUrlParams = [
+	'w=ATTR(width)',
+	'h=ATTR(height)',
+	'ow=ATTR(data-override-width)',
+	'oh=ATTR(data-override-height)',
+	'ms=ATTR(data-multi-size)',
+	'slot=ATTR(data-slot)',
+	'targeting=TGT',
+	'curl=CANONICAL_URL',
+	'timeout=TIMEOUT',
+	'adcid=ADCID',
+	'purl=HREF',
+	'gdpr_consent=CONSENT_STRING',
+];
+
 const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	const adTargetingMapped: AdTargetParam[] = [];
 
@@ -72,8 +87,8 @@ const useRealTimeConfig = (
 	if (isInVariant('relevant-yield', group)) {
 		const relevantYieldURL = [
 			`${relevantYieldURLPrefix}?tag_id=${tagId}`,
+			...commonPrebidUrlParams,
 			'tgt_pfx=rv',
-			'gdpr_consent=CONSENT_STRING',
 			'dummy_param=ATTR(data-amp-slot-index)',
 		].join('&');
 
@@ -108,18 +123,7 @@ const useRealTimeConfig = (
 		// In this case it corresponds to the placement ID of the bid requests
 		// on the prebid server
 		`${preBidServerPrefix}?tag_id=${placementId}`,
-		'w=ATTR(width)',
-		'h=ATTR(height)',
-		'ow=ATTR(data-override-width)',
-		'oh=ATTR(data-override-height)',
-		'ms=ATTR(data-multi-size)',
-		'slot=ATTR(data-slot)',
-		'targeting=TGT',
-		'curl=CANONICAL_URL',
-		'timeout=TIMEOUT',
-		'adcid=ADCID',
-		'purl=HREF',
-		'gdpr_consent=CONSENT_STRING',
+		...commonPrebidUrlParams,
 	].join('&');
 
 	return realTimeConfig({
