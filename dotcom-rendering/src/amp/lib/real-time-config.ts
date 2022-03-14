@@ -50,20 +50,20 @@ const getPlacementId = (adType: AdType): number => {
  * Determine the Relevant Yield tag id that is used to look up a given stored bid request
  */
 const getTagId = (adType: AdType): string => {
-	if (!adType.isSticky) {
-		switch (adType.adRegion) {
-			case 'UK':
-				return '6214ca675cf18e70cbaeef37_6214c9a4b73a6613d4aeef2f';
-			case 'US':
-				return '6214cb381a577cd525aeef3f_6214caacb52b565527aeef39';
-			case 'AU':
-				return '6214cbe6a24103508faeef45_6214cb50aac9c1160daeef40';
-			// 'INT' same as sticky
-			default:
-				break;
-		}
+	if (adType.isSticky || adType.adRegion === 'INT') {
+		return '6214ca56243f4ff4f5aeef36_6214c723c70856442e4d79f2';
 	}
-	return '6214ca56243f4ff4f5aeef36_6214c723c70856442e4d79f2';
+
+	if (adType.adRegion === 'UK') {
+		return '6214ca675cf18e70cbaeef37_6214c9a4b73a6613d4aeef2f';
+	}
+
+	if (adType.adRegion === 'US') {
+		return '6214cb381a577cd525aeef3f_6214caacb52b565527aeef39';
+	}
+
+	// ad region is AU
+	return '6214cbe6a24103508faeef45_6214cb50aac9c1160daeef40';
 };
 
 /**
@@ -76,19 +76,23 @@ const getPubAndProfileIds = (
 	pubId: string;
 	profileId: string;
 } => {
-	if (!adType.isSticky) {
-		switch (adType.adRegion) {
-			case 'AU':
-				return { profileId: '6697', pubId: '157203' };
-			case 'US':
-				return { profileId: '6696', pubId: '157206' };
-		}
+	if (
+		adType.isSticky ||
+		adType.adRegion === 'UK' ||
+		adType.adRegion === 'INT'
+	) {
+		return {
+			profileId: '6611',
+			pubId: '157207',
+		};
 	}
-	// Sticky, International and UK
-	return {
-		profileId: '6611',
-		pubId: '157207',
-	};
+
+	if (adType.adRegion === 'AU') {
+		return { profileId: '6697', pubId: '157203' };
+	}
+
+	// ad region is US
+	return { profileId: '6696', pubId: '157206' };
 };
 
 /**
