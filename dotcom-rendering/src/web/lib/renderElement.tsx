@@ -147,9 +147,9 @@ export const renderElement = ({
 						title={element.title}
 						duration={element.duration}
 						pillar={format.theme}
-						contentIsNotSensitive={isSensitive}
+						contentIsNotSensitive={!isSensitive}
 						aCastisEnabled={switches.acast}
-						readerCanBeShownAds={isAdFreeUser}
+						readerCanBeShownAds={!isAdFreeUser}
 					/>
 				</Island>,
 			];
