@@ -1,13 +1,9 @@
-
 import {
 	neutral,
 	brandBackground,
 	brandBorder,
 	brandLine,
-	labs,
-	border,
 } from '@guardian/source-foundations';
-import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
 import { Lines } from '@guardian/source-react-components-development-kitchen';
@@ -18,16 +14,12 @@ import { ElementContainer } from '../components/ElementContainer';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Nav } from '../components/Nav/Nav';
-import { LabsHeader } from '../components/LabsHeader.importable';
-import {
-	getCurrentPillar,
-} from '../lib/layoutHelpers';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import { Stuck, BannerWrapper } from './lib/stickiness';
 import { Island } from '../components/Island';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { NewsLetterSignupContent } from '../components/NewsLetterSignupContent';
 import { NewsLetterSignupBanner } from '../components/NewsLetterSignupBanner';
-
 
 interface Props {
 	CAPI: CAPIType;
@@ -42,14 +34,10 @@ export const NewsletterSignupLayout = ({
 	format,
 	palette,
 }: Props) => {
-
-	const formatForNav =
-		format.theme === ArticleSpecial.Labs
-			? format
-			: {
-					...format,
-					theme: getCurrentPillar(CAPI),
-			  };
+	const formatForNav = {
+		...format,
+		theme: getCurrentPillar(CAPI),
+	};
 
 	return (
 		<>
@@ -69,28 +57,26 @@ export const NewsletterSignupLayout = ({
 							/>
 						</ElementContainer>
 					</Stuck>
-					{format.theme !== ArticleSpecial.Labs && (
-						<ElementContainer
-							showTopBorder={false}
-							showSideBorders={false}
-							padded={false}
-							backgroundColour={brandBackground.primary}
-							element="header"
-						>
-							<Header
-								edition={CAPI.editionId}
-								idUrl={CAPI.config.idUrl}
-								mmaUrl={CAPI.config.mmaUrl}
-								supporterCTA={
-									CAPI.nav.readerRevenueLinks.header.supporter
-								}
-								discussionApiUrl={CAPI.config.discussionApiUrl}
-								isAnniversary={
-									CAPI.config.switches.anniversaryHeaderSvg
-								}
-							/>
-						</ElementContainer>
-					)}
+					<ElementContainer
+						showTopBorder={false}
+						showSideBorders={false}
+						padded={false}
+						backgroundColour={brandBackground.primary}
+						element="header"
+					>
+						<Header
+							edition={CAPI.editionId}
+							idUrl={CAPI.config.idUrl}
+							mmaUrl={CAPI.config.mmaUrl}
+							supporterCTA={
+								CAPI.nav.readerRevenueLinks.header.supporter
+							}
+							discussionApiUrl={CAPI.config.discussionApiUrl}
+							isAnniversary={
+								CAPI.config.switches.anniversaryHeaderSvg
+							}
+						/>
+					</ElementContainer>
 					<ElementContainer
 						showSideBorders={true}
 						borderColour={brandLine.primary}
@@ -108,54 +94,32 @@ export const NewsletterSignupLayout = ({
 							edition={CAPI.editionId}
 						/>
 					</ElementContainer>
-					{NAV.subNavSections &&
-						format.theme !== ArticleSpecial.Labs && (
-							<>
-								<ElementContainer
-									backgroundColour={
-										palette.background.article
-									}
-									padded={false}
-									element="aside"
-								>
-									<Island deferUntil="idle">
-										<SubNav
-											subNavSections={NAV.subNavSections}
-											currentNavLink={NAV.currentNavLink}
-											format={format}
-										/>
-									</Island>
-								</ElementContainer>
-								<ElementContainer
-									backgroundColour={
-										palette.background.article
-									}
-									padded={false}
-									showTopBorder={false}
-								>
-									<Lines count={4} effect="straight" />
-								</ElementContainer>
-							</>
-						)}
+					{NAV.subNavSections && (
+						<>
+							<ElementContainer
+								backgroundColour={palette.background.article}
+								padded={false}
+								element="aside"
+							>
+								<Island deferUntil="idle">
+									<SubNav
+										subNavSections={NAV.subNavSections}
+										currentNavLink={NAV.currentNavLink}
+										format={format}
+									/>
+								</Island>
+							</ElementContainer>
+							<ElementContainer
+								backgroundColour={palette.background.article}
+								padded={false}
+								showTopBorder={false}
+							>
+								<Lines count={4} effect="straight" />
+							</ElementContainer>
+						</>
+					)}
 				</>
 			</div>
-
-			{format.theme === ArticleSpecial.Labs && (
-				<Stuck>
-					<ElementContainer
-						showSideBorders={true}
-						showTopBorder={false}
-						backgroundColour={labs[400]}
-						borderColour={border.primary}
-						sectionId="labs-header"
-						element="aside"
-					>
-						<Island deferUntil="idle">
-							<LabsHeader />
-						</Island>
-					</ElementContainer>
-				</Stuck>
-			)}
 
 			{CAPI.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
@@ -174,7 +138,11 @@ export const NewsletterSignupLayout = ({
 					/>
 				</ElementContainer>
 
-				<Island clientOnly={true} deferUntil="idle" placeholderHeight={304}>
+				<Island
+					clientOnly={true}
+					deferUntil="idle"
+					placeholderHeight={304}
+				>
 					<OnwardsUpper
 						ajaxUrl={CAPI.config.ajaxUrl}
 						hasRelated={CAPI.hasRelated}
