@@ -1,33 +1,7 @@
 import { ClassNames } from '@emotion/react';
-import { regionClasses } from '../lib/region-classes';
+import { getRTCParameters } from '../lib/real-time-config';
+import { adRegions, regionClasses } from '../lib/region-classes';
 import { BaseAdProps, Ad } from './Ad';
-
-type AdRegion = 'US' | 'AU' | 'ROW';
-
-// Array of possible ad regions
-const adRegions: AdRegion[] = ['US', 'AU', 'ROW'];
-
-/**
- * Determine the Placement ID that is used to look up a given stored bid request
- *
- * Stored bid requests are stored by the prebid server instance and each is
- * keyed by a placement ID. This placement ID corresponds to the tag id parameter
- * provided on the client
- *
- * @param adRegion The advertising region - different regions are covered by different
- * stored bid requests
- * @returns The placement id for an ad, depending on its ad region
- */
-const getPlacementIdByAdRegion = (adRegion: AdRegion): number => {
-	switch (adRegion) {
-		case 'US':
-			return 7;
-		case 'AU':
-			return 6;
-		default:
-			return 4;
-	}
-};
 
 /**
  * Ad slot component whose config differs based on region.
@@ -62,7 +36,7 @@ export const RegionalAd = ({
 							contentType={contentType}
 							commercialProperties={commercialProperties}
 							config={config}
-							placementId={getPlacementIdByAdRegion(adRegion)}
+							rtcParameters={getRTCParameters({ adRegion })}
 							adTargeting={adTargeting}
 						/>
 					</div>
