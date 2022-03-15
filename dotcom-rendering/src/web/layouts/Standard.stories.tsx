@@ -100,7 +100,12 @@ export const NewsletterSignupStory = (): React.ReactNode => {
 		headline: 'Sign up for First Edition',
 		blocks: [{...NewsletterSignup.blocks[0], elements:[
 			{
-				"html": "<iframe src=\"https://www.theguardian.com/email/form/plaintone/4156\" height=\"52px\" data-form-title=\"A different kind of daily email\" data-form-description=\"Sign up and get a daily briefing from the Guardian\" data-form-campaign-code=\"UK_signup_page\" scrolling=\"no\" seamless frameborder=\"0\" class=\"iframed--overflow-hidden email-sub__iframe js-email-sub__iframe js-email-sub__iframe--article\" data-form-success-desc=\"Thanks, you'll start getting the morning briefing soon.\"></iframe>",
+				"html": "<p>Start the day one step ahead.</p><p>Our email breaks down the key stories of the day and why they matter. </p>",
+				"_type": "model.dotcomrendering.pageElements.TextBlockElement",
+				"elementId": "fbc31a95-6e90-4919-80d9-e8dbbe14cb54"
+			},
+			{
+				"html": "<iframe src=\"https://www.theguardian.com/email/form/thrasher/4156\" height=\"52px\" data-form-title=\"A different kind of daily email\" data-form-description=\"Sign up and get a daily briefing from the Guardian\" data-form-campaign-code=\"UK_signup_page\" scrolling=\"no\" seamless frameborder=\"0\" class=\"iframed--overflow-hidden email-sub__iframe js-email-sub__iframe js-email-sub__iframe--article\" data-form-success-desc=\"Thanks, you'll start getting the morning briefing soon.\"></iframe>",
 				"safe": true,
 				"alt": "Sign up to Guardian Morning Briefing",
 				"isMandatory": true,
@@ -109,11 +114,6 @@ export const NewsletterSignupStory = (): React.ReactNode => {
 				"sourceDomain": "theguardian.com",
 				"_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
 				"elementId": "dcd0a6cf-0e79-4065-8aa3-94c1833ac7a4"
-			},
-			{
-				"html": "<p>Start the day one step ahead.</p><p>Our email breaks down the key stories of the day and why they matter. </p>",
-				"_type": "model.dotcomrendering.pageElements.TextBlockElement",
-				"elementId": "fbc31a95-6e90-4919-80d9-e8dbbe14cb54"
 			},
 		]} ]
 	});

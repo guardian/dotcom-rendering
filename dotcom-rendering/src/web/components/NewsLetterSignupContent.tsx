@@ -4,12 +4,15 @@ import { from, until, textSans } from '@guardian/source-foundations';
 
 import { ArticleDesign } from '@guardian/libs';
 import { SvgEnvelope } from '@guardian/source-react-components';
+import { buildAdTargeting } from '../../lib/ad-targeting';
 import { GridItem } from './GridItem';
 import { Border } from './Border';
 import { MainMedia } from './MainMedia';
 import { ShareIcons } from './ShareIcons';
 import { ArticleHeadline } from './ArticleHeadline';
 import type { NewsletterData } from '../layouts/NewsletterSignupLayout';
+import { ArticleBody } from './ArticleBody';
+import { ArticleContainer } from './ArticleContainer';
 
 type Props = {
 	format: ArticleFormat;
@@ -171,16 +174,6 @@ const shareSectionStyles = css`
 	}
 `;
 
-const contentPlaceHolderStyle = css`
-	background: yellow;
-	padding: 16px 0;
-	border: 4px dashed red;
-
-	p {
-		margin-bottom: 8px;
-	}
-`;
-
 const imageWrapperLinkStyle = css`
 	border-radius: 10px;
 	overflow: hidden;
@@ -193,19 +186,7 @@ const imageWrapperLinkStyle = css`
 	}
 `;
 
-function findFirstParagraphForDemo(CAPI: CAPIType): string {
-	const textElement = CAPI.blocks[0].elements.find(
-		(element) =>
-			element._type ===
-			'model.dotcomrendering.pageElements.TextBlockElement',
-	);
 
-	if (textElement) {
-		return (textElement as TextBlockElement).html;
-	}
-
-	return '<p>NO CONTENT FOUND</p>';
-}
 
 export const NewsLetterSignupContent = ({
 	format,
@@ -213,6 +194,23 @@ export const NewsLetterSignupContent = ({
 	CAPI,
 	newsletterData,
 }: Props) => {
+
+
+	const {
+		config: { host },
+	} = CAPI;
+
+	const adTargeting: AdTargeting = buildAdTargeting({
+		isAdFreeUser: CAPI.isAdFreeUser,
+		isSensitive: CAPI.config.isSensitive,
+		videoDuration: CAPI.config.videoDuration,
+		edition: CAPI.config.edition,
+		section: CAPI.config.section,
+		sharedAdTargeting: CAPI.config.sharedAdTargeting,
+		adUnit: CAPI.config.adUnit,
+	});
+
+
 	return (
 		<NewsletterContentGrid format={format}>
 			<GridItem area="label" element="aside">
@@ -234,25 +232,21 @@ export const NewsLetterSignupContent = ({
 				/>
 			</GridItem>
 			<GridItem area="content" element="main">
-				<div css={contentPlaceHolderStyle}>
-					<p>
-						THIS IS WILL BE THE FORMATTED ARTICLE BODY AS DEFINED IN
-						COMPOSER
-					</p>
-					<p>WHICH SHOULD INCLUDE A SIGN-UP EMBED</p>
-					<div
-						dangerouslySetInnerHTML={{ __html: CAPI.standfirst }}
+				<ArticleContainer format={format}>
+					<ArticleBody
+						format={format}
+						palette={palette}
+						blocks={CAPI.blocks}
+						adTargeting={adTargeting}
+						host={host}
+						pageId={CAPI.pageId}
+						webTitle={CAPI.webTitle}
+						ajaxUrl={CAPI.config.ajaxUrl}
 					/>
-					<div
-						dangerouslySetInnerHTML={{
-							__html: findFirstParagraphForDemo(CAPI),
-						}}
-					/>
-				</div>
+				</ArticleContainer>
 
 				<div css={shareSectionStyles}>
 					<h2>Tell your friends</h2>
-
 					<ShareIcons
 						pageId={CAPI.pageId}
 						webTitle={CAPI.webTitle}
@@ -266,10 +260,8 @@ export const NewsLetterSignupContent = ({
 			</GridItem>
 			<GridItem area="image" element="aside">
 				{CAPI.mainMediaElements.length > 0 && (
-					<a
-						href={newsletterData.previewHref}
+					<div
 						css={imageWrapperLinkStyle}
-						aria-label="preview this newsletter"
 					>
 						<MainMedia
 							format={format}
@@ -279,7 +271,7 @@ export const NewsLetterSignupContent = ({
 							ajaxUrl={CAPI.config.ajaxUrl}
 							hideCaption={true}
 						/>
-					</a>
+					</div>
 				)}
 			</GridItem>
 
