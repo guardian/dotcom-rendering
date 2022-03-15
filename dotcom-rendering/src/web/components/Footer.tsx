@@ -14,6 +14,8 @@ import { ArticleDisplay } from '@guardian/libs';
 import { clearFix } from '../../lib/mixins';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
+import { Island } from './Island';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 // CSS vars
 const emailSignupSideMargins = 10;
@@ -181,9 +183,17 @@ const bttPosition = css`
 	right: 20px;
 `;
 
-const FooterLinks: React.FC<{
+const FooterLinks = ({
+	pageFooter,
+	urls,
+	edition,
+	contributionsServiceUrl,
+}: {
 	pageFooter: FooterType;
-}> = ({ pageFooter }) => {
+	urls: ReaderRevenueCategories;
+	edition: Edition;
+	contributionsServiceUrl: string;
+}) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
 		const linkList = linkGroup.map((l: FooterLink, index: number) => (
 			<li key={`${l.url}${index}`}>
@@ -202,7 +212,16 @@ const FooterLinks: React.FC<{
 
 	const rrLinks = (
 		<div css={readerRevenueLinks}>
-			<div id="reader-revenue-links-footer" />
+			<Island deferUntil="visible" clientOnly={true}>
+				<ReaderRevenueLinks
+					urls={urls}
+					edition={edition}
+					dataLinkNamePrefix="footer : "
+					inHeader={false}
+					remoteHeader={false}
+					contributionsServiceUrl={contributionsServiceUrl}
+				/>
+			</Island>
 		</div>
 	);
 
@@ -216,11 +235,21 @@ const FooterLinks: React.FC<{
 
 const year = new Date().getFullYear();
 
-export const Footer: React.FC<{
+export const Footer = ({
+	pillars,
+	pillar,
+	pageFooter,
+	urls,
+	edition,
+	contributionsServiceUrl,
+}: {
 	pillars: PillarType[];
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
-}> = ({ pillars, pillar, pageFooter }) => (
+	urls: ReaderRevenueCategories;
+	edition: Edition;
+	contributionsServiceUrl: string;
+}) => (
 	<div
 		data-print-layout="hide"
 		css={footer}
@@ -247,7 +276,12 @@ export const Footer: React.FC<{
 				height="100"
 			/>
 
-			<FooterLinks pageFooter={pageFooter} />
+			<FooterLinks
+				pageFooter={pageFooter}
+				urls={urls}
+				edition={edition}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>
 			<div css={bttPosition}>
 				<BackToTop />
 			</div>

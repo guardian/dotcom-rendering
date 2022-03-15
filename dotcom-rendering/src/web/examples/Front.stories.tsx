@@ -52,6 +52,14 @@ export const Front = () => (
 				isAnniversary={true}
 				discussionApiUrl=""
 				supporterCTA=""
+				urls={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				remoteHeader={false}
+				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 		<ElementContainer
@@ -536,6 +544,14 @@ export const Front = () => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
+				urls={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				edition="UK"
+				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 	</>
@@ -556,6 +572,14 @@ export const Front2 = () => (
 				isAnniversary={true}
 				discussionApiUrl=""
 				supporterCTA=""
+				urls={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				remoteHeader={false}
+				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 		<ElementContainer
@@ -1040,6 +1064,14 @@ export const Front2 = () => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
+				urls={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				edition="UK"
+				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 	</>
