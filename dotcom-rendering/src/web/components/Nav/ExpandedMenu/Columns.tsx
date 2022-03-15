@@ -9,7 +9,7 @@ import {
 	from,
 } from '@guardian/source-foundations';
 
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleDisplay, ArticleFormat } from '@guardian/libs';
 import { Column } from './Column';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { MoreColumn } from './MoreColumn';
@@ -117,10 +117,14 @@ const brandExtensionLink = css`
 `;
 
 export const Columns: React.FC<{
-	display: ArticleDisplay;
+	format: ArticleFormat;
 	nav: NavType;
-}> = ({ display, nav }) => (
-	<ul css={columnsStyle(display)} role="menubar" data-cy="nav-menu-columns">
+}> = ({ format, nav }) => (
+	<ul
+		css={columnsStyle(format.display)}
+		role="menubar"
+		data-cy="nav-menu-columns"
+	>
 		{nav.pillars.map((column, i) => (
 			<Column
 				column={column}
