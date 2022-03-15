@@ -18,7 +18,6 @@ import { useApi } from '../lib/useApi';
 import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
-	supporterCTA: string;
 	discussionApiUrl: string;
 	idUrl?: string;
 	mmaUrl?: string;
@@ -222,7 +221,6 @@ const MyAccount = ({
 };
 
 export const Links = ({
-	supporterCTA,
 	discussionApiUrl: discussionApiUrlFromConfig,
 	idUrl: idUrlServerFromConfig,
 	mmaUrl: mmaUrlServerFromConfig,
@@ -244,21 +242,14 @@ export const Links = ({
 			{/* Since 'subscriptions' is only rendered on the client, rendering it within
 				a div is required to prevent DOM elements getting mis-matched during hydration  */}
 			<div css={linkWrapperStyles}>
-				{supporterCTA !== '' && (
-					<>
-						<div css={seperatorStyles} id="supporter" />
-						<a
-							href="https://support.theguardian.com/subscribe/weekly?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_supporter_cta%22%7D"
-							css={[
-								linkTablet({ showAtTablet: false }),
-								linkStyles,
-							]}
-							data-link-name="nav2 : supporter-cta"
-						>
-							Print subscriptions
-						</a>
-					</>
-				)}
+				<div css={seperatorStyles} id="supporter" />
+				<a
+					href="https://support.theguardian.com/subscribe/weekly?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_supporter_cta%22%7D"
+					css={[linkTablet({ showAtTablet: false }), linkStyles]}
+					data-link-name="nav2 : supporter-cta"
+				>
+					Print subscriptions
+				</a>
 			</div>
 
 			<div css={seperatorStyles} />
