@@ -1,25 +1,52 @@
 import { useState, useEffect } from 'react';
 import { ArticleDesign, getCookie } from '@guardian/libs';
-import { constructQuery } from '../../../lib/querystring';
+import { constructQuery } from '../../lib/querystring';
 
 import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
-} from './dismissGate';
-import { useSignInGateSelector } from '../../lib/useSignInGateSelector';
+} from './SignInGate/dismissGate';
+import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 
-import { useOnce } from '../../lib/useOnce';
+import { useOnce } from '../lib/useOnce';
 import {
 	ComponentEventParams,
 	submitViewEventTracking,
 	withComponentId,
-} from './componentEventTracking';
-import { signInGateTestIdToComponentId } from './signInGate';
+} from './SignInGate/componentEventTracking';
+import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
 import {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
-	SignInGateSelectorProps,
-} from './types';
+} from './SignInGate/types';
+import { WithABProvider } from './WithABProvider';
+
+type Props = {
+	format: ArticleFormat;
+	contentType: string;
+	sectionName?: string;
+	tags: TagType[];
+	isPaidContent: boolean;
+	isPreview: boolean;
+	host?: string;
+	pageId: string;
+	idUrl?: string;
+	switches: Switches;
+	pageIsSensitive: boolean;
+	isDev: boolean;
+};
+
+type SignInGateSelectorProps = {
+	format: ArticleFormat;
+	contentType: string;
+	sectionName?: string;
+	tags: TagType[];
+	isPaidContent: boolean;
+	isPreview: boolean;
+	host?: string;
+	pageId: string;
+	idUrl?: string;
+};
 
 // interface for the component which shows the sign in gate
 interface ShowSignInGateProps {
@@ -123,7 +150,7 @@ const ShowSignInGate = ({
 
 // component with conditional logic which determines if a sign in gate
 // should be shown on the current page
-export const SignInGateSelector = ({
+const SignInGateSelectorWithAB = ({
 	format,
 	contentType,
 	sectionName = '',
@@ -133,7 +160,6 @@ export const SignInGateSelector = ({
 	host = 'https://theguardian.com/',
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
-	pageViewId,
 }: SignInGateSelectorProps) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
@@ -147,6 +173,8 @@ export const SignInGateSelector = ({
 	>(undefined);
 	const [canShowGate, setCanShowGate] = useState(false);
 	const gateSelector = useSignInGateSelector();
+
+	const { pageViewId } = window.guardian.config.ophan;
 
 	useOnce(() => {
 		// this hook will fire when the sign in gate is dismissed
@@ -221,3 +249,36 @@ export const SignInGateSelector = ({
 		</>
 	);
 };
+
+export const SignInGateSelector = ({
+	format,
+	contentType,
+	sectionName = '',
+	tags,
+	isPaidContent,
+	isPreview,
+	host = 'https://theguardian.com/',
+	pageId,
+	idUrl = 'https://profile.theguardian.com',
+	switches,
+	pageIsSensitive,
+	isDev,
+}: Props) => (
+	<WithABProvider
+		abTestSwitches={switches}
+		pageIsSensitive={pageIsSensitive}
+		isDev={!!isDev}
+	>
+		<SignInGateSelectorWithAB
+			format={format}
+			contentType={contentType}
+			sectionName={sectionName}
+			tags={tags}
+			isPaidContent={isPaidContent}
+			isPreview={isPreview}
+			host={host}
+			pageId={pageId}
+			idUrl={idUrl}
+		/>
+	</WithABProvider>
+);
