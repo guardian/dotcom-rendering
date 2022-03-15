@@ -85,7 +85,7 @@ const MockYoutubeComponent = () => (
 	/>
 );
 
-export const Playing = () => {
+export const Active = () => {
 	return (
 		<Container>
 			<StickyVideo isActive={true} videoId={videoId}>
@@ -95,7 +95,7 @@ export const Playing = () => {
 	);
 };
 
-export const NotPlaying = () => {
+export const NotActive = () => {
 	return (
 		<Container>
 			<StickyVideo isActive={false} videoId={videoId}>
