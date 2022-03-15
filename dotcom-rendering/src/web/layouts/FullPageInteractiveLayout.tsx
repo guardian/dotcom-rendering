@@ -48,7 +48,20 @@ const Renderer: React.FC<{
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-}> = ({ format, elements, host, pageId, webTitle, ajaxUrl }) => {
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
+}> = ({
+	format,
+	elements,
+	host,
+	pageId,
+	webTitle,
+	ajaxUrl,
+	isAdFreeUser,
+	isSensitive,
+	switches,
+}) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -66,6 +79,9 @@ const Renderer: React.FC<{
 			pageId,
 			webTitle,
 			ajaxUrl,
+			isAdFreeUser,
+			isSensitive,
+			switches,
 		});
 
 		if (ok) {
@@ -299,6 +315,9 @@ export const FullPageInteractiveLayout = ({
 						pageId={CAPI.pageId}
 						webTitle={CAPI.webTitle}
 						ajaxUrl={CAPI.config.ajaxUrl}
+						switches={CAPI.config.switches}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						isSensitive={CAPI.config.isSensitive}
 					/>
 				</article>
 			</ElementContainer>

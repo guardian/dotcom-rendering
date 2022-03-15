@@ -143,7 +143,7 @@ export const shouldHideSupportMessaging = (
 	isRecurringContributor(isSignedIn) ||
 	isRecentOneOffContributor();
 
-const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
+export const REQUIRED_CONSENTS_FOR_ARTICLE_COUNT = [1, 3, 7];
 const REQUIRED_CONSENTS_FOR_BROWSER_ID = [1, 3, 5, 7];
 
 export const hasArticleCountOptOutCookie = (): boolean =>
