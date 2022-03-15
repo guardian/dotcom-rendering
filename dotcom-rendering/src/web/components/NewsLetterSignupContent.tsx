@@ -207,8 +207,12 @@ function findFirstParagraphForDemo(CAPI: CAPIType): string {
 	return '<p>NO CONTENT FOUND</p>';
 }
 
-export const NewsLetterSignupContent = ({ format, palette, CAPI, newsletterData }: Props) => {
-
+export const NewsLetterSignupContent = ({
+	format,
+	palette,
+	CAPI,
+	newsletterData,
+}: Props) => {
 	return (
 		<NewsletterContentGrid format={format}>
 			<GridItem area="label" element="aside">
@@ -219,11 +223,9 @@ export const NewsLetterSignupContent = ({ format, palette, CAPI, newsletterData 
 					<span>UK Focused</span>
 				</div>
 			</GridItem>
-
 			<GridItem area="border">
 				<Border palette={palette} />
 			</GridItem>
-
 			<GridItem area="headline">
 				<ArticleHeadline
 					headlineString={CAPI.headline}
@@ -231,7 +233,6 @@ export const NewsLetterSignupContent = ({ format, palette, CAPI, newsletterData 
 					tags={[]}
 				/>
 			</GridItem>
-
 			<GridItem area="content" element="main">
 				<div css={contentPlaceHolderStyle}>
 					<p>
@@ -263,10 +264,13 @@ export const NewsLetterSignupContent = ({ format, palette, CAPI, newsletterData 
 					/>
 				</div>
 			</GridItem>
-
 			<GridItem area="image" element="aside">
 				{CAPI.mainMediaElements.length > 0 && (
-					<a href={newsletterData.previewHref} css={imageWrapperLinkStyle} aria-label="preview this newsletter">
+					<a
+						href={newsletterData.previewHref}
+						css={imageWrapperLinkStyle}
+						aria-label="preview this newsletter"
+					>
 						<MainMedia
 							format={format}
 							elements={CAPI.mainMediaElements}
@@ -282,15 +286,18 @@ export const NewsLetterSignupContent = ({ format, palette, CAPI, newsletterData 
 			<GridItem area="privacy">
 				<div css={privacyStyles}>
 					<p>
-						<b>Privacy Notice:</b> We thought you should know this
-						newsletter may also contain information about Guardian
-						products, services and chosen charities or online
-						advertisements. Newsletters may also contain content
-						funded by outside parties.{' '}
-						<a target="_blank" href="/help/privacy-policy">
-							See privacy policy here.
+						<b>Privacy Notice:</b> Our newsletters may contain info
+						about charities, online ads, and content funded by
+						outside parties. For more information click{' '}
+						<a
+							target="_blank"
+							href="/help/privacy-policy"
+							aria-label="our privacy policy"
+						>
+							here
 						</a>{' '}
-						This site is protected by reCAPTCHA and the{' '}
+						for our privacy policy. We operate Google reCAPTCHA to
+						protect our website and the{' '}
 						<a
 							href="https://policies.google.com/privacy"
 							target="_blank"
