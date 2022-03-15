@@ -35,6 +35,7 @@ import { setAutomat } from '../lib/setAutomat';
 import { useIsInView } from '../lib/useIsInView';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import {
+	getOphanRecordFunction,
 	OphanRecordFunction,
 	sendOphanComponentEvent,
 	submitComponentEvent,
@@ -45,10 +46,8 @@ type Props = {
 	edition: Edition;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
-	remoteHeaderEnabled: boolean;
+	remoteHeader: boolean;
 	contributionsServiceUrl: string;
-	pageViewId: string;
-	ophanRecord: OphanRecordFunction;
 	urls: {
 		subscribe: string;
 		support: string;
@@ -367,17 +366,17 @@ const ReaderRevenueLinksNative: React.FC<{
 	);
 };
 
-export const ReaderRevenueLinks: React.FC<Props> = ({
+export const ReaderRevenueLinks = ({
 	edition,
 	dataLinkNamePrefix,
 	inHeader,
-	remoteHeaderEnabled,
+	remoteHeader,
 	urls,
 	contributionsServiceUrl,
-	ophanRecord,
-	pageViewId = '',
 }: Props) => {
 	const [countryCode, setCountryCode] = useState<string>();
+	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+	const ophanRecord = getOphanRecordFunction();
 
 	useEffect(() => {
 		const callFetch = () => {
@@ -393,7 +392,7 @@ export const ReaderRevenueLinks: React.FC<Props> = ({
 	}, []);
 
 	if (countryCode) {
-		if (inHeader && remoteHeaderEnabled) {
+		if (inHeader && remoteHeader) {
 			return (
 				<ReaderRevenueLinksRemote
 					edition={edition}

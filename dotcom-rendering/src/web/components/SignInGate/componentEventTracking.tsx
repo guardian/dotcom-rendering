@@ -6,6 +6,8 @@ type ABTestVariant = {
 	variant: string;
 };
 
+const isServer = typeof window === 'undefined';
+
 export type ComponentEventParams = {
 	componentType: string;
 	componentId?: string;
@@ -23,7 +25,7 @@ type ComponentEventWithoutAction = {
 	abTest?: ABTestVariant;
 };
 
-const ophan = window?.guardian?.ophan;
+const ophan = isServer ? { record: () => {} } : window?.guardian?.ophan;
 
 // ophan helper methods
 export const submitComponentEventTracking = (

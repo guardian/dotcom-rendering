@@ -126,7 +126,7 @@ const Live: FC<Props> = ({ item }) => {
 					</div>
 				</GridItem>
 				<GridItem area="key-events">
-					<div css={keyEventsWrapperStyles}>
+					<div css={keyEventsWrapperStyles} data-chromatic="ignore">
 						<KeyEvents
 							keyEvents={keyEvents(item.blocks)}
 							format={item}

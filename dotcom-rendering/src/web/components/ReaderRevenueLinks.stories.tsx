@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { brandBackground } from '@guardian/source-foundations';
 import { ABProvider } from '@guardian/ab-react';
 
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 export default {
 	component: ReaderRevenueLinks,
@@ -33,8 +33,6 @@ const revenueUrls = {
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';
 
-const ophanRecord = () => {};
-
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -57,10 +55,8 @@ export const Header = () => {
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={true}
-				remoteHeaderEnabled={false}
-				pageViewId="page-view-id"
+				remoteHeader={false}
 				contributionsServiceUrl={contributionsServiceUrl}
-				ophanRecord={ophanRecord}
 			/>
 		</Container>
 	);
@@ -81,10 +77,8 @@ export const HeaderMobile = () => {
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={true}
-				remoteHeaderEnabled={false}
-				pageViewId="page-view-id"
+				remoteHeader={false}
 				contributionsServiceUrl={contributionsServiceUrl}
-				ophanRecord={ophanRecord}
 			/>
 		</Container>
 	);
@@ -105,10 +99,8 @@ export const Footer = () => {
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={false}
-				remoteHeaderEnabled={false}
-				pageViewId="page-view-id"
+				remoteHeader={false}
 				contributionsServiceUrl={contributionsServiceUrl}
-				ophanRecord={ophanRecord}
 			/>
 		</Container>
 	);
@@ -129,10 +121,8 @@ export const FooterMobile = () => {
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={false}
-				remoteHeaderEnabled={false}
-				pageViewId="page-view-id"
+				remoteHeader={false}
 				contributionsServiceUrl={contributionsServiceUrl}
-				ophanRecord={ophanRecord}
 			/>
 		</Container>
 	);

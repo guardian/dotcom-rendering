@@ -43,6 +43,9 @@ window.guardian = {
 			pageViewId: 'mockPageViewId',
 		}
 	},
+	ophan: {
+		record: ({}) => {}
+	}
 }
 setCookie({name:'bwid', value: 'mockBrowserId'});
 

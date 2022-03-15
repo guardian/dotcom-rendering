@@ -7,6 +7,8 @@ import { DecideLayout } from '../layouts/DecideLayout';
 import { CommercialMetrics } from './CommercialMetrics.importable';
 import { Island } from './Island';
 import { FocusStyles } from './FocusStyles.importable';
+import { BrazeMessaging } from './BrazeMessaging.importable';
+import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 
 type Props = {
 	CAPI: CAPIType;
@@ -49,6 +51,14 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 					switches={CAPI.config.switches}
 					isSensitive={CAPI.config.isSensitive}
 					isDev={CAPI.config.isDev}
+				/>
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<BrazeMessaging idApiUrl={CAPI.config.idApiUrl} />
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<ReaderRevenueDev
+					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 				/>
 			</Island>
 			<div id="react-root" />

@@ -34,6 +34,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { Island } from '../components/Island';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 interface Props {
 	CAPI: CAPIType;
@@ -48,7 +49,20 @@ const Renderer: React.FC<{
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-}> = ({ format, elements, host, pageId, webTitle, ajaxUrl }) => {
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
+}> = ({
+	format,
+	elements,
+	host,
+	pageId,
+	webTitle,
+	ajaxUrl,
+	isAdFreeUser,
+	isSensitive,
+	switches,
+}) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );
@@ -66,6 +80,9 @@ const Renderer: React.FC<{
 			pageId,
 			webTitle,
 			ajaxUrl,
+			isAdFreeUser,
+			isSensitive,
+			switches,
 		});
 
 		if (ok) {
@@ -199,6 +216,11 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 							isAnniversary={
 								CAPI.config.switches.anniversaryHeaderSvg
 							}
+							urls={CAPI.nav.readerRevenueLinks.header}
+							remoteHeader={CAPI.config.switches.remoteHeader}
+							contributionsServiceUrl={
+								CAPI.contributionsServiceUrl
+							}
 						/>
 					</ElementContainer>
 				</div>
@@ -299,6 +321,9 @@ export const FullPageInteractiveLayout = ({
 						pageId={CAPI.pageId}
 						webTitle={CAPI.webTitle}
 						ajaxUrl={CAPI.config.ajaxUrl}
+						switches={CAPI.config.switches}
+						isAdFreeUser={CAPI.isAdFreeUser}
+						isSensitive={CAPI.config.isSensitive}
 					/>
 				</article>
 			</ElementContainer>
@@ -330,10 +355,33 @@ export const FullPageInteractiveLayout = ({
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<BannerWrapper>
+				<Island deferUntil="idle" clientOnly={true}>
+					<StickyBottomBanner
+						abTestSwitches={CAPI.config.switches}
+						contentType={CAPI.contentType}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						idApiUrl={CAPI.config.idApiUrl}
+						isDev={CAPI.config.isDev ?? false}
+						isMinuteArticle={CAPI.pageType.isMinuteArticle}
+						isPaidContent={CAPI.pageType.isPaidContent}
+						isPreview={!!CAPI.config.isPreview}
+						keywordsId={CAPI.config.keywordIds}
+						pageId={CAPI.pageId}
+						pageIsSensitive={CAPI.config.isSensitive}
+						section={CAPI.config.section}
+						sectionName={CAPI.sectionName}
+						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						tags={CAPI.tags}
+					/>
+				</Island>
+			</BannerWrapper>
 			<MobileStickyContainer />
 		</>
 	);

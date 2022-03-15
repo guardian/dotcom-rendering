@@ -11,7 +11,6 @@ type Props = {
 	abTestSwitches: CoreAPIConfig['abTestSwitches'];
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];
 	isDev: boolean;
-	children: JSX.Element;
 };
 
 const InitialiseAB = ({ children }: { children: JSX.Element }) => {
@@ -35,7 +34,7 @@ export const WithABProvider = ({
 	pageIsSensitive,
 	isDev,
 	children,
-}: Props) => {
+}: Props & { children: JSX.Element }) => {
 	const mvtId = Number(
 		(isDev &&
 			getCookie({ name: 'GU_mvt_id_local', shouldMemoize: true })) || // Simplify localhost testing by creating a different mvt id
@@ -68,3 +67,5 @@ export const WithABProvider = ({
 		</ABProvider>
 	);
 };
+
+export type ABProps = Props;

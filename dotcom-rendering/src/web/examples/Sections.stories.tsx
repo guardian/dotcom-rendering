@@ -56,7 +56,19 @@ export const Sections = (): React.ReactNode => (
 			padded={false}
 			backgroundColour={brandBackground.primary}
 		>
-			<Header edition="UK" supporterCTA="" discussionApiUrl="" />
+			<Header
+				edition="UK"
+				supporterCTA=""
+				discussionApiUrl=""
+				urls={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				remoteHeader={false}
+				contributionsServiceUrl=""
+			/>
 		</ElementContainer>
 		<ElementContainer
 			showSideBorders={true}
@@ -141,6 +153,14 @@ export const Sections = (): React.ReactNode => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
+				urls={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				edition="UK"
+				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 	</>

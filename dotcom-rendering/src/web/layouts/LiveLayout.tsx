@@ -59,6 +59,8 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -338,6 +340,11 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							isAnniversary={
 								CAPI.config.switches.anniversaryHeaderSvg
 							}
+							urls={CAPI.nav.readerRevenueLinks.header}
+							remoteHeader={CAPI.config.switches.remoteHeader}
+							contributionsServiceUrl={
+								CAPI.contributionsServiceUrl
+							}
 						/>
 					</ElementContainer>
 
@@ -612,6 +619,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
 										ajaxUrl={CAPI.config.ajaxUrl}
+										switches={CAPI.config.switches}
+										isSensitive={CAPI.config.isSensitive}
+										isAdFreeUser={CAPI.isAdFreeUser}
 									/>
 								</div>
 							</GridItem>
@@ -765,6 +775,31 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												pageId={CAPI.pageId}
 												webTitle={CAPI.webTitle}
 												ajaxUrl={CAPI.config.ajaxUrl}
+												section={CAPI.config.section}
+												switches={CAPI.config.switches}
+												isSensitive={
+													CAPI.config.isSensitive
+												}
+												isAdFreeUser={CAPI.isAdFreeUser}
+												shouldHideReaderRevenue={
+													CAPI.shouldHideReaderRevenue
+												}
+												tags={CAPI.tags}
+												isPaidContent={
+													!!CAPI.config.isPaidContent
+												}
+												contributionsServiceUrl={
+													CAPI.contributionsServiceUrl
+												}
+												contentType={CAPI.contentType}
+												sectionName={
+													CAPI.sectionName || ''
+												}
+												isPreview={
+													CAPI.config.isPreview
+												}
+												idUrl={CAPI.config.idUrl || ''}
+												isDev={!!CAPI.config.isDev}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
@@ -782,7 +817,56 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												/>
 											)}
 											{showBodyEndSlot && (
-												<div id="slot-body-end" />
+												<Island clientOnly={true}>
+													<SlotBodyEnd
+														abTestSwitches={
+															CAPI.config.switches
+														}
+														contentType={
+															CAPI.contentType
+														}
+														contributionsServiceUrl={
+															CAPI.contributionsServiceUrl
+														}
+														idApiUrl={
+															CAPI.config.idApiUrl
+														}
+														isDev={
+															CAPI.config.isDev ??
+															false
+														}
+														isMinuteArticle={
+															CAPI.pageType
+																.isMinuteArticle
+														}
+														isPaidContent={
+															CAPI.pageType
+																.isPaidContent
+														}
+														keywordsId={
+															CAPI.config
+																.keywordIds
+														}
+														pageId={CAPI.pageId}
+														pageIsSensitive={
+															CAPI.config
+																.isSensitive
+														}
+														sectionId={
+															CAPI.config.section
+														}
+														sectionName={
+															CAPI.sectionName
+														}
+														shouldHideReaderRevenue={
+															CAPI.shouldHideReaderRevenue
+														}
+														stage={
+															CAPI.config.stage
+														}
+														tags={CAPI.tags}
+													/>
+												</Island>
 											)}
 											<Lines
 												data-print-layout="hide"
@@ -974,10 +1058,33 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 
-			<BannerWrapper data-print-layout="hide" />
+			<BannerWrapper data-print-layout="hide">
+				<Island deferUntil="idle" clientOnly={true}>
+					<StickyBottomBanner
+						abTestSwitches={CAPI.config.switches}
+						contentType={CAPI.contentType}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						idApiUrl={CAPI.config.idApiUrl}
+						isDev={CAPI.config.isDev ?? false}
+						isMinuteArticle={CAPI.pageType.isMinuteArticle}
+						isPaidContent={CAPI.pageType.isPaidContent}
+						isPreview={!!CAPI.config.isPreview}
+						keywordsId={CAPI.config.keywordIds}
+						pageId={CAPI.pageId}
+						pageIsSensitive={CAPI.config.isSensitive}
+						section={CAPI.config.section}
+						sectionName={CAPI.sectionName}
+						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						tags={CAPI.tags}
+					/>
+				</Island>
+			</BannerWrapper>
 			<MobileStickyContainer data-print-layout="hide" />
 		</>
 	);
