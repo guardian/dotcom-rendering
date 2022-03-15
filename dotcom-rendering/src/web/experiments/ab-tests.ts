@@ -6,7 +6,6 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
-import { spacefinderOkr3RichLinks } from './tests/spacefinder-okr-3-rich-links';
 import { spacefinderOkrMegaTest } from './tests/spacefinder-okr-mega-test';
 
 // keep in sync with ab-tests in frontend
@@ -17,6 +16,5 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
-	spacefinderOkr3RichLinks,
 	spacefinderOkrMegaTest,
 ];

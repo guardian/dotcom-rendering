@@ -76,7 +76,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 
-                We therefore use JS to make the Nav elements more accessibile. We add a
+                We therefore use JS to make the Nav elements more accessible. We add a
                 keydown `addEventListener` to both the veggie burger button and the show
                 more menu buttons. We also listen to escape key presses to close the Nav menu.
                 We also toggle the tabindex of clickable items to make sure that even when we
@@ -213,7 +213,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>
-				<ExpandedMenu nav={nav} display={format.display} />
+				<ExpandedMenu nav={nav} format={format} />
 			</div>
 			{displayRoundel && (
 				<PositionRoundel>
