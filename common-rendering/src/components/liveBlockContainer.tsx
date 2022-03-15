@@ -1,12 +1,12 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 import {
 	neutral,
 	from,
 	space,
 	headline,
 	body,
-} from "@guardian/source-foundations";
-import { FirstPublished } from "./FirstPublished";
+} from '@guardian/source-foundations';
+import { FirstPublished } from './FirstPublished';
 
 type BlockContributor = {
 	name: string;
@@ -48,7 +48,7 @@ const BlockTitle = ({ title }: { title: string }) => {
 	return (
 		<h2
 			css={css`
-				${headline.xxsmall({ fontWeight: "bold" })}
+				${headline.xxsmall({ fontWeight: 'bold' })}
 				margin-bottom: ${space[2]}px;
 			`}
 		>
@@ -75,7 +75,7 @@ const BlockByline = ({
 			`}
 		>
 			{imageUrl && (
-				<div style={{ width: "36px", height: "36px" }}>
+				<div style={{ width: '36px', height: '36px' }}>
 					<img
 						src={imageUrl}
 						alt={name}
@@ -126,7 +126,7 @@ const LiveBlockContainer = ({
 			 * - 'pending' is used to mark blocks that have been inserted as part of a live update. We use this
 			 *    to animate the reveal as well as for enhancing twitter embeds
 			 */
-			className={`block ${isLiveUpdate && "pending"}`}
+			className={`block ${isLiveUpdate && 'pending'}`}
 			css={css`
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;
@@ -144,7 +144,7 @@ const LiveBlockContainer = ({
 					<FirstPublished
 						firstPublished={blockFirstPublished}
 						blockLink={blockLink}
-						showTimeAgo={isPinnedPost ? false : true}
+						isPinnedPost={isPinnedPost ? false : true}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}

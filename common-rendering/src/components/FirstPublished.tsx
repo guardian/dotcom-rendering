@@ -8,11 +8,11 @@ const padString = (time: number) => (time < 10 ? `0${time}` : time);
 const FirstPublished = ({
 	firstPublished,
 	blockLink,
-	showTimeAgo = true,
+	isPinnedPost = true,
 }: {
 	firstPublished: number;
 	blockLink: string;
-	showTimeAgo?: boolean;
+	isPinnedPost?: boolean;
 }) => {
 	const publishedDate = new Date(firstPublished);
 	return (
@@ -32,7 +32,7 @@ const FirstPublished = ({
 				}
 			`}
 		>
-			{showTimeAgo && (
+			{isPinnedPost && (
 				<time
 					dateTime={publishedDate.toISOString()}
 					data-relativeformat="med"
