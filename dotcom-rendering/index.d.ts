@@ -141,6 +141,7 @@ type Palette = {
 		mostViewedTab: Colour;
 		matchNav: Colour;
 		analysisUnderline: Colour;
+		matchStats: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -169,7 +170,6 @@ type Palette = {
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;
-
 	};
 	topBar: {
 		card: Colour;
@@ -580,6 +580,7 @@ interface BlocksRequest {
 	sharedAdTargeting: Record<string, unknown>;
 	adUnit: string;
 	videoDuration?: number;
+	switches: { [key: string]: boolean };
 }
 
 /**
@@ -873,14 +874,6 @@ interface ComponentNameChunkMap {
 	chunkName: string;
 	addWhen: BlockElementType;
 }
-
-interface InteractiveBlockLoadable extends ComponentNameChunkMap {
-	chunkName: 'InteractiveBlockComponent';
-	addWhen: InteractiveBlockElement['_type'];
-}
-
-// There are docs on loadable in ./docs/loadable-components.md
-type LoadableComponents = [InteractiveBlockLoadable];
 
 interface CarouselImagesMap {
 	'300'?: string;

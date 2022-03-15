@@ -8,6 +8,7 @@ import { Caption } from './Caption';
 import { useOnce } from '../lib/useOnce';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { defaultRoleStyles } from './Figure';
 
 type Props = {
 	url?: string;
@@ -249,7 +250,11 @@ export const InteractiveBlockComponent = ({
 			iframe.style.width = '100%';
 			iframe.style.border = 'none';
 			iframe.height = decideHeight(role).toString();
-			iframe.src = url;
+			if (url.startsWith('http:')) {
+				iframe.src = url.replace('http:', 'https:');
+			} else {
+				iframe.src = url;
+			}
 
 			setupWindowListeners(iframe);
 
@@ -287,7 +292,10 @@ export const InteractiveBlockComponent = ({
 			<figure
 				id={elementId} // boot scripts use id when inserting interactive content
 				ref={wrapperRef}
-				css={wrapperStyle({ format, role, loaded, palette })}
+				css={[
+					defaultRoleStyles(role, format),
+					wrapperStyle({ format, role, loaded, palette }),
+				]}
 				className={interactiveLegacyFigureClasses(
 					'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					role,

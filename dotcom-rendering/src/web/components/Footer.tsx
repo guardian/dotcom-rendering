@@ -133,19 +133,6 @@ const footerList = css`
 	}
 `;
 
-const readerRevenueLinks = css`
-	border-left: ${footerBorders};
-	flex: 1;
-	padding: 12px 0 0 10px;
-	margin: 0 10px 36px 0;
-	width: calc(50% - 10px);
-
-	${until.tablet} {
-		width: 50%;
-		border-top: ${footerBorders};
-	}
-`;
-
 const copyright = css`
 	${textSans.xxsmall()};
 	padding-left: 20px;
@@ -181,9 +168,7 @@ const bttPosition = css`
 	right: 20px;
 `;
 
-const FooterLinks: React.FC<{
-	pageFooter: FooterType;
-}> = ({ pageFooter }) => {
+const FooterLinks = ({ pageFooter }: { pageFooter: FooterType }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
 		const linkList = linkGroup.map((l: FooterLink, index: number) => (
 			<li key={`${l.url}${index}`}>
@@ -200,27 +185,20 @@ const FooterLinks: React.FC<{
 		return <ul key={key}>{linkList}</ul>;
 	});
 
-	const rrLinks = (
-		<div css={readerRevenueLinks}>
-			<div id="reader-revenue-links-footer" />
-		</div>
-	);
-
-	return (
-		<div css={footerList}>
-			{linkGroups}
-			{rrLinks}
-		</div>
-	);
+	return <div css={footerList}>{linkGroups}</div>;
 };
 
 const year = new Date().getFullYear();
 
-export const Footer: React.FC<{
+export const Footer = ({
+	pillars,
+	pillar,
+	pageFooter,
+}: {
 	pillars: PillarType[];
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
-}> = ({ pillars, pillar, pageFooter }) => (
+}) => (
 	<div
 		data-print-layout="hide"
 		css={footer}

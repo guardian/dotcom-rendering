@@ -51,7 +51,14 @@ export const Front = () => (
 				edition="UK"
 				isAnniversary={true}
 				discussionApiUrl=""
-				supporterCTA=""
+				urls={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				remoteHeader={false}
+				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 		<ElementContainer
@@ -555,7 +562,14 @@ export const Front2 = () => (
 				edition="US"
 				isAnniversary={true}
 				discussionApiUrl=""
-				supporterCTA=""
+				urls={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				remoteHeader={false}
+				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 		<ElementContainer

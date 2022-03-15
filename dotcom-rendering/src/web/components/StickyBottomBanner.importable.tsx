@@ -5,7 +5,8 @@ import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { ArticleCounts, getArticleCounts } from '../../../lib/article-count';
+import type { ArticleCounts } from '../../lib/article-count';
+import { getArticleCounts } from '../../lib/article-count';
 import {
 	canShowRRBanner,
 	canShowPuzzlesBanner,
@@ -13,21 +14,25 @@ import {
 	PuzzlesBanner,
 	BannerProps,
 	CanShowFunctionType,
-} from './ReaderRevenueBanner';
-import { getAlreadyVisitedCount } from '../../lib/alreadyVisited';
-import { useOnce } from '../../lib/useOnce';
+} from './StickyBottomBanner/ReaderRevenueBanner';
+import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
+import { useOnce } from '../lib/useOnce';
 import {
 	pickMessage,
 	SlotConfig,
 	MaybeFC,
 	CandidateConfig,
-} from '../../lib/messagePicker';
-import { getLocaleCode } from '../../lib/getCountryCode';
-import { useSignInGateWillShow } from '../../lib/useSignInGateWillShow';
-import { BrazeBanner, canShowBrazeBanner } from './BrazeBanner';
+} from '../lib/messagePicker';
+import { getLocaleCode } from '../lib/getCountryCode';
+import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
+import {
+	BrazeBanner,
+	canShowBrazeBanner,
+} from './StickyBottomBanner/BrazeBanner';
+import { ABProps, WithABProvider } from './WithABProvider';
+import { useBraze } from '../lib/useBraze';
 
 type Props = {
-	brazeMessages?: Promise<BrazeMessagesInterface>;
 	contentType: string;
 	sectionName?: string;
 	section: string;
@@ -36,10 +41,10 @@ type Props = {
 	isPreview: boolean;
 	shouldHideReaderRevenue: boolean;
 	isMinuteArticle: boolean;
-	isSensitive: boolean;
+
 	contributionsServiceUrl: string;
 	idApiUrl: string;
-	switches: Switches;
+
 	pageId: string;
 	keywordsId: string;
 };
@@ -180,7 +185,7 @@ const buildReaderRevenueBannerConfig = buildRRBannerConfigWith({
 });
 
 const buildBrazeBanner = (
-	brazeMessages: Promise<BrazeMessagesInterface>,
+	brazeMessages: BrazeMessagesInterface,
 	brazeArticleContext: BrazeArticleContext,
 ): CandidateConfig<any> => ({
 	candidate: {
@@ -191,8 +196,7 @@ const buildBrazeBanner = (
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
 
-export const StickyBottomBanner = ({
-	brazeMessages,
+const StickyBottomBannerWithAB = ({
 	contentType,
 	sectionName,
 	section,
@@ -207,7 +211,12 @@ export const StickyBottomBanner = ({
 	switches,
 	pageId,
 	keywordsId,
-}: Props) => {
+}: Props & {
+	switches: Switches;
+	isSensitive: boolean;
+}) => {
+	const { brazeMessages } = useBraze(idApiUrl);
+
 	const asyncCountryCode = getLocaleCode();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
@@ -269,7 +278,7 @@ export const StickyBottomBanner = ({
 			section: sectionName,
 		};
 		const brazeBanner = buildBrazeBanner(
-			brazeMessages as Promise<BrazeMessagesInterface>,
+			brazeMessages as BrazeMessagesInterface,
 			brazeArticleContext,
 		);
 		const bannerConfig: SlotConfig = {
@@ -292,3 +301,44 @@ export const StickyBottomBanner = ({
 
 	return null;
 };
+
+export const StickyBottomBanner = ({
+	abTestSwitches,
+	contentType,
+	contributionsServiceUrl,
+	idApiUrl,
+	isDev,
+	isMinuteArticle,
+	isPaidContent,
+	isPreview,
+	keywordsId,
+	pageId,
+	pageIsSensitive,
+	section,
+	sectionName,
+	shouldHideReaderRevenue,
+	tags,
+}: Props & ABProps) => (
+	<WithABProvider
+		abTestSwitches={abTestSwitches}
+		pageIsSensitive={pageIsSensitive}
+		isDev={isDev}
+	>
+		<StickyBottomBannerWithAB
+			contentType={contentType}
+			sectionName={sectionName}
+			section={section}
+			tags={tags}
+			isPaidContent={isPaidContent}
+			isPreview={isPreview}
+			shouldHideReaderRevenue={shouldHideReaderRevenue}
+			isMinuteArticle={isMinuteArticle}
+			isSensitive={pageIsSensitive}
+			contributionsServiceUrl={contributionsServiceUrl}
+			idApiUrl={idApiUrl}
+			switches={abTestSwitches}
+			pageId={pageId}
+			keywordsId={keywordsId}
+		/>
+	</WithABProvider>
+);

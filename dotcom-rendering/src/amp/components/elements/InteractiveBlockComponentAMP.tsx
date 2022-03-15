@@ -4,7 +4,7 @@ import { ClassNames } from '@emotion/react';
 import { ShowMoreButton } from '../ShowMoreButton';
 import { NotRenderableInDCR } from '../../../lib/errors/not-renderable-in-dcr';
 
-export const InteractiveBlockComponent: React.FunctionComponent<{
+export const InteractiveBlockComponentAMP: React.FunctionComponent<{
 	url?: string;
 	isMandatory?: boolean;
 }> = ({ url, isMandatory }) => {

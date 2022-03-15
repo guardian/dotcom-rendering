@@ -7,7 +7,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleFormat } from '@guardian/libs';
 import { getZIndex } from '../../../lib/getZIndex';
 
 import { ShowMoreMenu } from './ShowMoreMenu';
@@ -106,20 +106,20 @@ const mainMenuStyles = css`
 `;
 
 export const ExpandedMenu: React.FC<{
-	display: ArticleDisplay;
+	format: ArticleFormat;
 	nav: NavType;
-}> = ({ display, nav }) => {
+}> = ({ format, nav }) => {
 	return (
 		<div id="expanded-menu-root">
-			<ShowMoreMenu display={display} />
-			<VeggieBurgerMenu display={display} />
+			<ShowMoreMenu display={format.display} />
+			<VeggieBurgerMenu display={format.display} />
 			<div id="expanded-menu" css={wrapperMainMenuStyles}>
 				<div
 					css={mainMenuStyles}
 					data-testid="expanded-menu"
 					data-cy="expanded-menu"
 				>
-					<Columns nav={nav} />
+					<Columns format={format} nav={nav} />
 				</div>
 			</div>
 		</div>

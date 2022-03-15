@@ -50,6 +50,8 @@ import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.imp
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -293,16 +295,19 @@ export const ShowcaseLayout = ({
 									edition={CAPI.editionId}
 									idUrl={CAPI.config.idUrl}
 									mmaUrl={CAPI.config.mmaUrl}
-									supporterCTA={
-										CAPI.nav.readerRevenueLinks.header
-											.supporter
-									}
 									discussionApiUrl={
 										CAPI.config.discussionApiUrl
 									}
 									isAnniversary={
 										CAPI.config.switches
 											.anniversaryHeaderSvg
+									}
+									urls={CAPI.nav.readerRevenueLinks.header}
+									remoteHeader={
+										CAPI.config.switches.remoteHeader
+									}
+									contributionsServiceUrl={
+										CAPI.contributionsServiceUrl
 									}
 								/>
 							</ElementContainer>
@@ -477,6 +482,9 @@ export const ShowcaseLayout = ({
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
+									switches={CAPI.config.switches}
+									isAdFreeUser={CAPI.isAdFreeUser}
+									isSensitive={CAPI.config.isSensitive}
 								/>
 							</div>
 						</GridItem>
@@ -537,8 +545,57 @@ export const ShowcaseLayout = ({
 									pageId={CAPI.pageId}
 									webTitle={CAPI.webTitle}
 									ajaxUrl={CAPI.config.ajaxUrl}
+									switches={CAPI.config.switches}
+									isSensitive={CAPI.config.isSensitive}
+									isAdFreeUser={CAPI.isAdFreeUser}
+									section={CAPI.config.section}
+									shouldHideReaderRevenue={
+										CAPI.shouldHideReaderRevenue
+									}
+									tags={CAPI.tags}
+									isPaidContent={!!CAPI.config.isPaidContent}
+									contributionsServiceUrl={
+										CAPI.contributionsServiceUrl
+									}
+									contentType={CAPI.contentType}
+									sectionName={CAPI.sectionName || ''}
+									isPreview={CAPI.config.isPreview}
+									idUrl={CAPI.config.idUrl || ''}
+									isDev={!!CAPI.config.isDev}
 								/>
-								{showBodyEndSlot && <div id="slot-body-end" />}
+								{showBodyEndSlot && (
+									<Island clientOnly={true}>
+										<SlotBodyEnd
+											abTestSwitches={
+												CAPI.config.switches
+											}
+											contentType={CAPI.contentType}
+											contributionsServiceUrl={
+												CAPI.contributionsServiceUrl
+											}
+											idApiUrl={CAPI.config.idApiUrl}
+											isDev={CAPI.config.isDev ?? false}
+											isMinuteArticle={
+												CAPI.pageType.isMinuteArticle
+											}
+											isPaidContent={
+												CAPI.pageType.isPaidContent
+											}
+											keywordsId={CAPI.config.keywordIds}
+											pageId={CAPI.pageId}
+											pageIsSensitive={
+												CAPI.config.isSensitive
+											}
+											sectionId={CAPI.config.section}
+											sectionName={CAPI.sectionName}
+											shouldHideReaderRevenue={
+												CAPI.shouldHideReaderRevenue
+											}
+											stage={CAPI.config.stage}
+											tags={CAPI.tags}
+										/>
+									</Island>
+								)}
 								<Lines count={4} effect="straight" />
 								<SubMeta
 									palette={palette}
@@ -722,7 +779,27 @@ export const ShowcaseLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<BannerWrapper>
+				<Island deferUntil="idle" clientOnly={true}>
+					<StickyBottomBanner
+						abTestSwitches={CAPI.config.switches}
+						contentType={CAPI.contentType}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						idApiUrl={CAPI.config.idApiUrl}
+						isDev={CAPI.config.isDev ?? false}
+						isMinuteArticle={CAPI.pageType.isMinuteArticle}
+						isPaidContent={CAPI.pageType.isPaidContent}
+						isPreview={!!CAPI.config.isPreview}
+						keywordsId={CAPI.config.keywordIds}
+						pageId={CAPI.pageId}
+						pageIsSensitive={CAPI.config.isSensitive}
+						section={CAPI.config.section}
+						sectionName={CAPI.sectionName}
+						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						tags={CAPI.tags}
+					/>
+				</Island>
+			</BannerWrapper>
 			<MobileStickyContainer />
 		</>
 	);

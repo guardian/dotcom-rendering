@@ -18,9 +18,10 @@ export const interactiveLegacyFigureClasses = (
 			'element-interactive',
 	};
 
-	const roleClass = role ? `element-${role}` : '';
+	const roleClass = role ? ` element-${role}` : '';
 	const elementClass = elementClasses[elementType] || '';
-	return `element ${elementClass} ${roleClass}`;
+	const legacyRoleClass = role ? ` element--${role}` : '';
+	return `element ${elementClass}${legacyRoleClass}${roleClass}`;
 };
 
 // Classes present in Frontend that we add for legacy interactives.

@@ -581,7 +581,15 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 const backgroundHeader = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
-			return pillarPalette[format.theme][400];
+			switch (format.theme) {
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReport:
+					// We don't have designs for Special Report or Labs liveblogs yet
+					// so we default to news
+					return news[200];
+				default:
+					return pillarPalette[format.theme][300];
+			}
 		default:
 			return backgroundArticle(format);
 	}
@@ -590,7 +598,24 @@ const backgroundHeader = (format: ArticleFormat): string => {
 const backgroundStandfirst = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
-			return pillarPalette[format.theme][300];
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[200];
+				case ArticlePillar.Culture:
+					return culture[200];
+				case ArticlePillar.Sport:
+					return sport[100];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[200];
+				case ArticlePillar.Opinion:
+					return opinion[200];
+				case ArticleSpecial.Labs:
+				case ArticleSpecial.SpecialReport:
+					// We don't have designs for Special Report or Labs liveblogs yet
+					// so we default to news
+					return news[200];
+			}
+			break;
 		case ArticleDesign.DeadBlog:
 			return neutral[93];
 		default:
@@ -951,6 +976,16 @@ const textShareCountUntilDesktop = (format: ArticleFormat): string => {
 	return text.supporting;
 };
 
+const backgroundMatchStats = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return neutral[97];
+		default:
+			return '#d9edf6';
+	}
+};
+
 export const decidePalette = (format: ArticleFormat): Palette => {
 	return {
 		text: {
@@ -1016,6 +1051,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			mostViewedTab: backgroundMostViewedTab(format),
 			matchNav: backgroundMatchNav(),
 			analysisUnderline: backgroundUnderline(format),
+			matchStats: backgroundMatchStats(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
