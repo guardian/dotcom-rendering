@@ -27,16 +27,6 @@ export const PinnedPostLiveness = ({}) => {
 		pinnedPost && pinnedPost.scrollHeight <= pinnedPost.clientHeight;
 	if (contentFitsContainer) hideShowMore();
 
-	if (pinnedPost) {
-		submitComponentEvent({
-			component: {
-				componentType: 'LIVE_BLOG_PINNED_POST',
-				id: pinnedPost?.id,
-			},
-			action: 'INSERT',
-		});
-	}
-
 	const hasBeenSeen = useRef(false);
 
 	useEffect(() => {

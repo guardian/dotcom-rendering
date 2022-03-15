@@ -133,7 +133,11 @@ export interface PinnedPostProps extends Props {
 
 export const PinnedPost = ({ pinnedPost, children }: PinnedPostProps) => {
 	return (
-		<div css={[pinnedPostContainer]} data-gu-marker="pinned-post">
+		<div
+			css={[pinnedPostContainer]}
+			data-gu-marker="pinned-post"
+			data-component="pinned-post"
+		>
 			<input
 				type="checkbox"
 				css={css`
