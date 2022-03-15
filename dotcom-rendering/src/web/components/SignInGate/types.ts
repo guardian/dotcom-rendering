@@ -32,17 +32,4 @@ export type CurrentSignInGateABTest = {
 	id: string;
 };
 
-export interface SignInGateSelectorProps {
-	format: ArticleFormat;
-	contentType: string;
-	sectionName?: string;
-	tags: TagType[];
-	isPaidContent: boolean;
-	isPreview: boolean;
-	host?: string;
-	pageId: string;
-	idUrl?: string;
-	pageViewId: string;
-}
-
 export type SignInGateTestMap = { [name: string]: SignInGateComponent };

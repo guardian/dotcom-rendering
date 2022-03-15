@@ -1,5 +1,5 @@
 import {
-	DailyArticleCount,
+	DailyArticleHistory,
 	DailyArticleCountKey,
 	getDailyArticleCount,
 	incrementDailyArticleCount,
@@ -7,7 +7,7 @@ import {
 
 const today = Math.floor(Date.now() / 86400000);
 
-const validDailyArticleCount: DailyArticleCount = [
+const validDailyArticleCount: DailyArticleHistory = [
 	{
 		day: today,
 		count: 3,
@@ -27,10 +27,10 @@ describe('dailyArticleCount', () => {
 		localStorage.clear();
 	});
 
-	it('gets an empty array of daily article counts by default', () => {
+	it('gets undefined if no article count in local storage', () => {
 		const output = getDailyArticleCount();
 
-		expect(output).toEqual([]);
+		expect(output).toEqual(undefined);
 	});
 
 	it('returns array of valid daily article counts if they exist', () => {
@@ -44,16 +44,16 @@ describe('dailyArticleCount', () => {
 		expect(output).toEqual(validDailyArticleCount);
 	});
 
-	it('returns empty array of daily article counts if failed to parse local storage, and remove the key from localStorage', () => {
+	it('returns undefined if failed to parse local storage, and remove the key from localStorage', () => {
 		localStorage.setItem(DailyArticleCountKey, 'not a valid json string');
 
 		const output = getDailyArticleCount();
 
-		expect(output).toEqual([]);
+		expect(output).toEqual(undefined);
 		expect(localStorage.getItem(DailyArticleCountKey)).toBeNull();
 	});
 
-	it('returns empty array of daily article counts if invalid json format, and removes the key from localStorage', () => {
+	it('returns undefined if invalid json format, and removes the key from localStorage', () => {
 		localStorage.setItem(
 			DailyArticleCountKey,
 			JSON.stringify(validDailyArticleCount), // invalid format (array only, not it { value: array } format)
@@ -61,7 +61,7 @@ describe('dailyArticleCount', () => {
 
 		const output = getDailyArticleCount();
 
-		expect(output).toEqual([]);
+		expect(output).toEqual(undefined);
 		expect(localStorage.getItem(DailyArticleCountKey)).toBeNull();
 	});
 
@@ -125,7 +125,7 @@ describe('dailyArticleCount', () => {
 	it('increments daily article for today if it does not exist, and removes any older than 60 days', () => {
 		// valid daily article count with some older than 60 days
 		const [, ...withoutToday] = validDailyArticleCount;
-		const mocked: DailyArticleCount = [
+		const mocked: DailyArticleHistory = [
 			...withoutToday,
 			...[
 				{ day: today - 61, count: 1 },

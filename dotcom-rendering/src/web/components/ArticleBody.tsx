@@ -15,7 +15,19 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-	switches?: Switches;
+	isAdFreeUser: boolean;
+	switches: { [key: string]: boolean };
+	section: string;
+	shouldHideReaderRevenue: boolean;
+	tags: TagType[];
+	isPaidContent: boolean;
+	contributionsServiceUrl: string;
+	contentType: string;
+	sectionName: string;
+	isPreview?: boolean;
+	idUrl: string;
+	isSensitive: boolean;
+	isDev: boolean;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -97,6 +109,18 @@ export const ArticleBody = ({
 	webTitle,
 	ajaxUrl,
 	switches,
+	isAdFreeUser,
+	section,
+	shouldHideReaderRevenue,
+	tags,
+	isPaidContent,
+	contributionsServiceUrl,
+	contentType,
+	sectionName,
+	isPreview,
+	idUrl,
+	isSensitive,
+	isDev,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
@@ -114,6 +138,8 @@ export const ArticleBody = ({
 					className="js-liveblog-body"
 					css={[
 						globalStrongStyles,
+						globalH2Styles(format.display),
+						globalH3Styles(format.display),
 						globalLinkStyles(palette),
 						// revealStyles is used to animate the reveal of new blocks
 						format.design === ArticleDesign.LiveBlog &&
@@ -128,8 +154,15 @@ export const ArticleBody = ({
 						pageId={pageId}
 						webTitle={webTitle}
 						ajaxUrl={ajaxUrl}
-						isLiveUpdate={false}
 						switches={switches}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
+						isLiveUpdate={false}
+						section={section}
+						shouldHideReaderRevenue={shouldHideReaderRevenue}
+						tags={tags}
+						isPaidContent={isPaidContent}
+						contributionsServiceUrl={contributionsServiceUrl}
 					/>
 				</div>
 			</>
@@ -157,6 +190,16 @@ export const ArticleBody = ({
 				pageId={pageId}
 				webTitle={webTitle}
 				ajaxUrl={ajaxUrl}
+				contentType={contentType}
+				sectionName={sectionName}
+				tags={tags}
+				isPaidContent={isPaidContent}
+				isPreview={isPreview}
+				idUrl={idUrl}
+				switches={switches}
+				isDev={isDev}
+				isAdFreeUser={isAdFreeUser}
+				isSensitive={isSensitive}
 			/>
 		</div>
 	);

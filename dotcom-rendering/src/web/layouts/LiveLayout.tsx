@@ -12,6 +12,7 @@ import {
 } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { Hide } from '@guardian/source-react-components';
 import { StarRating } from '../components/StarRating/StarRating';
@@ -35,7 +36,7 @@ import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { GridItem } from '../components/GridItem';
 import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { Pagination } from '../components/Pagination';
+
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
@@ -611,6 +612,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										pageId={CAPI.pageId}
 										webTitle={CAPI.webTitle}
 										ajaxUrl={CAPI.config.ajaxUrl}
+										switches={CAPI.config.switches}
+										isSensitive={CAPI.config.isSensitive}
+										isAdFreeUser={CAPI.isAdFreeUser}
 									/>
 								</div>
 							</GridItem>
@@ -764,7 +768,31 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												pageId={CAPI.pageId}
 												webTitle={CAPI.webTitle}
 												ajaxUrl={CAPI.config.ajaxUrl}
+												section={CAPI.config.section}
 												switches={CAPI.config.switches}
+												isSensitive={
+													CAPI.config.isSensitive
+												}
+												isAdFreeUser={CAPI.isAdFreeUser}
+												shouldHideReaderRevenue={
+													CAPI.shouldHideReaderRevenue
+												}
+												tags={CAPI.tags}
+												isPaidContent={
+													!!CAPI.config.isPaidContent
+												}
+												contributionsServiceUrl={
+													CAPI.contributionsServiceUrl
+												}
+												contentType={CAPI.contentType}
+												sectionName={
+													CAPI.sectionName || ''
+												}
+												isPreview={
+													CAPI.config.isPreview
+												}
+												idUrl={CAPI.config.idUrl || ''}
+												isDev={!!CAPI.config.isDev}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination

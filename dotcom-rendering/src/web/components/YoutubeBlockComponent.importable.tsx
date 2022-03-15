@@ -192,10 +192,7 @@ export const YoutubeBlockComponent = ({
 
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
-			<StickyVideo
-				isActive={isPlaying && !!stickyVideos}
-				setVideoControls={setVideoControls}
-			>
+			<StickyVideo isActive={isPlaying && !!stickyVideos} videoId={id}>
 				<YoutubeAtom
 					videoControls={videoControls}
 					assetId={assetId}

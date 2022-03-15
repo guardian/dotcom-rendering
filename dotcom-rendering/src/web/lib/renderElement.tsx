@@ -1,5 +1,4 @@
 import {
-	AudioAtom,
 	ExplainerAtom,
 	InteractiveAtom,
 	InteractiveLayoutAtom,
@@ -21,7 +20,7 @@ import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
 import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
 import { ImageBlockComponent } from '../components/ImageBlockComponent';
 import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
-import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent';
+import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
 import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
 import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent';
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
@@ -40,6 +39,7 @@ import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockCom
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
+import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.importable';
 
 import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
@@ -77,7 +77,9 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
-	switches?: Switches;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: Switches;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -128,21 +130,28 @@ export const renderElement = ({
 	pageId,
 	webTitle,
 	ajaxUrl,
+	isAdFreeUser,
 	switches,
+	isSensitive,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
 				true,
-				<AudioAtom
-					id={element.id}
-					trackUrl={element.trackUrl}
-					kicker={element.kicker}
-					title={element.title}
-					duration={element.duration}
-					pillar={format.theme}
-				/>,
+				<Island>
+					<AudioAtomWrapper
+						id={element.id}
+						trackUrl={element.trackUrl}
+						kicker={element.kicker}
+						title={element.title}
+						duration={element.duration}
+						pillar={format.theme}
+						contentIsNotSensitive={!isSensitive}
+						aCastisEnabled={switches.acast}
+						readerCanBeShownAds={!isAdFreeUser}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
 			return [
@@ -366,14 +375,16 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return [
 				true,
-				<InteractiveBlockComponent
-					url={element.url}
-					scriptUrl={element.scriptUrl}
-					alt={element.alt}
-					role={element.role}
-					format={format}
-					elementId={element.elementId}
-				/>,
+				<Island deferUntil="visible">
+					<InteractiveBlockComponent
+						url={element.url}
+						scriptUrl={element.scriptUrl}
+						alt={element.alt}
+						role={element.role}
+						format={format}
+						elementId={element.elementId}
+					/>
+				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.ItemLinkBlockElement':
 			return [true, <ItemLinkBlockElement html={element.html} />];
@@ -512,6 +523,7 @@ export const renderElement = ({
 						richLinkIndex={index}
 						element={element}
 						ajaxUrl={ajaxUrl}
+						format={format}
 					/>
 				</Island>,
 			];
@@ -727,12 +739,6 @@ export const renderElement = ({
 // bareElements is the set of element types that don't get wrapped in a Figure
 // for most article types, either because they don't need it or because they
 // add the figure themselves.
-// We might assume that InteractiveBlockElement should be included in this list,
-// however we can't do this while we maintain the current component abstraction.
-// If no outer figure, then HydrateOnce uses the component's figure as the root
-// for hydration. For InteractiveBlockElements, the result is that the state that
-// determines height is never updated leaving an empty placeholder space in the
-// article even after the interactive content has loaded.
 const bareElements = new Set([
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 	'model.dotcomrendering.pageElements.CaptionBlockElement',
@@ -744,6 +750,7 @@ const bareElements = new Set([
 	'model.dotcomrendering.pageElements.SubheadingBlockElement',
 	'model.dotcomrendering.pageElements.TextBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+	'model.dotcomrendering.pageElements.InteractiveBlockElement',
 ]);
 
 // renderArticleElement is a wrapper for renderElement that wraps elements in a
@@ -761,6 +768,8 @@ export const renderArticleElement = ({
 	starRating,
 	pageId,
 	webTitle,
+	isAdFreeUser,
+	isSensitive,
 	switches,
 }: Props): JSX.Element => {
 	const withUpdatedRole = updateRole(element, format);
@@ -777,6 +786,8 @@ export const renderArticleElement = ({
 		starRating,
 		pageId,
 		webTitle,
+		isAdFreeUser,
+		isSensitive,
 		switches,
 	});
 
@@ -798,6 +809,7 @@ export const renderArticleElement = ({
 					: ''
 			}
 			type={element._type}
+			format={format}
 		>
 			{el}
 		</Figure>

@@ -22,6 +22,13 @@ export const DefaultRichLink: React.FC<DefaultProps> = ({
 	url,
 	isPlaceholder,
 }) => {
+	const defaultFormat = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		// We default to SpecialReport here purely because the greys of this theme
+		// look better as the defaults
+		theme: ArticleSpecial.SpecialReport,
+	};
 	return (
 		<RichLink
 			richLinkIndex={index}
@@ -30,13 +37,8 @@ export const DefaultRichLink: React.FC<DefaultProps> = ({
 			headlineText={headlineText}
 			contentType="article"
 			url={url}
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				// We default to SpecialReport here purely because the greys of this theme
-				// look better as the defaults
-				theme: ArticleSpecial.SpecialReport,
-			}}
+			linkFormat={defaultFormat}
+			format={defaultFormat}
 			tags={[]}
 			sponsorName=""
 			isPlaceholder={isPlaceholder}
