@@ -55,21 +55,24 @@ const NewsletterContentGrid = ({
 								grid-template-columns: 219px 1px 1fr 1fr;
 
 								grid-template-areas:
-									'title      border  content       image'
+									'label      border  headline      image'
+									'label      border  content       image'
 									'.          border  privacy       privacy';
 							}
 
 							${until.wide} {
 								grid-template-columns: 140px 1px 1fr 1fr;
 								grid-template-areas:
-									'title  border  content   image'
+									'label  border  headline  image'
+									'label  border  content  image'
 									'.      border  privacy   privacy';
 							}
 
 							${until.leftCol} {
 								grid-template-columns: 1fr 1fr;
 								grid-template-areas:
-									'title       title'
+									'label       label'
+									'headline    image'
 									'content     image'
 									'privacy     privacy';
 							}
@@ -77,9 +80,10 @@ const NewsletterContentGrid = ({
 							${until.desktop} {
 								grid-template-columns: 1fr;
 								grid-template-areas:
-									'title'
-									'content'
+									'label'
+									'headline'
 									'image'
+									'content'
 									'privacy';
 							}
 
@@ -87,9 +91,10 @@ const NewsletterContentGrid = ({
 								grid-column-gap: 0px;
 								grid-template-columns: 1fr;
 								grid-template-areas:
-									'title'
-									'content'
+									'label'
+									'headline'
 									'image'
+									'content'
 									'privacy';
 							}
 						}
@@ -206,7 +211,7 @@ export const NewsLetterSignupContent = ({ format, palette, CAPI, newsletterData 
 
 	return (
 		<NewsletterContentGrid format={format}>
-			<GridItem area="title" element="aside">
+			<GridItem area="label" element="aside">
 				<div css={newsletterFactStyle({ padUntilLeftCol: 16 })}>
 					<figure aria-label="newsletter type">
 						<SvgEnvelope size="small" />
@@ -219,12 +224,15 @@ export const NewsLetterSignupContent = ({ format, palette, CAPI, newsletterData 
 				<Border palette={palette} />
 			</GridItem>
 
-			<GridItem area="content" element="main">
+			<GridItem area="headline">
 				<ArticleHeadline
 					headlineString={CAPI.headline}
 					format={format}
 					tags={[]}
 				/>
+			</GridItem>
+
+			<GridItem area="content" element="main">
 				<div css={contentPlaceHolderStyle}>
 					<p>
 						THIS IS WILL BE THE FORMATTED ARTICLE BODY AS DEFINED IN
