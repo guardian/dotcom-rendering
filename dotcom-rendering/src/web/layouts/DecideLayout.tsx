@@ -1,4 +1,4 @@
-import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
 import { decidePalette } from '../lib/decidePalette';
@@ -11,6 +11,7 @@ import { LiveLayout } from './LiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
+import { hackToNewsletterSignupLayout, formatAsNewsletterDesign } from './lib/newsLetterHacks';
 
 type Props = {
 	CAPI: CAPIType;
@@ -18,15 +19,9 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const hackToNewsletterSignupLayout = true;
-
 export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
-	if (hackToNewsletterSignupLayout) {
-		const newsletterFormat: ArticleFormat = {
-			theme: ArticlePillar.News,
-			design: ArticleDesign.NewsletterSignup,
-			display: ArticleDisplay.Standard,
-		};
+	if (hackToNewsletterSignupLayout || CAPI.tags.some(tag => tag.id === 'info/newsletter-sign-up')) {
+		const newsletterFormat = formatAsNewsletterDesign(format)
 		const newsletterPalette = decidePalette(newsletterFormat);
 
 		return (
