@@ -58,7 +58,6 @@ export const Sections = (): React.ReactNode => (
 		>
 			<Header
 				edition="UK"
-				supporterCTA=""
 				discussionApiUrl=""
 				urls={{
 					contribute: '',

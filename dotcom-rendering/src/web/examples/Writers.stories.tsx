@@ -74,7 +74,6 @@ export const Writers = (): React.ReactNode => (
 			<Header
 				edition="UK"
 				discussionApiUrl=""
-				supporterCTA=""
 				urls={{
 					contribute: '',
 					subscribe: '',

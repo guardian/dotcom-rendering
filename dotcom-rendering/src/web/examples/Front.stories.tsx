@@ -51,7 +51,6 @@ export const Front = () => (
 				edition="UK"
 				isAnniversary={true}
 				discussionApiUrl=""
-				supporterCTA=""
 				urls={{
 					contribute: '',
 					subscribe: '',
@@ -563,7 +562,6 @@ export const Front2 = () => (
 				edition="US"
 				isAnniversary={true}
 				discussionApiUrl=""
-				supporterCTA=""
 				urls={{
 					contribute: '',
 					subscribe: '',
