@@ -79,7 +79,7 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	switches: Switches;
+	switches: { [key: string]: boolean };
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -723,7 +723,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
-						stickyVideos={switches?.stickyVideos}
+						stickyVideos={switches.stickyVideos}
 					/>
 				</Island>,
 			];

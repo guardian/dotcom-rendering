@@ -18,7 +18,7 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	switches: Switches;
+	switches: { [key: string]: boolean };
 	isLiveUpdate?: boolean;
 };
 
