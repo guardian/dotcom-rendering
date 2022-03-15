@@ -32,6 +32,10 @@ const articles = [
 		url: 'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 	},
 	{
+		name: 'NewsletterSignup',
+		url: 'https://www.theguardian.com/info/2016/mar/01/the-morning-briefing-start-the-day-one-step-ahead',
+	},
+	{
 		name: 'Analysis',
 		url: 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 	},
