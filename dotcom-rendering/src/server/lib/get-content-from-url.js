@@ -1,6 +1,10 @@
 const fetch = require('node-fetch');
 
-async function getContentFromURL(_url) {
+/**
+ * Get DCR content from a `theguardian.com` URL.
+ * Takes in optional `X-Gu-*` headers to send.
+ */
+async function getContentFromURL(_url, _headers) {
 	try {
 		if (!_url) {
 			throw new Error('The url query parameter is mandatory');
@@ -14,8 +18,15 @@ async function getContentFromURL(_url) {
 		// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
 		const jsonUrl = `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
 
-		const { html, ...config } = await fetch(jsonUrl).then((article) =>
-			article.json(),
+		// Explicitly pass through GU headers - this enables us to override properties such as region in CI
+		const headers = Object.fromEntries(
+			Object.entries(_headers).filter(([key]) =>
+				key.toLowerCase().startsWith('x-gu-'),
+			),
+		);
+
+		const { html, ...config } = await fetch(jsonUrl, { headers }).then(
+			(article) => article.json(),
 		);
 
 		return config;
@@ -55,7 +66,7 @@ exports.getContentFromURLMiddleware = async (req, res, next) => {
 		if (req.path.startsWith('/AMP')) {
 			url = url.replace('www', 'amp');
 		}
-		req.body = await getContentFromURL(url);
+		req.body = await getContentFromURL(url, req.headers);
 	}
 	next();
 };
