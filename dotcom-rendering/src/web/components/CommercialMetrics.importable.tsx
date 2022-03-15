@@ -9,7 +9,6 @@ import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { WithABProvider } from './WithABProvider';
 import { useOnce } from '../lib/useOnce';
 import { tests } from '../experiments/ab-tests';
-import { spacefinderOkr3RichLinks } from '../experiments/tests/spacefinder-okr-3-rich-links';
 import { spacefinderOkrMegaTest } from '../experiments/tests/spacefinder-okr-mega-test';
 
 type Props = {
@@ -32,7 +31,6 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 
 		const testsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
-			spacefinderOkr3RichLinks,
 			spacefinderOkrMegaTest,
 		];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
