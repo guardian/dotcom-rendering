@@ -13,6 +13,10 @@ const noJSStyling = css`
 		${body.small()};
 	}
 
+	.twitter-tweet iframe {
+		width: 100% !important;
+	}
+
 	.twitter-tweet p {
 		padding-bottom: 10px;
 	}
