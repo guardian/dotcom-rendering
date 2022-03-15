@@ -21,7 +21,6 @@ module.exports = ({ sessionId }) => ({
 		runtimeChunk: false,
 	},
 	externals: [
-		'@loadable/component',
 		require('webpack-node-externals')({
 			allowlist: [/^@guardian/],
 			additionalModuleDirs: [

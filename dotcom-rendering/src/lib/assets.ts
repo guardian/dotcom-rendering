@@ -1,16 +1,13 @@
 interface AssetHash {
-	[key: string]: { [key: string]: [] };
+	[key: string]: string;
 }
 
-let loadableManifest: AssetHash = {};
-let loadableManifestLegacy: AssetHash = {};
+let manifest: AssetHash = {};
 
 try {
 	// path is relative to the server bundle
 	// eslint-disable-next-line import/no-unresolved
-	loadableManifest = require('./loadable-manifest-browser.json');
-	// eslint-disable-next-line import/no-unresolved
-	loadableManifestLegacy = require('./loadable-manifest-browser.legacy.json');
+	manifest = require('./manifest.json');
 } catch (e) {
 	// do nothing
 }
@@ -33,23 +30,28 @@ const decideAssetOrigin = (stage: string | undefined): string => {
 };
 export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
 
-export const loadableManifestJson = loadableManifest;
-
-export const getScriptArrayFromFilename = (
+export const getScriptNameFromFilename = (
 	filename: string,
-): { src: string; legacy: boolean }[] => {
-	// Get legacy file name if one's available
-	// Builds with the SKIP_LEGACY flag will not include legacy bundles, this aids build performance.
-	// 'ophan.87b473fc83e9ca6250fc.js' -> 'ophan'
-	const chunkName = filename.split('.')[0];
-	const chunks: string[] | undefined =
-		loadableManifestLegacy.assetsByChunkName?.[chunkName];
-	const legacyFilename = chunks && chunks.length > 0 && chunks[0];
+): string | undefined => {
+	const path = `./dist/${filename}.js`;
+	// const name = manifest[path]
+	return manifest[path];
+	// if (name)
+};
 
-	const scripts = [
-		{ src: `${ASSET_ORIGIN}assets/${filename}`, legacy: false },
-	];
+export const getScriptArrayFromChunkName = (
+	chunkName: string,
+): { src: string; legacy?: boolean }[] => {
+	const filename = getScriptNameFromFilename(chunkName);
+	const legacyFilename = getScriptNameFromFilename(`${chunkName}.legacy`);
 
+	const scripts = [];
+
+	if (filename)
+		scripts.push({
+			src: `${ASSET_ORIGIN}assets/${filename}`,
+			legacy: false,
+		});
 	if (legacyFilename)
 		scripts.push({
 			src: `${ASSET_ORIGIN}assets/${legacyFilename}`,
@@ -57,16 +59,4 @@ export const getScriptArrayFromFilename = (
 		});
 
 	return scripts;
-};
-
-export const getScriptArrayFromChunkName = (
-	chunkName: string,
-): { src: string; legacy?: boolean }[] => {
-	const chunks: string[] | undefined =
-		loadableManifestJson.assetsByChunkName[chunkName];
-	const filename = chunks && chunks.length > 0 && chunks[0];
-	if (!filename) {
-		return [];
-	}
-	return getScriptArrayFromFilename(filename);
 };

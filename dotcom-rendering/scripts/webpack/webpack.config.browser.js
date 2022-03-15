@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -26,7 +27,6 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		ga: './src/web/browser/ga/init.ts',
 		ophan: './src/web/browser/ophan/init.ts',
 		islands: './src/web/browser/islands/init.ts',
-		react: './src/web/browser/react/init.ts',
 		dynamicImport: './src/web/browser/dynamicImport/init.ts',
 		atomIframe: './src/web/browser/atomIframe/init.ts',
 		coreVitals: './src/web/browser/coreVitals/init.ts',
@@ -45,16 +45,19 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 	optimization: {
 		splitChunks: { cacheGroups: { default: false } },
 	},
-	plugins: DEV
-		? [
-				new GuStatsReportPlugin({
-					buildName: isLegacyJS ? 'legacy-client' : 'client',
-					project: 'dotcom-rendering',
-					team: 'dotcom',
-					sessionId,
-				}),
-		  ]
-		: undefined,
+	plugins: [
+		new WebpackManifestPlugin(),
+		...(DEV
+			? [
+					new GuStatsReportPlugin({
+						buildName: isLegacyJS ? 'legacy-client' : 'client',
+						project: 'dotcom-rendering',
+						team: 'dotcom',
+						sessionId,
+					}),
+			  ]
+			: []),
+	],
 	module: {
 		rules: [
 			{

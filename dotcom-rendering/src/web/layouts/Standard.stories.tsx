@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 
 import { breakpoints } from '@guardian/source-foundations';
 
-import { makeGuardianBrowserCAPI } from '../../model/window-guardian';
-
 import { decideFormat } from '../lib/decideFormat';
 
 import { Article } from '../../../fixtures/generated/articles/Article';
@@ -24,7 +22,6 @@ import { Labs } from '../../../fixtures/generated/articles/Labs';
 import { SpecialReport } from '../../../fixtures/generated/articles/SpecialReport';
 import { NumberedList } from '../../../fixtures/generated/articles/NumberedList';
 
-import { BootReact } from '../components/BootReact';
 import { embedIframe } from '../browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
@@ -72,8 +69,6 @@ const HydratedLayout = ({
 	const format: ArticleFormat = decideFormat(ServerCAPI.format);
 
 	useEffect(() => {
-		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-		BootReact({ CAPI });
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);

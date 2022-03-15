@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 
-import { makeGuardianBrowserCAPI } from '../../model/window-guardian';
-
 import { decideFormat } from '../lib/decideFormat';
 
 import { Article } from '../../../fixtures/generated/articles/Article';
 
-import { BootReact } from '../components/BootReact';
 import { embedIframe } from '../browser/embedIframe/embedIframe';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
@@ -45,8 +42,6 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIType }) => {
 	const format: ArticleFormat = decideFormat(ServerCAPI.format);
 
 	useEffect(() => {
-		const CAPI = makeGuardianBrowserCAPI(ServerCAPI);
-		BootReact({ CAPI });
 		embedIframe().catch((e) =>
 			console.error(`HydratedLayout embedIframe - error: ${e}`),
 		);

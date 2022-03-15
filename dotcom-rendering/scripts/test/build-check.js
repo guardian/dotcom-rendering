@@ -48,7 +48,6 @@ const fileExists = async (glob) => {
 		'ga',
 		'ophan',
 		'islands',
-		'react',
 		'dynamicImport',
 		'atomIframe',
 		'embedIframe',
