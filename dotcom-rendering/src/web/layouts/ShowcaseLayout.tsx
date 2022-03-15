@@ -295,10 +295,6 @@ export const ShowcaseLayout = ({
 									edition={CAPI.editionId}
 									idUrl={CAPI.config.idUrl}
 									mmaUrl={CAPI.config.mmaUrl}
-									supporterCTA={
-										CAPI.nav.readerRevenueLinks.header
-											.supporter
-									}
 									discussionApiUrl={
 										CAPI.config.discussionApiUrl
 									}
@@ -780,9 +776,6 @@ export const ShowcaseLayout = ({
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={CAPI.nav.readerRevenueLinks.header}
-					edition={CAPI.editionId}
-					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 

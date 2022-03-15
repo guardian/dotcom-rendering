@@ -51,7 +51,6 @@ export const Front = () => (
 				edition="UK"
 				isAnniversary={true}
 				discussionApiUrl=""
-				supporterCTA=""
 				urls={{
 					contribute: '',
 					subscribe: '',
@@ -544,14 +543,6 @@ export const Front = () => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
-				urls={{
-					contribute: '',
-					subscribe: '',
-					support: '',
-					supporter: '',
-				}}
-				edition="UK"
-				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 	</>
@@ -571,7 +562,6 @@ export const Front2 = () => (
 				edition="US"
 				isAnniversary={true}
 				discussionApiUrl=""
-				supporterCTA=""
 				urls={{
 					contribute: '',
 					subscribe: '',
@@ -1064,14 +1054,6 @@ export const Front2 = () => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
-				urls={{
-					contribute: '',
-					subscribe: '',
-					support: '',
-					supporter: '',
-				}}
-				edition="UK"
-				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 	</>

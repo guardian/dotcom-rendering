@@ -74,7 +74,6 @@ export const Writers = (): React.ReactNode => (
 			<Header
 				edition="UK"
 				discussionApiUrl=""
-				supporterCTA=""
 				urls={{
 					contribute: '',
 					subscribe: '',
@@ -276,14 +275,6 @@ export const Writers = (): React.ReactNode => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
-				urls={{
-					contribute: '',
-					subscribe: '',
-					support: '',
-					supporter: '',
-				}}
-				edition="UK"
-				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 	</>
