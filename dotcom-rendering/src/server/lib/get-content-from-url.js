@@ -1,5 +1,9 @@
 const fetch = require('node-fetch');
 
+/**
+ * Get DCR content from a `theguardian.com` URL.
+ * Takes in optional `X-Gu-*` headers to send.
+ */
 async function getContentFromURL(_url, _headers) {
 	try {
 		if (!_url) {
@@ -15,19 +19,15 @@ async function getContentFromURL(_url, _headers) {
 		const jsonUrl = `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
 
 		// Explicitly pass through GU headers - this enables us to override properties such as region in CI
-		let guHeaders = {};
-		if (_headers) {
-			guHeaders = Object.keys(_headers)
-				.filter((key) => key.toLowerCase().startsWith('x-gu-'))
-				.reduce((result, key) => {
-					result[key] = _headers[key];
-					return result;
-				}, {});
-		}
+		const headers = Object.fromEntries(
+			Object.entries(_headers).filter(([key]) =>
+				key.toLowerCase().startsWith('x-gu-'),
+			),
+		);
 
-		const { html, ...config } = await fetch(jsonUrl, {
-			headers: guHeaders,
-		}).then((article) => article.json());
+		const { html, ...config } = await fetch(jsonUrl, { headers }).then(
+			(article) => article.json(),
+		);
 
 		return config;
 	} catch (error) {
