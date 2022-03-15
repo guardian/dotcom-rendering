@@ -6,7 +6,6 @@ import { SvgAlertRound } from '@guardian/source-react-components';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 
-import { VideoControls } from '@guardian/atoms-rendering/dist/types/types';
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
 
@@ -90,14 +89,9 @@ export const YoutubeBlockComponent = ({
 	stickyVideos,
 }: Props): JSX.Element => {
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
-	const [videoControls, setVideoControls] = useState<VideoControls>();
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
-
-	useEffect(() => {
-		setVideoControls(undefined);
-	}, [videoControls]);
 
 	useEffect(() => {
 		const defineConsentState = async () => {
@@ -194,7 +188,6 @@ export const YoutubeBlockComponent = ({
 		<div data-chromatic="ignore" data-component="youtube-atom">
 			<StickyVideo isActive={isPlaying && !!stickyVideos} videoId={id}>
 				<YoutubeAtom
-					videoControls={videoControls}
 					assetId={assetId}
 					overrideImage={
 						overrideImage
