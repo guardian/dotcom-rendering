@@ -32,8 +32,8 @@ const parse =
 	});
 
 const parseMany =
-	(blocks: Block[]): ((context: Context) => LiveBlock[]) =>
-	(context: Context): LiveBlock[] =>
+	(context: Context) =>
+	(blocks: Block[]): LiveBlock[] =>
 		blocks.map(parse(context));
 
 // ----- Exports ----- //

@@ -363,7 +363,7 @@ const fromCapiLiveBlog =
 			? 30
 			: 10;
 
-		const parsedBlocks = parseLiveBlocks(body)(context);
+		const parsedBlocks = parseLiveBlocks(context)(body);
 		const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
 		return {
 			design:
