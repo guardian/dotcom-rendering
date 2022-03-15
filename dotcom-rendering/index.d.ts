@@ -807,16 +807,6 @@ interface DCRServerDocumentData {
 	GA: GADataType;
 	linkedData: { [key: string]: any };
 }
-
-// All Components that are loaded with loadable
-// should be added here, this is the chunk name as
-// defined in loadable-manifest-browser.json
-type BlockElementType = string;
-interface ComponentNameChunkMap {
-	chunkName: string;
-	addWhen: BlockElementType;
-}
-
 interface CarouselImagesMap {
 	'300'?: string;
 	'460'?: string;

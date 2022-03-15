@@ -30,44 +30,38 @@ const fileExists = async (glob) => {
 	await fileExists(/react\.(?!legacy).*\.js$/);
 	await fileExists(/react\.legacy.*\.js$/);
 
-	// Check that loadable manifest files exist
-	await fileExists('loadable-manifest-browser.json');
-	await fileExists('loadable-manifest-browser.legacy.json');
+	// Check that the manifest files exist
+	await fileExists('manifest.json');
+	await fileExists('manifest.legacy.json');
 
-	// Check that the loadable manifest files return values for all the chunks
-	const loadableManifest = await loadJsonFile(
-		'./dist/loadable-manifest-browser.json',
-	);
-	const legacyLoadableManifest = await loadJsonFile(
-		'./dist/loadable-manifest-browser.legacy.json',
-	);
+	// Check that the manifest files return values for all the chunks
+	const manifest = await loadJsonFile('./dist/manifest.json');
+	const legacyManifest = await loadJsonFile('./dist/manifest.legacy.json');
 
 	[
-		'sentryLoader',
-		'bootCmp',
-		'ga',
-		'ophan',
-		'islands',
-		'dynamicImport',
-		'atomIframe',
-		'embedIframe',
-		'newsletterEmbedIframe',
-		'relativeTime',
-		'initDiscussion',
+		'sentryLoader.js',
+		'bootCmp.js',
+		'ga.js',
+		'ophan.js',
+		'islands.js',
+		'dynamicImport.js',
+		'atomIframe.js',
+		'embedIframe.js',
+		'newsletterEmbedIframe.js',
+		'relativeTime.js',
+		'initDiscussion.js',
 	].map((name) => {
-		if (loadableManifest.assetsByChunkName[name]) {
-			console.log(`Loadable manifest returned value ${name}`);
+		if (manifest[name]) {
+			console.log(`Manifest returned value ${name}`);
 		} else {
-			errorAndThrow(
-				`Loadable manifest did not return a value for ${name}`,
-			);
+			errorAndThrow(`Manifest did not return a value for ${name}`);
 		}
 
-		if (legacyLoadableManifest.assetsByChunkName[name]) {
-			console.log(`Legacy Loadable manifest returned value ${name}`);
+		if (legacyManifest[name]) {
+			console.log(`Legacy manifest returned value ${name}`);
 		} else {
 			errorAndThrow(
-				`Legacy Loadable manifest did not return a value for ${name}`,
+				`Legacy Loadabl manifest did not return a value for ${name}`,
 			);
 		}
 	});

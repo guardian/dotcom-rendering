@@ -46,7 +46,9 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		splitChunks: { cacheGroups: { default: false } },
 	},
 	plugins: [
-		new WebpackManifestPlugin(),
+		new WebpackManifestPlugin({
+			fileName: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
+		}),
 		...(DEV
 			? [
 					new GuStatsReportPlugin({

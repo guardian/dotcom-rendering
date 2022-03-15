@@ -10,7 +10,7 @@ import { decideFormat } from '../lib/decideFormat';
 import { Page } from '../components/Page';
 
 import { escapeData } from '../../lib/escapeData';
-import { ASSET_ORIGIN, getScriptArrayFromChunkName } from '../../lib/assets';
+import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 
 import { makeWindowGuardian } from '../../model/window-guardian';
 import { htmlTemplate } from './htmlTemplate';
@@ -114,16 +114,16 @@ export const document = ({ data }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
-			...getScriptArrayFromChunkName('bootCmp'),
-			...getScriptArrayFromChunkName('ophan'),
+			...getScriptArrayFromFile('bootCmp.js'),
+			...getScriptArrayFromFile('ophan.js'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
-			...getScriptArrayFromChunkName('sentryLoader'),
-			...getScriptArrayFromChunkName('coreVitals'),
-			...getScriptArrayFromChunkName('dynamicImport'),
+			...getScriptArrayFromFile('sentryLoader.ks'),
+			...getScriptArrayFromFile('coreVitals.js'),
+			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements && {
 				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
-			...getScriptArrayFromChunkName('islands'),
+			...getScriptArrayFromFile('islands.js'),
 		].filter(isDefined), // We use the TypeGuard to keep TS happy
 	);
 
@@ -135,14 +135,14 @@ export const document = ({ data }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		...getScriptArrayFromChunkName('atomIframe'),
-		...getScriptArrayFromChunkName('embedIframe'),
-		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
-		...getScriptArrayFromChunkName('relativeTime'),
-		...getScriptArrayFromChunkName('initDiscussion'),
+		...getScriptArrayFromFile('atomIframe.js'),
+		...getScriptArrayFromFile('embedIframe.js'),
+		...getScriptArrayFromFile('newsletterEmbedIframe.js'),
+		...getScriptArrayFromFile('relativeTime.js'),
+		...getScriptArrayFromFile('initDiscussion.js'),
 	]);
 
-	const gaChunk = getScriptArrayFromChunkName('ga');
+	const gaChunk = getScriptArrayFromFile('ga.js');
 	const modernScript = gaChunk.filter(
 		(script) => script && script.legacy === false,
 	)[0];

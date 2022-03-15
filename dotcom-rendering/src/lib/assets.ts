@@ -3,11 +3,13 @@ interface AssetHash {
 }
 
 let manifest: AssetHash = {};
+let legacyManifest: AssetHash = {};
 
 try {
 	// path is relative to the server bundle
 	// eslint-disable-next-line import/no-unresolved
 	manifest = require('./manifest.json');
+	legacyManifest = require('./manifest.legacy.json');
 } catch (e) {
 	// do nothing
 }
@@ -30,33 +32,30 @@ const decideAssetOrigin = (stage: string | undefined): string => {
 };
 export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
 
-export const getScriptNameFromFilename = (
-	filename: string,
-): string | undefined => {
-	const path = `./dist/${filename}.js`;
-	// const name = manifest[path]
-	return manifest[path];
-	// if (name)
-};
-
-export const getScriptArrayFromChunkName = (
-	chunkName: string,
+export const getScriptArrayFromFile = (
+	file: string,
 ): { src: string; legacy?: boolean }[] => {
-	const filename = getScriptNameFromFilename(chunkName);
-	const legacyFilename = getScriptNameFromFilename(`${chunkName}.legacy`);
+	const isDev = process.env.NODE_ENV === 'development';
+
+	const filename = isDev ? file : manifest[file];
+	const legacyFilename = isDev
+		? file.replace('.js', '.legacy.js')
+		: legacyManifest[file];
 
 	const scripts = [];
 
-	if (filename)
+	if (filename) {
 		scripts.push({
 			src: `${ASSET_ORIGIN}assets/${filename}`,
 			legacy: false,
 		});
-	if (legacyFilename)
+	}
+	if (legacyFilename) {
 		scripts.push({
 			src: `${ASSET_ORIGIN}assets/${legacyFilename}`,
 			legacy: true,
 		});
+	}
 
 	return scripts;
 };

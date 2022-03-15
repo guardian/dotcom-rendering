@@ -41,12 +41,12 @@ module.exports = ({ sessionId }) => ({
 				: callback();
 		},
 		({ request }, callback) => {
-			return request?.endsWith('loadable-manifest-browser.json')
+			return request?.endsWith('manifest.json')
 				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
-			return request?.endsWith('loadable-manifest-browser.legacy.json')
+			return request?.endsWith('manifest.legacy.json')
 				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
