@@ -117,7 +117,7 @@ export const StickyVideo = ({ isActive, children, videoId }: Props) => {
 	};
 
 	useEffect(() => {
-		setIsSticky(isActive && !isIntersecting);
+		setIsSticky(isActive && isIntersecting);
 	}, [isIntersecting, isActive]);
 
 	useEffect(() => {
