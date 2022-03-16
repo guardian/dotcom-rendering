@@ -4,11 +4,7 @@ import type { Branding } from '@guardian/apps-rendering-api-models/branding';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	remSpace,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { remSpace, textSans, until } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import Anchor from 'components/anchor';
 import { getFormat } from 'item';
@@ -84,11 +80,14 @@ const getStyles = (
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
-			return css(styles(format, lightModeImage, darkModeImage), blogStyles);
+			return css(
+				styles(format, lightModeImage, darkModeImage),
+				blogStyles,
+			);
 		default:
 			return styles(format, lightModeImage, darkModeImage);
 	}
-}
+};
 
 const OptionalLogo = (item: Item): JSX.Element =>
 	pipe(
