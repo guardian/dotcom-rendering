@@ -27,7 +27,6 @@ import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 
 import { extractNAV } from '../../model/extract-nav';
-import { fireAndResetHydrationState } from '../components/HydrateOnce';
 import { DecideLayout } from './DecideLayout';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 
@@ -64,7 +63,6 @@ const HydratedLayout = ({
 	ServerCAPI: CAPIType;
 	modifyPage?: () => void;
 }) => {
-	fireAndResetHydrationState();
 	const NAV = extractNAV(ServerCAPI.nav);
 	const format: ArticleFormat = decideFormat(ServerCAPI.format);
 
