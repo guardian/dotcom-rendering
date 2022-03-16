@@ -3,6 +3,10 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/source-foundations';
 
+import {
+	formatAsNewsletterDesign,
+	hackCardsToNewsLetterSignUpFormatBasedOnText,
+} from '../../layouts/lib/newsLetterHacks';
 import { StarRating } from '../StarRating/StarRating';
 import { CardHeadline } from '../CardHeadline';
 import { Avatar } from '../Avatar';
@@ -123,7 +127,7 @@ const fullCardImageAgeStyles = css`
 
 export const Card = ({
 	linkTo,
-	format,
+	format: originalformat, // temporary hack see below
 	headlineText,
 	headlineSize,
 	showQuotes,
@@ -149,6 +153,15 @@ export const Card = ({
 	dataLinkName,
 	branding,
 }: Props) => {
+	// temporary Hack - set card format based on article URL and headline
+	// TO DO - remove before merge. Should be setting the format on
+	// the article data of the related articles in production
+	const format =
+		hackCardsToNewsLetterSignUpFormatBasedOnText &&
+		linkTo.includes('sign-up') && headlineText.toLowerCase().includes('sign up')
+			? formatAsNewsletterDesign(originalformat)
+			: originalformat;
+
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
 	let contentCoverage: CardPercentageType | undefined;

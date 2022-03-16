@@ -1,6 +1,7 @@
 import { ArticleDesign, ArticleDisplay } from "@guardian/libs";
 
 export const hackToNewsletterSignupLayout = false;
+export const hackCardsToNewsLetterSignUpFormatBasedOnText = true
 
 export const formatAsNewsletterDesign = (format:ArticleFormat) => {
 	return {

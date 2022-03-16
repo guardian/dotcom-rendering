@@ -332,6 +332,8 @@ const textCardHeadline = (format: ArticleFormat): string => {
 				default:
 					return WHITE;
 			}
+		case ArticleDesign.NewsletterSignup:
+			return neutral[0];
 		default:
 			return BLACK;
 	}
@@ -535,6 +537,8 @@ const backgroundCard = (format: ArticleFormat): string => {
 				default:
 					return pillarPalette[format.theme][300];
 			}
+		case ArticleDesign.NewsletterSignup:
+				return neutral[100];
 		default:
 			return neutral[97];
 	}

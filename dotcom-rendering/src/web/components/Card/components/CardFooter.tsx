@@ -70,6 +70,10 @@ export const CardFooter = ({
 		);
 	}
 
+	if (format.design === ArticleDesign.NewsletterSignup) {
+		return null
+	}
+
 	if (format.design === ArticleDesign.Media) {
 		return (
 			<footer css={spaceBetween}>

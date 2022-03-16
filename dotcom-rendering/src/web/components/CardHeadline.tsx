@@ -173,9 +173,16 @@ export const CardHeadline = ({
 					)}
 
 					<span
-						css={css`
-							color: ${palette.text.cardHeadline};
-						`}
+						css={[
+							css`
+								color: ${palette.text.cardHeadline};
+							`,
+							format.design === ArticleDesign.NewsletterSignup &&
+								css`
+									${textSans.small({ lineHeight: 'tight' })}
+
+								`,
+						]}
 					>
 						{headlineText}
 					</span>
