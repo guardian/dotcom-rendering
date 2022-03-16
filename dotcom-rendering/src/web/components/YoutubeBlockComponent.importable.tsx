@@ -179,7 +179,6 @@ export const YoutubeBlockComponent = ({
 			case 'cued':
 			case 'end':
 			case 'paused':
-			default:
 				return setIsPlaying(false);
 		}
 	};
