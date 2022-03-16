@@ -132,9 +132,9 @@ export const adStyles = (format: ArticleFormat): SerializedStyles => {
 		.ad-placeholder {
 			margin: ${remSpace[4]} 0;
 
-			// &.hidden {
-			// 	display: none;
-			// }
+			&.hidden {
+				display: none;
+			}
 
 			color: ${neutral[20]};
 			background: ${backgroundColor(format)};
