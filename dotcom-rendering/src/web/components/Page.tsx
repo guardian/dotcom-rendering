@@ -4,12 +4,8 @@ import { focusHalo } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
-import { CommercialMetrics } from './CommercialMetrics.importable';
 import { Island } from './Island';
-import { FocusStyles } from './FocusStyles.importable';
-import { BrazeMessaging } from './BrazeMessaging.importable';
-import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
-import { AlreadyVisited } from './AlreadyVisited.importable';
+import { BootPage } from './BootPage.importable';
 
 type Props = {
 	CAPI: CAPIType;
@@ -44,24 +40,12 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 				<SkipTo id="keyevents" label="Skip to key events" />
 			)}
 			<Island clientOnly={true} deferUntil="idle">
-				<AlreadyVisited />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<FocusStyles />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<CommercialMetrics
-					enabled={CAPI.config.switches.commercialMetrics}
+				<BootPage
+					commercialMetrics={CAPI.config.switches.commercialMetrics}
 					switches={CAPI.config.switches}
 					isSensitive={CAPI.config.isSensitive}
 					isDev={CAPI.config.isDev}
-				/>
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<BrazeMessaging idApiUrl={CAPI.config.idApiUrl} />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<ReaderRevenueDev
+					idApiUrl={CAPI.config.idApiUrl}
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 				/>
 			</Island>
