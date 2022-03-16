@@ -4,22 +4,18 @@ import {
 	bypassCommercialMetricsSampling as switchOffSampling,
 } from '@guardian/commercial-core';
 import { getCookie } from '@guardian/libs';
-import { useAB } from '@guardian/ab-react';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
-import { WithABProvider } from './WithABProvider';
 import { useOnce } from '../lib/useOnce';
 import { tests } from '../experiments/ab-tests';
 import { spacefinderOkrMegaTest } from '../experiments/tests/spacefinder-okr-mega-test';
 import { commercialLazyLoadMargin } from '../experiments/tests/commercial-lazy-load-margin';
+import { useAB } from '../lib/useAB';
 
 type Props = {
 	enabled: boolean;
-	switches: Switches;
-	isSensitive: boolean;
-	isDev?: boolean;
 };
 
-const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
+export const CommercialMetrics = ({ enabled }: Props) => {
 	const ABTestAPI = useAB();
 	const adBlockerInUse = useAdBlockInUse();
 
@@ -35,7 +31,7 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 			spacefinderOkrMegaTest,
 			commercialLazyLoadMargin,
 		];
-		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
+		const shouldForceMetrics = ABTestAPI?.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
 
@@ -61,18 +57,3 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 	// We don’t render anything
 	return null;
 };
-
-export const CommercialMetrics = ({
-	enabled,
-	switches,
-	isSensitive,
-	isDev,
-}: Props) => (
-	<WithABProvider
-		abTestSwitches={switches}
-		pageIsSensitive={isSensitive}
-		isDev={!!isDev}
-	>
-		<CommercialMetricsWithAB enabled={enabled} />
-	</WithABProvider>
-);

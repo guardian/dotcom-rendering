@@ -662,9 +662,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format }: Props) => {
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}
-							switches={CAPI.config.switches}
-							pageIsSensitive={CAPI.config.isSensitive}
-							isDev={CAPI.config.isDev}
 						/>
 					</ElementContainer>
 				)}
@@ -715,20 +712,19 @@ export const InteractiveLayout = ({ CAPI, NAV, format }: Props) => {
 			<BannerWrapper data-print-layout="hide">
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
 						contributionsServiceUrl={CAPI.contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
-						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}
 						isPaidContent={CAPI.pageType.isPaidContent}
 						isPreview={!!CAPI.config.isPreview}
+						isSensitive={CAPI.config.isSensitive}
 						keywordsId={CAPI.config.keywordIds}
 						pageId={CAPI.pageId}
-						pageIsSensitive={CAPI.config.isSensitive}
 						section={CAPI.config.section}
 						sectionName={CAPI.sectionName}
 						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						switches={CAPI.config.switches}
 						tags={CAPI.tags}
 					/>
 				</Island>

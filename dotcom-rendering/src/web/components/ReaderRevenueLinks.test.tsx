@@ -1,7 +1,8 @@
 import { render, wait } from '@testing-library/react';
-import { ABProvider } from '@guardian/ab-react';
+import { AB } from '@guardian/ab-core';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
+import { setABTests } from '../lib/useAB';
 
 const shouldHideSupportMessaging: {
 	[key: string]: any;
@@ -19,19 +20,15 @@ jest.mock('@guardian/libs', () => ({
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';
 
-const AbProvider: React.FC = ({ children }) => {
-	return (
-		<ABProvider
-			mvtMaxValue={1000000}
-			mvtId={1234}
-			pageIsSensitive={false}
-			abTestSwitches={{}}
-			arrayOfTestObjects={[]}
-		>
-			{children}
-		</ABProvider>
-	);
-};
+setABTests(
+	new AB({
+		mvtMaxValue: 1000000,
+		mvtId: 1234,
+		pageIsSensitive: false,
+		abTestSwitches: {},
+		arrayOfTestObjects: [],
+	}),
+);
 
 describe('ReaderRevenueLinks', () => {
 	const urls = {
@@ -45,16 +42,14 @@ describe('ReaderRevenueLinks', () => {
 		shouldHideSupportMessaging.mockReturnValue(true);
 
 		const { getByText } = render(
-			<AbProvider>
-				<ReaderRevenueLinks
-					urls={urls}
-					edition="US"
-					dataLinkNamePrefix="nav2 : "
-					inHeader={true}
-					remoteHeader={false}
-					contributionsServiceUrl={contributionsServiceUrl}
-				/>
-			</AbProvider>,
+			<ReaderRevenueLinks
+				urls={urls}
+				edition="US"
+				dataLinkNamePrefix="nav2 : "
+				inHeader={true}
+				remoteHeader={false}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>,
 		);
 
 		await wait(() => expect(getByText('Thank you')).toBeInTheDocument());
@@ -64,17 +59,14 @@ describe('ReaderRevenueLinks', () => {
 		shouldHideSupportMessaging.mockReturnValue(false);
 
 		const { getByText } = render(
-			<AbProvider>
-				<ReaderRevenueLinks
-					urls={urls}
-					edition={edition}
-					dataLinkNamePrefix="nav2 : "
-					inHeader={true}
-					remoteHeader={false}
-					contributionsServiceUrl={contributionsServiceUrl}
-				/>
-				,
-			</AbProvider>,
+			<ReaderRevenueLinks
+				urls={urls}
+				edition={edition}
+				dataLinkNamePrefix="nav2 : "
+				inHeader={true}
+				remoteHeader={false}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>,
 		);
 
 		await wait(() =>

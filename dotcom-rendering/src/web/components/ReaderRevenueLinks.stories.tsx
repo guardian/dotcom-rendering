@@ -1,28 +1,25 @@
 import { css } from '@emotion/react';
 
 import { brandBackground } from '@guardian/source-foundations';
-import { ABProvider } from '@guardian/ab-react';
 
+import { AB } from '@guardian/ab-core';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
+import { setABTests } from '../lib/useAB';
 
 export default {
 	component: ReaderRevenueLinks,
 	title: 'Components/ReaderRevenueLinks',
 };
 
-const AbProvider: React.FC = ({ children }) => {
-	return (
-		<ABProvider
-			mvtMaxValue={1000000}
-			mvtId={1234}
-			pageIsSensitive={false}
-			abTestSwitches={{}}
-			arrayOfTestObjects={[]}
-		>
-			{children}
-		</ABProvider>
-	);
-};
+setABTests(
+	new AB({
+		mvtMaxValue: 1000000,
+		mvtId: 1234,
+		pageIsSensitive: false,
+		abTestSwitches: {},
+		arrayOfTestObjects: [],
+	}),
+);
 
 const revenueUrls = {
 	subscribe: '',
@@ -43,7 +40,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 			background-color: ${brandBackground.primary};
 		`}
 	>
-		<AbProvider>{children}</AbProvider>
+		{children}
 	</div>
 );
 

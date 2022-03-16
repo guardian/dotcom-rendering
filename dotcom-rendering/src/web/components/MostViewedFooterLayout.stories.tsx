@@ -1,9 +1,9 @@
 import fetchMock from 'fetch-mock';
 
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { ABProvider } from '@guardian/ab-react';
 
 import React, { useEffect } from 'react';
+import { AB } from '@guardian/ab-core';
 import { ElementContainer } from './ElementContainer';
 import {
 	responseWithTwoTabs,
@@ -13,6 +13,7 @@ import {
 
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
+import { setABTests } from '../lib/useAB';
 
 const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
@@ -29,19 +30,15 @@ export default {
 	},
 };
 
-const AbProvider: React.FC = ({ children }) => {
-	return (
-		<ABProvider
-			mvtMaxValue={1000000}
-			mvtId={1234}
-			pageIsSensitive={false}
-			abTestSwitches={{}}
-			arrayOfTestObjects={[]}
-		>
-			{children}
-		</ABProvider>
-	);
-};
+setABTests(
+	new AB({
+		mvtMaxValue: 1000000,
+		mvtId: 1234,
+		pageIsSensitive: false,
+		abTestSwitches: {},
+		arrayOfTestObjects: [],
+	}),
+);
 
 export const withTwoTabs = () => {
 	fetchMock.restore().getOnce('*', {
@@ -51,22 +48,17 @@ export const withTwoTabs = () => {
 
 	return (
 		<HydratedLayout>
-			<AbProvider>
-				<ElementContainer>
-					<MostViewedFooterLayout
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
-						}}
-						sectionName="politics"
-						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-						switches={{}}
-						pageIsSensitive={false}
-						isDev={false}
-					/>
-				</ElementContainer>
-			</AbProvider>
+			<ElementContainer>
+				<MostViewedFooterLayout
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+					sectionName="politics"
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				/>
+			</ElementContainer>
 		</HydratedLayout>
 	);
 };
@@ -80,21 +72,16 @@ export const withOneTabs = () => {
 
 	return (
 		<HydratedLayout>
-			<AbProvider>
-				<ElementContainer>
-					<MostViewedFooterLayout
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
-						}}
-						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-						switches={{}}
-						pageIsSensitive={false}
-						isDev={false}
-					/>
-				</ElementContainer>
-			</AbProvider>
+			<ElementContainer>
+				<MostViewedFooterLayout
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				/>
+			</ElementContainer>
 		</HydratedLayout>
 	);
 };
@@ -108,21 +95,16 @@ export const withNoMostSharedImage = () => {
 
 	return (
 		<HydratedLayout>
-			<AbProvider>
-				<ElementContainer>
-					<MostViewedFooterLayout
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Standard,
-							theme: ArticlePillar.News,
-						}}
-						ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-						switches={{}}
-						pageIsSensitive={false}
-						isDev={false}
-					/>
-				</ElementContainer>
-			</AbProvider>
+			<ElementContainer>
+				<MostViewedFooterLayout
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
+				/>
+			</ElementContainer>
 		</HydratedLayout>
 	);
 };
