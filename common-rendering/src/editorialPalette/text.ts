@@ -22,6 +22,13 @@ import { Colour } from '.';
 
 // ----- Functions ----- //
 
+const branding = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+}
+const brandingDark = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+}
+
 const headline = (format: ArticleFormat): Colour => {
 	if (
 		format.display === ArticleDisplay.Immersive ||
@@ -486,6 +493,8 @@ const pagination = (format: ArticleFormat): Colour => {
 
 const text = {
 	articleLink,
+	branding,
+	brandingDark,
 	bylineLeftColumn,
 	bylineInline,
 	bylineDark,
