@@ -20,6 +20,8 @@ import { Island } from '../components/Island';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { NewsLetterSignupContent } from '../components/NewsLetterSignupContent';
 import { NewsLetterSignupBanner } from '../components/NewsLetterSignupBanner';
+import { NewsletterPromotionBanner } from '../components/NewsletterPromotionBanner';
+
 
 interface Props {
 	CAPI: CAPIType;
@@ -27,6 +29,33 @@ interface Props {
 	format: ArticleFormat;
 	palette: Palette;
 }
+
+function isBannerElement(element:CAPIElement) {
+	return element._type==='model.dotcomrendering.pageElements.EmbedBlockElement' && element.html.includes('data-is-banner=\"true\"');
+}
+
+function removeBannerElements(CAPI:CAPIType): [CAPIType, EmbedBlockElement[]] {
+	const bannerElements: EmbedBlockElement[] = []
+	const filteredCAPI = {...CAPI}
+
+	filteredCAPI.blocks.forEach(block => {
+		const bannersInThisBlock:EmbedBlockElement[] = []
+		const othersInThisBlock:CAPIElement[] = []
+		block.elements.forEach(element => {
+			if (isBannerElement(element)) {
+				bannersInThisBlock.push(element as EmbedBlockElement)
+			} else {
+				othersInThisBlock.push(element)
+			}
+		})
+
+		bannerElements.push(...bannersInThisBlock)
+		block.elements = othersInThisBlock
+	})
+
+	return [filteredCAPI, bannerElements]
+}
+
 
 const newslettersSubNav: SubNavType = {
 	links: [
@@ -41,12 +70,13 @@ const newslettersSubNav: SubNavType = {
 const THERE_SHOULD_BE_MERCH_AD_SLOTS = false;
 
 export interface NewsletterData {
-	previewHref: string
+	previewHref: string;
 }
-function getNewsletterDataForDemo():NewsletterData {
+function getNewsletterDataForDemo(): NewsletterData {
 	return {
-		previewHref: "https://www.theguardian.com/world/series/guardian-morning-briefing/latest/email"
-	}
+		previewHref:
+			'https://www.theguardian.com/world/series/guardian-morning-briefing/latest/email',
+	};
 }
 
 export const NewsletterSignupLayout = ({
@@ -60,7 +90,8 @@ export const NewsletterSignupLayout = ({
 		theme: getCurrentPillar(CAPI),
 	};
 
-	const newsletterData = getNewsletterDataForDemo()
+	const newsletterData = getNewsletterDataForDemo();
+	const [CAPIWithoutBanners, bannerElements] = removeBannerElements(CAPI);
 
 	return (
 		<>
@@ -154,10 +185,19 @@ export const NewsletterSignupLayout = ({
 					<NewsLetterSignupContent
 						format={format}
 						palette={palette}
-						CAPI={CAPI}
+						CAPI={CAPIWithoutBanners}
 						newsletterData={newsletterData}
 					/>
 				</ElementContainer>
+
+				{!!bannerElements[0] && (
+					<ElementContainer padded={false}>
+						<NewsletterPromotionBanner
+							label="You also might enjoy"
+							element={bannerElements[0]}
+						/>
+					</ElementContainer>
+				)}
 
 				<Island
 					clientOnly={true}

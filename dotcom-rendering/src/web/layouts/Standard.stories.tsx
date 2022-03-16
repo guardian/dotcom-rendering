@@ -115,6 +115,37 @@ export const NewsletterSignupStory = (): React.ReactNode => {
 				"_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
 				"elementId": "dcd0a6cf-0e79-4065-8aa3-94c1833ac7a4"
 			},
+			{
+				"html": `
+					<style>
+						[data-is-banner=true] {
+							background-color: purple;
+							border: 2px dashed white;
+							border-radius: 5px;
+							padding: 8px;
+							color: white;
+						}
+						[data-is-banner=true] h3 {
+							font-size: 150%;
+						}
+						[data-is-banner=true] span {
+							font-size: 100%;
+						}
+					</style>
+					<div data-is-banner=\"true\">
+						<h3>The Long Read</h3>
+						<span>ADVERT FOR THE LONG READ DEFINED AS AN EMBED WITHIN THE COMPOSER CONTENT</span>
+					</div>
+				`,
+				"safe": true,
+				"alt": "ADVERT FOR THE LONG READ",
+				"isMandatory": true,
+				"isThirdPartyTracking": false,
+				"source": "The Guardian",
+				"sourceDomain": "theguardian.com",
+				"_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
+				"elementId": "dcd0a6cf-0e79-4065-8aa3-94c1833ac7a5"
+			},
 		]} ]
 	});
 
