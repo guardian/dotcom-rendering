@@ -3,6 +3,7 @@ import { BrazeMessaging } from './BrazeMessaging';
 import { CommercialMetrics } from './CommercialMetrics';
 import { FocusStyles } from './FocusStyles';
 import { ReaderRevenueDev } from './ReaderRevenueDev';
+import { WeAreHiring } from './WeAreHiring';
 
 type Props = {
 	commercialMetrics: boolean;
@@ -32,6 +33,7 @@ export const BootPage = ({
 	 *
 	 * */
 	<>
+		<WeAreHiring />
 		<FocusStyles />
 		<AlreadyVisited />
 		<CommercialMetrics
