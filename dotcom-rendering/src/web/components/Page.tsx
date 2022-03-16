@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { Global, css } from '@emotion/react';
-import { focusHalo } from '@guardian/source-foundations';
+import { focusHalo, brandAlt, neutral } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
@@ -34,6 +34,10 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 					/* The not(.src...) selector is to work with Source's FocusStyleManager. */
 					*:focus {
 						${focusHalo}
+					}
+					::selection {
+						background: ${brandAlt[400]};
+						color: ${neutral[7]};
 					}
 				`}
 			/>
