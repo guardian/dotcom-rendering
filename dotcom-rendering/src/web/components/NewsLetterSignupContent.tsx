@@ -13,6 +13,7 @@ import { ArticleHeadline } from './ArticleHeadline';
 import type { NewsletterData } from '../layouts/NewsletterSignupLayout';
 import { ArticleBody } from './ArticleBody';
 import { ArticleContainer } from './ArticleContainer';
+import { PrivacyText } from './PrivacyText';
 
 type Props = {
 	format: ArticleFormat;
@@ -277,36 +278,7 @@ export const NewsLetterSignupContent = ({
 
 			<GridItem area="privacy">
 				<div css={privacyStyles}>
-					<p>
-						<b>Privacy Notice:</b> Our newsletters may contain info
-						about charities, online ads, and content funded by
-						outside parties. For more information click{' '}
-						<a
-							target="_blank"
-							href="/help/privacy-policy"
-							aria-label="our privacy policy"
-						>
-							here
-						</a>{' '}
-						for our privacy policy. We operate Google reCAPTCHA to
-						protect our website and the{' '}
-						<a
-							href="https://policies.google.com/privacy"
-							target="_blank"
-							aria-label="google's privacy policy"
-						>
-							Google Privacy Policy
-						</a>{' '}
-						and{' '}
-						<a
-							href="https://policies.google.com/terms"
-							target="_blank"
-							aria-label="google's terms of service"
-						>
-							Terms of Services
-						</a>{' '}
-						apply.
-					</p>
+					<PrivacyText recaptcha={true} subject='newsletters' />
 				</div>
 			</GridItem>
 		</NewsletterContentGrid>
