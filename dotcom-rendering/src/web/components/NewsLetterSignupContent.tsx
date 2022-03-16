@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from, until, textSans } from '@guardian/source-foundations';
+import { from, until, textSans, brandAlt, neutral } from '@guardian/source-foundations';
 
 import { ArticleDesign } from '@guardian/libs';
 import { SvgEnvelope } from '@guardian/source-react-components';
@@ -134,7 +134,7 @@ const newsletterFactStyle = (
 		: ''}
 
 	figure {
-		background-color: #ffe500;
+		background-color: ${brandAlt[400]};
 		padding: 6px;
 		border-radius: 50%;
 		display: inline-flex;
@@ -145,7 +145,7 @@ const newsletterFactStyle = (
 
 	span {
 		${textSans.medium({ fontWeight: 'bold' })}
-		color: ${params.color || '#121212'};
+		color: ${params.color || neutral[7]};
 	}
 `;
 
@@ -182,7 +182,7 @@ const imageWrapperLinkStyle = css`
 	display: inline-block;
 
 	p {
-		background-color: #ffe500;
+		background-color: ${brandAlt[400]};
 		padding: 5px 10px;
 	}
 `;

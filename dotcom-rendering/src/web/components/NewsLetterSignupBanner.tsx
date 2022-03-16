@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source-foundations';
+import { from, until, brand, brandAlt } from '@guardian/source-foundations';
 
 import Logo from '../../static/logos/guardian-newsletters-logo.svg';
 
@@ -7,8 +7,8 @@ type Props = {
 };
 
 const bannerStyle = css`
-	background-color: #052962;
-	color: yellow;
+	background-color: ${brand[400]};
+	color: ${brandAlt[400]};
 	padding: 10px 0;
 	font-weight: bold;
 `;
