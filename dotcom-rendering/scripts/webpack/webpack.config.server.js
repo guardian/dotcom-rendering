@@ -65,7 +65,7 @@ module.exports = ({ sessionId }) => ({
 	module: {
 		rules: [
 			{
-				test: /(\.tsx|\.js|\.ts)$/,
+				test: /(\.tsx?|\.jsx?)$/,
 				exclude: {
 					and: [/node_modules/],
 					not: [/@guardian/, /dynamic-import-polyfill/],
