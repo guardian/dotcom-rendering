@@ -11,8 +11,14 @@ import {
 	article,
 	comment,
 	editorial,
+	feature,
+	interview,
 	letter,
 	matchReport,
+	photoEssay,
+	printShop,
+	quiz,
+	recipe,
 	review,
 } from 'fixtures/item';
 import { deadBlog, live } from 'fixtures/live';
@@ -69,6 +75,78 @@ export const MatchReport = (): React.ReactNode => {
 	);
 };
 MatchReport.story = { name: 'Match Report' };
+
+export const PrintShop = (): React.ReactNode => {
+	return (
+		<Standard item={printShop}>
+			{renderAll(
+				formatFromItem(printShop, some(ArticleDisplay.Standard)),
+				partition(printShop.body).oks,
+			)}
+		</Standard>
+	);
+};
+PrintShop.story = { name: 'PrintShop' };
+
+export const PhotoEssay = (): React.ReactNode => {
+	return (
+		<Standard item={photoEssay}>
+			{renderAll(
+				formatFromItem(photoEssay, some(ArticleDisplay.Standard)),
+				partition(photoEssay.body).oks,
+			)}
+		</Standard>
+	);
+};
+PhotoEssay.story = { name: 'Photo Essay' };
+
+export const Feature = (): React.ReactNode => {
+	return (
+		<Standard item={feature}>
+			{renderAll(
+				formatFromItem(feature, some(ArticleDisplay.Standard)),
+				partition(feature.body).oks,
+			)}
+		</Standard>
+	);
+};
+Feature.story = { name: 'Feature' };
+
+export const Interview = (): React.ReactNode => {
+	return (
+		<Standard item={interview}>
+			{renderAll(
+				formatFromItem(interview, some(ArticleDisplay.Standard)),
+				partition(interview.body).oks,
+			)}
+		</Standard>
+	);
+};
+Interview.story = { name: 'Interview' };
+
+export const Quiz = (): React.ReactNode => {
+	return (
+		<Standard item={quiz}>
+			{renderAll(
+				formatFromItem(quiz, some(ArticleDisplay.Standard)),
+				partition(quiz.body).oks,
+			)}
+		</Standard>
+	);
+};
+Quiz.story = { name: 'Quiz' };
+
+export const Recipe = (): React.ReactNode => {
+	return (
+		<Standard item={recipe}>
+			{renderAll(
+				formatFromItem(recipe, some(ArticleDisplay.Standard)),
+				partition(recipe.body).oks,
+			)}
+		</Standard>
+	);
+};
+Recipe.story = { name: 'Recipe' };
 
 export const CommentItem = (): React.ReactNode => {
 	return (

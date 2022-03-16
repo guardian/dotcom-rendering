@@ -209,8 +209,8 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: some(''),
-					newest: some(''),
+					newer: some('?page=with:block-0'),
+					newest: some('?page=with:block-0'),
 					older: none,
 					oldest: none,
 					numberOfPages: 2,
@@ -237,8 +237,8 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: some(''),
-					newest: some(''),
+					newer: some('?page=with:block-0'),
+					newest: some('?page=with:block-0'),
 					older: some(`?page=with:block-24`),
 					oldest: some(`?page=with:block-34`),
 					numberOfPages: 4,
@@ -267,7 +267,7 @@ describe('pagination', () => {
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
 				newer: some(`?page=with:block-14`),
-				newest: some(''),
+				newest: some('?page=with:block-0'),
 				older: some(`?page=with:block-34`),
 				oldest: some(`?page=with:block-44`),
 				numberOfPages: 5,
@@ -295,7 +295,7 @@ describe('pagination', () => {
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
 				newer: some(`?page=with:block-24`),
-				newest: some(''),
+				newest: some('?page=with:block-0'),
 				older: some(`?page=with:block-44`),
 				oldest: some(`?page=with:block-44`),
 				numberOfPages: 5,
@@ -325,7 +325,7 @@ describe('pagination', () => {
 				older: none,
 				oldest: none,
 				newer: some(`?page=with:block-34`),
-				newest: some(''),
+				newest: some('?page=with:block-0'),
 				numberOfPages: 5,
 			};
 

@@ -167,7 +167,9 @@ const columnStyle = css`
 		position: relative;
 
 		:after {
-			content: none;
+			height: 100%;
+			left: 0;
+			width: 1px;
 		}
 
 		:first-of-type {
@@ -199,7 +201,7 @@ export const Column = ({
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 
-                We therefore use JS to make the Nav elements more accessibile. We add a
+                We therefore use JS to make the Nav elements more accessible. We add a
                 keydown `addEventListener` to toggle the column drop down.
                 This is not a perfect solution as not all screen readers support JS
                 https://webaim.org/projects/screenreadersurvey8/#javascript

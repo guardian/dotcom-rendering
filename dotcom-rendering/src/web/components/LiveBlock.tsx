@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
+import { joinUrl } from '@guardian/libs';
 import { renderArticleElement } from '../lib/renderElement';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -15,6 +16,9 @@ type Props = {
 	adTargeting: AdTargeting;
 	host?: string;
 	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
 	isLiveUpdate?: boolean;
 };
 
@@ -24,13 +28,16 @@ export const LiveBlock = ({
 	pageId,
 	webTitle,
 	adTargeting,
-	host,
+	host = 'https://www.theguardian.com',
 	ajaxUrl,
+	isAdFreeUser,
+	isSensitive,
+	switches,
 	isLiveUpdate,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
-	const blockLink = `${pageId}#block-${block.id}`;
+	const blockLink = `${joinUrl(host, pageId)}#block-${block.id}`;
 
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
@@ -61,6 +68,9 @@ export const LiveBlock = ({
 					index,
 					pageId,
 					webTitle,
+					isAdFreeUser,
+					isSensitive,
+					switches,
 				}),
 			)}
 			<footer

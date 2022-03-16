@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 import { decideLogo } from '../../../lib/decideLogo';
+import { trackSponsorLogoLinkClick } from '../../../browser/ga/ga';
 
 type Props = {
 	branding: Branding;
@@ -50,6 +51,12 @@ export const CardBranding = ({ branding, format }: Props) => {
 				data-sponsor={branding.sponsorName.toLowerCase()}
 				rel="nofollow"
 				aria-label={`Visit the ${branding.sponsorName} website`}
+				onClick={() =>
+					trackSponsorLogoLinkClick(
+						branding.sponsorName.toLowerCase(),
+					)
+				}
+				data-cy="card-branding-logo"
 			>
 				<img
 					css={logoImageStyle}
