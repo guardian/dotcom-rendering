@@ -25,6 +25,7 @@ import { Colour } from '.';
 const branding = (_format: ArticleFormat): Colour => {
 	return neutral[20];
 }
+
 const brandingDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 }
