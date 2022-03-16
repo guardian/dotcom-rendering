@@ -65,7 +65,6 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 				/>
 			</Island>
-			<div id="react-root" />
 			<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
 		</StrictMode>
 	);
