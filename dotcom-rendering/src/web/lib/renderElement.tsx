@@ -383,6 +383,7 @@ export const renderElement = ({
 						role={element.role}
 						format={format}
 						elementId={element.elementId}
+						caption={element.caption}
 					/>
 				</Island>,
 			];
