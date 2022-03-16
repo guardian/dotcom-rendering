@@ -1,12 +1,10 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 // This file contains some checks that the building and bundling
 // is working correctly between modern and legacy scripts.
 // It checks the following:
-// 1. That there is a react and react.legacy file output in dist
-// 2. That the manifest files are output
-// 3. That the manifest files contain at least the entry points under the expected property
-// 4. That the javascript bundles are transpiling to the correct levels
+// 1. That the manifest files are output
+// 2. That the manifest files contain at least the entry points under the expected property
 
-const fs = require('fs');
 const find = require('find');
 const loadJsonFile = require('load-json-file');
 
@@ -26,10 +24,6 @@ const fileExists = async (glob) => {
 };
 
 (async () => {
-	// Check that there is a `react` and `react.legacy` in dist folder.
-	await fileExists(/react\.(?!legacy).*\.js$/);
-	await fileExists(/react\.legacy.*\.js$/);
-
 	// Check that the manifest files exist
 	await fileExists('manifest.json');
 	await fileExists('manifest.legacy.json');
@@ -65,41 +59,4 @@ const fileExists = async (glob) => {
 			);
 		}
 	});
-
-	// Check that the react bundles are transpiling
-	// Simply check that each of the react bundles have or do not have
-	// an async e (as in async await) code as modern bundle doesn't transpile this
-	// Brittle, but it works...
-
-	const readReact = new Promise((resolve, reject) => {
-		find.file(/react\.(?!legacy).*\.js$/, `./dist/`, (files) => {
-			resolve(files[0]);
-		});
-	});
-
-	const readReactLegacy = new Promise((resolve, reject) => {
-		find.file(/react\.legacy.*\.js$/, `./dist/`, (files) => {
-			resolve(files[0]);
-		});
-	});
-
-	await readReact
-		.then((path) => fs.promises.readFile(path, 'utf8'))
-		.then((fileContents) => {
-			if (fileContents.includes('async e')) {
-				console.log('Modern bundle contains async e string');
-			} else {
-				errorAndThrow(`Modern bundle does not contain async e string`);
-			}
-		});
-
-	await readReactLegacy
-		.then((path) => fs.promises.readFile(path, 'utf8'))
-		.then((fileContents) => {
-			if (!fileContents.includes('async e')) {
-				console.log('Legacy bundle does not contain async e string');
-			} else {
-				errorAndThrow(`Legacy bundle contains async e string`);
-			}
-		});
 })();
