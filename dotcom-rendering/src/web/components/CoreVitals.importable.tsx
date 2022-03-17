@@ -26,7 +26,6 @@ const CoreVitalsWithAB = () => {
 		team: 'dotcom',
 	});
 
-
 	const testsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
 	];

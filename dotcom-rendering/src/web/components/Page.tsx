@@ -10,6 +10,7 @@ import { FocusStyles } from './FocusStyles.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { CoreVitals } from './CoreVitals.importable';
 
 type Props = {
 	CAPI: CAPIType;
@@ -56,6 +57,13 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			<Island clientOnly={true} deferUntil="idle">
 				<CommercialMetrics
 					enabled={CAPI.config.switches.commercialMetrics}
+					switches={CAPI.config.switches}
+					isSensitive={CAPI.config.isSensitive}
+					isDev={CAPI.config.isDev}
+				/>
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<CoreVitals
 					switches={CAPI.config.switches}
 					isSensitive={CAPI.config.isSensitive}
 					isDev={CAPI.config.isDev}
