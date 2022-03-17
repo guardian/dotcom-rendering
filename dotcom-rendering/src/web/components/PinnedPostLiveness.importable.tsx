@@ -29,30 +29,31 @@ export const PinnedPostLiveness = ({}) => {
 
 	const hasBeenSeen = useRef(false);
 
-	useEffect(() => {
-		const handleClickTracking = () => {
-			if (pinnedPostCheckBox instanceof HTMLInputElement) {
-				if (pinnedPostCheckBox.checked) {
-					submitComponentEvent({
-						component: {
-							componentType: 'LIVE_BLOG_PINNED_POST',
-							id: pinnedPost?.id,
-						},
-						action: 'CLICK',
-						value: 'show-less',
-					});
-				} else {
-					submitComponentEvent({
-						component: {
-							componentType: 'LIVE_BLOG_PINNED_POST',
-							id: pinnedPost?.id,
-						},
-						action: 'CLICK',
-						value: 'show-more',
-					});
-				}
+	const handleClickTracking = () => {
+		if (pinnedPostCheckBox instanceof HTMLInputElement) {
+			if (pinnedPostCheckBox.checked) {
+				submitComponentEvent({
+					component: {
+						componentType: 'LIVE_BLOG_PINNED_POST',
+						id: pinnedPost?.id,
+					},
+					action: 'CLICK',
+					value: 'show-less',
+				});
+			} else {
+				submitComponentEvent({
+					component: {
+						componentType: 'LIVE_BLOG_PINNED_POST',
+						id: pinnedPost?.id,
+					},
+					action: 'CLICK',
+					value: 'show-more',
+				});
 			}
-		};
+		}
+	};
+
+	useEffect(() => {
 		pinnedPostCheckBox?.addEventListener('change', handleClickTracking);
 
 		return () => {
