@@ -786,7 +786,7 @@ const borderStandfirst = (format: ArticleFormat): string => {
 			case ArticleSpecial.Labs:
 				return labs[300];
 			case ArticlePillar.News:
-				return '#874444';
+				return '#7f3a3a';
 		}
 	if (format.design === ArticleDesign.DeadBlog) return '#BDBDBD';
 	return border.secondary;
