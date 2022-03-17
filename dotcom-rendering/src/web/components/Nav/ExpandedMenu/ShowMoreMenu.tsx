@@ -21,6 +21,7 @@ const showMoreTextStyles = css`
 	display: block;
 	height: 100%;
 
+	/* stylelint-disable-next-line selector-type-no-unknown */
 	${`#${navInputCheckboxId}`}:checked ~ div label & svg {
 		transform: translateY(-2px) rotate(-180deg);
 		:hover {
