@@ -13,8 +13,9 @@ jobs:
       - uses: guardian/actions-setup-node@main
         with:
           cache: "yarn"
+      - run: make install
       - name: Lint
-        run: yarn lint
+        run: make lint
         working-directory: dotcom-rendering
       - name: Stylelint
         run: make stylelint
