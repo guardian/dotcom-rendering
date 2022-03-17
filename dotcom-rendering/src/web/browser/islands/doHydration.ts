@@ -24,6 +24,7 @@ export const doHydration = (name: string, data: any, element: HTMLElement) => {
 	start();
 	import(
 		/* webpackInclude: /\.importable\.tsx$/ */
+		/* webpackChunkName: "[request]" */
 		`../../components/${name}.importable`
 	)
 		.then((module) => {
