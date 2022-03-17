@@ -97,7 +97,7 @@ export const LiveBlogRenderer = ({
 							switches={switches}
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
-							isPinnedPost={true}
+							isPinnedPost={false}
 						/>
 					</>
 				);
