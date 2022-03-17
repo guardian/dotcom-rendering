@@ -1,21 +1,21 @@
 name: DCR lint 🔎
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
+  push:
+    paths-ignore:
+      - "apps-rendering/**"
 
 jobs:
-    lint:
-        name: DCR Lint
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: guardian/actions-setup-node@main
-						  with:
-							  cache: 'yarn'
-            - name: Lint
-              run: yarn lint
-              working-directory: dotcom-rendering
-						-	name: Stylelint
-						  run: make stylelint
-							working-directory: dotcom-rendering
+  lint:
+    name: DCR Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: guardian/actions-setup-node@main
+        with:
+          cache: "yarn"
+      - name: Lint
+        run: yarn lint
+        working-directory: dotcom-rendering
+      - name: Stylelint
+        run: make stylelint
+        working-directory: dotcom-rendering
