@@ -10,7 +10,7 @@ import {
 	focusHalo,
 	height,
 } from '@guardian/source-foundations';
-import { Props, SvgMinus, SvgPlus } from '@guardian/source-react-components';
+import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { css } from '@emotion/react';
 
@@ -126,12 +126,12 @@ const buttonIcon = css`
 	}
 `;
 
-export interface PinnedPostProps extends Props {
+type Props = {
 	pinnedPost: Block;
 	children: React.ReactNode;
-}
+};
 
-export const PinnedPost = ({ pinnedPost, children }: PinnedPostProps) => {
+export const PinnedPost = ({ pinnedPost, children }: Props) => {
 	return (
 		<div css={[pinnedPostContainer]} data-gu-marker="pinned-post">
 			<input
