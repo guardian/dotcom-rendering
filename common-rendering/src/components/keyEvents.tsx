@@ -184,7 +184,15 @@ const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
 					<time
 						dateTime={keyEvent.date.toISOString()}
 						data-relativeformat="med"
-						title={keyEvent.date.toLocaleTimeString()}
+						title={`${keyEvent.date.toLocaleDateString('en-GB', {
+							hour: '2-digit',
+							minute: '2-digit',
+							weekday: 'long',
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+							timeZoneName: 'long',
+						})}`}
 						css={timeStyles(supportsDarkMode)}
 					>
 						{timeAgo(keyEvent.date.getTime(), { verbose: true })}
