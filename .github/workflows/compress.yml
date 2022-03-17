@@ -17,3 +17,6 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           build-script: build:dcr
+
+          # https://github.com/preactjs/compressed-size-action#increasing-the-required-threshold
+          minimum-change-threshold: 100
