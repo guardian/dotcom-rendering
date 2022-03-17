@@ -1,4 +1,4 @@
-export const baseBlock: Block = {
+export const liveBlock: Block = {
 	secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
 	blockFirstPublishedDisplay: '19.30 GMT',
 	blockLastUpdated: 1613763519000,

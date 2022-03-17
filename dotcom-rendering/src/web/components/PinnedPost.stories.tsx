@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { from, breakpoints } from '@guardian/source-foundations';
 import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { baseBlock } from '../../../fixtures/manual/liveBlock';
+import { liveBlock } from '../../../fixtures/manual/liveBlock';
 import { LiveBlock } from './LiveBlock';
 import { PinnedPost } from './PinnedPost';
 
@@ -41,7 +41,7 @@ export default {
 
 export const Expandable = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		elements: [
 			{
 				elementId: '14ffdfde-113a-4270-afca-d34436dca56e',
