@@ -2,6 +2,7 @@ import { Island } from '../components/Island';
 import { LiveBlock } from '../components/LiveBlock';
 import { PinnedPost } from '../components/PinnedPost';
 import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
+import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -48,22 +49,27 @@ export const LiveBlogRenderer = ({
 	return (
 		<>
 			{pinnedPost && (
-				<PinnedPost pinnedPost={pinnedPost}>
-					<LiveBlock
-						format={format}
-						block={pinnedPost}
-						pageId={pageId}
-						webTitle={webTitle}
-						adTargeting={adTargeting}
-						host={host}
-						ajaxUrl={ajaxUrl}
-						isLiveUpdate={isLiveUpdate}
-						switches={switches}
-						isAdFreeUser={isAdFreeUser}
-						isSensitive={isSensitive}
-						isPinnedPost={true}
-					/>
-				</PinnedPost>
+				<>
+					<Island clientOnly={true} deferUntil="idle">
+						<EnhancePinnedPost />
+					</Island>
+					<PinnedPost pinnedPost={pinnedPost}>
+						<LiveBlock
+							format={format}
+							block={pinnedPost}
+							pageId={pageId}
+							webTitle={webTitle}
+							adTargeting={adTargeting}
+							host={host}
+							ajaxUrl={ajaxUrl}
+							isLiveUpdate={isLiveUpdate}
+							switches={switches}
+							isAdFreeUser={isAdFreeUser}
+							isSensitive={isSensitive}
+							isPinnedPost={true}
+						/>
+					</PinnedPost>
+				</>
 			)}
 			{blocks.map((block, index) => {
 				return (
