@@ -654,6 +654,10 @@ const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
 };
 
 const fillShareIcon = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.NewsletterSignup) {
+		return neutral[20]
+	}
+
 	if (format.design === ArticleDesign.DeadBlog) {
 		switch (format.theme) {
 			case ArticlePillar.Culture:
