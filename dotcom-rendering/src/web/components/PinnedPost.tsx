@@ -10,14 +10,13 @@ import {
 	focusHalo,
 	height,
 } from '@guardian/source-foundations';
-import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
+import {
+	SvgMinus,
+	SvgPlus,
+	SvgPinned,
+} from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { css } from '@emotion/react';
-
-// TODO: replace with source pinned icon once this has been merged and released.
-// See PR here: https://github.com/guardian/source/pull/1292
-// See Ticket here: https://trello.com/c/xZr6SP9H/272-pinned-post-replace-local-pinned-svg-with-source
-import PinIcon from '../../static/icons/pin.svg';
 
 const pinnedPostContainer = css`
 	border: 3px solid ${news[300]};
@@ -52,8 +51,7 @@ const pinnedPostRow = css`
 	align-items: center;
 	svg {
 		fill: ${neutral[100]};
-		width: 1.125rem;
-		height: 1.5rem;
+		height: 2rem;
 	}
 `;
 
@@ -145,7 +143,7 @@ export const PinnedPost = ({ pinnedPost, children }: Props) => {
 				key="PinnedPostCheckbox"
 			/>
 			<div css={pinnedPostRow}>
-				<PinIcon fill="white" />
+				<SvgPinned />
 				{pinnedPost.blockFirstPublished && (
 					<time data-relativeformat="med" css={timeAgoText}>
 						From {timeAgo(pinnedPost.blockFirstPublished)}
