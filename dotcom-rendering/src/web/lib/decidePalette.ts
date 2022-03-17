@@ -749,45 +749,16 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 
 const borderHeadline = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) {
-		switch (format.theme) {
-			case ArticlePillar.Culture:
-				return '#716960';
-			case ArticlePillar.Opinion:
-				return '#ae4017';
-			case ArticlePillar.Lifestyle:
-				return '#713b68';
-			case ArticlePillar.Sport:
-				return '#3e657b';
-			case ArticleSpecial.SpecialReport:
-				return specialReport[200];
-			case ArticleSpecial.Labs:
-				return labs[200];
-			case ArticlePillar.News:
-				return '#914b4a';
-		}
+		return 'rgba(255,255,255, 0.2)';
 	}
 	if (format.design === ArticleDesign.DeadBlog) return '#CDCDCD';
 	return border.secondary;
 };
 
 const borderStandfirst = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog)
-		switch (format.theme) {
-			case ArticlePillar.Culture:
-				return '#615b53';
-			case ArticlePillar.Opinion:
-				return '#9b3801';
-			case ArticlePillar.Lifestyle:
-				return '#6f3d67';
-			case ArticlePillar.Sport:
-				return '#295873';
-			case ArticleSpecial.SpecialReport:
-				return specialReport[300];
-			case ArticleSpecial.Labs:
-				return labs[300];
-			case ArticlePillar.News:
-				return '#7f3a3a';
-		}
+	if (format.design === ArticleDesign.LiveBlog) {
+		return 'rgba(255,255,255, 0.2)';
+	}
 	if (format.design === ArticleDesign.DeadBlog) return '#BDBDBD';
 	return border.secondary;
 };
