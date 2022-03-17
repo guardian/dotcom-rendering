@@ -31,7 +31,7 @@ interface Props {
 }
 
 function isBannerElement(element:CAPIElement) {
-	return element._type==='model.dotcomrendering.pageElements.EmbedBlockElement' && element.html.includes('data-is-banner=\"true\"');
+	return element._type==='model.dotcomrendering.pageElements.EmbedBlockElement' && element.html.includes('data-is-banner-for-newsletter-signup=\"true\"');
 }
 
 function removeBannerElements(CAPI:CAPIType): [CAPIType, EmbedBlockElement[]] {
