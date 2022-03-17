@@ -8,6 +8,8 @@ import {
 	brandAlt,
 } from '@guardian/source-foundations';
 
+import { SvgChevronDownSingle } from '@guardian/source-react-components';
+
 import { ArticleDisplay } from '@guardian/libs';
 import { navInputCheckboxId, showMoreButtonId } from '../config';
 
@@ -18,37 +20,25 @@ const screenReadable = css`
 const showMoreTextStyles = css`
 	display: block;
 	height: 100%;
-	:after {
-		content: '';
-		border: 1px solid currentColor;
-		border-left: transparent;
-		border-top: transparent;
-		display: inline-block;
-		height: 8px;
-		margin-left: 6px;
 
-		/*
-            IMPORTANT NOTE:
-            we need to specify the adjacent path to the a (current) tag
-            to apply styles to the nested tabs due to the fact we use ~
-            to support NoJS
-        */
-		transform: translateY(-3px) rotate(45deg);
-		/* stylelint-disable-next-line selector-type-no-unknown */
-		${`#${navInputCheckboxId}`}:checked ~ div label & {
-			transform: translateY(1px) rotate(-135deg);
+	${`#${navInputCheckboxId}`}:checked ~ div label & svg {
+		transform: translateY(-2px) rotate(-180deg);
+		:hover {
+			transform: translateY(-4px) rotate(-180deg);
 		}
-
-		transition: transform 250ms ease-out;
-		vertical-align: middle;
-		width: 8px;
 	}
-	:hover:after {
-		transform: translateY(0) rotate(45deg);
-		/* refer to comment above */
-		/* stylelint-disable-next-line selector-type-no-unknown */
-		${`#${navInputCheckboxId}`}:checked ~ div label & {
-			transform: translateY(-2px) rotate(-135deg);
+
+	svg {
+		position: absolute;
+		right: 2px;
+		top: 14px;
+		fill: currentColor;
+		height: 16px;
+		width: 16px;
+		transition: transform 250ms ease-out;
+
+		:hover {
+			transform: translateY(2px);
 		}
 	}
 `;
@@ -95,7 +85,10 @@ export const ShowMoreMenu = ({ display }: { display: ArticleDisplay }) => (
 			data-cy="nav-show-more-button"
 		>
 			<span css={screenReadable}>Show</span>
-			<span css={showMoreTextStyles}>More</span>
+			<span css={showMoreTextStyles}>
+				More
+				<SvgChevronDownSingle />
+			</span>
 		</label>
 		{/* eslint-enable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */}
 	</>
