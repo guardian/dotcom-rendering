@@ -20,7 +20,7 @@ function hideShowMore() {
 	if (pinnedPostButton) pinnedPostButton.style.display = 'none';
 }
 
-export const EnhancePinnedPost = ({}) => {
+export const EnhancePinnedPost = () => {
 	const contentFitsContainer =
 		pinnedPost && pinnedPost.scrollHeight <= pinnedPost.clientHeight;
 	if (contentFitsContainer) hideShowMore();
