@@ -131,8 +131,9 @@ const LiveBlockContainer = ({
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
-				border-top: ${isPinnedPost ? 0 : `1px solid ${borderColour}`};
-				border-bottom: ${isPinnedPost ? 0 : `1px solid ${neutral[86]}`};
+				${!isPinnedPost &&
+				`border-top: 1px solid ${borderColour};
+				border-bottom: 1px solid ${neutral[86]};`}
 				${from.tablet} {
 					padding: ${space[2]}px ${SIDE_MARGIN}px;
 					padding-left: ${LEFT_MARGIN_DESKTOP}px;
