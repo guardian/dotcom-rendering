@@ -52,13 +52,17 @@ const rowStyles = css`
 	svg {
 		fill: ${neutral[100]};
 		height: 32px;
+		margin-bottom: 4px;
 	}
 `;
 
 const timeAgoStyles = css`
 	${textSans.small({ fontWeight: 'bold' })};
 	color: ${neutral[100]};
-	margin-left: 42px;
+	${from.tablet} {
+		margin-left: 28px;
+	}
+	margin-bottom: 4px;
 `;
 
 const overlayStyles = css`
