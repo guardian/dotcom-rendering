@@ -27,7 +27,7 @@ const pinnedPostContainer = (palette: Palette) => css`
 	#pinned-post-checkbox:checked ~ #collapsible-body {
 		max-height: fit-content;
 	}
-	#pinned-post-checkbox:checked ~ #overlay,
+	#pinned-post-checkbox:checked ~ #pinned-post-overlay,
 	#pinned-post-checkbox ~ label #svgminus,
 	#pinned-post-checkbox:checked ~ label #svgplus {
 		display: none;
@@ -44,7 +44,7 @@ const pinnedPostContainer = (palette: Palette) => css`
 	}
 `;
 
-const pinnedPostRow = (palette: Palette) => css`
+const rowStyles = (palette: Palette) => css`
 	background: ${palette.border.pinnedPost};
 	height: 32px;
 	display: flex;
@@ -52,16 +52,20 @@ const pinnedPostRow = (palette: Palette) => css`
 	svg {
 		fill: ${neutral[100]};
 		height: 32px;
+		margin-bottom: 4px;
 	}
 `;
 
-const timeAgoText = css`
+const timeAgoStyles = css`
 	${textSans.small({fontWeight: 'bold'})};
 	color: ${neutral[100]};
-	margin-left: 42px;
+	${from.tablet} {
+		margin-left: 28px;
+	}
+	margin-bottom: 4px;
 `;
 
-const overlay = css`
+const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
 		${neutral[100]},
@@ -144,10 +148,10 @@ export const PinnedPost = ({pinnedPost, children, format}: Props) => {
 				tabIndex={-1}
 				key="PinnedPostCheckbox"
 			/>
-			<div css={pinnedPostRow(palette)}>
+			<div css={rowStyles(palette)}>
 				<SvgPinned/>
 				{pinnedPost.blockFirstPublished && (
-					<time data-relativeformat="med" css={timeAgoText}>
+					<time data-relativeformat="med" css={timeAgoStyles}>
 						From {timeAgo(pinnedPost.blockFirstPublished)}
 					</time>
 				)}
@@ -156,6 +160,7 @@ export const PinnedPost = ({pinnedPost, children, format}: Props) => {
 				{children}
 			</div>
 			<div id="overlay" css={overlay}/>
+			<div id="pinned-post-overlay" css={overlayStyles}/>
 			<label
 				css={fakeButtonStyles(palette)}
 				htmlFor="pinned-post-checkbox"
