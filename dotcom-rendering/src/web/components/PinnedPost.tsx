@@ -46,19 +46,19 @@ const pinnedPostContainer = (palette: Palette) => css`
 
 const pinnedPostRow = (palette: Palette) => css`
 	background: ${palette.border.pinnedPost};
-	height: 2rem;
+	height: 32px;
 	display: flex;
 	align-items: center;
 	svg {
 		fill: ${neutral[100]};
-		height: 2rem;
+		height: 32px;
 	}
 `;
 
 const timeAgoText = css`
 	${textSans.small({fontWeight: 'bold'})};
 	color: ${neutral[100]};
-	margin-left: 2.6rem;
+	margin-left: 42px;
 `;
 
 const overlay = css`
@@ -68,7 +68,7 @@ const overlay = css`
 		${neutral[100]} 40%,
 		rgba(255, 255, 255, 0)
 	);
-	height: 5rem;
+	height: 80px;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
@@ -92,18 +92,18 @@ const fakeButtonStyles = (palette: Palette) => css`
 		${focusHalo};
 	}
 	background: ${palette.border.pinnedPost};
-	margin-left: 0.625rem;
+	margin-left: 10px;
 	position: absolute;
-	bottom: -1.5rem;
+	bottom: -24px;
 	${textSans.medium({fontWeight: 'bold'})};
 	height: ${height.ctaMedium}px;
 	min-height: ${height.ctaMedium}px;
 	padding: 0 ${space[5]}px;
 	border-radius: ${height.ctaMedium}px;
-	padding-bottom: 0.125rem;
+	padding-bottom: 2px;
 	color: white;
 	${from.tablet} {
-		margin-left: 3.75rem;
+		margin-left: 60px;
 	}
 `;
 
