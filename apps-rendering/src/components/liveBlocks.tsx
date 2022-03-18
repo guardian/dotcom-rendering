@@ -41,6 +41,8 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 						blockTitle={block.title}
 						blockFirstPublished={blockFirstPublished}
 						blockLink={blockLink}
+						// TODO pass this value in when available
+						isPinnedPost={false}
 					>
 						{renderAll(format, partition(block.body).oks)}
 
