@@ -172,7 +172,28 @@ const follow = (format: ArticleFormat): Colour => {
 };
 
 const followDark = (format: ArticleFormat): Colour => {
-	return neutral[100];
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return neutral[100];
+		default:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[500];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticlePillar.Sport:
+					return sport[500];
+				case ArticlePillar.Culture:
+					return culture[500];
+				case ArticlePillar.Opinion:
+					return opinion[500];
+				case ArticleSpecial.Labs:
+					return specialReport[500];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[500];
+			}
+	}
 };
 
 const bylineDark = (format: ArticleFormat): Colour => {
@@ -394,22 +415,7 @@ const standfirstLinkDark = (format: ArticleFormat): Colour => {
 					return specialReport[500];
 			}
 		default: {
-			switch (format.theme) {
-				case ArticlePillar.News:
-					return news[400];
-				case ArticlePillar.Culture:
-					return culture[400];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[400];
-				case ArticlePillar.Sport:
-					return sport[400];
-				case ArticlePillar.Opinion:
-					return opinion[400];
-				case ArticleSpecial.Labs:
-					return labs[300];
-				case ArticleSpecial.SpecialReport:
-					return specialReport[400];
-			}
+			return neutral[60];
 		}
 	}
 };

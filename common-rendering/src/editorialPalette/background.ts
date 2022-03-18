@@ -159,8 +159,10 @@ const articleContentDark = ({ design }: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			return neutral[7];
-		default:
+		case ArticleDesign.LiveBlog:
 			return neutral[0];
+		default:
+			return neutral[10];
 	}
 };
 
