@@ -159,7 +159,7 @@ export const PinnedPost = ({pinnedPost, children, format}: Props) => {
 			<div id="collapsible-body" css={collapsibleBody}>
 				{children}
 			</div>
-			<div id="overlay" css={overlay}/>
+			<div id="overlay" css={overlayStyles}/>
 			<div id="pinned-post-overlay" css={overlayStyles}/>
 			<label
 				css={fakeButtonStyles(palette)}
