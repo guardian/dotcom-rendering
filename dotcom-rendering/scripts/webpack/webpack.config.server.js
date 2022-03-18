@@ -21,7 +21,6 @@ module.exports = ({ sessionId }) => ({
 		runtimeChunk: false,
 	},
 	externals: [
-		'@loadable/component',
 		require('webpack-node-externals')({
 			allowlist: [/^@guardian/],
 			additionalModuleDirs: [
@@ -42,12 +41,12 @@ module.exports = ({ sessionId }) => ({
 				: callback();
 		},
 		({ request }, callback) => {
-			return request?.endsWith('loadable-manifest-browser.json')
+			return request?.endsWith('manifest.json')
 				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
 		({ request }, callback) => {
-			return request?.endsWith('loadable-manifest-browser.legacy.json')
+			return request?.endsWith('manifest.legacy.json')
 				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
