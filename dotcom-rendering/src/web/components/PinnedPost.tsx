@@ -27,7 +27,7 @@ const pinnedPostContainer = css`
 	#pinned-post-checkbox:checked ~ #collapsible-body {
 		max-height: fit-content;
 	}
-	#pinned-post-checkbox:checked ~ #overlay,
+	#pinned-post-checkbox:checked ~ #pinned-post-overlay,
 	#pinned-post-checkbox ~ label #svgminus,
 	#pinned-post-checkbox:checked ~ label #svgplus {
 		display: none;
@@ -61,7 +61,7 @@ const timeAgoText = css`
 	margin-left: 42px;
 `;
 
-const overlay = css`
+const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
 		${neutral[100]},
@@ -153,7 +153,7 @@ export const PinnedPost = ({ pinnedPost, children }: Props) => {
 			<div id="collapsible-body" css={collapsibleBody}>
 				{children}
 			</div>
-			<div id="overlay" css={overlay} />
+			<div id="pinned-post-overlay" css={overlayStyles} />
 			<label
 				css={button}
 				htmlFor="pinned-post-checkbox"
