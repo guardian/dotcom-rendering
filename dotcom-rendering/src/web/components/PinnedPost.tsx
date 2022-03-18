@@ -52,7 +52,7 @@ const rowStyles = css`
 	svg {
 		fill: ${neutral[100]};
 		height: 32px;
-		margin-bottom: 4px;
+		margin-bottom: ${space[1]}px;
 	}
 `;
 
@@ -62,7 +62,7 @@ const timeAgoStyles = css`
 	${from.tablet} {
 		margin-left: 28px;
 	}
-	margin-bottom: 4px;
+	margin-bottom: ${space[1]}px;
 `;
 
 const overlayStyles = css`
