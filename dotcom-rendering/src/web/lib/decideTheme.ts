@@ -1,6 +1,7 @@
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 
 export const decideTheme = ({ theme }: Partial<CAPIFormat>): ArticleTheme => {
+	return ArticlePillar.News;
 	switch (theme) {
 		case 'NewsPillar':
 			return ArticlePillar.News;

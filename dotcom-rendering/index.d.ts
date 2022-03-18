@@ -161,6 +161,7 @@ type Palette = {
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		liveBlock: Colour;
+		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
 		standfirst: Colour;

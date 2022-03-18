@@ -733,6 +733,10 @@ const borderLiveBlock = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const borderPinnedPost = (format: ArticleFormat): string => {
+	return pillarPalette[format.theme][300];
+}
+
 const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -1075,6 +1079,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
 			liveBlock: borderLiveBlock(format),
+			pinnedPost: borderPinnedPost(format),
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
 			standfirst: borderStandfirst(format),
