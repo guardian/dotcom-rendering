@@ -22,10 +22,8 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 	return (
 		<>
 			{/* Accordion? */}
-			{/* Pagination? */}
 			{blocks.map((block) => {
-				// TODO: get page number
-				const blockLink = `${1}#block-${block.id}`;
+				const blockLink = `#block-${block.id}`;
 				const borderLiveBlock = border.liveBlock(format);
 				const blockFirstPublished = pipe(
 					block.firstPublished,
