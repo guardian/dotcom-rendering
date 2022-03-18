@@ -7,7 +7,7 @@ type When = 'idle' | 'visible';
 interface HydrateProps {
 	deferUntil?: When;
 	clientOnly?: false;
-	placeholderHeight?: undefined;
+	placeholderHeight?: never;
 	children: JSX.Element;
 }
 
