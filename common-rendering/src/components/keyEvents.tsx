@@ -23,7 +23,7 @@ import {
 } from '@guardian/libs';
 import { darkModeCss } from '../lib';
 import Accordion from './accordion';
-import { text } from '../editorialPalette';
+import { background, text } from '../editorialPalette';
 
 // ----- Component ----- //
 type paletteId = 300 | 400 | 500;
@@ -61,6 +61,7 @@ const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
 };
 
 const keyEventWrapperStyles = (
+	format: ArticleFormat,
 	supportsDarkMode: boolean,
 ): SerializedStyles => css`
 	width: 100%;
@@ -71,11 +72,15 @@ const keyEventWrapperStyles = (
 	}
 
 	${darkModeCss(supportsDarkMode)`
-		background-color: ${neutral[10]};
+		border-top-color: ${neutral[20]};
+		background-color: ${background.articleContentDark(format)};
 	`}
 `;
 
-const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+const listStyles = (
+	format: ArticleFormat,
+	supportsDarkMode: boolean,
+): SerializedStyles => css`
 	li::before {
 		content: '';
 		display: block;
@@ -89,9 +94,11 @@ const listStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	}
 
 	${darkModeCss(supportsDarkMode)`
+	background-color: ${background.articleContentDark(format)};
+
 		li::before {
 			border-color: transparent ${neutral[60]};
-			background-color: neutral[60];
+
 		}
 	`}
 `;
@@ -191,7 +198,7 @@ const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 			tabIndex={0}
 			id="keyevents"
-			css={keyEventWrapperStyles(supportsDarkMode)}
+			css={keyEventWrapperStyles(format, supportsDarkMode)}
 			aria-label="Key Events"
 		>
 			<Accordion
@@ -199,7 +206,7 @@ const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
 				accordionTitle="Key events"
 				context="keyEvents"
 			>
-				<ul css={listStyles(supportsDarkMode)}>
+				<ul css={listStyles(format, supportsDarkMode)}>
 					{keyEvents.slice(0, 7).map((event, index) => (
 						<ListItem
 							key={`${event.url}${index}`}

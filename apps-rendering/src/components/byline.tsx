@@ -129,11 +129,14 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 			return css(
 				blogStyles,
 				blogColor(neutral[100], bylineLeftColumn, bylineDark),
+				darkModeCss`
+					color: ${neutral[86]};
+				`,
 			);
 		case ArticleDesign.DeadBlog:
 			return css(
 				blogStyles,
-				blogColor(bylineInline, bylineLeftColumn, neutral[93]),
+				blogColor(bylineInline, bylineLeftColumn, neutral[86]),
 			);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:

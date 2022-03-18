@@ -70,7 +70,7 @@ const Media: FC<Props> = ({ item, children }) => (
 		<section css={onwardStyles}>
 			<RelatedContent content={item.relatedContent} />
 		</section>
-		<Footer isCcpa={false} />
+		<Footer isCcpa={false} format={item} />
 	</main>
 );
 

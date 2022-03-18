@@ -2,12 +2,18 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-const styles: SerializedStyles = css`
+const styles = (
+	usePillarColour: boolean,
+	format: ArticleFormat,
+): SerializedStyles => css`
 	list-style: none;
 	margin: ${remSpace[3]} 0;
 	padding-left: 0;
@@ -23,14 +29,22 @@ const styles: SerializedStyles = css`
 		background-color: ${neutral[86]};
 		margin-left: -${remSpace[6]};
 		vertical-align: middle;
+
+		${darkModeCss`
+			background-color: ${background.bulletDark(format, usePillarColour)};
+		`}
 	}
 `;
 
 interface Props {
 	children: ReactNode;
+	usePillarColour: boolean;
+	format: ArticleFormat;
 }
 
-const List: FC<Props> = ({ children }) => <ul css={styles}>{children}</ul>;
+const List: FC<Props> = ({ children, usePillarColour, format }) => (
+	<ul css={styles(usePillarColour, format)}>{children}</ul>
+);
 
 // ----- Exports ----- //
 
