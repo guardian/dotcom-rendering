@@ -36,12 +36,14 @@ export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
 	}
 };
 
+export const getToday = (): number => Math.floor(Date.now() / 86400000);
+
 export const incrementDailyArticleCount = (): void => {
 	// get the daily article count from local storage
 	const dailyArticleCount = getDailyArticleCount() || [];
 
 	// calculate days since unix epoch for today date
-	const today = Math.floor(Date.now() / 86400000);
+	const today = getToday();
 
 	// check if latest day is today and increment if so
 	if (
