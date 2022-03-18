@@ -8,11 +8,11 @@ const padString = (time: number) => (time < 10 ? `0${time}` : time);
 const FirstPublished = ({
 	firstPublished,
 	blockLink,
-	isPinnedPost = true,
+	isPinnedPost,
 }: {
 	firstPublished: number;
 	blockLink: string;
-	isPinnedPost?: boolean;
+	isPinnedPost: boolean;
 }) => {
 	const publishedDate = new Date(firstPublished);
 	return (

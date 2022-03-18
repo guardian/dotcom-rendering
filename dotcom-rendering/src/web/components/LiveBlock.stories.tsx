@@ -106,6 +106,7 @@ export const VideoAsSecond = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				switches={{}}
+				isPinnedPost={false}
 			/>
 		</Wrapper>
 	);
@@ -154,6 +155,7 @@ export const Title = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				switches={{}}
+				isPinnedPost={false}
 			/>
 		</Wrapper>
 	);
@@ -223,6 +225,7 @@ export const Video = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				switches={{}}
+				isPinnedPost={false}
 			/>
 		</Wrapper>
 	);
@@ -267,6 +270,7 @@ export const RichLink = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				switches={{}}
+				isPinnedPost={false}
 			/>
 		</Wrapper>
 	);
@@ -302,6 +306,7 @@ export const FirstImage = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				switches={{}}
+				isPinnedPost={false}
 			/>
 		</Wrapper>
 	);
@@ -361,6 +366,7 @@ export const ImageRoles = () => {
 				webTitle=""
 				ajaxUrl=""
 				switches={{}}
+				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
 			/>
@@ -411,6 +417,7 @@ export const Thumbnail = () => {
 				webTitle=""
 				ajaxUrl=""
 				switches={{}}
+				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
 			/>
@@ -449,6 +456,7 @@ export const ImageAndTitle = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				switches={{}}
+				isPinnedPost={false}
 			/>
 		</Wrapper>
 	);
@@ -481,6 +489,7 @@ export const Updated = () => {
 				isAdFreeUser={false}
 				isSensitive={false}
 				switches={{}}
+				isPinnedPost={false}
 			/>
 		</Wrapper>
 	);
@@ -517,6 +526,7 @@ export const Contributor = () => {
 				webTitle=""
 				ajaxUrl=""
 				switches={{}}
+				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
 			/>
@@ -551,6 +561,7 @@ export const NoAvatar = () => {
 				webTitle=""
 				ajaxUrl=""
 				switches={{}}
+				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
 			/>
@@ -588,6 +599,7 @@ export const TitleAndContributor = () => {
 				webTitle=""
 				ajaxUrl=""
 				switches={{}}
+				isPinnedPost={false}
 				isAdFreeUser={false}
 				isSensitive={false}
 			/>

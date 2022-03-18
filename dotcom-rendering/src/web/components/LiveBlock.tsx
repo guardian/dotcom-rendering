@@ -20,7 +20,7 @@ type Props = {
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
 	isLiveUpdate?: boolean;
-	isPinnedPost?: boolean;
+	isPinnedPost: boolean;
 };
 
 export const LiveBlock = ({

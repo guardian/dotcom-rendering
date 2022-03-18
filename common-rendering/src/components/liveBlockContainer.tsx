@@ -23,7 +23,7 @@ type Props = {
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
 	avatarBackgroundColor?: string;
-	isPinnedPost?: boolean;
+	isPinnedPost: boolean;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
