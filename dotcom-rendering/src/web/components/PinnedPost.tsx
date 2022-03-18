@@ -167,14 +167,14 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 				htmlFor="pinned-post-checkbox"
 				id="pinned-post-button"
 			>
-				<div>
+				<>
 					<span id="svgminus" css={buttonIcon}>
 						<SvgMinus />
 					</span>
 					<span id="svgplus" css={buttonIcon}>
 						<SvgPlus />
 					</span>
-				</div>
+				</>
 			</label>
 		</div>
 	);
