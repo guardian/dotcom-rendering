@@ -27,20 +27,17 @@ export const initHydration = (elements: NodeListOf<Element>) => {
 			switch (deferUntil) {
 				case 'idle': {
 					whenIdle(() => {
-						// eslint-disable-next-line @typescript-eslint/no-floating-promises
 						doHydration(name, props, element);
 					});
 					break;
 				}
 				case 'visible': {
 					whenVisible(element, () => {
-						// eslint-disable-next-line @typescript-eslint/no-floating-promises
 						doHydration(name, props, element);
 					});
 					break;
 				}
 				default: {
-					// eslint-disable-next-line @typescript-eslint/no-floating-promises
 					doHydration(name, props, element);
 				}
 			}
