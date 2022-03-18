@@ -36,7 +36,7 @@ export const getDailyArticleCount = (): DailyArticleHistory | undefined => {
 	}
 };
 
-export const getToday = (): number => Math.floor(Date.now() / 86400000);
+export const getToday = (): number => Math.floor(Date.now() / 86_400_000);
 
 export const incrementDailyArticleCount = (): void => {
 	// get the daily article count from local storage
