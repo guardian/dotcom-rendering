@@ -7,9 +7,9 @@ import { getName } from '../islands/getName';
 function forceHydration() {
 	try {
 		// Select the Discussion island element
-		const guElement = document.querySelector(
+		const guElement = document.querySelector<HTMLElement>(
 			'gu-island[name=DiscussionContainer]',
-		) as HTMLElement;
+		);
 		if (!guElement) return;
 
 		// Read the props from where they have been serialised in the dom using an Island
