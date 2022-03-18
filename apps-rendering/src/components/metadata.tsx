@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -78,6 +79,10 @@ const metaBottomStyles = (isLive: boolean): SerializedStyles => css`
 	}
 
 	${!isLive && `border-top: 1px solid rgba(153, 153, 153, 0.4);`}
+
+	${darkModeCss`
+		border-top-color: ${neutral[20]};
+	`}
 `;
 
 const toggleStyles = css`
@@ -110,6 +115,10 @@ const toggleOverrideStyles = css`
 			background-color: rgba(255, 255, 255, 0.5);
 		}
 	}
+
+	${darkModeCss`
+		color: ${neutral[93]};
+	`}
 `;
 
 const liveBylineStyles = css`
@@ -154,22 +163,22 @@ const tempraryBackgroundStyle = (format: ArticleFormat): SerializedStyles => {
 				${from.desktop} {
 					background-color: ${neutral[97]};
 				}
-				@media (prefers-color-scheme: dark) {
-					background-color: ${neutral[10]};
-				}
+
+				${darkModeCss`
+					background-color: ${background.articleContentDark(format)};
+				`}
 			`;
 		default:
 			return css`
 				background-color: ${themeStyles.liveblogBackground};
+
 				${from.desktop} {
 					background-color: ${neutral[97]};
 				}
-				@media (prefers-color-scheme: dark) {
-					background-color: ${themeStyles.liveblogDarkBackground};
-					${from.desktop} {
-						background-color: ${neutral[10]};
-					}
-				}
+
+				${darkModeCss`
+					background-color: ${background.articleContentDark(format)};
+				`}
 			`;
 	}
 };

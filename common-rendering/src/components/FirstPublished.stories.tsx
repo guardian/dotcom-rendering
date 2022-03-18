@@ -1,15 +1,16 @@
 // ----- Imports ----- //
 
-import type { FC } from "react";
+import type { FC } from 'react';
 
-import { FirstPublished } from "./FirstPublished";
+import { FirstPublished } from './FirstPublished';
 
 // ----- Stories ----- //
 
 const Default: FC = () => (
 	<FirstPublished
+		supportsDarkMode={true}
 		firstPublished={1613763003000}
-		blockLink={"#block-60300f5f8f08ad21ea60071e"}
+		blockLink={'#block-60300f5f8f08ad21ea60071e'}
 	/>
 );
 
@@ -17,7 +18,7 @@ const Default: FC = () => (
 
 export default {
 	component: FirstPublished,
-	title: "Common/Components/FirstPublished",
+	title: 'Common/Components/FirstPublished',
 };
 
 export { Default };

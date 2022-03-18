@@ -1,6 +1,9 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	breakpoints,
 	from,
@@ -14,7 +17,7 @@ import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-const styles = css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	border-width: 0 1px;
 	${textSans.small({ lineHeight: 'regular' })};
 	margin-left: 0;
@@ -37,7 +40,7 @@ const styles = css`
 
 	${darkModeCss`
         color: ${neutral[60]};
-		background: ${neutral[0]};
+		background-color: ${background.articleContentDark(format)};
 
         a {
             color: ${neutral[60]};
@@ -47,10 +50,11 @@ const styles = css`
 
 interface Props {
 	isCcpa: boolean;
+	format: ArticleFormat;
 }
 
-const Footer: FC<Props> = ({ isCcpa }) => (
-	<footer css={styles}>
+const Footer: FC<Props> = ({ isCcpa, format }) => (
+	<footer css={styles(format)}>
 		<FooterContent isCcpa={isCcpa} />
 	</footer>
 );

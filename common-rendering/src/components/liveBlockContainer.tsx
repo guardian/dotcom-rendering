@@ -1,12 +1,15 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 import {
 	neutral,
 	from,
 	space,
 	headline,
 	body,
-} from "@guardian/source-foundations";
-import { FirstPublished } from "./FirstPublished";
+} from '@guardian/source-foundations';
+import { darkModeCss } from '../lib';
+import { FirstPublished } from './FirstPublished';
+import { border } from '../editorialPalette';
+import { ArticleFormat } from '@guardian/libs';
 
 type BlockContributor = {
 	name: string;
@@ -16,13 +19,14 @@ type BlockContributor = {
 type Props = {
 	id: string;
 	children: React.ReactNode;
-	borderColour: string;
+	format: ArticleFormat;
 	blockTitle?: string;
 	blockFirstPublished?: number;
 	blockLink: string;
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
 	avatarBackgroundColor?: string;
+	supportsDarkMode: boolean;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -47,7 +51,7 @@ const BlockTitle = ({ title }: { title: string }) => {
 	return (
 		<h2
 			css={css`
-				${headline.xxsmall({ fontWeight: "bold" })}
+				${headline.xxsmall({ fontWeight: 'bold' })}
 				margin-bottom: ${space[2]}px;
 			`}
 		>
@@ -74,7 +78,7 @@ const BlockByline = ({
 			`}
 		>
 			{imageUrl && (
-				<div style={{ width: "36px", height: "36px" }}>
+				<div style={{ width: '36px', height: '36px' }}>
 					<img
 						src={imageUrl}
 						alt={name}
@@ -105,13 +109,14 @@ const BlockByline = ({
 const LiveBlockContainer = ({
 	id,
 	children,
-	borderColour,
+	format,
 	blockTitle,
 	blockFirstPublished,
 	blockLink,
 	isLiveUpdate,
 	contributors,
 	avatarBackgroundColor,
+	supportsDarkMode,
 }: Props) => {
 	return (
 		<article
@@ -124,17 +129,24 @@ const LiveBlockContainer = ({
 			 * - 'pending' is used to mark blocks that have been inserted as part of a live update. We use this
 			 *    to animate the reveal as well as for enhancing twitter embeds
 			 */
-			className={`block ${isLiveUpdate && "pending"}`}
+			className={`block ${isLiveUpdate && 'pending'}`}
 			css={css`
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
-				border-top: 1px solid ${borderColour};
+				border-top: 1px solid ${border.liveBlock(format)};
 				${from.tablet} {
 					padding: ${space[2]}px ${SIDE_MARGIN}px;
 					padding-left: ${LEFT_MARGIN_DESKTOP}px;
 				}
 				border-bottom: 1px solid ${neutral[86]};
+
+				${darkModeCss(supportsDarkMode)`
+					border-top: 1px solid ${border.liveBlockDark(format)};
+					background-color: ${neutral[10]};
+					color: ${neutral[100]};
+					border-bottom: 0;
+				`}
 			`}
 		>
 			<Header>
@@ -142,6 +154,7 @@ const LiveBlockContainer = ({
 					<FirstPublished
 						firstPublished={blockFirstPublished}
 						blockLink={blockLink}
+						supportsDarkMode={supportsDarkMode}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}
