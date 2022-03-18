@@ -37,14 +37,21 @@ else
 
     cd dotcom-rendering
 
-    #Code Validation
-    echo bundlesize token $BUNDLESIZE_GITHUB_TOKEN
-    make validate-ci
+	if [ $currentBranch == "main" ]
+	then
+		#Code Validation
+		make validate-ci
 
-    #Cypress Tests
-    # see https://docs.cypress.io/guides/guides/continuous-integration.html#Advanced-setup
-    # apt-get install xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
-    make cypress
+		#Cypress Tests
+		# see https://docs.cypress.io/guides/guides/continuous-integration.html#Advanced-setup
+		# apt-get install xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
+		make cypress
+	else
+		#Run bundle size?
+		make bundlesize
+
+		printf "Skipping code checks when not on main"
+	fi
 
     #RiffRaff publish
     make riffraff-publish

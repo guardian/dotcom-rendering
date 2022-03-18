@@ -53,7 +53,7 @@ export const LiveBlogRenderer = ({
 					<Island clientOnly={true} deferUntil="idle">
 						<EnhancePinnedPost />
 					</Island>
-					<PinnedPost pinnedPost={pinnedPost}>
+					<PinnedPost pinnedPost={pinnedPost} format={format}>
 						<LiveBlock
 							format={format}
 							block={pinnedPost}
