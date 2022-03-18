@@ -2,7 +2,6 @@
 
 import { css } from '@emotion/react';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { map, OptionKind, partition } from '@guardian/types';
 import { LastUpdated } from 'components/lastUpdated';
@@ -22,11 +21,9 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 	return (
 		<>
 			{/* Accordion? */}
-			{/* Pagination? */}
 			{blocks.map((block) => {
 				// TODO: get page number
 				const blockLink = `${1}#block-${block.id}`;
-				const borderLiveBlock = border.liveBlock(format);
 				const blockFirstPublished = pipe(
 					block.firstPublished,
 					map(Number),
@@ -37,12 +34,13 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 					<LiveBlockContainer
 						key={block.id}
 						id={block.id}
-						borderColour={borderLiveBlock}
+						format={format}
 						blockTitle={block.title}
 						blockFirstPublished={blockFirstPublished}
 						blockLink={blockLink}
 						// TODO pass this value in when available
 						isPinnedPost={false}
+						supportsDarkMode={true}
 					>
 						{renderAll(format, partition(block.body).oks)}
 

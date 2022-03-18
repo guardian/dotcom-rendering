@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { timeAgo } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
+import { darkModeCss } from '../lib';
 
 // TODO: update this code to use shared version when it is available
 const padString = (time: number) => (time < 10 ? `0${time}` : time);
@@ -9,10 +10,12 @@ const FirstPublished = ({
 	firstPublished,
 	blockLink,
 	isPinnedPost,
+	supportsDarkMode,
 }: {
 	firstPublished: number;
 	blockLink: string;
 	isPinnedPost: boolean;
+	supportsDarkMode: boolean;
 }) => {
 	const publishedDate = new Date(firstPublished);
 	return (
@@ -40,6 +43,10 @@ const FirstPublished = ({
 						color: ${neutral[46]};
 						font-weight: bold;
 						margin-right: ${space[2]}px;
+
+						${darkModeCss(supportsDarkMode)`
+							color: ${neutral[60]};
+						`}
 					`}
 				>
 					{timeAgo(firstPublished)}
@@ -49,6 +56,10 @@ const FirstPublished = ({
 				css={css`
 					${textSans.xxsmall()};
 					color: ${neutral[46]};
+
+					${darkModeCss(supportsDarkMode)`
+						color: ${neutral[60]};
+					`}
 				`}
 			>
 				{`${padString(publishedDate.getHours())}:${padString(

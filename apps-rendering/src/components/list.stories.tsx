@@ -7,21 +7,21 @@ import ListItem from './listItem';
 
 // ----- Setup ----- //
 
-const listItem = (
-	<ListItem
-		format={{
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-			theme: ArticlePillar.News,
-		}}
-	>
-		A bullet point
-	</ListItem>
-);
+const format = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: ArticlePillar.News,
+};
+
+const listItem = <ListItem format={format}>A bullet point</ListItem>;
 
 // ----- Stories ----- //
 
-const Default: FC = () => <List>{[listItem, listItem, listItem]}</List>;
+const Default: FC = () => (
+	<List usePillarColour={false} format={format}>
+		{[listItem, listItem, listItem]}
+	</List>
+);
 
 // ----- Exports ----- //
 

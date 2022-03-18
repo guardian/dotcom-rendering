@@ -51,7 +51,6 @@ export const LiveBlock = ({
 	return (
 		<LiveBlockContainer
 			id={block.id}
-			borderColour={palette.border.liveBlock}
 			blockTitle={block.title}
 			blockFirstPublished={block.blockFirstPublished}
 			blockLink={blockLink}
@@ -59,6 +58,8 @@ export const LiveBlock = ({
 			contributors={block.contributors}
 			avatarBackgroundColor={palette.background.avatar}
 			isPinnedPost={isPinnedPost}
+			supportsDarkMode={false}
+			format={format}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({

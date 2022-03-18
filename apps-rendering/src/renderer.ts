@@ -256,7 +256,7 @@ const textElement =
 			case 'BR':
 				return h('br', { key }, null);
 			case 'UL':
-				return h(List, { children });
+				return h(List, { children, format, usePillarColour: false });
 			case 'OL':
 				return h(OrderedList, { children });
 			case 'LI':
@@ -303,13 +303,21 @@ const standfirstTextElement =
 					children,
 				);
 			case 'UL':
-				return h(List, { children });
+				return styledH(List, {
+					children,
+					format,
+					usePillarColour: true,
+				});
 			case 'LI':
 				return h(ListItem, { format, children });
 			case 'A': {
 				const styles = css`
 					color: ${text.standfirstLink(format)};
 					${borderFromFormat(format)};
+
+					${darkModeCss`
+						color: ${text.standfirstLinkDark(format)};
+					`}
 				`;
 				const url = withDefault('')(getHref(node));
 				const href = url.startsWith('profile/')

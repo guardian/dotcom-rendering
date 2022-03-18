@@ -73,7 +73,7 @@
     "@sentry/integrations": "^5.30.0",
     "@testing-library/dom": "^7.31.2",
     "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.1",
+    "@testing-library/user-event": "^13.5.0",
     "@types/ajv": "^1.0.0",
     "@types/amphtml-validator": "^1.0.1",
     "@types/compose-function": "^0.0.30",
@@ -104,7 +104,7 @@
     "@types/webpack-bundle-analyzer": "^4.4.1",
     "@types/webpack-env": "^1.16.0",
     "@types/webpack-node-externals": "^2.5.3",
-    "@types/youtube": "^0.0.41",
+    "@types/youtube": "^0.0.46",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/eslint-plugin-tslint": "^4.22.0",
     "@typescript-eslint/parser": "^4.21.0",
@@ -179,7 +179,7 @@
     "response-time": "^2.3.2",
     "rimraf": "^3.0.2",
     "sanitize-html": "^2.3.2",
-    "simple-progress-webpack-plugin": "^1.1.2",
+    "simple-progress-webpack-plugin": "^2.0.0",
     "snyk": "^1.639.0",
     "start-server-and-test": "^1.12.1",
     "storybook-addon-turbo-build": "^1.0.0-beta.0",
@@ -251,7 +251,7 @@
     ]
   },
   "run-if-changed": {
-    "src/lib/content.d.ts": "make gen-schema && make gen-fixtures",
-    "src/lib/index.d.ts": "make gen-schema && make gen-fixtures"
+    "dotcom-rendering/src/lib/content.d.ts": "make gen-schema && make gen-fixtures",
+    "dotcom-rendering/src/lib/index.d.ts": "make gen-schema && make gen-fixtures"
   }
 }

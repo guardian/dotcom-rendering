@@ -52,10 +52,9 @@ const headline = (format: ArticleFormat): Colour => {
 };
 
 const headlineDark = (format: ArticleFormat): Colour => {
-	if (
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog
-	) {
+	if (format.design === ArticleDesign.DeadBlog) {
+		return neutral[7];
+	} else if (format.design === ArticleDesign.LiveBlog) {
 		switch (format.theme) {
 			case ArticlePillar.Culture:
 				return culture[200];
@@ -125,6 +124,46 @@ const standfirstDark = ({ design, theme }: ArticleFormat): Colour => {
 	}
 };
 
+const bulletDark = (
+	{ design, theme }: ArticleFormat,
+	returnPillarColour: boolean,
+): Colour => {
+	if (returnPillarColour) {
+		switch (design) {
+			case ArticleDesign.DeadBlog:
+				return neutral[46];
+			case ArticleDesign.LiveBlog:
+				switch (theme) {
+					case ArticlePillar.Opinion:
+						return opinion[550];
+					case ArticlePillar.Sport:
+						return sport[500];
+					case ArticlePillar.Culture:
+						return culture[500];
+					case ArticlePillar.Lifestyle:
+						return lifestyle[500];
+					case ArticlePillar.News:
+						return news[550];
+					default:
+						return neutral[46];
+				}
+			default:
+				return neutral[46];
+		}
+	}
+
+	return neutral[46];
+};
+
+const articleContentDark = ({ design }: ArticleFormat): Colour => {
+	switch (design) {
+		case ArticleDesign.DeadBlog:
+			return neutral[7];
+		default:
+			return neutral[0];
+	}
+};
+
 // ----- API ----- //
 
 const background = {
@@ -132,6 +171,8 @@ const background = {
 	headlineDark,
 	standfirst,
 	standfirstDark,
+	articleContentDark,
+	bulletDark,
 };
 
 // ----- Exports ----- //
