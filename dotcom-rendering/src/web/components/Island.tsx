@@ -42,13 +42,13 @@ const decideChildren = (
  * Note. The component passed as children must follow the [MyComponent].importable.tsx
  * namimg convention
  *
- * @param deferUntil - Delay when client code should execute
+ * @param {HydrateProps | ClientOnlyProps} props - JSX Props
+ * @param {When} props.deferUntil - Delay when client code should execute
  * 		- idle - Execute when browser idle
  * 		- visible - Execute when component appears in viewport
- * @param clientOnly - Should the component be server side rendered
- * @param placeholderHeight - The height for the placeholder element
- * @param children - The component being inserted. Must be a single React Element
- *
+ * @param {boolean} props.clientOnly - Should the component be server side rendered
+ * @param {number} props.placeholderHeight - The height for the placeholder element
+ * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
  */
 export const Island = ({
 	deferUntil,
