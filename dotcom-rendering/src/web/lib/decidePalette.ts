@@ -735,7 +735,7 @@ const borderLiveBlock = (format: ArticleFormat): string => {
 
 const borderPinnedPost = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme][300];
-}
+};
 
 const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];

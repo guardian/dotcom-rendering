@@ -14,9 +14,9 @@ import {
 	SvgPlus,
 	SvgPinned,
 } from '@guardian/source-react-components';
-import {timeAgo} from '@guardian/libs';
-import {css} from '@emotion/react';
-import {decidePalette} from "../lib/decidePalette";
+import { timeAgo } from '@guardian/libs';
+import { css } from '@emotion/react';
+import { decidePalette } from '../lib/decidePalette';
 
 const pinnedPostContainer = (palette: Palette) => css`
 	border: 3px solid ${palette.border.pinnedPost};
@@ -57,7 +57,7 @@ const rowStyles = (palette: Palette) => css`
 `;
 
 const timeAgoStyles = css`
-	${textSans.small({fontWeight: 'bold'})};
+	${textSans.small({ fontWeight: 'bold' })};
 	color: ${neutral[100]};
 	${from.tablet} {
 		margin-left: 28px;
@@ -99,7 +99,7 @@ const fakeButtonStyles = (palette: Palette) => css`
 	margin-left: 10px;
 	position: absolute;
 	bottom: -24px;
-	${textSans.medium({fontWeight: 'bold'})};
+	${textSans.medium({ fontWeight: 'bold' })};
 	height: ${height.ctaMedium}px;
 	min-height: ${height.ctaMedium}px;
 	padding: 0 ${space[5]}px;
@@ -134,7 +134,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-export const PinnedPost = ({pinnedPost, children, format}: Props) => {
+export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 	const palette = decidePalette(format);
 	return (
 		<div css={[pinnedPostContainer(palette)]} data-gu-marker="pinned-post">
@@ -149,7 +149,7 @@ export const PinnedPost = ({pinnedPost, children, format}: Props) => {
 				key="PinnedPostCheckbox"
 			/>
 			<div css={rowStyles(palette)}>
-				<SvgPinned/>
+				<SvgPinned />
 				{pinnedPost.blockFirstPublished && (
 					<time data-relativeformat="med" css={timeAgoStyles}>
 						From {timeAgo(pinnedPost.blockFirstPublished)}
@@ -159,8 +159,8 @@ export const PinnedPost = ({pinnedPost, children, format}: Props) => {
 			<div id="collapsible-body" css={collapsibleBody}>
 				{children}
 			</div>
-			<div id="overlay" css={overlayStyles}/>
-			<div id="pinned-post-overlay" css={overlayStyles}/>
+			<div id="overlay" css={overlayStyles} />
+			<div id="pinned-post-overlay" css={overlayStyles} />
 			<label
 				css={fakeButtonStyles(palette)}
 				htmlFor="pinned-post-checkbox"
@@ -168,10 +168,10 @@ export const PinnedPost = ({pinnedPost, children, format}: Props) => {
 			>
 				<div>
 					<span id="svgminus" css={buttonIcon}>
-						<SvgMinus/>
+						<SvgMinus />
 					</span>
 					<span id="svgplus" css={buttonIcon}>
-						<SvgPlus/>
+						<SvgPlus />
 					</span>
 				</div>
 			</label>
