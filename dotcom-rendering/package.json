@@ -73,7 +73,7 @@
     "@sentry/integrations": "^5.30.0",
     "@testing-library/dom": "^7.31.2",
     "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.1",
+    "@testing-library/user-event": "^13.5.0",
     "@types/ajv": "^1.0.0",
     "@types/amphtml-validator": "^1.0.1",
     "@types/compose-function": "^0.0.30",
