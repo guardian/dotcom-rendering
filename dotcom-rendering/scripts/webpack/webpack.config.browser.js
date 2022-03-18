@@ -2,9 +2,7 @@
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
-const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
-const GITHUB = process.env.CI_ENV === 'github';
 
 /**
  * @param {boolean} isLegacyJS
@@ -12,8 +10,7 @@ const GITHUB = process.env.CI_ENV === 'github';
  */
 const generateName = (isLegacyJS) => {
 	const legacyString = isLegacyJS ? '.legacy' : '';
-	const chunkhashString = PROD && !GITHUB ? '.[chunkhash]' : '';
-	return `[name]${legacyString}${chunkhashString}.js`;
+	return `[name]${legacyString}.[chunkhash].js`;
 };
 
 /**
