@@ -2,22 +2,19 @@ import '../webpackPublicPath';
 import { startup } from '../startup';
 import { getProps } from '../islands/getProps';
 import { doHydration } from '../islands/doHydration';
-import { getName } from '../islands/getName';
 
 function forceHydration() {
 	try {
+		const name = 'DiscussionContainer';
+
 		// Select the Discussion island element
 		const guElement = document.querySelector<HTMLElement>(
-			'gu-island[name=DiscussionContainer]',
+			`gu-island[name=${name}]`,
 		);
 		if (!guElement) return;
 
 		// Read the props from where they have been serialised in the dom using an Island
 		const props = getProps(guElement);
-		const name = getName(guElement);
-
-		// Ensure we have name
-		if (!name) return;
 
 		// Now that we have the props as an object, tell Discussion we want it to expand itself
 		props.expanded = true;
