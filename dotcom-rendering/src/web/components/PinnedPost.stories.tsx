@@ -306,7 +306,7 @@ export const SpecialReport = () => {
 		],
 	};
 	const format = {
-		theme: ArticleSpecial.SpecialReport;
+		theme: ArticleSpecial.SpecialReport,
 		design: ArticleDesign.LiveBlog,
 		display: ArticleDisplay.Standard,
 	};
