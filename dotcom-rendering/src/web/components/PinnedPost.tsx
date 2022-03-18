@@ -44,7 +44,7 @@ const pinnedPostContainer = css`
 	}
 `;
 
-const pinnedPostRow = css`
+const rowStyles = css`
 	background: ${news[300]};
 	height: 32px;
 	display: flex;
@@ -55,7 +55,7 @@ const pinnedPostRow = css`
 	}
 `;
 
-const timeAgoText = css`
+const timeAgoStyles = css`
 	${textSans.small({ fontWeight: 'bold' })};
 	color: ${neutral[100]};
 	margin-left: 42px;
@@ -142,10 +142,10 @@ export const PinnedPost = ({ pinnedPost, children }: Props) => {
 				tabIndex={-1}
 				key="PinnedPostCheckbox"
 			/>
-			<div css={pinnedPostRow}>
+			<div css={rowStyles}>
 				<SvgPinned />
 				{pinnedPost.blockFirstPublished && (
-					<time data-relativeformat="med" css={timeAgoText}>
+					<time data-relativeformat="med" css={timeAgoStyles}>
 						From {timeAgo(pinnedPost.blockFirstPublished)}
 					</time>
 				)}
