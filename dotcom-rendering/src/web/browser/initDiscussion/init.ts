@@ -4,7 +4,7 @@ import { getProps } from '../islands/getProps';
 import { doHydration } from '../islands/doHydration';
 import { getName } from '../islands/getName';
 
-function forceHydration() {
+async function forceHydration() {
 	try {
 		// Select the Discussion island element
 		const guElement = document.querySelector<HTMLElement>(
@@ -23,7 +23,7 @@ function forceHydration() {
 		props.expanded = true;
 
 		// Force hydration
-		doHydration(name, props, guElement);
+		await doHydration(name, props, guElement);
 	} catch (err) {
 		// Do nothing
 	}
@@ -37,7 +37,7 @@ const init = (): Promise<void> => {
 	 *
 	 */
 	const hashLink = window.location.hash;
-	if (hashLink && hashLink.includes('comment')) forceHydration();
+	if (hashLink && hashLink.includes('comment')) return forceHydration();
 
 	return Promise.resolve();
 };
