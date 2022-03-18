@@ -138,7 +138,7 @@ const buildHtml = (
 ): string => {
 	// Used when taking the reader to the top of the blog on toast click
 	// or when linking to a specific block
-	const smoothScrolling = isBlog ? `style="scroll-behavior: smooth;"` : '';
+	const smoothScrolling = isBlog ? 'style="scroll-behavior: smooth;"' : '';
 
 	return `<!DOCTYPE html>
     <html lang="en" ${smoothScrolling}>
