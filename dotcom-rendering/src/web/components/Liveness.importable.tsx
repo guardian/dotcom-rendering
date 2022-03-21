@@ -14,6 +14,7 @@ type Props = {
 	onFirstPage: boolean;
 	webURL: string;
 	mostRecentBlockId: string;
+	hasPinnedPost: boolean;
 };
 
 const isServer = typeof window === 'undefined';
@@ -133,6 +134,7 @@ export const Liveness = ({
 	onFirstPage,
 	webURL,
 	mostRecentBlockId,
+	hasPinnedPost,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<
@@ -252,16 +254,22 @@ export const Liveness = ({
 	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
 
 	const handleToastClick = () => {
+		// We adjust the position we scroll readers to based on if there is a pinned
+		// post or not. If there is we want to scroll them to a position below it, if
+		// there is then we want to scroll them to a position that ensures they still
+		// see the key events filter
+		const placeToScrollTo = hasPinnedPost ? 'top-of-blog' : 'maincontent';
 		if (onFirstPage) {
 			setShowToast(false);
-			document.getElementById('top-of-blog')?.scrollIntoView({
+
+			document.getElementById(placeToScrollTo)?.scrollIntoView({
 				behavior: 'smooth',
 			});
-			window.location.href = '#top-of-blog';
+			window.location.href = `#${placeToScrollTo}`;
 			revealPendingBlocks();
 			setNumHiddenBlocks(0);
 		} else {
-			window.location.href = `${webURL}#top-of-blog`;
+			window.location.href = `${webURL}#${placeToScrollTo}`;
 		}
 	};
 
