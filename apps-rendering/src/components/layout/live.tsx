@@ -98,7 +98,7 @@ const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 						{
 							date: block.firstPublished.value,
 							text: block.title,
-							url: `#block-${block.id}`,
+							url: `?page=with:block-${block.id}#block-${block.id}`,
 						},
 				  ]
 				: events,
