@@ -267,6 +267,30 @@ const blocks: LiveBlock[] = [
 		firstPublished: some(new Date('2021-11-02T12:00:00Z')),
 		lastModified: some(new Date('2021-11-02T13:13:13Z')),
 		body: [],
+		contributors: [
+			{
+				id: '',
+				apiUrl: '',
+				name: 'Alex Hern',
+				image: some({
+					src: 'https://i.guim.co.uk/img/uploads/2021/02/18/Alex_Hern.png?width=64&quality=85&fit=bounds&s=23a43b779a5093807af839a51836919a',
+					srcset: 'https://i.guim.co.uk/img/uploads/2021/02/18/Alex_Hern.png?width=64&quality=85&fit=bounds&s=23a43b779a5093807af839a51836919a',
+					dpr2Srcset:
+						'https://i.guim.co.uk/img/uploads/2021/02/18/Alex_Hern.png?width=64&quality=85&fit=bounds&s=23a43b779a5093807af839a51836919a',
+					alt: some('image'),
+					width: 36,
+					height: 36,
+					caption: captionDocFragment,
+					credit: {
+						kind: OptionKind.None,
+					},
+					nativeCaption: {
+						kind: OptionKind.None,
+					},
+					role: ArticleElementRole.Standard,
+				}),
+			},
+		],
 	},
 	{
 		id: '2',
@@ -275,6 +299,7 @@ const blocks: LiveBlock[] = [
 		firstPublished: some(new Date('2021-11-02T11:20:00Z')),
 		lastModified: some(new Date('2021-11-02T13:03:13Z')),
 		body: [],
+		contributors: [],
 	},
 	{
 		id: '3',
@@ -283,6 +308,7 @@ const blocks: LiveBlock[] = [
 		firstPublished: some(new Date('2021-11-02T11:05:12Z')),
 		lastModified: some(new Date('2021-11-02T12:13:13Z')),
 		body: [],
+		contributors: [],
 	},
 	{
 		id: '4',
@@ -291,6 +317,7 @@ const blocks: LiveBlock[] = [
 		firstPublished: some(new Date('2021-11-02T10:55:03Z')),
 		lastModified: some(new Date('2021-11-02T11:13:13Z')),
 		body: [],
+		contributors: [],
 	},
 	{
 		id: '5',
@@ -299,6 +326,7 @@ const blocks: LiveBlock[] = [
 		firstPublished: some(new Date('2021-11-02T10:20:20Z')),
 		lastModified: some(new Date('2021-11-02T11:13:13Z')),
 		body: [],
+		contributors: [],
 	},
 ];
 
