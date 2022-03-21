@@ -38,7 +38,7 @@ export const EnhancePinnedPost = () => {
 						id: pinnedPost?.id,
 					},
 					action: 'CLICK',
-					value: 'show-less',
+					value: 'show-more',
 				});
 			} else {
 				submitComponentEvent({
@@ -47,7 +47,7 @@ export const EnhancePinnedPost = () => {
 						id: pinnedPost?.id,
 					},
 					action: 'CLICK',
-					value: 'show-more',
+					value: 'show-less',
 				});
 			}
 		}
