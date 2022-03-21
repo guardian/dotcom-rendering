@@ -29,6 +29,7 @@ type Props = {
 	idUrl: string;
 	isSensitive: boolean;
 	isDev: boolean;
+	onFirstPage?: boolean;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -123,6 +124,7 @@ export const ArticleBody = ({
 	idUrl,
 	isSensitive,
 	isDev,
+	onFirstPage,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
@@ -166,6 +168,7 @@ export const ArticleBody = ({
 						tags={tags}
 						isPaidContent={isPaidContent}
 						contributionsServiceUrl={contributionsServiceUrl}
+						onFirstPage={onFirstPage}
 					/>
 				</div>
 			</>

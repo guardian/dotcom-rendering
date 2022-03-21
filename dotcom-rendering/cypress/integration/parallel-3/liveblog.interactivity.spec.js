@@ -175,7 +175,7 @@ describe('Liveblogs', function () {
 			cy.get(`[data-cy="toast"]`).should('exist');
 			cy.contains('1 new update').click({ force: true });
 			cy.location().should((loc) => {
-				expect(loc.hash).to.eq('#top-of-blog');
+				expect(loc.hash).to.eq('#maincontent');
 				expect(loc.pathname).to.eq(
 					'/australia-news/live/2022/feb/22/australia-news-live-updates-scott-morrison-nsw-trains-coronavirus-covid-omicron-weather',
 				);

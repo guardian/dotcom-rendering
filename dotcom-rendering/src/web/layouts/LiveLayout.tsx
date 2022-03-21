@@ -802,6 +802,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												}
 												idUrl={CAPI.config.idUrl || ''}
 												isDev={!!CAPI.config.isDev}
+												onFirstPage={
+													pagination.currentPage === 1
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
