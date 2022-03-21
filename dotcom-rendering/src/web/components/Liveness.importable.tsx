@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
 import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
@@ -65,9 +65,11 @@ function insert(html: string, switches: Switches) {
 			'article .pending.block',
 		);
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
-		twttr.ready((twitter) => {
-			twitter.widgets.load(Array.from(pendingBlocks));
-		});
+		if (typeof twttr !== 'undefined')  {
+			twttr.ready((twitter) => {
+				twitter.widgets.load(Array.from(pendingBlocks));
+			});
+		}
 	}
 }
 
@@ -148,10 +150,17 @@ export const Liveness = ({
 	 * allows us to avoid the problems of imperative code being executed multiple times
 	 * inside react's declarative structure (things get re-rendered when any state changes)
 	 */
-	function onSuccess(data: LiveUpdateType) {
+	const onSuccess = useCallback((data: LiveUpdateType) => {
 		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
 			// Insert the new blocks in the dom (but hidden)
-			if (onFirstPage) insert(data.html, switches);
+			if (onFirstPage) {
+				try {
+					insert(data.html, switches);
+				} catch(e) {
+					console.log('>> failed >>', e);
+				}
+
+			}
 
 			if (lastUpdated) {
 				lastUpdated.setAttribute('dateTime', new Date().toString());
@@ -176,7 +185,7 @@ export const Liveness = ({
 				setLatestBlockId(data.mostRecentBlockId);
 			}
 		}
-	}
+	}, [onFirstPage, topOfBlogVisible, numHiddenBlocks]);
 
 	/**
 	 * This is a utility used by our Cypress end to end tests
@@ -253,7 +262,7 @@ export const Liveness = ({
 		};
 	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
 
-	const handleToastClick = () => {
+	const handleToastClick = useCallback(() => {
 		// We adjust the position we scroll readers to based on if there is a pinned
 		// post or not. If there is we want to scroll them to a position below it, if
 		// there is then we want to scroll them to a position that ensures they still
@@ -271,7 +280,7 @@ export const Liveness = ({
 		} else {
 			window.location.href = `${webURL}#${placeToScrollTo}`;
 		}
-	};
+	},[onFirstPage]);
 
 	if (showToast) {
 		return (
