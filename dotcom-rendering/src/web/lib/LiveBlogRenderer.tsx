@@ -22,6 +22,7 @@ type Props = {
 	tags: TagType[];
 	isPaidContent: boolean;
 	contributionsServiceUrl: string;
+	onFirstPage?: boolean;
 };
 
 export const LiveBlogRenderer = ({
@@ -42,13 +43,14 @@ export const LiveBlogRenderer = ({
 	tags,
 	isPaidContent,
 	contributionsServiceUrl,
+	onFirstPage,
 }: Props) => {
 	const thereAreMoreThanFourBlocks = blocks.length > 4;
 	const positionToInsertEpic = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
 
 	return (
 		<>
-			{pinnedPost && (
+			{pinnedPost && onFirstPage && (
 				<>
 					<Island clientOnly={true} deferUntil="idle">
 						<EnhancePinnedPost />
