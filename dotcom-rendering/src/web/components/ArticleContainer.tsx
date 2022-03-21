@@ -134,7 +134,7 @@ const articleAdStyles = css`
 				padding-bottom: ${space[6]}px;
 
 				& > div:not(.ad-slot__label) {
-					width: 300px;
+					width: auto;
 					margin-left: auto;
 					margin-right: auto;
 				}
