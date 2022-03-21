@@ -1,11 +1,12 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import LiveBlockContainer, { BlockContributor } from '@guardian/common-rendering/src/components/liveBlockContainer';
+import type { BlockContributor } from '@guardian/common-rendering/src/components/liveBlockContainer';
+import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { ArticleFormat } from '@guardian/libs';
 import { map, OptionKind, partition, withDefault } from '@guardian/types';
 import { LastUpdated } from 'components/lastUpdated';
-import { Contributor } from 'contributor';
+import type { Contributor } from 'contributor';
 import { formatUTCTimeDateTz } from 'date';
 import { pipe, toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
@@ -14,7 +15,9 @@ import { renderAll } from 'renderer';
 
 // ----- Functions ----- //
 
-const contributorToBlockContributor = (contributor: Contributor): BlockContributor => ({
+const contributorToBlockContributor = (
+	contributor: Contributor,
+): BlockContributor => ({
 	name: contributor.name,
 	imageUrl: pipe(
 		contributor.image,
@@ -53,7 +56,9 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 						// TODO pass this value in when available
 						isPinnedPost={false}
 						supportsDarkMode={true}
-						contributors={block.contributors.map(contributorToBlockContributor)}
+						contributors={block.contributors.map(
+							contributorToBlockContributor,
+						)}
 					>
 						{renderAll(format, partition(block.body).oks)}
 
