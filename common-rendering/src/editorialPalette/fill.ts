@@ -14,6 +14,7 @@ import {
 	opinion,
 	labs,
 	specialReport,
+	neutral,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -113,6 +114,16 @@ const blockquoteIcon = (format: ArticleFormat): Colour => {
 	}
 };
 
+const blockquoteIconDark = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.DeadBlog:
+		case ArticleDesign.LiveBlog:
+			return neutral[60];
+		default:
+			return blockquoteIcon(format);
+	}
+};
+
 // ----- API ----- //
 
 const fill = {
@@ -120,6 +131,7 @@ const fill = {
 	icon,
 	iconDark,
 	blockquoteIcon,
+	blockquoteIconDark,
 };
 
 // ----- Exports ----- //

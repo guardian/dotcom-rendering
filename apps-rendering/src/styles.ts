@@ -185,6 +185,10 @@ export const adStyles = (format: ArticleFormat): SerializedStyles => {
 					margin-top: 0;
 				}
 
+				button {
+					margin-top: ${remSpace[3]};
+				}
+
 				${darkModeCss`
                 background-color: ${brandAltBackground.ctaSecondary};
             `}

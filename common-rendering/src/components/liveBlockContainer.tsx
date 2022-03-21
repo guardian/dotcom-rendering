@@ -7,6 +7,9 @@ import {
 	body,
 } from '@guardian/source-foundations';
 import { FirstPublished } from './FirstPublished';
+import { darkModeCss } from '../lib';
+import { border } from '../editorialPalette';
+import { ArticleFormat } from '@guardian/libs';
 
 type BlockContributor = {
 	name: string;
@@ -16,14 +19,15 @@ type BlockContributor = {
 type Props = {
 	id: string;
 	children: React.ReactNode;
-	borderColour: string;
+	format: ArticleFormat;
 	blockTitle?: string;
 	blockFirstPublished?: number;
 	blockLink: string;
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
 	avatarBackgroundColor?: string;
-	isPinnedPost?: boolean;
+	isPinnedPost: boolean;
+	supportsDarkMode: boolean;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -106,7 +110,7 @@ const BlockByline = ({
 const LiveBlockContainer = ({
 	id,
 	children,
-	borderColour,
+	format,
 	blockTitle,
 	blockFirstPublished,
 	blockLink,
@@ -114,6 +118,7 @@ const LiveBlockContainer = ({
 	contributors,
 	avatarBackgroundColor,
 	isPinnedPost,
+	supportsDarkMode,
 }: Props) => {
 	return (
 		<article
@@ -131,12 +136,20 @@ const LiveBlockContainer = ({
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
-				border-top: ${isPinnedPost ? 0 : `1px solid ${borderColour}`};
-				border-bottom: ${isPinnedPost ? 0 : `1px solid ${neutral[86]}`};
+				${!isPinnedPost &&
+				`border-top: 1px solid ${border.liveBlock(format)};
+				border-bottom: 1px solid ${neutral[86]};`}
 				${from.tablet} {
 					padding: ${space[2]}px ${SIDE_MARGIN}px;
 					padding-left: ${LEFT_MARGIN_DESKTOP}px;
 				}
+
+				${darkModeCss(supportsDarkMode)`
+					border-top: 1px solid ${border.liveBlockDark(format)};
+					background-color: ${neutral[10]};
+					color: ${neutral[100]};
+					border-bottom: 0;
+				`}
 			`}
 		>
 			<Header>
@@ -144,7 +157,8 @@ const LiveBlockContainer = ({
 					<FirstPublished
 						firstPublished={blockFirstPublished}
 						blockLink={blockLink}
-						isPinnedPost={isPinnedPost ? false : true}
+						isPinnedPost={isPinnedPost}
+						supportsDarkMode={supportsDarkMode}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}

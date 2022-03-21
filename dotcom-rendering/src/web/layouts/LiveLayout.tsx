@@ -59,7 +59,6 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
-import { PinnedPostLiveness } from '../components/PinnedPostLiveness.importable';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
@@ -582,11 +581,13 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 						borderColour={palette.border.article}
 						backgroundColour={palette.background.article}
 					>
-						<div
-							css={css`
-								height: ${space[4]}px;
-							`}
-						/>
+						<Hide until="desktop">
+							<div
+								css={css`
+									height: ${space[4]}px;
+								`}
+							/>
+						</Hide>
 					</ElementContainer>
 
 					<ElementContainer
@@ -697,10 +698,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									<Island clientOnly={true} deferUntil="idle">
-										<PinnedPostLiveness />
-									</Island>
-									<span data-gu-marker="top-of-blog" />
 									{format.design ===
 										ArticleDesign.LiveBlog && (
 										<Island
@@ -724,6 +721,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												// know it will exist for all blogs
 												mostRecentBlockId={
 													CAPI.mostRecentBlockId || ''
+												}
+												hasPinnedPost={
+													!!CAPI.pinnedPost
 												}
 											/>
 										</Island>
@@ -802,6 +802,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												}
 												idUrl={CAPI.config.idUrl || ''}
 												isDev={!!CAPI.config.isDev}
+												onFirstPage={
+													pagination.currentPage === 1
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination

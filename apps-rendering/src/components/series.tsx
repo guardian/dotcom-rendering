@@ -63,10 +63,12 @@ const immersiveLabsLinkStyles = css`
 
 const blogLinkStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxxsmall({ lineHeight: 'tight', fontWeight: 'bold' })}
-	color: ${format.design === ArticleDesign.LiveBlog
-		? getThemeStyles(format.theme).liveblogKicker
-		: text.seriesTitle(format)};
+	color: ${text.seriesTitle(format)};
 	text-decoration: none;
+
+	${darkModeCss`
+		color: ${text.seriesTitleDark(format)};
+	`}
 `;
 
 const getLinkStyles = ({

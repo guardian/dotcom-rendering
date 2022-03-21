@@ -5,6 +5,7 @@ import { css } from '@emotion/react';
 import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
 import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
 import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, news, remSpace } from '@guardian/source-foundations';
@@ -21,11 +22,11 @@ import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
-import { articleWidthStyles, onwardStyles } from 'styles';
+import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
 
 // ----- Component ----- //
 
-const mainStyles = css`
+const mainStyles = (format: ArticleFormat): SerializedStyles => css`
 	display: grid;
 	background-color: ${neutral[97]};
 	grid-template-columns: 1fr;
@@ -34,6 +35,10 @@ const mainStyles = css`
 		'main-media'
 		'key-events'
 		'live-blocks';
+
+	${darkModeCss`
+		background-color: ${background.articleContentDark(format)};
+	`}
 
 	${from.tablet} {
 		column-gap: 20px;
@@ -117,9 +122,14 @@ const Live: FC<Props> = ({ item }) => {
 		/>
 	);
 	return (
-		<article className="js-article">
+		<article
+			className="js-article"
+			css={darkModeCss`
+					background-color: ${background.articleContentDark(item)};
+				`}
+		>
 			<LiveblogHeader item={item} />
-			<main css={mainStyles}>
+			<main css={mainStyles(item)}>
 				<GridItem area="metadata">
 					<div css={metadataWrapperStyles(item)}>
 						<Metadata item={item} />
@@ -153,7 +163,7 @@ const Live: FC<Props> = ({ item }) => {
 				<RelatedContent content={item.relatedContent} />
 			</section>
 			<section css={articleWidthStyles}>
-				<Footer isCcpa={false} />
+				<Footer format={item} isCcpa={false} />
 			</section>
 		</article>
 	);

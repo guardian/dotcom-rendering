@@ -2,14 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	background,
-	neutral,
-	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -28,7 +24,7 @@ const backgroundColour = (format: ArticleFormat): string => {
 	}
 };
 
-const styles = css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	margin-top: 0;
 	margin-bottom: 0;
 	display: flex;
@@ -38,7 +34,7 @@ const styles = css`
 	${textSans.medium()}
 
 	${darkModeCss`
-		background: ${background.inverse};
+		background-color: ${background.articleContentDark(format)};
 		color: ${neutral[86]};
 	`}
 `;
@@ -64,7 +60,7 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	line-height: 1;
 
 	${darkModeCss`
-		color: ${neutral[60]};
+		color: ${neutral[86]};
 		background-color: ${neutral[20]};
 	`};
 `;
@@ -79,7 +75,7 @@ interface Props {
 }
 
 const Tags: FC<Props> = ({ tags, format }) => (
-	<ul css={styles}>
+	<ul css={styles(format)}>
 		{tags.map((tag, index) => {
 			return (
 				<li key={index} css={tagStyles}>

@@ -3,32 +3,32 @@ import {
 	neutral,
 	space,
 	textSans,
-	news,
 	from,
 	visuallyHidden,
 	transitions,
 	focusHalo,
 	height,
 } from '@guardian/source-foundations';
-import { Props, SvgMinus, SvgPlus } from '@guardian/source-react-components';
+import {
+	SvgMinus,
+	SvgPlus,
+	SvgPinned,
+} from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { css } from '@emotion/react';
+import { decidePalette } from '../lib/decidePalette';
 
-// TODO: replace with source pinned icon once this has been merged and released.
-// See PR here: https://github.com/guardian/source/pull/1292
-// See Ticket here: https://trello.com/c/xZr6SP9H/272-pinned-post-replace-local-pinned-svg-with-source
-import PinIcon from '../../static/icons/pin.svg';
-
-const pinnedPostContainer = css`
-	border: 3px solid ${news[300]};
+const pinnedPostContainer = (palette: Palette) => css`
+	border: 3px solid ${palette.border.pinnedPost};
 	padding-bottom: ${space[1]}px;
 	margin-bottom: ${space[9]}px;
 	position: relative;
 	background: ${neutral[100]};
 	#pinned-post-checkbox:checked ~ #collapsible-body {
 		max-height: fit-content;
+		margin-bottom: ${space[1]}px;
 	}
-	#pinned-post-checkbox:checked ~ #overlay,
+	#pinned-post-checkbox:checked ~ #pinned-post-overlay,
 	#pinned-post-checkbox ~ label #svgminus,
 	#pinned-post-checkbox:checked ~ label #svgplus {
 		display: none;
@@ -45,39 +45,42 @@ const pinnedPostContainer = css`
 	}
 `;
 
-const pinnedPostRow = css`
-	background: ${news[300]};
-	height: 2rem;
+const rowStyles = (palette: Palette) => css`
+	background: ${palette.border.pinnedPost};
+	height: 32px;
 	display: flex;
 	align-items: center;
 	svg {
 		fill: ${neutral[100]};
-		width: 1.125rem;
-		height: 1.5rem;
+		height: 32px;
+		margin-bottom: ${space[1]}px;
 	}
 `;
 
-const timeAgoText = css`
+const timeAgoStyles = css`
 	${textSans.small({ fontWeight: 'bold' })};
 	color: ${neutral[100]};
-	margin-left: 2.6rem;
+	${from.tablet} {
+		margin-left: 28px;
+	}
+	margin-bottom: ${space[1]}px;
 `;
 
-const overlay = css`
+const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
 		${neutral[100]},
 		${neutral[100]} 40%,
 		rgba(255, 255, 255, 0)
 	);
-	height: 5rem;
+	height: 80px;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 	display: block;
 `;
 
-const button = css`
+const fakeButtonStyles = (palette: Palette) => css`
 	display: inline-flex;
 	justify-content: space-between;
 	align-items: center;
@@ -93,19 +96,19 @@ const button = css`
 	&:focus {
 		${focusHalo};
 	}
-	background: ${news[300]};
-	margin-left: 0.625rem;
+	background: ${palette.border.pinnedPost};
+	margin-left: 10px;
 	position: absolute;
-	bottom: -1.5rem;
+	bottom: -24px;
 	${textSans.medium({ fontWeight: 'bold' })};
 	height: ${height.ctaMedium}px;
 	min-height: ${height.ctaMedium}px;
 	padding: 0 ${space[5]}px;
 	border-radius: ${height.ctaMedium}px;
-	padding-bottom: 0.125rem;
+	padding-bottom: 2px;
 	color: white;
 	${from.tablet} {
-		margin-left: 3.75rem;
+		margin-left: 60px;
 	}
 `;
 
@@ -126,15 +129,17 @@ const buttonIcon = css`
 	}
 `;
 
-export interface PinnedPostProps extends Props {
+type Props = {
 	pinnedPost: Block;
 	children: React.ReactNode;
-}
+	format: ArticleFormat;
+};
 
-export const PinnedPost = ({ pinnedPost, children }: PinnedPostProps) => {
+export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
+	const palette = decidePalette(format);
 	return (
 		<div
-			css={[pinnedPostContainer]}
+			css={pinnedPostContainer(palette)}
 			data-gu-marker="pinned-post"
 			data-component="pinned-post"
 		>
@@ -148,10 +153,10 @@ export const PinnedPost = ({ pinnedPost, children }: PinnedPostProps) => {
 				tabIndex={-1}
 				key="PinnedPostCheckbox"
 			/>
-			<div css={pinnedPostRow}>
-				<PinIcon fill="white" />
+			<div css={rowStyles(palette)}>
+				<SvgPinned />
 				{pinnedPost.blockFirstPublished && (
-					<time data-relativeformat="med" css={timeAgoText}>
+					<time data-relativeformat="med" css={timeAgoStyles}>
 						From {timeAgo(pinnedPost.blockFirstPublished)}
 					</time>
 				)}
@@ -159,20 +164,20 @@ export const PinnedPost = ({ pinnedPost, children }: PinnedPostProps) => {
 			<div id="collapsible-body" css={collapsibleBody}>
 				{children}
 			</div>
-			<div id="overlay" css={overlay} />
+			<div id="pinned-post-overlay" css={overlayStyles} />
 			<label
-				css={button}
+				css={fakeButtonStyles(palette)}
 				htmlFor="pinned-post-checkbox"
 				id="pinned-post-button"
 			>
-				<div>
+				<>
 					<span id="svgminus" css={buttonIcon}>
 						<SvgMinus />
 					</span>
 					<span id="svgplus" css={buttonIcon}>
 						<SvgPlus />
 					</span>
-				</div>
+				</>
 			</label>
 		</div>
 	);

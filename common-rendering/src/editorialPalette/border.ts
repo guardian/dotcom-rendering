@@ -45,7 +45,7 @@ const liveBlock = (format: ArticleFormat): Colour => {
 		case ArticlePillar.Lifestyle:
 			return lifestyle[300];
 		case ArticlePillar.Sport:
-			return sport[300];
+			return sport[400];
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Opinion:
@@ -54,6 +54,25 @@ const liveBlock = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+	}
+};
+
+const liveBlockDark = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
 	}
 };
 
@@ -81,6 +100,7 @@ const border = {
 	articleLink,
 	articleLinkDark,
 	liveBlock,
+	liveBlockDark,
 	standfirstLink,
 	standfirstLinkDark,
 	pagination,

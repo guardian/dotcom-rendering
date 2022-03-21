@@ -2,6 +2,7 @@ import { Island } from '../components/Island';
 import { LiveBlock } from '../components/LiveBlock';
 import { PinnedPost } from '../components/PinnedPost';
 import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
+import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -21,6 +22,7 @@ type Props = {
 	tags: TagType[];
 	isPaidContent: boolean;
 	contributionsServiceUrl: string;
+	onFirstPage?: boolean;
 };
 
 export const LiveBlogRenderer = ({
@@ -41,30 +43,37 @@ export const LiveBlogRenderer = ({
 	tags,
 	isPaidContent,
 	contributionsServiceUrl,
+	onFirstPage,
 }: Props) => {
 	const thereAreMoreThanFourBlocks = blocks.length > 4;
 	const positionToInsertEpic = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
 
 	return (
 		<>
-			{pinnedPost && (
-				<PinnedPost pinnedPost={pinnedPost}>
-					<LiveBlock
-						format={format}
-						block={pinnedPost}
-						pageId={pageId}
-						webTitle={webTitle}
-						adTargeting={adTargeting}
-						host={host}
-						ajaxUrl={ajaxUrl}
-						isLiveUpdate={isLiveUpdate}
-						switches={switches}
-						isAdFreeUser={isAdFreeUser}
-						isSensitive={isSensitive}
-						isPinnedPost={true}
-					/>
-				</PinnedPost>
+			{pinnedPost && onFirstPage && (
+				<>
+					<Island clientOnly={true} deferUntil="idle">
+						<EnhancePinnedPost />
+					</Island>
+					<PinnedPost pinnedPost={pinnedPost} format={format}>
+						<LiveBlock
+							format={format}
+							block={pinnedPost}
+							pageId={pageId}
+							webTitle={webTitle}
+							adTargeting={adTargeting}
+							host={host}
+							ajaxUrl={ajaxUrl}
+							isLiveUpdate={isLiveUpdate}
+							switches={switches}
+							isAdFreeUser={isAdFreeUser}
+							isSensitive={isSensitive}
+							isPinnedPost={true}
+						/>
+					</PinnedPost>
+				</>
 			)}
+			<div id="top-of-blog" />
 			{blocks.map((block, index) => {
 				return (
 					<>
@@ -97,7 +106,7 @@ export const LiveBlogRenderer = ({
 							switches={switches}
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
-							isPinnedPost={true}
+							isPinnedPost={false}
 						/>
 					</>
 				);

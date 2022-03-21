@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
 import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
@@ -14,9 +14,18 @@ type Props = {
 	onFirstPage: boolean;
 	webURL: string;
 	mostRecentBlockId: string;
+	hasPinnedPost: boolean;
 };
 
 const isServer = typeof window === 'undefined';
+
+const topOfBlog: Element | null = !isServer
+	? window.document.getElementById('top-of-blog')
+	: null;
+
+const lastUpdated: Element | null = !isServer
+	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
+	: null;
 
 /**
  * insert
@@ -45,9 +54,9 @@ function insert(html: string, switches: Switches) {
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
-	const latestBlock = blogBody?.querySelector('#liveblog-body :first-child');
-	if (!latestBlock || !blogBody) return;
-	blogBody.insertBefore(fragment, latestBlock);
+	if (!blogBody || !topOfBlog) return;
+	// nextSibling? See: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore#example_2
+	blogBody.insertBefore(fragment, topOfBlog.nextSibling);
 
 	// Enhance
 	// -----------
@@ -56,9 +65,11 @@ function insert(html: string, switches: Switches) {
 			'article .pending.block',
 		);
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
-		twttr.ready((twitter) => {
-			twitter.widgets.load(Array.from(pendingBlocks));
-		});
+		if (typeof twttr !== 'undefined') {
+			twttr.ready((twitter) => {
+				twitter.widgets.load(Array.from(pendingBlocks));
+			});
+		}
 	}
 }
 
@@ -115,14 +126,6 @@ function getKey(
 	}
 }
 
-const topOfBlog: Element | null = !isServer
-	? window.document.querySelector('[data-gu-marker=top-of-blog]')
-	: null;
-
-const lastUpdated: Element | null = !isServer
-	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
-	: null;
-
 export const Liveness = ({
 	pageId,
 	webTitle,
@@ -133,6 +136,7 @@ export const Liveness = ({
 	onFirstPage,
 	webURL,
 	mostRecentBlockId,
+	hasPinnedPost,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<
@@ -146,31 +150,44 @@ export const Liveness = ({
 	 * allows us to avoid the problems of imperative code being executed multiple times
 	 * inside react's declarative structure (things get re-rendered when any state changes)
 	 */
-	function onSuccess(data: LiveUpdateType) {
-		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
-			// Insert the new blocks in the dom (but hidden)
-			if (onFirstPage) insert(data.html, switches);
+	const onSuccess = useCallback(
+		(data: LiveUpdateType) => {
+			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
+				// Insert the new blocks in the dom (but hidden)
+				if (onFirstPage) {
+					try {
+						insert(data.html, switches);
+					} catch (e) {
+						console.log('>> failed >>', e);
+					}
+				}
 
-			if (lastUpdated) {
-				lastUpdated.setAttribute('dateTime', new Date().toString());
-				updateTimeElement(lastUpdated);
-			}
+				if (lastUpdated) {
+					lastUpdated.setAttribute('dateTime', new Date().toString());
+					updateTimeElement(lastUpdated);
+				}
 
-			if (onFirstPage && topOfBlogVisible && document.hasFocus()) {
-				revealPendingBlocks();
-				setNumHiddenBlocks(0);
-			} else {
-				setShowToast(true);
-				// Increment the count of new posts
-				setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
-			}
+				if (
+					onFirstPage &&
+					topOfBlogVisible &&
+					document.visibilityState === 'visible'
+				) {
+					revealPendingBlocks();
+					setNumHiddenBlocks(0);
+				} else {
+					setShowToast(true);
+					// Increment the count of new posts
+					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
+				}
 
-			// Update the block id we use for polling
-			if (data.mostRecentBlockId) {
-				setLatestBlockId(data.mostRecentBlockId);
+				// Update the block id we use for polling
+				if (data.mostRecentBlockId) {
+					setLatestBlockId(data.mostRecentBlockId);
+				}
 			}
-		}
-	}
+		},
+		[onFirstPage, topOfBlogVisible, numHiddenBlocks, switches],
+	);
 
 	/**
 	 * This is a utility used by our Cypress end to end tests
@@ -247,19 +264,25 @@ export const Liveness = ({
 		};
 	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
 
-	const handleToastClick = () => {
+	const handleToastClick = useCallback(() => {
+		// We adjust the position we scroll readers to based on if there is a pinned
+		// post or not. If there is we want to scroll them to a position below it, if
+		// there is then we want to scroll them to a position that ensures they still
+		// see the key events filter
+		const placeToScrollTo = hasPinnedPost ? 'top-of-blog' : 'maincontent';
 		if (onFirstPage) {
 			setShowToast(false);
-			document.getElementById('maincontent')?.scrollIntoView({
+
+			document.getElementById(placeToScrollTo)?.scrollIntoView({
 				behavior: 'smooth',
 			});
-			window.location.href = '#maincontent';
+			window.location.href = `#${placeToScrollTo}`;
 			revealPendingBlocks();
 			setNumHiddenBlocks(0);
 		} else {
-			window.location.href = `${webURL}#maincontent`;
+			window.location.href = `${webURL}#${placeToScrollTo}`;
 		}
-	};
+	}, [hasPinnedPost, onFirstPage, webURL]);
 
 	if (showToast) {
 		return (
