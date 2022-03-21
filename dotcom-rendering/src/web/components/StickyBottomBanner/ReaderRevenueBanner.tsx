@@ -129,7 +129,7 @@ const buildPayload = async ({
 			tagIds: tags.map((tag) => tag.id),
 			contentType,
 			browserId: (await hasCmpConsentForBrowserId())
-				? browserId
+				? browserId || undefined
 				: undefined,
 		},
 	};
