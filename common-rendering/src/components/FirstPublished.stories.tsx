@@ -11,6 +11,7 @@ const Default: FC = () => (
 		supportsDarkMode={true}
 		firstPublished={1613763003000}
 		blockLink={'#block-60300f5f8f08ad21ea60071e'}
+		isPinnedPost={false}
 	/>
 );
 

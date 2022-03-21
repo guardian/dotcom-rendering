@@ -20,6 +20,7 @@ type Props = {
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
 	isLiveUpdate?: boolean;
+	isPinnedPost: boolean;
 };
 
 export const LiveBlock = ({
@@ -34,6 +35,7 @@ export const LiveBlock = ({
 	isSensitive,
 	switches,
 	isLiveUpdate,
+	isPinnedPost,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -55,6 +57,7 @@ export const LiveBlock = ({
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
 			avatarBackgroundColor={palette.background.avatar}
+			isPinnedPost={isPinnedPost}
 			supportsDarkMode={false}
 			format={format}
 		>

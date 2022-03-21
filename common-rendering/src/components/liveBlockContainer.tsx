@@ -6,8 +6,8 @@ import {
 	headline,
 	body,
 } from '@guardian/source-foundations';
-import { darkModeCss } from '../lib';
 import { FirstPublished } from './FirstPublished';
+import { darkModeCss } from '../lib';
 import { border } from '../editorialPalette';
 import { ArticleFormat } from '@guardian/libs';
 
@@ -26,6 +26,7 @@ type Props = {
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
 	avatarBackgroundColor?: string;
+	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
 };
 
@@ -116,6 +117,7 @@ const LiveBlockContainer = ({
 	isLiveUpdate,
 	contributors,
 	avatarBackgroundColor,
+	isPinnedPost,
 	supportsDarkMode,
 }: Props) => {
 	return (
@@ -134,12 +136,13 @@ const LiveBlockContainer = ({
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
-				border-top: 1px solid ${border.liveBlock(format)};
+				${!isPinnedPost &&
+				`border-top: 1px solid ${border.liveBlock(format)};
+				border-bottom: 1px solid ${neutral[86]};`}
 				${from.tablet} {
 					padding: ${space[2]}px ${SIDE_MARGIN}px;
 					padding-left: ${LEFT_MARGIN_DESKTOP}px;
 				}
-				border-bottom: 1px solid ${neutral[86]};
 
 				${darkModeCss(supportsDarkMode)`
 					border-top: 1px solid ${border.liveBlockDark(format)};
@@ -154,6 +157,7 @@ const LiveBlockContainer = ({
 					<FirstPublished
 						firstPublished={blockFirstPublished}
 						blockLink={blockLink}
+						isPinnedPost={isPinnedPost}
 						supportsDarkMode={supportsDarkMode}
 					/>
 				)}
