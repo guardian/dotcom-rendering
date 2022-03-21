@@ -65,7 +65,7 @@ function insert(html: string, switches: Switches) {
 			'article .pending.block',
 		);
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
-		if (typeof twttr !== 'undefined')  {
+		if (typeof twttr !== 'undefined') {
 			twttr.ready((twitter) => {
 				twitter.widgets.load(Array.from(pendingBlocks));
 			});
@@ -150,42 +150,44 @@ export const Liveness = ({
 	 * allows us to avoid the problems of imperative code being executed multiple times
 	 * inside react's declarative structure (things get re-rendered when any state changes)
 	 */
-	const onSuccess = useCallback((data: LiveUpdateType) => {
-		if (data && data.numNewBlocks && data.numNewBlocks > 0) {
-			// Insert the new blocks in the dom (but hidden)
-			if (onFirstPage) {
-				try {
-					insert(data.html, switches);
-				} catch(e) {
-					console.log('>> failed >>', e);
+	const onSuccess = useCallback(
+		(data: LiveUpdateType) => {
+			if (data && data.numNewBlocks && data.numNewBlocks > 0) {
+				// Insert the new blocks in the dom (but hidden)
+				if (onFirstPage) {
+					try {
+						insert(data.html, switches);
+					} catch (e) {
+						console.log('>> failed >>', e);
+					}
 				}
 
-			}
+				if (lastUpdated) {
+					lastUpdated.setAttribute('dateTime', new Date().toString());
+					updateTimeElement(lastUpdated);
+				}
 
-			if (lastUpdated) {
-				lastUpdated.setAttribute('dateTime', new Date().toString());
-				updateTimeElement(lastUpdated);
-			}
+				if (
+					onFirstPage &&
+					topOfBlogVisible &&
+					document.visibilityState === 'visible'
+				) {
+					revealPendingBlocks();
+					setNumHiddenBlocks(0);
+				} else {
+					setShowToast(true);
+					// Increment the count of new posts
+					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
+				}
 
-			if (
-				onFirstPage &&
-				topOfBlogVisible &&
-				document.visibilityState === 'visible'
-			) {
-				revealPendingBlocks();
-				setNumHiddenBlocks(0);
-			} else {
-				setShowToast(true);
-				// Increment the count of new posts
-				setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
+				// Update the block id we use for polling
+				if (data.mostRecentBlockId) {
+					setLatestBlockId(data.mostRecentBlockId);
+				}
 			}
-
-			// Update the block id we use for polling
-			if (data.mostRecentBlockId) {
-				setLatestBlockId(data.mostRecentBlockId);
-			}
-		}
-	}, [onFirstPage, topOfBlogVisible, numHiddenBlocks]);
+		},
+		[onFirstPage, topOfBlogVisible, numHiddenBlocks],
+	);
 
 	/**
 	 * This is a utility used by our Cypress end to end tests
@@ -280,7 +282,7 @@ export const Liveness = ({
 		} else {
 			window.location.href = `${webURL}#${placeToScrollTo}`;
 		}
-	},[onFirstPage]);
+	}, [onFirstPage]);
 
 	if (showToast) {
 		return (
