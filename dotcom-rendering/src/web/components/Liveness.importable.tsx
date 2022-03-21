@@ -186,7 +186,7 @@ export const Liveness = ({
 				}
 			}
 		},
-		[onFirstPage, topOfBlogVisible, numHiddenBlocks],
+		[onFirstPage, topOfBlogVisible, numHiddenBlocks, switches],
 	);
 
 	/**
@@ -282,7 +282,7 @@ export const Liveness = ({
 		} else {
 			window.location.href = `${webURL}#${placeToScrollTo}`;
 		}
-	}, [onFirstPage]);
+	}, [hasPinnedPost, onFirstPage, webURL]);
 
 	if (showToast) {
 		return (
