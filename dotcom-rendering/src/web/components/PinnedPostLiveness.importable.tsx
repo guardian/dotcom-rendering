@@ -67,7 +67,7 @@ export const PinnedPostLiveness = ({}) => {
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
 	useEffect(() => {
-		if (!pinnedPost) return () => {};
+		if (!pinnedPost) return;
 
 		const pinnedPostTiming = initPerf('pinned-post-view-duration');
 
