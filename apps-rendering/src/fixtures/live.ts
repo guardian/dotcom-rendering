@@ -281,12 +281,8 @@ const blocks: LiveBlock[] = [
 					width: 36,
 					height: 36,
 					caption: captionDocFragment,
-					credit: {
-						kind: OptionKind.None,
-					},
-					nativeCaption: {
-						kind: OptionKind.None,
-					},
+					credit: none,
+					nativeCaption: none,
 					role: ArticleElementRole.Standard,
 				}),
 			},
