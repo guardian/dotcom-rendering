@@ -71,6 +71,7 @@ export const LiveBlogRenderer = ({
 					</PinnedPost>
 				</>
 			)}
+			<div id="top-of-blog" />
 			{blocks.map((block, index) => {
 				return (
 					<>

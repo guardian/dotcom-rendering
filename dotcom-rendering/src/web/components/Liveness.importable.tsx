@@ -18,6 +18,14 @@ type Props = {
 
 const isServer = typeof window === 'undefined';
 
+const topOfBlog: Element | null = !isServer
+	? window.document.getElementById('top-of-blog')
+	: null;
+
+const lastUpdated: Element | null = !isServer
+	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
+	: null;
+
 /**
  * insert
  *
@@ -45,9 +53,9 @@ function insert(html: string, switches: Switches) {
 	// We're being sent this string by our own backend, not reader input, so we
 	// trust that the tags and attributes it contains are safe and intentional
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
-	const latestBlock = blogBody?.querySelector('#liveblog-body :first-child');
-	if (!latestBlock || !blogBody) return;
-	blogBody.insertBefore(fragment, latestBlock);
+	if (!blogBody || !topOfBlog) return;
+	// nextSibling? See: https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore#example_2
+	blogBody.insertBefore(fragment, topOfBlog.nextSibling);
 
 	// Enhance
 	// -----------
@@ -114,14 +122,6 @@ function getKey(
 		return undefined;
 	}
 }
-
-const topOfBlog: Element | null = !isServer
-	? window.document.querySelector('[data-gu-marker=top-of-blog]')
-	: null;
-
-const lastUpdated: Element | null = !isServer
-	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
-	: null;
 
 export const Liveness = ({
 	pageId,
@@ -250,14 +250,14 @@ export const Liveness = ({
 	const handleToastClick = () => {
 		if (onFirstPage) {
 			setShowToast(false);
-			document.getElementById('maincontent')?.scrollIntoView({
+			document.getElementById('top-of-blog')?.scrollIntoView({
 				behavior: 'smooth',
 			});
-			window.location.href = '#maincontent';
+			window.location.href = '#top-of-blog';
 			revealPendingBlocks();
 			setNumHiddenBlocks(0);
 		} else {
-			window.location.href = `${webURL}#maincontent`;
+			window.location.href = `${webURL}#top-of-blog`;
 		}
 	};
 
