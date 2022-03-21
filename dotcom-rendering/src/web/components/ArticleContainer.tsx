@@ -140,11 +140,6 @@ const articleAdStyles = css`
 				}
 			}
 		}
-
-		&.ad-slot--fluid {
-			background-color: green;
-			width: 100%;
-		}
 	}
 `;
 
