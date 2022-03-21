@@ -156,7 +156,11 @@ export const Liveness = ({
 				updateTimeElement(lastUpdated);
 			}
 
-			if (onFirstPage && topOfBlogVisible && document.hasFocus()) {
+			if (
+				onFirstPage &&
+				topOfBlogVisible &&
+				document.visibilityState === 'visible'
+			) {
 				revealPendingBlocks();
 				setNumHiddenBlocks(0);
 			} else {
