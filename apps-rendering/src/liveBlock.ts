@@ -1,10 +1,12 @@
 // ----- Imports ----- //
 
 import type { Block } from '@guardian/content-api-models/v1/block';
+import { Tag } from '@guardian/content-api-models/v1/tag';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import { maybeCapiDate } from 'capi';
+import { Contributor, tagToContributor } from 'contributor';
 import type { Context } from 'parserContext';
 
 // ----- Types ----- //
@@ -16,12 +18,20 @@ type LiveBlock = {
 	firstPublished: Option<Date>;
 	lastModified: Option<Date>;
 	body: Body;
+	contributors: Contributor[];
 };
 
 // ----- Functions ----- //
 
+const contributorTags = (contributors: string[], tags: Tag[]): Tag[] => {
+	const isTag = (tag: Tag | undefined): tag is Tag => tag !== undefined;
+	return contributors.map(contributor => tags.find(tag => tag.id === `profile/${contributor}`)).filter(isTag);
+}
+
+const tagsToContributors = (tags: Tag[], context: Context): Contributor[] => tags.map(tagToContributor(context.salt))
+
 const parse =
-	(context: Context) =>
+	(context: Context, tags: Tag[]) =>
 	(block: Block): LiveBlock => ({
 		id: block.id,
 		isKeyEvent: block.attributes.keyEvent ?? false,
@@ -29,12 +39,13 @@ const parse =
 		firstPublished: maybeCapiDate(block.firstPublishedDate),
 		lastModified: maybeCapiDate(block.lastModifiedDate),
 		body: parseElements(context)(block.elements),
+		contributors: tagsToContributors(contributorTags(block.contributors, tags), context),
 	});
 
 const parseMany =
-	(blocks: Block[]): ((context: Context) => LiveBlock[]) =>
-	(context: Context): LiveBlock[] =>
-		blocks.map(parse(context));
+	(context: Context) =>
+	(blocks: Block[], tags: Tag[]): LiveBlock[] =>
+		blocks.map(parse(context, tags));
 
 // ----- Exports ----- //
 
