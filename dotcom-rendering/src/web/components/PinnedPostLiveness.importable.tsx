@@ -84,7 +84,7 @@ export const PinnedPostLiveness = ({}) => {
 						submitComponentEvent({
 							component: {
 								componentType: 'LIVE_BLOG_PINNED_POST',
-								id: pinnedPost?.id,
+								id: pinnedPost.id,
 							},
 							action: 'VIEW',
 							value: timeTakenInSeconds.toString(),
