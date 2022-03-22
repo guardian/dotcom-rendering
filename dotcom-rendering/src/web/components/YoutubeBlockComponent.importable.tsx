@@ -155,7 +155,6 @@ export const YoutubeBlockComponent = ({
 	const ophanTracking = (trackingEvent: string) => {
 		if (!id) return;
 
-		// this can be removed once we've spoken to D&I
 		if (trackingEvent === 'stick') {
 			submitComponentEvent({
 				component: {
