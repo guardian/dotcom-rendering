@@ -166,7 +166,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 				<RelatedContent content={item.relatedContent} />
 			</section>
 			{commentContainer}
-			<Footer isCcpa={false} />
+			<Footer isCcpa={false} format={item} />
 		</main>
 	);
 };

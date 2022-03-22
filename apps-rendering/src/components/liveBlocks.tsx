@@ -1,16 +1,30 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { BlockContributor } from '@guardian/common-rendering/src/components/liveBlockContainer';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { map, OptionKind, partition } from '@guardian/types';
+import { map, OptionKind, partition, withDefault } from '@guardian/types';
 import { LastUpdated } from 'components/lastUpdated';
+import type { Contributor } from 'contributor';
 import { formatUTCTimeDateTz } from 'date';
 import { pipe, toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
+
+// ----- Functions ----- //
+
+const contributorToBlockContributor = (
+	contributor: Contributor,
+): BlockContributor => ({
+	name: contributor.name,
+	imageUrl: pipe(
+		contributor.image,
+		map((i) => i.src),
+		withDefault<string | undefined>(undefined),
+	),
+});
 
 // ----- Component ----- //
 interface LiveBlocksProps {
@@ -22,11 +36,8 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 	return (
 		<>
 			{/* Accordion? */}
-			{/* Pagination? */}
 			{blocks.map((block) => {
-				// TODO: get page number
-				const blockLink = `${1}#block-${block.id}`;
-				const borderLiveBlock = border.liveBlock(format);
+				const blockLink = `?page=with:block-${block.id}#block-${block.id}`;
 				const blockFirstPublished = pipe(
 					block.firstPublished,
 					map(Number),
@@ -37,10 +48,16 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 					<LiveBlockContainer
 						key={block.id}
 						id={block.id}
-						borderColour={borderLiveBlock}
+						format={format}
 						blockTitle={block.title}
 						blockFirstPublished={blockFirstPublished}
 						blockLink={blockLink}
+						// TODO pass this value in when available
+						isPinnedPost={false}
+						supportsDarkMode={true}
+						contributors={block.contributors.map(
+							contributorToBlockContributor,
+						)}
 					>
 						{renderAll(format, partition(block.body).oks)}
 

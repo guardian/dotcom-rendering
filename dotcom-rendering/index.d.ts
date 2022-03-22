@@ -161,6 +161,7 @@ type Palette = {
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		liveBlock: Colour;
+		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
 		standfirst: Colour;
@@ -210,13 +211,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
+		adUnit: string;
+		customParams: CustomParams;
+		disableAds?: false;
+	}
 	| {
-			disableAds: true;
-	  };
+		disableAds: true;
+	};
 
 interface SectionNielsenAPI {
 	name: string;
@@ -434,6 +435,7 @@ interface CAPIType {
 	main: string;
 	keyEvents: Block[];
 	blocks: Block[];
+	pinnedPost?: Block;
 	pagination?: Pagination;
 	author: AuthorType;
 
@@ -509,49 +511,6 @@ interface CAPIType {
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;
 }
-
-// Browser data models. Note the CAPI prefix here means something different to
-// the models above.
-
-type CAPIBrowserType = {
-	format: CAPIFormat;
-	config: ConfigTypeBrowser;
-	editionId: Edition;
-	editionLongForm: string;
-	contentType: string;
-	sectionName?: string;
-	shouldHideReaderRevenue: boolean;
-	pageType: {
-		isMinuteArticle: boolean;
-		isPaidContent: boolean;
-		hasShowcaseMainElement: boolean;
-	};
-	hasRelated: boolean;
-	hasStoryPackage: boolean;
-	shouldHideAds: boolean;
-	isAdFreeUser: boolean;
-	pageId: string;
-	tags: TagType[];
-	isCommentable: boolean;
-	nav: {
-		readerRevenueLinks: {
-			footer: ReaderRevenueCategories;
-			header: ReaderRevenueCategories;
-		};
-	};
-	contributionsServiceUrl: string;
-	isImmersive: boolean;
-	isPhotoEssay: boolean;
-	isSpecialReport: boolean;
-	isLiveBlog: boolean;
-	isLive: boolean;
-	matchUrl?: string;
-	elementsToHydrate: CAPIElement[];
-	isPreview?: boolean;
-	webTitle: string;
-	stage: string;
-	mostRecentBlockId?: string;
-};
 
 interface TagType {
 	id: string;
@@ -850,30 +809,6 @@ interface DCRServerDocumentData {
 	GA: GADataType;
 	linkedData: { [key: string]: any };
 }
-
-interface BrowserNavType {
-	currentNavLink: string;
-	subNavSections?: SubNavType;
-}
-
-interface DCRBrowserDocumentData {
-	page: string;
-	site: string;
-	CAPI: CAPIBrowserType;
-	NAV: BrowserNavType;
-	GA: GADataType;
-	linkedData: { [key: string]: any };
-}
-
-// All Components that are loaded with loadable
-// should be added here, this is the chunk name as
-// defined in loadable-manifest-browser.json
-type BlockElementType = string;
-interface ComponentNameChunkMap {
-	chunkName: string;
-	addWhen: BlockElementType;
-}
-
 interface CarouselImagesMap {
 	'300'?: string;
 	'460'?: string;

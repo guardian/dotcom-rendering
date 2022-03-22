@@ -8,7 +8,6 @@ export const htmlTemplate = ({
 	title = 'The Guardian',
 	description,
 	linkedData,
-	loadableConfigScripts,
 	priorityScriptTags,
 	lowPriorityScriptTags,
 	css,
@@ -25,7 +24,6 @@ export const htmlTemplate = ({
 	title?: string;
 	description: string;
 	linkedData: { [key: string]: any };
-	loadableConfigScripts: string[];
 	priorityScriptTags: string[];
 	lowPriorityScriptTags: string[];
 	css: string;
@@ -285,7 +283,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 						keywords,
 					).replace(/%20/g, '+')}" />
                 </noscript>
-                ${loadableConfigScripts.join('\n')}
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>
                 <style>${resets.resetCSS}</style>

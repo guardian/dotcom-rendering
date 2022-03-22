@@ -1,13 +1,15 @@
 import { StrictMode } from 'react';
 import { Global, css } from '@emotion/react';
-import { focusHalo } from '@guardian/source-foundations';
+import { focusHalo, brandAlt, neutral } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { CommercialMetrics } from './CommercialMetrics.importable';
 import { Island } from './Island';
 import { FocusStyles } from './FocusStyles.importable';
+import { BrazeMessaging } from './BrazeMessaging.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
+import { AlreadyVisited } from './AlreadyVisited.importable';
 
 type Props = {
 	CAPI: CAPIType;
@@ -33,6 +35,10 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 					*:focus {
 						${focusHalo}
 					}
+					::selection {
+						background: ${brandAlt[400]};
+						color: ${neutral[7]};
+					}
 				`}
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
@@ -41,6 +47,9 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id="keyevents" label="Skip to key events" />
 			)}
+			<Island clientOnly={true} deferUntil="idle">
+				<AlreadyVisited />
+			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FocusStyles />
 			</Island>
@@ -53,11 +62,13 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
+				<BrazeMessaging idApiUrl={CAPI.config.idApiUrl} />
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
 				<ReaderRevenueDev
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
 				/>
 			</Island>
-			<div id="react-root" />
 			<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
 		</StrictMode>
 	);

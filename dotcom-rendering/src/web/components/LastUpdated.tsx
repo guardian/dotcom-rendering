@@ -17,7 +17,21 @@ const LastUpdated = ({
 				color: ${neutral[46]};
 			`}
 		>
-			<time dateTime={new Date(lastUpdated).toISOString()}>
+			<time
+				dateTime={new Date(lastUpdated).toISOString()}
+				title={`Last updated ${new Date(lastUpdated).toLocaleDateString(
+					'en-GB',
+					{
+						hour: '2-digit',
+						minute: '2-digit',
+						weekday: 'long',
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric',
+						timeZoneName: 'long',
+					},
+				)}`}
+			>
 				{`Updated at ${lastUpdatedDisplay}`}
 			</time>
 		</div>

@@ -383,6 +383,7 @@ export const renderElement = ({
 						role={element.role}
 						format={format}
 						elementId={element.elementId}
+						caption={element.caption}
 					/>
 				</Island>,
 			];
@@ -569,15 +570,13 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TextBlockElement':
 			return [
 				true,
-				<>
-					<TextBlockComponent
-						key={index}
-						isFirstParagraph={index === 0}
-						html={element.html}
-						format={format}
-						forceDropCap={element.dropCap}
-					/>
-				</>,
+				<TextBlockComponent
+					key={index}
+					isFirstParagraph={index === 0}
+					html={element.html}
+					format={format}
+					forceDropCap={element.dropCap}
+				/>,
 			];
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return [

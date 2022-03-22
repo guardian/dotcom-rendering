@@ -25,18 +25,19 @@ const ignoreErrors = [
 	'The quota has been exceeded',
 ];
 
-const CAPIBrowser: CAPIBrowserType = window.guardian.app.data.CAPI;
+const { config } = window.guardian;
 const {
-	editionLongForm,
-	contentType,
-	config: { isDev, enableSentryReporting, dcrSentryDsn },
-} = CAPIBrowser;
+	switches: { enableSentryReporting },
+	isDev,
+	page: { dcrSentryDsn },
+	stage,
+} = config;
 
 Sentry.init({
 	ignoreErrors,
 	whitelistUrls,
 	dsn: dcrSentryDsn,
-	environment: window.guardian.config.stage || 'DEV',
+	environment: stage || 'DEV',
 	integrations: [new CaptureConsole({ levels: ['error'] })],
 	maxBreadcrumbs: 50,
 	// sampleRate: // We use Math.random in init.ts to sample errors
@@ -48,11 +49,6 @@ Sentry.init({
 		}
 		return event;
 	},
-});
-
-Sentry.configureScope((scope) => {
-	scope.setTag('edition', editionLongForm);
-	scope.setTag('contentType', contentType);
 });
 
 export const reportError = (error: Error, feature?: string): void => {

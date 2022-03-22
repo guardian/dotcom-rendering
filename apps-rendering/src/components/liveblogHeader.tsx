@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import {
 	Column,
 	Columns,
@@ -9,6 +8,10 @@ import {
 } from '@guardian/source-react-components';
 import Headline from 'components/headline';
 import Standfirst from 'components/standfirst';
+import {
+	headlineBackgroundColour,
+	standfirstBackgroundColour,
+} from 'editorialStyles';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
@@ -26,10 +29,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 
 	return (
 		<header>
-			<Container
-				element="div"
-				backgroundColor={background.headline(format)}
-			>
+			<Container element="div" css={headlineBackgroundColour(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Series item={item} />
@@ -39,10 +39,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 					</Column>
 				</Columns>
 			</Container>
-			<Container
-				element="div"
-				backgroundColor={background.standfirst(format)}
-			>
+			<Container element="div" css={standfirstBackgroundColour(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Hide below="desktop">

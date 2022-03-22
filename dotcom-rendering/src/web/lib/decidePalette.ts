@@ -733,6 +733,10 @@ const borderLiveBlock = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const borderPinnedPost = (format: ArticleFormat): string => {
+	return pillarPalette[format.theme][300];
+};
+
 const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -748,13 +752,17 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 };
 
 const borderHeadline = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) return '#9F2423';
+	if (format.design === ArticleDesign.LiveBlog) {
+		return 'rgba(255,255,255, 0.2)';
+	}
 	if (format.design === ArticleDesign.DeadBlog) return '#CDCDCD';
 	return border.secondary;
 };
 
 const borderStandfirst = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) return '#8C2222';
+	if (format.design === ArticleDesign.LiveBlog) {
+		return 'rgba(255,255,255, 0.2)';
+	}
 	if (format.design === ArticleDesign.DeadBlog) return '#BDBDBD';
 	return border.secondary;
 };
@@ -1071,6 +1079,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			articleLink: borderArticleLink(format),
 			articleLinkHover: borderArticleLinkHover(format),
 			liveBlock: borderLiveBlock(format),
+			pinnedPost: borderPinnedPost(format),
 			standfirstLink: borderStandfirstLink(format),
 			headline: borderHeadline(format),
 			standfirst: borderStandfirst(format),
