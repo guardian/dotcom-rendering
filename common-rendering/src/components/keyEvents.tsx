@@ -80,11 +80,11 @@ const linkStyles = (
 ): SerializedStyles => css`
 	text-decoration: none;
 
-	&:hover:before {
+	&:hover::before {
 		background-color: ${neutral[0]};
 	}
 
-	&:before {
+	&::before {
 		content: '';
 		display: block;
 		position: absolute;
@@ -97,11 +97,11 @@ const linkStyles = (
 	}
 
 	${darkModeCss(supportsDarkMode)`
-		&:hover:before {
+		&:hover::before {
 			background-color: ${neutral[100]};
 		}
 
-		&:before {
+		&::before {
 			border-color: transparent ${neutral[60]};
 			background-color: ${neutral[60]};
 		}
