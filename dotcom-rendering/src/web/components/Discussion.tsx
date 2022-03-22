@@ -18,7 +18,6 @@ export type Props = {
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
 	user?: UserProfile;
-	expanded?: boolean;
 };
 
 const commentIdFromUrl = () => {
@@ -38,14 +37,13 @@ export const Discussion = ({
 	discussionApiClientHeader,
 	enableDiscussionSwitch,
 	user,
-	expanded,
 }: Props) => {
 	const [commentPage, setCommentPage] = useState<number>();
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
 	>();
-	const [isExpanded, setIsExpanded] = useState<boolean>(!!expanded);
+	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
 	);
