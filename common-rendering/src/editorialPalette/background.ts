@@ -15,6 +15,7 @@ import {
 	opinion,
 	news,
 	specialReport,
+	labs,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -173,7 +174,7 @@ const avatar = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[800];
 		case ArticleSpecial.Labs:
-			return '#69D1CA';
+			return labs[400];
 		case ArticlePillar.Opinion:
 			return opinion[300];
 		case ArticlePillar.Culture:
