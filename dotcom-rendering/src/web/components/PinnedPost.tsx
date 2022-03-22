@@ -138,7 +138,11 @@ type Props = {
 export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 	const palette = decidePalette(format);
 	return (
-		<div css={[pinnedPostContainer(palette)]} data-gu-marker="pinned-post">
+		<div
+			css={pinnedPostContainer(palette)}
+			data-gu-marker="pinned-post"
+			data-component="pinned-post"
+		>
 			<input
 				type="checkbox"
 				css={css`
