@@ -10,6 +10,7 @@ import { WithABProvider } from './WithABProvider';
 import { useOnce } from '../lib/useOnce';
 import { tests } from '../experiments/ab-tests';
 import { spacefinderOkrMegaTest } from '../experiments/tests/spacefinder-okr-mega-test';
+import { commercialLazyLoadMargin } from '../experiments/tests/commercial-lazy-load-margin';
 
 type Props = {
 	enabled: boolean;
@@ -32,6 +33,7 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 		const testsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
 			spacefinderOkrMegaTest,
+			commercialLazyLoadMargin
 		];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
