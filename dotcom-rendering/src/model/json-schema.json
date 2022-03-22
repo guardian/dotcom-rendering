@@ -176,6 +176,9 @@
                 "$ref": "#/definitions/Block"
             }
         },
+        "pinnedPost": {
+            "$ref": "#/definitions/Block"
+        },
         "pagination": {
             "$ref": "#/definitions/Pagination"
         },
@@ -390,6 +393,9 @@
         },
         "filterKeyEvents": {
             "type": "boolean"
+        },
+        "mostRecentBlockId": {
+            "type": "string"
         }
     },
     "required": [
@@ -3501,6 +3507,12 @@
                 },
                 "firstPublishedDisplay": {
                     "type": "string"
+                },
+                "contributors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/BlockContributor"
+                    }
                 }
             },
             "required": [
@@ -3508,6 +3520,20 @@
                 "id",
                 "primaryDateLine",
                 "secondaryDateLine"
+            ]
+        },
+        "BlockContributor": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "imageUrl": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
             ]
         },
         "Pagination": {

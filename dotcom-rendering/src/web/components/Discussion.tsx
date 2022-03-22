@@ -18,7 +18,6 @@ export type Props = {
 	discussionApiClientHeader: string;
 	enableDiscussionSwitch: boolean;
 	user?: UserProfile;
-	expanded?: boolean;
 };
 
 const commentIdFromUrl = () => {
@@ -38,14 +37,13 @@ export const Discussion = ({
 	discussionApiClientHeader,
 	enableDiscussionSwitch,
 	user,
-	expanded,
 }: Props) => {
 	const [commentPage, setCommentPage] = useState<number>();
 	const [commentPageSize, setCommentPageSize] = useState<25 | 50 | 100>();
 	const [commentOrderBy, setCommentOrderBy] = useState<
 		'newest' | 'oldest' | 'recommendations'
 	>();
-	const [isExpanded, setIsExpanded] = useState<boolean>(!!expanded);
+	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 	const [hashCommentId, setHashCommentId] = useState<number | undefined>(
 		commentIdFromUrl(),
 	);
@@ -64,28 +62,11 @@ export const Discussion = ({
 	const handlePermalink = (commentId: number) => {
 		if (typeof window === 'undefined') return false;
 		window.location.hash = `#comment-${commentId}`;
-		const comment = window.document.getElementById(`comment-${commentId}`);
-		if (comment) {
-			// The comment was already on the page so just scroll to it.
-			comment.scrollIntoView();
-		}
+		// Put this comment id into the hashCommentId state which will
+		// trigger an api call to get the comment context and then expand
+		// and reload the discussion based on the resuts
 		setHashCommentId(commentId);
 		return false;
-	};
-
-	const handleExpanded = (value: number): void => {
-		const { ga } = window;
-
-		if (!ga) {
-			return;
-		}
-
-		ga('allEditorialPropertyTracker.send', 'event', {
-			eventCategory: 'Performance',
-			eventAction: 'DiscussionExpanded',
-			eventValue: Math.round(value),
-			nonInteraction: true,
-		});
 	};
 
 	// Check the url to see if there is a comment hash, e.g. ...crisis#comment-139113120
@@ -147,9 +128,6 @@ export const Discussion = ({
 				commentToScrollTo={hashCommentId}
 				onPermalinkClick={handlePermalink}
 				apiKey="dotcom-rendering"
-				onExpanded={(value) => {
-					handleExpanded(value);
-				}}
 			/>
 		</>
 	);

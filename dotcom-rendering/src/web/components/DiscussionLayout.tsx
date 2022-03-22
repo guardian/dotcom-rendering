@@ -8,7 +8,7 @@ import { Island } from './Island';
 import { DiscussionContainer } from './DiscussionContainer.importable';
 import { DiscussionMeta } from './DiscussionMeta.importable';
 
-interface DiscussionLayoutProps {
+type Props = {
 	format: ArticleFormat;
 	discussionApiUrl: string;
 	shortUrlId: string;
@@ -17,8 +17,7 @@ interface DiscussionLayoutProps {
 	enableDiscussionSwitch: boolean;
 	isAdFreeUser: boolean;
 	shouldHideAds: boolean;
-	expanded?: boolean;
-}
+};
 
 export const DiscussionLayout = ({
 	format,
@@ -29,8 +28,7 @@ export const DiscussionLayout = ({
 	enableDiscussionSwitch,
 	isAdFreeUser,
 	shouldHideAds,
-	expanded,
-}: DiscussionLayoutProps) => {
+}: Props) => {
 	const hideAd = isAdFreeUser || shouldHideAds;
 	return (
 		<>
@@ -70,7 +68,6 @@ export const DiscussionLayout = ({
 									discussionApiClientHeader
 								}
 								enableDiscussionSwitch={enableDiscussionSwitch}
-								expanded={expanded}
 							/>
 						</Island>
 					</div>

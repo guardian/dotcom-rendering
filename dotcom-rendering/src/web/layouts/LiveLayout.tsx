@@ -698,7 +698,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									<span data-gu-marker="top-of-blog" />
 									{format.design ===
 										ArticleDesign.LiveBlog && (
 										<Island
@@ -722,6 +721,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												// know it will exist for all blogs
 												mostRecentBlockId={
 													CAPI.mostRecentBlockId || ''
+												}
+												hasPinnedPost={
+													!!CAPI.pinnedPost
 												}
 											/>
 										</Island>
@@ -769,6 +771,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												format={format}
 												palette={palette}
 												blocks={CAPI.blocks}
+												pinnedPost={CAPI.pinnedPost}
 												adTargeting={adTargeting}
 												host={host}
 												pageId={CAPI.pageId}
@@ -799,6 +802,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												}
 												idUrl={CAPI.config.idUrl || ''}
 												isDev={!!CAPI.config.isDev}
+												onFirstPage={
+													pagination.currentPage === 1
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
