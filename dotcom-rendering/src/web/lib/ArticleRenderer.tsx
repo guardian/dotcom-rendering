@@ -54,9 +54,16 @@ export const ArticleRenderer: React.FC<{
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	contentType: string;
+	sectionName: string;
+	tags: TagType[];
+	isPaidContent: boolean;
+	isPreview?: boolean;
+	idUrl: string;
+	switches: Switches;
+	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	switches: { [key: string]: boolean };
 }> = ({
 	format,
 	elements,
@@ -65,11 +72,18 @@ export const ArticleRenderer: React.FC<{
 	pageId,
 	webTitle,
 	ajaxUrl,
+	contentType,
+	sectionName,
+	tags,
+	isPaidContent,
+	isPreview,
+	idUrl,
+	switches,
 	isAdFreeUser,
 	isSensitive,
-	switches,
+	isDev,
 }) => {
-	const output = elements.map((element, index) => {
+	const renderedElements = elements.map((element, index) => {
 		return renderArticleElement({
 			format,
 			element,
@@ -106,7 +120,21 @@ export const ArticleRenderer: React.FC<{
 			css={[adStylesDynamic, commercialPosition]}
 		>
 			{/* Insert the placeholder for the sign in gate on the 2nd article element */}
-			{withSignInGateSlot(output)}
+			{withSignInGateSlot({
+				renderedElements,
+				format,
+				contentType,
+				sectionName,
+				tags,
+				isPaidContent,
+				isPreview,
+				host,
+				pageId,
+				idUrl,
+				switches,
+				isSensitive,
+				isDev,
+			})}
 		</div>
 	); // classname that space finder is going to target for in-body ads in DCR
 };

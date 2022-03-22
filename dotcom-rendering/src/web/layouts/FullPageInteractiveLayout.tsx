@@ -34,6 +34,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { Island } from '../components/Island';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 interface Props {
 	CAPI: CAPIType;
@@ -208,12 +209,14 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 							edition={CAPI.editionId}
 							idUrl={CAPI.config.idUrl}
 							mmaUrl={CAPI.config.mmaUrl}
-							supporterCTA={
-								CAPI.nav.readerRevenueLinks.header.supporter
-							}
 							discussionApiUrl={CAPI.config.discussionApiUrl}
 							isAnniversary={
 								CAPI.config.switches.anniversaryHeaderSvg
+							}
+							urls={CAPI.nav.readerRevenueLinks.header}
+							remoteHeader={CAPI.config.switches.remoteHeader}
+							contributionsServiceUrl={
+								CAPI.contributionsServiceUrl
 							}
 						/>
 					</ElementContainer>
@@ -352,7 +355,27 @@ export const FullPageInteractiveLayout = ({
 				/>
 			</ElementContainer>
 
-			<BannerWrapper />
+			<BannerWrapper>
+				<Island deferUntil="idle" clientOnly={true}>
+					<StickyBottomBanner
+						abTestSwitches={CAPI.config.switches}
+						contentType={CAPI.contentType}
+						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						idApiUrl={CAPI.config.idApiUrl}
+						isDev={CAPI.config.isDev ?? false}
+						isMinuteArticle={CAPI.pageType.isMinuteArticle}
+						isPaidContent={CAPI.pageType.isPaidContent}
+						isPreview={!!CAPI.config.isPreview}
+						keywordsId={CAPI.config.keywordIds}
+						pageId={CAPI.pageId}
+						pageIsSensitive={CAPI.config.isSensitive}
+						section={CAPI.config.section}
+						sectionName={CAPI.sectionName}
+						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						tags={CAPI.tags}
+					/>
+				</Island>
+			</BannerWrapper>
 			<MobileStickyContainer />
 		</>
 	);

@@ -61,7 +61,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Interactive &&
 		item.display === ArticleDisplay.Immersive
 	) {
-		return <Interactive>{renderAllWithoutStyles(item, body)}</Interactive>;
+		return (
+			<Interactive item={item}>
+				{renderAllWithoutStyles(item, body)}
+			</Interactive>
+		);
 	}
 
 	if (

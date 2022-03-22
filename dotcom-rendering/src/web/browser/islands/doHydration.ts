@@ -23,7 +23,8 @@ export const doHydration = (name: string, data: any, element: HTMLElement) => {
 	const { start, end } = initPerf(`hydrate-${name}`);
 	start();
 	import(
-		/* webpackInclude: /\.importable\.(tsx|jsx)$/ */
+		/* webpackInclude: /\.importable\.tsx$/ */
+		/* webpackChunkName: "[request]" */
 		`../../components/${name}.importable`
 	)
 		.then((module) => {

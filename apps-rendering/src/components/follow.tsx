@@ -18,32 +18,27 @@ interface Props extends ArticleFormat {
 	contributors: Contributor[];
 }
 
-const styles = (format: ArticleFormat): SerializedStyles => {
-	const follow = text.follow(format);
-	const followDark = text.followDark(format);
+const styles = (format: ArticleFormat): SerializedStyles => css`
+	${textSans.small()}
+	color: ${text.follow(format)};
+	display: block;
+	padding: 0;
+	border: none;
+	background: none;
+	margin-left: 0;
+	margin-top: ${remSpace[1]};
+	min-height: ${remSpace[6]};
 
-	return css`
-		${textSans.small()}
-		color: ${follow};
-		display: block;
-		padding: 0;
-		border: none;
-		background: none;
-		margin-left: 0;
-		margin-top: ${remSpace[1]};
-		min-height: ${remSpace[6]};
+	svg {
+		width: ${remSpace[6]};
+		height: ${remSpace[6]};
+		fill: currentColor;
+	}
 
-		svg {
-			width: ${remSpace[6]};
-			height: ${remSpace[6]};
-			fill: currentColor;
-		}
-
-		${darkModeCss`
-			color: ${followDark};
-		`}
-	`;
-};
+	${darkModeCss`
+		color: ${text.followDark(format)};
+	`}
+`;
 
 const followStatusStyles = css`
 	display: flex;

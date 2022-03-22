@@ -71,7 +71,18 @@ export const Writers = (): React.ReactNode => (
 			padded={false}
 			backgroundColour={brandBackground.primary}
 		>
-			<Header edition="UK" discussionApiUrl="" supporterCTA="" />
+			<Header
+				edition="UK"
+				discussionApiUrl=""
+				urls={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				remoteHeader={false}
+				contributionsServiceUrl=""
+			/>
 		</ElementContainer>
 		<ElementContainer
 			showSideBorders={true}

@@ -16,12 +16,13 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
+import { standfirstBackgroundColour } from 'editorialStyles';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe } from 'lib';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { renderStandfirstText } from 'renderer';
-import { darkModeCss as darkMode } from 'styles';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -29,12 +30,12 @@ interface Props {
 	item: Item;
 }
 
-const darkStyles = (format: ArticleFormat): SerializedStyles => darkMode`
+const darkStyles = (format: ArticleFormat): SerializedStyles => darkModeCss`
     background: ${background.standfirstDark(format)};
     color: ${text.standfirstDark(format)};
 
     a {
-        color: ${text.standfirstDark(format)};
+        color: ${text.standfirstLinkDark(format)};
 		border-bottom: 0.0625rem solid ${border.standfirstLinkDark(format)};
     }
 `;
@@ -46,7 +47,8 @@ const isNotBlog = (format: ArticleFormat): boolean =>
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	margin-bottom: ${remSpace[3]};
 	color: ${text.standfirst(format)};
-	background-color: ${background.standfirst(format)};
+
+	${standfirstBackgroundColour(format)}
 
 	p,
 	ul {
@@ -92,6 +94,8 @@ const liveblogStyles: SerializedStyles = css`
 	p {
 		margin: 0;
 		padding: 0.75rem 0;
+
+		${darkModeCss`color: ${neutral[93]};`}
 	}
 
 	ul {
@@ -118,6 +122,13 @@ const deadblogStyles = (format: ArticleFormat): SerializedStyles => {
 			color: ${colour};
 			border-bottom: 1px solid ${colour};
 		}
+
+		${darkModeCss`
+			a:link, a:hover {
+				color: ${text.standfirstLinkDark(format)};
+				border-bottom-color: ${border.standfirstLinkDark(format)};
+			}
+		`}
 	`;
 };
 

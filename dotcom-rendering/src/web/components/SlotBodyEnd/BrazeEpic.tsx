@@ -32,7 +32,7 @@ type EpicConfig = {
 };
 
 export const canShowBrazeEpic = async (
-	brazeMessagesPromise: Promise<BrazeMessagesInterface>,
+	brazeMessages: BrazeMessagesInterface,
 	brazeArticleContext: BrazeArticleContext,
 ): Promise<CanShowResult<Meta>> => {
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
@@ -44,7 +44,6 @@ export const canShowBrazeEpic = async (
 	}
 
 	try {
-		const brazeMessages = await brazeMessagesPromise;
 		const message = await brazeMessages.getMessageForEndOfArticle(
 			brazeArticleContext,
 		);

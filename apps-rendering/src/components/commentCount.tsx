@@ -55,6 +55,10 @@ const blogStyles = (color: string): SerializedStyles => css`
 	${from.desktop} {
 		color: ${neutral[46]};
 		border-left: 1px solid ${neutral[86]};
+
+		${darkModeCss`
+			border-left-color: ${neutral[20]}
+		`}
 	}
 	padding-top: ${remSpace[2]};
 	margin-bottom: ${remSpace[2]};

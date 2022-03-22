@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import type { ArticleFormat } from '@guardian/libs';
 import Footer from 'components/footer';
 import type { FC, ReactNode } from 'react';
 
@@ -7,12 +8,13 @@ import type { FC, ReactNode } from 'react';
 
 interface Props {
 	children: ReactNode[];
+	item: ArticleFormat;
 }
 
-const Interactive: FC<Props> = ({ children }) => (
+const Interactive: FC<Props> = ({ children, item }) => (
 	<main>
 		<article>{children}</article>
-		<Footer isCcpa={false} />
+		<Footer isCcpa={false} format={item} />
 	</main>
 );
 

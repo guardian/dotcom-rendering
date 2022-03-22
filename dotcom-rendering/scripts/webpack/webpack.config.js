@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const LoadablePlugin = require('@loadable/webpack-plugin');
 const { v4: uuidv4 } = require('uuid');
 const WebpackMessages = require('webpack-messages');
 
@@ -49,11 +48,6 @@ const commonConfigs = ({ platform }) => ({
 		// @ts-ignore -- somehow the type declaration isn’t playing nice
 		new FilterWarningsPlugin({
 			exclude: /export .* was not found in/,
-		}),
-		// @ts-ignore -- somehow the type declaration isn’t playing nice
-		new LoadablePlugin({
-			writeToDisk: true,
-			filename: `loadable-manifest-${platform}.json`,
 		}),
 		// Matching modules specified in this regex will not be imported during the webpack build
 		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.

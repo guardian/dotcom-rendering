@@ -3,7 +3,6 @@ import { renderToString } from 'react-dom/server';
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
 
-import { ChunkExtractor } from '@loadable/server';
 import { ArticlePillar } from '@guardian/libs';
 import { decideTheme } from '../lib/decideTheme';
 import { decideFormat } from '../lib/decideFormat';
@@ -11,12 +10,7 @@ import { decideFormat } from '../lib/decideFormat';
 import { Page } from '../components/Page';
 
 import { escapeData } from '../../lib/escapeData';
-import {
-	ASSET_ORIGIN,
-	getScriptArrayFromFilename,
-	getScriptArrayFromChunkName,
-	loadableManifestJson,
-} from '../../lib/assets';
+import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 
 import { makeWindowGuardian } from '../../model/window-guardian';
 import { htmlTemplate } from './htmlTemplate';
@@ -72,65 +66,11 @@ export const document = ({ data }: Props): string => {
 	const chunks = extractCriticalToChunks(html);
 	const extractedCss = constructStyleTagsFromChunks(chunks);
 
-	// There are docs on loadable in ./docs/loadable-components.md
-	const loadableExtractor = new ChunkExtractor({
-		stats: loadableManifestJson,
-		entrypoints: ['react'],
-	});
-
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
 	const CAPIElements: CAPIElement[] = CAPI.blocks
 		.map((block) => block.elements)
 		.flat();
-
-	let arrayOfLoadableScriptObjects: {
-		src: string;
-		legacy: boolean;
-	}[] = [];
-
-	// Pre assets returns an array of objects structured as:
-	// {
-	//     filename: 'elements-RichLinkComponent.js',
-	//     scriptType: 'script',
-	//     chunk: 'elements-RichLinkComponent',
-	//     url: '/elements-RichLinkComponent.js',
-	//     path: '/Users/gareth_trufitt/code/dotcom-rendering/dist/elements-RichLinkComponent.js',
-	//     type: 'mainAsset',
-	//     linkType: 'preload'
-	// }
-	//
-
-	const preAssets: {
-		filename: string;
-		scriptType: string;
-		chunk: string;
-		url: string;
-		path: string;
-		type: string;
-		linkType: string;
-	}[] =
-		// PreAssets is *undocumented* and not in TS types. It returns the webpack asset for each script.
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		loadableExtractor.getPreAssets();
-
-	preAssets.forEach((script) => {
-		arrayOfLoadableScriptObjects = [
-			...arrayOfLoadableScriptObjects,
-			...getScriptArrayFromFilename(script.filename),
-		];
-	});
-
-	// Loadable generates configuration script elements as the first two items
-	// of the script element array. We need to generate the react component version
-	// and then build an array of them, rendering them to string and grabbing
-	// the first two items. The alternative getScriptTags just returns a string
-	// of scripts tags already concatenated, so is not useful in this scenario.
-	const loadableConfigScripts = loadableExtractor
-		.getScriptElements()
-		.map((script) => renderToString(script))
-		.slice(0, 2);
 
 	/**
 	 * Preload the following woff2 font files
@@ -174,17 +114,16 @@ export const document = ({ data }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
-			...getScriptArrayFromChunkName('bootCmp'),
-			...getScriptArrayFromChunkName('ophan'),
+			...getScriptArrayFromFile('bootCmp.js'),
+			...getScriptArrayFromFile('ophan.js'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
-			...getScriptArrayFromChunkName('sentryLoader'),
-			...getScriptArrayFromChunkName('coreVitals'),
-			...getScriptArrayFromChunkName('dynamicImport'),
+			...getScriptArrayFromFile('sentryLoader.ks'),
+			...getScriptArrayFromFile('coreVitals.js'),
+			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements && {
 				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
-			...getScriptArrayFromChunkName('islands'),
-			...arrayOfLoadableScriptObjects, // This includes the 'react' entry point
+			...getScriptArrayFromFile('islands.js'),
 		].filter(isDefined), // We use the TypeGuard to keep TS happy
 	);
 
@@ -196,14 +135,14 @@ export const document = ({ data }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		...getScriptArrayFromChunkName('atomIframe'),
-		...getScriptArrayFromChunkName('embedIframe'),
-		...getScriptArrayFromChunkName('newsletterEmbedIframe'),
-		...getScriptArrayFromChunkName('relativeTime'),
-		...getScriptArrayFromChunkName('initDiscussion'),
+		...getScriptArrayFromFile('atomIframe.js'),
+		...getScriptArrayFromFile('embedIframe.js'),
+		...getScriptArrayFromFile('newsletterEmbedIframe.js'),
+		...getScriptArrayFromFile('relativeTime.js'),
+		...getScriptArrayFromFile('initDiscussion.js'),
 	]);
 
-	const gaChunk = getScriptArrayFromChunkName('ga');
+	const gaChunk = getScriptArrayFromFile('ga.js');
 	const modernScript = gaChunk.filter(
 		(script) => script && script.legacy === false,
 	)[0];
@@ -241,7 +180,6 @@ export const document = ({ data }: Props): string => {
 
 	return htmlTemplate({
 		linkedData,
-		loadableConfigScripts,
 		priorityScriptTags,
 		lowPriorityScriptTags,
 		css: extractedCss,
