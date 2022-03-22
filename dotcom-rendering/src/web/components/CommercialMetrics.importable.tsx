@@ -33,7 +33,7 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 		const testsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
 			spacefinderOkrMegaTest,
-			commercialLazyLoadMargin
+			commercialLazyLoadMargin,
 		];
 		const shouldForceMetrics = ABTestAPI.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
