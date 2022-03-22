@@ -177,3 +177,4 @@ const LiveBlockContainer = ({
 };
 
 export default LiveBlockContainer;
+export type { BlockContributor };
