@@ -21,7 +21,7 @@ import Byline from 'components/byline';
 import CommentCount from 'components/commentCount';
 import Dateline from 'components/dateline';
 import Follow from 'components/follow';
-import OptionalLogo from 'components/logo';
+import Logo from 'components/logo';
 import type { Item } from 'item';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -238,7 +238,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 			)}
 		>
 			<BlogLines {...item} />
-			{OptionalLogo(item)}
+			<Logo item={item} />
 			<Avatar {...item} />
 			<div css={css(textStyles, withBylineTextStyles, liveBlogPadding)}>
 				<div css={liveBylineStyles}>
