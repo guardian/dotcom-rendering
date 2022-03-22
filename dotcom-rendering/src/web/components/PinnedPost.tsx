@@ -126,6 +126,7 @@ const buttonIcon = css`
 		width: 24px;
 		height: auto;
 		margin-left: -${space[1]}px;
+		margin-right: ${space[1]}px;
 	}
 `;
 
