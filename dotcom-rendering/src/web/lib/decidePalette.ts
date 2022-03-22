@@ -582,7 +582,7 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 			case ArticlePillar.Lifestyle:
 				return lifestyle[500];
 			case ArticlePillar.Sport:
-				return sport[800];
+				return sport[600];
 			case ArticlePillar.Opinion:
 				return opinion[500];
 			case ArticleSpecial.Labs:
@@ -768,7 +768,7 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 			case ArticlePillar.Lifestyle:
 				return lifestyle[500];
 			case ArticlePillar.Sport:
-				return sport[800];
+				return sport[600];
 			case ArticlePillar.Opinion:
 				return opinion[500];
 			case ArticleSpecial.Labs:
