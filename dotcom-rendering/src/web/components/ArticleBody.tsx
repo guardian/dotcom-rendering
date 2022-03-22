@@ -10,11 +10,26 @@ type Props = {
 	format: ArticleFormat;
 	palette: Palette;
 	blocks: Block[];
+	pinnedPost?: Block;
 	adTargeting: AdTargeting;
 	host?: string;
 	pageId: string;
 	webTitle: string;
 	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	switches: { [key: string]: boolean };
+	section: string;
+	shouldHideReaderRevenue: boolean;
+	tags: TagType[];
+	isPaidContent: boolean;
+	contributionsServiceUrl: string;
+	contentType: string;
+	sectionName: string;
+	isPreview?: boolean;
+	idUrl: string;
+	isSensitive: boolean;
+	isDev: boolean;
+	onFirstPage?: boolean;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -90,11 +105,26 @@ export const ArticleBody = ({
 	format,
 	palette,
 	blocks,
+	pinnedPost,
 	adTargeting,
 	host,
 	pageId,
 	webTitle,
 	ajaxUrl,
+	switches,
+	isAdFreeUser,
+	section,
+	shouldHideReaderRevenue,
+	tags,
+	isPaidContent,
+	contributionsServiceUrl,
+	contentType,
+	sectionName,
+	isPreview,
+	idUrl,
+	isSensitive,
+	isDev,
+	onFirstPage,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
@@ -112,6 +142,8 @@ export const ArticleBody = ({
 					className="js-liveblog-body"
 					css={[
 						globalStrongStyles,
+						globalH2Styles(format.display),
+						globalH3Styles(format.display),
 						globalLinkStyles(palette),
 						// revealStyles is used to animate the reveal of new blocks
 						format.design === ArticleDesign.LiveBlog &&
@@ -121,12 +153,22 @@ export const ArticleBody = ({
 					<LiveBlogRenderer
 						format={format}
 						blocks={blocks}
+						pinnedPost={pinnedPost}
 						adTargeting={adTargeting}
 						host={host}
 						pageId={pageId}
 						webTitle={webTitle}
 						ajaxUrl={ajaxUrl}
+						switches={switches}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
 						isLiveUpdate={false}
+						section={section}
+						shouldHideReaderRevenue={shouldHideReaderRevenue}
+						tags={tags}
+						isPaidContent={isPaidContent}
+						contributionsServiceUrl={contributionsServiceUrl}
+						onFirstPage={onFirstPage}
 					/>
 				</div>
 			</>
@@ -154,6 +196,16 @@ export const ArticleBody = ({
 				pageId={pageId}
 				webTitle={webTitle}
 				ajaxUrl={ajaxUrl}
+				contentType={contentType}
+				sectionName={sectionName}
+				tags={tags}
+				isPaidContent={isPaidContent}
+				isPreview={isPreview}
+				idUrl={idUrl}
+				switches={switches}
+				isDev={isDev}
+				isAdFreeUser={isAdFreeUser}
+				isSensitive={isSensitive}
 			/>
 		</div>
 	);

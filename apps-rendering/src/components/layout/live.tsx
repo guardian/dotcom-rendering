@@ -4,6 +4,8 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
 import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
+import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, news, remSpace } from '@guardian/source-foundations';
@@ -17,13 +19,14 @@ import RelatedContent from 'components/relatedContent';
 import Tags from 'components/tags';
 import HeaderMedia from 'headerMedia';
 import type { DeadBlog, LiveBlog } from 'item';
+import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
-import { articleWidthStyles, onwardStyles } from 'styles';
+import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
 
 // ----- Component ----- //
 
-const mainStyles = css`
+const mainStyles = (format: ArticleFormat): SerializedStyles => css`
 	display: grid;
 	background-color: ${neutral[97]};
 	grid-template-columns: 1fr;
@@ -32,6 +35,10 @@ const mainStyles = css`
 		'main-media'
 		'key-events'
 		'live-blocks';
+
+	${darkModeCss`
+		background-color: ${background.articleContentDark(format)};
+	`}
 
 	${from.tablet} {
 		column-gap: 20px;
@@ -91,7 +98,7 @@ const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 						{
 							date: block.firstPublished.value,
 							text: block.title,
-							url: `#block-${block.id}`,
+							url: `?page=with:block-${block.id}#block-${block.id}`,
 						},
 				  ]
 				: events,
@@ -102,42 +109,65 @@ interface Props {
 	item: LiveBlog | DeadBlog;
 }
 
-const Live: FC<Props> = ({ item }) => (
-	<article className="js-article">
-		<LiveblogHeader item={item} />
-		<main css={mainStyles}>
-			<GridItem area="metadata">
-				<div css={metadataWrapperStyles(item)}>
-					<Metadata item={item} />
-				</div>
-			</GridItem>
-			<GridItem area="key-events">
-				<div css={keyEventsWrapperStyles}>
-					<KeyEvents
-						keyEvents={keyEvents(item.blocks)}
+const Live: FC<Props> = ({ item }) => {
+	const pagination = (
+		<Pagination
+			format={item}
+			currentPage={item.pagedBlocks.currentPage.pageNumber}
+			totalPages={item.pagedBlocks.pagination.numberOfPages}
+			newest={toNullable(item.pagedBlocks.pagination.newest)}
+			newer={toNullable(item.pagedBlocks.pagination.newer)}
+			oldest={toNullable(item.pagedBlocks.pagination.oldest)}
+			older={toNullable(item.pagedBlocks.pagination.older)}
+		/>
+	);
+	return (
+		<article
+			className="js-article"
+			css={darkModeCss`
+					background-color: ${background.articleContentDark(item)};
+				`}
+		>
+			<LiveblogHeader item={item} />
+			<main css={mainStyles(item)}>
+				<GridItem area="metadata">
+					<div css={metadataWrapperStyles(item)}>
+						<Metadata item={item} />
+					</div>
+				</GridItem>
+				<GridItem area="key-events">
+					<div css={keyEventsWrapperStyles} data-chromatic="ignore">
+						<KeyEvents
+							keyEvents={keyEvents(item.blocks)}
+							format={item}
+							supportsDarkMode
+						/>
+					</div>
+				</GridItem>
+				<GridItem area="main-media">
+					<HeaderMedia item={item} />
+				</GridItem>
+				<GridItem area="live-blocks">
+					{item.pagedBlocks.currentPage.pageNumber > 1 && pagination}
+					<LiveBlocks
+						blocks={item.pagedBlocks.currentPage.blocks}
 						format={item}
-						supportsDarkMode
 					/>
-				</div>
-			</GridItem>
-			<GridItem area="main-media">
-				<HeaderMedia item={item} />
-			</GridItem>
-			<GridItem area="live-blocks">
-				<LiveBlocks blocks={item.blocks} format={item} />
-			</GridItem>
-		</main>
-		<section css={articleWidthStyles}>
-			<Tags tags={item.tags} format={item} />
-		</section>
-		<section css={onwardStyles}>
-			<RelatedContent content={item.relatedContent} />
-		</section>
-		<section css={articleWidthStyles}>
-			<Footer isCcpa={false} />
-		</section>
-	</article>
-);
+					{pagination}
+				</GridItem>
+			</main>
+			<section css={articleWidthStyles}>
+				<Tags tags={item.tags} format={item} />
+			</section>
+			<section css={onwardStyles}>
+				<RelatedContent content={item.relatedContent} />
+			</section>
+			<section css={articleWidthStyles}>
+				<Footer format={item} isCcpa={false} />
+			</section>
+		</article>
+	);
+};
 
 // ----- Exports ----- //
 

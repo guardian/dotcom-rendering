@@ -9,6 +9,10 @@ import { extract as extractGA } from '../../model/extract-ga';
 import { blocksToHtml } from './blocksToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
 
+function enhancePinnedPost(format: CAPIFormat, block?: Block) {
+	return block ? enhanceBlocks([block], format)[0] : block;
+}
+
 export const renderArticle = (
 	{ body }: express.Request,
 	res: express.Response,
@@ -18,6 +22,7 @@ export const renderArticle = (
 		const CAPI = {
 			...data,
 			blocks: enhanceBlocks(data.blocks, data.format),
+			pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 			standfirst: enhanceStandfirst(data.standfirst),
 		};
 		const resp = document({
@@ -48,6 +53,7 @@ export const renderArticleJson = (
 		const CAPI = {
 			...body,
 			blocks: enhanceBlocks(data.blocks, data.format),
+			pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 			standfirst: enhanceStandfirst(data.standfirst),
 		} as CAPIType;
 		const resp = {
@@ -86,6 +92,7 @@ export const renderInteractive = (
 		const CAPI = {
 			...body,
 			blocks: enhanceBlocks(data.blocks, data.format),
+			pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 			standfirst: enhanceStandfirst(data.standfirst),
 		} as CAPIType;
 
@@ -127,6 +134,7 @@ export const renderBlocks = (
 			section,
 			sharedAdTargeting,
 			adUnit,
+			switches,
 		} = body;
 
 		const enhancedBlocks = enhanceBlocks(blocks, format);
@@ -144,6 +152,7 @@ export const renderBlocks = (
 			section,
 			sharedAdTargeting,
 			adUnit,
+			switches,
 		});
 
 		res.status(200).send(html);

@@ -16,7 +16,11 @@ type Props = {
 	adTargeting: AdTargeting;
 	host?: string;
 	ajaxUrl: string;
+	isAdFreeUser: boolean;
+	isSensitive: boolean;
+	switches: { [key: string]: boolean };
 	isLiveUpdate?: boolean;
+	isPinnedPost: boolean;
 };
 
 export const LiveBlock = ({
@@ -27,7 +31,11 @@ export const LiveBlock = ({
 	adTargeting,
 	host = 'https://www.theguardian.com',
 	ajaxUrl,
+	isAdFreeUser,
+	isSensitive,
+	switches,
 	isLiveUpdate,
+	isPinnedPost,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -43,13 +51,15 @@ export const LiveBlock = ({
 	return (
 		<LiveBlockContainer
 			id={block.id}
-			borderColour={palette.border.liveBlock}
 			blockTitle={block.title}
 			blockFirstPublished={block.blockFirstPublished}
 			blockLink={blockLink}
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
 			avatarBackgroundColor={palette.background.avatar}
+			isPinnedPost={isPinnedPost}
+			supportsDarkMode={false}
+			format={format}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({
@@ -62,6 +72,9 @@ export const LiveBlock = ({
 					index,
 					pageId,
 					webTitle,
+					isAdFreeUser,
+					isSensitive,
+					switches,
 				}),
 			)}
 			<footer

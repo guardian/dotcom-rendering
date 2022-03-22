@@ -1,5 +1,6 @@
 import { text, textSans } from '@guardian/source-foundations';
-import { realTimeConfig, BaseAdProps, CommercialConfig, Ad } from './Ad';
+import { getRTCParameters } from '../lib/real-time-config';
+import { BaseAdProps, Ad } from './Ad';
 
 // This CSS should be imported and added to global styles in amp/server/document.tsx to add the Advertisement label to the sticky
 export const stickyAdLabelCss = `
@@ -15,12 +16,6 @@ amp-sticky-ad:before {
 	font-size: 0.75rem;
 }`;
 
-const mobileStickyPlacementId = 9;
-
-interface StickyAdProps extends BaseAdProps {
-	config: CommercialConfig;
-}
-
 export const StickyAd = ({
 	edition,
 	section,
@@ -28,7 +23,7 @@ export const StickyAd = ({
 	config,
 	commercialProperties,
 	adTargeting,
-}: StickyAdProps) => {
+}: BaseAdProps) => {
 	return (
 		<amp-sticky-ad layout="nodisplay">
 			<Ad
@@ -37,13 +32,9 @@ export const StickyAd = ({
 				section={section}
 				contentType={contentType}
 				commercialProperties={commercialProperties}
-				rtcConfig={realTimeConfig(
-					config.usePrebid,
-					config.usePermutive,
-					config.useAmazon,
-					mobileStickyPlacementId,
-				)}
+				config={config}
 				adTargeting={adTargeting}
+				rtcParameters={getRTCParameters({ isSticky: true })}
 			/>
 		</amp-sticky-ad>
 	);

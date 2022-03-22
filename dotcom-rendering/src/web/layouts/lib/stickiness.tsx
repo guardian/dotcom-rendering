@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { getZIndex, getZIndexImportant } from '../../lib/getZIndex';
+import { getZIndex, getZIndexImportant, ZIndex } from '../../lib/getZIndex';
 
 type Props = {
 	children?: React.ReactNode;
@@ -8,7 +8,7 @@ type Props = {
 
 type StuckProps = {
 	children?: React.ReactNode;
-	zIndex?: string;
+	zIndex?: ZIndex;
 };
 
 const stickyStyles = css`
@@ -16,7 +16,7 @@ const stickyStyles = css`
 	top: 0;
 `;
 
-const addZindex = (zIndex = 'stickyAdWrapper') => css`
+const addZindex = (zIndex: ZIndex = 'stickyAdWrapper') => css`
 	${getZIndex(zIndex)}
 `;
 
@@ -57,7 +57,5 @@ export const SendToBack = ({ children }: Props) => (
 );
 
 export const BannerWrapper = ({ children }: Props) => (
-	<aside id="bottom-banner" css={bannerWrapper}>
-		{children}
-	</aside>
+	<aside css={bannerWrapper}>{children}</aside>
 );

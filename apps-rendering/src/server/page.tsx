@@ -134,9 +134,14 @@ const buildHtml = (
 	head: string,
 	body: string,
 	scripts: ReactElement,
-): string => `
-    <!DOCTYPE html>
-    <html lang="en">
+	isBlog: boolean,
+): string => {
+	// Used when taking the reader to the top of the blog on toast click
+	// or when linking to a specific block
+	const smoothScrolling = isBlog ? 'style="scroll-behavior: smooth;"' : '';
+
+	return `<!DOCTYPE html>
+    <html lang="en" ${smoothScrolling}>
         <head>
             ${head}
         </head>
@@ -146,6 +151,7 @@ const buildHtml = (
         </body>
     </html>
 `;
+};
 
 function render(
 	imageSalt: string,
@@ -173,7 +179,11 @@ function render(
 		/>
 	);
 
-	return { html: buildHtml(head, body.html, scripts), clientScript };
+	const isBlog =
+		item.design === ArticleDesign.LiveBlog ||
+		item.design === ArticleDesign.DeadBlog;
+
+	return { html: buildHtml(head, body.html, scripts, isBlog), clientScript };
 }
 
 // ----- Export ----- //

@@ -10,7 +10,7 @@ import { MostViewedRightItem } from './MostViewedRightItem';
 
 const wrapperStyles = css`
 	margin-top: 24px;
-	margin-bottom: 24px;
+	padding-bottom: 48px;
 `;
 
 // We only stick most viewed when ads are not showing. We do this

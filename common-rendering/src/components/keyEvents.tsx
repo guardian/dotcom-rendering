@@ -23,7 +23,7 @@ import {
 } from '@guardian/libs';
 import { darkModeCss } from '../lib';
 import Accordion from './accordion';
-import { text } from '../editorialPalette';
+import { background, text } from '../editorialPalette';
 
 // ----- Component ----- //
 type paletteId = 300 | 400 | 500;
@@ -61,6 +61,7 @@ const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
 };
 
 const keyEventWrapperStyles = (
+	format: ArticleFormat,
 	supportsDarkMode: boolean,
 ): SerializedStyles => css`
 	width: 100%;
@@ -71,13 +72,21 @@ const keyEventWrapperStyles = (
 	}
 
 	${darkModeCss(supportsDarkMode)`
-		background-color: ${neutral[10]};
+		border-top-color: ${neutral[20]};
+		background-color: ${background.articleContentDark(format)};
 	`}
 `;
 
-const linkStyles = (
-	supportsDarkMode: boolean
+const listStyles = (
+	format: ArticleFormat,
+	supportsDarkMode: boolean,
 ): SerializedStyles => css`
+	${darkModeCss(supportsDarkMode)`
+		background-color: ${background.articleContentDark(format)};
+	`}
+`;
+
+const linkStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	text-decoration: none;
 
 	&:hover::before {
@@ -162,7 +171,7 @@ const textStyles = (
 `;
 
 const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
-	${textSans.xxsmall({ fontWeight: "bold", lineHeight: "tight" })};
+	${textSans.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${neutral[7]};
 	display: block;
 	transform: translateY(-2.5px);
@@ -197,7 +206,9 @@ const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
 					>
 						{timeAgo(keyEvent.date.getTime(), { verbose: true })}
 					</time>
-					<span css={textStyles(format, supportsDarkMode)} >{keyEvent.text}</span>
+					<span css={textStyles(format, supportsDarkMode)}>
+						{keyEvent.text}
+					</span>
 				</div>
 			</Link>
 		</li>
@@ -210,7 +221,7 @@ const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 			tabIndex={0}
 			id="keyevents"
-			css={keyEventWrapperStyles(supportsDarkMode)}
+			css={keyEventWrapperStyles(format, supportsDarkMode)}
 			aria-label="Key Events"
 		>
 			<Accordion
@@ -218,7 +229,7 @@ const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
 				accordionTitle="Key events"
 				context="keyEvents"
 			>
-				<ul>
+				<ul css={listStyles(format, supportsDarkMode)}>
 					{keyEvents.slice(0, 7).map((event, index) => (
 						<ListItem
 							key={`${event.url}${index}`}

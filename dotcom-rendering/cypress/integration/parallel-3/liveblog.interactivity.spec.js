@@ -155,7 +155,7 @@ describe('Liveblogs', function () {
 		cy.wait('@updateCall');
 	});
 
-	it.skip('should handle when the toast is clicked from the second page', function () {
+	it('should handle when the toast is clicked from the second page', function () {
 		stubUpdates();
 		cy.visit(
 			`/Article?url=${blogUrl}?live=true&page=with:block-6214732b8f08f86d89ef68d6&filterKeyEvents=false#liveblog-navigation`,
@@ -201,7 +201,7 @@ describe('Liveblogs', function () {
 			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
 				'not.be.visible',
 			);
-			cy.get('[data-gu-marker=top-of-blog]').scrollIntoView();
+			cy.get('[id=top-of-blog]').scrollIntoView();
 			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
 				'be.visible',
 			);
