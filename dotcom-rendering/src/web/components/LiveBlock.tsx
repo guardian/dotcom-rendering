@@ -66,6 +66,7 @@ export const LiveBlock = ({
 			isPinnedPost={isPinnedPost}
 			supportsDarkMode={false}
 			format={format}
+			isOriginalPinnedPost={isOriginalPinnedPost}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({
