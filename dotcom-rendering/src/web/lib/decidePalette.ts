@@ -772,9 +772,10 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 			case ArticlePillar.Opinion:
 				return opinion[500];
 			case ArticleSpecial.Labs:
-				return labs[400];
 			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
+				// We don't have designs for Special Report or Labs liveblogs yet
+				// so we default to news
+				return news[600];
 		}
 	}
 	if (format.theme === ArticleSpecial.SpecialReport)
