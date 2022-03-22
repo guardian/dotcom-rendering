@@ -39,7 +39,9 @@ export const LiveBlock = ({
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
-	const blockLink = `${joinUrl(host, pageId)}#block-${block.id}`;
+	const blockLink = `${joinUrl(host, pageId)}?page=with:block-${
+		block.id
+	}#block-${block.id}`;
 
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
