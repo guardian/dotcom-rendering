@@ -8,7 +8,13 @@ import { Pagination } from '@guardian/common-rendering/src/components/Pagination
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, neutral, news, remSpace } from '@guardian/source-foundations';
+import {
+	from,
+	neutral,
+	news,
+	pxToRem,
+	remSpace,
+} from '@guardian/source-foundations';
 import { OptionKind } from '@guardian/types';
 import Footer from 'components/footer';
 import GridItem from 'components/gridItem';
@@ -148,12 +154,35 @@ const Live: FC<Props> = ({ item }) => {
 					<HeaderMedia item={item} />
 				</GridItem>
 				<GridItem area="live-blocks">
-					{item.pagedBlocks.currentPage.pageNumber > 1 && pagination}
-					<LiveBlocks
-						blocks={item.pagedBlocks.currentPage.blocks}
-						format={item}
-					/>
-					{pagination}
+					<div
+						css={css`
+							padding-left: ${pxToRem(10)}rem;
+							padding-right: ${pxToRem(10)}rem;
+							padding-top: ${remSpace[3]};
+
+							${from.mobileLandscape} {
+								padding-left: ${remSpace[5]};
+								padding-right: ${remSpace[5]};
+							}
+
+							${from.tablet} {
+								padding-left: 0;
+								padding-right: 0;
+							}
+
+							${from.desktop} {
+								padding: 0;
+							}
+						`}
+					>
+						{item.pagedBlocks.currentPage.pageNumber > 1 &&
+							pagination}
+						<LiveBlocks
+							blocks={item.pagedBlocks.currentPage.blocks}
+							format={item}
+						/>
+						{pagination}
+					</div>
 				</GridItem>
 			</main>
 			<section css={articleWidthStyles}>
