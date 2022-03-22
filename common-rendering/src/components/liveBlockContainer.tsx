@@ -134,6 +134,7 @@ const LiveBlockContainer = ({
 			className={`block ${isLiveUpdate && 'pending'}`}
 			css={css`
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
+				box-sizing: border-box;
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
 				${!isPinnedPost &&
