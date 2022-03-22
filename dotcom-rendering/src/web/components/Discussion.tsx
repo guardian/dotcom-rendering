@@ -62,11 +62,9 @@ export const Discussion = ({
 	const handlePermalink = (commentId: number) => {
 		if (typeof window === 'undefined') return false;
 		window.location.hash = `#comment-${commentId}`;
-		const comment = window.document.getElementById(`comment-${commentId}`);
-		if (comment) {
-			// The comment was already on the page so just scroll to it.
-			comment.scrollIntoView();
-		}
+		// Put this comment id into the hashCommentId state which will
+		// trigger an api call to get the comment context and then expand
+		// and reload the discussion based on the resuts
 		setHashCommentId(commentId);
 		return false;
 	};
