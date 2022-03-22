@@ -8,8 +8,9 @@ import {
 } from '@guardian/source-foundations';
 import { FirstPublished } from './FirstPublished';
 import { darkModeCss } from '../lib';
-import { border } from '../editorialPalette';
+import { background, border } from '../editorialPalette';
 import { ArticleFormat } from '@guardian/libs';
+
 
 type BlockContributor = {
 	name: string;
@@ -25,7 +26,6 @@ type Props = {
 	blockLink: string;
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
-	avatarBackgroundColor?: string;
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
 };
@@ -64,11 +64,11 @@ const BlockTitle = ({ title }: { title: string }) => {
 const BlockByline = ({
 	name,
 	imageUrl,
-	avatarBackgroundColor,
+	format,
 }: {
 	name: string;
+	format: ArticleFormat;
 	imageUrl?: string;
-	avatarBackgroundColor?: string;
 }) => {
 	return (
 		<div
@@ -86,9 +86,9 @@ const BlockByline = ({
 						css={css`
 							border-radius: 100%;
 							object-fit: cover;
-							height: 100%;
-							width: 100%;
-							background-color: ${avatarBackgroundColor};
+							height: 36px;
+							width: 36px;
+							background-color: ${background.avatar(format)};
 						`}
 					/>
 				</div>
@@ -116,7 +116,6 @@ const LiveBlockContainer = ({
 	blockLink,
 	isLiveUpdate,
 	contributors,
-	avatarBackgroundColor,
 	isPinnedPost,
 	supportsDarkMode,
 }: Props) => {
@@ -168,7 +167,7 @@ const LiveBlockContainer = ({
 						<BlockByline
 							name={contributor.name}
 							imageUrl={contributor.imageUrl}
-							avatarBackgroundColor={avatarBackgroundColor}
+							format={format}
 						/>
 					))}
 			</Header>
