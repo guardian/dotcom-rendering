@@ -204,7 +204,7 @@ const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
 						})}`}
 						css={timeStyles(supportsDarkMode)}
 					>
-						{timeAgo(keyEvent.date.getTime(), { verbose: true })}
+						{timeAgo(keyEvent.date.getTime())}
 					</time>
 					<span css={textStyles(format, supportsDarkMode)}>
 						{keyEvent.text}
