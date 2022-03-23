@@ -28,7 +28,7 @@ function hideShowMore() {
 function scrollOnCollapse() {
 	const position = pinnedPost?.getBoundingClientRect();
 	if (position && position.top < 0) {
-		document.getElementById('maincontent')?.scrollIntoView({
+		pinnedPost?.scrollIntoView({
 			behavior: 'smooth',
 		});
 	}
