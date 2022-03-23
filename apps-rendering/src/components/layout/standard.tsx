@@ -18,7 +18,7 @@ import FootballScores from 'components/footballScores';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';
-import OptionalLogo from 'components/logo';
+import Logo from 'components/logo';
 import Metadata from 'components/metadata';
 import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
@@ -148,7 +148,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 					</div>
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />
-						{OptionalLogo(item)}
+						<Logo item={item} />
 					</section>
 				</header>
 				<Body
