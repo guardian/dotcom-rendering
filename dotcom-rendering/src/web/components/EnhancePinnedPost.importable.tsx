@@ -22,6 +22,15 @@ function hideShowMore() {
 	if (pinnedPostButton) pinnedPostButton.style.display = 'none';
 }
 
+/**
+ * Scroll to the top of the main content when the pinned post is collapsed
+ */
+function scrollOnCollapse() {
+	document.getElementById('maincontent')?.scrollIntoView({
+		behavior: 'smooth',
+	});
+}
+
 export const EnhancePinnedPost = () => {
 	const contentFitsContainer =
 		pinnedPost && pinnedPost.scrollHeight <= pinnedPost.clientHeight;
@@ -49,6 +58,7 @@ export const EnhancePinnedPost = () => {
 					action: 'CLICK',
 					value: 'show-less',
 				});
+				scrollOnCollapse();
 			}
 		}
 	};
