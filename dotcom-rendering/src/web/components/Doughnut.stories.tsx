@@ -109,12 +109,7 @@ Three.story = { name: 'with three sections' };
 export const Smaller = () => {
 	return (
 		<Container>
-			<Doughnut
-				sections={twoSections}
-				percentCutout={20}
-				width={200}
-				height={200}
-			/>
+			<Doughnut sections={twoSections} percentCutout={20} size={200} />
 		</Container>
 	);
 };

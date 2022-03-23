@@ -7,8 +7,7 @@ import { isLight } from '../lib/isLight';
 type Props = {
 	sections: Section[];
 	percentCutout?: number;
-	width?: number;
-	height?: number;
+	size?: number;
 };
 
 type Section = {
@@ -40,13 +39,12 @@ const withoutZeroSections = (sections: Section[]) =>
 export const Doughnut = ({
 	sections,
 	percentCutout = 35,
-	width = 300,
-	height = 300,
+	size = 300,
 }: Props) => {
 	// TODO: Support displaying 0% for sections where value is zero
 	// We handle these at the moment by filtering them out using withoutZeroSections()
 
-	const outerRadius = Math.min(height / 2, width / 2);
+	const outerRadius = size / 2;
 	const innerRadius = outerRadius * (percentCutout / 100);
 	const radius = (innerRadius + outerRadius) / 2;
 
@@ -58,8 +56,8 @@ export const Doughnut = ({
 	const tau = Math.PI * 2;
 
 	const center = {
-		x: width / 2,
-		y: height / 2,
+		x: size / 2,
+		y: size / 2,
 	};
 
 	const getPosition = (angle: number) =>
@@ -140,9 +138,9 @@ export const Doughnut = ({
 	return (
 		<svg
 			preserveAspectRatio="xMinYMin"
-			width={width}
-			height={height}
-			viewBox={`0 0 ${width} ${height}`}
+			width={size}
+			height={size}
+			viewBox={`0 0 ${size} ${size}`}
 		>
 			{segments.map((segment) => (
 				<g>

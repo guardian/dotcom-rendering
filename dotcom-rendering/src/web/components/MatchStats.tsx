@@ -302,11 +302,7 @@ const DecideDoughnut = ({
 							}
 						`}
 					>
-						<Doughnut
-							sections={sections}
-							width={200}
-							height={200}
-						/>
+						<Doughnut sections={sections} size={200} />
 					</div>
 					<div
 						css={css`
@@ -316,11 +312,7 @@ const DecideDoughnut = ({
 							}
 						`}
 					>
-						<Doughnut
-							sections={sections}
-							width={300}
-							height={300}
-						/>
+						<Doughnut sections={sections} size={300} />
 					</div>
 					{/* This represents the stats component being within the left column on a liveblog */}
 					<div
@@ -330,11 +322,7 @@ const DecideDoughnut = ({
 							}
 						`}
 					>
-						<Doughnut
-							sections={sections}
-							width={200}
-							height={200}
-						/>
+						<Doughnut sections={sections} size={200} />
 					</div>
 				</>
 			);
