@@ -13,6 +13,7 @@ import {
 	neutral,
 	remSpace,
 	from,
+	until,
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import {
@@ -82,6 +83,10 @@ const listStyles = (
 	supportsDarkMode: boolean,
 ): SerializedStyles => css`
 	${darkModeCss(supportsDarkMode)`
+		${until.desktop} {
+			background-color: ${neutral[10]};
+		}
+
 		background-color: ${background.articleContentDark(format)};
 	`}
 `;
