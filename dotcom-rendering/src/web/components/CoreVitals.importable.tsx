@@ -6,6 +6,7 @@ import {
 	initCoreWebVitals,
 } from '@guardian/libs';
 import { tests } from '../experiments/ab-tests';
+import { commercialGptLazyLoad } from '../experiments/tests/commercial-gpt-lazy-load';
 import { WithABProvider } from './WithABProvider';
 
 const CoreVitalsWithAB = () => {
@@ -28,6 +29,7 @@ const CoreVitalsWithAB = () => {
 
 	const testsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
+		commercialGptLazyLoad,
 	];
 
 	const ABTestAPI = useAB();
