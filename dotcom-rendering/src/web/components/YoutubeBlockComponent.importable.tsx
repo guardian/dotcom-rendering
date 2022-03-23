@@ -187,6 +187,7 @@ export const YoutubeBlockComponent = ({
 			elementId: id,
 		});
 	};
+	console.log({ stickyVideos });
 
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
