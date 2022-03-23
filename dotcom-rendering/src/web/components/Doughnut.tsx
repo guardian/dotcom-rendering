@@ -136,12 +136,7 @@ export const Doughnut = ({
 	);
 
 	return (
-		<svg
-			preserveAspectRatio="xMinYMin"
-			width={size}
-			height={size}
-			viewBox={`0 0 ${size} ${size}`}
-		>
+		<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
 			{segments.map((segment) => (
 				<g>
 					<path
