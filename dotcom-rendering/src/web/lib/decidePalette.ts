@@ -570,12 +570,30 @@ const backgroundBullet = (format: ArticleFormat): string => {
 };
 
 const backgroundBulletStandfirst = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.DeadBlog:
-			return neutral[60];
-		default:
-			return neutral[86]; // default previously defined in Standfirst.tsx
+	if (format.design === ArticleDesign.DeadBlog) {
+		return neutral[60];
 	}
+	if (format.design === ArticleDesign.LiveBlog) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[600];
+			case ArticlePillar.Culture:
+				return culture[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[500];
+			case ArticlePillar.Sport:
+				return sport[600];
+			case ArticlePillar.Opinion:
+				return opinion[500];
+			case ArticleSpecial.Labs:
+			case ArticleSpecial.SpecialReport:
+				// We don't have designs for Special Report or Labs liveblogs yet
+				// so we default to news
+				return news[600];
+		}
+	}
+
+	return neutral[86]; // default previously defined in Standfirst.tsx
 };
 
 const backgroundHeader = (format: ArticleFormat): string => {
@@ -745,7 +763,25 @@ const borderArticleLink = (format: ArticleFormat): string => {
 };
 
 const borderStandfirstLink = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+	if (format.design === ArticleDesign.LiveBlog) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[600];
+			case ArticlePillar.Culture:
+				return culture[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[500];
+			case ArticlePillar.Sport:
+				return sport[600];
+			case ArticlePillar.Opinion:
+				return opinion[500];
+			case ArticleSpecial.Labs:
+			case ArticleSpecial.SpecialReport:
+				// We don't have designs for Special Report or Labs liveblogs yet
+				// so we default to news
+				return news[600];
+		}
+	}
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[400];
 	return border.secondary;
@@ -826,7 +862,7 @@ const hoverStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog)
 		return pillarPalette[format.theme].main;
 	if (format.design === ArticleDesign.LiveBlog) {
-		return pillarPalette[format.theme].dark;
+		return WHITE;
 	}
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[400];
