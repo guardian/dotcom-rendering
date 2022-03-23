@@ -350,7 +350,10 @@ export const renderElement = ({
 				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
-			if (format.design === ArticleDesign.Interactive) {
+			if (
+				format.design === ArticleDesign.Interactive ||
+				format.design === ArticleDesign.FullPageInteractive
+			) {
 				return [
 					true,
 					<InteractiveLayoutAtom
