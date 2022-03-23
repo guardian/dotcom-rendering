@@ -12,6 +12,7 @@ import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
 import { ShareIcons } from './ShareIcons';
 import { Badge } from './Badge';
+import { decidePalette } from '../lib/decidePalette';
 
 const labelStyles = (palette: Palette) => css`
 	${textSans.xxsmall()};
@@ -121,7 +122,6 @@ const hideSlash = css`
 `;
 
 type Props = {
-	palette: Palette;
 	format: ArticleFormat;
 	subMetaSectionLinks: SimpleLinkType[];
 	subMetaKeywordLinks: SimpleLinkType[];
@@ -141,7 +141,6 @@ const syndicationButtonOverrides = (palette: Palette) => css`
 `;
 
 export const SubMeta = ({
-	palette,
 	format,
 	subMetaKeywordLinks,
 	subMetaSectionLinks,
@@ -151,6 +150,7 @@ export const SubMeta = ({
 	showBottomSocialButtons,
 	badge,
 }: Props) => {
+	const palette = decidePalette(format);
 	const hasSectionLinks = subMetaSectionLinks.length > 0;
 	const hasKeywordLinks = subMetaKeywordLinks.length > 0;
 	return (

@@ -53,6 +53,7 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -223,15 +224,9 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
-export const ShowcaseLayout = ({
-	CAPI,
-	NAV,
-	format,
-	palette,
-}: Props): JSX.Element => {
+export const ShowcaseLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -264,6 +259,8 @@ export const ShowcaseLayout = ({
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const palette = decidePalette(format);
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
 
@@ -439,7 +436,7 @@ export const ShowcaseLayout = ({
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border palette={palette} />
+							<Border format={format} />
 						</GridItem>
 						<GridItem area="headline">
 							<PositionHeadline design={format.design}>
@@ -541,7 +538,6 @@ export const ShowcaseLayout = ({
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
-									palette={palette}
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
@@ -601,7 +597,6 @@ export const ShowcaseLayout = ({
 								)}
 								<Lines count={4} effect="straight" />
 								<SubMeta
-									palette={palette}
 									format={format}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks

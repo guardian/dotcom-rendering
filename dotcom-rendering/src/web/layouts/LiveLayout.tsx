@@ -62,6 +62,7 @@ import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -263,10 +264,9 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
-export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -306,6 +306,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const palette = decidePalette(format);
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -770,7 +773,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											)}
 											<ArticleBody
 												format={format}
-												palette={palette}
 												blocks={CAPI.blocks}
 												pinnedPost={CAPI.pinnedPost}
 												adTargeting={adTargeting}
@@ -880,7 +882,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												effect="straight"
 											/>
 											<SubMeta
-												palette={palette}
 												format={format}
 												subMetaKeywordLinks={
 													CAPI.subMetaKeywordLinks

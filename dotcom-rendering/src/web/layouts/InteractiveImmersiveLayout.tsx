@@ -295,12 +295,7 @@ export const InteractiveImmersiveLayout = ({
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<ImmersiveHeader
-				CAPI={CAPI}
-				NAV={NAV}
-				format={format}
-				palette={palette}
-			/>
+			<ImmersiveHeader CAPI={CAPI} NAV={NAV} format={format} />
 			<main>
 				<ElementContainer
 					showTopBorder={false}
@@ -323,7 +318,7 @@ export const InteractiveImmersiveLayout = ({
 							{format.design === ArticleDesign.PhotoEssay ? (
 								<></>
 							) : (
-								<Border palette={palette} />
+								<Border format={format} />
 							)}
 						</GridItem>
 						<GridItem area="title" element="aside">

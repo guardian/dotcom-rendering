@@ -60,6 +60,7 @@ import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 
 const StandardGrid = ({
 	children,
@@ -310,10 +311,9 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
-export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -350,6 +350,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const palette = decidePalette(format);
 
 	const formatForNav =
 		format.theme === ArticleSpecial.Labs
@@ -496,7 +498,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							{format.theme === ArticleSpecial.Labs ? (
 								<></>
 							) : (
-								<Border palette={palette} />
+								<Border format={format} />
 							)}
 						</GridItem>
 						<GridItem area="matchNav" element="aside">
@@ -642,7 +644,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
-									palette={palette}
 									blocks={CAPI.blocks}
 									pinnedPost={CAPI.pinnedPost}
 									adTargeting={adTargeting}
@@ -721,7 +722,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									effect="straight"
 								/>
 								<SubMeta
-									palette={palette}
 									format={format}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
