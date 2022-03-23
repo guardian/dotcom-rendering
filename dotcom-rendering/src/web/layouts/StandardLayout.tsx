@@ -358,6 +358,9 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					theme: getCurrentPillar(CAPI),
 			  };
 
+	const contributionsServiceUrl =
+		process?.env?.SDC_URL ?? CAPI.contributionsServiceUrl;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -395,7 +398,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								urls={CAPI.nav.readerRevenueLinks.header}
 								remoteHeader={CAPI.config.switches.remoteHeader}
 								contributionsServiceUrl={
-									CAPI.contributionsServiceUrl
+									contributionsServiceUrl
 								}
 							/>
 						</ElementContainer>
@@ -657,7 +660,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									tags={CAPI.tags}
 									isPaidContent={!!CAPI.config.isPaidContent}
 									contributionsServiceUrl={
-										CAPI.contributionsServiceUrl
+										contributionsServiceUrl
 									}
 									contentType={CAPI.contentType}
 									sectionName={CAPI.sectionName || ''}
@@ -687,7 +690,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											}
 											contentType={CAPI.contentType}
 											contributionsServiceUrl={
-												CAPI.contributionsServiceUrl
+												contributionsServiceUrl
 											}
 											idApiUrl={CAPI.config.idApiUrl}
 											isDev={CAPI.config.isDev ?? false}
@@ -916,7 +919,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
 						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}
