@@ -47,6 +47,7 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
 
 const StandardGrid = ({
 	children,
@@ -325,6 +326,8 @@ export const CommentLayout = ({
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
+
 	return (
 		<>
 			<div id="bannerandheader">
@@ -362,7 +365,7 @@ export const CommentLayout = ({
 								urls={CAPI.nav.readerRevenueLinks.header}
 								remoteHeader={CAPI.config.switches.remoteHeader}
 								contributionsServiceUrl={
-									CAPI.contributionsServiceUrl
+									contributionsServiceUrl
 								}
 							/>
 						</ElementContainer>
@@ -571,7 +574,7 @@ export const CommentLayout = ({
 											!!CAPI.config.isPaidContent
 										}
 										contributionsServiceUrl={
-											CAPI.contributionsServiceUrl
+											contributionsServiceUrl
 										}
 										contentType={CAPI.contentType}
 										sectionName={CAPI.sectionName || ''}
@@ -587,7 +590,7 @@ export const CommentLayout = ({
 												}
 												contentType={CAPI.contentType}
 												contributionsServiceUrl={
-													CAPI.contributionsServiceUrl
+													contributionsServiceUrl
 												}
 												idApiUrl={CAPI.config.idApiUrl}
 												isDev={
@@ -806,7 +809,7 @@ export const CommentLayout = ({
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
 						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}

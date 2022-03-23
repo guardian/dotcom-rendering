@@ -61,6 +61,7 @@ import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -302,6 +303,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		totalPages: 1,
 	};
 
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
+
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 	return (
 		<>
@@ -339,9 +342,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							}
 							urls={CAPI.nav.readerRevenueLinks.header}
 							remoteHeader={CAPI.config.switches.remoteHeader}
-							contributionsServiceUrl={
-								CAPI.contributionsServiceUrl
-							}
+							contributionsServiceUrl={contributionsServiceUrl}
 						/>
 					</ElementContainer>
 
@@ -791,7 +792,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													!!CAPI.config.isPaidContent
 												}
 												contributionsServiceUrl={
-													CAPI.contributionsServiceUrl
+													contributionsServiceUrl
 												}
 												contentType={CAPI.contentType}
 												sectionName={
@@ -831,7 +832,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 															CAPI.contentType
 														}
 														contributionsServiceUrl={
-															CAPI.contributionsServiceUrl
+															contributionsServiceUrl
 														}
 														idApiUrl={
 															CAPI.config.idApiUrl
@@ -1071,7 +1072,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
 						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}
