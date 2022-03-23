@@ -23,12 +23,15 @@ function hideShowMore() {
 }
 
 /**
- * Scroll to the top of the main content when the pinned post is collapsed
+ * Scroll to the top of the main content when the pinned post is collapsed if the top of the post is out of view
  */
 function scrollOnCollapse() {
-	document.getElementById('maincontent')?.scrollIntoView({
-		behavior: 'smooth',
-	});
+	const position = pinnedPost?.getBoundingClientRect();
+	if (position && position.top < 0) {
+		document.getElementById('maincontent')?.scrollIntoView({
+			behavior: 'smooth',
+		});
+	}
 }
 
 export const EnhancePinnedPost = () => {
