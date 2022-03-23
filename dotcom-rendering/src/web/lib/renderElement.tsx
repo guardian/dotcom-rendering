@@ -725,6 +725,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
+						stickyVideos={switches.stickyVideos}
 					/>
 				</Island>,
 			];
