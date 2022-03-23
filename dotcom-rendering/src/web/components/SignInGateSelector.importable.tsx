@@ -182,7 +182,7 @@ const SignInGateSelectorWithAB = ({
 		// this only happens within the dismissGate method
 		if (isGateDismissed) {
 			document.dispatchEvent(
-				new CustomEvent('dcr:page:article:redisplayed'),
+				new CustomEvent('article:sign-in-gate-dismissed'),
 			);
 		}
 	}, [isGateDismissed]);
