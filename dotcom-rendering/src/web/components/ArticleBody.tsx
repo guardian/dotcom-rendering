@@ -5,10 +5,10 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	blocks: Block[];
 	pinnedPost?: Block;
 	adTargeting: AdTargeting;
@@ -103,7 +103,6 @@ const revealStyles = css`
 
 export const ArticleBody = ({
 	format,
-	palette,
 	blocks,
 	pinnedPost,
 	adTargeting,
@@ -127,6 +126,7 @@ export const ArticleBody = ({
 	onFirstPage,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
+	const palette = decidePalette(format);
 
 	if (
 		format.design === ArticleDesign.LiveBlog ||
