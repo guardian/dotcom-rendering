@@ -29,7 +29,6 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		islands: './src/web/browser/islands/init.ts',
 		dynamicImport: './src/web/browser/dynamicImport/init.ts',
 		atomIframe: './src/web/browser/atomIframe/init.ts',
-		coreVitals: './src/web/browser/coreVitals/init.ts',
 		embedIframe: './src/web/browser/embedIframe/init.ts',
 		newsletterEmbedIframe:
 			'./src/web/browser/newsletterEmbedIframe/init.ts',

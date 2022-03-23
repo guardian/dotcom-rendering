@@ -118,7 +118,6 @@ export const document = ({ data }: Props): string => {
 			...getScriptArrayFromFile('ophan.js'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
 			...getScriptArrayFromFile('sentryLoader.ks'),
-			...getScriptArrayFromFile('coreVitals.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements && {
 				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
