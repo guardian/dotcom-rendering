@@ -8,8 +8,7 @@ export const commercialGptLazyLoad: ABTest = {
 	audience: 1 / 100,
 	audienceOffset: 10 / 100,
 	audienceCriteria: 'All pageviews',
-	successMeasure:
-		'Ad ratio and viewability remain constant or improve',
+	successMeasure: 'Ad ratio and viewability remain constant or improve',
 	description:
 		'This test compares GPT enableLazyLoad to our custom-built lazy load solution',
 	variants: [
