@@ -52,6 +52,7 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -264,6 +265,8 @@ export const ShowcaseLayout = ({
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
+
 	return (
 		<>
 			{format.theme !== ArticleSpecial.Labs ? (
@@ -307,7 +310,7 @@ export const ShowcaseLayout = ({
 										CAPI.config.switches.remoteHeader
 									}
 									contributionsServiceUrl={
-										CAPI.contributionsServiceUrl
+										contributionsServiceUrl
 									}
 								/>
 							</ElementContainer>
@@ -555,7 +558,7 @@ export const ShowcaseLayout = ({
 									tags={CAPI.tags}
 									isPaidContent={!!CAPI.config.isPaidContent}
 									contributionsServiceUrl={
-										CAPI.contributionsServiceUrl
+										contributionsServiceUrl
 									}
 									contentType={CAPI.contentType}
 									sectionName={CAPI.sectionName || ''}
@@ -571,7 +574,7 @@ export const ShowcaseLayout = ({
 											}
 											contentType={CAPI.contentType}
 											contributionsServiceUrl={
-												CAPI.contributionsServiceUrl
+												contributionsServiceUrl
 											}
 											idApiUrl={CAPI.config.idApiUrl}
 											isDev={CAPI.config.isDev ?? false}
@@ -784,7 +787,7 @@ export const ShowcaseLayout = ({
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
 						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}

@@ -59,6 +59,7 @@ import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
 
 const StandardGrid = ({
 	children,
@@ -358,8 +359,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					theme: getCurrentPillar(CAPI),
 			  };
 
-	const contributionsServiceUrl =
-		process?.env?.SDC_URL ?? CAPI.contributionsServiceUrl;
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
 
 	return (
 		<>

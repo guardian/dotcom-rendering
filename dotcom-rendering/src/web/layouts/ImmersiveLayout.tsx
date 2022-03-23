@@ -44,6 +44,7 @@ import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -228,6 +229,8 @@ export const ImmersiveLayout = ({
 	const captionText = decideCaption(mainMedia);
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
+
 	return (
 		<>
 			<ImmersiveHeader
@@ -391,7 +394,7 @@ export const ImmersiveLayout = ({
 									tags={CAPI.tags}
 									isPaidContent={!!CAPI.config.isPaidContent}
 									contributionsServiceUrl={
-										CAPI.contributionsServiceUrl
+										contributionsServiceUrl
 									}
 									contentType={CAPI.contentType}
 									sectionName={CAPI.sectionName || ''}
@@ -407,7 +410,7 @@ export const ImmersiveLayout = ({
 											}
 											contentType={CAPI.contentType}
 											contributionsServiceUrl={
-												CAPI.contributionsServiceUrl
+												contributionsServiceUrl
 											}
 											idApiUrl={CAPI.config.idApiUrl}
 											isDev={CAPI.config.isDev ?? false}
@@ -619,7 +622,7 @@ export const ImmersiveLayout = ({
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
 						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}
