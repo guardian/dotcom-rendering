@@ -44,6 +44,8 @@ import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -172,7 +174,6 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
@@ -189,12 +190,7 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	return caption.join(' ');
 };
 
-export const ImmersiveLayout = ({
-	CAPI,
-	NAV,
-	format,
-	palette,
-}: Props): JSX.Element => {
+export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -228,19 +224,16 @@ export const ImmersiveLayout = ({
 	const captionText = decideCaption(mainMedia);
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
+
 	return (
 		<>
-			<ImmersiveHeader
-				CAPI={CAPI}
-				NAV={NAV}
-				format={format}
-				palette={palette}
-			/>
+			<ImmersiveHeader CAPI={CAPI} NAV={NAV} format={format} />
 			<main>
 				<ElementContainer
 					showTopBorder={false}
 					showSideBorders={false}
-					backgroundColour={palette.background.article}
+					backgroundColour={decidePalette(format).background.article}
 					element="article"
 				>
 					<ImmersiveGrid>
@@ -258,7 +251,7 @@ export const ImmersiveLayout = ({
 							{format.design === ArticleDesign.PhotoEssay ? (
 								<></>
 							) : (
-								<Border palette={palette} />
+								<Border format={format} />
 							)}
 						</GridItem>
 						<GridItem area="title" element="aside">
@@ -374,7 +367,6 @@ export const ImmersiveLayout = ({
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
-									palette={palette}
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
@@ -391,7 +383,7 @@ export const ImmersiveLayout = ({
 									tags={CAPI.tags}
 									isPaidContent={!!CAPI.config.isPaidContent}
 									contributionsServiceUrl={
-										CAPI.contributionsServiceUrl
+										contributionsServiceUrl
 									}
 									contentType={CAPI.contentType}
 									sectionName={CAPI.sectionName || ''}
@@ -407,7 +399,7 @@ export const ImmersiveLayout = ({
 											}
 											contentType={CAPI.contentType}
 											contributionsServiceUrl={
-												CAPI.contributionsServiceUrl
+												contributionsServiceUrl
 											}
 											idApiUrl={CAPI.config.idApiUrl}
 											isDev={CAPI.config.isDev ?? false}
@@ -434,7 +426,6 @@ export const ImmersiveLayout = ({
 								)}
 								<Lines count={4} effect="straight" />
 								<SubMeta
-									palette={palette}
 									format={format}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
@@ -619,7 +610,7 @@ export const ImmersiveLayout = ({
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
 						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}

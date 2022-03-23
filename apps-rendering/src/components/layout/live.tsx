@@ -5,9 +5,16 @@ import { css } from '@emotion/react';
 import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
 import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
 import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, neutral, news, remSpace } from '@guardian/source-foundations';
+import {
+	from,
+	neutral,
+	news,
+	pxToRem,
+	remSpace,
+} from '@guardian/source-foundations';
 import { OptionKind } from '@guardian/types';
 import Footer from 'components/footer';
 import GridItem from 'components/gridItem';
@@ -21,11 +28,11 @@ import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
-import { articleWidthStyles, onwardStyles } from 'styles';
+import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
 
 // ----- Component ----- //
 
-const mainStyles = css`
+const mainStyles = (format: ArticleFormat): SerializedStyles => css`
 	display: grid;
 	background-color: ${neutral[97]};
 	grid-template-columns: 1fr;
@@ -34,6 +41,10 @@ const mainStyles = css`
 		'main-media'
 		'key-events'
 		'live-blocks';
+
+	${darkModeCss`
+		background-color: ${background.articleContentDark(format)};
+	`}
 
 	${from.tablet} {
 		column-gap: 20px;
@@ -93,7 +104,7 @@ const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 						{
 							date: block.firstPublished.value,
 							text: block.title,
-							url: `#block-${block.id}`,
+							url: `?page=with:block-${block.id}#block-${block.id}`,
 						},
 				  ]
 				: events,
@@ -117,9 +128,14 @@ const Live: FC<Props> = ({ item }) => {
 		/>
 	);
 	return (
-		<article className="js-article">
+		<article
+			className="js-article"
+			css={darkModeCss`
+					background-color: ${background.articleContentDark(item)};
+				`}
+		>
 			<LiveblogHeader item={item} />
-			<main css={mainStyles}>
+			<main css={mainStyles(item)}>
 				<GridItem area="metadata">
 					<div css={metadataWrapperStyles(item)}>
 						<Metadata item={item} />
@@ -138,12 +154,35 @@ const Live: FC<Props> = ({ item }) => {
 					<HeaderMedia item={item} />
 				</GridItem>
 				<GridItem area="live-blocks">
-					{item.pagedBlocks.currentPage.pageNumber > 1 && pagination}
-					<LiveBlocks
-						blocks={item.pagedBlocks.currentPage.blocks}
-						format={item}
-					/>
-					{pagination}
+					<div
+						css={css`
+							padding-left: ${pxToRem(10)}rem;
+							padding-right: ${pxToRem(10)}rem;
+							padding-top: ${remSpace[3]};
+
+							${from.mobileLandscape} {
+								padding-left: ${remSpace[5]};
+								padding-right: ${remSpace[5]};
+							}
+
+							${from.tablet} {
+								padding-left: 0;
+								padding-right: 0;
+							}
+
+							${from.desktop} {
+								padding: 0;
+							}
+						`}
+					>
+						{item.pagedBlocks.currentPage.pageNumber > 1 &&
+							pagination}
+						<LiveBlocks
+							blocks={item.pagedBlocks.currentPage.blocks}
+							format={item}
+						/>
+						{pagination}
+					</div>
 				</GridItem>
 			</main>
 			<section css={articleWidthStyles}>
@@ -153,7 +192,7 @@ const Live: FC<Props> = ({ item }) => {
 				<RelatedContent content={item.relatedContent} />
 			</section>
 			<section css={articleWidthStyles}>
-				<Footer isCcpa={false} />
+				<Footer format={item} isCcpa={false} />
 			</section>
 		</article>
 	);

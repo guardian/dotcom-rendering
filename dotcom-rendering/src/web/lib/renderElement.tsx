@@ -350,7 +350,10 @@ export const renderElement = ({
 				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
-			if (format.design === ArticleDesign.Interactive) {
+			if (
+				format.design === ArticleDesign.Interactive ||
+				format.design === ArticleDesign.FullPageInteractive
+			) {
 				return [
 					true,
 					<InteractiveLayoutAtom
@@ -570,15 +573,13 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TextBlockElement':
 			return [
 				true,
-				<>
-					<TextBlockComponent
-						key={index}
-						isFirstParagraph={index === 0}
-						html={element.html}
-						format={format}
-						forceDropCap={element.dropCap}
-					/>
-				</>,
+				<TextBlockComponent
+					key={index}
+					isFirstParagraph={index === 0}
+					html={element.html}
+					format={format}
+					forceDropCap={element.dropCap}
+				/>,
 			];
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return [
@@ -724,6 +725,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
+						stickyVideos={switches.stickyVideos}
 					/>
 				</Island>,
 			];

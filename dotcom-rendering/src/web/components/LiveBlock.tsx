@@ -20,6 +20,7 @@ type Props = {
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
 	isLiveUpdate?: boolean;
+	isPinnedPost: boolean;
 };
 
 export const LiveBlock = ({
@@ -34,10 +35,13 @@ export const LiveBlock = ({
 	isSensitive,
 	switches,
 	isLiveUpdate,
+	isPinnedPost,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
-	const blockLink = `${joinUrl(host, pageId)}#block-${block.id}`;
+	const blockLink = `${joinUrl(host, pageId)}?page=with:block-${
+		block.id
+	}#block-${block.id}`;
 
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
@@ -49,13 +53,15 @@ export const LiveBlock = ({
 	return (
 		<LiveBlockContainer
 			id={block.id}
-			borderColour={palette.border.liveBlock}
 			blockTitle={block.title}
 			blockFirstPublished={block.blockFirstPublished}
 			blockLink={blockLink}
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
 			avatarBackgroundColor={palette.background.avatar}
+			isPinnedPost={isPinnedPost}
+			supportsDarkMode={false}
+			format={format}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({

@@ -13,6 +13,12 @@ const noJSStyling = css`
 		${body.small()};
 	}
 
+	.twitter-tweet iframe {
+		/* Unfortunately due to how Twitter embeds work setting !important is the only way to overwrite tweet CSS */
+		/* stylelint-disable-next-line declaration-no-important */
+		width: 100% !important;
+	}
+
 	.twitter-tweet p {
 		padding-bottom: 10px;
 	}

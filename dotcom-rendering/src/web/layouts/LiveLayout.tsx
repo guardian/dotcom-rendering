@@ -61,6 +61,8 @@ import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -262,10 +264,9 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
-export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -302,7 +303,12 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 		totalPages: 1,
 	};
 
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
+
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const palette = decidePalette(format);
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -339,9 +345,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							}
 							urls={CAPI.nav.readerRevenueLinks.header}
 							remoteHeader={CAPI.config.switches.remoteHeader}
-							contributionsServiceUrl={
-								CAPI.contributionsServiceUrl
-							}
+							contributionsServiceUrl={contributionsServiceUrl}
 						/>
 					</ElementContainer>
 
@@ -698,7 +702,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									<span data-gu-marker="top-of-blog" />
 									{format.design ===
 										ArticleDesign.LiveBlog && (
 										<Island
@@ -722,6 +725,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												// know it will exist for all blogs
 												mostRecentBlockId={
 													CAPI.mostRecentBlockId || ''
+												}
+												hasPinnedPost={
+													!!CAPI.pinnedPost
 												}
 											/>
 										</Island>
@@ -767,8 +773,8 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											)}
 											<ArticleBody
 												format={format}
-												palette={palette}
 												blocks={CAPI.blocks}
+												pinnedPost={CAPI.pinnedPost}
 												adTargeting={adTargeting}
 												host={host}
 												pageId={CAPI.pageId}
@@ -788,7 +794,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 													!!CAPI.config.isPaidContent
 												}
 												contributionsServiceUrl={
-													CAPI.contributionsServiceUrl
+													contributionsServiceUrl
 												}
 												contentType={CAPI.contentType}
 												sectionName={
@@ -799,6 +805,9 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												}
 												idUrl={CAPI.config.idUrl || ''}
 												isDev={!!CAPI.config.isDev}
+												onFirstPage={
+													pagination.currentPage === 1
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
@@ -825,7 +834,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 															CAPI.contentType
 														}
 														contributionsServiceUrl={
-															CAPI.contributionsServiceUrl
+															contributionsServiceUrl
 														}
 														idApiUrl={
 															CAPI.config.idApiUrl
@@ -873,7 +882,6 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 												effect="straight"
 											/>
 											<SubMeta
-												palette={palette}
 												format={format}
 												subMetaKeywordLinks={
 													CAPI.subMetaKeywordLinks
@@ -1065,7 +1073,7 @@ export const LiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
 						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}

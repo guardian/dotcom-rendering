@@ -15,7 +15,7 @@ import Byline from 'components/byline';
 import Cutout from 'components/cutout';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
-import OptionalLogo from 'components/logo';
+import Logo from 'components/logo';
 import Metadata from 'components/metadata';
 import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
@@ -100,7 +100,9 @@ const Comment: FC<Props> = ({ item, children }) => (
 				</section>
 
 				<HeaderMedia item={item} />
-				<section css={articleWidthStyles}>{OptionalLogo(item)}</section>
+				<section css={articleWidthStyles}>
+					<Logo item={item} />
+				</section>
 			</header>
 			<ArticleBody className={[articleWidthStyles]} format={item}>
 				{children}
@@ -112,7 +114,7 @@ const Comment: FC<Props> = ({ item, children }) => (
 		<section css={onwardStyles}>
 			<RelatedContent content={item.relatedContent} />
 		</section>
-		<Footer isCcpa={false} />
+		<Footer isCcpa={false} format={item} />
 	</main>
 );
 

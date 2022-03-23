@@ -47,6 +47,8 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 
 const StandardGrid = ({
 	children,
@@ -276,15 +278,9 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
-export const CommentLayout = ({
-	CAPI,
-	NAV,
-	format,
-	palette,
-}: Props): JSX.Element => {
+export const CommentLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -325,6 +321,10 @@ export const CommentLayout = ({
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
+	const palette = decidePalette(format);
+
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
+
 	return (
 		<>
 			<div id="bannerandheader">
@@ -362,7 +362,7 @@ export const CommentLayout = ({
 								urls={CAPI.nav.readerRevenueLinks.header}
 								remoteHeader={CAPI.config.switches.remoteHeader}
 								contributionsServiceUrl={
-									CAPI.contributionsServiceUrl
+									contributionsServiceUrl
 								}
 							/>
 						</ElementContainer>
@@ -433,7 +433,7 @@ export const CommentLayout = ({
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border palette={palette} />
+							<Border format={format} />
 						</GridItem>
 						<GridItem area="headline">
 							<div css={maxWidth}>
@@ -552,7 +552,6 @@ export const CommentLayout = ({
 								<div css={maxWidth}>
 									<ArticleBody
 										format={format}
-										palette={palette}
 										blocks={CAPI.blocks}
 										adTargeting={adTargeting}
 										host={host}
@@ -571,7 +570,7 @@ export const CommentLayout = ({
 											!!CAPI.config.isPaidContent
 										}
 										contributionsServiceUrl={
-											CAPI.contributionsServiceUrl
+											contributionsServiceUrl
 										}
 										contentType={CAPI.contentType}
 										sectionName={CAPI.sectionName || ''}
@@ -587,7 +586,7 @@ export const CommentLayout = ({
 												}
 												contentType={CAPI.contentType}
 												contributionsServiceUrl={
-													CAPI.contributionsServiceUrl
+													contributionsServiceUrl
 												}
 												idApiUrl={CAPI.config.idApiUrl}
 												isDev={
@@ -619,7 +618,6 @@ export const CommentLayout = ({
 									)}
 									<Lines count={4} effect="straight" />
 									<SubMeta
-										palette={palette}
 										format={format}
 										subMetaKeywordLinks={
 											CAPI.subMetaKeywordLinks
@@ -806,7 +804,7 @@ export const CommentLayout = ({
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
 						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}

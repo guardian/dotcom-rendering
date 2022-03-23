@@ -57,6 +57,7 @@ import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { decidePalette } from '../lib/decidePalette';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -235,10 +236,9 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
-export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const InteractiveLayout = ({ CAPI, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -264,6 +264,9 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const palette = decidePalette(format);
+
 	return (
 		<>
 			{CAPI.isLegacyInteractive && (
@@ -413,7 +416,7 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								{format.theme === ArticleSpecial.Labs ? (
 									<></>
 								) : (
-									<Border palette={palette} />
+									<Border format={format} />
 								)}
 							</GridItem>
 							<GridItem area="headline">
@@ -524,7 +527,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								<ArticleContainer format={format}>
 									<ArticleBody
 										format={format}
-										palette={palette}
 										blocks={CAPI.blocks}
 										adTargeting={adTargeting}
 										host={host}
@@ -560,7 +562,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format, palette }: Props) => {
 										/>
 									</div>
 									<SubMeta
-										palette={palette}
 										format={format}
 										subMetaKeywordLinks={
 											CAPI.subMetaKeywordLinks

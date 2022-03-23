@@ -59,6 +59,8 @@ import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 
 const StandardGrid = ({
 	children,
@@ -309,10 +311,9 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
-export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
+export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -350,6 +351,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
+	const palette = decidePalette(format);
+
 	const formatForNav =
 		format.theme === ArticleSpecial.Labs
 			? format
@@ -357,6 +360,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					...format,
 					theme: getCurrentPillar(CAPI),
 			  };
+
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
 
 	return (
 		<>
@@ -395,7 +400,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 								urls={CAPI.nav.readerRevenueLinks.header}
 								remoteHeader={CAPI.config.switches.remoteHeader}
 								contributionsServiceUrl={
-									CAPI.contributionsServiceUrl
+									contributionsServiceUrl
 								}
 							/>
 						</ElementContainer>
@@ -493,7 +498,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							{format.theme === ArticleSpecial.Labs ? (
 								<></>
 							) : (
-								<Border palette={palette} />
+								<Border format={format} />
 							)}
 						</GridItem>
 						<GridItem area="matchNav" element="aside">
@@ -639,8 +644,8 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
-									palette={palette}
 									blocks={CAPI.blocks}
+									pinnedPost={CAPI.pinnedPost}
 									adTargeting={adTargeting}
 									host={host}
 									pageId={CAPI.pageId}
@@ -656,7 +661,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									tags={CAPI.tags}
 									isPaidContent={!!CAPI.config.isPaidContent}
 									contributionsServiceUrl={
-										CAPI.contributionsServiceUrl
+										contributionsServiceUrl
 									}
 									contentType={CAPI.contentType}
 									sectionName={CAPI.sectionName || ''}
@@ -686,7 +691,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 											}
 											contentType={CAPI.contentType}
 											contributionsServiceUrl={
-												CAPI.contributionsServiceUrl
+												contributionsServiceUrl
 											}
 											idApiUrl={CAPI.config.idApiUrl}
 											isDev={CAPI.config.isDev ?? false}
@@ -717,7 +722,6 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 									effect="straight"
 								/>
 								<SubMeta
-									palette={palette}
 									format={format}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
@@ -915,7 +919,7 @@ export const StandardLayout = ({ CAPI, NAV, format, palette }: Props) => {
 					<StickyBottomBanner
 						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
 						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}

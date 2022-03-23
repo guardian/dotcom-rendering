@@ -10,6 +10,7 @@ const generateBlocks = (numberOfBlocks: number): LiveBlock[] => {
 		firstPublished: some(new Date('2021-11-02T12:00:00Z')),
 		lastModified: some(new Date('2021-11-02T13:13:13Z')),
 		body: [],
+		contributors: [],
 	};
 
 	const liveBlocks = [];

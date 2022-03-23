@@ -49,9 +49,6 @@ const CommercialMetricsWithAB = ({ enabled }: { enabled: boolean }) => {
 			isDev,
 			adBlockerInUse,
 		});
-		// TODO: capture CWV also, to ensure commercial performance
-		// doesn’t come at the expense of user experience.
-		// See https://git.io/JP68Q in `frontend`
 
 		if (shouldForceMetrics) {
 			// TODO: rename this in commercial-core and update here

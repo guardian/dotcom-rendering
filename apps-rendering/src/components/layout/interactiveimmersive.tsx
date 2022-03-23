@@ -13,7 +13,7 @@ import Epic from 'components/epic';
 import Footer from 'components/footer';
 import Headline from 'components/headline';
 import ImmersiveCaption from 'components/immersiveCaption';
-import OptionalLogo from 'components/logo';
+import Logo from 'components/logo';
 import Metadata from 'components/metadata';
 import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
@@ -82,7 +82,7 @@ const InteractiveImmersive: FC<Props> = ({ item, children }) => {
 					</div>
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />
-						{OptionalLogo(item)}
+						<Logo item={item} />
 					</section>
 				</header>
 				<Body format={item}>{children}</Body>
@@ -94,7 +94,7 @@ const InteractiveImmersive: FC<Props> = ({ item, children }) => {
 			<section css={onwardStyles}>
 				<RelatedContent content={item.relatedContent} />
 			</section>
-			<Footer isCcpa={false} />
+			<Footer isCcpa={false} format={item} />
 		</main>
 	);
 };
