@@ -2882,10 +2882,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-4.2.0.tgz#3440b095c69a4e9df919581a38c8b9d8129841b8"
   integrity sha512-D/76oqTs7SqHyTzTInWIYlID5iOCWypyJncaegDV+ooDY0SF2c0bpc46tVRxG9ybrRuFvoOi9rCFFYZMWptINA==
 
-"@guardian/support-dotcom-components@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.1.tgz#a6f51ce1c93efbaac705989a9d63a601bbf80328"
-  integrity sha512-zoxBAQIRUiz3iMi+wgutSi36igLjpGUI66JT+ByxHgFkTELiqsflG6Htn1ynYy4j5q80LyEIwahLqtuFFWq+YQ==
+"@guardian/support-dotcom-components@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.2.tgz#56bfb7cf7aef6d859b6f97b3986188af687f8a16"
+  integrity sha512-NqAxmegwQ1ltBH4EmfXwJHxRXGJzlZMSFDkK+5fkReL4XtACX3ZzR2rMbl7SN5RxSbeSzr5nGElRZ0TWkAYRJw==
 
 "@guardian/types@^9.0.1":
   version "9.0.1"
