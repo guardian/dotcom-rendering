@@ -37,35 +37,38 @@ const labelStyles = (background: string) => css`
 const withoutZeroSections = (sections: Section[]) =>
 	sections.filter((section) => section.value !== 0);
 
+type Point = { x: number; y: number };
+
 export const Doughnut = ({
 	sections,
 	percentCutout = 35,
 	width = 300,
 	height = 300,
 }: Props) => {
-	if (withoutZeroSections(sections).length === 1) {
-		// The Doughnut component requires at least 2 sections
-		// TODO: Support showing 100% for a single section
-		return null;
-	}
-
 	// TODO: Support displaying 0% for sections where value is zero
 	// We handle these at the moment by filtering them out using withoutZeroSections()
 
-	const radius = Math.min(height / 2, width / 2);
-	const cutoutRadius = radius * (percentCutout / 100);
+	const outerRadius = Math.min(height / 2, width / 2);
+	const innerRadius = outerRadius * (percentCutout / 100);
+	const radius = (innerRadius + outerRadius) / 2;
 
 	const totalValue = sections
 		.map((section) => section.value)
 		.reduce((runningTotal, currentValue) => runningTotal + currentValue);
 
-	const halfPI = Math.PI / 2;
-	const doublePI = Math.PI * 2;
+	/** τ = 2π https://en.wikipedia.org/wiki/Turn_(angle)#Tau_proposals */
+	const tau = Math.PI * 2;
 
-	const center = {
+	const center: Point = {
 		x: width / 2,
 		y: height / 2,
 	};
+
+	const getPosition = (angle: number) =>
+		[
+			center.x + Math.cos(angle) * radius,
+			center.y + Math.sin(angle) * radius,
+		].join(' ');
 
 	// Segments
 	const segments: {
@@ -75,88 +78,66 @@ export const Doughnut = ({
 		label: string;
 		value: number;
 	}[] = [];
-	let segmentAngle;
-	let endRadius;
-	let arc;
-	let outer;
-	let inner;
-	let r;
-	let a;
-	let startRadius = -halfPI;
 
-	withoutZeroSections(sections).forEach((section) => {
-		segmentAngle = (section.value / totalValue) * doublePI;
+	withoutZeroSections(sections).reduce<number>(
+		(angleStart, { color, label, value }) => {
+			const angleLength = (value / totalValue) * tau;
 
-		endRadius = startRadius + segmentAngle;
-		arc = (endRadius - startRadius) % doublePI > Math.PI ? 1 : 0;
+			const angleEnd = angleStart + angleLength;
+			const angleMid = (angleStart + angleEnd) / 2;
 
-		outer = {
-			start: {
-				x: center.x + Math.cos(startRadius) * radius,
-				y: center.y + Math.sin(startRadius) * radius,
-			},
-			end: {
-				x: center.x + Math.cos(endRadius) * radius,
-				y: center.y + Math.sin(endRadius) * radius,
-			},
-		};
-		inner = {
-			start: {
-				x: center.x + Math.cos(endRadius) * cutoutRadius,
-				y: center.y + Math.sin(endRadius) * cutoutRadius,
-			},
-			end: {
-				x: center.x + Math.cos(startRadius) * cutoutRadius,
-				y: center.y + Math.sin(startRadius) * cutoutRadius,
-			},
-		};
+			const sweepFlag = (angleEnd - angleStart) % tau > Math.PI ? 1 : 0;
 
-		r = (cutoutRadius + radius) / 2;
-		a = (startRadius + endRadius) / 2;
 
-		segments.push({
 			/**
-			 * M: Move pointer
-			 * A: Outer arc
-			 * L: Connect outer and inner arc
-			 * A: Inner arc
-			 * Z: Close path
+			 * Get the SVG path commands string
+			 *
+			 * https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d
+			 *
+			 * M: move https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#line_commands
+			 * A: arc https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#arcs
+			 *
+			 * We cannot draw a circle with the arc command, so we split it
+			 * in two if there’s
 			 */
-			d: [
-				'M',
-				outer.start.x,
-				outer.start.y,
-				'A',
-				radius,
-				radius,
-				0,
-				arc,
-				1,
-				outer.end.x,
-				outer.end.y,
-				'L',
-				inner.start.x,
-				inner.start.y,
-				'A',
-				cutoutRadius,
-				cutoutRadius,
-				0,
-				arc,
-				0,
-				inner.end.x,
-				inner.end.y,
-				'Z',
-			].join(' '),
-			label: section.label,
-			value: section.value,
-			transform: `translate(${Math.cos(a) * r + center.x}, ${
-				Math.sin(a) * r + center.y
-			})`,
-			color: section.color,
-		});
+			const d =
+				sections.length > 1
+					? [
+							'M',
+							getPosition(angleStart),
+							'A',
+							radius,
+							radius,
+							0,
+							sweepFlag,
+							1,
+							getPosition(angleEnd),
+					  ].join(' ')
+					: // Special case: full circle, draw 2 arcs
+					  [
+							`M ${getPosition(angleStart)}`,
+							`A ${radius} ${radius} 0 0 1`,
+							getPosition(angleMid),
+							`M ${getPosition(angleMid)}`,
+							`A ${radius} ${radius} 0 0 1`,
+							getPosition(angleEnd),
+					  ].join(' ');
 
-		startRadius += (section.value / totalValue) * doublePI;
-	});
+			segments.push({
+				d,
+				label,
+				value,
+				transform: `translate(${
+					Math.cos(angleMid) * radius + center.x
+				}, ${Math.sin(angleMid) * radius + center.y})`,
+				color,
+			});
+
+			return angleEnd;
+		},
+		// start at the top of the cirlce
+		-Math.PI / 2,
+	);
 
 	return (
 		<svg
@@ -167,7 +148,12 @@ export const Doughnut = ({
 		>
 			{segments.map((segment) => (
 				<g>
-					<path d={segment.d} fill={segment.color} />
+					<path
+						d={segment.d}
+						fill="none"
+						stroke={segment.color}
+						strokeWidth={radius / 2}
+					/>
 					<text transform={segment.transform}>
 						<tspan css={labelStyles(segment.color)} x="0" dy="0">
 							{segment.label}
