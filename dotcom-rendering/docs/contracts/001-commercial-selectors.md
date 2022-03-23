@@ -9,7 +9,7 @@ We place the following classes on the container element of the article body:
 
 Furthermore, within the article body, we add the following attributes to certain elements:
 
-- `data-spacefinder-role` which denotes the role of figures (e.g. rich-links)
+- `data-spacefinder-role` which denotes the role of figures (e.g. rich-links). We add this to elements belonging to `Figure` and `InteractiveBlockComponent` components.
 - `data-spacefinder-type` the underlying element `_type`
 
 These are elements spacefinder needs to know about when positioning adverts.

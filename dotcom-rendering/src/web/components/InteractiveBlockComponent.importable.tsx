@@ -302,6 +302,7 @@ export const InteractiveBlockComponent = ({
 				)}
 				data-alt={alt} // for compatibility with custom boot scripts
 				data-cypress={`interactive-element-${encodeURI(alt || '')}`}
+				data-spacefinder-role={role}
 			>
 				{!loaded && (
 					<>
