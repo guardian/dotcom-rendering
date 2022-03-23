@@ -37,8 +37,6 @@ const labelStyles = (background: string) => css`
 const withoutZeroSections = (sections: Section[]) =>
 	sections.filter((section) => section.value !== 0);
 
-type Point = { x: number; y: number };
-
 export const Doughnut = ({
 	sections,
 	percentCutout = 35,
@@ -59,7 +57,7 @@ export const Doughnut = ({
 	/** τ = 2π https://en.wikipedia.org/wiki/Turn_(angle)#Tau_proposals */
 	const tau = Math.PI * 2;
 
-	const center: Point = {
+	const center = {
 		x: width / 2,
 		y: height / 2,
 	};
@@ -88,7 +86,6 @@ export const Doughnut = ({
 
 			const sweepFlag = (angleEnd - angleStart) % tau > Math.PI ? 1 : 0;
 
-
 			/**
 			 * Get the SVG path commands string
 			 *
@@ -96,6 +93,7 @@ export const Doughnut = ({
 			 *
 			 * M: move https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#line_commands
 			 * A: arc https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#arcs
+			 * Z: close the circle
 			 *
 			 * We cannot draw a circle with the arc command, so we split it
 			 * in two if there’s
@@ -118,9 +116,9 @@ export const Doughnut = ({
 							`M ${getPosition(angleStart)}`,
 							`A ${radius} ${radius} 0 0 1`,
 							getPosition(angleMid),
-							`M ${getPosition(angleMid)}`,
 							`A ${radius} ${radius} 0 0 1`,
 							getPosition(angleEnd),
+							'Z',
 					  ].join(' ');
 
 			segments.push({
