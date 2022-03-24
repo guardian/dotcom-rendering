@@ -31,10 +31,10 @@ describe('Doughnut', () => {
 		expect(getByText(mockSections[1].label)).toBeInTheDocument();
 	});
 
-	it('should return null if only one section is passed', () => {
+	it('should return a circle if only one section is passed', () => {
 		const { container } = render(<Doughnut sections={[mockSections[0]]} />);
 
-		expect(container.firstChild).toBeNull();
+		expect(container.firstChild).not.toBeNull();
 	});
 
 	it('should handle if a section has a zero value', () => {
