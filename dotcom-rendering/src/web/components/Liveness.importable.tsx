@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
 import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
@@ -25,6 +26,10 @@ const topOfBlog: Element | null = !isServer
 
 const lastUpdated: Element | null = !isServer
 	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
+	: null;
+
+const toastRoot: Element | null = !isServer
+	? window.document.getElementById('toast-root')
 	: null;
 
 /**
@@ -284,13 +289,25 @@ export const Liveness = ({
 		}
 	}, [hasPinnedPost, onFirstPage, webURL]);
 
-	if (showToast) {
-		return (
+	if (toastRoot && showToast) {
+		/**
+		 * createPortal?
+		 *
+		 * We're using a portal here because of a the way Safari implements position: sticky. If
+		 * the element is rendered directly here as a child of the Island (its parent) then stickiness
+		 * won't work in Safari because this browser positions the element relative to the immediate
+		 * parent, whereas Chrome et al are more forgiving.
+		 *
+		 * By using a Portal we can insert the Toast as a sibling to the Island, which works around
+		 * Safari's behaviour.
+		 */
+		return ReactDOM.createPortal(
 			<Toast
 				onClick={handleToastClick}
 				count={numHiddenBlocks}
 				format={format}
-			/>
+			/>,
+			toastRoot,
 		);
 	}
 
