@@ -52,7 +52,8 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 	p,
 	ul {
-		margin: ${remSpace[3]} 0;
+		padding: ${remSpace[3]} 0 0;
+		margin: 0;
 	}
 
 	address {
