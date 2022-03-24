@@ -16,8 +16,8 @@ type Section = {
 	color: string;
 };
 
-/** three decimal places are plenty */
-const PRECISION = 3;
+/** set decimal places */
+const PRECISION = 6;
 
 const unitStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
