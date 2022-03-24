@@ -16,6 +16,9 @@ type Section = {
 	color: string;
 };
 
+/** three decimal places are plenty */
+const PRECISION = 3;
+
 const unitStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
 	text-anchor: middle;
@@ -75,20 +78,23 @@ export const Doughnut = ({
 		const angleEnd = angleStart + angleLength;
 		const angleMid = angleStart + angleLength / 2;
 
-		const dasharray = [
-			angleLength * radius,
-			(tau - angleLength) * radius,
-		].join(',');
-		const dashoffset = (-angleStart * radius).toString();
+		const dasharray = [angleLength * radius, (tau - angleLength) * radius]
+			.map((dash) => dash.toFixed(PRECISION))
+			.join(',');
+		const dashoffset = (-angleStart * radius).toFixed(PRECISION);
 
 		segments.push({
 			dasharray,
 			dashoffset,
 			label,
 			value,
-			transform: `translate(${Math.cos(angleMid) * radius + center}, ${
-				Math.sin(angleMid) * radius + center
-			})`,
+			transform: [
+				'translate(',
+				(Math.cos(angleMid) * radius + center).toFixed(PRECISION),
+				', ',
+				(Math.sin(angleMid) * radius + center).toFixed(PRECISION),
+				')',
+			].join(''),
 			color,
 		});
 
