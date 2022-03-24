@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -8,6 +9,19 @@ import { breakpoints } from '@guardian/source-foundations';
 
 import { Toast } from './Toast';
 
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+	<div
+		css={css`
+			position: sticky;
+			top: 0;
+			display: flex;
+			justify-content: center;
+		`}
+	>
+		{children}
+	</div>
+);
+
 export default {
 	component: Toast,
 	title: 'Components/Toast',
@@ -15,15 +29,17 @@ export default {
 
 export const Default = () => {
 	return (
-		<Toast
-			format={{
-				theme: ArticlePillar.News,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}}
-			count={3}
-			onClick={() => {}}
-		/>
+		<Wrapper>
+			<Toast
+				format={{
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+				}}
+				count={3}
+				onClick={() => {}}
+			/>
+		</Wrapper>
 	);
 };
 Default.story = {
@@ -35,15 +51,17 @@ Default.story = {
 
 export const Sport = () => {
 	return (
-		<Toast
-			format={{
-				theme: ArticlePillar.Sport,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}}
-			count={3}
-			onClick={() => {}}
-		/>
+		<Wrapper>
+			<Toast
+				format={{
+					theme: ArticlePillar.Sport,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+				}}
+				count={3}
+				onClick={() => {}}
+			/>
+		</Wrapper>
 	);
 };
 Sport.story = {
@@ -55,15 +73,17 @@ Sport.story = {
 
 export const Special = () => {
 	return (
-		<Toast
-			format={{
-				theme: ArticleSpecial.SpecialReport,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}}
-			count={17}
-			onClick={() => {}}
-		/>
+		<Wrapper>
+			<Toast
+				format={{
+					theme: ArticleSpecial.SpecialReport,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+				}}
+				count={17}
+				onClick={() => {}}
+			/>
+		</Wrapper>
 	);
 };
 Special.story = {
@@ -75,15 +95,17 @@ Special.story = {
 
 export const One = () => {
 	return (
-		<Toast
-			format={{
-				theme: ArticlePillar.Culture,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}}
-			count={1}
-			onClick={() => {}}
-		/>
+		<Wrapper>
+			<Toast
+				format={{
+					theme: ArticlePillar.Culture,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+				}}
+				count={1}
+				onClick={() => {}}
+			/>
+		</Wrapper>
 	);
 };
 One.story = {
@@ -95,15 +117,17 @@ One.story = {
 
 export const Lots = () => {
 	return (
-		<Toast
-			format={{
-				theme: ArticlePillar.Lifestyle,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}}
-			count={239}
-			onClick={() => {}}
-		/>
+		<Wrapper>
+			<Toast
+				format={{
+					theme: ArticlePillar.Lifestyle,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+				}}
+				count={239}
+				onClick={() => {}}
+			/>
+		</Wrapper>
 	);
 };
 Lots.story = {
@@ -115,15 +139,17 @@ Lots.story = {
 
 export const Mobile = () => {
 	return (
-		<Toast
-			format={{
-				theme: ArticlePillar.News,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}}
-			count={3}
-			onClick={() => {}}
-		/>
+		<Wrapper>
+			<Toast
+				format={{
+					theme: ArticlePillar.News,
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+				}}
+				count={3}
+				onClick={() => {}}
+			/>
+		</Wrapper>
 	);
 };
 Mobile.story = {
