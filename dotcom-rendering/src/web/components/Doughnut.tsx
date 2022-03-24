@@ -55,15 +55,12 @@ export const Doughnut = ({
 	/** τ = 2π https://en.wikipedia.org/wiki/Turn_(angle)#Tau_proposals */
 	const tau = Math.PI * 2;
 
-	const center = {
-		x: size / 2,
-		y: size / 2,
-	};
+	const center = size / 2;
 
 	const getPosition = (angle: number) =>
 		[
-			center.x + Math.cos(angle) * radius,
-			center.y + Math.sin(angle) * radius,
+			center + Math.cos(angle) * radius,
+			center + Math.sin(angle) * radius,
 		].join(' ');
 
 	// Segments
@@ -124,8 +121,8 @@ export const Doughnut = ({
 				label,
 				value,
 				transform: `translate(${
-					Math.cos(angleMid) * radius + center.x
-				}, ${Math.sin(angleMid) * radius + center.y})`,
+					Math.cos(angleMid) * radius + center
+				}, ${Math.sin(angleMid) * radius + center})`,
 				color,
 			});
 
@@ -157,7 +154,7 @@ export const Doughnut = ({
 			))}
 			<text
 				css={unitStyles}
-				transform={`translate(${center.x}, ${center.y})`}
+				transform={`translate(${center}, ${center})`}
 				dy="0.4em"
 			>
 				%
