@@ -161,6 +161,9 @@ const StretchBackground = ({
 				position: relative;
 				flex-grow: 1;
 				padding: ${space[2]}px 10px;
+				${from.mobileLandscape} {
+					margin-left: ${space[3]}px;
+				}
 				/* We use min-height to help reduce our CLS value */
 				min-height: 800px;
 				background-color: ${palette.background.matchStats};
