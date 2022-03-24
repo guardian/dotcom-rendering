@@ -57,15 +57,10 @@ export const Doughnut = ({
 
 	const center = size / 2;
 
-	const getPosition = (angle: number) =>
-		[
-			center + Math.cos(angle) * radius,
-			center + Math.sin(angle) * radius,
-		].join(' ');
-
 	// Segments
 	const segments: {
-		d: string;
+		dasharray: string;
+		dashoffset: string;
 		color: string;
 		transform: string;
 		label: string;
@@ -79,45 +74,15 @@ export const Doughnut = ({
 			const angleEnd = angleStart + angleLength;
 			const angleMid = (angleStart + angleEnd) / 2;
 
-			const sweepFlag = (angleEnd - angleStart) % tau > Math.PI ? 1 : 0;
-
-			/**
-			 * Get the SVG path commands string
-			 *
-			 * https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d
-			 *
-			 * M: move https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#line_commands
-			 * A: arc https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#arcs
-			 * Z: close the circle
-			 *
-			 * We cannot draw a circle with the arc command, so we split it
-			 * in two if there’s
-			 */
-			const d =
-				sections.length > 1
-					? [
-							'M',
-							getPosition(angleStart),
-							'A',
-							radius,
-							radius,
-							0,
-							sweepFlag,
-							1,
-							getPosition(angleEnd),
-					  ].join(' ')
-					: // Special case: full circle, draw 2 arcs
-					  [
-							`M ${getPosition(angleStart)}`,
-							`A ${radius} ${radius} 0 0 1`,
-							getPosition(angleMid),
-							`A ${radius} ${radius} 0 0 1`,
-							getPosition(angleEnd),
-							'Z',
-					  ].join(' ');
+			const dasharray = [
+				angleLength * radius,
+				(tau - angleLength) * radius,
+			].join(',');
+			const dashoffset = (-angleStart * radius).toString();
 
 			segments.push({
-				d,
+				dasharray,
+				dashoffset,
 				label,
 				value,
 				transform: `translate(${
@@ -128,7 +93,7 @@ export const Doughnut = ({
 
 			return angleEnd;
 		},
-		// start at the top of the cirlce
+		// start at the top of the circle
 		-Math.PI / 2,
 	);
 
@@ -136,11 +101,15 @@ export const Doughnut = ({
 		<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
 			{segments.map((segment) => (
 				<g>
-					<path
-						d={segment.d}
+					<circle
+						cx={center}
+						cy={center}
+						r={radius}
 						fill="none"
 						stroke={segment.color}
-						strokeWidth={radius / 2}
+						strokeWidth={outerRadius - innerRadius}
+						strokeDasharray={segment.dasharray}
+						strokeDashoffset={segment.dashoffset}
 					/>
 					<text transform={segment.transform}>
 						<tspan css={labelStyles(segment.color)} x="0" dy="0">
