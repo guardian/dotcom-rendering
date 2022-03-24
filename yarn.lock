@@ -2809,10 +2809,10 @@
   dependencies:
     youtube-player "^5.5.2"
 
-"@guardian/braze-components@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-6.1.0.tgz#11e4414ed15fbd16ac005dab60c42383b913dbec"
-  integrity sha512-26dRs/zXoYXz9Ov54GRhhEB1wiB2+iAnxc+HYRmsb/tOjcyxu/YkyhFnPgHgZUX8F7y2IuB7TBx7nNGONjWYgQ==
+"@guardian/braze-components@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-7.0.0.tgz#d92482c652d93c82272d8bb350ca8320e08a87dc"
+  integrity sha512-33qYKl7YaF2dCfgznLrCV6REOwc7LfiMAbqHYtbeqg+cRFPUYIXc17iiI1tGkFESjQ0hFqIBQ0Q/B8Fga1J1zA==
 
 "@guardian/commercial-core@^3.0.0":
   version "3.0.0"
