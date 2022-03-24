@@ -57,6 +57,7 @@ export const Doughnut = ({
 
 	/** τ = 2π https://en.wikipedia.org/wiki/Turn_(angle)#Tau_proposals */
 	const tau = Math.PI * 2;
+	const quarterTurn = Math.PI / 2;
 
 	const center = size / 2;
 
@@ -70,8 +71,7 @@ export const Doughnut = ({
 		value: number;
 	}[] = [];
 
-	/** start from the top of the circle and keep going */
-	let angleStart = -Math.PI / 2;
+	let angleStart = -quarterTurn;
 	for (const { color, label, value } of withoutZeroSections(sections)) {
 		const angleLength = (value / totalValue) * tau;
 
@@ -81,7 +81,14 @@ export const Doughnut = ({
 		const dasharray = [angleLength * radius, (tau - angleLength) * radius]
 			.map((dash) => dash.toFixed(PRECISION))
 			.join(',');
-		const dashoffset = (-angleStart * radius).toFixed(PRECISION);
+		/**
+		 * The offset is turned one quarter and rotated
+		 * with a transform to keep the top join as crisp
+		 * as possible.
+		 */
+		const dashoffset = (-(quarterTurn + angleStart) * radius).toFixed(
+			PRECISION,
+		);
 
 		segments.push({
 			dasharray,
@@ -114,6 +121,8 @@ export const Doughnut = ({
 						strokeWidth={outerRadius - innerRadius}
 						strokeDasharray={segment.dasharray}
 						strokeDashoffset={segment.dashoffset}
+						// rotate back a quarter turn
+						transform={`rotate(-90 ${center} ${center})`}
 					/>
 					<text transform={segment.transform}>
 						<tspan css={labelStyles(segment.color)} x="0" dy="0">
