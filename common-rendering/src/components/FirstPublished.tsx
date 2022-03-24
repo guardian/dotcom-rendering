@@ -25,7 +25,6 @@ const FirstPublished = ({
 			css={css`
 				${textSans.xxsmall({ fontWeight: 'bold' })}
 				margin-bottom: ${space[1]}px;
-				padding-top: ${space[1]}px;
 				display: flex;
 				width: fit-content;
 				flex-direction: row;
