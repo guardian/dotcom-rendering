@@ -291,15 +291,20 @@ export const Liveness = ({
 
 	if (toastRoot && showToast) {
 		/**
-		 * createPortal?
+		 * Why `createPortal`?
 		 *
-		 * We're using a portal here because of a the way Safari implements position: sticky. If
-		 * the element is rendered directly here as a child of the Island (its parent) then stickiness
-		 * won't work in Safari because this browser positions the element relative to the immediate
-		 * parent, whereas Chrome et al are more forgiving.
+		 * We use a Portal because of a the way different browsers implement `position: sticky`.
+		 * A [stickily positioned element][] depends on its [containing block][] to determine
+		 * when to become stuck.
+		 *
+		 * In Safari the containing block is set to the immediate parent
+		 * whereas Chrome, Firefox and other browser are more forgiving.
 		 *
 		 * By using a Portal we can insert the Toast as a sibling to the Island, which works around
 		 * Safari's behaviour.
+		 *
+		 * [stickily positioned element]: https://developer.mozilla.org/en-US/docs/Web/CSS/position#types_of_positioning
+		 * [containing block]: https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
 		 */
 		return ReactDOM.createPortal(
 			<Toast
