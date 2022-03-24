@@ -71,7 +71,7 @@
     "@hkdobrev/run-if-changed": "^0.3.1",
     "@sentry/browser": "^5.30.0",
     "@sentry/integrations": "^5.30.0",
-    "@testing-library/dom": "^7.31.2",
+    "@testing-library/dom": "^8.11.4",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.5.0",
     "@types/ajv": "^1.0.0",
