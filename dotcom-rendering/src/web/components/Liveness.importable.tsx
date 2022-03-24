@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 import { initHydration } from '../browser/islands/initHydration';
 import { useApi } from '../lib/useApi';
 import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
@@ -25,6 +26,10 @@ const topOfBlog: Element | null = !isServer
 
 const lastUpdated: Element | null = !isServer
 	? window.document.querySelector('[data-gu-marker=liveblog-last-updated]')
+	: null;
+
+const toastRoot: Element | null = !isServer
+	? window.document.getElementById('toast-root')
 	: null;
 
 /**
@@ -284,13 +289,30 @@ export const Liveness = ({
 		}
 	}, [hasPinnedPost, onFirstPage, webURL]);
 
-	if (showToast) {
-		return (
+	if (toastRoot && showToast) {
+		/**
+		 * Why `createPortal`?
+		 *
+		 * We use a Portal because of a the way different browsers implement `position: sticky`.
+		 * A [stickily positioned element][] depends on its [containing block][] to determine
+		 * when to become stuck.
+		 *
+		 * In Safari the containing block is set to the immediate parent
+		 * whereas Chrome, Firefox and other browser are more forgiving.
+		 *
+		 * By using a Portal we can insert the Toast as a sibling to the Island, which works around
+		 * Safari's behaviour.
+		 *
+		 * [stickily positioned element]: https://developer.mozilla.org/en-US/docs/Web/CSS/position#types_of_positioning
+		 * [containing block]: https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
+		 */
+		return ReactDOM.createPortal(
 			<Toast
 				onClick={handleToastClick}
 				count={numHiddenBlocks}
 				format={format}
-			/>
+			/>,
+			toastRoot,
 		);
 	}
 
