@@ -63,6 +63,7 @@ import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { getZIndex } from '../lib/getZIndex';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -704,33 +705,52 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 								<div id="maincontent" css={bodyWrapper}>
 									{format.design ===
 										ArticleDesign.LiveBlog && (
-										<Island
-											clientOnly={true}
-											deferUntil="idle"
-										>
-											<Liveness
-												pageId={CAPI.pageId}
-												webTitle={CAPI.webTitle}
-												ajaxUrl={CAPI.config.ajaxUrl}
-												filterKeyEvents={
-													CAPI.filterKeyEvents
-												}
-												format={format}
-												switches={CAPI.config.switches}
-												onFirstPage={
-													pagination.currentPage === 1
-												}
-												webURL={CAPI.webURL}
-												// We default to string here because the property is optional but we
-												// know it will exist for all blogs
-												mostRecentBlockId={
-													CAPI.mostRecentBlockId || ''
-												}
-												hasPinnedPost={
-													!!CAPI.pinnedPost
-												}
+										<>
+											{/* The Toast component is inserted into this div using a Portal */}
+											<div
+												id="toast-root"
+												css={css`
+													position: sticky;
+													top: 0;
+													${getZIndex('toast')};
+													display: flex;
+													justify-content: center;
+												`}
 											/>
-										</Island>
+											<Island
+												clientOnly={true}
+												deferUntil="idle"
+											>
+												<Liveness
+													pageId={CAPI.pageId}
+													webTitle={CAPI.webTitle}
+													ajaxUrl={
+														CAPI.config.ajaxUrl
+													}
+													filterKeyEvents={
+														CAPI.filterKeyEvents
+													}
+													format={format}
+													switches={
+														CAPI.config.switches
+													}
+													onFirstPage={
+														pagination.currentPage ===
+														1
+													}
+													webURL={CAPI.webURL}
+													// We default to string here because the property is optional but we
+													// know it will exist for all blogs
+													mostRecentBlockId={
+														CAPI.mostRecentBlockId ||
+														''
+													}
+													hasPinnedPost={
+														!!CAPI.pinnedPost
+													}
+												/>
+											</Island>
+										</>
 									)}
 									<Hide below="desktop">
 										<Island deferUntil="visible">

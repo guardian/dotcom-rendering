@@ -17,12 +17,12 @@ export const GetMatchNav = ({ matchUrl }: Props) => {
 		comments?: string;
 		minByMinUrl?: string;
 		venue?: string;
-	}>(matchUrl);
+	}>(matchUrl, { errorRetryCount: 1 });
 
 	if (loading) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
-		window.guardian.modules.sentry.reportError(error, 'match-nav');
+		window.guardian?.modules?.sentry?.reportError?.(error, 'match-nav');
 
 		return null;
 	}
