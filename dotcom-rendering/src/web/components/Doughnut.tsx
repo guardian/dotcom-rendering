@@ -67,35 +67,33 @@ export const Doughnut = ({
 		value: number;
 	}[] = [];
 
-	withoutZeroSections(sections).reduce<number>(
-		(angleStart, { color, label, value }) => {
-			const angleLength = (value / totalValue) * tau;
+	/** start from the top of the circle and keep going */
+	let angleStart = -Math.PI / 2;
+	for (const { color, label, value } of withoutZeroSections(sections)) {
+		const angleLength = (value / totalValue) * tau;
 
-			const angleEnd = angleStart + angleLength;
-			const angleMid = (angleStart + angleEnd) / 2;
+		const angleEnd = angleStart + angleLength;
+		const angleMid = angleStart + angleLength / 2;
 
-			const dasharray = [
-				angleLength * radius,
-				(tau - angleLength) * radius,
-			].join(',');
-			const dashoffset = (-angleStart * radius).toString();
+		const dasharray = [
+			angleLength * radius,
+			(tau - angleLength) * radius,
+		].join(',');
+		const dashoffset = (-angleStart * radius).toString();
 
-			segments.push({
-				dasharray,
-				dashoffset,
-				label,
-				value,
-				transform: `translate(${
-					Math.cos(angleMid) * radius + center
-				}, ${Math.sin(angleMid) * radius + center})`,
-				color,
-			});
+		segments.push({
+			dasharray,
+			dashoffset,
+			label,
+			value,
+			transform: `translate(${Math.cos(angleMid) * radius + center}, ${
+				Math.sin(angleMid) * radius + center
+			})`,
+			color,
+		});
 
-			return angleEnd;
-		},
-		// start at the top of the circle
-		-Math.PI / 2,
-	);
+		angleStart = angleEnd;
+	}
 
 	return (
 		<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
