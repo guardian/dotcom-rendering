@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { Global, css } from '@emotion/react';
 import { focusHalo, brandAlt, neutral } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
+import { filterABTestSwitches } from '../../model/enhance-switches';
 import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { CommercialMetrics } from './CommercialMetrics.importable';
@@ -73,7 +74,7 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			</Island>
 			<Island clientOnly={true}>
 				<SetABTests
-					abTestSwitches={CAPI.config.switches}
+					abTestSwitches={filterABTestSwitches(CAPI.config.switches)}
 					pageIsSensitive={CAPI.config.isSensitive}
 					isDev={!!CAPI.config.isDev}
 				/>
