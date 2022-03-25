@@ -38,9 +38,8 @@ export const renderArticle = (
 
 		res.status(200).send(resp);
 	} catch (e) {
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		res.status(500).send(`<pre>${e.stack}</pre>`);
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	}
 };
 
@@ -69,9 +68,8 @@ export const renderArticleJson = (
 
 		res.status(200).send(resp);
 	} catch (e) {
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		res.status(500).send(`<pre>${e.stack}</pre>`);
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	}
 };
 
@@ -109,9 +107,8 @@ export const renderInteractive = (
 
 		res.status(200).send(resp);
 	} catch (e) {
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		res.status(500).send(`<pre>${e.stack}</pre>`);
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	}
 };
 
@@ -157,9 +154,8 @@ export const renderBlocks = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		res.status(500).send(`<pre>${e.stack}</pre>`);
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	}
 };
 
@@ -178,8 +174,7 @@ export const renderKeyEvents = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		res.status(500).send(`<pre>${e.stack}</pre>`);
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	}
 };
