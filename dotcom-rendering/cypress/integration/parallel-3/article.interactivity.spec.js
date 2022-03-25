@@ -81,10 +81,6 @@ describe('Interactivity', function () {
 				.should('eq', 2);
 			// Verify hydration
 			cy.get('img[alt="Michael Barnier and the EU flag"]').should(
-				'not.exist',
-			);
-			cy.scrollTo('bottom', { duration: 300 });
-			cy.get('img[alt="Michael Barnier and the EU flag"]').should(
 				'be.visible',
 			);
 		});
