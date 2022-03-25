@@ -29,7 +29,7 @@
     <body>
         <h2>Default Endpoints</h2>
 
-        <ul>
+        <ul id="default-endpoints">
             <li><a href="/Article?url=https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software">Article</a></li>
             <li><a href="/AMPArticle?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance">⚡️Article</a></li>
 			<li><a href="/Interactive?url=https://www.theguardian.com/world/ng-interactive/2021/dec/03/french-election-polls-who-is-leading-the-race-to-be-the-next-president-of-france">Interactive</a></li>
@@ -308,6 +308,40 @@
                         '/sport/blog/2020/jul/09/why-chris-froome-and-team-ineos-parting-of-the-ways-cycling',
                 },
             ];
+
+			const urls = new Set();
+
+			const checkClipboard = (e) => {
+				if (document.visibilityState !== "visible") return;
+				if (!navigator?.clipboard) return;
+				if (!document.hasFocus()) return;
+
+				navigator.clipboard.readText().then(text => {
+					const guurl = ["https://www.theguardian.com/", "https://m.code.dev-theguardian.com/", "http://localhost:9000/"].find(base => text.startWith(base));
+					if (guurl) {
+						if (urls.has(text)) return;
+
+						urls.add(text);
+						const fragment = document.createDocumentFragment()
+						const li = document.createElement("li")
+						const a = document.createElement("a")
+						const slug = text.slice(guurl.length, 64)
+
+						a.setAttribute("href", `/Article?url=${text}`)
+						a.innerText = `📋 Article from clipboard: /${slug}…`;
+
+						li.appendChild(a);
+						fragment.appendChild(li);
+
+						document.querySelector("#default-endpoints").appendChild(fragment)
+					}
+				})
+
+			}
+
+			document.addEventListener("visibilitychange", checkClipboard);
+			window.addEventListener("focus", checkClipboard);
+			checkClipboard();
 
             var makeTestArticle = (a) => `
                 <div class="test-article">
