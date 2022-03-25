@@ -3,8 +3,9 @@ import type { ABTest } from '@guardian/ab-core';
 export const commercialGptLazyLoad: ABTest = {
 	id: 'CommercialGptLazyLoad',
 	author: 'Zeke Hunter-Green (@zekehuntergreen)',
-	start: '2022-03-23',
-	expiry: '2022-04-01',
+	start: '2022-03-25',
+	// The test should run for at least one week
+	expiry: '2022-04-05',
 	audience: 1 / 100,
 	audienceOffset: 10 / 100,
 	audienceCriteria: 'All pageviews',
