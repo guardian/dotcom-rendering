@@ -318,7 +318,7 @@
 
 				navigator.clipboard.readText().then(text => {
 					const guurl = ["https://www.theguardian.com/", "https://m.code.dev-theguardian.com/", "http://localhost:9000/"].find(base => text.startWith(base));
-					if (text.startsWith(guurl)) {
+					if (guurl) {
 						if (urls.has(text)) return;
 
 						urls.add(text);
