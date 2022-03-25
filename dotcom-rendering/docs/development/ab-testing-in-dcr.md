@@ -26,7 +26,7 @@ The library docs above explain the integration and the API.
 
 ```ts
 // Within the components
-import { useAB } from '@guardian/ab-react';
+import { useAB } from '../lib/useAB';
 
 // Example usage of AB Tests
 // Used in the Cypress tests as smoke test of the AB tests framework integration

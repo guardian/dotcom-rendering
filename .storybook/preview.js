@@ -1,4 +1,5 @@
 import { setCookie } from '@guardian/libs';
+import { AB } from '@guardian/ab-core';
 
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
@@ -10,6 +11,7 @@ import { resets } from '@guardian/source-foundations'
 import { Lazy } from '../dotcom-rendering/src/web/components/Lazy';
 import { Picture } from '../dotcom-rendering/src/web/components/Picture';
 import { mockRESTCalls } from '../dotcom-rendering/src/web/lib/mockRESTCalls';
+import { setABTests } from '../dotcom-rendering/src/web/lib/useAB';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -21,6 +23,16 @@ if (isChromatic()) {
 }
 
 mockRESTCalls();
+
+setABTests(
+	new AB({
+		mvtMaxValue: 1_000_000,
+		mvtId: 1234,
+		pageIsSensitive: false,
+		abTestSwitches: {},
+		arrayOfTestObjects: [],
+	}),
+);
 
 // Add base css for the site
 let css = `${getFontsCss()}${resets.resetCSS}`;

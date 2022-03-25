@@ -11,6 +11,7 @@ import { BrazeMessaging } from './BrazeMessaging.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { CoreVitals } from './CoreVitals.importable';
+import { SetABTests } from './SetABTests.importable';
 
 type Props = {
 	CAPI: CAPIType;
@@ -57,17 +58,10 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			<Island clientOnly={true} deferUntil="idle">
 				<CommercialMetrics
 					enabled={CAPI.config.switches.commercialMetrics}
-					switches={CAPI.config.switches}
-					isSensitive={CAPI.config.isSensitive}
-					isDev={CAPI.config.isDev}
 				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<CoreVitals
-					switches={CAPI.config.switches}
-					isSensitive={CAPI.config.isSensitive}
-					isDev={CAPI.config.isDev}
-				/>
+				<CoreVitals />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<BrazeMessaging idApiUrl={CAPI.config.idApiUrl} />
@@ -75,6 +69,13 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			<Island clientOnly={true} deferUntil="idle">
 				<ReaderRevenueDev
 					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+				/>
+			</Island>
+			<Island clientOnly={true}>
+				<SetABTests
+					abTestSwitches={CAPI.config.switches}
+					pageIsSensitive={CAPI.config.isSensitive}
+					isDev={!!CAPI.config.isDev}
 				/>
 			</Island>
 			<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />

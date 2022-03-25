@@ -358,20 +358,19 @@ export const FullPageInteractiveLayout = ({
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
 						contributionsServiceUrl={CAPI.contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
-						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}
 						isPaidContent={CAPI.pageType.isPaidContent}
 						isPreview={!!CAPI.config.isPreview}
+						isSensitive={CAPI.config.isSensitive}
 						keywordsId={CAPI.config.keywordIds}
 						pageId={CAPI.pageId}
-						pageIsSensitive={CAPI.config.isSensitive}
 						section={CAPI.config.section}
 						sectionName={CAPI.sectionName}
 						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						switches={CAPI.config.switches}
 						tags={CAPI.tags}
 					/>
 				</Island>

@@ -394,15 +394,11 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
-											abTestSwitches={
-												CAPI.config.switches
-											}
 											contentType={CAPI.contentType}
 											contributionsServiceUrl={
 												contributionsServiceUrl
 											}
 											idApiUrl={CAPI.config.idApiUrl}
-											isDev={CAPI.config.isDev ?? false}
 											isMinuteArticle={
 												CAPI.pageType.isMinuteArticle
 											}
@@ -411,9 +407,6 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 											}
 											keywordsId={CAPI.config.keywordIds}
 											pageId={CAPI.pageId}
-											pageIsSensitive={
-												CAPI.config.isSensitive
-											}
 											sectionId={CAPI.config.section}
 											sectionName={CAPI.sectionName}
 											shouldHideReaderRevenue={
@@ -561,9 +554,6 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}
-							switches={CAPI.config.switches}
-							pageIsSensitive={CAPI.config.isSensitive}
-							isDev={CAPI.config.isDev}
 						/>
 					</ElementContainer>
 				)}
@@ -608,20 +598,19 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
-						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}
 						isPaidContent={CAPI.pageType.isPaidContent}
 						isPreview={!!CAPI.config.isPreview}
+						isSensitive={CAPI.config.isSensitive}
 						keywordsId={CAPI.config.keywordIds}
 						pageId={CAPI.pageId}
-						pageIsSensitive={CAPI.config.isSensitive}
 						section={CAPI.config.section}
 						sectionName={CAPI.sectionName}
 						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						switches={CAPI.config.switches}
 						tags={CAPI.tags}
 					/>
 				</Island>

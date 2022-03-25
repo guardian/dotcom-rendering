@@ -285,29 +285,24 @@ The advantage of this is being able to force yourself into a specific section of
 
 The disadvantage of this method is that it's a bit tricky to work out exactly which mvt_id to set, and if you make changed to the audience and offset, you may have to adjust the value of the cookie too.
 
-**B)** Add the `forcedTestVariant` prop to the `ABProvider` in the relevant `Island`:
+**B)** Add the `forcedTestVariant` prop to the `SetABTests` Island:
 
 ```tsx
-<ABProvider
-    arrayOfTestObjects={tests}
-    abTestSwitches={{
-        ...CAPI.config.switches,
-        ...cypressAbSwitches,
-    }}
-    pageIsSensitive={CAPI.config.isSensitive}
-    mvtMaxValue={1000000}
-    mvtId={mvtId}
-    ophanRecord={ophanRecordFunc}
-    // forced test variant prop
-    forcedTestVariant={{
-        // id of the test from the test definition
-        testId: 'SignInGatePatientia',
-        // name of the variant to force into
-        variant: { id: 'patientia-variant-1', test: () => {} },
-    }}
->
-    ...
-</ABProvider>
+<Island clientOnly={true}>
+	<SetABTests
+		abTestSwitches={CAPI.config.switches}
+		pageIsSensitive={CAPI.config.isSensitive}
+		isDev={!!CAPI.config.isDev}
+
+		// forced test variant prop
+    	forcedTestVariant={{
+			// id of the test from the test definition
+			testId: 'SignInGatePatientia',
+			// name of the variant to force into
+			variant: { id: 'patientia-variant-1', test: () => {} },
+    	}}
+	/>
+</Island>
 ```
 
 The advantages of using the forcedTestVariant:
