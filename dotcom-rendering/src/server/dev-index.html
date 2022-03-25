@@ -317,7 +317,7 @@
 				if (!document.hasFocus()) return;
 
 				navigator.clipboard.readText().then(text => {
-					const guurl = ["https://www.theguardian.com/", "https://m.code.dev-theguardian.com/", "http://localhost:9000/"].find(base => text.startWith(base));
+					const guurl = ["https://www.theguardian.com/", "https://m.code.dev-theguardian.com/", "http://localhost:9000/"].find(base => text.startsWith(base));
 					if (guurl) {
 						if (urls.has(text)) return;
 
