@@ -2,24 +2,12 @@ import { css } from '@emotion/react';
 
 import { brandBackground } from '@guardian/source-foundations';
 
-import { AB } from '@guardian/ab-core';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
-import { setABTests } from '../lib/useAB';
 
 export default {
 	component: ReaderRevenueLinks,
 	title: 'Components/ReaderRevenueLinks',
 };
-
-setABTests(
-	new AB({
-		mvtMaxValue: 1000000,
-		mvtId: 1234,
-		pageIsSensitive: false,
-		abTestSwitches: {},
-		arrayOfTestObjects: [],
-	}),
-);
 
 const revenueUrls = {
 	subscribe: '',

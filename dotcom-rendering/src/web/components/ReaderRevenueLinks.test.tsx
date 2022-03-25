@@ -1,8 +1,6 @@
 import { render, wait } from '@testing-library/react';
-import { AB } from '@guardian/ab-core';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
-import { setABTests } from '../lib/useAB';
 
 const shouldHideSupportMessaging: {
 	[key: string]: any;
@@ -19,16 +17,6 @@ jest.mock('@guardian/libs', () => ({
 
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';
-
-setABTests(
-	new AB({
-		mvtMaxValue: 1000000,
-		mvtId: 1234,
-		pageIsSensitive: false,
-		abTestSwitches: {},
-		arrayOfTestObjects: [],
-	}),
-);
 
 describe('ReaderRevenueLinks', () => {
 	const urls = {

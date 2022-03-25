@@ -3,7 +3,6 @@ import fetchMock from 'fetch-mock';
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
 
 import React, { useEffect } from 'react';
-import { AB } from '@guardian/ab-core';
 import { ElementContainer } from './ElementContainer';
 import {
 	responseWithTwoTabs,
@@ -13,7 +12,6 @@ import {
 
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
-import { setABTests } from '../lib/useAB';
 
 const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
@@ -29,16 +27,6 @@ export default {
 		chromatic: { diffThreshold: 0.2 },
 	},
 };
-
-setABTests(
-	new AB({
-		mvtMaxValue: 1000000,
-		mvtId: 1234,
-		pageIsSensitive: false,
-		abTestSwitches: {},
-		arrayOfTestObjects: [],
-	}),
-);
 
 export const withTwoTabs = () => {
 	fetchMock.restore().getOnce('*', {
