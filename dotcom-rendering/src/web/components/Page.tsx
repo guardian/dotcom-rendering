@@ -24,9 +24,10 @@ type Props = {
  * @description
  * Page is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
  *
- * @param {CAPIType} CAPI - The article JSON data
- * @param {NAVType} NAV - The article JSON data
- * @param {ArticleFormat} format - The format model for the article
+ * @param {Props} props
+ * @param {CAPIType} props.CAPI - The article JSON data
+ * @param {NAVType} props.NAV - The article JSON data
+ * @param {ArticleFormat} props.format - The format model for the article
  * */
 export const Page = ({ CAPI, NAV, format }: Props) => {
 	return (
