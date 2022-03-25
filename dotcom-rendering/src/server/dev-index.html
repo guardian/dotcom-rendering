@@ -309,15 +309,26 @@
                 },
             ];
 
-			if(navigator?.clipboard) {
-				navigator.clipboard.readText().then(text=> {
-					if (text.startsWith("https://www.theguardian.com/")) {
+			const urls = new Set();
+
+			const checkClipboard = (e) => {
+				if (document.visibilityState !== "visible") return;
+				if (!navigator?.clipboard) return;
+				if (!document.hasFocus()) return;
+
+				navigator.clipboard.readText().then(text => {
+					const guurl = "https://www.theguardian.com/";
+					if (text.startsWith(guurl)) {
+						if (urls.has(text)) return;
+
+						urls.add(text);
 						const fragment = document.createDocumentFragment()
 						const li = document.createElement("li")
 						const a = document.createElement("a")
+						const slug = text.slice(guurl.length, 64)
 
 						a.setAttribute("href", `/Article?url=${text}`)
-						a.innerText = "📋 Article from clipboard";
+						a.innerText = `📋 Article from clipboard: /${slug}…`;
 
 						li.appendChild(a);
 						fragment.appendChild(li);
@@ -325,7 +336,12 @@
 						document.querySelector("#default-endpoints").appendChild(fragment)
 					}
 				})
+
 			}
+
+			document.addEventListener("visibilitychange", checkClipboard);
+			window.addEventListener("focus", checkClipboard);
+			checkClipboard();
 
             var makeTestArticle = (a) => `
                 <div class="test-article">
