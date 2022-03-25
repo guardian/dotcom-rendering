@@ -293,8 +293,6 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							adSizes.empty,
 							adSizes.mpu,
 							adSizes.googleCard,
-							adSizes.outstreamDesktop,
-							adSizes.outstreamGoogleDesktop,
 							adSizes.fluid,
 							adSizes.halfPage,
 							adSizes.skyscraper,
@@ -307,8 +305,6 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 							adSizes.outstreamMobile,
 							adSizes.mpu,
 							adSizes.googleCard,
-							adSizes.outstreamDesktop,
-							adSizes.outstreamGoogleDesktop,
 							adSizes.fluid,
 						]
 							.map((size) => size.toString())
@@ -419,7 +415,6 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 						adSizes.mpu,
 						adSizes.googleCard,
 						adSizes.halfPage,
-						adSizes.outstreamGoogleDesktop,
 						adSizes.fluid,
 					]
 						.map((size) => size.toString())
