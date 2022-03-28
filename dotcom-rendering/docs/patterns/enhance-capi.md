@@ -10,7 +10,7 @@ Ideally, these transformations would not be required. A better solution would be
 ## Examples
 
 ### DropCaps
-Certain article types, such as Features, have the first letter of the first paragraph marked as a DropCap. However, there was a requirement to sometimes also have other paragraphs be given a DropCap. But composer does not offer a way to mark a paragraph as, say, `dropcap: true`, so instead a convention was invented where if the preceding element was a h2 tag containing '* * *' then that was the trigger to give the following paragraph drop cap styling.
+Certain article types, such as Features, have the first letter of the first paragraph marked as a DropCap. However, there was a requirement to sometimes also have other paragraphs be given a DropCap. But composer does not offer a way to mark a paragraph as, say, `dropcap: true`, so instead a convention was invented where, if the preceding element was an `h2` tag containing '* * *', then that was the trigger to give the following paragraph drop cap styling.
 
 In DCR we replicate this using [enhance-dividers.ts](/dotcom-rendering/src/model/enhance-dividers.ts)
 
