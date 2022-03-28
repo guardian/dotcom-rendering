@@ -234,6 +234,7 @@ const HeadlineAgeWarning = ({
 	isScreenReader?: boolean;
 	format: ArticleFormat;
 }) => {
+	const palette = decidePalette(format);
 	const ageWarningMargins =
 		format.display === ArticleDisplay.Immersive
 			? css`
@@ -263,6 +264,9 @@ const HeadlineAgeWarning = ({
 						margin-top: 0;
 					}
 			  `;
+	const backgroundStyles = css`
+		background-color: ${palette.background.headline};
+	`;
 
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
@@ -272,7 +276,7 @@ const HeadlineAgeWarning = ({
 
 	if (age) {
 		return (
-			<div css={ageWarningMargins}>
+			<div css={[ageWarningMargins, backgroundStyles]}>
 				<AgeWarning age={age} />
 			</div>
 		);
