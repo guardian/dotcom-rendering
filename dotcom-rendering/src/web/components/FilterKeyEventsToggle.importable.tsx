@@ -30,7 +30,8 @@ export const FilterKeyEventsToggle = ({ filterKeyEvents }: Props) => {
 	const handleClick = () => {
 		setChecked(!checked);
 
-		const urlParams = new URLSearchParams();
+		const urlParams = new URLSearchParams(window.location.search);
+		urlParams.delete('page');
 		urlParams.set('filterKeyEvents', checked ? 'false' : 'true');
 
 		window.location.hash = 'filter-toggle';
