@@ -31,7 +31,7 @@ export const FilterKeyEventsToggle = ({ filterKeyEvents }: Props) => {
 		setChecked(!checked);
 
 		const urlParams = new URLSearchParams(window.location.search);
-		urlParams.delete('page');
+		urlParams.delete('page'); // direct to the first page
 		urlParams.set('filterKeyEvents', checked ? 'false' : 'true');
 
 		window.location.hash = 'filter-toggle';
