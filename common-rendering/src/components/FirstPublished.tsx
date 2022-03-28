@@ -76,7 +76,7 @@ const FirstPublished = ({
 			{isOriginalPinnedPost && (
 				<span
 					css={css`
-						width: 0.875rem;
+						width: 14px;
 						height: 0.875rem;
 						border-radius: 50%;
 						background-color: ${border.liveBlock(format)};
