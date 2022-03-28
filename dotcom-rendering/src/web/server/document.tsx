@@ -117,7 +117,7 @@ export const document = ({ data }: Props): string => {
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
 			CAPI.config && { src: CAPI.config.commercialBundleUrl },
-			...getScriptArrayFromFile('sentryLoader.ks'),
+			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements && {
 				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
