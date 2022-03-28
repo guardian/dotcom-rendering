@@ -28,7 +28,7 @@ const generateScriptTags = (
 		let attrs: string;
 		switch (script.legacy) {
 			case true:
-				attrs = 'defer nomodules';
+				attrs = 'defer nomodule';
 				break;
 			case false:
 				attrs = 'type="module"';
