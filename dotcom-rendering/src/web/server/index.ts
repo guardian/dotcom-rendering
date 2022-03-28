@@ -8,6 +8,7 @@ import { validateAsCAPIType } from '../../model/validate';
 import { extract as extractGA } from '../../model/extract-ga';
 import { blocksToHtml } from './blocksToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
+import { frontToHtml } from './frontToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -164,6 +165,22 @@ export const renderKeyEvents = (
 			filterKeyEvents,
 		});
 
+		res.status(200).send(html);
+	} catch (e) {
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
+	}
+};
+
+export const renderFront = (
+	{ body, query }: express.Request,
+	res: express.Response,
+): void => {
+	try {
+		const html = frontToHtml({
+			query,
+			body,
+		});
 		res.status(200).send(html);
 	} catch (e) {
 		const message = e instanceof Error ? e.stack : 'Unknown Error';
