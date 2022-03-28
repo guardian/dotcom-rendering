@@ -752,3 +752,53 @@ export const ReviewWithoutStars = () => {
 	);
 };
 ReviewWithoutStars.story = { name: 'Review without stars' };
+
+export const AgeWarning = () => {
+	const designs: [string, ArticleDesign][] = [
+		['Comment', ArticleDesign.Comment],
+		['Interview', ArticleDesign.Interview],
+		['MatchReport', ArticleDesign.MatchReport],
+		['Feature', ArticleDesign.Feature],
+		['Interactive', ArticleDesign.Interactive],
+		['Media', ArticleDesign.Media],
+		['Analysis', ArticleDesign.Analysis],
+		['Review', ArticleDesign.Review],
+	];
+	const format = (design: ArticleDesign): ArticleFormat => ({
+		display: ArticleDisplay.Standard,
+		design,
+		theme: ArticlePillar.News,
+	});
+
+	return (
+		<>
+			{designs.map(([themeName, design]) => (
+				<>
+					<ElementContainer>
+						<Flex>
+							<LeftColumn>
+								<></>
+							</LeftColumn>
+							<ArticleContainer format={format(design)}>
+								<ArticleHeadline
+									headlineString={`This is a headline in ${themeName} with an age warning showing`}
+									format={format(design)}
+									tags={[
+										{
+											id: 'tone/news',
+											type: '',
+											title: '',
+										},
+									]}
+									webPublicationDateDeprecated="2020-03-28T07:27:19.000Z"
+								/>
+							</ArticleContainer>
+						</Flex>
+					</ElementContainer>
+					<br />
+				</>
+			))}
+		</>
+	);
+};
+AgeWarning.story = { name: 'with age warning' };
