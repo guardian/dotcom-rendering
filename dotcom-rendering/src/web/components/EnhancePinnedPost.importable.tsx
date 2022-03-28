@@ -26,10 +26,8 @@ function hideShowMore() {
 	const pinnedPostOverlay = document.querySelector<HTMLElement>(
 		'#pinned-post-overlay',
 	);
-	if (pinnedPostButton && pinnedPostOverlay) {
-		pinnedPostButton.style.display = 'none';
-		pinnedPostOverlay.style.display = 'none';
-	}
+	if (pinnedPostButton) pinnedPostButton.style.display = 'none';
+	if (pinnedPostOverlay) pinnedPostOverlay.style.display = 'none';
 }
 
 /**
