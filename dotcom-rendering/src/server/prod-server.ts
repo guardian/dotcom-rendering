@@ -110,7 +110,7 @@ export const prodServer = () => {
 		logRenderTime,
 		// TODO: implement Fronts’ getContentFromURLMiddleware,
 		async (req: Request, res: Response) => {
-			// Eg. http://localhost:9000/AMPArticle?url=https://www.theguardian.com/commentisfree/...
+			// Eg. http://localhost:9000/Front?url=https://www.theguardian.com/uk/sport
 			try {
 				return renderFront(req, res);
 			} catch (error) {
