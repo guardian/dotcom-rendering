@@ -238,7 +238,7 @@ const HeadlineAgeWarning = ({
 	const ageWarningMargins =
 		format.display === ArticleDisplay.Immersive
 			? css`
-					margin-top: -44px;
+					padding-top: 12px;
 					margin-left: 0px;
 					margin-bottom: 0px;
 
