@@ -77,7 +77,7 @@ const FirstPublished = ({
 				<span
 					css={css`
 						width: 14px;
-						height: 0.875rem;
+						height: 14px;
 						border-radius: 50%;
 						background-color: ${border.liveBlock(format)};
 						align-self: center;
