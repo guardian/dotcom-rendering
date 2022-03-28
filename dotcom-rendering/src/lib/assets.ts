@@ -33,7 +33,7 @@ const decideAssetOrigin = (stage: string | undefined): string => {
 export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
 
 export const getScriptArrayFromFile = (
-	file: string,
+	file: `${string}.js`,
 ): { src: string; legacy?: boolean }[] => {
 	if (!file.endsWith('.js'))
 		throw new Error('Invalid filename: extension must be .js');
