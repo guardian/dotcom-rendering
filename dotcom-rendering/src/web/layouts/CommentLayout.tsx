@@ -33,12 +33,10 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
-import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import { getAgeWarning } from '../../lib/age-warning';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { Stuck, SendToBack, BannerWrapper } from './lib/stickiness';
 import { Island } from '../components/Island';
@@ -255,21 +253,6 @@ const headlinePadding = css`
 	padding-bottom: 43px;
 `;
 
-const ageWarningMargins = css`
-	margin-top: 12px;
-	margin-left: -10px;
-	margin-bottom: 6px;
-
-	${from.tablet} {
-		margin-left: -20px;
-	}
-
-	${from.leftCol} {
-		margin-left: -10px;
-		margin-top: 0;
-	}
-`;
-
 const mainMediaWrapper = css`
 	position: relative;
 `;
@@ -316,8 +299,6 @@ export const CommentLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 		CAPI.tags.filter((tag) => tag.type === 'Contributor').length === 1;
 
 	const showAvatar = avatarUrl && onlyOneContributor;
-
-	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
@@ -445,23 +426,15 @@ export const CommentLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 								>
 									{/* TOP - we use divs here to position content in groups using flex */}
 									<div css={!showAvatar && headlinePadding}>
-										{age && (
-											<div css={ageWarningMargins}>
-												<AgeWarning age={age} />
-											</div>
-										)}
 										<ArticleHeadline
 											format={format}
 											headlineString={CAPI.headline}
 											tags={CAPI.tags}
 											byline={CAPI.author.byline}
+											webPublicationDateDeprecated={
+												CAPI.webPublicationDateDeprecated
+											}
 										/>
-										{age && (
-											<AgeWarning
-												age={age}
-												isScreenReader={true}
-											/>
-										)}
 									</div>
 									{/* BOTTOM */}
 									<div>
