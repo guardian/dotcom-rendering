@@ -17,12 +17,11 @@ type Props = {
 	standfirst: string;
 };
 
-
 const nestedStyles = (format: ArticleFormat, palette: Palette) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return css`
-			li {
+				li {
 					margin-bottom: 6px;
 					padding-left: ${space[6]}px;
 
@@ -66,7 +65,7 @@ const nestedStyles = (format: ArticleFormat, palette: Palette) => {
 					border-bottom: 1px solid ${palette.border.standfirstLink};
 					transition: border-color 0.15s ease-out;
 				}
-			`
+			`;
 		default:
 			return css`
 				li {
@@ -113,7 +112,7 @@ const nestedStyles = (format: ArticleFormat, palette: Palette) => {
 					border-bottom: 1px solid ${palette.border.standfirstLink};
 					transition: border-color 0.15s ease-out;
 				}
-			`
+			`;
 	}
 };
 
