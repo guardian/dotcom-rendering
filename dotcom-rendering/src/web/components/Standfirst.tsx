@@ -20,7 +20,8 @@ type Props = {
 const nestedStyles = (palette: Palette) => css`
 	li {
 		margin-bottom: 6px;
-		padding-left: ${space[6]}px;
+		/* padding-left: ${space[6]}px; */
+		padding-left: 19px;
 
 		p {
 			display: inline;
@@ -35,7 +36,8 @@ const nestedStyles = (palette: Palette) => css`
 		width: 0.7em;
 		margin-right: 7px;
 		background-color: ${palette.background.bulletStandfirst};
-		margin-left: -${space[6]}px;
+		/* margin-left: -${space[6]}px; */
+		margin-left: -19px;
 	}
 
 	p {
