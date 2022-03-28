@@ -18,102 +18,53 @@ type Props = {
 };
 
 const nestedStyles = (format: ArticleFormat, palette: Palette) => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			return css`
-				li {
-					margin-bottom: 6px;
-					padding-left: ${space[6]}px;
+	const offset = format.display === ArticleDisplay.Immersive ? space[6] : 19;
+	return css`
+		li {
+			margin-bottom: 6px;
+			padding-left: ${offset}px;
 
-					p {
-						display: inline;
-					}
-				}
+			p {
+				display: inline;
+			}
+		}
 
-				li:before {
-					display: inline-block;
-					content: '';
-					border-radius: 50%;
-					height: 0.7em;
-					width: 0.7em;
-					margin-right: 7px;
-					background-color: ${palette.background.bulletStandfirst};
-					margin-left: -${space[6]}px;
-				}
+		li:before {
+			display: inline-block;
+			content: '';
+			border-radius: 50%;
+			height: 0.7em;
+			width: 0.7em;
+			margin-right: 7px;
+			background-color: ${palette.background.bulletStandfirst};
+			margin-left: -${offset}px;
+		}
 
-				p {
-					margin-bottom: 8px;
-				}
+		p {
+			margin-bottom: 8px;
+		}
 
-				strong {
-					font-weight: bold;
-				}
+		strong {
+			font-weight: bold;
+		}
 
-				[data-dcr-style='bullet'] {
-					display: inline-block;
-					content: '';
-					border-radius: 50%;
-					height: 13px;
-					width: 13px;
-					margin-right: 2px;
-					background-color: ${palette.background.bulletStandfirst};
-				}
+		[data-dcr-style='bullet'] {
+			display: inline-block;
+			content: '';
+			border-radius: 50%;
+			height: 13px;
+			width: 13px;
+			margin-right: 2px;
+			background-color: ${palette.background.bulletStandfirst};
+		}
 
-				a {
-					color: ${palette.text.standfirstLink};
-					text-decoration: none;
-					border-bottom: 1px solid ${palette.border.standfirstLink};
-					transition: border-color 0.15s ease-out;
-				}
-			`;
-		default:
-			return css`
-				li {
-					margin-bottom: 6px;
-					padding-left: 19px;
-
-					p {
-						display: inline;
-					}
-				}
-
-				li:before {
-					display: inline-block;
-					content: '';
-					border-radius: 50%;
-					height: 0.7em;
-					width: 0.7em;
-					margin-right: 7px;
-					background-color: ${palette.background.bulletStandfirst};
-					margin-left: -19px;
-				}
-
-				p {
-					margin-bottom: 8px;
-				}
-
-				strong {
-					font-weight: bold;
-				}
-
-				[data-dcr-style='bullet'] {
-					display: inline-block;
-					content: '';
-					border-radius: 50%;
-					height: 13px;
-					width: 13px;
-					margin-right: 2px;
-					background-color: ${palette.background.bulletStandfirst};
-				}
-
-				a {
-					color: ${palette.text.standfirstLink};
-					text-decoration: none;
-					border-bottom: 1px solid ${palette.border.standfirstLink};
-					transition: border-color 0.15s ease-out;
-				}
-			`;
-	}
+		a {
+			color: ${palette.text.standfirstLink};
+			text-decoration: none;
+			border-bottom: 1px solid ${palette.border.standfirstLink};
+			transition: border-color 0.15s ease-out;
+		}
+	`;
 };
 
 const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
@@ -249,7 +200,6 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 		<div
 			css={[
 				nestedStyles(format, palette),
-				// standfirstBulletStyles(format),
 				standfirstStyles(format, palette),
 				hoverStyles(palette),
 			]}
