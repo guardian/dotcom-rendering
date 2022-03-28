@@ -227,25 +227,42 @@ const HeadlineAgeWarning = ({
 	tags,
 	webPublicationDateDeprecated,
 	isScreenReader = false,
+	format,
 }: {
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
 	isScreenReader?: boolean;
+	format: ArticleFormat;
 }) => {
-	const ageWarningMargins = css`
-		margin-top: 12px;
-		margin-left: -10px;
-		margin-bottom: 6px;
+	const ageWarningMargins =
+		format.display === ArticleDisplay.Immersive
+			? css`
+					margin-top: -44px;
+					margin-left: 0px;
+					margin-bottom: 0px;
 
-		${from.tablet} {
-			margin-left: -20px;
-		}
+					${from.tablet} {
+						margin-left: 10px;
+					}
 
-		${from.leftCol} {
-			margin-left: -10px;
-			margin-top: 0;
-		}
-	`;
+					${from.leftCol} {
+						margin-left: 20px;
+					}
+			  `
+			: css`
+					margin-top: 12px;
+					margin-left: -10px;
+					margin-bottom: 6px;
+
+					${from.tablet} {
+						margin-left: -20px;
+					}
+
+					${from.leftCol} {
+						margin-left: -10px;
+						margin-top: 0;
+					}
+			  `;
 
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
@@ -285,6 +302,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<h1
 								css={[
@@ -302,6 +320,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 						</>
@@ -316,6 +335,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<h1
 								css={[
@@ -333,6 +353,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 							{byline && (
@@ -354,6 +375,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<h1
 								css={[
@@ -383,6 +405,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 						</>
@@ -397,6 +420,7 @@ export const ArticleHeadline = ({
 						webPublicationDateDeprecated={
 							webPublicationDateDeprecated
 						}
+						format={format}
 					/>
 					<h1
 						css={[
@@ -414,6 +438,7 @@ export const ArticleHeadline = ({
 						webPublicationDateDeprecated={
 							webPublicationDateDeprecated
 						}
+						format={format}
 						isScreenReader={true}
 					/>
 				</>
@@ -432,6 +457,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<h1
 								css={[
@@ -449,6 +475,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 						</>
@@ -462,6 +489,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<h1
 								css={[
@@ -479,6 +507,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 							{byline && (
@@ -499,6 +528,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<h1
 								css={[
@@ -516,6 +546,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 						</>
@@ -528,6 +559,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<h1
 								css={[
@@ -548,6 +580,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 						</>
@@ -562,6 +595,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<HeadlineTag
 								tagText="Interview"
@@ -592,6 +626,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 							{byline && (
@@ -612,6 +647,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<h1
 								css={[
@@ -629,6 +665,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 						</>
@@ -645,6 +682,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<h1
 								className={interactiveLegacyClasses.headline}
@@ -663,6 +701,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 						</div>
@@ -675,6 +714,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 							/>
 							<h1
 								css={[
@@ -694,6 +734,7 @@ export const ArticleHeadline = ({
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
+								format={format}
 								isScreenReader={true}
 							/>
 						</>
