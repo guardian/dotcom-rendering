@@ -223,16 +223,16 @@ const zIndex = css`
 	z-index: 1;
 `;
 
-const HeadlineAgeWarning = ({
+const WithAgeWarning = ({
 	tags,
 	webPublicationDateDeprecated,
-	isScreenReader = false,
 	format,
+	children,
 }: {
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
-	isScreenReader?: boolean;
 	format: ArticleFormat;
+	children: React.ReactNode;
 }) => {
 	const palette = decidePalette(format);
 	const ageWarningMargins =
@@ -270,19 +270,19 @@ const HeadlineAgeWarning = ({
 
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
-	if (age && isScreenReader) {
-		return <AgeWarning age={age} isScreenReader={true} />;
-	}
-
 	if (age) {
 		return (
-			<div css={[ageWarningMargins, backgroundStyles]}>
-				<AgeWarning age={age} />
-			</div>
+			<>
+				<div css={[backgroundStyles, ageWarningMargins]}>
+					<AgeWarning age={age} />
+				</div>
+				{children}
+				<AgeWarning age={age} isScreenReader={true} />
+			</>
 		);
 	}
 
-	return null;
+	return <>{children}</>;
 };
 
 export const ArticleHeadline = ({
@@ -298,35 +298,28 @@ export const ArticleHeadline = ({
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
 				case ArticleDesign.PrintShop:
+					// Immersive headlines have two versions, with main media, and (this one) without
 					return (
-						// Immersive headlines have two versions, with main media, and (this one) without
 						<>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<h1
-								css={[
-									jumboFont,
-									maxWidth,
-									immersiveStyles,
-									displayBlock,
-									reducedBottomPadding,
-								]}
 							>
-								{curly(headlineString)}
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+								<h1
+									css={[
+										jumboFont,
+										maxWidth,
+										immersiveStyles,
+										displayBlock,
+										reducedBottomPadding,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 						</>
 					);
 				case ArticleDesign.Comment:
@@ -334,32 +327,25 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Letter:
 					return (
 						<>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<h1
-								css={[
-									lightFont,
-									invertedText,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
 							>
-								{curly(headlineString)}
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+								<h1
+									css={[
+										lightFont,
+										invertedText,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 							{byline && (
 								<HeadlineByline
 									format={format}
@@ -374,44 +360,37 @@ export const ArticleHeadline = ({
 						// Immersive headlines with main media present, are large and inverted with
 						// a black background
 						<>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<h1
-								css={[
-									immersiveWrapper,
-									darkBackground(palette),
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
 							>
-								<span
+								<h1
 									css={[
-										format.theme === ArticleSpecial.Labs
-											? jumboLabsFont
-											: jumboFont,
-										maxWidth,
-										invertedStyles(palette),
-										immersiveStyles,
-										displayBlock,
+										immersiveWrapper,
+										darkBackground(palette),
+										css`
+											color: ${palette.text.headline};
+										`,
 									]}
 								>
-									{curly(headlineString)}
-								</span>
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+									<span
+										css={[
+											format.theme === ArticleSpecial.Labs
+												? jumboLabsFont
+												: jumboFont,
+											maxWidth,
+											invertedStyles(palette),
+											immersiveStyles,
+											displayBlock,
+										]}
+									>
+										{curly(headlineString)}
+									</span>
+								</h1>
+							</WithAgeWarning>
 						</>
 					);
 			}
@@ -419,32 +398,25 @@ export const ArticleHeadline = ({
 		case ArticleDisplay.NumberedList:
 			return (
 				<>
-					<HeadlineAgeWarning
+					<WithAgeWarning
 						tags={tags}
 						webPublicationDateDeprecated={
 							webPublicationDateDeprecated
 						}
 						format={format}
-					/>
-					<h1
-						css={[
-							boldFont,
-							topPadding,
-							css`
-								color: ${palette.text.headline};
-							`,
-						]}
 					>
-						{curly(headlineString)}
-					</h1>
-					<HeadlineAgeWarning
-						tags={tags}
-						webPublicationDateDeprecated={
-							webPublicationDateDeprecated
-						}
-						format={format}
-						isScreenReader={true}
-					/>
+						<h1
+							css={[
+								boldFont,
+								topPadding,
+								css`
+									color: ${palette.text.headline};
+								`,
+							]}
+						>
+							{curly(headlineString)}
+						</h1>
+					</WithAgeWarning>
 				</>
 			);
 		case ArticleDisplay.Showcase:
@@ -456,64 +428,50 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Feature:
 					return (
 						<>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<h1
-								css={[
-									boldFont,
-									topPadding,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
 							>
-								{curly(headlineString)}
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+								<h1
+									css={[
+										boldFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 						</>
 					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 					return (
 						<>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<h1
-								css={[
-									lightFont,
-									topPadding,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
 							>
-								{curly(headlineString)}
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+								<h1
+									css={[
+										lightFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 							{byline && (
 								<HeadlineByline
 									format={format}
@@ -527,66 +485,53 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Letter:
 					return (
 						<>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<h1
-								css={[
-									lightFont,
-									topPadding,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
 							>
-								{curly(headlineString)}
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+								<h1
+									css={[
+										lightFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 						</>
 					);
 				case ArticleDesign.Analysis:
 					return (
 						<>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<h1
-								css={[
-									standardFont,
-									topPadding,
-									underlinedStyles(
-										palette.background.analysisUnderline,
-									),
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
 							>
-								{curly(headlineString)}
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+								<h1
+									css={[
+										standardFont,
+										topPadding,
+										underlinedStyles(
+											palette.background
+												.analysisUnderline,
+										),
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 						</>
 					);
 				case ArticleDesign.Interview:
@@ -594,45 +539,38 @@ export const ArticleHeadline = ({
 						// Inverted headlines have a wrapper div for positioning
 						// and a black background (only for the text)
 						<div css={[shiftSlightly, maxWidth, displayFlex]}>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<HeadlineTag
-								tagText="Interview"
-								palette={palette}
-							/>
-							<h1
-								css={[
-									invertedFont,
-									invertedWrapper,
-									zIndex,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
 							>
-								<span
+								<HeadlineTag
+									tagText="Interview"
+									palette={palette}
+								/>
+								<h1
 									css={[
-										darkBackground(palette),
-										invertedStyles(palette),
-										displayInline,
+										invertedFont,
+										invertedWrapper,
+										zIndex,
+										css`
+											color: ${palette.text.headline};
+										`,
 									]}
 								>
-									{curly(headlineString)}
-								</span>
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+									<span
+										css={[
+											darkBackground(palette),
+											invertedStyles(palette),
+											displayInline,
+										]}
+									>
+										{curly(headlineString)}
+									</span>
+								</h1>
+							</WithAgeWarning>
 							{byline && (
 								<HeadlineByline
 									format={format}
@@ -646,32 +584,25 @@ export const ArticleHeadline = ({
 				case ArticleDesign.DeadBlog:
 					return (
 						<>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<h1
-								css={[
-									standardFont,
-									css`
-										color: ${palette.text.headline};
-										padding-bottom: ${space[9]}px;
-									`,
-								]}
 							>
-								{curly(headlineString)}
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+								<h1
+									css={[
+										standardFont,
+										css`
+											color: ${palette.text.headline};
+											padding-bottom: ${space[9]}px;
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 						</>
 					);
 				case ArticleDesign.Interactive:
@@ -681,66 +612,54 @@ export const ArticleHeadline = ({
 								position: relative;
 							`}
 						>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<h1
-								className={interactiveLegacyClasses.headline}
-								css={[
-									standardFont,
-									topPadding,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
 							>
-								{curly(headlineString)}
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+								<h1
+									className={
+										interactiveLegacyClasses.headline
+									}
+									css={[
+										standardFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 						</div>
 					);
 				default:
 					return (
 						<>
-							<HeadlineAgeWarning
+							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
 									webPublicationDateDeprecated
 								}
 								format={format}
-							/>
-							<h1
-								css={[
-									format.theme === ArticleSpecial.Labs
-										? labsFont
-										: standardFont,
-									topPadding,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
 							>
-								{curly(headlineString)}
-							</h1>
-							<HeadlineAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-								isScreenReader={true}
-							/>
+								<h1
+									css={[
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: standardFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 						</>
 					);
 			}
