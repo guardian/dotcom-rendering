@@ -18,7 +18,7 @@ In DCR we replicate this using [enhance-dividers.ts](/dotcom-rendering/src/model
 There are some conventions that can result in images appearing differently, we need a cleaner to support these while we wait for support for them to be added natively to Composer.
 
 Multi images. Consecutive sequences of two halfWidth images will be merged into a MultiImageBlockElement and shown side by side
-Captions. A ul/li tag directly after an image will replace the proceeding image's caption
+Captions. A `ul`/`li` tag directly after an image will replace the preceding image's caption
 
 In particular, Photo essay articles needs a lot of cleaning to achieve the intended designs. They use special caption styles and can sometimes have titles overlaying images.
 
