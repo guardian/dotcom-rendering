@@ -146,15 +146,11 @@ export const document = ({ data }: Props): string => {
 	]);
 
 	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.filter(
-		(script) => script && script.legacy === false,
-	)[0];
-	const legacyScript = gaChunk.filter(
-		(script) => script && script.legacy === true,
-	)[0];
+	const modernScript = gaChunk.find((script) => script?.legacy === false);
+	const legacyScript = gaChunk.find((script) => script?.legacy === true);
 	const gaPath = {
-		modern: modernScript.src,
-		legacy: legacyScript?.src,
+		modern: modernScript?.src as string,
+		legacy: legacyScript?.src as string,
 	};
 
 	/**
