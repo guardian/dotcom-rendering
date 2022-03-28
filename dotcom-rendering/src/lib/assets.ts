@@ -35,6 +35,9 @@ export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
 export const getScriptArrayFromFile = (
 	file: string,
 ): { src: string; legacy?: boolean }[] => {
+	if (!file.endsWith('.js'))
+		throw new Error('Invalid filename: extension must be .js');
+
 	const isDev = process.env.NODE_ENV === 'development';
 
 	const filename = isDev ? file : manifest[file];
