@@ -1,8 +1,15 @@
-const fetch = require('node-fetch');
+// @ts-check
+const fetch = require('node-fetch').default;
+
+/** @type {(_: [string, unknown]) => _ is [string, string]} */
+const isStringTuple = (_) => typeof _[1] === 'string';
 
 /**
  * Get DCR content from a `theguardian.com` URL.
  * Takes in optional `X-Gu-*` headers to send.
+ *
+ * @param {string} _url
+ * @param {import('http').IncomingHttpHeaders} _headers
  */
 async function getContentFromURL(_url, _headers) {
 	try {
@@ -19,10 +26,11 @@ async function getContentFromURL(_url, _headers) {
 		const jsonUrl = `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
 
 		// Explicitly pass through GU headers - this enables us to override properties such as region in CI
+		/** @type {HeadersInit} */
 		const headers = Object.fromEntries(
-			Object.entries(_headers).filter(([key]) =>
-				key.toLowerCase().startsWith('x-gu-'),
-			),
+			Object.entries(_headers)
+				.filter(([key]) => key.toLowerCase().startsWith('x-gu-'))
+				.filter(isStringTuple),
 		);
 
 		const { html, ...config } = await fetch(jsonUrl, { headers }).then(
@@ -31,13 +39,13 @@ async function getContentFromURL(_url, _headers) {
 
 		return config;
 	} catch (error) {
-		// eslint-disable-next-line no-console
 		console.error(error);
 	}
 }
 
 exports.default = getContentFromURL;
 
+/** @type {import('webpack-dev-server').ExpressRequestHandler} */
 exports.getContentFromURLMiddleware = async (req, res, next) => {
 	if (req.query.url) {
 		/**
