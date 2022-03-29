@@ -6,6 +6,7 @@ import {
 	headline,
 	from,
 	until,
+	brandAlt,
 } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
@@ -88,6 +89,7 @@ const showMenuUnderlineStyles = css`
 
 		:hover {
 			text-decoration: underline;
+			color: ${brandAlt[400]};
 		}
 
 		:after {
