@@ -58,6 +58,7 @@ export const Sections = (): React.ReactNode => (
 		>
 			<Header
 				edition="UK"
+				supporterCTA=""
 				discussionApiUrl=""
 				urls={{
 					contribute: '',
@@ -152,6 +153,14 @@ export const Sections = (): React.ReactNode => (
 				pageFooter={pageFooter}
 				pillar={ArticlePillar.News}
 				pillars={NAV.pillars}
+				urls={{
+					contribute: '',
+					subscribe: '',
+					support: '',
+					supporter: '',
+				}}
+				edition="UK"
+				contributionsServiceUrl=""
 			/>
 		</ElementContainer>
 	</>

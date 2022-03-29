@@ -374,6 +374,9 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								supporterCTA={
+									CAPI.nav.readerRevenueLinks.header.supporter
+								}
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
@@ -874,6 +877,9 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 
