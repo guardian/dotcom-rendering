@@ -256,41 +256,49 @@ export const MoreColumn: React.FC<{
 				</ul>
 			</li>
 			<li css={columnStyle} role="none">
-				<li
-					key="facebook"
-					css={[mainMenuLinkStyle, hideDesktop]}
-					role="none"
+				<ul
+					css={[
+						columnLinks,
+						!!moreColumn.pillar && pillarColumnLinks,
+					]}
+					role="menu"
 				>
-					<a
-						className="selectableMenuItem"
-						css={columnLinkTitle}
-						data-link-name="nav2 : secondary : facebook"
-						href="https://www.facebook.com/theguardian"
-						role="menuitem"
-						tabIndex={-1}
+					<li
+						key="facebook"
+						css={[mainMenuLinkStyle, hideDesktop]}
+						role="none"
 					>
-						<FacebookIcon css={shareIconStyles} />
-						Facebook
-					</a>
-				</li>
+						<a
+							className="selectableMenuItem"
+							css={columnLinkTitle}
+							data-link-name="nav2 : secondary : facebook"
+							href="https://www.facebook.com/theguardian"
+							role="menuitem"
+							tabIndex={-1}
+						>
+							<FacebookIcon css={shareIconStyles} />
+							Facebook
+						</a>
+					</li>
 
-				<li
-					key="twitter"
-					css={[mainMenuLinkStyle, hideDesktop]}
-					role="none"
-				>
-					<a
-						className="selectableMenuItem"
-						css={columnLinkTitle}
-						data-link-name="nav2 : secondary : twitter"
-						href="https://twitter.com/guardian"
-						role="menuitem"
-						tabIndex={-1}
+					<li
+						key="twitter"
+						css={[mainMenuLinkStyle, hideDesktop]}
+						role="none"
 					>
-						<TwitterIconPadded css={shareIconStyles} />
-						Twitter
-					</a>
-				</li>
+						<a
+							className="selectableMenuItem"
+							css={columnLinkTitle}
+							data-link-name="nav2 : secondary : twitter"
+							href="https://twitter.com/guardian"
+							role="menuitem"
+							tabIndex={-1}
+						>
+							<TwitterIconPadded css={shareIconStyles} />
+							Twitter
+						</a>
+					</li>
+				</ul>
 			</li>
 		</>
 	);
