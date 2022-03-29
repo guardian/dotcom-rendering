@@ -488,6 +488,9 @@ export const InteractiveImmersiveLayout = ({
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 
