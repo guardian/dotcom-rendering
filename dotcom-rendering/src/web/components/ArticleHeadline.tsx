@@ -223,6 +223,39 @@ const zIndex = css`
 	z-index: 1;
 `;
 
+const ageWarningMargins = (format: ArticleFormat) =>
+	format.display === ArticleDisplay.Immersive
+		? css`
+				margin-left: 0px;
+				margin-bottom: 0px;
+
+				${from.tablet} {
+					margin-left: 10px;
+				}
+
+				${from.leftCol} {
+					margin-left: 20px;
+				}
+		  `
+		: css`
+				margin-top: 12px;
+				margin-left: -10px;
+				margin-bottom: 6px;
+
+				${from.tablet} {
+					margin-left: -20px;
+				}
+
+				${from.leftCol} {
+					margin-left: -10px;
+					margin-top: 0;
+				}
+		  `;
+
+const backgroundStyles = (palette: Palette) => css`
+	background-color: ${palette.background.headline};
+`;
+
 const WithAgeWarning = ({
 	tags,
 	webPublicationDateDeprecated,
@@ -235,44 +268,14 @@ const WithAgeWarning = ({
 	children: React.ReactNode;
 }) => {
 	const palette = decidePalette(format);
-	const ageWarningMargins =
-		format.display === ArticleDisplay.Immersive
-			? css`
-					margin-left: 0px;
-					margin-bottom: 0px;
-
-					${from.tablet} {
-						margin-left: 10px;
-					}
-
-					${from.leftCol} {
-						margin-left: 20px;
-					}
-			  `
-			: css`
-					margin-top: 12px;
-					margin-left: -10px;
-					margin-bottom: 6px;
-
-					${from.tablet} {
-						margin-left: -20px;
-					}
-
-					${from.leftCol} {
-						margin-left: -10px;
-						margin-top: 0;
-					}
-			  `;
-	const backgroundStyles = css`
-		background-color: ${palette.background.headline};
-	`;
-
 	const age = getAgeWarning(tags, webPublicationDateDeprecated);
 
 	if (age) {
 		return (
 			<>
-				<div css={[backgroundStyles, ageWarningMargins]}>
+				<div
+					css={[backgroundStyles(palette), ageWarningMargins(format)]}
+				>
 					<AgeWarning age={age} />
 				</div>
 				{children}
