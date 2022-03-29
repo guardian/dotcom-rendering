@@ -135,6 +135,11 @@ export const renderElement = ({
 	isSensitive,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
+
+	const isLiveBlog =
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
+
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
@@ -725,7 +730,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
-						stickyVideos={switches.stickyVideos}
+						stickyVideos={isLiveBlog && switches.stickyVideos}
 					/>
 				</Island>,
 			];
