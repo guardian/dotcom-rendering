@@ -21,13 +21,16 @@ const showMoreTextStyles = css`
 	display: block;
 	height: 100%;
 
-	/* stylelint-disable-next-line selector-type-no-unknown */
+	/* stylelint-disable selector-type-no-unknown */
 	${`#${navInputCheckboxId}`}:checked ~ div label & svg {
 		transform: translateY(-2px) rotate(-180deg);
-		:hover {
-			transform: translateY(-4px) rotate(-180deg);
-		}
 	}
+
+	${`#${navInputCheckboxId}`}:checked ~ div label:hover & svg,
+	${`#${navInputCheckboxId}`}:checked ~ div label:focus & svg {
+		transform: translateY(-4px) rotate(-180deg);
+	}
+	/* stylelint-enable selector-type-no-unknown */
 
 	svg {
 		position: absolute;
@@ -37,10 +40,6 @@ const showMoreTextStyles = css`
 		height: 16px;
 		width: 16px;
 		transition: transform 250ms ease-out;
-
-		:hover {
-			transform: translateY(2px);
-		}
 	}
 `;
 
@@ -62,9 +61,13 @@ const openExpandedMenuStyles = (display: ArticleDisplay) => css`
 		padding-top: ${display === ArticleDisplay.Immersive ? '9px' : '5px'};
 		height: 42px;
 	}
+
 	:hover,
 	:focus {
 		color: ${brandAlt[400]};
+		svg {
+			transform: translateY(2px);
+		}
 	}
 `;
 
