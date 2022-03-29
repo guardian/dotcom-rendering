@@ -33,8 +33,9 @@ async function getContentFromURL(_url, _headers) {
 				.filter(isStringTuple),
 		);
 
+		// pick all the keys from the JSON except `html`
 		const { html, ...config } = await fetch(jsonUrl, { headers }).then(
-			(article) => article.json(),
+			(response) => response.json(),
 		);
 
 		return config;
