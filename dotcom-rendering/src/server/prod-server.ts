@@ -108,7 +108,8 @@ export const prodServer = () => {
 	app.get(
 		'/Front',
 		logRenderTime,
-		// TODO: implement Fronts’ getContentFromURLMiddleware,
+		// TODO: ensure getContentFromURLMiddleware supports fronts
+		getContentFromURLMiddleware,
 		async (req: Request, res: Response) => {
 			// Eg. http://localhost:9000/Front?url=https://www.theguardian.com/uk/sport
 			try {
