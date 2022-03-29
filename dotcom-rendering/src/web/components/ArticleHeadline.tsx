@@ -28,6 +28,7 @@ type Props = {
 	byline?: string;
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
+	hasStarRating?: boolean;
 };
 
 const curly = (x: any) => x;
@@ -287,12 +288,69 @@ const WithAgeWarning = ({
 	return <>{children}</>;
 };
 
+const decideBottomPadding = ({
+	format,
+	hasStarRating,
+}: {
+	format: ArticleFormat;
+	hasStarRating?: boolean;
+}) => {
+	if (
+		format.display === ArticleDisplay.Immersive &&
+		format.design === ArticleDesign.Interactive
+	) {
+		// These types of article have no padding
+		return '';
+	}
+
+	if (format.display === ArticleDisplay.Showcase) {
+		// Showcase articles always have 24 pixels
+		return css`
+			padding-bottom: ${space[6]}px;
+		`;
+	}
+
+	switch (format.design) {
+		case ArticleDesign.Review:
+			if (hasStarRating) {
+				return '';
+			}
+			return css`
+				padding-bottom: ${space[6]}px;
+				${from.tablet} {
+					padding-bottom: ${space[9]}px;
+				}
+			`;
+
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+			// Opinion pieces always have 43 pixels of bottom padding
+			return css`
+				padding-bottom: 43px;
+			`;
+		case ArticleDesign.Interview:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			// Don't add extra padding
+			return '';
+		default:
+			return css`
+				padding-bottom: ${space[6]}px;
+				${from.tablet} {
+					padding-bottom: ${space[9]}px;
+				}
+			`;
+	}
+};
+
 export const ArticleHeadline = ({
 	headlineString,
 	format,
 	tags,
 	byline,
 	webPublicationDateDeprecated,
+	hasStarRating,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -302,7 +360,9 @@ export const ArticleHeadline = ({
 				case ArticleDesign.PrintShop:
 					// Immersive headlines have two versions, with main media, and (this one) without
 					return (
-						<>
+						<div
+							css={decideBottomPadding({ format, hasStarRating })}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -322,13 +382,15 @@ export const ArticleHeadline = ({
 									{curly(headlineString)}
 								</h1>
 							</WithAgeWarning>
-						</>
+						</div>
 					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					return (
-						<>
+						<div
+							css={decideBottomPadding({ format, hasStarRating })}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -355,13 +417,15 @@ export const ArticleHeadline = ({
 									tags={tags}
 								/>
 							)}
-						</>
+						</div>
 					);
 				default:
 					return (
 						// Immersive headlines with main media present, are large and inverted with
 						// a black background
-						<>
+						<div
+							css={decideBottomPadding({ format, hasStarRating })}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -393,13 +457,13 @@ export const ArticleHeadline = ({
 									</span>
 								</h1>
 							</WithAgeWarning>
-						</>
+						</div>
 					);
 			}
 		}
 		case ArticleDisplay.NumberedList:
 			return (
-				<>
+				<div css={decideBottomPadding({ format, hasStarRating })}>
 					<WithAgeWarning
 						tags={tags}
 						webPublicationDateDeprecated={
@@ -419,7 +483,7 @@ export const ArticleHeadline = ({
 							{curly(headlineString)}
 						</h1>
 					</WithAgeWarning>
-				</>
+				</div>
 			);
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.Standard:
@@ -429,7 +493,9 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Feature:
 					return (
-						<>
+						<div
+							css={decideBottomPadding({ format, hasStarRating })}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -449,12 +515,14 @@ export const ArticleHeadline = ({
 									{curly(headlineString)}
 								</h1>
 							</WithAgeWarning>
-						</>
+						</div>
 					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 					return (
-						<>
+						<div
+							css={decideBottomPadding({ format, hasStarRating })}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -481,12 +549,14 @@ export const ArticleHeadline = ({
 									tags={tags}
 								/>
 							)}
-						</>
+						</div>
 					);
 
 				case ArticleDesign.Letter:
 					return (
-						<>
+						<div
+							css={decideBottomPadding({ format, hasStarRating })}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -506,11 +576,13 @@ export const ArticleHeadline = ({
 									{curly(headlineString)}
 								</h1>
 							</WithAgeWarning>
-						</>
+						</div>
 					);
 				case ArticleDesign.Analysis:
 					return (
-						<>
+						<div
+							css={decideBottomPadding({ format, hasStarRating })}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -534,13 +606,20 @@ export const ArticleHeadline = ({
 									{curly(headlineString)}
 								</h1>
 							</WithAgeWarning>
-						</>
+						</div>
 					);
 				case ArticleDesign.Interview:
 					return (
 						// Inverted headlines have a wrapper div for positioning
 						// and a black background (only for the text)
-						<div css={[shiftSlightly, maxWidth, displayFlex]}>
+						<div
+							css={[
+								shiftSlightly,
+								maxWidth,
+								displayFlex,
+								decideBottomPadding({ format, hasStarRating }),
+							]}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -585,7 +664,9 @@ export const ArticleHeadline = ({
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
-						<>
+						<div
+							css={decideBottomPadding({ format, hasStarRating })}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -605,14 +686,17 @@ export const ArticleHeadline = ({
 									{curly(headlineString)}
 								</h1>
 							</WithAgeWarning>
-						</>
+						</div>
 					);
 				case ArticleDesign.Interactive:
 					return (
 						<div
-							css={css`
-								position: relative;
-							`}
+							css={[
+								decideBottomPadding({ format, hasStarRating }),
+								css`
+									position: relative;
+								`,
+							]}
 						>
 							<WithAgeWarning
 								tags={tags}
@@ -640,7 +724,9 @@ export const ArticleHeadline = ({
 					);
 				default:
 					return (
-						<>
+						<div
+							css={decideBottomPadding({ format, hasStarRating })}
+						>
 							<WithAgeWarning
 								tags={tags}
 								webPublicationDateDeprecated={
@@ -662,7 +748,7 @@ export const ArticleHeadline = ({
 									{curly(headlineString)}
 								</h1>
 							</WithAgeWarning>
-						</>
+						</div>
 					);
 			}
 		}
