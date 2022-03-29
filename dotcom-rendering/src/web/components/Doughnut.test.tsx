@@ -24,22 +24,17 @@ describe('Doughnut', () => {
 
 	it('should display the given labels when sizing is customised', () => {
 		const { getByText } = render(
-			<Doughnut
-				sections={mockSections}
-				percentCutout={20}
-				width={200}
-				height={200}
-			/>,
+			<Doughnut sections={mockSections} percentCutout={20} size={200} />,
 		);
 
 		expect(getByText(mockSections[0].label)).toBeInTheDocument();
 		expect(getByText(mockSections[1].label)).toBeInTheDocument();
 	});
 
-	it('should return null if only one section is passed', () => {
+	it('should return a circle if only one section is passed', () => {
 		const { container } = render(<Doughnut sections={[mockSections[0]]} />);
 
-		expect(container.firstChild).toBeNull();
+		expect(container.firstChild).not.toBeNull();
 	});
 
 	it('should handle if a section has a zero value', () => {

@@ -28,6 +28,7 @@ type Props = {
 	avatarBackgroundColor?: string;
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
+	isOriginalPinnedPost?: boolean;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -119,6 +120,7 @@ const LiveBlockContainer = ({
 	avatarBackgroundColor,
 	isPinnedPost,
 	supportsDarkMode,
+	isOriginalPinnedPost = false,
 }: Props) => {
 	return (
 		<article
@@ -160,6 +162,8 @@ const LiveBlockContainer = ({
 						blockLink={blockLink}
 						isPinnedPost={isPinnedPost}
 						supportsDarkMode={supportsDarkMode}
+						isOriginalPinnedPost={isOriginalPinnedPost}
+						format={format}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}

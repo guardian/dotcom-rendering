@@ -8,23 +8,29 @@ import { validateAsCAPIType } from '../../model/validate';
 import { extract as extractGA } from '../../model/extract-ga';
 import { blocksToHtml } from './blocksToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
+import { frontToHtml } from './frontToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
+
+const enhanceCAPIType = (body: Record<string, unknown>): CAPIType => {
+	const data = validateAsCAPIType(body);
+	const CAPI: CAPIType = {
+		...data,
+		blocks: enhanceBlocks(data.blocks, data.format),
+		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
+		standfirst: enhanceStandfirst(data.standfirst),
+	};
+	return CAPI;
+};
 
 export const renderArticle = (
 	{ body }: express.Request,
 	res: express.Response,
 ): void => {
 	try {
-		const data = validateAsCAPIType(body);
-		const CAPI = {
-			...data,
-			blocks: enhanceBlocks(data.blocks, data.format),
-			pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
-			standfirst: enhanceStandfirst(data.standfirst),
-		};
+		const CAPI = enhanceCAPIType(body);
 		const resp = document({
 			data: {
 				CAPI,
@@ -38,9 +44,8 @@ export const renderArticle = (
 
 		res.status(200).send(resp);
 	} catch (e) {
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		res.status(500).send(`<pre>${e.stack}</pre>`);
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	}
 };
 
@@ -49,13 +54,7 @@ export const renderArticleJson = (
 	res: express.Response,
 ): void => {
 	try {
-		const data = validateAsCAPIType(body);
-		const CAPI = {
-			...body,
-			blocks: enhanceBlocks(data.blocks, data.format),
-			pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
-			standfirst: enhanceStandfirst(data.standfirst),
-		} as CAPIType;
+		const CAPI = enhanceCAPIType(body);
 		const resp = {
 			data: {
 				CAPI,
@@ -69,9 +68,8 @@ export const renderArticleJson = (
 
 		res.status(200).send(resp);
 	} catch (e) {
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		res.status(500).send(`<pre>${e.stack}</pre>`);
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	}
 };
 
@@ -88,14 +86,7 @@ export const renderInteractive = (
 	res: express.Response,
 ): void => {
 	try {
-		const data = validateAsCAPIType(body);
-		const CAPI = {
-			...body,
-			blocks: enhanceBlocks(data.blocks, data.format),
-			pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
-			standfirst: enhanceStandfirst(data.standfirst),
-		} as CAPIType;
-
+		const CAPI = enhanceCAPIType(body);
 		const resp = document({
 			data: {
 				CAPI,
@@ -109,9 +100,8 @@ export const renderInteractive = (
 
 		res.status(200).send(resp);
 	} catch (e) {
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		res.status(500).send(`<pre>${e.stack}</pre>`);
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	}
 };
 
@@ -157,9 +147,8 @@ export const renderBlocks = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		res.status(500).send(`<pre>${e.stack}</pre>`);
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	}
 };
 
@@ -178,8 +167,23 @@ export const renderKeyEvents = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		// @ts-expect-error
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-		res.status(500).send(`<pre>${e.stack}</pre>`);
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
+	}
+};
+
+export const renderFront = (
+	{ body, query }: express.Request,
+	res: express.Response,
+): void => {
+	try {
+		const html = frontToHtml({
+			query,
+			body,
+		});
+		res.status(200).send(html);
+	} catch (e) {
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	}
 };

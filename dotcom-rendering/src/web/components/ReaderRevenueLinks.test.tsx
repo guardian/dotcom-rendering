@@ -1,5 +1,4 @@
 import { render, wait } from '@testing-library/react';
-import { ABProvider } from '@guardian/ab-react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
@@ -19,20 +18,6 @@ jest.mock('@guardian/libs', () => ({
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';
 
-const AbProvider: React.FC = ({ children }) => {
-	return (
-		<ABProvider
-			mvtMaxValue={1000000}
-			mvtId={1234}
-			pageIsSensitive={false}
-			abTestSwitches={{}}
-			arrayOfTestObjects={[]}
-		>
-			{children}
-		</ABProvider>
-	);
-};
-
 describe('ReaderRevenueLinks', () => {
 	const urls = {
 		contribute: 'https://www.theguardian.com/contribute',
@@ -45,16 +30,14 @@ describe('ReaderRevenueLinks', () => {
 		shouldHideSupportMessaging.mockReturnValue(true);
 
 		const { getByText } = render(
-			<AbProvider>
-				<ReaderRevenueLinks
-					urls={urls}
-					edition="US"
-					dataLinkNamePrefix="nav2 : "
-					inHeader={true}
-					remoteHeader={false}
-					contributionsServiceUrl={contributionsServiceUrl}
-				/>
-			</AbProvider>,
+			<ReaderRevenueLinks
+				urls={urls}
+				edition="US"
+				dataLinkNamePrefix="nav2 : "
+				inHeader={true}
+				remoteHeader={false}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>,
 		);
 
 		await wait(() => expect(getByText('Thank you')).toBeInTheDocument());
@@ -64,17 +47,14 @@ describe('ReaderRevenueLinks', () => {
 		shouldHideSupportMessaging.mockReturnValue(false);
 
 		const { getByText } = render(
-			<AbProvider>
-				<ReaderRevenueLinks
-					urls={urls}
-					edition={edition}
-					dataLinkNamePrefix="nav2 : "
-					inHeader={true}
-					remoteHeader={false}
-					contributionsServiceUrl={contributionsServiceUrl}
-				/>
-				,
-			</AbProvider>,
+			<ReaderRevenueLinks
+				urls={urls}
+				edition={edition}
+				dataLinkNamePrefix="nav2 : "
+				inHeader={true}
+				remoteHeader={false}
+				contributionsServiceUrl={contributionsServiceUrl}
+			/>,
 		);
 
 		await wait(() =>

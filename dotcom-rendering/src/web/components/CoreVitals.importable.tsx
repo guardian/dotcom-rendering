@@ -1,14 +1,13 @@
 import type { ABTest } from '@guardian/ab-core';
-import { useAB } from '@guardian/ab-react';
 import {
 	bypassCoreWebVitalsSampling,
 	getCookie,
 	initCoreWebVitals,
 } from '@guardian/libs';
+import { useAB } from '../lib/useAB';
 import { tests } from '../experiments/ab-tests';
-import { WithABProvider } from './WithABProvider';
 
-const CoreVitalsWithAB = () => {
+export const CoreVitals = () => {
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
 
@@ -31,7 +30,7 @@ const CoreVitalsWithAB = () => {
 	];
 
 	const ABTestAPI = useAB();
-	const userInTestToForceMetrics = ABTestAPI.allRunnableTests(tests).some(
+	const userInTestToForceMetrics = ABTestAPI?.allRunnableTests(tests).some(
 		(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
 	);
 
@@ -43,19 +42,3 @@ const CoreVitalsWithAB = () => {
 	// don’t render anything
 	return null;
 };
-
-type Props = {
-	switches: Switches;
-	isSensitive: boolean;
-	isDev?: boolean;
-};
-
-export const CoreVitals = ({ switches, isSensitive, isDev }: Props) => (
-	<WithABProvider
-		abTestSwitches={switches}
-		pageIsSensitive={isSensitive}
-		isDev={!!isDev}
-	>
-		<CoreVitalsWithAB />
-	</WithABProvider>
-);

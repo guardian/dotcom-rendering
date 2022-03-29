@@ -17,8 +17,8 @@ try {
 /**
  * Decides the url to use for fetching assets
  *
- * @param stage {'PROD' | 'CODE' | undefined} the environment code is executing in
- * @returns
+ * @param {'PROD' | 'CODE' | undefined} stage the environment code is executing in
+ * @returns {string}
  */
 const decideAssetOrigin = (stage: string | undefined): string => {
 	switch (stage?.toUpperCase()) {
@@ -33,8 +33,11 @@ const decideAssetOrigin = (stage: string | undefined): string => {
 export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
 
 export const getScriptArrayFromFile = (
-	file: string,
+	file: `${string}.js`,
 ): { src: string; legacy?: boolean }[] => {
+	if (!file.endsWith('.js'))
+		throw new Error('Invalid filename: extension must be .js');
+
 	const isDev = process.env.NODE_ENV === 'development';
 
 	const filename = isDev ? file : manifest[file];

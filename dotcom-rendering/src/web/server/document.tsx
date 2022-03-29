@@ -20,20 +20,29 @@ interface Props {
 }
 
 const generateScriptTags = (
-	scripts: Array<{ src: string; legacy?: boolean }>,
+	scripts: Array<{ src: string; legacy?: boolean } | false>,
 ) =>
-	scripts.reduce((scriptTags, script) => {
-		let attrs = 'defer';
+	scripts.reduce<string[]>((scriptTags, script) => {
+		if (script === false) return scriptTags;
 
-		if (Object.prototype.hasOwnProperty.call(script, 'legacy')) {
-			attrs = script.legacy ? 'defer nomodule' : 'type="module"';
+		let attrs: string;
+		switch (script.legacy) {
+			case true:
+				attrs = 'defer nomodule';
+				break;
+			case false:
+				attrs = 'type="module"';
+				break;
+			default:
+				attrs = 'defer';
+				break;
 		}
 
 		return [
 			...scriptTags,
 			`<script ${attrs} src="${script.src}"></script>`,
 		];
-	}, [] as string[]);
+	}, []);
 
 const decideTitle = (CAPI: CAPIType): string => {
 	if (
@@ -91,7 +100,7 @@ export const document = ({ data }: Props): string => {
 	];
 
 	const polyfillIO =
-		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
+		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
 	const pageHasNonBootInteractiveElements = CAPIElements.some(
 		(element) =>
@@ -101,9 +110,6 @@ export const document = ({ data }: Props): string => {
 				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
 	);
 
-	function isDefined<T>(argument: T | boolean): argument is T {
-		return argument !== false;
-	}
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -111,20 +117,18 @@ export const document = ({ data }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const priorityScriptTags = generateScriptTags(
-		[
-			{ src: polyfillIO },
-			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
-			CAPI.config && { src: CAPI.config.commercialBundleUrl },
-			...getScriptArrayFromFile('sentryLoader.ks'),
-			...getScriptArrayFromFile('dynamicImport.js'),
-			pageHasNonBootInteractiveElements && {
-				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-			},
-			...getScriptArrayFromFile('islands.js'),
-		].filter(isDefined), // We use the TypeGuard to keep TS happy
-	);
+	const priorityScriptTags = generateScriptTags([
+		{ src: polyfillIO },
+		...getScriptArrayFromFile('bootCmp.js'),
+		...getScriptArrayFromFile('ophan.js'),
+		CAPI.config && { src: CAPI.config.commercialBundleUrl },
+		...getScriptArrayFromFile('sentryLoader.js'),
+		...getScriptArrayFromFile('dynamicImport.js'),
+		pageHasNonBootInteractiveElements && {
+			src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
+		},
+		...getScriptArrayFromFile('islands.js'),
+	]);
 
 	/**
 	 * Low priority scripts. These scripts will be requested
@@ -142,15 +146,11 @@ export const document = ({ data }: Props): string => {
 	]);
 
 	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.filter(
-		(script) => script && script.legacy === false,
-	)[0];
-	const legacyScript = gaChunk.filter(
-		(script) => script && script.legacy === true,
-	)[0];
+	const modernScript = gaChunk.find((script) => script?.legacy === false);
+	const legacyScript = gaChunk.find((script) => script?.legacy === true);
 	const gaPath = {
-		modern: modernScript.src,
-		legacy: legacyScript?.src,
+		modern: modernScript?.src as string,
+		legacy: legacyScript?.src as string,
 	};
 
 	/**

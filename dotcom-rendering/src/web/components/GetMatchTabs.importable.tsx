@@ -15,11 +15,12 @@ export const GetMatchTabs = ({ matchUrl, format }: Props) => {
 	const { data, error, loading } = useApi<{
 		reportUrl?: string;
 		minByMinUrl?: string;
-	}>(matchUrl);
+	}>(matchUrl, { errorRetryCount: 1 });
+
 	if (loading) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
-		window.guardian.modules.sentry.reportError(error, 'match-tabs');
+		window.guardian?.modules?.sentry?.reportError?.(error, 'match-tabs');
 
 		return null;
 	}

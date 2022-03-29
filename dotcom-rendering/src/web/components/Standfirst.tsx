@@ -17,52 +17,55 @@ type Props = {
 	standfirst: string;
 };
 
-const nestedStyles = (palette: Palette) => css`
-	li {
-		margin-bottom: 6px;
-		padding-left: ${space[6]}px;
+const nestedStyles = (format: ArticleFormat, palette: Palette) => {
+	const offset = format.display === ArticleDisplay.Immersive ? space[6] : 19;
+	return css`
+		li {
+			margin-bottom: 6px;
+			padding-left: ${offset}px;
+
+			p {
+				display: inline;
+			}
+		}
+
+		li:before {
+			display: inline-block;
+			content: '';
+			border-radius: 50%;
+			height: 0.7em;
+			width: 0.7em;
+			margin-right: 7px;
+			background-color: ${palette.background.bulletStandfirst};
+			margin-left: -${offset}px;
+		}
 
 		p {
-			display: inline;
+			margin-bottom: 8px;
 		}
-	}
 
-	li:before {
-		display: inline-block;
-		content: '';
-		border-radius: 50%;
-		height: 0.7em;
-		width: 0.7em;
-		margin-right: 7px;
-		background-color: ${palette.background.bulletStandfirst};
-		margin-left: -${space[6]}px;
-	}
+		strong {
+			font-weight: bold;
+		}
 
-	p {
-		margin-bottom: 8px;
-	}
+		[data-dcr-style='bullet'] {
+			display: inline-block;
+			content: '';
+			border-radius: 50%;
+			height: 13px;
+			width: 13px;
+			margin-right: 2px;
+			background-color: ${palette.background.bulletStandfirst};
+		}
 
-	strong {
-		font-weight: bold;
-	}
-
-	[data-dcr-style='bullet'] {
-		display: inline-block;
-		content: '';
-		border-radius: 50%;
-		height: 13px;
-		width: 13px;
-		margin-right: 2px;
-		background-color: ${palette.background.bulletStandfirst};
-	}
-
-	a {
-		color: ${palette.text.standfirstLink};
-		text-decoration: none;
-		border-bottom: 1px solid ${palette.border.standfirstLink};
-		transition: border-color 0.15s ease-out;
-	}
-`;
+		a {
+			color: ${palette.text.standfirstLink};
+			text-decoration: none;
+			border-bottom: 1px solid ${palette.border.standfirstLink};
+			transition: border-color 0.15s ease-out;
+		}
+	`;
+};
 
 const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 	switch (format.display) {
@@ -196,7 +199,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 	return (
 		<div
 			css={[
-				nestedStyles(palette),
+				nestedStyles(format, palette),
 				standfirstStyles(format, palette),
 				hoverStyles(palette),
 			]}

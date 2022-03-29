@@ -63,18 +63,12 @@ interface Props {
 	sectionName?: string;
 	format: ArticleFormat;
 	ajaxUrl: string;
-	switches: Switches;
-	pageIsSensitive: boolean;
-	isDev?: boolean;
 }
 
 export const MostViewedFooterLayout = ({
 	sectionName,
 	format,
 	ajaxUrl,
-	switches,
-	pageIsSensitive,
-	isDev,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -113,9 +107,6 @@ export const MostViewedFooterLayout = ({
 								sectionName={sectionName}
 								palette={palette}
 								ajaxUrl={ajaxUrl}
-								switches={switches}
-								pageIsSensitive={pageIsSensitive}
-								isDev={isDev}
 							/>
 						</Island>
 					</div>

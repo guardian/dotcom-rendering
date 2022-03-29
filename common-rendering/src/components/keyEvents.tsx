@@ -81,7 +81,19 @@ const listStyles = (
 	format: ArticleFormat,
 	supportsDarkMode: boolean,
 ): SerializedStyles => css`
-	li::before {
+	${darkModeCss(supportsDarkMode)`
+		background-color: ${background.articleContentDark(format)};
+	`}
+`;
+
+const linkStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+	text-decoration: none;
+
+	&:hover::before {
+		background-color: ${neutral[0]};
+	}
+
+	&::before {
 		content: '';
 		display: block;
 		position: absolute;
@@ -94,11 +106,13 @@ const listStyles = (
 	}
 
 	${darkModeCss(supportsDarkMode)`
-	background-color: ${background.articleContentDark(format)};
+		&:hover::before {
+			background-color: ${neutral[100]};
+		}
 
-		li::before {
+		&::before {
 			border-color: transparent ${neutral[60]};
-
+			background-color: ${neutral[60]};
 		}
 	`}
 `;
@@ -118,7 +132,6 @@ const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 `;
 
 const timeTextWrapperStyles: SerializedStyles = css`
-	margin-left: ${remSpace[4]};
 	margin-left: 0.5rem;
 `;
 
@@ -171,23 +184,33 @@ const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
 	return (
 		<li css={listItemStyles(supportsDarkMode)}>
-			<div css={timeTextWrapperStyles}>
-				<time
-					dateTime={keyEvent.date.toISOString()}
-					data-relativeformat="med"
-					title={keyEvent.date.toLocaleTimeString()}
-					css={timeStyles(supportsDarkMode)}
-				>
-					{timeAgo(keyEvent.date.getTime())}
-				</time>
-				<Link
-					priority="secondary"
-					css={textStyles(format, supportsDarkMode)}
-					href={keyEvent.url}
-				>
-					{keyEvent.text}
-				</Link>
-			</div>
+			<Link
+				priority="secondary"
+				css={linkStyles(supportsDarkMode)}
+				href={keyEvent.url}
+			>
+				<div css={timeTextWrapperStyles}>
+					<time
+						dateTime={keyEvent.date.toISOString()}
+						data-relativeformat="med"
+						title={`${keyEvent.date.toLocaleDateString('en-GB', {
+							hour: '2-digit',
+							minute: '2-digit',
+							weekday: 'long',
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+							timeZoneName: 'long',
+						})}`}
+						css={timeStyles(supportsDarkMode)}
+					>
+						{timeAgo(keyEvent.date.getTime())}
+					</time>
+					<span css={textStyles(format, supportsDarkMode)}>
+						{keyEvent.text}
+					</span>
+				</div>
+			</Link>
 		</li>
 	);
 };

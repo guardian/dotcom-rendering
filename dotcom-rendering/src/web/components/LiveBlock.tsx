@@ -21,6 +21,7 @@ type Props = {
 	switches: { [key: string]: boolean };
 	isLiveUpdate?: boolean;
 	isPinnedPost: boolean;
+	pinnedPostId?: string;
 };
 
 export const LiveBlock = ({
@@ -36,6 +37,7 @@ export const LiveBlock = ({
 	switches,
 	isLiveUpdate,
 	isPinnedPost,
+	pinnedPostId,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -50,6 +52,8 @@ export const LiveBlock = ({
 		!!block.blockLastUpdated &&
 		block.blockLastUpdated > block.blockFirstPublished;
 
+	const isOriginalPinnedPost = !isPinnedPost && block.id === pinnedPostId;
+
 	return (
 		<LiveBlockContainer
 			id={block.id}
@@ -62,6 +66,7 @@ export const LiveBlock = ({
 			isPinnedPost={isPinnedPost}
 			supportsDarkMode={false}
 			format={format}
+			isOriginalPinnedPost={isOriginalPinnedPost}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({
