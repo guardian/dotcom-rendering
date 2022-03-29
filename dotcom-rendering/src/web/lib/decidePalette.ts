@@ -556,6 +556,15 @@ const backgroundHeadline = (format: ArticleFormat): string => {
 	}
 };
 
+const backgroundAgeWarning = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return backgroundArticle(format);
+		default:
+			return backgroundHeadline(format);
+	}
+};
+
 const backgroundHeadlineByline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return brandAltBackground.primary;
@@ -1096,6 +1105,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			matchNav: backgroundMatchNav(),
 			analysisUnderline: backgroundUnderline(format),
 			matchStats: backgroundMatchStats(format),
+			ageWarning: backgroundAgeWarning(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

@@ -253,7 +253,7 @@ const ageWarningMargins = (format: ArticleFormat) =>
 		  `;
 
 const backgroundStyles = (palette: Palette) => css`
-	background-color: ${palette.background.headline};
+	background-color: ${palette.background.ageWarning};
 `;
 
 const WithAgeWarning = ({
