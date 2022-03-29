@@ -358,6 +358,9 @@ export const InteractiveImmersiveLayout = ({
 											headlineString={CAPI.headline}
 											tags={CAPI.tags}
 											byline={CAPI.author.byline}
+											webPublicationDateDeprecated={
+												CAPI.webPublicationDateDeprecated
+											}
 										/>
 									</div>
 								)}
