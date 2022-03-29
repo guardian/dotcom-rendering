@@ -260,6 +260,9 @@ export const ImmersiveHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 										headlineString={CAPI.headline}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
+										webPublicationDateDeprecated={
+											CAPI.webPublicationDateDeprecated
+										}
 									/>
 								</ContainerLayout>
 							</Box>

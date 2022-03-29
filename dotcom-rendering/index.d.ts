@@ -142,6 +142,7 @@ type Palette = {
 		matchNav: Colour;
 		analysisUnderline: Colour;
 		matchStats: Colour;
+		ageWarning: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -211,13 +212,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-		adUnit: string;
-		customParams: CustomParams;
-		disableAds?: false;
-	}
+			adUnit: string;
+			customParams: CustomParams;
+			disableAds?: false;
+	  }
 	| {
-		disableAds: true;
-	};
+			disableAds: true;
+	  };
 
 interface SectionNielsenAPI {
 	name: string;

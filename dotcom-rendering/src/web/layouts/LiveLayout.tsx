@@ -34,14 +34,12 @@ import { Nav } from '../components/Nav/Nav';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { GridItem } from '../components/GridItem';
-import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import { getAgeWarning } from '../../lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
@@ -248,19 +246,6 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
-const ageWarningMargins = css`
-	margin-top: 12px;
-	margin-left: -10px;
-	margin-bottom: 6px;
-	${from.tablet} {
-		margin-left: -20px;
-	}
-	${from.leftCol} {
-		margin-left: -10px;
-		margin-top: 0;
-	}
-`;
-
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
@@ -295,8 +280,6 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 	);
 
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
-
-	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	// Set a default pagination if it is missing from CAPI
 	const pagination: Pagination = CAPI.pagination ?? {
@@ -462,11 +445,6 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 										<ArticleHeadlinePadding
 											design={format.design}
 										>
-											{age && (
-												<div css={ageWarningMargins}>
-													<AgeWarning age={age} />
-												</div>
-											)}
 											{!CAPI.matchUrl && (
 												<ArticleHeadline
 													format={format}
@@ -475,12 +453,9 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 													}
 													tags={CAPI.tags}
 													byline={CAPI.author.byline}
-												/>
-											)}
-											{age && (
-												<AgeWarning
-													age={age}
-													isScreenReader={true}
+													webPublicationDateDeprecated={
+														CAPI.webPublicationDateDeprecated
+													}
 												/>
 											)}
 										</ArticleHeadlinePadding>
