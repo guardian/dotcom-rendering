@@ -238,7 +238,6 @@ const WithAgeWarning = ({
 	const ageWarningMargins =
 		format.display === ArticleDisplay.Immersive
 			? css`
-					padding-top: 12px;
 					margin-left: 0px;
 					margin-bottom: 0px;
 
