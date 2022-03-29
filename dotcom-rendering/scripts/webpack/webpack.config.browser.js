@@ -10,7 +10,8 @@ const DEV = process.env.NODE_ENV === 'development';
  */
 const generateName = (isLegacyJS) => {
 	const legacyString = isLegacyJS ? '.legacy' : '';
-	return `[name]${legacyString}.[chunkhash].js`;
+	const chunkhashString = DEV ? '' : '.[chunkhash]';
+	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
 /**
