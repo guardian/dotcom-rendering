@@ -17,10 +17,3 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           build-script: build:dcr
-
-          # https://github.com/preactjs/compressed-size-action#increasing-the-required-threshold
-          minimum-change-threshold: 100
-
-          # https://github.com/preactjs/compressed-size-action#dealing-with-hashed-filenames
-          # The default hash digest is set to 20 chars in Webpack
-          strip-hash: "\\.(\\w{20})\\.js$"
