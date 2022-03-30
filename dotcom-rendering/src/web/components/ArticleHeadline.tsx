@@ -307,8 +307,13 @@ const decideBottomPadding = ({
 	`;
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
-			// Immersive articles have no padding
-			return '';
+			switch (format.design) {
+				case ArticleDesign.PrintShop:
+					return defaultPadding;
+				default:
+					// Non PrintShop Immersive articles have no padding
+					return '';
+			}
 		case ArticleDisplay.Showcase:
 			switch (format.design) {
 				case ArticleDesign.Comment:
