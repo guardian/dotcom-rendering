@@ -29,6 +29,7 @@ type Props = {
 	tags: TagType[];
 	webPublicationDateDeprecated: string;
 	hasStarRating?: boolean;
+	hasAvatar?: boolean;
 };
 
 const curly = (x: any) => x;
@@ -292,9 +293,11 @@ const WithAgeWarning = ({
 const decideBottomPadding = ({
 	format,
 	hasStarRating,
+	hasAvatar,
 }: {
 	format: ArticleFormat;
 	hasStarRating?: boolean;
+	hasAvatar?: boolean;
 }) => {
 	if (format.display === ArticleDisplay.Immersive) {
 		// Immersive articles have no padding
@@ -323,10 +326,13 @@ const decideBottomPadding = ({
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
-			// Opinion pieces always have 43 pixels of bottom padding
-			return css`
-				padding-bottom: 43px;
-			`;
+			// Opinion pieces with an avatar have no padding
+			// Those with no avatar always have 43 pixels of bottom padding
+			return hasAvatar
+				? ''
+				: css`
+						padding-bottom: 43px;
+				  `;
 		case ArticleDesign.Interview:
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
@@ -349,6 +355,7 @@ export const ArticleHeadline = ({
 	byline,
 	webPublicationDateDeprecated,
 	hasStarRating,
+	hasAvatar,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -359,7 +366,11 @@ export const ArticleHeadline = ({
 					// Immersive headlines have two versions, with main media, and (this one) without
 					return (
 						<div
-							css={decideBottomPadding({ format, hasStarRating })}
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
 							<WithAgeWarning
 								tags={tags}
@@ -387,7 +398,11 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Letter:
 					return (
 						<div
-							css={decideBottomPadding({ format, hasStarRating })}
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
 							<WithAgeWarning
 								tags={tags}
@@ -458,7 +473,13 @@ export const ArticleHeadline = ({
 		}
 		case ArticleDisplay.NumberedList:
 			return (
-				<div css={decideBottomPadding({ format, hasStarRating })}>
+				<div
+					css={decideBottomPadding({
+						format,
+						hasStarRating,
+						hasAvatar,
+					})}
+				>
 					<WithAgeWarning
 						tags={tags}
 						webPublicationDateDeprecated={
@@ -489,7 +510,11 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Feature:
 					return (
 						<div
-							css={decideBottomPadding({ format, hasStarRating })}
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
 							<WithAgeWarning
 								tags={tags}
@@ -516,7 +541,11 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Editorial:
 					return (
 						<div
-							css={decideBottomPadding({ format, hasStarRating })}
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
 							<WithAgeWarning
 								tags={tags}
@@ -550,7 +579,11 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Letter:
 					return (
 						<div
-							css={decideBottomPadding({ format, hasStarRating })}
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
 							<WithAgeWarning
 								tags={tags}
@@ -576,7 +609,11 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Analysis:
 					return (
 						<div
-							css={decideBottomPadding({ format, hasStarRating })}
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
 							<WithAgeWarning
 								tags={tags}
@@ -612,7 +649,11 @@ export const ArticleHeadline = ({
 								shiftSlightly,
 								maxWidth,
 								displayFlex,
-								decideBottomPadding({ format, hasStarRating }),
+								decideBottomPadding({
+									format,
+									hasStarRating,
+									hasAvatar,
+								}),
 							]}
 						>
 							<WithAgeWarning
@@ -660,7 +701,11 @@ export const ArticleHeadline = ({
 				case ArticleDesign.DeadBlog:
 					return (
 						<div
-							css={decideBottomPadding({ format, hasStarRating })}
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
 							<WithAgeWarning
 								tags={tags}
@@ -687,7 +732,11 @@ export const ArticleHeadline = ({
 					return (
 						<div
 							css={[
-								decideBottomPadding({ format, hasStarRating }),
+								decideBottomPadding({
+									format,
+									hasStarRating,
+									hasAvatar,
+								}),
 								css`
 									position: relative;
 								`,
@@ -720,7 +769,11 @@ export const ArticleHeadline = ({
 				default:
 					return (
 						<div
-							css={decideBottomPadding({ format, hasStarRating })}
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
 							<WithAgeWarning
 								tags={tags}
