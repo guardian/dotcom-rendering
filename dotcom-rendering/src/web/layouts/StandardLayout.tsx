@@ -34,7 +34,6 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
-import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Nav } from '../components/Nav/Nav';
 import { LabsHeader } from '../components/LabsHeader.importable';
@@ -42,7 +41,6 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import { getAgeWarning } from '../../lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
@@ -292,21 +290,6 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
-const ageWarningMargins = css`
-	margin-top: 12px;
-	margin-left: -10px;
-	margin-bottom: 6px;
-
-	${from.tablet} {
-		margin-left: -20px;
-	}
-
-	${from.leftCol} {
-		margin-left: -10px;
-		margin-top: 0;
-	}
-`;
-
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
@@ -346,8 +329,6 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 		format.design === ArticleDesign.MatchReport && !!CAPI.matchUrl;
 
 	const showComments = CAPI.isCommentable;
-
-	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
@@ -393,6 +374,9 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								supporterCTA={
+									CAPI.nav.readerRevenueLinks.header.supporter
+								}
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
@@ -542,23 +526,15 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 										CAPI.starRating === 0
 									}
 								>
-									{age && (
-										<div css={ageWarningMargins}>
-											<AgeWarning age={age} />
-										</div>
-									)}
 									<ArticleHeadline
 										format={format}
 										headlineString={CAPI.headline}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
+										webPublicationDateDeprecated={
+											CAPI.webPublicationDateDeprecated
+										}
 									/>
-									{age && (
-										<AgeWarning
-											age={age}
-											isScreenReader={true}
-										/>
-									)}
 								</ArticleHeadlinePadding>
 							</div>
 							{CAPI.starRating || CAPI.starRating === 0 ? (
@@ -686,15 +662,11 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
-											abTestSwitches={
-												CAPI.config.switches
-											}
 											contentType={CAPI.contentType}
 											contributionsServiceUrl={
 												contributionsServiceUrl
 											}
 											idApiUrl={CAPI.config.idApiUrl}
-											isDev={CAPI.config.isDev ?? false}
 											isMinuteArticle={
 												CAPI.pageType.isMinuteArticle
 											}
@@ -703,9 +675,6 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 											}
 											keywordsId={CAPI.config.keywordIds}
 											pageId={CAPI.pageId}
-											pageIsSensitive={
-												CAPI.config.isSensitive
-											}
 											sectionId={CAPI.config.section}
 											sectionName={CAPI.sectionName}
 											shouldHideReaderRevenue={
@@ -864,9 +833,6 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}
-							switches={CAPI.config.switches}
-							pageIsSensitive={CAPI.config.isSensitive}
-							isDev={CAPI.config.isDev}
 						/>
 					</ElementContainer>
 				)}
@@ -911,26 +877,28 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 
 			<BannerWrapper data-print-layout="hide">
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
-						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}
 						isPaidContent={CAPI.pageType.isPaidContent}
 						isPreview={!!CAPI.config.isPreview}
+						isSensitive={CAPI.config.isSensitive}
 						keywordsId={CAPI.config.keywordIds}
 						pageId={CAPI.pageId}
-						pageIsSensitive={CAPI.config.isSensitive}
 						section={CAPI.config.section}
 						sectionName={CAPI.sectionName}
 						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						switches={CAPI.config.switches}
 						tags={CAPI.tags}
 					/>
 				</Island>

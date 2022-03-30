@@ -1,4 +1,4 @@
-import { transformDots } from './transforDots';
+import { transformDots } from './transformDots';
 
 const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 	// Loop over elements and check if a dot is in the TextBlockElement

@@ -1,5 +1,5 @@
 import { Runnable } from '@guardian/ab-core';
-import { useAB } from '@guardian/ab-react';
+import { useAB } from './useAB';
 import {
 	SignInGateComponent,
 	CurrentSignInGateABTest,
@@ -14,11 +14,11 @@ import {
  * A custom hook to make which selects the sign in gate (component and ab test)
  * to be displayed on the current page
  * */
-export const useSignInGateSelector = (): [
-	SignInGateComponent | null,
-	CurrentSignInGateABTest | null,
-] => {
+export const useSignInGateSelector = ():
+	| undefined
+	| [SignInGateComponent | null, CurrentSignInGateABTest | null] => {
 	const ab = useAB();
+	if (!ab) return undefined;
 
 	const test: Runnable | null = ab.firstRunnableTest(signInGateTests);
 

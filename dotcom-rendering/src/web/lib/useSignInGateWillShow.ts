@@ -37,7 +37,10 @@ export const useSignInGateWillShow = ({
 	const gateSelector = useSignInGateSelector();
 
 	useOnce(() => {
-		const [gateSelectorVariant, gateSelectorTest] = gateSelector;
+		const [gateSelectorVariant, gateSelectorTest] = gateSelector as [
+			SignInGateComponent | null,
+			CurrentSignInGateABTest | null,
+		];
 		setGateVariant(gateSelectorVariant);
 		setCurrentTest(gateSelectorTest);
 	}, [gateSelector]);

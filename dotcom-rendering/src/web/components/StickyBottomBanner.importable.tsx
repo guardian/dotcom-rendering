@@ -29,7 +29,6 @@ import {
 	BrazeBanner,
 	canShowBrazeBanner,
 } from './StickyBottomBanner/BrazeBanner';
-import { ABProps, WithABProvider } from './WithABProvider';
 import { useBraze } from '../lib/useBraze';
 
 type Props = {
@@ -196,7 +195,7 @@ const buildBrazeBanner = (
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,
 });
 
-const StickyBottomBannerWithAB = ({
+export const StickyBottomBanner = ({
 	contentType,
 	sectionName,
 	section,
@@ -301,44 +300,3 @@ const StickyBottomBannerWithAB = ({
 
 	return null;
 };
-
-export const StickyBottomBanner = ({
-	abTestSwitches,
-	contentType,
-	contributionsServiceUrl,
-	idApiUrl,
-	isDev,
-	isMinuteArticle,
-	isPaidContent,
-	isPreview,
-	keywordsId,
-	pageId,
-	pageIsSensitive,
-	section,
-	sectionName,
-	shouldHideReaderRevenue,
-	tags,
-}: Props & ABProps) => (
-	<WithABProvider
-		abTestSwitches={abTestSwitches}
-		pageIsSensitive={pageIsSensitive}
-		isDev={isDev}
-	>
-		<StickyBottomBannerWithAB
-			contentType={contentType}
-			sectionName={sectionName}
-			section={section}
-			tags={tags}
-			isPaidContent={isPaidContent}
-			isPreview={isPreview}
-			shouldHideReaderRevenue={shouldHideReaderRevenue}
-			isMinuteArticle={isMinuteArticle}
-			isSensitive={pageIsSensitive}
-			contributionsServiceUrl={contributionsServiceUrl}
-			idApiUrl={idApiUrl}
-			switches={abTestSwitches}
-			pageId={pageId}
-			keywordsId={keywordsId}
-		/>
-	</WithABProvider>
-);

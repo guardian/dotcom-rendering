@@ -229,7 +229,8 @@ export const YoutubeBlockComponent = ({
 				eventEmitters={[ophanTracking, gaTracking]}
 				pillar={format.theme}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
-				shouldStick={!!stickyVideos}
+				shouldStick={stickyVideos}
+				isMainMedia={isMainMedia}
 			/>
 			{!hideCaption && (
 				<Caption

@@ -12,14 +12,22 @@ const pinnedPostCheckBox: Element | null = !isServer
 	? window.document.querySelector('input[name=pinned-post-checkbox]')
 	: null;
 
+const pinnedPostContent: Element | null = !isServer
+	? window.document.querySelector('#collapsible-body')
+	: null;
+
 /**
- * hide show more button on pinned post
+ * hide show more button and overlay on pinned post
  */
 function hideShowMore() {
 	const pinnedPostButton = document.querySelector<HTMLElement>(
 		'#pinned-post-button',
 	);
+	const pinnedPostOverlay = document.querySelector<HTMLElement>(
+		'#pinned-post-overlay',
+	);
 	if (pinnedPostButton) pinnedPostButton.style.display = 'none';
+	if (pinnedPostOverlay) pinnedPostOverlay.style.display = 'none';
 }
 
 /**
@@ -36,7 +44,9 @@ function scrollOnCollapse() {
 
 export const EnhancePinnedPost = () => {
 	const contentFitsContainer =
-		pinnedPost && pinnedPost.scrollHeight <= pinnedPost.clientHeight;
+		pinnedPostContent &&
+		pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
+
 	if (contentFitsContainer) hideShowMore();
 
 	const hasBeenSeen = useRef(false);
