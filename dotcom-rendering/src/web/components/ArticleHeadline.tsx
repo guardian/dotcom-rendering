@@ -299,52 +299,65 @@ const decideBottomPadding = ({
 	hasStarRating?: boolean;
 	hasAvatar?: boolean;
 }) => {
-	if (format.display === ArticleDisplay.Immersive) {
-		// Immersive articles have no padding
-		return '';
-	}
-
-	if (format.display === ArticleDisplay.Showcase) {
-		// Showcase articles always have 24 pixels
-		return css`
-			padding-bottom: ${space[6]}px;
-		`;
-	}
-
-	switch (format.design) {
-		case ArticleDesign.Review:
-			if (hasStarRating) {
-				return '';
-			}
-			return css`
-				padding-bottom: ${space[6]}px;
-				${from.tablet} {
-					padding-bottom: ${space[9]}px;
-				}
-			`;
-
-		case ArticleDesign.Comment:
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-			// Opinion pieces with an avatar have no padding
-			// Those with no avatar always have 43 pixels of bottom padding
-			return hasAvatar
-				? ''
-				: css`
-						padding-bottom: 43px;
-				  `;
-		case ArticleDesign.Interview:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog:
-			// Don't add extra padding
+	switch (format.display) {
+		case ArticleDisplay.Immersive:
+			// Immersive articles have no padding
 			return '';
-		default:
-			return css`
-				padding-bottom: ${space[6]}px;
-				${from.tablet} {
-					padding-bottom: ${space[9]}px;
-				}
-			`;
+		case ArticleDisplay.Showcase:
+			switch (format.design) {
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+					// Opinion pieces with an avatar have no padding
+					// Those with no avatar always have 43 pixels of bottom padding
+					return hasAvatar
+						? ''
+						: css`
+								padding-bottom: 43px;
+						  `;
+				default:
+					// Non opinion showcase articles always have 24 pixels
+					return css`
+						padding-bottom: ${space[6]}px;
+					`;
+			}
+		default: {
+			switch (format.design) {
+				case ArticleDesign.Review:
+					if (hasStarRating) {
+						return '';
+					}
+					return css`
+						padding-bottom: ${space[6]}px;
+						${from.tablet} {
+							padding-bottom: ${space[9]}px;
+						}
+					`;
+
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+					// Opinion pieces with an avatar have no padding
+					// Those with no avatar always have 43 pixels of bottom padding
+					return hasAvatar
+						? ''
+						: css`
+								padding-bottom: 43px;
+						  `;
+				case ArticleDesign.Interview:
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					// Don't add extra padding
+					return '';
+				default:
+					return css`
+						padding-bottom: ${space[6]}px;
+						${from.tablet} {
+							padding-bottom: ${space[9]}px;
+						}
+					`;
+			}
+		}
 	}
 };
 
