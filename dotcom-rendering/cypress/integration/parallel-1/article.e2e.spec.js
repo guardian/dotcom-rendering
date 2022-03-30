@@ -2,6 +2,7 @@ import { articles, AMPArticles } from '../../lib/articles.js';
 import { disableCMP } from '../../lib/disableCMP.js';
 import { setUrlFragment } from '../../lib/setUrlFragment.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { mockApi } from '../../lib/mocks';
 
 describe('E2E Page rendering', function () {
 	beforeEach(function () {
@@ -66,6 +67,10 @@ describe('E2E Page rendering', function () {
 	});
 
 	describe('AB Tests - Can modify page', function () {
+		beforeEach(function () {
+			mockApi();
+		});
+
 		it('should set the correct AB Test Variant', function () {
 			// The A/B test has an audience of 0.001 and test offset of 0
 			// Therefore the test will run from MVTIds 0 - 100
