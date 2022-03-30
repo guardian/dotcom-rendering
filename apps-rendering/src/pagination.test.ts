@@ -154,8 +154,8 @@ describe('pagination', () => {
 				const expectedPagination: Pagination = {
 					newer: none,
 					newest: none,
-					oldest: some(`?page=with:block-19`),
-					older: some(`?page=with:block-19`),
+					oldest: some(`?page=with:block-19#liveblock-container`),
+					older: some(`?page=with:block-19#liveblock-container`),
 					numberOfPages: 2,
 				};
 
@@ -182,8 +182,8 @@ describe('pagination', () => {
 				const expectedPagination: Pagination = {
 					newer: none,
 					newest: none,
-					oldest: some(`?page=with:block-25`),
-					older: some(`?page=with:block-15`),
+					oldest: some(`?page=with:block-25#liveblock-container`),
+					older: some(`?page=with:block-15#liveblock-container`),
 					numberOfPages: 3,
 				};
 
@@ -202,7 +202,7 @@ describe('pagination', () => {
 				const expectedCurrentPage: PageReference = {
 					blocks: blocks.slice(10, 20),
 					pageNumber: 2,
-					suffix: '?page=with:block-10',
+					suffix: '?page=with:block-10#liveblock-container',
 				};
 
 				expect(result.currentPage).toEqual(expectedCurrentPage);
@@ -210,8 +210,8 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: some('?page=with:block-0'),
-					newest: some('?page=with:block-0'),
+					newer: some('?page=with:block-0#liveblock-container'),
+					newest: some('?page=with:block-0#liveblock-container'),
 					older: none,
 					oldest: none,
 					numberOfPages: 2,
@@ -230,7 +230,7 @@ describe('pagination', () => {
 				const expectedCurrentPage: PageReference = {
 					blocks: blocks.slice(14, 24),
 					pageNumber: 2,
-					suffix: '?page=with:block-14',
+					suffix: '?page=with:block-14#liveblock-container',
 				};
 
 				expect(result.currentPage).toEqual(expectedCurrentPage);
@@ -238,10 +238,10 @@ describe('pagination', () => {
 
 			it('should return expected pagination object', () => {
 				const expectedPagination: Pagination = {
-					newer: some('?page=with:block-0'),
-					newest: some('?page=with:block-0'),
-					older: some(`?page=with:block-24`),
-					oldest: some(`?page=with:block-34`),
+					newer: some('?page=with:block-0#liveblock-container'),
+					newest: some('?page=with:block-0#liveblock-container'),
+					older: some(`?page=with:block-24#liveblock-container`),
+					oldest: some(`?page=with:block-34#liveblock-container`),
 					numberOfPages: 4,
 				};
 
@@ -259,7 +259,7 @@ describe('pagination', () => {
 			const expectedCurrentPage: PageReference = {
 				blocks: blocks.slice(24, 34),
 				pageNumber: 3,
-				suffix: '?page=with:block-24',
+				suffix: '?page=with:block-24#liveblock-container',
 			};
 
 			expect(result.currentPage).toEqual(expectedCurrentPage);
@@ -267,10 +267,10 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				newer: some(`?page=with:block-14`),
-				newest: some('?page=with:block-0'),
-				older: some(`?page=with:block-34`),
-				oldest: some(`?page=with:block-44`),
+				newer: some(`?page=with:block-14#liveblock-container`),
+				newest: some('?page=with:block-0#liveblock-container'),
+				older: some(`?page=with:block-34#liveblock-container`),
+				oldest: some(`?page=with:block-44#liveblock-container`),
 				numberOfPages: 5,
 			};
 
@@ -287,7 +287,7 @@ describe('pagination', () => {
 			const expectedCurrentPage: PageReference = {
 				blocks: blocks.slice(34, 44),
 				pageNumber: 4,
-				suffix: '?page=with:block-34',
+				suffix: '?page=with:block-34#liveblock-container',
 			};
 
 			expect(result.currentPage).toEqual(expectedCurrentPage);
@@ -295,10 +295,10 @@ describe('pagination', () => {
 
 		it('should return expected pagination object', () => {
 			const expectedPagination: Pagination = {
-				newer: some(`?page=with:block-24`),
-				newest: some('?page=with:block-0'),
-				older: some(`?page=with:block-44`),
-				oldest: some(`?page=with:block-44`),
+				newer: some(`?page=with:block-24#liveblock-container`),
+				newest: some('?page=with:block-0#liveblock-container'),
+				older: some(`?page=with:block-44#liveblock-container`),
+				oldest: some(`?page=with:block-44#liveblock-container`),
 				numberOfPages: 5,
 			};
 
@@ -315,7 +315,7 @@ describe('pagination', () => {
 			const expectedCurrentPage: PageReference = {
 				blocks: blocks.slice(44, 54),
 				pageNumber: 5,
-				suffix: '?page=with:block-44',
+				suffix: '?page=with:block-44#liveblock-container',
 			};
 
 			expect(result.currentPage).toEqual(expectedCurrentPage);
@@ -325,8 +325,8 @@ describe('pagination', () => {
 			const expectedPagination: Pagination = {
 				older: none,
 				oldest: none,
-				newer: some(`?page=with:block-34`),
-				newest: some('?page=with:block-0'),
+				newer: some(`?page=with:block-34#liveblock-container`),
+				newest: some('?page=with:block-0#liveblock-container'),
 				numberOfPages: 5,
 			};
 

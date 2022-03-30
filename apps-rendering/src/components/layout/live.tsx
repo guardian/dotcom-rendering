@@ -174,6 +174,7 @@ const Live: FC<Props> = ({ item }) => {
 								padding: 0;
 							}
 						`}
+						id="liveblock-container"
 					>
 						{item.pagedBlocks.currentPage.pageNumber > 1 &&
 							pagination}

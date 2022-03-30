@@ -59,7 +59,7 @@ const maybePageRef = (
 	const maybeFirstBlock: (blocks: LiveBlock[]) => Option<LiveBlock> =
 		index(0);
 	const pageRef = (block: LiveBlock): string =>
-		`?page=with:block-${block.id}`;
+		`?page=with:block-${block.id}#liveblock-container`;
 
 	return pipe(pages, maybeBlocks, andThen(maybeFirstBlock), map(pageRef));
 };
