@@ -87,7 +87,8 @@ const showMenuUnderlineStyles = css`
 			}
 		}
 
-		:hover {
+		:hover,
+		:focus {
 			text-decoration: underline;
 			color: ${brandAlt[400]};
 		}
