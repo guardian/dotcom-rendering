@@ -361,6 +361,10 @@ export const InteractiveImmersiveLayout = ({
 											webPublicationDateDeprecated={
 												CAPI.webPublicationDateDeprecated
 											}
+											hasStarRating={
+												!!CAPI.starRating ||
+												CAPI.starRating === 0
+											}
 										/>
 									</div>
 								)}

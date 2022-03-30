@@ -16,7 +16,6 @@ import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
 import { mainMediaElements } from './ArticleHeadline.mocks';
-import { ArticleHeadlinePadding } from './ArticleHeadlinePadding';
 
 export default {
 	component: ArticleHeadline,
@@ -730,18 +729,13 @@ export const ReviewWithoutStars = () => {
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
-					<ArticleHeadlinePadding
-						design={format.design}
-						starRating={undefined}
-					>
-						<ArticleHeadline
-							headlineString="This is a Review headline."
-							format={format}
-							tags={[]}
-							webPublicationDateDeprecated=""
-							byline="Byline text"
-						/>
-					</ArticleHeadlinePadding>
+					<ArticleHeadline
+						headlineString="This is a Review headline."
+						format={format}
+						tags={[]}
+						webPublicationDateDeprecated=""
+						byline="Byline text"
+					/>
 					<Standfirst
 						format={format}
 						standfirst="This is the standfirst text. We include here to demonstrate we have the correct amount of padding below the headline when there are no stars."

@@ -249,10 +249,6 @@ const pushToBottom = css`
 	justify-content: flex-end;
 `;
 
-const headlinePadding = css`
-	padding-bottom: 43px;
-`;
-
 const mainMediaWrapper = css`
 	position: relative;
 `;
@@ -427,18 +423,21 @@ export const CommentLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 										showAvatar && minHeightWithAvatar,
 									]}
 								>
-									{/* TOP - we use divs here to position content in groups using flex */}
-									<div css={!showAvatar && headlinePadding}>
-										<ArticleHeadline
-											format={format}
-											headlineString={CAPI.headline}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
-											webPublicationDateDeprecated={
-												CAPI.webPublicationDateDeprecated
-											}
-										/>
-									</div>
+									{/* TOP - we position content in groups here using flex */}
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+										webPublicationDateDeprecated={
+											CAPI.webPublicationDateDeprecated
+										}
+										hasStarRating={
+											!!CAPI.starRating ||
+											CAPI.starRating === 0
+										}
+										hasAvatar={!!showAvatar}
+									/>
 									{/* BOTTOM */}
 									<div>
 										{showAvatar && avatarUrl && (

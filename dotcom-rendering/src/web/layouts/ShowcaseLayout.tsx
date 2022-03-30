@@ -425,21 +425,19 @@ export const ShowcaseLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 						</GridItem>
 						<GridItem area="headline">
 							<PositionHeadline design={format.design}>
-								<div
-									css={css`
-										padding-bottom: 24px;
-									`}
-								>
-									<ArticleHeadline
-										format={format}
-										headlineString={CAPI.headline}
-										tags={CAPI.tags}
-										byline={CAPI.author.byline}
-										webPublicationDateDeprecated={
-											CAPI.webPublicationDateDeprecated
-										}
-									/>
-								</div>
+								<ArticleHeadline
+									format={format}
+									headlineString={CAPI.headline}
+									tags={CAPI.tags}
+									byline={CAPI.author.byline}
+									webPublicationDateDeprecated={
+										CAPI.webPublicationDateDeprecated
+									}
+									hasStarRating={
+										!!CAPI.starRating ||
+										CAPI.starRating === 0
+									}
+								/>
 							</PositionHeadline>
 						</GridItem>
 						<GridItem area="media">

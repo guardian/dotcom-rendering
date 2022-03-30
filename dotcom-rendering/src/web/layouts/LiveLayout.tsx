@@ -24,7 +24,6 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { SubMeta } from '../components/SubMeta';
 import { MainMedia } from '../components/MainMedia';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleHeadlinePadding } from '../components/ArticleHeadlinePadding';
 import { Standfirst } from '../components/Standfirst';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -445,23 +444,21 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 								</GridItem>
 								<GridItem area="headline">
 									<div css={maxWidth}>
-										<ArticleHeadlinePadding
-											design={format.design}
-										>
-											{!CAPI.matchUrl && (
-												<ArticleHeadline
-													format={format}
-													headlineString={
-														CAPI.headline
-													}
-													tags={CAPI.tags}
-													byline={CAPI.author.byline}
-													webPublicationDateDeprecated={
-														CAPI.webPublicationDateDeprecated
-													}
-												/>
-											)}
-										</ArticleHeadlinePadding>
+										{!CAPI.matchUrl && (
+											<ArticleHeadline
+												format={format}
+												headlineString={CAPI.headline}
+												tags={CAPI.tags}
+												byline={CAPI.author.byline}
+												webPublicationDateDeprecated={
+													CAPI.webPublicationDateDeprecated
+												}
+												hasStarRating={
+													!!CAPI.starRating ||
+													CAPI.starRating === 0
+												}
+											/>
+										)}
 									</div>
 									{CAPI.starRating ||
 									CAPI.starRating === 0 ? (

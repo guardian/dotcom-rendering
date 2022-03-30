@@ -294,6 +294,10 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 											webPublicationDateDeprecated={
 												CAPI.webPublicationDateDeprecated
 											}
+											hasStarRating={
+												!!CAPI.starRating ||
+												CAPI.starRating === 0
+											}
 										/>
 									</div>
 								)}
