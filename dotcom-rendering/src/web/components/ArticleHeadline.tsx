@@ -299,6 +299,12 @@ const decideBottomPadding = ({
 	hasStarRating?: boolean;
 	hasAvatar?: boolean;
 }) => {
+	const defaultPadding = css`
+		padding-bottom: ${space[6]}px;
+		${from.tablet} {
+			padding-bottom: ${space[9]}px;
+		}
+	`;
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			// Immersive articles have no padding
@@ -331,12 +337,7 @@ const decideBottomPadding = ({
 					if (hasStarRating) {
 						return '';
 					}
-					return css`
-						padding-bottom: ${space[6]}px;
-						${from.tablet} {
-							padding-bottom: ${space[9]}px;
-						}
-					`;
+					return defaultPadding;
 
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
@@ -354,12 +355,7 @@ const decideBottomPadding = ({
 					// Don't add extra padding
 					return '';
 				default:
-					return css`
-						padding-bottom: ${space[6]}px;
-						${from.tablet} {
-							padding-bottom: ${space[9]}px;
-						}
-					`;
+					return defaultPadding;
 			}
 		}
 	}
