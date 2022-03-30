@@ -422,42 +422,39 @@ export const ArticleHeadline = ({
 				default:
 					return (
 						// Immersive headlines with main media present, are large and inverted with
-						// a black background
-						<div
-							css={decideBottomPadding({ format, hasStarRating })}
+						// a black background. They also have no padding and we want to avoid any
+						// wrapper div as this affects the z-index stack
+						<WithAgeWarning
+							tags={tags}
+							webPublicationDateDeprecated={
+								webPublicationDateDeprecated
+							}
+							format={format}
 						>
-							<WithAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
+							<h1
+								css={[
+									immersiveWrapper,
+									darkBackground(palette),
+									css`
+										color: ${palette.text.headline};
+									`,
+								]}
 							>
-								<h1
+								<span
 									css={[
-										immersiveWrapper,
-										darkBackground(palette),
-										css`
-											color: ${palette.text.headline};
-										`,
+										format.theme === ArticleSpecial.Labs
+											? jumboLabsFont
+											: jumboFont,
+										maxWidth,
+										invertedStyles(palette),
+										immersiveStyles,
+										displayBlock,
 									]}
 								>
-									<span
-										css={[
-											format.theme === ArticleSpecial.Labs
-												? jumboLabsFont
-												: jumboFont,
-											maxWidth,
-											invertedStyles(palette),
-											immersiveStyles,
-											displayBlock,
-										]}
-									>
-										{curly(headlineString)}
-									</span>
-								</h1>
-							</WithAgeWarning>
-						</div>
+									{curly(headlineString)}
+								</span>
+							</h1>
+						</WithAgeWarning>
 					);
 			}
 		}
