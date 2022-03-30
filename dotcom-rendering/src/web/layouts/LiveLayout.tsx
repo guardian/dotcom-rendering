@@ -422,7 +422,15 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 								clientOnly={true}
 								placeholderHeight={230}
 							>
-								<GetMatchNav matchUrl={CAPI.matchUrl} />
+								<GetMatchNav
+									matchUrl={CAPI.matchUrl}
+									format={format}
+									headlineString={CAPI.headline}
+									tags={CAPI.tags}
+									webPublicationDateDeprecated={
+										CAPI.webPublicationDateDeprecated
+									}
+								/>
 							</Island>
 						</ContainerLayout>
 					) : (
