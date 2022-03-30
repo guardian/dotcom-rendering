@@ -315,6 +315,10 @@ const decideBottomPadding = ({
 						: css`
 								padding-bottom: 43px;
 						  `;
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					// Don't add extra padding
+					return '';
 				default:
 					// Non opinion showcase articles always have 24 pixels
 					return css`
