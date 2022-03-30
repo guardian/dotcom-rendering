@@ -163,6 +163,7 @@ const immersiveStyles = css`
 	}
 	margin-right: ${space[5]}px;
 `;
+
 const reducedBottomPadding = css`
 	padding-bottom: ${space[4]}px;
 `;
@@ -295,11 +296,8 @@ const decideBottomPadding = ({
 	format: ArticleFormat;
 	hasStarRating?: boolean;
 }) => {
-	if (
-		format.display === ArticleDisplay.Immersive &&
-		format.design === ArticleDesign.Interactive
-	) {
-		// These types of article have no padding
+	if (format.display === ArticleDisplay.Immersive) {
+		// Immersive articles have no padding
 		return '';
 	}
 
