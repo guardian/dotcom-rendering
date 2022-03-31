@@ -110,6 +110,7 @@ const fakeButtonStyles = (palette: Palette) => css`
 	${from.tablet} {
 		margin-left: 60px;
 	}
+	z-index: 1;
 `;
 
 const collapsibleBody = css`
@@ -153,23 +154,16 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 				name="pinned-post-checkbox"
 				tabIndex={-1}
 				key="PinnedPostCheckbox"
+				aria-controls="collapsible-body"
+				aria-label="Toggle pinned post"
 			/>
-			<div css={rowStyles(palette)}>
-				<SvgPinned />
-				{pinnedPost.blockFirstPublished && (
-					<time data-relativeformat="med" css={timeAgoStyles}>
-						From {timeAgo(pinnedPost.blockFirstPublished)}
-					</time>
-				)}
-			</div>
-			<div id="collapsible-body" css={collapsibleBody}>
-				{children}
-			</div>
-			<div id="pinned-post-overlay" css={overlayStyles} />
 			<label
 				css={fakeButtonStyles(palette)}
 				htmlFor="pinned-post-checkbox"
 				id="pinned-post-button"
+				// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+				tabIndex={0}
+				aria-labelledby="pinned-post-checkbox"
 			>
 				<>
 					<span id="svgminus" css={buttonIcon}>
@@ -180,6 +174,18 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 					</span>
 				</>
 			</label>
+			<div css={rowStyles(palette)}>
+				<SvgPinned />
+				{pinnedPost.blockFirstPublished && (
+					<time data-relativeformat="med" css={timeAgoStyles}>
+						From {timeAgo(pinnedPost.blockFirstPublished)}
+					</time>
+				)}
+			</div>
+			<div id="collapsible-body" css={collapsibleBody} role="region">
+				{children}
+			</div>
+			<div id="pinned-post-overlay" css={overlayStyles} />
 		</div>
 	);
 };

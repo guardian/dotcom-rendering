@@ -8,7 +8,7 @@ const pinnedPost: Element | null = !isServer
 	? window.document.querySelector('[data-gu-marker=pinned-post]')
 	: null;
 
-const pinnedPostCheckBox: Element | null = !isServer
+const pinnedPostCheckBox: HTMLElement | null = !isServer
 	? window.document.querySelector('input[name=pinned-post-checkbox]')
 	: null;
 
@@ -16,13 +16,20 @@ const pinnedPostContent: Element | null = !isServer
 	? window.document.querySelector('#collapsible-body')
 	: null;
 
+const pinnedPostButton: HTMLElement | null = !isServer
+	? window.document.querySelector('#pinned-post-button')
+	: null;
+
+function keyListener(e: KeyboardEvent) {
+	if (e.key === 'Enter') {
+		e.preventDefault();
+		pinnedPostCheckBox?.click();
+	}
+}
 /**
  * hide show more button and overlay on pinned post
  */
 function hideShowMore() {
-	const pinnedPostButton = document.querySelector<HTMLElement>(
-		'#pinned-post-button',
-	);
 	const pinnedPostOverlay = document.querySelector<HTMLElement>(
 		'#pinned-post-overlay',
 	);
@@ -87,6 +94,13 @@ export const EnhancePinnedPost = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		pinnedPostButton?.addEventListener('keydown', keyListener);
+
+		return () => {
+			pinnedPostButton?.removeEventListener('keydown', keyListener);
+		};
+	}, []);
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
 	useEffect(() => {
