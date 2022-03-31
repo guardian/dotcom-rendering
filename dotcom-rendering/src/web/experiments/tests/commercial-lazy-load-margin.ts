@@ -20,35 +20,35 @@ export const commercialLazyLoadMargin: ABTest = {
 			test: (): void => {},
 		},
 		{
-			id: 'variant 1',
+			id: 'variant-1',
 			test: (): void => {},
 		},
 		{
-			id: 'variant 2',
+			id: 'variant-2',
 			test: (): void => {},
 		},
 		{
-			id: 'variant 3',
+			id: 'variant-3',
 			test: (): void => {},
 		},
 		{
-			id: 'variant 4',
+			id: 'variant-4',
 			test: (): void => {},
 		},
 		{
-			id: 'variant 5',
+			id: 'variant-5',
 			test: (): void => {},
 		},
 		{
-			id: 'variant 6',
+			id: 'variant-6',
 			test: (): void => {},
 		},
 		{
-			id: 'variant 7',
+			id: 'variant-7',
 			test: (): void => {},
 		},
 		{
-			id: 'variant 8',
+			id: 'variant-8',
 			test: (): void => {},
 		},
 	],
