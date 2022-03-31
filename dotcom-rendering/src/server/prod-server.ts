@@ -5,6 +5,7 @@ import {
 	renderArticle,
 	renderArticleJson,
 	renderBlocks,
+	renderFront,
 	renderInteractive,
 	renderKeyEvents,
 	renderPerfTest as renderArticlePerfTest,
@@ -71,6 +72,7 @@ export const prodServer = () => {
 	app.post('/AMPInteractive', logRenderTime, renderAMPArticle);
 	app.post('/Blocks', logRenderTime, renderBlocks);
 	app.post('/KeyEvents', logRenderTime, renderKeyEvents);
+	app.post('/Front', logRenderTime, renderFront);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
@@ -96,6 +98,21 @@ export const prodServer = () => {
 			// Eg. http://localhost:9000/AMPArticle?url=https://www.theguardian.com/commentisfree/...
 			try {
 				return renderAMPArticle(req, res);
+			} catch (error) {
+				// eslint-disable-next-line no-console
+				console.error(error);
+			}
+		},
+	);
+
+	app.get(
+		'/Front',
+		logRenderTime,
+		// TODO: implement Fronts’ getContentFromURLMiddleware,
+		async (req: Request, res: Response) => {
+			// Eg. http://localhost:9000/Front?url=https://www.theguardian.com/uk/sport
+			try {
+				return renderFront(req, res);
 			} catch (error) {
 				// eslint-disable-next-line no-console
 				console.error(error);

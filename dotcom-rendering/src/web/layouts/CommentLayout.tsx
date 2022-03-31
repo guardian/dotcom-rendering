@@ -33,12 +33,10 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
-import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import { getAgeWarning } from '../../lib/age-warning';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { Stuck, SendToBack, BannerWrapper } from './lib/stickiness';
 import { Island } from '../components/Island';
@@ -251,25 +249,6 @@ const pushToBottom = css`
 	justify-content: flex-end;
 `;
 
-const headlinePadding = css`
-	padding-bottom: 43px;
-`;
-
-const ageWarningMargins = css`
-	margin-top: 12px;
-	margin-left: -10px;
-	margin-bottom: 6px;
-
-	${from.tablet} {
-		margin-left: -20px;
-	}
-
-	${from.leftCol} {
-		margin-left: -10px;
-		margin-top: 0;
-	}
-`;
-
 const mainMediaWrapper = css`
 	position: relative;
 `;
@@ -317,8 +296,6 @@ export const CommentLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 
 	const showAvatar = avatarUrl && onlyOneContributor;
 
-	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
-
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
 	const palette = decidePalette(format);
@@ -355,6 +332,9 @@ export const CommentLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								supporterCTA={
+									CAPI.nav.readerRevenueLinks.header.supporter
+								}
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
@@ -443,26 +423,21 @@ export const CommentLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 										showAvatar && minHeightWithAvatar,
 									]}
 								>
-									{/* TOP - we use divs here to position content in groups using flex */}
-									<div css={!showAvatar && headlinePadding}>
-										{age && (
-											<div css={ageWarningMargins}>
-												<AgeWarning age={age} />
-											</div>
-										)}
-										<ArticleHeadline
-											format={format}
-											headlineString={CAPI.headline}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
-										/>
-										{age && (
-											<AgeWarning
-												age={age}
-												isScreenReader={true}
-											/>
-										)}
-									</div>
+									{/* TOP - we position content in groups here using flex */}
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+										webPublicationDateDeprecated={
+											CAPI.webPublicationDateDeprecated
+										}
+										hasStarRating={
+											!!CAPI.starRating ||
+											CAPI.starRating === 0
+										}
+										hasAvatar={!!showAvatar}
+									/>
 									{/* BOTTOM */}
 									<div>
 										{showAvatar && avatarUrl && (
@@ -784,6 +759,9 @@ export const CommentLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 

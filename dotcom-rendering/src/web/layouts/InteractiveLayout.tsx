@@ -25,7 +25,6 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { SubMeta } from '../components/SubMeta';
 import { MainMedia } from '../components/MainMedia';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { ArticleHeadlinePadding } from '../components/ArticleHeadlinePadding';
 import { Standfirst } from '../components/Standfirst';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -35,13 +34,11 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
-import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { Nav } from '../components/Nav/Nav';
 import { LabsHeader } from '../components/LabsHeader.importable';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { getAgeWarning } from '../../lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
@@ -217,21 +214,6 @@ const starWrapper = css`
 	margin-left: -10px;
 `;
 
-const ageWarningMargins = css`
-	margin-top: 12px;
-	margin-left: -10px;
-	margin-bottom: 6px;
-
-	${from.tablet} {
-		margin-left: -20px;
-	}
-
-	${from.leftCol} {
-		margin-left: -10px;
-		margin-top: 0;
-	}
-`;
-
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
@@ -260,8 +242,6 @@ export const InteractiveLayout = ({ CAPI, NAV, format }: Props) => {
 	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
 
 	const showComments = CAPI.isCommentable;
-
-	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
 
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
 
@@ -304,6 +284,9 @@ export const InteractiveLayout = ({ CAPI, NAV, format }: Props) => {
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								supporterCTA={
+									CAPI.nav.readerRevenueLinks.header.supporter
+								}
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
@@ -421,31 +404,19 @@ export const InteractiveLayout = ({ CAPI, NAV, format }: Props) => {
 							</GridItem>
 							<GridItem area="headline">
 								<div css={maxWidth}>
-									<ArticleHeadlinePadding
-										design={format.design}
-										starRating={
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+										webPublicationDateDeprecated={
+											CAPI.webPublicationDateDeprecated
+										}
+										hasStarRating={
 											!!CAPI.starRating ||
 											CAPI.starRating === 0
 										}
-									>
-										{age && (
-											<div css={ageWarningMargins}>
-												<AgeWarning age={age} />
-											</div>
-										)}
-										<ArticleHeadline
-											format={format}
-											headlineString={CAPI.headline}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
-										/>
-										{age && (
-											<AgeWarning
-												age={age}
-												isScreenReader={true}
-											/>
-										)}
-									</ArticleHeadlinePadding>
+									/>
 								</div>
 								{CAPI.starRating || CAPI.starRating === 0 ? (
 									<div css={starWrapper}>
@@ -706,6 +677,9 @@ export const InteractiveLayout = ({ CAPI, NAV, format }: Props) => {
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 

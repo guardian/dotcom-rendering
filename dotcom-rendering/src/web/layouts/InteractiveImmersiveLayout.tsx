@@ -358,6 +358,13 @@ export const InteractiveImmersiveLayout = ({
 											headlineString={CAPI.headline}
 											tags={CAPI.tags}
 											byline={CAPI.author.byline}
+											webPublicationDateDeprecated={
+												CAPI.webPublicationDateDeprecated
+											}
+											hasStarRating={
+												!!CAPI.starRating ||
+												CAPI.starRating === 0
+											}
 										/>
 									</div>
 								)}
@@ -485,6 +492,9 @@ export const InteractiveImmersiveLayout = ({
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 

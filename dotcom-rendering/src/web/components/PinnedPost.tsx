@@ -148,6 +148,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 			<input
 				type="checkbox"
 				css={css`
+					visibility: hidden;
 					${visuallyHidden};
 				`}
 				id="pinned-post-checkbox"

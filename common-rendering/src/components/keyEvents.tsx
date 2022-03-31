@@ -97,7 +97,6 @@ const linkStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		content: '';
 		display: block;
 		position: absolute;
-		top: 0;
 		left: -0.313rem;
 		height: 0.563rem;
 		width: 0.563rem;
