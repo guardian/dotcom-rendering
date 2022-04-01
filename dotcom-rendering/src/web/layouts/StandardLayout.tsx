@@ -495,6 +495,12 @@ export const StandardLayout = ({ CAPI, NAV, format }: Props) => {
 										>
 											<GetMatchNav
 												matchUrl={CAPI.matchUrl}
+												format={format}
+												headlineString={CAPI.headline}
+												tags={CAPI.tags}
+												webPublicationDateDeprecated={
+													CAPI.webPublicationDateDeprecated
+												}
 											/>
 										</Island>
 									)}

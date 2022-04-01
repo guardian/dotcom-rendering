@@ -6,15 +6,6 @@ describe('RegionalAd', () => {
 	const permutiveURL =
 		'https://guardian.amp.permutive.com/rtc?type=doubleclick';
 
-	const ukPrebidURL =
-		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=4&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING';
-	const usPrebidURL =
-		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=7&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING';
-	const auPrebidURL =
-		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=6&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING';
-	const intPrebidURL =
-		'https://prebid.adnxs.com/pbs/v1/openrtb2/amp?tag_id=4&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING';
-
 	const ukRelevantYieldURL =
 		'https://pbs.relevant-digital.com/openrtb2/amp?tag_id=6214ca675cf18e70cbaeef37_6214c9a4b73a6613d4aeef2f&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
 	const usRelevantYieldURL =
@@ -53,7 +44,7 @@ describe('RegionalAd', () => {
 		},
 	};
 
-	it('with no ab test running rtc-config contains permutive and prebid URLs when `usePermutive` and `usePrebid` flags are set to true', () => {
+	it('with no ab test running rtc-config contains just a permutive URL when `usePermutive` and `usePrebid` flags are set to true', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<RegionalAd
@@ -96,13 +87,13 @@ describe('RegionalAd', () => {
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
 
-		expect(ukRtcAttribute.urls).toEqual([ukPrebidURL, permutiveURL]);
-		expect(usRtcAttribute.urls).toEqual([usPrebidURL, permutiveURL]);
-		expect(auRtcAttribute.urls).toEqual([auPrebidURL, permutiveURL]);
-		expect(intRtcAttribute.urls).toEqual([intPrebidURL, permutiveURL]);
+		expect(ukRtcAttribute.urls).toEqual([permutiveURL]);
+		expect(usRtcAttribute.urls).toEqual([permutiveURL]);
+		expect(auRtcAttribute.urls).toEqual([permutiveURL]);
+		expect(intRtcAttribute.urls).toEqual([permutiveURL]);
 	});
 
-	it('with no ab test running rtc-config contains just the prebid URL when `usePermutive` is false and `usePrebid` is true', () => {
+	it('with no ab test running rtc-config contains just no prebid URL when `usePermutive` is false and `usePrebid` is true', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<RegionalAd
@@ -145,10 +136,10 @@ describe('RegionalAd', () => {
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
 
-		expect(ukRtcAttribute.urls).toEqual([ukPrebidURL]);
-		expect(usRtcAttribute.urls).toEqual([usPrebidURL]);
-		expect(auRtcAttribute.urls).toEqual([auPrebidURL]);
-		expect(intRtcAttribute.urls).toEqual([intPrebidURL]);
+		expect(ukRtcAttribute.urls).toEqual([]);
+		expect(usRtcAttribute.urls).toEqual([]);
+		expect(auRtcAttribute.urls).toEqual([]);
+		expect(intRtcAttribute.urls).toEqual([]);
 	});
 
 	it('with no ab test running rtc-config contains just the permutive URL when `usePermutive` is true and `usePrebid` is false', () => {
@@ -345,63 +336,6 @@ describe('RegionalAd', () => {
 		expect(usRtcAttribute.vendors).toEqual({});
 		expect(auRtcAttribute.vendors).toEqual({});
 		expect(intRtcAttribute.vendors).toEqual({});
-	});
-
-	it('with ab test running and in control group, rtc-config contains permutive and prebid URLs when `usePermutive` and `usePrebid` flags are set to true', () => {
-		const { container } = render(
-			<ContentABTestProvider
-				pageId="world/2021/jun/24/hong-kong-apple-daily-queue-final-edition-newspaper"
-				switches={{ ampContentAbTesting: true }}
-			>
-				<RegionalAd
-					edition="UK"
-					section=""
-					contentType=""
-					config={{
-						usePrebid: true,
-						usePermutive: true,
-						useAmazon: true,
-					}}
-					commercialProperties={{
-						UK: { adTargeting: [] },
-						US: { adTargeting: [] },
-						AU: { adTargeting: [] },
-						INT: { adTargeting: [] },
-					}}
-					adTargeting={{
-						customParams: { sens: 'f', urlkw: [] },
-						adUnit: '',
-					}}
-				/>
-			</ContentABTestProvider>,
-		);
-
-		const ampAdElement = container.querySelectorAll('amp-ad');
-
-		expect(ampAdElement).not.toBeNull();
-
-		const ukRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[0].getAttribute('rtc-config') || '{}',
-		);
-		const usRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[1].getAttribute('rtc-config') || '{}',
-		);
-		const auRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[2].getAttribute('rtc-config') || '{}',
-		);
-		const intRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[3].getAttribute('rtc-config') || '{}',
-		);
-
-		expect(ukRtcAttribute.urls).toEqual([ukPrebidURL, permutiveURL]);
-		expect(usRtcAttribute.urls).toEqual([usPrebidURL, permutiveURL]);
-		expect(auRtcAttribute.urls).toEqual([auPrebidURL, permutiveURL]);
-		expect(intRtcAttribute.urls).toEqual([intPrebidURL, permutiveURL]);
-
-		expect(ukRtcAttribute.vendors).toEqual(apsVendorObj);
-		expect(usRtcAttribute.vendors).toEqual(apsVendorObj);
-		expect(auRtcAttribute.vendors).toEqual(apsVendorObj);
-		expect(intRtcAttribute.vendors).toEqual(apsVendorObj);
 	});
 
 	it('with ab test running and in relevant yield variant, rtc-config contains permutive and relevant yield URLs when `usePermutive` and `usePrebid` flags are set to true', () => {
