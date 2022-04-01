@@ -22,6 +22,7 @@ type Props = {
 	format: ArticleFormat;
 	blockTitle?: string;
 	blockFirstPublished?: number;
+	blockFirstPublishedDisplay?: string;
 	blockLink: string;
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
@@ -114,6 +115,7 @@ const LiveBlockContainer = ({
 	format,
 	blockTitle,
 	blockFirstPublished,
+	blockFirstPublishedDisplay,
 	blockLink,
 	isLiveUpdate,
 	contributors,
@@ -159,6 +161,7 @@ const LiveBlockContainer = ({
 				{blockFirstPublished && (
 					<FirstPublished
 						firstPublished={blockFirstPublished}
+						firstPublishedDisplay={blockFirstPublishedDisplay}
 						blockLink={blockLink}
 						isPinnedPost={isPinnedPost}
 						supportsDarkMode={supportsDarkMode}
