@@ -24,6 +24,15 @@ type Props = {
 	pinnedPostId?: string;
 };
 
+const formatFirstPublishedDisplay = (time: string): string | undefined => {
+	const match = /([0-9]{1,2})\.([0-9]{1,2}).*/.exec(time);
+	if (match) {
+		const [, hour, minute] = match;
+		return `${hour}:${minute}`;
+	}
+	return undefined;
+};
+
 export const LiveBlock = ({
 	format,
 	block,
@@ -59,6 +68,9 @@ export const LiveBlock = ({
 			id={block.id}
 			blockTitle={block.title}
 			blockFirstPublished={block.blockFirstPublished}
+			blockFirstPublishedDisplay={formatFirstPublishedDisplay(
+				block.blockFirstPublishedDisplay || '',
+			)}
 			blockLink={blockLink}
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
