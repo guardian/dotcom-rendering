@@ -166,6 +166,7 @@
     "lodash.escape": "^4.0.1",
     "lodash.get": "^4.4.2",
     "log4js": "6.4.1",
+    "markov-strings": "^3.0.1",
     "minify-css-string": "^1.0.0",
     "node-fetch": "2.6.7",
     "nodemon": "^2.0.7",

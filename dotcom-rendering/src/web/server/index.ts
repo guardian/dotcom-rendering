@@ -1,4 +1,6 @@
 import type express from 'express';
+import Markov from 'markov-strings';
+import { readFileSync } from 'fs';
 import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
 import { extractNAV } from '../../model/extract-nav';
 import { document } from './document';
@@ -30,7 +32,30 @@ export const renderArticle = (
 	res: express.Response,
 ): void => {
 	try {
+		const markov = new Markov({ stateSize: 1 });
+
+		const array = readFileSync('articles.txt')
+			.toString()
+			.replace(/\r\n/g, '\n')
+			.split('\n');
+
+		markov.addData(array);
+
 		const CAPI = enhanceCAPIType(body);
+
+		CAPI.blocks[0].elements.forEach((block) => {
+			if (
+				block._type ===
+				'model.dotcomrendering.pageElements.TextBlockElement'
+			) {
+				block.html = `<p>${
+					markov.generate({
+						maxTries: 100,
+					}).string
+				}</p>`;
+			}
+		});
+
 		const resp = document({
 			data: {
 				CAPI,
