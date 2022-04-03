@@ -89,20 +89,20 @@ const articleAdStyles = css`
 			margin-top: 4px;
 			margin-left: 20px;
 		}
+		&.ad-slot--offset-right {
+			${from.desktop} {
+				float: right;
+				width: auto;
+				margin-right: -318px;
+			}
+
+			${from.wide} {
+				margin-right: -398px;
+			}
+		}
 	}
 	.ad-slot-container {
 		max-width: 300px;
-	}
-	.ad-slot--offset-right {
-		${from.desktop} {
-			float: right;
-			width: auto;
-			margin-right: -318px;
-		}
-
-		${from.wide} {
-			margin-right: -398px;
-		}
 	}
 	.ad-slot--fluid {
 		width: 100%;
