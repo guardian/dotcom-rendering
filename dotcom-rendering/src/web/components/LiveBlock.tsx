@@ -24,18 +24,6 @@ type Props = {
 	pinnedPostId?: string;
 };
 
-// TODO: This should be considered a temporary solution until we decide on the best
-// way to display either editionalised or local time to the user - at which point frontend
-// should be updated
-const formatFirstPublishedDisplay = (time: string): string | undefined => {
-	const match = /([0-9]{1,2})\.([0-9]{1,2}).*/.exec(time);
-	if (match) {
-		const [, hour, minute] = match;
-		return `${hour}:${minute}`;
-	}
-	return undefined;
-};
-
 export const LiveBlock = ({
 	format,
 	block,
@@ -71,9 +59,9 @@ export const LiveBlock = ({
 			id={block.id}
 			blockTitle={block.title}
 			blockFirstPublished={block.blockFirstPublished}
-			blockFirstPublishedDisplay={formatFirstPublishedDisplay(
-				block.blockFirstPublishedDisplay || '',
-			)}
+			blockFirstPublishedDisplay={
+				block.blockFirstPublishedDisplayNoTimezone
+			}
 			blockLink={blockLink}
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
