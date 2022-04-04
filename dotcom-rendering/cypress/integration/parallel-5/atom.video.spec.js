@@ -174,6 +174,58 @@ describe('YouTube Atom', function () {
 		cy.get(overlaySelector).should('not.exist');
 	});
 
+	it('plays in video when 2 same videos exist in page', function () {
+		// cy.intercept('**youtube**').as('callToYouTube');
+		cy.visit(
+			'/Article?url=https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
+		);
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe()
+			.find("[title='Accept all']", { timeout: 12000 })
+			.click();
+
+		// Wait for hydration
+		cy.get('[data-component=youtube-atom]')
+			.parent()
+			.should('have.attr', 'data-gu-ready', 'true');
+
+		// Make sure overlay for both videos is displayed
+		const overlaySelectorforMultipleVideos = `[data-cy^="youtube-overlay-qkC9z-dSAOE"]`;
+		cy.get(overlaySelectorforMultipleVideos)
+			.should('have.length', 2)
+			.each((item) => {
+				cy.wrap(item).should('be.visible');
+			});
+
+		// Listen for the ophan call made when the video is played
+		interceptPlayEvent(
+			'gu-video-youtube-1e89d5bd-489e-470a-857e-4f30e85b5aec',
+		).as('ophanCall');
+
+		// Listen for the YouTube embed call made when the video is played
+		interceptYouTubeEmbed({
+			videoId: 'qkC9z-dSAOE',
+			adUnit: '/59666047/theguardian.com/world/liveblog/ng',
+			pageUrl:
+				'/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
+			rejectAll: false,
+		}).as('youtubeEmbed');
+
+		// Play videos
+		cy.get(overlaySelectorforMultipleVideos).each((item) => {
+			cy.wrap(item).click();
+		});
+
+		cy.wait('@ophanCall', { timeout: 30000 });
+
+		cy.wait('@youtubeEmbed', { timeout: 30000 });
+
+		// after videos are played, overlay is gone
+		cy.get(overlaySelectorforMultipleVideos).should('not.exist');
+	});
+
 	it('still plays the video if the reader rejects consent', function () {
 		cy.visit(
 			'/Article?url=https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
