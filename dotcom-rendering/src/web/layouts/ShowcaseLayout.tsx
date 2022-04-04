@@ -32,13 +32,11 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
-import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { LabsHeader } from '../components/LabsHeader.importable';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import { getAgeWarning } from '../../lib/age-warning';
 import {
 	decideLineCount,
 	decideLineEffect,
@@ -52,6 +50,8 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -203,34 +203,13 @@ const PositionHeadline = ({
 	}
 };
 
-const ageWarningMargins = css`
-	margin-top: 12px;
-	margin-left: -10px;
-	margin-bottom: 6px;
-
-	${from.tablet} {
-		margin-left: -20px;
-	}
-
-	${from.leftCol} {
-		margin-left: -10px;
-		margin-top: 0;
-	}
-`;
-
 interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
-export const ShowcaseLayout = ({
-	CAPI,
-	NAV,
-	format,
-	palette,
-}: Props): JSX.Element => {
+export const ShowcaseLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -260,9 +239,11 @@ export const ShowcaseLayout = ({
 
 	const showComments = CAPI.isCommentable;
 
-	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
-
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const palette = decidePalette(format);
+
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
 
 	return (
 		<>
@@ -295,6 +276,10 @@ export const ShowcaseLayout = ({
 									edition={CAPI.editionId}
 									idUrl={CAPI.config.idUrl}
 									mmaUrl={CAPI.config.mmaUrl}
+									supporterCTA={
+										CAPI.nav.readerRevenueLinks.header
+											.supporter
+									}
 									discussionApiUrl={
 										CAPI.config.discussionApiUrl
 									}
@@ -307,7 +292,7 @@ export const ShowcaseLayout = ({
 										CAPI.config.switches.remoteHeader
 									}
 									contributionsServiceUrl={
-										CAPI.contributionsServiceUrl
+										contributionsServiceUrl
 									}
 								/>
 							</ElementContainer>
@@ -436,33 +421,23 @@ export const ShowcaseLayout = ({
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border palette={palette} />
+							<Border format={format} />
 						</GridItem>
 						<GridItem area="headline">
 							<PositionHeadline design={format.design}>
-								<div
-									css={css`
-										padding-bottom: 24px;
-									`}
-								>
-									{age && (
-										<div css={ageWarningMargins}>
-											<AgeWarning age={age} />
-										</div>
-									)}
-									<ArticleHeadline
-										format={format}
-										headlineString={CAPI.headline}
-										tags={CAPI.tags}
-										byline={CAPI.author.byline}
-									/>
-									{age && (
-										<AgeWarning
-											age={age}
-											isScreenReader={true}
-										/>
-									)}
-								</div>
+								<ArticleHeadline
+									format={format}
+									headlineString={CAPI.headline}
+									tags={CAPI.tags}
+									byline={CAPI.author.byline}
+									webPublicationDateDeprecated={
+										CAPI.webPublicationDateDeprecated
+									}
+									hasStarRating={
+										!!CAPI.starRating ||
+										CAPI.starRating === 0
+									}
+								/>
 							</PositionHeadline>
 						</GridItem>
 						<GridItem area="media">
@@ -538,7 +513,6 @@ export const ShowcaseLayout = ({
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
-									palette={palette}
 									blocks={CAPI.blocks}
 									adTargeting={adTargeting}
 									host={host}
@@ -555,7 +529,7 @@ export const ShowcaseLayout = ({
 									tags={CAPI.tags}
 									isPaidContent={!!CAPI.config.isPaidContent}
 									contributionsServiceUrl={
-										CAPI.contributionsServiceUrl
+										contributionsServiceUrl
 									}
 									contentType={CAPI.contentType}
 									sectionName={CAPI.sectionName || ''}
@@ -566,15 +540,11 @@ export const ShowcaseLayout = ({
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
-											abTestSwitches={
-												CAPI.config.switches
-											}
 											contentType={CAPI.contentType}
 											contributionsServiceUrl={
-												CAPI.contributionsServiceUrl
+												contributionsServiceUrl
 											}
 											idApiUrl={CAPI.config.idApiUrl}
-											isDev={CAPI.config.isDev ?? false}
 											isMinuteArticle={
 												CAPI.pageType.isMinuteArticle
 											}
@@ -583,9 +553,6 @@ export const ShowcaseLayout = ({
 											}
 											keywordsId={CAPI.config.keywordIds}
 											pageId={CAPI.pageId}
-											pageIsSensitive={
-												CAPI.config.isSensitive
-											}
 											sectionId={CAPI.config.section}
 											sectionName={CAPI.sectionName}
 											shouldHideReaderRevenue={
@@ -598,7 +565,6 @@ export const ShowcaseLayout = ({
 								)}
 								<Lines count={4} effect="straight" />
 								<SubMeta
-									palette={palette}
 									format={format}
 									subMetaKeywordLinks={
 										CAPI.subMetaKeywordLinks
@@ -735,9 +701,6 @@ export const ShowcaseLayout = ({
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}
-							switches={CAPI.config.switches}
-							pageIsSensitive={CAPI.config.isSensitive}
-							isDev={CAPI.config.isDev}
 						/>
 					</ElementContainer>
 				)}
@@ -776,26 +739,28 @@ export const ShowcaseLayout = ({
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
-						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}
 						isPaidContent={CAPI.pageType.isPaidContent}
 						isPreview={!!CAPI.config.isPreview}
+						isSensitive={CAPI.config.isSensitive}
 						keywordsId={CAPI.config.keywordIds}
 						pageId={CAPI.pageId}
-						pageIsSensitive={CAPI.config.isSensitive}
 						section={CAPI.config.section}
 						sectionName={CAPI.sectionName}
 						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						switches={CAPI.config.switches}
 						tags={CAPI.tags}
 					/>
 				</Island>

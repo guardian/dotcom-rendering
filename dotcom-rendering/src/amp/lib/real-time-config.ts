@@ -18,32 +18,9 @@ type AdType =
  * These can be computed from the Config type above
  */
 export type RTCParameters = {
-	placementId: number;
 	tagId: string;
 	profileId: string;
 	pubId: string;
-};
-
-/**
- * Determine the Xandr Placement ID that is used to look up a given stored bid request
- *
- * Stored bid requests are stored by the prebid server instance and each is
- * keyed by a placement ID. This placement ID corresponds to the tag id parameter
- * provided on the client
- *
- */
-const getPlacementId = (adType: AdType): number => {
-	if (adType.isSticky) {
-		return 9;
-	}
-	switch (adType.adRegion) {
-		case 'US':
-			return 7;
-		case 'AU':
-			return 6;
-		default:
-			return 4;
-	}
 };
 
 /**
@@ -99,7 +76,6 @@ const getPubAndProfileIds = (
  * Compute the full set of RTC parameters from a given ad type
  */
 export const getRTCParameters = (adType: AdType): RTCParameters => ({
-	placementId: getPlacementId(adType),
 	tagId: getTagId(adType),
 	...getPubAndProfileIds(adType),
 });

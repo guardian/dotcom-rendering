@@ -21,6 +21,19 @@ type Props = {
 	switches: { [key: string]: boolean };
 	isLiveUpdate?: boolean;
 	isPinnedPost: boolean;
+	pinnedPostId?: string;
+};
+
+// TODO: This should be considered a temporary solution until we decide on the best
+// way to display either editionalised or local time to the user - at which point frontend
+// should be updated
+const formatFirstPublishedDisplay = (time: string): string | undefined => {
+	const match = /([0-9]{1,2})\.([0-9]{1,2}).*/.exec(time);
+	if (match) {
+		const [, hour, minute] = match;
+		return `${hour}:${minute}`;
+	}
+	return undefined;
 };
 
 export const LiveBlock = ({
@@ -36,6 +49,7 @@ export const LiveBlock = ({
 	switches,
 	isLiveUpdate,
 	isPinnedPost,
+	pinnedPostId,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	const palette = decidePalette(format);
@@ -50,17 +64,23 @@ export const LiveBlock = ({
 		!!block.blockLastUpdated &&
 		block.blockLastUpdated > block.blockFirstPublished;
 
+	const isOriginalPinnedPost = !isPinnedPost && block.id === pinnedPostId;
+
 	return (
 		<LiveBlockContainer
 			id={block.id}
 			blockTitle={block.title}
 			blockFirstPublished={block.blockFirstPublished}
+			blockFirstPublishedDisplay={formatFirstPublishedDisplay(
+				block.blockFirstPublishedDisplay || '',
+			)}
 			blockLink={blockLink}
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
 			isPinnedPost={isPinnedPost}
 			supportsDarkMode={false}
 			format={format}
+			isOriginalPinnedPost={isOriginalPinnedPost}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({

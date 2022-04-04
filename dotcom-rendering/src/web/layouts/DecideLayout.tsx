@@ -1,8 +1,6 @@
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { decidePalette } from '../lib/decidePalette';
-
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
@@ -18,8 +16,6 @@ type Props = {
 };
 
 export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
-	const palette = decidePalette(format);
-
 	// TODO we can probably better express this as data
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -42,7 +38,6 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 						<ImmersiveLayout
 							CAPI={CAPI}
 							NAV={NAV}
-							palette={palette}
 							format={format}
 						/>
 					);
@@ -54,33 +49,16 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 			switch (format.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
-					return (
-						<LiveLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							format={format}
-							palette={palette}
-						/>
-					);
+					return <LiveLayout CAPI={CAPI} NAV={NAV} format={format} />;
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					return (
-						<CommentLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							format={format}
-							palette={palette}
-						/>
+						<CommentLayout CAPI={CAPI} NAV={NAV} format={format} />
 					);
 				default:
 					return (
-						<ShowcaseLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							format={format}
-							palette={palette}
-						/>
+						<ShowcaseLayout CAPI={CAPI} NAV={NAV} format={format} />
 					);
 			}
 		}
@@ -93,7 +71,6 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 							CAPI={CAPI}
 							NAV={NAV}
 							format={format}
-							palette={palette}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
@@ -107,33 +84,16 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				}
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
-					return (
-						<LiveLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							format={format}
-							palette={palette}
-						/>
-					);
+					return <LiveLayout CAPI={CAPI} NAV={NAV} format={format} />;
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					return (
-						<CommentLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							format={format}
-							palette={palette}
-						/>
+						<CommentLayout CAPI={CAPI} NAV={NAV} format={format} />
 					);
 				default:
 					return (
-						<StandardLayout
-							CAPI={CAPI}
-							NAV={NAV}
-							format={format}
-							palette={palette}
-						/>
+						<StandardLayout CAPI={CAPI} NAV={NAV} format={format} />
 					);
 			}
 		}

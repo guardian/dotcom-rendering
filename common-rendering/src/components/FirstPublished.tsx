@@ -1,21 +1,32 @@
 import { css } from '@emotion/react';
-import { timeAgo } from '@guardian/libs';
+import { ArticleFormat, timeAgo } from '@guardian/libs';
 import { neutral, space, textSans } from '@guardian/source-foundations';
+import { SvgPinned } from '@guardian/source-react-components';
+import { border } from '../editorialPalette';
 import { darkModeCss } from '../lib';
 
 // TODO: update this code to use shared version when it is available
 const padString = (time: number) => (time < 10 ? `0${time}` : time);
 
+const fallbackDate = (date: Date) =>
+	`${padString(date.getHours())}:${padString(date.getMinutes())}`;
+
 const FirstPublished = ({
 	firstPublished,
+	firstPublishedDisplay,
 	blockLink,
 	isPinnedPost,
 	supportsDarkMode,
+	isOriginalPinnedPost,
+	format,
 }: {
 	firstPublished: number;
+	firstPublishedDisplay?: string;
 	blockLink: string;
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
+	isOriginalPinnedPost: boolean;
+	format: ArticleFormat;
 }) => {
 	const publishedDate = new Date(firstPublished);
 	return (
@@ -25,11 +36,11 @@ const FirstPublished = ({
 			css={css`
 				${textSans.xxsmall({ fontWeight: 'bold' })}
 				margin-bottom: ${space[1]}px;
-				padding-top: ${space[1]}px;
 				display: flex;
 				width: fit-content;
 				flex-direction: row;
 				text-decoration: none;
+
 				:hover {
 					filter: brightness(30%);
 				}
@@ -62,10 +73,25 @@ const FirstPublished = ({
 					`}
 				`}
 			>
-				{`${padString(publishedDate.getHours())}:${padString(
-					publishedDate.getMinutes(),
-				)}`}
+				{firstPublishedDisplay || fallbackDate(publishedDate)}
 			</span>
+			{isOriginalPinnedPost && (
+				<span
+					css={css`
+						width: 14px;
+						height: 14px;
+						border-radius: 50%;
+						background-color: ${border.liveBlock(format)};
+						align-self: center;
+						margin-left: ${space[2]}px;
+						svg {
+							fill: ${neutral[100]};
+						}
+					`}
+				>
+					<SvgPinned />
+				</span>
+			)}
 		</a>
 	);
 };

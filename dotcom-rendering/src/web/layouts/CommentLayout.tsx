@@ -33,12 +33,10 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
 import { Border } from '../components/Border';
 import { GridItem } from '../components/GridItem';
-import { AgeWarning } from '../components/AgeWarning';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import { getAgeWarning } from '../../lib/age-warning';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { Stuck, SendToBack, BannerWrapper } from './lib/stickiness';
 import { Island } from '../components/Island';
@@ -47,6 +45,8 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 
 const StandardGrid = ({
 	children,
@@ -249,25 +249,6 @@ const pushToBottom = css`
 	justify-content: flex-end;
 `;
 
-const headlinePadding = css`
-	padding-bottom: 43px;
-`;
-
-const ageWarningMargins = css`
-	margin-top: 12px;
-	margin-left: -10px;
-	margin-bottom: 6px;
-
-	${from.tablet} {
-		margin-left: -20px;
-	}
-
-	${from.leftCol} {
-		margin-left: -10px;
-		margin-top: 0;
-	}
-`;
-
 const mainMediaWrapper = css`
 	position: relative;
 `;
@@ -276,15 +257,9 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
-export const CommentLayout = ({
-	CAPI,
-	NAV,
-	format,
-	palette,
-}: Props): JSX.Element => {
+export const CommentLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPI;
@@ -321,9 +296,11 @@ export const CommentLayout = ({
 
 	const showAvatar = avatarUrl && onlyOneContributor;
 
-	const age = getAgeWarning(CAPI.tags, CAPI.webPublicationDateDeprecated);
-
 	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+
+	const palette = decidePalette(format);
+
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
 
 	return (
 		<>
@@ -355,6 +332,9 @@ export const CommentLayout = ({
 								edition={CAPI.editionId}
 								idUrl={CAPI.config.idUrl}
 								mmaUrl={CAPI.config.mmaUrl}
+								supporterCTA={
+									CAPI.nav.readerRevenueLinks.header.supporter
+								}
 								discussionApiUrl={CAPI.config.discussionApiUrl}
 								isAnniversary={
 									CAPI.config.switches.anniversaryHeaderSvg
@@ -362,7 +342,7 @@ export const CommentLayout = ({
 								urls={CAPI.nav.readerRevenueLinks.header}
 								remoteHeader={CAPI.config.switches.remoteHeader}
 								contributionsServiceUrl={
-									CAPI.contributionsServiceUrl
+									contributionsServiceUrl
 								}
 							/>
 						</ElementContainer>
@@ -433,7 +413,7 @@ export const CommentLayout = ({
 							/>
 						</GridItem>
 						<GridItem area="border">
-							<Border palette={palette} />
+							<Border format={format} />
 						</GridItem>
 						<GridItem area="headline">
 							<div css={maxWidth}>
@@ -443,26 +423,21 @@ export const CommentLayout = ({
 										showAvatar && minHeightWithAvatar,
 									]}
 								>
-									{/* TOP - we use divs here to position content in groups using flex */}
-									<div css={!showAvatar && headlinePadding}>
-										{age && (
-											<div css={ageWarningMargins}>
-												<AgeWarning age={age} />
-											</div>
-										)}
-										<ArticleHeadline
-											format={format}
-											headlineString={CAPI.headline}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
-										/>
-										{age && (
-											<AgeWarning
-												age={age}
-												isScreenReader={true}
-											/>
-										)}
-									</div>
+									{/* TOP - we position content in groups here using flex */}
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPI.headline}
+										tags={CAPI.tags}
+										byline={CAPI.author.byline}
+										webPublicationDateDeprecated={
+											CAPI.webPublicationDateDeprecated
+										}
+										hasStarRating={
+											!!CAPI.starRating ||
+											CAPI.starRating === 0
+										}
+										hasAvatar={!!showAvatar}
+									/>
 									{/* BOTTOM */}
 									<div>
 										{showAvatar && avatarUrl && (
@@ -552,7 +527,6 @@ export const CommentLayout = ({
 								<div css={maxWidth}>
 									<ArticleBody
 										format={format}
-										palette={palette}
 										blocks={CAPI.blocks}
 										adTargeting={adTargeting}
 										host={host}
@@ -571,7 +545,7 @@ export const CommentLayout = ({
 											!!CAPI.config.isPaidContent
 										}
 										contributionsServiceUrl={
-											CAPI.contributionsServiceUrl
+											contributionsServiceUrl
 										}
 										contentType={CAPI.contentType}
 										sectionName={CAPI.sectionName || ''}
@@ -582,17 +556,11 @@ export const CommentLayout = ({
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>
 											<SlotBodyEnd
-												abTestSwitches={
-													CAPI.config.switches
-												}
 												contentType={CAPI.contentType}
 												contributionsServiceUrl={
-													CAPI.contributionsServiceUrl
+													contributionsServiceUrl
 												}
 												idApiUrl={CAPI.config.idApiUrl}
-												isDev={
-													CAPI.config.isDev ?? false
-												}
 												isMinuteArticle={
 													CAPI.pageType
 														.isMinuteArticle
@@ -604,9 +572,6 @@ export const CommentLayout = ({
 													CAPI.config.keywordIds
 												}
 												pageId={CAPI.pageId}
-												pageIsSensitive={
-													CAPI.config.isSensitive
-												}
 												sectionId={CAPI.config.section}
 												sectionName={CAPI.sectionName}
 												shouldHideReaderRevenue={
@@ -619,7 +584,6 @@ export const CommentLayout = ({
 									)}
 									<Lines count={4} effect="straight" />
 									<SubMeta
-										palette={palette}
 										format={format}
 										subMetaKeywordLinks={
 											CAPI.subMetaKeywordLinks
@@ -757,9 +721,6 @@ export const CommentLayout = ({
 							format={format}
 							sectionName={CAPI.sectionName}
 							ajaxUrl={CAPI.config.ajaxUrl}
-							switches={CAPI.config.switches}
-							pageIsSensitive={CAPI.config.isSensitive}
-							isDev={CAPI.config.isDev}
 						/>
 					</ElementContainer>
 				)}
@@ -798,26 +759,28 @@ export const CommentLayout = ({
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
-						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}
 						isPaidContent={CAPI.pageType.isPaidContent}
 						isPreview={!!CAPI.config.isPreview}
+						isSensitive={CAPI.config.isSensitive}
 						keywordsId={CAPI.config.keywordIds}
 						pageId={CAPI.pageId}
-						pageIsSensitive={CAPI.config.isSensitive}
 						section={CAPI.config.section}
 						sectionName={CAPI.sectionName}
 						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						switches={CAPI.config.switches}
 						tags={CAPI.tags}
 					/>
 				</Island>

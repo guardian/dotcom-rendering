@@ -7,7 +7,6 @@ import {
 } from '@guardian/libs';
 
 import { css } from '@emotion/react';
-import { decidePalette } from '../lib/decidePalette';
 import {
 	getAllThemes,
 	getThemeNameAsString,
@@ -69,11 +68,6 @@ export const News = () => {
 	return (
 		<Container>
 			<SubMeta
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				})}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -95,11 +89,6 @@ export const Sport = () => {
 	return (
 		<Container>
 			<SubMeta
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Sport,
-				})}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -121,11 +110,6 @@ export const Culture = () => {
 	return (
 		<Container>
 			<SubMeta
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Culture,
-				})}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -147,11 +131,6 @@ export const Lifestyle = () => {
 	return (
 		<Container>
 			<SubMeta
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Lifestyle,
-				})}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -173,11 +152,6 @@ export const Opinion = () => {
 	return (
 		<Container>
 			<SubMeta
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.Opinion,
-				})}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -199,11 +173,6 @@ export const Labs = () => {
 	return (
 		<Container>
 			<SubMeta
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticleSpecial.Labs,
-				})}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -225,11 +194,6 @@ export const SpecialReport = () => {
 	return (
 		<Container>
 			<SubMeta
-				palette={decidePalette({
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticleSpecial.SpecialReport,
-				})}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -257,7 +221,6 @@ export const DeadBlogStory = () => {
 				<Container>
 					<p>{getThemeNameAsString(format)}</p>
 					<SubMeta
-						palette={decidePalette(format)}
 						format={format}
 						subMetaKeywordLinks={subMetaKeywordLinks}
 						subMetaSectionLinks={subMetaSectionLinks}

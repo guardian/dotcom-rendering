@@ -12,19 +12,41 @@ const pinnedPostCheckBox: Element | null = !isServer
 	? window.document.querySelector('input[name=pinned-post-checkbox]')
 	: null;
 
+const pinnedPostContent: Element | null = !isServer
+	? window.document.querySelector('#collapsible-body')
+	: null;
+
 /**
- * hide show more button on pinned post
+ * hide show more button and overlay on pinned post
  */
 function hideShowMore() {
 	const pinnedPostButton = document.querySelector<HTMLElement>(
 		'#pinned-post-button',
 	);
+	const pinnedPostOverlay = document.querySelector<HTMLElement>(
+		'#pinned-post-overlay',
+	);
 	if (pinnedPostButton) pinnedPostButton.style.display = 'none';
+	if (pinnedPostOverlay) pinnedPostOverlay.style.display = 'none';
+}
+
+/**
+ * Scroll to the top of the main content when the pinned post is collapsed if the top of the post is out of view
+ */
+function scrollOnCollapse() {
+	const position = pinnedPost?.getBoundingClientRect();
+	if (position && position.top < 0) {
+		pinnedPost?.scrollIntoView({
+			behavior: 'smooth',
+		});
+	}
 }
 
 export const EnhancePinnedPost = () => {
 	const contentFitsContainer =
-		pinnedPost && pinnedPost.scrollHeight <= pinnedPost.clientHeight;
+		pinnedPostContent &&
+		pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
+
 	if (contentFitsContainer) hideShowMore();
 
 	const hasBeenSeen = useRef(false);
@@ -49,6 +71,7 @@ export const EnhancePinnedPost = () => {
 					action: 'CLICK',
 					value: 'show-less',
 				});
+				scrollOnCollapse();
 			}
 		}
 	};

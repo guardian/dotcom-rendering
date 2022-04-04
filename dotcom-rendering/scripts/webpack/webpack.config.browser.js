@@ -2,9 +2,7 @@
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
-const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
-const GITHUB = process.env.CI_ENV === 'github';
 
 /**
  * @param {boolean} isLegacyJS
@@ -12,7 +10,7 @@ const GITHUB = process.env.CI_ENV === 'github';
  */
 const generateName = (isLegacyJS) => {
 	const legacyString = isLegacyJS ? '.legacy' : '';
-	const chunkhashString = PROD && !GITHUB ? '.[chunkhash]' : '';
+	const chunkhashString = DEV ? '' : '.[chunkhash]';
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
@@ -29,7 +27,6 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		islands: './src/web/browser/islands/init.ts',
 		dynamicImport: './src/web/browser/dynamicImport/init.ts',
 		atomIframe: './src/web/browser/atomIframe/init.ts',
-		coreVitals: './src/web/browser/coreVitals/init.ts',
 		embedIframe: './src/web/browser/embedIframe/init.ts',
 		newsletterEmbedIframe:
 			'./src/web/browser/newsletterEmbedIframe/init.ts',

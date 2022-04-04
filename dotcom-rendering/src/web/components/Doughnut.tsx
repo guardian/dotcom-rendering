@@ -7,8 +7,7 @@ import { isLight } from '../lib/isLight';
 type Props = {
 	sections: Section[];
 	percentCutout?: number;
-	width?: number;
-	height?: number;
+	size?: number;
 };
 
 type Section = {
@@ -16,6 +15,9 @@ type Section = {
 	value: number;
 	color: string;
 };
+
+/** set decimal places */
+const PRECISION = 6;
 
 const unitStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
@@ -40,134 +42,88 @@ const withoutZeroSections = (sections: Section[]) =>
 export const Doughnut = ({
 	sections,
 	percentCutout = 35,
-	width = 300,
-	height = 300,
+	size = 300,
 }: Props) => {
-	if (withoutZeroSections(sections).length === 1) {
-		// The Doughnut component requires at least 2 sections
-		// TODO: Support showing 100% for a single section
-		return null;
-	}
-
 	// TODO: Support displaying 0% for sections where value is zero
 	// We handle these at the moment by filtering them out using withoutZeroSections()
 
-	const radius = Math.min(height / 2, width / 2);
-	const cutoutRadius = radius * (percentCutout / 100);
+	const outerRadius = size / 2;
+	const innerRadius = outerRadius * (percentCutout / 100);
+	const radius = (innerRadius + outerRadius) / 2;
 
 	const totalValue = sections
 		.map((section) => section.value)
 		.reduce((runningTotal, currentValue) => runningTotal + currentValue);
 
-	const halfPI = Math.PI / 2;
-	const doublePI = Math.PI * 2;
+	/** τ = 2π https://en.wikipedia.org/wiki/Turn_(angle)#Tau_proposals */
+	const tau = Math.PI * 2;
+	const quarterTurn = Math.PI / 2;
 
-	const center = {
-		x: width / 2,
-		y: height / 2,
-	};
+	const center = size / 2;
 
 	// Segments
 	const segments: {
-		d: string;
+		dasharray: string;
+		dashoffset: string;
 		color: string;
 		transform: string;
 		label: string;
 		value: number;
 	}[] = [];
-	let segmentAngle;
-	let endRadius;
-	let arc;
-	let outer;
-	let inner;
-	let r;
-	let a;
-	let startRadius = -halfPI;
 
-	withoutZeroSections(sections).forEach((section) => {
-		segmentAngle = (section.value / totalValue) * doublePI;
+	let angleStart = -quarterTurn;
+	for (const { color, label, value } of withoutZeroSections(sections)) {
+		const angleLength = (value / totalValue) * tau;
 
-		endRadius = startRadius + segmentAngle;
-		arc = (endRadius - startRadius) % doublePI > Math.PI ? 1 : 0;
+		const angleEnd = angleStart + angleLength;
+		const angleMid = angleStart + angleLength / 2;
 
-		outer = {
-			start: {
-				x: center.x + Math.cos(startRadius) * radius,
-				y: center.y + Math.sin(startRadius) * radius,
-			},
-			end: {
-				x: center.x + Math.cos(endRadius) * radius,
-				y: center.y + Math.sin(endRadius) * radius,
-			},
-		};
-		inner = {
-			start: {
-				x: center.x + Math.cos(endRadius) * cutoutRadius,
-				y: center.y + Math.sin(endRadius) * cutoutRadius,
-			},
-			end: {
-				x: center.x + Math.cos(startRadius) * cutoutRadius,
-				y: center.y + Math.sin(startRadius) * cutoutRadius,
-			},
-		};
-
-		r = (cutoutRadius + radius) / 2;
-		a = (startRadius + endRadius) / 2;
+		const dasharray = [angleLength * radius, (tau - angleLength) * radius]
+			.map((dash) => dash.toFixed(PRECISION))
+			.join(',');
+		/**
+		 * The offset is turned one quarter and rotated
+		 * with a transform to keep the top join as crisp
+		 * as possible.
+		 */
+		const dashoffset = (-(quarterTurn + angleStart) * radius).toFixed(
+			PRECISION,
+		);
 
 		segments.push({
-			/**
-			 * M: Move pointer
-			 * A: Outer arc
-			 * L: Connect outer and inner arc
-			 * A: Inner arc
-			 * Z: Close path
-			 */
-			d: [
-				'M',
-				outer.start.x,
-				outer.start.y,
-				'A',
-				radius,
-				radius,
-				0,
-				arc,
-				1,
-				outer.end.x,
-				outer.end.y,
-				'L',
-				inner.start.x,
-				inner.start.y,
-				'A',
-				cutoutRadius,
-				cutoutRadius,
-				0,
-				arc,
-				0,
-				inner.end.x,
-				inner.end.y,
-				'Z',
-			].join(' '),
-			label: section.label,
-			value: section.value,
-			transform: `translate(${Math.cos(a) * r + center.x}, ${
-				Math.sin(a) * r + center.y
-			})`,
-			color: section.color,
+			dasharray,
+			dashoffset,
+			label,
+			value,
+			transform: [
+				'translate(',
+				(Math.cos(angleMid) * radius + center).toFixed(PRECISION),
+				', ',
+				(Math.sin(angleMid) * radius + center).toFixed(PRECISION),
+				')',
+			].join(''),
+			color,
 		});
 
-		startRadius += (section.value / totalValue) * doublePI;
-	});
+		angleStart = angleEnd;
+	}
 
 	return (
-		<svg
-			preserveAspectRatio="xMinYMin"
-			width={width}
-			height={height}
-			viewBox={`0 0 ${width} ${height}`}
-		>
+		<svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
 			{segments.map((segment) => (
 				<g>
-					<path d={segment.d} fill={segment.color} />
+					<circle
+						cx={center}
+						cy={center}
+						r={radius}
+						fill="none"
+						stroke={segment.color}
+						strokeWidth={outerRadius - innerRadius}
+						strokeDasharray={segment.dasharray}
+						strokeDashoffset={segment.dashoffset}
+						// rotate back a quarter turn
+						transform={`rotate(-90 ${center} ${center})`}
+					/>
 					<text transform={segment.transform}>
 						<tspan css={labelStyles(segment.color)} x="0" dy="0">
 							{segment.label}
@@ -180,7 +136,7 @@ export const Doughnut = ({
 			))}
 			<text
 				css={unitStyles}
-				transform={`translate(${center.x}, ${center.y})`}
+				transform={`translate(${center}, ${center})`}
 				dy="0.4em"
 			>
 				%

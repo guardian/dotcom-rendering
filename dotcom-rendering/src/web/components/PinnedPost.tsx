@@ -126,6 +126,7 @@ const buttonIcon = css`
 		width: 24px;
 		height: auto;
 		margin-left: -${space[1]}px;
+		margin-right: ${space[1]}px;
 	}
 `;
 
@@ -146,6 +147,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 			<input
 				type="checkbox"
 				css={css`
+					visibility: hidden;
 					${visuallyHidden};
 				`}
 				id="pinned-post-checkbox"

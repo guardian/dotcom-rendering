@@ -2802,17 +2802,17 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^22.3.0":
-  version "22.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-22.3.0.tgz#9472f7ed8bfbd791b4afd1aa239e6f06852b2a49"
-  integrity sha512-LMmNXATyxVxUtD2jYcJ6meJCqjTbAv4N+kG537igv0OwjpFF2W1URy+w9Jp2XJ0ukBcTOQuCRk3EQFzrwzlMqw==
+"@guardian/atoms-rendering@^22.6.2":
+  version "22.6.2"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-22.6.2.tgz#43a9d70173cfae9002d707fffc31f3627a875790"
+  integrity sha512-SFfTea4Y+CjvyuidXG+5x9HvgJi80/J9ypdrOUsdaxFkMPAL1zaYN0Jl+zcYkRxBNkJvS470Og6GYLsiR9XI+w==
   dependencies:
     youtube-player "^5.5.2"
 
-"@guardian/braze-components@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-6.1.0.tgz#11e4414ed15fbd16ac005dab60c42383b913dbec"
-  integrity sha512-26dRs/zXoYXz9Ov54GRhhEB1wiB2+iAnxc+HYRmsb/tOjcyxu/YkyhFnPgHgZUX8F7y2IuB7TBx7nNGONjWYgQ==
+"@guardian/braze-components@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-7.1.0.tgz#b8812002cc77f5c65a091ebf0f5b78d6fc1403f4"
+  integrity sha512-6X+CKHfElQQj7k8JELFuiUW0JyMJArY8XEum2RpnNs1qelPSwtmtibo4bh5LKtKVXf83zYs9PwUXd3AJwp3x1g==
 
 "@guardian/commercial-core@^3.0.0":
   version "3.0.0"
@@ -2882,10 +2882,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-4.2.0.tgz#3440b095c69a4e9df919581a38c8b9d8129841b8"
   integrity sha512-D/76oqTs7SqHyTzTInWIYlID5iOCWypyJncaegDV+ooDY0SF2c0bpc46tVRxG9ybrRuFvoOi9rCFFYZMWptINA==
 
-"@guardian/support-dotcom-components@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.1.tgz#a6f51ce1c93efbaac705989a9d63a601bbf80328"
-  integrity sha512-zoxBAQIRUiz3iMi+wgutSi36igLjpGUI66JT+ByxHgFkTELiqsflG6Htn1ynYy4j5q80LyEIwahLqtuFFWq+YQ==
+"@guardian/support-dotcom-components@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.2.tgz#56bfb7cf7aef6d859b6f97b3986188af687f8a16"
+  integrity sha512-NqAxmegwQ1ltBH4EmfXwJHxRXGJzlZMSFDkK+5fkReL4XtACX3ZzR2rMbl7SN5RxSbeSzr5nGElRZ0TWkAYRJw==
 
 "@guardian/types@^9.0.1":
   version "9.0.1"
@@ -14710,9 +14710,9 @@ minimist-options@4.1.0:
     kind-of "^6.0.3"
 
 minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.5, minimist@~1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
-  integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
+  integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
 
 minipass-collect@^1.0.2:
   version "1.0.2"

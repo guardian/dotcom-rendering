@@ -101,3 +101,16 @@ export const NoShimmer = () => {
 	);
 };
 NoShimmer.story = { name: 'without shimmer' };
+
+export const Background = () => {
+	return (
+		<Container>
+			<Placeholder
+				height={200}
+				shouldShimmer={true}
+				backgroundColor="#ffff00"
+			/>
+		</Container>
+	);
+};
+Background.story = { name: 'with backgroundColor set' };

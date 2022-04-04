@@ -23,11 +23,13 @@ type Props = {
 	format: ArticleFormat;
 	blockTitle?: string;
 	blockFirstPublished?: number;
+	blockFirstPublishedDisplay?: string;
 	blockLink: string;
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
+	isOriginalPinnedPost?: boolean;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -113,11 +115,13 @@ const LiveBlockContainer = ({
 	format,
 	blockTitle,
 	blockFirstPublished,
+	blockFirstPublishedDisplay,
 	blockLink,
 	isLiveUpdate,
 	contributors,
 	isPinnedPost,
 	supportsDarkMode,
+	isOriginalPinnedPost = false,
 }: Props) => {
 	return (
 		<article
@@ -156,9 +160,12 @@ const LiveBlockContainer = ({
 				{blockFirstPublished && (
 					<FirstPublished
 						firstPublished={blockFirstPublished}
+						firstPublishedDisplay={blockFirstPublishedDisplay}
 						blockLink={blockLink}
 						isPinnedPost={isPinnedPost}
 						supportsDarkMode={supportsDarkMode}
+						isOriginalPinnedPost={isOriginalPinnedPost}
+						format={format}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}

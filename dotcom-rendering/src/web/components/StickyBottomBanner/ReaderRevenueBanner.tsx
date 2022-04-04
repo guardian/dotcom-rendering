@@ -19,6 +19,7 @@ import {
 	MODULES_VERSION,
 	hasOptedOutOfArticleCount,
 	lazyFetchEmailWithTimeout,
+	hasCmpConsentForBrowserId,
 } from '../../lib/contributions';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 import { getZIndex } from '../../lib/getZIndex';
@@ -100,6 +101,8 @@ const buildPayload = async ({
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
 	const articleCountToday = getArticleCountToday(articleCounts);
 
+	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
+
 	return {
 		tracking: {
 			ophanPageId: window.guardian.config.ophan.pageViewId,
@@ -125,6 +128,9 @@ const buildPayload = async ({
 			sectionId,
 			tagIds: tags.map((tag) => tag.id),
 			contentType,
+			browserId: (await hasCmpConsentForBrowserId())
+				? browserId || undefined
+				: undefined,
 		},
 	};
 };

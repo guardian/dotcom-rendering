@@ -35,9 +35,6 @@ describe('MostViewedFooterData', () => {
 					display: ArticleDisplay.Standard,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				switches={{}}
-				pageIsSensitive={false}
-				isDev={false}
 			/>,
 		);
 
@@ -74,9 +71,6 @@ describe('MostViewedFooterData', () => {
 					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				switches={{}}
-				pageIsSensitive={false}
-				isDev={false}
 			/>,
 		);
 
@@ -109,9 +103,6 @@ describe('MostViewedFooterData', () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				})}
-				switches={{}}
-				pageIsSensitive={false}
-				isDev={false}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -155,9 +146,6 @@ describe('MostViewedFooterData', () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				})}
-				switches={{}}
-				pageIsSensitive={false}
-				isDev={false}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -200,9 +188,6 @@ describe('MostViewedFooterData', () => {
 					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				switches={{}}
-				pageIsSensitive={false}
-				isDev={false}
 			/>,
 		);
 
@@ -221,9 +206,6 @@ describe('MostViewedFooterData', () => {
 					theme: ArticlePillar.News,
 				})}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				switches={{}}
-				pageIsSensitive={false}
-				isDev={false}
 			/>,
 		);
 

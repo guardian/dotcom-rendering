@@ -24,6 +24,7 @@ import { getZIndex } from '../../lib/getZIndex';
 import { Stuck } from '../lib/stickiness';
 import { getCurrentPillar } from '../../lib/layoutHelpers';
 import { Island } from '../../components/Island';
+import { decidePalette } from '../../lib/decidePalette';
 
 const hasMainMediaStyles = css`
 	height: 100vh;
@@ -44,7 +45,6 @@ interface Props {
 	CAPI: CAPIType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
@@ -98,12 +98,7 @@ const Box = ({
 	</div>
 );
 
-export const ImmersiveHeader = ({
-	CAPI,
-	NAV,
-	format,
-	palette,
-}: Props): JSX.Element => {
+export const ImmersiveHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 	const {
 		config: { host },
 	} = CAPI;
@@ -143,6 +138,8 @@ export const ImmersiveHeader = ({
 			/>
 		</div>
 	);
+
+	const palette = decidePalette(format);
 
 	return (
 		<>
@@ -263,6 +260,13 @@ export const ImmersiveHeader = ({
 										headlineString={CAPI.headline}
 										tags={CAPI.tags}
 										byline={CAPI.author.byline}
+										webPublicationDateDeprecated={
+											CAPI.webPublicationDateDeprecated
+										}
+										hasStarRating={
+											!!CAPI.starRating ||
+											CAPI.starRating === 0
+										}
 									/>
 								</ContainerLayout>
 							</Box>

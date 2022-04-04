@@ -295,12 +295,7 @@ export const InteractiveImmersiveLayout = ({
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<ImmersiveHeader
-				CAPI={CAPI}
-				NAV={NAV}
-				format={format}
-				palette={palette}
-			/>
+			<ImmersiveHeader CAPI={CAPI} NAV={NAV} format={format} />
 			<main>
 				<ElementContainer
 					showTopBorder={false}
@@ -323,7 +318,7 @@ export const InteractiveImmersiveLayout = ({
 							{format.design === ArticleDesign.PhotoEssay ? (
 								<></>
 							) : (
-								<Border palette={palette} />
+								<Border format={format} />
 							)}
 						</GridItem>
 						<GridItem area="title" element="aside">
@@ -363,6 +358,13 @@ export const InteractiveImmersiveLayout = ({
 											headlineString={CAPI.headline}
 											tags={CAPI.tags}
 											byline={CAPI.author.byline}
+											webPublicationDateDeprecated={
+												CAPI.webPublicationDateDeprecated
+											}
+											hasStarRating={
+												!!CAPI.starRating ||
+												CAPI.starRating === 0
+											}
 										/>
 									</div>
 								)}
@@ -490,26 +492,28 @@ export const InteractiveImmersiveLayout = ({
 					pageFooter={CAPI.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPI.nav.readerRevenueLinks.header}
+					edition={CAPI.editionId}
+					contributionsServiceUrl={CAPI.contributionsServiceUrl}
 				/>
 			</ElementContainer>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						abTestSwitches={CAPI.config.switches}
 						contentType={CAPI.contentType}
 						contributionsServiceUrl={CAPI.contributionsServiceUrl}
 						idApiUrl={CAPI.config.idApiUrl}
-						isDev={CAPI.config.isDev ?? false}
 						isMinuteArticle={CAPI.pageType.isMinuteArticle}
 						isPaidContent={CAPI.pageType.isPaidContent}
 						isPreview={!!CAPI.config.isPreview}
+						isSensitive={CAPI.config.isSensitive}
 						keywordsId={CAPI.config.keywordIds}
 						pageId={CAPI.pageId}
-						pageIsSensitive={CAPI.config.isSensitive}
 						section={CAPI.config.section}
 						sectionName={CAPI.sectionName}
 						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+						switches={CAPI.config.switches}
 						tags={CAPI.tags}
 					/>
 				</Island>
