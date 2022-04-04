@@ -13,6 +13,7 @@ import { Caption } from './Caption';
 
 type Props = {
 	id: string;
+	elementId: string;
 	mediaTitle?: string;
 	altText?: string;
 	assetId: string;
@@ -70,6 +71,7 @@ const expiredSVGWrapperStyles = css`
 
 export const YoutubeBlockComponent = ({
 	id,
+	elementId,
 	assetId,
 	mediaTitle,
 	altText,
@@ -191,7 +193,7 @@ export const YoutubeBlockComponent = ({
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
-				elementId={id}
+				elementId={elementId}
 				videoId={assetId}
 				overrideImage={
 					overrideImage
