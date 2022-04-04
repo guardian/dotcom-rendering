@@ -174,7 +174,7 @@ describe('YouTube Atom', function () {
 		cy.get(overlaySelector).should('not.exist');
 	});
 
-	it('plays in video when 2 same videos exist in page', function () {
+	it('plays in video when same video exists both in body and in main media of the blog', function () {
 		// cy.intercept('**youtube**').as('callToYouTube');
 		cy.visit(
 			'/Article?url=https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
@@ -191,17 +191,22 @@ describe('YouTube Atom', function () {
 			.parent()
 			.should('have.attr', 'data-gu-ready', 'true');
 
-		// Make sure overlay for both videos is displayed
+		// Make sure overlays for both videos are displayed
+		const mediaDiv = 'div[data-gu-name="media"]';
+		const bodyDiv = 'div[data-gu-name="body"]';
 		const overlaySelectorforMultipleVideos = `[data-cy^="youtube-overlay-qkC9z-dSAOE"]`;
-		cy.get(overlaySelectorforMultipleVideos)
-			.should('have.length', 2)
-			.each((item) => {
-				cy.wrap(item).should('be.visible');
-			});
+		
+		cy.get(mediaDiv).within(() => {
+			cy.get(overlaySelectorforMultipleVideos)
+		}).should('have.length', 1).and('be.visible');
+
+		cy.get(bodyDiv).within(() => {
+			cy.get(overlaySelectorforMultipleVideos)
+		}).should('have.length', 1).and('be.visible');
 
 		// Listen for the ophan call made when the video is played
 		interceptPlayEvent(
-			'gu-video-youtube-1e89d5bd-489e-470a-857e-4f30e85b5aec',
+			'gu-video-youtube-1e89d5bd-489e-470a-857e-4f30e85b5aec'
 		).as('ophanCall');
 
 		// Listen for the YouTube embed call made when the video is played
@@ -213,17 +218,33 @@ describe('YouTube Atom', function () {
 			rejectAll: false,
 		}).as('youtubeEmbed');
 
-		// Play videos
-		cy.get(overlaySelectorforMultipleVideos).each((item) => {
-			cy.wrap(item).click();
+		// Play main media video
+		cy.get(mediaDiv).within(() => {
+			cy.get(overlaySelectorforMultipleVideos).click()
 		});
 
+		// check if the ophan call and YouTube embed call were made
 		cy.wait('@ophanCall', { timeout: 30000 });
+		cy.wait('@youtubeEmbed', { timeout: 30000 });
+		
+		// check if the main media video overplay is gone
+		cy.get(mediaDiv).within(() => {
+			cy.get(overlaySelectorforMultipleVideos).should('not.exist')
+		});
 
+		// Play body video
+		cy.get(bodyDiv).within(() => {
+			cy.get(overlaySelectorforMultipleVideos).click()
+		});
+
+		// check if the second ophan call and YouTube embed call were made
+		cy.wait('@ophanCall', { timeout: 30000 });
 		cy.wait('@youtubeEmbed', { timeout: 30000 });
 
-		// after videos are played, overlay is gone
-		cy.get(overlaySelectorforMultipleVideos).should('not.exist');
+		// check if the body video overplay is gone
+		cy.get(bodyDiv).within(() => {
+			cy.get(overlaySelectorforMultipleVideos).should('not.exist')
+		});
 	});
 
 	it('still plays the video if the reader rejects consent', function () {
