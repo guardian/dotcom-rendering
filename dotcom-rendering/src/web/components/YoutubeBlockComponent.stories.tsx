@@ -57,6 +57,7 @@ export const Default = () => {
 				expired={false}
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -93,6 +94,7 @@ export const Vertical = () => {
 				role="inline"
 				height={259}
 				width={460}
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -130,6 +132,7 @@ export const Expired = () => {
 				role="inline"
 				height={259}
 				width={460}
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -168,6 +171,7 @@ export const WithOverlayImage = () => {
 				role="inline"
 				height={259}
 				width={460}
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -227,6 +231,7 @@ export const WithPosterImage = () => {
 				role="inline"
 				height={259}
 				width={460}
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -287,6 +292,7 @@ export const WithPosterAndOverlayImage = () => {
 				role="inline"
 				height={259}
 				width={460}
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

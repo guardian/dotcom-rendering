@@ -32,7 +32,7 @@ type Props = {
 	width?: number;
 	duration?: number; // in seconds
 	origin?: string;
-	stickyVideos?: boolean;
+	stickyVideos: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage: string) => css`
@@ -232,7 +232,7 @@ export const YoutubeBlockComponent = ({
 				eventEmitters={[ophanTracking, gaTracking]}
 				pillar={format.theme}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
-				shouldStick={!!stickyVideos}
+				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
 			/>
 			{!hideCaption && (
