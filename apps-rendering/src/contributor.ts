@@ -40,7 +40,7 @@ const tagToContributor =
 			fromNullable,
 			map((url) => ({
 				srcset: contributorSrcset(url, salt, Dpr.One),
-				src: src(salt, url, 300, Dpr.One),
+				src: src(salt, url, 140, Dpr.One),
 				dpr2Srcset: contributorSrcset(url, salt, Dpr.Two),
 				height: 192,
 				width: 192,
