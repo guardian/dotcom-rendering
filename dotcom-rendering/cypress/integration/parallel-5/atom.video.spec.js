@@ -195,18 +195,24 @@ describe('YouTube Atom', function () {
 		const mediaDiv = 'div[data-gu-name="media"]';
 		const bodyDiv = 'div[data-gu-name="body"]';
 		const overlaySelectorforMultipleVideos = `[data-cy^="youtube-overlay-qkC9z-dSAOE"]`;
-		
-		cy.get(mediaDiv).within(() => {
-			cy.get(overlaySelectorforMultipleVideos)
-		}).should('have.length', 1).and('be.visible');
 
-		cy.get(bodyDiv).within(() => {
-			cy.get(overlaySelectorforMultipleVideos)
-		}).should('have.length', 1).and('be.visible');
+		cy.get(mediaDiv)
+			.within(() => {
+				cy.get(overlaySelectorforMultipleVideos);
+			})
+			.should('have.length', 1)
+			.and('be.visible');
+
+		cy.get(bodyDiv)
+			.within(() => {
+				cy.get(overlaySelectorforMultipleVideos);
+			})
+			.should('have.length', 1)
+			.and('be.visible');
 
 		// Listen for the ophan call made when the video is played
 		interceptPlayEvent(
-			'gu-video-youtube-1e89d5bd-489e-470a-857e-4f30e85b5aec'
+			'gu-video-youtube-1e89d5bd-489e-470a-857e-4f30e85b5aec',
 		).as('ophanCall');
 
 		// Listen for the YouTube embed call made when the video is played
@@ -220,21 +226,21 @@ describe('YouTube Atom', function () {
 
 		// Play main media video
 		cy.get(mediaDiv).within(() => {
-			cy.get(overlaySelectorforMultipleVideos).click()
+			cy.get(overlaySelectorforMultipleVideos).click();
 		});
 
 		// check if the ophan call and YouTube embed call were made
 		cy.wait('@ophanCall', { timeout: 30000 });
 		cy.wait('@youtubeEmbed', { timeout: 30000 });
-		
+
 		// check if the main media video overplay is gone
 		cy.get(mediaDiv).within(() => {
-			cy.get(overlaySelectorforMultipleVideos).should('not.exist')
+			cy.get(overlaySelectorforMultipleVideos).should('not.exist');
 		});
 
 		// Play body video
 		cy.get(bodyDiv).within(() => {
-			cy.get(overlaySelectorforMultipleVideos).click()
+			cy.get(overlaySelectorforMultipleVideos).click();
 		});
 
 		// check if the second ophan call and YouTube embed call were made
@@ -243,7 +249,7 @@ describe('YouTube Atom', function () {
 
 		// check if the body video overplay is gone
 		cy.get(bodyDiv).within(() => {
-			cy.get(overlaySelectorforMultipleVideos).should('not.exist')
+			cy.get(overlaySelectorforMultipleVideos).should('not.exist');
 		});
 	});
 
