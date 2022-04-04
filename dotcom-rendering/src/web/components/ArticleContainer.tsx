@@ -67,6 +67,10 @@ const articleAdStyles = css`
 		margin: 12px auto;
 		text-align: center;
 		background-color: ${neutral[97]};
+		/* We don't float right inline1 so prevent merger with any nearby rich-links that float left */
+		${until.leftCol} {
+			clear: left;
+		}
 	}
 	.ad-slot--inline:not(.ad-slot--inline1),
 	.ad-slot-liveblog--inline:not(.ad-slot--inline1) {
