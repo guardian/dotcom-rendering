@@ -2802,10 +2802,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^23.0.0":
-  version "23.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.0.0.tgz#09074dce6836bf35d7c911ac2427d65f3d0aeb8b"
-  integrity sha512-s0Fwqf/cZmUd/pXk1+m/bPmScqCUcXO15wWhhTPQT9mLuDxkampMwqz3hiAjmae1Rc3RpKu/WyMOfK4CcVokMA==
+"@guardian/atoms-rendering@^23.0.2":
+  version "23.0.2"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.0.2.tgz#022ade58a313b4b5c9858d624d7db751dabb31d1"
+  integrity sha512-82PGb+yzs6wLAxpn/kuDoWxYlEuXNEJpJ7ONkUV8k8tesGi2tEiDEwH5/gURgmpe/I+GkKm2n46bsxRczZ74FA==
   dependencies:
     youtube-player "^5.5.2"
 
