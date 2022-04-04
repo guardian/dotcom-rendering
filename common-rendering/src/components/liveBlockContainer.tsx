@@ -79,15 +79,15 @@ const BlockByline = ({
 			`}
 		>
 			{imageUrl && (
-				<div style={{ width: '36px', height: '36px' }}>
+				<div style={{ width: '2.25rem', height: '2.25rem' }}>
 					<img
 						src={imageUrl}
 						alt={name}
 						css={css`
 							border-radius: 100%;
 							object-fit: cover;
-							height: 36px;
-							width: 36px;
+							height: 2.25rem;
+							width: 2.25rem;
 							background-color: ${background.avatar(format)};
 						`}
 					/>
