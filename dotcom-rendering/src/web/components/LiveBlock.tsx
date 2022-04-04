@@ -77,7 +77,6 @@ export const LiveBlock = ({
 			blockLink={blockLink}
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
-			avatarBackgroundColor={palette.background.avatar}
 			isPinnedPost={isPinnedPost}
 			supportsDarkMode={false}
 			format={format}
