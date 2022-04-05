@@ -168,7 +168,7 @@ export const Liveness = ({
 
 	const onAutoFilterSuccess = (data: FilterResult) => {
 		console.log('>>>> data >>>', data);
-	}
+	};
 
 	/**
 	 * This function runs (once) after every successful useApi call. This is useful because it
@@ -231,11 +231,14 @@ export const Liveness = ({
 		onSuccess,
 	});
 
-	useApi(`https://ner.code.dev-gutools.co.uk/v1/top-mentions?entities=PERSON,LOC,GPE&top=10&path=/${pageId}`, {
-		refreshInterval: 10_000,
-		refreshWhenHidden: true,
-		onSuccess: onAutoFilterSuccess,
-	})
+	useApi(
+		`https://ner.code.dev-gutools.co.uk/v1/top-mentions?entities=PERSON,LOC,GPE&top=10&path=/${pageId}`,
+		{
+			refreshInterval: 10_000,
+			refreshWhenHidden: true,
+			onSuccess: onAutoFilterSuccess,
+		},
+	);
 
 	useEffect(() => {
 		document.title =
