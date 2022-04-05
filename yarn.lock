@@ -2853,6 +2853,11 @@
   resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-3.8.1.tgz#7c07ef3436d246a29c36aefbbd14a643af6df61c"
   integrity sha512-vZ6wjYe4s8kKC9uXt6V/Vse/QjTAsSGhYnVXjjsJMPrjeXSJ0vJGvn/zv6/OkuRwhchN8L9e89Ml7wgvZ4jtzg==
 
+"@guardian/libs@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-4.0.0.tgz#f178fa929c5ae1be6b0a6c752471139da5128ba5"
+  integrity sha512-zMFmFPTt6nJjCQQBBLAFpSU+E1Q2hhpbQ4e38RdhikUFGKWQpKVo+DfUzRLqX1/LXEfb3ywqXGfk5vOsPG7TDw==
+
 "@guardian/prettier@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@guardian/prettier/-/prettier-0.5.0.tgz#d8ea25cc396f31bd4baedb8f6d7d3727a9af1fa7"
@@ -19622,9 +19627,9 @@ type-detect@4.0.8:
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
 type-fest@^0.18.0, type-fest@^0.20.2, type-fest@^0.21.3, type-fest@^0.6.0, type-fest@^0.8.1, type-fest@^1.4.0, type-fest@^2.8.0:
-  version "2.12.1"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.12.1.tgz#d2be8f50bf5f8f0a5fd916d29bf3e98c17e960be"
-  integrity sha512-AiknQSEqKVGDDjtZqeKrUoTlcj7FKhupmnVUgz6KoOKtvMwRGE6hUNJ/nVear+h7fnUPO1q/htSkYKb1pyntkQ==
+  version "2.12.2"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.12.2.tgz#80a53614e6b9b475eb9077472fb7498dc7aa51d0"
+  integrity sha512-qt6ylCGpLjZ7AaODxbpyBZSs9fCI9SkL3Z9q2oxMBQhs/uyY+VD8jHA8ULCGmWQJlBgqvO3EJeAngOHD8zQCrQ==
 
 type-is@~1.6.18:
   version "1.6.18"
