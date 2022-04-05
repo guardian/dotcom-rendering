@@ -8,8 +8,12 @@ import { darkModeCss } from '../lib';
 // TODO: update this code to use shared version when it is available
 const padString = (time: number) => (time < 10 ? `0${time}` : time);
 
+const fallbackDate = (date: Date) =>
+	`${padString(date.getHours())}:${padString(date.getMinutes())}`;
+
 const FirstPublished = ({
 	firstPublished,
+	firstPublishedDisplay,
 	blockLink,
 	isPinnedPost,
 	supportsDarkMode,
@@ -17,6 +21,7 @@ const FirstPublished = ({
 	format,
 }: {
 	firstPublished: number;
+	firstPublishedDisplay?: string;
 	blockLink: string;
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
@@ -68,9 +73,7 @@ const FirstPublished = ({
 					`}
 				`}
 			>
-				{`${padString(publishedDate.getHours())}:${padString(
-					publishedDate.getMinutes(),
-				)}`}
+				{firstPublishedDisplay || fallbackDate(publishedDate)}
 			</span>
 			{isOriginalPinnedPost && (
 				<span
