@@ -61,6 +61,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import { AutomaticFilter } from '../components/AutomaticFilter.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -894,6 +895,9 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="right-column">
+								<Island>
+									<AutomaticFilter pageId={CAPI.pageId} />
+								</Island>
 								<div
 									css={css`
 										height: 100%;
