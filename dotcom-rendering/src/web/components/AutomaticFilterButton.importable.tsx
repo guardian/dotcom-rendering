@@ -4,36 +4,28 @@ type Props = {
 	filter: Filter;
 };
 const AutomaticFilterButton = ({ filter }: Props) => {
+	const handleClick = () => {
+		const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
+		const allBlocks =
+			blogBody?.querySelectorAll<HTMLElement>('article .block');
+
+		allBlocks?.forEach((block) => {
+			const blockIds = filter.blocks.map((blockId) => `block-${blockId}`);
+			if (blockIds.includes(block.id)) {
+				block.classList.add('reveal');
+				block.classList.remove('pending');
+			} else {
+				block.classList.add('pending');
+				block.classList.remove('reveal');
+			}
+		});
+	};
+
 	return (
 		<Button
 			id="automatic-filter-button"
-			onClick={() => {
-				const blogBody =
-					document.querySelector<HTMLElement>('#liveblog-body');
-				const allBlocks =
-					blogBody?.querySelectorAll<HTMLElement>('article .block');
-
-				allBlocks?.forEach((block) => {
-					console.log('>>> block >>>', block);
-					const blockIds = filter.blocks.map(
-						(blockId) => `block-${blockId}`,
-					);
-					if (blockIds.includes(block.id)) {
-						console.log('>>> revealing block.id >>>', block.id);
-						block.classList.add('reveal');
-						block.classList.remove('pending');
-					} else {
-						console.log('>>> hiding block.id >>>', block.id);
-						block.classList.add('pending');
-						block.classList.remove('reveal');
-					}
-				});
-
-				console.log(
-					'>>> allBlocks updated >>>',
-					blogBody?.querySelectorAll<HTMLElement>('article .block'),
-				);
-			}}
+			value={filter.blocks[0]}
+			onClick={handleClick}
 		>
 			{filter.name}
 		</Button>

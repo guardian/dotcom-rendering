@@ -745,6 +745,9 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 											/>
 										</Island>
 									</Hide>
+									<Island>
+										<AutomaticFilter pageId={CAPI.pageId} />
+									</Island>
 									<Accordion
 										supportsDarkMode={false}
 										accordionTitle="Live feed"
@@ -915,11 +918,6 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 									`}
 								>
 									<RightColumn>
-										<Island>
-											<AutomaticFilter
-												pageId={CAPI.pageId}
-											/>
-										</Island>
 										<AdSlot
 											position="right"
 											display={format.display}

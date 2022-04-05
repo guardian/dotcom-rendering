@@ -271,6 +271,17 @@ export const Liveness = ({
 		};
 	}, [numHiddenBlocks, onFirstPage, topOfBlogVisible]);
 
+	useEffect(() => {
+		const autoButtons = document.querySelectorAll<HTMLElement>(
+			'#automatic-filter-button',
+		);
+		Array.from(autoButtons).map((button) =>
+			button.addEventListener('click', (e: any) =>
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+				console.log('button clicked', e?.target.value),
+			),
+		);
+	});
 	const handleToastClick = useCallback(() => {
 		// We adjust the position we scroll readers to based on if there is a pinned
 		// post or not. If there is we want to scroll them to a position below it, if
