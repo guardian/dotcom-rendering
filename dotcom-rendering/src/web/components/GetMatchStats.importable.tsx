@@ -1,3 +1,5 @@
+import { ArticleDesign } from '@guardian/libs';
+import { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
 
 import { Placeholder } from './Placeholder';
@@ -12,11 +14,16 @@ type Props = {
 const Loading = () => <Placeholder height={800} />;
 
 export const GetMatchStats = ({ matchUrl, format }: Props) => {
+	const options: SWRConfiguration = {};
+	// If this blog is live then poll for new stats
+	if (format.design === ArticleDesign.LiveBlog) {
+		options.refreshInterval = 14_000;
+	}
 	const { data, error, loading } = useApi<{
 		id: string;
 		homeTeam: TeamType;
 		awayTeam: TeamType;
-	}>(matchUrl);
+	}>(matchUrl, options);
 
 	if (loading) return <Loading />;
 	if (error) {
