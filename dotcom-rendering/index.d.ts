@@ -873,6 +873,19 @@ type LiveUpdateType = {
 	html: string;
 	mostRecentBlockId: string;
 };
+interface Filter {
+	name: string;
+	type: string;
+	count: number;
+	blocks: string[];
+	percentage_blocks: number;
+}
+
+interface FilterResult {
+	results: Filter[];
+	model: string;
+	entityType: string[];
+}
 
 // ------------
 // RichLinks //

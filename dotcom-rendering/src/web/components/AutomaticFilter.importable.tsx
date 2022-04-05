@@ -5,20 +5,6 @@ type Props = {
 	pageId: string;
 };
 
-interface Filter {
-	name: string;
-	type: string;
-	count: number;
-	blocks: string[];
-	percentage_blocks: number;
-}
-
-interface FilterResult {
-	results: Filter[];
-	model: string;
-	entityType: string[];
-}
-
 export const AutomaticFilter = ({ pageId }: Props) => {
 	const { data, error }: { data?: FilterResult; error?: any } = useApi(
 		`https://ner.code.dev-gutools.co.uk/v1/top-mentions?entities=PERSON,LOC,GPE&top=10&path=/${pageId}`,
@@ -37,8 +23,8 @@ export const AutomaticFilter = ({ pageId }: Props) => {
 
 	return data ? (
 		<div id="just-for-testing">
-			{data?.results.map((result: Filter) => (
-				<AutomaticFilterButton label={result.name} />
+			{data?.results.map((filter: Filter) => (
+				<AutomaticFilterButton filter={filter} />
 			))}
 		</div>
 	) : null;

@@ -1,16 +1,18 @@
 import { Button } from '@guardian/source-react-components';
 
 type Props = {
-	label: string;
+	filter: Filter;
 };
-const AutomaticFilterButton = ({ label }: Props) => {
+const AutomaticFilterButton = ({ filter }: Props) => {
 	return (
 		<Button
+			id="automatic-filter-button"
 			onClick={() => {
-				console.log('button clicked', label);
+				console.log(filter.blocks);
+				console.log('>>> <<<<');
 			}}
 		>
-			{label}
+			{filter.name}
 		</Button>
 	);
 };
