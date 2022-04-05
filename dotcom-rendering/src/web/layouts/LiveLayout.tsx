@@ -895,9 +895,6 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="right-column">
-								<Island>
-									<AutomaticFilter pageId={CAPI.pageId} />
-								</Island>
 								<div
 									css={css`
 										height: 100%;
@@ -918,6 +915,11 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 									`}
 								>
 									<RightColumn>
+										<Island>
+											<AutomaticFilter
+												pageId={CAPI.pageId}
+											/>
+										</Island>
 										<AdSlot
 											position="right"
 											display={format.display}
