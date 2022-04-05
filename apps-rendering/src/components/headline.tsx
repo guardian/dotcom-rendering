@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
+import { background, border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -11,6 +11,7 @@ import {
 	headline,
 	neutral,
 	remSpace,
+	space,
 	textSans,
 } from '@guardian/source-foundations';
 import StarRating from 'components/starRating';
@@ -153,12 +154,81 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const Headline = ({ item }: Props): ReactElement => (
-	<h1 css={getStyles(item)}>
-		<span>{item.headline}</span>
-		<StarRating item={item} />
-	</h1>
+// const Headline = ({ item }: Props): ReactElement => (
+// 	<h1 css={getStyles(item)}>
+// 		<span>{item.headline}</span>
+// 		<StarRating item={item} />
+// 	</h1>
+// );
+
+const headlineTagWrapper = css`
+	margin-left: 6px;
+	margin-top: 6px;
+`;
+
+const headlineTagStyles = (format: ArticleFormat) => css`
+	background-color: ${background.headlineTag(format)};
+	color: ${neutral[100]};
+	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
+	box-shadow: 0.25rem 0 0 ${background.headlineTag(format)}, -0.375rem 0 0 ${background.headlineTag(format)};
+	display: inline-block;
+	box-decoration-break: clone;
+`;
+
+const invertedStyles = (format: ArticleFormat) => css`
+	position: relative;
+	white-space: pre-wrap;
+	padding-bottom: ${space[1]}px;
+	padding-right: ${space[1]}px;
+	box-shadow: -6px 0 0 ${background.headline(format)};
+	/* Box decoration is required to push the box shadow out on Firefox */
+	box-decoration-break: clone;
+`;
+
+const headlineStyles = (format: ArticleFormat): SerializedStyles => {
+	return css`
+	color: ${neutral[100]};
+		background-color: ${neutral[0]};
+		${invertedStyles(format)};
+		display: inline;
+		`;
+}
+
+export const HeadlineTag = ({
+	tagText,
+	format,
+}: {
+	tagText: string;
+	format: ArticleFormat;
+}) => (
+	<div css={headlineTagWrapper}>
+		<div css={headlineTagStyles(format)}>{tagText}</div>
+	</div>
 );
+
+
+const Headline = ({ item }: Props): ReactElement => {
+	const format = { design: item.design, theme: item.theme, display: item.display};
+	switch (item.design) {
+		case ArticleDesign.Interview:
+			return (
+				<>
+			<h1 css={getStyles(item)}>
+			<HeadlineTag tagText="Interview" format={format} />
+
+				<span css={headlineStyles(format)}>{item.headline}</span>
+				<StarRating item={item} />
+			</h1>
+			</>);
+		default:
+			console.log(item.design)
+			return (<h1 css={getStyles(item)}>
+			<span>{item.headline}</span>
+			<StarRating item={item} />
+		</h1>)
+	}
+
+}
 
 // ----- Exports ----- //
 

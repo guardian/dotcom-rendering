@@ -179,7 +179,8 @@ type Item =
 	| Letter
 	| Obituary
 	| Editorial
-	| Correction;
+	| Correction
+	| Interview;
 
 // ----- Convenience Types ----- //
 
