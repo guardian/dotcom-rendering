@@ -2,7 +2,7 @@ import { cmpIframe } from '../../lib/cmpIframe';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
-const interceptPlayEvent = (id) => {
+const interceptPlayEvent = ({ id }) => {
 	return cy.intercept(
 		{
 			url: 'http://ophan.theguardian.com/img/2?**',
@@ -104,9 +104,9 @@ describe('YouTube Atom', function () {
 		cy.window().its('onYouTubeIframeAPIReady').should('not.exist');
 
 		// Listen for the ophan call made when the video is played
-		interceptPlayEvent(
-			'gu-video-youtube-2b33a7b7-e639-4232-9ecd-0fb920fa8147',
-		).as('ophanCall');
+		interceptPlayEvent({
+			id: 'gu-video-youtube-2b33a7b7-e639-4232-9ecd-0fb920fa8147',
+		}).as('ophanCall');
 
 		// Listen for the YouTube embed call made when the video is played
 		interceptYouTubeEmbed({
@@ -150,9 +150,9 @@ describe('YouTube Atom', function () {
 		cy.get(overlaySelector).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
-		interceptPlayEvent(
-			'gu-video-youtube-2bc6f709-865e-49ae-b01b-8fc38eb4e9a7',
-		).as('ophanCall');
+		interceptPlayEvent({
+			id: 'gu-video-youtube-2bc6f709-865e-49ae-b01b-8fc38eb4e9a7',
+		}).as('ophanCall');
 
 		// Listen for the YouTube embed call made when the video is played
 		interceptYouTubeEmbed({
@@ -211,9 +211,9 @@ describe('YouTube Atom', function () {
 			.and('be.visible');
 
 		// Listen for the ophan call made when the video is played
-		interceptPlayEvent(
-			'gu-video-youtube-1e89d5bd-489e-470a-857e-4f30e85b5aec',
-		).as('ophanCall');
+		interceptPlayEvent({
+			id: 'gu-video-youtube-1e89d5bd-489e-470a-857e-4f30e85b5aec',
+		}).as('ophanCall');
 
 		// Listen for the YouTube embed call made when the video is played
 		interceptYouTubeEmbed({
@@ -274,9 +274,9 @@ describe('YouTube Atom', function () {
 		cy.get(overlaySelector).should('be.visible');
 
 		// Listen for the ophan call made when the video is played
-		interceptPlayEvent(
-			'gu-video-youtube-2bc6f709-865e-49ae-b01b-8fc38eb4e9a7',
-		).as('ophanCall');
+		interceptPlayEvent({
+			id: 'gu-video-youtube-2bc6f709-865e-49ae-b01b-8fc38eb4e9a7',
+		}).as('ophanCall');
 
 		// Listen for the YouTube embed call made when the video is played
 		interceptYouTubeEmbed({
