@@ -18,6 +18,20 @@ type Props = {
 	hasPinnedPost: boolean;
 };
 
+interface Filter {
+	name: string;
+	type: string;
+	count: number;
+	blocks: string[];
+	percentage_blocks: number;
+}
+
+interface FilterResult {
+	results: Filter[];
+	model: string;
+	entityType: string[];
+}
+
 const isServer = typeof window === 'undefined';
 
 const topOfBlog: Element | null = !isServer
@@ -152,6 +166,10 @@ export const Liveness = ({
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 
+	const onAutoFilterSuccess = (data: FilterResult) => {
+		console.log('>>>> data >>>', data);
+	}
+
 	/**
 	 * This function runs (once) after every successful useApi call. This is useful because it
 	 * allows us to avoid the problems of imperative code being executed multiple times
@@ -212,6 +230,12 @@ export const Liveness = ({
 		refreshWhenHidden: true,
 		onSuccess,
 	});
+
+	useApi(`https://ner.code.dev-gutools.co.uk/v1/top-mentions?entities=PERSON,LOC,GPE&top=10&path=/${pageId}`, {
+		refreshInterval: 10_000,
+		refreshWhenHidden: true,
+		onSuccess: onAutoFilterSuccess,
+	})
 
 	useEffect(() => {
 		document.title =
