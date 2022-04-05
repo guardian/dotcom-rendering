@@ -95,7 +95,7 @@ const buildCsp = (
 	`
     default-src 'self';
     style-src ${styleSrc(styles, thirdPartyEmbed.twitter, hasInlineStyles)}
-    img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${
+    img-src 'self' data: https://static.theguardian.com https://*.guim.co.uk ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:'
 			: ''
@@ -135,7 +135,7 @@ function buildCspEditions(
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-	img-src 'self' https://static.theguardian.com https://*.guim.co.uk ${
+	img-src 'self' data: https://static.theguardian.com https://*.guim.co.uk ${
 		thirdPartyEmbed.twitter
 			? 'https://platform.twitter.com https://syndication.twitter.com https://pbs.twimg.com data:'
 			: ''
