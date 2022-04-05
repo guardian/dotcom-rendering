@@ -174,7 +174,7 @@ describe('YouTube Atom', function () {
 		cy.get(overlaySelector).should('not.exist');
 	});
 
-	it('plays in video when same video exists both in body and in main media of the blog', function () {
+	it('plays when the same video exists both in body and in main media of the blog', function () {
 		// cy.intercept('**youtube**').as('callToYouTube');
 		cy.visit(
 			'/Article?url=https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates?dcr=true',
@@ -253,7 +253,7 @@ describe('YouTube Atom', function () {
 		});
 	});
 
-	it('still plays the video if the reader rejects consent', function () {
+	it('plays the video if the reader rejects consent', function () {
 		cy.visit(
 			'/Article?url=https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
 		);
