@@ -177,7 +177,7 @@ describe('YouTube Atom', function () {
 	it('plays in video when same video exists both in body and in main media of the blog', function () {
 		// cy.intercept('**youtube**').as('callToYouTube');
 		cy.visit(
-			'/Article?url=https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
+			'/Article?url=https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates?dcr=true',
 		);
 		cmpIframe().contains("It's your choice");
 		cmpIframe().find("[title='Manage my cookies']").click();
