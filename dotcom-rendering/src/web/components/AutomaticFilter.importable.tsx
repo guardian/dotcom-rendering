@@ -42,11 +42,13 @@ export const AutomaticFilter = ({
 
 	return (
 		<div css={ContainerStyles}>
-			<AutomaticFilterButton
-				selectedFilter={selectedFilter}
-				setSelectedFilter={setSelectedFilter}
-				filter={showAllFilter}
-			/>
+			{automaticFilterData && automaticFilterData.results.length > 0 && (
+				<AutomaticFilterButton
+					selectedFilter={selectedFilter}
+					setSelectedFilter={setSelectedFilter}
+					filter={showAllFilter}
+				/>
+			)}
 			{automaticFilterData?.results.map((filter: Filter) => (
 				<AutomaticFilterButton
 					selectedFilter={selectedFilter}
