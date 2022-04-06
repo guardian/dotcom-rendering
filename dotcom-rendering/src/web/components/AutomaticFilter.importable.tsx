@@ -6,6 +6,7 @@ import AutomaticFilterButton from './AutomaticFilterButton.importable';
 
 type Props = {
 	pageId: string;
+	pinnedPostId?: string;
 };
 
 const ContainerStyles = css`
@@ -14,12 +15,28 @@ const ContainerStyles = css`
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-content: space-between;
 `;
 
-export const AutomaticFilter = ({ pageId }: Props) => {
-	const [selectedFilter, setSelectedFilter] = useState('');
+interface Filter {
+	name: string;
+	type: string;
+	count: number;
+	blocks: string[];
+	percentage_blocks: number;
+}
+
+const showAllFilter = {
+	name: 'Show All',
+	type: ' ',
+	count: 0,
+	blocks: [''],
+	percentage_blocks: 0,
+};
+
+export const AutomaticFilter = ({ pageId, pinnedPostId }: Props) => {
+	const [selectedFilter, setSelectedFilter] = useState('show all');
 	const { data, error }: { data?: FilterResult; error?: any } = useApi(
 		`https://ner.code.dev-gutools.co.uk/v1/top-mentions?entities=PERSON,LOC,GPE&top=10&path=/${pageId}`,
 		{
@@ -34,12 +51,18 @@ export const AutomaticFilter = ({ pageId }: Props) => {
 	}
 
 	return data ? (
-		<div id="just-for-testing" css={ContainerStyles}>
+		<div css={ContainerStyles}>
+			<AutomaticFilterButton
+				selectedFilter={selectedFilter}
+				setSelectedFilter={setSelectedFilter}
+				filter={showAllFilter}
+			/>
 			{data?.results.map((filter: Filter) => (
 				<AutomaticFilterButton
 					selectedFilter={selectedFilter}
 					setSelectedFilter={setSelectedFilter}
 					filter={filter}
+					pinnedPostId={pinnedPostId}
 				/>
 			))}
 		</div>

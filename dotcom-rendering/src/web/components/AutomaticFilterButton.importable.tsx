@@ -6,11 +6,13 @@ type Props = {
 	filter: Filter;
 	selectedFilter: string;
 	setSelectedFilter: (name: string) => void;
+	pinnedPostId?: string;
 };
 const AutomaticFilterButton = ({
 	filter,
 	selectedFilter,
 	setSelectedFilter,
+	pinnedPostId,
 }: Props) => {
 	const handleClick = () => {
 		setSelectedFilter(filter.name);
@@ -18,18 +20,31 @@ const AutomaticFilterButton = ({
 		const allBlocks =
 			blogBody?.querySelectorAll<HTMLElement>('article .block');
 
-		allBlocks?.forEach((block) => {
-			const blockIds = filter.blocks.map((blockId) => `block-${blockId}`);
-			if (blockIds.includes(block.id)) {
+		if (filter.name === 'Show All') {
+			allBlocks?.forEach((block) => {
 				block.classList.add('reveal');
-				block.classList.add('filter');
-				block.classList.remove('pending');
-			} else {
-				block.classList.add('pending');
 				block.classList.remove('filter');
-				block.classList.remove('reveal');
-			}
-		});
+				block.classList.remove('pending');
+			});
+		} else {
+			allBlocks?.forEach((block) => {
+				const blockIds = filter.blocks.map(
+					(blockId) => `block-${blockId}`,
+				);
+
+				if (block.id === `block-${pinnedPostId}`) return;
+
+				if (blockIds.includes(block.id)) {
+					block.classList.add('reveal');
+					block.classList.add('filter');
+					block.classList.remove('pending');
+				} else {
+					block.classList.add('pending');
+					block.classList.remove('filter');
+					block.classList.remove('reveal');
+				}
+			});
+		}
 	};
 	return (
 		<Button

@@ -746,7 +746,10 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 										</Island>
 									</Hide>
 									<Island>
-										<AutomaticFilter pageId={CAPI.pageId} />
+										<AutomaticFilter
+											pageId={CAPI.pageId}
+											pinnedPostId={CAPI.pinnedPost?.id}
+										/>
 									</Island>
 									<Accordion
 										supportsDarkMode={false}
