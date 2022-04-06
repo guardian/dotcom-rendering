@@ -194,8 +194,12 @@ describe('YouTube Atom', function () {
 
 		// Wait for hydration
 		cy.get('[data-component=youtube-atom]')
-			.parent()
-			.should('have.attr', 'data-gu-ready', 'true');
+			.should('have.length', 3)
+			.each((item) => {
+				cy.wrap(item)
+					.parent()
+					.should('have.attr', 'data-gu-ready', 'true');
+			});
 
 		// Make sure overlays for both videos are displayed
 		const mediaDiv = 'div[data-gu-name="media"]';
