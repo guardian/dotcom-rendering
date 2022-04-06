@@ -9,6 +9,7 @@ import {
 import { spacefinderOkrMegaTest } from './tests/spacefinder-okr-mega-test';
 import { commercialGptLazyLoad } from './tests/commercial-gpt-lazy-load';
 import { commercialLazyLoadMargin } from './tests/commercial-lazy-load-margin';
+import { prebidPriceGranularity } from './tests/prebid-price-granularity';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -21,4 +22,5 @@ export const tests: ABTest[] = [
 	spacefinderOkrMegaTest,
 	commercialGptLazyLoad,
 	commercialLazyLoadMargin,
+	prebidPriceGranularity,
 ];
