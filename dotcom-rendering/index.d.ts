@@ -212,13 +212,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
+		adUnit: string;
+		customParams: CustomParams;
+		disableAds?: false;
+	}
 	| {
-			disableAds: true;
-	  };
+		disableAds: true;
+	};
 
 interface SectionNielsenAPI {
 	name: string;
@@ -847,7 +847,7 @@ interface Filter {
 interface FilterResult {
 	results: Filter[];
 	model: string;
-	entityType: string[];
+	entity_types: string[];
 }
 
 // ------------
