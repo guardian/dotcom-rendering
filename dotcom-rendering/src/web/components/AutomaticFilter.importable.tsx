@@ -38,7 +38,7 @@ export const AutomaticFilter = ({
 	automaticFilterData,
 	pinnedPostId,
 }: Props) => {
-	const [selectedFilter, setSelectedFilter] = useState('show all');
+	const [selectedFilter, setSelectedFilter] = useState('Show All');
 
 	return (
 		<div css={ContainerStyles}>
