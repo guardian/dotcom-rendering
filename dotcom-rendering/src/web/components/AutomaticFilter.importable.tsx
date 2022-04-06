@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useApi } from '../lib/useApi';
 import AutomaticFilterButton from './AutomaticFilterButton.importable';
 
@@ -6,6 +7,7 @@ type Props = {
 };
 
 export const AutomaticFilter = ({ pageId }: Props) => {
+	const [selectedFilter, setSelectedFilter] = useState('');
 	const { data, error }: { data?: FilterResult; error?: any } = useApi(
 		`https://ner.code.dev-gutools.co.uk/v1/top-mentions?entities=PERSON,LOC,GPE&top=10&path=/${pageId}`,
 		{
@@ -24,7 +26,11 @@ export const AutomaticFilter = ({ pageId }: Props) => {
 	return data ? (
 		<div id="just-for-testing">
 			{data?.results.map((filter: Filter) => (
-				<AutomaticFilterButton filter={filter} />
+				<AutomaticFilterButton
+					selectedFilter={selectedFilter}
+					setSelectedFilter={setSelectedFilter}
+					filter={filter}
+				/>
 			))}
 		</div>
 	) : null;

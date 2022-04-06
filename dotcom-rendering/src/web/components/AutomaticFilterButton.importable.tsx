@@ -2,9 +2,16 @@ import { Button } from '@guardian/source-react-components';
 
 type Props = {
 	filter: Filter;
+	selectedFilter: string;
+	setSelectedFilter: (name: string) => void;
 };
-const AutomaticFilterButton = ({ filter }: Props) => {
+const AutomaticFilterButton = ({
+	filter,
+	selectedFilter,
+	setSelectedFilter,
+}: Props) => {
 	const handleClick = () => {
+		setSelectedFilter(filter.name);
 		const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
 		const allBlocks =
 			blogBody?.querySelectorAll<HTMLElement>('article .block');
@@ -25,6 +32,7 @@ const AutomaticFilterButton = ({ filter }: Props) => {
 
 	return (
 		<Button
+			priority={selectedFilter === filter.name ? 'primary' : 'tertiary'}
 			id="automatic-filter-button"
 			value={filter.blocks[0]}
 			onClick={handleClick}
