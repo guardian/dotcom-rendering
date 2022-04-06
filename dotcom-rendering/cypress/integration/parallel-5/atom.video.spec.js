@@ -2,13 +2,14 @@ import { cmpIframe } from '../../lib/cmpIframe';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
-const interceptPlayEvent = ({ id }) => {
+const interceptPlayEvent = ({ id, times = 1 }) => {
 	return cy.intercept(
 		{
 			url: 'http://ophan.theguardian.com/img/2?**',
 			query: {
 				video: /(.*)eventType\":\"video:content:play(.*)/,
 			},
+			times,
 		},
 		function (req) {
 			const url = new URL(req.url);
@@ -21,10 +22,11 @@ const interceptPlayEvent = ({ id }) => {
 	);
 };
 
-const interceptYouTubeEmbed = ({ videoId, adUnit, pageUrl, rejectAll }) => {
+const interceptYouTubeEmbed = ({ videoId, adUnit, pageUrl, rejectAll, times = 1 }) => {
 	return cy.intercept(
 		{
 			url: `https://www.youtube.com/embed/${videoId}?**`,
+			times,
 		},
 		function (req) {
 			// https://guardian.github.io/commercial-request-parser/ is useful to parse YouTube requests
