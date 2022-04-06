@@ -137,7 +137,6 @@ describe('YouTube Atom', function () {
 	});
 
 	it('plays in body videos', function () {
-		// cy.intercept('**youtube**').as('callToYouTube');
 		cy.visit(
 			'/Article?url=https://www.theguardian.com/environment/2021/oct/05/volcanoes-are-life-how-the-ocean-is-enriched-by-eruptions-devastating-on-land',
 		);
@@ -178,12 +177,11 @@ describe('YouTube Atom', function () {
 
 		cy.wait('@youtubeEmbed', { timeout: 30000 });
 
-		// // Video is playing, overlay is gone
+		// Video is playing, overlay is gone
 		cy.get(overlaySelector).should('not.exist');
 	});
 
 	it('plays when the same video exists both in body and in main media of the blog', function () {
-		// cy.intercept('**youtube**').as('callToYouTube');
 		cy.visit(
 			'/Article?url=https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates?dcr=true',
 		);
