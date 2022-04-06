@@ -54,7 +54,7 @@ const decideTitle = (CAPI: CAPIType): string => {
 	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
 };
 
-export const document = ({ data }: Props): string => {
+export const articleToHtml = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
 	const title = decideTitle(CAPI);
 	const key = 'dcr';
