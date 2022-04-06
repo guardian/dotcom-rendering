@@ -7,13 +7,13 @@ import { ArticlePillar } from '@guardian/libs';
 import { decideTheme } from '../lib/decideTheme';
 import { decideFormat } from '../lib/decideFormat';
 
-import { Page } from '../components/Page';
+import { Article } from '../components/Article';
 
 import { escapeData } from '../../lib/escapeData';
 import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 
 import { makeWindowGuardian } from '../../model/window-guardian';
-import { htmlTemplate } from './htmlTemplate';
+import { articleTemplate } from './articleTemplate';
 
 interface Props {
 	data: DCRServerDocumentData;
@@ -54,7 +54,7 @@ const decideTitle = (CAPI: CAPIType): string => {
 	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
 };
 
-export const document = ({ data }: Props): string => {
+export const articleToHtml = ({ data }: Props): string => {
 	const { CAPI, NAV, linkedData } = data;
 	const title = decideTitle(CAPI);
 	const key = 'dcr';
@@ -68,7 +68,7 @@ export const document = ({ data }: Props): string => {
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<Page format={format} CAPI={CAPI} NAV={NAV} />
+			<Article format={format} CAPI={CAPI} NAV={NAV} />
 		</CacheProvider>,
 	);
 
@@ -177,7 +177,7 @@ export const document = ({ data }: Props): string => {
 			? ''
 			: CAPI.config.keywords;
 
-	return htmlTemplate({
+	return articleTemplate({
 		linkedData,
 		priorityScriptTags,
 		lowPriorityScriptTags,

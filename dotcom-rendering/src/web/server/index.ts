@@ -1,7 +1,7 @@
 import type express from 'express';
 import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
 import { extractNAV } from '../../model/extract-nav';
-import { document } from './document';
+import { articleToHtml } from './articleToHtml';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { validateAsCAPIType } from '../../model/validate';
@@ -31,7 +31,7 @@ export const renderArticle = (
 ): void => {
 	try {
 		const CAPI = enhanceCAPIType(body);
-		const resp = document({
+		const resp = articleToHtml({
 			data: {
 				CAPI,
 				site: 'frontend',
@@ -87,7 +87,7 @@ export const renderInteractive = (
 ): void => {
 	try {
 		const CAPI = enhanceCAPIType(body);
-		const resp = document({
+		const resp = articleToHtml({
 			data: {
 				CAPI,
 				site: 'frontend',

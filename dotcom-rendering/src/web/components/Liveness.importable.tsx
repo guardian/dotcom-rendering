@@ -84,7 +84,7 @@ function insert(html: string, switches: Switches) {
 function revealPendingBlocks() {
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
 	const pendingBlocks = blogBody?.querySelectorAll<HTMLElement>(
-		'article .pending.block',
+		'article .pending.block.filter',
 	);
 	pendingBlocks?.forEach((block) => {
 		block.classList.add('reveal');

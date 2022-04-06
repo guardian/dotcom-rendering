@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source-foundations';
+import { SWRConfiguration } from 'swr';
+import { ArticleDesign } from '@guardian/libs';
 import { useApi } from '../lib/useApi';
 
 import { Placeholder } from './Placeholder';
@@ -24,13 +26,18 @@ export const GetMatchNav = ({
 	tags,
 	webPublicationDateDeprecated,
 }: Props) => {
+	const options: SWRConfiguration = { errorRetryCount: 1 };
+	// If this blog is live then poll for new stats
+	if (format.design === ArticleDesign.LiveBlog) {
+		options.refreshInterval = 16_000;
+	}
 	const { data, error, loading } = useApi<{
 		homeTeam: TeamType;
 		awayTeam: TeamType;
 		comments?: string;
 		minByMinUrl?: string;
 		venue?: string;
-	}>(matchUrl, { errorRetryCount: 1 });
+	}>(matchUrl, options);
 
 	if (loading) return <Loading />;
 	if (error) {
