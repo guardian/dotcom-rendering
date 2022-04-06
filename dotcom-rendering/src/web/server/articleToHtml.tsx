@@ -7,7 +7,7 @@ import { ArticlePillar } from '@guardian/libs';
 import { decideTheme } from '../lib/decideTheme';
 import { decideFormat } from '../lib/decideFormat';
 
-import { Page } from '../components/Page';
+import { Article } from '../components/Article';
 
 import { escapeData } from '../../lib/escapeData';
 import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
@@ -68,7 +68,7 @@ export const articleToHtml = ({ data }: Props): string => {
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<Page format={format} CAPI={CAPI} NAV={NAV} />
+			<Article format={format} CAPI={CAPI} NAV={NAV} />
 		</CacheProvider>,
 	);
 
