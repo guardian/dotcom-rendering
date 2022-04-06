@@ -4,7 +4,7 @@ import { ArticleDesign } from '@guardian/libs';
 import { getFontsCss } from '../../lib/fonts-css';
 import { ASSET_ORIGIN } from '../../lib/assets';
 
-export const htmlTemplate = ({
+export const articleTemplate = ({
 	title = 'The Guardian',
 	description,
 	linkedData,

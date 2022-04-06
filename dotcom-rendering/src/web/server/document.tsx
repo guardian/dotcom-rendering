@@ -13,7 +13,7 @@ import { escapeData } from '../../lib/escapeData';
 import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 
 import { makeWindowGuardian } from '../../model/window-guardian';
-import { htmlTemplate } from './htmlTemplate';
+import { articleTemplate } from './articleTemplate';
 
 interface Props {
 	data: DCRServerDocumentData;
@@ -177,7 +177,7 @@ export const document = ({ data }: Props): string => {
 			? ''
 			: CAPI.config.keywords;
 
-	return htmlTemplate({
+	return articleTemplate({
 		linkedData,
 		priorityScriptTags,
 		lowPriorityScriptTags,
