@@ -96,7 +96,8 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Quiz ||
 		item.design === ArticleDesign.MatchReport ||
 		item.design === ArticleDesign.Obituary ||
-		item.design === ArticleDesign.Correction
+		item.design === ArticleDesign.Correction ||
+		item.design === ArticleDesign.Interview
 	) {
 		return <Standard item={item}>{render(item, body)}</Standard>;
 	}
