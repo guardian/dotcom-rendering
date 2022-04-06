@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+import { space } from '@guardian/source-foundations';
 import { useState } from 'react';
 import { useApi } from '../lib/useApi';
 import AutomaticFilterButton from './AutomaticFilterButton.importable';
@@ -5,6 +7,16 @@ import AutomaticFilterButton from './AutomaticFilterButton.importable';
 type Props = {
 	pageId: string;
 };
+
+const ContainerStyles = css`
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: space-between;
+`;
 
 export const AutomaticFilter = ({ pageId }: Props) => {
 	const [selectedFilter, setSelectedFilter] = useState('');
@@ -17,14 +29,12 @@ export const AutomaticFilter = ({ pageId }: Props) => {
 		},
 	);
 
-	console.log(data?.results);
-
 	if (error) {
 		return null;
 	}
 
 	return data ? (
-		<div id="just-for-testing">
+		<div id="just-for-testing" css={ContainerStyles}>
 			{data?.results.map((filter: Filter) => (
 				<AutomaticFilterButton
 					selectedFilter={selectedFilter}

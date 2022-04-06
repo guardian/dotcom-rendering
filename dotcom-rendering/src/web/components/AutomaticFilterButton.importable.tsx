@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+import { space } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 
 type Props = {
@@ -29,13 +31,16 @@ const AutomaticFilterButton = ({
 			}
 		});
 	};
-
 	return (
 		<Button
 			priority={selectedFilter === filter.name ? 'primary' : 'tertiary'}
 			id="automatic-filter-button"
 			value={filter.blocks[0]}
 			onClick={handleClick}
+			cssOverrides={css`
+				margin-top: ${space[1]}px;
+				margin-bottom: ${space[1]}px;
+			`}
 		>
 			{filter.name}
 		</Button>
