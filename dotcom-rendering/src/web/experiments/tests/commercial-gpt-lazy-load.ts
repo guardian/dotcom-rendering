@@ -5,7 +5,7 @@ export const commercialGptLazyLoad: ABTest = {
 	author: 'Zeke Hunter-Green (@zekehuntergreen)',
 	start: '2022-03-29',
 	// The test should run for 10 days
-	expiry: '2022-04-12',
+	expiry: '2022-05-01',
 	audience: 5 / 100,
 	audienceOffset: 20 / 100,
 	audienceCriteria: 'All pageviews',
