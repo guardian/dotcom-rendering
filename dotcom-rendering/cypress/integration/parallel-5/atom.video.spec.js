@@ -22,7 +22,13 @@ const interceptPlayEvent = ({ id, times = 1 }) => {
 	);
 };
 
-const interceptYouTubeEmbed = ({ videoId, adUnit, pageUrl, rejectAll, times = 1 }) => {
+const interceptYouTubeEmbed = ({
+	videoId,
+	adUnit,
+	pageUrl,
+	rejectAll,
+	times = 1,
+}) => {
 	return cy.intercept(
 		{
 			url: `https://www.youtube.com/embed/${videoId}?**`,
@@ -212,10 +218,14 @@ describe('YouTube Atom', function () {
 			.should('have.length', 1)
 			.and('be.visible');
 
+		/**
+		 * Main media video
+		 */
+
 		// Listen for the ophan call made when the video is played
 		interceptPlayEvent({
 			id: 'gu-video-youtube-1e89d5bd-489e-470a-857e-4f30e85b5aec',
-		}).as('ophanCall');
+		}).as('ophanCall1');
 
 		// Listen for the YouTube embed call made when the video is played
 		interceptYouTubeEmbed({
@@ -224,35 +234,53 @@ describe('YouTube Atom', function () {
 			pageUrl:
 				'/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
 			rejectAll: false,
-		}).as('youtubeEmbed');
+		}).as('youtubeEmbed1');
 
 		// Play main media video
 		cy.get(mediaDiv).within(() => {
 			cy.get(overlaySelectorforMultipleVideos).click();
 		});
 
-		// check if the ophan call and YouTube embed call were made
-		cy.wait('@ophanCall', { timeout: 30000 });
-		cy.wait('@youtubeEmbed', { timeout: 30000 });
-
 		// check if the main media video overplay is gone
 		cy.get(mediaDiv).within(() => {
 			cy.get(overlaySelectorforMultipleVideos).should('not.exist');
 		});
+
+		// check if the ophan call and YouTube embed call were made
+		cy.wait('@ophanCall1', { timeout: 30000 });
+		cy.wait('@youtubeEmbed1', { timeout: 30000 });
+
+		/**
+		 * Body video
+		 */
+
+		// Listen for the ophan call made when the video is played
+		interceptPlayEvent({
+			id: 'gu-video-youtube-1e89d5bd-489e-470a-857e-4f30e85b5aec',
+		}).as('ophanCall2');
+
+		// Listen for the YouTube embed call made when the video is played
+		interceptYouTubeEmbed({
+			videoId: 'qkC9z-dSAOE',
+			adUnit: '/59666047/theguardian.com/world/liveblog/ng',
+			pageUrl:
+				'/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates',
+			rejectAll: false,
+		}).as('youtubeEmbed2');
 
 		// Play body video
 		cy.get(bodyDiv).within(() => {
 			cy.get(overlaySelectorforMultipleVideos).click();
 		});
 
-		// check if the second ophan call and YouTube embed call were made
-		cy.wait('@ophanCall', { timeout: 30000 });
-		cy.wait('@youtubeEmbed', { timeout: 30000 });
-
 		// check if the body video overplay is gone
 		cy.get(bodyDiv).within(() => {
 			cy.get(overlaySelectorforMultipleVideos).should('not.exist');
 		});
+
+		// check if the ophan call and YouTube embed call were made
+		cy.wait('@ophanCall2', { timeout: 30000 });
+		cy.wait('@youtubeEmbed2', { timeout: 30000 });
 	});
 
 	it('plays the video if the reader rejects consent', function () {
