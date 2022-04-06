@@ -767,7 +767,7 @@ interface GADataType {
 interface DCRServerDocumentData {
 	page: string;
 	site: string;
-	CAPI: CAPIArticleType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	GA: GADataType;
 	linkedData: { [key: string]: any };

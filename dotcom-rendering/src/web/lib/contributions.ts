@@ -242,5 +242,6 @@ export const lazyFetchEmailWithTimeout =
 		});
 	};
 
-export const getContributionsServiceUrl = (CAPI: CAPIArticleType): string =>
-	process?.env?.SDC_URL ?? CAPI.contributionsServiceUrl;
+export const getContributionsServiceUrl = (
+	CAPIArticle: CAPIArticleType,
+): string => process?.env?.SDC_URL ?? CAPIArticle.contributionsServiceUrl;

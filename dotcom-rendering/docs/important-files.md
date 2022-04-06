@@ -10,7 +10,7 @@ The index file defines the CAPIArticleType used in DCR as well as various other 
 
 ### window-guardian.ts
 
-This file generates the DCR Guardian browser config, and will populate the array of atom elements that were defined in index.d.ts. The generic [blockElementWithIndex function](https://github.com/guardian/dotcom-rendering/blob/main/src/model/window-guardian.ts#L72) will produce the array of elements given the full list of [CAPI.blocks, the model type and the name of the atom index field](https://github.com/guardian/dotcom-rendering/blob/main/src/model/window-guardian.ts#L190).
+This file generates the DCR Guardian browser config, and will populate the array of atom elements that were defined in index.d.ts. The generic [blockElementWithIndex function](https://github.com/guardian/dotcom-rendering/blob/main/src/model/window-guardian.ts#L72) will produce the array of elements given the full list of [CAPIArticle.blocks, the model type and the name of the atom index field](https://github.com/guardian/dotcom-rendering/blob/main/src/model/window-guardian.ts#L190).
 
 ### ArticleRenderer.tsx
 

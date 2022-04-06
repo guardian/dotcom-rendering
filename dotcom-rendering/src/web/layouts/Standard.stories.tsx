@@ -43,11 +43,11 @@ export default {
 	},
 };
 
-const convertToStandard = (CAPI: CAPIArticleType) => {
+const convertToStandard = (CAPIArticle: CAPIArticleType) => {
 	return {
-		...CAPI,
+		...CAPIArticle,
 		format: {
-			...CAPI.format,
+			...CAPIArticle.format,
 			display: 'StandardDisplay' as CAPIDisplay,
 		},
 	};
@@ -77,7 +77,7 @@ const HydratedLayout = ({
 	if (modifyPage) {
 		modifyPage();
 	}
-	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} format={format} />;
+	return <DecideLayout CAPIArticle={ServerCAPI} NAV={NAV} format={format} />;
 };
 
 export const ArticleStory = (): React.ReactNode => {

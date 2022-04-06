@@ -21,11 +21,11 @@ export default {
 	},
 };
 
-const convertToInteractiveImmersive = (CAPI: CAPIArticleType) => {
+const convertToInteractiveImmersive = (CAPIArticle: CAPIArticleType) => {
 	return {
-		...CAPI,
+		...CAPIArticle,
 		format: {
-			...CAPI.format,
+			...CAPIArticle.format,
 			display: 'ImmersiveDisplay' as CAPIDisplay,
 			design: 'InteractiveDesign' as CAPIDesign,
 		},
@@ -47,7 +47,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIArticleType }) => {
 		injectPrivacySettingsLink();
 		doStorybookHydration();
 	}, [ServerCAPI]);
-	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} format={format} />;
+	return <DecideLayout CAPIArticle={ServerCAPI} NAV={NAV} format={format} />;
 };
 
 export const ArticleStory = (): React.ReactNode => {

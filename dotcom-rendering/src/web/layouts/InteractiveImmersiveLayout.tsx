@@ -266,36 +266,41 @@ const stretchLines = css`
 `;
 
 interface Props {
-	CAPI: CAPIArticleType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 	palette: Palette;
 }
 
 export const InteractiveImmersiveLayout = ({
-	CAPI,
+	CAPIArticle,
 	NAV,
 	format,
 	palette,
 }: Props) => {
 	const {
 		config: { host },
-	} = CAPI;
+	} = CAPIArticle;
 
-	const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
+	const mainMedia = CAPIArticle.mainMediaElements[0] as ImageBlockElement;
 	const captionText = decideCaption(mainMedia);
-	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+	const { branding } =
+		CAPIArticle.commercialProperties[CAPIArticle.editionId];
 
 	return (
 		<>
-			{CAPI.isLegacyInteractive && (
+			{CAPIArticle.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
 			)}
-			{CAPI.config.switches.surveys && (
+			{CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<ImmersiveHeader CAPI={CAPI} NAV={NAV} format={format} />
+			<ImmersiveHeader
+				CAPIArticle={CAPIArticle}
+				NAV={NAV}
+				format={format}
+			/>
 			<main>
 				<ElementContainer
 					showTopBorder={false}
@@ -337,13 +342,15 @@ export const InteractiveImmersiveLayout = ({
 									>
 										<ArticleTitle
 											format={format}
-											tags={CAPI.tags}
-											sectionLabel={CAPI.sectionLabel}
-											sectionUrl={CAPI.sectionUrl}
-											guardianBaseURL={
-												CAPI.guardianBaseURL
+											tags={CAPIArticle.tags}
+											sectionLabel={
+												CAPIArticle.sectionLabel
 											}
-											badge={CAPI.badge}
+											sectionUrl={CAPIArticle.sectionUrl}
+											guardianBaseURL={
+												CAPIArticle.guardianBaseURL
+											}
+											badge={CAPIArticle.badge}
 										/>
 									</div>
 								)}
@@ -355,15 +362,17 @@ export const InteractiveImmersiveLayout = ({
 									<div css={maxWidth}>
 										<ArticleHeadline
 											format={format}
-											headlineString={CAPI.headline}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
+											headlineString={
+												CAPIArticle.headline
+											}
+											tags={CAPIArticle.tags}
+											byline={CAPIArticle.author.byline}
 											webPublicationDateDeprecated={
-												CAPI.webPublicationDateDeprecated
+												CAPIArticle.webPublicationDateDeprecated
 											}
 											hasStarRating={
-												!!CAPI.starRating ||
-												CAPI.starRating === 0
+												!!CAPIArticle.starRating ||
+												CAPIArticle.starRating === 0
 											}
 										/>
 									</div>
@@ -373,15 +382,17 @@ export const InteractiveImmersiveLayout = ({
 						<GridItem area="standfirst">
 							<Standfirst
 								format={format}
-								standfirst={CAPI.standfirst}
+								standfirst={CAPIArticle.standfirst}
 							/>
 						</GridItem>
 						<GridItem area="byline">
 							<HeadlineByline
 								format={format}
-								tags={CAPI.tags}
+								tags={CAPIArticle.tags}
 								byline={
-									CAPI.author.byline ? CAPI.author.byline : ''
+									CAPIArticle.author.byline
+										? CAPIArticle.author.byline
+										: ''
 								}
 							/>
 						</GridItem>
@@ -415,24 +426,25 @@ export const InteractiveImmersiveLayout = ({
 								<ArticleMeta
 									branding={branding}
 									format={format}
-									pageId={CAPI.pageId}
-									webTitle={CAPI.webTitle}
-									author={CAPI.author}
-									tags={CAPI.tags}
+									pageId={CAPIArticle.pageId}
+									webTitle={CAPIArticle.webTitle}
+									author={CAPIArticle.author}
+									tags={CAPIArticle.tags}
 									primaryDateline={
-										CAPI.webPublicationDateDisplay
+										CAPIArticle.webPublicationDateDisplay
 									}
 									secondaryDateline={
-										CAPI.webPublicationSecondaryDateDisplay
+										CAPIArticle.webPublicationSecondaryDateDisplay
 									}
-									isCommentable={CAPI.isCommentable}
+									isCommentable={CAPIArticle.isCommentable}
 									discussionApiUrl={
-										CAPI.config.discussionApiUrl
+										CAPIArticle.config.discussionApiUrl
 									}
-									shortUrlId={CAPI.config.shortUrlId}
-									ajaxUrl={CAPI.config.ajaxUrl}
+									shortUrlId={CAPIArticle.config.shortUrlId}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									showShareCount={
-										CAPI.config.switches.serverShareCounts
+										CAPIArticle.config.switches
+											.serverShareCounts
 									}
 								/>
 							</div>
@@ -451,15 +463,17 @@ export const InteractiveImmersiveLayout = ({
 						<Renderer
 							format={format}
 							elements={
-								CAPI.blocks[0] ? CAPI.blocks[0].elements : []
+								CAPIArticle.blocks[0]
+									? CAPIArticle.blocks[0].elements
+									: []
 							}
 							host={host}
-							pageId={CAPI.pageId}
-							webTitle={CAPI.webTitle}
-							ajaxUrl={CAPI.config.ajaxUrl}
-							switches={CAPI.config.switches}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							isSensitive={CAPI.config.isSensitive}
+							pageId={CAPIArticle.pageId}
+							webTitle={CAPIArticle.webTitle}
+							ajaxUrl={CAPIArticle.config.ajaxUrl}
+							switches={CAPIArticle.config.switches}
+							isAdFreeUser={CAPIArticle.isAdFreeUser}
+							isSensitive={CAPIArticle.config.isSensitive}
 						/>
 					</article>
 				</ElementContainer>
@@ -489,32 +503,38 @@ export const InteractiveImmersiveLayout = ({
 				element="footer"
 			>
 				<Footer
-					pageFooter={CAPI.pageFooter}
+					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={CAPI.nav.readerRevenueLinks.header}
-					edition={CAPI.editionId}
-					contributionsServiceUrl={CAPI.contributionsServiceUrl}
+					urls={CAPIArticle.nav.readerRevenueLinks.header}
+					edition={CAPIArticle.editionId}
+					contributionsServiceUrl={
+						CAPIArticle.contributionsServiceUrl
+					}
 				/>
 			</ElementContainer>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
-						idApiUrl={CAPI.config.idApiUrl}
-						isMinuteArticle={CAPI.pageType.isMinuteArticle}
-						isPaidContent={CAPI.pageType.isPaidContent}
-						isPreview={!!CAPI.config.isPreview}
-						isSensitive={CAPI.config.isSensitive}
-						keywordsId={CAPI.config.keywordIds}
-						pageId={CAPI.pageId}
-						section={CAPI.config.section}
-						sectionName={CAPI.sectionName}
-						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-						switches={CAPI.config.switches}
-						tags={CAPI.tags}
+						contentType={CAPIArticle.contentType}
+						contributionsServiceUrl={
+							CAPIArticle.contributionsServiceUrl
+						}
+						idApiUrl={CAPIArticle.config.idApiUrl}
+						isMinuteArticle={CAPIArticle.pageType.isMinuteArticle}
+						isPaidContent={CAPIArticle.pageType.isPaidContent}
+						isPreview={!!CAPIArticle.config.isPreview}
+						isSensitive={CAPIArticle.config.isSensitive}
+						keywordsId={CAPIArticle.config.keywordIds}
+						pageId={CAPIArticle.pageId}
+						section={CAPIArticle.config.section}
+						sectionName={CAPIArticle.sectionName}
+						shouldHideReaderRevenue={
+							CAPIArticle.shouldHideReaderRevenue
+						}
+						switches={CAPIArticle.config.switches}
+						tags={CAPIArticle.tags}
 					/>
 				</Island>
 			</BannerWrapper>

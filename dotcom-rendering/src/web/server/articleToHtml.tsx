@@ -44,19 +44,19 @@ const generateScriptTags = (
 		];
 	}, []);
 
-const decideTitle = (CAPI: CAPIArticleType): string => {
+const decideTitle = (CAPIArticle: CAPIArticleType): string => {
 	if (
-		decideTheme(CAPI.format) === ArticlePillar.Opinion &&
-		CAPI.author.byline
+		decideTheme(CAPIArticle.format) === ArticlePillar.Opinion &&
+		CAPIArticle.author.byline
 	) {
-		return `${CAPI.headline} | ${CAPI.author.byline} | The Guardian`;
+		return `${CAPIArticle.headline} | ${CAPIArticle.author.byline} | The Guardian`;
 	}
-	return `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`;
+	return `${CAPIArticle.headline} | ${CAPIArticle.sectionLabel} | The Guardian`;
 };
 
 export const articleToHtml = ({ data }: Props): string => {
-	const { CAPI, NAV, linkedData } = data;
-	const title = decideTitle(CAPI);
+	const { CAPIArticle, NAV, linkedData } = data;
+	const title = decideTitle(CAPIArticle);
 	const key = 'dcr';
 	const cache = createCache({ key });
 
@@ -64,11 +64,11 @@ export const articleToHtml = ({ data }: Props): string => {
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
 		createEmotionServer(cache);
 
-	const format: ArticleFormat = decideFormat(CAPI.format);
+	const format: ArticleFormat = decideFormat(CAPIArticle.format);
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<Article format={format} CAPI={CAPI} NAV={NAV} />
+			<Article format={format} CAPIArticle={CAPIArticle} NAV={NAV} />
 		</CacheProvider>,
 	);
 
@@ -77,7 +77,7 @@ export const articleToHtml = ({ data }: Props): string => {
 
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
-	const CAPIElements: CAPIElement[] = CAPI.blocks
+	const CAPIElements: CAPIElement[] = CAPIArticle.blocks
 		.map((block) => block.elements)
 		.flat();
 
@@ -121,7 +121,7 @@ export const articleToHtml = ({ data }: Props): string => {
 		{ src: polyfillIO },
 		...getScriptArrayFromFile('bootCmp.js'),
 		...getScriptArrayFromFile('ophan.js'),
-		CAPI.config && { src: CAPI.config.commercialBundleUrl },
+		CAPIArticle.config && { src: CAPIArticle.config.commercialBundleUrl },
 		...getScriptArrayFromFile('sentryLoader.js'),
 		...getScriptArrayFromFile('dynamicImport.js'),
 		pageHasNonBootInteractiveElements && {
@@ -159,23 +159,24 @@ export const articleToHtml = ({ data }: Props): string => {
 	 */
 	const windowGuardian = escapeData(JSON.stringify(makeWindowGuardian(data)));
 
-	const hasAmpInteractiveTag = CAPI.tags.some(
+	const hasAmpInteractiveTag = CAPIArticle.tags.some(
 		(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
 	);
 
 	// Only include AMP link for interactives which have the 'ampinteractive' tag
 	const ampLink =
-		CAPI.format.design !== 'InteractiveDesign' || hasAmpInteractiveTag
-			? `https://amp.theguardian.com/${data.CAPI.pageId}`
+		CAPIArticle.format.design !== 'InteractiveDesign' ||
+		hasAmpInteractiveTag
+			? `https://amp.theguardian.com/${data.CAPIArticle.pageId}`
 			: undefined;
 
-	const { openGraphData } = CAPI;
-	const { twitterData } = CAPI;
+	const { openGraphData } = CAPIArticle;
+	const { twitterData } = CAPIArticle;
 	const keywords =
-		typeof CAPI.config.keywords === 'undefined' ||
-		CAPI.config.keywords === 'Network Front'
+		typeof CAPIArticle.config.keywords === 'undefined' ||
+		CAPIArticle.config.keywords === 'Network Front'
 			? ''
-			: CAPI.config.keywords;
+			: CAPIArticle.config.keywords;
 
 	return articleTemplate({
 		linkedData,
@@ -185,7 +186,7 @@ export const articleToHtml = ({ data }: Props): string => {
 		html,
 		fontFiles,
 		title,
-		description: CAPI.trailText,
+		description: CAPIArticle.trailText,
 		windowGuardian,
 		gaPath,
 		ampLink,

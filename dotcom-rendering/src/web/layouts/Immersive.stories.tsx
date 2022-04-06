@@ -45,13 +45,13 @@ function isImageBlockElement(block: CAPIElement): block is ImageBlockElement {
 	);
 }
 
-const convertToImmersive = (CAPI: CAPIArticleType) => ({
-	...CAPI,
+const convertToImmersive = (CAPIArticle: CAPIArticleType) => ({
+	...CAPIArticle,
 	format: {
-		...CAPI.format,
+		...CAPIArticle.format,
 		display: 'ImmersiveDisplay' as CAPIDisplay,
 	},
-	mainMediaElements: CAPI.mainMediaElements.map((el) => {
+	mainMediaElements: CAPIArticle.mainMediaElements.map((el) => {
 		if (isImageBlockElement(el)) {
 			return {
 				...el,
@@ -76,7 +76,7 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIArticleType }) => {
 		injectPrivacySettingsLink();
 		doStorybookHydration();
 	}, [ServerCAPI]);
-	return <DecideLayout CAPI={ServerCAPI} NAV={NAV} format={format} />;
+	return <DecideLayout CAPIArticle={ServerCAPI} NAV={NAV} format={format} />;
 };
 
 export const ArticleStory = (): React.ReactNode => {

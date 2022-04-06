@@ -10,12 +10,16 @@ import { InteractiveLayout } from './InteractiveLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 
 type Props = {
-	CAPI: CAPIArticleType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
 
-export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
+export const DecideLayout = ({
+	CAPIArticle,
+	NAV,
+	format,
+}: Props): JSX.Element => {
 	// TODO we can probably better express this as data
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -27,7 +31,7 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 					// if published before.
 					return (
 						<FullPageInteractiveLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
 						/>
@@ -36,7 +40,7 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				default: {
 					return (
 						<ImmersiveLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
 						/>
@@ -49,16 +53,30 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 			switch (format.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
-					return <LiveLayout CAPI={CAPI} NAV={NAV} format={format} />;
+					return (
+						<LiveLayout
+							CAPIArticle={CAPIArticle}
+							NAV={NAV}
+							format={format}
+						/>
+					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					return (
-						<CommentLayout CAPI={CAPI} NAV={NAV} format={format} />
+						<CommentLayout
+							CAPIArticle={CAPIArticle}
+							NAV={NAV}
+							format={format}
+						/>
 					);
 				default:
 					return (
-						<ShowcaseLayout CAPI={CAPI} NAV={NAV} format={format} />
+						<ShowcaseLayout
+							CAPIArticle={CAPIArticle}
+							NAV={NAV}
+							format={format}
+						/>
 					);
 			}
 		}
@@ -68,7 +86,7 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				case ArticleDesign.Interactive:
 					return (
 						<InteractiveLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
 						/>
@@ -76,7 +94,7 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
 						/>
@@ -84,16 +102,30 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				}
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
-					return <LiveLayout CAPI={CAPI} NAV={NAV} format={format} />;
+					return (
+						<LiveLayout
+							CAPIArticle={CAPIArticle}
+							NAV={NAV}
+							format={format}
+						/>
+					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					return (
-						<CommentLayout CAPI={CAPI} NAV={NAV} format={format} />
+						<CommentLayout
+							CAPIArticle={CAPIArticle}
+							NAV={NAV}
+							format={format}
+						/>
 					);
 				default:
 					return (
-						<StandardLayout CAPI={CAPI} NAV={NAV} format={format} />
+						<StandardLayout
+							CAPIArticle={CAPIArticle}
+							NAV={NAV}
+							format={format}
+						/>
 					);
 			}
 		}
