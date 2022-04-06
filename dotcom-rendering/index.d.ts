@@ -439,6 +439,7 @@ interface CAPIType {
 	pinnedPost?: Block;
 	pagination?: Pagination;
 	author: AuthorType;
+	automaticFilterData?: FilterResult;
 
 	/**
 	 * @TJS-format date-time

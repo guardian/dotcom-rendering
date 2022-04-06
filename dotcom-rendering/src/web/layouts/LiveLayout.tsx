@@ -746,7 +746,11 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 										</Island>
 									</Hide>
 									<Island>
-										<AutomaticFilter pageId={CAPI.pageId} />
+										<AutomaticFilter
+											automaticFilterData={
+												CAPI.automaticFilterData
+											}
+										/>
 									</Island>
 									<Accordion
 										supportsDarkMode={false}
