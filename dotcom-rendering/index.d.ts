@@ -513,6 +513,123 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 }
 
+interface FrontType {
+	pressedPage: PressedPageType;
+	nav: CAPINavType;
+	editionId: string;
+	editionLongForm: string;
+	guardianBaseURL: string;
+	pageId: string;
+	webTitle: string;
+	webURL: string;
+	config: FrontConfigType;
+	commercialProperties: Record<string, unknown>;
+}
+
+type PressedPageType = {
+	id: string;
+	seoData: SeoDataType;
+	frontProperties: FrontPropertiesType;
+	collections: PressedCollectionType[];
+};
+
+type SeoDataType = {
+	id: string;
+	navSection: string;
+	webTitle: string;
+	description: string;
+};
+
+type FrontPropertiesType = {
+	isImageDisplayed: boolean;
+	commercial: Record<string, unknown>;
+};
+
+type PressedCollectionType = Record<string, unknown>;
+
+type FrontConfigType = {
+	avatarApiUrl: string;
+	externalEmbedHost: string;
+	ajaxUrl: string;
+	keywords: string;
+	revisionNumber: string;
+	isProd: boolean;
+	switches: Switches;
+	section: string;
+	keywordIds: string;
+	locationapiurl: string;
+	sharedAdTargeting: { [key: string]: any };
+	buildNumber: string;
+	abTests: Record<string, unknown>;
+	pbIndexSites: { [key: string]: unknown }[];
+	ampIframeUrl: string;
+	beaconUrl: string;
+	userAttributesApiUrl: string;
+	host: string;
+	brazeApiKey: string;
+	calloutsUrl: string;
+	requiresMembershipAccess: boolean;
+	onwardWebSocket: string;
+	a9PublisherId: string;
+	contentType: string;
+	facebookIaAdUnitRoot: string;
+	ophanEmbedJsUrl: string;
+	idUrl: string;
+	dcrSentryDsn: string;
+	isFront: true;
+	idWebAppUrl: string;
+	discussionApiUrl: string;
+	sentryPublicApiKey: string;
+	omnitureAccount: string;
+	dfpAccountId: string;
+	pageId: string;
+	forecastsapiurl: string;
+	assetsPath: string;
+	pillar: string;
+	commercialBundleUrl: string;
+	discussionApiClientHeader: string;
+	membershipUrl: string;
+	dfpHost: string;
+	cardStyle: string;
+	googletagUrl: string;
+	sentryHost: string;
+	shouldHideAdverts: boolean;
+	mmaUrl: string;
+	membershipAccess: string;
+	isPreview: boolean;
+	googletagJsUrl: string;
+	supportUrl: string;
+	edition: string;
+	discussionFrontendUrl: string;
+	ipsosTag: string;
+	ophanJsUrl: string;
+	isPaidContent: boolean;
+	mobileAppsAdUnitRoot: string;
+	plistaPublicApiKey: string;
+	frontendAssetsFullURL: string;
+	googleSearchId: string;
+	allowUserGeneratedContent: boolean;
+	dfpAdUnitRoot: string;
+	idApiUrl: string;
+	omnitureAmpAccount: string;
+	adUnit: string;
+	hasPageSkin: boolean;
+	webTitle: string;
+	stripePublicToken: string;
+	googleRecaptchaSiteKey: string;
+	discussionD2Uid: string;
+	weatherapiurl: string;
+	googleSearchUrl: string;
+	optimizeEpicUrl: string;
+	stage: string;
+	idOAuthUrl: string;
+	isSensitive: boolean;
+	isDev: boolean;
+	thirdPartyAppsAccount: string;
+	avatarImagesUrl: string;
+	fbAppId: string;
+};
+
 interface TagType {
 	id: string;
 	type: string;

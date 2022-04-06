@@ -1,7 +1,7 @@
 import { isObject } from '@guardian/libs';
 import type { Request } from 'express';
 
-type FrontData = { query: Request['query']; body: unknown };
+type FrontData = { query: Request['query']; body: FrontType };
 
 export const frontToHtml = ({ query, body }: FrontData) => {
 	const config =

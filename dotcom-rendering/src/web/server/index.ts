@@ -4,7 +4,7 @@ import { extractNAV } from '../../model/extract-nav';
 import { articleToHtml } from './articleToHtml';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
-import { validateAsCAPIType } from '../../model/validate';
+import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import { extract as extractGA } from '../../model/extract-ga';
 import { blocksToHtml } from './blocksToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
@@ -23,6 +23,14 @@ const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 		standfirst: enhanceStandfirst(data.standfirst),
 	};
 	return CAPIArticle;
+};
+
+const enhanceFront = (body: Record<string, unknown>): FrontType => {
+	const enhanced = validateAsFrontType(body);
+	const Front: FrontType = {
+		...enhanced,
+	};
+	return Front;
 };
 
 export const renderArticle = (
@@ -177,9 +185,10 @@ export const renderFront = (
 	res: express.Response,
 ): void => {
 	try {
+		const enhanced = enhanceFront(body);
 		const html = frontToHtml({
 			query,
-			body,
+			body: enhanced,
 		});
 		res.status(200).send(html);
 	} catch (e) {
