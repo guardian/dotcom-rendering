@@ -44,7 +44,7 @@ const generateScriptTags = (
 		];
 	}, []);
 
-const decideTitle = (CAPI: CAPIType): string => {
+const decideTitle = (CAPI: CAPIArticleType): string => {
 	if (
 		decideTheme(CAPI.format) === ArticlePillar.Opinion &&
 		CAPI.author.byline

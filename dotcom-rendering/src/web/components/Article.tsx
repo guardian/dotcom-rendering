@@ -15,7 +15,7 @@ import { CoreVitals } from './CoreVitals.importable';
 import { SetABTests } from './SetABTests.importable';
 
 type Props = {
-	CAPI: CAPIType;
+	CAPI: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -25,7 +25,7 @@ type Props = {
  * Article is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
- * @param {CAPIType} props.CAPI - The article JSON data
+ * @param {CAPIArticleType} props.CAPI - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * @param {ArticleFormat} props.format - The format model for the article
  * */

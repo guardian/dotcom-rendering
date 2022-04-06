@@ -246,7 +246,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	CAPI: CAPIType;
+	CAPI: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }

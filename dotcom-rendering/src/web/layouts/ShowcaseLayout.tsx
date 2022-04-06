@@ -204,7 +204,7 @@ const PositionHeadline = ({
 };
 
 interface Props {
-	CAPI: CAPIType;
+	CAPI: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }

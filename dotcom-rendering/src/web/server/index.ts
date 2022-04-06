@@ -14,9 +14,9 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceCAPIType = (body: Record<string, unknown>): CAPIType => {
+const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
-	const CAPI: CAPIType = {
+	const CAPI: CAPIArticleType = {
 		...data,
 		blocks: enhanceBlocks(data.blocks, data.format),
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),

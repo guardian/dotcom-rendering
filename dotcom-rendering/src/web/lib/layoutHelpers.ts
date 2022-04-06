@@ -25,7 +25,7 @@ export const decideLineCount = (design?: ArticleDesign): 8 | 4 => {
 	return 4;
 };
 
-export const getCurrentPillar = (CAPI: CAPIType): ArticleTheme => {
+export const getCurrentPillar = (CAPI: CAPIArticleType): ArticleTheme => {
 	const currentPillar =
 		(CAPI.nav.currentPillarTitle &&
 			(CAPI.nav.currentPillarTitle.toLowerCase() as LegacyPillar)) ||

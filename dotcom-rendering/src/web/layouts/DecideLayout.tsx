@@ -10,7 +10,7 @@ import { InteractiveLayout } from './InteractiveLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 
 type Props = {
-	CAPI: CAPIType;
+	CAPI: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };

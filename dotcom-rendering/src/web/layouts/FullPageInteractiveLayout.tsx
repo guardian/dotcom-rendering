@@ -37,7 +37,7 @@ import { Island } from '../components/Island';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 interface Props {
-	CAPI: CAPIType;
+	CAPI: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }

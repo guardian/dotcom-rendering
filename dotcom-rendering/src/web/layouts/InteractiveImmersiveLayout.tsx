@@ -266,7 +266,7 @@ const stretchLines = css`
 `;
 
 interface Props {
-	CAPI: CAPIType;
+	CAPI: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 	palette: Palette;

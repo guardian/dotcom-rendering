@@ -28,7 +28,7 @@ import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 const logRenderTime = responseTime(
 	(req: Request, _: Response, time: number) => {
 		// eslint-disable-next-line prefer-destructuring
-		const body: CAPIType = req.body;
+		const body: CAPIArticleType = req.body;
 		logger.info({
 			pageId: body.pageId,
 			renderTime: time,

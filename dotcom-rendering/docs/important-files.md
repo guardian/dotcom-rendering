@@ -6,7 +6,7 @@ This file maps data provided by frontend to data types defined in DCR, so make s
 
 ### index.d.ts
 
-The index file defines the CAPIType used in DCR as well as various other types and interfaces that can be used within the application. In this file add an array of your atoms to the [CAPIBrowserType type](https://github.com/guardian/dotcom-rendering/blob/main/index.d.ts#L359). You will also need to add your atom type to the [Island-Type list](https://github.com/guardian/dotcom-rendering/blob/main/index.d.ts#L666), which will be required for the root of the atom element.
+The index file defines the CAPIArticleType used in DCR as well as various other types and interfaces that can be used within the application. In this file add an array of your atoms to the [CAPIBrowserType type](https://github.com/guardian/dotcom-rendering/blob/main/index.d.ts#L359). You will also need to add your atom type to the [Island-Type list](https://github.com/guardian/dotcom-rendering/blob/main/index.d.ts#L666), which will be required for the root of the atom element.
 
 ### window-guardian.ts
 

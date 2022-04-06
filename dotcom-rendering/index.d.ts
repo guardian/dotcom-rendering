@@ -1,5 +1,5 @@
 // ------------------------  //
-// CAPIType and its subtypes //
+// CAPIArticleType and its subtypes //
 // ------------------------- //
 
 // Pillars are used for styling
@@ -428,7 +428,7 @@ interface CAPINavType {
 
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.
-interface CAPIType {
+interface CAPIArticleType {
 	headline: string;
 	standfirst: string;
 	webTitle: string;
@@ -767,7 +767,7 @@ interface GADataType {
 interface DCRServerDocumentData {
 	page: string;
 	site: string;
-	CAPI: CAPIType;
+	CAPI: CAPIArticleType;
 	NAV: NavType;
 	GA: GADataType;
 	linkedData: { [key: string]: any };

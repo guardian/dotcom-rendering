@@ -43,7 +43,7 @@ export default {
 	},
 };
 
-const convertToStandard = (CAPI: CAPIType) => {
+const convertToStandard = (CAPI: CAPIArticleType) => {
 	return {
 		...CAPI,
 		format: {
@@ -60,7 +60,7 @@ const HydratedLayout = ({
 	ServerCAPI,
 	modifyPage,
 }: {
-	ServerCAPI: CAPIType;
+	ServerCAPI: CAPIArticleType;
 	modifyPage?: () => void;
 }) => {
 	const NAV = extractNAV(ServerCAPI.nav);
