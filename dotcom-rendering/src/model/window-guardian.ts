@@ -34,7 +34,7 @@ export interface WindowGuardianConfig {
 const makeWindowGuardianConfig = (
 	dcrDocumentData: DCRServerDocumentData,
 ): WindowGuardianConfig => {
-	const { config } = dcrDocumentData.CAPI;
+	const { config } = dcrDocumentData.CAPIArticle;
 	return {
 		// This indicates to the client side code that we are running a dotcom-rendering rendered page.
 		isDotcomRendering: true,
@@ -43,8 +43,8 @@ const makeWindowGuardianConfig = (
 		frontendAssetsFullURL: config.frontendAssetsFullURL,
 		page: Object.assign(config, {
 			dcrCouldRender: true,
-			contentType: dcrDocumentData.CAPI.contentType,
-			edition: dcrDocumentData.CAPI.editionId,
+			contentType: dcrDocumentData.CAPIArticle.contentType,
+			edition: dcrDocumentData.CAPIArticle.editionId,
 			revisionNumber: config.revisionNumber,
 			dcrSentryDsn:
 				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',

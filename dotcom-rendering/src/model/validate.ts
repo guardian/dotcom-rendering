@@ -15,7 +15,9 @@ addFormats(ajv);
 
 const validate = ajv.compile(schema);
 
-export const validateAsCAPIType = (data: { [key: string]: any }): CAPIType => {
+export const validateAsCAPIType = (data: {
+	[key: string]: any;
+}): CAPIArticleType => {
 	const isValid = validate(data);
 
 	if (!isValid) {
@@ -28,5 +30,5 @@ export const validateAsCAPIType = (data: { [key: string]: any }): CAPIType => {
 		);
 	}
 
-	return data as CAPIType;
+	return data as CAPIArticleType;
 };

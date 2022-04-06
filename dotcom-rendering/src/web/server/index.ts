@@ -14,15 +14,15 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceCAPIType = (body: Record<string, unknown>): CAPIType => {
+const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
-	const CAPI: CAPIType = {
+	const CAPIArticle: CAPIArticleType = {
 		...data,
 		blocks: enhanceBlocks(data.blocks, data.format),
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
 	};
-	return CAPI;
+	return CAPIArticle;
 };
 
 export const renderArticle = (
@@ -30,15 +30,15 @@ export const renderArticle = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = enhanceCAPIType(body);
+		const CAPIArticle = enhanceCAPIType(body);
 		const resp = articleToHtml({
 			data: {
-				CAPI,
+				CAPIArticle,
 				site: 'frontend',
 				page: 'Article',
-				NAV: extractNAV(CAPI.nav),
-				GA: extractGA(CAPI),
-				linkedData: CAPI.linkedData,
+				NAV: extractNAV(CAPIArticle.nav),
+				GA: extractGA(CAPIArticle),
+				linkedData: CAPIArticle.linkedData,
 			},
 		});
 
@@ -54,15 +54,15 @@ export const renderArticleJson = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = enhanceCAPIType(body);
+		const CAPIArticle = enhanceCAPIType(body);
 		const resp = {
 			data: {
-				CAPI,
+				CAPIArticle,
 				site: 'frontend',
 				page: 'Article',
-				NAV: extractNAV(CAPI.nav),
-				GA: extractGA(CAPI),
-				linkedData: CAPI.linkedData,
+				NAV: extractNAV(CAPIArticle.nav),
+				GA: extractGA(CAPIArticle),
+				linkedData: CAPIArticle.linkedData,
 			},
 		};
 
@@ -86,15 +86,15 @@ export const renderInteractive = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = enhanceCAPIType(body);
+		const CAPIArticle = enhanceCAPIType(body);
 		const resp = articleToHtml({
 			data: {
-				CAPI,
+				CAPIArticle,
 				site: 'frontend',
 				page: 'Interactive',
-				NAV: extractNAV(CAPI.nav),
-				GA: extractGA(CAPI),
-				linkedData: CAPI.linkedData,
+				NAV: extractNAV(CAPIArticle.nav),
+				GA: extractGA(CAPIArticle),
+				linkedData: CAPIArticle.linkedData,
 			},
 		});
 
