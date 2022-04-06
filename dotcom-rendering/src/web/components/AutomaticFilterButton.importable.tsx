@@ -13,9 +13,11 @@ const AutomaticFilterButton = ({ filter }: Props) => {
 			const blockIds = filter.blocks.map((blockId) => `block-${blockId}`);
 			if (blockIds.includes(block.id)) {
 				block.classList.add('reveal');
+				block.classList.add('filter');
 				block.classList.remove('pending');
 			} else {
 				block.classList.add('pending');
+				block.classList.remove('filter');
 				block.classList.remove('reveal');
 			}
 		});
