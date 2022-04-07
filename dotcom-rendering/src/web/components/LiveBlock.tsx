@@ -104,6 +104,7 @@ export const LiveBlock = ({
 			>
 				<ShareIcons
 					pageId={pageId}
+					blockId={block.id}
 					webTitle={webTitle}
 					displayIcons={['facebook', 'twitter']}
 					format={format}
