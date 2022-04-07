@@ -330,7 +330,7 @@ export const ShareIcons = ({
 								app_id: '180444840287',
 							})}`}
 							role="button"
-							aria-label="Share on Messenger>"
+							aria-label="Share on Messenger"
 							target="_blank"
 							rel="noreferrer"
 							data-ignore="global-link-styling"
