@@ -2,7 +2,7 @@ import { isBoolean, isObject, isString } from '@guardian/libs';
 import type { Request } from 'express';
 import { escape } from 'he';
 
-type FrontData = { query: Request['query']; body: unknown };
+type FrontData = { query: Request['query']; body: FrontType };
 
 const displayJSON = (json: unknown): string => {
 	if (isString(json)) return `<span class="string">"${escape(json)}"</span>`;
