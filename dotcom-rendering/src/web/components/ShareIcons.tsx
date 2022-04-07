@@ -10,6 +10,7 @@ import LinkedInIcon from '../../static/icons/linked-in.svg';
 import WhatsAppIcon from '../../static/icons/whatsapp.svg';
 import MessengerIcon from '../../static/icons/messenger.svg';
 
+import { decidePalette } from '../lib/decidePalette';
 import { Hide } from './Hide';
 
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
@@ -18,7 +19,6 @@ type Props = {
 	pageId: string;
 	webTitle: string;
 	displayIcons: SharePlatform[];
-	palette: Palette;
 	format: ArticleFormat;
 	size: ShareIconSize;
 	context: Context;
@@ -42,11 +42,8 @@ const topMarginStlyes = css`
 	margin-top: 3px;
 `;
 
-const decideIconColor = (
-	palette: Palette,
-	format: ArticleFormat,
-	context: Context,
-) => {
+const decideIconColor = (format: ArticleFormat, context: Context) => {
+	const palette = decidePalette(format);
 	if (format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta') {
 		return css`
 			fill: ${palette.fill.shareIconGrayBackground};
@@ -68,11 +65,8 @@ const decideIconColor = (
 	`;
 };
 
-const decideIconColorOnHover = (
-	palette: Palette,
-	format: ArticleFormat,
-	context: Context,
-) => {
+const decideIconColorOnHover = (format: ArticleFormat, context: Context) => {
+	const palette = decidePalette(format);
 	if (
 		(format.design === ArticleDesign.LiveBlog ||
 			format.design === ArticleDesign.DeadBlog) &&
@@ -140,11 +134,11 @@ export const ShareIcons = ({
 	pageId,
 	webTitle,
 	displayIcons,
-	palette,
 	format,
 	size,
 	context,
 }: Props) => {
+	const palette = decidePalette(format);
 	return (
 		<ul css={ulStyles}>
 			{displayIcons.includes('facebook') && (
@@ -162,12 +156,8 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								decideIconColor(palette, format, context),
-								decideIconColorOnHover(
-									palette,
-									format,
-									context,
-								),
+								decideIconColor(format, context),
+								decideIconColorOnHover(format, context),
 							]}
 						>
 							<FacebookIcon />
@@ -191,12 +181,8 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								decideIconColor(palette, format, context),
-								decideIconColorOnHover(
-									palette,
-									format,
-									context,
-								),
+								decideIconColor(format, context),
+								decideIconColorOnHover(format, context),
 							]}
 						>
 							<TwitterIconPadded />
@@ -219,12 +205,8 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								decideIconColor(palette, format, context),
-								decideIconColorOnHover(
-									palette,
-									format,
-									context,
-								),
+								decideIconColor(format, context),
+								decideIconColorOnHover(format, context),
 							]}
 						>
 							<EmailIcon />
@@ -248,12 +230,8 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								decideIconColor(palette, format, context),
-								decideIconColorOnHover(
-									palette,
-									format,
-									context,
-								),
+								decideIconColor(format, context),
+								decideIconColorOnHover(format, context),
 							]}
 						>
 							<LinkedInIcon />
@@ -278,12 +256,8 @@ export const ShareIcons = ({
 							<span
 								css={[
 									iconStyles({ palette, size }),
-									decideIconColor(palette, format, context),
-									decideIconColorOnHover(
-										palette,
-										format,
-										context,
-									),
+									decideIconColor(format, context),
+									decideIconColorOnHover(format, context),
 								]}
 							>
 								<WhatsAppIcon />
@@ -309,12 +283,8 @@ export const ShareIcons = ({
 							<span
 								css={[
 									iconStyles({ palette, size }),
-									decideIconColor(palette, format, context),
-									decideIconColorOnHover(
-										palette,
-										format,
-										context,
-									),
+									decideIconColor(format, context),
+									decideIconColorOnHover(format, context),
 								]}
 							>
 								<MessengerIcon />
