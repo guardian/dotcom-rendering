@@ -13,14 +13,14 @@ import { ContainerLayout } from '../components/ContainerLayout';
 import { Header } from '../components/Header';
 
 interface Props {
-	Front: FrontType;
+	front: FrontType;
 	NAV: NavType;
 }
 
-export const FrontLayout = ({ Front, NAV }: Props) => {
+export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { isPaidContent },
-	} = Front;
+	} = front;
 
 	const format = {
 		display: ArticleDisplay.Standard,
@@ -30,7 +30,7 @@ export const FrontLayout = ({ Front, NAV }: Props) => {
 
 	const palette = decidePalette(format);
 
-	// const contributionsServiceUrl = getContributionsServiceUrl(Front);
+	// const contributionsServiceUrl = getContributionsServiceUrl(front);
 
 	return (
 		<>
@@ -44,18 +44,18 @@ export const FrontLayout = ({ Front, NAV }: Props) => {
 						element="header"
 					>
 						<Header
-							edition={Front.editionId}
-							idUrl={Front.config.idUrl}
-							mmaUrl={Front.config.mmaUrl}
+							edition={front.editionId}
+							idUrl={front.config.idUrl}
+							mmaUrl={front.config.mmaUrl}
 							supporterCTA={
-								Front.nav.readerRevenueLinks.header.supporter
+								front.nav.readerRevenueLinks.header.supporter
 							}
-							discussionApiUrl={Front.config.discussionApiUrl}
+							discussionApiUrl={front.config.discussionApiUrl}
 							isAnniversary={
-								Front.config.switches.anniversaryHeaderSvg
+								front.config.switches.anniversaryHeaderSvg
 							}
-							urls={Front.nav.readerRevenueLinks.header}
-							remoteHeader={Front.config.switches.remoteHeader}
+							urls={front.nav.readerRevenueLinks.header}
+							remoteHeader={front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 						/>
 					</ElementContainer>
@@ -71,9 +71,9 @@ export const FrontLayout = ({ Front, NAV }: Props) => {
 							nav={NAV}
 							format={format}
 							subscribeUrl={
-								Front.nav.readerRevenueLinks.header.subscribe
+								front.nav.readerRevenueLinks.header.subscribe
 							}
-							edition={Front.editionId}
+							edition={front.editionId}
 						/>
 					</ElementContainer>
 					{NAV.subNavSections && (
@@ -104,7 +104,7 @@ export const FrontLayout = ({ Front, NAV }: Props) => {
 			</div>
 
 			<main>
-				{Front.pressedPage.collections.map((collection, index) => {
+				{front.pressedPage.collections.map((collection, index) => {
 					return (
 						<ContainerLayout
 							title={collection.displayName as string}
@@ -119,8 +119,8 @@ export const FrontLayout = ({ Front, NAV }: Props) => {
 					<ElementContainer data-print-layout="hide" element="aside">
 						<MostViewedFooterLayout
 							format={format}
-							sectionName="" // {Front.sectionName}
-							ajaxUrl={Front.config.ajaxUrl}
+							sectionName="" // {front.sectionName}
+							ajaxUrl={front.config.ajaxUrl}
 						/>
 					</ElementContainer>
 				)}

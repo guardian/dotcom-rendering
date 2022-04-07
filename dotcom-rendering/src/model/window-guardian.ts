@@ -169,7 +169,7 @@ const makeFrontWindowGuardianConfig = ({
 };
 
 export const makeFrontWindowGuardian = (
-	Front: FrontType,
+	front: FrontType,
 ): {
 	// The 'config' attribute is derived from DCRServerDocumentData and contains
 	// all the data that, for legacy reasons, for instance compatibility
@@ -185,7 +185,7 @@ export const makeFrontWindowGuardian = (
 	};
 } => {
 	return {
-		config: makeFrontWindowGuardianConfig(Front),
+		config: makeFrontWindowGuardianConfig(front),
 		polyfilled: false,
 		adBlockers: {
 			active: undefined,

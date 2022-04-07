@@ -9,7 +9,7 @@ import { CoreVitals } from './CoreVitals.importable';
 import { FrontLayout } from '../layouts/FrontLayout';
 
 type Props = {
-	Front: FrontType;
+	front: FrontType;
 	NAV: NavType;
 };
 
@@ -18,10 +18,10 @@ type Props = {
  * Article is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
- * @param {FrontType} props.Front - The article JSON data
+ * @param {FrontType} props.front - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * */
-export const FrontPage = ({ Front, NAV }: Props) => {
+export const FrontPage = ({ front, NAV }: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -48,7 +48,7 @@ export const FrontPage = ({ Front, NAV }: Props) => {
 			<Island clientOnly={true} deferUntil="idle">
 				<CoreVitals />
 			</Island>
-			<FrontLayout Front={Front} NAV={NAV} />
+			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>
 	);
 };

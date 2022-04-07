@@ -11,7 +11,7 @@ import { escapeData } from '../../lib/escapeData';
 import { makeFrontWindowGuardian } from '../../model/window-guardian';
 
 interface Props {
-	Front: FrontType;
+	front: FrontType;
 	NAV: NavType;
 }
 
@@ -40,8 +40,8 @@ const generateScriptTags = (
 		];
 	}, []);
 
-export const frontToHtml = ({ Front, NAV }: Props): string => {
-	const title = Front.webTitle;
+export const frontToHtml = ({ front, NAV }: Props): string => {
+	const title = front.webTitle;
 	const key = 'dcr';
 	const cache = createCache({ key });
 
@@ -51,7 +51,7 @@ export const frontToHtml = ({ Front, NAV }: Props): string => {
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<FrontPage Front={Front} NAV={NAV} />
+			<FrontPage front={front} NAV={NAV} />
 		</CacheProvider>,
 	);
 
@@ -90,7 +90,7 @@ export const frontToHtml = ({ Front, NAV }: Props): string => {
 		{ src: polyfillIO },
 		...getScriptArrayFromFile('bootCmp.js'),
 		...getScriptArrayFromFile('ophan.js'),
-		Front.config && { src: Front.config.commercialBundleUrl },
+		front.config && { src: front.config.commercialBundleUrl },
 		...getScriptArrayFromFile('sentryLoader.js'),
 		...getScriptArrayFromFile('dynamicImport.js'),
 		...getScriptArrayFromFile('islands.js'),
@@ -123,13 +123,13 @@ export const frontToHtml = ({ Front, NAV }: Props): string => {
 	 * is placed in a script tag on the page
 	 */
 	const windowGuardian = escapeData(
-		JSON.stringify(makeFrontWindowGuardian(Front)),
+		JSON.stringify(makeFrontWindowGuardian(front)),
 	);
 
 	const keywords =
-		typeof Front.config.keywords === 'undefined'
+		typeof front.config.keywords === 'undefined'
 			? ''
-			: Front.config.keywords;
+			: front.config.keywords;
 
 	return frontTemplate({
 		priorityScriptTags,

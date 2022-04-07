@@ -27,10 +27,10 @@ const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 
 const enhanceFront = (body: Record<string, unknown>): FrontType => {
 	const enhanced = validateAsFrontType(body);
-	const Front: FrontType = {
+	const front: FrontType = {
 		...enhanced,
 	};
-	return Front;
+	return front;
 };
 
 export const renderArticle = (
@@ -187,7 +187,7 @@ export const renderFront = (
 	try {
 		const front = enhanceFront(body);
 		const html = frontToHtml({
-			Front: front,
+			front,
 			NAV: extractNAV(front.nav),
 		});
 		res.status(200).send(html);
