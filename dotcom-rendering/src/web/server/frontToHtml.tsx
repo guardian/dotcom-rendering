@@ -126,10 +126,7 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 		JSON.stringify(makeFrontWindowGuardian(front)),
 	);
 
-	const keywords =
-		typeof front.config.keywords === 'undefined'
-			? ''
-			: front.config.keywords;
+	const keywords = front.config.keywords ?? '';
 
 	return frontTemplate({
 		priorityScriptTags,
