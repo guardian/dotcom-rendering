@@ -4,9 +4,9 @@ import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import { OptionKind } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import type { Item } from 'item';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
-import type { Item } from 'item';
 import type { FC, ReactElement } from 'react';
 import { renderCaption } from 'renderer';
 

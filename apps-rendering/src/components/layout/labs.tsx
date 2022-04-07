@@ -17,10 +17,10 @@ import Metadata from 'components/metadata';
 import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
 import Standfirst from 'components/standfirst';
-import MainMedia from 'mainMedia';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import { pipe } from 'lib';
+import MainMedia from 'mainMedia';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,

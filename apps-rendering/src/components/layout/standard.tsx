@@ -24,7 +24,6 @@ import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
 import Standfirst from 'components/standfirst';
 import Tags from 'components/tags';
-import MainMedia from 'mainMedia';
 import { getFormat } from 'item';
 import type {
 	Item,
@@ -33,6 +32,7 @@ import type {
 	Standard as StandardItem,
 } from 'item';
 import { maybeRender, pipe } from 'lib';
+import MainMedia from 'mainMedia';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,

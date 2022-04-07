@@ -27,11 +27,11 @@ import type {
 	Request,
 } from 'express';
 import express from 'express';
-import { MainMediaKind } from 'mainMedia';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
 import { pipe, resultToNullable, toArray } from 'lib';
 import { logger } from 'logger';
+import { MainMediaKind } from 'mainMedia';
 import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
 import { parseRelatedContent } from 'relatedContent';

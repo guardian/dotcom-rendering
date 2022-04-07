@@ -23,11 +23,11 @@ import LiveblogHeader from 'components/liveblogHeader';
 import Metadata from 'components/metadata';
 import RelatedContent from 'components/relatedContent';
 import Tags from 'components/tags';
-import MainMedia from 'mainMedia';
 import { getFormat } from 'item';
 import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
+import MainMedia from 'mainMedia';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
 

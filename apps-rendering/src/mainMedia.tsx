@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import HeaderImage from 'components/headerImage';
 import HeaderVideo from 'components/headerVideo';
@@ -20,7 +20,6 @@ export type MainMedia =
 	| { kind: MainMediaKind.Image; image: ImageData }
 	| { kind: MainMediaKind.Video; video: VideoData };
 
-
 // ----- Component ----- //
 
 interface Props {
@@ -30,14 +29,13 @@ interface Props {
 
 const MainMedia: FC<Props> = ({ format, mainMedia }) =>
 	maybeRender(mainMedia, (media) => {
-			switch (media.kind) {
-				case MainMediaKind.Image:
-					return <HeaderImage image={media.image} format={format} />;
-				case MainMediaKind.Video:
-					return <HeaderVideo video={media.video} format={format} />;
-			}
-		},
-	);
+		switch (media.kind) {
+			case MainMediaKind.Image:
+				return <HeaderImage image={media.image} format={format} />;
+			case MainMediaKind.Video:
+				return <HeaderVideo video={media.video} format={format} />;
+		}
+	});
 
 // ----- Exports ----- //
 

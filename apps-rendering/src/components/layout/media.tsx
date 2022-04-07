@@ -10,9 +10,9 @@ import Byline from 'components/media/byline';
 import Tags from 'components/media/tags';
 import RelatedContent from 'components/relatedContent';
 import Standfirst from 'components/standfirst';
-import MainMedia from 'mainMedia';
 import { getFormat } from 'item';
 import type { Item } from 'item';
+import MainMedia from 'mainMedia';
 import type { FC, ReactNode } from 'react';
 import { articleWidthStyles, onwardStyles } from 'styles';
 

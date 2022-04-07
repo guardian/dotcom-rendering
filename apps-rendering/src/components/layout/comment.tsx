@@ -21,9 +21,9 @@ import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
 import Standfirst from 'components/standfirst';
 import Tags from 'components/tags';
-import MainMedia from 'mainMedia';
 import { getFormat } from 'item';
 import type { Comment as CommentItem, Editorial, Letter } from 'item';
+import MainMedia from 'mainMedia';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
