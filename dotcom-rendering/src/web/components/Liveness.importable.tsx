@@ -146,9 +146,7 @@ export const Liveness = ({
 	hasPinnedPost,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
-	const [topOfBlogVisible, setTopOfBlogVisible] = useState<
-		boolean | undefined
-	>();
+	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 

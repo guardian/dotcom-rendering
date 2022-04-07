@@ -53,7 +53,7 @@ class BlockEnhancer {
 }
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
-// exmaple: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
+// example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
 // as they both effect SubheadingBlockElement
 export const enhanceBlocks = (blocks: Block[], format: CAPIFormat): Block[] => {
 	return new BlockEnhancer(blocks, format)
