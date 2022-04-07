@@ -9,8 +9,8 @@ import {
 import { none, OptionKind, some, toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
-import type { MainMedia } from 'headerMedia';
-import { MainMediaKind } from 'headerMedia';
+import type { MainMedia } from 'mainMedia';
+import { MainMediaKind } from 'mainMedia';
 import type { DeadBlog, LiveBlog } from 'item';
 import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';

@@ -10,7 +10,8 @@ import Byline from 'components/media/byline';
 import Tags from 'components/media/tags';
 import RelatedContent from 'components/relatedContent';
 import Standfirst from 'components/standfirst';
-import HeaderMedia from 'headerMedia';
+import MainMedia from 'mainMedia';
+import { getFormat } from 'item';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { articleWidthStyles, onwardStyles } from 'styles';
@@ -40,7 +41,10 @@ const Media: FC<Props> = ({ item, children }) => (
 	<main css={[Styles]}>
 		<article css={BorderStyles}>
 			<header>
-				<HeaderMedia item={item} />
+				<MainMedia
+					format={getFormat(item)}
+					mainMedia={item.mainMedia}
+				/>
 				<div css={articleWidthStyles}>
 					<Series series={item.series} theme={item.theme} />
 				</div>

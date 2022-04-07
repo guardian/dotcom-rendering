@@ -17,7 +17,8 @@ import Metadata from 'components/metadata';
 import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
 import Standfirst from 'components/standfirst';
-import HeaderMedia from 'headerMedia';
+import MainMedia from 'mainMedia';
+import { getFormat } from 'item';
 import type { Item } from 'item';
 import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
@@ -60,7 +61,10 @@ const Labs: FC<Props> = ({ item, children }) => {
 		<main css={[Styles, DarkStyles]}>
 			<article css={BorderStyles}>
 				<header>
-					<HeaderMedia item={item} />
+					<MainMedia
+						format={getFormat(item)}
+						mainMedia={item.mainMedia}
+					/>
 					<div>
 						<Series item={item} />
 						<Headline item={item} />

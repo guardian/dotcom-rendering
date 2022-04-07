@@ -27,7 +27,7 @@ import type {
 	Request,
 } from 'express';
 import express from 'express';
-import { MainMediaKind } from 'headerMedia';
+import { MainMediaKind } from 'mainMedia';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
 import { pipe, resultToNullable, toArray } from 'lib';

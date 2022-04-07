@@ -16,8 +16,8 @@ import { ElementKind } from 'bodyElement';
 import { parse } from 'client/parser';
 import type { Contributor } from 'contributor';
 import type { MatchScores } from 'football';
-import type { MainMedia } from 'headerMedia';
-import { MainMediaKind } from 'headerMedia';
+import type { MainMedia } from 'mainMedia';
+import { MainMediaKind } from 'mainMedia';
 import type { Image } from 'image';
 import type {
 	Comment,

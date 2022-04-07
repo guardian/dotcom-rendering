@@ -23,7 +23,8 @@ import LiveblogHeader from 'components/liveblogHeader';
 import Metadata from 'components/metadata';
 import RelatedContent from 'components/relatedContent';
 import Tags from 'components/tags';
-import HeaderMedia from 'headerMedia';
+import MainMedia from 'mainMedia';
+import { getFormat } from 'item';
 import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
@@ -151,7 +152,10 @@ const Live: FC<Props> = ({ item }) => {
 					</div>
 				</GridItem>
 				<GridItem area="main-media">
-					<HeaderMedia item={item} />
+					<MainMedia
+						format={getFormat(item)}
+						mainMedia={item.mainMedia}
+					/>
 				</GridItem>
 				<GridItem area="live-blocks">
 					<div

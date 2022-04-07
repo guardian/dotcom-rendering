@@ -34,7 +34,7 @@ import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
 import type { MatchScores } from 'football';
 import { parseMatchScores } from 'football';
-import type { MainMedia } from 'headerMedia';
+import type { MainMedia } from 'mainMedia';
 import type { Image } from 'image';
 import { parseCardImage } from 'image';
 import { pipe } from 'lib';

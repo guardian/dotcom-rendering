@@ -24,7 +24,8 @@ import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
 import Standfirst from 'components/standfirst';
 import Tags from 'components/tags';
-import HeaderMedia from 'headerMedia';
+import MainMedia from 'mainMedia';
+import { getFormat } from 'item';
 import type {
 	Item,
 	MatchReport as MatchReportItem,
@@ -136,7 +137,10 @@ const Standard: FC<Props> = ({ item, children }) => {
 					</div>
 				))}
 				<header>
-					<HeaderMedia item={item} />
+					<MainMedia
+						format={getFormat(item)}
+						mainMedia={item.mainMedia}
+					/>
 					<Series item={item} />
 					<Headline item={item} />
 					<div css={articleWidthStyles}>

@@ -15,7 +15,7 @@ import {
 import { SvgQuote } from '@guardian/source-react-components';
 import { OptionKind } from '@guardian/types';
 import { editionsHeadlineTextColour } from 'editorialStyles';
-import { MainMediaKind } from 'headerMedia';
+import { MainMediaKind } from 'mainMedia';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index } from 'lib';
