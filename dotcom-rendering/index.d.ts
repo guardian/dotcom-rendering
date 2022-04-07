@@ -1,5 +1,5 @@
 // ------------------------  //
-// CAPIType and its subtypes //
+// CAPIArticleType and its subtypes //
 // ------------------------- //
 
 // Pillars are used for styling
@@ -428,7 +428,7 @@ interface CAPINavType {
 
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.
-interface CAPIType {
+interface CAPIArticleType {
 	headline: string;
 	standfirst: string;
 	webTitle: string;
@@ -744,44 +744,6 @@ interface ConfigType extends CommercialConfigType {
 	isPreview?: boolean;
 }
 
-interface ConfigTypeBrowser {
-	frontendAssetsFullURL: string;
-	isDev: boolean;
-	ajaxUrl: string;
-	shortUrlId: string;
-	pageId: string;
-	isPaidContent: boolean;
-	showRelatedContent: boolean;
-	keywordIds: string;
-	ampIframeUrl: string;
-	ampPrebid: boolean;
-	permutive: boolean;
-	enableSentryReporting: boolean;
-	enableDiscussionSwitch: boolean;
-	slotBodyEnd: boolean;
-	isSensitive: boolean;
-	videoDuration: number;
-	edition: string;
-	section: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	sharedAdTargeting: { [key: string]: any };
-	adUnit: string;
-	idApiUrl: string;
-	discussionApiUrl: string;
-	discussionD2Uid: string;
-	discussionApiClientHeader: string;
-	dcrSentryDsn: string;
-	remoteBanner: boolean;
-	remoteHeader: boolean;
-	puzzlesBanner: boolean;
-	ausMoment2020Header: boolean;
-	switches: CAPIType['config']['switches'];
-	abTests: CAPIType['config']['abTests'];
-	host?: string;
-	idUrl?: string;
-	mmaUrl?: string;
-}
-
 interface GADataType {
 	pillar: LegacyPillar;
 	webTitle: string;
@@ -805,7 +767,7 @@ interface GADataType {
 interface DCRServerDocumentData {
 	page: string;
 	site: string;
-	CAPI: CAPIType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	GA: GADataType;
 	linkedData: { [key: string]: any };

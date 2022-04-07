@@ -722,6 +722,7 @@ export const renderElement = ({
 						adTargeting={adTargeting}
 						isMainMedia={isMainMedia}
 						id={element.id}
+						elementId={element.elementId}
 						assetId={element.assetId}
 						expired={element.expired}
 						overrideImage={element.overrideImage}

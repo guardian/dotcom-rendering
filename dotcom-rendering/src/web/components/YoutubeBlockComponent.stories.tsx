@@ -53,9 +53,11 @@ export const Default = () => {
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
+				elementId="5ab531a2-f6ea-499d-b274-191114c8628c"
 				expired={false}
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -86,11 +88,13 @@ export const Vertical = () => {
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
+				elementId="5ab531a2-f6ea-499d-b274-191114c8628c"
 				expired={false}
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				height={259}
 				width={460}
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -121,12 +125,14 @@ export const Expired = () => {
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
+				elementId="5ab531a2-f6ea-499d-b274-191114c8628c"
 				expired={true}
 				overrideImage="https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/500.jpg?quality=85&auto=format&fit=max&s=17c70ec70002ea34886fd6c2605cd81e"
 				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				height={259}
 				width={460}
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -157,6 +163,7 @@ export const WithOverlayImage = () => {
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
+				elementId="5ab531a2-f6ea-499d-b274-191114c8628c"
 				expired={false}
 				duration={333}
 				overrideImage="https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/500.jpg?quality=85&auto=format&fit=max&s=17c70ec70002ea34886fd6c2605cd81e"
@@ -164,6 +171,7 @@ export const WithOverlayImage = () => {
 				role="inline"
 				height={259}
 				width={460}
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -194,6 +202,7 @@ export const WithPosterImage = () => {
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
+				elementId="5ab531a2-f6ea-499d-b274-191114c8628c"
 				expired={false}
 				duration={333}
 				posterImage={[
@@ -222,6 +231,7 @@ export const WithPosterImage = () => {
 				role="inline"
 				height={259}
 				width={460}
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -252,6 +262,7 @@ export const WithPosterAndOverlayImage = () => {
 				assetId="d2Q5bXvEgMg"
 				mediaTitle="Prince Harry and Meghan's 'bombshell' plans explained – video"
 				id="c2b8a51c-cb3d-41e7-bb79-1d9a091d0c28"
+				elementId="5ab531a2-f6ea-499d-b274-191114c8628c"
 				expired={false}
 				overrideImage="https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/500.jpg?quality=85&auto=format&fit=max&s=17c70ec70002ea34886fd6c2605cd81e"
 				duration={333}
@@ -281,6 +292,7 @@ export const WithPosterAndOverlayImage = () => {
 				role="inline"
 				height={259}
 				width={460}
+				stickyVideos={false}
 			/>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

@@ -88,6 +88,7 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 						case ArticlePillar.News:
 							return news[600];
 						case ArticlePillar.Sport:
+							return BLACK;
 						case ArticlePillar.Lifestyle:
 						case ArticlePillar.Culture:
 						case ArticlePillar.Opinion:

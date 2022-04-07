@@ -23,7 +23,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 		{children}
 	</div>
 );
-const CAPI = {
+const CAPIArticle = {
 	tags: [],
 	guardianBaseURL: 'https://theguardian.com',
 	inLeftCol: true,
@@ -32,7 +32,7 @@ const CAPI = {
 	sectionUrl: '/section_url',
 };
 const brexitCAPI = {
-	...CAPI,
+	...CAPIArticle,
 	...{
 		sectionLabel: 'Brexit',
 		sectionUrl: '/brexit',
@@ -45,7 +45,7 @@ const brexitCAPI = {
 };
 
 const beyondTheBladeCAPI = {
-	...CAPI,
+	...CAPIArticle,
 	...{
 		sectionLabel: 'Beyond the blade',
 		sectionUrl: '/beyond-the-blade',
@@ -128,7 +128,7 @@ export const immersiveCommentTag = () => {
 		>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...CAPI}
+				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Immersive,
 					theme: ArticlePillar.Sport,
@@ -152,7 +152,7 @@ export const ImmersiveSeriesTag = () => {
 		<Container>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...CAPI}
+				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Immersive,
 					theme: ArticlePillar.Sport,
@@ -176,7 +176,7 @@ export const ArticleBlogTag = () => {
 		<Container>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...CAPI}
+				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -200,7 +200,7 @@ export const ArticleOpinionTag = () => {
 		<Container>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...CAPI}
+				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -224,7 +224,7 @@ export const ArticleSeriesTag = () => {
 		<Container>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...CAPI}
+				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
@@ -248,7 +248,7 @@ export const SpecialReportTitle = () => {
 		<Container>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...CAPI}
+				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticleSpecial.SpecialReport,
@@ -272,7 +272,7 @@ export const ArticleNoTags = () => {
 		<Container>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...CAPI}
+				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Culture,
@@ -289,7 +289,7 @@ export const LabsStory = () => {
 		<Container>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...CAPI}
+				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticleSpecial.Labs,
@@ -313,7 +313,7 @@ export const LongStory = () => {
 		<Container>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...CAPI}
+				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.News,
@@ -337,7 +337,7 @@ export const LongWord = () => {
 		<Container>
 			<ArticleTitle
 				// eslint-disable-next-line react/jsx-props-no-spreading
-				{...CAPI}
+				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.News,
@@ -367,7 +367,7 @@ export const ArticleDeadBlogTitle = () => {
 					<p>{getThemeNameAsString(format)}</p>
 					<ArticleTitle
 						// eslint-disable-next-line react/jsx-props-no-spreading
-						{...CAPI}
+						{...CAPIArticle}
 						format={format}
 						tags={[
 							{
