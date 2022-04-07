@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source-foundations';
 import { useState } from 'react';
+import { useApi } from '../lib/useApi';
 import AutomaticFilterButton from './AutomaticFilterButton.importable';
 
 type Props = {
-	automaticFilterData?: FilterResult;
+	pageId?: string;
 	pinnedPostId?: string;
 };
 
@@ -34,22 +35,26 @@ const showAllFilter = {
 	percentage_blocks: 0,
 };
 
-export const AutomaticFilter = ({
-	automaticFilterData,
-	pinnedPostId,
-}: Props) => {
+export const AutomaticFilter = ({ pageId, pinnedPostId }: Props) => {
 	const [selectedFilter, setSelectedFilter] = useState('Show All');
+
+	const { data, error }: { data?: FilterResult; error?: any } = useApi(
+		`https://ner.code.dev-gutools.co.uk/v1/top-mentions?entities=PERSON,LOC,GPE&top=9&path=/${pageId}`,
+	);
+	if (error) {
+		return null;
+	}
 
 	return (
 		<div css={ContainerStyles}>
-			{automaticFilterData && automaticFilterData.results.length > 0 && (
+			{data && data.results.length > 0 && (
 				<AutomaticFilterButton
 					selectedFilter={selectedFilter}
 					setSelectedFilter={setSelectedFilter}
 					filter={showAllFilter}
 				/>
 			)}
-			{automaticFilterData?.results.map((filter: Filter) => (
+			{data?.results.map((filter: Filter) => (
 				<AutomaticFilterButton
 					selectedFilter={selectedFilter}
 					setSelectedFilter={setSelectedFilter}

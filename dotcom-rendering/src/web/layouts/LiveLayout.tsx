@@ -747,9 +747,7 @@ export const LiveLayout = ({ CAPI, NAV, format }: Props) => {
 									</Hide>
 									<Island>
 										<AutomaticFilter
-											automaticFilterData={
-												CAPI.automaticFilterData
-											}
+											pageId={CAPI.pageId}
 											pinnedPostId={CAPI.pinnedPost?.id}
 										/>
 									</Island>
