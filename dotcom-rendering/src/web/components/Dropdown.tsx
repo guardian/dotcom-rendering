@@ -17,6 +17,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 
 export interface DropdownLinkType {
+	id: string;
 	url: string;
 	title: string;
 	isActive?: boolean;

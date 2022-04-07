@@ -357,6 +357,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.config.switches.remoteHeader
 							}
 							contributionsServiceUrl={contributionsServiceUrl}
+							idApiUrl={CAPIArticle.config.idApiUrl}
 						/>
 					</ElementContainer>
 
