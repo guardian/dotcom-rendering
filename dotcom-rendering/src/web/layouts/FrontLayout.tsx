@@ -56,7 +56,7 @@ export const FrontLayout = ({ Front, NAV }: Props) => {
 							}
 							urls={Front.nav.readerRevenueLinks.header}
 							remoteHeader={Front.config.switches.remoteHeader}
-							contributionsServiceUrl="contributionsServiceUrl"
+							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 						/>
 					</ElementContainer>
 					<ElementContainer
