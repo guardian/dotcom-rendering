@@ -1,5 +1,3 @@
-type StageType = 'DEV' | 'CODE' | 'PROD';
-
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;
 	isDev: boolean;
@@ -20,6 +18,37 @@ export interface WindowGuardianConfig {
 		ajaxUrl: string;
 		shouldHideReaderRevenue: boolean;
 	} & ConfigType;
+	libs: {
+		googletag: string;
+	};
+	switches: { [key: string]: boolean };
+	tests: ServerSideTests;
+	ophan: {
+		pageViewId: string;
+		browserId: string;
+	};
+}
+
+interface WindowGuardianFrontConfig {
+	isDotcomRendering: boolean;
+	isDev: boolean;
+	stage: StageType;
+	frontendAssetsFullURL: string;
+	page: {
+		dcrCouldRender: boolean;
+		contentType: string;
+		edition: Edition;
+		revisionNumber: string;
+		dcrSentryDsn: string;
+		sentryHost: string;
+		sentryPublicApiKey: string;
+		keywordIds: string;
+		dfpAccountId: string;
+		adUnit: string;
+		showRelatedContent: boolean;
+		ajaxUrl: string;
+		shouldHideReaderRevenue: boolean;
+	};
 	libs: {
 		googletag: string;
 	};
@@ -103,7 +132,7 @@ export const makeWindowGuardian = (
 
 const makeFrontWindowGuardianConfig = (
 	Front: FrontType,
-): WindowGuardianConfig => {
+): WindowGuardianFrontConfig => {
 	const { config } = Front;
 	return {
 		// This indicates to the client side code that we are running a dotcom-rendering rendered page.
@@ -125,6 +154,7 @@ const makeFrontWindowGuardianConfig = (
 			adUnit: config.adUnit,
 			showRelatedContent: true,
 			ajaxUrl: config.ajaxUrl,
+			shouldHideReaderRevenue: false, // TODO Pass this in
 		},
 		libs: {
 			googletag: config.googletagUrl,
@@ -135,7 +165,7 @@ const makeFrontWindowGuardianConfig = (
 			pageViewId: '',
 			browserId: '',
 		},
-	} as WindowGuardianConfig;
+	};
 };
 
 export const makeFrontWindowGuardian = (
@@ -145,7 +175,7 @@ export const makeFrontWindowGuardian = (
 	// all the data that, for legacy reasons, for instance compatibility
 	// with the frontend commercial stack, or other scripts, we want to find
 	// at window.guardian.config
-	config: WindowGuardianConfig;
+	config: WindowGuardianFrontConfig;
 	polyfilled: boolean;
 	adBlockers: any;
 	modules: {

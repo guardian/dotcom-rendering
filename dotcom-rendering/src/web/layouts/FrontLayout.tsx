@@ -44,7 +44,7 @@ export const FrontLayout = ({ Front, NAV }: Props) => {
 						element="header"
 					>
 						<Header
-							edition={Front.editionId as Edition}
+							edition={Front.editionId}
 							idUrl={Front.config.idUrl}
 							mmaUrl={Front.config.mmaUrl}
 							supporterCTA={
@@ -73,7 +73,7 @@ export const FrontLayout = ({ Front, NAV }: Props) => {
 							subscribeUrl={
 								Front.nav.readerRevenueLinks.header.subscribe
 							}
-							edition={Front.editionId as Edition}
+							edition={Front.editionId}
 						/>
 					</ElementContainer>
 					{NAV.subNavSections && (
