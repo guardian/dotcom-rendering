@@ -193,8 +193,12 @@ export const SeriesSectionLink = ({
 	const palette = decidePalette(format);
 
 	const seriesTitleColour = isMatch
-		? palette.text.matchSeriesTitle
+		? palette.text.matchTitle
 		: palette.text.seriesTitle;
+
+	const sectionTitleColour = isMatch
+		? palette.text.matchTitle
+		: palette.text.sectionTitle;
 
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -273,7 +277,7 @@ export const SeriesSectionLink = ({
 									fontStyles(format),
 									breakWord,
 									css`
-										color: ${palette.text.sectionTitle};
+										color: ${sectionTitleColour};
 										background-color: ${palette.background
 											.sectionTitle};
 										box-shadow: -6px 0 0 0
@@ -390,7 +394,7 @@ export const SeriesSectionLink = ({
 									displayBlock,
 									breakWord,
 									css`
-										color: ${palette.text.sectionTitle};
+										color: ${sectionTitleColour};
 										background-color: ${palette.background
 											.sectionTitle};
 									`,
@@ -411,7 +415,7 @@ export const SeriesSectionLink = ({
 					css={[
 						sectionLabelLink,
 						css`
-							color: ${palette.text.sectionTitle};
+							color: ${sectionTitleColour};
 							background-color: ${palette.background
 								.sectionTitle};
 						`,

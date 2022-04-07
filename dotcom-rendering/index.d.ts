@@ -81,8 +81,8 @@ type Palette = {
 	text: {
 		headline: Colour;
 		seriesTitle: Colour;
-		matchSeriesTitle: Colour;
 		sectionTitle: Colour;
+		matchTitle: Colour;
 		byline: Colour;
 		twitterHandle: Colour;
 		caption: Colour;

@@ -195,6 +195,59 @@ export const ArticleBlogTag = () => {
 };
 ArticleBlogTag.story = { name: 'Article with a Blog tag' };
 
+export const LiveblogTitle = () => {
+	return (
+		<Container>
+			<div
+				css={css`
+					background-color: #005689;
+				`}
+			>
+				<ArticleTitle
+					// eslint-disable-next-line react/jsx-props-no-spreading
+					{...CAPIArticle}
+					format={{
+						display: ArticleDisplay.Standard,
+						theme: ArticlePillar.Sport,
+						design: ArticleDesign.LiveBlog,
+					}}
+					tags={[
+						{
+							id: '',
+							title: 'Liveblog title',
+							type: 'Blog',
+						},
+					]}
+				/>
+			</div>
+			<div
+				css={css`
+					background-color: #ffe500;
+				`}
+			>
+				<ArticleTitle
+					// eslint-disable-next-line react/jsx-props-no-spreading
+					{...CAPIArticle}
+					format={{
+						display: ArticleDisplay.Standard,
+						theme: ArticlePillar.Sport,
+						design: ArticleDesign.LiveBlog,
+					}}
+					tags={[
+						{
+							id: '',
+							title: 'Match liveblog title',
+							type: 'Blog',
+						},
+					]}
+					isMatch={true}
+				/>
+			</div>
+		</Container>
+	);
+};
+LiveblogTitle.story = { name: 'Liveblog title' };
+
 export const ArticleOpinionTag = () => {
 	return (
 		<Container>

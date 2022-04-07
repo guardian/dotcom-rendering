@@ -72,7 +72,7 @@ const textHeadline = (format: ArticleFormat): string => {
 	}
 };
 
-const textSeriesMatchTitle = (): string => {
+const textMatchTitle = (): string => {
 	return BLACK;
 };
 
@@ -1048,8 +1048,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		text: {
 			headline: textHeadline(format),
 			seriesTitle: textSeriesTitle(format),
-			matchSeriesTitle: textSeriesMatchTitle(),
 			sectionTitle: textSectionTitle(format),
+			matchTitle: textMatchTitle(),
 			byline: textByline(format),
 			twitterHandle: textTwitterHandle(format),
 			caption: textCaption(format),
