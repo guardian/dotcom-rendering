@@ -101,9 +101,10 @@ export const makeWindowGuardian = (
 	};
 };
 
-const makeFrontWindowGuardianConfig = (
-	Front: FrontType,
-): WindowGuardianConfig => {
+const makeFrontWindowGuardianConfig = ({
+	config,
+	editionId,
+}: FrontType): WindowGuardianConfig => {
 	const { config } = Front;
 	return {
 		// This indicates to the client side code that we are running a dotcom-rendering rendered page.
