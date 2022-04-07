@@ -130,10 +130,10 @@ export const makeWindowGuardian = (
 	};
 };
 
-const makeFrontWindowGuardianConfig = (
-	Front: FrontType,
-): WindowGuardianFrontConfig => {
-	const { config } = Front;
+const makeFrontWindowGuardianConfig = ({
+	config,
+	editionId,
+}: FrontType): WindowGuardianFrontConfig => {
 	return {
 		// This indicates to the client side code that we are running a dotcom-rendering rendered page.
 		isDotcomRendering: true,
@@ -143,7 +143,7 @@ const makeFrontWindowGuardianConfig = (
 		page: {
 			dcrCouldRender: true,
 			contentType: 'TODO: Do we need this?',
-			edition: Front.editionId,
+			edition: editionId,
 			revisionNumber: config.revisionNumber,
 			dcrSentryDsn:
 				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
