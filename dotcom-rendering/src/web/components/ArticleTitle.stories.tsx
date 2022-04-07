@@ -200,6 +200,7 @@ export const LiveblogTitle = () => {
 		<Container>
 			<div
 				css={css`
+					/* stylelint-disable-next-line color-no-hex */
 					background-color: #005689;
 				`}
 			>
@@ -222,6 +223,7 @@ export const LiveblogTitle = () => {
 			</div>
 			<div
 				css={css`
+					/* stylelint-disable-next-line color-no-hex */
 					background-color: #ffe500;
 				`}
 			>
