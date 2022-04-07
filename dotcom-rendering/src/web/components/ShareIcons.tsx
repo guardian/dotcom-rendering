@@ -14,6 +14,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { Hide } from './Hide';
 
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
+type ShareIconSize = 'small' | 'medium';
 
 type Props = {
 	pageId: string;
@@ -133,7 +134,7 @@ const getUrl = ({
 	CMP?: string;
 	blockId?: string;
 }) => {
-	const searchParams = new URLSearchParams();
+	const searchParams = new URLSearchParams({});
 	if (CMP) searchParams.append('CMP', CMP);
 	if (blockId) searchParams.append('page', `with:block-${blockId}`);
 
