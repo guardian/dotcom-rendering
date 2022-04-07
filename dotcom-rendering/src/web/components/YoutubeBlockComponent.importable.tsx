@@ -7,7 +7,7 @@ import { YoutubeAtom } from '@guardian/atoms-rendering';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 
 import { trackVideoInteraction } from '../browser/ga/ga';
-import { record, submitComponentEvent } from '../browser/ophan/ophan';
+import { record } from '../browser/ophan/ophan';
 
 import { Caption } from './Caption';
 
@@ -156,32 +156,14 @@ export const YoutubeBlockComponent = ({
 
 	const ophanTracking = (trackingEvent: string) => {
 		if (!id) return;
-
-		if (trackingEvent === 'stick') {
-			submitComponentEvent({
-				component: {
-					componentType: 'STICKY_VIDEO',
-					id: assetId,
-				},
-				action: 'STICK',
-			});
-		} else if (trackingEvent === 'close') {
-			submitComponentEvent({
-				component: {
-					componentType: 'STICKY_VIDEO',
-					id: assetId,
-				},
-				action: 'CLOSE',
-			});
-		} else {
-			record({
-				video: {
-					id: `gu-video-youtube-${id}`,
-					eventType: `video:content:${trackingEvent}`,
-				},
-			});
-		}
+		record({
+			video: {
+				id: `gu-video-youtube-${id}`,
+				eventType: `video:content:${trackingEvent}`,
+			},
+		});
 	};
+
 	const gaTracking = (trackingEvent: string) => {
 		if (!id) return;
 		trackVideoInteraction({
