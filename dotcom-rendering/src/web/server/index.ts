@@ -185,10 +185,10 @@ export const renderFront = (
 	res: express.Response,
 ): void => {
 	try {
-		const enhanced = enhanceFront(body);
+		const front = enhanceFront(body);
 		const html = frontToHtml({
-			Front: enhanced,
-			NAV: extractNAV(enhanced.nav),
+			Front: front,
+			NAV: extractNAV(front.nav),
 		});
 		res.status(200).send(html);
 	} catch (e) {
