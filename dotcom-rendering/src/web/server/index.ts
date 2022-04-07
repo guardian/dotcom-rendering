@@ -181,14 +181,14 @@ export const renderKeyEvents = (
 };
 
 export const renderFront = (
-	{ body, query }: express.Request,
+	{ body }: express.Request,
 	res: express.Response,
 ): void => {
 	try {
 		const enhanced = enhanceFront(body);
 		const html = frontToHtml({
-			query,
-			body: enhanced,
+			Front: enhanced,
+			NAV: extractNAV(enhanced.nav),
 		});
 		res.status(200).send(html);
 	} catch (e) {
