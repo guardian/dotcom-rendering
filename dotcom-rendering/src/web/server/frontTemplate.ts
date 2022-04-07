@@ -37,18 +37,20 @@ export const frontTemplate = ({
 	// See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
 	const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">`;
 
-	// Duplicated prefetch and preconnect tags from DCP:
-	// Documented here: https://github.com/guardian/frontend/pull/12935
-	// Preconnect should be used for the most crucial third party domains
-	// "use preconnect when you know for sure that you’re going to be accessing a resource"
-	// - https://www.smashingmagazine.com/2019/04/optimization-performance-resource-hints/
-	// DNS-prefetch should be used for other third party domains that we are likely to connect to but not sure (ads)
-	// Preconnecting to too many URLs can reduce page performance
-	// DNS-prefetch can also be used as a fallback for IE11
-	// More information on preconnecting:
-	// https://css-tricks.com/using-relpreconnect-to-establish-network-connections-early-and-increase-performance/
-	// More information on prefetching:
-	// https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+	/**
+	 * Duplicated prefetch and preconnect tags from DCP:
+	 * Documented here: https://github.com/guardian/frontend/pull/12935
+	 * Preconnect should be used for the most crucial third party domains
+	 * "use preconnect when you know for sure that you’re going to be accessing a resource"
+	 * - https://www.smashingmagazine.com/2019/04/optimization-performance-resource-hints/
+	 * DNS-prefetch should be used for other third party domains that we are likely to connect to but not sure (ads)
+	 * Preconnecting to too many URLs can reduce page performance
+	 * DNS-prefetch can also be used as a fallback for IE11
+	 * More information on preconnecting:
+	 * https://css-tricks.com/using-relpreconnect-to-establish-network-connections-early-and-increase-performance/
+	 * More information on prefetching:
+	 * https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+	 */
 	const staticPreconnectUrls = [
 		`${ASSET_ORIGIN}`,
 		`https://i.guim.co.uk`,
