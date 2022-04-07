@@ -11,7 +11,8 @@ assignees: ''
 
 A clear and concise description of what the bug is.
 
-Does it occur on any specific browsers or breakpoints?
+- Does it occur on any specific browsers or breakpoints?
+- Should this issue be assigned to one of our GitHub project boards, or to a milestone?
 
 ## Steps To Reproduce
 
