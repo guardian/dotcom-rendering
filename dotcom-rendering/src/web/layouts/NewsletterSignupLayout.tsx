@@ -21,10 +21,11 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { NewsLetterSignupContent } from '../components/NewsLetterSignupContent';
 import { NewsLetterSignupBanner } from '../components/NewsLetterSignupBanner';
 import { NewsletterPromotionBanner } from '../components/NewsletterPromotionBanner';
+import { getContributionsServiceUrl } from '../lib/contributions';
 
 
 interface Props {
-	CAPI: CAPIType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 	palette: Palette;
@@ -34,7 +35,7 @@ function isBannerElement(element:CAPIElement) {
 	return element._type==='model.dotcomrendering.pageElements.EmbedBlockElement' && element.html.includes('data-is-banner-for-newsletter-signup=\"true\"');
 }
 
-function removeBannerElements(CAPI:CAPIType): [CAPIType, EmbedBlockElement[]] {
+function removeBannerElements(CAPI:CAPIArticleType): [CAPIArticleType, EmbedBlockElement[]] {
 	const bannerElements: EmbedBlockElement[] = []
 	const filteredCAPI = {...CAPI}
 
@@ -80,18 +81,20 @@ function getNewsletterDataForDemo(): NewsletterData {
 }
 
 export const NewsletterSignupLayout = ({
-	CAPI,
+	CAPIArticle,
 	NAV,
 	format,
 	palette,
 }: Props) => {
 	const formatForNav = {
 		...format,
-		theme: getCurrentPillar(CAPI),
+		theme: getCurrentPillar(CAPIArticle),
 	};
 
 	const newsletterData = getNewsletterDataForDemo();
-	const [CAPIWithoutBanners, bannerElements] = removeBannerElements(CAPI);
+	const [CAPIWithoutBanners, bannerElements] = removeBannerElements(CAPIArticle);
+
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
 	return (
 		<>
@@ -105,8 +108,8 @@ export const NewsletterSignupLayout = ({
 							shouldCenter={false}
 						>
 							<HeaderAdSlot
-								isAdFreeUser={CAPI.isAdFreeUser}
-								shouldHideAds={CAPI.shouldHideAds}
+								isAdFreeUser={CAPIArticle.isAdFreeUser}
+								shouldHideAds={CAPIArticle.shouldHideAds}
 								display={format.display}
 							/>
 						</ElementContainer>
@@ -119,15 +122,22 @@ export const NewsletterSignupLayout = ({
 						element="header"
 					>
 						<Header
-							edition={CAPI.editionId}
-							idUrl={CAPI.config.idUrl}
-							mmaUrl={CAPI.config.mmaUrl}
+							edition={CAPIArticle.editionId}
+							idUrl={CAPIArticle.config.idUrl}
+							mmaUrl={CAPIArticle.config.mmaUrl}
 							supporterCTA={
-								CAPI.nav.readerRevenueLinks.header.supporter
+								CAPIArticle.nav.readerRevenueLinks.header.supporter
 							}
-							discussionApiUrl={CAPI.config.discussionApiUrl}
+							discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 							isAnniversary={
-								CAPI.config.switches.anniversaryHeaderSvg
+								CAPIArticle.config.switches.anniversaryHeaderSvg
+							}
+							urls={CAPIArticle.nav.readerRevenueLinks.header}
+							remoteHeader={
+								CAPIArticle.config.switches.remoteHeader
+							}
+							contributionsServiceUrl={
+								contributionsServiceUrl
 							}
 						/>
 					</ElementContainer>
@@ -143,9 +153,9 @@ export const NewsletterSignupLayout = ({
 							nav={NAV}
 							format={formatForNav}
 							subscribeUrl={
-								CAPI.nav.readerRevenueLinks.header.subscribe
+								CAPIArticle.nav.readerRevenueLinks.header.subscribe
 							}
-							edition={CAPI.editionId}
+							edition={CAPIArticle.editionId}
 						/>
 					</ElementContainer>
 
@@ -172,7 +182,7 @@ export const NewsletterSignupLayout = ({
 				</>
 			</div>
 
-			{CAPI.config.switches.surveys && (
+			{CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
@@ -185,8 +195,9 @@ export const NewsletterSignupLayout = ({
 					<NewsLetterSignupContent
 						format={format}
 						palette={palette}
-						CAPI={CAPIWithoutBanners}
+						CAPIArticle={CAPIWithoutBanners}
 						newsletterData={newsletterData}
+						contributionsServiceUrl={contributionsServiceUrl}
 					/>
 				</ElementContainer>
 
@@ -205,20 +216,20 @@ export const NewsletterSignupLayout = ({
 					placeholderHeight={304}
 				>
 					<OnwardsUpper
-						ajaxUrl={CAPI.config.ajaxUrl}
-						hasRelated={CAPI.hasRelated}
-						hasStoryPackage={CAPI.hasStoryPackage}
-						isAdFreeUser={CAPI.isAdFreeUser}
-						pageId={CAPI.pageId}
-						isPaidContent={CAPI.config.isPaidContent || false}
-						showRelatedContent={CAPI.config.showRelatedContent}
-						keywordIds={CAPI.config.keywordIds}
-						contentType={CAPI.contentType}
-						tags={CAPI.tags}
+						ajaxUrl={CAPIArticle.config.ajaxUrl}
+						hasRelated={CAPIArticle.hasRelated}
+						hasStoryPackage={CAPIArticle.hasStoryPackage}
+						isAdFreeUser={CAPIArticle.isAdFreeUser}
+						pageId={CAPIArticle.pageId}
+						isPaidContent={CAPIArticle.config.isPaidContent || false}
+						showRelatedContent={CAPIArticle.config.showRelatedContent}
+						keywordIds={CAPIArticle.config.keywordIds}
+						contentType={CAPIArticle.contentType}
+						tags={CAPIArticle.tags}
 						format={format}
 						pillar={format.theme}
-						edition={CAPI.editionId}
-						shortUrlId={CAPI.config.shortUrlId}
+						edition={CAPIArticle.editionId}
+						shortUrlId={CAPIArticle.config.shortUrlId}
 						alsoShowCuratedContent={false}
 						customHeading="Other popular newsletters"
 					/>
@@ -267,9 +278,14 @@ export const NewsletterSignupLayout = ({
 				element="footer"
 			>
 				<Footer
-					pageFooter={CAPI.pageFooter}
+					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPIArticle.nav.readerRevenueLinks.header}
+					edition={CAPIArticle.editionId}
+					contributionsServiceUrl={
+						CAPIArticle.contributionsServiceUrl
+					}
 				/>
 			</ElementContainer>
 

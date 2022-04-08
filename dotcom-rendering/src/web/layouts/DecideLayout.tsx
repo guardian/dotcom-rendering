@@ -31,7 +31,7 @@ export const DecideLayout = ({
 
 		return (
 			<NewsletterSignupLayout
-				CAPI={CAPIArticle}
+				CAPIArticle={CAPIArticle}
 				NAV={NAV}
 				format={newsletterFormat}
 				palette={newsletterPalette}

@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 
-import { from, until, textSans, brandAlt, neutral } from '@guardian/source-foundations';
+import {
+	from,
+	until,
+	textSans,
+	brandAlt,
+	neutral,
+} from '@guardian/source-foundations';
 
 import { ArticleDesign } from '@guardian/libs';
 import { SvgEnvelope } from '@guardian/source-react-components';
@@ -18,8 +24,9 @@ import { PrivacyText } from './PrivacyText';
 type Props = {
 	format: ArticleFormat;
 	palette: Palette;
-	CAPI: CAPIType;
+	CAPIArticle: CAPIArticleType;
 	newsletterData: NewsletterData;
+	contributionsServiceUrl: string;
 };
 
 const NewsletterContentGrid = ({
@@ -187,30 +194,28 @@ const imageWrapperLinkStyle = css`
 	}
 `;
 
-
-
 export const NewsLetterSignupContent = ({
 	format,
 	palette,
-	CAPI,
+	CAPIArticle,
 	newsletterData,
+	contributionsServiceUrl,
 }: Props) => {
-
+	console.log({ newsletterData });
 
 	const {
 		config: { host },
-	} = CAPI;
+	} = CAPIArticle;
 
 	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: CAPI.isAdFreeUser,
-		isSensitive: CAPI.config.isSensitive,
-		videoDuration: CAPI.config.videoDuration,
-		edition: CAPI.config.edition,
-		section: CAPI.config.section,
-		sharedAdTargeting: CAPI.config.sharedAdTargeting,
-		adUnit: CAPI.config.adUnit,
+		isAdFreeUser: CAPIArticle.isAdFreeUser,
+		isSensitive: CAPIArticle.config.isSensitive,
+		videoDuration: CAPIArticle.config.videoDuration,
+		edition: CAPIArticle.config.edition,
+		section: CAPIArticle.config.section,
+		sharedAdTargeting: CAPIArticle.config.sharedAdTargeting,
+		adUnit: CAPIArticle.config.adUnit,
 	});
-
 
 	return (
 		<NewsletterContentGrid format={format}>
@@ -223,36 +228,53 @@ export const NewsLetterSignupContent = ({
 				</div>
 			</GridItem>
 			<GridItem area="border">
-				<Border palette={palette} />
+				<Border format={format} />
 			</GridItem>
 			<GridItem area="headline">
 				<ArticleHeadline
-					headlineString={CAPI.headline}
+					headlineString={CAPIArticle.headline}
 					format={format}
 					tags={[]}
+					webPublicationDateDeprecated={
+						CAPIArticle.webPublicationDateDeprecated
+					}
 				/>
 			</GridItem>
 			<GridItem area="content" element="main">
 				<ArticleContainer format={format}>
 					<ArticleBody
 						format={format}
-						palette={palette}
-						blocks={CAPI.blocks}
+						blocks={CAPIArticle.blocks}
+						pinnedPost={CAPIArticle.pinnedPost}
 						adTargeting={adTargeting}
 						host={host}
-						pageId={CAPI.pageId}
-						webTitle={CAPI.webTitle}
-						ajaxUrl={CAPI.config.ajaxUrl}
+						pageId={CAPIArticle.pageId}
+						webTitle={CAPIArticle.webTitle}
+						ajaxUrl={CAPIArticle.config.ajaxUrl}
+						switches={CAPIArticle.config.switches}
+						isSensitive={CAPIArticle.config.isSensitive}
+						isAdFreeUser={CAPIArticle.isAdFreeUser}
+						section={CAPIArticle.config.section}
+						shouldHideReaderRevenue={
+							CAPIArticle.shouldHideReaderRevenue
+						}
+						tags={CAPIArticle.tags}
+						isPaidContent={!!CAPIArticle.config.isPaidContent}
+						contributionsServiceUrl={contributionsServiceUrl}
+						contentType={CAPIArticle.contentType}
+						sectionName={CAPIArticle.sectionName || ''}
+						isPreview={CAPIArticle.config.isPreview}
+						idUrl={CAPIArticle.config.idUrl || ''}
+						isDev={!!CAPIArticle.config.isDev}
 					/>
 				</ArticleContainer>
 
 				<div css={shareSectionStyles}>
 					<h2>Tell your friends</h2>
 					<ShareIcons
-						pageId={CAPI.pageId}
-						webTitle={CAPI.webTitle}
+						pageId={CAPIArticle.pageId}
+						webTitle={CAPIArticle.webTitle}
 						displayIcons={['facebook', 'twitter', 'email']}
-						palette={palette}
 						format={format}
 						size="medium"
 						context="ArticleMeta"
@@ -260,16 +282,19 @@ export const NewsLetterSignupContent = ({
 				</div>
 			</GridItem>
 			<GridItem area="image" element="aside">
-				{CAPI.mainMediaElements.length > 0 && (
-					<div
-						css={imageWrapperLinkStyle}
-					>
+				{CAPIArticle.mainMediaElements.length > 0 && (
+					<div css={imageWrapperLinkStyle}>
 						<MainMedia
 							format={format}
-							elements={CAPI.mainMediaElements}
-							pageId={CAPI.pageId}
-							webTitle={CAPI.webTitle}
-							ajaxUrl={CAPI.config.ajaxUrl}
+							elements={CAPIArticle.mainMediaElements}
+							adTargeting={adTargeting}
+							host={host}
+							pageId={CAPIArticle.pageId}
+							webTitle={CAPIArticle.webTitle}
+							ajaxUrl={CAPIArticle.config.ajaxUrl}
+							switches={CAPIArticle.config.switches}
+							isAdFreeUser={CAPIArticle.isAdFreeUser}
+							isSensitive={CAPIArticle.config.isSensitive}
 							hideCaption={true}
 						/>
 					</div>
@@ -278,7 +303,7 @@ export const NewsLetterSignupContent = ({
 
 			<GridItem area="privacy">
 				<div css={privacyStyles}>
-					<PrivacyText recaptcha={true} subject='newsletters' />
+					<PrivacyText recaptcha={true} subject="newsletters" />
 				</div>
 			</GridItem>
 		</NewsletterContentGrid>
