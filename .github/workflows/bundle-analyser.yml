@@ -26,7 +26,7 @@ jobs:
               working-directory: dotcom-rendering
 
             - name: Archive code coverage results
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v3
               with:
                   name: bundle-analyser-report
                   path: dotcom-rendering/dist/browser-bundles.html
