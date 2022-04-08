@@ -107,7 +107,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				{front.pressedPage.collections.map((collection, index) => {
 					return (
 						<ContainerLayout
-							title={collection.displayName as string}
+							title={collection.displayName}
 							showTopBorder={index !== 0}
 							sideBorders={true}
 							centralBorder="partial"

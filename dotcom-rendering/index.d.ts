@@ -547,7 +547,9 @@ type FrontPropertiesType = {
 	commercial: Record<string, unknown>;
 };
 
-type PressedCollectionType = Record<string, unknown>;
+type PressedCollectionType = {
+	displayName: string;
+};
 
 type FrontConfigType = {
 	avatarApiUrl: string;
