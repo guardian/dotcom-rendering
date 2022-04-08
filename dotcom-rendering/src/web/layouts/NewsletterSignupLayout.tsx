@@ -23,7 +23,6 @@ import { NewsLetterSignupBanner } from '../components/NewsLetterSignupBanner';
 import { NewsletterPromotionBanner } from '../components/NewsletterPromotionBanner';
 import { getContributionsServiceUrl } from '../lib/contributions';
 
-
 interface Props {
 	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
@@ -31,32 +30,37 @@ interface Props {
 	palette: Palette;
 }
 
-function isBannerElement(element:CAPIElement) {
-	return element._type==='model.dotcomrendering.pageElements.EmbedBlockElement' && element.html.includes('data-is-banner-for-newsletter-signup=\"true\"');
+function isBannerElement(element: CAPIElement) {
+	return (
+		element._type ===
+			'model.dotcomrendering.pageElements.EmbedBlockElement' &&
+		element.html.includes('data-is-banner-for-newsletter-signup="true"')
+	);
 }
 
-function removeBannerElements(CAPI:CAPIArticleType): [CAPIArticleType, EmbedBlockElement[]] {
-	const bannerElements: EmbedBlockElement[] = []
-	const filteredCAPI = {...CAPI}
+function removeBannerElements(
+	CAPI: CAPIArticleType,
+): [CAPIArticleType, EmbedBlockElement[]] {
+	const bannerElements: EmbedBlockElement[] = [];
+	const filteredCAPI = { ...CAPI };
 
-	filteredCAPI.blocks.forEach(block => {
-		const bannersInThisBlock:EmbedBlockElement[] = []
-		const othersInThisBlock:CAPIElement[] = []
-		block.elements.forEach(element => {
+	filteredCAPI.blocks.forEach((block) => {
+		const bannersInThisBlock: EmbedBlockElement[] = [];
+		const othersInThisBlock: CAPIElement[] = [];
+		block.elements.forEach((element) => {
 			if (isBannerElement(element)) {
-				bannersInThisBlock.push(element as EmbedBlockElement)
+				bannersInThisBlock.push(element as EmbedBlockElement);
 			} else {
-				othersInThisBlock.push(element)
+				othersInThisBlock.push(element);
 			}
-		})
+		});
 
-		bannerElements.push(...bannersInThisBlock)
-		block.elements = othersInThisBlock
-	})
+		bannerElements.push(...bannersInThisBlock);
+		block.elements = othersInThisBlock;
+	});
 
-	return [filteredCAPI, bannerElements]
+	return [filteredCAPI, bannerElements];
 }
-
 
 const newslettersSubNav: SubNavType = {
 	links: [
@@ -72,11 +76,16 @@ const THERE_SHOULD_BE_MERCH_AD_SLOTS = false;
 
 export interface NewsletterData {
 	previewHref: string;
+	focusedFactText: string;
 }
+
+// TO DO - have these values populated in the enhanced CAPI
+// response using values from the newsletter API
 function getNewsletterDataForDemo(): NewsletterData {
 	return {
 		previewHref:
 			'https://www.theguardian.com/world/series/guardian-morning-briefing/latest/email',
+		focusedFactText: 'UK Focused',
 	};
 }
 
@@ -92,7 +101,8 @@ export const NewsletterSignupLayout = ({
 	};
 
 	const newsletterData = getNewsletterDataForDemo();
-	const [CAPIWithoutBanners, bannerElements] = removeBannerElements(CAPIArticle);
+	const [CAPIWithoutBanners, bannerElements] =
+		removeBannerElements(CAPIArticle);
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
@@ -126,9 +136,12 @@ export const NewsletterSignupLayout = ({
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
 							supporterCTA={
-								CAPIArticle.nav.readerRevenueLinks.header.supporter
+								CAPIArticle.nav.readerRevenueLinks.header
+									.supporter
 							}
-							discussionApiUrl={CAPIArticle.config.discussionApiUrl}
+							discussionApiUrl={
+								CAPIArticle.config.discussionApiUrl
+							}
 							isAnniversary={
 								CAPIArticle.config.switches.anniversaryHeaderSvg
 							}
@@ -136,9 +149,7 @@ export const NewsletterSignupLayout = ({
 							remoteHeader={
 								CAPIArticle.config.switches.remoteHeader
 							}
-							contributionsServiceUrl={
-								contributionsServiceUrl
-							}
+							contributionsServiceUrl={contributionsServiceUrl}
 						/>
 					</ElementContainer>
 					<ElementContainer
@@ -153,7 +164,8 @@ export const NewsletterSignupLayout = ({
 							nav={NAV}
 							format={formatForNav}
 							subscribeUrl={
-								CAPIArticle.nav.readerRevenueLinks.header.subscribe
+								CAPIArticle.nav.readerRevenueLinks.header
+									.subscribe
 							}
 							edition={CAPIArticle.editionId}
 						/>
@@ -194,7 +206,6 @@ export const NewsletterSignupLayout = ({
 				<ElementContainer padded={true}>
 					<NewsLetterSignupContent
 						format={format}
-						palette={palette}
 						CAPIArticle={CAPIWithoutBanners}
 						newsletterData={newsletterData}
 						contributionsServiceUrl={contributionsServiceUrl}
@@ -221,8 +232,12 @@ export const NewsletterSignupLayout = ({
 						hasStoryPackage={CAPIArticle.hasStoryPackage}
 						isAdFreeUser={CAPIArticle.isAdFreeUser}
 						pageId={CAPIArticle.pageId}
-						isPaidContent={CAPIArticle.config.isPaidContent || false}
-						showRelatedContent={CAPIArticle.config.showRelatedContent}
+						isPaidContent={
+							CAPIArticle.config.isPaidContent || false
+						}
+						showRelatedContent={
+							CAPIArticle.config.showRelatedContent
+						}
 						keywordIds={CAPIArticle.config.keywordIds}
 						contentType={CAPIArticle.contentType}
 						tags={CAPIArticle.tags}

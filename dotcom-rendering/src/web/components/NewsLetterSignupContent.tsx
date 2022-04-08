@@ -23,7 +23,6 @@ import { PrivacyText } from './PrivacyText';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	CAPIArticle: CAPIArticleType;
 	newsletterData: NewsletterData;
 	contributionsServiceUrl: string;
@@ -196,12 +195,10 @@ const imageWrapperLinkStyle = css`
 
 export const NewsLetterSignupContent = ({
 	format,
-	palette,
 	CAPIArticle,
 	newsletterData,
 	contributionsServiceUrl,
 }: Props) => {
-	console.log({ newsletterData });
 
 	const {
 		config: { host },
@@ -224,7 +221,7 @@ export const NewsLetterSignupContent = ({
 					<figure aria-label="newsletter type">
 						<SvgEnvelope size="small" />
 					</figure>
-					<span>UK Focused</span>
+					<span>{newsletterData.focusedFactText}</span>
 				</div>
 			</GridItem>
 			<GridItem area="border">
