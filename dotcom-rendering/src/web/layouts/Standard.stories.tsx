@@ -117,22 +117,25 @@ export const NewsletterSignupStory = (): React.ReactNode => {
 							border-radius: 5px;
 							padding: 8px;
 							color: white;
+							font-family: arial,sans-serif;
 						}
 						[data-is-banner-for-newsletter-signup=true] h3 {
 							font-size: 150%;
 						}
 						[data-is-banner-for-newsletter-signup=true] span, [data-is-banner-for-newsletter-signup=true] p {
 							font-size: 100%;
+							line-height: 1.5;
+						}
+						[data-is-banner-for-newsletter-signup=true] code {
+							font-family: monospace;
 						}
 					</style>
 					<div data-is-banner-for-newsletter-signup=\"true\">
 						<h3>This purple box is an embed - the blue banner is a part of the layout</h3>
-						<p>There is an attribute name in the embed HTML that the layout file
-						uses to identify this embed element as belonging in the banner.</p>
-						<p>It removes it from the rest of the content and places it in the banner section
-						if there was no embed element with the attribute name in the composer content,
-						the banner section would not be rendered.</p>
-						<p>Editors could change which other newsletter was promoted by replacing the embed.</p>
+
+						<p>The layout file finds the emded element containing the text <code>data-is-banner-for-newsletter-signup=\"true\"</code>, removes it from the rest of the content and renders it inside this banner. The banner is not rendered if the emebed is not in the article.</p>
+
+						<p>Editors could change which other newsletter was promoted in sign-up page by changing the embed in composer.</p>
 					</div>
 				`,
 				"safe": true,
@@ -146,11 +149,7 @@ export const NewsletterSignupStory = (): React.ReactNode => {
 			},
 			{
 				"html": `
-				<p>Perhaps having the graphic on a grid layout is not ideal. You can see that this <em>leaves a lot of white space</em> in the
-				page on the desktop layouts which isn't great. I expect there are solutions for this that allow the content text to wrap
-				under the image.</p>
-				<p>We could also have some extra features that apear in the grid below the image on the desktop view and not appear on mobile.</p>
-				<p>The <strong>sign-up embed</strong> is part of the composer content, like in any other article, so there is editorial control over where in goes in the content - although it is using the "thrasher" version of the form page to fit the design. The <strong>share buttons</strong> and the <strong>privacy wording</strong> are part of the page layout, so the editors would not need to add these to the content.</p>
+				<p>The <strong>sign-up embed</strong> is part of the composer content, so there is editorial control over where it goes in the content. The <strong>share buttons</strong> and the <strong>privacy wording</strong> are part of the page layout, so the editors would not need to add those in composer.</p>
 				`,
 				"_type": "model.dotcomrendering.pageElements.TextBlockElement",
 				"elementId": "fbc31a95-6e90-4919-80d9-e8dbbe14cb59"
