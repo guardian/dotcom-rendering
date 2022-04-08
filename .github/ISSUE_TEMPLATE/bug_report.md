@@ -12,14 +12,14 @@ assignees: ''
 A clear and concise description of what the bug is.
 
 - Does it occur on any specific browsers or breakpoints?
-- Should this issue be assigned to one of our GitHub project boards, or to a milestone?
+- Remember to assign this to one of our GitHub project boards and to a milestone if applicable
 
 ## Steps To Reproduce
 
 Steps to reproduce the behaviour:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
+1. Go to '…'
+2. Click on '…'
+3. Scroll down to '…'
 4. See error
 
 ## Screenshots
