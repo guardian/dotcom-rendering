@@ -160,9 +160,9 @@ export const TextBlockComponent = ({
 					border-radius: 50%;
 					height: 13px;
 					width: 13px;
-					margin-right: 8px;
 					background-color: ${neutral[86]};
 					margin-left: -20px;
+					margin-right: 7px;
 				}
 
 				/* Subscript and Superscript styles */
