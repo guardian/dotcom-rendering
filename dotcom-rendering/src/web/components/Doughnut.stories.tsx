@@ -20,6 +20,14 @@ const ninetyNineToOne = [
 	},
 ];
 
+const oneSection = [
+	{
+		value: 100,
+		label: 'All',
+		color: '#FFE500',
+	},
+];
+
 const twoSections = [
 	{
 		value: 29,
@@ -71,6 +79,15 @@ export const NinetyNineToOne = () => {
 };
 NinetyNineToOne.story = { name: 'with one section at 99 and the other at 1' };
 
+export const One = () => {
+	return (
+		<Container>
+			<Doughnut sections={oneSection} />
+		</Container>
+	);
+};
+One.story = { name: 'with one section' };
+
 export const Two = () => {
 	return (
 		<Container>
@@ -92,12 +109,7 @@ Three.story = { name: 'with three sections' };
 export const Smaller = () => {
 	return (
 		<Container>
-			<Doughnut
-				sections={twoSections}
-				percentCutout={20}
-				width={200}
-				height={200}
-			/>
+			<Doughnut sections={twoSections} percentCutout={20} size={200} />
 		</Container>
 	);
 };

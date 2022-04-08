@@ -16,7 +16,6 @@ import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
 import { mainMediaElements } from './ArticleHeadline.mocks';
-import { ArticleHeadlinePadding } from './ArticleHeadlinePadding';
 
 export default {
 	component: ArticleHeadline,
@@ -40,6 +39,7 @@ export const ArticleStory = () => {
 						headlineString="This is how the default headline looks"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -65,6 +65,7 @@ export const Feature = () => {
 						headlineString="This is a Feature headline, it has colour applied based on pillar"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -95,6 +96,7 @@ export const ShowcaseInterview = () => {
 							headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 							format={format}
 							tags={[]}
+							webPublicationDateDeprecated=""
 							byline="Byline text"
 						/>
 					</div>
@@ -138,6 +140,7 @@ export const ShowcaseInterviewNobyline = () => {
 							headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 							format={format}
 							tags={[]}
+							webPublicationDateDeprecated=""
 							byline=""
 						/>
 					</div>
@@ -178,6 +181,7 @@ export const Interview = () => {
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 						byline="Byline text"
 					/>
 					<Standfirst
@@ -219,6 +223,7 @@ export const InterviewSpecialReport = () => {
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 						byline="Byline text"
 					/>
 					<Standfirst
@@ -262,6 +267,7 @@ export const InterviewNoByline = () => {
 						headlineString="This is an Interview headline. It has a black background, white text and overlays the image below it (as a sibling)"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 						byline=""
 					/>
 					<Standfirst
@@ -305,6 +311,7 @@ export const Comment = () => {
 						headlineString="Yes, the billionaire club is one we really need to shut down"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -341,6 +348,7 @@ export const Analysis = () => {
 									headlineString={`This is an Analysis headline in ${themeName}, it's underlined. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor`}
 									format={format(theme)}
 									tags={[]}
+									webPublicationDateDeprecated=""
 								/>
 							</ArticleContainer>
 						</Flex>
@@ -370,6 +378,7 @@ export const Media = () => {
 						headlineString="This is the headline you see when design type is Media"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -395,6 +404,7 @@ export const Review = () => {
 						headlineString="This is the headline you see when design type is Review"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -420,6 +430,7 @@ export const PhotoEssay = () => {
 						headlineString="This is the headline you see when design type is PhotoEssay"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -445,6 +456,7 @@ export const Quiz = () => {
 						headlineString="This is the headline you see when design type is Quiz"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -470,6 +482,7 @@ export const Recipe = () => {
 						headlineString="This is the headline you see when design type is Recipe"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -495,6 +508,7 @@ export const Immersive = () => {
 						headlineString="This is the headline you see when display type is Immersive"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -520,6 +534,7 @@ export const ImmersiveNoMainMedia = () => {
 						headlineString="This is the headline you see when design type is PrintShop, which has no main media"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -549,6 +564,7 @@ export const ImmersiveComment = () => {
 						headlineString="This is the headline you see when display type is Immersive and design Comment"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -574,6 +590,7 @@ export const Editorial = () => {
 						headlineString="This is the headline you see when design type is Editorial"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -599,6 +616,7 @@ export const MatchReport = () => {
 						headlineString="This is the headline you see when design type is MatchReport"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -624,6 +642,7 @@ export const SpecialReport = () => {
 						headlineString="This is the headline you see when pillar is SpecialReport"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -649,6 +668,7 @@ export const LiveBlog = () => {
 						headlineString="This is the headline you see when design type is LiveBlog"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -687,6 +707,7 @@ export const DeadBlog = () => {
 						headlineString="This is the headline you see when design type is DeadBlog"
 						format={format}
 						tags={[]}
+						webPublicationDateDeprecated=""
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -708,17 +729,13 @@ export const ReviewWithoutStars = () => {
 					<></>
 				</LeftColumn>
 				<ArticleContainer format={format}>
-					<ArticleHeadlinePadding
-						design={format.design}
-						starRating={undefined}
-					>
-						<ArticleHeadline
-							headlineString="This is a Review headline."
-							format={format}
-							tags={[]}
-							byline="Byline text"
-						/>
-					</ArticleHeadlinePadding>
+					<ArticleHeadline
+						headlineString="This is a Review headline."
+						format={format}
+						tags={[]}
+						webPublicationDateDeprecated=""
+						byline="Byline text"
+					/>
 					<Standfirst
 						format={format}
 						standfirst="This is the standfirst text. We include here to demonstrate we have the correct amount of padding below the headline when there are no stars."
@@ -729,3 +746,53 @@ export const ReviewWithoutStars = () => {
 	);
 };
 ReviewWithoutStars.story = { name: 'Review without stars' };
+
+export const AgeWarning = () => {
+	const designs: [string, ArticleDesign][] = [
+		['Comment', ArticleDesign.Comment],
+		['Interview', ArticleDesign.Interview],
+		['MatchReport', ArticleDesign.MatchReport],
+		['Feature', ArticleDesign.Feature],
+		['Interactive', ArticleDesign.Interactive],
+		['Media', ArticleDesign.Media],
+		['Analysis', ArticleDesign.Analysis],
+		['Review', ArticleDesign.Review],
+	];
+	const format = (design: ArticleDesign): ArticleFormat => ({
+		display: ArticleDisplay.Standard,
+		design,
+		theme: ArticlePillar.News,
+	});
+
+	return (
+		<>
+			{designs.map(([themeName, design]) => (
+				<>
+					<ElementContainer>
+						<Flex>
+							<LeftColumn>
+								<></>
+							</LeftColumn>
+							<ArticleContainer format={format(design)}>
+								<ArticleHeadline
+									headlineString={`This is a headline in ${themeName} with an age warning showing`}
+									format={format(design)}
+									tags={[
+										{
+											id: 'tone/news',
+											type: '',
+											title: '',
+										},
+									]}
+									webPublicationDateDeprecated="2020-03-28T07:27:19.000Z"
+								/>
+							</ArticleContainer>
+						</Flex>
+					</ElementContainer>
+					<br />
+				</>
+			))}
+		</>
+	);
+};
+AgeWarning.story = { name: 'with age warning' };

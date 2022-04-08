@@ -1,12 +1,16 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 import {
 	neutral,
 	from,
 	space,
 	headline,
 	body,
-} from "@guardian/source-foundations";
-import { FirstPublished } from "./FirstPublished";
+} from '@guardian/source-foundations';
+import { FirstPublished } from './FirstPublished';
+import { darkModeCss } from '../lib';
+import { background, border } from '../editorialPalette';
+import { ArticleFormat } from '@guardian/libs';
+
 
 type BlockContributor = {
 	name: string;
@@ -16,13 +20,16 @@ type BlockContributor = {
 type Props = {
 	id: string;
 	children: React.ReactNode;
-	borderColour: string;
+	format: ArticleFormat;
 	blockTitle?: string;
 	blockFirstPublished?: number;
+	blockFirstPublishedDisplay?: string;
 	blockLink: string;
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
-	avatarBackgroundColor?: string;
+	isPinnedPost: boolean;
+	supportsDarkMode: boolean;
+	isOriginalPinnedPost?: boolean;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -47,7 +54,7 @@ const BlockTitle = ({ title }: { title: string }) => {
 	return (
 		<h2
 			css={css`
-				${headline.xxsmall({ fontWeight: "bold" })}
+				${headline.xxsmall({ fontWeight: 'bold' })}
 				margin-bottom: ${space[2]}px;
 			`}
 		>
@@ -59,11 +66,11 @@ const BlockTitle = ({ title }: { title: string }) => {
 const BlockByline = ({
 	name,
 	imageUrl,
-	avatarBackgroundColor,
+	format,
 }: {
 	name: string;
+	format: ArticleFormat;
 	imageUrl?: string;
-	avatarBackgroundColor?: string;
 }) => {
 	return (
 		<div
@@ -74,16 +81,16 @@ const BlockByline = ({
 			`}
 		>
 			{imageUrl && (
-				<div style={{ width: "36px", height: "36px" }}>
+				<div style={{ width: '2.25rem', height: '2.25rem' }}>
 					<img
 						src={imageUrl}
 						alt={name}
 						css={css`
 							border-radius: 100%;
 							object-fit: cover;
-							height: 100%;
-							width: 100%;
-							background-color: ${avatarBackgroundColor};
+							height: 2.25rem;
+							width: 2.25rem;
+							background-color: ${background.avatar(format)};
 						`}
 					/>
 				</div>
@@ -105,13 +112,16 @@ const BlockByline = ({
 const LiveBlockContainer = ({
 	id,
 	children,
-	borderColour,
+	format,
 	blockTitle,
 	blockFirstPublished,
+	blockFirstPublishedDisplay,
 	blockLink,
 	isLiveUpdate,
 	contributors,
-	avatarBackgroundColor,
+	isPinnedPost,
+	supportsDarkMode,
+	isOriginalPinnedPost = false,
 }: Props) => {
 	return (
 		<article
@@ -124,24 +134,38 @@ const LiveBlockContainer = ({
 			 * - 'pending' is used to mark blocks that have been inserted as part of a live update. We use this
 			 *    to animate the reveal as well as for enhancing twitter embeds
 			 */
-			className={`block ${isLiveUpdate && "pending"}`}
+			className={`block ${isLiveUpdate && 'pending'}`}
 			css={css`
 				padding: ${space[2]}px ${SIDE_MARGIN_MOBILE}px;
+				box-sizing: border-box;
 				margin-bottom: ${space[3]}px;
 				background: ${neutral[100]};
-				border-top: 1px solid ${borderColour};
+				${!isPinnedPost &&
+				`border-top: 1px solid ${border.liveBlock(format)};
+				border-bottom: 1px solid ${neutral[86]};`}
 				${from.tablet} {
 					padding: ${space[2]}px ${SIDE_MARGIN}px;
 					padding-left: ${LEFT_MARGIN_DESKTOP}px;
 				}
-				border-bottom: 1px solid ${neutral[86]};
+
+				${darkModeCss(supportsDarkMode)`
+					border-top: 1px solid ${border.liveBlockDark(format)};
+					background-color: ${neutral[10]};
+					color: ${neutral[100]};
+					border-bottom: 0;
+				`}
 			`}
 		>
 			<Header>
 				{blockFirstPublished && (
 					<FirstPublished
 						firstPublished={blockFirstPublished}
+						firstPublishedDisplay={blockFirstPublishedDisplay}
 						blockLink={blockLink}
+						isPinnedPost={isPinnedPost}
+						supportsDarkMode={supportsDarkMode}
+						isOriginalPinnedPost={isOriginalPinnedPost}
+						format={format}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}
@@ -150,7 +174,7 @@ const LiveBlockContainer = ({
 						<BlockByline
 							name={contributor.name}
 							imageUrl={contributor.imageUrl}
-							avatarBackgroundColor={avatarBackgroundColor}
+							format={format}
 						/>
 					))}
 			</Header>
@@ -160,3 +184,4 @@ const LiveBlockContainer = ({
 };
 
 export default LiveBlockContainer;
+export type { BlockContributor };

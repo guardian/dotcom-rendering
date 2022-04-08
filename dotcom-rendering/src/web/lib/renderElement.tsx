@@ -135,6 +135,11 @@ export const renderElement = ({
 	isSensitive,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
+
+	const isLiveBlog =
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
+
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
@@ -350,7 +355,10 @@ export const renderElement = ({
 				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
-			if (format.design === ArticleDesign.Interactive) {
+			if (
+				format.design === ArticleDesign.Interactive ||
+				format.design === ArticleDesign.FullPageInteractive
+			) {
 				return [
 					true,
 					<InteractiveLayoutAtom
@@ -383,6 +391,7 @@ export const renderElement = ({
 						role={element.role}
 						format={format}
 						elementId={element.elementId}
+						caption={element.caption}
 					/>
 				</Island>,
 			];
@@ -569,15 +578,13 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TextBlockElement':
 			return [
 				true,
-				<>
-					<TextBlockComponent
-						key={index}
-						isFirstParagraph={index === 0}
-						html={element.html}
-						format={format}
-						forceDropCap={element.dropCap}
-					/>
-				</>,
+				<TextBlockComponent
+					key={index}
+					isFirstParagraph={index === 0}
+					html={element.html}
+					format={format}
+					forceDropCap={element.dropCap}
+				/>,
 			];
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return [
@@ -715,6 +722,7 @@ export const renderElement = ({
 						adTargeting={adTargeting}
 						isMainMedia={isMainMedia}
 						id={element.id}
+						elementId={element.elementId}
 						assetId={element.assetId}
 						expired={element.expired}
 						overrideImage={element.overrideImage}
@@ -723,6 +731,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
+						stickyVideos={isLiveBlog && switches.stickyVideos}
 					/>
 				</Island>,
 			];

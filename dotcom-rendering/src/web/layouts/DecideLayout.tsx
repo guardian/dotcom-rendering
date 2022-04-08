@@ -1,8 +1,6 @@
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { decidePalette } from '../lib/decidePalette';
-
 import { StandardLayout } from './StandardLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
@@ -12,21 +10,28 @@ import { InteractiveLayout } from './InteractiveLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { hackToNewsletterSignupLayout, formatAsNewsletterDesign } from './lib/newsLetterHacks';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
-	CAPI: CAPIType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
 
-export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
-	if (hackToNewsletterSignupLayout || CAPI.tags.some(tag => tag.id === 'info/newsletter-sign-up')) {
+export const DecideLayout = ({
+	CAPIArticle,
+	NAV,
+	format,
+}: Props): JSX.Element => {
+
+
+	if (hackToNewsletterSignupLayout || CAPIArticle.tags.some(tag => tag.id === 'info/newsletter-sign-up')) {
 		const newsletterFormat = formatAsNewsletterDesign(format)
 		const newsletterPalette = decidePalette(newsletterFormat);
 
 		return (
 			<NewsletterSignupLayout
-				CAPI={CAPI}
+				CAPI={CAPIArticle}
 				NAV={NAV}
 				format={newsletterFormat}
 				palette={newsletterPalette}
@@ -34,7 +39,6 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 		);
 	}
 
-	const palette = decidePalette(format);
 
 	// TODO we can probably better express this as data
 	switch (format.display) {
@@ -47,7 +51,7 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 					// if published before.
 					return (
 						<FullPageInteractiveLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
 						/>
@@ -56,9 +60,8 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				default: {
 					return (
 						<ImmersiveLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
-							palette={palette}
 							format={format}
 						/>
 					);
@@ -72,10 +75,9 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
-							palette={palette}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -83,19 +85,17 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
-							palette={palette}
 						/>
 					);
 				default:
 					return (
 						<ShowcaseLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
-							palette={palette}
 						/>
 					);
 			}
@@ -106,16 +106,15 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				case ArticleDesign.Interactive:
 					return (
 						<InteractiveLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
-							palette={palette}
 						/>
 					);
 				case ArticleDesign.FullPageInteractive: {
 					return (
 						<FullPageInteractiveLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
 						/>
@@ -125,10 +124,9 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				case ArticleDesign.DeadBlog:
 					return (
 						<LiveLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
-							palette={palette}
 						/>
 					);
 				case ArticleDesign.Comment:
@@ -136,19 +134,17 @@ export const DecideLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
-							palette={palette}
 						/>
 					);
 				default:
 					return (
 						<StandardLayout
-							CAPI={CAPI}
+							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
-							palette={palette}
 						/>
 					);
 			}

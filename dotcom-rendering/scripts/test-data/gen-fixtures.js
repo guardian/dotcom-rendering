@@ -150,7 +150,7 @@ try {
 				// Write the new fixture data
 				const contents = `${HEADER}export const ${
 					article.name
-				}: CAPIType = ${JSON.stringify(json, null, 4)}`;
+				}: CAPIArticleType = ${JSON.stringify(json, null, 4)}`;
 				fs.writeFileSync(
 					`${root}/fixtures/generated/articles/${article.name}.ts`,
 					contents,

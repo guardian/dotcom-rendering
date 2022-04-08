@@ -76,9 +76,17 @@ const BylineMeta: React.FunctionComponent<{
 		? contributorTag.bylineImageUrl
 		: null;
 
+	const shouldShowBylineImage =
+		contributorTag && bylineImageUrl && contributorCount === 1;
+
 	return (
 		<div css={bylineWrapper}>
-			<div css={[bylineStyle(pillar), !bylineImageUrl && bottomPadding]}>
+			<div
+				css={[
+					bylineStyle(pillar),
+					!shouldShowBylineImage && bottomPadding,
+				]}
+			>
 				<Byline
 					byline={articleData.author.byline}
 					tags={articleData.tags}
@@ -86,7 +94,7 @@ const BylineMeta: React.FunctionComponent<{
 				/>
 			</div>
 
-			{contributorTag && bylineImageUrl && contributorCount === 1 && (
+			{shouldShowBylineImage && (
 				<amp-img
 					class={bylineImageStyle}
 					src={bylineImageUrl}

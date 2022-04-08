@@ -52,7 +52,7 @@ const headlineWrapperStyles = css`
 const imageWrapperStyles = css`
 	width: 72px;
 	height: 72px;
-	padding-top: 3px;
+	margin-top: 3px;
 	margin-right: 10px;
 `;
 

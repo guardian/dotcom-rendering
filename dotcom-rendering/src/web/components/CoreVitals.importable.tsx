@@ -1,11 +1,14 @@
+import type { ABTest } from '@guardian/ab-core';
 import {
 	bypassCoreWebVitalsSampling,
 	getCookie,
 	initCoreWebVitals,
 } from '@guardian/libs';
-import { startup } from '../startup';
+import { useAB } from '../lib/useAB';
+import { tests } from '../experiments/ab-tests';
+import { commercialGptLazyLoad } from '../experiments/tests/commercial-gpt-lazy-load';
 
-const init = (): Promise<void> => {
+export const CoreVitals = () => {
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 	const { pageViewId } = window.guardian.config.ophan;
 
@@ -23,10 +26,21 @@ const init = (): Promise<void> => {
 		team: 'dotcom',
 	});
 
+	const testsToForceMetrics: ABTest[] = [
+		/* keep array multi-line */
+		commercialGptLazyLoad,
+	];
+
+	const ABTestAPI = useAB();
+	const userInTestToForceMetrics = ABTestAPI?.allRunnableTests(tests).some(
+		(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
+	);
+
 	if (window.location.hostname === (process.env.HOSTNAME || 'localhost'))
 		bypassCoreWebVitalsSampling('dotcom');
+	else if (userInTestToForceMetrics)
+		bypassCoreWebVitalsSampling('commercial');
 
-	return Promise.resolve();
+	// don’t render anything
+	return null;
 };
-
-startup('coreVitals', null, init);

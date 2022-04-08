@@ -26,7 +26,7 @@ The library docs above explain the integration and the API.
 
 ```ts
 // Within the components
-import { useAB } from '@guardian/ab-react';
+import { useAB } from '../lib/useAB';
 
 // Example usage of AB Tests
 // Used in the Cypress tests as smoke test of the AB tests framework integration
@@ -59,8 +59,8 @@ In order to set up a server-side test in DCR, follow steps 1-4 outlined in the `
 
 On the live website, Fastly automatically assigns users to buckets. You can force yourself into a test on your local machine by following these steps:
 
-1) Ensure you are running `frontend` locally and your server-side experiment is enabled in the dashboard.
-2) Use the Header Hacker extension to change the HTTP headers as described in the `frontend` documentation. Please note that this is the only way to opt-in locally. If testing in the CODE environment, use the `/opt/in/` link.
+1. Ensure you are running `frontend` locally and your server-side experiment is enabled in the dashboard.
+2. Use the Header Hacker extension to change the HTTP headers as described in the `frontend` documentation. Please note that this is the only way to opt-in locally. If testing in the CODE environment, use the `/opt/in/` link.
 
 You can verify that you have been correctly assigned to the variant by appending `.json?dcr` to the end of an article link (e.g. `http://localhost:9000/world/2021/jan/01/your-article.json?dcr`. This will return the document data in `JSON` format. Your A/B test will be within the `config` object in camel case, as follows:
 
@@ -70,4 +70,4 @@ You can verify that you have been correctly assigned to the variant by appending
 }
 ```
 
-You can access server-side `abTests` within DCR wherever the CAPI object is used (`CAPI.config.abTests`).
+You can access server-side `abTests` within DCR wherever the CAPI object is used (`CAPIArticle.config.abTests`).

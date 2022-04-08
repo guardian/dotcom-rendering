@@ -23,6 +23,9 @@ export const BlockquoteBlockComponent: React.FC<Props> = ({
 				margin-bottom: 16px;
 				${body.medium()};
 				font-style: italic;
+				p {
+					margin-bottom: 8px;
+				}
 			`;
 
 			const simpleBlockquoteStyles = css`

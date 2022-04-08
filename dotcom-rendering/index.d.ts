@@ -1,5 +1,5 @@
 // ------------------------  //
-// CAPIType and its subtypes //
+// CAPIArticleType and its subtypes //
 // ------------------------- //
 
 // Pillars are used for styling
@@ -142,6 +142,7 @@ type Palette = {
 		matchNav: Colour;
 		analysisUnderline: Colour;
 		matchStats: Colour;
+		ageWarning: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -161,6 +162,7 @@ type Palette = {
 		articleLink: Colour;
 		articleLinkHover: Colour;
 		liveBlock: Colour;
+		pinnedPost: Colour;
 		standfirstLink: Colour;
 		headline: Colour;
 		standfirst: Colour;
@@ -426,7 +428,7 @@ interface CAPINavType {
 
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.
-interface CAPIType {
+interface CAPIArticleType {
 	headline: string;
 	standfirst: string;
 	webTitle: string;
@@ -434,6 +436,7 @@ interface CAPIType {
 	main: string;
 	keyEvents: Block[];
 	blocks: Block[];
+	pinnedPost?: Block;
 	pagination?: Pagination;
 	author: AuthorType;
 
@@ -510,47 +513,281 @@ interface CAPIType {
 	mostRecentBlockId?: string;
 }
 
-// Browser data models. Note the CAPI prefix here means something different to
-// the models above.
+type StageType = 'DEV' | 'CODE' | 'PROD';
 
-type CAPIBrowserType = {
-	format: CAPIFormat;
-	config: ConfigTypeBrowser;
+interface FrontType {
+	pressedPage: PressedPageType;
+	nav: CAPINavType;
 	editionId: Edition;
 	editionLongForm: string;
-	contentType: string;
-	sectionName?: string;
-	shouldHideReaderRevenue: boolean;
-	pageType: {
-		isMinuteArticle: boolean;
-		isPaidContent: boolean;
-		hasShowcaseMainElement: boolean;
-	};
-	hasRelated: boolean;
-	hasStoryPackage: boolean;
-	shouldHideAds: boolean;
-	isAdFreeUser: boolean;
+	guardianBaseURL: string;
 	pageId: string;
-	tags: TagType[];
-	isCommentable: boolean;
-	nav: {
-		readerRevenueLinks: {
-			footer: ReaderRevenueCategories;
-			header: ReaderRevenueCategories;
-		};
-	};
-	contributionsServiceUrl: string;
-	isImmersive: boolean;
-	isPhotoEssay: boolean;
-	isSpecialReport: boolean;
-	isLiveBlog: boolean;
-	isLive: boolean;
-	matchUrl?: string;
-	elementsToHydrate: CAPIElement[];
-	isPreview?: boolean;
 	webTitle: string;
-	stage: string;
-	mostRecentBlockId?: string;
+	webURL: string;
+	config: FrontConfigType;
+	commercialProperties: Record<string, unknown>;
+}
+
+type PressedPageType = {
+	id: string;
+	seoData: SeoDataType;
+	frontProperties: FrontPropertiesType;
+	collections: PressedCollectionType[];
+};
+
+type SeoDataType = {
+	id: string;
+	navSection: string;
+	webTitle: string;
+	description: string;
+};
+
+type FrontPropertiesType = {
+	isImageDisplayed: boolean;
+	commercial: Record<string, unknown>;
+};
+
+type CollectionType =
+	| 'dynamic/fast'
+	| 'dynamic/package'
+	| 'dynamic/slow'
+	| 'dynamic/slow-mpu'
+	| 'fixed/large/slow-XIV'
+	| 'fixed/medium/fast-XI'
+	| 'fixed/medium/fast-XII'
+	| 'fixed/medium/slow-VI'
+	| 'fixed/medium/slow-VII'
+	| 'fixed/medium/slow-XII-mpu'
+	| 'fixed/small/fast-VIII'
+	| 'fixed/small/slow-I'
+	| 'fixed/small/slow-III'
+	| 'fixed/small/slow-IV'
+	| 'fixed/small/slow-V-half'
+	| 'fixed/small/slow-V-mpu'
+	| 'fixed/small/slow-V-third'
+	| 'fixed/thrasher'
+	| 'fixed/video'
+	| 'nav/list'
+	| 'nav/media-list'
+	| 'news/most-popular';
+
+type CollectionCard = {
+	properties: {
+		isBreaking: boolean;
+		showMainVideo: boolean;
+		showKickerTag: boolean;
+		showByline: boolean;
+		imageSlideshowReplace: boolean;
+		maybeContent?: {
+			trail: {
+				trailPicture?: {
+					allImages: {
+						index: number;
+						fields: {
+							displayCredit?: string;
+							source: string;
+							photographer?: string;
+							isMaster?: string;
+							altText: string;
+							height: string;
+							credit: string;
+							mediaId: string;
+							width: string;
+						};
+						mediaType: string;
+						url: string;
+					}[];
+				};
+				byline?: string;
+				thumbnailPath?: string;
+				webPublicationDate: number;
+			};
+			metadata: {
+				id: string;
+				webTitle: string;
+				webUrl: string;
+				type: string;
+				sectionId?: { value: string };
+				format: CAPIFormat;
+			};
+			fields: {
+				main: string;
+				body: string;
+				standfirst?: string;
+			};
+			elements: Record<string, unknown>;
+			tags: Record<string, unknown>;
+		};
+		maybeContentId?: string;
+		isLiveBlog: boolean;
+		isCrossword: boolean;
+		byline?: string;
+		webTitle: string;
+		linkText?: string;
+		webUrl?: string;
+		editionBrandings: { edition: { id: Edition } }[];
+	};
+	header: {
+		isVideo: boolean;
+		isComment: boolean;
+		isGallery: boolean;
+		isAudio: boolean;
+		headline: string;
+		url: string;
+		hasMainVideoElement: boolean;
+	};
+	card: {
+		id: string;
+		cardStyle: {
+			type: string;
+		};
+		webPublicationDateOption?: number;
+		lastModifiedOption?: number;
+		trailText?: string;
+		starRating?: number;
+		shortUrlPath?: string;
+		shortUrl: string;
+		group: string;
+		isLive: boolean;
+	};
+	discussion: {
+		isCommentable: boolean;
+		isClosedForComments: boolean;
+		discussionId?: string;
+	};
+	display: {
+		isBoosted: boolean;
+		showBoostedHeadline: boolean;
+		showQuotedHeadline: boolean;
+		imageHide: boolean;
+		showLivePlayable: boolean;
+	};
+	format?: CAPIFormat;
+	enriched?: Record<string, unknown>;
+	supportingContent?: unknown[];
+	cardStyle?: {
+		type: string;
+	};
+	type: string;
+};
+
+type PressedCollectionType = {
+	id: string;
+	displayName: string;
+	curated: CollectionCard[];
+	backfill: CollectionCard[];
+	treats: CollectionCard[];
+	lastUpdate?: number;
+	href?: string;
+	groups?: string[];
+	collectionType: CollectionType;
+	uneditable: boolean;
+	showTags: boolean;
+	showSections: boolean;
+	hideKickers: boolean;
+	showDateHeader: boolean;
+	showLatestUpdate: boolean;
+	config: {
+		displayName: string;
+		metadata?: { type: string }[];
+		collectionType: CollectionType;
+		href?: string;
+		groups?: string[];
+		uneditable: boolean;
+		showTags: boolean;
+		showSections: boolean;
+		hideKickers: boolean;
+		showDateHeader: boolean;
+		showLatestUpdate: boolean;
+		excludeFromRss: boolean;
+		showTimestamps: boolean;
+		hideShowMore: boolean;
+		platform: string;
+	};
+	hasMore: boolean;
+};
+
+type FrontConfigType = {
+	avatarApiUrl: string;
+	externalEmbedHost: string;
+	ajaxUrl: string;
+	keywords: string;
+	revisionNumber: string;
+	isProd: boolean;
+	switches: Switches;
+	section: string;
+	keywordIds: string;
+	locationapiurl: string;
+	sharedAdTargeting: { [key: string]: any };
+	buildNumber: string;
+	abTests: ServerSideTests;
+	pbIndexSites: { [key: string]: unknown }[];
+	ampIframeUrl: string;
+	beaconUrl: string;
+	userAttributesApiUrl: string;
+	host: string;
+	brazeApiKey: string;
+	calloutsUrl: string;
+	requiresMembershipAccess: boolean;
+	onwardWebSocket: string;
+	a9PublisherId: string;
+	contentType: string;
+	facebookIaAdUnitRoot: string;
+	ophanEmbedJsUrl: string;
+	idUrl: string;
+	dcrSentryDsn: string;
+	isFront: true;
+	idWebAppUrl: string;
+	discussionApiUrl: string;
+	sentryPublicApiKey: string;
+	omnitureAccount: string;
+	dfpAccountId: string;
+	pageId: string;
+	forecastsapiurl: string;
+	assetsPath: string;
+	pillar: string;
+	commercialBundleUrl: string;
+	discussionApiClientHeader: string;
+	membershipUrl: string;
+	dfpHost: string;
+	cardStyle?: string;
+	googletagUrl: string;
+	sentryHost: string;
+	shouldHideAdverts: boolean;
+	mmaUrl: string;
+	membershipAccess: string;
+	isPreview: boolean;
+	googletagJsUrl: string;
+	supportUrl: string;
+	edition: string;
+	discussionFrontendUrl: string;
+	ipsosTag: string;
+	ophanJsUrl: string;
+	isPaidContent: boolean;
+	mobileAppsAdUnitRoot: string;
+	plistaPublicApiKey: string;
+	frontendAssetsFullURL: string;
+	googleSearchId: string;
+	allowUserGeneratedContent: boolean;
+	dfpAdUnitRoot: string;
+	idApiUrl: string;
+	omnitureAmpAccount: string;
+	adUnit: string;
+	hasPageSkin: boolean;
+	webTitle: string;
+	stripePublicToken: string;
+	googleRecaptchaSiteKey: string;
+	discussionD2Uid: string;
+	weatherapiurl: string;
+	googleSearchUrl: string;
+	optimizeEpicUrl: string;
+	stage: StageType;
+	idOAuthUrl: string;
+	isSensitive: boolean;
+	isDev: boolean;
+	thirdPartyAppsAccount: string;
+	avatarImagesUrl: string;
+	fbAppId: string;
 };
 
 interface TagType {
@@ -784,44 +1021,6 @@ interface ConfigType extends CommercialConfigType {
 	isPreview?: boolean;
 }
 
-interface ConfigTypeBrowser {
-	frontendAssetsFullURL: string;
-	isDev: boolean;
-	ajaxUrl: string;
-	shortUrlId: string;
-	pageId: string;
-	isPaidContent: boolean;
-	showRelatedContent: boolean;
-	keywordIds: string;
-	ampIframeUrl: string;
-	ampPrebid: boolean;
-	permutive: boolean;
-	enableSentryReporting: boolean;
-	enableDiscussionSwitch: boolean;
-	slotBodyEnd: boolean;
-	isSensitive: boolean;
-	videoDuration: number;
-	edition: string;
-	section: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	sharedAdTargeting: { [key: string]: any };
-	adUnit: string;
-	idApiUrl: string;
-	discussionApiUrl: string;
-	discussionD2Uid: string;
-	discussionApiClientHeader: string;
-	dcrSentryDsn: string;
-	remoteBanner: boolean;
-	remoteHeader: boolean;
-	puzzlesBanner: boolean;
-	ausMoment2020Header: boolean;
-	switches: CAPIType['config']['switches'];
-	abTests: CAPIType['config']['abTests'];
-	host?: string;
-	idUrl?: string;
-	mmaUrl?: string;
-}
-
 interface GADataType {
 	pillar: LegacyPillar;
 	webTitle: string;
@@ -845,35 +1044,11 @@ interface GADataType {
 interface DCRServerDocumentData {
 	page: string;
 	site: string;
-	CAPI: CAPIType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	GA: GADataType;
 	linkedData: { [key: string]: any };
 }
-
-interface BrowserNavType {
-	currentNavLink: string;
-	subNavSections?: SubNavType;
-}
-
-interface DCRBrowserDocumentData {
-	page: string;
-	site: string;
-	CAPI: CAPIBrowserType;
-	NAV: BrowserNavType;
-	GA: GADataType;
-	linkedData: { [key: string]: any };
-}
-
-// All Components that are loaded with loadable
-// should be added here, this is the chunk name as
-// defined in loadable-manifest-browser.json
-type BlockElementType = string;
-interface ComponentNameChunkMap {
-	chunkName: string;
-	addWhen: BlockElementType;
-}
-
 interface CarouselImagesMap {
 	'300'?: string;
 	'460'?: string;

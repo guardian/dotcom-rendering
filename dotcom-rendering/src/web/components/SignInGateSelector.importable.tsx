@@ -19,24 +19,8 @@ import {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
 } from './SignInGate/types';
-import { WithABProvider } from './WithABProvider';
 
 type Props = {
-	format: ArticleFormat;
-	contentType: string;
-	sectionName?: string;
-	tags: TagType[];
-	isPaidContent: boolean;
-	isPreview: boolean;
-	host?: string;
-	pageId: string;
-	idUrl?: string;
-	switches: Switches;
-	pageIsSensitive: boolean;
-	isDev: boolean;
-};
-
-type SignInGateSelectorProps = {
 	format: ArticleFormat;
 	contentType: string;
 	sectionName?: string;
@@ -150,7 +134,7 @@ const ShowSignInGate = ({
 
 // component with conditional logic which determines if a sign in gate
 // should be shown on the current page
-const SignInGateSelectorWithAB = ({
+export const SignInGateSelector = ({
 	format,
 	contentType,
 	sectionName = '',
@@ -160,7 +144,7 @@ const SignInGateSelectorWithAB = ({
 	host = 'https://theguardian.com/',
 	pageId,
 	idUrl = 'https://profile.theguardian.com',
-}: SignInGateSelectorProps) => {
+}: Props) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const [isGateDismissed, setIsGateDismissed] = useState<boolean | undefined>(
 		undefined,
@@ -182,13 +166,16 @@ const SignInGateSelectorWithAB = ({
 		// this only happens within the dismissGate method
 		if (isGateDismissed) {
 			document.dispatchEvent(
-				new CustomEvent('dcr:page:article:redisplayed'),
+				new CustomEvent('article:sign-in-gate-dismissed'),
 			);
 		}
 	}, [isGateDismissed]);
 
 	useOnce(() => {
-		const [gateSelectorVariant, gateSelectorTest] = gateSelector;
+		const [gateSelectorVariant, gateSelectorTest] = gateSelector as [
+			SignInGateComponent | null,
+			CurrentSignInGateABTest | null,
+		];
 		if (gateSelectorVariant && gateSelectorTest) {
 			setGateVariant(gateSelectorVariant);
 			setCurrentTest(gateSelectorTest);
@@ -249,36 +236,3 @@ const SignInGateSelectorWithAB = ({
 		</>
 	);
 };
-
-export const SignInGateSelector = ({
-	format,
-	contentType,
-	sectionName = '',
-	tags,
-	isPaidContent,
-	isPreview,
-	host = 'https://theguardian.com/',
-	pageId,
-	idUrl = 'https://profile.theguardian.com',
-	switches,
-	pageIsSensitive,
-	isDev,
-}: Props) => (
-	<WithABProvider
-		abTestSwitches={switches}
-		pageIsSensitive={pageIsSensitive}
-		isDev={!!isDev}
-	>
-		<SignInGateSelectorWithAB
-			format={format}
-			contentType={contentType}
-			sectionName={sectionName}
-			tags={tags}
-			isPaidContent={isPaidContent}
-			isPreview={isPreview}
-			host={host}
-			pageId={pageId}
-			idUrl={idUrl}
-		/>
-	</WithABProvider>
-);

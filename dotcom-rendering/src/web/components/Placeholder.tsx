@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import { css, keyframes } from '@emotion/react';
 
 import { space, neutral } from '@guardian/source-foundations';
@@ -11,6 +12,7 @@ type Props = {
 	spaceBelow?: 1 | 2 | 3 | 4 | 5 | 6 | 9;
 	spaceLeft?: 1 | 2 | 3 | 4 | 5 | 6 | 9;
 	shouldShimmer?: boolean;
+	backgroundColor?: string;
 };
 
 const shimmer = keyframes`
@@ -22,13 +24,13 @@ const shimmer = keyframes`
   }
 `;
 
-const shimmerStyles = css`
+const shimmerStyles = (backgroundColor: string) => css`
 	animation: ${shimmer} 2s infinite linear;
 	background: linear-gradient(
 		to right,
-		${BACKGROUND_COLOUR} 4%,
-		${neutral[86]} 25%,
-		${BACKGROUND_COLOUR} 36%
+		${backgroundColor} 4%,
+		white 25%,
+		${backgroundColor} 36%
 	);
 	background-size: 1500px 100%;
 `;
@@ -40,6 +42,7 @@ export const Placeholder = ({
 	spaceBelow,
 	spaceLeft,
 	shouldShimmer = true,
+	backgroundColor = BACKGROUND_COLOUR,
 }: Props) => (
 	<div
 		id={rootId}
@@ -54,9 +57,9 @@ export const Placeholder = ({
 				width: ${width ? `${width}px` : '100%'};
 				margin-bottom: ${spaceBelow && space[spaceBelow]}px;
 				margin-left: ${spaceLeft && space[spaceLeft]}px;
-				background-color: ${BACKGROUND_COLOUR};
+				background-color: ${backgroundColor};
 
-				${shouldShimmer && shimmerStyles}
+				${shouldShimmer && shimmerStyles(backgroundColor)}
 			`}
 		/>
 	</div>

@@ -19,6 +19,7 @@ import {
 	MODULES_VERSION,
 	hasOptedOutOfArticleCount,
 	lazyFetchEmailWithTimeout,
+	hasCmpConsentForBrowserId,
 } from '../../lib/contributions';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 import { getZIndex } from '../../lib/getZIndex';
@@ -27,6 +28,7 @@ import { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
 import { useOnce } from '../../lib/useOnce';
 import { ArticleCounts } from '../../../lib/article-count';
+import { getToday } from '../../lib/dailyArticleCount';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -70,11 +72,13 @@ export type CanShowFunctionType<T> = (
 const getArticleCountToday = (
 	articleCounts: ArticleCounts | undefined,
 ): number | undefined => {
-	if (articleCounts) {
-		return (
-			articleCounts.dailyArticleHistory[0] &&
-			articleCounts.dailyArticleHistory[0].count
-		);
+	const latest = articleCounts?.dailyArticleHistory[0];
+	if (latest) {
+		if (latest.day === getToday()) {
+			return articleCounts?.dailyArticleHistory[0].count;
+		}
+		// article counting is enabled, but none so far today
+		return 0;
 	}
 	return undefined;
 };
@@ -96,6 +100,8 @@ const buildPayload = async ({
 	const articleCounts = await asyncArticleCounts;
 	const weeklyArticleHistory = articleCounts?.weeklyArticleHistory;
 	const articleCountToday = getArticleCountToday(articleCounts);
+
+	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
 
 	return {
 		tracking: {
@@ -122,6 +128,9 @@ const buildPayload = async ({
 			sectionId,
 			tagIds: tags.map((tag) => tag.id),
 			contentType,
+			browserId: (await hasCmpConsentForBrowserId())
+				? browserId || undefined
+				: undefined,
 		},
 	};
 };

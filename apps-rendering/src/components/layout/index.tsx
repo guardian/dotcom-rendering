@@ -61,7 +61,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Interactive &&
 		item.display === ArticleDisplay.Immersive
 	) {
-		return <Interactive>{renderAllWithoutStyles(item, body)}</Interactive>;
+		return (
+			<Interactive item={item}>
+				{renderAllWithoutStyles(item, body)}
+			</Interactive>
+		);
 	}
 
 	if (
@@ -92,7 +96,8 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Quiz ||
 		item.design === ArticleDesign.MatchReport ||
 		item.design === ArticleDesign.Obituary ||
-		item.design === ArticleDesign.Correction
+		item.design === ArticleDesign.Correction ||
+		item.design === ArticleDesign.Interview
 	) {
 		return <Standard item={item}>{render(item, body)}</Standard>;
 	}

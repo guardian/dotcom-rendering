@@ -11,2330 +11,2348 @@
 *    gen-fixtures.ts directly.
 */
 
-export const Feature: CAPIType = {
-    "slotMachineFlags": "",
-    "main": "<figure class=\"element element-atom\"> \n <gu-atom data-atom-id=\"d904f65f-f5c1-4786-8d7a-54fc2a4abe72\" data-atom-type=\"media\"> \n  <div>\n   <iframe frameborder=\"0\" allowfullscreen=\"true\" src=\"https://www.youtube-nocookie.com/embed/7z3iv-HkI7o?showinfo=0&amp;rel=0\"></iframe>\n  </div>\n </gu-atom> \n</figure>",
-    "subMetaSectionLinks": [
-        {
-            "url": "/film/oscars-2020",
-            "title": "Oscars 2020"
-        }
-    ],
-    "commercialProperties": {
-        "UK": {
-            "adTargeting": [
-                {
-                    "name": "co",
-                    "value": [
-                        "lanre-bakare"
-                    ]
-                },
-                {
-                    "name": "edition",
-                    "value": "uk"
-                },
-                {
-                    "name": "k",
-                    "value": [
-                        "chris-rock",
-                        "taika-waititi",
-                        "bradpitt",
-                        "laura-dern",
-                        "culture",
-                        "bong-joon-ho",
-                        "oscars-2020",
-                        "sigourney-weaver",
-                        "film",
-                        "joaquin-phoenix"
-                    ]
-                },
-                {
-                    "name": "sh",
-                    "value": "https://www.theguardian.com/p/d8qaf"
-                },
-                {
-                    "name": "tn",
-                    "value": [
-                        "features"
-                    ]
-                },
-                {
-                    "name": "su",
-                    "value": [
-                        "0"
-                    ]
-                },
-                {
-                    "name": "ct",
-                    "value": "article"
-                },
-                {
-                    "name": "p",
-                    "value": "ng"
-                },
-                {
-                    "name": "url",
-                    "value": "/film/2020/feb/10/quotes-of-the-oscars-2020"
-                }
-            ]
-        },
-        "US": {
-            "adTargeting": [
-                {
-                    "name": "co",
-                    "value": [
-                        "lanre-bakare"
-                    ]
-                },
-                {
-                    "name": "k",
-                    "value": [
-                        "chris-rock",
-                        "taika-waititi",
-                        "bradpitt",
-                        "laura-dern",
-                        "culture",
-                        "bong-joon-ho",
-                        "oscars-2020",
-                        "sigourney-weaver",
-                        "film",
-                        "joaquin-phoenix"
-                    ]
-                },
-                {
-                    "name": "sh",
-                    "value": "https://www.theguardian.com/p/d8qaf"
-                },
-                {
-                    "name": "tn",
-                    "value": [
-                        "features"
-                    ]
-                },
-                {
-                    "name": "su",
-                    "value": [
-                        "0"
-                    ]
-                },
-                {
-                    "name": "ct",
-                    "value": "article"
-                },
-                {
-                    "name": "p",
-                    "value": "ng"
-                },
-                {
-                    "name": "url",
-                    "value": "/film/2020/feb/10/quotes-of-the-oscars-2020"
-                },
-                {
-                    "name": "edition",
-                    "value": "us"
-                }
-            ]
-        },
-        "AU": {
-            "adTargeting": [
-                {
-                    "name": "co",
-                    "value": [
-                        "lanre-bakare"
-                    ]
-                },
-                {
-                    "name": "k",
-                    "value": [
-                        "chris-rock",
-                        "taika-waititi",
-                        "bradpitt",
-                        "laura-dern",
-                        "culture",
-                        "bong-joon-ho",
-                        "oscars-2020",
-                        "sigourney-weaver",
-                        "film",
-                        "joaquin-phoenix"
-                    ]
-                },
-                {
-                    "name": "sh",
-                    "value": "https://www.theguardian.com/p/d8qaf"
-                },
-                {
-                    "name": "tn",
-                    "value": [
-                        "features"
-                    ]
-                },
-                {
-                    "name": "su",
-                    "value": [
-                        "0"
-                    ]
-                },
-                {
-                    "name": "ct",
-                    "value": "article"
-                },
-                {
-                    "name": "p",
-                    "value": "ng"
-                },
-                {
-                    "name": "url",
-                    "value": "/film/2020/feb/10/quotes-of-the-oscars-2020"
-                },
-                {
-                    "name": "edition",
-                    "value": "au"
-                }
-            ]
-        },
-        "INT": {
-            "adTargeting": [
-                {
-                    "name": "co",
-                    "value": [
-                        "lanre-bakare"
-                    ]
-                },
-                {
-                    "name": "k",
-                    "value": [
-                        "chris-rock",
-                        "taika-waititi",
-                        "bradpitt",
-                        "laura-dern",
-                        "culture",
-                        "bong-joon-ho",
-                        "oscars-2020",
-                        "sigourney-weaver",
-                        "film",
-                        "joaquin-phoenix"
-                    ]
-                },
-                {
-                    "name": "sh",
-                    "value": "https://www.theguardian.com/p/d8qaf"
-                },
-                {
-                    "name": "tn",
-                    "value": [
-                        "features"
-                    ]
-                },
-                {
-                    "name": "edition",
-                    "value": "int"
-                },
-                {
-                    "name": "su",
-                    "value": [
-                        "0"
-                    ]
-                },
-                {
-                    "name": "ct",
-                    "value": "article"
-                },
-                {
-                    "name": "p",
-                    "value": "ng"
-                },
-                {
-                    "name": "url",
-                    "value": "/film/2020/feb/10/quotes-of-the-oscars-2020"
-                }
-            ]
-        }
-    },
-    "beaconURL": "//phar.gu-web.net",
-    "webPublicationSecondaryDateDisplay": "Last modified on Mon 10 Feb 2020 09.58 GMT",
-    "editionLongForm": "UK edition",
-    "hasRelated": true,
-    "publication": "theguardian.com",
-    "trailText": "Jeff Bezos was mocked by Rock, Brad Pitt had a pop at Trump and Sigourney Weaver laced up her gloves",
-    "subMetaKeywordLinks": [
-        {
-            "url": "/stage/chris-rock",
-            "title": "Chris Rock"
-        },
-        {
-            "url": "/film/joaquin-phoenix",
-            "title": "Joaquin Phoenix"
-        },
-        {
-            "url": "/film/sigourney-weaver",
-            "title": "Sigourney Weaver"
-        },
-        {
-            "url": "/film/bong-joon-ho",
-            "title": "Bong Joon-ho"
-        },
-        {
-            "url": "/film/bradpitt",
-            "title": "Brad Pitt"
-        },
-        {
-            "url": "/film/taika-waititi",
-            "title": "Taika Waititi"
-        },
-        {
-            "url": "/tone/features",
-            "title": "features"
-        }
-    ],
-    "contentType": "Article",
-    "nav": {
-        "currentUrl": "/film",
-        "pillars": [
-            {
-                "title": "News",
-                "url": "/",
-                "longTitle": "Headlines",
-                "iconName": "home",
-                "children": [
-                    {
-                        "title": "UK",
-                        "url": "/uk-news",
-                        "longTitle": "UK news",
-                        "children": [
-                            {
-                                "title": "UK politics",
-                                "url": "/politics"
-                            },
-                            {
-                                "title": "Education",
-                                "url": "/education",
-                                "children": [
-                                    {
-                                        "title": "Schools",
-                                        "url": "/education/schools"
-                                    },
-                                    {
-                                        "title": "Teachers",
-                                        "url": "/teacher-network"
-                                    },
-                                    {
-                                        "title": "Universities",
-                                        "url": "/education/universities"
-                                    },
-                                    {
-                                        "title": "Students",
-                                        "url": "/education/students"
-                                    }
-                                ]
-                            },
-                            {
-                                "title": "Media",
-                                "url": "/media"
-                            },
-                            {
-                                "title": "Society",
-                                "url": "/society"
-                            },
-                            {
-                                "title": "Law",
-                                "url": "/law"
-                            },
-                            {
-                                "title": "Scotland",
-                                "url": "/uk/scotland"
-                            },
-                            {
-                                "title": "Wales",
-                                "url": "/uk/wales"
-                            },
-                            {
-                                "title": "Northern Ireland",
-                                "url": "/uk/northernireland"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "World",
-                        "url": "/world",
-                        "longTitle": "World news",
-                        "children": [
-                            {
-                                "title": "Europe",
-                                "url": "/world/europe-news"
-                            },
-                            {
-                                "title": "US",
-                                "url": "/us-news",
-                                "longTitle": "US news"
-                            },
-                            {
-                                "title": "Americas",
-                                "url": "/world/americas"
-                            },
-                            {
-                                "title": "Asia",
-                                "url": "/world/asia"
-                            },
-                            {
-                                "title": "Australia",
-                                "url": "/australia-news",
-                                "longTitle": "Australia news"
-                            },
-                            {
-                                "title": "Middle East",
-                                "url": "/world/middleeast"
-                            },
-                            {
-                                "title": "Africa",
-                                "url": "/world/africa"
-                            },
-                            {
-                                "title": "Inequality",
-                                "url": "/inequality"
-                            },
-                            {
-                                "title": "Global development",
-                                "url": "/global-development"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Coronavirus",
-                        "url": "/world/coronavirus-outbreak",
-                        "longTitle": "Coronavirus"
-                    },
-                    {
-                        "title": "Climate crisis",
-                        "url": "/environment/climate-crisis"
-                    },
-                    {
-                        "title": "Football",
-                        "url": "/football",
-                        "children": [
-                            {
-                                "title": "Live scores",
-                                "url": "/football/live",
-                                "longTitle": "football/live"
-                            },
-                            {
-                                "title": "Tables",
-                                "url": "/football/tables",
-                                "longTitle": "football/tables"
-                            },
-                            {
-                                "title": "Fixtures",
-                                "url": "/football/fixtures",
-                                "longTitle": "football/fixtures"
-                            },
-                            {
-                                "title": "Results",
-                                "url": "/football/results",
-                                "longTitle": "football/results"
-                            },
-                            {
-                                "title": "Competitions",
-                                "url": "/football/competitions",
-                                "longTitle": "football/competitions"
-                            },
-                            {
-                                "title": "Clubs",
-                                "url": "/football/teams",
-                                "longTitle": "football/teams"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Business",
-                        "url": "/business",
-                        "children": [
-                            {
-                                "title": "Economics",
-                                "url": "/business/economics"
-                            },
-                            {
-                                "title": "Banking",
-                                "url": "/business/banking"
-                            },
-                            {
-                                "title": "Money",
-                                "url": "/money",
-                                "children": [
-                                    {
-                                        "title": "Property",
-                                        "url": "/money/property"
-                                    },
-                                    {
-                                        "title": "Pensions",
-                                        "url": "/money/pensions"
-                                    },
-                                    {
-                                        "title": "Savings",
-                                        "url": "/money/savings"
-                                    },
-                                    {
-                                        "title": "Borrowing",
-                                        "url": "/money/debt"
-                                    },
-                                    {
-                                        "title": "Careers",
-                                        "url": "/money/work-and-careers"
-                                    }
-                                ]
-                            },
-                            {
-                                "title": "Markets",
-                                "url": "/business/stock-markets"
-                            },
-                            {
-                                "title": "Project Syndicate",
-                                "url": "/business/series/project-syndicate-economists"
-                            },
-                            {
-                                "title": "B2B",
-                                "url": "/business-to-business"
-                            },
-                            {
-                                "title": "Retail",
-                                "url": "/business/retail"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Environment",
-                        "url": "/environment",
-                        "children": [
-                            {
-                                "title": "Climate crisis",
-                                "url": "/environment/climate-crisis"
-                            },
-                            {
-                                "title": "Wildlife",
-                                "url": "/environment/wildlife"
-                            },
-                            {
-                                "title": "Energy",
-                                "url": "/environment/energy"
-                            },
-                            {
-                                "title": "Pollution",
-                                "url": "/environment/pollution"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "UK politics",
-                        "url": "/politics"
-                    },
-                    {
-                        "title": "Education",
-                        "url": "/education",
-                        "children": [
-                            {
-                                "title": "Schools",
-                                "url": "/education/schools"
-                            },
-                            {
-                                "title": "Teachers",
-                                "url": "/teacher-network"
-                            },
-                            {
-                                "title": "Universities",
-                                "url": "/education/universities"
-                            },
-                            {
-                                "title": "Students",
-                                "url": "/education/students"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Society",
-                        "url": "/society"
-                    },
-                    {
-                        "title": "Science",
-                        "url": "/science"
-                    },
-                    {
-                        "title": "Tech",
-                        "url": "/technology"
-                    },
-                    {
-                        "title": "Global development",
-                        "url": "/global-development"
-                    },
-                    {
-                        "title": "Obituaries",
-                        "url": "/tone/obituaries"
-                    }
-                ]
-            },
-            {
-                "title": "Opinion",
-                "url": "/commentisfree",
-                "longTitle": "Opinion home",
-                "iconName": "home",
-                "children": [
-                    {
-                        "title": "The Guardian view",
-                        "url": "/profile/editorial"
-                    },
-                    {
-                        "title": "Columnists",
-                        "url": "/index/contributors"
-                    },
-                    {
-                        "title": "Cartoons",
-                        "url": "/cartoons/archive"
-                    },
-                    {
-                        "title": "Opinion videos",
-                        "url": "/type/video+tone/comment"
-                    },
-                    {
-                        "title": "Letters",
-                        "url": "/tone/letters"
-                    }
-                ]
-            },
-            {
-                "title": "Sport",
-                "url": "/sport",
-                "longTitle": "Sport home",
-                "iconName": "home",
-                "children": [
-                    {
-                        "title": "Football",
-                        "url": "/football",
-                        "children": [
-                            {
-                                "title": "Live scores",
-                                "url": "/football/live",
-                                "longTitle": "football/live"
-                            },
-                            {
-                                "title": "Tables",
-                                "url": "/football/tables",
-                                "longTitle": "football/tables"
-                            },
-                            {
-                                "title": "Fixtures",
-                                "url": "/football/fixtures",
-                                "longTitle": "football/fixtures"
-                            },
-                            {
-                                "title": "Results",
-                                "url": "/football/results",
-                                "longTitle": "football/results"
-                            },
-                            {
-                                "title": "Competitions",
-                                "url": "/football/competitions",
-                                "longTitle": "football/competitions"
-                            },
-                            {
-                                "title": "Clubs",
-                                "url": "/football/teams",
-                                "longTitle": "football/teams"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Cricket",
-                        "url": "/sport/cricket"
-                    },
-                    {
-                        "title": "Rugby union",
-                        "url": "/sport/rugby-union"
-                    },
-                    {
-                        "title": "Tennis",
-                        "url": "/sport/tennis"
-                    },
-                    {
-                        "title": "Cycling",
-                        "url": "/sport/cycling"
-                    },
-                    {
-                        "title": "F1",
-                        "url": "/sport/formulaone"
-                    },
-                    {
-                        "title": "Golf",
-                        "url": "/sport/golf"
-                    },
-                    {
-                        "title": "Boxing",
-                        "url": "/sport/boxing"
-                    },
-                    {
-                        "title": "Rugby league",
-                        "url": "/sport/rugbyleague"
-                    },
-                    {
-                        "title": "Racing",
-                        "url": "/sport/horse-racing"
-                    },
-                    {
-                        "title": "US sports",
-                        "url": "/sport/us-sport"
-                    }
-                ]
-            },
-            {
-                "title": "Culture",
-                "url": "/culture",
-                "longTitle": "Culture home",
-                "iconName": "home",
-                "children": [
-                    {
-                        "title": "Film",
-                        "url": "/film"
-                    },
-                    {
-                        "title": "Music",
-                        "url": "/music"
-                    },
-                    {
-                        "title": "TV & radio",
-                        "url": "/tv-and-radio"
-                    },
-                    {
-                        "title": "Books",
-                        "url": "/books"
-                    },
-                    {
-                        "title": "Art & design",
-                        "url": "/artanddesign"
-                    },
-                    {
-                        "title": "Stage",
-                        "url": "/stage"
-                    },
-                    {
-                        "title": "Games",
-                        "url": "/games"
-                    },
-                    {
-                        "title": "Classical",
-                        "url": "/music/classicalmusicandopera"
-                    }
-                ]
-            },
-            {
-                "title": "Lifestyle",
-                "url": "/lifeandstyle",
-                "longTitle": "Lifestyle home",
-                "iconName": "home",
-                "children": [
-                    {
-                        "title": "Fashion",
-                        "url": "/fashion"
-                    },
-                    {
-                        "title": "Food",
-                        "url": "/food"
-                    },
-                    {
-                        "title": "Recipes",
-                        "url": "/tone/recipes"
-                    },
-                    {
-                        "title": "Travel",
-                        "url": "/travel",
-                        "children": [
-                            {
-                                "title": "UK",
-                                "url": "/travel/uk"
-                            },
-                            {
-                                "title": "Europe",
-                                "url": "/travel/europe"
-                            },
-                            {
-                                "title": "US",
-                                "url": "/travel/usa"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Health & fitness",
-                        "url": "/lifeandstyle/health-and-wellbeing"
-                    },
-                    {
-                        "title": "Women",
-                        "url": "/lifeandstyle/women"
-                    },
-                    {
-                        "title": "Men",
-                        "url": "/lifeandstyle/men"
-                    },
-                    {
-                        "title": "Love & sex",
-                        "url": "/lifeandstyle/love-and-sex"
-                    },
-                    {
-                        "title": "Beauty",
-                        "url": "/fashion/beauty"
-                    },
-                    {
-                        "title": "Home & garden",
-                        "url": "/lifeandstyle/home-and-garden"
-                    },
-                    {
-                        "title": "Money",
-                        "url": "/money",
-                        "children": [
-                            {
-                                "title": "Property",
-                                "url": "/money/property"
-                            },
-                            {
-                                "title": "Pensions",
-                                "url": "/money/pensions"
-                            },
-                            {
-                                "title": "Savings",
-                                "url": "/money/savings"
-                            },
-                            {
-                                "title": "Borrowing",
-                                "url": "/money/debt"
-                            },
-                            {
-                                "title": "Careers",
-                                "url": "/money/work-and-careers"
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Cars",
-                        "url": "/technology/motoring"
-                    }
-                ]
-            }
-        ],
-        "otherLinks": [
-            {
-                "title": "The Guardian app",
-                "url": "https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet"
-            },
-            {
-                "title": "Video",
-                "url": "/video"
-            },
-            {
-                "title": "Podcasts",
-                "url": "/podcasts"
-            },
-            {
-                "title": "Pictures",
-                "url": "/inpictures"
-            },
-            {
-                "title": "Newsletters",
-                "url": "/email-newsletters"
-            },
-            {
-                "title": "Today's paper",
-                "url": "/theguardian",
-                "children": [
-                    {
-                        "title": "Obituaries",
-                        "url": "/tone/obituaries"
-                    },
-                    {
-                        "title": "G2",
-                        "url": "/theguardian/g2"
-                    },
-                    {
-                        "title": "Journal",
-                        "url": "/theguardian/journal"
-                    },
-                    {
-                        "title": "Saturday",
-                        "url": "/theguardian/saturday"
-                    }
-                ]
-            },
-            {
-                "title": "Inside the Guardian",
-                "url": "https://www.theguardian.com/membership"
-            },
-            {
-                "title": "The Observer",
-                "url": "/observer",
-                "children": [
-                    {
-                        "title": "Comment",
-                        "url": "/theobserver/news/comment"
-                    },
-                    {
-                        "title": "The New Review",
-                        "url": "/theobserver/new-review"
-                    },
-                    {
-                        "title": "Observer Magazine",
-                        "url": "/theobserver/magazine"
-                    },
-                    {
-                        "title": "Observer Food Monthly",
-                        "url": "/theobserver/foodmonthly"
-                    }
-                ]
-            },
-            {
-                "title": "Guardian Weekly",
-                "url": "https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK"
-            },
-            {
-                "title": "Crosswords",
-                "url": "/crosswords",
-                "children": [
-                    {
-                        "title": "Blog",
-                        "url": "/crosswords/crossword-blog"
-                    },
-                    {
-                        "title": "Quick",
-                        "url": "/crosswords/series/quick"
-                    },
-                    {
-                        "title": "Cryptic",
-                        "url": "/crosswords/series/cryptic"
-                    },
-                    {
-                        "title": "Prize",
-                        "url": "/crosswords/series/prize"
-                    },
-                    {
-                        "title": "Weekend",
-                        "url": "/crosswords/series/weekend-crossword"
-                    },
-                    {
-                        "title": "Quiptic",
-                        "url": "/crosswords/series/quiptic"
-                    },
-                    {
-                        "title": "Genius",
-                        "url": "/crosswords/series/genius"
-                    },
-                    {
-                        "title": "Speedy",
-                        "url": "/crosswords/series/speedy"
-                    },
-                    {
-                        "title": "Everyman",
-                        "url": "/crosswords/series/everyman"
-                    },
-                    {
-                        "title": "Azed",
-                        "url": "/crosswords/series/azed"
-                    }
-                ]
-            }
-        ],
-        "brandExtensions": [
-            {
-                "title": "Search jobs",
-                "url": "https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown"
-            },
-            {
-                "title": "Hire with Guardian Jobs",
-                "url": "https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs"
-            },
-            {
-                "title": "Holidays",
-                "url": "https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader"
-            },
-            {
-                "title": "Live events",
-                "url": "https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown"
-            },
-            {
-                "title": "Masterclasses",
-                "url": "/guardian-masterclasses"
-            },
-            {
-                "title": "Digital Archive",
-                "url": "https://theguardian.newspapers.com"
-            },
-            {
-                "title": "Guardian Print Shop",
-                "url": "/artanddesign/series/gnm-print-sales"
-            },
-            {
-                "title": "Patrons",
-                "url": "https://patrons.theguardian.com/?INTCMP=header_patrons"
-            },
-            {
-                "title": "Guardian Puzzles app",
-                "url": "https://puzzles.theguardian.com/download"
-            },
-            {
-                "title": "Guardian content licensing site",
-                "url": "https://licensing.theguardian.com/"
-            }
-        ],
-        "currentNavLinkTitle": "Film",
-        "currentPillarTitle": "Culture",
-        "subNavSections": {
-            "links": [
-                {
-                    "title": "Film",
-                    "url": "/film"
-                },
-                {
-                    "title": "Music",
-                    "url": "/music"
-                },
-                {
-                    "title": "TV & radio",
-                    "url": "/tv-and-radio"
-                },
-                {
-                    "title": "Books",
-                    "url": "/books"
-                },
-                {
-                    "title": "Art & design",
-                    "url": "/artanddesign"
-                },
-                {
-                    "title": "Stage",
-                    "url": "/stage"
-                },
-                {
-                    "title": "Games",
-                    "url": "/games"
-                },
-                {
-                    "title": "Classical",
-                    "url": "/music/classicalmusicandopera"
-                }
-            ]
-        },
-        "readerRevenueLinks": {
-            "header": {
-                "contribute": "https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D",
-                "subscribe": "https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D",
-                "support": "https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D",
-                "supporter": "https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D"
-            },
-            "footer": {
-                "contribute": "https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D",
-                "subscribe": "https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D",
-                "support": "https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D",
-                "supporter": "https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D"
-            },
-            "sideMenu": {
-                "contribute": "https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D",
-                "subscribe": "https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D",
-                "support": "https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D",
-                "supporter": "https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D"
-            },
-            "ampHeader": {
-                "contribute": "https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D",
-                "subscribe": "https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D",
-                "support": "https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D",
-                "supporter": "https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D"
-            },
-            "ampFooter": {
-                "contribute": "https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D",
-                "subscribe": "https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D",
-                "support": "https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D",
-                "supporter": "https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D"
-            }
-        }
-    },
-    "author": {
-        "byline": "Lanre Bakare",
-        "twitterHandle": "lanre_bakare"
-    },
-    "designType": "Feature",
-    "editionId": "UK",
-    "format": {
-        "design": "FeatureDesign",
-        "theme": "CulturePillar",
-        "display": "StandardDisplay"
-    },
-    "standfirst": "<p>Jeff Bezos was mocked by Rock, Brad Pitt had a pop at Trump and Sigourney Weaver laced up her gloves</p>\n<ul>\n <li><a href=\"https://www.theguardian.com/film/2020/feb/09/oscar-winners-2020-oscars-full-list-live-as-they-happen\">Oscar winners 2020: the complete list</a><br></li>\n <li><a href=\"https://www.theguardian.com/film/gallery/2020/feb/10/razzle-and-dazzle-oscars-2020-after-parties-in-pictures\">Razzle and dazzle: the after-parties in pictures</a></li>\n</ul>",
-    "openGraphData": {
-        "og:url": "http://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020",
-        "article:author": "https://www.theguardian.com/profile/lanre-bakare",
-        "og:image:height": "720",
-        "og:description": "Jeff Bezos was mocked by Rock, Brad Pitt had a pop at Trump and Sigourney Weaver laced up her gloves",
-        "og:image:width": "1200",
-        "og:image": "https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=7a06e26f0c0b00f26e538b1c69d23f9f",
-        "al:ios:url": "gnmguardian://film/2020/feb/10/quotes-of-the-oscars-2020?contenttype=Article&source=applinks",
-        "article:publisher": "https://www.facebook.com/theguardian",
-        "og:type": "article",
-        "al:ios:app_store_id": "409128287",
-        "article:section": "Film",
-        "article:published_time": "2020-02-10T06:59:35.000Z",
-        "og:title": "'I've been a scoundrel all my life': quotes of the Oscars 2020",
-        "fb:app_id": "180444840287",
-        "article:tag": "Oscars 2020,Film,Culture,Chris Rock,Joaquin Phoenix,Sigourney Weaver,Bong Joon-ho,Brad Pitt,Taika Waititi,Laura Dern",
-        "al:ios:app_name": "The Guardian",
-        "og:site_name": "the Guardian",
-        "article:modified_time": "2020-02-10T09:58:49.000Z"
-    },
-    "sectionUrl": "film/oscars-2020",
-    "pageId": "film/2020/feb/10/quotes-of-the-oscars-2020",
-    "version": 3,
-    "tags": [
-        {
-            "id": "film/oscars-2020",
-            "type": "Keyword",
-            "title": "Oscars 2020"
-        },
-        {
-            "id": "film/film",
-            "type": "Keyword",
-            "title": "Film"
-        },
-        {
-            "id": "culture/culture",
-            "type": "Keyword",
-            "title": "Culture"
-        },
-        {
-            "id": "stage/chris-rock",
-            "type": "Keyword",
-            "title": "Chris Rock"
-        },
-        {
-            "id": "film/joaquin-phoenix",
-            "type": "Keyword",
-            "title": "Joaquin Phoenix"
-        },
-        {
-            "id": "film/sigourney-weaver",
-            "type": "Keyword",
-            "title": "Sigourney Weaver"
-        },
-        {
-            "id": "film/bong-joon-ho",
-            "type": "Keyword",
-            "title": "Bong Joon-ho"
-        },
-        {
-            "id": "film/bradpitt",
-            "type": "Keyword",
-            "title": "Brad Pitt"
-        },
-        {
-            "id": "film/taika-waititi",
-            "type": "Keyword",
-            "title": "Taika Waititi"
-        },
-        {
-            "id": "film/laura-dern",
-            "type": "Keyword",
-            "title": "Laura Dern"
-        },
-        {
-            "id": "type/article",
-            "type": "Type",
-            "title": "Article"
-        },
-        {
-            "id": "tone/features",
-            "type": "Tone",
-            "title": "Features"
-        },
-        {
-            "id": "profile/lanre-bakare",
-            "type": "Contributor",
-            "title": "Lanre Bakare",
-            "twitterHandle": "lanre_bakare",
-            "bylineImageUrl": "https://i.guim.co.uk/img/uploads/2017/10/06/Lanre-Bakare,-L.png?width=300&quality=85&auto=format&fit=max&s=afa36cd9b80bea5e98f10280aea4d0e4"
-        },
-        {
-            "id": "tracking/commissioningdesk/uk-culture",
-            "type": "Tracking",
-            "title": "UK Culture"
-        }
-    ],
-    "pillar": "culture",
-    "webURL": "https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020",
-    "showBottomSocialButtons": true,
-    "isImmersive": false,
-    "sectionLabel": "Oscars 2020",
-    "shouldHideReaderRevenue": false,
-    "isAdFreeUser": false,
-    "pageFooter": {
-        "footerLinks": [
-            [
-                {
-                    "text": "About us",
-                    "url": "/about",
-                    "dataLinkName": "uk : footer : about us",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Contact us",
-                    "url": "/help/contact-us",
-                    "dataLinkName": "uk : footer : contact us",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Complaints & corrections",
-                    "url": "/info/complaints-and-corrections",
-                    "dataLinkName": "complaints",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "SecureDrop",
-                    "url": "https://www.theguardian.com/securedrop",
-                    "dataLinkName": "securedrop",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Work for us",
-                    "url": "https://workforus.theguardian.com",
-                    "dataLinkName": "uk : footer : work for us",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Privacy policy",
-                    "url": "/info/privacy",
-                    "dataLinkName": "privacy",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Cookie policy",
-                    "url": "/info/cookies",
-                    "dataLinkName": "cookie",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Terms & conditions",
-                    "url": "/help/terms-of-service",
-                    "dataLinkName": "terms",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Help",
-                    "url": "/help",
-                    "dataLinkName": "uk : footer : tech feedback",
-                    "extraClasses": "js-tech-feedback-report"
-                }
-            ],
-            [
-                {
-                    "text": "All topics",
-                    "url": "/index/subjects/a",
-                    "dataLinkName": "uk : footer : all topics",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "All writers",
-                    "url": "/index/contributors",
-                    "dataLinkName": "uk : footer : all contributors",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Modern Slavery Act",
-                    "url": "https://uploads.guim.co.uk/2021/07/27/STL_&_GMG_Modern_Slavery_Act_Statement_2021.pdf",
-                    "dataLinkName": "uk : footer : modern slavery act statement",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Digital newspaper archive",
-                    "url": "https://theguardian.newspapers.com",
-                    "dataLinkName": "digital newspaper archive",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Facebook",
-                    "url": "https://www.facebook.com/theguardian",
-                    "dataLinkName": "uk : footer : facebook",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "YouTube",
-                    "url": "https://www.youtube.com/user/TheGuardian",
-                    "dataLinkName": "uk : footer : youtube",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Instagram",
-                    "url": "https://www.instagram.com/guardian",
-                    "dataLinkName": "uk : footer : instagram",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "LinkedIn",
-                    "url": "https://www.linkedin.com/company/theguardian",
-                    "dataLinkName": "uk : footer : linkedin",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Twitter",
-                    "url": "https://twitter.com/guardian",
-                    "dataLinkName": "uk: footer : twitter",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Newsletters",
-                    "url": "/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK",
-                    "dataLinkName": "uk : footer : newsletters",
-                    "extraClasses": ""
-                }
-            ],
-            [
-                {
-                    "text": "Advertise with us",
-                    "url": "https://advertising.theguardian.com",
-                    "dataLinkName": "uk : footer : advertise with us",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Guardian Labs",
-                    "url": "/guardian-labs",
-                    "dataLinkName": "uk : footer : guardian labs",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Search jobs",
-                    "url": "https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS",
-                    "dataLinkName": "uk : footer : jobs",
-                    "extraClasses": ""
-                },
-                {
-                    "text": "Patrons",
-                    "url": "https://patrons.theguardian.com?INTCMP=footer_patrons",
-                    "dataLinkName": "uk : footer : patrons",
-                    "extraClasses": ""
-                }
-            ]
-        ]
-    },
-    "twitterData": {
-        "twitter:app:id:iphone": "409128287",
-        "twitter:app:name:googleplay": "The Guardian",
-        "twitter:app:name:ipad": "The Guardian",
-        "twitter:image": "https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=3a2d8d8453727f492ba281e762df7fa7",
-        "twitter:site": "@guardian",
-        "twitter:app:url:ipad": "gnmguardian://film/2020/feb/10/quotes-of-the-oscars-2020?contenttype=Article&source=twitter",
-        "twitter:card": "summary_large_image",
-        "twitter:app:name:iphone": "The Guardian",
-        "twitter:creator": "@lanre_bakare",
-        "twitter:app:id:ipad": "409128287",
-        "twitter:app:id:googleplay": "com.guardian",
-        "twitter:app:url:googleplay": "guardian://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020",
-        "twitter:app:url:iphone": "gnmguardian://film/2020/feb/10/quotes-of-the-oscars-2020?contenttype=Article&source=twitter"
-    },
-    "sectionName": "film",
-    "webPublicationDateDeprecated": "2020-02-10T06:59:35.000Z",
-    "pageType": {
-        "hasShowcaseMainElement": false,
-        "isFront": false,
-        "isLiveblog": false,
-        "isMinuteArticle": false,
-        "isPaidContent": false,
-        "isPreview": false,
-        "isSensitive": false
-    },
-    "hasStoryPackage": false,
-    "contributionsServiceUrl": "https://contributions.guardianapis.com",
-    "headline": "'I've been a scoundrel all my life': quotes of the Oscars 2020",
-    "isLegacyInteractive": false,
-    "guardianBaseURL": "https://www.theguardian.com",
-    "mainMediaElements": [
-        {
-            "id": "d904f65f-f5c1-4786-8d7a-54fc2a4abe72",
-            "assetId": "7z3iv-HkI7o",
-            "channelId": "UCIRYBXDze5krPDzAEOxFGVA",
-            "mediaTitle": "Biggest night in Hollywood: key moments from the Oscars – video ",
-            "overrideImage": "https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=700&quality=85&auto=format&fit=max&s=676cb4a37f52687006049d3982e07556",
-            "posterImage": [
-                {
-                    "url": "https://media.guim.co.uk/c4c763be8d0e2fbdddbea10e80a4790e9aa9789f/0_182_3500_1968/2000.jpg",
-                    "width": 2000
-                },
-                {
-                    "url": "https://media.guim.co.uk/c4c763be8d0e2fbdddbea10e80a4790e9aa9789f/0_182_3500_1968/1000.jpg",
-                    "width": 1000
-                },
-                {
-                    "url": "https://media.guim.co.uk/c4c763be8d0e2fbdddbea10e80a4790e9aa9789f/0_182_3500_1968/500.jpg",
-                    "width": 500
-                },
-                {
-                    "url": "https://media.guim.co.uk/c4c763be8d0e2fbdddbea10e80a4790e9aa9789f/0_182_3500_1968/140.jpg",
-                    "width": 140
-                },
-                {
-                    "url": "https://media.guim.co.uk/c4c763be8d0e2fbdddbea10e80a4790e9aa9789f/0_182_3500_1968/3500.jpg",
-                    "width": 3500
-                }
-            ],
-            "expired": true,
-            "duration": 207,
-            "altText": "Press Room - 92nd Academy Awards<br>epa08208148 Joaquin Phoenix poses in the press room with the Oscar for Best Actor for his performance in 'Joker' during the 92nd annual Academy Awards ceremony at the Dolby Theatre in Hollywood, California, USA, 09 February 2020. The Oscars are presented for outstanding individual or collective efforts in filmmaking in 24 categories.  EPA/DAVID SWANSON",
-            "_type": "model.dotcomrendering.pageElements.YoutubeBlockElement",
-            "elementId": "42339c09-23e3-4b58-8e45-fbb885bab81f"
-        }
-    ],
-    "webPublicationDate": "2020-02-10T06:59:35.000Z",
-    "blocks": [
-        {
-            "id": "5e40df888f08e133247404c6",
-            "elements": [
-                {
-                    "html": "<h2>Chris Rock on Jeff Bezos and Marriage Story</h2>",
-                    "_type": "model.dotcomrendering.pageElements.SubheadingBlockElement",
-                    "elementId": "eb444c56-1ba0-4454-89fa-81b5fcf2af38"
-                },
-                {
-                    "html": "<p>“Bezos is so rich, he got divorced and he is still the richest man in the world. He saw <a href=\"https://www.theguardian.com/film/2019/nov/15/marriage-story-review-noah-baumbach-adam-driver-scarlett-johansson\">Marriage Story</a> and thought it was a comedy.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "1d382131-6aae-4d9c-bac5-f98c297b28bf"
-                },
-                {
-                    "html": "<h2><strong><a href=\"https://www.theguardian.com/film/2020/feb/10/joaquin-phoenixs-oscars-speech-in-full\">Joaquin Phoenix</a> …</strong></h2>",
-                    "_type": "model.dotcomrendering.pageElements.SubheadingBlockElement",
-                    "elementId": "0ef68b2c-5888-466f-ac8d-f592c995ed3c"
-                },
-                {
-                    "html": "<p><strong>… on veganism</strong><strong> and social justice<br></strong>“I think at times we feel or are made to feel that we champion different causes. But for me I see commonality. I think whether we’re talking about gender inequality or racism or queer rights or indigenous rights, or animal rights – we’re talking about the fight against injustice.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "d8b701bf-8b00-4024-83cf-92f8f67ee852"
-                },
-                {
-                    "url": "https://www.theguardian.com/film/2020/feb/10/joaquin-phoenixs-oscars-speech-in-full",
-                    "text": "Joaquin Phoenix's Oscars speech in full: 'We feel entitled to artificially inseminate a cow and steal her baby'",
-                    "prefix": "Related: ",
-                    "role": "thumbnail",
-                    "_type": "model.dotcomrendering.pageElements.RichLinkBlockElement",
-                    "elementId": "8767e42b-9ab1-4877-828e-34c7ca522591"
-                },
-                {
-                    "html": "<p>“We’re talking about the fight against the belief that one nation, one people, one race, one gender, one species has the right to dominate, use and control another with impunity.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "fb4f7efa-6eca-4423-9531-b6d570498fde"
-                },
-                {
-                    "html": "<p><strong>… on dairy products<br></strong>“I think we’ve become very disconnected from the natural world, many of us are guilty of an egocentric worldview and we believe that we’re the centre of the universe. We go into the natural world and we plunder it for its resources, we feel entitled to artificially inseminate a cow and steal her baby even though her cries of anguish are unmistakeable. Then we take her milk intended for her calf and we put it in our coffee and our cereal.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "5396c7fd-98e2-41b0-a923-4579ef7c8731"
-                },
-                {
-                    "html": "<p><strong>… on forgiveness<br></strong>“I have been a scoundrel all my life, I’ve been selfish. I’ve been cruel at times, hard to work with and I’m grateful that so many of you in this room have given me a second chance. I think that’s when we’re at our best: when we support each other. Not when we cancel each other out for our past mistakes, but when we help each other to grow. When we educate each other. When we guide each other to redemption.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "e58086cb-c867-4492-9777-d9db86584b65"
-                },
-                {
-                    "url": "https://www.theguardian.com/film/2020/feb/10/parasite-best-picture-new-era-for-oscars",
-                    "text": "Parasite's best picture triumph could begin a new era for the Oscars",
-                    "prefix": "Related: ",
-                    "role": "thumbnail",
-                    "_type": "model.dotcomrendering.pageElements.RichLinkBlockElement",
-                    "elementId": "c4baff26-6871-4cbc-a4a4-e633f05d6442"
-                },
-                {
-                    "html": "<h2><strong>Laura Dern on meeting your heroes</strong></h2>",
-                    "_type": "model.dotcomrendering.pageElements.SubheadingBlockElement",
-                    "elementId": "ddbe5db9-bcc7-4330-834f-746b7e67a753"
-                },
-                {
-                    "html": "<p>“Noah [Baumbach] wrote a movie about love and breaching divisions in the name and the honour of family and home and hopefully for our planet. Some say never meet your heroes. I say if you’re really blessed you get them as your parents. I share this with my acting legends Diane Ladd and Bruce Dern. You got game, I love you. Thank you all for this gift. This is the best birthday present ever.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "dfb9c8ad-96f3-4346-b629-3bed745a94af"
-                },
-                {
-                    "media": {
-                        "allImages": [
-                            {
-                                "index": 0,
-                                "fields": {
-                                    "height": "2100",
-                                    "width": "3500"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/3500.jpg"
-                            },
-                            {
-                                "index": 1,
-                                "fields": {
-                                    "isMaster": "true",
-                                    "height": "2100",
-                                    "width": "3500"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg"
-                            },
-                            {
-                                "index": 2,
-                                "fields": {
-                                    "height": "1200",
-                                    "width": "2000"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/2000.jpg"
-                            },
-                            {
-                                "index": 3,
-                                "fields": {
-                                    "height": "600",
-                                    "width": "1000"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/1000.jpg"
-                            },
-                            {
-                                "index": 4,
-                                "fields": {
-                                    "height": "300",
-                                    "width": "500"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/500.jpg"
-                            },
-                            {
-                                "index": 5,
-                                "fields": {
-                                    "height": "84",
-                                    "width": "140"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/140.jpg"
-                            }
-                        ]
-                    },
-                    "data": {
-                        "alt": "Taika Waititi.",
-                        "caption": "‘We can make it here as well’ … Taika Waititi.",
-                        "credit": "Photograph: Eric Gaillard/Reuters"
-                    },
-                    "displayCredit": true,
-                    "role": "inline",
-                    "imageSources": [
-                        {
-                            "weighting": "inline",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf",
-                                    "width": 620
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4",
-                                    "width": 1240
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc",
-                                    "width": 605
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2",
-                                    "width": 1210
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37",
-                                    "width": 445
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46",
-                                    "width": 890
-                                }
-                            ]
-                        },
-                        {
-                            "weighting": "thumbnail",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=140&quality=85&auto=format&fit=max&s=baeee98e0224a8f53fde2e8a1cdb3475",
-                                    "width": 140
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=084163a5dc8919450d5a5972556be190",
-                                    "width": 280
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=120&quality=85&auto=format&fit=max&s=437471392ece4ffc8487fa438bf75796",
-                                    "width": 120
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=fce239649806c95727aabaed7519dfa1",
-                                    "width": 240
-                                }
-                            ]
-                        },
-                        {
-                            "weighting": "supporting",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=380&quality=85&auto=format&fit=max&s=64596d769a1ebe6e77e0bd5fd3ac68e3",
-                                    "width": 380
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=982ed204c2526b18f71933ad959a4f1f",
-                                    "width": 760
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=4088905b0c3a1daa955a4618d1aa7a56",
-                                    "width": 300
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=040b422cf0ee5df9ee0653fc44c37504",
-                                    "width": 600
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf",
-                                    "width": 620
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4",
-                                    "width": 1240
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc",
-                                    "width": 605
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2",
-                                    "width": 1210
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37",
-                                    "width": 445
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46",
-                                    "width": 890
-                                }
-                            ]
-                        },
-                        {
-                            "weighting": "showcase",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=860&quality=85&auto=format&fit=max&s=c74fb2637336544e0b987d808316555b",
-                                    "width": 860
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=9bfebb5c99a80d1120dbfe5b4ab40598",
-                                    "width": 1720
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=780&quality=85&auto=format&fit=max&s=99bf51f05fe69e3fc4203d8005ec492c",
-                                    "width": 780
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=9c312451fc144cd45eb35793af2e8ebc",
-                                    "width": 1560
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf",
-                                    "width": 620
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4",
-                                    "width": 1240
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc",
-                                    "width": 605
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2",
-                                    "width": 1210
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37",
-                                    "width": 445
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46",
-                                    "width": 890
-                                }
-                            ]
-                        },
-                        {
-                            "weighting": "halfwidth",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf",
-                                    "width": 620
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4",
-                                    "width": 1240
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc",
-                                    "width": 605
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2",
-                                    "width": 1210
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37",
-                                    "width": 445
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46",
-                                    "width": 890
-                                }
-                            ]
-                        },
-                        {
-                            "weighting": "immersive",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf",
-                                    "width": 620
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4",
-                                    "width": 1240
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc",
-                                    "width": 605
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2",
-                                    "width": 1210
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37",
-                                    "width": 445
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46",
-                                    "width": 890
-                                }
-                            ]
-                        }
-                    ],
-                    "_type": "model.dotcomrendering.pageElements.ImageBlockElement",
-                    "elementId": "9efb3eaf-ad5b-4f04-9068-e39a3d0113dc"
-                },
-                {
-                    "html": "<h2><strong>Taika Waititi on far-right extremism and indigenous kids</strong></h2>",
-                    "_type": "model.dotcomrendering.pageElements.SubheadingBlockElement",
-                    "elementId": "1d91fc05-2930-4676-9326-1b07c5251a80"
-                },
-                {
-                    "html": "<p>Backstage: “If you were a Nazi, you would go to jail. Now you’re a Nazi, feel free to have a rally down in the square with your mates.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "15798569-9b62-47ee-bace-10cb95d77cff"
-                },
-                {
-                    "html": "<p>On stage he said: “I want to dedicate this to all the indigenous kids in the world who want to do art, we are the original storytellers and we can make it here as well.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "31602f4c-770b-4d43-96cf-c9f7a7b35ba7"
-                },
-                {
-                    "html": "<h2><strong>Brad Pitt on Trump’s impeachment, John Bolton and the Republican party</strong></h2>",
-                    "_type": "model.dotcomrendering.pageElements.SubheadingBlockElement",
-                    "elementId": "7d92a47f-bfb2-4470-ad1c-05fddcca50e7"
-                },
-                {
-                    "html": "<p>“Thank you to the Academy for this honour of honours. They told me I only have 45 seconds up here which is 45 more than the Senate gave John Bolton.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "6d3934d5-aa20-47b0-bc21-df14502ea2af"
-                },
-                {
-                    "url": "https://www.theguardian.com/film/2020/feb/10/parasite-best-picture-new-era-for-oscars",
-                    "text": "Parasite's best picture triumph could begin a new era for the Oscars",
-                    "prefix": "Related: ",
-                    "role": "thumbnail",
-                    "_type": "model.dotcomrendering.pageElements.RichLinkBlockElement",
-                    "elementId": "cea6b48a-9756-483d-af7b-bd4830a9a5bc"
-                },
-                {
-                    "html": "<h2>Bong Joon-Ho on booze and Scorsese and Tarantino</h2>",
-                    "_type": "model.dotcomrendering.pageElements.SubheadingBlockElement",
-                    "elementId": "560ce442-9a6d-4e1a-95a4-a935908e60dc"
-                },
-                {
-                    "html": "<p>“The [international feature film] category has a new name and I’m so happy to be its first recipient under its new name. I applaud and support the new direction that this change symbolises. I’m ready to drink tonight.</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "b8be13db-4cba-4a57-80d4-7decca5df67d"
-                },
-                {
-                    "html": "<p>“When I was young and starting in cinema there was a saying that I carved deep into my heart, which is, ‘The most personal is the most creative.’ That quote was from our great Martin Scorsese. When I was in school I studied Scorsese’s films. Just to be nominated was a huge honour, I never felt I would win. When people in the US were not familiar with my films Quentin [Tarantino] would always put my films on his list – Quentin, I love you.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "0b4183ec-a707-411f-8381-a36da9adc805"
-                },
-                {
-                    "html": "<h2><strong>Hildur Guðnadóttir on female composers</strong></h2>",
-                    "_type": "model.dotcomrendering.pageElements.SubheadingBlockElement",
-                    "elementId": "59c1c02a-d021-4817-965d-0e5e03d0d84c"
-                },
-                {
-                    "html": "<p>“To the girls to the women, to the mothers to the daughters who hear the music bubbling within please speak up – we need to hear your voices.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "571162a1-e74e-49e8-9f49-c4627b39a0b5"
-                },
-                {
-                    "media": {
-                        "allImages": [
-                            {
-                                "index": 0,
-                                "fields": {
-                                    "height": "2650",
-                                    "width": "4416"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/4416.jpg"
-                            },
-                            {
-                                "index": 1,
-                                "fields": {
-                                    "isMaster": "true",
-                                    "height": "2650",
-                                    "width": "4416"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg"
-                            },
-                            {
-                                "index": 2,
-                                "fields": {
-                                    "height": "1200",
-                                    "width": "2000"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/2000.jpg"
-                            },
-                            {
-                                "index": 3,
-                                "fields": {
-                                    "height": "600",
-                                    "width": "1000"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/1000.jpg"
-                            },
-                            {
-                                "index": 4,
-                                "fields": {
-                                    "height": "300",
-                                    "width": "500"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/500.jpg"
-                            },
-                            {
-                                "index": 5,
-                                "fields": {
-                                    "height": "84",
-                                    "width": "140"
-                                },
-                                "mediaType": "Image",
-                                "mimeType": "image/jpeg",
-                                "url": "https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/140.jpg"
-                            }
-                        ]
-                    },
-                    "data": {
-                        "copyright": "2020 Getty Images",
-                        "alt": "Brie Larson, Sigourney Weaver, and Gal Gadot.",
-                        "caption": "Brie Larson, Sigourney Weaver, and Gal Gadot.",
-                        "credit": "Photograph: Kevin Winter/Getty Images"
-                    },
-                    "displayCredit": true,
-                    "role": "inline",
-                    "imageSources": [
-                        {
-                            "weighting": "inline",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a",
-                                    "width": 620
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38",
-                                    "width": 1240
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7",
-                                    "width": 605
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679",
-                                    "width": 1210
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce",
-                                    "width": 445
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f",
-                                    "width": 890
-                                }
-                            ]
-                        },
-                        {
-                            "weighting": "thumbnail",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=140&quality=85&auto=format&fit=max&s=110a2b17faf8c84553fb7034d2606e91",
-                                    "width": 140
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=31a7b62a0d6cad6b5eabf99384fd98b6",
-                                    "width": 280
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=120&quality=85&auto=format&fit=max&s=dd9242ba7c7b9eedf1e0e36387914020",
-                                    "width": 120
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=c898df85f5a67cfcaaa3f9d6dd35c524",
-                                    "width": 240
-                                }
-                            ]
-                        },
-                        {
-                            "weighting": "supporting",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=380&quality=85&auto=format&fit=max&s=ed6f81bf1b15c64720d1ccc5b27ca972",
-                                    "width": 380
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=cc7942f8bca7b4bcc6eb12a4fd38096d",
-                                    "width": 760
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=300&quality=85&auto=format&fit=max&s=aac757c2d1e80ac5ffce804563a497cb",
-                                    "width": 300
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=aa31554ce3bc6e311f425fd389f144c7",
-                                    "width": 600
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a",
-                                    "width": 620
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38",
-                                    "width": 1240
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7",
-                                    "width": 605
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679",
-                                    "width": 1210
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce",
-                                    "width": 445
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f",
-                                    "width": 890
-                                }
-                            ]
-                        },
-                        {
-                            "weighting": "showcase",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=860&quality=85&auto=format&fit=max&s=260745962754893f52166a58e2a72953",
-                                    "width": 860
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=c6fa8fd31ffb2b6c737992c3daf0a46a",
-                                    "width": 1720
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=780&quality=85&auto=format&fit=max&s=632692b4637d7f965382587259b4dfd7",
-                                    "width": 780
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=47c74f4b536cee5e6374bd68fe28d1b7",
-                                    "width": 1560
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a",
-                                    "width": 620
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38",
-                                    "width": 1240
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7",
-                                    "width": 605
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679",
-                                    "width": 1210
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce",
-                                    "width": 445
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f",
-                                    "width": 890
-                                }
-                            ]
-                        },
-                        {
-                            "weighting": "halfwidth",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a",
-                                    "width": 620
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38",
-                                    "width": 1240
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7",
-                                    "width": 605
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679",
-                                    "width": 1210
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce",
-                                    "width": 445
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f",
-                                    "width": 890
-                                }
-                            ]
-                        },
-                        {
-                            "weighting": "immersive",
-                            "srcSet": [
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a",
-                                    "width": 620
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38",
-                                    "width": 1240
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7",
-                                    "width": 605
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679",
-                                    "width": 1210
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce",
-                                    "width": 445
-                                },
-                                {
-                                    "src": "https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f",
-                                    "width": 890
-                                }
-                            ]
-                        }
-                    ],
-                    "_type": "model.dotcomrendering.pageElements.ImageBlockElement",
-                    "elementId": "f7ac6d29-ff2a-4c04-a96c-b62d2aa7df50"
-                },
-                {
-                    "html": "<h2>Sigourney Weaver, Gal Gadot and Brie Larson’s Fight Club</h2>",
-                    "_type": "model.dotcomrendering.pageElements.SubheadingBlockElement",
-                    "elementId": "311142ab-beb1-43b9-acc2-454a4ae4c9d3"
-                },
-                {
-                    "html": "<p>“We decided that after the show we’re going to start a fight club. Men are invited but no shirts allowed. The winner will get a lifetime’s supply of deodorant, sushi, and tequila. The loser gets a lifetime of questions about what it’s like as a woman in Hollywood.</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "41e03411-5247-4185-98ab-3a0b5ac91ee7"
-                },
-                {
-                    "html": "<h2><strong>Ford v Ferrari</strong><strong> sound editor Donald Sylvester</strong><strong> on sharing</strong></h2>",
-                    "_type": "model.dotcomrendering.pageElements.SubheadingBlockElement",
-                    "elementId": "16394398-78d7-48d8-86d2-36382a3e1e36"
-                },
-                {
-                    "html": "<p>“If I could I would break this off [statuette] and give James [Mangold] the head so he could put it in a jar.”</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "54dc0902-4f00-4fb1-a56a-3169673c8689"
-                },
-                {
-                    "html": "<h2><strong>Hair Love’s directors on … hair</strong></h2>",
-                    "_type": "model.dotcomrendering.pageElements.SubheadingBlockElement",
-                    "elementId": "5197d7e2-7175-4e71-bfd0-72da20847989"
-                },
-                {
-                    "html": "<p>Matthew A Cherry and Karen Rupert Toliver said their film Hair Love, which won for best animated short, was made because they “wanted to normalise black hair” and make cartoons more diverse. The directors invited black teenager <a href=\"https://www.theguardian.com/us-news/2020/jan/23/deandre-arnold-texas-school-district-student-dreadlocks\">Deandre Arnold</a>, who was told he wouldn’t be able to take part in his graduation if he didn’t cut his dreadlocks, as their guest.</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "7be9caf7-3d20-4fc3-855b-39bf985b08c9"
-                },
-                {
-                    "html": "<p>“We have a firm belief that representation matters deeply, especially in cartoons because in cartoons that’s how we first see our movies and think about how we shape the world,” said Karen Rupert Toliver.</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "2b827ca7-b228-494e-82f1-34ac0b95f007"
-                }
-            ],
-            "blockCreatedOn": 1581309832000,
-            "blockCreatedOnDisplay": "04.43 GMT",
-            "blockLastUpdated": 1581317966000,
-            "blockLastUpdatedDisplay": "06.59 GMT",
-            "blockFirstPublished": 1581309836000,
-            "blockFirstPublishedDisplay": "04.43 GMT",
-            "contributors": [],
-            "primaryDateLine": "Mon 10 Feb 2020 06.59 GMT",
-            "secondaryDateLine": "Last modified on Mon 10 Feb 2020 09.58 GMT"
-        }
-    ],
-    "linkedData": [
-        {
-            "@type": "NewsArticle",
-            "@context": "https://schema.org",
-            "@id": "https://amp.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020",
-            "publisher": {
-                "@type": "Organization",
-                "@context": "https://schema.org",
-                "@id": "https://www.theguardian.com#publisher",
-                "name": "The Guardian",
-                "url": "https://www.theguardian.com/",
-                "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png",
-                    "width": 190,
-                    "height": 60
-                },
-                "sameAs": [
-                    "https://www.facebook.com/theguardian",
-                    "https://twitter.com/guardian",
-                    "https://www.youtube.com/user/TheGuardian"
-                ]
-            },
-            "isAccessibleForFree": true,
-            "isPartOf": {
-                "@type": [
-                    "CreativeWork",
-                    "Product"
-                ],
-                "name": "The Guardian",
-                "productID": "theguardian.com:basic"
-            },
-            "image": [
-                "https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=7a06e26f0c0b00f26e538b1c69d23f9f",
-                "https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=c921d14c579306497fafe7974d278ee5",
-                "https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=0977d1fe55c20b2906b6d5a4a65f93ce",
-                "https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&quality=85&auto=format&fit=max&s=84f1308a7490fdacd47fa353736ea983"
-            ],
-            "author": [
-                {
-                    "@type": "Person",
-                    "name": "Lanre Bakare",
-                    "sameAs": "https://www.theguardian.com/profile/lanre-bakare"
-                }
-            ],
-            "datePublished": "2020-02-10T06:59:35.000Z",
-            "headline": "'I've been a scoundrel all my life': quotes of the Oscars 2020",
-            "dateModified": "2020-02-10T09:58:49.000Z",
-            "mainEntityOfPage": "https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020"
-        },
-        {
-            "@type": "WebPage",
-            "@context": "https://schema.org",
-            "@id": "https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020",
-            "potentialAction": {
-                "@type": "ViewAction",
-                "target": "android-app://com.guardian/https/www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020"
-            }
-        }
-    ],
-    "webPublicationDateDisplay": "Mon 10 Feb 2020 06.59 GMT",
-    "shouldHideAds": false,
-    "webTitle": "'I've been a scoundrel all my life': quotes of the Oscars 2020",
-    "isSpecialReport": false,
-    "isCommentable": false,
-    "keyEvents": [],
-    "filterKeyEvents": false,
-    "config": {
-        "references": [
-            {
-                "rich-link": "https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email"
-            }
-        ],
-        "shortUrlId": "/p/d8ex5",
-        "switches": {
-            "prebidAppnexusUkRow": true,
-            "clickToView": true,
-            "abPuzzlesBanner": true,
-            "prebidTrustx": true,
-            "scAdFreeBanner": false,
-            "compareVariantDecision": false,
-            "enableSentryReporting": true,
-            "lazyLoadContainers": true,
-            "adFreeStrictExpiryEnforcement": false,
-            "liveblogRendering": true,
-            "remarketing": true,
-            "registerWithPhone": false,
-            "targeting": true,
-            "extendedMostPopularFronts": true,
-            "slotBodyEnd": true,
-            "emailInlineInFooter": true,
-            "facebookTrackingPixel": true,
-            "serviceWorkerEnabled": false,
-            "iasAdTargeting": true,
-            "extendedMostPopular": true,
-            "prebidAnalytics": true,
-            "imrWorldwide": true,
-            "acast": true,
-            "twitterUwt": true,
-            "prebidAppnexusInvcode": true,
-            "prebidAppnexus": true,
-            "enableDiscussionSwitch": true,
-            "prebidXaxis": true,
-            "interactiveFullHeaderSwitch": false,
-            "discussionAllPageSize": true,
-            "prebidUserSync": true,
-            "audioOnwardJourneySwitch": true,
-            "mobileStickyPrebid": true,
-            "breakingNews": true,
-            "externalVideoEmbeds": true,
-            "simpleReach": true,
-            "carrotTrafficDriver": true,
-            "geoMostPopular": true,
-            "weAreHiring": true,
-            "relatedContent": true,
-            "thirdPartyEmbedTracking": true,
-            "prebidOzone": true,
-            "prebidAdYouLike": true,
-            "mostViewedFronts": true,
-            "abSignInGateMainControl": true,
-            "ampPrebid": true,
-            "googleSearch": true,
-            "brazeSwitch": true,
-            "consentManagement": true,
-            "commercial": true,
-            "redplanetForAus": true,
-            "prebidSonobi": true,
-            "idProfileNavigation": true,
-            "confiantAdVerification": true,
-            "discussionAllowAnonymousRecommendsSwitch": false,
-            "scrollDepth": true,
-            "permutive": true,
-            "comscore": true,
-            "webFonts": true,
-            "prebidImproveDigital": true,
-            "ophan": true,
-            "crosswordSvgThumbnails": true,
-            "prebidTriplelift": true,
-            "weather": true,
-            "commercialOutbrainNewids": true,
-            "dotcomRendering": true,
-            "abSignInGateMainVariant": true,
-            "hostedVideoAutoplay": true,
-            "abAdblockAsk": true,
-            "prebidPubmatic": true,
-            "serverShareCounts": true,
-            "autoRefresh": true,
-            "enhanceTweets": true,
-            "prebidIndexExchange": true,
-            "prebidOpenx": true,
-            "idCookieRefresh": true,
-            "sharingComments": true,
-            "abSignInGateMandatory": true,
-            "discussionPageSize": true,
-            "smartAppBanner": false,
-            "boostGaUserTimingFidelity": false,
-            "historyTags": true,
-            "mobileStickyLeaderboard": true,
-            "abDeeplyReadTest": false,
-            "surveys": true,
-            "remoteBanner": true,
-            "inizio": true,
-            "prebidHeaderBidding": true,
-            "a9HeaderBidding": true
-        },
-        "keywordIds": "environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters",
-        "sharedAdTargeting": {
-            "ct": "article",
-            "co": [
-                "jennifer-rankin"
-            ],
-            "url": "/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe",
-            "su": [
-                "0"
-            ],
-            "edition": "uk",
-            "tn": [
-                "news"
-            ],
-            "p": "ng",
-            "k": [
-                "eu",
-                "flooding",
-                "world",
-                "europe-news",
-                "natural-disasters",
-                "science",
-                "environment",
-                "climate-change",
-                "wildfires",
-                "scienceofclimatechange"
-            ],
-            "sh": "https://www.theguardian.com/p/d8ex5"
-        },
-        "toneIds": "tone/news",
-        "dcrSentryDsn": "https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847",
-        "discussionApiUrl": "https://discussion.theguardian.com/discussion-api",
-        "sentryPublicApiKey": "344003a8d11c41d8800fbad8383fdc50",
-        "commercialBundleUrl": "https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js",
-        "discussionApiClientHeader": "nextgen",
-        "shouldHideReaderRevenue": false,
-        "sentryHost": "app.getsentry.com/35463",
-        "isPaidContent": false,
-        "headline": "Fires and floods: maps of Europe predict scale of climate catastrophe",
-        "idApiUrl": "https://idapi.theguardian.com",
-        "showRelatedContent": true,
-        "adUnit": "/59666047/theguardian.com/environment/article/ng",
-        "videoDuration": 0,
-        "stage": "PROD",
-        "isSensitive": false,
-        "isDev": false,
-        "ajaxUrl": "https://api.nextgen.guardianapps.co.uk",
-        "keywords": "Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather",
-        "revisionNumber": "DEV",
-        "section": "environment",
-        "isPhotoEssay": false,
-        "ampIframeUrl": "https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html",
-        "isLive": false,
-        "host": "https://www.theguardian.com",
-        "brazeApiKey": "7f28c639-8bda-48ff-a3f6-24345abfc07c",
-        "contentType": "Article",
-        "idUrl": "https://profile.theguardian.com",
-        "author": "Jennifer Rankin",
-        "dfpAccountId": "59666047",
-        "pageId": "environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe",
-        "googletagUrl": "//securepubads.g.doubleclick.net/tag/js/gpt.js",
-        "mmaUrl": "https://manage.theguardian.com",
-        "abTests": {},
-        "edition": "UK",
-        "ipsosTag": "environment",
-        "isLiveBlog": false,
-        "frontendAssetsFullURL": "https://assets.guim.co.uk/",
-        "webPublicationDate": 1581314427000,
-        "discussionD2Uid": "zHoBy6HNKsk"
-    }
-}
+export const Feature: CAPIArticleType = {
+	slotMachineFlags: '',
+	main: '<figure class="element element-atom"> \n <gu-atom data-atom-id="d904f65f-f5c1-4786-8d7a-54fc2a4abe72" data-atom-type="media"> \n  <div>\n   <iframe frameborder="0" allowfullscreen="true" src="https://www.youtube-nocookie.com/embed/7z3iv-HkI7o?showinfo=0&amp;rel=0"></iframe>\n  </div>\n </gu-atom> \n</figure>',
+	subMetaSectionLinks: [
+		{
+			url: '/film/oscars-2020',
+			title: 'Oscars 2020',
+		},
+	],
+	commercialProperties: {
+		UK: {
+			adTargeting: [
+				{
+					name: 'co',
+					value: ['lanre-bakare'],
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'k',
+					value: [
+						'chris-rock',
+						'taika-waititi',
+						'bradpitt',
+						'laura-dern',
+						'culture',
+						'bong-joon-ho',
+						'oscars-2020',
+						'sigourney-weaver',
+						'film',
+						'joaquin-phoenix',
+					],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8qaf',
+				},
+				{
+					name: 'tn',
+					value: ['features'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'url',
+					value: '/film/2020/feb/10/quotes-of-the-oscars-2020',
+				},
+			],
+		},
+		US: {
+			adTargeting: [
+				{
+					name: 'co',
+					value: ['lanre-bakare'],
+				},
+				{
+					name: 'k',
+					value: [
+						'chris-rock',
+						'taika-waititi',
+						'bradpitt',
+						'laura-dern',
+						'culture',
+						'bong-joon-ho',
+						'oscars-2020',
+						'sigourney-weaver',
+						'film',
+						'joaquin-phoenix',
+					],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8qaf',
+				},
+				{
+					name: 'tn',
+					value: ['features'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'url',
+					value: '/film/2020/feb/10/quotes-of-the-oscars-2020',
+				},
+				{
+					name: 'edition',
+					value: 'us',
+				},
+			],
+		},
+		AU: {
+			adTargeting: [
+				{
+					name: 'co',
+					value: ['lanre-bakare'],
+				},
+				{
+					name: 'k',
+					value: [
+						'chris-rock',
+						'taika-waititi',
+						'bradpitt',
+						'laura-dern',
+						'culture',
+						'bong-joon-ho',
+						'oscars-2020',
+						'sigourney-weaver',
+						'film',
+						'joaquin-phoenix',
+					],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8qaf',
+				},
+				{
+					name: 'tn',
+					value: ['features'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'url',
+					value: '/film/2020/feb/10/quotes-of-the-oscars-2020',
+				},
+				{
+					name: 'edition',
+					value: 'au',
+				},
+			],
+		},
+		INT: {
+			adTargeting: [
+				{
+					name: 'co',
+					value: ['lanre-bakare'],
+				},
+				{
+					name: 'k',
+					value: [
+						'chris-rock',
+						'taika-waititi',
+						'bradpitt',
+						'laura-dern',
+						'culture',
+						'bong-joon-ho',
+						'oscars-2020',
+						'sigourney-weaver',
+						'film',
+						'joaquin-phoenix',
+					],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8qaf',
+				},
+				{
+					name: 'tn',
+					value: ['features'],
+				},
+				{
+					name: 'edition',
+					value: 'int',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'url',
+					value: '/film/2020/feb/10/quotes-of-the-oscars-2020',
+				},
+			],
+		},
+	},
+	beaconURL: '//phar.gu-web.net',
+	webPublicationSecondaryDateDisplay:
+		'Last modified on Mon 10 Feb 2020 09.58 GMT',
+	editionLongForm: 'UK edition',
+	hasRelated: true,
+	publication: 'theguardian.com',
+	trailText:
+		'Jeff Bezos was mocked by Rock, Brad Pitt had a pop at Trump and Sigourney Weaver laced up her gloves',
+	subMetaKeywordLinks: [
+		{
+			url: '/stage/chris-rock',
+			title: 'Chris Rock',
+		},
+		{
+			url: '/film/joaquin-phoenix',
+			title: 'Joaquin Phoenix',
+		},
+		{
+			url: '/film/sigourney-weaver',
+			title: 'Sigourney Weaver',
+		},
+		{
+			url: '/film/bong-joon-ho',
+			title: 'Bong Joon-ho',
+		},
+		{
+			url: '/film/bradpitt',
+			title: 'Brad Pitt',
+		},
+		{
+			url: '/film/taika-waititi',
+			title: 'Taika Waititi',
+		},
+		{
+			url: '/tone/features',
+			title: 'features',
+		},
+	],
+	contentType: 'Article',
+	nav: {
+		currentUrl: '/film',
+		pillars: [
+			{
+				title: 'News',
+				url: '/',
+				longTitle: 'Headlines',
+				iconName: 'home',
+				children: [
+					{
+						title: 'UK',
+						url: '/uk-news',
+						longTitle: 'UK news',
+						children: [
+							{
+								title: 'UK politics',
+								url: '/politics',
+							},
+							{
+								title: 'Education',
+								url: '/education',
+								children: [
+									{
+										title: 'Schools',
+										url: '/education/schools',
+									},
+									{
+										title: 'Teachers',
+										url: '/teacher-network',
+									},
+									{
+										title: 'Universities',
+										url: '/education/universities',
+									},
+									{
+										title: 'Students',
+										url: '/education/students',
+									},
+								],
+							},
+							{
+								title: 'Media',
+								url: '/media',
+							},
+							{
+								title: 'Society',
+								url: '/society',
+							},
+							{
+								title: 'Law',
+								url: '/law',
+							},
+							{
+								title: 'Scotland',
+								url: '/uk/scotland',
+							},
+							{
+								title: 'Wales',
+								url: '/uk/wales',
+							},
+							{
+								title: 'Northern Ireland',
+								url: '/uk/northernireland',
+							},
+						],
+					},
+					{
+						title: 'World',
+						url: '/world',
+						longTitle: 'World news',
+						children: [
+							{
+								title: 'Europe',
+								url: '/world/europe-news',
+							},
+							{
+								title: 'US',
+								url: '/us-news',
+								longTitle: 'US news',
+							},
+							{
+								title: 'Americas',
+								url: '/world/americas',
+							},
+							{
+								title: 'Asia',
+								url: '/world/asia',
+							},
+							{
+								title: 'Australia',
+								url: '/australia-news',
+								longTitle: 'Australia news',
+							},
+							{
+								title: 'Middle East',
+								url: '/world/middleeast',
+							},
+							{
+								title: 'Africa',
+								url: '/world/africa',
+							},
+							{
+								title: 'Inequality',
+								url: '/inequality',
+							},
+							{
+								title: 'Global development',
+								url: '/global-development',
+							},
+						],
+					},
+					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
+					},
+					{
+						title: 'Climate crisis',
+						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Football',
+						url: '/football',
+						children: [
+							{
+								title: 'Live scores',
+								url: '/football/live',
+								longTitle: 'football/live',
+							},
+							{
+								title: 'Tables',
+								url: '/football/tables',
+								longTitle: 'football/tables',
+							},
+							{
+								title: 'Fixtures',
+								url: '/football/fixtures',
+								longTitle: 'football/fixtures',
+							},
+							{
+								title: 'Results',
+								url: '/football/results',
+								longTitle: 'football/results',
+							},
+							{
+								title: 'Competitions',
+								url: '/football/competitions',
+								longTitle: 'football/competitions',
+							},
+							{
+								title: 'Clubs',
+								url: '/football/teams',
+								longTitle: 'football/teams',
+							},
+						],
+					},
+					{
+						title: 'Business',
+						url: '/business',
+						children: [
+							{
+								title: 'Economics',
+								url: '/business/economics',
+							},
+							{
+								title: 'Banking',
+								url: '/business/banking',
+							},
+							{
+								title: 'Money',
+								url: '/money',
+								children: [
+									{
+										title: 'Property',
+										url: '/money/property',
+									},
+									{
+										title: 'Pensions',
+										url: '/money/pensions',
+									},
+									{
+										title: 'Savings',
+										url: '/money/savings',
+									},
+									{
+										title: 'Borrowing',
+										url: '/money/debt',
+									},
+									{
+										title: 'Careers',
+										url: '/money/work-and-careers',
+									},
+								],
+							},
+							{
+								title: 'Markets',
+								url: '/business/stock-markets',
+							},
+							{
+								title: 'Project Syndicate',
+								url: '/business/series/project-syndicate-economists',
+							},
+							{
+								title: 'B2B',
+								url: '/business-to-business',
+							},
+							{
+								title: 'Retail',
+								url: '/business/retail',
+							},
+						],
+					},
+					{
+						title: 'Environment',
+						url: '/environment',
+						children: [
+							{
+								title: 'Climate crisis',
+								url: '/environment/climate-crisis',
+							},
+							{
+								title: 'Wildlife',
+								url: '/environment/wildlife',
+							},
+							{
+								title: 'Energy',
+								url: '/environment/energy',
+							},
+							{
+								title: 'Pollution',
+								url: '/environment/pollution',
+							},
+						],
+					},
+					{
+						title: 'UK politics',
+						url: '/politics',
+					},
+					{
+						title: 'Education',
+						url: '/education',
+						children: [
+							{
+								title: 'Schools',
+								url: '/education/schools',
+							},
+							{
+								title: 'Teachers',
+								url: '/teacher-network',
+							},
+							{
+								title: 'Universities',
+								url: '/education/universities',
+							},
+							{
+								title: 'Students',
+								url: '/education/students',
+							},
+						],
+					},
+					{
+						title: 'Society',
+						url: '/society',
+					},
+					{
+						title: 'Science',
+						url: '/science',
+					},
+					{
+						title: 'Tech',
+						url: '/technology',
+					},
+					{
+						title: 'Global development',
+						url: '/global-development',
+					},
+					{
+						title: 'Obituaries',
+						url: '/tone/obituaries',
+					},
+				],
+			},
+			{
+				title: 'Opinion',
+				url: '/commentisfree',
+				longTitle: 'Opinion home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'The Guardian view',
+						url: '/profile/editorial',
+					},
+					{
+						title: 'Columnists',
+						url: '/index/contributors',
+					},
+					{
+						title: 'Cartoons',
+						url: '/cartoons/archive',
+					},
+					{
+						title: 'Opinion videos',
+						url: '/type/video+tone/comment',
+					},
+					{
+						title: 'Letters',
+						url: '/tone/letters',
+					},
+				],
+			},
+			{
+				title: 'Sport',
+				url: '/sport',
+				longTitle: 'Sport home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'Football',
+						url: '/football',
+						children: [
+							{
+								title: 'Live scores',
+								url: '/football/live',
+								longTitle: 'football/live',
+							},
+							{
+								title: 'Tables',
+								url: '/football/tables',
+								longTitle: 'football/tables',
+							},
+							{
+								title: 'Fixtures',
+								url: '/football/fixtures',
+								longTitle: 'football/fixtures',
+							},
+							{
+								title: 'Results',
+								url: '/football/results',
+								longTitle: 'football/results',
+							},
+							{
+								title: 'Competitions',
+								url: '/football/competitions',
+								longTitle: 'football/competitions',
+							},
+							{
+								title: 'Clubs',
+								url: '/football/teams',
+								longTitle: 'football/teams',
+							},
+						],
+					},
+					{
+						title: 'Winter Olympics',
+						url: '/sport/winter-olympics-2022',
+					},
+					{
+						title: 'Cricket',
+						url: '/sport/cricket',
+					},
+					{
+						title: 'Rugby union',
+						url: '/sport/rugby-union',
+					},
+					{
+						title: 'Tennis',
+						url: '/sport/tennis',
+					},
+					{
+						title: 'Cycling',
+						url: '/sport/cycling',
+					},
+					{
+						title: 'F1',
+						url: '/sport/formulaone',
+					},
+					{
+						title: 'Golf',
+						url: '/sport/golf',
+					},
+					{
+						title: 'Boxing',
+						url: '/sport/boxing',
+					},
+					{
+						title: 'Rugby league',
+						url: '/sport/rugbyleague',
+					},
+					{
+						title: 'Racing',
+						url: '/sport/horse-racing',
+					},
+					{
+						title: 'US sports',
+						url: '/sport/us-sport',
+					},
+				],
+			},
+			{
+				title: 'Culture',
+				url: '/culture',
+				longTitle: 'Culture home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'Film',
+						url: '/film',
+					},
+					{
+						title: 'Music',
+						url: '/music',
+					},
+					{
+						title: 'TV & radio',
+						url: '/tv-and-radio',
+					},
+					{
+						title: 'Books',
+						url: '/books',
+					},
+					{
+						title: 'Art & design',
+						url: '/artanddesign',
+					},
+					{
+						title: 'Stage',
+						url: '/stage',
+					},
+					{
+						title: 'Games',
+						url: '/games',
+					},
+					{
+						title: 'Classical',
+						url: '/music/classicalmusicandopera',
+					},
+				],
+			},
+			{
+				title: 'Lifestyle',
+				url: '/lifeandstyle',
+				longTitle: 'Lifestyle home',
+				iconName: 'home',
+				children: [
+					{
+						title: 'Fashion',
+						url: '/fashion',
+					},
+					{
+						title: 'Food',
+						url: '/food',
+					},
+					{
+						title: 'Recipes',
+						url: '/tone/recipes',
+					},
+					{
+						title: 'Travel',
+						url: '/travel',
+						children: [
+							{
+								title: 'UK',
+								url: '/travel/uk',
+							},
+							{
+								title: 'Europe',
+								url: '/travel/europe',
+							},
+							{
+								title: 'US',
+								url: '/travel/usa',
+							},
+						],
+					},
+					{
+						title: 'Health & fitness',
+						url: '/lifeandstyle/health-and-wellbeing',
+					},
+					{
+						title: 'Women',
+						url: '/lifeandstyle/women',
+					},
+					{
+						title: 'Men',
+						url: '/lifeandstyle/men',
+					},
+					{
+						title: 'Love & sex',
+						url: '/lifeandstyle/love-and-sex',
+					},
+					{
+						title: 'Beauty',
+						url: '/fashion/beauty',
+					},
+					{
+						title: 'Home & garden',
+						url: '/lifeandstyle/home-and-garden',
+					},
+					{
+						title: 'Money',
+						url: '/money',
+						children: [
+							{
+								title: 'Property',
+								url: '/money/property',
+							},
+							{
+								title: 'Pensions',
+								url: '/money/pensions',
+							},
+							{
+								title: 'Savings',
+								url: '/money/savings',
+							},
+							{
+								title: 'Borrowing',
+								url: '/money/debt',
+							},
+							{
+								title: 'Careers',
+								url: '/money/work-and-careers',
+							},
+						],
+					},
+					{
+						title: 'Cars',
+						url: '/technology/motoring',
+					},
+				],
+			},
+		],
+		otherLinks: [
+			{
+				title: 'The Guardian app',
+				url: 'https://www.theguardian.com/mobile/2014/may/29/the-guardian-for-mobile-and-tablet',
+			},
+			{
+				title: 'Video',
+				url: '/video',
+			},
+			{
+				title: 'Podcasts',
+				url: '/podcasts',
+			},
+			{
+				title: 'Pictures',
+				url: '/inpictures',
+			},
+			{
+				title: 'Newsletters',
+				url: '/email-newsletters',
+			},
+			{
+				title: "Today's paper",
+				url: '/theguardian',
+				children: [
+					{
+						title: 'Obituaries',
+						url: '/tone/obituaries',
+					},
+					{
+						title: 'G2',
+						url: '/theguardian/g2',
+					},
+					{
+						title: 'Journal',
+						url: '/theguardian/journal',
+					},
+					{
+						title: 'Saturday',
+						url: '/theguardian/saturday',
+					},
+				],
+			},
+			{
+				title: 'Inside the Guardian',
+				url: 'https://www.theguardian.com/membership',
+			},
+			{
+				title: 'The Observer',
+				url: '/observer',
+				children: [
+					{
+						title: 'Comment',
+						url: '/theobserver/news/comment',
+					},
+					{
+						title: 'The New Review',
+						url: '/theobserver/new-review',
+					},
+					{
+						title: 'Observer Magazine',
+						url: '/theobserver/magazine',
+					},
+					{
+						title: 'Observer Food Monthly',
+						url: '/theobserver/foodmonthly',
+					},
+				],
+			},
+			{
+				title: 'Guardian Weekly',
+				url: 'https://www.theguardian.com/weekly?INTCMP=gdnwb_mawns_editorial_gweekly_GW_TopNav_UK',
+			},
+			{
+				title: 'Crosswords',
+				url: '/crosswords',
+				children: [
+					{
+						title: 'Blog',
+						url: '/crosswords/crossword-blog',
+					},
+					{
+						title: 'Quick',
+						url: '/crosswords/series/quick',
+					},
+					{
+						title: 'Cryptic',
+						url: '/crosswords/series/cryptic',
+					},
+					{
+						title: 'Prize',
+						url: '/crosswords/series/prize',
+					},
+					{
+						title: 'Weekend',
+						url: '/crosswords/series/weekend-crossword',
+					},
+					{
+						title: 'Quiptic',
+						url: '/crosswords/series/quiptic',
+					},
+					{
+						title: 'Genius',
+						url: '/crosswords/series/genius',
+					},
+					{
+						title: 'Speedy',
+						url: '/crosswords/series/speedy',
+					},
+					{
+						title: 'Everyman',
+						url: '/crosswords/series/everyman',
+					},
+					{
+						title: 'Azed',
+						url: '/crosswords/series/azed',
+					},
+				],
+			},
+		],
+		brandExtensions: [
+			{
+				title: 'Search jobs',
+				url: 'https://jobs.theguardian.com?INTCMP=jobs_uk_web_newheader_dropdown',
+			},
+			{
+				title: 'Hire with Guardian Jobs',
+				url: 'https://recruiters.theguardian.com/?utm_source=gdnwb&utm_medium=navbar&utm_campaign=Guardian_Navbar_Recruiters&CMP_TU=trdmkt&CMP_BUNIT=jobs',
+			},
+			{
+				title: 'Holidays',
+				url: 'https://holidays.theguardian.com?INTCMP=holidays_uk_web_newheader',
+			},
+			{
+				title: 'Live events',
+				url: 'https://membership.theguardian.com/events?INTCMP=live_uk_header_dropdown',
+			},
+			{
+				title: 'Masterclasses',
+				url: '/guardian-masterclasses',
+			},
+			{
+				title: 'Digital Archive',
+				url: 'https://theguardian.newspapers.com',
+			},
+			{
+				title: 'Guardian Print Shop',
+				url: '/artanddesign/series/gnm-print-sales',
+			},
+			{
+				title: 'Patrons',
+				url: 'https://patrons.theguardian.com/?INTCMP=header_patrons',
+			},
+			{
+				title: 'Guardian Puzzles app',
+				url: 'https://puzzles.theguardian.com/download',
+			},
+			{
+				title: 'Guardian content licensing site',
+				url: 'https://licensing.theguardian.com/',
+			},
+		],
+		currentNavLinkTitle: 'Film',
+		currentPillarTitle: 'Culture',
+		subNavSections: {
+			links: [
+				{
+					title: 'Film',
+					url: '/film',
+				},
+				{
+					title: 'Music',
+					url: '/music',
+				},
+				{
+					title: 'TV & radio',
+					url: '/tv-and-radio',
+				},
+				{
+					title: 'Books',
+					url: '/books',
+				},
+				{
+					title: 'Art & design',
+					url: '/artanddesign',
+				},
+				{
+					title: 'Stage',
+					url: '/stage',
+				},
+				{
+					title: 'Games',
+					url: '/games',
+				},
+				{
+					title: 'Classical',
+					url: '/music/classicalmusicandopera',
+				},
+			],
+		},
+		readerRevenueLinks: {
+			header: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
+			},
+			footer: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_contribute%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support_subscribe%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_supporter_cta%22%7D',
+			},
+			sideMenu: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=side_menu_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_contribute%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support_subscribe%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=side_menu_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_support%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=side_menu_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22side_menu_supporter_cta%22%7D',
+			},
+			ampHeader: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=header_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_contribute%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=header_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_support_subscribe%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=amp_header_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22amp_header_support%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_HEADER%22,%22componentId%22:%22header_supporter_cta%22%7D',
+			},
+			ampFooter: {
+				contribute:
+					'https://support.theguardian.com/contribute?INTCMP=amp_footer_support_contribute&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_contribute%22%7D',
+				subscribe:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_support_subscribe&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_support_subscribe%22%7D',
+				support:
+					'https://support.theguardian.com?INTCMP=footer_support&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22footer_support%22%7D',
+				supporter:
+					'https://support.theguardian.com/subscribe?INTCMP=amp_footer_supporter_cta&acquisitionData=%7B%22source%22:%22GUARDIAN_WEB%22,%22componentType%22:%22ACQUISITIONS_FOOTER%22,%22componentId%22:%22amp_footer_supporter_cta%22%7D',
+			},
+		},
+	},
+	author: {
+		byline: 'Lanre Bakare',
+		twitterHandle: 'lanre_bakare',
+	},
+	designType: 'Feature',
+	editionId: 'UK',
+	format: {
+		design: 'FeatureDesign',
+		theme: 'CulturePillar',
+		display: 'StandardDisplay',
+	},
+	standfirst:
+		'<p>Jeff Bezos was mocked by Rock, Brad Pitt had a pop at Trump and Sigourney Weaver laced up her gloves</p>\n<ul>\n <li><a href="https://www.theguardian.com/film/2020/feb/09/oscar-winners-2020-oscars-full-list-live-as-they-happen">Oscar winners 2020: the complete list</a><br></li>\n <li><a href="https://www.theguardian.com/film/gallery/2020/feb/10/razzle-and-dazzle-oscars-2020-after-parties-in-pictures">Razzle and dazzle: the after-parties in pictures</a></li>\n</ul>',
+	openGraphData: {
+		'og:url':
+			'http://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+		'article:author': 'https://www.theguardian.com/profile/lanre-bakare',
+		'og:image:height': '720',
+		'og:description':
+			'Jeff Bezos was mocked by Rock, Brad Pitt had a pop at Trump and Sigourney Weaver laced up her gloves',
+		'og:image:width': '1200',
+		'og:image':
+			'https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=7a06e26f0c0b00f26e538b1c69d23f9f',
+		'al:ios:url':
+			'gnmguardian://film/2020/feb/10/quotes-of-the-oscars-2020?contenttype=Article&source=applinks',
+		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:type': 'article',
+		'al:ios:app_store_id': '409128287',
+		'article:section': 'Film',
+		'article:published_time': '2020-02-10T06:59:35.000Z',
+		'og:title':
+			"'I've been a scoundrel all my life': quotes of the Oscars 2020",
+		'fb:app_id': '180444840287',
+		'article:tag':
+			'Oscars 2020,Film,Culture,Chris Rock,Joaquin Phoenix,Sigourney Weaver,Bong Joon-ho,Brad Pitt,Taika Waititi,Laura Dern',
+		'al:ios:app_name': 'The Guardian',
+		'og:site_name': 'the Guardian',
+		'article:modified_time': '2020-02-10T09:58:49.000Z',
+	},
+	sectionUrl: 'film/oscars-2020',
+	pageId: 'film/2020/feb/10/quotes-of-the-oscars-2020',
+	version: 3,
+	tags: [
+		{
+			id: 'film/oscars-2020',
+			type: 'Keyword',
+			title: 'Oscars 2020',
+		},
+		{
+			id: 'film/film',
+			type: 'Keyword',
+			title: 'Film',
+		},
+		{
+			id: 'culture/culture',
+			type: 'Keyword',
+			title: 'Culture',
+		},
+		{
+			id: 'stage/chris-rock',
+			type: 'Keyword',
+			title: 'Chris Rock',
+		},
+		{
+			id: 'film/joaquin-phoenix',
+			type: 'Keyword',
+			title: 'Joaquin Phoenix',
+		},
+		{
+			id: 'film/sigourney-weaver',
+			type: 'Keyword',
+			title: 'Sigourney Weaver',
+		},
+		{
+			id: 'film/bong-joon-ho',
+			type: 'Keyword',
+			title: 'Bong Joon-ho',
+		},
+		{
+			id: 'film/bradpitt',
+			type: 'Keyword',
+			title: 'Brad Pitt',
+		},
+		{
+			id: 'film/taika-waititi',
+			type: 'Keyword',
+			title: 'Taika Waititi',
+		},
+		{
+			id: 'film/laura-dern',
+			type: 'Keyword',
+			title: 'Laura Dern',
+		},
+		{
+			id: 'type/article',
+			type: 'Type',
+			title: 'Article',
+		},
+		{
+			id: 'tone/features',
+			type: 'Tone',
+			title: 'Features',
+		},
+		{
+			id: 'profile/lanre-bakare',
+			type: 'Contributor',
+			title: 'Lanre Bakare',
+			twitterHandle: 'lanre_bakare',
+			bylineImageUrl:
+				'https://i.guim.co.uk/img/uploads/2017/10/06/Lanre-Bakare,-L.png?width=300&quality=85&auto=format&fit=max&s=afa36cd9b80bea5e98f10280aea4d0e4',
+		},
+		{
+			id: 'tracking/commissioningdesk/uk-culture',
+			type: 'Tracking',
+			title: 'UK Culture',
+		},
+	],
+	pillar: 'culture',
+	webURL: 'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+	showBottomSocialButtons: true,
+	isImmersive: false,
+	sectionLabel: 'Oscars 2020',
+	shouldHideReaderRevenue: false,
+	isAdFreeUser: false,
+	pageFooter: {
+		footerLinks: [
+			[
+				{
+					text: 'About us',
+					url: '/about',
+					dataLinkName: 'uk : footer : about us',
+					extraClasses: '',
+				},
+				{
+					text: 'Contact us',
+					url: '/help/contact-us',
+					dataLinkName: 'uk : footer : contact us',
+					extraClasses: '',
+				},
+				{
+					text: 'Complaints & corrections',
+					url: '/info/complaints-and-corrections',
+					dataLinkName: 'complaints',
+					extraClasses: '',
+				},
+				{
+					text: 'SecureDrop',
+					url: 'https://www.theguardian.com/securedrop',
+					dataLinkName: 'securedrop',
+					extraClasses: '',
+				},
+				{
+					text: 'Work for us',
+					url: 'https://workforus.theguardian.com',
+					dataLinkName: 'uk : footer : work for us',
+					extraClasses: '',
+				},
+				{
+					text: 'Privacy policy',
+					url: '/info/privacy',
+					dataLinkName: 'privacy',
+					extraClasses: '',
+				},
+				{
+					text: 'Cookie policy',
+					url: '/info/cookies',
+					dataLinkName: 'cookie',
+					extraClasses: '',
+				},
+				{
+					text: 'Terms & conditions',
+					url: '/help/terms-of-service',
+					dataLinkName: 'terms',
+					extraClasses: '',
+				},
+				{
+					text: 'Help',
+					url: '/help',
+					dataLinkName: 'uk : footer : tech feedback',
+					extraClasses: 'js-tech-feedback-report',
+				},
+			],
+			[
+				{
+					text: 'All topics',
+					url: '/index/subjects/a',
+					dataLinkName: 'uk : footer : all topics',
+					extraClasses: '',
+				},
+				{
+					text: 'All writers',
+					url: '/index/contributors',
+					dataLinkName: 'uk : footer : all contributors',
+					extraClasses: '',
+				},
+				{
+					text: 'Modern Slavery Act',
+					url: 'https://uploads.guim.co.uk/2021/07/27/STL_&_GMG_Modern_Slavery_Act_Statement_2021.pdf',
+					dataLinkName: 'uk : footer : modern slavery act statement',
+					extraClasses: '',
+				},
+				{
+					text: 'Digital newspaper archive',
+					url: 'https://theguardian.newspapers.com',
+					dataLinkName: 'digital newspaper archive',
+					extraClasses: '',
+				},
+				{
+					text: 'Facebook',
+					url: 'https://www.facebook.com/theguardian',
+					dataLinkName: 'uk : footer : facebook',
+					extraClasses: '',
+				},
+				{
+					text: 'YouTube',
+					url: 'https://www.youtube.com/user/TheGuardian',
+					dataLinkName: 'uk : footer : youtube',
+					extraClasses: '',
+				},
+				{
+					text: 'Instagram',
+					url: 'https://www.instagram.com/guardian',
+					dataLinkName: 'uk : footer : instagram',
+					extraClasses: '',
+				},
+				{
+					text: 'LinkedIn',
+					url: 'https://www.linkedin.com/company/theguardian',
+					dataLinkName: 'uk : footer : linkedin',
+					extraClasses: '',
+				},
+				{
+					text: 'Twitter',
+					url: 'https://twitter.com/guardian',
+					dataLinkName: 'uk: footer : twitter',
+					extraClasses: '',
+				},
+				{
+					text: 'Newsletters',
+					url: '/email-newsletters?INTCMP=DOTCOM_FOOTER_NEWSLETTER_UK',
+					dataLinkName: 'uk : footer : newsletters',
+					extraClasses: '',
+				},
+			],
+			[
+				{
+					text: 'Advertise with us',
+					url: 'https://advertising.theguardian.com',
+					dataLinkName: 'uk : footer : advertise with us',
+					extraClasses: '',
+				},
+				{
+					text: 'Guardian Labs',
+					url: '/guardian-labs',
+					dataLinkName: 'uk : footer : guardian labs',
+					extraClasses: '',
+				},
+				{
+					text: 'Search jobs',
+					url: 'https://jobs.theguardian.com?INTCMP=NGW_FOOTER_UK_GU_JOBS',
+					dataLinkName: 'uk : footer : jobs',
+					extraClasses: '',
+				},
+				{
+					text: 'Patrons',
+					url: 'https://patrons.theguardian.com?INTCMP=footer_patrons',
+					dataLinkName: 'uk : footer : patrons',
+					extraClasses: '',
+				},
+			],
+		],
+	},
+	twitterData: {
+		'twitter:app:id:iphone': '409128287',
+		'twitter:app:name:googleplay': 'The Guardian',
+		'twitter:app:name:ipad': 'The Guardian',
+		'twitter:image':
+			'https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=3a2d8d8453727f492ba281e762df7fa7',
+		'twitter:site': '@guardian',
+		'twitter:app:url:ipad':
+			'gnmguardian://film/2020/feb/10/quotes-of-the-oscars-2020?contenttype=Article&source=twitter',
+		'twitter:card': 'summary_large_image',
+		'twitter:app:name:iphone': 'The Guardian',
+		'twitter:creator': '@lanre_bakare',
+		'twitter:app:id:ipad': '409128287',
+		'twitter:app:id:googleplay': 'com.guardian',
+		'twitter:app:url:googleplay':
+			'guardian://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+		'twitter:app:url:iphone':
+			'gnmguardian://film/2020/feb/10/quotes-of-the-oscars-2020?contenttype=Article&source=twitter',
+	},
+	sectionName: 'film',
+	webPublicationDateDeprecated: '2020-02-10T06:59:35.000Z',
+	pageType: {
+		hasShowcaseMainElement: false,
+		isFront: false,
+		isLiveblog: false,
+		isMinuteArticle: false,
+		isPaidContent: false,
+		isPreview: false,
+		isSensitive: false,
+	},
+	hasStoryPackage: false,
+	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	headline: "'I've been a scoundrel all my life': quotes of the Oscars 2020",
+	isLegacyInteractive: false,
+	guardianBaseURL: 'https://www.theguardian.com',
+	mainMediaElements: [
+		{
+			id: 'd904f65f-f5c1-4786-8d7a-54fc2a4abe72',
+			assetId: '7z3iv-HkI7o',
+			channelId: 'UCIRYBXDze5krPDzAEOxFGVA',
+			mediaTitle:
+				'Biggest night in Hollywood: key moments from the Oscars – video ',
+			overrideImage:
+				'https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=700&quality=85&auto=format&fit=max&s=676cb4a37f52687006049d3982e07556',
+			posterImage: [
+				{
+					url: 'https://media.guim.co.uk/c4c763be8d0e2fbdddbea10e80a4790e9aa9789f/0_182_3500_1968/2000.jpg',
+					width: 2000,
+				},
+				{
+					url: 'https://media.guim.co.uk/c4c763be8d0e2fbdddbea10e80a4790e9aa9789f/0_182_3500_1968/1000.jpg',
+					width: 1000,
+				},
+				{
+					url: 'https://media.guim.co.uk/c4c763be8d0e2fbdddbea10e80a4790e9aa9789f/0_182_3500_1968/500.jpg',
+					width: 500,
+				},
+				{
+					url: 'https://media.guim.co.uk/c4c763be8d0e2fbdddbea10e80a4790e9aa9789f/0_182_3500_1968/140.jpg',
+					width: 140,
+				},
+				{
+					url: 'https://media.guim.co.uk/c4c763be8d0e2fbdddbea10e80a4790e9aa9789f/0_182_3500_1968/3500.jpg',
+					width: 3500,
+				},
+			],
+			expired: true,
+			duration: 207,
+			altText:
+				"Press Room - 92nd Academy Awards<br>epa08208148 Joaquin Phoenix poses in the press room with the Oscar for Best Actor for his performance in 'Joker' during the 92nd annual Academy Awards ceremony at the Dolby Theatre in Hollywood, California, USA, 09 February 2020. The Oscars are presented for outstanding individual or collective efforts in filmmaking in 24 categories.  EPA/DAVID SWANSON",
+			_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
+			elementId: '0782faf8-3a56-4e9b-a6a8-a81a9574795b',
+		},
+	],
+	webPublicationDate: '2020-02-10T06:59:35.000Z',
+	blocks: [
+		{
+			id: '5e40df888f08e133247404c6',
+			elements: [
+				{
+					html: '<h2>Chris Rock on Jeff Bezos and Marriage Story</h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '42350f11-3bee-4d4b-a426-659065aa4526',
+				},
+				{
+					html: '<p>“Bezos is so rich, he got divorced and he is still the richest man in the world. He saw <a href="https://www.theguardian.com/film/2019/nov/15/marriage-story-review-noah-baumbach-adam-driver-scarlett-johansson">Marriage Story</a> and thought it was a comedy.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '4e7dae07-a50d-4928-9320-aa3443817fe2',
+				},
+				{
+					html: '<h2><strong><a href="https://www.theguardian.com/film/2020/feb/10/joaquin-phoenixs-oscars-speech-in-full">Joaquin Phoenix</a> …</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: 'ba22deab-6022-460d-89bd-ad341d253c18',
+				},
+				{
+					html: '<p><strong>… on veganism</strong><strong> and social justice<br></strong>“I think at times we feel or are made to feel that we champion different causes. But for me I see commonality. I think whether we’re talking about gender inequality or racism or queer rights or indigenous rights, or animal rights – we’re talking about the fight against injustice.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '6dad5ae5-dbca-455f-b18f-1a6d62474582',
+				},
+				{
+					url: 'https://www.theguardian.com/film/2020/feb/10/joaquin-phoenixs-oscars-speech-in-full',
+					text: "Joaquin Phoenix's Oscars speech in full: 'We feel entitled to artificially inseminate a cow and steal her baby'",
+					prefix: 'Related: ',
+					role: 'thumbnail',
+					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					elementId: 'f456ddc5-be23-4395-8eca-5396912e368e',
+				},
+				{
+					html: '<p>“We’re talking about the fight against the belief that one nation, one people, one race, one gender, one species has the right to dominate, use and control another with impunity.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '678d7fa9-f3da-4a23-b439-82e932654e88',
+				},
+				{
+					html: '<p><strong>… on dairy products<br></strong>“I think we’ve become very disconnected from the natural world, many of us are guilty of an egocentric worldview and we believe that we’re the centre of the universe. We go into the natural world and we plunder it for its resources, we feel entitled to artificially inseminate a cow and steal her baby even though her cries of anguish are unmistakeable. Then we take her milk intended for her calf and we put it in our coffee and our cereal.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'b376b57d-7ba4-46cd-86c8-6b235b82634e',
+				},
+				{
+					html: '<p><strong>… on forgiveness<br></strong>“I have been a scoundrel all my life, I’ve been selfish. I’ve been cruel at times, hard to work with and I’m grateful that so many of you in this room have given me a second chance. I think that’s when we’re at our best: when we support each other. Not when we cancel each other out for our past mistakes, but when we help each other to grow. When we educate each other. When we guide each other to redemption.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'affead4c-032a-4c8b-9f99-004d5a143f99',
+				},
+				{
+					url: 'https://www.theguardian.com/film/2020/feb/10/parasite-best-picture-new-era-for-oscars',
+					text: "Parasite's best picture triumph could begin a new era for the Oscars",
+					prefix: 'Related: ',
+					role: 'thumbnail',
+					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					elementId: '6c34af18-eff9-4d22-a8ea-dbc62893cade',
+				},
+				{
+					html: '<h2><strong>Laura Dern on meeting your heroes</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: 'f2a55d61-d238-4ec6-8e8c-9ed437be58ce',
+				},
+				{
+					html: '<p>“Noah [Baumbach] wrote a movie about love and breaching divisions in the name and the honour of family and home and hopefully for our planet. Some say never meet your heroes. I say if you’re really blessed you get them as your parents. I share this with my acting legends Diane Ladd and Bruce Dern. You got game, I love you. Thank you all for this gift. This is the best birthday present ever.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '55af669c-3d1d-49ee-b048-d5e8fffca79e',
+				},
+				{
+					media: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									height: '2100',
+									width: '3500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/3500.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									isMaster: 'true',
+									height: '2100',
+									width: '3500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									height: '1200',
+									width: '2000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/2000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '600',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/1000.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '300',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '84',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/140.jpg',
+							},
+						],
+					},
+					data: {
+						alt: 'Taika Waititi.',
+						caption:
+							'‘We can make it here as well’ … Taika Waititi.',
+						credit: 'Photograph: Eric Gaillard/Reuters',
+					},
+					displayCredit: true,
+					role: 'inline',
+					imageSources: [
+						{
+							weighting: 'inline',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'thumbnail',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=140&quality=85&auto=format&fit=max&s=baeee98e0224a8f53fde2e8a1cdb3475',
+									width: 140,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=084163a5dc8919450d5a5972556be190',
+									width: 280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=120&quality=85&auto=format&fit=max&s=437471392ece4ffc8487fa438bf75796',
+									width: 120,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=fce239649806c95727aabaed7519dfa1',
+									width: 240,
+								},
+							],
+						},
+						{
+							weighting: 'supporting',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=380&quality=85&auto=format&fit=max&s=64596d769a1ebe6e77e0bd5fd3ac68e3',
+									width: 380,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=982ed204c2526b18f71933ad959a4f1f',
+									width: 760,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=4088905b0c3a1daa955a4618d1aa7a56',
+									width: 300,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=040b422cf0ee5df9ee0653fc44c37504',
+									width: 600,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'showcase',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=860&quality=85&auto=format&fit=max&s=c74fb2637336544e0b987d808316555b',
+									width: 860,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=9bfebb5c99a80d1120dbfe5b4ab40598',
+									width: 1720,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=780&quality=85&auto=format&fit=max&s=99bf51f05fe69e3fc4203d8005ec492c',
+									width: 780,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=9c312451fc144cd45eb35793af2e8ebc',
+									width: 1560,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'halfwidth',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'immersive',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46',
+									width: 890,
+								},
+							],
+						},
+					],
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: '396ef0dc-31aa-4b4a-8f17-64105e11c8ae',
+				},
+				{
+					html: '<h2><strong>Taika Waititi on far-right extremism and indigenous kids</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '569b13a1-62bb-4d75-9280-782bc0303062',
+				},
+				{
+					html: '<p>Backstage: “If you were a Nazi, you would go to jail. Now you’re a Nazi, feel free to have a rally down in the square with your mates.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '0157536b-a947-4660-824e-32b779f0a2c4',
+				},
+				{
+					html: '<p>On stage he said: “I want to dedicate this to all the indigenous kids in the world who want to do art, we are the original storytellers and we can make it here as well.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '63c29d0b-3956-42e2-b389-3f25c67ff8ad',
+				},
+				{
+					html: '<h2><strong>Brad Pitt on Trump’s impeachment, John Bolton and the Republican party</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '45122a94-e7a2-423c-9986-681b263c9690',
+				},
+				{
+					html: '<p>“Thank you to the Academy for this honour of honours. They told me I only have 45 seconds up here which is 45 more than the Senate gave John Bolton.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '99e2fae3-54b2-4fcd-b48a-a3120bb83125',
+				},
+				{
+					url: 'https://www.theguardian.com/film/2020/feb/10/parasite-best-picture-new-era-for-oscars',
+					text: "Parasite's best picture triumph could begin a new era for the Oscars",
+					prefix: 'Related: ',
+					role: 'thumbnail',
+					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					elementId: '7cbd0759-90f8-463e-a8c6-7b3bc385e100',
+				},
+				{
+					html: '<h2>Bong Joon-Ho on booze and Scorsese and Tarantino</h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '31162814-0473-45fc-b831-1c57ed006cf6',
+				},
+				{
+					html: '<p>“The [international feature film] category has a new name and I’m so happy to be its first recipient under its new name. I applaud and support the new direction that this change symbolises. I’m ready to drink tonight.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '6185f885-6c2e-4d7a-bff3-fb32126ce5e7',
+				},
+				{
+					html: '<p>“When I was young and starting in cinema there was a saying that I carved deep into my heart, which is, ‘The most personal is the most creative.’ That quote was from our great Martin Scorsese. When I was in school I studied Scorsese’s films. Just to be nominated was a huge honour, I never felt I would win. When people in the US were not familiar with my films Quentin [Tarantino] would always put my films on his list – Quentin, I love you.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '34d486c4-8f35-494a-a9fc-ae0706809564',
+				},
+				{
+					html: '<h2><strong>Hildur Guðnadóttir on female composers</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: 'b74db68e-9260-4021-a68f-e6fff0f10551',
+				},
+				{
+					html: '<p>“To the girls to the women, to the mothers to the daughters who hear the music bubbling within please speak up – we need to hear your voices.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '2414cb8c-e72f-474d-8bf2-c2ce7f024c98',
+				},
+				{
+					media: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									height: '2650',
+									width: '4416',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/4416.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									isMaster: 'true',
+									height: '2650',
+									width: '4416',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									height: '1200',
+									width: '2000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/2000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '600',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/1000.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '300',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '84',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/140.jpg',
+							},
+						],
+					},
+					data: {
+						copyright: '2020 Getty Images',
+						alt: 'Brie Larson, Sigourney Weaver, and Gal Gadot.',
+						caption:
+							'Brie Larson, Sigourney Weaver, and Gal Gadot.',
+						credit: 'Photograph: Kevin Winter/Getty Images',
+					},
+					displayCredit: true,
+					role: 'inline',
+					imageSources: [
+						{
+							weighting: 'inline',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'thumbnail',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=140&quality=85&auto=format&fit=max&s=110a2b17faf8c84553fb7034d2606e91',
+									width: 140,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=31a7b62a0d6cad6b5eabf99384fd98b6',
+									width: 280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=120&quality=85&auto=format&fit=max&s=dd9242ba7c7b9eedf1e0e36387914020',
+									width: 120,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=c898df85f5a67cfcaaa3f9d6dd35c524',
+									width: 240,
+								},
+							],
+						},
+						{
+							weighting: 'supporting',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=380&quality=85&auto=format&fit=max&s=ed6f81bf1b15c64720d1ccc5b27ca972',
+									width: 380,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=cc7942f8bca7b4bcc6eb12a4fd38096d',
+									width: 760,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=300&quality=85&auto=format&fit=max&s=aac757c2d1e80ac5ffce804563a497cb',
+									width: 300,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=aa31554ce3bc6e311f425fd389f144c7',
+									width: 600,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'showcase',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=860&quality=85&auto=format&fit=max&s=260745962754893f52166a58e2a72953',
+									width: 860,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=c6fa8fd31ffb2b6c737992c3daf0a46a',
+									width: 1720,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=780&quality=85&auto=format&fit=max&s=632692b4637d7f965382587259b4dfd7',
+									width: 780,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=47c74f4b536cee5e6374bd68fe28d1b7',
+									width: 1560,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'halfwidth',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'immersive',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f',
+									width: 890,
+								},
+							],
+						},
+					],
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+					elementId: 'db70e0f4-70f8-4915-a9d0-623e5e52accc',
+				},
+				{
+					html: '<h2>Sigourney Weaver, Gal Gadot and Brie Larson’s Fight Club</h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: '758cb71f-89f4-4a15-a266-1d222ec70d1f',
+				},
+				{
+					html: '<p>“We decided that after the show we’re going to start a fight club. Men are invited but no shirts allowed. The winner will get a lifetime’s supply of deodorant, sushi, and tequila. The loser gets a lifetime of questions about what it’s like as a woman in Hollywood.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '2e055486-514e-462a-b1a2-1762c6280437',
+				},
+				{
+					html: '<h2><strong>Ford v Ferrari</strong><strong> sound editor Donald Sylvester</strong><strong> on sharing</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: 'c3e0dba2-1596-4c88-9a44-1cc04e3c6744',
+				},
+				{
+					html: '<p>“If I could I would break this off [statuette] and give James [Mangold] the head so he could put it in a jar.”</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'd141be0d-8b3d-4385-9d02-d278d6f076d8',
+				},
+				{
+					html: '<h2><strong>Hair Love’s directors on … hair</strong></h2>',
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					elementId: 'd4961214-a5a8-4949-bff4-a7dc6dc04630',
+				},
+				{
+					html: '<p>Matthew A Cherry and Karen Rupert Toliver said their film Hair Love, which won for best animated short, was made because they “wanted to normalise black hair” and make cartoons more diverse. The directors invited black teenager <a href="https://www.theguardian.com/us-news/2020/jan/23/deandre-arnold-texas-school-district-student-dreadlocks">Deandre Arnold</a>, who was told he wouldn’t be able to take part in his graduation if he didn’t cut his dreadlocks, as their guest.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: '1bb85509-d0b3-4af9-a1ab-a5c5a9574796',
+				},
+				{
+					html: '<p>“We have a firm belief that representation matters deeply, especially in cartoons because in cartoons that’s how we first see our movies and think about how we shape the world,” said Karen Rupert Toliver.</p>',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					elementId: 'fb5fa9d7-5f46-4d06-bec3-2f86918532b7',
+				},
+			],
+			blockCreatedOn: 1581309832000,
+			blockCreatedOnDisplay: '04.43 GMT',
+			blockLastUpdated: 1581317966000,
+			blockLastUpdatedDisplay: '06.59 GMT',
+			blockFirstPublished: 1581309836000,
+			blockFirstPublishedDisplay: '04.43 GMT',
+			primaryDateLine: 'Mon 10 Feb 2020 06.59 GMT',
+			secondaryDateLine: 'Last modified on Mon 10 Feb 2020 09.58 GMT',
+		},
+	],
+	linkedData: [
+		{
+			'@type': 'NewsArticle',
+			'@context': 'https://schema.org',
+			'@id': 'https://amp.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+			publisher: {
+				'@type': 'Organization',
+				'@context': 'https://schema.org',
+				'@id': 'https://www.theguardian.com#publisher',
+				name: 'The Guardian',
+				url: 'https://www.theguardian.com/',
+				logo: {
+					'@type': 'ImageObject',
+					url: 'https://uploads.guim.co.uk/2018/01/31/TheGuardian_AMP.png',
+					width: 190,
+					height: 60,
+				},
+				sameAs: [
+					'https://www.facebook.com/theguardian',
+					'https://twitter.com/guardian',
+					'https://www.youtube.com/user/TheGuardian',
+				],
+			},
+			isAccessibleForFree: true,
+			isPartOf: {
+				'@type': ['CreativeWork', 'Product'],
+				name: 'The Guardian',
+				productID: 'theguardian.com:basic',
+			},
+			image: [
+				'https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=7a06e26f0c0b00f26e538b1c69d23f9f',
+				'https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=c921d14c579306497fafe7974d278ee5',
+				'https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=0977d1fe55c20b2906b6d5a4a65f93ce',
+				'https://i.guim.co.uk/img/media/49565a29c6586fe6b748926e0be96c5e9c90473c/0_0_4981_2989/master/4981.jpg?width=1200&quality=85&auto=format&fit=max&s=84f1308a7490fdacd47fa353736ea983',
+			],
+			author: [
+				{
+					'@type': 'Person',
+					name: 'Lanre Bakare',
+					sameAs: 'https://www.theguardian.com/profile/lanre-bakare',
+				},
+			],
+			datePublished: '2020-02-10T06:59:35.000Z',
+			headline:
+				"'I've been a scoundrel all my life': quotes of the Oscars 2020",
+			dateModified: '2020-02-10T09:58:49.000Z',
+			mainEntityOfPage:
+				'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+		},
+		{
+			'@type': 'WebPage',
+			'@context': 'https://schema.org',
+			'@id': 'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+			potentialAction: {
+				'@type': 'ViewAction',
+				target: 'android-app://com.guardian/https/www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+			},
+		},
+	],
+	webPublicationDateDisplay: 'Mon 10 Feb 2020 06.59 GMT',
+	shouldHideAds: false,
+	webTitle: "'I've been a scoundrel all my life': quotes of the Oscars 2020",
+	isSpecialReport: false,
+	isCommentable: false,
+	keyEvents: [],
+	filterKeyEvents: false,
+	config: {
+		references: [
+			{
+				'rich-link':
+					'https://www.theguardian.com/environment/2015/oct/19/sign-up-to-the-green-light-email',
+			},
+		],
+		shortUrlId: '/p/d8ex5',
+		switches: {
+			prebidAppnexusUkRow: true,
+			clickToView: true,
+			abPuzzlesBanner: true,
+			prebidTrustx: true,
+			scAdFreeBanner: false,
+			compareVariantDecision: false,
+			enableSentryReporting: true,
+			lazyLoadContainers: true,
+			adFreeStrictExpiryEnforcement: false,
+			liveblogRendering: true,
+			remarketing: true,
+			registerWithPhone: false,
+			targeting: true,
+			extendedMostPopularFronts: true,
+			slotBodyEnd: true,
+			emailInlineInFooter: true,
+			facebookTrackingPixel: true,
+			serviceWorkerEnabled: false,
+			iasAdTargeting: true,
+			extendedMostPopular: true,
+			prebidAnalytics: true,
+			imrWorldwide: true,
+			acast: true,
+			twitterUwt: true,
+			prebidAppnexusInvcode: true,
+			prebidAppnexus: true,
+			enableDiscussionSwitch: true,
+			prebidXaxis: true,
+			interactiveFullHeaderSwitch: false,
+			discussionAllPageSize: true,
+			prebidUserSync: true,
+			audioOnwardJourneySwitch: true,
+			mobileStickyPrebid: true,
+			breakingNews: true,
+			externalVideoEmbeds: true,
+			simpleReach: true,
+			carrotTrafficDriver: true,
+			geoMostPopular: true,
+			weAreHiring: true,
+			relatedContent: true,
+			thirdPartyEmbedTracking: true,
+			prebidOzone: true,
+			prebidAdYouLike: true,
+			mostViewedFronts: true,
+			abSignInGateMainControl: true,
+			ampPrebid: true,
+			googleSearch: true,
+			brazeSwitch: true,
+			consentManagement: true,
+			commercial: true,
+			redplanetForAus: true,
+			prebidSonobi: true,
+			idProfileNavigation: true,
+			confiantAdVerification: true,
+			discussionAllowAnonymousRecommendsSwitch: false,
+			scrollDepth: true,
+			permutive: true,
+			comscore: true,
+			webFonts: true,
+			prebidImproveDigital: true,
+			ophan: true,
+			crosswordSvgThumbnails: true,
+			prebidTriplelift: true,
+			weather: true,
+			commercialOutbrainNewids: true,
+			dotcomRendering: true,
+			abSignInGateMainVariant: true,
+			hostedVideoAutoplay: true,
+			abAdblockAsk: true,
+			prebidPubmatic: true,
+			serverShareCounts: true,
+			autoRefresh: true,
+			enhanceTweets: true,
+			prebidIndexExchange: true,
+			prebidOpenx: true,
+			idCookieRefresh: true,
+			sharingComments: true,
+			abSignInGateMandatory: true,
+			discussionPageSize: true,
+			smartAppBanner: false,
+			boostGaUserTimingFidelity: false,
+			historyTags: true,
+			mobileStickyLeaderboard: true,
+			abDeeplyReadTest: false,
+			surveys: true,
+			remoteBanner: true,
+			inizio: true,
+			prebidHeaderBidding: true,
+			a9HeaderBidding: true,
+		},
+		keywordIds:
+			'environment/climate-change,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+		sharedAdTargeting: {
+			ct: 'article',
+			co: ['jennifer-rankin'],
+			url: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			su: ['0'],
+			edition: 'uk',
+			tn: ['news'],
+			p: 'ng',
+			k: [
+				'eu',
+				'flooding',
+				'world',
+				'europe-news',
+				'natural-disasters',
+				'science',
+				'environment',
+				'climate-change',
+				'wildfires',
+				'scienceofclimatechange',
+			],
+			sh: 'https://www.theguardian.com/p/d8ex5',
+		},
+		toneIds: 'tone/news',
+		dcrSentryDsn:
+			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+		discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+		sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+		commercialBundleUrl:
+			'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
+		discussionApiClientHeader: 'nextgen',
+		shouldHideReaderRevenue: false,
+		sentryHost: 'app.getsentry.com/35463',
+		isPaidContent: false,
+		headline:
+			'Fires and floods: maps of Europe predict scale of climate catastrophe',
+		idApiUrl: 'https://idapi.theguardian.com',
+		showRelatedContent: true,
+		adUnit: '/59666047/theguardian.com/environment/article/ng',
+		videoDuration: 0,
+		stage: 'PROD',
+		isSensitive: false,
+		isDev: false,
+		ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+		keywords:
+			'Climate change,Environment,Climate change,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+		revisionNumber: 'DEV',
+		section: 'environment',
+		isPhotoEssay: false,
+		ampIframeUrl:
+			'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
+		isLive: false,
+		host: 'https://www.theguardian.com',
+		brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+		contentType: 'Article',
+		idUrl: 'https://profile.theguardian.com',
+		author: 'Jennifer Rankin',
+		dfpAccountId: '59666047',
+		pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
+		mmaUrl: 'https://manage.theguardian.com',
+		abTests: {},
+		edition: 'UK',
+		ipsosTag: 'environment',
+		isLiveBlog: false,
+		frontendAssetsFullURL: 'https://assets.guim.co.uk/',
+		webPublicationDate: 1581314427000,
+		discussionD2Uid: 'zHoBy6HNKsk',
+	},
+};

@@ -42,7 +42,10 @@ export const largeAspectRatio = () => {
 		</Container>
 	);
 };
-largeAspectRatio.story = { name: 'with large aspect ratio' };
+largeAspectRatio.story = {
+	name: 'with large aspect ratio',
+	chromatic: { disable: true },
+};
 
 export const verticalAspectRatio = () => {
 	return (

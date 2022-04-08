@@ -5,11 +5,12 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
-	palette: Palette;
 	blocks: Block[];
+	pinnedPost?: Block;
 	adTargeting: AdTargeting;
 	host?: string;
 	pageId: string;
@@ -28,6 +29,7 @@ type Props = {
 	idUrl: string;
 	isSensitive: boolean;
 	isDev: boolean;
+	onFirstPage?: boolean;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -101,8 +103,8 @@ const revealStyles = css`
 
 export const ArticleBody = ({
 	format,
-	palette,
 	blocks,
+	pinnedPost,
 	adTargeting,
 	host,
 	pageId,
@@ -121,8 +123,10 @@ export const ArticleBody = ({
 	idUrl,
 	isSensitive,
 	isDev,
+	onFirstPage,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
+	const palette = decidePalette(format);
 
 	if (
 		format.design === ArticleDesign.LiveBlog ||
@@ -149,6 +153,7 @@ export const ArticleBody = ({
 					<LiveBlogRenderer
 						format={format}
 						blocks={blocks}
+						pinnedPost={pinnedPost}
 						adTargeting={adTargeting}
 						host={host}
 						pageId={pageId}
@@ -163,6 +168,7 @@ export const ArticleBody = ({
 						tags={tags}
 						isPaidContent={isPaidContent}
 						contributionsServiceUrl={contributionsServiceUrl}
+						onFirstPage={onFirstPage}
 					/>
 				</div>
 			</>

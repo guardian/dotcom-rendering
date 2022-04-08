@@ -57,18 +57,18 @@ rendered, there is no need to hydrate the component.
 Here is a list of elements in the 'frontend' article json model that can contain third party content with details
 of the decision to wrap them in ClickToView or not.
 
-Element | Wrapped in Click to View | Details
---------|--------|-------
-DocumentBlockElement | yes | Can contain both Scribd (tracking) and DocumentCloud (non-tracking)
-EmbedBlockElement | yes | Can contain almost anything including content which has its own specific element type eg youtube, twitter
-InstagramBlockElement | yes | Facebook
-MapBlockElement | yes | maps are provided by google who track
-PullquoteBlockElement | yes | It is possible to include an iframe in a pullquote, its arguable if this should be wrapped in click to view as this rarely if ever happens
-SoundcloudBlockElement | no | Soundcloud claim to not track users
-SpotifyBlockElement | yes | Spotify track users
-TweetBlockElement | no | twitter support a [do-not-track](https://developer.twitter.com/en/docs/twitter-for-websites/privacy) feature
-VideoBlockElement | no | These contain videos from random providers which may track. However we do not currently render these videos 😱
-VideoFacebookBlockElement | yes | Facebook
-VideoVimeoBlockElement | no | Vimeo provide a 'do-not-track' feature
-VideoYoutubeBlockElement | no | Youtube provide a 'do-not-track' feature
-WitnessTypeBlockElement | no | Witness is part of the Guardian, post can contain Youtube videos which supports a 'do-not-track' feature.
+| Element                   | Wrapped in Click to View | Details                                                                                                                                    |
+| ------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| DocumentBlockElement      | yes                      | Can contain both Scribd (tracking) and DocumentCloud (non-tracking)                                                                        |
+| EmbedBlockElement         | yes                      | Can contain almost anything including content which has its own specific element type eg youtube, twitter                                  |
+| InstagramBlockElement     | yes                      | Facebook                                                                                                                                   |
+| MapBlockElement           | yes                      | maps are provided by google who track                                                                                                      |
+| PullquoteBlockElement     | yes                      | It is possible to include an iframe in a pullquote, its arguable if this should be wrapped in click to view as this rarely if ever happens |
+| SoundcloudBlockElement    | no                       | Soundcloud claim to not track users                                                                                                        |
+| SpotifyBlockElement       | yes                      | Spotify track users                                                                                                                        |
+| TweetBlockElement         | no                       | twitter support a [do-not-track](https://developer.twitter.com/en/docs/twitter-for-websites/privacy) feature                               |
+| VideoBlockElement         | no                       | These contain videos from random providers which may track. However we do not currently render these videos 😱                             |
+| VideoFacebookBlockElement | yes                      | Facebook                                                                                                                                   |
+| VideoVimeoBlockElement    | no                       | Vimeo provide a 'do-not-track' feature                                                                                                     |
+| VideoYoutubeBlockElement  | no                       | Youtube provide a 'do-not-track' feature                                                                                                   |
+| WitnessTypeBlockElement   | no                       | Witness is part of the Guardian, post can contain Youtube videos which supports a 'do-not-track' feature.                                  |

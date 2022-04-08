@@ -7,6 +7,8 @@ import {
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
 import { spacefinderOkrMegaTest } from './tests/spacefinder-okr-mega-test';
+import { commercialGptLazyLoad } from './tests/commercial-gpt-lazy-load';
+import { commercialLazyLoadMargin } from './tests/commercial-lazy-load-margin';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -17,4 +19,6 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 	spacefinderOkrMegaTest,
+	commercialGptLazyLoad,
+	commercialLazyLoadMargin,
 ];

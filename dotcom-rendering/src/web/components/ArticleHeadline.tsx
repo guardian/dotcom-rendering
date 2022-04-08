@@ -19,12 +19,17 @@ import { HeadlineByline } from './HeadlineByline';
 import { getZIndex } from '../lib/getZIndex';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { AgeWarning } from './AgeWarning';
+import { getAgeWarning } from '../../lib/age-warning';
 
 type Props = {
 	headlineString: string;
 	format: ArticleFormat;
 	byline?: string;
 	tags: TagType[];
+	webPublicationDateDeprecated: string;
+	hasStarRating?: boolean;
+	hasAvatar?: boolean;
 };
 
 const curly = (x: any) => x;
@@ -159,6 +164,7 @@ const immersiveStyles = css`
 	}
 	margin-right: ${space[5]}px;
 `;
+
 const reducedBottomPadding = css`
 	padding-bottom: ${space[4]}px;
 `;
@@ -220,47 +226,216 @@ const zIndex = css`
 	z-index: 1;
 `;
 
+const ageWarningMargins = (format: ArticleFormat) =>
+	format.display === ArticleDisplay.Immersive
+		? css`
+				margin-left: 0px;
+				margin-bottom: 0px;
+
+				${from.tablet} {
+					margin-left: 10px;
+				}
+
+				${from.leftCol} {
+					margin-left: 20px;
+				}
+		  `
+		: css`
+				margin-top: 12px;
+				margin-left: -10px;
+				margin-bottom: 6px;
+
+				${from.tablet} {
+					margin-left: -20px;
+				}
+
+				${from.leftCol} {
+					margin-left: -10px;
+					margin-top: 0;
+				}
+		  `;
+
+const backgroundStyles = (palette: Palette) => css`
+	background-color: ${palette.background.ageWarning};
+`;
+
+const WithAgeWarning = ({
+	tags,
+	webPublicationDateDeprecated,
+	format,
+	children,
+}: {
+	tags: TagType[];
+	webPublicationDateDeprecated: string;
+	format: ArticleFormat;
+	children: React.ReactNode;
+}) => {
+	const palette = decidePalette(format);
+	const age = getAgeWarning(tags, webPublicationDateDeprecated);
+
+	if (age) {
+		return (
+			<>
+				<div
+					css={[backgroundStyles(palette), ageWarningMargins(format)]}
+				>
+					<AgeWarning age={age} />
+				</div>
+				{children}
+				<AgeWarning age={age} isScreenReader={true} />
+			</>
+		);
+	}
+
+	return <>{children}</>;
+};
+
+const decideBottomPadding = ({
+	format,
+	hasStarRating,
+	hasAvatar,
+}: {
+	format: ArticleFormat;
+	hasStarRating?: boolean;
+	hasAvatar?: boolean;
+}) => {
+	const defaultPadding = css`
+		padding-bottom: ${space[6]}px;
+		${from.tablet} {
+			padding-bottom: ${space[9]}px;
+		}
+	`;
+	switch (format.display) {
+		case ArticleDisplay.Immersive:
+			// Immersive articles have no padding
+			return '';
+		case ArticleDisplay.Showcase:
+			switch (format.design) {
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+					// Opinion pieces with an avatar have no padding
+					// Those with no avatar always have 43 pixels of bottom padding
+					return hasAvatar
+						? ''
+						: css`
+								padding-bottom: 43px;
+						  `;
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					// Don't add extra padding
+					return '';
+				default:
+					// Non opinion showcase articles always have 24 pixels
+					return css`
+						padding-bottom: ${space[6]}px;
+					`;
+			}
+		default: {
+			switch (format.design) {
+				case ArticleDesign.Review:
+					if (hasStarRating) {
+						return '';
+					}
+					return defaultPadding;
+
+				case ArticleDesign.Comment:
+				case ArticleDesign.Editorial:
+				case ArticleDesign.Letter:
+					// Opinion pieces with an avatar have no padding
+					// Those with no avatar always have 43 pixels of bottom padding
+					return hasAvatar
+						? ''
+						: css`
+								padding-bottom: 43px;
+						  `;
+				case ArticleDesign.Interview:
+				case ArticleDesign.LiveBlog:
+				case ArticleDesign.DeadBlog:
+					// Don't add extra padding
+					return '';
+				default:
+					return defaultPadding;
+			}
+		}
+	}
+};
+
 export const ArticleHeadline = ({
 	headlineString,
 	format,
 	tags,
 	byline,
+	webPublicationDateDeprecated,
+	hasStarRating,
+	hasAvatar,
 }: Props) => {
 	const palette = decidePalette(format);
+
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
 				case ArticleDesign.PrintShop:
+					// Immersive headlines have two versions, with main media, and (this one) without
 					return (
-						// Immersive headlines have two versions, with main media, and (this one) without
-						<h1
-							css={[
-								jumboFont,
-								maxWidth,
-								immersiveStyles,
-								displayBlock,
-								reducedBottomPadding,
-							]}
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
-							{curly(headlineString)}
-						</h1>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
+							>
+								<h1
+									css={[
+										jumboFont,
+										maxWidth,
+										immersiveStyles,
+										displayBlock,
+										reducedBottomPadding,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
+						</div>
 					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 				case ArticleDesign.Letter:
 					return (
-						<>
-							<h1
-								css={[
-									lightFont,
-									invertedText,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
+						>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
 							>
-								{curly(headlineString)}
-							</h1>
+								<h1
+									css={[
+										lightFont,
+										invertedText,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 							{byline && (
 								<HeadlineByline
 									format={format}
@@ -268,60 +443,63 @@ export const ArticleHeadline = ({
 									tags={tags}
 								/>
 							)}
-						</>
+						</div>
 					);
 				default:
 					return (
 						// Immersive headlines with main media present, are large and inverted with
-						// a black background
-						<h1
-							css={[
-								immersiveWrapper,
-								darkBackground(palette),
-								css`
-									color: ${palette.text.headline};
-								`,
-							]}
+						// a black background. They also have no padding and we want to avoid any
+						// wrapper div as this affects the z-index stack
+						<WithAgeWarning
+							tags={tags}
+							webPublicationDateDeprecated={
+								webPublicationDateDeprecated
+							}
+							format={format}
 						>
-							<span
+							<h1
 								css={[
-									format.theme === ArticleSpecial.Labs
-										? jumboLabsFont
-										: jumboFont,
-									maxWidth,
-									invertedStyles(palette),
-									immersiveStyles,
-									displayBlock,
+									immersiveWrapper,
+									darkBackground(palette),
+									css`
+										color: ${palette.text.headline};
+									`,
 								]}
 							>
-								{curly(headlineString)}
-							</span>
-						</h1>
+								<span
+									css={[
+										format.theme === ArticleSpecial.Labs
+											? jumboLabsFont
+											: jumboFont,
+										maxWidth,
+										invertedStyles(palette),
+										immersiveStyles,
+										displayBlock,
+									]}
+								>
+									{curly(headlineString)}
+								</span>
+							</h1>
+						</WithAgeWarning>
 					);
 			}
 		}
 		case ArticleDisplay.NumberedList:
 			return (
-				<h1
-					css={[
-						boldFont,
-						topPadding,
-						css`
-							color: ${palette.text.headline};
-						`,
-					]}
+				<div
+					css={decideBottomPadding({
+						format,
+						hasStarRating,
+						hasAvatar,
+					})}
 				>
-					{curly(headlineString)}
-				</h1>
-			);
-		case ArticleDisplay.Showcase:
-		case ArticleDisplay.Standard:
-		default: {
-			switch (format.design) {
-				case ArticleDesign.Review:
-				case ArticleDesign.Recipe:
-				case ArticleDesign.Feature:
-					return (
+					<WithAgeWarning
+						tags={tags}
+						webPublicationDateDeprecated={
+							webPublicationDateDeprecated
+						}
+						format={format}
+					>
 						<h1
 							css={[
 								boldFont,
@@ -333,22 +511,74 @@ export const ArticleHeadline = ({
 						>
 							{curly(headlineString)}
 						</h1>
+					</WithAgeWarning>
+				</div>
+			);
+		case ArticleDisplay.Showcase:
+		case ArticleDisplay.Standard:
+		default: {
+			switch (format.design) {
+				case ArticleDesign.Review:
+				case ArticleDesign.Recipe:
+				case ArticleDesign.Feature:
+					return (
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
+						>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
+							>
+								<h1
+									css={[
+										boldFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
+						</div>
 					);
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
 					return (
-						<>
-							<h1
-								css={[
-									lightFont,
-									topPadding,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
+						>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
 							>
-								{curly(headlineString)}
-							</h1>
+								<h1
+									css={[
+										lightFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 							{byline && (
 								<HeadlineByline
 									format={format}
@@ -356,71 +586,121 @@ export const ArticleHeadline = ({
 									tags={tags}
 								/>
 							)}
-						</>
+						</div>
 					);
 
 				case ArticleDesign.Letter:
 					return (
-						<>
-							<h1
-								css={[
-									lightFont,
-									topPadding,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
+						>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
 							>
-								{curly(headlineString)}
-							</h1>
-						</>
+								<h1
+									css={[
+										lightFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
+						</div>
 					);
 				case ArticleDesign.Analysis:
 					return (
-						<h1
-							css={[
-								standardFont,
-								topPadding,
-								underlinedStyles(
-									palette.background.analysisUnderline,
-								),
-								css`
-									color: ${palette.text.headline};
-								`,
-							]}
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
-							{curly(headlineString)}
-						</h1>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
+							>
+								<h1
+									css={[
+										standardFont,
+										topPadding,
+										underlinedStyles(
+											palette.background
+												.analysisUnderline,
+										),
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
+						</div>
 					);
 				case ArticleDesign.Interview:
 					return (
 						// Inverted headlines have a wrapper div for positioning
 						// and a black background (only for the text)
-						<div css={[shiftSlightly, maxWidth, displayFlex]}>
-							<HeadlineTag
-								tagText="Interview"
-								palette={palette}
-							/>
-							<h1
-								css={[
-									invertedFont,
-									invertedWrapper,
-									zIndex,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
+						<div
+							css={[
+								shiftSlightly,
+								maxWidth,
+								displayFlex,
+								decideBottomPadding({
+									format,
+									hasStarRating,
+									hasAvatar,
+								}),
+							]}
+						>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
 							>
-								<span
+								<HeadlineTag
+									tagText="Interview"
+									palette={palette}
+								/>
+								<h1
 									css={[
-										darkBackground(palette),
-										invertedStyles(palette),
-										displayInline,
+										invertedFont,
+										invertedWrapper,
+										zIndex,
+										css`
+											color: ${palette.text.headline};
+										`,
 									]}
 								>
-									{curly(headlineString)}
-								</span>
-							</h1>
+									<span
+										css={[
+											darkBackground(palette),
+											invertedStyles(palette),
+											displayInline,
+										]}
+									>
+										{curly(headlineString)}
+									</span>
+								</h1>
+							</WithAgeWarning>
 							{byline && (
 								<HeadlineByline
 									format={format}
@@ -433,54 +713,103 @@ export const ArticleHeadline = ({
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
-						<h1
-							css={[
-								standardFont,
-								css`
-									color: ${palette.text.headline};
-									padding-bottom: ${space[9]}px;
-								`,
-							]}
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
-							{curly(headlineString)}
-						</h1>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
+							>
+								<h1
+									css={[
+										standardFont,
+										css`
+											color: ${palette.text.headline};
+											padding-bottom: ${space[9]}px;
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
+						</div>
 					);
 				case ArticleDesign.Interactive:
 					return (
 						<div
-							css={css`
-								position: relative;
-							`}
+							css={[
+								decideBottomPadding({
+									format,
+									hasStarRating,
+									hasAvatar,
+								}),
+								css`
+									position: relative;
+								`,
+							]}
 						>
-							<h1
-								className={interactiveLegacyClasses.headline}
-								css={[
-									standardFont,
-									topPadding,
-									css`
-										color: ${palette.text.headline};
-									`,
-								]}
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
 							>
-								{curly(headlineString)}
-							</h1>
+								<h1
+									className={
+										interactiveLegacyClasses.headline
+									}
+									css={[
+										standardFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
 						</div>
 					);
 				default:
 					return (
-						<h1
-							css={[
-								format.theme === ArticleSpecial.Labs
-									? labsFont
-									: standardFont,
-								topPadding,
-								css`
-									color: ${palette.text.headline};
-								`,
-							]}
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
 						>
-							{curly(headlineString)}
-						</h1>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
+							>
+								<h1
+									css={[
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: standardFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
+						</div>
 					);
 			}
 		}

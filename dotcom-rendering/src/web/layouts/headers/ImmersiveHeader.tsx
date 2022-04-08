@@ -24,6 +24,7 @@ import { getZIndex } from '../../lib/getZIndex';
 import { Stuck } from '../lib/stickiness';
 import { getCurrentPillar } from '../../lib/layoutHelpers';
 import { Island } from '../../components/Island';
+import { decidePalette } from '../../lib/decidePalette';
 
 const hasMainMediaStyles = css`
 	height: 100vh;
@@ -41,10 +42,9 @@ const hasMainMediaStyles = css`
 `;
 
 interface Props {
-	CAPI: CAPIType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
@@ -99,30 +99,29 @@ const Box = ({
 );
 
 export const ImmersiveHeader = ({
-	CAPI,
+	CAPIArticle,
 	NAV,
 	format,
-	palette,
 }: Props): JSX.Element => {
 	const {
 		config: { host },
-	} = CAPI;
+	} = CAPIArticle;
 
 	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: CAPI.isAdFreeUser,
-		isSensitive: CAPI.config.isSensitive,
-		videoDuration: CAPI.config.videoDuration,
-		edition: CAPI.config.edition,
-		section: CAPI.config.section,
-		sharedAdTargeting: CAPI.config.sharedAdTargeting,
-		adUnit: CAPI.config.adUnit,
+		isAdFreeUser: CAPIArticle.isAdFreeUser,
+		isSensitive: CAPIArticle.config.isSensitive,
+		videoDuration: CAPIArticle.config.videoDuration,
+		edition: CAPIArticle.config.edition,
+		section: CAPIArticle.config.section,
+		sharedAdTargeting: CAPIArticle.config.sharedAdTargeting,
+		adUnit: CAPIArticle.config.adUnit,
 	});
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
-	// 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
+	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
 
-	const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
+	const mainMedia = CAPIArticle.mainMediaElements[0] as ImageBlockElement;
 	const captionText = decideCaption(mainMedia);
 
 	const HEADLINE_OFFSET = mainMedia ? 120 : 0;
@@ -143,6 +142,8 @@ export const ImmersiveHeader = ({
 			/>
 		</div>
 	);
+
+	const palette = decidePalette(format);
 
 	return (
 		<>
@@ -176,13 +177,14 @@ export const ImmersiveHeader = ({
 							<Nav
 								format={{
 									...format,
-									theme: getCurrentPillar(CAPI),
+									theme: getCurrentPillar(CAPIArticle),
 								}}
 								nav={NAV}
 								subscribeUrl={
-									CAPI.nav.readerRevenueLinks.header.subscribe
+									CAPIArticle.nav.readerRevenueLinks.header
+										.subscribe
 								}
-								edition={CAPI.editionId}
+								edition={CAPIArticle.editionId}
 							/>
 						</ElementContainer>
 					</div>
@@ -205,22 +207,22 @@ export const ImmersiveHeader = ({
 
 					<MainMedia
 						format={format}
-						elements={CAPI.mainMediaElements}
+						elements={CAPIArticle.mainMediaElements}
 						adTargeting={adTargeting}
 						starRating={
 							format.design === ArticleDesign.Review &&
-							CAPI.starRating
-								? CAPI.starRating
+							CAPIArticle.starRating
+								? CAPIArticle.starRating
 								: undefined
 						}
 						host={host}
 						hideCaption={true}
-						pageId={CAPI.pageId}
-						webTitle={CAPI.webTitle}
-						ajaxUrl={CAPI.config.ajaxUrl}
-						switches={CAPI.config.switches}
-						isAdFreeUser={CAPI.isAdFreeUser}
-						isSensitive={CAPI.config.isSensitive}
+						pageId={CAPIArticle.pageId}
+						webTitle={CAPIArticle.webTitle}
+						ajaxUrl={CAPIArticle.config.ajaxUrl}
+						switches={CAPIArticle.config.switches}
+						isAdFreeUser={CAPIArticle.isAdFreeUser}
+						isSensitive={CAPIArticle.config.isSensitive}
 					/>
 				</div>
 				{mainMedia && (
@@ -245,11 +247,13 @@ export const ImmersiveHeader = ({
 							>
 								<ArticleTitle
 									format={format}
-									tags={CAPI.tags}
-									sectionLabel={CAPI.sectionLabel}
-									sectionUrl={CAPI.sectionUrl}
-									guardianBaseURL={CAPI.guardianBaseURL}
-									badge={CAPI.badge}
+									tags={CAPIArticle.tags}
+									sectionLabel={CAPIArticle.sectionLabel}
+									sectionUrl={CAPIArticle.sectionUrl}
+									guardianBaseURL={
+										CAPIArticle.guardianBaseURL
+									}
+									badge={CAPIArticle.badge}
 								/>
 							</ContainerLayout>
 							<Box palette={palette}>
@@ -260,9 +264,16 @@ export const ImmersiveHeader = ({
 								>
 									<ArticleHeadline
 										format={format}
-										headlineString={CAPI.headline}
-										tags={CAPI.tags}
-										byline={CAPI.author.byline}
+										headlineString={CAPIArticle.headline}
+										tags={CAPIArticle.tags}
+										byline={CAPIArticle.author.byline}
+										webPublicationDateDeprecated={
+											CAPIArticle.webPublicationDateDeprecated
+										}
+										hasStarRating={
+											!!CAPIArticle.starRating ||
+											CAPIArticle.starRating === 0
+										}
 									/>
 								</ContainerLayout>
 							</Box>

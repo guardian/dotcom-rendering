@@ -164,9 +164,10 @@ clear: # private
 	@clear
 
 gen-schema:
-	$(call log, "Generating new schema")
+	$(call log, "Generating new schemas")
 	@node scripts/json-schema/gen-schema.js
 	@git add src/model/json-schema.json
+	@git add src/model/front-schema.json
 
 gen-fixtures:
 	$(call log, "Generating new article fixture data")

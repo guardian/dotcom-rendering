@@ -54,17 +54,17 @@ describe('Interactivity', function () {
 			cy.get('[data-cy=discussion]').should('exist');
 		});
 		// eslint-disable-next-line mocha/no-skipped-tests
-		it.skip('loads the discussion immediately when you use a permalink', function () {
+		it('loads the discussion immediately when you use a permalink', function () {
 			// The permalink feature is not currently working but once it does we want this test ready to go
 			cy.visit(
 				`/Article?url=https://www.theguardian.com/commentisfree/2022/jan/20/uk-government-yemen-war-saudi-arabia-westminster#comment-154433663`,
 			);
 			cy.get('gu-island[name=DiscussionContainer]').should(
 				'have.attr',
-				'data-gu-hydrated',
+				'data-gu-ready',
 				'true',
 			);
-			cy.get('[data-cy=discussion]').should('be.visible');
+			cy.get('[id=comment-154433663]').should('be.visible');
 		});
 		it('loads the most viwed list only after starting to scroll the page', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
@@ -80,10 +80,6 @@ describe('Interactivity', function () {
 				.its('length')
 				.should('eq', 2);
 			// Verify hydration
-			cy.get('img[alt="Michael Barnier and the EU flag"]').should(
-				'not.exist',
-			);
-			cy.scrollTo('bottom', { duration: 300 });
 			cy.get('img[alt="Michael Barnier and the EU flag"]').should(
 				'be.visible',
 			);

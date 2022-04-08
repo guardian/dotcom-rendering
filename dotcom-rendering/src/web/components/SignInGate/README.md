@@ -150,11 +150,7 @@ In the `src/web/components/SignInGate/gates` folder, we have a file for each uni
 // src/web/components/SignInGate/types.ts
 type SignInGateComponent = {
     gate?: (props: SignInGateProps) => JSX.Element;
-    canShow: (
-        CAPI: CAPIBrowserType,
-        isSignedIn: boolean,
-        currentTest: CurrentABTest,
-    ) => boolean;
+    canShow: (isSignedIn: boolean, currentTest: CurrentABTest) => boolean;
 };
 ```
 
@@ -289,29 +285,23 @@ The advantage of this is being able to force yourself into a specific section of
 
 The disadvantage of this method is that it's a bit tricky to work out exactly which mvt_id to set, and if you make changed to the audience and offset, you may have to adjust the value of the cookie too.
 
-**B)** Add the `forcedTestVariant` prop to the `ABProvider` in `BootReact.tsx`:
+**B)** Add the `forcedTestVariant` prop to the `SetABTests` Island:
 
 ```tsx
-<ABProvider
-    arrayOfTestObjects={tests}
-    abTestSwitches={{
-        ...CAPI.config.switches,
-        ...cypressAbSwitches,
-    }}
-    pageIsSensitive={CAPI.config.isSensitive}
-    mvtMaxValue={1000000}
-    mvtId={mvtId}
-    ophanRecord={ophanRecordFunc}
-    // forced test variant prop
-    forcedTestVariant={{
-        // id of the test from the test definition
-        testId: 'SignInGatePatientia',
-        // name of the variant to force into
-        variant: { id: 'patientia-variant-1', test: () => {} },
-    }}
->
-    ...
-</ABProvider>
+<Island clientOnly={true}>
+    <SetABTests
+        abTestSwitches={CAPIArticle.config.switches}
+        pageIsSensitive={CAPIArticle.config.isSensitive}
+        isDev={!!CAPIArticle.config.isDev}
+        // forced test variant prop
+        forcedTestVariant={{
+            // id of the test from the test definition
+            testId: 'SignInGatePatientia',
+            // name of the variant to force into
+            variant: { id: 'patientia-variant-1', test: () => {} },
+        }}
+    />
+</Island>
 ```
 
 The advantages of using the forcedTestVariant:
@@ -321,7 +311,7 @@ The advantages of using the forcedTestVariant:
 
 ```tsx
  abTestSwitches={{
-       ...CAPI.config.switches,
+       ...CAPIArticle.config.switches,
        ...cypressAbSwitches,
        ...{ abSignInGateSwitchName: true }, // DO NOT COMMIT THIS!!
    }}
@@ -389,9 +379,7 @@ In the gate designs themselves, it is useful to set a `data-cy` attributes on an
 
 ```html
 // gateDesigns/SignInGatePatientia.tsx ...
-<div className="{signinGate}" data-cy="sign-in-gate-patientia">
-    ...
-</div>
+<div className="{signinGate}" data-cy="sign-in-gate-patientia">...</div>
 ...
 ```
 

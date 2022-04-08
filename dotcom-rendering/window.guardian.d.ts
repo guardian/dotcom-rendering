@@ -7,7 +7,7 @@ import type {
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { WindowGuardianConfig } from './src/model/window-guardian';
 import { ReaderRevenueDevUtils } from './src/web/lib/readerRevenueDevUtils';
-import { DailyArticleHistory } from "./src/web/lib/dailyArticleCount";
+import { DailyArticleHistory } from './src/web/lib/dailyArticleCount';
 
 declare global {
 	/* ~ Here, declare things that go in the global namespace, or augment
@@ -15,13 +15,6 @@ declare global {
 	 */
 	interface Window {
 		guardian: {
-			app: {
-				data: {
-					GA: { [key: string]: any };
-					[key: string]: any;
-					CAPI: CAPIBrowserType;
-				};
-			};
 			mustardCut: boolean;
 			polyfilled: boolean;
 			onPolyfilled: () => void;
@@ -53,6 +46,7 @@ declare global {
 			gaPath: string;
 			weeklyArticleCount: WeeklyArticleHistory | undefined;
 			dailyArticleCount: DailyArticleHistory | undefined;
+			GAData: GADataType;
 		};
 		GoogleAnalyticsObject: string;
 		ga: UniversalAnalytics.ga | null;

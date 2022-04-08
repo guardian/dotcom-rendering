@@ -13,6 +13,7 @@ import { Caption } from './Caption';
 
 type Props = {
 	id: string;
+	elementId: string;
 	mediaTitle?: string;
 	altText?: string;
 	assetId: string;
@@ -31,6 +32,7 @@ type Props = {
 	width?: number;
 	duration?: number; // in seconds
 	origin?: string;
+	stickyVideos: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage: string) => css`
@@ -69,6 +71,7 @@ const expiredSVGWrapperStyles = css`
 
 export const YoutubeBlockComponent = ({
 	id,
+	elementId,
 	assetId,
 	mediaTitle,
 	altText,
@@ -84,6 +87,7 @@ export const YoutubeBlockComponent = ({
 	width = 460,
 	duration,
 	origin,
+	stickyVideos,
 }: Props): JSX.Element => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -159,6 +163,7 @@ export const YoutubeBlockComponent = ({
 			},
 		});
 	};
+
 	const gaTracking = (trackingEvent: string) => {
 		if (!id) return;
 		trackVideoInteraction({
@@ -170,7 +175,8 @@ export const YoutubeBlockComponent = ({
 	return (
 		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
-				assetId={assetId}
+				elementId={elementId}
+				videoId={assetId}
 				overrideImage={
 					overrideImage
 						? [
@@ -208,6 +214,8 @@ export const YoutubeBlockComponent = ({
 				eventEmitters={[ophanTracking, gaTracking]}
 				pillar={format.theme}
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
+				shouldStick={stickyVideos}
+				isMainMedia={isMainMedia}
 			/>
 			{!hideCaption && (
 				<Caption

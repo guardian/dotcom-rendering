@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { Hide } from '@guardian/source-react-components';
 import { space } from '@guardian/source-foundations';
-import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
 	count: number;
@@ -29,46 +28,39 @@ const SvgReload = ({ size }: { size: 12 | 16 | 18 | 24 | 26 | 28 | 30 }) => {
 
 /**
  * A button to scroll to the top when new content exists.
+ *
+ * This element is rendered using a Portal into the `toast-root` div. This
+ * root div has position: sticky
  */
 export const Toast = ({ count, onClick, format }: Props) => {
 	return (
 		<div
 			css={css`
-				position: sticky;
-				top: 0;
-				${getZIndex('toast')};
-				display: flex;
-				justify-content: center;
+				position: absolute;
+				top: ${space[2]}px;
 			`}
 			data-cy="toast"
 		>
-			<div
-				css={css`
-					position: absolute;
-					top: ${space[2]}px;
-				`}
-			>
-				<Hide above="phablet">
-					<EditorialButton
-						size="xsmall" // <-- Mobile version is xsmall
-						onClick={onClick}
-						format={format}
-						icon={<SvgReload size={30} />}
-					>{`${count} new update${
-						count === 1 ? '' : 's'
-					}`}</EditorialButton>
-				</Hide>
-				<Hide below="phablet">
-					<EditorialButton
-						size="small" // <-- Desktop version is small
-						onClick={onClick}
-						format={format}
-						icon={<SvgReload size={30} />}
-					>{`${count} new update${
-						count === 1 ? '' : 's'
-					}`}</EditorialButton>
-				</Hide>
-			</div>
+			<Hide above="phablet">
+				<EditorialButton
+					size="xsmall" // <-- Mobile version is xsmall
+					onClick={onClick}
+					format={format}
+					icon={<SvgReload size={30} />}
+				>{`${count} new update${
+					count === 1 ? '' : 's'
+				}`}</EditorialButton>
+			</Hide>
+			<Hide below="phablet">
+				<EditorialButton
+					size="small" // <-- Desktop version is small
+					onClick={onClick}
+					format={format}
+					icon={<SvgReload size={30} />}
+				>{`${count} new update${
+					count === 1 ? '' : 's'
+				}`}</EditorialButton>
+			</Hide>
 		</div>
 	);
 };

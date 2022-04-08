@@ -31,9 +31,6 @@ export const withSignInGateSlot = ({
 	host,
 	pageId,
 	idUrl,
-	switches,
-	isSensitive,
-	isDev,
 }: Props): React.ReactNode => {
 	return renderedElements.map((element, i) => {
 		return (
@@ -53,9 +50,6 @@ export const withSignInGateSlot = ({
 								host={host}
 								pageId={pageId}
 								idUrl={idUrl}
-								switches={switches}
-								pageIsSensitive={isSensitive}
-								isDev={isDev}
 							/>
 						</Island>
 					</div>
