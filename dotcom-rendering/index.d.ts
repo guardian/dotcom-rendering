@@ -513,10 +513,12 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 }
 
+type StageType = 'DEV' | 'CODE' | 'PROD';
+
 interface FrontType {
 	pressedPage: PressedPageType;
 	nav: CAPINavType;
-	editionId: string;
+	editionId: Edition;
 	editionLongForm: string;
 	guardianBaseURL: string;
 	pageId: string;
@@ -545,7 +547,9 @@ type FrontPropertiesType = {
 	commercial: Record<string, unknown>;
 };
 
-type PressedCollectionType = Record<string, unknown>;
+type PressedCollectionType = {
+	displayName: string;
+};
 
 type FrontConfigType = {
 	avatarApiUrl: string;
@@ -560,7 +564,7 @@ type FrontConfigType = {
 	locationapiurl: string;
 	sharedAdTargeting: { [key: string]: any };
 	buildNumber: string;
-	abTests: Record<string, unknown>;
+	abTests: ServerSideTests;
 	pbIndexSites: { [key: string]: unknown }[];
 	ampIframeUrl: string;
 	beaconUrl: string;
@@ -621,7 +625,7 @@ type FrontConfigType = {
 	weatherapiurl: string;
 	googleSearchUrl: string;
 	optimizeEpicUrl: string;
-	stage: string;
+	stage: StageType;
 	idOAuthUrl: string;
 	isSensitive: boolean;
 	isDev: boolean;
