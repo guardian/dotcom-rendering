@@ -547,8 +547,164 @@ type FrontPropertiesType = {
 	commercial: Record<string, unknown>;
 };
 
+type CollectionType =
+	| 'dynamic/fast'
+	| 'dynamic/package'
+	| 'dynamic/slow'
+	| 'dynamic/slow-mpu'
+	| 'fixed/large/slow-XIV'
+	| 'fixed/medium/fast-XI'
+	| 'fixed/medium/fast-XII'
+	| 'fixed/medium/slow-VI'
+	| 'fixed/medium/slow-VII'
+	| 'fixed/medium/slow-XII-mpu'
+	| 'fixed/small/fast-VIII'
+	| 'fixed/small/slow-I'
+	| 'fixed/small/slow-III'
+	| 'fixed/small/slow-IV'
+	| 'fixed/small/slow-V-half'
+	| 'fixed/small/slow-V-mpu'
+	| 'fixed/small/slow-V-third'
+	| 'fixed/thrasher'
+	| 'fixed/video'
+	| 'nav/list'
+	| 'nav/media-list'
+	| 'news/most-popular';
+
+type CollectionCard = {
+	properties: {
+		isBreaking: boolean;
+		showMainVideo: boolean;
+		showKickerTag: boolean;
+		showByline: boolean;
+		imageSlideshowReplace: boolean;
+		maybeContent?: {
+			trail: {
+				trailPicture: {
+					allImages: {
+						index: number;
+						fields: {
+							displayCredit?: string;
+							source: string;
+							photographer?: string;
+							isMaster?: string;
+							altText: string;
+							height: string;
+							credit: string;
+							mediaId: string;
+							width: string;
+						};
+						mediaType: string;
+						url: string;
+					}[];
+				};
+				byline?: string;
+				thumbnailPath: string;
+				webPublicationDate: number;
+			};
+			metadata: {
+				id: string;
+				webTitle: string;
+				webUrl: string;
+				type: string;
+				sectionId?: { value: string };
+				format: CAPIFormat;
+			};
+			fields: {
+				main: string;
+				body: string;
+				standfirst: string;
+			};
+			elements: Record<string, unknown>;
+			tags: Record<string, unknown>;
+		};
+		maybeContentId?: string;
+		isLiveBlog: boolean;
+		isCrossword: boolean;
+		byline?: string;
+		webTitle: string;
+		linkText?: string;
+		webUrl?: string;
+		editionBrandings: { edition: { id: Edition } }[];
+	};
+	header: {
+		isVideo: boolean;
+		isComment: boolean;
+		isGallery: boolean;
+		isAudio: boolean;
+		headline: string;
+		url: string;
+		hasMainVideoElement: boolean;
+	};
+	card: {
+		id: string;
+		cardStyle: {
+			type: string;
+		};
+		webPublicationDateOption?: number;
+		lastModifiedOption?: number;
+		trailText?: string;
+		starRating?: number;
+		shortUrlPath?: string;
+		shortUrl: string;
+		group: string;
+		isLive: boolean;
+	};
+	discussion: {
+		isCommentable: boolean;
+		isClosedForComments: boolean;
+		discussionId?: string;
+	};
+	display: {
+		isBoosted: boolean;
+		showBoostedHeadline: boolean;
+		showQuotedHeadline: boolean;
+		imageHide: boolean;
+		showLivePlayable: boolean;
+	};
+	format?: CAPIFormat;
+	enriched: Record<string, unknown>;
+	supportingContent?: unknown[];
+	cardStyle?: {
+		type: string;
+	};
+	type: string;
+};
+
 type PressedCollectionType = {
+	id: string;
 	displayName: string;
+	curated: CollectionCard[];
+	backfill: CollectionCard[];
+	treats: CollectionCard[];
+	lastUpdate?: number;
+	href?: string;
+	groups?: string[];
+	collectionType: CollectionType;
+	uneditable: boolean;
+	showTags: boolean;
+	showSections: boolean;
+	hideKickers: boolean;
+	showDateHeader: boolean;
+	showLatestUpdate: boolean;
+	config: {
+		displayName: string;
+		metadata?: { type: string }[];
+		collectionType: CollectionType;
+		href?: string;
+		groups?: string[];
+		uneditable: boolean;
+		showTags: boolean;
+		showSections: boolean;
+		hideKickers: boolean;
+		showDateHeader: boolean;
+		showLatestUpdate: boolean;
+		excludeFromRss: boolean;
+		showTimestamps: boolean;
+		hideShowMore: boolean;
+		platform: string;
+	};
+	hasMore: boolean;
 };
 
 type FrontConfigType = {
@@ -594,7 +750,7 @@ type FrontConfigType = {
 	discussionApiClientHeader: string;
 	membershipUrl: string;
 	dfpHost: string;
-	cardStyle: string;
+	cardStyle?: string;
 	googletagUrl: string;
 	sentryHost: string;
 	shouldHideAdverts: boolean;
