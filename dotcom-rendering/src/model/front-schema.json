@@ -167,8 +167,6 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "thumbnailPath",
-                                                                "trailPicture",
                                                                 "webPublicationDate"
                                                             ]
                                                         },
@@ -241,8 +239,7 @@
                                                             },
                                                             "required": [
                                                                 "body",
-                                                                "main",
-                                                                "standfirst"
+                                                                "main"
                                                             ]
                                                         },
                                                         "elements": {
@@ -491,7 +488,6 @@
                                         "card",
                                         "discussion",
                                         "display",
-                                        "enriched",
                                         "header",
                                         "properties",
                                         "type"
@@ -609,8 +605,6 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "thumbnailPath",
-                                                                "trailPicture",
                                                                 "webPublicationDate"
                                                             ]
                                                         },
@@ -683,8 +677,7 @@
                                                             },
                                                             "required": [
                                                                 "body",
-                                                                "main",
-                                                                "standfirst"
+                                                                "main"
                                                             ]
                                                         },
                                                         "elements": {
@@ -933,7 +926,6 @@
                                         "card",
                                         "discussion",
                                         "display",
-                                        "enriched",
                                         "header",
                                         "properties",
                                         "type"
@@ -1051,8 +1043,6 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "thumbnailPath",
-                                                                "trailPicture",
                                                                 "webPublicationDate"
                                                             ]
                                                         },
@@ -1125,8 +1115,7 @@
                                                             },
                                                             "required": [
                                                                 "body",
-                                                                "main",
-                                                                "standfirst"
+                                                                "main"
                                                             ]
                                                         },
                                                         "elements": {
@@ -1375,7 +1364,6 @@
                                         "card",
                                         "discussion",
                                         "display",
-                                        "enriched",
                                         "header",
                                         "properties",
                                         "type"

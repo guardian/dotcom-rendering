@@ -580,7 +580,7 @@ type CollectionCard = {
 		imageSlideshowReplace: boolean;
 		maybeContent?: {
 			trail: {
-				trailPicture: {
+				trailPicture?: {
 					allImages: {
 						index: number;
 						fields: {
@@ -599,7 +599,7 @@ type CollectionCard = {
 					}[];
 				};
 				byline?: string;
-				thumbnailPath: string;
+				thumbnailPath?: string;
 				webPublicationDate: number;
 			};
 			metadata: {
@@ -613,7 +613,7 @@ type CollectionCard = {
 			fields: {
 				main: string;
 				body: string;
-				standfirst: string;
+				standfirst?: string;
 			};
 			elements: Record<string, unknown>;
 			tags: Record<string, unknown>;
@@ -663,7 +663,7 @@ type CollectionCard = {
 		showLivePlayable: boolean;
 	};
 	format?: CAPIFormat;
-	enriched: Record<string, unknown>;
+	enriched?: Record<string, unknown>;
 	supportingContent?: unknown[];
 	cardStyle?: {
 		type: string;
