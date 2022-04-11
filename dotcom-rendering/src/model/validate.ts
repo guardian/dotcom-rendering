@@ -37,7 +37,7 @@ export const validateAsCAPIType = (data: {
 
 export const validateAsFrontType = (
 	data: Record<string, unknown>,
-): FrontType => {
+): FEFrontType => {
 	const isValid = validateFront(data);
 
 	if (!isValid) {
@@ -50,5 +50,5 @@ export const validateAsFrontType = (
 		);
 	}
 
-	return data as unknown as FrontType;
+	return data as unknown as FEFrontType;
 };

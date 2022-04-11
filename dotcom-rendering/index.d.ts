@@ -515,8 +515,8 @@ interface CAPIArticleType {
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
-interface FrontType {
-	pressedPage: PressedPageType;
+interface FEFrontType {
+	pressedPage: FEPressedPageType;
 	nav: CAPINavType;
 	editionId: Edition;
 	editionLongForm: string;
@@ -524,7 +524,7 @@ interface FrontType {
 	pageId: string;
 	webTitle: string;
 	webURL: string;
-	config: FrontConfigType;
+	config: FEFrontConfigType;
 	commercialProperties: Record<string, unknown>;
 }
 
@@ -533,36 +533,36 @@ type DCRFrontType = {
 	nav: CAPINavType;
 	editionId: Edition;
 	webTitle: string;
-	config: FrontConfigType;
+	config: FEFrontConfigType;
 };
 
-type PressedPageType = {
+type FEPressedPageType = {
 	id: string;
-	seoData: SeoDataType;
-	frontProperties: FrontPropertiesType;
-	collections: CollectionType[];
+	seoData: FESeoDataType;
+	frontProperties: FEFrontPropertiesType;
+	collections: FECollectionType[];
 };
 
 type DCRPressedPageType = {
 	id: string;
-	seoData: SeoDataType;
-	frontProperties: FrontPropertiesType;
+	seoData: FESeoDataType;
+	frontProperties: FEFrontPropertiesType;
 	collections: DCRCollectionType[];
 };
 
-type SeoDataType = {
+type FESeoDataType = {
 	id: string;
 	navSection: string;
 	webTitle: string;
 	description: string;
 };
 
-type FrontPropertiesType = {
+type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
 	commercial: Record<string, unknown>;
 };
 
-type ContainerType =
+type FEContainerType =
 	| 'dynamic/fast'
 	| 'dynamic/package'
 	| 'dynamic/slow'
@@ -586,7 +586,7 @@ type ContainerType =
 	| 'nav/media-list'
 	| 'news/most-popular';
 
-type FrontCard = {
+type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
 		showMainVideo: boolean;
@@ -712,16 +712,16 @@ type DCRFrontCard = {
 	kickerText?: string;
 };
 
-type CollectionType = {
+type FECollectionType = {
 	id: string;
 	displayName: string;
-	curated: FrontCard[];
-	backfill: FrontCard[];
-	treats: FrontCard[];
+	curated: FEFrontCard[];
+	backfill: FEFrontCard[];
+	treats: FEFrontCard[];
 	lastUpdate?: number;
 	href?: string;
 	groups?: string[];
-	collectionType: ContainerType;
+	collectionType: FEContainerType;
 	uneditable: boolean;
 	showTags: boolean;
 	showSections: boolean;
@@ -731,7 +731,7 @@ type CollectionType = {
 	config: {
 		displayName: string;
 		metadata?: { type: string }[];
-		collectionType: ContainerType;
+		collectionType: FEContainerType;
 		href?: string;
 		groups?: string[];
 		uneditable: boolean;
@@ -756,7 +756,7 @@ type DCRCollectionType = {
 	treats: DCRFrontCard[];
 };
 
-type FrontConfigType = {
+type FEFrontConfigType = {
 	avatarApiUrl: string;
 	externalEmbedHost: string;
 	ajaxUrl: string;

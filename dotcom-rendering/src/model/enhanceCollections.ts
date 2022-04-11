@@ -1,7 +1,7 @@
 import { ArticleDesign } from '@guardian/libs';
 import { decideFormat } from '../web/lib/decideFormat';
 
-const enhanceCards = (collections: FrontCard[]): DCRFrontCard[] => {
+const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] => {
 	const enhanced: DCRFrontCard[] = [];
 	collections.forEach((faciaCard) => {
 		if (faciaCard.format) {
@@ -27,7 +27,7 @@ const enhanceCards = (collections: FrontCard[]): DCRFrontCard[] => {
 };
 
 export const enhanceCollections = (
-	collections: CollectionType[],
+	collections: FECollectionType[],
 ): DCRCollectionType[] => {
 	return collections.map((collection) => {
 		return {

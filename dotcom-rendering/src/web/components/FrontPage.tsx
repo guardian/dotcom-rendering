@@ -18,7 +18,7 @@ type Props = {
  * Article is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
- * @param {FrontType} props.front - The article JSON data
+ * @param {DCRFrontType} props.front - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * */
 export const FrontPage = ({ front, NAV }: Props) => {

@@ -27,7 +27,7 @@ const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 };
 
 const enhanceFront = (body: Record<string, unknown>): DCRFrontType => {
-	const data: FrontType = validateAsFrontType(body);
+	const data: FEFrontType = validateAsFrontType(body);
 	return {
 		...data,
 		pressedPage: {
