@@ -52,7 +52,7 @@ type RRBannerConfig = {
 	id: string;
 	BannerComponent: React.FC<BannerProps>;
 	canShowFn: CanShowFunctionType<BannerProps>;
-	isEnabled: (switches: CAPIType['config']['switches']) => boolean;
+	isEnabled: (switches: CAPIArticleType['config']['switches']) => boolean;
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {

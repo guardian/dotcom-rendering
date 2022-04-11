@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import { joinUrl } from '@guardian/libs';
 import { renderArticleElement } from '../lib/renderElement';
-import { decidePalette } from '../lib/decidePalette';
 
 import { ShareIcons } from './ShareIcons';
 import { LastUpdated } from './LastUpdated';
@@ -52,7 +51,6 @@ export const LiveBlock = ({
 	pinnedPostId,
 }: Props) => {
 	if (block.elements.length === 0) return null;
-	const palette = decidePalette(format);
 	const blockLink = `${joinUrl(host, pageId)}?page=with:block-${
 		block.id
 	}#block-${block.id}`;
@@ -106,9 +104,9 @@ export const LiveBlock = ({
 			>
 				<ShareIcons
 					pageId={pageId}
+					blockId={block.id}
 					webTitle={webTitle}
 					displayIcons={['facebook', 'twitter']}
-					palette={palette}
 					format={format}
 					size="small"
 					context="LiveBlock"

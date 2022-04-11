@@ -28,7 +28,7 @@ import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 const logRenderTime = responseTime(
 	(req: Request, _: Response, time: number) => {
 		// eslint-disable-next-line prefer-destructuring
-		const body: CAPIType = req.body;
+		const body: CAPIArticleType = req.body;
 		logger.info({
 			pageId: body.pageId,
 			renderTime: time,
@@ -108,7 +108,8 @@ export const prodServer = () => {
 	app.get(
 		'/Front',
 		logRenderTime,
-		// TODO: implement Fronts’ getContentFromURLMiddleware,
+		// TODO: ensure getContentFromURLMiddleware supports fronts
+		getContentFromURLMiddleware,
 		async (req: Request, res: Response) => {
 			// Eg. http://localhost:9000/Front?url=https://www.theguardian.com/uk/sport
 			try {

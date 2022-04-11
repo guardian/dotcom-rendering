@@ -1,5 +1,5 @@
 import validator from 'amphtml-validator';
-import { Article as CAPI } from '../../../fixtures/generated/articles/Article';
+import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
 import { Article } from '../pages/Article';
 import { extractNAV } from '../../model/extract-nav';
 import { AnalyticsModel } from '../components/Analytics';
@@ -26,13 +26,13 @@ test('rejects invalid AMP doc (to test validator)', async () => {
 // fields. This then errors in Elements.tsx.
 test('produces valid AMP doc', async () => {
 	const v = await validator.getInstance();
-	const { config } = CAPI;
-	const nav = extractNAV(CAPI.nav);
-	const { linkedData } = CAPI;
+	const { config } = ExampleArticle;
+	const nav = extractNAV(ExampleArticle.nav);
+	const { linkedData } = ExampleArticle;
 
 	const metadata = {
-		description: CAPI.trailText,
-		canonicalURL: CAPI.webURL,
+		description: ExampleArticle.trailText,
+		canonicalURL: ExampleArticle.webURL,
 	};
 
 	const analytics: AnalyticsModel = {
@@ -40,9 +40,9 @@ test('produces valid AMP doc', async () => {
 		title: 'Foo',
 		fbPixelaccount: 'XXXXXXXXXX',
 		comscoreID: 'XXXXXXX',
-		section: CAPI.sectionName,
-		contentType: CAPI.contentType,
-		id: CAPI.pageId,
+		section: ExampleArticle.sectionName,
+		contentType: ExampleArticle.contentType,
+		id: ExampleArticle.pageId,
 		neilsenAPIID: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX',
 		domain: 'amp.theguardian.com',
 		permutive: {
@@ -59,7 +59,7 @@ test('produces valid AMP doc', async () => {
 		<Article
 			experimentsData={{}}
 			nav={nav}
-			articleData={{ ...CAPI, shouldHideReaderRevenue: false }}
+			articleData={{ ...ExampleArticle, shouldHideReaderRevenue: false }}
 			config={config}
 			analytics={analytics}
 		/>

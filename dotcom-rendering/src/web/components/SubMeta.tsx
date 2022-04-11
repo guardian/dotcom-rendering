@@ -233,7 +233,6 @@ export const SubMeta = ({
 					<ShareIcons
 						pageId={pageId}
 						webTitle={webTitle}
-						palette={palette}
 						format={format}
 						displayIcons={[
 							'facebook',

@@ -11,7 +11,7 @@
  *    gen-fixtures.ts directly.
  */
 
-export const MatchReport: CAPIType = {
+export const MatchReport: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="cc1d3dc14ab9104587323ef12ac477004b369637"> <img src="https://media.guim.co.uk/cc1d3dc14ab9104587323ef12ac477004b369637/67_36_1713_1028/1000.jpg" alt="André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">André Ayew celebrates after giving Swansea the lead in their 2-0 home victory against Championship leaders Norwich.</span> <span class="element-image__credit">Photograph: Kieran McManus/BPI/Shutterstock</span> </figcaption> </figure>',
 	subMetaSectionLinks: [

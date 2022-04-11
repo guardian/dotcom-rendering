@@ -667,6 +667,9 @@ export const Carousel: React.FC<OnwardsType> = ({
 							carouselImages,
 							kickerText,
 						} = trail;
+						// Don't try to render cards that have no publication date. This property is technically optional
+						// but we rarely if ever expect it not to exist
+						if (!webPublicationDate) return;
 						const imageUrl =
 							isFullCardImage && carouselImages
 								? carouselImages['460']

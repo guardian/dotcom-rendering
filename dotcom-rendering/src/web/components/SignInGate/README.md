@@ -289,19 +289,18 @@ The disadvantage of this method is that it's a bit tricky to work out exactly wh
 
 ```tsx
 <Island clientOnly={true}>
-	<SetABTests
-		abTestSwitches={CAPI.config.switches}
-		pageIsSensitive={CAPI.config.isSensitive}
-		isDev={!!CAPI.config.isDev}
-
-		// forced test variant prop
-    	forcedTestVariant={{
-			// id of the test from the test definition
-			testId: 'SignInGatePatientia',
-			// name of the variant to force into
-			variant: { id: 'patientia-variant-1', test: () => {} },
-    	}}
-	/>
+    <SetABTests
+        abTestSwitches={CAPIArticle.config.switches}
+        pageIsSensitive={CAPIArticle.config.isSensitive}
+        isDev={!!CAPIArticle.config.isDev}
+        // forced test variant prop
+        forcedTestVariant={{
+            // id of the test from the test definition
+            testId: 'SignInGatePatientia',
+            // name of the variant to force into
+            variant: { id: 'patientia-variant-1', test: () => {} },
+        }}
+    />
 </Island>
 ```
 
@@ -312,7 +311,7 @@ The advantages of using the forcedTestVariant:
 
 ```tsx
  abTestSwitches={{
-       ...CAPI.config.switches,
+       ...CAPIArticle.config.switches,
        ...cypressAbSwitches,
        ...{ abSignInGateSwitchName: true }, // DO NOT COMMIT THIS!!
    }}
