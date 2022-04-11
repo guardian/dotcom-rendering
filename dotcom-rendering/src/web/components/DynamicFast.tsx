@@ -11,6 +11,11 @@ type Props = {
 export const DynamicFast = ({ trails }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
+	// TODO: These divisions are based on assunmed rules for how content is placed in these columns but this needs confirmation
+	// Current assumptions
+	// - The boosted third card is standalone
+	// - The middle column has exactly three items
+	// - The last column has exactly three items
 	const third = trails[2];
 	const groupOne = trails.slice(3, 6);
 	const groupTwo = trails.slice(7, 12);
