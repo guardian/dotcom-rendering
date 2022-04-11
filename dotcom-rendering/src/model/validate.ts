@@ -23,7 +23,6 @@ export const validateAsCAPIType = (data: {
 	const isValid = validate(data);
 
 	if (!isValid) {
-		// @ts-expect-error
 		const url = data.webURL || 'unknown url';
 
 		throw new TypeError(
@@ -32,7 +31,7 @@ export const validateAsCAPIType = (data: {
 		);
 	}
 
-	return data as CAPIArticleType;
+	return data as unknown as CAPIArticleType;
 };
 
 export const validateAsFrontType = (
@@ -41,7 +40,6 @@ export const validateAsFrontType = (
 	const isValid = validateFront(data);
 
 	if (!isValid) {
-		// @ts-expect-error
 		const url = data.webURL || 'unknown url';
 
 		throw new TypeError(
