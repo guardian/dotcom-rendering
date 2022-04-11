@@ -11,7 +11,7 @@
 *    gen-fixtures.ts directly.
 */
 
-export const NewsletterSignup: CAPIType = {
+export const NewsletterSignup: CAPIArticleType = {
     "slotMachineFlags": "",
     "main": "<figure class=\"element element-image\" data-media-id=\"937cf22da8d73eae17817c720b02783cf35953cf\"> <img src=\"https://media.guim.co.uk/937cf22da8d73eae17817c720b02783cf35953cf/0_0_5000_3000/1000.jpg\" alt=\"Guardian morning briefing newsletter: Michaela Coel, Boris Johnson, Lewis Hamilton\" width=\"1000\" height=\"600\" class=\"gu-image\" /> </figure>",
     "subMetaSectionLinks": [
@@ -1029,7 +1029,7 @@ export const NewsletterSignup: CAPIType = {
     "author": {
         "byline": "Guardian emails team"
     },
-    "designType": "Article",
+    "designType": "NewsletterSignup",
     "editionId": "UK",
     "format": {
         "design": "ArticleDesign",
@@ -1279,6 +1279,7 @@ export const NewsletterSignup: CAPIType = {
     "guardianBaseURL": "https://www.theguardian.com",
     "mainMediaElements": [
         {
+            "_type": "model.dotcomrendering.pageElements.ImageBlockElement",
             "media": {
                 "allImages": [
                     {
@@ -1531,8 +1532,7 @@ export const NewsletterSignup: CAPIType = {
                     ]
                 }
             ],
-            "_type": "model.dotcomrendering.pageElements.ImageBlockElement",
-            "elementId": "25e67fc9-e470-4b25-9d3f-d5a32e7ce719"
+            "elementId": "b4f99a7a-7269-4101-b508-b3cd48dec7d5"
         }
     ],
     "webPublicationDate": "2020-03-24T01:00:56.000Z",
@@ -1541,6 +1541,7 @@ export const NewsletterSignup: CAPIType = {
             "id": "56d03a8be4b0bd5a0524cbb2",
             "elements": [
                 {
+                    "_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
                     "html": "<iframe src=\"https://www.theguardian.com/email/form/plaintone/4156\" height=\"52px\" data-form-title=\"A different kind of daily email\" data-form-description=\"Sign up and get a daily briefing from the Guardian\" data-form-campaign-code=\"UK_signup_page\" scrolling=\"no\" seamless frameborder=\"0\" class=\"iframed--overflow-hidden email-sub__iframe js-email-sub__iframe js-email-sub__iframe--article\" data-form-success-desc=\"Thanks, you'll start getting the morning briefing soon.\"></iframe>",
                     "safe": true,
                     "alt": "Sign up to Guardian Morning Briefing",
@@ -1548,38 +1549,37 @@ export const NewsletterSignup: CAPIType = {
                     "isThirdPartyTracking": false,
                     "source": "The Guardian",
                     "sourceDomain": "theguardian.com",
-                    "_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
-                    "elementId": "dcd0a6cf-0e79-4065-8aa3-94c1833ac7a4"
+                    "elementId": "31857bb9-d775-45e4-b2f8-619d5c18efa2"
                 },
                 {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
                     "html": "<p>The Guardian Morning Briefing breaks down the news stories of the day, telling you what’s happening and why it matters so you’ll be completely up to speed. Besides the main headlines, you can expect a fantastic lunchtime read to get your teeth into, and highlights of what’s on the UK’s newspapers front pages. We’ll make sure you don’t miss a thing. <strong><a href=\"https://www.theguardian.com/world/series/guardian-morning-briefing/latest\">See the latest morning briefing here.</a></strong></p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "fbc31a95-6e90-4919-80d9-e8dbbe14cb54"
+                    "elementId": "19baff71-db9b-4857-a58c-baf23fab8945"
                 },
                 {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
                     "html": "<p><strong>Or try our other emails:</strong></p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "ada5c712-de45-460d-af5f-65446f0448c8"
+                    "elementId": "3d342595-1cca-4318-916f-ff2674f674a0"
                 },
                 {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
                     "html": "<ul> \n <li><p>Living in the US? <a href=\"https://www.theguardian.com/info/2018/sep/17/guardian-us-morning-briefing-sign-up-to-stay-informed\">Try First Thing</a> to get the American view</p></li> \n <li><p>Living in Australia? <a href=\"https://www.theguardian.com/world/guardian-australia-morning-mail/2014/jun/24/-sp-guardian-australias-morning-mail-subscribe-by-email\">You may prefer Guardian Australia’s Morning Mail</a></p></li> \n</ul>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "a7351446-b151-4ba1-9575-f499aa3dce1f"
+                    "elementId": "ee8fcdd3-bb4f-4eeb-a3fa-d8adc66db5ae"
                 },
                 {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
                     "html": "<p><strong><a href=\"https://www.theguardian.com/email-newsletters\">Explore all our newsletters:</a></strong><a href=\"https://www.theguardian.com/email-newsletters\"> whether you love film, football, fashion or food, we’ve got something for you</a></p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "5121537c-6698-4926-9051-69ca5e65ffb9"
+                    "elementId": "5c7d348e-8ce1-471e-8dfb-0b1af3eb5637"
                 },
                 {
+                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
                     "html": "<p>•••</p>",
-                    "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "27d2e2a8-d151-45ed-a57d-46c09dfd34a1"
+                    "elementId": "d8e26673-d31c-4b99-84bc-16b68c87b2d0"
                 },
                 {
-                    "html": "<p><sup>The Guardian’s newsletters include content from our website, which may be funded by outside parties. Newsletters may also display information about Guardian News and Media’s other products, services or events (such as Guardian Jobs or Masterclasses), chosen charities or online advertisements.</sup></p>",
                     "_type": "model.dotcomrendering.pageElements.TextBlockElement",
-                    "elementId": "e3d2f784-ade1-474d-bd6a-44d991a8414b"
+                    "html": "<p><sup>The Guardian’s newsletters include content from our website, which may be funded by outside parties. Newsletters may also display information about Guardian News and Media’s other products, services or events (such as Guardian Jobs or Masterclasses), chosen charities or online advertisements.</sup></p>",
+                    "elementId": "e89a3829-10c8-442f-a066-97112879f91b"
                 }
             ],
             "blockCreatedOn": 1456487051000,
