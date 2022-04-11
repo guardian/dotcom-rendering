@@ -10,7 +10,7 @@ type Props = {
 	format: ArticleFormat;
 	isCuratedContent?: boolean;
 	isFullCardImage?: boolean;
-	customHeading?: string
+	customHeading?: string;
 };
 
 type OnwardsResponse = {

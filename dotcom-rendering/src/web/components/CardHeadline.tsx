@@ -180,7 +180,6 @@ export const CardHeadline = ({
 							format.design === ArticleDesign.NewsletterSignup &&
 								css`
 									${textSans.small({ lineHeight: 'tight' })}
-
 								`,
 						]}
 					>

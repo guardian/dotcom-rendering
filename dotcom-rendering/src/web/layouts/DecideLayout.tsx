@@ -9,7 +9,10 @@ import { LiveLayout } from './LiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { NewsletterSignupLayout } from './NewsletterSignupLayout';
-import { hackToNewsletterSignupLayout, formatAsNewsletterDesign } from './lib/newsLetterHacks';
+import {
+	hackToNewsletterSignupLayout,
+	formatAsNewsletterDesign,
+} from './lib/newsLetterHacks';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
@@ -23,10 +26,11 @@ export const DecideLayout = ({
 	NAV,
 	format,
 }: Props): JSX.Element => {
-
-
-	if (hackToNewsletterSignupLayout || CAPIArticle.tags.some(tag => tag.id === 'info/newsletter-sign-up')) {
-		const newsletterFormat = formatAsNewsletterDesign(format)
+	if (
+		hackToNewsletterSignupLayout ||
+		CAPIArticle.tags.some((tag) => tag.id === 'info/newsletter-sign-up')
+	) {
+		const newsletterFormat = formatAsNewsletterDesign(format);
 		const newsletterPalette = decidePalette(newsletterFormat);
 
 		return (
@@ -38,7 +42,6 @@ export const DecideLayout = ({
 			/>
 		);
 	}
-
 
 	// TODO we can probably better express this as data
 	switch (format.display) {

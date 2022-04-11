@@ -199,7 +199,6 @@ export const NewsLetterSignupContent = ({
 	newsletterData,
 	contributionsServiceUrl,
 }: Props) => {
-
 	const {
 		config: { host },
 	} = CAPIArticle;

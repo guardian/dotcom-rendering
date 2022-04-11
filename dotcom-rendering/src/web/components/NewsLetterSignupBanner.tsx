@@ -3,8 +3,7 @@ import { from, until, brand, brandAlt } from '@guardian/source-foundations';
 
 import Logo from '../../static/logos/guardian-newsletters-logo.svg';
 
-type Props = {
-};
+type Props = {};
 
 const bannerStyle = css`
 	background-color: ${brand[400]};

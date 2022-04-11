@@ -539,7 +539,7 @@ const backgroundCard = (format: ArticleFormat): string => {
 					return pillarPalette[format.theme][300];
 			}
 		case ArticleDesign.NewsletterSignup:
-				return neutral[100];
+			return neutral[100];
 		default:
 			return neutral[97];
 	}
@@ -683,7 +683,7 @@ const fillCommentCountUntilDesktop = (format: ArticleFormat): string => {
 
 const fillShareIcon = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.NewsletterSignup) {
-		return neutral[20]
+		return neutral[20];
 	}
 
 	if (format.design === ArticleDesign.DeadBlog) {

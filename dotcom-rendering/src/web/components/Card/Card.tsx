@@ -158,7 +158,8 @@ export const Card = ({
 	// the article data of the related articles in production
 	const format =
 		hackCardsToNewsLetterSignUpFormatBasedOnText &&
-		linkTo.includes('sign-up') && headlineText.toLowerCase().includes('sign up')
+		linkTo.includes('sign-up') &&
+		headlineText.toLowerCase().includes('sign up')
 			? formatAsNewsletterDesign(originalformat)
 			: originalformat;
 

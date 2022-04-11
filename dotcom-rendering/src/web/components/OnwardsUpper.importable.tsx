@@ -272,9 +272,10 @@ export const OnwardsUpper = ({
 		ophanComponentName = 'related-stories';
 	}
 
-	const curatedDataUrl = (showRelatedContent && alsoShowCuratedContent)
-		? getContainerDataUrl(pillar, edition, ajaxUrl)
-		: null;
+	const curatedDataUrl =
+		showRelatedContent && alsoShowCuratedContent
+			? getContainerDataUrl(pillar, edition, ajaxUrl)
+			: null;
 
 	return (
 		<div css={onwardsWrapper}>

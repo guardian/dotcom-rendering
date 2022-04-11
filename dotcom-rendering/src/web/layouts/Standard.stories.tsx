@@ -91,25 +91,28 @@ export const NewsletterSignupStory = (): React.ReactNode => {
 	const ServerCAPI = convertToStandard({
 		...NewsletterSignup,
 		headline: 'Sign up for First Edition',
-		blocks: [{...NewsletterSignup.blocks[0], elements:[
+		blocks: [
 			{
-				"html": "<p>Start the day one step ahead.</p><p>Our email breaks down the key stories of the day and why they matter. </p>",
-				"_type": "model.dotcomrendering.pageElements.TextBlockElement",
-				"elementId": "fbc31a95-6e90-4919-80d9-e8dbbe14cb54"
-			},
-			{
-				"html": "<iframe src=\"https://www.theguardian.com/email/form/thrasher/4156\" height=\"52px\" data-form-title=\"A different kind of daily email\" data-form-description=\"Sign up and get a daily briefing from the Guardian\" data-form-campaign-code=\"UK_signup_page\" scrolling=\"no\" seamless frameborder=\"0\" class=\"iframed--overflow-hidden email-sub__iframe js-email-sub__iframe js-email-sub__iframe--article\" data-form-success-desc=\"Thanks, you'll start getting the morning briefing soon.\"></iframe>",
-				"safe": true,
-				"alt": "Sign up to Guardian Morning Briefing",
-				"isMandatory": true,
-				"isThirdPartyTracking": false,
-				"source": "The Guardian",
-				"sourceDomain": "theguardian.com",
-				"_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
-				"elementId": "dcd0a6cf-0e79-4065-8aa3-94c1833ac7a4"
-			},
-			{
-				"html": `
+				...NewsletterSignup.blocks[0],
+				elements: [
+					{
+						html: '<p>Start the day one step ahead.</p><p>Our email breaks down the key stories of the day and why they matter. </p>',
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'fbc31a95-6e90-4919-80d9-e8dbbe14cb54',
+					},
+					{
+						html: '<iframe src="https://www.theguardian.com/email/form/thrasher/4156" height="52px" data-form-title="A different kind of daily email" data-form-description="Sign up and get a daily briefing from the Guardian" data-form-campaign-code="UK_signup_page" scrolling="no" seamless frameborder="0" class="iframed--overflow-hidden email-sub__iframe js-email-sub__iframe js-email-sub__iframe--article" data-form-success-desc="Thanks, you\'ll start getting the morning briefing soon."></iframe>',
+						safe: true,
+						alt: 'Sign up to Guardian Morning Briefing',
+						isMandatory: true,
+						isThirdPartyTracking: false,
+						source: 'The Guardian',
+						sourceDomain: 'theguardian.com',
+						_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+						elementId: 'dcd0a6cf-0e79-4065-8aa3-94c1833ac7a4',
+					},
+					{
+						html: `
 					<style>
 						[data-is-banner-for-newsletter-signup=true] {
 							background-color: purple;
@@ -138,23 +141,25 @@ export const NewsletterSignupStory = (): React.ReactNode => {
 						<p>Editors could change which other newsletter was promoted in sign-up page by changing the embed in composer.</p>
 					</div>
 				`,
-				"safe": true,
-				"alt": "ADVERT FOR THE LONG READ",
-				"isMandatory": true,
-				"isThirdPartyTracking": false,
-				"source": "The Guardian",
-				"sourceDomain": "theguardian.com",
-				"_type": "model.dotcomrendering.pageElements.EmbedBlockElement",
-				"elementId": "dcd0a6cf-0e79-4065-8aa3-94c1833ac7a5"
-			},
-			{
-				"html": `
+						safe: true,
+						alt: 'ADVERT FOR THE LONG READ',
+						isMandatory: true,
+						isThirdPartyTracking: false,
+						source: 'The Guardian',
+						sourceDomain: 'theguardian.com',
+						_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
+						elementId: 'dcd0a6cf-0e79-4065-8aa3-94c1833ac7a5',
+					},
+					{
+						html: `
 				<p>The <strong>sign-up embed</strong> is part of the composer content, so there is editorial control over where it goes in the content. The <strong>share buttons</strong> and the <strong>privacy wording</strong> are part of the page layout, so the editors would not need to add those in composer.</p>
 				`,
-				"_type": "model.dotcomrendering.pageElements.TextBlockElement",
-				"elementId": "fbc31a95-6e90-4919-80d9-e8dbbe14cb59"
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'fbc31a95-6e90-4919-80d9-e8dbbe14cb59',
+					},
+				],
 			},
-		]} ]
+		],
 	});
 
 	return <HydratedLayout ServerCAPI={ServerCAPI} />;

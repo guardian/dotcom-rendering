@@ -71,7 +71,7 @@ export const CardFooter = ({
 	}
 
 	if (format.design === ArticleDesign.NewsletterSignup) {
-		return null
+		return null;
 	}
 
 	if (format.design === ArticleDesign.Media) {
