@@ -3,8 +3,6 @@ import { from, until, brand, brandAlt } from '@guardian/source-foundations';
 
 import Logo from '../../static/logos/guardian-newsletters-logo.svg';
 
-type Props = {};
-
 const bannerStyle = css`
 	background-color: ${brand[400]};
 	color: ${brandAlt[400]};
@@ -32,7 +30,7 @@ const wrapperStyle = css`
 	}
 `;
 
-export const NewsLetterSignupBanner = ({}: Props) => (
+export const NewsLetterSignupBanner = () => (
 	<div css={bannerStyle}>
 		<div css={wrapperStyle}>
 			<Logo />
