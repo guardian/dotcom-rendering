@@ -23,9 +23,9 @@ export default {
 	},
 };
 
-export const DropdownActive = () => (
+export const Default = () => (
 	<ContainerLayout
-		title="Headlines"
+		title="DynamicFast"
 		showTopBorder={true}
 		sideBorders={true}
 		padContent={false}
@@ -34,4 +34,4 @@ export const DropdownActive = () => (
 		<DynamicFast trails={trails} />
 	</ContainerLayout>
 );
-DropdownActive.story = { name: 'DynamicFast with first item active' };
+Default.story = { name: 'DynamicFast' };
