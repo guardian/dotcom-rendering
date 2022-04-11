@@ -13,7 +13,7 @@ import { ContainerLayout } from '../components/ContainerLayout';
 import { Header } from '../components/Header';
 
 interface Props {
-	front: FrontType;
+	front: DCRFrontType;
 	NAV: NavType;
 }
 
@@ -105,10 +105,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<main>
 				{front.pressedPage.collections.map((collection, index) => {
+					// TODO: We also need to support backfill and treats containers
+					const trails = collection.curated;
+					// There are some containers that have zero trails. We don't want to render these
+					if (trails.length === 0) return null;
 					return (
 						<ContainerLayout
 							title={collection.displayName}
-							showTopBorder={index !== 0}
+							showTopBorder={index > 1}
 							sideBorders={true}
 							centralBorder="partial"
 						/>

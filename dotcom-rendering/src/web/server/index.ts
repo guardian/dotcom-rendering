@@ -4,6 +4,7 @@ import { extractNAV } from '../../model/extract-nav';
 import { articleToHtml } from './articleToHtml';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
+import { enhanceCollections } from '../../model/enhanceCollections';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import { extract as extractGA } from '../../model/extract-ga';
 import { blocksToHtml } from './blocksToHtml';
@@ -25,12 +26,15 @@ const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 	return CAPIArticle;
 };
 
-const enhanceFront = (body: Record<string, unknown>): FrontType => {
-	const enhanced = validateAsFrontType(body);
-	const front: FrontType = {
-		...enhanced,
+const enhanceFront = (body: Record<string, unknown>): DCRFrontType => {
+	const data: FrontType = validateAsFrontType(body);
+	return {
+		...data,
+		pressedPage: {
+			...data.pressedPage,
+			collections: enhanceCollections(data.pressedPage.collections),
+		},
 	};
-	return front;
 };
 
 export const renderArticle = (

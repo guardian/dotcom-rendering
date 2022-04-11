@@ -528,11 +528,26 @@ interface FrontType {
 	commercialProperties: Record<string, unknown>;
 }
 
+type DCRFrontType = {
+	pressedPage: DCRPressedPageType;
+	nav: CAPINavType;
+	editionId: Edition;
+	webTitle: string;
+	config: FrontConfigType;
+};
+
 type PressedPageType = {
 	id: string;
 	seoData: SeoDataType;
 	frontProperties: FrontPropertiesType;
-	collections: PressedCollectionType[];
+	collections: CollectionType[];
+};
+
+type DCRPressedPageType = {
+	id: string;
+	seoData: SeoDataType;
+	frontProperties: FrontPropertiesType;
+	collections: DCRCollectionType[];
 };
 
 type SeoDataType = {
@@ -547,7 +562,7 @@ type FrontPropertiesType = {
 	commercial: Record<string, unknown>;
 };
 
-type CollectionType =
+type ContainerType =
 	| 'dynamic/fast'
 	| 'dynamic/package'
 	| 'dynamic/slow'
@@ -571,7 +586,7 @@ type CollectionType =
 	| 'nav/media-list'
 	| 'news/most-popular';
 
-type CollectionCard = {
+type FrontCard = {
 	properties: {
 		isBreaking: boolean;
 		showMainVideo: boolean;
@@ -588,7 +603,7 @@ type CollectionCard = {
 							source: string;
 							photographer?: string;
 							isMaster?: string;
-							altText: string;
+							altText?: string;
 							height: string;
 							credit: string;
 							mediaId: string;
@@ -632,6 +647,22 @@ type CollectionCard = {
 		isComment: boolean;
 		isGallery: boolean;
 		isAudio: boolean;
+		kicker?: {
+			type: string;
+			item?: {
+				properties: {
+					kickerText: string;
+				};
+			};
+		};
+		seriesOrBlogKicker?: {
+			properties: {
+				kickerText: string;
+			};
+			name: string;
+			url: string;
+			id: string;
+		};
 		headline: string;
 		url: string;
 		hasMainVideoElement: boolean;
@@ -671,16 +702,26 @@ type CollectionCard = {
 	type: string;
 };
 
-type PressedCollectionType = {
+type DCRFrontCard = {
+	format: ArticleFormat;
+	isLiveBlog: boolean;
+	url: string;
+	headline: string;
+	webPublicationDate?: string;
+	image?: string;
+	kickerText?: string;
+};
+
+type CollectionType = {
 	id: string;
 	displayName: string;
-	curated: CollectionCard[];
-	backfill: CollectionCard[];
-	treats: CollectionCard[];
+	curated: FrontCard[];
+	backfill: FrontCard[];
+	treats: FrontCard[];
 	lastUpdate?: number;
 	href?: string;
 	groups?: string[];
-	collectionType: CollectionType;
+	collectionType: ContainerType;
 	uneditable: boolean;
 	showTags: boolean;
 	showSections: boolean;
@@ -690,7 +731,7 @@ type PressedCollectionType = {
 	config: {
 		displayName: string;
 		metadata?: { type: string }[];
-		collectionType: CollectionType;
+		collectionType: ContainerType;
 		href?: string;
 		groups?: string[];
 		uneditable: boolean;
@@ -705,6 +746,14 @@ type PressedCollectionType = {
 		platform: string;
 	};
 	hasMore: boolean;
+};
+
+type DCRCollectionType = {
+	id: string;
+	displayName: string;
+	curated: DCRFrontCard[];
+	backfill: DCRFrontCard[];
+	treats: DCRFrontCard[];
 };
 
 type FrontConfigType = {
@@ -1057,7 +1106,7 @@ interface BaseTrailType {
 	url: string;
 	headline: string;
 	isLiveBlog: boolean;
-	webPublicationDate: string;
+	webPublicationDate?: string;
 	image?: string;
 	carouselImages?: CarouselImagesMap;
 	avatarUrl?: string;

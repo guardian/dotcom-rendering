@@ -11,7 +11,7 @@ import { escapeData } from '../../lib/escapeData';
 import { makeFrontWindowGuardian } from '../../model/window-guardian';
 
 interface Props {
-	front: FrontType;
+	front: DCRFrontType;
 	NAV: NavType;
 }
 

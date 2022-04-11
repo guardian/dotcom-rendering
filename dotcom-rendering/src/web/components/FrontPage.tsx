@@ -9,7 +9,7 @@ import { CoreVitals } from './CoreVitals.importable';
 import { FrontLayout } from '../layouts/FrontLayout';
 
 type Props = {
-	front: FrontType;
+	front: DCRFrontType;
 	NAV: NavType;
 };
 
