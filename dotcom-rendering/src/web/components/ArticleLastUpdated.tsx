@@ -6,14 +6,14 @@ import { PulsingDot } from './PulsingDot.importable';
 import { Island } from './Island';
 
 const lastUpdatedStyles = (palette: Palette) => css`
-	${textSans.xxsmall()}
+	${textSans.small()}
 	padding-bottom: 0.125rem;
 	padding-top: 0.125rem;
 	color: ${palette.text.standfirst};
 `;
 
 const livePulseIconStyles = css`
-	${textSans.xxsmall({ fontWeight: 'bold' })}
+	${textSans.small({ fontWeight: 'bold' })}
 `;
 
 type Props = {

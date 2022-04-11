@@ -1,9 +1,12 @@
 import { css } from '@emotion/react';
 
-import { from, until } from '@guardian/source-foundations';
+import { from, textSans, until } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import { Badge } from './Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
+import { Island } from './Island';
+import { PulsingDot } from './PulsingDot.importable';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
@@ -16,7 +19,7 @@ type Props = {
 
 const sectionStyles = css`
 	padding-top: 8px;
-	display: flex;
+	display: inline-flex;
 	flex-direction: row;
 	${from.leftCol} {
 		flex-direction: column;
@@ -56,6 +59,14 @@ const immersiveMargins = css`
 	}
 `;
 
+const livePulseIconStyles = css`
+	${textSans.xxsmall({ fontWeight: 'bold' })}
+	padding-top: 0.25em;
+	${from.desktop} {
+		display: none;
+	}
+`;
+
 export const ArticleTitle = ({
 	format,
 	tags,
@@ -63,29 +74,49 @@ export const ArticleTitle = ({
 	sectionUrl,
 	guardianBaseURL,
 	badge,
-}: Props) => (
-	<div css={[sectionStyles, badge && badgeContainer]}>
-		{badge && format.display !== ArticleDisplay.Immersive && (
-			<div css={titleBadgeWrapper}>
-				<Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
+}: Props) => {
+	const palette = decidePalette(format);
+	return (
+		<div css={[sectionStyles, badge && badgeContainer]}>
+			{format.design === ArticleDesign.LiveBlog && (
+				<span
+					css={[
+						livePulseIconStyles,
+						css`
+							color: ${palette.text.seriesTitle};
+						`,
+					]}
+				>
+					<Island deferUntil="idle">
+						<PulsingDot />
+					</Island>
+				</span>
+			)}
+			{badge && format.display !== ArticleDisplay.Immersive && (
+				<div css={titleBadgeWrapper}>
+					<Badge
+						imageUrl={badge.imageUrl}
+						seriesTag={badge.seriesTag}
+					/>
+				</div>
+			)}
+			<div
+				css={[
+					badge && marginTop,
+					format.display === ArticleDisplay.Immersive &&
+						format.design !== ArticleDesign.PrintShop &&
+						immersiveMargins,
+				]}
+			>
+				<SeriesSectionLink
+					format={format}
+					tags={tags}
+					sectionLabel={sectionLabel}
+					sectionUrl={sectionUrl}
+					guardianBaseURL={guardianBaseURL}
+					badge={badge}
+				/>
 			</div>
-		)}
-		<div
-			css={[
-				badge && marginTop,
-				format.display === ArticleDisplay.Immersive &&
-					format.design !== ArticleDesign.PrintShop &&
-					immersiveMargins,
-			]}
-		>
-			<SeriesSectionLink
-				format={format}
-				tags={tags}
-				sectionLabel={sectionLabel}
-				sectionUrl={sectionUrl}
-				guardianBaseURL={guardianBaseURL}
-				badge={badge}
-			/>
 		</div>
-	</div>
-);
+	);
+};

@@ -1,17 +1,23 @@
 import { css, keyframes } from '@emotion/react';
 
 import { storage } from '@guardian/libs';
+import { until } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 
 const dotStyles = (colour?: string) => css`
 	color: ${colour && colour};
+	vertical-align: middle;
 	:before {
 		border-radius: 62.5rem;
 		display: inline-block;
 		position: relative;
 		background-color: currentColor;
-		width: 0.75em;
-		height: 0.75em;
+		width: 0.917em;
+		height: 0.917em;
+		${until.desktop} {
+			width: 1.084em;
+			height: 1.084em;
+		}
 		content: '';
 		margin-right: 0.1875rem;
 		vertical-align: initial;
