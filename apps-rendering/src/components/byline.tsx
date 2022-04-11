@@ -6,6 +6,7 @@ import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
+	brandAlt,
 	from,
 	headline,
 	labs,
@@ -17,7 +18,7 @@ import type { Option } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { getHref } from 'renderer';
-import { darkModeCss } from 'styles';
+import { articleWidthStyles, darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
@@ -79,6 +80,29 @@ const commentStyles = (kicker: string): SerializedStyles => css`
 	${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
 `;
 
+const interviewStyles = (format: ArticleFormat): SerializedStyles => css`
+${articleWidthStyles};
+${format.theme === ArticleSpecial.Labs
+	? textSans.large({ lineHeight: 'regular' })
+	: headline.xxsmall({
+			fontWeight: 'regular',
+			lineHeight: 'loose',
+	  })}
+font-style: italic;
+background-color: ${brandAlt[400]};
+box-shadow: 4px 0 0 ${brandAlt[400]},
+	-6px 0 0 ${brandAlt[400]};
+display: inline-block;
+box-decoration-break: clone;
+
+a {
+	color: inherit;
+	text-decoration: none;
+	:hover {
+		text-decoration: underline;
+	}
+}
+`;
 const commentAnchorStyles = (
 	kicker: string,
 	inverted: string,
@@ -90,6 +114,15 @@ const commentAnchorStyles = (
         color: ${inverted};
     `}
 `;
+
+const interviewAnchorStyles = (
+	kicker: string
+): SerializedStyles => css`
+	color: ${kicker};
+	text-decoration: none;
+
+`;
+
 
 const labsStyles = css`
 	${textSans.medium({ lineHeight: 'regular', fontStyle: 'italic' })}
@@ -142,6 +175,8 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return commentStyles(bylineLeftColumn);
+		case ArticleDesign.Interview:
+			return interviewStyles(format);
 		default:
 			return styles(bylineLeftColumn);
 	}
@@ -171,6 +206,8 @@ const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return commentAnchorStyles(kicker, inverted);
+		case ArticleDesign.Interview:
+			return interviewAnchorStyles(kicker);
 
 		default:
 			return anchorStyles(kicker, inverted);
@@ -198,23 +235,29 @@ const toReact = (format: ArticleFormat) => {
 	};
 };
 
-const renderText = (
+export const renderText = (
 	format: ArticleFormat,
 	byline: DocumentFragment,
 ): ReactNode =>
 	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
 
-const Byline: FC<Props> = ({ bylineHtml, ...format }) =>
-	pipe(
-		bylineHtml,
-		map((byline) => (
-			<address css={getStyles(format)}>
-				{renderText(format, byline)}
-			</address>
-		)),
-		withDefault<ReactElement | null>(null),
-	);
+const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return null;
+		default:
+			return pipe(
+				bylineHtml,
+				map((byline) => (
+					<address css={getStyles(format)}>
+						{renderText(format, byline)}
+					</address>
+				)),
+				withDefault<ReactElement | null>(null),
+			);
+	}
 
+	}
 // ----- Exports ----- //
 
 export default Byline;

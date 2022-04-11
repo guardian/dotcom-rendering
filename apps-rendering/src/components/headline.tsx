@@ -17,11 +17,14 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { map, Option, withDefault } from '@guardian/types';
 import StarRating from 'components/starRating';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
+import { pipe } from 'lib';
 import type { ReactElement } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
+import { renderText } from './byline';
 
 // ----- Component ----- //
 
@@ -29,15 +32,26 @@ interface Props {
 	item: Item;
 }
 
-const styles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.medium()}
-	${headlineTextColour(format)}
+const styles = (format: ArticleFormat): SerializedStyles => {
+	const baseStyles = css`
+		${headline.medium()}
+		${headlineTextColour(format)}
     ${headlineBackgroundColour(format)}
-    padding-bottom: ${remSpace[6]};
 	margin: 0;
 
-	${articleWidthStyles}
-`;
+		${articleWidthStyles}
+	`;
+
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return baseStyles;
+		default:
+			return css`
+				${baseStyles}
+				padding-bottom: ${remSpace[6]};
+			`;
+	}
+};
 
 const immersiveStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
@@ -191,9 +205,7 @@ const headlineTagStyles = (format: ArticleFormat) => css`
 const invertedStyles = (format: ArticleFormat) => css`
 	position: relative;
 	white-space: pre-wrap;
-	padding: 0 ${remSpace[1]} ${remSpace[1]} ${remSpace[1]};
-	box-shadow: -6px 0 0 ${background.headline(format)};
-	/* Box decoration is required to push the box shadow out on Firefox */
+	padding: 0 ${remSpace[1]};
 	box-decoration-break: clone;
 `;
 
@@ -220,20 +232,21 @@ export const HeadlineTag = ({
 
 const HeadlineByline = ({
 	format,
-	byline,
+	bylineHtml,
 }: {
 	format: ArticleFormat;
-	byline: String;
+	bylineHtml: Option<DocumentFragment>;
 }) => {
-	console.log({ byline });
-	switch (format.design) {
-		case ArticleDesign.Interview:
-			return <div>{byline}</div>;
-		default:
-			return null;
-	}
+	return pipe(
+		bylineHtml,
+		map((byline) => (
+			<address css={getStyles(format)}>
+				{renderText(format, byline)}
+			</address>
+		)),
+		withDefault<ReactElement | null>(null),
+	);
 };
-
 const Headline = ({ item }: Props): ReactElement => {
 	const format = {
 		design: item.design,
@@ -250,7 +263,14 @@ const Headline = ({ item }: Props): ReactElement => {
 							{item.headline}
 						</span>
 					</h1>
-					<HeadlineByline format={format} byline={item.byline} />
+					<HeadlineByline
+						bylineHtml={item.bylineHtml}
+						format={{
+							theme: item.theme,
+							design: item.design,
+							display: item.display,
+						}}
+					/>
 				</>
 			);
 		default:
