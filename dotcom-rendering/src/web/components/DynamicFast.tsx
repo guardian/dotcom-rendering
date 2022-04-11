@@ -133,7 +133,7 @@ export const DynamicFast = ({ trails }: Props) => {
 												linkTo={card.url}
 												format={card.format}
 												headlineText={card.headline}
-												headlineSize="medium"
+												headlineSize="small"
 												byline={card.byline}
 												showByline={card.showByline}
 												showQuotes={
