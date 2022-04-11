@@ -515,6 +515,7 @@ interface CAPIArticleType {
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
+// FE* types are coming from Frontend
 interface FEFrontType {
 	pressedPage: FEPressedPageType;
 	nav: CAPINavType;
