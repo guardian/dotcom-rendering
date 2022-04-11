@@ -13,7 +13,7 @@ const program = TJS.getProgramFromFiles(
 
 const settings = { rejectDateType: true, required: true };
 const schema = TJS.generateSchema(program, 'CAPIArticleType', settings);
-const frontSchema = TJS.generateSchema(program, 'FrontType', settings);
+const frontSchema = TJS.generateSchema(program, 'FEFrontType', settings);
 
 fs.writeFile(
 	`${root}/src/model/json-schema.json`,
