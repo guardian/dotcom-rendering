@@ -11,6 +11,7 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { decidePalette } from '../lib/decidePalette';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { Header } from '../components/Header';
+import { DynamicFast } from '../components/DynamicFast';
 
 interface Props {
 	front: DCRFrontType;
@@ -114,8 +115,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							title={collection.displayName}
 							showTopBorder={index > 1}
 							sideBorders={true}
+							padContent={false}
 							centralBorder="partial"
-						/>
+						>
+							<DynamicFast trails={trails} />
+						</ContainerLayout>
 					);
 				})}
 
