@@ -1,12 +1,15 @@
 import { ArticleDesign } from '@guardian/libs';
 import { decideFormat } from '../web/lib/decideFormat';
 
-const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] => {
-	const enhanced: DCRFrontCard[] = [];
-	collections.forEach((faciaCard) => {
-		if (faciaCard.format) {
+const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] =>
+	collections
+		.filter(
+			(card: FEFrontCard): card is FEFrontCard & { format: CAPIFormat } =>
+				!!card.format,
+		)
+		.map((faciaCard) => {
 			const format = decideFormat(faciaCard.format);
-			enhanced.push({
+			return {
 				format,
 				isLiveBlog: format.design === ArticleDesign.LiveBlog,
 				url: faciaCard.header.url,
@@ -20,11 +23,8 @@ const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] => {
 					?.allImages[0].url,
 				kickerText:
 					faciaCard.header.kicker?.item?.properties.kickerText,
-			});
-		}
-	});
-	return enhanced;
-};
+			};
+		});
 
 export const enhanceCollections = (
 	collections: FECollectionType[],
