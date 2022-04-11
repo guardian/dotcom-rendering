@@ -2,7 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background, border, text } from '@guardian/common-rendering/src/editorialPalette';
+import {
+	background,
+	border,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -11,8 +14,8 @@ import {
 	headline,
 	neutral,
 	remSpace,
-	space,
 	textSans,
+	until,
 } from '@guardian/source-foundations';
 import StarRating from 'components/starRating';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
@@ -90,6 +93,15 @@ const featureStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
 `;
 
+const interviewStyles = css`
+	${headline.medium({ fontWeight: 'bold' })}
+	line-height: 42px;
+	${until.tablet} {
+		${headline.small({ fontWeight: 'bold' })};
+		line-height: 35px;
+	}
+`;
+
 const commentStyles = css`
 	${headline.medium({ fontWeight: 'light' })}
 	padding-bottom: ${remSpace[1]};
@@ -138,6 +150,8 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 			);
 		case ArticleDesign.Feature:
 			return css(styles(format), featureStyles, fontSizeRestriction);
+		case ArticleDesign.Interview:
+			return css(styles(format), interviewStyles, fontSizeRestriction);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
@@ -162,24 +176,22 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 // );
 
 const headlineTagWrapper = css`
-	margin-left: 6px;
-	margin-top: 6px;
+	${articleWidthStyles}
 `;
 
 const headlineTagStyles = (format: ArticleFormat) => css`
 	background-color: ${background.headlineTag(format)};
 	color: ${neutral[100]};
 	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
-	box-shadow: 0.25rem 0 0 ${background.headlineTag(format)}, -0.375rem 0 0 ${background.headlineTag(format)};
 	display: inline-block;
 	box-decoration-break: clone;
+	padding: 0 ${remSpace[1]};
 `;
 
 const invertedStyles = (format: ArticleFormat) => css`
 	position: relative;
 	white-space: pre-wrap;
-	padding-bottom: ${space[1]}px;
-	padding-right: ${space[1]}px;
+	padding: 0 ${remSpace[1]} ${remSpace[1]} ${remSpace[1]};
 	box-shadow: -6px 0 0 ${background.headline(format)};
 	/* Box decoration is required to push the box shadow out on Firefox */
 	box-decoration-break: clone;
@@ -187,12 +199,12 @@ const invertedStyles = (format: ArticleFormat) => css`
 
 const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
-	color: ${neutral[100]};
+		color: ${neutral[100]};
 		background-color: ${neutral[0]};
 		${invertedStyles(format)};
 		display: inline;
-		`;
-}
+	`;
+};
 
 export const HeadlineTag = ({
 	tagText,
@@ -206,29 +218,51 @@ export const HeadlineTag = ({
 	</div>
 );
 
+const HeadlineByline = ({
+	format,
+	byline,
+}: {
+	format: ArticleFormat;
+	byline: String;
+}) => {
+	console.log({ byline });
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return <div>{byline}</div>;
+		default:
+			return null;
+	}
+};
 
 const Headline = ({ item }: Props): ReactElement => {
-	const format = { design: item.design, theme: item.theme, display: item.display};
+	const format = {
+		design: item.design,
+		theme: item.theme,
+		display: item.display,
+	};
 	switch (item.design) {
 		case ArticleDesign.Interview:
 			return (
 				<>
-			<h1 css={getStyles(item)}>
-			<HeadlineTag tagText="Interview" format={format} />
-
-				<span css={headlineStyles(format)}>{item.headline}</span>
-				<StarRating item={item} />
-			</h1>
-			</>);
+					<HeadlineTag tagText="Interview" format={format} />
+					<h1 css={getStyles(item)}>
+						<span css={headlineStyles(format)}>
+							{item.headline}
+						</span>
+					</h1>
+					<HeadlineByline format={format} byline={item.byline} />
+				</>
+			);
 		default:
-			console.log(item.design)
-			return (<h1 css={getStyles(item)}>
-			<span>{item.headline}</span>
-			<StarRating item={item} />
-		</h1>)
+			console.log(item.design);
+			return (
+				<h1 css={getStyles(item)}>
+					<span>{item.headline}</span>
+					<StarRating item={item} />
+				</h1>
+			);
 	}
-
-}
+};
 
 // ----- Exports ----- //
 
