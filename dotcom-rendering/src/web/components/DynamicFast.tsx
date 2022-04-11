@@ -122,7 +122,7 @@ export const DynamicFast = ({ trails }: Props) => {
 					<UL direction="column">
 						{groupOne.map((card) => {
 							return (
-								<LI bottomMargin={true} stretch={true}>
+								<LI stretch={true}>
 									<Card
 										linkTo={card.url}
 										format={card.format}
@@ -166,7 +166,7 @@ export const DynamicFast = ({ trails }: Props) => {
 					<UL direction="column">
 						{groupTwo.map((card) => {
 							return (
-								<LI bottomMargin={true} stretch={true}>
+								<LI stretch={true}>
 									<Card
 										linkTo={card.url}
 										format={card.format}
