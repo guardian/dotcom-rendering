@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useDocumentVisibilityState(): VisibilityState {
+export function useDocumentVisibilityState(): DocumentVisibilityState {
 	const [visibilityState, setVisibilityState] = useState(
 		document.visibilityState,
 	);
