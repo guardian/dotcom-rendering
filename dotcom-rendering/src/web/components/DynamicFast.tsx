@@ -121,9 +121,9 @@ export const DynamicFast = ({ trails }: Props) => {
 							padSides={true}
 						>
 							<UL direction="column">
-								{group.map((card, groupIndex) => {
+								{group.map((card, cardIndex) => {
 									const isLastCard =
-										groupIndex === group.length - 1;
+										cardIndex === group.length - 1;
 									return (
 										<LI
 											stretch={true}
