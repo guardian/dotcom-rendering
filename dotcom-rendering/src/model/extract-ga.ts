@@ -1,7 +1,7 @@
 // All GA fields should  fall back to default values -
 
 const filterTags = (
-	tags: CAPIType['tags'],
+	tags: CAPIArticleType['tags'],
 	tagType: 'Contributor' | 'Keyword' | 'Tone' | 'Series', // Let’s make a decision to keep this tag getter small and well defined, we don't really want to use tags
 ): TagType['id'] | '' => {
 	const tagArr = tags.filter((tag) => tag.type === tagType);
@@ -17,7 +17,7 @@ const filterTags = (
 
 // Annoyingly we ping GA with commissioningdesk as the title of the tag, not the id so handle that separately
 const getCommissioningDesk = (
-	tags: CAPIType['tags'],
+	tags: CAPIArticleType['tags'],
 ): TagType['title'] | '' => {
 	const tag = tags.find((thisTag) =>
 		thisTag.id.includes('tracking/commissioningdesk'),
@@ -46,7 +46,7 @@ const formatStringForGa = (string: string): string =>
 	string.toLowerCase().split(' ').join('');
 
 // we should not bring down the website if a trackable field is missing!
-export const extract = (data: CAPIType): GADataType => ({
+export const extract = (data: CAPIArticleType): GADataType => ({
 	webTitle: data.webTitle,
 	pillar: convertToLegacyPillar(data.format.theme),
 	section: data.sectionName || '',

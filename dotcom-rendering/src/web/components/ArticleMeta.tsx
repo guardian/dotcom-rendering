@@ -397,7 +397,6 @@ export const ArticleMeta = ({
 						<ShareIcons
 							pageId={pageId}
 							webTitle={webTitle}
-							palette={palette}
 							format={format}
 							displayIcons={['facebook', 'twitter', 'email']}
 							size="medium"

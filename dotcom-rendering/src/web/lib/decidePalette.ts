@@ -88,6 +88,7 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 						case ArticlePillar.News:
 							return news[600];
 						case ArticlePillar.Sport:
+							return BLACK;
 						case ArticlePillar.Lifestyle:
 						case ArticlePillar.Culture:
 						case ArticlePillar.Opinion:
@@ -553,6 +554,15 @@ const backgroundHeadline = (format: ArticleFormat): string => {
 			return 'transparent';
 		default:
 			return 'transparent';
+	}
+};
+
+const backgroundAgeWarning = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return backgroundArticle(format);
+		default:
+			return backgroundHeadline(format);
 	}
 };
 
@@ -1096,6 +1106,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			matchNav: backgroundMatchNav(),
 			analysisUnderline: backgroundUnderline(format),
 			matchStats: backgroundMatchStats(format),
+			ageWarning: backgroundAgeWarning(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

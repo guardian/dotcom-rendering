@@ -37,7 +37,7 @@ import { Island } from '../components/Island';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 
 interface Props {
-	CAPI: CAPIType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -130,12 +130,12 @@ const Renderer: React.FC<{
 	return <div css={adStyles}>{output}</div>;
 };
 
-const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
+const NavHeader = ({ CAPIArticle, NAV, format }: Props): JSX.Element => {
 	// Typically immersives use the slim nav, but this switch is used to force
 	// the full nav - typically during special events such as Project 200, or
 	// the Euros. The motivation is to better onboard new visitors; interactives
 	// often reach readers who are less familiar with the Guardian.
-	const isSlimNav = !CAPI.config.switches.interactiveFullHeaderSwitch;
+	const isSlimNav = !CAPIArticle.config.switches.interactiveFullHeaderSwitch;
 
 	if (isSlimNav) {
 		return (
@@ -157,13 +157,13 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 						format={{
 							display: format.display,
 							design: format.design,
-							theme: getCurrentPillar(CAPI),
+							theme: getCurrentPillar(CAPIArticle),
 						}}
 						nav={NAV}
 						subscribeUrl={
-							CAPI.nav.readerRevenueLinks.header.subscribe
+							CAPIArticle.nav.readerRevenueLinks.header.subscribe
 						}
-						edition={CAPI.editionId}
+						edition={CAPIArticle.editionId}
 					/>
 				</ElementContainer>
 			</div>
@@ -188,8 +188,8 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 						element="aside"
 					>
 						<HeaderAdSlot
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
+							isAdFreeUser={CAPIArticle.isAdFreeUser}
+							shouldHideAds={CAPIArticle.shouldHideAds}
 							display={format.display}
 						/>
 					</ElementContainer>
@@ -206,17 +206,25 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 						element="header"
 					>
 						<Header
-							edition={CAPI.editionId}
-							idUrl={CAPI.config.idUrl}
-							mmaUrl={CAPI.config.mmaUrl}
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							isAnniversary={
-								CAPI.config.switches.anniversaryHeaderSvg
+							edition={CAPIArticle.editionId}
+							idUrl={CAPIArticle.config.idUrl}
+							mmaUrl={CAPIArticle.config.mmaUrl}
+							supporterCTA={
+								CAPIArticle.nav.readerRevenueLinks.header
+									.supporter
 							}
-							urls={CAPI.nav.readerRevenueLinks.header}
-							remoteHeader={CAPI.config.switches.remoteHeader}
+							discussionApiUrl={
+								CAPIArticle.config.discussionApiUrl
+							}
+							isAnniversary={
+								CAPIArticle.config.switches.anniversaryHeaderSvg
+							}
+							urls={CAPIArticle.nav.readerRevenueLinks.header}
+							remoteHeader={
+								CAPIArticle.config.switches.remoteHeader
+							}
 							contributionsServiceUrl={
-								CAPI.contributionsServiceUrl
+								CAPIArticle.contributionsServiceUrl
 							}
 						/>
 					</ElementContainer>
@@ -235,11 +243,13 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 					format={{
 						display: ArticleDisplay.Standard,
 						design: format.design,
-						theme: getCurrentPillar(CAPI),
+						theme: getCurrentPillar(CAPIArticle),
 					}}
 					nav={NAV}
-					subscribeUrl={CAPI.nav.readerRevenueLinks.header.subscribe}
-					edition={CAPI.editionId}
+					subscribeUrl={
+						CAPIArticle.nav.readerRevenueLinks.header.subscribe
+					}
+					edition={CAPIArticle.editionId}
 				/>
 			</ElementContainer>
 
@@ -263,19 +273,19 @@ const NavHeader = ({ CAPI, NAV, format }: Props): JSX.Element => {
 };
 
 export const FullPageInteractiveLayout = ({
-	CAPI,
+	CAPIArticle,
 	NAV,
 	format,
 }: Props): JSX.Element => {
 	const {
 		config: { host },
-	} = CAPI;
+	} = CAPIArticle;
 
 	const palette = decidePalette(format);
 
 	return (
 		<>
-			{CAPI.isLegacyInteractive && (
+			{CAPIArticle.isLegacyInteractive && (
 				<Global styles={interactiveGlobalStyles} />
 			)}
 			<header
@@ -283,7 +293,11 @@ export const FullPageInteractiveLayout = ({
 					background-color: ${palette.background.article};
 				`}
 			>
-				<NavHeader CAPI={CAPI} NAV={NAV} format={format} />
+				<NavHeader
+					CAPIArticle={CAPIArticle}
+					NAV={NAV}
+					format={format}
+				/>
 
 				{format.theme === ArticleSpecial.Labs && (
 					<Stuck>
@@ -313,14 +327,18 @@ export const FullPageInteractiveLayout = ({
 				<article>
 					<Renderer
 						format={format}
-						elements={CAPI.blocks[0] ? CAPI.blocks[0].elements : []}
+						elements={
+							CAPIArticle.blocks[0]
+								? CAPIArticle.blocks[0].elements
+								: []
+						}
 						host={host}
-						pageId={CAPI.pageId}
-						webTitle={CAPI.webTitle}
-						ajaxUrl={CAPI.config.ajaxUrl}
-						switches={CAPI.config.switches}
-						isAdFreeUser={CAPI.isAdFreeUser}
-						isSensitive={CAPI.config.isSensitive}
+						pageId={CAPIArticle.pageId}
+						webTitle={CAPIArticle.webTitle}
+						ajaxUrl={CAPIArticle.config.ajaxUrl}
+						switches={CAPIArticle.config.switches}
+						isAdFreeUser={CAPIArticle.isAdFreeUser}
+						isSensitive={CAPIArticle.config.isSensitive}
 					/>
 				</article>
 			</ElementContainer>
@@ -349,29 +367,38 @@ export const FullPageInteractiveLayout = ({
 				element="footer"
 			>
 				<Footer
-					pageFooter={CAPI.pageFooter}
+					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPIArticle.nav.readerRevenueLinks.header}
+					edition={CAPIArticle.editionId}
+					contributionsServiceUrl={
+						CAPIArticle.contributionsServiceUrl
+					}
 				/>
 			</ElementContainer>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						contentType={CAPI.contentType}
-						contributionsServiceUrl={CAPI.contributionsServiceUrl}
-						idApiUrl={CAPI.config.idApiUrl}
-						isMinuteArticle={CAPI.pageType.isMinuteArticle}
-						isPaidContent={CAPI.pageType.isPaidContent}
-						isPreview={!!CAPI.config.isPreview}
-						isSensitive={CAPI.config.isSensitive}
-						keywordsId={CAPI.config.keywordIds}
-						pageId={CAPI.pageId}
-						section={CAPI.config.section}
-						sectionName={CAPI.sectionName}
-						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-						switches={CAPI.config.switches}
-						tags={CAPI.tags}
+						contentType={CAPIArticle.contentType}
+						contributionsServiceUrl={
+							CAPIArticle.contributionsServiceUrl
+						}
+						idApiUrl={CAPIArticle.config.idApiUrl}
+						isMinuteArticle={CAPIArticle.pageType.isMinuteArticle}
+						isPaidContent={CAPIArticle.pageType.isPaidContent}
+						isPreview={!!CAPIArticle.config.isPreview}
+						isSensitive={CAPIArticle.config.isSensitive}
+						keywordsId={CAPIArticle.config.keywordIds}
+						pageId={CAPIArticle.pageId}
+						section={CAPIArticle.config.section}
+						sectionName={CAPIArticle.sectionName}
+						shouldHideReaderRevenue={
+							CAPIArticle.shouldHideReaderRevenue
+						}
+						switches={CAPIArticle.config.switches}
+						tags={CAPIArticle.tags}
 					/>
 				</Island>
 			</BannerWrapper>

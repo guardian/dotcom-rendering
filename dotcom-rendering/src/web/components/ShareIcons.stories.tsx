@@ -1,7 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
-import { decidePalette } from '../lib/decidePalette';
-
 import { ShareIcons } from './ShareIcons';
 
 export default {
@@ -28,7 +26,6 @@ export const Medium = () => {
 				'twitter',
 				'whatsApp',
 			]}
-			palette={decidePalette(defaultFormat)}
 			format={defaultFormat}
 			size="medium"
 			context="LiveBlock"
@@ -50,7 +47,6 @@ export const Small = () => {
 				'twitter',
 				'whatsApp',
 			]}
-			palette={decidePalette(defaultFormat)}
 			format={defaultFormat}
 			size="small"
 			context="LiveBlock"

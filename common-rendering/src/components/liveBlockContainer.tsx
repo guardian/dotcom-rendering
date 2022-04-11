@@ -8,8 +8,9 @@ import {
 } from '@guardian/source-foundations';
 import { FirstPublished } from './FirstPublished';
 import { darkModeCss } from '../lib';
-import { border } from '../editorialPalette';
+import { background, border } from '../editorialPalette';
 import { ArticleFormat } from '@guardian/libs';
+
 
 type BlockContributor = {
 	name: string;
@@ -22,12 +23,13 @@ type Props = {
 	format: ArticleFormat;
 	blockTitle?: string;
 	blockFirstPublished?: number;
+	blockFirstPublishedDisplay?: string;
 	blockLink: string;
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
-	avatarBackgroundColor?: string;
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
+	isOriginalPinnedPost?: boolean;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -64,11 +66,11 @@ const BlockTitle = ({ title }: { title: string }) => {
 const BlockByline = ({
 	name,
 	imageUrl,
-	avatarBackgroundColor,
+	format,
 }: {
 	name: string;
+	format: ArticleFormat;
 	imageUrl?: string;
-	avatarBackgroundColor?: string;
 }) => {
 	return (
 		<div
@@ -79,16 +81,16 @@ const BlockByline = ({
 			`}
 		>
 			{imageUrl && (
-				<div style={{ width: '36px', height: '36px' }}>
+				<div style={{ width: '2.25rem', height: '2.25rem' }}>
 					<img
 						src={imageUrl}
 						alt={name}
 						css={css`
 							border-radius: 100%;
 							object-fit: cover;
-							height: 100%;
-							width: 100%;
-							background-color: ${avatarBackgroundColor};
+							height: 2.25rem;
+							width: 2.25rem;
+							background-color: ${background.avatar(format)};
 						`}
 					/>
 				</div>
@@ -113,12 +115,13 @@ const LiveBlockContainer = ({
 	format,
 	blockTitle,
 	blockFirstPublished,
+	blockFirstPublishedDisplay,
 	blockLink,
 	isLiveUpdate,
 	contributors,
-	avatarBackgroundColor,
 	isPinnedPost,
 	supportsDarkMode,
+	isOriginalPinnedPost = false,
 }: Props) => {
 	return (
 		<article
@@ -157,9 +160,12 @@ const LiveBlockContainer = ({
 				{blockFirstPublished && (
 					<FirstPublished
 						firstPublished={blockFirstPublished}
+						firstPublishedDisplay={blockFirstPublishedDisplay}
 						blockLink={blockLink}
 						isPinnedPost={isPinnedPost}
 						supportsDarkMode={supportsDarkMode}
+						isOriginalPinnedPost={isOriginalPinnedPost}
+						format={format}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}
@@ -168,7 +174,7 @@ const LiveBlockContainer = ({
 						<BlockByline
 							name={contributor.name}
 							imageUrl={contributor.imageUrl}
-							avatarBackgroundColor={avatarBackgroundColor}
+							format={format}
 						/>
 					))}
 			</Header>

@@ -72,48 +72,26 @@ const wrapperStyle = (length: number) => css`
 const isLastCardShowing = (index: number, totalStories: number) =>
 	index >= totalStories - 4;
 
-const containerMargins = (format: ArticleFormat) => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.DeadBlog: {
-			return css`
-				margin-top: 6px;
-				margin-bottom: 24px;
+const containerMargins = css`
+	margin-top: 6px;
+	margin-bottom: 24px;
 
-				margin-left: 0px;
-				margin-right: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
 
-				${from.leftCol} {
-					margin-left: -1px;
-					margin-right: -10px;
-					margin-top: 6px;
-				}
-			`;
-		}
-		default: {
-			return css`
-				margin-top: 6px;
-				margin-bottom: 24px;
-
-				margin-left: 0px;
-				margin-right: 0px;
-
-				${from.tablet} {
-					/* Shrink the container to remove the leading and
+	${from.tablet} {
+		/* Shrink the container to remove the leading and
        				   trailing side margins from the list of cards */
-					margin-left: -10px;
-					margin-right: -10px;
-				}
-
-				${from.leftCol} {
-					margin-left: -1px;
-					margin-right: -10px;
-					margin-top: 6px;
-				}
-			`;
-		}
+		margin-left: -10px;
+		margin-right: -10px;
 	}
-};
+
+	${from.leftCol} {
+		margin-left: -1px;
+		margin-right: -10px;
+		margin-top: 6px;
+	}
+`;
 
 const containerStyles = css`
 	display: flex;
@@ -635,7 +613,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</button>
 			</div>
 			<div
-				css={[containerStyles, containerMargins(format)]}
+				css={[containerStyles, containerMargins]}
 				data-component={ophanComponentName}
 				data-link={formatAttrString(heading)}
 			>

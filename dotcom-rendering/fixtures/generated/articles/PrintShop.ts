@@ -11,7 +11,7 @@
  *    gen-fixtures.ts directly.
  */
 
-export const PrintShop: CAPIType = {
+export const PrintShop: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '',
 	subMetaSectionLinks: [

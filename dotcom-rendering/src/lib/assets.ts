@@ -17,8 +17,8 @@ try {
 /**
  * Decides the url to use for fetching assets
  *
- * @param stage {'PROD' | 'CODE' | undefined} the environment code is executing in
- * @returns
+ * @param {'PROD' | 'CODE' | undefined} stage the environment code is executing in
+ * @returns {string}
  */
 const decideAssetOrigin = (stage: string | undefined): string => {
 	switch (stage?.toUpperCase()) {

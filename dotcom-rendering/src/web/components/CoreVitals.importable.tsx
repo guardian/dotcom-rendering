@@ -6,6 +6,8 @@ import {
 } from '@guardian/libs';
 import { useAB } from '../lib/useAB';
 import { tests } from '../experiments/ab-tests';
+import { commercialGptLazyLoad } from '../experiments/tests/commercial-gpt-lazy-load';
+import { spacefinderOkrMegaTest } from '../experiments/tests/spacefinder-okr-mega-test';
 
 export const CoreVitals = () => {
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
@@ -27,6 +29,8 @@ export const CoreVitals = () => {
 
 	const testsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
+		spacefinderOkrMegaTest,
+		commercialGptLazyLoad,
 	];
 
 	const ABTestAPI = useAB();

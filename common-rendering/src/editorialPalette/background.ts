@@ -5,6 +5,7 @@ import {
 	ArticleDisplay,
 	ArticleDesign,
 	ArticlePillar,
+	ArticleSpecial,
 } from '@guardian/libs';
 import {
 	neutral,
@@ -13,6 +14,8 @@ import {
 	lifestyle,
 	opinion,
 	news,
+	specialReport,
+	labs,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -166,11 +169,42 @@ const articleContentDark = ({ design }: ArticleFormat): Colour => {
 	}
 };
 
+const avatar = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticleSpecial.SpecialReport:
+			return specialReport[800];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.News:
+			return news[500];
+	}
+};
+const keyEvents = (_format: ArticleFormat): Colour => neutral[100];
+
+const keyEventsWide = (_format: ArticleFormat): Colour => neutral[97];
+
+const keyEventsDark = (_format: ArticleFormat): Colour => neutral[10];
+
+const keyEventsWideDark = articleContentDark;
+
 // ----- API ----- //
 
 const background = {
+	avatar,
 	headline,
 	headlineDark,
+	keyEvents,
+	keyEventsWide,
+	keyEventsDark,
+	keyEventsWideDark,
 	standfirst,
 	standfirstDark,
 	articleContentDark,

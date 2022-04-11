@@ -107,6 +107,7 @@ export const LiveBlogRenderer = ({
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
 							isPinnedPost={false}
+							pinnedPostId={pinnedPost?.id}
 						/>
 					</>
 				);

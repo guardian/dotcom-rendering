@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { Global, css } from '@emotion/react';
 import { focusHalo, brandAlt, neutral } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
+import { filterABTestSwitches } from '../../model/enhance-switches';
 import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { CommercialMetrics } from './CommercialMetrics.importable';
@@ -14,20 +15,21 @@ import { CoreVitals } from './CoreVitals.importable';
 import { SetABTests } from './SetABTests.importable';
 
 type Props = {
-	CAPI: CAPIType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
 
 /**
  * @description
- * Page is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
+ * Article is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
  *
- * @param {CAPIType} CAPI - The article JSON data
- * @param {NAVType} NAV - The article JSON data
- * @param {ArticleFormat} format - The format model for the article
+ * @param {Props} props
+ * @param {CAPIArticleType} props.CAPIArticle - The article JSON data
+ * @param {NAVType} props.NAV - The article JSON data
+ * @param {ArticleFormat} props.format - The format model for the article
  * */
-export const Page = ({ CAPI, NAV, format }: Props) => {
+export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -57,28 +59,32 @@ export const Page = ({ CAPI, NAV, format }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<CommercialMetrics
-					enabled={CAPI.config.switches.commercialMetrics}
+					enabled={CAPIArticle.config.switches.commercialMetrics}
 				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<CoreVitals />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
-				<BrazeMessaging idApiUrl={CAPI.config.idApiUrl} />
+				<BrazeMessaging idApiUrl={CAPIArticle.config.idApiUrl} />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<ReaderRevenueDev
-					shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
+					shouldHideReaderRevenue={
+						CAPIArticle.shouldHideReaderRevenue
+					}
 				/>
 			</Island>
 			<Island clientOnly={true}>
 				<SetABTests
-					abTestSwitches={CAPI.config.switches}
-					pageIsSensitive={CAPI.config.isSensitive}
-					isDev={!!CAPI.config.isDev}
+					abTestSwitches={filterABTestSwitches(
+						CAPIArticle.config.switches,
+					)}
+					pageIsSensitive={CAPIArticle.config.isSensitive}
+					isDev={!!CAPIArticle.config.isDev}
 				/>
 			</Island>
-			<DecideLayout CAPI={CAPI} NAV={NAV} format={format} />
+			<DecideLayout CAPIArticle={CAPIArticle} NAV={NAV} format={format} />
 		</StrictMode>
 	);
 };

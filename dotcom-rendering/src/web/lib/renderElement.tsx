@@ -135,6 +135,11 @@ export const renderElement = ({
 	isSensitive,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
+
+	const isLiveBlog =
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
+
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
@@ -717,6 +722,7 @@ export const renderElement = ({
 						adTargeting={adTargeting}
 						isMainMedia={isMainMedia}
 						id={element.id}
+						elementId={element.elementId}
 						assetId={element.assetId}
 						expired={element.expired}
 						overrideImage={element.overrideImage}
@@ -725,7 +731,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
-						stickyVideos={switches.stickyVideos}
+						stickyVideos={isLiveBlog && switches.stickyVideos}
 					/>
 				</Island>,
 			];

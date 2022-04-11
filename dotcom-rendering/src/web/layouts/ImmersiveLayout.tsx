@@ -171,7 +171,7 @@ const stretchLines = css`
 	}
 `;
 interface Props {
-	CAPI: CAPIType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -190,45 +190,54 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	return caption.join(' ');
 };
 
-export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
+export const ImmersiveLayout = ({
+	CAPIArticle,
+	NAV,
+	format,
+}: Props): JSX.Element => {
 	const {
 		config: { isPaidContent, host },
-	} = CAPI;
+	} = CAPIArticle;
 
 	const adTargeting: AdTargeting = buildAdTargeting({
-		isAdFreeUser: CAPI.isAdFreeUser,
-		isSensitive: CAPI.config.isSensitive,
-		videoDuration: CAPI.config.videoDuration,
-		edition: CAPI.config.edition,
-		section: CAPI.config.section,
-		sharedAdTargeting: CAPI.config.sharedAdTargeting,
-		adUnit: CAPI.config.adUnit,
+		isAdFreeUser: CAPIArticle.isAdFreeUser,
+		isSensitive: CAPIArticle.config.isSensitive,
+		videoDuration: CAPIArticle.config.videoDuration,
+		edition: CAPIArticle.config.edition,
+		section: CAPIArticle.config.section,
+		sharedAdTargeting: CAPIArticle.config.sharedAdTargeting,
+		adUnit: CAPIArticle.config.adUnit,
 	});
 
 	const showBodyEndSlot =
-		parse(CAPI.slotMachineFlags || '').showBodyEnd ||
-		CAPI.config.switches.slotBodyEnd;
+		parse(CAPIArticle.slotMachineFlags || '').showBodyEnd ||
+		CAPIArticle.config.switches.slotBodyEnd;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
-	// 2) Otherwise, ensure slot only renders if `CAPI.config.shouldHideReaderRevenue` equals false.
+	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
 
-	const seriesTag = CAPI.tags.find(
+	const seriesTag = CAPIArticle.tags.find(
 		(tag) => tag.type === 'Series' || tag.type === 'Blog',
 	);
-	const showOnwardsLower = seriesTag && CAPI.hasStoryPackage;
+	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
 
-	const showComments = CAPI.isCommentable;
+	const showComments = CAPIArticle.isCommentable;
 
-	const mainMedia = CAPI.mainMediaElements[0] as ImageBlockElement;
+	const mainMedia = CAPIArticle.mainMediaElements[0] as ImageBlockElement;
 	const captionText = decideCaption(mainMedia);
-	const { branding } = CAPI.commercialProperties[CAPI.editionId];
+	const { branding } =
+		CAPIArticle.commercialProperties[CAPIArticle.editionId];
 
-	const contributionsServiceUrl = getContributionsServiceUrl(CAPI);
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
 	return (
 		<>
-			<ImmersiveHeader CAPI={CAPI} NAV={NAV} format={format} />
+			<ImmersiveHeader
+				CAPIArticle={CAPIArticle}
+				NAV={NAV}
+				format={format}
+			/>
 			<main>
 				<ElementContainer
 					showTopBorder={false}
@@ -270,13 +279,15 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 									>
 										<ArticleTitle
 											format={format}
-											tags={CAPI.tags}
-											sectionLabel={CAPI.sectionLabel}
-											sectionUrl={CAPI.sectionUrl}
-											guardianBaseURL={
-												CAPI.guardianBaseURL
+											tags={CAPIArticle.tags}
+											sectionLabel={
+												CAPIArticle.sectionLabel
 											}
-											badge={CAPI.badge}
+											sectionUrl={CAPIArticle.sectionUrl}
+											guardianBaseURL={
+												CAPIArticle.guardianBaseURL
+											}
+											badge={CAPIArticle.badge}
 										/>
 									</div>
 								)}
@@ -288,9 +299,18 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 									<div css={maxWidth}>
 										<ArticleHeadline
 											format={format}
-											headlineString={CAPI.headline}
-											tags={CAPI.tags}
-											byline={CAPI.author.byline}
+											headlineString={
+												CAPIArticle.headline
+											}
+											tags={CAPIArticle.tags}
+											byline={CAPIArticle.author.byline}
+											webPublicationDateDeprecated={
+												CAPIArticle.webPublicationDateDeprecated
+											}
+											hasStarRating={
+												!!CAPIArticle.starRating ||
+												CAPIArticle.starRating === 0
+											}
 										/>
 									</div>
 								)}
@@ -299,15 +319,17 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 						<GridItem area="standfirst">
 							<Standfirst
 								format={format}
-								standfirst={CAPI.standfirst}
+								standfirst={CAPIArticle.standfirst}
 							/>
 						</GridItem>
 						<GridItem area="byline">
 							<HeadlineByline
 								format={format}
-								tags={CAPI.tags}
+								tags={CAPIArticle.tags}
 								byline={
-									CAPI.author.byline ? CAPI.author.byline : ''
+									CAPIArticle.author.byline
+										? CAPIArticle.author.byline
+										: ''
 								}
 							/>
 						</GridItem>
@@ -341,24 +363,25 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 								<ArticleMeta
 									branding={branding}
 									format={format}
-									pageId={CAPI.pageId}
-									webTitle={CAPI.webTitle}
-									author={CAPI.author}
-									tags={CAPI.tags}
+									pageId={CAPIArticle.pageId}
+									webTitle={CAPIArticle.webTitle}
+									author={CAPIArticle.author}
+									tags={CAPIArticle.tags}
 									primaryDateline={
-										CAPI.webPublicationDateDisplay
+										CAPIArticle.webPublicationDateDisplay
 									}
 									secondaryDateline={
-										CAPI.webPublicationSecondaryDateDisplay
+										CAPIArticle.webPublicationSecondaryDateDisplay
 									}
-									isCommentable={CAPI.isCommentable}
+									isCommentable={CAPIArticle.isCommentable}
 									discussionApiUrl={
-										CAPI.config.discussionApiUrl
+										CAPIArticle.config.discussionApiUrl
 									}
-									shortUrlId={CAPI.config.shortUrlId}
-									ajaxUrl={CAPI.config.ajaxUrl}
+									shortUrlId={CAPIArticle.config.shortUrlId}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									showShareCount={
-										CAPI.config.switches.serverShareCounts
+										CAPIArticle.config.switches
+											.serverShareCounts
 									}
 								/>
 							</div>
@@ -367,53 +390,67 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
-									blocks={CAPI.blocks}
+									blocks={CAPIArticle.blocks}
 									adTargeting={adTargeting}
 									host={host}
-									pageId={CAPI.pageId}
-									webTitle={CAPI.webTitle}
-									ajaxUrl={CAPI.config.ajaxUrl}
-									switches={CAPI.config.switches}
-									isSensitive={CAPI.config.isSensitive}
-									isAdFreeUser={CAPI.isAdFreeUser}
-									section={CAPI.config.section}
+									pageId={CAPIArticle.pageId}
+									webTitle={CAPIArticle.webTitle}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+									switches={CAPIArticle.config.switches}
+									isSensitive={CAPIArticle.config.isSensitive}
+									isAdFreeUser={CAPIArticle.isAdFreeUser}
+									section={CAPIArticle.config.section}
 									shouldHideReaderRevenue={
-										CAPI.shouldHideReaderRevenue
+										CAPIArticle.shouldHideReaderRevenue
 									}
-									tags={CAPI.tags}
-									isPaidContent={!!CAPI.config.isPaidContent}
+									tags={CAPIArticle.tags}
+									isPaidContent={
+										!!CAPIArticle.config.isPaidContent
+									}
 									contributionsServiceUrl={
 										contributionsServiceUrl
 									}
-									contentType={CAPI.contentType}
-									sectionName={CAPI.sectionName || ''}
-									isPreview={CAPI.config.isPreview}
-									idUrl={CAPI.config.idUrl || ''}
-									isDev={!!CAPI.config.isDev}
+									contentType={CAPIArticle.contentType}
+									sectionName={CAPIArticle.sectionName || ''}
+									isPreview={CAPIArticle.config.isPreview}
+									idUrl={CAPIArticle.config.idUrl || ''}
+									isDev={!!CAPIArticle.config.isDev}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
 										<SlotBodyEnd
-											contentType={CAPI.contentType}
+											contentType={
+												CAPIArticle.contentType
+											}
 											contributionsServiceUrl={
 												contributionsServiceUrl
 											}
-											idApiUrl={CAPI.config.idApiUrl}
+											idApiUrl={
+												CAPIArticle.config.idApiUrl
+											}
 											isMinuteArticle={
-												CAPI.pageType.isMinuteArticle
+												CAPIArticle.pageType
+													.isMinuteArticle
 											}
 											isPaidContent={
-												CAPI.pageType.isPaidContent
+												CAPIArticle.pageType
+													.isPaidContent
 											}
-											keywordsId={CAPI.config.keywordIds}
-											pageId={CAPI.pageId}
-											sectionId={CAPI.config.section}
-											sectionName={CAPI.sectionName}
+											keywordsId={
+												CAPIArticle.config.keywordIds
+											}
+											pageId={CAPIArticle.pageId}
+											sectionId={
+												CAPIArticle.config.section
+											}
+											sectionName={
+												CAPIArticle.sectionName
+											}
 											shouldHideReaderRevenue={
-												CAPI.shouldHideReaderRevenue
+												CAPIArticle.shouldHideReaderRevenue
 											}
-											stage={CAPI.config.stage}
-											tags={CAPI.tags}
+											stage={CAPIArticle.config.stage}
+											tags={CAPIArticle.tags}
 										/>
 									</Island>
 								)}
@@ -421,18 +458,18 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 								<SubMeta
 									format={format}
 									subMetaKeywordLinks={
-										CAPI.subMetaKeywordLinks
+										CAPIArticle.subMetaKeywordLinks
 									}
 									subMetaSectionLinks={
-										CAPI.subMetaSectionLinks
+										CAPIArticle.subMetaSectionLinks
 									}
-									pageId={CAPI.pageId}
-									webUrl={CAPI.webURL}
-									webTitle={CAPI.webTitle}
+									pageId={CAPIArticle.pageId}
+									webUrl={CAPIArticle.webURL}
+									webTitle={CAPIArticle.webTitle}
 									showBottomSocialButtons={
-										CAPI.showBottomSocialButtons
+										CAPIArticle.showBottomSocialButtons
 									}
-									badge={CAPI.badge}
+									badge={CAPIArticle.badge}
 								/>
 							</ArticleContainer>
 						</GridItem>
@@ -465,10 +502,10 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 													position="right"
 													display={format.display}
 													shouldHideReaderRevenue={
-														CAPI.shouldHideReaderRevenue
+														CAPIArticle.shouldHideReaderRevenue
 													}
 													isPaidContent={
-														CAPI.pageType
+														CAPIArticle.pageType
 															.isPaidContent
 													}
 												/>
@@ -496,20 +533,24 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 
 				<Island clientOnly={true} deferUntil="visible">
 					<OnwardsUpper
-						ajaxUrl={CAPI.config.ajaxUrl}
-						hasRelated={CAPI.hasRelated}
-						hasStoryPackage={CAPI.hasStoryPackage}
-						isAdFreeUser={CAPI.isAdFreeUser}
-						pageId={CAPI.pageId}
-						isPaidContent={CAPI.config.isPaidContent || false}
-						showRelatedContent={CAPI.config.showRelatedContent}
-						keywordIds={CAPI.config.keywordIds}
-						contentType={CAPI.contentType}
-						tags={CAPI.tags}
+						ajaxUrl={CAPIArticle.config.ajaxUrl}
+						hasRelated={CAPIArticle.hasRelated}
+						hasStoryPackage={CAPIArticle.hasStoryPackage}
+						isAdFreeUser={CAPIArticle.isAdFreeUser}
+						pageId={CAPIArticle.pageId}
+						isPaidContent={
+							CAPIArticle.config.isPaidContent || false
+						}
+						showRelatedContent={
+							CAPIArticle.config.showRelatedContent
+						}
+						keywordIds={CAPIArticle.config.keywordIds}
+						contentType={CAPIArticle.contentType}
+						tags={CAPIArticle.tags}
 						format={format}
 						pillar={format.theme}
-						edition={CAPI.editionId}
-						shortUrlId={CAPI.config.shortUrlId}
+						edition={CAPIArticle.editionId}
+						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
 
@@ -520,9 +561,9 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 					>
 						<Island clientOnly={true} deferUntil="visible">
 							<OnwardsLower
-								ajaxUrl={CAPI.config.ajaxUrl}
-								hasStoryPackage={CAPI.hasStoryPackage}
-								tags={CAPI.tags}
+								ajaxUrl={CAPIArticle.config.ajaxUrl}
+								hasStoryPackage={CAPIArticle.hasStoryPackage}
+								tags={CAPIArticle.tags}
 								format={format}
 							/>
 						</Island>
@@ -532,18 +573,21 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">
 						<DiscussionLayout
-							discussionApiUrl={CAPI.config.discussionApiUrl}
-							shortUrlId={CAPI.config.shortUrlId}
+							discussionApiUrl={
+								CAPIArticle.config.discussionApiUrl
+							}
+							shortUrlId={CAPIArticle.config.shortUrlId}
 							format={format}
-							discussionD2Uid={CAPI.config.discussionD2Uid}
+							discussionD2Uid={CAPIArticle.config.discussionD2Uid}
 							discussionApiClientHeader={
-								CAPI.config.discussionApiClientHeader
+								CAPIArticle.config.discussionApiClientHeader
 							}
 							enableDiscussionSwitch={
-								CAPI.config.switches.enableDiscussionSwitch
+								CAPIArticle.config.switches
+									.enableDiscussionSwitch
 							}
-							isAdFreeUser={CAPI.isAdFreeUser}
-							shouldHideAds={CAPI.shouldHideAds}
+							isAdFreeUser={CAPIArticle.isAdFreeUser}
+							shouldHideAds={CAPIArticle.shouldHideAds}
 						/>
 					</ElementContainer>
 				)}
@@ -552,8 +596,8 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 					<ElementContainer data-print-layout="hide" element="aside">
 						<MostViewedFooterLayout
 							format={format}
-							sectionName={CAPI.sectionName}
-							ajaxUrl={CAPI.config.ajaxUrl}
+							sectionName={CAPIArticle.sectionName}
+							ajaxUrl={CAPIArticle.config.ajaxUrl}
 						/>
 					</ElementContainer>
 				)}
@@ -589,29 +633,36 @@ export const ImmersiveLayout = ({ CAPI, NAV, format }: Props): JSX.Element => {
 				element="footer"
 			>
 				<Footer
-					pageFooter={CAPI.pageFooter}
+					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPIArticle.nav.readerRevenueLinks.header}
+					edition={CAPIArticle.editionId}
+					contributionsServiceUrl={
+						CAPIArticle.contributionsServiceUrl
+					}
 				/>
 			</ElementContainer>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
-						contentType={CAPI.contentType}
+						contentType={CAPIArticle.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}
-						idApiUrl={CAPI.config.idApiUrl}
-						isMinuteArticle={CAPI.pageType.isMinuteArticle}
-						isPaidContent={CAPI.pageType.isPaidContent}
-						isPreview={!!CAPI.config.isPreview}
-						isSensitive={CAPI.config.isSensitive}
-						keywordsId={CAPI.config.keywordIds}
-						pageId={CAPI.pageId}
-						section={CAPI.config.section}
-						sectionName={CAPI.sectionName}
-						shouldHideReaderRevenue={CAPI.shouldHideReaderRevenue}
-						switches={CAPI.config.switches}
-						tags={CAPI.tags}
+						idApiUrl={CAPIArticle.config.idApiUrl}
+						isMinuteArticle={CAPIArticle.pageType.isMinuteArticle}
+						isPaidContent={CAPIArticle.pageType.isPaidContent}
+						isPreview={!!CAPIArticle.config.isPreview}
+						isSensitive={CAPIArticle.config.isSensitive}
+						keywordsId={CAPIArticle.config.keywordIds}
+						pageId={CAPIArticle.pageId}
+						section={CAPIArticle.config.section}
+						sectionName={CAPIArticle.sectionName}
+						shouldHideReaderRevenue={
+							CAPIArticle.shouldHideReaderRevenue
+						}
+						switches={CAPIArticle.config.switches}
+						tags={CAPIArticle.tags}
 					/>
 				</Island>
 			</BannerWrapper>

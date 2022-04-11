@@ -1,27 +1,36 @@
 import type express from 'express';
 import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
 import { extractNAV } from '../../model/extract-nav';
-import { document } from './document';
+import { articleToHtml } from './articleToHtml';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
-import { validateAsCAPIType } from '../../model/validate';
+import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import { extract as extractGA } from '../../model/extract-ga';
 import { blocksToHtml } from './blocksToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
+import { frontToHtml } from './frontToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceCAPIType = (body: Record<string, unknown>): CAPIType => {
+const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
-	const CAPI: CAPIType = {
+	const CAPIArticle: CAPIArticleType = {
 		...data,
 		blocks: enhanceBlocks(data.blocks, data.format),
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
 	};
-	return CAPI;
+	return CAPIArticle;
+};
+
+const enhanceFront = (body: Record<string, unknown>): FrontType => {
+	const enhanced = validateAsFrontType(body);
+	const front: FrontType = {
+		...enhanced,
+	};
+	return front;
 };
 
 export const renderArticle = (
@@ -29,15 +38,15 @@ export const renderArticle = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = enhanceCAPIType(body);
-		const resp = document({
+		const CAPIArticle = enhanceCAPIType(body);
+		const resp = articleToHtml({
 			data: {
-				CAPI,
+				CAPIArticle,
 				site: 'frontend',
 				page: 'Article',
-				NAV: extractNAV(CAPI.nav),
-				GA: extractGA(CAPI),
-				linkedData: CAPI.linkedData,
+				NAV: extractNAV(CAPIArticle.nav),
+				GA: extractGA(CAPIArticle),
+				linkedData: CAPIArticle.linkedData,
 			},
 		});
 
@@ -53,15 +62,15 @@ export const renderArticleJson = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = enhanceCAPIType(body);
+		const CAPIArticle = enhanceCAPIType(body);
 		const resp = {
 			data: {
-				CAPI,
+				CAPIArticle,
 				site: 'frontend',
 				page: 'Article',
-				NAV: extractNAV(CAPI.nav),
-				GA: extractGA(CAPI),
-				linkedData: CAPI.linkedData,
+				NAV: extractNAV(CAPIArticle.nav),
+				GA: extractGA(CAPIArticle),
+				linkedData: CAPIArticle.linkedData,
 			},
 		};
 
@@ -85,15 +94,15 @@ export const renderInteractive = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPI = enhanceCAPIType(body);
-		const resp = document({
+		const CAPIArticle = enhanceCAPIType(body);
+		const resp = articleToHtml({
 			data: {
-				CAPI,
+				CAPIArticle,
 				site: 'frontend',
 				page: 'Interactive',
-				NAV: extractNAV(CAPI.nav),
-				GA: extractGA(CAPI),
-				linkedData: CAPI.linkedData,
+				NAV: extractNAV(CAPIArticle.nav),
+				GA: extractGA(CAPIArticle),
+				linkedData: CAPIArticle.linkedData,
 			},
 		});
 
@@ -164,6 +173,23 @@ export const renderKeyEvents = (
 			filterKeyEvents,
 		});
 
+		res.status(200).send(html);
+	} catch (e) {
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
+	}
+};
+
+export const renderFront = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
+	try {
+		const front = enhanceFront(body);
+		const html = frontToHtml({
+			front,
+			NAV: extractNAV(front.nav),
+		});
 		res.status(200).send(html);
 	} catch (e) {
 		const message = e instanceof Error ? e.stack : 'Unknown Error';

@@ -10,15 +10,17 @@ import LinkedInIcon from '../../static/icons/linked-in.svg';
 import WhatsAppIcon from '../../static/icons/whatsapp.svg';
 import MessengerIcon from '../../static/icons/messenger.svg';
 
+import { decidePalette } from '../lib/decidePalette';
 import { Hide } from './Hide';
 
 type Context = 'ArticleMeta' | 'LiveBlock' | 'SubMeta';
+type ShareIconSize = 'small' | 'medium';
 
 type Props = {
 	pageId: string;
+	blockId?: string;
 	webTitle: string;
 	displayIcons: SharePlatform[];
-	palette: Palette;
 	format: ArticleFormat;
 	size: ShareIconSize;
 	context: Context;
@@ -42,11 +44,8 @@ const topMarginStlyes = css`
 	margin-top: 3px;
 `;
 
-const decideIconColor = (
-	palette: Palette,
-	format: ArticleFormat,
-	context: Context,
-) => {
+const decideIconColor = (format: ArticleFormat, context: Context) => {
+	const palette = decidePalette(format);
 	if (format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta') {
 		return css`
 			fill: ${palette.fill.shareIconGrayBackground};
@@ -68,11 +67,8 @@ const decideIconColor = (
 	`;
 };
 
-const decideIconColorOnHover = (
-	palette: Palette,
-	format: ArticleFormat,
-	context: Context,
-) => {
+const decideIconColorOnHover = (format: ArticleFormat, context: Context) => {
+	const palette = decidePalette(format);
 	if (
 		(format.design === ArticleDesign.LiveBlog ||
 			format.design === ArticleDesign.DeadBlog) &&
@@ -129,30 +125,54 @@ const iconStyles = ({
 	}
 `;
 
-const encodeUrl = (pageId: string): string => {
-	return encodeURIComponent(`https://www.theguardian.com/${pageId}`);
+const getUrl = ({
+	pageId,
+	CMP,
+	blockId,
+}: {
+	pageId: string;
+	CMP?: string;
+	blockId?: string;
+}) => {
+	const searchParams = new URLSearchParams({});
+	if (CMP) searchParams.append('CMP', CMP);
+	if (blockId) searchParams.append('page', `with:block-${blockId}`);
+
+	const blockHash = blockId ? `#block-${blockId}` : '';
+	return new URL(
+		`${pageId}?${searchParams}${blockHash}`,
+		'https://www.theguardian.com/',
+	).href;
 };
 
-const encodeTitle = (webTitle: string): string => {
-	return encodeURIComponent(webTitle.replace(/Leave.EU/gi, 'Leave. EU'));
-};
+const encodeTitle = (webTitle: string): string =>
+	webTitle.replace(/Leave.EU/gi, 'Leave. EU');
+
 export const ShareIcons = ({
 	pageId,
+	blockId,
 	webTitle,
 	displayIcons,
-	palette,
 	format,
 	size,
 	context,
 }: Props) => {
+	const palette = decidePalette(format);
 	return (
 		<ul css={ulStyles}>
 			{displayIcons.includes('facebook') && (
 				<li css={liStyles(size)} key="facebook">
 					<a
-						href={`https://www.facebook.com/dialog/share?app_id=180444840287&href=${encodeUrl(
-							pageId,
-						)}&CMP=share_btn_fb`}
+						href={`https://www.facebook.com/dialog/share?${new URLSearchParams(
+							{
+								app_id: '180444840287',
+								href: getUrl({
+									pageId,
+									blockId,
+									CMP: 'share_btn_fb',
+								}),
+							},
+						).toString()}`}
 						role="button"
 						aria-label="Share on Facebook"
 						target="_blank"
@@ -162,12 +182,8 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								decideIconColor(palette, format, context),
-								decideIconColorOnHover(
-									palette,
-									format,
-									context,
-								),
+								decideIconColor(format, context),
+								decideIconColorOnHover(format, context),
 							]}
 						>
 							<FacebookIcon />
@@ -179,9 +195,16 @@ export const ShareIcons = ({
 			{displayIcons.includes('twitter') && (
 				<li css={liStyles(size)} key="twitter">
 					<a
-						href={`https://twitter.com/intent/tweet?text=${encodeTitle(
-							webTitle,
-						)}&url=${encodeUrl(pageId)}&CMP=share_btn_tw`}
+						href={`https://twitter.com/intent/tweet?${new URLSearchParams(
+							{
+								text: encodeTitle(webTitle),
+								url: getUrl({
+									pageId,
+									blockId,
+									CMP: 'share_btn_tw',
+								}),
+							},
+						)}`}
 						role="button"
 						aria-label="Share on Twitter"
 						target="_blank"
@@ -191,12 +214,8 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								decideIconColor(palette, format, context),
-								decideIconColorOnHover(
-									palette,
-									format,
-									context,
-								),
+								decideIconColor(format, context),
+								decideIconColorOnHover(format, context),
 							]}
 						>
 							<TwitterIconPadded />
@@ -208,9 +227,14 @@ export const ShareIcons = ({
 			{displayIcons.includes('email') && (
 				<li css={liStyles(size)} key="email">
 					<a
-						href={`mailto:?subject=${encodeTitle(
-							webTitle,
-						)}&body=${encodeUrl(pageId)}&CMP=share_btn_link`}
+						href={`mailto:?${new URLSearchParams({
+							subject: encodeTitle(webTitle),
+							body: getUrl({
+								pageId,
+								blockId,
+								CMP: 'share_btn_link',
+							}),
+						})}`}
 						role="button"
 						aria-label="Share via Email"
 						target="_blank"
@@ -219,12 +243,8 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								decideIconColor(palette, format, context),
-								decideIconColorOnHover(
-									palette,
-									format,
-									context,
-								),
+								decideIconColor(format, context),
+								decideIconColorOnHover(format, context),
 							]}
 						>
 							<EmailIcon />
@@ -236,9 +256,14 @@ export const ShareIcons = ({
 			{displayIcons.includes('linkedIn') && (
 				<li css={liStyles(size)} key="linkedIn">
 					<a
-						href={`http://www.linkedin.com/shareArticle?title=${encodeTitle(
-							webTitle,
-						)}&mini=true&url=${encodeUrl(pageId)}`}
+						href={`http://www.linkedin.com/shareArticle?=${new URLSearchParams(
+							{
+								title: encodeTitle(webTitle),
+								mini: 'true',
+								// TODO?: add &CMP=share_btn_*
+								url: getUrl({ pageId, blockId }),
+							},
+						)}`}
 						role="button"
 						aria-label="Share on LinkedIn"
 						target="_blank"
@@ -248,12 +273,8 @@ export const ShareIcons = ({
 						<span
 							css={[
 								iconStyles({ palette, size }),
-								decideIconColor(palette, format, context),
-								decideIconColorOnHover(
-									palette,
-									format,
-									context,
-								),
+								decideIconColor(format, context),
+								decideIconColorOnHover(format, context),
 							]}
 						>
 							<LinkedInIcon />
@@ -266,9 +287,16 @@ export const ShareIcons = ({
 				<Hide when="above" breakpoint="phablet" el="li" key="whatsApp">
 					<span css={[liStyles(size), topMarginStlyes]}>
 						<a
-							href={`whatsapp://send?text="${encodeTitle(
-								webTitle,
-							)}" ${encodeUrl(pageId)}&CMP=share_btn_wa`}
+							href={`whatsapp://send?${new URLSearchParams({
+								text: [
+									encodeTitle(webTitle),
+									getUrl({
+										pageId,
+										blockId,
+										CMP: 'share_btn_wa',
+									}),
+								].join(' '),
+							})}`}
 							role="button"
 							aria-label="Share on WhatsApp"
 							target="_blank"
@@ -278,12 +306,8 @@ export const ShareIcons = ({
 							<span
 								css={[
 									iconStyles({ palette, size }),
-									decideIconColor(palette, format, context),
-									decideIconColorOnHover(
-										palette,
-										format,
-										context,
-									),
+									decideIconColor(format, context),
+									decideIconColorOnHover(format, context),
 								]}
 							>
 								<WhatsAppIcon />
@@ -297,11 +321,16 @@ export const ShareIcons = ({
 				<Hide when="above" breakpoint="phablet" el="li" key="messenger">
 					<span css={[liStyles(size), topMarginStlyes]}>
 						<a
-							href={`fb-messenger://share?link=${encodeUrl(
-								pageId,
-							)}&app_id=180444840287&CMP=share_btn_me`}
+							href={`fb-messenger://share?${new URLSearchParams({
+								link: getUrl({
+									pageId,
+									blockId,
+									CMP: 'share_btn_me',
+								}),
+								app_id: '180444840287',
+							})}`}
 							role="button"
-							aria-label="Share on Messenger>"
+							aria-label="Share on Messenger"
 							target="_blank"
 							rel="noreferrer"
 							data-ignore="global-link-styling"
@@ -309,12 +338,8 @@ export const ShareIcons = ({
 							<span
 								css={[
 									iconStyles({ palette, size }),
-									decideIconColor(palette, format, context),
-									decideIconColorOnHover(
-										palette,
-										format,
-										context,
-									),
+									decideIconColor(format, context),
+									decideIconColorOnHover(format, context),
 								]}
 							>
 								<MessengerIcon />
