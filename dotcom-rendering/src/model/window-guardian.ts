@@ -133,7 +133,7 @@ export const makeWindowGuardian = (
 const makeFrontWindowGuardianConfig = ({
 	config,
 	editionId,
-}: FrontType): WindowGuardianFrontConfig => {
+}: DCRFrontType): WindowGuardianFrontConfig => {
 	return {
 		// This indicates to the client side code that we are running a dotcom-rendering rendered page.
 		isDotcomRendering: true,
@@ -169,7 +169,7 @@ const makeFrontWindowGuardianConfig = ({
 };
 
 export const makeFrontWindowGuardian = (
-	front: FrontType,
+	front: DCRFrontType,
 ): {
 	// The 'config' attribute is derived from DCRServerDocumentData and contains
 	// all the data that, for legacy reasons, for instance compatibility

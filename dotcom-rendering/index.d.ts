@@ -515,8 +515,9 @@ interface CAPIArticleType {
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
-interface FrontType {
-	pressedPage: PressedPageType;
+// FE* types are coming from Frontend
+interface FEFrontType {
+	pressedPage: FEPressedPageType;
 	nav: CAPINavType;
 	editionId: Edition;
 	editionLongForm: string;
@@ -524,30 +525,45 @@ interface FrontType {
 	pageId: string;
 	webTitle: string;
 	webURL: string;
-	config: FrontConfigType;
+	config: FEFrontConfigType;
 	commercialProperties: Record<string, unknown>;
 }
 
-type PressedPageType = {
-	id: string;
-	seoData: SeoDataType;
-	frontProperties: FrontPropertiesType;
-	collections: PressedCollectionType[];
+type DCRFrontType = {
+	pressedPage: DCRPressedPageType;
+	nav: CAPINavType;
+	editionId: Edition;
+	webTitle: string;
+	config: FEFrontConfigType;
 };
 
-type SeoDataType = {
+type FEPressedPageType = {
+	id: string;
+	seoData: FESeoDataType;
+	frontProperties: FEFrontPropertiesType;
+	collections: FECollectionType[];
+};
+
+type DCRPressedPageType = {
+	id: string;
+	seoData: FESeoDataType;
+	frontProperties: FEFrontPropertiesType;
+	collections: DCRCollectionType[];
+};
+
+type FESeoDataType = {
 	id: string;
 	navSection: string;
 	webTitle: string;
 	description: string;
 };
 
-type FrontPropertiesType = {
+type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
 	commercial: Record<string, unknown>;
 };
 
-type CollectionType =
+type FEContainerType =
 	| 'dynamic/fast'
 	| 'dynamic/package'
 	| 'dynamic/slow'
@@ -571,7 +587,7 @@ type CollectionType =
 	| 'nav/media-list'
 	| 'news/most-popular';
 
-type CollectionCard = {
+type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
 		showMainVideo: boolean;
@@ -588,7 +604,7 @@ type CollectionCard = {
 							source: string;
 							photographer?: string;
 							isMaster?: string;
-							altText: string;
+							altText?: string;
 							height: string;
 							credit: string;
 							mediaId: string;
@@ -632,6 +648,22 @@ type CollectionCard = {
 		isComment: boolean;
 		isGallery: boolean;
 		isAudio: boolean;
+		kicker?: {
+			type: string;
+			item?: {
+				properties: {
+					kickerText: string;
+				};
+			};
+		};
+		seriesOrBlogKicker?: {
+			properties: {
+				kickerText: string;
+			};
+			name: string;
+			url: string;
+			id: string;
+		};
 		headline: string;
 		url: string;
 		hasMainVideoElement: boolean;
@@ -671,16 +703,26 @@ type CollectionCard = {
 	type: string;
 };
 
-type PressedCollectionType = {
+type DCRFrontCard = {
+	format: ArticleFormat;
+	isLiveBlog: boolean;
+	url: string;
+	headline: string;
+	webPublicationDate?: string;
+	image?: string;
+	kickerText?: string;
+};
+
+type FECollectionType = {
 	id: string;
 	displayName: string;
-	curated: CollectionCard[];
-	backfill: CollectionCard[];
-	treats: CollectionCard[];
+	curated: FEFrontCard[];
+	backfill: FEFrontCard[];
+	treats: FEFrontCard[];
 	lastUpdate?: number;
 	href?: string;
 	groups?: string[];
-	collectionType: CollectionType;
+	collectionType: FEContainerType;
 	uneditable: boolean;
 	showTags: boolean;
 	showSections: boolean;
@@ -690,7 +732,7 @@ type PressedCollectionType = {
 	config: {
 		displayName: string;
 		metadata?: { type: string }[];
-		collectionType: CollectionType;
+		collectionType: FEContainerType;
 		href?: string;
 		groups?: string[];
 		uneditable: boolean;
@@ -707,7 +749,15 @@ type PressedCollectionType = {
 	hasMore: boolean;
 };
 
-type FrontConfigType = {
+type DCRCollectionType = {
+	id: string;
+	displayName: string;
+	curated: DCRFrontCard[];
+	backfill: DCRFrontCard[];
+	treats: DCRFrontCard[];
+};
+
+type FEFrontConfigType = {
 	avatarApiUrl: string;
 	externalEmbedHost: string;
 	ajaxUrl: string;
@@ -1055,7 +1105,7 @@ interface BaseTrailType {
 	url: string;
 	headline: string;
 	isLiveBlog: boolean;
-	webPublicationDate: string;
+	webPublicationDate?: string;
 	image?: string;
 	carouselImages?: CarouselImagesMap;
 	avatarUrl?: string;

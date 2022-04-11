@@ -128,7 +128,6 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "altText",
                                                                                             "credit",
                                                                                             "height",
                                                                                             "mediaId",
@@ -327,6 +326,67 @@
                                                 },
                                                 "isAudio": {
                                                     "type": "boolean"
+                                                },
+                                                "kicker": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        },
+                                                        "item": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "properties": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "kickerText": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "kickerText"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "properties"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "type"
+                                                    ]
+                                                },
+                                                "seriesOrBlogKicker": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "properties": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "kickerText": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "kickerText"
+                                                            ]
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "url": {
+                                                            "type": "string"
+                                                        },
+                                                        "id": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "name",
+                                                        "properties",
+                                                        "url"
+                                                    ]
                                                 },
                                                 "headline": {
                                                     "type": "string"
@@ -566,7 +626,6 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "altText",
                                                                                             "credit",
                                                                                             "height",
                                                                                             "mediaId",
@@ -765,6 +824,67 @@
                                                 },
                                                 "isAudio": {
                                                     "type": "boolean"
+                                                },
+                                                "kicker": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        },
+                                                        "item": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "properties": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "kickerText": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "kickerText"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "properties"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "type"
+                                                    ]
+                                                },
+                                                "seriesOrBlogKicker": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "properties": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "kickerText": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "kickerText"
+                                                            ]
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "url": {
+                                                            "type": "string"
+                                                        },
+                                                        "id": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "name",
+                                                        "properties",
+                                                        "url"
+                                                    ]
                                                 },
                                                 "headline": {
                                                     "type": "string"
@@ -1004,7 +1124,6 @@
                                                                                             }
                                                                                         },
                                                                                         "required": [
-                                                                                            "altText",
                                                                                             "credit",
                                                                                             "height",
                                                                                             "mediaId",
@@ -1204,6 +1323,67 @@
                                                 "isAudio": {
                                                     "type": "boolean"
                                                 },
+                                                "kicker": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        },
+                                                        "item": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "properties": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "kickerText": {
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "kickerText"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "properties"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "type"
+                                                    ]
+                                                },
+                                                "seriesOrBlogKicker": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "properties": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "kickerText": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "kickerText"
+                                                            ]
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "url": {
+                                                            "type": "string"
+                                                        },
+                                                        "id": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "name",
+                                                        "properties",
+                                                        "url"
+                                                    ]
+                                                },
                                                 "headline": {
                                                     "type": "string"
                                                 },
@@ -1383,7 +1563,7 @@
                                 }
                             },
                             "collectionType": {
-                                "$ref": "#/definitions/CollectionType"
+                                "$ref": "#/definitions/ContainerType"
                             },
                             "uneditable": {
                                 "type": "boolean"
@@ -1424,7 +1604,7 @@
                                         }
                                     },
                                     "collectionType": {
-                                        "$ref": "#/definitions/CollectionType"
+                                        "$ref": "#/definitions/ContainerType"
                                     },
                                     "href": {
                                         "type": "string"
@@ -1940,7 +2120,7 @@
             ],
             "type": "string"
         },
-        "CollectionType": {
+        "ContainerType": {
             "enum": [
                 "dynamic/fast",
                 "dynamic/package",
