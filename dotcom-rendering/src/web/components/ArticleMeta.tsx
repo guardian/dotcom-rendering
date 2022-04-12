@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 import {
 	between,
-	from,
-	until,
 	border,
+	from,
 	space,
+	until,
 } from '@guardian/source-foundations';
-import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { Contributor } from './Contributor';
@@ -38,28 +38,48 @@ type Props = {
 	showShareCount: boolean;
 };
 
-const meta = css`
-	${between.tablet.and.leftCol} {
-		order: 3;
-	}
+const meta = (format: ArticleFormat) => {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
+		return css`
+			${between.tablet.and.leftCol} {
+				order: 3;
+			}
 
-	${until.mobileLandscape} {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
+			${from.phablet} {
+				padding-left: 0px;
+				padding-right: 0px;
+			}
 
-	${from.mobileLandscape} {
-		padding-left: 20px;
-		padding-right: 20px;
-	}
+			padding-top: 2px;
+		`;
+	} else {
+		return css`
+			${between.tablet.and.leftCol} {
+				order: 3;
+			}
 
-	${from.phablet} {
-		padding-left: 0px;
-		padding-right: 0px;
-	}
+			${until.mobileLandscape} {
+				padding-left: 10px;
+				padding-right: 10px;
+			}
 
-	padding-top: 2px;
-`;
+			${from.mobileLandscape} {
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+
+			${from.phablet} {
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+
+			padding-top: 2px;
+		`;
+	}
+};
 
 const metaFlex = css`
 	margin-bottom: 6px;
@@ -328,7 +348,7 @@ export const ArticleMeta = ({
 			}
 			css={metaContainer(format)}
 		>
-			<div css={meta}>
+			<div css={meta(format)}>
 				{branding && (
 					<Island deferUntil="visible">
 						<Branding branding={branding} palette={palette} />
