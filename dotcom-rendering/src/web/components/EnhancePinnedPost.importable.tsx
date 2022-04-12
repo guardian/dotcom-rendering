@@ -45,8 +45,11 @@ function scrollOnCollapse() {
 
 export const EnhancePinnedPost = () => {
 	const [hasBeenSeen, setHasBeenSeen] = useState(false);
-	const [isInView, setNode] = useIsInView({ threshold: 0.1, repeat: true });
-	setNode(pinnedPost);
+	const [isInView] = useIsInView({
+		threshold: 0.1,
+		repeat: true,
+		node: pinnedPost ?? undefined,
+	});
 
 	const contentFitsContainer =
 		pinnedPostContent &&
