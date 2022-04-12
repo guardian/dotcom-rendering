@@ -5,7 +5,6 @@ import {
 	initCoreWebVitals,
 } from '@guardian/libs';
 import { useAB } from '../lib/useAB';
-import { tests } from '../experiments/ab-tests';
 import { commercialGptLazyLoad } from '../experiments/tests/commercial-gpt-lazy-load';
 import { spacefinderOkrMegaTest } from '../experiments/tests/spacefinder-okr-mega-test';
 
@@ -19,6 +18,20 @@ export const CoreVitals = () => {
 		window.location.hostname === 'preview.gutools.co.uk';
 	const sampling = 1 / 100;
 
+	const testsToForceMetrics: ABTest[] = [
+		/* keep array multi-line */
+		spacefinderOkrMegaTest,
+		commercialGptLazyLoad,
+	];
+
+	const ABTestAPI = useAB();
+
+	const userInTestToForceMetrics = testsToForceMetrics.some((test) =>
+		ABTestAPI?.runnableTest(test),
+	);
+
+	/* eslint-disable @typescript-eslint/no-floating-promises -- they’re async methods */
+
 	initCoreWebVitals({
 		browserId,
 		pageViewId,
@@ -27,21 +40,14 @@ export const CoreVitals = () => {
 		team: 'dotcom',
 	});
 
-	const testsToForceMetrics: ABTest[] = [
-		/* keep array multi-line */
-		spacefinderOkrMegaTest,
-		commercialGptLazyLoad,
-	];
-
-	const ABTestAPI = useAB();
-	const userInTestToForceMetrics = ABTestAPI?.allRunnableTests(tests).some(
-		(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
-	);
-
-	if (window.location.hostname === (process.env.HOSTNAME || 'localhost'))
+	if (window.location.hostname === (process.env.HOSTNAME || 'localhost')) {
 		bypassCoreWebVitalsSampling('dotcom');
-	else if (userInTestToForceMetrics)
+	}
+	if (userInTestToForceMetrics) {
 		bypassCoreWebVitalsSampling('commercial');
+	}
+
+	/* eslint-enable @typescript-eslint/no-floating-promises */
 
 	// don’t render anything
 	return null;
