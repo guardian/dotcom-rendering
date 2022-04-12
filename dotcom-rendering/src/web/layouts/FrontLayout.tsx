@@ -9,9 +9,8 @@ import { Nav } from '../components/Nav/Nav';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { decidePalette } from '../lib/decidePalette';
-import { ContainerLayout } from '../components/ContainerLayout';
 import { Header } from '../components/Header';
-import { DynamicFast } from '../components/DynamicFast';
+import { renderFrontContainer } from '../lib/renderContainer';
 
 interface Props {
 	front: DCRFrontType;
@@ -106,21 +105,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<main>
 				{front.pressedPage.collections.map((collection, index) => {
-					// TODO: We also need to support backfill and treats containers
-					const trails = collection.curated;
-					// There are some containers that have zero trails. We don't want to render these
-					if (trails.length === 0) return null;
-					return (
-						<ContainerLayout
-							title={collection.displayName}
-							showTopBorder={index > 1}
-							sideBorders={true}
-							padContent={false}
-							centralBorder="partial"
-						>
-							<DynamicFast trails={trails} />
-						</ContainerLayout>
-					);
+					return renderFrontContainer({
+						collection,
+						showTopBorder: index > 1,
+					});
 				})}
 
 				{!isPaidContent && (
