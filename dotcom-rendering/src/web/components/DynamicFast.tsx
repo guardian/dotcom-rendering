@@ -17,8 +17,7 @@ export const DynamicFast = ({ trails }: Props) => {
 	// - The middle column has exactly three items
 	// - The last column has exactly three items
 	const third = trails[2];
-	const groupOne = trails.slice(3, 6);
-	const groupTwo = trails.slice(7, 12);
+	const groups = [trails.slice(3, 6), trails.slice(7, 12)];
 
 	return (
 		<>
@@ -85,8 +84,8 @@ export const DynamicFast = ({ trails }: Props) => {
 					/>
 				</LI>
 			</UL>
-			<UL direction="row">
-				<LI percentage="50%" padSides={true}>
+			<UL direction="row" bottomMargin={true}>
+				<LI percentage="50%" padSides={true} bottomMargin={false}>
 					<Card
 						linkTo={third.url}
 						format={third.format}
@@ -113,94 +112,61 @@ export const DynamicFast = ({ trails }: Props) => {
 						branding={third.branding}
 					/>
 				</LI>
-				<LI
-					percentage="25%"
-					showDivider={true}
-					showTopMarginWhenStacked={true}
-					padSides={true}
-				>
-					<UL direction="column">
-						{groupOne.map((card) => {
-							return (
-								<LI bottomMargin={true} stretch={true}>
-									<Card
-										linkTo={card.url}
-										format={card.format}
-										headlineText={card.headline}
-										headlineSize="medium"
-										byline={card.byline}
-										showByline={card.showByline}
-										showQuotes={
-											card.format.design ===
-												ArticleDesign.Comment ||
-											card.format.design ===
-												ArticleDesign.Letter
-										}
-										webPublicationDate={
-											card.webPublicationDate
-										}
-										kickerText={card.kickerText}
-										showPulsingDot={
-											card.format.design ===
-											ArticleDesign.LiveBlog
-										}
-										showSlash={true}
-										showClock={false}
-										mediaType={card.mediaType}
-										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
-										starRating={card.starRating}
-										branding={card.branding}
-									/>
-								</LI>
-							);
-						})}
-					</UL>
-				</LI>
-				<LI
-					percentage="25%"
-					showDivider={true}
-					showTopMarginWhenStacked={true}
-					padSides={true}
-				>
-					<UL direction="column">
-						{groupTwo.map((card) => {
-							return (
-								<LI bottomMargin={true} stretch={true}>
-									<Card
-										linkTo={card.url}
-										format={card.format}
-										headlineText={card.headline}
-										headlineSize="small"
-										byline={card.byline}
-										showByline={card.showByline}
-										showQuotes={
-											card.format.design ===
-												ArticleDesign.Comment ||
-											card.format.design ===
-												ArticleDesign.Letter
-										}
-										webPublicationDate={
-											card.webPublicationDate
-										}
-										kickerText={card.kickerText}
-										showPulsingDot={
-											card.format.design ===
-											ArticleDesign.LiveBlog
-										}
-										showSlash={true}
-										showClock={false}
-										mediaType={card.mediaType}
-										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
-										starRating={card.starRating}
-										branding={card.branding}
-									/>
-								</LI>
-							);
-						})}
-					</UL>
-				</LI>
+				{groups.map((group) => {
+					return (
+						<LI
+							percentage="25%"
+							showDivider={true}
+							showTopMarginWhenStacked={true}
+							padSides={true}
+						>
+							<UL direction="column">
+								{group.map((card, cardIndex) => {
+									const isLastCard =
+										cardIndex === group.length - 1;
+									return (
+										<LI
+											stretch={true}
+											bottomMargin={!isLastCard}
+										>
+											<Card
+												linkTo={card.url}
+												format={card.format}
+												headlineText={card.headline}
+												headlineSize="small"
+												byline={card.byline}
+												showByline={card.showByline}
+												showQuotes={
+													card.format.design ===
+														ArticleDesign.Comment ||
+													card.format.design ===
+														ArticleDesign.Letter
+												}
+												webPublicationDate={
+													card.webPublicationDate
+												}
+												kickerText={card.kickerText}
+												showPulsingDot={
+													card.format.design ===
+													ArticleDesign.LiveBlog
+												}
+												showSlash={true}
+												showClock={false}
+												mediaType={card.mediaType}
+												mediaDuration={
+													card.mediaDuration
+												}
+												commentCount={card.commentCount}
+												starRating={card.starRating}
+												branding={card.branding}
+											/>
+										</LI>
+									);
+								})}
+							</UL>
+						</LI>
+					);
+				})}
 			</UL>
 		</>
 	);
