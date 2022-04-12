@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { initPerf } from '../browser/initPerf';
 import { submitComponentEvent } from '../browser/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
@@ -45,7 +45,7 @@ function scrollOnCollapse() {
 
 export const EnhancePinnedPost = () => {
 	console.log('new rendering happened');
-	const [isInView, setNode] = useIsInView({ threshold: 0.1 });
+	const [isInView, setNode] = useIsInView({ threshold: 0.1, repeat: true });
 	setNode(pinnedPost);
 
 	const contentFitsContainer =
@@ -54,7 +54,7 @@ export const EnhancePinnedPost = () => {
 
 	if (contentFitsContainer) hideShowMore();
 
-	const hasBeenSeen = useRef(false);
+	const [hasBeenSeen, setHasBeenSeen] = useState(false);
 
 	const handleClickTracking = () => {
 		if (pinnedPostCheckBox instanceof HTMLInputElement) {
@@ -96,17 +96,17 @@ export const EnhancePinnedPost = () => {
 	// and emit ophan events when the pinned post goes out of view
 	useEffect(() => {
 		console.log(`use effect called`);
-		console.log(`hasBeenSeen.current: ${hasBeenSeen.current}`);
+		console.log(`hasBeenSeen.current: ${hasBeenSeen}`);
 		console.log(`isInView: ${isInView}`);
 		if (!pinnedPost) return;
 		const pinnedPostTiming = initPerf('pinned-post-view-duration');
 
-		if (!hasBeenSeen.current && isInView) {
+		if (isInView) {
 			console.log('starting timing');
-			hasBeenSeen.current = true;
+			setHasBeenSeen(true);
 			pinnedPostTiming.clear(); // I think this will no longer be necessary
 			pinnedPostTiming.start();
-		} else if (hasBeenSeen.current) {
+		} else if (hasBeenSeen && !isInView) {
 			console.log('ending timing');
 			const timeTaken = pinnedPostTiming.end();
 			if (timeTaken) {
@@ -122,6 +122,6 @@ export const EnhancePinnedPost = () => {
 				});
 			}
 		}
-	}, [isInView]);
+	}, [isInView, hasBeenSeen]);
 	return null;
 };
