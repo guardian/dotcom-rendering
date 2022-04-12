@@ -1,4 +1,3 @@
-import { ArticleDesign } from '@guardian/libs';
 import { decideFormat } from '../web/lib/decideFormat';
 
 const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] => {
@@ -8,7 +7,6 @@ const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] => {
 			const format = decideFormat(faciaCard.format);
 			enhanced.push({
 				format,
-				isLiveBlog: format.design === ArticleDesign.LiveBlog,
 				url: faciaCard.header.url,
 				headline: faciaCard.header.headline,
 				webPublicationDate: faciaCard.card.webPublicationDateOption
