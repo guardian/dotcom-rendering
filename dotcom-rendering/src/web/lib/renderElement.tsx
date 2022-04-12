@@ -85,19 +85,19 @@ type Props = {
 // updateRole modifies the role of an element in a way appropriate for most
 // article types.
 const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
-	const isLiveBlog =
+	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
 	switch (el._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
-			if (isLiveBlog && el.role !== 'thumbnail') {
+			if (isBlog && el.role !== 'thumbnail') {
 				el.role = 'inline';
 			}
 
 			return el;
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-			if (isLiveBlog) {
+			if (isBlog) {
 				el.role = 'inline';
 			} else {
 				el.role = 'richLink';
@@ -105,7 +105,7 @@ const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
 
 			return el;
 		default:
-			if (isLiveBlog && 'role' in el) {
+			if (isBlog && 'role' in el) {
 				el.role = 'inline';
 			}
 
@@ -136,7 +136,7 @@ export const renderElement = ({
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
-	const isLiveBlog =
+	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
@@ -731,7 +731,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
-						stickyVideos={isLiveBlog && switches.stickyVideos}
+						stickyVideos={isBlog && switches.stickyVideos}
 					/>
 				</Island>,
 			];

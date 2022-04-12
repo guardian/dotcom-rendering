@@ -705,7 +705,6 @@ type FEFrontCard = {
 
 type DCRFrontCard = {
 	format: ArticleFormat;
-	isLiveBlog: boolean;
 	url: string;
 	headline: string;
 	webPublicationDate?: string;
@@ -1100,7 +1099,6 @@ interface DCRServerDocumentData {
 interface BaseTrailType {
 	url: string;
 	headline: string;
-	isLiveBlog: boolean;
 	webPublicationDate?: string;
 	image?: string;
 	avatarUrl?: string;
