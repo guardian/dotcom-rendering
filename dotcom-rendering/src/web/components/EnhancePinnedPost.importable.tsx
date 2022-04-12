@@ -44,7 +44,7 @@ function scrollOnCollapse() {
 }
 
 export const EnhancePinnedPost = () => {
-	console.log('new rendering happened');
+	const [hasBeenSeen, setHasBeenSeen] = useState(false);
 	const [isInView, setNode] = useIsInView({ threshold: 0.1, repeat: true });
 	setNode(pinnedPost);
 
@@ -53,8 +53,6 @@ export const EnhancePinnedPost = () => {
 		pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
 
 	if (contentFitsContainer) hideShowMore();
-
-	const [hasBeenSeen, setHasBeenSeen] = useState(false);
 
 	const handleClickTracking = () => {
 		if (pinnedPostCheckBox instanceof HTMLInputElement) {
@@ -95,22 +93,16 @@ export const EnhancePinnedPost = () => {
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
 	useEffect(() => {
-		console.log(`use effect called`);
-		console.log(`hasBeenSeen.current: ${hasBeenSeen}`);
-		console.log(`isInView: ${isInView}`);
 		if (!pinnedPost) return;
 		const pinnedPostTiming = initPerf('pinned-post-view-duration');
 
 		if (isInView) {
-			console.log('starting timing');
 			setHasBeenSeen(true);
-			pinnedPostTiming.clear(); // I think this will no longer be necessary
+			pinnedPostTiming.clear();
 			pinnedPostTiming.start();
 		} else if (hasBeenSeen && !isInView) {
-			console.log('ending timing');
 			const timeTaken = pinnedPostTiming.end();
 			if (timeTaken) {
-				console.log(`timeTaken: ${timeTaken}`);
 				const timeTakenInSeconds = timeTaken / 1000;
 				submitComponentEvent({
 					component: {
