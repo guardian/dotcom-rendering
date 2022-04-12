@@ -1,45 +1,21 @@
 import { css } from '@emotion/react';
 
-import { from, until } from '@guardian/source-foundations';
+import { until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
 	alwaysVertical?: boolean;
 	percentage?: CardPercentageType;
-	isFullCardImage?: boolean;
 };
-
-const cardHeight = css`
-	${from.wide} {
-		height: 274px;
-		width: 460px;
-	}
-	${until.wide} {
-		height: 250px;
-		width: 419px;
-	}
-
-	${until.tablet} {
-		height: 203px;
-		width: 340px;
-	}
-
-	${until.phablet} {
-		height: 171px;
-		width: 286px;
-	}
-`;
 
 export const ImageWrapper = ({
 	children,
 	percentage,
 	alwaysVertical,
-	isFullCardImage,
 }: Props) => {
 	return (
 		<div
 			css={[
-				isFullCardImage && cardHeight,
 				css`
 					/* position relative is required here to bound the image overlay */
 					position: relative;
@@ -58,7 +34,6 @@ export const ImageWrapper = ({
 					img {
 						width: 100%;
 						display: block;
-						object-fit: ${isFullCardImage && 'cover'};
 					}
 				`,
 			]}

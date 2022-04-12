@@ -4,7 +4,8 @@ import { extractNAV } from '../../model/extract-nav';
 import { articleToHtml } from './articleToHtml';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
-import { validateAsCAPIType } from '../../model/validate';
+import { enhanceCollections } from '../../model/enhanceCollections';
+import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import { extract as extractGA } from '../../model/extract-ga';
 import { blocksToHtml } from './blocksToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
@@ -23,6 +24,17 @@ const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 		standfirst: enhanceStandfirst(data.standfirst),
 	};
 	return CAPIArticle;
+};
+
+const enhanceFront = (body: Record<string, unknown>): DCRFrontType => {
+	const data: FEFrontType = validateAsFrontType(body);
+	return {
+		...data,
+		pressedPage: {
+			...data.pressedPage,
+			collections: enhanceCollections(data.pressedPage.collections),
+		},
+	};
 };
 
 export const renderArticle = (
@@ -173,13 +185,14 @@ export const renderKeyEvents = (
 };
 
 export const renderFront = (
-	{ body, query }: express.Request,
+	{ body }: express.Request,
 	res: express.Response,
 ): void => {
 	try {
+		const front = enhanceFront(body);
 		const html = frontToHtml({
-			query,
-			body,
+			front,
+			NAV: extractNAV(front.nav),
 		});
 		res.status(200).send(html);
 	} catch (e) {

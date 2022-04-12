@@ -2,14 +2,13 @@ import { css } from '@emotion/react';
 
 type Props = {
 	children: React.ReactNode;
-	isFullCardImage?: boolean;
 };
 
-export const HeadlineWrapper = ({ children, isFullCardImage }: Props) => (
+export const HeadlineWrapper = ({ children }: Props) => (
 	<div
 		css={css`
-			padding-bottom: ${isFullCardImage ? 0 : 8}px;
-			padding-left: ${isFullCardImage ? 0 : 5}px;
+			padding-bottom: 8px;
+			padding-left: 5px;
 			padding-right: 5px;
 			flex-grow: 1;
 		`}

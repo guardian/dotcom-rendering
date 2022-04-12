@@ -9,6 +9,9 @@ import {
 	until,
 } from '@guardian/source-foundations';
 
+import FacebookIcon from '../../../../static/icons/facebook.svg';
+import TwitterIconPadded from '../../../../static/icons/twitter-padded.svg';
+
 const pillarHeight = 42;
 
 export const hideDesktop = css`
@@ -189,6 +192,15 @@ const mainMenuLinkStyle = css`
 	}
 `;
 
+const shareIconStyles = css`
+	fill: currentColor;
+	height: 28px;
+	left: 18px;
+	position: absolute;
+	top: 5px;
+	width: 28px;
+`;
+
 export const MoreColumn: React.FC<{
 	column: LinkType;
 	brandExtensions: LinkType[];
@@ -206,38 +218,88 @@ export const MoreColumn: React.FC<{
 		],
 	};
 	return (
-		<li
-			css={[columnStyle, pillarDivider, pillarDividerExtended]}
-			role="none"
-		>
-			<ul
-				css={[columnLinks, !!moreColumn.pillar && pillarColumnLinks]}
-				role="menu"
-				id={subNavId}
+		<>
+			<li
+				css={[columnStyle, pillarDivider, pillarDividerExtended]}
+				role="none"
 			>
-				{(moreColumn.children || []).map((link) => (
+				<ul
+					css={[
+						columnLinks,
+						!!moreColumn.pillar && pillarColumnLinks,
+					]}
+					role="menu"
+					id={subNavId}
+				>
+					{(moreColumn.children || []).map((link) => (
+						<li
+							key={link.title.toLowerCase()}
+							css={[
+								mainMenuLinkStyle,
+								!!link.mobileOnly && hideDesktop,
+							]}
+							role="none"
+						>
+							<a
+								className="selectableMenuItem"
+								css={columnLinkTitle}
+								href={link.url}
+								role="menuitem"
+								data-link-name={`nav2 : secondary : ${link.longTitle}`}
+								data-cy={`column-collapse-sublink-${link.title}`}
+								tabIndex={-1}
+							>
+								{link.longTitle}
+							</a>
+						</li>
+					))}
+				</ul>
+			</li>
+			<li css={columnStyle} role="none">
+				<ul
+					css={[
+						columnLinks,
+						!!moreColumn.pillar && pillarColumnLinks,
+					]}
+					role="menu"
+				>
 					<li
-						key={link.title.toLowerCase()}
-						css={[
-							mainMenuLinkStyle,
-							!!link.mobileOnly && hideDesktop,
-						]}
+						key="facebook"
+						css={[mainMenuLinkStyle, hideDesktop]}
 						role="none"
 					>
 						<a
 							className="selectableMenuItem"
 							css={columnLinkTitle}
-							href={link.url}
+							data-link-name="nav2 : secondary : facebook"
+							href="https://www.facebook.com/theguardian"
 							role="menuitem"
-							data-link-name={`nav2 : secondary : ${link.longTitle}`}
-							data-cy={`column-collapse-sublink-${link.title}`}
 							tabIndex={-1}
 						>
-							{link.longTitle}
+							<FacebookIcon css={shareIconStyles} />
+							Facebook
 						</a>
 					</li>
-				))}
-			</ul>
-		</li>
+
+					<li
+						key="twitter"
+						css={[mainMenuLinkStyle, hideDesktop]}
+						role="none"
+					>
+						<a
+							className="selectableMenuItem"
+							css={columnLinkTitle}
+							data-link-name="nav2 : secondary : twitter"
+							href="https://twitter.com/guardian"
+							role="menuitem"
+							tabIndex={-1}
+						>
+							<TwitterIconPadded css={shareIconStyles} />
+							Twitter
+						</a>
+					</li>
+				</ul>
+			</li>
+		</>
 	);
 };

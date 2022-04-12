@@ -1,19 +1,30 @@
 import { useEffect, useState, useRef } from 'react';
 import libDebounce from 'lodash.debounce';
 
+/**
+ * Custom hook around the `IntersectionObserver`.
+ *
+ * @param options
+ * @param {boolean} [options.debouce] If `true`, debounce triggers by 200ms.
+ * By default, trigger instantaneously. Enabling debouncing ensures the target
+ * element intersects for at least 200ms before the callback is executed
+ * @param {boolean} [options.repeat] If `true`, trigger the hook on
+ * all intersections. By default, only trigger on the first intersection.
+ * @param {boolean} [options.node] Set the initial node, if known.
+ * @returns a tuple containing [isInView, setNode];
+ */
 const useIsInView = (
 	options: IntersectionObserverInit & {
-		debounce?: boolean;
-		repeat?: boolean;
+		debounce?: true;
+		repeat?: true;
+		node?: HTMLElement;
 	},
 ): [boolean, React.Dispatch<React.SetStateAction<HTMLElement | null>>] => {
 	const [isInView, setIsInView] = useState<boolean>(false);
-	const [node, setNode] = useState<HTMLElement | null>(null);
+	const [node, setNode] = useState<HTMLElement | null>(options.node ?? null);
 
 	const observer = useRef<IntersectionObserver | null>(null);
 
-	// Enabling debouncing ensures the target element intersects for at least
-	// 200ms before the callback is executed
 	const intersectionFn: IntersectionObserverCallback = ([entry]) => {
 		if (entry.isIntersecting) {
 			setIsInView(true);
@@ -25,7 +36,8 @@ const useIsInView = (
 		? libDebounce(intersectionFn, 200)
 		: intersectionFn;
 
-	useEffect((): any => {
+	useEffect(() => {
+		// TODO: can we remove this? It’s now always cleaned up
 		if (observer.current) {
 			observer.current.disconnect();
 		}
@@ -36,14 +48,12 @@ const useIsInView = (
 				options,
 			);
 
-			const { current: currentObserver } = observer;
-
 			if (node) {
-				currentObserver.observe(node);
+				observer.current.observe(node);
 			}
-
-			return () => currentObserver.disconnect();
 		}
+
+		return () => observer.current?.disconnect();
 	}, [node, options, intersectionCallback]);
 
 	return [isInView, setNode];

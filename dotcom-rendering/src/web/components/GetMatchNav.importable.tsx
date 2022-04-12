@@ -44,25 +44,31 @@ export const GetMatchNav = ({
 		// Send the error to Sentry and then render the headline in its place as a fallback
 		window.guardian?.modules?.sentry?.reportError?.(error, 'match-nav');
 
-		return (
-			<div
-				css={css`
-					${from.leftCol} {
-						margin-left: 10px;
-					}
-					${from.desktop} {
-						max-width: 700px;
-					}
-				`}
-			>
-				<ArticleHeadline
-					headlineString={headlineString}
-					format={format}
-					tags={tags}
-					webPublicationDateDeprecated={webPublicationDateDeprecated}
-				/>
-			</div>
-		);
+		if (
+			format.design === ArticleDesign.LiveBlog ||
+			format.design === ArticleDesign.DeadBlog
+		)
+			return (
+				<div
+					css={css`
+						${from.leftCol} {
+							margin-left: 10px;
+						}
+						${from.desktop} {
+							max-width: 700px;
+						}
+					`}
+				>
+					<ArticleHeadline
+						headlineString={headlineString}
+						format={format}
+						tags={tags}
+						webPublicationDateDeprecated={
+							webPublicationDateDeprecated
+						}
+					/>
+				</div>
+			);
 	}
 	if (data) {
 		return (
