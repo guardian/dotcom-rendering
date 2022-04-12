@@ -55,30 +55,30 @@ const meta = (format: ArticleFormat) => {
 
 			padding-top: 2px;
 		`;
-	} else {
-		return css`
-			${between.tablet.and.leftCol} {
-				order: 3;
-			}
-
-			${until.mobileLandscape} {
-				padding-left: 10px;
-				padding-right: 10px;
-			}
-
-			${from.mobileLandscape} {
-				padding-left: 20px;
-				padding-right: 20px;
-			}
-
-			${from.phablet} {
-				padding-left: 0px;
-				padding-right: 0px;
-			}
-
-			padding-top: 2px;
-		`;
 	}
+
+	return css`
+		${between.tablet.and.leftCol} {
+			order: 3;
+		}
+
+		${until.mobileLandscape} {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+
+		${from.mobileLandscape} {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+
+		${from.phablet} {
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+
+		padding-top: 2px;
+	`;
 };
 
 const metaFlex = css`
