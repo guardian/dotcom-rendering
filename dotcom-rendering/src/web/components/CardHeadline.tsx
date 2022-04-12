@@ -1,13 +1,7 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import {
-	headline,
-	textSans,
-	neutral,
-	until,
-	space,
-} from '@guardian/source-foundations';
+import { headline, textSans, until, space } from '@guardian/source-foundations';
 
 import { QuoteIcon } from './QuoteIcon';
 import { Kicker } from './Kicker';
@@ -24,7 +18,6 @@ type Props = {
 	size?: SmallHeadlineSize;
 	byline?: string;
 	showByline?: boolean;
-	isFullCardImage?: boolean; // Used for carousel AB test
 };
 
 const fontStyles = (size: SmallHeadlineSize) => {
@@ -112,21 +105,6 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	}
 };
 
-const fullCardImageTextStyles = css`
-	${headline.xxsmall()};
-	color: ${neutral[100]};
-	background-color: rgba(0, 0, 0, 0.75);
-	box-shadow: -${space[1]}px 0 0 rgba(0, 0, 0, 0.75);
-	/* Box decoration is required to push the box shadow out on Firefox */
-	box-decoration-break: clone;
-	line-height: 1.25;
-	/* white-space: pre-wrap; */
-	padding-right: ${space[1]}px;
-	${until.desktop} {
-		${headline.xxxsmall()};
-	}
-`;
-
 export const CardHeadline = ({
 	headlineText,
 	format,
@@ -137,7 +115,6 @@ export const CardHeadline = ({
 	size = 'medium',
 	byline,
 	showByline,
-	isFullCardImage,
 }: Props) => {
 	const palette = decidePalette(format);
 	return (
@@ -152,13 +129,9 @@ export const CardHeadline = ({
 							size,
 							palette.background.analysisUnderline,
 						),
-					isFullCardImage &&
-						css`
-							line-height: 1; /* Reset line height in full image carousel */
-						`,
 				]}
 			>
-				<span css={isFullCardImage && fullCardImageTextStyles}>
+				<span>
 					{kickerText && (
 						<Kicker
 							text={kickerText}

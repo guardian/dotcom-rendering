@@ -38,7 +38,6 @@ type Props = {
 	imageUrl?: string;
 	imagePosition?: ImagePositionType;
 	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
-	isFullCardImage?: boolean; // For use in Carousel until we decide a `Display.Immersive` convention
 	standfirst?: string;
 	avatar?: AvatarType;
 	showClock?: boolean;
@@ -115,12 +114,6 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	</>
 );
 
-const fullCardImageAgeStyles = css`
-	min-width: 25%;
-	align-self: flex-end;
-	text-align: end;
-`;
-
 export const Card = ({
 	linkTo,
 	format,
@@ -133,7 +126,6 @@ export const Card = ({
 	imageUrl,
 	imagePosition,
 	imageSize,
-	isFullCardImage,
 	standfirst,
 	avatar,
 	showClock,
@@ -163,24 +155,11 @@ export const Card = ({
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
-	/**
-	 * Why are we setting cardPalette like this?
-	 *
-	 * Good question. Basically, we had a production issue and this was the easiest and
-	 * quickest way to fix it rather than fixing Card's properly 😱
-	 *
-	 * Once:
-	 * 1. Cards have been refactored to remove `isFullSizeImage`
-	 * 2. We support the concept of a container type and
-	 * 3. We  and are able to handle Carousels natively - in
-	 *    the model
-	 * Then this should be removed.
-	 */
 	const cardPalette = decidePalette(format);
 
 	return (
 		<CardLink linkTo={linkTo} format={format} dataLinkName={dataLinkName}>
-			<TopBar palette={cardPalette} isFullCardImage={isFullCardImage}>
+			<TopBar palette={cardPalette}>
 				<CardLayout
 					imagePosition={imagePosition}
 					alwaysVertical={alwaysVertical}
@@ -191,7 +170,6 @@ export const Card = ({
 							<ImageWrapper
 								percentage={imageCoverage}
 								alwaysVertical={alwaysVertical}
-								isFullCardImage={isFullCardImage}
 							>
 								<img
 									src={imageUrl}
@@ -207,14 +185,9 @@ export const Card = ({
 								</>
 							</ImageWrapper>
 						)}
-						<ContentWrapper
-							percentage={contentCoverage}
-							isFullCardImage={isFullCardImage}
-						>
+						<ContentWrapper percentage={contentCoverage}>
 							<Flex>
-								<HeadlineWrapper
-									isFullCardImage={isFullCardImage}
-								>
+								<HeadlineWrapper>
 									<CardHeadline
 										headlineText={headlineText}
 										format={format}
@@ -238,7 +211,6 @@ export const Card = ({
 										}
 										byline={byline}
 										showByline={showByline}
-										isFullCardImage={isFullCardImage}
 									/>
 								</HeadlineWrapper>
 								<>
@@ -255,9 +227,7 @@ export const Card = ({
 									)}
 								</>
 							</Flex>
-							<div
-								css={isFullCardImage && fullCardImageAgeStyles}
-							>
+							<div>
 								{standfirst && (
 									<StandfirstWrapper palette={cardPalette}>
 										{standfirst}
@@ -287,7 +257,6 @@ export const Card = ({
 											/>
 										) : undefined
 									}
-									isFullCardImage={isFullCardImage}
 									mediaMeta={
 										format.design === ArticleDesign.Media &&
 										mediaType ? (

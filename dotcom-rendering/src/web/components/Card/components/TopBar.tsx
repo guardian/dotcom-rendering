@@ -3,10 +3,9 @@ import { css } from '@emotion/react';
 type Props = {
 	children: React.ReactNode;
 	palette: Palette;
-	isFullCardImage?: boolean;
 };
 
-export const TopBar = ({ children, palette, isFullCardImage }: Props) => (
+export const TopBar = ({ children, palette }: Props) => (
 	<div
 		css={css`
 			display: flex;
@@ -23,7 +22,7 @@ export const TopBar = ({ children, palette, isFullCardImage }: Props) => (
 				top: 0;
 				left: 0;
 				right: 0;
-				height: ${isFullCardImage ? 4 : 1}px;
+				height: 1px;
 				z-index: 2;
 			}
 		`}

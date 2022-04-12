@@ -988,7 +988,6 @@ type OnwardsType = {
 	ophanComponentName: OphanComponentName;
 	format: ArticleFormat;
 	isCuratedContent?: boolean;
-	isFullCardImage?: boolean;
 };
 
 type OphanComponentName =
@@ -1097,17 +1096,13 @@ interface DCRServerDocumentData {
 	GA: GADataType;
 	linkedData: { [key: string]: any };
 }
-interface CarouselImagesMap {
-	'300'?: string;
-	'460'?: string;
-}
+
 interface BaseTrailType {
 	url: string;
 	headline: string;
 	isLiveBlog: boolean;
 	webPublicationDate?: string;
 	image?: string;
-	carouselImages?: CarouselImagesMap;
 	avatarUrl?: string;
 	mediaType?: MediaType;
 	mediaDuration?: number;
