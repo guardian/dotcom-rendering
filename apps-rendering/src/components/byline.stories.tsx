@@ -97,4 +97,4 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default, Comment, Labs, Deadblog };
+export { Default, Comment, Labs, Deadblog, mockBylineHtml };
