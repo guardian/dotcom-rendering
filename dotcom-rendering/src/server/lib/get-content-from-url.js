@@ -71,7 +71,12 @@ exports.getContentFromURLMiddleware = async (req, res, next) => {
 		 * after 'url=' including '?filterKeyEvents=true' and we'd rather not serialise so we just
 		 * split the string instead
 		 */
-		let url = req.url.split('url=')[1];
+
+		let url = decodeURIComponent(req.url.split('url=')[1]);
+
+		if (url.includes('&') && !url.includes('?')) {
+			url = url.replace('&', '?');
+		}
 		if (req.path.startsWith('/AMP')) {
 			url = url.replace('www', 'amp');
 		}
