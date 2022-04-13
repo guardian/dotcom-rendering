@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette/background';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
@@ -5,7 +6,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
 import type { ReactElement } from 'react';
 
-const headlineTagStyles = (format: ArticleFormat) => css`
+const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.headlineTag(format)};
 	color: ${text.headlineTag(format)};
 	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
