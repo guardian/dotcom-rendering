@@ -6,7 +6,6 @@ import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	brandAlt,
 	from,
 	headline,
 	labs,
@@ -18,7 +17,7 @@ import type { Option } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactElement, ReactNode } from 'react';
 import { getHref } from 'renderer';
-import { articleWidthStyles, darkModeCss } from 'styles';
+import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
@@ -80,27 +79,6 @@ const commentStyles = (kicker: string): SerializedStyles => css`
 	${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
 `;
 
-const interviewStyles = (format: ArticleFormat): SerializedStyles => css`
-	${articleWidthStyles};
-	${format.theme === ArticleSpecial.Labs
-		? textSans.large({ lineHeight: 'regular' })
-		: headline.xxsmall({
-				fontWeight: 'regular',
-				lineHeight: 'loose',
-		  })}
-	font-style: italic;
-	background-color: ${brandAlt[400]};
-	display: inline-block;
-	box-decoration-break: clone;
-
-	a {
-		color: inherit;
-		text-decoration: none;
-		:hover {
-			text-decoration: underline;
-		}
-	}
-`;
 const commentAnchorStyles = (
 	kicker: string,
 	inverted: string,
@@ -164,7 +142,6 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return commentStyles(bylineLeftColumn);
-
 		default:
 			return styles(bylineLeftColumn);
 	}
