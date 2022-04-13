@@ -18,6 +18,7 @@ export const articleTemplate = ({
 	openGraphData,
 	twitterData,
 	keywords,
+	initTwitter,
 }: {
 	title?: string;
 	description: string;
@@ -33,6 +34,7 @@ export const articleTemplate = ({
 	openGraphData: { [key: string]: string };
 	twitterData: { [key: string]: string };
 	keywords: string;
+	initTwitter?: string;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -267,6 +269,10 @@ https://workforus.theguardian.com/careers/product-engineering/
 						apiName: 'require'
 					};
 					window.curl = window.curlConfig;
+				</script>
+
+				<script>
+					${initTwitter}
 				</script>
 
 

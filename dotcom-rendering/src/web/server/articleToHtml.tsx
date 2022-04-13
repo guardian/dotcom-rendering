@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
 
-import { ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { decideTheme } from '../lib/decideTheme';
 import { decideFormat } from '../lib/decideFormat';
 
@@ -110,6 +110,12 @@ export const articleToHtml = ({ data }: Props): string => {
 				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
 	);
 
+	const pageHasTweetElements = CAPIElements.some(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.TweetBlockElement',
+	);
+
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -178,6 +184,26 @@ export const articleToHtml = ({ data }: Props): string => {
 			? ''
 			: CAPIArticle.config.keywords;
 
+	const initTwitter = `
+		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
+		window.twttr = (function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0],
+			t = window.twttr || {};
+			if (d.getElementById(id)) return t;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "https://platform.twitter.com/widgets.js";
+			fjs.parentNode.insertBefore(js, fjs);
+
+			t._e = [];
+			t.ready = function(f) {
+			t._e.push(f);
+			};
+
+			return t;
+		}(document, "script", "twitter-wjs"));
+	`;
+
 	return articleTemplate({
 		linkedData,
 		priorityScriptTags,
@@ -193,5 +219,9 @@ export const articleToHtml = ({ data }: Props): string => {
 		openGraphData,
 		twitterData,
 		keywords,
+		initTwitter:
+			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
+				? initTwitter
+				: undefined,
 	});
 };

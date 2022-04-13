@@ -12,7 +12,7 @@ import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
 import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
-import { TweetBlockComponent } from './TweetBlockComponent';
+import { TweetBlockComponent } from './TweetBlockComponent.importable';
 import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
 import { MapEmbedBlockComponent } from './MapEmbedBlockComponent.importable';
 import { VineBlockComponent } from './VineBlockComponent.importable';

@@ -34,7 +34,7 @@ import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent
 import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
 import { TableBlockComponent } from '../components/TableBlockComponent';
 import { TextBlockComponent } from '../components/TextBlockComponent';
-import { TweetBlockComponent } from '../components/TweetBlockComponent';
+import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
 import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockComponent.importable';
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
@@ -600,6 +600,14 @@ export const renderElement = ({
 				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
+			if (switches.enhanceTweets) {
+				return [
+					true,
+					<Island deferUntil="visible">
+						<TweetBlockComponent element={element} />
+					</Island>,
+				];
+			}
 			return [true, <TweetBlockComponent element={element} />];
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 			return [
