@@ -177,18 +177,14 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const invertedStyles = (format: ArticleFormat) => css`
-	position: relative;
-	white-space: pre-wrap;
-	padding: 0 ${remSpace[1]};
-	box-decoration-break: clone;
-`;
-
 const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		color: ${text.headline(format)};
 		background-color: ${neutral[0]};
-		${invertedStyles(format)};
+		position: relative;
+		white-space: pre-wrap;
+		padding: 0 ${remSpace[1]};
+		box-decoration-break: clone;
 		display: inline;
 	`;
 };

@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette/background';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
@@ -35,7 +35,7 @@ const renderText = (
 ): ReactNode =>
 	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
 
-const headlineBox = (format: ArticleFormat) => css`
+const headlineBox = (format: ArticleFormat): SerializedStyles => css`
 	${format.theme === ArticleSpecial.Labs
 		? textSans.large({ lineHeight: 'regular' })
 		: headline.xxsmall({
@@ -53,7 +53,7 @@ const headlineBox = (format: ArticleFormat) => css`
 	}
 `;
 
-const addressStyles = (format: ArticleFormat) => css`
+const addressStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.headlineByline(format)};
 	padding: 0 ${remSpace[1]};
 	width: fit-content;
@@ -65,7 +65,7 @@ const HeadlineByline = ({
 }: {
 	format: ArticleFormat;
 	bylineHtml: Option<DocumentFragment>;
-}) => {
+}): ReactElement | null => {
 	return pipe(
 		bylineHtml,
 		map((byline) => (
