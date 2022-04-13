@@ -203,7 +203,9 @@ const Headline = ({ item }: Props): ReactElement => {
 		case ArticleDesign.Interview:
 			return (
 				<>
-					<HeadlineTag tagText="Interview" format={format} />
+					<div css={articleWidthStyles}>
+						<HeadlineTag tagText="Interview" format={format} />
+					</div>
 					<h1 css={getStyles(item)}>
 						<span css={headlineStyles(format)}>
 							{item.headline}

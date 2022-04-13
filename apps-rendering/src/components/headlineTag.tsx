@@ -3,7 +3,6 @@ import { background } from '@guardian/common-rendering/src/editorialPalette/back
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
 import { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
-import { articleWidthStyles } from 'styles';
 
 const headlineTagStyles = (format: ArticleFormat) => css`
 	background-color: ${background.headlineTag(format)};
@@ -20,11 +19,7 @@ const HeadlineTag = ({
 }: {
 	tagText: string;
 	format: ArticleFormat;
-}) => (
-	<div css={articleWidthStyles}>
-		<span css={headlineTagStyles(format)}>{tagText}</span>
-	</div>
-);
+}) => <span css={headlineTagStyles(format)}>{tagText}</span>;
 
 // ----- Exports ----- //
 
