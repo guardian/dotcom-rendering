@@ -2802,11 +2802,12 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^23.1.0":
-  version "23.1.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.1.0.tgz#4091406e9fed553eba3278f5b563d489d2108222"
-  integrity sha512-ezw42JHr5HJQaoKlL9GzouCF+07//n6rRrZhKuzYPY3WcWSkGfvQGWBNdJ7FS6pon/6qhApZsxy3BDTvBSeD4w==
+"@guardian/atoms-rendering@^23.1.2":
+  version "23.1.2"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.1.2.tgz#a52ee743fc78915d9691eeb9fa1851d67bfefe6d"
+  integrity sha512-mzoSTSNVs5dEBDcihj0/kjt7PvG3uRBW4b5OZxZHPuuLOIX2Wk89HIIgOk/wZTGATVm87D4bJErCAU30MVOLFw==
   dependencies:
+    is-mobile "^3.1.1"
     youtube-player "^5.5.2"
 
 "@guardian/braze-components@^7.2.0":
@@ -12245,6 +12246,11 @@ is-map@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/is-map/-/is-map-2.0.2.tgz#00922db8c9bf73e81b7a335827bc2a43f2b91127"
   integrity sha512-cOZFQQozTha1f4MxLFzlgKYPTyj26picdZTx82hbc/Xf4K/tZOOXSCkMvU4pKioRXGDLJRn0GM7Upe7kR721yg==
+
+is-mobile@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/is-mobile/-/is-mobile-3.1.1.tgz#3b9e48f40068e4ea2da411f5009779844ce8d6aa"
+  integrity sha512-RRoXXR2HNFxNkUnxtaBdGBXtFlUMFa06S0NUKf/LCF+MuGLu13gi9iBCkoEmc6+rpXuwi5Mso5V8Zf7mNynMBQ==
 
 is-negative-zero@^2.0.1:
   version "2.0.2"
