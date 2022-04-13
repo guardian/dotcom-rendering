@@ -113,11 +113,6 @@ const commentAnchorStyles = (
     `}
 `;
 
-const interviewAnchorStyles = (kicker: string): SerializedStyles => css`
-	color: ${kicker};
-	text-decoration: none;
-`;
-
 const labsStyles = css`
 	${textSans.medium({ lineHeight: 'regular', fontStyle: 'italic' })}
 	color: ${labs[300]};
@@ -169,8 +164,7 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return commentStyles(bylineLeftColumn);
-		case ArticleDesign.Interview:
-			return interviewStyles(format);
+
 		default:
 			return styles(bylineLeftColumn);
 	}
@@ -200,9 +194,6 @@ const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return commentAnchorStyles(kicker, inverted);
-		case ArticleDesign.Interview:
-			return interviewAnchorStyles(kicker);
-
 		default:
 			return anchorStyles(kicker, inverted);
 	}
