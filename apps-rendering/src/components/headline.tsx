@@ -2,15 +2,11 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import {
-	background,
-	border,
-} from '@guardian/common-rendering/src/editorialPalette';
+import { border } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
-	brandAlt,
 	from,
 	headline,
 	neutral,
@@ -18,14 +14,13 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { map, Option, withDefault } from '@guardian/types';
 import StarRating from 'components/starRating';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
-import { pipe } from 'lib';
-import type { ReactElement, ReactNode } from 'react';
-import { getHref } from 'renderer';
+import type { ReactElement } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
+import HeadlineByline from './headlineByline';
+import HeadlineTag from './headlineTag';
 
 // ----- Component ----- //
 
@@ -37,9 +32,8 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 	const baseStyles = css`
 		${headline.medium()}
 		${headlineTextColour(format)}
-    ${headlineBackgroundColour(format)}
-	margin: 0;
-
+		${headlineBackgroundColour(format)}
+		margin: 0;
 		${articleWidthStyles}
 	`;
 
@@ -183,15 +177,6 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const headlineTagStyles = (format: ArticleFormat) => css`
-	background-color: ${background.headlineTag(format)};
-	color: ${neutral[100]};
-	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
-	display: inline-block;
-	box-decoration-break: clone;
-	padding: 0 ${remSpace[1]};
-`;
-
 const invertedStyles = (format: ArticleFormat) => css`
 	position: relative;
 	white-space: pre-wrap;
@@ -206,89 +191,6 @@ const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 		${invertedStyles(format)};
 		display: inline;
 	`;
-};
-
-export const HeadlineTag = ({
-	tagText,
-	format,
-}: {
-	tagText: string;
-	format: ArticleFormat;
-}) => (
-	<div css={articleWidthStyles}>
-		<span css={headlineTagStyles(format)}>{tagText}</span>
-	</div>
-);
-
-const toReact = (format: ArticleFormat) => {
-	return function getReactNode(node: Node, index: number): ReactNode {
-		switch (node.nodeName) {
-			case 'A':
-				return (
-					<a
-						href={withDefault('')(getHref(node))}
-						key={`anchor-${index}`}
-					>
-						{node.textContent ?? ''}
-					</a>
-				);
-			case 'SPAN':
-				return Array.from(node.childNodes).map(toReact(format));
-			case '#text':
-				return node.textContent;
-		}
-	};
-};
-
-const renderText = (
-	format: ArticleFormat,
-	byline: DocumentFragment,
-): ReactNode =>
-	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
-
-const headlineBox = (format: ArticleFormat) => css`
-	${articleWidthStyles}
-	${format.theme === ArticleSpecial.Labs
-		? textSans.large({ lineHeight: 'regular' })
-		: headline.xxsmall({
-				fontWeight: 'regular',
-				lineHeight: 'loose',
-		  })}
-	font-style: italic;
-
-	a {
-		color: inherit;
-		text-decoration: none;
-		:hover {
-			text-decoration: underline;
-		}
-	}
-`;
-
-const addressStyles = css`
-	background-color: ${brandAlt[400]};
-	padding: 0 ${remSpace[1]};
-	width: fit-content;
-`;
-
-const HeadlineByline = ({
-	format,
-	bylineHtml,
-}: {
-	format: ArticleFormat;
-	bylineHtml: Option<DocumentFragment>;
-}) => {
-	return pipe(
-		bylineHtml,
-		map((byline) => (
-			<div css={headlineBox(format)}>
-				<address css={addressStyles}>
-					{renderText(format, byline)}
-				</address>
-			</div>
-		)),
-		withDefault<ReactElement | null>(null),
-	);
 };
 
 const Headline = ({ item }: Props): ReactElement => {

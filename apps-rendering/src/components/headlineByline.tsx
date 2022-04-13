@@ -1,0 +1,88 @@
+import { css } from '@emotion/react';
+import { ArticleFormat, ArticleSpecial } from '@guardian/libs';
+import {
+	textSans,
+	headline,
+	brandAlt,
+	remSpace,
+} from '@guardian/source-foundations';
+import { withDefault, map, Option } from '@guardian/types';
+import { pipe } from 'lib';
+import { ReactNode, ReactElement } from 'react';
+import { getHref } from 'renderer';
+import { articleWidthStyles } from 'styles';
+
+const toReact = (format: ArticleFormat) => {
+	return function getReactNode(node: Node, index: number): ReactNode {
+		switch (node.nodeName) {
+			case 'A':
+				return (
+					<a
+						href={withDefault('')(getHref(node))}
+						key={`anchor-${index}`}
+					>
+						{node.textContent ?? ''}
+					</a>
+				);
+			case 'SPAN':
+				return Array.from(node.childNodes).map(toReact(format));
+			case '#text':
+				return node.textContent;
+		}
+	};
+};
+
+const renderText = (
+	format: ArticleFormat,
+	byline: DocumentFragment,
+): ReactNode =>
+	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
+
+const headlineBox = (format: ArticleFormat) => css`
+	${articleWidthStyles}
+	${format.theme === ArticleSpecial.Labs
+		? textSans.large({ lineHeight: 'regular' })
+		: headline.xxsmall({
+				fontWeight: 'regular',
+				lineHeight: 'loose',
+		  })}
+	font-style: italic;
+
+	a {
+		color: inherit;
+		text-decoration: none;
+		:hover {
+			text-decoration: underline;
+		}
+	}
+`;
+
+const addressStyles = css`
+	background-color: ${brandAlt[400]};
+	padding: 0 ${remSpace[1]};
+	width: fit-content;
+`;
+
+const HeadlineByline = ({
+	format,
+	bylineHtml,
+}: {
+	format: ArticleFormat;
+	bylineHtml: Option<DocumentFragment>;
+}) => {
+	return pipe(
+		bylineHtml,
+		map((byline) => (
+			<div css={headlineBox(format)}>
+				<address css={addressStyles}>
+					{renderText(format, byline)}
+				</address>
+			</div>
+		)),
+		withDefault<ReactElement | null>(null),
+	);
+};
+
+// ----- Exports ----- //
+
+export default HeadlineByline;
