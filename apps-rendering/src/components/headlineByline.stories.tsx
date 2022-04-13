@@ -1,8 +1,25 @@
 // ----- Imports ----- //
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import type { Option } from '@guardian/types';
+import { toOption } from '@guardian/types';
+import { text } from '@storybook/addon-knobs';
+import { parse } from 'client/parser';
+import { pipe } from 'lib';
 import type { FC } from 'react';
-import { mockBylineHtml } from './byline.stories';
 import HeadlineByline from './headlineByline';
+
+// ----- Setup ----- //
+
+const parser = new DOMParser();
+const parseByline = parse(parser);
+
+const profileLink = (): string =>
+	text('Profile Link', 'https://theguardian.com');
+
+const byline = (): string => text('Byline', 'Jane Smith');
+
+const mockBylineHtml = (): Option<DocumentFragment> =>
+	pipe(`<a href="${profileLink()}">${byline()}</a>`, parseByline, toOption);
 
 // ----- Stories ----- //
 
