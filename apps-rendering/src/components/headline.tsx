@@ -220,7 +220,6 @@ const Headline = ({ item }: Props): ReactElement => {
 				</>
 			);
 		default:
-			console.log(item.design);
 			return (
 				<h1 css={getStyles(item)}>
 					<span>{item.headline}</span>
