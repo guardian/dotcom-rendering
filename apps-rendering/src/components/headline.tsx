@@ -257,18 +257,15 @@ const renderText = (
 ): ReactNode =>
 	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
 
-
 const headlineBox = (format: ArticleFormat) => css`
 	${articleWidthStyles}
-		${format.theme === ArticleSpecial.Labs
+	${format.theme === ArticleSpecial.Labs
 		? textSans.large({ lineHeight: 'regular' })
 		: headline.xxsmall({
 				fontWeight: 'regular',
 				lineHeight: 'loose',
 		  })}
 	font-style: italic;
-
-
 
 	a {
 		color: inherit;
@@ -277,14 +274,13 @@ const headlineBox = (format: ArticleFormat) => css`
 			text-decoration: underline;
 		}
 	}
-	`;
+`;
 
-const yellow = css`
-		background-color: ${brandAlt[400]};
-		padding: 0 ${remSpace[1]};
-	box-decoration-break: clone;
+const addressStyles = css`
+	background-color: ${brandAlt[400]};
+	padding: 0 ${remSpace[1]};
 	width: fit-content;
-`
+`;
 
 const HeadlineByline = ({
 	format,
@@ -297,14 +293,15 @@ const HeadlineByline = ({
 		bylineHtml,
 		map((byline) => (
 			<div css={headlineBox(format)}>
-			<address css={yellow}>
-				{renderText(format, byline)}
-			</address>
+				<address css={addressStyles}>
+					{renderText(format, byline)}
+				</address>
 			</div>
 		)),
 		withDefault<ReactElement | null>(null),
 	);
 };
+
 const Headline = ({ item }: Props): ReactElement => {
 	const format = {
 		design: item.design,
