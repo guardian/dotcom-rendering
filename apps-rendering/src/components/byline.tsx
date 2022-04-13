@@ -90,7 +90,6 @@ const interviewStyles = (format: ArticleFormat): SerializedStyles => css`
 		  })}
 	font-style: italic;
 	background-color: ${brandAlt[400]};
-	box-shadow: 4px 0 0 ${brandAlt[400]}, -6px 0 0 ${brandAlt[400]};
 	display: inline-block;
 	box-decoration-break: clone;
 
