@@ -281,7 +281,7 @@ export const Liveness = ({
 			document.getElementById(placeToScrollTo)?.scrollIntoView({
 				behavior: 'smooth',
 			});
-			window.location.href = `#${placeToScrollTo}`;
+			window.history.replaceState({}, '', `#${placeToScrollTo}`);
 			revealPendingBlocks();
 			setNumHiddenBlocks(0);
 		} else {

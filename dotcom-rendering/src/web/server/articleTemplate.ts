@@ -1,6 +1,5 @@
 import { resets, brandBackground } from '@guardian/source-foundations';
 import he from 'he';
-import { ArticleDesign } from '@guardian/libs';
 import { getFontsCss } from '../../lib/fonts-css';
 import { ASSET_ORIGIN } from '../../lib/assets';
 
@@ -19,7 +18,6 @@ export const articleTemplate = ({
 	openGraphData,
 	twitterData,
 	keywords,
-	format,
 }: {
 	title?: string;
 	description: string;
@@ -35,7 +33,6 @@ export const articleTemplate = ({
 	openGraphData: { [key: string]: string };
 	twitterData: { [key: string]: string };
 	keywords: string;
-	format: ArticleFormat;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -112,8 +109,6 @@ export const articleTemplate = ({
 		(src) => `<link rel="dns-prefetch" href="${src}">`,
 	);
 
-	const smoothScrolling = `style="scroll-behavior: smooth;"`;
-
 	const weAreHiringMessage = `
 <!--
 
@@ -159,10 +154,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 --->`;
 
 	return `<!doctype html>
-        <html lang="en" ${
-			// Used when taking the reader to the top of the blog on toast click
-			format.design === ArticleDesign.LiveBlog && smoothScrolling
-		}>
+        <html lang="en">
             <head>
 			    ${weAreHiringMessage}
                 <title>${title}</title>

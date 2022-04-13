@@ -193,6 +193,5 @@ export const articleToHtml = ({ data }: Props): string => {
 		openGraphData,
 		twitterData,
 		keywords,
-		format,
 	});
 };
