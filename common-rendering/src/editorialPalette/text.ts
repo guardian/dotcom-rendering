@@ -61,6 +61,10 @@ const headline = (format: ArticleFormat): Colour => {
 		}
 	}
 
+	if (format.design === ArticleDesign.Interview) {
+		return neutral[100];
+	}
+
 	return neutral[7];
 };
 

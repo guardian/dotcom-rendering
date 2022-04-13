@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
+import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -186,7 +186,7 @@ const invertedStyles = (format: ArticleFormat) => css`
 
 const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
-		color: ${neutral[100]};
+		color: ${text.headline(format)};
 		background-color: ${neutral[0]};
 		${invertedStyles(format)};
 		display: inline;
