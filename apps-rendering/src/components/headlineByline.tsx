@@ -1,14 +1,12 @@
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette/background';
-import { ArticleFormat, ArticleSpecial } from '@guardian/libs';
-import {
-	textSans,
-	headline,
-	remSpace,
-} from '@guardian/source-foundations';
-import { withDefault, map, Option } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleSpecial } from '@guardian/libs';
+import { headline, remSpace, textSans } from '@guardian/source-foundations';
+import type { Option } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
-import { ReactNode, ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { getHref } from 'renderer';
 
 const toReact = (format: ArticleFormat) => {

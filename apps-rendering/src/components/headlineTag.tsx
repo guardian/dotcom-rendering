@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette/background';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
-import { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
 
 const headlineTagStyles = (format: ArticleFormat) => css`
