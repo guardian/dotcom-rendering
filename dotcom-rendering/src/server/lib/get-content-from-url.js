@@ -72,6 +72,13 @@ const parseURL = (requestURL, requestPath) => {
 	 * This happens because the url query param isn't serialised. But we actually want everything
 	 * after 'url=' including '?filterKeyEvents=true' and we'd rather not serialise so we just
 	 * split the string instead
+	 *
+	 *
+	 * When in DEV, any params after 'url' are considered additional params and so are preceded by an ampersand.
+	 * If our url includes an '&' but not a '?' then we are within the DEV environment and the first ampersand
+	 * should be replaced by a question mark to indicate the start of the query string.
+	 * In order to achieve this, we are first decoding the URL so that we can read any special characters.
+	 *
 	 */
 
 	let url = decodeURIComponent(requestURL.split('url=')[1]);
