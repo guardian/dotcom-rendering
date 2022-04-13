@@ -10,7 +10,6 @@ import { withDefault, map, Option } from '@guardian/types';
 import { pipe } from 'lib';
 import { ReactNode, ReactElement } from 'react';
 import { getHref } from 'renderer';
-import { articleWidthStyles } from 'styles';
 
 const toReact = (format: ArticleFormat) => {
 	return function getReactNode(node: Node, index: number): ReactNode {
@@ -39,7 +38,6 @@ const renderText = (
 	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
 
 const headlineBox = (format: ArticleFormat) => css`
-	${articleWidthStyles}
 	${format.theme === ArticleSpecial.Labs
 		? textSans.large({ lineHeight: 'regular' })
 		: headline.xxsmall({

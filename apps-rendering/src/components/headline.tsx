@@ -211,14 +211,16 @@ const Headline = ({ item }: Props): ReactElement => {
 							{item.headline}
 						</span>
 					</h1>
-					<HeadlineByline
-						bylineHtml={item.bylineHtml}
-						format={{
-							theme: item.theme,
-							design: item.design,
-							display: item.display,
-						}}
-					/>
+					<div css={articleWidthStyles}>
+						<HeadlineByline
+							bylineHtml={item.bylineHtml}
+							format={{
+								theme: item.theme,
+								design: item.design,
+								display: item.display,
+							}}
+						/>
+					</div>
 				</>
 			);
 		default:
