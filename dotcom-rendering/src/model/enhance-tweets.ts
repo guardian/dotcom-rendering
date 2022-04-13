@@ -12,9 +12,7 @@ const removeTweetClass = (elements: CAPIElement[]): CAPIElement[] => {
 				);
 				enhanced.push({
 					...element,
-					...{
-						html: withoutTweetClass,
-					},
+					html: withoutTweetClass,
 				});
 				break;
 			default:
