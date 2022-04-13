@@ -1,12 +1,13 @@
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette/background';
+import { text } from '@guardian/common-rendering/src/editorialPalette/text';
 import { ArticleFormat } from '@guardian/libs';
-import { neutral, headline, remSpace } from '@guardian/source-foundations';
+import { headline, remSpace } from '@guardian/source-foundations';
 import { articleWidthStyles } from 'styles';
 
 const headlineTagStyles = (format: ArticleFormat) => css`
 	background-color: ${background.headlineTag(format)};
-	color: ${neutral[100]};
+	color: ${text.headlineTag(format)};
 	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	display: inline-block;
 	box-decoration-break: clone;

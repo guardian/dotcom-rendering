@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette/background';
 import { ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import {
 	textSans,
 	headline,
-	brandAlt,
 	remSpace,
 } from '@guardian/source-foundations';
 import { withDefault, map, Option } from '@guardian/types';
@@ -57,8 +57,8 @@ const headlineBox = (format: ArticleFormat) => css`
 	}
 `;
 
-const addressStyles = css`
-	background-color: ${brandAlt[400]};
+const addressStyles = (format: ArticleFormat) => css`
+	background-color: ${background.headlineByline(format)};
 	padding: 0 ${remSpace[1]};
 	width: fit-content;
 `;
@@ -74,7 +74,7 @@ const HeadlineByline = ({
 		bylineHtml,
 		map((byline) => (
 			<div css={headlineBox(format)}>
-				<address css={addressStyles}>
+				<address css={addressStyles(format)}>
 					{renderText(format, byline)}
 				</address>
 			</div>

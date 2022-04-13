@@ -16,6 +16,7 @@ import {
 	news,
 	specialReport,
 	labs,
+	brandAlt,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -53,6 +54,8 @@ const headline = (format: ArticleFormat): Colour => {
 
 	return neutral[100];
 };
+
+const headlineByline = (_format: ArticleFormat): Colour => brandAlt[400];
 
 const headlineDark = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -219,6 +222,7 @@ const headlineTag = (format: ArticleFormat): Colour => {
 const background = {
 	avatar,
 	headline,
+	headlineByline,
 	headlineDark,
 	headlineTag,
 	keyEvents,
