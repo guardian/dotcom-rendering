@@ -183,10 +183,6 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const headlineTagWrapper = css`
-	${articleWidthStyles}
-`;
-
 const headlineTagStyles = (format: ArticleFormat) => css`
 	background-color: ${background.headlineTag(format)};
 	color: ${neutral[100]};
@@ -219,8 +215,8 @@ export const HeadlineTag = ({
 	tagText: string;
 	format: ArticleFormat;
 }) => (
-	<div css={headlineTagWrapper}>
-		<div css={headlineTagStyles(format)}>{tagText}</div>
+	<div css={articleWidthStyles}>
+		<span css={headlineTagStyles(format)}>{tagText}</span>
 	</div>
 );
 
