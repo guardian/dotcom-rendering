@@ -1,4 +1,5 @@
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette/background';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
