@@ -35,7 +35,7 @@ const noJSStyling = css`
 `;
 
 /**
- * enhanceTweet takes the nojs default version of a Twitter tweet embed
+ * loadTweet takes the nojs default version of a Twitter tweet embed
  * and enhances it using Twitter's platform api script
  *
  * This code should only execute if switches.enhanceTweets is true (see
@@ -43,7 +43,7 @@ const noJSStyling = css`
  *
  * @param element TweetBlockElement - The tweet element we want to enhance
  */
-const enhanceTweet = (element: TweetBlockElement) => {
+const loadTweet = (element: TweetBlockElement) => {
 	const tweetContainer = document.getElementById(
 		`tweet-container-${element.elementId}`,
 	);
@@ -54,7 +54,7 @@ const enhanceTweet = (element: TweetBlockElement) => {
 	if (tweetContainer && tweet && typeof twttr !== 'undefined') {
 		// We need this classname to exist as this is what Twitter uses
 		// to find the tweet on the page. We *remove* this class in
-		// preventTweetEnhancement()
+		// enhanceTweets()
 		tweet.classList.add('twitter-tweet');
 		twttr.ready((twitter) => {
 			twitter.widgets.load(tweetContainer);
@@ -65,8 +65,8 @@ const enhanceTweet = (element: TweetBlockElement) => {
 export const TweetBlockComponent = ({ element }: Props) => {
 	useEffect(() => {
 		// This code only runs if this component is hydrated, which
-		// only happens if the switch is on
-		enhanceTweet(element);
+		// only happens if the enhanceTweets switch is on
+		loadTweet(element);
 	}, [element]);
 
 	return (

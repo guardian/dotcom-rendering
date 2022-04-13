@@ -5,7 +5,7 @@ import { enhanceInteractiveContentsElements } from './enhance-interactive-conten
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceEmbeds } from './enhance-embeds';
-import { preventTweetEnhancement } from './prevent-tweet-enhancement';
+import { enhanceTweets } from './enhance-tweets';
 
 class BlockEnhancer {
 	blocks: Block[];
@@ -52,8 +52,8 @@ class BlockEnhancer {
 		return this;
 	}
 
-	preventTweetEnhancement() {
-		this.blocks = preventTweetEnhancement(this.blocks);
+	enhanceTweets() {
+		this.blocks = enhanceTweets(this.blocks);
 		return this;
 	}
 }
@@ -70,5 +70,5 @@ export const enhanceBlocks = (blocks: Block[], format: CAPIFormat): Block[] => {
 		.enhanceImages()
 		.enhanceNumberedLists()
 		.enhanceEmbeds()
-		.preventTweetEnhancement().blocks;
+		.enhanceTweets().blocks;
 };

@@ -24,7 +24,7 @@ const removeTweetClass = (elements: CAPIElement[]): CAPIElement[] => {
 	return enhanced;
 };
 
-export const preventTweetEnhancement = (blocks: Block[]): Block[] =>
+export const enhanceTweets = (blocks: Block[]): Block[] =>
 	blocks.map((block: Block) => {
 		return {
 			...block,
