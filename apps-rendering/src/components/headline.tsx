@@ -10,6 +10,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
+	brandAlt,
 	from,
 	headline,
 	neutral,
@@ -22,9 +23,9 @@ import StarRating from 'components/starRating';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import { pipe } from 'lib';
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
+import { getHref } from 'renderer';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
-import { renderText } from './byline';
 
 // ----- Component ----- //
 
@@ -230,6 +231,61 @@ export const HeadlineTag = ({
 	</div>
 );
 
+const toReact = (format: ArticleFormat) => {
+	return function getReactNode(node: Node, index: number): ReactNode {
+		switch (node.nodeName) {
+			case 'A':
+				return (
+					<a
+						href={withDefault('')(getHref(node))}
+						key={`anchor-${index}`}
+					>
+						{node.textContent ?? ''}
+					</a>
+				);
+			case 'SPAN':
+				return Array.from(node.childNodes).map(toReact(format));
+			case '#text':
+				return node.textContent;
+		}
+	};
+};
+
+const renderText = (
+	format: ArticleFormat,
+	byline: DocumentFragment,
+): ReactNode =>
+	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
+
+
+const headlineBox = (format: ArticleFormat) => css`
+	${articleWidthStyles}
+		${format.theme === ArticleSpecial.Labs
+		? textSans.large({ lineHeight: 'regular' })
+		: headline.xxsmall({
+				fontWeight: 'regular',
+				lineHeight: 'loose',
+		  })}
+	font-style: italic;
+
+
+
+	a {
+		color: inherit;
+		text-decoration: none;
+		:hover {
+			text-decoration: underline;
+		}
+	}
+	`;
+
+const yellow = css`
+		background-color: ${brandAlt[400]};
+		padding: 0 ${remSpace[1]};
+	box-decoration-break: clone;
+	width: fit-content;
+`
+
 const HeadlineByline = ({
 	format,
 	bylineHtml,
@@ -240,9 +296,11 @@ const HeadlineByline = ({
 	return pipe(
 		bylineHtml,
 		map((byline) => (
-			<address css={getStyles(format)}>
+			<div css={headlineBox(format)}>
+			<address css={yellow}>
 				{renderText(format, byline)}
 			</address>
+			</div>
 		)),
 		withDefault<ReactElement | null>(null),
 	);

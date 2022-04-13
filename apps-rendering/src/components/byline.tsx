@@ -81,27 +81,26 @@ const commentStyles = (kicker: string): SerializedStyles => css`
 `;
 
 const interviewStyles = (format: ArticleFormat): SerializedStyles => css`
-${articleWidthStyles};
-${format.theme === ArticleSpecial.Labs
-	? textSans.large({ lineHeight: 'regular' })
-	: headline.xxsmall({
-			fontWeight: 'regular',
-			lineHeight: 'loose',
-	  })}
-font-style: italic;
-background-color: ${brandAlt[400]};
-box-shadow: 4px 0 0 ${brandAlt[400]},
-	-6px 0 0 ${brandAlt[400]};
-display: inline-block;
-box-decoration-break: clone;
+	${articleWidthStyles};
+	${format.theme === ArticleSpecial.Labs
+		? textSans.large({ lineHeight: 'regular' })
+		: headline.xxsmall({
+				fontWeight: 'regular',
+				lineHeight: 'loose',
+		  })}
+	font-style: italic;
+	background-color: ${brandAlt[400]};
+	box-shadow: 4px 0 0 ${brandAlt[400]}, -6px 0 0 ${brandAlt[400]};
+	display: inline-block;
+	box-decoration-break: clone;
 
-a {
-	color: inherit;
-	text-decoration: none;
-	:hover {
-		text-decoration: underline;
+	a {
+		color: inherit;
+		text-decoration: none;
+		:hover {
+			text-decoration: underline;
+		}
 	}
-}
 `;
 const commentAnchorStyles = (
 	kicker: string,
@@ -115,14 +114,10 @@ const commentAnchorStyles = (
     `}
 `;
 
-const interviewAnchorStyles = (
-	kicker: string
-): SerializedStyles => css`
+const interviewAnchorStyles = (kicker: string): SerializedStyles => css`
 	color: ${kicker};
 	text-decoration: none;
-
 `;
-
 
 const labsStyles = css`
 	${textSans.medium({ lineHeight: 'regular', fontStyle: 'italic' })}
@@ -235,7 +230,7 @@ const toReact = (format: ArticleFormat) => {
 	};
 };
 
-export const renderText = (
+const renderText = (
 	format: ArticleFormat,
 	byline: DocumentFragment,
 ): ReactNode =>
@@ -256,8 +251,7 @@ const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
 				withDefault<ReactElement | null>(null),
 			);
 	}
-
-	}
+};
 // ----- Exports ----- //
 
 export default Byline;
