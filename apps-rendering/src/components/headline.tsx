@@ -183,13 +183,6 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-// const Headline = ({ item }: Props): ReactElement => (
-// 	<h1 css={getStyles(item)}>
-// 		<span>{item.headline}</span>
-// 		<StarRating item={item} />
-// 	</h1>
-// );
-
 const headlineTagWrapper = css`
 	${articleWidthStyles}
 `;
