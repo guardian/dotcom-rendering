@@ -66,10 +66,15 @@ const articleAdStyles = css`
 	.ad-slot--inline1 {
 		margin: 12px auto;
 		text-align: center;
-		background-color: ${neutral[97]};
-		/* We don't float right inline1 so prevent merger with any nearby rich-links that float left */
-		${until.leftCol} {
+		/* Unlike other inlines we don't float right inline1 */
+		/* Prevent merger with any nearby float left elements e.g. rich-links */
+		${until.tablet} {
 			clear: left;
+			width: 300px;
+		}
+		/* Reserve full width with a background colour */
+		${from.tablet} {
+			background-color: ${neutral[97]};
 		}
 	}
 	.ad-slot--inline:not(.ad-slot--inline1),
