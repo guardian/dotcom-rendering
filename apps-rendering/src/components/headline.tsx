@@ -16,7 +16,7 @@ import {
 } from '@guardian/source-foundations';
 import StarRating from 'components/starRating';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
-import type { Item } from 'item';
+import { getFormat, Item } from 'item';
 import type { ReactElement } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import HeadlineByline from './headlineByline';
@@ -184,17 +184,12 @@ const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 		position: relative;
 		white-space: pre-wrap;
 		padding: 0 ${remSpace[1]};
-		box-decoration-break: clone;
 		display: inline;
 	`;
 };
 
 const Headline = ({ item }: Props): ReactElement => {
-	const format = {
-		design: item.design,
-		theme: item.theme,
-		display: item.display,
-	};
+	const format = getFormat(item);
 	switch (item.design) {
 		case ArticleDesign.Interview:
 			return (
@@ -210,11 +205,7 @@ const Headline = ({ item }: Props): ReactElement => {
 					<div css={articleWidthStyles}>
 						<HeadlineByline
 							bylineHtml={item.bylineHtml}
-							format={{
-								theme: item.theme,
-								design: item.design,
-								display: item.display,
-							}}
+							format={format}
 						/>
 					</div>
 				</>
