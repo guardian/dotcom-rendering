@@ -276,8 +276,22 @@ export const LiveBlogEpic = ({
 		isPaidContent,
 		tags,
 	});
-
 	if (!payload) return null;
+
+	/**
+	 * Because this epic is loaded client side it will cause CLS (it will shift the
+	 * blocks down after the page has already loaded). This is a poor reader experience
+	 * in general because it moves the content whilst they are trying to read it but
+	 * it is especially problematic where a permalink is being used, so we're disabling
+	 * this element in those cases.
+	 */
+	if (window.location.href.includes('#block-')) {
+		log(
+			'dotcom',
+			'A permalink was detected so the LiveBlogEpic will not show',
+		);
+		return null;
+	}
 
 	// Using the payload, make a fetch request to contributions
 	return (
