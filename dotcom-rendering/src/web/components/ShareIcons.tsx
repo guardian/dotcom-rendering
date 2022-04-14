@@ -234,7 +234,9 @@ export const ShareIcons = ({
 								blockId,
 								CMP: 'share_btn_link',
 							}),
-						})}`}
+						})
+							.toString()
+							.replace(/\+/g, '%20')}`}
 						role="button"
 						aria-label="Share via Email"
 						target="_blank"
