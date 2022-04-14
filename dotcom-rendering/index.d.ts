@@ -338,6 +338,7 @@ interface Block {
 	title?: string;
 	blockFirstPublished?: number;
 	blockFirstPublishedDisplay?: string;
+	blockFirstPublishedDisplayNoTimezone?: string;
 	primaryDateLine: string;
 	secondaryDateLine: string;
 	createdOn?: number;

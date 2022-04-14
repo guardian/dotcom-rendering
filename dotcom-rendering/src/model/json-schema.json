@@ -3484,6 +3484,9 @@
                 "blockFirstPublishedDisplay": {
                     "type": "string"
                 },
+                "blockFirstPublishedDisplayNoTimezone": {
+                    "type": "string"
+                },
                 "primaryDateLine": {
                     "type": "string"
                 },
