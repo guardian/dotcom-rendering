@@ -16,7 +16,6 @@ import {
 	neutral,
 	remSpace,
 	textSans,
-	until,
 } from '@guardian/source-foundations';
 import StarRating from 'components/starRating';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
