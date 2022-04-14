@@ -11,19 +11,14 @@ import TheGuardianLogoSVG from '../../static/logos/the-guardian.svg';
 
 import { getZIndex } from '../lib/getZIndex';
 
-const link = (isAnniversary?: boolean) => css`
+const link = () => css`
 	float: right;
 	margin-top: 10px;
 	margin-right: 54px;
 	margin-bottom: 21px;
 
-	${until.mobileMedium} {
-		margin-top: ${isAnniversary ? '20px' : ''};
-	}
-
 	${from.mobileMedium} {
 		margin-right: 10px;
-		margin-top: ${isAnniversary ? '14px' : ''};
 	}
 	${from.mobileLandscape} {
 		margin-right: 20px;
@@ -32,7 +27,7 @@ const link = (isAnniversary?: boolean) => css`
 		margin-top: 8px;
 	}
 	${from.desktop} {
-		margin-top: ${isAnniversary ? '8px' : '5px'};
+		margin-top: 5px;
 		margin-bottom: 15px;
 		position: relative;
 	}
@@ -43,33 +38,30 @@ const link = (isAnniversary?: boolean) => css`
 	${getZIndex('TheGuardian')}
 `;
 
-const style = (isAnniversary?: boolean) => css`
-	height: ${isAnniversary ? 'auto' : '44px'};
+const style = () => css`
+	height: 44px;
 	width: 146px;
 	${from.mobileMedium} {
-		height: ${isAnniversary ? 'auto' : '56px'};
+		height: 56px;
 		width: 195px;
 	}
 	${from.tablet} {
-		height: ${isAnniversary ? 'auto' : '72px'};
+		height: 72px;
 		width: 224px;
 	}
 	${from.desktop} {
-		height: ${isAnniversary ? 'auto' : '95px'};
+		height: 95px;
 		width: 295px;
 	}
 
 	path {
-		fill: ${isAnniversary ? '' : brandText.primary};
+		fill: brandText.primary;
 	}
 `;
 
-export const Logo: React.FC<{
-	isAnniversary?: boolean;
-	edition: Edition;
-}> = ({ isAnniversary, edition }) => {
+export const Logo: React.FC = () => {
 	return (
-		<a css={link(isAnniversary)} href="/" data-link-name="nav2 : logo">
+		<a css={link} href="/" data-link-name="nav2 : logo">
 			<span
 				css={css`
 					${visuallyHidden};
@@ -77,7 +69,7 @@ export const Logo: React.FC<{
 			>
 				The Guardian - Back to home
 			</span>
-			<TheGuardianLogoSVG css={style(isAnniversary)} />
+			<TheGuardianLogoSVG css={style} />
 		</a>
 	);
 };
