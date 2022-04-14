@@ -327,7 +327,7 @@
 						const a = document.createElement("a")
 						const slug = text.slice(guurl.length, 64)
 
-						a.setAttribute("href", `/Article?url=${text}`)
+						a.setAttribute("href", `${getPageType(text)}?url=${text}`)
 						a.innerText = `📋 Article from clipboard: /${slug}…`;
 
 						li.appendChild(a);
@@ -337,6 +337,15 @@
 					}
 				})
 
+			}
+
+			const getPageType = (url) => {
+				// All interactive pages include this in the URL
+				if (url.includes('/ng-interactive/')) return '/Interactive'
+				// We're looking for the date string, e.g /2022/jul/30
+				else if (url.match(/[0-9]{4}\/[a-z]{3}\/[0-9]{2}\/.+/)) return '/Article'
+				// Fall back to fronts for all other page types
+				else return '/Front'
 			}
 
 			document.addEventListener("visibilitychange", checkClipboard);
