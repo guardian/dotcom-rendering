@@ -8,8 +8,6 @@ import {
 } from '@guardian/source-foundations';
 
 import TheGuardianLogoSVG from '../../static/logos/the-guardian.svg';
-import GuardianAnniversaryLogoSVG from '../../static/logos/guardian-anniversary-logo.svg';
-import GuardianAnniversaryLogoUKSVG from '../../static/logos/guardian-anniversary-logo-uk.svg';
 
 import { getZIndex } from '../lib/getZIndex';
 
