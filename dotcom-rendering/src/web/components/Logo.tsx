@@ -70,13 +70,6 @@ export const Logo: React.FC<{
 	isAnniversary?: boolean;
 	edition: Edition;
 }> = ({ isAnniversary, edition }) => {
-	let svg;
-	if (isAnniversary && edition === 'UK') {
-		svg = <GuardianAnniversaryLogoUKSVG css={style(isAnniversary)} />;
-	} else if (isAnniversary) {
-		svg = <GuardianAnniversaryLogoSVG css={style(isAnniversary)} />;
-	} else svg = <TheGuardianLogoSVG css={style(isAnniversary)} />;
-
 	return (
 		<a css={link(isAnniversary)} href="/" data-link-name="nav2 : logo">
 			<span
@@ -86,7 +79,7 @@ export const Logo: React.FC<{
 			>
 				The Guardian - Back to home
 			</span>
-			{svg}
+			<TheGuardianLogoSVG css={style(isAnniversary)} />
 		</a>
 	);
 };
