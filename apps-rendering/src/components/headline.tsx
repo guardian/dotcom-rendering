@@ -104,11 +104,7 @@ const featureStyles = css`
 
 const interviewStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
-	line-height: 42px;
-	${until.tablet} {
-		${headline.small({ fontWeight: 'bold' })};
-		line-height: 35px;
-	}
+	line-height: 1.25;
 `;
 
 const commentStyles = css`
