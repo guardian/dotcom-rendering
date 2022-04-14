@@ -1,349 +1,391 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            html {
-                font-family: Arial, Helvetica, sans-serif;
-                padding-left: 2em;
-            }
-            h2 {
-                margin-top: 1.5em;
-            }
-            a {
-                color: #389ddc;
-            }
-            .test-articles-list span {
-                display: inline-block;
-                width: 8em;
-                line-height: 2em;
-            }
-            .test-article-header span {
-                font-weight: bold;
-            }
-            .test-article > span:nth-child(1),
-            .test-article-header > span:nth-child(1) {
-                width: 14em !important;
-            }
-        </style>
-    </head>
-    <body>
-        <h2>Default Endpoints</h2>
+	<head>
+		<style>
+			html {
+				font-family: Arial, Helvetica, sans-serif;
+				padding-left: 2em;
+			}
+			h2 {
+				margin-top: 1.5em;
+			}
+			a {
+				color: #389ddc;
+			}
+			.test-articles-list span {
+				display: inline-block;
+				width: 8em;
+				line-height: 2em;
+			}
+			.test-article-header span {
+				font-weight: bold;
+			}
+			.test-article > span:nth-child(1),
+			.test-article-header > span:nth-child(1) {
+				width: 14em !important;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Default Endpoints</h2>
 
-        <ul id="default-endpoints">
-            <li><a href="/Article?url=https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software">Article</a></li>
-            <li><a href="/AMPArticle?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance">⚡️Article</a></li>
-			<li><a href="/Interactive?url=https://www.theguardian.com/world/ng-interactive/2021/dec/03/french-election-polls-who-is-leading-the-race-to-be-the-next-president-of-france">Interactive</a></li>
-			<li><a href="/AMPInteractive?url=https://www.theguardian.com/world/2021/mar/24/how-a-container-ship-blocked-the-suez-canal-visual-guide">⚡️Interactive</a></li>
-        </ul>
+		<ul id="default-endpoints">
+			<li>
+				<a
+					href="/Article?url=https://www.theguardian.com/money/2017/mar/10/ministers-to-criminalise-use-of-ticket-tout-harvesting-software"
+					>Article</a
+				>
+			</li>
+			<li>
+				<a
+					href="/AMPArticle?url=https://amp.theguardian.com/world/2013/jun/09/edward-snowden-nsa-whistleblower-surveillance"
+					>⚡️Article</a
+				>
+			</li>
+			<li>
+				<a
+					href="/Interactive?url=https://www.theguardian.com/world/ng-interactive/2021/dec/03/french-election-polls-who-is-leading-the-race-to-be-the-next-president-of-france"
+					>Interactive</a
+				>
+			</li>
+			<li>
+				<a
+					href="/AMPInteractive?url=https://www.theguardian.com/world/2021/mar/24/how-a-container-ship-blocked-the-suez-canal-visual-guide"
+					>⚡️Interactive</a
+				>
+			</li>
+		</ul>
 
-        <h2>Test Articles By Content Type</h2>
+		<h2>Test Articles By Content Type</h2>
 
-        <div id="test-articles-by-content" class="test-articles-list">
-            <div class="test-article-header">
-                <span>type</span>
-                <span>local</span>
-                <span>local-amp</span>
-                <span>production</span>
-                <span>production-amp</span>
-            </div>
-        </div>
+		<div id="test-articles-by-content" class="test-articles-list">
+			<div class="test-article-header">
+				<span>type</span>
+				<span>local</span>
+				<span>local-amp</span>
+				<span>production</span>
+				<span>production-amp</span>
+			</div>
+		</div>
 
-        <h2>Test Articles By Element</h2>
+		<h2>Test Articles By Element</h2>
 
-        <div id="test-articles-by-element" class="test-articles-list">
-            <div class="test-article-header">
-                <span>type</span>
-                <span>local</span>
-                <span>local-amp</span>
-                <span>production</span>
-                <span>production-amp</span>
-            </div>
-        </div>
+		<div id="test-articles-by-element" class="test-articles-list">
+			<div class="test-article-header">
+				<span>type</span>
+				<span>local</span>
+				<span>local-amp</span>
+				<span>production</span>
+				<span>production-amp</span>
+			</div>
+		</div>
 
-        <h2>Test Articles By Atom Type</h2>
+		<h2>Test Articles By Atom Type</h2>
 
-        <div id="test-articles-by-atom-type" class="test-articles-list">
-            <div class="test-article-header">
-                <span>type</span>
-                <span>local</span>
-                <span>local-amp</span>
-                <span>production</span>
-                <span>production-amp</span>
-            </div>
-        </div>
+		<div id="test-articles-by-atom-type" class="test-articles-list">
+			<div class="test-article-header">
+				<span>type</span>
+				<span>local</span>
+				<span>local-amp</span>
+				<span>production</span>
+				<span>production-amp</span>
+			</div>
+		</div>
 
-        <h2>Test Articles By Element (Missing)</h2>
-        <ul>
-            <li>BlockquoteBlockElement</li>
-            <li>CaptionBlockElement</li>
-            <li>ContentAtomBlockElement</li>
-            <li>DisclaimerBlockElement</li>
-            <li>GuideAtomBlockElement</li>
-            <li>InteractiveMarkupBlockElement</li>
-            <li>InteractiveUrlBlockElement</li>
-            <li>ProfileAtomBlockElement</li>
-            <li>QABlockElement</li>
-            <li>SubheadingBlockElement</li>
-            <li>TimelineBlockElement</li>
-            <li>VideoBlockElement</li>
-            <li>VideoFacebookBlockElement</li>
-        </ul>
+		<h2>Test Articles By Element (Missing)</h2>
+		<ul>
+			<li>BlockquoteBlockElement</li>
+			<li>CaptionBlockElement</li>
+			<li>ContentAtomBlockElement</li>
+			<li>DisclaimerBlockElement</li>
+			<li>GuideAtomBlockElement</li>
+			<li>InteractiveMarkupBlockElement</li>
+			<li>InteractiveUrlBlockElement</li>
+			<li>ProfileAtomBlockElement</li>
+			<li>QABlockElement</li>
+			<li>SubheadingBlockElement</li>
+			<li>TimelineBlockElement</li>
+			<li>VideoBlockElement</li>
+			<li>VideoFacebookBlockElement</li>
+		</ul>
 
-        <script>
-            var testContentTypes = [
-                {
-                    name: 'Live Blog',
-                    article:
-                        '/football/live/2018/jul/03/world-cup-2018-england-v-colombia-switzerland-v-sweden-buildup-live',
-                },
-                {
-                    name: 'Opinion Piece',
-                    article:
-                        '/politics/2019/jul/15/it-will-be-boris-johnson-and-it-will-certainly-be-a-disaster',
-                },
-                {
-                    name: 'Paid Content',
-                    article:
-                        '/bank-australia-clean-money/2019/feb/11/three-trillion-reasons-for-australians-to-join-the-clean-money-revolution',
-                },
-                {
-                    name: 'Review',
-                    article: '/music/2018/aug/31/eminem-kamikaze-album-review',
-                },
-            ];
+		<script>
+			var testContentTypes = [
+				{
+					name: 'Live Blog',
+					article:
+						'/football/live/2018/jul/03/world-cup-2018-england-v-colombia-switzerland-v-sweden-buildup-live',
+				},
+				{
+					name: 'Opinion Piece',
+					article:
+						'/politics/2019/jul/15/it-will-be-boris-johnson-and-it-will-certainly-be-a-disaster',
+				},
+				{
+					name: 'Paid Content',
+					article:
+						'/bank-australia-clean-money/2019/feb/11/three-trillion-reasons-for-australians-to-join-the-clean-money-revolution',
+				},
+				{
+					name: 'Review',
+					article: '/music/2018/aug/31/eminem-kamikaze-album-review',
+				},
+			];
 
-            var testArticles = [
-                {
-                    name: 'AudioBlockElement',
-                    article:
-                        '/music/2018/nov/02/the-prodigy-no-tourists-review',
-                },
-                {
-                    name: 'CodeBlockElement',
-                    article: '/info/2018/nov/30/bye-bye-mongo-hello-postgres',
-                },
-                {
-                    name: 'CommentBlockElement',
-                    article:
-                        '/music/2016/apr/28/readers-recommend-playlist-songs-about-climate-change',
-                },
-                {
-                    name: 'ContentAtomBlockElement',
-                    article:
-                        '/world/2018/jun/18/yemen-crisis-saudi-coalition-demands-houthis-unconditional-withdrawal-from-port',
-                },
-                {
-                    name: 'DividerBlockElement',
-                    article:
-                        '/society/2019/apr/25/hand-dryers-paper-towels-hygiene-dyson-airblade',
-                },
-                {
-                    name: 'DocumentBlockElement',
-                    article:
-                        '/australia-news/2019/oct/25/why-angus-taylors-statement-on-the-council-documents-doesnt-clear-up-anything',
-                },
-                {
-                    name: 'EmbedBlockElement',
-                    article:
-                        '/australia-news/2018/jun/12/shorten-wants-more-aged-care-spending-but-wont-back-royal-commission',
-                },
-                {
-                    name: 'GenericAtomBlockElement', // AudioAtom
-                    article:
-                        '/football/2020/jun/13/the-forgotten-story-of-jimmy-hasty-irish-football-one-armed-wonder',
-                },
-                {
-                    name: 'GuVideoBlockElement',
-                    article: '/film/2013/feb/14/keanu-reeves-future-of-cinema',
-                },
-                {
-                    name: 'HighlightBlockElement',
-                    article:
-                        '/uk-news/2020/apr/22/eddies-last-farewell-a-funeral-in-the-time-of-coronavirus-photo-essay',
-                },
-                {
-                    name: 'ImageBlockElement',
-                    article:
-                        '/environment/2018/dec/21/from-spectacular-orchids-to-towering-trees-2018s-top-new-plant-discoveries',
-                },
-                {
-                    name: 'ImageBlockElement (left)',
-                    article:
-                        '/film/2018/aug/30/damon-herriman-to-play-charles-manson-in-quentin-tarantino-film',
-                },
-                {
-                    name: 'InstagramBlockElement',
-                    article:
-                        '/lifeandstyle/2020/apr/27/its-like-a-sexy-story-just-for-me-how-lockdown-has-triggered-a-wave-of-sexting',
-                },
-                {
-                    name: 'InteractiveAtomBlockElement',
-                    article:
-                        '/world/2020/jun/10/uk-coronavirus-lockdown-20000-lives-boris-johnson-neil-ferguson',
-                },
-                {
-                    name: 'InteractiveBlockElement',
-                    article:
-                        '/uk-news/2019/feb/21/teenager-shot-in-fight-on-london-tube-barking-hammersmith-and-city-line',
-                },
-                {
-                    name: 'MapBlockElement',
-                    article:
-                        '/world/2016/sep/19/democratic-republic-congo-demonstrations-banned-police-killed-joseph-kabila-etienne-tshisekedi',
-                },
-                {
-                    name: 'MembershipBlockElement',
-                    article:
-                        '/world/2019/may/02/britons-more-sold-on-immigration-benefits-than-other-europeans',
-                },
-                {
-                    name: 'PullquoteBlockElement',
-                    article:
-                        '/world/2018/dec/28/south-koreas-sexist-sex-education',
-                },
-                {
-                    name: 'RichLinkBlockElement',
-                    article:
-                        '/football/2019/jun/04/juventus-interested-paul-pogba-manchester-united',
-                },
-                {
-                    name: 'SoundcloudBlockElement',
-                    article:
-                        '/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
-                },
-                {
-                    name: 'SpotifyBlockElement',
-                    article:
-                        '/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue',
-                },
-                {
-                    name: 'TableBlockElement',
-                    article:
-                        '/football/blog/2019/dec/09/sergej-milinkovic-savic-and-luis-alberto-are-leading-lazios-surge',
-                },
-                {
-                    name: 'TextBlockElement',
-                    article:
-                        '/politics/2018/nov/27/eu-will-not-renegotiate-brexit-deal-says-may-deputy-david-lidington',
-                },
-                {
-                    name: 'TweetBlockElement',
-                    article:
-                        '/uk-news/reality-check/2015/sep/19/daily-mail-syrian-refugees-story-three-problems',
-                },
-                {
-                    name: 'VideoVimeoBlockElement',
-                    article:
-                        '/stage/2020/mar/29/ecole-des-femmes-review-moliere-theatre-odeon',
-                },
-                {
-                    name: 'VideoYoutubeBlockElement',
-                    article:
-                        '/music/2021/oct/23/buffalo-nichols-buffalo-nichols-review-carl-nichols',
-                },
-                {
-                    name: 'VineBlockElement',
-                    article:
-                        '/technology/2015/sep/04/vine-why-you-always-lyin-nicholas-fraser-down-goes',
-                },
-                {
-                    name: 'YoutubeBlockElement',
-                    article: '/us-news/2020/oct/29/lordstown-ohio-trump-gm-plant-election',
-                },
-                {
-                    name: 'YoutubeBlockElement (in Main media position)',
-                    article: '/world/2020/apr/01/what-is-coronavirus-and-what-is-the-mortality-rate-covid-19',
-                },
-            ];
+			var testArticles = [
+				{
+					name: 'AudioBlockElement',
+					article:
+						'/music/2018/nov/02/the-prodigy-no-tourists-review',
+				},
+				{
+					name: 'CodeBlockElement',
+					article: '/info/2018/nov/30/bye-bye-mongo-hello-postgres',
+				},
+				{
+					name: 'CommentBlockElement',
+					article:
+						'/music/2016/apr/28/readers-recommend-playlist-songs-about-climate-change',
+				},
+				{
+					name: 'ContentAtomBlockElement',
+					article:
+						'/world/2018/jun/18/yemen-crisis-saudi-coalition-demands-houthis-unconditional-withdrawal-from-port',
+				},
+				{
+					name: 'DividerBlockElement',
+					article:
+						'/society/2019/apr/25/hand-dryers-paper-towels-hygiene-dyson-airblade',
+				},
+				{
+					name: 'DocumentBlockElement',
+					article:
+						'/australia-news/2019/oct/25/why-angus-taylors-statement-on-the-council-documents-doesnt-clear-up-anything',
+				},
+				{
+					name: 'EmbedBlockElement',
+					article:
+						'/australia-news/2018/jun/12/shorten-wants-more-aged-care-spending-but-wont-back-royal-commission',
+				},
+				{
+					name: 'GenericAtomBlockElement', // AudioAtom
+					article:
+						'/football/2020/jun/13/the-forgotten-story-of-jimmy-hasty-irish-football-one-armed-wonder',
+				},
+				{
+					name: 'GuVideoBlockElement',
+					article: '/film/2013/feb/14/keanu-reeves-future-of-cinema',
+				},
+				{
+					name: 'HighlightBlockElement',
+					article:
+						'/uk-news/2020/apr/22/eddies-last-farewell-a-funeral-in-the-time-of-coronavirus-photo-essay',
+				},
+				{
+					name: 'ImageBlockElement',
+					article:
+						'/environment/2018/dec/21/from-spectacular-orchids-to-towering-trees-2018s-top-new-plant-discoveries',
+				},
+				{
+					name: 'ImageBlockElement (left)',
+					article:
+						'/film/2018/aug/30/damon-herriman-to-play-charles-manson-in-quentin-tarantino-film',
+				},
+				{
+					name: 'InstagramBlockElement',
+					article:
+						'/lifeandstyle/2020/apr/27/its-like-a-sexy-story-just-for-me-how-lockdown-has-triggered-a-wave-of-sexting',
+				},
+				{
+					name: 'InteractiveAtomBlockElement',
+					article:
+						'/world/2020/jun/10/uk-coronavirus-lockdown-20000-lives-boris-johnson-neil-ferguson',
+				},
+				{
+					name: 'InteractiveBlockElement',
+					article:
+						'/uk-news/2019/feb/21/teenager-shot-in-fight-on-london-tube-barking-hammersmith-and-city-line',
+				},
+				{
+					name: 'MapBlockElement',
+					article:
+						'/world/2016/sep/19/democratic-republic-congo-demonstrations-banned-police-killed-joseph-kabila-etienne-tshisekedi',
+				},
+				{
+					name: 'MembershipBlockElement',
+					article:
+						'/world/2019/may/02/britons-more-sold-on-immigration-benefits-than-other-europeans',
+				},
+				{
+					name: 'PullquoteBlockElement',
+					article:
+						'/world/2018/dec/28/south-koreas-sexist-sex-education',
+				},
+				{
+					name: 'RichLinkBlockElement',
+					article:
+						'/football/2019/jun/04/juventus-interested-paul-pogba-manchester-united',
+				},
+				{
+					name: 'SoundcloudBlockElement',
+					article:
+						'/music/2020/jan/31/elon-musk-edm-artist-first-track-dont-doubt-ur-vibe',
+				},
+				{
+					name: 'SpotifyBlockElement',
+					article:
+						'/music/2020/jun/15/pet-shop-boys-where-to-start-in-their-back-catalogue',
+				},
+				{
+					name: 'TableBlockElement',
+					article:
+						'/football/blog/2019/dec/09/sergej-milinkovic-savic-and-luis-alberto-are-leading-lazios-surge',
+				},
+				{
+					name: 'TextBlockElement',
+					article:
+						'/politics/2018/nov/27/eu-will-not-renegotiate-brexit-deal-says-may-deputy-david-lidington',
+				},
+				{
+					name: 'TweetBlockElement',
+					article:
+						'/uk-news/reality-check/2015/sep/19/daily-mail-syrian-refugees-story-three-problems',
+				},
+				{
+					name: 'VideoVimeoBlockElement',
+					article:
+						'/stage/2020/mar/29/ecole-des-femmes-review-moliere-theatre-odeon',
+				},
+				{
+					name: 'VideoYoutubeBlockElement',
+					article:
+						'/music/2021/oct/23/buffalo-nichols-buffalo-nichols-review-carl-nichols',
+				},
+				{
+					name: 'VineBlockElement',
+					article:
+						'/technology/2015/sep/04/vine-why-you-always-lyin-nicholas-fraser-down-goes',
+				},
+				{
+					name: 'YoutubeBlockElement',
+					article:
+						'/us-news/2020/oct/29/lordstown-ohio-trump-gm-plant-election',
+				},
+				{
+					name: 'YoutubeBlockElement (in Main media position)',
+					article:
+						'/world/2020/apr/01/what-is-coronavirus-and-what-is-the-mortality-rate-covid-19',
+				},
+			];
 
-            var testContentAtomTypes = [
-                {
-                    name: 'AudioAtom',
-                    article:
-                        '/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may',
-                },
-                {
-                    name: 'ChartAtom',
-                    article:
-                        '/australia-news/2020/apr/07/coronavirus-crisis-has-had-staggering-impact-on-australian-businesses-data-reveals',
-                },
-                {
-                    name: 'ExplainerAtom',
-                    article:
-                        '/books/2020/may/07/poems-to-get-us-through-the-ghosts-of-cricketing-summers-knock-kit-wright-for-six-carol-ann-duffy-roller',
-                },
-                {
-                    name: 'GuideAtom',
-                    article:
-                        '/sport/2020/may/19/pinatubo-has-probably-trained-on-for-the-2000-guineas-says-charlie-appleby',
-                },
-                {
-                    name: 'InteractiveAtom',
-                    article:
-                        '/world/2020/jun/10/uk-coronavirus-lockdown-20000-lives-boris-johnson-neil-ferguson',
-                },
-                {
-                    name: 'ProfileAtom',
-                    article:
-                        '/politics/2020/jan/24/labour-leadership-unite-backs-brilliant-rebecca-long-bailey',
-                },
-                {
-                    name: 'Q&A Atom',
-                    article:
-                        '/world/2020/jul/16/a-single-use-face-mask-or-one-like-amber-heards-how-i-learnt-to-choose-wisely',
-                },
-                {
-                    name: 'Quiz Atom',
-                    article:
-                        '/sport/2020/oct/09/sports-quiz-of-the-week-big-deals-defeats-hits-bang-football',
-                },
-                {
-                    name: 'Quiz Atom (personality variant)',
-                    article:
-                        '/world/2016/mar/09/how-millennial-are-you-the-generation-y-quiz',
-                },
-                {
-                    name: 'TimelineAtom',
-                    article:
-                        '/sport/blog/2020/jul/09/why-chris-froome-and-team-ineos-parting-of-the-ways-cycling',
-                },
-            ];
+			var testContentAtomTypes = [
+				{
+					name: 'AudioAtom',
+					article:
+						'/football/blog/2020/may/06/bundesliga-football-puts-its-reputation-on-the-line-with-return-in-late-may',
+				},
+				{
+					name: 'ChartAtom',
+					article:
+						'/australia-news/2020/apr/07/coronavirus-crisis-has-had-staggering-impact-on-australian-businesses-data-reveals',
+				},
+				{
+					name: 'ExplainerAtom',
+					article:
+						'/books/2020/may/07/poems-to-get-us-through-the-ghosts-of-cricketing-summers-knock-kit-wright-for-six-carol-ann-duffy-roller',
+				},
+				{
+					name: 'GuideAtom',
+					article:
+						'/sport/2020/may/19/pinatubo-has-probably-trained-on-for-the-2000-guineas-says-charlie-appleby',
+				},
+				{
+					name: 'InteractiveAtom',
+					article:
+						'/world/2020/jun/10/uk-coronavirus-lockdown-20000-lives-boris-johnson-neil-ferguson',
+				},
+				{
+					name: 'ProfileAtom',
+					article:
+						'/politics/2020/jan/24/labour-leadership-unite-backs-brilliant-rebecca-long-bailey',
+				},
+				{
+					name: 'Q&A Atom',
+					article:
+						'/world/2020/jul/16/a-single-use-face-mask-or-one-like-amber-heards-how-i-learnt-to-choose-wisely',
+				},
+				{
+					name: 'Quiz Atom',
+					article:
+						'/sport/2020/oct/09/sports-quiz-of-the-week-big-deals-defeats-hits-bang-football',
+				},
+				{
+					name: 'Quiz Atom (personality variant)',
+					article:
+						'/world/2016/mar/09/how-millennial-are-you-the-generation-y-quiz',
+				},
+				{
+					name: 'TimelineAtom',
+					article:
+						'/sport/blog/2020/jul/09/why-chris-froome-and-team-ineos-parting-of-the-ways-cycling',
+				},
+			];
 
 			const urls = new Set();
 
+			const getPageType = (url) => {
+				// All interactive pages include this in the URL
+				if (url.includes('/ng-interactive/')) return 'Interactive';
+				// We're looking for the date string, e.g /2022/jul/30
+				else if (url.match(/[0-9]{4}\/[a-z]{3}\/[0-9]{2}\/.+/))
+					return 'Article';
+				// Fall back to fronts for all other page types
+				else return 'Front';
+			};
+
 			const checkClipboard = (e) => {
-				if (document.visibilityState !== "visible") return;
+				if (document.visibilityState !== 'visible') return;
 				if (!navigator?.clipboard) return;
 				if (!document.hasFocus()) return;
 
-				navigator.clipboard.readText().then(text => {
-					const guurl = ["https://www.theguardian.com/", "https://m.code.dev-theguardian.com/", "http://localhost:9000/"].find(base => text.startsWith(base));
+				navigator.clipboard.readText().then((text) => {
+					const guurl = [
+						'https://www.theguardian.com/',
+						'https://m.code.dev-theguardian.com/',
+						'http://localhost:9000/',
+					].find((base) => text.startsWith(base));
 					if (guurl) {
 						if (urls.has(text)) return;
 
 						urls.add(text);
-						const fragment = document.createDocumentFragment()
-						const li = document.createElement("li")
-						const a = document.createElement("a")
-						const slug = text.slice(guurl.length, 64)
+						const fragment = document.createDocumentFragment();
+						const li = document.createElement('li');
+						const a = document.createElement('a');
+						const slug = text.slice(guurl.length, 64);
 
-						a.setAttribute("href", `/Article?url=${text}`)
-						a.innerText = `📋 Article from clipboard: /${slug}…`;
+						a.setAttribute(
+							'href',
+							`/${getPageType(text)}?url=${text}`,
+						);
+						a.innerText = `📋 ${getPageType(
+							text,
+						)} from clipboard: /${slug}…`;
 
 						li.appendChild(a);
 						fragment.appendChild(li);
 
-						document.querySelector("#default-endpoints").appendChild(fragment)
+						document
+							.querySelector('#default-endpoints')
+							.appendChild(fragment);
 					}
-				})
+				});
+			};
 
-			}
-
-			document.addEventListener("visibilitychange", checkClipboard);
-			window.addEventListener("focus", checkClipboard);
+			document.addEventListener('visibilitychange', checkClipboard);
+			window.addEventListener('focus', checkClipboard);
 			checkClipboard();
 
-            var makeTestArticle = (a) => `
+			const makeTestArticle = (a) => `
                 <div class="test-article">
                     <span>${a.name}</span>
                     <span><a href="/Article?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/Article?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
@@ -353,23 +395,21 @@
                 </div>
             `;
 
-            testContentTypes.forEach((a) => {
-                document.getElementById(
-                    'test-articles-by-content',
-                ).innerHTML += makeTestArticle(a);
-            });
+			testContentTypes.forEach((a) => {
+				document.getElementById('test-articles-by-content').innerHTML +=
+					makeTestArticle(a);
+			});
 
-            testArticles.forEach((a) => {
-                document.getElementById(
-                    'test-articles-by-element',
-                ).innerHTML += makeTestArticle(a);
-            });
+			testArticles.forEach((a) => {
+				document.getElementById('test-articles-by-element').innerHTML +=
+					makeTestArticle(a);
+			});
 
-            testContentAtomTypes.forEach((a) => {
-                document.getElementById(
-                    'test-articles-by-atom-type',
-                ).innerHTML += makeTestArticle(a);
-            });
-        </script>
-    </body>
+			testContentAtomTypes.forEach((a) => {
+				document.getElementById(
+					'test-articles-by-atom-type',
+				).innerHTML += makeTestArticle(a);
+			});
+		</script>
+	</body>
 </html>
