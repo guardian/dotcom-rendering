@@ -18,10 +18,7 @@ const Default: FC = () => (
 		}).map((format) => (
 			<div key={format.theme}>
 				<p>{getThemeNameAsString(format)}</p>
-				<HeadlineTag
-					tagText={'Interview'}
-					format={format}
-				/>
+				<HeadlineTag tagText={'Interview'} format={format} />
 				<br />
 			</div>
 		))}

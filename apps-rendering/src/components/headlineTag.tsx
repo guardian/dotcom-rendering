@@ -18,10 +18,11 @@ const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 type Props = {
 	tagText: string;
 	format: ArticleFormat;
-}
+};
 
-const HeadlineTag: FC<Props> = ({ tagText, format }) =>
-	<span css={headlineTagStyles(format)}>{tagText}</span>;
+const HeadlineTag: FC<Props> = ({ tagText, format }) => (
+	<span css={headlineTagStyles(format)}>{tagText}</span>
+);
 
 // ----- Exports ----- //
 
