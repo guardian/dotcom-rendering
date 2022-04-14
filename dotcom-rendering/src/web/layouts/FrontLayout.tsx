@@ -122,6 +122,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							sideBorders={true}
 							padContent={false}
 							centralBorder="partial"
+							url={collection.href}
 						>
 							<DecideContainer
 								trails={trails}
