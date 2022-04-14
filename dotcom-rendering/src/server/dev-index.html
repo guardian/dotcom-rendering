@@ -385,7 +385,7 @@
 			window.addEventListener('focus', checkClipboard);
 			checkClipboard();
 
-			var makeTestArticle = (a) => `
+			const makeTestArticle = (a) => `
                 <div class="test-article">
                     <span>${a.name}</span>
                     <span><a href="/Article?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/Article?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
