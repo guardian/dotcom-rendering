@@ -12,7 +12,7 @@ import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
 import { VimeoBlockComponent } from './VimeoBlockComponent';
 import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
 import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
-import { TweetBlockComponent } from './TweetBlockComponent';
+import { TweetBlockComponent } from './TweetBlockComponent.importable';
 import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
 import { MapEmbedBlockComponent } from './MapEmbedBlockComponent.importable';
 import { VineBlockComponent } from './VineBlockComponent.importable';
@@ -391,7 +391,7 @@ const twitterTweetEmbed: TweetBlockElement = {
 	role: Inline,
 	isThirdPartyTracking: false,
 	_type: 'model.dotcomrendering.pageElements.TweetBlockElement',
-	html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A staff member at MSNBC has died of coronavirus. It’s hitting them pretty hard as you can see from <a href="https://twitter.com/maddow?ref_src=twsrc%5Etfw">@maddow</a>’s sign-off today <a href="https://t.co/nbqRRaammr">pic.twitter.com/nbqRRaammr</a></p>&mdash; Matt Bevan 🎙 (@MatthewBevan) <a href="https://twitter.com/MatthewBevan/status/1241244758653071360?ref_src=twsrc%5Etfw">March 21, 2020</a></blockquote>\n',
+	html: '<blockquote class="nojs-tweet"><p lang="en" dir="ltr">A staff member at MSNBC has died of coronavirus. It’s hitting them pretty hard as you can see from <a href="https://twitter.com/maddow?ref_src=twsrc%5Etfw">@maddow</a>’s sign-off today <a href="https://t.co/nbqRRaammr">pic.twitter.com/nbqRRaammr</a></p>&mdash; Matt Bevan 🎙 (@MatthewBevan) <a href="https://twitter.com/MatthewBevan/status/1241244758653071360?ref_src=twsrc%5Etfw">March 21, 2020</a></blockquote>\n',
 	hasMedia: false,
 	id: '1241244758653071360',
 	url: 'https://twitter.com/MatthewBevan/status/1241244758653071360',
@@ -407,7 +407,7 @@ const twitterEmbedEmbed: EmbedBlockElement = {
 	safe: false,
 	alt: 'Video: social distancing',
 	_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
-	html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Confused about the difference between self-isolation and social distancing - and who should do it? 🤷🏻‍♀️ Watch this as <a href="https://twitter.com/robosborneitv?ref_src=twsrc%5Etfw">@robosborneitv</a> explains, with the help of his mum, and <a href="https://twitter.com/ckkhaira?ref_src=twsrc%5Etfw">@ckkhaira</a> <a href="https://t.co/SNzpDRFxsz">https://t.co/SNzpDRFxsz</a> <a href="https://twitter.com/hashtag/coronavirus?src=hash&amp;ref_src=twsrc%5Etfw">#coronavirus</a> <a href="https://twitter.com/hashtag/covid19?src=hash&amp;ref_src=twsrc%5Etfw">#covid19</a> <a href="https://t.co/wC6ezmAqRC">pic.twitter.com/wC6ezmAqRC</a></p>&mdash; ITV Wales News (@ITVWales) <a href="https://twitter.com/ITVWales/status/1241068501076410376?ref_src=twsrc%5Etfw">March 20, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
+	html: '<blockquote class="nojs-tweet"><p lang="en" dir="ltr">Confused about the difference between self-isolation and social distancing - and who should do it? 🤷🏻‍♀️ Watch this as <a href="https://twitter.com/robosborneitv?ref_src=twsrc%5Etfw">@robosborneitv</a> explains, with the help of his mum, and <a href="https://twitter.com/ckkhaira?ref_src=twsrc%5Etfw">@ckkhaira</a> <a href="https://t.co/SNzpDRFxsz">https://t.co/SNzpDRFxsz</a> <a href="https://twitter.com/hashtag/coronavirus?src=hash&amp;ref_src=twsrc%5Etfw">#coronavirus</a> <a href="https://twitter.com/hashtag/covid19?src=hash&amp;ref_src=twsrc%5Etfw">#covid19</a> <a href="https://t.co/wC6ezmAqRC">pic.twitter.com/wC6ezmAqRC</a></p>&mdash; ITV Wales News (@ITVWales) <a href="https://twitter.com/ITVWales/status/1241068501076410376?ref_src=twsrc%5Etfw">March 20, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>',
 	isMandatory: false,
 };
 

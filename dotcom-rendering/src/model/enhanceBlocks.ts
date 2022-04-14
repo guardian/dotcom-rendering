@@ -5,6 +5,7 @@ import { enhanceInteractiveContentsElements } from './enhance-interactive-conten
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceEmbeds } from './enhance-embeds';
+import { enhanceTweets } from './enhance-tweets';
 
 class BlockEnhancer {
 	blocks: Block[];
@@ -50,6 +51,11 @@ class BlockEnhancer {
 		this.blocks = enhanceEmbeds(this.blocks);
 		return this;
 	}
+
+	enhanceTweets() {
+		this.blocks = enhanceTweets(this.blocks);
+		return this;
+	}
 }
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
@@ -63,5 +69,6 @@ export const enhanceBlocks = (blocks: Block[], format: CAPIFormat): Block[] => {
 		.enhanceDots()
 		.enhanceImages()
 		.enhanceNumberedLists()
-		.enhanceEmbeds().blocks;
+		.enhanceEmbeds()
+		.enhanceTweets().blocks;
 };
