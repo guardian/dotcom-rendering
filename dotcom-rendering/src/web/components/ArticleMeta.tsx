@@ -48,11 +48,6 @@ const meta = (format: ArticleFormat) => {
 				order: 3;
 			}
 
-			${from.phablet} {
-				padding-left: 0px;
-				padding-right: 0px;
-			}
-
 			padding-top: 2px;
 		`;
 	}
