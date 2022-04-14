@@ -5,9 +5,9 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
 import { headline, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
-import { map, withDefault } from '@guardian/types';
-import { pipe } from 'lib';
-import type { ReactElement, ReactNode } from 'react';
+import { withDefault } from '@guardian/types';
+import { maybeRender } from 'lib';
+import type { FC, ReactNode } from 'react';
 import { getHref } from 'renderer';
 
 const toReact = (format: ArticleFormat) => {
@@ -60,25 +60,19 @@ const addressStyles = (format: ArticleFormat): SerializedStyles => css`
 	width: fit-content;
 `;
 
-const HeadlineByline = ({
-	format,
-	bylineHtml,
-}: {
+type Props = {
 	format: ArticleFormat;
 	bylineHtml: Option<DocumentFragment>;
-}): ReactElement | null => {
-	return pipe(
-		bylineHtml,
-		map((byline) => (
-			<div css={headlineBox(format)}>
-				<address css={addressStyles(format)}>
-					{renderText(format, byline)}
-				</address>
-			</div>
-		)),
-		withDefault<ReactElement | null>(null),
-	);
 };
+
+const HeadlineByline: FC<Props> = ({ format, bylineHtml }) =>
+	maybeRender(bylineHtml, (byline) => (
+		<div css={headlineBox(format)}>
+			<address css={addressStyles(format)}>
+				{renderText(format, byline)}
+			</address>
+		</div>
+	));
 
 // ----- Exports ----- //
 
