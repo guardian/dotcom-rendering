@@ -121,7 +121,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					return (
 						<ContainerLayout
 							title={collection.displayName}
-							showTopBorder={index > 0}
+							// TODO: This logic should be updated, as this relies
+							// on the first container being 'palette styles do not delete'
+							showTopBorder={index > 1}
 							sideBorders={true}
 							padContent={false}
 							centralBorder="partial"
