@@ -21,6 +21,7 @@ type Props = {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	badge?: BadgeType;
+	isMatch?: boolean;
 };
 
 const sectionLabelLink = css`
@@ -174,6 +175,7 @@ export const SeriesSectionLink = ({
 	sectionUrl,
 	guardianBaseURL,
 	badge,
+	isMatch,
 }: Props) => {
 	// If we have a tag, use it to show 2 section titles
 	const tag = tags.find(
@@ -189,6 +191,14 @@ export const SeriesSectionLink = ({
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const palette = decidePalette(format);
+
+	const seriesTitleColour = isMatch
+		? palette.text.matchTitle
+		: palette.text.seriesTitle;
+
+	const sectionTitleColour = isMatch
+		? palette.text.matchTitle
+		: palette.text.sectionTitle;
 
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -209,7 +219,7 @@ export const SeriesSectionLink = ({
 										fontStyles(format),
 										breakWord,
 										css`
-											color: ${palette.text.seriesTitle};
+											color: ${seriesTitleColour};
 											background-color: ${palette
 												.background.seriesTitle};
 											box-shadow: -6px 0 0 0
@@ -267,7 +277,7 @@ export const SeriesSectionLink = ({
 									fontStyles(format),
 									breakWord,
 									css`
-										color: ${palette.text.sectionTitle};
+										color: ${sectionTitleColour};
 										background-color: ${palette.background
 											.sectionTitle};
 										box-shadow: -6px 0 0 0
@@ -316,7 +326,7 @@ export const SeriesSectionLink = ({
 										breakWord,
 										!badge && sectionPadding,
 										css`
-											color: ${palette.text.seriesTitle};
+											color: ${seriesTitleColour};
 											background-color: ${palette
 												.background.seriesTitle};
 											box-shadow: -6px 0 0 0
@@ -355,7 +365,7 @@ export const SeriesSectionLink = ({
 							css={[
 								sectionLabelLink,
 								css`
-									color: ${palette.text.seriesTitle};
+									color: ${seriesTitleColour};
 									background-color: ${palette.background
 										.seriesTitle};
 								`,
@@ -384,7 +394,7 @@ export const SeriesSectionLink = ({
 									displayBlock,
 									breakWord,
 									css`
-										color: ${palette.text.sectionTitle};
+										color: ${sectionTitleColour};
 										background-color: ${palette.background
 											.sectionTitle};
 									`,
@@ -405,7 +415,7 @@ export const SeriesSectionLink = ({
 					css={[
 						sectionLabelLink,
 						css`
-							color: ${palette.text.sectionTitle};
+							color: ${sectionTitleColour};
 							background-color: ${palette.background
 								.sectionTitle};
 						`,

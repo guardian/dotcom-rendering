@@ -12,6 +12,7 @@ type Props = {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	badge?: BadgeType;
+	isMatch?: boolean;
 };
 
 const sectionStyles = css`
@@ -63,6 +64,7 @@ export const ArticleTitle = ({
 	sectionUrl,
 	guardianBaseURL,
 	badge,
+	isMatch,
 }: Props) => (
 	<div css={[sectionStyles, badge && badgeContainer]}>
 		{badge && format.display !== ArticleDisplay.Immersive && (
@@ -85,6 +87,7 @@ export const ArticleTitle = ({
 				sectionUrl={sectionUrl}
 				guardianBaseURL={guardianBaseURL}
 				badge={badge}
+				isMatch={isMatch}
 			/>
 		</div>
 	</div>
