@@ -66,6 +66,7 @@ export const SpotifyBlockComponent = ({
 						captionText={caption}
 						format={format}
 						credit={credit}
+						isMainMedia={isMainMedia}
 					/>
 				)}
 			</div>
