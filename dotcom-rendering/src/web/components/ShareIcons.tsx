@@ -47,16 +47,20 @@ const topMarginStlyes = css`
 const decideIconColor = (format: ArticleFormat, context: Context) => {
 	const palette = decidePalette(format);
 	if (format.design === ArticleDesign.LiveBlog) {
-		return context === 'ArticleMeta'
-			? css`
-					fill: ${palette.fill.shareIconGrayBackground};
-					${until.desktop} {
-						fill: ${palette.text.standfirst};
-					}
-			  `
-			: css`
-					fill: ${palette.fill.shareIconGrayBackground};
-			  `;
+		if (context === 'ArticleMeta') {
+			return css`
+				fill: ${palette.fill.shareIconGrayBackground};
+				${until.desktop} {
+					fill: ${palette.text.standfirst};
+				}
+			`;
+		}
+
+		if (context === 'SubMeta') {
+			return css`
+				fill: ${palette.fill.shareIconGrayBackground};
+			`;
+		}
 	}
 	if (
 		format.design === ArticleDesign.DeadBlog &&
