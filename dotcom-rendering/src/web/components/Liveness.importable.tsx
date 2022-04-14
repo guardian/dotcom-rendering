@@ -146,9 +146,7 @@ export const Liveness = ({
 	hasPinnedPost,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
-	const [topOfBlogVisible, setTopOfBlogVisible] = useState<
-		boolean | undefined
-	>();
+	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
 
@@ -283,7 +281,7 @@ export const Liveness = ({
 			document.getElementById(placeToScrollTo)?.scrollIntoView({
 				behavior: 'smooth',
 			});
-			window.location.href = `#${placeToScrollTo}`;
+			window.history.replaceState({}, '', `#${placeToScrollTo}`);
 			revealPendingBlocks();
 			setNumHiddenBlocks(0);
 		} else {

@@ -1,13 +1,9 @@
 import { resets, brandBackground } from '@guardian/source-foundations';
-import he from 'he';
-import { ArticleDesign } from '@guardian/libs';
 import { getFontsCss } from '../../lib/fonts-css';
 import { ASSET_ORIGIN } from '../../lib/assets';
 
-export const htmlTemplate = ({
+export const frontTemplate = ({
 	title = 'The Guardian',
-	description,
-	linkedData,
 	priorityScriptTags,
 	lowPriorityScriptTags,
 	css,
@@ -15,27 +11,17 @@ export const htmlTemplate = ({
 	windowGuardian,
 	gaPath,
 	fontFiles = [],
-	ampLink,
-	openGraphData,
-	twitterData,
 	keywords,
-	format,
 }: {
 	title?: string;
-	description: string;
-	linkedData: { [key: string]: any };
 	priorityScriptTags: string[];
 	lowPriorityScriptTags: string[];
 	css: string;
 	html: string;
-	fontFiles?: string[];
 	windowGuardian: string;
+	fontFiles?: string[];
 	gaPath: { modern: string; legacy: string };
-	ampLink?: string;
-	openGraphData: { [key: string]: string };
-	twitterData: { [key: string]: string };
 	keywords: string;
-	format: ArticleFormat;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -47,41 +33,24 @@ export const htmlTemplate = ({
 			`<link rel="preload" href="${fontFile}" as="font" crossorigin>`,
 	);
 
-	const generateMetaTags = (
-		dataObject: { [key: string]: string },
-		attributeName: 'name' | 'property',
-	) => {
-		if (dataObject) {
-			return Object.entries(dataObject)
-				.map(
-					([id, value]) =>
-						`<meta ${attributeName}="${id}" content="${value}"/>`,
-				)
-				.join('\n');
-		}
-		return '';
-	};
-
-	const openGraphMetaTags = generateMetaTags(openGraphData, 'property');
-
 	// Opt out of having information from our website used for personalization of content and suggestions for Twitter users, including ads
 	// See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
 	const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">`;
 
-	const twitterMetaTags = generateMetaTags(twitterData, 'name');
-
-	// Duplicated prefetch and preconnect tags from DCP:
-	// Documented here: https://github.com/guardian/frontend/pull/12935
-	// Preconnect should be used for the most crucial third party domains
-	// "use preconnect when you know for sure that you’re going to be accessing a resource"
-	// - https://www.smashingmagazine.com/2019/04/optimization-performance-resource-hints/
-	// DNS-prefetch should be used for other third party domains that we are likely to connect to but not sure (ads)
-	// Preconnecting to too many URLs can reduce page performance
-	// DNS-prefetch can also be used as a fallback for IE11
-	// More information on preconnecting:
-	// https://css-tricks.com/using-relpreconnect-to-establish-network-connections-early-and-increase-performance/
-	// More information on prefetching:
-	// https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+	/**
+	 * Duplicated prefetch and preconnect tags from DCP:
+	 * Documented here: https://github.com/guardian/frontend/pull/12935
+	 * Preconnect should be used for the most crucial third party domains
+	 * "use preconnect when you know for sure that you’re going to be accessing a resource"
+	 * - https://www.smashingmagazine.com/2019/04/optimization-performance-resource-hints/
+	 * DNS-prefetch should be used for other third party domains that we are likely to connect to but not sure (ads)
+	 * Preconnecting to too many URLs can reduce page performance
+	 * DNS-prefetch can also be used as a fallback for IE11
+	 * More information on preconnecting:
+	 * https://css-tricks.com/using-relpreconnect-to-establish-network-connections-early-and-increase-performance/
+	 * More information on prefetching:
+	 * https://developer.mozilla.org/en-US/docs/Web/Performance/dns-prefetch
+	 */
 	const staticPreconnectUrls = [
 		`${ASSET_ORIGIN}`,
 		`https://i.guim.co.uk`,
@@ -111,8 +80,6 @@ export const htmlTemplate = ({
 	const prefetchTags = staticPrefetchUrls.map(
 		(src) => `<link rel="dns-prefetch" href="${src}">`,
 	);
-
-	const smoothScrolling = `style="scroll-behavior: smooth;"`;
 
 	const weAreHiringMessage = `
 <!--
@@ -159,14 +126,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 --->`;
 
 	return `<!doctype html>
-        <html lang="en" ${
-			// Used when taking the reader to the top of the blog on toast click
-			format.design === ArticleDesign.LiveBlog && smoothScrolling
-		}>
+        <html lang="en">
             <head>
 			    ${weAreHiringMessage}
                 <title>${title}</title>
-                <meta name="description" content="${he.encode(description)}" />
+                <meta name="description" content="Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice" />
                 <meta charset="utf-8">
 
                 <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
@@ -175,28 +139,16 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 ${preconnectTags.join('\n')}
                 ${prefetchTags.join('\n')}
-
-                <script type="application/ld+json">
-                    ${JSON.stringify(linkedData)}
-                </script>
-
-                <!-- TODO make this conditional when we support more content types -->
-                ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
-
                 ${fontPreloadTags.join('\n')}
 
-                ${openGraphMetaTags}
-
                 ${twitterSecAndPrivacyMetaTags}
-
-                ${twitterMetaTags}
 
                 <!--  This tag enables pages to be featured in Google Discover as large previews
                     See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
                 <meta name="robots" content="max-image-preview:large">
 
                 <script>
-                    window.guardian = ${windowGuardian};
+					window.guardian = ${windowGuardian};
                     window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
                 </script>
 
@@ -279,9 +231,16 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 
                 <noscript>
-                    <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${encodeURIComponent(
-						keywords,
-					).replace(/%20/g, '+')}" />
+                    <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
+						{
+							c1: '2',
+							c2: '6035250',
+							cv: '2.0',
+							cj: '1',
+							cs_ucfr: '0',
+							comscorekw: keywords,
+						},
+					)}" />
                 </noscript>
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>

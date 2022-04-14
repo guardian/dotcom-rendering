@@ -11,7 +11,7 @@
  *    gen-fixtures.ts directly.
  */
 
-export const Live: CAPIType = {
+export const Live: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="2dbb8d5200a0c46420d3d9145194d7bcb9311d44"> \n <img src="https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg" alt="Perseverance rover as it touched down in the area known as Jezero crater." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Perseverance rover as it touched down in the area known as Jezero crater.</span> \n  <span class="element-image__credit">Photograph: NASA/Getty Images</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [
@@ -1920,7 +1920,7 @@ export const Live: CAPIType = {
 					elementId: 'b23e23eb-efcd-4c81-9be5-7b9163c03ed7',
 				},
 				{
-					html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I love rocks. Look at these right next to my wheel. Are they volcanic or sedimentary? What story do they tell? Can’t wait to find out.<a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a><a href="https://t.co/7w3rbvbyoL">https://t.co/7w3rbvbyoL</a> <a href="https://t.co/H3q1M0YJAd">pic.twitter.com/H3q1M0YJAd</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362831783444717568?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
+					html: '<blockquote class="nojs-tweet"><p lang="en" dir="ltr">I love rocks. Look at these right next to my wheel. Are they volcanic or sedimentary? What story do they tell? Can’t wait to find out.<a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a><a href="https://t.co/7w3rbvbyoL">https://t.co/7w3rbvbyoL</a> <a href="https://t.co/H3q1M0YJAd">pic.twitter.com/H3q1M0YJAd</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362831783444717568?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
 					url: 'https://twitter.com/NASAPersevere/status/1362831783444717568',
 					id: '1362831783444717568',
 					hasMedia: false,
@@ -1931,7 +1931,7 @@ export const Live: CAPIType = {
 					elementId: '21ee0668-9968-47e1-9406-28557d2e4b49',
 				},
 				{
-					html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Every picture tells a story. This one captures me in midair, floating over Mars while hanging from my parachute during the final <a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a>.<br><br>Latest update and images: <a href="https://t.co/fnnEOOMWsV">https://t.co/fnnEOOMWsV</a> <a href="https://t.co/39aGp963a3">pic.twitter.com/39aGp963a3</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362839907824136193?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
+					html: '<blockquote class="nojs-tweet"><p lang="en" dir="ltr">Every picture tells a story. This one captures me in midair, floating over Mars while hanging from my parachute during the final <a href="https://twitter.com/hashtag/CountdownToMars?src=hash&amp;ref_src=twsrc%5Etfw">#CountdownToMars</a>.<br><br>Latest update and images: <a href="https://t.co/fnnEOOMWsV">https://t.co/fnnEOOMWsV</a> <a href="https://t.co/39aGp963a3">pic.twitter.com/39aGp963a3</a></p>&mdash; NASA&#39;s Perseverance Mars Rover (@NASAPersevere) <a href="https://twitter.com/NASAPersevere/status/1362839907824136193?ref_src=twsrc%5Etfw">February 19, 2021</a></blockquote>\n',
 					url: 'https://twitter.com/NASAPersevere/status/1362839907824136193',
 					id: '1362839907824136193',
 					hasMedia: false,

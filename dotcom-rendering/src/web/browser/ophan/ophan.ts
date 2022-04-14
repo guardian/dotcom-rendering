@@ -12,11 +12,7 @@ import type {
 export type OphanRecordFunction = (event: { [key: string]: any }) => void;
 
 export const getOphanRecordFunction = (): OphanRecordFunction => {
-	const record =
-		window &&
-		window.guardian &&
-		window.guardian.ophan &&
-		window.guardian.ophan.record;
+	const record = window?.guardian?.ophan?.record;
 
 	if (record) {
 		return record;
@@ -26,11 +22,7 @@ export const getOphanRecordFunction = (): OphanRecordFunction => {
 };
 
 export const record: OphanRecordFunction = (event) => {
-	if (
-		window.guardian &&
-		window.guardian.ophan &&
-		window.guardian.ophan.record
-	) {
+	if (window?.guardian?.ophan?.record) {
 		window.guardian.ophan.record(event);
 	} else {
 		throw new Error("window.guardian.ophan.record doesn't exist");
@@ -98,11 +90,7 @@ export const sendOphanPlatformRecord = () => {
 	record({ experiences: 'dotcom-rendering' });
 
 	// Record server-side AB test variants (i.e. control or variant)
-	if (
-		window.guardian &&
-		window.guardian.config &&
-		window.guardian.config.tests
-	) {
+	if (window?.guardian?.config?.tests) {
 		const { tests } = window.guardian.config;
 
 		record(abTestPayload(tests));
@@ -110,7 +98,7 @@ export const sendOphanPlatformRecord = () => {
 };
 
 export const recordPerformance = () => {
-	const performanceAPI = window.performance;
+	const { performance: performanceAPI } = window;
 	const supportsPerformanceProperties =
 		performanceAPI &&
 		'navigation' in performanceAPI &&

@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { Hide } from './Hide';
@@ -37,40 +37,9 @@ export const OnwardsLayout: React.FC<OnwardsType> = (
 ) => {
 	const sections = useComments([data]);
 
-	/**
-	 * Why are we overriding display like this?
-	 *
-	 * Good question. Basically, we had a production issue and this was the easiest and
-	 * quickest way to fix it rather than fixing Card's properly 😱
-	 *
-	 * Carousels use display.Immersive to change some Card styles and this was bleeding
-	 * into normal onwards cards that linked through to Immersive articles.
-	 *
-	 * Once:
-	 * 1. Cards have been refactored to remove `isFullSizeImage`
-	 * 2. We support the concept of a container type and
-	 * 3. We  and are able to handle Carousels natively - in
-	 *    the model
-	 * Then this should be removed.
-	 */
-	const sectionsForcedToStandard = sections.map((section) => {
-		return {
-			...section,
-			trails: section.trails.map((trail) => {
-				return {
-					...trail,
-					format: {
-						...trail.format,
-						display: ArticleDisplay.Standard,
-					},
-				};
-			}),
-		};
-	});
-
 	return (
 		<>
-			{sectionsForcedToStandard.map((section, index) => (
+			{sections.map((section, index) => (
 				<Flex key={`${section.heading}-${index}`}>
 					<LeftColumn
 						borderType="partial"

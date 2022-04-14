@@ -128,7 +128,7 @@ describe('Liveblogs', function () {
 				html: tweetBlock,
 				mostRecentBlockId: 'abc',
 			});
-			cy.scrollTo(0, 1600);
+			cy.scrollTo(0, 1200);
 			getTwitterIframe().contains(
 				'They will prepare the extraordinary European Council meeting tonight',
 				{
@@ -201,7 +201,7 @@ describe('Liveblogs', function () {
 			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
 				'not.be.visible',
 			);
-			cy.get('[id=top-of-blog]').scrollIntoView();
+			cy.scrollTo(0, 900);
 			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
 				'be.visible',
 			);

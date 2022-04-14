@@ -53,10 +53,6 @@ export const Format =
 									imagePosition="top"
 									showClock={true}
 									commentCount={99}
-									isFullCardImage={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
 									starRating={starRating}
 								/>
 							</LI>
@@ -86,10 +82,6 @@ export const Format =
 									imagePosition="top"
 									showClock={true}
 									commentCount={99}
-									isFullCardImage={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
 									starRating={starRating}
 								/>
 							</LI>
@@ -119,10 +111,6 @@ export const Format =
 									imagePosition="top"
 									showClock={true}
 									commentCount={99}
-									isFullCardImage={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
 									starRating={starRating}
 								/>
 							</LI>
@@ -152,10 +140,6 @@ export const Format =
 									imagePosition="top"
 									showClock={true}
 									commentCount={99}
-									isFullCardImage={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
 									starRating={starRating}
 								/>
 							</LI>
@@ -182,10 +166,6 @@ export const Format =
 									imagePosition="top"
 									showClock={true}
 									commentCount={99}
-									isFullCardImage={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
 									starRating={starRating}
 								/>
 							</LI>
@@ -215,10 +195,6 @@ export const Format =
 									imagePosition="top"
 									showClock={true}
 									commentCount={99}
-									isFullCardImage={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
 									starRating={starRating}
 								/>
 							</LI>
@@ -248,10 +224,6 @@ export const Format =
 									imagePosition="top"
 									showClock={true}
 									commentCount={99}
-									isFullCardImage={
-										format.display ===
-										ArticleDisplay.Immersive
-									}
 									starRating={starRating}
 								/>
 							</LI>

@@ -11,7 +11,7 @@
  *    gen-fixtures.ts directly.
  */
 
-export const Editorial: CAPIType = {
+export const Editorial: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="c8200f3ea53cda44927b11af11e8fc731afc3f34"> <img src="https://media.guim.co.uk/c8200f3ea53cda44927b11af11e8fc731afc3f34/0_0_5322_3193/1000.jpg" alt="‘Ministers have said further border measures are required, but cannot say when they will be applied.’ A man waiting at the Heathrow international arrivals hall on 29 January." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">‘Ministers have said further border measures are required, but cannot say when they will be applied.’</span> <span class="element-image__credit">Photograph: May James/ZUMA Wire/REX/Shutterstock</span> </figcaption> </figure>',
 	subMetaSectionLinks: [

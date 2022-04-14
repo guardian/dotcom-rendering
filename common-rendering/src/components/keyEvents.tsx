@@ -81,8 +81,18 @@ const listStyles = (
 	format: ArticleFormat,
 	supportsDarkMode: boolean,
 ): SerializedStyles => css`
+	background-color: ${background.keyEvents(format)};
+
+	${from.desktop} {
+		background-color: ${background.keyEventsWide(format)};
+	}
+
 	${darkModeCss(supportsDarkMode)`
-		background-color: ${background.articleContentDark(format)};
+		background-color: ${background.keyEventsDark(format)};
+
+		${from.desktop} {
+			background-color: ${background.keyEventsWideDark(format)};
+		}
 	`}
 `;
 

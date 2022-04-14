@@ -11,7 +11,7 @@
  *    gen-fixtures.ts directly.
  */
 
-export const Article: CAPIType = {
+export const Article: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="82cf4777db1bc8aee728f88202118ec67f535156"> <img src="https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/1000.jpg" alt="A digitally manipulated image showing a flooded Rotterdam." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A digitally manipulated image showing a flooded Rotterdam.</span> <span class="element-image__credit">Photograph: Alexandre Rotenberg/Alamy</span> </figcaption> </figure>',
 	subMetaSectionLinks: [

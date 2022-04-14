@@ -1,7 +1,7 @@
 import { Article } from '../../fixtures/generated/articles/Article';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 
-const example: CAPIType = Article;
+const example: CAPIArticleType = Article;
 
 const metaData = {
 	id: '123',

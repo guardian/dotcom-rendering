@@ -15,27 +15,29 @@ import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 export const render = ({ body }: express.Request, res: express.Response) => {
 	try {
 		// TODO remove when migrated to v2
-		const CAPI = validateV2(body);
-		const { linkedData } = CAPI;
-		const { config } = CAPI;
-		const blockElements = CAPI.blocks.map((block) => block.elements);
+		const CAPIArticle = validateV2(body);
+		const { linkedData } = CAPIArticle;
+		const { config } = CAPIArticle;
+		const blockElements = CAPIArticle.blocks.map((block) => block.elements);
 
 		// This is simply to flatten the elements
 		const elements = ([] as CAPIElement[]).concat(...blockElements);
 
-		const scripts = [...extractScripts(elements, CAPI.mainMediaElements)];
+		const scripts = [
+			...extractScripts(elements, CAPIArticle.mainMediaElements),
+		];
 
-		const sectionName = CAPI.sectionName || '';
+		const sectionName = CAPIArticle.sectionName || '';
 		const neilsenAPIID = findBySubsection(sectionName).apiID;
 
 		const analytics: AnalyticsModel = {
 			gaTracker: 'UA-78705427-1',
-			title: CAPI.headline,
+			title: CAPIArticle.headline,
 			fbPixelaccount: '279880532344561',
 			comscoreID: '6035250',
 			section: sectionName,
-			contentType: CAPI.contentType,
-			id: CAPI.pageId,
+			contentType: CAPIArticle.contentType,
+			id: CAPIArticle.pageId,
 			neilsenAPIID,
 			domain: 'amp.theguardian.com',
 			permutive: {
@@ -47,20 +49,20 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 		};
 
 		const metadata = {
-			description: CAPI.trailText,
-			canonicalURL: CAPI.webURL,
+			description: CAPIArticle.trailText,
+			canonicalURL: CAPIArticle.webURL,
 		};
 
 		const resp = document({
 			linkedData,
 			scripts,
 			metadata,
-			title: `${CAPI.headline} | ${CAPI.sectionLabel} | The Guardian`,
+			title: `${CAPIArticle.headline} | ${CAPIArticle.sectionLabel} | The Guardian`,
 			body: (
 				<Article
 					experimentsData={getAmpExperimentCache()}
-					articleData={CAPI}
-					nav={extractNAV(CAPI.nav)}
+					articleData={CAPIArticle}
+					nav={extractNAV(CAPIArticle.nav)}
 					analytics={analytics}
 					config={config}
 				/>
