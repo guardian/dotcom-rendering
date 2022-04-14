@@ -119,7 +119,7 @@ const captionPadding = css`
 	padding-right: 8px;
 `;
 
-const mobileCaptionPadding = css`
+const tabletCaptionPadding = css`
 	${until.desktop} {
 		${captionPadding}
 	}
@@ -258,7 +258,7 @@ export const Caption = ({
 				shouldLimitWidth && limitedWidth,
 				!isOverlayed && bottomMargin,
 				isOverlayed && overlayedStyles(palette, format),
-				isMainMedia && isLiveblog && mobileCaptionPadding,
+				isMainMedia && isLiveblog && tabletCaptionPadding,
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,
 			]}
