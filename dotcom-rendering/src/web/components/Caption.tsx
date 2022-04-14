@@ -247,7 +247,7 @@ export const Caption = ({
 	if (noCaption && (noCredit || hideCredit)) return null;
 
 	const palette = decidePalette(format);
-	const isLiveblog =
+	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
@@ -258,7 +258,7 @@ export const Caption = ({
 				shouldLimitWidth && limitedWidth,
 				!isOverlayed && bottomMargin,
 				isOverlayed && overlayedStyles(palette, format),
-				isMainMedia && isLiveblog && tabletCaptionPadding,
+				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,
 			]}
