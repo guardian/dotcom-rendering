@@ -12,10 +12,10 @@ import {
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
-import { map, withDefault } from '@guardian/types';
+import { withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import { pipe } from 'lib';
-import type { FC, ReactElement, ReactNode } from 'react';
+import { maybeRender } from 'lib';
+import type { FC, ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
@@ -208,15 +208,11 @@ const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
 		case ArticleDesign.Interview:
 			return null;
 		default:
-			return pipe(
-				bylineHtml,
-				map((byline) => (
-					<address css={getStyles(format)}>
-						{renderText(format, byline)}
-					</address>
-				)),
-				withDefault<ReactElement | null>(null),
-			);
+			return maybeRender(bylineHtml, (byline) => (
+				<address css={getStyles(format)}>
+					{renderText(format, byline)}
+				</address>
+			));
 	}
 };
 // ----- Exports ----- //
