@@ -14,17 +14,13 @@ const Default: FC = () => (
 	<>
 		{getAllThemes({
 			display: ArticleDisplay.Standard,
-			design: ArticleDesign.DeadBlog,
+			design: ArticleDesign.Interview,
 		}).map((format) => (
 			<div key={format.theme}>
 				<p>{getThemeNameAsString(format)}</p>
 				<HeadlineTag
 					tagText={'Interview'}
-					format={{
-						theme: format.theme,
-						design: ArticleDesign.Interview,
-						display: ArticleDisplay.Standard,
-					}}
+					format={format}
 				/>
 				<br />
 			</div>
