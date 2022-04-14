@@ -1,16 +1,16 @@
 import { brandBackground, brandLine } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { renderContainer } from '../lib/renderContainer';
+
 import { SubNav } from '../components/SubNav.importable';
 import { ElementContainer } from '../components/ElementContainer';
 import { Nav } from '../components/Nav/Nav';
-
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { decidePalette } from '../lib/decidePalette';
 import { Header } from '../components/Header';
-import { renderFrontContainer } from '../lib/renderContainer';
+import { ContainerLayout } from '../components/ContainerLayout';
 
 interface Props {
 	front: DCRFrontType;
@@ -105,10 +105,30 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<main>
 				{front.pressedPage.collections.map((collection, index) => {
-					return renderFrontContainer({
-						collection,
-						showTopBorder: index > 1,
+					// TODO: We also need to support treats containers
+					// Backfills should be added to the end of any curated content
+					const trails = collection.curated.concat(
+						collection.backfill,
+					);
+					// There are some containers that have zero trails. We don't want to render these
+					if (trails.length === 0) return null;
+
+					const containerElement = renderContainer({
+						trails,
+						containerType: collection.collectionType,
 					});
+
+					return (
+						<ContainerLayout
+							title={collection.displayName}
+							showTopBorder={index > 0}
+							sideBorders={true}
+							padContent={false}
+							centralBorder="partial"
+						>
+							{containerElement}
+						</ContainerLayout>
+					);
 				})}
 
 				{!isPaidContent && (

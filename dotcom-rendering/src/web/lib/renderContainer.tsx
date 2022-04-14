@@ -1,4 +1,3 @@
-import { ContainerLayout } from '../components/ContainerLayout';
 import { DynamicFast } from '../components/DynamicFast';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
 
@@ -7,7 +6,7 @@ type Props = {
 	containerType: DCRContainerType;
 };
 
-const renderContainer = ({ trails, containerType }: Props) => {
+export const renderContainer = ({ trails, containerType }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
 			return <DynamicFast trails={trails} />;
@@ -19,35 +18,4 @@ const renderContainer = ({ trails, containerType }: Props) => {
 			// before fronts are released
 			return <DynamicFast trails={trails} />;
 	}
-};
-
-export const renderFrontContainer = ({
-	collection,
-	showTopBorder,
-}: {
-	collection: DCRCollectionType;
-	showTopBorder: boolean;
-}) => {
-	// TODO: We also need to support treats containers
-	// Backfills should be added to the end of any curated content
-	const trails = collection.curated.concat(collection.backfill);
-	// There are some containers that have zero trails. We don't want to render these
-	if (trails.length === 0) return null;
-
-	const element = renderContainer({
-		trails,
-		containerType: collection.collectionType,
-	});
-
-	return (
-		<ContainerLayout
-			title={collection.displayName}
-			showTopBorder={showTopBorder}
-			sideBorders={true}
-			padContent={false}
-			centralBorder="partial"
-		>
-			{element}
-		</ContainerLayout>
-	);
 };
