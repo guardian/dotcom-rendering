@@ -587,6 +587,9 @@ type FEContainerType =
 	| 'nav/media-list'
 	| 'news/most-popular';
 
+// TODO: This may need to be declared differently than the front type in the future
+type DCRContainerType = FEContainerType;
+
 type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -751,6 +754,7 @@ type FECollectionType = {
 type DCRCollectionType = {
 	id: string;
 	displayName: string;
+	collectionType: DCRContainerType;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];

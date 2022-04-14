@@ -1563,7 +1563,7 @@
                                 }
                             },
                             "collectionType": {
-                                "$ref": "#/definitions/ContainerType"
+                                "$ref": "#/definitions/FEContainerType"
                             },
                             "uneditable": {
                                 "type": "boolean"
@@ -1604,7 +1604,7 @@
                                         }
                                     },
                                     "collectionType": {
-                                        "$ref": "#/definitions/ContainerType"
+                                        "$ref": "#/definitions/FEContainerType"
                                     },
                                     "href": {
                                         "type": "string"
@@ -2120,7 +2120,7 @@
             ],
             "type": "string"
         },
-        "ContainerType": {
+        "FEContainerType": {
             "enum": [
                 "dynamic/fast",
                 "dynamic/package",
