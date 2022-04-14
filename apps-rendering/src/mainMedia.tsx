@@ -1,12 +1,15 @@
-import { map, withDefault } from '@guardian/types';
+// ----- Imports ----- //
+
+import type { ArticleFormat } from '@guardian/libs';
+import type { Option } from '@guardian/types';
 import HeaderImage from 'components/headerImage';
 import HeaderVideo from 'components/headerVideo';
 import type { Image as ImageData } from 'image';
-import type { Item } from 'item';
-import { getFormat } from 'item';
-import { pipe } from 'lib';
+import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import type { Video as VideoData } from 'video';
+
+// ----- Types ----- //
 
 export const enum MainMediaKind {
 	Image,
@@ -17,27 +20,23 @@ export type MainMedia =
 	| { kind: MainMediaKind.Image; image: ImageData }
 	| { kind: MainMediaKind.Video; video: VideoData };
 
-interface HeaderMediaProps {
-	item: Item;
+// ----- Component ----- //
+
+interface Props {
+	format: ArticleFormat;
+	mainMedia: Option<MainMedia>;
 }
 
-const HeaderMedia: FC<HeaderMediaProps> = ({ item }) => {
-	const format = getFormat(item);
-	return pipe(
-		item.mainMedia,
-		map((media) => {
-			if (media.kind === MainMediaKind.Image) {
+const MainMedia: FC<Props> = ({ format, mainMedia }) =>
+	maybeRender(mainMedia, (media) => {
+		switch (media.kind) {
+			case MainMediaKind.Image:
 				return <HeaderImage image={media.image} format={format} />;
-			}
-
-			if (media.kind.valueOf() === MainMediaKind.Video.valueOf()) {
+			case MainMediaKind.Video:
 				return <HeaderVideo video={media.video} format={format} />;
-			}
+		}
+	});
 
-			return <></>;
-		}),
-		withDefault(<></>),
-	);
-};
+// ----- Exports ----- //
 
-export default HeaderMedia;
+export default MainMedia;
