@@ -50,6 +50,8 @@ const headline = (format: ArticleFormat): Colour => {
 		return opinion[800];
 	} else if (format.design === ArticleDesign.Media) {
 		return neutral[10];
+	} else if (format.design === ArticleDesign.Interview) {
+		return neutral[0];
 	}
 
 	return neutral[100];
@@ -215,7 +217,7 @@ const headlineTag = (format: ArticleFormat): Colour => {
 		case ArticlePillar.News:
 			return news[300];
 	}
-}
+};
 
 // ----- API ----- //
 

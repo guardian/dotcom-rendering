@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border, text } from '@guardian/common-rendering/src/editorialPalette';
+import { background, border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -32,7 +32,6 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 	const baseStyles = css`
 		${headline.medium()}
 		${headlineTextColour(format)}
-		${headlineBackgroundColour(format)}
 		margin: 0;
 		${articleWidthStyles}
 	`;
@@ -43,6 +42,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 		default:
 			return css`
 				${baseStyles}
+				${headlineBackgroundColour(format)}
 				padding-bottom: ${remSpace[6]};
 			`;
 	}
@@ -180,7 +180,7 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		color: ${text.headline(format)};
-		background-color: ${neutral[0]};
+		background-color: ${background.headline(format)};
 		position: relative;
 		white-space: pre-wrap;
 		padding: 0 ${remSpace[1]};
