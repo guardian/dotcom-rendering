@@ -185,6 +185,7 @@ const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 		white-space: pre-wrap;
 		padding: 0 ${remSpace[1]};
 		display: inline;
+		box-decoration-break: clone;
 	`;
 };
 
