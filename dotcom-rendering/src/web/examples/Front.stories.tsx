@@ -49,7 +49,6 @@ export const Front = () => (
 		>
 			<Header
 				edition="UK"
-				isAnniversary={true}
 				discussionApiUrl=""
 				supporterCTA=""
 				urls={{
@@ -569,7 +568,6 @@ export const Front2 = () => (
 		>
 			<Header
 				edition="US"
-				isAnniversary={true}
 				discussionApiUrl=""
 				supporterCTA=""
 				urls={{

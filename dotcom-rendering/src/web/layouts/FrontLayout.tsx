@@ -52,9 +52,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.nav.readerRevenueLinks.header.supporter
 							}
 							discussionApiUrl={front.config.discussionApiUrl}
-							isAnniversary={
-								front.config.switches.anniversaryHeaderSvg
-							}
 							urls={front.nav.readerRevenueLinks.header}
 							remoteHeader={front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in

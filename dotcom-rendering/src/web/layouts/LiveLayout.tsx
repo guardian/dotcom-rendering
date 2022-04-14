@@ -330,9 +330,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
 							}
-							isAnniversary={
-								CAPIArticle.config.switches.anniversaryHeaderSvg
-							}
 							urls={CAPIArticle.nav.readerRevenueLinks.header}
 							remoteHeader={
 								CAPIArticle.config.switches.remoteHeader
