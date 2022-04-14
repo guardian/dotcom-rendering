@@ -758,6 +758,7 @@ type DCRCollectionType = {
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];
+	href?: string;
 };
 
 type FEFrontConfigType = {
