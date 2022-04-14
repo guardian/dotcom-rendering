@@ -6,7 +6,7 @@ type Props = {
 	containerType: DCRContainerType;
 };
 
-export const renderContainer = ({ trails, containerType }: Props) => {
+export const DecideContainer = ({ trails, containerType }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
 			return <DynamicFast trails={trails} />;

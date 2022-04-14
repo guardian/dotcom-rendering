@@ -1,7 +1,7 @@
 import { brandBackground, brandLine } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { renderContainer } from '../lib/renderContainer';
+import { DecideContainer } from '../lib/DecideContainer';
 
 import { SubNav } from '../components/SubNav.importable';
 import { ElementContainer } from '../components/ElementContainer';
@@ -113,11 +113,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					// There are some containers that have zero trails. We don't want to render these
 					if (trails.length === 0) return null;
 
-					const containerElement = renderContainer({
-						trails,
-						containerType: collection.collectionType,
-					});
-
 					return (
 						<ContainerLayout
 							title={collection.displayName}
@@ -128,7 +123,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							padContent={false}
 							centralBorder="partial"
 						>
-							{containerElement}
+							<DecideContainer
+								trails={trails}
+								containerType={collection.collectionType}
+							/>
 						</ContainerLayout>
 					);
 				})}
