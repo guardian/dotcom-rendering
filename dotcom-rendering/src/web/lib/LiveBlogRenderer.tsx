@@ -45,9 +45,6 @@ export const LiveBlogRenderer = ({
 	contributionsServiceUrl,
 	onFirstPage,
 }: Props) => {
-	const thereAreMoreThanFourBlocks = blocks.length > 4;
-	const positionToInsertEpic = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
-
 	return (
 		<>
 			{pinnedPost && onFirstPage && (
@@ -74,44 +71,36 @@ export const LiveBlogRenderer = ({
 				</>
 			)}
 			<div id="top-of-blog" />
-			{blocks.map((block, index) => {
+			{blocks.map((block) => {
 				return (
-					<>
-						{!isLiveUpdate &&
-							thereAreMoreThanFourBlocks &&
-							index === positionToInsertEpic && (
-								<Island clientOnly={true}>
-									<LiveBlogEpic
-										section={section}
-										shouldHideReaderRevenue={
-											shouldHideReaderRevenue
-										}
-										tags={tags}
-										isPaidContent={isPaidContent}
-										contributionsServiceUrl={
-											contributionsServiceUrl
-										}
-									/>
-								</Island>
-							)}
-						<LiveBlock
-							format={format}
-							block={block}
-							pageId={pageId}
-							webTitle={webTitle}
-							adTargeting={adTargeting}
-							host={host}
-							ajaxUrl={ajaxUrl}
-							isLiveUpdate={isLiveUpdate}
-							switches={switches}
-							isAdFreeUser={isAdFreeUser}
-							isSensitive={isSensitive}
-							isPinnedPost={false}
-							pinnedPostId={pinnedPost?.id}
-						/>
-					</>
+					<LiveBlock
+						format={format}
+						block={block}
+						pageId={pageId}
+						webTitle={webTitle}
+						adTargeting={adTargeting}
+						host={host}
+						ajaxUrl={ajaxUrl}
+						isLiveUpdate={isLiveUpdate}
+						switches={switches}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
+						isPinnedPost={false}
+						pinnedPostId={pinnedPost?.id}
+					/>
 				);
 			})}
+			{blocks.length > 4 && (
+				<Island clientOnly={true}>
+					<LiveBlogEpic
+						section={section}
+						shouldHideReaderRevenue={shouldHideReaderRevenue}
+						tags={tags}
+						isPaidContent={isPaidContent}
+						contributionsServiceUrl={contributionsServiceUrl}
+					/>
+				</Island>
+			)}
 		</>
 	);
 };

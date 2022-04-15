@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { space } from '@guardian/source-foundations';
@@ -201,6 +202,12 @@ const Render = ({
 	);
 };
 
+/**
+ * Using the payload, make a fetch request to contributions service
+ *
+ * @param payload - unknown
+ * @param contributionsServiceUrl - string
+ */
 const Fetch = ({
 	payload,
 	contributionsServiceUrl,
@@ -251,6 +258,10 @@ const Fetch = ({
 	);
 };
 
+function insertAfter(referenceNode: HTMLElement, newNode: Element) {
+	referenceNode.parentNode?.insertBefore(newNode, referenceNode.nextSibling);
+}
+
 /**
  * LiveBlogEpic is the support epic which appears in-between blocks in blogs
  *
@@ -279,25 +290,44 @@ export const LiveBlogEpic = ({
 	if (!payload) return null;
 
 	/**
-	 * Because this epic is loaded client side it will cause CLS (it will shift the
-	 * blocks down after the page has already loaded). This is a poor reader experience
-	 * in general because it moves the content whilst they are trying to read it but
-	 * it is especially problematic where a permalink is being used, so we're disabling
-	 * this element in those cases.
+	 * Here we decide where to insert the epic.
+	 *
+	 * If the url contains a permalink then we
+	 * want to insert it immediately after that block to prevent any CLS issues.
+	 *
+	 * Otherwise, we choose a random position near the top of the blog
 	 */
+	const epicPlaceholder = document.createElement('article');
 	if (window.location.href.includes('#block-')) {
-		log(
-			'dotcom',
-			'A permalink was detected so the LiveBlogEpic will not show',
-		);
-		return null;
+		// Because we're using a permalink there's a possibility the epic will render in
+		// view. To prevent confusing layout shift we initially hide the message so that
+		// we can reveal (animate in) it once it has been rendered
+		epicPlaceholder.classList.add('pending');
+		const blockId = window.location.hash.slice(1);
+		const blockLinkedTo = document.getElementById(blockId);
+		if (blockLinkedTo) {
+			insertAfter(blockLinkedTo, epicPlaceholder);
+		}
+		epicPlaceholder.classList.add('reveal');
+		epicPlaceholder.classList.remove('pending');
+	} else {
+		// This is a simple page load so we simply insert the epic somewhere near the top
+		// of the blog
+		const randomPosition = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
+		const aBlockNearTheTop =
+			document.querySelectorAll<HTMLElement>('article.block')[
+				randomPosition
+			];
+		if (aBlockNearTheTop) {
+			insertAfter(aBlockNearTheTop, epicPlaceholder);
+		}
 	}
 
-	// Using the payload, make a fetch request to contributions
-	return (
+	return createPortal(
 		<Fetch
 			payload={payload}
 			contributionsServiceUrl={contributionsServiceUrl}
-		/>
+		/>,
+		epicPlaceholder,
 	);
 };
