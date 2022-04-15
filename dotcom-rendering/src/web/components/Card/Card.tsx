@@ -37,6 +37,7 @@ type Props = {
 	webPublicationDate?: string;
 	imageUrl?: string;
 	imagePosition?: ImagePositionType;
+	imagePositionOnMobile?: ImagePositionType;
 	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
 	standfirst?: string;
 	avatar?: AvatarType;
@@ -49,7 +50,6 @@ type Props = {
 	showSlash?: boolean;
 	commentCount?: number;
 	starRating?: number;
-	alwaysVertical?: boolean;
 	minWidthInPixels?: number;
 	// Ophan tracking
 	dataLinkName?: string;
@@ -124,7 +124,8 @@ export const Card = ({
 	showByline,
 	webPublicationDate,
 	imageUrl,
-	imagePosition,
+	imagePosition = 'top',
+	imagePositionOnMobile = 'left',
 	imageSize,
 	standfirst,
 	avatar,
@@ -136,7 +137,6 @@ export const Card = ({
 	showSlash,
 	commentCount,
 	starRating,
-	alwaysVertical,
 	minWidthInPixels,
 	dataLinkName,
 	branding,
@@ -162,14 +162,14 @@ export const Card = ({
 			<TopBar palette={cardPalette}>
 				<CardLayout
 					imagePosition={imagePosition}
-					alwaysVertical={alwaysVertical}
+					imagePositionOnMobile={imagePositionOnMobile}
 					minWidthInPixels={minWidthInPixels}
 				>
 					<>
 						{imageUrl && (
 							<ImageWrapper
 								percentage={imageCoverage}
-								alwaysVertical={alwaysVertical}
+								imagePositionOnMobile={imagePositionOnMobile}
 							>
 								<img
 									src={imageUrl}

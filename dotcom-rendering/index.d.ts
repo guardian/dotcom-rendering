@@ -889,7 +889,7 @@ interface BadgeType {
 	imageUrl: string;
 }
 
-type ImagePositionType = 'left' | 'top' | 'right';
+type ImagePositionType = 'left' | 'top' | 'right' | 'bottom';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 

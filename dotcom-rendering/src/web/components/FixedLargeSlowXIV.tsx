@@ -41,6 +41,7 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 						showClock={false}
 						imageUrl={primary.image}
 						imagePosition="right"
+						imagePositionOnMobile="bottom"
 						imageSize="large"
 						mediaType={primary.mediaType}
 						mediaDuration={primary.mediaDuration}

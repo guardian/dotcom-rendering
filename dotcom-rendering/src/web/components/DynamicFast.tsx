@@ -43,6 +43,7 @@ export const DynamicFast = ({ trails }: Props) => {
 						showClock={false}
 						imageUrl={primary.image}
 						imagePosition="right"
+						imagePositionOnMobile="top"
 						imageSize="large"
 						mediaType={primary.mediaType}
 						mediaDuration={primary.mediaDuration}
