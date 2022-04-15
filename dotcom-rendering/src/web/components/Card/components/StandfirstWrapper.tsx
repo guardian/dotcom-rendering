@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { until, body } from '@guardian/source-foundations';
 
 type Props = {
-	children: string;
+	children: string | React.ReactNode;
 	palette: Palette;
 };
 

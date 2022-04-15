@@ -707,6 +707,7 @@ type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
 	headline: string;
+	standfirst?: string;
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
@@ -1117,6 +1118,7 @@ interface BaseTrailType {
 interface TrailType extends BaseTrailType {
 	palette?: never;
 	format: ArticleFormat;
+	standfirst?: string;
 }
 
 interface CAPITrailType extends BaseTrailType {

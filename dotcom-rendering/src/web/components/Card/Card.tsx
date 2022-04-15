@@ -230,7 +230,11 @@ export const Card = ({
 							<div>
 								{standfirst && (
 									<StandfirstWrapper palette={cardPalette}>
-										{standfirst}
+										<div
+											dangerouslySetInnerHTML={{
+												__html: standfirst,
+											}}
+										/>
 									</StandfirstWrapper>
 								)}
 								{avatar && (
