@@ -21,8 +21,8 @@ type OnwardsResponse = {
 	description: string;
 };
 
-const fixedHeight = css`
-	height: 300px;
+const minHeight = css`
+	min-height: 300px;
 `;
 
 const revealStyles = css`
@@ -87,7 +87,7 @@ export const OnwardsData = ({
 
 	if (data && data.trails) {
 		return (
-			<div css={[fixedHeight, revealStyles]} className="onwards">
+			<div css={[minHeight, revealStyles]} className="onwards">
 				<div className="pending">
 					<Container
 						heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
