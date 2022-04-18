@@ -6,6 +6,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
+import { breakpoints, from } from '@guardian/source-foundations';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 import { Card } from './Card';
@@ -31,8 +32,11 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
 			css={css`
-				height: 300px;
-				width: 240px;
+				max-height: 300px;
+				width: 100%;
+				${from.tablet} {
+					max-width: 240px;
+				}
 				padding: 20px;
 			`}
 		>
@@ -41,12 +45,16 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-const CardRow = ({ children }: { children: React.ReactNode }) => {
+const CardGroup = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
 			css={css`
 				display: flex;
-				flex-direction: row;
+				flex-direction: column;
+				${from.tablet} {
+					flex-direction: row;
+				}
+				max-width: 800px;
 			`}
 		>
 			{children}
@@ -91,13 +99,13 @@ const CardsWithDifferentThemes = ({
 
 	return (
 		<>
-			<CardRow>
+			<CardGroup>
 				{cards.slice(0, 4).map((card) => {
 					return (
 						<div
 							css={css`
 								height: 300px;
-								width: 240px;
+								max-width: 240px;
 								padding: 20px;
 								display: flex;
 								flex-direction: row;
@@ -118,8 +126,8 @@ const CardsWithDifferentThemes = ({
 						</div>
 					);
 				})}
-			</CardRow>
-			<CardRow>
+			</CardGroup>
+			<CardGroup>
 				{cards.slice(4).map((card) => {
 					return (
 						<CardWrapper>
@@ -138,7 +146,7 @@ const CardsWithDifferentThemes = ({
 						</CardWrapper>
 					);
 				})}
-			</CardRow>
+			</CardGroup>
 		</>
 	);
 };
@@ -166,247 +174,311 @@ for (const [displayName, displayValue] of Object.entries(ArticleDisplay)) {
 
 const cardStories = storiesOf(`Components/Card`, module);
 
-cardStories.add('with different headline sizes', () => {
-	return (
-		<CardRow>
+cardStories
+	.add('with different headline sizes', () => {
+		return (
+			<CardGroup>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						headlineSize="tiny"
+						headlineText="tiny"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						headlineSize="small"
+						headlineText="small"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						headlineSize="medium"
+						headlineText="medium"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						headlineSize="large"
+						headlineText="large"
+					/>
+				</CardWrapper>
+			</CardGroup>
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
+
+cardStories
+	.add('with byline', () => {
+		return (
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					headlineSize="tiny"
-					headlineText="tiny"
+					byline="Byline text"
+					showByline={true}
 				/>
 			</CardWrapper>
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
+
+cardStories
+	.add('with media type', () => {
+		return (
+			<CardGroup>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Media,
+							theme: ArticlePillar.Sport,
+						}}
+						mediaType="Video"
+						mediaDuration={30}
+						headlineText="Video"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Media,
+							theme: ArticlePillar.Sport,
+						}}
+						mediaType="Audio"
+						mediaDuration={90}
+						headlineText="Audio"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Media,
+							theme: ArticlePillar.Sport,
+						}}
+						mediaType="Gallery"
+						mediaDuration={360}
+						headlineText="Gallery"
+					/>
+				</CardWrapper>
+			</CardGroup>
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
+
+cardStories
+	.add('with different image positions', () => {
+		return (
+			<>
+				<div
+					css={css`
+						width: 100%;
+						${from.tablet} {
+							max-width: 500px;
+						}
+						padding: 20px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePosition="left"
+						headlineText="left"
+					/>
+				</div>
+				<div
+					css={css`
+						width: 100%;
+						${from.tablet} {
+							max-width: 500px;
+						}
+						padding: 20px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePosition="right"
+						headlineText="right"
+					/>
+				</div>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						imagePosition="top"
+						headlineText="top"
+					/>
+				</CardWrapper>
+			</>
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
+
+cardStories
+	.add('with different image sizes', () => {
+		return (
+			<>
+				<div
+					css={css`
+						max-height: 80px;
+						max-width: 340px;
+						padding: 10px;
+						margin-bottom: 20px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePosition="left"
+						headlineText="small"
+						imageSize="small"
+					/>
+				</div>
+				<div
+					css={css`
+						max-height: 100px;
+						max-width: 340px;
+						padding: 10px;
+						margin-bottom: 20px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePosition="left"
+						headlineText="medium"
+						imageSize="medium"
+					/>
+				</div>
+				<div
+					css={css`
+						max-height: 200px;
+						max-width: 440px;
+						padding: 10px;
+						margin-bottom: 20px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePosition="left"
+						headlineText="large"
+						imageSize="large"
+					/>
+				</div>
+				<div
+					css={css`
+						max-height: 240px;
+						max-width: 540px;
+						padding: 10px;
+						margin-bottom: 20px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imagePosition="left"
+						headlineText="jumbo"
+						imageSize="jumbo"
+					/>
+				</div>
+			</>
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
+
+cardStories
+	.add('with pulsing dot', () => {
+		return (
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					headlineSize="small"
-					headlineText="small"
+					showPulsingDot={true}
+					kickerText="Pulsing Dot"
 				/>
 			</CardWrapper>
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
+
+cardStories
+	.add('with no slash', () => {
+		return (
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					headlineSize="medium"
-					headlineText="medium"
+					showSlash={false}
+					kickerText="No slash"
 				/>
 			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					headlineSize="large"
-					headlineText="large"
-				/>
-			</CardWrapper>
-		</CardRow>
-	);
-});
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
 
-cardStories.add('with byline', () => {
-	return (
-		<CardWrapper>
-			<Card {...basicCardProps} byline="Byline text" showByline={true} />
-		</CardWrapper>
-	);
-});
+cardStories
+	.add('with an avatar', () => {
+		return (
+			<CardGroup>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						imageUrl=""
+						avatar={{
+							src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
+							alt: '',
+						}}
+					/>
+				</CardWrapper>
+			</CardGroup>
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
 
-cardStories.add('with media type', () => {
-	return (
-		<CardRow>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Media,
-						theme: ArticlePillar.Sport,
-					}}
-					mediaType="Video"
-					mediaDuration={30}
-					headlineText="Video"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Media,
-						theme: ArticlePillar.Sport,
-					}}
-					mediaType="Audio"
-					mediaDuration={90}
-					headlineText="Audio"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Media,
-						theme: ArticlePillar.Sport,
-					}}
-					mediaType="Gallery"
-					mediaDuration={360}
-					headlineText="Gallery"
-				/>
-			</CardWrapper>
-		</CardRow>
-	);
-});
-
-cardStories.add('with different image positions', () => {
-	return (
-		<CardRow>
-			<div
-				css={css`
-					height: 100px;
-					width: 340px;
-					padding: 10px;
-				`}
-			>
-				<Card
-					{...basicCardProps}
-					imagePosition="left"
-					headlineText="left"
-				/>
-			</div>
-			<div
-				css={css`
-					height: 100px;
-					width: 340px;
-					padding: 10px;
-				`}
-			>
-				<Card
-					{...basicCardProps}
-					imagePosition="right"
-					headlineText="right"
-				/>
-			</div>
-			<div
-				css={css`
-					height: 300px;
-					width: 240px;
-					padding: 10px;
-				`}
-			>
-				<Card
-					{...basicCardProps}
-					imagePosition="top"
-					headlineText="top"
-				/>
-			</div>
-		</CardRow>
-	);
-});
-
-cardStories.add('with different image sizes', () => {
-	return (
-		<>
-			<div
-				css={css`
-					height: 80px;
-					width: 340px;
-					padding: 10px;
-					margin-bottom: 20px;
-				`}
-			>
-				<Card
-					{...basicCardProps}
-					imagePosition="left"
-					headlineText="small"
-					imageSize="small"
-				/>
-			</div>
-			<div
-				css={css`
-					height: 100px;
-					width: 340px;
-					padding: 10px;
-					margin-bottom: 20px;
-				`}
-			>
-				<Card
-					{...basicCardProps}
-					imagePosition="left"
-					headlineText="medium"
-					imageSize="medium"
-				/>
-			</div>
-			<div
-				css={css`
-					height: 200px;
-					width: 440px;
-					padding: 10px;
-					margin-bottom: 20px;
-				`}
-			>
-				<Card
-					{...basicCardProps}
-					imagePosition="left"
-					headlineText="large"
-					imageSize="large"
-				/>
-			</div>
-			<div
-				css={css`
-					height: 240px;
-					width: 540px;
-					padding: 10px;
-					margin-bottom: 20px;
-				`}
-			>
-				<Card
-					{...basicCardProps}
-					imagePosition="left"
-					headlineText="jumbo"
-					imageSize="jumbo"
-				/>
-			</div>
-		</>
-	);
-});
-
-cardStories.add('with pulsing dot', () => {
-	return (
-		<CardWrapper>
-			<Card
-				{...basicCardProps}
-				showPulsingDot={true}
-				kickerText="Pulsing Dot"
-			/>
-		</CardWrapper>
-	);
-});
-
-cardStories.add('with no slash', () => {
-	return (
-		<CardWrapper>
-			<Card {...basicCardProps} showSlash={false} kickerText="No slash" />
-		</CardWrapper>
-	);
-});
-
-cardStories.add('with an avatar', () => {
-	return (
-		<CardWrapper>
-			<Card
-				{...basicCardProps}
-				imageUrl=""
-				avatar={{
-					src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
-					alt: '',
-				}}
-			/>
-		</CardWrapper>
-	);
-});
-
-cardStories.add('with comments', () => {
-	return (
-		<CardWrapper>
-			<Card {...basicCardProps} commentCount={894} />
-		</CardWrapper>
-	);
-});
+cardStories
+	.add('with comments', () => {
+		return (
+			<CardGroup>
+				<CardWrapper>
+					<Card {...basicCardProps} commentCount={894} />
+				</CardWrapper>
+			</CardGroup>
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
