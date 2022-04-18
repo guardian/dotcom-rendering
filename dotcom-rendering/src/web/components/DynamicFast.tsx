@@ -131,6 +131,9 @@ export const DynamicFast = ({ trails }: Props) => {
 										// No bottom margin on the last two cards
 										cardIndex < smallCards.length - 2
 									}
+									padBottomOnMobile={
+										cardIndex < smallCards.length - 1
+									}
 								>
 									<Card
 										linkTo={card.url}

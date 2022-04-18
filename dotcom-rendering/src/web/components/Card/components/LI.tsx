@@ -33,6 +33,12 @@ const paddingBottomStyles = css`
 	padding-bottom: 10px;
 `;
 
+const mobilePaddingBottomStyles = css`
+	${until.tablet} {
+		padding-bottom: 10px;
+	}
+`;
+
 const marginTopStyles = css`
 	${until.tablet} {
 		margin-top: 12px;
@@ -65,6 +71,7 @@ type Props = {
 	padSides?: boolean; // If this LI directly wraps a card this should be true
 	padSidesOnMobile?: boolean; // Should be true if spacing between cards is desired on mobile devices
 	padBottom?: boolean;
+	padBottomOnMobile?: boolean; // Should be true if spacing below is desired on mobile devices
 	showTopMarginWhenStacked?: boolean;
 	snapAlignStart?: boolean; // True when snapping card when scrolling e.g. in carousel
 };
@@ -77,6 +84,7 @@ export const LI = ({
 	padSides = false,
 	padSidesOnMobile = false,
 	padBottom,
+	padBottomOnMobile,
 	showTopMarginWhenStacked,
 	snapAlignStart = false,
 }: Props) => {
@@ -91,6 +99,7 @@ export const LI = ({
 				showDivider && verticalDivider,
 				padSides && sidePaddingStyles(padSidesOnMobile),
 				padBottom && paddingBottomStyles,
+				padBottomOnMobile && mobilePaddingBottomStyles,
 				showTopMarginWhenStacked && marginTopStyles,
 				snapAlignStart && snapAlignStartStyles,
 			]}
