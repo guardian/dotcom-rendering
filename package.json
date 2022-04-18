@@ -17,7 +17,7 @@
 		"prepare": "husky install"
 	},
 	"resolutions": {
-		"@types/webpack": "^5.0.0",
+		"@types/webpack": "^5.28.0",
 		"type-fest": "^2.8.0"
 	},
 	"dependencies": {
