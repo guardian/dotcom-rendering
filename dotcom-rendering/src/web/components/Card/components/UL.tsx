@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { until } from '@guardian/source-foundations';
+import { until, from } from '@guardian/source-foundations';
 
 import { verticalDivider } from '../../../lib/verticalDivider';
 
@@ -18,11 +18,18 @@ const marginBottomStyles = css`
 	margin-bottom: 10px;
 `;
 
+const wrapStyles = css`
+	${from.tablet} {
+		flex-wrap: wrap;
+	}
+`;
+
 type Props = {
 	children: React.ReactNode;
 	direction?: 'row' | 'column'; // Passed to flex-direction
 	showDivider?: boolean; // If this UL is a column and not the left most column
 	padBottom?: boolean; // If this UL is a row, add spacing below
+	wrapCards?: boolean; // Used to keep cards aligned in adjacent columns
 };
 
 export const UL = ({
@@ -30,6 +37,7 @@ export const UL = ({
 	direction = 'column',
 	showDivider = false,
 	padBottom = false,
+	wrapCards = false,
 }: Props) => {
 	return (
 		<ul
@@ -37,6 +45,7 @@ export const UL = ({
 				ulStyles(direction),
 				showDivider && verticalDivider,
 				padBottom && marginBottomStyles,
+				wrapCards && wrapStyles,
 			]}
 		>
 			{children}
