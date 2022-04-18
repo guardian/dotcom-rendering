@@ -172,313 +172,255 @@ for (const [displayName, displayValue] of Object.entries(ArticleDisplay)) {
 	}
 }
 
-const cardStories = storiesOf(`Components/Card`, module);
+const cardStories = storiesOf(`Components/Card`, module).addParameters({
+	chromatic: {
+		viewports: [breakpoints.mobile, breakpoints.wide],
+	},
+});
 
-cardStories
-	.add('with different headline sizes', () => {
-		return (
-			<CardGroup>
-				<CardWrapper>
-					<Card
-						{...basicCardProps}
-						headlineSize="tiny"
-						headlineText="tiny"
-					/>
-				</CardWrapper>
-				<CardWrapper>
-					<Card
-						{...basicCardProps}
-						headlineSize="small"
-						headlineText="small"
-					/>
-				</CardWrapper>
-				<CardWrapper>
-					<Card
-						{...basicCardProps}
-						headlineSize="medium"
-						headlineText="medium"
-					/>
-				</CardWrapper>
-				<CardWrapper>
-					<Card
-						{...basicCardProps}
-						headlineSize="large"
-						headlineText="large"
-					/>
-				</CardWrapper>
-			</CardGroup>
-		);
-	})
-	.addParameters({
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
-		},
-	});
-
-cardStories
-	.add('with byline', () => {
-		return (
+cardStories.add('with different headline sizes', () => {
+	return (
+		<CardGroup>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					byline="Byline text"
-					showByline={true}
+					headlineSize="tiny"
+					headlineText="tiny"
 				/>
 			</CardWrapper>
-		);
-	})
-	.addParameters({
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
-		},
-	});
-
-cardStories
-	.add('with media type', () => {
-		return (
-			<CardGroup>
-				<CardWrapper>
-					<Card
-						{...basicCardProps}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Media,
-							theme: ArticlePillar.Sport,
-						}}
-						mediaType="Video"
-						mediaDuration={30}
-						headlineText="Video"
-					/>
-				</CardWrapper>
-				<CardWrapper>
-					<Card
-						{...basicCardProps}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Media,
-							theme: ArticlePillar.Sport,
-						}}
-						mediaType="Audio"
-						mediaDuration={90}
-						headlineText="Audio"
-					/>
-				</CardWrapper>
-				<CardWrapper>
-					<Card
-						{...basicCardProps}
-						format={{
-							display: ArticleDisplay.Standard,
-							design: ArticleDesign.Media,
-							theme: ArticlePillar.Sport,
-						}}
-						mediaType="Gallery"
-						mediaDuration={360}
-						headlineText="Gallery"
-					/>
-				</CardWrapper>
-			</CardGroup>
-		);
-	})
-	.addParameters({
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
-		},
-	});
-
-cardStories
-	.add('with different image positions', () => {
-		return (
-			<>
-				<div
-					css={css`
-						width: 100%;
-						${from.tablet} {
-							max-width: 500px;
-						}
-						padding: 20px;
-					`}
-				>
-					<Card
-						{...basicCardProps}
-						imagePosition="left"
-						headlineText="left"
-					/>
-				</div>
-				<div
-					css={css`
-						width: 100%;
-						${from.tablet} {
-							max-width: 500px;
-						}
-						padding: 20px;
-					`}
-				>
-					<Card
-						{...basicCardProps}
-						imagePosition="right"
-						headlineText="right"
-					/>
-				</div>
-				<CardWrapper>
-					<Card
-						{...basicCardProps}
-						imagePosition="top"
-						headlineText="top"
-					/>
-				</CardWrapper>
-			</>
-		);
-	})
-	.addParameters({
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
-		},
-	});
-
-cardStories
-	.add('with different image sizes', () => {
-		return (
-			<>
-				<div
-					css={css`
-						max-height: 80px;
-						max-width: 340px;
-						padding: 10px;
-						margin-bottom: 20px;
-					`}
-				>
-					<Card
-						{...basicCardProps}
-						imagePosition="left"
-						headlineText="small"
-						imageSize="small"
-					/>
-				</div>
-				<div
-					css={css`
-						max-height: 100px;
-						max-width: 340px;
-						padding: 10px;
-						margin-bottom: 20px;
-					`}
-				>
-					<Card
-						{...basicCardProps}
-						imagePosition="left"
-						headlineText="medium"
-						imageSize="medium"
-					/>
-				</div>
-				<div
-					css={css`
-						max-height: 200px;
-						max-width: 440px;
-						padding: 10px;
-						margin-bottom: 20px;
-					`}
-				>
-					<Card
-						{...basicCardProps}
-						imagePosition="left"
-						headlineText="large"
-						imageSize="large"
-					/>
-				</div>
-				<div
-					css={css`
-						max-height: 240px;
-						max-width: 540px;
-						padding: 10px;
-						margin-bottom: 20px;
-					`}
-				>
-					<Card
-						{...basicCardProps}
-						imagePosition="left"
-						headlineText="jumbo"
-						imageSize="jumbo"
-					/>
-				</div>
-			</>
-		);
-	})
-	.addParameters({
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
-		},
-	});
-
-cardStories
-	.add('with pulsing dot', () => {
-		return (
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					showPulsingDot={true}
-					kickerText="Pulsing Dot"
+					headlineSize="small"
+					headlineText="small"
 				/>
 			</CardWrapper>
-		);
-	})
-	.addParameters({
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
-		},
-	});
-
-cardStories
-	.add('with no slash', () => {
-		return (
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					showSlash={false}
-					kickerText="No slash"
+					headlineSize="medium"
+					headlineText="medium"
 				/>
 			</CardWrapper>
-		);
-	})
-	.addParameters({
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
-		},
-	});
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					headlineSize="large"
+					headlineText="large"
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+});
 
-cardStories
-	.add('with an avatar', () => {
-		return (
-			<CardGroup>
-				<CardWrapper>
-					<Card
-						{...basicCardProps}
-						imageUrl=""
-						avatar={{
-							src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
-							alt: '',
-						}}
-					/>
-				</CardWrapper>
-			</CardGroup>
-		);
-	})
-	.addParameters({
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
-		},
-	});
+cardStories.add('with byline', () => {
+	return (
+		<CardWrapper>
+			<Card {...basicCardProps} byline="Byline text" showByline={true} />
+		</CardWrapper>
+	);
+});
 
-cardStories
-	.add('with comments', () => {
-		return (
-			<CardGroup>
-				<CardWrapper>
-					<Card {...basicCardProps} commentCount={894} />
-				</CardWrapper>
-			</CardGroup>
-		);
-	})
-	.addParameters({
-		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
-		},
-	});
+cardStories.add('with media type', () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Media,
+						theme: ArticlePillar.Sport,
+					}}
+					mediaType="Video"
+					mediaDuration={30}
+					headlineText="Video"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Media,
+						theme: ArticlePillar.Sport,
+					}}
+					mediaType="Audio"
+					mediaDuration={90}
+					headlineText="Audio"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Media,
+						theme: ArticlePillar.Sport,
+					}}
+					mediaType="Gallery"
+					mediaDuration={360}
+					headlineText="Gallery"
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+});
+
+cardStories.add('with different image positions', () => {
+	return (
+		<>
+			<div
+				css={css`
+					width: 100%;
+					${from.tablet} {
+						max-width: 500px;
+					}
+					padding: 20px;
+				`}
+			>
+				<Card
+					{...basicCardProps}
+					imagePosition="left"
+					headlineText="left"
+				/>
+			</div>
+			<div
+				css={css`
+					width: 100%;
+					${from.tablet} {
+						max-width: 500px;
+					}
+					padding: 20px;
+				`}
+			>
+				<Card
+					{...basicCardProps}
+					imagePosition="right"
+					headlineText="right"
+				/>
+			</div>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					imagePosition="top"
+					headlineText="top"
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('with different image sizes', () => {
+	return (
+		<>
+			<div
+				css={css`
+					max-height: 80px;
+					max-width: 340px;
+					padding: 10px;
+					margin-bottom: 20px;
+				`}
+			>
+				<Card
+					{...basicCardProps}
+					imagePosition="left"
+					headlineText="small"
+					imageSize="small"
+				/>
+			</div>
+			<div
+				css={css`
+					max-height: 100px;
+					max-width: 340px;
+					padding: 10px;
+					margin-bottom: 20px;
+				`}
+			>
+				<Card
+					{...basicCardProps}
+					imagePosition="left"
+					headlineText="medium"
+					imageSize="medium"
+				/>
+			</div>
+			<div
+				css={css`
+					max-height: 200px;
+					max-width: 440px;
+					padding: 10px;
+					margin-bottom: 20px;
+				`}
+			>
+				<Card
+					{...basicCardProps}
+					imagePosition="left"
+					headlineText="large"
+					imageSize="large"
+				/>
+			</div>
+			<div
+				css={css`
+					max-height: 240px;
+					max-width: 540px;
+					padding: 10px;
+					margin-bottom: 20px;
+				`}
+			>
+				<Card
+					{...basicCardProps}
+					imagePosition="left"
+					headlineText="jumbo"
+					imageSize="jumbo"
+				/>
+			</div>
+		</>
+	);
+});
+
+cardStories.add('with pulsing dot', () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				showPulsingDot={true}
+				kickerText="Pulsing Dot"
+			/>
+		</CardWrapper>
+	);
+});
+
+cardStories.add('with no slash', () => {
+	return (
+		<CardWrapper>
+			<Card {...basicCardProps} showSlash={false} kickerText="No slash" />
+		</CardWrapper>
+	);
+});
+
+cardStories.add('with an avatar', () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					imageUrl=""
+					avatar={{
+						src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
+						alt: '',
+					}}
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+});
+
+cardStories.add('with comments', () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card {...basicCardProps} commentCount={894} />
+			</CardWrapper>
+		</CardGroup>
+	);
+});
