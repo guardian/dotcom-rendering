@@ -1,6 +1,9 @@
+import { css, keyframes } from '@emotion/react';
+import { useEffect } from 'react';
 import { useApi } from '../lib/useApi';
 
 import { decideTrail } from '../lib/decideTrail';
+import { Placeholder } from './Placeholder';
 
 type Props = {
 	url: string;
@@ -18,6 +21,24 @@ type OnwardsResponse = {
 	description: string;
 };
 
+const fixedHeight = css`
+	height: 300px;
+`;
+
+const revealStyles = css`
+	/* We're using classnames here because we add and remove these classes
+	   using plain javascript */
+	.reveal {
+		animation: ${keyframes`
+			0% { opacity: 0; }
+			100% { opacity: 1; }
+		`} 4s ease-out;
+	}
+	.pending {
+		display: none;
+	}
+`;
+
 export const OnwardsData = ({
 	url,
 	limit,
@@ -26,7 +47,7 @@ export const OnwardsData = ({
 	format,
 	isCuratedContent,
 }: Props) => {
-	const { data } = useApi<OnwardsResponse>(url);
+	const { data, loading, error } = useApi<OnwardsResponse>(url);
 
 	const buildTrails = (
 		trails: CAPITrailType[],
@@ -35,16 +56,49 @@ export const OnwardsData = ({
 		return trails.slice(0, trailLimit).map(decideTrail);
 	};
 
+	useEffect(() => {
+		if (data) {
+			const pendingElements = document?.querySelectorAll<HTMLElement>(
+				'.onwards > .pending',
+			);
+			pendingElements?.forEach((element) => {
+				element.classList.add('reveal');
+				element.classList.remove('pending');
+			});
+		}
+	});
+
+	if (error) {
+		// Send the error to Sentry and then prevent the element from rendering
+		window.guardian.modules.sentry.reportError(error, 'onwards-lower');
+		return null;
+	}
+
+	if (loading) {
+		return (
+			<Placeholder
+				// 300 is a best guess
+				height={300}
+				shouldShimmer={false}
+				backgroundColor="white"
+			/>
+		);
+	}
+
 	if (data && data.trails) {
 		return (
-			<Container
-				heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
-				trails={buildTrails(data.trails, limit)}
-				description={data.description}
-				ophanComponentName={ophanComponentName}
-				format={format}
-				isCuratedContent={isCuratedContent}
-			/>
+			<div css={[fixedHeight, revealStyles]} className="onwards">
+				<div className="pending">
+					<Container
+						heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
+						trails={buildTrails(data.trails, limit)}
+						description={data.description}
+						ophanComponentName={ophanComponentName}
+						format={format}
+						isCuratedContent={isCuratedContent}
+					/>
+				</div>
+			</div>
 		);
 	}
 
