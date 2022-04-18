@@ -22,21 +22,21 @@ type Props = {
 	children: React.ReactNode;
 	direction?: 'row' | 'column'; // Passed to flex-direction
 	showDivider?: boolean; // If this UL is a column and not the left most column
-	bottomMargin?: boolean; // If this UL is a row, add spacing below
+	padBottom?: boolean; // If this UL is a row, add spacing below
 };
 
 export const UL = ({
 	children,
 	direction = 'column',
 	showDivider = false,
-	bottomMargin = false,
+	padBottom = false,
 }: Props) => {
 	return (
 		<ul
 			css={[
 				ulStyles(direction),
 				showDivider && verticalDivider,
-				bottomMargin && marginBottomStyles,
+				padBottom && marginBottomStyles,
 			]}
 		>
 			{children}

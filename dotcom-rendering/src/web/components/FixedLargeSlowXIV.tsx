@@ -19,7 +19,7 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 
 	return (
 		<>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="75%">
 					<Card
 						linkTo={primary.url}
@@ -84,7 +84,7 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 			</UL>
 			{groups.map((group, groupIndex) => {
 				return (
-					<UL direction="row" bottomMargin={true}>
+					<UL direction="row" padBottom={true}>
 						{group.map((card, cardIndex) => {
 							return (
 								<LI

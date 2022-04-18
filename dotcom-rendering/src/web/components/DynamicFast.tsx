@@ -16,7 +16,7 @@ export const DynamicFast = ({ trails }: Props) => {
 
 	return (
 		<>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="75%">
 					<Card
 						linkTo={primary.url}
@@ -79,14 +79,10 @@ export const DynamicFast = ({ trails }: Props) => {
 					/>
 				</LI>
 			</UL>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				{bigCards.map((card) => {
 					return (
-						<LI
-							percentage="25%"
-							padSides={true}
-							bottomMargin={false}
-						>
+						<LI percentage="25%" padSides={true} padBottom={false}>
 							<Card
 								linkTo={card.url}
 								format={card.format}

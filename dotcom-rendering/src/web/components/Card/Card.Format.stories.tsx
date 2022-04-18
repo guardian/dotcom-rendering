@@ -31,7 +31,7 @@ export const Format =
 							theme: ArticlePillar.News,
 						}}
 					>
-						<UL direction="row" bottomMargin={true}>
+						<UL direction="row" padBottom={true}>
 							<LI padSides={true} percentage="25%">
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"

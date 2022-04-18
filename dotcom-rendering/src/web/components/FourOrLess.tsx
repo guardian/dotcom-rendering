@@ -29,7 +29,7 @@ export const FourOrLess = ({ content }: Props) => {
 
 	return (
 		<>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				{content.map((trail, index) => (
 					<LI
 						padSides={true}

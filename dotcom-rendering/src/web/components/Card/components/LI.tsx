@@ -29,8 +29,8 @@ const snapAlignStartStyles = css`
 	scroll-snap-align: start;
 `;
 
-const marginBottomStyles = css`
-	margin-bottom: 10px;
+const paddingBottomStyles = css`
+	padding-bottom: 10px;
 `;
 
 const marginTopStyles = css`
@@ -64,7 +64,7 @@ type Props = {
 	showDivider?: boolean; // If this LI wraps a card in a row this should be true
 	padSides?: boolean; // If this LI directly wraps a card this should be true
 	padSidesOnMobile?: boolean; // Should be true if spacing between cards is desired on mobile devices
-	bottomMargin?: boolean; // True when wrapping a card in a column and not the last item
+	padBottom?: boolean;
 	showTopMarginWhenStacked?: boolean;
 	snapAlignStart?: boolean; // True when snapping card when scrolling e.g. in carousel
 };
@@ -76,7 +76,7 @@ export const LI = ({
 	showDivider,
 	padSides = false,
 	padSidesOnMobile = false,
-	bottomMargin,
+	padBottom,
 	showTopMarginWhenStacked,
 	snapAlignStart = false,
 }: Props) => {
@@ -90,7 +90,7 @@ export const LI = ({
 				sizeStyles,
 				showDivider && verticalDivider,
 				padSides && sidePaddingStyles(padSidesOnMobile),
-				bottomMargin && marginBottomStyles,
+				padBottom && paddingBottomStyles,
 				showTopMarginWhenStacked && marginTopStyles,
 				snapAlignStart && snapAlignStartStyles,
 			]}

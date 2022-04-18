@@ -118,7 +118,7 @@ export const Writers = (): React.ReactNode => (
 			padContent={false}
 		>
 			<>
-				<UL direction="row" bottomMargin={true}>
+				<UL direction="row" padBottom={true}>
 					<LI padSides={true}>
 						<Grey padded={false} heightInPixels={230} />
 					</LI>

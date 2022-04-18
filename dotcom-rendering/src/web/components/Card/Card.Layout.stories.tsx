@@ -41,7 +41,7 @@ export const News = () => (
 					theme: ArticlePillar.News,
 				}}
 			>
-				<UL direction="row" bottomMargin={true}>
+				<UL direction="row" padBottom={true}>
 					<LI percentage="75%" showDivider={false} padSides={true}>
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
@@ -104,7 +104,7 @@ export const News = () => (
 						padSides={true}
 					>
 						<UL direction="column">
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -119,7 +119,7 @@ export const News = () => (
 									commentCount={82224}
 								/>
 							</LI>
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -131,7 +131,7 @@ export const News = () => (
 									headlineSize="small"
 								/>
 							</LI>
-							<LI bottomMargin={false} stretch={true}>
+							<LI padBottom={false} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -153,7 +153,7 @@ export const News = () => (
 						padSides={true}
 					>
 						<UL direction="column">
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -167,7 +167,7 @@ export const News = () => (
 									commentCount={26}
 								/>
 							</LI>
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -180,7 +180,7 @@ export const News = () => (
 									kickerText={kickers[1]}
 								/>
 							</LI>
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -193,7 +193,7 @@ export const News = () => (
 									kickerText={kickers[0]}
 								/>
 							</LI>
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -206,7 +206,7 @@ export const News = () => (
 									kickerText={kickers[2]}
 								/>
 							</LI>
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -219,7 +219,7 @@ export const News = () => (
 									kickerText={kickers[0]}
 								/>
 							</LI>
-							<LI bottomMargin={false} stretch={true}>
+							<LI padBottom={false} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -258,7 +258,7 @@ export const InDepth = () => (
 				<UL direction="row">
 					<LI percentage="50%" padSides={true}>
 						<UL direction="column">
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -274,7 +274,7 @@ export const InDepth = () => (
 									imageSize="small"
 								/>
 							</LI>
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -291,7 +291,7 @@ export const InDepth = () => (
 									commentCount={864}
 								/>
 							</LI>
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -307,7 +307,7 @@ export const InDepth = () => (
 									imageSize="small"
 								/>
 							</LI>
-							<LI bottomMargin={true} stretch={true}>
+							<LI padBottom={true} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -323,7 +323,7 @@ export const InDepth = () => (
 									imageSize="small"
 								/>
 							</LI>
-							<LI bottomMargin={false} stretch={true}>
+							<LI padBottom={false} stretch={true}>
 								<Card
 									linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"
 									format={{
@@ -383,7 +383,7 @@ export const Related = () => (
 					theme: ArticlePillar.News,
 				}}
 			>
-				<UL direction="row" bottomMargin={true}>
+				<UL direction="row" padBottom={true}>
 					<LI padSides={true} percentage="33%">
 						<Card
 							linkTo="/lifeandstyle/2018/mar/10/meera-sodhas-vegan-recipe-for-peanut-and-broccoli-pad-thai"

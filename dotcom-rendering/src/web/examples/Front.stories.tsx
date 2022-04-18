@@ -95,7 +95,7 @@ export const Front = () => (
 			centralBorder="partial"
 			padContent={false}
 		>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				<LI percentage="75%" showDivider={false} padSides={true}>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
@@ -169,7 +169,7 @@ export const Front = () => (
 					padSides={true}
 				>
 					<UL direction="column">
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -184,7 +184,7 @@ export const Front = () => (
 								commentCount={82224}
 							/>
 						</LI>
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -205,7 +205,7 @@ export const Front = () => (
 					padSides={true}
 				>
 					<UL direction="column">
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -219,7 +219,7 @@ export const Front = () => (
 								commentCount={26}
 							/>
 						</LI>
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -232,7 +232,7 @@ export const Front = () => (
 								kickerText={kickers[1]}
 							/>
 						</LI>
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -245,7 +245,7 @@ export const Front = () => (
 								kickerText={kickers[0]}
 							/>
 						</LI>
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -274,7 +274,7 @@ export const Front = () => (
 			centralBorder="partial"
 			padContent={false}
 		>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				<LI padSides={true}>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
@@ -615,7 +615,7 @@ export const Front2 = () => (
 			centralBorder="partial"
 			padContent={false}
 		>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				<LI percentage="75%" showDivider={false} padSides={true}>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
@@ -689,7 +689,7 @@ export const Front2 = () => (
 					padSides={true}
 				>
 					<UL direction="column">
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -704,7 +704,7 @@ export const Front2 = () => (
 								commentCount={82224}
 							/>
 						</LI>
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -725,7 +725,7 @@ export const Front2 = () => (
 					padSides={true}
 				>
 					<UL direction="column">
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -739,7 +739,7 @@ export const Front2 = () => (
 								commentCount={26}
 							/>
 						</LI>
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -752,7 +752,7 @@ export const Front2 = () => (
 								kickerText={kickers[1]}
 							/>
 						</LI>
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -765,7 +765,7 @@ export const Front2 = () => (
 								kickerText={kickers[0]}
 							/>
 						</LI>
-						<LI bottomMargin={true} stretch={true}>
+						<LI padBottom={true} stretch={true}>
 							<Card
 								linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
 								format={{
@@ -794,7 +794,7 @@ export const Front2 = () => (
 			centralBorder="partial"
 			padContent={false}
 		>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				<LI padSides={true}>
 					<Card
 						linkTo="/society/2019/nov/14/witchcraft-and-black-magic-contribute-to-increase-in-child-abuse"
