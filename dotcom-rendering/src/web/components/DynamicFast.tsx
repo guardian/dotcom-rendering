@@ -119,7 +119,7 @@ export const DynamicFast = ({ trails }: Props) => {
 						</LI>
 					);
 				})}
-				<LI percentage="50%">
+				<LI percentage="50%" showTopMarginWhenStacked={true}>
 					<UL direction="row" wrapCards={true}>
 						{smallCards.map((card, cardIndex) => {
 							return (
