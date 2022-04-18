@@ -19,7 +19,8 @@ const basicCardProps = {
 		theme: ArticlePillar.News,
 	},
 	headlineText: 'Headline text',
-	standfirst: 'This is the standfirst/trail text',
+	standfirst:
+		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
 	headlineSize: 'medium' as SmallHeadlineSize,
 	kickerText: '',
 	webPublicationDate: '2019-11-11T09:45:30.000Z',
@@ -33,11 +34,12 @@ const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 		<div
 			css={css`
 				max-height: 300px;
-				width: 100%;
+				max-width: 600px;
+				flex-basis: 100%;
 				${from.tablet} {
-					max-width: 240px;
+					flex-basis: 1;
 				}
-				padding: 20px;
+				margin: 10px;
 			`}
 		>
 			{children}
@@ -54,7 +56,7 @@ const CardGroup = ({ children }: { children: React.ReactNode }) => {
 				${from.tablet} {
 					flex-direction: row;
 				}
-				max-width: 800px;
+				max-width: 1000px;
 			`}
 		>
 			{children}
@@ -102,20 +104,12 @@ const CardsWithDifferentThemes = ({
 			<CardGroup>
 				{cards.slice(0, 4).map((card) => {
 					return (
-						<div
-							css={css`
-								height: 300px;
-								max-width: 240px;
-								padding: 20px;
-								display: flex;
-								flex-direction: row;
-							`}
-						>
+						<CardWrapper>
 							<Card
 								{...basicCardProps}
 								format={card.format}
 								headlineText={title}
-								standfirst="This is the standfirst/trail text"
+								standfirst="The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives"
 								kickerText={card.title}
 								starRating={
 									design === ArticleDesign.Review
@@ -123,7 +117,7 @@ const CardsWithDifferentThemes = ({
 										: undefined
 								}
 							/>
-						</div>
+						</CardWrapper>
 					);
 				})}
 			</CardGroup>
@@ -135,7 +129,7 @@ const CardsWithDifferentThemes = ({
 								{...basicCardProps}
 								format={card.format}
 								headlineText={title}
-								standfirst="This is the standfirst/trail text"
+								standfirst="The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives"
 								kickerText={card.title}
 								starRating={
 									design === ArticleDesign.Review
@@ -215,9 +209,15 @@ cardStories.add('with different headline sizes', () => {
 
 cardStories.add('with byline', () => {
 	return (
-		<CardWrapper>
-			<Card {...basicCardProps} byline="Byline text" showByline={true} />
-		</CardWrapper>
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					byline="Byline text"
+					showByline={true}
+				/>
+			</CardWrapper>
+		</CardGroup>
 	);
 });
 
@@ -270,36 +270,20 @@ cardStories.add('with media type', () => {
 cardStories.add('with different image positions', () => {
 	return (
 		<>
-			<div
-				css={css`
-					width: 100%;
-					${from.tablet} {
-						max-width: 500px;
-					}
-					padding: 20px;
-				`}
-			>
+			<CardWrapper>
 				<Card
 					{...basicCardProps}
 					imagePosition="left"
 					headlineText="left"
 				/>
-			</div>
-			<div
-				css={css`
-					width: 100%;
-					${from.tablet} {
-						max-width: 500px;
-					}
-					padding: 20px;
-				`}
-			>
+			</CardWrapper>
+			<CardWrapper>
 				<Card
 					{...basicCardProps}
 					imagePosition="right"
 					headlineText="right"
 				/>
-			</div>
+			</CardWrapper>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
@@ -314,66 +298,38 @@ cardStories.add('with different image positions', () => {
 cardStories.add('with different image sizes', () => {
 	return (
 		<>
-			<div
-				css={css`
-					max-height: 80px;
-					max-width: 340px;
-					padding: 10px;
-					margin-bottom: 20px;
-				`}
-			>
+			<CardWrapper>
 				<Card
 					{...basicCardProps}
 					imagePosition="left"
 					headlineText="small"
 					imageSize="small"
 				/>
-			</div>
-			<div
-				css={css`
-					max-height: 100px;
-					max-width: 340px;
-					padding: 10px;
-					margin-bottom: 20px;
-				`}
-			>
+			</CardWrapper>
+			<CardWrapper>
 				<Card
 					{...basicCardProps}
 					imagePosition="left"
 					headlineText="medium"
 					imageSize="medium"
 				/>
-			</div>
-			<div
-				css={css`
-					max-height: 200px;
-					max-width: 440px;
-					padding: 10px;
-					margin-bottom: 20px;
-				`}
-			>
+			</CardWrapper>
+			<CardWrapper>
 				<Card
 					{...basicCardProps}
 					imagePosition="left"
 					headlineText="large"
 					imageSize="large"
 				/>
-			</div>
-			<div
-				css={css`
-					max-height: 240px;
-					max-width: 540px;
-					padding: 10px;
-					margin-bottom: 20px;
-				`}
-			>
+			</CardWrapper>
+			<CardWrapper>
 				<Card
 					{...basicCardProps}
 					imagePosition="left"
 					headlineText="jumbo"
 					imageSize="jumbo"
 				/>
-			</div>
+			</CardWrapper>
 		</>
 	);
 });
