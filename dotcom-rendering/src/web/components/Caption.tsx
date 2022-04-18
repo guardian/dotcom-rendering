@@ -43,7 +43,7 @@ const captionStyle = (palette: Palette) => css`
 	color: ${palette.text.caption};
 `;
 
-const bottomMargin = css`
+const bottomMarginStyles = css`
 	margin-bottom: 6px;
 `;
 
@@ -245,7 +245,7 @@ export const Caption = ({
 			css={[
 				captionStyle(palette),
 				shouldLimitWidth && limitedWidth,
-				!isOverlayed && bottomMargin,
+				!isOverlayed && bottomMarginStyles,
 				isOverlayed && overlayedStyles(palette, format),
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,
@@ -291,7 +291,7 @@ export const Caption = ({
 								border-top: 1px solid ${palette.text.caption};
 							}
 						`,
-						bottomMargin,
+						bottomMarginStyles,
 						padCaption && captionPadding,
 						shouldLimitWidth && veryLimitedWidth,
 						shouldLimitWidth && bigLeftMargin,
