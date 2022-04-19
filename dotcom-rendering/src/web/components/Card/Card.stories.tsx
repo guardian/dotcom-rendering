@@ -75,6 +75,8 @@ const CardsWithDifferentThemes = ({
 }) => {
 	const cards = [];
 	for (const [pillarName, pillarValue] of Object.entries(ArticlePillar)) {
+		// We need to check if numeric here because the values are also exported as keynames
+		// See: https://www.typescriptlang.org/play?#code/KYOwrgtgBAggTgFwJYGMA2wAKS1oIZxQDeAsAFBSVQBywA7gM5QC8UADADTlVQDyADkhBIA9iBZQAjFwpUAyvxGIJAJhk8AwmDQIwcYBIDM6qgBkkAM2AMEATwwSALDIC+5cijEMRGAHRoRAHMACl4AIwArYBQEX1AEOCRrYPhkdCwcfDgASmyAbnIAegAqcgBtbioygCI2ao4oatpGaoBdE0oayXrGgSFREDaOqBqVHuqFJQQhys7qw3GtHT1gGdk5x3HzKxt7VfbZkab6Bh62A-WjvuExHskLnhrJxB6VB6rqpd19HsN3ue21jsGHqjla5FaUHIxUKQA
 		if (Number.isNaN(Number(pillarName))) {
 			cards.push({
 				title: pillarName,
