@@ -19,7 +19,7 @@ type Props = {
 
 const sectionStyles = css`
 	padding-top: 8px;
-	display: inline-flex;
+	display: flex;
 	flex-direction: row;
 	${from.leftCol} {
 		flex-direction: column;
@@ -59,7 +59,8 @@ const immersiveMargins = css`
 	}
 `;
 
-const livePulseIconStyles = css`
+const livePulseIconStyles = (palette: Palette) => css`
+	color: ${palette.text.seriesTitle};
 	${textSans.xxsmall({ fontWeight: 'bold' })}
 	padding-top: 0.25em;
 	${from.desktop} {
@@ -79,14 +80,7 @@ export const ArticleTitle = ({
 	return (
 		<div css={[sectionStyles, badge && badgeContainer]}>
 			{format.design === ArticleDesign.LiveBlog && (
-				<span
-					css={[
-						livePulseIconStyles,
-						css`
-							color: ${palette.text.seriesTitle};
-						`,
-					]}
-				>
+				<span css={livePulseIconStyles(palette)}>
 					<Island deferUntil="idle">
 						<PulsingDot />
 					</Island>

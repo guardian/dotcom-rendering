@@ -6,17 +6,17 @@ import { useEffect, useState } from 'react';
 
 const dotStyles = (colour?: string) => css`
 	color: ${colour && colour};
-	vertical-align: middle;
+
 	:before {
 		border-radius: 62.5rem;
 		display: inline-block;
 		position: relative;
 		background-color: currentColor;
-		width: 0.917em;
-		height: 0.917em;
+		width: 0.688rem;
+		height: 0.688rem;
 		${until.desktop} {
-			width: 1.084em;
-			height: 1.084em;
+			width: 0.813rem;
+			height: 0.813rem;
 		}
 		content: '';
 		margin-right: 0.1875rem;
