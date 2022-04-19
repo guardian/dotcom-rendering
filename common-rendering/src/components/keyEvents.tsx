@@ -97,6 +97,7 @@ const listStyles = (
 `;
 
 const linkStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+	position: initial;
 	text-decoration: none;
 
 	&:hover::before {
