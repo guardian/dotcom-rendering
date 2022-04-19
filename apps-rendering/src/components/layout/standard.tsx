@@ -1,14 +1,11 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticleDisplay } from '@guardian/libs';
 import {
 	background,
 	breakpoints,
 	from,
 	neutral,
-	remSpace,
 } from '@guardian/source-foundations';
 import { Lines } from '@guardian/source-react-components-development-kitchen';
 import { map, none, withDefault } from '@guardian/types';
@@ -26,7 +23,6 @@ import Standfirst from 'components/standfirst';
 import Tags from 'components/tags';
 import HeaderMedia from 'headerMedia';
 import type {
-	Item,
 	MatchReport as MatchReportItem,
 	Review as ReviewItem,
 	Standard as StandardItem,
@@ -39,7 +35,7 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { getThemeStyles, themeToPillarString } from 'themeStyles';
+import { themeToPillarString } from 'themeStyles';
 
 // ----- Styles ----- //
 
@@ -60,35 +56,6 @@ const BorderStyles = css`
 		margin: 0 auto;
 	}
 `;
-
-const itemStyles = (item: Item): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(item.theme);
-
-	switch (item.display) {
-		case ArticleDisplay.Immersive:
-			return css`
-				> p:first-of-type:first-letter,
-				> hr + p:first-letter {
-					color: ${kicker};
-					display: inline-block;
-					vertical-align: text-top;
-					line-height: 5.625rem;
-					font-size: 6.8125rem;
-					display: inline-block;
-					font-weight: 900;
-					float: left;
-					margin-right: ${remSpace[3]};
-
-					${darkModeCss`
-                        color: ${inverted};
-                    `}
-				}
-			`;
-
-		default:
-			return css``;
-	}
-};
 
 interface Props {
 	item: StandardItem | ReviewItem | MatchReportItem;
@@ -151,10 +118,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 						<Logo item={item} />
 					</section>
 				</header>
-				<Body
-					className={[articleWidthStyles, itemStyles(item)]}
-					format={item}
-				>
+				<Body className={[articleWidthStyles]} format={item}>
 					{children}
 				</Body>
 				{epicContainer}
