@@ -9,9 +9,9 @@ import {
 import { breakpoints, from } from '@guardian/source-foundations';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { Card } from './Card';
+import { Card, Props as CardProps } from './Card';
 
-const basicCardProps = {
+const basicCardProps: CardProps = {
 	linkTo: '',
 	format: {
 		display: ArticleDisplay.Standard,
@@ -21,12 +21,12 @@ const basicCardProps = {
 	headlineText: 'Headline text',
 	standfirst:
 		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
-	headlineSize: 'medium' as SmallHeadlineSize,
+	headlineSize: 'medium',
 	kickerText: '',
 	webPublicationDate: '2019-11-11T09:45:30.000Z',
 	imageUrl:
 		'https://i.guim.co.uk/img/media/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg?width=1140&quality=85&s=15053eb16d6829d670fb348d8d26aabd',
-	imagePosition: 'top' as ImagePositionType,
+	imagePosition: 'top',
 };
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => {
