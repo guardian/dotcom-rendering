@@ -84,7 +84,7 @@ export const ArticleTitle = ({
 			{format.design === ArticleDesign.LiveBlog && (
 				<span css={livePulseIconStyles(palette)}>
 					<Island deferUntil="idle">
-						<PulsingDot />
+						<PulsingDot diameter={1.084} />
 					</Island>
 				</span>
 			)}
