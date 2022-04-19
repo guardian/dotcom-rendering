@@ -5,8 +5,8 @@ import { decidePalette } from '../lib/decidePalette';
 import { PulsingDot } from './PulsingDot.importable';
 import { Island } from './Island';
 
-const lastUpdatedStyles = (palette: Palette) => css`
-	${textSans.small()}
+const lastUpdatedStyles = (palette: Palette, design: ArticleDesign) => css`
+	${design === ArticleDesign.LiveBlog ? textSans.small() : textSans.xxsmall()}
 	padding-bottom: 0.125rem;
 	padding-top: 0.125rem;
 	color: ${palette.text.standfirst};
@@ -27,7 +27,7 @@ export const ArticleLastUpdated = ({ format, lastUpdated }: Props) => {
 	const date = new Date(lastUpdated);
 
 	return (
-		<div css={lastUpdatedStyles(palette)}>
+		<div css={lastUpdatedStyles(palette, format.design)}>
 			{format.design === ArticleDesign.LiveBlog && (
 				<span css={livePulseIconStyles}>
 					<Island deferUntil="idle">
