@@ -483,6 +483,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								sectionUrl={CAPIArticle.sectionUrl}
 								guardianBaseURL={CAPIArticle.guardianBaseURL}
 								badge={CAPIArticle.badge}
+								isMatch={!!CAPIArticle.matchUrl}
 							/>
 						</GridItem>
 						<GridItem area="border">

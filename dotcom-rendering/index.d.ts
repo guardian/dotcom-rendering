@@ -82,6 +82,7 @@ type Palette = {
 		headline: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
+		matchTitle: Colour;
 		byline: Colour;
 		twitterHandle: Colour;
 		caption: Colour;
@@ -338,6 +339,7 @@ interface Block {
 	title?: string;
 	blockFirstPublished?: number;
 	blockFirstPublishedDisplay?: string;
+	blockFirstPublishedDisplayNoTimezone?: string;
 	primaryDateLine: string;
 	secondaryDateLine: string;
 	createdOn?: number;
@@ -587,6 +589,9 @@ type FEContainerType =
 	| 'nav/media-list'
 	| 'news/most-popular';
 
+// TODO: This may need to be declared differently than the front type in the future
+type DCRContainerType = FEContainerType;
+
 type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -705,7 +710,6 @@ type FEFrontCard = {
 
 type DCRFrontCard = {
 	format: ArticleFormat;
-	isLiveBlog: boolean;
 	url: string;
 	headline: string;
 	webPublicationDate?: string;
@@ -752,9 +756,11 @@ type FECollectionType = {
 type DCRCollectionType = {
 	id: string;
 	displayName: string;
+	collectionType: DCRContainerType;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];
+	href?: string;
 };
 
 type FEFrontConfigType = {
@@ -988,7 +994,6 @@ type OnwardsType = {
 	ophanComponentName: OphanComponentName;
 	format: ArticleFormat;
 	isCuratedContent?: boolean;
-	isFullCardImage?: boolean;
 };
 
 type OphanComponentName =
@@ -1097,17 +1102,12 @@ interface DCRServerDocumentData {
 	GA: GADataType;
 	linkedData: { [key: string]: any };
 }
-interface CarouselImagesMap {
-	'300'?: string;
-	'460'?: string;
-}
+
 interface BaseTrailType {
 	url: string;
 	headline: string;
-	isLiveBlog: boolean;
 	webPublicationDate?: string;
 	image?: string;
-	carouselImages?: CarouselImagesMap;
 	avatarUrl?: string;
 	mediaType?: MediaType;
 	mediaDuration?: number;

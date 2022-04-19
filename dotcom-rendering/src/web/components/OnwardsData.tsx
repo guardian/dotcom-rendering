@@ -9,7 +9,6 @@ type Props = {
 	Container: React.FC<OnwardsType>;
 	format: ArticleFormat;
 	isCuratedContent?: boolean;
-	isFullCardImage?: boolean;
 };
 
 type OnwardsResponse = {
@@ -26,7 +25,6 @@ export const OnwardsData = ({
 	Container,
 	format,
 	isCuratedContent,
-	isFullCardImage,
 }: Props) => {
 	const { data } = useApi<OnwardsResponse>(url);
 
@@ -46,7 +44,6 @@ export const OnwardsData = ({
 				ophanComponentName={ophanComponentName}
 				format={format}
 				isCuratedContent={isCuratedContent}
-				isFullCardImage={isFullCardImage}
 			/>
 		);
 	}

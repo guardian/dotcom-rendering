@@ -10,11 +10,11 @@ import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { Option } from '@guardian/types';
 import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import { fromString as dateFromString } from 'date';
-import type { MainMedia } from 'headerMedia';
-import { MainMediaKind } from 'headerMedia';
 import { parseImage } from 'image';
 import { isLabs } from 'item';
 import { pipe } from 'lib';
+import { MainMediaKind } from 'mainMedia';
+import type { MainMedia } from 'mainMedia';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
 

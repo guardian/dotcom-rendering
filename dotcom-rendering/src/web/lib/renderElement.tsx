@@ -34,7 +34,7 @@ import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent
 import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
 import { TableBlockComponent } from '../components/TableBlockComponent';
 import { TextBlockComponent } from '../components/TextBlockComponent';
-import { TweetBlockComponent } from '../components/TweetBlockComponent';
+import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
 import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockComponent.importable';
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
@@ -85,19 +85,19 @@ type Props = {
 // updateRole modifies the role of an element in a way appropriate for most
 // article types.
 const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
-	const isLiveBlog =
+	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
 	switch (el._type) {
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
-			if (isLiveBlog && el.role !== 'thumbnail') {
+			if (isBlog && el.role !== 'thumbnail') {
 				el.role = 'inline';
 			}
 
 			return el;
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
-			if (isLiveBlog) {
+			if (isBlog) {
 				el.role = 'inline';
 			} else {
 				el.role = 'richLink';
@@ -105,7 +105,7 @@ const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
 
 			return el;
 		default:
-			if (isLiveBlog && 'role' in el) {
+			if (isBlog && 'role' in el) {
 				el.role = 'inline';
 			}
 
@@ -136,7 +136,7 @@ export const renderElement = ({
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
-	const isLiveBlog =
+	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
@@ -600,6 +600,14 @@ export const renderElement = ({
 				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
+			if (switches.enhanceTweets) {
+				return [
+					true,
+					<Island deferUntil="visible">
+						<TweetBlockComponent element={element} />
+					</Island>,
+				];
+			}
 			return [true, <TweetBlockComponent element={element} />];
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 			return [
@@ -731,7 +739,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
-						stickyVideos={isLiveBlog && switches.stickyVideos}
+						stickyVideos={isBlog && switches.stickyVideos}
 					/>
 				</Island>,
 			];

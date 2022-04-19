@@ -11,7 +11,7 @@ import {
 	brandAlt,
 	text,
 } from '@guardian/source-foundations';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 
 import { LeftColumn } from './LeftColumn';
 import { Hide } from './Hide';
@@ -101,8 +101,8 @@ const containerStyles = css`
 	overflow: hidden; /* Needed for scrolling to work */
 `;
 
-const carouselStyle = (isFullCardImage?: boolean) => css`
-	min-height: ${!isFullCardImage && '227px'};
+const carouselStyle = css`
+	min-height: 227px;
 	position: relative; /* must set position for offset(Left) calculations of children to be relative to this box */
 
 	display: flex;
@@ -157,20 +157,7 @@ const dotActiveStyle = (palette: Palette) => css`
 	}
 `;
 
-const adjustNumberOfDotsStyle = (
-	index: number,
-	totalStories: number,
-	isFullCardImage?: boolean,
-) => {
-	/* This is a bit of a hack for the test, while we think of better UX here.
-    The dots can't line up on Desktop because we don't show 1 story per swipe */
-	if (isFullCardImage) {
-		return css`
-			${from.desktop} {
-				display: ${index >= totalStories - 1 ? 'none' : 'auto'};
-			}
-		`;
-	}
+const adjustNumberOfDotsStyle = (index: number, totalStories: number) => {
 	return css`
 		${from.phablet} {
 			display: ${index >= totalStories - 1 ? 'none' : 'auto'};
@@ -332,19 +319,6 @@ const Title = ({
 	</h2>
 );
 
-const convertToImmersive = (trails: TrailType[]): TrailType[] => {
-	return trails.map((trail) => {
-		const format = {
-			...trail.format,
-			display: ArticleDisplay.Immersive,
-		};
-		return {
-			...trail,
-			format,
-		};
-	});
-};
-
 type CarouselCardProps = {
 	isFirst: boolean;
 	format: ArticleFormat;
@@ -353,7 +327,6 @@ type CarouselCardProps = {
 	webPublicationDate: string;
 	kickerText?: string;
 	imageUrl?: string;
-	isFullCardImage?: boolean;
 	dataLinkName?: string;
 };
 
@@ -365,7 +338,6 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	webPublicationDate,
 	kickerText,
 	isFirst,
-	isFullCardImage,
 	dataLinkName,
 }: CarouselCardProps) => (
 	<LI
@@ -386,7 +358,6 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			showClock={true}
 			alwaysVertical={true}
 			minWidthInPixels={220}
-			isFullCardImage={isFullCardImage}
 			showQuotes={
 				format.design === ArticleDesign.Comment ||
 				format.design === ArticleDesign.Letter
@@ -402,7 +373,6 @@ type HeaderAndNavProps = {
 	palette: Palette;
 	index: number;
 	isCuratedContent?: boolean;
-	isFullCardImage?: boolean;
 	goToIndex: (newIndex: number) => void;
 };
 
@@ -412,7 +382,6 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	palette,
 	index,
 	isCuratedContent,
-	isFullCardImage,
 	goToIndex,
 }) => (
 	<div>
@@ -433,15 +402,9 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 					css={[
 						dotStyle,
 						i === index && dotActiveStyle(palette),
-						adjustNumberOfDotsStyle(
-							i,
-							trails.length,
-							isFullCardImage,
-						),
+						adjustNumberOfDotsStyle(i, trails.length),
 					]}
-					data-link-name={`${
-						isFullCardImage ? 'carousel-large' : 'carousel-small'
-					}-nav-dot-${i}`}
+					data-link-name={`carousel-small-nav-dot-${i}`}
 				/>
 			))}
 		</div>
@@ -453,7 +416,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 	trails,
 	ophanComponentName,
 	format,
-	isFullCardImage,
 	isCuratedContent,
 }: OnwardsType) => {
 	const palette = decidePalette(format);
@@ -462,11 +424,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 	const [index, setIndex] = useState(0);
 	const [maxIndex, setMaxIndex] = useState(0);
 
-	const variantComponentName = isFullCardImage
-		? 'carousel-large'
-		: 'carousel-small';
-
-	const arrowName = `${variantComponentName}-arrow`;
+	const arrowName = 'carousel-small-arrow';
 
 	const notPresentation = (el: HTMLElement): boolean =>
 		el.getAttribute('role') !== 'presentation';
@@ -565,8 +523,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 	// when index changes and compare it against the prior maxIndex only.
 	useEffect(() => setMaxIndex((m) => Math.max(index, m)), [index]);
 
-	if (isFullCardImage) trails = convertToImmersive(trails);
-
 	return (
 		<div
 			css={wrapperStyle(trails.length)}
@@ -587,7 +543,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 					palette={palette}
 					index={index}
 					isCuratedContent={isCuratedContent}
-					isFullCardImage={isFullCardImage}
 					goToIndex={goToIndex}
 				/>
 			</LeftColumn>
@@ -625,7 +580,6 @@ export const Carousel: React.FC<OnwardsType> = ({
 							palette={palette}
 							index={index}
 							isCuratedContent={isCuratedContent}
-							isFullCardImage={isFullCardImage}
 							goToIndex={goToIndex}
 						/>
 						<Hide when="below" breakpoint="desktop">
@@ -653,9 +607,9 @@ export const Carousel: React.FC<OnwardsType> = ({
 				</Hide>
 
 				<ul
-					css={carouselStyle(isFullCardImage)}
+					css={carouselStyle}
 					ref={carouselRef}
-					data-component={`${variantComponentName} | maxIndex-${maxIndex}`}
+					data-component={`carousel-small | maxIndex-${maxIndex}`}
 				>
 					{trails.map((trail, i) => {
 						const {
@@ -663,17 +617,12 @@ export const Carousel: React.FC<OnwardsType> = ({
 							headline: headlineText,
 							webPublicationDate,
 							format: trailFormat,
-							image: fallbackImageUrl,
-							carouselImages,
+							image,
 							kickerText,
 						} = trail;
 						// Don't try to render cards that have no publication date. This property is technically optional
 						// but we rarely if ever expect it not to exist
 						if (!webPublicationDate) return;
-						const imageUrl =
-							isFullCardImage && carouselImages
-								? carouselImages['460']
-								: fallbackImageUrl;
 						return (
 							<CarouselCard
 								key={`${trail.url}${i}`}
@@ -682,10 +631,9 @@ export const Carousel: React.FC<OnwardsType> = ({
 								linkTo={linkTo}
 								headlineText={headlineText}
 								webPublicationDate={webPublicationDate}
-								imageUrl={imageUrl}
+								imageUrl={image}
 								kickerText={kickerText}
-								isFullCardImage={isFullCardImage}
-								dataLinkName={`${variantComponentName}-card-position-${i}`}
+								dataLinkName={`carousel-small-card-position-${i}`}
 							/>
 						);
 					})}

@@ -408,6 +408,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.guardianBaseURL
 									}
 									badge={CAPIArticle.badge}
+									isMatch={true}
 								/>
 							}
 							leftColSize="wide"
@@ -425,6 +426,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.guardianBaseURL
 									}
 									badge={CAPIArticle.badge}
+									isMatch={true}
 								/>
 							</Hide>
 

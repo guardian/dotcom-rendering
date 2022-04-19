@@ -19,12 +19,13 @@ import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
 import Standfirst from 'components/standfirst';
 import Tags from 'components/tags';
-import HeaderMedia from 'headerMedia';
+import { getFormat } from 'item';
 import type {
 	MatchReport as MatchReportItem,
 	Review as ReviewItem,
 	Standard as StandardItem,
 } from 'item';
+import MainMedia from 'mainMedia';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
@@ -70,7 +71,10 @@ const InteractiveImmersive: FC<Props> = ({ item, children }) => {
 		<main css={[Styles, DarkStyles]}>
 			<article className="js-article" css={BorderStyles}>
 				<header>
-					<HeaderMedia item={item} />
+					<MainMedia
+						format={getFormat(item)}
+						mainMedia={item.mainMedia}
+					/>
 					<Series item={item} />
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
