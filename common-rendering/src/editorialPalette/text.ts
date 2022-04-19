@@ -62,7 +62,7 @@ const dropCapDark = (format: ArticleFormat): Colour => {
 		case ArticlePillar.News:
 			return news[500];
 		case ArticleSpecial.Labs:
-			return labs[500];
+			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 	}
