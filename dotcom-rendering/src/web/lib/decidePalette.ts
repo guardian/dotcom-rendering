@@ -157,8 +157,10 @@ const textTwitterHandle = (format: ArticleFormat): string => {
 	return text.supporting;
 };
 
-const textTwitterHandleLiveBackground = (): string => {
-	return WHITE;
+const textTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	return textTwitterHandle(format);
 };
 
 const textCaption = (format: ArticleFormat): string => {
@@ -739,6 +741,11 @@ const fillCaptionCamera = (format: ArticleFormat): string =>
 const fillBlockquoteIcon = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
 
+const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	return neutral[46];
+};
 const borderSyndicationButton = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	return border.secondary;
@@ -1059,7 +1066,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			matchTitle: textMatchTitle(),
 			byline: textByline(format),
 			twitterHandle: textTwitterHandle(format),
-			twitterHandleLiveBackground: textTwitterHandleLiveBackground(),
+			twitterHandleBelowDesktop: textTwitterHandleBelowDesktop(format),
 			caption: textCaption(format),
 			captionLink: textCaptionLink(format),
 			subMeta: textSubMeta(format),
@@ -1131,6 +1138,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),
+			twitterHandleBelowDesktop: fillTwitterHandleBelowDesktop(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(format),

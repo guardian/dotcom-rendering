@@ -16,42 +16,29 @@ import TwitterIcon from '../../static/icons/twitter.svg';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 
-const defaultTwitterHandleColour = (palette: Palette) => css`
-	color: ${palette.text.twitterHandle};
+const twitterHandleColour = (palette: Palette) => css`
+	color: ${palette.text.twitterHandleBelowDesktop};
 
 	svg {
-		fill: ${neutral[46]};
+		fill: ${palette.fill.twitterHandleBelowDesktop};
 	}
 
 	a {
+		color: ${palette.text.twitterHandleBelowDesktop};
+	}
+
+	${from.desktop} {
 		color: ${palette.text.twitterHandle};
+
+		svg {
+			fill: ${neutral[46]};
+		}
+
+		a {
+			color: ${palette.text.twitterHandle};
+		}
 	}
 `;
-
-const twitterHandleColour = (palette: Palette, format: ArticleFormat) => {
-	switch (format.design) {
-		case ArticleDesign.LiveBlog: {
-			return css`
-				color: ${palette.text.twitterHandleLiveBackground};
-
-				svg {
-					fill: ${neutral[100]};
-				}
-
-				a {
-					color: ${palette.text.twitterHandleLiveBackground};
-				}
-
-				${from.desktop} {
-					${defaultTwitterHandleColour(palette)}
-				}
-			`;
-		}
-		default: {
-			return defaultTwitterHandleColour(palette);
-		}
-	}
-};
 
 const twitterHandleStyles = css`
 	${textSans.xxsmall()};
@@ -155,12 +142,7 @@ export const Contributor: React.FC<{
 				</div>
 			)}
 			{onlyOneContributor && author.twitterHandle && (
-				<div
-					css={[
-						twitterHandleStyles,
-						twitterHandleColour(palette, format),
-					]}
-				>
+				<div css={[twitterHandleStyles, twitterHandleColour(palette)]}>
 					<TwitterIcon />
 					<a
 						href={`https://www.twitter.com/${author.twitterHandle}`}
