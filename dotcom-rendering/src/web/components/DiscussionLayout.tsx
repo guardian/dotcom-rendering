@@ -58,7 +58,11 @@ export const DiscussionLayout = ({
 							max-width: 100%;
 						`}
 					>
-						<Island clientOnly={true} deferUntil="visible">
+						<Island
+							clientOnly={true}
+							deferUntil="visible"
+							placeholderHeight={258}
+						>
 							<DiscussionContainer
 								format={format}
 								discussionApiUrl={discussionApiUrl}
