@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { initPerf } from '../browser/initPerf';
 import { submitComponentEvent } from '../browser/ophan/ophan';
 import { useIsInView } from '../lib/useIsInView';
@@ -76,6 +76,9 @@ export const EnhancePinnedPost = () => {
 		node: pinnedPost ?? undefined,
 	});
 
+	const pinnedPostTiming =
+		useRef<{ start: () => void; end: () => number; clear: () => void }>();
+
 	const contentFitsContainer =
 		pinnedPostContent &&
 		pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
@@ -93,18 +96,21 @@ export const EnhancePinnedPost = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		pinnedPostTiming.current = initPerf('pinned-post-view-duration');
+	}, []);
+
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
 	useEffect(() => {
 		if (!pinnedPost) return;
-		const pinnedPostTiming = initPerf('pinned-post-view-duration');
 
 		if (isInView) {
 			setHasBeenSeen(true);
-			pinnedPostTiming.clear();
-			pinnedPostTiming.start();
+			pinnedPostTiming.current?.clear();
+			pinnedPostTiming.current?.start();
 		} else if (hasBeenSeen && !isInView) {
-			const timeTaken = pinnedPostTiming.end();
+			const timeTaken = pinnedPostTiming.current?.end();
 			if (timeTaken) {
 				const timeTakenInSeconds = timeTaken / 1000;
 				submitComponentEvent({
