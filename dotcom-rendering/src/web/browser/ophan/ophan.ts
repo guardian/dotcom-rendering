@@ -8,22 +8,27 @@ import type {
 	OphanProduct,
 	OphanABTestMeta,
 } from '@guardian/libs';
+import { log } from '@guardian/libs';
 
-export type OphanRecordFunction = (event: { [key: string]: any }) => void;
+export type OphanRecordFunction = (
+	event: { [key: string]: any },
+	callback?: () => void,
+) => void;
 
 export const getOphanRecordFunction = (): OphanRecordFunction => {
 	const record = window?.guardian?.ophan?.record;
 
-	if (record) {
-		return record;
-	}
-	console.log('window.guardian.ophan.record is not available');
+	if (record) return record;
+
+	console.warn('window.guardian.ophan.record is not available');
 	return () => {};
 };
 
 export const record: OphanRecordFunction = (event) => {
 	if (window?.guardian?.ophan?.record) {
-		window.guardian.ophan.record(event);
+		window.guardian.ophan.record(event, () =>
+			log('dotcom', '🧿 Ophan event recorded:', event),
+		);
 	} else {
 		throw new Error("window.guardian.ophan.record doesn't exist");
 	}
