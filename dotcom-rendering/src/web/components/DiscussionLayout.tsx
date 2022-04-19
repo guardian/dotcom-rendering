@@ -61,7 +61,7 @@ export const DiscussionLayout = ({
 						<Island
 							clientOnly={true}
 							deferUntil="visible"
-							placeholderHeight={324}
+							placeholderHeight={624}
 						>
 							<DiscussionContainer
 								format={format}

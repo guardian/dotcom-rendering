@@ -52,8 +52,8 @@ const revealStyles = css`
 `;
 
 const fixHeight = css`
-	max-height: 280px;
-	min-height: 280px;
+	max-height: 580px;
+	min-height: 580px;
 	overflow: hidden;
 `;
 
