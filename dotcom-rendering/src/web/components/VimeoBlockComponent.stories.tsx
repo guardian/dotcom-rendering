@@ -35,6 +35,7 @@ export const smallAspectRatio = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
+				isMainMedia={false}
 			/>
 			<p>abc</p>
 		</Container>
@@ -58,6 +59,7 @@ export const largeAspectRatio = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
+				isMainMedia={false}
 			/>
 			<p>abc</p>
 		</Container>
@@ -84,6 +86,7 @@ export const verticalAspectRatio = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
+				isMainMedia={false}
 			/>
 			<p>abc</p>
 		</Container>
