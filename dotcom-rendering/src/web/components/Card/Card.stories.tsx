@@ -83,7 +83,7 @@ const CardsWithDifferentThemes = ({
 				format: {
 					display,
 					design,
-					theme: pillarValue as ArticleTheme,
+					theme: pillarValue as ArticlePillar,
 				},
 			});
 		}
