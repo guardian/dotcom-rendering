@@ -9,9 +9,9 @@ import {
 import { breakpoints, from } from '@guardian/source-foundations';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { Card } from './Card';
+import { Card, Props as CardProps } from './Card';
 
-const basicCardProps = {
+const basicCardProps: CardProps = {
 	linkTo: '',
 	format: {
 		display: ArticleDisplay.Standard,
@@ -21,12 +21,12 @@ const basicCardProps = {
 	headlineText: 'Headline text',
 	standfirst:
 		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
-	headlineSize: 'medium' as SmallHeadlineSize,
+	headlineSize: 'medium',
 	kickerText: '',
 	webPublicationDate: '2019-11-11T09:45:30.000Z',
 	imageUrl:
 		'https://i.guim.co.uk/img/media/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg?width=1140&quality=85&s=15053eb16d6829d670fb348d8d26aabd',
-	imagePosition: 'top' as ImagePositionType,
+	imagePosition: 'top',
 };
 
 const CardWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -75,13 +75,15 @@ const CardsWithDifferentThemes = ({
 }) => {
 	const cards = [];
 	for (const [pillarName, pillarValue] of Object.entries(ArticlePillar)) {
+		// We need to check if numeric here because the values are also exported as keynames
+		// See: https://www.typescriptlang.org/play?#code/KYOwrgtgBAggTgFwJYGMA2wAKS1oIZxQDeAsAFBSVQBywA7gM5QC8UADADTlVQDyADkhBIA9iBZQAjFwpUAyvxGIJAJhk8AwmDQIwcYBIDM6qgBkkAM2AMEATwwSALDIC+5cijEMRGAHRoRAHMACl4AIwArYBQEX1AEOCRrYPhkdCwcfDgASmyAbnIAegAqcgBtbioygCI2ao4oatpGaoBdE0oayXrGgSFREDaOqBqVHuqFJQQhys7qw3GtHT1gGdk5x3HzKxt7VfbZkab6Bh62A-WjvuExHskLnhrJxB6VB6rqpd19HsN3ue21jsGHqjla5FaUHIxUKQA
 		if (Number.isNaN(Number(pillarName))) {
 			cards.push({
 				title: pillarName,
 				format: {
 					display,
 					design,
-					theme: pillarValue as ArticleTheme,
+					theme: pillarValue as ArticlePillar,
 				},
 			});
 		}
@@ -259,7 +261,6 @@ cardStories.add('with media type', () => {
 						theme: ArticlePillar.Sport,
 					}}
 					mediaType="Gallery"
-					mediaDuration={360}
 					headlineText="Gallery"
 				/>
 			</CardWrapper>
