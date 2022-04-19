@@ -24,11 +24,11 @@ import { Colour } from '.';
 
 const branding = (_format: ArticleFormat): Colour => {
 	return neutral[20];
-}
+};
 
 const brandingDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
-}
+};
 
 const dropCap = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
