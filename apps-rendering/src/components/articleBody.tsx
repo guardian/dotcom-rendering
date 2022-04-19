@@ -1,7 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
-import { background, neutral, remSpace } from '@guardian/source-foundations';
+import { text } from '@guardian/common-rendering/src/editorialPalette/text';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import { background, neutral, remSpace, space } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
 import { adStyles, darkModeCss } from 'styles';
 
@@ -11,7 +12,21 @@ interface ArticleBodyProps {
 	format: ArticleFormat;
 }
 
-const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
+const dropCapWeight = (format: ArticleFormat): SerializedStyles => {
+	switch (format.design) {
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
+			return css`font-weight: 200;
+			`;
+		default:
+			return css`
+				font-weight: 700;
+			`;
+	}
+}
+const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => {
+	const baseStyles = css`
 	position: relative;
 	clear: both;
 
@@ -28,7 +43,34 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 		clear: both;
 		display: inline-block;
 	}
-`;
+	`;
+
+	const dropCap = css`
+		p:first-child:first-letter {
+		color: ${text.dropCap(format)};
+		${dropCapWeight(format)};
+		float: left;
+		font-size: 7.375rem;
+		line-height: 6.188rem;
+		vertical-align: text-top;
+		pointer-events: none;
+		margin-right: ${space[1]}px;
+		}
+	`;
+
+	switch (format.design) {
+		case ArticleDesign.Interview:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+			return css`
+				${baseStyles}
+				${dropCap}
+			`;
+		default:
+			return baseStyles;
+			}
+};
 
 const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
     background: ${background.inverse};

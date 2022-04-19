@@ -30,6 +30,25 @@ const brandingDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 }
 
+const dropCap = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.News:
+			return news[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
+};
+
 const headline = (format: ArticleFormat): Colour => {
 	if (
 		format.display === ArticleDisplay.Immersive ||
@@ -589,6 +608,7 @@ const text = {
 	bylineLeftColumn,
 	bylineInline,
 	bylineDark,
+	dropCap,
 	follow,
 	followDark,
 	headline,
