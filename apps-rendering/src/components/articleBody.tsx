@@ -62,6 +62,13 @@ const dropCap = (format: ArticleFormat): SerializedStyles => css`
 		pointer-events: none;
 		margin-right: ${remSpace[1]};
 	}
+
+	${darkModeCss`
+		p:first-of-type:first-letter,
+		hr + p:first-letter {
+			color: ${text.dropCapDark(format)};
+		}
+	`};
 `;
 
 const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => {
