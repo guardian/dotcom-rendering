@@ -85,7 +85,7 @@ export const OnwardsData = ({
 		);
 	}
 
-	if (data && data.trails) {
+	if (data?.trails) {
 		return (
 			<div css={[minHeight, revealStyles]} className="onwards">
 				<div className="pending">
