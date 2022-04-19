@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
-import { background, neutral, remSpace, space } from '@guardian/source-foundations';
+import { background, headline, neutral, remSpace } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
 import { adStyles, darkModeCss } from 'styles';
 
@@ -47,14 +47,15 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => {
 
 	const dropCap = css`
 		p:first-child:first-letter {
-		color: ${text.dropCap(format)};
-		${dropCapWeight(format)};
-		float: left;
-		font-size: 7.375rem;
-		line-height: 6.188rem;
-		vertical-align: text-top;
-		pointer-events: none;
-		margin-right: ${space[1]}px;
+			${headline.large({ fontWeight: 'bold' })}
+			${dropCapWeight(format)};
+			color: ${text.dropCap(format)};
+			float: left;
+			font-size: 7.375rem;
+			line-height: 6.188rem;
+			vertical-align: text-top;
+			pointer-events: none;
+			margin-right: ${remSpace[1]};
 		}
 	`;
 
