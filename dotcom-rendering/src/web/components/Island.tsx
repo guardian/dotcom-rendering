@@ -37,7 +37,7 @@ const decideChildren = (
 			<Placeholder
 				height={placeholderHeight}
 				shouldShimmer={false}
-				backgroundColor="white"
+				backgroundColor="transparent"
 			/>
 		); // Portal using placeholder
 	return null; // Portal not using placeholder (this also includes placeholderHeight === 0 - this is intentional)
