@@ -43,6 +43,31 @@ function scrollOnCollapse() {
 	}
 }
 
+const handleClickTracking = () => {
+	if (pinnedPostCheckBox instanceof HTMLInputElement) {
+		if (pinnedPostCheckBox.checked) {
+			submitComponentEvent({
+				component: {
+					componentType: 'LIVE_BLOG_PINNED_POST',
+					id: pinnedPost?.id,
+				},
+				action: 'CLICK',
+				value: 'show-more',
+			});
+		} else {
+			submitComponentEvent({
+				component: {
+					componentType: 'LIVE_BLOG_PINNED_POST',
+					id: pinnedPost?.id,
+				},
+				action: 'CLICK',
+				value: 'show-less',
+			});
+			scrollOnCollapse();
+		}
+	}
+};
+
 export const EnhancePinnedPost = () => {
 	const [hasBeenSeen, setHasBeenSeen] = useState(false);
 	const [isInView] = useIsInView({
@@ -56,31 +81,6 @@ export const EnhancePinnedPost = () => {
 		pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
 
 	if (contentFitsContainer) hideShowMore();
-
-	const handleClickTracking = () => {
-		if (pinnedPostCheckBox instanceof HTMLInputElement) {
-			if (pinnedPostCheckBox.checked) {
-				submitComponentEvent({
-					component: {
-						componentType: 'LIVE_BLOG_PINNED_POST',
-						id: pinnedPost?.id,
-					},
-					action: 'CLICK',
-					value: 'show-more',
-				});
-			} else {
-				submitComponentEvent({
-					component: {
-						componentType: 'LIVE_BLOG_PINNED_POST',
-						id: pinnedPost?.id,
-					},
-					action: 'CLICK',
-					value: 'show-less',
-				});
-				scrollOnCollapse();
-			}
-		}
-	};
 
 	useEffect(() => {
 		pinnedPostCheckBox?.addEventListener('change', handleClickTracking);
