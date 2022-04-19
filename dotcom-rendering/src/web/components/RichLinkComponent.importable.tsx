@@ -57,11 +57,16 @@ export const RichLinkComponent = ({
 	format,
 }: Props) => {
 	const url = buildUrl(element, ajaxUrl);
-	const { data, error } = useApi<CAPIRichLinkType>(url);
+	const { data, error, loading } = useApi<CAPIRichLinkType>(url);
 
 	if (error) {
 		// Send the error to Sentry
 		window?.guardian?.modules?.sentry?.reportError(error, 'rich-link');
+		return null;
+	}
+
+	if (loading) {
+		return null;
 	}
 
 	if (!data) {
