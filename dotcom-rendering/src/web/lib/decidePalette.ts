@@ -1,24 +1,24 @@
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	ArticleSpecial,
-	ArticlePillar,
-} from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	neutral,
-	text,
-	specialReport,
-	opinion,
-	news,
-	sport,
-	brandAltBackground,
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
+import {
 	border,
 	brand,
 	brandAlt,
-	lifestyle,
+	brandAltBackground,
 	culture,
 	labs,
+	lifestyle,
+	neutral,
+	news,
+	opinion,
+	specialReport,
+	sport,
+	text,
 } from '@guardian/source-foundations';
 
 // Here is the one place where we use `pillarPalette`
@@ -180,7 +180,10 @@ const textSubMeta = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
-	if (format.design === ArticleDesign.DeadBlog)
+	if (
+		format.design === ArticleDesign.DeadBlog ||
+		format.design === ArticleDesign.LiveBlog
+	)
 		return blogsGrayBackgroundPalette(format);
 	return pillarPalette[format.theme].main;
 };
