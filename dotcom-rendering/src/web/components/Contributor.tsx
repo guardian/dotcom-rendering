@@ -6,6 +6,7 @@ import {
 	headline,
 	textSans,
 	until,
+	from,
 } from '@guardian/source-foundations';
 
 import { BylineLink } from './BylineLink';
@@ -15,25 +16,59 @@ import TwitterIcon from '../../static/icons/twitter.svg';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 
-const twitterHandleStyles = (palette: Palette) => css`
-	${textSans.xxsmall()};
-	font-weight: bold;
+const defaultTwitterHandleColour = (palette: Palette) => css`
 	color: ${palette.text.twitterHandle};
 
-	padding-right: 10px;
-	display: inline-block;
-
 	svg {
-		height: 10px;
-		max-width: 12px;
-		margin-right: 0px;
 		fill: ${neutral[46]};
 	}
 
 	a {
 		color: ${palette.text.twitterHandle};
+	}
+`;
+
+const twitterHandleColour = (palette: Palette, format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog: {
+			return css`
+				color: ${palette.text.twitterHandleLiveBackground};
+
+				svg {
+					fill: ${neutral[100]};
+				}
+
+				a {
+					color: ${palette.text.twitterHandleLiveBackground};
+				}
+
+				${from.desktop} {
+					${defaultTwitterHandleColour(palette)}
+				}
+			`;
+		}
+		default: {
+			return defaultTwitterHandleColour(palette);
+		}
+	}
+};
+
+const twitterHandleStyles = css`
+	${textSans.xxsmall()};
+	font-weight: bold;
+
+	svg {
+		height: 10px;
+		max-width: 12px;
+		margin-right: 0px;
+	}
+
+	a {
 		text-decoration: none;
 	}
+
+	padding-right: 10px;
+	display: inline-block;
 `;
 
 // for liveblog smaller breakpoints article meta is located in the same
@@ -120,7 +155,12 @@ export const Contributor: React.FC<{
 				</div>
 			)}
 			{onlyOneContributor && author.twitterHandle && (
-				<div css={twitterHandleStyles(palette)}>
+				<div
+					css={[
+						twitterHandleStyles,
+						twitterHandleColour(palette, format),
+					]}
+				>
 					<TwitterIcon />
 					<a
 						href={`https://www.twitter.com/${author.twitterHandle}`}

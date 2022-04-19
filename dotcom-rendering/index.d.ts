@@ -85,6 +85,7 @@ type Palette = {
 		matchTitle: Colour;
 		byline: Colour;
 		twitterHandle: Colour;
+		twitterHandleLiveBackground: Colour;
 		caption: Colour;
 		captionLink: Colour;
 		subMeta: Colour;

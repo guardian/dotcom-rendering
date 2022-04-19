@@ -157,6 +157,10 @@ const textTwitterHandle = (format: ArticleFormat): string => {
 	return text.supporting;
 };
 
+const textTwitterHandleLiveBackground = (): string => {
+	return WHITE;
+};
+
 const textCaption = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
@@ -1055,6 +1059,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			matchTitle: textMatchTitle(),
 			byline: textByline(format),
 			twitterHandle: textTwitterHandle(format),
+			twitterHandleLiveBackground: textTwitterHandleLiveBackground(),
 			caption: textCaption(format),
 			captionLink: textCaptionLink(format),
 			subMeta: textSubMeta(format),
