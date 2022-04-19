@@ -261,7 +261,6 @@ cardStories.add('with media type', () => {
 						theme: ArticlePillar.Sport,
 					}}
 					mediaType="Gallery"
-					mediaDuration={360}
 					headlineText="Gallery"
 				/>
 			</CardWrapper>
