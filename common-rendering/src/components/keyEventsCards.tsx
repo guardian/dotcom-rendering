@@ -225,7 +225,11 @@ const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
 	);
 };
 
-const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
+const KeyEventsCards = ({
+	keyEvents,
+	format,
+	supportsDarkMode,
+}: KeyEventsProps) => {
 	return (
 		<nav
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
@@ -256,5 +260,5 @@ const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
 
 // ----- Exports ----- //
 
-export default KeyEvents;
+export default KeyEventsCards;
 export type { KeyEvent };
