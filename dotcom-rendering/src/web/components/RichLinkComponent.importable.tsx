@@ -62,7 +62,6 @@ export const RichLinkComponent = ({
 	if (error) {
 		// Send the error to Sentry
 		window?.guardian?.modules?.sentry?.reportError(error, 'rich-link');
-		return null;
 	}
 
 	if (data) {
