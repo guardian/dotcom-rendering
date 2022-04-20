@@ -30,7 +30,8 @@ export const doStorybookHydration = () => {
 				/* webpackChunkName: "[request]" */
 				`../../components/${name}.importable`
 			).then((module) => {
-				ReactDOM.hydrate(
+				element.querySelector('[data-name="placeholder"]')?.remove();
+				ReactDOM.render(
 					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 					React.createElement(module[name], props),
 					element,

@@ -1010,7 +1010,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					/>
 				</ElementContainer>
 
-				<Island clientOnly={true} deferUntil="visible">
+				<Island
+					clientOnly={true}
+					deferUntil="visible"
+					placeholderHeight={600}
+				>
 					<OnwardsUpper
 						ajaxUrl={CAPIArticle.config.ajaxUrl}
 						hasRelated={CAPIArticle.hasRelated}
