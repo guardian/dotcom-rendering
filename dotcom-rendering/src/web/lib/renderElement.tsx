@@ -816,6 +816,7 @@ export const renderArticleElement = ({
 
 	return needsFigure ? (
 		<Figure
+			key={'elementId' in element ? element.elementId : index}
 			isMainMedia={isMainMedia}
 			id={'elementId' in element ? element.elementId : undefined}
 			role={role}
