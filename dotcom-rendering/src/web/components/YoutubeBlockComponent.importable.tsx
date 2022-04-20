@@ -148,6 +148,7 @@ export const YoutubeBlockComponent = ({
 						displayCredit={false}
 						shouldLimitWidth={shouldLimitWidth}
 						mediaType="Video"
+						isMainMedia={isMainMedia}
 					/>
 				)}
 			</figure>
@@ -224,6 +225,7 @@ export const YoutubeBlockComponent = ({
 					displayCredit={false}
 					shouldLimitWidth={shouldLimitWidth}
 					mediaType="Video"
+					isMainMedia={isMainMedia}
 				/>
 			)}
 		</div>

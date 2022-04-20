@@ -18,6 +18,7 @@ type Props = {
 	caption?: string;
 	format: ArticleFormat;
 	elementId?: string;
+	isMainMedia: boolean;
 };
 
 /*
@@ -233,6 +234,7 @@ export const InteractiveBlockComponent = ({
 	caption,
 	format,
 	elementId = '',
+	isMainMedia,
 }: Props) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const placeholderLinkRef = useRef<HTMLAnchorElement>(null);
@@ -321,7 +323,13 @@ export const InteractiveBlockComponent = ({
 					</>
 				)}
 			</figure>
-			{caption && <Caption captionText={caption} format={format} />}
+			{caption && (
+				<Caption
+					captionText={caption}
+					format={format}
+					isMainMedia={isMainMedia}
+				/>
+			)}
 		</>
 	);
 };

@@ -26,7 +26,7 @@ import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
 
-type Props = {
+export type Props = {
 	linkTo: string;
 	format: ArticleFormat;
 	headlineText: string;

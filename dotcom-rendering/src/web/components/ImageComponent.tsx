@@ -368,6 +368,7 @@ export const ImageComponent = ({
 										displayCredit={element.displayCredit}
 										shouldLimitWidth={shouldLimitWidth}
 										isOverlayed={true}
+										isMainMedia={isMainMedia}
 									/>
 								</div>
 							</div>
@@ -387,6 +388,7 @@ export const ImageComponent = ({
 						credit={element.data.credit}
 						displayCredit={element.displayCredit}
 						shouldLimitWidth={shouldLimitWidth}
+						isMainMedia={isMainMedia}
 					/>
 				</Hide>
 			) : (
@@ -396,6 +398,7 @@ export const ImageComponent = ({
 					credit={element.data.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={shouldLimitWidth}
+					isMainMedia={isMainMedia}
 				/>
 			)}
 		</>

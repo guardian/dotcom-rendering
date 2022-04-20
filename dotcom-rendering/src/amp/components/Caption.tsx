@@ -21,19 +21,20 @@ const captionPadding = css`
 	padding-right: 8px;
 `;
 
-export const Caption: React.FC<{
-	captionText?: string;
-	pillar: ArticleTheme;
-	padCaption?: boolean;
-	credit?: string;
-	displayCredit?: boolean;
-}> = ({
+export const Caption = ({
 	captionText,
 	pillar,
 	padCaption = false,
 	credit,
 	displayCredit = true,
 	children,
+}: {
+	captionText?: string;
+	pillar: ArticleTheme;
+	padCaption?: boolean;
+	credit?: string;
+	displayCredit?: boolean;
+	children: React.ReactNode;
 }) => {
 	const iconStyle = css`
 		fill: ${pillarPalette_DO_NOT_USE[pillar].main};

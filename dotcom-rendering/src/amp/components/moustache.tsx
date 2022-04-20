@@ -5,10 +5,15 @@ const open = (name: string, invert?: boolean) =>
 const close = (name: string) => `{{/${name}}}`;
 export const moustacheVariable = (name: string) => `{{${name}}}`;
 
-export const MoustacheSection: React.FC<{
+export const MoustacheSection = ({
+	name,
+	children,
+	invert,
+}: {
 	name: string;
+	children: React.ReactNode;
 	invert?: boolean;
-}> = ({ name, children, invert }) => (
+}) => (
 	<>
 		{open(name, invert)}
 		{children}
@@ -20,7 +25,11 @@ export const MoustacheVariable: React.FC<{ name: string }> = ({ name }) => (
 	<>{moustacheVariable(name)}</>
 );
 
-export const MoustacheTemplate: React.FC = ({ children }) => {
+export const MoustacheTemplate = ({
+	children,
+}: {
+	children: React.ReactNode;
+}) => {
 	// this next line is necessary cos react has a 'template' object with no 'type' property.
 	// By saying 'as {}' we can pretend we're not adding the 'type' property and thus avoid unhappy type errors
 	const props = { type: 'amp-mustache' } as { [key: string]: any };
