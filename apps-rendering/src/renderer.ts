@@ -177,43 +177,6 @@ const allowsDropCaps = (format: ArticleFormat): boolean => {
 	}
 };
 
-const dropCapWeight = (format: ArticleFormat): SerializedStyles => {
-	switch (format.design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return css`
-				font-weight: 200;
-			`;
-		default:
-			return css`
-				font-weight: 700;
-			`;
-	}
-};
-
-const dropCapStyles = (format: ArticleFormat): SerializedStyles => css`
-	&:first-of-type:first-letter,
-	hr + &:first-letter {
-		${headline.large({ fontWeight: 'bold' })}
-		${dropCapWeight(format)}
-		color: ${text.dropCap(format)};
-		float: left;
-		font-size: 7.375rem;
-		line-height: 6.188rem;
-		vertical-align: text-top;
-		pointer-events: none;
-		margin-right: ${remSpace[1]};
-	}
-
-	${darkModeCss`
-		&:first-of-type:first-letter,
-		hr + &:first-letter {
-			color: ${text.dropCapDark(format)};
-		}
-	`};
-`;
-
 //Elements rendered by this function should contain no styles.
 // For example in callout form and interactives we want to exclude styles.
 const plainTextElement = (node: Node, key: number): ReactNode => {
@@ -271,15 +234,7 @@ const textElement =
 				const showDropCap =
 					allowsDropCaps(format) && text.length >= 200;
 				return showDropCap
-					? styledH(
-							Paragraph,
-							{
-								key,
-								format,
-								dropCapStyles: dropCapStyles(format),
-							},
-							children,
-					  )
+					? h(Paragraph, { key, format, showDropCap }, children)
 					: h(Paragraph, { key, format }, children);
 			}
 			case '#text':

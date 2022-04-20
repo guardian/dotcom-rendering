@@ -2,33 +2,82 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import { text } from '@guardian/common-rendering/src/editorialPalette/text';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import { body, remSpace, textSans } from '@guardian/source-foundations';
+import {
+	body,
+	headline,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
 interface Props {
 	children?: ReactNode;
 	format: ArticleFormat;
-	dropCapStyles?: SerializedStyles;
+	showDropCap?: boolean;
 }
 
-const styles = (theme: ArticleTheme): SerializedStyles => {
-	const labs = theme === ArticleSpecial.Labs ? textSans.medium() : null;
+const dropCapWeight = (format: ArticleFormat): SerializedStyles => {
+	switch (format.design) {
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
+			return css`
+				font-weight: 200;
+			`;
+		default:
+			return css`
+				font-weight: 700;
+			`;
+	}
+};
+
+const styles = (
+	format: ArticleFormat,
+	showDropCap: boolean = false,
+): SerializedStyles => {
+	const labs =
+		format.theme === ArticleSpecial.Labs ? textSans.medium() : null;
+
+	const dropCap = showDropCap
+		? css`
+				&:first-of-type:first-letter,
+				hr + &:first-letter {
+					${headline.large({ fontWeight: 'bold' })}
+					${dropCapWeight(format)}
+				color: ${text.dropCap(format)};
+					float: left;
+					font-size: 7.375rem;
+					line-height: 6.188rem;
+					vertical-align: text-top;
+					pointer-events: none;
+					margin-right: ${remSpace[1]};
+				}
+
+				${darkModeCss`
+				&:first-of-type:first-letter,
+				hr + &:first-letter {
+					color: ${text.dropCapDark(format)};
+				}`}
+		  `
+		: null;
 
 	return css`
 		${body.medium()}
 		overflow-wrap: break-word;
 		margin: 0 0 ${remSpace[3]};
-
+		${dropCap}
 		${labs}
 	`;
 };
 
-const Paragraph: FC<Props> = ({ children, format, dropCapStyles }: Props) => (
-	<p css={[styles(format.theme), dropCapStyles]}>{children}</p>
+const Paragraph: FC<Props> = ({ children, format, showDropCap }: Props) => (
+	<p css={styles(format, showDropCap)}>{children}</p>
 );
 
 // ----- Exports ----- //
