@@ -3,8 +3,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
-import { ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
 	body,
 	headline,
@@ -19,7 +19,7 @@ import { darkModeCss } from 'styles';
 interface Props {
 	children?: ReactNode;
 	format: ArticleFormat;
-	showDropCap?: boolean;
+	showDropCap: boolean;
 }
 
 const dropCapWeight = (format: ArticleFormat): SerializedStyles => {
@@ -39,7 +39,7 @@ const dropCapWeight = (format: ArticleFormat): SerializedStyles => {
 
 const styles = (
 	format: ArticleFormat,
-	showDropCap: boolean = false,
+	showDropCap: boolean,
 ): SerializedStyles => {
 	const labs =
 		format.theme === ArticleSpecial.Labs ? textSans.medium() : null;
