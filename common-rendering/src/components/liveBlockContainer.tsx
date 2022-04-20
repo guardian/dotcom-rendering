@@ -11,7 +11,6 @@ import { darkModeCss } from '../lib';
 import { background, border } from '../editorialPalette';
 import { ArticleFormat } from '@guardian/libs';
 
-
 type BlockContributor = {
 	name: string;
 	imageUrl?: string;
@@ -24,12 +23,14 @@ type Props = {
 	blockTitle?: string;
 	blockFirstPublished?: number;
 	blockFirstPublishedDisplay?: string;
-	blockLink: string;
+	blockId: string;
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
 	isOriginalPinnedPost?: boolean;
+	host?: string;
+	pageId?: string;
 };
 
 const LEFT_MARGIN_DESKTOP = 60;
@@ -116,16 +117,22 @@ const LiveBlockContainer = ({
 	blockTitle,
 	blockFirstPublished,
 	blockFirstPublishedDisplay,
-	blockLink,
+	blockId,
 	isLiveUpdate,
 	contributors,
 	isPinnedPost,
 	supportsDarkMode,
 	isOriginalPinnedPost = false,
+	host,
+	pageId,
 }: Props) => {
 	return (
 		<article
-			id={`block-${id}`}
+			/**
+			 * Pinned posts are not the cannonical source for a post, they're a copy. Only the *true* post
+			 * should get the id. This will prevent two elements on the page having the same id.
+			 * */
+			id={!isPinnedPost ? `block-${id}` : undefined}
 			key={id}
 			/**
 			 *   Classnames
@@ -161,11 +168,13 @@ const LiveBlockContainer = ({
 					<FirstPublished
 						firstPublished={blockFirstPublished}
 						firstPublishedDisplay={blockFirstPublishedDisplay}
-						blockLink={blockLink}
+						blockId={blockId}
 						isPinnedPost={isPinnedPost}
 						supportsDarkMode={supportsDarkMode}
 						isOriginalPinnedPost={isOriginalPinnedPost}
 						format={format}
+						host={host}
+						pageId={pageId}
 					/>
 				)}
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}

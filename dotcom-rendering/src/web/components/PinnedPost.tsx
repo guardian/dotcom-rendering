@@ -140,6 +140,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 	const palette = decidePalette(format);
 	return (
 		<div
+			id="pinned-post"
 			css={pinnedPostContainer(palette)}
 			data-gu-marker="pinned-post"
 			data-component="pinned-post"
