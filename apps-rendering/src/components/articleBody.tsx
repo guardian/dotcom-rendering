@@ -1,7 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	background,
@@ -18,19 +18,19 @@ interface ArticleBodyProps {
 	format: ArticleFormat;
 }
 
-const shouldShowDropCap = (format: ArticleFormat): boolean => {
-	if (format.display === ArticleDisplay.Immersive) {
-		return true;
-	} else {
-		switch (format.design) {
-			case ArticleDesign.Interview:
-			case ArticleDesign.Comment:
-			case ArticleDesign.Editorial:
-			case ArticleDesign.Letter:
-				return true;
-			default:
-				return false;
-		}
+const allowsDropCaps = (format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.Labs) return false;
+	if (format.display === ArticleDisplay.Immersive) return true;
+	switch (format.design) {
+		case ArticleDesign.Feature:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Review:
+		case ArticleDesign.Interview:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Recipe:
+			return true;
+		default:
+			return false;
 	}
 };
 
@@ -91,7 +91,7 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => {
 		}
 	`;
 
-	if (shouldShowDropCap(format)) {
+	if (allowsDropCaps(format)) {
 		return css`
 			${baseStyles}
 			${dropCap(format)}
