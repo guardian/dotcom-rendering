@@ -27,13 +27,14 @@ import { Island } from '../../components/Island';
 import { decidePalette } from '../../lib/decidePalette';
 
 const hasMainMediaStyles = css`
-	height: 100vh;
+	height: 80vh;
 	/**
     100vw is normally enough but don't let the content shrink vertically too
     much just in case
     */
 	min-height: 25rem;
 	${from.desktop} {
+		height: 100vh;
 		min-height: 31.25rem;
 	}
 	${from.wide} {
