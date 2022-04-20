@@ -21,12 +21,16 @@ import {
 	ArticleTheme,
 	timeAgo,
 } from '@guardian/libs';
-import { darkModeCss } from '../lib';
-import Accordion from './accordion';
-import { background, text } from '../editorialPalette';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import Accordion from '@guardian/common-rendering/src/components/accordion';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Component ----- //
-type paletteId = 300 | 400 | 500;
+type PaletteId = 300 | 400 | 500;
+
 interface KeyEvent {
 	date: Date;
 	text: string;
@@ -45,7 +49,7 @@ interface ListItemProps {
 	supportsDarkMode: boolean;
 }
 
-const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
+const getColor = (theme: ArticleTheme, paletteId: PaletteId) => {
 	switch (theme) {
 		case ArticlePillar.Sport:
 			return sport[paletteId];
