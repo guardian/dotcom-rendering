@@ -32,10 +32,7 @@ const FirstPublished = ({
 	host?: string;
 	pageId?: string;
 }) => {
-	const baseHref =
-		host && pageId
-			? `${joinUrl(host, pageId)}?page=with:block-${blockId}`
-			: `?page=with:block-${blockId}`;
+	const baseHref = host && pageId ? joinUrl(host, pageId) : '';
 
 	const publishedDate = new Date(firstPublished);
 	return (
@@ -45,7 +42,7 @@ const FirstPublished = ({
 			`}
 		>
 			<a
-				href={`${baseHref}#block-${blockId}`}
+				href={`${baseHref}?page=with:block-${blockId}#block-${blockId}`}
 				data-ignore="global-link-styling"
 				css={css`
 					${textSans.xxsmall({ fontWeight: 'bold' })}
