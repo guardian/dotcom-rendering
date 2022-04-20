@@ -11,13 +11,8 @@ type Props = {
 export const DynamicFast = ({ trails }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
-	// TODO: These divisions are based on assunmed rules for how content is placed in these columns but this needs confirmation
-	// Current assumptions
-	// - The boosted third card is standalone
-	// - The middle column has exactly three items
-	// - The last column has exactly three items
-	const third = trails[2];
-	const groups = [trails.slice(3, 6), trails.slice(7, 12)];
+	const bigCards = trails.slice(2, 4);
+	const smallCards = [trails.slice(4, 7), trails.slice(7, 10)];
 
 	return (
 		<>
@@ -86,34 +81,46 @@ export const DynamicFast = ({ trails }: Props) => {
 				</LI>
 			</UL>
 			<UL direction="row" bottomMargin={true}>
-				<LI percentage="50%" padSides={true} bottomMargin={false}>
-					<Card
-						linkTo={third.url}
-						format={third.format}
-						headlineText={third.headline}
-						headlineSize="large"
-						byline={third.byline}
-						showByline={third.showByline}
-						showQuotes={
-							third.format.design === ArticleDesign.Comment ||
-							third.format.design === ArticleDesign.Letter
-						}
-						webPublicationDate={third.webPublicationDate}
-						kickerText={third.kickerText}
-						showPulsingDot={
-							third.format.design === ArticleDesign.LiveBlog
-						}
-						showSlash={true}
-						showClock={false}
-						imageUrl={third.image}
-						mediaType={third.mediaType}
-						mediaDuration={third.mediaDuration}
-						commentCount={third.commentCount}
-						starRating={third.starRating}
-						branding={third.branding}
-					/>
-				</LI>
-				{groups.map((group) => {
+				{bigCards.map((card, cardIndex) => {
+					return (
+						<LI
+							percentage="25%"
+							padSides={true}
+							bottomMargin={false}
+							showTopMarginWhenStacked={cardIndex > 0}
+							showDivider={cardIndex > 0}
+						>
+							<Card
+								linkTo={card.url}
+								format={card.format}
+								headlineText={card.headline}
+								headlineSize="medium"
+								byline={card.byline}
+								showByline={card.showByline}
+								showQuotes={
+									card.format.design ===
+										ArticleDesign.Comment ||
+									card.format.design === ArticleDesign.Letter
+								}
+								webPublicationDate={card.webPublicationDate}
+								kickerText={card.kickerText}
+								showPulsingDot={
+									card.format.design ===
+									ArticleDesign.LiveBlog
+								}
+								showSlash={true}
+								showClock={false}
+								imageUrl={card.image}
+								mediaType={card.mediaType}
+								mediaDuration={card.mediaDuration}
+								commentCount={card.commentCount}
+								starRating={card.starRating}
+								branding={card.branding}
+							/>
+						</LI>
+					);
+				})}
+				{smallCards.map((group) => {
 					return (
 						<LI
 							percentage="25%"
