@@ -98,6 +98,7 @@ export const LiveBlogRenderer = ({
 						tags={tags}
 						isPaidContent={isPaidContent}
 						contributionsServiceUrl={contributionsServiceUrl}
+						pinnedPostId={pinnedPost?.id}
 					/>
 				</Island>
 			)}

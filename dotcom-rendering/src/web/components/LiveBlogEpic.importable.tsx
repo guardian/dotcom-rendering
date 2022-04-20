@@ -22,6 +22,7 @@ type Props = {
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
+	pinnedPostId?: string;
 };
 
 const useConsent = () => {
@@ -278,6 +279,7 @@ export const LiveBlogEpic = ({
 	isPaidContent,
 	tags,
 	contributionsServiceUrl,
+	pinnedPostId,
 }: Props) => {
 	log('dotcom', 'LiveBlogEpic started');
 	// First construct the payload
@@ -292,22 +294,37 @@ export const LiveBlogEpic = ({
 	/**
 	 * Here we decide where to insert the epic.
 	 *
-	 * If the url contains a permalink then we
-	 * want to insert it immediately after that block to prevent any CLS issues.
+	 * Either:
 	 *
-	 * Otherwise, we choose a random position near the top of the blog
+	 * a) The url contains a link to a normal post
+	 * b) The url contains a link to a pinned post
+	 * c) We're not linking to anything
+	 *
+	 * If a, the url contains a permalink, then we want to insert it immediately
+	 * after that block to prevent any CLS issues
+	 *
+	 * If b, it's linking to a pinned post, then this block is already at the
+	 * top of the page so we can default to:
+	 *
+	 * c) choose a random position somewhere near the top of the blog
+	 *
 	 */
 	const epicPlaceholder = document.createElement('article');
-	if (window.location.href.includes('#block-')) {
-		// Because we're using a permalink there's a possibility the epic will render in
-		// view. To prevent confusing layout shift we initially hide the message so that
-		// we can reveal (animate in) it once it has been rendered
+	const blockId = window.location.hash.slice(1);
+
+	const isPermalink = window.location.href.includes('#block-');
+	// pinnedPostId doesn't have the 'block-' prefix
+	const isLinkingToPinnedPost = blockId === `block-${pinnedPostId}`;
+
+	if (isPermalink && !isLinkingToPinnedPost) {
 		epicPlaceholder.classList.add('pending');
-		const blockId = window.location.hash.slice(1);
 		const blockLinkedTo = document.getElementById(blockId);
 		if (blockLinkedTo) {
 			insertAfter(blockLinkedTo, epicPlaceholder);
 		}
+		// Because we're using a permalink there's a possibility the epic will render in
+		// view. To prevent confusing layout shift we initially hide the message so that
+		// we can reveal (animate in) it once it has been rendered
 		epicPlaceholder.classList.add('reveal');
 		epicPlaceholder.classList.remove('pending');
 	} else {
