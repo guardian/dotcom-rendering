@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { from, visuallyHidden } from '@guardian/source-foundations';
 
-import TheGuardianLogoSVG from '../../static/logos/the-guardian.svg';
+import TheGuardianLogoSVG from '../../static/logos/the-guardian-best-website.svg';
 
 import { getZIndex } from '../lib/getZIndex';
 
