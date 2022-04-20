@@ -233,9 +233,7 @@ const textElement =
 			case 'P': {
 				const showDropCap =
 					allowsDropCaps(format) && text.length >= 200;
-				return showDropCap
-					? h(Paragraph, { key, format, showDropCap }, children)
-					: h(Paragraph, { key, format }, children);
+				return h(Paragraph, { key, format, showDropCap }, children);
 			}
 			case '#text':
 				return transform(text, format);
