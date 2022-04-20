@@ -106,7 +106,7 @@
     "@types/webpack-node-externals": "^2.5.3",
     "@types/youtube": "^0.0.46",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
-    "@typescript-eslint/eslint-plugin-tslint": "^4.22.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^5.20.0",
     "@typescript-eslint/parser": "^4.21.0",
     "ajv": "^8.1.0",
     "ajv-formats": "^2.0.2",
