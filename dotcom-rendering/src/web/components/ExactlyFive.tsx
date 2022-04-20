@@ -12,7 +12,7 @@ type Props = {
 
 export const ExactlyFive = ({ content }: Props) => (
 	<>
-		<UL direction="row" bottomMargin={true}>
+		<UL direction="row" padBottom={true}>
 			<LI padSides={true} percentage="33%">
 				<Card
 					linkTo={content[0].url}
@@ -79,7 +79,7 @@ export const ExactlyFive = ({ content }: Props) => (
 				percentage="33%"
 			>
 				<UL direction="column">
-					<LI bottomMargin={true} stretch={true}>
+					<LI padBottom={true} stretch={true}>
 						<Card
 							linkTo={content[2].url}
 							format={content[2].format}
@@ -108,7 +108,7 @@ export const ExactlyFive = ({ content }: Props) => (
 							branding={content[2].branding}
 						/>
 					</LI>
-					<LI bottomMargin={true} stretch={true}>
+					<LI padBottom={true} stretch={true}>
 						<Card
 							linkTo={content[3].url}
 							format={content[3].format}
@@ -137,7 +137,7 @@ export const ExactlyFive = ({ content }: Props) => (
 							branding={content[3].branding}
 						/>
 					</LI>
-					<LI bottomMargin={false} stretch={true}>
+					<LI padBottom={false} stretch={true}>
 						<Card
 							linkTo={content[4].url}
 							format={content[4].format}
