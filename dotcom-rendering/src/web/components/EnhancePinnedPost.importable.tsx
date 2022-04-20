@@ -76,8 +76,7 @@ export const EnhancePinnedPost = () => {
 		node: pinnedPost ?? undefined,
 	});
 
-	const pinnedPostTiming =
-		useRef<{ start: () => void; end: () => number; clear: () => void }>();
+	const pinnedPostTiming = useRef<ReturnType<typeof initPerf>>();
 
 	const contentFitsContainer =
 		pinnedPostContent &&
