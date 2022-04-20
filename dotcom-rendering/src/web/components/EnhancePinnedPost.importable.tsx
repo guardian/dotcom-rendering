@@ -1,18 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { initPerf } from '../browser/initPerf';
 import { submitComponentEvent } from '../browser/ophan/ophan';
+import { useIsInView } from '../lib/useIsInView';
 
 const isServer = typeof window === 'undefined';
 
-const pinnedPost: Element | null = !isServer
+const pinnedPost: HTMLElement | null = !isServer
 	? window.document.querySelector('[data-gu-marker=pinned-post]')
 	: null;
 
-const pinnedPostCheckBox: Element | null = !isServer
+const pinnedPostCheckBox: HTMLElement | null = !isServer
 	? window.document.querySelector('input[name=pinned-post-checkbox]')
 	: null;
 
-const pinnedPostContent: Element | null = !isServer
+const pinnedPostContent: HTMLElement | null = !isServer
 	? window.document.querySelector('#collapsible-body')
 	: null;
 
@@ -42,39 +43,46 @@ function scrollOnCollapse() {
 	}
 }
 
+const handleClickTracking = () => {
+	if (pinnedPostCheckBox instanceof HTMLInputElement) {
+		if (pinnedPostCheckBox.checked) {
+			submitComponentEvent({
+				component: {
+					componentType: 'LIVE_BLOG_PINNED_POST',
+					id: pinnedPost?.id,
+				},
+				action: 'CLICK',
+				value: 'show-more',
+			});
+		} else {
+			submitComponentEvent({
+				component: {
+					componentType: 'LIVE_BLOG_PINNED_POST',
+					id: pinnedPost?.id,
+				},
+				action: 'CLICK',
+				value: 'show-less',
+			});
+			scrollOnCollapse();
+		}
+	}
+};
+
 export const EnhancePinnedPost = () => {
+	const [hasBeenSeen, setHasBeenSeen] = useState(false);
+	const [isInView] = useIsInView({
+		threshold: 0.1,
+		repeat: true,
+		node: pinnedPost ?? undefined,
+	});
+
+	const pinnedPostTiming = useRef<ReturnType<typeof initPerf>>();
+
 	const contentFitsContainer =
 		pinnedPostContent &&
 		pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
 
 	if (contentFitsContainer) hideShowMore();
-
-	const hasBeenSeen = useRef(false);
-
-	const handleClickTracking = () => {
-		if (pinnedPostCheckBox instanceof HTMLInputElement) {
-			if (pinnedPostCheckBox.checked) {
-				submitComponentEvent({
-					component: {
-						componentType: 'LIVE_BLOG_PINNED_POST',
-						id: pinnedPost?.id,
-					},
-					action: 'CLICK',
-					value: 'show-more',
-				});
-			} else {
-				submitComponentEvent({
-					component: {
-						componentType: 'LIVE_BLOG_PINNED_POST',
-						id: pinnedPost?.id,
-					},
-					action: 'CLICK',
-					value: 'show-less',
-				});
-				scrollOnCollapse();
-			}
-		}
-	};
 
 	useEffect(() => {
 		pinnedPostCheckBox?.addEventListener('change', handleClickTracking);
@@ -87,44 +95,33 @@ export const EnhancePinnedPost = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		pinnedPostTiming.current = initPerf('pinned-post-view-duration');
+	}, []);
+
 	// calculate duration when user is viewing pinned post
 	// and emit ophan events when the pinned post goes out of view
 	useEffect(() => {
 		if (!pinnedPost) return;
 
-		const pinnedPostTiming = initPerf('pinned-post-view-duration');
-
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					hasBeenSeen.current = true;
-					pinnedPostTiming.clear();
-					pinnedPostTiming.start();
-				} else if (hasBeenSeen.current) {
-					const timeTaken = pinnedPostTiming.end();
-					if (timeTaken) {
-						const timeTakenInSeconds = timeTaken / 1000;
-						submitComponentEvent({
-							component: {
-								componentType: 'LIVE_BLOG_PINNED_POST',
-								id: pinnedPost.id,
-							},
-							action: 'VIEW',
-							value: timeTakenInSeconds.toString(),
-						});
-					}
-				}
-			},
-			{
-				threshold: 0.1,
-			},
-		);
-
-		observer.observe(pinnedPost);
-
-		return () => {
-			observer.disconnect();
-		};
-	}, []);
+		if (isInView) {
+			setHasBeenSeen(true);
+			pinnedPostTiming.current?.clear();
+			pinnedPostTiming.current?.start();
+		} else if (hasBeenSeen && !isInView) {
+			const timeTaken = pinnedPostTiming.current?.end();
+			if (timeTaken) {
+				const timeTakenInSeconds = timeTaken / 1000;
+				submitComponentEvent({
+					component: {
+						componentType: 'LIVE_BLOG_PINNED_POST',
+						id: pinnedPost.id,
+					},
+					action: 'VIEW',
+					value: timeTakenInSeconds.toString(),
+				});
+			}
+		}
+	}, [isInView, hasBeenSeen]);
 	return null;
 };
