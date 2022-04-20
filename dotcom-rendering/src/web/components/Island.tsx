@@ -32,7 +32,14 @@ const decideChildren = (
 	placeholderHeight?: number,
 ) => {
 	if (!clientOnly) return children; // Server side rendering
-	if (placeholderHeight) return <Placeholder height={placeholderHeight} />; // Portal using placeholder
+	if (placeholderHeight)
+		return (
+			<Placeholder
+				height={placeholderHeight}
+				shouldShimmer={false}
+				backgroundColor="transparent"
+			/>
+		); // Portal using placeholder
 	return null; // Portal not using placeholder (this also includes placeholderHeight === 0 - this is intentional)
 };
 

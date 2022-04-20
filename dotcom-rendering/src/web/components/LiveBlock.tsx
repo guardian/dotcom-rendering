@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
-import { joinUrl } from '@guardian/libs';
 import { renderArticleElement } from '../lib/renderElement';
 
 import { ShareIcons } from './ShareIcons';
@@ -39,10 +38,6 @@ export const LiveBlock = ({
 	pinnedPostId,
 }: Props) => {
 	if (block.elements.length === 0) return null;
-	const blockLink = `${joinUrl(host, pageId)}?page=with:block-${
-		block.id
-	}#block-${block.id}`;
-
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
 		!!block.blockLastUpdatedDisplay &&
@@ -60,13 +55,15 @@ export const LiveBlock = ({
 			blockFirstPublishedDisplay={
 				block.blockFirstPublishedDisplayNoTimezone
 			}
-			blockLink={blockLink}
+			blockId={block.id}
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
 			isPinnedPost={isPinnedPost}
 			supportsDarkMode={false}
 			format={format}
 			isOriginalPinnedPost={isOriginalPinnedPost}
+			host={host}
+			pageId={pageId}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({
