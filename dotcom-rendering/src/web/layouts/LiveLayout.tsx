@@ -408,6 +408,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.guardianBaseURL
 									}
 									badge={CAPIArticle.badge}
+									isMatch={true}
 								/>
 							}
 							leftColSize="wide"
@@ -425,6 +426,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.guardianBaseURL
 									}
 									badge={CAPIArticle.badge}
+									isMatch={true}
 								/>
 							</Hide>
 
@@ -1008,7 +1010,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					/>
 				</ElementContainer>
 
-				<Island clientOnly={true} deferUntil="visible">
+				<Island
+					clientOnly={true}
+					deferUntil="visible"
+					placeholderHeight={600}
+				>
 					<OnwardsUpper
 						ajaxUrl={CAPIArticle.config.ajaxUrl}
 						hasRelated={CAPIArticle.hasRelated}

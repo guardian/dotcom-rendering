@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
-import { joinUrl } from '@guardian/libs';
 import { renderArticleElement } from '../lib/renderElement';
 
 import { ShareIcons } from './ShareIcons';
@@ -23,18 +22,6 @@ type Props = {
 	pinnedPostId?: string;
 };
 
-// TODO: This should be considered a temporary solution until we decide on the best
-// way to display either editionalised or local time to the user - at which point frontend
-// should be updated
-const formatFirstPublishedDisplay = (time: string): string | undefined => {
-	const match = /([0-9]{1,2})\.([0-9]{1,2}).*/.exec(time);
-	if (match) {
-		const [, hour, minute] = match;
-		return `${hour}:${minute}`;
-	}
-	return undefined;
-};
-
 export const LiveBlock = ({
 	format,
 	block,
@@ -51,10 +38,6 @@ export const LiveBlock = ({
 	pinnedPostId,
 }: Props) => {
 	if (block.elements.length === 0) return null;
-	const blockLink = `${joinUrl(host, pageId)}?page=with:block-${
-		block.id
-	}#block-${block.id}`;
-
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
 		!!block.blockLastUpdatedDisplay &&
@@ -69,16 +52,18 @@ export const LiveBlock = ({
 			id={block.id}
 			blockTitle={block.title}
 			blockFirstPublished={block.blockFirstPublished}
-			blockFirstPublishedDisplay={formatFirstPublishedDisplay(
-				block.blockFirstPublishedDisplay || '',
-			)}
-			blockLink={blockLink}
+			blockFirstPublishedDisplay={
+				block.blockFirstPublishedDisplayNoTimezone
+			}
+			blockId={block.id}
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}
 			isPinnedPost={isPinnedPost}
 			supportsDarkMode={false}
 			format={format}
 			isOriginalPinnedPost={isOriginalPinnedPost}
+			host={host}
+			pageId={pageId}
 		>
 			{block.elements.map((element, index) =>
 				renderArticleElement({

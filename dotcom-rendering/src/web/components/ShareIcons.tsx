@@ -46,13 +46,21 @@ const topMarginStlyes = css`
 
 const decideIconColor = (format: ArticleFormat, context: Context) => {
 	const palette = decidePalette(format);
-	if (format.design === ArticleDesign.LiveBlog && context === 'ArticleMeta') {
-		return css`
-			fill: ${palette.fill.shareIconGrayBackground};
-			${until.desktop} {
-				fill: ${palette.text.standfirst};
-			}
-		`;
+	if (format.design === ArticleDesign.LiveBlog) {
+		if (context === 'ArticleMeta') {
+			return css`
+				fill: ${palette.fill.shareIconGrayBackground};
+				${until.desktop} {
+					fill: ${palette.text.standfirst};
+				}
+			`;
+		}
+
+		if (context === 'SubMeta') {
+			return css`
+				fill: ${palette.fill.shareIconGrayBackground};
+			`;
+		}
 	}
 	if (
 		format.design === ArticleDesign.DeadBlog &&
@@ -234,7 +242,9 @@ export const ShareIcons = ({
 								blockId,
 								CMP: 'share_btn_link',
 							}),
-						})}`}
+						})
+							.toString()
+							.replace(/\+/g, '%20')}`}
 						role="button"
 						aria-label="Share via Email"
 						target="_blank"

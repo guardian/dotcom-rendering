@@ -11,17 +11,12 @@ type Props = {
 export const DynamicFast = ({ trails }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
-	// TODO: These divisions are based on assunmed rules for how content is placed in these columns but this needs confirmation
-	// Current assumptions
-	// - The boosted third card is standalone
-	// - The middle column has exactly three items
-	// - The last column has exactly three items
-	const third = trails[2];
-	const groups = [trails.slice(3, 6), trails.slice(7, 12)];
+	const bigCards = trails.slice(2, 4);
+	const smallCards = trails.slice(4, 10);
 
 	return (
 		<>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="75%">
 					<Card
 						linkTo={primary.url}
@@ -44,6 +39,7 @@ export const DynamicFast = ({ trails }: Props) => {
 						showClock={false}
 						imageUrl={primary.image}
 						imagePosition="right"
+						imagePositionOnMobile="top"
 						imageSize="large"
 						mediaType={primary.mediaType}
 						mediaDuration={primary.mediaDuration}
@@ -85,89 +81,96 @@ export const DynamicFast = ({ trails }: Props) => {
 					/>
 				</LI>
 			</UL>
-			<UL direction="row" bottomMargin={true}>
-				<LI percentage="50%" padSides={true} bottomMargin={false}>
-					<Card
-						linkTo={third.url}
-						format={third.format}
-						headlineText={third.headline}
-						headlineSize="large"
-						byline={third.byline}
-						showByline={third.showByline}
-						showQuotes={
-							third.format.design === ArticleDesign.Comment ||
-							third.format.design === ArticleDesign.Letter
-						}
-						webPublicationDate={third.webPublicationDate}
-						kickerText={third.kickerText}
-						showPulsingDot={
-							third.format.design === ArticleDesign.LiveBlog
-						}
-						showSlash={true}
-						showClock={false}
-						imageUrl={third.image}
-						mediaType={third.mediaType}
-						mediaDuration={third.mediaDuration}
-						commentCount={third.commentCount}
-						starRating={third.starRating}
-						branding={third.branding}
-					/>
-				</LI>
-				{groups.map((group) => {
+			<UL direction="row" padBottom={true}>
+				{bigCards.map((card, cardIndex) => {
 					return (
 						<LI
 							percentage="25%"
-							showDivider={true}
-							showTopMarginWhenStacked={true}
 							padSides={true}
+							padBottom={false}
+							showTopMarginWhenStacked={cardIndex > 0}
+							showDivider={cardIndex > 0}
 						>
-							<UL direction="column">
-								{group.map((card, cardIndex) => {
-									const isLastCard =
-										cardIndex === group.length - 1;
-									return (
-										<LI
-											stretch={true}
-											bottomMargin={!isLastCard}
-										>
-											<Card
-												linkTo={card.url}
-												format={card.format}
-												headlineText={card.headline}
-												headlineSize="small"
-												byline={card.byline}
-												showByline={card.showByline}
-												showQuotes={
-													card.format.design ===
-														ArticleDesign.Comment ||
-													card.format.design ===
-														ArticleDesign.Letter
-												}
-												webPublicationDate={
-													card.webPublicationDate
-												}
-												kickerText={card.kickerText}
-												showPulsingDot={
-													card.format.design ===
-													ArticleDesign.LiveBlog
-												}
-												showSlash={true}
-												showClock={false}
-												mediaType={card.mediaType}
-												mediaDuration={
-													card.mediaDuration
-												}
-												commentCount={card.commentCount}
-												starRating={card.starRating}
-												branding={card.branding}
-											/>
-										</LI>
-									);
-								})}
-							</UL>
+							<Card
+								linkTo={card.url}
+								format={card.format}
+								headlineText={card.headline}
+								headlineSize="medium"
+								byline={card.byline}
+								showByline={card.showByline}
+								showQuotes={
+									card.format.design ===
+										ArticleDesign.Comment ||
+									card.format.design === ArticleDesign.Letter
+								}
+								webPublicationDate={card.webPublicationDate}
+								kickerText={card.kickerText}
+								showPulsingDot={
+									card.format.design ===
+									ArticleDesign.LiveBlog
+								}
+								showSlash={true}
+								showClock={false}
+								imageUrl={card.image}
+								mediaType={card.mediaType}
+								mediaDuration={card.mediaDuration}
+								commentCount={card.commentCount}
+								starRating={card.starRating}
+								branding={card.branding}
+							/>
 						</LI>
 					);
 				})}
+				<LI percentage="50%" showTopMarginWhenStacked={true}>
+					<UL direction="row" wrapCards={true}>
+						{smallCards.map((card, cardIndex) => {
+							return (
+								<LI
+									percentage="50%"
+									showDivider={true}
+									padSides={true}
+									padBottom={
+										// No bottom margin on the last two cards
+										cardIndex < smallCards.length - 2
+									}
+									padBottomOnMobile={
+										cardIndex < smallCards.length - 1
+									}
+								>
+									<Card
+										linkTo={card.url}
+										format={card.format}
+										headlineText={card.headline}
+										headlineSize="small"
+										byline={card.byline}
+										showByline={card.showByline}
+										showQuotes={
+											card.format.design ===
+												ArticleDesign.Comment ||
+											card.format.design ===
+												ArticleDesign.Letter
+										}
+										webPublicationDate={
+											card.webPublicationDate
+										}
+										kickerText={card.kickerText}
+										showPulsingDot={
+											card.format.design ===
+											ArticleDesign.LiveBlog
+										}
+										showSlash={true}
+										showClock={false}
+										mediaType={card.mediaType}
+										mediaDuration={card.mediaDuration}
+										commentCount={card.commentCount}
+										starRating={card.starRating}
+										branding={card.branding}
+									/>
+								</LI>
+							);
+						})}
+					</UL>
+				</LI>
 			</UL>
 		</>
 	);

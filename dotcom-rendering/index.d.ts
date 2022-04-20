@@ -82,8 +82,10 @@ type Palette = {
 		headline: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
+		matchTitle: Colour;
 		byline: Colour;
 		twitterHandle: Colour;
+		twitterHandleBelowDesktop: Colour;
 		caption: Colour;
 		captionLink: Colour;
 		subMeta: Colour;
@@ -155,6 +157,7 @@ type Palette = {
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
+		twitterHandleBelowDesktop: Colour;
 	};
 	border: {
 		syndicationButton: Colour;
@@ -338,6 +341,7 @@ interface Block {
 	title?: string;
 	blockFirstPublished?: number;
 	blockFirstPublishedDisplay?: string;
+	blockFirstPublishedDisplayNoTimezone?: string;
 	primaryDateLine: string;
 	secondaryDateLine: string;
 	createdOn?: number;
@@ -587,6 +591,9 @@ type FEContainerType =
 	| 'nav/media-list'
 	| 'news/most-popular';
 
+// TODO: This may need to be declared differently than the front type in the future
+type DCRContainerType = FEContainerType;
+
 type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -752,9 +759,11 @@ type FECollectionType = {
 type DCRCollectionType = {
 	id: string;
 	displayName: string;
+	collectionType: DCRContainerType;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];
+	href?: string;
 };
 
 type FEFrontConfigType = {
@@ -883,7 +892,7 @@ interface BadgeType {
 	imageUrl: string;
 }
 
-type ImagePositionType = 'left' | 'top' | 'right';
+type ImagePositionType = 'left' | 'top' | 'right' | 'bottom';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 

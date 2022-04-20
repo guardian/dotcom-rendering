@@ -34,7 +34,12 @@ mockRESTCalls();
 export default {
 	title: 'Layouts/Showcase',
 	parameters: {
-		chromatic: { viewports: [1300], delay: 800, diffThreshold: 0.2 },
+		chromatic: {
+			viewports: [1300],
+			delay: 800,
+			diffThreshold: 0.2,
+			pauseAnimationAtEnd: true,
+		},
 	},
 };
 

@@ -29,7 +29,7 @@ export const MoreThanFive = ({ content }: Props) => {
 	const secondRowTrails = content.slice(4, content.length);
 	return (
 		<>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="25%">
 					<Card
 						linkTo={content[0].url}
@@ -158,7 +158,7 @@ export const MoreThanFive = ({ content }: Props) => {
 					/>
 				</LI>
 			</UL>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				{secondRowTrails.map((trail, index) => (
 					<LI
 						padSides={true}

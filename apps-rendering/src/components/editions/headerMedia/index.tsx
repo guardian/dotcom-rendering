@@ -12,11 +12,11 @@ import HeaderImageCaption, {
 	captionId,
 } from 'components/editions/headerImageCaption';
 import StarRating from 'components/editions/starRating';
-import { MainMediaKind } from 'headerMedia';
 import type { Image } from 'image';
 import type { Item } from 'item';
 import { isPicture as checkIfPicture, getFormat } from 'item';
 import { maybeRender } from 'lib';
+import { MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import FootballScores from '../footballScores';
