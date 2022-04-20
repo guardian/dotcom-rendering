@@ -200,7 +200,12 @@ const AdSlotLabelToggled: React.FC = () => (
 	</div>
 );
 
-export const AdSlot: React.FC<Props> = ({ position, display }) => {
+export const AdSlot: React.FC<Props> = ({
+	position,
+	display,
+	shouldHideReaderRevenue = false,
+	isPaidContent = false,
+}) => {
 	switch (position) {
 		case 'right':
 			switch (display) {
@@ -240,8 +245,10 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					return (
 						<Island>
 							<TopRightAdSlot
-								shouldHideReaderRevenue={false}
-								isPaidContent={false}
+								shouldHideReaderRevenue={
+									shouldHideReaderRevenue
+								}
+								isPaidContent={isPaidContent}
 								adStyles={adStyles}
 							/>
 						</Island>
