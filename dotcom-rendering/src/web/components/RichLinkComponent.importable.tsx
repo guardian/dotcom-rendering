@@ -1,5 +1,5 @@
+import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { RichLink, RichLinkImageData } from './RichLink';
-import { DefaultRichLink } from './DefaultRichLink';
 
 import { useApi } from '../lib/useApi';
 import { decideFormat } from '../lib/decideFormat';
@@ -57,7 +57,7 @@ export const RichLinkComponent = ({
 	format,
 }: Props) => {
 	const url = buildUrl(element, ajaxUrl);
-	const { data, error, loading } = useApi<CAPIRichLinkType>(url);
+	const { data, error } = useApi<CAPIRichLinkType>(url);
 
 	if (error) {
 		// Send the error to Sentry
@@ -65,41 +65,60 @@ export const RichLinkComponent = ({
 		return null;
 	}
 
-	if (loading) {
-		return null;
-	}
+	if (data) {
+		const richLinkImageData: RichLinkImageData = {
+			thumbnailUrl: data.thumbnailUrl,
+			altText: data.imageAsset?.fields.altText,
+			width: data.imageAsset?.fields.width,
+			height: data.imageAsset?.fields.height,
+		};
 
-	if (!data) {
 		return (
-			<DefaultRichLink
-				index={richLinkIndex}
-				headlineText={element.text}
-				url={element.url}
+			// This is the enhanced rich link rendered on the client
+			<RichLink
+				richLinkIndex={richLinkIndex}
+				cardStyle={data.cardStyle}
+				imageData={richLinkImageData}
+				headlineText={data.headline}
+				contentType={data.contentType}
+				url={data.url}
+				starRating={data.starRating}
+				linkFormat={decideFormat(data.format)}
+				format={format}
+				tags={data.tags}
+				sponsorName={data.sponsorName}
+				contributorImage={data.contributorImage}
 			/>
 		);
 	}
 
-	const richLinkImageData: RichLinkImageData = {
-		thumbnailUrl: data.thumbnailUrl,
-		altText: data.imageAsset?.fields.altText,
-		width: data.imageAsset?.fields.width,
-		height: data.imageAsset?.fields.height,
+	const defaultFormat = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		// We default to SpecialReport here purely because the greys of this theme
+		// look better as the defaults
+		theme: ArticleSpecial.SpecialReport,
 	};
 
 	return (
+		// Render a default (basic) rich link on the server
 		<RichLink
 			richLinkIndex={richLinkIndex}
-			cardStyle={data.cardStyle}
-			imageData={richLinkImageData}
-			headlineText={data.headline}
-			contentType={data.contentType}
-			url={data.url}
-			starRating={data.starRating}
-			linkFormat={decideFormat(data.format)}
-			format={format}
-			tags={data.tags}
-			sponsorName={data.sponsorName}
-			contributorImage={data.contributorImage}
+			cardStyle="news"
+			imageData={{
+				thumbnailUrl: '',
+				altText: '',
+				width: '',
+				height: '',
+			}}
+			headlineText={element.text}
+			contentType="article"
+			url={element.url}
+			linkFormat={defaultFormat}
+			format={defaultFormat}
+			tags={[]}
+			sponsorName=""
+			isPlaceholder={true}
 		/>
 	);
 };
