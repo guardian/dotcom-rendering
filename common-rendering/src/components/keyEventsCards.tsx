@@ -59,23 +59,6 @@ const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
 	}
 };
 
-const keyEventWrapperStyles = (
-	format: ArticleFormat,
-	supportsDarkMode: boolean,
-): SerializedStyles => css`
-	width: 100%;
-
-	${from.desktop} {
-		border-top: 1px solid ${neutral[86]};
-		padding-top: ${remSpace[2]};
-	}
-
-	${darkModeCss(supportsDarkMode)`
-		border-top-color: ${neutral[20]};
-		background-color: ${background.articleContentDark(format)};
-	`}
-`;
-
 const listStyles = (
 	format: ArticleFormat,
 	supportsDarkMode: boolean,
@@ -238,7 +221,11 @@ const ListItem = ({ keyEvent, format, supportsDarkMode }: ListItemProps) => {
 	);
 };
 
-const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
+const KeyEventsCards = ({
+	keyEvents,
+	format,
+	supportsDarkMode,
+}: KeyEventsProps) => {
 	return (
 		<nav id="keyevents" aria-label="Key Events">
 			<ul css={listStyles(format, supportsDarkMode)}>
@@ -257,5 +244,5 @@ const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
 
 // ----- Exports ----- //
 
-export default KeyEvents;
+export default KeyEventsCards;
 export type { KeyEvent };
