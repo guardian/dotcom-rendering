@@ -7,7 +7,7 @@ type Props = {
 	palette: Palette;
 };
 
-export const StandfirstWrapper = ({ children, palette }: Props) => (
+export const TrailTextWrapper = ({ children, palette }: Props) => (
 	<div
 		css={css`
 			display: flex;

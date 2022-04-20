@@ -19,7 +19,7 @@ import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { CardLayout } from './components/CardLayout';
 import { ImageWrapper } from './components/ImageWrapper';
 import { AvatarContainer } from './components/AvatarContainer';
-import { StandfirstWrapper } from './components/StandfirstWrapper';
+import { TrailTextWrapper } from './components/TrailTextWrapper';
 import { CardFooter } from './components/CardFooter';
 import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
@@ -38,7 +38,7 @@ type Props = {
 	imageUrl?: string;
 	imagePosition?: ImagePositionType;
 	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
-	standfirst?: string;
+	trailText?: string;
 	avatar?: AvatarType;
 	showClock?: boolean;
 	mediaType?: MediaType;
@@ -126,7 +126,7 @@ export const Card = ({
 	imageUrl,
 	imagePosition,
 	imageSize,
-	standfirst,
+	trailText,
 	avatar,
 	showClock,
 	mediaType,
@@ -228,14 +228,14 @@ export const Card = ({
 								</>
 							</Flex>
 							<div>
-								{standfirst && (
-									<StandfirstWrapper palette={cardPalette}>
+								{trailText && (
+									<TrailTextWrapper palette={cardPalette}>
 										<div
 											dangerouslySetInnerHTML={{
-												__html: standfirst,
+												__html: trailText,
 											}}
 										/>
-									</StandfirstWrapper>
+									</TrailTextWrapper>
 								)}
 								{avatar && (
 									<Hide when="below" breakpoint="tablet">

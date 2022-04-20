@@ -25,7 +25,7 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
-						standfirst={primary.standfirst}
+						trailText={primary.trailText}
 						headlineSize="large"
 						byline={primary.byline}
 						showByline={primary.showByline}

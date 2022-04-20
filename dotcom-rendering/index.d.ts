@@ -1118,7 +1118,7 @@ interface BaseTrailType {
 interface TrailType extends BaseTrailType {
 	palette?: never;
 	format: ArticleFormat;
-	standfirst?: string;
+	trailText?: string;
 }
 
 interface CAPITrailType extends BaseTrailType {
