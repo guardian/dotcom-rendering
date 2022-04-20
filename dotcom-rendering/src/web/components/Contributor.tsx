@@ -6,6 +6,7 @@ import {
 	headline,
 	textSans,
 	until,
+	from,
 } from '@guardian/source-foundations';
 
 import { BylineLink } from './BylineLink';
@@ -15,25 +16,46 @@ import TwitterIcon from '../../static/icons/twitter.svg';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 
-const twitterHandleStyles = (palette: Palette) => css`
+const twitterHandleColour = (palette: Palette) => css`
+	color: ${palette.text.twitterHandleBelowDesktop};
+
+	svg {
+		fill: ${palette.fill.twitterHandleBelowDesktop};
+	}
+
+	a {
+		color: ${palette.text.twitterHandleBelowDesktop};
+	}
+
+	${from.desktop} {
+		color: ${palette.text.twitterHandle};
+
+		svg {
+			fill: ${neutral[46]};
+		}
+
+		a {
+			color: ${palette.text.twitterHandle};
+		}
+	}
+`;
+
+const twitterHandleStyles = css`
 	${textSans.xxsmall()};
 	font-weight: bold;
-	color: ${palette.text.twitterHandle};
-
-	padding-right: 10px;
-	display: inline-block;
 
 	svg {
 		height: 10px;
 		max-width: 12px;
 		margin-right: 0px;
-		fill: ${neutral[46]};
 	}
 
 	a {
-		color: ${palette.text.twitterHandle};
 		text-decoration: none;
 	}
+
+	padding-right: 10px;
+	display: inline-block;
 `;
 
 // for liveblog smaller breakpoints article meta is located in the same
@@ -120,7 +142,7 @@ export const Contributor: React.FC<{
 				</div>
 			)}
 			{onlyOneContributor && author.twitterHandle && (
-				<div css={twitterHandleStyles(palette)}>
+				<div css={[twitterHandleStyles, twitterHandleColour(palette)]}>
 					<TwitterIcon />
 					<a
 						href={`https://www.twitter.com/${author.twitterHandle}`}
