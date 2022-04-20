@@ -13,6 +13,8 @@ import { Hide } from './Hide';
 import { Badge } from './Badge';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { Island } from './Island';
+import { PulsingDot } from './PulsingDot.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -166,6 +168,11 @@ const immersiveTitleBadgeStyle = (palette: Palette) => css`
 	background-color: ${palette.background.seriesTitle};
 	box-shadow: -6px 0 0 0 ${palette.background.seriesTitle},
 		6px 0 0 0 ${palette.background.seriesTitle};
+`;
+
+const rowWithDot = css`
+	display: flex;
+	align-items: center;
 `;
 
 export const SeriesSectionLink = ({
@@ -359,52 +366,72 @@ export const SeriesSectionLink = ({
 				// We have a tag, we're not immersive, show both series and section titles
 				return (
 					// Sometimes the tags/titles are shown inline, sometimes stacked
-					<div css={!badge && rowBelowLeftCol(format)}>
-						<a
-							href={`${guardianBaseURL}/${tag.id}`}
-							css={[
-								sectionLabelLink,
-								css`
-									color: ${seriesTitleColour};
-									background-color: ${palette.background
-										.seriesTitle};
-								`,
-								marginRight,
-								fontStyles(format),
-								breakWord,
-								css`
-									box-shadow: -6px 0 0 0
-											${palette.background.seriesTitle},
-										6px 0 0 0
-											${palette.background.seriesTitle};
-								`,
-							]}
-							data-component="series"
-							data-link-name="article series"
-						>
-							<span>{tag.title}</span>
-						</a>
-
-						<Hide when="below" breakpoint="tablet">
+					<div
+						css={[
+							format.design === ArticleDesign.LiveBlog &&
+								badge &&
+								rowWithDot,
+							css`
+								color: ${seriesTitleColour};
+							`,
+							fontStyles(format),
+						]}
+					>
+						<Hide when="above" breakpoint="desktop">
+							{format.design === ArticleDesign.LiveBlog && (
+								<Island deferUntil="idle">
+									<PulsingDot />
+								</Island>
+							)}
+						</Hide>
+						<div css={!badge && rowBelowLeftCol(format)}>
 							<a
-								href={`${guardianBaseURL}/${sectionUrl}`}
+								href={`${guardianBaseURL}/${tag.id}`}
 								css={[
 									sectionLabelLink,
-									secondaryFontStyles(format),
-									displayBlock,
+									css`
+										color: ${seriesTitleColour};
+										background-color: ${palette.background
+											.seriesTitle};
+									`,
+									marginRight,
 									breakWord,
 									css`
-										color: ${sectionTitleColour};
-										background-color: ${palette.background
-											.sectionTitle};
+										box-shadow: -6px 0 0 0
+												${palette.background
+													.seriesTitle},
+											6px 0 0 0
+												${palette.background
+													.seriesTitle};
 									`,
 								]}
-								data-component="section"
-								data-link-name="article section"
+								data-component="series"
+								data-link-name="article series"
 							>
-								<span>{sectionLabel}</span>
+								<span>{tag.title}</span>
 							</a>
-						</Hide>
+
+							<Hide when="below" breakpoint="tablet">
+								<a
+									href={`${guardianBaseURL}/${sectionUrl}`}
+									css={[
+										sectionLabelLink,
+										secondaryFontStyles(format),
+										displayBlock,
+										breakWord,
+										css`
+											color: ${sectionTitleColour};
+											background-color: ${palette
+												.background.sectionTitle};
+										`,
+									]}
+									data-component="section"
+									data-link-name="article section"
+								>
+									<span>{sectionLabel}</span>
+								</a>
+							</Hide>
+						</div>
 					</div>
 				);
 			}

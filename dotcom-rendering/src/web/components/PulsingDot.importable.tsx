@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 
 const dotStyles = (colour?: string) => css`
 	color: ${colour && colour};
-
 	:before {
 		border-radius: 62.5rem;
 		display: inline-block;
