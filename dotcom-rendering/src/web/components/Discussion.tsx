@@ -44,7 +44,7 @@ const revealStyles = css`
 		animation: ${keyframes`
 		0% { opacity: 0; }
 		100% { opacity: 1; }
-	`} 4s ease-out;
+	`} 2s ease-out;
 	}
 	.pending {
 		display: none;
