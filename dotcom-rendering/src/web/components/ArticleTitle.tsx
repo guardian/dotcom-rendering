@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { from, textSans, until } from '@guardian/source-foundations';
+import { from, until } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import { Badge } from './Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
@@ -62,7 +62,6 @@ const immersiveMargins = css`
 
 const livePulseIconStyles = (palette: Palette) => css`
 	color: ${palette.text.seriesTitle};
-	${textSans.xxsmall({ fontWeight: 'bold' })}
 	padding-top: 0.25em;
 	${from.desktop} {
 		display: none;
@@ -84,7 +83,7 @@ export const ArticleTitle = ({
 			{format.design === ArticleDesign.LiveBlog && (
 				<span css={livePulseIconStyles(palette)}>
 					<Island deferUntil="idle">
-						<PulsingDot diameter={1.084} />
+						<PulsingDot />
 					</Island>
 				</span>
 			)}

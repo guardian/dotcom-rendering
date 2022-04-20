@@ -3,7 +3,7 @@ import { css, keyframes } from '@emotion/react';
 import { storage } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 
-const dotStyles = (colour?: string, diameter?: number) => css`
+const dotStyles = (colour?: string) => css`
 	color: ${colour && colour};
 
 	:before {
@@ -11,8 +11,8 @@ const dotStyles = (colour?: string, diameter?: number) => css`
 		display: inline-block;
 		position: relative;
 		background-color: currentColor;
-		width: ${diameter ?? 0.75}em;
-		height: ${diameter ?? 0.75}em;
+		width: 0.75em;
+		height: 0.75em;
 		content: '';
 		margin-right: 0.1875rem;
 		vertical-align: initial;
@@ -35,10 +35,9 @@ const animate = css`
 
 interface Props {
 	colour?: string;
-	diameter?: number;
 }
 
-export const PulsingDot = ({ colour, diameter }: Props) => {
+export const PulsingDot = ({ colour }: Props) => {
 	const [shouldFlash, setShouldFlash] = useState(false);
 
 	useEffect(() => {
@@ -54,5 +53,5 @@ export const PulsingDot = ({ colour, diameter }: Props) => {
 		setShouldFlash(flashingPreference !== false);
 	}, []);
 
-	return <span css={[dotStyles(colour, diameter), shouldFlash && animate]} />;
+	return <span css={[dotStyles(colour), shouldFlash && animate]} />;
 };
