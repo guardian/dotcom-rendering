@@ -14,7 +14,7 @@ import {
 import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
 import {
@@ -161,6 +161,59 @@ const TweetStyles = css`
 	}
 `;
 
+const allowsDropCaps = (format: ArticleFormat): boolean => {
+	if (format.theme === ArticleSpecial.Labs) return false;
+	if (format.display === ArticleDisplay.Immersive) return true;
+	switch (format.design) {
+		case ArticleDesign.Feature:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Review:
+		case ArticleDesign.Interview:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Recipe:
+			return true;
+		default:
+			return false;
+	}
+};
+
+const dropCapWeight = (format: ArticleFormat): SerializedStyles => {
+	switch (format.design) {
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
+			return css`
+				font-weight: 200;
+			`;
+		default:
+			return css`
+				font-weight: 700;
+			`;
+	}
+};
+
+const dropCapStyles = (format: ArticleFormat): SerializedStyles => css`
+	&:first-of-type:first-letter,
+	hr + &:first-letter {
+		${headline.large({ fontWeight: 'bold' })}
+		${dropCapWeight(format)}
+		color: ${text.dropCap(format)};
+		float: left;
+		font-size: 7.375rem;
+		line-height: 6.188rem;
+		vertical-align: text-top;
+		pointer-events: none;
+		margin-right: ${remSpace[1]};
+	}
+
+	${darkModeCss`
+		&:first-of-type:first-letter,
+		hr + &:first-letter {
+			color: ${text.dropCapDark(format)};
+		}
+	`};
+`;
+
 //Elements rendered by this function should contain no styles.
 // For example in callout form and interactives we want to exclude styles.
 const plainTextElement = (node: Node, key: number): ReactNode => {
@@ -214,8 +267,21 @@ const textElement =
 			textElement(format, isEditions),
 		);
 		switch (node.nodeName) {
-			case 'P':
-				return h(Paragraph, { key, format }, children);
+			case 'P': {
+				const showDropCap =
+					allowsDropCaps(format) && text.length >= 200;
+				return showDropCap
+					? styledH(
+							Paragraph,
+							{
+								key,
+								format,
+								dropCapStyles: dropCapStyles(format),
+							},
+							children,
+					  )
+					: h(Paragraph, { key, format }, children);
+			}
 			case '#text':
 				return transform(text, format);
 			case 'SPAN':

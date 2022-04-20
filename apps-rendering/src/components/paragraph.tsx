@@ -12,6 +12,7 @@ import type { FC, ReactNode } from 'react';
 interface Props {
 	children?: ReactNode;
 	format: ArticleFormat;
+	dropCapStyles?: SerializedStyles;
 }
 
 const styles = (theme: ArticleTheme): SerializedStyles => {
@@ -26,8 +27,8 @@ const styles = (theme: ArticleTheme): SerializedStyles => {
 	`;
 };
 
-const Paragraph: FC<Props> = ({ children, format }: Props) => (
-	<p css={styles(format.theme)}>{children}</p>
+const Paragraph: FC<Props> = ({ children, format, dropCapStyles }: Props) => (
+	<p css={[styles(format.theme), dropCapStyles]}>{children}</p>
 );
 
 // ----- Exports ----- //

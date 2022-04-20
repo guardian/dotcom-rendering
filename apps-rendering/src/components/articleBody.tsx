@@ -1,14 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette/text';
-import { ArticleFormat, ArticleSpecial } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import {
-	background,
-	headline,
-	neutral,
-	remSpace,
-} from '@guardian/source-foundations';
+import type { ArticleFormat } from '@guardian/libs';
+import { background, neutral, remSpace } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
 import { adStyles, darkModeCss } from 'styles';
 
@@ -18,88 +11,24 @@ interface ArticleBodyProps {
 	format: ArticleFormat;
 }
 
-const allowsDropCaps = (format: ArticleFormat) => {
-	if (format.theme === ArticleSpecial.Labs) return false;
-	if (format.display === ArticleDisplay.Immersive) return true;
-	switch (format.design) {
-		case ArticleDesign.Feature:
-		case ArticleDesign.Comment:
-		case ArticleDesign.Review:
-		case ArticleDesign.Interview:
-		case ArticleDesign.PhotoEssay:
-		case ArticleDesign.Recipe:
-			return true;
-		default:
-			return false;
-	}
-};
+const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
+	position: relative;
+	clear: both;
 
-const dropCapWeight = (format: ArticleFormat): SerializedStyles => {
-	switch (format.design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return css`
-				font-weight: 200;
-			`;
-		default:
-			return css`
-				font-weight: 700;
-			`;
-	}
-};
-
-const dropCap = (format: ArticleFormat): SerializedStyles => css`
-	p:first-of-type:first-letter,
-	hr + p:first-letter {
-		${headline.large({ fontWeight: 'bold' })}
-		${dropCapWeight(format)};
-		color: ${text.dropCap(format)};
-		float: left;
-		font-size: 7.375rem;
-		line-height: 6.188rem;
-		vertical-align: text-top;
-		pointer-events: none;
-		margin-right: ${remSpace[1]};
+	iframe {
+		width: 100%;
+		border: none;
 	}
 
-	${darkModeCss`
-		p:first-of-type:first-letter,
-		hr + p:first-letter {
-			color: ${text.dropCapDark(format)};
-		}
-	`};
-`;
+	${adStyles(format)}
 
-const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => {
-	const baseStyles = css`
-		position: relative;
-		clear: both;
-
-		iframe {
-			width: 100%;
-			border: none;
-		}
-
-		${adStyles(format)}
-
-		twitter-widget,
+	twitter-widget,
     figure[data-atom-type="explainer"] {
-			margin: ${remSpace[4]} 0;
-			clear: both;
-			display: inline-block;
-		}
-	`;
-
-	if (allowsDropCaps(format)) {
-		return css`
-			${baseStyles}
-			${dropCap(format)}
-		`;
-	} else {
-		return baseStyles;
+		margin: ${remSpace[4]} 0;
+		clear: both;
+		display: inline-block;
 	}
-};
+`;
 
 const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
     background: ${background.inverse};
