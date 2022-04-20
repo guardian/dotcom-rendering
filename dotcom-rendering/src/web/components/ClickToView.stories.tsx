@@ -881,6 +881,7 @@ export const VimeoBlockComponentStory = () => {
 							caption={vimeoVideoEmbed.caption}
 							credit={vimeoVideoEmbed.credit}
 							title={vimeoVideoEmbed.title}
+							isMainMedia={false}
 						/>
 					</ClickToView>
 				</Figure>

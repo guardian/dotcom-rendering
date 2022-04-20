@@ -28,6 +28,7 @@ type Props = {
 	isOverlayed?: boolean;
 	isLeftCol?: boolean;
 	mediaType?: MediaType;
+	isMainMedia?: boolean;
 };
 
 type IconProps = {
@@ -116,6 +117,12 @@ const veryLimitedWidth = css`
 const captionPadding = css`
 	padding-left: 8px;
 	padding-right: 8px;
+`;
+
+const tabletCaptionPadding = css`
+	${until.desktop} {
+		${captionPadding}
+	}
 `;
 
 const videoPadding = css`
@@ -231,6 +238,7 @@ export const Caption = ({
 	isOverlayed,
 	isLeftCol,
 	mediaType = 'Gallery',
+	isMainMedia = false,
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -239,6 +247,9 @@ export const Caption = ({
 	if (noCaption && (noCredit || hideCredit)) return null;
 
 	const palette = decidePalette(format);
+	const isBlog =
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog;
 
 	const defaultCaption = (
 		<figcaption
@@ -247,6 +258,7 @@ export const Caption = ({
 				shouldLimitWidth && limitedWidth,
 				!isOverlayed && bottomMargin,
 				isOverlayed && overlayedStyles(palette, format),
+				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,
 			]}
