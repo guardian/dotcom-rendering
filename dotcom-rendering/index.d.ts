@@ -85,6 +85,7 @@ type Palette = {
 		matchTitle: Colour;
 		byline: Colour;
 		twitterHandle: Colour;
+		twitterHandleBelowDesktop: Colour;
 		caption: Colour;
 		captionLink: Colour;
 		subMeta: Colour;
@@ -156,6 +157,7 @@ type Palette = {
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
+		twitterHandleBelowDesktop: Colour;
 	};
 	border: {
 		syndicationButton: Colour;
@@ -889,7 +891,7 @@ interface BadgeType {
 	imageUrl: string;
 }
 
-type ImagePositionType = 'left' | 'top' | 'right';
+type ImagePositionType = 'left' | 'top' | 'right' | 'bottom';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 

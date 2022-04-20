@@ -4,12 +4,21 @@ import { css } from '@emotion/react';
 import { unescapeData } from '../../lib/escapeData';
 import { Caption } from './Caption';
 
-export const GuVideoBlockComponent: React.FC<{
+type Props = {
 	html: string;
 	format: ArticleFormat;
 	credit: string;
+	isMainMedia: boolean;
 	caption?: string;
-}> = ({ html, format, credit, caption }) => {
+};
+
+export const GuVideoBlockComponent = ({
+	html,
+	format,
+	credit,
+	isMainMedia,
+	caption,
+}: Props) => {
 	const embedContainer = css`
 		width: 100%;
 		margin-bottom: ${caption ? `0px` : `6px`};
@@ -28,6 +37,7 @@ export const GuVideoBlockComponent: React.FC<{
 					format={format}
 					credit={credit}
 					mediaType="Video"
+					isMainMedia={isMainMedia}
 				/>
 			)}
 		</div>

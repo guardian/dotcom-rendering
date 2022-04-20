@@ -1,24 +1,24 @@
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	ArticleSpecial,
-	ArticlePillar,
-} from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	neutral,
-	text,
-	specialReport,
-	opinion,
-	news,
-	sport,
-	brandAltBackground,
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
+import {
 	border,
 	brand,
 	brandAlt,
-	lifestyle,
+	brandAltBackground,
 	culture,
 	labs,
+	lifestyle,
+	neutral,
+	news,
+	opinion,
+	specialReport,
+	sport,
+	text,
 } from '@guardian/source-foundations';
 
 // Here is the one place where we use `pillarPalette`
@@ -157,6 +157,12 @@ const textTwitterHandle = (format: ArticleFormat): string => {
 	return text.supporting;
 };
 
+const textTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	return textTwitterHandle(format);
+};
+
 const textCaption = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
@@ -180,7 +186,10 @@ const textSubMeta = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
-	if (format.design === ArticleDesign.DeadBlog)
+	if (
+		format.design === ArticleDesign.DeadBlog ||
+		format.design === ArticleDesign.LiveBlog
+	)
 		return blogsGrayBackgroundPalette(format);
 	return pillarPalette[format.theme].main;
 };
@@ -732,6 +741,11 @@ const fillCaptionCamera = (format: ArticleFormat): string =>
 const fillBlockquoteIcon = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].main;
 
+const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	return neutral[46];
+};
 const borderSyndicationButton = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	return border.secondary;
@@ -1052,6 +1066,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			matchTitle: textMatchTitle(),
 			byline: textByline(format),
 			twitterHandle: textTwitterHandle(format),
+			twitterHandleBelowDesktop: textTwitterHandleBelowDesktop(format),
 			caption: textCaption(format),
 			captionLink: textCaptionLink(format),
 			subMeta: textSubMeta(format),
@@ -1123,6 +1138,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),
+			twitterHandleBelowDesktop: fillTwitterHandleBelowDesktop(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(format),

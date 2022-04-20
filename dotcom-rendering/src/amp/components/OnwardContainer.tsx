@@ -1,4 +1,3 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { neutral, headline, textSans } from '@guardian/source-foundations';
 
@@ -102,11 +101,15 @@ const showMore = css`
 	}
 `;
 
-export const OnwardContainer: React.FC<{
+export const OnwardContainer = ({
+	guardianBaseURL,
+	path,
+	componentName,
+}: {
 	guardianBaseURL: string;
 	path: string;
 	componentName: string;
-}> = ({ guardianBaseURL, path, componentName }) => (
+}) => (
 	<amp-list
 		layout="fixed-height"
 		height="184px"
