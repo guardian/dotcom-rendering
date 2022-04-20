@@ -125,7 +125,11 @@ const LiveBlockContainer = ({
 }: Props) => {
 	return (
 		<article
-			id={`block-${id}`}
+			/**
+			 * Pinned posts are not the cannonical source for a post, they're a copy. Only the *true* post
+			 * should get the id. This will prevent two elements on the page having the same id.
+			 * */
+			id={!isPinnedPost ? `block-${id}` : undefined}
 			key={id}
 			/**
 			 *   Classnames
