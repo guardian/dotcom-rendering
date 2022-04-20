@@ -27,6 +27,7 @@ const adSlotLabelStyles = css`
 	${textSans.xxsmall()};
 	position: relative;
 	height: ${labelHeight}px;
+	max-height: ${labelHeight}px;
 	background-color: ${neutral[97]};
 	padding: 0 8px;
 	border-top: 1px solid ${border.secondary};
