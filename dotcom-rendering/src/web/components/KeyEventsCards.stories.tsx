@@ -1,13 +1,7 @@
 import { css } from '@emotion/react';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticlePillar,
-	ArticleTheme,
-} from '@guardian/libs';
-import type { KeyEvent } from './keyEvents';
-import KeyEvents from './keyEventsCards';
-import KeyEventsCard from './keyEventsCards';
+import { neutral } from '@guardian/source-foundations';
+import type { KeyEvent } from './KeyEventsCards';
+import KeyEventsCard from './KeyEventsCards';
 
 const getDate = (milliSeconds = 1, seconds = 1, minutes = 1, hours = 1) =>
 	new Date(Date.now() - milliSeconds * seconds * minutes * hours);
@@ -50,15 +44,19 @@ const events: KeyEvent[] = [
 	},
 ];
 
-const getFormat = (theme: ArticleTheme) => {
-	return {
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-		theme: theme,
-	};
-};
+// const getFormat = (theme: ArticleTheme) => {
+// 	return {
+// 		design: ArticleDesign.Standard,
+// 		display: ArticleDisplay.Standard,
+// 		theme,
+// 	};
+// };
 
 const wrapperStyles = css`
+	padding: 20px;
+	display: flex;
+	background-color: ${neutral[93]};
+
 	ul {
 		overflow-x: scroll;
 		margin: 20px 0;
@@ -69,38 +67,21 @@ const wrapperStyles = css`
 	}
 `;
 
-const keyEventWithTheme = (dark: boolean, events: KeyEvent[]) => () =>
-	(
-		<div css={wrapperStyles}>
-			<KeyEvents
-				supportsDarkMode={dark}
-				keyEvents={events}
-				format={getFormat(ArticlePillar.News)}
+const MultipleCards = () => (
+	<div css={wrapperStyles}>
+		{events.map((event) => (
+			<KeyEventsCard
+				text={event.text}
+				url={event.url}
+				date={event.date}
 			/>
-			<KeyEvents
-				supportsDarkMode={dark}
-				keyEvents={events}
-				format={getFormat(ArticlePillar.Sport)}
-			/>
-			<KeyEvents
-				supportsDarkMode={dark}
-				keyEvents={events}
-				format={getFormat(ArticlePillar.Culture)}
-			/>
-			<KeyEvents
-				supportsDarkMode={dark}
-				keyEvents={events}
-				format={getFormat(ArticlePillar.Lifestyle)}
-			/>
-		</div>
-	);
-
-const SingleCard = keyEventWithTheme(false, events.slice(0, 1));
-const MultipleCards = keyEventWithTheme(false, events.slice(0, 2));
+		))}
+	</div>
+);
 
 export default {
 	component: KeyEventsCard,
-	title: 'Common/Components/KeyEventsCard',
+	title: 'Components/KeyEventsCard',
 };
 
-export { SingleCard, MultipleCards };
+export { MultipleCards };
