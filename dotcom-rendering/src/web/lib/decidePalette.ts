@@ -156,13 +156,13 @@ const textLastUpdatedStandfirst = (format: ArticleFormat): string => {
 			case ArticlePillar.News:
 				return news[600];
 			case ArticlePillar.Culture:
-				return culture[400];
+				return culture[600];
 			case ArticlePillar.Lifestyle:
-				return lifestyle[500];
+				return lifestyle[600];
 			case ArticlePillar.Sport:
 				return sport[600];
 			case ArticlePillar.Opinion:
-				return opinion[500];
+				return opinion[600];
 			case ArticleSpecial.Labs:
 			case ArticleSpecial.SpecialReport:
 				return news[600];

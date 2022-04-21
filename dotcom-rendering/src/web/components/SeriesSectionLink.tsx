@@ -428,25 +428,43 @@ export const SeriesSectionLink = ({
 			}
 			// There's no tag so fallback to section title
 			return (
-				<a
-					href={`${guardianBaseURL}/${sectionUrl}`}
-					css={[
-						sectionLabelLink,
-						css`
-							color: ${sectionTitleColour};
-							background-color: ${palette.background
-								.sectionTitle};
-						`,
-						marginRight,
-						fontStyles(format),
-						breakWord,
-					]}
-					data-component="section"
-					data-link-name="article section"
-					className={interactiveLegacyClasses.labelLink}
-				>
-					<span>{sectionLabel}</span>
-				</a>
+				<>
+					<Hide when="above" breakpoint="desktop">
+						{format.design === ArticleDesign.LiveBlog && (
+							<span
+								css={[
+									fontStyles(format),
+									css`
+										color: ${seriesTitleColour};
+									`,
+								]}
+							>
+								<Island deferUntil="idle">
+									<PulsingDot />
+								</Island>
+							</span>
+						)}
+					</Hide>
+					<a
+						href={`${guardianBaseURL}/${sectionUrl}`}
+						css={[
+							sectionLabelLink,
+							css`
+								color: ${sectionTitleColour};
+								background-color: ${palette.background
+									.sectionTitle};
+							`,
+							marginRight,
+							fontStyles(format),
+							breakWord,
+						]}
+						data-component="section"
+						data-link-name="article section"
+						className={interactiveLegacyClasses.labelLink}
+					>
+						<span>{sectionLabel}</span>
+					</a>
+				</>
 			);
 		}
 	}
