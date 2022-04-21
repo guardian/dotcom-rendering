@@ -259,12 +259,12 @@ export const ImageComponent = ({
 					width: 100%;
 
 					${from.desktop} {
-		height: 100vh;
-		min-height: 31.25rem;
-	}
-	${from.wide} {
-		min-height: 50rem;
-	}
+						height: 100vh;
+						min-height: 31.25rem;
+					}
+					${from.wide} {
+						min-height: 50rem;
+					}
 					img {
 						object-fit: cover;
 					}
