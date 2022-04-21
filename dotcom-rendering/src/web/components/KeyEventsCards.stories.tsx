@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import {
+	ArticleSpecial,
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+} from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import type { KeyEvent } from './KeyEventsCards';
 import { KeyEventsCard } from './KeyEventsCards';
@@ -78,9 +83,9 @@ const wrapperStyles = css`
 	}
 `;
 
-const Cards = ({ theme }: { theme: ArticleTheme }) => (
+const Cards = ({ theme, count }: { theme: ArticleTheme; count: number }) => (
 	<ul css={wrapperStyles}>
-		{events.map((event) => (
+		{events.slice(0, count).map((event) => (
 			<KeyEventsCard
 				text={event.text}
 				url={event.url}
@@ -91,12 +96,26 @@ const Cards = ({ theme }: { theme: ArticleTheme }) => (
 	</ul>
 );
 
+const SingleCard = () => (
+	<>
+		<Cards theme={ArticlePillar.News} count={1} />
+		<Cards theme={ArticlePillar.Culture} count={1} />
+		<Cards theme={ArticlePillar.Lifestyle} count={1} />
+		<Cards theme={ArticlePillar.Sport} count={1} />
+		<Cards theme={ArticlePillar.Opinion} count={1} />
+		<Cards theme={ArticleSpecial.SpecialReport} count={1} />
+	</>
+);
+
 const MultipleCards = () => (
 	<>
-		<Cards theme={ArticlePillar.News} />
-		<Cards theme={ArticlePillar.Culture} />
-		<Cards theme={ArticlePillar.Lifestyle} />
-		<Cards theme={ArticlePillar.Sport} />
+		<Cards theme={ArticlePillar.News} count={7} />
+		<Cards theme={ArticlePillar.Culture} count={7} />
+		<Cards theme={ArticlePillar.Lifestyle} count={7} />
+		<Cards theme={ArticlePillar.Sport} count={7} />
+		<Cards theme={ArticlePillar.Culture} count={7} />
+		<Cards theme={ArticlePillar.Opinion} count={1} />
+		<Cards theme={ArticleSpecial.SpecialReport} count={7} />
 	</>
 );
 
@@ -105,4 +124,4 @@ export default {
 	title: 'Components/KeyEventsCard',
 };
 
-export { MultipleCards };
+export { SingleCard, MultipleCards };
