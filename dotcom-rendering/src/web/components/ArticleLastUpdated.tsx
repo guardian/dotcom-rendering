@@ -9,11 +9,12 @@ const lastUpdatedStyles = (palette: Palette) => css`
 	${textSans.small()}
 	padding-bottom: 0.125rem;
 	padding-top: 0.125rem;
-	color: ${palette.text.standfirst};
+	color: ${palette.text.lastUpdatedStandfirst};
 `;
 
-const livePulseIconStyles = css`
+const livePulseIconStyles = (palette: Palette) => css`
 	${textSans.small({ fontWeight: 'bold' })}
+	color: ${palette.text.standfirst};
 `;
 
 type Props = {
@@ -29,7 +30,7 @@ export const ArticleLastUpdated = ({ format, lastUpdated }: Props) => {
 	return (
 		<div css={lastUpdatedStyles(palette)}>
 			{format.design === ArticleDesign.LiveBlog && (
-				<span css={livePulseIconStyles}>
+				<span css={livePulseIconStyles(palette)}>
 					<Island deferUntil="idle">
 						<PulsingDot />
 					</Island>
