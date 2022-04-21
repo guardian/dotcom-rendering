@@ -1,0 +1,58 @@
+name: DCR Fronts Ophan tag status
+on:
+  push:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
+
+jobs:
+  data-link-name:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.21.0
+
+      - name: Compare components "data-link-name"
+        id: text
+        run: |
+          echo "About to run Deno script"
+          TEXT=$(deno run --allow-net ./scripts/deno/ophan-components.ts data-link-name)
+          echo "::set-output text=$TEXT"
+
+      - name: Update Comment
+        uses: peter-evans/create-or-update-comment@v2.0.0
+        with:
+          comment-id: 1211151898
+          body: "{{ steps.text.outputs }}"
+          edit-mode: replace
+
+  data-component:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.21.0
+
+      - name: Compare components "data-component"
+        id: text
+        run: |
+          echo "About to run Deno script"
+          TEXT=$(deno run --allow-net ./scripts/deno/ophan-components.ts data-component)
+          echo "::set-output name=text::$TEXT"
+
+      - name: Update Comment
+        uses: peter-evans/create-or-update-comment@v2.0.0
+        with:
+          comment-id: 1212191944
+          body: "{{ steps.text.outputs }}"
+          edit-mode: replace
