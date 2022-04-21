@@ -257,6 +257,7 @@ export const ImageComponent = ({
                     always be used if display === 'immersive' */
 					height: 80vh;
 					width: 100%;
+					min-height: 25rem;
 
 					${from.desktop} {
 						height: 100vh;
