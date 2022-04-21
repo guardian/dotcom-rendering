@@ -47,6 +47,7 @@ export const DiscussionLayout = ({
 						/>
 					</Island>
 				}
+				leftColSize="wide"
 			>
 				<Flex>
 					<div
