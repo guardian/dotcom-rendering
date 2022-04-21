@@ -61,6 +61,10 @@ const headline = (format: ArticleFormat): Colour => {
 		}
 	}
 
+	if (format.design === ArticleDesign.Interview) {
+		return neutral[100];
+	}
+
 	return neutral[7];
 };
 
@@ -151,6 +155,8 @@ const bylineInline = (format: ArticleFormat): Colour => {
 			return specialReport[300];
 	}
 };
+
+const headlineTag = (_format: ArticleFormat): Colour => neutral[100];
 
 const follow = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
@@ -593,6 +599,7 @@ const text = {
 	followDark,
 	headline,
 	headlineDark,
+	headlineTag,
 	keyEventsInline,
 	keyEventsLeftColumn,
 	kicker,
