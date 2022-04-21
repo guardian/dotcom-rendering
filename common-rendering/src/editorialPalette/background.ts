@@ -187,9 +187,9 @@ const avatar = (format: ArticleFormat): string => {
 			return news[500];
 	}
 };
-const keyEvents = (_format: ArticleFormat): Colour => neutral[97];
+const keyEvents = (_format: ArticleFormat): Colour => neutral[100];
 
-const keyEventsWide = (_format: ArticleFormat): Colour => neutral[93];
+const keyEventsWide = (_format: ArticleFormat): Colour => neutral[97];
 
 const keyEventsDark = (_format: ArticleFormat): Colour => neutral[10];
 

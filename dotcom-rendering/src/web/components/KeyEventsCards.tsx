@@ -2,20 +2,17 @@ import { css } from '@emotion/react';
 import { textSans, neutral, space, from } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
+import { decidePalette } from '../lib/decidePalette';
 
-interface KeyEvent {
+export interface KeyEvent {
 	date: Date;
 	text: string;
 	url: string;
+	format: ArticleFormat;
 }
 
 const linkStyles = css`
-	position: initial;
 	text-decoration: none;
-
-	&:hover::before {
-		background-color: ${neutral[0]};
-	}
 
 	&::before {
 		content: '';
@@ -33,18 +30,25 @@ const linkStyles = css`
 			width: 15px;
 		}
 	}
+
+	&:hover::before {
+		background-color: ${neutral[0]};
+	}
 `;
 
 const listItemStyles = css`
+	position: relative;
 	padding-bottom: ${space[5]}px;
 	padding-top: ${space[3]}px;
-	position: relative;
-	background-color: ${neutral[97]};
 	padding-right: ${space[5]}px;
+	background-color: ${neutral[97]};
 	list-style: none;
+	display: block;
+	width: 150px;
 
 	${from.desktop} {
 		background-color: ${neutral[93]};
+		width: 180px;
 	}
 
 	&::before {
@@ -62,30 +66,12 @@ const listItemStyles = css`
 	}
 `;
 
-const textStyles = css`
-	width: 150px;
+const textStyles = (palette: Palette) => css`
 	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
-
-	// TODO: update this colour
-	color: ${neutral[7]};
-	display: block;
-	text-decoration: none;
+	color: ${palette.text.keyEvent};
 
 	&:hover {
-		// TODO: update this colour
-		color: ${neutral[7]};
 		text-decoration: underline;
-	}
-
-	${from.desktop} {
-		// TODO: update this colour
-		color: ${neutral[7]};
-
-		&:hover {
-			// TODO: update this colour
-			color: ${neutral[7]};
-			text-decoration: underline;
-		}
 	}
 `;
 
@@ -95,7 +81,9 @@ const timeStyles = css`
 	display: block;
 `;
 
-const KeyEventCard = ({ text, date, url }: KeyEvent) => {
+export const KeyEventsCard = ({ text, date, url, format }: KeyEvent) => {
+	const palette = decidePalette(format);
+
 	return (
 		<li css={listItemStyles}>
 			<Link priority="secondary" css={linkStyles} href={url}>
@@ -115,11 +103,8 @@ const KeyEventCard = ({ text, date, url }: KeyEvent) => {
 				>
 					{timeAgo(date.getTime())}
 				</time>
-				<span css={textStyles}>{text}</span>
+				<span css={textStyles(palette)}>{text}</span>
 			</Link>
 		</li>
 	);
 };
-
-export default KeyEventCard;
-export type { KeyEvent };

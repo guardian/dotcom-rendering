@@ -121,6 +121,7 @@ type Palette = {
 		overlayedCaption: Colour;
 		shareCount: Colour;
 		shareCountUntilDesktop: Colour;
+		keyEvent: Colour;
 	};
 	background: {
 		article: Colour;
