@@ -1,7 +1,14 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { headline, textSans, until, space } from '@guardian/source-foundations';
+import {
+	headline,
+	textSans,
+	until,
+	space,
+	headlineSizes,
+	lineHeights,
+} from '@guardian/source-foundations';
 
 import { QuoteIcon } from './QuoteIcon';
 import { Kicker } from './Kicker';
@@ -86,22 +93,43 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 				transparent ${baseSize - 1}px,
 				${colour}
 			);
-			line-height: ${baseSize}px;
 			background-size: 1px ${baseSize}px;
 			background-origin: content-box;
 			background-clip: content-box;
 			margin-right: -5px;
 		`;
 	}
+
+	function screenSizedUnderlinedCss(
+		baseSize: number,
+		untilDesktopSize: number,
+	) {
+		return css`
+			${until.desktop} {
+				${generateUnderlinedCss(untilDesktopSize)}
+			}
+
+			${generateUnderlinedCss(baseSize)}
+		`;
+	}
+
 	switch (size) {
-		case 'small':
-			return generateUnderlinedCss(22);
-		case 'medium':
-			return generateUnderlinedCss(25);
 		case 'large':
-			return generateUnderlinedCss(29);
-		default:
-			return generateUnderlinedCss(24);
+			return screenSizedUnderlinedCss(
+				headlineSizes.xsmall * lineHeights.tight,
+				headlineSizes.xxsmall * lineHeights.tight,
+			);
+		case 'medium':
+			return screenSizedUnderlinedCss(
+				headlineSizes.xxsmall * lineHeights.tight,
+				headlineSizes.xxxsmall * lineHeights.tight,
+			);
+		case 'small':
+			return generateUnderlinedCss(
+				headlineSizes.xxxsmall * lineHeights.tight,
+			);
+		case 'tiny':
+			return generateUnderlinedCss(14 * lineHeights.tight);
 	}
 };
 
