@@ -231,7 +231,7 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
  * - ["'\u2018\u201c]? matches an optional quotation mark, apostrophe, open single quote
  * or open double quote.
  *
- * - (?!) is a negative lookahead checking that the first letter is not "I".
+ * - (?!I) is a negative lookahead checking that the first letter is not "I".
  *
  * - The rest of the expression matches 3 or more characters in the Latin-1 Unicode block,
  * which includes diacritics (e.g. å, č, Ë, etc.).
