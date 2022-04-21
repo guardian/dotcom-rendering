@@ -44,16 +44,8 @@ const events: KeyEvent[] = [
 	},
 ];
 
-// const getFormat = (theme: ArticleTheme) => {
-// 	return {
-// 		design: ArticleDesign.Standard,
-// 		display: ArticleDisplay.Standard,
-// 		theme,
-// 	};
-// };
-
 const wrapperStyles = css`
-	padding: 20px;
+	padding-left: 20px;
 	display: flex;
 	background-color: ${neutral[93]};
 

@@ -25,7 +25,7 @@ const linkStyles = css`
 		width: 13px;
 		border-radius: 50%;
 		background-color: ${neutral[46]};
-		margin-bottom: ${space[2]}px;
+		margin-bottom: ${space[1]}px;
 		z-index: 2;
 
 		${from.tablet} {
@@ -36,7 +36,7 @@ const linkStyles = css`
 `;
 
 const listItemStyles = css`
-	padding-bottom: ${space[3]}px;
+	padding-bottom: ${space[5]}px;
 	padding-top: ${space[3]}px;
 	position: relative;
 	background-color: ${neutral[97]};
@@ -54,11 +54,7 @@ const listItemStyles = css`
 		border-top: 1px dotted ${neutral[46]};
 		left: 0;
 		right: 0;
-		top: 6px;
-
-		${from.tablet} {
-			top: ${space[2]}px;
-		}
+		top: 18px;
 	}
 
 	&:last-child::before {
