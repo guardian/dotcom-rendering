@@ -35,10 +35,10 @@ const hasMainMediaStyles = css`
 	min-height: 25rem;
 	${from.desktop} {
 		height: 100vh;
-		min-height: 31.25rem;
+		/* min-height: 31.25rem; */
 	}
 	${from.wide} {
-		min-height: 50rem;
+		/* min-height: 50rem; */
 	}
 `;
 

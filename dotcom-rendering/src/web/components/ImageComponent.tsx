@@ -276,7 +276,6 @@ export const ImageComponent = ({
 					isLazy={!isMainMedia}
 					isMainMedia={isMainMedia}
 				/>
-				{starRating && <PositionStarRating rating={starRating} />}
 				{title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
