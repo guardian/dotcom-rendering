@@ -222,6 +222,19 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 	}
 };
 
+/**
+ * This regular expression checks that a string begins with a word that is at least
+ * three characters long.
+ * ["'\u2018\u201c]? matches an optional quotation mark, apostrophe, open single quote
+ * or open double quote.
+ * The rest of the expression matches any character in the Latin-1 Unicode block,
+ * which includes diacritics (e.g. å, č, Ë, etc.).
+ * The regex sits outside the rendering function so it is only compiled once
+ * for better performance.
+ */
+const dropCapRegex =
+	/^["'\u2018\u201c]?[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F]{3,}/;
+
 const textElement =
 	(format: ArticleFormat, isEditions = false) =>
 	(node: Node, key: number): ReactNode => {
@@ -232,7 +245,9 @@ const textElement =
 		switch (node.nodeName) {
 			case 'P': {
 				const showDropCap =
-					allowsDropCaps(format) && text.length >= 200;
+					allowsDropCaps(format) &&
+					text.length >= 200 &&
+					dropCapRegex.test(text);
 				return h(Paragraph, { key, format, showDropCap }, children);
 			}
 			case '#text':
