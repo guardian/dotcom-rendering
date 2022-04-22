@@ -116,20 +116,20 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	switch (size) {
 		case 'large':
 			return screenSizedUnderlinedCss(
-				headlineSizes.xsmall * lineHeights.tight,
-				headlineSizes.xxsmall * lineHeights.tight,
+				Math.round(headlineSizes.xsmall * lineHeights.tight),
+				Math.round(headlineSizes.xxsmall * lineHeights.tight),
 			);
 		case 'medium':
 			return screenSizedUnderlinedCss(
-				headlineSizes.xxsmall * lineHeights.tight,
-				headlineSizes.xxxsmall * lineHeights.tight,
+				Math.round(headlineSizes.xxsmall * lineHeights.tight),
+				Math.round(headlineSizes.xxxsmall * lineHeights.tight),
 			);
 		case 'small':
 			return generateUnderlinedCss(
-				headlineSizes.xxxsmall * lineHeights.tight,
+				Math.round(headlineSizes.xxxsmall * lineHeights.tight),
 			);
 		case 'tiny':
-			return generateUnderlinedCss(14 * lineHeights.tight);
+			return generateUnderlinedCss(Math.round(14 * lineHeights.tight));
 	}
 };
 
