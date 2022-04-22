@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { ArticleFormat } from '@guardian/libs';
 import { KeyEventsCard } from './KeyEventsCards';
 
@@ -6,6 +7,22 @@ interface Props {
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
 }
+
+const containerStyles = css`
+	overflow: hidden;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	overflow-x: auto;
+	overflow-y: hidden;
+`;
+const carouselStyles = css`
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	flex-direction: row;
+	align-items: stretch;
+	width: fit-content;
+`;
 
 export const KeyEventsCarousel = ({
 	keyEvents,
@@ -24,17 +41,19 @@ export const KeyEventsCarousel = ({
 			};
 		});
 	return (
-		<div>
-			{transformedKeyEvents.map((keyEvent) => {
-				return (
-					<KeyEventsCard
-						text={keyEvent.text}
-						url={keyEvent.url}
-						date={keyEvent.date}
-						format={format}
-					/>
-				);
-			})}
+		<div css={containerStyles}>
+			<span css={carouselStyles}>
+				{transformedKeyEvents.map((keyEvent) => {
+					return (
+						<KeyEventsCard
+							text={keyEvent.text}
+							url={keyEvent.url}
+							date={keyEvent.date}
+							format={format}
+						/>
+					);
+				})}
+			</span>
 		</div>
 	);
 };
