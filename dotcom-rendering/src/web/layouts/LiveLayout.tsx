@@ -604,6 +604,41 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</StandFirstGrid>
 					</ElementContainer>
 
+					<Hide until="desktop">
+						<ElementContainer
+							showTopBorder={false}
+							borderColour={palette.border.article}
+							backgroundColour={neutral[93]}
+						>
+							<Island>
+								<KeyEventsCarousel
+									keyEvents={CAPIArticle.keyEvents}
+									filterKeyEvents={
+										CAPIArticle.filterKeyEvents
+									}
+									format={format}
+								/>
+							</Island>
+						</ElementContainer>
+					</Hide>
+					<Hide from="desktop">
+						<ElementContainer
+							showTopBorder={false}
+							borderColour={palette.border.article}
+							backgroundColour={neutral[97]}
+						>
+							<Island>
+								<KeyEventsCarousel
+									keyEvents={CAPIArticle.keyEvents}
+									filterKeyEvents={
+										CAPIArticle.filterKeyEvents
+									}
+									format={format}
+								/>
+							</Island>
+						</ElementContainer>
+					</Hide>
+
 					<ElementContainer
 						showTopBorder={false}
 						borderColour={palette.border.article}
