@@ -41,7 +41,11 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 			h(
 				'div',
 				{ className: 'upgrade-banner' },
-				h('h1', null, 'Support the Guardian and enjoy the app ad-free.'),
+				h(
+					'h1',
+					null,
+					'Support the Guardian and enjoy the app ad-free.',
+				),
 				<ThemeProvider theme={buttonThemeBrandAlt}>
 					<Button>Support the Guardian</Button>
 				</ThemeProvider>,
