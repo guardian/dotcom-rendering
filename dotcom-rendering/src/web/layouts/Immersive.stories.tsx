@@ -112,7 +112,14 @@ ReviewStory.story = {
 	name: 'Review',
 	parameters: {
 		viewport: { defaultViewport: 'phablet' },
-		chromatic: { viewports: [660] },
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.mobileLandscape,
+				breakpoints.phablet,
+				breakpoints.wide,
+			],
+		},
 	},
 };
 

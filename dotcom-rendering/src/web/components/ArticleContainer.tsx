@@ -86,7 +86,7 @@ const articleAdStyles = css`
 			margin-left: 20px;
 		}
 	}
-	.ad-slot--inline:not(.ad-slot--inline1):not(.ad-slot--top-above-nav):not(.ad-slot--fluid) {
+	.ad-slot-container {
 		max-width: 300px;
 	}
 	.ad-slot--offset-right {

@@ -12,6 +12,7 @@ const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] =>
 				format,
 				url: faciaCard.header.url,
 				headline: faciaCard.header.headline,
+				standfirst: faciaCard.card.trailText,
 				webPublicationDate: faciaCard.card.webPublicationDateOption
 					? new Date(
 							faciaCard.card.webPublicationDateOption,
