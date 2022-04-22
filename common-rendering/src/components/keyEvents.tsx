@@ -4,7 +4,6 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import {
 	textSans,
-	headline,
 	sport,
 	culture,
 	lifestyle,
@@ -149,7 +148,7 @@ const textStyles = (
 	format: ArticleFormat,
 	supportsDarkMode: boolean,
 ): SerializedStyles => css`
-	${headline.xxxsmall({ fontWeight: 'regular', lineHeight: 'regular' })};
+	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
 	/* TODO update with Source value when it's added */
 	${from.desktop} {
 		font-size: 15px;
