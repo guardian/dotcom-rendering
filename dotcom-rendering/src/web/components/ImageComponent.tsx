@@ -255,9 +255,17 @@ export const ImageComponent = ({
 					/* These styles depend on the containing layout component wrapping the main media
                     with a div set to 100vh. This is the case for ImmersiveLayout which should
                     always be used if display === 'immersive' */
-					height: 100vh;
+					height: 80vh;
 					width: 100%;
+					min-height: 25rem;
 
+					${from.desktop} {
+						height: 100vh;
+						min-height: 31.25rem;
+					}
+					${from.wide} {
+						min-height: 50rem;
+					}
 					img {
 						object-fit: cover;
 					}
@@ -273,7 +281,6 @@ export const ImageComponent = ({
 					isLazy={!isMainMedia}
 					isMainMedia={isMainMedia}
 				/>
-				{starRating && <PositionStarRating rating={starRating} />}
 				{title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
