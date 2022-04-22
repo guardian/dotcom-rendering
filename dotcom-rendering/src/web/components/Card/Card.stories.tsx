@@ -19,7 +19,7 @@ const basicCardProps: CardProps = {
 		theme: ArticlePillar.News,
 	},
 	headlineText: 'Headline text',
-	standfirst:
+	trailText:
 		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
 	headlineSize: 'medium',
 	kickerText: '',
@@ -111,7 +111,7 @@ const CardsWithDifferentThemes = ({
 								{...basicCardProps}
 								format={card.format}
 								headlineText={title}
-								standfirst="The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives"
+								trailText="The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives"
 								kickerText={card.title}
 								starRating={
 									design === ArticleDesign.Review
@@ -131,7 +131,7 @@ const CardsWithDifferentThemes = ({
 								{...basicCardProps}
 								format={card.format}
 								headlineText={title}
-								standfirst="The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives"
+								trailText="The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives"
 								kickerText={card.title}
 								starRating={
 									design === ArticleDesign.Review
