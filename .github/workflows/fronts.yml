@@ -1,7 +1,11 @@
-name: DCR Fronts Ophan tag status
+name: DCR Fronts–Ophan Components
 on:
   push:
     branches: [main]
+
+  schedule:
+    # Every work day of the week at 08:08
+    - cron: "8 8 * * MON-FRI"
 
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
