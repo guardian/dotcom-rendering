@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleFormat } from '@guardian/libs';
+import { neutral, brandAlt, space } from '@guardian/source-foundations';
+import {
+	Hide,
+	SvgChevronLeftSingle,
+	SvgChevronRightSingle,
+} from '@guardian/source-react-components';
 import { KeyEventsCard } from './KeyEventsCards';
 
 interface Props {
@@ -14,7 +20,10 @@ const containerStyles = css`
 	scroll-behavior: smooth;
 	overflow-x: auto;
 	overflow-y: hidden;
+	display: flex;
+	flex-direction: column;
 `;
+
 const carouselStyles = css`
 	display: flex;
 	justify-content: space-between;
@@ -22,6 +31,45 @@ const carouselStyles = css`
 	flex-direction: row;
 	align-items: stretch;
 	width: fit-content;
+`;
+
+const buttonContainerStyles = css`
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+	margin-bottom: ${space[3]}px;
+	bottom: 0;
+	position: relative;
+`;
+
+const buttonStyles = css`
+	position: absolute;
+
+	border: 0 none;
+	border-radius: 100%;
+	height: 34px;
+	width: 34px;
+	cursor: pointer;
+	padding: 0;
+	background-color: ${neutral[0]};
+
+	&:active,
+	&:hover {
+		outline: none;
+		background-color: ${brandAlt[400]};
+		svg {
+			fill: ${neutral[7]};
+		}
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	svg {
+		fill: ${neutral[100]};
+		height: 34px;
+	}
 `;
 
 export const KeyEventsCarousel = ({
@@ -54,6 +102,16 @@ export const KeyEventsCarousel = ({
 					);
 				})}
 			</span>
+			<Hide until="desktop">
+				<span css={buttonContainerStyles}>
+					<button css={buttonStyles}>
+						<SvgChevronLeftSingle />
+					</button>
+					<button css={buttonStyles}>
+						<SvgChevronRightSingle />
+					</button>
+				</span>
+			</Hide>
 		</div>
 	);
 };
