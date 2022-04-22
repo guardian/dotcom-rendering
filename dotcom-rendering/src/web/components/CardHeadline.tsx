@@ -78,7 +78,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 };
 
 const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
-	function generateUnderlinedCss(baseSize: number) {
+	function underlinedCss(baseSize: number) {
 		return css`
 			background-image: linear-gradient(
 				to bottom,
@@ -94,28 +94,28 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 		`;
 	}
 
-	function screenSizedUnderlinedCss(
+	function underlinedCssWithMediaQuery(
 		baseSize: number,
 		untilDesktopSize: number,
 	) {
 		return css`
 			${until.desktop} {
-				${generateUnderlinedCss(untilDesktopSize)}
+				${underlinedCss(untilDesktopSize)}
 			}
 
-			${generateUnderlinedCss(baseSize)}
+			${underlinedCss(baseSize)}
 		`;
 	}
 
 	switch (size) {
 		case 'large':
-			return screenSizedUnderlinedCss(29, 25);
+			return underlinedCssWithMediaQuery(29, 29);
 		case 'medium':
-			return screenSizedUnderlinedCss(25, 22);
+			return underlinedCssWithMediaQuery(25, 25);
 		case 'small':
-			return generateUnderlinedCss(22);
+			return underlinedCss(22);
 		case 'tiny':
-			return generateUnderlinedCss(24);
+			return underlinedCss(24);
 	}
 };
 
