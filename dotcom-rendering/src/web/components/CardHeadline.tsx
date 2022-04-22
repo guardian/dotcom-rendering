@@ -93,6 +93,7 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 				transparent ${baseSize - 1}px,
 				${colour}
 			);
+			line-height: ${baseSize}px;
 			background-size: 1px ${baseSize}px;
 			background-origin: content-box;
 			background-clip: content-box;
