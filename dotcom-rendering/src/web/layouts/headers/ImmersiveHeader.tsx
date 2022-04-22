@@ -29,7 +29,7 @@ import { decidePalette } from '../../lib/decidePalette';
 const hasMainMediaStyles = css`
 	height: 80vh;
 	/**
-    100vw is normally enough but don't let the content shrink vertically too
+    80vh is normally enough but don't let the content shrink vertically too
     much just in case
     */
 	min-height: 25rem;
