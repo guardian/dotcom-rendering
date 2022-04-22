@@ -65,6 +65,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -801,6 +802,15 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											</Island>
 										</>
 									)}
+									<Island>
+										<KeyEventsCarousel
+											keyEvents={CAPIArticle.keyEvents}
+											filterKeyEvents={
+												CAPIArticle.filterKeyEvents
+											}
+											format={format}
+										/>
+									</Island>
 									{CAPIArticle.keyEvents?.length ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">
@@ -832,6 +842,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										) : (
 											<></>
 										)}
+
 										<ArticleContainer
 											format={format}
 											abTests={CAPIArticle.config.abTests}
