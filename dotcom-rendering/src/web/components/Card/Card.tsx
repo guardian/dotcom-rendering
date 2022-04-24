@@ -81,13 +81,13 @@ const coverages: CoveragesType = {
 	image: {
 		small: '25%',
 		medium: '50%',
-		large: '67%',
+		large: '66%',
 		jumbo: '75%',
 	},
 	content: {
 		small: '75%',
 		medium: '50%',
-		large: '33%',
+		large: '34%',
 		jumbo: '25%',
 	},
 };
