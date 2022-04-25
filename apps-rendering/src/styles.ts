@@ -16,8 +16,18 @@ import type { Option } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 
+
 export const sidePadding = css`
 	padding-left: ${remSpace[3]};
+	padding-right: ${remSpace[3]};
+
+	${from.wide} {
+		padding-left: 0;
+		padding-right: 0;
+	}
+`;
+
+export const interviewSidePadding = css`
 	padding-right: ${remSpace[3]};
 
 	${from.wide} {

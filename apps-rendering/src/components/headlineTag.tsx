@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette/background';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, remSpace } from '@guardian/source-foundations';
+import { from, headline, remSpace } from '@guardian/source-foundations';
 import type { FC } from 'react';
 
 const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -12,7 +12,10 @@ const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	display: inline-block;
 	box-decoration-break: clone;
-	padding: 0 ${remSpace[1]};
+	padding: 0 ${remSpace[3]};
+	${from.wide} {
+		padding: 0 ${remSpace[2]};
+	}
 `;
 
 type Props = {

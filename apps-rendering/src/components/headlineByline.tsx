@@ -3,12 +3,18 @@ import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette/background';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
-import { headline, remSpace, textSans } from '@guardian/source-foundations';
+import {
+	from,
+	headline,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { withDefault } from '@guardian/types';
 import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getHref } from 'renderer';
+import { darkModeCss } from 'styles';
 
 const toReact = (format: ArticleFormat) => {
 	return function getReactNode(node: Node, index: number): ReactNode {
@@ -56,8 +62,16 @@ const headlineBox = (format: ArticleFormat): SerializedStyles => css`
 
 const addressStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.headlineByline(format)};
-	padding: 0 ${remSpace[1]};
+	padding: 0 ${remSpace[3]};
 	width: fit-content;
+
+	${from.wide} {
+		padding: 0 ${remSpace[2]};
+	}
+
+	${darkModeCss`
+		background-color: ${background.headlineBylineDark(format)};
+	`}
 `;
 
 type Props = {
