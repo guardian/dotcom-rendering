@@ -160,12 +160,10 @@ export const Card = ({
 
 	const cardPalette = decidePalette(format);
 
-	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
 	const moreThanTwoSubLinks =
 		supportingContent &&
 		supportingContent.length &&
 		supportingContent.length > 2;
-	const showFooterInColumn = isHorizontal && !moreThanTwoSubLinks;
 
 	const renderFooter = ({
 		renderAge = true,
@@ -320,12 +318,14 @@ export const Card = ({
 									</AvatarContainer>
 								</Hide>
 							)}
-							{showFooterInColumn &&
+							{/* Show the card footer in the same column as the headline content */}
+							{!moreThanTwoSubLinks &&
 								renderFooter({ forceVertical: true })}
 						</div>
 					</ContentWrapper>
 				</CardLayout>
-				{!showFooterInColumn && renderFooter({})}
+				{/* If there are more than two sublinks break footer out of the headline column into a row below */}
+				{moreThanTwoSubLinks && renderFooter({})}
 			</TopBar>
 		</CardLink>
 	);
