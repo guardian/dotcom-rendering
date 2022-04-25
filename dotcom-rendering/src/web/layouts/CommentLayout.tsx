@@ -47,6 +47,7 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { Hide } from '../components/Hide';
 
 const StandardGrid = ({
 	children,
@@ -211,6 +212,7 @@ const avatarPositionStyles = css`
 	display: flex;
 	justify-content: flex-end;
 	overflow: hidden;
+	position: relative;
 	margin-bottom: -29px;
 	margin-top: -50px;
 	pointer-events: none;
@@ -405,7 +407,12 @@ export const CommentLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<StraightLines count={4} />
+						<StraightLines
+							count={4}
+							cssOverrides={css`
+								display: block;
+							`}
+						/>
 					</ElementContainer>
 				</SendToBack>
 			</div>
@@ -466,14 +473,26 @@ export const CommentLayout = ({
 												/>
 											</div>
 										)}
-										<StraightLines count={8} />
+										<StraightLines
+											count={8}
+											cssOverrides={css`
+												display: block;
+											`}
+										/>
 									</div>
 								</div>
 							</div>
 						</GridItem>
 						<GridItem area="lines">
 							<div css={pushToBottom}>
-								<StraightLines count={8} />
+								<Hide when="below" breakpoint="desktop">
+									<StraightLines
+										count={8}
+										cssOverrides={css`
+											display: block;
+										`}
+									/>
+								</Hide>
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
@@ -613,7 +632,12 @@ export const CommentLayout = ({
 											/>
 										</Island>
 									)}
-									<StraightLines count={4} />
+									<StraightLines
+										count={4}
+										cssOverrides={css`
+											display: block;
+										`}
+									/>
 									<SubMeta
 										format={format}
 										subMetaKeywordLinks={
