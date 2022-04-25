@@ -317,13 +317,16 @@ export const Card = ({
 								</Hide>
 							)}
 							{/* Show the card footer in the same column as the headline content */}
-							{!moreThanTwoSubLinks &&
-								renderFooter({ forceVertical: true })}
+							{!moreThanTwoSubLinks ? (
+								renderFooter({ forceVertical: true })
+							) : (
+								<></>
+							)}
 						</div>
 					</ContentWrapper>
 				</CardLayout>
 				{/* If there are more than two sublinks break footer out of the headline column into a row below */}
-				{moreThanTwoSubLinks && renderFooter({})}
+				{moreThanTwoSubLinks ? renderFooter({}) : <></>}
 			</TopBar>
 		</CardLink>
 	);
