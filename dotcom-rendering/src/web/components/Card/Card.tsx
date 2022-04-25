@@ -161,8 +161,7 @@ export const Card = ({
 	const cardPalette = decidePalette(format);
 
 	const moreThanTwoSubLinks =
-		supportingContent &&
-		supportingContent.length &&
+		supportingContent?.length &&
 		supportingContent.length > 2;
 
 	const renderFooter = ({
