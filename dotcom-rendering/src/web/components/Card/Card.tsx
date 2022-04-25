@@ -21,7 +21,7 @@ import { ImageWrapper } from './components/ImageWrapper';
 import { AvatarContainer } from './components/AvatarContainer';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
 import { CardFooter } from './components/CardFooter';
-import { TopBar } from './components/TopBar';
+import { CardWrapper } from './components/CardWrapper';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
@@ -236,7 +236,7 @@ export const Card = ({
 
 	return (
 		<CardLink linkTo={linkTo} format={format} dataLinkName={dataLinkName}>
-			<TopBar palette={cardPalette}>
+			<CardWrapper palette={cardPalette}>
 				<CardLayout
 					imagePosition={imagePosition}
 					imagePositionOnMobile={imagePositionOnMobile}
@@ -324,7 +324,7 @@ export const Card = ({
 				</CardLayout>
 				{/* If there are more than two sublinks break footer out of the headline column into a row below */}
 				{moreThanTwoSubLinks && renderFooter({})}
-			</TopBar>
+			</CardWrapper>
 		</CardLink>
 	);
 };

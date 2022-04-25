@@ -5,7 +5,7 @@ type Props = {
 	palette: Palette;
 };
 
-export const TopBar = ({ children, palette }: Props) => (
+export const CardWrapper = ({ children, palette }: Props) => (
 	<div
 		css={css`
 			display: flex;
