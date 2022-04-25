@@ -1300,7 +1300,7 @@ declare namespace JSX {
 		 * to server-rendered HTML.
 		 *
 		 * Add `data-component="component-name"` to the element you want
-		 * to track. Then add data-link-name="link-name" to the anchor for which
+		 * to track. Then `add data-link-name="link-name"` to the anchor for which
 		 * clicks will be tracked.
 		 *
 		 * The page views table will then contain `link-name` when the
