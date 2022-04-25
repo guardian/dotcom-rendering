@@ -160,6 +160,84 @@ export const Card = ({
 
 	const cardPalette = decidePalette(format);
 
+	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
+	const moreThanTwoSubLinks =
+		supportingContent &&
+		supportingContent.length &&
+		supportingContent.length > 2;
+	const showFooterInColumn = isHorizontal && !moreThanTwoSubLinks;
+
+	const renderFooter = ({
+		renderAge = true,
+		renderMediaMeta = true,
+		renderCommentCount = true,
+		renderCardBranding = true,
+		renderSupportingContent = true,
+		forceVertical = false,
+	}: {
+		renderAge?: boolean;
+		renderMediaMeta?: boolean;
+		renderCommentCount?: boolean;
+		renderCardBranding?: boolean;
+		renderSupportingContent?: boolean;
+		forceVertical?: boolean;
+	}) => {
+		return (
+			<CardFooter
+				format={format}
+				age={
+					renderAge && webPublicationDate ? (
+						<CardAge
+							format={format}
+							webPublicationDate={webPublicationDate}
+							showClock={showClock}
+						/>
+					) : undefined
+				}
+				mediaMeta={
+					renderMediaMeta &&
+					format.design === ArticleDesign.Media &&
+					mediaType ? (
+						<MediaMeta
+							palette={cardPalette}
+							mediaType={mediaType}
+							mediaDuration={mediaDuration}
+						/>
+					) : undefined
+				}
+				commentCount={
+					renderCommentCount &&
+					showCommentCount &&
+					longCount &&
+					shortCount ? (
+						<CardCommentCount
+							palette={cardPalette}
+							long={longCount}
+							short={shortCount}
+						/>
+					) : undefined
+				}
+				cardBranding={
+					renderCardBranding && branding ? (
+						<CardBranding branding={branding} format={format} />
+					) : undefined
+				}
+				supportingContent={
+					renderSupportingContent &&
+					supportingContent &&
+					supportingContent.length > 0 ? (
+						<SupportingContent
+							supportingContent={supportingContent}
+							imagePosition={
+								forceVertical ? 'top' : imagePosition
+							}
+						/>
+					) : undefined
+				}
+			/>
+		);
+	};
+
 	return (
 		<CardLink linkTo={linkTo} format={format} dataLinkName={dataLinkName}>
 			<TopBar palette={cardPalette}>
@@ -239,52 +317,11 @@ export const Card = ({
 								</Hide>
 							)}
 						</div>
-						{}
+						{showFooterInColumn &&
+							renderFooter({ forceVertical: true })}
 					</ContentWrapper>
 				</CardLayout>
-				<CardFooter
-					format={format}
-					age={
-						webPublicationDate ? (
-							<CardAge
-								format={format}
-								webPublicationDate={webPublicationDate}
-								showClock={showClock}
-							/>
-						) : undefined
-					}
-					mediaMeta={
-						format.design === ArticleDesign.Media && mediaType ? (
-							<MediaMeta
-								palette={cardPalette}
-								mediaType={mediaType}
-								mediaDuration={mediaDuration}
-							/>
-						) : undefined
-					}
-					commentCount={
-						showCommentCount && longCount && shortCount ? (
-							<CardCommentCount
-								palette={cardPalette}
-								long={longCount}
-								short={shortCount}
-							/>
-						) : undefined
-					}
-					cardBranding={
-						branding ? (
-							<CardBranding branding={branding} format={format} />
-						) : undefined
-					}
-					supportingContent={
-						supportingContent && supportingContent.length > 0 ? (
-							<SupportingContent
-								supportingContent={supportingContent}
-								imagePosition={imagePosition}
-							/>
-						) : undefined
-					}
-				/>
+				{!showFooterInColumn && renderFooter({})}
 			</TopBar>
 		</CardLink>
 	);
