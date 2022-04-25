@@ -348,3 +348,68 @@ export const MoreThanThree = () => {
 		</div>
 	);
 };
+
+export const OneSublink = () => {
+	return (
+		<div
+			css={css`
+				width: 700px;
+			`}
+		>
+			<Card
+				{...basicCardProps}
+				supportingContent={[
+					{
+						...aBasicLink,
+						headline: 'Headline',
+						kickerText: 'Kicker',
+					},
+				]}
+				imagePosition="left"
+				trailText="When the image is positioned horizontally and there is only one sublink, it appears under the headline"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				linkTo=""
+				headlineText="With one link"
+			/>
+		</div>
+	);
+};
+
+export const TwoSublinks = () => {
+	return (
+		<div
+			css={css`
+				width: 700px;
+			`}
+		>
+			<Card
+				{...basicCardProps}
+				supportingContent={[
+					{
+						...aBasicLink,
+						headline: 'Headline 1',
+						kickerText: 'Kicker',
+					},
+					{
+						...aBasicLink,
+						headline: 'Headline 2',
+						kickerText: 'Kicker',
+					},
+				]}
+				imagePosition="left"
+				trailText="When there are only two sublinks they appear under the headline vertically stacked"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				linkTo=""
+				headlineText="With two links"
+			/>
+		</div>
+	);
+};
