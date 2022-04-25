@@ -838,6 +838,59 @@ const activeMatchTab = (): string => {
 	return sport[300];
 };
 
+const borderCardSupporting = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReport:
+					return opinion[550];
+				default:
+					return neutral[46];
+			}
+		case ArticleDesign.LiveBlog:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[600];
+				case ArticlePillar.Sport:
+					return sport[600];
+				case ArticlePillar.Opinion:
+					return WHITE;
+				case ArticlePillar.Culture:
+					return culture[600];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[500];
+				case ArticleSpecial.SpecialReport:
+					return brandAlt[400];
+				case ArticleSpecial.Labs:
+				default:
+					return BLACK;
+			}
+		case ArticleDesign.Media:
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReport:
+					return brandAlt[400];
+				case ArticlePillar.News:
+					return news[600];
+				case ArticlePillar.Sport:
+					return sport[600];
+				case ArticlePillar.Opinion:
+					return opinion[550];
+				case ArticlePillar.Lifestyle:
+				case ArticlePillar.Culture:
+				default:
+					return pillarPalette[format.theme][500];
+			}
+		default:
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReport:
+					return brandAltBackground.primary;
+				default:
+					return neutral[86];
+			}
+	}
+};
+
 const backgroundMatchNav = (): string => {
 	return '#FFE500';
 };
@@ -1156,6 +1209,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			lines: borderLines(format),
 			matchTab: matchTab(),
 			activeMatchTab: activeMatchTab(),
+			cardSupporting: borderCardSupporting(format),
 		},
 		topBar: {
 			card: topBarCard(format),

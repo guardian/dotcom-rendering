@@ -18,6 +18,7 @@ type Props = {
 	size?: SmallHeadlineSize;
 	byline?: string;
 	showByline?: boolean;
+	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 };
 
 const fontStyles = (size: SmallHeadlineSize) => {
@@ -105,6 +106,18 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	}
 };
 
+const lineStyles = (palette: Palette) => css`
+	:before {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		content: '';
+		width: 120px;
+		border-top: 1px solid ${palette.border.cardSupporting};
+	}
+`;
+
 export const CardHeadline = ({
 	headlineText,
 	format,
@@ -115,6 +128,7 @@ export const CardHeadline = ({
 	size = 'medium',
 	byline,
 	showByline,
+	showLine,
 }: Props) => {
 	const palette = decidePalette(format);
 	return (
@@ -129,6 +143,7 @@ export const CardHeadline = ({
 							size,
 							palette.background.analysisUnderline,
 						),
+					showLine && lineStyles(palette),
 				]}
 			>
 				<span>

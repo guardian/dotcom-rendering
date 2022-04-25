@@ -25,6 +25,7 @@ import { TopBar } from './components/TopBar';
 import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
+import { SupportingContent } from '../SupportingContent';
 
 export type Props = {
 	linkTo: string;
@@ -55,6 +56,7 @@ export type Props = {
 	dataLinkName?: string;
 	// Labs
 	branding?: Branding;
+	supportingContent?: DCRSupportingContent[];
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -140,6 +142,7 @@ export const Card = ({
 	minWidthInPixels,
 	dataLinkName,
 	branding,
+	supportingContent,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -165,76 +168,48 @@ export const Card = ({
 					imagePositionOnMobile={imagePositionOnMobile}
 					minWidthInPixels={minWidthInPixels}
 				>
-					<>
-						{imageUrl && (
-							<ImageWrapper
-								percentage={imageCoverage}
-								imagePositionOnMobile={imagePositionOnMobile}
-							>
-								<img
-									src={imageUrl}
-									alt=""
-									role="presentation"
+					{imageUrl && (
+						<ImageWrapper
+							percentage={imageCoverage}
+							imagePositionOnMobile={imagePositionOnMobile}
+						>
+							<img src={imageUrl} alt="" role="presentation" />
+							<>
+								{starRating !== undefined ? (
+									<StarRatingComponent rating={starRating} />
+								) : null}
+							</>
+						</ImageWrapper>
+					)}
+					<ContentWrapper percentage={contentCoverage}>
+						<Flex>
+							<HeadlineWrapper>
+								<CardHeadline
+									headlineText={headlineText}
+									format={format}
+									size={headlineSize}
+									showQuotes={showQuotes}
+									kickerText={
+										format.design === ArticleDesign.LiveBlog
+											? 'Live'
+											: kickerText
+									}
+									showPulsingDot={
+										format.design ===
+											ArticleDesign.LiveBlog ||
+										showPulsingDot
+									}
+									showSlash={
+										format.design ===
+											ArticleDesign.LiveBlog || showSlash
+									}
+									byline={byline}
+									showByline={showByline}
 								/>
-								<>
-									{starRating !== undefined ? (
-										<StarRatingComponent
-											rating={starRating}
-										/>
-									) : null}
-								</>
-							</ImageWrapper>
-						)}
-						<ContentWrapper percentage={contentCoverage}>
-							<Flex>
-								<HeadlineWrapper>
-									<CardHeadline
-										headlineText={headlineText}
-										format={format}
-										size={headlineSize}
-										showQuotes={showQuotes}
-										kickerText={
-											format.design ===
-											ArticleDesign.LiveBlog
-												? 'Live'
-												: kickerText
-										}
-										showPulsingDot={
-											format.design ===
-												ArticleDesign.LiveBlog ||
-											showPulsingDot
-										}
-										showSlash={
-											format.design ===
-												ArticleDesign.LiveBlog ||
-											showSlash
-										}
-										byline={byline}
-										showByline={showByline}
-									/>
-								</HeadlineWrapper>
-								<>
-									{avatar && (
-										<Hide when="above" breakpoint="tablet">
-											<AvatarContainer>
-												<Avatar
-													imageSrc={avatar.src}
-													imageAlt={avatar.alt}
-													palette={cardPalette}
-												/>
-											</AvatarContainer>
-										</Hide>
-									)}
-								</>
-							</Flex>
-							<div>
-								{standfirst && (
-									<StandfirstWrapper palette={cardPalette}>
-										{standfirst}
-									</StandfirstWrapper>
-								)}
+							</HeadlineWrapper>
+							<>
 								{avatar && (
-									<Hide when="below" breakpoint="tablet">
+									<Hide when="above" breakpoint="tablet">
 										<AvatarContainer>
 											<Avatar
 												imageSrc={avatar.src}
@@ -244,53 +219,72 @@ export const Card = ({
 										</AvatarContainer>
 									</Hide>
 								)}
-								<CardFooter
-									format={format}
-									age={
-										webPublicationDate ? (
-											<CardAge
-												format={format}
-												webPublicationDate={
-													webPublicationDate
-												}
-												showClock={showClock}
-											/>
-										) : undefined
-									}
-									mediaMeta={
-										format.design === ArticleDesign.Media &&
-										mediaType ? (
-											<MediaMeta
-												palette={cardPalette}
-												mediaType={mediaType}
-												mediaDuration={mediaDuration}
-											/>
-										) : undefined
-									}
-									commentCount={
-										showCommentCount &&
-										longCount &&
-										shortCount ? (
-											<CardCommentCount
-												palette={cardPalette}
-												long={longCount}
-												short={shortCount}
-											/>
-										) : undefined
-									}
-									cardBranding={
-										branding ? (
-											<CardBranding
-												branding={branding}
-												format={format}
-											/>
-										) : undefined
-									}
-								/>
-							</div>
-						</ContentWrapper>
-					</>
+							</>
+						</Flex>
+						<div>
+							{standfirst && (
+								<StandfirstWrapper palette={cardPalette}>
+									{standfirst}
+								</StandfirstWrapper>
+							)}
+							{avatar && (
+								<Hide when="below" breakpoint="tablet">
+									<AvatarContainer>
+										<Avatar
+											imageSrc={avatar.src}
+											imageAlt={avatar.alt}
+											palette={cardPalette}
+										/>
+									</AvatarContainer>
+								</Hide>
+							)}
+						</div>
+						{}
+					</ContentWrapper>
 				</CardLayout>
+				<CardFooter
+					format={format}
+					age={
+						webPublicationDate ? (
+							<CardAge
+								format={format}
+								webPublicationDate={webPublicationDate}
+								showClock={showClock}
+							/>
+						) : undefined
+					}
+					mediaMeta={
+						format.design === ArticleDesign.Media && mediaType ? (
+							<MediaMeta
+								palette={cardPalette}
+								mediaType={mediaType}
+								mediaDuration={mediaDuration}
+							/>
+						) : undefined
+					}
+					commentCount={
+						showCommentCount && longCount && shortCount ? (
+							<CardCommentCount
+								palette={cardPalette}
+								long={longCount}
+								short={shortCount}
+							/>
+						) : undefined
+					}
+					cardBranding={
+						branding ? (
+							<CardBranding branding={branding} format={format} />
+						) : undefined
+					}
+					supportingContent={
+						supportingContent && supportingContent.length > 0 ? (
+							<SupportingContent
+								supportingContent={supportingContent}
+								imagePosition={imagePosition}
+							/>
+						) : undefined
+					}
+				/>
 			</TopBar>
 		</CardLink>
 	);

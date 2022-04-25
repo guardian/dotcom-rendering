@@ -175,6 +175,7 @@ type Palette = {
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;
+		cardSupporting: Colour;
 	};
 	topBar: {
 		card: Colour;
@@ -567,6 +568,30 @@ type FEFrontPropertiesType = {
 	commercial: Record<string, unknown>;
 };
 
+type FESupportingContent = {
+	properties: {
+		href: string;
+	};
+	header?: {
+		kicker?: {
+			item: {
+				properties: {
+					kickerText: string;
+				};
+			};
+		};
+		headline: string;
+	};
+	format?: CAPIFormat;
+};
+
+type DCRSupportingContent = {
+	headline: string;
+	url: string;
+	kickerText?: string;
+	format: ArticleFormat;
+};
+
 type FEContainerType =
 	| 'dynamic/fast'
 	| 'dynamic/package'
@@ -703,7 +728,7 @@ type FEFrontCard = {
 	};
 	format?: CAPIFormat;
 	enriched?: Record<string, unknown>;
-	supportingContent?: unknown[];
+	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: string;
 	};
@@ -906,7 +931,7 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 
-type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
+type CardPercentageType = '25%' | '34%' | '50%' | '66%' | '75%' | '100%';
 
 type HeadlineLink = {
 	to: string; // the href for the anchor tag
@@ -1126,6 +1151,7 @@ interface BaseTrailType {
 interface TrailType extends BaseTrailType {
 	palette?: never;
 	format: ArticleFormat;
+	supportingContent?: DCRSupportingContent[];
 }
 
 interface CAPITrailType extends BaseTrailType {
