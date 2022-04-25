@@ -366,9 +366,7 @@ const textCardKicker = (format: ArticleFormat): string => {
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Letter)
 	)
-		// TODO: Pull this in from source as opinion[550]
-		// https://theguardian.design/2a1e5182b/p/492a30-light-palette
-		return '#ff9941';
+		return opinion[550];
 	if (format.theme === ArticleSpecial.SpecialReport) return brandAlt[400];
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -394,9 +392,7 @@ const textCardKicker = (format: ArticleFormat): string => {
 				case ArticlePillar.Sport:
 					return sport[600];
 				case ArticlePillar.Opinion:
-					// TODO: Pull this in from source as opinion[550]
-					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
-					return '#ff9941';
+					return opinion[550];
 				case ArticlePillar.Lifestyle:
 				case ArticlePillar.Culture:
 				default:
@@ -413,9 +409,7 @@ const textCardFooter = (format: ArticleFormat): string => {
 		case ArticleDesign.Letter:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
-					// TODO: Pull this in from souce once we see it here:
-					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
-					return '#ff9941';
+					return opinion[550];
 				default:
 					return neutral[46];
 			}
@@ -446,9 +440,7 @@ const textCardFooter = (format: ArticleFormat): string => {
 				case ArticlePillar.Sport:
 					return sport[600];
 				case ArticlePillar.Opinion:
-					// TODO: Pull this in from source as opinion[550]
-					// https://theguardian.design/2a1e5182b/p/492a30-light-palette
-					return '#ff9941';
+					return opinion[550];
 				case ArticlePillar.Lifestyle:
 				case ArticlePillar.Culture:
 				default:
