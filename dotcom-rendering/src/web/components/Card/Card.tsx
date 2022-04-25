@@ -320,9 +320,9 @@ export const Card = ({
 									</AvatarContainer>
 								</Hide>
 							)}
+							{showFooterInColumn &&
+								renderFooter({ forceVertical: true })}
 						</div>
-						{showFooterInColumn &&
-							renderFooter({ forceVertical: true })}
 					</ContentWrapper>
 				</CardLayout>
 				{!showFooterInColumn && renderFooter({})}
