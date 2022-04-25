@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans, text } from '@guardian/source-foundations';
+import { textSans, text, space } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 import { ClickToView } from './ClickToView';
 
@@ -17,6 +17,7 @@ const emailCaptionStyle = css`
 	${textSans.xxsmall()};
 	word-break: break-all;
 	color: ${text.supporting};
+	padding-bottom: ${space[1]}px;
 `;
 
 const embedContainerStyles = (isEmailEmbed: boolean) => css`
@@ -48,10 +49,10 @@ export const EmbedBlockComponent = ({
 			sourceDomain={sourceDomain}
 		>
 			<div data-cy="embed-block" css={embedContainerStyles(isEmailEmbed)}>
-				<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
 				{isEmailEmbed && caption && (
 					<div css={emailCaptionStyle}>{caption}</div>
 				)}
+				<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
 			</div>
 		</ClickToView>
 	);
