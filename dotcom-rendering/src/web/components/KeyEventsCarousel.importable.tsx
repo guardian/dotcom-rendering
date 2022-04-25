@@ -73,6 +73,13 @@ const buttonStyles = css`
 	}
 `;
 
+/**
+ *
+ * A function to scroll the key events carousel on click.
+ *
+ * @param {string} direction The direction to scroll
+ * @returns void
+ */
 function scrollOnClick(direction: 'left' | 'right') {
 	const carousel = document.getElementById('key-events-carousel');
 	if (carousel) {
