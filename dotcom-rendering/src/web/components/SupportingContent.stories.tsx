@@ -23,7 +23,7 @@ const basicCardProps: CardProps = {
 		theme: ArticlePillar.News,
 	},
 	headlineText: 'Headline text',
-	standfirst:
+	trailText:
 		'The 29-year-old source behind the biggest intelligence leak in the NSA’s history explains his motives',
 	headlineSize: 'medium',
 	kickerText: '',
