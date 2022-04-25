@@ -73,6 +73,17 @@ const buttonStyles = css`
 	}
 `;
 
+function scrollOnClick(direction: 'left' | 'right') {
+	const carousel = document.getElementById('key-events-carousel');
+	if (carousel) {
+		if (direction === 'left') {
+			carousel.scrollLeft += 180;
+		} else {
+			carousel.scrollLeft -= 180;
+		}
+	}
+}
+
 export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
@@ -108,24 +119,16 @@ export const KeyEventsCarousel = ({
 					<button
 						css={buttonStyles}
 						type="button"
-						onClick={() => {
-							const carousel = document.getElementById(
-								'key-events-carousel',
-							);
-							if (carousel) carousel.scrollLeft -= 180;
-						}}
+						aria-label="Move key events carousel backwards"
+						onClick={() => scrollOnClick('left')}
 					>
 						<SvgChevronLeftSingle />
 					</button>
 					<button
 						css={buttonStyles}
 						type="button"
-						onClick={() => {
-							const carousel = document.getElementById(
-								'key-events-carousel',
-							);
-							if (carousel) carousel.scrollLeft += 180;
-						}}
+						aria-label="Move key events carousel forwards"
+						onClick={() => scrollOnClick('right')}
 					>
 						<SvgChevronRightSingle />
 					</button>
