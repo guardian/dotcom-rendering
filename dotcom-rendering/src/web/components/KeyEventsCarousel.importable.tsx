@@ -27,24 +27,25 @@ const containerStyles = css`
 const carouselStyles = css`
 	display: flex;
 	justify-content: space-between;
-	position: relative;
 	flex-direction: row;
 	align-items: stretch;
 	width: fit-content;
+	margin-bottom: 34px;
 `;
 
 const buttonContainerStyles = css`
 	display: flex;
-	justify-content: space-between;
+	height: 34px;
 	margin-top: 10px;
 	margin-bottom: ${space[3]}px;
+	position: absolute;
 	bottom: 0;
-	position: relative;
+	justify-content: space-between;
+	width: 100%;
+	padding-right: 40px;
 `;
 
 const buttonStyles = css`
-	position: absolute;
-
 	border: 0 none;
 	border-radius: 100%;
 	height: 34px;
@@ -89,7 +90,7 @@ export const KeyEventsCarousel = ({
 			};
 		});
 	return (
-		<div css={containerStyles}>
+		<div id="key-events-carousel" css={containerStyles}>
 			<span css={carouselStyles}>
 				{transformedKeyEvents.map((keyEvent) => {
 					return (
@@ -104,10 +105,28 @@ export const KeyEventsCarousel = ({
 			</span>
 			<Hide until="desktop">
 				<span css={buttonContainerStyles}>
-					<button css={buttonStyles}>
+					<button
+						css={buttonStyles}
+						type="button"
+						onClick={() => {
+							const carousel = document.getElementById(
+								'key-events-carousel',
+							);
+							if (carousel) carousel.scrollLeft -= 180;
+						}}
+					>
 						<SvgChevronLeftSingle />
 					</button>
-					<button css={buttonStyles}>
+					<button
+						css={buttonStyles}
+						type="button"
+						onClick={() => {
+							const carousel = document.getElementById(
+								'key-events-carousel',
+							);
+							if (carousel) carousel.scrollLeft += 180;
+						}}
+					>
 						<SvgChevronRightSingle />
 					</button>
 				</span>
