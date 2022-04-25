@@ -3,11 +3,11 @@ import { css } from '@emotion/react';
 import { until, body } from '@guardian/source-foundations';
 
 type Props = {
-	children: string;
+	children: string | React.ReactNode;
 	palette: Palette;
 };
 
-export const StandfirstWrapper = ({ children, palette }: Props) => (
+export const TrailTextWrapper = ({ children, palette }: Props) => (
 	<div
 		css={css`
 			display: flex;

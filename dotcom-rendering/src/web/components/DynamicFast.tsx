@@ -22,6 +22,7 @@ export const DynamicFast = ({ trails }: Props) => {
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
+						trailText={primary.trailText}
 						headlineSize="large"
 						byline={primary.byline}
 						showByline={primary.showByline}
