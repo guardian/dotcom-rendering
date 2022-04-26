@@ -14,6 +14,9 @@ const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
 export default {
 	component: DiscussionLayout,
 	title: 'Components/DiscussionLayout',
+	chromatic: {
+		delay: 800,
+	},
 };
 export const Basic = () => {
 	return (
