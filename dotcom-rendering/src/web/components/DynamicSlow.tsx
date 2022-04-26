@@ -8,6 +8,11 @@ type Props = {
 	trails: TrailType[];
 };
 
+/**
+ * A `Card` container for up to 8 trails.
+ *
+ * @see {@link https://www.figma.com/file/sx2vMFHbL7SsUo0LcpsKNe/%E2%AC%A3--Front-container?node-id=123%3A137122 Figma designs}
+ */
 export const DynamicSlow = ({ trails }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
