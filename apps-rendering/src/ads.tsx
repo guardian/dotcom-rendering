@@ -29,7 +29,14 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 
 	const insertAd = (para: number, nodes: ReactNode[]): ReactNode[] =>
 		adIndices.includes(para)
-			? [...nodes, <AdSlot className={className} paragraph={para} />]
+			? [
+					...nodes,
+					<AdSlot
+						className={className}
+						paragraph={para}
+						key={para}
+					/>,
+			  ]
 			: nodes;
 
 	return flattenedNodes.reduce<{ paraNum: number; nodes: ReactNode[] }>(

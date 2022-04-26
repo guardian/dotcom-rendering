@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@emotion/react';
 import { Button, buttonThemeBrandAlt } from '@guardian/source-react-components';
-import { FC, ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 
 type Props = {
 	className: string;
