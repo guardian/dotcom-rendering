@@ -97,12 +97,12 @@ export const lineStyles = css`
 	${darkModeCss`
 		// Straight, Dashed, Squiggly
 		&[stroke], defs pattern[stroke], defs pattern g[stroke] {
-			stroke: ${neutral[20]}
+			stroke: ${neutral[20]};
 		}
 
 		// Dotted
 		defs pattern circle[fill]  {
-			fill: ${neutral[20]}
+			fill: ${neutral[20]};
 		}
     `}
 `;
