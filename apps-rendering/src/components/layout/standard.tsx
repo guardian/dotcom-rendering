@@ -1,13 +1,13 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import {
 	background,
 	breakpoints,
 	from,
 	neutral,
 } from '@guardian/source-foundations';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { DottedLines, SquigglyLines, StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { map, none, withDefault } from '@guardian/types';
 import Body from 'components/articleBody';
 import Epic from 'components/epic';
@@ -21,7 +21,7 @@ import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
 import Standfirst from 'components/standfirst';
 import Tags from 'components/tags';
-import { getFormat } from 'item';
+import { getFormat, Item } from 'item';
 import type {
 	MatchReport as MatchReportItem,
 	Review as ReviewItem,
@@ -37,6 +37,7 @@ import {
 	onwardStyles,
 } from 'styles';
 import { themeToPillarString } from 'themeStyles';
+import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 
 // ----- Styles ----- //
 
@@ -57,6 +58,22 @@ const BorderStyles = css`
 		margin: 0 auto;
 	}
 `;
+
+const decideLines = (item: Item, cssOverrides?: SerializedStyles | SerializedStyles[]): JSX.Element => {
+	const count = item.design === ArticleDesign.Comment ? 8 : 4;
+
+	if (item.theme === ArticlePillar.Sport) {
+		return <DottedLines cssOverrides={cssOverrides} count={count} />;
+	}
+
+	switch (item.design) {
+		case ArticleDesign.Feature:
+		case ArticleDesign.Recipe:
+			return <SquigglyLines cssOverrides={cssOverrides} count={count} />;
+		default:
+			return <StraightLines cssOverrides={cssOverrides} count={count} />;
+	}
+};
 
 interface Props {
 	item: StandardItem | ReviewItem | MatchReportItem;
@@ -114,9 +131,7 @@ const Standard: FC<Props> = ({ item, children }) => {
 						<Standfirst item={item} />
 						<ImmersiveCaption item={item} />
 					</div>
-					<div css={lineStyles}>
-						<StraightLines count={4} />
-					</div>
+					{decideLines(item, lineStyles)}
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />
 						<Logo item={item} />

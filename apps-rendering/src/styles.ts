@@ -86,22 +86,23 @@ export const liveblogWidthStyles: SerializedStyles = css`
 `;
 
 export const lineStyles = css`
+	display: block;
+
 	${from.wide} {
 		width: ${wideContentWidth}px;
 		margin-left: auto;
 		margin-right: auto;
 	}
-	div {
-		${darkModeCss`
-        background-image: repeating-linear-gradient(
-            to bottom,
-            ${neutral[20]},
-            ${neutral[20]} 1px,
-            transparent 1px,
-            transparent 3px
-            );
+
+	${darkModeCss`
+		[stroke] {
+			stroke: ${neutral[20]}
+		}
+
+		defs pattern [fill]  {
+			fill: ${neutral[20]}
+		}
     `}
-	}
 `;
 
 export const onwardStyles: SerializedStyles = css`
