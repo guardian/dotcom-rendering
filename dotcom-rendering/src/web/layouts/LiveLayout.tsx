@@ -773,7 +773,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											</Island>
 										</>
 									)}
-									{CAPIArticle.keyEvents?.length && (
+									{CAPIArticle.keyEvents?.length ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
@@ -783,13 +783,15 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												/>
 											</Island>
 										</Hide>
+									) : (
+										<></>
 									)}
 									<Accordion
 										supportsDarkMode={false}
 										accordionTitle="Live feed"
 										context="liveFeed"
 									>
-										{CAPIArticle.keyEvents?.length && (
+										{CAPIArticle.keyEvents?.length ? (
 											<Hide above="desktop">
 												<Island deferUntil="visible">
 													<FilterKeyEventsToggle
@@ -799,6 +801,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													/>
 												</Island>
 											</Hide>
+										) : (
+											<></>
 										)}
 										<ArticleContainer format={format}>
 											{pagination.currentPage !== 1 && (
