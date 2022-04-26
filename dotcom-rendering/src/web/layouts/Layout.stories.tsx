@@ -107,7 +107,17 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 						const stories = storiesOf(
 							`Layouts/${displayName}/${designName}`,
 							module,
-						);
+						).addParameters({
+							chromatic: {
+								viewports: [
+									breakpoints.mobile,
+									breakpoints.tablet,
+									breakpoints.wide,
+								],
+								diffThreshold: 0.2,
+								pauseAnimationAtEnd: true,
+							},
+						});
 
 						const fixture =
 							Fixtures[designName] || Fixtures.Article;
