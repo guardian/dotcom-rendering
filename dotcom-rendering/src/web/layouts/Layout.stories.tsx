@@ -133,7 +133,7 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 				for (const [specialName] of Object.entries(ArticleSpecial)) {
 					if (Number.isNaN(Number(specialName))) {
 						const stories = storiesOf(
-							`Layouts/Format variations/${displayName}/${designName}`,
+							`Layouts/${displayName}/${designName}`,
 							module,
 						);
 
