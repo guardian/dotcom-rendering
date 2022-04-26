@@ -16,6 +16,7 @@ export default {
 	title: 'Components/DiscussionLayout',
 	chromatic: {
 		delay: 800,
+		pauseAnimationAtEnd: true,
 	},
 };
 export const Basic = () => {
