@@ -26,9 +26,11 @@ export default {
 	},
 };
 
-// HydratedLayout is used here to simulated the hydration that happens after we init react on
-// the client. We need a separate component so that we can make use of useEffect to ensure
-// the hydrate step only runs once the dom has been rendered.
+/**
+ * HydratedLayout is used here to simulated the hydration that happens after we init react on
+ * the client. We need a separate component so that we can make use of `useEffect` to ensure
+ * the hydrate step only runs once the DOM has been rendered.
+ */
 const HydratedLayout = ({
 	ServerCAPI,
 	modifyPage,
