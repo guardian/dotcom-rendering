@@ -25,9 +25,8 @@ const flexEnd = css`
 
 const linesWrapperStyles = css`
 	/* Fill the container */
-	flex-grow: 1;
-	/* Push the lines down to align with the bottom of the card */
-	margin-top: 5px;
+	flex: 1;
+	align-self: flex-end;
 `;
 
 export const CardFooter = ({
@@ -52,7 +51,10 @@ export const CardFooter = ({
 				<div>{supportingContent}</div>
 				<div css={spaceBetween}>
 					{age}
-					<StraightLines cssOverrides={linesWrapperStyles} count={4} />
+					<StraightLines
+						cssOverrides={linesWrapperStyles}
+						count={4}
+					/>
 					{commentCount}
 				</div>
 			</footer>
