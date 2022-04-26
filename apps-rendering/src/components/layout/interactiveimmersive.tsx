@@ -81,7 +81,7 @@ const InteractiveImmersive: FC<Props> = ({ item, children }) => {
 						<Standfirst item={item} />
 						<ImmersiveCaption item={item} />
 					</div>
-						<StraightLines count={4} cssOverrides={lineStyles} />
+					<StraightLines count={4} cssOverrides={lineStyles} />
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />
 						<Logo item={item} />
