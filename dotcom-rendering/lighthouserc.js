@@ -1,7 +1,10 @@
 module.exports = {
   ci: {
     collect: {
-      url: ['http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/2020/feb/08/hungary-now-for-the-new-right-what-venezuela-once-was-for-the-left#noads'],
+      url: [
+        'http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/2020/feb/08/hungary-now-for-the-new-right-what-venezuela-once-was-for-the-left#noads',
+        'http://localhost:9000/Front?url=https://www.theguardian.com/uk'
+      ],
       startServerCommand: 'NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js',
       numberOfRuns: '10',
       puppeteerScript: './scripts/lighthouse/puppeteer-script.js',
