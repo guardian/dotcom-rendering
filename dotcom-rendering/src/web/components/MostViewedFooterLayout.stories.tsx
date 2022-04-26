@@ -13,7 +13,7 @@ import {
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 
-const HydratedLayout = ({ children }: { children: React.ReactNode }) => {
+const Hydrated = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
 		doStorybookHydration();
 	});
@@ -35,7 +35,7 @@ export const withTwoTabs = () => {
 	});
 
 	return (
-		<HydratedLayout>
+		<Hydrated>
 			<ElementContainer>
 				<MostViewedFooterLayout
 					format={{
@@ -47,7 +47,7 @@ export const withTwoTabs = () => {
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				/>
 			</ElementContainer>
-		</HydratedLayout>
+		</Hydrated>
 	);
 };
 withTwoTabs.story = { name: 'with two tabs' };
@@ -59,7 +59,7 @@ export const withOneTabs = () => {
 	});
 
 	return (
-		<HydratedLayout>
+		<Hydrated>
 			<ElementContainer>
 				<MostViewedFooterLayout
 					format={{
@@ -70,7 +70,7 @@ export const withOneTabs = () => {
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				/>
 			</ElementContainer>
-		</HydratedLayout>
+		</Hydrated>
 	);
 };
 withOneTabs.story = { name: 'with one tab' };
@@ -82,7 +82,7 @@ export const withNoMostSharedImage = () => {
 	});
 
 	return (
-		<HydratedLayout>
+		<Hydrated>
 			<ElementContainer>
 				<MostViewedFooterLayout
 					format={{
@@ -93,7 +93,7 @@ export const withNoMostSharedImage = () => {
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				/>
 			</ElementContainer>
-		</HydratedLayout>
+		</Hydrated>
 	);
 };
 withNoMostSharedImage.story = { name: 'with a missing image on most shared' };
