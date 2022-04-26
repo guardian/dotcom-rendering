@@ -114,7 +114,7 @@ const MultipleCards = () => (
 		<Cards theme={ArticlePillar.Lifestyle} count={7} />
 		<Cards theme={ArticlePillar.Sport} count={7} />
 		<Cards theme={ArticlePillar.Culture} count={7} />
-		<Cards theme={ArticlePillar.Opinion} count={1} />
+		<Cards theme={ArticlePillar.Opinion} count={7} />
 		<Cards theme={ArticleSpecial.SpecialReport} count={7} />
 	</>
 );
