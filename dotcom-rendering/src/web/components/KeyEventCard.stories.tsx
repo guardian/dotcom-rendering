@@ -6,8 +6,8 @@ import {
 	ArticlePillar,
 } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
-import type { KeyEvent } from './KeyEventsCards';
-import { KeyEventsCard } from './KeyEventsCards';
+import type { KeyEvent } from './KeyEventCard';
+import { KeyEventCard } from './KeyEventCard';
 
 const getDate = (milliSeconds = 1, seconds = 1, minutes = 1, hours = 1) =>
 	new Date(Date.now() - milliSeconds * seconds * minutes * hours);
@@ -86,7 +86,7 @@ const wrapperStyles = css`
 const Cards = ({ theme, count }: { theme: ArticleTheme; count: number }) => (
 	<ul css={wrapperStyles}>
 		{events.slice(0, count).map((event) => (
-			<KeyEventsCard
+			<KeyEventCard
 				text={event.text}
 				url={event.url}
 				date={event.date}
@@ -120,8 +120,8 @@ const MultipleCards = () => (
 );
 
 export default {
-	component: KeyEventsCard,
-	title: 'Components/KeyEventsCard',
+	component: KeyEventCard,
+	title: 'Components/KeyEventCard',
 };
 
 export { SingleCard, MultipleCards };

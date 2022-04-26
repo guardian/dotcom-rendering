@@ -81,7 +81,7 @@ const timeStyles = css`
 	display: block;
 `;
 
-export const KeyEventsCard = ({ text, date, url, format }: KeyEvent) => {
+export const KeyEventCard = ({ text, date, url, format }: KeyEvent) => {
 	const palette = decidePalette(format);
 
 	return (
