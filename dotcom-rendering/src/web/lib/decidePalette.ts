@@ -150,6 +150,27 @@ const textStandfirst = (format: ArticleFormat): string => {
 	return BLACK;
 };
 
+const textLastUpdated = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.LiveBlog) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[600];
+			case ArticlePillar.Culture:
+				return culture[600];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[600];
+			case ArticlePillar.Sport:
+				return sport[600];
+			case ArticlePillar.Opinion:
+				return opinion[600];
+			case ArticleSpecial.Labs:
+			case ArticleSpecial.SpecialReport:
+				return news[600];
+		}
+	}
+	return BLACK;
+};
+
 const textTwitterHandle = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -1137,6 +1158,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
+			lastUpdated: textLastUpdated(format),
 			branding: textBranding(format),
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),

@@ -13,6 +13,8 @@ import { Hide } from './Hide';
 import { Badge } from './Badge';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { Island } from './Island';
+import { PulsingDot } from './PulsingDot.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -360,6 +362,22 @@ export const SeriesSectionLink = ({
 				return (
 					// Sometimes the tags/titles are shown inline, sometimes stacked
 					<div css={!badge && rowBelowLeftCol(format)}>
+						<Hide when="above" breakpoint="desktop">
+							{format.design === ArticleDesign.LiveBlog && (
+								<span
+									css={[
+										fontStyles(format),
+										css`
+											color: ${seriesTitleColour};
+										`,
+									]}
+								>
+									<Island deferUntil="idle">
+										<PulsingDot />
+									</Island>
+								</span>
+							)}
+						</Hide>
 						<a
 							href={`${guardianBaseURL}/${tag.id}`}
 							css={[
@@ -410,25 +428,43 @@ export const SeriesSectionLink = ({
 			}
 			// There's no tag so fallback to section title
 			return (
-				<a
-					href={`${guardianBaseURL}/${sectionUrl}`}
-					css={[
-						sectionLabelLink,
-						css`
-							color: ${sectionTitleColour};
-							background-color: ${palette.background
-								.sectionTitle};
-						`,
-						marginRight,
-						fontStyles(format),
-						breakWord,
-					]}
-					data-component="section"
-					data-link-name="article section"
-					className={interactiveLegacyClasses.labelLink}
-				>
-					<span>{sectionLabel}</span>
-				</a>
+				<>
+					<Hide when="above" breakpoint="desktop">
+						{format.design === ArticleDesign.LiveBlog && (
+							<span
+								css={[
+									fontStyles(format),
+									css`
+										color: ${seriesTitleColour};
+									`,
+								]}
+							>
+								<Island deferUntil="idle">
+									<PulsingDot />
+								</Island>
+							</span>
+						)}
+					</Hide>
+					<a
+						href={`${guardianBaseURL}/${sectionUrl}`}
+						css={[
+							sectionLabelLink,
+							css`
+								color: ${sectionTitleColour};
+								background-color: ${palette.background
+									.sectionTitle};
+							`,
+							marginRight,
+							fontStyles(format),
+							breakWord,
+						]}
+						data-component="section"
+						data-link-name="article section"
+						className={interactiveLegacyClasses.labelLink}
+					>
+						<span>{sectionLabel}</span>
+					</a>
+				</>
 			);
 		}
 	}
