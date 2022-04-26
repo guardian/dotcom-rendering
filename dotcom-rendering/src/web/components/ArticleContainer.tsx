@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
+import { useAB } from '../lib/useAB';
 
 import { labelStyles, carrotAdStyles } from './AdSlot';
 
@@ -8,6 +9,8 @@ type Props = {
 	format: ArticleFormat;
 	children: React.ReactNode;
 };
+
+type ABVariants = 'ab-test-variant' | 'ab-test-control' | 'ab-test-not-in-test';
 
 const articleWidth = (format: ArticleFormat) => {
 	switch (format.design) {
@@ -47,58 +50,91 @@ const articleWrapper = css`
 	z-index: 1;
 `;
 
-const articleAdStyles = css`
-	.ad-slot {
-		@media print {
-			/* stylelint-disable-next-line declaration-no-important */
-			display: none !important;
+const articleAdStyles = (abVariant: ABVariants) => {
+	const sharedCSS = css`
+		.ad-slot {
+			@media print {
+				/* stylelint-disable-next-line declaration-no-important */
+				display: none !important;
+			}
+			&.ad-slot--collapse {
+				display: none;
+			}
 		}
-		&.ad-slot--collapse {
-			display: none;
+		.ad-slot--mostpop {
+			${from.desktop} {
+				margin: 0;
+				width: auto;
+			}
 		}
-	}
-	.ad-slot--mostpop {
-		${from.desktop} {
-			margin: 0;
-			width: auto;
+		.ad-slot-container {
+			max-width: 300px;
 		}
-	}
-	.ad-slot--inline1 {
-		margin: 12px auto;
-		text-align: center;
-		/* Unlike other inlines we don't float right inline1 */
-		/* Prevent merger with any nearby float left elements e.g. rich-links */
-		${until.tablet} {
-			clear: left;
+		.ad-slot--fluid {
+			width: 100%;
+		}
+		.ad-slot--liveblog-inline {
+			margin: 0 auto ${space[3]}px;
+
+			.ad-slot__label {
+				color: ${neutral[46]};
+				border-top-color: ${neutral[86]};
+			}
+
+			&.ad-slot--outstream {
+				${from.tablet} {
+					width: 620px;
+				}
+			}
+
+			&:not(.ad-slot--outstream) {
+				width: 300px;
+				background-color: ${neutral[93]};
+				text-align: center;
+
+				${from.tablet} {
+					width: 100%;
+					padding-bottom: ${space[6]}px;
+
+					& > div:not(.ad-slot__label) {
+						width: 300px;
+						margin-left: auto;
+						margin-right: auto;
+					}
+				}
+			}
+
+			&.ad-slot--fluid {
+				background-color: green;
+				width: 100%;
+			}
+		}
+	`;
+	const controlCSS = css`
+		.ad-slot--inline,
+		.ad-slot-liveblog--inline {
 			width: 300px;
+			margin: 12px auto;
+			min-width: 160px;
+			min-height: 274px;
+			text-align: center;
+
+			${from.tablet} {
+				margin-right: -100px;
+				width: auto;
+				float: right;
+				margin-top: 4px;
+				margin-left: 20px;
+			}
+			${from.desktop} {
+				width: auto;
+				float: right;
+				margin: 0;
+				margin-top: 4px;
+				margin-left: 20px;
+			}
 		}
-		/* Reserve full width with a background colour */
-		${from.tablet} {
-			background-color: ${neutral[97]};
-		}
-	}
-	.ad-slot--inline:not(.ad-slot--inline1),
-	.ad-slot-liveblog--inline:not(.ad-slot--inline1) {
-		width: 300px;
-		margin: 12px auto;
-		min-width: 300px;
-		min-height: 274px;
-		text-align: center;
-		${from.tablet} {
-			margin-right: -100px;
-			width: auto;
-			float: right;
-			margin-top: 4px;
-			margin-left: 20px;
-		}
-		${from.desktop} {
-			width: auto;
-			float: right;
-			margin: 0;
-			margin-top: 4px;
-			margin-left: 20px;
-		}
-		&.ad-slot--offset-right {
+		.ad-slot--offset-right {
 			${from.desktop} {
 				float: right;
 				width: auto;
@@ -109,58 +145,92 @@ const articleAdStyles = css`
 				margin-right: -398px;
 			}
 		}
-	}
-	.ad-slot-container {
-		max-width: 300px;
-	}
-	.ad-slot--fluid {
-		width: 100%;
-	}
-	.ad-slot--liveblog-inline {
-		margin: 0 auto ${space[3]}px;
-
-		.ad-slot__label {
-			color: ${neutral[46]};
-			border-top-color: ${neutral[86]};
-		}
-
-		&.ad-slot--outstream {
+		.ad-slot--outstream {
 			${from.tablet} {
-				width: 620px;
-			}
-		}
-
-		&:not(.ad-slot--outstream) {
-			width: 300px;
-			background-color: ${neutral[93]};
-			text-align: center;
-
-			${from.tablet} {
+				margin-left: 0;
 				width: 100%;
-				padding-bottom: ${space[6]}px;
-
-				& > div:not(.ad-slot__label) {
-					width: 300px;
-					margin-left: auto;
-					margin-right: auto;
+				.ad-slot__label {
+					margin-left: 35px;
+					margin-right: 35px;
 				}
 			}
 		}
-
-		&.ad-slot--fluid {
-			background-color: green;
-			width: 100%;
+	`;
+	const variantCSS = css`
+		.ad-slot--inline1 {
+			margin: 12px auto;
+			text-align: center;
+			/* Unlike other inlines we don't float right inline1 */
+			/* Prevent merger with any nearby float left elements e.g. rich-links */
+			${until.tablet} {
+				clear: left;
+				width: 300px;
+			}
+			/* Reserve full width with a background colour */
+			${from.tablet} {
+				background-color: ${neutral[97]};
+			}
 		}
+		.ad-slot--inline:not(.ad-slot--inline1),
+		.ad-slot-liveblog--inline:not(.ad-slot--inline1) {
+			width: 300px;
+			margin: 12px auto;
+			min-width: 300px;
+			min-height: 274px;
+			text-align: center;
+			${from.tablet} {
+				margin-right: -100px;
+				width: auto;
+				float: right;
+				margin-top: 4px;
+				margin-left: 20px;
+			}
+			${from.desktop} {
+				width: auto;
+				float: right;
+				margin: 0;
+				margin-top: 4px;
+				margin-left: 20px;
+			}
+			&.ad-slot--offset-right {
+				${from.desktop} {
+					float: right;
+					width: auto;
+					margin-right: -318px;
+				}
+
+				${from.wide} {
+					margin-right: -398px;
+				}
+			}
+		}
+	`;
+	if (abVariant === 'ab-test-variant') {
+		return [
+			sharedCSS,
+			variantCSS,
+		];
 	}
-`;
+	return [
+		sharedCSS,
+		controlCSS,
+	];
+}
 
 export const ArticleContainer = ({ children, format }: Props) => {
+	const ABTestAPI = useAB();
+	const abTestVariant: ABVariants =
+		(ABTestAPI?.isUserInVariant('Inline1ContainerSizing', 'control') &&
+			'ab-test-control') ||
+		(ABTestAPI?.isUserInVariant('Inline1ContainerSizing', 'variant') &&
+			'ab-test-variant') ||
+		'ab-test-not-in-test';
 	return (
 		<div
 			css={[
 				articleWrapper,
 				articleWidth(format),
-				articleAdStyles,
+				articleAdStyles(abTestVariant),
 				carrotAdStyles,
 				labelStyles,
 			]}
