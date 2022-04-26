@@ -1,12 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleFormat } from '@guardian/libs';
-import { neutral, brandAlt, space } from '@guardian/source-foundations';
-import {
-	Hide,
-	SvgChevronLeftSingle,
-	SvgChevronRightSingle,
-} from '@guardian/source-react-components';
 import { KeyEventsCard } from './KeyEventsCards';
+import { CarouselButtons } from './KeyEventsCarouselButtons';
 
 interface Props {
 	keyEvents: Block[];
@@ -33,64 +28,6 @@ const carouselStyles = css`
 	margin-bottom: 34px;
 `;
 
-const buttonContainerStyles = css`
-	display: flex;
-	height: 34px;
-	margin-top: 10px;
-	margin-bottom: ${space[3]}px;
-	position: absolute;
-	bottom: 0;
-	justify-content: space-between;
-	width: 100%;
-	padding-right: 40px;
-`;
-
-const buttonStyles = css`
-	border: 0 none;
-	border-radius: 100%;
-	height: 34px;
-	width: 34px;
-	cursor: pointer;
-	padding: 0;
-	background-color: ${neutral[0]};
-
-	&:active,
-	&:hover {
-		outline: none;
-		background-color: ${brandAlt[400]};
-		svg {
-			fill: ${neutral[7]};
-		}
-	}
-
-	&:focus {
-		outline: none;
-	}
-
-	svg {
-		fill: ${neutral[100]};
-		height: 34px;
-	}
-`;
-
-/**
- *
- * A function to scroll the key events carousel on click.
- *
- * @param {string} direction The direction to scroll
- * @returns void
- */
-function scrollOnClick(direction: 'left' | 'right') {
-	const carousel = document.getElementById('key-events-carousel');
-	if (carousel) {
-		if (direction === 'left') {
-			carousel.scrollLeft += 180;
-		} else {
-			carousel.scrollLeft -= 180;
-		}
-	}
-}
-
 export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
@@ -109,7 +46,7 @@ export const KeyEventsCarousel = ({
 		});
 	return (
 		<div id="key-events-carousel" css={containerStyles}>
-			<span css={carouselStyles}>
+			<span id="key-events-cards" css={carouselStyles}>
 				{transformedKeyEvents.map((keyEvent) => {
 					return (
 						<KeyEventsCard
@@ -121,26 +58,8 @@ export const KeyEventsCarousel = ({
 					);
 				})}
 			</span>
-			<Hide until="desktop">
-				<span css={buttonContainerStyles}>
-					<button
-						css={buttonStyles}
-						type="button"
-						aria-label="Move key events carousel backwards"
-						onClick={() => scrollOnClick('left')}
-					>
-						<SvgChevronLeftSingle />
-					</button>
-					<button
-						css={buttonStyles}
-						type="button"
-						aria-label="Move key events carousel forwards"
-						onClick={() => scrollOnClick('right')}
-					>
-						<SvgChevronRightSingle />
-					</button>
-				</span>
-			</Hide>
+
+			<CarouselButtons />
 		</div>
 	);
 };
