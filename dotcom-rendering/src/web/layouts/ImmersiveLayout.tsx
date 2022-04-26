@@ -348,6 +348,9 @@ export const ImmersiveLayout = ({
 											<GuardianLabsLines />
 										) : (
 											<Lines
+												cssOverrides={css`
+													display: block;
+												`}
 												effect={decideLineEffect(
 													ArticleDesign.Standard,
 													format.theme,

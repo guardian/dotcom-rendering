@@ -537,6 +537,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<Hide from="desktop">
 									<div css={sidePaddingDesktop}>
 										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
 											count={decideLineCount(
 												format.design,
 											)}
@@ -647,6 +650,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<Hide until="desktop">
 									<div css={[maxWidth, sidePaddingDesktop]}>
 										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
 											count={decideLineCount(
 												format.design,
 											)}

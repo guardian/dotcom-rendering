@@ -484,6 +484,9 @@ export const ShowcaseLayout = ({
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									<Lines
+										cssOverrides={css`
+											display: block;
+										`}
 										count={decideLineCount(format.design)}
 										effect={decideLineEffect(
 											format.design,

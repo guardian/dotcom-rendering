@@ -593,6 +593,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										<GuardianLabsLines />
 									) : (
 										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
 											count={decideLineCount(
 												format.design,
 											)}
