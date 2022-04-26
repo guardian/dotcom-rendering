@@ -516,6 +516,7 @@ interface CAPIArticleType {
 
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;
+	matchType?: string;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
