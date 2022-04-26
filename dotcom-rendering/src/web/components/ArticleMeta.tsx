@@ -9,7 +9,7 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Contributor } from './Contributor';
 import { Avatar } from './Avatar';
 import { Counts } from './Counts';
@@ -351,11 +351,7 @@ export const ArticleMeta = ({
 				)}
 				{format.theme === ArticleSpecial.Labs ? (
 					<div css={stretchLines}>
-						<Lines
-							count={1}
-							effect="straight"
-							color={border.primary}
-						/>
+						<StraightLines count={1} color={border.primary} />
 						<div
 							css={css`
 								height: ${space[1]}px;

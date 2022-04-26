@@ -11,7 +11,10 @@ import {
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 import { ArticleBody } from '../components/ArticleBody';
 import { RightColumn } from '../components/RightColumn';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -454,7 +457,7 @@ export const ImmersiveLayout = ({
 										/>
 									</Island>
 								)}
-								<Lines count={4} effect="straight" />
+								<StraightLines count={4} />
 								<SubMeta
 									format={format}
 									subMetaKeywordLinks={

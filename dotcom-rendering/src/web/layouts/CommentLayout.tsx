@@ -11,7 +11,7 @@ import {
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 
 import { ArticleBody } from '../components/ArticleBody';
 import { RightColumn } from '../components/RightColumn';
@@ -405,7 +405,7 @@ export const CommentLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<Lines count={4} effect="straight" />
+						<StraightLines count={4} />
 					</ElementContainer>
 				</SendToBack>
 			</div>
@@ -466,14 +466,14 @@ export const CommentLayout = ({
 												/>
 											</div>
 										)}
-										<Lines count={8} effect="straight" />
+										<StraightLines count={8} />
 									</div>
 								</div>
 							</div>
 						</GridItem>
 						<GridItem area="lines">
 							<div css={pushToBottom}>
-								<Lines count={8} effect="straight" />
+								<StraightLines count={8} />
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
@@ -613,7 +613,7 @@ export const CommentLayout = ({
 											/>
 										</Island>
 									)}
-									<Lines count={4} effect="straight" />
+									<StraightLines count={4} />
 									<SubMeta
 										format={format}
 										subMetaKeywordLinks={

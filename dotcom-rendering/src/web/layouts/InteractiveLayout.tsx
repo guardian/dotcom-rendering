@@ -15,7 +15,10 @@ import {
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 
 import { StarRating } from '../components/StarRating/StarRating';
 import { ArticleBody } from '../components/ArticleBody';
@@ -351,7 +354,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						padded={false}
 						showTopBorder={false}
 					>
-						<Lines count={4} effect="straight" />
+						<StraightLines count={4} />
 					</ElementContainer>
 				)}
 			</div>
@@ -545,9 +548,9 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isDev={!!CAPIArticle.config.isDev}
 									/>
 
-									{/* <Lines data-print-layout="hide" count={4} /> */}
+									{/* <StraightLines data-print-layout="hide" count={4} /> */}
 									<div css={stretchMetaLines}>
-										<Lines
+										<StraightLines
 											count={4}
 											data-print-layout="hide"
 										/>

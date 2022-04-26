@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { headline } from '@guardian/source-foundations';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 
 import { useApi } from '../lib/useApi';
 import { decideTrail } from '../lib/decideTrail';
@@ -56,7 +56,7 @@ export const MostViewedRight = ({
 				css={[wrapperStyles, stickToTop && stickyStyles]}
 				data-component="geo-most-popular"
 			>
-				<Lines count={4} effect="straight" />
+				<StraightLines count={4} />
 				<h3 css={headingStyles}>Most viewed</h3>
 				<ul data-link-name="Right hand most popular geo GB">
 					{trails.map((trail, index) => (

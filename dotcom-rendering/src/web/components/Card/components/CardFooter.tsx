@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 
 type Props = {
 	format: ArticleFormat;
@@ -52,9 +52,7 @@ export const CardFooter = ({
 				<div>{supportingContent}</div>
 				<div css={spaceBetween}>
 					{age}
-					<div css={linesWrapperStyles}>
-						<Lines count={4} />
-					</div>
+					<StraightLines cssOverrides={linesWrapperStyles} count={4} />
 					{commentCount}
 				</div>
 			</footer>

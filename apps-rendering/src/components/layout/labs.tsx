@@ -7,7 +7,7 @@ import {
 	from,
 	neutral,
 } from '@guardian/source-foundations';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { map, withDefault } from '@guardian/types';
 import Body from 'components/articleBody';
 import Footer from 'components/footer';
@@ -73,7 +73,7 @@ const Labs: FC<Props> = ({ item, children }) => {
 						</div>
 					</div>
 					<div css={lineStyles}>
-						<Lines count={4} />
+						<StraightLines count={4} />
 					</div>
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />

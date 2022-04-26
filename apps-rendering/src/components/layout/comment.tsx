@@ -9,7 +9,7 @@ import {
 	opinion,
 	remSpace,
 } from '@guardian/source-foundations';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/articleBody';
 import Byline from 'components/byline';
 import Cutout from 'components/cutout';
@@ -89,7 +89,7 @@ const Comment: FC<Props> = ({ item, children }) => (
 					format={item}
 				/>
 				<div css={[commentLineStylePosition, lineStyles]}>
-					<Lines count={8} />
+					<StraightLines count={8} />
 				</div>
 
 				<div css={articleWidthStyles}>

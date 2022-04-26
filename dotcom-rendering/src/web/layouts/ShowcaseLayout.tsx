@@ -13,7 +13,10 @@ import {
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 import { ArticleBody } from '../components/ArticleBody';
 import { RightColumn } from '../components/RightColumn';
 import { ArticleTitle } from '../components/ArticleTitle';
@@ -349,7 +352,7 @@ export const ShowcaseLayout = ({
 								padded={false}
 								showTopBorder={false}
 							>
-								<Lines count={4} effect="straight" />
+								<StraightLines count={4} />
 							</ElementContainer>
 						</SendToBack>
 					</div>
@@ -586,7 +589,7 @@ export const ShowcaseLayout = ({
 										/>
 									</Island>
 								)}
-								<Lines count={4} effect="straight" />
+								<StraightLines count={4} />
 								<SubMeta
 									format={format}
 									subMetaKeywordLinks={
