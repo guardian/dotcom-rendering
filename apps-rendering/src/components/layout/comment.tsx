@@ -88,10 +88,10 @@ const Comment: FC<Props> = ({ item, children }) => (
 					className={articleWidthStyles}
 					format={item}
 				/>
-				<div css={[commentLineStylePosition, lineStyles]}>
-					<StraightLines count={8} />
-				</div>
-
+				<StraightLines
+					cssOverrides={[commentLineStylePosition, lineStyles]}
+					count={8}
+				/>
 				<div css={articleWidthStyles}>
 					<Standfirst item={item} />
 				</div>
