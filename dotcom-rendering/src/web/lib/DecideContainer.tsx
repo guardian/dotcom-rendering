@@ -13,9 +13,6 @@ export const DecideContainer = ({ trails, containerType }: Props) => {
 		case 'fixed/large/slow-XIV':
 			return <FixedLargeSlowXIV trails={trails} />;
 		default:
-			// TODO: This default allows us to render fronts in-development where we might
-			// not support all the container types, but it should be removed / re-investigated
-			// before fronts are released
-			return <DynamicFast trails={trails} />;
+			return <p>{containerType} is not yet supported</p>;
 	}
 };
