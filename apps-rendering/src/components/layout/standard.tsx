@@ -1,13 +1,19 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import {
 	background,
 	breakpoints,
 	from,
 	neutral,
 } from '@guardian/source-foundations';
-import { DottedLines, SquigglyLines, StraightLines } from '@guardian/source-react-components-development-kitchen';
+import {
+	DottedLines,
+	SquigglyLines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 import { map, none, withDefault } from '@guardian/types';
 import Body from 'components/articleBody';
 import Epic from 'components/epic';
@@ -21,8 +27,9 @@ import RelatedContent from 'components/relatedContent';
 import Series from 'components/series';
 import Standfirst from 'components/standfirst';
 import Tags from 'components/tags';
-import { getFormat, Item } from 'item';
+import { getFormat } from 'item';
 import type {
+	Item,
 	MatchReport as MatchReportItem,
 	Review as ReviewItem,
 	Standard as StandardItem,
@@ -37,7 +44,6 @@ import {
 	onwardStyles,
 } from 'styles';
 import { themeToPillarString } from 'themeStyles';
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 
 // ----- Styles ----- //
 
@@ -59,7 +65,10 @@ const BorderStyles = css`
 	}
 `;
 
-const decideLines = (item: Item, cssOverrides?: SerializedStyles | SerializedStyles[]): JSX.Element => {
+const decideLines = (
+	item: Item,
+	cssOverrides?: SerializedStyles | SerializedStyles[],
+): JSX.Element => {
 	const count = item.design === ArticleDesign.Comment ? 8 : 4;
 
 	if (item.theme === ArticlePillar.Sport) {
