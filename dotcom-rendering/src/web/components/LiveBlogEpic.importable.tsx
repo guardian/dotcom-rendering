@@ -171,9 +171,10 @@ const usePayload = ({
  *
  * Dynamically imports and renders a given module
  *
- * @param url string - The url of the compoenent
- * @param name string - The name of the compoenent
- * @param props object - The props of the compoenent
+ * @param props
+ * @param props.url string - The url of the component
+ * @param props.name tring - The name of the component
+ * @param props.props object - The props of the component
  * @returns The resulting react component
  */
 const Render = ({
