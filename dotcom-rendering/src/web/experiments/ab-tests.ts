@@ -9,6 +9,7 @@ import {
 import { commercialGptLazyLoad } from './tests/commercial-gpt-lazy-load';
 import { commercialLazyLoadMargin } from './tests/commercial-lazy-load-margin';
 import { prebidPriceGranularity } from './tests/prebid-price-granularity';
+import { inline1ContainerSizing } from './tests/inline1-container-sizing';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -21,4 +22,5 @@ export const tests: ABTest[] = [
 	commercialGptLazyLoad,
 	commercialLazyLoadMargin,
 	prebidPriceGranularity,
+	inline1ContainerSizing,
 ];
