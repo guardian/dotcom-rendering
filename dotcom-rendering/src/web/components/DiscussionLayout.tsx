@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source-foundations';
+import { ArticleDisplay } from '@guardian/libs';
 import { ContainerLayout } from './ContainerLayout';
 import { Flex } from './Flex';
 import { RightColumn } from './RightColumn';
@@ -46,6 +47,11 @@ export const DiscussionLayout = ({
 							enableDiscussionSwitch={enableDiscussionSwitch}
 						/>
 					</Island>
+				}
+				leftColSize={
+					format.display === ArticleDisplay.Standard
+						? 'wide'
+						: 'compact'
 				}
 			>
 				<Flex>

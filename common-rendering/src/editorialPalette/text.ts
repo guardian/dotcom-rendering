@@ -24,11 +24,49 @@ import { Colour } from '.';
 
 const branding = (_format: ArticleFormat): Colour => {
 	return neutral[20];
-}
+};
 
 const brandingDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
-}
+};
+
+const dropCap = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.News:
+			return news[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
+};
+
+const dropCapDark = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.News:
+			return news[500];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+};
 
 const headline = (format: ArticleFormat): Colour => {
 	if (
@@ -59,6 +97,10 @@ const headline = (format: ArticleFormat): Colour => {
 			default:
 				return news[300];
 		}
+	}
+
+	if (format.design === ArticleDesign.Interview) {
+		return neutral[100];
 	}
 
 	return neutral[7];
@@ -151,6 +193,8 @@ const bylineInline = (format: ArticleFormat): Colour => {
 			return specialReport[300];
 	}
 };
+
+const headlineTag = (_format: ArticleFormat): Colour => neutral[100];
 
 const follow = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
@@ -589,10 +633,13 @@ const text = {
 	bylineLeftColumn,
 	bylineInline,
 	bylineDark,
+	dropCap,
+	dropCapDark,
 	follow,
 	followDark,
 	headline,
 	headlineDark,
+	headlineTag,
 	keyEventsInline,
 	keyEventsLeftColumn,
 	kicker,

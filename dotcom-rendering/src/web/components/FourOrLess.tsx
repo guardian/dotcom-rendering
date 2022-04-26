@@ -17,7 +17,7 @@ const decidePercentage = (length: number) => {
 		case 2:
 			return '50%';
 		case 3:
-			return '33%';
+			return '34%';
 		case 4:
 		default:
 			return '25%';
@@ -29,7 +29,7 @@ export const FourOrLess = ({ content }: Props) => {
 
 	return (
 		<>
-			<UL direction="row" bottomMargin={true}>
+			<UL direction="row" padBottom={true}>
 				{content.map((trail, index) => (
 					<LI
 						padSides={true}

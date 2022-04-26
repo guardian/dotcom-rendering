@@ -39,6 +39,7 @@ export default {
 			viewports: [breakpoints.wide],
 			delay: 800,
 			diffThreshold: 0.2,
+			pauseAnimationAtEnd: true,
 		},
 	},
 };

@@ -4,8 +4,8 @@ import { until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
-	imagePosition?: ImagePositionType;
-	alwaysVertical?: boolean;
+	imagePosition: ImagePositionType;
+	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
 };
 
@@ -13,6 +13,8 @@ const decideDirection = (imagePosition?: ImagePositionType) => {
 	switch (imagePosition) {
 		case 'top':
 			return 'column';
+		case 'bottom':
+			return 'column-reverse';
 		case 'left':
 			return 'row';
 		case 'right':
@@ -35,20 +37,13 @@ const decideWidth = (minWidthInPixels?: number) => {
 };
 
 const decidePosition = (
-	imagePosition?: ImagePositionType,
-	alwaysVertical?: boolean,
+	imagePosition: ImagePositionType,
+	imagePositionOnMobile: ImagePositionType,
 ) => {
-	const direction = decideDirection(imagePosition);
-	if (alwaysVertical) {
-		return css`
-			flex-direction: ${direction};
-		`;
-	}
 	return css`
-		flex-direction: ${direction};
-		/* Force horizontal view for mobile cards */
+		flex-direction: ${decideDirection(imagePosition)};
 		${until.tablet} {
-			flex-direction: row;
+			flex-direction: ${decideDirection(imagePositionOnMobile)};
 		}
 	`;
 };
@@ -56,16 +51,17 @@ const decidePosition = (
 export const CardLayout = ({
 	children,
 	imagePosition,
-	alwaysVertical,
+	imagePositionOnMobile,
 	minWidthInPixels,
 }: Props) => (
 	<div
 		css={[
 			css`
 				display: flex;
+				flex-basis: 100%;
 			`,
 			decideWidth(minWidthInPixels),
-			decidePosition(imagePosition, alwaysVertical),
+			decidePosition(imagePosition, imagePositionOnMobile),
 		]}
 	>
 		{children}

@@ -35,7 +35,12 @@ mockRESTCalls();
 export default {
 	title: 'Layouts/Immersive',
 	parameters: {
-		chromatic: { viewports: [1300], delay: 800, diffThreshold: 0.2 },
+		chromatic: {
+			viewports: [1300],
+			delay: 800,
+			diffThreshold: 0.2,
+			pauseAnimationAtEnd: true,
+		},
 	},
 };
 
@@ -107,7 +112,14 @@ ReviewStory.story = {
 	name: 'Review',
 	parameters: {
 		viewport: { defaultViewport: 'phablet' },
-		chromatic: { viewports: [660] },
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.mobileLandscape,
+				breakpoints.phablet,
+				breakpoints.wide,
+			],
+		},
 	},
 };
 

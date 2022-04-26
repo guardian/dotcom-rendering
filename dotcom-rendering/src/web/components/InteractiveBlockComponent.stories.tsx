@@ -51,6 +51,7 @@ export const Default = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
+				isMainMedia={false}
 			/>
 			<SomeText />
 			<SomeText />
@@ -75,6 +76,7 @@ export const InlineMap = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
+				isMainMedia={false}
 			/>
 			<SomeText />
 			<SomeText />
@@ -98,6 +100,7 @@ export const Showcase = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
+				isMainMedia={false}
 			/>
 			<SomeText />
 			<SomeText />
@@ -123,6 +126,7 @@ export const WithCaption = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
+				isMainMedia={false}
 			/>
 			<SomeText />
 			<SomeText />
@@ -147,6 +151,7 @@ export const NonBootJs = () => {
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 				}}
+				isMainMedia={false}
 			/>
 			<SomeText />
 			<SomeText />

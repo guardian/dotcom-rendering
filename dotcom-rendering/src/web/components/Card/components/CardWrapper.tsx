@@ -5,10 +5,12 @@ type Props = {
 	palette: Palette;
 };
 
-export const TopBar = ({ children, palette }: Props) => (
+export const CardWrapper = ({ children, palette }: Props) => (
 	<div
 		css={css`
 			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
 			width: 100%;
 			/* We absolutely position the 1 pixel top bar below
                so this is required here */

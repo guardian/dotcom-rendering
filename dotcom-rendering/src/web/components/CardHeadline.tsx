@@ -18,6 +18,7 @@ type Props = {
 	size?: SmallHeadlineSize;
 	byline?: string;
 	showByline?: boolean;
+	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 };
 
 const fontStyles = (size: SmallHeadlineSize) => {
@@ -78,7 +79,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 };
 
 const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
-	function generateUnderlinedCss(baseSize: number) {
+	function underlinedCss(baseSize: number) {
 		return css`
 			background-image: linear-gradient(
 				to bottom,
@@ -93,17 +94,43 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 			margin-right: -5px;
 		`;
 	}
+
+	function underlinedCssWithMediaQuery(
+		baseSize: number,
+		untilDesktopSize: number,
+	) {
+		return css`
+			${until.desktop} {
+				${underlinedCss(untilDesktopSize)}
+			}
+
+			${underlinedCss(baseSize)}
+		`;
+	}
+
 	switch (size) {
-		case 'small':
-			return generateUnderlinedCss(22);
-		case 'medium':
-			return generateUnderlinedCss(25);
 		case 'large':
-			return generateUnderlinedCss(29);
-		default:
-			return generateUnderlinedCss(24);
+			return underlinedCssWithMediaQuery(29, 29);
+		case 'medium':
+			return underlinedCssWithMediaQuery(25, 25);
+		case 'small':
+			return underlinedCss(22);
+		case 'tiny':
+			return underlinedCss(24);
 	}
 };
+
+const lineStyles = (palette: Palette) => css`
+	:before {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		content: '';
+		width: 120px;
+		border-top: 1px solid ${palette.border.cardSupporting};
+	}
+`;
 
 export const CardHeadline = ({
 	headlineText,
@@ -115,6 +142,7 @@ export const CardHeadline = ({
 	size = 'medium',
 	byline,
 	showByline,
+	showLine,
 }: Props) => {
 	const palette = decidePalette(format);
 	return (
@@ -129,6 +157,7 @@ export const CardHeadline = ({
 							size,
 							palette.background.analysisUnderline,
 						),
+					showLine && lineStyles(palette),
 				]}
 			>
 				<span>

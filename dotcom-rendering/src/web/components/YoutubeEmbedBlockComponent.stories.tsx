@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { decidePalette } from '../lib/decidePalette';
 
 import { YoutubeEmbedBlockComponent } from './YoutubeEmbedBlockComponent';
 
@@ -37,16 +36,12 @@ export const standardAspectRatio = () => {
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 				}}
-				palette={decidePalette({
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				})}
 				height={259}
 				width={460}
 				caption="blah"
 				credit=""
 				title=""
+				isMainMedia={false}
 			/>
 			<p>abc</p>
 		</Container>

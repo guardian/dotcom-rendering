@@ -320,6 +320,7 @@ export const renderElement = ({
 					html={element.html}
 					format={format}
 					credit={element.source}
+					isMainMedia={isMainMedia}
 					caption={element.caption}
 				/>,
 			];
@@ -392,6 +393,7 @@ export const renderElement = ({
 						format={format}
 						elementId={element.elementId}
 						caption={element.caption}
+						isMainMedia={isMainMedia}
 					/>
 				</Island>,
 			];
@@ -640,6 +642,7 @@ export const renderElement = ({
 					caption={element.caption}
 					credit={element.credit}
 					title={element.title}
+					isMainMedia={isMainMedia}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
@@ -647,13 +650,13 @@ export const renderElement = ({
 				true,
 				<YoutubeEmbedBlockComponent
 					format={format}
-					palette={palette}
 					embedUrl={element.embedUrl}
 					height={element.height}
 					width={element.width}
 					caption={element.caption}
 					credit={element.credit}
 					title={element.title}
+					isMainMedia={isMainMedia}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
@@ -816,6 +819,7 @@ export const renderArticleElement = ({
 
 	return needsFigure ? (
 		<Figure
+			key={'elementId' in element ? element.elementId : index}
 			isMainMedia={isMainMedia}
 			id={'elementId' in element ? element.elementId : undefined}
 			role={role}

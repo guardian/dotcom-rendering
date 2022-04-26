@@ -146,7 +146,8 @@ export const ArticleBody = ({
 						globalH3Styles(format.display),
 						globalLinkStyles(palette),
 						// revealStyles is used to animate the reveal of new blocks
-						format.design === ArticleDesign.LiveBlog &&
+						(format.design === ArticleDesign.DeadBlog ||
+							format.design === ArticleDesign.LiveBlog) &&
 							revealStyles,
 					]}
 				>
