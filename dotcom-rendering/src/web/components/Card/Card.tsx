@@ -160,8 +160,9 @@ export const Card = ({
 
 	const cardPalette = decidePalette(format);
 
-	const moreThanTwoSubLinks =
-		supportingContent?.length && supportingContent.length > 2;
+	const moreThanTwoSubLinks: boolean = !!(
+		supportingContent?.length && supportingContent.length > 2
+	);
 
 	const renderFooter = ({
 		renderAge = true,
