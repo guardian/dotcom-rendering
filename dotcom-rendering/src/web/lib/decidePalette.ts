@@ -150,7 +150,7 @@ const textStandfirst = (format: ArticleFormat): string => {
 	return BLACK;
 };
 
-const textLastUpdatedStandfirst = (format: ArticleFormat): string => {
+const textLastUpdated = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) {
 		switch (format.theme) {
 			case ArticlePillar.News:
@@ -1105,7 +1105,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
-			lastUpdatedStandfirst: textLastUpdatedStandfirst(format),
+			lastUpdated: textLastUpdated(format),
 			branding: textBranding(format),
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),

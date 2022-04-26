@@ -9,7 +9,7 @@ const lastUpdatedStyles = (palette: Palette) => css`
 	${textSans.small()}
 	padding-bottom: 0.125rem;
 	padding-top: 0.125rem;
-	color: ${palette.text.lastUpdatedStandfirst};
+	color: ${palette.text.lastUpdated};
 `;
 
 const livePulseIconStyles = (palette: Palette) => css`

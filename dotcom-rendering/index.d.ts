@@ -103,7 +103,7 @@ type Palette = {
 		headlineByline: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
-		lastUpdatedStandfirst: Colour;
+		lastUpdated: Colour;
 		branding: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
