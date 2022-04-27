@@ -542,10 +542,6 @@ export const Letter: CAPIArticleType = {
 						],
 					},
 					{
-						title: 'Winter Olympics',
-						url: '/sport/winter-olympics-2022',
-					},
-					{
 						title: 'Cricket',
 						url: '/sport/cricket',
 					},
@@ -1290,6 +1286,7 @@ export const Letter: CAPIArticleType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
+			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 			media: {
 				allImages: [
 					{
@@ -1534,8 +1531,7 @@ export const Letter: CAPIArticleType = {
 					],
 				},
 			],
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: 'b21966cd-7773-4f86-917f-3c3a8fb2e690',
+			elementId: '56e8f9d0-9f86-4c50-8994-344b38dc0ce4',
 		},
 	],
 	webPublicationDate: '2021-04-05T16:04:21.000Z',
@@ -1544,19 +1540,19 @@ export const Letter: CAPIArticleType = {
 			id: '5e74b1928f089367b3d0b644',
 			elements: [
 				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '2eddb099-5f11-485c-84dd-4cad5f1e2e0f',
+					elementId: '5d0f0991-c653-48c8-9d39-da4805912316',
 				},
 				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>• In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '4488de50-2ce2-43d1-a470-77e2e71d036e',
+					elementId: '9790af35-4d4d-4194-a96c-ec676cfbbab0',
 				},
 				{
-					html: '<p>• Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '73506432-455c-4b9f-b192-94eb63dd2879',
+					html: '<p>• Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p>',
+					elementId: '5f1d8294-a7b4-478c-bff1-c5395234e67c',
 				},
 			],
 			blockCreatedOn: 1584705938000,
@@ -1565,6 +1561,8 @@ export const Letter: CAPIArticleType = {
 			blockLastUpdatedDisplay: '14.58 BST',
 			blockFirstPublished: 1617631111000,
 			blockFirstPublishedDisplay: '14.58 BST',
+			blockFirstPublishedDisplayNoTimezone: '14.58',
+			contributors: [],
 			primaryDateLine: 'Mon 5 Apr 2021 17.04 BST',
 			secondaryDateLine: 'Last modified on Mon 5 Apr 2021 18.36 BST',
 		},

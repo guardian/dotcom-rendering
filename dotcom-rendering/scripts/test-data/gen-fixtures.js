@@ -28,8 +28,12 @@ const root = resolve(__dirname, '..', '..');
 
 const articles = [
 	{
-		name: 'Article',
+		name: 'Standard',
 		url: 'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+	},
+	{
+		name: 'NewletterSignup',
+		url: 'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 	},
 	{
 		name: 'Analysis',

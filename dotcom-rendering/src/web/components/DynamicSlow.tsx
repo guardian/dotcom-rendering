@@ -8,11 +8,16 @@ type Props = {
 	trails: TrailType[];
 };
 
-export const DynamicFast = ({ trails }: Props) => {
+/**
+ * A `Card` container for up to 8 trails.
+ *
+ * @see {@link https://www.figma.com/file/sx2vMFHbL7SsUo0LcpsKNe/%E2%AC%A3--Front-container?node-id=123%3A137122 Figma designs}
+ */
+export const DynamicSlow = ({ trails }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
-	const bigCards = trails.slice(2, 4);
-	const smallCards = trails.slice(4, 10);
+	const smallCards = trails.slice(2, 6);
+	const bigCards = trails.slice(6, 8);
 
 	return (
 		<>
@@ -84,65 +89,73 @@ export const DynamicFast = ({ trails }: Props) => {
 				</LI>
 			</UL>
 			<UL direction="row" padBottom={true}>
-				{bigCards.map((card, cardIndex) => {
-					return (
-						<LI
-							percentage="25%"
-							padSides={true}
-							padBottom={false}
-							showTopMarginWhenStacked={cardIndex > 0}
-							showDivider={cardIndex > 0}
-						>
-							<Card
-								linkTo={card.url}
-								format={card.format}
-								headlineText={card.headline}
-								headlineSize="medium"
-								byline={card.byline}
-								showByline={card.showByline}
-								showQuotes={
-									card.format.design ===
-										ArticleDesign.Comment ||
-									card.format.design === ArticleDesign.Letter
-								}
-								webPublicationDate={card.webPublicationDate}
-								kickerText={card.kickerText}
-								showPulsingDot={
-									card.format.design ===
-									ArticleDesign.LiveBlog
-								}
-								showSlash={true}
-								showClock={false}
-								imageUrl={card.image}
-								mediaType={card.mediaType}
-								mediaDuration={card.mediaDuration}
-								commentCount={card.commentCount}
-								starRating={card.starRating}
-								branding={card.branding}
-								supportingContent={card.supportingContent}
-							/>
-						</LI>
-					);
-				})}
-				<LI percentage="50%" showTopMarginWhenStacked={true}>
-					<UL direction="row" wrapCards={true}>
+				<LI percentage="50%" showTopMarginWhenStacked={false}>
+					<UL direction="column" wrapCards={true}>
 						{smallCards.map((card, cardIndex) => {
 							return (
 								<LI
-									percentage="50%"
-									showDivider={true}
 									padSides={true}
+									showTopMarginWhenStacked={false}
 									padBottom={
-										// No bottom margin on the last two cards
-										cardIndex < smallCards.length - 2
-									}
-									padBottomOnMobile={
+										// No bottom margin on the last card
 										cardIndex < smallCards.length - 1
+									}
+									padBottomOnMobile={false}
+								>
+									<Card
+										linkTo={card.url}
+										format={card.format}
+										headlineText={card.headline}
+										headlineSize="medium"
+										byline={card.byline}
+										showByline={card.showByline}
+										showQuotes={
+											card.format.design ===
+												ArticleDesign.Comment ||
+											card.format.design ===
+												ArticleDesign.Letter
+										}
+										webPublicationDate={
+											card.webPublicationDate
+										}
+										kickerText={card.kickerText}
+										showPulsingDot={
+											card.format.design ===
+											ArticleDesign.LiveBlog
+										}
+										showSlash={true}
+										showClock={false}
+										mediaType={card.mediaType}
+										mediaDuration={card.mediaDuration}
+										commentCount={card.commentCount}
+										starRating={card.starRating}
+										branding={card.branding}
+										supportingContent={
+											card.supportingContent
+										}
+									/>
+								</LI>
+							);
+						})}
+					</UL>
+				</LI>
+				<LI percentage="50%" showTopMarginWhenStacked={true}>
+					<UL direction="row" wrapCards={true} showDivider={true}>
+						{bigCards.map((card, cardIndex) => {
+							return (
+								<LI
+									percentage="50%"
+									showDivider={cardIndex !== 0}
+									padSides={true}
+									padBottom={false}
+									padBottomOnMobile={
+										cardIndex < bigCards.length
 									}
 								>
 									<Card
 										linkTo={card.url}
 										format={card.format}
+										trailText={card.trailText}
 										headlineText={card.headline}
 										headlineSize="small"
 										byline={card.byline}
@@ -163,6 +176,7 @@ export const DynamicFast = ({ trails }: Props) => {
 										}
 										showSlash={true}
 										showClock={false}
+										imageUrl={card.image}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
 										commentCount={card.commentCount}

@@ -58,6 +58,7 @@ export const CardLayout = ({
 		css={[
 			css`
 				display: flex;
+				flex-basis: 100%;
 			`,
 			decideWidth(minWidthInPixels),
 			decidePosition(imagePosition, imagePositionOnMobile),
