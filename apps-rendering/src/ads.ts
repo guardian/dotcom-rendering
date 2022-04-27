@@ -2,7 +2,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import AdSlot from 'adSlot';
 import Paragraph from 'components/paragraph';
 import type { ReactNode } from 'react';
-import { isValidElement } from 'react';
+import { createElement as h, isValidElement } from 'react';
 
 function getAdIndices(): number[] {
 	const adEveryNParagraphs = 6;
@@ -31,17 +31,9 @@ function insertPlaceholders(
 	const className =
 		numParas < 15 ? 'ad-placeholder hidden short' : 'ad-placeholder hidden';
 
-	const insertAd = (para: number, nodes: ReactNode[]): ReactNode[] =>
-		adIndices.includes(para)
-			? [
-					...nodes,
-					<AdSlot
-						className={className}
-						paragraph={para}
-						format={format}
-						key={para}
-					/>,
-			  ]
+	const insertAd = (paragraph: number, nodes: ReactNode[]): ReactNode[] =>
+		adIndices.includes(paragraph)
+			? [...nodes, h(AdSlot, { className, paragraph, format })]
 			: nodes;
 
 	return flattenedNodes.reduce<{ paraNum: number; nodes: ReactNode[] }>(
