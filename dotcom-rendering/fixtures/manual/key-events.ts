@@ -10,8 +10,6 @@ const format = {
 	theme: ArticlePillar.News
 };
 
-
-
 export const events: KeyEvent[] = [
 	{
 		date: getDate(),

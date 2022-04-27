@@ -6,7 +6,7 @@ import {
 	ArticlePillar,
 } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
-import { events } from 'fixtures/manual/key-events';
+import { events } from '../../../fixtures/manual/key-events';
 import { KeyEventCard } from './KeyEventCard';
 
 const getFormat = (theme: ArticleTheme) => {
