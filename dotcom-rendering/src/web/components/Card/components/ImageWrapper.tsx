@@ -22,7 +22,7 @@ export const ImageWrapper = ({
 					/* position relative is required here to bound the image overlay */
 					position: relative;
 					flex-basis: ${percentage && percentage};
-					// If no image position for mobile is provided then hide the image
+					/* If no image position for mobile is provided then hide the image */
 					${imagePositionOnMobile === 'none' && until.tablet} {
 						display: none;
 					}
