@@ -107,7 +107,6 @@ describe('Adds placholders at the correct indexes', () => {
 			tenParagraphs,
 			mockFormat,
 		);
-		console.log(JSON.stringify(tenParagraphsAndTwoAds[10]));
 		expect(tenParagraphsAndTwoAds[10].type).toBe(AdSlot);
 	});
 });
