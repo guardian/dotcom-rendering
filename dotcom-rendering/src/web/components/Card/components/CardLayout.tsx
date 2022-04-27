@@ -5,7 +5,7 @@ import { until } from '@guardian/source-foundations';
 type Props = {
 	children: React.ReactNode;
 	imagePosition: ImagePositionType;
-	imagePositionOnMobile: ImagePositionType;
+	imagePositionOnMobile?: ImagePositionType;
 	minWidthInPixels?: number;
 };
 
@@ -51,7 +51,7 @@ const decidePosition = (
 export const CardLayout = ({
 	children,
 	imagePosition,
-	imagePositionOnMobile,
+	imagePositionOnMobile = 'left',
 	minWidthInPixels,
 }: Props) => (
 	<div

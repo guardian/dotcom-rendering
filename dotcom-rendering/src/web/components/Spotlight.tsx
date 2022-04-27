@@ -31,5 +31,6 @@ export const Spotlight = ({ content }: Props) => (
 		commentCount={content[0].commentCount}
 		imagePosition="right"
 		imageSize="jumbo"
+		imagePositionOnMobile="left"
 	/>
 );

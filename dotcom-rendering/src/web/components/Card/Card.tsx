@@ -127,7 +127,7 @@ export const Card = ({
 	webPublicationDate,
 	imageUrl,
 	imagePosition = 'top',
-	imagePositionOnMobile = 'left',
+	imagePositionOnMobile,
 	imageSize,
 	trailText,
 	avatar,

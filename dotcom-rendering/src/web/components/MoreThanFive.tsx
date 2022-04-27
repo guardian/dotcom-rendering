@@ -56,6 +56,7 @@ export const MoreThanFive = ({ content }: Props) => {
 						commentCount={content[0].commentCount}
 						starRating={content[0].starRating}
 						branding={content[0].branding}
+						imagePositionOnMobile="left"
 					/>
 				</LI>
 				<LI
@@ -89,6 +90,7 @@ export const MoreThanFive = ({ content }: Props) => {
 						commentCount={content[1].commentCount}
 						starRating={content[1].starRating}
 						branding={content[1].branding}
+						imagePositionOnMobile="left"
 					/>
 				</LI>
 				<LI
@@ -122,6 +124,7 @@ export const MoreThanFive = ({ content }: Props) => {
 						commentCount={content[2].commentCount}
 						starRating={content[2].starRating}
 						branding={content[2].branding}
+						imagePositionOnMobile="left"
 					/>
 				</LI>
 				<LI
@@ -155,6 +158,7 @@ export const MoreThanFive = ({ content }: Props) => {
 						commentCount={content[3].commentCount}
 						starRating={content[3].starRating}
 						branding={content[3].branding}
+						imagePositionOnMobile="left"
 					/>
 				</LI>
 			</UL>
@@ -198,6 +202,7 @@ export const MoreThanFive = ({ content }: Props) => {
 							commentCount={trail.commentCount}
 							starRating={trail.starRating}
 							branding={trail.branding}
+							imagePositionOnMobile="left"
 						/>
 					</LI>
 				))}

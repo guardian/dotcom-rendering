@@ -85,6 +85,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 						starRating={secondary.starRating}
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
+						imagePositionOnMobile="left"
 					/>
 				</LI>
 			</UL>
@@ -188,6 +189,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 										supportingContent={
 											card.supportingContent
 										}
+										imagePositionOnMobile="left"
 									/>
 								</LI>
 							);
