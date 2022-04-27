@@ -34,6 +34,12 @@ const linkStyles = css`
 	&:hover::before {
 		background-color: ${neutral[0]};
 	}
+
+	&:hover {
+		span {
+			text-decoration: underline;
+		}
+	}
 `;
 
 const listItemStyles = css`
@@ -69,10 +75,6 @@ const listItemStyles = css`
 const textStyles = (palette: Palette) => css`
 	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
 	color: ${palette.text.keyEvent};
-
-	&:hover {
-		text-decoration: underline;
-	}
 `;
 
 const timeStyles = css`
