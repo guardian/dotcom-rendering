@@ -12,10 +12,10 @@ import {
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
-import { map, withDefault } from '@guardian/types';
+import { withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import { pipe } from 'lib';
-import type { FC, ReactElement, ReactNode } from 'react';
+import { maybeRender } from 'lib';
+import type { FC, ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
@@ -171,7 +171,6 @@ const getAnchorStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return commentAnchorStyles(kicker, inverted);
-
 		default:
 			return anchorStyles(kicker, inverted);
 	}
@@ -204,17 +203,18 @@ const renderText = (
 ): ReactNode =>
 	Array.from(byline.childNodes).map((node, i) => toReact(format)(node, i));
 
-const Byline: FC<Props> = ({ bylineHtml, ...format }) =>
-	pipe(
-		bylineHtml,
-		map((byline) => (
-			<address css={getStyles(format)}>
-				{renderText(format, byline)}
-			</address>
-		)),
-		withDefault<ReactElement | null>(null),
-	);
-
+const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return null;
+		default:
+			return maybeRender(bylineHtml, (byline) => (
+				<address css={getStyles(format)}>
+					{renderText(format, byline)}
+				</address>
+			));
+	}
+};
 // ----- Exports ----- //
 
 export default Byline;

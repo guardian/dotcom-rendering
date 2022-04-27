@@ -479,6 +479,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								sectionUrl={CAPIArticle.sectionUrl}
 								guardianBaseURL={CAPIArticle.guardianBaseURL}
 								badge={CAPIArticle.badge}
+								isMatch={!!CAPIArticle.matchUrl}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -794,7 +795,11 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					/>
 				</ElementContainer>
 
-				<Island clientOnly={true} deferUntil="visible">
+				<Island
+					clientOnly={true}
+					deferUntil="visible"
+					placeholderHeight={600}
+				>
 					<OnwardsUpper
 						ajaxUrl={CAPIArticle.config.ajaxUrl}
 						hasRelated={CAPIArticle.hasRelated}

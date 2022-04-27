@@ -15,10 +15,10 @@ import {
 import { SvgQuote } from '@guardian/source-react-components';
 import { OptionKind } from '@guardian/types';
 import { editionsHeadlineTextColour } from 'editorialStyles';
-import { MainMediaKind } from 'headerMedia';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index } from 'lib';
+import { MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import Series from '../series';

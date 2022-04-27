@@ -27,6 +27,7 @@ const adSlotLabelStyles = css`
 	${textSans.xxsmall()};
 	position: relative;
 	height: ${labelHeight}px;
+	max-height: ${labelHeight}px;
 	background-color: ${neutral[97]};
 	padding: 0 8px;
 	border-top: 1px solid ${border.secondary};
@@ -199,7 +200,12 @@ const AdSlotLabelToggled: React.FC = () => (
 	</div>
 );
 
-export const AdSlot: React.FC<Props> = ({ position, display }) => {
+export const AdSlot: React.FC<Props> = ({
+	position,
+	display,
+	shouldHideReaderRevenue = false,
+	isPaidContent = false,
+}) => {
 	switch (position) {
 		case 'right':
 			switch (display) {
@@ -239,8 +245,10 @@ export const AdSlot: React.FC<Props> = ({ position, display }) => {
 					return (
 						<Island>
 							<TopRightAdSlot
-								shouldHideReaderRevenue={false}
-								isPaidContent={false}
+								shouldHideReaderRevenue={
+									shouldHideReaderRevenue
+								}
+								isPaidContent={isPaidContent}
 								adStyles={adStyles}
 							/>
 						</Island>

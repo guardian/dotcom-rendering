@@ -16,6 +16,7 @@ import {
 	news,
 	specialReport,
 	labs,
+	brandAlt,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -49,10 +50,14 @@ const headline = (format: ArticleFormat): Colour => {
 		return opinion[800];
 	} else if (format.design === ArticleDesign.Media) {
 		return neutral[10];
+	} else if (format.design === ArticleDesign.Interview) {
+		return neutral[0];
 	}
 
 	return neutral[100];
 };
+
+const headlineByline = (_format: ArticleFormat): Colour => brandAlt[400];
 
 const headlineDark = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -195,12 +200,33 @@ const keyEventsDark = (_format: ArticleFormat): Colour => neutral[10];
 
 const keyEventsWideDark = articleContentDark;
 
+const headlineTag = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.News:
+			return news[300];
+	}
+};
+
 // ----- API ----- //
 
 const background = {
 	avatar,
 	headline,
+	headlineByline,
 	headlineDark,
+	headlineTag,
 	keyEvents,
 	keyEventsWide,
 	keyEventsDark,

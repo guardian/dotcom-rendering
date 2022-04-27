@@ -4,15 +4,17 @@ import { until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
-	alwaysVertical?: boolean;
+	imagePositionOnMobile: ImagePositionType;
 	percentage?: CardPercentageType;
 };
 
 export const ImageWrapper = ({
 	children,
 	percentage,
-	alwaysVertical,
+	imagePositionOnMobile,
 }: Props) => {
+	const notVertical =
+		imagePositionOnMobile !== 'top' && imagePositionOnMobile !== 'bottom';
 	return (
 		<div
 			css={[
@@ -20,7 +22,11 @@ export const ImageWrapper = ({
 					/* position relative is required here to bound the image overlay */
 					position: relative;
 					flex-basis: ${percentage && percentage};
-					${!alwaysVertical && until.tablet} {
+					/* If no image position for mobile is provided then hide the image */
+					${imagePositionOnMobile === 'none' && until.tablet} {
+						display: none;
+					}
+					${notVertical && until.tablet} {
 						/* Below tablet, we fix the size of the image and add a margin
                        around it. The corresponding content flex grows to fill the space */
 						margin-left: 6px;

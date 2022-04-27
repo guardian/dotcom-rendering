@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 
-import { until } from '@guardian/source-foundations';
+import { until, from } from '@guardian/source-foundations';
 
 import { verticalDivider } from '../../../lib/verticalDivider';
 
-const ulStyles = (direction?: 'row' | 'column') => css`
+type Direction = 'row' | 'column' | 'row-reverse';
+
+const ulStyles = (direction?: Direction) => css`
 	position: relative;
 	display: flex;
 	flex-direction: ${direction};
@@ -18,25 +20,34 @@ const marginBottomStyles = css`
 	margin-bottom: 10px;
 `;
 
+const wrapStyles = css`
+	${from.tablet} {
+		flex-wrap: wrap;
+	}
+`;
+
 type Props = {
 	children: React.ReactNode;
-	direction?: 'row' | 'column'; // Passed to flex-direction
+	direction?: Direction; // Passed to flex-direction
 	showDivider?: boolean; // If this UL is a column and not the left most column
-	bottomMargin?: boolean; // If this UL is a row, add spacing below
+	padBottom?: boolean; // If this UL is a row, add spacing below
+	wrapCards?: boolean; // Used to keep cards aligned in adjacent columns
 };
 
 export const UL = ({
 	children,
 	direction = 'column',
 	showDivider = false,
-	bottomMargin = false,
+	padBottom = false,
+	wrapCards = false,
 }: Props) => {
 	return (
 		<ul
 			css={[
 				ulStyles(direction),
 				showDivider && verticalDivider,
-				bottomMargin && marginBottomStyles,
+				padBottom && marginBottomStyles,
+				wrapCards && wrapStyles,
 			]}
 		>
 			{children}

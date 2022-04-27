@@ -13,6 +13,8 @@ import { Hide } from './Hide';
 import { Badge } from './Badge';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { Island } from './Island';
+import { PulsingDot } from './PulsingDot.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -21,6 +23,7 @@ type Props = {
 	sectionUrl: string;
 	guardianBaseURL: string;
 	badge?: BadgeType;
+	isMatch?: boolean;
 };
 
 const sectionLabelLink = css`
@@ -174,6 +177,7 @@ export const SeriesSectionLink = ({
 	sectionUrl,
 	guardianBaseURL,
 	badge,
+	isMatch,
 }: Props) => {
 	// If we have a tag, use it to show 2 section titles
 	const tag = tags.find(
@@ -189,6 +193,14 @@ export const SeriesSectionLink = ({
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	const palette = decidePalette(format);
+
+	const seriesTitleColour = isMatch
+		? palette.text.matchTitle
+		: palette.text.seriesTitle;
+
+	const sectionTitleColour = isMatch
+		? palette.text.matchTitle
+		: palette.text.sectionTitle;
 
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
@@ -209,7 +221,7 @@ export const SeriesSectionLink = ({
 										fontStyles(format),
 										breakWord,
 										css`
-											color: ${palette.text.seriesTitle};
+											color: ${seriesTitleColour};
 											background-color: ${palette
 												.background.seriesTitle};
 											box-shadow: -6px 0 0 0
@@ -267,7 +279,7 @@ export const SeriesSectionLink = ({
 									fontStyles(format),
 									breakWord,
 									css`
-										color: ${palette.text.sectionTitle};
+										color: ${sectionTitleColour};
 										background-color: ${palette.background
 											.sectionTitle};
 										box-shadow: -6px 0 0 0
@@ -316,7 +328,7 @@ export const SeriesSectionLink = ({
 										breakWord,
 										!badge && sectionPadding,
 										css`
-											color: ${palette.text.seriesTitle};
+											color: ${seriesTitleColour};
 											background-color: ${palette
 												.background.seriesTitle};
 											box-shadow: -6px 0 0 0
@@ -350,12 +362,28 @@ export const SeriesSectionLink = ({
 				return (
 					// Sometimes the tags/titles are shown inline, sometimes stacked
 					<div css={!badge && rowBelowLeftCol(format)}>
+						<Hide when="above" breakpoint="desktop">
+							{format.design === ArticleDesign.LiveBlog && (
+								<span
+									css={[
+										fontStyles(format),
+										css`
+											color: ${seriesTitleColour};
+										`,
+									]}
+								>
+									<Island deferUntil="idle">
+										<PulsingDot />
+									</Island>
+								</span>
+							)}
+						</Hide>
 						<a
 							href={`${guardianBaseURL}/${tag.id}`}
 							css={[
 								sectionLabelLink,
 								css`
-									color: ${palette.text.seriesTitle};
+									color: ${seriesTitleColour};
 									background-color: ${palette.background
 										.seriesTitle};
 								`,
@@ -384,7 +412,7 @@ export const SeriesSectionLink = ({
 									displayBlock,
 									breakWord,
 									css`
-										color: ${palette.text.sectionTitle};
+										color: ${sectionTitleColour};
 										background-color: ${palette.background
 											.sectionTitle};
 									`,
@@ -400,25 +428,43 @@ export const SeriesSectionLink = ({
 			}
 			// There's no tag so fallback to section title
 			return (
-				<a
-					href={`${guardianBaseURL}/${sectionUrl}`}
-					css={[
-						sectionLabelLink,
-						css`
-							color: ${palette.text.sectionTitle};
-							background-color: ${palette.background
-								.sectionTitle};
-						`,
-						marginRight,
-						fontStyles(format),
-						breakWord,
-					]}
-					data-component="section"
-					data-link-name="article section"
-					className={interactiveLegacyClasses.labelLink}
-				>
-					<span>{sectionLabel}</span>
-				</a>
+				<>
+					<Hide when="above" breakpoint="desktop">
+						{format.design === ArticleDesign.LiveBlog && (
+							<span
+								css={[
+									fontStyles(format),
+									css`
+										color: ${seriesTitleColour};
+									`,
+								]}
+							>
+								<Island deferUntil="idle">
+									<PulsingDot />
+								</Island>
+							</span>
+						)}
+					</Hide>
+					<a
+						href={`${guardianBaseURL}/${sectionUrl}`}
+						css={[
+							sectionLabelLink,
+							css`
+								color: ${sectionTitleColour};
+								background-color: ${palette.background
+									.sectionTitle};
+							`,
+							marginRight,
+							fontStyles(format),
+							breakWord,
+						]}
+						data-component="section"
+						data-link-name="article section"
+						className={interactiveLegacyClasses.labelLink}
+					>
+						<span>{sectionLabel}</span>
+					</a>
+				</>
 			);
 		}
 	}

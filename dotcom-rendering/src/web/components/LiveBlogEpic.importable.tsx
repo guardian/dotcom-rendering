@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { space } from '@guardian/source-foundations';
@@ -14,6 +15,7 @@ import {
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useApi } from '../lib/useApi';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 
 type Props = {
 	section: string;
@@ -170,9 +172,10 @@ const usePayload = ({
  *
  * Dynamically imports and renders a given module
  *
- * @param url string - The url of the compoenent
- * @param name string - The name of the compoenent
- * @param props object - The props of the compoenent
+ * @param props
+ * @param props.url string - The url of the component
+ * @param props.name tring - The name of the component
+ * @param props.props object - The props of the component
  * @returns The resulting react component
  */
 const Render = ({
@@ -201,6 +204,12 @@ const Render = ({
 	);
 };
 
+/**
+ * Using the payload, make a fetch request to contributions service
+ *
+ * @param payload - unknown
+ * @param contributionsServiceUrl - string
+ */
 const Fetch = ({
 	payload,
 	contributionsServiceUrl,
@@ -241,15 +250,25 @@ const Fetch = ({
 	}
 	log('dotcom', 'LiveBlogEpic has a module');
 
+	// Add submitComponentEvent function to props to enable Ophan tracking in the component
+	const props = {
+		...response.data.module.props,
+		submitComponentEvent,
+	};
+
 	// Take any returned module and render it
 	return (
 		<Render
 			url={response.data.module.url}
 			name={response.data.module.name}
-			props={response.data.module.props}
+			props={props}
 		/>
 	);
 };
+
+function insertAfter(referenceNode: HTMLElement, newNode: Element) {
+	referenceNode.parentNode?.insertBefore(newNode, referenceNode.nextSibling);
+}
 
 /**
  * LiveBlogEpic is the support epic which appears in-between blocks in blogs
@@ -276,14 +295,47 @@ export const LiveBlogEpic = ({
 		isPaidContent,
 		tags,
 	});
-
 	if (!payload) return null;
 
-	// Using the payload, make a fetch request to contributions
-	return (
+	/**
+	 * Here we decide where to insert the epic.
+	 *
+	 * If the url contains a permalink then we
+	 * want to insert it immediately after that block to prevent any CLS issues.
+	 *
+	 * Otherwise, we choose a random position near the top of the blog
+	 */
+	const epicPlaceholder = document.createElement('article');
+	if (window.location.href.includes('#block-')) {
+		// Because we're using a permalink there's a possibility the epic will render in
+		// view. To prevent confusing layout shift we initially hide the message so that
+		// we can reveal (animate in) it once it has been rendered
+		epicPlaceholder.classList.add('pending');
+		const blockId = window.location.hash.slice(1);
+		const blockLinkedTo = document.getElementById(blockId);
+		if (blockLinkedTo) {
+			insertAfter(blockLinkedTo, epicPlaceholder);
+		}
+		epicPlaceholder.classList.add('reveal');
+		epicPlaceholder.classList.remove('pending');
+	} else {
+		// This is a simple page load so we simply insert the epic somewhere near the top
+		// of the blog
+		const randomPosition = Math.floor(Math.random() * 3) + 1; // 1, 2 or 3
+		const aBlockNearTheTop =
+			document.querySelectorAll<HTMLElement>('article.block')[
+				randomPosition
+			];
+		if (aBlockNearTheTop) {
+			insertAfter(aBlockNearTheTop, epicPlaceholder);
+		}
+	}
+
+	return createPortal(
 		<Fetch
 			payload={payload}
 			contributionsServiceUrl={contributionsServiceUrl}
-		/>
+		/>,
+		epicPlaceholder,
 	);
 };

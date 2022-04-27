@@ -356,7 +356,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			kickerText={kickerText || ''}
 			imageUrl={imageUrl || ''}
 			showClock={true}
-			alwaysVertical={true}
+			imagePositionOnMobile="top"
 			minWidthInPixels={220}
 			showQuotes={
 				format.design === ArticleDesign.Comment ||

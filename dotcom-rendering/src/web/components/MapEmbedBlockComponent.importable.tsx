@@ -73,6 +73,7 @@ export const MapEmbedBlockComponent = ({
 						captionText={caption}
 						format={format}
 						credit={credit}
+						isMainMedia={isMainMedia}
 					/>
 				)}
 			</div>

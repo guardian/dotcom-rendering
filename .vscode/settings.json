@@ -1,4 +1,7 @@
 {
+	"deno.enablePaths": ["scripts/deno"],
+	"deno.lint": true,
+	"deno.unstable": false,
     "eslint.validate": ["typescript", "typescriptreact"],
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true

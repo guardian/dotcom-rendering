@@ -34,12 +34,12 @@ import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
 import type { MatchScores } from 'football';
 import { parseMatchScores } from 'football';
-import type { MainMedia } from 'headerMedia';
 import type { Image } from 'image';
 import { parseCardImage } from 'image';
 import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { parseMany as parseLiveBlocks } from 'liveBlock';
+import type { MainMedia } from 'mainMedia';
 import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
@@ -179,7 +179,8 @@ type Item =
 	| Letter
 	| Obituary
 	| Editorial
-	| Correction;
+	| Correction
+	| Interview;
 
 // ----- Convenience Types ----- //
 

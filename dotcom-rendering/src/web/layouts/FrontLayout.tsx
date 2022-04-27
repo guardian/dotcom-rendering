@@ -1,22 +1,26 @@
 import { brandBackground, brandLine } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
 import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { DecideContainer } from '../lib/DecideContainer';
+
 import { SubNav } from '../components/SubNav.importable';
 import { ElementContainer } from '../components/ElementContainer';
 import { Nav } from '../components/Nav/Nav';
-
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { decidePalette } from '../lib/decidePalette';
-import { ContainerLayout } from '../components/ContainerLayout';
 import { Header } from '../components/Header';
-import { DynamicFast } from '../components/DynamicFast';
+import { ContainerLayout } from '../components/ContainerLayout';
 
 interface Props {
 	front: DCRFrontType;
 	NAV: NavType;
 }
+
+const spaces = / /g;
+/** TODO: Confirm with is a valid way to generate component IDs. */
+const ophanComponentId = (name: string) =>
+	name.toLowerCase().replace(spaces, '-');
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
@@ -103,19 +107,36 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<main>
 				{front.pressedPage.collections.map((collection, index) => {
-					// TODO: We also need to support backfill and treats containers
-					const trails = collection.curated;
+					// TODO: We also need to support treats containers
+					// Backfills should be added to the end of any curated content
+					const trails = collection.curated.concat(
+						collection.backfill,
+					);
 					// There are some containers that have zero trails. We don't want to render these
 					if (trails.length === 0) return null;
+
+					const ophanName = ophanComponentId(collection.displayName);
+
 					return (
 						<ContainerLayout
 							title={collection.displayName}
+							// TODO: This logic should be updated, as this relies
+							// on the first container being 'palette styles do not delete'
 							showTopBorder={index > 1}
 							sideBorders={true}
 							padContent={false}
 							centralBorder="partial"
+							url={collection.href}
+							// same as above re 'palette styles' for index increment
+							ophanComponentLink={`container-${
+								index + 1
+							} | ${ophanName}`}
+							ophanComponentName={`${ophanName}`}
 						>
-							<DynamicFast trails={trails} />
+							<DecideContainer
+								trails={trails}
+								containerType={collection.collectionType}
+							/>
 						</ContainerLayout>
 					);
 				})}

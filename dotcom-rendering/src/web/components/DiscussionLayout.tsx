@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from } from '@guardian/source-foundations';
+import { ArticleDisplay } from '@guardian/libs';
 import { ContainerLayout } from './ContainerLayout';
 import { Flex } from './Flex';
 import { RightColumn } from './RightColumn';
@@ -47,6 +48,11 @@ export const DiscussionLayout = ({
 						/>
 					</Island>
 				}
+				leftColSize={
+					format.display === ArticleDisplay.Standard
+						? 'wide'
+						: 'compact'
+				}
 			>
 				<Flex>
 					<div
@@ -58,7 +64,11 @@ export const DiscussionLayout = ({
 							max-width: 100%;
 						`}
 					>
-						<Island clientOnly={true} deferUntil="visible">
+						<Island
+							clientOnly={true}
+							deferUntil="visible"
+							placeholderHeight={324}
+						>
 							<DiscussionContainer
 								format={format}
 								discussionApiUrl={discussionApiUrl}

@@ -5,6 +5,7 @@ import {
 	renderStandfirstText,
 	renderText,
 	transformHref,
+	shouldShowDropCap,
 } from 'renderer';
 import { JSDOM } from 'jsdom';
 import { ArticlePillar } from '@guardian/libs';
@@ -599,5 +600,64 @@ describe('Transforms hrefs', () => {
 		expect(transformed).toBe(
 			'https://www.theguardian.com/world/series/coronavirus-live',
 		);
+	});
+});
+
+describe('Shows drop caps', () => {
+	const paragraph = new Array(50).fill('word').join(' ');
+	const format = {
+		display: ArticleDisplay.Standard,
+		theme: ArticlePillar.Culture,
+		design: ArticleDesign.Interview,
+	};
+
+	test('Shows drop cap if the paragraph is at least 200 characters long, the first word is longer than three chars, and the article has the correct design', () => {
+		const showDropCap = shouldShowDropCap(paragraph, format);
+		expect(showDropCap).toBe(true);
+	});
+
+	test('Shows drop cap if the first word is at least three characters long', () => {
+		const threeChars = `One ${paragraph}`;
+		const showDropCap = shouldShowDropCap(threeChars, format);
+		expect(showDropCap).toBe(true);
+	});
+
+	test('Shows drop cap for eligible paragraphs including Unicode Latin-1 characters', () => {
+		const unicodeLatin = `Česká ${paragraph}`;
+		const showDropCap = shouldShowDropCap(unicodeLatin, format);
+		expect(showDropCap).toBe(true);
+	});
+
+	test('Does not show drop cap if the paragraph starts with an "I", despite being at least 200 characters long', () => {
+		const startsWithI = `Inevitably, ${paragraph}`;
+		const showDropCap = shouldShowDropCap(startsWithI, format);
+		expect(showDropCap).toBe(false);
+	});
+
+	test('Does not show drop cap if the first word is shorter than three characters', () => {
+		const twoChars = `On ${paragraph}`;
+		const showDropCap = shouldShowDropCap(twoChars, format);
+		expect(showDropCap).toBe(false);
+	});
+
+	test('Does not show drop cap if the first word is shorter than three characters (ignoring quotation mark)', () => {
+		const twoCharsWithQuotationMark = `“On ${paragraph}`;
+		const showDropCap = shouldShowDropCap(
+			twoCharsWithQuotationMark,
+			format,
+		);
+		expect(showDropCap).toBe(false);
+	});
+
+	test('Does not show drop cap if the paragraph is shorter than 200 characters', () => {
+		const shortParagraph =
+			'The pen might not be mightier than the sword, but maybe the printing press was heavier than the siege weapon. Just a few words can change everything.';
+		const showDropCap = shouldShowDropCap(shortParagraph, format);
+		expect(showDropCap).toBe(false);
+	});
+
+	test('Does not show drop cap if the article is not an allowed design (e.g. standard design)', () => {
+		const showDropCap = shouldShowDropCap(paragraph, mockFormat);
+		expect(showDropCap).toBe(false);
 	});
 });

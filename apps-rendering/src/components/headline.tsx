@@ -2,7 +2,11 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
+import {
+	background,
+	border,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -16,8 +20,11 @@ import {
 import StarRating from 'components/starRating';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
+import { getFormat } from 'item';
 import type { ReactElement } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
+import HeadlineByline from './headlineByline';
+import HeadlineTag from './headlineTag';
 
 // ----- Component ----- //
 
@@ -25,15 +32,25 @@ interface Props {
 	item: Item;
 }
 
-const styles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.medium()}
-	${headlineTextColour(format)}
-    ${headlineBackgroundColour(format)}
-    padding-bottom: ${remSpace[6]};
-	margin: 0;
+const styles = (format: ArticleFormat): SerializedStyles => {
+	const baseStyles = css`
+		${headline.medium()}
+		${headlineTextColour(format)}
+		margin: 0;
+		${articleWidthStyles}
+	`;
 
-	${articleWidthStyles}
-`;
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return baseStyles;
+		default:
+			return css`
+				${baseStyles}
+				${headlineBackgroundColour(format)}
+				padding-bottom: ${remSpace[6]};
+			`;
+	}
+};
 
 const immersiveStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
@@ -89,6 +106,11 @@ const featureStyles = css`
 	${headline.medium({ fontWeight: 'bold' })}
 `;
 
+const interviewStyles = css`
+	${headline.medium({ fontWeight: 'bold' })}
+	line-height: 1.25;
+`;
+
 const commentStyles = css`
 	${headline.medium({ fontWeight: 'light' })}
 	padding-bottom: ${remSpace[1]};
@@ -137,6 +159,8 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 			);
 		case ArticleDesign.Feature:
 			return css(styles(format), featureStyles, fontSizeRestriction);
+		case ArticleDesign.Interview:
+			return css(styles(format), interviewStyles, fontSizeRestriction);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
@@ -153,12 +177,49 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const Headline = ({ item }: Props): ReactElement => (
-	<h1 css={getStyles(item)}>
-		<span>{item.headline}</span>
-		<StarRating item={item} />
-	</h1>
-);
+const headlineStyles = (format: ArticleFormat): SerializedStyles => {
+	return css`
+		color: ${text.headline(format)};
+		background-color: ${background.headline(format)};
+		position: relative;
+		white-space: pre-wrap;
+		padding: 0 ${remSpace[1]};
+		display: inline;
+		box-decoration-break: clone;
+	`;
+};
+
+const Headline = ({ item }: Props): ReactElement => {
+	const format = getFormat(item);
+	switch (item.design) {
+		case ArticleDesign.Interview:
+			return (
+				<>
+					<div css={articleWidthStyles}>
+						<HeadlineTag tagText="Interview" format={format} />
+					</div>
+					<h1 css={getStyles(item)}>
+						<span css={headlineStyles(format)}>
+							{item.headline}
+						</span>
+					</h1>
+					<div css={articleWidthStyles}>
+						<HeadlineByline
+							bylineHtml={item.bylineHtml}
+							format={format}
+						/>
+					</div>
+				</>
+			);
+		default:
+			return (
+				<h1 css={getStyles(item)}>
+					<span>{item.headline}</span>
+					<StarRating item={item} />
+				</h1>
+			);
+	}
+};
 
 // ----- Exports ----- //
 

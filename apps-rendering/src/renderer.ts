@@ -14,7 +14,7 @@ import {
 import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
 import {
@@ -161,6 +161,22 @@ const TweetStyles = css`
 	}
 `;
 
+const allowsDropCaps = (format: ArticleFormat): boolean => {
+	if (format.theme === ArticleSpecial.Labs) return false;
+	if (format.display === ArticleDisplay.Immersive) return true;
+	switch (format.design) {
+		case ArticleDesign.Feature:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Review:
+		case ArticleDesign.Interview:
+		case ArticleDesign.PhotoEssay:
+		case ArticleDesign.Recipe:
+			return true;
+		default:
+			return false;
+	}
+};
+
 //Elements rendered by this function should contain no styles.
 // For example in callout form and interactives we want to exclude styles.
 const plainTextElement = (node: Node, key: number): ReactNode => {
@@ -206,6 +222,29 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 	}
 };
 
+/**
+ * This regular expression checks that a string begins with a word that is at least
+ * three characters long, ignoring the initial quotation mark.
+ *
+ *  The regex can be broken down as follows:
+ *
+ * - `["'\u2018\u201c]?` matches an optional quotation mark, apostrophe, open single quote
+ * or open double quote.
+ *
+ * - `(?!I)` is a negative lookahead checking that the first letter is not "I".
+ *
+ * - The rest of the expression matches 3 or more characters in the Latin-1 Unicode block,
+ * which includes diacritics (e.g. å, č, Ë, etc.).
+ *
+ * The regex sits outside the rendering function so it is only compiled once
+ * for better performance.
+ */
+const dropCapRegex =
+	/^["'\u2018\u201c]?(?!I)[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F]{3,}/;
+
+const shouldShowDropCap = (text: string, format: ArticleFormat): boolean =>
+	allowsDropCaps(format) && text.length >= 200 && dropCapRegex.test(text);
+
 const textElement =
 	(format: ArticleFormat, isEditions = false) =>
 	(node: Node, key: number): ReactNode => {
@@ -214,8 +253,10 @@ const textElement =
 			textElement(format, isEditions),
 		);
 		switch (node.nodeName) {
-			case 'P':
-				return h(Paragraph, { key, format }, children);
+			case 'P': {
+				const showDropCap = shouldShowDropCap(text, format);
+				return h(Paragraph, { key, format, showDropCap }, children);
+			}
 			case '#text':
 				return transform(text, format);
 			case 'SPAN':
@@ -799,4 +840,5 @@ export {
 	transformHref,
 	plainTextElement,
 	renderCaption,
+	shouldShowDropCap,
 };

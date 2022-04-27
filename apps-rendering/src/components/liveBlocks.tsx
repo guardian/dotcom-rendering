@@ -37,7 +37,6 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 		<>
 			{/* Accordion? */}
 			{blocks.map((block) => {
-				const blockLink = `?page=with:block-${block.id}#block-${block.id}`;
 				const blockFirstPublished = pipe(
 					block.firstPublished,
 					map(Number),
@@ -51,7 +50,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 						format={format}
 						blockTitle={block.title}
 						blockFirstPublished={blockFirstPublished}
-						blockLink={blockLink}
+						blockId={block.id}
 						// TODO pass this value in when available
 						isPinnedPost={false}
 						supportsDarkMode={true}
