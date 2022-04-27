@@ -250,6 +250,7 @@ const Fetch = ({
 	}
 	log('dotcom', 'LiveBlogEpic has a module');
 
+	// Add submitComponentEvent function to props to enable Ophan tracking in the component
 	const props = {
 		...response.data.module.props,
 		submitComponentEvent,
