@@ -2,13 +2,13 @@ import { css } from '@emotion/react';
 import { between, space, textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 
+const ALL_OUT_WICKETS = 10;
+
 type Props = {
 	matchUrl: string;
 	match: CricketMatch;
 	format: ArticleFormat;
 };
-
-const ALL_OUT_WICKETS = 10;
 
 const screenReaderOnlyStyle = css`
 	border: 0;
@@ -72,7 +72,7 @@ const linkStyle = (palette: Palette) => css`
 	}
 `;
 
-const cricketScore = ({
+export const cricketScore = ({
 	innings,
 	short,
 }: {
@@ -91,7 +91,7 @@ const cricketScore = ({
 	return `${innings.runsScored} - ${innings.fallOfWicket.length}`;
 };
 
-const CricketInning = ({
+export const CricketInnings = ({
 	match,
 	home,
 }: {
@@ -149,7 +149,7 @@ export const CricketScoreboard = ({ matchUrl, match, format }: Props) => {
 							{match.teams.find((team) => !!team.home)?.name}
 						</td>
 						<td css={cellStyle}>
-							<CricketInning match={match} home={true} />
+							<CricketInnings match={match} home={true} />
 						</td>
 					</tr>
 					{/* Away team */}
@@ -158,7 +158,7 @@ export const CricketScoreboard = ({ matchUrl, match, format }: Props) => {
 							{match.teams.find((team) => !team.home)?.name}
 						</td>
 						<td css={cellStyle}>
-							<CricketInning match={match} home={false} />
+							<CricketInnings match={match} home={false} />
 						</td>
 					</tr>
 				</tbody>
