@@ -28,7 +28,8 @@ function insertPlaceholders(
 
 	const numParas = flattenedNodes.filter(isPara).length;
 
-	const className = numParas < 15 ? 'ad-placeholder hidden short' : 'ad-placeholder hidden';
+	const className =
+		numParas < 15 ? 'ad-placeholder hidden short' : 'ad-placeholder hidden';
 
 	const insertAd = (para: number, nodes: ReactNode[]): ReactNode[] =>
 		adIndices.includes(para)
