@@ -20,7 +20,7 @@ jobs:
           deno-version: v1.21.0
 
       - name: Compare components "data-link-name"
-        run: deno run --allow-env="GITHUB_TOKEN" --no-check=remote --allow-net=www.theguardian.com,api.github.com  scripts/deno/ophan-components.ts data-link-name
+        run: scripts/ci-ophan.sh
 
   data-component:
     runs-on: ubuntu-20.04
