@@ -206,16 +206,10 @@ const articleAdStyles = (abVariant: ABVariants) => {
 		}
 	`;
 	if (abVariant === 'ab-test-variant') {
-		return [
-			sharedCSS,
-			variantCSS,
-		];
+		return [sharedCSS, variantCSS];
 	}
-	return [
-		sharedCSS,
-		controlCSS,
-	];
-}
+	return [sharedCSS, controlCSS];
+};
 
 export const ArticleContainer = ({ children, format }: Props) => {
 	const ABTestAPI = useAB();
