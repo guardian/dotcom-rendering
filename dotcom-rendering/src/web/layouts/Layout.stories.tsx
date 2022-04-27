@@ -6,7 +6,6 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { breakpoints } from '@guardian/source-foundations';
 import { storiesOf } from '@storybook/react';
 
 import { decideFormat } from '../lib/decideFormat';
@@ -98,11 +97,6 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 							module,
 						).addParameters({
 							chromatic: {
-								viewports: [
-									breakpoints.mobile,
-									breakpoints.tablet,
-									breakpoints.wide,
-								],
 								diffThreshold: 0.2,
 								pauseAnimationAtEnd: true,
 							},
@@ -134,7 +128,12 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 						const stories = storiesOf(
 							`Layouts/Format variations/${displayName}/${designName}`,
 							module,
-						);
+						).addParameters({
+							chromatic: {
+								diffThreshold: 0.2,
+								pauseAnimationAtEnd: true,
+							},
+						});
 
 						const fixture =
 							Fixtures[designName] || Fixtures.Article;
