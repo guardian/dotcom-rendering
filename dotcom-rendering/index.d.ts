@@ -883,6 +883,7 @@ interface TagType {
 	twitterHandle?: string;
 	paidContentType?: string;
 	bylineImageUrl?: string;
+	bylineLargeImageUrl?: string;
 }
 
 /**

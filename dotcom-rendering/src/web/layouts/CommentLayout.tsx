@@ -296,7 +296,7 @@ export const CommentLayout = ({
 	const contributorTag = CAPIArticle.tags.find(
 		(tag) => tag.type === 'Contributor',
 	);
-	const avatarUrl = contributorTag && contributorTag.bylineImageUrl;
+	const avatarUrl = contributorTag && contributorTag.bylineLargeImageUrl;
 	const onlyOneContributor: boolean =
 		CAPIArticle.tags.filter((tag) => tag.type === 'Contributor').length ===
 		1;
