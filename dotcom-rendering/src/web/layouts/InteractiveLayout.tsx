@@ -522,7 +522,10 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="body" element="article">
-								<ArticleContainer format={format}>
+								<ArticleContainer
+									format={format}
+									abTests={CAPIArticle.config.abTests}
+								>
 									<ArticleBody
 										format={format}
 										blocks={CAPIArticle.blocks}

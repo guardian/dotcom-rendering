@@ -1,16 +1,14 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
-import { useAB } from '../lib/useAB';
 
 import { labelStyles, carrotAdStyles } from './AdSlot';
 
 type Props = {
+	abTests?: ServerSideTests;
 	format: ArticleFormat;
 	children: React.ReactNode;
 };
-
-type ABVariants = 'ab-test-variant' | 'ab-test-control' | 'ab-test-not-in-test';
 
 const articleWidth = (format: ArticleFormat) => {
 	switch (format.design) {
@@ -50,7 +48,7 @@ const articleWrapper = css`
 	z-index: 1;
 `;
 
-const articleAdStyles = (abVariant: ABVariants) => {
+const articleAdStyles = (isInline1ContainerSizingVariant: boolean) => {
 	const sharedCSS = css`
 		.ad-slot {
 			@media print {
@@ -205,26 +203,21 @@ const articleAdStyles = (abVariant: ABVariants) => {
 			}
 		}
 	`;
-	if (abVariant === 'ab-test-variant') {
+	if (isInline1ContainerSizingVariant) {
 		return [sharedCSS, variantCSS];
 	}
 	return [sharedCSS, controlCSS];
 };
 
-export const ArticleContainer = ({ children, format }: Props) => {
-	const ABTestAPI = useAB();
-	const abTestVariant: ABVariants =
-		(ABTestAPI?.isUserInVariant('Inline1ContainerSizing', 'control') &&
-			'ab-test-control') ||
-		(ABTestAPI?.isUserInVariant('Inline1ContainerSizing', 'variant') &&
-			'ab-test-variant') ||
-		'ab-test-not-in-test';
+export const ArticleContainer = ({ children, format, abTests }: Props) => {
+	const isInline1ContainerSizingVariant =
+		abTests?.inline1ContainerSizingVariant === 'variant';
 	return (
 		<div
 			css={[
 				articleWrapper,
 				articleWidth(format),
-				articleAdStyles(abTestVariant),
+				articleAdStyles(isInline1ContainerSizingVariant),
 				carrotAdStyles,
 				labelStyles,
 			]}

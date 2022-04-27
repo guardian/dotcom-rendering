@@ -559,7 +559,10 @@ export const CommentLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer format={format}>
+							<ArticleContainer
+								format={format}
+								abTests={CAPIArticle.config.abTests}
+							>
 								<div css={maxWidth}>
 									<ArticleBody
 										format={format}

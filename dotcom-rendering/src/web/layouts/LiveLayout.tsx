@@ -818,7 +818,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										) : (
 											<></>
 										)}
-										<ArticleContainer format={format}>
+										<ArticleContainer
+											format={format}
+											abTests={CAPIArticle.config.abTests}
+										>
 											{pagination.currentPage !== 1 && (
 												<Pagination
 													currentPage={
