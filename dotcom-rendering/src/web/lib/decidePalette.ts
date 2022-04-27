@@ -842,6 +842,18 @@ const backgroundMatchNav = (): string => {
 	return '#FFE500';
 };
 
+const cricketScoreboardTop = (): string => {
+	return sport[300];
+};
+
+const cricketScoreboardLink = (): string => {
+	return sport[300];
+};
+
+const cricketScoreboardDivider = (): string => {
+	return neutral[86];
+};
+
 const backgroundUnderline = (format: ArticleFormat): string =>
 	transparentColour(textCardKicker(format));
 
@@ -1102,6 +1114,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			overlayedCaption: textOverlayed(),
 			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
+			cricketScoreboardLink: cricketScoreboardLink(),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -1156,6 +1169,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			lines: borderLines(format),
 			matchTab: matchTab(),
 			activeMatchTab: activeMatchTab(),
+			cricketScoreboardTop: cricketScoreboardTop(),
+			cricketScoreboardDivider: cricketScoreboardDivider(),
 		},
 		topBar: {
 			card: topBarCard(format),

@@ -121,6 +121,7 @@ type Palette = {
 		overlayedCaption: Colour;
 		shareCount: Colour;
 		shareCountUntilDesktop: Colour;
+		cricketScoreboardLink: Colour;
 	};
 	background: {
 		article: Colour;
@@ -175,6 +176,8 @@ type Palette = {
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;
+		cricketScoreboardTop: Colour;
+		cricketScoreboardDivider: Colour;
 	};
 	topBar: {
 		card: Colour;
@@ -399,6 +402,36 @@ type PageTypeType = {
 	isSensitive: boolean;
 };
 
+type MatchType = 'CricketMatchType' | 'FootballMatchType';
+
+type CricketTeam = {
+	name: string;
+	home: boolean;
+};
+
+type FallOfWicket = {
+	order: number;
+};
+
+type CricketInnings = {
+	order: number;
+	battingTeam: string;
+	runsScored: string;
+	declared: boolean;
+	forfeited: boolean;
+	fallOfWicket: FallOfWicket[];
+	overs: string;
+};
+
+type CricketMatch = {
+	matchId: string;
+	competitionName: string;
+	venueName: string;
+	teams: CricketTeam[];
+	innings: CricketInnings[];
+	gameDate: string;
+};
+
 // Data types for the API request bodies from clients that require
 // transformation before internal use. If we use the data as-is, we avoid the
 // CAPI prefix. Note also, the 'CAPI' prefix naming convention is a bit
@@ -505,6 +538,7 @@ interface CAPIArticleType {
 	pageType: PageTypeType;
 
 	matchUrl?: string;
+	matchType?: MatchType;
 	isSpecialReport: boolean;
 
 	// Interactives made on Frontend rather than DCR require special handling.
