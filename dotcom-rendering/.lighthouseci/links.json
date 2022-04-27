@@ -1,0 +1,4 @@
+{
+  "http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/2020/feb/08/hungary-now-for-the-new-right-what-venezuela-once-was-for-the-left": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1651074126942-17002.report.html",
+  "http://localhost:9000/Front?url=https://www.theguardian.com/uk": "https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1651074129549-45033.report.html"
+}
