@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { background, neutral, remSpace } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
-import { adStyles, darkModeCss } from 'styles';
+import { darkModeCss } from 'styles';
 import type { ThemeStyles } from 'themeStyles';
 import { getThemeStyles } from 'themeStyles';
 
@@ -13,8 +13,8 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 	background: ${background.inverse};
 	color: ${neutral[86]};
 
-	${adStyles(format)}
 `;
+//	${adStyles(format)}
 
 const ArticleBodyDarkStyles = ({
 	inverted,

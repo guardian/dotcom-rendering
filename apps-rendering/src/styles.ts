@@ -4,13 +4,9 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
 	background,
-	brandAltBackground,
 	from,
-	headline,
 	neutral,
 	remSpace,
-	textSans,
-	until,
 } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
@@ -118,101 +114,12 @@ export const onwardStyles: SerializedStyles = css`
 	}
 `;
 
-const adHeight = '258px';
-
 export const backgroundColor = (format: ArticleFormat): string =>
 	format.design === ArticleDesign.Comment ||
 	format.design === ArticleDesign.Letter ||
 	format.design === ArticleDesign.Editorial
 		? neutral[86]
 		: neutral[97];
-
-export const adStyles = (format: ArticleFormat): SerializedStyles => {
-	return css`
-		.ad-placeholder {
-			margin: ${remSpace[4]} 0;
-
-			&.hidden {
-				display: none;
-			}
-
-			color: ${neutral[20]};
-			background: ${backgroundColor(format)};
-
-			${darkModeCss`
-            background-color: ${neutral[20]};
-        `}
-
-			clear: both;
-
-			.ad-labels {
-				${textSans.xsmall()}
-				padding: ${remSpace[3]};
-				float: left;
-				width: calc(100% - ${remSpace[3]} - ${remSpace[3]});
-
-				h1 {
-					margin: 0;
-					float: left;
-					font-size: 16px;
-					font-weight: 400;
-
-					${darkModeCss`
-                    color: ${neutral[60]};
-                `}
-				}
-			}
-
-			.ad-slot {
-				clear: both;
-				padding-bottom: ${adHeight};
-			}
-
-			.ad-slot-square {
-				height: 344px;
-				width: 320px;
-				margin-left: auto;
-				margin-right: auto;
-				padding-bottom: 0;
-			}
-
-			.upgrade-banner {
-				padding: ${remSpace[3]};
-				background-color: ${brandAltBackground.primary};
-
-				h1 {
-					${headline.xxxsmall()};
-					margin-top: 0;
-				}
-
-				button {
-					margin-top: ${remSpace[3]};
-				}
-
-				${darkModeCss`
-                background-color: ${brandAltBackground.ctaSecondary};
-            `}
-			}
-
-			${until.phablet} {
-				margin: 1em -${remSpace[3]};
-			}
-
-			${from.desktop} {
-				position: absolute;
-				margin-left: calc(${wideContentWidth}px + ${remSpace[4]});
-				min-width: 300px;
-				margin-bottom: ${remSpace[6]};
-			}
-		}
-
-		.ad-placeholder.short:nth-of-type(1) {
-			${from.desktop} {
-				top: 0;
-			}
-		}
-	`;
-};
 
 export const fontFace = (
 	family: string,

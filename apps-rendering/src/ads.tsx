@@ -1,3 +1,4 @@
+import { ArticleFormat } from '@guardian/libs';
 import AdSlot from 'adSlot';
 import Paragraph from 'components/paragraph';
 import type { ReactNode } from 'react';
@@ -14,7 +15,7 @@ function getAdIndices(): number[] {
 	return [firstAdIndex, ...indicesAfterFirstAd];
 }
 
-function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
+function insertPlaceholders(reactNodes: ReactNode[], format: ArticleFormat): ReactNode[] {
 	const adIndices = getAdIndices();
 
 	const flattenedNodes = reactNodes.flat();
@@ -25,7 +26,7 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 	const numParas = flattenedNodes.filter(isPara).length;
 
 	const className =
-		numParas < 15 ? 'ad-placeholder hidden short' : 'ad-placeholder hidden';
+		numParas < 15 ? 'ad-placeholder short' : 'ad-placeholder';
 
 	const insertAd = (para: number, nodes: ReactNode[]): ReactNode[] =>
 		adIndices.includes(para)
@@ -34,6 +35,7 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 					<AdSlot
 						className={className}
 						paragraph={para}
+						format={format}
 						key={para}
 					/>,
 			  ]
@@ -59,7 +61,7 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 
 const getAdPlaceholderInserter = (
 	shouldHideAdverts: boolean,
-): ((reactNodes: ReactNode[]) => ReactNode[]) =>
+): ((reactNodes: ReactNode[], format: ArticleFormat) => ReactNode[]) =>
 	shouldHideAdverts
 		? (reactNodes: ReactNode[]): ReactNode[] => reactNodes
 		: insertPlaceholders;

@@ -23,7 +23,7 @@ import Live from './live';
 const renderWithAds =
 	(shouldHide: boolean) =>
 	(format: ArticleFormat, elements: BodyElement[]): ReactNode[] =>
-		getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
+		getAdPlaceholderInserter(shouldHide)(renderAll(format, elements), format);
 
 // ----- Component ----- //
 

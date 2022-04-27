@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { background, neutral, remSpace } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
-import { adStyles, darkModeCss } from 'styles';
+import { darkModeCss } from 'styles';
 
 interface ArticleBodyProps {
 	className?: SerializedStyles[];
@@ -20,8 +20,6 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 		border: none;
 	}
 
-	${adStyles(format)}
-
 	twitter-widget,
     figure[data-atom-type="explainer"] {
 		margin: ${remSpace[4]} 0;
@@ -29,7 +27,6 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 		display: inline-block;
 	}
 `;
-
 const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
     background: ${background.inverse};
     color: ${neutral[86]};
