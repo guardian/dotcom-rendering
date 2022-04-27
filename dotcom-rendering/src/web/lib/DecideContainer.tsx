@@ -1,6 +1,6 @@
-import { DynamicFast } from '../components/DynamicFast';
-import { DynamicSlow } from '../components/DynamicSlow';
-import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
+import { DynamicFast } from '../components/FrontContainer/DynamicFast';
+import { DynamicSlow } from '../components/FrontContainer/DynamicSlow';
+import { FixedLargeSlowXIV } from '../components/FrontContainer/FixedLargeSlowXIV';
 
 type Props = {
 	trails: DCRFrontCard[];

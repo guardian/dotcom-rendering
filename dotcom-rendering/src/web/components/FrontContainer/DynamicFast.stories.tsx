@@ -1,12 +1,12 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { ContainerLayout } from './ContainerLayout';
-import { DynamicSlow } from './DynamicSlow';
+import { ContainerLayout } from '../ContainerLayout';
+import { DynamicFast } from './DynamicFast';
 
-import { trails } from '../../../fixtures/manual/trails';
+import { trails } from '../../../../fixtures/manual/trails';
 
 export default {
-	component: DynamicSlow,
-	title: 'Components/DynamicSlow',
+	component: DynamicFast,
+	title: 'Components/DynamicFast',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -25,13 +25,13 @@ export default {
 
 export const Default = () => (
 	<ContainerLayout
-		title="DynamicSlow"
+		title="DynamicFast"
 		showTopBorder={true}
 		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
-		<DynamicSlow trails={trails} />
+		<DynamicFast trails={trails} />
 	</ContainerLayout>
 );
-Default.story = { name: 'DynamicSlow' };
+Default.story = { name: 'DynamicFast' };

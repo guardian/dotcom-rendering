@@ -1,8 +1,8 @@
 import { ArticleDesign } from '@guardian/libs';
 
-import { Card } from './Card/Card';
-import { UL } from './Card/components/UL';
-import { LI } from './Card/components/LI';
+import { Card } from '../Card/Card';
+import { UL } from '../Card/components/UL';
+import { LI } from '../Card/components/LI';
 
 type Props = {
 	trails: TrailType[];
