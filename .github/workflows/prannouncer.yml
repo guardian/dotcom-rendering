@@ -9,6 +9,6 @@ jobs:
   prnouncer:
     runs-on: ubuntu-latest
     steps:
-      - uses: guardian/prnouncer@main
+      - uses: guardian/actions-prnouncer@main
         with:
           google-webhook-url: ${{ secrets.GOOGLE_WEBHOOK_URL }}
