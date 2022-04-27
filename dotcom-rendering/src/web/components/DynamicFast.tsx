@@ -80,7 +80,6 @@ export const DynamicFast = ({ trails }: Props) => {
 						starRating={secondary.starRating}
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
-						imagePositionOnMobile="left"
 					/>
 				</LI>
 			</UL>
@@ -121,7 +120,6 @@ export const DynamicFast = ({ trails }: Props) => {
 								starRating={card.starRating}
 								branding={card.branding}
 								supportingContent={card.supportingContent}
-								imagePositionOnMobile="left"
 							/>
 						</LI>
 					);

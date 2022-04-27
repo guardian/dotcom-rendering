@@ -25,6 +25,7 @@ const directionStyles = (imagePosition: ImagePositionType) => {
 					flex-direction: row;
 				}
 			`;
+		case 'none':
 		case 'top':
 		case 'bottom':
 			return css`

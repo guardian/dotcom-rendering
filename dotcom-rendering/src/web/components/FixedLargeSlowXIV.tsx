@@ -81,7 +81,6 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 						commentCount={secondary.commentCount}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
-						imagePositionOnMobile="left"
 					/>
 				</LI>
 			</UL>
@@ -129,7 +128,6 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
-										imagePositionOnMobile="left"
 									/>
 								</LI>
 							);

@@ -61,7 +61,6 @@ export const FourOrLess = ({ content }: Props) => {
 							commentCount={trail.commentCount}
 							starRating={trail.starRating}
 							branding={trail.branding}
-							imagePositionOnMobile="left"
 						/>
 					</LI>
 				))}

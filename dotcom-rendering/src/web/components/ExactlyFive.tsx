@@ -38,7 +38,6 @@ export const ExactlyFive = ({ content }: Props) => (
 					commentCount={content[0].commentCount}
 					starRating={content[0].starRating}
 					branding={content[0].branding}
-					imagePositionOnMobile="left"
 				/>
 			</LI>
 			<LI
@@ -71,7 +70,6 @@ export const ExactlyFive = ({ content }: Props) => (
 					commentCount={content[1].commentCount}
 					starRating={content[1].starRating}
 					branding={content[1].branding}
-					imagePositionOnMobile="left"
 				/>
 			</LI>
 			<LI

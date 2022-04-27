@@ -4,7 +4,7 @@ import { until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
-	imagePositionOnMobile?: ImagePositionType;
+	imagePositionOnMobile: ImagePositionType;
 	percentage?: CardPercentageType;
 };
 
@@ -23,7 +23,7 @@ export const ImageWrapper = ({
 					position: relative;
 					flex-basis: ${percentage && percentage};
 					// If no image position for mobile is provided then hide the image
-					${!imagePositionOnMobile && until.tablet} {
+					${imagePositionOnMobile === 'none' && until.tablet} {
 						display: none;
 					}
 					${notVertical && until.tablet} {
