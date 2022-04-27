@@ -10,6 +10,7 @@ import {
 } from '@guardian/libs';
 import { compose } from 'lib';
 import { ElementKind, BodyElement } from 'bodyElement';
+import AdSlot from 'adSlot';
 
 const shouldHideAdverts = false;
 const insertAdPlaceholders = getAdPlaceholderInserter(shouldHideAdverts);
@@ -97,7 +98,7 @@ describe('Adds placholders at the correct indexes', () => {
 			fiveParagraphs,
 			mockFormat,
 		);
-		expect(fiveParagraphsAndOneAd[3].type).toBe('aside');
+		expect(fiveParagraphsAndOneAd[3].type).toBe(AdSlot);
 	});
 
 	test('Adds second placeholder after 9th paragraph', () => {
@@ -106,7 +107,8 @@ describe('Adds placholders at the correct indexes', () => {
 			tenParagraphs,
 			mockFormat,
 		);
-		expect(tenParagraphsAndTwoAds[10].type).toBe('aside');
+		console.log(JSON.stringify(tenParagraphsAndTwoAds[10]));
+		expect(tenParagraphsAndTwoAds[10].type).toBe(AdSlot);
 	});
 });
 
