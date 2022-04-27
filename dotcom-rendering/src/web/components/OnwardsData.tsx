@@ -1,4 +1,4 @@
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import { useApi } from '../lib/useApi';
 
@@ -23,20 +23,6 @@ type OnwardsResponse = {
 
 const minHeight = css`
 	min-height: 300px;
-`;
-
-const revealStyles = css`
-	/* We're using classnames here because we add and remove these classes
-	   using plain javascript */
-	.reveal {
-		animation: ${keyframes`
-			0% { opacity: 0; }
-			100% { opacity: 1; }
-		`} 2s ease-out;
-	}
-	.pending {
-		display: none;
-	}
 `;
 
 export const OnwardsData = ({
@@ -87,7 +73,7 @@ export const OnwardsData = ({
 
 	if (data?.trails) {
 		return (
-			<div css={[minHeight, revealStyles]} className="onwards">
+			<div css={[minHeight]} className="onwards">
 				<div className="pending">
 					<Container
 						heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'

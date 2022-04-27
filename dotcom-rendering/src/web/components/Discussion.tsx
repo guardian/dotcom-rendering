@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 
 import { joinUrl } from '@guardian/libs';
 import { neutral, space } from '@guardian/source-foundations';
@@ -35,20 +35,6 @@ const overlayStyles = css`
 	right: 0;
 	width: 100%;
 	display: block;
-`;
-
-const revealStyles = css`
-	/* We're using classnames here because we add and remove these classes
-   using plain javascript */
-	.reveal {
-		animation: ${keyframes`
-		0% { opacity: 0; }
-		100% { opacity: 1; }
-	`} 2s ease-out;
-	}
-	.pending {
-		display: none;
-	}
 `;
 
 const fixHeight = css`
@@ -152,7 +138,7 @@ export const Discussion = ({
 	return (
 		<>
 			<div
-				css={[positionRelative, revealStyles, !isExpanded && fixHeight]}
+				css={[positionRelative, !isExpanded && fixHeight]}
 				className="discussion"
 			>
 				<div className="pending">

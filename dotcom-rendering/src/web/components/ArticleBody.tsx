@@ -1,4 +1,4 @@
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 
 import { headline, body, between, space } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
@@ -87,20 +87,6 @@ const globalLinkStyles = (palette: Palette) => css`
 	}
 `;
 
-const revealStyles = css`
-	/* We're using classnames here because we add and remove these classes
-	   using plain javascript */
-	.reveal {
-		animation: ${keyframes`
-			0% { opacity: 0; }
-			100% { opacity: 1; }
-		`} 4s ease-out;
-	}
-	.pending {
-		display: none;
-	}
-`;
-
 export const ArticleBody = ({
 	format,
 	blocks,
@@ -145,10 +131,6 @@ export const ArticleBody = ({
 						globalH2Styles(format.display),
 						globalH3Styles(format.display),
 						globalLinkStyles(palette),
-						// revealStyles is used to animate the reveal of new blocks
-						(format.design === ArticleDesign.DeadBlog ||
-							format.design === ArticleDesign.LiveBlog) &&
-							revealStyles,
 					]}
 				>
 					<LiveBlogRenderer

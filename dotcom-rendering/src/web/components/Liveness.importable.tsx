@@ -87,7 +87,7 @@ function revealPendingBlocks() {
 		'article .pending.block',
 	);
 	pendingBlocks?.forEach((block) => {
-		block.classList.add('reveal');
+		block.classList.add('reveal-slowly');
 		block.classList.remove('pending');
 	});
 
