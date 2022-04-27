@@ -1,4 +1,4 @@
-name: DCR Fronts–Ophan Components
+name: DCR Fronts Ophan Components
 on:
   schedule:
     # Every work day of the week at 08:08
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  data-link-name:
+  ophan-components:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -19,19 +19,7 @@ jobs:
         with:
           deno-version: v1.21.0
 
-      - name: Compare components "data-link-name"
+      - name: Compare Ophan components
         run: scripts/ci-ophan.sh
-
-  data-component:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup deno
-        uses: denolib/setup-deno@v2
-        with:
-          deno-version: v1.21.0
-
-      - name: Compare components "data-component"
-        run: run: deno run --allow-env="GITHUB_TOKEN" --no-check=remote --allow-net=www.theguardian.com,api.github.com  scripts/deno/ophan-components.ts data-component
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
