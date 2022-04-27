@@ -331,6 +331,7 @@ interface AuthorType {
 interface BlockContributor {
 	name: string;
 	imageUrl?: string;
+	largeImageUrl?: string;
 }
 
 interface Block {
