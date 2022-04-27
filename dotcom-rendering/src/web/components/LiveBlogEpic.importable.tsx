@@ -15,6 +15,7 @@ import {
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useApi } from '../lib/useApi';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 
 type Props = {
 	section: string;
@@ -249,12 +250,18 @@ const Fetch = ({
 	}
 	log('dotcom', 'LiveBlogEpic has a module');
 
+	// Add submitComponentEvent function to props to enable Ophan tracking in the component
+	const props = {
+		...response.data.module.props,
+		submitComponentEvent,
+	};
+
 	// Take any returned module and render it
 	return (
 		<Render
 			url={response.data.module.url}
 			name={response.data.module.name}
-			props={response.data.module.props}
+			props={props}
 		/>
 	);
 };
