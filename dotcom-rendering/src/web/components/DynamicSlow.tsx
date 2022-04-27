@@ -135,6 +135,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 										supportingContent={
 											card.supportingContent
 										}
+										imagePositionOnMobile="none"
 									/>
 								</LI>
 							);
