@@ -1,0 +1,37 @@
+name: DCR Fronts–Ophan Components
+on:
+  schedule:
+    # Every work day of the week at 08:08
+    - cron: "8 8 * * MON-FRI"
+
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
+
+jobs:
+  data-link-name:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.21.0
+
+      - name: Compare components "data-link-name"
+        run: scripts/ci-ophan.sh
+
+  data-component:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.21.0
+
+      - name: Compare components "data-component"
+        run: run: deno run --allow-env="GITHUB_TOKEN" --no-check=remote --allow-net=www.theguardian.com,api.github.com  scripts/deno/ophan-components.ts data-component
