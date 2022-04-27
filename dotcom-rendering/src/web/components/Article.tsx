@@ -49,7 +49,7 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 						animation: ${keyframes`
 							0% { opacity: 0; }
 							100% { opacity: 1; }
-						`} 2s ease-out;
+						`} 1s ease-out;
 					}
 					.reveal-slowly {
 						animation: ${keyframes`
