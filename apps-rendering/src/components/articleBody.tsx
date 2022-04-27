@@ -21,7 +21,7 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	twitter-widget,
-    figure[data-atom-type="explainer"] {
+	figure[data-atom-type='explainer'] {
 		margin: ${remSpace[4]} 0;
 		clear: both;
 		display: inline-block;

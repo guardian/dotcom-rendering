@@ -1,4 +1,4 @@
-import { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import AdSlot from 'adSlot';
 import Paragraph from 'components/paragraph';
 import type { ReactNode } from 'react';
@@ -15,7 +15,10 @@ function getAdIndices(): number[] {
 	return [firstAdIndex, ...indicesAfterFirstAd];
 }
 
-function insertPlaceholders(reactNodes: ReactNode[], format: ArticleFormat): ReactNode[] {
+function insertPlaceholders(
+	reactNodes: ReactNode[],
+	format: ArticleFormat,
+): ReactNode[] {
 	const adIndices = getAdIndices();
 
 	const flattenedNodes = reactNodes.flat();
@@ -25,8 +28,7 @@ function insertPlaceholders(reactNodes: ReactNode[], format: ArticleFormat): Rea
 
 	const numParas = flattenedNodes.filter(isPara).length;
 
-	const className =
-		numParas < 15 ? 'ad-placeholder short' : 'ad-placeholder';
+	const className = numParas < 15 ? 'ad-placeholder short' : 'ad-placeholder';
 
 	const insertAd = (para: number, nodes: ReactNode[]): ReactNode[] =>
 		adIndices.includes(para)

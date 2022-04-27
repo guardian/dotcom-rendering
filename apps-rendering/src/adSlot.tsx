@@ -1,9 +1,10 @@
-import { css, SerializedStyles, ThemeProvider } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import {
 	background,
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	headline,

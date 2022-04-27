@@ -12,7 +12,6 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 	clear: both;
 	background: ${background.inverse};
 	color: ${neutral[86]};
-
 `;
 //	${adStyles(format)}
 
