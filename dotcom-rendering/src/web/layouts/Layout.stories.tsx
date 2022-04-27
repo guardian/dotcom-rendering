@@ -94,7 +94,7 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 				for (const [pillarName] of Object.entries(ArticlePillar)) {
 					if (Number.isNaN(Number(pillarName))) {
 						const stories = storiesOf(
-							`Layouts/${displayName}/${designName}`,
+							`Layouts/Format variations/${displayName}/${designName}`,
 							module,
 						).addParameters({
 							chromatic: {
@@ -132,7 +132,7 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 				for (const [specialName] of Object.entries(ArticleSpecial)) {
 					if (Number.isNaN(Number(specialName))) {
 						const stories = storiesOf(
-							`Layouts/${displayName}/${designName}`,
+							`Layouts/Format variations/${displayName}/${designName}`,
 							module,
 						);
 
@@ -163,3 +163,14 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 		}
 	}
 }
+
+storiesOf(`Layouts/Liveblog`, module).add('With no key events', () => {
+	return (
+		<HydratedLayout
+			ServerCAPI={{
+				...Fixtures.LiveBlog,
+				keyEvents: [],
+			}}
+		/>
+	);
+});
