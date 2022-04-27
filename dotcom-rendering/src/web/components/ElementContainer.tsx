@@ -1,9 +1,8 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
 
 import { border, from } from '@guardian/source-foundations';
-// @ts-ignore-start
+// @ts-ignore
 import { jsx as _jsx } from 'react/jsx-runtime';
-// @ts-ignore-end
 import { center } from '../lib/center';
 
 const padding = emoCss`
@@ -48,6 +47,8 @@ type Props = {
 		| 'section'
 		| 'footer'; // ElementContainer is generally a top-level wrapper
 	className?: string;
+	ophanComponentName?: string;
+	ophanComponentLink?: string;
 };
 
 export const ElementContainer = ({
@@ -61,6 +62,8 @@ export const ElementContainer = ({
 	children,
 	element = 'div',
 	className,
+	ophanComponentName,
+	ophanComponentLink,
 }: Props) => (
 	<ClassNames>
 		{({ css }) => {
@@ -83,6 +86,8 @@ export const ElementContainer = ({
 			// Create a react element from the tagName passed in OR
 			// default to <div>
 			return _jsx(`${element}`, {
+				'data-link-name': ophanComponentLink,
+				'data-component': ophanComponentName,
 				className: className ? `${style} ${className}` : style,
 				children: child,
 			});
