@@ -10,7 +10,6 @@ import { tests } from '../experiments/ab-tests';
 import { commercialLazyLoadMargin } from '../experiments/tests/commercial-lazy-load-margin';
 import { useAB } from '../lib/useAB';
 import { prebidPriceGranularity } from '../experiments/tests/prebid-price-granularity';
-import { inline1ContainerSizing } from '../experiments/tests/inline1-container-sizing';
 
 type Props = {
 	enabled: boolean;
@@ -32,7 +31,6 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 			/* keep array multi-line */
 			commercialLazyLoadMargin,
 			prebidPriceGranularity,
-			inline1ContainerSizing,
 		];
 		const shouldForceMetrics = ABTestAPI?.allRunnableTests(tests).some(
 			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
