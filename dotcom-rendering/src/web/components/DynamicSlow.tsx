@@ -106,6 +106,9 @@ export const DynamicSlow = ({ trails }: Props) => {
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}
+										imageUrl={card.image}
+										imagePosition="left"
+										imageSize="small"
 										headlineSize="small"
 										byline={card.byline}
 										showByline={card.showByline}
