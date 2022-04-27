@@ -7,7 +7,7 @@ const getDate = (milliSeconds = 1, seconds = 1, minutes = 1, hours = 1) =>
 const format = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
-	theme: ArticlePillar.News
+	theme: ArticlePillar.News,
 };
 
 export const events: KeyEvent[] = [
