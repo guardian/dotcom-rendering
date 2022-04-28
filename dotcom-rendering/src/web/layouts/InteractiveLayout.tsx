@@ -354,7 +354,12 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						padded={false}
 						showTopBorder={false}
 					>
-						<StraightLines count={4} />
+						<StraightLines
+							cssOverrides={css`
+								display: block;
+							`}
+							count={4}
+						/>
 					</ElementContainer>
 				)}
 			</div>
@@ -556,6 +561,9 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										<StraightLines
 											count={4}
 											data-print-layout="hide"
+											cssOverrides={css`
+												display: block;
+											`}
 										/>
 									</div>
 									<SubMeta

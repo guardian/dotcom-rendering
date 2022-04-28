@@ -389,7 +389,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						showTopBorder={false}
 						borderColour={palette.border.article}
 					>
-						<StraightLines count={4} />
+						<StraightLines
+							count={4}
+							cssOverrides={css`
+								display: block;
+							`}
+						/>
 					</ElementContainer>
 				</SendToBack>
 			</div>
@@ -943,6 +948,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											<StraightLines
 												data-print-layout="hide"
 												count={4}
+												cssOverrides={css`
+													display: block;
+												`}
 											/>
 											<SubMeta
 												format={format}

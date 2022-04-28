@@ -84,6 +84,8 @@ const metaFlex = css`
 `;
 
 const stretchLines = css`
+	display: block;
+
 	${until.phablet} {
 		margin-left: -20px;
 		margin-right: -20px;
@@ -350,8 +352,12 @@ export const ArticleMeta = ({
 					</Island>
 				)}
 				{format.theme === ArticleSpecial.Labs ? (
-					<div css={stretchLines}>
-						<StraightLines count={1} color={border.primary} />
+					<div>
+						<StraightLines
+							cssOverrides={stretchLines}
+							count={1}
+							color={border.primary}
+						/>
 						<div
 							css={css`
 								height: ${space[1]}px;

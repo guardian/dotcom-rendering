@@ -5,14 +5,18 @@ import {
 } from '@guardian/source-react-components-development-kitchen';
 import { border, space } from '@guardian/source-foundations';
 
+const block = css`
+	display: block;
+`;
+
 export const GuardianLabsLines = () => (
 	<>
-		<StraightLines count={1} color={border.primary} />
+		<StraightLines cssOverrides={block} count={1} color={border.primary} />
 		<div
 			css={css`
 				height: ${space[2]}px;
 			`}
 		/>
-		<DottedLines count={1} color={border.primary} />
+		<DottedLines cssOverrides={block} count={1} color={border.primary} />
 	</>
 );

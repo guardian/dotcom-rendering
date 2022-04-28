@@ -352,7 +352,12 @@ export const ShowcaseLayout = ({
 								padded={false}
 								showTopBorder={false}
 							>
-								<StraightLines count={4} />
+								<StraightLines
+									count={4}
+									cssOverrides={css`
+										display: block;
+									`}
+								/>
 							</ElementContainer>
 						</SendToBack>
 					</div>
@@ -592,7 +597,12 @@ export const ShowcaseLayout = ({
 										/>
 									</Island>
 								)}
-								<StraightLines count={4} />
+								<StraightLines
+									count={4}
+									cssOverrides={css`
+										display: block;
+									`}
+								/>
 								<SubMeta
 									format={format}
 									subMetaKeywordLinks={

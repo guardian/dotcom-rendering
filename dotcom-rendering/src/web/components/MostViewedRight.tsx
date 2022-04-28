@@ -56,7 +56,12 @@ export const MostViewedRight = ({
 				css={[wrapperStyles, stickToTop && stickyStyles]}
 				data-component="geo-most-popular"
 			>
-				<StraightLines count={4} />
+				<StraightLines
+					cssOverrides={css`
+						display: block;
+					`}
+					count={4}
+				/>
 				<h3 css={headingStyles}>Most viewed</h3>
 				<ul data-link-name="Right hand most popular geo GB">
 					{trails.map((trail, index) => (
