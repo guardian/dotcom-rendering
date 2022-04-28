@@ -9,7 +9,7 @@ if (!token) {
 
 const path = Deno.env.get("GITHUB_EVENT_PATH");
 if (!path) {
-	console.warn("Missing GITHUB_PATH");
+	console.warn("Missing GITHUB_EVENT_PATH");
 	Deno.exit(1);
 }
 
@@ -47,33 +47,65 @@ interface Result {
 	passed: boolean;
 	operator: string;
 	auditTitle: string;
+	name: string;
+	values: number[];
+	level: string;
+	url: string;
+	auditDocumentationLink: string;
 }
 
-const createLighthouseResultsMd = (): string => {
-	const data: Result[] = JSON.parse(
-		Deno.readTextFileSync(
-			"dotcom-rendering/.lighthouseci/assertion-results.json"
-		)
-	);
+const dir = "dotcom-rendering/.lighthouseci";
 
-	const auditCount = data.length;
-	const failedAuditCount = data.filter((result) => !result.passed).length;
-	const resultsTemplateString = data.map(
+const info: Record<string, string> = JSON.parse(
+	Deno.readTextFileSync(`${dir}/links.json`)
+);
+
+const generateAuditTable = (auditUrl: string, results: Result[]): string => {
+	const reportUrl = info[auditUrl];
+
+	const resultsTemplateString = results.map(
 		(result) =>
 			`| ${result.auditTitle} | ${result.passed ? "✅" : "❌"} | ${
 				result.expected
 			} | ${result.actual} |`
 	);
 
-	return [
-		`${MAGIC_STRING} for the changes in this PR:`,
-		"| Category | Passed | Expected | Actual |",
+	const [endpoint, testUrlClean] = auditUrl.split("?url=");
+
+	const table = [
+		`### [Report for ${endpoint.split("/").slice(-1)}](${reportUrl})`,
+		`> tested url \`${testUrlClean}\``,
+		"",
+		"| Category | Status | Expected | Actual |",
 		"| --- | --- | --- | --- |",
 		...resultsTemplateString,
-		" ",
+		"",
+	].join("\n");
+
+	return table;
+};
+
+const createLighthouseResultsMd = (): string => {
+	const data: Result[] = JSON.parse(
+		Deno.readTextFileSync(`${dir}/assertion-results.json`)
+	);
+
+	const auditCount = data.length;
+	const failedAuditCount = data.filter((result) => !result.passed).length;
+	const auditUrls = [...new Set<string>(data.map((result) => result.url))];
+
+	return [
+		`## ${MAGIC_STRING} for the changes in this PR`,
+		`Lighthouse tested ${auditUrls.length} URLs  `,
 		failedAuditCount > 1 &&
 			`⚠️ Budget exceeded for ${failedAuditCount} of ${auditCount} audits.`,
-	].join("\n");
+		...auditUrls.map((url) =>
+			generateAuditTable(
+				url,
+				data.filter((result) => result.url === url)
+			)
+		),
+	].join("\n\n");
 };
 
 const getCommentID = async (): Promise<number | null> => {
