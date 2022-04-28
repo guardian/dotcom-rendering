@@ -17,11 +17,18 @@ export const CoreVitals = () => {
 		window.location.hostname === 'preview.gutools.co.uk';
 	const sampling = 1 / 100;
 
+	const ABTestAPI = useAB();
+
 	// For these tests switch off sampling and collect metrics for 100% of views
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
 		commercialGptLazyLoad,
 	];
+
+	const userInClientSideTestToForceMetrics =
+	clientSideTestsToForceMetrics.some((test) =>
+		ABTestAPI?.runnableTest(test),
+	);
 
 	const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
 		/* linter, please keep this array multi-line */
@@ -32,13 +39,6 @@ export const CoreVitals = () => {
 	const userInServerSideTestToForceMetrics =
 		serverSideTestsToForceMetrics.some((test) =>
 			Object.keys(window.guardian.config.tests).includes(test),
-		);
-
-	const ABTestAPI = useAB();
-
-	const userInClientSideTestToForceMetrics =
-		clientSideTestsToForceMetrics.some((test) =>
-			ABTestAPI?.runnableTest(test),
 		);
 
 	/* eslint-disable @typescript-eslint/no-floating-promises -- they’re async methods */

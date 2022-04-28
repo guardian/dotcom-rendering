@@ -27,14 +27,28 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 		if (!enabled) return;
 
 		// For these tests switch off sampling and collect metrics for 100% of views
-		const testsToForceMetrics: ABTest[] = [
+		const clientSideTestsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
 			commercialLazyLoadMargin,
 			prebidPriceGranularity,
 		];
-		const shouldForceMetrics = ABTestAPI?.allRunnableTests(tests).some(
-			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
+
+		const userInClientSideTestToForceMetrics = ABTestAPI?.allRunnableTests(
+			tests,
+		).some((test) =>
+			clientSideTestsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
+
+		const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
+			/* keep array multi-line */
+			'inline1ContainerSizingVariant',
+			'inline1ContainerSizingControl',
+		];
+
+		const userInServerSideTestToForceMetrics =
+			serverSideTestsToForceMetrics.some((test) =>
+				Object.keys(window.guardian.config.tests).includes(test),
+			);
 
 		const isDev =
 			window.guardian.config.page.isDev ||
@@ -49,7 +63,10 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 			adBlockerInUse,
 		});
 
-		if (shouldForceMetrics) {
+		if (
+			userInClientSideTestToForceMetrics ||
+			userInServerSideTestToForceMetrics
+		) {
 			// TODO: rename this in commercial-core and update here
 			switchOffSampling();
 		}
