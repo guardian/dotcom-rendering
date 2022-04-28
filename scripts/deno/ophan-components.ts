@@ -1,4 +1,5 @@
-import { Octokit } from "https://cdn.skypack.dev/octokit?dts";
+import { Octokit } from "https://cdn.skypack.dev/octokit";
+import type { RestEndpointMethodTypes } from "https://cdn.skypack.dev/@octokit/plugin-rest-endpoint-methods?dts";
 
 const token = Deno.env.get("GITHUB_TOKEN");
 if (!token) {
@@ -137,17 +138,34 @@ ${
 
 	const issue_number = issues[attribute];
 
-	await octokit.request("PATCH /repos/{owner}/{repo}/issues/{issue_number}", {
-		owner: "guardian",
-		repo: "dotcom-rendering",
-		issue_number,
-		body,
-	});
-
-	console.info(`Updated dotcom-rendering#${issue_number} ${attribute}`);
-	console.info(
-		`https://github.com/guardian/dotcom-rendering/issues/${issue_number}`
+	const {
+		data: { body: previousBody },
+	}: RestEndpointMethodTypes["issues"]["update"]["response"] = await octokit.request(
+		"GET /repos/{owner}/{repo}/issues/{issue_number}",
+		{
+			owner: "guardian",
+			repo: "dotcom-rendering",
+			issue_number,
+		}
 	);
+
+	const {
+		data: { body: newBody, html_url },
+	}: RestEndpointMethodTypes["issues"]["update"]["response"] = await octokit.request(
+		"PATCH /repos/{owner}/{repo}/issues/{issue_number}",
+		{
+			owner: "guardian",
+			repo: "dotcom-rendering",
+			issue_number,
+			body,
+		}
+	);
+
+	const change: string =
+		previousBody === newBody ? "[no change]" : `[some changes]`;
+
+	console.info(`PR dotcom-rendering#${issue_number} ${attribute} ${change}`);
+	console.info(html_url);
 };
 
 await updateIssue("data-component");
