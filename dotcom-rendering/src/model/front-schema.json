@@ -527,7 +527,82 @@
                                         },
                                         "supportingContent": {
                                             "type": "array",
-                                            "items": {}
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "properties": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "href": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "href"
+                                                        ]
+                                                    },
+                                                    "header": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "kicker": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "item": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "properties": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "kickerText": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "kickerText"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "properties"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "item"
+                                                                ]
+                                                            },
+                                                            "headline": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "headline"
+                                                        ]
+                                                    },
+                                                    "format": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "design": {
+                                                                "$ref": "#/definitions/CAPIDesign"
+                                                            },
+                                                            "theme": {
+                                                                "$ref": "#/definitions/CAPITheme"
+                                                            },
+                                                            "display": {
+                                                                "$ref": "#/definitions/CAPIDisplay"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "design",
+                                                            "display",
+                                                            "theme"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "properties"
+                                                ]
+                                            }
                                         },
                                         "cardStyle": {
                                             "type": "object",
@@ -1025,7 +1100,82 @@
                                         },
                                         "supportingContent": {
                                             "type": "array",
-                                            "items": {}
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "properties": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "href": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "href"
+                                                        ]
+                                                    },
+                                                    "header": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "kicker": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "item": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "properties": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "kickerText": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "kickerText"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "properties"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "item"
+                                                                ]
+                                                            },
+                                                            "headline": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "headline"
+                                                        ]
+                                                    },
+                                                    "format": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "design": {
+                                                                "$ref": "#/definitions/CAPIDesign"
+                                                            },
+                                                            "theme": {
+                                                                "$ref": "#/definitions/CAPITheme"
+                                                            },
+                                                            "display": {
+                                                                "$ref": "#/definitions/CAPIDisplay"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "design",
+                                                            "display",
+                                                            "theme"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "properties"
+                                                ]
+                                            }
                                         },
                                         "cardStyle": {
                                             "type": "object",
@@ -1523,7 +1673,82 @@
                                         },
                                         "supportingContent": {
                                             "type": "array",
-                                            "items": {}
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "properties": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "href": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "href"
+                                                        ]
+                                                    },
+                                                    "header": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "kicker": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "item": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "properties": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "kickerText": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "kickerText"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "properties"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "item"
+                                                                ]
+                                                            },
+                                                            "headline": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "headline"
+                                                        ]
+                                                    },
+                                                    "format": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "design": {
+                                                                "$ref": "#/definitions/CAPIDesign"
+                                                            },
+                                                            "theme": {
+                                                                "$ref": "#/definitions/CAPITheme"
+                                                            },
+                                                            "display": {
+                                                                "$ref": "#/definitions/CAPIDisplay"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "design",
+                                                            "display",
+                                                            "theme"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "properties"
+                                                ]
+                                            }
                                         },
                                         "cardStyle": {
                                             "type": "object",
