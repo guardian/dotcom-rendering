@@ -573,7 +573,7 @@ type FEFrontPropertiesType = {
 
 type FESupportingContent = {
 	properties: {
-		href: string;
+		href?: string;
 	};
 	header?: {
 		kicker?: {
@@ -590,7 +590,7 @@ type FESupportingContent = {
 
 type DCRSupportingContent = {
 	headline: string;
-	url: string;
+	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
 };

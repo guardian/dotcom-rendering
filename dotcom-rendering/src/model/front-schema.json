@@ -536,10 +536,7 @@
                                                             "href": {
                                                                 "type": "string"
                                                             }
-                                                        },
-                                                        "required": [
-                                                            "href"
-                                                        ]
+                                                        }
                                                     },
                                                     "header": {
                                                         "type": "object",
@@ -1109,10 +1106,7 @@
                                                             "href": {
                                                                 "type": "string"
                                                             }
-                                                        },
-                                                        "required": [
-                                                            "href"
-                                                        ]
+                                                        }
                                                     },
                                                     "header": {
                                                         "type": "object",
@@ -1682,10 +1676,7 @@
                                                             "href": {
                                                                 "type": "string"
                                                             }
-                                                        },
-                                                        "required": [
-                                                            "href"
-                                                        ]
+                                                        }
                                                     },
                                                     "header": {
                                                         "type": "object",
