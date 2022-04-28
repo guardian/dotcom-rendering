@@ -921,7 +921,7 @@ interface BadgeType {
 	imageUrl: string;
 }
 
-type ImagePositionType = 'left' | 'top' | 'right' | 'bottom';
+type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 

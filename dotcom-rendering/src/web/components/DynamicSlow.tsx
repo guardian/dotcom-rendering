@@ -88,23 +88,24 @@ export const DynamicSlow = ({ trails }: Props) => {
 					/>
 				</LI>
 			</UL>
-			<UL direction="row" padBottom={true}>
-				<LI percentage="50%" showTopMarginWhenStacked={false}>
-					<UL direction="column" wrapCards={true}>
-						{smallCards.map((card, cardIndex) => {
+			<UL direction="row-reverse" padBottom={true}>
+				<LI percentage="50%" showTopMarginWhenStacked={true}>
+					<UL direction="row" wrapCards={true} showDivider={true}>
+						{bigCards.map((card, cardIndex) => {
 							return (
 								<LI
+									percentage="50%"
+									showDivider={cardIndex !== 0}
 									padSides={true}
-									showTopMarginWhenStacked={false}
-									padBottom={
-										// No bottom margin on the last card
-										cardIndex < smallCards.length - 1
+									padBottom={false}
+									padBottomOnMobile={
+										cardIndex < bigCards.length
 									}
-									padBottomOnMobile={false}
 								>
 									<Card
 										linkTo={card.url}
 										format={card.format}
+										trailText={card.trailText}
 										headlineText={card.headline}
 										headlineSize="medium"
 										byline={card.byline}
@@ -125,6 +126,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 										}
 										showSlash={true}
 										showClock={false}
+										imageUrl={card.image}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
 										commentCount={card.commentCount}
@@ -133,30 +135,33 @@ export const DynamicSlow = ({ trails }: Props) => {
 										supportingContent={
 											card.supportingContent
 										}
+										imagePositionOnMobile="none"
 									/>
 								</LI>
 							);
 						})}
 					</UL>
 				</LI>
-				<LI percentage="50%" showTopMarginWhenStacked={true}>
-					<UL direction="row" wrapCards={true} showDivider={true}>
-						{bigCards.map((card, cardIndex) => {
+				<LI percentage="50%" showTopMarginWhenStacked={false}>
+					<UL direction="column" wrapCards={true}>
+						{smallCards.map((card, cardIndex) => {
 							return (
 								<LI
-									percentage="50%"
-									showDivider={cardIndex !== 0}
 									padSides={true}
-									padBottom={false}
-									padBottomOnMobile={
-										cardIndex < bigCards.length
+									showTopMarginWhenStacked={false}
+									padBottom={
+										// No bottom margin on the last card
+										cardIndex < smallCards.length - 1
 									}
+									padBottomOnMobile={false}
 								>
 									<Card
 										linkTo={card.url}
 										format={card.format}
-										trailText={card.trailText}
 										headlineText={card.headline}
+										imageUrl={card.image}
+										imagePosition="left"
+										imageSize="small"
 										headlineSize="small"
 										byline={card.byline}
 										showByline={card.showByline}
@@ -176,7 +181,6 @@ export const DynamicSlow = ({ trails }: Props) => {
 										}
 										showSlash={true}
 										showClock={false}
-										imageUrl={card.image}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
 										commentCount={card.commentCount}

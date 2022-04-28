@@ -9,6 +9,7 @@
         "styled-components.vscode-styled-components",
         "stylelint.vscode-stylelint",
         "eamodio.gitlens",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "denoland.vscode-deno"
     ]
 }

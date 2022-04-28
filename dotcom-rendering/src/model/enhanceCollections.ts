@@ -48,8 +48,11 @@ export const enhanceCollections = (
 	collections: FECollectionType[],
 ): DCRCollectionType[] => {
 	return collections.map((collection) => {
+		const { id, displayName, collectionType } = collection;
 		return {
-			...collection,
+			id,
+			displayName,
+			collectionType,
 			curated: enhanceCards(collection.curated),
 			backfill: enhanceCards(collection.backfill),
 			treats: enhanceCards(collection.treats),
