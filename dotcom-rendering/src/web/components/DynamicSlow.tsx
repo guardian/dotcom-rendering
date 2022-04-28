@@ -88,7 +88,60 @@ export const DynamicSlow = ({ trails }: Props) => {
 					/>
 				</LI>
 			</UL>
-			<UL direction="row" padBottom={true}>
+			<UL direction="row-reverse" padBottom={true}>
+				<LI percentage="50%" showTopMarginWhenStacked={true}>
+					<UL direction="row" wrapCards={true} showDivider={true}>
+						{bigCards.map((card, cardIndex) => {
+							return (
+								<LI
+									percentage="50%"
+									showDivider={cardIndex !== 0}
+									padSides={true}
+									padBottom={false}
+									padBottomOnMobile={
+										cardIndex < bigCards.length
+									}
+								>
+									<Card
+										linkTo={card.url}
+										format={card.format}
+										trailText={card.trailText}
+										headlineText={card.headline}
+										headlineSize="medium"
+										byline={card.byline}
+										showByline={card.showByline}
+										showQuotes={
+											card.format.design ===
+												ArticleDesign.Comment ||
+											card.format.design ===
+												ArticleDesign.Letter
+										}
+										webPublicationDate={
+											card.webPublicationDate
+										}
+										kickerText={card.kickerText}
+										showPulsingDot={
+											card.format.design ===
+											ArticleDesign.LiveBlog
+										}
+										showSlash={true}
+										showClock={false}
+										imageUrl={card.image}
+										mediaType={card.mediaType}
+										mediaDuration={card.mediaDuration}
+										commentCount={card.commentCount}
+										starRating={card.starRating}
+										branding={card.branding}
+										supportingContent={
+											card.supportingContent
+										}
+										imagePositionOnMobile="none"
+									/>
+								</LI>
+							);
+						})}
+					</UL>
+				</LI>
 				<LI percentage="50%" showTopMarginWhenStacked={false}>
 					<UL direction="column" wrapCards={true}>
 						{smallCards.map((card, cardIndex) => {
@@ -128,58 +181,6 @@ export const DynamicSlow = ({ trails }: Props) => {
 										}
 										showSlash={true}
 										showClock={false}
-										mediaType={card.mediaType}
-										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
-										starRating={card.starRating}
-										branding={card.branding}
-										supportingContent={
-											card.supportingContent
-										}
-									/>
-								</LI>
-							);
-						})}
-					</UL>
-				</LI>
-				<LI percentage="50%" showTopMarginWhenStacked={true}>
-					<UL direction="row" wrapCards={true} showDivider={true}>
-						{bigCards.map((card, cardIndex) => {
-							return (
-								<LI
-									percentage="50%"
-									showDivider={cardIndex !== 0}
-									padSides={true}
-									padBottom={false}
-									padBottomOnMobile={
-										cardIndex < bigCards.length
-									}
-								>
-									<Card
-										linkTo={card.url}
-										format={card.format}
-										trailText={card.trailText}
-										headlineText={card.headline}
-										headlineSize="medium"
-										byline={card.byline}
-										showByline={card.showByline}
-										showQuotes={
-											card.format.design ===
-												ArticleDesign.Comment ||
-											card.format.design ===
-												ArticleDesign.Letter
-										}
-										webPublicationDate={
-											card.webPublicationDate
-										}
-										kickerText={card.kickerText}
-										showPulsingDot={
-											card.format.design ===
-											ArticleDesign.LiveBlog
-										}
-										showSlash={true}
-										showClock={false}
-										imageUrl={card.image}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
 										commentCount={card.commentCount}
