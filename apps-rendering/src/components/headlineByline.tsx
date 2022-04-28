@@ -46,7 +46,7 @@ const headlineBox = (format: ArticleFormat): SerializedStyles => css`
 	${format.theme === ArticleSpecial.Labs
 		? textSans.large({ lineHeight: 'regular' })
 		: headline.xxsmall({
-				fontWeight: 'regular',
+				fontWeight: 'medium',
 				lineHeight: 'loose',
 		  })}
 	font-style: italic;

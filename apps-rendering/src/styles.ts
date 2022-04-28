@@ -16,7 +16,6 @@ import type { Option } from '@guardian/types';
 import { map, none, some, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 
-
 export const sidePadding = css`
 	padding-left: ${remSpace[3]};
 	padding-right: ${remSpace[3]};

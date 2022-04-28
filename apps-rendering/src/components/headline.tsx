@@ -42,6 +42,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Interview:
 			return css`
 				${baseStyles}
+				padding-bottom: ${remSpace[1]};
 			`;
 		default:
 			return css`
@@ -184,12 +185,12 @@ const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 		background-color: ${background.headline(format)};
 		position: relative;
 		white-space: pre-wrap;
-		padding: 0 ${remSpace[3]};
+		padding: 0 ${remSpace[3]} ${remSpace[1]};
 		display: inline;
 		box-decoration-break: clone;
 
 		${from.wide} {
-			padding: 0 ${remSpace[2]};
+			padding: 0 ${remSpace[2]} ${remSpace[1]};
 		}
 
 		${darkModeCss`
@@ -201,13 +202,12 @@ const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 const interviewHeadlineStyles: SerializedStyles = css`
 	padding-left: 0;
 	padding-right: ${remSpace[3]};
-	margin-top: -2.15rem;
+	margin: -2.15rem auto 0;
 	position: relative;
 
 	${from.wide} {
 		padding-left: 0;
 		padding-right: ${remSpace[3]};
-		margin: -2.15rem auto 0;
 	}
 
 	${from.phablet} {
