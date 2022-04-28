@@ -52,6 +52,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							edition={front.editionId}
 							idUrl={front.config.idUrl}
 							mmaUrl={front.config.mmaUrl}
+							supporterCTA={
+								front.nav.readerRevenueLinks.header.supporter
+							}
 							discussionApiUrl={front.config.discussionApiUrl}
 							isAnniversary={
 								front.config.switches.anniversaryHeaderSvg
