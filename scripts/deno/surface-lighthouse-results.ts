@@ -1,13 +1,6 @@
 import { Octokit } from "https://cdn.skypack.dev/octokit?dts";
+import type { RestEndpointMethodTypes } from "https://cdn.skypack.dev/@octokit/plugin-rest-endpoint-methods?dts";
 
-type Comment = {
-  body: string;
-  id: number;
-};
-
-type ListCommentResponse = {
-  data: Comment[];
-};
 
 const token = Deno.env.get("GITHUB_TOKEN");
 if (!token) {
@@ -59,7 +52,7 @@ const createLighthouseResultsMd = (): string => {
 };
 
 const getCommentID = async (): Promise<number | null> => {
-  const { data: comments }: ListCommentResponse = await octokit.rest.issues
+  const { data: comments }: RestEndpointMethodTypes["issues"]["listComments"]["response"] = await octokit.rest.issues
     .listComments({
       owner: "guardian",
       repo: "dotcom-rendering",
@@ -69,7 +62,7 @@ const getCommentID = async (): Promise<number | null> => {
   console.log(comments);
 
   const comment = comments.find(
-    (comment) => comment.body.includes("⚡️ Lighthouse report"),
+    (comment) => comment.body?.includes("⚡️ Lighthouse report"),
   );
 
   return comment?.id ?? null;
