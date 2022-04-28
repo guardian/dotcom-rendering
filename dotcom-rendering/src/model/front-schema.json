@@ -563,10 +563,7 @@
                                                                             "properties"
                                                                         ]
                                                                     }
-                                                                },
-                                                                "required": [
-                                                                    "item"
-                                                                ]
+                                                                }
                                                             },
                                                             "headline": {
                                                                 "type": "string"
@@ -1133,10 +1130,7 @@
                                                                             "properties"
                                                                         ]
                                                                     }
-                                                                },
-                                                                "required": [
-                                                                    "item"
-                                                                ]
+                                                                }
                                                             },
                                                             "headline": {
                                                                 "type": "string"
@@ -1703,10 +1697,7 @@
                                                                             "properties"
                                                                         ]
                                                                     }
-                                                                },
-                                                                "required": [
-                                                                    "item"
-                                                                ]
+                                                                }
                                                             },
                                                             "headline": {
                                                                 "type": "string"

@@ -577,7 +577,7 @@ type FESupportingContent = {
 	};
 	header?: {
 		kicker?: {
-			item: {
+			item?: {
 				properties: {
 					kickerText: string;
 				};
