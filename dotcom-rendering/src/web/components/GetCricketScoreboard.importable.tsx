@@ -13,12 +13,6 @@ type Props = {
 const Loading = () => <Placeholder height={172} />;
 
 export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
-	// TODO: This is for testing only
-	const url = matchUrl.replace(
-		'http://localhost:9000',
-		'https://api.nextgen.guardianapps.co.uk',
-	);
-
 	const options: SWRConfiguration = {
 		errorRetryCount: 1,
 	};
@@ -30,7 +24,7 @@ export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
 	const { data, error, loading } = useApi<{
 		match: CricketMatch;
 		scorecardUrl: string;
-	}>(url, options);
+	}>(matchUrl, options);
 
 	if (loading) return <Loading />;
 	if (error) {
