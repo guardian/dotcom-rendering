@@ -6,6 +6,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { decidePalette } from '../lib/decidePalette';
+import { revealStyles } from '../lib/revealStyles';
 
 type Props = {
 	format: ArticleFormat;
@@ -131,6 +132,10 @@ export const ArticleBody = ({
 						globalH2Styles(format.display),
 						globalH3Styles(format.display),
 						globalLinkStyles(palette),
+						// revealStyles is used to animate the reveal of new blocks
+						(format.design === ArticleDesign.DeadBlog ||
+							format.design === ArticleDesign.LiveBlog) &&
+							revealStyles,
 					]}
 				>
 					<LiveBlogRenderer

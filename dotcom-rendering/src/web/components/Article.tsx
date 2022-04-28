@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { Global, css, keyframes } from '@emotion/react';
+import { Global, css } from '@emotion/react';
 import { focusHalo, brandAlt, neutral } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
 import { filterABTestSwitches } from '../../model/enhance-switches';
@@ -42,23 +42,6 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 					::selection {
 						background: ${brandAlt[400]};
 						color: ${neutral[7]};
-					}
-					/* We're using classnames here because we add and remove these classes
-	   				   using plain javascript */
-					.reveal {
-						animation: ${keyframes`
-							0% { opacity: 0; }
-							100% { opacity: 1; }
-						`} 1s ease-out;
-					}
-					.reveal-slowly {
-						animation: ${keyframes`
-							0% { opacity: 0; }
-							100% { opacity: 1; }
-						`} 4s ease-out;
-					}
-					.pending {
-						display: none;
 					}
 				`}
 			/>

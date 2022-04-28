@@ -11,6 +11,7 @@ import { Hide } from './Hide';
 import { getCommentContext } from '../lib/getCommentContext';
 import { useDiscussion } from '../lib/useDiscussion';
 import { decidePalette } from '../lib/decidePalette';
+import { revealStyles } from '../lib/revealStyles';
 
 export type Props = {
 	format: ArticleFormat;
@@ -138,7 +139,7 @@ export const Discussion = ({
 	return (
 		<>
 			<div
-				css={[positionRelative, !isExpanded && fixHeight]}
+				css={[positionRelative, revealStyles, !isExpanded && fixHeight]}
 				className="discussion"
 			>
 				<div className="pending">

@@ -4,6 +4,7 @@ import { useApi } from '../lib/useApi';
 
 import { decideTrail } from '../lib/decideTrail';
 import { Placeholder } from './Placeholder';
+import { revealStyles } from '../lib/revealStyles';
 
 type Props = {
 	url: string;
@@ -73,7 +74,7 @@ export const OnwardsData = ({
 
 	if (data?.trails) {
 		return (
-			<div css={[minHeight]} className="onwards">
+			<div css={[minHeight, revealStyles]} className="onwards">
 				<div className="pending">
 					<Container
 						heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
