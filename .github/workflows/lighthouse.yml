@@ -30,6 +30,6 @@ jobs:
           deno-version: v1.21.0
 
       - name: Surface Lighthouse Results
-        run: deno run --no-check --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH" scripts/deno/surface-lighthouse-results.ts
+        run: deno run --no-check --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH" --allow-read scripts/deno/surface-lighthouse-results.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
