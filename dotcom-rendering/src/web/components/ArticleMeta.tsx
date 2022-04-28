@@ -9,7 +9,7 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { Contributor } from './Contributor';
 import { Avatar } from './Avatar';
 import { Counts } from './Counts';
@@ -84,6 +84,8 @@ const metaFlex = css`
 `;
 
 const stretchLines = css`
+	display: block;
+
 	${until.phablet} {
 		margin-left: -20px;
 		margin-right: -20px;
@@ -350,10 +352,10 @@ export const ArticleMeta = ({
 					</Island>
 				)}
 				{format.theme === ArticleSpecial.Labs ? (
-					<div css={stretchLines}>
-						<Lines
+					<div>
+						<StraightLines
+							cssOverrides={stretchLines}
 							count={1}
-							effect="straight"
 							color={border.primary}
 						/>
 						<div

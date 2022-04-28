@@ -408,6 +408,9 @@ export const InteractiveImmersiveLayout = ({
 											<GuardianLabsLines />
 										) : (
 											<Lines
+												cssOverrides={css`
+													display: block;
+												`}
 												effect={decideLineEffect(
 													ArticleDesign.Standard,
 													format.theme,

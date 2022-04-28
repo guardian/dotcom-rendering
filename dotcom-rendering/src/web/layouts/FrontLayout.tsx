@@ -1,6 +1,7 @@
 import { brandBackground, brandLine } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { css } from '@emotion/react';
 import { DecideContainer } from '../lib/DecideContainer';
 
 import { SubNav } from '../components/SubNav.importable';
@@ -101,7 +102,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								padded={false}
 								showTopBorder={false}
 							>
-								<Lines count={4} effect="straight" />
+								<StraightLines
+									cssOverrides={css`
+										display: block;
+									`}
+									count={4}
+								/>
 							</ElementContainer>
 						</>
 					)}

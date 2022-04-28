@@ -7,7 +7,7 @@ import {
 	from,
 	neutral,
 } from '@guardian/source-foundations';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { DottedLines } from '@guardian/source-react-components-development-kitchen';
 import { map, withDefault } from '@guardian/types';
 import Body from 'components/articleBody';
 import Footer from 'components/footer';
@@ -72,9 +72,7 @@ const Labs: FC<Props> = ({ item, children }) => {
 							<Standfirst item={item} />
 						</div>
 					</div>
-					<div css={lineStyles}>
-						<Lines count={4} />
-					</div>
+					<DottedLines count={1} cssOverrides={lineStyles} />
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />
 						{pipe(

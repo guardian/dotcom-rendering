@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 
 type Props = {
 	format: ArticleFormat;
@@ -25,9 +25,8 @@ const flexEnd = css`
 
 const linesWrapperStyles = css`
 	/* Fill the container */
-	flex-grow: 1;
-	/* Push the lines down to align with the bottom of the card */
-	margin-top: 5px;
+	flex: 1;
+	align-self: flex-end;
 `;
 
 export const CardFooter = ({
@@ -52,9 +51,10 @@ export const CardFooter = ({
 				<div>{supportingContent}</div>
 				<div css={spaceBetween}>
 					{age}
-					<div css={linesWrapperStyles}>
-						<Lines count={4} />
-					</div>
+					<StraightLines
+						cssOverrides={linesWrapperStyles}
+						count={4}
+					/>
 					{commentCount}
 				</div>
 			</footer>

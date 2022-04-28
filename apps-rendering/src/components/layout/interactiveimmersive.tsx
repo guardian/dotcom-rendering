@@ -7,7 +7,7 @@ import {
 	from,
 	neutral,
 } from '@guardian/source-foundations';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import Body from 'components/articleBody';
 import Epic from 'components/epic';
 import Footer from 'components/footer';
@@ -81,9 +81,7 @@ const InteractiveImmersive: FC<Props> = ({ item, children }) => {
 						<Standfirst item={item} />
 						<ImmersiveCaption item={item} />
 					</div>
-					<div css={lineStyles}>
-						<Lines count={4} />
-					</div>
+					<StraightLines count={4} cssOverrides={lineStyles} />
 					<section css={articleWidthStyles}>
 						<Metadata item={item} />
 						<Logo item={item} />

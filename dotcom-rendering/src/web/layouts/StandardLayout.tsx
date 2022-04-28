@@ -14,7 +14,10 @@ import {
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 import { StarRating } from '../components/StarRating/StarRating';
 import { ArticleBody } from '../components/ArticleBody';
 import { RightColumn } from '../components/RightColumn';
@@ -438,7 +441,12 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									padded={false}
 									showTopBorder={false}
 								>
-									<Lines count={4} effect="straight" />
+									<StraightLines
+										count={4}
+										cssOverrides={css`
+											display: block;
+										`}
+									/>
 								</ElementContainer>
 							</>
 						)}
@@ -590,6 +598,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										<GuardianLabsLines />
 									) : (
 										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
 											count={decideLineCount(
 												format.design,
 											)}
@@ -713,10 +724,12 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										/>
 									</Island>
 								)}
-								<Lines
+								<StraightLines
 									data-print-layout="hide"
 									count={4}
-									effect="straight"
+									cssOverrides={css`
+										display: block;
+									`}
 								/>
 								<SubMeta
 									format={format}
