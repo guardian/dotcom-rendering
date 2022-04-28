@@ -1,3 +1,5 @@
+import { ArticleDesign } from '@guardian/libs';
+import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
 import { CricketScoreboard } from './CricketScoreboard';
 
@@ -17,9 +19,18 @@ export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
 		'https://api.nextgen.guardianapps.co.uk',
 	);
 
-	const { data, error, loading } = useApi<CricketMatch>(url, {
+	const options: SWRConfiguration = {
 		errorRetryCount: 1,
-	});
+	};
+	// If this blog is live then poll for new stats
+	if (format.design === ArticleDesign.LiveBlog) {
+		options.refreshInterval = 14_000;
+	}
+
+	const { data, error, loading } = useApi<{
+		match: CricketMatch;
+		scorecardUrl: string;
+	}>(url, options);
 
 	if (loading) return <Loading />;
 	if (error) {
@@ -31,9 +42,13 @@ export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
 
 		return null;
 	}
-	if (data && data.matchId) {
+	if (data && data?.match?.matchId) {
 		return (
-			<CricketScoreboard match={data} matchUrl={url} format={format} />
+			<CricketScoreboard
+				match={data.match}
+				scorecardUrl={data.scorecardUrl}
+				format={format}
+			/>
 		);
 	}
 

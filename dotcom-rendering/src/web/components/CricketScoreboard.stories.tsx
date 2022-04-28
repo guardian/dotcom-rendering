@@ -25,7 +25,7 @@ export const defaultStory = () => {
 					theme: ArticlePillar.Sport,
 				}}
 				match={match}
-				matchUrl="/test"
+				scorecardUrl="/test"
 			/>
 		</div>
 	);

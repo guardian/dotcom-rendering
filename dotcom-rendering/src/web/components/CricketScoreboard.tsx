@@ -5,7 +5,7 @@ import { decidePalette } from '../lib/decidePalette';
 const ALL_OUT_WICKETS = 10;
 
 type Props = {
-	matchUrl: string;
+	scorecardUrl: string;
 	match: CricketMatch;
 	format: ArticleFormat;
 };
@@ -126,7 +126,7 @@ export const CricketInnings = ({
 	}
 };
 
-export const CricketScoreboard = ({ matchUrl, match, format }: Props) => {
+export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {
 	const palette = decidePalette(format);
 	const date = new Date(match.gameDate);
 	return (
@@ -165,14 +165,10 @@ export const CricketScoreboard = ({ matchUrl, match, format }: Props) => {
 				<caption css={captionStyle(palette)}>
 					{match.competitionName}, {match.venueName}
 				</caption>
-				{/* TODO: This is a bad solution, find a better one :) */}
 				<tfoot>
 					<tr css={rowStyle(palette)}>
 						<td css={linkPaddingStlye} colSpan={2}>
-							<a
-								css={linkStyle(palette)}
-								href={matchUrl.replace('.json?dcr=true', '')}
-							>
+							<a css={linkStyle(palette)} href={scorecardUrl}>
 								View full scorecard
 							</a>
 						</td>
