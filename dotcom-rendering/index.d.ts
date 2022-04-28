@@ -331,6 +331,7 @@ interface AuthorType {
 interface BlockContributor {
 	name: string;
 	imageUrl?: string;
+	largeImageUrl?: string;
 }
 
 interface Block {
@@ -572,11 +573,11 @@ type FEFrontPropertiesType = {
 
 type FESupportingContent = {
 	properties: {
-		href: string;
+		href?: string;
 	};
 	header?: {
 		kicker?: {
-			item: {
+			item?: {
 				properties: {
 					kickerText: string;
 				};
@@ -589,7 +590,7 @@ type FESupportingContent = {
 
 type DCRSupportingContent = {
 	headline: string;
-	url: string;
+	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
 };
@@ -883,6 +884,7 @@ interface TagType {
 	twitterHandle?: string;
 	paidContentType?: string;
 	bylineImageUrl?: string;
+	bylineLargeImageUrl?: string;
 }
 
 /**

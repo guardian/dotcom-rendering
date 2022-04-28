@@ -73,7 +73,7 @@ const BylineMeta: React.FunctionComponent<{
 		(t) => t.type === 'Contributor',
 	).length;
 	const bylineImageUrl = contributorTag
-		? contributorTag.bylineImageUrl
+		? contributorTag.bylineLargeImageUrl
 		: null;
 
 	const shouldShowBylineImage =

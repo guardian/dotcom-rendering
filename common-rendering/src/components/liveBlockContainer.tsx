@@ -14,6 +14,7 @@ import { ArticleFormat } from '@guardian/libs';
 type BlockContributor = {
 	name: string;
 	imageUrl?: string;
+	largeImageUrl?: string;
 };
 
 type Props = {
@@ -182,7 +183,7 @@ const LiveBlockContainer = ({
 					contributors.map((contributor) => (
 						<BlockByline
 							name={contributor.name}
-							imageUrl={contributor.imageUrl}
+							imageUrl={contributor.largeImageUrl ? contributor.largeImageUrl : contributor.imageUrl}
 							format={format}
 						/>
 					))}
