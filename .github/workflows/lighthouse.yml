@@ -1,25 +1,30 @@
 name: DCR Run Lighthouse CI
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
+  push:
+    paths-ignore:
+      - "apps-rendering/**"
 jobs:
-    lhci:
-        name: DCR Lighthouse
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
-            - name: Install Node
-              uses: guardian/actions-setup-node@main
-            # Make sure we install dependencies in the root directory
-            - uses: bahmutov/npm-install@v1
-            - run: make build
-              working-directory: dotcom-rendering
-            - name: Install and run Lighthouse CI
-              working-directory: dotcom-rendering
-              env:
-                  LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
-              run: |
-                  npm install -g puppeteer-core@2.1.0 @lhci/cli@0.8.2
-                  lhci autorun
+  lhci:
+    name: DCR Lighthouse
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node
+        uses: guardian/actions-setup-node@main
+      # Make sure we install dependencies in the root directory
+      - uses: bahmutov/npm-install@v1
+      - run: make build
+        working-directory: dotcom-rendering
+      - name: Install and run Lighthouse CI
+        working-directory: dotcom-rendering
+        env:
+          LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
+        run: |
+          npm install -g puppeteer-core@2.1.0 @lhci/cli@0.8.2
+          lhci autorun
+
+      - name: Surface Lighthouse Results
+        run: deno run --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH" scripts/deno/surface-lighthouse-results.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

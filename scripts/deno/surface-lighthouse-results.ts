@@ -1,22 +1,20 @@
 import { Octokit } from "https://cdn.skypack.dev/octokit?dts";
 import type { RestEndpointMethodTypes } from "https://cdn.skypack.dev/@octokit/plugin-rest-endpoint-methods?dts";
 
-
 const token = Deno.env.get("GITHUB_TOKEN");
 if (!token) {
   console.warn("Missing GITHUB_TOKEN");
   Deno.exit(1);
 }
 
-// const path = Deno.env.get("GITHUB_EVENT_PATH") ?? "";
-// if (!path) {
-// 	console.warn("Missing GITHUB_PATH");
-// 	Deno.exit(1);
-// }
+const path = Deno.env.get("GITHUB_EVENT_PATH");
+if (!path) {
+  console.warn("Missing GITHUB_PATH");
+  Deno.exit(1);
+}
 
 const octokit = new Octokit({ auth: token });
-// const event = JSON.parse(Deno.readTextFileSync(path));
-const event = { pull_request: { number: 4759 } };
+const event = JSON.parse(Deno.readTextFileSync(path));
 const issue_number = event.pull_request.number;
 interface Result {
   actual: number;
@@ -52,12 +50,14 @@ const createLighthouseResultsMd = (): string => {
 };
 
 const getCommentID = async (): Promise<number | null> => {
-  const { data: comments }: RestEndpointMethodTypes["issues"]["listComments"]["response"] = await octokit.rest.issues
-    .listComments({
-      owner: "guardian",
-      repo: "dotcom-rendering",
-      issue_number: 4759,
-    });
+  const { data: comments }:
+    RestEndpointMethodTypes["issues"]["listComments"]["response"] =
+      await octokit.rest.issues
+        .listComments({
+          owner: "guardian",
+          repo: "dotcom-rendering",
+          issue_number: 4759,
+        });
 
   console.log(comments);
 
