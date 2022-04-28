@@ -18,16 +18,28 @@ export const CoreVitals = () => {
 	const sampling = 1 / 100;
 
 	// For these tests switch off sampling and collect metrics for 100% of views
-	const testsToForceMetrics: ABTest[] = [
+	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
 		commercialGptLazyLoad,
 	];
 
+	const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
+		/* linter, please keep this array multi-line */
+		'inline1ContainerSizingVariant',
+		'inline1ContainerSizingControl',
+	];
+
+	const userInServerSideTestToForceMetrics =
+		serverSideTestsToForceMetrics.some((test) =>
+			Object.keys(window.guardian.config.tests).includes(test),
+		);
+
 	const ABTestAPI = useAB();
 
-	const userInTestToForceMetrics = testsToForceMetrics.some((test) =>
-		ABTestAPI?.runnableTest(test),
-	);
+	const userInClientSideTestToForceMetrics =
+		clientSideTestsToForceMetrics.some((test) =>
+			ABTestAPI?.runnableTest(test),
+		);
 
 	/* eslint-disable @typescript-eslint/no-floating-promises -- they’re async methods */
 
@@ -42,7 +54,10 @@ export const CoreVitals = () => {
 	if (window.location.hostname === (process.env.HOSTNAME || 'localhost')) {
 		bypassCoreWebVitalsSampling('dotcom');
 	}
-	if (userInTestToForceMetrics) {
+	if (
+		userInClientSideTestToForceMetrics ||
+		userInServerSideTestToForceMetrics
+	) {
 		bypassCoreWebVitalsSampling('commercial');
 	}
 
