@@ -15,7 +15,6 @@ export const FixedSmallSlowIV = ({ trails }: Props) => {
 			{slicedTrails.map((trail, index) => {
 				return (
 					<LI
-						percentage="25%"
 						padSides={true}
 						showDivider={index > 0}
 						padBottomOnMobile={true}
