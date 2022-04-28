@@ -26,9 +26,9 @@ export const CoreVitals = () => {
 	];
 
 	const userInClientSideTestToForceMetrics =
-	clientSideTestsToForceMetrics.some((test) =>
-		ABTestAPI?.runnableTest(test),
-	);
+		clientSideTestsToForceMetrics.some((test) =>
+			ABTestAPI?.runnableTest(test),
+		);
 
 	const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
 		/* linter, please keep this array multi-line */
