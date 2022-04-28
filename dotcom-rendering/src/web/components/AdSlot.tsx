@@ -453,6 +453,7 @@ export const AdSlot: React.FC<Props> = ({
 					css={[
 						css`
 							position: relative;
+							min-height: 332px;
 						`,
 						adStyles,
 						fluidFullWidthAdStyles,
@@ -484,6 +485,7 @@ export const AdSlot: React.FC<Props> = ({
 					css={[
 						css`
 							position: relative;
+							min-height: 332px;
 						`,
 						adStyles,
 						fluidFullWidthAdStyles,
