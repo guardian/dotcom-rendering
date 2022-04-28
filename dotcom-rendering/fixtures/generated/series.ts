@@ -19,6 +19,81 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/apr/27/tan-france-beauty-and-the-bleach-review-queer-eye-colourism-documentary',
+			linkText:
+				'Tan France: Beauty and the Bleach review – a completely devastating evocation of racist trauma',
+			showByline: false,
+			byline: 'Rachel Aroesti',
+			image: 'https://i.guim.co.uk/img/media/64011453f224a19470ed43975671ae0f330bd4cd/0_378_5760_3456/master/5760.jpg?width=300&quality=85&auto=format&fit=max&s=4f88c2d5d1b1d8064c5a158e912c1a10',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/64011453f224a19470ed43975671ae0f330bd4cd/0_378_5760_3456/master/5760.jpg?width=300&quality=85&auto=format&fit=max&s=4f88c2d5d1b1d8064c5a158e912c1a10',
+				'460': 'https://i.guim.co.uk/img/media/64011453f224a19470ed43975671ae0f330bd4cd/0_378_5760_3456/master/5760.jpg?width=460&quality=85&auto=format&fit=max&s=62e826dd66383ccdcf540e13d4683271',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-04-27T21:01:40.000Z',
+			headline:
+				'Tan France: Beauty and the Bleach review – a completely devastating evocation of racist trauma',
+			shortUrl: 'https://www.theguardian.com/p/yb8mc',
+			starRating: 3,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/apr/26/the-offer-review-the-making-of-the-godfather-makes-for-hit-and-miss-tv',
+			linkText:
+				'The Offer review – the making of The Godfather makes for hit-and-miss TV',
+			showByline: false,
+			byline: 'Adrian Horton',
+			image: 'https://i.guim.co.uk/img/media/90de55c79a46d912d0e916c9a10788bf458f894a/0_135_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=1e00d55b5a884e900d8d0e5ad0c2ee82',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/90de55c79a46d912d0e916c9a10788bf458f894a/0_135_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=1e00d55b5a884e900d8d0e5ad0c2ee82',
+				'460': 'https://i.guim.co.uk/img/media/90de55c79a46d912d0e916c9a10788bf458f894a/0_135_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=ac596aed19b35b0437bfae52d7dabdb7',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-04-27T05:04:18.000Z',
+			headline:
+				'The Offer review – the making of The Godfather makes for hit-and-miss TV',
+			shortUrl: 'https://www.theguardian.com/p/yb8vz',
+			starRating: 3,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/apr/26/noughts-crosses-review-stilted-confused-and-poorly-executed',
+			linkText:
+				'Noughts + Crosses review – stilted, confused and poorly executed',
+			showByline: false,
+			byline: 'Jack Seale',
+			image: 'https://i.guim.co.uk/img/media/43567644bf918bf4bae120c8944cb924d1051457/0_75_4285_2571/master/4285.jpg?width=300&quality=85&auto=format&fit=max&s=25dcb6c118b9e00451698193820d89bc',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/43567644bf918bf4bae120c8944cb924d1051457/0_75_4285_2571/master/4285.jpg?width=300&quality=85&auto=format&fit=max&s=25dcb6c118b9e00451698193820d89bc',
+				'460': 'https://i.guim.co.uk/img/media/43567644bf918bf4bae120c8944cb924d1051457/0_75_4285_2571/master/4285.jpg?width=460&quality=85&auto=format&fit=max&s=65b084a046e08c180bc46f3c225892c1',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-04-26T22:32:11.000Z',
+			headline:
+				'Noughts + Crosses review – stilted, confused and poorly executed',
+			shortUrl: 'https://www.theguardian.com/p/yb6mx',
+			starRating: 2,
+		},
+		{
 			url: 'https://www.theguardian.com/tv-and-radio/2022/apr/25/navalny-review-one-of-the-most-jaw-dropping-things-youll-ever-witness',
 			linkText:
 				'Navalny review – one of the most jaw-dropping things you’ll ever witness',
@@ -189,81 +264,6 @@ export const series = {
 			headline:
 				'Chivalry review – Steve Coogan and Sarah Solemani’s immensely satisfying #MeToo comedy',
 			shortUrl: 'https://www.theguardian.com/p/ya4bg',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/apr/20/the-man-who-fell-to-earth-review-small-screen-sequel-series-crash-lands',
-			linkText:
-				'The Man Who Fell to Earth review – small screen sequel series crash lands',
-			showByline: false,
-			byline: 'Charles Bramesco',
-			image: 'https://i.guim.co.uk/img/media/fe954d4ab4486954e055d1122f56bcbf1903a09d/0_92_2500_1500/master/2500.jpg?width=300&quality=85&auto=format&fit=max&s=d5349fd1a6e4ef558d050b57d87065f1',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/fe954d4ab4486954e055d1122f56bcbf1903a09d/0_92_2500_1500/master/2500.jpg?width=300&quality=85&auto=format&fit=max&s=d5349fd1a6e4ef558d050b57d87065f1',
-				'460': 'https://i.guim.co.uk/img/media/fe954d4ab4486954e055d1122f56bcbf1903a09d/0_92_2500_1500/master/2500.jpg?width=460&quality=85&auto=format&fit=max&s=1c31d128f93b866ce0651af124e2d016',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-04-21T06:06:47.000Z',
-			headline:
-				'The Man Who Fell to Earth review – small screen sequel series crash lands',
-			shortUrl: 'https://www.theguardian.com/p/ya69q',
-			starRating: 2,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/apr/20/netflix-russian-doll-review-second-season-natasha-lyonne-five-stars',
-			linkText:
-				'Russian Doll review – did we need this second season? Yes, yes, yes',
-			showByline: false,
-			byline: 'Rebecca Nicholson',
-			image: 'https://i.guim.co.uk/img/media/608875574f5b716de2fe89c221dd17c7f5bc08ed/225_0_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=e7575647ae9d8a42a048988775274819',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/608875574f5b716de2fe89c221dd17c7f5bc08ed/225_0_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=e7575647ae9d8a42a048988775274819',
-				'460': 'https://i.guim.co.uk/img/media/608875574f5b716de2fe89c221dd17c7f5bc08ed/225_0_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=dbf821aedd519967f026c9cf2983adbd',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-04-20T10:18:27.000Z',
-			headline:
-				'Russian Doll review – did we need this second season? Yes, yes, yes',
-			shortUrl: 'https://www.theguardian.com/p/y9qk4',
-			starRating: 5,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/apr/19/life-after-life-review-a-thoroughly-addictive-weepathon',
-			linkText:
-				'Life After Life review – a thoroughly addictive weepathon',
-			showByline: false,
-			byline: 'Rachel Aroesti',
-			image: 'https://i.guim.co.uk/img/media/00c3dd4c3ce54f4e4d4fec909f468d687e1c0485/0_266_4800_2880/master/4800.jpg?width=300&quality=85&auto=format&fit=max&s=2a9424de53e183d21cead62e8df86bc0',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/00c3dd4c3ce54f4e4d4fec909f468d687e1c0485/0_266_4800_2880/master/4800.jpg?width=300&quality=85&auto=format&fit=max&s=2a9424de53e183d21cead62e8df86bc0',
-				'460': 'https://i.guim.co.uk/img/media/00c3dd4c3ce54f4e4d4fec909f468d687e1c0485/0_266_4800_2880/master/4800.jpg?width=460&quality=85&auto=format&fit=max&s=3d80e889366929b3519cb57e8149932a',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-04-19T21:00:10.000Z',
-			headline:
-				'Life After Life review – a thoroughly addictive weepathon',
-			shortUrl: 'https://www.theguardian.com/p/y9kvn',
 			starRating: 4,
 		},
 	],

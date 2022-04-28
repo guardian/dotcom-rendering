@@ -396,6 +396,9 @@
         },
         "mostRecentBlockId": {
             "type": "string"
+        },
+        "matchType": {
+            "type": "string"
         }
     },
     "required": [
@@ -3533,6 +3536,9 @@
                 },
                 "imageUrl": {
                     "type": "string"
+                },
+                "largeImageUrl": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -3608,6 +3614,9 @@
                     "type": "string"
                 },
                 "bylineImageUrl": {
+                    "type": "string"
+                },
+                "bylineLargeImageUrl": {
                     "type": "string"
                 }
             },

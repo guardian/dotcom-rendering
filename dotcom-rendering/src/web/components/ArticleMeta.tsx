@@ -198,12 +198,12 @@ const metaContainer = (format: ArticleFormat) => {
 
 const getBylineImageUrl = (tags: TagType[]) => {
 	const contributorTag = tags.find((tag) => tag.type === 'Contributor');
-	return contributorTag && contributorTag.bylineImageUrl;
+	return contributorTag?.bylineLargeImageUrl;
 };
 
 const getAuthorName = (tags: TagType[]) => {
 	const contributorTag = tags.find((tag) => tag.type === 'Contributor');
-	return contributorTag && contributorTag.title;
+	return contributorTag?.title;
 };
 
 const shouldShowAvatar = (format: ArticleFormat) => {
