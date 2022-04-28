@@ -28,6 +28,10 @@ const setBackgroundColour = (colour: string) => emoCss`
 	background-color: ${colour};
 `;
 
+const setHeight = (height: number) => emoCss`
+	min-height: ${height}px;
+`;
+
 type Props = {
 	sectionId?: string;
 	showSideBorders?: boolean;
@@ -49,6 +53,7 @@ type Props = {
 	className?: string;
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
+	fixedHeight?: number;
 };
 
 export const ElementContainer = ({
@@ -64,6 +69,7 @@ export const ElementContainer = ({
 	className,
 	ophanComponentName,
 	ophanComponentLink,
+	fixedHeight,
 }: Props) => (
 	<ClassNames>
 		{({ css }) => {
@@ -75,6 +81,7 @@ export const ElementContainer = ({
 						showSideBorders && sideBorders(borderColour),
 						showTopBorder && topBorder(borderColour),
 						padded && padding,
+						fixedHeight && setHeight(fixedHeight),
 					]}
 				>
 					{children && children}

@@ -791,6 +791,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
+					fixedHeight={248}
 				>
 					<AdSlot
 						data-print-layout="hide"
@@ -885,6 +886,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
+					fixedHeight={248}
 				>
 					<AdSlot position="merchandising" display={format.display} />
 				</ElementContainer>
