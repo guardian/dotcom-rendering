@@ -1,21 +1,44 @@
 import { Octokit } from "https://cdn.skypack.dev/octokit?dts";
 import type { RestEndpointMethodTypes } from "https://cdn.skypack.dev/@octokit/plugin-rest-endpoint-methods?dts";
 
+/* -- Setup -- */
+
 const token = Deno.env.get("GITHUB_TOKEN");
-if (!token) {
-	console.warn("Missing GITHUB_TOKEN");
-	Deno.exit(1);
-}
+if (!token) throw new Error("Missing GITHUB_TOKEN");
 
 const path = Deno.env.get("GITHUB_EVENT_PATH");
-if (!path) {
-	console.warn("Missing GITHUB_EVENT_PATH");
-	Deno.exit(1);
-}
+if (!path) throw new Error("Missing GITHUB_EVENT_PATH");
+
+/**
+ * https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
+ */
+const payload: {
+	action: string;
+	sender: Record<string, unknown>;
+	repository: Record<string, unknown>;
+	organization: Record<string, unknown>;
+	installation: Record<string, unknown>;
+	issue?: { number: number };
+	pull_request?: { number: number };
+	number?: number;
+} = JSON.parse(Deno.readTextFileSync(path));
+console.log(payload);
+const issue_number = (payload.issue || payload.pull_request || payload).number;
+
+console.log({ issue_number });
+
+if (!issue_number) throw new Error("Missing issue_number");
 
 console.log(path);
 
+/* -- Definitions -- */
+
 const MAGIC_STRING = "⚡️ Lighthouse report";
+const GIHUB_PARAMS = {
+	owner: "guardian",
+	repo: "dotcom-rendering",
+	issue_number,
+};
 
 const octokit = new Octokit({ auth: token });
 
@@ -35,29 +58,7 @@ const {
 	>;
 } = octokit.rest.issues;
 
-/**
- * https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
- */
-const event: {
-	action: string;
-	sender: Record<string, unknown>;
-	repository: Record<string, unknown>;
-	organization: Record<string, unknown>;
-	installation: Record<string, unknown>;
-	issue?: { number: number };
-	pull_request?: { number: number };
-	number?: number;
-} = JSON.parse(Deno.readTextFileSync(path));
-console.log(event);
-const issue_number = (event.issue ?? event.pull_request ?? event).number;
 
-console.log({ issue_number });
-
-const GIHUB_PARAMS = {
-	owner: "guardian",
-	repo: "dotcom-rendering",
-	issue_number,
-};
 interface Result {
 	actual: number;
 	expected: number;
