@@ -64,7 +64,7 @@ const results: Result[] = JSON.parse(
 /* -- Definitions -- */
 
 /** The string to search for when looking for a comment */
-const MAGIC_STRING = "⚡️ Lighthouse report";
+const REPORT_TITLE = "⚡️ Lighthouse report";
 const GIHUB_PARAMS = {
 	owner: "guardian",
 	repo: "dotcom-rendering",
@@ -114,7 +114,7 @@ const createLighthouseResultsMd = (): string => {
 	const auditUrls = [...new Set<string>(results.map((result) => result.url))];
 
 	return [
-		`## ${MAGIC_STRING} for the changes in this PR`,
+		`## ${REPORT_TITLE} for the changes in this PR`,
 		`Lighthouse tested ${auditUrls.length} URLs  `,
 		failedAuditCount > 1 &&
 			`⚠️ Budget exceeded for ${failedAuditCount} of ${auditCount} audits.`,
@@ -133,7 +133,7 @@ const getCommentID = async (): Promise<number | null> => {
 	});
 
 	const comment = comments.find((comment) =>
-		comment.body?.includes(MAGIC_STRING)
+		comment.body?.includes(REPORT_TITLE)
 	);
 
 	return comment?.id ?? null;
