@@ -1,4 +1,4 @@
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 
 import { headline, body, between, space } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
@@ -6,6 +6,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { decidePalette } from '../lib/decidePalette';
+import { revealStyles } from '../lib/revealStyles';
 
 type Props = {
 	format: ArticleFormat;
@@ -84,20 +85,6 @@ const globalLinkStyles = (palette: Palette) => css`
 			color: ${palette.text.articleLinkHover};
 			border-bottom: 1px solid ${palette.border.articleLinkHover};
 		}
-	}
-`;
-
-const revealStyles = css`
-	/* We're using classnames here because we add and remove these classes
-	   using plain javascript */
-	.reveal {
-		animation: ${keyframes`
-			0% { opacity: 0; }
-			100% { opacity: 1; }
-		`} 4s ease-out;
-	}
-	.pending {
-		display: none;
 	}
 `;
 
