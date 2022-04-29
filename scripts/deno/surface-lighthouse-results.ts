@@ -1,6 +1,7 @@
 import { Octokit } from "https://cdn.skypack.dev/octokit?dts";
 import type { RestEndpointMethodTypes } from "https://cdn.skypack.dev/@octokit/plugin-rest-endpoint-methods?dts";
 import type { EventPayloadMap } from "https://cdn.skypack.dev/@octokit/webhooks-types?dts";
+import "https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/v0.8.2/types/assert.d.ts";
 
 /* -- Setup -- */
 
@@ -45,19 +46,25 @@ const links: Record<string, string> = JSON.parse(
 	Deno.readTextFileSync(`${dir}/links.json`)
 );
 
-interface Result {
-	actual: number;
-	expected: number;
-	passed: boolean;
-	operator: string;
-	auditTitle: string;
-	name: string;
-	values: number[];
-	level: string;
+/** https://github.com/GoogleChrome/lighthouse-ci/blob/5963dcce0e88b8d3aedaba56a93ec4b93cf073a1/packages/utils/src/assertions.js#L15-L30 */
+interface AssertionResult {
 	url: string;
-	auditDocumentationLink: string;
+	name:
+		| keyof Omit<LHCI.AssertCommand.AssertionOptions, "aggregationMethod">
+		| "auditRan";
+	operator: string;
+	expected: number;
+	actual: number;
+	values: number[];
+	passed: boolean;
+	level: LHCI.AssertCommand.AssertionFailureLevel;
+	auditId: string;
+	auditProperty?: string;
+	auditTitle?: string;
+	auditDocumentationLink?: string;
+	message?: string;
 }
-const results: Result[] = JSON.parse(
+const results: AssertionResult[] = JSON.parse(
 	Deno.readTextFileSync(`${dir}/assertion-results.json`)
 );
 
@@ -83,7 +90,10 @@ const octokit = new Octokit({ auth: token }) as {
 
 /* -- Methods -- */
 
-const generateAuditTable = (auditUrl: string, results: Result[]): string => {
+const generateAuditTable = (
+	auditUrl: string,
+	results: AssertionResult[]
+): string => {
 	const reportUrl = links[auditUrl];
 
 	const resultsTemplateString = results.map(
