@@ -1,5 +1,6 @@
 import { Octokit } from "https://cdn.skypack.dev/octokit?dts";
 import type { RestEndpointMethodTypes } from "https://cdn.skypack.dev/@octokit/plugin-rest-endpoint-methods?dts";
+import type { EventPayloadMap } from "https://cdn.skypack.dev/@octokit/webhooks-types?dts";
 
 /* -- Setup -- */
 
@@ -14,23 +15,28 @@ if (!path) throw new Error("Missing GITHUB_EVENT_PATH");
 /**
  * https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
  */
-const payload: {
-	action: string;
-	sender: Record<string, unknown>;
-	repository: Record<string, unknown>;
-	organization: Record<string, unknown>;
-	installation: Record<string, unknown>;
-	issue?: { number: number };
-	pull_request?: { number: number };
-	number?: number;
-} = JSON.parse(Deno.readTextFileSync(path));
+const payload: EventPayloadMap["push" | "pull_request"] = JSON.parse(
+	Deno.readTextFileSync(path)
+);
+
+const isPullRequestEvent = (
+	payload: EventPayloadMap[keyof EventPayloadMap]
+): payload is EventPayloadMap["pull_request"] =>
+	typeof (payload as EventPayloadMap["pull_request"])?.pull_request ===
+	"number";
+
 /**
- * The Current Issue / PR number for adding a Lighthouse report
- * On push to the main branch, defaults to the original issue:
+ * One of two values depending on the workflow trigger event
+ *
+ * - on a "pull_request" event: the current Issue / PR number
+ * on which to add or update the Lighthouse report
+ *
+ * - on a "push" event: the original issue to track the latest report:
  * https://github.com/guardian/dotcom-rendering/issues/4584
  */
-const issue_number =
-	(payload.issue ?? payload.pull_request ?? payload).number ?? 4584;
+const issue_number = isPullRequestEvent(payload)
+	? payload.pull_request.number
+	: 4584;
 
 /** The Lighthouse results directory  */
 const dir = "dotcom-rendering/.lighthouseci";
@@ -63,7 +69,7 @@ const GIHUB_PARAMS = {
 	owner: "guardian",
 	repo: "dotcom-rendering",
 	issue_number,
-};
+} as const;
 
 const octokit = new Octokit({ auth: token }) as {
 	rest: {
