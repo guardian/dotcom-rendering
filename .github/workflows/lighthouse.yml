@@ -1,8 +1,13 @@
 name: DCR Run Lighthouse CI
 on:
   push:
+    branches:
+      - main
     paths-ignore:
       - "apps-rendering/**"
+  pull_request:
+    types: [synchronize]
+
 jobs:
   lhci:
     name: DCR Lighthouse
