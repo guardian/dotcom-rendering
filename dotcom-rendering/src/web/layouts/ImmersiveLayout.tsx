@@ -393,7 +393,10 @@ export const ImmersiveLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer format={format}>
+							<ArticleContainer
+								format={format}
+								abTests={CAPIArticle.config.abTests}
+							>
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
