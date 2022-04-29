@@ -334,6 +334,7 @@ interface AuthorType {
 interface BlockContributor {
 	name: string;
 	imageUrl?: string;
+	largeImageUrl?: string;
 }
 
 interface Block {
@@ -605,11 +606,11 @@ type FEFrontPropertiesType = {
 
 type FESupportingContent = {
 	properties: {
-		href: string;
+		href?: string;
 	};
 	header?: {
 		kicker?: {
-			item: {
+			item?: {
 				properties: {
 					kickerText: string;
 				};
@@ -622,7 +623,7 @@ type FESupportingContent = {
 
 type DCRSupportingContent = {
 	headline: string;
-	url: string;
+	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
 };
@@ -651,8 +652,27 @@ type FEContainerType =
 	| 'nav/media-list'
 	| 'news/most-popular';
 
-// TODO: This may need to be declared differently than the front type in the future
+type FEContainerPalette =
+	| `Branded`
+	| `EventPalette`
+	| `SombreAltPalette`
+	| `EventAltPalette`
+	| `InvestigationPalette`
+	| `LongRunningAltPalette`
+	| `LongRunningPalette`
+	| `SombrePalette`
+	| `Canonical`
+	| `Dynamo`
+	| `Special`
+	| `DynamoLike`
+	| `Special`
+	| `Breaking`
+	| `Podcast`
+	| `BreakingPalette`;
+
+// TODO: These may need to be declared differently than the front types in the future
 type DCRContainerType = FEContainerType;
+type DCRContainerPalette = FEContainerPalette;
 
 type FEFrontCard = {
 	properties: {
@@ -798,7 +818,7 @@ type FECollectionType = {
 	showLatestUpdate: boolean;
 	config: {
 		displayName: string;
-		metadata?: { type: string }[];
+		metadata?: { type: FEContainerPalette }[];
 		collectionType: FEContainerType;
 		href?: string;
 		groups?: string[];
@@ -820,6 +840,7 @@ type DCRCollectionType = {
 	id: string;
 	displayName: string;
 	collectionType: DCRContainerType;
+	containerPalette?: DCRContainerPalette;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];
@@ -916,6 +937,7 @@ interface TagType {
 	twitterHandle?: string;
 	paidContentType?: string;
 	bylineImageUrl?: string;
+	bylineLargeImageUrl?: string;
 }
 
 /**
@@ -952,7 +974,7 @@ interface BadgeType {
 	imageUrl: string;
 }
 
-type ImagePositionType = 'left' | 'top' | 'right' | 'bottom';
+type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 

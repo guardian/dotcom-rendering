@@ -11,7 +11,10 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { Hide } from '@guardian/source-react-components';
@@ -393,7 +396,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						showTopBorder={false}
 						borderColour={palette.border.article}
 					>
-						<Lines count={4} effect="straight" />
+						<StraightLines
+							count={4}
+							cssOverrides={css`
+								display: block;
+							`}
+						/>
 					</ElementContainer>
 				</SendToBack>
 			</div>
@@ -541,6 +549,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<Hide from="desktop">
 									<div css={sidePaddingDesktop}>
 										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
 											count={decideLineCount(
 												format.design,
 											)}
@@ -662,6 +673,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<Hide until="desktop">
 									<div css={[maxWidth, sidePaddingDesktop]}>
 										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
 											count={decideLineCount(
 												format.design,
 											)}
@@ -957,10 +971,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													/>
 												</Island>
 											)}
-											<Lines
+											<StraightLines
 												data-print-layout="hide"
 												count={4}
-												effect="straight"
+												cssOverrides={css`
+													display: block;
+												`}
 											/>
 											<SubMeta
 												format={format}

@@ -1,6 +1,7 @@
 import { brandBackground, brandLine } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { css } from '@emotion/react';
 import { DecideContainer } from '../lib/DecideContainer';
 
 import { SubNav } from '../components/SubNav.importable';
@@ -16,6 +17,11 @@ interface Props {
 	front: DCRFrontType;
 	NAV: NavType;
 }
+
+const spaces = / /g;
+/** TODO: Confirm with is a valid way to generate component IDs. */
+const ophanComponentId = (name: string) =>
+	name.toLowerCase().replace(spaces, '-');
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
@@ -96,7 +102,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								padded={false}
 								showTopBorder={false}
 							>
-								<Lines count={4} effect="straight" />
+								<StraightLines
+									cssOverrides={css`
+										display: block;
+									`}
+									count={4}
+								/>
 							</ElementContainer>
 						</>
 					)}
@@ -113,6 +124,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					// There are some containers that have zero trails. We don't want to render these
 					if (trails.length === 0) return null;
 
+					const ophanName = ophanComponentId(collection.displayName);
+
 					return (
 						<ContainerLayout
 							title={collection.displayName}
@@ -123,6 +136,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							padContent={false}
 							centralBorder="partial"
 							url={collection.href}
+							// same as above re 'palette styles' for index increment
+							ophanComponentLink={`container-${
+								index + 1
+							} | ${ophanName}`}
+							ophanComponentName={`${ophanName}`}
 						>
 							<DecideContainer
 								trails={trails}
