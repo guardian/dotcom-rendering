@@ -39,6 +39,10 @@ const issue_number = isPullRequestEvent(payload)
 	? payload.pull_request.number
 	: 4584;
 
+console.log(`Using issue #${issue_number}`);
+
+console.log({ payload });
+
 /** The Lighthouse results directory  */
 const dir = "dotcom-rendering/.lighthouseci";
 
@@ -174,7 +178,7 @@ try {
 	const body = createLighthouseResultsMd();
 	const comment_id = await getCommentID();
 
-	comment_id
+	const { data } = comment_id
 		? await octokit.rest.issues.updateComment({
 				...GIHUB_PARAMS,
 				comment_id,
@@ -184,6 +188,13 @@ try {
 				...GIHUB_PARAMS,
 				body,
 		  });
+
+	console.log(
+		`Successfully ${
+			comment_id ? "updated" : "created"
+		} Lighthouse report comment`
+	);
+	console.log("See:", data.html_url);
 } catch (error) {
 	if (error instanceof Error) throw error;
 
