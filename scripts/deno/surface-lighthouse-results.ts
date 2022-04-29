@@ -57,8 +57,8 @@ interface AssertionResult {
 	actual: number;
 	values: number[];
 	passed: boolean;
-	level: LHCI.AssertCommand.AssertionFailureLevel;
-	auditId: string;
+	level?: LHCI.AssertCommand.AssertionFailureLevel;
+	auditId?: string;
 	auditProperty?: string;
 	auditTitle?: string;
 	auditDocumentationLink?: string;
