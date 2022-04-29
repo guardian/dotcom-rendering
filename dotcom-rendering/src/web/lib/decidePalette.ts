@@ -107,7 +107,12 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 };
 
 const textSeriesTitleWhenMatch = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.MatchReport:
 			return BLACK;
+		default:
+			return textSeriesTitle(format);
+	}
 };
 
 const textSectionTitle = textSeriesTitle;
