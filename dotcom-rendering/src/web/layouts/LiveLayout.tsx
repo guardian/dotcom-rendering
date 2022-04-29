@@ -482,7 +482,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								</GridItem>
 								<GridItem area="headline">
 									<div css={maxWidth}>
-										{footballMatchUrl && (
+										{!footballMatchUrl && (
 											<ArticleHeadline
 												format={format}
 												headlineString={
