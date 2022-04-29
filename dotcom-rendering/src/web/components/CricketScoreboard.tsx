@@ -38,14 +38,14 @@ const tableStyle = css`
 const captionStyle = (palette: Palette) => css`
 	text-align: left;
 	font-weight: bold;
-	border-top: 0.0625rem solid ${palette.border.cricketScoreboardTop};
+	border-top: 1px solid ${palette.border.cricketScoreboardTop};
 	border-collapse: inherit;
 	padding-top: ${space[2]}px;
 	padding-bottom: ${space[2]}px;
 `;
 
 const rowStyle = (palette: Palette) => css`
-	border-top: 0.0625rem solid ${palette.border.cricketScoreboardDivider};
+	border-top: 1px solid ${palette.border.cricketScoreboardDivider};
 `;
 
 const cellStyle = css`
