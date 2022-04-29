@@ -72,10 +72,6 @@ const textHeadline = (format: ArticleFormat): string => {
 	}
 };
 
-const textMatchTitle = (): string => {
-	return BLACK;
-};
-
 const textSeriesTitle = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -108,6 +104,10 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 		default:
 			return BLACK;
 	}
+};
+
+const textSeriesTitleWhenMatch = (format: ArticleFormat): string => {
+			return BLACK;
 };
 
 const textSectionTitle = textSeriesTitle;
@@ -1128,8 +1128,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		text: {
 			headline: textHeadline(format),
 			seriesTitle: textSeriesTitle(format),
+			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
-			matchTitle: textMatchTitle(),
 			byline: textByline(format),
 			twitterHandle: textTwitterHandle(format),
 			twitterHandleBelowDesktop: textTwitterHandleBelowDesktop(format),
