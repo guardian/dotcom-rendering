@@ -45,9 +45,9 @@ const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] =>
 		});
 
 const decideContainerPalette = (
-	metadata: { type: FEContainerPalette }[],
-): DCRContainerPalette => {
-	return metadata[0].type;
+	metadata?: { type: FEContainerPalette }[],
+): DCRContainerPalette | undefined => {
+	return metadata?.length && metadata[0].type ? metadata[0].type : undefined;
 };
 
 export const enhanceCollections = (
@@ -59,9 +59,9 @@ export const enhanceCollections = (
 			id,
 			displayName,
 			collectionType,
-			containerPalette:
-				collection.config.metadata &&
-				decideContainerPalette(collection.config.metadata),
+			containerPalette: decideContainerPalette(
+				collection.config.metadata,
+			),
 			curated: enhanceCards(collection.curated),
 			backfill: enhanceCards(collection.backfill),
 			treats: enhanceCards(collection.treats),
