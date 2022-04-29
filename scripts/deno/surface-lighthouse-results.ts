@@ -3,9 +3,11 @@ import type { RestEndpointMethodTypes } from "https://cdn.skypack.dev/@octokit/p
 
 /* -- Setup -- */
 
+/** Github token for Authentication */
 const token = Deno.env.get("GITHUB_TOKEN");
 if (!token) throw new Error("Missing GITHUB_TOKEN");
 
+/** Path for workflow event */
 const path = Deno.env.get("GITHUB_EVENT_PATH");
 if (!path) throw new Error("Missing GITHUB_EVENT_PATH");
 
@@ -22,17 +24,40 @@ const payload: {
 	pull_request?: { number: number };
 	number?: number;
 } = JSON.parse(Deno.readTextFileSync(path));
-console.log(payload);
-const issue_number = (payload.issue || payload.pull_request || payload).number;
+/**
+ * The Current Issue / PR number for adding a Lighthouse report
+ * On push to the main branch, defaults to the original issue:
+ * https://github.com/guardian/dotcom-rendering/issues/4584
+ */
+const issue_number =
+	(payload.issue ?? payload.pull_request ?? payload).number ?? 4584;
 
-console.log({ issue_number });
+/** The Lighthouse results directory  */
+const dir = "dotcom-rendering/.lighthouseci";
 
-if (!issue_number) throw new Error("Missing issue_number");
+const links: Record<string, string> = JSON.parse(
+	Deno.readTextFileSync(`${dir}/links.json`)
+);
 
-console.log(path);
+interface Result {
+	actual: number;
+	expected: number;
+	passed: boolean;
+	operator: string;
+	auditTitle: string;
+	name: string;
+	values: number[];
+	level: string;
+	url: string;
+	auditDocumentationLink: string;
+}
+const results: Result[] = JSON.parse(
+	Deno.readTextFileSync(`${dir}/assertion-results.json`)
+);
 
 /* -- Definitions -- */
 
+/** The string to search for when looking for a comment */
 const MAGIC_STRING = "⚡️ Lighthouse report";
 const GIHUB_PARAMS = {
 	owner: "guardian",
@@ -50,27 +75,10 @@ const octokit = new Octokit({ auth: token }) as {
 	};
 };
 
-interface Result {
-	actual: number;
-	expected: number;
-	passed: boolean;
-	operator: string;
-	auditTitle: string;
-	name: string;
-	values: number[];
-	level: string;
-	url: string;
-	auditDocumentationLink: string;
-}
-
-const dir = "dotcom-rendering/.lighthouseci";
-
-const info: Record<string, string> = JSON.parse(
-	Deno.readTextFileSync(`${dir}/links.json`)
-);
+/* -- Methods -- */
 
 const generateAuditTable = (auditUrl: string, results: Result[]): string => {
-	const reportUrl = info[auditUrl];
+	const reportUrl = links[auditUrl];
 
 	const resultsTemplateString = results.map(
 		(result) =>
@@ -95,13 +103,9 @@ const generateAuditTable = (auditUrl: string, results: Result[]): string => {
 };
 
 const createLighthouseResultsMd = (): string => {
-	const data: Result[] = JSON.parse(
-		Deno.readTextFileSync(`${dir}/assertion-results.json`)
-	);
-
-	const auditCount = data.length;
-	const failedAuditCount = data.filter((result) => !result.passed).length;
-	const auditUrls = [...new Set<string>(data.map((result) => result.url))];
+	const auditCount = results.length;
+	const failedAuditCount = results.filter((result) => !result.passed).length;
+	const auditUrls = [...new Set<string>(results.map((result) => result.url))];
 
 	return [
 		`## ${MAGIC_STRING} for the changes in this PR`,
@@ -111,7 +115,7 @@ const createLighthouseResultsMd = (): string => {
 		...auditUrls.map((url) =>
 			generateAuditTable(
 				url,
-				data.filter((result) => result.url === url)
+				results.filter((result) => result.url === url)
 			)
 		),
 	].join("\n\n");
@@ -144,5 +148,8 @@ try {
 				body,
 		  });
 } catch (error) {
+	if (error instanceof Error) throw error;
+
 	console.error("there was an error:", error.message);
+	Deno.exit(1);
 }
