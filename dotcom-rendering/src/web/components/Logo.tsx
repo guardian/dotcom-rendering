@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
-
-import { from, visuallyHidden } from '@guardian/source-foundations';
-
-import TheGuardianLogoSVG from '../../static/logos/the-guardian-best-website.svg';
-
+import {
+	brandAlt,
+	brandText,
+	from,
+	visuallyHidden,
+} from '@guardian/source-foundations';
+import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
 
 const link = () => css`
@@ -64,7 +66,10 @@ export const Logo: React.FC = () => {
 			>
 				The Guardian - Back to home
 			</span>
-			<TheGuardianLogoSVG css={style} />
+			<SvgGuardianBestWebsiteLogo
+				textColor={brandText.primary}
+				textAccentColor={brandAlt[400]}
+			/>
 		</a>
 	);
 };
