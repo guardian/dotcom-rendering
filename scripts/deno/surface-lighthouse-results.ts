@@ -40,24 +40,15 @@ const GIHUB_PARAMS = {
 	issue_number,
 };
 
-const octokit = new Octokit({ auth: token });
-
-const {
-	createComment,
-	updateComment,
-}: {
-	createComment: (
-		arg: RestEndpointMethodTypes["issues"]["createComment"]["parameters"]
-	) => Promise<
-		RestEndpointMethodTypes["issues"]["createComment"]["response"]
-	>;
-	updateComment: (
-		arg: RestEndpointMethodTypes["issues"]["updateComment"]["parameters"]
-	) => Promise<
-		RestEndpointMethodTypes["issues"]["updateComment"]["response"]
-	>;
-} = octokit.rest.issues;
-
+const octokit = new Octokit({ auth: token }) as {
+	rest: {
+		issues: {
+			[Method in keyof RestEndpointMethodTypes["issues"]]: (
+				arg: RestEndpointMethodTypes["issues"][Method]["parameters"]
+			) => Promise<RestEndpointMethodTypes["issues"][Method]["response"]>;
+		};
+	};
+};
 
 interface Result {
 	actual: number;
@@ -127,13 +118,9 @@ const createLighthouseResultsMd = (): string => {
 };
 
 const getCommentID = async (): Promise<number | null> => {
-	const {
-		data: comments,
-	}: RestEndpointMethodTypes["issues"]["listComments"]["response"] = await octokit.rest.issues.listComments(
-		{
-			...GIHUB_PARAMS,
-		}
-	);
+	const { data: comments } = await octokit.rest.issues.listComments({
+		...GIHUB_PARAMS,
+	});
 
 	const comment = comments.find((comment) =>
 		comment.body?.includes(MAGIC_STRING)
@@ -147,12 +134,12 @@ try {
 	const comment_id = await getCommentID();
 
 	comment_id
-		? await updateComment({
+		? await octokit.rest.issues.updateComment({
 				...GIHUB_PARAMS,
 				comment_id,
 				body,
 		  })
-		: await createComment({
+		: await octokit.rest.issues.createComment({
 				...GIHUB_PARAMS,
 				body,
 		  });
