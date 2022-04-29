@@ -27,7 +27,7 @@ jobs:
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
         run: |
           npm install -g puppeteer-core@2.1.0 @lhci/cli@0.8.2
-          lhci autorun
+          lhci autorun --assert.includePassedAssertions
 
       - name: Setup deno
         uses: denolib/setup-deno@v2
