@@ -23,7 +23,7 @@ const payload: EventPayloadMap["push" | "pull_request"] = JSON.parse(
 const isPullRequestEvent = (
 	payload: EventPayloadMap[keyof EventPayloadMap]
 ): payload is EventPayloadMap["pull_request"] =>
-	typeof (payload as EventPayloadMap["pull_request"])?.pull_request ===
+	typeof (payload as EventPayloadMap["pull_request"])?.pull_request.number ===
 	"number";
 
 /**
