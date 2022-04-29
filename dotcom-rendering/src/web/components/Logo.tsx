@@ -8,25 +8,33 @@ import {
 import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
 import { getZIndex } from '../lib/getZIndex';
 
-const link = () => css`
+const linkStyles = css`
 	float: right;
 	margin-top: 10px;
 	margin-right: 54px;
 	margin-bottom: 21px;
+	height: 44px;
+	width: 146px;
 
 	${from.mobileMedium} {
 		margin-right: 10px;
+		height: 56px;
+		width: 195px;
 	}
 	${from.mobileLandscape} {
 		margin-right: 20px;
 	}
 	${from.tablet} {
 		margin-top: 8px;
+		height: 72px;
+		width: 224px;
 	}
 	${from.desktop} {
 		margin-top: 5px;
 		margin-bottom: 15px;
 		position: relative;
+		height: 95px;
+		width: 295px;
 	}
 	${from.wide} {
 		margin-right: 96px;
@@ -35,30 +43,9 @@ const link = () => css`
 	${getZIndex('TheGuardian')}
 `;
 
-const style = () => css`
-	height: 44px;
-	width: 146px;
-	${from.mobileMedium} {
-		height: 56px;
-		width: 195px;
-	}
-	${from.tablet} {
-		height: 72px;
-		width: 224px;
-	}
-	${from.desktop} {
-		height: 95px;
-		width: 295px;
-	}
-
-	path {
-		fill: brandText.primary;
-	}
-`;
-
 export const Logo: React.FC = () => {
 	return (
-		<a css={link} href="/" data-link-name="nav2 : logo">
+		<a css={linkStyles} href="/" data-link-name="nav2 : logo">
 			<span
 				css={css`
 					${visuallyHidden};
