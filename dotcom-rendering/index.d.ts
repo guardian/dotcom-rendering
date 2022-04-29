@@ -619,8 +619,27 @@ type FEContainerType =
 	| 'nav/media-list'
 	| 'news/most-popular';
 
-// TODO: This may need to be declared differently than the front type in the future
+type FEContainerPalette =
+	| `Branded`
+	| `EventPalette`
+	| `SombreAltPalette`
+	| `EventAltPalette`
+	| `InvestigationPalette`
+	| `LongRunningAltPalette`
+	| `LongRunningPalette`
+	| `SombrePalette`
+	| `Canonical`
+	| `Dynamo`
+	| `Special`
+	| `DynamoLike`
+	| `Special`
+	| `Breaking`
+	| `Podcast`
+	| `BreakingPalette`;
+
+// TODO: These may need to be declared differently than the front types in the future
 type DCRContainerType = FEContainerType;
+type DCRContainerPalette = FEContainerPalette;
 
 type FEFrontCard = {
 	properties: {
@@ -766,7 +785,7 @@ type FECollectionType = {
 	showLatestUpdate: boolean;
 	config: {
 		displayName: string;
-		metadata?: { type: string }[];
+		metadata?: { type: FEContainerPalette }[];
 		collectionType: FEContainerType;
 		href?: string;
 		groups?: string[];
@@ -788,6 +807,7 @@ type DCRCollectionType = {
 	id: string;
 	displayName: string;
 	collectionType: DCRContainerType;
+	containerPalette?: DCRContainerPalette;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];

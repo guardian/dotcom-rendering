@@ -44,6 +44,12 @@ const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] =>
 			};
 		});
 
+const decideContainerPalette = (
+	metadata?: { type: FEContainerPalette }[],
+): DCRContainerPalette | undefined => {
+	return metadata?.length && metadata[0].type ? metadata[0].type : undefined;
+};
+
 export const enhanceCollections = (
 	collections: FECollectionType[],
 ): DCRCollectionType[] => {
@@ -53,6 +59,9 @@ export const enhanceCollections = (
 			id,
 			displayName,
 			collectionType,
+			containerPalette: decideContainerPalette(
+				collection.config.metadata,
+			),
 			curated: enhanceCards(collection.curated),
 			backfill: enhanceCards(collection.backfill),
 			treats: enhanceCards(collection.treats),
