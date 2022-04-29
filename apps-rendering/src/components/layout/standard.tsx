@@ -15,11 +15,11 @@ import {
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
 import { map, none, withDefault } from '@guardian/types';
-import Body from 'components/articleBody';
+import Body from 'components/ArticleBody';
 import Epic from 'components/epic';
 import FootballScores from 'components/footballScores';
 import Footer from 'components/footer';
-import Headline from 'components/headline';
+import Headline from 'components/Headline';
 import ImmersiveCaption from 'components/immersiveCaption';
 import Logo from 'components/logo';
 import Metadata from 'components/metadata';

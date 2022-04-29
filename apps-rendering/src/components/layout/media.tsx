@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import { background, breakpoints, from } from '@guardian/source-foundations';
 import Footer from 'components/footer';
-import Headline from 'components/headline';
+import Headline from 'components/Headline';
 import Body from 'components/media/articleBody';
 import Series from 'components/media/articleSeries';
 import Byline from 'components/media/byline';

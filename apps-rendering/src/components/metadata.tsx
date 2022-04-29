@@ -16,8 +16,8 @@ import {
 	StraightLines,
 	ToggleSwitch,
 } from '@guardian/source-react-components-development-kitchen';
-import Avatar from 'components/avatar';
-import Byline from 'components/byline';
+import Avatar from 'components/Avatar';
+import Byline from 'components/Byline';
 import CommentCount from 'components/commentCount';
 import Dateline from 'components/dateline';
 import Follow from 'components/follow';

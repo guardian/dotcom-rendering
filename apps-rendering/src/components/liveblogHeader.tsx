@@ -6,7 +6,7 @@ import {
 	Container,
 	Hide,
 } from '@guardian/source-react-components';
-import Headline from 'components/headline';
+import Headline from 'components/Headline';
 import Standfirst from 'components/standfirst';
 import {
 	headlineBackgroundColour,

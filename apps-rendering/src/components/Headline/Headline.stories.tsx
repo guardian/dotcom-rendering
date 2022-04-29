@@ -5,7 +5,7 @@ import { boolean, radios, withKnobs } from '@storybook/addon-knobs';
 import { analysis, article, feature, labs, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
-import Headline from './headline';
+import Headline from './';
 
 // ----- Setup ----- //
 

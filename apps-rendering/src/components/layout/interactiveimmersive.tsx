@@ -11,7 +11,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import Body from 'components/articleBody';
 import Epic from 'components/epic';
 import Footer from 'components/footer';
-import Headline from 'components/headline';
+import Headline from 'components/Headline';
 import ImmersiveCaption from 'components/immersiveCaption';
 import Logo from 'components/logo';
 import Metadata from 'components/metadata';

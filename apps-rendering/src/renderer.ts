@@ -48,10 +48,10 @@ import type {
 	Text,
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
-import Anchor from 'components/anchor';
+import Anchor from 'components/Anchor';
 import Quiz from 'components/atoms/quiz';
-import Blockquote from 'components/blockquote';
-import Bullet from 'components/bullet';
+import Blockquote from 'components/Blockquote';
+import Bullet from 'components/Bullet';
 import CalloutForm from 'components/calloutForm';
 import Credit from 'components/credit';
 import GalleryImage from 'components/editions/galleryImage';

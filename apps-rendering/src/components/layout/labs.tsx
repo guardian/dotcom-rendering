@@ -9,9 +9,9 @@ import {
 } from '@guardian/source-foundations';
 import { DottedLines } from '@guardian/source-react-components-development-kitchen';
 import { map, withDefault } from '@guardian/types';
-import Body from 'components/articleBody';
+import Body from 'components/ArticleBody';
 import Footer from 'components/footer';
-import Headline from 'components/headline';
+import Headline from 'components/Headline';
 import Logo from 'components/labsLogo';
 import Metadata from 'components/metadata';
 import RelatedContent from 'components/relatedContent';

@@ -4,7 +4,7 @@ import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace, textSans, until } from '@guardian/source-foundations';
-import Anchor from 'components/anchor';
+import Anchor from 'components/Anchor';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
