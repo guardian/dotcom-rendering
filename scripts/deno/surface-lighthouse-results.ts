@@ -90,6 +90,26 @@ const octokit = new Octokit({ auth: token }) as {
 
 /* -- Methods -- */
 
+/** If large number, round to 0 decimal, if small, round to 6 decimal points */
+const formatNumber = (expected: number, actual: number): string =>
+	expected > 100 ? Math.ceil(actual).toString() : actual.toFixed(6);
+
+const getStatus = (
+	passed: boolean,
+	level: AssertionResult["level"]
+): "✅" | "⚠️" | "❌" => {
+	if (passed) return "✅";
+
+	switch (level) {
+		case "off":
+		case "warn":
+			return "⚠️";
+		case "error":
+		default:
+			return "❌";
+	}
+};
+
 const generateAuditTable = (
 	auditUrl: string,
 	results: AssertionResult[]
@@ -97,10 +117,11 @@ const generateAuditTable = (
 	const reportUrl = links[auditUrl];
 
 	const resultsTemplateString = results.map(
-		(result) =>
-			`| ${result.auditTitle} | ${result.passed ? "✅" : "❌"} | ${
-				result.expected
-			} | ${result.actual} |`
+		({ auditTitle, auditProperty, passed, expected, actual, level }) =>
+			`| ${auditTitle ?? auditProperty ?? "Unknown Test"} | ${getStatus(
+				passed,
+				level
+			)} | ${expected} | ${formatNumber(expected, actual)} |`
 	);
 
 	const [endpoint, testUrlClean] = auditUrl.split("?url=");
