@@ -13,6 +13,8 @@ if (!path) {
 	Deno.exit(1);
 }
 
+console.log(path);
+
 const MAGIC_STRING = "⚡️ Lighthouse report";
 
 const octokit = new Octokit({ auth: token });
@@ -33,8 +35,23 @@ const {
 	>;
 } = octokit.rest.issues;
 
-const event = JSON.parse(Deno.readTextFileSync(path));
-const issue_number = event.pull_request.number;
+/**
+ * https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
+ */
+const event: {
+	action: string;
+	sender: Record<string, unknown>;
+	repository: Record<string, unknown>;
+	organization: Record<string, unknown>;
+	installation: Record<string, unknown>;
+	issue?: { number: number };
+	pull_request?: { number: number };
+	number?: number;
+} = JSON.parse(Deno.readTextFileSync(path));
+console.log(event);
+const issue_number = (event.issue ?? event.pull_request ?? event).number;
+
+console.log({ issue_number });
 
 const GIHUB_PARAMS = {
 	owner: "guardian",
@@ -116,8 +133,6 @@ const getCommentID = async (): Promise<number | null> => {
 			...GIHUB_PARAMS,
 		}
 	);
-
-	console.log(comments);
 
 	const comment = comments.find((comment) =>
 		comment.body?.includes(MAGIC_STRING)
