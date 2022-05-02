@@ -11,6 +11,7 @@ import { decidePalette } from '../lib/decidePalette';
 type Props = {
 	headlineText: string; // The text shown
 	format: ArticleFormat; // Used to decide when to add type specific styles
+	palette?: Palette;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
@@ -135,6 +136,7 @@ const lineStyles = (palette: Palette) => css`
 export const CardHeadline = ({
 	headlineText,
 	format,
+	palette,
 	showQuotes,
 	kickerText,
 	showPulsingDot,
@@ -144,7 +146,7 @@ export const CardHeadline = ({
 	showByline,
 	showLine,
 }: Props) => {
-	const palette = decidePalette(format);
+	const cardPalette = palette || decidePalette(format);
 	return (
 		<>
 			<h4
@@ -155,28 +157,28 @@ export const CardHeadline = ({
 					format.design === ArticleDesign.Analysis &&
 						underlinedStyles(
 							size,
-							palette.background.analysisUnderline,
+							cardPalette.background.analysisUnderline,
 						),
-					showLine && lineStyles(palette),
+					showLine && lineStyles(cardPalette),
 				]}
 			>
 				<span>
 					{kickerText && (
 						<Kicker
 							text={kickerText}
-							palette={palette}
+							palette={cardPalette}
 							showPulsingDot={showPulsingDot}
 							showSlash={showSlash}
 							inCard={true}
 						/>
 					)}
 					{showQuotes && (
-						<QuoteIcon colour={palette.text.cardKicker} />
+						<QuoteIcon colour={cardPalette.text.cardKicker} />
 					)}
 
 					<span
 						css={css`
-							color: ${palette.text.cardHeadline};
+							color: ${cardPalette.text.cardHeadline};
 						`}
 					>
 						{headlineText}

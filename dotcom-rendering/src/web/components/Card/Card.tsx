@@ -269,6 +269,7 @@ export const Card = ({
 								<CardHeadline
 									headlineText={headlineText}
 									format={format}
+									palette={cardPalette}
 									size={headlineSize}
 									showQuotes={showQuotes}
 									kickerText={

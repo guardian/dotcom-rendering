@@ -345,7 +345,11 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 	}
 };
 
-const textCardHeadline = (format: ArticleFormat): string => {
+const textCardHeadline = (
+	format: ArticleFormat,
+	frontPalette?: FrontPalette,
+): string => {
+	if (frontPalette) return frontPalette.cardHeadline;
 	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
 	if (format.display === ArticleDisplay.Immersive) return BLACK;
 	switch (format.design) {
@@ -1148,7 +1152,7 @@ export const decidePalette = (
 			syndicationButton: textSyndicationButton(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
-			cardHeadline: textCardHeadline(format),
+			cardHeadline: textCardHeadline(format, frontPalette),
 			cardByline: textCardByline(format),
 			cardKicker: textCardKicker(format),
 			linkKicker: textLinkKicker(format),
