@@ -188,6 +188,21 @@ type Palette = {
 	};
 };
 
+type FrontPalette = {
+	containerBorder: string;
+	containerBackground: string;
+	containerText: string;
+	dynamoHeadline: string;
+	dynamoKicker: string;
+	dynamoSublinkKicker: string;
+	dynamoMeta: string;
+	cardBackground: string;
+	cardHeadline: string;
+	cardKicker: string;
+	commentCount: string;
+	toggle: string;
+};
+
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
 type SharePlatform =

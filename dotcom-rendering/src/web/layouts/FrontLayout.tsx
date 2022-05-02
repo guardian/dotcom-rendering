@@ -141,6 +141,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								index + 1
 							} | ${ophanName}`}
 							ophanComponentName={`${ophanName}`}
+							containerPalette={collection.containerPalette}
 						>
 							<DecideContainer
 								trails={trails}

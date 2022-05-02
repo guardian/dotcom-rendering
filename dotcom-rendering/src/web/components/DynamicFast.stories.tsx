@@ -7,6 +7,21 @@ import { trails } from '../../../fixtures/manual/trails';
 export default {
 	component: DynamicFast,
 	title: 'Components/DynamicFast',
+};
+
+export const Default = () => (
+	<ContainerLayout
+		title="DynamicFast"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+	>
+		<DynamicFast trails={trails} />
+	</ContainerLayout>
+);
+Default.story = {
+	name: 'DynamicFast',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -23,15 +38,106 @@ export default {
 	},
 };
 
-export const Default = () => (
+export const EventPalette = () => (
 	<ContainerLayout
-		title="DynamicFast"
+		title="EventPalette"
 		showTopBorder={true}
 		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
+		containerPalette="EventPalette"
 	>
-		<DynamicFast trails={trails} />
+		<DynamicFast trails={trails} containerPalette="EventPalette" />
 	</ContainerLayout>
 );
-Default.story = { name: 'DynamicFast' };
+
+export const EventAltPalette = () => (
+	<ContainerLayout
+		title="EventAltPalette"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+		containerPalette="EventAltPalette"
+	>
+		<DynamicFast trails={trails} containerPalette="EventAltPalette" />
+	</ContainerLayout>
+);
+
+export const SombrePalette = () => (
+	<ContainerLayout
+		title="SombrePalette"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+		containerPalette="SombrePalette"
+	>
+		<DynamicFast trails={trails} containerPalette="SombrePalette" />
+	</ContainerLayout>
+);
+
+export const SombreAltPalette = () => (
+	<ContainerLayout
+		title="SombreAltPalette"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+		containerPalette="SombreAltPalette"
+	>
+		<DynamicFast trails={trails} containerPalette="SombreAltPalette" />
+	</ContainerLayout>
+);
+
+export const BreakingPalette = () => (
+	<ContainerLayout
+		title="BreakingPalette"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+		containerPalette="BreakingPalette"
+	>
+		<DynamicFast trails={trails} containerPalette="BreakingPalette" />
+	</ContainerLayout>
+);
+
+export const LongRunningPalette = () => (
+	<ContainerLayout
+		title="LongRunningPalette"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+		containerPalette="LongRunningPalette"
+	>
+		<DynamicFast trails={trails} containerPalette="LongRunningPalette" />
+	</ContainerLayout>
+);
+
+export const LongRunningAltPalette = () => (
+	<ContainerLayout
+		title="LongRunningAltPalette"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+		containerPalette="LongRunningAltPalette"
+	>
+		<DynamicFast trails={trails} containerPalette="LongRunningAltPalette" />
+	</ContainerLayout>
+);
+
+export const InvestigationPalette = () => (
+	<ContainerLayout
+		title="InvestigationPalette"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+		containerPalette="InvestigationPalette"
+	>
+		<DynamicFast trails={trails} containerPalette="InvestigationPalette" />
+	</ContainerLayout>
+);
