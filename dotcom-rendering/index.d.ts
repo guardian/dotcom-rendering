@@ -635,7 +635,6 @@ type FEContainerType =
 	| 'news/most-popular';
 
 type FEContainerPalette =
-	| `Branded`
 	| `EventPalette`
 	| `SombreAltPalette`
 	| `EventAltPalette`
@@ -643,13 +642,6 @@ type FEContainerPalette =
 	| `LongRunningAltPalette`
 	| `LongRunningPalette`
 	| `SombrePalette`
-	| `Canonical`
-	| `Dynamo`
-	| `Special`
-	| `DynamoLike`
-	| `Special`
-	| `Breaking`
-	| `Podcast`
 	| `BreakingPalette`;
 
 // TODO: These may need to be declared differently than the front types in the future

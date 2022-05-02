@@ -116,7 +116,6 @@ export const decideFrontPalette = (
 				commentCount: '#707070',
 			};
 		case 'EventAltPalette':
-		default:
 			return {
 				containerBorder: 'rgba(0,0,0, 0.2)',
 				cardHeadline: '#041F4A',
