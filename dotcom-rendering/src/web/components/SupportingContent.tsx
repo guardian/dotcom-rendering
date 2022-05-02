@@ -92,6 +92,7 @@ export const SupportingContent = ({
 							size="tiny"
 							showSlash={false}
 							showLine={true}
+							linkTo={subLink.url}
 						/>
 					</li>
 				);

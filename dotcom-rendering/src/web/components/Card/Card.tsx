@@ -236,78 +236,54 @@ export const Card = ({
 	};
 
 	return (
-		<CardLink linkTo={linkTo} format={format} dataLinkName={dataLinkName}>
-			<CardWrapper palette={cardPalette}>
-				<CardLayout
-					imagePosition={imagePosition}
-					imagePositionOnMobile={imagePositionOnMobile}
-					minWidthInPixels={minWidthInPixels}
-				>
-					{imageUrl && (
-						<ImageWrapper
-							percentage={imageCoverage}
-							imagePositionOnMobile={imagePositionOnMobile}
-						>
-							<img src={imageUrl} alt="" role="presentation" />
-							<>
-								{starRating !== undefined ? (
-									<StarRatingComponent rating={starRating} />
-								) : null}
-							</>
-						</ImageWrapper>
-					)}
-					<ContentWrapper percentage={contentCoverage}>
-						<Flex>
-							<HeadlineWrapper>
-								<CardHeadline
-									headlineText={headlineText}
-									format={format}
-									size={headlineSize}
-									showQuotes={showQuotes}
-									kickerText={
-										format.design === ArticleDesign.LiveBlog
-											? 'Live'
-											: kickerText
-									}
-									showPulsingDot={
-										format.design ===
-											ArticleDesign.LiveBlog ||
-										showPulsingDot
-									}
-									showSlash={
-										format.design ===
-											ArticleDesign.LiveBlog || showSlash
-									}
-									byline={byline}
-									showByline={showByline}
-								/>
-							</HeadlineWrapper>
-							<>
-								{avatar && (
-									<Hide when="above" breakpoint="tablet">
-										<AvatarContainer>
-											<Avatar
-												imageSrc={avatar.src}
-												imageAlt={avatar.alt}
-												palette={cardPalette}
-											/>
-										</AvatarContainer>
-									</Hide>
-								)}
-							</>
-						</Flex>
-						<div>
-							{trailText && (
-								<TrailTextWrapper palette={cardPalette}>
-									<div
-										dangerouslySetInnerHTML={{
-											__html: trailText,
-										}}
-									/>
-								</TrailTextWrapper>
-							)}
+		<CardWrapper format={format}>
+			<CardLink linkTo={linkTo} dataLinkName={dataLinkName} />
+			<CardLayout
+				imagePosition={imagePosition}
+				imagePositionOnMobile={imagePositionOnMobile}
+				minWidthInPixels={minWidthInPixels}
+			>
+				{imageUrl && (
+					<ImageWrapper
+						percentage={imageCoverage}
+						imagePositionOnMobile={imagePositionOnMobile}
+					>
+						<img src={imageUrl} alt="" role="presentation" />
+						<>
+							{starRating !== undefined ? (
+								<StarRatingComponent rating={starRating} />
+							) : null}
+						</>
+					</ImageWrapper>
+				)}
+				<ContentWrapper percentage={contentCoverage}>
+					<Flex>
+						<HeadlineWrapper>
+							<CardHeadline
+								headlineText={headlineText}
+								format={format}
+								size={headlineSize}
+								showQuotes={showQuotes}
+								kickerText={
+									format.design === ArticleDesign.LiveBlog
+										? 'Live'
+										: kickerText
+								}
+								showPulsingDot={
+									format.design === ArticleDesign.LiveBlog ||
+									showPulsingDot
+								}
+								showSlash={
+									format.design === ArticleDesign.LiveBlog ||
+									showSlash
+								}
+								byline={byline}
+								showByline={showByline}
+							/>
+						</HeadlineWrapper>
+						<>
 							{avatar && (
-								<Hide when="below" breakpoint="tablet">
+								<Hide when="above" breakpoint="tablet">
 									<AvatarContainer>
 										<Avatar
 											imageSrc={avatar.src}
@@ -317,18 +293,40 @@ export const Card = ({
 									</AvatarContainer>
 								</Hide>
 							)}
-							{/* Show the card footer in the same column as the headline content */}
-							{!moreThanTwoSubLinks ? (
-								renderFooter({ forceVertical: true })
-							) : (
-								<></>
-							)}
-						</div>
-					</ContentWrapper>
-				</CardLayout>
-				{/* If there are more than two sublinks break footer out of the headline column into a row below */}
-				{moreThanTwoSubLinks ? renderFooter({}) : <></>}
-			</CardWrapper>
-		</CardLink>
+						</>
+					</Flex>
+					<div>
+						{trailText && (
+							<TrailTextWrapper palette={cardPalette}>
+								<div
+									dangerouslySetInnerHTML={{
+										__html: trailText,
+									}}
+								/>
+							</TrailTextWrapper>
+						)}
+						{avatar && (
+							<Hide when="below" breakpoint="tablet">
+								<AvatarContainer>
+									<Avatar
+										imageSrc={avatar.src}
+										imageAlt={avatar.alt}
+										palette={cardPalette}
+									/>
+								</AvatarContainer>
+							</Hide>
+						)}
+						{/* Show the card footer in the same column as the headline content */}
+						{!moreThanTwoSubLinks ? (
+							renderFooter({ forceVertical: true })
+						) : (
+							<></>
+						)}
+					</div>
+				</ContentWrapper>
+			</CardLayout>
+			{/* If there are more than two sublinks break footer out of the headline column into a row below */}
+			{moreThanTwoSubLinks ? renderFooter({}) : <></>}
+		</CardWrapper>
 	);
 };

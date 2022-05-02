@@ -64,6 +64,11 @@ const indices = [
 
 	// Main media
 	'mainMedia',
+
+	// Nested links in cards should sit above the main card link
+	// See: https://www.sarasoueidan.com/blog/nested-links/
+	'card-sublink',
+	'card-link',
 ] as const;
 
 // Implementation code - you don't need to change this to get a new index

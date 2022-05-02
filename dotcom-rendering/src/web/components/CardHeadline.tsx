@@ -3,10 +3,12 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { headline, textSans, until, space } from '@guardian/source-foundations';
 
+import { Link } from '@guardian/source-react-components';
 import { QuoteIcon } from './QuoteIcon';
 import { Kicker } from './Kicker';
 import { Byline } from './Byline';
 import { decidePalette } from '../lib/decidePalette';
+import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
 	headlineText: string; // The text shown
@@ -19,6 +21,7 @@ type Props = {
 	byline?: string;
 	showByline?: boolean;
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
+	linkTo?: string; // If provided, the headline is wrapped in a link
 };
 
 const fontStyles = (size: SmallHeadlineSize) => {
@@ -143,7 +146,9 @@ export const CardHeadline = ({
 	byline,
 	showByline,
 	showLine,
+	linkTo,
 }: Props) => {
+	console.log({ linkTo });
 	const palette = decidePalette(format);
 	return (
 		<>
@@ -160,7 +165,7 @@ export const CardHeadline = ({
 					showLine && lineStyles(palette),
 				]}
 			>
-				<span>
+				<>
 					{kickerText && (
 						<Kicker
 							text={kickerText}
@@ -179,9 +184,29 @@ export const CardHeadline = ({
 							color: ${palette.text.cardHeadline};
 						`}
 					>
-						{headlineText}
+						{linkTo ? (
+							<Link
+								href={linkTo}
+								subdued={true}
+								cssOverrides={css`
+									/* See: https://css-tricks.com/nested-links/ */
+									z-index: ${getZIndex('card-sublink')};
+									/* The following styles turn off those provided by Link */
+									color: inherit;
+									font-family: inherit;
+									font-size: inherit;
+									:hover {
+										color: inherit;
+									}
+								`}
+							>
+								{headlineText}
+							</Link>
+						) : (
+							headlineText
+						)}
 					</span>
-				</span>
+				</>
 			</h4>
 			{byline && showByline && (
 				<Byline
