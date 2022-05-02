@@ -584,6 +584,7 @@ type FESupportingContent = {
 			};
 		};
 		headline: string;
+		url: string;
 	};
 	format?: CAPIFormat;
 };
