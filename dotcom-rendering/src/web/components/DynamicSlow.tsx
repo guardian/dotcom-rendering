@@ -16,8 +16,8 @@ type Props = {
 export const DynamicSlow = ({ trails }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
-	const smallCards = trails.slice(2, 6);
-	const bigCards = trails.slice(6, 8);
+	const bigCards = trails.slice(2, 4);
+	const smallCards = trails.slice(4, 8);
 
 	return (
 		<>
