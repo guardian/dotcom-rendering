@@ -153,6 +153,7 @@ const WithLink = ({
 					${getZIndex('card-sublink')};
 					/* The following styles turn off those provided by Link */
 					color: inherit;
+					/* stylelint-disable-next-line property-disallowed-list */
 					font-family: inherit;
 					font-size: inherit;
 					/* This css is used to remove any underline from the kicker but still
