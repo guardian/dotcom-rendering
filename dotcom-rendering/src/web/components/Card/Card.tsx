@@ -57,6 +57,7 @@ export type Props = {
 	// Labs
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
+	containerPalette?: DCRContainerPalette;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';

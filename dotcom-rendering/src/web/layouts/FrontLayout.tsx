@@ -145,6 +145,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<DecideContainer
 								trails={trails}
 								containerType={collection.collectionType}
+								containerPalette={collection.containerPalette}
 							/>
 						</ContainerLayout>
 					);
