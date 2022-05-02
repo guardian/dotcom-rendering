@@ -1,3 +1,4 @@
+import React from 'react';
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
@@ -135,6 +136,43 @@ const lineStyles = (palette: Palette) => css`
 	}
 `;
 
+const WithLink = ({
+	linkTo,
+	children,
+}: {
+	linkTo?: string;
+	children: React.ReactNode;
+}) => {
+	if (linkTo) {
+		return (
+			<Link
+				href={linkTo}
+				subdued={true}
+				cssOverrides={css`
+					/* See: https://css-tricks.com/nested-links/ */
+					${getZIndex('card-sublink')};
+					/* The following styles turn off those provided by Link */
+					color: inherit;
+					font-family: inherit;
+					font-size: inherit;
+					/* This css is used to remove any underline from the kicker but still
+					   have it applied to the headline when the kicker is hovered */
+					:hover {
+						color: inherit;
+						text-decoration: none;
+						.show-underline {
+							text-decoration: underline;
+						}
+					}
+				`}
+			>
+				{children}
+			</Link>
+		);
+	}
+	return <>{children}</>;
+};
+
 export const CardHeadline = ({
 	headlineText,
 	format,
@@ -148,7 +186,6 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 }: Props) => {
-	console.log({ linkTo });
 	const palette = decidePalette(format);
 	return (
 		<>
@@ -165,7 +202,7 @@ export const CardHeadline = ({
 					showLine && lineStyles(palette),
 				]}
 			>
-				<>
+				<WithLink linkTo={linkTo}>
 					{kickerText && (
 						<Kicker
 							text={kickerText}
@@ -183,30 +220,11 @@ export const CardHeadline = ({
 						css={css`
 							color: ${palette.text.cardHeadline};
 						`}
+						className="show-underline"
 					>
-						{linkTo ? (
-							<Link
-								href={linkTo}
-								subdued={true}
-								cssOverrides={css`
-									/* See: https://css-tricks.com/nested-links/ */
-									z-index: ${getZIndex('card-sublink')};
-									/* The following styles turn off those provided by Link */
-									color: inherit;
-									font-family: inherit;
-									font-size: inherit;
-									:hover {
-										color: inherit;
-									}
-								`}
-							>
-								{headlineText}
-							</Link>
-						) : (
-							headlineText
-						)}
+						{headlineText}
 					</span>
-				</>
+				</WithLink>
 			</h4>
 			{byline && showByline && (
 				<Byline
