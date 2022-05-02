@@ -186,9 +186,6 @@ export const DynamicSlow = ({ trails }: Props) => {
 										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
-										supportingContent={
-											card.supportingContent
-										}
 									/>
 								</LI>
 							);
