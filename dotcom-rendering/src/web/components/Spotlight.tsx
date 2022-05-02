@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 import { ArticleDesign } from '@guardian/libs';
+import { decideFrontPalette } from '../lib/decideFrontPalette';
 
 import { Card } from './Card/Card';
 
@@ -11,7 +12,7 @@ type Props = {
 
 export const Spotlight = ({ content, containerPalette }: Props) => (
 	<Card
-		containerPalette={containerPalette}
+		frontPalette={containerPalette && decideFrontPalette(containerPalette)}
 		linkTo={content[0].url}
 		format={content[0].format}
 		headlineText={content[0].headline}

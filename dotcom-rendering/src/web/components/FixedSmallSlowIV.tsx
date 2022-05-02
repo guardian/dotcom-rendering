@@ -1,4 +1,5 @@
 import { ArticleDesign } from '@guardian/libs';
+import { decideFrontPalette } from '../lib/decideFrontPalette';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -21,7 +22,10 @@ export const FixedSmallSlowIV = ({ trails, containerPalette }: Props) => {
 						padBottomOnMobile={true}
 					>
 						<Card
-							containerPalette={containerPalette}
+							frontPalette={
+								containerPalette &&
+								decideFrontPalette(containerPalette)
+							}
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}

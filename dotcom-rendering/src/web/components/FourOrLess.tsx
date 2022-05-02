@@ -5,6 +5,7 @@ import { ArticleDesign } from '@guardian/libs';
 import { Card } from './Card/Card';
 import { UL } from './Card/components/UL';
 import { LI } from './Card/components/LI';
+import { decideFrontPalette } from '../lib/decideFrontPalette';
 
 type Props = {
 	content: TrailType[];
@@ -39,7 +40,10 @@ export const FourOrLess = ({ content, containerPalette }: Props) => {
 						percentage={percentage}
 					>
 						<Card
-							containerPalette={containerPalette}
+							frontPalette={
+								containerPalette &&
+								decideFrontPalette(containerPalette)
+							}
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}

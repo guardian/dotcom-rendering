@@ -57,7 +57,7 @@ export type Props = {
 	// Labs
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
-	containerPalette?: DCRContainerPalette;
+	frontPalette?: FrontPalette;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -144,6 +144,7 @@ export const Card = ({
 	dataLinkName,
 	branding,
 	supportingContent,
+	frontPalette,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -159,7 +160,7 @@ export const Card = ({
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
-	const cardPalette = decidePalette(format);
+	const cardPalette = decidePalette(format, frontPalette);
 
 	const moreThanTwoSubLinks: boolean = !!(
 		supportingContent?.length && supportingContent.length > 2
