@@ -4,7 +4,7 @@
  *
  * @see {@link https://github.com/guardian/interactive-atom-container-colours/blob/master/shared/css/_variables.scss Frontend code}
  * @param {DCRContainerPalette} containerPalette
- * @returns {FrontPalette}
+ * @returns {FrontPalette} an object with the overrides set as properties
  */
 export const decideFrontPalette = (
 	containerPalette: DCRContainerPalette,
