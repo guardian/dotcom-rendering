@@ -938,7 +938,11 @@ const borderArticleLinkHover = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const topBarCard = (format: ArticleFormat): string => {
+const topBarCard = (
+	format: ArticleFormat,
+	frontPalette?: FrontPalette,
+): string => {
+	if (frontPalette) return frontPalette.cardKicker;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return brandAltBackground.primary;
 	return pillarPalette[format.theme].main;
@@ -1249,7 +1253,7 @@ export const decidePalette = (
 			cardSupporting: borderCardSupporting(format),
 		},
 		topBar: {
-			card: topBarCard(format),
+			card: topBarCard(format, frontPalette),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
