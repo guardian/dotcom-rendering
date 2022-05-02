@@ -150,7 +150,7 @@ const WithLink = ({
 				subdued={true}
 				cssOverrides={css`
 					/* See: https://css-tricks.com/nested-links/ */
-					${getZIndex('card-sublink')};
+					${getZIndex('card-nested-link')};
 					/* The following styles turn off those provided by Link */
 					color: inherit;
 					/* stylelint-disable-next-line property-disallowed-list */

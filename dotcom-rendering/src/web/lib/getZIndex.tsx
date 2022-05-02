@@ -67,7 +67,7 @@ const indices = [
 
 	// Nested links in cards should sit above the main card link
 	// See: https://www.sarasoueidan.com/blog/nested-links/
-	'card-sublink',
+	'card-nested-link',
 	'card-link',
 ] as const;
 

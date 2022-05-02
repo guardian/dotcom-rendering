@@ -23,7 +23,7 @@ describe('getZIndex', () => {
 		expect(getZIndex('bodyArea')).toBe('z-index: 5;');
 		expect(getZIndex('rightColumnArea')).toBe('z-index: 4;');
 		expect(getZIndex('mainMedia')).toBe('z-index: 3;');
-		expect(getZIndex('card-sublink')).toBe('z-index: 2;');
+		expect(getZIndex('card-nested-link')).toBe('z-index: 2;');
 		expect(getZIndex('card-link')).toBe('z-index: 1;');
 	});
 });
