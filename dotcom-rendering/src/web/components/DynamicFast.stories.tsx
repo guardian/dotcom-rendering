@@ -7,6 +7,20 @@ import { trails } from '../../../fixtures/manual/trails';
 export default {
 	component: DynamicFast,
 	title: 'Components/DynamicFast',
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.mobileMedium,
+				breakpoints.mobileLandscape,
+				breakpoints.phablet,
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
+	},
 };
 
 export const Default = () => (
@@ -22,18 +36,4 @@ export const Default = () => (
 );
 Default.story = {
 	name: 'DynamicFast',
-	parameters: {
-		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.mobileLandscape,
-				breakpoints.phablet,
-				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
-				breakpoints.wide,
-			],
-		},
-	},
 };
