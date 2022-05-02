@@ -385,7 +385,11 @@ const textCardByline = (format: ArticleFormat): string => {
 	return textByline(format);
 };
 
-const textCardKicker = (format: ArticleFormat): string => {
+const textCardKicker = (
+	format: ArticleFormat,
+	frontPalette?: FrontPalette,
+): string => {
+	if (frontPalette) return frontPalette.cardKicker;
 	if (
 		format.theme === ArticleSpecial.SpecialReport &&
 		(format.design === ArticleDesign.Comment ||
@@ -1154,7 +1158,7 @@ export const decidePalette = (
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline: textCardHeadline(format, frontPalette),
 			cardByline: textCardByline(format),
-			cardKicker: textCardKicker(format),
+			cardKicker: textCardKicker(format, frontPalette),
 			linkKicker: textLinkKicker(format),
 			cardStandfirst: textCardStandfirst(format),
 			cardFooter: textCardFooter(format),
