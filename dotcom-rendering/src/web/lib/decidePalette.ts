@@ -1172,7 +1172,7 @@ export const decidePalette = (
 			cardByline: textCardByline(format, frontPalette),
 			cardKicker: textCardKicker(format, frontPalette),
 			linkKicker: textLinkKicker(format),
-			cardStandfirst: textCardStandfirst(format),
+			cardStandfirst: textCardStandfirst(format, frontPalette),
 			cardFooter: textCardFooter(format, frontPalette),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
