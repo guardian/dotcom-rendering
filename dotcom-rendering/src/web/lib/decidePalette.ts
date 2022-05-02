@@ -378,7 +378,11 @@ const textCardHeadline = (
 const textCardStandfirst = textCardHeadline;
 
 /** same as textByline except for SpecialReport */
-const textCardByline = (format: ArticleFormat): string => {
+const textCardByline = (
+	format: ArticleFormat,
+	frontPalette?: FrontPalette,
+): string => {
+	if (frontPalette) return frontPalette.cardKicker;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[700];
 
@@ -1161,7 +1165,7 @@ export const decidePalette = (
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline: textCardHeadline(format, frontPalette),
-			cardByline: textCardByline(format),
+			cardByline: textCardByline(format, frontPalette),
 			cardKicker: textCardKicker(format, frontPalette),
 			linkKicker: textLinkKicker(format),
 			cardStandfirst: textCardStandfirst(format),

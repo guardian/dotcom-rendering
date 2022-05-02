@@ -189,6 +189,7 @@ export const CardHeadline = ({
 				<Byline
 					text={byline}
 					format={format}
+					palette={cardPalette}
 					size={size}
 					isCard={true}
 				/>
