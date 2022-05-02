@@ -432,7 +432,11 @@ const textCardKicker = (
 	}
 };
 
-const textCardFooter = (format: ArticleFormat): string => {
+const textCardFooter = (
+	format: ArticleFormat,
+	frontPalette?: FrontPalette,
+): string => {
+	if (frontPalette) return frontPalette.cardHeadline;
 	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
@@ -1161,7 +1165,7 @@ export const decidePalette = (
 			cardKicker: textCardKicker(format, frontPalette),
 			linkKicker: textLinkKicker(format),
 			cardStandfirst: textCardStandfirst(format),
-			cardFooter: textCardFooter(format),
+			cardFooter: textCardFooter(format, frontPalette),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),

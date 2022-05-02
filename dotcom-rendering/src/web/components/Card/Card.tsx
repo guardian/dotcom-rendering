@@ -188,6 +188,7 @@ export const Card = ({
 					renderAge && webPublicationDate ? (
 						<CardAge
 							format={format}
+							palette={cardPalette}
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
 						/>
