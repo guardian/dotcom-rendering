@@ -12,7 +12,7 @@ export const decideFrontPalette = (
 	switch (containerPalette) {
 		case 'LongRunningPalette':
 			return {
-				containerBorder: 'yellow',
+				containerBorder: 'rgba(0,0,0, 0.2)',
 				cardHeadline: '#ffffff',
 				containerBackground: '#e4e5e8',
 				containerText: '#052962',
@@ -27,7 +27,7 @@ export const decideFrontPalette = (
 			};
 		case 'LongRunningAltPalette':
 			return {
-				containerBorder: 'yellow',
+				containerBorder: 'rgba(0,0,0, 0.2)',
 				cardHeadline: '#121212',
 				containerBackground: '#f2f2f2',
 				containerText: '#121212',
@@ -42,7 +42,7 @@ export const decideFrontPalette = (
 			};
 		case 'SombrePalette':
 			return {
-				containerBorder: 'yellow',
+				containerBorder: 'rgba(255,255,255, 0.2)',
 				cardHeadline: '#ffffff',
 				containerBackground: '#595c5f',
 				containerText: '#ffffff',
@@ -57,7 +57,7 @@ export const decideFrontPalette = (
 			};
 		case 'SombreAltPalette':
 			return {
-				containerBorder: 'yellow',
+				containerBorder: 'rgba(255,255,255, 0.2)',
 				cardHeadline: '#ffffff',
 				containerBackground: '#3f464a',
 				containerText: '#ffffff',
@@ -72,7 +72,7 @@ export const decideFrontPalette = (
 			};
 		case 'InvestigationPalette':
 			return {
-				containerBorder: 'yellow',
+				containerBorder: 'rgba(255,255,255, 0.2)',
 				cardHeadline: '#ffffff',
 				containerBackground: '#595c5f',
 				containerText: '#ffffff',
@@ -87,7 +87,7 @@ export const decideFrontPalette = (
 			};
 		case 'BreakingPalette':
 			return {
-				containerBorder: 'yellow',
+				containerBorder: 'rgba(0,0,0, 0.2)',
 				cardHeadline: '#ffffff',
 				containerBackground: '#ffffff',
 				containerText: '#121212',
@@ -102,7 +102,7 @@ export const decideFrontPalette = (
 			};
 		case 'EventPalette':
 			return {
-				containerBorder: 'yellow',
+				containerBorder: 'rgba(0,0,0, 0.2)',
 				cardHeadline: '#041F4A',
 				containerBackground: '#f1f8fc',
 				containerText: '#041F4A',
@@ -118,7 +118,7 @@ export const decideFrontPalette = (
 		case 'EventAltPalette':
 		default:
 			return {
-				containerBorder: 'yellow',
+				containerBorder: 'rgba(0,0,0, 0.2)',
 				cardHeadline: '#041F4A',
 				containerBackground: '#fbf6ef',
 				containerText: '#041f4a',
