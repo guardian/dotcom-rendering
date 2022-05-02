@@ -539,7 +539,11 @@ const backgroundAvatar = (format: ArticleFormat): string => {
 	}
 };
 
-const backgroundCard = (format: ArticleFormat): string => {
+const backgroundCard = (
+	format: ArticleFormat,
+	frontPalette?: FrontPalette,
+): string => {
+	if (frontPalette) return frontPalette.cardBackground;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	switch (format.design) {
@@ -1123,7 +1127,10 @@ const backgroundMatchStats = (format: ArticleFormat): string => {
 	}
 };
 
-export const decidePalette = (format: ArticleFormat): Palette => {
+export const decidePalette = (
+	format: ArticleFormat,
+	frontPalette?: FrontPalette,
+): Palette => {
 	return {
 		text: {
 			headline: textHeadline(format),
@@ -1175,7 +1182,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
-			card: backgroundCard(format),
+			card: backgroundCard(format, frontPalette),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),

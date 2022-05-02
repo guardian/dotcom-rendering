@@ -4,8 +4,7 @@ import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 
-const linkStyles = (format: ArticleFormat) => {
-	const palette = decidePalette(format);
+const linkStyles = (format: ArticleFormat, palette: Palette) => {
 	const baseLinkStyles = css`
 		display: flex;
 		/* a tag specific styles */
@@ -84,6 +83,7 @@ type Props = {
 	children: React.ReactNode;
 	linkTo: string;
 	format: ArticleFormat;
+	palette?: Palette;
 	dataLinkName?: string;
 };
 
@@ -91,9 +91,17 @@ export const CardLink = ({
 	children,
 	linkTo,
 	format,
+	palette,
 	dataLinkName = 'article',
-}: Props) => (
-	<a href={linkTo} css={linkStyles(format)} data-link-name={dataLinkName}>
-		{children}
-	</a>
-);
+}: Props) => {
+	const cardPalette = palette || decidePalette(format);
+	return (
+		<a
+			href={linkTo}
+			css={linkStyles(format, cardPalette)}
+			data-link-name={dataLinkName}
+		>
+			{children}
+		</a>
+	);
+};

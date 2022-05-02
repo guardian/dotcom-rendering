@@ -238,7 +238,12 @@ export const Card = ({
 	};
 
 	return (
-		<CardLink linkTo={linkTo} format={format} dataLinkName={dataLinkName}>
+		<CardLink
+			linkTo={linkTo}
+			format={format}
+			dataLinkName={dataLinkName}
+			palette={cardPalette}
+		>
 			<CardWrapper palette={cardPalette}>
 				<CardLayout
 					imagePosition={imagePosition}
