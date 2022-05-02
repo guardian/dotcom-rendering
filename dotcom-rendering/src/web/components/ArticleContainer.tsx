@@ -107,6 +107,18 @@ const articleAdStyles = (isInline1ContainerSizingVariant: boolean) => {
 				width: 100%;
 			}
 		}
+		/** ad-slot-offset-right is only added to inline2+ slots */
+		.ad-slot--offset-right {
+			${from.desktop} {
+				float: right;
+				width: auto;
+				margin-right: -318px;
+			}
+
+			${from.wide} {
+				margin-right: -398px;
+			}
+		}
 	`;
 	const controlCSS = css`
 		.ad-slot--inline,
@@ -132,17 +144,6 @@ const articleAdStyles = (isInline1ContainerSizingVariant: boolean) => {
 				margin-left: 20px;
 			}
 		}
-		.ad-slot--offset-right {
-			${from.desktop} {
-				float: right;
-				width: auto;
-				margin-right: -318px;
-			}
-
-			${from.wide} {
-				margin-right: -398px;
-			}
-		}
 		.ad-slot--outstream {
 			${from.tablet} {
 				margin-left: 0;
@@ -158,7 +159,7 @@ const articleAdStyles = (isInline1ContainerSizingVariant: boolean) => {
 		.ad-slot--inline1 {
 			margin: 12px auto;
 			text-align: center;
-			/* Unlike other inlines we don't float right inline1 */
+			/* Unlike other inlines do not float right inline1 */
 			/* Prevent merger with any nearby float left elements e.g. rich-links */
 			${until.tablet} {
 				clear: left;
@@ -189,17 +190,6 @@ const articleAdStyles = (isInline1ContainerSizingVariant: boolean) => {
 				margin: 0;
 				margin-top: 4px;
 				margin-left: 20px;
-			}
-			&.ad-slot--offset-right {
-				${from.desktop} {
-					float: right;
-					width: auto;
-					margin-right: -318px;
-				}
-
-				${from.wide} {
-					margin-right: -398px;
-				}
 			}
 		}
 	`;
