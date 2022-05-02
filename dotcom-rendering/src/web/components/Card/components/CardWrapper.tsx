@@ -46,9 +46,6 @@ const cardStyles = (format: ArticleFormat) => {
 		color: inherit;
 		text-decoration: none;
 		background-color: ${palette.background.card};
-
-		/* The whole card is one link so we card level styles here */
-		width: 100%;
 	`;
 
 	if (format.theme === ArticleSpecial.SpecialReport) {
