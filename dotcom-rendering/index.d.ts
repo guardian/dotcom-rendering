@@ -82,7 +82,7 @@ type Palette = {
 		headline: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
-		matchTitle: Colour;
+		seriesTitleWhenMatch: Colour;
 		byline: Colour;
 		twitterHandle: Colour;
 		twitterHandleBelowDesktop: Colour;
@@ -123,6 +123,7 @@ type Palette = {
 		shareCount: Colour;
 		shareCountUntilDesktop: Colour;
 		cricketScoreboardLink: Colour;
+		keyEvent: Colour;
 	};
 	background: {
 		article: Colour;
@@ -794,7 +795,7 @@ type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
 	headline: string;
-	standfirst?: string;
+	trailText?: string;
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;

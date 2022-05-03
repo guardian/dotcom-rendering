@@ -72,10 +72,6 @@ const textHeadline = (format: ArticleFormat): string => {
 	}
 };
 
-const textMatchTitle = (): string => {
-	return BLACK;
-};
-
 const textSeriesTitle = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -107,6 +103,16 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 			}
 		default:
 			return BLACK;
+	}
+};
+
+const textSeriesTitleWhenMatch = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.MatchReport:
+		case ArticleDesign.LiveBlog:
+			return BLACK;
+		default:
+			return textSeriesTitle(format);
 	}
 };
 
@@ -282,6 +288,25 @@ const textWitnessAuthor = (format: ArticleFormat): string =>
 
 const textPullQuote = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
+};
+
+const textKeyEvent = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[350];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
 };
 
 const textStandfirstLink = (format: ArticleFormat): string => {
@@ -1140,8 +1165,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		text: {
 			headline: textHeadline(format),
 			seriesTitle: textSeriesTitle(format),
+			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
-			matchTitle: textMatchTitle(),
 			byline: textByline(format),
 			twitterHandle: textTwitterHandle(format),
 			twitterHandleBelowDesktop: textTwitterHandleBelowDesktop(format),
@@ -1182,6 +1207,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),
+			keyEvent: textKeyEvent(format),
 		},
 		background: {
 			article: backgroundArticle(format),
