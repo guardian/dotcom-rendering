@@ -44,6 +44,3 @@ coverage
 
 # Architecture Diagram
 webArchitecture.svg
-
-# lighthouse results from local build
-.lighthouseci/
