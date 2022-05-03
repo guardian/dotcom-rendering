@@ -10,7 +10,8 @@ module.exports = {
       puppeteerScript: './scripts/lighthouse/puppeteer-script.js',
       settings: {
         onlyCategories: "accessibility,best-practices,performance,seo",
-        disableStorageReset: true
+        disableStorageReset: true,
+		includePassedAssertions: true,
       }
     },
     upload: {

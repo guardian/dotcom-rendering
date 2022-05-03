@@ -23,8 +23,8 @@ const payload: EventPayloadMap["push" | "pull_request"] = JSON.parse(
 const isPullRequestEvent = (
 	payload: EventPayloadMap[keyof EventPayloadMap]
 ): payload is EventPayloadMap["pull_request"] =>
-	typeof (payload as EventPayloadMap["pull_request"])?.pull_request.number ===
-	"number";
+	//@ts-expect-error -- We’re actually checking the type
+	typeof payload?.pull_request?.number === "number";
 
 /**
  * One of two values depending on the workflow trigger event
@@ -36,8 +36,10 @@ const isPullRequestEvent = (
  * https://github.com/guardian/dotcom-rendering/issues/4584
  */
 const issue_number = isPullRequestEvent(payload)
-	? payload.pull_request.number
-	: 4584;
+	? // If PullRequestEvent
+	  payload.pull_request.number
+	: // If PushEvent
+	  4584;
 
 console.log(`Using issue #${issue_number}`);
 
@@ -151,8 +153,9 @@ const createLighthouseResultsMd = (): string => {
 	return [
 		`## ${REPORT_TITLE} for the changes in this PR`,
 		`Lighthouse tested ${auditUrls.length} URLs  `,
-		failedAuditCount > 1 &&
-			`⚠️ Budget exceeded for ${failedAuditCount} of ${auditCount} audits.`,
+		failedAuditCount > 0
+			? `⚠️ Budget exceeded for ${failedAuditCount} of ${auditCount} audits.`
+			: "All audits passed",
 		...auditUrls.map((url) =>
 			generateAuditTable(
 				url,
