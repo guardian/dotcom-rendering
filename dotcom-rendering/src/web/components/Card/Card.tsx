@@ -249,11 +249,9 @@ export const Card = ({
 						imagePositionOnMobile={imagePositionOnMobile}
 					>
 						<img src={imageUrl} alt="" role="presentation" />
-						<>
-							{starRating !== undefined ? (
-								<StarRatingComponent rating={starRating} />
-							) : null}
-						</>
+						{starRating !== undefined ? (
+							<StarRatingComponent rating={starRating} />
+						) : null}
 					</ImageWrapper>
 				)}
 				<ContentWrapper percentage={contentCoverage}>
@@ -281,19 +279,17 @@ export const Card = ({
 								showByline={showByline}
 							/>
 						</HeadlineWrapper>
-						<>
-							{avatar && (
-								<Hide when="above" breakpoint="tablet">
-									<AvatarContainer>
-										<Avatar
-											imageSrc={avatar.src}
-											imageAlt={avatar.alt}
-											palette={cardPalette}
-										/>
-									</AvatarContainer>
-								</Hide>
-							)}
-						</>
+						{avatar && (
+							<Hide when="above" breakpoint="tablet">
+								<AvatarContainer>
+									<Avatar
+										imageSrc={avatar.src}
+										imageAlt={avatar.alt}
+										palette={cardPalette}
+									/>
+								</AvatarContainer>
+							</Hide>
+						)}
 					</Flex>
 					<div>
 						{trailText && (
