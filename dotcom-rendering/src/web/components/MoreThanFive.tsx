@@ -5,7 +5,6 @@ import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { Card } from './Card/Card';
 import { UL } from './Card/components/UL';
 import { LI } from './Card/components/LI';
-import { decideFrontPalette } from '../lib/decideFrontPalette';
 
 type Props = {
 	content: TrailType[];
@@ -34,10 +33,7 @@ export const MoreThanFive = ({ content, containerPalette }: Props) => {
 			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="25%">
 					<Card
-						frontPalette={
-							containerPalette &&
-							decideFrontPalette(containerPalette)
-						}
+						containerPalette={containerPalette}
 						linkTo={content[0].url}
 						format={content[0].format}
 						headlineText={content[0].headline}
@@ -71,10 +67,7 @@ export const MoreThanFive = ({ content, containerPalette }: Props) => {
 					percentage="25%"
 				>
 					<Card
-						frontPalette={
-							containerPalette &&
-							decideFrontPalette(containerPalette)
-						}
+						containerPalette={containerPalette}
 						linkTo={content[1].url}
 						format={content[1].format}
 						headlineText={content[1].headline}
@@ -108,10 +101,7 @@ export const MoreThanFive = ({ content, containerPalette }: Props) => {
 					percentage="25%"
 				>
 					<Card
-						frontPalette={
-							containerPalette &&
-							decideFrontPalette(containerPalette)
-						}
+						containerPalette={containerPalette}
 						linkTo={content[2].url}
 						format={content[2].format}
 						headlineText={content[2].headline}
@@ -145,10 +135,7 @@ export const MoreThanFive = ({ content, containerPalette }: Props) => {
 					percentage="25%"
 				>
 					<Card
-						frontPalette={
-							containerPalette &&
-							decideFrontPalette(containerPalette)
-						}
+						containerPalette={containerPalette}
 						linkTo={content[3].url}
 						format={content[3].format}
 						headlineText={content[3].headline}
@@ -185,10 +172,7 @@ export const MoreThanFive = ({ content, containerPalette }: Props) => {
 						percentage={secondRowPercentage}
 					>
 						<Card
-							frontPalette={
-								containerPalette &&
-								decideFrontPalette(containerPalette)
-							}
+							containerPalette={containerPalette}
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}

@@ -11,7 +11,6 @@ import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { CardCommentCount } from '../CardCommentCount';
 
-import { decidePalette } from '../../lib/decidePalette';
 import { formatCount } from '../../lib/formatCount';
 
 import { ContentWrapper } from './components/ContentWrapper';
@@ -57,7 +56,7 @@ export type Props = {
 	// Labs
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
-	frontPalette?: FrontPalette;
+	containerPalette?: DCRContainerPalette;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -144,7 +143,7 @@ export const Card = ({
 	dataLinkName,
 	branding,
 	supportingContent,
-	frontPalette,
+	containerPalette,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -159,8 +158,6 @@ export const Card = ({
 
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
-
-	const cardPalette = decidePalette(format, frontPalette);
 
 	const moreThanTwoSubLinks: boolean = !!(
 		supportingContent?.length && supportingContent.length > 2
@@ -184,12 +181,12 @@ export const Card = ({
 		return (
 			<CardFooter
 				format={format}
-				palette={cardPalette}
+				containerPalette={containerPalette}
 				age={
 					renderAge && webPublicationDate ? (
 						<CardAge
 							format={format}
-							palette={cardPalette}
+							containerPalette={containerPalette}
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
 						/>
@@ -200,7 +197,8 @@ export const Card = ({
 					format.design === ArticleDesign.Media &&
 					mediaType ? (
 						<MediaMeta
-							palette={cardPalette}
+							containerPalette={containerPalette}
+							format={format}
 							mediaType={mediaType}
 							mediaDuration={mediaDuration}
 						/>
@@ -212,7 +210,8 @@ export const Card = ({
 					longCount &&
 					shortCount ? (
 						<CardCommentCount
-							palette={cardPalette}
+							containerPalette={containerPalette}
+							format={format}
 							long={longCount}
 							short={shortCount}
 						/>
@@ -240,12 +239,12 @@ export const Card = ({
 	};
 
 	return (
-		<CardWrapper format={format} palette={cardPalette}>
+		<CardWrapper format={format} containerPalette={containerPalette}>
 			<CardLink
 				linkTo={linkTo}
 				dataLinkName={dataLinkName}
 				format={format}
-				palette={cardPalette}
+				containerPalette={containerPalette}
 			/>
 			<CardLayout
 				imagePosition={imagePosition}
@@ -269,7 +268,7 @@ export const Card = ({
 							<CardHeadline
 								headlineText={headlineText}
 								format={format}
-								palette={cardPalette}
+								containerPalette={containerPalette}
 								size={headlineSize}
 								showQuotes={showQuotes}
 								kickerText={
@@ -295,7 +294,8 @@ export const Card = ({
 									<Avatar
 										imageSrc={avatar.src}
 										imageAlt={avatar.alt}
-										palette={cardPalette}
+										containerPalette={containerPalette}
+										format={format}
 									/>
 								</AvatarContainer>
 							</Hide>
@@ -303,7 +303,10 @@ export const Card = ({
 					</Flex>
 					<div>
 						{trailText && (
-							<TrailTextWrapper palette={cardPalette}>
+							<TrailTextWrapper
+								containerPalette={containerPalette}
+								format={format}
+							>
 								<div
 									dangerouslySetInnerHTML={{
 										__html: trailText,
@@ -317,7 +320,8 @@ export const Card = ({
 									<Avatar
 										imageSrc={avatar.src}
 										imageAlt={avatar.alt}
-										palette={cardPalette}
+										containerPalette={containerPalette}
+										format={format}
 									/>
 								</AvatarContainer>
 							</Hide>

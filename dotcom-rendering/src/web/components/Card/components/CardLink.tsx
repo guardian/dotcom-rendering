@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
+import { decideFrontPalette } from '../../../lib/decideFrontPalette';
 import { decidePalette } from '../../../lib/decidePalette';
 import { getZIndex } from '../../../lib/getZIndex';
 
@@ -93,21 +94,24 @@ const linkStyles = (format: ArticleFormat, palette: Palette) => {
 type Props = {
 	linkTo: string;
 	format: ArticleFormat;
-	palette?: Palette;
+	containerPalette?: DCRContainerPalette;
 	dataLinkName?: string;
 };
 
 export const CardLink = ({
 	linkTo,
 	format,
-	palette,
+	containerPalette,
 	dataLinkName = 'article',
 }: Props) => {
-	const cardPalette = palette || decidePalette(format);
+	const palette = decidePalette(
+		format,
+		containerPalette && decideFrontPalette(containerPalette),
+	);
 	return (
 		<a
 			href={linkTo}
-			css={[fauxLinkStyles, linkStyles(format, cardPalette)]}
+			css={[fauxLinkStyles, linkStyles(format, palette)]}
 			data-link-name={dataLinkName}
 		>
 			{linkTo}

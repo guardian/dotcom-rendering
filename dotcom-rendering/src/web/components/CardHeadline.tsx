@@ -10,11 +10,12 @@ import { Kicker } from './Kicker';
 import { Byline } from './Byline';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import { decideFrontPalette } from '../lib/decideFrontPalette';
 
 type Props = {
 	headlineText: string; // The text shown
 	format: ArticleFormat; // Used to decide when to add type specific styles
-	palette?: Palette;
+	containerPalette?: DCRContainerPalette;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
@@ -178,7 +179,7 @@ const WithLink = ({
 export const CardHeadline = ({
 	headlineText,
 	format,
-	palette,
+	containerPalette,
 	showQuotes,
 	kickerText,
 	showPulsingDot,
@@ -189,7 +190,10 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 }: Props) => {
-	const cardPalette = palette || decidePalette(format);
+	const palette = decidePalette(
+		format,
+		containerPalette && decideFrontPalette(containerPalette),
+	);
 	return (
 		<>
 			<h4
@@ -200,28 +204,28 @@ export const CardHeadline = ({
 					format.design === ArticleDesign.Analysis &&
 						underlinedStyles(
 							size,
-							cardPalette.background.analysisUnderline,
+							palette.background.analysisUnderline,
 						),
-					showLine && lineStyles(cardPalette),
+					showLine && lineStyles(palette),
 				]}
 			>
 				<WithLink linkTo={linkTo}>
 					{kickerText && (
 						<Kicker
 							text={kickerText}
-							palette={cardPalette}
+							palette={palette}
 							showPulsingDot={showPulsingDot}
 							showSlash={showSlash}
 							inCard={true}
 						/>
 					)}
 					{showQuotes && (
-						<QuoteIcon colour={cardPalette.text.cardKicker} />
+						<QuoteIcon colour={palette.text.cardKicker} />
 					)}
 
 					<span
 						css={css`
-							color: ${cardPalette.text.cardHeadline};
+							color: ${palette.text.cardHeadline};
 						`}
 						className="show-underline"
 					>
@@ -233,7 +237,7 @@ export const CardHeadline = ({
 				<Byline
 					text={byline}
 					format={format}
-					palette={cardPalette}
+					containerPalette={containerPalette}
 					size={size}
 					isCard={true}
 				/>

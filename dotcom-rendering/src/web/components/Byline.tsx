@@ -3,11 +3,12 @@ import { css } from '@emotion/react';
 import { headline, textSans, until } from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
+import { decideFrontPalette } from '../lib/decideFrontPalette';
 
 type Props = {
 	text: string;
 	format: ArticleFormat;
-	palette?: Palette;
+	containerPalette?: DCRContainerPalette;
 	size: SmallHeadlineSize;
 	isCard?: boolean;
 };
@@ -84,15 +85,19 @@ const colourStyles = (palette: Palette, isCard: Props['isCard']) => {
 	`;
 };
 
-export const Byline = ({ text, format, palette, size, isCard }: Props) => {
-	const cardPalette = palette || decidePalette(format);
+export const Byline = ({
+	text,
+	format,
+	containerPalette,
+	size,
+	isCard,
+}: Props) => {
+	const palette = decidePalette(
+		format,
+		containerPalette && decideFrontPalette(containerPalette),
+	);
 	return (
-		<span
-			css={[
-				bylineStyles(size, format),
-				colourStyles(cardPalette, isCard),
-			]}
-		>
+		<span css={[bylineStyles(size, format), colourStyles(palette, isCard)]}>
 			{text}
 		</span>
 	);

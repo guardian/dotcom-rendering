@@ -5,7 +5,6 @@ import { ArticleDesign } from '@guardian/libs';
 import { Card } from './Card/Card';
 import { UL } from './Card/components/UL';
 import { LI } from './Card/components/LI';
-import { decideFrontPalette } from '../lib/decideFrontPalette';
 
 type Props = {
 	content: TrailType[];
@@ -17,9 +16,7 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 		<UL direction="row" padBottom={true}>
 			<LI padSides={true} percentage="34%">
 				<Card
-					frontPalette={
-						containerPalette && decideFrontPalette(containerPalette)
-					}
+					containerPalette={containerPalette}
 					linkTo={content[0].url}
 					format={content[0].format}
 					headlineText={content[0].headline}
@@ -52,9 +49,7 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 				percentage="34%"
 			>
 				<Card
-					frontPalette={
-						containerPalette && decideFrontPalette(containerPalette)
-					}
+					containerPalette={containerPalette}
 					linkTo={content[1].url}
 					format={content[1].format}
 					headlineText={content[1].headline}
@@ -89,10 +84,7 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 				<UL direction="column">
 					<LI padBottom={true} stretch={true}>
 						<Card
-							frontPalette={
-								containerPalette &&
-								decideFrontPalette(containerPalette)
-							}
+							containerPalette={containerPalette}
 							linkTo={content[2].url}
 							format={content[2].format}
 							headlineText={content[2].headline}
@@ -122,10 +114,7 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 					</LI>
 					<LI padBottom={true} stretch={true}>
 						<Card
-							frontPalette={
-								containerPalette &&
-								decideFrontPalette(containerPalette)
-							}
+							containerPalette={containerPalette}
 							linkTo={content[3].url}
 							format={content[3].format}
 							headlineText={content[3].headline}
@@ -155,10 +144,7 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 					</LI>
 					<LI padBottom={false} stretch={true}>
 						<Card
-							frontPalette={
-								containerPalette &&
-								decideFrontPalette(containerPalette)
-							}
+							containerPalette={containerPalette}
 							linkTo={content[4].url}
 							format={content[4].format}
 							headlineText={content[4].headline}

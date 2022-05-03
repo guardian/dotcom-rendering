@@ -3,7 +3,6 @@ import { ArticleDesign } from '@guardian/libs';
 import { Card } from './Card/Card';
 import { UL } from './Card/components/UL';
 import { LI } from './Card/components/LI';
-import { decideFrontPalette } from '../lib/decideFrontPalette';
 
 type Props = {
 	trails: TrailType[];
@@ -24,10 +23,7 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="75%">
 					<Card
-						frontPalette={
-							containerPalette &&
-							decideFrontPalette(containerPalette)
-						}
+						containerPalette={containerPalette}
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
@@ -64,10 +60,7 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 					percentage="25%"
 				>
 					<Card
-						frontPalette={
-							containerPalette &&
-							decideFrontPalette(containerPalette)
-						}
+						containerPalette={containerPalette}
 						linkTo={secondary.url}
 						format={secondary.format}
 						headlineText={secondary.headline}
@@ -105,10 +98,7 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 									showDivider={cardIndex !== 0}
 								>
 									<Card
-										frontPalette={
-											containerPalette &&
-											decideFrontPalette(containerPalette)
-										}
+										containerPalette={containerPalette}
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}

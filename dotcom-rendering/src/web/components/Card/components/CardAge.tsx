@@ -5,10 +5,11 @@ import { ArticleDesign, timeAgo } from '@guardian/libs';
 
 import { decidePalette } from '../../../lib/decidePalette';
 import ClockIcon from '../../../../static/icons/clock.svg';
+import { decideFrontPalette } from '../../../lib/decideFrontPalette';
 
 type Props = {
 	format: ArticleFormat;
-	palette?: Palette;
+	containerPalette?: DCRContainerPalette;
 	webPublicationDate: string;
 	showClock?: boolean;
 };
@@ -45,19 +46,22 @@ const ageStyles = (format: ArticleFormat, palette: Palette) => {
 
 export const CardAge = ({
 	format,
-	palette,
+	containerPalette,
 	webPublicationDate,
 	showClock,
 }: Props) => {
 	const displayString = timeAgo(new Date(webPublicationDate).getTime());
-	const cardPalette = palette || decidePalette(format);
+	const palette = decidePalette(
+		format,
+		containerPalette && decideFrontPalette(containerPalette),
+	);
 
 	if (!displayString) {
 		return null;
 	}
 
 	return (
-		<span css={ageStyles(format, cardPalette)}>
+		<span css={ageStyles(format, palette)}>
 			<span>
 				{showClock && <ClockIcon />}
 				<time dateTime={webPublicationDate} data-relativeformat="med">
