@@ -61,6 +61,13 @@ window.guardian = {
 }
 setCookie({name:'bwid', value: 'mockBrowserId'});
 
+// See https://www.chromatic.com/docs/resource-loading
+// Seems like chromatic isn't super great at loading font's correctly.
+// This might help reduce the false positives we get when running chromatic tests.
+const fontLoader = async () => ({
+	fonts: await document.fonts.ready,
+});
+
 const guardianViewports = {
 	mobileMedium: {
 		name: 'mobileMedium',
@@ -122,3 +129,5 @@ export const parameters = {
 	},
 	layout: 'fullscreen',
 };
+
+export const loaders = isChromatic() && document.fonts ? [fontLoader] : [];
