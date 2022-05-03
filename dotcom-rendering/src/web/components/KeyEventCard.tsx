@@ -13,6 +13,7 @@ export interface KeyEvent {
 
 const linkStyles = css`
 	text-decoration: none;
+	line-height: 1.35;
 
 	&::before {
 		content: '';
