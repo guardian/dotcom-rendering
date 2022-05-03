@@ -36,6 +36,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 	const baseStyles = css`
 		${headline.medium()}
 		${headlineTextColour(format)}
+		margin: 0;
 	`;
 
 	switch (format.design) {
