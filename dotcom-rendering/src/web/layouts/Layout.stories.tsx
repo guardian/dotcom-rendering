@@ -164,6 +164,12 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 }
 
 storiesOf(`Layouts/Liveblog`, module)
+	.addParameters({
+		chromatic: {
+			diffThreshold: 0.2,
+			pauseAnimationAtEnd: true,
+		},
+	})
 	.add('With no key events', () => {
 		return (
 			<HydratedLayout
@@ -173,10 +179,4 @@ storiesOf(`Layouts/Liveblog`, module)
 				}}
 			/>
 		);
-	})
-	.addParameters({
-		chromatic: {
-			diffThreshold: 0.2,
-			pauseAnimationAtEnd: true,
-		},
 	});
