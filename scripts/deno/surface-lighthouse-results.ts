@@ -43,7 +43,8 @@ const isPullRequestEvent = (
  * on which to add or update the Lighthouse report
  *
  * - on a "push" event: the original issue to track the latest report:
- * https://github.com/guardian/dotcom-rendering/issues/4584
+ * https://github.com/guardian/dotcom-rendering/issues/4584, which allows
+ * to track the state Lighthouse CI Reports on `main` over time.
  */
 const issue_number = isPullRequestEvent(payload)
 	? // If PullRequestEvent
@@ -92,7 +93,8 @@ const GIHUB_PARAMS = {
 	issue_number,
 } as const;
 
-const octokit = new Octokit({ auth: token }) as unknown as OctokitWithRest;
+// @ts-expect-error -- Octokit’s own types are not as good as ours
+const octokit = new Octokit({ auth: token }) as OctokitWithRest;
 
 /* -- Methods -- */
 
