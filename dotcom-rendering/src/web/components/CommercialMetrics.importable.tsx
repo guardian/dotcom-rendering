@@ -7,9 +7,9 @@ import { getCookie } from '@guardian/libs';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
 import { tests } from '../experiments/ab-tests';
-import { spacefinderOkrMegaTest } from '../experiments/tests/spacefinder-okr-mega-test';
 import { commercialLazyLoadMargin } from '../experiments/tests/commercial-lazy-load-margin';
 import { useAB } from '../lib/useAB';
+import { prebidPriceGranularity } from '../experiments/tests/prebid-price-granularity';
 
 type Props = {
 	enabled: boolean;
@@ -26,14 +26,29 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 		// Only send metrics if the switch is enabled
 		if (!enabled) return;
 
-		const testsToForceMetrics: ABTest[] = [
+		// For these tests switch off sampling and collect metrics for 100% of views
+		const clientSideTestsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
-			spacefinderOkrMegaTest,
 			commercialLazyLoadMargin,
+			prebidPriceGranularity,
 		];
-		const shouldForceMetrics = ABTestAPI?.allRunnableTests(tests).some(
-			(test) => testsToForceMetrics.map((t) => t.id).includes(test.id),
+
+		const userInClientSideTestToForceMetrics = ABTestAPI?.allRunnableTests(
+			tests,
+		).some((test) =>
+			clientSideTestsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
+
+		const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
+			/* keep array multi-line */
+			'inline1ContainerSizingVariant',
+			'inline1ContainerSizingControl',
+		];
+
+		const userInServerSideTestToForceMetrics =
+			serverSideTestsToForceMetrics.some((test) =>
+				Object.keys(window.guardian.config.tests).includes(test),
+			);
 
 		const isDev =
 			window.guardian.config.page.isDev ||
@@ -48,7 +63,10 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 			adBlockerInUse,
 		});
 
-		if (shouldForceMetrics) {
+		if (
+			userInClientSideTestToForceMetrics ||
+			userInServerSideTestToForceMetrics
+		) {
 			// TODO: rename this in commercial-core and update here
 			switchOffSampling();
 		}

@@ -16,7 +16,7 @@ const decidePercentage = (length: number) => {
 		case 6:
 			return '50%';
 		case 7:
-			return '33%';
+			return '34%';
 		case 8:
 			return '25%';
 		default:

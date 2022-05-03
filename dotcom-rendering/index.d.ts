@@ -82,7 +82,7 @@ type Palette = {
 		headline: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
-		matchTitle: Colour;
+		seriesTitleWhenMatch: Colour;
 		byline: Colour;
 		twitterHandle: Colour;
 		twitterHandleBelowDesktop: Colour;
@@ -103,6 +103,7 @@ type Palette = {
 		headlineByline: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;
+		lastUpdated: Colour;
 		branding: Colour;
 		disclaimerLink: Colour;
 		signInLink: Colour;
@@ -121,6 +122,8 @@ type Palette = {
 		overlayedCaption: Colour;
 		shareCount: Colour;
 		shareCountUntilDesktop: Colour;
+		cricketScoreboardLink: Colour;
+		keyEvent: Colour;
 	};
 	background: {
 		article: Colour;
@@ -175,6 +178,9 @@ type Palette = {
 		lines: Colour;
 		matchTab: Colour;
 		activeMatchTab: Colour;
+		cricketScoreboardTop: Colour;
+		cricketScoreboardDivider: Colour;
+		cardSupporting: Colour;
 	};
 	topBar: {
 		card: Colour;
@@ -329,6 +335,7 @@ interface AuthorType {
 interface BlockContributor {
 	name: string;
 	imageUrl?: string;
+	largeImageUrl?: string;
 }
 
 interface Block {
@@ -397,6 +404,36 @@ type PageTypeType = {
 	isPaidContent: boolean;
 	isPreview: boolean;
 	isSensitive: boolean;
+};
+
+type MatchType = 'CricketMatchType' | 'FootballMatchType';
+
+type CricketTeam = {
+	name: string;
+	home: boolean;
+};
+
+type FallOfWicket = {
+	order: number;
+};
+
+type CricketInnings = {
+	order: number;
+	battingTeam: string;
+	runsScored: string;
+	declared: boolean;
+	forfeited: boolean;
+	fallOfWicket: FallOfWicket[];
+	overs: string;
+};
+
+type CricketMatch = {
+	matchId: string;
+	competitionName: string;
+	venueName: string;
+	teams: CricketTeam[];
+	innings: CricketInnings[];
+	gameDate: string;
 };
 
 // Data types for the API request bodies from clients that require
@@ -505,6 +542,7 @@ interface CAPIArticleType {
 	pageType: PageTypeType;
 
 	matchUrl?: string;
+	matchType?: MatchType;
 	isSpecialReport: boolean;
 
 	// Interactives made on Frontend rather than DCR require special handling.
@@ -567,6 +605,31 @@ type FEFrontPropertiesType = {
 	commercial: Record<string, unknown>;
 };
 
+type FESupportingContent = {
+	properties: {
+		href?: string;
+	};
+	header?: {
+		kicker?: {
+			item?: {
+				properties: {
+					kickerText: string;
+				};
+			};
+		};
+		headline: string;
+		url: string;
+	};
+	format?: CAPIFormat;
+};
+
+type DCRSupportingContent = {
+	headline: string;
+	url?: string;
+	kickerText?: string;
+	format: ArticleFormat;
+};
+
 type FEContainerType =
 	| 'dynamic/fast'
 	| 'dynamic/package'
@@ -591,8 +654,27 @@ type FEContainerType =
 	| 'nav/media-list'
 	| 'news/most-popular';
 
-// TODO: This may need to be declared differently than the front type in the future
+type FEContainerPalette =
+	| `Branded`
+	| `EventPalette`
+	| `SombreAltPalette`
+	| `EventAltPalette`
+	| `InvestigationPalette`
+	| `LongRunningAltPalette`
+	| `LongRunningPalette`
+	| `SombrePalette`
+	| `Canonical`
+	| `Dynamo`
+	| `Special`
+	| `DynamoLike`
+	| `Special`
+	| `Breaking`
+	| `Podcast`
+	| `BreakingPalette`;
+
+// TODO: These may need to be declared differently than the front types in the future
 type DCRContainerType = FEContainerType;
+type DCRContainerPalette = FEContainerPalette;
 
 type FEFrontCard = {
 	properties: {
@@ -703,7 +785,7 @@ type FEFrontCard = {
 	};
 	format?: CAPIFormat;
 	enriched?: Record<string, unknown>;
-	supportingContent?: unknown[];
+	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: string;
 	};
@@ -714,7 +796,7 @@ type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
 	headline: string;
-	standfirst?: string;
+	trailText?: string;
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
@@ -738,7 +820,7 @@ type FECollectionType = {
 	showLatestUpdate: boolean;
 	config: {
 		displayName: string;
-		metadata?: { type: string }[];
+		metadata?: { type: FEContainerPalette }[];
 		collectionType: FEContainerType;
 		href?: string;
 		groups?: string[];
@@ -760,6 +842,7 @@ type DCRCollectionType = {
 	id: string;
 	displayName: string;
 	collectionType: DCRContainerType;
+	containerPalette?: DCRContainerPalette;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];
@@ -856,6 +939,7 @@ interface TagType {
 	twitterHandle?: string;
 	paidContentType?: string;
 	bylineImageUrl?: string;
+	bylineLargeImageUrl?: string;
 }
 
 /**
@@ -892,7 +976,7 @@ interface BadgeType {
 	imageUrl: string;
 }
 
-type ImagePositionType = 'left' | 'top' | 'right' | 'bottom';
+type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
@@ -907,7 +991,7 @@ type LineEffectType = 'squiggly' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 
-type CardPercentageType = '25%' | '33%' | '50%' | '67%' | '75%' | '100%';
+type CardPercentageType = '25%' | '34%' | '50%' | '66%' | '75%' | '100%';
 
 type HeadlineLink = {
 	to: string; // the href for the anchor tag
@@ -1127,6 +1211,7 @@ interface BaseTrailType {
 interface TrailType extends BaseTrailType {
 	palette?: never;
 	format: ArticleFormat;
+	supportingContent?: DCRSupportingContent[];
 	trailText?: string;
 }
 
@@ -1277,5 +1362,39 @@ declare namespace JSX {
 			props: any;
 			children: React.ReactNode;
 		};
+	}
+
+	interface IntrinsicAttributes {
+		/**
+		 * **Rendered Components – Ophan**
+		 *
+		 * The Ophan client automatically tracks components on the page
+		 * that have the `data-component` attribute.
+		 * To avoid race conditions, it is best to add this attribute only
+		 * to server-rendered HTML.
+		 *
+		 * Add `data-component="component-name"` to the element you want
+		 * to track.
+		 *
+		 * The page views table will then contain `component-name` when the
+		 * element is present on the page.
+		 */
+		'data-component'?: string;
+		/**
+		 * **Component Clicks – Ophan**
+		 *
+		 * The Ophan client automatically tracks click interactions
+		 * on components that have the `data-link-name` attribute.
+		 * To avoid race conditions, it is best to add this attribute only
+		 * to server-rendered HTML.
+		 *
+		 * Add `data-component="component-name"` to the element you want
+		 * to track. Then `add data-link-name="link-name"` to the anchor for which
+		 * clicks will be tracked.
+		 *
+		 * The page views table will then contain `link-name` when the
+		 * link is clicked.
+		 */
+		'data-link-name'?: string;
 	}
 }

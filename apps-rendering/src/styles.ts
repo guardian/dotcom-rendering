@@ -86,22 +86,25 @@ export const liveblogWidthStyles: SerializedStyles = css`
 `;
 
 export const lineStyles = css`
+	display: block;
+
 	${from.wide} {
 		width: ${wideContentWidth}px;
 		margin-left: auto;
 		margin-right: auto;
 	}
-	div {
-		${darkModeCss`
-        background-image: repeating-linear-gradient(
-            to bottom,
-            ${neutral[20]},
-            ${neutral[20]} 1px,
-            transparent 1px,
-            transparent 3px
-            );
+
+	${darkModeCss`
+		// Straight, Dashed, Squiggly
+		&[stroke], defs pattern[stroke], defs pattern g[stroke] {
+			stroke: ${neutral[20]};
+		}
+
+		// Dotted
+		defs pattern circle[fill]  {
+			fill: ${neutral[20]};
+		}
     `}
-	}
 `;
 
 export const onwardStyles: SerializedStyles = css`

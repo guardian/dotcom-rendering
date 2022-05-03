@@ -46,6 +46,7 @@ export const DynamicFast = ({ trails }: Props) => {
 						commentCount={primary.commentCount}
 						starRating={primary.starRating}
 						branding={primary.branding}
+						supportingContent={primary.supportingContent}
 					/>
 				</LI>
 				<LI
@@ -78,6 +79,7 @@ export const DynamicFast = ({ trails }: Props) => {
 						commentCount={secondary.commentCount}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
+						supportingContent={secondary.supportingContent}
 					/>
 				</LI>
 			</UL>
@@ -117,6 +119,7 @@ export const DynamicFast = ({ trails }: Props) => {
 								commentCount={card.commentCount}
 								starRating={card.starRating}
 								branding={card.branding}
+								supportingContent={card.supportingContent}
 							/>
 						</LI>
 					);
@@ -165,6 +168,9 @@ export const DynamicFast = ({ trails }: Props) => {
 										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
+										supportingContent={
+											card.supportingContent
+										}
 									/>
 								</LI>
 							);

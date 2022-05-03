@@ -1,12 +1,15 @@
+import React from 'react';
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { headline, textSans, until, space } from '@guardian/source-foundations';
 
+import { Link } from '@guardian/source-react-components';
 import { QuoteIcon } from './QuoteIcon';
 import { Kicker } from './Kicker';
 import { Byline } from './Byline';
 import { decidePalette } from '../lib/decidePalette';
+import { getZIndex } from '../lib/getZIndex';
 
 type Props = {
 	headlineText: string; // The text shown
@@ -18,6 +21,8 @@ type Props = {
 	size?: SmallHeadlineSize;
 	byline?: string;
 	showByline?: boolean;
+	showLine?: boolean; // If true a short line is displayed above, used for sublinks
+	linkTo?: string; // If provided, the headline is wrapped in a link
 };
 
 const fontStyles = (size: SmallHeadlineSize) => {
@@ -78,7 +83,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 };
 
 const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
-	function generateUnderlinedCss(baseSize: number) {
+	function underlinedCss(baseSize: number) {
 		return css`
 			background-image: linear-gradient(
 				to bottom,
@@ -93,16 +98,80 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 			margin-right: -5px;
 		`;
 	}
-	switch (size) {
-		case 'small':
-			return generateUnderlinedCss(22);
-		case 'medium':
-			return generateUnderlinedCss(25);
-		case 'large':
-			return generateUnderlinedCss(29);
-		default:
-			return generateUnderlinedCss(24);
+
+	function underlinedCssWithMediaQuery(
+		baseSize: number,
+		untilDesktopSize: number,
+	) {
+		return css`
+			${until.desktop} {
+				${underlinedCss(untilDesktopSize)}
+			}
+
+			${underlinedCss(baseSize)}
+		`;
 	}
+
+	switch (size) {
+		case 'large':
+			return underlinedCssWithMediaQuery(29, 29);
+		case 'medium':
+			return underlinedCssWithMediaQuery(25, 25);
+		case 'small':
+			return underlinedCss(22);
+		case 'tiny':
+			return underlinedCss(24);
+	}
+};
+
+const lineStyles = (palette: Palette) => css`
+	:before {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		content: '';
+		width: 120px;
+		border-top: 1px solid ${palette.border.cardSupporting};
+	}
+`;
+
+const WithLink = ({
+	linkTo,
+	children,
+}: {
+	linkTo?: string;
+	children: React.ReactNode;
+}) => {
+	if (linkTo) {
+		return (
+			<Link
+				href={linkTo}
+				subdued={true}
+				cssOverrides={css`
+					/* See: https://css-tricks.com/nested-links/ */
+					${getZIndex('card-nested-link')};
+					/* The following styles turn off those provided by Link */
+					color: inherit;
+					/* stylelint-disable-next-line property-disallowed-list */
+					font-family: inherit;
+					font-size: inherit;
+					/* This css is used to remove any underline from the kicker but still
+					   have it applied to the headline when the kicker is hovered */
+					:hover {
+						color: inherit;
+						text-decoration: none;
+						.show-underline {
+							text-decoration: underline;
+						}
+					}
+				`}
+			>
+				{children}
+			</Link>
+		);
+	}
+	return <>{children}</>;
 };
 
 export const CardHeadline = ({
@@ -115,6 +184,8 @@ export const CardHeadline = ({
 	size = 'medium',
 	byline,
 	showByline,
+	showLine,
+	linkTo,
 }: Props) => {
 	const palette = decidePalette(format);
 	return (
@@ -129,9 +200,10 @@ export const CardHeadline = ({
 							size,
 							palette.background.analysisUnderline,
 						),
+					showLine && lineStyles(palette),
 				]}
 			>
-				<span>
+				<WithLink linkTo={linkTo}>
 					{kickerText && (
 						<Kicker
 							text={kickerText}
@@ -149,10 +221,11 @@ export const CardHeadline = ({
 						css={css`
 							color: ${palette.text.cardHeadline};
 						`}
+						className="show-underline"
 					>
 						{headlineText}
 					</span>
-				</span>
+				</WithLink>
 			</h4>
 			{byline && showByline && (
 				<Byline

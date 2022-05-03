@@ -11,7 +11,10 @@ import {
 	space,
 } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import Accordion from '@guardian/common-rendering/src/components/accordion';
 import { Hide } from '@guardian/source-react-components';
@@ -50,6 +53,7 @@ import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';
 import { Liveness } from '../components/Liveness.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
+import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -293,6 +297,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const palette = decidePalette(format);
 
+	const footballMatchUrl =
+		CAPIArticle.matchType === 'FootballMatchType' && CAPIArticle.matchUrl;
+
+	const cricketMatchUrl =
+		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -323,10 +333,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							edition={CAPIArticle.editionId}
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
-							supporterCTA={
-								CAPIArticle.nav.readerRevenueLinks.header
-									.supporter
-							}
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
 							}
@@ -386,14 +392,19 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						showTopBorder={false}
 						borderColour={palette.border.article}
 					>
-						<Lines count={4} effect="straight" />
+						<StraightLines
+							count={4}
+							cssOverrides={css`
+								display: block;
+							`}
+						/>
 					</ElementContainer>
 				</SendToBack>
 			</div>
 
 			<main>
 				<article>
-					{CAPIArticle.matchUrl ? (
+					{footballMatchUrl ? (
 						<ContainerLayout
 							showTopBorder={false}
 							backgroundColour={palette.background.matchNav}
@@ -436,7 +447,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								placeholderHeight={230}
 							>
 								<GetMatchNav
-									matchUrl={CAPIArticle.matchUrl}
+									matchUrl={footballMatchUrl}
 									format={format}
 									headlineString={CAPIArticle.headline}
 									tags={CAPIArticle.tags}
@@ -467,7 +478,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								</GridItem>
 								<GridItem area="headline">
 									<div css={maxWidth}>
-										{!CAPIArticle.matchUrl && (
+										{!footballMatchUrl && (
 											<ArticleHeadline
 												format={format}
 												headlineString={
@@ -534,6 +545,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<Hide from="desktop">
 									<div css={sidePaddingDesktop}>
 										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
 											count={decideLineCount(
 												format.design,
 											)}
@@ -612,13 +626,24 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<LiveGrid>
 							<GridItem area="media">
 								<div css={maxWidth}>
-									{CAPIArticle.matchUrl && (
+									{footballMatchUrl && (
 										<Island
 											clientOnly={true}
 											placeholderHeight={40}
 										>
 											<GetMatchTabs
-												matchUrl={CAPIArticle.matchUrl}
+												matchUrl={footballMatchUrl}
+												format={format}
+											/>
+										</Island>
+									)}
+									{cricketMatchUrl && (
+										<Island
+											clientOnly={true}
+											placeholderHeight={172}
+										>
+											<GetCricketScoreboard
+												matchUrl={cricketMatchUrl}
 												format={format}
 											/>
 										</Island>
@@ -644,6 +669,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<Hide until="desktop">
 									<div css={[maxWidth, sidePaddingDesktop]}>
 										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
 											count={decideLineCount(
 												format.design,
 											)}
@@ -691,7 +719,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{/* Key events */}
 								<div
 									css={[
-										!CAPIArticle.matchUrl && sticky,
+										!footballMatchUrl && sticky,
 										keyEventsMargins,
 										sidePaddingDesktop,
 									]}
@@ -705,14 +733,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									/>
 								</div>
 								{/* Match stats */}
-								{CAPIArticle.matchUrl && (
+								{footballMatchUrl && (
 									<Island
 										deferUntil="visible"
 										clientOnly={true}
 										placeholderHeight={800}
 									>
 										<GetMatchStats
-											matchUrl={CAPIArticle.matchUrl}
+											matchUrl={footballMatchUrl}
 											format={format}
 										/>
 									</Island>
@@ -773,21 +801,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											</Island>
 										</>
 									)}
-									<Hide below="desktop">
-										<Island deferUntil="visible">
-											<FilterKeyEventsToggle
-												filterKeyEvents={
-													CAPIArticle.filterKeyEvents
-												}
-											/>
-										</Island>
-									</Hide>
-									<Accordion
-										supportsDarkMode={false}
-										accordionTitle="Live feed"
-										context="liveFeed"
-									>
-										<Hide above="desktop">
+									{CAPIArticle.keyEvents?.length ? (
+										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
 													filterKeyEvents={
@@ -796,7 +811,31 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												/>
 											</Island>
 										</Hide>
-										<ArticleContainer format={format}>
+									) : (
+										<></>
+									)}
+									<Accordion
+										supportsDarkMode={false}
+										accordionTitle="Live feed"
+										context="liveFeed"
+									>
+										{CAPIArticle.keyEvents?.length ? (
+											<Hide above="desktop">
+												<Island deferUntil="visible">
+													<FilterKeyEventsToggle
+														filterKeyEvents={
+															CAPIArticle.filterKeyEvents
+														}
+													/>
+												</Island>
+											</Hide>
+										) : (
+											<></>
+										)}
+										<ArticleContainer
+											format={format}
+											abTests={CAPIArticle.config.abTests}
+										>
 											{pagination.currentPage !== 1 && (
 												<Pagination
 													currentPage={
@@ -931,10 +970,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													/>
 												</Island>
 											)}
-											<Lines
+											<StraightLines
 												data-print-layout="hide"
 												count={4}
-												effect="straight"
+												cssOverrides={css`
+													display: block;
+												`}
 											/>
 											<SubMeta
 												format={format}
@@ -1129,11 +1170,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
 				/>
 			</ElementContainer>
 

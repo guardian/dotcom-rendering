@@ -638,10 +638,6 @@ export const Review: CAPIArticleType = {
 						],
 					},
 					{
-						title: 'Winter Olympics',
-						url: '/sport/winter-olympics-2022',
-					},
-					{
 						title: 'Cricket',
 						url: '/sport/cricket',
 					},
@@ -1189,6 +1185,8 @@ export const Review: CAPIArticleType = {
 			twitterHandle: 'LucyMangan',
 			bylineImageUrl:
 				'https://i.guim.co.uk/img/uploads/2017/10/09/Lucy-Mangan,-R.png?width=300&quality=85&auto=format&fit=max&s=ac80477b5fecbdb9d0fb635d622b0eea',
+			bylineLargeImageUrl:
+				'https://i.guim.co.uk/img/uploads/2017/10/09/Lucy-Mangan,-R.png?width=300&quality=85&auto=format&fit=max&s=ac80477b5fecbdb9d0fb635d622b0eea',
 		},
 		{
 			id: 'publication/theguardian',
@@ -1405,6 +1403,7 @@ export const Review: CAPIArticleType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
+			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 			media: {
 				allImages: [
 					{
@@ -1659,8 +1658,7 @@ export const Review: CAPIArticleType = {
 					],
 				},
 			],
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: '6b04e679-046f-452c-ad90-c0c97bd2ae98',
+			elementId: '654756e6-d237-4e0a-b3b1-3829d0b864f1',
 		},
 	],
 	webPublicationDate: '2020-01-17T12:00:05.000Z',
@@ -1669,16 +1667,17 @@ export const Review: CAPIArticleType = {
 			id: '5e1df3f28f08d66fcfaa3e49',
 			elements: [
 				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The new season of <a href="https://www.theguardian.com/tv-and-radio/2019/jan/17/sex-education-asa-butterfield-gillian-anderson-netflix">Sex Education</a> (Netflix) opens with a bravura sequence that swiftly takes its place in the pantheon of peen-based comedy greats. Suffice to say that since we left Otis at the end of the <a href="https://www.theguardian.com/tv-and-radio/2019/jan/11/sex-education-review-netflix-asa-butterfield-gillian-anderson">glorious inaugural run</a> having successfully masturbated for the first time, he has taken gleefully to his new hobby and – I don’t know if you know the French expression to encourage reluctant diners, “the appetite comes with eating”? – but we need to come up with the carnal equivalent for his joyful daily pursuits of the big O.</p>',
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '199bde98-8f5a-413b-a853-01abfc27a427',
+					elementId: '2dc742c6-16be-46b7-9f2d-459f10d3fc96',
 				},
 				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The scene establishes the tone of the new season – furiously fast, furiously funny, and not for the faint of heart any more than the first series was. And, just like the first series, it underpins the comedy arising from the sixth form students’ sexual escapades, experiments and baffled queries (“My cum tastes like kimchi! Why do I have a fermented dick?”) with deeper explorations of the main characters and the emotional pressures engendered by bigger problems.</p>',
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'a25cde66-971c-4076-9a79-5bc394097df2',
+					elementId: '7ccfb96c-94a0-4cc6-8ede-893aba5eaa02',
 				},
 				{
+					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
 					url: 'https://www.youtube.com/watch?v=qZhb0Vl_BaM',
 					originalUrl: 'https://www.youtube.com/watch?v=qZhb0Vl_BaM',
 					embedUrl:
@@ -1689,15 +1688,15 @@ export const Review: CAPIArticleType = {
 					isThirdPartyTracking: false,
 					source: 'YouTube',
 					sourceDomain: 'youtube-nocookie.com',
-					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
-					elementId: '17bf776d-a070-4d09-80d1-dab4d54be83a',
+					elementId: 'd90bd303-4f27-423f-ac14-ef700f7fb609',
 				},
 				{
-					html: '<p>With the help of Miss Sands, Maeve (Emma Mackey) finagles her way back into school and the special ability programme. All she has to do thereafter is wrestle with her unwelcoming and far more privileged peers and the return of her errant mother Erin (Anne-Marie Duff), allegedly clean for a year and with a three-year-old half-sister in tow. Otis (<a href="https://www.theguardian.com/tv-and-radio/2019/dec/28/sex-education-asa-butterfield-feel-more-confident-talking-about-sex">Asa Butterfield</a>) must negotiate his new relationship with Ola (Patricia Allison) while his mother Jean (Gillian Anderson, given a whole heap more to do this time round and rightly relishing every moment) throws more spanners in to his sexual works by dating Ola’s dad. Adam – poor beleaguered Adam (Connor Swindells) – is unjustly expelled from military school and sent back home to a dead-end job and his ever more hateful father. Swindells gives an extraordinary performance with what amounts to barely a hundred lines in the entire eight episodes, and if your heart doesn’t break at at least three points for him then I have no use for you. I don’t want to spoil Eric’s storyline because it doesn’t get going until a few episodes in, but <a href="https://www.theguardian.com/culture/2020/jan/05/ncuti-gatwa-i-will-say-yes-to-anything-sex-education">Ncuti Gatwa</a> remains the find of the age and handles everything thrown at him with such deftness and authenticity that you can only boggle at the fact that Laurie Nunn’s creation is his first major role.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'c6b348a2-d4e5-481d-a2fd-d1d8cad345f1',
+					html: '<p>With the help of Miss Sands, Maeve (Emma Mackey) finagles her way back into school and the special ability programme. All she has to do thereafter is wrestle with her unwelcoming and far more privileged peers and the return of her errant mother Erin (Anne-Marie Duff), allegedly clean for a year and with a three-year-old half-sister in tow. Otis (<a href="https://www.theguardian.com/tv-and-radio/2019/dec/28/sex-education-asa-butterfield-feel-more-confident-talking-about-sex">Asa Butterfield</a>) must negotiate his new relationship with Ola (Patricia Allison) while his mother Jean (Gillian Anderson, given a whole heap more to do this time round and rightly relishing every moment) throws more spanners in to his sexual works by dating Ola’s dad. Adam – poor beleaguered Adam (Connor Swindells) – is unjustly expelled from military school and sent back home to a dead-end job and his ever more hateful father. Swindells gives an extraordinary performance with what amounts to barely a hundred lines in the entire eight episodes, and if your heart doesn’t break at at least three points for him then I have no use for you. I don’t want to spoil Eric’s storyline because it doesn’t get going until a few episodes in, but <a href="https://www.theguardian.com/culture/2020/jan/05/ncuti-gatwa-i-will-say-yes-to-anything-sex-education">Ncuti Gatwa</a> remains the find of the age and handles everything thrown at him with such deftness and authenticity that you can only boggle at the fact that Laurie Nunn’s creation is his first major role.</p>',
+					elementId: '6bee71f5-e466-4751-9f5a-2413d205c535',
 				},
 				{
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 					media: {
 						allImages: [
 							{
@@ -1971,18 +1970,17 @@ export const Review: CAPIArticleType = {
 							],
 						},
 					],
-					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					elementId: '3c200212-e1a4-4807-95c9-4f43ccac8ee8',
+					elementId: '762ef205-f7b5-48f2-bb9f-ef1967810807',
 				},
 				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Every performer is wonderful, not least because the script is wonderful, playing the sex for laughs and the search for intimacy as something serious, good and noble. Not a single character is a cipher – even the smallest parts have a sketched backstory and some good gags. It’s all of a piece with the charm and generosity of spirit that suffuses the whole thing. <a href="https://www.theguardian.com/tv-and-radio/sex-education" data-component="auto-linked-tag">Sex Education</a> sets so many conventions cheerily but firmly aside that you feel like an entire forest of received wisdom is being clear-cut. Light floods in, new growth springs up. Such a sense of revelry and optimism abounds that you can feel it doing your heart and soul good as you watch. And all without missing a comic or emotional beat or deviating from its moral core, which urges us all to connect.</p>',
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: '99899ac3-79ee-4aa2-bb64-796bf6e25184',
+					elementId: 'a8904a38-9426-472c-a12e-0e2aed8430ad',
 				},
 				{
-					html: '<p>So welcome once more, Otis (and your newly excitable penis), Maeve with her troubles to seek, Jackson (Kedar Williams-Stirling) whose mental health plummets to new lows as his swimming career reaches new heights, Aimee through whose experience on a local bus the issue of sexual assault is channelled, and all the magnificent rest of you. Nobody does it better. In fact, nobody does anything quite like it at all.</p>',
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					elementId: 'fd04a895-886a-4dde-8dc2-fcb0a2ee3f5a',
+					html: '<p>So welcome once more, Otis (and your newly excitable penis), Maeve with her troubles to seek, Jackson (Kedar Williams-Stirling) whose mental health plummets to new lows as his swimming career reaches new heights, Aimee through whose experience on a local bus the issue of sexual assault is channelled, and all the magnificent rest of you. Nobody does it better. In fact, nobody does anything quite like it at all.</p>',
+					elementId: '81fdd401-7e3d-40a8-9763-8846e2c2a145',
 				},
 			],
 			blockCreatedOn: 1579021298000,
@@ -1991,6 +1989,8 @@ export const Review: CAPIArticleType = {
 			blockLastUpdatedDisplay: '15.20 GMT',
 			blockFirstPublished: 1579021299000,
 			blockFirstPublishedDisplay: '17.01 GMT',
+			blockFirstPublishedDisplayNoTimezone: '17.01',
+			contributors: [],
 			primaryDateLine: 'Fri 17 Jan 2020 12.00 GMT',
 			secondaryDateLine: 'Last modified on Tue 31 Mar 2020 11.40 BST',
 		},

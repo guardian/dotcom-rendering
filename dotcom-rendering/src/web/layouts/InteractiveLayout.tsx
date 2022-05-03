@@ -15,7 +15,10 @@ import {
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 
 import { StarRating } from '../components/StarRating/StarRating';
 import { ArticleBody } from '../components/ArticleBody';
@@ -285,10 +288,6 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								edition={CAPIArticle.editionId}
 								idUrl={CAPIArticle.config.idUrl}
 								mmaUrl={CAPIArticle.config.mmaUrl}
-								supporterCTA={
-									CAPIArticle.nav.readerRevenueLinks.header
-										.supporter
-								}
 								discussionApiUrl={
 									CAPIArticle.config.discussionApiUrl
 								}
@@ -351,7 +350,12 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						padded={false}
 						showTopBorder={false}
 					>
-						<Lines count={4} effect="straight" />
+						<StraightLines
+							cssOverrides={css`
+								display: block;
+							`}
+							count={4}
+						/>
 					</ElementContainer>
 				)}
 			</div>
@@ -467,6 +471,9 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<div css={maxWidth}>
 									<div css={stretchLines}>
 										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
 											count={decideLineCount(
 												format.design,
 											)}
@@ -511,7 +518,10 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="body" element="article">
-								<ArticleContainer format={format}>
+								<ArticleContainer
+									format={format}
+									abTests={CAPIArticle.config.abTests}
+								>
 									<ArticleBody
 										format={format}
 										blocks={CAPIArticle.blocks}
@@ -545,11 +555,14 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isDev={!!CAPIArticle.config.isDev}
 									/>
 
-									{/* <Lines data-print-layout="hide" count={4} /> */}
+									{/* <StraightLines data-print-layout="hide" count={4} /> */}
 									<div css={stretchMetaLines}>
-										<Lines
+										<StraightLines
 											count={4}
 											data-print-layout="hide"
+											cssOverrides={css`
+												display: block;
+											`}
 										/>
 									</div>
 									<SubMeta
@@ -708,11 +721,6 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
 				/>
 			</ElementContainer>
 

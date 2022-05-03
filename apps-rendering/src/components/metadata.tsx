@@ -13,7 +13,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import {
-	Lines,
+	StraightLines,
 	ToggleSwitch,
 } from '@guardian/source-react-components-development-kitchen';
 import Avatar from 'components/avatar';
@@ -185,7 +185,7 @@ const tempraryBackgroundStyle = (format: ArticleFormat): SerializedStyles => {
 
 const BlogLines: FC<Item> = (item: Item) => (
 	<>
-		<Lines
+		<StraightLines
 			color={
 				isLive(item.design)
 					? 'rgba(255, 255, 255, 0.4)'
@@ -193,8 +193,8 @@ const BlogLines: FC<Item> = (item: Item) => (
 			}
 			cssOverrides={linesStyles}
 		/>
-		<Lines color={neutral[86]} cssOverrides={linesDesktopStyles} />
-		<Lines
+		<StraightLines color={neutral[86]} cssOverrides={linesDesktopStyles} />
+		<StraightLines
 			color={
 				isLive(item.design) ? neutral[20] : 'rgba(237, 237, 237, 0.4)'
 			}

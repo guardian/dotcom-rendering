@@ -586,10 +586,6 @@ export const Quiz: CAPIArticleType = {
 						],
 					},
 					{
-						title: 'Winter Olympics',
-						url: '/sport/winter-olympics-2022',
-					},
-					{
 						title: 'Cricket',
 						url: '/sport/cricket',
 					},
@@ -1323,6 +1319,7 @@ export const Quiz: CAPIArticleType = {
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
 		{
+			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 			media: {
 				allImages: [
 					{
@@ -1577,8 +1574,7 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-			elementId: 'bdcc9faf-d30d-4e9a-a701-945e2502e690',
+			elementId: '6c303d19-cf2e-4f22-bdc7-177d357b1761',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -1587,6 +1583,7 @@ export const Quiz: CAPIArticleType = {
 			id: '5ee1f3138f0875833522a23a',
 			elements: [
 				{
+					_type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement',
 					id: '2c6bf552-2827-4256-b3a0-f557d215c394',
 					quizType: 'knowledge',
 					questions: [
@@ -2190,8 +2187,7 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					_type: 'model.dotcomrendering.pageElements.QuizAtomBlockElement',
-					elementId: '409fb101-d883-4fd2-913a-f550b9edaa16',
+					elementId: '41e07c50-b0c7-427c-9662-4404f36f0389',
 				},
 			],
 			blockCreatedOn: 1591866131000,
@@ -2200,6 +2196,8 @@ export const Quiz: CAPIArticleType = {
 			blockLastUpdatedDisplay: '00.14 BST',
 			blockFirstPublished: 1591866202000,
 			blockFirstPublishedDisplay: '10.03 BST',
+			blockFirstPublishedDisplayNoTimezone: '10.03',
+			contributors: [],
 			primaryDateLine: 'Fri 12 Jun 2020 10.09 BST',
 			secondaryDateLine: 'Last modified on Fri 12 Jun 2020 10.09 BST',
 		},

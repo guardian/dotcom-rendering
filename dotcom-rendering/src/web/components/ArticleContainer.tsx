@@ -5,6 +5,7 @@ import { from, neutral, space, until } from '@guardian/source-foundations';
 import { labelStyles, carrotAdStyles } from './AdSlot';
 
 type Props = {
+	abTests?: ServerSideTests;
 	format: ArticleFormat;
 	children: React.ReactNode;
 };
@@ -47,7 +48,7 @@ const articleWrapper = css`
 	z-index: 1;
 `;
 
-const articleAdStyles = css`
+const adSharedCSS = css`
 	.ad-slot {
 		@media print {
 			/* stylelint-disable-next-line declaration-no-important */
@@ -63,52 +64,8 @@ const articleAdStyles = css`
 			width: auto;
 		}
 	}
-	.ad-slot--inline,
-	.ad-slot-liveblog--inline {
-		width: 300px;
-		margin: 12px auto;
-		min-width: 160px;
-		min-height: 274px;
-		text-align: center;
-
-		${from.tablet} {
-			margin-right: -100px;
-			width: auto;
-			float: right;
-			margin-top: 4px;
-			margin-left: 20px;
-		}
-		${from.desktop} {
-			width: auto;
-			float: right;
-			margin: 0;
-			margin-top: 4px;
-			margin-left: 20px;
-		}
-	}
 	.ad-slot-container {
 		max-width: 300px;
-	}
-	.ad-slot--offset-right {
-		${from.desktop} {
-			float: right;
-			width: auto;
-			margin-right: -318px;
-		}
-
-		${from.wide} {
-			margin-right: -398px;
-		}
-	}
-	.ad-slot--outstream {
-		${from.tablet} {
-			margin-left: 0;
-			width: 100%;
-			.ad-slot__label {
-				margin-left: 35px;
-				margin-right: 35px;
-			}
-		}
 	}
 	.ad-slot--fluid {
 		width: 100%;
@@ -149,15 +106,105 @@ const articleAdStyles = css`
 			width: 100%;
 		}
 	}
+	/** ad-slot-offset-right is only added to inline2+ slots */
+	.ad-slot--offset-right {
+		${from.desktop} {
+			float: right;
+			width: auto;
+			margin-right: -318px;
+		}
+
+		${from.wide} {
+			margin-right: -398px;
+		}
+	}
 `;
 
-export const ArticleContainer = ({ children, format }: Props) => {
+const adControlCSS = css`
+	.ad-slot--inline,
+	.ad-slot-liveblog--inline {
+		width: 300px;
+		margin: 12px auto;
+		min-width: 160px;
+		min-height: 274px;
+		text-align: center;
+
+		${from.tablet} {
+			margin-right: -100px;
+			width: auto;
+			float: right;
+			margin-top: 4px;
+			margin-left: 20px;
+		}
+		${from.desktop} {
+			width: auto;
+			float: right;
+			margin: 0;
+			margin-top: 4px;
+			margin-left: 20px;
+		}
+	}
+	.ad-slot--outstream {
+		${from.tablet} {
+			margin-left: 0;
+			width: 100%;
+			.ad-slot__label {
+				margin-left: 35px;
+				margin-right: 35px;
+			}
+		}
+	}
+`;
+
+const adVariantCSS = css`
+	.ad-slot--inline1 {
+		margin: 12px auto;
+		text-align: center;
+		/* Unlike other inlines do not float right inline1 */
+		/* Prevent merger with any nearby float left elements e.g. rich-links */
+		${until.tablet} {
+			clear: left;
+			width: 300px;
+		}
+		/* Reserve full width with a background colour */
+		${from.tablet} {
+			background-color: ${neutral[97]};
+		}
+	}
+	.ad-slot--inline:not(.ad-slot--inline1),
+	.ad-slot-liveblog--inline:not(.ad-slot--inline1) {
+		width: 300px;
+		margin: 12px auto;
+		min-width: 300px;
+		min-height: 274px;
+		text-align: center;
+		${from.tablet} {
+			margin-right: -100px;
+			width: auto;
+			float: right;
+			margin-top: 4px;
+			margin-left: 20px;
+		}
+		${from.desktop} {
+			width: auto;
+			float: right;
+			margin: 0;
+			margin-top: 4px;
+			margin-left: 20px;
+		}
+	}
+`;
+
+export const ArticleContainer = ({ children, format, abTests }: Props) => {
+	const isInline1ContainerSizingVariant =
+		abTests?.inline1ContainerSizingVariant === 'variant';
 	return (
 		<div
 			css={[
 				articleWrapper,
 				articleWidth(format),
-				articleAdStyles,
+				adSharedCSS,
+				isInline1ContainerSizingVariant ? adVariantCSS : adControlCSS,
 				carrotAdStyles,
 				labelStyles,
 			]}

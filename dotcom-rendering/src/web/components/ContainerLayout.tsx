@@ -27,6 +27,8 @@ type Props = {
 	stretchRight?: boolean;
 	leftColSize?: LeftColSize;
 	format?: ArticleFormat;
+	ophanComponentName?: string;
+	ophanComponentLink?: string;
 };
 
 const containerStyles = css`
@@ -113,6 +115,8 @@ export const ContainerLayout = ({
 	stretchRight = false,
 	leftColSize,
 	format,
+	ophanComponentLink,
+	ophanComponentName,
 }: Props) => (
 	<ElementContainer
 		sectionId={sectionId}
@@ -121,6 +125,9 @@ export const ContainerLayout = ({
 		padded={padSides}
 		borderColour={borderColour}
 		backgroundColour={backgroundColour}
+		element="section"
+		ophanComponentLink={ophanComponentLink}
+		ophanComponentName={ophanComponentName}
 	>
 		<Flex>
 			<LeftColumn

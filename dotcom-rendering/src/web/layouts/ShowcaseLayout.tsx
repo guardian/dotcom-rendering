@@ -13,7 +13,10 @@ import {
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 import { ArticleBody } from '../components/ArticleBody';
 import { RightColumn } from '../components/RightColumn';
 import { ArticleTitle } from '../components/ArticleTitle';
@@ -281,10 +284,6 @@ export const ShowcaseLayout = ({
 									edition={CAPIArticle.editionId}
 									idUrl={CAPIArticle.config.idUrl}
 									mmaUrl={CAPIArticle.config.mmaUrl}
-									supporterCTA={
-										CAPIArticle.nav.readerRevenueLinks
-											.header.supporter
-									}
 									discussionApiUrl={
 										CAPIArticle.config.discussionApiUrl
 									}
@@ -349,7 +348,12 @@ export const ShowcaseLayout = ({
 								padded={false}
 								showTopBorder={false}
 							>
-								<Lines count={4} effect="straight" />
+								<StraightLines
+									count={4}
+									cssOverrides={css`
+										display: block;
+									`}
+								/>
 							</ElementContainer>
 						</SendToBack>
 					</div>
@@ -481,6 +485,9 @@ export const ShowcaseLayout = ({
 							<div css={maxWidth}>
 								<div css={stretchLines}>
 									<Lines
+										cssOverrides={css`
+											display: block;
+										`}
 										count={decideLineCount(format.design)}
 										effect={decideLineEffect(
 											format.design,
@@ -519,7 +526,10 @@ export const ShowcaseLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer format={format}>
+							<ArticleContainer
+								format={format}
+								abTests={CAPIArticle.config.abTests}
+							>
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
@@ -586,7 +596,12 @@ export const ShowcaseLayout = ({
 										/>
 									</Island>
 								)}
-								<Lines count={4} effect="straight" />
+								<StraightLines
+									count={4}
+									cssOverrides={css`
+										display: block;
+									`}
+								/>
 								<SubMeta
 									format={format}
 									subMetaKeywordLinks={
@@ -775,11 +790,6 @@ export const ShowcaseLayout = ({
 					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
 				/>
 			</ElementContainer>
 
