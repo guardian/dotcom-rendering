@@ -8,7 +8,7 @@ const enhanceSupportingContent = (
 		// Some sublinks are to fronts and so don't have a `format` property
 		format: (subLink.format && decideFormat(subLink.format)) || format,
 		headline: subLink.header?.headline || '',
-		url: subLink.properties.href,
+		url: subLink.properties.href || subLink.header?.url,
 		kickerText: subLink.header?.kicker?.item?.properties.kickerText,
 	}));
 };
