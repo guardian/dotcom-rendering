@@ -11,13 +11,13 @@ module.exports = {
       settings: {
         onlyCategories: "accessibility,best-practices,performance,seo",
         disableStorageReset: true,
-		includePassedAssertions: true,
       }
     },
     upload: {
       target: 'temporary-public-storage',
     },
     assert: {
+      includePassedAssertions: true,
       assertions: {
         "first-contentful-paint": ["warn", {"maxNumericValue": 1500}],
         "largest-contentful-paint": ["warn", {"maxNumericValue": 3000}],

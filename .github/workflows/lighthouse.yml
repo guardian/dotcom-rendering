@@ -6,7 +6,8 @@ on:
     paths-ignore:
       - "apps-rendering/**"
   pull_request:
-    types: [synchronize]
+    #  If/when we compare results to `main`, we should also run on 'reopened'
+    types: [opened, synchronize]
 
 jobs:
   lhci:
