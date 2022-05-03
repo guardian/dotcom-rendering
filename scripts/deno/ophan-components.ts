@@ -1,12 +1,4 @@
-import { Octokit } from "https://cdn.skypack.dev/octokit";
-import type { RestEndpointMethodTypes } from "https://cdn.skypack.dev/@octokit/plugin-rest-endpoint-methods?dts";
-
-const token = Deno.env.get("GITHUB_TOKEN");
-if (!token) {
-	console.warn("Missing GITHUB_TOKEN");
-	Deno.exit(1);
-}
-const octokit = new Octokit({ auth: token });
+import { octokit } from "./github.ts";
 
 type Platform = "frontend" | "dcr";
 type OphanAttribute = "data-link-name" | "data-component";
@@ -140,26 +132,20 @@ ${
 
 	const {
 		data: { body: previousBody },
-	}: RestEndpointMethodTypes["issues"]["update"]["response"] = await octokit.request(
-		"GET /repos/{owner}/{repo}/issues/{issue_number}",
-		{
-			owner: "guardian",
-			repo: "dotcom-rendering",
-			issue_number,
-		}
-	);
+	} = await octokit.rest.issues.get({
+		owner: "guardian",
+		repo: "dotcom-rendering",
+		issue_number,
+	});
 
 	const {
 		data: { body: newBody, html_url },
-	}: RestEndpointMethodTypes["issues"]["update"]["response"] = await octokit.request(
-		"PATCH /repos/{owner}/{repo}/issues/{issue_number}",
-		{
-			owner: "guardian",
-			repo: "dotcom-rendering",
-			issue_number,
-			body,
-		}
-	);
+	} = await octokit.rest.issues.update({
+		owner: "guardian",
+		repo: "dotcom-rendering",
+		issue_number,
+		body,
+	});
 
 	const change: string =
 		previousBody === newBody ? "[no change]" : `[some changes]`;
