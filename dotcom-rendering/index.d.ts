@@ -761,7 +761,7 @@ type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
 	headline: string;
-	standfirst?: string;
+	trailText?: string;
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
