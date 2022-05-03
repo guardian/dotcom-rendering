@@ -290,6 +290,25 @@ const textPullQuote = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
+const textKeyEvent = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[350];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
 const textStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -1175,6 +1194,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			overlayedCaption: textOverlayed(),
 			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
+			keyEvent: textKeyEvent(format),
 		},
 		background: {
 			article: backgroundArticle(format),
