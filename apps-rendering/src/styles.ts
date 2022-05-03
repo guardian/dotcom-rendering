@@ -26,15 +26,6 @@ export const sidePadding = css`
 	}
 `;
 
-export const interviewSidePadding = css`
-	padding-right: ${remSpace[3]};
-
-	${from.wide} {
-		padding-left: 0;
-		padding-right: 0;
-	}
-`;
-
 export const liveblogPhabletSidePadding = css`
 	${from.phablet} {
 		padding-left: ${remSpace[5]};

@@ -202,11 +202,10 @@ const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 const interviewHeadlineStyles: SerializedStyles = css`
 	padding-left: 0;
 	padding-right: ${remSpace[12]};
-	margin-top: -2.14rem;
 	position: relative;
 
 	${from.wide} {
-		margin: -2.14rem auto 0;
+		margin: 0 auto;
 	}
 
 	${from.phablet} {
