@@ -385,6 +385,9 @@
         "matchUrl": {
             "type": "string"
         },
+        "matchType": {
+            "$ref": "#/definitions/MatchType"
+        },
         "isSpecialReport": {
             "type": "boolean"
         },
@@ -4207,6 +4210,13 @@
                 "text",
                 "url"
             ]
+        },
+        "MatchType": {
+            "enum": [
+                "CricketMatchType",
+                "FootballMatchType"
+            ],
+            "type": "string"
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

@@ -327,8 +327,11 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
 
+	const footballMatchUrl =
+		CAPIArticle.matchType === 'FootballMatchType' && CAPIArticle.matchUrl;
+
 	const isMatchReport =
-		format.design === ArticleDesign.MatchReport && !!CAPIArticle.matchUrl;
+		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
 	const showComments = CAPIArticle.isCommentable;
 
@@ -487,7 +490,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								sectionUrl={CAPIArticle.sectionUrl}
 								guardianBaseURL={CAPIArticle.guardianBaseURL}
 								badge={CAPIArticle.badge}
-								isMatch={!!CAPIArticle.matchUrl}
+								isMatch={!!footballMatchUrl}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -500,14 +503,14 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
 								{format.design === ArticleDesign.MatchReport &&
-									CAPIArticle.matchUrl && (
+									footballMatchUrl && (
 										<Island
 											deferUntil="visible"
 											clientOnly={true}
 											placeholderHeight={230}
 										>
 											<GetMatchNav
-												matchUrl={CAPIArticle.matchUrl}
+												matchUrl={footballMatchUrl}
 												format={format}
 												headlineString={
 													CAPIArticle.headline
@@ -524,13 +527,13 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
 								{format.design === ArticleDesign.MatchReport &&
-									CAPIArticle.matchUrl && (
+									footballMatchUrl && (
 										<Island
 											clientOnly={true}
 											placeholderHeight={40}
 										>
 											<GetMatchTabs
-												matchUrl={CAPIArticle.matchUrl}
+												matchUrl={footballMatchUrl}
 												format={format}
 											/>
 										</Island>
@@ -672,14 +675,14 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isDev={!!CAPIArticle.config.isDev}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
-									!!CAPIArticle.matchUrl && (
+									!!footballMatchUrl && (
 										<Island
 											deferUntil="visible"
 											clientOnly={true}
 											placeholderHeight={800}
 										>
 											<GetMatchStats
-												matchUrl={CAPIArticle.matchUrl}
+												matchUrl={footballMatchUrl}
 												format={format}
 											/>
 										</Island>

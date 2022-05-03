@@ -53,6 +53,7 @@ import { ContainerLayout } from '../components/ContainerLayout';
 import { Island } from '../components/Island';
 import { Liveness } from '../components/Liveness.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
+import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -296,6 +297,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const palette = decidePalette(format);
 
+	const footballMatchUrl =
+		CAPIArticle.matchType === 'FootballMatchType' && CAPIArticle.matchUrl;
+
+	const cricketMatchUrl =
+		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -397,7 +404,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 			<main>
 				<article>
-					{CAPIArticle.matchUrl ? (
+					{footballMatchUrl ? (
 						<ContainerLayout
 							showTopBorder={false}
 							backgroundColour={palette.background.matchNav}
@@ -440,7 +447,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								placeholderHeight={230}
 							>
 								<GetMatchNav
-									matchUrl={CAPIArticle.matchUrl}
+									matchUrl={footballMatchUrl}
 									format={format}
 									headlineString={CAPIArticle.headline}
 									tags={CAPIArticle.tags}
@@ -471,7 +478,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								</GridItem>
 								<GridItem area="headline">
 									<div css={maxWidth}>
-										{!CAPIArticle.matchUrl && (
+										{!footballMatchUrl && (
 											<ArticleHeadline
 												format={format}
 												headlineString={
@@ -619,13 +626,24 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<LiveGrid>
 							<GridItem area="media">
 								<div css={maxWidth}>
-									{CAPIArticle.matchUrl && (
+									{footballMatchUrl && (
 										<Island
 											clientOnly={true}
 											placeholderHeight={40}
 										>
 											<GetMatchTabs
-												matchUrl={CAPIArticle.matchUrl}
+												matchUrl={footballMatchUrl}
+												format={format}
+											/>
+										</Island>
+									)}
+									{cricketMatchUrl && (
+										<Island
+											clientOnly={true}
+											placeholderHeight={172}
+										>
+											<GetCricketScoreboard
+												matchUrl={cricketMatchUrl}
 												format={format}
 											/>
 										</Island>
@@ -701,7 +719,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{/* Key events */}
 								<div
 									css={[
-										!CAPIArticle.matchUrl && sticky,
+										!footballMatchUrl && sticky,
 										keyEventsMargins,
 										sidePaddingDesktop,
 									]}
@@ -715,14 +733,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									/>
 								</div>
 								{/* Match stats */}
-								{CAPIArticle.matchUrl && (
+								{footballMatchUrl && (
 									<Island
 										deferUntil="visible"
 										clientOnly={true}
 										placeholderHeight={800}
 									>
 										<GetMatchStats
-											matchUrl={CAPIArticle.matchUrl}
+											matchUrl={footballMatchUrl}
 											format={format}
 										/>
 									</Island>

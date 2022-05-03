@@ -506,6 +506,10 @@ const textLinkKicker = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const textCricketScoreboardLink = (): string => {
+	return sport[300];
+};
+
 const backgroundArticle = (format: ArticleFormat): string => {
 	if (
 		format.design === ArticleDesign.LiveBlog ||
@@ -1034,6 +1038,14 @@ const backgroundRichLink: (format: ArticleFormat) => string = (format) => {
 	return pillarPalette[ArticlePillar.News][400];
 };
 
+const borderCricketScoreboardTop = (): string => {
+	return sport[300];
+};
+
+const borderCricketScoreboardDivider = (): string => {
+	return neutral[86];
+};
+
 const fillRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
 		switch (format.theme) {
@@ -1194,6 +1206,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			overlayedCaption: textOverlayed(),
 			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
+			cricketScoreboardLink: textCricketScoreboardLink(),
 			keyEvent: textKeyEvent(format),
 		},
 		background: {
@@ -1247,6 +1260,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
 			lines: borderLines(format),
+			cricketScoreboardTop: borderCricketScoreboardTop(),
+			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			matchTab: matchTab(),
 			activeMatchTab: activeMatchTab(),
 			cardSupporting: borderCardSupporting(format),
