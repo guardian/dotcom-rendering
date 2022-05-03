@@ -7,6 +7,7 @@ import { mockApi } from '../../lib/mocks';
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { tweetBlock } from '../../fixtures/manual/tweet-block';
+import { match1, match2 } from '../../fixtures/manual/cricket-match';
 
 const blogUrl =
 	'https://www.theguardian.com/australia-news/live/2022/feb/22/australia-news-live-updates-scott-morrison-nsw-trains-coronavirus-covid-omicron-weather';
@@ -206,5 +207,47 @@ describe('Liveblogs', function () {
 				'be.visible',
 			);
 		});
+	});
+
+	it('should render live score updates to a cricketblog', function () {
+		// Get article with ?live to force the article to be 'live'
+		cy.visit(
+			'/Article?url=https://theguardian.com/sport/live/2022/mar/27/west-indies-v-england-third-test-day-four-live?live',
+		);
+
+		// Initial request for the cricket data
+		cy.intercept(
+			{
+				url: /england-cricket-team\.json/,
+			},
+			{
+				statusCode: 200,
+				body: {
+					scorecardUrl: '/test',
+					match: match1,
+				},
+			},
+		);
+
+		cy.contains('297 & 28 - 0 (4.5 overs)');
+		cy.contains('204 & 120 all out (64.2 overs)');
+
+		// We should always see a second request if it's 'live updating'
+		cy.intercept(
+			{
+				url: /england-cricket-team\.json/,
+			},
+			{
+				statusCode: 200,
+				body: {
+					scorecardUrl: '/test',
+					match: match2,
+				},
+			},
+		);
+
+		// The cricket data is updated every 14 seconds, so we need a longer timeout here
+		// Wait for the 'updated' cricket score to appear on the page correctly!
+		cy.contains('297 & 104 - 3 (25 overs)', { timeout: 20000 });
 	});
 });

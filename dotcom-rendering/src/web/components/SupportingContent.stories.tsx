@@ -34,7 +34,7 @@ const basicCardProps: CardProps = {
 
 const aBasicLink = {
 	headline: 'Headline',
-	url: '',
+	url: 'https://www.theguardian.com',
 	format: {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,

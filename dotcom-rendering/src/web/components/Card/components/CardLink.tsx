@@ -3,6 +3,17 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
+import { getZIndex } from '../../../lib/getZIndex';
+
+const fauxLinkStyles = css`
+	position: absolute;
+	${getZIndex('card-link')};
+	opacity: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+`;
 
 const linkStyles = (format: ArticleFormat, palette: Palette) => {
 	const baseLinkStyles = css`
@@ -80,7 +91,6 @@ const linkStyles = (format: ArticleFormat, palette: Palette) => {
 };
 
 type Props = {
-	children: React.ReactNode;
 	linkTo: string;
 	format: ArticleFormat;
 	palette?: Palette;
@@ -88,7 +98,6 @@ type Props = {
 };
 
 export const CardLink = ({
-	children,
 	linkTo,
 	format,
 	palette,
@@ -98,10 +107,10 @@ export const CardLink = ({
 	return (
 		<a
 			href={linkTo}
-			css={linkStyles(format, cardPalette)}
+			css={[fauxLinkStyles, linkStyles(format, cardPalette)]}
 			data-link-name={dataLinkName}
 		>
-			{children}
+			{linkTo}
 		</a>
 	);
 };
