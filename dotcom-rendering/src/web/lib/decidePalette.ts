@@ -1021,7 +1021,11 @@ const borderArticle: (format: ArticleFormat) => string = (format) => {
 	return border.secondary;
 };
 
-const borderLines: (format: ArticleFormat) => string = (format) => {
+const borderLines = (
+	format: ArticleFormat,
+	frontPalette?: FrontPalette,
+): string => {
+	if (frontPalette) return frontPalette.cardHeadline;
 	if (format.theme === ArticleSpecial.Labs) return border.primary;
 	return border.secondary;
 };
@@ -1247,7 +1251,7 @@ export const decidePalette = (
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
-			lines: borderLines(format),
+			lines: borderLines(format, frontPalette),
 			matchTab: matchTab(),
 			activeMatchTab: activeMatchTab(),
 			cardSupporting: borderCardSupporting(format),

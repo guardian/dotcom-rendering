@@ -5,6 +5,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 
 type Props = {
 	format: ArticleFormat;
+	palette: Palette;
 	age?: JSX.Element;
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
@@ -31,6 +32,7 @@ const linesWrapperStyles = css`
 
 export const CardFooter = ({
 	format,
+	palette,
 	age,
 	mediaMeta,
 	commentCount,
@@ -53,6 +55,7 @@ export const CardFooter = ({
 					{age}
 					<StraightLines
 						cssOverrides={linesWrapperStyles}
+						color={palette.border.lines}
 						count={4}
 					/>
 					{commentCount}

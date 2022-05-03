@@ -184,6 +184,7 @@ export const Card = ({
 		return (
 			<CardFooter
 				format={format}
+				palette={cardPalette}
 				age={
 					renderAge && webPublicationDate ? (
 						<CardAge
