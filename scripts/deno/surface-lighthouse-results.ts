@@ -1,9 +1,19 @@
-import { Octokit } from "https://cdn.skypack.dev/octokit?dts";
+import { Octokit } from "https://cdn.skypack.dev/octokit";
 import type { RestEndpointMethodTypes } from "https://cdn.skypack.dev/@octokit/plugin-rest-endpoint-methods?dts";
 import type { EventPayloadMap } from "https://cdn.skypack.dev/@octokit/webhooks-types?dts";
 import "https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/v0.8.2/types/assert.d.ts";
 
 /* -- Setup -- */
+
+type OctokitWithRest = {
+	rest: {
+		issues: {
+			[Method in keyof RestEndpointMethodTypes["issues"]]: (
+				arg: RestEndpointMethodTypes["issues"][Method]["parameters"]
+			) => Promise<RestEndpointMethodTypes["issues"][Method]["response"]>;
+		};
+	};
+};
 
 /** Github token for Authentication */
 const token = Deno.env.get("GITHUB_TOKEN");
@@ -42,8 +52,6 @@ const issue_number = isPullRequestEvent(payload)
 	  4584;
 
 console.log(`Using issue #${issue_number}`);
-
-console.log({ payload });
 
 /** The Lighthouse results directory  */
 const dir = "dotcom-rendering/.lighthouseci";
@@ -84,15 +92,7 @@ const GIHUB_PARAMS = {
 	issue_number,
 } as const;
 
-const octokit = new Octokit({ auth: token }) as {
-	rest: {
-		issues: {
-			[Method in keyof RestEndpointMethodTypes["issues"]]: (
-				arg: RestEndpointMethodTypes["issues"][Method]["parameters"]
-			) => Promise<RestEndpointMethodTypes["issues"][Method]["response"]>;
-		};
-	};
-};
+const octokit = new Octokit({ auth: token }) as unknown as OctokitWithRest;
 
 /* -- Methods -- */
 
