@@ -240,7 +240,7 @@ export const Card = ({
 	};
 
 	return (
-		<CardWrapper format={format}>
+		<CardWrapper format={format} palette={cardPalette}>
 			<CardLink
 				linkTo={linkTo}
 				dataLinkName={dataLinkName}

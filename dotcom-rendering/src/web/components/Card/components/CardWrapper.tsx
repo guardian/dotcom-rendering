@@ -7,10 +7,11 @@ import { decidePalette } from '../../../lib/decidePalette';
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
+	palette?: Palette;
 };
 
-const cardStyles = (format: ArticleFormat) => {
-	const palette = decidePalette(format);
+const cardStyles = (format: ArticleFormat, palette?: Palette) => {
+	const cardPalette = palette || decidePalette(format);
 	const baseCardStyles = css`
 		display: flex;
 		flex-direction: column;
@@ -22,7 +23,7 @@ const cardStyles = (format: ArticleFormat) => {
 
 		/* Styling for top bar */
 		:before {
-			background-color: ${palette.topBar.card};
+			background-color: ${cardPalette.topBar.card};
 			content: '';
 			position: absolute;
 			top: 0;
@@ -45,7 +46,7 @@ const cardStyles = (format: ArticleFormat) => {
 		/* a tag specific styles */
 		color: inherit;
 		text-decoration: none;
-		background-color: ${palette.background.card};
+		background-color: ${cardPalette.background.card};
 	`;
 
 	if (format.theme === ArticleSpecial.SpecialReport) {
@@ -89,6 +90,6 @@ const cardStyles = (format: ArticleFormat) => {
 	}
 };
 
-export const CardWrapper = ({ children, format }: Props) => (
-	<div css={cardStyles(format)}>{children}</div>
+export const CardWrapper = ({ children, format, palette }: Props) => (
+	<div css={cardStyles(format, palette)}>{children}</div>
 );
