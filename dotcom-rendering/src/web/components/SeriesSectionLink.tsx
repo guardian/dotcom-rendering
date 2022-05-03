@@ -195,11 +195,11 @@ export const SeriesSectionLink = ({
 	const palette = decidePalette(format);
 
 	const seriesTitleColour = isMatch
-		? palette.text.matchTitle
+		? palette.text.seriesTitleWhenMatch
 		: palette.text.seriesTitle;
 
 	const sectionTitleColour = isMatch
-		? palette.text.matchTitle
+		? palette.text.seriesTitleWhenMatch
 		: palette.text.sectionTitle;
 
 	switch (format.display) {

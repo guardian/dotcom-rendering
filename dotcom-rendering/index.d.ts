@@ -82,7 +82,7 @@ type Palette = {
 		headline: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
-		matchTitle: Colour;
+		seriesTitleWhenMatch: Colour;
 		byline: Colour;
 		twitterHandle: Colour;
 		twitterHandleBelowDesktop: Colour;
