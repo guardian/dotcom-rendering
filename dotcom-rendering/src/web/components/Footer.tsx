@@ -14,8 +14,6 @@ import { ArticleDisplay } from '@guardian/libs';
 import { clearFix } from '../../lib/mixins';
 import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
-import { Island } from './Island';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 // CSS vars
 const emailSignupSideMargins = 10;
@@ -135,19 +133,6 @@ const footerList = css`
 	}
 `;
 
-const readerRevenueLinks = css`
-	border-left: ${footerBorders};
-	flex: 1;
-	padding: 12px 0 0 10px;
-	margin: 0 10px 36px 0;
-	width: calc(50% - 10px);
-
-	${until.tablet} {
-		width: 50%;
-		border-top: ${footerBorders};
-	}
-`;
-
 const copyright = css`
 	${textSans.xxsmall()};
 	padding-left: 20px;
@@ -183,17 +168,7 @@ const bttPosition = css`
 	right: 20px;
 `;
 
-const FooterLinks = ({
-	pageFooter,
-	urls,
-	edition,
-	contributionsServiceUrl,
-}: {
-	pageFooter: FooterType;
-	urls: ReaderRevenueCategories;
-	edition: Edition;
-	contributionsServiceUrl: string;
-}) => {
+const FooterLinks = ({ pageFooter }: { pageFooter: FooterType }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
 		const linkList = linkGroup.map((l: FooterLink, index: number) => (
 			<li key={`${l.url}${index}`}>
@@ -210,27 +185,7 @@ const FooterLinks = ({
 		return <ul key={key}>{linkList}</ul>;
 	});
 
-	const rrLinks = (
-		<div css={readerRevenueLinks}>
-			<Island deferUntil="visible" clientOnly={true}>
-				<ReaderRevenueLinks
-					urls={urls}
-					edition={edition}
-					dataLinkNamePrefix="footer : "
-					inHeader={false}
-					remoteHeader={false}
-					contributionsServiceUrl={contributionsServiceUrl}
-				/>
-			</Island>
-		</div>
-	);
-
-	return (
-		<div css={footerList}>
-			{linkGroups}
-			{rrLinks}
-		</div>
-	);
+	return <div css={footerList}>{linkGroups}</div>;
 };
 
 const year = new Date().getFullYear();
@@ -239,16 +194,10 @@ export const Footer = ({
 	pillars,
 	pillar,
 	pageFooter,
-	urls,
-	edition,
-	contributionsServiceUrl,
 }: {
 	pillars: PillarType[];
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
-	urls: ReaderRevenueCategories;
-	edition: Edition;
-	contributionsServiceUrl: string;
 }) => (
 	<div
 		data-print-layout="hide"
@@ -276,12 +225,7 @@ export const Footer = ({
 				height="100"
 			/>
 
-			<FooterLinks
-				pageFooter={pageFooter}
-				urls={urls}
-				edition={edition}
-				contributionsServiceUrl={contributionsServiceUrl}
-			/>
+			<FooterLinks pageFooter={pageFooter} />
 			<div css={bttPosition}>
 				<BackToTop />
 			</div>
