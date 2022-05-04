@@ -34,14 +34,6 @@ build: clean-dist install
 	$(call log, "building production bundles")
 	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
 
-build-ci: clean-dist install
-	$(call log, "building production bundles")
-	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
-
-start-ci: install
-	$(call log, "starting PROD server...")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
-
 start: install
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
@@ -66,11 +58,11 @@ run-ci: stop build-ci start-ci
 
 # dev #########################################
 
-dev: clear clean-dist install gen-dotenv
+dev: clear clean-dist install-dev
 	$(call log, "starting DEV server")
 	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
-dev-legacy: clear clean-dist install gen-dotenv
+dev-legacy: clear clean-dist install-dev
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
@@ -145,6 +137,12 @@ clean-deps:
 install: check-env
 	$(call log, "refreshing dependencies")
 	@yarn --silent
+	@node scripts/dotenv/gen-dotenv.js
+
+install-dev: check-env
+	$(call log, "refreshing dependencies")
+	@yarn --silent
+	@node scripts/dotenv/gen-dotenv-dev.js
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
@@ -153,9 +151,6 @@ validate-build: # private
 	$(call log, "checking bundling")
 	@rm -rf dist
 	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
-
-gen-dotenv: # private
-	@node scripts/dev/gen-dotenv.js
 
 check-env: # private
 	$(call log, "checking environment")

@@ -61,7 +61,7 @@ module.exports = ({ sessionId }) => ({
 					team: 'dotcom',
 					sessionId,
 				}),
-				Dotenv,
+				new Dotenv,
 		  ]
 		: undefined,
 	module: {
