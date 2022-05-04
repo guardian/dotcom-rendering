@@ -39,17 +39,6 @@ const logRenderTime = responseTime(
 export const prodServer = () => {
 	logger.info('dotcom-rendering is GO.');
 
-	if (process.env.DISABLE_LOGGING_AND_METRICS !== 'true') {
-		getGuardianConfiguration('prod')
-			.then((config: GuardianConfiguration) => {
-				log(`loaded ${config.size()} configuration parameters`);
-			})
-			.catch((err: any) => {
-				warn('Failed to get configuration. Bad AWS credentials?');
-				warn(err);
-			});
-	}
-
 	const app = express();
 
 	app.use(express.json({ limit: '50mb' }));

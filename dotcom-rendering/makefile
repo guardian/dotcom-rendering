@@ -58,11 +58,11 @@ run-ci: stop build-ci start-ci
 
 # dev #########################################
 
-dev: clear clean-dist install-dev
+dev: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
-dev-legacy: clear clean-dist install-dev
+dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
@@ -138,11 +138,6 @@ install: check-env
 	$(call log, "refreshing dependencies")
 	@yarn --silent
 	@node scripts/dotenv/gen-dotenv.js
-
-install-dev: check-env
-	$(call log, "refreshing dependencies")
-	@yarn --silent
-	@node scripts/dotenv/gen-dotenv-dev.js
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
