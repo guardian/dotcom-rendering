@@ -1,4 +1,5 @@
 // @ts-check
+const Dotenv = require('dotenv-webpack');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
@@ -60,6 +61,7 @@ module.exports = ({ sessionId }) => ({
 					team: 'dotcom',
 					sessionId,
 				}),
+				Dotenv,
 		  ]
 		: undefined,
 	module: {
