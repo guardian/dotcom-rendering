@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans, neutral, space } from '@guardian/source-foundations';
+import { textSans, neutral, space, remSpace, text as textColor } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 
 type Props = {
@@ -24,6 +24,17 @@ const bodyContentStyles = css`
 	p {
 		word-break: break-word;
 		margin-bottom: ${space[2]}px;
+	}
+
+	blockquote {
+		font-style: italic; /* would something like "textSans({FontStyle: 'italic'})" work here..? */
+		color: ${textColor.supporting};
+		border-left: ${remSpace[1]} ${neutral[86]} solid; /* is this the right way to refer to the colour here..? */
+		margin-top: ${remSpace[1]};
+		margin-right: 0;
+		margin-bottom: ${remSpace[4]};
+		margin-left: 0;
+		padding-left: ${remSpace[3]};
 	}
 `;
 
