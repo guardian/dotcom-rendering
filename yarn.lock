@@ -2836,10 +2836,10 @@
     customize-cra "^1.0.0"
     timeago.js "^4.0.2"
 
-"@guardian/eslint-plugin-source-react-components@^4.0.2":
-  version "4.0.2"
-  resolved "https://registry.npmjs.org/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-4.0.2.tgz#d62e2a34722b77ba8661935676ece072881e8f2f"
-  integrity sha512-28xzl6tImEMxBIYTZlzsSs0fIx1+THdIxHbC2LVzlztYPKMRCe8DHG5Va2bOUyB2o7Z2kmH6rh8cdSuD+qFZsw==
+"@guardian/eslint-plugin-source-react-components@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-4.1.0.tgz#a127f90721bccbc2bcd5e124f1214b897e0b5950"
+  integrity sha512-fplAX/t5nmabDeeSNu+8ZA9MIcCTgM/0bVW18hm18LTrju0w5pV0SYKJYncOdr969N8C+Qm7W10JAbDKaa2ETw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.9.1"
     "@typescript-eslint/parser" "5.9.1"
@@ -2883,7 +2883,7 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-0.0.35.tgz#fe3b7f3abac0a0612618ba62647c3a739eaf3e40"
   integrity sha512-i76aDzboAaMJLPso0+mqCrC8zvZHzEb1tOzofOUVtd0LCCc4G70KsqpVDcLOSX0dTmMD4XmEJJbrtPrqB/Va6w==
 
-"@guardian/source-react-components@^4.0.2":
+"@guardian/source-react-components@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-4.4.0.tgz#69cf404b56db3ca507702d29dae6a40eeb145cf4"
   integrity sha512-5Q4Vl8ek0UV0Y9ob5y3Smq5xHs1d3lEzLynv5qqlYqVBlhze5Ypg5IzrPcEpKtcUaCIQeI9d5FevHM9fmm18sQ==
