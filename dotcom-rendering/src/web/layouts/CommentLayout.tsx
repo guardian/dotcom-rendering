@@ -11,7 +11,7 @@ import {
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 
 import { ArticleBody } from '../components/ArticleBody';
 import { RightColumn } from '../components/RightColumn';
@@ -47,6 +47,7 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { Hide } from '../components/Hide';
 
 const StandardGrid = ({
 	children,
@@ -211,6 +212,7 @@ const avatarPositionStyles = css`
 	display: flex;
 	justify-content: flex-end;
 	overflow: hidden;
+	position: relative;
 	margin-bottom: -29px;
 	margin-top: -50px;
 	pointer-events: none;
@@ -296,7 +298,7 @@ export const CommentLayout = ({
 	const contributorTag = CAPIArticle.tags.find(
 		(tag) => tag.type === 'Contributor',
 	);
-	const avatarUrl = contributorTag && contributorTag.bylineImageUrl;
+	const avatarUrl = contributorTag && contributorTag.bylineLargeImageUrl;
 	const onlyOneContributor: boolean =
 		CAPIArticle.tags.filter((tag) => tag.type === 'Contributor').length ===
 		1;
@@ -340,10 +342,6 @@ export const CommentLayout = ({
 								edition={CAPIArticle.editionId}
 								idUrl={CAPIArticle.config.idUrl}
 								mmaUrl={CAPIArticle.config.mmaUrl}
-								supporterCTA={
-									CAPIArticle.nav.readerRevenueLinks.header
-										.supporter
-								}
 								discussionApiUrl={
 									CAPIArticle.config.discussionApiUrl
 								}
@@ -401,7 +399,12 @@ export const CommentLayout = ({
 						padded={false}
 						showTopBorder={false}
 					>
-						<Lines count={4} effect="straight" />
+						<StraightLines
+							count={4}
+							cssOverrides={css`
+								display: block;
+							`}
+						/>
 					</ElementContainer>
 				</SendToBack>
 			</div>
@@ -462,14 +465,26 @@ export const CommentLayout = ({
 												/>
 											</div>
 										)}
-										<Lines count={8} effect="straight" />
+										<StraightLines
+											count={8}
+											cssOverrides={css`
+												display: block;
+											`}
+										/>
 									</div>
 								</div>
 							</div>
 						</GridItem>
 						<GridItem area="lines">
 							<div css={pushToBottom}>
-								<Lines count={8} effect="straight" />
+								<Hide when="below" breakpoint="desktop">
+									<StraightLines
+										count={8}
+										cssOverrides={css`
+											display: block;
+										`}
+									/>
+								</Hide>
 							</div>
 						</GridItem>
 						<GridItem area="standfirst">
@@ -536,7 +551,10 @@ export const CommentLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer format={format}>
+							<ArticleContainer
+								format={format}
+								abTests={CAPIArticle.config.abTests}
+							>
 								<div css={maxWidth}>
 									<ArticleBody
 										format={format}
@@ -609,7 +627,12 @@ export const CommentLayout = ({
 											/>
 										</Island>
 									)}
-									<Lines count={4} effect="straight" />
+									<StraightLines
+										count={4}
+										cssOverrides={css`
+											display: block;
+										`}
+									/>
 									<SubMeta
 										format={format}
 										subMetaKeywordLinks={
@@ -799,11 +822,6 @@ export const CommentLayout = ({
 					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
 				/>
 			</ElementContainer>
 

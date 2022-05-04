@@ -163,13 +163,20 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 	}
 }
 
-storiesOf(`Layouts/Liveblog`, module).add('With no key events', () => {
-	return (
-		<HydratedLayout
-			ServerCAPI={{
-				...Fixtures.LiveBlog,
-				keyEvents: [],
-			}}
-		/>
-	);
-});
+storiesOf(`Layouts/Liveblog`, module)
+	.addParameters({
+		chromatic: {
+			diffThreshold: 0.2,
+			pauseAnimationAtEnd: true,
+		},
+	})
+	.add('With no key events', () => {
+		return (
+			<HydratedLayout
+				ServerCAPI={{
+					...Fixtures.LiveBlog,
+					keyEvents: [],
+				}}
+			/>
+		);
+	});

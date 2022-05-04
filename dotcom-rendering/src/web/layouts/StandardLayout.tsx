@@ -14,7 +14,10 @@ import {
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 import { StarRating } from '../components/StarRating/StarRating';
 import { ArticleBody } from '../components/ArticleBody';
 import { RightColumn } from '../components/RightColumn';
@@ -324,8 +327,11 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
 
+	const footballMatchUrl =
+		CAPIArticle.matchType === 'FootballMatchType' && CAPIArticle.matchUrl;
+
 	const isMatchReport =
-		format.design === ArticleDesign.MatchReport && !!CAPIArticle.matchUrl;
+		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
 	const showComments = CAPIArticle.isCommentable;
 
@@ -374,10 +380,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								edition={CAPIArticle.editionId}
 								idUrl={CAPIArticle.config.idUrl}
 								mmaUrl={CAPIArticle.config.mmaUrl}
-								supporterCTA={
-									CAPIArticle.nav.readerRevenueLinks.header
-										.supporter
-								}
 								discussionApiUrl={
 									CAPIArticle.config.discussionApiUrl
 								}
@@ -434,7 +436,12 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									padded={false}
 									showTopBorder={false}
 								>
-									<Lines count={4} effect="straight" />
+									<StraightLines
+										count={4}
+										cssOverrides={css`
+											display: block;
+										`}
+									/>
 								</ElementContainer>
 							</>
 						)}
@@ -479,7 +486,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								sectionUrl={CAPIArticle.sectionUrl}
 								guardianBaseURL={CAPIArticle.guardianBaseURL}
 								badge={CAPIArticle.badge}
-								isMatch={!!CAPIArticle.matchUrl}
+								isMatch={!!footballMatchUrl}
 							/>
 						</GridItem>
 						<GridItem area="border">
@@ -492,14 +499,14 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
 								{format.design === ArticleDesign.MatchReport &&
-									CAPIArticle.matchUrl && (
+									footballMatchUrl && (
 										<Island
 											deferUntil="visible"
 											clientOnly={true}
 											placeholderHeight={230}
 										>
 											<GetMatchNav
-												matchUrl={CAPIArticle.matchUrl}
+												matchUrl={footballMatchUrl}
 												format={format}
 												headlineString={
 													CAPIArticle.headline
@@ -516,13 +523,13 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
 								{format.design === ArticleDesign.MatchReport &&
-									CAPIArticle.matchUrl && (
+									footballMatchUrl && (
 										<Island
 											clientOnly={true}
 											placeholderHeight={40}
 										>
 											<GetMatchTabs
-												matchUrl={CAPIArticle.matchUrl}
+												matchUrl={footballMatchUrl}
 												format={format}
 											/>
 										</Island>
@@ -586,6 +593,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										<GuardianLabsLines />
 									) : (
 										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
 											count={decideLineCount(
 												format.design,
 											)}
@@ -627,7 +637,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer format={format}>
+							<ArticleContainer
+								format={format}
+								abTests={CAPIArticle.config.abTests}
+							>
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
@@ -658,14 +671,14 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isDev={!!CAPIArticle.config.isDev}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
-									!!CAPIArticle.matchUrl && (
+									!!footballMatchUrl && (
 										<Island
 											deferUntil="visible"
 											clientOnly={true}
 											placeholderHeight={800}
 										>
 											<GetMatchStats
-												matchUrl={CAPIArticle.matchUrl}
+												matchUrl={footballMatchUrl}
 												format={format}
 											/>
 										</Island>
@@ -709,10 +722,12 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										/>
 									</Island>
 								)}
-								<Lines
+								<StraightLines
 									data-print-layout="hide"
 									count={4}
-									effect="straight"
+									cssOverrides={css`
+										display: block;
+									`}
 								/>
 								<SubMeta
 									format={format}
@@ -914,11 +929,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
 				/>
 			</ElementContainer>
 

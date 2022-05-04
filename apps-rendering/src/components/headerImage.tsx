@@ -68,6 +68,16 @@ const immersiveStyles = css`
 	left: 0;
 `;
 
+const interviewStyles = css`
+	position: relative;
+	margin: 0;
+	${from.wide} {
+		width: ${wideContentWidth}px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+`;
+
 const imgStyles = (width: number, height: number): SerializedStyles => css`
 	display: block;
 	width: 100%;
@@ -91,6 +101,8 @@ const getStyles = ({ design, display }: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return liveStyles;
+		case ArticleDesign.Interview:
+			return interviewStyles;
 		default:
 			if (display === ArticleDisplay.Immersive) {
 				return immersiveStyles;

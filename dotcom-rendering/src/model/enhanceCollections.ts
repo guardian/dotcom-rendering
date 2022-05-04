@@ -8,7 +8,7 @@ const enhanceSupportingContent = (
 		// Some sublinks are to fronts and so don't have a `format` property
 		format: (subLink.format && decideFormat(subLink.format)) || format,
 		headline: subLink.header?.headline || '',
-		url: subLink.properties.href,
+		url: subLink.properties.href || subLink.header?.url,
 		kickerText: subLink.header?.kicker?.item?.properties.kickerText,
 	}));
 };
@@ -25,7 +25,7 @@ const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] =>
 				format,
 				url: faciaCard.header.url,
 				headline: faciaCard.header.headline,
-				standfirst: faciaCard.card.trailText,
+				trailText: faciaCard.card.trailText,
 				webPublicationDate: faciaCard.card.webPublicationDateOption
 					? new Date(
 							faciaCard.card.webPublicationDateOption,
@@ -44,6 +44,12 @@ const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] =>
 			};
 		});
 
+const decideContainerPalette = (
+	metadata?: { type: FEContainerPalette }[],
+): DCRContainerPalette | undefined => {
+	return metadata?.length && metadata[0].type ? metadata[0].type : undefined;
+};
+
 export const enhanceCollections = (
 	collections: FECollectionType[],
 ): DCRCollectionType[] => {
@@ -53,6 +59,9 @@ export const enhanceCollections = (
 			id,
 			displayName,
 			collectionType,
+			containerPalette: decideContainerPalette(
+				collection.config.metadata,
+			),
 			curated: enhanceCards(collection.curated),
 			backfill: enhanceCards(collection.backfill),
 			treats: enhanceCards(collection.treats),

@@ -11,7 +11,10 @@ import {
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import {
+	Lines,
+	StraightLines,
+} from '@guardian/source-react-components-development-kitchen';
 import { ArticleBody } from '../components/ArticleBody';
 import { RightColumn } from '../components/RightColumn';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -345,6 +348,9 @@ export const ImmersiveLayout = ({
 											<GuardianLabsLines />
 										) : (
 											<Lines
+												cssOverrides={css`
+													display: block;
+												`}
 												effect={decideLineEffect(
 													ArticleDesign.Standard,
 													format.theme,
@@ -387,7 +393,10 @@ export const ImmersiveLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer format={format}>
+							<ArticleContainer
+								format={format}
+								abTests={CAPIArticle.config.abTests}
+							>
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
@@ -454,7 +463,7 @@ export const ImmersiveLayout = ({
 										/>
 									</Island>
 								)}
-								<Lines count={4} effect="straight" />
+								<StraightLines count={4} />
 								<SubMeta
 									format={format}
 									subMetaKeywordLinks={
@@ -640,11 +649,6 @@ export const ImmersiveLayout = ({
 					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
-					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
-					contributionsServiceUrl={
-						CAPIArticle.contributionsServiceUrl
-					}
 				/>
 			</ElementContainer>
 

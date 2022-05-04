@@ -385,6 +385,9 @@
         "matchUrl": {
             "type": "string"
         },
+        "matchType": {
+            "$ref": "#/definitions/MatchType"
+        },
         "isSpecialReport": {
             "type": "boolean"
         },
@@ -395,6 +398,9 @@
             "type": "boolean"
         },
         "mostRecentBlockId": {
+            "type": "string"
+        },
+        "matchType": {
             "type": "string"
         }
     },
@@ -3533,6 +3539,9 @@
                 },
                 "imageUrl": {
                     "type": "string"
+                },
+                "largeImageUrl": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -3608,6 +3617,9 @@
                     "type": "string"
                 },
                 "bylineImageUrl": {
+                    "type": "string"
+                },
+                "bylineLargeImageUrl": {
                     "type": "string"
                 }
             },
@@ -4198,6 +4210,13 @@
                 "text",
                 "url"
             ]
+        },
+        "MatchType": {
+            "enum": [
+                "CricketMatchType",
+                "FootballMatchType"
+            ],
+            "type": "string"
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

@@ -1,9 +1,10 @@
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 import { useEffect } from 'react';
 import { useApi } from '../lib/useApi';
 
 import { decideTrail } from '../lib/decideTrail';
 import { Placeholder } from './Placeholder';
+import { revealStyles } from '../lib/revealStyles';
 
 type Props = {
 	url: string;
@@ -23,20 +24,6 @@ type OnwardsResponse = {
 
 const minHeight = css`
 	min-height: 300px;
-`;
-
-const revealStyles = css`
-	/* We're using classnames here because we add and remove these classes
-	   using plain javascript */
-	.reveal {
-		animation: ${keyframes`
-			0% { opacity: 0; }
-			100% { opacity: 1; }
-		`} 2s ease-out;
-	}
-	.pending {
-		display: none;
-	}
 `;
 
 export const OnwardsData = ({

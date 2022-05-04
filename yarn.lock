@@ -2815,10 +2815,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-7.2.0.tgz#e5e7ba7c19484ebe0e405a93b1c389dae681acef"
   integrity sha512-Y2+XC0bP5mFacwtDlDqlQsbUyQwn4OSlpOTw3+u7t1RhJFw61SDYAER4gOpyJ4t+wQZFdk//LGJUjFqzDfEEuQ==
 
-"@guardian/commercial-core@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-3.0.0.tgz#8b2040e89b4dd8e317563938552776da4ced5bee"
-  integrity sha512-wB3y5p6eyuuekEK27S4OZ8vnVRMJ1tcHwi1SwmfIsYNEZLwYJRv3UxsLlTEeUmH8YAnYNgIEzJ390GfQ8iaVeA==
+"@guardian/commercial-core@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-3.3.0.tgz#c859a49a0949a864df97a5c23b21e641ef18d93e"
+  integrity sha512-F0vMNO9Rud7eLgtivz1YWOBvgHuAP1IgI98aJrnD9iPdeiX8Cf79ApinvdT46/p/rNgOEwn2UhoJq9MkhtyqXg==
 
 "@guardian/consent-management-platform@^10.5.0":
   version "10.5.0"
@@ -2827,10 +2827,10 @@
   dependencies:
     "@guardian/libs" "1.6.1 - 3.3.0"
 
-"@guardian/discussion-rendering@^10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-10.0.0.tgz#779f94c43e60cc31716b3f69693de0c4fb5f406f"
-  integrity sha512-jb3uFwo+tArK94x9WY6sd99kNqb09JZ7TMI7quDQZ3XX/sXA9L6WGpOaMaVsDqxkpUEVx7OxBFwzAZ+cS9LRHA==
+"@guardian/discussion-rendering@^10.1.0":
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-10.1.0.tgz#70ad2a173bf36318edfa90db83232351bd833d2f"
+  integrity sha512-nzMvqxlu2yRXREIhLTCJFYHGV7+kNCkosy1t66Ud7C7vEOmr4oxK2zeeAWhMGJ+52ZY/qJRI7F519bLXJxnF/w==
   dependencies:
     babel-plugin-emotion "^10.0.33"
     customize-cra "^1.0.0"
@@ -2878,10 +2878,10 @@
   dependencies:
     mini-svg-data-uri "^1.3.3"
 
-"@guardian/source-react-components-development-kitchen@^0.0.33":
-  version "0.0.33"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-0.0.33.tgz#d785992f833f6072072848f1d748d6f9b1e82cb7"
-  integrity sha512-/jpVvjzWxbnhf7Of7lVRv67SAa2i2bQGsvTz+JsZIjgllmZKSLfuwn8SoYzJnQIiRhJhPzRY6PZFhMhZOtcPDw==
+"@guardian/source-react-components-development-kitchen@0.0.35":
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-0.0.35.tgz#fe3b7f3abac0a0612618ba62647c3a739eaf3e40"
+  integrity sha512-i76aDzboAaMJLPso0+mqCrC8zvZHzEb1tOzofOUVtd0LCCc4G70KsqpVDcLOSX0dTmMD4XmEJJbrtPrqB/Va6w==
 
 "@guardian/source-react-components@^4.0.2":
   version "4.4.0"
@@ -6498,9 +6498,9 @@ async-listener@^0.6.0:
     shimmer "^1.1.0"
 
 async@^2.6.2, async@^2.6.3, async@~2.6.1:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
-  integrity sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.6.4.tgz#706b7ff6084664cd7eae713f6f965433b5504221"
+  integrity sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==
   dependencies:
     lodash "^4.17.14"
 

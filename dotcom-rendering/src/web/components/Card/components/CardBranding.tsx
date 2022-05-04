@@ -3,6 +3,7 @@ import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 import { decideLogo } from '../../../lib/decideLogo';
 import { trackSponsorLogoLinkClick } from '../../../browser/ga/ga';
+import { getZIndex } from '../../../lib/getZIndex';
 
 type Props = {
 	branding: Branding;
@@ -22,6 +23,9 @@ const brandingWrapperStyle = css`
 	padding-bottom: ${space[3]}px;
 	text-align: right;
 	flex: auto;
+	/* See: https://css-tricks.com/nested-links/ */
+	${getZIndex('card-nested-link')};
+	position: relative;
 `;
 
 const labelStyle = (palette: Palette) => {

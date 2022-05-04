@@ -20,7 +20,6 @@ type Props = {
 	edition: Edition;
 	idUrl?: string;
 	mmaUrl?: string;
-	supporterCTA: string;
 	discussionApiUrl: string;
 	urls: ReaderRevenueCategories;
 	remoteHeader: boolean;
@@ -31,7 +30,6 @@ export const Header = ({
 	edition,
 	idUrl,
 	mmaUrl,
-	supporterCTA,
 	discussionApiUrl,
 	urls,
 	remoteHeader,
@@ -60,7 +58,6 @@ export const Header = ({
 		<div id="links-root">
 			<Island>
 				<Links
-					supporterCTA={supporterCTA}
 					idUrl={idUrl}
 					mmaUrl={mmaUrl}
 					discussionApiUrl={discussionApiUrl}
