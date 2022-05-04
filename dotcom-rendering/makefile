@@ -66,11 +66,11 @@ run-ci: stop build-ci start-ci
 
 # dev #########################################
 
-dev: clear clean-dist install
+dev: clear clean-dist install gen-dotenv
 	$(call log, "starting DEV server")
 	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
-dev-legacy: clear clean-dist install
+dev-legacy: clear clean-dist install gen-dotenv
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
@@ -154,12 +154,14 @@ validate-build: # private
 	@rm -rf dist
 	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js
 
+gen-dotenv: # private
+	@node scripts/dev/gen-dotenv.js
+
 check-env: # private
 	$(call log, "checking environment")
 	@node scripts/env/check-node.js
 	@node scripts/env/check-yarn.js
 	@node scripts/env/check-deps.js
-	@node scripts/env/check-dotenv.js
 
 clear: # private
 	@clear
