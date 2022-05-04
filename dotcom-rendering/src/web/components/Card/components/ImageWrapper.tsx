@@ -1,16 +1,64 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 
-import { until } from '@guardian/source-foundations';
+import { between, from, until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
+	imageSize?: ImageSizeType;
+	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
-	percentage?: CardPercentageType;
+};
+
+const flexBasisStyles = ({
+	imagePosition,
+	imageSize,
+}: {
+	imagePosition: ImagePositionType;
+	imageSize: ImageSizeType;
+}): SerializedStyles | null => {
+	switch (imagePosition) {
+		case 'top':
+		case 'bottom':
+			// We only specifiy an explicit width for the image when
+			// we're positioning left or right, not top. Top positioned
+			// images flow naturally
+			return null;
+		case 'left':
+		case 'right':
+			switch (imageSize) {
+				case 'small':
+					return css`
+						flex-basis: 25%;
+						${between.tablet.and.desktop} {
+							flex-basis: 40%;
+						}
+						${from.desktop} {
+							flex-basis: 33%;
+						}
+					`;
+				case 'medium':
+					return css`
+						flex-basis: 50%;
+					`;
+				case 'large':
+					return css`
+						flex-basis: 66%;
+					`;
+				case 'jumbo':
+					return css`
+						flex-basis: 75%;
+					`;
+			}
+		// eslint-disable-next-line no-fallthrough
+		case 'none':
+			return null;
+	}
 };
 
 export const ImageWrapper = ({
 	children,
-	percentage,
+	imageSize = 'large',
+	imagePosition,
 	imagePositionOnMobile,
 }: Props) => {
 	const notVertical =
@@ -18,10 +66,13 @@ export const ImageWrapper = ({
 	return (
 		<div
 			css={[
+				flexBasisStyles({
+					imageSize,
+					imagePosition,
+				}),
 				css`
 					/* position relative is required here to bound the image overlay */
 					position: relative;
-					flex-basis: ${percentage && percentage};
 					/* If no image position for mobile is provided then hide the image */
 					${imagePositionOnMobile === 'none' && until.tablet} {
 						display: none;
