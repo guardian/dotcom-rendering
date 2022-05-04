@@ -4,7 +4,6 @@ import { getZIndex } from '../../../lib/getZIndex';
 const fauxLinkStyles = css`
 	position: absolute;
 	${getZIndex('card-link')};
-	opacity: 0;
 	top: 0;
 	right: 0;
 	bottom: 0;
@@ -17,7 +16,6 @@ type Props = {
 };
 
 export const CardLink = ({ linkTo, dataLinkName = 'article' }: Props) => (
-	<a href={linkTo} css={fauxLinkStyles} data-link-name={dataLinkName}>
-		{linkTo}
-	</a>
+	// eslint-disable-next-line -- we’ve got an empty link floating: see #4798
+	<a href={linkTo} css={fauxLinkStyles} data-link-name={dataLinkName} />
 );

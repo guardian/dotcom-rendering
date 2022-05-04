@@ -800,6 +800,8 @@ type DCRFrontCard = {
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
+	/** @see JSX.IntrinsicAttributes["data-link-name"] */
+	dataLinkName: string;
 };
 
 type FECollectionType = {
@@ -1213,6 +1215,8 @@ interface TrailType extends BaseTrailType {
 	format: ArticleFormat;
 	supportingContent?: DCRSupportingContent[];
 	trailText?: string;
+	/** @see JSX.IntrinsicAttributes["data-link-name"] */
+	dataLinkName?: string;
 }
 
 interface CAPITrailType extends BaseTrailType {

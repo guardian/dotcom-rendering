@@ -52,6 +52,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 						starRating={primary.starRating}
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
+						dataLinkName={primary.dataLinkName}
 					/>
 				</LI>
 				<LI
@@ -85,6 +86,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 						starRating={secondary.starRating}
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
+						dataLinkName={secondary.dataLinkName}
 					/>
 				</LI>
 			</UL>
@@ -136,6 +138,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 											card.supportingContent
 										}
 										imagePositionOnMobile="none"
+										dataLinkName={card.dataLinkName}
 									/>
 								</LI>
 							);
@@ -186,6 +189,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
+										dataLinkName={card.dataLinkName}
 									/>
 								</LI>
 							);
