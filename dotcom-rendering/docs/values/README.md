@@ -1,4 +1,4 @@
-§# Values
+# Values
 
 ## Approachable
 
