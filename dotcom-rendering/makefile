@@ -31,12 +31,12 @@ deploy:
 # prod #########################################
 
 build: export NODE_ENV=production
-build: clean-dist install
+build: clean-dist install gen-dotenv
 	$(call log, "building production bundles")
 	webpack --config ./scripts/webpack/webpack.config.js --progress
 
 build-ci: export NODE_ENV=production
-build-ci: clean-dist install
+build-ci: clean-dist install gen-dotenv
 	$(call log, "building production bundles")
 	SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
 
@@ -68,11 +68,11 @@ run-ci: stop build-ci start-ci
 
 # dev #########################################
 
-dev: clear clean-dist install
+dev: clear clean-dist install gen-dotenv
 	$(call log, "starting DEV server")
 	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
-dev-legacy: clear clean-dist install
+dev-legacy: clear clean-dist install gen-dotenv
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
@@ -147,7 +147,6 @@ clean-deps:
 install: check-env
 	$(call log, "refreshing dependencies")
 	@yarn --silent
-	@node scripts/dotenv/gen-dotenv.js
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")
@@ -175,6 +174,10 @@ gen-schema:
 gen-fixtures:
 	$(call log, "Generating new article fixture data")
 	@node scripts/test-data/gen-fixtures.js
+
+gen-dotenv:
+	$(call log, "Generating .env file")
+	@node scripts/dotenv/gen-dotenv.js
 
 perf-test:
 	@node scripts/perf/perf-test.js
