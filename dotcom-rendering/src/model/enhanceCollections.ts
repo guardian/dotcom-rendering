@@ -1,4 +1,5 @@
 import { decideFormat } from '../web/lib/decideFormat';
+import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 
 const enhanceSupportingContent = (
 	supportingContent: FESupportingContent[],
@@ -19,10 +20,15 @@ const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] =>
 			(card: FEFrontCard): card is FEFrontCard & { format: CAPIFormat } =>
 				!!card.format,
 		)
-		.map((faciaCard) => {
+		.map((faciaCard, index) => {
 			const format = decideFormat(faciaCard.format);
+			const group = `${faciaCard.card.group}${
+				faciaCard.display.isBoosted ? '+' : ''
+			}`;
+			const dataLinkName = getDataLinkNameCard(format, group, index + 1);
 			return {
 				format,
+				dataLinkName,
 				url: faciaCard.header.url,
 				headline: faciaCard.header.headline,
 				trailText: faciaCard.card.trailText,

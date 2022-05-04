@@ -52,7 +52,7 @@ export type Props = {
 	commentCount?: number;
 	starRating?: number;
 	minWidthInPixels?: number;
-	// Ophan tracking
+	/** Used for Ophan tracking */
 	dataLinkName?: string;
 	// Labs
 	branding?: Branding;
