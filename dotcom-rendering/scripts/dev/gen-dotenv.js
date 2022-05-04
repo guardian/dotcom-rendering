@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs').promises;
 const secrets = require('../secrets');
-const { getGuardianConfiguration } = require('../webpack/lib/aws-parameters');
+const { getGuardianConfiguration } = require('./aws-parameters');
 
 const ENV_PATH = path.resolve(__dirname, '../../.env');
 
