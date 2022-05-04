@@ -30,7 +30,8 @@ const decideSubLinkFormat = ({
 	if (
 		linkFormat.design === ArticleDesign.LiveBlog ||
 		linkFormat.design === ArticleDesign.Media ||
-		linkFormat.theme === ArticleSpecial.SpecialReport
+		linkFormat.theme === ArticleSpecial.SpecialReport ||
+		linkFormat.design === ArticleDesign.Analysis
 	)
 		return containerFormat;
 	// Otherwise, we can allow the sublink to express its own styling
