@@ -30,9 +30,19 @@ deploy:
 
 # prod #########################################
 
+build: export NODE_ENV=production
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
+	webpack --config ./scripts/webpack/webpack.config.js --progress
+
+build-ci: export NODE_ENV=production
+build-ci: clean-dist install
+	$(call log, "building production bundles")
+	SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+
+start-ci: install
+	$(call log, "starting PROD server...")
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
 
 start: install
 	$(call log, "starting PROD server...")

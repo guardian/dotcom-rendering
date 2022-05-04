@@ -1,6 +1,6 @@
 const { CredentialsProviderError } = require('@aws-sdk/property-provider');
 const path = require('path');
-const { prompt, warn, log } = require('../env/log');
+const { prompt, log, warn } = require('../env/log');
 const fs = require('fs').promises;
 const secrets = require('../secrets');
 const { getGuardianConfiguration } = require('./aws-parameters');
@@ -48,21 +48,31 @@ const genEnv = async () => {
 		}
 	} catch (err) {
 		if (err instanceof CredentialsProviderError) {
-			const missingMessages = Object.values(secrets).map(
-				(secret) => `* ${secret.key}: ${secret.missingMessage}`,
-			);
+			const PROD = process.env.NODE_ENV === 'production';
+			if (PROD) {
+				warn(
+					'[scripts/dotenv] could not generate .env file from AWS Parameter Store. Exiting',
+				);
+				process.exit(1);
+			}
 
 			prompt(
-				'Could not load AWS credentials to generate .env file',
-				"This won't stop dotcom-rendering from working, it will just vary from PROD by:",
-				...missingMessages,
-				'',
-				'To get things working PROD like either:',
-				'* Get your credentials from Janus',
-				'* Ask a local engineer for a copy of the .env file',
-				'',
-				'Then try again.',
+				'[scripts/dotenv] Could not load AWS credentials to generate .env file',
+				"[scripts/dotenv] This won't stop dotcom-rendering from working, it will just vary from PROD by:",
 			);
+			for (const secret of secrets) {
+				prompt(
+					`[scripts/dotenv]  * ${secret.key}: ${secret.missingMessage}`,
+				);
+			}
+			prompt(
+				'',
+				'[scripts/dotenv] To get things working PROD like either:',
+				'[scripts/dotenv]  * Get your credentials from Janus',
+				'[scripts/dotenv]  * Ask a local engineer for a copy of the .env file',
+				'[scripts/dotenv] Then try again.',
+			);
+
 			process.exit(0);
 		} else {
 			throw err;
