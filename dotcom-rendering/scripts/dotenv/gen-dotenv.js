@@ -5,7 +5,6 @@ const fs = require('fs').promises;
 const secrets = require('../secrets');
 const { getGuardianConfiguration } = require('./aws-parameters');
 
-
 const ENV_PATH = path.resolve(__dirname, '../../.env');
 
 const checkEnv = async () => {
@@ -64,9 +63,9 @@ const genEnv = async () => {
 				'',
 				'Then try again.',
 			);
-			process.exit(0)
+			process.exit(0);
 		} else {
-			throw err
+			throw err;
 		}
 	}
 })();

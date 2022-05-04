@@ -14,11 +14,6 @@ import {
 	render as renderAMPArticle,
 	renderPerfTest as renderAMPArticlePerfTest,
 } from '../amp/server';
-import { log, warn } from '../../scripts/env/log';
-import {
-	getGuardianConfiguration,
-	GuardianConfiguration,
-} from './lib/aws/aws-parameters';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { logger } from './lib/logging';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
