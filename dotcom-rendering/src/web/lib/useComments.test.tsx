@@ -88,6 +88,7 @@ describe('buildUrl', () => {
 						headline:
 							"There's no point railing against Farage. You have to present an alternative",
 						shortUrl: 'https://theguardian.com/p/fb28c',
+						dataLinkName: 'news | group-0 | card-@1',
 					},
 					{
 						url: 'https://www.theguardian.com/commentisfree/2020/nov/03/this-election-isnt-about-the-next-four-years-its-about-the-next-four-millennia',
@@ -105,6 +106,7 @@ describe('buildUrl', () => {
 						headline:
 							"This election isn't about the next four years. It's about the next four millennia",
 						shortUrl: 'https://theguardian.com/p/f36yf',
+						dataLinkName: 'news | group-0 | card-@2',
 					},
 				],
 				ophanComponentName: 'series',
@@ -141,6 +143,7 @@ describe('buildUrl', () => {
 						headline:
 							'The EHRC report shows how difficult building real anti-racist politics will be',
 						shortUrl: 'https://gu.com/p/fb7yx',
+						dataLinkName: 'news | group-0 | card-@1',
 					},
 					{
 						url: 'https://www.theguardian.com/commentisfree/2020/nov/03/emmanuel-macron-islam-french-president-terror-attacks',
@@ -158,6 +161,7 @@ describe('buildUrl', () => {
 						headline:
 							"Macron wants to fix France's social ills – but he won't do it by 'reforming' Islam",
 						shortUrl: 'https://gu.com/p/fbx5q',
+						dataLinkName: 'news | group-0 | card-@2',
 					},
 				],
 				ophanComponentName: 'series',

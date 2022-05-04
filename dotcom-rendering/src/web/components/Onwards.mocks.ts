@@ -137,7 +137,7 @@ const CAPITrails: CAPITrailType[] = [
 	},
 ];
 
-const trails: TrailType[] = CAPITrails.map((thisTrail) => {
+const trails: TrailType[] = CAPITrails.map((thisTrail, index) => {
 	const format = decideFormat(thisTrail.format);
 	return {
 		url: thisTrail.url,
@@ -149,6 +149,7 @@ const trails: TrailType[] = CAPITrails.map((thisTrail) => {
 		mediaType: thisTrail.mediaType,
 		mediaDuration: thisTrail.mediaDuration,
 		format,
+		dataLinkName: `news | group-0 | card-@${index + 1}`,
 	};
 });
 

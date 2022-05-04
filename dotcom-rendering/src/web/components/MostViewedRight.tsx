@@ -47,8 +47,8 @@ export const MostViewedRight = ({
 
 	if (data) {
 		const trails: TrailType[] = data.trails
-			.map(decideTrail)
-			.slice(0, limitItems);
+			.slice(0, limitItems)
+			.map(decideTrail);
 		const stickToTop = adBlockerDetected || isAdFreeUser;
 		// Look I don't know why data-component is geo-most-popular either, but it is, ok? Ok.
 		return (
