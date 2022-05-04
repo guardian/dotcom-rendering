@@ -83,4 +83,4 @@ const getGuardianConfiguration = (
 	});
 };
 
-export { getGuardianConfiguration, GuardianConfiguration };
+export { getGuardianConfiguration };
