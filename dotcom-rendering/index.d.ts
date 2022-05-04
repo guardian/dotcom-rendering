@@ -1216,7 +1216,7 @@ interface TrailType extends BaseTrailType {
 	supportingContent?: DCRSupportingContent[];
 	trailText?: string;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
-	dataLinkName?: string;
+	dataLinkName: string;
 }
 
 interface CAPITrailType extends BaseTrailType {
