@@ -53,7 +53,7 @@ const genEnv = async () => {
 				warn(
 					'[scripts/dotenv] could not generate .env file from AWS Parameter Store. Exiting',
 				);
-				process.exit(1);
+				throw err;
 			}
 
 			prompt(
