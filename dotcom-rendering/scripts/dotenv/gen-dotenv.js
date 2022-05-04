@@ -42,7 +42,7 @@ const genEnv = async () => {
 		const validEnv = await checkEnv();
 		if (!validEnv) {
 			log(
-				'Your .env file is missing, attemting to generate it from AWS parameters...',
+				'[scripts/dotenv] Your .env file is missing, attemting to generate it from AWS parameters...',
 			);
 			await genEnv();
 		}
