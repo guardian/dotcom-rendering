@@ -17,7 +17,7 @@ const decideSubLinkFormat = ({
 	containerFormat,
 	containerPalette,
 }: {
-	linkFormat?: CAPIFormat;
+	linkFormat?: ArticleFormat;
 	containerFormat: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
 }): ArticleFormat => {
@@ -25,18 +25,16 @@ const decideSubLinkFormat = ({
 	if (!linkFormat) return containerFormat;
 	// If the container has a special palette, use the container format
 	if (containerPalette) return containerFormat;
-	// Convert from CAPI to DCR format
-	const dcrLinkFormat = decideFormat(linkFormat);
 	// These types of article styles have background styles that sublinks
 	// need to respect so we use the container format here
 	if (
-		dcrLinkFormat.design === ArticleDesign.LiveBlog ||
-		dcrLinkFormat.design === ArticleDesign.Media ||
-		dcrLinkFormat.theme === ArticleSpecial.SpecialReport
+		linkFormat.design === ArticleDesign.LiveBlog ||
+		linkFormat.design === ArticleDesign.Media ||
+		linkFormat.theme === ArticleSpecial.SpecialReport
 	)
 		return containerFormat;
 	// Otherwise, we can allow the sublink to express its own styling
-	return dcrLinkFormat;
+	return linkFormat;
 };
 
 const enhanceSupportingContent = (
@@ -46,7 +44,9 @@ const enhanceSupportingContent = (
 ): DCRSupportingContent[] => {
 	return supportingContent.map((subLink) => ({
 		format: decideSubLinkFormat({
-			linkFormat: subLink.format,
+			linkFormat: subLink.format
+				? decideFormat(subLink.format)
+				: undefined,
 			containerFormat: format,
 			containerPalette,
 		}),
