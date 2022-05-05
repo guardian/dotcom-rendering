@@ -27,7 +27,11 @@ type CAPITheme = ThemePillar | ThemeSpecial;
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type CAPIDesign =
 	| 'ArticleDesign'
+	// Temporarily accept both the old MediaDesign and the new ones
 	| 'MediaDesign'
+	| 'GalleryDesign'
+	| 'AudioDesign'
+	| 'VideoDesign'
 	| 'ReviewDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'
