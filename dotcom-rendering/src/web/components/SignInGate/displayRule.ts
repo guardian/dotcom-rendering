@@ -1,6 +1,5 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
 import { onConsentChange } from '@guardian/consent-management-platform';
-import { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { getLocale } from '@guardian/libs';
 import {
 	DailyArticle,
@@ -69,38 +68,8 @@ export const isValidTag = (tags: TagType[]): boolean => {
 };
 
 export const hasRequiredConsents = (): Promise<boolean> => {
-	const hasConsentedToAll = (state: ConsentState) => {
-		const consentFlags = state.tcfv2?.consents
-			? Object.values(state.tcfv2.consents)
-			: [];
-		const vendorConsentFlags = state.tcfv2?.vendorConsents
-			? Object.values(state.tcfv2.vendorConsents)
-			: [];
-		const isEmpty =
-			consentFlags.length === 0 || vendorConsentFlags.length === 0;
-
-		return (
-			!isEmpty && [...consentFlags, ...vendorConsentFlags].every(Boolean)
-		);
-	};
-
 	return new Promise((resolve) => {
-		onConsentChange((state) => {
-			if (state.tcfv2) {
-				return resolve(hasConsentedToAll(state));
-			}
-
-			if (state.ccpa) {
-				return resolve(state.ccpa.doNotSell === false);
-			}
-
-			if (state.aus) {
-				return resolve(state.aus.personalisedAdvertising);
-			}
-
-			// this shouldn't ever be hit, but this is here as safety
-			return resolve(false);
-		});
+		onConsentChange((state) => resolve(state.canTarget));
 	});
 };
 
