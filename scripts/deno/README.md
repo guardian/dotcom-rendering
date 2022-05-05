@@ -1,9 +1,9 @@
 # Developing with Deno
 
 Deno is a runtime for JavaScript, used here broadly as an alternative to Node.
-At present Deno scripts are only used in this repo as part of github actions, 
-where it is installed as part of the action setup. Given this, it should only 
-be needed if you are working on these actions, so it is not currently added as 
+At present Deno scripts are only used in this repo as part of Github Actions,
+where it is installed as part of the action setup. Given this, it should only
+be needed if you are working on these actions, so it is not currently added as
 a dependency for the main repo.
 
 
