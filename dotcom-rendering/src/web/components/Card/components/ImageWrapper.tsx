@@ -33,7 +33,7 @@ const flexBasisStyles = ({
 							flex-basis: 40%;
 						}
 						${from.desktop} {
-							flex-basis: 33%;
+							flex-basis: 30%;
 						}
 					`;
 				case 'medium':
