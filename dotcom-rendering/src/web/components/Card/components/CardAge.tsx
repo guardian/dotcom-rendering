@@ -5,7 +5,6 @@ import { ArticleDesign, timeAgo } from '@guardian/libs';
 
 import { decidePalette } from '../../../lib/decidePalette';
 import ClockIcon from '../../../../static/icons/clock.svg';
-import { decideFrontPalette } from '../../../lib/decideFrontPalette';
 
 type Props = {
 	format: ArticleFormat;
@@ -51,10 +50,7 @@ export const CardAge = ({
 	showClock,
 }: Props) => {
 	const displayString = timeAgo(new Date(webPublicationDate).getTime());
-	const palette = decidePalette(
-		format,
-		containerPalette && decideFrontPalette(containerPalette),
-	);
+	const palette = decidePalette(format, containerPalette);
 
 	if (!displayString) {
 		return null;

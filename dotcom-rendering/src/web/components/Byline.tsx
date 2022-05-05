@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import { headline, textSans, until } from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
-import { decideFrontPalette } from '../lib/decideFrontPalette';
 
 type Props = {
 	text: string;
@@ -92,10 +91,7 @@ export const Byline = ({
 	size,
 	isCard,
 }: Props) => {
-	const palette = decidePalette(
-		format,
-		containerPalette && decideFrontPalette(containerPalette),
-	);
+	const palette = decidePalette(format, containerPalette);
 	return (
 		<span css={[bylineStyles(size, format), colourStyles(palette, isCard)]}>
 			{text}

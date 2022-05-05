@@ -7,7 +7,7 @@ import { LeftColumn } from './LeftColumn';
 import { ContainerTitle } from './ContainerTitle';
 import { Hide } from './Hide';
 import { Flex } from './Flex';
-import { decideFrontPalette } from '../lib/decideFrontPalette';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 
 type Props = {
 	title?: string;
@@ -121,17 +121,17 @@ export const ContainerLayout = ({
 	ophanComponentName,
 	containerPalette,
 }: Props) => {
-	const frontPalette =
-		containerPalette && decideFrontPalette(containerPalette);
+	const overrides =
+		containerPalette && decideContainerOverrides(containerPalette);
 	return (
 		<ElementContainer
 			sectionId={sectionId}
 			showSideBorders={sideBorders}
 			showTopBorder={showTopBorder}
 			padded={padSides}
-			borderColour={borderColour || frontPalette?.containerBorder}
+			borderColour={borderColour || overrides?.border.container}
 			backgroundColour={
-				backgroundColour || frontPalette?.containerBackground
+				backgroundColour || overrides?.background.container
 			}
 			element="section"
 			ophanComponentLink={ophanComponentLink}
@@ -140,15 +140,13 @@ export const ContainerLayout = ({
 			<Flex>
 				<LeftColumn
 					borderType={centralBorder}
-					borderColour={borderColour || frontPalette?.containerBorder}
+					borderColour={borderColour || overrides?.border.container}
 					size={leftColSize}
 				>
 					<>
 						<ContainerTitle
 							title={title}
-							fontColour={
-								fontColour || frontPalette?.containerText
-							}
+							fontColour={fontColour || overrides?.text.container}
 							description={description}
 							url={url}
 						/>
@@ -164,9 +162,7 @@ export const ContainerLayout = ({
 					<Hide when="above" breakpoint="leftCol">
 						<ContainerTitle
 							title={title}
-							fontColour={
-								fontColour || frontPalette?.containerText
-							}
+							fontColour={fontColour || overrides?.text.container}
 							description={description}
 							url={url}
 						/>

@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
-import { decideFrontPalette } from '../../../lib/decideFrontPalette';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
@@ -92,9 +91,6 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 };
 
 export const CardWrapper = ({ children, format, containerPalette }: Props) => {
-	const palette = decidePalette(
-		format,
-		containerPalette && decideFrontPalette(containerPalette),
-	);
+	const palette = decidePalette(format, containerPalette);
 	return <div css={cardStyles(format, palette)}>{children}</div>;
 };

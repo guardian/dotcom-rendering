@@ -196,19 +196,31 @@ type Palette = {
 	};
 };
 
-type FrontPalette = {
-	containerBorder: string;
-	containerBackground: string;
-	containerText: string;
-	dynamoHeadline: string;
-	dynamoKicker: string;
-	dynamoSublinkKicker: string;
-	dynamoMeta: string;
-	cardBackground: string;
-	cardHeadline: string;
-	cardKicker: string;
-	commentCount: string;
-	toggle: string;
+type ContainerOverrides = {
+	text: {
+		cardHeadline: Colour;
+		cardKicker: Colour;
+		cardByline: Colour;
+		cardFooter: Colour;
+		cardCommentCount: Colour;
+		dynamoHeadline: Colour;
+		dynamoKicker: Colour;
+		dynamoSublinkKicker: Colour;
+		dynamoMeta: Colour;
+		container: Colour;
+		containerToggle: Colour;
+	};
+	border: {
+		container: Colour;
+		lines: Colour;
+	};
+	background: {
+		container: Colour;
+		card: Colour;
+	};
+	topBar: {
+		card: Colour;
+	};
 };
 
 type Edition = 'UK' | 'US' | 'INT' | 'AU';

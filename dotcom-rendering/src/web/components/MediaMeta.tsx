@@ -6,7 +6,6 @@ import {
 	SvgCamera,
 	SvgVideo,
 } from '@guardian/source-react-components';
-import { decideFrontPalette } from '../lib/decideFrontPalette';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
@@ -107,10 +106,7 @@ export const MediaMeta = ({
 	format,
 	containerPalette,
 }: Props) => {
-	const palette = decidePalette(
-		format,
-		containerPalette && decideFrontPalette(containerPalette),
-	);
+	const palette = decidePalette(format, containerPalette);
 	return (
 		<div css={wrapperStyles}>
 			<MediaIcon mediaType={mediaType} palette={palette} />

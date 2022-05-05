@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import { until, body } from '@guardian/source-foundations';
-import { decideFrontPalette } from '../../../lib/decideFrontPalette';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
@@ -15,10 +14,7 @@ export const TrailTextWrapper = ({
 	format,
 	containerPalette,
 }: Props) => {
-	const palette = decidePalette(
-		format,
-		containerPalette && decideFrontPalette(containerPalette),
-	);
+	const palette = decidePalette(format, containerPalette);
 	return (
 		<div
 			css={css`

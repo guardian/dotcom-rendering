@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { decideFrontPalette } from '../../../lib/decideFrontPalette';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
@@ -41,10 +40,7 @@ export const CardFooter = ({
 	cardBranding,
 	supportingContent,
 }: Props) => {
-	const palette = decidePalette(
-		format,
-		containerPalette && decideFrontPalette(containerPalette),
-	);
+	const palette = decidePalette(format, containerPalette);
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
 		return <footer>{cardBranding}</footer>;
 	}

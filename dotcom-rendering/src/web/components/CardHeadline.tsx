@@ -10,7 +10,6 @@ import { Kicker } from './Kicker';
 import { Byline } from './Byline';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
-import { decideFrontPalette } from '../lib/decideFrontPalette';
 
 type Props = {
 	headlineText: string; // The text shown
@@ -190,10 +189,7 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 }: Props) => {
-	const palette = decidePalette(
-		format,
-		containerPalette && decideFrontPalette(containerPalette),
-	);
+	const palette = decidePalette(format, containerPalette);
 	return (
 		<>
 			<h4
