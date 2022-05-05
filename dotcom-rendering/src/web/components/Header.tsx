@@ -14,6 +14,7 @@ const headerStyles = css`
 	/* Prevent a scrollbar appearing here on IE/Edge */
 	-ms-overflow-style: none;
 	background-color: ${brand[400]};
+	height: 141px;
 `;
 
 type Props = {
