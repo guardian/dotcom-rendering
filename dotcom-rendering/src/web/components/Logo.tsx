@@ -13,12 +13,10 @@ const linkStyles = css`
 	margin-top: 10px;
 	margin-right: 54px;
 	margin-bottom: 21px;
-	height: 44px;
 	width: 146px;
 
 	${from.mobileMedium} {
 		margin-right: 10px;
-		height: 56px;
 		width: 195px;
 	}
 	${from.mobileLandscape} {
@@ -26,14 +24,12 @@ const linkStyles = css`
 	}
 	${from.tablet} {
 		margin-top: 8px;
-		height: 72px;
 		width: 224px;
 	}
 	${from.desktop} {
 		margin-top: 5px;
 		margin-bottom: 15px;
 		position: relative;
-		height: 95px;
 		width: 295px;
 	}
 	${from.wide} {
