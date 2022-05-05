@@ -3,7 +3,6 @@ import {
 	textSans,
 	neutral,
 	space,
-	remSpace,
 	text as textColor,
 } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
@@ -35,12 +34,12 @@ const bodyContentStyles = css`
 	blockquote {
 		font-style: italic;
 		color: ${textColor.supporting};
-		border-left: ${remSpace[1]} ${neutral[86]} solid;
-		margin-top: ${remSpace[1]};
+		border-left: ${space[1]}px ${neutral[86]} solid;
+		margin-top: ${space[1]}px;
 		margin-right: 0;
-		margin-bottom: ${remSpace[4]};
+		margin-bottom: ${space[4]}px;
 		margin-left: 0;
-		padding-left: ${remSpace[3]};
+		padding-left: ${space[3]}px;
 	}
 `;
 
