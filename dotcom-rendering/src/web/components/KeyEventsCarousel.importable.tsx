@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleFormat } from '@guardian/libs';
-import { KeyEventsCard } from './KeyEventsCards';
+import { Hide } from '@guardian/source-react-components';
 import { CarouselButtons } from './KeyEventsCarouselButtons';
 import { KeyEventCard } from './KeyEventCard';
 
@@ -11,7 +11,6 @@ interface Props {
 }
 
 const containerStyles = css`
-	overflow: hidden;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overflow-x: auto;
@@ -47,7 +46,7 @@ export const KeyEventsCarousel = ({
 		});
 	return (
 		<div id="key-event-carousel" css={containerStyles}>
-			<span id="key-event-cards" css={carouselStyles} ref={carouselRef}>
+			<span id="key-event-cards" css={carouselStyles}>
 				{transformedKeyEvents.map((keyEvent) => {
 					return (
 						<KeyEventCard
@@ -59,8 +58,9 @@ export const KeyEventsCarousel = ({
 					);
 				})}
 			</span>
-
-			<CarouselButtons />
+			<Hide until="desktop">
+				<CarouselButtons />
+			</Hide>
 		</div>
 	);
 };

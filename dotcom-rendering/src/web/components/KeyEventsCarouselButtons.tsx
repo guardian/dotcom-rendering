@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { neutral, brandAlt, space } from '@guardian/source-foundations';
 import {
-	Hide,
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
@@ -67,9 +66,13 @@ function isLastCardShow(index: number) {
 
 	const carousel = document.getElementById('key-event-carousel');
 	const width = carousel?.clientWidth;
-	const eventsInView = Math.round(width / 180);
-
-	return totalKeyEvents - eventsInView === index;
+	if (width) {
+		const eventsInView = Math.round(width / 180);
+		if (totalKeyEvents) {
+			return totalKeyEvents - eventsInView === index;
+		}
+		return false;
+	}
 }
 /**
  *
@@ -110,41 +113,39 @@ export const CarouselButtons = () => {
 	const isFirstCard = index === 1;
 
 	return (
-		<Hide until="desktop">
-			<span css={buttonContainerStyles}>
-				<button
-					css={[buttonStyles, isFirstCard && disabledButtonStyles]}
-					type="button"
-					aria-label="Move key events carousel backwards"
-					onClick={() =>
-						scrollOnClick(
-							'left',
-							setIndex,
-							index,
-							setIsLastCard,
-							isLastCard,
-						)
-					}
-				>
-					<SvgChevronLeftSingle />
-				</button>
-				<button
-					css={[buttonStyles, isLastCard && disabledButtonStyles]}
-					type="button"
-					aria-label="Move key events carousel forwards"
-					onClick={() =>
-						scrollOnClick(
-							'right',
-							setIndex,
-							index,
-							setIsLastCard,
-							isLastCard,
-						)
-					}
-				>
-					<SvgChevronRightSingle />
-				</button>
-			</span>
-		</Hide>
+		<span css={buttonContainerStyles}>
+			<button
+				css={[buttonStyles, isFirstCard && disabledButtonStyles]}
+				type="button"
+				aria-label="Move key events carousel backwards"
+				onClick={() =>
+					scrollOnClick(
+						'left',
+						setIndex,
+						index,
+						setIsLastCard,
+						isLastCard,
+					)
+				}
+			>
+				<SvgChevronLeftSingle />
+			</button>
+			<button
+				css={[buttonStyles, isLastCard && disabledButtonStyles]}
+				type="button"
+				aria-label="Move key events carousel forwards"
+				onClick={() =>
+					scrollOnClick(
+						'right',
+						setIndex,
+						index,
+						setIsLastCard,
+						isLastCard,
+					)
+				}
+			>
+				<SvgChevronRightSingle />
+			</button>
+		</span>
 	);
 };
