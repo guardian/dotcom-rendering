@@ -275,6 +275,7 @@ cardStories.add('with different image positions', () => {
 				<Card
 					{...basicCardProps}
 					imagePosition="left"
+					imageSize="large"
 					headlineText="left"
 				/>
 			</CardWrapper>
@@ -282,6 +283,7 @@ cardStories.add('with different image positions', () => {
 				<Card
 					{...basicCardProps}
 					imagePosition="right"
+					imageSize="large"
 					headlineText="right"
 				/>
 			</CardWrapper>
