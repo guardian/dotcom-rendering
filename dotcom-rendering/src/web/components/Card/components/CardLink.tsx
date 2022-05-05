@@ -12,6 +12,7 @@ const fauxLinkStyles = css`
 	right: 0;
 	bottom: 0;
 	left: 0;
+	opacity: 0;
 `;
 
 const linkStyles = (format: ArticleFormat, palette: Palette) => {
