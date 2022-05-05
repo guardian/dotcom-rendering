@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleFormat } from '@guardian/libs';
 import { KeyEventsCard } from './KeyEventsCards';
 import { CarouselButtons } from './KeyEventsCarouselButtons';
+import { KeyEventCard } from './KeyEventCard';
 
 interface Props {
 	keyEvents: Block[];
@@ -45,11 +46,11 @@ export const KeyEventsCarousel = ({
 			};
 		});
 	return (
-		<div id="key-events-carousel" css={containerStyles}>
-			<span id="key-events-cards" css={carouselStyles}>
+		<div id="key-event-carousel" css={containerStyles}>
+			<span id="key-event-cards" css={carouselStyles} ref={carouselRef}>
 				{transformedKeyEvents.map((keyEvent) => {
 					return (
-						<KeyEventsCard
+						<KeyEventCard
 							text={keyEvent.text}
 							url={keyEvent.url}
 							date={keyEvent.date}
