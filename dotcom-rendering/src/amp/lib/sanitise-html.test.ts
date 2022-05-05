@@ -1,4 +1,4 @@
-import { sanitise } from '../../lib/sanitise-html';
+import sanitise from 'sanitize-html';
 
 describe('sanitise-html', () => {
 	it('Remove rouge attributes', () => {

@@ -8,7 +8,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { sanitise } from '../../lib/sanitise-html';
+import sanitise from 'sanitize-html';
 import { decidePalette } from '../lib/decidePalette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 
@@ -214,10 +214,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 					allowedTags: false, // Leave tags from CAPI alone
 					allowedAttributes: false, // Leave attributes from CAPI alone
 					transformTags: {
-						a: (
-							tagName: string,
-							attribs: { [key: string]: any },
-						) => ({
+						a: (tagName, attribs) => ({
 							tagName, // Just return anchors as is
 							attribs: {
 								...attribs, // Merge into the existing attributes
