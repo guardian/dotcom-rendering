@@ -6,18 +6,15 @@ where it is installed as part of the action setup. Given this, it should only
 be needed if you are working on these actions, so it is not currently added as
 a dependency for the main repo.
 
-
 ## Installation
 
 To run locally, you will need to [install Deno](https://deno.land/#installation).
 It is packaged as a single executable.
 
-
 ## IDE support
 
 A Deno extension `denoland.vscode-deno` has been added to the recommended VSCode
 extensions list in the root of this repo.
-
 
 ## Troubleshooting
 
