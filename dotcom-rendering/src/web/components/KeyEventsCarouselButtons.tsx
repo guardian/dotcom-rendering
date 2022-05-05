@@ -63,9 +63,9 @@ const disabledButtonStyles = css`
 
 function isLastCardShow(index: number) {
 	const totalKeyEvents =
-		document.getElementById('key-events-cards')?.children.length;
+		document.getElementById('key-event-cards')?.children.length;
 
-	const carousel = document.getElementById('key-events-carousel');
+	const carousel = document.getElementById('key-event-carousel');
 	const width = carousel?.clientWidth;
 	const eventsInView = Math.round(width / 180);
 
@@ -85,7 +85,7 @@ function scrollOnClick(
 	setLastCard: any,
 	lastCard: boolean,
 ) {
-	const carousel = document.getElementById('key-events-carousel');
+	const carousel = document.getElementById('key-event-carousel');
 	if (
 		(lastCard && direction === 'right') ||
 		(index === 0 && direction === 'left')
