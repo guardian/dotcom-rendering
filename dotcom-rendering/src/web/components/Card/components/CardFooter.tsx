@@ -56,7 +56,7 @@ export const CardFooter = ({
 	) {
 		return (
 			<footer>
-				<div>{supportingContent}</div>
+				{supportingContent}
 				<div css={spaceBetween}>
 					{age}
 					<StraightLines
@@ -73,7 +73,7 @@ export const CardFooter = ({
 	if (format.design === ArticleDesign.Media) {
 		return (
 			<footer>
-				<div>{supportingContent}</div>
+				{supportingContent}
 				<div css={spaceBetween}>
 					{mediaMeta}
 					{/* Show age if we have it otherwise try for commentCount */}
@@ -86,7 +86,7 @@ export const CardFooter = ({
 	if (age) {
 		return (
 			<footer>
-				<div>{supportingContent}</div>
+				{supportingContent}
 				<div css={spaceBetween}>
 					{age}
 					{commentCount}
@@ -97,7 +97,7 @@ export const CardFooter = ({
 
 	return (
 		<footer>
-			<div>{supportingContent}</div>
+			{supportingContent}
 			<div css={flexEnd}>
 				<>{commentCount}</>
 			</div>

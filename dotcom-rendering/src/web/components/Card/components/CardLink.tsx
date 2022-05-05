@@ -9,7 +9,6 @@ import { getZIndex } from '../../../lib/getZIndex';
 const fauxLinkStyles = css`
 	position: absolute;
 	${getZIndex('card-link')};
-	opacity: 0;
 	top: 0;
 	right: 0;
 	bottom: 0;
@@ -109,12 +108,11 @@ export const CardLink = ({
 		containerPalette && decideFrontPalette(containerPalette),
 	);
 	return (
+		// eslint-disable-next-line -- we’ve got an empty link floating. See: https://github.com/guardian/dotcom-rendering/pull/4798
 		<a
 			href={linkTo}
 			css={[fauxLinkStyles, linkStyles(format, palette)]}
 			data-link-name={dataLinkName}
-		>
-			{linkTo}
-		</a>
+		/>
 	);
 };

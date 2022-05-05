@@ -2815,10 +2815,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-7.2.0.tgz#e5e7ba7c19484ebe0e405a93b1c389dae681acef"
   integrity sha512-Y2+XC0bP5mFacwtDlDqlQsbUyQwn4OSlpOTw3+u7t1RhJFw61SDYAER4gOpyJ4t+wQZFdk//LGJUjFqzDfEEuQ==
 
-"@guardian/commercial-core@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-3.0.0.tgz#8b2040e89b4dd8e317563938552776da4ced5bee"
-  integrity sha512-wB3y5p6eyuuekEK27S4OZ8vnVRMJ1tcHwi1SwmfIsYNEZLwYJRv3UxsLlTEeUmH8YAnYNgIEzJ390GfQ8iaVeA==
+"@guardian/commercial-core@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-3.3.0.tgz#c859a49a0949a864df97a5c23b21e641ef18d93e"
+  integrity sha512-F0vMNO9Rud7eLgtivz1YWOBvgHuAP1IgI98aJrnD9iPdeiX8Cf79ApinvdT46/p/rNgOEwn2UhoJq9MkhtyqXg==
 
 "@guardian/consent-management-platform@^10.5.0":
   version "10.5.0"
@@ -2836,10 +2836,10 @@
     customize-cra "^1.0.0"
     timeago.js "^4.0.2"
 
-"@guardian/eslint-plugin-source-react-components@^4.0.2":
-  version "4.0.2"
-  resolved "https://registry.npmjs.org/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-4.0.2.tgz#d62e2a34722b77ba8661935676ece072881e8f2f"
-  integrity sha512-28xzl6tImEMxBIYTZlzsSs0fIx1+THdIxHbC2LVzlztYPKMRCe8DHG5Va2bOUyB2o7Z2kmH6rh8cdSuD+qFZsw==
+"@guardian/eslint-plugin-source-react-components@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-4.1.0.tgz#a127f90721bccbc2bcd5e124f1214b897e0b5950"
+  integrity sha512-fplAX/t5nmabDeeSNu+8ZA9MIcCTgM/0bVW18hm18LTrju0w5pV0SYKJYncOdr969N8C+Qm7W10JAbDKaa2ETw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.9.1"
     "@typescript-eslint/parser" "5.9.1"
@@ -2883,10 +2883,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-0.0.35.tgz#fe3b7f3abac0a0612618ba62647c3a739eaf3e40"
   integrity sha512-i76aDzboAaMJLPso0+mqCrC8zvZHzEb1tOzofOUVtd0LCCc4G70KsqpVDcLOSX0dTmMD4XmEJJbrtPrqB/Va6w==
 
-"@guardian/source-react-components@^4.0.2":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-4.2.0.tgz#3440b095c69a4e9df919581a38c8b9d8129841b8"
-  integrity sha512-D/76oqTs7SqHyTzTInWIYlID5iOCWypyJncaegDV+ooDY0SF2c0bpc46tVRxG9ybrRuFvoOi9rCFFYZMWptINA==
+"@guardian/source-react-components@^4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-4.4.0.tgz#69cf404b56db3ca507702d29dae6a40eeb145cf4"
+  integrity sha512-5Q4Vl8ek0UV0Y9ob5y3Smq5xHs1d3lEzLynv5qqlYqVBlhze5Ypg5IzrPcEpKtcUaCIQeI9d5FevHM9fmm18sQ==
 
 "@guardian/support-dotcom-components@^1.0.2":
   version "1.0.2"
@@ -6498,9 +6498,9 @@ async-listener@^0.6.0:
     shimmer "^1.1.0"
 
 async@^2.6.2, async@^2.6.3, async@~2.6.1:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
-  integrity sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.6.4.tgz#706b7ff6084664cd7eae713f6f965433b5504221"
+  integrity sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==
   dependencies:
     lodash "^4.17.14"
 

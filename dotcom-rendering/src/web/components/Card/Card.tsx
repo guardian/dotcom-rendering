@@ -51,7 +51,7 @@ export type Props = {
 	commentCount?: number;
 	starRating?: number;
 	minWidthInPixels?: number;
-	// Ophan tracking
+	/** Used for Ophan tracking */
 	dataLinkName?: string;
 	// Labs
 	branding?: Branding;
@@ -162,6 +162,11 @@ export const Card = ({
 	const moreThanTwoSubLinks: boolean = !!(
 		supportingContent?.length && supportingContent.length > 2
 	);
+
+	const cardIsVertical =
+		imagePosition === 'top' || imagePosition === 'bottom';
+
+	const positionFooterUnderContent = !moreThanTwoSubLinks && cardIsVertical;
 
 	const renderFooter = ({
 		renderAge = true,
@@ -327,7 +332,7 @@ export const Card = ({
 							</Hide>
 						)}
 						{/* Show the card footer in the same column as the headline content */}
-						{!moreThanTwoSubLinks ? (
+						{positionFooterUnderContent ? (
 							renderFooter({ forceVertical: true })
 						) : (
 							<></>
@@ -336,7 +341,7 @@ export const Card = ({
 				</ContentWrapper>
 			</CardLayout>
 			{/* If there are more than two sublinks break footer out of the headline column into a row below */}
-			{moreThanTwoSubLinks ? renderFooter({}) : <></>}
+			{!positionFooterUnderContent ? renderFooter({}) : <></>}
 		</CardWrapper>
 	);
 };

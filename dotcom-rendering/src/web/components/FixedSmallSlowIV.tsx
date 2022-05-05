@@ -1,4 +1,5 @@
 import { ArticleDesign } from '@guardian/libs';
+
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -49,6 +50,7 @@ export const FixedSmallSlowIV = ({ trails, containerPalette }: Props) => {
 							commentCount={trail.commentCount}
 							starRating={trail.starRating}
 							branding={trail.branding}
+							dataLinkName={trail.dataLinkName}
 						/>
 					</LI>
 				);

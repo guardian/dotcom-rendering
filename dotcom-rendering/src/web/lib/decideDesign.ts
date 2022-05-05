@@ -11,7 +11,11 @@ export const decideDesign = ({
 	switch (design) {
 		case 'ArticleDesign':
 			return ArticleDesign.Standard;
+		// Temporarily accept both the old MediaDesign and the new ones
 		case 'MediaDesign':
+		case 'GalleryDesign':
+		case 'AudioDesign':
+		case 'VideoDesign':
 			return ArticleDesign.Media;
 		case 'ReviewDesign':
 			return ArticleDesign.Review;

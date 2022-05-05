@@ -27,7 +27,11 @@ type CAPITheme = ThemePillar | ThemeSpecial;
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type CAPIDesign =
 	| 'ArticleDesign'
+	// Temporarily accept both the old MediaDesign and the new ones
 	| 'MediaDesign'
+	| 'GalleryDesign'
+	| 'AudioDesign'
+	| 'VideoDesign'
 	| 'ReviewDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'
@@ -807,6 +811,8 @@ type DCRFrontCard = {
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
+	/** @see JSX.IntrinsicAttributes["data-link-name"] */
+	dataLinkName: string;
 };
 
 type FECollectionType = {
@@ -1220,6 +1226,8 @@ interface TrailType extends BaseTrailType {
 	format: ArticleFormat;
 	supportingContent?: DCRSupportingContent[];
 	trailText?: string;
+	/** @see JSX.IntrinsicAttributes["data-link-name"] */
+	dataLinkName: string;
 }
 
 interface CAPITrailType extends BaseTrailType {
@@ -1369,5 +1377,39 @@ declare namespace JSX {
 			props: any;
 			children: React.ReactNode;
 		};
+	}
+
+	interface IntrinsicAttributes {
+		/**
+		 * **Rendered Components – Ophan**
+		 *
+		 * The Ophan client automatically tracks components on the page
+		 * that have the `data-component` attribute.
+		 * To avoid race conditions, it is best to add this attribute only
+		 * to server-rendered HTML.
+		 *
+		 * Add `data-component="component-name"` to the element you want
+		 * to track.
+		 *
+		 * The page views table will then contain `component-name` when the
+		 * element is present on the page.
+		 */
+		'data-component'?: string;
+		/**
+		 * **Component Clicks – Ophan**
+		 *
+		 * The Ophan client automatically tracks click interactions
+		 * on components that have the `data-link-name` attribute.
+		 * To avoid race conditions, it is best to add this attribute only
+		 * to server-rendered HTML.
+		 *
+		 * Add `data-component="component-name"` to the element you want
+		 * to track. Then `add data-link-name="link-name"` to the anchor for which
+		 * clicks will be tracked.
+		 *
+		 * The page views table will then contain `link-name` when the
+		 * link is clicked.
+		 */
+		'data-link-name'?: string;
 	}
 }

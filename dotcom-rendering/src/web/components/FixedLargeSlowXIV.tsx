@@ -132,6 +132,7 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
+										dataLinkName={card.dataLinkName}
 									/>
 								</LI>
 							);

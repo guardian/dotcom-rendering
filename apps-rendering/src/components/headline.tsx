@@ -37,15 +37,18 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 		${headline.medium()}
 		${headlineTextColour(format)}
 		margin: 0;
-		${articleWidthStyles}
 	`;
 
 	switch (format.design) {
 		case ArticleDesign.Interview:
-			return baseStyles;
+			return css`
+				${baseStyles}
+				padding-bottom: ${remSpace[1]};
+			`;
 		default:
 			return css`
 				${baseStyles}
+				${articleWidthStyles}
 				${headlineBackgroundColour(format)}
 				padding-bottom: ${remSpace[6]};
 			`;
@@ -183,33 +186,52 @@ const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 		background-color: ${background.headline(format)};
 		position: relative;
 		white-space: pre-wrap;
-		padding: 0 ${remSpace[1]};
+		padding: 0 ${remSpace[3]} ${remSpace[1]};
 		display: inline;
 		box-decoration-break: clone;
+
+		${from.wide} {
+			padding: 0 ${remSpace[2]} ${remSpace[1]};
+		}
+
+		${darkModeCss`
+			background-color: ${background.headlineDark(format)};
+		`};
 	`;
 };
+
+const interviewHeadlineStyles: SerializedStyles = css`
+	padding-left: 0;
+	padding-right: ${remSpace[12]};
+	position: relative;
+
+	${from.wide} {
+		margin: 0 auto;
+	}
+
+	${from.phablet} {
+		width: 38.75rem;
+	}
+`;
 
 const Headline = ({ item }: Props): ReactElement => {
 	const format = getFormat(item);
 	switch (item.design) {
 		case ArticleDesign.Interview:
 			return (
-				<>
-					<div css={articleWidthStyles}>
-						<HeadlineTag tagText="Interview" format={format} />
-					</div>
+				<div css={interviewHeadlineStyles}>
+					<HeadlineTag tagText="Interview" format={format} />
 					<h1 css={getStyles(item)}>
 						<span css={headlineStyles(format)}>
 							{item.headline}
 						</span>
 					</h1>
-					<div css={articleWidthStyles}>
-						<HeadlineByline
-							bylineHtml={item.bylineHtml}
-							format={format}
-						/>
-					</div>
-				</>
+
+					<HeadlineByline
+						bylineHtml={item.bylineHtml}
+						format={format}
+					/>
+				</div>
 			);
 		default:
 			return (

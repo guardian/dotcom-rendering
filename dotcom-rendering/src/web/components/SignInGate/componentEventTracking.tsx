@@ -1,4 +1,4 @@
-import { OphanComponent, OphanComponentEvent } from '../../browser/ophan/ophan';
+import type { OphanComponent, OphanComponentEvent } from '@guardian/libs';
 import { CurrentSignInGateABTest } from './types';
 
 type ABTestVariant = {
@@ -25,13 +25,11 @@ type ComponentEventWithoutAction = {
 	abTest?: ABTestVariant;
 };
 
-const ophan = isServer ? { record: () => {} } : window?.guardian?.ophan;
+const ophan = isServer ? undefined : window?.guardian?.ophan;
 
 // ophan helper methods
-export const submitComponentEventTracking = (
-	componentEvent: OphanComponentEvent,
-) => {
-	ophan.record({ componentEvent });
+const submitComponentEventTracking = (componentEvent: OphanComponentEvent) => {
+	ophan?.record({ componentEvent });
 };
 
 export const submitViewEventTracking = (
