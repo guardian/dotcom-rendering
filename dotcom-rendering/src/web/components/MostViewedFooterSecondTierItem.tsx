@@ -80,14 +80,12 @@ type Props = {
 	trail: TrailType;
 	title: string;
 	showRightBorder?: boolean; // Prevents double borders
-	dataLinkName: string;
 };
 
 export const MostViewedFooterSecondTierItem = ({
 	trail,
 	title,
 	showRightBorder,
-	dataLinkName,
 }: Props) => {
 	const {
 		url,
@@ -104,7 +102,11 @@ export const MostViewedFooterSecondTierItem = ({
 
 	return (
 		<div css={itemStyles(showRightBorder)}>
-			<a css={headlineLink} href={url} data-link-name={dataLinkName}>
+			<a
+				css={headlineLink}
+				href={url}
+				data-link-name={trail.dataLinkName}
+			>
 				<Flex>
 					<div css={headlineStyles}>
 						<div css={titleStyles}>{title}</div>
