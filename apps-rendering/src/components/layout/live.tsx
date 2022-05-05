@@ -128,6 +128,7 @@ const Live: FC<Props> = ({ item }) => {
 			older={toNullable(item.pagedBlocks.pagination.older)}
 		/>
 	);
+
 	return (
 		<article
 			className="js-article"
@@ -142,6 +143,7 @@ const Live: FC<Props> = ({ item }) => {
 						<Metadata item={item} />
 					</div>
 				</GridItem>
+
 				<GridItem area="key-events">
 					<div css={keyEventsWrapperStyles} data-chromatic="ignore">
 						<KeyEvents
