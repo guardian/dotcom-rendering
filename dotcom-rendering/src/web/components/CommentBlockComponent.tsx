@@ -33,9 +33,9 @@ const bodyContentStyles = css`
 	}
 
 	blockquote {
-		font-style: italic; /* would something like "textSans({FontStyle: 'italic'})" work here..? */
+		font-style: italic;
 		color: ${textColor.supporting};
-		border-left: ${remSpace[1]} ${neutral[86]} solid; /* is this the right way to refer to the colour here..? */
+		border-left: ${remSpace[1]} ${neutral[86]} solid;
 		margin-top: ${remSpace[1]};
 		margin-right: 0;
 		margin-bottom: ${remSpace[4]};
