@@ -630,6 +630,18 @@ type DCRSupportingContent = {
 	format: ArticleFormat;
 };
 
+type FEEnrichedContent = {
+	embedHtml?: string;
+	embedCss?: string;
+	embedJs?: string;
+};
+
+type DCREnrichedContent = {
+	embedHtml?: string;
+	embedCss?: string;
+	embedJs?: string;
+};
+
 type FEContainerType =
 	| 'dynamic/fast'
 	| 'dynamic/package'
@@ -784,7 +796,7 @@ type FEFrontCard = {
 		showLivePlayable: boolean;
 	};
 	format?: CAPIFormat;
-	enriched?: Record<string, unknown>;
+	enriched?: FEEnrichedContent;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: string;
@@ -800,6 +812,8 @@ type DCRFrontCard = {
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
+	type?: string;
+	enriched?: DCREnrichedContent;
 };
 
 type FECollectionType = {
@@ -1207,6 +1221,8 @@ interface BaseTrailType {
 	starRating?: number;
 	linkText?: string;
 	branding?: Branding;
+	type?: string;
+	enriched?: DCREnrichedContent;
 }
 interface TrailType extends BaseTrailType {
 	palette?: never;

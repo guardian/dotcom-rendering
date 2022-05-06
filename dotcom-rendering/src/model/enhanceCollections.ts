@@ -1,5 +1,11 @@
 import { decideFormat } from '../web/lib/decideFormat';
 
+// There are certain collections used to add things like global styles to a front page
+// which we don't want to use on DCR as we'd like to try and migrate these styles into DCR itself.
+const blockedCollections = [
+	'ba744122-6c99-417f-8ddd-5a5905eb4928', // Palette styles new do not delete
+];
+
 const enhanceSupportingContent = (
 	supportingContent: FESupportingContent[],
 	format: ArticleFormat,
@@ -14,35 +20,28 @@ const enhanceSupportingContent = (
 };
 
 const enhanceCards = (collections: FEFrontCard[]): DCRFrontCard[] =>
-	collections
-		.filter(
-			(card: FEFrontCard): card is FEFrontCard & { format: CAPIFormat } =>
-				!!card.format,
-		)
-		.map((faciaCard) => {
-			const format = decideFormat(faciaCard.format);
-			return {
-				format,
-				url: faciaCard.header.url,
-				headline: faciaCard.header.headline,
-				trailText: faciaCard.card.trailText,
-				webPublicationDate: faciaCard.card.webPublicationDateOption
-					? new Date(
-							faciaCard.card.webPublicationDateOption,
-					  ).toISOString()
-					: undefined,
-				image: faciaCard.properties.maybeContent?.trail.trailPicture
-					?.allImages[0].url,
-				kickerText:
-					faciaCard.header.kicker?.item?.properties.kickerText,
-				supportingContent: faciaCard.supportingContent
-					? enhanceSupportingContent(
-							faciaCard.supportingContent,
-							format,
-					  )
-					: undefined,
-			};
-		});
+	collections.map((faciaCard) => {
+		const format = decideFormat(faciaCard.format || {});
+		return {
+			format,
+			url: faciaCard.header.url,
+			headline: faciaCard.header.headline,
+			trailText: faciaCard.card.trailText,
+			webPublicationDate: faciaCard.card.webPublicationDateOption
+				? new Date(
+						faciaCard.card.webPublicationDateOption,
+				  ).toISOString()
+				: undefined,
+			image: faciaCard.properties.maybeContent?.trail.trailPicture
+				?.allImages[0].url,
+			kickerText: faciaCard.header.kicker?.item?.properties.kickerText,
+			supportingContent: faciaCard.supportingContent
+				? enhanceSupportingContent(faciaCard.supportingContent, format)
+				: undefined,
+			type: faciaCard.type,
+			enriched: faciaCard.enriched,
+		};
+	});
 
 const decideContainerPalette = (
 	metadata?: { type: FEContainerPalette }[],
@@ -53,18 +52,20 @@ const decideContainerPalette = (
 export const enhanceCollections = (
 	collections: FECollectionType[],
 ): DCRCollectionType[] => {
-	return collections.map((collection) => {
-		const { id, displayName, collectionType } = collection;
-		return {
-			id,
-			displayName,
-			collectionType,
-			containerPalette: decideContainerPalette(
-				collection.config.metadata,
-			),
-			curated: enhanceCards(collection.curated),
-			backfill: enhanceCards(collection.backfill),
-			treats: enhanceCards(collection.treats),
-		};
-	});
+	return collections
+		.filter((collection) => !blockedCollections.includes(collection.id))
+		.map((collection) => {
+			const { id, displayName, collectionType } = collection;
+			return {
+				id,
+				displayName,
+				collectionType,
+				containerPalette: decideContainerPalette(
+					collection.config.metadata,
+				),
+				curated: enhanceCards(collection.curated),
+				backfill: enhanceCards(collection.backfill),
+				treats: enhanceCards(collection.treats),
+			};
+		});
 };

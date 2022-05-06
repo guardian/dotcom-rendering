@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/source-foundations';
@@ -57,6 +57,8 @@ export type Props = {
 	// Labs
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
+	type?: string;
+	enriched?: DCREnrichedContent;
 };
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
@@ -101,6 +103,11 @@ const starWrapper = css`
 	margin-top: 2px;
 `;
 
+const snapStyles = css`
+	overflow-y: hidden;
+	position: relative;
+`;
+
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 	<>
 		<Hide when="above" breakpoint="desktop">
@@ -143,6 +150,8 @@ export const Card = ({
 	dataLinkName,
 	branding,
 	supportingContent,
+	type,
+	enriched,
 }: Props) => {
 	// Decide how we position the image on the card
 	let imageCoverage: CardPercentageType | undefined;
@@ -234,6 +243,23 @@ export const Card = ({
 			/>
 		);
 	};
+
+	if (type === 'LinkSnap' && enriched?.embedHtml !== undefined) {
+		return (
+			<div css={snapStyles}>
+				<Global styles={enriched?.embedCss} />
+				<div
+					dangerouslySetInnerHTML={{ __html: enriched?.embedHtml }}
+				/>
+
+				{enriched?.embedJs !== undefined && (
+					<script
+						dangerouslySetInnerHTML={{ __html: enriched?.embedJs }}
+					/>
+				)}
+			</div>
+		);
+	}
 
 	return (
 		<CardWrapper format={format}>
