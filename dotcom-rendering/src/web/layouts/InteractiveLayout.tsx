@@ -743,7 +743,12 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzleBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

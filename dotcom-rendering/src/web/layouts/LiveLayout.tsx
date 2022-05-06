@@ -779,9 +779,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.filterKeyEvents
 													}
 													format={format}
-													switches={
+													enhanceTweetsSwitch={
 														CAPIArticle.config
 															.switches
+															.enhanceTweets
 													}
 													onFirstPage={
 														pagination.currentPage ===
@@ -1190,7 +1191,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzleBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

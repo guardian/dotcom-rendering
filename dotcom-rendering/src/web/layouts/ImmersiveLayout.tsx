@@ -669,7 +669,12 @@ export const ImmersiveLayout = ({
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzleBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>
