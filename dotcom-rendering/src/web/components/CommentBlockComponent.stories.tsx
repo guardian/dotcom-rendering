@@ -47,6 +47,7 @@ export const embeddedBlockquoteStory = () => {
 		<div
 			css={css`
 				padding: 20px;
+				width: 700px;
 			`}
 		>
 			<CommentBlockComponent
