@@ -4,11 +4,11 @@ import { css } from '@emotion/react';
 import type { BlockContributor } from '@guardian/common-rendering/src/components/liveBlockContainer';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { ArticleFormat } from '@guardian/libs';
-import { map, OptionKind, partition, withDefault } from '@guardian/types';
+import { map, partition, withDefault } from '@guardian/types';
 import { LastUpdated } from 'components/lastUpdated';
 import type { Contributor } from 'contributor';
 import { formatUTCTimeDateTz } from 'date';
-import { pipe, toNullable } from 'lib';
+import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
@@ -42,6 +42,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 					map(Number),
 					toNullable,
 				);
+				const blockLink = `?page=with:block-${block.id}#block-${block.id}`;
 
 				return (
 					<LiveBlockContainer
@@ -50,7 +51,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 						format={format}
 						blockTitle={block.title}
 						blockFirstPublished={blockFirstPublished}
-						blockId={block.id}
+						blockLink={blockLink}
 						// TODO pass this value in when available
 						isPinnedPost={false}
 						supportsDarkMode={true}
@@ -66,17 +67,14 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 								justify-content: end;
 							`}
 						>
-							{block.lastModified.kind === OptionKind.Some &&
-								block.firstPublished.kind === OptionKind.Some &&
-								block.lastModified.value >
-									block.firstPublished.value && (
-									<LastUpdated
-										lastUpdated={block.lastModified.value}
-										lastUpdatedDisplay={formatUTCTimeDateTz(
-											block.lastModified.value,
-										)}
-									/>
-								)}
+							{block.lastModified > block.firstPublished && (
+								<LastUpdated
+									lastUpdated={block.lastModified}
+									lastUpdatedDisplay={formatUTCTimeDateTz(
+										block.lastModified,
+									)}
+								/>
+							)}
 						</footer>
 					</LiveBlockContainer>
 				);
