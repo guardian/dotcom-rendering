@@ -104,8 +104,10 @@ const shouldShowDropCap = ({
 	return false;
 };
 
+/**
+ * https://www.npmjs.com/package/sanitize-html#default-options
+ */
 const sanitiserOptions: IOptions = {
-	// Defaults: https://www.npmjs.com/package/sanitize-html#what-are-the-default-options
 	allowedTags: false, // Leave tags from CAPI alone
 	allowedAttributes: false, // Leave attributes from CAPI alone
 	transformTags: {
