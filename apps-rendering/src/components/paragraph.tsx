@@ -60,7 +60,7 @@ const styles = (
 				}
 
 				// This fixes drop cap misalignment in Firefox
-				@supports (-moz-appearance:none) {
+				@supports (-moz-appearance: none) {
 					&:first-of-type:first-letter,
 					hr + &:first-letter {
 						margin-top: ${remSpace[3]};
