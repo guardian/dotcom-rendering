@@ -80,7 +80,7 @@ const buttonStyles = css`
 
 const disabledButtonStyles = css`
 	background-color: ${neutral[60]};
-	cursor: 'default';
+	cursor: default;
 
 	&:hover,
 	&:focus {
