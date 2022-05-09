@@ -18,7 +18,7 @@ const flexBasisStyles = ({
 	imageSize,
 }: {
 	imageSize: ImageSizeType;
-}): SerializedStyles | null => {
+}): SerializedStyles => {
 	switch (imageSize) {
 		case 'small':
 			return css`
@@ -52,6 +52,8 @@ export const ImageWrapper = ({
 	imagePositionOnMobile,
 }: Props) => {
 	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
+	const isHorizontalOnMobile =
+		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
 	return (
 		<div
 			css={[
@@ -68,7 +70,7 @@ export const ImageWrapper = ({
 					`,
 				/* Below tablet, we fix the size of the image and add a margin
 				   around it. The corresponding content flex grows to fill the space */
-				isHorizontal &&
+				isHorizontalOnMobile &&
 					css`
 						${until.tablet} {
 							margin-left: 6px;
