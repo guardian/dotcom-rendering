@@ -27,7 +27,8 @@ const adLabelsStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.adLabel(format)};
 	padding: ${remSpace[3]};
 	float: left;
-	width: calc(100% - ${remSpace[6]});
+	// We need to account for padding on both sides
+	width: calc(100% - 2 * ${remSpace[3]});
 
 	h1 {
 		margin: 0;
