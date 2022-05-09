@@ -174,33 +174,32 @@ export const KeyEventsCarousel = ({
 				})}
 			</span>
 			<Hide until="desktop">
-				<span css={buttonContainerStyles}>
-					<button
-						css={[
-							buttonStyles,
-							isFirstCard && disabledButtonStyles,
-						]}
-						type="button"
-						aria-label="Move key events carousel backwards"
-						onClick={() => {
-							if (isFirstCard) return;
-							goPrevious();
-						}}
-					>
-						<SvgChevronLeftSingle />
-					</button>
-					<button
-						css={[buttonStyles, isLastCard && disabledButtonStyles]}
-						type="button"
-						aria-label="Move key events carousel forwards"
-						onClick={() => {
-							if (isLastCard) return;
-							goNext();
-						}}
-					>
-						<SvgChevronRightSingle />
-					</button>
-				</span>
+				{keyEvents.length > 6 && (
+					<span css={buttonContainerStyles}>
+						<button
+							css={[
+								buttonStyles,
+								isFirstCard && disabledButtonStyles,
+							]}
+							type="button"
+							aria-label="Move key events carousel backwards"
+							onClick={goPrevious}
+						>
+							<SvgChevronLeftSingle />
+						</button>
+						<button
+							css={[
+								buttonStyles,
+								isLastCard && disabledButtonStyles,
+							]}
+							type="button"
+							aria-label="Move key events carousel forwards"
+							onClick={goNext}
+						>
+							<SvgChevronRightSingle />
+						</button>
+					</span>
+				)}
 			</Hide>
 		</div>
 	);
