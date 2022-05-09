@@ -9,6 +9,11 @@ type Props = {
 	imagePositionOnMobile: ImagePositionType;
 };
 
+/**
+ * This function works in partnership with its sibling in `ContentWrapper`. If you
+ * change any values here be sure to update that file as well.
+ *
+ */
 const flexBasisStyles = ({
 	imagePosition,
 	imageSize,

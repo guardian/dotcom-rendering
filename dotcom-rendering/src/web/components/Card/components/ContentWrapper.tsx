@@ -8,6 +8,11 @@ const sizingStyles = css`
 	justify-content: space-between;
 `;
 
+/**
+ * This function works in partnership with its sibling in `ImageWrapper`. If you
+ * change any values here be sure to update that file as well.
+ *
+ */
 const flexBasisStyles = ({
 	imagePosition,
 	imageSize,
