@@ -636,11 +636,7 @@ type FEEnrichedContent = {
 	embedJs?: string;
 };
 
-type DCREnrichedContent = {
-	embedHtml?: string;
-	embedCss?: string;
-	embedJs?: string;
-};
+type DCREnrichedContent = FEEnrichedContent;
 
 type FEContainerType =
 	| 'dynamic/fast'
