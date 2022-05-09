@@ -98,8 +98,9 @@ export const KeyEventsCarousel = ({
 	filterKeyEvents,
 	format,
 }: Props) => {
-	const [activeIndex, setActiveIndex] = useState(0);
+	const [activeIndex, setActiveIndex] = useState(6);
 	const [elements, setElements] = useState<Element[]>();
+	const cardWidth = 180;
 	const isFirstCard = activeIndex === 6;
 	const isLastCard = activeIndex === keyEvents.length - 1;
 
@@ -111,14 +112,8 @@ export const KeyEventsCarousel = ({
 	useEffect(() => {
 		function handleIntersect(entries: IntersectionObserverEntry[]) {
 			const entry = entries.find((e) => e.isIntersecting);
-			if (entry) {
-				const index = elements?.findIndex((e) => e === entry.target);
-
-				if (index) {
-					console.log('index is ', index);
-					setActiveIndex(index);
-				}
-			}
+			const index = elements?.findIndex((e) => e === entry?.target);
+			if (index) setActiveIndex(index);
 		}
 
 		const observer = new window.IntersectionObserver(handleIntersect, {
@@ -132,21 +127,17 @@ export const KeyEventsCarousel = ({
 		});
 	}, [elements]);
 
-	function goPrevious() {
-		if (activeIndex > 0 && elements) {
-			if (carousel) carousel.scrollLeft -= 180;
-
-			elements[activeIndex - 1].scrollIntoView({
-				behavior: 'smooth',
-			});
+	const goPrevious = () => {
+		if (carousel && !isFirstCard) {
+			carousel.scrollLeft -= cardWidth;
 		}
-	}
+	};
 
-	function goNext() {
-		if (elements && activeIndex < elements.length - 1) {
-			if (carousel) carousel.scrollLeft += 180;
+	const goNext = () => {
+		if (carousel && !isLastCard) {
+			carousel.scrollLeft += cardWidth;
 		}
-	}
+	};
 
 	const transformedKeyEvents = keyEvents
 		.filter((keyEvent) => {
