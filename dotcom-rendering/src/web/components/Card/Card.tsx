@@ -1,4 +1,4 @@
-import { css, Global } from '@emotion/react';
+import { css } from '@emotion/react';
 
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/source-foundations';
@@ -26,6 +26,7 @@ import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
 import { SupportingContent } from '../SupportingContent';
+import { Snap } from '../Snap';
 
 export type Props = {
 	linkTo: string;
@@ -101,11 +102,6 @@ const starWrapper = css`
 	position: absolute;
 	bottom: 0;
 	margin-top: 2px;
-`;
-
-const snapStyles = css`
-	overflow-y: hidden;
-	position: relative;
 `;
 
 const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
@@ -244,21 +240,8 @@ export const Card = ({
 		);
 	};
 
-	if (type === 'LinkSnap' && enriched?.embedHtml !== undefined) {
-		return (
-			<div css={snapStyles}>
-				<Global styles={enriched?.embedCss} />
-				<div
-					dangerouslySetInnerHTML={{ __html: enriched?.embedHtml }}
-				/>
-
-				{enriched?.embedJs !== undefined && (
-					<script
-						dangerouslySetInnerHTML={{ __html: enriched?.embedJs }}
-					/>
-				)}
-			</div>
-		);
+	if (type === 'LinkSnap') {
+		return <Snap enriched={enriched} />;
 	}
 
 	return (

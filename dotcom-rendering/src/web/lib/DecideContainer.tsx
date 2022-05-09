@@ -1,5 +1,4 @@
 import { DynamicFast } from '../components/DynamicFast';
-import { DynamicPackage } from '../components/DynamicPackage';
 import { DynamicSlow } from '../components/DynamicSlow';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
 import { FixedSmallSlowI } from '../components/FixedSmallSlowI';
