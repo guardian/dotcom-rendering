@@ -805,7 +805,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
 													}
-													id="1"
+													id="desktop"
 												/>
 											</Island>
 										</Hide>
@@ -824,7 +824,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														filterKeyEvents={
 															CAPIArticle.filterKeyEvents
 														}
-														id="2"
+														id="mobile"
 													/>
 												</Island>
 											</Hide>
