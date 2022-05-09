@@ -84,16 +84,6 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 		margin: 1em -${remSpace[3]};
 	}
 
-	// This class is applied in the nativeCommunication module
-	// to the first ad slot if Teads ads are enabled.
-	&.ad-slot-square {
-		height: 344px;
-		width: 320px;
-		margin-left: auto;
-		margin-right: auto;
-		padding-bottom: 0;
-	}
-
 	// This class is applied if the article has fewer than 15 paragraphs.
 	&.short:nth-of-type(1) {
 		${from.desktop} {
@@ -107,6 +97,16 @@ const adHeight = '258px';
 const adSlotStyles = css`
 	clear: both;
 	padding-bottom: ${adHeight};
+
+	// This class is applied in the nativeCommunication module
+	// to the first ad slot if Teads ads are enabled.
+	&.ad-slot-square {
+		height: 344px;
+		width: 320px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-bottom: 0;
+	}
 `;
 
 const AdSlot: FC<Props> = ({ className, paragraph, format }): ReactElement => (
