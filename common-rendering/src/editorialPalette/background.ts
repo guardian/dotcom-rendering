@@ -23,12 +23,14 @@ import { Colour } from '.';
 // ----- Functions ----- //
 
 const adSlot = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.Comment ||
-	format.design === ArticleDesign.Letter ||
-	format.design === ArticleDesign.Editorial) {
-		return neutral[86];
+	switch (format.design) {
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			return neutral[86];
+		default:
+			return neutral[97];
 	}
-	return  neutral[97];
 }
 
 const adSlotDark = (_format: ArticleFormat) => neutral[20];
