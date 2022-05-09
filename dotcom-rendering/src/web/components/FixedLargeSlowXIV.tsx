@@ -49,6 +49,8 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 						commentCount={primary.commentCount}
 						starRating={primary.starRating}
 						branding={primary.branding}
+						type={primary.type}
+						enriched={primary.enriched}
 					/>
 				</LI>
 				<LI
@@ -81,6 +83,8 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 						commentCount={secondary.commentCount}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
+						type={secondary.type}
+						enriched={secondary.enriched}
 					/>
 				</LI>
 			</UL>
@@ -129,6 +133,8 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 										starRating={card.starRating}
 										branding={card.branding}
 										dataLinkName={card.dataLinkName}
+										type={card.type}
+										enriched={card.enriched}
 									/>
 								</LI>
 							);

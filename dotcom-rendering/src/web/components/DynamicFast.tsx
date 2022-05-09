@@ -48,6 +48,8 @@ export const DynamicFast = ({ trails }: Props) => {
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
 						dataLinkName={primary.dataLinkName}
+						type={primary.type}
+						enriched={primary.enriched}
 					/>
 				</LI>
 				<LI
@@ -82,6 +84,8 @@ export const DynamicFast = ({ trails }: Props) => {
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
 						dataLinkName={secondary.dataLinkName}
+						type={secondary.type}
+						enriched={secondary.enriched}
 					/>
 				</LI>
 			</UL>
@@ -123,6 +127,8 @@ export const DynamicFast = ({ trails }: Props) => {
 								branding={card.branding}
 								supportingContent={card.supportingContent}
 								dataLinkName={card.dataLinkName}
+								type={card.type}
+								enriched={card.enriched}
 							/>
 						</LI>
 					);
@@ -175,6 +181,8 @@ export const DynamicFast = ({ trails }: Props) => {
 											card.supportingContent
 										}
 										dataLinkName={card.dataLinkName}
+										type={card.type}
+										enriched={card.enriched}
 									/>
 								</LI>
 							);

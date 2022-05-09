@@ -49,6 +49,8 @@ export const FixedSmallSlowIV = ({ trails }: Props) => {
 							starRating={trail.starRating}
 							branding={trail.branding}
 							dataLinkName={trail.dataLinkName}
+							type={trail.type}
+							enriched={trail.enriched}
 						/>
 					</LI>
 				);
