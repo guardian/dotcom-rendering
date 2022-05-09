@@ -22,6 +22,11 @@ const carouselStyles = css`
 	overflow-y: hidden;
 	display: flex;
 	flex-direction: column;
+	scrollbar-width: none; /* for Firefox */
+	-ms-overflow-style: none; /* for Internet Explorer, Edge */
+	&::-webkit-scrollbar {
+		display: none; /* for Chrome, Safari, and Opera */
+	}
 `;
 
 const containerStyles = css`
