@@ -30,6 +30,7 @@ import {
 	getLastOneOffContributionDate,
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
+	getPurchaseInfo,
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
@@ -173,6 +174,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 	useOnce((): void => {
 		setAutomat();
 
+		const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 		const requestData: HeaderPayload = {
 			tracking: {
 				ophanPageId: pageViewId,
@@ -189,6 +191,8 @@ const ReaderRevenueLinksRemote: React.FC<{
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 				),
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
+				purchaseInfo: getPurchaseInfo(),
+				isSignedIn,
 			},
 		};
 		getHeader(contributionsServiceUrl, requestData)

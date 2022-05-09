@@ -1,5 +1,6 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
+import { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
 
@@ -244,3 +245,18 @@ export const lazyFetchEmailWithTimeout =
 export const getContributionsServiceUrl = (
 	CAPIArticle: CAPIArticleType,
 ): string => process.env.SDC_URL ?? CAPIArticle.contributionsServiceUrl;
+
+type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];
+export const getPurchaseInfo = () => {
+	const purchaseInfoRaw = getCookie({
+		name: 'GU_CO_COMPLETE',
+		shouldMemoize: true,
+	});
+	let purchaseInfo: PurchaseInfo;
+
+	try {
+		purchaseInfo = purchaseInfoRaw && JSON.parse(purchaseInfoRaw);
+	} catch {} // eslint-disable-line no-empty
+
+	return purchaseInfo;
+};
