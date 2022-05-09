@@ -60,7 +60,10 @@ const disabledButtonStyles = css`
 	}
 `;
 
+
+// TODO: refactor islastcard
 function isLastCardShow(index: number) {
+	let isLastCard = false;
 	const totalKeyEvents =
 		document.getElementById('key-event-cards')?.children.length;
 
@@ -69,10 +72,11 @@ function isLastCardShow(index: number) {
 	if (width) {
 		const eventsInView = Math.round(width / 180);
 		if (totalKeyEvents) {
-			return totalKeyEvents - eventsInView === index;
+			isLastCard = totalKeyEvents - eventsInView === index;
+			return isLastCard;
 		}
-		return false;
 	}
+	return isLastCard;
 }
 /**
  *
