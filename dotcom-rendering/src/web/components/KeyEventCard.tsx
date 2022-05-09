@@ -89,7 +89,7 @@ export const KeyEventCard = ({ text, date, url, format }: KeyEvent) => {
 	const palette = decidePalette(format);
 
 	return (
-		<li css={listItemStyles}>
+		<li css={listItemStyles} id="key-event-card">
 			<Link priority="secondary" css={linkStyles} href={url}>
 				<time
 					dateTime={date.toISOString()}
