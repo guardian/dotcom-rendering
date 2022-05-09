@@ -783,15 +783,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								)}
 							</GridItem>
 							<GridItem area="body">
-								<Island>
-									<KeyEventsCarousel
-										keyEvents={CAPIArticle.keyEvents}
-										filterKeyEvents={
-											CAPIArticle.filterKeyEvents
-										}
-										format={format}
-									/>
-								</Island>
 								<div id="maincontent" css={bodyWrapper}>
 									{format.design ===
 										ArticleDesign.LiveBlog && (
