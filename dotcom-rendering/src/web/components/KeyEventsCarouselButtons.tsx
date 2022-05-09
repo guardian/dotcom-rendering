@@ -60,7 +60,6 @@ const disabledButtonStyles = css`
 	}
 `;
 
-
 // TODO: refactor islastcard
 function isLastCardShow(index: number) {
 	let isLastCard = false;
@@ -78,43 +77,55 @@ function isLastCardShow(index: number) {
 	}
 	return isLastCard;
 }
-/**
- *
- * A function to scroll the key events carousel on click.
- *
- * @param {string} direction The direction to scroll
- * @returns void
- */
-function scrollOnClick(
-	direction: 'left' | 'right',
-	setIndex: any,
-	index: number,
-	setLastCard: any,
-	lastCard: boolean,
-) {
-	const carousel = document.getElementById('key-event-carousel');
-	if (
-		(lastCard && direction === 'right') ||
-		(index === 0 && direction === 'left')
-	)
-		return;
-	if (carousel) {
-		if (direction === 'left') {
-			carousel.scrollLeft -= 180;
-			setIndex((i: number) => i - 1);
-		} else {
-			carousel.scrollLeft += 180;
-			setIndex((i: number) => i + 1);
-		}
-	}
-	const lastCardShowing = isLastCardShow(index);
-	setLastCard(lastCardShowing);
-}
+// /**
+//  *
+//  * A function to scroll the key events carousel on click.
+//  *
+//  * @param {string} direction The direction to scroll
+//  * @returns void
+//  */
+// function scrollOnClick(
+// 	direction: 'left' | 'right',
+// 	setIndex: any,
+// 	index: number,
+// 	setLastCard: any,
+// 	lastCard: boolean,
+// ) {
+// 	const carousel = document.getElementById('key-event-carousel');
+// 	if (
+// 		(lastCard && direction === 'right') ||
+// 		(index === 0 && direction === 'left')
+// 	)
+// 		return;
+// 	if (carousel) {
+// 		if (direction === 'left') {
+// 			carousel.scrollLeft -= 180;
+// 			setIndex((i: number) => i - 1);
+// 		} else {
+// 			carousel.scrollLeft += 180;
+// 			setIndex((i: number) => i + 1);
+// 		}
+// 	}
+// 	const lastCardShowing = isLastCardShow(index);
+// 	setLastCard(lastCardShowing);
+// }
 
-export const CarouselButtons = () => {
-	const [index, setIndex] = useState(1);
-	const [isLastCard, setIsLastCard] = useState(false);
-	const isFirstCard = index === 1;
+export const CarouselButtons = ({
+	goPrevious,
+	goNext,
+	activeIndex,
+	totalCards,
+}: {
+	goPrevious: any;
+	goNext: any;
+	activeIndex: number;
+	totalCards: number;
+}) => {
+	// const [index, setIndex] = useState(1);
+	// const [isLastCard, setIsLastCard] = useState(false);
+
+	const isFirstCard = activeIndex === 6;
+	const isLastCard = activeIndex === totalCards;
 
 	return (
 		<span css={buttonContainerStyles}>
@@ -122,14 +133,20 @@ export const CarouselButtons = () => {
 				css={[buttonStyles, isFirstCard && disabledButtonStyles]}
 				type="button"
 				aria-label="Move key events carousel backwards"
-				onClick={() =>
-					scrollOnClick(
-						'left',
-						setIndex,
-						index,
-						setIsLastCard,
-						isLastCard,
-					)
+				onClick={
+					() => {
+						console.log({ activeIndex });
+						console.log({ totalCards });
+						if (activeIndex === 6) return;
+						goPrevious();
+					}
+					// scrollOnClick(
+					// 	'left',
+					// 	setIndex,
+					// 	index,
+					// 	setIsLastCard,
+					// 	isLastCard,
+					// )
 				}
 			>
 				<SvgChevronLeftSingle />
@@ -138,14 +155,21 @@ export const CarouselButtons = () => {
 				css={[buttonStyles, isLastCard && disabledButtonStyles]}
 				type="button"
 				aria-label="Move key events carousel forwards"
-				onClick={() =>
-					scrollOnClick(
-						'right',
-						setIndex,
-						index,
-						setIsLastCard,
-						isLastCard,
-					)
+				onClick={
+					() => {
+						console.log({ activeIndex }, { totalCards });
+
+						if (activeIndex === totalCards) return;
+						goNext();
+					}
+
+					// scrollOnClick(
+					// 	'right',
+					// 	setIndex,
+					// 	index,
+					// 	setIsLastCard,
+					// 	isLastCard,
+					// )
 				}
 			>
 				<SvgChevronRightSingle />
