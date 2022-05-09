@@ -196,6 +196,34 @@ type Palette = {
 	};
 };
 
+type ContainerOverrides = {
+	text: {
+		cardHeadline: Colour;
+		cardStandfirst: Colour;
+		cardKicker: Colour;
+		cardByline: Colour;
+		cardFooter: Colour;
+		cardCommentCount: Colour;
+		dynamoHeadline: Colour;
+		dynamoKicker: Colour;
+		dynamoSublinkKicker: Colour;
+		dynamoMeta: Colour;
+		container: Colour;
+		containerToggle: Colour;
+	};
+	border: {
+		container: Colour;
+		lines: Colour;
+	};
+	background: {
+		container: Colour;
+		card: Colour;
+	};
+	topBar: {
+		card: Colour;
+	};
+};
+
 type Edition = 'UK' | 'US' | 'INT' | 'AU';
 
 type SharePlatform =
@@ -659,7 +687,6 @@ type FEContainerType =
 	| 'news/most-popular';
 
 type FEContainerPalette =
-	| `Branded`
 	| `EventPalette`
 	| `SombreAltPalette`
 	| `EventAltPalette`
@@ -667,13 +694,6 @@ type FEContainerPalette =
 	| `LongRunningAltPalette`
 	| `LongRunningPalette`
 	| `SombrePalette`
-	| `Canonical`
-	| `Dynamo`
-	| `Special`
-	| `DynamoLike`
-	| `Special`
-	| `Breaking`
-	| `Podcast`
 	| `BreakingPalette`;
 
 // TODO: These may need to be declared differently than the front types in the future

@@ -34,4 +34,6 @@ export const Default = () => (
 		<DynamicFast trails={trails} />
 	</ContainerLayout>
 );
-Default.story = { name: 'DynamicFast' };
+Default.story = {
+	name: 'DynamicFast',
+};
