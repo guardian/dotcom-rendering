@@ -52,7 +52,7 @@ const listItemStyles = css`
 	list-style: none;
 	display: block;
 	width: 150px;
-	scroll-snap-align: end;
+	scroll-snap-align: start;
 
 	${from.desktop} {
 		background-color: ${neutral[93]};
