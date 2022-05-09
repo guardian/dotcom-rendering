@@ -69,6 +69,7 @@ const enhanceCards = (
 	containerPalette?: DCRContainerPalette,
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
+		// Cards with snaps won't have a set format.
 		const format = decideFormat(faciaCard.format || {});
 		const group = `${faciaCard.card.group}${
 			faciaCard.display.isBoosted ? '+' : ''
