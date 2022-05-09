@@ -53,48 +53,13 @@ export type Props = {
 	commentCount?: number;
 	starRating?: number;
 	minWidthInPixels?: number;
-	// Ophan tracking
+	/** Used for Ophan tracking */
 	dataLinkName?: string;
 	// Labs
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
 	type?: string;
 	enriched?: DCREnrichedContent;
-};
-
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
-
-type CoveragesType = {
-	image: {
-		small: CardPercentageType;
-		medium: CardPercentageType;
-		large: CardPercentageType;
-		jumbo: CardPercentageType;
-	};
-	content: {
-		small: CardPercentageType;
-		medium: CardPercentageType;
-		large: CardPercentageType;
-		jumbo: CardPercentageType;
-	};
-};
-
-const coverages: CoveragesType = {
-	// coverages is how we set the image size relative to the space given
-	// to the headline. These percentages are passed to flex-basis inside the
-	// wrapper components
-	image: {
-		small: '25%',
-		medium: '50%',
-		large: '66%',
-		jumbo: '75%',
-	},
-	content: {
-		small: '75%',
-		medium: '50%',
-		large: '34%',
-		jumbo: '25%',
-	},
 };
 
 const starWrapper = css`
@@ -149,17 +114,6 @@ export const Card = ({
 	type,
 	enriched,
 }: Props) => {
-	// Decide how we position the image on the card
-	let imageCoverage: CardPercentageType | undefined;
-	let contentCoverage: CardPercentageType | undefined;
-	if (imageSize && imagePosition !== 'top') {
-		// We only specifiy an explicit width for the image when
-		// we're positioning left or right, not top. Top positioned
-		// images flow naturally
-		imageCoverage = coverages.image[imageSize];
-		contentCoverage = coverages.content[imageSize];
-	}
-
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
@@ -168,6 +122,11 @@ export const Card = ({
 	const moreThanTwoSubLinks: boolean = !!(
 		supportingContent?.length && supportingContent.length > 2
 	);
+
+	const cardIsVertical =
+		imagePosition === 'top' || imagePosition === 'bottom';
+
+	const positionFooterUnderContent = !moreThanTwoSubLinks && cardIsVertical;
 
 	const renderFooter = ({
 		renderAge = true,
@@ -254,7 +213,8 @@ export const Card = ({
 			>
 				{imageUrl && (
 					<ImageWrapper
-						percentage={imageCoverage}
+						imageSize={imageSize}
+						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
 					>
 						<img src={imageUrl} alt="" role="presentation" />
@@ -263,7 +223,10 @@ export const Card = ({
 						) : null}
 					</ImageWrapper>
 				)}
-				<ContentWrapper percentage={contentCoverage}>
+				<ContentWrapper
+					imageSize={imageSize}
+					imagePosition={imagePosition}
+				>
 					<Flex>
 						<HeadlineWrapper>
 							<CardHeadline
@@ -322,7 +285,7 @@ export const Card = ({
 							</Hide>
 						)}
 						{/* Show the card footer in the same column as the headline content */}
-						{!moreThanTwoSubLinks ? (
+						{positionFooterUnderContent ? (
 							renderFooter({ forceVertical: true })
 						) : (
 							<></>
@@ -331,7 +294,7 @@ export const Card = ({
 				</ContentWrapper>
 			</CardLayout>
 			{/* If there are more than two sublinks break footer out of the headline column into a row below */}
-			{moreThanTwoSubLinks ? renderFooter({}) : <></>}
+			{!positionFooterUnderContent ? renderFooter({}) : <></>}
 		</CardWrapper>
 	);
 };

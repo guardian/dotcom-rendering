@@ -27,7 +27,11 @@ type CAPITheme = ThemePillar | ThemeSpecial;
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type CAPIDesign =
 	| 'ArticleDesign'
+	// Temporarily accept both the old MediaDesign and the new ones
 	| 'MediaDesign'
+	| 'GalleryDesign'
+	| 'AudioDesign'
+	| 'VideoDesign'
 	| 'ReviewDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'
@@ -810,6 +814,8 @@ type DCRFrontCard = {
 	kickerText?: string;
 	type?: string;
 	enriched?: DCREnrichedContent;
+	/** @see JSX.IntrinsicAttributes["data-link-name"] */
+	dataLinkName: string;
 };
 
 type FECollectionType = {
@@ -987,6 +993,8 @@ interface BadgeType {
 }
 
 type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
+
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
@@ -1225,6 +1233,8 @@ interface TrailType extends BaseTrailType {
 	format: ArticleFormat;
 	supportingContent?: DCRSupportingContent[];
 	trailText?: string;
+	/** @see JSX.IntrinsicAttributes["data-link-name"] */
+	dataLinkName: string;
 }
 
 interface CAPITrailType extends BaseTrailType {
