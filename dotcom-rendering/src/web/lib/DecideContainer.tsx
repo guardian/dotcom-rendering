@@ -1,7 +1,6 @@
 import { DynamicFast } from '../components/DynamicFast';
 import { DynamicSlow } from '../components/DynamicSlow';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
-import { FixedSmallSlowI } from '../components/FixedSmallSlowI';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 
 type Props = {
@@ -19,8 +18,6 @@ export const DecideContainer = ({ trails, containerType }: Props) => {
 			return <FixedLargeSlowXIV trails={trails} />;
 		case 'fixed/small/slow-IV':
 			return <FixedSmallSlowIV trails={trails} />;
-		case 'fixed/small/slow-I':
-			return <FixedSmallSlowI trails={trails} />;
 		default:
 			return <p>{containerType} is not yet supported</p>;
 	}
