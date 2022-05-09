@@ -41,6 +41,7 @@ const Cards = ({ theme, count }: { theme: ArticleTheme; count: number }) => (
 				url={event.url}
 				date={event.date}
 				format={getFormat(theme)}
+				isSummary={event.isSummary}
 			/>
 		))}
 	</ul>

@@ -9,9 +9,10 @@ export interface KeyEvent {
 	text: string;
 	url: string;
 	format: ArticleFormat;
+	isSummary: boolean;
 }
 
-const linkStyles = css`
+const linkStyles = (bgColor: string) => css`
 	text-decoration: none;
 	line-height: 1.35;
 
@@ -22,7 +23,7 @@ const linkStyles = css`
 		height: 13px;
 		width: 13px;
 		border-radius: 50%;
-		background-color: ${neutral[46]};
+		background-color: ${bgColor};
 		margin-bottom: ${space[1]}px;
 		z-index: 2;
 
@@ -84,12 +85,19 @@ const timeStyles = css`
 	display: block;
 `;
 
-export const KeyEventCard = ({ text, date, url, format }: KeyEvent) => {
+export const KeyEventCard = ({
+	text,
+	date,
+	url,
+	format,
+	isSummary,
+}: KeyEvent) => {
 	const palette = decidePalette(format);
+	const bgColor = isSummary ? palette.text.keyEvent : neutral[46];
 
 	return (
 		<li css={listItemStyles}>
-			<Link priority="secondary" css={linkStyles} href={url}>
+			<Link priority="secondary" css={linkStyles(bgColor)} href={url}>
 				<time
 					dateTime={date.toISOString()}
 					data-relativeformat="med"
