@@ -199,6 +199,7 @@ type Palette = {
 type ContainerOverrides = {
 	text: {
 		cardHeadline: Colour;
+		cardStandfirst: Colour;
 		cardKicker: Colour;
 		cardByline: Colour;
 		cardFooter: Colour;

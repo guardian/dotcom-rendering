@@ -19,6 +19,7 @@ const textCardHeadline = (containerPalette: DCRContainerPalette): string => {
 	}
 };
 
+const textCardStandfirst = textCardHeadline;
 const textCardFooter = textCardHeadline;
 
 const textCardKicker = (containerPalette: DCRContainerPalette): string => {
@@ -276,6 +277,7 @@ export const decideContainerOverrides = (
 	return {
 		text: {
 			cardHeadline: textCardHeadline(containerPalette),
+			cardStandfirst: textCardStandfirst(containerPalette),
 			cardKicker: textCardKicker(containerPalette),
 			cardByline: textCardByline(containerPalette),
 			cardFooter: textCardFooter(containerPalette),

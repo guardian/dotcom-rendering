@@ -371,11 +371,7 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 	}
 };
 
-const textCardHeadline = (
-	format: ArticleFormat,
-	overrides?: ContainerOverrides,
-): string => {
-	if (overrides) return overrides.text.cardHeadline;
+const textCardHeadline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
 	if (format.display === ArticleDisplay.Immersive) return BLACK;
 	switch (format.design) {
@@ -404,22 +400,14 @@ const textCardHeadline = (
 const textCardStandfirst = textCardHeadline;
 
 /** same as textByline except for SpecialReport */
-const textCardByline = (
-	format: ArticleFormat,
-	overrides?: ContainerOverrides,
-): string => {
-	if (overrides) return overrides.text.cardByline;
+const textCardByline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[700];
 
 	return textByline(format);
 };
 
-const textCardKicker = (
-	format: ArticleFormat,
-	overrides?: ContainerOverrides,
-): string => {
-	if (overrides) return overrides.text.cardKicker;
+const textCardKicker = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.SpecialReport &&
 		(format.design === ArticleDesign.Comment ||
@@ -462,11 +450,7 @@ const textCardKicker = (
 	}
 };
 
-const textCardFooter = (
-	format: ArticleFormat,
-	overrides?: ContainerOverrides,
-): string => {
-	if (overrides) return overrides.text.cardFooter;
+const textCardFooter = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
@@ -585,11 +569,7 @@ const backgroundAvatar = (format: ArticleFormat): string => {
 	}
 };
 
-const backgroundCard = (
-	format: ArticleFormat,
-	overrides?: ContainerOverrides,
-): string => {
-	if (overrides) return overrides.background.card;
+const backgroundCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	switch (format.design) {
@@ -968,11 +948,7 @@ const borderArticleLinkHover = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const topBarCard = (
-	format: ArticleFormat,
-	overrides?: ContainerOverrides,
-): string => {
-	if (overrides) return overrides.topBar.card;
+const topBarCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return brandAltBackground.primary;
 	return pillarPalette[format.theme].main;
@@ -1051,11 +1027,7 @@ const borderArticle: (format: ArticleFormat) => string = (format) => {
 	return border.secondary;
 };
 
-const borderLines = (
-	format: ArticleFormat,
-	overrides?: ContainerOverrides,
-): string => {
-	if (overrides) return overrides.border.lines;
+const borderLines = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return border.primary;
 	return border.secondary;
 };
@@ -1212,12 +1184,14 @@ export const decidePalette = (
 			syndicationButton: textSyndicationButton(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
-			cardHeadline: textCardHeadline(format, overrides),
-			cardByline: textCardByline(format, overrides),
-			cardKicker: textCardKicker(format, overrides),
+			cardHeadline:
+				overrides?.text.cardHeadline || textCardHeadline(format),
+			cardByline: overrides?.text.cardByline || textCardByline(format),
+			cardKicker: overrides?.text.cardKicker || textCardKicker(format),
 			linkKicker: textLinkKicker(format),
-			cardStandfirst: textCardStandfirst(format, overrides),
-			cardFooter: textCardFooter(format, overrides),
+			cardStandfirst:
+				overrides?.text.cardStandfirst || textCardStandfirst(format),
+			cardFooter: overrides?.text.cardFooter || textCardFooter(format),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
@@ -1248,7 +1222,7 @@ export const decidePalette = (
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
-			card: backgroundCard(format, overrides),
+			card: overrides?.background.card || backgroundCard(format),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
@@ -1293,7 +1267,7 @@ export const decidePalette = (
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
-			lines: borderLines(format, overrides),
+			lines: overrides?.border.lines || borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			matchTab: matchTab(),
@@ -1301,7 +1275,7 @@ export const decidePalette = (
 			cardSupporting: borderCardSupporting(format),
 		},
 		topBar: {
-			card: topBarCard(format, overrides),
+			card: overrides?.topBar.card || topBarCard(format),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
