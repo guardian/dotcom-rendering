@@ -49,7 +49,7 @@ const flexBasisStyles = ({
 						flex-basis: 25%;
 					`;
 			}
-		// eslint-disable-next-line no-fallthrough
+		// eslint-disable-next-line no-fallthrough -- we know fallthrough will never happen here but eslint isn't so sure
 		case 'none':
 			return null;
 	}
