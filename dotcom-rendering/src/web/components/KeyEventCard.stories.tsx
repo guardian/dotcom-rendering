@@ -7,7 +7,7 @@ import {
 } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { events } from '../../../fixtures/manual/key-events';
-import { KeyEventCard } from './KeyEventCard';
+import { KeyEventCard } from './KeyEventCard.importable';
 
 const getFormat = (theme: ArticleTheme) => {
 	return {
