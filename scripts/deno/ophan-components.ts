@@ -1,11 +1,4 @@
-import { Octokit } from "https://cdn.skypack.dev/octokit?dts";
-
-const token = Deno.env.get("GITHUB_TOKEN");
-if (!token) {
-	console.warn("Missing GITHUB_TOKEN");
-	Deno.exit(1);
-}
-const octokit = new Octokit({ auth: token });
+import { octokit } from "./github.ts";
 
 type Platform = "frontend" | "dcr";
 type OphanAttribute = "data-link-name" | "data-component";
@@ -137,17 +130,28 @@ ${
 
 	const issue_number = issues[attribute];
 
-	await octokit.request("PATCH /repos/{owner}/{repo}/issues/{issue_number}", {
+	const {
+		data: { body: previousBody },
+	} = await octokit.rest.issues.get({
+		owner: "guardian",
+		repo: "dotcom-rendering",
+		issue_number,
+	});
+
+	const {
+		data: { body: newBody, html_url },
+	} = await octokit.rest.issues.update({
 		owner: "guardian",
 		repo: "dotcom-rendering",
 		issue_number,
 		body,
 	});
 
-	console.info(`Updated dotcom-rendering#${issue_number} ${attribute}`);
-	console.info(
-		`https://github.com/guardian/dotcom-rendering/issues/${issue_number}`
-	);
+	const change: string =
+		previousBody === newBody ? "[no change]" : `[some changes]`;
+
+	console.info(`PR dotcom-rendering#${issue_number} ${attribute} ${change}`);
+	console.info(html_url);
 };
 
 await updateIssue("data-component");

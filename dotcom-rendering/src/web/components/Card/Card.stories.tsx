@@ -268,72 +268,86 @@ cardStories.add('with media type', () => {
 	);
 });
 
-cardStories.add('with different image positions', () => {
-	return (
-		<>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imagePosition="left"
-					headlineText="left"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imagePosition="right"
-					headlineText="right"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imagePosition="top"
-					headlineText="top"
-				/>
-			</CardWrapper>
-		</>
-	);
-});
+cardStories
+	.add('with different image positions', () => {
+		return (
+			<>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						imagePosition="left"
+						imageSize="large"
+						headlineText="left"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						imagePosition="right"
+						imageSize="large"
+						headlineText="right"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						imagePosition="top"
+						headlineText="top"
+					/>
+				</CardWrapper>
+			</>
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
 
-cardStories.add('with different image sizes', () => {
-	return (
-		<>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imagePosition="left"
-					headlineText="small"
-					imageSize="small"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imagePosition="left"
-					headlineText="medium"
-					imageSize="medium"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imagePosition="left"
-					headlineText="large"
-					imageSize="large"
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imagePosition="left"
-					headlineText="jumbo"
-					imageSize="jumbo"
-				/>
-			</CardWrapper>
-		</>
-	);
-});
+cardStories
+	.add('with different image sizes', () => {
+		return (
+			<>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						imagePosition="left"
+						headlineText="small"
+						imageSize="small"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						imagePosition="left"
+						headlineText="medium"
+						imageSize="medium"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						imagePosition="left"
+						headlineText="large"
+						imageSize="large"
+					/>
+				</CardWrapper>
+				<CardWrapper>
+					<Card
+						{...basicCardProps}
+						imagePosition="left"
+						headlineText="jumbo"
+						imageSize="jumbo"
+					/>
+				</CardWrapper>
+			</>
+		);
+	})
+	.addParameters({
+		chromatic: {
+			viewports: [breakpoints.mobile, breakpoints.wide],
+		},
+	});
 
 cardStories.add('with pulsing dot', () => {
 	return (

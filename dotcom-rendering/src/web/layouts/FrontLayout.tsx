@@ -54,9 +54,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							idUrl={front.config.idUrl}
 							mmaUrl={front.config.mmaUrl}
 							discussionApiUrl={front.config.discussionApiUrl}
-							isAnniversary={
-								front.config.switches.anniversaryHeaderSvg
-							}
 							urls={front.nav.readerRevenueLinks.header}
 							remoteHeader={front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
@@ -138,10 +135,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								index + 1
 							} | ${ophanName}`}
 							ophanComponentName={`${ophanName}`}
+							containerPalette={collection.containerPalette}
 						>
 							<DecideContainer
 								trails={trails}
 								containerType={collection.collectionType}
+								containerPalette={collection.containerPalette}
 							/>
 						</ContainerLayout>
 					);

@@ -13,10 +13,9 @@ import {
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
-import { map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
-import { pipe } from 'lib';
-import type { FC, ReactElement } from 'react';
+import { maybeRender } from 'lib';
+import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 
@@ -144,19 +143,22 @@ const getStyles = ({
 	return standardStyles;
 };
 
-const Series: FC<Props> = ({ item }: Props) =>
-	pipe(
-		item.series,
-		map((series) => (
-			<nav css={getStyles(item)}>
-				<a css={getLinkStyles(item)} href={series.webUrl}>
-					{series.webTitle}
-				</a>
-			</nav>
-		)),
-		withDefault<ReactElement | null>(null),
-	);
+const Series: FC<Props> = ({ item }: Props) => {
+	// There are some inconsistencies between kickers in AR and DCR.
+	// Until a decision is made, we are not rendering this component in the Interview Design.
+	// See issue here: https://github.com/guardian/dotcom-rendering/issues/4760
+	if (item.design === ArticleDesign.Interview) {
+		return null;
+	}
 
+	return maybeRender(item.series, (series) => (
+		<nav css={getStyles(item)}>
+			<a css={getLinkStyles(item)} href={series.webUrl}>
+				{series.webTitle}
+			</a>
+		</nav>
+	));
+};
 // ----- Exports ----- //
 
 export default Series;

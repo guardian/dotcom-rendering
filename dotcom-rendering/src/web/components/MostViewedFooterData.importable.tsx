@@ -102,14 +102,12 @@ export const MostViewedFooterData = ({
 						<MostViewedFooterSecondTierItem
 							trail={decideTrail(data.mostCommented)}
 							title="Most commented"
-							dataLinkName="comment | group-0 | card-@1" // To match Frontend
 							showRightBorder={true}
 						/>
 					)}
 					{'mostShared' in data && (
 						<MostViewedFooterSecondTierItem
 							trail={decideTrail(data.mostShared)}
-							dataLinkName="news | group-0 | card-@1" // To match Frontend
 							title="Most shared"
 						/>
 					)}

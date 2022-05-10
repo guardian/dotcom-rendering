@@ -27,7 +27,11 @@ type CAPITheme = ThemePillar | ThemeSpecial;
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type CAPIDesign =
 	| 'ArticleDesign'
+	// Temporarily accept both the old MediaDesign and the new ones
 	| 'MediaDesign'
+	| 'GalleryDesign'
+	| 'AudioDesign'
+	| 'VideoDesign'
 	| 'ReviewDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'
@@ -189,6 +193,34 @@ type Palette = {
 		headlineByline: Colour;
 
 		standfirstLink: Colour;
+	};
+};
+
+type ContainerOverrides = {
+	text: {
+		cardHeadline: Colour;
+		cardStandfirst: Colour;
+		cardKicker: Colour;
+		cardByline: Colour;
+		cardFooter: Colour;
+		cardCommentCount: Colour;
+		dynamoHeadline: Colour;
+		dynamoKicker: Colour;
+		dynamoSublinkKicker: Colour;
+		dynamoMeta: Colour;
+		container: Colour;
+		containerToggle: Colour;
+	};
+	border: {
+		container: Colour;
+		lines: Colour;
+	};
+	background: {
+		container: Colour;
+		card: Colour;
+	};
+	topBar: {
+		card: Colour;
 	};
 };
 
@@ -655,7 +687,6 @@ type FEContainerType =
 	| 'news/most-popular';
 
 type FEContainerPalette =
-	| `Branded`
 	| `EventPalette`
 	| `SombreAltPalette`
 	| `EventAltPalette`
@@ -663,13 +694,6 @@ type FEContainerPalette =
 	| `LongRunningAltPalette`
 	| `LongRunningPalette`
 	| `SombrePalette`
-	| `Canonical`
-	| `Dynamo`
-	| `Special`
-	| `DynamoLike`
-	| `Special`
-	| `Breaking`
-	| `Podcast`
 	| `BreakingPalette`;
 
 // TODO: These may need to be declared differently than the front types in the future
@@ -800,6 +824,8 @@ type DCRFrontCard = {
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
+	/** @see JSX.IntrinsicAttributes["data-link-name"] */
+	dataLinkName: string;
 };
 
 type FECollectionType = {
@@ -977,6 +1003,8 @@ interface BadgeType {
 }
 
 type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
+
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
@@ -1213,6 +1241,8 @@ interface TrailType extends BaseTrailType {
 	format: ArticleFormat;
 	supportingContent?: DCRSupportingContent[];
 	trailText?: string;
+	/** @see JSX.IntrinsicAttributes["data-link-name"] */
+	dataLinkName: string;
 }
 
 interface CAPITrailType extends BaseTrailType {

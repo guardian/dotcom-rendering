@@ -34,18 +34,25 @@ interface Props {
 
 const styles = (format: ArticleFormat): SerializedStyles => {
 	const baseStyles = css`
-		${headline.medium()}
+		${headline.small()}
 		${headlineTextColour(format)}
 		margin: 0;
-		${articleWidthStyles}
+
+		${from.tablet} {
+			${headline.medium()}
+		}
 	`;
 
 	switch (format.design) {
 		case ArticleDesign.Interview:
-			return baseStyles;
+			return css`
+				${baseStyles}
+				padding-bottom: ${remSpace[1]};
+			`;
 		default:
 			return css`
 				${baseStyles}
+				${articleWidthStyles}
 				${headlineBackgroundColour(format)}
 				padding-bottom: ${remSpace[6]};
 			`;
@@ -53,7 +60,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 };
 
 const immersiveStyles = css`
-	${headline.medium({ fontWeight: 'bold' })}
+	${headline.small({ fontWeight: 'bold' })}
 	font-weight: 700;
 	padding: ${remSpace[1]} ${remSpace[3]} ${remSpace[6]} ${remSpace[3]};
 	margin: calc(80vh - 5rem) 0 0;
@@ -86,7 +93,11 @@ const immersiveStyles = css`
 `;
 
 const analysisStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.medium({ lineHeight: 'regular', fontWeight: 'light' })}
+	${headline.small({ lineHeight: 'regular', fontWeight: 'light' })}
+
+	${from.tablet} {
+		${headline.medium({ lineHeight: 'regular', fontWeight: 'light' })}
+	}
 
 	span {
 		box-shadow: inset 0 -0.025rem ${border.articleLink(format)};
@@ -99,39 +110,52 @@ const analysisStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const mediaStyles = css`
-	${headline.medium({ fontWeight: 'medium' })}
+	${headline.small({ fontWeight: 'medium' })}
+
+	${from.tablet} {
+		${headline.medium({ fontWeight: 'medium' })}
+	}
 `;
 
 const featureStyles = css`
-	${headline.medium({ fontWeight: 'bold' })}
+	${headline.small({ fontWeight: 'bold' })}
+
+	${from.tablet} {
+		${headline.medium({ fontWeight: 'bold' })}
+	}
 `;
 
 const interviewStyles = css`
-	${headline.medium({ fontWeight: 'bold' })}
+	${headline.small({ fontWeight: 'bold' })}
 	line-height: 1.25;
+
+	${from.tablet} {
+		${headline.medium({ fontWeight: 'bold' })}
+		line-height: 1.25;
+	}
 `;
 
 const commentStyles = css`
-	${headline.medium({ fontWeight: 'light' })}
+	${headline.small({ fontWeight: 'light' })}
 	padding-bottom: ${remSpace[1]};
+
+	${from.tablet} {
+		${headline.medium({ fontWeight: 'light' })}
+	}
 `;
 
 const labsStyles = css`
 	${textSans.xxxlarge({ lineHeight: 'regular' })}
+
+	${from.desktop} {
+		${textSans.xxxlarge({ lineHeight: 'regular' })}
+	}
 `;
 
 const immersiveLabs = css`
 	${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}
 	${from.desktop} {
 		${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}
-	}
-`;
-
-// stop headlines from growing in size with font resizer
-const fontSizeRestriction = css`
-	font-size: 28px;
-	${from.tablet} {
-		font-size: 34px;
 	}
 `;
 
@@ -147,33 +171,29 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 
 	if (format.theme === ArticleSpecial.Labs) {
-		return css(styles(format), labsStyles, fontSizeRestriction);
+		return css(styles(format), labsStyles);
 	}
 
 	switch (format.design) {
 		case ArticleDesign.Analysis:
-			return css(
-				styles(format),
-				analysisStyles(format),
-				fontSizeRestriction,
-			);
+			return css(styles(format), analysisStyles(format));
 		case ArticleDesign.Feature:
-			return css(styles(format), featureStyles, fontSizeRestriction);
+			return css(styles(format), featureStyles);
 		case ArticleDesign.Interview:
-			return css(styles(format), interviewStyles, fontSizeRestriction);
+			return css(styles(format), interviewStyles);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
-			return css(styles(format), commentStyles, fontSizeRestriction);
+			return css(styles(format), commentStyles);
 		case ArticleDesign.Media:
-			return css(styles(format), mediaStyles, fontSizeRestriction);
+			return css(styles(format), mediaStyles);
 
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
-			return css(styles(format), fontSizeRestriction, liveblogStyles);
+			return css(styles(format), liveblogStyles);
 
 		default:
-			return css(styles(format), fontSizeRestriction);
+			return css(styles(format));
 	}
 };
 
@@ -183,33 +203,52 @@ const headlineStyles = (format: ArticleFormat): SerializedStyles => {
 		background-color: ${background.headline(format)};
 		position: relative;
 		white-space: pre-wrap;
-		padding: 0 ${remSpace[1]};
+		padding: 0 ${remSpace[3]} ${remSpace[1]};
 		display: inline;
 		box-decoration-break: clone;
+
+		${from.wide} {
+			padding: 0 ${remSpace[2]} ${remSpace[1]};
+		}
+
+		${darkModeCss`
+			background-color: ${background.headlineDark(format)};
+		`};
 	`;
 };
+
+const interviewHeadlineStyles: SerializedStyles = css`
+	padding-left: 0;
+	padding-right: ${remSpace[12]};
+	position: relative;
+
+	${from.wide} {
+		margin: 0 auto;
+	}
+
+	${from.phablet} {
+		width: 38.75rem;
+	}
+`;
 
 const Headline = ({ item }: Props): ReactElement => {
 	const format = getFormat(item);
 	switch (item.design) {
 		case ArticleDesign.Interview:
 			return (
-				<>
-					<div css={articleWidthStyles}>
-						<HeadlineTag tagText="Interview" format={format} />
-					</div>
+				<div css={interviewHeadlineStyles}>
+					<HeadlineTag tagText="Interview" format={format} />
 					<h1 css={getStyles(item)}>
 						<span css={headlineStyles(format)}>
 							{item.headline}
 						</span>
 					</h1>
-					<div css={articleWidthStyles}>
-						<HeadlineByline
-							bylineHtml={item.bylineHtml}
-							format={format}
-						/>
-					</div>
-				</>
+
+					<HeadlineByline
+						bylineHtml={item.bylineHtml}
+						format={format}
+					/>
+				</div>
 			);
 		default:
 			return (

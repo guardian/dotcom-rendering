@@ -48,15 +48,16 @@ const listItemStyles = css`
 	position: relative;
 	padding-bottom: ${space[5]}px;
 	padding-top: ${space[3]}px;
-	padding-right: ${space[5]}px;
+	padding-right: ${space[3]}px;
 	background-color: ${neutral[97]};
 	list-style: none;
 	display: block;
-	width: 150px;
+	width: 162px;
 
 	${from.desktop} {
 		background-color: ${neutral[93]};
-		width: 180px;
+		width: 200px;
+		padding-right: ${space[5]}px;
 	}
 
 	&::before {
