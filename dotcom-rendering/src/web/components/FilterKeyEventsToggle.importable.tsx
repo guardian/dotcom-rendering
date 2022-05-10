@@ -22,10 +22,13 @@ const toggleWrapperStyles = css`
 
 interface Props {
 	filterKeyEvents: boolean;
-	breakpoint: "mobile" | "desktop";
+	breakpoint: 'mobile' | 'desktop';
 }
 
-export const FilterKeyEventsToggle = ({ filterKeyEvents, breakpoint }: Props) => {
+export const FilterKeyEventsToggle = ({
+	filterKeyEvents,
+	breakpoint,
+}: Props) => {
 	const [checked, setChecked] = useState(filterKeyEvents);
 
 	const handleClick = () => {
