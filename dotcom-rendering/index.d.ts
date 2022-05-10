@@ -601,6 +601,7 @@ interface FEFrontType {
 	webURL: string;
 	config: FEFrontConfigType;
 	commercialProperties: Record<string, unknown>;
+	pageFooter: FooterType;
 }
 
 type DCRFrontType = {
@@ -609,6 +610,7 @@ type DCRFrontType = {
 	editionId: Edition;
 	webTitle: string;
 	config: FEFrontConfigType;
+	pageFooter: FooterType;
 };
 
 type FEPressedPageType = {
