@@ -22,10 +22,10 @@ const toggleWrapperStyles = css`
 
 interface Props {
 	filterKeyEvents: boolean;
-	id: string;
+	breakpoint: "mobile" | "desktop";
 }
 
-export const FilterKeyEventsToggle = ({ filterKeyEvents, id }: Props) => {
+export const FilterKeyEventsToggle = ({ filterKeyEvents, breakpoint }: Props) => {
 	const [checked, setChecked] = useState(filterKeyEvents);
 
 	const handleClick = () => {
@@ -35,13 +35,13 @@ export const FilterKeyEventsToggle = ({ filterKeyEvents, id }: Props) => {
 		urlParams.delete('page'); // direct to the first page
 		urlParams.set('filterKeyEvents', checked ? 'false' : 'true');
 
-		window.location.hash = `filter-toggle-${id}`;
+		window.location.hash = `filter-toggle-${breakpoint}`;
 		window.location.search = urlParams.toString();
 	};
 
 	return (
 		<>
-			<span id={`filter-toggle-${id}`} />
+			<span id={`filter-toggle-${breakpoint}`} />
 			<div css={toggleWrapperStyles}>
 				<ToggleSwitch
 					label="Show key events only"
