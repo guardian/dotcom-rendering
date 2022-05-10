@@ -293,38 +293,19 @@ const textPullQuote = (format: ArticleFormat): string => {
 const textKeyEvent = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
+			return news[300];
 		case ArticlePillar.Sport:
-			return sport[400];
+			return sport[300];
 		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
+			return lifestyle[300];
 		case ArticlePillar.Culture:
-			return culture[350];
+			return culture[300];
 		case ArticlePillar.Opinion:
 			return opinion[300];
 		case ArticleSpecial.Labs:
-			return labs[400];
+			return labs[300];
 		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-	}
-};
-
-const textKeyEventUnderline = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[100];
-		case ArticlePillar.Sport:
-			return sport[100];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[100];
-		case ArticlePillar.Culture:
-			return culture[100];
-		case ArticlePillar.Opinion:
-			return opinion[100];
-		case ArticleSpecial.Labs:
-			return labs[200];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[100];
+			return specialReport[300];
 	}
 };
 
@@ -1179,6 +1160,63 @@ const backgroundMatchStats = (format: ArticleFormat): string => {
 	}
 };
 
+const backgroundKeyEventBullet = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
+const hoverKeyEventLink = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
+const hoverKeyEventBullet = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[200];
+		case ArticlePillar.Sport:
+			return sport[200];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[200];
+		case ArticlePillar.Culture:
+			return culture[200];
+		case ArticlePillar.Opinion:
+			return opinion[200];
+		case ArticleSpecial.Labs:
+			return labs[200];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[200];
+	}
+};
+
 export const decidePalette = (format: ArticleFormat): Palette => {
 	return {
 		text: {
@@ -1227,7 +1265,6 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			keyEvent: textKeyEvent(format),
-			keyEventUnderline: textKeyEventUnderline(format),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -1252,6 +1289,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			analysisUnderline: backgroundUnderline(format),
 			matchStats: backgroundMatchStats(format),
 			ageWarning: backgroundAgeWarning(format),
+			keyEventBullet: backgroundKeyEventBullet(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -1292,6 +1330,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
 			standfirstLink: hoverStandfirstLink(format),
+			keyEventLink: hoverKeyEventLink(format),
+			keyEventBullet: hoverKeyEventBullet(format),
 		},
 	};
 };

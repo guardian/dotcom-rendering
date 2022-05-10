@@ -13,10 +13,13 @@ export interface KeyEvent {
 }
 
 const linkStyles = (palette: Palette, isSummary: boolean) => {
-	const { keyEvent, keyEventUnderline } = palette.text;
+	const bulletColor = isSummary
+		? palette.background.keyEventBullet
+		: neutral[46];
 
-	const bgColor = isSummary ? keyEvent : neutral[46];
-	const bgColorHover = isSummary ? keyEventUnderline : neutral[0];
+	const bulletHoverColor = isSummary
+		? palette.hover.keyEventBullet
+		: neutral[0];
 
 	return css`
 		text-decoration: none;
@@ -29,7 +32,7 @@ const linkStyles = (palette: Palette, isSummary: boolean) => {
 			height: 13px;
 			width: 13px;
 			border-radius: 50%;
-			background-color: ${bgColor};
+			background-color: ${bulletColor};
 			margin-bottom: ${space[1]}px;
 			z-index: 2;
 
@@ -40,13 +43,12 @@ const linkStyles = (palette: Palette, isSummary: boolean) => {
 		}
 
 		&:hover::before {
-			background-color: ${bgColorHover};
+			background-color: ${bulletHoverColor};
 		}
 
 		&:hover {
 			span {
-				text-decoration: underline;
-				text-decoration-color: ${palette.text.keyEventUnderline};
+				border-bottom: 1px solid ${palette.hover.keyEventLink};
 			}
 		}
 	`;
