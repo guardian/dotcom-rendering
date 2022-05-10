@@ -77,9 +77,10 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 			</Island>
 			<Island clientOnly={true}>
 				<SetABTests
-					abTestSwitches={filterABTestSwitches(
-						CAPIArticle.config.switches,
-					)}
+					abTestSwitches={filterABTestSwitches({
+						...CAPIArticle.config.switches,
+						abWellBeingGateTest: true,
+					})}
 					pageIsSensitive={CAPIArticle.config.isSensitive}
 					isDev={!!CAPIArticle.config.isDev}
 				/>

@@ -40,6 +40,7 @@ interface ShowSignInGateProps {
 	signInUrl: string;
 	gateVariant: SignInGateComponent;
 	host: string;
+	tags: TagType[];
 }
 
 const dismissGate = (
@@ -99,6 +100,7 @@ const ShowSignInGate = ({
 	signInUrl,
 	gateVariant,
 	host,
+	tags,
 }: ShowSignInGateProps) => {
 	// use effect hook to fire view event tracking only on initial render
 	useEffect(() => {
@@ -114,6 +116,7 @@ const ShowSignInGate = ({
 	// therefore the gate is optional
 	// this is because we want a section of the audience to never see the gate
 	// but still fire a view event if they are eligible to see the gate
+	console.log('gateVariant.gate', !!gateVariant.gate);
 	if (gateVariant.gate) {
 		return gateVariant.gate({
 			guUrl: host,
@@ -126,6 +129,7 @@ const ShowSignInGate = ({
 			isComment:
 				format.design === ArticleDesign.Comment ||
 				format.design === ArticleDesign.Editorial,
+			tags,
 		});
 	}
 	// return nothing if no gate needs to be shown
@@ -159,6 +163,8 @@ export const SignInGateSelector = ({
 	const gateSelector = useSignInGateSelector();
 
 	const { pageViewId } = window.guardian.config.ophan;
+
+	console.log(isSignedIn, isGateDismissed, canShowGate);
 
 	useOnce(() => {
 		// this hook will fire when the sign in gate is dismissed
@@ -220,6 +226,8 @@ export const SignInGateSelector = ({
 		currentTest,
 	});
 
+	console.log('!isGateDismissed, canShowGate');
+	console.log(!isGateDismissed, canShowGate);
 	return (
 		<>
 			{/* Sign In Gate Display Logic */}
@@ -231,6 +239,7 @@ export const SignInGateSelector = ({
 					signInUrl={signInUrl}
 					gateVariant={gateVariant}
 					host={host}
+					tags={tags}
 				/>
 			)}
 		</>

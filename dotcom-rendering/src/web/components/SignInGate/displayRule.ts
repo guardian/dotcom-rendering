@@ -8,6 +8,7 @@ import {
 } from '../../lib/dailyArticleCount';
 import { hasUserDismissedGateMoreThanCount } from './dismissGate';
 import { CanShowGateProps } from './types';
+import { getTags } from './wellbeing';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n: number = 2): boolean => {
@@ -130,6 +131,32 @@ export const canShowSignInGate = ({
 			!isPreview &&
 			!isIOS9(),
 	);
+
+export const tagsForWellbeing = (tags: TagType[]): [boolean, TagType[]] => {
+	console.log('tags', tags);
+	const userTags = getTags();
+	console.log('userTags', userTags);
+	// const showForTags = ['environment/climate-crisis', 'world/coronavirus-outbreak'];
+
+	console.log([
+		userTags.some((showTag) => tags.map((tag) => tag.id).includes(showTag)),
+		userTags
+			.map((showTag) => tags.find((tag) => tag.id === showTag))
+			.filter(Boolean) as TagType[],
+	]);
+
+	return [
+		userTags.some((showTag) => tags.map((tag) => tag.id).includes(showTag)),
+		userTags
+			.map((showTag) => tags.find((tag) => tag.id === showTag))
+			.filter(Boolean) as TagType[],
+	];
+};
+
+export const canShowWellBeingGate = ({
+	tags,
+}: CanShowGateProps): Promise<boolean> =>
+	Promise.resolve(tagsForWellbeing(tags)[0]);
 
 export const canShowMandatoryUs: ({
 	isSignedIn,

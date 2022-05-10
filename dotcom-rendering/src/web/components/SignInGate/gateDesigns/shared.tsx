@@ -15,7 +15,7 @@ export const signInGateContainer = css`
 	max-width: 617px;
 
 	${from.desktop} {
-		min-height: 600px;
+		/* min-height: 600px; */
 	}
 `;
 
@@ -83,6 +83,17 @@ export const registerButton = css`
 export const laterButton = css`
 	/* stylelint-disable-next-line declaration-no-important */
 	color: ${brand[400]} !important;
+
+	/* stylelint-disable-next-line declaration-no-important */
+	margin-right: ${space[4]}px !important;
+
+	${from.mobileMedium} {
+		/* stylelint-disable-next-line declaration-no-important */
+		margin-right: ${space[9]}px !important;
+	}
+
+	/* stylelint-disable-next-line declaration-no-important */
+	text-decoration: none !important;
 `;
 
 export const signInLink = css`

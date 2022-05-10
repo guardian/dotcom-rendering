@@ -24,6 +24,7 @@ export interface SignInGateProps {
 	isComment?: boolean;
 	abTest?: CurrentSignInGateABTest;
 	isMandatory?: boolean;
+	tags?: TagType[];
 }
 
 export type CurrentSignInGateABTest = {

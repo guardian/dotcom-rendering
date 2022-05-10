@@ -19,9 +19,11 @@ export const useSignInGateSelector = ():
 	| [SignInGateComponent | null, CurrentSignInGateABTest | null] => {
 	const ab = useAB();
 	if (!ab) return undefined;
+	console.log('ab', ab);
 
 	const test: Runnable | null = ab.firstRunnableTest(signInGateTests);
 
+	console.log('test', test);
 	if (!test) {
 		return [null, null];
 	}
@@ -31,9 +33,12 @@ export const useSignInGateSelector = ():
 		variant: test.variantToRun.id,
 		id: test.id,
 	};
+	console.log('currentTest', currentTest);
 
 	const gateVariant =
 		signInGateTestVariantToGateMapping?.[currentTest.variant];
+
+	console.log('gateVariant', gateVariant);
 
 	if (!gateVariant) {
 		return [null, null];

@@ -2,6 +2,7 @@ import { ElementContainer } from '../ElementContainer';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
+import { WellBeingGateMain } from './gateDesigns/WellBeingGateMain';
 
 export default {
 	component: SignInGateSelector,
@@ -107,3 +108,17 @@ export const fakeSocialStandaloneVertical = () => {
 fakeSocialStandaloneVertical.story = {
 	name: 'fake_social_standalone_vertical',
 };
+
+export const wellbeingStandalone = () => {
+	return (
+		<ElementContainer>
+			<WellBeingGateMain
+				guUrl="https://theguardian.com"
+				signInUrl="https://profile.theguardian.com/"
+				dismissGate={() => {}}
+				ophanComponentId="test"
+			/>
+		</ElementContainer>
+	);
+};
+wellbeingStandalone.story = { name: 'wellbeing_standalone' };

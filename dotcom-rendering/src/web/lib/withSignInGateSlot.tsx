@@ -2,6 +2,7 @@
 // if the SignInGateSelector determines a gate should be rendered.
 
 import { Island } from '../components/Island';
+import { ManageWellbeingPrefs } from '../components/ManageWellbeingPrefs.importable';
 import { SignInGateSelector } from '../components/SignInGateSelector.importable';
 
 type Props = {
@@ -37,7 +38,7 @@ export const withSignInGateSlot = ({
 			<>
 				{element}
 				{/* Add the placeholder div after the second article element */}
-				{i === 1 && (
+				{i === 0 && (
 					<div id="sign-in-gate">
 						<Island clientOnly={true}>
 							<SignInGateSelector
@@ -53,6 +54,11 @@ export const withSignInGateSlot = ({
 							/>
 						</Island>
 					</div>
+				)}
+				{i === renderedElements.length - 1 && (
+					<Island clientOnly={true}>
+						<ManageWellbeingPrefs tags={tags} />
+					</Island>
 				)}
 			</>
 		);
