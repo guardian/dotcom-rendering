@@ -3,7 +3,6 @@ import { textSans, neutral, space, from } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
-import { submitComponentEvent } from '../browser/ophan/ophan';
 
 export interface KeyEvent {
 	date: Date;
@@ -95,15 +94,7 @@ export const KeyEventCard = ({ text, date, url, format }: KeyEvent) => {
 				priority="secondary"
 				css={linkStyles}
 				href={url}
-				onClick={() => {
-					submitComponentEvent({
-						component: {
-							componentType: 'KEY_EVENT_CARD',
-							id: url,
-						},
-						action: 'CLICK',
-					});
-				}}
+				data-link-name="key event card"
 			>
 				<time
 					dateTime={date.toISOString()}
