@@ -9,9 +9,7 @@ updates:
       directory: '/'
       schedule:
           interval: 'daily'
-      # Minimise the number of chromatic runs.
-      # We've enabled 'Require branches to be up to date before merging',
-      # so you won't be able to merge a dependabot PR unless you rebase manually anyway.
+      # Set to minimise the number of chromatic runs.
       rebase-strategy: "disabled"
     - package-ecosystem: 'npm'
       directory: '/apps-rendering'
@@ -20,7 +18,7 @@ updates:
       labels:
         - "AR Dependency"
       rebase-strategy: "disabled"
-    - package-ecosystem: "npm" 
+    - package-ecosystem: "npm"
       directory: "/dotcom-rendering"
       schedule:
         interval: "daily"
