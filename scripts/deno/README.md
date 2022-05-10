@@ -18,6 +18,10 @@ extensions list in the root of this repo.
 
 ## Troubleshooting
 
+VSCode won't assume that all `.ts` files are Deno files, so the Deno language
+server needs to be specifically enabled for the Deno scripts in this repo.
+Information on configuration can be found on [the extension page](https://marketplace.visualstudio.com/items?itemName=denoland.vscode-deno).
+
 The first time you open a Deno script in VSCode, it might red underline imports
 from third-party sources hosted on the web. These need to be fetched and cached
 locally, but once this has been done once, the relevant builds of these packages
