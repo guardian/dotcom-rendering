@@ -128,6 +128,7 @@ type Palette = {
 		shareCountUntilDesktop: Colour;
 		cricketScoreboardLink: Colour;
 		keyEvent: Colour;
+		keyEventUnderline: Colour;
 	};
 	background: {
 		article: Colour;
@@ -191,7 +192,6 @@ type Palette = {
 	};
 	hover: {
 		headlineByline: Colour;
-
 		standfirstLink: Colour;
 	};
 };

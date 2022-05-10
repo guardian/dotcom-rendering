@@ -12,37 +12,45 @@ export interface KeyEvent {
 	isSummary: boolean;
 }
 
-const linkStyles = (bgColor: string) => css`
-	text-decoration: none;
-	line-height: 1.35;
+const linkStyles = (palette: Palette, isSummary: boolean) => {
+	const { keyEvent, keyEventUnderline } = palette.text;
 
-	&::before {
-		content: '';
-		display: block;
-		position: relative;
-		height: 13px;
-		width: 13px;
-		border-radius: 50%;
-		background-color: ${bgColor};
-		margin-bottom: ${space[1]}px;
-		z-index: 2;
+	const bgColor = isSummary ? keyEvent : neutral[46];
+	const bgColorHover = isSummary ? keyEventUnderline : neutral[0];
 
-		${from.tablet} {
-			height: 15px;
-			width: 15px;
+	return css`
+		text-decoration: none;
+		line-height: 1.35;
+
+		&::before {
+			content: '';
+			display: block;
+			position: relative;
+			height: 13px;
+			width: 13px;
+			border-radius: 50%;
+			background-color: ${bgColor};
+			margin-bottom: ${space[1]}px;
+			z-index: 2;
+
+			${from.tablet} {
+				height: 15px;
+				width: 15px;
+			}
 		}
-	}
 
-	&:hover::before {
-		background-color: ${neutral[0]};
-	}
-
-	&:hover {
-		span {
-			text-decoration: underline;
+		&:hover::before {
+			background-color: ${bgColorHover};
 		}
-	}
-`;
+
+		&:hover {
+			span {
+				text-decoration: underline;
+				text-decoration-color: ${palette.text.keyEventUnderline};
+			}
+		}
+	`;
+};
 
 const listItemStyles = css`
 	position: relative;
@@ -93,11 +101,14 @@ export const KeyEventCard = ({
 	isSummary,
 }: KeyEvent) => {
 	const palette = decidePalette(format);
-	const bgColor = isSummary ? palette.text.keyEvent : neutral[46];
 
 	return (
 		<li css={listItemStyles}>
-			<Link priority="secondary" css={linkStyles(bgColor)} href={url}>
+			<Link
+				priority="secondary"
+				css={linkStyles(palette, isSummary)}
+				href={url}
+			>
 				<time
 					dateTime={date.toISOString()}
 					data-relativeformat="med"

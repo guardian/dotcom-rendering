@@ -309,6 +309,25 @@ const textKeyEvent = (format: ArticleFormat): string => {
 	}
 };
 
+const textKeyEventUnderline = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[100];
+		case ArticlePillar.Sport:
+			return sport[100];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[100];
+		case ArticlePillar.Culture:
+			return culture[100];
+		case ArticlePillar.Opinion:
+			return opinion[100];
+		case ArticleSpecial.Labs:
+			return labs[200];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[100];
+	}
+};
+
 const textStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -1208,6 +1227,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			keyEvent: textKeyEvent(format),
+			keyEventUnderline: textKeyEventUnderline(format),
 		},
 		background: {
 			article: backgroundArticle(format),
