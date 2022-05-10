@@ -602,6 +602,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</Hide>
 				</ElementContainer>
+
+				{/* This div is used to contain the Toast */}
 				<div>
 					{format.design === ArticleDesign.LiveBlog && (
 						<>
@@ -639,153 +641,157 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</>
 					)}
 
-					<article>
-						<ElementContainer
-							showTopBorder={false}
-							backgroundColour={palette.background.article}
-							borderColour={palette.border.article}
-							padded={false}
-						>
-							<LiveGrid>
-								<GridItem area="media">
-									<div css={maxWidth}>
-										{footballMatchUrl && (
-											<Island
-												clientOnly={true}
-												placeholderHeight={40}
-											>
-												<GetMatchTabs
-													matchUrl={footballMatchUrl}
-													format={format}
-												/>
-											</Island>
-										)}
-										{cricketMatchUrl && (
-											<Island
-												clientOnly={true}
-												placeholderHeight={172}
-											>
-												<GetCricketScoreboard
-													matchUrl={cricketMatchUrl}
-													format={format}
-												/>
-											</Island>
-										)}
-										<MainMedia
-											format={format}
-											elements={
-												CAPIArticle.mainMediaElements
-											}
-											adTargeting={adTargeting}
-											host={host}
-											pageId={CAPIArticle.pageId}
-											webTitle={CAPIArticle.webTitle}
-											ajaxUrl={CAPIArticle.config.ajaxUrl}
-											switches={
-												CAPIArticle.config.switches
-											}
-											isSensitive={
-												CAPIArticle.config.isSensitive
-											}
-											isAdFreeUser={
-												CAPIArticle.isAdFreeUser
-											}
-										/>
-									</div>
-								</GridItem>
-								<GridItem area="info" element="aside">
-									{/* Lines */}
-									<Hide until="desktop">
-										<div
-											css={[maxWidth, sidePaddingDesktop]}
-										>
-											<Lines
-												cssOverrides={css`
-													display: block;
-												`}
-												count={decideLineCount(
-													format.design,
-												)}
-												effect={decideLineEffect(
-													format.design,
-													format.theme,
-												)}
-											/>
-										</div>
-									</Hide>
-									{/* Meta */}
-									<Hide until="desktop">
-										<div
-											css={[maxWidth, sidePaddingDesktop]}
-										>
-											<ArticleMeta
-												branding={branding}
-												format={format}
-												pageId={CAPIArticle.pageId}
-												webTitle={CAPIArticle.webTitle}
-												author={CAPIArticle.author}
-												tags={CAPIArticle.tags}
-												primaryDateline={
-													CAPIArticle.webPublicationDateDisplay
-												}
-												secondaryDateline={
-													CAPIArticle.webPublicationSecondaryDateDisplay
-												}
-												isCommentable={
-													CAPIArticle.isCommentable
-												}
-												discussionApiUrl={
-													CAPIArticle.config
-														.discussionApiUrl
-												}
-												shortUrlId={
-													CAPIArticle.config
-														.shortUrlId
-												}
-												ajaxUrl={
-													CAPIArticle.config.ajaxUrl
-												}
-												showShareCount={
-													CAPIArticle.config.switches
-														.serverShareCounts
-												}
-											/>
-										</div>
-									</Hide>
-									{/* Key events */}
-									<div
-										css={[
-											!footballMatchUrl && sticky,
-											keyEventsMargins,
-											sidePaddingDesktop,
-										]}
-									>
-										<KeyEventsContainer
-											format={format}
-											keyEvents={CAPIArticle.keyEvents}
-											filterKeyEvents={
-												CAPIArticle.filterKeyEvents
-											}
-										/>
-									</div>
-									{/* Match stats */}
+					<ElementContainer
+						showTopBorder={false}
+						backgroundColour={palette.background.article}
+						borderColour={palette.border.article}
+						padded={false}
+					>
+						<LiveGrid>
+							<GridItem area="media">
+								<div css={maxWidth}>
 									{footballMatchUrl && (
 										<Island
-											deferUntil="visible"
 											clientOnly={true}
-											placeholderHeight={800}
+											placeholderHeight={40}
 										>
-											<GetMatchStats
+											<GetMatchTabs
 												matchUrl={footballMatchUrl}
 												format={format}
 											/>
 										</Island>
 									)}
-								</GridItem>
-								<GridItem area="body">
-									<div id="maincontent" css={bodyWrapper}>
+									{cricketMatchUrl && (
+										<Island
+											clientOnly={true}
+											placeholderHeight={172}
+										>
+											<GetCricketScoreboard
+												matchUrl={cricketMatchUrl}
+												format={format}
+											/>
+										</Island>
+									)}
+									<MainMedia
+										format={format}
+										elements={CAPIArticle.mainMediaElements}
+										adTargeting={adTargeting}
+										host={host}
+										pageId={CAPIArticle.pageId}
+										webTitle={CAPIArticle.webTitle}
+										ajaxUrl={CAPIArticle.config.ajaxUrl}
+										switches={CAPIArticle.config.switches}
+										isSensitive={
+											CAPIArticle.config.isSensitive
+										}
+										isAdFreeUser={CAPIArticle.isAdFreeUser}
+									/>
+								</div>
+							</GridItem>
+							<GridItem area="info" element="aside">
+								{/* Lines */}
+								<Hide until="desktop">
+									<div css={[maxWidth, sidePaddingDesktop]}>
+										<Lines
+											cssOverrides={css`
+												display: block;
+											`}
+											count={decideLineCount(
+												format.design,
+											)}
+											effect={decideLineEffect(
+												format.design,
+												format.theme,
+											)}
+										/>
+									</div>
+								</Hide>
+								{/* Meta */}
+								<Hide until="desktop">
+									<div css={[maxWidth, sidePaddingDesktop]}>
+										<ArticleMeta
+											branding={branding}
+											format={format}
+											pageId={CAPIArticle.pageId}
+											webTitle={CAPIArticle.webTitle}
+											author={CAPIArticle.author}
+											tags={CAPIArticle.tags}
+											primaryDateline={
+												CAPIArticle.webPublicationDateDisplay
+											}
+											secondaryDateline={
+												CAPIArticle.webPublicationSecondaryDateDisplay
+											}
+											isCommentable={
+												CAPIArticle.isCommentable
+											}
+											discussionApiUrl={
+												CAPIArticle.config
+													.discussionApiUrl
+											}
+											shortUrlId={
+												CAPIArticle.config.shortUrlId
+											}
+											ajaxUrl={CAPIArticle.config.ajaxUrl}
+											showShareCount={
+												CAPIArticle.config.switches
+													.serverShareCounts
+											}
+										/>
+									</div>
+								</Hide>
+								{/* Key events */}
+								<div
+									css={[
+										!footballMatchUrl && sticky,
+										keyEventsMargins,
+										sidePaddingDesktop,
+									]}
+								>
+									<KeyEventsContainer
+										format={format}
+										keyEvents={CAPIArticle.keyEvents}
+										filterKeyEvents={
+											CAPIArticle.filterKeyEvents
+										}
+									/>
+								</div>
+								{/* Match stats */}
+								{footballMatchUrl && (
+									<Island
+										deferUntil="visible"
+										clientOnly={true}
+										placeholderHeight={800}
+									>
+										<GetMatchStats
+											matchUrl={footballMatchUrl}
+											format={format}
+										/>
+									</Island>
+								)}
+							</GridItem>
+							<GridItem area="body">
+								<div id="maincontent" css={bodyWrapper}>
+									{CAPIArticle.keyEvents?.length ? (
+										<Hide below="desktop">
+											<Island deferUntil="visible">
+												<FilterKeyEventsToggle
+													filterKeyEvents={
+														CAPIArticle.filterKeyEvents
+													}
+												/>
+											</Island>
+										</Hide>
+									) : (
+										<></>
+									)}
+									<Accordion
+										supportsDarkMode={false}
+										accordionTitle="Live feed"
+										context="liveFeed"
+									>
 										{CAPIArticle.keyEvents?.length ? (
-											<Hide below="desktop">
+											<Hide above="desktop">
 												<Island deferUntil="visible">
 													<FilterKeyEventsToggle
 														filterKeyEvents={
@@ -797,256 +803,208 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										) : (
 											<></>
 										)}
-										<Accordion
-											supportsDarkMode={false}
-											accordionTitle="Live feed"
-											context="liveFeed"
+										<ArticleContainer
+											format={format}
+											abTests={CAPIArticle.config.abTests}
 										>
-											{CAPIArticle.keyEvents?.length ? (
-												<Hide above="desktop">
-													<Island deferUntil="visible">
-														<FilterKeyEventsToggle
-															filterKeyEvents={
-																CAPIArticle.filterKeyEvents
-															}
-														/>
-													</Island>
-												</Hide>
-											) : (
-												<></>
+											{pagination.currentPage !== 1 && (
+												<Pagination
+													currentPage={
+														pagination.currentPage
+													}
+													totalPages={
+														pagination.totalPages
+													}
+													newest={pagination.newest}
+													oldest={pagination.oldest}
+													newer={pagination.newer}
+													older={pagination.older}
+													format={format}
+												/>
 											)}
-											<ArticleContainer
+											<ArticleBody
 												format={format}
-												abTests={
-													CAPIArticle.config.abTests
+												blocks={CAPIArticle.blocks}
+												pinnedPost={
+													CAPIArticle.pinnedPost
 												}
-											>
-												{pagination.currentPage !==
-													1 && (
-													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
-														newer={pagination.newer}
-														older={pagination.older}
-														format={format}
-													/>
-												)}
-												<ArticleBody
-													format={format}
-													blocks={CAPIArticle.blocks}
-													pinnedPost={
-														CAPIArticle.pinnedPost
-													}
-													adTargeting={adTargeting}
-													host={host}
-													pageId={CAPIArticle.pageId}
-													webTitle={
-														CAPIArticle.webTitle
-													}
-													ajaxUrl={
-														CAPIArticle.config
-															.ajaxUrl
-													}
-													section={
-														CAPIArticle.config
-															.section
-													}
-													switches={
-														CAPIArticle.config
-															.switches
-													}
-													isSensitive={
-														CAPIArticle.config
-															.isSensitive
-													}
-													isAdFreeUser={
-														CAPIArticle.isAdFreeUser
-													}
-													shouldHideReaderRevenue={
-														CAPIArticle.shouldHideReaderRevenue
-													}
-													tags={CAPIArticle.tags}
-													isPaidContent={
-														!!CAPIArticle.config
-															.isPaidContent
-													}
-													contributionsServiceUrl={
-														contributionsServiceUrl
-													}
-													contentType={
-														CAPIArticle.contentType
-													}
-													sectionName={
-														CAPIArticle.sectionName ||
-														''
-													}
-													isPreview={
-														CAPIArticle.config
-															.isPreview
-													}
-													idUrl={
-														CAPIArticle.config
-															.idUrl || ''
-													}
-													isDev={
-														!!CAPIArticle.config
-															.isDev
-													}
-													onFirstPage={
-														pagination.currentPage ===
-														1
-													}
-												/>
-												{pagination.totalPages > 1 && (
-													<Pagination
-														currentPage={
-															pagination.currentPage
-														}
-														totalPages={
-															pagination.totalPages
-														}
-														newest={
-															pagination.newest
-														}
-														oldest={
-															pagination.oldest
-														}
-														newer={pagination.newer}
-														older={pagination.older}
-														format={format}
-													/>
-												)}
-												{showBodyEndSlot && (
-													<Island clientOnly={true}>
-														<SlotBodyEnd
-															contentType={
-																CAPIArticle.contentType
-															}
-															contributionsServiceUrl={
-																contributionsServiceUrl
-															}
-															idApiUrl={
-																CAPIArticle
-																	.config
-																	.idApiUrl
-															}
-															isMinuteArticle={
-																CAPIArticle
-																	.pageType
-																	.isMinuteArticle
-															}
-															isPaidContent={
-																CAPIArticle
-																	.pageType
-																	.isPaidContent
-															}
-															keywordsId={
-																CAPIArticle
-																	.config
-																	.keywordIds
-															}
-															pageId={
-																CAPIArticle.pageId
-															}
-															sectionId={
-																CAPIArticle
-																	.config
-																	.section
-															}
-															sectionName={
-																CAPIArticle.sectionName
-															}
-															shouldHideReaderRevenue={
-																CAPIArticle.shouldHideReaderRevenue
-															}
-															stage={
-																CAPIArticle
-																	.config
-																	.stage
-															}
-															tags={
-																CAPIArticle.tags
-															}
-														/>
-													</Island>
-												)}
-												<StraightLines
-													data-print-layout="hide"
-													count={4}
-													cssOverrides={css`
-														display: block;
-													`}
-												/>
-												<SubMeta
-													format={format}
-													subMetaKeywordLinks={
-														CAPIArticle.subMetaKeywordLinks
-													}
-													subMetaSectionLinks={
-														CAPIArticle.subMetaSectionLinks
-													}
-													pageId={CAPIArticle.pageId}
-													webUrl={CAPIArticle.webURL}
-													webTitle={
-														CAPIArticle.webTitle
-													}
-													showBottomSocialButtons={
-														CAPIArticle.showBottomSocialButtons
-													}
-													badge={CAPIArticle.badge}
-												/>
-											</ArticleContainer>
-										</Accordion>
-									</div>
-								</GridItem>
-								<GridItem area="right-column">
-									<div
-										css={css`
-											height: 100%;
-											${from.desktop} {
-												/* above 980 */
-												margin-left: 20px;
-												margin-right: -20px;
-												display: none;
-											}
-											${from.leftCol} {
-												/* above 1140 */
-												margin-left: 0px;
-												margin-right: 0px;
-											}
-											${from.wide} {
-												display: block;
-											}
-										`}
-									>
-										<RightColumn>
-											<AdSlot
-												position="right"
-												display={format.display}
+												adTargeting={adTargeting}
+												host={host}
+												pageId={CAPIArticle.pageId}
+												webTitle={CAPIArticle.webTitle}
+												ajaxUrl={
+													CAPIArticle.config.ajaxUrl
+												}
+												section={
+													CAPIArticle.config.section
+												}
+												switches={
+													CAPIArticle.config.switches
+												}
+												isSensitive={
+													CAPIArticle.config
+														.isSensitive
+												}
+												isAdFreeUser={
+													CAPIArticle.isAdFreeUser
+												}
 												shouldHideReaderRevenue={
 													CAPIArticle.shouldHideReaderRevenue
 												}
+												tags={CAPIArticle.tags}
 												isPaidContent={
-													CAPIArticle.pageType
+													!!CAPIArticle.config
 														.isPaidContent
 												}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
+												contentType={
+													CAPIArticle.contentType
+												}
+												sectionName={
+													CAPIArticle.sectionName ||
+													''
+												}
+												isPreview={
+													CAPIArticle.config.isPreview
+												}
+												idUrl={
+													CAPIArticle.config.idUrl ||
+													''
+												}
+												isDev={
+													!!CAPIArticle.config.isDev
+												}
+												onFirstPage={
+													pagination.currentPage === 1
+												}
 											/>
-										</RightColumn>
-									</div>
-								</GridItem>
-							</LiveGrid>
-						</ElementContainer>
-					</article>
+											{pagination.totalPages > 1 && (
+												<Pagination
+													currentPage={
+														pagination.currentPage
+													}
+													totalPages={
+														pagination.totalPages
+													}
+													newest={pagination.newest}
+													oldest={pagination.oldest}
+													newer={pagination.newer}
+													older={pagination.older}
+													format={format}
+												/>
+											)}
+											{showBodyEndSlot && (
+												<Island clientOnly={true}>
+													<SlotBodyEnd
+														contentType={
+															CAPIArticle.contentType
+														}
+														contributionsServiceUrl={
+															contributionsServiceUrl
+														}
+														idApiUrl={
+															CAPIArticle.config
+																.idApiUrl
+														}
+														isMinuteArticle={
+															CAPIArticle.pageType
+																.isMinuteArticle
+														}
+														isPaidContent={
+															CAPIArticle.pageType
+																.isPaidContent
+														}
+														keywordsId={
+															CAPIArticle.config
+																.keywordIds
+														}
+														pageId={
+															CAPIArticle.pageId
+														}
+														sectionId={
+															CAPIArticle.config
+																.section
+														}
+														sectionName={
+															CAPIArticle.sectionName
+														}
+														shouldHideReaderRevenue={
+															CAPIArticle.shouldHideReaderRevenue
+														}
+														stage={
+															CAPIArticle.config
+																.stage
+														}
+														tags={CAPIArticle.tags}
+													/>
+												</Island>
+											)}
+											<StraightLines
+												data-print-layout="hide"
+												count={4}
+												cssOverrides={css`
+													display: block;
+												`}
+											/>
+											<SubMeta
+												format={format}
+												subMetaKeywordLinks={
+													CAPIArticle.subMetaKeywordLinks
+												}
+												subMetaSectionLinks={
+													CAPIArticle.subMetaSectionLinks
+												}
+												pageId={CAPIArticle.pageId}
+												webUrl={CAPIArticle.webURL}
+												webTitle={CAPIArticle.webTitle}
+												showBottomSocialButtons={
+													CAPIArticle.showBottomSocialButtons
+												}
+												badge={CAPIArticle.badge}
+											/>
+										</ArticleContainer>
+									</Accordion>
+								</div>
+							</GridItem>
+							<GridItem area="right-column">
+								<div
+									css={css`
+										height: 100%;
+										${from.desktop} {
+											/* above 980 */
+											margin-left: 20px;
+											margin-right: -20px;
+											display: none;
+										}
+										${from.leftCol} {
+											/* above 1140 */
+											margin-left: 0px;
+											margin-right: 0px;
+										}
+										${from.wide} {
+											display: block;
+										}
+									`}
+								>
+									<RightColumn>
+										<AdSlot
+											position="right"
+											display={format.display}
+											shouldHideReaderRevenue={
+												CAPIArticle.shouldHideReaderRevenue
+											}
+											isPaidContent={
+												CAPIArticle.pageType
+													.isPaidContent
+											}
+										/>
+									</RightColumn>
+								</div>
+							</GridItem>
+						</LiveGrid>
+					</ElementContainer>
 
 					<ElementContainer
 						data-print-layout="hide"
