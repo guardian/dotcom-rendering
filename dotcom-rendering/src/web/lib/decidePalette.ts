@@ -23,6 +23,7 @@ import {
 
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
+import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
 
 const WHITE = neutral[100];
@@ -1026,7 +1027,7 @@ const borderArticle: (format: ArticleFormat) => string = (format) => {
 	return border.secondary;
 };
 
-const borderLines: (format: ArticleFormat) => string = (format) => {
+const borderLines = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return border.primary;
 	return border.secondary;
 };
@@ -1217,7 +1218,12 @@ const hoverKeyEventBullet = (format: ArticleFormat): string => {
 	}
 };
 
-export const decidePalette = (format: ArticleFormat): Palette => {
+export const decidePalette = (
+	format: ArticleFormat,
+	containerPalette?: DCRContainerPalette,
+): Palette => {
+	const overrides =
+		containerPalette && decideContainerOverrides(containerPalette);
 	return {
 		text: {
 			headline: textHeadline(format),
@@ -1235,12 +1241,14 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			syndicationButton: textSyndicationButton(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
-			cardHeadline: textCardHeadline(format),
-			cardByline: textCardByline(format),
-			cardKicker: textCardKicker(format),
+			cardHeadline:
+				overrides?.text.cardHeadline || textCardHeadline(format),
+			cardByline: overrides?.text.cardByline || textCardByline(format),
+			cardKicker: overrides?.text.cardKicker || textCardKicker(format),
 			linkKicker: textLinkKicker(format),
-			cardStandfirst: textCardStandfirst(format),
-			cardFooter: textCardFooter(format),
+			cardStandfirst:
+				overrides?.text.cardStandfirst || textCardStandfirst(format),
+			cardFooter: overrides?.text.cardFooter || textCardFooter(format),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
@@ -1271,7 +1279,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
-			card: backgroundCard(format),
+			card: overrides?.background.card || backgroundCard(format),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
@@ -1317,7 +1325,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
-			lines: borderLines(format),
+			lines: overrides?.border.lines || borderLines(format),
 			cricketScoreboardTop: borderCricketScoreboardTop(),
 			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			matchTab: matchTab(),
@@ -1325,7 +1333,7 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			cardSupporting: borderCardSupporting(format),
 		},
 		topBar: {
-			card: topBarCard(format),
+			card: overrides?.topBar.card || topBarCard(format),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),

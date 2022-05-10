@@ -400,6 +400,39 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			</div>
 
 			<main>
+				{format.design === ArticleDesign.LiveBlog && (
+					<>
+						{/* The Toast component is inserted into this div using a Portal */}
+						<div
+							id="toast-root"
+							css={css`
+								position: sticky;
+								top: 0;
+								${getZIndex('toast')};
+								display: flex;
+								justify-content: center;
+							`}
+						/>
+						<Island clientOnly={true} deferUntil="idle">
+							<Liveness
+								pageId={CAPIArticle.pageId}
+								webTitle={CAPIArticle.webTitle}
+								ajaxUrl={CAPIArticle.config.ajaxUrl}
+								filterKeyEvents={CAPIArticle.filterKeyEvents}
+								format={format}
+								switches={CAPIArticle.config.switches}
+								onFirstPage={pagination.currentPage === 1}
+								webURL={CAPIArticle.webURL}
+								// We default to string here because the property is optional but we
+								// know it will exist for all blogs
+								mostRecentBlockId={
+									CAPIArticle.mostRecentBlockId || ''
+								}
+								hasPinnedPost={!!CAPIArticle.pinnedPost}
+							/>
+						</Island>
+					</>
+				)}
 				<article>
 					{footballMatchUrl ? (
 						<ContainerLayout
@@ -745,59 +778,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{format.design ===
-										ArticleDesign.LiveBlog && (
-										<>
-											{/* The Toast component is inserted into this div using a Portal */}
-											<div
-												id="toast-root"
-												css={css`
-													position: sticky;
-													top: 0;
-													${getZIndex('toast')};
-													display: flex;
-													justify-content: center;
-												`}
-											/>
-											<Island
-												clientOnly={true}
-												deferUntil="idle"
-											>
-												<Liveness
-													pageId={CAPIArticle.pageId}
-													webTitle={
-														CAPIArticle.webTitle
-													}
-													ajaxUrl={
-														CAPIArticle.config
-															.ajaxUrl
-													}
-													filterKeyEvents={
-														CAPIArticle.filterKeyEvents
-													}
-													format={format}
-													switches={
-														CAPIArticle.config
-															.switches
-													}
-													onFirstPage={
-														pagination.currentPage ===
-														1
-													}
-													webURL={CAPIArticle.webURL}
-													// We default to string here because the property is optional but we
-													// know it will exist for all blogs
-													mostRecentBlockId={
-														CAPIArticle.mostRecentBlockId ||
-														''
-													}
-													hasPinnedPost={
-														!!CAPIArticle.pinnedPost
-													}
-												/>
-											</Island>
-										</>
-									)}
 									{CAPIArticle.keyEvents?.length ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">

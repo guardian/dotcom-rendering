@@ -2,9 +2,11 @@ import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
+	containerPalette?: DCRContainerPalette;
 	age?: JSX.Element;
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
@@ -31,12 +33,14 @@ const linesWrapperStyles = css`
 
 export const CardFooter = ({
 	format,
+	containerPalette,
 	age,
 	mediaMeta,
 	commentCount,
 	cardBranding,
 	supportingContent,
 }: Props) => {
+	const palette = decidePalette(format, containerPalette);
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
 		return <footer>{cardBranding}</footer>;
 	}
@@ -53,6 +57,7 @@ export const CardFooter = ({
 					{age}
 					<StraightLines
 						cssOverrides={linesWrapperStyles}
+						color={palette.border.lines}
 						count={4}
 					/>
 					{commentCount}

@@ -5,7 +5,7 @@ import {
 	ArticleDisplay,
 	ArticlePillar,
 } from '@guardian/libs';
-import { neutral } from '@guardian/source-foundations';
+import { from, neutral } from '@guardian/source-foundations';
 import { events } from '../../../fixtures/manual/key-events';
 import { KeyEventCard } from './KeyEventCard';
 
@@ -19,9 +19,13 @@ const getFormat = (theme: ArticleTheme) => {
 
 const wrapperStyles = css`
 	padding-left: 20px;
-	display: flex;
-	background-color: ${neutral[93]};
+	display: inline-flex;
+	background-color: ${neutral[97]};
 	margin: 10px 0;
+
+	${from.desktop} {
+		background-color: ${neutral[93]};
+	}
 
 	ul {
 		overflow-x: scroll;
