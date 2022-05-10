@@ -73,6 +73,20 @@ module.exports = {
 				);
 			});
 
+			devServer.app.get('/service-worker.js', (req, res) => {
+				res.sendFile(
+					path.join(
+						__dirname,
+						'..',
+						'..',
+						'src',
+						'static',
+						'js',
+						'service-worker.js',
+					),
+				)
+			})
+
 			// webpack-hot-server-middleware needs to run after webpack-dev-middleware
 			middlewares.push({
 				name: 'server',

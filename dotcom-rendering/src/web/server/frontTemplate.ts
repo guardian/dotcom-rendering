@@ -229,6 +229,24 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
+				<!-- offline support -->
+				<script>
+					const registerServiceWorker = async () => {
+						if ('serviceWorker' in navigator) {
+							try {
+								const registration = await navigator.serviceWorker.register(
+									'/service-worker.js',
+									{scope: '/'}
+								);
+							} catch (error) {
+								console.error(\`Registration failed with \${error}\`);
+							}
+						}
+					};
+					registerServiceWorker()
+				</script>
+				<script src='${ASSET_ORIGIN}static/frontend/js/happy-offline.js'><script>
+
 
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
