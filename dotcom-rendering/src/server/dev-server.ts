@@ -8,6 +8,7 @@ import {
 	renderInteractive,
 	renderKeyEvents,
 } from '../web/server';
+import {capiContentRequest, capiTagRequest} from "./capi";
 
 // see https://www.npmjs.com/package/webpack-hot-server-Middleware
 // for more info
@@ -30,6 +31,10 @@ export const devServer = () => {
 				return renderKeyEvents(req, res);
 			case '/Front':
 				return renderFront(req, res);
+			case '/capi/content':
+				return capiContentRequest(req, res);
+			case '/capi/tag':
+				return capiTagRequest(req, res);
 			default:
 				next();
 		}

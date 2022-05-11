@@ -14,6 +14,7 @@ import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { SubNav } from '../components/SubNav.importable';
+import { CapiFrontContainer } from "../components/CapiFrontContainer.importable";
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -41,6 +42,22 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	const palette = decidePalette(format);
 
 	// const contributionsServiceUrl = getContributionsServiceUrl(front);
+
+	const dynamicCollection: DCRCollectionType = {
+		id: 'dynamic-collection',
+		displayName: 'My container',
+		collectionType: 'dynamic/fast',
+		curated: [],
+		backfill: [],
+		treats: [],
+		href: 'https/theguardian.com',
+	}
+	const filteredCollections = front.pressedPage.collections.filter(coll => coll.displayName !== 'Ukraine invasion');
+	const collections = [
+		...filteredCollections.slice(0,2),
+		dynamicCollection,
+		...filteredCollections.slice(2),
+	]
 
 	return (
 		<>
@@ -116,17 +133,26 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			</div>
 
 			<main>
-				{front.pressedPage.collections.map((collection, index) => {
+				{collections.map((collection, index) => {
+
 					// TODO: We also need to support treats containers
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
 					);
-					// There are some containers that have zero trails. We don't want to render these
-					if (trails.length === 0) return null;
 
 					const ophanName = ophanComponentId(collection.displayName);
 
+					if (collection.id === 'dynamic-collection') {
+						return (
+							<Island deferUntil="visible" clientOnly={true}>
+								<CapiFrontContainer collection={collection} ophanName={ophanName} index={index} />
+							</Island>
+						)
+					}
+
+					// There are some containers that have zero trails. We don't want to render these
+					if (trails.length === 0) return null;
 					return (
 						<ContainerLayout
 							key={index}
