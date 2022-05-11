@@ -12,6 +12,7 @@ type Props = {
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	supportingContent?: JSX.Element;
+	renderLines?: boolean;
 };
 
 const spaceBetween = css`
@@ -39,6 +40,7 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	supportingContent,
+	renderLines,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
@@ -55,11 +57,13 @@ export const CardFooter = ({
 				{supportingContent}
 				<div css={spaceBetween}>
 					{age}
-					<StraightLines
-						cssOverrides={linesWrapperStyles}
-						color={palette.border.lines}
-						count={4}
-					/>
+					{renderLines && (
+						<StraightLines
+							cssOverrides={linesWrapperStyles}
+							color={palette.border.lines}
+							count={4}
+						/>
+					)}
 					{commentCount}
 				</div>
 			</footer>
