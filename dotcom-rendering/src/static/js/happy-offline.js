@@ -16,7 +16,6 @@ const domreadyHandler = async (event) => {
 			return fixedUrl;
 		});
 
-		console.log('caching', sectionName, fixedUrls);
 		cache.addAll(fixedUrls);
 	});
 }
