@@ -157,6 +157,7 @@ const WithLink = ({
 					/* stylelint-disable-next-line property-disallowed-list */
 					font-family: inherit;
 					font-size: inherit;
+					line-height: inherit;
 					/* This css is used to remove any underline from the kicker but still
 					   have it applied to the headline when the kicker is hovered */
 					:hover {
