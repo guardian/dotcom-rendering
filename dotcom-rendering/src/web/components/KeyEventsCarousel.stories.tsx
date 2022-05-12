@@ -19,7 +19,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
 			css={css`
-				padding: 20px;
+				position: relative;
 				max-width: 700px;
 				${from.tablet} {
 					width: 700px;
@@ -41,7 +41,7 @@ export const Standard = () => {
 		<Wrapper>
 			<KeyEventsCarousel
 				keyEvents={Live.keyEvents}
-				filterKeyEvents={Live.filterKeyEvents}
+				filterKeyEvents={false}
 				format={format}
 			/>
 		</Wrapper>

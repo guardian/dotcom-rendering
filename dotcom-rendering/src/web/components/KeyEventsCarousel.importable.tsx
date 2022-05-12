@@ -99,9 +99,8 @@ const carousel: Element | null = !isServer
 	: null;
 
 function calculateCardsOnScreen() {
-	if (carousel) {
-		return Math.floor(carousel.clientWidth / 180);
-	}
+	// we only want to count cards fully in view so we round down.
+	if (carousel) return Math.floor(carousel.clientWidth / 200);
 	return 0;
 }
 export const KeyEventsCarousel = ({
@@ -111,7 +110,7 @@ export const KeyEventsCarousel = ({
 }: Props) => {
 	const [activeIndex, setActiveIndex] = useState(0);
 	const [elements, setElements] = useState<Element[]>();
-	const cardWidth = 180;
+	const cardWidth = 200;
 	const cardsOnScreen = calculateCardsOnScreen();
 	const isFirstCard = activeIndex === cardsOnScreen;
 	const isLastCard = activeIndex === keyEvents.length - 1;
