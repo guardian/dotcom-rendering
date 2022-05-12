@@ -973,7 +973,7 @@ type FEFrontConfigType = {
 	idOAuthUrl: string;
 	isSensitive: boolean;
 	isDev: boolean;
-	thirdPartyAppsAccount: string;
+	thirdPartyAppsAccount?: string;
 	avatarImagesUrl: string;
 	fbAppId: string;
 };
