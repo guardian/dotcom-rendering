@@ -8,6 +8,7 @@ import { ImmersiveLayout } from './ImmersiveLayout';
 import { LiveLayout } from './LiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
+import { buildNewsletterSignupLayout } from './lib/newsletterSignupLayoutUsage';
 
 type Props = {
 	CAPIArticle: CAPIArticleType;
@@ -20,6 +21,8 @@ export const DecideLayout = ({
 	NAV,
 	format,
 }: Props): JSX.Element => {
+	return buildNewsletterSignupLayout(CAPIArticle, NAV, format);
+
 	// TODO we can probably better express this as data
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
