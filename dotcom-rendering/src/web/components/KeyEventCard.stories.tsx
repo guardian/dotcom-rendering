@@ -37,7 +37,25 @@ const wrapperStyles = css`
 	}
 `;
 
-const Cards = ({ theme, count }: { theme: ArticleTheme; count: number }) => (
+const SummaryCard = ({ theme }: { theme: ArticleTheme }) => (
+	<ul css={wrapperStyles}>
+		<KeyEventCard
+			text={events[0].text}
+			url={events[0].url}
+			date={events[0].date}
+			format={getFormat(theme)}
+			isSummary={true}
+		/>
+	</ul>
+);
+
+const StandardCard = ({
+	theme,
+	count,
+}: {
+	theme: ArticleTheme;
+	count: number;
+}) => (
 	<ul css={wrapperStyles}>
 		{events.slice(0, count).map((event) => (
 			<KeyEventCard
@@ -51,26 +69,37 @@ const Cards = ({ theme, count }: { theme: ArticleTheme; count: number }) => (
 	</ul>
 );
 
-const SingleCard = () => (
+const Summary = () => (
 	<>
-		<Cards theme={ArticlePillar.News} count={1} />
-		<Cards theme={ArticlePillar.Culture} count={1} />
-		<Cards theme={ArticlePillar.Lifestyle} count={1} />
-		<Cards theme={ArticlePillar.Sport} count={1} />
-		<Cards theme={ArticlePillar.Opinion} count={1} />
-		<Cards theme={ArticleSpecial.SpecialReport} count={1} />
+		<SummaryCard theme={ArticlePillar.News} />
+		<SummaryCard theme={ArticlePillar.Culture} />
+		<SummaryCard theme={ArticlePillar.Lifestyle} />
+		<SummaryCard theme={ArticlePillar.Sport} />
+		<SummaryCard theme={ArticlePillar.Opinion} />
+		<SummaryCard theme={ArticleSpecial.SpecialReport} />
 	</>
 );
 
-const MultipleCards = () => (
+const KeyEvent = () => (
 	<>
-		<Cards theme={ArticlePillar.News} count={7} />
-		<Cards theme={ArticlePillar.Culture} count={7} />
-		<Cards theme={ArticlePillar.Lifestyle} count={7} />
-		<Cards theme={ArticlePillar.Sport} count={7} />
-		<Cards theme={ArticlePillar.Culture} count={7} />
-		<Cards theme={ArticlePillar.Opinion} count={7} />
-		<Cards theme={ArticleSpecial.SpecialReport} count={7} />
+		<StandardCard theme={ArticlePillar.News} count={1} />
+		<StandardCard theme={ArticlePillar.Culture} count={1} />
+		<StandardCard theme={ArticlePillar.Lifestyle} count={1} />
+		<StandardCard theme={ArticlePillar.Sport} count={1} />
+		<StandardCard theme={ArticlePillar.Opinion} count={1} />
+		<StandardCard theme={ArticleSpecial.SpecialReport} count={1} />
+	</>
+);
+
+const Multiple = () => (
+	<>
+		<StandardCard theme={ArticlePillar.News} count={7} />
+		<StandardCard theme={ArticlePillar.Culture} count={7} />
+		<StandardCard theme={ArticlePillar.Lifestyle} count={7} />
+		<StandardCard theme={ArticlePillar.Sport} count={7} />
+		<StandardCard theme={ArticlePillar.Culture} count={7} />
+		<StandardCard theme={ArticlePillar.Opinion} count={7} />
+		<StandardCard theme={ArticleSpecial.SpecialReport} count={7} />
 	</>
 );
 
@@ -79,4 +108,4 @@ export default {
 	title: 'Components/KeyEventCard',
 };
 
-export { SingleCard, MultipleCards };
+export { Summary, KeyEvent, Multiple };
