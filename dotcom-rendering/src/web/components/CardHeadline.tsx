@@ -126,6 +126,7 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 };
 
 const lineStyles = (palette: Palette) => css`
+	padding-top: 1px;
 	:before {
 		display: block;
 		position: absolute;
