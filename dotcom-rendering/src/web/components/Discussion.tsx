@@ -92,7 +92,7 @@ export const Discussion = ({
 		window.location.hash = `#comment-${commentId}`;
 		// Put this comment id into the hashCommentId state which will
 		// trigger an api call to get the comment context and then expand
-		// and reload the discussion based on the resuts
+		// and reload the discussion based on the results
 		setHashCommentId(commentId);
 		return false;
 	};
