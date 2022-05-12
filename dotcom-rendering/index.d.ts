@@ -48,7 +48,8 @@ type CAPIDesign =
 	| 'PhotoEssayDesign'
 	| 'PrintShopDesign'
 	| 'ObituaryDesign'
-	| 'FullPageInteractiveDesign';
+	| 'FullPageInteractiveDesign'
+	| 'NewsletterSignupDesign';
 
 // CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
@@ -689,18 +690,35 @@ type FEContainerType =
 	| 'news/most-popular';
 
 type FEContainerPalette =
-	| `EventPalette`
-	| `SombreAltPalette`
-	| `EventAltPalette`
-	| `InvestigationPalette`
-	| `LongRunningAltPalette`
-	| `LongRunningPalette`
-	| `SombrePalette`
-	| `BreakingPalette`;
+	| 'EventPalette'
+	| 'SombreAltPalette'
+	| 'EventAltPalette'
+	| 'InvestigationPalette'
+	| 'LongRunningAltPalette'
+	| 'LongRunningPalette'
+	| 'SombrePalette'
+	| 'Canonical'
+	| 'Dynamo'
+	| 'Special'
+	| 'DynamoLike'
+	| 'Special'
+	| 'Breaking'
+	| 'Podcast'
+	| 'Branded'
+	| 'BreakingPalette';
+
+type DCRContainerPalette =
+	| 'EventPalette'
+	| 'SombreAltPalette'
+	| 'EventAltPalette'
+	| 'InvestigationPalette'
+	| 'LongRunningAltPalette'
+	| 'LongRunningPalette'
+	| 'SombrePalette'
+	| 'BreakingPalette';
 
 // TODO: These may need to be declared differently than the front types in the future
 type DCRContainerType = FEContainerType;
-type DCRContainerPalette = FEContainerPalette;
 
 type FEFrontCard = {
 	properties: {
@@ -955,7 +973,7 @@ type FEFrontConfigType = {
 	idOAuthUrl: string;
 	isSensitive: boolean;
 	isDev: boolean;
-	thirdPartyAppsAccount: string;
+	thirdPartyAppsAccount?: string;
 	avatarImagesUrl: string;
 	fbAppId: string;
 };

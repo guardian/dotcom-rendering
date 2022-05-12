@@ -101,7 +101,33 @@ const enhanceCards = (
 const decideContainerPalette = (
 	metadata?: { type: FEContainerPalette }[],
 ): DCRContainerPalette | undefined => {
-	return metadata?.length && metadata[0].type ? metadata[0].type : undefined;
+	switch (metadata?.[0]?.type) {
+		case 'EventPalette':
+			return 'EventPalette';
+		case 'SombreAltPalette':
+			return 'SombreAltPalette';
+		case 'EventAltPalette':
+			return 'EventAltPalette';
+		case 'InvestigationPalette':
+			return 'InvestigationPalette';
+		case 'LongRunningAltPalette':
+			return 'LongRunningAltPalette';
+		case 'LongRunningPalette':
+			return 'LongRunningPalette';
+		case 'SombrePalette':
+			return 'SombrePalette';
+		case 'BreakingPalette':
+			return 'BreakingPalette';
+		case 'Canonical':
+		case 'Dynamo':
+		case 'Special':
+		case 'DynamoLike':
+		case 'Breaking':
+		case 'Podcast':
+		case 'Branded':
+		default:
+			return undefined;
+	}
 };
 
 export const enhanceCollections = (
