@@ -111,15 +111,21 @@ const sanitiserOptions: IOptions = {
 	allowedTags: false, // Leave tags from CAPI alone
 	allowedAttributes: false, // Leave attributes from CAPI alone
 	transformTags: {
-		a: (tagName, attribs) => ({
-			tagName, // Just return anchors as is
-			attribs: {
-				...attribs, // Merge into the existing attributes
-				...{
-					'data-link-name': 'in body link', // Add the data-link-name for Ophan to anchors
+		a: (tagName, attribs) => {
+			const mailto = attribs.href?.startsWith('mailto:')
+				? ` | ${attribs.href}`
+				: '';
+
+			return {
+				tagName, // Just return anchors as is
+				attribs: {
+					...attribs, // Merge into the existing attributes
+					...{
+						'data-link-name': `in body link${mailto}`, // Add the data-link-name for Ophan to anchors
+					},
 				},
-			},
-		}),
+			};
+		},
 	},
 };
 
