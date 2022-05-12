@@ -101,8 +101,7 @@ const enhanceCards = (
 const decideContainerPalette = (
 	metadata?: { type: FEContainerPalette }[],
 ): DCRContainerPalette | undefined => {
-	if (!metadata?.length || metadata[0].type) return undefined;
-	switch (metadata[0].type) {
+	switch (metadata?.[0]?.type) {
 		case 'EventPalette':
 			return 'EventPalette';
 		case 'SombreAltPalette':
