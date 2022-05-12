@@ -130,13 +130,14 @@ export const KeyEventsCarousel = ({
 
 		const observer = new window.IntersectionObserver(handleIntersect, {
 			root: carousel,
-			rootMargin: '0% 0% 0% -87%',
-			threshold: 0.5,
+			rootMargin: '0% 0% 0% -100%',
 		});
 
 		elements?.forEach((el) => {
 			observer.observe(el);
 		});
+
+		return () => observer.disconnect();
 	}, [elements, activeIndex]);
 
 	const goPrevious = () => {
