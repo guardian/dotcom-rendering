@@ -6,10 +6,12 @@ import {
 	SvgCamera,
 	SvgVideo,
 } from '@guardian/source-react-components';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	mediaType: MediaType;
-	palette: Palette;
+	containerPalette?: DCRContainerPalette;
+	format: ArticleFormat;
 	mediaDuration?: number;
 };
 
@@ -98,12 +100,23 @@ const MediaDuration = ({
 	palette: Palette;
 }) => <p css={durationStyles(palette)}>{secondsToDuration(mediaDuration)}</p>;
 
-export const MediaMeta = ({ mediaType, mediaDuration, palette }: Props) => (
-	<div css={wrapperStyles}>
-		<MediaIcon mediaType={mediaType} palette={palette} />
-		&nbsp;
-		{mediaDuration && (
-			<MediaDuration mediaDuration={mediaDuration} palette={palette} />
-		)}
-	</div>
-);
+export const MediaMeta = ({
+	mediaType,
+	mediaDuration,
+	format,
+	containerPalette,
+}: Props) => {
+	const palette = decidePalette(format, containerPalette);
+	return (
+		<div css={wrapperStyles}>
+			<MediaIcon mediaType={mediaType} palette={palette} />
+			&nbsp;
+			{mediaDuration && (
+				<MediaDuration
+					mediaDuration={mediaDuration}
+					palette={palette}
+				/>
+			)}
+		</div>
+	);
+};

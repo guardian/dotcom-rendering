@@ -26,3 +26,41 @@ export const defaultStory = () => {
 	);
 };
 defaultStory.story = { name: 'default' };
+
+export const embeddedBlockquoteStory = () => {
+	const bodyContent = `
+		<blockquote>
+			<p>
+				Children and youth are striking to demand action. But many of not most are
+				themselves involved in one of the most damaging practices towards earth's
+				climate, I mean consuming massive amounts of meat and diary in their diets.
+			</p>
+			<p>What is their thought on this regard ?</p>
+		</blockquote>
+		<p>
+			Are they? I see young people leading on this. There's been a massive surge
+			towards veganism by young people, which has resulted in a sevenfold increase
+			in the UK within 5 years. Quite remarkable. And it should be recognised.
+		</p>
+	`;
+	return (
+		<div
+			css={css`
+				padding: 20px;
+				width: 700px;
+			`}
+		>
+			<CommentBlockComponent
+				profileURL="https://profile.theguardian.com/user/id/1395989"
+				profileName="George Monbiot"
+				dateTime="15 March 2019 11:00am"
+				avatarURL="https://avatar.guim.co.uk/user/1395989"
+				body={bodyContent}
+				permalink="https://www.theguardian.com/commentisfree/live/2019/mar/15/webchat-share-questions-for-george-monbiot-and-climate-strike-activists?dcr&page=with:block-5c8b9709e4b0cf92e5a57a5f#block-5c8b9709e4b0cf92e5a57a5f"
+			/>
+		</div>
+	);
+};
+embeddedBlockquoteStory.story = {
+	name: 'Comment block which contains a blockquote',
+};

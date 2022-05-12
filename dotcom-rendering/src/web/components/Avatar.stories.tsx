@@ -7,7 +7,6 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 
 import { Avatar } from './Avatar';
-import { decidePalette } from '../lib/decidePalette';
 
 export default {
 	component: Avatar,
@@ -32,10 +31,10 @@ export const defaultStory = () => (
 		<Avatar
 			imageSrc={imageSrc173}
 			imageAlt="The alt of the image"
-			palette={decidePalette({
+			format={{
 				...format,
 				theme: ArticlePillar.Opinion,
-			})}
+			}}
 		/>
 	</div>
 );
@@ -46,10 +45,10 @@ export const largeStory = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			palette={decidePalette({
+			format={{
 				...format,
 				theme: ArticlePillar.Lifestyle,
-			})}
+			}}
 		/>
 	</div>
 );
@@ -60,7 +59,7 @@ export const largeStoryNews = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			palette={decidePalette(format)}
+			format={format}
 		/>
 	</div>
 );
@@ -71,10 +70,10 @@ export const largeStoryCulture = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			palette={decidePalette({
+			format={{
 				...format,
 				theme: ArticlePillar.Culture,
-			})}
+			}}
 		/>
 	</div>
 );
@@ -85,10 +84,10 @@ export const SpecialReport = () => (
 		<Avatar
 			imageSrc={imageSrc300}
 			imageAlt="The alt of the image"
-			palette={decidePalette({
+			format={{
 				...format,
 				theme: ArticleSpecial.SpecialReport,
-			})}
+			}}
 		/>
 	</div>
 );
@@ -99,10 +98,10 @@ export const smallStory = () => (
 		<Avatar
 			imageSrc={imageSrc300Sport}
 			imageAlt="The alt of the image"
-			palette={decidePalette({
+			format={{
 				...format,
 				theme: ArticlePillar.Sport,
-			})}
+			}}
 		/>
 	</div>
 );

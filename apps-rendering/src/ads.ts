@@ -1,7 +1,7 @@
-import { ThemeProvider } from '@emotion/react';
-import { Button, buttonThemeBrandAlt } from '@guardian/source-react-components';
+import type { ArticleFormat } from '@guardian/libs';
+import AdSlot from 'adSlot';
 import Paragraph from 'components/paragraph';
-import type { ReactElement, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { createElement as h, isValidElement } from 'react';
 
 function getAdIndices(): number[] {
@@ -9,13 +9,16 @@ function getAdIndices(): number[] {
 	const firstAdIndex = 3;
 	const totalAds = 15;
 
-	const indiciesAfterFirstAd = [...Array(totalAds - 1).keys()].map(
+	const indicesAfterFirstAd = [...Array(totalAds - 1).keys()].map(
 		(index) => firstAdIndex + adEveryNParagraphs * ++index,
 	);
-	return [firstAdIndex, ...indiciesAfterFirstAd];
+	return [firstAdIndex, ...indicesAfterFirstAd];
 }
 
-function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
+function insertPlaceholders(
+	reactNodes: ReactNode[],
+	format: ArticleFormat,
+): ReactNode[] {
 	const adIndices = getAdIndices();
 
 	const flattenedNodes = reactNodes.flat();
@@ -28,32 +31,10 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 	const className =
 		numParas < 15 ? 'ad-placeholder hidden short' : 'ad-placeholder hidden';
 
-	const ad = (para: number): ReactElement =>
-		h(
-			'aside',
-			{ className, key: `ad-after-${para}-para` },
-			h(
-				'div',
-				{ className: 'ad-labels' },
-				h('h1', null, 'Advertisement'),
-			),
-			h('div', { className: 'ad-slot' }, null),
-			h(
-				'div',
-				{ className: 'upgrade-banner' },
-				h(
-					'h1',
-					null,
-					'Support the Guardian and enjoy the app ad-free.',
-				),
-				<ThemeProvider theme={buttonThemeBrandAlt}>
-					<Button>Support the Guardian</Button>
-				</ThemeProvider>,
-			),
-		);
-
-	const insertAd = (para: number, nodes: ReactNode[]): ReactNode[] =>
-		adIndices.includes(para) ? [...nodes, ad(para)] : nodes;
+	const insertAd = (paragraph: number, nodes: ReactNode[]): ReactNode[] =>
+		adIndices.includes(paragraph)
+			? [...nodes, h(AdSlot, { className, paragraph, format })]
+			: nodes;
 
 	return flattenedNodes.reduce<{ paraNum: number; nodes: ReactNode[] }>(
 		({ paraNum, nodes: prevNodes }, node) => {
@@ -75,7 +56,7 @@ function insertPlaceholders(reactNodes: ReactNode[]): ReactNode[] {
 
 const getAdPlaceholderInserter = (
 	shouldHideAdverts: boolean,
-): ((reactNodes: ReactNode[]) => ReactNode[]) =>
+): ((reactNodes: ReactNode[], format: ArticleFormat) => ReactNode[]) =>
 	shouldHideAdverts
 		? (reactNodes: ReactNode[]): ReactNode[] => reactNodes
 		: insertPlaceholders;

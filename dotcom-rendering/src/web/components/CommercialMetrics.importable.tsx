@@ -61,15 +61,20 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 			browserId: browserId || undefined,
 			isDev,
 			adBlockerInUse,
-		});
-
-		if (
-			userInClientSideTestToForceMetrics ||
-			userInServerSideTestToForceMetrics
-		) {
-			// TODO: rename this in commercial-core and update here
-			switchOffSampling();
-		}
+		})
+			.then(() => {
+				if (
+					userInClientSideTestToForceMetrics ||
+					userInServerSideTestToForceMetrics
+				) {
+					// TODO: rename this in commercial-core and update here
+					// eslint-disable-next-line no-void
+					void switchOffSampling();
+				}
+			})
+			.catch((e) =>
+				console.error(`Error initialising commercial metrics: ${e}`),
+			);
 	}, [ABTestAPI, adBlockerInUse, enabled]);
 
 	// We don’t render anything

@@ -2,9 +2,15 @@ import { getAdPlaceholderInserter } from './ads';
 import { ReactNode } from 'react';
 import { renderAll } from 'renderer';
 import { JSDOM } from 'jsdom';
-import {ArticlePillar, ArticleFormat, ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import {
+	ArticlePillar,
+	ArticleFormat,
+	ArticleDesign,
+	ArticleDisplay,
+} from '@guardian/libs';
 import { compose } from 'lib';
 import { ElementKind, BodyElement } from 'bodyElement';
+import AdSlot from 'adSlot';
 
 const shouldHideAdverts = false;
 const insertAdPlaceholders = getAdPlaceholderInserter(shouldHideAdverts);
@@ -32,19 +38,28 @@ const renderTextElement = compose(render, textElement);
 describe('Adds the correct number of ad placeholders', () => {
 	test('Adds no placeholders for 2 paragraphs', () => {
 		const twoParagraphs = renderParagraphs(2);
-		const twoParagraphsAndNoAds = insertAdPlaceholders(twoParagraphs);
+		const twoParagraphsAndNoAds = insertAdPlaceholders(
+			twoParagraphs,
+			mockFormat,
+		);
 		expect(twoParagraphsAndNoAds.length).toBe(2);
 	});
 
 	test('Adds one placeholder for 5 paragraphs', () => {
 		const fiveParagraphs = renderParagraphs(5);
-		const fiveParagraphsAndOneAd = insertAdPlaceholders(fiveParagraphs);
+		const fiveParagraphsAndOneAd = insertAdPlaceholders(
+			fiveParagraphs,
+			mockFormat,
+		);
 		expect(fiveParagraphsAndOneAd.length).toBe(6);
 	});
 
 	test('Adds two placeholders for 9 paragraphs', () => {
 		const nineParagraphs = renderParagraphs(9);
-		const nineParagraphsAndTwoAds = insertAdPlaceholders(nineParagraphs);
+		const nineParagraphsAndTwoAds = insertAdPlaceholders(
+			nineParagraphs,
+			mockFormat,
+		);
 		expect(nineParagraphsAndTwoAds.length).toBe(11);
 	});
 
@@ -52,6 +67,7 @@ describe('Adds the correct number of ad placeholders', () => {
 		const fiftyParagraphs = renderParagraphs(50);
 		const fiftyParagraphsAndEightAds = insertAdPlaceholders(
 			fiftyParagraphs,
+			mockFormat,
 		);
 		expect(fiftyParagraphsAndEightAds.length).toBe(58);
 	});
@@ -60,13 +76,17 @@ describe('Adds the correct number of ad placeholders', () => {
 		const ninetyParagraphs = renderParagraphs(90);
 		const ninetyParagraphsAndFifteenAds = insertAdPlaceholders(
 			ninetyParagraphs,
+			mockFormat,
 		);
 		expect(ninetyParagraphsAndFifteenAds.length).toBe(105);
 	});
 
 	test('Adds fifteen placeholders for 150 paragraphs', () => {
 		const hundredFifty = renderParagraphs(150);
-		const hundredFiftyAndFifteenAds = insertAdPlaceholders(hundredFifty);
+		const hundredFiftyAndFifteenAds = insertAdPlaceholders(
+			hundredFifty,
+			mockFormat,
+		);
 		expect(hundredFiftyAndFifteenAds.length).toBe(165);
 	});
 });
@@ -76,14 +96,18 @@ describe('Adds placholders at the correct indexes', () => {
 		const fiveParagraphs = renderParagraphs(5);
 		const fiveParagraphsAndOneAd: any = insertAdPlaceholders(
 			fiveParagraphs,
+			mockFormat,
 		);
-		expect(fiveParagraphsAndOneAd[3].type).toBe('aside');
+		expect(fiveParagraphsAndOneAd[3].type).toBe(AdSlot);
 	});
 
 	test('Adds second placeholder after 9th paragraph', () => {
 		const tenParagraphs = renderParagraphs(10);
-		const tenParagraphsAndTwoAds: any = insertAdPlaceholders(tenParagraphs);
-		expect(tenParagraphsAndTwoAds[10].type).toBe('aside');
+		const tenParagraphsAndTwoAds: any = insertAdPlaceholders(
+			tenParagraphs,
+			mockFormat,
+		);
+		expect(tenParagraphsAndTwoAds[10].type).toBe(AdSlot);
 	});
 });
 
@@ -92,6 +116,7 @@ describe('Adds short classname correctly', () => {
 		const fourteenParagraphs = renderParagraphs(14);
 		const fourteenParagraphsAndTwoAds: any = insertAdPlaceholders(
 			fourteenParagraphs,
+			mockFormat,
 		);
 		expect(fourteenParagraphsAndTwoAds[3].props.className).toBe(
 			'ad-placeholder hidden short',
@@ -105,6 +130,7 @@ describe('Adds short classname correctly', () => {
 		const fifteenParagraphs = renderParagraphs(15);
 		const fifteenParagraphsAndTwoAds: any = insertAdPlaceholders(
 			fifteenParagraphs,
+			mockFormat,
 		);
 		expect(fifteenParagraphsAndTwoAds[3].props.className).toBe(
 			'ad-placeholder hidden',
@@ -126,7 +152,7 @@ describe('Handles different DOM structures', () => {
 			'<div></div>',
 		]);
 
-		const sixTagsWithNoAds = insertAdPlaceholders(text);
+		const sixTagsWithNoAds = insertAdPlaceholders(text, mockFormat);
 		expect(sixTagsWithNoAds.length).toBe(6);
 	});
 
@@ -140,7 +166,7 @@ describe('Handles different DOM structures', () => {
 			'<a href="foo"></a>',
 		]);
 
-		const sixTagsWithOneAd: any = insertAdPlaceholders(text);
+		const sixTagsWithOneAd: any = insertAdPlaceholders(text, mockFormat);
 		expect(sixTagsWithOneAd.length).toBe(7);
 		expect(
 			sixTagsWithOneAd[5].props.className ===

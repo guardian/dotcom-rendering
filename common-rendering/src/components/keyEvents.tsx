@@ -62,10 +62,17 @@ const getColor = (theme: ArticleTheme, paletteId: paletteId) => {
 const keyEventWrapperStyles = (
 	format: ArticleFormat,
 	supportsDarkMode: boolean,
+	hideMobile: boolean,
 ): SerializedStyles => css`
 	width: 100%;
 
+	${hideMobile &&
+	css`
+		display: none;
+	`}
+
 	${from.desktop} {
+		display: block;
 		border-top: 1px solid ${neutral[86]};
 		padding-top: ${remSpace[2]};
 	}
@@ -230,7 +237,11 @@ const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 			tabIndex={0}
 			id="keyevents"
-			css={keyEventWrapperStyles(format, supportsDarkMode)}
+			css={keyEventWrapperStyles(
+				format,
+				supportsDarkMode,
+				keyEvents.length === 0,
+			)}
 			aria-label="Key Events"
 		>
 			<Accordion
