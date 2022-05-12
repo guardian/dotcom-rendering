@@ -94,36 +94,34 @@ const disabledButtonStyles = css`
 
 const isServer = typeof window === 'undefined';
 
-const carousel: Element | null = !isServer
+const carousel = !isServer
 	? window.document.getElementById('key-event-carousel')
 	: null;
 
-function calculateCardsOnScreen() {
-	// we only want to count cards fully in view so we round down.
-	if (carousel) return Math.floor(carousel.clientWidth / 200);
-	return 0;
-}
+const cards = !isServer
+	? Array.from(document.querySelectorAll('#key-event-card'))
+	: null;
+
 export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	format,
 }: Props) => {
 	const [activeIndex, setActiveIndex] = useState(0);
-	const [elements, setElements] = useState<Element[]>();
 	const cardWidth = 200;
-	const cardsOnScreen = calculateCardsOnScreen();
+
+	// we only want to count cards fully in view so we round down.
+	const cardsOnScreen = carousel
+		? Math.floor(carousel.clientWidth / cardWidth)
+		: 0;
+
 	const isFirstCard = activeIndex === cardsOnScreen;
 	const isLastCard = activeIndex === keyEvents.length - 1;
 
 	useEffect(() => {
-		const cards = document.querySelectorAll('#key-event-card');
-		setElements(Array.from(cards));
-	}, []);
-
-	useEffect(() => {
 		function handleIntersect(entries: IntersectionObserverEntry[]) {
 			const entry = entries.find((e) => e.isIntersecting);
-			const index = elements?.findIndex((e) => e === entry?.target);
+			const index = cards?.findIndex((e) => e === entry?.target);
 			if (index && index !== -1) setActiveIndex(index);
 		}
 
@@ -132,12 +130,12 @@ export const KeyEventsCarousel = ({
 			rootMargin: '0% 0% 0% -100%',
 		});
 
-		elements?.forEach((el) => {
+		cards?.forEach((el) => {
 			observer.observe(el);
 		});
 
 		return () => observer.disconnect();
-	}, [elements, activeIndex]);
+	}, [activeIndex]);
 
 	const goPrevious = () => {
 		if (carousel && !isFirstCard) {
