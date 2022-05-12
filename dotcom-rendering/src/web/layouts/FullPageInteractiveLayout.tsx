@@ -212,9 +212,6 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props): JSX.Element => {
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
 							}
-							isAnniversary={
-								CAPIArticle.config.switches.anniversaryHeaderSvg
-							}
 							urls={CAPIArticle.nav.readerRevenueLinks.header}
 							remoteHeader={
 								CAPIArticle.config.switches.remoteHeader

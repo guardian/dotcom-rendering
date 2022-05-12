@@ -14,6 +14,7 @@ import { getZIndex } from '../lib/getZIndex';
 type Props = {
 	headlineText: string; // The text shown
 	format: ArticleFormat; // Used to decide when to add type specific styles
+	containerPalette?: DCRContainerPalette;
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
@@ -177,6 +178,7 @@ const WithLink = ({
 export const CardHeadline = ({
 	headlineText,
 	format,
+	containerPalette,
 	showQuotes,
 	kickerText,
 	showPulsingDot,
@@ -187,7 +189,7 @@ export const CardHeadline = ({
 	showLine,
 	linkTo,
 }: Props) => {
-	const palette = decidePalette(format);
+	const palette = decidePalette(format, containerPalette);
 	return (
 		<>
 			<h4
@@ -231,6 +233,7 @@ export const CardHeadline = ({
 				<Byline
 					text={byline}
 					format={format}
+					containerPalette={containerPalette}
 					size={size}
 					isCard={true}
 				/>
