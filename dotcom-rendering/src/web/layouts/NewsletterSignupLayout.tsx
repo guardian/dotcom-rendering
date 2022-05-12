@@ -6,7 +6,7 @@ import {
 } from '@guardian/source-foundations';
 import type { ArticleFormat } from '@guardian/libs';
 
-import { Lines } from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -49,11 +49,6 @@ export const NewsletterSignupLayout = ({
 	format,
 	palette,
 }: Props) => {
-	const formatForNav = {
-		...format,
-		theme: getCurrentPillar(CAPIArticle),
-	};
-
 	const {
 		config: { host },
 	} = CAPIArticle;
@@ -72,85 +67,78 @@ export const NewsletterSignupLayout = ({
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
-				<>
-					<Stuck>
-						<ElementContainer
-							showTopBorder={false}
-							showSideBorders={false}
-							padded={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								shouldHideAds={CAPIArticle.shouldHideAds}
-								display={format.display}
-							/>
-						</ElementContainer>
-					</Stuck>
+				<Stuck>
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
 						padded={false}
-						backgroundColour={brandBackground.primary}
-						element="header"
+						shouldCenter={false}
 					>
-						<Header
-							edition={CAPIArticle.editionId}
-							idUrl={CAPIArticle.config.idUrl}
-							mmaUrl={CAPIArticle.config.mmaUrl}
-							discussionApiUrl={
-								CAPIArticle.config.discussionApiUrl
-							}
-							isAnniversary={
-								CAPIArticle.config.switches.anniversaryHeaderSvg
-							}
-							urls={CAPIArticle.nav.readerRevenueLinks.header}
-							remoteHeader={
-								CAPIArticle.config.switches.remoteHeader
-							}
-							contributionsServiceUrl={contributionsServiceUrl}
+						<HeaderAdSlot
+							isAdFreeUser={CAPIArticle.isAdFreeUser}
+							shouldHideAds={CAPIArticle.shouldHideAds}
+							display={format.display}
 						/>
 					</ElementContainer>
-					<ElementContainer
-						showSideBorders={true}
-						borderColour={brandLine.primary}
-						showTopBorder={false}
-						padded={false}
-						backgroundColour={brandBackground.primary}
-						element="nav"
-					>
-						<Nav
-							nav={NAV}
-							format={formatForNav}
-							subscribeUrl={
-								CAPIArticle.nav.readerRevenueLinks.header
-									.subscribe
-							}
-							edition={CAPIArticle.editionId}
-						/>
-					</ElementContainer>
+				</Stuck>
+				<ElementContainer
+					showTopBorder={false}
+					showSideBorders={false}
+					padded={false}
+					backgroundColour={brandBackground.primary}
+					element="header"
+				>
+					<Header
+						edition={CAPIArticle.editionId}
+						idUrl={CAPIArticle.config.idUrl}
+						mmaUrl={CAPIArticle.config.mmaUrl}
+						discussionApiUrl={CAPIArticle.config.discussionApiUrl}
+						urls={CAPIArticle.nav.readerRevenueLinks.header}
+						remoteHeader={CAPIArticle.config.switches.remoteHeader}
+						contributionsServiceUrl={contributionsServiceUrl}
+					/>
+				</ElementContainer>
+				<ElementContainer
+					showSideBorders={true}
+					borderColour={brandLine.primary}
+					showTopBorder={false}
+					padded={false}
+					backgroundColour={brandBackground.primary}
+					element="nav"
+				>
+					<Nav
+						nav={NAV}
+						format={{
+							...format,
+							theme: getCurrentPillar(CAPIArticle),
+						}}
+						subscribeUrl={
+							CAPIArticle.nav.readerRevenueLinks.header.subscribe
+						}
+						edition={CAPIArticle.editionId}
+					/>
+				</ElementContainer>
 
-					<ElementContainer
-						backgroundColour={palette.background.article}
-						padded={false}
-						element="aside"
-					>
-						<Island deferUntil="idle">
-							<SubNav
-								subNavSections={newslettersSubNav}
-								currentNavLink={NAV.currentNavLink}
-								format={format}
-							/>
-						</Island>
-					</ElementContainer>
-					<ElementContainer
-						backgroundColour={palette.background.article}
-						padded={false}
-						showTopBorder={false}
-					>
-						<Lines count={4} effect="straight" />
-					</ElementContainer>
-				</>
+				<ElementContainer
+					backgroundColour={palette.background.article}
+					padded={false}
+					element="aside"
+				>
+					<Island deferUntil="idle">
+						<SubNav
+							subNavSections={newslettersSubNav}
+							currentNavLink={NAV.currentNavLink}
+							format={format}
+						/>
+					</Island>
+				</ElementContainer>
+				<ElementContainer
+					backgroundColour={palette.background.article}
+					padded={false}
+					showTopBorder={false}
+				>
+					<StraightLines count={4} />
+				</ElementContainer>
 			</div>
 
 			{CAPIArticle.config.switches.surveys && (
