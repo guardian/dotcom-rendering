@@ -171,8 +171,10 @@ const textLastUpdated = (format: ArticleFormat): string => {
 			case ArticlePillar.Opinion:
 				return opinion[600];
 			case ArticleSpecial.Labs:
-			case ArticleSpecial.SpecialReport:
+				// We don't support liveblogs on labs ye
 				return news[600];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[700];
 		}
 	}
 	return BLACK;
@@ -259,7 +261,7 @@ const textArticleLink = (format: ArticleFormat): string => {
 			case ArticleSpecial.Labs:
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
+				return specialReport[300];
 		}
 	}
 
@@ -306,7 +308,7 @@ const textKeyEvent = (format: ArticleFormat): string => {
 		case ArticleSpecial.Labs:
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
+			return specialReport[300];
 	}
 };
 
@@ -651,10 +653,11 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 			case ArticlePillar.Opinion:
 				return opinion[500];
 			case ArticleSpecial.Labs:
-			case ArticleSpecial.SpecialReport:
-				// We don't have designs for Special Report or Labs liveblogs yet
+				// We don't have designs for Labs liveblogs yet
 				// so we default to news
 				return news[600];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[700];
 		}
 	}
 
@@ -666,10 +669,11 @@ const backgroundHeader = (format: ArticleFormat): string => {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
-				case ArticleSpecial.SpecialReport:
 					// We don't have designs for Special Report or Labs liveblogs yet
 					// so we default to news
 					return news[200];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[700];
 				default:
 					return pillarPalette[format.theme][300];
 			}
@@ -693,10 +697,11 @@ const backgroundStandfirst = (format: ArticleFormat): string => {
 				case ArticlePillar.Opinion:
 					return opinion[200];
 				case ArticleSpecial.Labs:
-				case ArticleSpecial.SpecialReport:
-					// We don't have designs for Special Report or Labs liveblogs yet
+					// We don't have designs for Labs liveblogs yet
 					// so we default to news
 					return news[200];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
 			}
 			break;
 		case ArticleDesign.DeadBlog:
@@ -828,7 +833,7 @@ const borderPinnedPost = (format: ArticleFormat): string => {
 const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[400];
+		return specialReport[300];
 	return border.secondary;
 };
 
@@ -846,10 +851,11 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 			case ArticlePillar.Opinion:
 				return opinion[500];
 			case ArticleSpecial.Labs:
-			case ArticleSpecial.SpecialReport:
 				// We don't have designs for Special Report or Labs liveblogs yet
 				// so we default to news
 				return news[600];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[450];
 		}
 	}
 	if (format.theme === ArticleSpecial.SpecialReport)
