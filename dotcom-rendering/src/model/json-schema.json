@@ -399,9 +399,6 @@
         },
         "mostRecentBlockId": {
             "type": "string"
-        },
-        "matchType": {
-            "type": "string"
         }
     },
     "required": [
@@ -2120,11 +2117,13 @@
             "enum": [
                 "AnalysisDesign",
                 "ArticleDesign",
+                "AudioDesign",
                 "CommentDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
+                "GalleryDesign",
                 "InteractiveDesign",
                 "InterviewDesign",
                 "LetterDesign",
@@ -2136,7 +2135,8 @@
                 "PrintShopDesign",
                 "QuizDesign",
                 "RecipeDesign",
-                "ReviewDesign"
+                "ReviewDesign",
+                "VideoDesign"
             ],
             "type": "string"
         },
