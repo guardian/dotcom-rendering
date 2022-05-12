@@ -1,5 +1,4 @@
 import {
-	neutral,
 	brandBackground,
 	brandBorder,
 	brandLine,
@@ -24,6 +23,7 @@ import { NewsLetterSignupBanner } from '../components/NewsLetterSignupBanner';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleBody } from '../components/ArticleBody';
+import { ContainerLayout } from '../components/ContainerLayout';
 
 interface Props {
 	CAPIArticle: CAPIArticleType;
@@ -31,8 +31,6 @@ interface Props {
 	format: ArticleFormat;
 	palette: Palette;
 }
-
-const THERE_SHOULD_BE_MERCH_AD_SLOTS = false;
 
 export const NewsletterSignupLayout = ({
 	CAPIArticle,
@@ -150,7 +148,11 @@ export const NewsletterSignupLayout = ({
 					<NewsLetterSignupBanner />
 				</ElementContainer>
 
-				<ElementContainer padded={true}>
+				<ContainerLayout
+					centralBorder="full"
+					sideBorders={true}
+					title="UK Focused"
+				>
 					<ArticleContainer format={format}>
 						<ArticleBody
 							format={format}
@@ -178,7 +180,7 @@ export const NewsletterSignupLayout = ({
 							isDev={!!CAPIArticle.config.isDev}
 						/>
 					</ArticleContainer>
-				</ElementContainer>
+				</ContainerLayout>
 
 				<Island
 					clientOnly={true}
@@ -206,39 +208,6 @@ export const NewsletterSignupLayout = ({
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
-
-				{THERE_SHOULD_BE_MERCH_AD_SLOTS && (
-					<>
-						<ElementContainer
-							data-print-layout="hide"
-							padded={false}
-							showTopBorder={false}
-							showSideBorders={false}
-							backgroundColour={neutral[93]}
-							element="aside"
-						>
-							<AdSlot
-								data-print-layout="hide"
-								position="merchandising-high"
-								display={format.display}
-							/>
-						</ElementContainer>
-
-						<ElementContainer
-							data-print-layout="hide"
-							padded={false}
-							showTopBorder={false}
-							showSideBorders={false}
-							backgroundColour={neutral[93]}
-							element="aside"
-						>
-							<AdSlot
-								position="merchandising"
-								display={format.display}
-							/>
-						</ElementContainer>
-					</>
-				)}
 			</main>
 
 			<ElementContainer
