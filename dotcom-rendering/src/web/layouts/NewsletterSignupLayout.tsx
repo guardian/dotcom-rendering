@@ -157,7 +157,6 @@ export const NewsletterSignupLayout = ({
 						<ArticleBody
 							format={format}
 							blocks={CAPIArticle.blocks}
-							pinnedPost={CAPIArticle.pinnedPost}
 							adTargeting={adTargeting}
 							host={host}
 							pageId={CAPIArticle.pageId}
