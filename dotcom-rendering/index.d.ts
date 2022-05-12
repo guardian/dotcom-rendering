@@ -1316,10 +1316,6 @@ type AdSlotType =
 // 3rd party type declarations //
 // ------------------------------
 /* eslint-disable @typescript-eslint/no-explicit-any */
-declare module 'dompurify' {
-	const createDOMPurify: any;
-	export default createDOMPurify;
-}
 declare module 'compose-function' {
 	const compose: any;
 	export default compose;
