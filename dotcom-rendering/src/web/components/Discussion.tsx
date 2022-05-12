@@ -89,7 +89,20 @@ export const Discussion = ({
 
 	const handlePermalink = (commentId: number) => {
 		if (typeof window === 'undefined') return false;
-		window.location.hash = `#comment-${commentId}`;
+
+		const newHash = `#comment-${commentId}`
+
+		// If the comment is already on the page, scroll to
+		// it directly. (If comment is not loaded, updating the hashCommentId
+		// should trigger setCommentPage, which will trigger a page load in
+		// discussion rendering.) We're adding scrolling here because React
+		// doesn't register a click as a change of state, if the same link is
+		// clicked twice. (Problem still persists for edge case of user navigating
+		// to a different page of comments without changing the comment id.)
+		document.querySelector(newHash)?.scrollIntoView();
+
+		window.location.hash = newHash;
+
 		// Put this comment id into the hashCommentId state which will
 		// trigger an api call to get the comment context and then expand
 		// and reload the discussion based on the results
