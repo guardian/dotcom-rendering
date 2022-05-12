@@ -2306,6 +2306,7 @@
                 "LiveBlogDesign",
                 "MatchReportDesign",
                 "MediaDesign",
+                "NewsletterSignupDesign",
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PrintShopDesign",
@@ -2375,14 +2376,21 @@
         },
         "FEContainerPalette": {
             "enum": [
+                "Branded",
+                "Breaking",
                 "BreakingPalette",
+                "Canonical",
+                "Dynamo",
+                "DynamoLike",
                 "EventAltPalette",
                 "EventPalette",
                 "InvestigationPalette",
                 "LongRunningAltPalette",
                 "LongRunningPalette",
+                "Podcast",
                 "SombreAltPalette",
-                "SombrePalette"
+                "SombrePalette",
+                "Special"
             ],
             "type": "string"
         },
