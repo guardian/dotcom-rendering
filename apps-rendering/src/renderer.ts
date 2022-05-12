@@ -53,6 +53,7 @@ import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/blockquote';
 import Bullet from 'components/bullet';
 import CalloutForm from 'components/calloutForm';
+import { Caption } from 'components/caption';
 import Credit from 'components/credit';
 import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
@@ -405,82 +406,6 @@ const Tweet = (props: {
 		...Array.from(props.content).map(textElement(props.format)),
 	);
 
-const captionHeadingStyles = css`
-	${headline.xxxsmall()}
-	color: ${neutral[86]};
-	margin: 0 0 ${remSpace[3]};
-	display: block;
-`;
-
-const captionElement =
-	(format: ArticleFormat) =>
-	(node: Node, key: number): ReactNode => {
-		const text = node.textContent ?? '';
-		const children = Array.from(node.childNodes).map(
-			captionElement(format),
-		);
-		switch (node.nodeName) {
-			case 'STRONG':
-				return format.design === ArticleDesign.Media
-					? styledH(
-							'h2',
-							{ css: captionHeadingStyles, key },
-							children,
-					  )
-					: children;
-			case 'BR':
-				return null;
-			case 'EM':
-				return styledH(
-					'em',
-					{
-						css: css`
-							${textSans.xsmall({
-								fontStyle: 'italic',
-								fontWeight: 'bold',
-							})}
-						`,
-						key,
-					},
-					children,
-				);
-			case 'A':
-				return styledH(
-					Anchor,
-					{
-						href: withDefault('')(getHref(node)),
-						className:
-							format.design === ArticleDesign.Media
-								? css`
-										color: ${neutral[86]};
-								  `
-								: undefined,
-						format,
-						key,
-					},
-					children,
-				);
-			case '#text':
-				return styledH(
-					'span',
-					{
-						css: css`
-							${textSans.xxsmall()}
-						`,
-						key,
-					},
-					text,
-				);
-			default:
-				return textElement(format)(node, key);
-		}
-	};
-
-const renderCaption = (
-	doc: DocumentFragment,
-	format: ArticleFormat,
-): ReactNode[] => Array.from(doc.childNodes).map(captionElement(format));
-
 const imageRenderer = (
 	format: ArticleFormat,
 	element: Image,
@@ -489,7 +414,7 @@ const imageRenderer = (
 	const { caption, credit, nativeCaption } = element;
 	return h(BodyImage, {
 		caption: map<DocumentFragment, ReactNode>((cap) => [
-			renderCaption(cap, format),
+			h(Caption, { format, caption: cap }),
 			h(Credit, { credit, format, key }),
 		])(caption),
 		format: format,
@@ -652,9 +577,9 @@ const mediaAtomRenderer = (
 	const figcaption = h(FigCaption, {
 		format: format,
 		supportsDarkMode: true,
-		children: map((cap: DocumentFragment) => renderCaption(cap, format))(
-			caption,
-		),
+		children: map((cap: DocumentFragment) =>
+			h(Caption, { caption: cap, format }),
+		)(caption),
 	});
 	return styledH('figure', figureAttributes, [
 		isEditions
@@ -839,6 +764,5 @@ export {
 	getHref,
 	transformHref,
 	plainTextElement,
-	renderCaption,
 	shouldShowDropCap,
 };
