@@ -6,6 +6,7 @@ import { LI } from './Card/components/LI';
 
 type Props = {
 	trails: TrailType[];
+	containerPalette?: DCRContainerPalette;
 };
 
 /**
@@ -13,7 +14,7 @@ type Props = {
  *
  * @see {@link https://www.figma.com/file/sx2vMFHbL7SsUo0LcpsKNe/%E2%AC%A3--Front-container?node-id=123%3A137122 Figma designs}
  */
-export const DynamicSlow = ({ trails }: Props) => {
+export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
 	const bigCards = trails.slice(2, 4);
@@ -24,6 +25,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="75%">
 					<Card
+						containerPalette={containerPalette}
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
@@ -52,6 +54,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 						starRating={primary.starRating}
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
+						dataLinkName={primary.dataLinkName}
 					/>
 				</LI>
 				<LI
@@ -61,6 +64,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 					percentage="25%"
 				>
 					<Card
+						containerPalette={containerPalette}
 						linkTo={secondary.url}
 						format={secondary.format}
 						headlineText={secondary.headline}
@@ -85,6 +89,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 						starRating={secondary.starRating}
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
+						dataLinkName={secondary.dataLinkName}
 					/>
 				</LI>
 			</UL>
@@ -103,6 +108,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 									}
 								>
 									<Card
+										containerPalette={containerPalette}
 										linkTo={card.url}
 										format={card.format}
 										trailText={card.trailText}
@@ -136,6 +142,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 											card.supportingContent
 										}
 										imagePositionOnMobile="none"
+										dataLinkName={card.dataLinkName}
 									/>
 								</LI>
 							);
@@ -156,6 +163,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 									padBottomOnMobile={false}
 								>
 									<Card
+										containerPalette={containerPalette}
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}
@@ -186,6 +194,7 @@ export const DynamicSlow = ({ trails }: Props) => {
 										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
+										dataLinkName={card.dataLinkName}
 									/>
 								</LI>
 							);

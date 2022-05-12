@@ -11,7 +11,6 @@ import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { CardCommentCount } from '../CardCommentCount';
 
-import { decidePalette } from '../../lib/decidePalette';
 import { formatCount } from '../../lib/formatCount';
 
 import { ContentWrapper } from './components/ContentWrapper';
@@ -52,46 +51,12 @@ export type Props = {
 	commentCount?: number;
 	starRating?: number;
 	minWidthInPixels?: number;
-	// Ophan tracking
+	/** Used for Ophan tracking */
 	dataLinkName?: string;
 	// Labs
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
-};
-
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
-
-type CoveragesType = {
-	image: {
-		small: CardPercentageType;
-		medium: CardPercentageType;
-		large: CardPercentageType;
-		jumbo: CardPercentageType;
-	};
-	content: {
-		small: CardPercentageType;
-		medium: CardPercentageType;
-		large: CardPercentageType;
-		jumbo: CardPercentageType;
-	};
-};
-
-const coverages: CoveragesType = {
-	// coverages is how we set the image size relative to the space given
-	// to the headline. These percentages are passed to flex-basis inside the
-	// wrapper components
-	image: {
-		small: '25%',
-		medium: '50%',
-		large: '66%',
-		jumbo: '75%',
-	},
-	content: {
-		small: '75%',
-		medium: '50%',
-		large: '34%',
-		jumbo: '25%',
-	},
+	containerPalette?: DCRContainerPalette;
 };
 
 const starWrapper = css`
@@ -143,26 +108,19 @@ export const Card = ({
 	dataLinkName,
 	branding,
 	supportingContent,
+	containerPalette,
 }: Props) => {
-	// Decide how we position the image on the card
-	let imageCoverage: CardPercentageType | undefined;
-	let contentCoverage: CardPercentageType | undefined;
-	if (imageSize && imagePosition !== 'top') {
-		// We only specifiy an explicit width for the image when
-		// we're positioning left or right, not top. Top positioned
-		// images flow naturally
-		imageCoverage = coverages.image[imageSize];
-		contentCoverage = coverages.content[imageSize];
-	}
-
 	const showCommentCount = commentCount || commentCount === 0;
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
-
-	const cardPalette = decidePalette(format);
 
 	const moreThanTwoSubLinks: boolean = !!(
 		supportingContent?.length && supportingContent.length > 2
 	);
+
+	const cardIsVertical =
+		imagePosition === 'top' || imagePosition === 'bottom';
+
+	const positionFooterUnderContent = !moreThanTwoSubLinks && cardIsVertical;
 
 	const renderFooter = ({
 		renderAge = true,
@@ -182,10 +140,12 @@ export const Card = ({
 		return (
 			<CardFooter
 				format={format}
+				containerPalette={containerPalette}
 				age={
 					renderAge && webPublicationDate ? (
 						<CardAge
 							format={format}
+							containerPalette={containerPalette}
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
 						/>
@@ -196,7 +156,8 @@ export const Card = ({
 					format.design === ArticleDesign.Media &&
 					mediaType ? (
 						<MediaMeta
-							palette={cardPalette}
+							containerPalette={containerPalette}
+							format={format}
 							mediaType={mediaType}
 							mediaDuration={mediaDuration}
 						/>
@@ -208,7 +169,8 @@ export const Card = ({
 					longCount &&
 					shortCount ? (
 						<CardCommentCount
-							palette={cardPalette}
+							containerPalette={containerPalette}
+							format={format}
 							long={longCount}
 							short={shortCount}
 						/>
@@ -236,8 +198,13 @@ export const Card = ({
 	};
 
 	return (
-		<CardWrapper format={format}>
-			<CardLink linkTo={linkTo} dataLinkName={dataLinkName} />
+		<CardWrapper format={format} containerPalette={containerPalette}>
+			<CardLink
+				linkTo={linkTo}
+				dataLinkName={dataLinkName}
+				format={format}
+				containerPalette={containerPalette}
+			/>
 			<CardLayout
 				imagePosition={imagePosition}
 				imagePositionOnMobile={imagePositionOnMobile}
@@ -245,7 +212,8 @@ export const Card = ({
 			>
 				{imageUrl && (
 					<ImageWrapper
-						percentage={imageCoverage}
+						imageSize={imageSize}
+						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
 					>
 						<img src={imageUrl} alt="" role="presentation" />
@@ -254,12 +222,16 @@ export const Card = ({
 						) : null}
 					</ImageWrapper>
 				)}
-				<ContentWrapper percentage={contentCoverage}>
+				<ContentWrapper
+					imageSize={imageSize}
+					imagePosition={imagePosition}
+				>
 					<Flex>
 						<HeadlineWrapper>
 							<CardHeadline
 								headlineText={headlineText}
 								format={format}
+								containerPalette={containerPalette}
 								size={headlineSize}
 								showQuotes={showQuotes}
 								kickerText={
@@ -285,7 +257,8 @@ export const Card = ({
 									<Avatar
 										imageSrc={avatar.src}
 										imageAlt={avatar.alt}
-										palette={cardPalette}
+										containerPalette={containerPalette}
+										format={format}
 									/>
 								</AvatarContainer>
 							</Hide>
@@ -293,7 +266,10 @@ export const Card = ({
 					</Flex>
 					<div>
 						{trailText && (
-							<TrailTextWrapper palette={cardPalette}>
+							<TrailTextWrapper
+								containerPalette={containerPalette}
+								format={format}
+							>
 								<div
 									dangerouslySetInnerHTML={{
 										__html: trailText,
@@ -307,13 +283,14 @@ export const Card = ({
 									<Avatar
 										imageSrc={avatar.src}
 										imageAlt={avatar.alt}
-										palette={cardPalette}
+										containerPalette={containerPalette}
+										format={format}
 									/>
 								</AvatarContainer>
 							</Hide>
 						)}
 						{/* Show the card footer in the same column as the headline content */}
-						{!moreThanTwoSubLinks ? (
+						{positionFooterUnderContent ? (
 							renderFooter({ forceVertical: true })
 						) : (
 							<></>
@@ -322,7 +299,7 @@ export const Card = ({
 				</ContentWrapper>
 			</CardLayout>
 			{/* If there are more than two sublinks break footer out of the headline column into a row below */}
-			{moreThanTwoSubLinks ? renderFooter({}) : <></>}
+			{!positionFooterUnderContent ? renderFooter({}) : <></>}
 		</CardWrapper>
 	);
 };

@@ -126,7 +126,7 @@ function ads(): void {
 
 			insertAds();
 			Array.from(
-				document.querySelectorAll('.ad-labels, .upgrade-banner button'),
+				document.querySelectorAll('.ad-labels, .support-banner button'),
 			).forEach((adLabel) => {
 				adLabel.addEventListener('click', () => {
 					void acquisitionsClient.launchPurchaseScreen(

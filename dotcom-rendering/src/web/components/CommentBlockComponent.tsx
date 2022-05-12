@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { textSans, neutral, space } from '@guardian/source-foundations';
+import {
+	textSans,
+	neutral,
+	space,
+	text as textColor,
+} from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 
 type Props = {
@@ -24,6 +29,17 @@ const bodyContentStyles = css`
 	p {
 		word-break: break-word;
 		margin-bottom: ${space[2]}px;
+	}
+
+	blockquote {
+		font-style: italic;
+		color: ${textColor.supporting};
+		border-left: ${space[1]}px ${neutral[86]} solid;
+		margin-top: ${space[1]}px;
+		margin-right: 0;
+		margin-bottom: ${space[4]}px;
+		margin-left: 0;
+		padding-left: ${space[3]}px;
 	}
 `;
 

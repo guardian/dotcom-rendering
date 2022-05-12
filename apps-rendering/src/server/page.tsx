@@ -56,6 +56,7 @@ const scriptName = ({ design, display }: ArticleFormat): Option<string> => {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Quiz:
 		case ArticleDesign.Media:
+		case ArticleDesign.Interview:
 			return some('article.js');
 		default:
 			return none;
