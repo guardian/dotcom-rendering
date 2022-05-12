@@ -152,6 +152,7 @@ export const NewsletterSignupLayout = ({
 					centralBorder="full"
 					sideBorders={true}
 					title="UK Focused"
+					description={CAPIArticle.headline}
 				>
 					<ArticleContainer format={format}>
 						<ArticleBody
