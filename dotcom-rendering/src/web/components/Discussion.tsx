@@ -90,7 +90,7 @@ export const Discussion = ({
 	const handlePermalink = (commentId: number) => {
 		if (typeof window === 'undefined') return false;
 
-		const newHash = `#comment-${commentId}`
+		const newHash = `#comment-${commentId}`;
 
 		// If the comment is already on the page, scroll to
 		// it directly. (If comment is not loaded, updating the hashCommentId
