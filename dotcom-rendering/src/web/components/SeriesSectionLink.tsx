@@ -203,7 +203,7 @@ export const SeriesSectionLink = ({
 	isMatch,
 }: Props) => {
 	// If we have a tag, use it to show 2 section titles
-	const tag = pickSeriesTag(tags);
+	const tag: TagType | undefined = pickSeriesTag(tags);
 
 	const hasSeriesTag = tag && tag.type === 'Series';
 
