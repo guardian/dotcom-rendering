@@ -7,6 +7,7 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { css } from '@emotion/react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -30,16 +31,6 @@ interface Props {
 	format: ArticleFormat;
 	palette: Palette;
 }
-
-const newslettersSubNav: SubNavType = {
-	links: [
-		{
-			url: '/email-newsletters',
-			title: 'Email newsletters',
-			longTitle: 'Email newsletters',
-		},
-	],
-};
 
 const THERE_SHOULD_BE_MERCH_AD_SLOTS = false;
 
@@ -119,26 +110,35 @@ export const NewsletterSignupLayout = ({
 					/>
 				</ElementContainer>
 
-				<ElementContainer
-					backgroundColour={palette.background.article}
-					padded={false}
-					element="aside"
-				>
-					<Island deferUntil="idle">
-						<SubNav
-							subNavSections={newslettersSubNav}
-							currentNavLink={NAV.currentNavLink}
-							format={format}
-						/>
-					</Island>
-				</ElementContainer>
-				<ElementContainer
-					backgroundColour={palette.background.article}
-					padded={false}
-					showTopBorder={false}
-				>
-					<StraightLines count={4} />
-				</ElementContainer>
+				{NAV.subNavSections && (
+					<>
+						<ElementContainer
+							backgroundColour={palette.background.article}
+							padded={false}
+							element="aside"
+						>
+							<Island deferUntil="idle">
+								<SubNav
+									subNavSections={NAV.subNavSections}
+									currentNavLink={NAV.currentNavLink}
+									format={format}
+								/>
+							</Island>
+						</ElementContainer>
+						<ElementContainer
+							backgroundColour={palette.background.article}
+							padded={false}
+							showTopBorder={false}
+						>
+							<StraightLines
+								count={4}
+								cssOverrides={css`
+									display: block;
+								`}
+							/>
+						</ElementContainer>
+					</>
+				)}
 			</div>
 
 			{CAPIArticle.config.switches.surveys && (
