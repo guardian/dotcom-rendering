@@ -98,15 +98,22 @@ const carousel: Element | null = !isServer
 	? window.document.getElementById('key-event-carousel')
 	: null;
 
+function calculateCardsOnScreen() {
+	if (carousel) {
+		return Math.floor(carousel.clientWidth / 180);
+	}
+	return 0;
+}
 export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	format,
 }: Props) => {
-	const [activeIndex, setActiveIndex] = useState(6);
+	const [activeIndex, setActiveIndex] = useState(0);
 	const [elements, setElements] = useState<Element[]>();
 	const cardWidth = 180;
-	const isFirstCard = activeIndex === 6;
+	const cardsOnScreen = calculateCardsOnScreen();
+	const isFirstCard = activeIndex === cardsOnScreen;
 	const isLastCard = activeIndex === keyEvents.length - 1;
 
 	useEffect(() => {
@@ -118,19 +125,19 @@ export const KeyEventsCarousel = ({
 		function handleIntersect(entries: IntersectionObserverEntry[]) {
 			const entry = entries.find((e) => e.isIntersecting);
 			const index = elements?.findIndex((e) => e === entry?.target);
-			if (index) setActiveIndex(index);
+			if (index && index !== -1) setActiveIndex(index);
 		}
 
 		const observer = new window.IntersectionObserver(handleIntersect, {
 			root: carousel,
-			rootMargin: '0px 0px 0px -1076px',
+			rootMargin: '0% 0% 0% -87%',
 			threshold: 0.5,
 		});
 
 		elements?.forEach((el) => {
 			observer.observe(el);
 		});
-	}, [elements]);
+	}, [elements, activeIndex]);
 
 	const goPrevious = () => {
 		if (carousel && !isFirstCard) {
