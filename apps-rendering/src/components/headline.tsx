@@ -125,6 +125,14 @@ const featureStyles = css`
 	}
 `;
 
+const reviewStyles = css`
+	${headline.small({ fontWeight: 'bold' })}
+
+	${from.tablet} {
+		${headline.medium({ fontWeight: 'bold' })}
+	}
+`;
+
 const interviewStyles = css`
 	${headline.small({ fontWeight: 'bold' })}
 	line-height: 1.25;
@@ -187,7 +195,8 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 			return css(styles(format), commentStyles);
 		case ArticleDesign.Media:
 			return css(styles(format), mediaStyles);
-
+		case ArticleDesign.Review:
+			return css(styles(format), reviewStyles);
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return css(styles(format), liveblogStyles);
