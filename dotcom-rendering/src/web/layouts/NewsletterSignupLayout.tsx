@@ -144,7 +144,7 @@ export const NewsletterSignupLayout = ({
 			)}
 
 			<main>
-				<ElementContainer padded={false}>
+				<ElementContainer padded={false} showSideBorders={false}>
 					<NewsLetterSignupBanner />
 				</ElementContainer>
 
