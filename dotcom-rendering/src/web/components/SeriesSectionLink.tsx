@@ -170,29 +170,6 @@ const immersiveTitleBadgeStyle = (palette: Palette) => css`
 		6px 0 0 0 ${palette.background.seriesTitle};
 `;
 
-const pickSeriesTag = (tags: TagType[]): TagType | undefined => {
-	const observerTag = tags.find(
-		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
-	);
-
-	// Observer opinion (commentisfree) articles should prioritise
-	// the publication tag over the commentisfree tag.
-	if (
-		observerTag &&
-		tags.find((tag) => tag.id === 'commentisfree/commentisfree')
-	) {
-		return observerTag;
-	}
-
-	return tags.find(
-		(thisTag) =>
-			thisTag.type === 'Blog' ||
-			thisTag.type === 'Series' ||
-			(thisTag.type === 'Publication' &&
-				thisTag.title === 'The Observer'),
-	);
-};
-
 export const SeriesSectionLink = ({
 	format,
 	tags,
@@ -202,8 +179,23 @@ export const SeriesSectionLink = ({
 	badge,
 	isMatch,
 }: Props) => {
+	const observerTag = tags.find(
+		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
+	);
+	const isCommentIsFree = tags.some(
+		(tag) => tag.id === 'commentisfree/commentisfree',
+	);
+	const seriesTag = tags.find(
+		(tag) =>
+			tag.type === 'Blog' ||
+			tag.type === 'Series' ||
+			(tag.type === 'Publication' && tag.title === 'The Observer'),
+	);
+
 	// If we have a tag, use it to show 2 section titles
-	const tag: TagType | undefined = pickSeriesTag(tags);
+	// Observer opinion (commentisfree) articles should prioritise
+	// the publication tag over the commentisfree tag.
+	const tag = observerTag && isCommentIsFree ? observerTag : seriesTag;
 
 	const hasSeriesTag = tag && tag.type === 'Series';
 
