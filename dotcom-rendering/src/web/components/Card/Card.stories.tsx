@@ -29,11 +29,21 @@ const basicCardProps: CardProps = {
 	imagePosition: 'top',
 };
 
+const aBasicLink = {
+	headline: 'Headline',
+	url: 'https://www.theguardian.com',
+	format: {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticlePillar.News,
+	},
+};
+
 const CardWrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<div
 			css={css`
-				max-height: 300px;
+				max-height: 360px;
 				max-width: 600px;
 				flex-basis: 100%;
 				${from.tablet} {
@@ -275,6 +285,7 @@ cardStories.add('with different image positions', () => {
 				<Card
 					{...basicCardProps}
 					imagePosition="left"
+					imageSize="large"
 					headlineText="left"
 				/>
 			</CardWrapper>
@@ -282,6 +293,7 @@ cardStories.add('with different image positions', () => {
 				<Card
 					{...basicCardProps}
 					imagePosition="right"
+					imageSize="large"
 					headlineText="right"
 				/>
 			</CardWrapper>
@@ -355,9 +367,37 @@ cardStories.add('with no slash', () => {
 	);
 });
 
-cardStories.add('with an avatar', () => {
+cardStories.add('with an avatar when vertical', () => {
 	return (
-		<CardGroup>
+		<>
+			<CardWrapper>
+				<div
+					css={css`
+						width: 260px;
+					`}
+				>
+					<Card
+						{...basicCardProps}
+						imageUrl=""
+						avatar={{
+							src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
+							alt: '',
+						}}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Comment,
+							theme: ArticlePillar.Opinion,
+						}}
+					/>
+				</div>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('with an avatar when horizontal', () => {
+	return (
+		<>
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
@@ -366,18 +406,291 @@ cardStories.add('with an avatar', () => {
 						src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
 						alt: '',
 					}}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
 				/>
 			</CardWrapper>
-		</CardGroup>
+		</>
 	);
 });
 
-cardStories.add('with comments', () => {
+cardStories.add('when vertical and theme opinion', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="top"
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when vertical, opinion and with comments', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="top"
+					commentCount={99}
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('with sublinks when vertical and opinion', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="top"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline: 'Headline 1',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline: 'Headline 2',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline: 'Headline 3',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when horizontal and opinion', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					commentCount={99}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="right"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					commentCount={99}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="right"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					commentCount={99}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="right"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when news, with comments', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					imagePosition="right"
+					imageSize="large"
+					commentCount={99}
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					imagePosition="right"
+					imageSize="large"
+					commentCount={99}
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when news, with more than two sublinks', () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				imagePosition="right"
+				imageSize="large"
+				commentCount={99}
+				supportingContent={[
+					{
+						...aBasicLink,
+						headline: 'A longer headline to see how wrapping works',
+						kickerText: 'Kicker',
+					},
+					{
+						...aBasicLink,
+						headline: 'A longer headline to see how wrapping works',
+						kickerText: 'Kicker',
+					},
+					{
+						...aBasicLink,
+						headline: 'A longer headline to see how wrapping works',
+						kickerText: 'Kicker',
+					},
+				]}
+			/>
+		</CardWrapper>
+	);
+});
+
+cardStories.add('when vertical, news and with comments', () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
 				<Card {...basicCardProps} commentCount={894} />
 			</CardWrapper>
 		</CardGroup>
+	);
+});
+
+cardStories.add('when horizontal, opinion, with a small image', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="small"
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when opinion, with the image at the bottom', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="bottom"
+					commentCount={99}
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
 	);
 });

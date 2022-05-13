@@ -9,20 +9,25 @@ updates:
       directory: '/'
       schedule:
           interval: 'daily'
+      # Set to minimise the number of chromatic runs.
+      rebase-strategy: "disabled"
     - package-ecosystem: 'npm'
       directory: '/apps-rendering'
       schedule:
           interval: 'daily'
       labels:
         - "AR Dependency"
-    - package-ecosystem: "npm" 
+      rebase-strategy: "disabled"
+    - package-ecosystem: "npm"
       directory: "/dotcom-rendering"
       schedule:
         interval: "daily"
       labels:
         - "DCR Dependency"
       open-pull-requests-limit: 10
+      rebase-strategy: "disabled"
     - package-ecosystem: 'github-actions'
       directory: '/'
       schedule:
           interval: 'daily'
+      rebase-strategy: "disabled"

@@ -9,9 +9,9 @@ import {
 	from,
 	until,
 	visuallyHidden,
+	brandText,
 } from '@guardian/source-foundations';
-
-import Logo from '../../static/logos/guardian-anniversary-logo.svg';
+import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
 
@@ -218,7 +218,10 @@ export const Header: React.FC<{
 				>
 					The Guardian - Back to home
 				</span>
-				<Logo />
+				<SvgGuardianBestWebsiteLogo
+					textColor={brandText.primary}
+					textAccentColor={brandAlt[400]}
+				/>
 			</a>
 		</div>
 
