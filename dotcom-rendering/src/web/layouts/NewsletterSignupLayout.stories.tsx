@@ -50,7 +50,10 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIArticleType }) => {
 	);
 };
 
-const stories = storiesOf(`Layouts/NewsletterSignUp`, module).addParameters({
+const stories = storiesOf(
+	`Layouts/NewsletterSignUp(in progress)`,
+	module,
+).addParameters({
 	chromatic: {
 		diffThreshold: 0.2,
 		pauseAnimationAtEnd: true,
