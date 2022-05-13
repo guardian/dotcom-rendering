@@ -165,7 +165,7 @@ clear: # private
 
 gen-schema:
 	$(call log, "Generating new schemas")
-	@node scripts/json-schema/gen-schema.js
+	@node scripts/json-schema/write-schema.js
 	@git add src/model/json-schema.json
 	@git add src/model/front-schema.json
 

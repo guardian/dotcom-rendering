@@ -974,7 +974,7 @@ type FEFrontConfigType = {
 	isSensitive: boolean;
 	isDev: boolean;
 	thirdPartyAppsAccount?: string;
-	avatarImagesUrl: string;
+	avatarImagesUrl?: string;
 	fbAppId: string;
 };
 
