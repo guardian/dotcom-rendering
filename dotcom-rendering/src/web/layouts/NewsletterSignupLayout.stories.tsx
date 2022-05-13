@@ -3,7 +3,6 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { storiesOf } from '@storybook/react';
 
 import { decideFormat } from '../lib/decideFormat';
-import { decidePalette } from '../lib/decidePalette';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 import { embedIframe } from '../browser/embedIframe/embedIframe';
@@ -33,19 +32,15 @@ const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIArticleType }) => {
 		doStorybookHydration();
 	}, [ServerCAPI]);
 
-	const newsletterFormat = {
-		theme: format.theme,
-		design: ArticleDesign.NewsletterSignup,
-		display: ArticleDisplay.Standard,
-	};
-	const newsletterPalette = decidePalette(newsletterFormat);
-
 	return (
 		<NewsletterSignupLayout
 			CAPIArticle={ServerCAPI}
 			NAV={NAV}
-			format={newsletterFormat}
-			palette={newsletterPalette}
+			format={{
+				theme: format.theme,
+				design: ArticleDesign.NewsletterSignup,
+				display: ArticleDisplay.Standard,
+			}}
 		/>
 	);
 };

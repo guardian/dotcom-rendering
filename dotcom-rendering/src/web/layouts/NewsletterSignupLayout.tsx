@@ -24,20 +24,15 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleBody } from '../components/ArticleBody';
 import { ContainerLayout } from '../components/ContainerLayout';
+import { decidePalette } from '../lib/decidePalette';
 
 interface Props {
 	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-	palette: Palette;
 }
 
-export const NewsletterSignupLayout = ({
-	CAPIArticle,
-	NAV,
-	format,
-	palette,
-}: Props) => {
+export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { host },
 	} = CAPIArticle;
@@ -52,6 +47,8 @@ export const NewsletterSignupLayout = ({
 		adUnit: CAPIArticle.config.adUnit,
 	});
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
+
+	const palette = decidePalette(format);
 
 	return (
 		<>
