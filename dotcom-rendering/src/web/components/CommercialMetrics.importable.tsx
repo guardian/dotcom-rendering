@@ -7,7 +7,6 @@ import { getCookie } from '@guardian/libs';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
 import { tests } from '../experiments/ab-tests';
-import { commercialLazyLoadMargin } from '../experiments/tests/commercial-lazy-load-margin';
 import { useAB } from '../lib/useAB';
 import { prebidPriceGranularity } from '../experiments/tests/prebid-price-granularity';
 
@@ -29,7 +28,6 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 		// For these tests switch off sampling and collect metrics for 100% of views
 		const clientSideTestsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
-			commercialLazyLoadMargin,
 			prebidPriceGranularity,
 		];
 

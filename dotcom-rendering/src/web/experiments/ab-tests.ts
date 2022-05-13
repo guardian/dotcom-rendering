@@ -6,8 +6,6 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
-import { commercialGptLazyLoad } from './tests/commercial-gpt-lazy-load';
-import { commercialLazyLoadMargin } from './tests/commercial-lazy-load-margin';
 import { prebidPriceGranularity } from './tests/prebid-price-granularity';
 
 // keep in sync with ab-tests in frontend
@@ -18,7 +16,5 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
-	commercialGptLazyLoad,
-	commercialLazyLoadMargin,
 	prebidPriceGranularity,
 ];
