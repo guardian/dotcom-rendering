@@ -6,7 +6,7 @@ on:
 
 jobs:
   build_check:
-    name: DCR Build Check
+    name: DCR Schema Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,10 +21,6 @@ jobs:
       - name: Install
         run: yarn
 
-      - name: Generate production build
-        run: make build
-        working-directory: dotcom-rendering
-
-      - name: Validate Build
-        run: make buildCheck
+      - name: Run check-schema script
+        run: make check-schema
         working-directory: dotcom-rendering

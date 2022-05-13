@@ -2,20 +2,22 @@
 	"deno.enablePaths": ["scripts/deno"],
 	"deno.lint": true,
 	"deno.unstable": false,
-    "eslint.validate": ["typescript", "typescriptreact"],
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.workingDirectories": [
-        "./dotcom-rendering"
-	],
-    "files.watcherExclude": {
-        "**/target": true
-    },
-    "workbench.colorCustomizations": {
-        "titleBar.activeBackground": "#648FFF",
-        "titleBar.activeForeground": "#000000"
+	"eslint.validate": ["typescript", "typescriptreact"],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
 	},
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "gitlens.advanced.blame.customArguments": ["--ignore-revs-file", ".git-blame-ignore-revs"]
+	"eslint.workingDirectories": ["./dotcom-rendering"],
+	"files.watcherExclude": {
+		"**/target": true
+	},
+	"workbench.colorCustomizations": {
+		"titleBar.activeBackground": "#648FFF",
+		"titleBar.activeForeground": "#000000"
+	},
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"gitlens.advanced.blame.customArguments": [
+		"--ignore-revs-file",
+		".git-blame-ignore-revs"
+	],
+	"deno.enable": true
 }

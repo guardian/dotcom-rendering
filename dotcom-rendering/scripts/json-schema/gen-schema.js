@@ -1,40 +1,33 @@
 const TJS = require('typescript-json-schema');
-const { resolve } = require('path');
+const path = require('path');
 
-const root = resolve(__dirname, '..', '..');
-const fs = require('fs');
+const root = path.resolve(__dirname, '..', '..');
 
 const program = TJS.getProgramFromFiles(
-	[resolve(`${root}/src/lib/content.d.ts`), resolve(`${root}/index.d.ts`)],
+	[
+		path.resolve(`${root}/src/lib/content.d.ts`),
+		path.resolve(`${root}/index.d.ts`),
+	],
 	{
 		skipLibCheck: true,
 	},
 );
 
 const settings = { rejectDateType: true, required: true };
-const schema = TJS.generateSchema(program, 'CAPIArticleType', settings);
-const frontSchema = TJS.generateSchema(program, 'FEFrontType', settings);
 
-fs.writeFile(
-	`${root}/src/model/json-schema.json`,
-	JSON.stringify(schema, null, 4),
-	'utf8',
-	(err) => {
-		if (err) {
-			// eslint-disable-next-line @typescript-eslint/tslint/config
-			console.log(err);
-		}
+module.exports = {
+	generateArticleSchema: () => {
+		return JSON.stringify(
+			TJS.generateSchema(program, 'CAPIArticleType', settings),
+			null,
+			4,
+		);
 	},
-);
-
-fs.writeFile(
-	`${root}/src/model/front-schema.json`,
-	JSON.stringify(frontSchema, null, 4),
-	'utf8',
-	(err) => {
-		if (err) {
-			// eslint-disable-next-line @typescript-eslint/tslint/config
-			console.log(err);
-		}
+	generateFrontSchema: () => {
+		return JSON.stringify(
+			TJS.generateSchema(program, 'FEFrontType', settings),
+			null,
+			4,
+		);
 	},
-);
+};

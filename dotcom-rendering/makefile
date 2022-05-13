@@ -169,6 +169,10 @@ gen-schema:
 	@git add src/model/json-schema.json
 	@git add src/model/front-schema.json
 
+check-schema:
+	$(call log, "Checking schemas are up-to-date")
+	@node scripts/json-schema/check-schema.js
+
 gen-fixtures:
 	$(call log, "Generating new article fixture data")
 	@node scripts/test-data/gen-fixtures.js
