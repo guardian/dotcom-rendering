@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { some } from '@guardian/types';
 import { boolean, radios, withKnobs } from '@storybook/addon-knobs';
 import { analysis, article, feature, labs, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
@@ -52,7 +53,7 @@ const Review = (): ReactElement => (
 	<Headline
 		item={{
 			...review,
-			starRating: radios('Rating', starRating, 3),
+			starRating: some(radios('Rating', starRating, 3)),
 			display: boolean('Immersive', false)
 				? ArticleDisplay.Immersive
 				: ArticleDisplay.Standard,
