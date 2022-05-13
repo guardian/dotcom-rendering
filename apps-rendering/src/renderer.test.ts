@@ -533,9 +533,8 @@ describe('Renders different types of Editions elements', () => {
 	test('ElementKind.Embed', () => {
 		const nodes = renderEditions(embedElement);
 		const embed = nodes.flat()[0];
-		expect(getHtml(embed)).toContain(
-			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
-		);
+		// Editions shouldn't render generic embeds
+		expect(getHtml(embed)).toBeNull;
 	});
 
 	test('ElementKind.Video', () => {
