@@ -92,22 +92,14 @@ const disabledButtonStyles = css`
 	}
 `;
 
-const isServer = typeof window === 'undefined';
-
-const carousel = !isServer
-	? window.document.getElementById('key-event-carousel')
-	: null;
-
-const cards = !isServer
-	? Array.from(document.querySelectorAll('#key-event-card'))
-	: null;
-
 export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	format,
 }: Props) => {
 	const [activeIndex, setActiveIndex] = useState(0);
+	const [carousel, setCarousel] = useState<HTMLElement>();
+	const [cards, setCards] = useState<Element[]>();
 	const cardWidth = 200;
 
 	// we only want to count cards fully in view so we round down.
@@ -117,6 +109,16 @@ export const KeyEventsCarousel = ({
 
 	const isFirstCard = activeIndex === cardsOnScreen;
 	const isLastCard = activeIndex === keyEvents.length - 1;
+
+	useEffect(() => {
+		const carouselElement =
+			window.document.getElementById('key-event-carousel');
+		const cardsArray = Array.from(
+			document.querySelectorAll('#key-event-card'),
+		);
+		if (carouselElement) setCarousel(carouselElement);
+		if (cardsArray) setCards(cardsArray);
+	}, []);
 
 	useEffect(() => {
 		function handleIntersect(entries: IntersectionObserverEntry[]) {
@@ -135,7 +137,7 @@ export const KeyEventsCarousel = ({
 		});
 
 		return () => observer.disconnect();
-	}, [activeIndex]);
+	}, [activeIndex, cards, carousel]);
 
 	const goPrevious = () => {
 		if (carousel && !isFirstCard) {
