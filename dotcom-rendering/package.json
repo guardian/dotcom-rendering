@@ -40,6 +40,7 @@
     "*": "lint"
   },
   "dependencies": {
+    "@actions/core": "^1.8.1",
     "@aws-sdk/client-cloudwatch": "^3.45.0",
     "@aws-sdk/client-ssm": "^3.45.0",
     "@babel/helper-create-regexp-features-plugin": "^7.12.17",
