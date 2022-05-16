@@ -22,5 +22,5 @@ jobs:
         run: yarn
 
       - name: Run check-schema script
-        run: scripts/json-schema/check-schema.js
+        run: node scripts/json-schema/check-schema.js
         working-directory: dotcom-rendering
