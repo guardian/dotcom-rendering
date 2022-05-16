@@ -25,10 +25,7 @@ interface Props {
 	id: 'filter-toggle-mobile' | 'filter-toggle-desktop';
 }
 
-export const FilterKeyEventsToggle = ({
-	filterKeyEvents,
-	id,
-}: Props) => {
+export const FilterKeyEventsToggle = ({ filterKeyEvents, id }: Props) => {
 	const [checked, setChecked] = useState(filterKeyEvents);
 
 	const handleClick = () => {
