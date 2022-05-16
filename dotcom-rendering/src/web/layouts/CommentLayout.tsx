@@ -388,7 +388,7 @@ export const CommentLayout = ({
 							padded={false}
 							element="aside"
 						>
-							<Island deferUntil="idle">
+							<Island type="component" deferUntil="idle">
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
@@ -593,7 +593,10 @@ export const CommentLayout = ({
 										isDev={!!CAPIArticle.config.isDev}
 									/>
 									{showBodyEndSlot && (
-										<Island clientOnly={true}>
+										<Island
+											type="component"
+											clientOnly={true}
+										>
 											<SlotBodyEnd
 												contentType={
 													CAPIArticle.contentType
@@ -686,6 +689,7 @@ export const CommentLayout = ({
 									/>
 									{!isPaidContent ? (
 										<Island
+											type="component"
 											clientOnly={true}
 											deferUntil="visible"
 										>
@@ -718,6 +722,7 @@ export const CommentLayout = ({
 				</ElementContainer>
 
 				<Island
+					type="component"
 					clientOnly={true}
 					deferUntil="visible"
 					placeholderHeight={600}
@@ -749,7 +754,11 @@ export const CommentLayout = ({
 						sectionId="onwards-lower"
 						element="section"
 					>
-						<Island clientOnly={true} deferUntil="visible">
+						<Island
+							type="component"
+							clientOnly={true}
+							deferUntil="visible"
+						>
 							<OnwardsLower
 								ajaxUrl={CAPIArticle.config.ajaxUrl}
 								hasStoryPackage={CAPIArticle.hasStoryPackage}
@@ -805,7 +814,7 @@ export const CommentLayout = ({
 
 			{NAV.subNavSections && (
 				<ElementContainer padded={false} element="aside">
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -835,7 +844,7 @@ export const CommentLayout = ({
 			</ElementContainer>
 
 			<BannerWrapper>
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island type="component" deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={CAPIArticle.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

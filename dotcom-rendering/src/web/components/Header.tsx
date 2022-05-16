@@ -39,7 +39,7 @@ export const Header = ({
 }: Props) => (
 	<div css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
-			<Island deferUntil="idle">
+			<Island type="component" deferUntil="idle">
 				<EditionDropdown
 					edition={edition}
 					dataLinkName="nav2 : topbar : edition-picker: toggle"
@@ -47,7 +47,7 @@ export const Header = ({
 			</Island>
 		</Hide>
 		<Logo />
-		<Island deferUntil="idle" clientOnly={true}>
+		<Island type="component" deferUntil="idle" clientOnly={true}>
 			<ReaderRevenueLinks
 				urls={urls}
 				edition={edition}
@@ -58,7 +58,7 @@ export const Header = ({
 			/>
 		</Island>
 		<div id="links-root">
-			<Island>
+			<Island type="component">
 				<Links
 					supporterCTA={supporterCTA}
 					idUrl={idUrl}

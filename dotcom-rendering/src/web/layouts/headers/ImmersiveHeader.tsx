@@ -199,7 +199,7 @@ export const ImmersiveHeader = ({
 								borderColour={border.primary}
 								sectionId="labs-header"
 							>
-								<Island deferUntil="idle">
+								<Island type="component" deferUntil="idle">
 									<LabsHeader />
 								</Island>
 							</ElementContainer>

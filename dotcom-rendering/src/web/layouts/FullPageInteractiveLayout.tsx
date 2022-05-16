@@ -256,7 +256,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props): JSX.Element => {
 					padded={false}
 					element="aside"
 				>
-					<Island deferUntil="idle">
+					<Island type="component" deferUntil="idle">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -305,7 +305,7 @@ export const FullPageInteractiveLayout = ({
 							borderColour={border.primary}
 							sectionId="labs-header"
 						>
-							<Island deferUntil="idle">
+							<Island type="component" deferUntil="idle">
 								<LabsHeader />
 							</Island>
 						</ElementContainer>
@@ -346,7 +346,7 @@ export const FullPageInteractiveLayout = ({
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -376,7 +376,7 @@ export const FullPageInteractiveLayout = ({
 			</ElementContainer>
 
 			<BannerWrapper>
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island type="component" deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={CAPIArticle.contentType}
 						contributionsServiceUrl={

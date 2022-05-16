@@ -426,7 +426,7 @@ export const ImmersiveLayout = ({
 									isDev={!!CAPIArticle.config.isDev}
 								/>
 								{showBodyEndSlot && (
-									<Island clientOnly={true}>
+									<Island type="component" clientOnly={true}>
 										<SlotBodyEnd
 											contentType={
 												CAPIArticle.contentType
@@ -541,6 +541,7 @@ export const ImmersiveLayout = ({
 				</ElementContainer>
 
 				<Island
+					type="component"
 					clientOnly={true}
 					deferUntil="visible"
 					placeholderHeight={600}
@@ -572,7 +573,11 @@ export const ImmersiveLayout = ({
 						sectionId="onwards-lower"
 						element="section"
 					>
-						<Island clientOnly={true} deferUntil="visible">
+						<Island
+							type="component"
+							clientOnly={true}
+							deferUntil="visible"
+						>
 							<OnwardsLower
 								ajaxUrl={CAPIArticle.config.ajaxUrl}
 								hasStoryPackage={CAPIArticle.hasStoryPackage}
@@ -628,7 +633,7 @@ export const ImmersiveLayout = ({
 
 			{NAV.subNavSections && (
 				<ElementContainer padded={false} element="aside">
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -658,7 +663,7 @@ export const ImmersiveLayout = ({
 			</ElementContainer>
 
 			<BannerWrapper>
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island type="component" deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={CAPIArticle.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

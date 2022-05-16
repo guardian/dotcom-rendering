@@ -425,7 +425,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									padded={false}
 									element="aside"
 								>
-									<Island deferUntil="idle">
+									<Island type="component" deferUntil="idle">
 										<SubNav
 											subNavSections={NAV.subNavSections}
 											currentNavLink={NAV.currentNavLink}
@@ -462,7 +462,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						sectionId="labs-header"
 						element="aside"
 					>
-						<Island deferUntil="idle">
+						<Island type="component" deferUntil="idle">
 							<LabsHeader />
 						</Island>
 					</ElementContainer>
@@ -505,6 +505,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{format.design === ArticleDesign.MatchReport &&
 									footballMatchUrl && (
 										<Island
+											type="component"
 											deferUntil="visible"
 											clientOnly={true}
 											placeholderHeight={230}
@@ -529,6 +530,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{format.design === ArticleDesign.MatchReport &&
 									footballMatchUrl && (
 										<Island
+											type="component"
 											clientOnly={true}
 											placeholderHeight={40}
 										>
@@ -677,6 +679,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
 										<Island
+											type="component"
 											deferUntil="visible"
 											clientOnly={true}
 											placeholderHeight={800}
@@ -689,7 +692,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									)}
 
 								{showBodyEndSlot && (
-									<Island clientOnly={true}>
+									<Island type="component" clientOnly={true}>
 										<SlotBodyEnd
 											contentType={
 												CAPIArticle.contentType
@@ -781,6 +784,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									/>
 									{!isPaidContent ? (
 										<Island
+											type="component"
 											clientOnly={true}
 											deferUntil="visible"
 										>
@@ -815,6 +819,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</ElementContainer>
 
 				<Island
+					type="component"
 					clientOnly={true}
 					deferUntil="visible"
 					placeholderHeight={600}
@@ -846,7 +851,11 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						sectionId="onwards-lower"
 						element="section"
 					>
-						<Island clientOnly={true} deferUntil="visible">
+						<Island
+							type="component"
+							clientOnly={true}
+							deferUntil="visible"
+						>
 							<OnwardsLower
 								ajaxUrl={CAPIArticle.config.ajaxUrl}
 								hasStoryPackage={CAPIArticle.hasStoryPackage}
@@ -911,7 +920,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					padded={false}
 					element="aside"
 				>
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -942,7 +951,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			</ElementContainer>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island type="component" deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={CAPIArticle.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

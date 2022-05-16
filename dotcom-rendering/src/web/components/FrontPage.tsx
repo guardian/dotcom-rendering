@@ -3,10 +3,10 @@ import { Global, css } from '@emotion/react';
 import { focusHalo, brandAlt, neutral } from '@guardian/source-foundations';
 import { SkipTo } from './SkipTo';
 import { Island } from './Island';
-import { FocusStyles } from './FocusStyles.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { CoreVitals } from './CoreVitals.importable';
 import { FrontLayout } from '../layouts/FrontLayout';
+import { focusStyles } from '../lib/focusStyles.importable';
 
 type Props = {
 	front: DCRFrontType;
@@ -39,13 +39,11 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			/>
 			<SkipTo id="maincontent" label="Skip to main content" />
 			<SkipTo id="navigation" label="Skip to navigation" />
-			<Island clientOnly={true} deferUntil="idle">
+			<Island type="component" clientOnly={true} deferUntil="idle">
 				<AlreadyVisited />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<FocusStyles />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island type="script" func={focusStyles} deferUntil="idle" />
+			<Island type="component" clientOnly={true} deferUntil="idle">
 				<CoreVitals />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />

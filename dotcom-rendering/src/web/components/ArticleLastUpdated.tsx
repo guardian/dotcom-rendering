@@ -31,7 +31,7 @@ export const ArticleLastUpdated = ({ format, lastUpdated }: Props) => {
 		<div css={lastUpdatedStyles(palette)}>
 			{format.design === ArticleDesign.LiveBlog && (
 				<span css={livePulseIconStyles(palette)}>
-					<Island deferUntil="idle">
+					<Island type="component" deferUntil="idle">
 						<PulsingDot />
 					</Island>
 					LIVE

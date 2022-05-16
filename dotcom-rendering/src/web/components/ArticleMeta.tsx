@@ -347,7 +347,7 @@ export const ArticleMeta = ({
 		>
 			<div css={meta(format)}>
 				{branding && (
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<Branding branding={branding} palette={palette} />
 					</Island>
 				)}
@@ -439,7 +439,11 @@ export const ArticleMeta = ({
 							{/* The meta-number css is needed by Counts.tsx */}
 							<div className="meta-number">
 								{showShareCount && (
-									<Island clientOnly={true} deferUntil="idle">
+									<Island
+										type="component"
+										clientOnly={true}
+										deferUntil="idle"
+									>
 										<ShareCount
 											ajaxUrl={ajaxUrl}
 											pageId={pageId}
@@ -450,7 +454,11 @@ export const ArticleMeta = ({
 							</div>
 							<div className="meta-number">
 								{isCommentable && (
-									<Island clientOnly={true} deferUntil="idle">
+									<Island
+										type="component"
+										clientOnly={true}
+										deferUntil="idle"
+									>
 										<CommentCount
 											discussionApiUrl={discussionApiUrl}
 											shortUrlId={shortUrlId}

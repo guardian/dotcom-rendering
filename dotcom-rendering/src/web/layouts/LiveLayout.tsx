@@ -377,7 +377,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							borderColour={palette.border.article}
 							element="aside"
 						>
-							<Island deferUntil="idle">
+							<Island type="component" deferUntil="idle">
 								<SubNav
 									subNavSections={NAV.subNavSections}
 									currentNavLink={NAV.currentNavLink}
@@ -438,6 +438,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</Hide>
 
 						<Island
+							type="component"
 							deferUntil="visible"
 							clientOnly={true}
 							placeholderHeight={230}
@@ -622,7 +623,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									justify-content: center;
 								`}
 							/>
-							<Island clientOnly={true} deferUntil="idle">
+							<Island
+								type="component"
+								clientOnly={true}
+								deferUntil="idle"
+							>
 								<Liveness
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
@@ -656,6 +661,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<div css={maxWidth}>
 									{footballMatchUrl && (
 										<Island
+											type="component"
 											clientOnly={true}
 											placeholderHeight={40}
 										>
@@ -667,6 +673,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									)}
 									{cricketMatchUrl && (
 										<Island
+											type="component"
 											clientOnly={true}
 											placeholderHeight={172}
 										>
@@ -763,6 +770,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{/* Match stats */}
 								{footballMatchUrl && (
 									<Island
+										type="component"
 										deferUntil="visible"
 										clientOnly={true}
 										placeholderHeight={800}
@@ -778,7 +786,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<div id="maincontent" css={bodyWrapper}>
 									{CAPIArticle.keyEvents?.length ? (
 										<Hide below="desktop">
-											<Island deferUntil="visible">
+											<Island
+												type="component"
+												deferUntil="visible"
+											>
 												<FilterKeyEventsToggle
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
@@ -796,7 +807,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									>
 										{CAPIArticle.keyEvents?.length ? (
 											<Hide above="desktop">
-												<Island deferUntil="visible">
+												<Island
+													type="component"
+													deferUntil="visible"
+												>
 													<FilterKeyEventsToggle
 														filterKeyEvents={
 															CAPIArticle.filterKeyEvents
@@ -900,7 +914,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												/>
 											)}
 											{showBodyEndSlot && (
-												<Island clientOnly={true}>
+												<Island
+													type="component"
+													clientOnly={true}
+												>
 													<SlotBodyEnd
 														contentType={
 															CAPIArticle.contentType
@@ -1026,6 +1043,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</ElementContainer>
 
 					<Island
+						type="component"
 						clientOnly={true}
 						deferUntil="visible"
 						placeholderHeight={600}
@@ -1057,7 +1075,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							sectionId="onwards-lower"
 							element="section"
 						>
-							<Island clientOnly={true} deferUntil="visible">
+							<Island
+								type="component"
+								clientOnly={true}
+								deferUntil="visible"
+							>
 								<OnwardsLower
 									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									hasStoryPackage={
@@ -1133,7 +1155,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					padded={false}
 					element="aside"
 				>
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -1164,7 +1186,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			</ElementContainer>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island type="component" deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={CAPIArticle.contentType}
 						contributionsServiceUrl={contributionsServiceUrl}

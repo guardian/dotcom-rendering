@@ -334,7 +334,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						padded={false}
 						element="aside"
 					>
-						<Island deferUntil="idle">
+						<Island type="component" deferUntil="idle">
 							<SubNav
 								subNavSections={NAV.subNavSections}
 								currentNavLink={NAV.currentNavLink}
@@ -369,7 +369,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						borderColour={border.primary}
 						sectionId="labs-header"
 					>
-						<Island deferUntil="idle">
+						<Island type="component" deferUntil="idle">
 							<LabsHeader />
 						</Island>
 					</ElementContainer>
@@ -603,6 +603,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</ElementContainer>
 
 				<Island
+					type="component"
 					clientOnly={true}
 					deferUntil="visible"
 					placeholderHeight={600}
@@ -634,7 +635,11 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						sectionId="onwards-lower"
 						element="section"
 					>
-						<Island clientOnly={true} deferUntil="visible">
+						<Island
+							type="component"
+							clientOnly={true}
+							deferUntil="visible"
+						>
 							<OnwardsLower
 								ajaxUrl={CAPIArticle.config.ajaxUrl}
 								hasStoryPackage={CAPIArticle.hasStoryPackage}
@@ -699,7 +704,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					padded={false}
 					element="aside"
 				>
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -730,7 +735,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			</ElementContainer>
 
 			<BannerWrapper data-print-layout="hide">
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island type="component" deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={CAPIArticle.contentType}
 						contributionsServiceUrl={

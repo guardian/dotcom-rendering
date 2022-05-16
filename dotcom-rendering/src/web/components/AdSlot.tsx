@@ -236,7 +236,7 @@ export const AdSlot: React.FC<Props> = ({
 				}
 				case ArticleDisplay.Standard: {
 					return (
-						<Island>
+						<Island type="component">
 							<TopRightAdSlot
 								shouldHideReaderRevenue={
 									shouldHideReaderRevenue

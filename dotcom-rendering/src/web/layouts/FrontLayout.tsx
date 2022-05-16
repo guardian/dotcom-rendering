@@ -91,7 +91,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								padded={false}
 								element="aside"
 							>
-								<Island deferUntil="idle">
+								<Island type="component" deferUntil="idle">
 									<SubNav
 										subNavSections={NAV.subNavSections}
 										currentNavLink={NAV.currentNavLink}
@@ -171,7 +171,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					padded={false}
 					element="aside"
 				>
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}

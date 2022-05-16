@@ -1402,11 +1402,12 @@ interface PerformanceEntry {
 declare namespace JSX {
 	interface IntrinsicElements {
 		'gu-island': {
+			type: 'component' | 'script';
 			name: string;
 			deferUntil?: 'idle' | 'visible';
 			clientOnly?: boolean;
 			props: any;
-			children: React.ReactNode;
+			children?: React.ReactNode;
 		};
 	}
 

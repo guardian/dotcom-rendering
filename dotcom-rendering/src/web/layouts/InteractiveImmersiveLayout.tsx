@@ -488,7 +488,7 @@ export const InteractiveImmersiveLayout = ({
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
 							currentNavLink={NAV.currentNavLink}
@@ -518,7 +518,7 @@ export const InteractiveImmersiveLayout = ({
 			</ElementContainer>
 
 			<BannerWrapper>
-				<Island deferUntil="idle" clientOnly={true}>
+				<Island type="component" deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={CAPIArticle.contentType}
 						contributionsServiceUrl={

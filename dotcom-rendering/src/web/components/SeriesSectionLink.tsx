@@ -381,7 +381,7 @@ export const SeriesSectionLink = ({
 										`,
 									]}
 								>
-									<Island deferUntil="idle">
+									<Island type="component" deferUntil="idle">
 										<PulsingDot />
 									</Island>
 								</span>
@@ -448,7 +448,7 @@ export const SeriesSectionLink = ({
 									`,
 								]}
 							>
-								<Island deferUntil="idle">
+								<Island type="component" deferUntil="idle">
 									<PulsingDot />
 								</Island>
 							</span>

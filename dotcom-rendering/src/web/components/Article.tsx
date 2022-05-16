@@ -7,12 +7,12 @@ import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { CommercialMetrics } from './CommercialMetrics.importable';
 import { Island } from './Island';
-import { FocusStyles } from './FocusStyles.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { CoreVitals } from './CoreVitals.importable';
 import { SetABTests } from './SetABTests.importable';
+import { focusStyles } from '../lib/focusStyles.importable';
 
 type Props = {
 	CAPIArticle: CAPIArticleType;
@@ -51,31 +51,29 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo id="keyevents" label="Skip to key events" />
 			)}
-			<Island clientOnly={true} deferUntil="idle">
+			<Island type="component" clientOnly={true} deferUntil="idle">
 				<AlreadyVisited />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
-				<FocusStyles />
-			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island type="script" func={focusStyles} deferUntil="idle" />
+			<Island type="component" clientOnly={true} deferUntil="idle">
 				<CommercialMetrics
 					enabled={CAPIArticle.config.switches.commercialMetrics}
 				/>
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island type="component" clientOnly={true} deferUntil="idle">
 				<CoreVitals />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island type="component" clientOnly={true} deferUntil="idle">
 				<BrazeMessaging idApiUrl={CAPIArticle.config.idApiUrl} />
 			</Island>
-			<Island clientOnly={true} deferUntil="idle">
+			<Island type="component" clientOnly={true} deferUntil="idle">
 				<ReaderRevenueDev
 					shouldHideReaderRevenue={
 						CAPIArticle.shouldHideReaderRevenue
 					}
 				/>
 			</Island>
-			<Island clientOnly={true}>
+			<Island type="component" clientOnly={true}>
 				<SetABTests
 					abTestSwitches={filterABTestSwitches(
 						CAPIArticle.config.switches,

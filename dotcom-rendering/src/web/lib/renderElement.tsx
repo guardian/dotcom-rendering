@@ -144,7 +144,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
 				true,
-				<Island>
+				<Island type="component">
 					<AudioAtomWrapper
 						id={element.id}
 						trackUrl={element.trackUrl}
@@ -172,7 +172,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<CalloutBlockComponent callout={element} format={format} />
 				</Island>,
 			];
@@ -193,7 +193,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<ChartAtomWrapper id={element.id} html={element.html} />
 				</Island>,
 			];
@@ -231,7 +231,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.DocumentBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<DocumentBlockComponent
 						embedUrl={element.embedUrl}
 						height={element.height}
@@ -259,7 +259,7 @@ export const renderElement = ({
 
 				return [
 					true,
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<UnsafeEmbedBlockComponent
 							key={index}
 							html={element.html}
@@ -276,7 +276,7 @@ export const renderElement = ({
 			}
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<EmbedBlockComponent
 						key={index}
 						html={element.html}
@@ -302,7 +302,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<GuideAtomWrapper
 						id={element.id}
 						title={element.title}
@@ -346,7 +346,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<InstagramBlockComponent
 						key={index}
 						element={element}
@@ -384,7 +384,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
@@ -403,7 +403,7 @@ export const renderElement = ({
 			return [
 				true,
 				<div id={element.elementId}>
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<InteractiveContentsBlockComponent
 							subheadingLinks={element.subheadingLinks}
 							endDocumentElementId={element.endDocumentElementId}
@@ -414,7 +414,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.MapBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<MapEmbedBlockComponent
 						format={format}
 						embedUrl={element.embedUrl}
@@ -461,7 +461,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<ProfileAtomWrapper
 						id={element.id}
 						title={element.title}
@@ -487,7 +487,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.QABlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<QandaAtomWrapper
 						id={element.id}
 						title={element.title}
@@ -503,7 +503,7 @@ export const renderElement = ({
 				true,
 				<>
 					{element.quizType === 'personality' && (
-						<Island>
+						<Island type="component">
 							<PersonalityQuizAtomWrapper
 								id={element.id}
 								questions={element.questions}
@@ -514,7 +514,7 @@ export const renderElement = ({
 						</Island>
 					)}
 					{element.quizType === 'knowledge' && (
-						<Island>
+						<Island type="component">
 							<KnowledgeQuizAtomWrapper
 								id={element.id}
 								questions={element.questions}
@@ -529,7 +529,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
 			return [
 				true,
-				<Island deferUntil="idle">
+				<Island type="component" deferUntil="idle">
 					<RichLinkComponent
 						richLinkIndex={index}
 						element={element}
@@ -543,7 +543,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.SpotifyBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<SpotifyBlockComponent
 						embedUrl={element.embedUrl}
 						height={element.height}
@@ -591,7 +591,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<TimelineAtomWrapper
 						id={element.id}
 						title={element.title}
@@ -605,7 +605,7 @@ export const renderElement = ({
 			if (switches.enhanceTweets) {
 				return [
 					true,
-					<Island deferUntil="visible">
+					<Island type="component" deferUntil="visible">
 						<TweetBlockComponent element={element} />
 					</Island>,
 				];
@@ -614,7 +614,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.VideoFacebookBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<VideoFacebookBlockComponent
 						role={element.role}
 						isTracking={element.isThirdPartyTracking}
@@ -662,7 +662,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.VineBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island type="component" deferUntil="visible">
 					<VineBlockComponent
 						element={element}
 						// No role given by CAPI
@@ -723,7 +723,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 			return [
 				true,
-				<Island>
+				<Island type="component">
 					<YoutubeBlockComponent
 						format={format}
 						key={index}

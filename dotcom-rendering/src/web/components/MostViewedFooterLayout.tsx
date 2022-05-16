@@ -102,7 +102,11 @@ export const MostViewedFooterLayout = ({
 						<Hide when="above" breakpoint="leftCol">
 							<h2 css={headingStyles}>Most popular</h2>
 						</Hide>
-						<Island clientOnly={true} deferUntil="visible">
+						<Island
+							type="component"
+							clientOnly={true}
+							deferUntil="visible"
+						>
 							<MostViewedFooterData
 								sectionName={sectionName}
 								palette={palette}
