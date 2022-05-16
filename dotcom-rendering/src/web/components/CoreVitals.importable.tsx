@@ -5,7 +5,6 @@ import {
 	initCoreWebVitals,
 } from '@guardian/libs';
 import { useAB } from '../lib/useAB';
-import { commercialGptLazyLoad } from '../experiments/tests/commercial-gpt-lazy-load';
 
 export const CoreVitals = () => {
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
@@ -22,7 +21,6 @@ export const CoreVitals = () => {
 	// For these tests switch off sampling and collect metrics for 100% of views
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
-		commercialGptLazyLoad,
 	];
 
 	const userInClientSideTestToForceMetrics =
