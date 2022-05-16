@@ -23,6 +23,7 @@ import Dateline from 'components/dateline';
 import Follow from 'components/follow';
 import Logo from 'components/logo';
 import type { Item } from 'item';
+import { getFormat } from 'item';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { darkModeCss } from 'styles';
@@ -209,7 +210,7 @@ const MetadataWithByline: FC<Props> = ({ item }: Props) => (
 		<div css={css(textStyles, withBylineTextStyles)}>
 			<Byline {...item} />
 			<Dateline date={item.publishDate} format={item} />
-			<Follow {...item} />
+			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />
 	</div>
@@ -219,7 +220,7 @@ const ShortMetadata: FC<Props> = ({ item }: Props) => (
 	<div css={styles}>
 		<div css={textStyles}>
 			<Dateline date={item.publishDate} format={item} />
-			<Follow {...item} />
+			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />
 	</div>
@@ -245,7 +246,10 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 					<Byline {...item} />
 				</div>
 				<Dateline date={item.publishDate} format={item} />
-				<Follow {...item} />
+				<Follow
+					format={getFormat(item)}
+					contributors={item.contributors}
+				/>
 			</div>
 			<div css={metaBottomStyles(isLive(design))}>
 				{isLive(design) && (

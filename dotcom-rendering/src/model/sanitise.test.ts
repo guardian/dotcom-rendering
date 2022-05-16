@@ -1,4 +1,4 @@
-import { stripHTML } from './strip-html';
+import { stripHTML } from './sanitise';
 
 describe('stripHTML', () => {
 	it('removes all HTML tags', () => {

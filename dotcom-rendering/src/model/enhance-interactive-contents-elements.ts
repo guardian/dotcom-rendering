@@ -1,4 +1,4 @@
-import { stripHTML } from './strip-html';
+import { stripHTML } from './sanitise';
 
 const scriptUrls = [
 	'https://interactive.guim.co.uk/page-enhancers/nav/boot.js',

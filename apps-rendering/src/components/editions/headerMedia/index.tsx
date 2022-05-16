@@ -40,7 +40,7 @@ const fullWidthStyles = css`
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	overflow-x: hidden;
+	overflow: hidden;
 `;
 
 const captionStyles = css`

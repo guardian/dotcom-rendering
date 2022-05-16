@@ -54,6 +54,8 @@ export const decideDesign = ({
 			return ArticleDesign.Obituary;
 		case 'FullPageInteractiveDesign':
 			return ArticleDesign.FullPageInteractive;
+		case 'NewsletterSignupDesign':
+			return ArticleDesign.NewsletterSignup;
 		default:
 			return ArticleDesign.Standard;
 	}

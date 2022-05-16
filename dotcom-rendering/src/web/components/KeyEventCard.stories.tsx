@@ -7,7 +7,7 @@ import {
 } from '@guardian/libs';
 import { from, neutral } from '@guardian/source-foundations';
 import { events } from '../../../fixtures/manual/key-events';
-import { KeyEventCard } from './KeyEventCard';
+import { KeyEvent, KeyEventCard } from './KeyEventCard';
 
 const getFormat = (theme: ArticleTheme) => {
 	return {
@@ -57,7 +57,7 @@ const StandardCard = ({
 	count: number;
 }) => (
 	<ul css={wrapperStyles}>
-		{events.slice(0, count).map((event) => (
+		{events.slice(0, count).map((event: KeyEvent) => (
 			<KeyEventCard
 				text={event.text}
 				url={event.url}

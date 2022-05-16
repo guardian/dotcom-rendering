@@ -46,7 +46,7 @@ export const Default = () => {
 	return (
 		<SupportingContent
 			supportingContent={[aBasicLink]}
-			imagePosition="top"
+			alignment="horizontal"
 		/>
 	);
 };
@@ -55,7 +55,7 @@ export const WithKicker = () => {
 	return (
 		<SupportingContent
 			supportingContent={[{ ...aBasicLink, kickerText: 'Kicket text' }]}
-			imagePosition="top"
+			alignment="horizontal"
 		/>
 	);
 };

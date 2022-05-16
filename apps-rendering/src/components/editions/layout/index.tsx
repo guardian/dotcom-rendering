@@ -16,7 +16,6 @@ import type { Item } from 'item';
 import { isPicture } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
-import { getThemeStyles } from 'themeStyles';
 import Header from '../header';
 import {
 	articleMarginStyles,
@@ -123,31 +122,6 @@ const headerBackgroundStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${headerBackgroundColour(format)};
 `;
 
-const itemStyles = (item: Item): SerializedStyles => {
-	const { kicker } = getThemeStyles(item.theme);
-
-	switch (item.display) {
-		case ArticleDisplay.Immersive:
-			return css`
-				> p:first-of-type:first-letter,
-				> hr + p:first-letter {
-					color: ${kicker};
-					display: inline-block;
-					vertical-align: text-top;
-					line-height: 5.625rem;
-					font-size: 6.8125rem;
-					display: inline-block;
-					font-weight: 900;
-					float: left;
-					margin-right: ${remSpace[3]};
-				}
-			`;
-
-		default:
-			return css``;
-	}
-};
-
 const getSectionStyles = (item: ArticleFormat): SerializedStyles[] => {
 	if (
 		item.design === ArticleDesign.Interview ||
@@ -194,10 +168,7 @@ const Layout: FC<Props> = ({ item }) => {
 								: null,
 						]}
 					>
-						<section
-							className={'body-content'}
-							css={[bodyStyles, itemStyles(item)]}
-						>
+						<section className={'body-content'} css={bodyStyles}>
 							{renderEditionsAll(item, partition(item.body).oks)}
 						</section>
 					</div>
