@@ -121,8 +121,8 @@ const standfirst = ({ design, theme }: ArticleFormat): Colour => {
 
 	if (
 		design === ArticleDesign.Comment ||
-		ArticleDesign.Letter ||
-		ArticleDesign.Editorial
+		design === ArticleDesign.Letter ||
+		design === ArticleDesign.Editorial
 	) {
 		return opinion[800];
 	}
