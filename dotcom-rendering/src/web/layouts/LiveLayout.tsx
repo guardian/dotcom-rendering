@@ -805,7 +805,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
 													}
-													breakpoint="desktop"
+													id="filter-toggle-desktop"
 												/>
 											</Island>
 										</Hide>
@@ -824,7 +824,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														filterKeyEvents={
 															CAPIArticle.filterKeyEvents
 														}
-														breakpoint="mobile"
+														id="filter-toggle-mobile"
 													/>
 												</Island>
 											</Hide>
