@@ -1121,6 +1121,8 @@ export const Quiz: CAPIArticleType = {
 			id: 'profile/steven-pye',
 			type: 'Contributor',
 			title: 'Steven Pye',
+			bylineImageUrl:
+				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/1/1362132740458/Steven-Pye.jpg?width=300&quality=85&auto=format&fit=max&s=5157df1a9e8f0f416988733b4e400e8b',
 		},
 		{
 			id: 'tracking/commissioningdesk/uk-communities-and-social',
@@ -1574,7 +1576,7 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '6c303d19-cf2e-4f22-bdc7-177d357b1761',
+			elementId: 'f5ec0bc5-ebd4-486a-b4e0-03bbcfdbc875',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2187,7 +2189,7 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '41e07c50-b0c7-427c-9662-4404f36f0389',
+					elementId: 'ca4e4aa1-2336-4a53-b2c1-1edbe84574c2',
 				},
 			],
 			blockCreatedOn: 1591866131000,

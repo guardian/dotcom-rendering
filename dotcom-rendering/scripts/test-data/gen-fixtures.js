@@ -32,18 +32,6 @@ const articles = [
 		url: 'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
 	},
 	{
-		name: 'NewletterSignupSports',
-		url: 'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
-	},
-	{
-		name: 'NewletterSignupNews',
-		url: 'https://www.theguardian.com/world/guardian-australia-morning-mail/2014/jun/24/-sp-guardian-australias-morning-mail-subscribe-by-email',
-	},
-	{
-		name: 'NewletterSignupNewsInteractive',
-		url: 'https://www.theguardian.com/news/ng-interactive/2022/apr/21/lose-yourself-in-a-great-story-sign-up-for-the-long-read-email',
-	},
-	{
 		name: 'Analysis',
 		url: 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 	},
@@ -110,6 +98,10 @@ const articles = [
 	{
 		name: 'NumberedList',
 		url: 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+	},
+	{
+		name: 'NewsletterSignup',
+		url: 'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 	},
 ];
 
