@@ -8,7 +8,7 @@ const articleSchema = getArticleSchema();
 const frontSchema = getFrontSchema();
 
 fs.writeFile(
-	`${root}/src/model/json-schema.json`,
+	`${root}/src/model/article-schema.json`,
 	articleSchema,
 	'utf8',
 	(err) => {
