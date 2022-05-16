@@ -5,7 +5,7 @@ const root = path.resolve(__dirname, '..', '..');
 const { getArticleSchema, getFrontSchema } = require('./get-schema');
 
 const existingArticleSchema = fs.readFileSync(
-	`${root}/src/model/json-schema.json`,
+	`${root}/src/model/article-schema.json`,
 	{ encoding: 'utf-8' },
 );
 const existingFrontSchema = fs.readFileSync(
