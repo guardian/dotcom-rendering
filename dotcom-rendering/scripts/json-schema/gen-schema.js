@@ -1,23 +1,15 @@
-const TJS = require('typescript-json-schema');
-const { resolve } = require('path');
+const path = require('path');
 
-const root = resolve(__dirname, '..', '..');
+const root = path.resolve(__dirname, '..', '..');
 const fs = require('fs');
+const { getArticleSchema, getFrontSchema } = require('./get-schema');
 
-const program = TJS.getProgramFromFiles(
-	[resolve(`${root}/src/lib/content.d.ts`), resolve(`${root}/index.d.ts`)],
-	{
-		skipLibCheck: true,
-	},
-);
-
-const settings = { rejectDateType: true, required: true };
-const schema = TJS.generateSchema(program, 'CAPIArticleType', settings);
-const frontSchema = TJS.generateSchema(program, 'FEFrontType', settings);
+const articleSchema = getArticleSchema();
+const frontSchema = getFrontSchema();
 
 fs.writeFile(
 	`${root}/src/model/json-schema.json`,
-	JSON.stringify(schema, null, 4),
+	articleSchema,
 	'utf8',
 	(err) => {
 		if (err) {
@@ -29,7 +21,7 @@ fs.writeFile(
 
 fs.writeFile(
 	`${root}/src/model/front-schema.json`,
-	JSON.stringify(frontSchema, null, 4),
+	frontSchema,
 	'utf8',
 	(err) => {
 		if (err) {

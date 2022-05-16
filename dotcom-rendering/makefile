@@ -163,6 +163,10 @@ check-env: # private
 clear: # private
 	@clear
 
+check-schema:
+	$(call log, "Checking schemas")
+	@node scripts/json-schema/check-schema
+
 gen-schema:
 	$(call log, "Generating new schemas")
 	@node scripts/json-schema/gen-schema.js
