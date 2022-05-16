@@ -112,6 +112,26 @@ BackgroundStory.story = { name: 'with a blue background' };
 export const InnerBackgroundStory = () => {
 	return (
 		<ContainerLayout
+			title="Inner Background"
+			description="About this content"
+			fontColour={brandBackground.ctaPrimary}
+			showTopBorder={true}
+			sideBorders={true}
+			centralBorder="full"
+			innerBackgroundColour={brandBackground.primary}
+			borderColour={brandBorder.primary}
+		>
+			<Grey />
+		</ContainerLayout>
+	);
+};
+InnerBackgroundStory.story = {
+	name: 'with a blue inner background',
+};
+
+export const DifferentBackgrounds = () => {
+	return (
+		<ContainerLayout
 			title="Tip us off"
 			showTopBorder={true}
 			sideBorders={true}
@@ -126,7 +146,7 @@ export const InnerBackgroundStory = () => {
 		</ContainerLayout>
 	);
 };
-InnerBackgroundStory.story = {
+DifferentBackgrounds.story = {
 	name: 'with inner background different to main background',
 };
 
