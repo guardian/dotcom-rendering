@@ -9,7 +9,7 @@ interface HydrateProps {
 	clientOnly?: false;
 	placeholderHeight?: never;
 	children: JSX.Element;
-	expediteLoading?: boolean;
+	expediteLoading?: false;
 }
 
 interface ClientOnlyProps {
@@ -17,7 +17,7 @@ interface ClientOnlyProps {
 	clientOnly: true;
 	placeholderHeight?: number;
 	children: JSX.Element;
-	expediteLoading?: boolean;
+	expediteLoading?: false;
 }
 
 /**
@@ -58,7 +58,8 @@ const decideChildren = (
  * @param {boolean} props.clientOnly - Should the component be server side rendered
  * @param {number} props.placeholderHeight - The height for the placeholder element
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
- * @param {boolean} props.expediteLoading - Should this component script be included in the document head - Use sparingly for critical islands
+ * @param {boolean} props.expediteLoading - Should this component script be included in the document head -
+ * 		Use sparingly for critical islands only, don't set without discussing with the dotcom team.
  */
 export const Island = ({
 	deferUntil,
