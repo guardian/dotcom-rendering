@@ -15,6 +15,7 @@ const wrapperStyles = css`
 	display: flex;
 	margin-left: 5px;
 	margin-right: 5px;
+	margin-bottom: 5px;
 `;
 
 const directionStyles = (alignment: Alignment) => {
