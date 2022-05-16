@@ -120,11 +120,11 @@ export const KeyEventsCarousel = ({
 	}, []);
 
 	useEffect(() => {
-		function handleIntersect(entries: IntersectionObserverEntry[]) {
+		const handleIntersect = (entries: IntersectionObserverEntry[]) => {
 			const entry = entries.find((e) => e.isIntersecting);
 			const index = cards?.findIndex((e) => e === entry?.target);
 			if (index && index !== -1) setActiveIndex(index);
-		}
+		};
 
 		const observer = new window.IntersectionObserver(handleIntersect, {
 			root: carousel,
