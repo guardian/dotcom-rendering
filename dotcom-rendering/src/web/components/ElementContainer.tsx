@@ -34,10 +34,10 @@ type Props = {
 	showTopBorder?: boolean;
 	padded?: boolean;
 	backgroundColour?: string;
+	innerBackgroundColour?: string;
 	borderColour?: string;
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
-	fullWidthBackground?: boolean;
 	element?:
 		| 'div'
 		| 'article'
@@ -59,8 +59,8 @@ export const ElementContainer = ({
 	padded = true,
 	borderColour = border.secondary,
 	backgroundColour,
+	innerBackgroundColour,
 	shouldCenter = true,
-	fullWidthBackground = true,
 	children,
 	element = 'div',
 	className,
@@ -76,21 +76,17 @@ export const ElementContainer = ({
 						shouldCenter && center,
 						showSideBorders && sideBorders(borderColour),
 						showTopBorder && topBorder(borderColour),
-						backgroundColour &&
-							!fullWidthBackground &&
-							setBackgroundColour(backgroundColour),
+						innerBackgroundColour &&
+							setBackgroundColour(innerBackgroundColour),
 						padded && padding,
 					]}
 				>
 					{children && children}
 				</div>
 			);
-			const style =
-				fullWidthBackground &&
-				css`
-					${backgroundColour &&
-					setBackgroundColour(backgroundColour)};
-				`;
+			const style = css`
+				${backgroundColour && setBackgroundColour(backgroundColour)};
+			`;
 			// Create a react element from the tagName passed in OR
 			// default to <div>
 			return _jsx(`${element}`, {

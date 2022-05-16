@@ -31,7 +31,7 @@ type Props = {
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
 	containerPalette?: DCRContainerPalette;
-	fullWidthBackground?: boolean;
+	innerBackgroundColour?: string;
 };
 
 const containerStyles = css`
@@ -121,7 +121,7 @@ export const ContainerLayout = ({
 	ophanComponentLink,
 	ophanComponentName,
 	containerPalette,
-	fullWidthBackground,
+	innerBackgroundColour,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -138,7 +138,7 @@ export const ContainerLayout = ({
 			element="section"
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}
-			fullWidthBackground={fullWidthBackground}
+			innerBackgroundColour={innerBackgroundColour}
 		>
 			<Flex>
 				<LeftColumn
