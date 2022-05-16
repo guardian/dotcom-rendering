@@ -111,8 +111,7 @@ export const KeyEventsCarousel = ({
 	const isLastCard = activeIndex === keyEvents.length - 1;
 
 	useEffect(() => {
-		const carouselElement =
-			window.document.getElementById('key-event-carousel');
+		const carouselElement = document.getElementById('key-event-carousel');
 		const cardsArray = Array.from(
 			document.querySelectorAll('#key-event-card'),
 		);
@@ -140,15 +139,11 @@ export const KeyEventsCarousel = ({
 	}, [activeIndex, cards, carousel]);
 
 	const goPrevious = () => {
-		if (carousel && !isFirstCard) {
-			carousel.scrollLeft -= cardWidth;
-		}
+		if (carousel && !isFirstCard) carousel.scrollLeft -= cardWidth;
 	};
 
 	const goNext = () => {
-		if (carousel && !isLastCard) {
-			carousel.scrollLeft += cardWidth;
-		}
+		if (carousel && !isLastCard) carousel.scrollLeft += cardWidth;
 	};
 
 	const transformedKeyEvents = keyEvents

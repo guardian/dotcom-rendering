@@ -1,7 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
-import { Live } from '../../../fixtures/generated/articles/Live';
+import {
+	LongKeyEvents,
+	ShortKeyEvents,
+	SingleKeyEvent,
+} from '../../../fixtures/manual/live-blog-key-events';
 
 import { KeyEventsCarousel } from './KeyEventsCarousel.importable';
 
@@ -31,19 +35,44 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-export default {
-	component: KeyEventsCarousel,
-	title: 'Components/KeyEventsCarousel',
-};
-
-export const Standard = () => {
+const SingleKeyEventCarousel = () => {
 	return (
 		<Wrapper>
 			<KeyEventsCarousel
-				keyEvents={Live.keyEvents}
+				keyEvents={SingleKeyEvent}
 				filterKeyEvents={false}
 				format={format}
 			/>
 		</Wrapper>
 	);
 };
+const ShortKeyEventCarousel = () => {
+	return (
+		<Wrapper>
+			<KeyEventsCarousel
+				keyEvents={ShortKeyEvents}
+				filterKeyEvents={false}
+				format={format}
+			/>
+		</Wrapper>
+	);
+};
+
+const LongKeyEventCarousel = () => {
+	return (
+		<Wrapper>
+			<KeyEventsCarousel
+				keyEvents={LongKeyEvents}
+				filterKeyEvents={false}
+				format={format}
+			/>
+		</Wrapper>
+	);
+};
+
+export default {
+	component: KeyEventsCarousel,
+	title: 'Components/KeyEventsCarousel',
+};
+
+export { SingleKeyEventCarousel, ShortKeyEventCarousel, LongKeyEventCarousel };
