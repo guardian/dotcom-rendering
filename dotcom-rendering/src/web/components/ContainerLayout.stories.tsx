@@ -95,19 +95,39 @@ export const BackgroundStory = () => {
 	return (
 		<ContainerLayout
 			title="Background Colour"
-			description="About this content"
+			description="When fullWidthBackground is false, the background colour is contained"
 			fontColour={brandBackground.ctaPrimary}
 			showTopBorder={true}
 			sideBorders={true}
 			centralBorder="full"
 			backgroundColour={brandBackground.primary}
 			borderColour={brandBorder.primary}
+			fullWidthBackground={false}
 		>
 			<Grey />
 		</ContainerLayout>
 	);
 };
 BackgroundStory.story = { name: 'with a blue background' };
+
+export const FullWidthBackgroundStory = () => {
+	return (
+		<ContainerLayout
+			title="Background Colour"
+			description="When fullWidthBackground is true (default), then the background colour stretches all the way to the viewport edges, left and right"
+			fontColour={brandBackground.ctaPrimary}
+			showTopBorder={true}
+			sideBorders={true}
+			centralBorder="full"
+			backgroundColour={brandBackground.primary}
+			borderColour={brandBorder.primary}
+			fullWidthBackground={true}
+		>
+			<Grey />
+		</ContainerLayout>
+	);
+};
+FullWidthBackgroundStory.story = { name: 'with a full width blue background' };
 
 export const StretchRightStory = () => {
 	return (
