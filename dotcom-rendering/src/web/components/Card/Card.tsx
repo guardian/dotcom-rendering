@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/source-foundations';
 
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { StarRating } from '../StarRating/StarRating';
 import { CardHeadline } from '../CardHeadline';
 import { Avatar } from '../Avatar';
@@ -25,6 +26,7 @@ import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
 import { SupportingContent } from '../SupportingContent';
+import { decidePalette } from '../../lib/decidePalette';
 
 export type Props = {
 	linkTo: string;
@@ -111,91 +113,16 @@ export const Card = ({
 	containerPalette,
 }: Props) => {
 	const showCommentCount = commentCount || commentCount === 0;
+	const palette = decidePalette(format, containerPalette);
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
-	const moreThanTwoSubLinks: boolean = !!(
-		supportingContent?.length && supportingContent.length > 2
-	);
+	const hasSublinks = supportingContent && supportingContent.length > 0;
+	const noOfSublinks = (supportingContent && supportingContent.length) || 0;
 
-	const cardIsVertical =
-		imagePosition === 'top' || imagePosition === 'bottom';
-
-	const positionFooterUnderContent = !moreThanTwoSubLinks && cardIsVertical;
-
-	const renderFooter = ({
-		renderAge = true,
-		renderMediaMeta = true,
-		renderCommentCount = true,
-		renderCardBranding = true,
-		renderSupportingContent = true,
-		forceVertical = false,
-	}: {
-		renderAge?: boolean;
-		renderMediaMeta?: boolean;
-		renderCommentCount?: boolean;
-		renderCardBranding?: boolean;
-		renderSupportingContent?: boolean;
-		forceVertical?: boolean;
-	}) => {
-		return (
-			<CardFooter
-				format={format}
-				containerPalette={containerPalette}
-				age={
-					renderAge && webPublicationDate ? (
-						<CardAge
-							format={format}
-							containerPalette={containerPalette}
-							webPublicationDate={webPublicationDate}
-							showClock={showClock}
-						/>
-					) : undefined
-				}
-				mediaMeta={
-					renderMediaMeta &&
-					format.design === ArticleDesign.Media &&
-					mediaType ? (
-						<MediaMeta
-							containerPalette={containerPalette}
-							format={format}
-							mediaType={mediaType}
-							mediaDuration={mediaDuration}
-						/>
-					) : undefined
-				}
-				commentCount={
-					renderCommentCount &&
-					showCommentCount &&
-					longCount &&
-					shortCount ? (
-						<CardCommentCount
-							containerPalette={containerPalette}
-							format={format}
-							long={longCount}
-							short={shortCount}
-						/>
-					) : undefined
-				}
-				cardBranding={
-					renderCardBranding && branding ? (
-						<CardBranding branding={branding} format={format} />
-					) : undefined
-				}
-				supportingContent={
-					renderSupportingContent &&
-					supportingContent &&
-					supportingContent.length > 0 ? (
-						<SupportingContent
-							supportingContent={supportingContent}
-							imagePosition={
-								forceVertical ? 'top' : imagePosition
-							}
-						/>
-					) : undefined
-				}
-			/>
-		);
-	};
+	const isOpinion =
+		format.design === ArticleDesign.Comment ||
+		format.design === ArticleDesign.Editorial ||
+		format.design === ArticleDesign.Letter;
 
 	return (
 		<CardWrapper format={format} containerPalette={containerPalette}>
@@ -289,17 +216,74 @@ export const Card = ({
 								</AvatarContainer>
 							</Hide>
 						)}
-						{/* Show the card footer in the same column as the headline content */}
-						{positionFooterUnderContent ? (
-							renderFooter({ forceVertical: true })
+						<CardFooter
+							format={format}
+							age={
+								webPublicationDate ? (
+									<CardAge
+										format={format}
+										containerPalette={containerPalette}
+										webPublicationDate={webPublicationDate}
+										showClock={showClock}
+									/>
+								) : undefined
+							}
+							mediaMeta={
+								format.design === ArticleDesign.Media &&
+								mediaType ? (
+									<MediaMeta
+										containerPalette={containerPalette}
+										format={format}
+										mediaType={mediaType}
+										mediaDuration={mediaDuration}
+									/>
+								) : undefined
+							}
+							commentCount={
+								showCommentCount && longCount && shortCount ? (
+									<CardCommentCount
+										containerPalette={containerPalette}
+										format={format}
+										long={longCount}
+										short={shortCount}
+									/>
+								) : undefined
+							}
+							cardBranding={
+								branding ? (
+									<CardBranding
+										branding={branding}
+										format={format}
+									/>
+								) : undefined
+							}
+						/>
+						{hasSublinks && noOfSublinks <= 2 ? (
+							<SupportingContent
+								supportingContent={supportingContent}
+								alignment="vertical"
+							/>
 						) : (
 							<></>
 						)}
 					</div>
 				</ContentWrapper>
 			</CardLayout>
-			{/* If there are more than two sublinks break footer out of the headline column into a row below */}
-			{!positionFooterUnderContent ? renderFooter({}) : <></>}
+			{hasSublinks && noOfSublinks > 2 ? (
+				<SupportingContent
+					supportingContent={supportingContent}
+					alignment={
+						imagePosition === 'top' || imagePosition === 'bottom'
+							? 'vertical'
+							: 'horizontal'
+					}
+				/>
+			) : (
+				<></>
+			)}
+			{isOpinion && (
+				<StraightLines color={palette.border.lines} count={4} />
+			)}
 		</CardWrapper>
 	);
 };

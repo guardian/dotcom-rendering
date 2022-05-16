@@ -73,7 +73,11 @@ const getCaptionDetails = (oDoc: Option<DocumentFragment>): CaptionDetails => {
 				details.location = node.textContent
 					? some(node.textContent)
 					: none;
-			} else if (node.nodeName === '#text' || node.nodeName === 'A') {
+			} else if (
+				node.nodeName === '#text' ||
+				node.nodeName === 'A' ||
+				node.nodeName === 'EM'
+			) {
 				details = pushToDescription(details, node);
 			}
 			return details;
