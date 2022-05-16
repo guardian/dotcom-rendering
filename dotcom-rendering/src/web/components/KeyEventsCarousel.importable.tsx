@@ -159,7 +159,7 @@ export const KeyEventsCarousel = ({
 		});
 	return (
 		<div id="key-event-carousel" css={carouselStyles}>
-			<span css={containerStyles}>
+			<ul css={containerStyles}>
 				{transformedKeyEvents.map((keyEvent) => {
 					return (
 						<KeyEventCard
@@ -170,7 +170,7 @@ export const KeyEventsCarousel = ({
 						/>
 					);
 				})}
-			</span>
+			</ul>
 			<Hide until="desktop">
 				{keyEvents.length > 6 && (
 					<span css={buttonContainerStyles}>
