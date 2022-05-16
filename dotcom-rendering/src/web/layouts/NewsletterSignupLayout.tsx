@@ -26,6 +26,14 @@ import { ArticleBody } from '../components/ArticleBody';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { decidePalette } from '../lib/decidePalette';
 
+// This Layout is not currently in use.
+// It is an outline of a design for articles with the ArticleDesign.NewsletterSignup
+// which are currently rendered using the standard layout.
+// The full version of the design is to be implemented by the newsletters team.
+
+// to use this layout, edit ./dotcom-rendering/src/web/layouts/DecideLayout.tsx
+// to return is on articles with  ArticleDisplay.Standard && ArticleDesign.NewsletterSignup
+
 interface Props {
 	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
