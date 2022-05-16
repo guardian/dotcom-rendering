@@ -16,14 +16,14 @@ const program = TJS.getProgramFromFiles(
 const settings = { rejectDateType: true, required: true };
 
 module.exports = {
-	generateArticleSchema: () => {
+	getArticleSchema: () => {
 		return JSON.stringify(
 			TJS.generateSchema(program, 'CAPIArticleType', settings),
 			null,
 			4,
 		);
 	},
-	generateFrontSchema: () => {
+	getFrontSchema: () => {
 		return JSON.stringify(
 			TJS.generateSchema(program, 'FEFrontType', settings),
 			null,

@@ -2,10 +2,10 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..', '..');
 const fs = require('fs');
-const { generateArticleSchema, generateFrontSchema } = require('./schema');
+const { getArticleSchema, getFrontSchema } = require('./get-schema');
 
-const articleSchema = generateArticleSchema();
-const frontSchema = generateFrontSchema();
+const articleSchema = getArticleSchema();
+const frontSchema = getFrontSchema();
 
 fs.writeFile(
 	`${root}/src/model/json-schema.json`,

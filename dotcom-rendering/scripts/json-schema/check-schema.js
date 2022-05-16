@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 
 const root = path.resolve(__dirname, '..', '..');
-const { generateArticleSchema, generateFrontSchema } = require('./schema');
+const { getArticleSchema, getFrontSchema } = require('./get-schema');
 
 const existingArticleSchema = fs.readFileSync(
 	`${root}/src/model/json-schema.json`,
@@ -13,8 +13,8 @@ const existingFrontSchema = fs.readFileSync(
 	{ encoding: 'utf-8' },
 );
 
-const articleSchema = generateArticleSchema();
-const frontSchema = generateFrontSchema();
+const articleSchema = getArticleSchema();
+const frontSchema = getFrontSchema();
 
 if (
 	existingArticleSchema !== articleSchema ||
