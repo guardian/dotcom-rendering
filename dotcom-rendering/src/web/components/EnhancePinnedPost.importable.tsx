@@ -82,7 +82,6 @@ export const EnhancePinnedPost = () => {
 		const contentFitsContainer =
 			pinnedPostContent &&
 			pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
-
 		if (contentFitsContainer) hideShowMore();
 	};
 
@@ -93,7 +92,9 @@ export const EnhancePinnedPost = () => {
 		if (!pinnedPost) return;
 
 		const observer = new MutationObserver(checkContentHeight);
-		observer.observe(pinnedPost);
+		const config = { childList: true };
+
+		observer.observe(pinnedPost, config);
 
 		return () => observer.disconnect();
 	}, []);
