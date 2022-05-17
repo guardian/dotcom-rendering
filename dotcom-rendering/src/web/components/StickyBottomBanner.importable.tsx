@@ -167,28 +167,20 @@ const buildRRBannerConfigWith = ({
 	};
 };
 
-const buildPuzzlesBannerConfig = ({
-	puzzleBannerSwitch,
-}: {
-	puzzleBannerSwitch: boolean;
-}) =>
+const buildPuzzlesBannerConfig = (isEnabled: boolean) =>
 	buildRRBannerConfigWith({
 		id: 'puzzles-banner',
 		BannerComponent: PuzzlesBanner,
 		canShowFn: canShowPuzzlesBanner,
-		isEnabled: puzzleBannerSwitch,
+		isEnabled,
 	});
 
-const buildReaderRevenueBannerConfig = ({
-	remoteBannerSwitch,
-}: {
-	remoteBannerSwitch: boolean;
-}) =>
+const buildReaderRevenueBannerConfig = (isEnabled: boolean) =>
 	buildRRBannerConfigWith({
 		id: 'reader-revenue-banner',
 		BannerComponent: ReaderRevenueBanner,
 		canShowFn: canShowRRBanner,
-		isEnabled: remoteBannerSwitch,
+		isEnabled,
 	});
 
 const buildBrazeBanner = (
@@ -246,7 +238,7 @@ export const StickyBottomBanner = ({
 
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
-		const puzzlesBanner = buildPuzzlesBannerConfig({ puzzleBannerSwitch })({
+		const puzzlesBanner = buildPuzzlesBannerConfig(puzzleBannerSwitch)({
 			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
@@ -263,9 +255,9 @@ export const StickyBottomBanner = ({
 			contributionsServiceUrl,
 			idApiUrl,
 		});
-		const readerRevenue = buildReaderRevenueBannerConfig({
+		const readerRevenue = buildReaderRevenueBannerConfig(
 			remoteBannerSwitch,
-		})({
+		)({
 			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
