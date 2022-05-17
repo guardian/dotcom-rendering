@@ -143,6 +143,9 @@ const adControlCSS = css`
 			margin-top: 4px;
 			margin-left: 20px;
 		}
+		&.ad-slot--fluid {
+			width: 100%;
+		}
 	}
 	.ad-slot--outstream {
 		${from.tablet} {
@@ -170,6 +173,9 @@ const adVariantCSS = css`
 		${from.tablet} {
 			background-color: ${neutral[97]};
 		}
+		&.ad-slot--fluid {
+			width: 100%;
+		}
 	}
 	.ad-slot--inline:not(.ad-slot--inline1),
 	.ad-slot-liveblog--inline:not(.ad-slot--inline1) {
@@ -191,6 +197,9 @@ const adVariantCSS = css`
 			margin: 0;
 			margin-top: 4px;
 			margin-left: 20px;
+		}
+		&.ad-slot--fluid {
+			width: 100%;
 		}
 	}
 `;
