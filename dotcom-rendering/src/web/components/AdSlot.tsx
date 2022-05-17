@@ -209,7 +209,6 @@ export const AdSlot: React.FC<Props> = ({
 	switch (position) {
 		case 'right':
 			switch (display) {
-				case ArticleDisplay.Immersive:
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
@@ -234,7 +233,8 @@ export const AdSlot: React.FC<Props> = ({
 						/>
 					);
 				}
-				case ArticleDisplay.Standard: {
+				case ArticleDisplay.Standard:
+				case ArticleDisplay.Immersive: {
 					return (
 						<Island>
 							<TopRightAdSlot
