@@ -22,6 +22,17 @@ import { Colour } from '.';
 
 // ----- Functions ----- //
 
+const adLabel = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
+
+const adLabelDark = (_format: ArticleFormat): Colour => {
+	return neutral[60];
+};
+
+const adSlot = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
 const branding = (_format: ArticleFormat): Colour => {
 	return neutral[20];
 };
@@ -627,6 +638,9 @@ const pagination = (format: ArticleFormat): Colour => {
 // ----- API ----- //
 
 const text = {
+	adLabel,
+	adLabelDark,
+	adSlot,
 	articleLink,
 	branding,
 	brandingDark,

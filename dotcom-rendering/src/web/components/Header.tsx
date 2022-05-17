@@ -20,7 +20,7 @@ type Props = {
 	edition: Edition;
 	idUrl?: string;
 	mmaUrl?: string;
-	isAnniversary?: boolean; // Temporary for G200 anniversary
+	supporterCTA: string;
 	discussionApiUrl: string;
 	urls: ReaderRevenueCategories;
 	remoteHeader: boolean;
@@ -31,7 +31,7 @@ export const Header = ({
 	edition,
 	idUrl,
 	mmaUrl,
-	isAnniversary,
+	supporterCTA,
 	discussionApiUrl,
 	urls,
 	remoteHeader,
@@ -46,7 +46,7 @@ export const Header = ({
 				/>
 			</Island>
 		</Hide>
-		<Logo isAnniversary={isAnniversary} edition={edition} />
+		<Logo />
 		<Island deferUntil="idle" clientOnly={true}>
 			<ReaderRevenueLinks
 				urls={urls}
@@ -60,6 +60,7 @@ export const Header = ({
 		<div id="links-root">
 			<Island>
 				<Links
+					supporterCTA={supporterCTA}
 					idUrl={idUrl}
 					mmaUrl={mmaUrl}
 					discussionApiUrl={discussionApiUrl}

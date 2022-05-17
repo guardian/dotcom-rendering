@@ -66,9 +66,8 @@ function insert(html: string, enhanceTweetsSwitch: boolean) {
 	// Enhance
 	// -----------
 	if (enhanceTweetsSwitch) {
-		const pendingBlocks = blogBody.querySelectorAll<HTMLElement>(
-			'article .pending.block',
-		);
+		const pendingBlocks =
+			blogBody.querySelectorAll<HTMLElement>('.pending.block');
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
 		if (typeof twttr !== 'undefined') {
 			twttr.ready((twitter) => {
@@ -83,9 +82,8 @@ function insert(html: string, enhanceTweetsSwitch: boolean) {
  */
 function revealPendingBlocks() {
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
-	const pendingBlocks = blogBody?.querySelectorAll<HTMLElement>(
-		'article .pending.block',
-	);
+	const pendingBlocks =
+		blogBody?.querySelectorAll<HTMLElement>('.pending.block');
 	pendingBlocks?.forEach((block) => {
 		block.classList.add('reveal-slowly');
 		block.classList.remove('pending');

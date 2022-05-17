@@ -50,13 +50,22 @@ const styles = (
 				hr + &:first-letter {
 					${headline.large({ fontWeight: 'bold' })}
 					${dropCapWeight(format)}
-				color: ${text.dropCap(format)};
+					color: ${text.dropCap(format)};
 					float: left;
 					font-size: 7.375rem;
 					line-height: 6.188rem;
 					vertical-align: text-top;
 					pointer-events: none;
 					margin-right: ${remSpace[1]};
+					font-style: normal;
+				}
+
+				// This fixes drop cap misalignment in Firefox
+				@supports (-moz-appearance: none) {
+					&:first-of-type:first-letter,
+					hr + &:first-letter {
+						margin-top: ${remSpace[3]};
+					}
 				}
 
 				${darkModeCss`

@@ -3,9 +3,11 @@ import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
 import { CardHeadline } from './CardHeadline';
 
+type Alignment = 'vertical' | 'horizontal';
+
 type Props = {
 	supportingContent: DCRSupportingContent[];
-	imagePosition: ImagePositionType;
+	alignment: Alignment;
 };
 
 const wrapperStyles = css`
@@ -13,21 +15,19 @@ const wrapperStyles = css`
 	display: flex;
 	margin-left: 5px;
 	margin-right: 5px;
+	margin-bottom: 5px;
 `;
 
-const directionStyles = (imagePosition: ImagePositionType) => {
-	switch (imagePosition) {
-		case 'left':
-		case 'right':
+const directionStyles = (alignment: Alignment) => {
+	switch (alignment) {
+		case 'horizontal':
 			return css`
 				flex-direction: column;
 				${from.phablet} {
 					flex-direction: row;
 				}
 			`;
-		case 'none':
-		case 'top':
-		case 'bottom':
+		case 'vertical':
 			return css`
 				flex-direction: column;
 			`;
@@ -58,12 +58,9 @@ const bottomMargin = css`
 	}
 `;
 
-export const SupportingContent = ({
-	supportingContent,
-	imagePosition,
-}: Props) => {
+export const SupportingContent = ({ supportingContent, alignment }: Props) => {
 	return (
-		<ul css={[wrapperStyles, directionStyles(imagePosition)]}>
+		<ul css={[wrapperStyles, directionStyles(alignment)]}>
 			{supportingContent.map((subLink: DCRSupportingContent, index) => {
 				// The model has this property as optional but it is very likely
 				// to exist
@@ -73,9 +70,7 @@ export const SupportingContent = ({
 					subLink.format.design === ArticleDesign.LiveBlog
 						? 'Live'
 						: subLink.kickerText;
-				const shouldPadLeft =
-					index > 0 &&
-					(imagePosition === 'left' || imagePosition === 'right');
+				const shouldPadLeft = index > 0 && alignment === 'horizontal';
 				return (
 					<li
 						css={[

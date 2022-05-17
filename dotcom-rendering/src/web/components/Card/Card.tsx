@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/source-foundations';
 
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { StarRating } from '../StarRating/StarRating';
 import { CardHeadline } from '../CardHeadline';
 import { Avatar } from '../Avatar';
@@ -11,7 +12,6 @@ import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { CardCommentCount } from '../CardCommentCount';
 
-import { decidePalette } from '../../lib/decidePalette';
 import { formatCount } from '../../lib/formatCount';
 
 import { ContentWrapper } from './components/ContentWrapper';
@@ -26,6 +26,7 @@ import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
 import { SupportingContent } from '../SupportingContent';
+import { decidePalette } from '../../lib/decidePalette';
 
 export type Props = {
 	linkTo: string;
@@ -57,41 +58,7 @@ export type Props = {
 	// Labs
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
-};
-
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
-
-type CoveragesType = {
-	image: {
-		small: CardPercentageType;
-		medium: CardPercentageType;
-		large: CardPercentageType;
-		jumbo: CardPercentageType;
-	};
-	content: {
-		small: CardPercentageType;
-		medium: CardPercentageType;
-		large: CardPercentageType;
-		jumbo: CardPercentageType;
-	};
-};
-
-const coverages: CoveragesType = {
-	// coverages is how we set the image size relative to the space given
-	// to the headline. These percentages are passed to flex-basis inside the
-	// wrapper components
-	image: {
-		small: '25%',
-		medium: '50%',
-		large: '66%',
-		jumbo: '75%',
-	},
-	content: {
-		small: '75%',
-		medium: '50%',
-		large: '34%',
-		jumbo: '25%',
-	},
+	containerPalette?: DCRContainerPalette;
 };
 
 const starWrapper = css`
@@ -143,106 +110,28 @@ export const Card = ({
 	dataLinkName,
 	branding,
 	supportingContent,
+	containerPalette,
 }: Props) => {
-	// Decide how we position the image on the card
-	let imageCoverage: CardPercentageType | undefined;
-	let contentCoverage: CardPercentageType | undefined;
-	if (imageSize && imagePosition !== 'top') {
-		// We only specifiy an explicit width for the image when
-		// we're positioning left or right, not top. Top positioned
-		// images flow naturally
-		imageCoverage = coverages.image[imageSize];
-		contentCoverage = coverages.content[imageSize];
-	}
-
 	const showCommentCount = commentCount || commentCount === 0;
+	const palette = decidePalette(format, containerPalette);
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
-	const cardPalette = decidePalette(format);
+	const hasSublinks = supportingContent && supportingContent.length > 0;
+	const noOfSublinks = (supportingContent && supportingContent.length) || 0;
 
-	const moreThanTwoSubLinks: boolean = !!(
-		supportingContent?.length && supportingContent.length > 2
-	);
-
-	const cardIsVertical =
-		imagePosition === 'top' || imagePosition === 'bottom';
-
-	const positionFooterUnderContent = !moreThanTwoSubLinks && cardIsVertical;
-
-	const renderFooter = ({
-		renderAge = true,
-		renderMediaMeta = true,
-		renderCommentCount = true,
-		renderCardBranding = true,
-		renderSupportingContent = true,
-		forceVertical = false,
-	}: {
-		renderAge?: boolean;
-		renderMediaMeta?: boolean;
-		renderCommentCount?: boolean;
-		renderCardBranding?: boolean;
-		renderSupportingContent?: boolean;
-		forceVertical?: boolean;
-	}) => {
-		return (
-			<CardFooter
-				format={format}
-				age={
-					renderAge && webPublicationDate ? (
-						<CardAge
-							format={format}
-							webPublicationDate={webPublicationDate}
-							showClock={showClock}
-						/>
-					) : undefined
-				}
-				mediaMeta={
-					renderMediaMeta &&
-					format.design === ArticleDesign.Media &&
-					mediaType ? (
-						<MediaMeta
-							palette={cardPalette}
-							mediaType={mediaType}
-							mediaDuration={mediaDuration}
-						/>
-					) : undefined
-				}
-				commentCount={
-					renderCommentCount &&
-					showCommentCount &&
-					longCount &&
-					shortCount ? (
-						<CardCommentCount
-							palette={cardPalette}
-							long={longCount}
-							short={shortCount}
-						/>
-					) : undefined
-				}
-				cardBranding={
-					renderCardBranding && branding ? (
-						<CardBranding branding={branding} format={format} />
-					) : undefined
-				}
-				supportingContent={
-					renderSupportingContent &&
-					supportingContent &&
-					supportingContent.length > 0 ? (
-						<SupportingContent
-							supportingContent={supportingContent}
-							imagePosition={
-								forceVertical ? 'top' : imagePosition
-							}
-						/>
-					) : undefined
-				}
-			/>
-		);
-	};
+	const isOpinion =
+		format.design === ArticleDesign.Comment ||
+		format.design === ArticleDesign.Editorial ||
+		format.design === ArticleDesign.Letter;
 
 	return (
-		<CardWrapper format={format}>
-			<CardLink linkTo={linkTo} dataLinkName={dataLinkName} />
+		<CardWrapper format={format} containerPalette={containerPalette}>
+			<CardLink
+				linkTo={linkTo}
+				dataLinkName={dataLinkName}
+				format={format}
+				containerPalette={containerPalette}
+			/>
 			<CardLayout
 				imagePosition={imagePosition}
 				imagePositionOnMobile={imagePositionOnMobile}
@@ -250,7 +139,8 @@ export const Card = ({
 			>
 				{imageUrl && (
 					<ImageWrapper
-						percentage={imageCoverage}
+						imageSize={imageSize}
+						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
 					>
 						<img src={imageUrl} alt="" role="presentation" />
@@ -259,12 +149,16 @@ export const Card = ({
 						) : null}
 					</ImageWrapper>
 				)}
-				<ContentWrapper percentage={contentCoverage}>
+				<ContentWrapper
+					imageSize={imageSize}
+					imagePosition={imagePosition}
+				>
 					<Flex>
 						<HeadlineWrapper>
 							<CardHeadline
 								headlineText={headlineText}
 								format={format}
+								containerPalette={containerPalette}
 								size={headlineSize}
 								showQuotes={showQuotes}
 								kickerText={
@@ -290,7 +184,8 @@ export const Card = ({
 									<Avatar
 										imageSrc={avatar.src}
 										imageAlt={avatar.alt}
-										palette={cardPalette}
+										containerPalette={containerPalette}
+										format={format}
 									/>
 								</AvatarContainer>
 							</Hide>
@@ -298,7 +193,10 @@ export const Card = ({
 					</Flex>
 					<div>
 						{trailText && (
-							<TrailTextWrapper palette={cardPalette}>
+							<TrailTextWrapper
+								containerPalette={containerPalette}
+								format={format}
+							>
 								<div
 									dangerouslySetInnerHTML={{
 										__html: trailText,
@@ -312,22 +210,80 @@ export const Card = ({
 									<Avatar
 										imageSrc={avatar.src}
 										imageAlt={avatar.alt}
-										palette={cardPalette}
+										containerPalette={containerPalette}
+										format={format}
 									/>
 								</AvatarContainer>
 							</Hide>
 						)}
-						{/* Show the card footer in the same column as the headline content */}
-						{positionFooterUnderContent ? (
-							renderFooter({ forceVertical: true })
+						<CardFooter
+							format={format}
+							age={
+								webPublicationDate ? (
+									<CardAge
+										format={format}
+										containerPalette={containerPalette}
+										webPublicationDate={webPublicationDate}
+										showClock={showClock}
+									/>
+								) : undefined
+							}
+							mediaMeta={
+								format.design === ArticleDesign.Media &&
+								mediaType ? (
+									<MediaMeta
+										containerPalette={containerPalette}
+										format={format}
+										mediaType={mediaType}
+										mediaDuration={mediaDuration}
+									/>
+								) : undefined
+							}
+							commentCount={
+								showCommentCount && longCount && shortCount ? (
+									<CardCommentCount
+										containerPalette={containerPalette}
+										format={format}
+										long={longCount}
+										short={shortCount}
+									/>
+								) : undefined
+							}
+							cardBranding={
+								branding ? (
+									<CardBranding
+										branding={branding}
+										format={format}
+									/>
+								) : undefined
+							}
+						/>
+						{hasSublinks && noOfSublinks <= 2 ? (
+							<SupportingContent
+								supportingContent={supportingContent}
+								alignment="vertical"
+							/>
 						) : (
 							<></>
 						)}
 					</div>
 				</ContentWrapper>
 			</CardLayout>
-			{/* If there are more than two sublinks break footer out of the headline column into a row below */}
-			{!positionFooterUnderContent ? renderFooter({}) : <></>}
+			{hasSublinks && noOfSublinks > 2 ? (
+				<SupportingContent
+					supportingContent={supportingContent}
+					alignment={
+						imagePosition === 'top' || imagePosition === 'bottom'
+							? 'vertical'
+							: 'horizontal'
+					}
+				/>
+			) : (
+				<></>
+			)}
+			{isOpinion && (
+				<StraightLines color={palette.border.lines} count={4} />
+			)}
 		</CardWrapper>
 	);
 };

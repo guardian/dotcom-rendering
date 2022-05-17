@@ -27,7 +27,11 @@ type CAPITheme = ThemePillar | ThemeSpecial;
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type CAPIDesign =
 	| 'ArticleDesign'
+	// Temporarily accept both the old MediaDesign and the new ones
 	| 'MediaDesign'
+	| 'GalleryDesign'
+	| 'AudioDesign'
+	| 'VideoDesign'
 	| 'ReviewDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'
@@ -44,7 +48,8 @@ type CAPIDesign =
 	| 'PhotoEssayDesign'
 	| 'PrintShopDesign'
 	| 'ObituaryDesign'
-	| 'FullPageInteractiveDesign';
+	| 'FullPageInteractiveDesign'
+	| 'NewsletterSignupDesign';
 
 // CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
@@ -189,6 +194,34 @@ type Palette = {
 		headlineByline: Colour;
 
 		standfirstLink: Colour;
+	};
+};
+
+type ContainerOverrides = {
+	text: {
+		cardHeadline: Colour;
+		cardStandfirst: Colour;
+		cardKicker: Colour;
+		cardByline: Colour;
+		cardFooter: Colour;
+		cardCommentCount: Colour;
+		dynamoHeadline: Colour;
+		dynamoKicker: Colour;
+		dynamoSublinkKicker: Colour;
+		dynamoMeta: Colour;
+		container: Colour;
+		containerToggle: Colour;
+	};
+	border: {
+		container: Colour;
+		lines: Colour;
+	};
+	background: {
+		container: Colour;
+		card: Colour;
+	};
+	topBar: {
+		card: Colour;
 	};
 };
 
@@ -569,6 +602,7 @@ interface FEFrontType {
 	webURL: string;
 	config: FEFrontConfigType;
 	commercialProperties: Record<string, unknown>;
+	pageFooter: FooterType;
 }
 
 type DCRFrontType = {
@@ -577,6 +611,7 @@ type DCRFrontType = {
 	editionId: Edition;
 	webTitle: string;
 	config: FEFrontConfigType;
+	pageFooter: FooterType;
 };
 
 type FEPressedPageType = {
@@ -655,26 +690,35 @@ type FEContainerType =
 	| 'news/most-popular';
 
 type FEContainerPalette =
-	| `Branded`
-	| `EventPalette`
-	| `SombreAltPalette`
-	| `EventAltPalette`
-	| `InvestigationPalette`
-	| `LongRunningAltPalette`
-	| `LongRunningPalette`
-	| `SombrePalette`
-	| `Canonical`
-	| `Dynamo`
-	| `Special`
-	| `DynamoLike`
-	| `Special`
-	| `Breaking`
-	| `Podcast`
-	| `BreakingPalette`;
+	| 'EventPalette'
+	| 'SombreAltPalette'
+	| 'EventAltPalette'
+	| 'InvestigationPalette'
+	| 'LongRunningAltPalette'
+	| 'LongRunningPalette'
+	| 'SombrePalette'
+	| 'Canonical'
+	| 'Dynamo'
+	| 'Special'
+	| 'DynamoLike'
+	| 'Special'
+	| 'Breaking'
+	| 'Podcast'
+	| 'Branded'
+	| 'BreakingPalette';
+
+type DCRContainerPalette =
+	| 'EventPalette'
+	| 'SombreAltPalette'
+	| 'EventAltPalette'
+	| 'InvestigationPalette'
+	| 'LongRunningAltPalette'
+	| 'LongRunningPalette'
+	| 'SombrePalette'
+	| 'BreakingPalette';
 
 // TODO: These may need to be declared differently than the front types in the future
 type DCRContainerType = FEContainerType;
-type DCRContainerPalette = FEContainerPalette;
 
 type FEFrontCard = {
 	properties: {
@@ -929,7 +973,7 @@ type FEFrontConfigType = {
 	idOAuthUrl: string;
 	isSensitive: boolean;
 	isDev: boolean;
-	thirdPartyAppsAccount: string;
+	thirdPartyAppsAccount?: string;
 	avatarImagesUrl: string;
 	fbAppId: string;
 };
@@ -979,6 +1023,8 @@ interface BadgeType {
 }
 
 type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
+
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
 type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
 
@@ -1288,10 +1334,6 @@ type AdSlotType =
 // 3rd party type declarations //
 // ------------------------------
 /* eslint-disable @typescript-eslint/no-explicit-any */
-declare module 'dompurify' {
-	const createDOMPurify: any;
-	export default createDOMPurify;
-}
 declare module 'compose-function' {
 	const compose: any;
 	export default compose;

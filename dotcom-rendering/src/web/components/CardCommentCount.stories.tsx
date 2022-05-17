@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticlePillar, ArticleDisplay } from '@guardian/libs';
 
 import { CardCommentCount } from './CardCommentCount';
-import { decidePalette } from '../lib/decidePalette';
 
 export default {
 	component: CardCommentCount,
@@ -24,11 +23,11 @@ export const CommentCountStory = () => {
 	return (
 		<Container>
 			<CardCommentCount
-				palette={decidePalette({
+				format={{
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
 					display: ArticleDisplay.Standard,
-				})}
+				}}
 				short="11k"
 				long="10,899"
 			/>
@@ -41,11 +40,11 @@ export const MediaStory = () => {
 	return (
 		<Container>
 			<CardCommentCount
-				palette={decidePalette({
+				format={{
 					design: ArticleDesign.Media,
 					theme: ArticlePillar.Culture,
 					display: ArticleDisplay.Standard,
-				})}
+				}}
 				short="11k"
 				long="10,899"
 			/>

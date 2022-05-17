@@ -34,6 +34,7 @@ type Props = {
 	showTopBorder?: boolean;
 	padded?: boolean;
 	backgroundColour?: string;
+	innerBackgroundColour?: string;
 	borderColour?: string;
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
@@ -58,6 +59,7 @@ export const ElementContainer = ({
 	padded = true,
 	borderColour = border.secondary,
 	backgroundColour,
+	innerBackgroundColour,
 	shouldCenter = true,
 	children,
 	element = 'div',
@@ -74,6 +76,8 @@ export const ElementContainer = ({
 						shouldCenter && center,
 						showSideBorders && sideBorders(borderColour),
 						showTopBorder && topBorder(borderColour),
+						innerBackgroundColour &&
+							setBackgroundColour(innerBackgroundColour),
 						padded && padding,
 					]}
 				>

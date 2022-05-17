@@ -8,6 +8,7 @@ import { LI } from './Card/components/LI';
 
 type Props = {
 	content: TrailType[];
+	containerPalette?: DCRContainerPalette;
 };
 
 const decidePercentage = (length: number) => {
@@ -24,7 +25,7 @@ const decidePercentage = (length: number) => {
 	}
 };
 
-export const FourOrLess = ({ content }: Props) => {
+export const FourOrLess = ({ content, containerPalette }: Props) => {
 	const percentage = decidePercentage(content.length);
 
 	return (
@@ -38,6 +39,7 @@ export const FourOrLess = ({ content }: Props) => {
 						percentage={percentage}
 					>
 						<Card
+							containerPalette={containerPalette}
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}
