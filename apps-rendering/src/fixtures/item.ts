@@ -372,7 +372,7 @@ const feature: Feature = {
 
 const review: Review = {
 	design: ArticleDesign.Review,
-	starRating: 4,
+	starRating: some(4),
 	...fields,
 	theme: ArticlePillar.Culture,
 };

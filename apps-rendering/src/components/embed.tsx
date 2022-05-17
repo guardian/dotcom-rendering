@@ -51,7 +51,7 @@ const EmbedComponent: FC<Props> = ({ embed, editions }) => {
 			return !editions ? <GenericEmbed embed={embed} /> : null;
 
 		case EmbedKind.Generic:
-			return <GenericEmbed embed={embed} />;
+			return !editions ? <GenericEmbed embed={embed} /> : null;
 
 		default:
 			return null;

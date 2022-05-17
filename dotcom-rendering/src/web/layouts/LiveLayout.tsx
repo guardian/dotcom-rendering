@@ -333,6 +333,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							edition={CAPIArticle.editionId}
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
+							supporterCTA={
+								CAPIArticle.nav.readerRevenueLinks.header
+									.supporter
+							}
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
 							}
@@ -627,7 +631,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.filterKeyEvents
 									}
 									format={format}
-									switches={CAPIArticle.config.switches}
+									enhanceTweetsSwitch={
+										CAPIArticle.config.switches
+											.enhanceTweets
+									}
 									onFirstPage={pagination.currentPage === 1}
 									webURL={CAPIArticle.webURL}
 									// We default to string here because the property is optional but we
@@ -1151,6 +1158,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPIArticle.nav.readerRevenueLinks.header}
+					edition={CAPIArticle.editionId}
+					contributionsServiceUrl={
+						CAPIArticle.contributionsServiceUrl
+					}
 				/>
 			</ElementContainer>
 
@@ -1171,7 +1183,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzlesBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

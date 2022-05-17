@@ -23,9 +23,11 @@ const Default: FC = () => (
 				image: none,
 			},
 		]}
-		theme={selectPillar(ArticlePillar.News)}
-		design={ArticleDesign.Standard}
-		display={ArticleDisplay.Standard}
+		format={{
+			theme: selectPillar(ArticlePillar.News),
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+		}}
 	/>
 );
 
@@ -47,9 +49,11 @@ const Deadblogs: FC = () => {
 								image: none,
 							},
 						]}
-						theme={format.theme}
-						design={ArticleDesign.DeadBlog}
-						display={ArticleDisplay.Standard}
+						format={{
+							theme: format.theme,
+							design: ArticleDesign.DeadBlog,
+							display: ArticleDisplay.Standard,
+						}}
 					/>
 					<br />
 				</div>

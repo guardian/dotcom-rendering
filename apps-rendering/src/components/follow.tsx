@@ -14,8 +14,9 @@ import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-interface Props extends ArticleFormat {
+interface Props {
 	contributors: Contributor[];
+	format: ArticleFormat;
 }
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
@@ -46,7 +47,7 @@ const followStatusStyles = css`
 	column-gap: 0.2em;
 `;
 
-const Follow: FC<Props> = ({ contributors, ...format }) => {
+const Follow: FC<Props> = ({ contributors, format }) => {
 	const [contributor] = contributors;
 
 	if (

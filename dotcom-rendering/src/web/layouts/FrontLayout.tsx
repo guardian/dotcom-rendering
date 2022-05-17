@@ -58,6 +58,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							edition={front.editionId}
 							idUrl={front.config.idUrl}
 							mmaUrl={front.config.mmaUrl}
+							supporterCTA={
+								front.nav.readerRevenueLinks.header.supporter
+							}
 							discussionApiUrl={front.config.discussionApiUrl}
 							urls={front.nav.readerRevenueLinks.header}
 							remoteHeader={front.config.switches.remoteHeader}
@@ -190,6 +193,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					pageFooter={front.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={front.nav.readerRevenueLinks.header}
+					edition={front.editionId}
+					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 				/>
 			</ElementContainer>
 		</>
