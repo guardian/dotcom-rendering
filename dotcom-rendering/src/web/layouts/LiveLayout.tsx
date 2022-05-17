@@ -631,7 +631,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.filterKeyEvents
 									}
 									format={format}
-									switches={CAPIArticle.config.switches}
+									enhanceTweetsSwitch={
+										CAPIArticle.config.switches
+											.enhanceTweets
+									}
 									onFirstPage={pagination.currentPage === 1}
 									webURL={CAPIArticle.webURL}
 									// We default to string here because the property is optional but we
@@ -1180,7 +1183,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzlesBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>
