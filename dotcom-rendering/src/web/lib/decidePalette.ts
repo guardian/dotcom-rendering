@@ -76,8 +76,7 @@ const textHeadline = (format: ArticleFormat): string => {
 const textSeriesTitle = (format: ArticleFormat): string => {
 	if (
 		format.theme === ArticleSpecial.Labs &&
-		format.design !== ArticleDesign.LiveBlog &&
-		format.design !== ArticleDesign.DeadBlog
+		format.design !== ArticleDesign.LiveBlog
 	) {
 		return BLACK;
 	}
