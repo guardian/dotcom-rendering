@@ -154,6 +154,7 @@ type Palette = {
 		matchStats: Colour;
 		ageWarning: Colour;
 		keyEventBullet: Colour;
+		summaryEventBullet: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -196,6 +197,7 @@ type Palette = {
 		standfirstLink: Colour;
 		keyEventLink: Colour;
 		keyEventBullet: Colour;
+		summaryEventBullet: Colour;
 	};
 };
 

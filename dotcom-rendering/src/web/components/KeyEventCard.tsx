@@ -12,47 +12,47 @@ export interface KeyEvent {
 	isSummary: boolean;
 }
 
-const linkStyles = (palette: Palette, isSummary: boolean) => {
-	const bulletColor = isSummary
-		? palette.background.keyEventBullet
-		: neutral[46];
+const linkStyles = (palette: Palette) => css`
+	text-decoration: none;
+	line-height: 1.35;
 
-	const bulletHoverColor = isSummary
-		? palette.hover.keyEventBullet
-		: neutral[0];
+	&::before {
+		content: '';
+		display: block;
+		position: relative;
+		height: 13px;
+		width: 13px;
+		border-radius: 50%;
+		background-color: ${palette.background.keyEventBullet};
+		margin-bottom: ${space[1]}px;
+		z-index: 2;
 
-	return css`
-		text-decoration: none;
-		line-height: 1.35;
-
-		&::before {
-			content: '';
-			display: block;
-			position: relative;
-			height: 13px;
-			width: 13px;
-			border-radius: 50%;
-			background-color: ${bulletColor};
-			margin-bottom: ${space[1]}px;
-			z-index: 2;
-
-			${from.tablet} {
-				height: 15px;
-				width: 15px;
-			}
+		${from.tablet} {
+			height: 15px;
+			width: 15px;
 		}
+	}
 
-		&:hover::before {
-			background-color: ${bulletHoverColor};
-		}
+	&:hover::before {
+		background-color: ${palette.hover.keyEventBullet};
+	}
 
-		&:hover {
-			span {
-				border-bottom: 1px solid ${palette.hover.keyEventLink};
-			}
+	&:hover {
+		span {
+			border-bottom: 1px solid ${palette.hover.keyEventLink};
 		}
-	`;
-};
+	}
+`;
+
+const summaryStyles = (palette: Palette) => css`
+	&::before {
+		background-color: ${palette.background.summaryEventBullet};
+	}
+
+	&:hover::before {
+		background-color: ${palette.hover.summaryEventBullet};
+	}
+`;
 
 const listItemStyles = css`
 	position: relative;
@@ -109,7 +109,7 @@ export const KeyEventCard = ({
 		<li css={listItemStyles}>
 			<Link
 				priority="secondary"
-				css={linkStyles(palette, isSummary)}
+				css={[linkStyles(palette), isSummary && summaryStyles(palette)]}
 				href={url}
 				data-link-name="key event card"
 			>

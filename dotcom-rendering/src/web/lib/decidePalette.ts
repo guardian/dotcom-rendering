@@ -1161,7 +1161,9 @@ const backgroundMatchStats = (format: ArticleFormat): string => {
 	}
 };
 
-const backgroundKeyEventBullet = (format: ArticleFormat): string => {
+const backgroundKeyEventBullet = (): string => neutral[46];
+
+const backgroundSummaryEventBullet = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -1199,7 +1201,9 @@ const hoverKeyEventLink = (format: ArticleFormat): string => {
 	}
 };
 
-const hoverKeyEventBullet = (format: ArticleFormat): string => {
+const hoverKeyEventBullet = (): string => neutral[0];
+
+const hoverSummaryEventBullet = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[200];
@@ -1297,7 +1301,8 @@ export const decidePalette = (
 			analysisUnderline: backgroundUnderline(format),
 			matchStats: backgroundMatchStats(format),
 			ageWarning: backgroundAgeWarning(format),
-			keyEventBullet: backgroundKeyEventBullet(format),
+			keyEventBullet: backgroundKeyEventBullet(),
+			summaryEventBullet: backgroundSummaryEventBullet(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -1339,7 +1344,8 @@ export const decidePalette = (
 			headlineByline: hoverHeadlineByline(format),
 			standfirstLink: hoverStandfirstLink(format),
 			keyEventLink: hoverKeyEventLink(format),
-			keyEventBullet: hoverKeyEventBullet(format),
+			keyEventBullet: hoverKeyEventBullet(),
+			summaryEventBullet: hoverSummaryEventBullet(format),
 		},
 	};
 };
