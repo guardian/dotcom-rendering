@@ -90,7 +90,12 @@ export const KeyEventCard = ({ text, date, url, format }: KeyEvent) => {
 
 	return (
 		<li css={listItemStyles}>
-			<Link priority="secondary" css={linkStyles} href={url}>
+			<Link
+				priority="secondary"
+				css={linkStyles}
+				href={url}
+				data-link-name="key event card"
+			>
 				<time
 					dateTime={date.toISOString()}
 					data-relativeformat="med"

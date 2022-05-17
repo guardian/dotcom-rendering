@@ -242,8 +242,18 @@ const plainTextElement = (node: Node, key: number): ReactNode => {
 const dropCapRegex =
 	/^["'\u2018\u201c]?(?!I)[a-zA-Z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F]{3,}/;
 
-const shouldShowDropCap = (text: string, format: ArticleFormat): boolean =>
-	allowsDropCaps(format) && text.length >= 200 && dropCapRegex.test(text);
+const shouldShowDropCap = (
+	text: string,
+	format: ArticleFormat,
+	isEditions: boolean,
+): boolean => {
+	if (isEditions) {
+		return false;
+	}
+	return (
+		allowsDropCaps(format) && text.length >= 200 && dropCapRegex.test(text)
+	);
+};
 
 const textElement =
 	(format: ArticleFormat, isEditions = false) =>
@@ -254,7 +264,7 @@ const textElement =
 		);
 		switch (node.nodeName) {
 			case 'P': {
-				const showDropCap = shouldShowDropCap(text, format);
+				const showDropCap = shouldShowDropCap(text, format, isEditions);
 				return h(Paragraph, { key, format, showDropCap }, children);
 			}
 			case '#text':

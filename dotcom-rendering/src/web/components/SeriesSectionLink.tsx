@@ -179,14 +179,23 @@ export const SeriesSectionLink = ({
 	badge,
 	isMatch,
 }: Props) => {
-	// If we have a tag, use it to show 2 section titles
-	const tag = tags.find(
-		(thisTag) =>
-			thisTag.type === 'Blog' ||
-			thisTag.type === 'Series' ||
-			(thisTag.type === 'Publication' &&
-				thisTag.title === 'The Observer'),
+	const observerTag = tags.find(
+		(tag) => tag.type === 'Publication' && tag.title === 'The Observer',
 	);
+	const isCommentIsFree = tags.some(
+		(tag) => tag.id === 'commentisfree/commentisfree',
+	);
+	const seriesTag = tags.find(
+		(tag) =>
+			tag.type === 'Blog' ||
+			tag.type === 'Series' ||
+			(tag.type === 'Publication' && tag.title === 'The Observer'),
+	);
+
+	// If we have a tag, use it to show 2 section titles
+	// Observer opinion (commentisfree) articles should prioritise
+	// the publication tag over the commentisfree tag.
+	const tag = observerTag && isCommentIsFree ? observerTag : seriesTag;
 
 	const hasSeriesTag = tag && tag.type === 'Series';
 
