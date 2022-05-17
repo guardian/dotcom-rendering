@@ -14,7 +14,6 @@ import {
 	articleMainImage,
 	isAnalysis,
 	isFeature,
-	isReview,
 } from 'capi';
 import {
 	isAudio,
@@ -23,6 +22,7 @@ import {
 	isLabs,
 	isLetter,
 	isLive,
+	isReview,
 	isVideo,
 } from 'item';
 import { compose, index, pipe } from 'lib';
@@ -33,7 +33,7 @@ const parseRelatedItemType = (content: Content): RelatedItemType => {
 		return RelatedItemType.FEATURE;
 	} else if (isLive(tags) && content.fields?.liveBloggingNow) {
 		return RelatedItemType.LIVE;
-	} else if (isReview(content)) {
+	} else if (isReview(tags)) {
 		return RelatedItemType.REVIEW;
 	} else if (isAnalysis(content)) {
 		return RelatedItemType.ANALYSIS;
