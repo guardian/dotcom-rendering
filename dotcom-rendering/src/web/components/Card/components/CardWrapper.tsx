@@ -26,7 +26,7 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 			background-color: ${cardPalette.topBar.card};
 			content: '';
 			position: absolute;
-			top: 0;
+			top: -1px;
 			left: 0;
 			right: 0;
 			height: 1px;
