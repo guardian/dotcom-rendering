@@ -17,10 +17,6 @@ const pinnedPostContent: HTMLElement | null = !isServer
 	? window.document.querySelector('#collapsible-body')
 	: null;
 
-const contentFitsContainer = () =>
-	pinnedPostContent &&
-	pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
-
 /**
  * hide show more button and overlay on pinned post
  */
@@ -82,15 +78,24 @@ export const EnhancePinnedPost = () => {
 
 	const pinnedPostTiming = useRef<ReturnType<typeof initPerf>>();
 
+	const checkContentHeight = () => {
+		const contentFitsContainer =
+			pinnedPostContent &&
+			pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
+
+		if (contentFitsContainer) hideShowMore();
+	};
+
 	/**
-	 * Timeout allows embeds to load before calculating content height
+	 * Checks for dom updates (embeds loading etc) and updates content height
 	 */
 	useEffect(() => {
-		const timeout = setTimeout(() => {
-			if (contentFitsContainer()) hideShowMore();
-		}, 1000);
+		if (!pinnedPost) return;
 
-		return () => clearTimeout(timeout);
+		const observer = new MutationObserver(checkContentHeight);
+		observer.observe(pinnedPost);
+
+		return () => observer.disconnect();
 	}, []);
 
 	useEffect(() => {
