@@ -265,8 +265,9 @@ const textArticleLink = (format: ArticleFormat): string => {
 	}
 
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[400];
+	if (format.theme === ArticleSpecial.SpecialReport) {
+		return specialReport[300];
+	}
 	switch (format.theme) {
 		case ArticlePillar.Opinion:
 		case ArticlePillar.Culture:
@@ -513,9 +514,11 @@ const textCricketScoreboardLink = (): string => {
 };
 
 const backgroundArticle = (format: ArticleFormat): string => {
+	// specialreport blogs should have specialreport background
 	if (
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog
+		(format.design === ArticleDesign.LiveBlog ||
+			format.design === ArticleDesign.DeadBlog) &&
+		format.theme !== ArticleSpecial.SpecialReport
 	)
 		return neutral[97];
 	// Order matters. We want comment special report pieces to have the opinion background
@@ -698,7 +701,13 @@ const backgroundStandfirst = (format: ArticleFormat): string => {
 			}
 			break;
 		case ArticleDesign.DeadBlog:
-			return neutral[93];
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReport:
+					return specialReport[700];
+				default:
+					return neutral[93];
+			}
+
 		default:
 			return backgroundArticle(format);
 	}
