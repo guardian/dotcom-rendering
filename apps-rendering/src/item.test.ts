@@ -210,7 +210,7 @@ const getFirstBody = (item: Review | Standard) =>
 describe('fromCapi returns correct Item', () => {
 	test('media', () => {
 		const item = f(contentWithTag('type/audio'));
-		expect(item.design).toBe(ArticleDesign.Media);
+		expect(item.design).toBe(ArticleDesign.Audio);
 	});
 
 	test('review', () => {
