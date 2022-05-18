@@ -597,6 +597,40 @@ const seriesTitle = (format: ArticleFormat): Colour => {
 	}
 };
 
+const richLink = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+};
+
+const richLinkDark = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+}
+
+const richLinkAnchorDark = (_format: ArticleFormat): Colour => {
+	return neutral[60];
+}
+
+/**
+ * Neutral colour that is applied server-side before client-side JS changes the colour based on the theme.
+ */
+ const richLinkSvgPreload = (format: ArticleFormat): Colour => {
+	return neutral[7];
+}
+
 const seriesTitleDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -658,6 +692,10 @@ const text = {
 	keyEventsLeftColumn,
 	kicker,
 	linkDark,
+	richLink,
+	richLinkAnchorDark,
+	richLinkDark,
+	richLinkSvgPreload,
 	standfirst,
 	standfirstDark,
 	standfirstLink,
