@@ -132,8 +132,6 @@ const richLinkDark = (_format: ArticleFormat): Colour => {
 	return neutral[7];
 }
 
-
-
 // ----- API ----- //
 
 const fill = {
