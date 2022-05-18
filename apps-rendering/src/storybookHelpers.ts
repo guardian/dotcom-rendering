@@ -18,7 +18,9 @@ const selectPillar = (initial: ArticlePillar): ArticlePillar =>
 
 const designOptions = {
 	Article: ArticleDesign.Standard,
-	Media: ArticleDesign.Media,
+	Gallery: ArticleDesign.Gallery,
+	Audio: ArticleDesign.Audio,
+	Video: ArticleDesign.Video,
 	Review: ArticleDesign.Review,
 	Analysis: ArticleDesign.Analysis,
 	Comment: ArticleDesign.Comment,
