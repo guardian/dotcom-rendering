@@ -384,9 +384,9 @@ const fromCapi =
 				design: ArticleDesign.Interactive,
 				...itemFieldsWithBody(context, request),
 			};
-		// This isn't accurate, picture pieces look different to galleries.
-		// This is to prevent accidentally breaking Editions until we have
-		// a model for pictures.
+			// This isn't accurate, picture pieces look different to galleries.
+			// This is to prevent accidentally breaking Editions until we have
+			// a model for pictures.
 		} else if (isGallery(tags) || isPicture(tags)) {
 			return {
 				design: ArticleDesign.Gallery,

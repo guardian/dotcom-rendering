@@ -41,13 +41,11 @@ const mainStyles = css`
 
 const articleWrapperStyles = (item: ArticleFormat): SerializedStyles => css`
 	min-height: 100%;
-	background-color: ${
-		item.design === ArticleDesign.Gallery ||
-		item.design === ArticleDesign.Audio ||
-		item.design === ArticleDesign.Video
-			? neutral[7]
-			: 'inherit'
-	};
+	background-color: ${item.design === ArticleDesign.Gallery ||
+	item.design === ArticleDesign.Audio ||
+	item.design === ArticleDesign.Video
+		? neutral[7]
+		: 'inherit'};
 `;
 
 const articleStyles = css`

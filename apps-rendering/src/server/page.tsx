@@ -77,7 +77,8 @@ const styles = (format: ArticleFormat): string => `
 			format.design === ArticleDesign.Gallery ||
 			format.design === ArticleDesign.Audio ||
 			format.design === ArticleDesign.Video
-				? background.inverse : 'white'
+				? background.inverse
+				: 'white'
 		};
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';
