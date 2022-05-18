@@ -713,9 +713,11 @@ const renderEditions =
 				return textRenderer(format, excludeStyles, element, true);
 
 			case ElementKind.Image:
-				return format.design === ArticleDesign.Media
-					? h(GalleryImage, { format, image: element })
-					: imageRenderer(format, element, key);
+				return format.design === ArticleDesign.Gallery ||
+					format.design === ArticleDesign.Audio ||
+					format.design === ArticleDesign.Video
+						? h(GalleryImage, { format, image: element })
+						: imageRenderer(format, element, key);
 
 			case ElementKind.Pullquote: {
 				const { quote, attribution } = element;

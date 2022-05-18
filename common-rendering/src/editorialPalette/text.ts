@@ -82,7 +82,9 @@ const dropCapDark = (format: ArticleFormat): Colour => {
 const headline = (format: ArticleFormat): Colour => {
 	if (
 		format.display === ArticleDisplay.Immersive ||
-		format.design === ArticleDesign.Media ||
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video ||
 		format.design === ArticleDesign.LiveBlog
 	) {
 		return neutral[100];
@@ -371,7 +373,9 @@ const standfirst = ({ design }: ArticleFormat): Colour => {
 	switch (design) {
 		case ArticleDesign.LiveBlog:
 			return neutral[100];
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return neutral[86];
 		default:
 			return neutral[7];
@@ -409,7 +413,9 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
 			}
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			switch (format.theme) {
 				case ArticlePillar.News:
 					return news[500];
@@ -452,7 +458,9 @@ const standfirstLinkDark = (format: ArticleFormat): Colour => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return neutral[100];
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			switch (format.theme) {
 				case ArticlePillar.News:
 					return news[500];
@@ -504,7 +512,9 @@ const kicker = (format: ArticleFormat): Colour => {
 				default:
 					return neutral[0];
 			}
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			switch (format.theme) {
 				case ArticlePillar.News:
 					return news[600];

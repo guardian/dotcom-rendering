@@ -29,7 +29,9 @@ const emStyles = css`
 `;
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
-	format.design === ArticleDesign.Media
+	format.design === ArticleDesign.Gallery ||
+	format.design === ArticleDesign.Audio ||
+	format.design === ArticleDesign.Video
 		? css`
 				color: ${neutral[86]};
 		  `
@@ -51,7 +53,7 @@ const captionElement =
 
 		switch (node.nodeName) {
 			case 'STRONG':
-				return format.design === ArticleDesign.Media ? (
+				return format.design === ArticleDesign.Gallery || format.design === ArticleDesign.Audio || format.design === ArticleDesign.Video ? (
 					<h2 css={headingStyles} key={key}>
 						{children}
 					</h2>

@@ -55,7 +55,9 @@ const scriptName = ({ design, display }: ArticleFormat): Option<string> => {
 		case ArticleDesign.Review:
 		case ArticleDesign.Standard:
 		case ArticleDesign.Quiz:
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 		case ArticleDesign.Interview:
 			return some('article.js');
 		default:
@@ -72,7 +74,10 @@ const styles = (format: ArticleFormat): string => `
 
     body {
         background: ${
-			format.design === ArticleDesign.Media ? background.inverse : 'white'
+			format.design === ArticleDesign.Gallery ||
+			format.design === ArticleDesign.Audio ||
+			format.design === ArticleDesign.Video
+				? background.inverse : 'white'
 		};
         margin: 0;
         font-family: 'Guardian Text Egyptian Web';

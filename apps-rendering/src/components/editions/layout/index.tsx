@@ -41,9 +41,13 @@ const mainStyles = css`
 
 const articleWrapperStyles = (item: ArticleFormat): SerializedStyles => css`
 	min-height: 100%;
-	background-color: ${item.design === ArticleDesign.Media
-		? neutral[7]
-		: 'inherit'};
+	background-color: ${
+		item.design === ArticleDesign.Gallery ||
+		item.design === ArticleDesign.Audio ||
+		item.design === ArticleDesign.Video
+			? neutral[7]
+			: 'inherit'
+	};
 `;
 
 const articleStyles = css`
@@ -125,7 +129,9 @@ const headerBackgroundStyles = (format: ArticleFormat): SerializedStyles => css`
 const getSectionStyles = (item: ArticleFormat): SerializedStyles[] => {
 	if (
 		item.design === ArticleDesign.Interview ||
-		item.design === ArticleDesign.Media ||
+		item.design === ArticleDesign.Gallery ||
+		item.design === ArticleDesign.Audio ||
+		item.design === ArticleDesign.Video ||
 		item.display === ArticleDisplay.Immersive
 	) {
 		return [];
@@ -141,7 +147,9 @@ const Layout: FC<Props> = ({ item }) => {
 		item.design === ArticleDesign.Review ||
 		item.design === ArticleDesign.Interview ||
 		item.design === ArticleDesign.Feature ||
-		item.design === ArticleDesign.Media ||
+		item.design === ArticleDesign.Gallery ||
+		item.design === ArticleDesign.Audio ||
+		item.design === ArticleDesign.Video ||
 		item.design === ArticleDesign.Editorial ||
 		item.design === ArticleDesign.Letter ||
 		item.design === ArticleDesign.Quiz ||
@@ -163,7 +171,9 @@ const Layout: FC<Props> = ({ item }) => {
 							bodyWrapperStyles,
 							articleStyles,
 							isPicture(item.tags) && extendedBodyStyles,
-							item.design === ArticleDesign.Media
+							item.design === ArticleDesign.Gallery ||
+							item.design === ArticleDesign.Audio ||
+							item.design === ArticleDesign.Video
 								? galleryWrapperStyles
 								: null,
 						]}

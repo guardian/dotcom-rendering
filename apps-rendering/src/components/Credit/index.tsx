@@ -30,7 +30,9 @@ const Credit: FC<Props> = ({ format, credit }) =>
 		credit,
 		map((cred) => {
 			switch (format.design) {
-				case ArticleDesign.Media:
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
 					return <p css={mediaStyles}>{cred}</p>;
 				default:
 					return <span css={defaultStyles}> {cred}</span>;

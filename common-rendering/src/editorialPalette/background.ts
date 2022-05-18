@@ -61,7 +61,11 @@ const headline = (format: ArticleFormat): Colour => {
 		format.design === ArticleDesign.Editorial
 	) {
 		return opinion[800];
-	} else if (format.design === ArticleDesign.Media) {
+	} else if (
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video
+	) {
 		return neutral[10];
 	} else if (format.design === ArticleDesign.Interview) {
 		return neutral[0];

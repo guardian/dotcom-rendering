@@ -530,10 +530,20 @@ const formatFromRelatedItem = (
 			};
 
 		case RelatedItemType.GALLERY:
+			return {
+				design: ArticleDesign.Gallery,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
 		case RelatedItemType.AUDIO:
+			return {
+				design: ArticleDesign.Audio,
+				theme: themeFromString(pillar),
+				display: ArticleDisplay.Standard,
+			};
 		case RelatedItemType.VIDEO:
 			return {
-				design: ArticleDesign.Media,
+				design: ArticleDesign.Video,
 				theme: themeFromString(pillar),
 				display: ArticleDisplay.Standard,
 			};
