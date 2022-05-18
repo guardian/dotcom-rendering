@@ -42,6 +42,7 @@ export const renderArticle = (
 	res: express.Response,
 ): void => {
 	try {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		const CAPIArticle = enhanceCAPIType(body);
 		const resp = articleToHtml({
 			data: {
@@ -66,6 +67,7 @@ export const renderArticleJson = (
 	res: express.Response,
 ): void => {
 	try {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		const CAPIArticle = enhanceCAPIType(body);
 		const resp = {
 			data: {
@@ -98,6 +100,7 @@ export const renderInteractive = (
 	res: express.Response,
 ): void => {
 	try {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		const CAPIArticle = enhanceCAPIType(body);
 		const resp = articleToHtml({
 			data: {
@@ -189,6 +192,7 @@ export const renderFront = (
 	res: express.Response,
 ): void => {
 	try {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 		const front = enhanceFront(body);
 		const html = frontToHtml({
 			front,

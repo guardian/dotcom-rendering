@@ -94,6 +94,8 @@ const clearCommonReaderRevenueStateAndReload = (
 	window.location.reload();
 };
 
+/* eslint-disable @typescript-eslint/default-param-last -- this is worth a refactor */
+
 const showMeTheEpic = (
 	asExistingSupporter: boolean = false,
 	shouldHideReaderRevenue: boolean,

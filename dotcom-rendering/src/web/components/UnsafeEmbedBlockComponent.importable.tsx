@@ -33,9 +33,9 @@ export const UnsafeEmbedBlockComponent = ({
 		isMainMedia={isMainMedia}
 		source={source}
 		sourceDomain={sourceDomain}
-		onAccept={() =>
-			updateIframeHeight(`iframe[name="unsafe-embed-${index}"]`)
-		}
+		onAccept={() => {
+			void updateIframeHeight(`iframe[name="unsafe-embed-${index}"]`);
+		}}
 	>
 		<iframe
 			css={fullWidthStyles}

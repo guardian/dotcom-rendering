@@ -153,6 +153,7 @@ const buildRRBannerConfigWith = ({
 					}),
 				show:
 					({ meta, module, fetchEmail }: BannerProps) =>
+					// eslint-disable-next-line react/display-name
 					() =>
 						(
 							<BannerComponent
@@ -190,6 +191,7 @@ const buildBrazeBanner = (
 	candidate: {
 		id: 'braze-banner',
 		canShow: () => canShowBrazeBanner(brazeMessages, brazeArticleContext),
+		// eslint-disable-next-line react/display-name
 		show: (meta: any) => () => <BrazeBanner meta={meta} />,
 	},
 	timeoutMillis: DEFAULT_BANNER_TIMEOUT_MILLIS,

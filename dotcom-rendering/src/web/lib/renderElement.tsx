@@ -134,6 +134,7 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 }: Props): [boolean, JSX.Element] => {
+	/* eslint-disable react/jsx-key -- it’s not an array of JSX */
 	const palette = decidePalette(format);
 
 	const isBlog =

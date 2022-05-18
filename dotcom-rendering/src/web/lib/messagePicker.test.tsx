@@ -189,6 +189,7 @@ describe('pickMessage', () => {
 	});
 
 	it('passes metadata returned by canShow to show', async () => {
+		// eslint-disable-next-line react/display-name -- it’s a test
 		const renderComponent = jest.fn(() => () => <div />);
 		const meta = { extra: 'info' };
 		const config: SlotConfig = {
