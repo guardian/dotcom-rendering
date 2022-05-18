@@ -74,7 +74,12 @@ const textHeadline = (format: ArticleFormat): string => {
 };
 
 const textSeriesTitle = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
+	if (
+		format.theme === ArticleSpecial.Labs &&
+		format.design !== ArticleDesign.LiveBlog
+	) {
+		return BLACK;
+	}
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	switch (format.display) {
@@ -669,7 +674,7 @@ const backgroundHeader = (format: ArticleFormat): string => {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
-					return news[200];
+					return news[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[700];
 				default:
