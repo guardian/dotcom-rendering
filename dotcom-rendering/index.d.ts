@@ -153,6 +153,8 @@ type Palette = {
 		analysisUnderline: Colour;
 		matchStats: Colour;
 		ageWarning: Colour;
+		keyEventBullet: Colour;
+		summaryEventBullet: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -192,8 +194,10 @@ type Palette = {
 	};
 	hover: {
 		headlineByline: Colour;
-
 		standfirstLink: Colour;
+		keyEventLink: Colour;
+		keyEventBullet: Colour;
+		summaryEventBullet: Colour;
 	};
 };
 

@@ -296,17 +296,17 @@ const textPullQuote = (format: ArticleFormat): string => {
 const textKeyEvent = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
+			return news[300];
 		case ArticlePillar.Sport:
-			return sport[400];
+			return sport[300];
 		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
+			return lifestyle[300];
 		case ArticlePillar.Culture:
-			return culture[350];
+			return culture[300];
 		case ArticlePillar.Opinion:
 			return opinion[300];
 		case ArticleSpecial.Labs:
-			return labs[400];
+			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 	}
@@ -1167,6 +1167,67 @@ const backgroundMatchStats = (format: ArticleFormat): string => {
 	}
 };
 
+const backgroundKeyEventBullet = (): string => neutral[46];
+
+const backgroundSummaryEventBullet = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
+const hoverKeyEventLink = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
+const hoverKeyEventBullet = (): string => neutral[0];
+
+const hoverSummaryEventBullet = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[200];
+		case ArticlePillar.Sport:
+			return sport[200];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[200];
+		case ArticlePillar.Culture:
+			return culture[200];
+		case ArticlePillar.Opinion:
+			return opinion[200];
+		case ArticleSpecial.Labs:
+			return labs[200];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[200];
+	}
+};
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -1246,6 +1307,8 @@ export const decidePalette = (
 			analysisUnderline: backgroundUnderline(format),
 			matchStats: backgroundMatchStats(format),
 			ageWarning: backgroundAgeWarning(format),
+			keyEventBullet: backgroundKeyEventBullet(),
+			summaryEventBullet: backgroundSummaryEventBullet(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -1286,6 +1349,9 @@ export const decidePalette = (
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
 			standfirstLink: hoverStandfirstLink(format),
+			keyEventLink: hoverKeyEventLink(format),
+			keyEventBullet: hoverKeyEventBullet(),
+			summaryEventBullet: hoverSummaryEventBullet(format),
 		},
 	};
 };
