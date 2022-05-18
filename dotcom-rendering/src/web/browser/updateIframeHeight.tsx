@@ -15,6 +15,7 @@ export const updateIframeHeight = (queryString: string): Promise<void> => {
 		});
 		if (iframe) {
 			try {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- we’ll catch it!
 				const message = JSON.parse(event.data) as {
 					type: string;
 					value: string;
@@ -25,8 +26,9 @@ export const updateIframeHeight = (queryString: string): Promise<void> => {
 						break;
 					default:
 				}
-				// eslint-disable-next-line no-empty
-			} catch (e) {}
+			} catch (e) {
+				/* Fail silently */
+			}
 		}
 	});
 
