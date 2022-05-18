@@ -86,6 +86,58 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
+const richLink = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+};
+
+const richLinkSvg = richLink;
+
+
+const richLinkSvgDark = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return labs[500];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+};
+
+/**
+ * Neutral colour that is applied server-side before client-side JS changes the colour based on the theme.
+ */
+const richLinkSvgPreload = (format: ArticleFormat): Colour => {
+	return neutral[7];
+}
+
+const richLinkDark = (format: ArticleFormat): Colour => {
+	return neutral[60];
+}
+
 const standfirstLinkDark = (format: ArticleFormat): Colour => {
 	return neutral[46];
 };
@@ -104,6 +156,11 @@ const border = {
 	standfirstLink,
 	standfirstLinkDark,
 	pagination,
+	richLink,
+	richLinkDark,
+	richLinkSvg,
+	richLinkSvgDark,
+	richLinkSvgPreload,
 };
 
 // ----- Exports ----- //

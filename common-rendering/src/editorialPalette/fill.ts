@@ -124,6 +124,16 @@ const blockquoteIconDark = (format: ArticleFormat): Colour => {
 	}
 };
 
+const richLink = (_format: ArticleFormat): Colour => {
+	return neutral[100];
+};
+
+const richLinkDark = (_format: ArticleFormat): Colour => {
+	return neutral[7];
+}
+
+
+
 // ----- API ----- //
 
 const fill = {
@@ -132,6 +142,8 @@ const fill = {
 	iconDark,
 	blockquoteIcon,
 	blockquoteIconDark,
+	richLink,
+	richLinkDark,
 };
 
 // ----- Exports ----- //
