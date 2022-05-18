@@ -40,7 +40,8 @@ const ageStyles = (format: ArticleFormat, palette: Palette) => {
 					format.design === ArticleDesign.Gallery ||
 					format.design === ArticleDesign.Audio ||
 					format.design === ArticleDesign.Video
-					? `bold` : `regular`,
+						? `bold`
+						: `regular`,
 			})};
 		}
 	`;
