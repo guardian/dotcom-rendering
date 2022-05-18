@@ -75,7 +75,7 @@ const zipBundle = () => {
 			maxBuffer: 200000000, // increase if you get a maxBuffer exceeded error
 		},
 	).then(() => {
-		cpy(['rendering.zip'], path.resolve(target, 'rendering', 'dist'));
+		void cpy(['rendering.zip'], path.resolve(target, 'rendering', 'dist'));
 	});
 };
 
