@@ -241,7 +241,7 @@ cardStories.add('with media type', () => {
 					{...basicCardProps}
 					format={{
 						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Media,
+						design: ArticleDesign.Video,
 						theme: ArticlePillar.Sport,
 					}}
 					mediaType="Video"
@@ -254,7 +254,7 @@ cardStories.add('with media type', () => {
 					{...basicCardProps}
 					format={{
 						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Media,
+						design: ArticleDesign.Audio,
 						theme: ArticlePillar.Sport,
 					}}
 					mediaType="Audio"
@@ -267,7 +267,7 @@ cardStories.add('with media type', () => {
 					{...basicCardProps}
 					format={{
 						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Media,
+						design: ArticleDesign.Gallery,
 						theme: ArticlePillar.Sport,
 					}}
 					mediaType="Gallery"

@@ -385,7 +385,9 @@ const textCardHeadline = (format: ArticleFormat): string => {
 		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:
 			return pillarPalette[format.theme].dark;
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return WHITE;
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
@@ -439,7 +441,9 @@ const textCardKicker = (format: ArticleFormat): string => {
 				default:
 					return BLACK;
 			}
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			switch (format.theme) {
 				case ArticlePillar.News:
 					return news[600];
@@ -485,7 +489,9 @@ const textCardFooter = (format: ArticleFormat): string => {
 				default:
 					return BLACK;
 			}
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
 					return brandAlt[400];
@@ -586,7 +592,9 @@ const backgroundCard = (format: ArticleFormat): string => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return opinion[800];
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return neutral[20];
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
@@ -920,7 +928,9 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 				default:
 					return BLACK;
 			}
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
 					return brandAlt[400];

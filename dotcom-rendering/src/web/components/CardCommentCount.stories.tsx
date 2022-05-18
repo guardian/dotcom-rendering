@@ -36,12 +36,12 @@ export const CommentCountStory = () => {
 };
 CommentCountStory.story = { name: 'default' };
 
-export const MediaStory = () => {
+export const GalleryStory = () => {
 	return (
 		<Container>
 			<CardCommentCount
 				format={{
-					design: ArticleDesign.Media,
+					design: ArticleDesign.Gallery,
 					theme: ArticlePillar.Culture,
 					display: ArticleDisplay.Standard,
 				}}
@@ -51,4 +51,4 @@ export const MediaStory = () => {
 		</Container>
 	);
 };
-MediaStory.story = { name: 'Media' };
+GalleryStory.story = { name: 'Gallery' };

@@ -229,7 +229,9 @@ export const Card = ({
 								) : undefined
 							}
 							mediaMeta={
-								format.design === ArticleDesign.Media &&
+								(format.design === ArticleDesign.Gallery ||
+								format.design === ArticleDesign.Audio ||
+								format.design === ArticleDesign.Video) &&
 								mediaType ? (
 									<MediaMeta
 										containerPalette={containerPalette}

@@ -37,7 +37,10 @@ const ageStyles = (format: ArticleFormat, palette: Palette) => {
 		> time {
 			${textSans.xxsmall({
 				fontWeight:
-					format.design === ArticleDesign.Media ? `bold` : `regular`,
+					format.design === ArticleDesign.Gallery ||
+					format.design === ArticleDesign.Audio ||
+					format.design === ArticleDesign.Video
+					? `bold` : `regular`,
 			})};
 		}
 	`;

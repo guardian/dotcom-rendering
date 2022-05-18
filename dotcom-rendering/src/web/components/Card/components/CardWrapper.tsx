@@ -72,7 +72,9 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 					background-color: #fdf0e8;
 				}
 			`;
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 		case ArticleDesign.LiveBlog:
 			return css`
 				${baseCardStyles};
