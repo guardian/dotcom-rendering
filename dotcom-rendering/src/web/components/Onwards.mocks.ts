@@ -33,7 +33,7 @@ const CAPITrails: CAPITrailType[] = [
 		webPublicationDate: '2019-12-02T09:45:30.000Z',
 		format: {
 			theme: 'NewsPillar',
-			design: 'MediaDesign',
+			design: 'VideoDesign',
 			display: 'StandardDisplay',
 		},
 		pillar: 'news',
