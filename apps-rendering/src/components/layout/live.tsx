@@ -16,13 +16,13 @@ import {
 	remSpace,
 } from '@guardian/source-foundations';
 import { OptionKind } from '@guardian/types';
-import Footer from 'components/footer';
-import GridItem from 'components/gridItem';
-import LiveBlocks from 'components/liveBlocks';
-import LiveblogHeader from 'components/liveblogHeader';
-import Metadata from 'components/metadata';
-import RelatedContent from 'components/relatedContent';
-import Tags from 'components/tags';
+import Footer from 'components/Footer';
+import GridItem from 'components/GridItem';
+import LiveBlocks from 'components/LiveBlocks';
+import LiveblogHeader from 'components/LiveblogHeader';
+import Metadata from 'components/Metadata';
+import RelatedContent from 'components/RelatedContent';
+import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';

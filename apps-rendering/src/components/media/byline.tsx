@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import Dateline from 'components/dateline';
+import Dateline from 'components/Dateline';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import { pipe } from 'lib';

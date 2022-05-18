@@ -15,18 +15,18 @@ import {
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
 import { map, none, withDefault } from '@guardian/types';
-import Body from 'components/articleBody';
-import Epic from 'components/epic';
-import FootballScores from 'components/footballScores';
-import Footer from 'components/footer';
-import Headline from 'components/headline';
-import ImmersiveCaption from 'components/immersiveCaption';
-import Logo from 'components/logo';
-import Metadata from 'components/metadata';
-import RelatedContent from 'components/relatedContent';
-import Series from 'components/series';
-import Standfirst from 'components/standfirst';
-import Tags from 'components/tags';
+import Body from 'components/ArticleBody';
+import Epic from 'components/Epic';
+import FootballScores from 'components/FootballScores';
+import Footer from 'components/Footer';
+import Headline from 'components/Headline';
+import ImmersiveCaption from 'components/ImmersiveCaption';
+import Logo from 'components/Logo';
+import Metadata from 'components/Metadata';
+import RelatedContent from 'components/RelatedContent';
+import Series from 'components/Series';
+import Standfirst from 'components/Standfirst';
+import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type {
 	Item,

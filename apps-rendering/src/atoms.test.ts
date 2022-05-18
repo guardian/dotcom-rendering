@@ -22,7 +22,7 @@ import { TimelineAtom } from '@guardian/content-atom-model/timeline/timelineAtom
 import { TimelineItem } from '@guardian/content-atom-model/timeline/timelineItem';
 import { err, fromNullable, ok, some } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
-import { atomScript } from 'components/interactiveAtom';
+import { atomScript } from 'components/InteractiveAtom';
 import Int64 from 'node-int64';
 import { DocParser } from 'parserContext';
 import { formatOptionalDate, parseAtom } from './atoms';
