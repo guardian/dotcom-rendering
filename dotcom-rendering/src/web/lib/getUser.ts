@@ -21,11 +21,13 @@ const callApi = (url: string) => {
 export const getUser = async (ajaxUrl: string): Promise<UserProfile | void> => {
 	const url = joinUrl([ajaxUrl, 'profile/me?strict_sanctions_check=false']);
 	return callApi(url)
-		.catch((error) => {
+		.catch((e: unknown) => {
+			const error = e instanceof Error ? e : new Error('Unknown error');
 			window.guardian.modules.sentry.reportError(error, 'get-user');
 		})
 		.then((json: { userProfile: UserProfile }) => json.userProfile)
-		.catch((error) => {
+		.catch((e: unknown) => {
+			const error = e instanceof Error ? e : new Error('Unknown error');
 			window.guardian.modules.sentry.reportError(error, 'get-user');
 		});
 };

@@ -42,7 +42,8 @@ export const getLocaleCode = async (): Promise<CountryCode | null> => {
 			locale = countryCode;
 			return countryCode;
 		})
-		.catch((error) => {
+		.catch((e: unknown) => {
+			const error = e instanceof Error ? e : new Error('Unknown error');
 			console.log(`Error getting location from libs/getLocale`);
 			window.guardian.modules.sentry.reportError(
 				error,

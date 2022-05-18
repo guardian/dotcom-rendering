@@ -220,7 +220,8 @@ export const setLocalNoBannerCachePeriod = (): void =>
 const getEmail = (ajaxUrl: string): Promise<string | undefined> => {
 	return getIdApiUserData(ajaxUrl)
 		.then((data: IdApiUserData) => data.user?.primaryEmailAddress)
-		.catch((error) => {
+		.catch((e: unknown) => {
+			const error = e instanceof Error ? e : new Error('Unknown error');
 			window.guardian.modules.sentry.reportError(error, 'getEmail');
 			return undefined;
 		});

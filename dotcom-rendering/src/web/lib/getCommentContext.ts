@@ -114,7 +114,8 @@ export const getCommentContext = async (
 			return response;
 		})
 		.then((response) => response.json())
-		.catch((error) => {
+		.catch((e: unknown) => {
+			const error = e instanceof Error ? e : new Error('Unknown error');
 			window.guardian.modules.sentry.reportError(
 				error,
 				'get-comment-page',
