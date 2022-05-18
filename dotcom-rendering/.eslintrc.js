@@ -12,6 +12,7 @@ module.exports = {
 		'airbnb-typescript',
 		'prettier',
 		'plugin:@guardian/source-react-components/recommended',
+		'plugin:react/recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -24,6 +25,8 @@ module.exports = {
 		'@typescript-eslint/tslint',
 		'react-hooks',
 		'dcr',
+		'import',
+		'jsx-a11y',
 	],
 	rules: {
 		'dcr/only-import-below': [
