@@ -25,6 +25,10 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 		:before {
 			background-color: ${cardPalette.topBar.card};
 			content: '';
+			position: absolute;
+			top: -1px;
+			left: 0;
+			right: 0;
 			height: 1px;
 			z-index: 2;
 		}
