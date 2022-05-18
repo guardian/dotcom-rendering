@@ -78,11 +78,26 @@ export const EnhancePinnedPost = () => {
 
 	const pinnedPostTiming = useRef<ReturnType<typeof initPerf>>();
 
-	const contentFitsContainer =
-		pinnedPostContent &&
-		pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
+	const checkContentHeight = () => {
+		const contentFitsContainer =
+			pinnedPostContent &&
+			pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
+		if (contentFitsContainer) hideShowMore();
+	};
 
-	if (contentFitsContainer) hideShowMore();
+	/**
+	 * Checks for dom updates (embeds loading etc) and updates content height
+	 */
+	useEffect(() => {
+		if (!pinnedPost) return;
+
+		const observer = new MutationObserver(checkContentHeight);
+		const config = { childList: true };
+
+		observer.observe(pinnedPost, config);
+
+		return () => observer.disconnect();
+	}, []);
 
 	useEffect(() => {
 		pinnedPostCheckBox?.addEventListener('change', handleClickTracking);

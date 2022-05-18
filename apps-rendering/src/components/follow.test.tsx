@@ -34,7 +34,7 @@ describe('Follow component renders as expected', () => {
 
 		act(() => {
 			render(
-				<Follow contributors={contributors} {...followFormat} />,
+				<Follow contributors={contributors} format={followFormat} />,
 				container,
 			);
 		});
@@ -51,7 +51,7 @@ describe('Follow component renders as expected', () => {
 		];
 
 		const follow = renderer.create(
-			<Follow contributors={contributors} {...followFormat} />,
+			<Follow contributors={contributors} format={followFormat} />,
 		);
 
 		expect(follow.root.children).toHaveLength(0);
@@ -74,7 +74,7 @@ describe('Follow component renders as expected', () => {
 		];
 
 		const follow = renderer.create(
-			<Follow contributors={contributors} {...followFormat} />,
+			<Follow contributors={contributors} format={followFormat} />,
 		);
 
 		expect(follow.root.children).toHaveLength(0);

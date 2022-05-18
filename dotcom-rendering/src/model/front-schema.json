@@ -567,10 +567,14 @@
                                                             },
                                                             "headline": {
                                                                 "type": "string"
+                                                            },
+                                                            "url": {
+                                                                "type": "string"
                                                             }
                                                         },
                                                         "required": [
-                                                            "headline"
+                                                            "headline",
+                                                            "url"
                                                         ]
                                                     },
                                                     "format": {
@@ -1134,10 +1138,14 @@
                                                             },
                                                             "headline": {
                                                                 "type": "string"
+                                                            },
+                                                            "url": {
+                                                                "type": "string"
                                                             }
                                                         },
                                                         "required": [
-                                                            "headline"
+                                                            "headline",
+                                                            "url"
                                                         ]
                                                     },
                                                     "format": {
@@ -1701,10 +1709,14 @@
                                                             },
                                                             "headline": {
                                                                 "type": "string"
+                                                            },
+                                                            "url": {
+                                                                "type": "string"
                                                             }
                                                         },
                                                         "required": [
-                                                            "headline"
+                                                            "headline",
+                                                            "url"
                                                         ]
                                                     },
                                                     "format": {
@@ -1802,7 +1814,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "type": {
-                                                    "type": "string"
+                                                    "$ref": "#/definitions/FEContainerPalette"
                                                 }
                                             },
                                             "required": [
@@ -2247,7 +2259,6 @@
                 "stripePublicToken",
                 "supportUrl",
                 "switches",
-                "thirdPartyAppsAccount",
                 "userAttributesApiUrl",
                 "weatherapiurl",
                 "webTitle"
@@ -2255,6 +2266,9 @@
         },
         "commercialProperties": {
             "$ref": "#/definitions/Record<string,unknown>"
+        },
+        "pageFooter": {
+            "$ref": "#/definitions/FooterType"
         }
     },
     "required": [
@@ -2264,6 +2278,7 @@
         "editionLongForm",
         "guardianBaseURL",
         "nav",
+        "pageFooter",
         "pageId",
         "pressedPage",
         "webTitle",
@@ -2277,23 +2292,27 @@
             "enum": [
                 "AnalysisDesign",
                 "ArticleDesign",
+                "AudioDesign",
                 "CommentDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
+                "GalleryDesign",
                 "InteractiveDesign",
                 "InterviewDesign",
                 "LetterDesign",
                 "LiveBlogDesign",
                 "MatchReportDesign",
                 "MediaDesign",
+                "NewsletterSignupDesign",
                 "ObituaryDesign",
                 "PhotoEssayDesign",
                 "PrintShopDesign",
                 "QuizDesign",
                 "RecipeDesign",
-                "ReviewDesign"
+                "ReviewDesign",
+                "VideoDesign"
             ],
             "type": "string"
         },
@@ -2351,6 +2370,26 @@
                 "nav/list",
                 "nav/media-list",
                 "news/most-popular"
+            ],
+            "type": "string"
+        },
+        "FEContainerPalette": {
+            "enum": [
+                "Branded",
+                "Breaking",
+                "BreakingPalette",
+                "Canonical",
+                "Dynamo",
+                "DynamoLike",
+                "EventAltPalette",
+                "EventPalette",
+                "InvestigationPalette",
+                "LongRunningAltPalette",
+                "LongRunningPalette",
+                "Podcast",
+                "SombreAltPalette",
+                "SombrePalette",
+                "Special"
             ],
             "type": "string"
         },
@@ -2532,6 +2571,45 @@
                 "PROD"
             ],
             "type": "string"
+        },
+        "FooterType": {
+            "type": "object",
+            "properties": {
+                "footerLinks": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/FooterLink"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "footerLinks"
+            ]
+        },
+        "FooterLink": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "dataLinkName": {
+                    "type": "string"
+                },
+                "extraClasses": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "dataLinkName",
+                "text",
+                "url"
+            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

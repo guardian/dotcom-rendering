@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { some } from '@guardian/types';
 import { radios, withKnobs } from '@storybook/addon-knobs';
 import { article, review } from 'fixtures/item';
 import type { ReactElement } from 'react';
@@ -15,7 +16,7 @@ const Default = (): ReactElement => (
 	<StarRating
 		item={{
 			...review,
-			starRating: radios('Rating', starRating, 3),
+			starRating: some(radios('Rating', starRating, 3)),
 		}}
 	/>
 );

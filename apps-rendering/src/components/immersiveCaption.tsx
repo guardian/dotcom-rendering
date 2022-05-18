@@ -4,11 +4,11 @@ import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import { OptionKind } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import { Caption } from 'components/caption';
 import type { Item } from 'item';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
 import type { FC, ReactElement } from 'react';
-import { renderCaption } from 'renderer';
 
 interface Props {
 	item: Item;
@@ -30,7 +30,7 @@ const buildCaption = (
 	if (cap.kind === OptionKind.Some && credit.kind === OptionKind.Some) {
 		return (
 			<p css={captionHeadingStyles}>
-				{renderCaption(cap.value, format)} {credit.value}
+				<Caption caption={cap.value} format={format} /> {credit.value}
 			</p>
 		);
 	} else if (
@@ -38,7 +38,9 @@ const buildCaption = (
 		credit.kind === OptionKind.None
 	) {
 		return (
-			<p css={captionHeadingStyles}>{renderCaption(cap.value, format)}</p>
+			<p css={captionHeadingStyles}>
+				<Caption caption={cap.value} format={format} />
+			</p>
 		);
 	} else if (
 		cap.kind === OptionKind.None &&

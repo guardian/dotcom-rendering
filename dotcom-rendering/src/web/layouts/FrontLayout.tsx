@@ -1,4 +1,8 @@
-import { brandBackground, brandLine } from '@guardian/source-foundations';
+import {
+	brandBackground,
+	brandBorder,
+	brandLine,
+} from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { css } from '@emotion/react';
@@ -11,6 +15,7 @@ import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { decidePalette } from '../lib/decidePalette';
 import { Header } from '../components/Header';
+import { Footer } from '../components/Footer';
 import { ContainerLayout } from '../components/ContainerLayout';
 
 interface Props {
@@ -53,10 +58,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							edition={front.editionId}
 							idUrl={front.config.idUrl}
 							mmaUrl={front.config.mmaUrl}
-							discussionApiUrl={front.config.discussionApiUrl}
-							isAnniversary={
-								front.config.switches.anniversaryHeaderSvg
+							supporterCTA={
+								front.nav.readerRevenueLinks.header.supporter
 							}
+							discussionApiUrl={front.config.discussionApiUrl}
 							urls={front.nav.readerRevenueLinks.header}
 							remoteHeader={front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
@@ -138,10 +143,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								index + 1
 							} | ${ophanName}`}
 							ophanComponentName={`${ophanName}`}
+							containerPalette={collection.containerPalette}
 						>
 							<DecideContainer
 								trails={trails}
 								containerType={collection.collectionType}
+								containerPalette={collection.containerPalette}
 							/>
 						</ContainerLayout>
 					);
@@ -173,6 +180,24 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					</Island>
 				</ElementContainer>
 			)}
+
+			<ElementContainer
+				data-print-layout="hide"
+				padded={false}
+				backgroundColour={brandBackground.primary}
+				borderColour={brandBorder.primary}
+				showSideBorders={false}
+				element="footer"
+			>
+				<Footer
+					pageFooter={front.pageFooter}
+					pillar={format.theme}
+					pillars={NAV.pillars}
+					urls={front.nav.readerRevenueLinks.header}
+					edition={front.editionId}
+					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+				/>
+			</ElementContainer>
 		</>
 	);
 };

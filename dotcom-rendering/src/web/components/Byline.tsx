@@ -7,6 +7,7 @@ import { decidePalette } from '../lib/decidePalette';
 type Props = {
 	text: string;
 	format: ArticleFormat;
+	containerPalette?: DCRContainerPalette;
 	size: SmallHeadlineSize;
 	isCard?: boolean;
 };
@@ -83,13 +84,17 @@ const colourStyles = (palette: Palette, isCard: Props['isCard']) => {
 	`;
 };
 
-export const Byline = ({ text, format, size, isCard }: Props) => (
-	<span
-		css={[
-			bylineStyles(size, format),
-			colourStyles(decidePalette(format), isCard),
-		]}
-	>
-		{text}
-	</span>
-);
+export const Byline = ({
+	text,
+	format,
+	containerPalette,
+	size,
+	isCard,
+}: Props) => {
+	const palette = decidePalette(format, containerPalette);
+	return (
+		<span css={[bylineStyles(size, format), colourStyles(palette, isCard)]}>
+			{text}
+		</span>
+	);
+};

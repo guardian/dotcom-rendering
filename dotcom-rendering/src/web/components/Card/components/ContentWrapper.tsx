@@ -1,6 +1,6 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 
-import { until } from '@guardian/source-foundations';
+import { between, from } from '@guardian/source-foundations';
 
 const sizingStyles = css`
 	display: flex;
@@ -8,24 +8,69 @@ const sizingStyles = css`
 	justify-content: space-between;
 `;
 
-const coverageStyles = (percentage?: string) => {
-	return percentage
-		? css`
-				flex-basis: ${percentage};
-				${until.tablet} {
-					flex-basis: unset;
+/**
+ * This function works in partnership with its sibling in `ImageWrapper`. If you
+ * change any values here be sure to update that file as well.
+ *
+ */
+const flexBasisStyles = ({
+	imageSize,
+}: {
+	imageSize: ImageSizeType;
+}): SerializedStyles => {
+	switch (imageSize) {
+		case 'small':
+			return css`
+				flex-basis: 75%;
+				${between.tablet.and.desktop} {
+					flex-basis: 60%;
 				}
-		  `
-		: css`
-				flex-grow: 1;
-		  `;
+				${from.desktop} {
+					flex-basis: 70%;
+				}
+			`;
+		case 'medium':
+			return css`
+				flex-basis: 50%;
+			`;
+		case 'large':
+			return css`
+				flex-basis: 34%;
+			`;
+		case 'jumbo':
+			return css`
+				flex-basis: 25%;
+			`;
+	}
 };
 
 type Props = {
 	children: React.ReactNode;
-	percentage?: CardPercentageType;
+	imageSize?: ImageSizeType;
+	imagePosition: ImagePositionType;
 };
 
-export const ContentWrapper = ({ children, percentage }: Props) => (
-	<div css={[sizingStyles, coverageStyles(percentage)]}>{children}</div>
-);
+export const ContentWrapper = ({
+	children,
+	imageSize = 'small',
+	imagePosition,
+}: Props) => {
+	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
+	const isVertical = imagePosition === 'top' || imagePosition === 'bottom';
+	return (
+		<div
+			css={[
+				sizingStyles,
+				isHorizontal && flexBasisStyles({ imageSize }),
+				/* If the image is top or bottom positioned then it takes 100% of the width and
+				   we want the content to grow into the remaining vertical space */
+				isVertical &&
+					css`
+						flex-grow: 1;
+					`,
+			]}
+		>
+			{children}
+		</div>
+	);
+};

@@ -61,14 +61,13 @@
     "@guardian/ab-react": "^2.0.1",
     "@guardian/atoms-rendering": "^23.1.2",
     "@guardian/braze-components": "^7.2.0",
-    "@guardian/commercial-core": "^3.3.0",
+    "@guardian/commercial-core": "^3.4.0",
     "@guardian/consent-management-platform": "^10.5.0",
-    "@guardian/discussion-rendering": "^10.1.0",
+    "@guardian/discussion-rendering": "^10.1.1",
     "@guardian/libs": "^4.0.0",
     "@guardian/prettier": "^0.5.0",
     "@guardian/shimport": "^1.0.2",
     "@guardian/support-dotcom-components": "^1.0.2",
-    "@hkdobrev/run-if-changed": "^0.3.1",
     "@sentry/browser": "^5.30.0",
     "@sentry/integrations": "^5.30.0",
     "@testing-library/dom": "^8.13.0",
@@ -79,7 +78,7 @@
     "@types/compose-function": "^0.0.30",
     "@types/compression": "^0.0.36",
     "@types/crypto-js": "^4.1.1",
-    "@types/dompurify": "^2.0.4",
+    "@types/dompurify": "^2.3.3",
     "@types/express": "^4.17.11",
     "@types/gapi.analytics": "^0.0.3",
     "@types/google.analytics": "^0.0.41",
@@ -98,7 +97,7 @@
     "@types/react-dom": "^18.0.1",
     "@types/react-test-renderer": "17.0.1",
     "@types/response-time": "^2.3.4",
-    "@types/sanitize-html": "^1.27.1",
+    "@types/sanitize-html": "^2.6.0",
     "@types/twitter-for-web": "^0.0.2",
     "@types/uuid": "^8.3.4",
     "@types/webpack-bundle-analyzer": "^4.4.1",
@@ -129,8 +128,8 @@
     "cypress-wait-until": "^1.7.1",
     "cypress-webpack-preprocessor-v5": "^5.0.0-alpha.1",
     "doctoc": "^2.1.0",
-    "dompurify": "^2.2.6",
     "dotenv-webpack": "^7.1.0",
+    "dompurify": "^2.3.6",
     "dynamic-import-polyfill": "^0.1.1",
     "eslint": "^7.24.0",
     "eslint-config-airbnb": "^18.0.1",
@@ -179,7 +178,7 @@
     "regenerator-runtime": "^0.13.7",
     "response-time": "^2.3.2",
     "rimraf": "^3.0.2",
-    "sanitize-html": "^2.3.2",
+    "sanitize-html": "^2.6.0",
     "simple-progress-webpack-plugin": "^2.0.0",
     "snyk": "^1.639.0",
     "start-server-and-test": "^1.12.1",
@@ -250,9 +249,5 @@
     "collectCoverageFrom": [
       "src/**/*.{ts,tsx}"
     ]
-  },
-  "run-if-changed": {
-    "dotcom-rendering/src/lib/content.d.ts": "make gen-schema && make gen-fixtures",
-    "dotcom-rendering/src/lib/index.d.ts": "make gen-schema && make gen-fixtures"
   }
 }

@@ -11,7 +11,7 @@ type Props = {
 	ajaxUrl: string;
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
-	switches: Switches;
+	enhanceTweetsSwitch: boolean;
 	onFirstPage: boolean;
 	webURL: string;
 	mostRecentBlockId: string;
@@ -41,7 +41,7 @@ const toastRoot: Element | null = !isServer
  * @param {string} html The block html to be inserted
  * @returns void
  */
-function insert(html: string, switches: Switches) {
+function insert(html: string, enhanceTweetsSwitch: boolean) {
 	// Create
 	// ------
 	const template = document.createElement('template');
@@ -65,10 +65,9 @@ function insert(html: string, switches: Switches) {
 
 	// Enhance
 	// -----------
-	if (switches.enhanceTweets) {
-		const pendingBlocks = blogBody.querySelectorAll<HTMLElement>(
-			'article .pending.block',
-		);
+	if (enhanceTweetsSwitch) {
+		const pendingBlocks =
+			blogBody.querySelectorAll<HTMLElement>('.pending.block');
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
 		if (typeof twttr !== 'undefined') {
 			twttr.ready((twitter) => {
@@ -83,9 +82,8 @@ function insert(html: string, switches: Switches) {
  */
 function revealPendingBlocks() {
 	const blogBody = document.querySelector<HTMLElement>('#liveblog-body');
-	const pendingBlocks = blogBody?.querySelectorAll<HTMLElement>(
-		'article .pending.block',
-	);
+	const pendingBlocks =
+		blogBody?.querySelectorAll<HTMLElement>('.pending.block');
 	pendingBlocks?.forEach((block) => {
 		block.classList.add('reveal-slowly');
 		block.classList.remove('pending');
@@ -139,7 +137,7 @@ export const Liveness = ({
 	ajaxUrl,
 	filterKeyEvents,
 	format,
-	switches,
+	enhanceTweetsSwitch,
 	onFirstPage,
 	webURL,
 	mostRecentBlockId,
@@ -161,7 +159,7 @@ export const Liveness = ({
 				// Insert the new blocks in the dom (but hidden)
 				if (onFirstPage) {
 					try {
-						insert(data.html, switches);
+						insert(data.html, enhanceTweetsSwitch);
 					} catch (e) {
 						console.log('>> failed >>', e);
 					}
@@ -191,7 +189,7 @@ export const Liveness = ({
 				}
 			}
 		},
-		[onFirstPage, topOfBlogVisible, numHiddenBlocks, switches],
+		[onFirstPage, topOfBlogVisible, numHiddenBlocks, enhanceTweetsSwitch],
 	);
 
 	/**

@@ -22,6 +22,19 @@ import { Colour } from '.';
 
 // ----- Functions ----- //
 
+const adSlot = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.Comment:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Editorial:
+			return neutral[86];
+		default:
+			return neutral[97];
+	}
+};
+
+const adSlotDark = (_format: ArticleFormat) => neutral[20];
+
 const headline = (format: ArticleFormat): Colour => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return neutral[7];
@@ -106,7 +119,11 @@ const standfirst = ({ design, theme }: ArticleFormat): Colour => {
 		}
 	}
 
-	if (design === ArticleDesign.Comment) {
+	if (
+		design === ArticleDesign.Comment ||
+		design === ArticleDesign.Letter ||
+		design === ArticleDesign.Editorial
+	) {
 		return opinion[800];
 	}
 
@@ -198,7 +215,14 @@ const avatar = (format: ArticleFormat): string => {
 };
 const keyEvents = (_format: ArticleFormat): Colour => neutral[100];
 
-const keyEventsWide = (_format: ArticleFormat): Colour => neutral[97];
+const keyEventsWide = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticleSpecial.SpecialReport:
+			return specialReport[800];
+		default:
+			return neutral[97];
+	}
+};
 
 const keyEventsDark = (_format: ArticleFormat): Colour => neutral[10];
 
@@ -223,10 +247,22 @@ const headlineTag = (format: ArticleFormat): Colour => {
 	}
 };
 
+const supportBanner = (_format: ArticleFormat): Colour => {
+	return brandAlt[400];
+};
+
+const supportBannerDark = (_format: ArticleFormat): Colour => {
+	return brandAlt[200];
+};
+
 // ----- API ----- //
 
 const background = {
+	adSlot,
+	adSlotDark,
+	articleContentDark,
 	avatar,
+	bulletDark,
 	headline,
 	headlineByline,
 	headlineBylineDark,
@@ -238,8 +274,8 @@ const background = {
 	keyEventsWideDark,
 	standfirst,
 	standfirstDark,
-	articleContentDark,
-	bulletDark,
+	supportBanner,
+	supportBannerDark,
 };
 
 // ----- Exports ----- //

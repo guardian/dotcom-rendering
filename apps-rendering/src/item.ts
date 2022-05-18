@@ -16,8 +16,8 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import type { Option } from '@guardian/types';
 import { fromNullable, map } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import type { Logo } from 'capi';
@@ -94,7 +94,7 @@ interface DeadBlog extends Fields {
 interface Review extends Fields {
 	design: ArticleDesign.Review;
 	body: Body;
-	starRating: number;
+	starRating: Option<number>;
 }
 
 interface Comment extends Fields {
@@ -396,10 +396,10 @@ const fromCapi =
 				design: ArticleDesign.Media,
 				...itemFieldsWithBody(context, request),
 			};
-		} else if (fields?.starRating !== undefined && isReview(tags)) {
+		} else if (isReview(tags)) {
 			return {
 				design: ArticleDesign.Review,
-				starRating: fields.starRating,
+				starRating: fromNullable(fields?.starRating),
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isAnalysis(tags)) {
@@ -512,4 +512,5 @@ export {
 	isPicture,
 	isLetter,
 	isObituary,
+	isReview,
 };

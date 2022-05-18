@@ -3,7 +3,7 @@ import type { ABTest } from '@guardian/ab-core';
 export const prebidPriceGranularity: ABTest = {
 	id: 'PrebidPriceGranularity',
 	start: '2022-04-05',
-	expiry: '2022-05-03',
+	expiry: '2022-06-09',
 	author: 'Chris Jones (@chrislomaxjones)',
 	description:
 		'Test the commercial impact of changing Prebid Price granularity for Ozone',
