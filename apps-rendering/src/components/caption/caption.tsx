@@ -11,7 +11,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
-import Anchor from 'components/anchor';
+import Anchor from 'components/Anchor';
 import type { FC, ReactNode } from 'react';
 import { getHref, renderTextElement } from 'renderer';
 

@@ -5,7 +5,7 @@ import { err, fromNullable, ok } from '@guardian/types';
 import type { Result } from '@guardian/types';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
-import { atomScript } from 'components/interactiveAtom';
+import { atomScript } from 'components/InteractiveAtom';
 import { isValidDate } from 'date';
 import type Int64 from 'node-int64';
 import type { DocParser } from 'parserContext';

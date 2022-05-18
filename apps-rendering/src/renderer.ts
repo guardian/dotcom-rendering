@@ -48,30 +48,30 @@ import type {
 	Text,
 	TimelineAtom as TimelineAtomElement,
 } from 'bodyElement';
-import Anchor from 'components/anchor';
+import Anchor from 'components/Anchor';
 import Quiz from 'components/atoms/quiz';
-import Blockquote from 'components/blockquote';
-import Bullet from 'components/bullet';
-import CalloutForm from 'components/calloutForm';
-import { Caption } from 'components/caption';
-import Credit from 'components/credit';
+import Blockquote from 'components/Blockquote';
+import Bullet from 'components/Bullet';
+import CalloutForm from 'components/CalloutForm';
+import Caption from 'components/caption';
+import Credit from 'components/Credit';
 import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
 import Video from 'components/editions/video';
-import { EmbedComponentWrapper } from 'components/embedWrapper';
-import HorizontalRule from 'components/horizontalRule';
-import Interactive from 'components/interactive';
+import EmbedComponentWrapper from 'components/EmbedWrapper';
+import HorizontalRule from 'components/HorizontalRule';
+import Interactive from 'components/Interactive';
 import InteractiveAtom, {
 	atomCss,
 	atomScript,
-} from 'components/interactiveAtom';
-import List from 'components/list';
-import ListItem from 'components/listItem';
-import LiveEventLink from 'components/liveEventLink';
-import OrderedList from 'components/orderedList';
-import Paragraph from 'components/paragraph';
-import Pullquote from 'components/pullquote';
-import RichLink from 'components/richLink';
+} from 'components/InteractiveAtom';
+import List from 'components/List';
+import ListItem from 'components/ListItem';
+import LiveEventLink from 'components/LiveEventLink';
+import OrderedList from 'components/OrderedList';
+import Paragraph from 'components/Paragraph';
+import Pullquote from 'components/Pullquote';
+import RichLink from 'components/RichLink';
 import { isElement, pipe } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
