@@ -11,9 +11,9 @@ import {
 	fontSizeRestriction,
 } from './Headline.defaults';
 import ImmersiveHeadline from './ImmersiveHeadline';
+import InterviewHeadline from './InterviewHeadline';
 import LabsHeadline from './LabsHeadline';
 import MediaHeadline from './MediaHeadline';
-import InterviewHeadline from './InterviewHeadline';
 
 interface Props {
 	item: Item;

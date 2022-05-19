@@ -1,15 +1,16 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
-	text,
 	background,
+	text,
 } from '@guardian/common-rendering/src/editorialPalette';
-import { headlineTextColour } from 'editorialStyles';
-import { ArticleFormat } from '@guardian/libs';
-import { remSpace, headline } from '@guardian/source-foundations';
+import type { ArticleFormat } from '@guardian/libs';
+import { headline, remSpace } from '@guardian/source-foundations';
 import HeadlineByline from 'components/headlineByline';
 import HeadlineTag from 'components/headlineTag';
-import { getFormat, Item } from 'item';
+import { headlineTextColour } from 'editorialStyles';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 import { articleWidthStyles } from 'styles';
 
 interface Props {
