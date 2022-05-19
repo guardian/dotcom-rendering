@@ -11,7 +11,6 @@ import {
 } from '@guardian/source-foundations';
 import {
 	DottedLines,
-	SquigglyLines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
 import { map, none, withDefault } from '@guardian/types';
@@ -75,13 +74,7 @@ const decideLines = (
 		return <DottedLines cssOverrides={cssOverrides} count={count} />;
 	}
 
-	switch (item.design) {
-		case ArticleDesign.Feature:
-		case ArticleDesign.Recipe:
-			return <SquigglyLines cssOverrides={cssOverrides} count={count} />;
-		default:
-			return <StraightLines cssOverrides={cssOverrides} count={count} />;
-	}
+	return <StraightLines cssOverrides={cssOverrides} count={count} />;
 };
 
 interface Props {
