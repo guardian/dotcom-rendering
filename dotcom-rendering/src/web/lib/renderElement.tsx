@@ -382,7 +382,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return [
 				true,
-				<Island deferUntil="visible">
+				<Island deferUntil="idle">
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
