@@ -132,6 +132,13 @@ const richLinkDark = (_format: ArticleFormat): Colour => {
 	return neutral[7];
 }
 
+/**
+ *  This is applied server-side. When the page loads, client-side JS changes the colour.
+ */
+const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+}
+
 // ----- API ----- //
 
 const fill = {
@@ -142,6 +149,7 @@ const fill = {
 	blockquoteIconDark,
 	richLink,
 	richLinkDark,
+	richLinkSvgPreloadDark,
 };
 
 // ----- Exports ----- //

@@ -67,7 +67,7 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		background: ${background.richLink(format)};
 		padding: ${remSpace[3]} ${remSpace[3]} ${remSpace[2]};
-		border-top: solid 1px ${border.richLinkDark(format)};
+		border-top: solid 1px ${border.richLinkPreload(format)};
 		transition: all 0.2s ease;
 
 		&.js-news {
@@ -105,6 +105,10 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 			margin: 0;
 			display: inline-flex;
 			transition: all 0.2s ease;
+			color: ${text.richLinkAnchor(format)};
+			${darkModeStyles`
+				color: ${text.richLinkDark(format)};
+			`}
 		}
 
 		svg {
@@ -115,6 +119,10 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 			display: inline-block;
 			margin-right: ${remSpace[2]};
 			transition: all 0.2s ease;
+			${darkModeStyles`
+				border: 1px solid ${border.richLinkSvgPreloadDark(format)};
+				fill: ${fill.richLinkSvgPreloadDark(format)};
+			`}
 		}
 
 		a {

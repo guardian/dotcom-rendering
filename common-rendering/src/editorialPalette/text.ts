@@ -630,6 +630,10 @@ const richLinkDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 }
 
+const richLinkAnchor = (_format: ArticleFormat): Colour => {
+	return neutral[7];
+}
+
 const richLinkAnchorDark = (_format: ArticleFormat): Colour => {
 	return neutral[60];
 }
@@ -637,7 +641,7 @@ const richLinkAnchorDark = (_format: ArticleFormat): Colour => {
 /**
  * Neutral colour that is applied server-side before client-side JS changes the colour based on the theme.
  */
- const richLinkSvgPreload = (format: ArticleFormat): Colour => {
+ const richLinkSvgPreload = (_format: ArticleFormat): Colour => {
 	return neutral[7];
 }
 
@@ -703,6 +707,7 @@ const text = {
 	kicker,
 	linkDark,
 	richLink,
+	richLinkAnchor,
 	richLinkAnchorDark,
 	richLinkDark,
 	richLinkSvgPreload,
