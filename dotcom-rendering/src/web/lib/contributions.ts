@@ -246,16 +246,24 @@ export const getContributionsServiceUrl = (
 	CAPIArticle: CAPIArticleType,
 ): string => process.env.SDC_URL ?? CAPIArticle.contributionsServiceUrl;
 
+// TODO: remove this once PR in support-dotcom-components is merged and released
+// https://github.com/guardian/support-dotcom-components/pull/665
+// @ts-ignore
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];
 export const getPurchaseInfo = () => {
 	const purchaseInfoRaw = getCookie({
 		name: 'GU_CO_COMPLETE',
 		shouldMemoize: true,
 	});
+
+	if (!purchaseInfoRaw) {
+		return undefined;
+	}
+
 	let purchaseInfo: PurchaseInfo;
 
 	try {
-		purchaseInfo = purchaseInfoRaw && JSON.parse(purchaseInfoRaw);
+		purchaseInfo = JSON.parse(decodeURIComponent(purchaseInfoRaw));
 	} catch {} // eslint-disable-line no-empty
 
 	return purchaseInfo;
