@@ -1,4 +1,4 @@
-const extraRules = require('./eslint-8-ignores');
+const transitionRules = require('./eslint-guardian');
 
 module.exports = {
 	env: {
@@ -8,9 +8,7 @@ module.exports = {
 	},
 	extends: [
 		'eslint:recommended',
-		'plugin:@typescript-eslint/eslint-recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:@typescript-eslint/recommended-requiring-type-checking',
+		'@guardian/eslint-config-typescript',
 		'airbnb-typescript',
 		'prettier',
 		'plugin:@guardian/source-react-components/recommended',
@@ -96,7 +94,8 @@ module.exports = {
 		'react/require-default-props': [0],
 		'react/jsx-uses-react': 'off',
 		'react/react-in-jsx-scope': 'off',
-		...extraRules,
+		/** These rules will be disabled one-by-one */
+		...transitionRules,
 	},
 	settings: {
 		'import/resolver': {
@@ -113,9 +112,9 @@ module.exports = {
 			},
 		},
 		{
-			files: ['**/**.test.ts'],
+			files: ['**/**.stories.tsx'],
 			rules: {
-				'react/display-name': 'error',
+				'import/no-default-export': 'off',
 			},
 		},
 	],
