@@ -1,3 +1,5 @@
+const extraRules = require('./eslint-8-ignores');
+
 module.exports = {
 	env: {
 		browser: true,
@@ -22,8 +24,11 @@ module.exports = {
 	plugins: [
 		'@typescript-eslint',
 		'@typescript-eslint/tslint',
+		'react',
 		'react-hooks',
 		'dcr',
+		'import',
+		'jsx-a11y',
 	],
 	rules: {
 		'dcr/only-import-below': [
@@ -91,6 +96,7 @@ module.exports = {
 		'react/require-default-props': [0],
 		'react/jsx-uses-react': 'off',
 		'react/react-in-jsx-scope': 'off',
+		...extraRules,
 	},
 	settings: {
 		'import/resolver': {
@@ -104,6 +110,12 @@ module.exports = {
 				'@typescript-eslint/no-var-requires': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
+			},
+		},
+		{
+			files: ['**/**.test.ts'],
+			rules: {
+				'react/display-name': 'error',
 			},
 		},
 	],
