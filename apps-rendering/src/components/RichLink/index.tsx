@@ -6,8 +6,8 @@ import {
 	fill,
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleDesign } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	from,
 	headline,
@@ -57,6 +57,12 @@ const liveBlogRichLinkStyles = css`
 	}
 `;
 
+const formatFromTheme = (theme: ArticleTheme): ArticleFormat => ({
+	theme,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+});
+
 const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		background: ${background.richLink(format)};
@@ -65,23 +71,23 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 		transition: all 0.2s ease;
 
 		&.js-news {
-			${richLinkPillarStyles(format)}
+			${richLinkPillarStyles(formatFromTheme(ArticlePillar.News))}
 		}
 
 		&.js-opinion {
-			${richLinkPillarStyles(format)}
+			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Opinion))}
 		}
 
 		&.js-sport {
-			${richLinkPillarStyles(format)}
+			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Sport))}
 		}
 
 		&.js-culture {
-			${richLinkPillarStyles(format)}
+			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Culture))}
 		}
 
 		&.js-lifestyle {
-			${richLinkPillarStyles(format)}
+			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Lifestyle))}
 		}
 
 		img {
