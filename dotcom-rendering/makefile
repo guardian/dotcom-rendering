@@ -33,12 +33,12 @@ deploy:
 build: export NODE_ENV=production
 build: clean-dist install gen-dotenv
 	$(call log, "building production bundles")
-	webpack --config ./scripts/webpack/webpack.config.js --progress
+	@webpack --config ./scripts/webpack/webpack.config.js --progress
 
 build-ci: export NODE_ENV=production
 build-ci: clean-dist install gen-dotenv
 	$(call log, "building production bundles")
-	SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+	@SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
 
 start-ci: install
 	$(call log, "starting PROD server...")
