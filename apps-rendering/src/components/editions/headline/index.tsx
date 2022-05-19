@@ -241,7 +241,9 @@ const getHeadlineStyles = (
 				getFontStyles('regular', 'light'),
 				analysisStyles(kickerColor),
 			);
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return css(sharedStyles, galleryStyles);
 	}
 

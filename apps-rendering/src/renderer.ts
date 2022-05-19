@@ -713,7 +713,9 @@ const renderEditions =
 				return textRenderer(format, excludeStyles, element, true);
 
 			case ElementKind.Image:
-				return format.design === ArticleDesign.Media
+				return format.design === ArticleDesign.Gallery ||
+					format.design === ArticleDesign.Audio ||
+					format.design === ArticleDesign.Video
 					? h(GalleryImage, { format, image: element })
 					: imageRenderer(format, element, key);
 

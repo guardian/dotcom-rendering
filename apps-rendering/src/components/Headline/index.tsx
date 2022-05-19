@@ -193,7 +193,9 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return css(styles(format), commentStyles);
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return css(styles(format), mediaStyles);
 		case ArticleDesign.Review:
 			return css(styles(format), reviewStyles);

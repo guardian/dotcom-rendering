@@ -43,7 +43,9 @@ const colour = (format: ArticleFormat): SerializedStyles => {
 		`;
 	}
 	switch (format.design) {
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return css`
 				color: ${linkDark};
 				border-bottom: 0.0625rem solid ${neutral[20]};

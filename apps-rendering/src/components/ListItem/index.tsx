@@ -47,7 +47,9 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			return css(baseStyles, liveblogStyles(format));
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return css(baseStyles, mediaStyles);
 		default:
 			return baseStyles;

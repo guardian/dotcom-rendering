@@ -187,21 +187,53 @@ export const Analysis = () => {
 };
 Analysis.story = { name: 'Analysis' };
 
-export const Media = () => {
+export const Gallery = () => {
 	return (
 		<ElementContainer>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Media,
+					design: ArticleDesign.Gallery,
 					theme: ArticlePillar.Culture,
 				}}
-				standfirst="This is how Media standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
+				standfirst="This is how Gallery standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
 		</ElementContainer>
 	);
 };
-Media.story = { name: 'Media' };
+Gallery.story = { name: 'Gallery' };
+
+export const Audio = () => {
+	return (
+		<ElementContainer>
+			<Standfirst
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Audio,
+					theme: ArticlePillar.Culture,
+				}}
+				standfirst="This is how Audio standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
+			/>
+		</ElementContainer>
+	);
+};
+Audio.story = { name: 'Audio' };
+
+export const Video = () => {
+	return (
+		<ElementContainer>
+			<Standfirst
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Video,
+					theme: ArticlePillar.Culture,
+				}}
+				standfirst="This is how Video standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
+			/>
+		</ElementContainer>
+	);
+};
+Video.story = { name: 'Video' };
 
 export const Recipe = () => {
 	return (
