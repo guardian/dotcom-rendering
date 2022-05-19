@@ -18,10 +18,10 @@ module.exports = {
 			target: 'temporary-public-storage',
 		},
 		assert: {
+			includePassedAssertions: true,
 			assertMatrix: [
 				{
 					matchingUrlPattern: '.*',
-					includePassedAssertions: true,
 					assertions: {
 						'first-contentful-paint': [
 							'warn',
@@ -36,10 +36,6 @@ module.exports = {
 							'warn',
 							{ maxNumericValue: 0.002 },
 						],
-						'categories:accessibility': [
-							'warn',
-							{ minScore: 0.97 },
-						],
 					},
 				},
 				{
@@ -47,6 +43,15 @@ module.exports = {
 					assertions: {
 						'categories:accessibility': [
 							'error',
+							{ minScore: 0.97 },
+						],
+					},
+				},
+				{
+					matchingUrlPattern: 'http://localhost:9000/Front?.+',
+					assertions: {
+						'categories:accessibility': [
+							'warn',
 							{ minScore: 0.97 },
 						],
 					},
