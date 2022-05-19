@@ -17,10 +17,10 @@ import {
 	videos,
 } from 'client/nativeCommunication';
 import setup from 'client/setup';
-import { createEmbedComponentFromProps } from 'components/embedWrapper';
-import EpicContent from 'components/epicContent';
-import FollowStatus from 'components/followStatus';
-import FooterContent from 'components/footerContent';
+import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
+import EpicContent from 'components/EpicContent';
+import FollowStatus from 'components/FollowStatus';
+import FooterContent from 'components/FooterContent';
 import { formatDate, formatLocal, isValidDate } from 'date';
 import { handleErrors, isObject } from 'lib';
 import {

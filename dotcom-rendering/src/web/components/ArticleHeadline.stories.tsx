@@ -361,10 +361,10 @@ export const Analysis = () => {
 };
 Analysis.story = { name: 'Analysis' };
 
-export const Media = () => {
+export const Gallery = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Media,
+		design: ArticleDesign.Gallery,
 		theme: ArticlePillar.News,
 	};
 	return (
@@ -375,7 +375,7 @@ export const Media = () => {
 				</LeftColumn>
 				<ArticleContainer format={format}>
 					<ArticleHeadline
-						headlineString="This is the headline you see when design type is Media"
+						headlineString="This is the headline you see when design type is Gallery"
 						format={format}
 						tags={[]}
 						webPublicationDateDeprecated=""
@@ -385,7 +385,7 @@ export const Media = () => {
 		</ElementContainer>
 	);
 };
-Media.story = { name: 'Media' };
+Gallery.story = { name: 'Gallery' };
 
 export const Review = () => {
 	const format = {
@@ -754,7 +754,7 @@ export const AgeWarning = () => {
 		['MatchReport', ArticleDesign.MatchReport],
 		['Feature', ArticleDesign.Feature],
 		['Interactive', ArticleDesign.Interactive],
-		['Media', ArticleDesign.Media],
+		['Gallery', ArticleDesign.Gallery],
 		['Analysis', ArticleDesign.Analysis],
 		['Review', ArticleDesign.Review],
 	];

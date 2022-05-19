@@ -21,7 +21,9 @@ const getLinkType = ({ theme, design }: ArticleFormat): RichLinkCardType => {
 					return 'editorial';
 				case ArticleDesign.Comment:
 					return 'comment';
-				case ArticleDesign.Media:
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
 					return 'media';
 				case ArticleDesign.Review:
 					return 'review';

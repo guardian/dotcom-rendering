@@ -31,7 +31,7 @@ const adSlot = (format: ArticleFormat): Colour => {
 		default:
 			return neutral[97];
 	}
-}
+};
 
 const adSlotDark = (_format: ArticleFormat) => neutral[20];
 
@@ -61,7 +61,11 @@ const headline = (format: ArticleFormat): Colour => {
 		format.design === ArticleDesign.Editorial
 	) {
 		return opinion[800];
-	} else if (format.design === ArticleDesign.Media) {
+	} else if (
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video
+	) {
 		return neutral[10];
 	} else if (format.design === ArticleDesign.Interview) {
 		return neutral[0];
@@ -119,7 +123,11 @@ const standfirst = ({ design, theme }: ArticleFormat): Colour => {
 		}
 	}
 
-	if (design === ArticleDesign.Comment) {
+	if (
+		design === ArticleDesign.Comment ||
+		design === ArticleDesign.Letter ||
+		design === ArticleDesign.Editorial
+	) {
 		return opinion[800];
 	}
 
@@ -211,7 +219,14 @@ const avatar = (format: ArticleFormat): string => {
 };
 const keyEvents = (_format: ArticleFormat): Colour => neutral[100];
 
-const keyEventsWide = (_format: ArticleFormat): Colour => neutral[97];
+const keyEventsWide = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticleSpecial.SpecialReport:
+			return specialReport[800];
+		default:
+			return neutral[97];
+	}
+};
 
 const keyEventsDark = (_format: ArticleFormat): Colour => neutral[10];
 

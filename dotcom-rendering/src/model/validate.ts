@@ -1,7 +1,7 @@
 import Ajv, { Options } from 'ajv';
 import addFormats from 'ajv-formats';
 
-import schema from './json-schema.json';
+import schema from './article-schema.json';
 import frontSchema from './front-schema.json';
 
 const options: Options = {

@@ -27,8 +27,6 @@ type CAPITheme = ThemePillar | ThemeSpecial;
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type CAPIDesign =
 	| 'ArticleDesign'
-	// Temporarily accept both the old MediaDesign and the new ones
-	| 'MediaDesign'
 	| 'GalleryDesign'
 	| 'AudioDesign'
 	| 'VideoDesign'
@@ -48,7 +46,8 @@ type CAPIDesign =
 	| 'PhotoEssayDesign'
 	| 'PrintShopDesign'
 	| 'ObituaryDesign'
-	| 'FullPageInteractiveDesign';
+	| 'FullPageInteractiveDesign'
+	| 'NewsletterSignupDesign';
 
 // CAPIDisplay is the display information passed through from CAPI and dictates the displaystyle of the content e.g. Immersive
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Display.scala
@@ -152,6 +151,8 @@ type Palette = {
 		analysisUnderline: Colour;
 		matchStats: Colour;
 		ageWarning: Colour;
+		keyEventBullet: Colour;
+		summaryEventBullet: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -191,8 +192,10 @@ type Palette = {
 	};
 	hover: {
 		headlineByline: Colour;
-
 		standfirstLink: Colour;
+		keyEventLink: Colour;
+		keyEventBullet: Colour;
+		summaryEventBullet: Colour;
 	};
 };
 
@@ -689,18 +692,35 @@ type FEContainerType =
 	| 'news/most-popular';
 
 type FEContainerPalette =
-	| `EventPalette`
-	| `SombreAltPalette`
-	| `EventAltPalette`
-	| `InvestigationPalette`
-	| `LongRunningAltPalette`
-	| `LongRunningPalette`
-	| `SombrePalette`
-	| `BreakingPalette`;
+	| 'EventPalette'
+	| 'SombreAltPalette'
+	| 'EventAltPalette'
+	| 'InvestigationPalette'
+	| 'LongRunningAltPalette'
+	| 'LongRunningPalette'
+	| 'SombrePalette'
+	| 'Canonical'
+	| 'Dynamo'
+	| 'Special'
+	| 'DynamoLike'
+	| 'Special'
+	| 'Breaking'
+	| 'Podcast'
+	| 'Branded'
+	| 'BreakingPalette';
+
+type DCRContainerPalette =
+	| 'EventPalette'
+	| 'SombreAltPalette'
+	| 'EventAltPalette'
+	| 'InvestigationPalette'
+	| 'LongRunningAltPalette'
+	| 'LongRunningPalette'
+	| 'SombrePalette'
+	| 'BreakingPalette';
 
 // TODO: These may need to be declared differently than the front types in the future
 type DCRContainerType = FEContainerType;
-type DCRContainerPalette = FEContainerPalette;
 
 type FEFrontCard = {
 	properties: {
@@ -716,7 +736,7 @@ type FEFrontCard = {
 						index: number;
 						fields: {
 							displayCredit?: string;
-							source: string;
+							source?: string;
 							photographer?: string;
 							isMaster?: string;
 							altText?: string;
@@ -955,7 +975,7 @@ type FEFrontConfigType = {
 	idOAuthUrl: string;
 	isSensitive: boolean;
 	isDev: boolean;
-	thirdPartyAppsAccount: string;
+	thirdPartyAppsAccount?: string;
 	avatarImagesUrl: string;
 	fbAppId: string;
 };

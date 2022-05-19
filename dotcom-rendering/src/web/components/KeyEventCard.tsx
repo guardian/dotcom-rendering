@@ -9,9 +9,10 @@ export interface KeyEvent {
 	text: string;
 	url: string;
 	format: ArticleFormat;
+	isSummary: boolean;
 }
 
-const linkStyles = css`
+const linkStyles = (palette: Palette) => css`
 	text-decoration: none;
 	line-height: 1.35;
 
@@ -22,7 +23,7 @@ const linkStyles = css`
 		height: 13px;
 		width: 13px;
 		border-radius: 50%;
-		background-color: ${neutral[46]};
+		background-color: ${palette.background.keyEventBullet};
 		margin-bottom: ${space[1]}px;
 		z-index: 2;
 
@@ -33,13 +34,23 @@ const linkStyles = css`
 	}
 
 	&:hover::before {
-		background-color: ${neutral[0]};
+		background-color: ${palette.hover.keyEventBullet};
 	}
 
 	&:hover {
 		span {
-			text-decoration: underline;
+			border-bottom: 1px solid ${palette.hover.keyEventLink};
 		}
+	}
+`;
+
+const summaryStyles = (palette: Palette) => css`
+	&::before {
+		background-color: ${palette.background.summaryEventBullet};
+	}
+
+	&:hover::before {
+		background-color: ${palette.hover.summaryEventBullet};
 	}
 `;
 
@@ -86,12 +97,23 @@ const timeStyles = css`
 	display: block;
 `;
 
-export const KeyEventCard = ({ text, date, url, format }: KeyEvent) => {
+export const KeyEventCard = ({
+	text,
+	date,
+	url,
+	format,
+	isSummary,
+}: KeyEvent) => {
 	const palette = decidePalette(format);
 
 	return (
 		<li css={listItemStyles} id="key-event-card">
-			<Link priority="secondary" css={linkStyles} href={url}>
+			<Link
+				priority="secondary"
+				css={[linkStyles(palette), isSummary && summaryStyles(palette)]}
+				href={url}
+				data-link-name="key event card"
+			>
 				<time
 					dateTime={date.toISOString()}
 					data-relativeformat="med"

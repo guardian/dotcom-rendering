@@ -15,6 +15,39 @@ export const trails: TrailType[] = [
 			display: ArticleDisplay.Standard,
 		},
 		dataLinkName: 'news | group-0 | card-@1',
+
+		supportingContent: [
+			{
+				url: 'https://www.theguardian.com',
+				format: {
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				},
+				headline: 'Headline 1',
+				kickerText: 'Kicker',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				format: {
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				},
+				headline: 'Headline 2',
+				kickerText: 'Kicker',
+			},
+			{
+				url: 'https://www.theguardian.com',
+				format: {
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				},
+				headline: 'Headline 3',
+				kickerText: 'Kicker',
+			},
+		],
 	},
 	{
 		url: 'https://www.theguardian.com/environment/2019/dec/02/migration-v-climate-europes-new-political-divide',
@@ -25,7 +58,7 @@ export const trails: TrailType[] = [
 		webPublicationDate: '2019-12-02T09:45:30.000Z',
 		format: {
 			theme: ArticlePillar.News,
-			design: ArticleDesign.Media,
+			design: ArticleDesign.Video,
 			display: ArticleDisplay.Standard,
 		},
 		mediaType: 'Video',

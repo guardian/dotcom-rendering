@@ -16,8 +16,8 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import type { Option } from '@guardian/types';
 import { fromNullable, map } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import type { Logo } from 'capi';
@@ -94,7 +94,7 @@ interface DeadBlog extends Fields {
 interface Review extends Fields {
 	design: ArticleDesign.Review;
 	body: Body;
-	starRating: number;
+	starRating: Option<number>;
 }
 
 interface Comment extends Fields {
@@ -311,13 +311,6 @@ const isVideo = hasTag('type/video');
 
 const isGallery = hasTag('type/gallery');
 
-const isMedia = hasSomeTag([
-	'type/audio',
-	'type/video',
-	'type/gallery',
-	'type/picture',
-]);
-
 const isReview = hasSomeTag([
 	'tone/reviews',
 	'tone/livereview',
@@ -391,15 +384,28 @@ const fromCapi =
 				design: ArticleDesign.Interactive,
 				...itemFieldsWithBody(context, request),
 			};
-		} else if (isMedia(tags)) {
+			// This isn't accurate, picture pieces look different to galleries.
+			// This is to prevent accidentally breaking Editions until we have
+			// a model for pictures.
+		} else if (isGallery(tags) || isPicture(tags)) {
 			return {
-				design: ArticleDesign.Media,
+				design: ArticleDesign.Gallery,
 				...itemFieldsWithBody(context, request),
 			};
-		} else if (fields?.starRating !== undefined && isReview(tags)) {
+		} else if (isAudio(tags)) {
+			return {
+				design: ArticleDesign.Audio,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isVideo(tags)) {
+			return {
+				design: ArticleDesign.Video,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isReview(tags)) {
 			return {
 				design: ArticleDesign.Review,
-				starRating: fields.starRating,
+				starRating: fromNullable(fields?.starRating),
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isAnalysis(tags)) {
@@ -512,4 +518,5 @@ export {
 	isPicture,
 	isLetter,
 	isObituary,
+	isReview,
 };

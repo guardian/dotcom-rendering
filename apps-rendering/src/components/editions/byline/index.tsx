@@ -195,7 +195,11 @@ const getBylineStyles = (
 	if (format.display === ArticleDisplay.Showcase) {
 		return css(styles(iconColor), showcaseStyles);
 	}
-	if (format.design === ArticleDesign.Media) {
+	if (
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video
+	) {
 		return css(styles(iconColor), galleryStyles);
 	}
 	return styles(iconColor);
@@ -241,10 +245,14 @@ const hasAvatar = (item: Item): boolean => {
 	);
 };
 const ignoreIconColour = (format: ArticleFormat): boolean =>
-	format.design === ArticleDesign.Media;
+	format.design === ArticleDesign.Gallery ||
+	format.design === ArticleDesign.Audio ||
+	format.design === ArticleDesign.Video;
 
 const ignoreTextColour = (format: ArticleFormat): boolean =>
-	format.design === ArticleDesign.Media ||
+	format.design === ArticleDesign.Gallery ||
+	format.design === ArticleDesign.Audio ||
+	format.design === ArticleDesign.Video ||
 	format.display === ArticleDisplay.Immersive;
 
 const Byline: FC<Props> = ({ item }) => {
