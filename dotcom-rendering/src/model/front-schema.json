@@ -131,7 +131,6 @@
                                                                                             "credit",
                                                                                             "height",
                                                                                             "mediaId",
-                                                                                            "source",
                                                                                             "width"
                                                                                         ]
                                                                                     },
@@ -702,7 +701,6 @@
                                                                                             "credit",
                                                                                             "height",
                                                                                             "mediaId",
-                                                                                            "source",
                                                                                             "width"
                                                                                         ]
                                                                                     },
@@ -1273,7 +1271,6 @@
                                                                                             "credit",
                                                                                             "height",
                                                                                             "mediaId",
-                                                                                            "source",
                                                                                             "width"
                                                                                         ]
                                                                                     },

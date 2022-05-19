@@ -738,7 +738,7 @@ type FEFrontCard = {
 						index: number;
 						fields: {
 							displayCredit?: string;
-							source: string;
+							source?: string;
 							photographer?: string;
 							isMaster?: string;
 							altText?: string;
