@@ -1,6 +1,6 @@
 const secrets = [
 	{
-		key: 'images.signature-salt',
+		key: 'IMAGE_SALT',
 		missingMessage: 'Images will fallback to a placeholder image',
 	},
 ];

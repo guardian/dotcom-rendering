@@ -1,9 +1,9 @@
 const { CredentialsProviderError } = require('@aws-sdk/property-provider');
 const path = require('path');
-const { prompt, log, warn } = require('../env/log');
 const fs = require('fs').promises;
+const { prompt, log, warn } = require('../env/log');
 const secrets = require('../secrets');
-const { getGuardianConfiguration } = require('./aws-parameters');
+const { getAwsSsmParameters } = require('./get-aws-ssm-parameters');
 
 const ENV_PATH = path.resolve(__dirname, '../../.env');
 
@@ -25,12 +25,11 @@ const checkEnv = async () => {
 
 const genEnv = async () => {
 	const env = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
-	const configuration = await getGuardianConfiguration(env);
+	const parameters = await getAwsSsmParameters(env);
 
 	let envString = '';
-	for (const secretKey of secrets) {
-		// eslint-disable-next-line no-await-in-loop
-		envString += `${secretKey}=${configuration.getParameter(secretKey)}\n`;
+	for (const secret of secrets) {
+		envString += `${secret.key}=${parameters[secret.key]}\n`;
 	}
 
 	await fs.writeFile(ENV_PATH, envString);
@@ -42,9 +41,14 @@ const genEnv = async () => {
 		const validEnv = await checkEnv();
 		if (!validEnv) {
 			log(
-				'[scripts/dotenv] Your .env file is missing, attemting to generate it from AWS parameters...',
+				'[scripts/dotenv] .env file is missing, attemting to generate it from AWS parameters...',
 			);
+
 			await genEnv();
+
+			log('[scripts/dotenv] .env file written successfully');
+		} else {
+			log('[scripts/dotenv] valid .env file exists, moving on...');
 		}
 	} catch (err) {
 		if (err instanceof CredentialsProviderError) {
@@ -60,11 +64,13 @@ const genEnv = async () => {
 				'[scripts/dotenv] Could not load AWS credentials to generate .env file',
 				"[scripts/dotenv] This won't stop dotcom-rendering from working, it will just vary from PROD by:",
 			);
+
 			for (const secret of secrets) {
 				prompt(
 					`[scripts/dotenv]  * ${secret.key}: ${secret.missingMessage}`,
 				);
 			}
+
 			prompt(
 				'',
 				'[scripts/dotenv] To get things working PROD like either:',
