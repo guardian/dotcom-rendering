@@ -5,6 +5,7 @@ import type {
 	VendorName,
 } from '@guardian/consent-management-platform/dist/types';
 import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { OphanRecordFunction } from './src/web/browser/ophan/ophan';
 import { WindowGuardianConfig } from './src/model/window-guardian';
 import { ReaderRevenueDevUtils } from './src/web/lib/readerRevenueDevUtils';
 import { DailyArticleHistory } from './src/web/lib/dailyArticleCount';
@@ -20,14 +21,14 @@ declare global {
 			onPolyfilled: () => void;
 			queue: Array<() => void>;
 			config: WindowGuardianConfig;
-			ophan: {
+			ophan?: {
 				setEventEmitter: () => void; // We don't currently have a custom eventEmitter on DCR - like 'mediator' in Frontend.
 				trackComponentAttention: (
 					name: string,
 					el: Element,
 					visiblityThreshold: number,
 				) => void;
-				record: ({}) => void;
+				record: OphanRecordFunction;
 				viewId: string;
 				pageViewId: string;
 			};

@@ -12,10 +12,10 @@ import { map, none, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
-import { atomCss, atomScript } from 'components/interactiveAtom';
+import { atomCss, atomScript } from 'components/InteractiveAtom';
 import Layout from 'components/layout';
-import Meta from 'components/meta';
-import Scripts from 'components/scripts';
+import Meta from 'components/Meta';
+import Scripts from 'components/Scripts';
 import { fromCapi } from 'item';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
@@ -56,6 +56,7 @@ const scriptName = ({ design, display }: ArticleFormat): Option<string> => {
 		case ArticleDesign.Standard:
 		case ArticleDesign.Quiz:
 		case ArticleDesign.Media:
+		case ArticleDesign.Interview:
 			return some('article.js');
 		default:
 			return none;

@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
-import Img from 'components/img';
+import Img from 'components/Img';
 import { isSingleContributor } from 'contributor';
 import type { Contributor } from 'contributor';
 import { pipe } from 'lib';

@@ -141,7 +141,6 @@ const readerRevenueLinks = css`
 	padding: 12px 0 0 10px;
 	margin: 0 10px 36px 0;
 	width: calc(50% - 10px);
-
 	${until.tablet} {
 		width: 50%;
 		border-top: ${footerBorders};

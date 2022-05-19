@@ -6,7 +6,6 @@ import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';
 import { LinkHeadline } from './LinkHeadline';
 import { useHover } from '../lib/useHover';
-import { decidePalette } from '../lib/decidePalette';
 
 const listItemStyles = css`
 	list-style: none;
@@ -86,7 +85,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							<Avatar
 								imageSrc={trail.image}
 								imageAlt=""
-								palette={decidePalette(trail.format)}
+								format={trail.format}
 							/>
 						</div>
 					)}

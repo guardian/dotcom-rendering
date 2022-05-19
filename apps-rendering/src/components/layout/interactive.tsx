@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import type { ArticleFormat } from '@guardian/libs';
-import Footer from 'components/footer';
+import Footer from 'components/Footer';
 import type { FC, ReactNode } from 'react';
 
 // ----- Component ----- //

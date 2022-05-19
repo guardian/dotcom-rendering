@@ -295,10 +295,6 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								discussionApiUrl={
 									CAPIArticle.config.discussionApiUrl
 								}
-								isAnniversary={
-									CAPIArticle.config.switches
-										.anniversaryHeaderSvg
-								}
 								urls={CAPIArticle.nav.readerRevenueLinks.header}
 								remoteHeader={
 									CAPIArticle.config.switches.remoteHeader
@@ -752,7 +748,12 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzlesBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

@@ -23,6 +23,7 @@ import {
 
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
+import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
 
 const WHITE = neutral[100];
@@ -72,12 +73,13 @@ const textHeadline = (format: ArticleFormat): string => {
 	}
 };
 
-const textMatchTitle = (): string => {
-	return BLACK;
-};
-
 const textSeriesTitle = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
+	if (
+		format.theme === ArticleSpecial.Labs &&
+		format.design !== ArticleDesign.LiveBlog
+	) {
+		return BLACK;
+	}
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	switch (format.display) {
@@ -107,6 +109,16 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 			}
 		default:
 			return BLACK;
+	}
+};
+
+const textSeriesTitleWhenMatch = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.MatchReport:
+		case ArticleDesign.LiveBlog:
+			return BLACK;
+		default:
+			return textSeriesTitle(format);
 	}
 };
 
@@ -164,8 +176,9 @@ const textLastUpdated = (format: ArticleFormat): string => {
 			case ArticlePillar.Opinion:
 				return opinion[600];
 			case ArticleSpecial.Labs:
-			case ArticleSpecial.SpecialReport:
 				return news[600];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[700];
 		}
 	}
 	return BLACK;
@@ -252,13 +265,14 @@ const textArticleLink = (format: ArticleFormat): string => {
 			case ArticleSpecial.Labs:
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
+				return specialReport[300];
 		}
 	}
 
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[400];
+	if (format.theme === ArticleSpecial.SpecialReport) {
+		return specialReport[300];
+	}
 	switch (format.theme) {
 		case ArticlePillar.Opinion:
 		case ArticlePillar.Culture:
@@ -282,6 +296,25 @@ const textWitnessAuthor = (format: ArticleFormat): string =>
 
 const textPullQuote = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
+};
+
+const textKeyEvent = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
 };
 
 const textStandfirstLink = (format: ArticleFormat): string => {
@@ -481,10 +514,16 @@ const textLinkKicker = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const textCricketScoreboardLink = (): string => {
+	return sport[300];
+};
+
 const backgroundArticle = (format: ArticleFormat): string => {
+	// specialreport blogs should have specialreport background
 	if (
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog
+		(format.design === ArticleDesign.LiveBlog ||
+			format.design === ArticleDesign.DeadBlog) &&
+		format.theme !== ArticleSpecial.SpecialReport
 	)
 		return neutral[97];
 	// Order matters. We want comment special report pieces to have the opinion background
@@ -621,10 +660,9 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 			case ArticlePillar.Opinion:
 				return opinion[500];
 			case ArticleSpecial.Labs:
-			case ArticleSpecial.SpecialReport:
-				// We don't have designs for Special Report or Labs liveblogs yet
-				// so we default to news
 				return news[600];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[700];
 		}
 	}
 
@@ -636,10 +674,9 @@ const backgroundHeader = (format: ArticleFormat): string => {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
 				case ArticleSpecial.Labs:
+					return news[300];
 				case ArticleSpecial.SpecialReport:
-					// We don't have designs for Special Report or Labs liveblogs yet
-					// so we default to news
-					return news[200];
+					return specialReport[700];
 				default:
 					return pillarPalette[format.theme][300];
 			}
@@ -663,14 +700,19 @@ const backgroundStandfirst = (format: ArticleFormat): string => {
 				case ArticlePillar.Opinion:
 					return opinion[200];
 				case ArticleSpecial.Labs:
-				case ArticleSpecial.SpecialReport:
-					// We don't have designs for Special Report or Labs liveblogs yet
-					// so we default to news
 					return news[200];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
 			}
 			break;
 		case ArticleDesign.DeadBlog:
-			return neutral[93];
+			switch (format.theme) {
+				case ArticleSpecial.SpecialReport:
+					return specialReport[700];
+				default:
+					return neutral[93];
+			}
+
 		default:
 			return backgroundArticle(format);
 	}
@@ -798,7 +840,7 @@ const borderPinnedPost = (format: ArticleFormat): string => {
 const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[400];
+		return specialReport[300];
 	return border.secondary;
 };
 
@@ -816,10 +858,9 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 			case ArticlePillar.Opinion:
 				return opinion[500];
 			case ArticleSpecial.Labs:
-			case ArticleSpecial.SpecialReport:
-				// We don't have designs for Special Report or Labs liveblogs yet
-				// so we default to news
 				return news[600];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[450];
 		}
 	}
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -997,7 +1038,7 @@ const borderArticle: (format: ArticleFormat) => string = (format) => {
 	return border.secondary;
 };
 
-const borderLines: (format: ArticleFormat) => string = (format) => {
+const borderLines = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return border.primary;
 	return border.secondary;
 };
@@ -1007,6 +1048,14 @@ const backgroundRichLink: (format: ArticleFormat) => string = (format) => {
 		return pillarPalette[format.theme].main;
 	}
 	return pillarPalette[ArticlePillar.News][400];
+};
+
+const borderCricketScoreboardTop = (): string => {
+	return sport[300];
+};
+
+const borderCricketScoreboardDivider = (): string => {
+	return neutral[86];
 };
 
 const fillRichLink: (format: ArticleFormat) => string = (format) => {
@@ -1123,13 +1172,79 @@ const backgroundMatchStats = (format: ArticleFormat): string => {
 	}
 };
 
-export const decidePalette = (format: ArticleFormat): Palette => {
+const backgroundKeyEventBullet = (): string => neutral[46];
+
+const backgroundSummaryEventBullet = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
+const hoverKeyEventLink = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
+const hoverKeyEventBullet = (): string => neutral[0];
+
+const hoverSummaryEventBullet = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[200];
+		case ArticlePillar.Sport:
+			return sport[200];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[200];
+		case ArticlePillar.Culture:
+			return culture[200];
+		case ArticlePillar.Opinion:
+			return opinion[200];
+		case ArticleSpecial.Labs:
+			return labs[200];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[200];
+	}
+};
+
+export const decidePalette = (
+	format: ArticleFormat,
+	containerPalette?: DCRContainerPalette,
+): Palette => {
+	const overrides =
+		containerPalette && decideContainerOverrides(containerPalette);
 	return {
 		text: {
 			headline: textHeadline(format),
 			seriesTitle: textSeriesTitle(format),
+			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
-			matchTitle: textMatchTitle(),
 			byline: textByline(format),
 			twitterHandle: textTwitterHandle(format),
 			twitterHandleBelowDesktop: textTwitterHandleBelowDesktop(format),
@@ -1141,12 +1256,14 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			syndicationButton: textSyndicationButton(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
-			cardHeadline: textCardHeadline(format),
-			cardByline: textCardByline(format),
-			cardKicker: textCardKicker(format),
+			cardHeadline:
+				overrides?.text.cardHeadline || textCardHeadline(format),
+			cardByline: overrides?.text.cardByline || textCardByline(format),
+			cardKicker: overrides?.text.cardKicker || textCardKicker(format),
 			linkKicker: textLinkKicker(format),
-			cardStandfirst: textCardStandfirst(format),
-			cardFooter: textCardFooter(format),
+			cardStandfirst:
+				overrides?.text.cardStandfirst || textCardStandfirst(format),
+			cardFooter: overrides?.text.cardFooter || textCardFooter(format),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
@@ -1169,13 +1286,15 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			overlayedCaption: textOverlayed(),
 			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
+			cricketScoreboardLink: textCricketScoreboardLink(),
+			keyEvent: textKeyEvent(format),
 		},
 		background: {
 			article: backgroundArticle(format),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
-			card: backgroundCard(format),
+			card: overrides?.background.card || backgroundCard(format),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
@@ -1193,6 +1312,8 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			analysisUnderline: backgroundUnderline(format),
 			matchStats: backgroundMatchStats(format),
 			ageWarning: backgroundAgeWarning(format),
+			keyEventBullet: backgroundKeyEventBullet(),
+			summaryEventBullet: backgroundSummaryEventBullet(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -1220,17 +1341,22 @@ export const decidePalette = (format: ArticleFormat): Palette => {
 			richLink: borderRichLink(format),
 			navPillar: borderNavPillar(format),
 			article: borderArticle(format),
-			lines: borderLines(format),
+			lines: overrides?.border.lines || borderLines(format),
+			cricketScoreboardTop: borderCricketScoreboardTop(),
+			cricketScoreboardDivider: borderCricketScoreboardDivider(),
 			matchTab: matchTab(),
 			activeMatchTab: activeMatchTab(),
 			cardSupporting: borderCardSupporting(format),
 		},
 		topBar: {
-			card: topBarCard(format),
+			card: overrides?.topBar.card || topBarCard(format),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
 			standfirstLink: hoverStandfirstLink(format),
+			keyEventLink: hoverKeyEventLink(format),
+			keyEventBullet: hoverKeyEventBullet(),
+			summaryEventBullet: hoverSummaryEventBullet(format),
 		},
 	};
 };

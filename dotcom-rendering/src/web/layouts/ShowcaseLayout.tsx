@@ -291,10 +291,6 @@ export const ShowcaseLayout = ({
 									discussionApiUrl={
 										CAPIArticle.config.discussionApiUrl
 									}
-									isAnniversary={
-										CAPIArticle.config.switches
-											.anniversaryHeaderSvg
-									}
 									urls={
 										CAPIArticle.nav.readerRevenueLinks
 											.header
@@ -819,7 +815,12 @@ export const ShowcaseLayout = ({
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzlesBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

@@ -17,7 +17,7 @@ import { parse } from 'client/parser';
 import { pipe } from 'lib';
 import type { FC } from 'react';
 import { selectPillar } from 'storybookHelpers';
-import Byline from '.';
+import Byline from './';
 
 // ----- Setup ----- //
 

@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 
 type Props = {
 	format: ArticleFormat;
@@ -23,12 +22,6 @@ const flexEnd = css`
 	justify-content: flex-end;
 `;
 
-const linesWrapperStyles = css`
-	/* Fill the container */
-	flex: 1;
-	align-self: flex-end;
-`;
-
 export const CardFooter = ({
 	format,
 	age,
@@ -41,30 +34,10 @@ export const CardFooter = ({
 		return <footer>{cardBranding}</footer>;
 	}
 
-	if (
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Editorial ||
-		format.design === ArticleDesign.Letter
-	) {
-		return (
-			<footer>
-				<div>{supportingContent}</div>
-				<div css={spaceBetween}>
-					{age}
-					<StraightLines
-						cssOverrides={linesWrapperStyles}
-						count={4}
-					/>
-					{commentCount}
-				</div>
-			</footer>
-		);
-	}
-
 	if (format.design === ArticleDesign.Media) {
 		return (
 			<footer>
-				<div>{supportingContent}</div>
+				{supportingContent}
 				<div css={spaceBetween}>
 					{mediaMeta}
 					{/* Show age if we have it otherwise try for commentCount */}
@@ -77,7 +50,7 @@ export const CardFooter = ({
 	if (age) {
 		return (
 			<footer>
-				<div>{supportingContent}</div>
+				{supportingContent}
 				<div css={spaceBetween}>
 					{age}
 					{commentCount}
@@ -88,7 +61,7 @@ export const CardFooter = ({
 
 	return (
 		<footer>
-			<div>{supportingContent}</div>
+			{supportingContent}
 			<div css={flexEnd}>
 				<>{commentCount}</>
 			</div>

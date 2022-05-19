@@ -4,7 +4,7 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
 import { selectPillar } from 'storybookHelpers';
-import Bullet from '.';
+import Bullet from './';
 
 // ----- Stories ----- //
 

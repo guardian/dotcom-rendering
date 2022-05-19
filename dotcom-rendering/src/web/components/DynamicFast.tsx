@@ -6,9 +6,10 @@ import { LI } from './Card/components/LI';
 
 type Props = {
 	trails: TrailType[];
+	containerPalette?: DCRContainerPalette;
 };
 
-export const DynamicFast = ({ trails }: Props) => {
+export const DynamicFast = ({ trails, containerPalette }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
 	const bigCards = trails.slice(2, 4);
@@ -19,6 +20,7 @@ export const DynamicFast = ({ trails }: Props) => {
 			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="75%">
 					<Card
+						containerPalette={containerPalette}
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
@@ -47,6 +49,7 @@ export const DynamicFast = ({ trails }: Props) => {
 						starRating={primary.starRating}
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
+						dataLinkName={primary.dataLinkName}
 					/>
 				</LI>
 				<LI
@@ -56,6 +59,7 @@ export const DynamicFast = ({ trails }: Props) => {
 					percentage="25%"
 				>
 					<Card
+						containerPalette={containerPalette}
 						linkTo={secondary.url}
 						format={secondary.format}
 						headlineText={secondary.headline}
@@ -80,6 +84,7 @@ export const DynamicFast = ({ trails }: Props) => {
 						starRating={secondary.starRating}
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
+						dataLinkName={secondary.dataLinkName}
 					/>
 				</LI>
 			</UL>
@@ -94,6 +99,7 @@ export const DynamicFast = ({ trails }: Props) => {
 							showDivider={cardIndex > 0}
 						>
 							<Card
+								containerPalette={containerPalette}
 								linkTo={card.url}
 								format={card.format}
 								headlineText={card.headline}
@@ -120,6 +126,7 @@ export const DynamicFast = ({ trails }: Props) => {
 								starRating={card.starRating}
 								branding={card.branding}
 								supportingContent={card.supportingContent}
+								dataLinkName={card.dataLinkName}
 							/>
 						</LI>
 					);
@@ -141,6 +148,7 @@ export const DynamicFast = ({ trails }: Props) => {
 									}
 								>
 									<Card
+										containerPalette={containerPalette}
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}
@@ -171,6 +179,7 @@ export const DynamicFast = ({ trails }: Props) => {
 										supportingContent={
 											card.supportingContent
 										}
+										dataLinkName={card.dataLinkName}
 									/>
 								</LI>
 							);

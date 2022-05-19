@@ -3,9 +3,19 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
+import { getZIndex } from '../../../lib/getZIndex';
 
-const linkStyles = (format: ArticleFormat) => {
-	const palette = decidePalette(format);
+const fauxLinkStyles = css`
+	position: absolute;
+	${getZIndex('card-link')};
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+`;
+
+const linkStyles = (format: ArticleFormat, palette: Palette) => {
 	const baseLinkStyles = css`
 		display: flex;
 		/* a tag specific styles */
@@ -81,19 +91,25 @@ const linkStyles = (format: ArticleFormat) => {
 };
 
 type Props = {
-	children: React.ReactNode;
 	linkTo: string;
 	format: ArticleFormat;
+	containerPalette?: DCRContainerPalette;
 	dataLinkName?: string;
 };
 
 export const CardLink = ({
-	children,
 	linkTo,
 	format,
+	containerPalette,
 	dataLinkName = 'article',
-}: Props) => (
-	<a href={linkTo} css={linkStyles(format)} data-link-name={dataLinkName}>
-		{children}
-	</a>
-);
+}: Props) => {
+	const palette = decidePalette(format, containerPalette);
+	return (
+		// eslint-disable-next-line -- we’ve got an empty link floating. See: https://github.com/guardian/dotcom-rendering/pull/4798
+		<a
+			href={linkTo}
+			css={[fauxLinkStyles, linkStyles(format, palette)]}
+			data-link-name={dataLinkName}
+		/>
+	);
+};

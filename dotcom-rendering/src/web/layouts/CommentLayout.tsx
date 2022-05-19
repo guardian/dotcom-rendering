@@ -349,10 +349,6 @@ export const CommentLayout = ({
 								discussionApiUrl={
 									CAPIArticle.config.discussionApiUrl
 								}
-								isAnniversary={
-									CAPIArticle.config.switches
-										.anniversaryHeaderSvg
-								}
 								urls={CAPIArticle.nav.readerRevenueLinks.header}
 								remoteHeader={
 									CAPIArticle.config.switches.remoteHeader
@@ -855,7 +851,12 @@ export const CommentLayout = ({
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzlesBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

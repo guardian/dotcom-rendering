@@ -7,7 +7,7 @@ import {
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import type { FC } from 'react';
-import { selectPillar } from '../../storybookHelpers';
+import { selectPillar } from 'storybookHelpers';
 import Anchor from './';
 
 // ----- Setup ----- //

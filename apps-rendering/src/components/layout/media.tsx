@@ -2,14 +2,14 @@
 
 import { css } from '@emotion/react';
 import { background, breakpoints, from } from '@guardian/source-foundations';
-import Footer from 'components/footer';
+import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Body from 'components/media/articleBody';
 import Series from 'components/media/articleSeries';
 import Byline from 'components/media/byline';
 import Tags from 'components/media/tags';
-import RelatedContent from 'components/relatedContent';
-import Standfirst from 'components/standfirst';
+import RelatedContent from 'components/RelatedContent';
+import Standfirst from 'components/Standfirst';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import MainMedia from 'mainMedia';

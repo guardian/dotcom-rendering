@@ -163,10 +163,14 @@ check-env: # private
 clear: # private
 	@clear
 
+check-schema:
+	$(call log, "Checking schemas")
+	@node scripts/json-schema/check-schema
+
 gen-schema:
 	$(call log, "Generating new schemas")
 	@node scripts/json-schema/gen-schema.js
-	@git add src/model/json-schema.json
+	@git add src/model/article-schema.json
 	@git add src/model/front-schema.json
 
 gen-fixtures:

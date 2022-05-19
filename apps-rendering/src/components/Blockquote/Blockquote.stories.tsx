@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import Paragraph from 'components/Paragraph';
 import type { FC } from 'react';
-import Paragraph from '../paragraph';
 import Blockquote from './';
 
 const standard = {
