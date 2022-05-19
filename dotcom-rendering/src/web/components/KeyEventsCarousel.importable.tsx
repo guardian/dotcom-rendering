@@ -48,7 +48,7 @@ const buttonStyles = css`
 	&:active,
 	&:hover {
 		outline: none;
-		background-color: ${buttonThemeBrandAlt.button.backgroundPrimaryHover};
+		background-color: ${buttonThemeBrandAlt.button.backgroundTertiaryHover};
 	}
 `;
 
