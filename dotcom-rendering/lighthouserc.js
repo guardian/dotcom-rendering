@@ -18,10 +18,10 @@ module.exports = {
 			target: 'temporary-public-storage',
 		},
 		assert: {
+			includePassedAssertions: true,
 			assertMatrix: [
 				{
 					matchingUrlPattern: '.*',
-					includePassedAssertions: true,
 					assertions: {
 						'first-contentful-paint': [
 							'warn',
