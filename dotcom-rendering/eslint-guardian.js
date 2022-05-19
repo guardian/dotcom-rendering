@@ -17,14 +17,14 @@ const guardianRules = {
 	// use `string[]` for simple arrays, `Array<string>` for complex ones
 	// https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/array-type.md#array-simple
 	'@typescript-eslint/array-type': [
-		WARNING,
+		OFF,
 		{
 			default: 'array-simple',
 		},
 	],
 
 	// use `Record<string, unknown>` instead of `{ [key: string]: unknown }`
-	'@typescript-eslint/consistent-indexed-object-style': [WARNING, 'record'],
+	'@typescript-eslint/consistent-indexed-object-style': [OFF, 'index-signature'],
 
 	// be explicit when you only want to import a type:
 	// `import type { Foo } from 'Foo';`
