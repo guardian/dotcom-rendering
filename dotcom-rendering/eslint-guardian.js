@@ -106,7 +106,6 @@ const extraRules = {
 	'sort-imports': WARNING,
 	'eslint-comments/no-unused-disable': WARNING,
 	'eslint-comments/disable-enable-pair': WARNING,
-	'import/no-default-export': WARNING,
 	'@typescript-eslint/naming-convention': WARNING,
 };
 

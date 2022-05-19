@@ -2,7 +2,6 @@ import { render } from '@testing-library/react';
 
 import { ClickToView } from './ClickToView';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 describe('ClickToView', () => {
 	it('It should render the third party content if it is not tracking', () => {
 		const thirdPartyContent = <div data-testid="third-party-content" />;

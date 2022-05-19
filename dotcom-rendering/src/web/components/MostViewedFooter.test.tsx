@@ -8,7 +8,6 @@ import { decidePalette } from '../lib/decidePalette';
 import { responseWithTwoTabs, responseWithOneTab } from './MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useApi: { [key: string]: any } = useApi_;
 
 jest.mock('../lib/useApi', () => ({
