@@ -100,7 +100,11 @@ export const headerBackgroundColour = (format: ArticleFormat): Colour => {
 		return neutral[97];
 	}
 
-	if (format.design === ArticleDesign.Media) {
+	if (
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video
+	) {
 		return neutral[7];
 	}
 

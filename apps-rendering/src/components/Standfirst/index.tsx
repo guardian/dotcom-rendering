@@ -169,7 +169,9 @@ const getStyles = (item: Item): SerializedStyles => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return css(styles(format), thinHeadline);
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return media(format);
 
 		default:

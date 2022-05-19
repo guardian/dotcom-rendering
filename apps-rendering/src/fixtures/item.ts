@@ -407,13 +407,13 @@ const interview: Interview = {
 };
 
 const media: Item = {
-	design: ArticleDesign.Media,
+	design: ArticleDesign.Gallery,
 	...fields,
 	body: galleryBody,
 };
 
 const cartoon: Item = {
-	design: ArticleDesign.Media,
+	design: ArticleDesign.Gallery,
 	...fields,
 	body: [],
 };

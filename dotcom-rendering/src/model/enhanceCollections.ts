@@ -30,7 +30,9 @@ const decideSubLinkFormat = ({
 	// need to respect so we use the container format here
 	if (
 		linkFormat.design === ArticleDesign.LiveBlog ||
-		linkFormat.design === ArticleDesign.Media ||
+		linkFormat.design === ArticleDesign.Gallery ||
+		linkFormat.design === ArticleDesign.Audio ||
+		linkFormat.design === ArticleDesign.Video ||
 		linkFormat.theme === ArticleSpecial.SpecialReport ||
 		linkFormat.design === ArticleDesign.Analysis
 	)

@@ -20,7 +20,9 @@ const marginAuto = `
 
 const backgroundColour = (format: ArticleFormat): string => {
 	switch (format.design) {
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return neutral[20];
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
