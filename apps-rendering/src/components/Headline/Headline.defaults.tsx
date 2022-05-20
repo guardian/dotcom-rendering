@@ -1,34 +1,34 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import StarRating from 'components/StarRating';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import { articleWidthStyles } from 'styles';
 
-export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.small()}
-	margin: 0;
-	${headlineTextColour(format)}
-	${headlineBackgroundColour(format)}
-    padding-bottom: ${remSpace[6]};
+export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
+	const baseStyles = css`
+		${headline.small()}
+		${headlineTextColour(format)}
+		margin: 0;
+		${from.tablet} {
+			${headline.medium()}
+		}
+	`;
 
-	${articleWidthStyles}
-
-	${from.tablet} {
-		${headline.medium()}
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return baseStyles;
+		default:
+			return css`
+				${baseStyles}
+				${articleWidthStyles}
+				${headlineBackgroundColour(format)}
+				padding-bottom: ${remSpace[6]};
+			`;
 	}
-`;
-
-// stop headlines from growing in size with font resizer
-export const fontSizeRestriction = css`
-	font-size: 28px;
-	${from.tablet} {
-		font-size: 34px;
-	}
-`;
-
+};
 interface DefaultProps {
 	item: Item;
 	styles: SerializedStyles;

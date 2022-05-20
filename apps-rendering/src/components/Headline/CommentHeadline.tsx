@@ -1,11 +1,7 @@
 import { css } from '@emotion/react';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import type { Item } from 'item';
-import {
-	DefaultHeadline,
-	defaultStyles,
-	fontSizeRestriction,
-} from './Headline.defaults';
+import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
 const commentStyles = css`
 	${headline.small({ fontWeight: 'light' })}
@@ -23,7 +19,7 @@ interface Props {
 const CommentHeadline: React.FC<Props> = ({ item }) => (
 	<DefaultHeadline
 		item={item}
-		styles={css(defaultStyles(item), commentStyles, fontSizeRestriction)}
+		styles={css(defaultStyles(item), commentStyles)}
 	/>
 );
 
