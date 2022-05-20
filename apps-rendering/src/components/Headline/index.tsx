@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { getFormat, Item } from 'item';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 import AnalysisHeadline from './AnalysisHeadline';
 import BlogHeadline from './BlogHeadline';
 import CommentHeadline from './CommentHeadline';

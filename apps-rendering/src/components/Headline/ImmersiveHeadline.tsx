@@ -7,7 +7,8 @@ import {
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
-import { getFormat, Item } from 'item';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 import { wideContentWidth } from 'styles';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
