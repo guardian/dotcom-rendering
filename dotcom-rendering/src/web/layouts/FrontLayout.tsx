@@ -149,7 +149,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								trails={trails}
 								containerType={collection.collectionType}
 								containerPalette={collection.containerPalette}
-								containerDisplayName={collection.displayName}
+								showAge={collection.displayName === 'Headlines'}
 							/>
 						</ContainerLayout>
 					);

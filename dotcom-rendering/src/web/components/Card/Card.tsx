@@ -55,7 +55,7 @@ export type Props = {
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
 	containerPalette?: DCRContainerPalette;
-	containerDisplayName?: string;
+	showAge?: boolean;
 };
 
 const starWrapper = css`
@@ -89,19 +89,19 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 const decideIfAgeShouldShow = ({
 	containerPalette,
 	format,
-	containerDisplayName,
+	showAge,
 }: {
 	containerPalette?: DCRContainerPalette;
 	format: ArticleFormat;
-	containerDisplayName?: string;
+	showAge: boolean;
 }): boolean => {
+	// Some containers force all cards to show age. E.g., The articles in the headlines
+	// container are typically very recent so we want to display age there
+	if (showAge) return true;
 	// Palettes are time sensitive so show age if one is being used
 	if (containerPalette) return true;
 	// Liveblogs are evidently time sensitive
 	if (format.design === ArticleDesign.LiveBlog) return true;
-	// The articles in the headlines container are typically very recent
-	// so we want to display age
-	if (containerDisplayName === 'Headlines') return true;
 	// Otherwise, do not show the article age on the Card
 	return false;
 };
@@ -134,7 +134,7 @@ export const Card = ({
 	branding,
 	supportingContent,
 	containerPalette,
-	containerDisplayName,
+	showAge = false,
 }: Props) => {
 	const showCommentCount = commentCount || commentCount === 0;
 	const palette = decidePalette(format, containerPalette);
@@ -148,10 +148,10 @@ export const Card = ({
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
 
-	const showAge = decideIfAgeShouldShow({
+	const renderAge = decideIfAgeShouldShow({
 		containerPalette,
 		format,
-		containerDisplayName,
+		showAge,
 	});
 
 	return (
@@ -249,7 +249,7 @@ export const Card = ({
 						<CardFooter
 							format={format}
 							age={
-								showAge && webPublicationDate ? (
+								renderAge && webPublicationDate ? (
 									<CardAge
 										format={format}
 										containerPalette={containerPalette}

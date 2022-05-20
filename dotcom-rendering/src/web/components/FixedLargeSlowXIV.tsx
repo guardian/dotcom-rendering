@@ -6,13 +6,13 @@ import { UL } from './Card/components/UL';
 type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
-	containerDisplayName: string;
+	showAge?: boolean;
 };
 
 export const FixedLargeSlowXIV = ({
 	trails,
 	containerPalette,
-	containerDisplayName,
+	showAge,
 }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
@@ -28,7 +28,7 @@ export const FixedLargeSlowXIV = ({
 				<LI padSides={true} percentage="75%">
 					<Card
 						containerPalette={containerPalette}
-						containerDisplayName={containerDisplayName}
+						showAge={showAge}
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
@@ -66,7 +66,7 @@ export const FixedLargeSlowXIV = ({
 				>
 					<Card
 						containerPalette={containerPalette}
-						containerDisplayName={containerDisplayName}
+						showAge={showAge}
 						linkTo={secondary.url}
 						format={secondary.format}
 						headlineText={secondary.headline}
@@ -105,9 +105,7 @@ export const FixedLargeSlowXIV = ({
 								>
 									<Card
 										containerPalette={containerPalette}
-										containerDisplayName={
-											containerDisplayName
-										}
+										showAge={showAge}
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}

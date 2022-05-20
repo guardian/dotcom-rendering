@@ -18,7 +18,7 @@ export const EventPalette = () => (
 		<DynamicFast
 			trails={trails}
 			containerPalette="EventPalette"
-			containerDisplayName="Spotlight"
+			showAge={true}
 		/>
 	</ContainerLayout>
 );
@@ -35,7 +35,7 @@ export const EventAltPalette = () => (
 		<DynamicFast
 			trails={trails}
 			containerPalette="EventAltPalette"
-			containerDisplayName="Spotlight"
+			showAge={true}
 		/>
 	</ContainerLayout>
 );
@@ -52,7 +52,7 @@ export const SombrePalette = () => (
 		<DynamicFast
 			trails={trails}
 			containerPalette="SombrePalette"
-			containerDisplayName="Spotlight"
+			showAge={true}
 		/>
 	</ContainerLayout>
 );
@@ -69,7 +69,7 @@ export const SombreAltPalette = () => (
 		<DynamicFast
 			trails={trails}
 			containerPalette="SombreAltPalette"
-			containerDisplayName="Spotlight"
+			showAge={true}
 		/>
 	</ContainerLayout>
 );
@@ -86,7 +86,7 @@ export const BreakingPalette = () => (
 		<DynamicFast
 			trails={trails}
 			containerPalette="BreakingPalette"
-			containerDisplayName="Spotlight"
+			showAge={true}
 		/>
 	</ContainerLayout>
 );
@@ -103,7 +103,7 @@ export const LongRunningPalette = () => (
 		<DynamicFast
 			trails={trails}
 			containerPalette="LongRunningPalette"
-			containerDisplayName="Spotlight"
+			showAge={true}
 		/>
 	</ContainerLayout>
 );
@@ -120,7 +120,7 @@ export const LongRunningAltPalette = () => (
 		<DynamicFast
 			trails={trails}
 			containerPalette="LongRunningAltPalette"
-			containerDisplayName="Spotlight"
+			showAge={true}
 		/>
 	</ContainerLayout>
 );
@@ -137,7 +137,7 @@ export const InvestigationPalette = () => (
 		<DynamicFast
 			trails={trails}
 			containerPalette="InvestigationPalette"
-			containerDisplayName="Spotlight"
+			showAge={true}
 		/>
 	</ContainerLayout>
 );
