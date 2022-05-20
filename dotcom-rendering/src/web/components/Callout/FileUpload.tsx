@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import { css } from '@emotion/react';
-
-import { textSans, text, space } from '@guardian/source-foundations';
-
+import { space, text, textSans } from '@guardian/source-foundations';
+import { useState } from 'react';
 import { stringifyFileBase64 } from '../../lib/stringifyFileBase64';
 import { FieldLabel } from './FieldLabel';
 

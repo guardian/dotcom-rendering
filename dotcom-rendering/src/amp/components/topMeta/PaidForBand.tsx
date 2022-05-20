@@ -1,17 +1,15 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
+import { ArticleSpecial } from '@guardian/libs';
 import {
 	brandAlt,
+	from,
 	neutral,
 	textSans,
-	from,
 } from '@guardian/source-foundations';
-import { ArticleSpecial } from '@guardian/libs';
-
-import LabsLogo from '../../../static/logos/the-guardian-labs.svg';
-import ArrowRightIcon from '../../../static/icons/arrow-right.svg';
+import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
+import ArrowRightIcon from '../../../static/icons/arrow-right.svg';
+import LabsLogo from '../../../static/logos/the-guardian-labs.svg';
 
 const headerStyle = css`
 	display: flex;

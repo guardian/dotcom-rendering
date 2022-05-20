@@ -15,7 +15,7 @@ jest.mock('./hasRequiredConsents', () => ({
 }));
 
 describe('checkBrazeDependecies', () => {
-	let windowSpy: jest.SpyInstance<any>;
+	let windowSpy: jest.SpyInstance;
 
 	beforeEach(() => {
 		windowSpy = jest.spyOn(window, 'window', 'get');

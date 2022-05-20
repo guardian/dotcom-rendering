@@ -1,16 +1,14 @@
 import { css } from '@emotion/react';
-
 import { ArticleDesign } from '@guardian/libs';
 import {
+	from,
 	headline,
 	neutral,
 	text,
-	from,
 	until,
 } from '@guardian/source-foundations';
-
-import { QuoteIcon } from './QuoteIcon';
 import { unescapeData } from '../../lib/escapeData';
+import { QuoteIcon } from './QuoteIcon';
 
 const partiallyLeft = css`
 	width: 220px;
@@ -161,7 +159,6 @@ export const PullQuoteBlockComponent: React.FC<{
 						css={css`
 							display: inline;
 						`}
-						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{
 							__html: unescapeData(html),
 						}}
@@ -191,7 +188,6 @@ export const PullQuoteBlockComponent: React.FC<{
 				>
 					<QuoteIcon colour={palette.fill.quoteIcon} />
 					<blockquote
-						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{
 							__html: unescapeData(html),
 						}}
@@ -240,7 +236,6 @@ export const PullQuoteBlockComponent: React.FC<{
 						css={css`
 							display: inline;
 						`}
-						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{
 							__html: unescapeData(html),
 						}}

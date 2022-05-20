@@ -1,11 +1,9 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { matchReport } from '../../../fixtures/generated/match-report';
-
+import { ArticleContainer } from './ArticleContainer';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
-import { ArticleContainer } from './ArticleContainer';
-
 import { MatchStats } from './MatchStats';
 import { RightColumn } from './RightColumn';
 

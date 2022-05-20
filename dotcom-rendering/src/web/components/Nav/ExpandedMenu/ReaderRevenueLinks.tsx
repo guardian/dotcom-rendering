@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-
 import {
-	from,
-	brandText,
 	brandAlt,
+	brandText,
+	from,
 	textSans,
 } from '@guardian/source-foundations';
 

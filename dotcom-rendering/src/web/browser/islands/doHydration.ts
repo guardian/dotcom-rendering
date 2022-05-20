@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { log } from '@guardian/libs';
-import { hydrate, render, h } from 'preact';
+import { h, hydrate, render } from 'preact';
 import { initPerf } from '../initPerf';
 
 /**

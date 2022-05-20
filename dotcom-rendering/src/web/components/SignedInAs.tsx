@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
-
 import {
-	text,
 	border,
+	headline,
 	neutral,
 	news,
-	headline,
-	textSans,
 	space,
+	text,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
@@ -106,11 +105,9 @@ export const SignedInAs = ({
 	isClosedForComments,
 }: Props) => {
 	const isBanned =
-		user &&
-		user.privateFields &&
-		user.privateFields.canPostComment === false;
+		user && user.privateFields && !user.privateFields.canPostComment;
 
-	if (enableDiscussionSwitch === false) {
+	if (!enableDiscussionSwitch) {
 		// Discussion is disabled sitewide and user is signed in
 		if (user) {
 			return (

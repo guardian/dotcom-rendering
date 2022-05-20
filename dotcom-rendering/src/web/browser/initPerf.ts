@@ -26,7 +26,6 @@ export const initPerf = (
 		perf.mark(endKey);
 		perf.measure(name, startKey, endKey);
 
-		// eslint-disable-next-line no-console
 		log('dotcom', JSON.stringify(perf.getEntriesByName(name)));
 
 		const measureEntries = perf.getEntriesByName(name, 'measure');

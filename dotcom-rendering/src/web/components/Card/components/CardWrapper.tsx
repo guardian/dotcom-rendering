@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-
-import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 

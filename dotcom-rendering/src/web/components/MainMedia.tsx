@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
-
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { until } from '@guardian/source-foundations';
-import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
-
-import { renderArticleElement } from '../lib/renderElement';
 import { getZIndex } from '../lib/getZIndex';
+import { renderArticleElement } from '../lib/renderElement';
 
 const mainMedia = css`
 	height: 100%;

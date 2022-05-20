@@ -1,20 +1,17 @@
-import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-
 import type { CommonBannerComponentProps } from '@guardian/braze-components/banner';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-import { getZIndex } from '../../lib/getZIndex';
+import { useEffect, useState } from 'react';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
-import { CanShowResult } from '../../lib/messagePicker';
+import { getZIndex } from '../../lib/getZIndex';
+import type { CanShowResult } from '../../lib/messagePicker';
 
 type Meta = {
-	dataFromBraze: {
-		[key: string]: string;
-	};
+	dataFromBraze: { [key: string]: string };
 	logImpressionWithBraze: () => void;
 	logButtonClickWithBraze: (id: number) => void;
 };

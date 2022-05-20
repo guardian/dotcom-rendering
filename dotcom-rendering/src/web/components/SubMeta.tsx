@@ -1,18 +1,16 @@
 import { css } from '@emotion/react';
-
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
-	space,
+	from,
 	headline,
+	space,
 	textSans,
 	until,
-	from,
 } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-
-import { ShareIcons } from './ShareIcons';
-import { Badge } from './Badge';
 import { decidePalette } from '../lib/decidePalette';
+import { Badge } from './Badge';
+import { ShareIcons } from './ShareIcons';
 
 const labelStyles = (palette: Palette) => css`
 	${textSans.xxsmall()};

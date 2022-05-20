@@ -1,26 +1,23 @@
-import { useRef, useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-import libDebounce from 'lodash/debounce';
-
-import {
-	headline,
-	from,
-	until,
-	space,
-	neutral,
-	brandAlt,
-	text,
-} from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
-
-import { LeftColumn } from './LeftColumn';
-import { Hide } from './Hide';
+import {
+	brandAlt,
+	from,
+	headline,
+	neutral,
+	space,
+	text,
+	until,
+} from '@guardian/source-foundations';
+import libDebounce from 'lodash/debounce';
+import { useEffect, useRef, useState } from 'react';
+import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
+import { getZIndex } from '../lib/getZIndex';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
-import { getZIndex } from '../lib/getZIndex';
-
-import { decidePalette } from '../lib/decidePalette';
+import { Hide } from './Hide';
+import { LeftColumn } from './LeftColumn';
 
 // Carousel icons - need replicating from source for centring
 

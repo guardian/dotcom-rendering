@@ -1,13 +1,13 @@
+import { css } from '@emotion/react';
 import {
-	ArticleDisplay,
 	ArticleDesign,
+	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
-import { ElementContainer } from './ElementContainer';
 import { Caption } from './Caption';
+import { ElementContainer } from './ElementContainer';
 import { StarRating } from './StarRating/StarRating';
 
 export default {

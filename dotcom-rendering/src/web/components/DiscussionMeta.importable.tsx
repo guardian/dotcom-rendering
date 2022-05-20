@@ -1,8 +1,8 @@
 import { joinUrl } from '@guardian/libs';
-import { SignedInAs } from './SignedInAs';
-import { useDiscussion } from '../lib/useDiscussion';
 import { decidePalette } from '../lib/decidePalette';
 import { useApi } from '../lib/useApi';
+import { useDiscussion } from '../lib/useDiscussion';
+import { SignedInAs } from './SignedInAs';
 
 export type Props = {
 	format: ArticleFormat;

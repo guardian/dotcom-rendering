@@ -1,17 +1,16 @@
-import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-
+import { App as Comments } from '@guardian/discussion-rendering';
 import { joinUrl } from '@guardian/libs';
 import { neutral, space } from '@guardian/source-foundations';
-import { App as Comments } from '@guardian/discussion-rendering';
-import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
 import { SvgPlus } from '@guardian/source-react-components';
-import { SignedInAs } from './SignedInAs';
-import { Hide } from './Hide';
-import { getCommentContext } from '../lib/getCommentContext';
-import { useDiscussion } from '../lib/useDiscussion';
+import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
+import { useEffect, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
+import { getCommentContext } from '../lib/getCommentContext';
 import { revealStyles } from '../lib/revealStyles';
+import { useDiscussion } from '../lib/useDiscussion';
+import { Hide } from './Hide';
+import { SignedInAs } from './SignedInAs';
 
 export type Props = {
 	format: ArticleFormat;
@@ -120,10 +119,10 @@ export const Discussion = ({
 	}, [hasCommentsHash]);
 
 	useEffect(() => {
-		const pendingElements = document?.querySelectorAll<HTMLElement>(
+		const pendingElements = document.querySelectorAll<HTMLElement>(
 			'.discussion > .pending',
 		);
-		pendingElements?.forEach((element) => {
+		pendingElements.forEach((element) => {
 			element.classList.add('reveal');
 			element.classList.remove('pending');
 		});

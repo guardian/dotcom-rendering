@@ -1,6 +1,5 @@
-import React from 'react';
 import { ClassNames } from '@emotion/react';
-
+import React from 'react';
 import { ShowMoreButton } from '../ShowMoreButton';
 
 // We look in the html field of the atom for a hint for the height of the atom

@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-
-import { until, from } from '@guardian/source-foundations';
-
+import { from, until } from '@guardian/source-foundations';
 import { verticalDivider } from '../../../lib/verticalDivider';
 
 type Direction = 'row' | 'column' | 'row-reverse';

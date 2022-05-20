@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
-
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
-
 import { SignedInAs } from './SignedInAs';
 
 const aUser = {

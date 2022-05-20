@@ -1,16 +1,15 @@
 import type express from 'express';
-
-import { document } from './document';
-import { Article } from '../pages/Article';
-import { extractScripts } from '../lib/scripts';
-import { extractNAV } from '../../model/extract-nav';
-import { AnalyticsModel } from '../components/Analytics';
-import { validateAsCAPIType as validateV2 } from '../../model/validate';
-import { findBySubsection } from '../../model/article-sections';
 import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
-import { generatePermutivePayload } from '../lib/permutive';
-import { getAmpExperimentCache } from './ampExperimentCache';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
+import { findBySubsection } from '../../model/article-sections';
+import { extractNAV } from '../../model/extract-nav';
+import { validateAsCAPIType as validateV2 } from '../../model/validate';
+import type { AnalyticsModel } from '../components/Analytics';
+import { generatePermutivePayload } from '../lib/permutive';
+import { extractScripts } from '../lib/scripts';
+import { Article } from '../pages/Article';
+import { getAmpExperimentCache } from './ampExperimentCache';
+import { document } from './document';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
 	try {
@@ -78,7 +77,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 			res.status(415).send(`<pre>${e.message}</pre>`);
 		} else {
 			// @ts-expect-error
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
 			res.status(500).send(`<pre>${e.message}</pre>`);
 		}
 	}

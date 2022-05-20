@@ -1,11 +1,13 @@
-import { createPortal } from 'react-dom';
-import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-import { space } from '@guardian/source-foundations';
 import { onConsentChange } from '@guardian/consent-management-platform';
-import { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { CountryCode, getCookie, joinUrl, log, storage } from '@guardian/libs';
-import { ModuleDataResponse } from '@guardian/support-dotcom-components';
+import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type { CountryCode } from '@guardian/libs';
+import { getCookie, joinUrl, log, storage } from '@guardian/libs';
+import { space } from '@guardian/source-foundations';
+import type { ModuleDataResponse } from '@guardian/support-dotcom-components';
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecurringContributor,
@@ -15,7 +17,6 @@ import {
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useApi } from '../lib/useApi';
-import { submitComponentEvent } from '../browser/ophan/ophan';
 
 type Props = {
 	section: string;
@@ -198,7 +199,7 @@ const Render = ({
 				margin-bottom: ${space[3]}px;
 			`}
 		>
-			{/* eslint-disable-next-line react/jsx-props-no-spreading */}
+			{}
 			<Epic {...props} />
 		</aside>
 	);

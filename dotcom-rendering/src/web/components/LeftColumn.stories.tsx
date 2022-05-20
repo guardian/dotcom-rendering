@@ -1,11 +1,10 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { Flex } from './Flex';
-import { RightColumn } from './RightColumn';
 import { ArticleContainer } from './ArticleContainer';
 import { ElementContainer } from './ElementContainer';
-
+import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { Placeholder } from './Placeholder';
+import { RightColumn } from './RightColumn';
 
 export default {
 	component: LeftColumn,

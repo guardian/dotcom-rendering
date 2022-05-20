@@ -1,6 +1,6 @@
-import { ReactElement, useState, useEffect } from 'react';
-
-import { CommonBannerComponentProps as BrazeBannerProps } from '@guardian/braze-components';
+import type { CommonBannerComponentProps as BrazeBannerProps } from '@guardian/braze-components';
+import type { ReactElement } from 'react';
+import { useEffect, useState } from 'react';
 
 export default {
 	component: 'BrazeBanner',
@@ -33,13 +33,11 @@ export const DefaultStory = (): ReactElement => {
 			<BrazeMessage
 				componentName={componentName}
 				logButtonClickWithBraze={(internalButtonId) => {
-					// eslint-disable-next-line no-console
 					console.log(
 						`Button with internal ID ${internalButtonId} clicked`,
 					);
 				}}
 				submitComponentEvent={(componentEvent) => {
-					// eslint-disable-next-line no-console
 					console.log(
 						'submitComponentEvent called with: ',
 						componentEvent,

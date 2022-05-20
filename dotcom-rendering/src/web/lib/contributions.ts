@@ -1,6 +1,7 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
-import { getIdApiUserData, IdApiUserData } from './getIdapiUserData';
+import type { IdApiUserData } from './getIdapiUserData';
+import { getIdApiUserData } from './getIdapiUserData';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
@@ -244,4 +245,4 @@ export const lazyFetchEmailWithTimeout =
 
 export const getContributionsServiceUrl = (
 	CAPIArticle: CAPIArticleType,
-): string => process?.env?.SDC_URL ?? CAPIArticle.contributionsServiceUrl;
+): string => process.env.SDC_URL ?? CAPIArticle.contributionsServiceUrl;

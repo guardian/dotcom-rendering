@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/media-has-caption */
-
 import { css } from '@emotion/react';
 import { unescapeData } from '../../lib/escapeData';
 import { Caption } from './Caption';

@@ -1,14 +1,13 @@
-import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
+import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
-import createCache from '@emotion/cache';
-import he from 'he';
-
 import { resets } from '@guardian/source-foundations';
+import he from 'he';
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { getFontsCss } from '../../lib/fonts-css';
-import { stickyAdLabelCss } from '../components/StickyAd';
 import { epicChoiceCardCss } from '../components/Epic';
+import { stickyAdLabelCss } from '../components/StickyAd';
 
 interface RenderToStringResult {
 	html: string;
@@ -29,7 +28,7 @@ export const document = ({
 }: {
 	linkedData: { [key: string]: any }[];
 	title: string;
-	body: React.ReactElement<any>;
+	body: React.ReactElement;
 	scripts: string[];
 	metadata: Metadata;
 }) => {

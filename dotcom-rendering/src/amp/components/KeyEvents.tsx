@@ -1,12 +1,11 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
 import {
+	headline,
 	neutral,
 	sport,
-	headline,
 	textSans,
 } from '@guardian/source-foundations';
+import React from 'react';
 import DownArrow from '../../static/icons/down-arrow.svg';
 import { blockLink } from '../lib/block-link';
 
