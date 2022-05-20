@@ -647,6 +647,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 									<span data-amp-bind-text="epicState.reminder.reminderLabel" />
 									. To find out what personal data we collect
 									and how we use it, view our{' '}
+									{/* eslint-disable-next-line react/jsx-no-target-blank -- we’re linking to Guardian */}
 									<a
 										target="_blank"
 										href="https://www.theguardian.com/help/privacy-policy"
@@ -667,6 +668,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 								please{' '}
 								<a
 									target="_blank"
+									rel="noreferrer"
 									href="mailto:contribution.support@theguardian.com"
 								>
 									contact us
