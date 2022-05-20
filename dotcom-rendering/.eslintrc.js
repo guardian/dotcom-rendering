@@ -14,7 +14,6 @@ const rulesToReview = {
 	'react/jsx-curly-newline': 'warn', // 8 problems
 	'no-case-declarations': 'warn', // 7 problems
 	'no-useless-escape': 'warn', // 6 problems
-	'react/jsx-no-target-blank': 'warn', // 3 problems
 };
 
 const rulesToRemove = {
@@ -90,6 +89,7 @@ module.exports = {
 		'global-require': 'error',
 		'no-empty-pattern': 'error',
 		'no-param-reassign': 'error',
+		'react/jsx-no-target-blank': 'error',
 
 		...rulesToReview,
 		...rulesToRemove,

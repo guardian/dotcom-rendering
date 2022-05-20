@@ -245,6 +245,7 @@ export const ShareIcons = ({
 						role="button"
 						aria-label="Share via Email"
 						target="_blank"
+						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
 						<span
