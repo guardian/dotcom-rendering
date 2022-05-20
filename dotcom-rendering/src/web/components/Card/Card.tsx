@@ -55,6 +55,7 @@ export type Props = {
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
 	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
 };
 
 const starWrapper = css`
@@ -78,6 +79,32 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 		</Hide>
 	</>
 );
+
+/**
+ * This functions contains the business logic that decides when the card age should be
+ * shown. It uses the format of the article the card links to as well as information
+ * about the container where the card sits.
+ *
+ */
+const decideIfAgeShouldShow = ({
+	containerPalette,
+	format,
+	showAge,
+}: {
+	containerPalette?: DCRContainerPalette;
+	format: ArticleFormat;
+	showAge: boolean;
+}): boolean => {
+	// Some containers force all cards to show age. E.g., The articles in the headlines
+	// container are typically very recent so we want to display age there
+	if (showAge) return true;
+	// Palettes are time sensitive so show age if one is being used
+	if (containerPalette) return true;
+	// Liveblogs are evidently time sensitive
+	if (format.design === ArticleDesign.LiveBlog) return true;
+	// Otherwise, do not show the article age on the Card
+	return false;
+};
 
 export const Card = ({
 	linkTo,
@@ -107,6 +134,7 @@ export const Card = ({
 	branding,
 	supportingContent,
 	containerPalette,
+	showAge = false,
 }: Props) => {
 	const showCommentCount = commentCount || commentCount === 0;
 	const palette = decidePalette(format, containerPalette);
@@ -119,6 +147,12 @@ export const Card = ({
 		format.design === ArticleDesign.Comment ||
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
+
+	const renderAge = decideIfAgeShouldShow({
+		containerPalette,
+		format,
+		showAge,
+	});
 
 	return (
 		<CardWrapper format={format} containerPalette={containerPalette}>
@@ -215,7 +249,7 @@ export const Card = ({
 						<CardFooter
 							format={format}
 							age={
-								webPublicationDate ? (
+								renderAge && webPublicationDate ? (
 									<CardAge
 										format={format}
 										containerPalette={containerPalette}

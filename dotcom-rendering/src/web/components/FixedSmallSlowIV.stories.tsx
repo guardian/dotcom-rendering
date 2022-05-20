@@ -30,7 +30,7 @@ export const Default = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedSmallSlowIV trails={trails} />
+		<FixedSmallSlowIV trails={trails} showAge={true} />
 	</ContainerLayout>
 );
 Default.story = { name: 'FixedSmallSlowIV' };

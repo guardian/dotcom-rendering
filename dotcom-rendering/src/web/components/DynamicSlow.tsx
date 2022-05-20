@@ -6,6 +6,7 @@ import { UL } from './Card/components/UL';
 type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
 };
 
 /**
@@ -13,7 +14,7 @@ type Props = {
  *
  * @see {@link https://www.figma.com/file/sx2vMFHbL7SsUo0LcpsKNe/%E2%AC%A3--Front-container?node-id=123%3A137122 Figma designs}
  */
-export const DynamicSlow = ({ trails, containerPalette }: Props) => {
+export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
 	const bigCards = trails.slice(2, 4);
@@ -25,6 +26,7 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 				<LI padSides={true} percentage="75%">
 					<Card
 						containerPalette={containerPalette}
+						showAge={showAge}
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
@@ -64,6 +66,7 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 				>
 					<Card
 						containerPalette={containerPalette}
+						showAge={showAge}
 						linkTo={secondary.url}
 						format={secondary.format}
 						headlineText={secondary.headline}
@@ -108,6 +111,7 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 								>
 									<Card
 										containerPalette={containerPalette}
+										showAge={showAge}
 										linkTo={card.url}
 										format={card.format}
 										trailText={card.trailText}
@@ -163,6 +167,7 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 								>
 									<Card
 										containerPalette={containerPalette}
+										showAge={showAge}
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}
