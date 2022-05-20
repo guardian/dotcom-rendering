@@ -70,6 +70,7 @@ module.exports = {
 		// Fixed as part of @guardian-eslint move May 2022
 		'array-callback-return': 'error',
 		'global-require': 'error',
+		'no-empty-pattern': 'error',
 		'no-param-reassign': 'error',
 
 		// TODO, review these (1314 problems)
