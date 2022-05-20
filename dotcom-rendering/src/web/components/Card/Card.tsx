@@ -99,13 +99,9 @@ const decideIfAgeShouldShow = ({
 	if (containerPalette) return true;
 	// Liveblogs are evidently time sensitive
 	if (format.design === ArticleDesign.LiveBlog) return true;
-	// The articles in headlines and sport are typically very recent
+	// The articles in the headlines container are typically very recent
 	// so we want to display age
-	if (
-		containerDisplayName === 'Headlines' ||
-		containerDisplayName === 'Sport'
-	)
-		return true;
+	if (containerDisplayName === 'Headlines') return true;
 	// Otherwise, do not show the article age on the Card
 	return false;
 };
