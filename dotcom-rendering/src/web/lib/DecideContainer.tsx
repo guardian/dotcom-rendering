@@ -7,12 +7,14 @@ type Props = {
 	trails: DCRFrontCard[];
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	containerDisplayName: string;
 };
 
 export const DecideContainer = ({
 	trails,
 	containerType,
 	containerPalette,
+	containerDisplayName,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -20,6 +22,7 @@ export const DecideContainer = ({
 				<DynamicFast
 					trails={trails}
 					containerPalette={containerPalette}
+					containerDisplayName={containerDisplayName}
 				/>
 			);
 		case 'dynamic/slow':
@@ -27,6 +30,7 @@ export const DecideContainer = ({
 				<DynamicSlow
 					trails={trails}
 					containerPalette={containerPalette}
+					containerDisplayName={containerDisplayName}
 				/>
 			);
 		case 'fixed/large/slow-XIV':
@@ -34,6 +38,7 @@ export const DecideContainer = ({
 				<FixedLargeSlowXIV
 					trails={trails}
 					containerPalette={containerPalette}
+					containerDisplayName={containerDisplayName}
 				/>
 			);
 		case 'fixed/small/slow-IV':
@@ -41,6 +46,7 @@ export const DecideContainer = ({
 				<FixedSmallSlowIV
 					trails={trails}
 					containerPalette={containerPalette}
+					containerDisplayName={containerDisplayName}
 				/>
 			);
 		default:

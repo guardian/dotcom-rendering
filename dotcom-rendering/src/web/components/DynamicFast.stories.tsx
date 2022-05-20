@@ -31,7 +31,7 @@ export const Default = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<DynamicFast trails={trails} />
+		<DynamicFast trails={trails} containerDisplayName="Spotlight" />
 	</ContainerLayout>
 );
 Default.story = {

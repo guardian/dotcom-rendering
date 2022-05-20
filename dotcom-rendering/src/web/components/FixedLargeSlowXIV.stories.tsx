@@ -31,7 +31,7 @@ export const Default = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedLargeSlowXIV trails={trails} />
+		<FixedLargeSlowXIV trails={trails} containerDisplayName="Spotlight" />
 	</ContainerLayout>
 );
 Default.story = { name: 'FixedLargeSlowXIV' };

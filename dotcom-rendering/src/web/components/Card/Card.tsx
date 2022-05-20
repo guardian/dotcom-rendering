@@ -59,6 +59,7 @@ export type Props = {
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
 	containerPalette?: DCRContainerPalette;
+	containerDisplayName?: string;
 };
 
 const starWrapper = css`
@@ -82,6 +83,36 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 		</Hide>
 	</>
 );
+
+/**
+ * This functions contains the business logic that decides when the card age should be
+ * shown. It uses the format of the article the card links to as well as information
+ * about the container where the card sits.
+ *
+ */
+const decideIfAgeShouldShow = ({
+	containerPalette,
+	format,
+	containerDisplayName,
+}: {
+	containerPalette?: DCRContainerPalette;
+	format: ArticleFormat;
+	containerDisplayName?: string;
+}): boolean => {
+	// Palettes are time sensitive so show age if one is being used
+	if (!!containerPalette) return true;
+	// Liveblogs are evidently time sensitive
+	if (format.design === ArticleDesign.LiveBlog) return true;
+	// The articles in headlines and sport are typically very recent
+	// so we want to display age
+	if (
+		containerDisplayName === 'Headlines' ||
+		containerDisplayName === 'Sport'
+	)
+		return true;
+	// Otherwise, do not show the article age on the Card
+	return false;
+};
 
 export const Card = ({
 	linkTo,
@@ -111,6 +142,7 @@ export const Card = ({
 	branding,
 	supportingContent,
 	containerPalette,
+	containerDisplayName,
 }: Props) => {
 	const showCommentCount = commentCount || commentCount === 0;
 	const palette = decidePalette(format, containerPalette);
@@ -123,6 +155,12 @@ export const Card = ({
 		format.design === ArticleDesign.Comment ||
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
+
+	const showAge = decideIfAgeShouldShow({
+		containerPalette,
+		format,
+		containerDisplayName,
+	});
 
 	return (
 		<CardWrapper format={format} containerPalette={containerPalette}>
@@ -219,7 +257,7 @@ export const Card = ({
 						<CardFooter
 							format={format}
 							age={
-								webPublicationDate ? (
+								showAge && webPublicationDate ? (
 									<CardAge
 										format={format}
 										containerPalette={containerPalette}

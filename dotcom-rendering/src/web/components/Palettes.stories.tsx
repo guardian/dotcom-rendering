@@ -16,7 +16,11 @@ export const EventPalette = () => (
 		centralBorder="partial"
 		containerPalette="EventPalette"
 	>
-		<DynamicFast trails={trails} containerPalette="EventPalette" />
+		<DynamicFast
+			trails={trails}
+			containerPalette="EventPalette"
+			containerDisplayName="Spotlight"
+		/>
 	</ContainerLayout>
 );
 
@@ -29,7 +33,11 @@ export const EventAltPalette = () => (
 		centralBorder="partial"
 		containerPalette="EventAltPalette"
 	>
-		<DynamicFast trails={trails} containerPalette="EventAltPalette" />
+		<DynamicFast
+			trails={trails}
+			containerPalette="EventAltPalette"
+			containerDisplayName="Spotlight"
+		/>
 	</ContainerLayout>
 );
 
@@ -42,7 +50,11 @@ export const SombrePalette = () => (
 		centralBorder="partial"
 		containerPalette="SombrePalette"
 	>
-		<DynamicFast trails={trails} containerPalette="SombrePalette" />
+		<DynamicFast
+			trails={trails}
+			containerPalette="SombrePalette"
+			containerDisplayName="Spotlight"
+		/>
 	</ContainerLayout>
 );
 
@@ -55,7 +67,11 @@ export const SombreAltPalette = () => (
 		centralBorder="partial"
 		containerPalette="SombreAltPalette"
 	>
-		<DynamicFast trails={trails} containerPalette="SombreAltPalette" />
+		<DynamicFast
+			trails={trails}
+			containerPalette="SombreAltPalette"
+			containerDisplayName="Spotlight"
+		/>
 	</ContainerLayout>
 );
 
@@ -68,7 +84,11 @@ export const BreakingPalette = () => (
 		centralBorder="partial"
 		containerPalette="BreakingPalette"
 	>
-		<DynamicFast trails={trails} containerPalette="BreakingPalette" />
+		<DynamicFast
+			trails={trails}
+			containerPalette="BreakingPalette"
+			containerDisplayName="Spotlight"
+		/>
 	</ContainerLayout>
 );
 
@@ -81,7 +101,11 @@ export const LongRunningPalette = () => (
 		centralBorder="partial"
 		containerPalette="LongRunningPalette"
 	>
-		<DynamicFast trails={trails} containerPalette="LongRunningPalette" />
+		<DynamicFast
+			trails={trails}
+			containerPalette="LongRunningPalette"
+			containerDisplayName="Spotlight"
+		/>
 	</ContainerLayout>
 );
 
@@ -94,7 +118,11 @@ export const LongRunningAltPalette = () => (
 		centralBorder="partial"
 		containerPalette="LongRunningAltPalette"
 	>
-		<DynamicFast trails={trails} containerPalette="LongRunningAltPalette" />
+		<DynamicFast
+			trails={trails}
+			containerPalette="LongRunningAltPalette"
+			containerDisplayName="Spotlight"
+		/>
 	</ContainerLayout>
 );
 
@@ -107,6 +135,10 @@ export const InvestigationPalette = () => (
 		centralBorder="partial"
 		containerPalette="InvestigationPalette"
 	>
-		<DynamicFast trails={trails} containerPalette="InvestigationPalette" />
+		<DynamicFast
+			trails={trails}
+			containerPalette="InvestigationPalette"
+			containerDisplayName="Spotlight"
+		/>
 	</ContainerLayout>
 );

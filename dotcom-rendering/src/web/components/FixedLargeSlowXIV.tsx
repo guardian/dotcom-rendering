@@ -7,9 +7,14 @@ import { LI } from './Card/components/LI';
 type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	containerDisplayName: string;
 };
 
-export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
+export const FixedLargeSlowXIV = ({
+	trails,
+	containerPalette,
+	containerDisplayName,
+}: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
 	const groups = [
@@ -24,6 +29,7 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 				<LI padSides={true} percentage="75%">
 					<Card
 						containerPalette={containerPalette}
+						containerDisplayName={containerDisplayName}
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
@@ -61,6 +67,7 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 				>
 					<Card
 						containerPalette={containerPalette}
+						containerDisplayName={containerDisplayName}
 						linkTo={secondary.url}
 						format={secondary.format}
 						headlineText={secondary.headline}
@@ -99,6 +106,9 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 								>
 									<Card
 										containerPalette={containerPalette}
+										containerDisplayName={
+											containerDisplayName
+										}
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}
