@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import StarRating from 'components/StarRating';
 import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
