@@ -19,7 +19,10 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 
 	switch (format.design) {
 		case ArticleDesign.Interview:
-			return baseStyles;
+			return css`
+				${baseStyles}
+				padding-bottom: ${remSpace[1]};
+			`;
 		default:
 			return css`
 				${baseStyles}

@@ -8,6 +8,7 @@ import HeadlineByline from 'components/HeadlineByline';
 import HeadlineTag from 'components/HeadlineTag';
 import type { Item } from 'item';
 import { getFormat } from 'item';
+import { darkModeCss } from 'styles';
 import { defaultStyles } from './Headline.defaults';
 
 interface Props {
@@ -48,9 +49,15 @@ const InterviewHeadline: React.FC<Props> = ({ item }) => {
 						background-color: ${background.headline(format)};
 						position: relative;
 						white-space: pre-wrap;
-						padding: 0 ${remSpace[1]};
+						padding: 0 ${remSpace[3]} ${remSpace[1]};
 						display: inline;
 						box-decoration-break: clone;
+						${from.wide} {
+							padding: 0 ${remSpace[2]} ${remSpace[1]};
+						}
+						${darkModeCss`
+							background-color: ${background.headlineDark(format)};
+						`};
 					`}
 				>
 					{item.headline}
