@@ -47,15 +47,19 @@ const enhanceSupportingContent = (
 	containerPalette?: DCRContainerPalette,
 ): DCRSupportingContent[] => {
 	return supportingContent.map((subLink) => {
+		// This is the actual DCR format for this sublink
 		const linkFormat = subLink.format
 			? decideFormat(subLink.format)
 			: undefined;
+		// This is the format used to decide how the sublink looks (we vary this based
+		// on the container background colour)
+		const presentationFormat = decidePresentationFormat({
+			linkFormat,
+			containerFormat: format,
+			containerPalette,
+		});
 		return {
-			format: decidePresentationFormat({
-				linkFormat,
-				containerFormat: format,
-				containerPalette,
-			}),
+			format: presentationFormat,
 			headline: subLink.header?.headline || '',
 			url: subLink.properties.href || subLink.header?.url,
 			kickerText:
