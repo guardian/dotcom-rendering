@@ -73,11 +73,12 @@ export const ImageWrapper = ({
 				isHorizontalOnMobile &&
 					css`
 						${until.tablet} {
-							margin-left: 6px;
 							width: 119px;
 							flex-shrink: 0;
-							margin-top: 6px;
-							margin-bottom: 6px;
+							margin-top: 4px;
+							margin-right: 0;
+							margin-bottom: 4px;
+							margin-left: 4px;
 							flex-basis: unset;
 						}
 					`,
