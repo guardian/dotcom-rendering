@@ -29,12 +29,12 @@ const decidePresentationFormat = ({
 	// These types of article styles have background styles that sublinks
 	// need to respect so we use the container format here
 	if (
-		linkFormat.design === ArticleDesign.LiveBlog ||
-		linkFormat.design === ArticleDesign.Gallery ||
-		linkFormat.design === ArticleDesign.Audio ||
-		linkFormat.design === ArticleDesign.Video ||
-		linkFormat.theme === ArticleSpecial.SpecialReport ||
-		linkFormat.design === ArticleDesign.Analysis
+		containerFormat.design === ArticleDesign.LiveBlog ||
+		containerFormat.design === ArticleDesign.Gallery ||
+		containerFormat.design === ArticleDesign.Audio ||
+		containerFormat.design === ArticleDesign.Video ||
+		containerFormat.theme === ArticleSpecial.SpecialReport ||
+		containerFormat.design === ArticleDesign.Analysis
 	)
 		return containerFormat;
 	// Otherwise, we can allow the sublink to express its own styling
