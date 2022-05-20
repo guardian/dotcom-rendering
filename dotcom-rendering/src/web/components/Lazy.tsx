@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import { useIsInView } from '../lib/useIsInView';
 
 type Props = {

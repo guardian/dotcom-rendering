@@ -1,11 +1,9 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
-import { text, neutral, textSans, body } from '@guardian/source-foundations';
-
-import { pillarPalette_DO_NOT_USE, neutralBorder } from '../../lib/pillars';
-import { ShareIcons } from './ShareIcons';
+import { body, neutral, text, textSans } from '@guardian/source-foundations';
+import React from 'react';
+import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import CommentIcon from '../../static/icons/comment.svg';
+import { ShareIcons } from './ShareIcons';
 
 const guardianLines = (pillar: ArticleTheme) => css`
 	background-image: repeating-linear-gradient(

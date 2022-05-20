@@ -3,7 +3,7 @@ import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
 
 const { window } = new JSDOM('');
-// @ts-ignore -- Close enough types: DOMWindow is missing "self" from Window
+// @ts-expect-error -- Close enough types: DOMWindow is missing "self" from Window
 const DOMPurify = createDOMPurify(window);
 
 type Opts = Config & {

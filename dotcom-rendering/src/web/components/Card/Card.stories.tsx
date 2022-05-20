@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { css } from '@emotion/react';
 import {
 	ArticleDesign,
@@ -9,7 +8,8 @@ import {
 import { breakpoints, from } from '@guardian/source-foundations';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
-import { Card, Props as CardProps } from './Card';
+import type { Props as CardProps } from './Card';
+import { Card } from './Card';
 
 const basicCardProps: CardProps = {
 	linkTo: '',
@@ -165,7 +165,6 @@ for (const [displayName, displayValue] of Object.entries(ArticleDisplay)) {
 		);
 		for (const [designName, designValue] of Object.entries(ArticleDesign)) {
 			if (Number.isNaN(Number(designName))) {
-				// eslint-disable-next-line @typescript-eslint/no-loop-func
 				stories.add(designName, () => {
 					return CardsWithDifferentThemes({
 						display: displayValue as ArticleDisplay,

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { border, until } from '@guardian/source-foundations';
 
 type Props = {

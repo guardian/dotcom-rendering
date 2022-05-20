@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { border, body } from '@guardian/source-foundations';
+import { body, border } from '@guardian/source-foundations';
 import { useEffect } from 'react';
 import { unescapeData } from '../../lib/escapeData';
 

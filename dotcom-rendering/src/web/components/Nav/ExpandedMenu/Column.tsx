@@ -1,15 +1,13 @@
 import { css } from '@emotion/react';
-
 import {
 	brand,
-	brandText,
 	brandAlt,
-	textSans,
+	brandText,
 	from,
+	textSans,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS

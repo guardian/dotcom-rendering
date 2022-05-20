@@ -1,12 +1,11 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
 import {
-	neutral,
 	brandAlt,
+	neutral,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import React from 'react';
 import ArrowRight from '../../static/icons/arrow-right.svg';
 
 const supportStyles = css`

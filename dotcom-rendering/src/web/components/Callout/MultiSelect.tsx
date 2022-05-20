@@ -1,5 +1,5 @@
-import { RadioSelect } from './RadioSelect';
 import { CheckboxSelect } from './CheckboxSelect';
+import { RadioSelect } from './RadioSelect';
 
 type Props = {
 	formField: CampaignFieldCheckbox | CampaignFieldRadio;

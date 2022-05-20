@@ -1,22 +1,21 @@
+import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import {
 	brandBackground,
 	brandBorder,
 	brandLine,
 } from '@guardian/source-foundations';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { css } from '@emotion/react';
-import { DecideContainer } from '../lib/DecideContainer';
-
-import { SubNav } from '../components/SubNav.importable';
+import { ContainerLayout } from '../components/ContainerLayout';
 import { ElementContainer } from '../components/ElementContainer';
-import { Nav } from '../components/Nav/Nav';
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { Nav } from '../components/Nav/Nav';
+import { SubNav } from '../components/SubNav.importable';
+import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import { ContainerLayout } from '../components/ContainerLayout';
 
 interface Props {
 	front: DCRFrontType;

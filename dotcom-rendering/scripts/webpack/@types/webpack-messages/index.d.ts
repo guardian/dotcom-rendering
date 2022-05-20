@@ -1,5 +1,5 @@
 declare module 'webpack-messages' {
-	import * as webpack from 'webpack';
+	import type * as webpack from 'webpack';
 
 	type Options = {
 		name: string;

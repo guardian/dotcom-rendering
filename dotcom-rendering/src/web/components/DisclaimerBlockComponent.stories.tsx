@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import { DisclaimerBlockComponent } from './DisclaimerBlockComponent';
 
 export default {

@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
-
-import { headline, body, between, space } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
+import { between, body, headline, space } from '@guardian/source-foundations';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
-import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { decidePalette } from '../lib/decidePalette';
+import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 
 type Props = {
@@ -122,7 +121,6 @@ export const ArticleBody = ({
 		return (
 			<>
 				<div
-					// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 					tabIndex={0}
 					id="liveblog-body"
 					// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
@@ -164,7 +162,6 @@ export const ArticleBody = ({
 	}
 	return (
 		<div
-			// eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
 			tabIndex={0}
 			id="maincontent"
 			css={[

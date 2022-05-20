@@ -1,21 +1,19 @@
 import { css } from '@emotion/react';
-
-import { news } from '@guardian/source-foundations';
 import {
-	ArticleDisplay,
 	ArticleDesign,
+	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-
-import { ElementContainer } from './ElementContainer';
+import { news } from '@guardian/source-foundations';
+import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
+import { mainMediaElements } from './ArticleHeadline.mocks';
+import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
-import { ArticleContainer } from './ArticleContainer';
 import { MainMedia } from './MainMedia';
 import { Standfirst } from './Standfirst';
-import { mainMediaElements } from './ArticleHeadline.mocks';
 
 export default {
 	component: ArticleHeadline,

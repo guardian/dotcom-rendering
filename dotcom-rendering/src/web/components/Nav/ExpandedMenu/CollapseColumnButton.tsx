@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-
 import {
-	from,
-	brandText,
 	brandAlt,
+	brandText,
+	from,
 	headline,
 } from '@guardian/source-foundations';
 
@@ -73,8 +72,6 @@ export const CollapseColumnButton: React.FC<{
 	collapseColumnInputId: string;
 	ariaControls: string;
 }> = ({ title, columnInputId, collapseColumnInputId, ariaControls }) => (
-	/* eslint-disable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
-	// @ts-ignore
 	<label
 		id={collapseColumnInputId}
 		className="selectableMenuItem"
@@ -87,7 +84,6 @@ export const CollapseColumnButton: React.FC<{
 		htmlFor={columnInputId}
 		aria-haspopup="true"
 		aria-controls={ariaControls}
-		// @ts-ignore
 		tabIndex={-1}
 		role="menuitem"
 		data-cy={`column-collapse-${title}`}
@@ -95,5 +91,4 @@ export const CollapseColumnButton: React.FC<{
 	>
 		{title}
 	</label>
-	/* eslint-enable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
 );

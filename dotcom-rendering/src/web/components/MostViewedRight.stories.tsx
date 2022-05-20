@@ -1,14 +1,12 @@
-import fetchMock from 'fetch-mock';
-
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { Flex } from './Flex';
-import { RightColumn } from './RightColumn';
-import { LeftColumn } from './LeftColumn';
+import fetchMock from 'fetch-mock';
 import { ArticleContainer } from './ArticleContainer';
 import { ElementContainer } from './ElementContainer';
-
+import { Flex } from './Flex';
+import { LeftColumn } from './LeftColumn';
 import { mockTab1 } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
+import { RightColumn } from './RightColumn';
 
 export default {
 	component: MostViewedRight,

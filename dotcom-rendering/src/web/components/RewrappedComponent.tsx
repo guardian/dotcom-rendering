@@ -1,7 +1,6 @@
-// @ts-ignore -- we’re actually using preact
-import { jsx as _jsx } from 'react/jsx-runtime';
 import { ClassNames } from '@emotion/react';
-
+// @ts-expect-error -- we’re actually using preact
+import { jsx as _jsx } from 'react/jsx-runtime';
 import type { HTMLTag } from 'src/model/unwrapHtml';
 import { unescapeData } from '../../lib/escapeData';
 import { recordLog } from '../lib/logging';

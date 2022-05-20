@@ -1,5 +1,5 @@
-import React from 'react';
 import { ClassNames } from '@emotion/react';
+import React from 'react';
 
 const prebidImg =
 	'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';

@@ -1,5 +1,5 @@
-import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
-import { KeyEvent } from 'src/web/components/KeyEventCard';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import type { KeyEvent } from 'src/web/components/KeyEventCard';
 
 const getDate = (milliSeconds = 1, seconds = 1, minutes = 1, hours = 1) =>
 	new Date(Date.now() - milliSeconds * seconds * minutes * hours);
