@@ -74,6 +74,7 @@ export const LiveBlogRenderer = ({
 			{blocks.map((block) => {
 				return (
 					<LiveBlock
+						key={block.id}
 						format={format}
 						block={block}
 						pageId={pageId}

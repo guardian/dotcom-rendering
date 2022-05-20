@@ -13,7 +13,7 @@ import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
  *
  * @returns the format property that we will use to style the sublink
  */
-const decideSubLinkFormat = ({
+const decidePresentationFormat = ({
 	linkFormat,
 	containerFormat,
 	containerPalette,
@@ -30,7 +30,9 @@ const decideSubLinkFormat = ({
 	// need to respect so we use the container format here
 	if (
 		linkFormat.design === ArticleDesign.LiveBlog ||
-		linkFormat.design === ArticleDesign.Media ||
+		linkFormat.design === ArticleDesign.Gallery ||
+		linkFormat.design === ArticleDesign.Audio ||
+		linkFormat.design === ArticleDesign.Video ||
 		linkFormat.theme === ArticleSpecial.SpecialReport ||
 		linkFormat.design === ArticleDesign.Analysis
 	)
@@ -44,18 +46,29 @@ const enhanceSupportingContent = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
 ): DCRSupportingContent[] => {
-	return supportingContent.map((subLink) => ({
-		format: decideSubLinkFormat({
-			linkFormat: subLink.format
-				? decideFormat(subLink.format)
-				: undefined,
+	return supportingContent.map((subLink) => {
+		// This is the actual DCR format for this sublink
+		const linkFormat = subLink.format
+			? decideFormat(subLink.format)
+			: undefined;
+		// This is the format used to decide how the sublink looks (we vary this based
+		// on the container background colour)
+		const presentationFormat = decidePresentationFormat({
+			linkFormat,
 			containerFormat: format,
 			containerPalette,
-		}),
-		headline: subLink.header?.headline || '',
-		url: subLink.properties.href || subLink.header?.url,
-		kickerText: subLink.header?.kicker?.item?.properties.kickerText,
-	}));
+		});
+		return {
+			format: presentationFormat,
+			headline: subLink.header?.headline || '',
+			url: subLink.properties.href || subLink.header?.url,
+			kickerText:
+				subLink.header?.kicker?.item?.properties.kickerText ||
+				(linkFormat && linkFormat.design === ArticleDesign.LiveBlog
+					? 'Live'
+					: undefined),
+		};
+	});
 };
 
 const enhanceCards = (
