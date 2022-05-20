@@ -3,7 +3,6 @@ const transitionRules = require('./eslint-guardian');
 /** TODO: Review these */
 const rulesToReview = {
 	'import/no-extraneous-dependencies': 'warn', // 683 problems
-	'react/jsx-one-expression-per-line': 'warn', // 325 problems
 	'consistent-return': 'warn', // 51 problems
 	'default-case': 'warn', // 50 problems
 	'react/no-danger': 'warn', // 48 problems
@@ -90,6 +89,7 @@ module.exports = {
 		'no-empty-pattern': 'error',
 		'no-param-reassign': 'error',
 		'react/jsx-no-target-blank': 'error',
+		'react/jsx-one-expression-per-line': 'off',
 
 		...rulesToReview,
 		...rulesToRemove,
