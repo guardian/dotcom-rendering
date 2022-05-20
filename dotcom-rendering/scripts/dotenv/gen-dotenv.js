@@ -73,7 +73,7 @@ const genEnv = async () => {
 
 			prompt(
 				'',
-				'[scripts/dotenv] To get things working PROD like either:',
+				'[scripts/dotenv] To get things working like PROD you can either:',
 				'[scripts/dotenv]  * Get your credentials from Janus',
 				'[scripts/dotenv]  * Ask a local engineer for a copy of the .env file',
 				'[scripts/dotenv] Then try again.',

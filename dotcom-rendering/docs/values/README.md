@@ -8,8 +8,29 @@ The project should have as few barriers as possible for anyone to work on it, in
 
 #### `.env` shouldn't be required
 
-While we use a `.env` file for configuration and secrets for `dotcom-rendering` to function correctly in `PROD`, not having it shouldn't block someone from running the project altogether.
+While we use a `.env` file for configuration and secrets for `dotcom-rendering` to function correctly in `PROD`, not having it shouldn't block someone from running the project locally.
 
 If you're considering adding something to the `.env` file - please consult with the dotcom team first. Wherever possible seeking solutions like passing the data from [Frontend](https://github.com/guardian/frontend) is preferred.
 
 e.g. [Fallback for images salt](#) (In development so not linked to)
+
+## Performant
+
+### Lines in the sand
+
+#### Non-critical scripts will not block rendering
+
+Any script added to the website that is not critical to rendering must must not block first paint or cause a dramatic repaint. Such scripts should have an `async` or `defer` attribute, be loaded programmatically from within our application JavaScript, or be added at the bottom of the document body.
+
+<!--
+Todo:
+
+## Maintainable
+
+## Reliable
+
+## Transparent
+
+## Open
+
+## Simple -->
