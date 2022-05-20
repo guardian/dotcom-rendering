@@ -82,9 +82,9 @@ const extractStarCount = (element: CAPIElement): number => {
 	return starCount;
 };
 
-const isStarableImage = (element: CAPIElement): boolean => {
+const isStarableImage = (element: CAPIElement | undefined): boolean => {
 	return (
-		element._type ===
+		element?._type ===
 			'model.dotcomrendering.pageElements.ImageBlockElement' &&
 		element.role !== 'thumbnail'
 	);

@@ -10,6 +10,10 @@ const windowGuardianConfig = {
 		dcrSentryDsn:
 			'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
 	},
+	ophan: {
+		browserId: 'jest-browser-id',
+		pageViewId: 'jest-page-view-id',
+	},
 } as WindowGuardianConfig;
 
 const windowGuardian = {
@@ -31,7 +35,6 @@ const windowGuardian = {
 	modules: {
 		sentry: {
 			reportError: (error: Error): void => {
-				 
 				console.log(
 					`Error: attempting to log error without having registered sentry.\nError is: ${error.message}`,
 				);
@@ -66,7 +69,7 @@ window.guardian = windowGuardian;
 
 // Mock Local Storage
 // See: https://github.com/facebook/jest/issues/2098#issuecomment-260733457
- 
+
 const localStorageMock = (function () {
 	let store: {
 		[key: string]: string;
