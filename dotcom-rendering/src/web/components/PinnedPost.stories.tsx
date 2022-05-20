@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import { from, breakpoints } from '@guardian/source-foundations';
 import {
-	ArticlePillar,
 	ArticleDesign,
 	ArticleDisplay,
+	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
+import { breakpoints, from } from '@guardian/source-foundations';
 import { liveBlock } from '../../../fixtures/manual/liveBlock';
 import { LiveBlock } from './LiveBlock';
 import { PinnedPost } from './PinnedPost';

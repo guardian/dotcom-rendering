@@ -1,8 +1,8 @@
-import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { RichLink, RichLinkImageData } from './RichLink';
-
-import { useApi } from '../lib/useApi';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { decideFormat } from '../lib/decideFormat';
+import { useApi } from '../lib/useApi';
+import type { RichLinkImageData } from './RichLink';
+import { RichLink } from './RichLink';
 
 type Props = {
 	element: RichLinkBlockElement;
@@ -61,15 +61,15 @@ export const RichLinkComponent = ({
 
 	if (error) {
 		// Send the error to Sentry
-		window?.guardian?.modules?.sentry?.reportError(error, 'rich-link');
+		window.guardian.modules.sentry.reportError(error, 'rich-link');
 	}
 
 	if (data) {
 		const richLinkImageData: RichLinkImageData = {
 			thumbnailUrl: data.thumbnailUrl,
-			altText: data.imageAsset?.fields.altText,
-			width: data.imageAsset?.fields.width,
-			height: data.imageAsset?.fields.height,
+			altText: data.imageAsset.fields.altText,
+			width: data.imageAsset.fields.width,
+			height: data.imageAsset.fields.height,
 		};
 
 		return (

@@ -1,21 +1,20 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import {
-	neutral,
+	body,
 	brand,
 	brandAlt,
+	neutral,
 	textSans,
-	body,
 } from '@guardian/source-foundations';
-
+import React from 'react';
+import type { Link } from '../../lib/footer-links';
 import {
-	Link,
 	footerLinksNew,
-	LinkPlatform,
 	isOnPlatform,
+	LinkPlatform,
 } from '../../lib/footer-links';
-import { ReaderRevenueButton } from './ReaderRevenueButton';
 import { useContentABTestGroup } from './ContentABTest';
+import { ReaderRevenueButton } from './ReaderRevenueButton';
 
 const innerContainerStyles = css`
 	padding-left: 10px;

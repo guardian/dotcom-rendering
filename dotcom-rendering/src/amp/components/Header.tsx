@@ -1,17 +1,16 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
 import {
-	neutral,
 	brand,
 	brandAlt,
-	headline,
+	brandText,
 	from,
+	headline,
+	neutral,
 	until,
 	visuallyHidden,
-	brandText,
 } from '@guardian/source-foundations';
 import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
+import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
 

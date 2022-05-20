@@ -1,4 +1,6 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	border,
@@ -6,21 +8,18 @@ import {
 	space,
 	until,
 } from '@guardian/source-foundations';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { Contributor } from './Contributor';
-import { Avatar } from './Avatar';
-import { Counts } from './Counts';
-import { Branding } from './Branding.importable';
-import { ShareIcons } from './ShareIcons';
-import { Dateline } from './Dateline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { decidePalette } from '../lib/decidePalette';
+import { Avatar } from './Avatar';
+import { Branding } from './Branding.importable';
 import { CommentCount } from './CommentCount.importable';
+import { Contributor } from './Contributor';
+import { Counts } from './Counts';
+import { Dateline } from './Dateline';
 import { Island } from './Island';
 import { ShareCount } from './ShareCount.importable';
-import { decidePalette } from '../lib/decidePalette';
+import { ShareIcons } from './ShareIcons';
 
 type Props = {
 	format: ArticleFormat;

@@ -1,6 +1,5 @@
 import { getDocumentCloudAssetUrl } from './DocumentBlockComponent.importable';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 describe('DocumentBlockComponent.getDocumentCloudAssetUrl', () => {
 	it('convert the document cloud embed url to the raw asset url', () => {
 		expect(

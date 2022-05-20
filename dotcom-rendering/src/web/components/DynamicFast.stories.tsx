@@ -1,8 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { trails } from '../../../fixtures/manual/trails';
 import { ContainerLayout } from './ContainerLayout';
 import { DynamicFast } from './DynamicFast';
-
-import { trails } from '../../../fixtures/manual/trails';
 
 export default {
 	component: DynamicFast,

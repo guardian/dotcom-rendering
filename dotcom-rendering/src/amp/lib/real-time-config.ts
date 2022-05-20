@@ -1,4 +1,4 @@
-import { AdRegion } from './region-classes';
+import type { AdRegion } from './region-classes';
 
 /**
  * Type of AMP ad

@@ -1,28 +1,28 @@
 import compression from 'compression';
-import express, { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import express from 'express';
 import responseTime from 'response-time';
-import {
-	renderArticle,
-	renderArticleJson,
-	renderBlocks,
-	renderFront,
-	renderInteractive,
-	renderKeyEvents,
-	renderPerfTest as renderArticlePerfTest,
-} from '../web/server';
 import {
 	render as renderAMPArticle,
 	renderPerfTest as renderAMPArticlePerfTest,
 } from '../amp/server';
+import {
+	renderArticle,
+	renderArticleJson,
+	renderPerfTest as renderArticlePerfTest,
+	renderBlocks,
+	renderFront,
+	renderInteractive,
+	renderKeyEvents,
+} from '../web/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
-import { logger } from './lib/logging';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
+import { logger } from './lib/logging';
 
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
 const logRenderTime = responseTime(
 	(req: Request, _: Response, time: number) => {
-		// eslint-disable-next-line prefer-destructuring
 		const body: CAPIArticleType = req.body;
 		logger.info({
 			pageId: body.pageId,
@@ -68,7 +68,6 @@ export const prodServer = () => {
 			try {
 				return renderArticle(req, res);
 			} catch (error) {
-				// eslint-disable-next-line no-console
 				console.error(error);
 			}
 		},
@@ -83,7 +82,6 @@ export const prodServer = () => {
 			try {
 				return renderAMPArticle(req, res);
 			} catch (error) {
-				// eslint-disable-next-line no-console
 				console.error(error);
 			}
 		},
@@ -99,7 +97,6 @@ export const prodServer = () => {
 			try {
 				return renderFront(req, res);
 			} catch (error) {
-				// eslint-disable-next-line no-console
 				console.error(error);
 			}
 		},
@@ -149,6 +146,6 @@ export const prodServer = () => {
 
 	const port = process.env.PORT || 9000;
 	app.listen(port);
-	// eslint-disable-next-line no-console
+
 	console.log(`Started production server on port ${port}\nready`);
 };

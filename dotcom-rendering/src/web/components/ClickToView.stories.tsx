@@ -1,23 +1,19 @@
-/* eslint-disable jsx-a11y/aria-role */
-
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
-import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
-
+import { ClickToView } from './ClickToView';
 import { ContainerLayout } from './ContainerLayout';
-import { Figure } from './Figure';
-import { EmbedBlockComponent } from './EmbedBlockComponent.importable';
-import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
-import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
-import { VimeoBlockComponent } from './VimeoBlockComponent';
 import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
-import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
-import { TweetBlockComponent } from './TweetBlockComponent.importable';
+import { EmbedBlockComponent } from './EmbedBlockComponent.importable';
+import { Figure } from './Figure';
 import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
 import { MapEmbedBlockComponent } from './MapEmbedBlockComponent.importable';
+import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
+import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
+import { TweetBlockComponent } from './TweetBlockComponent.importable';
+import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
+import { VimeoBlockComponent } from './VimeoBlockComponent';
 import { VineBlockComponent } from './VineBlockComponent.importable';
-
-import { ClickToView } from './ClickToView';
 
 export default {
 	component: ClickToView,

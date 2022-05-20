@@ -1,5 +1,5 @@
 import { KnowledgeQuizAtom } from '@guardian/atoms-rendering';
-import { SharingUrlsType } from '@guardian/atoms-rendering/dist/types/types';
+import type { SharingUrlsType } from '@guardian/atoms-rendering/dist/types/types';
 
 // These types are duplicates of those defined in the atom file.
 type AnswerType = {
@@ -33,6 +33,5 @@ type QuizAtomType = {
 };
 
 export const KnowledgeQuizAtomWrapper = (props: QuizAtomType) => {
-	// eslint-disable-next-line react/jsx-props-no-spreading
 	return <KnowledgeQuizAtom {...props} />;
 };

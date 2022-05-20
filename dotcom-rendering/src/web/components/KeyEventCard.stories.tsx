@@ -1,13 +1,14 @@
 import { css } from '@emotion/react';
 import {
-	ArticleSpecial,
 	ArticleDesign,
 	ArticleDisplay,
 	ArticlePillar,
+	ArticleSpecial,
 } from '@guardian/libs';
 import { from, neutral } from '@guardian/source-foundations';
 import { events } from '../../../fixtures/manual/key-events';
-import { KeyEvent as KeyEventType, KeyEventCard } from './KeyEventCard';
+import type { KeyEvent as KeyEventType } from './KeyEventCard';
+import { KeyEventCard } from './KeyEventCard';
 
 const getFormat = (theme: ArticleTheme) => {
 	return {

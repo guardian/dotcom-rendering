@@ -1,10 +1,8 @@
-import { brandBackground, brandBorder } from '@guardian/source-foundations';
-
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { brandBackground, brandBorder } from '@guardian/source-foundations';
 import { ElementContainer } from '../ElementContainer';
-
-import { nav } from './Nav.mock';
 import { Nav } from './Nav';
+import { nav } from './Nav.mock';
 
 export default {
 	component: Nav,

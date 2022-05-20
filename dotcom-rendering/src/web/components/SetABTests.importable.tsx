@@ -1,5 +1,5 @@
 import { AB } from '@guardian/ab-core';
-import { CoreAPIConfig } from '@guardian/ab-core/dist/types';
+import type { CoreAPIConfig } from '@guardian/ab-core/dist/types';
 import { getCookie, log } from '@guardian/libs';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
@@ -27,11 +27,11 @@ export const SetABTests = ({
 	);
 	if (!mvtId) {
 		// 0 is default and falsy here
-		// eslint-disable-next-line no-console
+
 		console.log('There is no MVT ID set, see SetABTests.importable.tsx');
 	}
 	const ophanRecord = getOphanRecordFunction();
-	const windowHash = window?.location.hash;
+	const windowHash = window.location.hash;
 	// Get the forced switches to use for when running within cypress
 	// Is empty object if not in cypress
 	const cypressAbSwitches = getCypressSwitches();

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-
-import { RadioGroup, Radio } from '@guardian/source-react-components';
+import { Radio, RadioGroup } from '@guardian/source-react-components';
 import { FieldLabel } from './FieldLabel';
 
 type FieldProp = {

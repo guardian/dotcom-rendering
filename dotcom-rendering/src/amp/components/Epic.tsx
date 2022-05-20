@@ -1,22 +1,21 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
 import {
-	headline,
 	body,
-	textSans,
+	border,
 	brand,
 	brandAlt,
-	neutral,
-	error,
 	brandBackground,
-	border,
+	error,
+	headline,
+	neutral,
+	textSans,
 } from '@guardian/source-foundations';
+import React from 'react';
 import {
 	MoustacheSection,
-	MoustacheVariable,
 	MoustacheTemplate,
 	moustacheVariable,
+	MoustacheVariable,
 } from './moustache';
 
 export const epicChoiceCardCss = `
@@ -351,7 +350,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 	const supportDotcomComponentsUrl =
 		process.env.GU_STAGE === 'PROD'
 			? 'https://contributions.guardianapis.com'
-			: process?.env?.SDC_URL ??
+			: process.env.SDC_URL ??
 			  'https://contributions.code.dev-guardianapis.com';
 
 	const setReminderUrl = `${supportDotcomComponentsUrl}/amp/set_reminder`;
@@ -490,7 +489,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 							<div css={buttonsStyle}>
 								<div>
 									<MoustacheSection name="cta">
-										{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+										{}
 										<a
 											id="primaryCta"
 											data-amp-bind-href="epicState.choiceCards ? epicState.ctaUrl + '&selected-contribution-type=' + epicState.choiceCards.choiceCardSelection.frequency + '&selected-amount=' + epicState.choiceCards.choiceCardSelection.amount : epicState.ctaUrl"

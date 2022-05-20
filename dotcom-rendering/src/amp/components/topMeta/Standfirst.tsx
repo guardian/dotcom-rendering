@@ -1,10 +1,9 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
-import { neutral, headline, textSans } from '@guardian/source-foundations';
-import { ArticleSpecial, ArticleTheme } from '@guardian/libs';
-
-import { pillarPalette_DO_NOT_USE, neutralBorder } from '../../../lib/pillars';
+import type { ArticleTheme } from '@guardian/libs';
+import { ArticleSpecial } from '@guardian/libs';
+import { headline, neutral, textSans } from '@guardian/source-foundations';
+import React from 'react';
+import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
 const ListStyle = (iconColour: string) => css`
 	li {

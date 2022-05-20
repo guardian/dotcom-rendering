@@ -1,8 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { ElementContainer } from './ElementContainer';
-
 import { Carousel } from './Carousel';
+import { ElementContainer } from './ElementContainer';
 
 export default {
 	component: Carousel,
