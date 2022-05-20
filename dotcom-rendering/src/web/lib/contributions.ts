@@ -137,9 +137,7 @@ export const isRecentOneOffContributor = () => {
 	return false;
 };
 
-export const shouldHideSupportMessaging = (
-	isSignedIn: boolean = false,
-): boolean =>
+export const shouldHideSupportMessaging = (isSignedIn = false): boolean =>
 	!shouldShowSupportMessaging() ||
 	isRecurringContributor(isSignedIn) ||
 	isRecentOneOffContributor();

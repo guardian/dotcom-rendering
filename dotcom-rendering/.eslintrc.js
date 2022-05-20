@@ -16,17 +16,15 @@ const rulesToReview = {
 };
 
 const rulesToRemove = {
-	'@typescript-eslint/explicit-module-boundary-types': 'off',
-	'@typescript-eslint/no-unsafe-call': 'off',
-	'@typescript-eslint/no-unsafe-assignment': 'off',
-	'@typescript-eslint/no-unsafe-return': 'off',
-	'@typescript-eslint/ban-ts-comment': 'off',
-	'@typescript-eslint/restrict-template-expressions': 'off',
-	'no-console': 'off',
-	'no-shadow': 'off',
+	'@typescript-eslint/explicit-module-boundary-types': 'warn',
+	'@typescript-eslint/no-unsafe-call': 'warn',
+	'@typescript-eslint/no-unsafe-assignment': 'warn',
+	'@typescript-eslint/no-unsafe-return': 'warn',
+	'@typescript-eslint/ban-ts-comment': 'warn',
+	'@typescript-eslint/restrict-template-expressions': 'warn',
 
-	'@typescript-eslint/explicit-function-return-type': 'off',
-	'@typescript-eslint/no-inferrable-types': 'off',
+	'no-console': 'warn',
+	'no-shadow': 'warn',
 };
 
 module.exports = {
