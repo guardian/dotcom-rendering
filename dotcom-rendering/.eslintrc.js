@@ -67,6 +67,8 @@ module.exports = {
 		'@typescript-eslint/explicit-function-return-type': [0],
 		'@typescript-eslint/no-inferrable-types': [0],
 
+		'no-param-reassign': 'error',
+
 		// TODO, review these (1314 problems)
 		'import/no-extraneous-dependencies': 'warn', // 683 problems
 		'react/jsx-one-expression-per-line': 'warn', // 325 problems
@@ -84,7 +86,6 @@ module.exports = {
 		'react/jsx-no-target-blank': 'warn', // 3 problems
 		'array-callback-return': 'warn', // 2 problems
 		'global-require': 'warn', // 2 problems
-		'no-param-reassign': 'warn', // 1 problems
 		/** These rules will be disabled one-by-one */
 		...transitionRules,
 	},
