@@ -1,9 +1,10 @@
+import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
+import { enhance } from '../lib/enhance';
 import { AudioAtomBlockComponent } from './elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from './elements/CommentBlockComponent';
 import { ContentAtomBlockComponent } from './elements/ContentAtomBlockComponent';
 import { DisclaimerBlockComponent } from './elements/DisclaimerBlockComponent';
 import { EmbedBlockComponentAMP } from './elements/EmbedBlockComponentAMP';
-import { Expandable } from './Expandable';
 import { GuVideoBlockComponent } from './elements/GuVideoBlockComponent';
 import { ImageBlockComponent } from './elements/ImageBlockComponent';
 import { InteractiveAtomBlockComponent } from './elements/InteractiveAtomBlockComponent';
@@ -18,9 +19,7 @@ import { TwitterBlockComponent } from './elements/TwitterBlockComponent';
 import { VideoVimeoBlockComponent } from './elements/VideoVimeoBlockComponent';
 import { VideoYoutubeBlockComponent } from './elements/VideoYoutubeBlockComponent';
 import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
-
-import { enhance } from '../lib/enhance';
-import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
+import { Expandable } from './Expandable';
 
 export const Elements = (
 	elements: CAPIElement[],
@@ -219,7 +218,6 @@ export const Elements = (
 					/>
 				);
 			default:
-				// eslint-disable-next-line no-console
 				console.log('Unsupported Element', JSON.stringify(element));
 				if ((element as { isMandatory?: boolean }).isMandatory) {
 					throw new NotRenderableInDCR();

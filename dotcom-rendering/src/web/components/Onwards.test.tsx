@@ -1,7 +1,5 @@
 import { render } from '@testing-library/react';
-
 import { useApi as useApi_ } from '../lib/useApi';
-
 import { linkAndDescription } from './Onwards.mocks';
 import { OnwardsLayout } from './OnwardsLayout';
 
@@ -20,7 +18,6 @@ describe('OnwardsLayout', () => {
 		useApi.mockReturnValue(response);
 
 		const { asFragment } = render(
-			// eslint-disable-next-line react/jsx-props-no-spreading
 			<OnwardsLayout {...linkAndDescription} />,
 		);
 

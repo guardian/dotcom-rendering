@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import { textSans } from '@guardian/source-foundations';
 import {
 	SvgAudio,

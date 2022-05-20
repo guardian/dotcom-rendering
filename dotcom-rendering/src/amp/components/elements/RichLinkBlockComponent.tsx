@@ -1,13 +1,11 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
 import {
+	headline,
 	neutral,
 	text,
-	headline,
 	textSans,
 } from '@guardian/source-foundations';
-
+import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
 const richLinkContainer = css`

@@ -1,5 +1,6 @@
 import { getCookie } from '@guardian/libs';
-import { Discussion, Props as DiscussionProps } from './Discussion';
+import type { Props as DiscussionProps } from './Discussion';
+import { Discussion } from './Discussion';
 import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
 
 /**
@@ -20,11 +21,11 @@ import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
  * just passing them through
  *
  */
-// eslint-disable-next-line react/destructuring-assignment
+
 export const DiscussionContainer = (props: DiscussionProps) => {
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	// eslint-disable-next-line react/jsx-props-no-spreading
+
 	if (isSignedIn) return <DiscussionWhenSignedIn {...props} />;
-	// eslint-disable-next-line react/jsx-props-no-spreading
+
 	return <Discussion {...props} />;
 };

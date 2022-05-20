@@ -1,30 +1,26 @@
 import { css } from '@emotion/react';
-
-import {
-	brandBackground,
-	labs,
-	border,
-	from,
-} from '@guardian/source-foundations';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-
-import { MainMedia } from '../../components/MainMedia';
-import { ArticleTitle } from '../../components/ArticleTitle';
+import {
+	border,
+	brandBackground,
+	from,
+	labs,
+} from '@guardian/source-foundations';
+import { buildAdTargeting } from '../../../lib/ad-targeting';
 import { ArticleHeadline } from '../../components/ArticleHeadline';
-import { ElementContainer } from '../../components/ElementContainer';
-import { Nav } from '../../components/Nav/Nav';
+import { ArticleTitle } from '../../components/ArticleTitle';
 import { Caption } from '../../components/Caption';
 import { ContainerLayout } from '../../components/ContainerLayout';
-import { LabsHeader } from '../../components/LabsHeader.importable';
-
-import { buildAdTargeting } from '../../../lib/ad-targeting';
-import { getZIndex } from '../../lib/getZIndex';
-
-import { Stuck } from '../lib/stickiness';
-import { getCurrentPillar } from '../../lib/layoutHelpers';
+import { ElementContainer } from '../../components/ElementContainer';
 import { Island } from '../../components/Island';
+import { LabsHeader } from '../../components/LabsHeader.importable';
+import { MainMedia } from '../../components/MainMedia';
+import { Nav } from '../../components/Nav/Nav';
 import { decidePalette } from '../../lib/decidePalette';
+import { getZIndex } from '../../lib/getZIndex';
+import { getCurrentPillar } from '../../lib/layoutHelpers';
+import { Stuck } from '../lib/stickiness';
 
 const hasMainMediaStyles = css`
 	height: 80vh;

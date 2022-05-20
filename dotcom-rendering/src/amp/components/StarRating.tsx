@@ -1,7 +1,6 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { brandAlt } from '@guardian/source-foundations';
-
+import React from 'react';
 import { Star } from '../../static/icons/Star';
 
 const ratingsWrapper = css`

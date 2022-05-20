@@ -1,7 +1,6 @@
-import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
 import { Article } from '../../fixtures/generated/articles/Article';
+import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
 import { images } from '../../fixtures/generated/images';
-
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 
 const metaData = {

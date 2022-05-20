@@ -1,6 +1,7 @@
-import { css, SerializedStyles } from '@emotion/react';
-import { getCookie } from '@guardian/libs';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { adSizes } from '@guardian/commercial-core';
+import { getCookie } from '@guardian/libs';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { ShadyPie } from './ShadyPie';
 

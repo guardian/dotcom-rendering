@@ -1,6 +1,5 @@
-import KeyEvents, {
-	KeyEvent,
-} from '@guardian/common-rendering/src/components/keyEvents';
+import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
+import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
 
 type Props = {
 	keyEvents: Block[];

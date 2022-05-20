@@ -1,16 +1,15 @@
 import { css } from '@emotion/react';
-
 import {
-	ArticleDisplay,
 	ArticleDesign,
+	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { ArticleMeta } from './ArticleMeta';
 import {
 	getAllThemes,
 	getThemeNameAsString,
 } from '../../../../common-rendering/src/fixtures/article';
+import { ArticleMeta } from './ArticleMeta';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
 	<div

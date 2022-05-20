@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import { Distribution } from './Distribution';
 
 export default {

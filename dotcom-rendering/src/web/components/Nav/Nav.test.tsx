@@ -1,5 +1,5 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { render, within } from '@testing-library/react';
-import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
 

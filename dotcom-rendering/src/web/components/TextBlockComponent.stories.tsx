@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
 import { TextBlockComponent } from './TextBlockComponent';
 
 const html =

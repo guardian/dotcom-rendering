@@ -1,5 +1,5 @@
-import { OphanComponentType } from '../browser/ophan/ophan';
 import { constructQuery } from '../../lib/querystring';
+import type { OphanComponentType } from '../browser/ophan/ophan';
 
 type AcquisitionLinkParams = {
 	base: string;

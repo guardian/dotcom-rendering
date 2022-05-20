@@ -1,6 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
-import { findCount, buildUrl } from './useComments';
+import { buildUrl, findCount } from './useComments';
 
 describe('findCount', () => {
 	it('finds and returns a specific count', () => {

@@ -1,6 +1,5 @@
-import { ContainerLayout } from './ContainerLayout';
-
 import { CodeBlockComponent } from './CodeBlockComponent';
+import { ContainerLayout } from './ContainerLayout';
 
 export default {
 	component: CodeBlockComponent,

@@ -1,18 +1,16 @@
 import { css } from '@emotion/react';
-
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	headline,
-	textSans,
 	from,
-	until,
+	headline,
 	space,
+	textSans,
+	until,
 } from '@guardian/source-foundations';
-
-import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { Hide } from './Hide';
-import { Badge } from './Badge';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { Badge } from './Badge';
+import { Hide } from './Hide';
 import { Island } from './Island';
 import { PulsingDot } from './PulsingDot.importable';
 

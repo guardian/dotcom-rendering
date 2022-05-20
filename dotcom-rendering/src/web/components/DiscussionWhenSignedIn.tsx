@@ -1,9 +1,8 @@
 import { joinUrl } from '@guardian/libs';
 import type { Props as DiscussionProps } from 'src/web/components/Discussion';
-import { Discussion } from './Discussion';
 import { useApi } from '../lib/useApi';
+import { Discussion } from './Discussion';
 
-// eslint-disable-next-line react/destructuring-assignment
 export const DiscussionWhenSignedIn = (props: DiscussionProps) => {
 	const { discussionApiUrl } = props;
 	const { data } = useApi<{ userProfile: UserProfile }>(
@@ -14,6 +13,6 @@ export const DiscussionWhenSignedIn = (props: DiscussionProps) => {
 		},
 	);
 	if (!data) return null;
-	// eslint-disable-next-line react/jsx-props-no-spreading
+
 	return <Discussion user={data.userProfile} {...props} />;
 };

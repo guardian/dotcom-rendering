@@ -1,7 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { ArticleDesign } from '@guardian/libs';
-
 import { Card } from './Card/Card';
 
 type Props = {

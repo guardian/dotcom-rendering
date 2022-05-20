@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
-
 import {
-	text,
-	headline,
 	between,
 	from,
-	until,
+	headline,
 	space,
+	text,
+	until,
 } from '@guardian/source-foundations';
 
 const linkStyles = css`

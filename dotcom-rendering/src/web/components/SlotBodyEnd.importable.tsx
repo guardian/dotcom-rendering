@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react';
-import { getCookie } from '@guardian/libs';
-import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type {
-	BrazeMessagesInterface,
 	BrazeArticleContext,
+	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
+import { getCookie } from '@guardian/libs';
+import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { useEffect, useState } from 'react';
 import { getArticleCounts } from '../../lib/article-count';
-import { useOnce } from '../lib/useOnce';
 import { getLocaleCode } from '../lib/getCountryCode';
-
-import {
-	pickMessage,
-	SlotConfig,
-	MaybeFC,
+import type {
 	CandidateConfig,
+	MaybeFC,
+	SlotConfig,
 } from '../lib/messagePicker';
-
+import { pickMessage } from '../lib/messagePicker';
+import { useBraze } from '../lib/useBraze';
+import { useOnce } from '../lib/useOnce';
+import { canShowBrazeEpic, MaybeBrazeEpic } from './SlotBodyEnd/BrazeEpic';
 import {
-	ReaderRevenueEpic,
 	canShowReaderRevenueEpic,
+	ReaderRevenueEpic,
+} from './SlotBodyEnd/ReaderRevenueEpic';
+import type {
 	CanShowData as RRCanShowData,
 	EpicConfig as RREpicConfig,
 } from './SlotBodyEnd/ReaderRevenueEpic';
-import { MaybeBrazeEpic, canShowBrazeEpic } from './SlotBodyEnd/BrazeEpic';
-import { useBraze } from '../lib/useBraze';
 
 type Props = {
 	contentType: string;
@@ -48,7 +48,6 @@ const buildReaderRevenueEpicConfig = (
 			id: 'reader-revenue-banner',
 			canShow: () => canShowReaderRevenueEpic(canShowData),
 			show: (meta: RREpicConfig) => () => {
-				/* eslint-disable-next-line react/jsx-props-no-spreading */
 				return <ReaderRevenueEpic {...meta} />;
 			},
 		},

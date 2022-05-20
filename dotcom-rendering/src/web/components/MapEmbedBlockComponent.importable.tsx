@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
-
-import { MaintainAspectRatio } from './MaintainAspectRatio';
 import { Caption } from './Caption';
 import { ClickToView } from './ClickToView';
+import { MaintainAspectRatio } from './MaintainAspectRatio';
 
 type Props = {
 	embedUrl?: string;

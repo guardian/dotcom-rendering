@@ -1,21 +1,21 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
 import { neutral } from '@guardian/source-foundations';
-import { Footer } from '../components/Footer';
+import React from 'react';
+import { AdConsent } from '../components/AdConsent';
+import { AmpExperimentComponent } from '../components/AmpExperiment';
+import type { AnalyticsModel } from '../components/Analytics';
+import { Analytics } from '../components/Analytics';
+import { AnalyticsIframe } from '../components/AnalyticsIframe';
 import { Body as BodyArticle } from '../components/BodyArticle';
 import { Body as BodyLiveblog } from '../components/BodyLiveblog';
+import { ContentABTestProvider } from '../components/ContentABTest';
+import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Onward } from '../components/Onward';
-import { AdConsent } from '../components/AdConsent';
 import { Sidebar } from '../components/Sidebar';
-import { Analytics, AnalyticsModel } from '../components/Analytics';
 import { filterForTagsOfType } from '../lib/tag-utils';
-import { AnalyticsIframe } from '../components/AnalyticsIframe';
-import { ArticleModel } from '../types/ArticleModel';
-import { AmpExperimentComponent } from '../components/AmpExperiment';
-import { AmpExperiments } from '../server/ampExperimentCache';
-import { ContentABTestProvider } from '../components/ContentABTest';
+import type { AmpExperiments } from '../server/ampExperimentCache';
+import type { ArticleModel } from '../types/ArticleModel';
 
 const containerStyles = css`
 	margin: auto;
