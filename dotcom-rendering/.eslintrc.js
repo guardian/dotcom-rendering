@@ -67,6 +67,9 @@ module.exports = {
 		'@typescript-eslint/explicit-function-return-type': [0],
 		'@typescript-eslint/no-inferrable-types': [0],
 
+		// Fixed as part of @guardian-eslint move May 2022
+		'array-callback-return': 'error',
+		'global-require': 'error',
 		'no-param-reassign': 'error',
 
 		// TODO, review these (1314 problems)
