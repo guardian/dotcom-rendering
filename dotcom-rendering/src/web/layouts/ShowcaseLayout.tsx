@@ -526,10 +526,7 @@ export const ShowcaseLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer
-								format={format}
-								abTests={CAPIArticle.config.abTests}
-							>
+							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
