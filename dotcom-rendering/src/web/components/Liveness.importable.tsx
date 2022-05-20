@@ -1,8 +1,8 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { initHydration } from '../browser/islands/initHydration';
-import { useApi } from '../lib/useApi';
 import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
+import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
 
 type Props = {

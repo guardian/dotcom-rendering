@@ -1,14 +1,11 @@
-import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-
-import { space, neutral, body } from '@guardian/source-foundations';
-import { SvgAlertRound } from '@guardian/source-react-components';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
-
+import { body, neutral, space } from '@guardian/source-foundations';
+import { SvgAlertRound } from '@guardian/source-react-components';
+import { useEffect, useState } from 'react';
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
-
 import { Caption } from './Caption';
 
 type Props = {

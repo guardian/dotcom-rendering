@@ -1,16 +1,14 @@
 import { css } from '@emotion/react';
-import fetchMock from 'fetch-mock';
-
 import {
-	ArticlePillar,
 	ArticleDesign,
 	ArticleDisplay,
+	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-
+import fetchMock from 'fetch-mock';
+import { CommentCount } from './CommentCount.importable';
 import { Counts } from './Counts';
 import { ShareCount } from './ShareCount.importable';
-import { CommentCount } from './CommentCount.importable';
 
 export default {
 	component: Counts,

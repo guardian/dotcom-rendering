@@ -7,7 +7,7 @@ let legacyManifest: AssetHash = {};
 
 try {
 	// path is relative to the server bundle
-	// eslint-disable-next-line import/no-unresolved
+
 	manifest = require('./manifest.json');
 	legacyManifest = require('./manifest.legacy.json');
 } catch (e) {

@@ -1,32 +1,28 @@
 import { css } from '@emotion/react';
-
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/source-foundations';
-
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { StarRating } from '../StarRating/StarRating';
-import { CardHeadline } from '../CardHeadline';
+import { decidePalette } from '../../lib/decidePalette';
+import { formatCount } from '../../lib/formatCount';
 import { Avatar } from '../Avatar';
+import { CardCommentCount } from '../CardCommentCount';
+import { CardHeadline } from '../CardHeadline';
 import { Flex } from '../Flex';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
-import { CardCommentCount } from '../CardCommentCount';
-
-import { formatCount } from '../../lib/formatCount';
-
-import { ContentWrapper } from './components/ContentWrapper';
-import { HeadlineWrapper } from './components/HeadlineWrapper';
-import { CardLayout } from './components/CardLayout';
-import { ImageWrapper } from './components/ImageWrapper';
+import { StarRating } from '../StarRating/StarRating';
+import { SupportingContent } from '../SupportingContent';
 import { AvatarContainer } from './components/AvatarContainer';
-import { TrailTextWrapper } from './components/TrailTextWrapper';
-import { CardFooter } from './components/CardFooter';
-import { CardWrapper } from './components/CardWrapper';
-import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
-import { SupportingContent } from '../SupportingContent';
-import { decidePalette } from '../../lib/decidePalette';
+import { CardFooter } from './components/CardFooter';
+import { CardLayout } from './components/CardLayout';
+import { CardLink } from './components/CardLink';
+import { CardWrapper } from './components/CardWrapper';
+import { ContentWrapper } from './components/ContentWrapper';
+import { HeadlineWrapper } from './components/HeadlineWrapper';
+import { ImageWrapper } from './components/ImageWrapper';
+import { TrailTextWrapper } from './components/TrailTextWrapper';
 
 export type Props = {
 	linkTo: string;

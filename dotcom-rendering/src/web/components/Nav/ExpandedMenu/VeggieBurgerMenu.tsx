@@ -1,13 +1,11 @@
 import { css } from '@emotion/react';
-
-import {
-	visuallyHidden,
-	from,
-	brandAlt,
-	neutral,
-} from '@guardian/source-foundations';
-
 import { ArticleDisplay } from '@guardian/libs';
+import {
+	brandAlt,
+	from,
+	neutral,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 import { getZIndex } from '../../../lib/getZIndex';
 import { navInputCheckboxId, veggieBurgerId } from '../config';
 
@@ -107,8 +105,6 @@ export const VeggieBurgerMenu: React.FC<{
 	display: ArticleDisplay;
 }> = ({ display }) => {
 	return (
-		/* eslint-disable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role */
-		// @ts-ignore
 		<label
 			id={veggieBurgerId}
 			css={veggieBurgerStyles(display)}
@@ -116,7 +112,6 @@ export const VeggieBurgerMenu: React.FC<{
 			key="OpenExpandedMenuButton"
 			htmlFor={navInputCheckboxId}
 			data-link-name="nav2 : veggie-burger: show"
-			// @ts-ignore
 			tabIndex={0}
 			role="button"
 			data-cy="veggie-burger"
@@ -124,6 +119,5 @@ export const VeggieBurgerMenu: React.FC<{
 			<span css={screenReadable}>Show More</span>
 			<span css={veggieBurgerIconStyles} />
 		</label>
-		/* eslint-enable @typescript-eslint/ban-ts-comment, jsx-a11y/label-has-associated-control, @typescript-eslint/no-unused-expressions, react/no-unknown-property, jsx-a11y/no-noninteractive-element-to-interactive-role  */
 	);
 };

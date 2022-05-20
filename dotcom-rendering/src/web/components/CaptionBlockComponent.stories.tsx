@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
-
-import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { CaptionBlockComponent } from './CaptionBlockComponent';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
-
-import { CaptionBlockComponent } from './CaptionBlockComponent';
 
 export default {
 	component: CaptionBlockComponent,

@@ -33,7 +33,7 @@ export const updateIframeHeight = (queryString: string): Promise<void> => {
 	iframes.forEach((iframe) => {
 		const src = (iframe.getAttribute('srcdoc') || '')
 			.replace(/<gu-script>/g, '<script>')
-			// eslint-disable-next-line no-useless-concat
+
 			.replace(/<\/gu-script>/g, '<' + '/script>');
 		iframe.setAttribute('srcdoc', src);
 	});

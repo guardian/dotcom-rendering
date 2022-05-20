@@ -1,7 +1,6 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
 import { brandAlt, neutral } from '@guardian/source-foundations';
+import React from 'react';
 import { Expandable } from '../Expandable';
 
 const eventsWrapper = css`

@@ -1,12 +1,9 @@
-import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-
-import { textSans, neutral } from '@guardian/source-foundations';
+import { neutral, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
-
-import PlusIcon from '../../static/icons/plus.svg';
+import { useEffect, useState } from 'react';
 import MinusIcon from '../../static/icons/minus.svg';
-
+import PlusIcon from '../../static/icons/plus.svg';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './Callout/Form';
 

@@ -1,31 +1,29 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
 import {
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';
 import {
-	until,
-	text,
 	neutral,
 	opinion,
+	text,
 	textSans,
+	until,
 } from '@guardian/source-foundations';
-
-import { Elements } from './Elements';
-import { ArticleModel } from '../types/ArticleModel';
-import { TopMeta } from './topMeta/TopMeta';
-import { SubMeta } from './SubMeta';
-import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
-import { RegionalAd } from './RegionalAd';
-import { StickyAd } from './StickyAd';
-import { findAdSlots } from '../lib/find-adslots';
-import { getSharingUrls } from '../../lib/sharing-urls';
+import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { Epic } from './Epic';
+import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
+import { getSharingUrls } from '../../lib/sharing-urls';
 import { decideDesign } from '../../web/lib/decideDesign';
 import { decideTheme } from '../../web/lib/decideTheme';
+import { findAdSlots } from '../lib/find-adslots';
+import type { ArticleModel } from '../types/ArticleModel';
+import { Elements } from './Elements';
+import { Epic } from './Epic';
+import { RegionalAd } from './RegionalAd';
+import { StickyAd } from './StickyAd';
+import { SubMeta } from './SubMeta';
+import { TopMeta } from './topMeta/TopMeta';
 
 const innerContainerStyles = css`
 	padding-left: 10px;

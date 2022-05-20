@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import { CommentBlockComponent } from './CommentBlockComponent';
 
 export default {

@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
-
 import { ArticlePillar } from '@guardian/libs';
 import { joinUrl } from '../../lib/joinUrl';
-import { ElementContainer } from './ElementContainer';
-
-import { OnwardsData } from './OnwardsData';
 import { Carousel } from './Carousel';
+import { ElementContainer } from './ElementContainer';
+import { OnwardsData } from './OnwardsData';
 import { OnwardsLayout } from './OnwardsLayout';
 
 type PillarForContainer =

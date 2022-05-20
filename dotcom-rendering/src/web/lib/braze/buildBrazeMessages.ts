@@ -1,17 +1,17 @@
-import { getCookie, log, storage } from '@guardian/libs';
 import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
 import {
 	BrazeMessages,
 	LocalMessageCache,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
-import {
-	hasCurrentBrazeUser,
-	setHasCurrentBrazeUser,
-	clearHasCurrentBrazeUser,
-} from '../hasCurrentBrazeUser';
+import { getCookie, log, storage } from '@guardian/libs';
 import { initPerf } from '../../browser/initPerf';
 import { record } from '../../browser/ophan/ophan';
+import {
+	clearHasCurrentBrazeUser,
+	hasCurrentBrazeUser,
+	setHasCurrentBrazeUser,
+} from '../hasCurrentBrazeUser';
 import { checkBrazeDependencies } from './checkBrazeDependencies';
 import { getInitialisedAppboy } from './initialiseAppboy';
 

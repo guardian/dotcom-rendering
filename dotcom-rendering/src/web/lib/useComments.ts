@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import { useApi } from './useApi';
 
 type CommentType = {

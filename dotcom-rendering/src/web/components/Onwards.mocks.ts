@@ -1,10 +1,9 @@
 import {
-	ArticlePillar,
 	ArticleDesign,
 	ArticleDisplay,
+	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-
 import { decideFormat } from '../lib/decideFormat';
 
 const CAPITrails: CAPITrailType[] = [

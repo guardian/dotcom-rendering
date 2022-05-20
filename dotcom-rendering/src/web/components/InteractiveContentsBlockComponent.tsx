@@ -1,16 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-
 import {
-	from,
-	until,
-	space,
-	neutral,
 	border,
+	from,
 	headline,
+	neutral,
+	space,
+	until,
 } from '@guardian/source-foundations';
 import { SvgChevronDownSingle } from '@guardian/source-react-components';
-
+import { useCallback, useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 
 const liStyles = css`
@@ -182,7 +180,7 @@ export const InteractiveContentsBlockComponent = ({
 			const getSubheadingIndexById = (id: string): number =>
 				enhancedSubheadings.findIndex((item) => item.ref?.id === id);
 
-			const onObserve = (entries: Array<IntersectionObserverEntry>) => {
+			const onObserve = (entries: IntersectionObserverEntry[]) => {
 				// Check if we've reached the end of the document
 				const endElement = endDocumentElementId
 					? entries.find(

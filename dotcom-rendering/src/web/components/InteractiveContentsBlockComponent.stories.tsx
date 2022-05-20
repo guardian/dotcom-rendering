@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
-
 import { NumberedList } from '../../../fixtures/generated/articles/NumberedList';
 import { enhanceInteractiveContentsElements } from '../../model/enhance-interactive-contents-elements';
-
 import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent';
 
-// @ts-ignore: we know that NumberedList fixture has an interactive content block
+// @ts-expect-error: we know that NumberedList fixture has an interactive content block
 const interactiveContentsBlock: InteractiveContentsBlockElement =
 	enhanceInteractiveContentsElements(NumberedList.blocks)[0].elements.find(
 		(block) =>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
+import type {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
 } from '../components/SignInGate/types';
@@ -49,7 +49,7 @@ export const useSignInGateWillShow = ({
 		if (gateVariant && currentTest) {
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			gateVariant
-				?.canShow({
+				.canShow({
 					isSignedIn: !!isSignedIn,
 					currentTest,
 					contentType,

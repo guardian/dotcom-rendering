@@ -1,34 +1,33 @@
-import { useState } from 'react';
 import { css } from '@emotion/react';
-
 import { getCookie } from '@guardian/libs';
 import {
 	getBanner,
 	getPuzzlesBanner,
 } from '@guardian/support-dotcom-components';
-import {
+import type {
+	BannerPayload,
 	ModuleData,
 	ModuleDataResponse,
-	BannerPayload,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useIsInView } from '../../lib/useIsInView';
+import { useState } from 'react';
+import type { ArticleCounts } from '../../../lib/article-count';
+import { trackNonClickInteraction } from '../../browser/ga/ga';
+import { submitComponentEvent } from '../../browser/ophan/ophan';
 import {
-	shouldHideSupportMessaging,
-	withinLocalNoBannerCachePeriod,
-	setLocalNoBannerCachePeriod,
-	MODULES_VERSION,
+	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
 	lazyFetchEmailWithTimeout,
-	hasCmpConsentForBrowserId,
+	MODULES_VERSION,
+	setLocalNoBannerCachePeriod,
+	shouldHideSupportMessaging,
+	withinLocalNoBannerCachePeriod,
 } from '../../lib/contributions';
-import { submitComponentEvent } from '../../browser/ophan/ophan';
-import { getZIndex } from '../../lib/getZIndex';
-import { trackNonClickInteraction } from '../../browser/ga/ga';
-import { CanShowResult } from '../../lib/messagePicker';
-import { setAutomat } from '../../lib/setAutomat';
-import { useOnce } from '../../lib/useOnce';
-import { ArticleCounts } from '../../../lib/article-count';
 import { getToday } from '../../lib/dailyArticleCount';
+import { getZIndex } from '../../lib/getZIndex';
+import type { CanShowResult } from '../../lib/messagePicker';
+import { setAutomat } from '../../lib/setAutomat';
+import { useIsInView } from '../../lib/useIsInView';
+import { useOnce } from '../../lib/useOnce';
 
 type BaseProps = {
 	isSignedIn: boolean;
@@ -75,7 +74,7 @@ const getArticleCountToday = (
 	const latest = articleCounts?.dailyArticleHistory[0];
 	if (latest) {
 		if (latest.day === getToday()) {
-			return articleCounts?.dailyArticleHistory[0].count;
+			return articleCounts.dailyArticleHistory[0].count;
 		}
 		// article counting is enabled, but none so far today
 		return 0;
@@ -316,7 +315,7 @@ const RemoteBanner = ({
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${error}`;
-				// eslint-disable-next-line no-console
+
 				console.log(msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
@@ -344,14 +343,13 @@ const RemoteBanner = ({
 					${getZIndex('banner')}
 				`}
 			>
-				{/* eslint-disable react/jsx-props-no-spreading */}
+				{}
 				<Banner
 					{...module.props}
-					// @ts-ignore
+					// @ts-expect-error
 					submitComponentEvent={submitComponentEvent}
 					fetchEmail={fetchEmail}
 				/>
-				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
 		);
 	}

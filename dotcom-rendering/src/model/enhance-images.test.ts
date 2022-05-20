@@ -1,8 +1,7 @@
 import { ArticlePillar } from '@guardian/libs';
-import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
 import { Article } from '../../fixtures/generated/articles/Article';
+import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
 import { images } from '../../fixtures/generated/images';
-
 import { enhanceImages } from './enhance-images';
 
 const image = {
@@ -526,17 +525,15 @@ describe('Enhance Images', () => {
 
 		// Need to ignore TS to check test works for other element types
 		it('will pass through other element types', () => {
-			// @ts-ignore
 			const input: Block[] = [
 				{
 					...metaData,
 					elements: [
 						{
-							// @ts-ignore
+							// @ts-expect-error
 							_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
-							// @ts-ignore
 							pillar: ArticlePillar.News,
 							role: 'inline',
 						},

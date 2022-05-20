@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { cricketScore, CricketInnings } from './CricketScoreboard';
+import { CricketInnings, cricketScore } from './CricketScoreboard';
 
 const defaultInnings: CricketInnings = {
 	order: 0,
