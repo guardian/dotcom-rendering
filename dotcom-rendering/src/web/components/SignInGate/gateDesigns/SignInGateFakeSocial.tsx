@@ -1,17 +1,16 @@
 import { css } from '@emotion/react';
-
-import { LinkButton, Link, Button } from '@guardian/source-react-components';
 import { cmp } from '@guardian/consent-management-platform';
 import {
+	from,
 	headline,
-	textSans,
 	line,
 	space,
-	from,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { Button, Link, LinkButton } from '@guardian/source-react-components';
 import { trackLink } from '../componentEventTracking';
-import { SignInGateProps } from '../types';
+import type { SignInGateProps } from '../types';
 import {
 	actionButtons,
 	bodyBold,

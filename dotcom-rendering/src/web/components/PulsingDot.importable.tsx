@@ -1,5 +1,4 @@
 import { css, keyframes } from '@emotion/react';
-
 import { storage } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 
@@ -42,7 +41,7 @@ export const PulsingDot = ({ colour }: Props) => {
 	useEffect(() => {
 		// Respect the accessibility flag set here
 		// https://www.theguardian.com/help/accessibility-help
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
 		const flashingPreference = storage.local.get(
 			'gu.prefs.accessibility.flashing-elements',
 		);

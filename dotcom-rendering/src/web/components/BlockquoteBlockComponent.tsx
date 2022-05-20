@@ -1,10 +1,9 @@
 import { ClassNames } from '@emotion/react';
-
 import { body } from '@guardian/source-foundations';
 import { renderToString } from 'react-dom/server';
 import { unwrapHtml } from '../../model/unwrapHtml';
-import { RewrappedComponent } from './RewrappedComponent';
 import { QuoteIcon } from './QuoteIcon';
+import { RewrappedComponent } from './RewrappedComponent';
 
 type Props = {
 	html: string;

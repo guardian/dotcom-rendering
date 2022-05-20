@@ -1,14 +1,12 @@
 import {
-	ArticleDisplay,
 	ArticleDesign,
+	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-
 import { decidePalette } from '../lib/decidePalette';
-import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
-
 import { ContainerLayout } from './ContainerLayout';
+import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
 
 export default {
 	component: PullQuoteBlockComponent,
@@ -27,7 +25,6 @@ export const SportInline = () => {
 					theme: ArticlePillar.Sport,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -49,7 +46,6 @@ export const LabsInline = () => {
 					theme: ArticleSpecial.Labs,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -71,7 +67,6 @@ export const LifestyleInline = () => {
 					theme: ArticlePillar.Lifestyle,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -93,7 +88,6 @@ export const CultureInline = () => {
 					theme: ArticlePillar.Culture,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -115,7 +109,6 @@ export const NewsInline = () => {
 					theme: ArticlePillar.News,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -137,7 +130,6 @@ export const OpinionInline = () => {
 					theme: ArticlePillar.Opinion,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -159,7 +151,6 @@ export const SpecialReportInline = () => {
 					theme: ArticleSpecial.SpecialReport,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -182,7 +173,6 @@ export const SportSupporting = () => {
 					theme: ArticlePillar.Sport,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -204,7 +194,6 @@ export const LabsSupporting = () => {
 					theme: ArticleSpecial.Labs,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -226,7 +215,6 @@ export const LifestyleSupporting = () => {
 					theme: ArticlePillar.Lifestyle,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -248,7 +236,6 @@ export const CultureSupporting = () => {
 					theme: ArticlePillar.Culture,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -270,7 +257,6 @@ export const NewsSupporting = () => {
 					theme: ArticlePillar.News,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -292,7 +278,6 @@ export const OpinionSupporting = () => {
 					theme: ArticlePillar.Opinion,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -314,7 +299,6 @@ export const SpecialReportSupporting = () => {
 					theme: ArticleSpecial.SpecialReport,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -337,7 +321,6 @@ export const PhotoEssayInline = () => {
 					theme: ArticlePillar.News,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
@@ -359,7 +342,6 @@ export const PhotoEssaySupporting = () => {
 					theme: ArticlePillar.News,
 				})}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>

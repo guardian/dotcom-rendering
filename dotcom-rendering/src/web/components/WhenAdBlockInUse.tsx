@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 
 type Props = {

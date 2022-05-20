@@ -1,10 +1,9 @@
-import {
-	GetParametersByPathCommand,
-	SSMClient,
+import type {
 	GetParametersByPathCommandOutput,
-	Parameter,
 	GetParametersByPathRequest,
+	Parameter,
 } from '@aws-sdk/client-ssm';
+import { GetParametersByPathCommand, SSMClient } from '@aws-sdk/client-ssm';
 
 process.env.AWS_PROFILE = 'frontend';
 const ssm = new SSMClient({ region: 'eu-west-1' });

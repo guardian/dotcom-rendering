@@ -1,20 +1,18 @@
 import { css } from '@emotion/react';
-
+import { ArticleDisplay } from '@guardian/libs';
 import {
 	brand,
-	brandText,
 	brandAlt,
 	brandBackground,
-	textSans,
+	brandText,
 	from,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-
-import { ArticleDisplay } from '@guardian/libs';
 import { clearFix } from '../../lib/mixins';
-import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';
+import { firstPillarWidth, Pillars, pillarWidth } from './Pillars';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 // CSS vars

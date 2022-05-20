@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
 
 export default {

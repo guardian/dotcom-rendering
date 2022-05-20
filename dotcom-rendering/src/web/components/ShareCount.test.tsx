@@ -1,6 +1,5 @@
-import { render } from '@testing-library/react';
-
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
 import { ShareCount } from './ShareCount.importable';
 

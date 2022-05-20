@@ -1,18 +1,16 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
-import { neutral, headline } from '@guardian/source-foundations';
-
-import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
-import { ArticleModel } from '../../types/ArticleModel';
-import { MainMedia } from '../MainMedia';
-import { Byline } from './Byline';
-import { TopMetaExtras } from './TopMetaExtras';
-import { Standfirst } from './Standfirst';
-import { SeriesLink } from './SeriesLink';
-import { getSharingUrls } from '../../../lib/sharing-urls';
+import { headline, neutral } from '@guardian/source-foundations';
+import React from 'react';
 import { getAgeWarning } from '../../../lib/age-warning';
+import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
+import { getSharingUrls } from '../../../lib/sharing-urls';
+import type { ArticleModel } from '../../types/ArticleModel';
+import { MainMedia } from '../MainMedia';
 import { Branding, BrandingRegionContainer } from './Branding';
+import { Byline } from './Byline';
+import { SeriesLink } from './SeriesLink';
+import { Standfirst } from './Standfirst';
+import { TopMetaExtras } from './TopMetaExtras';
 
 const headerStyle = css`
 	${headline.small()};

@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
-
 import { brand, from } from '@guardian/source-foundations';
-import { Dropdown } from './Dropdown';
 import { getZIndex } from '../lib/getZIndex';
+import { Dropdown } from './Dropdown';
 
 const editionDropdown = css`
 	display: flex;

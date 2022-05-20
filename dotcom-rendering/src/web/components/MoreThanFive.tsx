@@ -1,10 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-
 import { Card } from './Card/Card';
-import { UL } from './Card/components/UL';
 import { LI } from './Card/components/LI';
+import { UL } from './Card/components/UL';
 
 type Props = {
 	content: TrailType[];

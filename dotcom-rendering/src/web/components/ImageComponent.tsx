@@ -1,20 +1,18 @@
 import { css } from '@emotion/react';
-
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
-	until,
-	from,
 	between,
-	headline,
 	brandAltBackground,
+	from,
+	headline,
 	neutral,
+	until,
 } from '@guardian/source-foundations';
-
-import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
-import { Picture } from './Picture';
+import { decidePalette } from '../lib/decidePalette';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
+import { Picture } from './Picture';
 import { StarRating } from './StarRating/StarRating';
-import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	element: ImageBlockElement;
@@ -173,7 +171,7 @@ const Row = ({ children }: { children: React.ReactNode }) => (
 
 const CaptionToggle = () => (
 	<>
-		{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+		{}
 		<label
 			htmlFor="the-checkbox"
 			css={css`

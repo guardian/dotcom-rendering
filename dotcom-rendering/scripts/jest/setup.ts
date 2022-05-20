@@ -1,7 +1,7 @@
 // add some helpful assertions
 import 'jest-dom/extend-expect';
 
-import { WindowGuardianConfig } from '../../src/model/window-guardian';
+import type { WindowGuardianConfig } from '../../src/model/window-guardian';
 
 const windowGuardianConfig = {
 	page: {
@@ -31,7 +31,7 @@ const windowGuardian = {
 	modules: {
 		sentry: {
 			reportError: (error: Error): void => {
-				// eslint-disable-next-line no-console
+				 
 				console.log(
 					`Error: attempting to log error without having registered sentry.\nError is: ${error.message}`,
 				);
@@ -61,12 +61,12 @@ const windowGuardian = {
 // Stub global Guardian object
 // We should never be able to directly set things to the global window object.
 // But in this case we want to stub things for testing, so it's ok to ignore this rule
-// @ts-ignore
+// @ts-expect-error
 window.guardian = windowGuardian;
 
 // Mock Local Storage
 // See: https://github.com/facebook/jest/issues/2098#issuecomment-260733457
-// eslint-disable-next-line func-names
+ 
 const localStorageMock = (function () {
 	let store: {
 		[key: string]: string;

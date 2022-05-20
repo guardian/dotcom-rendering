@@ -1,14 +1,14 @@
-import { useRef, useState } from 'react';
 import { css } from '@emotion/react';
-import { body, textSans, space } from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
+import { body, space, textSans } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
-import { Placeholder } from './Placeholder';
-import { Caption } from './Caption';
-import { useOnce } from '../lib/useOnce';
+import { useRef, useState } from 'react';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { useOnce } from '../lib/useOnce';
+import { Caption } from './Caption';
 import { defaultRoleStyles } from './Figure';
+import { Placeholder } from './Placeholder';
 
 type Props = {
 	url?: string;
@@ -137,7 +137,7 @@ const setupWindowListeners = (iframe: HTMLIFrameElement) => {
 			try {
 				message = JSON.parse(event.data);
 			} catch (e) {
-				window?.guardian?.modules?.sentry?.reportError(
+				window.guardian.modules.sentry.reportError(
 					// @ts-expect-error
 					e,
 					'Json parse Failed on in interactiveBlockComponent',

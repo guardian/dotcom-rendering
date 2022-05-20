@@ -1,7 +1,7 @@
+import type { PutMetricDataInput } from '@aws-sdk/client-cloudwatch';
 import {
 	CloudWatchClient,
 	PutMetricDataCommand,
-	PutMetricDataInput,
 } from '@aws-sdk/client-cloudwatch';
 
 interface Metric {

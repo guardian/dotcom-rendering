@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import { Placeholder } from './Placeholder';
 
 const Container = ({ children }: { children: React.ReactNode }) => (

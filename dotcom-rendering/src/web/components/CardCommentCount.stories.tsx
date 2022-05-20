@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-
-import { ArticleDesign, ArticlePillar, ArticleDisplay } from '@guardian/libs';
-
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { CardCommentCount } from './CardCommentCount';
 
 export default {

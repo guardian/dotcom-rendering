@@ -1,8 +1,8 @@
 import validator from 'amphtml-validator';
 import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
-import { Article } from '../pages/Article';
 import { extractNAV } from '../../model/extract-nav';
-import { AnalyticsModel } from '../components/Analytics';
+import type { AnalyticsModel } from '../components/Analytics';
+import { Article } from '../pages/Article';
 import { document } from './document';
 
 test('rejects invalid AMP doc (to test validator)', async () => {
@@ -76,7 +76,6 @@ test('produces valid AMP doc', async () => {
 	);
 
 	if (result.errors.length > 0) {
-		// eslint-disable-next-line no-console
 		console.log(result.errors);
 	}
 	expect(result.errors.length).toBe(0);

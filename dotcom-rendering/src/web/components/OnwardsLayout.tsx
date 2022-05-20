@@ -1,16 +1,14 @@
 import { ArticleDesign } from '@guardian/libs';
-import { Flex } from './Flex';
-import { LeftColumn } from './LeftColumn';
-import { Hide } from './Hide';
-
-import { useComments } from '../lib/useComments';
 import { formatAttrString } from '../lib/formatAttrString';
-
+import { useComments } from '../lib/useComments';
 import { ContainerTitle } from './ContainerTitle';
-import { OnwardsContainer } from './OnwardsContainer';
-import { MoreThanFive } from './MoreThanFive';
 import { ExactlyFive } from './ExactlyFive';
+import { Flex } from './Flex';
 import { FourOrLess } from './FourOrLess';
+import { Hide } from './Hide';
+import { LeftColumn } from './LeftColumn';
+import { MoreThanFive } from './MoreThanFive';
+import { OnwardsContainer } from './OnwardsContainer';
 import { Spotlight } from './Spotlight';
 
 const decideLayout = (trails: TrailType[]) => {

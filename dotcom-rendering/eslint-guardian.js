@@ -19,12 +19,15 @@ const guardianRules = {
 	'@typescript-eslint/array-type': [
 		OFF,
 		{
-			default: 'array-simple',
+			default: 'array',
 		},
 	],
 
 	// use `Record<string, unknown>` instead of `{ [key: string]: unknown }`
-	'@typescript-eslint/consistent-indexed-object-style': [OFF, 'index-signature'],
+	'@typescript-eslint/consistent-indexed-object-style': [
+		OFF,
+		'index-signature',
+	],
 
 	// be explicit when you only want to import a type:
 	// `import type { Foo } from 'Foo';`

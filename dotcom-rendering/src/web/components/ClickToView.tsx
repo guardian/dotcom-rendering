@@ -1,14 +1,12 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import { useState } from 'react';
 import { css } from '@emotion/react';
-
 import {
-	border,
 	background,
-	textSans,
+	border,
 	space,
+	textSans,
 } from '@guardian/source-foundations';
 import { Button, SvgCheckmark } from '@guardian/source-react-components';
+import { useState } from 'react';
 
 type Props = {
 	children: React.ReactNode;

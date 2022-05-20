@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
-
 import {
-	breakpoints,
 	brandAltBackground,
 	brandBackground,
 	brandBorder,
+	breakpoints,
 } from '@guardian/source-foundations';
-
 import { ContainerLayout } from './ContainerLayout';
 
 export default {

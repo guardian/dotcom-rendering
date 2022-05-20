@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-
-import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 import { getZIndex } from '../../../lib/getZIndex';
@@ -105,7 +105,6 @@ export const CardLink = ({
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
-		// eslint-disable-next-line -- we’ve got an empty link floating. See: https://github.com/guardian/dotcom-rendering/pull/4798
 		<a
 			href={linkTo}
 			css={[fauxLinkStyles, linkStyles(format, palette)]}

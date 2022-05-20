@@ -1,18 +1,18 @@
-import { StrictMode } from 'react';
-import { Global, css } from '@emotion/react';
-import { focusHalo, brandAlt, neutral } from '@guardian/source-foundations';
+import { css, Global } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
+import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
+import { StrictMode } from 'react';
 import { filterABTestSwitches } from '../../model/enhance-switches';
-import { SkipTo } from './SkipTo';
 import { DecideLayout } from '../layouts/DecideLayout';
-import { CommercialMetrics } from './CommercialMetrics.importable';
-import { Island } from './Island';
-import { FocusStyles } from './FocusStyles.importable';
-import { BrazeMessaging } from './BrazeMessaging.importable';
-import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { AlreadyVisited } from './AlreadyVisited.importable';
+import { BrazeMessaging } from './BrazeMessaging.importable';
+import { CommercialMetrics } from './CommercialMetrics.importable';
 import { CoreVitals } from './CoreVitals.importable';
+import { FocusStyles } from './FocusStyles.importable';
+import { Island } from './Island';
+import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
 import { SetABTests } from './SetABTests.importable';
+import { SkipTo } from './SkipTo';
 
 type Props = {
 	CAPIArticle: CAPIArticleType;

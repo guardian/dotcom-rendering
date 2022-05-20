@@ -1,17 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
-
+import type { CommonEndOfArticleComponentProps } from '@guardian/braze-components/end-of-article';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
-
-import type { CommonEndOfArticleComponentProps } from '@guardian/braze-components/end-of-article';
-import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
-import { CanShowResult } from '../../lib/messagePicker';
-import { useOnce } from '../../lib/useOnce';
-import { useIsInView } from '../../lib/useIsInView';
+import { useEffect, useRef, useState } from 'react';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
+import { getBrazeMetaFromUrlFragment } from '../../lib/braze/forceBrazeMessage';
+import type { CanShowResult } from '../../lib/messagePicker';
+import { useIsInView } from '../../lib/useIsInView';
+import { useOnce } from '../../lib/useOnce';
 
 const wrapperMargins = css`
 	margin: 18px 0;
