@@ -17,7 +17,7 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 		flex-direction: column;
 		justify-content: space-between;
 		width: 100%;
-		/* We absolutely position both the 1 pixel top bar below and the faux link
+		/* We absolutely position the faux link
 		so this is required here */
 		position: relative;
 
