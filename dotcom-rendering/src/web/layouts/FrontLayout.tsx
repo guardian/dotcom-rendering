@@ -130,6 +130,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					return (
 						<ContainerLayout
+							key={index}
 							title={collection.displayName}
 							// TODO: This logic should be updated, as this relies
 							// on the first container being 'palette styles do not delete'

@@ -33,7 +33,7 @@ export const AudioAtomWrapper = ({
 	// *****************
 	const [shouldUseAcast, setShouldUseAcast] = useState<boolean>(false);
 	useEffect(() => {
-		onConsentChange((state: any) => {
+		onConsentChange((state) => {
 			// Should we use ad enabled audio? If so, then set the shouldUseAcast
 			// state to true, triggering a rerender of AudioAtom using a new track url
 			// (one with adverts)
