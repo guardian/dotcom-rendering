@@ -1,34 +1,33 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import type { Item } from 'item';
+import { getFormat, Item } from 'item';
 import AnalysisHeadline from './AnalysisHeadline';
 import BlogHeadline from './BlogHeadline';
 import CommentHeadline from './CommentHeadline';
 import FeatureHeadline from './FeatureHeadline';
-import {
-	DefaultHeadline,
-	defaultStyles,
-	fontSizeRestriction,
-} from './Headline.defaults';
+import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 import ImmersiveHeadline from './ImmersiveHeadline';
 import InterviewHeadline from './InterviewHeadline';
 import LabsHeadline from './LabsHeadline';
 import MediaHeadline from './MediaHeadline';
+import ReviewHeadline from './ReviewHeadline';
 
 interface Props {
 	item: Item;
 }
 
 const Headline: React.FC<Props> = ({ item }) => {
-	if (item.display === ArticleDisplay.Immersive) {
+	const format = getFormat(item);
+
+	if (format.display === ArticleDisplay.Immersive) {
 		return <ImmersiveHeadline item={item} />;
 	}
 
-	if (item.theme === ArticleSpecial.Labs) {
+	if (format.theme === ArticleSpecial.Labs) {
 		return <LabsHeadline item={item} />;
 	}
 
-	switch (item.design) {
+	switch (format.design) {
 		case ArticleDesign.Analysis:
 			return <AnalysisHeadline item={item} />;
 		case ArticleDesign.Feature:
@@ -37,18 +36,22 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return <CommentHeadline item={item} />;
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return <MediaHeadline item={item} />;
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return <BlogHeadline item={item} />;
 		case ArticleDesign.Interview:
 			return <InterviewHeadline item={item} />;
+		case ArticleDesign.Review:
+			return <ReviewHeadline item={item} />;
 		default:
 			return (
 				<DefaultHeadline
 					item={item}
-					styles={css(defaultStyles(item), fontSizeRestriction)}
+					styles={css(defaultStyles(item))}
 				/>
 			);
 	}

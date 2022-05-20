@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, remSpace } from '@guardian/source-foundations';
+import { from, headline, remSpace } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import {
 	DefaultHeadline,
@@ -8,8 +8,12 @@ import {
 } from './Headline.defaults';
 
 const commentStyles = css`
-	${headline.medium({ fontWeight: 'light' })}
+	${headline.small({ fontWeight: 'light' })}
 	padding-bottom: ${remSpace[1]};
+
+	${from.tablet} {
+		${headline.medium({ fontWeight: 'light' })}
+	}
 `;
 
 interface Props {

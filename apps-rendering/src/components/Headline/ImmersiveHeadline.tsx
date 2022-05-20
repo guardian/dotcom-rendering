@@ -7,12 +7,12 @@ import {
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
-import type { Item } from 'item';
+import { getFormat, Item } from 'item';
 import { wideContentWidth } from 'styles';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
 const immersiveStyles = css`
-	${headline.medium({ fontWeight: 'bold' })}
+	${headline.small({ fontWeight: 'bold' })}
 	font-weight: 700;
 	padding: ${remSpace[1]} ${remSpace[3]} ${remSpace[6]} ${remSpace[3]};
 	margin: calc(80vh - 5rem) 0 0;
@@ -55,15 +55,19 @@ interface Props {
 	item: Item;
 }
 
-const ImmersiveHeadline: React.FC<Props> = ({ item }) => (
-	<DefaultHeadline
-		item={item}
-		styles={css(
-			defaultStyles(item),
-			immersiveStyles,
-			item.theme === ArticleSpecial.Labs ? immersiveLabs : null,
-		)}
-	/>
-);
+const ImmersiveHeadline: React.FC<Props> = ({ item }) => {
+	const format = getFormat(item);
+
+	return (
+		<DefaultHeadline
+			item={item}
+			styles={css(
+				defaultStyles(item),
+				immersiveStyles,
+				format.theme === ArticleSpecial.Labs ? immersiveLabs : null,
+			)}
+		/>
+	);
+};
 
 export default ImmersiveHeadline;

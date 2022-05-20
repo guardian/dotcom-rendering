@@ -1,11 +1,7 @@
 import { css } from '@emotion/react';
 import { remSpace } from '@guardian/source-foundations';
 import type { Item } from 'item';
-import {
-	DefaultHeadline,
-	defaultStyles,
-	fontSizeRestriction,
-} from './Headline.defaults';
+import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
 const liveblogStyles = css`
 	padding: 0 0 ${remSpace[5]};
@@ -18,7 +14,7 @@ interface Props {
 const BlogHeadline: React.FC<Props> = ({ item }) => (
 	<DefaultHeadline
 		item={item}
-		styles={css(defaultStyles(item), fontSizeRestriction, liveblogStyles)}
+		styles={css(defaultStyles(item), liveblogStyles)}
 	/>
 );
 

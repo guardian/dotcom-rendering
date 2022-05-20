@@ -6,8 +6,8 @@ import {
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
-import HeadlineByline from 'components/headlineByline';
-import HeadlineTag from 'components/headlineTag';
+import HeadlineByline from 'components/HeadlineByline';
+import HeadlineTag from 'components/HeadlineTag';
 import { headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import { getFormat } from 'item';

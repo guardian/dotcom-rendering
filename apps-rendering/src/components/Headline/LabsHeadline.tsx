@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { from, textSans } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import {
 	DefaultHeadline,
@@ -9,6 +9,9 @@ import {
 
 const labsStyles = css`
 	${textSans.xxxlarge({ lineHeight: 'regular' })}
+	${from.desktop} {
+		${textSans.xxxlarge({ lineHeight: 'regular' })}
+	}
 `;
 
 interface Props {
