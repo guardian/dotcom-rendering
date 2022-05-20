@@ -96,7 +96,7 @@ const decideIfAgeShouldShow = ({
 	containerDisplayName?: string;
 }): boolean => {
 	// Palettes are time sensitive so show age if one is being used
-	if (!!containerPalette) return true;
+	if (containerPalette) return true;
 	// Liveblogs are evidently time sensitive
 	if (format.design === ArticleDesign.LiveBlog) return true;
 	// The articles in headlines and sport are typically very recent
