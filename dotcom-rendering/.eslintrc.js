@@ -6,7 +6,6 @@ const rulesToReview = {
 	'consistent-return': 'warn', // 51 problems
 	'default-case': 'warn', // 50 problems
 	'react/no-danger': 'warn', // 48 problems
-	'no-underscore-dangle': 'warn', // 45 problems
 	'react/no-array-index-key': 'warn', // 34 problems
 	'react/button-has-type': 'warn', // 23 problems
 	'@typescript-eslint/require-await': 'warn', // 22 problems
@@ -72,6 +71,7 @@ module.exports = {
 		'react/jsx-no-target-blank': 'error',
 		'react/jsx-one-expression-per-line': 'off',
 		'no-useless-escape': 'error',
+		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
 
 		...rulesToReview,
 		...rulesToRemove,
