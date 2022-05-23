@@ -118,16 +118,15 @@ const adStyles = css`
 			margin-right: -398px;
 		}
 	}
+	/* Unlike other inlines do not float right inline1 */
 	.ad-slot--inline1 {
 		margin: 12px auto;
 		text-align: center;
-		/* Unlike other inlines do not float right inline1 */
-		/* Prevent merger with any nearby float left elements e.g. rich-links */
 		${until.tablet} {
+			/* Prevent merger with any nearby float left elements e.g. rich-links */
 			clear: left;
 			width: 300px;
 		}
-		/* Reserve full width with a background colour */
 		${from.tablet} {
 			background-color: ${neutral[97]};
 		}
