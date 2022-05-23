@@ -30,8 +30,6 @@ export const CoreVitals = () => {
 
 	const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
 		/* linter, please keep this array multi-line */
-		'inline1ContainerSizingVariant',
-		'inline1ContainerSizingControl',
 	];
 
 	const userInServerSideTestToForceMetrics =
