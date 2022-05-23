@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { space } from '@guardian/source-foundations';
 import {
 	Button,
 	buttonThemeBrandAlt,
@@ -7,7 +8,6 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
-import { space } from '@guardian/source-foundations';
 import { KeyEventCard } from './KeyEventCard';
 
 interface Props {
@@ -99,6 +99,7 @@ export const KeyEventsCarousel = ({
 							url={keyEvent.url}
 							date={keyEvent.date}
 							format={format}
+							isSummary={false}
 						/>
 					);
 				})}
