@@ -182,9 +182,17 @@ try {
 		} Lighthouse report comment`,
 	);
 	console.log('See:', data.html_url);
-} catch (error) {
-	if (error instanceof Error) throw error;
+} catch (error: unknown) {
+	if (!(error instanceof Error)) {
+		console.error('Unknown error:', String(error));
+		Deno.exit(1);
+	}
 
-	console.error('there was an error:', error.message);
-	Deno.exit(1);
+	// Dependabot integration does not have the permission to update comments
+	if (error.message === 'Resource not accessible by integration') {
+		console.warn('Failed to update the comment', error);
+		Deno.exit();
+	}
+
+	throw error;
 }
