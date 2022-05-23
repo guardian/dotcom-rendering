@@ -5,7 +5,6 @@ import { from, neutral, space, until } from '@guardian/source-foundations';
 import { labelStyles, carrotAdStyles } from './AdSlot';
 
 type Props = {
-	abTests?: ServerSideTests;
 	format: ArticleFormat;
 	children: React.ReactNode;
 };
