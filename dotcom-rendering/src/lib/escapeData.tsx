@@ -2,7 +2,7 @@
  * Create an escapedData string that can be safely placed inside script tags on the page
  *
  * The level of sanitisation here is limited to escaping script tags to prevent
- * errors when embedded html string contgain their own script tags.
+ * errors when embedded html string contain their own script tags.
  *
  * See: https://www.w3.org/TR/html52/semantics-scripting.html#restrictions-for-contents-of-script-elements
  *
