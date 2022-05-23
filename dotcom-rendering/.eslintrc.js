@@ -58,27 +58,7 @@ module.exports = {
 		'jsx-a11y',
 	],
 	rules: {
-		'dcr/only-import-below': [
-			'warn',
-			{
-				allowedImports: [
-					'react',
-					'@emotion/react',
-					'jsdom',
-					'curlyquotes',
-					'react-dom',
-					'./src/lib',
-					'./src/amp/lib',
-					'./src/amp/types',
-					'./src/static/icons',
-					'./src/model',
-					'./src/web',
-					'@testing-library',
-					'@guardian/frontend/static/',
-				],
-			},
-		],
-
+    
 		// React & Hooks
 		'react/jsx-indent': [2, 'tab'],
 		'react/jsx-indent-props': [2, 'tab'],
