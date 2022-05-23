@@ -1,6 +1,5 @@
 import { ClassNames } from '@emotion/react';
-
-import { body, background } from '@guardian/source-foundations';
+import { background, body } from '@guardian/source-foundations';
 import { unwrapHtml } from '../../model/unwrapHtml';
 import { RewrappedComponent } from './RewrappedComponent';
 

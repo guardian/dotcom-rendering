@@ -1,17 +1,16 @@
 import { css } from '@emotion/react';
-import { neutral, headline, textSans } from '@guardian/source-foundations';
-
+import { headline, neutral, textSans } from '@guardian/source-foundations';
+import Camera from '../../static/icons/camera.svg';
+import Clock from '../../static/icons/clock.svg';
+import Quote from '../../static/icons/quote.svg';
+import VideoIcon from '../../static/icons/video-icon.svg';
+import VolumeHigh from '../../static/icons/volume-high.svg';
 import {
 	MoustacheSection,
-	MoustacheVariable,
 	MoustacheTemplate,
 	moustacheVariable,
+	MoustacheVariable,
 } from './moustache';
-import VideoIcon from '../../static/icons/video-icon.svg';
-import Camera from '../../static/icons/camera.svg';
-import VolumeHigh from '../../static/icons/volume-high.svg';
-import Quote from '../../static/icons/quote.svg';
-import Clock from '../../static/icons/clock.svg';
 import { ShowMoreButton } from './ShowMoreButton';
 
 const inner = css`

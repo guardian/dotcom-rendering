@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
-
 import {
-	ArticleDisplay,
 	ArticleDesign,
+	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
 import { decidePalette } from '../lib/decidePalette';
+import { BlockquoteBlockComponent } from './BlockquoteBlockComponent';
 
 const shortQuoteHtml =
 	'<blockquote class="quoted"> \n <p>We’ve now got evidence</blockquote>';

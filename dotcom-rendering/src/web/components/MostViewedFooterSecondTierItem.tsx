@@ -1,17 +1,15 @@
 import { css } from '@emotion/react';
-
 import {
 	border,
+	from,
+	headline,
 	neutral,
 	text,
-	headline,
-	from,
 } from '@guardian/source-foundations';
-
 import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';
-import { LinkHeadline } from './LinkHeadline';
 import { Flex } from './Flex';
+import { LinkHeadline } from './LinkHeadline';
 
 const itemStyles = (showRightBorder?: boolean) => css`
 	position: relative;

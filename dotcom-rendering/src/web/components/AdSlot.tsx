@@ -1,18 +1,17 @@
 import { css } from '@emotion/react';
-
+import { adSizes, sizeMappings } from '@guardian/commercial-core';
+import { ArticleDisplay } from '@guardian/libs';
 import {
 	border,
+	from,
 	neutral,
+	space,
 	text,
 	textSans,
-	from,
 	until,
-	space,
 } from '@guardian/source-foundations';
-import { ArticleDisplay } from '@guardian/libs';
-import { adSizes, sizeMappings } from '@guardian/commercial-core';
-import { TopRightAdSlot } from './TopRightAdSlot.importable';
 import { Island } from './Island';
+import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
 type Props = {
 	display: ArticleDisplay;

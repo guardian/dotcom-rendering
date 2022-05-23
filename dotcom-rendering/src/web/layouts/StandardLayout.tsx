@@ -1,66 +1,64 @@
 import { css } from '@emotion/react';
-
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
-	neutral,
+	border,
 	brandAltBackground,
 	brandBackground,
 	brandBorder,
 	brandLine,
-	labs,
-	border,
 	from,
+	labs,
+	neutral,
 	until,
 } from '@guardian/source-foundations';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
-
 import {
 	Lines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { StarRating } from '../components/StarRating/StarRating';
-import { ArticleBody } from '../components/ArticleBody';
-import { RightColumn } from '../components/RightColumn';
-import { ArticleTitle } from '../components/ArticleTitle';
-import { ArticleContainer } from '../components/ArticleContainer';
-import { ArticleMeta } from '../components/ArticleMeta';
-import { SubMeta } from '../components/SubMeta';
-import { MainMedia } from '../components/MainMedia';
-import { ArticleHeadline } from '../components/ArticleHeadline';
-import { Standfirst } from '../components/Standfirst';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import { SubNav } from '../components/SubNav.importable';
-import { ElementContainer } from '../components/ElementContainer';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
-import { Border } from '../components/Border';
-import { GridItem } from '../components/GridItem';
-import { DiscussionLayout } from '../components/DiscussionLayout';
-import { Nav } from '../components/Nav/Nav';
 import { LabsHeader } from '../components/LabsHeader.importable';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
+import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
+import { ArticleBody } from '../components/ArticleBody';
+import { ArticleContainer } from '../components/ArticleContainer';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { Border } from '../components/Border';
+import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ElementContainer } from '../components/ElementContainer';
+import { Footer } from '../components/Footer';
+import { GetMatchNav } from '../components/GetMatchNav.importable';
+import { GetMatchStats } from '../components/GetMatchStats.importable';
+import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { GridItem } from '../components/GridItem';
+import { Header } from '../components/Header';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
+import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
+import { Nav } from '../components/Nav/Nav';
+import { OnwardsLower } from '../components/OnwardsLower.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { RightColumn } from '../components/RightColumn';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
+import { Standfirst } from '../components/Standfirst';
+import { StarRating } from '../components/StarRating/StarRating';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { SubMeta } from '../components/SubMeta';
+import { SubNav } from '../components/SubNav.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 import {
 	decideLineCount,
 	decideLineEffect,
 	getCurrentPillar,
 } from '../lib/layoutHelpers';
-import { Stuck, BannerWrapper } from './lib/stickiness';
-import { Island } from '../components/Island';
-import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
-import { GetMatchStats } from '../components/GetMatchStats.importable';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { GetMatchNav } from '../components/GetMatchNav.importable';
-import { GetMatchTabs } from '../components/GetMatchTabs.importable';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const StandardGrid = ({
 	children,

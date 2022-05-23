@@ -1,13 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
 import { css } from '@emotion/react';
-
 import {
-	text,
-	news,
-	neutral,
-	textSans,
 	from,
+	neutral,
+	news,
+	text,
+	textSans,
 } from '@guardian/source-foundations';
+import { useEffect, useRef, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {

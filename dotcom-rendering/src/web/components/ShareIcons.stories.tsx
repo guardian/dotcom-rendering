@@ -1,5 +1,4 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
 import { ShareIcons } from './ShareIcons';
 
 export default {

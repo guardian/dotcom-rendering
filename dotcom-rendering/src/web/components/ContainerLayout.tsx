@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
-
-import { space, from } from '@guardian/source-foundations';
-import { ArticleFormat, ArticleDesign } from '@guardian/libs';
-import { ElementContainer } from './ElementContainer';
-import { LeftColumn } from './LeftColumn';
-import { ContainerTitle } from './ContainerTitle';
-import { Hide } from './Hide';
-import { Flex } from './Flex';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
+import { from, space } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { ContainerTitle } from './ContainerTitle';
+import { ElementContainer } from './ElementContainer';
+import { Flex } from './Flex';
+import { Hide } from './Hide';
+import { LeftColumn } from './LeftColumn';
 
 type Props = {
 	title?: string;

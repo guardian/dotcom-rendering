@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
-
 import { breakpoints } from '@guardian/source-foundations';
 
 /*

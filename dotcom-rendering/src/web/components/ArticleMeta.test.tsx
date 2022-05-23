@@ -1,9 +1,7 @@
-import { render } from '@testing-library/react';
-
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
-import { ArticleMeta } from './ArticleMeta';
+import { render } from '@testing-library/react';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { ArticleMeta } from './ArticleMeta';
 
 describe('ArticleMeta', () => {
 	it('It should contain legacy class names to support customised styling in interactives', () => {

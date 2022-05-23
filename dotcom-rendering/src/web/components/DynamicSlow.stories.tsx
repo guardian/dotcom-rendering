@@ -1,8 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { trails } from '../../../fixtures/manual/trails';
 import { ContainerLayout } from './ContainerLayout';
 import { DynamicSlow } from './DynamicSlow';
-
-import { trails } from '../../../fixtures/manual/trails';
 
 export default {
 	component: DynamicSlow,
@@ -31,7 +30,7 @@ export const Default = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<DynamicSlow trails={trails} />
+		<DynamicSlow trails={trails} showAge={true} />
 	</ContainerLayout>
 );
 Default.story = { name: 'DynamicSlow' };

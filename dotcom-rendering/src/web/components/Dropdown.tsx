@@ -1,18 +1,17 @@
-import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-
 import {
-	text,
-	neutral,
 	border,
-	brandText,
 	brandAlt,
-	news,
-	textSans,
+	brandText,
 	from,
+	neutral,
+	news,
+	text,
+	textSans,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
+import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 
 export interface DropdownLinkType {

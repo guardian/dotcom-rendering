@@ -1,15 +1,13 @@
 import fetchMock from 'fetch-mock';
-
+import { matchReport } from '../../../fixtures/generated/match-report';
+import { series } from '../../../fixtures/generated/series';
+import { storyPackage } from '../../../fixtures/generated/story-package';
+import { discussion } from '../../../fixtures/manual/discussion';
+import { discussionNoTopComments } from '../../../fixtures/manual/discussion-no-top-comments';
 import { mostRead } from '../../../fixtures/manual/most-read';
 import { mostReadGeo } from '../../../fixtures/manual/most-read-geo';
 import { related } from '../../../fixtures/manual/related';
-import { discussion } from '../../../fixtures/manual/discussion';
 import { shortDiscussion } from '../../../fixtures/manual/short-discussion';
-import { discussionNoTopComments } from '../../../fixtures/manual/discussion-no-top-comments';
-
-import { series } from '../../../fixtures/generated/series';
-import { storyPackage } from '../../../fixtures/generated/story-package';
-import { matchReport } from '../../../fixtures/generated/match-report';
 
 const richLinkCard = {
 	tags: [

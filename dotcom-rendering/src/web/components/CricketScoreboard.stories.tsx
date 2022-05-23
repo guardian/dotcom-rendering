@@ -1,9 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-
 import { breakpoints } from '@guardian/source-foundations';
-import { CricketScoreboard } from './CricketScoreboard';
-
 import { match } from '../../../fixtures/manual/cricket-scoreboard';
+import { CricketScoreboard } from './CricketScoreboard';
 
 export default {
 	component: CricketScoreboard,

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, until, textSans } from '@guardian/source-foundations';
+import { neutral, textSans, until } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../browser/ga/ga';
 
 const brandingStyle = css`

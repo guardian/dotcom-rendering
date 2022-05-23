@@ -1,56 +1,30 @@
 import { css } from '@emotion/react';
-
+import Accordion from '@guardian/common-rendering/src/components/accordion';
+import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
+import { ArticleDesign } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
-	neutral,
 	brandAltBackground,
 	brandBackground,
-	brandLine,
 	brandBorder,
+	brandLine,
 	from,
-	until,
+	neutral,
 	space,
+	until,
 } from '@guardian/source-foundations';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import { Hide } from '@guardian/source-react-components';
 import {
 	Lines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
-import Accordion from '@guardian/common-rendering/src/components/accordion';
-import { Hide } from '@guardian/source-react-components';
-import { StarRating } from '../components/StarRating/StarRating';
-import { ArticleBody } from '../components/ArticleBody';
-import { RightColumn } from '../components/RightColumn';
-import { ArticleTitle } from '../components/ArticleTitle';
-import { ArticleContainer } from '../components/ArticleContainer';
-import { ArticleMeta } from '../components/ArticleMeta';
-import { SubMeta } from '../components/SubMeta';
-import { MainMedia } from '../components/MainMedia';
-import { ArticleHeadline } from '../components/ArticleHeadline';
-import { Standfirst } from '../components/Standfirst';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import { SubNav } from '../components/SubNav.importable';
-import { ElementContainer } from '../components/ElementContainer';
-import { Nav } from '../components/Nav/Nav';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
-import { GridItem } from '../components/GridItem';
-import { DiscussionLayout } from '../components/DiscussionLayout';
-
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
-
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import {
-	decideLineCount,
-	decideLineEffect,
-	getCurrentPillar,
-} from '../lib/layoutHelpers';
-import { Stuck, SendToBack, BannerWrapper } from './lib/stickiness';
-import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
-import { ContainerLayout } from '../components/ContainerLayout';
-import { Island } from '../components/Island';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { ArticleBody } from '../components/ArticleBody';
+import { ArticleContainer } from '../components/ArticleContainer';
+import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Liveness } from '../components/Liveness.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
@@ -59,12 +33,36 @@ import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
+import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { ContainerLayout } from '../components/ContainerLayout';
+import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ElementContainer } from '../components/ElementContainer';
+import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
+import { Footer } from '../components/Footer';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
+import { GridItem } from '../components/GridItem';
+import { Header } from '../components/Header';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
+import { MainMedia } from '../components/MainMedia';
+import { Nav } from '../components/Nav/Nav';
+import { RightColumn } from '../components/RightColumn';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
+import { Standfirst } from '../components/Standfirst';
+import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { SubMeta } from '../components/SubMeta';
+import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import {
+	decideLineCount,
+	decideLineEffect,
+	getCurrentPillar,
+} from '../lib/layoutHelpers';
+import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -779,7 +777,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{CAPIArticle.keyEvents?.length ? (
+									{CAPIArticle.keyEvents.length ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
@@ -798,7 +796,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										accordionTitle="Live feed"
 										context="liveFeed"
 									>
-										{CAPIArticle.keyEvents?.length ? (
+										{CAPIArticle.keyEvents.length ? (
 											<Hide above="desktop">
 												<Island deferUntil="visible">
 													<FilterKeyEventsToggle

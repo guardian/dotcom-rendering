@@ -3,10 +3,10 @@ import {
 	getWeeklyArticleHistory,
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
-import { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { hasOptedOutOfArticleCount } from '../web/lib/contributions';
+import type { DailyArticleHistory } from '../web/lib/dailyArticleCount';
 import {
-	DailyArticleHistory,
 	getDailyArticleCount,
 	incrementDailyArticleCount,
 } from '../web/lib/dailyArticleCount';

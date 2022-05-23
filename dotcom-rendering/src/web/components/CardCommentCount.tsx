@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-
-import { textSans, between } from '@guardian/source-foundations';
-
+import { between, textSans } from '@guardian/source-foundations';
 import CommentIcon from '../../static/icons/comment.svg';
 import { decidePalette } from '../lib/decidePalette';
 

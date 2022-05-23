@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleSpecial, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 
 const shouldUseLogoForDarkBackground = (format: ArticleFormat): boolean => {
 	if (format.theme === ArticleSpecial.SpecialReport) return true;

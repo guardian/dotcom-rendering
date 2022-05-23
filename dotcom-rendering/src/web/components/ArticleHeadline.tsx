@@ -1,26 +1,20 @@
 import { css } from '@emotion/react';
-
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	headline,
-	textSans,
 	from,
-	until,
+	headline,
 	space,
+	textSans,
+	until,
 } from '@guardian/source-foundations';
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	ArticleFormat,
-	ArticleSpecial,
-} from '@guardian/libs';
-import { HeadlineTag } from './HeadlineTag';
-import { HeadlineByline } from './HeadlineByline';
-
-import { getZIndex } from '../lib/getZIndex';
+import { getAgeWarning } from '../../lib/age-warning';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { getZIndex } from '../lib/getZIndex';
 import { AgeWarning } from './AgeWarning';
-import { getAgeWarning } from '../../lib/age-warning';
+import { HeadlineByline } from './HeadlineByline';
+import { HeadlineTag } from './HeadlineTag';
 
 type Props = {
 	headlineString: string;

@@ -1,17 +1,12 @@
-/* eslint-disable jsx-a11y/aria-role */
-
 import { css } from '@emotion/react';
-
-import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ElementContainer } from './ElementContainer';
+import { Figure } from './Figure';
 import { Flex } from './Flex';
+import { ImageBlockComponent } from './ImageBlockComponent';
+import { image } from './ImageBlockComponent.mocks';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
-import { Figure } from './Figure';
-
-import { ImageBlockComponent } from './ImageBlockComponent';
-
-import { image } from './ImageBlockComponent.mocks';
 
 export default {
 	component: ImageBlockComponent,

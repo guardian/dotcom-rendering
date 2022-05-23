@@ -1,20 +1,16 @@
 import { css } from '@emotion/react';
-
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
-	neutral,
+	from,
 	headline,
+	neutral,
 	textSans,
 	until,
-	from,
 } from '@guardian/source-foundations';
-
-import { BylineLink } from './BylineLink';
-
 import TwitterIcon from '../../static/icons/twitter.svg';
-
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { BylineLink } from './BylineLink';
 
 const twitterHandleColour = (palette: Palette) => css`
 	color: ${palette.text.twitterHandleBelowDesktop};

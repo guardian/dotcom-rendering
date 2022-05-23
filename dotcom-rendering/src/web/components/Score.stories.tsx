@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/accessible-emoji */
-
 import { Score } from './Score';
 
 export default {

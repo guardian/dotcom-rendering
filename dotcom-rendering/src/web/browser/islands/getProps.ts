@@ -6,9 +6,9 @@
  * @param marker : The html element that we want to read the props attribute from;
  * @returns
  */
-export const getProps = (marker: HTMLElement): Record<string, unknown> => {
+export const getProps = (marker: HTMLElement): { [key: string]: unknown } => {
 	const serialised = marker.getAttribute('props');
-	let props: Record<string, unknown>;
+	let props: { [key: string]: unknown };
 	try {
 		props = serialised && JSON.parse(serialised);
 	} catch (error: unknown) {

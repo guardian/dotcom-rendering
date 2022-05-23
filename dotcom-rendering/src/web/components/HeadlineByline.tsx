@@ -1,20 +1,15 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	brandAltBackground,
 	headline,
-	textSans,
 	space,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	ArticleFormat,
-	ArticleSpecial,
-} from '@guardian/libs';
-import { BylineLink } from './BylineLink';
 import { decidePalette } from '../lib/decidePalette';
+import { BylineLink } from './BylineLink';
 
 const wrapperStyles = css`
 	margin-left: 6px;

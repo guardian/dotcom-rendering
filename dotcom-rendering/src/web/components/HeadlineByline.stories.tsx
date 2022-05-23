@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
-
 import {
-	ArticleDisplay,
 	ArticleDesign,
+	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-
 import { HeadlineByline } from './HeadlineByline';
 
 export default {

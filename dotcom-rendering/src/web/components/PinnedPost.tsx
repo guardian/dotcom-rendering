@@ -1,21 +1,20 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+import { css } from '@emotion/react';
+import { timeAgo } from '@guardian/libs';
 import {
+	focusHalo,
+	from,
+	height,
 	neutral,
 	space,
 	textSans,
-	from,
-	visuallyHidden,
 	transitions,
-	focusHalo,
-	height,
+	visuallyHidden,
 } from '@guardian/source-foundations';
 import {
 	SvgMinus,
-	SvgPlus,
 	SvgPinned,
+	SvgPlus,
 } from '@guardian/source-react-components';
-import { timeAgo } from '@guardian/libs';
-import { css } from '@emotion/react';
 import { decidePalette } from '../lib/decidePalette';
 
 const pinnedPostContainer = (palette: Palette) => css`

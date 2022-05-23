@@ -1,21 +1,21 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import {
+	headline,
 	neutral,
 	news,
-	headline,
 	textSans,
 } from '@guardian/source-foundations';
-import { ArticleModel } from '../types/ArticleModel';
-import { TopMetaLiveblog } from './topMeta/TopMetaLiveblog';
-import { SubMeta } from './SubMeta';
-import { KeyEvents } from './KeyEvents';
-import { Blocks } from './Blocks';
-import RefreshIcon from '../../static/icons/refresh.svg';
-import { Pagination } from './Pagination';
-import { getSharingUrls } from '../../lib/sharing-urls';
-import { decideTheme } from '../../web/lib/decideTheme';
+import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
+import { getSharingUrls } from '../../lib/sharing-urls';
+import RefreshIcon from '../../static/icons/refresh.svg';
+import { decideTheme } from '../../web/lib/decideTheme';
+import type { ArticleModel } from '../types/ArticleModel';
+import { Blocks } from './Blocks';
+import { KeyEvents } from './KeyEvents';
+import { Pagination } from './Pagination';
+import { SubMeta } from './SubMeta';
+import { TopMetaLiveblog } from './topMeta/TopMetaLiveblog';
 
 // TODO check if liveblog background colours are more complex - like regular
 // article is
