@@ -17,9 +17,8 @@ import {
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
 import React from 'react';
-
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
