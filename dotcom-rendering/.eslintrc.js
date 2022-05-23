@@ -2,7 +2,6 @@ const transitionRules = require('./eslint-guardian');
 
 /** TODO: Review these */
 const rulesToReview = {
-	'import/no-extraneous-dependencies': 'warn', // 683 problems
 	'consistent-return': 'warn', // 51 problems
 	'default-case': 'warn', // 50 problems
 	'react/no-danger': 'warn', // 48 problems
@@ -72,6 +71,11 @@ module.exports = {
 		'react/jsx-one-expression-per-line': 'off',
 		'no-useless-escape': 'error',
 		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
+		'import/no-extraneous-dependencies': [
+			'error',
+			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
+			{ packageDir: ['..', '.'] },
+		],
 
 		...rulesToReview,
 		...rulesToRemove,
