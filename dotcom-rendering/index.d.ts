@@ -256,13 +256,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
+		adUnit: string;
+		customParams: CustomParams;
+		disableAds?: false;
+	}
 	| {
-			disableAds: true;
-	  };
+		disableAds: true;
+	};
 
 interface SectionNielsenAPI {
 	name: string;
@@ -367,6 +367,17 @@ interface AuthorType {
 	email?: string;
 }
 
+interface MembershipPlaceholder {
+	campaignCode?: string;
+}
+
+interface Attributes {
+	pinned: boolean;
+	summary: boolean;
+	keyEvent: boolean;
+	membershipPlaceholder?: MembershipPlaceholder;
+}
+
 interface BlockContributor {
 	name: string;
 	imageUrl?: string;
@@ -376,6 +387,7 @@ interface BlockContributor {
 interface Block {
 	id: string;
 	elements: CAPIElement[];
+	attributes: Attributes;
 	blockCreatedOn?: number;
 	blockCreatedOnDisplay?: string;
 	blockLastUpdated?: number;
