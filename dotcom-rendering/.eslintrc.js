@@ -78,10 +78,14 @@ module.exports = {
 				],
 			},
 		],
+
+		// React & Hooks
 		'react/jsx-indent': [2, 'tab'],
 		'react/jsx-indent-props': [2, 'tab'],
 		'react/prop-types': [0],
 		'react/jsx-boolean-value': [2, 'always'],
+		'react-hooks/exhaustive-deps': 'error',
+		'react-hooks/rules-of-hooks': 'error',
 
 		// Fixed as part of @guardian-eslint move May 2022
 		'array-callback-return': 'error',
