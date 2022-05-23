@@ -99,11 +99,11 @@ const keyEventsWrapperStyles = css`
 const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 	blocks.reduce<KeyEvent[]>(
 		(events, block) =>
-			block.isKeyEvent && block.firstPublished.kind !== OptionKind.None
+			block.isKeyEvent
 				? [
 						...events,
 						{
-							date: block.firstPublished.value,
+							date: block.firstPublished,
 							text: block.title,
 							url: `?page=with:block-${block.id}#block-${block.id}`,
 						},

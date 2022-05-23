@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import type { BlockContributor } from '@guardian/common-rendering/src/components/liveBlockContainer';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { ArticleFormat } from '@guardian/libs';
-import { map, OptionKind, partition, withDefault } from '@guardian/types';
+import { map, partition, some, withDefault } from '@guardian/types';
 import { LastUpdated } from 'components/LastUpdated';
 import type { Contributor } from 'contributor';
 import { formatUTCTimeDateTz } from 'date';
@@ -38,7 +38,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 			{/* Accordion? */}
 			{blocks.map((block) => {
 				const blockFirstPublished = pipe(
-					block.firstPublished,
+					some(block.firstPublished),
 					map(Number),
 					toNullable,
 				);
@@ -66,17 +66,14 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 								justify-content: end;
 							`}
 						>
-							{block.lastModified.kind === OptionKind.Some &&
-								block.firstPublished.kind === OptionKind.Some &&
-								block.lastModified.value >
-									block.firstPublished.value && (
-									<LastUpdated
-										lastUpdated={block.lastModified.value}
-										lastUpdatedDisplay={formatUTCTimeDateTz(
-											block.lastModified.value,
-										)}
-									/>
-								)}
+							{block.lastModified > block.firstPublished && (
+								<LastUpdated
+									lastUpdated={block.lastModified}
+									lastUpdatedDisplay={formatUTCTimeDateTz(
+										block.lastModified,
+									)}
+								/>
+							)}
 						</footer>
 					</LiveBlockContainer>
 				);
