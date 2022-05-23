@@ -14,7 +14,7 @@
 
 // See: https://stackoverflow.com/a/1144788
 function escapeRegExp(str: string): string {
-	return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
+	return str.replace(/([.*+?^=!:${}()|[\]/\\])/g, '\\$1');
 }
 
 function replaceAll(str: string, find: string, replace: string): string {

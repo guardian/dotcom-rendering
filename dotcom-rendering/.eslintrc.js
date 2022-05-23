@@ -12,7 +12,6 @@ const rulesToReview = {
 	'@typescript-eslint/require-await': 'warn', // 22 problems
 	'react/jsx-curly-newline': 'warn', // 8 problems
 	'no-case-declarations': 'warn', // 7 problems
-	'no-useless-escape': 'warn', // 6 problems
 };
 
 const rulesToRemove = {
@@ -72,6 +71,7 @@ module.exports = {
 		'no-param-reassign': 'error',
 		'react/jsx-no-target-blank': 'error',
 		'react/jsx-one-expression-per-line': 'off',
+		'no-useless-escape': 'error',
 
 		...rulesToReview,
 		...rulesToRemove,
