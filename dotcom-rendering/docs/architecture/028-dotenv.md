@@ -1,6 +1,6 @@
 # `.env` File
 
-Any values in the `.env` file [shouldn't be required to run the application locally](../values/README.md#env-shouldnt-be-required) - to keep is at approachable as possible.
+Any values in the `.env` file [shouldn't be required to run the application locally](../values/README.md#env-shouldnt-be-required) - to keep it as approachable as possible.
 
 When starting up the application for the first time with `make dev` DCR will automatically generate an env file if you have Frontend [Janus](https://janus.gutools.co.uk/) credentials.
 This `.env` will then persist on your local drive for subsequent running of DCR. If there are changes to the `.env` file, it will automatically try and fetch these next time you run `make dev`.
