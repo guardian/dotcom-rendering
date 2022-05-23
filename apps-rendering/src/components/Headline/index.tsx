@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import AnalysisHeadline from './AnalysisHeadline';
 import BlogHeadline from './BlogHeadline';
 import CommentHeadline from './CommentHeadline';
 import FeatureHeadline from './FeatureHeadline';
@@ -29,8 +28,6 @@ const Headline: React.FC<Props> = ({ item }) => {
 	}
 
 	switch (format.design) {
-		case ArticleDesign.Analysis:
-			return <AnalysisHeadline item={item} />;
 		case ArticleDesign.Feature:
 			return <FeatureHeadline item={item} />;
 		case ArticleDesign.Editorial:
