@@ -12,6 +12,7 @@ import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
+import { ScrollTracker } from './ScrollTracker.importable';
 import { SetABTests } from './SetABTests.importable';
 import { SkipTo } from './SkipTo';
 
@@ -75,6 +76,9 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<CoreVitals />
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<ScrollTracker />
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<BrazeMessaging idApiUrl={CAPIArticle.config.idApiUrl} />
