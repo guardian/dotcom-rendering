@@ -143,20 +143,19 @@ const decideContainerPalette = (
 export const enhanceCollections = (
 	collections: FECollectionType[],
 ): DCRCollectionType[] => {
-	return collections
-		.map((collection) => {
-			const { id, displayName, collectionType } = collection;
-			const containerPalette = decideContainerPalette(
-				collection.config.metadata,
-			);
-			return {
-				id,
-				displayName,
-				collectionType,
-				containerPalette,
-				curated: enhanceCards(collection.curated, containerPalette),
-				backfill: enhanceCards(collection.backfill, containerPalette),
-				treats: enhanceCards(collection.treats, containerPalette),
-			};
-		});
+	return collections.map((collection) => {
+		const { id, displayName, collectionType } = collection;
+		const containerPalette = decideContainerPalette(
+			collection.config.metadata,
+		);
+		return {
+			id,
+			displayName,
+			collectionType,
+			containerPalette,
+			curated: enhanceCards(collection.curated, containerPalette),
+			backfill: enhanceCards(collection.backfill, containerPalette),
+			treats: enhanceCards(collection.treats, containerPalette),
+		};
+	});
 };
