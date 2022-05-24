@@ -9938,10 +9938,6 @@ eslint-plugin-cypress@^2.12.1:
   dependencies:
     globals "^11.12.0"
 
-"eslint-plugin-dcr@https://github.com/guardian/eslint-plugin-dcr#v0.1.0":
-  version "1.0.0"
-  resolved "https://github.com/guardian/eslint-plugin-dcr#9aff46e4ce196e57ea29e25ee5c0a3eb8d129964"
-
 eslint-plugin-eslint-comments@3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-eslint-comments/-/eslint-plugin-eslint-comments-3.2.0.tgz#9e1cd7b4413526abb313933071d7aba05ca12ffa"

@@ -48,7 +48,6 @@ module.exports = {
 		'@typescript-eslint/tslint',
 		'react',
 		'react-hooks',
-		'dcr',
 		'import',
 		'jsx-a11y',
 	],
