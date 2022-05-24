@@ -3469,6 +3469,9 @@
                         ]
                     }
                 },
+                "attributes": {
+                    "$ref": "#/definitions/Attributes"
+                },
                 "blockCreatedOn": {
                     "type": "number"
                 },
@@ -3525,11 +3528,42 @@
                 }
             },
             "required": [
+                "attributes",
                 "elements",
                 "id",
                 "primaryDateLine",
                 "secondaryDateLine"
             ]
+        },
+        "Attributes": {
+            "type": "object",
+            "properties": {
+                "pinned": {
+                    "type": "boolean"
+                },
+                "summary": {
+                    "type": "boolean"
+                },
+                "keyEvent": {
+                    "type": "boolean"
+                },
+                "membershipPlaceholder": {
+                    "$ref": "#/definitions/MembershipPlaceholder"
+                }
+            },
+            "required": [
+                "keyEvent",
+                "pinned",
+                "summary"
+            ]
+        },
+        "MembershipPlaceholder": {
+            "type": "object",
+            "properties": {
+                "campaignCode": {
+                    "type": "string"
+                }
+            }
         },
         "BlockContributor": {
             "type": "object",
