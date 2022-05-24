@@ -36,48 +36,40 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
 	return (
 		<>
 			{/* Accordion? */}
-			{blocks.map((block) => {
-				const blockFirstPublished = pipe(
-					some(block.firstPublished),
-					map(Number),
-					toNullable,
-				);
+			{blocks.map((block) => (
+				<LiveBlockContainer
+					key={block.id}
+					id={block.id}
+					format={format}
+					blockTitle={block.title}
+					blockFirstPublished={Number(block.firstPublished)}
+					blockId={block.id}
+					// TODO pass this value in when available
+					isPinnedPost={false}
+					supportsDarkMode={true}
+					contributors={block.contributors.map(
+						contributorToBlockContributor,
+					)}
+				>
+					{renderAll(format, partition(block.body).oks)}
 
-				return (
-					<LiveBlockContainer
-						key={block.id}
-						id={block.id}
-						format={format}
-						blockTitle={block.title}
-						blockFirstPublished={blockFirstPublished}
-						blockId={block.id}
-						// TODO pass this value in when available
-						isPinnedPost={false}
-						supportsDarkMode={true}
-						contributors={block.contributors.map(
-							contributorToBlockContributor,
-						)}
+					<footer
+						css={css`
+							display: flex;
+							justify-content: end;
+						`}
 					>
-						{renderAll(format, partition(block.body).oks)}
-
-						<footer
-							css={css`
-								display: flex;
-								justify-content: end;
-							`}
-						>
-							{block.lastModified > block.firstPublished && (
-								<LastUpdated
-									lastUpdated={block.lastModified}
-									lastUpdatedDisplay={formatUTCTimeDateTz(
-										block.lastModified,
-									)}
-								/>
-							)}
-						</footer>
-					</LiveBlockContainer>
-				);
-			})}
+						{block.lastModified > block.firstPublished && (
+							<LastUpdated
+								lastUpdated={block.lastModified}
+								lastUpdatedDisplay={formatUTCTimeDateTz(
+									block.lastModified,
+								)}
+							/>
+						)}
+					</footer>
+				</LiveBlockContainer>
+			))}
 		</>
 	);
 };

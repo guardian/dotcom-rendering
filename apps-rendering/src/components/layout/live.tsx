@@ -15,7 +15,6 @@ import {
 	pxToRem,
 	remSpace,
 } from '@guardian/source-foundations';
-import { OptionKind } from '@guardian/types';
 import Footer from 'components/Footer';
 import GridItem from 'components/GridItem';
 import LiveBlocks from 'components/LiveBlocks';
