@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { space } from '@guardian/source-foundations';
+import { from, space } from '@guardian/source-foundations';
 import {
 	Button,
 	buttonThemeBrandAlt,
@@ -8,6 +8,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
+import { decidePalette } from '../lib/decidePalette';
 import { KeyEventCard } from './KeyEventCard';
 
 interface Props {
@@ -16,7 +17,12 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const carouselStyles = css`
+const carouselStyles = (palette: Palette) => css`
+	background-color: ${palette.background.keyEvent};
+	${from.desktop} {
+		background-color: ${palette.background.keyEventFromDesktop};
+	}
+
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overflow-x: auto;
@@ -61,7 +67,6 @@ const rightButton = css`
 `;
 
 const isServer = typeof window === 'undefined';
-
 const carousel: HTMLElement | null = !isServer
 	? window.document.getElementById('key-event-carousel')
 	: null;
@@ -71,6 +76,7 @@ export const KeyEventsCarousel = ({
 	filterKeyEvents,
 	format,
 }: Props) => {
+	const palette = decidePalette(format);
 	const cardWidth = 200;
 	const goPrevious = () => {
 		if (carousel) carousel.scrollLeft -= cardWidth;
@@ -91,7 +97,7 @@ export const KeyEventsCarousel = ({
 			};
 		});
 	return (
-		<div id="key-event-carousel" css={carouselStyles}>
+		<div id="key-event-carousel" css={carouselStyles(palette)}>
 			<ul css={containerStyles}>
 				{transformedKeyEvents.map((keyEvent) => {
 					return (
