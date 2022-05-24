@@ -23,6 +23,6 @@ export const Snap = ({ enriched }: Props) => {
 				`,
 			]}
 			dangerouslySetInnerHTML={{ __html: enriched?.embedHtml }}
-		></div>
+		/>
 	);
 };

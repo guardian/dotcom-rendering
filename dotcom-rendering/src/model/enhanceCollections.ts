@@ -41,12 +41,6 @@ const decidePresentationFormat = ({
 	return linkFormat;
 };
 
-// There are certain collections used to add things like global styles to a front page
-// which we don't want to use on DCR as we'd like to try and migrate these styles into DCR itself.
-const blockedCollections = [
-	'ba744122-6c99-417f-8ddd-5a5905eb4928', // Palette styles new do not delete
-];
-
 const enhanceSupportingContent = (
 	supportingContent: FESupportingContent[],
 	format: ArticleFormat,
@@ -150,7 +144,6 @@ export const enhanceCollections = (
 	collections: FECollectionType[],
 ): DCRCollectionType[] => {
 	return collections
-		.filter((collection) => !blockedCollections.includes(collection.id))
 		.map((collection) => {
 			const { id, displayName, collectionType } = collection;
 			const containerPalette = decideContainerPalette(
