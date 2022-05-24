@@ -18,20 +18,12 @@ import {
 	Lines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { Liveness } from '../components/Liveness.importable';
-import { GetMatchStats } from '../components/GetMatchStats.importable';
-import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
@@ -40,13 +32,21 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
 import { Footer } from '../components/Footer';
+import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
+import { GetMatchNav } from '../components/GetMatchNav.importable';
+import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { KeyEventsContainer } from '../components/KeyEventsContainer';
+import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
+import { OnwardsLower } from '../components/OnwardsLower.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
@@ -810,10 +810,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										) : (
 											<></>
 										)}
-										<ArticleContainer
-											format={format}
-											abTests={CAPIArticle.config.abTests}
-										>
+										<ArticleContainer format={format}>
 											{pagination.currentPage !== 1 && (
 												<Pagination
 													currentPage={

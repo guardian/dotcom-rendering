@@ -2,7 +2,6 @@ import compression from 'compression';
 import type { Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
-import { log, warn } from '../../scripts/env/log';
 import {
 	render as renderAMPArticle,
 	renderPerfTest as renderAMPArticlePerfTest,
@@ -16,8 +15,6 @@ import {
 	renderInteractive,
 	renderKeyEvents,
 } from '../web/server';
-import type { GuardianConfiguration } from './lib/aws/aws-parameters';
-import { getGuardianConfiguration } from './lib/aws/aws-parameters';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
@@ -36,17 +33,6 @@ const logRenderTime = responseTime(
 
 export const prodServer = () => {
 	logger.info('dotcom-rendering is GO.');
-
-	if (process.env.DISABLE_LOGGING_AND_METRICS !== 'true') {
-		getGuardianConfiguration('prod')
-			.then((config: GuardianConfiguration) => {
-				log(`loaded ${config.size()} configuration parameters`);
-			})
-			.catch((err: any) => {
-				warn('Failed to get configuration. Bad AWS credentials?');
-				warn(err);
-			});
-	}
 
 	const app = express();
 
