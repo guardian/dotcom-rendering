@@ -353,6 +353,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			kickerText={kickerText || ''}
 			imageUrl={imageUrl || ''}
 			showClock={true}
+			showAge={true}
 			imagePositionOnMobile="top"
 			minWidthInPixels={220}
 			showQuotes={
@@ -619,7 +620,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 						} = trail;
 						// Don't try to render cards that have no publication date. This property is technically optional
 						// but we rarely if ever expect it not to exist
-						if (!webPublicationDate) return;
+						if (!webPublicationDate) return null;
 						return (
 							<CarouselCard
 								key={`${trail.url}${i}`}

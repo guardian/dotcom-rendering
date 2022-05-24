@@ -16,12 +16,9 @@ import {
 	Lines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { LabsHeader } from '../components/LabsHeader.importable';
-import { GuardianLabsLines } from '../components/GuardianLabsLines';
-
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -35,9 +32,11 @@ import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { GridItem } from '../components/GridItem';
+import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
@@ -639,10 +638,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer
-								format={format}
-								abTests={CAPIArticle.config.abTests}
-							>
+							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}

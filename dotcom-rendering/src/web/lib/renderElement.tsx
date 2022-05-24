@@ -18,28 +18,35 @@ import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
+import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
 import { GuVideoBlockComponent } from '../components/GuVideoBlockComponent';
+import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
+import { ImageBlockComponent } from '../components/ImageBlockComponent';
+import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
+import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
+import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent';
+import { Island } from '../components/Island';
+import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
+import { KnowledgeQuizAtomWrapper } from '../components/KnowledgeQuizAtomWrapper.importable';
+import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
+import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
+import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
+import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
+import { PersonalityQuizAtomWrapper } from '../components/PersonalityQuizAtomWrapper.importable';
+import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
+import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
+import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
 import { StarRatingBlockComponent } from '../components/StarRatingBlockComponent';
 import { SubheadingBlockComponent } from '../components/SubheadingBlockComponent';
 import { TableBlockComponent } from '../components/TableBlockComponent';
-import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
-import { HighlightBlockComponent } from '../components/HighlightBlockComponent';
-import { ImageBlockComponent } from '../components/ImageBlockComponent';
-import { InstagramBlockComponent } from '../components/InstagramBlockComponent.importable';
-import { InteractiveBlockComponent } from '../components/InteractiveBlockComponent.importable';
-import { ItemLinkBlockElement } from '../components/ItemLinkBlockElement';
-import { InteractiveContentsBlockComponent } from '../components/InteractiveContentsBlockComponent';
-import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
-import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
-import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
-import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
-import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { TextBlockComponent } from '../components/TextBlockComponent';
+import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
 import { TweetBlockComponent } from '../components/TweetBlockComponent.importable';
+import { UnsafeEmbedBlockComponent } from '../components/UnsafeEmbedBlockComponent.importable';
 import { VideoFacebookBlockComponent } from '../components/VideoFacebookBlockComponent.importable';
 import { VimeoBlockComponent } from '../components/VimeoBlockComponent';
 import { VineBlockComponent } from '../components/VineBlockComponent.importable';
@@ -50,17 +57,10 @@ import {
 } from '../components/WitnessBlockComponent';
 import { YoutubeBlockComponent } from '../components/YoutubeBlockComponent.importable';
 import { YoutubeEmbedBlockComponent } from '../components/YoutubeEmbedBlockComponent';
-import { TimelineAtomWrapper } from '../components/TimelineAtomWrapper.importable';
-import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
-import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
-import { PersonalityQuizAtomWrapper } from '../components/PersonalityQuizAtomWrapper.importable';
-import { KnowledgeQuizAtomWrapper } from '../components/KnowledgeQuizAtomWrapper.importable';
-import { Figure } from '../components/Figure';
 import {
 	interactiveLegacyFigureClasses,
 	isInteractive,
 } from '../layouts/lib/interactiveLegacyStyling';
-import { Island } from '../components/Island';
 import { decidePalette } from './decidePalette';
 
 type Props = {

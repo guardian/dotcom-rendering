@@ -6,9 +6,14 @@ import { UL } from './Card/components/UL';
 type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
 };
 
-export const FixedSmallSlowIV = ({ trails, containerPalette }: Props) => {
+export const FixedSmallSlowIV = ({
+	trails,
+	containerPalette,
+	showAge,
+}: Props) => {
 	const slicedTrails = trails.slice(0, 4);
 
 	return (
@@ -22,6 +27,7 @@ export const FixedSmallSlowIV = ({ trails, containerPalette }: Props) => {
 					>
 						<Card
 							containerPalette={containerPalette}
+							showAge={showAge}
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}

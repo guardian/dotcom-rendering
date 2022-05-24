@@ -28,7 +28,7 @@ const windowGuardian = {
 	ophan: {
 		setEventEmitter: () => null,
 		trackComponentAttention: () => null,
-		record: ({}: { [key: string]: any }) => null,
+		record: () => null,
 		viewId: '',
 		pageViewId: '',
 	},
