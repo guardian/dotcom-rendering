@@ -1,15 +1,15 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { ArticleDesign } from '@guardian/libs';
-
 import { Card } from './Card/Card';
 
 type Props = {
 	content: TrailType[];
+	containerPalette?: DCRContainerPalette;
 };
 
-export const Spotlight = ({ content }: Props) => (
+export const Spotlight = ({ content, containerPalette }: Props) => (
 	<Card
+		containerPalette={containerPalette}
+		showAge={true}
 		linkTo={content[0].url}
 		format={content[0].format}
 		headlineText={content[0].headline}

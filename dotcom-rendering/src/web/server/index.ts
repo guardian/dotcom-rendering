@@ -1,15 +1,15 @@
 import type express from 'express';
 import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
-import { extractNAV } from '../../model/extract-nav';
-import { articleToHtml } from './articleToHtml';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
-import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceCollections } from '../../model/enhanceCollections';
-import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
+import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { extract as extractGA } from '../../model/extract-ga';
+import { extractNAV } from '../../model/extract-nav';
+import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
+import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
-import { keyEventsToHtml } from './keyEventsToHtml';
 import { frontToHtml } from './frontToHtml';
+import { keyEventsToHtml } from './keyEventsToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;

@@ -1,23 +1,22 @@
 import { css } from '@emotion/react';
-
+import { getCookie, joinUrl } from '@guardian/libs';
 import {
 	brand,
-	brandText,
 	brandAlt,
-	textSans,
+	brandText,
 	from,
+	textSans,
 } from '@guardian/source-foundations';
-import { getCookie, joinUrl } from '@guardian/libs';
-import SearchIcon from '../../static/icons/search.svg';
-
-import { DropdownLinkType, Dropdown } from './Dropdown';
-
-import ProfileIcon from '../../static/icons/profile.svg';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
-import { useApi } from '../lib/useApi';
+import ProfileIcon from '../../static/icons/profile.svg';
+import SearchIcon from '../../static/icons/search.svg';
 import { getZIndex } from '../lib/getZIndex';
+import { useApi } from '../lib/useApi';
+import type { DropdownLinkType } from './Dropdown';
+import { Dropdown } from './Dropdown';
 
 type Props = {
+	supporterCTA: string;
 	discussionApiUrl: string;
 	idUrl?: string;
 	mmaUrl?: string;
@@ -167,7 +166,7 @@ const MyAccount = ({
 
 	// If we encounter an error or don't have user data display sign in to the user.
 	// SWR will retry in the background if the request failed
-	if (error || !data?.userProfile?.userId) return <SignIn idUrl={idUrl} />;
+	if (error || !data?.userProfile.userId) return <SignIn idUrl={idUrl} />;
 
 	const identityLinks: DropdownLinkType[] = [
 		{
@@ -221,6 +220,7 @@ const MyAccount = ({
 };
 
 export const Links = ({
+	supporterCTA,
 	discussionApiUrl: discussionApiUrlFromConfig,
 	idUrl: idUrlServerFromConfig,
 	mmaUrl: mmaUrlServerFromConfig,
@@ -234,6 +234,13 @@ export const Links = ({
 
 	const isServer = typeof window === 'undefined';
 
+	const showSupporterCTA =
+		!isServer &&
+		getCookie({
+			name: 'gu_hide_support_messaging',
+			shouldMemoize: true,
+		}) === 'true';
+
 	const isSignedIn =
 		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
@@ -242,14 +249,21 @@ export const Links = ({
 			{/* Since 'subscriptions' is only rendered on the client, rendering it within
 				a div is required to prevent DOM elements getting mis-matched during hydration  */}
 			<div css={linkWrapperStyles}>
-				<div css={seperatorStyles} id="supporter" />
-				<a
-					href="https://support.theguardian.com/subscribe/weekly?INTCMP=header_supporter_cta&acquisitionData=%7B%22source%22%3A%22GUARDIAN_WEB%22%2C%22componentType%22%3A%22ACQUISITIONS_HEADER%22%2C%22componentId%22%3A%22header_supporter_cta%22%7D"
-					css={[linkTablet({ showAtTablet: false }), linkStyles]}
-					data-link-name="nav2 : supporter-cta"
-				>
-					Print subscriptions
-				</a>
+				{showSupporterCTA && supporterCTA !== '' && (
+					<>
+						<div css={seperatorStyles} id="supporter" />
+						<a
+							href={supporterCTA}
+							css={[
+								linkTablet({ showAtTablet: false }),
+								linkStyles,
+							]}
+							data-link-name="nav2 : supporter-cta"
+						>
+							Subscriptions
+						</a>
+					</>
+				)}
 			</div>
 
 			<div css={seperatorStyles} />

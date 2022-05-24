@@ -15,7 +15,7 @@ export const getBylineComponentsFromTokens = (
 	tokens: string[],
 	tags: TagType[],
 ): BylineComponent[] => {
-	const [bylineComponents] = tokens.reduce(
+	const [bylineComponents] = tokens.reduce<[BylineComponent[], TagType[]]>(
 		([bylines, remainingTags], token) => {
 			const [firstContributorTag] = getContributorTagsForToken(
 				remainingTags,
@@ -37,7 +37,7 @@ export const getBylineComponentsFromTokens = (
 				newRemainingTags,
 			];
 		},
-		[[], tags] as [BylineComponent[], TagType[]],
+		[[], tags],
 	);
 
 	return bylineComponents;

@@ -1,19 +1,17 @@
 import { css } from '@emotion/react';
-
-import { textSans, until } from '@guardian/source-foundations';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
-
-import { decidePalette } from '../../../lib/decidePalette';
+import { textSans, until } from '@guardian/source-foundations';
 import ClockIcon from '../../../../static/icons/clock.svg';
+import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
+	containerPalette?: DCRContainerPalette;
 	webPublicationDate: string;
 	showClock?: boolean;
 };
 
-const ageStyles = (format: ArticleFormat) => {
-	const palette = decidePalette(format);
+const ageStyles = (format: ArticleFormat, palette: Palette) => {
 	return css`
 		${textSans.xxsmall()};
 		color: ${palette.text.cardFooter};
@@ -37,21 +35,31 @@ const ageStyles = (format: ArticleFormat) => {
 		> time {
 			${textSans.xxsmall({
 				fontWeight:
-					format.design === ArticleDesign.Media ? `bold` : `regular`,
+					format.design === ArticleDesign.Gallery ||
+					format.design === ArticleDesign.Audio ||
+					format.design === ArticleDesign.Video
+						? `bold`
+						: `regular`,
 			})};
 		}
 	`;
 };
 
-export const CardAge = ({ format, webPublicationDate, showClock }: Props) => {
+export const CardAge = ({
+	format,
+	containerPalette,
+	webPublicationDate,
+	showClock,
+}: Props) => {
 	const displayString = timeAgo(new Date(webPublicationDate).getTime());
+	const palette = decidePalette(format, containerPalette);
 
 	if (!displayString) {
 		return null;
 	}
 
 	return (
-		<span css={ageStyles(format)}>
+		<span css={ageStyles(format, palette)}>
 			<span>
 				{showClock && <ClockIcon />}
 				<time dateTime={webPublicationDate} data-relativeformat="med">

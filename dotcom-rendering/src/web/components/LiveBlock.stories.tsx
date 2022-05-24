@@ -1,35 +1,9 @@
-/* eslint-disable jsx-a11y/aria-role */
-
 import { css } from '@emotion/react';
-import { from, breakpoints } from '@guardian/source-foundations';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { breakpoints, from } from '@guardian/source-foundations';
+import { liveBlock } from '../../../fixtures/manual/liveBlock';
 import { images } from '../../../fixtures/generated/images';
 import { LiveBlock } from './LiveBlock';
-
-const baseBlock: Block = {
-	secondaryDateLine: 'First published on Fri 19 Feb 2021 17.20 GMT',
-	blockFirstPublishedDisplay: '19.30 GMT',
-	blockLastUpdated: 1613763519000,
-	firstPublishedDisplay: '17.20 GMT',
-	lastUpdatedDisplay: '19.47 GMT',
-	blockCreatedOnDisplay: '19.19 GMT',
-	blockLastUpdatedDisplay: '19.38 GMT',
-	firstPublished: 1613755208000,
-	createdOn: 1613762399000,
-	primaryDateLine: 'Fri 19 Feb 2021 19.41 GMT',
-	blockCreatedOn: 1613762399000,
-	blockFirstPublished: 1613763003000,
-	createdOnDisplay: '19.19 GMT',
-	lastUpdated: 1613764059000,
-	elements: [
-		{
-			elementId: '4ac2fcd8-284c-4038-91a1-093811f389ba',
-			_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-			html: '<p>Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption. </p>',
-		},
-	],
-	id: '60300f5f8f08ad21ea60071e',
-};
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -67,7 +41,7 @@ export default {
 
 export const VideoAsSecond = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		elements: [
 			{
 				elementId: '14ffdfde-113a-4270-afca-d34436dca56e',
@@ -115,7 +89,7 @@ VideoAsSecond.story = { name: 'with recap' };
 
 export const Title = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		title: 'Afternoon summary',
 		elements: [
 			{
@@ -164,7 +138,7 @@ Title.story = { name: 'with a title' };
 
 export const Video = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		elements: [
 			{
 				elementId: '09ed82c7-d0d8-445e-81b6-d8a39a547e3c',
@@ -234,7 +208,7 @@ Video.story = { name: 'with a video as the second element' };
 
 export const RichLink = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		elements: [
 			{
 				elementId: 'ae950f92-bc9b-4725-bac2-94fce86d8191',
@@ -279,7 +253,7 @@ RichLink.story = { name: 'with a rich link being forced inline' };
 
 export const FirstImage = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		elements: [
 			{
 				...images[0],
@@ -315,7 +289,7 @@ FirstImage.story = { name: 'with an image as the first element' };
 
 export const ImageRoles = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		elements: [
 			{
 				...images[0],
@@ -377,7 +351,7 @@ ImageRoles.story = { name: 'with images at different roles' };
 
 export const Thumbnail = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		elements: [
 			{
 				elementId: '1',
@@ -428,7 +402,7 @@ Thumbnail.story = { name: 'with a thumbnail image surrounded by text' };
 
 export const ImageAndTitle = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		title: 'Afternoon summary',
 		elements: [
 			{
@@ -464,9 +438,9 @@ export const ImageAndTitle = () => {
 ImageAndTitle.story = { name: 'with only a title and an image' };
 
 export const Updated = () => {
-	const publishedDate: number = baseBlock.blockFirstPublished || 999999;
+	const publishedDate: number = liveBlock.blockFirstPublished || 999999;
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		blockFirstPublished: publishedDate,
 		blockLastUpdated: publishedDate + 1000,
 	};
@@ -500,7 +474,7 @@ Updated.story = {
 
 export const Contributor = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		contributors: [
 			{
 				name: 'Andrew Roth',
@@ -537,7 +511,7 @@ Contributor.story = { name: 'with a contributor' };
 
 export const NoAvatar = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		contributors: [
 			{
 				name: 'Andrew Roth',
@@ -572,7 +546,7 @@ NoAvatar.story = { name: 'with a contributor but no avatar' };
 
 export const TitleAndContributor = () => {
 	const block: Block = {
-		...baseBlock,
+		...liveBlock,
 		title: 'Afternoon summary',
 		contributors: [
 			{

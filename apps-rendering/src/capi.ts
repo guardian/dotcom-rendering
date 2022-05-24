@@ -48,9 +48,6 @@ const isPhotoEssay = (content: Content): boolean =>
 const isFeature = (content: Content): boolean =>
 	content.tags.some((tag) => tag.id === 'tone/features');
 
-const isReview = (content: Content): boolean =>
-	[0, 1, 2, 3, 4, 5].includes(content.fields?.starRating ?? -1);
-
 const isAnalysis = (content: Content): boolean =>
 	content.tags.some((tag) => tag.id === 'tone/analysis');
 
@@ -227,7 +224,6 @@ export {
 	isImmersive,
 	isInteractive,
 	isFeature,
-	isReview,
 	isAnalysis,
 	articleSeries,
 	articleContributors,

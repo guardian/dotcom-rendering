@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
-
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
-import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
 import { Badge } from './Badge';
 import { SeriesSectionLink } from './SeriesSectionLink';
 

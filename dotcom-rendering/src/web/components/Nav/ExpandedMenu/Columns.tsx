@@ -1,18 +1,17 @@
 import { css } from '@emotion/react';
-
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay } from '@guardian/libs';
 import {
 	brand,
-	brandText,
 	brandAlt,
+	brandText,
+	from,
 	headline,
 	textSans,
-	from,
 } from '@guardian/source-foundations';
-
-import { ArticleDisplay, ArticleFormat } from '@guardian/libs';
 import { Column } from './Column';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 import { MoreColumn } from './MoreColumn';
+import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
 const columnsStyle = (display: ArticleDisplay) => css`
 	box-sizing: border-box;

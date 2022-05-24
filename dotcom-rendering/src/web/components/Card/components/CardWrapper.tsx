@@ -1,33 +1,30 @@
 import { css } from '@emotion/react';
-
-import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
+	containerPalette?: DCRContainerPalette;
 };
 
-const cardStyles = (format: ArticleFormat) => {
-	const palette = decidePalette(format);
+const cardStyles = (format: ArticleFormat, palette?: Palette) => {
+	const cardPalette = palette || decidePalette(format);
 	const baseCardStyles = css`
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		width: 100%;
-		/* We absolutely position bioth the 1 pixel top bar below and the faux link
+		/* We absolutely position the faux link
 		so this is required here */
 		position: relative;
 
 		/* Styling for top bar */
 		:before {
-			background-color: ${palette.topBar.card};
+			background-color: ${cardPalette.topBar.card};
 			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
 			height: 1px;
 			z-index: 2;
 		}
@@ -45,7 +42,7 @@ const cardStyles = (format: ArticleFormat) => {
 		/* a tag specific styles */
 		color: inherit;
 		text-decoration: none;
-		background-color: ${palette.background.card};
+		background-color: ${cardPalette.background.card};
 	`;
 
 	if (format.theme === ArticleSpecial.SpecialReport) {
@@ -71,7 +68,9 @@ const cardStyles = (format: ArticleFormat) => {
 					background-color: #fdf0e8;
 				}
 			`;
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 		case ArticleDesign.LiveBlog:
 			return css`
 				${baseCardStyles};
@@ -89,6 +88,7 @@ const cardStyles = (format: ArticleFormat) => {
 	}
 };
 
-export const CardWrapper = ({ children, format }: Props) => (
-	<div css={cardStyles(format)}>{children}</div>
-);
+export const CardWrapper = ({ children, format, containerPalette }: Props) => {
+	const palette = decidePalette(format, containerPalette);
+	return <div css={cardStyles(format, palette)}>{children}</div>;
+};

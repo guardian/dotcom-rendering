@@ -1,5 +1,5 @@
 import React from 'react';
-import { PermutivePayload } from '../lib/permutive';
+import type { PermutivePayload } from '../lib/permutive';
 
 export interface AnalyticsModel {
 	gaTracker: string;

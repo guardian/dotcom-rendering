@@ -40,7 +40,7 @@ const fullWidthStyles = css`
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	overflow-x: hidden;
+	overflow: hidden;
 `;
 
 const captionStyles = css`
@@ -124,7 +124,9 @@ const getImageStyle = (
 const isFullWidthImage = (format: ArticleFormat): boolean =>
 	format.display === ArticleDisplay.Immersive ||
 	format.design === ArticleDesign.Interview ||
-	format.design === ArticleDesign.Media;
+	format.design === ArticleDesign.Gallery ||
+	format.design === ArticleDesign.Audio ||
+	format.design === ArticleDesign.Video;
 
 const getStyles = (
 	format: ArticleFormat,

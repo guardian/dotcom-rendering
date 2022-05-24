@@ -1,13 +1,11 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { ArticleDesign } from '@guardian/libs';
-
 import { Card } from './Card/Card';
-import { UL } from './Card/components/UL';
 import { LI } from './Card/components/LI';
+import { UL } from './Card/components/UL';
 
 type Props = {
 	content: TrailType[];
+	containerPalette?: DCRContainerPalette;
 };
 
 const decidePercentage = (length: number) => {
@@ -24,7 +22,7 @@ const decidePercentage = (length: number) => {
 	}
 };
 
-export const FourOrLess = ({ content }: Props) => {
+export const FourOrLess = ({ content, containerPalette }: Props) => {
 	const percentage = decidePercentage(content.length);
 
 	return (
@@ -38,6 +36,8 @@ export const FourOrLess = ({ content }: Props) => {
 						percentage={percentage}
 					>
 						<Card
+							containerPalette={containerPalette}
+							showAge={true}
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}

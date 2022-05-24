@@ -1,14 +1,19 @@
 import { ArticleDesign } from '@guardian/libs';
-
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 
 type Props = {
 	trails: TrailType[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
 };
 
-export const FixedSmallSlowIV = ({ trails }: Props) => {
+export const FixedSmallSlowIV = ({
+	trails,
+	containerPalette,
+	showAge,
+}: Props) => {
 	const slicedTrails = trails.slice(0, 4);
 
 	return (
@@ -21,6 +26,8 @@ export const FixedSmallSlowIV = ({ trails }: Props) => {
 						padBottomOnMobile={true}
 					>
 						<Card
+							containerPalette={containerPalette}
+							showAge={showAge}
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}

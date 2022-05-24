@@ -23,7 +23,10 @@ import Live from './live';
 const renderWithAds =
 	(shouldHide: boolean) =>
 	(format: ArticleFormat, elements: BodyElement[]): ReactNode[] =>
-		getAdPlaceholderInserter(shouldHide)(renderAll(format, elements));
+		getAdPlaceholderInserter(shouldHide)(
+			renderAll(format, elements),
+			format,
+		);
 
 // ----- Component ----- //
 
@@ -76,7 +79,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <Comment item={item}>{render(item, body)}</Comment>;
 	}
 
-	if (item.design === ArticleDesign.Media) {
+	if (
+		item.design === ArticleDesign.Gallery ||
+		item.design === ArticleDesign.Audio ||
+		item.design === ArticleDesign.Video
+	) {
 		return (
 			<Media item={item}>
 				{render(

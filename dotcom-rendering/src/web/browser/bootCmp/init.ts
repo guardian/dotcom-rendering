@@ -1,20 +1,16 @@
-import { getCookie, log } from '@guardian/libs';
 import {
 	cmp,
-	onConsentChange,
 	getConsentFor,
+	onConsentChange,
 } from '@guardian/consent-management-platform';
-import { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import { getCookie, log } from '@guardian/libs';
 import { getLocaleCode } from '../../lib/getCountryCode';
 import { injectPrivacySettingsLink } from '../../lib/injectPrivacySettingsLink';
-import { startup } from '../startup';
-
 import { loadScript } from '../../lib/loadScript';
-import {
-	OphanComponentType,
-	OphanAction,
-	submitComponentEvent,
-} from '../ophan/ophan';
+import type { OphanAction, OphanComponentType } from '../ophan/ophan';
+import { submitComponentEvent } from '../ophan/ophan';
+import { startup } from '../startup';
 
 const trackPerformance = (
 	timingCategory: string,
@@ -108,7 +104,7 @@ const init = async (): Promise<void> => {
 		const decideConsentCarrierLabels = () => {
 			if (consentState.tcfv2) {
 				const consentUUID = getCookie({ name: 'consentUUID' }) || '';
-				const consentString = consentState.tcfv2?.tcString;
+				const consentString = consentState.tcfv2.tcString;
 				return [
 					'01:TCF.v2',
 					`02:${consentUUID}`,
@@ -117,7 +113,7 @@ const init = async (): Promise<void> => {
 			}
 			if (consentState.ccpa) {
 				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
-				const flag = consentState.ccpa?.doNotSell ? 'true' : 'false';
+				const flag = consentState.ccpa.doNotSell ? 'true' : 'false';
 				return ['01:CCPA', `04:${ccpaUUID}`, `05:${flag}`];
 			}
 			if (consentState.aus) {
@@ -162,7 +158,7 @@ const init = async (): Promise<void> => {
 			// Disable Google Analytics
 			// Note. We should never be able to directly set things to the global window object
 			// but in this case we want to stub things for testing, so it's ok to ignore this rule
-			// @ts-ignore
+			// @ts-expect-error
 			window.ga = null;
 		}
 	});

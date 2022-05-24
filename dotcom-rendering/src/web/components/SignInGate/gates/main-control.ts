@@ -1,12 +1,12 @@
 import { hasUserDismissedGate } from '../dismissGate';
-import { CanShowGateProps, SignInGateComponent } from '../types';
 import {
+	isIOS9,
 	isNPageOrHigherPageView,
 	isValidContentType,
 	isValidSection,
 	isValidTag,
-	isIOS9,
 } from '../displayRule';
+import type { CanShowGateProps, SignInGateComponent } from '../types';
 
 const canShow = ({
 	isSignedIn,

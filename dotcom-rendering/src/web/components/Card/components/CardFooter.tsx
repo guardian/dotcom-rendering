@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 
 type Props = {
 	format: ArticleFormat;
@@ -23,12 +21,6 @@ const flexEnd = css`
 	justify-content: flex-end;
 `;
 
-const linesWrapperStyles = css`
-	/* Fill the container */
-	flex: 1;
-	align-self: flex-end;
-`;
-
 export const CardFooter = ({
 	format,
 	age,
@@ -42,26 +34,10 @@ export const CardFooter = ({
 	}
 
 	if (
-		format.design === ArticleDesign.Comment ||
-		format.design === ArticleDesign.Editorial ||
-		format.design === ArticleDesign.Letter
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video
 	) {
-		return (
-			<footer>
-				{supportingContent}
-				<div css={spaceBetween}>
-					{age}
-					<StraightLines
-						cssOverrides={linesWrapperStyles}
-						count={4}
-					/>
-					{commentCount}
-				</div>
-			</footer>
-		);
-	}
-
-	if (format.design === ArticleDesign.Media) {
 		return (
 			<footer>
 				{supportingContent}

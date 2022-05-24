@@ -1,13 +1,11 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-
 import { Card } from './Card/Card';
-import { UL } from './Card/components/UL';
 import { LI } from './Card/components/LI';
+import { UL } from './Card/components/UL';
 
 type Props = {
 	content: TrailType[];
+	containerPalette?: DCRContainerPalette;
 };
 
 const decidePercentage = (length: number) => {
@@ -24,7 +22,7 @@ const decidePercentage = (length: number) => {
 	}
 };
 
-export const MoreThanFive = ({ content }: Props) => {
+export const MoreThanFive = ({ content, containerPalette }: Props) => {
 	const secondRowPercentage = decidePercentage(content.length);
 	const secondRowTrails = content.slice(4, content.length);
 	return (
@@ -32,6 +30,8 @@ export const MoreThanFive = ({ content }: Props) => {
 			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="25%">
 					<Card
+						containerPalette={containerPalette}
+						showAge={true}
 						linkTo={content[0].url}
 						format={content[0].format}
 						headlineText={content[0].headline}
@@ -65,6 +65,8 @@ export const MoreThanFive = ({ content }: Props) => {
 					percentage="25%"
 				>
 					<Card
+						containerPalette={containerPalette}
+						showAge={true}
 						linkTo={content[1].url}
 						format={content[1].format}
 						headlineText={content[1].headline}
@@ -98,6 +100,8 @@ export const MoreThanFive = ({ content }: Props) => {
 					percentage="25%"
 				>
 					<Card
+						containerPalette={containerPalette}
+						showAge={true}
 						linkTo={content[2].url}
 						format={content[2].format}
 						headlineText={content[2].headline}
@@ -131,6 +135,8 @@ export const MoreThanFive = ({ content }: Props) => {
 					percentage="25%"
 				>
 					<Card
+						containerPalette={containerPalette}
+						showAge={true}
 						linkTo={content[3].url}
 						format={content[3].format}
 						headlineText={content[3].headline}
@@ -167,6 +173,8 @@ export const MoreThanFive = ({ content }: Props) => {
 						percentage={secondRowPercentage}
 					>
 						<Card
+							containerPalette={containerPalette}
+							showAge={true}
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}

@@ -1,31 +1,28 @@
 import { css } from '@emotion/react';
-
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/source-foundations';
-
-import { StarRating } from '../StarRating/StarRating';
-import { CardHeadline } from '../CardHeadline';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { decidePalette } from '../../lib/decidePalette';
+import { formatCount } from '../../lib/formatCount';
 import { Avatar } from '../Avatar';
+import { CardCommentCount } from '../CardCommentCount';
+import { CardHeadline } from '../CardHeadline';
 import { Flex } from '../Flex';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
-import { CardCommentCount } from '../CardCommentCount';
-
-import { decidePalette } from '../../lib/decidePalette';
-import { formatCount } from '../../lib/formatCount';
-
-import { ContentWrapper } from './components/ContentWrapper';
-import { HeadlineWrapper } from './components/HeadlineWrapper';
-import { CardLayout } from './components/CardLayout';
-import { ImageWrapper } from './components/ImageWrapper';
+import { StarRating } from '../StarRating/StarRating';
+import { SupportingContent } from '../SupportingContent';
 import { AvatarContainer } from './components/AvatarContainer';
-import { TrailTextWrapper } from './components/TrailTextWrapper';
-import { CardFooter } from './components/CardFooter';
-import { CardWrapper } from './components/CardWrapper';
-import { CardLink } from './components/CardLink';
 import { CardAge } from './components/CardAge';
 import { CardBranding } from './components/CardBranding';
-import { SupportingContent } from '../SupportingContent';
+import { CardFooter } from './components/CardFooter';
+import { CardLayout } from './components/CardLayout';
+import { CardLink } from './components/CardLink';
+import { CardWrapper } from './components/CardWrapper';
+import { ContentWrapper } from './components/ContentWrapper';
+import { HeadlineWrapper } from './components/HeadlineWrapper';
+import { ImageWrapper } from './components/ImageWrapper';
+import { TrailTextWrapper } from './components/TrailTextWrapper';
 import { Snap } from '../Snap';
 
 export type Props = {
@@ -60,6 +57,8 @@ export type Props = {
 	supportingContent?: DCRSupportingContent[];
 	type?: string;
 	enriched?: DCREnrichedContent;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
 };
 
 const starWrapper = css`
@@ -83,6 +82,32 @@ const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
 		</Hide>
 	</>
 );
+
+/**
+ * This functions contains the business logic that decides when the card age should be
+ * shown. It uses the format of the article the card links to as well as information
+ * about the container where the card sits.
+ *
+ */
+const decideIfAgeShouldShow = ({
+	containerPalette,
+	format,
+	showAge,
+}: {
+	containerPalette?: DCRContainerPalette;
+	format: ArticleFormat;
+	showAge: boolean;
+}): boolean => {
+	// Some containers force all cards to show age. E.g., The articles in the headlines
+	// container are typically very recent so we want to display age there
+	if (showAge) return true;
+	// Palettes are time sensitive so show age if one is being used
+	if (containerPalette) return true;
+	// Liveblogs are evidently time sensitive
+	if (format.design === ArticleDesign.LiveBlog) return true;
+	// Otherwise, do not show the article age on the Card
+	return false;
+};
 
 export const Card = ({
 	linkTo,
@@ -113,99 +138,39 @@ export const Card = ({
 	supportingContent,
 	type,
 	enriched,
+	containerPalette,
+	showAge = false,
 }: Props) => {
 	const showCommentCount = commentCount || commentCount === 0;
+	const palette = decidePalette(format, containerPalette);
 	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
-	const cardPalette = decidePalette(format);
+	const hasSublinks = supportingContent && supportingContent.length > 0;
+	const noOfSublinks = (supportingContent && supportingContent.length) || 0;
 
-	const moreThanTwoSubLinks: boolean = !!(
-		supportingContent?.length && supportingContent.length > 2
-	);
+	const isOpinion =
+		format.design === ArticleDesign.Comment ||
+		format.design === ArticleDesign.Editorial ||
+		format.design === ArticleDesign.Letter;
 
-	const cardIsVertical =
-		imagePosition === 'top' || imagePosition === 'bottom';
-
-	const positionFooterUnderContent = !moreThanTwoSubLinks && cardIsVertical;
-
-	const renderFooter = ({
-		renderAge = true,
-		renderMediaMeta = true,
-		renderCommentCount = true,
-		renderCardBranding = true,
-		renderSupportingContent = true,
-		forceVertical = false,
-	}: {
-		renderAge?: boolean;
-		renderMediaMeta?: boolean;
-		renderCommentCount?: boolean;
-		renderCardBranding?: boolean;
-		renderSupportingContent?: boolean;
-		forceVertical?: boolean;
-	}) => {
-		return (
-			<CardFooter
-				format={format}
-				age={
-					renderAge && webPublicationDate ? (
-						<CardAge
-							format={format}
-							webPublicationDate={webPublicationDate}
-							showClock={showClock}
-						/>
-					) : undefined
-				}
-				mediaMeta={
-					renderMediaMeta &&
-					format.design === ArticleDesign.Media &&
-					mediaType ? (
-						<MediaMeta
-							palette={cardPalette}
-							mediaType={mediaType}
-							mediaDuration={mediaDuration}
-						/>
-					) : undefined
-				}
-				commentCount={
-					renderCommentCount &&
-					showCommentCount &&
-					longCount &&
-					shortCount ? (
-						<CardCommentCount
-							palette={cardPalette}
-							long={longCount}
-							short={shortCount}
-						/>
-					) : undefined
-				}
-				cardBranding={
-					renderCardBranding && branding ? (
-						<CardBranding branding={branding} format={format} />
-					) : undefined
-				}
-				supportingContent={
-					renderSupportingContent &&
-					supportingContent &&
-					supportingContent.length > 0 ? (
-						<SupportingContent
-							supportingContent={supportingContent}
-							imagePosition={
-								forceVertical ? 'top' : imagePosition
-							}
-						/>
-					) : undefined
-				}
-			/>
-		);
-	};
+	const renderAge = decideIfAgeShouldShow({
+		containerPalette,
+		format,
+		showAge,
+	});
 
 	if (type === 'LinkSnap') {
 		return <Snap enriched={enriched} />;
 	}
 
 	return (
-		<CardWrapper format={format}>
-			<CardLink linkTo={linkTo} dataLinkName={dataLinkName} />
+		<CardWrapper format={format} containerPalette={containerPalette}>
+			<CardLink
+				linkTo={linkTo}
+				dataLinkName={dataLinkName}
+				format={format}
+				containerPalette={containerPalette}
+			/>
 			<CardLayout
 				imagePosition={imagePosition}
 				imagePositionOnMobile={imagePositionOnMobile}
@@ -232,6 +197,7 @@ export const Card = ({
 							<CardHeadline
 								headlineText={headlineText}
 								format={format}
+								containerPalette={containerPalette}
 								size={headlineSize}
 								showQuotes={showQuotes}
 								kickerText={
@@ -257,7 +223,8 @@ export const Card = ({
 									<Avatar
 										imageSrc={avatar.src}
 										imageAlt={avatar.alt}
-										palette={cardPalette}
+										containerPalette={containerPalette}
+										format={format}
 									/>
 								</AvatarContainer>
 							</Hide>
@@ -265,7 +232,10 @@ export const Card = ({
 					</Flex>
 					<div>
 						{trailText && (
-							<TrailTextWrapper palette={cardPalette}>
+							<TrailTextWrapper
+								containerPalette={containerPalette}
+								format={format}
+							>
 								<div
 									dangerouslySetInnerHTML={{
 										__html: trailText,
@@ -279,22 +249,82 @@ export const Card = ({
 									<Avatar
 										imageSrc={avatar.src}
 										imageAlt={avatar.alt}
-										palette={cardPalette}
+										containerPalette={containerPalette}
+										format={format}
 									/>
 								</AvatarContainer>
 							</Hide>
 						)}
-						{/* Show the card footer in the same column as the headline content */}
-						{positionFooterUnderContent ? (
-							renderFooter({ forceVertical: true })
+						<CardFooter
+							format={format}
+							age={
+								renderAge && webPublicationDate ? (
+									<CardAge
+										format={format}
+										containerPalette={containerPalette}
+										webPublicationDate={webPublicationDate}
+										showClock={showClock}
+									/>
+								) : undefined
+							}
+							mediaMeta={
+								(format.design === ArticleDesign.Gallery ||
+									format.design === ArticleDesign.Audio ||
+									format.design === ArticleDesign.Video) &&
+								mediaType ? (
+									<MediaMeta
+										containerPalette={containerPalette}
+										format={format}
+										mediaType={mediaType}
+										mediaDuration={mediaDuration}
+									/>
+								) : undefined
+							}
+							commentCount={
+								showCommentCount && longCount && shortCount ? (
+									<CardCommentCount
+										containerPalette={containerPalette}
+										format={format}
+										long={longCount}
+										short={shortCount}
+									/>
+								) : undefined
+							}
+							cardBranding={
+								branding ? (
+									<CardBranding
+										branding={branding}
+										format={format}
+									/>
+								) : undefined
+							}
+						/>
+						{hasSublinks && noOfSublinks <= 2 ? (
+							<SupportingContent
+								supportingContent={supportingContent}
+								alignment="vertical"
+							/>
 						) : (
 							<></>
 						)}
 					</div>
 				</ContentWrapper>
 			</CardLayout>
-			{/* If there are more than two sublinks break footer out of the headline column into a row below */}
-			{!positionFooterUnderContent ? renderFooter({}) : <></>}
+			{hasSublinks && noOfSublinks > 2 ? (
+				<SupportingContent
+					supportingContent={supportingContent}
+					alignment={
+						imagePosition === 'top' || imagePosition === 'bottom'
+							? 'vertical'
+							: 'horizontal'
+					}
+				/>
+			) : (
+				<></>
+			)}
+			{isOpinion && (
+				<StraightLines color={palette.border.lines} count={4} />
+			)}
 		</CardWrapper>
 	);
 };

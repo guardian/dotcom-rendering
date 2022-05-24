@@ -35,7 +35,9 @@ const triangleStyles = (
 
 const Triangle: FC<TriangleProps> = ({ format, supportsDarkMode }) => {
 	switch (format.design) {
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return null;
 		default:
 			return (
@@ -81,7 +83,9 @@ const getStyles = (
 	supportsDarkMode: boolean
 ): SerializedStyles => {
 	switch (format.design) {
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 			return css(styles(supportsDarkMode), mediaStyles(supportsDarkMode));
 		default:
 			return styles(supportsDarkMode);

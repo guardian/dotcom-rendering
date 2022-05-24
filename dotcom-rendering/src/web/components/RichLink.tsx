@@ -1,22 +1,20 @@
 import { css } from '@emotion/react';
-
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
-	text,
 	brandAltBackground,
-	neutral,
-	headline,
-	textSans,
 	from,
+	headline,
+	neutral,
+	text,
+	textSans,
 } from '@guardian/source-foundations';
-import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
-
 import ArrowInCircle from '../../static/icons/arrow-in-circle.svg';
-
 import { decidePalette } from '../lib/decidePalette';
-import { StarRating } from './StarRating/StarRating';
-import { QuoteIcon } from './QuoteIcon';
-import { Hide } from './Hide';
 import { Avatar } from './Avatar';
+import { Hide } from './Hide';
+import { QuoteIcon } from './QuoteIcon';
+import { StarRating } from './StarRating/StarRating';
 
 interface Props {
 	richLinkIndex: number;
@@ -303,7 +301,7 @@ export const RichLink = ({
 								<Avatar
 									imageSrc={contributorImage}
 									imageAlt={mainContributor}
-									palette={palette}
+									format={format}
 								/>
 							</div>
 						)}

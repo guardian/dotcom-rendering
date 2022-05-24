@@ -1,14 +1,12 @@
 import { css } from '@emotion/react';
-
 import {
 	brand,
-	brandText,
 	brandAlt,
-	textSans,
+	brandText,
 	from,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-
 import FacebookIcon from '../../../../static/icons/facebook.svg';
 import TwitterIconPadded from '../../../../static/icons/twitter-padded.svg';
 

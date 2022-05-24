@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import {
 	background,
 	brand,
+	from,
+	headline,
 	line,
 	opinion,
 	space,
 	text,
-	from,
-	headline,
 	textSans,
 } from '@guardian/source-foundations';
 

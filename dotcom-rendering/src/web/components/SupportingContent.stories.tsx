@@ -1,14 +1,14 @@
-/* eslint-disable react/jsx-props-no-spreading */
+import { css } from '@emotion/react';
 import {
 	ArticleDesign,
-	ArticlePillar,
 	ArticleDisplay,
+	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
+import type { Props as CardProps } from './Card/Card';
+import { Card } from './Card/Card';
 import { SupportingContent } from './SupportingContent';
-import { Card, Props as CardProps } from './Card/Card';
 
 export default {
 	component: SupportingContent,
@@ -46,7 +46,7 @@ export const Default = () => {
 	return (
 		<SupportingContent
 			supportingContent={[aBasicLink]}
-			imagePosition="top"
+			alignment="horizontal"
 		/>
 	);
 };
@@ -55,7 +55,7 @@ export const WithKicker = () => {
 	return (
 		<SupportingContent
 			supportingContent={[{ ...aBasicLink, kickerText: 'Kicket text' }]}
-			imagePosition="top"
+			alignment="horizontal"
 		/>
 	);
 };

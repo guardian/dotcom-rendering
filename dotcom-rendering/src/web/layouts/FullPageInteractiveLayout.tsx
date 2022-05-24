@@ -1,40 +1,36 @@
 import { css, Global } from '@emotion/react';
-
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
+	border,
 	brandBackground,
 	brandBorder,
-	labs,
-	border,
 	brandLine,
-	neutral,
 	from,
+	labs,
+	neutral,
 	until,
 } from '@guardian/source-foundations';
-import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
-
-import { Footer } from '../components/Footer';
-import { SubNav } from '../components/SubNav.importable';
-import { ElementContainer } from '../components/ElementContainer';
-import { Nav } from '../components/Nav/Nav';
 import {
-	MobileStickyContainer,
-	labelStyles as adLabelStyles,
 	adCollapseStyles,
+	labelStyles as adLabelStyles,
+	MobileStickyContainer,
 } from '../components/AdSlot';
-import { LabsHeader } from '../components/LabsHeader.importable';
-
-import { getZIndex } from '../lib/getZIndex';
-
-import { Stuck, BannerWrapper } from './lib/stickiness';
-import { getCurrentPillar } from '../lib/layoutHelpers';
-
-import { renderElement } from '../lib/renderElement';
+import { ElementContainer } from '../components/ElementContainer';
+import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
-import { decidePalette } from '../lib/decidePalette';
 import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader.importable';
+import { Nav } from '../components/Nav/Nav';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { SubNav } from '../components/SubNav.importable';
+import { decidePalette } from '../lib/decidePalette';
+import { getZIndex } from '../lib/getZIndex';
+import { getCurrentPillar } from '../lib/layoutHelpers';
+import { renderElement } from '../lib/renderElement';
+import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
 	CAPIArticle: CAPIArticleType;
@@ -209,6 +205,10 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props): JSX.Element => {
 							edition={CAPIArticle.editionId}
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
+							supporterCTA={
+								CAPIArticle.nav.readerRevenueLinks.header
+									.supporter
+							}
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
 							}
@@ -363,6 +363,11 @@ export const FullPageInteractiveLayout = ({
 					pageFooter={CAPIArticle.pageFooter}
 					pillar={format.theme}
 					pillars={NAV.pillars}
+					urls={CAPIArticle.nav.readerRevenueLinks.header}
+					edition={CAPIArticle.editionId}
+					contributionsServiceUrl={
+						CAPIArticle.contributionsServiceUrl
+					}
 				/>
 			</ElementContainer>
 
@@ -385,7 +390,12 @@ export const FullPageInteractiveLayout = ({
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzlesBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

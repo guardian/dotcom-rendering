@@ -118,7 +118,11 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		return css(styles(kickerColor), getFontStyles(neutral[20], 'tight'));
 	}
 
-	if (format.design === ArticleDesign.Media) {
+	if (
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video
+	) {
 		return css(styles(kickerColor), galleryStyles);
 	}
 	return styles(kickerColor);

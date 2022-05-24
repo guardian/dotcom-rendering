@@ -1,15 +1,12 @@
 import { css } from '@emotion/react';
-
-import { from, until } from '@guardian/source-foundations';
-
 import { ArticleDesign } from '@guardian/libs';
-import TwitterIconPadded from '../../static/icons/twitter-padded.svg';
-import FacebookIcon from '../../static/icons/facebook.svg';
+import { from, until } from '@guardian/source-foundations';
 import EmailIcon from '../../static/icons/email.svg';
+import FacebookIcon from '../../static/icons/facebook.svg';
 import LinkedInIcon from '../../static/icons/linked-in.svg';
-import WhatsAppIcon from '../../static/icons/whatsapp.svg';
 import MessengerIcon from '../../static/icons/messenger.svg';
-
+import TwitterIconPadded from '../../static/icons/twitter-padded.svg';
+import WhatsAppIcon from '../../static/icons/whatsapp.svg';
 import { decidePalette } from '../lib/decidePalette';
 import { Hide } from './Hide';
 
@@ -248,6 +245,7 @@ export const ShareIcons = ({
 						role="button"
 						aria-label="Share via Email"
 						target="_blank"
+						rel="noreferrer"
 						data-ignore="global-link-styling"
 					>
 						<span

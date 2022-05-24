@@ -43,7 +43,6 @@ const recordLog = ({
 		? 'https://logs.guardianapis.com/log'
 		: 'https://logs.code.dev-guardianapis.com/log';
 
-	// eslint-disable-next-line no-void
 	void fetch(endpoint, {
 		method: 'POST',
 		body: JSON.stringify(data),

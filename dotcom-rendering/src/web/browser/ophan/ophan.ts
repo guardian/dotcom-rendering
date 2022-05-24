@@ -1,12 +1,12 @@
 import type {
 	OphanABEvent,
 	OphanABPayload,
+	OphanABTestMeta,
 	OphanAction,
 	OphanComponent,
 	OphanComponentEvent,
 	OphanComponentType,
 	OphanProduct,
-	OphanABTestMeta,
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
 
@@ -16,7 +16,7 @@ export type OphanRecordFunction = (
 ) => void;
 
 export const getOphanRecordFunction = (): OphanRecordFunction => {
-	const record = window?.guardian?.ophan?.record;
+	const record = window.guardian.ophan?.record;
 
 	if (record) return record;
 
@@ -25,7 +25,7 @@ export const getOphanRecordFunction = (): OphanRecordFunction => {
 };
 
 export const record: OphanRecordFunction = (event) => {
-	if (window?.guardian?.ophan?.record) {
+	if (window.guardian.ophan?.record) {
 		window.guardian.ophan.record(event, () =>
 			log('dotcom', '🧿 Ophan event recorded:', event),
 		);
@@ -95,7 +95,7 @@ export const sendOphanPlatformRecord = () => {
 	record({ experiences: 'dotcom-rendering' });
 
 	// Record server-side AB test variants (i.e. control or variant)
-	if (window?.guardian?.config?.tests) {
+	if (window.guardian.config.tests) {
 		const { tests } = window.guardian.config;
 
 		record(abTestPayload(tests));

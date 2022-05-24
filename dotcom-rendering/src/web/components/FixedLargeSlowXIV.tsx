@@ -1,14 +1,19 @@
 import { ArticleDesign } from '@guardian/libs';
-
 import { Card } from './Card/Card';
-import { UL } from './Card/components/UL';
 import { LI } from './Card/components/LI';
+import { UL } from './Card/components/UL';
 
 type Props = {
 	trails: TrailType[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
 };
 
-export const FixedLargeSlowXIV = ({ trails }: Props) => {
+export const FixedLargeSlowXIV = ({
+	trails,
+	containerPalette,
+	showAge,
+}: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
 	const groups = [
@@ -22,6 +27,8 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="75%">
 					<Card
+						containerPalette={containerPalette}
+						showAge={showAge}
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
@@ -60,6 +67,8 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 					percentage="25%"
 				>
 					<Card
+						containerPalette={containerPalette}
+						showAge={showAge}
 						linkTo={secondary.url}
 						format={secondary.format}
 						headlineText={secondary.headline}
@@ -99,6 +108,8 @@ export const FixedLargeSlowXIV = ({ trails }: Props) => {
 									showDivider={cardIndex !== 0}
 								>
 									<Card
+										containerPalette={containerPalette}
+										showAge={showAge}
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}

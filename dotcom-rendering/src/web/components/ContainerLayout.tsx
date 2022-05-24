@@ -1,12 +1,13 @@
 import { css } from '@emotion/react';
-
-import { space, from } from '@guardian/source-foundations';
-import { ArticleFormat, ArticleDesign } from '@guardian/libs';
-import { ElementContainer } from './ElementContainer';
-import { LeftColumn } from './LeftColumn';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
+import { from, space } from '@guardian/source-foundations';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { ContainerTitle } from './ContainerTitle';
-import { Hide } from './Hide';
+import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
+import { Hide } from './Hide';
+import { LeftColumn } from './LeftColumn';
 
 type Props = {
 	title?: string;
@@ -29,6 +30,8 @@ type Props = {
 	format?: ArticleFormat;
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
+	containerPalette?: DCRContainerPalette;
+	innerBackgroundColour?: string;
 };
 
 const containerStyles = css`
@@ -117,50 +120,59 @@ export const ContainerLayout = ({
 	format,
 	ophanComponentLink,
 	ophanComponentName,
-}: Props) => (
-	<ElementContainer
-		sectionId={sectionId}
-		showSideBorders={sideBorders}
-		showTopBorder={showTopBorder}
-		padded={padSides}
-		borderColour={borderColour}
-		backgroundColour={backgroundColour}
-		element="section"
-		ophanComponentLink={ophanComponentLink}
-		ophanComponentName={ophanComponentName}
-	>
-		<Flex>
-			<LeftColumn
-				borderType={centralBorder}
-				borderColour={borderColour}
-				size={leftColSize}
-			>
-				<>
-					<ContainerTitle
-						title={title}
-						fontColour={fontColour}
-						description={description}
-						url={url}
-					/>
-					{leftContent}
-				</>
-			</LeftColumn>
-			<Container
-				padded={padContent}
-				verticalMargins={verticalMargins}
-				stretchRight={stretchRight}
-				format={format}
-			>
-				<Hide when="above" breakpoint="leftCol">
-					<ContainerTitle
-						title={title}
-						fontColour={fontColour}
-						description={description}
-						url={url}
-					/>
-				</Hide>
-				{children}
-			</Container>
-		</Flex>
-	</ElementContainer>
-);
+	containerPalette,
+	innerBackgroundColour,
+}: Props) => {
+	const overrides =
+		containerPalette && decideContainerOverrides(containerPalette);
+	return (
+		<ElementContainer
+			sectionId={sectionId}
+			showSideBorders={sideBorders}
+			showTopBorder={showTopBorder}
+			padded={padSides}
+			borderColour={borderColour || overrides?.border.container}
+			backgroundColour={
+				backgroundColour || overrides?.background.container
+			}
+			element="section"
+			ophanComponentLink={ophanComponentLink}
+			ophanComponentName={ophanComponentName}
+			innerBackgroundColour={innerBackgroundColour}
+		>
+			<Flex>
+				<LeftColumn
+					borderType={centralBorder}
+					borderColour={borderColour || overrides?.border.container}
+					size={leftColSize}
+				>
+					<>
+						<ContainerTitle
+							title={title}
+							fontColour={fontColour || overrides?.text.container}
+							description={description}
+							url={url}
+						/>
+						{leftContent}
+					</>
+				</LeftColumn>
+				<Container
+					padded={padContent}
+					verticalMargins={verticalMargins}
+					stretchRight={stretchRight}
+					format={format}
+				>
+					<Hide when="above" breakpoint="leftCol">
+						<ContainerTitle
+							title={title}
+							fontColour={fontColour || overrides?.text.container}
+							description={description}
+							url={url}
+						/>
+					</Hide>
+					{children}
+				</Container>
+			</Flex>
+		</ElementContainer>
+	);
+};

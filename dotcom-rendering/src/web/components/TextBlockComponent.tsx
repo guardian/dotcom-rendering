@@ -1,25 +1,19 @@
 import { ClassNames } from '@emotion/react';
-
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	neutral,
 	body,
-	textSans,
 	from,
+	neutral,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	ArticleFormat,
-	ArticleSpecial,
-} from '@guardian/libs';
-import { sanitise } from '../../lib/sanitise-html';
-
+import type { IOptions } from 'sanitize-html';
+import sanitise from 'sanitize-html';
 import { unwrapHtml } from '../../model/unwrapHtml';
-import { RewrappedComponent } from './RewrappedComponent';
-
-import { DropCap } from './DropCap';
 import { decidePalette } from '../lib/decidePalette';
+import { DropCap } from './DropCap';
+import { RewrappedComponent } from './RewrappedComponent';
 
 type Props = {
 	html: string;
@@ -103,20 +97,28 @@ const shouldShowDropCap = ({
 	return false;
 };
 
-const sanitiserOptions = {
-	// Defaults: https://www.npmjs.com/package/sanitize-html#what-are-the-default-options
+/**
+ * https://www.npmjs.com/package/sanitize-html#default-options
+ */
+const sanitiserOptions: IOptions = {
 	allowedTags: false, // Leave tags from CAPI alone
 	allowedAttributes: false, // Leave attributes from CAPI alone
 	transformTags: {
-		a: (tagName: string, attribs: { [key: string]: any }) => ({
-			tagName, // Just return anchors as is
-			attribs: {
-				...attribs, // Merge into the existing attributes
-				...{
-					'data-link-name': 'in body link', // Add the data-link-name for Ophan to anchors
+		a: (tagName, attribs) => {
+			const mailto = attribs.href.startsWith('mailto:')
+				? ` | ${attribs.href}`
+				: '';
+
+			return {
+				tagName, // Just return anchors as is
+				attribs: {
+					...attribs, // Merge into the existing attributes
+					...{
+						'data-link-name': `in body link${mailto}`, // Add the data-link-name for Ophan to anchors
+					},
 				},
-			},
-		}),
+			};
+		},
 	},
 };
 

@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
+import { border, space } from '@guardian/source-foundations';
 import {
 	DottedLines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { border, space } from '@guardian/source-foundations';
 
 const block = css`
 	display: block;

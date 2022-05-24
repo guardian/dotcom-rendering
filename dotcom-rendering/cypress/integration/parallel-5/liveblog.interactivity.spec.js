@@ -202,7 +202,7 @@ describe('Liveblogs', function () {
 			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
 				'not.be.visible',
 			);
-			cy.scrollTo(0, 900);
+			cy.get('#maincontent').scrollIntoView();
 			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
 				'be.visible',
 			);

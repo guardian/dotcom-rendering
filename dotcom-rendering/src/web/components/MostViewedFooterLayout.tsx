@@ -1,12 +1,13 @@
 import { css } from '@emotion/react';
-import { text, headline, from, Breakpoint } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
+import type { Breakpoint } from '@guardian/source-foundations';
+import { from, headline, text } from '@guardian/source-foundations';
+import { decidePalette } from '../lib/decidePalette';
+import { AdSlot, labelStyles } from './AdSlot';
 import { Hide } from './Hide';
+import { Island } from './Island';
 import { LeftColumn } from './LeftColumn';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
-import { AdSlot, labelStyles } from './AdSlot';
-import { decidePalette } from '../lib/decidePalette';
-import { Island } from './Island';
 
 const stackBelow = (breakpoint: Breakpoint) => css`
 	display: flex;

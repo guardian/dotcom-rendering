@@ -33,7 +33,7 @@ const isTitle = (element: CAPIElement): boolean => {
 	)
 		return false;
 	const frag = JSDOM.fragment(element.html);
-	return frag?.firstElementChild?.nodeName === 'H2';
+	return frag.firstElementChild?.nodeName === 'H2';
 };
 
 const extractTitle = (element: CAPIElement): string => {

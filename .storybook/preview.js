@@ -6,7 +6,7 @@ import MockDate from 'mockdate';
 
 import { getFontsCss } from '../dotcom-rendering/src/lib/fonts-css';
 
-import { resets } from '@guardian/source-foundations'
+import { resets } from '@guardian/source-foundations';
 
 import { Lazy } from '../dotcom-rendering/src/web/components/Lazy';
 import { Picture } from '../dotcom-rendering/src/web/components/Picture';
@@ -53,13 +53,21 @@ window.guardian = {
 	config: {
 		ophan: {
 			pageViewId: 'mockPageViewId',
-		}
+		},
 	},
 	ophan: {
-		record: ({}) => {}
-	}
-}
-setCookie({name:'bwid', value: 'mockBrowserId'});
+		record: ({}) => {},
+	},
+	modules: {
+		sentry: {
+			reportError: () => {
+				/* a tree falls in the forest */
+			},
+		},
+	},
+};
+
+setCookie({ name: 'bwid', value: 'mockBrowserId' });
 
 const guardianViewports = {
 	mobileMedium: {

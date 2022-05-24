@@ -1,8 +1,8 @@
 import { ArticlePillar } from '@guardian/libs';
-import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { Article } from '../../fixtures/generated/articles/Article';
+import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
 import { images } from '../../fixtures/generated/images';
-
 import { enhanceImages } from './enhance-images';
 
 const image = {
@@ -13,18 +13,12 @@ const image = {
 	},
 };
 
-const metaData = {
-	id: '123',
-	primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-	secondaryDateLine: 'Last modified on Wed 9 Dec 2020 13.40 GMT',
-};
-
 describe('Enhance Images', () => {
 	describe('for photo essays', () => {
 		it('sets the caption for an image if the following element is a text element with ul and li tags', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						image,
 						{
@@ -38,7 +32,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,
@@ -63,7 +57,7 @@ describe('Enhance Images', () => {
 		it('creates a multi image element if 2 images in a row are halfWidth', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -78,7 +72,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
@@ -120,7 +114,7 @@ describe('Enhance Images', () => {
 		it('does not create a multi image element if roles are not halfWidth', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'inline' },
 						{ ...image, role: 'showcase' },
@@ -135,7 +129,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,
@@ -170,7 +164,7 @@ describe('Enhance Images', () => {
 		it('does not use a multi block element for a single image, even when halfWidth', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{
@@ -184,7 +178,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,
@@ -209,7 +203,7 @@ describe('Enhance Images', () => {
 		it('sets the title prop for the previous image element when a h2 caption is found', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						image,
 						{
@@ -223,7 +217,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,
@@ -247,7 +241,7 @@ describe('Enhance Images', () => {
 		it('handles when a caption, then a title follow an image, both are used', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						image,
 						{
@@ -271,7 +265,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,
@@ -301,7 +295,7 @@ describe('Enhance Images', () => {
 		it('halfWidth images without an image to be paired with are placed as single images by themselves', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -317,7 +311,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
@@ -368,7 +362,7 @@ describe('Enhance Images', () => {
 		it('handles when a title, then a caption follow an image, both are used', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						image,
 						{
@@ -392,7 +386,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,
@@ -422,14 +416,14 @@ describe('Enhance Images', () => {
 		it('removes default captions for photo essays and sets none at all if no ul element is found', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [image],
 				},
 			];
 
 			const expectedOutput: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,
@@ -451,7 +445,7 @@ describe('Enhance Images', () => {
 		it('handles if the last few images are not followed by any caption or title', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						image,
 						{
@@ -477,7 +471,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,
@@ -526,17 +520,15 @@ describe('Enhance Images', () => {
 
 		// Need to ignore TS to check test works for other element types
 		it('will pass through other element types', () => {
-			// @ts-ignore
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
-							// @ts-ignore
+							// @ts-expect-error
 							_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',
-							// @ts-ignore
 							pillar: ArticlePillar.News,
 							role: 'inline',
 						},
@@ -552,7 +544,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
@@ -585,14 +577,14 @@ describe('Enhance Images', () => {
 		it('keeps default captions for articles other than photo essays', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [image],
 				},
 			];
 
 			const expectedOutput = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,
@@ -609,7 +601,7 @@ describe('Enhance Images', () => {
 		it('creates two sets of multi image elements when there are 4 halfWidths images in a row', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -626,7 +618,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
@@ -683,7 +675,7 @@ describe('Enhance Images', () => {
 
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...images[0], role: 'inline' },
 						someText,
@@ -713,7 +705,7 @@ describe('Enhance Images', () => {
 		it('does not strip the captions from any preceding halfwidth images if the special caption is not placed immediately after them', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -729,7 +721,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
@@ -766,7 +758,7 @@ describe('Enhance Images', () => {
 		it('keeps the original captions and positions if there are 3 inline images in a row', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'inline' },
 						{ ...image, role: 'inline' },
@@ -777,7 +769,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,
@@ -814,7 +806,7 @@ describe('Enhance Images', () => {
 		it('does not strip captions if not a photo essay and there are no halfWidth images in the buffer', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'inline' },
 						{ ...image, role: 'inline' },
@@ -838,7 +830,7 @@ describe('Enhance Images', () => {
 		it('does not strip captions if not a photo essay and there is only one halfWidth image in the buffer', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'inline' },
 						{ ...image, role: 'inline' },
@@ -862,7 +854,7 @@ describe('Enhance Images', () => {
 		it('should only treat h2 text following an image as the image title on photo essays', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						image,
 						{
@@ -884,7 +876,7 @@ describe('Enhance Images', () => {
 		it('does not use the special caption outside photo essays if it does not immediately follow the halfWidth images', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'halfWidth' },
 						{ ...image, role: 'halfWidth' },
@@ -899,7 +891,7 @@ describe('Enhance Images', () => {
 			];
 			const expectedOutput = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
@@ -937,7 +929,7 @@ describe('Enhance Images', () => {
 		it('replaces the caption outside photo essays if there are two or more halfWidth images at the end of the buffer', () => {
 			const input: Block[] = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{ ...image, role: 'inline' },
 						{ ...image, role: 'halfWidth' },
@@ -953,7 +945,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = [
 				{
-					...metaData,
+					...blockMetaData,
 					elements: [
 						{
 							...image,

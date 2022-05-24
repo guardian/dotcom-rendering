@@ -1,10 +1,5 @@
+import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { enhanceDots } from './enhance-dots';
-
-const blockMetaData = {
-	id: '123',
-	primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-	secondaryDateLine: 'Last modified on Wed 9 Dec 2020 13.40 GMT',
-};
 
 describe('Middot Tests', () => {
 	it('Output should not be the same as input as dot has been replaced', () => {

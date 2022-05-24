@@ -11,12 +11,12 @@ export const decideDesign = ({
 	switch (design) {
 		case 'ArticleDesign':
 			return ArticleDesign.Standard;
-		// Temporarily accept both the old MediaDesign and the new ones
-		case 'MediaDesign':
 		case 'GalleryDesign':
+			return ArticleDesign.Gallery;
 		case 'AudioDesign':
+			return ArticleDesign.Audio;
 		case 'VideoDesign':
-			return ArticleDesign.Media;
+			return ArticleDesign.Video;
 		case 'ReviewDesign':
 			return ArticleDesign.Review;
 		case 'AnalysisDesign':
@@ -54,6 +54,8 @@ export const decideDesign = ({
 			return ArticleDesign.Obituary;
 		case 'FullPageInteractiveDesign':
 			return ArticleDesign.FullPageInteractive;
+		case 'NewsletterSignupDesign':
+			return ArticleDesign.NewsletterSignup;
 		default:
 			return ArticleDesign.Standard;
 	}

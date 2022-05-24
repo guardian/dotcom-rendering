@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
-
-import { neutral, border, text, headline } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
+import { border, headline, neutral, text } from '@guardian/source-foundations';
+import { useHover } from '../lib/useHover';
 import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';
 import { LinkHeadline } from './LinkHeadline';
-import { useHover } from '../lib/useHover';
-import { decidePalette } from '../lib/decidePalette';
 
 const listItemStyles = css`
 	list-style: none;
@@ -86,7 +84,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							<Avatar
 								imageSrc={trail.image}
 								imageAlt=""
-								palette={decidePalette(trail.format)}
+								format={trail.format}
 							/>
 						</div>
 					)}

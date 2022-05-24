@@ -1,5 +1,5 @@
-import { body } from '@guardian/source-foundations';
 import { css } from '@emotion/react';
+import { body } from '@guardian/source-foundations';
 
 const disclaimerStyles = css`
 	${body.small()};

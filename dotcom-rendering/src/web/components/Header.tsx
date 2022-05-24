@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
-
 import { brand } from '@guardian/source-foundations';
-import { Hide } from './Hide';
-import { Logo } from './Logo';
-import { Links } from './Links.importable';
-import { Island } from './Island';
 import { EditionDropdown } from './EditionDropdown.importable';
+import { Hide } from './Hide';
+import { Island } from './Island';
+import { Links } from './Links.importable';
+import { Logo } from './Logo';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 const headerStyles = css`
@@ -20,6 +19,7 @@ type Props = {
 	edition: Edition;
 	idUrl?: string;
 	mmaUrl?: string;
+	supporterCTA: string;
 	discussionApiUrl: string;
 	urls: ReaderRevenueCategories;
 	remoteHeader: boolean;
@@ -30,6 +30,7 @@ export const Header = ({
 	edition,
 	idUrl,
 	mmaUrl,
+	supporterCTA,
 	discussionApiUrl,
 	urls,
 	remoteHeader,
@@ -58,6 +59,7 @@ export const Header = ({
 		<div id="links-root">
 			<Island>
 				<Links
+					supporterCTA={supporterCTA}
 					idUrl={idUrl}
 					mmaUrl={mmaUrl}
 					discussionApiUrl={discussionApiUrl}

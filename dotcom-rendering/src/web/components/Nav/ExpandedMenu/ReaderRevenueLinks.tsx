@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-
 import {
-	from,
-	brandText,
 	brandAlt,
+	brandText,
+	from,
 	textSans,
 } from '@guardian/source-foundations';
 
@@ -73,7 +72,7 @@ export const ReaderRevenueLinks: React.FC<{
 			longTitle: 'Subscribe',
 			title: 'Subscribe',
 			mobileOnly: true,
-			url: 'https://support.theguardian.com/subscribe/weekly?INTCMP=side_menu_support_subscribe&acquisitionData=%7B"source"%3A"GUARDIAN_WEB"%2C"componentType"%3A"ACQUISITIONS_HEADER"%2C"componentId"%3A"side_menu_support_subscribe"%7D',
+			url: readerRevenueLinks.sideMenu.subscribe,
 		},
 	];
 

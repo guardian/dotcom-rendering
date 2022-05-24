@@ -1,7 +1,7 @@
-import { sanitise } from '../../lib/sanitise-html';
+import sanitise from 'sanitize-html';
 
 describe('sanitise-html', () => {
-	it('Remove rouge attributes', () => {
+	it('Remove rogue attributes', () => {
 		const badHtml =
 			'<p><a href="https://theguardian.com" not="allowed">Test</a></p>';
 		const goodHtml = '<p><a href="https://theguardian.com">Test</a></p>';

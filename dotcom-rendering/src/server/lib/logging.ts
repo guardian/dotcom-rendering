@@ -1,11 +1,6 @@
 import path from 'path';
-import {
-	configure,
-	getLogger,
-	addLayout,
-	shutdown,
-	LoggingEvent,
-} from 'log4js';
+import type { LoggingEvent } from 'log4js';
+import { addLayout, configure, getLogger, shutdown } from 'log4js';
 
 const logLocation =
 	process.env.NODE_ENV === 'production' &&
@@ -94,7 +89,6 @@ if (process.env.DISABLE_LOGGING_AND_METRICS === 'true') {
 if (process.env.NODE_ENV === 'development') {
 	shutdown((e) => {
 		if (e) {
-			// eslint-disable-next-line no-console
 			console.log(e);
 		}
 	});

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-
-import { textSans, between } from '@guardian/source-foundations';
-
+import { between, textSans } from '@guardian/source-foundations';
 import CommentIcon from '../../static/icons/comment.svg';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
-	palette: Palette;
+	containerPalette?: DCRContainerPalette;
+	format: ArticleFormat;
 	short: string;
 	long: string;
 };
@@ -45,7 +45,13 @@ const shortStyles = css`
 	}
 `;
 
-export const CardCommentCount = ({ palette, short, long }: Props) => {
+export const CardCommentCount = ({
+	containerPalette,
+	format,
+	short,
+	long,
+}: Props) => {
+	const palette = decidePalette(format, containerPalette);
 	return (
 		<div css={containerStyles(palette)} aria-label={`${short} Comments`}>
 			<div css={svgStyles(palette)}>
