@@ -5,24 +5,21 @@ import type { ArticleFormat } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
+
 import { DefaultByline } from './Byline.defaults';
 
-const commentStyles = (kicker: string): SerializedStyles => css`
-	color: ${kicker};
+const commentStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.bylineLeftColumn(format)};
 	width: 75%;
 	${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
 `;
 
-const commentAnchorStyles = (
-	kicker: string,
-	inverted: string,
-): SerializedStyles => css`
-	color: ${kicker};
+const commentAnchorStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.bylineLeftColumn(format)};
 	text-decoration: none;
 
 	${darkModeCss`
-        color: ${inverted};
+        color: ${text.bylineDark(format)};
     `}
 `;
 
@@ -31,17 +28,13 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const CommentByline: React.FC<Props> = ({ format, bylineHtml }) => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
-
-	return (
-		<DefaultByline
-			format={format}
-			bylineHtml={bylineHtml}
-			styles={commentStyles(text.bylineLeftColumn(format))}
-			anchorStyles={commentAnchorStyles(kicker, inverted)}
-		/>
-	);
-};
+const CommentByline: React.FC<Props> = ({ format, bylineHtml }) => (
+	<DefaultByline
+		format={format}
+		bylineHtml={bylineHtml}
+		styles={commentStyles(format)}
+		anchorStyles={commentAnchorStyles(format)}
+	/>
+);
 
 export default CommentByline;
