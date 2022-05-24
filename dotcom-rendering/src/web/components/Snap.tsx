@@ -1,4 +1,4 @@
-import { css, Global } from '@emotion/react';
+import { css } from '@emotion/react';
 
 const snapStyles = css`
 	overflow-y: hidden;
@@ -10,23 +10,19 @@ type Props = {
 };
 
 export const Snap = ({ enriched }: Props) => {
+	if (enriched?.embedHtml === undefined) {
+		return <></>;
+	}
+
 	return (
-		<div css={snapStyles}>
-			{enriched?.embedCss !== undefined && (
-				<Global styles={enriched?.embedCss} />
-			)}
-
-			{enriched?.embedHtml !== undefined && (
-				<div
-					dangerouslySetInnerHTML={{ __html: enriched?.embedHtml }}
-				/>
-			)}
-
-			{enriched?.embedJs !== undefined && (
-				<script
-					dangerouslySetInnerHTML={{ __html: enriched?.embedJs }}
-				/>
-			)}
-		</div>
+		<div
+			css={[
+				snapStyles,
+				css`
+					${enriched?.embedCss}
+				`,
+			]}
+			dangerouslySetInnerHTML={{ __html: enriched?.embedHtml }}
+		></div>
 	);
 };
