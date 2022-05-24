@@ -1,5 +1,8 @@
 stacks: [mobile, mobile-preview]
 regions: [eu-west-1]
+allowedStages:
+  - CODE
+  - PROD
 templates:
   cloudformation:
     type: cloud-formation
