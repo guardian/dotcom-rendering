@@ -128,6 +128,7 @@
     "cypress-wait-until": "^1.7.1",
     "cypress-webpack-preprocessor-v5": "^5.0.0-alpha.1",
     "doctoc": "^2.1.0",
+    "dotenv-webpack": "^7.1.0",
     "dompurify": "^2.3.6",
     "dynamic-import-polyfill": "^0.1.1",
     "eslint": "^8.15.0",
