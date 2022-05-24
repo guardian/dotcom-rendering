@@ -4,10 +4,10 @@ import { ArticleDesign } from '@guardian/libs';
  * NOTE: Immersive Opinion pieces are not supported,
  * i.e. when `CommentDesign` and `ImmersiveDisplay` are used jointly.
  */
-export const decideDesign = ({
-	design,
-	display,
-}: Partial<CAPIFormat>): ArticleDesign => {
+export const decideDesign = (
+	design: CAPIDesign | undefined,
+	display: CAPIDisplay | undefined,
+): ArticleDesign => {
 	switch (design) {
 		case 'ArticleDesign':
 			return ArticleDesign.Standard;
