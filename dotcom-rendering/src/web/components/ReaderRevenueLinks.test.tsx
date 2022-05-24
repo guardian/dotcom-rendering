@@ -32,7 +32,7 @@ describe('ReaderRevenueLinks', () => {
 		const { getByText } = render(
 			<ReaderRevenueLinks
 				urls={urls}
-				edition="US"
+				editionId="US"
 				dataLinkNamePrefix="nav2 : "
 				inHeader={true}
 				remoteHeader={false}
@@ -49,7 +49,7 @@ describe('ReaderRevenueLinks', () => {
 		const { getByText } = render(
 			<ReaderRevenueLinks
 				urls={urls}
-				edition={edition}
+				editionId={edition}
 				dataLinkNamePrefix="nav2 : "
 				inHeader={true}
 				remoteHeader={false}

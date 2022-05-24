@@ -48,7 +48,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<RegionalAd
-					edition="UK"
+					editionId="UK"
 					section=""
 					contentType=""
 					config={{
@@ -97,7 +97,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<RegionalAd
-					edition="UK"
+					editionId="UK"
 					section=""
 					contentType=""
 					config={{
@@ -146,7 +146,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<RegionalAd
-					edition="UK"
+					editionId="UK"
 					section=""
 					contentType=""
 					config={{
@@ -195,7 +195,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<RegionalAd
-					edition="UK"
+					editionId="UK"
 					section=""
 					contentType=""
 					config={{
@@ -244,7 +244,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<RegionalAd
-					edition="UK"
+					editionId="UK"
 					section=""
 					contentType=""
 					config={{
@@ -293,7 +293,7 @@ describe('RegionalAd', () => {
 		const { container } = render(
 			<ContentABTestProvider pageId="" switches={{}}>
 				<RegionalAd
-					edition="UK"
+					editionId="UK"
 					section=""
 					contentType=""
 					config={{
@@ -345,7 +345,7 @@ describe('RegionalAd', () => {
 				switches={{ ampContentAbTesting: true }}
 			>
 				<RegionalAd
-					edition="UK"
+					editionId="UK"
 					section=""
 					contentType=""
 					config={{
@@ -405,7 +405,7 @@ describe('RegionalAd', () => {
 				switches={{ ampContentAbTesting: true }}
 			>
 				<RegionalAd
-					edition="UK"
+					editionId="UK"
 					section=""
 					contentType=""
 					config={{
