@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { timeAgo } from '@guardian/libs';
-import { from, neutral, space, textSans } from '@guardian/source-foundations';
+import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -54,19 +54,19 @@ const summaryStyles = (palette: Palette) => css`
 	}
 `;
 
-const listItemStyles = css`
+const listItemStyles = (palette: Palette) => css`
 	position: relative;
 	padding-bottom: ${space[5]}px;
 	padding-top: ${space[3]}px;
 	padding-right: ${space[3]}px;
-	background-color: ${neutral[97]};
+	background-color: ${palette.background.keyEvent};
 	list-style: none;
 	display: block;
 	width: 162px;
 	scroll-snap-align: start;
 
 	${from.desktop} {
-		background-color: ${neutral[93]};
+		background-color: ${palette.background.keyEventFromDesktop};
 		width: 200px;
 		padding-right: ${space[5]}px;
 	}
@@ -75,7 +75,7 @@ const listItemStyles = css`
 		content: '';
 		display: block;
 		position: absolute;
-		border-top: 1px dotted ${neutral[46]};
+		border-top: 1px dotted ${palette.border.keyEvent};
 		left: 0;
 		right: 0;
 		top: 18px;
@@ -91,9 +91,9 @@ const textStyles = (palette: Palette) => css`
 	color: ${palette.text.keyEvent};
 `;
 
-const timeStyles = css`
+const timeStyles = (palette: Palette) => css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
-	color: ${neutral[7]};
+	color: ${palette.text.keyEventTime};
 	display: block;
 `;
 
@@ -107,7 +107,7 @@ export const KeyEventCard = ({
 	const palette = decidePalette(format);
 
 	return (
-		<li css={listItemStyles} id="key-event-card">
+		<li css={listItemStyles(palette)} id="key-event-card">
 			<Link
 				priority="secondary"
 				css={[linkStyles(palette), isSummary && summaryStyles(palette)]}
@@ -126,7 +126,7 @@ export const KeyEventCard = ({
 						day: 'numeric',
 						timeZoneName: 'long',
 					})}`}
-					css={timeStyles}
+					css={timeStyles(palette)}
 				>
 					{timeAgo(date.getTime())}
 				</time>

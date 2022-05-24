@@ -1068,6 +1068,8 @@ const borderCricketScoreboardDivider = (): string => {
 	return neutral[86];
 };
 
+const borderKeyEvent = (): string => neutral[46];
+
 const fillRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
 		switch (format.theme) {
@@ -1147,6 +1149,8 @@ const textOverlayed = (): string => {
 	return WHITE;
 };
 
+const textKeyEventTime = (): string => neutral[7];
+
 const backgroundHeadlineTag = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
 
@@ -1183,6 +1187,10 @@ const backgroundMatchStats = (format: ArticleFormat): string => {
 };
 
 const backgroundKeyEventBullet = (): string => neutral[46];
+
+const backgroundKeyEvent = (): string => neutral[97];
+
+const backgroundKeyEventFromDesktop = (): string => neutral[93];
 
 const backgroundSummaryEventBullet = (format: ArticleFormat): string => {
 	switch (format.theme) {
@@ -1298,6 +1306,7 @@ export const decidePalette = (
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			keyEvent: textKeyEvent(format),
+			keyEventTime: textKeyEventTime(),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -1324,6 +1333,8 @@ export const decidePalette = (
 			ageWarning: backgroundAgeWarning(format),
 			keyEventBullet: backgroundKeyEventBullet(),
 			summaryEventBullet: backgroundSummaryEventBullet(format),
+			keyEvent: backgroundKeyEvent(),
+			keyEventFromDesktop: backgroundKeyEventFromDesktop(),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -1357,6 +1368,7 @@ export const decidePalette = (
 			matchTab: matchTab(),
 			activeMatchTab: activeMatchTab(),
 			cardSupporting: borderCardSupporting(format),
+			keyEvent: borderKeyEvent(),
 		},
 		topBar: {
 			card: overrides?.topBar.card || topBarCard(format),
