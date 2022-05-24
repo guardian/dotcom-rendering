@@ -3,6 +3,6 @@
  *
  * @param s The string to test
  */
-export function isEdition(s: string): s is Edition {
+export function isEdition(s: string): s is EditionId {
 	return ['UK', 'US', 'INT', 'AU'].includes(s);
 }

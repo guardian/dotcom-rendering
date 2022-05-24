@@ -125,7 +125,7 @@ interface CommercialConfig {
 }
 
 export interface BaseAdProps {
-	edition: Edition;
+	editionId: EditionId;
 	section: string;
 	contentType: string;
 	commercialProperties: CommercialProperties;
@@ -140,7 +140,7 @@ interface AdProps extends BaseAdProps {
 
 export const Ad = ({
 	isSticky = false,
-	edition,
+	editionId,
 	section,
 	contentType,
 	commercialProperties,
@@ -179,7 +179,7 @@ export const Ad = ({
 			type="doubleclick"
 			json={stringify(
 				adJson([
-					...commercialProperties[edition].adTargeting,
+					...commercialProperties[editionId].adTargeting,
 					...mapAdTargeting(adTargeting),
 				]),
 			)}

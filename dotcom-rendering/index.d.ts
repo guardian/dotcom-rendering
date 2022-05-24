@@ -213,6 +213,7 @@ type ContainerOverrides = {
 		dynamoMeta: Colour;
 		container: Colour;
 		containerToggle: Colour;
+		containerDate: Colour;
 	};
 	border: {
 		container: Colour;
@@ -227,7 +228,13 @@ type ContainerOverrides = {
 	};
 };
 
-type Edition = 'UK' | 'US' | 'INT' | 'AU';
+type EditionId = 'UK' | 'US' | 'INT' | 'AU';
+
+type Edition = {
+	id: EditionId;
+	displayName: string;
+	locale: string;
+};
 
 type SharePlatform =
 	| 'facebook'
@@ -274,7 +281,7 @@ interface EditionCommercialProperties {
 	branding?: Branding;
 }
 
-type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
+type CommercialProperties = { [E in EditionId]: EditionCommercialProperties };
 
 type BrandingLogo = {
 	src: string;
@@ -524,7 +531,7 @@ interface CAPIArticleType {
 	webPublicationDateDisplay: string;
 	webPublicationSecondaryDateDisplay: string;
 	editionLongForm: string;
-	editionId: Edition;
+	editionId: EditionId;
 	pageId: string;
 	version: number; // TODO: check who uses?
 	tags: TagType[];
@@ -596,7 +603,7 @@ type StageType = 'DEV' | 'CODE' | 'PROD';
 interface FEFrontType {
 	pressedPage: FEPressedPageType;
 	nav: CAPINavType;
-	editionId: Edition;
+	editionId: EditionId;
 	editionLongForm: string;
 	guardianBaseURL: string;
 	pageId: string;
@@ -610,7 +617,7 @@ interface FEFrontType {
 type DCRFrontType = {
 	pressedPage: DCRPressedPageType;
 	nav: CAPINavType;
-	editionId: Edition;
+	editionId: EditionId;
 	webTitle: string;
 	config: FEFrontConfigType;
 	pageFooter: FooterType;
@@ -707,7 +714,7 @@ type FEContainerPalette =
 	| 'Breaking'
 	| 'Podcast'
 	| 'Branded'
-	| 'BreakingPalette';
+	| 'Breaking';
 
 type DCRContainerPalette =
 	| 'EventPalette'
@@ -776,7 +783,7 @@ type FEFrontCard = {
 		webTitle: string;
 		linkText?: string;
 		webUrl?: string;
-		editionBrandings: { edition: { id: Edition } }[];
+		editionBrandings: { edition: { id: EditionId } }[];
 	};
 	header: {
 		isVideo: boolean;
@@ -895,6 +902,9 @@ type DCRCollectionType = {
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];
 	href?: string;
+	config: {
+		showDateHeader: boolean;
+	};
 };
 
 type FEFrontConfigType = {
@@ -1223,7 +1233,7 @@ interface GADataType {
 	toneIds: string;
 	seriesId: string;
 	isHosted: string;
-	edition: Edition;
+	edition: EditionId;
 	beaconUrl: string;
 }
 

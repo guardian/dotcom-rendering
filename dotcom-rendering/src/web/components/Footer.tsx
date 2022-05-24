@@ -183,12 +183,12 @@ const bttPosition = css`
 const FooterLinks = ({
 	pageFooter,
 	urls,
-	edition,
+	editionId,
 	contributionsServiceUrl,
 }: {
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
-	edition: Edition;
+	editionId: EditionId;
 	contributionsServiceUrl: string;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
@@ -212,7 +212,7 @@ const FooterLinks = ({
 			<Island deferUntil="visible" clientOnly={true}>
 				<ReaderRevenueLinks
 					urls={urls}
-					edition={edition}
+					editionId={editionId}
 					dataLinkNamePrefix="footer : "
 					inHeader={false}
 					remoteHeader={false}
@@ -237,14 +237,14 @@ export const Footer = ({
 	pillar,
 	pageFooter,
 	urls,
-	edition,
+	editionId,
 	contributionsServiceUrl,
 }: {
 	pillars: PillarType[];
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
-	edition: Edition;
+	editionId: EditionId;
 	contributionsServiceUrl: string;
 }) => (
 	<div
@@ -276,7 +276,7 @@ export const Footer = ({
 			<FooterLinks
 				pageFooter={pageFooter}
 				urls={urls}
-				edition={edition}
+				editionId={editionId}
 				contributionsServiceUrl={contributionsServiceUrl}
 			/>
 			<div css={bttPosition}>

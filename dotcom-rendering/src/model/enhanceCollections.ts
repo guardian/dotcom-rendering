@@ -129,7 +129,7 @@ const decideContainerPalette = (
 			return 'LongRunningPalette';
 		case 'SombrePalette':
 			return 'SombrePalette';
-		case 'BreakingPalette':
+		case 'Breaking':
 			return 'BreakingPalette';
 		case 'Canonical':
 		case 'Dynamo':
@@ -159,6 +159,9 @@ export const enhanceCollections = (
 			curated: enhanceCards(collection.curated, containerPalette),
 			backfill: enhanceCards(collection.backfill, containerPalette),
 			treats: enhanceCards(collection.treats, containerPalette),
+			config: {
+				showDateHeader: collection.config.showDateHeader,
+			},
 		};
 	});
 };

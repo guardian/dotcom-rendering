@@ -559,7 +559,7 @@ export const ImmersiveLayout = ({
 						tags={CAPIArticle.tags}
 						format={format}
 						pillar={format.theme}
-						edition={CAPIArticle.editionId}
+						editionId={CAPIArticle.editionId}
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
@@ -647,7 +647,7 @@ export const ImmersiveLayout = ({
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 					contributionsServiceUrl={
 						CAPIArticle.contributionsServiceUrl
 					}

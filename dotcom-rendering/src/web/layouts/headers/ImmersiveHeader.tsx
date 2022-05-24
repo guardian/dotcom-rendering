@@ -181,7 +181,7 @@ export const ImmersiveHeader = ({
 									CAPIArticle.nav.readerRevenueLinks.header
 										.subscribe
 								}
-								edition={CAPIArticle.editionId}
+								editionId={CAPIArticle.editionId}
 							/>
 						</ElementContainer>
 					</div>

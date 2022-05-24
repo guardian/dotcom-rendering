@@ -32,6 +32,8 @@ type Props = {
 	ophanComponentLink?: string;
 	containerPalette?: DCRContainerPalette;
 	innerBackgroundColour?: string;
+	showDateHeader?: boolean;
+	editionId?: EditionId;
 };
 
 const containerStyles = css`
@@ -122,7 +124,10 @@ export const ContainerLayout = ({
 	ophanComponentName,
 	containerPalette,
 	innerBackgroundColour,
+	showDateHeader,
+	editionId,
 }: Props) => {
+	console.log(title, containerPalette);
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 	return (
@@ -152,6 +157,9 @@ export const ContainerLayout = ({
 							fontColour={fontColour || overrides?.text.container}
 							description={description}
 							url={url}
+							containerPalette={containerPalette}
+							showDateHeader={showDateHeader}
+							editionId={editionId}
 						/>
 						{leftContent}
 					</>
@@ -168,6 +176,8 @@ export const ContainerLayout = ({
 							fontColour={fontColour || overrides?.text.container}
 							description={description}
 							url={url}
+							showDateHeader={showDateHeader}
+							editionId={editionId}
 						/>
 					</Hide>
 					{children}

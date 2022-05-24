@@ -24,7 +24,7 @@ describe('ReaderRevenueLinks', () => {
 		subscribe: 'https://www.theguardian.com/subscribe',
 		support: 'https://www.theguardian.com/support',
 	};
-	const edition: Edition = 'UK';
+	const edition: EditionId = 'UK';
 
 	it('should render thank you message if shouldHideSupportMessaging() returns true', async () => {
 		shouldHideSupportMessaging.mockReturnValue(true);
