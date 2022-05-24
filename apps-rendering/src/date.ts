@@ -155,9 +155,6 @@ const localTime12Hr = (date: Date): string =>
 		.replace(':', '.')
 		.toLowerCase();
 
-const localTimeZone = (date: Date): string =>
-	/\(.*?\)$/.exec(date.toTimeString())?.pop() ?? '';
-
 const localTimeZoneAbbr = (date: Date): string =>
 	/([^\s]+)$/
 		.exec(date.toLocaleString([], { timeZoneName: 'short' }))
@@ -176,7 +173,7 @@ const fullyFormat = (date: Date): string =>
 const formatLocal = (date: Date): string =>
 	`${localDay(date)} ${date.getDate()} ${localMonth(
 		date,
-	)} ${date.getFullYear()} ${localTime(date)} ${localTimeZone(date)}`;
+	)} ${date.getFullYear()} ${localTime(date)} ${localTimeZoneAbbr(date)}`;
 
 const formatLocalTimeDateTz = (date: Date): string =>
 	`${localTime12Hr(date)} ${date.getDate()} ${localMonth(
