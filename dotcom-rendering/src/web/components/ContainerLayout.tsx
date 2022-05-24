@@ -127,7 +127,6 @@ export const ContainerLayout = ({
 	showDateHeader,
 	editionId,
 }: Props) => {
-	console.log(title, containerPalette);
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 	return (
