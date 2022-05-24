@@ -1,4 +1,5 @@
 import { adJson, stringify } from '../lib/ad-json';
+import { isInVariant } from '../lib/prebid-server-test';
 import type { RTCParameters } from '../lib/real-time-config';
 import { realTimeConfig } from '../lib/real-time-config';
 import { useContentABTestGroup } from './ContentABTest';
@@ -44,19 +45,6 @@ const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 
 	return adTargetingMapped;
 };
-
-// Variants for the Prebid server test
-// Assign each variant 4 groups e.g. 33.3% of content types each
-const variants = {
-	'relevant-yield': new Set([0, 1, 4, 5, 6, 7]),
-	pubmatic: new Set([2, 3, 8, 9, 10, 11]),
-};
-
-// Determine participation in a variant from group
-const isInVariant = (
-	variantName: 'relevant-yield' | 'pubmatic',
-	group: number | undefined,
-) => group !== undefined && variants[variantName].has(group);
 
 const useRealTimeConfig = (
 	usePrebid: boolean,
