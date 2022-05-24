@@ -87,6 +87,7 @@ export const KeyEventsCarousel = ({
 				text: keyEvent.title || '', // We fallback to '' here purely to keep ts happy
 				url: `?filterKeyEvents=${filterKeyEvents}&page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
 				date: new Date(keyEvent.blockFirstPublished || ''), // We fallback to '' here purely to keep ts happy
+				isSummmary: keyEvent.attributes.summary,
 			};
 		});
 	return (
@@ -99,7 +100,7 @@ export const KeyEventsCarousel = ({
 							url={keyEvent.url}
 							date={keyEvent.date}
 							format={format}
-							isSummary={false}
+							isSummary={keyEvent.isSummmary}
 						/>
 					);
 				})}
