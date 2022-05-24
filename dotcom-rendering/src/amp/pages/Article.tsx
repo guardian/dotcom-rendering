@@ -13,6 +13,7 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Onward } from '../components/Onward';
 import { Sidebar } from '../components/Sidebar';
+import { CookieSync } from '../components/CookieSync';
 import { filterForTagsOfType } from '../lib/tag-utils';
 import type { AmpExperiments } from '../server/ampExperimentCache';
 import type { ArticleModel } from '../types/ArticleModel';
@@ -56,6 +57,7 @@ export const Article: React.FC<{
 			<Analytics key="analytics" analytics={analytics} />
 			<AnalyticsIframe url={config.ampIframeUrl} />
 			<AdConsent />
+			<CookieSync />
 			{experimentsData && (
 				<AmpExperimentComponent experimentsData={experimentsData} />
 			)}
