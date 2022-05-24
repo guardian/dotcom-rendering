@@ -135,7 +135,6 @@ const decideContainerPalette = (
 		case 'Dynamo':
 		case 'Special':
 		case 'DynamoLike':
-		case 'Breaking':
 		case 'Podcast':
 		case 'Branded':
 		default:
