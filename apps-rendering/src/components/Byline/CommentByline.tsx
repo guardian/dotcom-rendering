@@ -5,7 +5,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { darkModeCss } from 'styles';
-
 import { DefaultByline } from './Byline.defaults';
 
 const commentStyles = (format: ArticleFormat): SerializedStyles => css`
