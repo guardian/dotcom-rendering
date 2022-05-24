@@ -389,13 +389,12 @@ export const Recipe: CAPIArticleType = {
 						],
 					},
 					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-					},
-					{
 						title: 'Climate crisis',
 						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Football',
@@ -432,6 +431,11 @@ export const Recipe: CAPIArticleType = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
 					},
 					{
 						title: 'Business',
@@ -1216,7 +1220,7 @@ export const Recipe: CAPIArticleType = {
 			type: 'Contributor',
 			title: 'Meera Sodha',
 			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2018/01/29/Meera_Sodha,_L.png?width=300&quality=85&auto=format&fit=max&s=135136df516ad3a2a8ca0ccfb446a904',
+				'https://i.guim.co.uk/img/uploads/2018/01/29/Meera-Sodha.jpg?width=300&quality=85&auto=format&fit=max&s=6eb81b918326c680e4d6f61f75a9de4e',
 			bylineLargeImageUrl:
 				'https://i.guim.co.uk/img/uploads/2018/01/29/Meera_Sodha,_L.png?width=300&quality=85&auto=format&fit=max&s=135136df516ad3a2a8ca0ccfb446a904',
 		},
@@ -1677,7 +1681,7 @@ export const Recipe: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '21b5ae84-b6f0-4528-aafc-c76a9adf26d5',
+			elementId: 'f1812a57-999d-4ab7-bbaa-3648b36a152d',
 		},
 	],
 	webPublicationDate: '2021-02-06T10:30:38.000Z',
@@ -1688,64 +1692,69 @@ export const Recipe: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p> The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
-					elementId: '0e55bde7-9b67-4c07-aa25-0035068ef27b',
+					elementId: '0bd873dd-ac35-4d8a-b4cb-14d050efb9bb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Spring onion pancakes with sesame sauce</h2>',
-					elementId: '6104693a-4316-4f6d-9639-eb769105ce4e',
+					elementId: 'c7a4dc9e-5d53-4860-b7ce-dd1a1229d618',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
-					elementId: '8b9044f5-ac6d-4e7a-b399-27d136613429',
+					elementId: '1f3656fb-815a-45aa-a075-1dda7e63fd88',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
-					elementId: '9c414294-e962-44f3-a838-04a960cfc8a0',
+					elementId: 'bfc6d317-6938-4d0d-8da6-efbd13580f7b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
-					elementId: '63d29f10-1a7a-4b7b-88d8-4d1376f5fbb6',
+					elementId: '8cdbc520-de99-46de-957a-61ddc6c9b443',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
-					elementId: 'b904c959-c67f-4b2a-bf91-553a5430664e',
+					elementId: '53103abc-7cdf-4468-80a1-d9f53b69276d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
-					elementId: '6c217c20-9677-4c11-b5dd-032cc7f2bde9',
+					elementId: 'b4c5b64d-5e4d-45df-93b2-6850ec4191dc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
-					elementId: '8033ff98-7b89-4fac-b208-6d19e47411e6',
+					elementId: '99977280-501c-40c2-8711-8f7bc0a729d4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
-					elementId: '9ce32388-0cb3-4ca8-aa96-accb95a30ddf',
+					elementId: 'e49fcc8c-5354-4341-a076-04bb93faa89c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
-					elementId: '4595766d-1b42-44c5-a165-d94d33a2a2d3',
+					elementId: '7f45a08e-eccb-4068-93a1-4ebbe95f0699',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
-					elementId: '6f79b789-2429-47ff-af90-086913fed528',
+					elementId: 'fdae627d-d84f-4024-8d2b-f31a981f540f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Serve the pancakes hot with the sauce for dipping or drizzling over the top.</p>',
-					elementId: '5846e360-57f5-4f1a-99d0-83bf9fafb7b3',
+					elementId: 'e7d953bc-74e3-44c5-92bf-87b94126139c',
 				},
 			],
+			attributes: {
+				pinned: false,
+				keyEvent: false,
+				summary: false,
+			},
 			blockCreatedOn: 1592302354000,
 			blockCreatedOnDisplay: '11.12 BST',
 			blockLastUpdated: 1612283118000,

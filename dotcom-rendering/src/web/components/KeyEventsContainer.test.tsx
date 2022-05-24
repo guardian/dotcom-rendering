@@ -5,6 +5,7 @@ import { KeyEventsContainer } from './KeyEventsContainer';
 const baseProperties = {
 	id: '123',
 	elements: [],
+	attributes: { keyEvent: false, pinned: false, summary: false },
 	primaryDateLine: '',
 	secondaryDateLine: '',
 };
