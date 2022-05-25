@@ -76,15 +76,18 @@ const emailSignupButton = css`
 	margin-top: ${space[3]}px;
 `;
 
-const showOnTablet = css`
-	${until.desktop} {
+const showWhenConstrained = css`
+	${between.mobileLandscape.and.desktop} {
 		display: none;
 	}
 	${from.wide} {
 		display: none;
 	}
 `;
-const hideOnTablet = css`
+const hideWhenConstrained = css`
+	${until.mobileLandscape} {
+		display: none;
+	}
 	${between.desktop.and.wide} {
 		display: none;
 	}
@@ -293,10 +296,10 @@ export const Footer = ({
 					icon={<SvgArrowRightStraight />}
 					iconSide="right"
 				>
-					<span css={hideOnTablet}>
+					<span css={hideWhenConstrained}>
 						Sign up for the Guardian Headlines email
 					</span>
-					<span css={showOnTablet}>Sign up</span>
+					<span css={showWhenConstrained}>Sign up</span>
 				</LinkButton>
 			</div>
 
