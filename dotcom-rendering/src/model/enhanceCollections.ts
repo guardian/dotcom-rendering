@@ -103,8 +103,8 @@ const enhanceCards = (
 						containerPalette,
 				  )
 				: undefined,
-			type: faciaCard.type,
-			enriched: faciaCard.enriched,
+			isSnap: faciaCard.type === 'SnapLink',
+			snapData: faciaCard.enriched,
 		};
 	});
 

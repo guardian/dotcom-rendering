@@ -55,8 +55,8 @@ export type Props = {
 	// Labs
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
-	type?: string;
-	enriched?: DCREnrichedContent;
+	isSnap?: boolean;
+	snapData?: DCREnrichedContent;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
@@ -136,8 +136,8 @@ export const Card = ({
 	dataLinkName,
 	branding,
 	supportingContent,
-	type,
-	enriched,
+	isSnap,
+	snapData,
 	containerPalette,
 	showAge = false,
 }: Props) => {
@@ -159,8 +159,8 @@ export const Card = ({
 		showAge,
 	});
 
-	if (type === 'LinkSnap') {
-		return <Snap enriched={enriched} />;
+	if (isSnap) {
+		return <Snap snapData={snapData} />;
 	}
 
 	return (

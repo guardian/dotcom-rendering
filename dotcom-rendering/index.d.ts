@@ -256,13 +256,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-		adUnit: string;
-		customParams: CustomParams;
-		disableAds?: false;
-	}
+			adUnit: string;
+			customParams: CustomParams;
+			disableAds?: false;
+	  }
 	| {
-		disableAds: true;
-	};
+			disableAds: true;
+	  };
 
 interface SectionNielsenAPI {
 	name: string;
@@ -866,8 +866,8 @@ type DCRFrontCard = {
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
-	type?: string;
-	enriched?: DCREnrichedContent;
+	isSnap: boolean;
+	snapData?: DCREnrichedContent;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 };

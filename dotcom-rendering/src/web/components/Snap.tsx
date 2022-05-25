@@ -6,11 +6,11 @@ const snapStyles = css`
 `;
 
 type Props = {
-	enriched?: DCREnrichedContent;
+	snapData?: DCREnrichedContent;
 };
 
-export const Snap = ({ enriched }: Props) => {
-	if (enriched?.embedHtml === undefined) {
+export const Snap = ({ snapData }: Props) => {
+	if (snapData?.embedHtml === undefined) {
 		return <></>;
 	}
 
@@ -19,10 +19,10 @@ export const Snap = ({ enriched }: Props) => {
 			css={[
 				snapStyles,
 				css`
-					${enriched?.embedCss}
+					${snapData?.embedCss}
 				`,
 			]}
-			dangerouslySetInnerHTML={{ __html: enriched?.embedHtml }}
+			dangerouslySetInnerHTML={{ __html: snapData?.embedHtml }}
 		/>
 	);
 };
