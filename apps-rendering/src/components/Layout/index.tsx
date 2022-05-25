@@ -13,7 +13,7 @@ import InteractiveLayout from 'components/Layout/InteractiveLayout';
 import LabsLayout from 'components/Layout/LabsLayout';
 import MediaLayout from 'components/Layout/MediaLayout';
 import StandardLayout from 'components/Layout/StandardLayout';
-import LiveLayout from './LiveLayout';
+import LiveLayout from 'components/Layout/LiveLayout';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
