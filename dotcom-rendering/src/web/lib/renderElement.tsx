@@ -138,6 +138,8 @@ export const renderElement = ({
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
 
+	const shouldLazyLoadInteractives = isAdFreeUser;
+
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 			return [
@@ -382,7 +384,9 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return [
 				true,
-				<Island deferUntil="idle">
+				<Island
+					deferUntil={shouldLazyLoadInteractives ? 'visible' : 'idle'}
+				>
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
