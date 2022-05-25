@@ -11,7 +11,7 @@ interface Props {
 	item: ArticleFormat;
 }
 
-const Interactive: FC<Props> = ({ children, item }) => (
+const InteractiveLayout: FC<Props> = ({ children, item }) => (
 	<main>
 		<article>{children}</article>
 		<Footer isCcpa={false} format={item} />
@@ -20,4 +20,4 @@ const Interactive: FC<Props> = ({ children, item }) => (
 
 // ----- Exports ----- //
 
-export default Interactive;
+export default InteractiveLayout;

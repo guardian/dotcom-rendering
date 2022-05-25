@@ -13,7 +13,7 @@ import type { Option } from '@guardian/types';
 import { getThirdPartyEmbeds, requiresInlineStyles } from 'capi';
 import type { ThirdPartyEmbeds } from 'capi';
 import { atomCss, atomScript } from 'components/InteractiveAtom';
-import Layout from 'components/layout';
+import Layout from 'components/Layout';
 import Meta from 'components/Meta';
 import Scripts from 'components/Scripts';
 import { fromCapi } from 'item';

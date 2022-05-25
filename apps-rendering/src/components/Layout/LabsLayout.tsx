@@ -56,7 +56,7 @@ interface Props {
 	children: ReactNode[];
 }
 
-const Labs: FC<Props> = ({ item, children }) => {
+const LabsLayout: FC<Props> = ({ item, children }) => {
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article css={BorderStyles}>
@@ -96,4 +96,4 @@ const Labs: FC<Props> = ({ item, children }) => {
 
 // ----- Exports ----- //
 
-export default Labs;
+export default LabsLayout;
