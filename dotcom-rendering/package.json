@@ -88,7 +88,7 @@
     "@types/jsdom": "^16.2.10",
     "@types/lodash.clonedeep": "^4.5.4",
     "@types/lodash.debounce": "^4.0.6",
-    "@types/lodash.escape": "^4.0.6",
+    "@types/lodash.escape": "^4.0.7",
     "@types/lodash.get": "^4.4.4",
     "@types/node": "^14.18.3",
     "@types/node-fetch": "^2.6.1",

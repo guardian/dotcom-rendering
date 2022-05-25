@@ -5014,10 +5014,10 @@
   dependencies:
     "@types/lodash" "*"
 
-"@types/lodash.escape@^4.0.6":
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/@types/lodash.escape/-/lodash.escape-4.0.6.tgz#71730c1a27bb5ac7f98f88d5e858fa4ad2df1106"
-  integrity sha512-/CI97B3wf1R4oD4yotsGoX/5bobL/RC8olTQ16iunzdjufcdD8GyIvNDatg1IfzVKaFBZmxuY0+WQDpdaQHLzg==
+"@types/lodash.escape@^4.0.7":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@types/lodash.escape/-/lodash.escape-4.0.7.tgz#0852665cece4ae0fdf5870dbd97ce99a3d4f4a01"
+  integrity sha512-k6BN7TWKe5rO11yIhMsVh2K9IZ0h9Vfw168/D/+Bv39qCz7vk0WIKTo8OORsah9o1vlDlkUoieAiU8AuYhXpwQ==
   dependencies:
     "@types/lodash" "*"
 
