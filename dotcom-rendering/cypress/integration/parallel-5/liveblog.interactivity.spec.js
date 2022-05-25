@@ -209,7 +209,10 @@ describe('Liveblogs', function () {
 		});
 	});
 
-	it('should render live score updates to a cricketblog', function () {
+	// For some reason Sport deadblogs lose their scores after a certain duration. Not quite sure what causes this just yet
+	// but disabling this test until the issue with Sports blogs is fixed.
+	// see: https://github.com/guardian/frontend/issues/25046
+	it.skip('should render live score updates to a cricketblog', function () {
 		// Get article with ?live to force the article to be 'live'
 		cy.visit(
 			'/Article?url=https://theguardian.com/sport/live/2022/mar/27/west-indies-v-england-third-test-day-four-live?live',
