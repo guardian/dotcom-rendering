@@ -638,13 +638,6 @@ const richLinkAnchorDark = (_format: ArticleFormat): Colour => {
 	return neutral[60];
 }
 
-/**
- * Neutral colour that is applied server-side before client-side JS changes the colour based on the theme.
- */
- const richLinkSvgPreload = (_format: ArticleFormat): Colour => {
-	return neutral[7];
-}
-
 const seriesTitleDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -710,7 +703,6 @@ const text = {
 	richLinkAnchor,
 	richLinkAnchorDark,
 	richLinkDark,
-	richLinkSvgPreload,
 	standfirst,
 	standfirstDark,
 	standfirstLink,
