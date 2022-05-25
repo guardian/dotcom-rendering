@@ -1,3 +1,6 @@
+// THIS IS TO BE PROMOTED TO LIBS
+// SEE https://github.com/guardian/libs/pull/323
+
 /** Nominal data */
 type Properties = Record<string, string>;
 /** Numerical data */

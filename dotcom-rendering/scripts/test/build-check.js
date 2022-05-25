@@ -44,6 +44,7 @@ const fileExists = async (glob) => {
 		'newsletterEmbedIframe.js',
 		'relativeTime.js',
 		'initDiscussion.js',
+		'tracking.js',
 	].map((name) => {
 		if (manifest[name]) {
 			console.log(`Manifest returned value ${name}`);

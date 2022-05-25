@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
@@ -32,6 +31,7 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 			'./src/web/browser/newsletterEmbedIframe/init.ts',
 		relativeTime: './src/web/browser/relativeTime/init.ts',
 		initDiscussion: './src/web/browser/initDiscussion/init.ts',
+		tracking: './src/web/browser/tracking/init.ts',
 	},
 	output: {
 		filename: generateName(isLegacyJS),

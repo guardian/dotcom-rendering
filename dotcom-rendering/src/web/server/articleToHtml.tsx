@@ -145,6 +145,7 @@ export const articleToHtml = ({ data }: Props): string => {
 		...getScriptArrayFromFile('newsletterEmbedIframe.js'),
 		...getScriptArrayFromFile('relativeTime.js'),
 		...getScriptArrayFromFile('initDiscussion.js'),
+		...getScriptArrayFromFile('tracking.js'),
 	]);
 
 	const gaChunk = getScriptArrayFromFile('ga.js');

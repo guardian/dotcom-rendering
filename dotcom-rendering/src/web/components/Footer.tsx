@@ -306,7 +306,7 @@ export const Footer = ({
 				<BackToTop />
 			</div>
 		</div>
-		<div css={copyright}>
+		<div css={copyright} data-component="copyright">
 			© {year} Guardian News & Media Limited or its affiliated companies.
 			All rights reserved. (modern)
 		</div>
