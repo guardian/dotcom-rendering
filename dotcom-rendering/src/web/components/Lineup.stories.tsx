@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import { Lineup } from './Lineup';
 
 const Container = ({ children }: { children: React.ReactNode }) => (

@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
-
 import { Caption } from './Caption';
-import { MaintainAspectRatio } from './MaintainAspectRatio';
 import { ClickToView } from './ClickToView';
+import { MaintainAspectRatio } from './MaintainAspectRatio';
 
 type Props = {
 	isMainMedia: boolean;

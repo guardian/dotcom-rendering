@@ -1,35 +1,37 @@
-import { useEffect, useState } from 'react';
-import { cmp } from '@guardian/consent-management-platform';
-import { getCookie } from '@guardian/libs';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
+import { cmp } from '@guardian/consent-management-platform';
+import { getCookie } from '@guardian/libs';
+import { useEffect, useState } from 'react';
 import type { ArticleCounts } from '../../lib/article-count';
 import { getArticleCounts } from '../../lib/article-count';
-import {
-	canShowRRBanner,
-	canShowPuzzlesBanner,
-	ReaderRevenueBanner,
-	PuzzlesBanner,
-	BannerProps,
-	CanShowFunctionType,
-} from './StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
-import { useOnce } from '../lib/useOnce';
-import {
-	pickMessage,
-	SlotConfig,
-	MaybeFC,
-	CandidateConfig,
-} from '../lib/messagePicker';
 import { getLocaleCode } from '../lib/getCountryCode';
+import type {
+	CandidateConfig,
+	MaybeFC,
+	SlotConfig,
+} from '../lib/messagePicker';
+import { pickMessage } from '../lib/messagePicker';
+import { useBraze } from '../lib/useBraze';
+import { useOnce } from '../lib/useOnce';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import {
 	BrazeBanner,
 	canShowBrazeBanner,
 } from './StickyBottomBanner/BrazeBanner';
-import { useBraze } from '../lib/useBraze';
+import {
+	canShowPuzzlesBanner,
+	canShowRRBanner,
+	PuzzlesBanner,
+	ReaderRevenueBanner,
+} from './StickyBottomBanner/ReaderRevenueBanner';
+import type {
+	BannerProps,
+	CanShowFunctionType,
+} from './StickyBottomBanner/ReaderRevenueBanner';
 
 type Props = {
 	contentType: string;
@@ -59,7 +61,7 @@ const getBannerLastClosedAt = (key: string): string | undefined => {
 	const item = localStorage.getItem(`gu.prefs.${key}`) as undefined | string;
 
 	if (item) {
-		const parsedItem = JSON.parse(item) as { [key: string]: any };
+		const parsedItem = JSON.parse(item) as Record<string, any>;
 		return parsedItem.value;
 	}
 	return item;

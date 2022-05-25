@@ -20,5 +20,6 @@ export const liveBlock: Block = {
 			html: '<p>Nasa scientists have worked for years to support this mission, and kept things going despite the ongoing coronavirus disruption. </p>',
 		},
 	],
+	attributes: { keyEvent: false, pinned: false, summary: false },
 	id: '60300f5f8f08ad21ea60071e',
 };

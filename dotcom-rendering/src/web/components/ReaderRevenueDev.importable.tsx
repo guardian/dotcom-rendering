@@ -20,14 +20,13 @@ export const ReaderRevenueDev = ({ shouldHideReaderRevenue }: Props) => {
 							shouldHideReaderRevenue,
 						),
 					)
-					/* eslint-disable no-console */
+
 					.catch((error) =>
 						console.log(
 							'Error loading readerRevenueDevUtils',
 							error,
 						),
 					);
-		/* eslint-enable no-console */
 
 		if (window && window.guardian) {
 			window.guardian.readerRevenue = {

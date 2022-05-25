@@ -1,10 +1,10 @@
+import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
+import { enhanceEmbeds } from './enhance-embeds';
 import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
-import { enhanceBlockquotes } from './enhance-blockquotes';
-import { enhanceEmbeds } from './enhance-embeds';
 import { enhanceTweets } from './enhance-tweets';
 
 class BlockEnhancer {

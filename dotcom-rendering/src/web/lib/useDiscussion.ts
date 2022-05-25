@@ -58,7 +58,7 @@ export const useDiscussion = (url: string) => {
 	});
 
 	return {
-		commentCount: data?.discussion?.commentCount,
-		isClosedForComments: data?.discussion?.isClosedForComments,
+		commentCount: data?.discussion.commentCount,
+		isClosedForComments: data?.discussion.isClosedForComments,
 	};
 };

@@ -1,4 +1,4 @@
-import { ABTest } from '@guardian/ab-core';
+import type { ABTest } from '@guardian/ab-core';
 
 export const signInGateMainControl: ABTest = {
 	id: 'SignInGateMainControl',

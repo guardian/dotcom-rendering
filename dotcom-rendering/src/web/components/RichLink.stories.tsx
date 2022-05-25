@@ -1,15 +1,11 @@
-/* eslint-disable jsx-a11y/aria-role */
-
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-
-import { Figure } from './Figure';
 import { ContainerLayout } from './ContainerLayout';
-
+import { Figure } from './Figure';
 import { RichLink } from './RichLink';
 
 const someContributor =

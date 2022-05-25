@@ -1,6 +1,6 @@
-import Ajv, { Options } from 'ajv';
+import type { Options } from 'ajv';
+import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-
 import schema from './article-schema.json';
 import frontSchema from './front-schema.json';
 

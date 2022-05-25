@@ -7,8 +7,10 @@ let legacyManifest: AssetHash = {};
 
 try {
 	// path is relative to the server bundle
-	// eslint-disable-next-line import/no-unresolved
+
+	// eslint-disable-next-line global-require -- this may fail
 	manifest = require('./manifest.json');
+	// eslint-disable-next-line global-require -- this may fail
 	legacyManifest = require('./manifest.legacy.json');
 } catch (e) {
 	// do nothing

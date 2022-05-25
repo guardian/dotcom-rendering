@@ -1,13 +1,12 @@
-import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-
-import { StandardLayout } from './StandardLayout';
-import { ShowcaseLayout } from './ShowcaseLayout';
 import { CommentLayout } from './CommentLayout';
-import { ImmersiveLayout } from './ImmersiveLayout';
-import { LiveLayout } from './LiveLayout';
-import { InteractiveLayout } from './InteractiveLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
+import { ImmersiveLayout } from './ImmersiveLayout';
+import { InteractiveLayout } from './InteractiveLayout';
+import { LiveLayout } from './LiveLayout';
+import { ShowcaseLayout } from './ShowcaseLayout';
+import { StandardLayout } from './StandardLayout';
 
 type Props = {
 	CAPIArticle: CAPIArticleType;

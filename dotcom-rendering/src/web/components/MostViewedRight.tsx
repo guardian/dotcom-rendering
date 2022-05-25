@@ -1,11 +1,8 @@
 import { css } from '@emotion/react';
-
 import { headline } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-
-import { useApi } from '../lib/useApi';
 import { decideTrail } from '../lib/decideTrail';
-
+import { useApi } from '../lib/useApi';
 import { MostViewedRightItem } from './MostViewedRightItem';
 
 const wrapperStyles = css`

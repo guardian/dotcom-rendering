@@ -1,14 +1,12 @@
 import { css } from '@emotion/react';
-
 import {
-	ArticleSpecial,
-	ArticlePillar,
 	ArticleDesign,
 	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
 } from '@guardian/libs';
-
-import { HeadlineTag } from './HeadlineTag';
 import { decidePalette } from '../lib/decidePalette';
+import { HeadlineTag } from './HeadlineTag';
 
 export default {
 	component: HeadlineTag,

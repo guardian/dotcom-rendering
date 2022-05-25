@@ -1,7 +1,5 @@
-/* eslint-disable no-bitwise */
 import { css, keyframes } from '@emotion/react';
-
-import { space, neutral } from '@guardian/source-foundations';
+import { neutral, space } from '@guardian/source-foundations';
 
 const BACKGROUND_COLOUR = neutral[93];
 

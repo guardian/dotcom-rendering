@@ -2216,6 +2216,11 @@ export const Article: CAPIArticleType = {
 					elementId: '0bc1c9ca-4bed-4530-9980-4d06b1dd3f4e',
 				},
 			],
+			attributes: {
+				pinned: false,
+				keyEvent: false,
+				summary: false,
+			},
 			blockCreatedOn: 1581314427000,
 			blockCreatedOnDisplay: '06.00 GMT',
 			blockLastUpdated: 1589470537000,

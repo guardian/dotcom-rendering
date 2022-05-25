@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { getName } from './getName';
 import { getProps } from './getProps';
 
@@ -32,7 +31,6 @@ export const doStorybookHydration = () => {
 			).then((module) => {
 				element.querySelector('[data-name="placeholder"]')?.remove();
 				ReactDOM.render(
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 					React.createElement(module[name], props),
 					element,
 				);

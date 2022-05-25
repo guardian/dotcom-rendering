@@ -1,6 +1,5 @@
 import '../webpackPublicPath';
 import { startup } from '../startup';
-
 import { init as initGa, sendPageView } from './ga';
 
 const init = (): Promise<void> => {

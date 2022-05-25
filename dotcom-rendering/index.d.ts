@@ -75,7 +75,7 @@ type ArticlePillar = ArticleTheme;
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
 // and can be used to add TypeSafety when needing to override a style in a designType
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 type DesignTypesObj = { [key in ArticleDesign]: any };
 
 type Colour = string;
@@ -256,13 +256,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
+		adUnit: string;
+		customParams: CustomParams;
+		disableAds?: false;
+	}
 	| {
-			disableAds: true;
-	  };
+		disableAds: true;
+	};
 
 interface SectionNielsenAPI {
 	name: string;
@@ -367,6 +367,17 @@ interface AuthorType {
 	email?: string;
 }
 
+interface MembershipPlaceholder {
+	campaignCode?: string;
+}
+
+interface Attributes {
+	pinned: boolean;
+	summary: boolean;
+	keyEvent: boolean;
+	membershipPlaceholder?: MembershipPlaceholder;
+}
+
 interface BlockContributor {
 	name: string;
 	imageUrl?: string;
@@ -376,6 +387,7 @@ interface BlockContributor {
 interface Block {
 	id: string;
 	elements: CAPIElement[];
+	attributes: Attributes;
 	blockCreatedOn?: number;
 	blockCreatedOnDisplay?: string;
 	blockLastUpdated?: number;
@@ -1189,7 +1201,7 @@ interface ConfigType extends CommercialConfigType {
 	videoDuration?: number;
 	edition: string;
 	section: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 	sharedAdTargeting: { [key: string]: any };
 	isPaidContent?: boolean;
 	keywordIds: string;
@@ -1335,17 +1347,18 @@ type AdSlotType =
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 declare module 'compose-function' {
 	const compose: any;
+	// eslint-disable-next-line import/no-default-export -- TODO: use type definition @types/compose-function
 	export default compose;
 }
 declare module 'minify-css-string' {
 	const minifyCSSString: any;
+	// eslint-disable-next-line import/no-default-export -- it’s that 6yo module works
 	export default minifyCSSString;
 }
 declare module 'chromatic/isChromatic';
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 declare module 'dynamic-import-polyfill' {
 	export const initialize: any;
@@ -1356,7 +1369,6 @@ declare module 'dynamic-import-polyfill' {
 // ------------------------------------- //
 
 declare namespace JSX {
-	/* eslint-disable @typescript-eslint/no-explicit-any */
 	interface IntrinsicElements {
 		'amp-state': any;
 		'amp-form': any;
@@ -1383,13 +1395,12 @@ declare namespace JSX {
 		'amp-audio': any;
 		'amp-embed': any;
 	}
-	/* eslint-enable @typescript-eslint/no-explicit-any */
 }
 
 // SVG handling
 declare module '*.svg' {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const content: any;
+	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
 	export default content;
 }
 

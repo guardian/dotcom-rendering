@@ -1,12 +1,10 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
-import { text, neutral, textSans } from '@guardian/source-foundations';
-
-import { Elements } from './Elements';
+import { neutral, text, textSans } from '@guardian/source-foundations';
+import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import { blockLink } from '../lib/block-link';
 import { findBlockAdSlots } from '../lib/find-adslots';
+import { Elements } from './Elements';
 import { RegionalAd } from './RegionalAd';
 
 const adStyle = css`

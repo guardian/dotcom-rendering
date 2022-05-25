@@ -1,14 +1,12 @@
 import { css } from '@emotion/react';
-
 import {
-	brandAlt,
 	background,
+	brandAlt,
 	headline,
-	textSans,
 	space,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-
 import { Score } from './Score';
 
 type Props = {

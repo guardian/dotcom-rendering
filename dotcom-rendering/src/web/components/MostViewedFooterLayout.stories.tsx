@@ -1,17 +1,14 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
-
-import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
-
 import React, { useEffect } from 'react';
+import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 import { ElementContainer } from './ElementContainer';
 import {
-	responseWithTwoTabs,
-	responseWithOneTab,
 	responseWithMissingImage,
+	responseWithOneTab,
+	responseWithTwoTabs,
 } from './MostViewed.mocks';
-
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
-import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 
 const Hydrated = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {

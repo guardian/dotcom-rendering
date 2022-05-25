@@ -33,6 +33,6 @@ export const MoustacheTemplate = ({
 	// this next line is necessary cos react has a 'template' object with no 'type' property.
 	// By saying 'as {}' we can pretend we're not adding the 'type' property and thus avoid unhappy type errors
 	const props = { type: 'amp-mustache' } as { [key: string]: any };
-	// eslint-disable-next-line react/jsx-props-no-spreading
+
 	return <template {...props}>{children}</template>;
 };

@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
-
-import { headline, textSans, text } from '@guardian/source-foundations';
+import { headline, text, textSans } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
-
 import { isLight } from '../lib/isLight';
 
 type Props = {

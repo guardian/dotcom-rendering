@@ -1,16 +1,14 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
 import { neutral, text, textSans } from '@guardian/source-foundations';
-
-import ClockIcon from '../../../static/icons/clock.svg';
-import { ShareIcons } from '../ShareIcons';
+import React from 'react';
 import {
+	neutralBorder,
 	pillarMap,
 	pillarPalette_DO_NOT_USE,
-	neutralBorder,
 } from '../../../lib/pillars';
+import ClockIcon from '../../../static/icons/clock.svg';
 import TwitterIcon from '../../../static/icons/twitter.svg';
+import { ShareIcons } from '../ShareIcons';
 
 const pillarColours = pillarMap(
 	(pillar) =>

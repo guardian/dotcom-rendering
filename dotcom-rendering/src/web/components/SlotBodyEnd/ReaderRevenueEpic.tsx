@@ -1,31 +1,28 @@
-import { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-
-import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
-import {
-	ModuleDataResponse,
-	ModuleData,
-	EpicPayload,
-	WeeklyArticleHistory,
-} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie, storage } from '@guardian/libs';
-import {
-	isRecurringContributor,
-	getLastOneOffContributionTimestamp,
-	shouldHideSupportMessaging,
-	hasCmpConsentForArticleCount,
-	MODULES_VERSION,
-	hasOptedOutOfArticleCount,
-	lazyFetchEmailWithTimeout,
-	hasCmpConsentForBrowserId,
-} from '../../lib/contributions';
-import { CanShowResult } from '../../lib/messagePicker';
+import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
+import type {
+	EpicPayload,
+	ModuleData,
+	ModuleDataResponse,
+	WeeklyArticleHistory,
+} from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { useEffect, useState } from 'react';
 import { initPerf } from '../../browser/initPerf';
+import type { OphanComponentEvent } from '../../browser/ophan/ophan';
+import { submitComponentEvent } from '../../browser/ophan/ophan';
 import {
-	OphanComponentEvent,
-	submitComponentEvent,
-} from '../../browser/ophan/ophan';
+	getLastOneOffContributionTimestamp,
+	hasCmpConsentForArticleCount,
+	hasCmpConsentForBrowserId,
+	hasOptedOutOfArticleCount,
+	isRecurringContributor,
+	lazyFetchEmailWithTimeout,
+	MODULES_VERSION,
+	shouldHideSupportMessaging,
+} from '../../lib/contributions';
+import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
 
 export type EpicConfig = {
@@ -173,7 +170,7 @@ export const ReaderRevenueEpic = ({
 			})
 			.catch((error) => {
 				const msg = `Error importing RR epic: ${error}`;
-				// eslint-disable-next-line no-console
+
 				console.log(msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
@@ -186,7 +183,7 @@ export const ReaderRevenueEpic = ({
 	if (Epic) {
 		return (
 			<div css={wrapperMargins}>
-				{/* eslint-disable react/jsx-props-no-spreading */}
+				{}
 				<Epic
 					{...module.props}
 					fetchEmail={fetchEmail}
@@ -195,7 +192,6 @@ export const ReaderRevenueEpic = ({
 					hasConsentForArticleCount={hasConsentForArticleCount}
 					stage={stage}
 				/>
-				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
 		);
 	}

@@ -1,7 +1,6 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
-
 import { border, from } from '@guardian/source-foundations';
-// @ts-ignore
+// @ts-expect-error
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { center } from '../lib/center';
 

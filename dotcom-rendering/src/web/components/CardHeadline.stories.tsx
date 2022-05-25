@@ -4,11 +4,9 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-
 import { specialReport } from '@guardian/source-foundations';
-import { ElementContainer } from './ElementContainer';
-
 import { CardHeadline } from './CardHeadline';
+import { ElementContainer } from './ElementContainer';
 
 export default {
 	component: CardHeadline,

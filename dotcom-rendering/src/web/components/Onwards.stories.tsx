@@ -1,20 +1,17 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { ElementContainer } from './ElementContainer';
-
 import {
-	linkAndDescription,
-	withLongDescription,
-	withLink,
-	oneTrail,
-	twoTrails,
-	threeTrails,
-	fourTrails,
-	fiveTrails,
-	sixTrails,
-	sevenTrails,
 	eightTrails,
+	fiveTrails,
+	fourTrails,
 	labsTrails,
+	linkAndDescription,
+	oneTrail,
+	sevenTrails,
+	sixTrails,
+	threeTrails,
+	twoTrails,
+	withLink,
+	withLongDescription,
 } from './Onwards.mocks';
 import { OnwardsLayout } from './OnwardsLayout';
 

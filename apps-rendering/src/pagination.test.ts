@@ -7,8 +7,8 @@ const generateBlocks = (numberOfBlocks: number): LiveBlock[] => {
 		id: '1',
 		isKeyEvent: true,
 		title: 'Block One',
-		firstPublished: some(new Date('2021-11-02T12:00:00Z')),
-		lastModified: some(new Date('2021-11-02T13:13:13Z')),
+		firstPublished: new Date('2021-11-02T12:00:00Z'),
+		lastModified: new Date('2021-11-02T13:13:13Z'),
 		body: [],
 		contributors: [],
 	};

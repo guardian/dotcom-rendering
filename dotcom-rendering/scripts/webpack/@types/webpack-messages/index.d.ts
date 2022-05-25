@@ -1,5 +1,5 @@
 declare module 'webpack-messages' {
-	import * as webpack from 'webpack';
+	import type * as webpack from 'webpack';
 
 	type Options = {
 		name: string;
@@ -15,5 +15,6 @@ declare module 'webpack-messages' {
 		apply(compiler: webpack.Compiler): void;
 	}
 
+	// eslint-disable-next-line import/no-default-export -- it is how the module is exported
 	export default WebpackMessages;
 }

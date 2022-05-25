@@ -1,12 +1,11 @@
-import { news } from '@guardian/source-foundations';
 import {
-	ArticleDisplay,
 	ArticleDesign,
+	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
+import { news } from '@guardian/source-foundations';
 import { ElementContainer } from './ElementContainer';
-
 import { Standfirst } from './Standfirst';
 
 export default {

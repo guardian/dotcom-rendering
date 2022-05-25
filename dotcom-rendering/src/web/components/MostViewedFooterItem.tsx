@@ -1,16 +1,14 @@
 import { css } from '@emotion/react';
-
 import { ArticleDesign } from '@guardian/libs';
 import {
 	border,
+	headline,
 	neutral,
 	text,
-	headline,
 	until,
 } from '@guardian/source-foundations';
-import { BigNumber } from './BigNumber/BigNumber';
 import { AgeWarning } from './AgeWarning';
-
+import { BigNumber } from './BigNumber/BigNumber';
 import { LinkHeadline } from './LinkHeadline';
 
 const gridItem = (position: number) => css`

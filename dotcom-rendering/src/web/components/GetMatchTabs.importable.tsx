@@ -1,8 +1,6 @@
 import { useApi } from '../lib/useApi';
-
-import { Placeholder } from './Placeholder';
-
 import { MatchTabs } from './MatchTabs';
+import { Placeholder } from './Placeholder';
 
 type Props = {
 	matchUrl: string;
@@ -20,7 +18,7 @@ export const GetMatchTabs = ({ matchUrl, format }: Props) => {
 	if (loading) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
-		window.guardian?.modules?.sentry?.reportError?.(error, 'match-tabs');
+		window.guardian.modules.sentry.reportError(error, 'match-tabs');
 
 		return null;
 	}

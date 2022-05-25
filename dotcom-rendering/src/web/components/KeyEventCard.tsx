@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
-import { textSans, neutral, space, from } from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
+import { from, neutral, space, textSans } from '@guardian/source-foundations';
+import { Link } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 
 export interface KeyEvent {

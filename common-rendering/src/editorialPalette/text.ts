@@ -179,7 +179,7 @@ const bylineLeftColumn = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Culture:
 					return culture[400];
 				case ArticlePillar.Opinion:
-					return opinion[400];
+					return opinion[300];
 				case ArticleSpecial.Labs:
 					return labs[400];
 				case ArticleSpecial.SpecialReport:
