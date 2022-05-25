@@ -19,6 +19,9 @@ const primaryStyles = css`
 	:hover {
 		text-decoration: underline;
 	}
+	&::-webkit-details-marker {
+		display: none;
+	}
 `;
 
 // for liveblog smaller breakpoints article meta is located in the same
