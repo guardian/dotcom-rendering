@@ -1,17 +1,17 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from "@emotion/react";
-import { css } from "@emotion/react";
-import { remSpace } from "@guardian/source-foundations";
-import { brandAltText, neutral, text } from "@guardian/source-foundations";
-import { textSans } from "@guardian/source-foundations";
-import type { ArticleFormat } from "@guardian/libs";
-import { ArticleDesign } from "@guardian/libs";
-import type { Option } from "@guardian/types";
-import { OptionKind } from "@guardian/types";
-import type { FC, ReactNode } from "react";
-import { fill } from "../editorialPalette";
-import { darkModeCss } from "../lib";
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { remSpace } from '@guardian/source-foundations';
+import { brandAltText, neutral, text } from '@guardian/source-foundations';
+import { textSans } from '@guardian/source-foundations';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
+import type { Option } from '@guardian/types';
+import { OptionKind } from '@guardian/types';
+import type { FC, ReactNode } from 'react';
+import { fill } from '../editorialPalette';
+import { darkModeCss } from '../lib';
 
 // ----- Sub-Components ----- //
 
@@ -22,7 +22,7 @@ interface TriangleProps {
 
 const triangleStyles = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean
+	supportsDarkMode: boolean,
 ): SerializedStyles => css`
 	fill: ${fill.icon(format)};
 	height: 0.8em;
@@ -61,7 +61,7 @@ type Props = {
 };
 
 const styles = (supportsDarkMode: boolean) => css`
-	${textSans.xsmall()}
+	${textSans.xsmall({ lineHeight: 'regular' })}
 	padding-top: ${remSpace[2]};
 	color: ${text.supporting};
 
@@ -80,7 +80,7 @@ const mediaStyles = (supportsDarkMode: boolean) => css`
 
 const getStyles = (
 	format: ArticleFormat,
-	supportsDarkMode: boolean
+	supportsDarkMode: boolean,
 ): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
