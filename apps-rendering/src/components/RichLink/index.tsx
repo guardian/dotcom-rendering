@@ -128,7 +128,7 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 		a {
 			display: inline-block;
 			text-decoration: none;
-			color: ${text.richLinkSvgPreload(format)};
+			color: ${text.richLinkAnchor(format)};
 			max-width: 100%;
 			word-wrap: break-word;
 
