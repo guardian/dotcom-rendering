@@ -1279,8 +1279,8 @@ interface BaseTrailType {
 	starRating?: number;
 	linkText?: string;
 	branding?: Branding;
-	type?: string;
-	enriched?: DCREnrichedContent;
+	isSnap?: boolean;
+	snapData?: DCREnrichedContent;
 }
 interface TrailType extends BaseTrailType {
 	palette?: never;

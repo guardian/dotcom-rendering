@@ -56,8 +56,8 @@ export const FixedSmallSlowIV = ({
 							starRating={trail.starRating}
 							branding={trail.branding}
 							dataLinkName={trail.dataLinkName}
-							type={trail.type}
-							enriched={trail.enriched}
+							isSnap={trail.isSnap}
+							snapData={trail.snapData}
 						/>
 					</LI>
 				);
