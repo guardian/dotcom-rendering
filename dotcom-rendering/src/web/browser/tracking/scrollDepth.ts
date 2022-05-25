@@ -2,6 +2,33 @@ import { log } from '@guardian/libs';
 import debounce from 'lodash.debounce';
 import { getLoggingEndpoint, recordLog } from './sendAnalyticsToLake';
 
+// -- Definitions -------
+
+type Payload = {
+	label: 'dotcom.scrollDepth';
+	properties: {
+		/** Article path */
+		path: string;
+		/** Whether the reader resized the page at any point */
+		resized: 'true' | 'false';
+		// TODO - anonymous for now
+		browserId?: 'anonymous';
+		pageViewId?: 'anonymous';
+	};
+	metrics: {
+		/** Maximum scrolled location (in px) */
+		scrollDepth: number;
+		/** Initial width of the viewport */
+		viewportWidth: number;
+		/** Initial height of the viewport */
+		viewportHeight: number;
+		/** Total height of the document */
+		pageHeight: number;
+		/** How long it took before the readers started scrolling (in ms) */
+		scrollStart: number;
+	};
+};
+
 // -- Constants ---------
 
 const MARKS = {
@@ -72,11 +99,11 @@ const visibilityListener = () => {
 		'mark',
 	)[0]?.startTime;
 
-	const payload = {
+	const payload: Payload = {
 		label: 'dotcom.scrollDepth',
 		properties: {
 			path: window.location.pathname,
-			hasResized: hasResized ? 'true' : 'false',
+			resized: hasResized ? 'true' : 'false',
 		},
 		metrics: {
 			pageHeight,
