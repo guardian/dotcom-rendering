@@ -114,6 +114,7 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 		svg {
 			width: 1.5rem;
 			border-radius: 100%;
+			fill: ${fill.richLinkSvgPreload(format)};
 			border: solid 1px ${border.richLinkSvgPreload(format)};
 			padding: 4px;
 			display: inline-block;

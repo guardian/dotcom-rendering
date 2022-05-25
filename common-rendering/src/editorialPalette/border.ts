@@ -128,21 +128,21 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
 };
 
 /**
- *  This is applied server-side. When the page loads, client-side JS changes the colour based on the theme.
+ *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
  */
  const richLinkPreload = (_format: ArticleFormat): Colour => {
 	return neutral[60];
 };
 
 /**
- *  This is applied server-side. When the page loads, client-side JS changes the colour.
+ *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
  */
 const richLinkSvgPreload = (_format: ArticleFormat): Colour => {
 	return neutral[7];
 }
 
 /**
- *  This is applied server-side. When the page loads, client-side JS changes the colour.
+ *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
  */
  const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 	return neutral[60];
