@@ -253,6 +253,20 @@ const FooterLinks = ({
 
 const year = new Date().getFullYear();
 
+const decideSignupLink = (edition: Edition): string => {
+	switch (edition) {
+		case 'US':
+			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-us';
+		case 'AU':
+			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-au';
+		case 'INT':
+			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-uk';
+		case 'UK':
+		default:
+			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-uk';
+	}
+};
+
 export const Footer = ({
 	pillars,
 	pillar,
@@ -291,7 +305,7 @@ export const Footer = ({
 				</div>
 				<LinkButton
 					size="small"
-					href="https://www.theguardian.com/info/2015/dec/08/daily-email-uk"
+					href={decideSignupLink(edition)}
 					cssOverrides={emailSignupButton}
 					icon={<SvgArrowRightStraight />}
 					iconSide="right"
