@@ -20,7 +20,7 @@ const primaryStyles = css`
 		text-decoration: underline;
 	}
 	&::-webkit-details-marker {
-		display:none;
+		display: none;
 	}
 `;
 
