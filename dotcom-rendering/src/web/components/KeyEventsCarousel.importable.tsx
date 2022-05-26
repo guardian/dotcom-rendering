@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, space, textSans } from '@guardian/source-foundations';
+import { from, space, textSans, until } from '@guardian/source-foundations';
 import {
 	Button,
 	buttonThemeBrandAlt,
@@ -24,10 +24,6 @@ type ValidBlock = Block & {
 
 const carouselStyles = (palette: Palette) => css`
 	background-color: ${palette.background.keyEvent};
-	${from.desktop} {
-		background-color: ${palette.background.keyEventFromDesktop};
-	}
-
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overflow-x: auto;
@@ -38,20 +34,31 @@ const carouselStyles = (palette: Palette) => css`
 	&::-webkit-scrollbar {
 		display: none;
 	}
-	width: 90vw;
+	${until.desktop} {
+		width: 90vw;
+	}
+	${from.desktop} {
+		background-color: ${palette.background.keyEventFromDesktop};
+	}
 `;
+const leftMarginStyles = css`
+	${from.desktop} {
+		margin-left: 240px;
+	}
+`;
+
 const titleStyles = css`
 	${textSans.small({ fontWeight: 'bold', lineHeight: 'regular' })};
 `;
 
-const containerStyles = css`
+const containerStyles = (shortCarousel: boolean) => css`
 	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
 	align-items: stretch;
 	width: fit-content;
 	position: relative;
-	${from.desktop} {
+	${from.desktop && !shortCarousel} {
 		margin-bottom: ${space[12]}px;
 	}
 `;
@@ -98,6 +105,7 @@ export const KeyEventsCarousel = ({
 		if (carousel.current) carousel.current.scrollLeft += cardWidth;
 	};
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
+	const shortCarousel = filteredKeyEvents.length <= 4;
 	return (
 		<>
 			<Hide from="desktop">
@@ -106,9 +114,12 @@ export const KeyEventsCarousel = ({
 			<div
 				ref={carousel}
 				id="key-events-carousel"
-				css={carouselStyles(palette)}
+				css={[
+					carouselStyles(palette),
+					shortCarousel && leftMarginStyles,
+				]}
 			>
-				<ul css={containerStyles}>
+				<ul css={containerStyles(shortCarousel)}>
 					{filteredKeyEvents.map((keyEvent) => {
 						return (
 							<KeyEventCard

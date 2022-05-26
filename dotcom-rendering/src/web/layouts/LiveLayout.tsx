@@ -40,6 +40,7 @@ import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
@@ -590,7 +591,21 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</ElementContainer>
-
+				<ElementContainer
+					showTopBorder={false}
+					backgroundColour={palette.background.keyEventFromDesktop}
+					borderColour={palette.border.article}
+				>
+					<Hide until={'desktop'}>
+						<Island>
+							<KeyEventsCarousel
+								keyEvents={CAPIArticle.keyEvents}
+								filterKeyEvents={CAPIArticle.filterKeyEvents}
+								format={format}
+							/>
+						</Island>
+					</Hide>
+				</ElementContainer>
 				<ElementContainer
 					showTopBorder={false}
 					borderColour={palette.border.article}
