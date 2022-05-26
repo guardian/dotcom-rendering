@@ -242,9 +242,8 @@ const decideSignupLink = (edition: Edition): string => {
 			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-us';
 		case 'AU':
 			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-au';
-		case 'INT':
-			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-uk';
 		case 'UK':
+		case 'INT': // There's no international version so we default to UK
 		default:
 			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-uk';
 	}
