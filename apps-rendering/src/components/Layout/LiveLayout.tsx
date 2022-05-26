@@ -15,7 +15,6 @@ import {
 	pxToRem,
 	remSpace,
 } from '@guardian/source-foundations';
-import { OptionKind } from '@guardian/types';
 import Footer from 'components/Footer';
 import GridItem from 'components/GridItem';
 import LiveBlocks from 'components/LiveBlocks';
@@ -99,11 +98,11 @@ const keyEventsWrapperStyles = css`
 const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 	blocks.reduce<KeyEvent[]>(
 		(events, block) =>
-			block.isKeyEvent && block.firstPublished.kind !== OptionKind.None
+			block.isKeyEvent
 				? [
 						...events,
 						{
-							date: block.firstPublished.value,
+							date: block.firstPublished,
 							text: block.title,
 							url: `?page=with:block-${block.id}#block-${block.id}`,
 						},
@@ -116,7 +115,7 @@ interface Props {
 	item: LiveBlog | DeadBlog;
 }
 
-const Live: FC<Props> = ({ item }) => {
+const LiveLayout: FC<Props> = ({ item }) => {
 	const pagination = (
 		<Pagination
 			format={item}
@@ -207,4 +206,4 @@ const Live: FC<Props> = ({ item }) => {
 
 // ----- Exports ----- //
 
-export default Live;
+export default LiveLayout;
