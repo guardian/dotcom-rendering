@@ -82,7 +82,7 @@ interface Props {
 	children: ReactNode[];
 }
 
-const Standard: FC<Props> = ({ item, children }) => {
+const StandardLayout: FC<Props> = ({ item, children }) => {
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (
 		<div css={articleWidthStyles}>
@@ -158,4 +158,4 @@ const Standard: FC<Props> = ({ item, children }) => {
 
 // ----- Exports ----- //
 
-export default Standard;
+export default StandardLayout;

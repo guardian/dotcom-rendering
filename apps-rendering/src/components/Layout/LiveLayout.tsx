@@ -115,7 +115,7 @@ interface Props {
 	item: LiveBlog | DeadBlog;
 }
 
-const Live: FC<Props> = ({ item }) => {
+const LiveLayout: FC<Props> = ({ item }) => {
 	const pagination = (
 		<Pagination
 			format={item}
@@ -206,4 +206,4 @@ const Live: FC<Props> = ({ item }) => {
 
 // ----- Exports ----- //
 
-export default Live;
+export default LiveLayout;

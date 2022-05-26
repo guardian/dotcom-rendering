@@ -8,15 +8,15 @@ import { partition } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
-import Comment from 'components/layout/comment';
-import Interactive from 'components/layout/interactive';
-import Labs from 'components/layout/labs';
-import Media from 'components/layout/media';
-import Standard from 'components/layout/standard';
+import CommentLayout from 'components/Layout/CommentLayout';
+import InteractiveLayout from 'components/Layout/InteractiveLayout';
+import LabsLayout from 'components/Layout/LabsLayout';
+import LiveLayout from 'components/Layout/LiveLayout';
+import MediaLayout from 'components/Layout/MediaLayout';
+import StandardLayout from 'components/Layout/StandardLayout';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
-import Live from './live';
 
 // ----- Functions ----- //
 
@@ -50,14 +50,14 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.LiveBlog ||
 		item.design === ArticleDesign.DeadBlog
 	) {
-		return <Live item={item} />;
+		return <LiveLayout item={item} />;
 	}
 
 	const body = partition(item.body).oks;
 	const render = renderWithAds(shouldHideAds);
 
 	if (item.theme === ArticleSpecial.Labs) {
-		return <Labs item={item}>{render(item, body)}</Labs>;
+		return <LabsLayout item={item}>{render(item, body)}</LabsLayout>;
 	}
 
 	if (
@@ -65,9 +65,9 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.display === ArticleDisplay.Immersive
 	) {
 		return (
-			<Interactive item={item}>
+			<InteractiveLayout item={item}>
 				{renderAllWithoutStyles(item, body)}
-			</Interactive>
+			</InteractiveLayout>
 		);
 	}
 
@@ -76,7 +76,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Letter ||
 		item.design === ArticleDesign.Editorial
 	) {
-		return <Comment item={item}>{render(item, body)}</Comment>;
+		return <CommentLayout item={item}>{render(item, body)}</CommentLayout>;
 	}
 
 	if (
@@ -85,12 +85,12 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Video
 	) {
 		return (
-			<Media item={item}>
+			<MediaLayout item={item}>
 				{render(
 					item,
 					body.filter((elem) => elem.kind === ElementKind.Image),
 				)}
-			</Media>
+			</MediaLayout>
 		);
 	}
 
@@ -106,7 +106,9 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Correction ||
 		item.design === ArticleDesign.Interview
 	) {
-		return <Standard item={item}>{render(item, body)}</Standard>;
+		return (
+			<StandardLayout item={item}>{render(item, body)}</StandardLayout>
+		);
 	}
 
 	return notImplemented;
