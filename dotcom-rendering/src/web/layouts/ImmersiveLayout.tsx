@@ -13,10 +13,9 @@ import {
 	Lines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -390,10 +389,7 @@ export const ImmersiveLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer
-								format={format}
-								abTests={CAPIArticle.config.abTests}
-							>
+							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}

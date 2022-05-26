@@ -1,13 +1,8 @@
+import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { Article } from '../../fixtures/generated/articles/Article';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 
 const example: CAPIArticleType = Article;
-
-const metaData = {
-	id: '123',
-	primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-	secondaryDateLine: 'Last modified on Wed 9 Dec 2020 13.40 GMT',
-};
 
 const formatIsPhotoEssay: CAPIFormat = {
 	...example.format,
@@ -27,7 +22,7 @@ describe('Enhancing blockquotes', () => {
 	it('adds the quoted prop when the quoted class was found', () => {
 		const input: Block[] = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
@@ -40,7 +35,7 @@ describe('Enhancing blockquotes', () => {
 
 		const expectedOutput = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
@@ -60,7 +55,7 @@ describe('Enhancing blockquotes', () => {
 	it('transforms simple blockquotes to highlight elements for photo essays', () => {
 		const input: Block[] = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
@@ -73,7 +68,7 @@ describe('Enhancing blockquotes', () => {
 
 		const expectedOutput = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.HighlightBlockElement',
@@ -92,7 +87,7 @@ describe('Enhancing blockquotes', () => {
 	it("doesn't transform quoted blockquotes to highlight elements for photo essays", () => {
 		const input: Block[] = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
@@ -105,7 +100,7 @@ describe('Enhancing blockquotes', () => {
 
 		const expectedOutput = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
@@ -125,7 +120,7 @@ describe('Enhancing blockquotes', () => {
 	it('passes through simple blockquotes', () => {
 		const input: Block[] = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
@@ -138,7 +133,7 @@ describe('Enhancing blockquotes', () => {
 
 		const expectedOutput = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
@@ -157,7 +152,7 @@ describe('Enhancing blockquotes', () => {
 	it('ignores blockquotes with other classnames', () => {
 		const input: Block[] = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
@@ -170,7 +165,7 @@ describe('Enhancing blockquotes', () => {
 
 		const expectedOutput = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
@@ -189,7 +184,7 @@ describe('Enhancing blockquotes', () => {
 	it('handles both quoted and simple blockquotes in the same array', () => {
 		const input: Block[] = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
@@ -207,7 +202,7 @@ describe('Enhancing blockquotes', () => {
 
 		const expectedOutput = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',

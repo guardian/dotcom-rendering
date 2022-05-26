@@ -74,7 +74,7 @@ interface Props {
 	children: ReactNode[];
 }
 
-const Comment: FC<Props> = ({ item, children }) => (
+const CommentLayout: FC<Props> = ({ item, children }) => (
 	<main css={[Styles, DarkStyles]}>
 		<article css={BorderStyles}>
 			<header>
@@ -124,4 +124,4 @@ const Comment: FC<Props> = ({ item, children }) => (
 
 // ----- Exports ----- //
 
-export default Comment;
+export default CommentLayout;
