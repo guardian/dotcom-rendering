@@ -34,10 +34,9 @@ const carouselStyles = (palette: Palette) => css`
 	overflow-y: hidden;
 	display: flex;
 	flex-direction: column;
-	scrollbar-width: none; /* for Firefox */
-	-ms-overflow-style: none; /* for Internet Explorer, Edge */
+	scrollbar-width: none;
 	&::-webkit-scrollbar {
-		display: none; /* for Chrome, Safari, and Opera */
+		display: none;
 	}
 `;
 
