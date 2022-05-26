@@ -8,6 +8,7 @@ import {
 	SvgChevronLeftSingle,
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
+import { useRef } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { KeyEventCard } from './KeyEventCard';
 
@@ -16,6 +17,10 @@ interface Props {
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
 }
+type ValidBlock = Block & {
+	title: string;
+	blockFirstPublished: number;
+};
 
 const carouselStyles = (palette: Palette) => css`
 	background-color: ${palette.background.keyEvent};
@@ -66,47 +71,44 @@ const rightButton = css`
 	right: ${space[5]}px;
 `;
 
-const isServer = typeof window === 'undefined';
-const carousel: HTMLElement | null = !isServer
-	? window.document.getElementById('key-event-carousel')
-	: null;
-
+const isValidKeyEvent = (keyEvent: Block): keyEvent is ValidBlock => {
+	return (
+		typeof keyEvent.title === 'string' &&
+		typeof keyEvent.blockFirstPublished === 'number'
+	);
+};
 export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	format,
 }: Props) => {
+	const carousel = useRef<HTMLDivElement | null>(null);
 	const palette = decidePalette(format);
 	const cardWidth = 200;
+
 	const goPrevious = () => {
-		if (carousel) carousel.scrollLeft -= cardWidth;
+		if (carousel.current) carousel.current.scrollLeft -= cardWidth;
 	};
 	const goNext = () => {
-		if (carousel) carousel.scrollLeft += cardWidth;
+		if (carousel.current) carousel.current.scrollLeft += cardWidth;
 	};
-	const transformedKeyEvents = keyEvents
-		.filter((keyEvent) => {
-			return keyEvent.title && keyEvent.blockFirstPublished;
-		})
-		.map((keyEvent) => {
-			return {
-				text: keyEvent.title || '', // We fallback to '' here purely to keep ts happy
-				url: `?filterKeyEvents=${filterKeyEvents}&page=with:block-${keyEvent.id}#block-${keyEvent.id}`,
-				date: new Date(keyEvent.blockFirstPublished || ''), // We fallback to '' here purely to keep ts happy
-				isSummmary: keyEvent.attributes.summary,
-			};
-		});
+	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
 	return (
-		<div id="key-event-carousel" css={carouselStyles(palette)}>
+		<div
+			ref={carousel}
+			id="key-events-carousel"
+			css={carouselStyles(palette)}
+		>
 			<ul css={containerStyles}>
-				{transformedKeyEvents.map((keyEvent) => {
+				{filteredKeyEvents.map((keyEvent) => {
 					return (
 						<KeyEventCard
-							text={keyEvent.text}
-							url={keyEvent.url}
-							date={keyEvent.date}
 							format={format}
-							isSummary={keyEvent.isSummmary}
+							filterKeyEvents={filterKeyEvents}
+							id={keyEvent.id}
+							blockFirstPublished={keyEvent.blockFirstPublished}
+							isSummary={keyEvent.attributes.summary}
+							title={keyEvent.title}
 						/>
 					);
 				})}

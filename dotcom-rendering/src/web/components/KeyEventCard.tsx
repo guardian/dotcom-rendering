@@ -4,12 +4,13 @@ import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 
-export interface KeyEvent {
-	date: Date;
-	text: string;
-	url: string;
-	format: ArticleFormat;
+interface Props {
+	id: string;
+	blockFirstPublished: number;
+	title: string;
 	isSummary: boolean;
+	filterKeyEvents: boolean;
+	format: ArticleFormat;
 }
 
 const linkStyles = (palette: Palette) => css`
@@ -98,16 +99,18 @@ const timeStyles = (palette: Palette) => css`
 `;
 
 export const KeyEventCard = ({
-	text,
-	date,
-	url,
-	format,
+	id,
+	blockFirstPublished,
 	isSummary,
-}: KeyEvent) => {
+	title,
+	filterKeyEvents,
+	format,
+}: Props) => {
 	const palette = decidePalette(format);
-
+	const url = `?filterKeyEvents=${filterKeyEvents}&page=with:block-${id}#block-${id}`;
+	const date = new Date(blockFirstPublished);
 	return (
-		<li css={listItemStyles(palette)} id="key-event-card">
+		<li css={listItemStyles(palette)}>
 			<Link
 				priority="secondary"
 				css={[linkStyles(palette), isSummary && summaryStyles(palette)]}
@@ -130,7 +133,7 @@ export const KeyEventCard = ({
 				>
 					{timeAgo(date.getTime())}
 				</time>
-				<span css={textStyles(palette)}>{text}</span>
+				<span css={textStyles(palette)}>{title}</span>
 			</Link>
 		</li>
 	);
