@@ -21,7 +21,10 @@ updates:
     - package-ecosystem: "npm"
       directory: "/dotcom-rendering"
       schedule:
-        interval: "daily"
+        interval: "weekly"
+        day: "wednesday"
+        time: "10:00"
+        timezone: "Europe/London"
       labels:
         - "DCR Dependency"
       open-pull-requests-limit: 10
