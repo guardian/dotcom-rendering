@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, space } from '@guardian/source-foundations';
+import { from, space, textSans } from '@guardian/source-foundations';
 import {
 	Button,
 	buttonThemeBrandAlt,
@@ -38,6 +38,10 @@ const carouselStyles = (palette: Palette) => css`
 	&::-webkit-scrollbar {
 		display: none;
 	}
+	width: 90vw;
+`;
+const titleStyles = css`
+	${textSans.small({ fontWeight: 'bold', lineHeight: 'regular' })};
 `;
 
 const containerStyles = css`
@@ -46,8 +50,10 @@ const containerStyles = css`
 	flex-direction: row;
 	align-items: stretch;
 	width: fit-content;
-	margin-bottom: ${space[12]}px;
 	position: relative;
+	${from.desktop} {
+		margin-bottom: ${space[12]}px;
+	}
 `;
 
 const buttonStyles = css`
@@ -93,47 +99,54 @@ export const KeyEventsCarousel = ({
 	};
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
 	return (
-		<div
-			ref={carousel}
-			id="key-events-carousel"
-			css={carouselStyles(palette)}
-		>
-			<ul css={containerStyles}>
-				{filteredKeyEvents.map((keyEvent) => {
-					return (
-						<KeyEventCard
-							format={format}
-							filterKeyEvents={filterKeyEvents}
-							id={keyEvent.id}
-							blockFirstPublished={keyEvent.blockFirstPublished}
-							isSummary={keyEvent.attributes.summary}
-							title={keyEvent.title}
-						/>
-					);
-				})}
-			</ul>
-			<Hide until="desktop">
-				{keyEvents.length > 6 && (
-					<>
-						<Button
-							hideLabel={true}
-							cssOverrides={[buttonStyles, leftButton]}
-							iconSide="left"
-							icon={<SvgChevronLeftSingle />}
-							onClick={goPrevious}
-							aria-label="Move key events carousel backwards"
-						/>
-						<Button
-							hideLabel={true}
-							cssOverrides={[buttonStyles, rightButton]}
-							iconSide="left"
-							icon={<SvgChevronRightSingle />}
-							onClick={goNext}
-							aria-label="Move key events carousel forwards"
-						/>
-					</>
-				)}
+		<>
+			<Hide from="desktop">
+				<div css={titleStyles}>Key events:</div>
 			</Hide>
-		</div>
+			<div
+				ref={carousel}
+				id="key-events-carousel"
+				css={carouselStyles(palette)}
+			>
+				<ul css={containerStyles}>
+					{filteredKeyEvents.map((keyEvent) => {
+						return (
+							<KeyEventCard
+								format={format}
+								filterKeyEvents={filterKeyEvents}
+								id={keyEvent.id}
+								blockFirstPublished={
+									keyEvent.blockFirstPublished
+								}
+								isSummary={keyEvent.attributes.summary}
+								title={keyEvent.title}
+							/>
+						);
+					})}
+				</ul>
+				<Hide until="desktop">
+					{keyEvents.length > 6 && (
+						<>
+							<Button
+								hideLabel={true}
+								cssOverrides={[buttonStyles, leftButton]}
+								iconSide="left"
+								icon={<SvgChevronLeftSingle />}
+								onClick={goPrevious}
+								aria-label="Move key events carousel backwards"
+							/>
+							<Button
+								hideLabel={true}
+								cssOverrides={[buttonStyles, rightButton]}
+								iconSide="left"
+								icon={<SvgChevronRightSingle />}
+								onClick={goNext}
+								aria-label="Move key events carousel forwards"
+							/>
+						</>
+					)}
+				</Hide>
+			</div>
+		</>
 	);
 };

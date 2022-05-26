@@ -746,21 +746,24 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								</Hide>
 								{/* Key events */}
-								<div
-									css={[
-										!footballMatchUrl && sticky,
-										keyEventsMargins,
-										sidePaddingDesktop,
-									]}
-								>
-									<KeyEventsContainer
-										format={format}
-										keyEvents={CAPIArticle.keyEvents}
-										filterKeyEvents={
-											CAPIArticle.filterKeyEvents
-										}
-									/>
-								</div>
+								{!CAPIArticle.config.switches
+									.keyEventsCarousel && (
+									<div
+										css={[
+											!footballMatchUrl && sticky,
+											keyEventsMargins,
+											sidePaddingDesktop,
+										]}
+									>
+										<KeyEventsContainer
+											format={format}
+											keyEvents={CAPIArticle.keyEvents}
+											filterKeyEvents={
+												CAPIArticle.filterKeyEvents
+											}
+										/>
+									</div>
+								)}
 								{/* Match stats */}
 								{footballMatchUrl && (
 									<Island
@@ -796,7 +799,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										accordionTitle="Live feed"
 										context="liveFeed"
 									>
-										{CAPIArticle.keyEvents.length ? (
+										{!CAPIArticle.config.switches
+											.keyEventsCarousel &&
+										CAPIArticle.keyEvents.length ? (
 											<Hide above="desktop">
 												<Island deferUntil="visible">
 													<FilterKeyEventsToggle
@@ -882,6 +887,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												}
 												onFirstPage={
 													pagination.currentPage === 1
+												}
+												keyEvents={
+													CAPIArticle.keyEvents
+												}
+												filterKeyEvents={
+													CAPIArticle.filterKeyEvents
 												}
 											/>
 											{pagination.totalPages > 1 && (
