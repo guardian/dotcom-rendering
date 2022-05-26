@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { until, brand, neutral } from '@guardian/source-foundations';
 import { SvgGuardianLogo } from '@guardian/source-react-components';
-import TextBadge from '../../static/logos/newsletters-badge.svg';
 import { ElementContainer } from './ElementContainer';
+import { NewsletterBadge } from './NewslettersBadge';
 
 const stackedWrapperStyle = css`
 	padding-top: 10px;
@@ -49,7 +49,7 @@ export const NewsLetterSignupBanner = () => (
 	>
 		<div css={stackedWrapperStyle}>
 			<SvgGuardianLogo textColor={neutral[100]} />
-			<TextBadge />
+			<NewsletterBadge />
 		</div>
 	</ElementContainer>
 );
