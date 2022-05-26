@@ -149,10 +149,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			)}
 
 			<main>
-				<ElementContainer padded={false} showSideBorders={false}>
-					<NewsLetterSignupBanner />
-				</ElementContainer>
-
+				<NewsLetterSignupBanner />
 				<ContainerLayout
 					centralBorder="full"
 					sideBorders={true}

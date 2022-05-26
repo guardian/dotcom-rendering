@@ -1,39 +1,55 @@
 import { css } from '@emotion/react';
-import { from, until, brand, brandAlt } from '@guardian/source-foundations';
+import { until, brand, neutral } from '@guardian/source-foundations';
+import { SvgGuardianLogo } from '@guardian/source-react-components';
+import TextBadge from '../../static/logos/newsletters-badge.svg';
+import { ElementContainer } from './ElementContainer';
 
-import Logo from '../../static/logos/guardian-newsletters-logo.svg';
-
-const bannerStyle = css`
-	background-color: ${brand[400]};
-	color: ${brandAlt[400]};
-	padding: 10px 0;
-	font-weight: bold;
-`;
-
-const wrapperStyle = css`
-	padding-left: 16px;
+const stackedWrapperStyle = css`
+	padding-top: 10px;
+	padding-bottom: 10px;
 	display: flex;
 	justify-content: flex-end;
-	align-items: center;
-
-	${from.wide} {
-		width: 250px;
-	}
+	align-items: flex-start;
+	flex-direction: column;
+	width: 230px;
 
 	${until.wide} {
+		width: 150px;
+	}
+
+	${until.leftCol} {
 		width: 170px;
+		margin-left: 10px;
 	}
 
 	${until.desktop} {
 		justify-content: flex-start;
+		width: 170px;
+	}
+
+	svg {
+		max-width: 100%;
+	}
+
+	svg:nth-of-type(1) {
+		width: 65%;
+	}
+
+	svg:nth-of-type(2) {
+		padding-top: 4px;
 		width: 100%;
 	}
 `;
 
 export const NewsLetterSignupBanner = () => (
-	<div css={bannerStyle}>
-		<div css={wrapperStyle}>
-			<Logo />
+	<ElementContainer
+		padded={true}
+		showSideBorders={false}
+		backgroundColour={brand[400]}
+	>
+		<div css={stackedWrapperStyle}>
+			<SvgGuardianLogo textColor={neutral[100]} />
+			<TextBadge />
 		</div>
-	</div>
+	</ElementContainer>
 );
