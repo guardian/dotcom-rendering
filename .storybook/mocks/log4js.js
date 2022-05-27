@@ -1,37 +1,13 @@
-/** It’s no op(eration) */
-const noop = () => {};
+// @ts-check
 
-const getLogger = {
-	isLevelEnabled: noop,
-	isTraceEnabled: noop,
-	isDebugEnabled: noop,
-	isInfoEnabled: noop,
-	isWarnEnabled: noop,
-	isErrorEnabled: noop,
-	isFatalEnabled: noop,
-
-	_log: noop,
-
-	addContext: noop,
-	removeContext: noop,
-	clearContext: noop,
-	setParseCallStackFunction: noop,
-
-	trace: noop,
-	debug: noop,
-	info: noop,
-	warn: noop,
-	error: noop,
-	fatal: noop,
-	mark: noop,
-};
-
-const logger = { ...console };
-
-export {
-	noop as addLayout,
-	noop as configure,
-	noop as shutdown,
-	getLogger,
-	logger,
+/** This is a mock logger to replace [logging.ts][]
+ *
+ * [logging.ts]: ../../dotcom-rendering/src/server/lib/logging.ts
+ *
+ * @type {Partial<import("log4js").Logger>}
+ */
+export const logger = {
+	log: console.log,
+	warn: console.warn,
+	debug: console.debug,
 };
