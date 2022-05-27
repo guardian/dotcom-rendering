@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -8,6 +9,7 @@ import {
 import { breakpoints, from } from '@guardian/source-foundations';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
+import { enumEntries } from '../../layouts/lib/enumEntries';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
 
@@ -84,32 +86,26 @@ const CardsWithDifferentThemes = ({
 	design: ArticleDesign;
 	title: string;
 }) => {
-	const cards = [];
-	for (const [pillarName, pillarValue] of Object.entries(ArticlePillar)) {
-		// We need to check if numeric here because the values are also exported as keynames
-		// See: https://www.typescriptlang.org/play?#code/KYOwrgtgBAggTgFwJYGMA2wAKS1oIZxQDeAsAFBSVQBywA7gM5QC8UADADTlVQDyADkhBIA9iBZQAjFwpUAyvxGIJAJhk8AwmDQIwcYBIDM6qgBkkAM2AMEATwwSALDIC+5cijEMRGAHRoRAHMACl4AIwArYBQEX1AEOCRrYPhkdCwcfDgASmyAbnIAegAqcgBtbioygCI2ao4oatpGaoBdE0oayXrGgSFREDaOqBqVHuqFJQQhys7qw3GtHT1gGdk5x3HzKxt7VfbZkab6Bh62A-WjvuExHskLnhrJxB6VB6rqpd19HsN3ue21jsGHqjla5FaUHIxUKQA
-		if (Number.isNaN(Number(pillarName))) {
-			cards.push({
-				title: pillarName,
-				format: {
-					display,
-					design,
-					theme: pillarValue as ArticlePillar,
-				},
-			});
-		}
+	const cards: Array<{ title: string; format: ArticleFormat }> = [];
+	for (const [pillarName, pillarValue] of enumEntries(ArticlePillar)) {
+		cards.push({
+			title: pillarName,
+			format: {
+				display,
+				design,
+				theme: pillarValue,
+			},
+		});
 	}
-	for (const [specialName, specialValue] of Object.entries(ArticleSpecial)) {
-		if (Number.isNaN(Number(specialName))) {
-			cards.push({
-				title: specialName,
-				format: {
-					display,
-					design,
-					theme: specialValue as ArticleSpecial,
-				},
-			});
-		}
+	for (const [specialName, specialValue] of enumEntries(ArticleSpecial)) {
+		cards.push({
+			title: specialName,
+			format: {
+				display,
+				design,
+				theme: specialValue,
+			},
+		});
 	}
 
 	return (
@@ -158,23 +154,19 @@ const CardsWithDifferentThemes = ({
 	);
 };
 
-for (const [displayName, displayValue] of Object.entries(ArticleDisplay)) {
-	if (Number.isNaN(Number(displayName))) {
-		const stories = storiesOf(
-			`Components/Card/Format variations/${displayName}`,
-			module,
-		);
-		for (const [designName, designValue] of Object.entries(ArticleDesign)) {
-			if (Number.isNaN(Number(designName))) {
-				stories.add(designName, () => {
-					return CardsWithDifferentThemes({
-						display: displayValue as ArticleDisplay,
-						design: designValue as ArticleDesign,
-						title: designName,
-					});
-				});
-			}
-		}
+for (const [displayName, displayValue] of enumEntries(ArticleDisplay)) {
+	const stories = storiesOf(
+		`Components/Card/Format variations/${displayName}`,
+		module,
+	);
+	for (const [designName, designValue] of enumEntries(ArticleDesign)) {
+		stories.add(designName, () => {
+			return CardsWithDifferentThemes({
+				display: displayValue,
+				design: designValue,
+				title: designName,
+			});
+		});
 	}
 }
 

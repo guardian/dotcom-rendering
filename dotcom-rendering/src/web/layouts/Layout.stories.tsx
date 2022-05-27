@@ -30,6 +30,7 @@ import { decideFormat } from '../lib/decideFormat';
 import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { DecideLayout } from './DecideLayout';
+import { enumEntries } from './lib/enumEntries';
 
 const Fixtures: { [key: string]: CAPIArticleType } = {
 	Article,
@@ -81,79 +82,69 @@ const HydratedLayout = ({
 	return <DecideLayout CAPIArticle={ServerCAPI} NAV={NAV} format={format} />;
 };
 
-for (const [displayName] of Object.entries(ArticleDisplay)) {
-	if (Number.isNaN(Number(displayName))) {
-		for (const [designName] of Object.entries(ArticleDesign)) {
-			if (Number.isNaN(Number(designName))) {
-				for (const [pillarName] of Object.entries(ArticlePillar)) {
-					if (Number.isNaN(Number(pillarName))) {
-						const stories = storiesOf(
-							`Layouts/Format variations/${displayName}/${designName}`,
-							module,
-						).addParameters({
-							chromatic: {
-								diffThreshold: 0.2,
-								pauseAnimationAtEnd: true,
+for (const [displayName] of enumEntries(ArticleDisplay)) {
+	for (const [designName] of enumEntries(ArticleDesign)) {
+		for (const [pillarName] of enumEntries(ArticlePillar)) {
+			const stories = storiesOf(
+				`Layouts/Format variations/${displayName}/${designName}`,
+				module,
+			).addParameters({
+				chromatic: {
+					diffThreshold: 0.2,
+					pauseAnimationAtEnd: true,
+				},
+			});
+
+			const fixture = Fixtures[designName] || Fixtures.Article;
+
+			stories.add(pillarName, () => {
+				return (
+					<HydratedLayout
+						ServerCAPI={{
+							...fixture,
+							format: {
+								display: `${displayName}Display`,
+								//@ts-expect-error -- StandardDesign uses ArticleDesign fallback
+								design: `${designName}Design`,
+								theme: `${pillarName}Pillar`,
 							},
-						});
+						}}
+					/>
+				);
+			});
+		}
 
-						const fixture =
-							Fixtures[designName] || Fixtures.Article;
+		for (const [specialName] of enumEntries(ArticleSpecial)) {
+			const stories = storiesOf(
+				`Layouts/Format variations/${displayName}/${designName}`,
+				module,
+			).addParameters({
+				chromatic: {
+					diffThreshold: 0.2,
+					pauseAnimationAtEnd: true,
+				},
+			});
 
-						stories.add(pillarName, () => {
-							return (
-								<HydratedLayout
-									ServerCAPI={{
-										...fixture,
-										format: {
-											display:
-												`${displayName}Display` as CAPIDisplay,
-											design: `${designName}Design` as CAPIDesign,
-											theme: `${pillarName}Pillar` as CAPITheme,
-										},
-									}}
-								/>
-							);
-						});
-					}
-				}
+			const fixture = Fixtures[designName] || Fixtures.Article;
 
-				for (const [specialName] of Object.entries(ArticleSpecial)) {
-					if (Number.isNaN(Number(specialName))) {
-						const stories = storiesOf(
-							`Layouts/Format variations/${displayName}/${designName}`,
-							module,
-						).addParameters({
-							chromatic: {
-								diffThreshold: 0.2,
-								pauseAnimationAtEnd: true,
+			stories.add(specialName, () => {
+				return (
+					<HydratedLayout
+						ServerCAPI={{
+							...fixture,
+							format: {
+								display: `${displayName}Display`,
+								//@ts-expect-error -- StandardDesign uses ArticleDesign fallback
+								design: `${designName}Design`,
+								theme:
+									specialName === 'Labs'
+										? specialName
+										: `${specialName}Theme`,
 							},
-						});
-
-						const fixture =
-							Fixtures[designName] || Fixtures.Article;
-
-						stories.add(specialName, () => {
-							return (
-								<HydratedLayout
-									ServerCAPI={{
-										...fixture,
-										format: {
-											display:
-												`${displayName}Display` as CAPIDisplay,
-											design: `${designName}Design` as CAPIDesign,
-											theme:
-												specialName === 'Labs'
-													? specialName
-													: (`${specialName}Theme` as CAPITheme),
-										},
-									}}
-								/>
-							);
-						});
-					}
-				}
-			}
+						}}
+					/>
+				);
+			});
 		}
 	}
 }
