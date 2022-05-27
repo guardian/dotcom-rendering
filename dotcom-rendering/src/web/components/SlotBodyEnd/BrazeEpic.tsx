@@ -144,10 +144,12 @@ export const MaybeBrazeEpic = ({ meta, countryCode, idApiUrl }: EpicConfig) => {
 
 	useEffect(() => {
 		import(
-			/* webpackChunkName: "guardian-braze-components-end-of-article" */ '@guardian/braze-components/end-of-article'
+			/* webpackChunkName: "guardian-braze-components-end-of-article" */ '@guardian/message-rendering/src/UKNewsletterEpic'
 		)
 			.then((module) => {
-				setBrazeComponent(() => module.BrazeEndOfArticleComponent);
+				console.log(module);
+				// @ts-expect-error
+				setBrazeComponent(() => module.UKNewsletterEpic);
 			})
 			.catch((error) =>
 				window.guardian.modules.sentry.reportError(error, 'braze-epic'),
