@@ -143,7 +143,7 @@ const listItemStyles = (palette: Palette) => css`
 `;
 
 const trimLeadingSlash = (url: string): string =>
-	url.substr(0, 1) === '/' ? url.slice(1) : url;
+	url.startsWith('/') ? url.slice(1) : url;
 
 export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 	const [showMore, setShowMore] = useState(false);
