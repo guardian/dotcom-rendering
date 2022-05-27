@@ -114,7 +114,11 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										showAge={showAge}
 										linkTo={card.url}
 										format={card.format}
-										trailText={card.trailText}
+										trailText={
+											card.supportingContent
+												? undefined
+												: card.trailText
+										}
 										headlineText={card.headline}
 										headlineSize="medium"
 										byline={card.byline}
