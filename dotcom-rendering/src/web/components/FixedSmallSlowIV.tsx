@@ -31,7 +31,6 @@ export const FixedSmallSlowIV = ({
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}
-							trailText={trail.trailText}
 							headlineSize="medium"
 							byline={trail.byline}
 							showByline={trail.showByline}
