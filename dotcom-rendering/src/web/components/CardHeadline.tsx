@@ -203,6 +203,10 @@ export const CardHeadline = ({
 							palette.background.analysisUnderline,
 						),
 					showLine && lineStyles(palette),
+					containerPalette &&
+						css`
+							font-weight: bold;
+						`,
 				]}
 			>
 				<WithLink linkTo={linkTo}>
