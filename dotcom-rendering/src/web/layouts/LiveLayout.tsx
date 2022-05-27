@@ -877,6 +877,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												onFirstPage={
 													pagination.currentPage === 1
 												}
+												abTests={
+													CAPIArticle.config.abTests
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination

@@ -551,6 +551,7 @@ export const ShowcaseLayout = ({
 									isPreview={CAPIArticle.config.isPreview}
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
+									abTests={CAPIArticle.config.abTests}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
