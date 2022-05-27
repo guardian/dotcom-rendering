@@ -2,12 +2,11 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import type { Image } from 'image';
 import type { FC } from 'react';
 import BlogMainMediaImage from './BlogMainMediaImage';
 import CommentMainMediaImage from './CommentMainMediaImage';
-import ImmersiveMainMediaImage from './ImmersiveMainMediaImage';
 import InterviewMainMediaImage from './InterviewMainMediaImage';
 import DefaultMainMediaImage from './MainMediaImage.defaults';
 
@@ -20,15 +19,16 @@ interface Props {
 }
 
 const MainMediaImage: FC<Props> = ({ className, image, format }: Props) => {
-	if (format.display === ArticleDisplay.Immersive) {
-		return (
-			<ImmersiveMainMediaImage
-				image={image}
-				format={format}
-				className={className}
-			/>
-		);
-	}
+	// --- Temporarily commenting this out until the Immersive layout is implemented ---
+	// if (format.display === ArticleDisplay.Immersive) {
+	// 	return (
+	// 		<ImmersiveMainMediaImage
+	// 			image={image}
+	// 			format={format}
+	// 			className={className}
+	// 		/>
+	// 	);
+	//}
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
