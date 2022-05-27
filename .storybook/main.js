@@ -61,6 +61,11 @@ const dcrWebpack = (config) => {
 	// Allows us to use enhancers in stories for better testing of compoenents & full articles
 	config.resolve.alias.jsdom$ = path.resolve(__dirname, "./mocks/jsdom.js");
 
+	// log4js tries to call "fs" in storybook -- we can ignore it
+	config.resolve.alias[
+		path.resolve(__dirname, '../dotcom-rendering/src/server/lib/logging.ts')
+	] = path.resolve(__dirname, './mocks/log4js.js');
+
 	// Support typescript in Storybook
 	// https://storybook.js.org/docs/configurations/typescript-config/
 	rules.push({
