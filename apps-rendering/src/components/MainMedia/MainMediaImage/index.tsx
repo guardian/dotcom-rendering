@@ -173,7 +173,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const HeaderImage: FC<Props> = ({ className, image, format }: Props) => (
+const MainMediaImage: FC<Props> = ({ className, image, format }: Props) => (
 	<figure css={[getStyles(format), className]} aria-labelledby={captionId}>
 		<Img
 			image={image}
@@ -193,4 +193,4 @@ const HeaderImage: FC<Props> = ({ className, image, format }: Props) => (
 
 // ----- Exports ----- //
 
-export default HeaderImage;
+export default MainMediaImage;

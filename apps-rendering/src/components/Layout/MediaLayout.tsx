@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { background, breakpoints, from } from '@guardian/source-foundations';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
+import MainMedia from 'components/MainMedia';
 import Body from 'components/media/articleBody';
 import Series from 'components/media/articleSeries';
 import Byline from 'components/media/byline';
@@ -12,7 +13,6 @@ import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
 import { getFormat } from 'item';
 import type { Item } from 'item';
-import MainMedia from 'mainMedia';
 import type { FC, ReactNode } from 'react';
 import { articleWidthStyles, onwardStyles } from 'styles';
 
