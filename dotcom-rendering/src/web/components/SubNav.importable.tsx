@@ -186,6 +186,8 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 			<ul
 				ref={ulRef}
 				css={[expandSubNav ? expandedStyles : collapsedStyles]}
+				// We’ve getting many false positive on changes to “Obituaries”
+				data-chromatic="ignore"
 			>
 				{subNavSections.parent && (
 					<li
