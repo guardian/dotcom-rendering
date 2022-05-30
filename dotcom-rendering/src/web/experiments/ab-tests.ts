@@ -5,7 +5,6 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
-import { prebidPriceGranularity } from './tests/prebid-price-granularity';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 
@@ -17,6 +16,5 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
-	prebidPriceGranularity,
 	commercialEndOfQuarter2Test,
 ];
