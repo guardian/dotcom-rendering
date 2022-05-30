@@ -276,7 +276,7 @@ export const Card = ({
 										// after a fetch call is made to get all the counts for each Card
 										// on the page with a discussion (see FetchCommentCounts.tsx)
 										data-name="comment-count-marker"
-										data-discussionid={discussionId}
+										data-discussion-id={discussionId}
 										data-format={JSON.stringify(format)}
 										data-ignore="global-link-styling"
 										data-link-name="Comment count"

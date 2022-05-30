@@ -37,7 +37,7 @@ function extractMarkers() {
 		.querySelectorAll('[data-name="comment-count-marker"]')
 		.forEach((element: Element) => {
 			if (element instanceof HTMLElement) {
-				const { discussionid: discussionId, format } = element.dataset;
+				const { discussionId, format } = element.dataset;
 				if (discussionId && format)
 					markers.push({ discussionId, format: JSON.parse(format) });
 			}
@@ -72,9 +72,8 @@ function enhanceCounts(counts: RawCountType[]): EnhancedCountType[] {
 		const { long, short } = formatCount(count);
 		// We don't get format in the api response so look it up in the array
 		// of DOM markers
-		const format = markers.find(
-			(marker) => marker.discussionId === id,
-		)?.format as ArticleFormat; // We cast because we're sure we will find it
+		const format = markers.find((marker) => marker.discussionId === id)
+			?.format as ArticleFormat; // We cast because we're sure we will find it
 		return {
 			id,
 			long,
@@ -121,7 +120,7 @@ function insertCount({
 	short: string;
 }) {
 	const countContainers = document.querySelectorAll<HTMLElement>(
-		`[data-discussionid="${id}"]`,
+		`[data-discussion-id="${id}"]`,
 	);
 	countContainers.forEach((container) => {
 		container.setAttribute('aria-label', `${short} Comments`);
