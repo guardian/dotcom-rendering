@@ -17,7 +17,6 @@ import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 // ----- Component ----- //
 interface Props {
 	item: Item;
-	css: SerializedStyles;
 }
 
 const Standfirst: React.FC<Props> = ({ item }) => {
