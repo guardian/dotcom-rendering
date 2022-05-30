@@ -1429,6 +1429,15 @@ declare namespace JSX {
 
 	interface IntrinsicAttributes {
 		/**
+		 * ## Chromatic
+		 * Set this attribute to ignore elements Chromatic should ignore.
+		 * Helps lower the amount of false positive for dynamic content.
+		 *
+		 * @see https://www.chromatic.com/docs/ignoring-elements#ignore-dom-elements
+		 */
+		'data-chromatic'?: 'ignore';
+
+		/**
 		 * **Rendered Components – Ophan**
 		 *
 		 * The Ophan client automatically tracks components on the page
