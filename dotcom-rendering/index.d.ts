@@ -260,13 +260,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-		adUnit: string;
-		customParams: CustomParams;
-		disableAds?: false;
-	}
+			adUnit: string;
+			customParams: CustomParams;
+			disableAds?: false;
+	  }
 	| {
-		disableAds: true;
-	};
+			disableAds: true;
+	  };
 
 interface SectionNielsenAPI {
 	name: string;
@@ -864,6 +864,7 @@ type DCRFrontCard = {
 	kickerText?: string;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionId?: string;
 };
 
 type FECollectionType = {
@@ -1281,6 +1282,7 @@ interface TrailType extends BaseTrailType {
 	trailText?: string;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionId?: string;
 }
 
 interface CAPITrailType extends BaseTrailType {

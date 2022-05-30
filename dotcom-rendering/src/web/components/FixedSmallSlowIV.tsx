@@ -51,10 +51,10 @@ export const FixedSmallSlowIV = ({
 							imageSize="medium"
 							mediaType={trail.mediaType}
 							mediaDuration={trail.mediaDuration}
-							commentCount={trail.commentCount}
 							starRating={trail.starRating}
 							branding={trail.branding}
 							dataLinkName={trail.dataLinkName}
+							discussionId={trail.discussionId}
 						/>
 					</LI>
 				);

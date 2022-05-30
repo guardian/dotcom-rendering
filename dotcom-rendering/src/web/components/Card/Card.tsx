@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/source-foundations';
+import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decidePalette } from '../../lib/decidePalette';
-import { formatCount } from '../../lib/formatCount';
+import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
-import { CardCommentCount } from '../CardCommentCount';
 import { CardHeadline } from '../CardHeadline';
 import { Flex } from '../Flex';
 import { Hide } from '../Hide';
@@ -46,7 +46,6 @@ export type Props = {
 	kickerText?: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
-	commentCount?: number;
 	starRating?: number;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
@@ -56,6 +55,7 @@ export type Props = {
 	supportingContent?: DCRSupportingContent[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	discussionId?: string;
 };
 
 const starWrapper = css`
@@ -127,7 +127,6 @@ export const Card = ({
 	kickerText,
 	showPulsingDot,
 	showSlash,
-	commentCount,
 	starRating,
 	minWidthInPixels,
 	dataLinkName,
@@ -135,10 +134,9 @@ export const Card = ({
 	supportingContent,
 	containerPalette,
 	showAge = false,
+	discussionId,
 }: Props) => {
-	const showCommentCount = commentCount || commentCount === 0;
 	const palette = decidePalette(format, containerPalette);
-	const { long: longCount, short: shortCount } = formatCount(commentCount);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const noOfSublinks = (supportingContent && supportingContent.length) || 0;
@@ -221,7 +219,7 @@ export const Card = ({
 							</Hide>
 						)}
 					</Flex>
-					<div>
+					<>
 						{trailText && (
 							<TrailTextWrapper
 								containerPalette={containerPalette}
@@ -272,12 +270,28 @@ export const Card = ({
 								) : undefined
 							}
 							commentCount={
-								showCommentCount && longCount && shortCount ? (
-									<CardCommentCount
-										containerPalette={containerPalette}
-										format={format}
-										long={longCount}
-										short={shortCount}
+								discussionId ? (
+									<Link
+										// This a tag is initially rendered empty. It gets populated later
+										// after a fetch call is made to get all the counts for each Card
+										// on the page with a discussion (see FetchCommentCounts.tsx)
+										data-name="comment-count-marker"
+										data-discussionid={discussionId}
+										data-format={JSON.stringify(format)}
+										data-ignore="global-link-styling"
+										data-link-name="Comment count"
+										href={`${linkTo}#comments`}
+										subdued={true}
+										cssOverrides={css`
+											/* See: https://css-tricks.com/nested-links/ */
+											${getZIndex('card-nested-link')};
+											/* The following styles turn off those provided by Link */
+											color: inherit;
+											/* stylelint-disable-next-line property-disallowed-list */
+											font-family: inherit;
+											font-size: inherit;
+											line-height: inherit;
+										`}
 									/>
 								) : undefined
 							}
@@ -298,7 +312,7 @@ export const Card = ({
 						) : (
 							<></>
 						)}
-					</div>
+					</>
 				</ContentWrapper>
 			</CardLayout>
 			{hasSublinks && noOfSublinks > 2 ? (

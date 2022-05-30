@@ -28,8 +28,8 @@ export const Spotlight = ({ content, containerPalette }: Props) => (
 		imageUrl={content[0].image}
 		mediaType={content[0].mediaType}
 		mediaDuration={content[0].mediaDuration}
-		commentCount={content[0].commentCount}
 		imagePosition="right"
 		imageSize="jumbo"
+		discussionId={content[0].discussionId}
 	/>
 );

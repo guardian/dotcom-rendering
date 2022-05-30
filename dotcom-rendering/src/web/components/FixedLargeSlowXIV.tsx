@@ -53,9 +53,9 @@ export const FixedLargeSlowXIV = ({
 						imageSize="large"
 						mediaType={primary.mediaType}
 						mediaDuration={primary.mediaDuration}
-						commentCount={primary.commentCount}
 						starRating={primary.starRating}
 						branding={primary.branding}
+						discussionId={primary.discussionId}
 					/>
 				</LI>
 				<LI
@@ -87,9 +87,9 @@ export const FixedLargeSlowXIV = ({
 						imageUrl={secondary.image}
 						mediaType={secondary.mediaType}
 						mediaDuration={secondary.mediaDuration}
-						commentCount={secondary.commentCount}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
+						discussionId={secondary.discussionId}
 					/>
 				</LI>
 			</UL>
@@ -136,9 +136,9 @@ export const FixedLargeSlowXIV = ({
 										showClock={false}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
+										discussionId={card.discussionId}
 										dataLinkName={card.dataLinkName}
 									/>
 								</LI>

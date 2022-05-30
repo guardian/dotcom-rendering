@@ -108,6 +108,7 @@ const enhanceCards = (
 							containerPalette,
 					  )
 					: undefined,
+				discussionId: faciaCard.discussion.discussionId,
 			};
 		});
 

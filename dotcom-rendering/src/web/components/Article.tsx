@@ -8,6 +8,7 @@ import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CommercialMetrics } from './CommercialMetrics.importable';
 import { CoreVitals } from './CoreVitals.importable';
+import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
@@ -74,6 +75,9 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.shouldHideReaderRevenue
 					}
 				/>
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<FetchCommentCounts repeat={true} />
 			</Island>
 			<Island clientOnly={true}>
 				<SetABTests
