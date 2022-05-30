@@ -28,14 +28,12 @@ const carouselStyles = (palette: Palette) => css`
 	scroll-behavior: smooth;
 	overflow-x: auto;
 	overflow-y: hidden;
-	display: flex;
-	flex-direction: column;
 	scrollbar-width: none;
 	&::-webkit-scrollbar {
 		display: none;
 	}
 	${until.desktop} {
-		width: 90vw;
+		width: 93vw;
 	}
 	${from.desktop} {
 		background-color: ${palette.background.keyEventFromDesktop};
@@ -47,20 +45,22 @@ const leftMarginStyles = css`
 	}
 `;
 
+const marginBottomStyles = css`
+	${from.desktop} {
+		margin-bottom: ${space[12]}px;
+	}
+`;
 const titleStyles = css`
 	${textSans.small({ fontWeight: 'bold', lineHeight: 'regular' })};
 `;
 
-const containerStyles = (shortCarousel: boolean) => css`
+const containerStyles = css`
 	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
 	align-items: stretch;
 	width: fit-content;
 	position: relative;
-	${from.desktop && !shortCarousel} {
-		margin-bottom: ${space[12]}px;
-	}
 `;
 
 const buttonStyles = css`
@@ -119,7 +119,12 @@ export const KeyEventsCarousel = ({
 					shortCarousel && leftMarginStyles,
 				]}
 			>
-				<ul css={containerStyles(shortCarousel)}>
+				<ul
+					css={[
+						containerStyles,
+						!shortCarousel && marginBottomStyles,
+					]}
+				>
 					{filteredKeyEvents.map((keyEvent) => {
 						return (
 							<KeyEventCard
