@@ -19,7 +19,6 @@ import {
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { parse } from '../../lib/slot-machine-flags';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -49,7 +48,6 @@ import { Nav } from '../components/Nav/Nav';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -268,10 +266,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		sharedAdTargeting: CAPIArticle.config.sharedAdTargeting,
 		adUnit: CAPIArticle.config.adUnit,
 	});
-
-	const showBodyEndSlot =
-		parse(CAPIArticle.slotMachineFlags || '').showBodyEnd ||
-		CAPIArticle.config.switches.slotBodyEnd;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -909,6 +903,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												filterKeyEvents={
 													CAPIArticle.filterKeyEvents
 												}
+												abTests={
+													CAPIArticle.config.abTests
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
@@ -924,52 +921,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													older={pagination.older}
 													format={format}
 												/>
-											)}
-											{showBodyEndSlot && (
-												<Island clientOnly={true}>
-													<SlotBodyEnd
-														contentType={
-															CAPIArticle.contentType
-														}
-														contributionsServiceUrl={
-															contributionsServiceUrl
-														}
-														idApiUrl={
-															CAPIArticle.config
-																.idApiUrl
-														}
-														isMinuteArticle={
-															CAPIArticle.pageType
-																.isMinuteArticle
-														}
-														isPaidContent={
-															CAPIArticle.pageType
-																.isPaidContent
-														}
-														keywordsId={
-															CAPIArticle.config
-																.keywordIds
-														}
-														pageId={
-															CAPIArticle.pageId
-														}
-														sectionId={
-															CAPIArticle.config
-																.section
-														}
-														sectionName={
-															CAPIArticle.sectionName
-														}
-														shouldHideReaderRevenue={
-															CAPIArticle.shouldHideReaderRevenue
-														}
-														stage={
-															CAPIArticle.config
-																.stage
-														}
-														tags={CAPIArticle.tags}
-													/>
-												</Island>
 											)}
 											<StraightLines
 												data-print-layout="hide"

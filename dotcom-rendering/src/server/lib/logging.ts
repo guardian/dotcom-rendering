@@ -13,7 +13,7 @@ const stage =
 		? process.env.GU_STAGE.toUpperCase()
 		: 'DEV';
 
-const logFields = (logEvent: LoggingEvent): any => {
+const logFields = (logEvent: LoggingEvent): unknown => {
 	const coreFields = {
 		stack: 'frontend',
 		app: 'dotcom-rendering',

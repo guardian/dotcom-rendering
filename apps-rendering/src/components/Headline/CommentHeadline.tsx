@@ -5,6 +5,7 @@ import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
 const commentStyles = css`
 	${headline.small({ fontWeight: 'light' })}
+	padding-top: ${remSpace[1]};
 	padding-bottom: ${remSpace[1]};
 
 	${from.tablet} {

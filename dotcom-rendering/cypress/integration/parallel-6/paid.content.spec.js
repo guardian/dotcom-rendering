@@ -14,7 +14,7 @@ import { storage } from '@guardian/libs';
 // cookie or by selecting the edition in the UI. Unfortunately, the first solution did
 // not work and the second one is not possible at this point of the migration.
 const paidContentPage =
-	'https://www.theguardian.com/welcome-to-ontario/2022/jan/20/bracing-boat-trips-dinosaurs-and-cherry-pie-the-best-things-to-do-with-kids-in-ontario';
+	'https://www.theguardian.com/you-could-be-here/2022/may/13/kos-crete-corfu-and-mykonos-a-guide-to-greeces-favourite-islands';
 
 describe('Paid content tests', function () {
 	beforeEach(function () {
@@ -59,7 +59,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=destination%20ontario');
+			expect(requestURL).to.include('el=british%20airways%20holidays');
 		});
 	});
 
@@ -100,7 +100,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=destination%20ontario');
+			expect(requestURL).to.include('el=british%20airways%20holidays');
 		});
 	});
 });
