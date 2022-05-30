@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { formatCount } from '../lib/formatCount';
 import { useApi } from '../lib/useApi';
@@ -147,8 +147,12 @@ function insertCount({
  * @param {boolean} repeat If true, the fetch call will be repeated on an interval
  */
 export const FetchCommentCounts = ({ repeat }: Props) => {
-	let markers = extractMarkers();
-	const [url, setUrl] = useState(buildUrl(markers));
+	const [url, setUrl] = useState<string | undefined>();
+
+	useEffect(() => {
+		const markers = extractMarkers();
+		setUrl(buildUrl(markers));
+	}, []);
 
 	useApi<{
 		counts: RawCountType[];
@@ -156,9 +160,11 @@ export const FetchCommentCounts = ({ repeat }: Props) => {
 		refreshInterval: repeat ? 15_000 : 0,
 		refreshWhenHidden: false,
 		onSuccess: (data?: { counts?: RawCountType[] }) => {
+			// It's possible the DOM has been mutated and there are new Cards showing
+			// so we check again
+			const markers = extractMarkers();
 			if (data?.counts) {
 				try {
-					markers = extractMarkers();
 					const enhancedCounts = enhanceCounts(data.counts, markers);
 					const renderedCounts = renderCounts(enhancedCounts);
 					renderedCounts.forEach((renderedCount) => {
@@ -172,7 +178,8 @@ export const FetchCommentCounts = ({ repeat }: Props) => {
 					// Do nothing
 				}
 			}
-			// setUrl(buildUrl(extractMarkers()));
+			// Make sure the list of discussionIds we fetch counts for is up to date
+			setUrl(buildUrl(markers));
 		},
 	});
 
