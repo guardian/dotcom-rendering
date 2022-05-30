@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, space, textSans, until } from '@guardian/source-foundations';
+import { from, space, textSans } from '@guardian/source-foundations';
 import {
 	Button,
 	buttonThemeBrandAlt,
@@ -32,7 +32,13 @@ const carouselStyles = (palette: Palette) => css`
 	&::-webkit-scrollbar {
 		display: none;
 	}
+	margin-right: -10px;
+	${from.tablet} {
+		margin-right: -20px;
+	}
+
 	${from.desktop} {
+		margin-right: 0px;
 		background-color: ${palette.background.keyEventFromDesktop};
 	}
 `;
