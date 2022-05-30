@@ -94,7 +94,6 @@ const containerStyles = css`
 	display: flex;
 	flex-direction: column;
 	position: relative;
-
 	overflow: hidden; /* Needed for scrolling to work */
 `;
 

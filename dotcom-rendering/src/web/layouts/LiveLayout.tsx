@@ -182,7 +182,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
 						'media'
 						'info'
@@ -585,6 +585,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</ElementContainer>
+
 				<ElementContainer
 					showTopBorder={false}
 					backgroundColour={palette.background.keyEventFromDesktop}

@@ -32,9 +32,6 @@ const carouselStyles = (palette: Palette) => css`
 	&::-webkit-scrollbar {
 		display: none;
 	}
-	/* ${until.desktop} {
-		width: 93vw;
-	} */
 	${from.desktop} {
 		background-color: ${palette.background.keyEventFromDesktop};
 	}
