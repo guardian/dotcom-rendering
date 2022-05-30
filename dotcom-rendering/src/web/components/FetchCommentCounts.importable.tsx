@@ -8,6 +8,11 @@ type Props = {
 	repeat?: boolean;
 };
 
+type MarkerType = {
+	discussionId: string;
+	format: ArticleFormat;
+};
+
 type RawCountType = {
 	id: string;
 	count: number;
@@ -32,7 +37,7 @@ type RenderedCountType = {
  * count
  */
 function extractMarkers() {
-	const markers: { discussionId: string; format: ArticleFormat }[] = [];
+	const markers: MarkerType[] = [];
 	document
 		.querySelectorAll('[data-name="comment-count-marker"]')
 		.forEach((element: Element) => {
@@ -49,8 +54,7 @@ function extractMarkers() {
  * @description
  * Creates the url used to fetch the count data
  */
-function buildUrl() {
-	const markers = extractMarkers();
+function buildUrl(markers: MarkerType[]) {
 	const discussionIds = markers.flatMap((marker) => marker.discussionId); // E.g.: ['/p/3pm9v', '/p/4k83z', '/p/6bnba']
 	return `https://api.nextgen.guardianapps.co.uk/discussion/comment-counts.json?shortUrls=${discussionIds.join(
 		',',
@@ -66,8 +70,10 @@ function buildUrl() {
  *   - The 'long' version of 12345 is 12,345
  *   - The 'short' version of 12345 is 12k
  */
-function enhanceCounts(counts: RawCountType[]): EnhancedCountType[] {
-	const markers = extractMarkers();
+function enhanceCounts(
+	counts: RawCountType[],
+	markers: MarkerType[],
+): EnhancedCountType[] {
 	return counts.map(({ count, id }) => {
 		const { long, short } = formatCount(count);
 		// We don't get format in the api response so look it up in the array
@@ -141,7 +147,8 @@ function insertCount({
  * @param {boolean} repeat If true, the fetch call will be repeated on an interval
  */
 export const FetchCommentCounts = ({ repeat }: Props) => {
-	const [url, setUrl] = useState(buildUrl());
+	let markers = extractMarkers();
+	const [url, setUrl] = useState(buildUrl(markers));
 
 	useApi<{
 		counts: RawCountType[];
@@ -151,7 +158,8 @@ export const FetchCommentCounts = ({ repeat }: Props) => {
 		onSuccess: (data?: { counts?: RawCountType[] }) => {
 			if (data?.counts) {
 				try {
-					const enhancedCounts = enhanceCounts(data.counts);
+					markers = extractMarkers();
+					const enhancedCounts = enhanceCounts(data.counts, markers);
 					const renderedCounts = renderCounts(enhancedCounts);
 					renderedCounts.forEach((renderedCount) => {
 						insertCount({
@@ -164,7 +172,7 @@ export const FetchCommentCounts = ({ repeat }: Props) => {
 					// Do nothing
 				}
 			}
-			setUrl(buildUrl());
+			// setUrl(buildUrl(extractMarkers()));
 		},
 	});
 
