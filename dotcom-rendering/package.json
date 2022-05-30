@@ -65,7 +65,6 @@
     "@guardian/consent-management-platform": "^10.5.0",
     "@guardian/discussion-rendering": "^10.1.1",
     "@guardian/libs": "^5.0.0",
-    "@guardian/prettier": "^0.5.0",
     "@guardian/shimport": "^1.0.2",
     "@guardian/support-dotcom-components": "^1.0.2",
     "@sentry/browser": "^5.30.0",
