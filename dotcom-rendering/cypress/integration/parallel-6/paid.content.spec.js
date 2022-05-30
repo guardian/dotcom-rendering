@@ -59,9 +59,6 @@ describe('Paid content tests', function () {
 	it('should send Google Analytics message on click of sponsor logo in onwards section', function () {
 		const paidContentPage =
 			'https://www.theguardian.com/feasting-with-ocado/2022/apr/08/rukmini-iyers-recipe-for-slow-cooked-lamb-leg-al-pastor-with-pineapple-salsa';
-		cy.visit(`Article?url=${paidContentPage}`, {
-			headers: { 'x-gu-geolocation': 'ip.dummytext,country:UK' },
-		});
 
 		// Open the Privacy setting dialogue
 		cmpIframe().contains("It's your choice");
