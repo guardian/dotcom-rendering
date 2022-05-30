@@ -202,18 +202,7 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 					</li>
 				)}
 				{subNavSections.links.map((link) => (
-					<li
-						key={link.url}
-						/**
-						 * We’ve getting many false positive on changes to Obituaries.
-						 * Let’s try ignoring it for now.
-						 *
-						 * @see https://www.chromatic.com/docs/ignoring-elements#ignore-dom-elements
-						 */
-						data-chromatic={
-							link.title === 'Obituaries' ? 'ignore' : undefined
-						}
-					>
+					<li key={link.url}>
 						<a
 							css={linkStyle(palette)}
 							data-src-focus-disabled={true}
