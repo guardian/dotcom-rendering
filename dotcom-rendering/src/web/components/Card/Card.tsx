@@ -219,7 +219,8 @@ export const Card = ({
 							</Hide>
 						)}
 					</Flex>
-					<>
+					{/* This div is needed to push this content to the bottom of the card */}
+					<div>
 						{trailText && (
 							<TrailTextWrapper
 								containerPalette={containerPalette}
@@ -312,7 +313,7 @@ export const Card = ({
 						) : (
 							<></>
 						)}
-					</>
+					</div>
 				</ContentWrapper>
 			</CardLayout>
 			{hasSublinks && noOfSublinks > 2 ? (
