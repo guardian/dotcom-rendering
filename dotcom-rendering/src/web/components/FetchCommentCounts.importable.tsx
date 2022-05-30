@@ -68,15 +68,15 @@ function buildUrl() {
  */
 function enhanceCounts(counts: RawCountType[]): EnhancedCountType[] {
 	const markers = extractMarkers();
-	return counts.map((count) => {
-		const { long, short } = formatCount(count.count);
+	return counts.map(({ count, id }) => {
+		const { long, short } = formatCount(count);
 		// We don't get format in the api response so look it up in the array
 		// of DOM markers
 		const format = markers.find(
-			(marker) => marker.discussionId === count.id,
+			(marker) => marker.discussionId === id,
 		)?.format as ArticleFormat; // We cast because we're sure we will find it
 		return {
-			id: count.id,
+			id,
 			long,
 			short,
 			format,
