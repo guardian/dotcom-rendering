@@ -1,6 +1,4 @@
 // ----- Imports ----- //
-
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
