@@ -153,6 +153,7 @@ export const KeyEventsCarousel = ({
 								icon={<SvgChevronLeftSingle />}
 								onClick={goPrevious}
 								aria-label="Move key events carousel backwards"
+								data-link-name="key event carousel left chevron"
 							/>
 							<Button
 								hideLabel={true}
@@ -161,6 +162,7 @@ export const KeyEventsCarousel = ({
 								icon={<SvgChevronRightSingle />}
 								onClick={goNext}
 								aria-label="Move key events carousel forwards"
+								data-link-name="key event carousel right chevron"
 							/>
 						</>
 					)}
