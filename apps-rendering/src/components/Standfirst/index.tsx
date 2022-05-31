@@ -6,7 +6,7 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import DeadBlogStandfirst from './DeadBlogStandfirst';
 import ImmersiveLabsStandfirst from './ImmersiveLabsStandfirst';
-import LabsStandfirst from './ImmersiveLabsStandfirst';
+import LabsStandfirst from './LabsStandfirst';
 import ImmersiveStandfirst from './ImmersiveStandfirst';
 import LiveBlogStandfirst from './LiveBlogStandfirst';
 import MediaStandfirst from './MediaStandfirst';
@@ -19,6 +19,7 @@ interface Props {
 
 const Standfirst: React.FC<Props> = ({ item }) => {
 	const format = getFormat(item);
+
 	if (format.display === ArticleDisplay.Immersive) {
 		return format.theme === ArticleSpecial.Labs ? (
 			<ImmersiveLabsStandfirst item={item} />

@@ -89,13 +89,14 @@ export const content = (
 interface Props {
 	item: Item;
 	css: SerializedStyles;
+	className?: string;
 }
 
-const DefaultStandfirst: FC<Props> = ({ item, css: styles }) =>
+const DefaultStandfirst: FC<Props> = ({ item, className }) =>
 	pipe(
 		item.standfirst,
 		map((standfirst) => (
-			<div css={styles}>{content(standfirst, item)}</div>
+			<div className={className}>{content(standfirst, item)}</div>
 		)),
 		withDefault<ReactElement | null>(null),
 	);
