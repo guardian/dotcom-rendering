@@ -150,7 +150,7 @@ describe('getPurchaseInfo', () => {
 		clearAllCookies();
 		// Reset modules to avoid memoized cookies affecting tests
 		jest.resetModules();
-		({ getPurchaseInfo } = require('./contributions'));
+		({ getPurchaseInfo } = jest.requireActual('./contributions'));
 	});
 
 	it('returns decoded cookie data', () => {
