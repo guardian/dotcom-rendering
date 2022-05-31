@@ -17,7 +17,7 @@ export const NewsletterBadge = ({
 	textColour = brandAlt[400],
 	borderColour = neutral[100],
 }: Props) => (
-	<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 40 113 24">
+	<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 40.5 113 22">
 		<text x="3" y="58" css={textStyle(textColour)}>
 			Newsletters
 		</text>
