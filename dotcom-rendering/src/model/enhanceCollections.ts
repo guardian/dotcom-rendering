@@ -113,35 +113,19 @@ const enhanceCards = (
 		});
 
 const decideContainerPalette = (
-	metadata?: { type: FEContainerPalette }[],
+	palettes?: FEContainerPalette[],
 ): DCRContainerPalette | undefined => {
-	switch (metadata?.[0]?.type) {
-		case 'EventPalette':
-			return 'EventPalette';
-		case 'SombreAltPalette':
-			return 'SombreAltPalette';
-		case 'EventAltPalette':
-			return 'EventAltPalette';
-		case 'InvestigationPalette':
-			return 'InvestigationPalette';
-		case 'LongRunningAltPalette':
-			return 'LongRunningAltPalette';
-		case 'LongRunningPalette':
-			return 'LongRunningPalette';
-		case 'SombrePalette':
-			return 'SombrePalette';
-		case 'BreakingPalette':
-			return 'BreakingPalette';
-		case 'Canonical':
-		case 'Dynamo':
-		case 'Special':
-		case 'DynamoLike':
-		case 'Breaking':
-		case 'Podcast':
-		case 'Branded':
-		default:
-			return undefined;
-	}
+	if (palettes?.includes('EventPalette')) return 'EventPalette';
+	if (palettes?.includes('SombreAltPalette')) return 'SombreAltPalette';
+	if (palettes?.includes('EventAltPalette')) return 'EventAltPalette';
+	if (palettes?.includes('InvestigationPalette'))
+		return 'InvestigationPalette';
+	if (palettes?.includes('LongRunningAltPalette'))
+		return 'LongRunningAltPalette';
+	if (palettes?.includes('LongRunningPalette')) return 'LongRunningPalette';
+	if (palettes?.includes('SombrePalette')) return 'SombrePalette';
+	if (palettes?.includes('BreakingPalette')) return 'BreakingPalette';
+	return undefined;
 };
 
 export const enhanceCollections = (
@@ -150,7 +134,7 @@ export const enhanceCollections = (
 	return collections.map((collection) => {
 		const { id, displayName, collectionType } = collection;
 		const containerPalette = decideContainerPalette(
-			collection.config.metadata,
+			collection.config.metadata?.map((meta) => meta.type),
 		);
 		return {
 			id,
