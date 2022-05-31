@@ -1,4 +1,5 @@
-import useSWR, { SWRConfiguration } from 'swr';
+import type { SWRConfiguration } from 'swr';
+import useSWR from 'swr';
 
 function checkForErrors(response: Response) {
 	if (!response.ok) {

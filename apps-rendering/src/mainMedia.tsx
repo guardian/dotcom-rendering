@@ -2,8 +2,8 @@
 
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import HeaderImage from 'components/headerImage';
-import HeaderVideo from 'components/headerVideo';
+import HeaderImage from 'components/HeaderImage';
+import HeaderVideo from 'components/HeaderVideo';
 import type { Image as ImageData } from 'image';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';

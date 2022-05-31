@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 
 type Props = {
@@ -34,7 +33,11 @@ export const CardFooter = ({
 		return <footer>{cardBranding}</footer>;
 	}
 
-	if (format.design === ArticleDesign.Media) {
+	if (
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video
+	) {
 		return (
 			<footer>
 				{supportingContent}

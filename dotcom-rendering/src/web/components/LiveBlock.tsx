@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
-
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import { renderArticleElement } from '../lib/renderElement';
-
-import { ShareIcons } from './ShareIcons';
 import { LastUpdated } from './LastUpdated';
+import { ShareIcons } from './ShareIcons';
 
 type Props = {
 	format: ArticleFormat;

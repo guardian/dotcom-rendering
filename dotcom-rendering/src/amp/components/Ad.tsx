@@ -1,5 +1,6 @@
 import { adJson, stringify } from '../lib/ad-json';
-import { realTimeConfig, RTCParameters } from '../lib/real-time-config';
+import type { RTCParameters } from '../lib/real-time-config';
+import { realTimeConfig } from '../lib/real-time-config';
 import { useContentABTestGroup } from './ContentABTest';
 
 // Largest size first

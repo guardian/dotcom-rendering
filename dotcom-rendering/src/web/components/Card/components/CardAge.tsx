@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
-
-import { textSans, until } from '@guardian/source-foundations';
 import { ArticleDesign, timeAgo } from '@guardian/libs';
-
-import { decidePalette } from '../../../lib/decidePalette';
+import { textSans, until } from '@guardian/source-foundations';
 import ClockIcon from '../../../../static/icons/clock.svg';
+import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
@@ -37,7 +35,11 @@ const ageStyles = (format: ArticleFormat, palette: Palette) => {
 		> time {
 			${textSans.xxsmall({
 				fontWeight:
-					format.design === ArticleDesign.Media ? `bold` : `regular`,
+					format.design === ArticleDesign.Gallery ||
+					format.design === ArticleDesign.Audio ||
+					format.design === ArticleDesign.Video
+						? `bold`
+						: `regular`,
 			})};
 		}
 	`;

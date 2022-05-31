@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
-
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
+import {
+	adCollapseStyles,
+	labelStyles as adLabelStyles,
+} from '../components/AdSlot';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { renderArticleElement } from './renderElement';
 import { withSignInGateSlot } from './withSignInGateSlot';
-import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import {
-	labelStyles as adLabelStyles,
-	adCollapseStyles,
-} from '../components/AdSlot';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -64,6 +64,7 @@ export const ArticleRenderer: React.FC<{
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests?: ServerSideTests;
 }> = ({
 	format,
 	elements,
@@ -82,6 +83,7 @@ export const ArticleRenderer: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	isDev,
+	abTests,
 }) => {
 	const renderedElements = elements.map((element, index) => {
 		return renderArticleElement({
@@ -97,6 +99,7 @@ export const ArticleRenderer: React.FC<{
 			isAdFreeUser,
 			isSensitive,
 			switches,
+			abTests,
 		});
 	});
 

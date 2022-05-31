@@ -1,7 +1,7 @@
 import { ElementContainer } from '../ElementContainer';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
-import { SignInGateMain } from './gateDesigns/SignInGateMain';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
+import { SignInGateMain } from './gateDesigns/SignInGateMain';
 
 export default {
 	component: SignInGateSelector,

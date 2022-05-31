@@ -1,17 +1,19 @@
 import { css } from '@emotion/react';
-import { textSans, neutral, space, from } from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
 import { timeAgo } from '@guardian/libs';
+import { from, space, textSans } from '@guardian/source-foundations';
+import { Link } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 
-export interface KeyEvent {
-	date: Date;
-	text: string;
-	url: string;
+interface Props {
+	id: string;
+	blockFirstPublished: number;
+	title: string;
+	isSummary: boolean;
+	filterKeyEvents: boolean;
 	format: ArticleFormat;
 }
 
-const linkStyles = css`
+const linkStyles = (palette: Palette) => css`
 	text-decoration: none;
 	line-height: 1.35;
 
@@ -22,7 +24,7 @@ const linkStyles = css`
 		height: 13px;
 		width: 13px;
 		border-radius: 50%;
-		background-color: ${neutral[46]};
+		background-color: ${palette.background.keyEventBullet};
 		margin-bottom: ${space[1]}px;
 		z-index: 2;
 
@@ -33,28 +35,39 @@ const linkStyles = css`
 	}
 
 	&:hover::before {
-		background-color: ${neutral[0]};
+		background-color: ${palette.hover.keyEventBullet};
 	}
 
 	&:hover {
 		span {
-			text-decoration: underline;
+			border-bottom: 1px solid ${palette.hover.keyEventLink};
 		}
 	}
 `;
 
-const listItemStyles = css`
+const summaryStyles = (palette: Palette) => css`
+	&::before {
+		background-color: ${palette.background.summaryEventBullet};
+	}
+
+	&:hover::before {
+		background-color: ${palette.hover.summaryEventBullet};
+	}
+`;
+
+const listItemStyles = (palette: Palette) => css`
 	position: relative;
 	padding-bottom: ${space[5]}px;
 	padding-top: ${space[3]}px;
 	padding-right: ${space[3]}px;
-	background-color: ${neutral[97]};
+	background-color: ${palette.background.keyEvent};
 	list-style: none;
 	display: block;
 	width: 162px;
+	scroll-snap-align: start;
 
 	${from.desktop} {
-		background-color: ${neutral[93]};
+		background-color: ${palette.background.keyEventFromDesktop};
 		width: 200px;
 		padding-right: ${space[5]}px;
 	}
@@ -63,7 +76,7 @@ const listItemStyles = css`
 		content: '';
 		display: block;
 		position: absolute;
-		border-top: 1px dotted ${neutral[46]};
+		border-top: 1px dotted ${palette.border.keyEvent};
 		left: 0;
 		right: 0;
 		top: 18px;
@@ -79,20 +92,28 @@ const textStyles = (palette: Palette) => css`
 	color: ${palette.text.keyEvent};
 `;
 
-const timeStyles = css`
+const timeStyles = (palette: Palette) => css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
-	color: ${neutral[7]};
+	color: ${palette.text.keyEventTime};
 	display: block;
 `;
 
-export const KeyEventCard = ({ text, date, url, format }: KeyEvent) => {
+export const KeyEventCard = ({
+	id,
+	blockFirstPublished,
+	isSummary,
+	title,
+	filterKeyEvents,
+	format,
+}: Props) => {
 	const palette = decidePalette(format);
-
+	const url = `?filterKeyEvents=${filterKeyEvents}&page=with:block-${id}#block-${id}`;
+	const date = new Date(blockFirstPublished);
 	return (
-		<li css={listItemStyles}>
+		<li css={listItemStyles(palette)}>
 			<Link
 				priority="secondary"
-				css={linkStyles}
+				css={[linkStyles(palette), isSummary && summaryStyles(palette)]}
 				href={url}
 				data-link-name="key event card"
 			>
@@ -108,11 +129,11 @@ export const KeyEventCard = ({ text, date, url, format }: KeyEvent) => {
 						day: 'numeric',
 						timeZoneName: 'long',
 					})}`}
-					css={timeStyles}
+					css={timeStyles(palette)}
 				>
 					{timeAgo(date.getTime())}
 				</time>
-				<span css={textStyles(palette)}>{text}</span>
+				<span css={textStyles(palette)}>{title}</span>
 			</Link>
 		</li>
 	);

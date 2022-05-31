@@ -1,15 +1,13 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { headline, textSans, until, space } from '@guardian/source-foundations';
-
+import { headline, space, textSans, until } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { QuoteIcon } from './QuoteIcon';
-import { Kicker } from './Kicker';
-import { Byline } from './Byline';
+import React from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
+import { Byline } from './Byline';
+import { Kicker } from './Kicker';
+import { QuoteIcon } from './QuoteIcon';
 
 type Props = {
 	headlineText: string; // The text shown
@@ -205,6 +203,10 @@ export const CardHeadline = ({
 							palette.background.analysisUnderline,
 						),
 					showLine && lineStyles(palette),
+					containerPalette &&
+						css`
+							font-weight: bold;
+						`,
 				]}
 			>
 				<WithLink linkTo={linkTo}>

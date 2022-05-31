@@ -1,42 +1,41 @@
-import React from 'react';
 import { css, Global } from '@emotion/react';
-
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
-	neutral,
 	brandBackground,
 	brandBorder,
 	from,
+	neutral,
 	until,
 } from '@guardian/source-foundations';
-import { ArticleFormat, ArticleSpecial, ArticleDesign } from '@guardian/libs';
-
 import { Lines } from '@guardian/source-react-components-development-kitchen';
-import { Footer } from '../components/Footer';
-import { SubNav } from '../components/SubNav.importable';
-import { ElementContainer } from '../components/ElementContainer';
+import React from 'react';
 import {
-	MobileStickyContainer,
-	AdSlot,
-	labelStyles as adLabelStyles,
 	adCollapseStyles,
+	labelStyles as adLabelStyles,
+	AdSlot,
+	MobileStickyContainer,
 } from '../components/AdSlot';
-import { BannerWrapper } from './lib/stickiness';
-import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
-import { ImmersiveHeader } from './headers/ImmersiveHeader';
-import { renderElement } from '../lib/renderElement';
-import { GridItem } from '../components/GridItem';
-import { Hide } from '../components/Hide';
-import { Border } from '../components/Border';
-import { ArticleTitle } from '../components/ArticleTitle';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { Border } from '../components/Border';
+import { Caption } from '../components/Caption';
+import { ElementContainer } from '../components/ElementContainer';
+import { Footer } from '../components/Footer';
+import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeadlineByline } from '../components/HeadlineByline';
-import { decideLineEffect, decideLineCount } from '../lib/layoutHelpers';
-import { Standfirst } from '../components/Standfirst';
-import { Caption } from '../components/Caption';
+import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
+import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { SubNav } from '../components/SubNav.importable';
+import { decideLineCount, decideLineEffect } from '../lib/layoutHelpers';
+import { renderElement } from '../lib/renderElement';
+import { ImmersiveHeader } from './headers/ImmersiveHeader';
+import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
+import { BannerWrapper } from './lib/stickiness';
 
 const InteractiveImmersiveGrid = ({
 	children,
@@ -536,7 +535,12 @@ export const InteractiveImmersiveLayout = ({
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzlesBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

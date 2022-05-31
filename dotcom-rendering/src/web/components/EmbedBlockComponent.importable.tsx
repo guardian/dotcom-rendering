@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans, text, space } from '@guardian/source-foundations';
+import { space, text, textSans } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 import { ClickToView } from './ClickToView';
 
@@ -50,7 +50,12 @@ export const EmbedBlockComponent = ({
 		>
 			<div data-cy="embed-block" css={embedContainerStyles(isEmailEmbed)}>
 				{isEmailEmbed && caption && (
-					<div css={emailCaptionStyle}>{caption}</div>
+					<div
+						css={emailCaptionStyle}
+						dangerouslySetInnerHTML={{
+							__html: caption,
+						}}
+					/>
 				)}
 				<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
 			</div>

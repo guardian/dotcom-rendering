@@ -3,7 +3,7 @@
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { withKnobs } from '@storybook/addon-knobs';
-import Series from 'components/series';
+import Series from 'components/Series';
 import { article, interview } from 'fixtures/item';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';

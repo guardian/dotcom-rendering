@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
-
-import { TextInput as SourceTextInput } from '@guardian/source-react-components';
 import { space } from '@guardian/source-foundations';
+import { TextInput as SourceTextInput } from '@guardian/source-react-components';
 
 const textInputStyles = css`
 	margin-top: ${space[2]}px;

@@ -1,5 +1,4 @@
 import { setCookie } from '@guardian/libs';
-import { getIdApiUserData } from './getIdapiUserData';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecentOneOffContributor,
@@ -7,11 +6,11 @@ import {
 	ONE_OFF_CONTRIBUTION_DATE_COOKIE,
 	SUPPORT_ONE_OFF_CONTRIBUTION_COOKIE,
 } from './contributions';
+import { getIdApiUserData } from './getIdapiUserData';
 
 const clearAllCookies = () => {
 	const cookies = document.cookie.split(';');
 
-	// eslint-disable-next-line no-plusplus
 	for (let i = 0; i < cookies.length; i++) {
 		const cookie = cookies[i];
 		const eqPos = cookie.indexOf('=');
@@ -98,7 +97,6 @@ describe('getLastOneOffContributionDate', () => {
 	});
 });
 
-/* eslint-disable @typescript-eslint/unbound-method */
 describe('isRecentOneOffContributor', () => {
 	beforeEach(clearAllCookies);
 
@@ -133,7 +131,6 @@ describe('isRecentOneOffContributor', () => {
 		expect(isRecentOneOffContributor()).toBe(false);
 	});
 });
-/* eslint-enable @typescript-eslint/unbound-method  */
 
 describe('lazyFetchEmailWithTimeout', () => {
 	it('returns a function to get the email address', async () => {

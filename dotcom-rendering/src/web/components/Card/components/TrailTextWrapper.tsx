@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-
-import { until, body } from '@guardian/source-foundations';
+import { body, until } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {

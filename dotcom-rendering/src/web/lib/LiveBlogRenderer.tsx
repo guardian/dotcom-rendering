@@ -1,8 +1,8 @@
+import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
 import { Island } from '../components/Island';
 import { LiveBlock } from '../components/LiveBlock';
-import { PinnedPost } from '../components/PinnedPost';
 import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
-import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
+import { PinnedPost } from '../components/PinnedPost';
 
 type Props = {
 	format: ArticleFormat;
@@ -74,6 +74,7 @@ export const LiveBlogRenderer = ({
 			{blocks.map((block) => {
 				return (
 					<LiveBlock
+						key={block.id}
 						format={format}
 						block={block}
 						pageId={pageId}

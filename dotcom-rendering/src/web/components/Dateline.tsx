@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { text, textSans, until } from '@guardian/source-foundations';
 import { ArticleDesign } from '@guardian/libs';
+import { text, textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 
 const captionFont = css`
@@ -18,6 +18,9 @@ const primaryStyles = css`
 	cursor: pointer;
 	:hover {
 		text-decoration: underline;
+	}
+	&::-webkit-details-marker {
+		display: none;
 	}
 `;
 

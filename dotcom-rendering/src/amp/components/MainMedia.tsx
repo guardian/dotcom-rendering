@@ -1,15 +1,14 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import {
 	neutral,
 	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { bestFitImage, heightEstimate } from '../lib/image-fit';
-
+import React from 'react';
 import InfoIcon from '../../static/icons/info.svg';
-import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
+import { bestFitImage, heightEstimate } from '../lib/image-fit';
 import { scrsetStringFromImagesSources } from '../lib/srcset-utils';
+import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
 
 const figureStyle = css`
 	margin: 0 0;
@@ -101,7 +100,7 @@ const mainImage = (element: ImageBlockElement) => {
 						id="show-caption"
 						css={inputStyle}
 					/>
-					{/* eslint-disable jsx-a11y/label-has-associated-control */}
+					{}
 					<label css={labelStyle} htmlFor="show-caption">
 						<span
 							css={css`

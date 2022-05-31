@@ -1,6 +1,5 @@
-import { render, fireEvent, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import user from '@testing-library/user-event';
-
 import { Form } from './Form';
 
 const textField = {
@@ -226,9 +225,9 @@ describe('Callout from', () => {
 			<Form formFields={[fileField]} onSubmit={mockSubmit} />,
 		);
 
-		const input = screen.getByTestId(
+		const input = screen.getByTestId<HTMLInputElement>(
 			`form-field-${fileField.id}`,
-		) as HTMLInputElement;
+		);
 		user.upload(input, file);
 
 		const inputFiles = input.files ? input.files : [];

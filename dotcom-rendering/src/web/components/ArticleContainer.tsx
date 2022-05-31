@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
-
-import { labelStyles, carrotAdStyles } from './AdSlot';
+import { carrotAdStyles, labelStyles } from './AdSlot';
 
 type Props = {
-	abTests?: ServerSideTests;
 	format: ArticleFormat;
 	children: React.ReactNode;
 };
@@ -48,7 +46,7 @@ const articleWrapper = css`
 	z-index: 1;
 `;
 
-const adSharedCSS = css`
+const adStyles = css`
 	.ad-slot {
 		@media print {
 			/* stylelint-disable-next-line declaration-no-important */
@@ -118,57 +116,20 @@ const adSharedCSS = css`
 			margin-right: -398px;
 		}
 	}
-`;
-
-const adControlCSS = css`
-	.ad-slot--inline,
-	.ad-slot-liveblog--inline {
-		width: 300px;
-		margin: 12px auto;
-		min-width: 160px;
-		min-height: 274px;
-		text-align: center;
-
-		${from.tablet} {
-			margin-right: -100px;
-			width: auto;
-			float: right;
-			margin-top: 4px;
-			margin-left: 20px;
-		}
-		${from.desktop} {
-			width: auto;
-			float: right;
-			margin: 0;
-			margin-top: 4px;
-			margin-left: 20px;
-		}
-	}
-	.ad-slot--outstream {
-		${from.tablet} {
-			margin-left: 0;
-			width: 100%;
-			.ad-slot__label {
-				margin-left: 35px;
-				margin-right: 35px;
-			}
-		}
-	}
-`;
-
-const adVariantCSS = css`
+	/* Unlike other inlines do not float right inline1 */
 	.ad-slot--inline1 {
 		margin: 12px auto;
 		text-align: center;
-		/* Unlike other inlines do not float right inline1 */
-		/* Prevent merger with any nearby float left elements e.g. rich-links */
 		${until.tablet} {
+			/* Prevent merger with any nearby float left elements e.g. rich-links */
 			clear: left;
 			width: 300px;
 		}
-		/* Reserve full width with a background colour */
 		${from.tablet} {
 			background-color: ${neutral[97]};
+		}
+		&.ad-slot--fluid {
+			width: 100%;
 		}
 	}
 	.ad-slot--inline:not(.ad-slot--inline1),
@@ -192,19 +153,19 @@ const adVariantCSS = css`
 			margin-top: 4px;
 			margin-left: 20px;
 		}
+		&.ad-slot--fluid {
+			width: 100%;
+		}
 	}
 `;
 
-export const ArticleContainer = ({ children, format, abTests }: Props) => {
-	const isInline1ContainerSizingVariant =
-		abTests?.inline1ContainerSizingVariant === 'variant';
+export const ArticleContainer = ({ children, format }: Props) => {
 	return (
 		<div
 			css={[
 				articleWrapper,
 				articleWidth(format),
-				adSharedCSS,
-				isInline1ContainerSizingVariant ? adVariantCSS : adControlCSS,
+				adStyles,
 				carrotAdStyles,
 				labelStyles,
 			]}

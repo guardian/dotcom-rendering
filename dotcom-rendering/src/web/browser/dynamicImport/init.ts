@@ -1,6 +1,3 @@
-/* eslint-disable no-new-func */
-/* eslint-disable no-new */
-
 import '../webpackPublicPath';
 import dynamicImportPolyfill from 'dynamic-import-polyfill';
 import { startup } from '../startup';

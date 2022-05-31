@@ -1,8 +1,5 @@
-/* eslint-disable jsx-a11y/aria-role */
-
 import { css } from '@emotion/react';
-
-import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { InteractiveBlockComponent } from './InteractiveBlockComponent.importable';
 import { TextBlockComponent } from './TextBlockComponent';
 

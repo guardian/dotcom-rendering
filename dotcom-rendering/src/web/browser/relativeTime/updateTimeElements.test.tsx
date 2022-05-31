@@ -1,7 +1,5 @@
-import MockDate from 'mockdate';
-
 import { render, screen } from '@testing-library/react';
-
+import MockDate from 'mockdate';
 import { updateTimeElements } from './updateTimeElements';
 
 function setup(html: string) {

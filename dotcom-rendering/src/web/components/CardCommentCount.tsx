@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-
-import { textSans, between } from '@guardian/source-foundations';
-
+import { between, textSans } from '@guardian/source-foundations';
 import CommentIcon from '../../static/icons/comment.svg';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -55,7 +53,7 @@ export const CardCommentCount = ({
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
-		<div css={containerStyles(palette)} aria-label={`${short} Comments`}>
+		<div css={containerStyles(palette)}>
 			<div css={svgStyles(palette)}>
 				<CommentIcon />
 			</div>

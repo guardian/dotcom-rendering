@@ -1,17 +1,14 @@
-/* eslint-disable jsx-a11y/accessible-emoji */
+import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-
-import { css } from '@emotion/react';
 import {
 	getAllThemes,
 	getThemeNameAsString,
 } from '../../../../common-rendering/src/fixtures/article';
-
 import { SubMeta } from './SubMeta';
 
 export default {

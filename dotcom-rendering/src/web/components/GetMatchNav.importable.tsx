@@ -1,13 +1,11 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
-import { SWRConfiguration } from 'swr';
 import { ArticleDesign } from '@guardian/libs';
+import { from } from '@guardian/source-foundations';
+import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
-
-import { Placeholder } from './Placeholder';
-
-import { MatchNav } from './MatchNav';
 import { ArticleHeadline } from './ArticleHeadline';
+import { MatchNav } from './MatchNav';
+import { Placeholder } from './Placeholder';
 
 type Props = {
 	matchUrl: string;
@@ -42,7 +40,7 @@ export const GetMatchNav = ({
 	if (loading) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then render the headline in its place as a fallback
-		window.guardian?.modules?.sentry?.reportError?.(error, 'match-nav');
+		window.guardian.modules.sentry.reportError(error, 'match-nav');
 
 		if (
 			format.design === ArticleDesign.LiveBlog ||

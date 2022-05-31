@@ -1,45 +1,39 @@
-import { useEffect, useState } from 'react';
-
 import { css } from '@emotion/react';
-
+import type { OphanABTestMeta, OphanComponentEvent } from '@guardian/libs';
+import { getCookie } from '@guardian/libs';
 import {
-	space,
-	brandText,
 	brandAlt,
-	neutral,
-	textSans,
-	headline,
+	brandText,
 	from,
+	headline,
+	neutral,
+	space,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-import {
-	OphanComponentEvent,
-	OphanABTestMeta,
-	getCookie,
-} from '@guardian/libs';
 import { getHeader } from '@guardian/support-dotcom-components';
-import {
+import type {
+	HeaderPayload,
 	ModuleData,
 	ModuleDataResponse,
-	HeaderPayload,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { getLocaleCode } from '../lib/getCountryCode';
+import { useEffect, useState } from 'react';
 import ArrowRightIcon from '../../static/icons/arrow-right.svg';
-
+import type { OphanRecordFunction } from '../browser/ophan/ophan';
+import {
+	getOphanRecordFunction,
+	sendOphanComponentEvent,
+	submitComponentEvent,
+} from '../browser/ophan/ophan';
+import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import {
 	getLastOneOffContributionDate,
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
+import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useIsInView } from '../lib/useIsInView';
-import { addTrackingCodesToUrl } from '../lib/acquisitions';
-import {
-	getOphanRecordFunction,
-	OphanRecordFunction,
-	sendOphanComponentEvent,
-	submitComponentEvent,
-} from '../browser/ophan/ophan';
 import { useOnce } from '../lib/useOnce';
 
 type Props = {
@@ -214,28 +208,26 @@ const ReaderRevenueLinksRemote: React.FC<{
 			})
 			.catch((error) => {
 				const msg = `Error importing RR header links: ${error}`;
-				// eslint-disable-next-line no-console
+
 				console.log(msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
 					'rr-header-links',
 				);
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [countryCode]);
 
 	if (SupportHeader && supportHeaderResponse) {
 		return (
 			<div css={headerStyles}>
-				{/* eslint-disable react/jsx-props-no-spreading */}
+				{}
 				<SupportHeader
-					// @ts-ignore
+					// @ts-expect-error
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
 					) => submitComponentEvent(componentEvent, ophanRecord)}
 					{...supportHeaderResponse.props}
 				/>
-				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
 		);
 	}
@@ -375,7 +367,7 @@ export const ReaderRevenueLinks = ({
 	contributionsServiceUrl,
 }: Props) => {
 	const [countryCode, setCountryCode] = useState<string>();
-	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+	const pageViewId = window.guardian.config.ophan.pageViewId;
 	const ophanRecord = getOphanRecordFunction();
 
 	useEffect(() => {

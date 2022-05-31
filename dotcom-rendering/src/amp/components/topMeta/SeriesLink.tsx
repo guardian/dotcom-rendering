@@ -1,7 +1,6 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
-
+import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
 const seriesStyle = (pillar: ArticleTheme) => css`

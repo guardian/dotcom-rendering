@@ -1,19 +1,16 @@
 import { css } from '@emotion/react';
-
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	brandBackground,
-	textSans,
 	from,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-
-import { ArticleFormat } from '@guardian/libs';
 import { getZIndex } from '../../../lib/getZIndex';
-
+import { navInputCheckboxId } from '../config';
+import { Columns } from './Columns';
 import { ShowMoreMenu } from './ShowMoreMenu';
 import { VeggieBurgerMenu } from './VeggieBurgerMenu';
-import { Columns } from './Columns';
-import { navInputCheckboxId } from '../config';
 
 const wrapperMainMenuStyles = css`
 	background-color: rgba(0, 0, 0, 0.5);

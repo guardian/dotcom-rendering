@@ -14,7 +14,6 @@ const init = async (): Promise<void> => {
 		// 99% of the time we don't want to remotely log errors with Sentry and so
 		// we just console them out
 		window.guardian.modules.sentry.reportError = (error) => {
-			// eslint-disable-next-line no-console
 			console.error(error);
 		};
 		return; // Don't initialise Sentry

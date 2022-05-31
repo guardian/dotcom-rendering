@@ -27,8 +27,6 @@ type CAPITheme = ThemePillar | ThemeSpecial;
 // https://github.com/guardian/content-api-scala-client/blob/master/client/src/main/scala/com.gu.contentapi.client/utils/format/Design.scala
 type CAPIDesign =
 	| 'ArticleDesign'
-	// Temporarily accept both the old MediaDesign and the new ones
-	| 'MediaDesign'
 	| 'GalleryDesign'
 	| 'AudioDesign'
 	| 'VideoDesign'
@@ -77,7 +75,7 @@ type ArticlePillar = ArticleTheme;
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
 // and can be used to add TypeSafety when needing to override a style in a designType
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 type DesignTypesObj = { [key in ArticleDesign]: any };
 
 type Colour = string;
@@ -129,6 +127,7 @@ type Palette = {
 		shareCountUntilDesktop: Colour;
 		cricketScoreboardLink: Colour;
 		keyEvent: Colour;
+		keyEventTime: Colour;
 	};
 	background: {
 		article: Colour;
@@ -153,6 +152,10 @@ type Palette = {
 		analysisUnderline: Colour;
 		matchStats: Colour;
 		ageWarning: Colour;
+		keyEventBullet: Colour;
+		summaryEventBullet: Colour;
+		keyEvent: Colour;
+		keyEventFromDesktop: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -186,14 +189,17 @@ type Palette = {
 		cricketScoreboardTop: Colour;
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
+		keyEvent: Colour;
 	};
 	topBar: {
 		card: Colour;
 	};
 	hover: {
 		headlineByline: Colour;
-
 		standfirstLink: Colour;
+		keyEventLink: Colour;
+		keyEventBullet: Colour;
+		summaryEventBullet: Colour;
 	};
 };
 
@@ -365,6 +371,17 @@ interface AuthorType {
 	email?: string;
 }
 
+interface MembershipPlaceholder {
+	campaignCode?: string;
+}
+
+interface Attributes {
+	pinned: boolean;
+	summary: boolean;
+	keyEvent: boolean;
+	membershipPlaceholder?: MembershipPlaceholder;
+}
+
 interface BlockContributor {
 	name: string;
 	imageUrl?: string;
@@ -374,6 +391,7 @@ interface BlockContributor {
 interface Block {
 	id: string;
 	elements: CAPIElement[];
+	attributes: Attributes;
 	blockCreatedOn?: number;
 	blockCreatedOnDisplay?: string;
 	blockLastUpdated?: number;
@@ -734,7 +752,7 @@ type FEFrontCard = {
 						index: number;
 						fields: {
 							displayCredit?: string;
-							source: string;
+							source?: string;
 							photographer?: string;
 							isMaster?: string;
 							altText?: string;
@@ -846,6 +864,7 @@ type DCRFrontCard = {
 	kickerText?: string;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionId?: string;
 };
 
 type FECollectionType = {
@@ -1187,7 +1206,7 @@ interface ConfigType extends CommercialConfigType {
 	videoDuration?: number;
 	edition: string;
 	section: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 	sharedAdTargeting: { [key: string]: any };
 	isPaidContent?: boolean;
 	keywordIds: string;
@@ -1263,6 +1282,7 @@ interface TrailType extends BaseTrailType {
 	trailText?: string;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionId?: string;
 }
 
 interface CAPITrailType extends BaseTrailType {
@@ -1333,17 +1353,18 @@ type AdSlotType =
 // ------------------------------
 // 3rd party type declarations //
 // ------------------------------
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 declare module 'compose-function' {
 	const compose: any;
+	// eslint-disable-next-line import/no-default-export -- TODO: use type definition @types/compose-function
 	export default compose;
 }
 declare module 'minify-css-string' {
 	const minifyCSSString: any;
+	// eslint-disable-next-line import/no-default-export -- it’s that 6yo module works
 	export default minifyCSSString;
 }
 declare module 'chromatic/isChromatic';
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 declare module 'dynamic-import-polyfill' {
 	export const initialize: any;
@@ -1354,7 +1375,6 @@ declare module 'dynamic-import-polyfill' {
 // ------------------------------------- //
 
 declare namespace JSX {
-	/* eslint-disable @typescript-eslint/no-explicit-any */
 	interface IntrinsicElements {
 		'amp-state': any;
 		'amp-form': any;
@@ -1381,13 +1401,12 @@ declare namespace JSX {
 		'amp-audio': any;
 		'amp-embed': any;
 	}
-	/* eslint-enable @typescript-eslint/no-explicit-any */
 }
 
 // SVG handling
 declare module '*.svg' {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const content: any;
+	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
 	export default content;
 }
 

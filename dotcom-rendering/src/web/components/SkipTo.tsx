@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans, neutral, border } from '@guardian/source-foundations';
+import { border, neutral, textSans } from '@guardian/source-foundations';
 
 type Identifier = 'maincontent' | 'navigation' | 'keyevents';
 

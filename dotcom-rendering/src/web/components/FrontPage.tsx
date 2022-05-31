@@ -1,12 +1,13 @@
+import { css, Global } from '@emotion/react';
+import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
-import { Global, css } from '@emotion/react';
-import { focusHalo, brandAlt, neutral } from '@guardian/source-foundations';
-import { SkipTo } from './SkipTo';
-import { Island } from './Island';
-import { FocusStyles } from './FocusStyles.importable';
+import { FrontLayout } from '../layouts/FrontLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { CoreVitals } from './CoreVitals.importable';
-import { FrontLayout } from '../layouts/FrontLayout';
+import { FetchCommentCounts } from './FetchCommentCounts.importable';
+import { FocusStyles } from './FocusStyles.importable';
+import { Island } from './Island';
+import { SkipTo } from './SkipTo';
 
 type Props = {
 	front: DCRFrontType;
@@ -47,6 +48,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<CoreVitals />
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<FetchCommentCounts repeat={true} />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>

@@ -1,14 +1,12 @@
-import { CacheProvider } from '@emotion/react';
-import { renderToString } from 'react-dom/server';
-import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
-
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
+import { renderToString } from 'react-dom/server';
 import { getScriptArrayFromFile } from '../../lib/assets';
-
-import { frontTemplate } from './frontTemplate';
-import { FrontPage } from '../components/FrontPage';
 import { escapeData } from '../../lib/escapeData';
 import { makeFrontWindowGuardian } from '../../model/window-guardian';
+import { FrontPage } from '../components/FrontPage';
+import { frontTemplate } from './frontTemplate';
 
 interface Props {
 	front: DCRFrontType;
@@ -111,8 +109,8 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	]);
 
 	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script?.legacy === false);
-	const legacyScript = gaChunk.find((script) => script?.legacy === true);
+	const modernScript = gaChunk.find((script) => script.legacy === false);
+	const legacyScript = gaChunk.find((script) => script.legacy === true);
 	const gaPath = {
 		modern: modernScript?.src as string,
 		legacy: legacyScript?.src as string,

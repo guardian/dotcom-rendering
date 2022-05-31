@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-
-import { ArticleDesign, ArticleFormat, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 
@@ -17,7 +17,7 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 		flex-direction: column;
 		justify-content: space-between;
 		width: 100%;
-		/* We absolutely position bioth the 1 pixel top bar below and the faux link
+		/* We absolutely position the faux link
 		so this is required here */
 		position: relative;
 
@@ -25,10 +25,6 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 		:before {
 			background-color: ${cardPalette.topBar.card};
 			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
 			height: 1px;
 			z-index: 2;
 		}
@@ -72,7 +68,9 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 					background-color: #fdf0e8;
 				}
 			`;
-		case ArticleDesign.Media:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
 		case ArticleDesign.LiveBlog:
 			return css`
 				${baseCardStyles};

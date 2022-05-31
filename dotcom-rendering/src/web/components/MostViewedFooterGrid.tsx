@@ -1,14 +1,13 @@
-import { useState } from 'react';
 import { css } from '@emotion/react';
 import {
-	neutral,
 	border,
-	headline,
 	from,
+	headline,
+	neutral,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-
+import { useState } from 'react';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
 const thinGreySolid = `1px solid ${border.secondary}`;
@@ -59,6 +58,7 @@ const unselectedStyles = css`
 
 const tabButton = css`
 	${headline.xxxsmall()};
+	color: ${neutral[7]};
 	margin: 0;
 	border: 0;
 	background: transparent;

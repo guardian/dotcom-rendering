@@ -345,13 +345,12 @@ export const Quiz: CAPIArticleType = {
 						],
 					},
 					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-					},
-					{
 						title: 'Climate crisis',
 						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Football',
@@ -388,6 +387,11 @@ export const Quiz: CAPIArticleType = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
 					},
 					{
 						title: 'Business',
@@ -1576,7 +1580,7 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'f5ec0bc5-ebd4-486a-b4e0-03bbcfdbc875',
+			elementId: 'a00b9fbc-478a-447f-94ea-b2b63c00d73e',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2189,9 +2193,14 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: 'ca4e4aa1-2336-4a53-b2c1-1edbe84574c2',
+					elementId: '1e0a69a1-ab5a-45c7-9cf0-46b77c6b5cd1',
 				},
 			],
+			attributes: {
+				pinned: false,
+				keyEvent: false,
+				summary: false,
+			},
 			blockCreatedOn: 1591866131000,
 			blockCreatedOnDisplay: '10.02 BST',
 			blockLastUpdated: 1591917260000,

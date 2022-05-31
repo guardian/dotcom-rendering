@@ -1,13 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
 import { css } from '@emotion/react';
-
 import {
-	text,
-	news,
-	neutral,
-	textSans,
 	from,
+	neutral,
+	news,
+	text,
+	textSans,
 } from '@guardian/source-foundations';
+import { useEffect, useRef, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
@@ -203,7 +202,18 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 					</li>
 				)}
 				{subNavSections.links.map((link) => (
-					<li key={link.url}>
+					<li
+						key={link.url}
+						/**
+						 * We’ve getting many false positive on changes to Obituaries.
+						 * Let’s try ignoring it for now.
+						 *
+						 * @see https://www.chromatic.com/docs/ignoring-elements#ignore-dom-elements
+						 */
+						data-chromatic={
+							link.title === 'Obituaries' ? 'ignore' : undefined
+						}
+					>
 						<a
 							css={linkStyle(palette)}
 							data-src-focus-disabled={true}

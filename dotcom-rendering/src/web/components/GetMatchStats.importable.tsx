@@ -1,10 +1,8 @@
 import { ArticleDesign } from '@guardian/libs';
-import { SWRConfiguration } from 'swr';
+import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
-
-import { Placeholder } from './Placeholder';
-
 import { MatchStats } from './MatchStats';
+import { Placeholder } from './Placeholder';
 
 type Props = {
 	matchUrl: string;

@@ -1,19 +1,13 @@
 import { css } from '@emotion/react';
-
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	from,
-	until,
-	textSans,
 	space,
+	textSans,
+	until,
 } from '@guardian/source-foundations';
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	ArticleSpecial,
-	ArticleFormat,
-} from '@guardian/libs';
-
 import CameraSvg from '../../static/icons/camera.svg';
 import VideoSvg from '../../static/icons/video-icon.svg';
 import { decidePalette } from '../lib/decidePalette';
@@ -271,7 +265,6 @@ export const Caption = ({
 			{captionText && (
 				<span
 					css={captionLink(palette)}
-					// eslint-disable-next-line react/no-danger
 					dangerouslySetInnerHTML={{
 						__html: captionText || '',
 					}}
@@ -312,7 +305,6 @@ export const Caption = ({
 					{captionText && (
 						<span
 							css={captionLink(palette)}
-							// eslint-disable-next-line react/no-danger
 							dangerouslySetInnerHTML={{
 								__html: captionText || '',
 							}}

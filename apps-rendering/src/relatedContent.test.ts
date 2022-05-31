@@ -164,8 +164,9 @@ describe('parseRelatedItemType', () => {
 		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.LIVE);
 	});
 
-	it('returns Type REVIEW given a content field with 0-5 star rating', () => {
+	it('returns Type REVIEW given a content with a reviews tone', () => {
 		defaultContent.fields = { starRating: 4 };
+		addTagToTagsList('tone/reviews', TagType.TONE);
 		const actual = parseRelatedContent([defaultContent]);
 		expect(actual.relatedItems[0].type).toEqual(RelatedItemType.REVIEW);
 		expect(actual.relatedItems[0].starRating).toBe('4');

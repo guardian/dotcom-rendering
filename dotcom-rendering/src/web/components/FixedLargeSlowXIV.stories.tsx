@@ -1,8 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { trails } from '../../../fixtures/manual/trails';
 import { ContainerLayout } from './ContainerLayout';
 import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
-
-import { trails } from '../../../fixtures/manual/trails';
 
 export default {
 	component: FixedLargeSlowXIV,
@@ -31,7 +30,7 @@ export const Default = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedLargeSlowXIV trails={trails} />
+		<FixedLargeSlowXIV trails={trails} showAge={true} />
 	</ContainerLayout>
 );
 Default.story = { name: 'FixedLargeSlowXIV' };
