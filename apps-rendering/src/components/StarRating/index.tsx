@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAltBackground, brandAltLine } from '@guardian/source-foundations';
+import { brandAltBackground, brandAltLine, from, remSpace } from '@guardian/source-foundations';
 import { SvgStar } from '@guardian/source-react-components';
 import type { Item } from 'item';
 import { maybeRender } from 'lib';
@@ -34,6 +34,14 @@ const emptyStyles = css`
 	stroke: ${brandAltLine.primary};
 `;
 
+const styles = css`
+	padding-top: ${remSpace[2]};
+
+	${from.tablet} {
+		padding-top: ${remSpace[1]};
+	}
+`;
+
 const empty = (
 	<span css={[starStyles, emptyStyles]}>
 		<SvgStar />
@@ -58,7 +66,7 @@ interface Props {
 const StarRating: FC<Props> = ({ item }) =>
 	item.design === ArticleDesign.Review
 		? maybeRender(item.starRating, (starRating) => (
-				<div>{stars(starRating)}</div>
+				<div css={styles}>{stars(starRating)}</div>
 		  ))
 		: null;
 
