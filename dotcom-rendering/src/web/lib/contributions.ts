@@ -246,9 +246,6 @@ export const getContributionsServiceUrl = (
 	CAPIArticle: CAPIArticleType,
 ): string => process.env.SDC_URL ?? CAPIArticle.contributionsServiceUrl;
 
-// TODO: remove this once PR in support-dotcom-components is merged and released
-// https://github.com/guardian/support-dotcom-components/pull/665
-// @ts-ignore
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];
 export const getPurchaseInfo = () => {
 	const purchaseInfoRaw = getCookie({

@@ -191,9 +191,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 				),
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
-				// TODO: remove this once PR in support-dotcom-components is merged and released
-				// https://github.com/guardian/support-dotcom-components/pull/665
-				// @ts-ignore
 				purchaseInfo: getPurchaseInfo(),
 				isSignedIn,
 			},
