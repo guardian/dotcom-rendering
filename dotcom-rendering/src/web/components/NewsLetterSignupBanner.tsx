@@ -4,50 +4,49 @@ import { SvgGuardianLogo } from '@guardian/source-react-components';
 import { ContainerLayout } from './ContainerLayout';
 import { NewsletterBadge } from './NewslettersBadge';
 
-const singleColumnWrapperStyle = css`
-	display: none;
+const mainColWrapperStyle = css`
+	display: flex;
+	height: 100%;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	max-width: 200px;
+
+	${until.wide} {
+		max-width: 160px;
+	}
+
+	${until.leftCol} {
+		justify-content: flex-start;
+		max-width: 200px;
+	}
 
 	${until.desktop} {
 		max-width: 170px;
 	}
 
-	${until.leftCol} {
-		display: flex;
-	}
-
+	// SvgGuardianLogo - don't display below leftCol breakpoint since will be in the leftContent of the ContainerLayout
 	svg:nth-of-type(1) {
 		width: 65%;
+		display: none;
+
+		${until.leftCol} {
+			display: block;
+		}
 	}
 
+	// NewsletterBadge
 	svg:nth-of-type(2) {
 		padding-top: ${space[1]}px;
 		width: 100%;
-	}
-`;
-
-const rightColWrapperStyle = css`
-	max-width: 200px;
-	height: 100%;
-	display: flex;
-	align-items: flex-end;
-
-	svg {
-		width: 100%;
 		position: relative;
-		bottom: -11%; // aligns the bottom line of the text within (not the border) with the logo on the left
-	}
+		bottom: -11%; // aligns the bottom line of the text within (not the border) with SvgGuardianLogo in the leftContent
 
-	${until.leftCol} {
-		display: none;
-	}
-
-	${until.wide} {
-		max-width: 160px;
-		svg {
+		${until.wide} {
 			bottom: -12.25%;
+		}
+
+		${until.leftCol} {
+			bottom: 0; // below leftCol breakpoint, the SvgGuardianLogo is above the NewsletterBadge
 		}
 	}
 `;
@@ -71,11 +70,8 @@ export const NewsLetterSignupBanner = () => (
 			</div>
 		}
 	>
-		<div css={singleColumnWrapperStyle}>
+		<div css={mainColWrapperStyle}>
 			<SvgGuardianLogo textColor={neutral[100]} width={200} />
-			<NewsletterBadge />
-		</div>
-		<div css={rightColWrapperStyle}>
 			<NewsletterBadge />
 		</div>
 	</ContainerLayout>
