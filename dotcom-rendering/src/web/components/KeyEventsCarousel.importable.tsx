@@ -108,7 +108,8 @@ export const KeyEventsCarousel = ({
 		if (carousel.current) carousel.current.scrollLeft += cardWidth;
 	};
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
-	const shortCarousel = filteredKeyEvents.length <= 4;
+	const carouselLength = filteredKeyEvents.length;
+	const shortCarousel = carouselLength <= 4;
 	return (
 		<>
 			<Hide from="desktop">
@@ -128,7 +129,7 @@ export const KeyEventsCarousel = ({
 						!shortCarousel && marginBottomStyles,
 					]}
 				>
-					{filteredKeyEvents.map((keyEvent) => {
+					{filteredKeyEvents.map((keyEvent, i) => {
 						return (
 							<KeyEventCard
 								format={format}
@@ -139,6 +140,7 @@ export const KeyEventsCarousel = ({
 								}
 								isSummary={keyEvent.attributes.summary}
 								title={keyEvent.title}
+								cardPosition={`${i} / ${carouselLength}`}
 							/>
 						);
 					})}
