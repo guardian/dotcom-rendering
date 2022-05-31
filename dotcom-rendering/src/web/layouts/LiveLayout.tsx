@@ -585,22 +585,30 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</ElementContainer>
-
-				<ElementContainer
-					showTopBorder={false}
-					backgroundColour={palette.background.keyEventFromDesktop}
-					borderColour={palette.border.article}
-				>
-					<Hide until={'desktop'}>
-						<Island>
-							<KeyEventsCarousel
-								keyEvents={CAPIArticle.keyEvents}
-								filterKeyEvents={CAPIArticle.filterKeyEvents}
-								format={format}
-							/>
-						</Island>
-					</Hide>
-				</ElementContainer>
+				{CAPIArticle.config.switches.keyEventsCarousel &&
+				CAPIArticle.keyEvents.length ? (
+					<ElementContainer
+						showTopBorder={false}
+						backgroundColour={
+							palette.background.keyEventFromDesktop
+						}
+						borderColour={palette.border.article}
+					>
+						<Hide until={'desktop'}>
+							<Island>
+								<KeyEventsCarousel
+									keyEvents={CAPIArticle.keyEvents}
+									filterKeyEvents={
+										CAPIArticle.filterKeyEvents
+									}
+									format={format}
+								/>
+							</Island>
+						</Hide>
+					</ElementContainer>
+				) : (
+					<></>
+				)}
 				<ElementContainer
 					showTopBorder={false}
 					borderColour={palette.border.article}
