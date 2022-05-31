@@ -53,7 +53,7 @@ export const CardCommentCount = ({
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
-		<div css={containerStyles(palette)} aria-label={`${short} Comments`}>
+		<div css={containerStyles(palette)}>
 			<div css={svgStyles(palette)}>
 				<CommentIcon />
 			</div>

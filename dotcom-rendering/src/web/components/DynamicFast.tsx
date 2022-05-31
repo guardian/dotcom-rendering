@@ -46,11 +46,11 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 						imageSize="large"
 						mediaType={primary.mediaType}
 						mediaDuration={primary.mediaDuration}
-						commentCount={primary.commentCount}
 						starRating={primary.starRating}
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
 						dataLinkName={primary.dataLinkName}
+						discussionId={primary.discussionId}
 					/>
 				</LI>
 				<LI
@@ -82,11 +82,11 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 						imageUrl={secondary.image}
 						mediaType={secondary.mediaType}
 						mediaDuration={secondary.mediaDuration}
-						commentCount={secondary.commentCount}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
 						dataLinkName={secondary.dataLinkName}
+						discussionId={secondary.discussionId}
 					/>
 				</LI>
 			</UL>
@@ -125,11 +125,11 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 								imageUrl={card.image}
 								mediaType={card.mediaType}
 								mediaDuration={card.mediaDuration}
-								commentCount={card.commentCount}
 								starRating={card.starRating}
 								branding={card.branding}
 								supportingContent={card.supportingContent}
 								dataLinkName={card.dataLinkName}
+								discussionId={card.discussionId}
 							/>
 						</LI>
 					);
@@ -177,13 +177,13 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 										showClock={false}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
 										supportingContent={
 											card.supportingContent
 										}
 										dataLinkName={card.dataLinkName}
+										discussionId={card.discussionId}
 									/>
 								</LI>
 							);

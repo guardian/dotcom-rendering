@@ -53,9 +53,9 @@ export const MoreThanFive = ({ content, containerPalette }: Props) => {
 						imageUrl={content[0].image}
 						mediaType={content[0].mediaType}
 						mediaDuration={content[0].mediaDuration}
-						commentCount={content[0].commentCount}
 						starRating={content[0].starRating}
 						branding={content[0].branding}
+						discussionId={content[0].discussionId}
 					/>
 				</LI>
 				<LI
@@ -88,9 +88,9 @@ export const MoreThanFive = ({ content, containerPalette }: Props) => {
 						imageUrl={content[1].image}
 						mediaType={content[1].mediaType}
 						mediaDuration={content[1].mediaDuration}
-						commentCount={content[1].commentCount}
 						starRating={content[1].starRating}
 						branding={content[1].branding}
+						discussionId={content[1].discussionId}
 					/>
 				</LI>
 				<LI
@@ -123,9 +123,9 @@ export const MoreThanFive = ({ content, containerPalette }: Props) => {
 						imageUrl={content[2].image}
 						mediaType={content[2].mediaType}
 						mediaDuration={content[2].mediaDuration}
-						commentCount={content[2].commentCount}
 						starRating={content[2].starRating}
 						branding={content[2].branding}
+						discussionId={content[2].discussionId}
 					/>
 				</LI>
 				<LI
@@ -158,9 +158,9 @@ export const MoreThanFive = ({ content, containerPalette }: Props) => {
 						imageUrl={content[3].image}
 						mediaType={content[3].mediaType}
 						mediaDuration={content[3].mediaDuration}
-						commentCount={content[3].commentCount}
 						starRating={content[3].starRating}
 						branding={content[3].branding}
+						discussionId={content[3].discussionId}
 					/>
 				</LI>
 			</UL>
@@ -203,9 +203,9 @@ export const MoreThanFive = ({ content, containerPalette }: Props) => {
 							}
 							mediaType={trail.mediaType}
 							mediaDuration={trail.mediaDuration}
-							commentCount={trail.commentCount}
 							starRating={trail.starRating}
 							branding={trail.branding}
+							discussionId={trail.discussionId}
 						/>
 					</LI>
 				))}
