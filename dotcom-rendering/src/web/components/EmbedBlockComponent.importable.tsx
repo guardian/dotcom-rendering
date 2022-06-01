@@ -21,6 +21,8 @@ const emailCaptionStyle = css`
 `;
 
 const embedContainerStyles = (isEmailEmbed: boolean) => css`
+	/* By using inline-block we keep the content together if a rich link is placed inline nearby */
+	display: inline-block;
 	iframe {
 		/* Some embeds can hijack the iframe and calculate an incorrect width, which pushes the body out */
 		/* stylelint-disable-next-line declaration-no-important */
