@@ -637,6 +637,7 @@ interface FEFrontType {
 	config: FEFrontConfigType;
 	commercialProperties: Record<string, unknown>;
 	pageFooter: FooterType;
+
 }
 
 type DCRFrontType = {
@@ -945,6 +946,7 @@ type DCRCollectionType = {
 	config: {
 		showDateHeader: boolean;
 	};
+	hasMore: boolean;
 };
 
 type FEFrontConfigType = {

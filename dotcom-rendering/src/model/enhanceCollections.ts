@@ -20,6 +20,7 @@ export const enhanceCollections = (
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 			},
+			hasMore: collection.hasMore,
 		};
 	});
 };

@@ -17,6 +17,7 @@ import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
+import { ShowMore } from '../components/ShowMore.importable';
 
 interface Props {
 	front: DCRFrontType;
@@ -170,6 +171,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerPalette={collection.containerPalette}
 								showAge={collection.displayName === 'Headlines'}
 							/>
+							{collection.hasMore && (
+								<Island deferUntil={'visible'}>
+									<ShowMore
+										id={collection.id}
+										displayName={collection.displayName}
+									/>
+								</Island>
+							)}
 						</ContainerLayout>
 					);
 				})}
