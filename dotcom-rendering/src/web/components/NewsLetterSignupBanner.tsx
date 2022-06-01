@@ -24,7 +24,6 @@ const mainColWrapperStyle = css`
 		max-width: 170px;
 	}
 
-	// SvgGuardianLogo - don't display below leftCol breakpoint since will be in the leftContent of the ContainerLayout
 	svg:nth-of-type(1) {
 		width: 65%;
 		display: none;
@@ -34,19 +33,18 @@ const mainColWrapperStyle = css`
 		}
 	}
 
-	// NewsletterBadge
 	svg:nth-of-type(2) {
 		padding-top: ${space[1]}px;
 		width: 100%;
 		position: relative;
-		bottom: -11%; // aligns the bottom line of the text within (not the border) with SvgGuardianLogo in the leftContent
+		bottom: -11%;
 
 		${until.wide} {
 			bottom: -12.25%;
 		}
 
 		${until.leftCol} {
-			bottom: 0; // below leftCol breakpoint, the SvgGuardianLogo is above the NewsletterBadge
+			bottom: 0;
 		}
 	}
 `;
