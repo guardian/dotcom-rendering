@@ -5,6 +5,7 @@ import {
 } from '@guardian/commercial-core';
 import { getCookie } from '@guardian/libs';
 import { tests } from '../experiments/ab-tests';
+import { commercialEndOfQuarter2Test } from '../experiments/tests/commercial-end-of-quarter-2-test';
 import { prebidPriceGranularity } from '../experiments/tests/prebid-price-granularity';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
@@ -29,6 +30,7 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 		const clientSideTestsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
 			prebidPriceGranularity,
+			commercialEndOfQuarter2Test,
 		];
 
 		const userInClientSideTestToForceMetrics = ABTestAPI?.allRunnableTests(
