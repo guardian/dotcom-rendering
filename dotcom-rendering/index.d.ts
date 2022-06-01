@@ -621,6 +621,7 @@ interface FEFrontType {
 	config: FEFrontConfigType;
 	commercialProperties: Record<string, unknown>;
 	pageFooter: FooterType;
+
 }
 
 type DCRFrontType = {
@@ -912,6 +913,7 @@ type DCRCollectionType = {
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];
 	href?: string;
+	hasMore: boolean;
 };
 
 type FEFrontConfigType = {

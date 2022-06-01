@@ -144,6 +144,7 @@ export const enhanceCollections = (
 			curated: enhanceCards(collection.curated, containerPalette),
 			backfill: enhanceCards(collection.backfill, containerPalette),
 			treats: enhanceCards(collection.treats, containerPalette),
+			hasMore: collection.hasMore,
 		};
 	});
 };
