@@ -146,7 +146,7 @@
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-stats": "^1.0.1",
-    "execa": "^5.0.0",
+    "execa": "^6.1.0",
     "express": "^4.17.1",
     "fetch-mock": "^9.11.0",
     "find": "^0.3.0",
