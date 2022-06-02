@@ -637,7 +637,6 @@ interface FEFrontType {
 	config: FEFrontConfigType;
 	commercialProperties: Record<string, unknown>;
 	pageFooter: FooterType;
-
 }
 
 type DCRFrontType = {
