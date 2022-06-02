@@ -14,10 +14,10 @@ import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { Snap } from '../components/Snap';
+import { ShowMore } from '../components/ShowMore.importable';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
-import { ShowMore } from '../components/ShowMore.importable';
 
 interface Props {
 	front: DCRFrontType;
@@ -175,6 +175,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								<Island deferUntil={'visible'}>
 									<ShowMore
 										id={collection.id}
+										editionId={front.editionId}
 										displayName={collection.displayName}
 									/>
 								</Island>
