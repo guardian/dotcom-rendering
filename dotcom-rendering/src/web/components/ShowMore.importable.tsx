@@ -25,10 +25,12 @@ import { Button, SvgPlus } from '@guardian/source-react-components';
 // 	}
 // }
 
-export const ShowMore: React.FC<{
+export const ShowMore = ({
+	displayName,
+}: {
 	id: string;
 	displayName: string;
-}> = ({ displayName }) => {
+}) => {
 	return (
 		<Button
 			priority="primary"
