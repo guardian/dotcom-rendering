@@ -75,9 +75,18 @@ const enhanceSupportingContent = (
 	});
 };
 
+/**
+ *
+ * Converts names and contents of a list of Frontend Fronts/Facia cards to match
+ * the model expected by DCR.
+ * Used as part of converting a whole Front, but can also be used for inserting
+ * a set of cards into an existing container (e.g. for 'Show More' functionality). The
+ * optional 'startIndex' param is for the latter case.
+ */
 export const enhanceCards = (
 	collections: FEFrontCard[],
 	containerPalette?: DCRContainerPalette,
+	startIndex = 1, // when inserting extra cards into a container after SSR, startIndex may be >1
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
 		// Snap cards may not have a format, default to a standard format if that's the case.
@@ -91,7 +100,11 @@ export const enhanceCards = (
 		const group = `${faciaCard.card.group}${
 			faciaCard.display.isBoosted ? '+' : ''
 		}`;
-		const dataLinkName = getDataLinkNameCard(format, group, index + 1);
+		const dataLinkName = getDataLinkNameCard(
+			format,
+			group,
+			startIndex + index,
+		);
 		return {
 			format,
 			dataLinkName,
