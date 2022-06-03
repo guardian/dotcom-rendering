@@ -240,9 +240,10 @@ const hasShareIcon = (format: ArticleFormat): boolean =>
 		format.design === ArticleDesign.Comment
 	);
 
-const hasAvatar = (item: Item): boolean => {
+const hasAvatar = (format: ArticleFormat): boolean => {
 	return (
-		item.design === ArticleDesign.Comment && item.contributors.length > 0
+		format.design === ArticleDesign.Comment &&
+		format.contributors.length > 0
 	);
 };
 const ignoreIconColour = (format: ArticleFormat): boolean =>
@@ -272,7 +273,7 @@ const Byline: FC<Props> = ({ item }) => {
 		<div css={getBylineStyles(format, iconColor, hasImage)}>
 			<address>{renderText(byline, format)}</address>
 			{showShareIcon && <ShareIcon />}
-			{hasAvatar(item) && (
+			{hasAvatar(format) && (
 				<div css={avatarWrapperStyles}>
 					<EditionsAvatar item={item} />
 				</div>
