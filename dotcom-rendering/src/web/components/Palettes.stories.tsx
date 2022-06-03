@@ -16,9 +16,11 @@ export const EventPalette = () => (
 		containerPalette="EventPalette"
 	>
 		<DynamicFast
+			collectionId="abc"
 			trails={trails}
 			containerPalette="EventPalette"
 			showAge={true}
+			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -33,9 +35,11 @@ export const EventAltPalette = () => (
 		containerPalette="EventAltPalette"
 	>
 		<DynamicFast
+			collectionId="abc"
 			trails={trails}
 			containerPalette="EventAltPalette"
 			showAge={true}
+			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -50,9 +54,11 @@ export const SombrePalette = () => (
 		containerPalette="SombrePalette"
 	>
 		<DynamicFast
+			collectionId="abc"
 			trails={trails}
 			containerPalette="SombrePalette"
 			showAge={true}
+			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -67,9 +73,11 @@ export const SombreAltPalette = () => (
 		containerPalette="SombreAltPalette"
 	>
 		<DynamicFast
+			collectionId="abc"
 			trails={trails}
 			containerPalette="SombreAltPalette"
 			showAge={true}
+			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -84,9 +92,11 @@ export const BreakingPalette = () => (
 		containerPalette="BreakingPalette"
 	>
 		<DynamicFast
+			collectionId="abc"
 			trails={trails}
 			containerPalette="BreakingPalette"
 			showAge={true}
+			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -101,9 +111,11 @@ export const LongRunningPalette = () => (
 		containerPalette="LongRunningPalette"
 	>
 		<DynamicFast
+			collectionId="abc"
 			trails={trails}
 			containerPalette="LongRunningPalette"
 			showAge={true}
+			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -118,9 +130,11 @@ export const LongRunningAltPalette = () => (
 		containerPalette="LongRunningAltPalette"
 	>
 		<DynamicFast
+			collectionId="abc"
 			trails={trails}
 			containerPalette="LongRunningAltPalette"
 			showAge={true}
+			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -135,9 +149,11 @@ export const InvestigationPalette = () => (
 		containerPalette="InvestigationPalette"
 	>
 		<DynamicFast
+			collectionId="abc"
 			trails={trails}
 			containerPalette="InvestigationPalette"
 			showAge={true}
+			hasMore={false}
 		/>
 	</ContainerLayout>
 );
