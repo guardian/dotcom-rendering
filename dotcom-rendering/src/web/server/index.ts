@@ -1,6 +1,7 @@
 import type express from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
+import { enhanceCards } from '../../model/enhanceCards';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { extract as extractGA } from '../../model/extract-ga';
@@ -10,6 +11,7 @@ import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
+import { cardsToHtml } from './showMoreCardsToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -179,6 +181,28 @@ export const renderKeyEvents = (
 
 		res.status(200).send(html);
 	} catch (e) {
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
+	}
+};
+
+export const renderCards = (
+	{ body }: { body: CardsRequest },
+	res: express.Response,
+): void => {
+	try {
+		const { cards, startIndex, containerPalette } = body;
+
+		const dcrTrails = enhanceCards(cards, containerPalette, startIndex);
+
+		const html = cardsToHtml({
+			cards: dcrTrails,
+			containerPalette,
+		});
+
+		res.status(200).send(html);
+	} catch (e) {
+		// todo: need to replicate error-handling behaviour of existing component
 		const message = e instanceof Error ? e.stack : 'Unknown Error';
 		res.status(500).send(`<pre>${message}</pre>`);
 	}

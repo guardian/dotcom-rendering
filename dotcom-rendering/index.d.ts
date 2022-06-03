@@ -1070,6 +1070,15 @@ interface KeyEventsRequest {
 	filterKeyEvents: boolean;
 }
 
+/**
+ * CardsRequest is the expected body format for POST requests made to /Cards
+ */
+interface CardsRequest {
+	cards: FEFrontCard[];
+	startIndex: number;
+	containerPalette?: DCRContainerPalette;
+}
+
 interface BadgeType {
 	seriesTag: string;
 	imageUrl: string;
