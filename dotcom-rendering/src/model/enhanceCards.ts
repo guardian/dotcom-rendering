@@ -109,5 +109,11 @@ export const enhanceCards = (
 					  )
 					: undefined,
 				discussionId: faciaCard.discussion.discussionId,
+				// there are two 'byline' properties on FEFrontCard; are they
+				// always the same? If not, which should be preferred?
+				byline:
+					faciaCard.properties.maybeContent?.trail.byline ??
+					undefined,
+				showByline: faciaCard.properties.showByline,
 			};
 		});
