@@ -76,14 +76,12 @@ const commentStyles = (hasImage: boolean): SerializedStyles => css`
 `;
 
 const avatarWrapperStyles = css`
-	position: absolute;
-	bottom: 0;
-	right: 0;
+	margin-top: -16px;
 `;
 
 // ----- Byline Component Styles ----- //
 
-const styles = (iconColor: string): SerializedStyles => {
+const styles = (iconColor: string, hasAvatar: boolean): SerializedStyles => {
 	return css`
 		position: relative;
 		display: flex;
@@ -105,12 +103,12 @@ const styles = (iconColor: string): SerializedStyles => {
 		}
 		min-height: ${remSpace[12]};
 
-		padding-bottom: ${remSpace[4]};
+		${!hasAvatar && `padding-bottom: ${remSpace[4]};`}
 		margin: 0;
 
 		${from.tablet} {
 			min-height: ${remSpace[9]};
-			padding-bottom: ${remSpace[9]};
+			${!hasAvatar && `padding-bottom: ${remSpace[9]};`}
 		}
 	`;
 };
@@ -184,25 +182,25 @@ const getBylineStyles = (
 ): SerializedStyles => {
 	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
 	if (format.display === ArticleDisplay.Immersive) {
-		return css(styles(iconColor), immersiveStyles);
+		return css(styles(iconColor, hasImage), immersiveStyles);
 	}
 	if (format.design === ArticleDesign.Interview) {
-		return css(styles(iconColor), interviewStyles);
+		return css(styles(iconColor, hasImage), interviewStyles);
 	}
 	if (format.design === ArticleDesign.Comment) {
-		return css(styles(iconColor), commentStyles(hasImage));
+		return css(styles(iconColor, hasImage), commentStyles(hasImage));
 	}
 	if (format.display === ArticleDisplay.Showcase) {
-		return css(styles(iconColor), showcaseStyles);
+		return css(styles(iconColor, hasImage), showcaseStyles);
 	}
 	if (
 		format.design === ArticleDesign.Gallery ||
 		format.design === ArticleDesign.Audio ||
 		format.design === ArticleDesign.Video
 	) {
-		return css(styles(iconColor), galleryStyles);
+		return css(styles(iconColor, hasImage), galleryStyles);
 	}
-	return styles(iconColor);
+	return styles(iconColor, hasImage);
 };
 
 // ----- Component ----- //
