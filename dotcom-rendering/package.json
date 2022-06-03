@@ -122,7 +122,7 @@
     "cpy": "^8.1.2",
     "crypto-js": "^4.1.1",
     "curlyquotes": "^1.5.5",
-    "cypress": "^7.4.0",
+    "cypress": "^10.0.2",
     "cypress-plugin-tab": "^1.0.5",
     "cypress-wait-until": "^1.7.1",
     "cypress-webpack-preprocessor-v5": "^5.0.0-alpha.1",
