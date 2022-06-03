@@ -182,10 +182,10 @@ const getBylineStyles = (
 ): SerializedStyles => {
 	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
 	if (format.display === ArticleDisplay.Immersive) {
-		return css(styles(iconColor, hasAvatar(format)), immersiveStyles);
+		return css(styles(iconColor, false), immersiveStyles);
 	}
 	if (format.design === ArticleDesign.Interview) {
-		return css(styles(iconColor, hasAvatar(format)), interviewStyles);
+		return css(styles(iconColor, false), interviewStyles);
 	}
 	if (format.design === ArticleDesign.Comment) {
 		return css(
@@ -194,16 +194,16 @@ const getBylineStyles = (
 		);
 	}
 	if (format.display === ArticleDisplay.Showcase) {
-		return css(styles(iconColor, hasAvatar(format)), showcaseStyles);
+		return css(styles(iconColor, false), showcaseStyles);
 	}
 	if (
 		format.design === ArticleDesign.Gallery ||
 		format.design === ArticleDesign.Audio ||
 		format.design === ArticleDesign.Video
 	) {
-		return css(styles(iconColor, hasAvatar(format)), galleryStyles);
+		return css(styles(iconColor, false), galleryStyles);
 	}
-	return styles(iconColor, hasAvatar(format));
+	return styles(iconColor, false);
 };
 
 // ----- Component ----- //
