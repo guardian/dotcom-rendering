@@ -166,15 +166,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							editionId={front.editionId}
 						>
 							<DecideContainer
+								collectionId={collection.id}
 								trails={trails}
 								containerType={collection.collectionType}
 								containerPalette={collection.containerPalette}
 								showAge={collection.displayName === 'Headlines'}
+								hasMore={collection.hasMore}
 							/>
 							{collection.hasMore && (
 								<Island deferUntil={'visible'}>
 									<ShowMore
-										id={collection.id}
+										collectionId={collection.id}
 										editionId={front.editionId}
 										displayName={collection.displayName}
 									/>

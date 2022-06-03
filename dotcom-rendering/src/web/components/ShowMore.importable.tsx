@@ -4,7 +4,7 @@ import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { useApi } from '../lib/useApi';
 
-const decideButtonText = ({
+function decideButtonText({
 	showMore,
 	loading,
 	displayName,
@@ -12,33 +12,56 @@ const decideButtonText = ({
 	showMore: boolean;
 	loading: boolean;
 	displayName: string;
-}) => {
+}) {
 	if (showMore && loading) return 'Loading';
 	if (showMore) return 'Less';
 	return `More ${displayName}`;
-};
+}
+
+function insertHtml(html: string, collectionId: string) {
+	const placeholder = document.querySelector<HTMLElement>(
+		`[data-show-more-placeholder="${collectionId}"]`,
+	);
+	if (placeholder) {
+		placeholder.insertAdjacentHTML('afterend', html);
+	}
+}
+
+function removeHtml(collectionId: string) {
+	const placeholder = document.querySelector<HTMLElement>(
+		`[data-show-more-placeholder="${collectionId}"]`,
+	);
+	if (placeholder) {
+		const nextSibling = placeholder.nextElementSibling;
+		if (nextSibling?.tagName === 'UL') nextSibling.remove();
+	}
+}
 
 export const ShowMore = ({
-	id,
+	collectionId,
 	displayName,
 	editionId,
 }: {
-	id: string;
+	collectionId: string;
 	displayName: string;
 	editionId: Edition;
 }) => {
 	const url = `https://api.nextgen.guardianapps.co.uk/${
 		editionId === 'INT' ? 'international' : editionId.toLowerCase()
-	}/show-more/${id}.json?dcr=true'`;
+	}/show-more/${collectionId}.json?dcr=true'`;
 	const [showMore, setShow] = useState(false);
-	const { data, loading } = useApi<{ userProfile: UserProfile }>(
+	const { data, loading } = useApi<{ html: string }>(
 		showMore ? url : undefined,
 	);
 
-	if (data) {
-		console.log('TODO: Insert data into the DOM here');
-	} else if (!showMore) {
-		console.log('TODO: Remove the data from the DOM here');
+	try {
+		if (data?.html) {
+			insertHtml(data.html, collectionId);
+		} else if (!showMore) {
+			removeHtml(collectionId);
+		}
+	} catch (e) {
+		// Do nothing
 	}
 
 	return (
