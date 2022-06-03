@@ -182,25 +182,28 @@ const getBylineStyles = (
 ): SerializedStyles => {
 	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
 	if (format.display === ArticleDisplay.Immersive) {
-		return css(styles(iconColor, hasImage), immersiveStyles);
+		return css(styles(iconColor, hasAvatar(format)), immersiveStyles);
 	}
 	if (format.design === ArticleDesign.Interview) {
-		return css(styles(iconColor, hasImage), interviewStyles);
+		return css(styles(iconColor, hasAvatar(format)), interviewStyles);
 	}
 	if (format.design === ArticleDesign.Comment) {
-		return css(styles(iconColor, hasImage), commentStyles(hasImage));
+		return css(
+			styles(iconColor, hasAvatar(format)),
+			commentStyles(hasImage),
+		);
 	}
 	if (format.display === ArticleDisplay.Showcase) {
-		return css(styles(iconColor, hasImage), showcaseStyles);
+		return css(styles(iconColor, hasAvatar(format)), showcaseStyles);
 	}
 	if (
 		format.design === ArticleDesign.Gallery ||
 		format.design === ArticleDesign.Audio ||
 		format.design === ArticleDesign.Video
 	) {
-		return css(styles(iconColor, hasImage), galleryStyles);
+		return css(styles(iconColor, hasAvatar(format)), galleryStyles);
 	}
-	return styles(iconColor, hasImage);
+	return styles(iconColor, hasAvatar(format));
 };
 
 // ----- Component ----- //
