@@ -179,31 +179,29 @@ const getBylineStyles = (
 	format: ArticleFormat,
 	iconColor: string,
 	hasImage: boolean,
+	hasAvatar: boolean,
 ): SerializedStyles => {
 	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
 	if (format.display === ArticleDisplay.Immersive) {
-		return css(styles(iconColor, false), immersiveStyles);
+		return css(styles(iconColor, hasAvatar), immersiveStyles);
 	}
 	if (format.design === ArticleDesign.Interview) {
-		return css(styles(iconColor, false), interviewStyles);
+		return css(styles(iconColor, hasAvatar), interviewStyles);
 	}
 	if (format.design === ArticleDesign.Comment) {
-		return css(
-			styles(iconColor, hasAvatar(format)),
-			commentStyles(hasImage),
-		);
+		return css(styles(iconColor, hasAvatar), commentStyles(hasImage));
 	}
 	if (format.display === ArticleDisplay.Showcase) {
-		return css(styles(iconColor, false), showcaseStyles);
+		return css(styles(iconColor, hasAvatar), showcaseStyles);
 	}
 	if (
 		format.design === ArticleDesign.Gallery ||
 		format.design === ArticleDesign.Audio ||
 		format.design === ArticleDesign.Video
 	) {
-		return css(styles(iconColor, false), galleryStyles);
+		return css(styles(iconColor, hasAvatar), galleryStyles);
 	}
-	return styles(iconColor, false);
+	return styles(iconColor, hasAvatar);
 };
 
 // ----- Component ----- //
@@ -240,7 +238,7 @@ const hasShareIcon = (format: ArticleFormat): boolean =>
 		format.design === ArticleDesign.Comment
 	);
 
-const hasAvatar = (format: ArticleFormat): boolean => {
+const hasAvatar = (format: Item): boolean => {
 	return (
 		format.design === ArticleDesign.Comment &&
 		format.contributors.length > 0
@@ -270,10 +268,12 @@ const Byline: FC<Props> = ({ item }) => {
 		contributor.value.image.kind === OptionKind.Some;
 
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div css={getBylineStyles(format, iconColor, hasImage)}>
+		<div
+			css={getBylineStyles(format, iconColor, hasImage, hasAvatar(item))}
+		>
 			<address>{renderText(byline, format)}</address>
 			{showShareIcon && <ShareIcon />}
-			{hasAvatar(format) && (
+			{hasAvatar(item) && (
 				<div css={avatarWrapperStyles}>
 					<EditionsAvatar item={item} />
 				</div>
