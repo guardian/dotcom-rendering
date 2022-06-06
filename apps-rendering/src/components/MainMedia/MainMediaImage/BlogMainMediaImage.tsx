@@ -35,6 +35,5 @@ const BlogMainMediaImage: FC<Props> = ({ image, format }) => (
 		imgCss={some(css())}
 	/>
 );
-// <img className={some(css())}
 
 export default BlogMainMediaImage;
