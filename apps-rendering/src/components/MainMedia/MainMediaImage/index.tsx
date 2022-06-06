@@ -8,7 +8,10 @@ import type { FC } from 'react';
 import BlogMainMediaImage from './BlogMainMediaImage';
 import CommentMainMediaImage from './CommentMainMediaImage';
 import InterviewMainMediaImage from './InterviewMainMediaImage';
-import DefaultMainMediaImage from './MainMediaImage.defaults';
+import DefaultMainMediaImage, {
+	defaultSizes,
+	defaultStyles,
+} from './MainMediaImage.defaults';
 
 // ----- Component ----- //
 
@@ -40,29 +43,18 @@ const MainMediaImage: FC<Props> = ({ className, image, format }: Props) => {
 				/>
 			);
 		case ArticleDesign.Interview:
-			return (
-				<InterviewMainMediaImage
-					image={image}
-					format={format}
-					className={className}
-				/>
-			);
+			return <InterviewMainMediaImage image={image} format={format} />;
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
-			return (
-				<CommentMainMediaImage
-					image={image}
-					format={format}
-					className={className}
-				/>
-			);
+			return <CommentMainMediaImage image={image} format={format} />;
 		default:
 			return (
 				<DefaultMainMediaImage
 					image={image}
 					format={format}
-					className={className}
+					css={defaultStyles}
+					sizes={defaultSizes}
 				/>
 			);
 	}

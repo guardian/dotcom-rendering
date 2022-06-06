@@ -56,10 +56,7 @@ const defaultSizes: Sizes = {
 	default: '100vw',
 };
 
-export const imgStyles = (
-	width: number,
-	height: number,
-): SerializedStyles => css`
+const imgStyles = (width: number, height: number): SerializedStyles => css`
 	display: block;
 	width: 100%;
 	height: calc(100vw * ${height / width});
@@ -72,7 +69,9 @@ export const imgStyles = (
 
 interface DefaultProps {
 	image: Image;
-	className?: SerializedStyles;
+	className?: string;
+	css?: SerializedStyles;
+	sizes: Sizes;
 	format: ArticleFormat;
 }
 
@@ -80,11 +79,12 @@ const DefaultMainMediaImage: FC<DefaultProps> = ({
 	className,
 	image,
 	format,
+	sizes,
 }) => (
-	<figure css={[defaultStyles, className]} aria-labelledby={captionId}>
+	<figure css={className} aria-labelledby={captionId}>
 		<Img
 			image={image}
-			sizes={defaultSizes}
+			sizes={sizes}
 			className={some(imgStyles(image.width, image.height))}
 			format={format}
 			supportsDarkMode
@@ -98,4 +98,7 @@ const DefaultMainMediaImage: FC<DefaultProps> = ({
 	</figure>
 );
 
+// ----- Exports ----- //
+
 export default DefaultMainMediaImage;
+export { defaultSizes, defaultStyles, imgStyles };
