@@ -10,7 +10,8 @@
     "target": "es2020",
     "transform": {
       "react": {
-        "runtime": "automatic"
+        "runtime": "automatic",
+        "importSource": "@emotion/react"
       }
     }
   }
