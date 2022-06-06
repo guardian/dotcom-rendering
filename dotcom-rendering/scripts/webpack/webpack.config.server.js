@@ -1,5 +1,6 @@
 // @ts-check
 const nodeExternals = require('webpack-node-externals');
+const swcConfig = require('./.swcrc.json');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
@@ -71,7 +72,18 @@ module.exports = ({ sessionId }) => ({
 					and: [/node_modules/],
 					not: [/@guardian/, /dynamic-import-polyfill/],
 				},
-				loader: 'swc-loader',
+				use: {
+					loader: 'swc-loader',
+					options: {
+						...swcConfig,
+						env: {
+							targets: {
+								// TODO read from .nvmrc
+								node: '14.18.3',
+							},
+						},
+					},
+				},
 			},
 			// TODO: find a way to remove
 			{

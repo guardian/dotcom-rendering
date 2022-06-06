@@ -1,4 +1,5 @@
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const swcConfig = require('./.swcrc.json');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
@@ -47,6 +48,12 @@ const getLoaders = (bundle) => {
 				},
 			];
 		case 'variant':
+			return [
+				{
+					loader: 'swc-loader',
+					options: swcConfig,
+				},
+			];
 		case 'modern':
 			return [
 				{
