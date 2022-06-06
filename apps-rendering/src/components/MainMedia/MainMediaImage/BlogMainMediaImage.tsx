@@ -1,15 +1,11 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import Img from '@guardian/common-rendering/src/components/img';
 import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, remSpace } from '@guardian/source-foundations';
 import { some } from '@guardian/types';
 import type { Image } from 'image';
 import type { FC } from 'react';
-import { Caption } from './MainMediaImage.defaults';
-
-const captionId = 'header-image-caption';
+import DefaultMainMediaImage from './MainMediaImage.defaults';
 
 const blogStyles = css`
 	margin-bottom: ${remSpace[4]};
@@ -20,33 +16,25 @@ const blogStyles = css`
 	}
 `;
 
-const sizes: Sizes = {
+const blogSizes: Sizes = {
 	mediaQueries: [{ breakpoint: 'tablet', size: '700px' }],
 	default: '100vw',
 };
 
 interface Props {
 	image: Image;
-	className?: SerializedStyles;
 	format: ArticleFormat;
 }
 
-const BlogMainMediaImage: FC<Props> = ({ className, image, format }) => (
-	<figure css={[blogStyles, className]} aria-labelledby={captionId}>
-		<Img
-			image={image}
-			sizes={sizes}
-			className={some(css())}
-			format={format}
-			supportsDarkMode
-			lightbox={some({
-				className: 'js-launch-slideshow',
-				caption: image.nativeCaption,
-				credit: image.credit,
-			})}
-		/>
-		<Caption format={format} image={image} />
-	</figure>
+const BlogMainMediaImage: FC<Props> = ({ image, format }) => (
+	<DefaultMainMediaImage
+		image={image}
+		sizes={blogSizes}
+		format={format}
+		css={css(blogStyles)}
+		imgCss={some(css())}
+	/>
 );
+// <img className={some(css())}
 
 export default BlogMainMediaImage;

@@ -4,7 +4,10 @@ import { from, remSpace } from '@guardian/source-foundations';
 import type { Image } from 'image';
 import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
-import DefaultMainMediaImage, { defaultSizes } from './MainMediaImage.defaults';
+import DefaultMainMediaImage, {
+	defaultImgCss,
+	defaultSizes,
+} from './MainMediaImage.defaults';
 
 const commentStyles = css`
 	margin: 0 0 ${remSpace[5]} 0;
@@ -28,6 +31,7 @@ const CommentMainMediaImage: FC<Props> = ({ image, format }) => (
 		sizes={defaultSizes}
 		format={format}
 		css={css(commentStyles)}
+		imgCss={defaultImgCss(image)}
 	/>
 );
 

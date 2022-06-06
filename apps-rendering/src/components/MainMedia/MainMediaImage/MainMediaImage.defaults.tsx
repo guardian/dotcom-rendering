@@ -6,6 +6,7 @@ import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
+import type { Option } from '@guardian/types';
 import { some } from '@guardian/types';
 import type { Image } from 'image';
 import type { FC } from 'react';
@@ -56,6 +57,9 @@ const defaultSizes: Sizes = {
 	default: '100vw',
 };
 
+const defaultImgCss = (image: Image): Option<SerializedStyles> =>
+	some(imgStyles(image.width, image.height));
+
 const imgStyles = (width: number, height: number): SerializedStyles => css`
 	display: block;
 	width: 100%;
@@ -71,6 +75,7 @@ interface DefaultProps {
 	image: Image;
 	className?: string;
 	css?: SerializedStyles;
+	imgCss: Option<SerializedStyles>;
 	sizes: Sizes;
 	format: ArticleFormat;
 }
@@ -78,6 +83,7 @@ interface DefaultProps {
 const DefaultMainMediaImage: FC<DefaultProps> = ({
 	className,
 	image,
+	imgCss,
 	format,
 	sizes,
 }) => (
@@ -85,7 +91,7 @@ const DefaultMainMediaImage: FC<DefaultProps> = ({
 		<Img
 			image={image}
 			sizes={sizes}
-			className={some(imgStyles(image.width, image.height))}
+			className={imgCss}
 			format={format}
 			supportsDarkMode
 			lightbox={some({
@@ -101,4 +107,4 @@ const DefaultMainMediaImage: FC<DefaultProps> = ({
 // ----- Exports ----- //
 
 export default DefaultMainMediaImage;
-export { defaultSizes, defaultStyles, imgStyles };
+export { defaultSizes, defaultStyles, imgStyles, defaultImgCss };

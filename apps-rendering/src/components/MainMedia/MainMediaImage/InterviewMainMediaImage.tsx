@@ -4,7 +4,10 @@ import { from } from '@guardian/source-foundations';
 import type { Image } from 'image';
 import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
-import DefaultMainMediaImage, { defaultSizes } from './MainMediaImage.defaults';
+import DefaultMainMediaImage, {
+	defaultImgCss,
+	defaultSizes,
+} from './MainMediaImage.defaults';
 
 const interviewStyles = css`
 	position: relative;
@@ -27,6 +30,7 @@ const InterviewMainMediaImage: FC<Props> = ({ image, format }) => (
 		sizes={defaultSizes}
 		format={format}
 		css={css(interviewStyles)}
+		imgCss={defaultImgCss(image)}
 	/>
 );
 
