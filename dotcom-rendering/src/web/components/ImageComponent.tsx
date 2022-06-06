@@ -242,6 +242,19 @@ export const ImageComponent = ({
 
 	const palette = decidePalette(format);
 
+	const master = element.media.allImages.find(
+		(image) => image.fields.isMaster,
+	)?.url;
+
+	if (!master) {
+		// This should be unreachable. Report if it isn't
+		window.guardian.modules.sentry.reportError(
+			new Error(`No master image found`),
+			'image-component',
+		);
+		return <></>;
+	}
+
 	if (
 		isMainMedia &&
 		format.display === ArticleDisplay.Immersive &&
@@ -272,7 +285,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					imageSources={element.imageSources}
+					master={master}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -303,7 +316,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					imageSources={element.imageSources}
+					master={master}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -335,7 +348,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					imageSources={element.imageSources}
+					master={master}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
