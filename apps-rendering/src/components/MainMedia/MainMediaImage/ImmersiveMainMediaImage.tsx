@@ -34,6 +34,8 @@ interface Props {
 	format: ArticleFormat;
 }
 
+// NOTE: This component isn't currently used - this file exists to preserve
+// immersive styling and sizes so we don't lose them in the big MainMedia refactor.
 const ImmersiveMainMediaImage: FC<Props> = ({ className, image, format }) => (
 	<figure css={[immersiveStyles, className]} aria-labelledby={captionId}>
 		<Img
