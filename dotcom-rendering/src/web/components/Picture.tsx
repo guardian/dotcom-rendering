@@ -182,11 +182,10 @@ function generateSignedUrl({
 	}
 
 	const salt = process.env.IMAGE_SALT;
-	// If no IMAGE_SALT env variable is set then we render a default image for developement
 	if (!salt) {
-		return quality === 'high'
-			? 'https://i.guim.co.uk/img/media/7dd363e8d24d920f3e600f1746f189eb4009c744/0_0_2516_1594/master/2516.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=cf595dd4e284bb4f67363faf591e7e1c'
-			: 'https://i.guim.co.uk/img/media/7dd363e8d24d920f3e600f1746f189eb4009c744/0_0_2516_1594/master/2516.jpg?width=620&quality=85&auto=format&fit=max&s=58a66cbaa65c06c0fa3b6ba4b224016a';
+		// If no IMAGE_SALT env variable is set then we can't optimise using Fastly so we
+		// render the master image instead
+		return master;
 	}
 
 	// Construct and sign the url
