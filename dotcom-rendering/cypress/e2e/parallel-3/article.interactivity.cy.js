@@ -145,8 +145,10 @@ describe('Interactivity', function () {
 				cy.contains('Crosswords');
 				cy.get('[data-cy=column-collapse-Opinion]').click();
 				cy.contains('Columnists').should('be.visible');
+				// this input element is not visible and typing into it will cause Cypress to fail to type - so force override
+				// https://docs.cypress.io/guides/references/error-messages#cy-failed-because-the-element-cannot-be-interacted-with
+				cy.focused().type('{esc}', { force: true });
 				// check focus is on veggie burger menu button on close
-				cy.focused().type('{esc}');
 				cy.focused().should('have.attr', 'data-cy', 'veggie-burger');
 			});
 
