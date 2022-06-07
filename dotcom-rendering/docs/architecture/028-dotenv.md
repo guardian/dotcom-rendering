@@ -38,3 +38,27 @@ const secrets = [
     // ...
 ];
 ```
+
+## Security
+
+`.env` variables are only available on the server, you should ensure that you **never** pass an environment variable into the clientside code
+e.g
+
+```jsx
+<Island>
+	<!-- Bad :((( -->
+	<MyComponent myProp={process.env.MY_VAR} />
+</Island>
+```
+
+This has considerable security implementations as this variable would then be available to any consumer of the site.
+
+## Limitations
+
+### Server Only
+
+DCR currently only supports `.env` variables being used on the _server_, but not the client.
+
+This limitation exists as the to maintain common & best practice within the organisation, we want to ensure that a re-deploy of the application would involve fetching a fresh environment variable. This means we cannot [inject environment variables through webpack](https://www.npmjs.com/package/dotenv-webpack) (which is done at build time) - and instead we load the dotenv directly when running the server bundle.
+
+This could be revisited in the future, but when doing so the [security implications](#security) of having `.env` variables available on the client should be considered and documented.

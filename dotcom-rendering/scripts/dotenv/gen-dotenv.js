@@ -1,5 +1,7 @@
-const { CredentialsProviderError } = require('@aws-sdk/property-provider');
 const path = require('path');
+const { CredentialsProviderError } = require('@aws-sdk/property-provider');
+
+console.log(typeof ExpiredTokenException);
 const fs = require('fs').promises;
 const { prompt, log, warn } = require('../env/log');
 const secrets = require('../secrets');
@@ -41,7 +43,7 @@ const genEnv = async () => {
 		const validEnv = await checkEnv();
 		if (!validEnv) {
 			log(
-				'[scripts/dotenv] .env file is missing, attemting to generate it from AWS parameters...',
+				'[scripts/dotenv] .env file is missing or out of date, attemting to generate it from AWS parameters...',
 			);
 
 			await genEnv();
@@ -51,7 +53,13 @@ const genEnv = async () => {
 			log('[scripts/dotenv] valid .env file exists, moving on...');
 		}
 	} catch (err) {
-		if (err instanceof CredentialsProviderError) {
+		console.log(err);
+		console.log(typeof err);
+		if (
+			err instanceof CredentialsProviderError ||
+			// eslint-disable-next-line no-underscore-dangle -- '__type' is the only way to identify this exception type
+			err.__type === 'ExpiredTokenException'
+		) {
 			const PROD = process.env.NODE_ENV === 'production';
 			if (PROD) {
 				warn(
