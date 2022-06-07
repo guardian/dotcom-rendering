@@ -11,6 +11,7 @@ import {
 	renderArticleJson,
 	renderPerfTest as renderArticlePerfTest,
 	renderBlocks,
+	renderCards,
 	renderFront,
 	renderInteractive,
 	renderKeyEvents,
@@ -56,6 +57,7 @@ export const prodServer = (): void => {
 	app.post('/AMPInteractive', logRenderTime, renderAMPArticle);
 	app.post('/Blocks', logRenderTime, renderBlocks);
 	app.post('/KeyEvents', logRenderTime, renderKeyEvents);
+	app.post('/Cards', logRenderTime, renderCards);
 	app.post('/Front', logRenderTime, renderFront);
 
 	// These GET's are for checking any given URL directly from PROD
