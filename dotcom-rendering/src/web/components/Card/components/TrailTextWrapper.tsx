@@ -21,7 +21,7 @@ export const TrailTextWrapper = ({
 				flex-direction: column;
 				color: ${palette.text.cardStandfirst};
 
-				${body.small()};
+				${body.small({ lineHeight: 'regular' })};
 				font-size: 14px;
 
 				padding-left: 5px;
