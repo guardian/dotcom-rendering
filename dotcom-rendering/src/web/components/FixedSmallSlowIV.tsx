@@ -31,7 +31,6 @@ export const FixedSmallSlowIV = ({
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}
-							trailText={trail.trailText}
 							headlineSize="medium"
 							byline={trail.byline}
 							showByline={trail.showByline}
@@ -52,11 +51,11 @@ export const FixedSmallSlowIV = ({
 							imageSize="medium"
 							mediaType={trail.mediaType}
 							mediaDuration={trail.mediaDuration}
-							commentCount={trail.commentCount}
 							starRating={trail.starRating}
 							branding={trail.branding}
 							dataLinkName={trail.dataLinkName}
 							snapData={trail.snapData}
+							discussionId={trail.discussionId}
 						/>
 					</LI>
 				);

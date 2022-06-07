@@ -58,6 +58,7 @@ const unselectedStyles = css`
 
 const tabButton = css`
 	${headline.xxxsmall()};
+	color: ${neutral[7]};
 	margin: 0;
 	border: 0;
 	background: transparent;

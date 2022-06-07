@@ -127,6 +127,7 @@ type Palette = {
 		shareCountUntilDesktop: Colour;
 		cricketScoreboardLink: Colour;
 		keyEvent: Colour;
+		keyEventTime: Colour;
 	};
 	background: {
 		article: Colour;
@@ -153,6 +154,8 @@ type Palette = {
 		ageWarning: Colour;
 		keyEventBullet: Colour;
 		summaryEventBullet: Colour;
+		keyEvent: Colour;
+		keyEventFromDesktop: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -186,6 +189,7 @@ type Palette = {
 		cricketScoreboardTop: Colour;
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
+		keyEvent: Colour;
 	};
 	topBar: {
 		card: Colour;
@@ -872,6 +876,7 @@ type DCRFrontCard = {
 	snapData?: DCRSnapType;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionId?: string;
 };
 
 type FECollectionType = {
@@ -1291,6 +1296,7 @@ interface TrailType extends BaseTrailType {
 	trailText?: string;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionId?: string;
 }
 
 interface CAPITrailType extends BaseTrailType {

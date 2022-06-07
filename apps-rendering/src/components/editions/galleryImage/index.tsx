@@ -128,7 +128,7 @@ const CaptionLocation: FC<{ location: string[]; triangleColor: string }> = ({
 	return (
 		<h2 css={styles}>
 			<Triangle color={triangleColor} />
-			{location.join(', ')}
+			{location.filter((s) => /[a-zA-Z]/.test(s)).join(', ')}
 		</h2>
 	);
 };

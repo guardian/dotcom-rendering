@@ -124,6 +124,28 @@ const blockquoteIconDark = (format: ArticleFormat): Colour => {
 	}
 };
 
+const richLink = (_format: ArticleFormat): Colour => {
+	return neutral[100];
+};
+
+const richLinkDark = (_format: ArticleFormat): Colour => {
+	return neutral[7];
+}
+
+/**
+ *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
+ */
+ const richLinkSvgPreload = (_format: ArticleFormat): Colour => {
+	return neutral[7];
+}
+
+/**
+ *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
+ */
+const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+}
+
 // ----- API ----- //
 
 const fill = {
@@ -132,6 +154,10 @@ const fill = {
 	iconDark,
 	blockquoteIcon,
 	blockquoteIconDark,
+	richLink,
+	richLinkDark,
+	richLinkSvgPreload,
+	richLinkSvgPreloadDark,
 };
 
 // ----- Exports ----- //

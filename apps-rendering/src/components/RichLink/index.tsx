@@ -1,45 +1,49 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
+import {
+	background,
+	border,
+	fill,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	from,
 	headline,
-	neutral,
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgArrowRightStraight } from '@guardian/source-react-components';
 import { createElement as h } from 'react';
 import type { ReactElement } from 'react';
-import { backgroundColor, darkModeCss, darkModeStyles } from 'styles';
-import { getThemeStyles } from 'themeStyles';
+import { darkModeCss, darkModeStyles } from 'styles';
 
 export const richLinkWidth = '8.75rem';
 
-const richLinkPillarStyles = (kicker: string, inverted: string): string => {
+const richLinkPillarStyles = (format: ArticleFormat): string => {
 	return `
-		border-top: solid 1px ${kicker};
+		border-top: solid 1px ${border.richLink(format)};
 
 		${darkModeStyles`
-			border-top: solid 1px ${neutral[60]};
+			border-top: solid 1px ${border.richLinkDark(format)};
 		`}
 
 		svg {
-			fill: white;
-			background: ${kicker};
-			border-color: ${kicker};
+			fill: ${fill.richLink(format)};
+			background: ${background.richLinkSvg(format)};
+			border-color: ${border.richLinkSvg(format)};
 			${darkModeStyles`
-				border-color: ${inverted};
-				background: ${inverted};
-				fill: ${neutral[7]};
+				border-color: ${border.richLinkSvgDark(format)};
+				background: ${background.richLinkSvgDark(format)};
+				fill: ${fill.richLinkDark(format)};
 			`}
 		}
 
 		button {
-			color: ${kicker};
+			color: ${text.richLink(format)};
 			${darkModeStyles`
-				color: ${neutral[86]};
+				color: ${text.richLinkDark(format)};
 			`}
 		}
 	`;
@@ -53,46 +57,37 @@ const liveBlogRichLinkStyles = css`
 	}
 `;
 
-const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker: newsKicker, inverted: newsInverted } = getThemeStyles(
-		ArticlePillar.News,
-	);
-	const { kicker: opinionKicker, inverted: opinionInverted } = getThemeStyles(
-		ArticlePillar.Opinion,
-	);
-	const { kicker: sportKicker, inverted: sportInverted } = getThemeStyles(
-		ArticlePillar.Sport,
-	);
-	const { kicker: cultureKicker, inverted: cultureInverted } = getThemeStyles(
-		ArticlePillar.Culture,
-	);
-	const { kicker: lifestyleKicker, inverted: lifestyleInverted } =
-		getThemeStyles(ArticlePillar.Lifestyle);
+const formatFromTheme = (theme: ArticleTheme): ArticleFormat => ({
+	theme,
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+});
 
+const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 	return css`
-		background: ${backgroundColor(format)};
+		background: ${background.richLink(format)};
 		padding: ${remSpace[3]} ${remSpace[3]} ${remSpace[2]};
-		border-top: solid 1px ${neutral[60]};
+		border-top: solid 1px ${border.richLinkPreload(format)};
 		transition: all 0.2s ease;
 
 		&.js-news {
-			${richLinkPillarStyles(newsKicker, newsInverted)}
+			${richLinkPillarStyles(formatFromTheme(ArticlePillar.News))}
 		}
 
 		&.js-opinion {
-			${richLinkPillarStyles(opinionKicker, opinionInverted)}
+			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Opinion))}
 		}
 
 		&.js-sport {
-			${richLinkPillarStyles(sportKicker, sportInverted)}
+			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Sport))}
 		}
 
 		&.js-culture {
-			${richLinkPillarStyles(cultureKicker, cultureInverted)}
+			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Culture))}
 		}
 
 		&.js-lifestyle {
-			${richLinkPillarStyles(lifestyleKicker, lifestyleInverted)}
+			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Lifestyle))}
 		}
 
 		img {
@@ -103,27 +98,38 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 		button {
 			background: none;
 			border: none;
-			${textSans.medium()};
+			${textSans.medium({
+				fontWeight: 'bold',
+			})}; // Bold for accessibility
 			padding: 0;
 			margin: 0;
 			display: inline-flex;
 			transition: all 0.2s ease;
+			color: ${text.richLinkAnchor(format)};
+			${darkModeStyles`
+				color: ${text.richLinkDark(format)};
+			`}
 		}
 
 		svg {
 			width: 1.5rem;
 			border-radius: 100%;
-			border: solid 1px ${neutral[7]};
+			fill: ${fill.richLinkSvgPreload(format)};
+			border: solid 1px ${border.richLinkSvgPreload(format)};
 			padding: 4px;
 			display: inline-block;
 			margin-right: ${remSpace[2]};
 			transition: all 0.2s ease;
+			${darkModeStyles`
+				border: 1px solid ${border.richLinkSvgPreloadDark(format)};
+				fill: ${fill.richLinkSvgPreloadDark(format)};
+			`}
 		}
 
 		a {
 			display: inline-block;
 			text-decoration: none;
-			color: ${neutral[7]};
+			color: ${text.richLinkAnchor(format)};
 			max-width: 100%;
 			word-wrap: break-word;
 
@@ -132,7 +138,7 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 				${headline.xxxsmall({ fontWeight: 'bold' })}
 				hyphens: auto;
 				${darkModeStyles`
-					color: ${neutral[86]};
+					color: ${text.richLinkDark(format)};
 				`}
 			}
 		}
@@ -157,10 +163,10 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 		}
 
 		${darkModeCss`
-			background-color: ${neutral[20]};
+			background-color: ${background.richLinkDark(format)};
 
-            a, h1 {
-                color: ${neutral[60]};
+            a {
+                color: ${text.richLinkAnchorDark(format)};
             }
         `}
 	`;

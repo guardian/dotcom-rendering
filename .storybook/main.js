@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 
+/** @type {import("@storybook/react/types").StorybookConfig} */
 module.exports = {
 	core: {
 		builder: "webpack5",
@@ -58,8 +59,13 @@ const dcrWebpack = (config) => {
 	const rules = config.module.rules;
 
 	// Mock JSDOM for storybook - it relies on native node.js packages
-	// Allows us to use enhancers in stories for better testing of compoenents & full articles
+	// Allows us to use enhancers in stories for better testing of components & full articles
 	config.resolve.alias.jsdom$ = path.resolve(__dirname, "./mocks/jsdom.js");
+
+	// log4js tries to call "fs" in storybook -- we can ignore it
+	config.resolve.alias[
+		path.resolve(__dirname, '../dotcom-rendering/src/server/lib/logging.ts')
+	] = path.resolve(__dirname, './mocks/log4js.js');
 
 	// Support typescript in Storybook
 	// https://storybook.js.org/docs/configurations/typescript-config/
