@@ -16,10 +16,9 @@ import {
 	neutral,
 	remSpace,
 } from '@guardian/source-foundations';
-import { OptionKind } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { index, maybeRender } from 'lib';
+import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from '../avatar';
