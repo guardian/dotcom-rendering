@@ -75,7 +75,7 @@ interface Props {
 }
 
 const Tags: FC<Props> = ({ tags, format }) => (
-	<ul css={styles(format)}>
+	<ul css={styles(format)} role="list">
 		{tags.map((tag, index) => {
 			return (
 				<li key={index} css={tagStyles}>
