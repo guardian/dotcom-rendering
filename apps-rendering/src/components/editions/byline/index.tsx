@@ -262,11 +262,6 @@ const Byline: FC<Props> = ({ item }) => {
 
 	const iconColor = ignoreIconColour(format) ? neutral[100] : kickerColor;
 	const showShareIcon = hasShareIcon(format);
-	const contributor = index(0)(item.contributors);
-
-	const hasImage =
-		contributor.kind === OptionKind.Some &&
-		contributor.value.image.kind === OptionKind.Some;
 
 	return maybeRender(item.bylineHtml, (byline) => (
 		<div css={getBylineStyles(format, iconColor, hasAvatar(item))}>
