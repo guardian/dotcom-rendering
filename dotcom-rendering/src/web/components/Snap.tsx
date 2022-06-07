@@ -6,7 +6,7 @@ const snapStyles = css`
 `;
 
 type Props = {
-	snapData?: DCREnrichedContent;
+	snapData?: DCRSnapType;
 };
 
 export const Snap = ({ snapData }: Props) => {

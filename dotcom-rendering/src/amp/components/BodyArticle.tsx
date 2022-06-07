@@ -109,8 +109,8 @@ export const Body: React.FC<{
 		sharedAdTargeting: config.sharedAdTargeting,
 		adUnit: config.adUnit,
 	});
-	const design = decideDesign(data.format.design, data.format.display);
-	const pillar = decideTheme(data.format.theme);
+	const design = decideDesign(data.format);
+	const pillar = decideTheme(data.format);
 	const elementsWithoutAds = Elements(
 		capiElements,
 		pillar,

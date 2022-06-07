@@ -91,7 +91,7 @@ export const Body: React.FC<{
 		sharedAdTargeting: config.sharedAdTargeting,
 		adUnit: config.adUnit,
 	});
-	const pillar = decideTheme(data.format.theme);
+	const pillar = decideTheme(data.format);
 	const url = `${data.guardianBaseURL}/${data.pageId}`;
 	const isFirstPage = data.pagination
 		? data.pagination.currentPage === 1

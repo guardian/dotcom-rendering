@@ -1,8 +1,8 @@
 import { ArticleDisplay } from '@guardian/libs';
 
-export const decideDisplay = (
-	display: CAPIDisplay | undefined,
-): ArticleDisplay => {
+export const decideDisplay = ({
+	display,
+}: Partial<CAPIFormat>): ArticleDisplay => {
 	switch (display) {
 		case 'StandardDisplay':
 			return ArticleDisplay.Standard;

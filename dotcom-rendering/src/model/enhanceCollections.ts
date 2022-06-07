@@ -76,8 +76,14 @@ const enhanceCards = (
 	containerPalette?: DCRContainerPalette,
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
-		// Cards with snaps won't have a set format.
-		const format = decideFormat(faciaCard.format);
+		// Snap cards may not have a format, default to a standard format if thats the case.
+		const format = decideFormat(
+			faciaCard.format || {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
+		);
 		const group = `${faciaCard.card.group}${
 			faciaCard.display.isBoosted ? '+' : ''
 		}`;
@@ -103,7 +109,6 @@ const enhanceCards = (
 						containerPalette,
 				  )
 				: undefined,
-			isSnap: faciaCard.type === 'LinkSnap',
 			snapData: faciaCard.enriched,
 		};
 	});

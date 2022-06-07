@@ -56,7 +56,6 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
 						dataLinkName={primary.dataLinkName}
-						isSnap={primary.isSnap}
 						snapData={primary.snapData}
 					/>
 				</LI>
@@ -94,7 +93,6 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
 						dataLinkName={secondary.dataLinkName}
-						isSnap={secondary.isSnap}
 						snapData={secondary.snapData}
 					/>
 				</LI>
@@ -150,7 +148,6 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										}
 										imagePositionOnMobile="none"
 										dataLinkName={card.dataLinkName}
-										isSnap={card.isSnap}
 										snapData={card.snapData}
 									/>
 								</LI>
@@ -205,7 +202,6 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										starRating={card.starRating}
 										branding={card.branding}
 										dataLinkName={card.dataLinkName}
-										isSnap={card.isSnap}
 										snapData={card.snapData}
 									/>
 								</LI>

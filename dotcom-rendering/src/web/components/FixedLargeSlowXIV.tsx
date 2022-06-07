@@ -56,7 +56,6 @@ export const FixedLargeSlowXIV = ({
 						commentCount={primary.commentCount}
 						starRating={primary.starRating}
 						branding={primary.branding}
-						isSnap={primary.isSnap}
 						snapData={primary.snapData}
 					/>
 				</LI>
@@ -92,7 +91,6 @@ export const FixedLargeSlowXIV = ({
 						commentCount={secondary.commentCount}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
-						isSnap={secondary.isSnap}
 						snapData={secondary.snapData}
 					/>
 				</LI>
@@ -144,7 +142,6 @@ export const FixedLargeSlowXIV = ({
 										starRating={card.starRating}
 										branding={card.branding}
 										dataLinkName={card.dataLinkName}
-										isSnap={card.isSnap}
 										snapData={card.snapData}
 									/>
 								</LI>
