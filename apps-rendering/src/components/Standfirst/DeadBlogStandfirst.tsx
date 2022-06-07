@@ -13,6 +13,19 @@ const deadblogStyles = (format: ArticleFormat): SerializedStyles => {
 
 	return css`
 		${headline.xxxsmall({ fontWeight: 'bold' })};
+		margin-bottom: 0;
+		padding-bottom: ${remSpace[3]};
+
+		p {
+			margin: 0;
+			padding: 0.75rem 0;
+
+			${darkModeCss`color: ${neutral[93]};`}
+		}
+
+		ul {
+			margin-bottom: 0;
+		}
 
 		a {
 			text-decoration: none;
@@ -47,26 +60,7 @@ const DeadBlogStandfirst: React.FC<Props> = ({ item }) => {
 	return (
 		<DefaultStandfirst
 			item={item}
-			css={css(
-				defaultStyles(format),
-				css`
-					${headline.xxxsmall()};
-					margin-bottom: 0;
-					padding-bottom: ${remSpace[3]};
-
-					p {
-						margin: 0;
-						padding: 0.75rem 0;
-
-						${darkModeCss`color: ${neutral[93]};`}
-					}
-
-					ul {
-						margin-bottom: 0;
-					}
-				`,
-				deadblogStyles(format),
-			)}
+			css={css(defaultStyles(format), deadblogStyles(format))}
 		/>
 	);
 };

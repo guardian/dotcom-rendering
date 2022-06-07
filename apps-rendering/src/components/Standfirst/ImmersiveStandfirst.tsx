@@ -4,6 +4,11 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
+const immersiveStyles = css`
+	${headline.xsmall({ fontWeight: 'light' })}
+	margin-top: ${remSpace[3]};
+`;
+
 interface Props {
 	item: Item;
 }
@@ -11,13 +16,7 @@ interface Props {
 const ImmersiveStandfirst: React.FC<Props> = ({ item }) => (
 	<DefaultStandfirst
 		item={item}
-		css={css(
-			defaultStyles(getFormat(item)),
-			css`
-				${headline.xsmall({ fontWeight: 'light' })}
-				margin-top: ${remSpace[3]};
-			`,
-		)}
+		css={css(defaultStyles(getFormat(item)), immersiveStyles)}
 	/>
 );
 

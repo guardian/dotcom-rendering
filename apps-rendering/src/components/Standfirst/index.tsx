@@ -10,6 +10,7 @@ import ImmersiveStandfirst from './ImmersiveStandfirst';
 import LabsStandfirst from './LabsStandfirst';
 import LiveBlogStandfirst from './LiveBlogStandfirst';
 import MediaStandfirst from './MediaStandfirst';
+import ReviewStandfirst from './ReviewStandfirst';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
 // ----- Component ----- //
@@ -46,28 +47,12 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
-			return (
-				<DefaultStandfirst
-					item={item}
-					css={css(
-						defaultStyles(format),
-						css`
-							${headline.xxsmall({ fontWeight: 'light' })}
-						`,
-					)}
-				/>
-			);
+			return <ReviewStandfirst item={item} />;
 		default:
 			return (
 				<DefaultStandfirst
 					item={item}
-					css={css(
-						defaultStyles(format),
-						css`
-							${headline.xxxsmall({ fontWeight: 'bold' })}
-							padding: 0;
-						`,
-					)}
+					css={css(defaultStyles(format))}
 				/>
 			);
 	}

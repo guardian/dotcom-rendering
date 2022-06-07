@@ -7,7 +7,7 @@ import {
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
+import { headline, remSpace } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import { standfirstBackgroundColour } from 'editorialStyles';
 import type { Item } from 'item';
@@ -32,6 +32,8 @@ const darkStyles = (format: ArticleFormat): SerializedStyles => darkModeCss`
 `;
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
+	${headline.xxxsmall({ fontWeight: 'bold' })}
+	padding: 0;
 	margin-bottom: ${remSpace[3]};
 	color: ${text.standfirst(format)};
 
