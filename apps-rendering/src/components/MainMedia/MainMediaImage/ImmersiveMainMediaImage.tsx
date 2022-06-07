@@ -10,14 +10,14 @@ import { Caption } from './MainMediaImage.defaults';
 
 const captionId = 'header-image-caption';
 
-const immersiveImgStyles = css`
+const imgStyles = css`
 	display: block;
 	height: 80vh;
 	object-fit: cover;
 	width: 100vw;
 `;
 
-const immersiveStyles = css`
+const styles = css`
 	margin: 0;
 	position: absolute;
 	left: 0;
@@ -37,11 +37,11 @@ interface Props {
 // NOTE: This component isn't currently used - this file exists to preserve
 // immersive styling and sizes so we don't lose them in the big MainMedia refactor.
 const ImmersiveMainMediaImage: FC<Props> = ({ className, image, format }) => (
-	<figure css={[immersiveStyles, className]} aria-labelledby={captionId}>
+	<figure css={[styles, className]} aria-labelledby={captionId}>
 		<Img
 			image={image}
 			sizes={getSizes(image)}
-			className={some(immersiveImgStyles)}
+			className={some(imgStyles)}
 			format={format}
 			supportsDarkMode
 			lightbox={some({

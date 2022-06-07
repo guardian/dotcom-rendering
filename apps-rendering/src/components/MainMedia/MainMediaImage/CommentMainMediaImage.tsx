@@ -9,7 +9,7 @@ import DefaultMainMediaImage, {
 	defaultSizes,
 } from './MainMediaImage.defaults';
 
-const commentStyles = css`
+const styles = css`
 	margin: 0 0 ${remSpace[5]} 0;
 	position: relative;
 
@@ -30,7 +30,7 @@ const CommentMainMediaImage: FC<Props> = ({ image, format }) => (
 		image={image}
 		sizes={defaultSizes}
 		format={format}
-		css={css(commentStyles)}
+		css={styles}
 		imgCss={defaultImgCss(image)}
 	/>
 );

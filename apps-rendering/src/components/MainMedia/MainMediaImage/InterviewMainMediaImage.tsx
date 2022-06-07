@@ -9,7 +9,7 @@ import DefaultMainMediaImage, {
 	defaultSizes,
 } from './MainMediaImage.defaults';
 
-const interviewStyles = css`
+const styles = css`
 	position: relative;
 	margin: 0;
 	${from.wide} {
@@ -29,7 +29,7 @@ const InterviewMainMediaImage: FC<Props> = ({ image, format }) => (
 		image={image}
 		sizes={defaultSizes}
 		format={format}
-		css={css(interviewStyles)}
+		css={styles}
 		imgCss={defaultImgCss(image)}
 	/>
 );

@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, remSpace } from '@guardian/source-foundations';
-import { some } from '@guardian/types';
+import { none } from '@guardian/types';
 import type { Image } from 'image';
 import type { FC } from 'react';
 import DefaultMainMediaImage from './MainMediaImage.defaults';
 
-const blogStyles = css`
+const styles = css`
 	margin-bottom: ${remSpace[4]};
 	position: relative;
 
@@ -16,7 +16,7 @@ const blogStyles = css`
 	}
 `;
 
-const blogSizes: Sizes = {
+const sizes: Sizes = {
 	mediaQueries: [{ breakpoint: 'tablet', size: '700px' }],
 	default: '100vw',
 };
@@ -29,10 +29,10 @@ interface Props {
 const BlogMainMediaImage: FC<Props> = ({ image, format }) => (
 	<DefaultMainMediaImage
 		image={image}
-		sizes={blogSizes}
+		sizes={sizes}
 		format={format}
-		css={css(blogStyles)}
-		imgCss={some(css())}
+		css={styles}
+		imgCss={none}
 	/>
 );
 
