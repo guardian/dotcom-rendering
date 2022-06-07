@@ -84,15 +84,13 @@ const Tags: FC<Props> = ({ tags, format }) => (
 					tag.type !== TagType.CAMPAIGN &&
 					tag.type !== TagType.TRACKING,
 			)
-			.map((tag, index) => {
-				return (
-					<li key={index} css={tagStyles}>
-						<a href={tag.webUrl} css={anchorStyles(format)}>
-							{tag.webTitle}
-						</a>
-					</li>
-				);
-			})}
+			.map((tag, index) => (
+				<li key={index} css={tagStyles}>
+					<a href={tag.webUrl} css={anchorStyles(format)}>
+						{tag.webTitle}
+					</a>
+				</li>
+			))}
 	</ul>
 );
 
