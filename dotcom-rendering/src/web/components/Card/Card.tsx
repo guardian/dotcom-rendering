@@ -155,7 +155,7 @@ export const Card = ({
 		showAge,
 	});
 
-	if (snapData !== undefined) {
+	if (snapData?.embedHtml) {
 		return <Snap snapData={snapData} />;
 	}
 
