@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { ArticleFormat } from '@guardian/libs';
 import { withKnobs } from '@storybook/addon-knobs';
 import Tags from './';
@@ -9,6 +10,7 @@ import Tags from './';
 const tag = {
 	webTitle: 'Tag title',
 	webUrl: 'https://mapi.co.uk/tag',
+	type: TagType.KEYWORD,
 };
 
 // ----- Stories ----- //
