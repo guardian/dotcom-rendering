@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { headline } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import DeadBlogStandfirst from './DeadBlogStandfirst';
@@ -36,12 +35,10 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 			return <LiveBlogStandfirst item={item} />;
 		case ArticleDesign.DeadBlog:
 			return <DeadBlogStandfirst item={item} />;
-
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return <MediaStandfirst item={item} />;
-
 		case ArticleDesign.Review:
 		case ArticleDesign.Feature:
 		case ArticleDesign.Editorial:
