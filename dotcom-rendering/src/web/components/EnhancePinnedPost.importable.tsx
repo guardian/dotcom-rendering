@@ -91,6 +91,8 @@ export const EnhancePinnedPost = () => {
 	useEffect(() => {
 		if (!pinnedPost) return;
 
+		checkContentHeight();
+
 		const observer = new MutationObserver(checkContentHeight);
 		const config = { childList: true };
 

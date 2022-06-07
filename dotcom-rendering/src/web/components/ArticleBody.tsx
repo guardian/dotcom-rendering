@@ -30,6 +30,7 @@ type Props = {
 	isSensitive: boolean;
 	isDev: boolean;
 	onFirstPage?: boolean;
+	abTests?: ServerSideTests;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -110,6 +111,7 @@ export const ArticleBody = ({
 	isSensitive,
 	isDev,
 	onFirstPage,
+	abTests,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -191,6 +193,7 @@ export const ArticleBody = ({
 				isDev={isDev}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
+				abTests={abTests}
 			/>
 		</div>
 	);

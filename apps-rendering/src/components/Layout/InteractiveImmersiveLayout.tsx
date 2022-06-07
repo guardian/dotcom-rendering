@@ -59,7 +59,7 @@ interface Props {
 	children: ReactNode[];
 }
 
-const InteractiveImmersive: FC<Props> = ({ item, children }) => {
+const InteractiveImmersiveLayout: FC<Props> = ({ item, children }) => {
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (
 		<div css={articleWidthStyles}>
@@ -103,4 +103,4 @@ const InteractiveImmersive: FC<Props> = ({ item, children }) => {
 
 // ----- Exports ----- //
 
-export default InteractiveImmersive;
+export default InteractiveImmersiveLayout;

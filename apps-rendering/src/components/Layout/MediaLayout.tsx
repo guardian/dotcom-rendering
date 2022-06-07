@@ -37,7 +37,7 @@ interface Props {
 	children: ReactNode[];
 }
 
-const Media: FC<Props> = ({ item, children }) => (
+const MediaLayout: FC<Props> = ({ item, children }) => (
 	<main css={[Styles]}>
 		<article css={BorderStyles}>
 			<header>
@@ -80,4 +80,4 @@ const Media: FC<Props> = ({ item, children }) => (
 
 // ----- Exports ----- //
 
-export default Media;
+export default MediaLayout;

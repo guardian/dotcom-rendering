@@ -4,6 +4,7 @@ import { StrictMode } from 'react';
 import { FrontLayout } from '../layouts/FrontLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { CoreVitals } from './CoreVitals.importable';
+import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { SkipTo } from './SkipTo';
@@ -47,6 +48,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<CoreVitals />
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<FetchCommentCounts repeat={true} />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>

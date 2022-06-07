@@ -51,11 +51,11 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						imageSize="large"
 						mediaType={primary.mediaType}
 						mediaDuration={primary.mediaDuration}
-						commentCount={primary.commentCount}
 						starRating={primary.starRating}
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
 						dataLinkName={primary.dataLinkName}
+						discussionId={primary.discussionId}
 					/>
 				</LI>
 				<LI
@@ -87,11 +87,11 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						imageUrl={secondary.image}
 						mediaType={secondary.mediaType}
 						mediaDuration={secondary.mediaDuration}
-						commentCount={secondary.commentCount}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
 						dataLinkName={secondary.dataLinkName}
+						discussionId={secondary.discussionId}
 					/>
 				</LI>
 			</UL>
@@ -114,7 +114,11 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										showAge={showAge}
 										linkTo={card.url}
 										format={card.format}
-										trailText={card.trailText}
+										trailText={
+											card.supportingContent
+												? undefined
+												: card.trailText
+										}
 										headlineText={card.headline}
 										headlineSize="medium"
 										byline={card.byline}
@@ -138,7 +142,6 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										imageUrl={card.image}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
 										supportingContent={
@@ -146,6 +149,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										}
 										imagePositionOnMobile="none"
 										dataLinkName={card.dataLinkName}
+										discussionId={card.discussionId}
 									/>
 								</LI>
 							);
@@ -195,10 +199,10 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										showClock={false}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
 										dataLinkName={card.dataLinkName}
+										discussionId={card.discussionId}
 									/>
 								</LI>
 							);

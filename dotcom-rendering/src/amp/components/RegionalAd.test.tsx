@@ -338,7 +338,7 @@ describe('RegionalAd', () => {
 		expect(intRtcAttribute.vendors).toEqual({});
 	});
 
-	it('with ab test running and in relevant yield variant, rtc-config contains permutive and relevant yield URLs when `usePermutive` and `usePrebid` flags are set to true', () => {
+	it.skip('with ab test running and in relevant yield variant, rtc-config contains permutive and relevant yield URLs when `usePermutive` and `usePrebid` flags are set to true', () => {
 		const { container } = render(
 			<ContentABTestProvider
 				pageId="food/2022/feb/15/air-fryers-miraculous-kitchen-must-have-or-just-a-load-of-hot-air"
