@@ -71,12 +71,14 @@ const showcaseStyles = css`
 	padding-bottom: ${remSpace[6]};
 `;
 
-const commentStyles = (hasImage: boolean): SerializedStyles => css`
-	padding-right: ${hasImage ? '6.5625rem' : 0};
-`;
-
 const avatarWrapperStyles = css`
 	margin-top: -16px;
+`;
+
+const addressStyles = css`
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: 50%;
 `;
 
 // ----- Byline Component Styles ----- //
@@ -178,7 +180,6 @@ const bylineSecondaryStyles = (format: ArticleFormat): SerializedStyles => {
 const getBylineStyles = (
 	format: ArticleFormat,
 	iconColor: string,
-	hasImage: boolean,
 	hasAvatar: boolean,
 ): SerializedStyles => {
 	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
@@ -189,7 +190,7 @@ const getBylineStyles = (
 		return css(styles(iconColor, hasAvatar), interviewStyles);
 	}
 	if (format.design === ArticleDesign.Comment) {
-		return css(styles(iconColor, hasAvatar), commentStyles(hasImage));
+		return css(styles(iconColor, hasAvatar));
 	}
 	if (format.display === ArticleDisplay.Showcase) {
 		return css(styles(iconColor, hasAvatar), showcaseStyles);
@@ -268,10 +269,8 @@ const Byline: FC<Props> = ({ item }) => {
 		contributor.value.image.kind === OptionKind.Some;
 
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div
-			css={getBylineStyles(format, iconColor, hasImage, hasAvatar(item))}
-		>
-			<address>{renderText(byline, format)}</address>
+		<div css={getBylineStyles(format, iconColor, hasAvatar(item))}>
+			<address css={addressStyles}>{renderText(byline, format)}</address>
 			{showShareIcon && <ShareIcon />}
 			{hasAvatar(item) && (
 				<div css={avatarWrapperStyles}>
