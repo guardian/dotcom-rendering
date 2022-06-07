@@ -3,6 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
+import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
@@ -69,6 +70,7 @@ interface Props {
 	tags: Array<{
 		webUrl: string;
 		webTitle: string;
+		type: TagType;
 	}>;
 	background?: string;
 	format: ArticleFormat;
@@ -76,15 +78,19 @@ interface Props {
 
 const Tags: FC<Props> = ({ tags, format }) => (
 	<ul css={styles(format)} role="list">
-		{tags.map((tag, index) => {
-			return (
+		{tags
+			.filter(
+				(tag) =>
+					tag.type !== TagType.CAMPAIGN &&
+					tag.type !== TagType.TRACKING,
+			)
+			.map((tag, index) => (
 				<li key={index} css={tagStyles}>
 					<a href={tag.webUrl} css={anchorStyles(format)}>
 						{tag.webTitle}
 					</a>
 				</li>
-			);
-		})}
+			))}
 	</ul>
 );
 
