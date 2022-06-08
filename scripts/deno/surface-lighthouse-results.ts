@@ -182,6 +182,7 @@ try {
 		} Lighthouse report comment`,
 	);
 	console.log('See:', data.html_url);
+	Deno.exit();
 } catch (error: unknown) {
 	if (!(error instanceof Error)) {
 		console.error('Unknown error:', String(error));

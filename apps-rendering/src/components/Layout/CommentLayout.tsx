@@ -16,6 +16,7 @@ import Cutout from 'components/Cutout';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/Logo';
+import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
@@ -23,7 +24,6 @@ import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type { Comment as CommentItem, Editorial, Letter } from 'item';
-import MainMedia from 'mainMedia';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,

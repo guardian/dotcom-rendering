@@ -16,10 +16,9 @@ import {
 	neutral,
 	remSpace,
 } from '@guardian/source-foundations';
-import { OptionKind } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { index, maybeRender } from 'lib';
+import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from '../avatar';
@@ -71,19 +70,19 @@ const showcaseStyles = css`
 	padding-bottom: ${remSpace[6]};
 `;
 
-const commentStyles = (hasImage: boolean): SerializedStyles => css`
-	padding-right: ${hasImage ? '6.5625rem' : 0};
+const avatarWrapperStyles = css`
+	margin-top: -16px;
 `;
 
-const avatarWrapperStyles = css`
-	position: absolute;
-	bottom: 0;
-	right: 0;
+const addressStyles = css`
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: 50%;
 `;
 
 // ----- Byline Component Styles ----- //
 
-const styles = (iconColor: string): SerializedStyles => {
+const styles = (iconColor: string, hasAvatar: boolean): SerializedStyles => {
 	return css`
 		position: relative;
 		display: flex;
@@ -105,12 +104,12 @@ const styles = (iconColor: string): SerializedStyles => {
 		}
 		min-height: ${remSpace[12]};
 
-		padding-bottom: ${remSpace[4]};
+		${!hasAvatar && `padding-bottom: ${remSpace[4]};`}
 		margin: 0;
 
 		${from.tablet} {
 			min-height: ${remSpace[9]};
-			padding-bottom: ${remSpace[9]};
+			${!hasAvatar && `padding-bottom: ${remSpace[9]};`}
 		}
 	`;
 };
@@ -180,29 +179,29 @@ const bylineSecondaryStyles = (format: ArticleFormat): SerializedStyles => {
 const getBylineStyles = (
 	format: ArticleFormat,
 	iconColor: string,
-	hasImage: boolean,
+	hasAvatar: boolean,
 ): SerializedStyles => {
 	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
 	if (format.display === ArticleDisplay.Immersive) {
-		return css(styles(iconColor), immersiveStyles);
+		return css(styles(iconColor, hasAvatar), immersiveStyles);
 	}
 	if (format.design === ArticleDesign.Interview) {
-		return css(styles(iconColor), interviewStyles);
+		return css(styles(iconColor, hasAvatar), interviewStyles);
 	}
 	if (format.design === ArticleDesign.Comment) {
-		return css(styles(iconColor), commentStyles(hasImage));
+		return css(styles(iconColor, hasAvatar));
 	}
 	if (format.display === ArticleDisplay.Showcase) {
-		return css(styles(iconColor), showcaseStyles);
+		return css(styles(iconColor, hasAvatar), showcaseStyles);
 	}
 	if (
 		format.design === ArticleDesign.Gallery ||
 		format.design === ArticleDesign.Audio ||
 		format.design === ArticleDesign.Video
 	) {
-		return css(styles(iconColor), galleryStyles);
+		return css(styles(iconColor, hasAvatar), galleryStyles);
 	}
-	return styles(iconColor);
+	return styles(iconColor, hasAvatar);
 };
 
 // ----- Component ----- //
@@ -239,9 +238,10 @@ const hasShareIcon = (format: ArticleFormat): boolean =>
 		format.design === ArticleDesign.Comment
 	);
 
-const hasAvatar = (item: Item): boolean => {
+const hasAvatar = (format: Item): boolean => {
 	return (
-		item.design === ArticleDesign.Comment && item.contributors.length > 0
+		format.design === ArticleDesign.Comment &&
+		format.contributors.length > 0
 	);
 };
 const ignoreIconColour = (format: ArticleFormat): boolean =>
@@ -261,15 +261,10 @@ const Byline: FC<Props> = ({ item }) => {
 
 	const iconColor = ignoreIconColour(format) ? neutral[100] : kickerColor;
 	const showShareIcon = hasShareIcon(format);
-	const contributor = index(0)(item.contributors);
-
-	const hasImage =
-		contributor.kind === OptionKind.Some &&
-		contributor.value.image.kind === OptionKind.Some;
 
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div css={getBylineStyles(format, iconColor, hasImage)}>
-			<address>{renderText(byline, format)}</address>
+		<div css={getBylineStyles(format, iconColor, hasAvatar(item))}>
+			<address css={addressStyles}>{renderText(byline, format)}</address>
 			{showShareIcon && <ShareIcon />}
 			{hasAvatar(item) && (
 				<div css={avatarWrapperStyles}>
