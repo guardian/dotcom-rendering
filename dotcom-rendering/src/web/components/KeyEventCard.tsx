@@ -118,7 +118,7 @@ export const KeyEventCard = ({
 				priority="secondary"
 				css={[linkStyles(palette), isSummary && summaryStyles(palette)]}
 				href={url}
-				data-link-name={`key event card ${cardPosition}`}
+				data-link-name={`key event card | ${cardPosition}`}
 			>
 				<time
 					dateTime={date.toISOString()}

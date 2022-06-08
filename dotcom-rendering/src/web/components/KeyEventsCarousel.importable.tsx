@@ -129,7 +129,7 @@ export const KeyEventsCarousel = ({
 						!shortCarousel && marginBottomStyles,
 					]}
 				>
-					{filteredKeyEvents.map((keyEvent, i) => {
+					{filteredKeyEvents.map((keyEvent, index) => {
 						return (
 							<KeyEventCard
 								format={format}
@@ -140,7 +140,7 @@ export const KeyEventsCarousel = ({
 								}
 								isSummary={keyEvent.attributes.summary}
 								title={keyEvent.title}
-								cardPosition={`${i} / ${carouselLength}`}
+								cardPosition={`${index} of ${carouselLength}`}
 							/>
 						);
 					})}
