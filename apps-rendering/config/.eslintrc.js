@@ -97,7 +97,7 @@ module.exports = {
 		// The CSS `list-style: none` causes accessibility issues in Safari when applied to unordered lists (<ul>).
 		// Adding the `role="list"` attribute to the <ul> tag fixes the issue in Safari, but triggers
 		// the `no-redundant-roles` linting error. The configuration below prevents the error by telling
-		// the linter that `list` is allowed ARIA role for the <ul> tag.
+		// the linter that `list` is an allowed ARIA role for the <ul> tag.
 		'jsx-a11y/no-redundant-roles': [
 			'error',
 			{
