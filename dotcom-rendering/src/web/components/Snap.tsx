@@ -6,11 +6,11 @@ const snapStyles = css`
 `;
 
 type Props = {
-	snapData?: DCRSnapType;
+	snapData: DCRSnapType;
 };
 
 export const Snap = ({ snapData }: Props) => {
-	if (snapData?.embedHtml === undefined) {
+	if (snapData.embedHtml === undefined) {
 		return <></>;
 	}
 
