@@ -11,6 +11,7 @@ interface Props {
 	isSummary: boolean;
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
+	cardPosition?: string;
 }
 
 const linkStyles = (palette: Palette) => css`
@@ -106,6 +107,7 @@ export const KeyEventCard = ({
 	title,
 	filterKeyEvents,
 	format,
+	cardPosition,
 }: Props) => {
 	const palette = decidePalette(format);
 	const url = `?filterKeyEvents=${filterKeyEvents}&page=with:block-${id}#block-${id}`;
@@ -116,7 +118,7 @@ export const KeyEventCard = ({
 				priority="secondary"
 				css={[linkStyles(palette), isSummary && summaryStyles(palette)]}
 				href={url}
-				data-link-name="key event card"
+				data-link-name={`key event card | ${cardPosition}`}
 			>
 				<time
 					dateTime={date.toISOString()}
