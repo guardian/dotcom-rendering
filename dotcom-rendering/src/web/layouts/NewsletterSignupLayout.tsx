@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	brand,
 	brandBackground,
 	brandBorder,
 	brandLine,
