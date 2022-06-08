@@ -221,7 +221,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 			<main>
 				<ContainerLayout
-					backgroundColour={brand[400]}
+					innerBackgroundColour={brandBackground.primary}
 					leftContent={
 						<div css={leftColWrapperStyle}>
 							<SvgGuardianLogo
