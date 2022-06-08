@@ -7,7 +7,7 @@
 For more information on how images work in DCR see [this excellent document](https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/docs/architecture/027-pictures.md). The changes discussed here build upon that work but, now that DCR is capable of signing urls, it refactors the code to move that step away from Frontend and into DCR.
 
 The image urls used at the Guardian are generated using the [fastly image optimiser [FIO]](https://developer.fastly.com/reference/io/). This service allows us to specify the image widths we want along with other query params affecting the quality of the resulting image.
-For a request to this servive to be valid it needs to be signed and to date that signing process has happened in Frontend. This architectural change moves that into DCR. This was made possible by [this PR](https://github.com/guardian/dotcom-rendering/issues/4752).
+For a request to this service to be valid it needs to be signed. To date, that signing process has happened in Frontend. This architectural change moves signing into DCR. This was made possible by [PR #4752](https://github.com/guardian/dotcom-rendering/issues/4752).
 
 ## Decision
 
