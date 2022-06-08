@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { remSpace, text, textSans } from '@guardian/source-foundations';
+import { remSpace, space, text, textSans } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
 import type { EmailSignup } from 'embed';
 import { maybeRender } from 'lib';
@@ -26,19 +26,20 @@ const styles = css`
 const captionStyles = css`
 	${textSans.xsmall()}
 	color: ${text.supporting};
+	padding-bottom: ${space[1]}px;
 `;
 
 const EmailSignupEmbed: FC<Props> = ({ embed }) => (
 	<figure css={styles}>
+		{maybeRender(embed.caption, (caption) => (
+			<figcaption css={captionStyles}>{caption}</figcaption>
+		))}
 		<iframe
 			src={embed.src}
 			className="js-email-signup"
 			height="60"
 			title={withDefault('Email newsletter signup embed')(embed.alt)}
 		></iframe>
-		{maybeRender(embed.caption, (caption) => (
-			<figcaption css={captionStyles}>{caption}</figcaption>
-		))}
 	</figure>
 );
 
