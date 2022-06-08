@@ -13,6 +13,7 @@ import Body from 'components/ArticleBody';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/LabsLogo';
+import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
@@ -20,7 +21,6 @@ import Standfirst from 'components/Standfirst';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import { pipe } from 'lib';
-import MainMedia from 'mainMedia';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,

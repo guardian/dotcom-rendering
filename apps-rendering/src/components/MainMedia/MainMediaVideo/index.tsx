@@ -59,7 +59,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const HeaderVideo: FC<Props> = ({ video, format }) => (
+const MainMediaVideo: FC<Props> = ({ video, format }) => (
 	<div
 		css={styles(format)}
 		data-posterUrl={video.posterUrl}
@@ -70,4 +70,4 @@ const HeaderVideo: FC<Props> = ({ video, format }) => (
 
 // ----- Exports ----- //
 
-export default HeaderVideo;
+export default MainMediaVideo;

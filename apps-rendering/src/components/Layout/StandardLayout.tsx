@@ -21,6 +21,7 @@ import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import ImmersiveCaption from 'components/ImmersiveCaption';
 import Logo from 'components/Logo';
+import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
@@ -34,7 +35,6 @@ import type {
 	Standard as StandardItem,
 } from 'item';
 import { maybeRender, pipe } from 'lib';
-import MainMedia from 'mainMedia';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
