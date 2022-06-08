@@ -253,6 +253,16 @@ export const ImageComponent = ({
 	const fallbackImage =
 		element.media.allImages.sort(descendingByWidth)[0].url;
 
+	function isSupported(imageUrl: string) {
+		const supportedImages = ['jpg', 'jpeg', 'png'];
+		const extension = imageUrl.split('.').pop();
+		return extension && supportedImages.includes(extension);
+	}
+	if (!isSupported(master || fallbackImage)) {
+		// We should only try to render images that are supported by Fastly
+		return null;
+	}
+
 	if (
 		isMainMedia &&
 		format.display === ArticleDisplay.Immersive &&
