@@ -246,14 +246,11 @@ export const ImageComponent = ({
 		(image) => image.fields.isMaster,
 	)?.url;
 
-	if (!master) {
-		// This should be unreachable. Report if it isn't
-		window.guardian.modules.sentry.reportError(
-			new Error(`No master image found`),
-			'image-component',
-		);
-		return <></>;
+	function descendingByWidth(a: Image, b: Image) {
+		return parseInt(b.fields.width) - parseInt(a.fields.width);
 	}
+	const fallbackImage =
+		element.media.allImages.sort(descendingByWidth)[0].url;
 
 	if (
 		isMainMedia &&
@@ -285,7 +282,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master}
+					master={master || fallbackImage}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -316,7 +313,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master}
+					master={master || fallbackImage}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -348,7 +345,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master}
+					master={master || fallbackImage}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
