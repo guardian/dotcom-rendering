@@ -1,30 +1,34 @@
+import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import {
+	brand,
 	brandBackground,
 	brandBorder,
 	brandLine,
+	neutral,
+	space,
+	until,
 } from '@guardian/source-foundations';
-import type { ArticleFormat } from '@guardian/libs';
-
+import { SvgGuardianLogo } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { css } from '@emotion/react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import { SubNav } from '../components/SubNav.importable';
-import { ElementContainer } from '../components/ElementContainer';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
-import { Nav } from '../components/Nav/Nav';
-import { getCurrentPillar } from '../lib/layoutHelpers';
-import { Stuck, BannerWrapper } from './lib/stickiness';
-import { Island } from '../components/Island';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { NewsLetterSignupBanner } from '../components/NewsLetterSignupBanner';
-import { getContributionsServiceUrl } from '../lib/contributions';
-import { ArticleContainer } from '../components/ArticleContainer';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
+import { ArticleContainer } from '../components/ArticleContainer';
 import { ContainerLayout } from '../components/ContainerLayout';
+import { ElementContainer } from '../components/ElementContainer';
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
+import { Nav } from '../components/Nav/Nav';
+import { NewsletterBadge } from '../components/NewslettersBadge';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { SubNav } from '../components/SubNav.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { getCurrentPillar } from '../lib/layoutHelpers';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 // This Layout is not currently in use.
 // It is an outline of a design for articles with the ArticleDesign.NewsletterSignup
@@ -33,6 +37,70 @@ import { decidePalette } from '../lib/decidePalette';
 
 // to use this layout, edit ./dotcom-rendering/src/web/layouts/DecideLayout.tsx
 // to return is on articles with  ArticleDisplay.Standard && ArticleDesign.NewsletterSignup
+
+const mainColWrapperStyle = css`
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	justify-content: flex-end;
+	max-width: 200px;
+
+	${until.wide} {
+		max-width: 160px;
+	}
+
+	${until.leftCol} {
+		justify-content: flex-start;
+		max-width: 200px;
+	}
+
+	${until.desktop} {
+		max-width: 170px;
+	}
+`;
+
+const mainColGuardianLogoContainerStyle = css`
+	svg {
+		display: none;
+
+		${until.leftCol} {
+			width: 65%;
+			display: block;
+		}
+	}
+`;
+
+// the negative bottom values at the two column layout are to
+// align the baseline of the text in the newsletters badge svg
+// with the guardaina logo in the leftCol, rather than aligning
+// the bottom of the SVG frame (design requirement)
+const mainColNewsLettersBadgeContainerStyle = css`
+	svg {
+		width: 100%;
+		position: relative;
+		bottom: -10.75px;
+
+		${until.wide} {
+			bottom: -9.5px;
+		}
+
+		${until.leftCol} {
+			padding-top: ${space[1]}px;
+			bottom: 0;
+		}
+	}
+`;
+
+const leftColWrapperStyle = css`
+	display: flex;
+	justify-content: flex-end;
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[9]}px;
+
+	svg {
+		max-width: 100%;
+	}
+`;
 
 interface Props {
 	CAPIArticle: CAPIArticleType;
@@ -152,7 +220,29 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			)}
 
 			<main>
-				<NewsLetterSignupBanner />
+				<ContainerLayout
+					backgroundColour={brand[400]}
+					leftContent={
+						<div css={leftColWrapperStyle}>
+							<SvgGuardianLogo
+								textColor={neutral[100]}
+								width={200}
+							/>
+						</div>
+					}
+				>
+					<div css={mainColWrapperStyle}>
+						<span css={mainColGuardianLogoContainerStyle}>
+							<SvgGuardianLogo
+								textColor={neutral[100]}
+								width={200}
+							/>
+						</span>
+						<span css={mainColNewsLettersBadgeContainerStyle}>
+							<NewsletterBadge />
+						</span>
+					</div>
+				</ContainerLayout>
 				<ContainerLayout
 					centralBorder="full"
 					sideBorders={true}
