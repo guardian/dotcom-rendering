@@ -35,14 +35,21 @@ const genEnv = async (parameters) => {
 };
 
 const prod = async () => {
-	const params = await getAwsSsmParameters('prod');
-	await genEnv(params);
-	const isValid = await checkEnv();
-	if (!isValid) {
-		warn(
-			'[scripts/dotenv] Could not validate that the .env file was generated correctly',
-		);
-		throw new Error('Could not validate .env file was generated correctly');
+	try {
+		const params = await getAwsSsmParameters('prod');
+		await genEnv(params);
+		const isValid = await checkEnv();
+		if (!isValid) {
+			warn(
+				'[scripts/dotenv] Could not validate that the .env file was generated correctly',
+			);
+			throw new Error(
+				'Could not validate .env file was generated correctly',
+			);
+		}
+	} catch (err) {
+		console.error(err);
+		process.exit(1);
 	}
 };
 
