@@ -1,6 +1,6 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
-import { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
 
@@ -247,7 +247,7 @@ export const getContributionsServiceUrl = (
 ): string => process.env.SDC_URL ?? CAPIArticle.contributionsServiceUrl;
 
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];
-export const getPurchaseInfo = () => {
+export const getPurchaseInfo = (): PurchaseInfo => {
 	const purchaseInfoRaw = getCookie({
 		name: 'GU_CO_COMPLETE',
 		shouldMemoize: true,
@@ -261,7 +261,7 @@ export const getPurchaseInfo = () => {
 
 	try {
 		purchaseInfo = JSON.parse(decodeURIComponent(purchaseInfoRaw));
-	} catch {} // eslint-disable-line no-empty
+	} catch {} // eslint-disable-line no-empty -- silently handle error
 
 	return purchaseInfo;
 };
