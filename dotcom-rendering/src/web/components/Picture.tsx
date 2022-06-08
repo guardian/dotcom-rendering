@@ -183,9 +183,11 @@ function generateSignedUrl({
 
 	const salt = process.env.IMAGE_SALT;
 	if (!salt) {
-		// If no IMAGE_SALT env variable is set then we can't optimise using Fastly so we
-		// render the master image instead
-		return master;
+		// If no IMAGE_SALT env variable is set then something has gone wrong
+		// and we want to know about it
+		throw new Error(
+			'No IMAGE_SALT value found when constructing picture source',
+		);
 	}
 
 	// Construct and sign the url
