@@ -1,9 +1,7 @@
+const fs = require('fs').promises;
 const path = require('path');
 const { CredentialsProviderError } = require('@aws-sdk/property-provider');
-
-console.log(typeof ExpiredTokenException);
-const fs = require('fs').promises;
-const { prompt, log, warn } = require('../env/log');
+const { prompt, warn } = require('../env/log');
 const secrets = require('../secrets');
 const { getAwsSsmParameters } = require('./get-aws-ssm-parameters');
 
@@ -13,83 +11,93 @@ const checkEnv = async () => {
 	try {
 		const env = (await fs.readFile(ENV_PATH)).toString();
 
-		let valid = true;
+		let isValid = true;
 		for (const secret of secrets) {
-			const regex = new RegExp(`^${secret.key.replace('.', '\\.')}=.*`);
-			if (!env.match(regex)) valid = false;
+			const regex = new RegExp(`^${secret.key.replace('.', '\\.')}=.+`);
+			if (!env.match(regex)) isValid = false;
 		}
 
-		return valid;
+		return isValid;
 	} catch (_err) {
 		return false;
 	}
 };
 
-const genEnv = async () => {
-	const env = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
-	const parameters = await getAwsSsmParameters(env);
-
+const genEnv = async (parameters) => {
 	let envString = '';
 	for (const secret of secrets) {
 		envString += `${secret.key}=${parameters[secret.key]}\n`;
 	}
 
 	await fs.writeFile(ENV_PATH, envString);
+
+	prompt('[scripts/dotenv] Generated .env file');
 };
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-(async () => {
+const prod = async () => {
+	const params = await getAwsSsmParameters('prod');
+	await genEnv(params);
+	const isValid = await checkEnv();
+	if (!isValid) {
+		warn(
+			'[scripts/dotenv] Could not validate that the .env file was generated correctly',
+		);
+		throw new Error('Could not validate .env file was generated correctly');
+	}
+};
+
+const dev = async () => {
 	try {
-		const validEnv = await checkEnv();
-		if (!validEnv) {
-			log(
-				'[scripts/dotenv] .env file is missing or out of date, attemting to generate it from AWS parameters...',
-			);
-
-			await genEnv();
-
-			log('[scripts/dotenv] .env file written successfully');
-		} else {
-			log('[scripts/dotenv] valid .env file exists, moving on...');
-		}
+		const params = await getAwsSsmParameters('dev');
+		await genEnv(params);
 	} catch (err) {
-		console.log(err);
-		console.log(typeof err);
 		if (
 			err instanceof CredentialsProviderError ||
 			// eslint-disable-next-line no-underscore-dangle -- '__type' is the only way to identify this exception type
 			err.__type === 'ExpiredTokenException'
 		) {
-			const PROD = process.env.NODE_ENV === 'production';
-			if (PROD) {
-				warn(
-					'[scripts/dotenv] could not generate .env file from AWS Parameter Store. Exiting',
-				);
-				throw err;
-			}
-
 			prompt(
 				'[scripts/dotenv] Could not load AWS credentials to generate .env file',
-				"[scripts/dotenv] This won't stop dotcom-rendering from working, it will just vary from PROD by:",
 			);
 
-			for (const secret of secrets) {
+			// We've failed to generate the .env file - but this is okay for the DEV environment
+			// If we already have an existing valid .env file, simply notify the user their .env was not updated.
+			// If we don't have a valid .env, notify them of the potential missing functionality.
+			const isValid = await checkEnv();
+			if (isValid) {
 				prompt(
-					`[scripts/dotenv]  * ${secret.key}: ${secret.missingMessage}`,
+					'[scripts/dotenv] .env file is valid but has not been updated',
 				);
+			} else {
+				prompt(
+					"[scripts/dotenv] This won't stop dotcom-rendering from working, it will just vary from PROD by:",
+				);
+
+				for (const secret of secrets) {
+					prompt(
+						`[scripts/dotenv]  * ${secret.key}: ${secret.missingMessage}`,
+					);
+				}
+
+				prompt(
+					'',
+					'[scripts/dotenv] To get things working like PROD you can either:',
+					'[scripts/dotenv]  * Get your credentials from Janus',
+					'[scripts/dotenv]  * Ask a local engineer for a copy of the .env file',
+					'[scripts/dotenv] Then try again.',
+				);
+
+				process.exit(0);
 			}
-
-			prompt(
-				'',
-				'[scripts/dotenv] To get things working like PROD you can either:',
-				'[scripts/dotenv]  * Get your credentials from Janus',
-				'[scripts/dotenv]  * Ask a local engineer for a copy of the .env file',
-				'[scripts/dotenv] Then try again.',
-			);
-
-			process.exit(0);
 		} else {
 			throw err;
 		}
 	}
+};
+
+// eslint-disable-next-line @typescript-eslint/no-floating-promises -- Async entrypoint
+(async () => {
+	const PROD = process.env.NODE_ENV === 'production';
+	if (PROD) await prod();
+	else await dev();
 })();
