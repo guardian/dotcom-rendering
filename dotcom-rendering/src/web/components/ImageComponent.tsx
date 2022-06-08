@@ -246,6 +246,7 @@ export const ImageComponent = ({
 		(image) => image.fields.isMaster,
 	)?.url;
 
+	// Legacy images do not have a master so we fallback to the largest available
 	function descendingByWidth(a: Image, b: Image) {
 		return parseInt(b.fields.width) - parseInt(a.fields.width);
 	}
