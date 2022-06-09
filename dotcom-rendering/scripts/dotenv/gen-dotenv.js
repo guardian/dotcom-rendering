@@ -11,13 +11,12 @@ const checkEnv = async () => {
 	try {
 		const env = (await fs.readFile(ENV_PATH)).toString();
 
-		let isValid = true;
 		for (const secret of secrets) {
 			const regex = new RegExp(`^${secret.key.replace('.', '\\.')}=.+`);
-			if (!env.match(regex)) isValid = false;
+			if (!env.match(regex)) return false;
 		}
 
-		return isValid;
+		return true;
 	} catch (_err) {
 		return false;
 	}
