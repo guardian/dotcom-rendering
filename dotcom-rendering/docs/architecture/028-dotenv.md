@@ -66,7 +66,7 @@ This has considerable security implementations as this variable would then be av
 
 ### Server Only
 
-DCR currently only supports `.env` variables being used on the _server_, but not the client.
+DCR currently only supports `.env` variables being used on the _server_, not the client.
 
 This limitation exists as the to maintain common & best practice within the organisation, we want to ensure that a re-deploy of the application would involve fetching a fresh environment variable. This means we cannot [inject environment variables through webpack](https://www.npmjs.com/package/dotenv-webpack) (which is done at build time) - and instead we load the dotenv directly when running the server bundle.
 
