@@ -1,7 +1,7 @@
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { Article } from '../../fixtures/generated/articles/Article';
 import { NumberedList } from '../../fixtures/generated/articles/NumberedList';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 
 describe('Enhance Numbered Lists', () => {
@@ -28,7 +28,7 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, Article.format)).toEqual(
+		expect(enhanceNumberedLists(input, ExampleArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
