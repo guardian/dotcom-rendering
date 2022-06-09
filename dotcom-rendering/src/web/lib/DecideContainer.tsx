@@ -1,6 +1,7 @@
 import { DynamicFast } from '../components/DynamicFast';
 import { DynamicSlow } from '../components/DynamicSlow';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
+import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 
 type Props = {
@@ -47,6 +48,16 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+				/>
+			);
+		case 'fixed/small/slow-III':
+			return (
+				<FixedSmallSlowIII
+					collectionId={collectionId}
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					hasMore={hasMore}
 				/>
 			);
 		default:
