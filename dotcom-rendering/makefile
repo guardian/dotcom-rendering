@@ -30,17 +30,14 @@ deploy:
 
 # prod #########################################
 
-build: export NODE_ENV=production
 build: clean-dist install
 	$(call log, "building production bundles")
-	@webpack --config ./scripts/webpack/webpack.config.js --progress
+	@export NODE_ENV=production @webpack --config ./scripts/webpack/webpack.config.js --progress
 
-build-ci: export NODE_ENV=production
 build-ci: clean-dist install
 	$(call log, "building production bundles")
-	@SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+	@NODE_ENV=production @SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
 
-start-ci: export NODE_ENV=production
 start-ci: install gen-dotenv
 	$(call log, "starting PROD server...")
 	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
