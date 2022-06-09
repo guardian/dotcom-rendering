@@ -53,11 +53,9 @@ export const DecideContainer = ({
 		case 'fixed/small/slow-III':
 			return (
 				<FixedSmallSlowIII
-					collectionId={collectionId}
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					hasMore={hasMore}
 				/>
 			);
 		default:
