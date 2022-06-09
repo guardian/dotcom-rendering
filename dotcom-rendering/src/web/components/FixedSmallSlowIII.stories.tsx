@@ -34,24 +34,3 @@ export const Default = () => (
 	</ContainerLayout>
 );
 Default.story = { name: 'FixedSmallSlowIII' };
-
-export const Mobile = () => (
-	<ContainerLayout
-		title="FixedSmallSlowIII"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
-		<FixedSmallSlowIII trails={trails} showAge={true} />
-	</ContainerLayout>
-);
-Mobile.story = {
-	name: 'with mobile viewport',
-	parameters: {
-		viewport: { defaultViewport: 'mobileMedium' },
-		chromatic: {
-			viewports: [breakpoints.mobile],
-		},
-	},
-};
