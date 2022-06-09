@@ -1,4 +1,4 @@
-import { Article } from '../../fixtures/generated/articles/Article';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { extract } from './extract-ga';
 
 const pillar: LegacyPillar = 'news';
@@ -22,9 +22,9 @@ const base = {
 };
 
 const CAPIArticle = {
-	...Article,
+	...ExampleArticle,
 	tags: [
-		...Article.tags,
+		...ExampleArticle.tags,
 		{
 			id: 'testseries',
 			type: 'Series',

@@ -1,5 +1,5 @@
 import type express from 'express';
-import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
+import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { findBySubsection } from '../../model/article-sections';
 import { extractNAV } from '../../model/extract-nav';

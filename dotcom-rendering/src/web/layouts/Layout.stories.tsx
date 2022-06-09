@@ -7,7 +7,6 @@ import {
 import { storiesOf } from '@storybook/react';
 import { useEffect } from 'react';
 import { Analysis } from '../../../fixtures/generated/articles/Analysis';
-import { Article } from '../../../fixtures/generated/articles/Article';
 import { Comment } from '../../../fixtures/generated/articles/Comment';
 import { Editorial } from '../../../fixtures/generated/articles/Editorial';
 import { Feature } from '../../../fixtures/generated/articles/Feature';
@@ -23,6 +22,7 @@ import { Quiz } from '../../../fixtures/generated/articles/Quiz';
 import { Recipe } from '../../../fixtures/generated/articles/Recipe';
 import { Review } from '../../../fixtures/generated/articles/Review';
 import { SpecialReport } from '../../../fixtures/generated/articles/SpecialReport';
+import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { extractNAV } from '../../model/extract-nav';
 import { embedIframe } from '../browser/embedIframe/embedIframe';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
@@ -32,7 +32,7 @@ import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { DecideLayout } from './DecideLayout';
 
 const Fixtures: { [key: string]: CAPIArticleType } = {
-	Article,
+	Standard,
 	PhotoEssay,
 	Review,
 	PrintShop,
