@@ -3,19 +3,19 @@ import { extract } from './extract-ga';
 
 const pillar: LegacyPillar = 'news';
 const base = {
-	authorIds: 'profile/jennifer-rankin',
+	authorIds: 'profile/glenn-greenwald',
 	beaconUrl: '//phar.gu-web.net',
-	commissioningDesks: 'ukenvironment',
-	contentId:
-		'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+	commissioningDesks: '',
+	contentId: 'world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	contentType: 'article',
 	edition: 'uk',
 	isHosted: 'false',
 	keywordIds:
-		'environment/climate-crisis,environment/environment,science/scienceofclimatechange,science/science,world/eu,world/europe-news,world/world,environment/flooding,world/wildfires,world/natural-disasters',
+		'us-news/us-national-security,us-news/us-politics,world/privacy,business/telecoms,technology/telecoms,business/verizon-communications,technology/data-protection,technology/technology,business/business,world/world,us-news/us-news,us-news/nsa,us-news/the-nsa-files',
 	pillar,
-	section: 'environment',
-	seriesId: 'testseries',
+	section: 'us-news',
+	seriesId:
+		'commentisfree/series/glenn-greenwald-security-liberty,testseries',
 	toneIds: 'tone/news',
 	webTitle:
 		"Ticket touts face unlimited fines for using 'bots' to buy in bulk",
