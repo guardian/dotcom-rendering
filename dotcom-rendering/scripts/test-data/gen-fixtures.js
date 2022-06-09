@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-const fetch = require('node-fetch');
-const execa = require('execa');
+
 const fs = require('fs');
 const { resolve } = require('path');
+const execa = require('execa');
+const fetch = require('node-fetch');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
