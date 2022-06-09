@@ -48,9 +48,7 @@ export const submitClickEventTracking = (
 		action: 'CLICK',
 	});
 
-export const withComponentId: (id: string) => OphanComponent = (
-	id: string = '',
-) => ({
+export const withComponentId: (id: string) => OphanComponent = (id = '') => ({
 	componentType: 'SIGN_IN_GATE',
 	id,
 });

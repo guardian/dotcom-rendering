@@ -33,7 +33,7 @@ export const MostViewedRight = ({
 	isAdFreeUser,
 	adBlockerDetected,
 }: Props) => {
-	const endpointUrl: string =
+	const endpointUrl =
 		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
 	const { data, error } = useApi<CAPITrailTabType>(endpointUrl);
 
