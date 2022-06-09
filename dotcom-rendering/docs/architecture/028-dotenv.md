@@ -45,11 +45,20 @@ const secrets = [
 e.g
 
 ```jsx
-<Island>
-	<!-- Bad :((( -->
-	<MyComponent myProp={process.env.MY_VAR} />
-</Island>
-```
+return (
+    <Island>
+	    <!-- Bad :((( -->
+	    <Image imageSalt={process.env.IMAGE_SALT} />
+    </Island>
+)
+
+const url = getSaltedUrl(process.env.IMAGE_SALT)
+return (
+    <Island>
+	    <!-- Good :))) -->
+	    <Image url={url} />
+    </Island>
+)
 
 This has considerable security implementations as this variable would then be available to any consumer of the site.
 
