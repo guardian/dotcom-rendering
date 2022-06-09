@@ -11,49 +11,33 @@
  *    gen-fixtures.ts directly.
  */
 
-export const Comment: CAPIArticleType = {
+export const Video: CAPIArticleType = {
 	slotMachineFlags: '',
-	main: '<figure class="element element-image" data-media-id="90f6640a4b3a916602353d2158a042b6a7e63726"> <img src="https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg" alt="A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’" width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’</span> <span class="element-image__credit">Photograph: Mark Pinder/The Guardian</span> </figcaption> </figure>',
+	main: '<figure class="element element-image" data-media-id="gu-image-410269952"> <img src="http://static.guim.co.uk/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg" alt="Phone records data" width="460" height="276" class="gu-image" /> <figcaption> <span class="element-image__caption">Under the terms of the order, the numbers of both parties on a call are handed over, as is location data and the time and duration of all calls. Photograph: Matt Rourke/AP</span> <span class="element-image__credit">Photograph: Matt Rourke/AP</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/business/austerity',
-			title: 'Austerity',
+			url: '/us-news/us-national-security',
+			title: 'US national security',
 		},
 		{
-			url: '/commentisfree/commentisfree',
-			title: 'Opinion',
+			url: '/commentisfree/series/glenn-greenwald-security-liberty',
+			title: 'Glenn Greenwald on security and liberty',
 		},
 	],
 	commercialProperties: {
 		UK: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
-				},
-				{
 					name: 'edition',
 					value: 'uk',
 				},
 				{
-					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/3gc62',
 				},
 				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
+					name: 'tn',
+					value: ['news'],
 				},
 				{
 					name: 'su',
@@ -64,44 +48,49 @@ export const Comment: CAPIArticleType = {
 					value: 'article',
 				},
 				{
-					name: 'tn',
-					value: ['comment'],
+					name: 'se',
+					value: ['glenn-greenwald-security-liberty'],
 				},
 				{
-					name: 'bl',
-					value: ['commentisfree'],
+					name: 'co',
+					value: ['glenn-greenwald'],
 				},
 				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'url',
+					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				},
+				{
+					name: 'k',
+					value: [
+						'business',
+						'us-national-security',
+						'world',
+						'data-protection',
+						'us-politics',
+						'technology',
+						'privacy',
+						'the-nsa-files',
+						'nsa',
+						'telecoms',
+						'verizon-communications',
+						'us-news',
+					],
 				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
 					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
+					value: 'https://www.theguardian.com/p/3gc62',
 				},
 				{
-					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-				},
-				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
+					name: 'tn',
+					value: ['news'],
 				},
 				{
 					name: 'su',
@@ -112,48 +101,53 @@ export const Comment: CAPIArticleType = {
 					value: 'article',
 				},
 				{
-					name: 'tn',
-					value: ['comment'],
+					name: 'se',
+					value: ['glenn-greenwald-security-liberty'],
 				},
 				{
-					name: 'bl',
-					value: ['commentisfree'],
+					name: 'co',
+					value: ['glenn-greenwald'],
 				},
 				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
+					name: 'url',
+					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				},
+				{
 					name: 'edition',
 					value: 'us',
+				},
+				{
+					name: 'k',
+					value: [
+						'business',
+						'us-national-security',
+						'world',
+						'data-protection',
+						'us-politics',
+						'technology',
+						'privacy',
+						'the-nsa-files',
+						'nsa',
+						'telecoms',
+						'verizon-communications',
+						'us-news',
+					],
 				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
 					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
+					value: 'https://www.theguardian.com/p/3gc62',
 				},
 				{
-					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-				},
-				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
+					name: 'tn',
+					value: ['news'],
 				},
 				{
 					name: 'su',
@@ -164,16 +158,37 @@ export const Comment: CAPIArticleType = {
 					value: 'article',
 				},
 				{
-					name: 'tn',
-					value: ['comment'],
+					name: 'se',
+					value: ['glenn-greenwald-security-liberty'],
 				},
 				{
-					name: 'bl',
-					value: ['commentisfree'],
+					name: 'co',
+					value: ['glenn-greenwald'],
 				},
 				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'url',
+					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				},
+				{
+					name: 'k',
+					value: [
+						'business',
+						'us-national-security',
+						'world',
+						'data-protection',
+						'us-politics',
+						'technology',
+						'privacy',
+						'the-nsa-files',
+						'nsa',
+						'telecoms',
+						'verizon-communications',
+						'us-news',
+					],
 				},
 				{
 					name: 'edition',
@@ -184,28 +199,12 @@ export const Comment: CAPIArticleType = {
 		INT: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
 					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
+					value: 'https://www.theguardian.com/p/3gc62',
 				},
 				{
-					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-				},
-				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
+					name: 'tn',
+					value: ['news'],
 				},
 				{
 					name: 'edition',
@@ -220,49 +219,82 @@ export const Comment: CAPIArticleType = {
 					value: 'article',
 				},
 				{
-					name: 'tn',
-					value: ['comment'],
+					name: 'se',
+					value: ['glenn-greenwald-security-liberty'],
 				},
 				{
-					name: 'bl',
-					value: ['commentisfree'],
+					name: 'co',
+					value: ['glenn-greenwald'],
 				},
 				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'url',
+					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				},
+				{
+					name: 'k',
+					value: [
+						'business',
+						'us-national-security',
+						'world',
+						'data-protection',
+						'us-politics',
+						'technology',
+						'privacy',
+						'the-nsa-files',
+						'nsa',
+						'telecoms',
+						'verizon-communications',
+						'us-news',
+					],
 				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Mon 10 Feb 2020 11.19 GMT',
+		'First published on Thu 6 Jun 2013 11.05 BST',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
 	publication: 'The Guardian',
 	trailText:
-		'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
+		'<p><strong>Exclusive:</strong> Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama administration</p>',
 	subMetaKeywordLinks: [
 		{
-			url: '/business/economics',
-			title: 'Economics',
+			url: '/us-news/us-politics',
+			title: 'US politics',
 		},
 		{
-			url: '/politics/conservatives',
-			title: 'Conservatives',
+			url: '/world/privacy',
+			title: 'Privacy',
 		},
 		{
-			url: '/politics/conservativehome',
-			title: 'ConservativeHome',
+			url: '/business/telecoms',
+			title: 'Telecommunications industry',
 		},
 		{
-			url: '/tone/comment',
-			title: 'comment',
+			url: '/technology/telecoms',
+			title: 'Telecoms',
+		},
+		{
+			url: '/business/verizon-communications',
+			title: 'Verizon Communications',
+		},
+		{
+			url: '/technology/data-protection',
+			title: 'Data protection',
+		},
+		{
+			url: '/tone/news',
+			title: 'news',
 		},
 	],
 	contentType: 'Article',
 	nav: {
-		currentUrl: '/business/economics',
+		currentUrl: '/us-news/us-politics',
 		pillars: [
 			{
 				title: 'News',
@@ -954,115 +986,168 @@ export const Comment: CAPIArticleType = {
 				url: 'https://licensing.theguardian.com/',
 			},
 		],
-		currentNavLinkTitle: 'Economics',
+		currentNavLinkTitle: 'US Politics',
 		currentPillarTitle: 'News',
 		subNavSections: {
-			parent: {
-				title: 'Business',
-				url: '/business',
-				children: [
-					{
-						title: 'Economics',
-						url: '/business/economics',
-					},
-					{
-						title: 'Banking',
-						url: '/business/banking',
-					},
-					{
-						title: 'Money',
-						url: '/money',
-						children: [
-							{
-								title: 'Property',
-								url: '/money/property',
-							},
-							{
-								title: 'Pensions',
-								url: '/money/pensions',
-							},
-							{
-								title: 'Savings',
-								url: '/money/savings',
-							},
-							{
-								title: 'Borrowing',
-								url: '/money/debt',
-							},
-							{
-								title: 'Careers',
-								url: '/money/work-and-careers',
-							},
-						],
-					},
-					{
-						title: 'Markets',
-						url: '/business/stock-markets',
-					},
-					{
-						title: 'Project Syndicate',
-						url: '/business/series/project-syndicate-economists',
-					},
-					{
-						title: 'B2B',
-						url: '/business-to-business',
-					},
-					{
-						title: 'Retail',
-						url: '/business/retail',
-					},
-				],
-			},
 			links: [
 				{
-					title: 'Economics',
-					url: '/business/economics',
+					title: 'US',
+					url: '/us-news',
+					longTitle: 'US news',
 				},
 				{
-					title: 'Banking',
-					url: '/business/banking',
-				},
-				{
-					title: 'Money',
-					url: '/money',
+					title: 'World',
+					url: '/world',
+					longTitle: 'World news',
 					children: [
 						{
-							title: 'Property',
-							url: '/money/property',
+							title: 'Europe',
+							url: '/world/europe-news',
 						},
 						{
-							title: 'Pensions',
-							url: '/money/pensions',
+							title: 'US',
+							url: '/us-news',
+							longTitle: 'US news',
 						},
 						{
-							title: 'Savings',
-							url: '/money/savings',
+							title: 'Americas',
+							url: '/world/americas',
 						},
 						{
-							title: 'Borrowing',
-							url: '/money/debt',
+							title: 'Asia',
+							url: '/world/asia',
 						},
 						{
-							title: 'Careers',
-							url: '/money/work-and-careers',
+							title: 'Australia',
+							url: '/australia-news',
+							longTitle: 'Australia news',
+						},
+						{
+							title: 'Middle East',
+							url: '/world/middleeast',
+						},
+						{
+							title: 'Africa',
+							url: '/world/africa',
+						},
+						{
+							title: 'Inequality',
+							url: '/inequality',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
 						},
 					],
 				},
 				{
-					title: 'Markets',
-					url: '/business/stock-markets',
+					title: 'Environment',
+					url: '/environment',
+					children: [
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Wildlife',
+							url: '/environment/wildlife',
+						},
+						{
+							title: 'Energy',
+							url: '/environment/energy',
+						},
+						{
+							title: 'Pollution',
+							url: '/environment/pollution',
+						},
+						{
+							title: 'Green light',
+							url: '/environment/series/green-light',
+						},
+					],
 				},
 				{
-					title: 'Project Syndicate',
-					url: '/business/series/project-syndicate-economists',
+					title: 'Soccer',
+					url: '/football',
+					children: [
+						{
+							title: 'Live scores',
+							url: '/football/live',
+							longTitle: 'football/live',
+						},
+						{
+							title: 'Tables',
+							url: '/football/tables',
+							longTitle: 'football/tables',
+						},
+						{
+							title: 'Fixtures',
+							url: '/football/fixtures',
+							longTitle: 'football/fixtures',
+						},
+						{
+							title: 'Results',
+							url: '/football/results',
+							longTitle: 'football/results',
+						},
+						{
+							title: 'Competitions',
+							url: '/football/competitions',
+							longTitle: 'football/competitions',
+						},
+						{
+							title: 'Clubs',
+							url: '/football/teams',
+							longTitle: 'football/teams',
+						},
+					],
 				},
 				{
-					title: 'B2B',
-					url: '/business-to-business',
+					title: 'US Politics',
+					url: '/us-news/us-politics',
+					longTitle: 'US politics',
 				},
 				{
-					title: 'Retail',
-					url: '/business/retail',
+					title: 'Business',
+					url: '/business',
+					children: [
+						{
+							title: 'Economics',
+							url: '/business/economics',
+						},
+						{
+							title: 'Sustainable business',
+							url: '/us/sustainable-business',
+						},
+						{
+							title: 'Diversity & equality in business',
+							url: '/business/diversity-and-equality',
+						},
+						{
+							title: 'Small business',
+							url: '/business/us-small-business',
+						},
+						{
+							title: 'Retail',
+							url: '/business/retail',
+						},
+					],
+				},
+				{
+					title: 'Tech',
+					url: '/technology',
+				},
+				{
+					title: 'Science',
+					url: '/science',
+				},
+				{
+					title: 'Newsletters',
+					url: '/email-newsletters?INTCMP=DOTCOM_NAV_NEWSLETTER_US',
+				},
+				{
+					title: 'Fight to vote',
+					url: '/us-news/series/the-fight-to-vote',
 				},
 			],
 		},
@@ -1120,72 +1205,86 @@ export const Comment: CAPIArticleType = {
 		},
 	},
 	author: {
-		byline: 'John Harris',
-		twitterHandle: 'johnharris1969',
+		byline: 'Glenn Greenwald',
 	},
-	designType: 'Comment',
+	designType: 'Article',
 	editionId: 'UK',
 	format: {
-		design: 'CommentDesign',
-		theme: 'OpinionPillar',
+		design: 'ArticleDesign',
+		theme: 'NewsPillar',
 		display: 'StandardDisplay',
 	},
 	standfirst:
-		'<p>In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back</p>',
+		'<strong>Exclusive:</strong> Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama\n<br>\n<br>• \n<a href="http://www.guardian.co.uk/world/interactive/2013/jun/06/verizon-telephone-data-court-order">Read the Verizon court order in full here</a>\n<br>• \n<a href="http://www.guardian.co.uk/world/2013/jun/06/obama-administration-nsa-verizon-records">Obama administration justifies surveillance</a>',
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-		'article:author': 'https://www.theguardian.com/profile/johnharris',
+			'http://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+		'article:author': 'https://www.theguardian.com/profile/glenn-greenwald',
 		'og:image:height': '720',
 		'og:description':
-			'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
+			'Exclusive: Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama administration',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
+			'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&enable=upscale&s=2b724110f381774c116ed9e53f249c01',
 		'al:ios:url':
-			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=applinks',
+			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'Opinion',
-		'article:published_time': '2020-02-10T06:00:27.000Z',
+		'article:section': 'US news',
+		'article:published_time': '2013-06-06T10:05:00.000Z',
 		'og:title':
-			'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
+			'NSA collecting phone records of millions of Verizon customers daily',
 		'fb:app_id': '180444840287',
 		'article:tag':
-			'Austerity,UK news,Economics,Business,Politics,Conservatives,ConservativeHome',
+			'US national security,US politics,Privacy,Telecommunications industry,Telecoms,Verizon Communications,Data protection,Technology,Business,World news,US news,NSA,The NSA files',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-02-10T11:19:50.000Z',
+		'article:modified_time': '2019-05-01T17:16:49.000Z',
 	},
-	sectionUrl: 'business/austerity',
-	pageId: 'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+	sectionUrl: 'us-news/us-national-security',
+	pageId: 'world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	version: 3,
 	tags: [
 		{
-			id: 'commentisfree/commentisfree',
-			type: 'Blog',
-			title: 'Opinion',
-		},
-		{
-			id: 'business/austerity',
+			id: 'us-news/us-national-security',
 			type: 'Keyword',
-			title: 'Austerity',
+			title: 'US national security',
 		},
 		{
-			id: 'tone/comment',
-			type: 'Tone',
-			title: 'Comment',
-		},
-		{
-			id: 'uk/uk',
+			id: 'us-news/us-politics',
 			type: 'Keyword',
-			title: 'UK news',
+			title: 'US politics',
 		},
 		{
-			id: 'business/economics',
+			id: 'world/privacy',
 			type: 'Keyword',
-			title: 'Economics',
+			title: 'Privacy',
+		},
+		{
+			id: 'business/telecoms',
+			type: 'Keyword',
+			title: 'Telecommunications industry',
+		},
+		{
+			id: 'technology/telecoms',
+			type: 'Keyword',
+			title: 'Telecoms',
+		},
+		{
+			id: 'business/verizon-communications',
+			type: 'Keyword',
+			title: 'Verizon Communications',
+		},
+		{
+			id: 'technology/data-protection',
+			type: 'Keyword',
+			title: 'Data protection',
+		},
+		{
+			id: 'technology/technology',
+			type: 'Keyword',
+			title: 'Technology',
 		},
 		{
 			id: 'business/business',
@@ -1193,19 +1292,34 @@ export const Comment: CAPIArticleType = {
 			title: 'Business',
 		},
 		{
-			id: 'politics/politics',
+			id: 'world/world',
 			type: 'Keyword',
-			title: 'Politics',
+			title: 'World news',
 		},
 		{
-			id: 'politics/conservatives',
-			type: 'Keyword',
-			title: 'Conservatives',
+			id: 'tone/news',
+			type: 'Tone',
+			title: 'News',
 		},
 		{
-			id: 'politics/conservativehome',
+			id: 'us-news/us-news',
 			type: 'Keyword',
-			title: 'ConservativeHome',
+			title: 'US news',
+		},
+		{
+			id: 'commentisfree/series/glenn-greenwald-security-liberty',
+			type: 'Series',
+			title: 'Glenn Greenwald on security and liberty',
+		},
+		{
+			id: 'us-news/nsa',
+			type: 'Keyword',
+			title: 'NSA',
+		},
+		{
+			id: 'us-news/the-nsa-files',
+			type: 'Keyword',
+			title: 'The NSA files',
 		},
 		{
 			id: 'type/article',
@@ -1213,14 +1327,11 @@ export const Comment: CAPIArticleType = {
 			title: 'Article',
 		},
 		{
-			id: 'profile/johnharris',
+			id: 'profile/glenn-greenwald',
 			type: 'Contributor',
-			title: 'John Harris',
-			twitterHandle: 'johnharris1969',
+			title: 'Glenn Greenwald',
 			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2019/06/25/John_Harris.jpg?width=300&quality=85&auto=format&fit=max&s=1879f98d066b9d921776a1b5bcaa025e',
-			bylineLargeImageUrl:
-				'https://i.guim.co.uk/img/uploads/2019/06/26/John_Harris_Next_Gen.png?width=300&quality=85&auto=format&fit=max&s=71554a58d52e35724d1464ab0e413199',
+				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2012/8/16/1345126789538/Gleen_Greenwald-140.jpg?width=300&quality=85&auto=format&fit=max&s=e67b2ebc5cf82a3ed2ea1d3cb2f0b268',
 		},
 		{
 			id: 'publication/theguardian',
@@ -1228,26 +1339,21 @@ export const Comment: CAPIArticleType = {
 			title: 'The Guardian',
 		},
 		{
-			id: 'theguardian/journal',
+			id: 'theguardian/mainsection',
 			type: 'NewspaperBook',
-			title: 'Journal',
+			title: 'Main section',
 		},
 		{
-			id: 'theguardian/journal/opinion',
+			id: 'theguardian/mainsection/topstories',
 			type: 'NewspaperBookSection',
-			title: 'Opinion',
-		},
-		{
-			id: 'tracking/commissioningdesk/uk-opinion',
-			type: 'Tracking',
-			title: 'UK Opinion',
+			title: 'Top stories',
 		},
 	],
-	pillar: 'opinion',
-	webURL: 'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+	pillar: 'news',
+	webURL: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	showBottomSocialButtons: true,
 	isImmersive: false,
-	sectionLabel: 'Austerity',
+	sectionLabel: 'US national security',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1403,22 +1509,21 @@ export const Comment: CAPIArticleType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&s=77ef16f3e784adf8d32f1f5724d0559f',
+			'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&s=25fcfa670f162b2c5414733152cf57bc',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
+			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:creator': '@johnharris1969',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'guardian://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 		'twitter:app:url:iphone':
-			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
+			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=twitter',
 	},
-	sectionName: 'commentisfree',
-	webPublicationDateDeprecated: '2020-02-10T06:00:27.000Z',
+	sectionName: 'us-news',
+	webPublicationDateDeprecated: '2013-06-06T10:05:00.000Z',
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -1430,7 +1535,8 @@ export const Comment: CAPIArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	headline: 'Austerity is grinding on – it has cut too deep to ‘level up’',
+	headline:
+		'NSA collecting phone records of millions of Verizon customers daily',
 	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
@@ -1441,117 +1547,65 @@ export const Comment: CAPIArticleType = {
 					{
 						index: 0,
 						fields: {
-							height: '84',
-							width: '140',
+							height: '276',
+							width: '460',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/140.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/500.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '1200',
-							width: '2000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/2000.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '1944',
-							width: '3240',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/3240.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '1944',
-							width: '3240',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg',
+						url: 'http://static.guim.co.uk/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg',
 					},
 				],
 			},
 			data: {
-				copyright: '©Mark Pinder',
-				alt: 'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
+				alt: 'Phone records data',
 				caption:
-					'A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’',
-				credit: 'Photograph: Mark Pinder/The Guardian',
+					'Under the terms of the order, the numbers of both parties on a call are handed over, as is location data and the time and duration of all calls. Photograph: Matt Rourke/AP',
+				credit: 'Photograph: Matt Rourke/AP',
 			},
-			displayCredit: true,
+			displayCredit: false,
 			role: 'inline',
 			imageSources: [
 				{
 					weighting: 'inline',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=85&auto=format&fit=max&s=2f0303e3a6cfa368bb76b5aa1fe40ba1',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ac282714e74da98178e57aed900667b3',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=85&auto=format&fit=max&s=862f35a51264a34c8f70c308a135e597',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=85&auto=format&fit=max&s=2f0303e3a6cfa368bb76b5aa1fe40ba1',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=435044a6a0f991c4d2849482be7294cd',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ac282714e74da98178e57aed900667b3',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=85&auto=format&fit=max&s=b8c14cbb95296c6ce2c47afd1c74caef',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=db791719b428c3726dd025373b5715c8',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=85&auto=format&fit=max&s=f4afb47d8116bd1c2f9fb126ab2d09ca',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7913b6ad76e99a6811ffc359ead3f1c9',
 							width: 930,
 						},
 					],
@@ -1568,59 +1622,59 @@ export const Comment: CAPIArticleType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=85&auto=format&fit=max&s=26a09576dd9b3bac4ab827034f7f91c8',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1020&quality=85&auto=format&fit=max&s=bb0557a68adb7d01d0294de4ff7c9a38',
 							width: 1020,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=813b6acd761529966116835eff6a8909',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=07925e22da45fa157dd39104bea25b07',
 							width: 2040,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=85&auto=format&fit=max&s=3319f7b3832d50285dfb34b7f0fd0c94',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=940&quality=85&auto=format&fit=max&s=9e51b0e35b15bda73be0d1cf2a816b06',
 							width: 940,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=b7779aa84cf1776a55a3e7d39689315b',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c91a29662a3b09d053d4d1fd1080db3c',
 							width: 1880,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=85&auto=format&fit=max&s=0a33519cea4b3268ef60e8d8787d5828',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=e7534b246401aae8940db9f78e8e2de6',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=85&auto=format&fit=max&s=0326f2185bb8e242f4433dc27a3ec922',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=85&auto=format&fit=max&s=f6f422301d42da7f16fdf0099e5d2abb',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=1eb4e21b9178b60d2110ac9a0a16cf36',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cd24eea3ca1f24fdeac108251502e520',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=85&auto=format&fit=max&s=64ac1cb7cdd1601f36889b25006668b9',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=85&auto=format&fit=max&s=b8c14cbb95296c6ce2c47afd1c74caef',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=beb1d1a8e658f4687cd5a5db56903722',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=db791719b428c3726dd025373b5715c8',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=85&auto=format&fit=max&s=b94d3e00e9fda7abaa884a455a8f2e9a',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=85&auto=format&fit=max&s=f4afb47d8116bd1c2f9fb126ab2d09ca',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=fc4d636cf1ea22a7874a9a8242edf6f6',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7913b6ad76e99a6811ffc359ead3f1c9',
 							width: 930,
 						},
 					],
@@ -1633,146 +1687,221 @@ export const Comment: CAPIArticleType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1900&quality=85&auto=format&fit=max&s=8667672030622de9da369861a8087d1d',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1900&quality=85&auto=format&fit=max&s=23200f4fbf312d4cc329b375882540e7',
 							width: 1900,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=0943f01999c33029da581e0821b5ec8f',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=5314e4ad4795ffd3aaf1a5c8cfd97be4',
 							width: 3800,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=85&auto=format&fit=max&s=aa6833bc19ffd820a12ce33c3eb2d63f',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1300&quality=85&auto=format&fit=max&s=ce24ae26bde4f0d84db39460758409d1',
 							width: 1300,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=616dca8321ef2cf9feb36b48d349cefa',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f9d8d9013a7e589b772d94a3626c6bb',
 							width: 2600,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=85&auto=format&fit=max&s=b8a3b1d849822273359f87c045c3aa76',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1140&quality=85&auto=format&fit=max&s=8501c0e4d7abeb6dbc054c78276f3d0e',
 							width: 1140,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3e8e7586f1725a997b04a34e2e521b3c',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3267023b74d0d6b9076ece455c939b03',
 							width: 2280,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=980&quality=85&auto=format&fit=max&s=8fff896c41dc3fef214643fd8e288cc2',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=980&quality=85&auto=format&fit=max&s=e13cdce4024f0740056c3ca1a00944f1',
 							width: 980,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=66031b4ef2bea03303df3df0b29cd175',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=7e73c17e8b531b5470a4f312d76851df',
 							width: 1960,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=740&quality=85&auto=format&fit=max&s=bc5369fef7b7afa64b5238ed1e71f64d',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=740&quality=85&auto=format&fit=max&s=3d0f43f5906111bd1d8239acdcf67a9c',
 							width: 740,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=fa727a0d91b4e0840ab691659611d829',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=4d1e34d5a6d635b6fec68eb0aabeb97c',
 							width: 1480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=85&auto=format&fit=max&s=0326f2185bb8e242f4433dc27a3ec922',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=85&auto=format&fit=max&s=f6f422301d42da7f16fdf0099e5d2abb',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=1eb4e21b9178b60d2110ac9a0a16cf36',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cd24eea3ca1f24fdeac108251502e520',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=480&quality=85&auto=format&fit=max&s=0b22ec495190385d5865b486a2c99f7f',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=480&quality=85&auto=format&fit=max&s=a9b086c50aea4bdc186c8e78983a10b9',
 							width: 480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=8dccc13c776978d8a9e03024e0e6012e',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=3db6a06f16d14b55a9c41b96fb84a2aa',
 							width: 960,
 						},
 					],
 				},
 			],
-			elementId: '4645bb8d-7745-4423-8d28-204d11941804',
+			elementId: 'ef7ce09a-d672-498f-bfe1-0dbd1fb01c75',
 		},
 	],
-	webPublicationDate: '2020-02-10T06:00:27.000Z',
+	webPublicationDate: '2013-06-06T10:05:00.000Z',
 	blocks: [
 		{
-			id: '6bc6fa8c-a504-4e81-9828-3a7a0a78b052',
+			id: 'ed4dfa13-125b-4c94-8b82-cc1e2bbb0553',
 			elements: [
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Seven years ago, pretty much to the week, I paid my <a href="https://www.theguardian.com/commentisfree/2013/feb/04/newcastle-cold-fear-little-sense-of-hope" title="">first visit as a journalist</a> to Newcastle upon Tyne. The ostensible reason was a fuss about the city council’s proposal to cut its arts budget to zero, and a <a href="https://www.theguardian.com/uk/2012/dec/16/newcastle-arts-cuts-disastrous-stars" title="">campaign of opposition</a> endorsed by such alumni of the city as Bryan Ferry and Gordon “Sting” Sumner. But that controversy was only a small, distracting aspect of a much bigger story: the fact that the coalition government’s austerity was now threatening some of the most basic parts of Newcastle’s social fabric, as councillors faced cuts of around £100m, spread over three years. Then as now, they were led by Nick Forbes, the imaginative, engaging politician who remains in post, and is these days also the leader of the Local Government Association’s Labour group, which represents councillors from across England and Wales, and had its annual conference at the weekend.</p>',
-					elementId: '5be74fb0-809a-41d3-8989-f1067194f0ab',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
-					html: '£37m was cut in 2013-14, followed by £38m, then £40m and so on, until the council had lost £300m by the end of 2019',
-					role: 'supporting',
-					isThirdPartyTracking: false,
-					elementId: 'e19a7c2a-32de-4eba-9b4e-5d9ac9a1115e',
+					html: "<p>The National Security Agency is currently collecting the telephone records of millions of US customers of Verizon, one of America's largest telecoms providers, under a top secret court order issued in April.</p>",
+					elementId: '0631c651-5e3f-4fcd-8f0e-8b19bf9729e3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>As the government hacked back the money that went from Whitehall to councils and the need for child and adult social care services continued to rise, <a href="https://www.chroniclelive.co.uk/news/north-east-news/tax-freeze-cuts-newcastle-city-6464052" title="">£37m</a> was cut from Newcastle’s budgets in 2013-14, followed by <a href="https://www.chroniclelive.co.uk/news/north-east-news/newcastle-city-council-reveals-40m-7276999" title="">£38m, then £40m</a> and <a href="https://www.bbc.co.uk/news/uk-england-tyne-38145319" title="">£30m</a> – and so on, until the council had lost <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">an estimated £300m</a> by the end of 2019. Each time I have gone back, I have heard about what has happened to libraries, seen closed youth clubs that were among the first things to be axed, and talked to people about cuts to early-years provision leading to four in 10 of the north-east’s children’s centres being shut. There is an awful symbolism in the fall in the <a href="https://www.bbc.co.uk/news/uk-politics-46514670" title="">number of lollipop men and women</a> from 64 to seven; on one trip, I was struck by the quiet poignancy of parks smattered with broken slides and swings.</p>',
-					elementId: '82152371-3d55-4503-9b4a-44cdbff0e269',
+					html: '<p>The order, a copy of which has been obtained by the Guardian, <a href="https://www.theguardian.com/world/interactive/2013/jun/06/verizon-telephone-data-court-order">requires Verizon on an "ongoing, daily basis" to give the NSA information on all telephone calls in its systems</a>, both within the US and between the US and other countries.</p>',
+					elementId: 'c48d912b-05bc-4141-9da8-08b43fefb780',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>But despite cliches about places in “the north” being social deserts, Newcastle is full of initiative and innovation – and as austerity hit, there was plenty of <a href="https://www.theguardian.com/business/2015/nov/23/newcastle-cuts-save-library-lose-pool-john-harris" title="">grassroots work</a> aimed at parrying the cuts, bringing in new approaches and making parts of the city more resilient. But hacked-back spending has taken an inevitable toll, and reflects something happening all over the country: the government using local and city government to administer policies that reflect ideological prejudices coursing through Westminster and Whitehall.</p>',
-					elementId: '55809df0-e600-4958-9e92-475f2d4797ca',
+					html: '<p>The document shows for the first time that under the Obama administration the communication records of millions of US citizens are being collected indiscriminately and in bulk – regardless of whether they are suspected of any wrongdoing.</p>',
+					elementId: 'f214d1a3-d2cb-497c-b6ed-6aac42ef1645',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Of late, by contrast, we have heard a lot of talk about Boris Johnson and his allies turning on the fiscal taps, and somehow marking the “end of austerity”. When he moved into Downing Street, <a href="https://www.bbc.co.uk/news/uk-politics-49102495" title="">the prime minister said</a> he would be “answering at last the plea of the forgotten people and left-behind towns, by physically and literally renewing the ties that bind us together, so that with safer streets and better education, and fantastic new road and rail infrastructure and full-fibre broadband, we level up across Britain”. Some of this is likely to happen, but all over the country austerity is nonetheless grinding on.</p>',
-					elementId: '35be6596-e4bd-471b-a5a5-25f3a1013f74',
+					html: '<p>The secret Foreign Intelligence Surveillance Court (Fisa) granted the order to the FBI on April 25, giving the government unlimited authority to obtain the data for a specified three-month period ending on July 19.</p>',
+					elementId: 'a6c18ecb-7ae6-41c3-9190-0d0c9ab2380e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Whatever paltry financial extras the government may now be granting councils, rising costs and increased need far outstrip them. Leeds <a href="https://www.yorkshireeveningpost.co.uk/news/politics/leeds-council-reveals-ps28m-cuts-coming-year-1385168" title="">faces cuts</a> in the next financial year of £28m. On the Wirral, the <a href="https://www.wirralglobe.co.uk/news/18213040.council-budget-clash/" title="">figure is £30m</a>; across the water in Liverpool, where <a href="https://www.liverpoolecho.co.uk/news/liverpool-news/joe-anderson-refuse-carry-out-17659928" title="">the mayor, Joe Anderson</a>, now says he will refuse to put through any further cuts beyond April 2021, there is a funding gap of £30m, only £7.2m of which will come from putting up council tax. In Doncaster, <a href="https://www.doncasterfreepress.co.uk/news/politics/council-tax-rise-and-job-cuts-way-doncaster-council-announces-its-budget-1384199" title="">new cuts</a> must total £18m; in Blackpool, to meet its obligations in children’s services, the council must somehow <a href="https://www.blackpoolgazette.co.uk/news/politics/ps20m-savings-plus-more-job-losses-blackpool-council-unveils-budget-proposals-1380603" title="">save £20m</a> from its other work. In Newcastle, the council will have to <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">cut £20m</a> across its budgets in 2020-21 – and, on current projections, another £17-18m the year after that.</p>',
-					elementId: 'd6b748db-50a0-43a3-b25b-b1a56aa662dd',
+					html: '<p>Under the terms of the blanket order, the numbers of both parties on a call are handed over, as is location data, call duration, unique identifiers, and the time and duration of all calls. The contents of the conversation itself are not covered.</p>',
+					elementId: 'ab25a802-19c7-46f3-9aa4-fc8a7f51bae8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>I spoke to Forbes last week. “We’ve cut every other service that the council provides to the absolute minimum, to try to protect social care,” he told me. “This is the first year we haven’t been able to do anything other than take money out of social care budgets … in some cases, we’re going to have to take away support that people have previously had.”</p>',
-					elementId: '1d7b3981-e32a-43cd-be84-21a43774d0a5',
+					html: "<p>The disclosure is likely to reignite longstanding debates in the US over the proper extent of the government's domestic spying powers.</p>",
+					elementId: '2705a178-17a1-4022-a793-3c7e43d8fe53',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>By way of cold comfort, last year’s autumn statement meant an injection by the government of £11m into the city’s finances, but it will be largely eaten up by the recent increase in the minimum wage. Embracing the Conservatives’ proposal that councils can raise council tax by up to 2% to cover rising pressures on adult social care, Forbes says, will bring a paltry £2m. Next year “looks even more scary, because it looks like we’re going to have to start dismantling various aspects of our social work teams”. This seems set to affect children’s services, which up to now have been protected.</p>',
-					elementId: '8346e2b4-f4c0-450a-b57e-0d960505aa19',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					url: 'https://www.theguardian.com/commentisfree/2020/feb/06/tory-level-up-north-regional-inequality',
-					text: 'Tory plans to ‘level up’ the north are laughably inadequate | Polly Toynbee',
-					prefix: 'Related: ',
-					role: 'thumbnail',
-					elementId: 'd92e6646-2af9-4470-918a-e3b796b44bb4',
+					html: '<p>Under the Bush administration, officials in security agencies had disclosed to reporters the large-scale collection of call records data by the <a href="https://www.theguardian.com/us-news/nsa" data-component="auto-linked-tag">NSA</a>, but this is the first time significant and top-secret documents have revealed the continuation of the practice on a massive scale under President Obama.</p>',
+					elementId: '512c3ada-6a88-43e9-8c9c-56acb0308efd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The politics of continuing austerity are often maddeningly contradictory. I have been to plenty of places where cuts have intensified people’s conviction that they have been neglected by Westminster and Whitehall. That impulse was one of the reasons behind the Brexit vote. In turn, the frustrations of three years of post-referendum politics and Johnson’s cynical approximation of optimism convinced people in lots of these areas to vote Conservative. And so it is that austerity continues, while the government tries to escape the blame by cosmetically positioning itself against its own policies.</p>',
-					elementId: '550d970b-2ad5-4f57-a1d6-606c6df115ca',
+					html: '<p>The unlimited nature of the records being handed over to the NSA is extremely unusual. Fisa court orders typically direct the production of records pertaining to a specific named target who is suspected of being an agent of a terrorist group or foreign state, or a finite set of individually named targets.</p>',
+					elementId: '4642f57e-86b8-47bd-b319-04e73b0381f6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>For the people involved in councils, other aspects of the picture are equally confounding. Rather than being able to plan for the long term, they have to wait every year for news of what the government will give them; thanks partly to the December election, even with the start of the next financial year looming, the next set of figures was confirmed only last week. In the spring, the government will reveal its new system of so-called “fair funding”. Recent reports have suggested that allocations for social care in some of England’s most deprived areas (including many places that were until recently part of the “red wall” of Labour constituencies) will <a href="https://www.theguardian.com/society/2020/jan/25/former-red-wall-areas-could-lose-millions-in-council-funding-review" title="">fall by £320m</a>, while those in more affluent places will rise by around the same amount.</p>',
-					elementId: 'a5513be6-e3bb-48f3-aca3-570703a8382d',
+					html: '<p>The Guardian approached the National Security Agency, the White House and the Department of Justice for comment in advance of publication on Wednesday. All declined. The agencies were also offered the opportunity to raise specific security concerns regarding the publication of the court order.</p>',
+					elementId: '439d3a37-41d8-4dc8-adbc-e9a5d2843284',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Possibly in response to the anxiety these projections sparked, subsequent predictions have suggested that other changes could balance these unfairnesses out – although many injustices would seemingly get worse. <a href="https://www.countycouncilsnetwork.org.uk/lgc-article-on-fair-funding-review-modelling-ccn-response/" title="">One report</a> suggests that inner London boroughs could lose as much as a quarter of their funding. The consequences of that would be unimaginable. To cap it all, there is the mess of uncertainty surrounding Brexit, and what it may mean for the public finances.</p>',
-					elementId: 'ac3e0bed-1349-4055-89a9-d2a5930ccf75',
+					html: "<p>The court order expressly bars Verizon from disclosing to the public either the existence of the FBI's request for its customers' records, or the court order itself. </p>",
+					elementId: 'e3b2e265-f09e-4cd1-8260-57e9d62c085a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>We know that the chancellor has already told departments to come up with <a href="https://www.theguardian.com/society/2020/jan/29/ministers-told-to-find-5-savings-to-refocus-on-pms-priorities" title="">savings of 5%</a>. Some people say that if the government has any intention of easing the predicament of councils and the people who need their services, the last chance for a rethink will come with the autumn statement. But whatever happens, most of the people I have spoken to are worried and angry for one incurable reason: the fact that after 10 years of cuts, so much damage has been done. Most of what has been closed will not come back; countless instances of need and hardship now feel like they are locked in. Brexit flags and banners, and some of those overhyped infrastructure projects, are hardly going to make up for the pain.</p>',
-					elementId: 'b966671c-3d8d-48bf-b984-b55062ef3f0c',
+					html: '<p>"We decline comment," said Ed McFadden, a Washington-based Verizon spokesman.</p>',
+					elementId: '8046cae9-c490-4798-b3a7-d263813e5e29',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>• John Harris is a Guardian columnist</p>',
-					elementId: '1dc766fb-a86d-4bfc-a66d-02084433dde3',
+					html: '<p>The order, signed by Judge Roger Vinson, compels Verizon to produce to the NSA electronic copies of "all call detail records or \'telephony metadata\' created by Verizon for communications between the United States and abroad" or "wholly within the United States, including local telephone calls".</p>',
+					elementId: '17913590-be14-4adc-ba08-7fbbc6b6ee0d',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The order directs Verizon to "continue production on an ongoing daily basis thereafter for the duration of this order". It specifies that the records to be produced include "session identifying information", such as "originating and terminating number", the duration of each call, telephone calling card numbers, trunk identifiers, International Mobile Subscriber Identity (IMSI) number, and "comprehensive communication routing information".</p>',
+					elementId: 'edb0fd8c-f77e-4d36-9ffb-47dc2c1c972b',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The information is classed as "metadata", or transactional information, rather than communications, and so does not require individual warrants to access. The document also specifies that such "metadata" is not limited to the aforementioned items. A 2005 court ruling judged that cell site location data – the nearest cell tower a phone was connected to – was also transactional data, and so could potentially fall under the scope of the order.</p>',
+					elementId: 'd462a240-ef2e-4dfd-9961-13c695954ded',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>While the order itself does not include either the contents of messages or the personal information of the subscriber of any particular cell number, its collection would allow the NSA to build easily a comprehensive picture of who any individual contacted, how and when, and possibly from where, retrospectively.</p>',
+					elementId: 'aa69cd0a-3467-4795-9f98-370c2c71ebaa',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>It is not known whether Verizon is the only cell-phone provider to be targeted with such an order, although previous reporting has suggested the NSA has collected cell records from all major mobile networks. It is also unclear from the leaked document whether the three-month order was a one-off, or the latest in a series of similar orders.</p>',
+					elementId: 'b3b30345-ebfb-4be9-9db5-c12358b8ba3d',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: "<p>The court order appears to explain the numerous cryptic public warnings by two US senators, Ron Wyden and Mark Udall, about the scope of the Obama administration's surveillance activities.</p>",
+					elementId: '54efd1b3-cf1f-42ff-ba27-33451322e4c0',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>For roughly two years, the two Democrats have been stridently advising the public that the US government is relying on "secret legal interpretations" to claim surveillance powers so broad that the American public would be "stunned" to learn of the kind of domestic spying being conducted.</p>',
+					elementId: '09bbe3b7-ab85-4530-a021-8440af4aa366',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Because those activities are classified, the senators, both members of the Senate intelligence committee, have been prevented from specifying which domestic surveillance programs they find so alarming. But the information they have been able to disclose in their public warnings perfectly tracks both the specific law cited by the April 25 court order as well as the vast scope of record-gathering it authorized.</p>',
+					elementId: 'bc20a24b-6d3e-4dc8-a8ef-cbc90d2be9c5',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: "<p>Julian Sanchez, a surveillance expert with the Cato Institute, explained: \"We've certainly seen the government increasingly strain the bounds of 'relevance' to collect large numbers of records at once — everyone at one or two degrees of separation from a target — but vacuuming all metadata up indiscriminately would be an extraordinary repudiation of any pretence of constraint or particularized suspicion.\" The April order requested by the FBI and NSA does precisely that.</p>",
+					elementId: 'ddd7a8c7-7531-4dfa-8be1-e64fa261ed3c',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The law on which the order explicitly relies is the so-called "business records" provision of the Patriot Act, 50 USC section 1861. That is the provision which Wyden and Udall have repeatedly cited when warning the public of what they believe is the Obama administration\'s extreme interpretation of the law to engage in excessive domestic surveillance.</p>',
+					elementId: '54a2e09b-97e4-441a-ae65-78ac396e4554',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In a letter to attorney general Eric Holder last year, they argued that "there is now a significant gap between what most Americans <em>think</em> the law allows and what the government secretly <em>claims</em> the law allows."</p>',
+					elementId: 'e4d7e47b-45cb-4427-8567-687e09f07c99',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>"We believe," they wrote, "that most Americans would be stunned to learn the details of how these secret court opinions have interpreted" the "business records" provision of the Patriot Act.</p>',
+					elementId: '55ee90dd-4d3d-4197-b0d2-93727bccff41',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Privacy advocates have long warned that allowing the government to collect and store unlimited "metadata" is a highly invasive form of surveillance of citizens\' communications activities. Those records enable the government to know the identity of every person with whom an individual communicates electronically, how long they spoke, and their location at the time of the communication.</p>',
+					elementId: '3533d2ce-95d9-4aac-92b9-b40db4e1431a',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: "<p>Such metadata is what the US government has long attempted to obtain in order to discover an individual's network of associations and communication patterns. The request for the bulk collection of all Verizon domestic telephone records indicates that the agency is continuing some version of the data-mining program begun by the Bush administration in the immediate aftermath of the 9/11 attack.</p>",
+					elementId: 'c3cfabfe-5fc2-40cf-aa5b-c9028c79bcd9',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The NSA, as part of a program secretly authorized by President Bush on 4 October 2001, implemented a bulk collection program of domestic telephone, internet and email records. A furore erupted in 2006 when USA Today reported that the NSA had "been secretly collecting the phone call records of tens of millions of Americans, using data provided by AT&amp;T, Verizon and BellSouth" and was "using the data to analyze calling patterns in an effort to detect terrorist activity." Until now, there has been no indication that the Obama administration implemented a similar program.</p>',
+					elementId: '3faf0dc1-c036-46e4-bf78-9ab995667fd2',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: "<p>These recent events reflect how profoundly the NSA's mission has transformed from an agency exclusively devoted to foreign intelligence gathering, into one that focuses increasingly on domestic communications. A 30-year employee of the NSA, William Binney, resigned from the agency shortly after 9/11 in protest at the agency's focus on domestic activities.</p>",
+					elementId: '7f00dd27-3353-4420-af29-0f7f49ca30a9',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In the mid-1970s, Congress, for the first time, investigated the surveillance activities of the US government. Back then, the mandate of the NSA was that it would never direct its surveillance apparatus domestically.</p>',
+					elementId: 'd316c2c0-e51e-4b36-b38b-b90d3870f65b',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>At the conclusion of that investigation, Frank Church, the Democratic senator from Idaho who chaired the investigative committee, warned: "The NSA\'s capability at any time could be turned around on the American people, and no American would have any privacy left, such is the capability to monitor everything: telephone conversations, telegrams, it doesn\'t matter."</p>',
+					elementId: 'a5a8ebec-9fc4-4583-9852-e6f1c671258a',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><em>Additional reporting by Ewen MacAskill and Spencer Ackerman</em></p>',
+					elementId: 'bd76fc10-59b9-42ae-9a51-237de8be44cf',
 				},
 			],
 			attributes: {
@@ -1780,20 +1909,20 @@ export const Comment: CAPIArticleType = {
 				keyEvent: false,
 				summary: false,
 			},
-			blockCreatedOn: 1581250344000,
-			blockCreatedOnDisplay: '12.12 GMT',
-			blockLastUpdated: 1581270178000,
-			blockLastUpdatedDisplay: '17.42 GMT',
+			blockCreatedOn: 1452843129000,
+			blockCreatedOnDisplay: '07.32 GMT',
+			blockLastUpdated: 1452843129000,
+			blockLastUpdatedDisplay: '07.32 GMT',
 			contributors: [],
-			primaryDateLine: 'Mon 10 Feb 2020 06.00 GMT',
-			secondaryDateLine: 'Last modified on Mon 10 Feb 2020 11.19 GMT',
+			primaryDateLine: 'Thu 6 Jun 2013 11.05 BST',
+			secondaryDateLine: 'First published on Thu 6 Jun 2013 11.05 BST',
 		},
 	],
 	linkedData: [
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'@id': 'https://amp.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1819,39 +1948,39 @@ export const Comment: CAPIArticleType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bd2f2a476abaf5a0bc7c70f1f31dba50',
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=d3257abb4b456eb86f445acfe8dfcdf3',
-				'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&quality=85&auto=format&fit=max&s=3d4a5bbf7513a6d5c91a173d5b4ad0b5',
+				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&enable=upscale&s=2b724110f381774c116ed9e53f249c01',
+				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'John Harris',
-					sameAs: 'https://www.theguardian.com/profile/johnharris',
+					name: 'Glenn Greenwald',
+					sameAs: 'https://www.theguardian.com/profile/glenn-greenwald',
 				},
 			],
-			datePublished: '2020-02-10T06:00:27.000Z',
+			datePublished: '2013-06-06T10:05:00.000Z',
 			headline:
-				'Austerity is grinding on – it has cut too deep to ‘level up’',
-			dateModified: '2020-02-10T11:19:50.000Z',
+				'NSA collecting phone records of millions of Verizon customers daily',
+			dateModified: '2019-05-01T17:16:49.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'@id': 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				target: 'android-app://com.guardian/https/www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Mon 10 Feb 2020 06.00 GMT',
+	webPublicationDateDisplay: 'Thu 6 Jun 2013 11.05 BST',
 	shouldHideAds: false,
 	webTitle:
-		'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
+		'NSA collecting phone records of millions of Verizon customers daily',
 	isSpecialReport: false,
 	isCommentable: true,
 	keyEvents: [],

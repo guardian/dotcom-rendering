@@ -1536,7 +1536,7 @@ export const NewletterSignup: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'b0c874b8-9347-4102-9cc5-cc3bc5229840',
+			elementId: '40cdb028-9318-47cd-9541-283b4e9f58c7',
 		},
 	],
 	webPublicationDate: '2022-03-22T16:57:35.000Z',
@@ -1547,7 +1547,7 @@ export const NewletterSignup: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football through our new weekly newsletter. It will be informative, entertaining and global. It will be critical – when needed – and passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, the first was published on Wednesday 30 March, 2022. There will also be guest appearances from stars such as Anita Asante, Ada Hegerberg and many more. </p>',
-					elementId: 'e349e262-bdc8-4e82-b039-de08c0c4ebaf',
+					elementId: 'b590a341-1da8-457e-99d4-5a5c649e344b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1558,22 +1558,22 @@ export const NewletterSignup: CAPIArticleType = {
 					isThirdPartyTracking: false,
 					source: 'The Guardian',
 					sourceDomain: 'theguardian.com',
-					elementId: 'eca5d547-c368-4dae-a626-45b57ff0c946',
+					elementId: '588bbfe2-4342-4db1-998c-10e9578fff88',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li> \n <li><p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li> \n</ul>',
-					elementId: 'fb4ec9f8-a073-43e4-a923-0bbd8a1fdb4a',
+					elementId: '4ac50602-cc63-40dd-bb0e-30a9b57d6821',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>***</p>',
-					elementId: '1f437da1-8c1b-4b81-8a9f-14d8e1d1f04e',
+					elementId: '0a910f99-0c57-431f-902e-303f437f8366',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: '7b1ceb09-eade-493f-8a4e-6e94506f3eb3',
+					elementId: 'e4a32c26-819e-4dec-882c-46cc48b310c5',
 				},
 			],
 			attributes: {

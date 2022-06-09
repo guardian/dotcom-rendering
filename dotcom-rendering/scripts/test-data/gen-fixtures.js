@@ -32,6 +32,18 @@ const articles = [
 		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	},
 	{
+		name: 'Gallery',
+		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	},
+	{
+		name: 'Audio',
+		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	},
+	{
+		name: 'Video',
+		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	},
+	{
 		name: 'NewletterSignup',
 		url: 'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 	},

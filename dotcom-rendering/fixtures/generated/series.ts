@@ -19,6 +19,31 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/jun/09/backstage-with-katherine-ryan-review-jimmy-carr-seann-walsh-desiree-burch',
+			linkText:
+				'Backstage With Katherine Ryan review – there are laughs, but why does it feel so cringemaking?',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image: 'https://i.guim.co.uk/img/media/53e07a9eb4bc60755554a42b540efed9679a1e4c/463_798_5377_3226/master/5377.jpg?width=300&quality=85&auto=format&fit=max&s=7b40a5cbc291cd8dfaf9127cb980c541',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/53e07a9eb4bc60755554a42b540efed9679a1e4c/463_798_5377_3226/master/5377.jpg?width=300&quality=85&auto=format&fit=max&s=7b40a5cbc291cd8dfaf9127cb980c541',
+				'460': 'https://i.guim.co.uk/img/media/53e07a9eb4bc60755554a42b540efed9679a1e4c/463_798_5377_3226/master/5377.jpg?width=460&quality=85&auto=format&fit=max&s=8b93f5971bab3a4600c5182c62468347',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-06-09T13:38:14.000Z',
+			headline:
+				'Backstage With Katherine Ryan review – there are laughs, but why does it feel so cringemaking?',
+			shortUrl: 'https://www.theguardian.com/p/ytqe4',
+			starRating: 3,
+		},
+		{
 			url: 'https://www.theguardian.com/tv-and-radio/2022/jun/08/ms-marvel-review-a-glorious-debut-for-the-first-muslim-superhero',
 			linkText:
 				'Ms Marvel review – a glorious debut for the MCU’s first Muslim superhero',
@@ -242,31 +267,6 @@ export const series = {
 				'Borgen review – this antidote to real-life politics is like The West Wing 2022',
 			shortUrl: 'https://www.theguardian.com/p/yhb65',
 			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/jun/01/abbott-elementary-review-the-gags-come-so-thick-and-fast-they-take-your-breath-away',
-			linkText:
-				'Abbott Elementary review – the gags come so thick and fast they take your breath away',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image: 'https://i.guim.co.uk/img/media/dc7cf4458351c955be2c55fbf2516e0d0c3e17ac/0_83_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=2137c576e7d82c39236d146223b00e98',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/dc7cf4458351c955be2c55fbf2516e0d0c3e17ac/0_83_3000_1800/master/3000.jpg?width=300&quality=85&auto=format&fit=max&s=2137c576e7d82c39236d146223b00e98',
-				'460': 'https://i.guim.co.uk/img/media/dc7cf4458351c955be2c55fbf2516e0d0c3e17ac/0_83_3000_1800/master/3000.jpg?width=460&quality=85&auto=format&fit=max&s=c060fe1382c50049eb1b4737f4d1377e',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-06-01T15:01:46.000Z',
-			headline:
-				'Abbott Elementary review – the gags come so thick and fast they take your breath away',
-			shortUrl: 'https://www.theguardian.com/p/yhg2n',
-			starRating: 5,
 		},
 	],
 };
