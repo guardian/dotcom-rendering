@@ -104,7 +104,7 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 						});
 
 						const fixture =
-							Fixtures[designName] || Fixtures.Article;
+							Fixtures[designName] || Fixtures.Standard;
 
 						stories.add(pillarName, () => {
 							return (
@@ -137,7 +137,7 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 						});
 
 						const fixture =
-							Fixtures[designName] || Fixtures.Article;
+							Fixtures[designName] || Fixtures.Standard;
 
 						stories.add(specialName, () => {
 							return (
