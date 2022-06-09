@@ -96,7 +96,9 @@ describe('Elements', function () {
 		it('should render the click to view overlay revealing the embed when clicked', function () {
 			const getIframeBody = () => {
 				return cy
-					.get('div[data-cy="embed-block"] > div > iframe')
+					.get('div[data-cy="embed-block"] > div > iframe', {
+						timeout: 30000,
+					})
 					.its('0.contentDocument.body')
 					.should('not.be.empty')
 					.then(cy.wrap);
@@ -109,15 +111,15 @@ describe('Elements', function () {
 			cy.scrollTo(0, 4500);
 
 			// Wait for hydration
-			cy.get('gu-island[name=EmbedBlockComponent]', { timeout: 30000 })
-				.first()
+			cy.get('gu-island[name=EmbedBlockComponent]')
+				.first({ timeout: 30000 })
 				.should('have.attr', 'data-gu-ready', 'true');
 
 			cy.contains('hosted on wnyc.org');
 
 			cy.get('button[data-cy="click-to-view-button"]').click();
 
-			getIframeBody().contains('radiolab');
+			getIframeBody().contains('Radiolab');
 		});
 
 		it('should render the interactive using a boot.js', function () {
