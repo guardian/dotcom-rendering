@@ -6,7 +6,7 @@ import { brandAlt, headline, neutral } from '@guardian/source-foundations';
 // to fix the design (the text will scale with the SVG)
 const textStyle = css`
 	${headline.small({ fontWeight: 'bold' })};
-	font-size: 19.5px;
+	font-size: 122%;
 	letter-spacing: -0.5px;
 	fill: ${brandAlt[400]};
 `;

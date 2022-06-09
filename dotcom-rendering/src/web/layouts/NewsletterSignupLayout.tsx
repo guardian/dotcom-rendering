@@ -77,10 +77,10 @@ const mainColNewsLettersBadgeContainerStyle = css`
 	svg {
 		width: 100%;
 		position: relative;
-		bottom: -10.75px;
+		bottom: -10px;
 
 		${until.wide} {
-			bottom: -9.5px;
+			bottom: -9px;
 		}
 
 		${until.leftCol} {
