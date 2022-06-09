@@ -60,7 +60,7 @@ return (
     </Island>
 )
 
-This has considerable security implementations as this variable would then be available to any consumer of the site.
+This has considerable security implications as this variable would then be available to any consumer of the site.
 
 ## Limitations
 
