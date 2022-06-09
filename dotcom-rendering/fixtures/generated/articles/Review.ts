@@ -2205,8 +2205,7 @@ export const Review: CAPIArticleType = {
 		shouldHideReaderRevenue: false,
 		sentryHost: 'app.getsentry.com/35463',
 		isPaidContent: false,
-		headline:
-			'Fires and floods: maps of Europe predict scale of climate catastrophe',
+		headline: 'Headline string',
 		idApiUrl: 'https://idapi.theguardian.com',
 		showRelatedContent: true,
 		adUnit: '/59666047/theguardian.com/environment/article/ng',
