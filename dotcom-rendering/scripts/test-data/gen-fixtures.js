@@ -29,7 +29,7 @@ const root = resolve(__dirname, '..', '..');
 const articles = [
 	{
 		name: 'Standard',
-		url: 'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	},
 	{
 		name: 'NewletterSignup',
