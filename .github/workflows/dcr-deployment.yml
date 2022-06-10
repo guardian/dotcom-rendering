@@ -4,6 +4,8 @@ on:
     paths-ignore:
       - "apps-rendering/**"
 jobs:
+  build:
+    - uses: ./.github/workflows/build-check.yml
   test:
     runs-on: ubuntu-latest
     steps:
