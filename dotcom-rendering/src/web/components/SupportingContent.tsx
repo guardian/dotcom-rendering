@@ -65,8 +65,7 @@ export const SupportingContent = ({ supportingContent, alignment }: Props) => {
 			{supportingContent.map((subLink: DCRSupportingContent, index) => {
 				// The model has this property as optional but it is very likely
 				// to exist
-				if (!subLink.headline)
-					return <React.Fragment key={subLink.url}></React.Fragment>;
+				if (!subLink.headline) return null;
 				// The kicker defaults to 'Live' when the article is a liveblog
 				const kickerText =
 					subLink.format.design === ArticleDesign.LiveBlog

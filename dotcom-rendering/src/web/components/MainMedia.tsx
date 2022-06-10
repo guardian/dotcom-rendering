@@ -97,7 +97,8 @@ export const MainMedia: React.FC<{
 		<div css={[mainMedia, chooseWrapper(format)]}>
 			{elements.map((element, index) => (
 				<RenderArticleElement
-					key={'elementId' in element ? element.elementId : index}
+					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
+					key={index}
 					format={format}
 					element={element}
 					adTargeting={adTargeting}
