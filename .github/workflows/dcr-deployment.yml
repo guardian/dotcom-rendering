@@ -4,21 +4,9 @@ on:
     paths-ignore:
       - "apps-rendering/**"
 jobs:
-  build:
-    uses: ./.github/workflows/build-check.yml
   test:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/workflows/build-check.yml
-      - uses: ./.github/workflows/bundle-analyser.yml
-      - uses: ./.github/workflows/chromatic.yml
-      - uses: ./.github/workflows/cypress.yml
-      - uses: ./.github/workflows/jest.yml
-      - uses: ./.github/workflows/lint.yml
-      - uses: ./.github/workflows/prettier.yml
-      - uses: ./.github/workflows/schema-check.yml
-      - uses: ./.github/workflows/typescript.yml
+    uses: ./.github/workflows/dcr-test.yml
   deploy:
     needs: test
     runs-on: ubuntu-latest

@@ -1,0 +1,14 @@
+name: DCR test
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - uses: ./.github/workflows/build-check.yml
+    - uses: ./.github/workflows/bundle-analyser.yml
+    - uses: ./.github/workflows/chromatic.yml
+    - uses: ./.github/workflows/cypress.yml
+    - uses: ./.github/workflows/jest.yml
+    - uses: ./.github/workflows/lint.yml
+    - uses: ./.github/workflows/prettier.yml
+    - uses: ./.github/workflows/schema-check.yml
+    - uses: ./.github/workflows/typescript.yml
