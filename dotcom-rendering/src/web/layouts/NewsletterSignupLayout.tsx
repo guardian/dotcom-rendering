@@ -6,23 +6,30 @@ import {
 	brandLine,
 	neutral,
 	space,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { SvgGuardianLogo } from '@guardian/source-react-components';
+import {
+	Column,
+	Columns,
+	SvgGuardianLogo,
+} from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
-import { ArticleContainer } from '../components/ArticleContainer';
+import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { MainMedia } from '../components/MainMedia';
 import { Nav } from '../components/Nav/Nav';
 import { NewsletterBadge } from '../components/NewslettersBadge';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { ShareIcons } from '../components/ShareIcons';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
@@ -248,32 +255,98 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					title="UK Focused"
 					description={CAPIArticle.headline}
 				>
-					<ArticleContainer format={format}>
-						<ArticleBody
-							format={format}
-							blocks={CAPIArticle.blocks}
-							adTargeting={adTargeting}
-							host={host}
-							pageId={CAPIArticle.pageId}
-							webTitle={CAPIArticle.webTitle}
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
-							switches={CAPIArticle.config.switches}
-							isSensitive={CAPIArticle.config.isSensitive}
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							section={CAPIArticle.config.section}
-							shouldHideReaderRevenue={
-								CAPIArticle.shouldHideReaderRevenue
-							}
-							tags={CAPIArticle.tags}
-							isPaidContent={!!CAPIArticle.config.isPaidContent}
-							contributionsServiceUrl={contributionsServiceUrl}
-							contentType={CAPIArticle.contentType}
-							sectionName={CAPIArticle.sectionName || ''}
-							isPreview={CAPIArticle.config.isPreview}
-							idUrl={CAPIArticle.config.idUrl || ''}
-							isDev={!!CAPIArticle.config.isDev}
-						/>
-					</ArticleContainer>
+					<Columns collapseUntil="desktop">
+						<Column width={[1, 1, 4 / 6, 3 / 6, 3 / 6]}>
+							<div>
+								<ArticleHeadline
+									format={format}
+									headlineString={CAPIArticle.headline}
+									tags={CAPIArticle.tags}
+									byline={CAPIArticle.author.byline}
+									webPublicationDateDeprecated={
+										CAPIArticle.webPublicationDateDeprecated
+									}
+								/>
+							</div>
+							<ArticleBody
+								format={format}
+								blocks={CAPIArticle.blocks}
+								adTargeting={adTargeting}
+								host={host}
+								pageId={CAPIArticle.pageId}
+								webTitle={CAPIArticle.webTitle}
+								ajaxUrl={CAPIArticle.config.ajaxUrl}
+								switches={CAPIArticle.config.switches}
+								isSensitive={CAPIArticle.config.isSensitive}
+								isAdFreeUser={CAPIArticle.isAdFreeUser}
+								section={CAPIArticle.config.section}
+								shouldHideReaderRevenue={
+									CAPIArticle.shouldHideReaderRevenue
+								}
+								tags={CAPIArticle.tags}
+								isPaidContent={
+									!!CAPIArticle.config.isPaidContent
+								}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								contentType={CAPIArticle.contentType}
+								sectionName={CAPIArticle.sectionName || ''}
+								isPreview={CAPIArticle.config.isPreview}
+								idUrl={CAPIArticle.config.idUrl || ''}
+								isDev={!!CAPIArticle.config.isDev}
+							/>
+							<div
+								css={css`
+									display: flex;
+									align-items: center;
+								`}
+							>
+								<span
+									css={css`
+										${textSans.medium({
+											fontWeight: 'bold',
+										})};
+										margin-right: ${space[2]}px;
+										margin-bottom: ${space[2]}px;
+									`}
+								>
+									Tell your friends
+								</span>
+								<div>
+									<ShareIcons
+										pageId={CAPIArticle.pageId}
+										webTitle={CAPIArticle.webTitle}
+										format={format}
+										displayIcons={[
+											'facebook',
+											'twitter',
+											'email',
+											'linkedIn',
+											'whatsApp',
+											'messenger',
+										]}
+										size="medium"
+										context="ArticleMeta"
+									/>
+								</div>
+							</div>
+						</Column>
+						<Column width={[1, 1, 2 / 6, 3 / 6, 3 / 6]}>
+							<MainMedia
+								format={format}
+								elements={CAPIArticle.mainMediaElements}
+								adTargeting={adTargeting}
+								host={host}
+								pageId={CAPIArticle.pageId}
+								webTitle={CAPIArticle.webTitle}
+								ajaxUrl={CAPIArticle.config.ajaxUrl}
+								switches={CAPIArticle.config.switches}
+								isAdFreeUser={CAPIArticle.isAdFreeUser}
+								isSensitive={CAPIArticle.config.isSensitive}
+							/>
+						</Column>
+					</Columns>
 				</ContainerLayout>
 
 				<Island
