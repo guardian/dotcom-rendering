@@ -9,7 +9,6 @@ import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import CommentLayout from 'components/Layout/CommentLayout';
-import ImmersiveLayout from './ImmersiveLayout';
 import InteractiveLayout from 'components/Layout/InteractiveLayout';
 import LabsLayout from 'components/Layout/LabsLayout';
 import LiveLayout from 'components/Layout/LiveLayout';
@@ -18,6 +17,7 @@ import StandardLayout from 'components/Layout/StandardLayout';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
+import ImmersiveLayout from './ImmersiveLayout';
 
 // ----- Functions ----- //
 
@@ -108,7 +108,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Interview
 	) {
 		if (item.display === ArticleDisplay.Immersive) {
-			return <ImmersiveLayout item={item}>{render(item, body)}</ImmersiveLayout>;
+			return (
+				<ImmersiveLayout item={item}>
+					{render(item, body)}
+				</ImmersiveLayout>
+			);
 		}
 
 		return (

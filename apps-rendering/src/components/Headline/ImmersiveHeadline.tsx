@@ -1,8 +1,13 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { ArticleFormat } from '@guardian/libs';
-import { from, headline, neutral, remSpace } from '@guardian/source-foundations';
+import type { ArticleFormat } from '@guardian/libs';
+import {
+	from,
+	headline,
+	neutral,
+	remSpace,
+} from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 
 // ----- Component ----- //
@@ -14,11 +19,11 @@ const styles = css`
 	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
 	${grid.between('centre-column-start', 'centre-column-end')}
 	grid-row: 3 / 5;
-	
+
 	${from.tablet} {
 		${grid.span('centre-column-start', 12)}
 	}
-	
+
 	${from.desktop} {
 		${headline.xlarge({ fontWeight: 'bold' })}
 		${grid.span('centre-column-start', 8)}
@@ -48,9 +53,7 @@ interface Props {
 const ImmersiveHeadline: React.FC<Props> = ({ headline }) => (
 	<>
 		<div css={backgroundStyles} />
-		<h1 css={styles}>
-			{headline}
-		</h1>
+		<h1 css={styles}>{headline}</h1>
 	</>
 );
 

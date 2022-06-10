@@ -7,7 +7,7 @@ import MainMediaVideo from 'components/MainMedia/MainMediaVideo';
 import { maybeRender } from 'lib';
 import { MainMedia, MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
-import { immersiveCaptionId } from './config'
+import { immersiveCaptionId } from './config';
 
 // ----- Component ----- //
 
@@ -28,8 +28,6 @@ const MainMedia: FC<Props> = ({ format, mainMedia }) =>
 
 // ----- Exports ----- //
 
-export {
-	immersiveCaptionId,
-}
+export { immersiveCaptionId };
 
 export default MainMedia;

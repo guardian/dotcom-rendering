@@ -36,7 +36,10 @@ const styles = css`
 
 const getSizes = (image: Image): Sizes => ({
 	mediaQueries: [
-		{ breakpoint: 'desktop', size: `${100 * (image.width / image.height)}vh` }
+		{
+			breakpoint: 'desktop',
+			size: `${100 * (image.width / image.height)}vh`,
+		},
 	],
 	default: `${80 * (image.width / image.height)}vh`,
 });

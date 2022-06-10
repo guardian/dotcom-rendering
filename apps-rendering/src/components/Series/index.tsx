@@ -13,7 +13,8 @@ import {
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
-import { getFormat, Item } from 'item';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
@@ -153,7 +154,9 @@ const Series: FC<Props> = ({ item }: Props) => {
 	}
 
 	if (item.display === ArticleDisplay.Immersive) {
-		return <ImmersiveSeries series={item.series} format={getFormat(item)} />;
+		return (
+			<ImmersiveSeries series={item.series} format={getFormat(item)} />
+		);
 	}
 
 	return maybeRender(item.series, (series) => (

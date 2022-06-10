@@ -1,9 +1,10 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
-import { Option, OptionKind } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { OptionKind } from '@guardian/types';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { ReactNode } from 'react';
@@ -36,11 +37,11 @@ const renderContent = (
 					<p>by {renderStandfirstText(bylineHtml.value, format)}</p>
 				</address>
 			</>
-		)
+		);
 	}
 
 	return rendered;
-}
+};
 
 // ----- Component ----- //
 
@@ -63,20 +64,19 @@ type Props = {
 	byline: string;
 	bylineHtml: Option<DocumentFragment>;
 	format: ArticleFormat;
-}
+};
 
 const ImmersiveStandfirst: React.FC<Props> = ({
 	standfirst,
 	format,
 	byline,
 	bylineHtml,
-}) => (
+}) =>
 	maybeRender(standfirst, (standfirstDoc) => (
 		<div css={styles}>
 			{renderContent(standfirstDoc, format, byline, bylineHtml)}
 		</div>
-	))
-);
+	));
 
 // ----- Exports ----- //
 

@@ -4,6 +4,4 @@ const immersiveCaptionId = 'immersive-main-media';
 
 // ----- Exports ----- //
 
-export {
-    immersiveCaptionId,
-}
+export { immersiveCaptionId };
