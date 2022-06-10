@@ -1,6 +1,6 @@
 name: DCR test
 on:
-  workflow_deploy:
+  workflow_call:
 runs:
   using: "composite"
   steps:
