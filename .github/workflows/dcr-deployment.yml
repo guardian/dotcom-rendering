@@ -4,7 +4,9 @@ on:
     paths-ignore:
       - "apps-rendering/**"
 jobs:
-
+  test:
+    runs-on: ubuntu-latest
+    uses: ./.github/actions/dcr-test.yml
   deploy:
     needs: test
     runs-on: ubuntu-latest
