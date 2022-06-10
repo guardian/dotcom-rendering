@@ -17,9 +17,9 @@ jobs:
       - uses: ./.github/workflows/typescript
   deploy:
     needs: test
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        runs-on: ubuntu-latest
         run: echo "Coming soon..."
 
 
