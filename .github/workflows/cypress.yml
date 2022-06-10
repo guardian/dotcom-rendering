@@ -1,8 +1,6 @@
 name: DCR cypress
 on:
-  push:
-    paths-ignore:
-      - "apps-rendering/**"
+  workflow_call:
 jobs:
   cypress:
     name: DCR Cypress

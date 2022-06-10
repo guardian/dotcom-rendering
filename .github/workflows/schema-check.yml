@@ -1,9 +1,6 @@
 name: DCR Schema Check
 on:
-  push:
-    paths-ignore:
-      - "apps-rendering/**"
-
+  workflow_call:
 jobs:
   build_check:
     name: DCR Schema Check

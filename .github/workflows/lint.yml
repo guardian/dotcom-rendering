@@ -1,9 +1,6 @@
 name: DCR lint 🔎
 on:
-  push:
-    paths-ignore:
-      - "apps-rendering/**"
-
+  workflow_call:
 jobs:
   lint:
     name: DCR Lint

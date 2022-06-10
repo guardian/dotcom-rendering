@@ -1,0 +1,25 @@
+name: DCR Deployment
+on:
+  push:
+    paths-ignore:
+      - "apps-rendering/**"
+jobs:
+  test:
+    steps:
+      - uses: ./.github/workflows/build-check
+      - uses: ./.github/workflows/bundle-analyser
+      - uses: ./.github/workflows/chromatic
+      - uses: ./.github/workflows/cypress
+      - uses: ./.github/workflows/jest
+      - uses: ./.github/workflows/lint
+      - uses: ./.github/workflows/prettier
+      - uses: ./.github/workflows/schema-check
+      - uses: ./.github/workflows/typescript
+  deploy:
+    needs: test
+    steps:
+      - name: Deploy
+        run: echo "Coming soon..."
+
+
+

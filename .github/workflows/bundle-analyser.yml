@@ -1,11 +1,8 @@
 name: DCR Bundle Analyser
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
-
+  workflow_call:
 jobs:
-    build_check:
+    bundle_analyser:
         name: DCR Bundle Analyser
         runs-on: ubuntu-latest
         steps:

@@ -1,9 +1,6 @@
 name: DCR prettier 💅
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
-
+  workflow_call:
 jobs:
     lint:
         name: DCR Prettier

@@ -1,9 +1,6 @@
 name: DCR Build Check
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
-
+  workflow_call:
 jobs:
     build_check:
         name: DCR Build Check

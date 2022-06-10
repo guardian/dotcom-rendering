@@ -1,9 +1,6 @@
 name: DCR jest 🤔
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
-
+    workflow_call:
 jobs:
     jest:
         name: DCR Jest

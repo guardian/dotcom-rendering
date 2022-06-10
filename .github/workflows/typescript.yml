@@ -1,9 +1,6 @@
 name: DCR typescript 🕵‍♀
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
-
+  workflow_call:
 jobs:
     typescript:
         name: Typescript
