@@ -19,6 +19,7 @@ jobs:
     needs: test
     steps:
       - name: Deploy
+        runs-on: ubuntu-latest
         run: echo "Coming soon..."
 
 
