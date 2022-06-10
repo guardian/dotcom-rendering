@@ -7,7 +7,7 @@ import {
 	labelStyles as adLabelStyles,
 } from '../components/AdSlot';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
-import { renderArticleElement } from './renderElement';
+import { RenderArticleElement } from './renderElement';
 import { withSignInGateSlot } from './withSignInGateSlot';
 
 // This is required for spacefinder to work!
@@ -86,21 +86,24 @@ export const ArticleRenderer: React.FC<{
 	abTests,
 }) => {
 	const renderedElements = elements.map((element, index) => {
-		return renderArticleElement({
-			format,
-			element,
-			adTargeting,
-			ajaxUrl,
-			host,
-			index,
-			isMainMedia: false,
-			pageId,
-			webTitle,
-			isAdFreeUser,
-			isSensitive,
-			switches,
-			abTests,
-		});
+		return (
+			<RenderArticleElement
+				key={'elementId' in element ? element.elementId : index}
+				format={format}
+				element={element}
+				adTargeting={adTargeting}
+				ajaxUrl={ajaxUrl}
+				host={host}
+				index={index}
+				isMainMedia={false}
+				pageId={pageId}
+				webTitle={webTitle}
+				isAdFreeUser={isAdFreeUser}
+				isSensitive={isSensitive}
+				switches={switches}
+				abTests={abTests}
+			/>
+		);
 	});
 
 	// const cleanedElements = elements.map(element =>

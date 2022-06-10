@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import React from 'react';
 
 /*
  * Working on this file? Checkout out 027-pictures.md for background information & context!
@@ -280,7 +281,7 @@ export const Picture = ({
 			)}
 
 			{desiredWidths.map(({ breakpoint, width: desiredWidth }) => (
-				<>
+				<React.Fragment key={breakpoint}>
 					{/* HDPI Source (DPR2) - images in this srcset have `dpr=2&quality=45` in the url */}
 					{hdpiSourceSets.length > 0 && (
 						<source
@@ -301,7 +302,7 @@ export const Picture = ({
 						)}
 						media={`(min-width: ${breakpoint}px)`}
 					/>
-				</>
+				</React.Fragment>
 			))}
 
 			<img

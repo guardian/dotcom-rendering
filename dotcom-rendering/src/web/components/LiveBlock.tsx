@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
-import { renderArticleElement } from '../lib/renderElement';
+import { RenderArticleElement } from '../lib/renderElement';
 import { LastUpdated } from './LastUpdated';
 import { ShareIcons } from './ShareIcons';
 
@@ -63,22 +63,23 @@ export const LiveBlock = ({
 			host={host}
 			pageId={pageId}
 		>
-			{block.elements.map((element, index) =>
-				renderArticleElement({
-					format,
-					element,
-					isMainMedia: false,
-					host,
-					adTargeting,
-					ajaxUrl,
-					index,
-					pageId,
-					webTitle,
-					isAdFreeUser,
-					isSensitive,
-					switches,
-				}),
-			)}
+			{block.elements.map((element, index) => (
+				<RenderArticleElement
+					key={'elementId' in element ? element.elementId : index}
+					format={format}
+					element={element}
+					adTargeting={adTargeting}
+					ajaxUrl={ajaxUrl}
+					host={host}
+					index={index}
+					isMainMedia={false}
+					pageId={pageId}
+					webTitle={webTitle}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					switches={switches}
+				/>
+			))}
 			<footer
 				css={css`
 					display: flex;
