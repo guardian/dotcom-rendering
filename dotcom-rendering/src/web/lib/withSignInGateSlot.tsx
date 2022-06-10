@@ -35,7 +35,7 @@ export const withSignInGateSlot = ({
 }: Props): React.ReactNode => {
 	return renderedElements.map((element, i) => {
 		return (
-			<React.Fragment key={element?.key}>
+			<React.Fragment key={element?.key ?? i}>
 				{element}
 				{/* Add the placeholder div after the second article element */}
 				{i === 1 && (
