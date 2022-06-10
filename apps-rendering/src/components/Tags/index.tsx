@@ -77,7 +77,7 @@ interface Props {
 }
 
 const Tags: FC<Props> = ({ tags, format }) => (
-	<ul css={styles(format)}>
+	<ul css={styles(format)} role="list">
 		{tags
 			.filter(
 				(tag) =>

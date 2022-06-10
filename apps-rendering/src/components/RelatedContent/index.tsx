@@ -112,7 +112,7 @@ const RelatedContent: FC<Props> = ({ content }) => {
 			return (
 				<section css={styles}>
 					<h2 css={headingStyles}>{title}</h2>
-					<ul css={listStyles}>
+					<ul css={listStyles} role="list">
 						{relatedItems.map((relatedItem, key) => {
 							return relatedItem.type === COMMENT &&
 								relatedItem.bylineImage ? (
