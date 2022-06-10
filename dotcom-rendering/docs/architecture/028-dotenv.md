@@ -41,7 +41,7 @@ const secrets = [
 
 ## Security
 
-`.env` variables are only available on the server, you should ensure that you **never** pass an environment variable into the clientside code
+`.env` variables are only available on the server, you should ensure that you **never** pass an environment variable into the client-side code.
 e.g
 
 ```jsx
