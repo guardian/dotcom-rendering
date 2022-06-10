@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { CredentialsProviderError } = require('@aws-sdk/property-provider');
-const { prompt, warn } = require('../env/log');
+const { prompt, log, success, warn } = require('../env/log');
 const secrets = require('../secrets');
 const { getAwsSsmParameters } = require('./get-aws-ssm-parameters');
 
@@ -25,12 +25,18 @@ const checkEnv = async () => {
 const genEnv = async (parameters) => {
 	let envString = '';
 	for (const secret of secrets) {
+		if (!parameters[secret.key]) {
+			throw new Error(
+				`Key "${secret.key}" could not be found or is empty`,
+			);
+		}
+
 		envString += `${secret.key}=${parameters[secret.key]}\n`;
 	}
 
 	await fs.writeFile(ENV_PATH, envString);
 
-	prompt('[scripts/dotenv] Generated .env file');
+	success('[scripts/dotenv] ✓ Generated .env file');
 };
 
 const prod = async () => {
@@ -39,9 +45,6 @@ const prod = async () => {
 		await genEnv(params);
 		const isValid = await checkEnv();
 		if (!isValid) {
-			warn(
-				'[scripts/dotenv] Could not validate that the .env file was generated correctly',
-			);
 			throw new Error(
 				'Could not validate .env file was generated correctly',
 			);
@@ -62,19 +65,18 @@ const dev = async () => {
 			// eslint-disable-next-line no-underscore-dangle -- '__type' is the only way to identify this exception type
 			err.__type === 'ExpiredTokenException'
 		) {
-			prompt(
-				'[scripts/dotenv] Could not load AWS credentials to generate .env file',
-			);
+			log('[scripts/dotenv] Could not load AWS credentials');
 
 			// We've failed to generate the .env file - but this is okay for the DEV environment
 			// If we already have an existing valid .env file, simply notify the user their .env was not updated.
 			// If we don't have a valid .env, notify them of the potential missing functionality.
 			const isValid = await checkEnv();
 			if (isValid) {
-				prompt(
-					'[scripts/dotenv] .env file is valid but has not been updated',
-				);
+				success('[scripts/dotenv] ✓ Using existing .env file');
 			} else {
+				warn(
+					'[scripts/dotenv] ✖ .env file either does not exist or is missing secrets',
+				);
 				prompt(
 					"[scripts/dotenv] This won't stop dotcom-rendering from working, it will just vary from PROD by:",
 				);
@@ -103,7 +105,6 @@ const dev = async () => {
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises -- Async entrypoint
 (async () => {
-	const PROD = process.env.NODE_ENV === 'production';
-	if (PROD) await prod();
+	if (process.env.NODE_ENV === 'production') await prod();
 	else await dev();
 })();
