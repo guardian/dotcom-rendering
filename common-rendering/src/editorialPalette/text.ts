@@ -552,6 +552,10 @@ const kicker = (format: ArticleFormat): Colour => {
 };
 
 const seriesTitle = (format: ArticleFormat): Colour => {
+	if (format.display === ArticleDisplay.Immersive) {
+		return neutral[100];
+	}
+
 	switch (format.design) {
 		case ArticleDesign.DeadBlog:
 			switch (format.theme) {
@@ -639,6 +643,10 @@ const richLinkAnchorDark = (_format: ArticleFormat): Colour => {
 }
 
 const seriesTitleDark = (format: ArticleFormat): Colour => {
+	if (format.display === ArticleDisplay.Immersive) {
+		return neutral[100];
+	}
+
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[500];
