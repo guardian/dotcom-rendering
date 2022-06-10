@@ -94,6 +94,7 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 				{bigCards.map((card, cardIndex) => {
 					return (
 						<LI
+							key={card.url}
 							percentage="25%"
 							padSides={true}
 							padBottom={false}
@@ -139,6 +140,7 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 						{smallCards.map((card, cardIndex) => {
 							return (
 								<LI
+									key={card.url}
 									percentage="50%"
 									showDivider={true}
 									padSides={true}
