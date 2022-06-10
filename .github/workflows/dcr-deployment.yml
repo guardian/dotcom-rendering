@@ -5,6 +5,7 @@ on:
       - "apps-rendering/**"
 jobs:
   test:
+    runs-on: ubuntu-latest
     steps:
       - uses: ./.github/workflows/build-check
       - uses: ./.github/workflows/bundle-analyser
