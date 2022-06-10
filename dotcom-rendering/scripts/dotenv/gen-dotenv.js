@@ -1,4 +1,4 @@
-const fs = require('fs').promises;
+const fs = require('fs');
 const path = require('path');
 const { CredentialsProviderError } = require('@aws-sdk/property-provider');
 const { prompt, log, success, warn } = require('../env/log');
@@ -7,13 +7,17 @@ const { getAwsSsmParameters } = require('./get-aws-ssm-parameters');
 
 const ENV_PATH = path.resolve(__dirname, '../../.env');
 
-const checkEnv = async () => {
+const checkEnv = () => {
 	try {
-		const env = (await fs.readFile(ENV_PATH)).toString();
+		const content = fs.readFileSync(ENV_PATH).toString().split('\n');
+		const entries = content
+			.filter((line) => line.trim() !== '')
+			.map((line) => line.split('='));
+
+		const env = Object.fromEntries(entries);
 
 		for (const secret of secrets) {
-			const regex = new RegExp(`^${secret.key.replace('.', '\\.')}=.+`);
-			if (!env.match(regex)) return false;
+			if (!env[secret.key]) return false;
 		}
 
 		return true;
@@ -22,7 +26,7 @@ const checkEnv = async () => {
 	}
 };
 
-const genEnv = async (parameters) => {
+const genEnv = (parameters) => {
 	let envString = '';
 	for (const secret of secrets) {
 		if (!parameters[secret.key]) {
@@ -34,7 +38,7 @@ const genEnv = async (parameters) => {
 		envString += `${secret.key}=${parameters[secret.key]}\n`;
 	}
 
-	await fs.writeFile(ENV_PATH, envString);
+	fs.writeFileSync(ENV_PATH, envString);
 
 	success('[scripts/dotenv] ✓ Generated .env file');
 };
@@ -42,8 +46,8 @@ const genEnv = async (parameters) => {
 const prod = async () => {
 	try {
 		const params = await getAwsSsmParameters('prod');
-		await genEnv(params);
-		const isValid = await checkEnv();
+		genEnv(params);
+		const isValid = checkEnv();
 		if (!isValid) {
 			throw new Error(
 				'Could not validate .env file was generated correctly',
@@ -58,7 +62,7 @@ const prod = async () => {
 const dev = async () => {
 	try {
 		const params = await getAwsSsmParameters('dev');
-		await genEnv(params);
+		genEnv(params);
 	} catch (err) {
 		if (
 			err instanceof CredentialsProviderError ||
@@ -70,7 +74,7 @@ const dev = async () => {
 			// We've failed to generate the .env file - but this is okay for the DEV environment
 			// If we already have an existing valid .env file, simply notify the user their .env was not updated.
 			// If we don't have a valid .env, notify them of the potential missing functionality.
-			const isValid = await checkEnv();
+			const isValid = checkEnv();
 			if (isValid) {
 				success('[scripts/dotenv] ✓ Using existing .env file');
 			} else {
