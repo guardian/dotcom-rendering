@@ -2890,6 +2890,93 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-4.4.0.tgz#69cf404b56db3ca507702d29dae6a40eeb145cf4"
   integrity sha512-5Q4Vl8ek0UV0Y9ob5y3Smq5xHs1d3lEzLynv5qqlYqVBlhze5Ypg5IzrPcEpKtcUaCIQeI9d5FevHM9fmm18sQ==
 
+"@guardian/src-brand@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-brand/-/src-brand-3.8.0.tgz#cbca5378757e3c3012325d451093ea0c613f2345"
+  integrity sha512-jIPgleBEZ7dyysTcM44UH0fshUtT0dsL2ic7qJurDF7N1ya4Ty7RGIsd+gAxPxr9NhBRQzj13JLLY6oXCZxx/A==
+
+"@guardian/src-button@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-button/-/src-button-3.8.0.tgz#6c7eee727b0bf283766d36e20929e63131bf82eb"
+  integrity sha512-C7wa10EAe+tbuySuzfsNK/Fppxw8I5/3bdyJ0acZQJaDQxJAzAkraGrhXDfWgNXXjpJXA6j3lLJUBaZE6m+hzA==
+  dependencies:
+    "@guardian/src-helpers" "^3.8.0"
+
+"@guardian/src-choice-card@^3.8.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-choice-card/-/src-choice-card-3.13.0.tgz#46cf37463b3faf93e29a4126c2b0d9505c998d9d"
+  integrity sha512-dZPLdmfssaXat2/NT0y1Gd3zuqdbjpOK5kkCd2TOEr+qHXhFnBJ1yxY+1Z9TZbYciVHJLPBVL5CATZTyotcc7g==
+  dependencies:
+    "@guardian/src-helpers" "^3.13.0"
+    "@guardian/src-label" "^3.13.0"
+    "@guardian/src-user-feedback" "^3.13.0"
+
+"@guardian/src-foundations@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-3.8.0.tgz#2a17748cced540ea137618feddc85d2b12c16023"
+  integrity sha512-FrlWLKEkqzBWXD3r7fJ0/qka/k5kbvjqrQRypQnkxkv2Y8SBb/OXzPm8jYVqb6PJ1UX4T0l6/58uqoi3zoWyHA==
+
+"@guardian/src-foundations@^3.13.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-foundations/-/src-foundations-3.13.0.tgz#4a40ac6e2bd62b8bf8ef634e9084fcc8c640d8c7"
+  integrity sha512-tibmZHHu7TjN3DSphUhlGSLCAJvLqr8XLDpgdlWB8YO1ohwYacOPpVdIGSi0N7E0XxjUOfB757XWXgs3yNd0LQ==
+
+"@guardian/src-helpers@^3.13.0", "@guardian/src-helpers@^3.8.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-helpers/-/src-helpers-3.13.0.tgz#57893f9dda72f076d0a1a8546dcb7c8f76ca29ec"
+  integrity sha512-0VTTxF1BPGpHkMmhJ1PW3+e/4TX9Mu43dczASsNXScG/1ij0RNDCI8+JDVcgMsXcgx5CbspKYadSt2S+L7qzBQ==
+  dependencies:
+    "@guardian/src-foundations" "^3.13.0"
+    mini-svg-data-uri "^1.3.3"
+
+"@guardian/src-icons@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-icons/-/src-icons-3.8.0.tgz#11f1bbfbbbbe04f63afeb614cfb1513ee97d1477"
+  integrity sha512-46Q/5YuLE+Z9wJSCD3wn9Nhlzvu7cyyzmNzcQI7iWUgYY5GCxm3pgI+xkqwAyKi49JBqZu1mgxp/eBFh5KLkdw==
+
+"@guardian/src-icons@^3.13.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-icons/-/src-icons-3.13.0.tgz#60a244d7ad9e815ce8751a5ae1fd8d23335b5c57"
+  integrity sha512-SF7jGfc4nRE7LRu5ZAkAloJlR4B81b/w6EUzuxZCETVM18+s1rJtofOGK/lix08ZHGl2RlabJ8Kl80ZUf2jrBQ==
+
+"@guardian/src-label@^3.13.0", "@guardian/src-label@^3.8.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-label/-/src-label-3.13.0.tgz#c3717574352854d45fd48d1f0600c4f9ce202beb"
+  integrity sha512-5kESAxQZ1zUhv2xbwn4XF5PQZRrrq3qq5+V0IkEfz9X/NCxMmr3QHILcougeK0hXodZKZhwidBtqPvKz6hQU6A==
+  dependencies:
+    "@guardian/src-helpers" "^3.13.0"
+
+"@guardian/src-layout@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-layout/-/src-layout-3.8.0.tgz#ef7c536006f79507c9cde1fd48f38ae4c7af47d4"
+  integrity sha512-O4cfoZndrVvbuAkGJK9O96FTuKh4C71iJ7KtNDFiISjWBAd0IdEBWi4Z56V8pMqZPKbLgim01D7rgM0vgeHW4w==
+  dependencies:
+    "@guardian/src-helpers" "^3.8.0"
+
+"@guardian/src-link@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-link/-/src-link-3.8.0.tgz#97f4be39a47f9b152e1ac4af8d2654db7f5fad40"
+  integrity sha512-+Ej1tAiJXdXCIyg1sfWJ4KQh5C6KcLOCc8n0rm0QPCNmVsCfXDtUdZVge5MFoR7p2LddspHjAz/SoKsvrYTz3A==
+  dependencies:
+    "@guardian/src-helpers" "^3.8.0"
+
+"@guardian/src-text-input@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-text-input/-/src-text-input-3.8.0.tgz#62e8d34c47d940fdac3096e2a81ddefc4096f9ec"
+  integrity sha512-EYoHj6KWWdrLXiUgtM4W6fj07SoA3Zmwe/geSn4mQk6viAy9bFmyJSCtLF+kQ0FlePqSgMpTpZHfCp8crJ1tRg==
+  dependencies:
+    "@guardian/src-helpers" "^3.8.0"
+    "@guardian/src-label" "^3.8.0"
+    "@guardian/src-user-feedback" "^3.8.0"
+
+"@guardian/src-user-feedback@^3.13.0", "@guardian/src-user-feedback@^3.8.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@guardian/src-user-feedback/-/src-user-feedback-3.13.0.tgz#d4aaab7a27f7f457e2de18382c37bc0c83e5b1f8"
+  integrity sha512-IETf2hFVw6rLHOt3eTinH9ZmuIJD/G7xdHWRQ9CJjORrzdrtnjFGgtIp3QTqKbUF/XmvAGlEF7cdt/7Xk2Z9nQ==
+  dependencies:
+    "@guardian/src-helpers" "^3.13.0"
+    "@guardian/src-icons" "^3.13.0"
+
 "@guardian/support-dotcom-components@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.2.tgz#56bfb7cf7aef6d859b6f97b3986188af687f8a16"
@@ -21520,6 +21607,11 @@ youtube-player@^5.5.2:
     debug "^2.6.6"
     load-script "^1.0.0"
     sister "^3.0.0"
+
+zod@^3.2.0:
+  version "3.17.3"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.17.3.tgz#86abbc670ff0063a4588d85a4dcc917d6e4af2ba"
+  integrity sha512-4oKP5zvG6GGbMlqBkI5FESOAweldEhSOZ6LI6cG+JzUT7ofj1ZOC0PJudpQOpT1iqOFpYYtX5Pw0+o403y4bcg==
 
 zwitch@^1.0.0:
   version "1.0.5"

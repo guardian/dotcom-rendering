@@ -1,6 +1,5 @@
 import { css, ThemeProvider } from '@emotion/react';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { ExampleComponent } from '@guardian/message-rendering/src/ExampleComponent';
 import { space, until, visuallyHidden } from '@guardian/source-foundations';
 import {
 	buttonThemeReaderRevenue,

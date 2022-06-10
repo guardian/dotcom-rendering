@@ -1,10 +1,10 @@
 // @ts-check
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const webpack = require('webpack');
-const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const { v4: uuidv4 } = require('uuid');
+const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -36,6 +36,7 @@ const commonConfigs = ({ platform }) => ({
 			react: 'preact/compat',
 			'react-dom/test-utils': 'preact/test-utils',
 			'react-dom': 'preact/compat',
+			'@sdc/shared/types': 'message-rendering/src/modules/types',
 		},
 		extensions: ['.js', '.ts', '.tsx', '.jsx'],
 		symlinks: false,
@@ -45,7 +46,7 @@ const commonConfigs = ({ platform }) => ({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
 		}),
-		// @ts-ignore -- somehow the type declaration isn’t playing nice
+		// @ts-expect-error -- somehow the type declaration isn’t playing nice
 		new FilterWarningsPlugin({
 			exclude: /export .* was not found in/,
 		}),
@@ -57,7 +58,7 @@ const commonConfigs = ({ platform }) => ({
 		...(DEV
 			? // DEV plugins
 			  [
-					// @ts-ignore -- somehow the type declaration isn’t playing nice
+					// @ts-expect-error -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
 						/** @type {(message: string) => void} */

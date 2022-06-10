@@ -22,7 +22,7 @@ const catchAndLogErrors = (description: string, fn: () => void): void => {
 	try {
 		fn();
 	} catch (e) {
-		console.log(`Error (${description}): `, e.message);
+		console.log(`Error (${description}): `, e);
 	}
 };
 

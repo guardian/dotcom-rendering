@@ -162,9 +162,11 @@ export const ReaderRevenueEpic = ({
 		const modulePerf = initPerf('contributions-epic-module');
 		modulePerf.start();
 
-		window
-			.guardianPolyfilledImport(module.url)
+		import(
+			/* webpackChunkName: "guardian-contributions-epic" */ '@guardian/message-rendering/src/modules/epics/ContributionsEpic'
+		)
 			.then((epicModule: { ContributionsEpic: React.FC<EpicProps> }) => {
+				console.log('AAAAAAAAAA');
 				modulePerf.end();
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 			})
@@ -177,7 +179,6 @@ export const ReaderRevenueEpic = ({
 					'rr-epic',
 				);
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	if (Epic) {
