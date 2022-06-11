@@ -182,12 +182,17 @@ function generateSignedUrl({
 	}
 
 	const salt = process.env.IMAGE_SALT;
-	if (!salt) {
-		// If no IMAGE_SALT env variable is set then something has gone wrong
-		// and we want to know about it
+	if (!salt && process.env.NODE_ENV === 'production') {
+		// If no IMAGE_SALT env variable is set in production then something has
+		// gone wrong and we want to know about it
 		throw new Error(
 			'No IMAGE_SALT value found when constructing picture source',
 		);
+	} else if (!salt) {
+		// If no IMAGE_SALT is set outside of production it likely means the
+		// developer has yet to set the env file. In this case we continue
+		// using a default image
+		return 'https://i.guim.co.uk/img/media/52f8e9183bbc03c48fcdf4ed9a4e12b3a19a9927/0_0_5000_3000/master/5000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=196c7f25bf2fddcb45512d3ff25e20c0';
 	}
 
 	// Construct and sign the url
