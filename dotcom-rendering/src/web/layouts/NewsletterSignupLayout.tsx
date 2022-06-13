@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
+import type { Breakpoint } from '@guardian/source-foundations';
 import {
+	brandAlt,
 	brandBackground,
 	brandBorder,
 	brandLine,
@@ -12,9 +14,11 @@ import {
 import {
 	Column,
 	Columns,
+	SvgEnvelope,
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { size } from 'lodash';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
@@ -107,6 +111,46 @@ const leftColWrapperStyle = css`
 		max-width: 100%;
 	}
 `;
+
+interface NewsletterDetailProps {
+	text: string;
+	showUntil?: Breakpoint;
+}
+const NewsletterDetail = ({ text, showUntil }: NewsletterDetailProps) => {
+	const displayRule = showUntil
+		? `
+	display: none;
+	${until[showUntil]} {
+		display: flex;
+	}
+	`
+		: `display: flex;`;
+
+	const containerStyle = css`
+		${displayRule}
+		align-items: center;
+		padding-top: ${space[3]}px;
+		padding-bottom: ${space[2]}px;
+
+		svg {
+			background-color: ${brandAlt[400]};
+			border-radius: 50%;
+			padding: 2px;
+			margin-right: ${space[2]}px;
+		}
+
+		span {
+			${textSans.medium({ fontWeight: 'bold' })};
+		}
+	`;
+
+	return (
+		<div css={containerStyle}>
+			<SvgEnvelope size="small" />
+			<span>{text}</span>
+		</div>
+	);
+};
 
 interface Props {
 	CAPIArticle: CAPIArticleType;
@@ -252,11 +296,15 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				<ContainerLayout
 					centralBorder="full"
 					sideBorders={true}
-					title="UK Focused"
-					description={CAPIArticle.headline}
+					stretchRight={true}
+					leftContent={<NewsletterDetail text="UK Focused" />}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 4 / 6, 3 / 6, 3 / 6]}>
+							<NewsletterDetail
+								text="UK Focused"
+								showUntil="leftCol"
+							/>
 							<div>
 								<ArticleHeadline
 									format={format}
