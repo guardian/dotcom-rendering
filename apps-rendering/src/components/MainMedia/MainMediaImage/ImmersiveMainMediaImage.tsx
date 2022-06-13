@@ -26,7 +26,6 @@ const styles = css`
 	margin: 0;
 	${grid.between('viewport-start', 'viewport-end')}
 	grid-row: 1 / 4;
-	background-color: pink;
 	height: 80vh;
 
 	${from.desktop} {
