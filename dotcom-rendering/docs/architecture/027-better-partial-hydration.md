@@ -12,7 +12,7 @@ See: https://addyosmani.com/blog/rehydration/
 
 ### Before
 
-We used App.tsx which was a global react app that let us have shared state between isands. For lazy loading we employed React Loadable Components. From there, we used a component called `HydrateOnce` which was designed to only execute once even thought the global react was triggering re-renders as state changed.
+We used App.tsx which was a global react app that let us have shared state between isands. For lazy loading we employed React Loadable Components. From there, we used a component called `HydrateOnce` which was designed to only execute once even though the global react was triggering re-renders as state changed.
 
 This was problematic because sometimes you had dependencies on global state so to get around this we added the `waitFor` prop.
 
@@ -32,6 +32,6 @@ PRs #3629 & #3784 simplify the process of partial hydration by moving the logic 
 To create a new island you now:
 
 1. Wrap you component on the server with `Island`.
-2. Add `.importable` to the component filname. Eg: `[MyThing].importable.tsx`
+2. Add `.importable` to the component filename. Eg: `[MyThing].importable.tsx`
 
 This is simpler to use, harder to make mistakes with and is certain to only ever send the data to the client that is required.
