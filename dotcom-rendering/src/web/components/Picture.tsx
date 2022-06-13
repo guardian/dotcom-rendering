@@ -183,7 +183,7 @@ function generateSignedUrl({
 	}
 
 	const salt = process.env.IMAGE_SALT;
-	if (!salt && process.env.NODE_ENV === 'production') {
+	if (!salt && process.env.NODE_ENV === 'production' && !process.env.CI) {
 		// If no IMAGE_SALT env variable is set in production then something has
 		// gone wrong and we want to know about it
 		throw new Error(
