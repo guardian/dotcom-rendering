@@ -109,6 +109,8 @@ const dev = async () => {
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises -- Async entrypoint
 (async () => {
-	if (process.env.NODE_ENV === 'production') await prod();
+	// We don't want to force the .env for exist for CI, but do for all other production environments.
+	if (process.env.NODE_ENV === 'production' && process.env.CI_ENV !== 'true')
+		await prod();
 	else await dev();
 })();
