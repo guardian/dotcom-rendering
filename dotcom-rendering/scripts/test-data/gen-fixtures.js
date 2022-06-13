@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-const fetch = require('node-fetch');
-const execa = require('execa');
+
 const fs = require('fs');
 const { resolve } = require('path');
+const execa = require('execa');
+const fetch = require('node-fetch');
 const { config } = require('../../fixtures/config');
 const { configOverrides } = require('../../fixtures/config-overrides');
 const { switchOverrides } = require('../../fixtures/switch-overrides');
@@ -29,7 +29,19 @@ const root = resolve(__dirname, '..', '..');
 const articles = [
 	{
 		name: 'Standard',
-		url: 'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	},
+	{
+		name: 'Gallery',
+		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	},
+	{
+		name: 'Audio',
+		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+	},
+	{
+		name: 'Video',
+		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	},
 	{
 		name: 'NewletterSignup',

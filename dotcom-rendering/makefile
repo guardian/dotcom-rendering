@@ -79,7 +79,7 @@ dev-legacy: clear clean-dist install gen-dotenv
 
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/integration/**/*"'
+	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 ampValidation: clean-dist install build
 	$(call log, "starting frontend PROD server for AMP Validation")

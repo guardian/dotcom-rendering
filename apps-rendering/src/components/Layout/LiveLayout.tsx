@@ -19,6 +19,7 @@ import Footer from 'components/Footer';
 import GridItem from 'components/GridItem';
 import LiveBlocks from 'components/LiveBlocks';
 import LiveblogHeader from 'components/LiveblogHeader';
+import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Tags from 'components/Tags';
@@ -26,7 +27,6 @@ import { getFormat } from 'item';
 import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
-import MainMedia from 'mainMedia';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
 

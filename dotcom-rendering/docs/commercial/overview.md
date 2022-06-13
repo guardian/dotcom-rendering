@@ -20,7 +20,7 @@ Among other tasks performed by the commercial modules we have
 
 As a result of architectural decision, dotcom-rendering currently makes use of frontend existing commercial modules. This means that when modifying any of those libraries it is important to check that your changes have not broken anything in Dotcom Rendering (see section "Development change checklist" for some pointers).
 
-That having been said, and when needed, once can make slight adjustement to an existing library to customise the code depending on whether it is working on Frontend or Dotcom Rendering by testing the value of `window.guardian.isDotcomRendering`. For this call
+That having been said, and when needed, one can make slight adjustments to an existing library to customise the code depending on whether it is working on Frontend or Dotcom Rendering by testing the value of `window.guardian.isDotcomRendering`. For this call
 
 ```
 import config from 'lib/config';

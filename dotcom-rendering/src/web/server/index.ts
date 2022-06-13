@@ -1,5 +1,5 @@
 import type express from 'express';
-import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
+import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';

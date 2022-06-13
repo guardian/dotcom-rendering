@@ -1,8 +1,8 @@
 import { ArticlePillar } from '@guardian/libs';
-import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { Article } from '../../fixtures/generated/articles/Article';
 import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { enhanceImages } from './enhance-images';
 
 const image = {
@@ -594,7 +594,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, Article.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -662,7 +662,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, Article.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -697,7 +697,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, Article.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -751,7 +751,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, Article.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -799,7 +799,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, Article.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -822,7 +822,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, Article.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -846,7 +846,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, Article.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -868,7 +868,7 @@ describe('Enhance Images', () => {
 
 			const expectedOutput = input;
 
-			expect(enhanceImages(input, Article.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -921,7 +921,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, Article.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
 				expectedOutput,
 			);
 		});
@@ -979,7 +979,7 @@ describe('Enhance Images', () => {
 				},
 			];
 
-			expect(enhanceImages(input, Article.format)).toEqual(
+			expect(enhanceImages(input, ExampleArticle.format)).toEqual(
 				expectedOutput,
 			);
 		});
