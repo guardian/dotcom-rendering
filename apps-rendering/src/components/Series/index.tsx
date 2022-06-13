@@ -19,7 +19,7 @@ import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import { getThemeStyles } from 'themeStyles';
-import ImmersiveSeries from './immersiveSeries';
+import ImmersiveSeries from './ImmersiveSeries';
 
 // ----- Component ----- //
 
