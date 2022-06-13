@@ -53,6 +53,12 @@ module.exports = {
 
 		return config;
 	},
+	env: (config) => ({
+		...config,
+		// Github sets a CI env var for all actions but this isn't being picked up by Storybook
+		// See: https://storybook.js.org/docs/react/configure/environment-variables
+		CI: 'true',
+	}),
 };
 
 const dcrWebpack = (config) => {
