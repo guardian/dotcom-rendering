@@ -779,10 +779,10 @@ const bareElements = new Set([
 	'model.dotcomrendering.pageElements.InteractiveBlockElement',
 ]);
 
-// renderArticleElement is a wrapper for renderElement that wraps elements in a
+// RenderArticleElement is a wrapper for renderElement that wraps elements in a
 // Figure and adds metadata and (role-) styling appropriate for most article
 // types.
-export const renderArticleElement = ({
+export const RenderArticleElement = ({
 	format,
 	element,
 	adTargeting,
