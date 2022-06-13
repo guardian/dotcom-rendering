@@ -55,6 +55,7 @@ export const FixedLargeSlowXIV = ({
 						mediaDuration={primary.mediaDuration}
 						starRating={primary.starRating}
 						branding={primary.branding}
+						snapData={primary.snapData}
 						discussionId={primary.discussionId}
 					/>
 				</LI>
@@ -89,6 +90,7 @@ export const FixedLargeSlowXIV = ({
 						mediaDuration={secondary.mediaDuration}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
+						snapData={secondary.snapData}
 						discussionId={secondary.discussionId}
 					/>
 				</LI>
@@ -140,6 +142,7 @@ export const FixedLargeSlowXIV = ({
 										branding={card.branding}
 										discussionId={card.discussionId}
 										dataLinkName={card.dataLinkName}
+										snapData={card.snapData}
 									/>
 								</LI>
 							);
