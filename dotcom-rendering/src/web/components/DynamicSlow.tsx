@@ -103,6 +103,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						{bigCards.map((card, cardIndex) => {
 							return (
 								<LI
+									key={card.url}
 									percentage="50%"
 									showDivider={cardIndex !== 0}
 									padSides={true}
@@ -164,6 +165,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						{smallCards.map((card, cardIndex) => {
 							return (
 								<LI
+									key={card.url}
 									padSides={true}
 									showTopMarginWhenStacked={false}
 									padBottom={

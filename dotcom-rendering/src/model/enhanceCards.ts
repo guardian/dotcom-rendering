@@ -110,6 +110,11 @@ export const enhanceCards = (
 				  )
 				: undefined,
 			discussionId: faciaCard.discussion.discussionId,
+			// nb. there is a distinct 'byline' property on FEFrontCard, at
+			// card.properties.byline
+			byline:
+				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
+			showByline: faciaCard.properties.showByline,
 			snapData: faciaCard.enriched,
 		};
 	});

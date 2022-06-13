@@ -1,8 +1,8 @@
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { Article } from '../../fixtures/generated/articles/Article';
 import { enhanceEmbeds } from './enhance-embeds';
 
-const example = Article;
+const example = ExampleArticle;
 
 describe('Enhance Embeds', () => {
 	it('creates an identical but new object when no changes are needed', () => {

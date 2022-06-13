@@ -97,8 +97,12 @@ describe('Interactivity', function () {
 				// down and preventing the scroll request to actually reach the bottom. We will fix
 				// this later when we've defined fixed heights for these containers, preventing CLS
 				cy.scrollTo('bottom', { duration: 300 });
-				cy.wait('@getMostReadGeo');
+				// Wait for hydration
+				cy.get('gu-island[name=MostViewedFooterData]')
+					.last()
+					.should('have.attr', 'data-gu-ready', 'true');
 				cy.wait('@getMostRead');
+				cy.wait('@getMostReadGeo');
 				cy.get('[data-cy=mostviewed-footer]').should('exist');
 				cy.get('[data-cy=tab-body-0]').should('be.visible');
 				cy.get('[data-cy=tab-body-1]').should('not.be.visible');
@@ -145,8 +149,10 @@ describe('Interactivity', function () {
 				cy.contains('Crosswords');
 				cy.get('[data-cy=column-collapse-Opinion]').click();
 				cy.contains('Columnists').should('be.visible');
+				// this input element is not visible and typing into it will cause Cypress to fail to type - so force override
+				// https://docs.cypress.io/guides/references/error-messages#cy-failed-because-the-element-cannot-be-interacted-with
+				cy.focused().type('{esc}', { force: true });
 				// check focus is on veggie burger menu button on close
-				cy.focused().type('{esc}');
 				cy.focused().should('have.attr', 'data-cy', 'veggie-burger');
 			});
 
