@@ -307,8 +307,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										${textSans.medium({
 											fontWeight: 'bold',
 										})};
-										margin-right: ${space[2]}px;
-										margin-bottom: ${space[2]}px;
+										margin-right: ${space[4]}px;
 									`}
 								>
 									Tell your friends
@@ -322,9 +321,6 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											'facebook',
 											'twitter',
 											'email',
-											'linkedIn',
-											'whatsApp',
-											'messenger',
 										]}
 										size="medium"
 										context="ArticleMeta"

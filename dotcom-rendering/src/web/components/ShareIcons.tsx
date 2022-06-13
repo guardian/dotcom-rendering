@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { from, until } from '@guardian/source-foundations';
+import { from, neutral, until } from '@guardian/source-foundations';
 import EmailIcon from '../../static/icons/email.svg';
 import FacebookIcon from '../../static/icons/facebook.svg';
 import LinkedInIcon from '../../static/icons/linked-in.svg';
@@ -67,6 +67,14 @@ const decideIconColor = (format: ArticleFormat, context: Context) => {
 			fill: ${palette.fill.shareIconGrayBackground};
 		`;
 	}
+	if (
+		format.design === ArticleDesign.NewsletterSignup &&
+		context === 'ArticleMeta'
+	) {
+		return css`
+			fill: ${neutral[7]};
+		`;
+	}
 	return css`
 		fill: ${palette.fill.shareIcon};
 	`;
@@ -87,7 +95,18 @@ const decideIconColorOnHover = (format: ArticleFormat, context: Context) => {
 			}
 		`;
 	}
-
+	if (
+		format.design === ArticleDesign.NewsletterSignup &&
+		context === 'ArticleMeta'
+	) {
+		return css`
+			:hover {
+				background-color: ${neutral[7]};
+				border-color: ${neutral[7]};
+				fill: white;
+			}
+		`;
+	}
 	return css`
 		:hover {
 			background-color: ${palette.fill.shareIcon};
