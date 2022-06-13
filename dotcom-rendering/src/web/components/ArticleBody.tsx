@@ -163,6 +163,9 @@ export const ArticleBody = ({
 						onFirstPage={onFirstPage}
 						keyEvents={keyEvents}
 						filterKeyEvents={filterKeyEvents}
+						isKeyEventsCarouselVariant={
+							abTests?.keyEventsCarouselVariant === 'variant'
+						}
 					/>
 				</div>
 			</>

@@ -296,6 +296,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
+	const isKeyEventsCarouselVariant =
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+		CAPIArticle.config.abTests.keyEventsCarouselVariant === 'variant';
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -585,8 +589,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</ElementContainer>
-				{CAPIArticle.config.switches.keyEventsCarousel &&
-				CAPIArticle.keyEvents.length ? (
+				{isKeyEventsCarouselVariant && CAPIArticle.keyEvents.length ? (
 					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={
@@ -764,8 +767,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								</Hide>
 								{/* Key events */}
-								{!CAPIArticle.config.switches
-									.keyEventsCarousel && (
+								{!isKeyEventsCarouselVariant ? (
 									<div
 										css={[
 											!footballMatchUrl && sticky,
@@ -781,7 +783,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											}
 										/>
 									</div>
-								)}
+								) : null}
 								{/* Match stats */}
 								{footballMatchUrl && (
 									<Island
@@ -817,8 +819,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										accordionTitle="Live feed"
 										context="liveFeed"
 									>
-										{!CAPIArticle.config.switches
-											.keyEventsCarousel &&
+										{!isKeyEventsCarouselVariant &&
 										CAPIArticle.keyEvents.length ? (
 											<Hide above="desktop">
 												<Island deferUntil="visible">

@@ -52,7 +52,9 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo
 					id={
-						CAPIArticle.config.switches.keyEventsCarousel
+						// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+						CAPIArticle.config.abTests.keyEventsCarouselVariant ===
+						'variant'
 							? 'key-events-carousel'
 							: 'keyevents'
 					}
