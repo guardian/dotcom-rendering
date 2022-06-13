@@ -1580,7 +1580,7 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'a00b9fbc-478a-447f-94ea-b2b63c00d73e',
+			elementId: 'c8c96f9d-0998-4f0c-a192-b8bd9bfb54d9',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2193,7 +2193,7 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '1e0a69a1-ab5a-45c7-9cf0-46b77c6b5cd1',
+					elementId: '32f549aa-26a4-4d31-afcf-ecc677010735',
 				},
 			],
 			attributes: {
@@ -2412,8 +2412,7 @@ export const Quiz: CAPIArticleType = {
 		shouldHideReaderRevenue: false,
 		sentryHost: 'app.getsentry.com/35463',
 		isPaidContent: false,
-		headline:
-			'Fires and floods: maps of Europe predict scale of climate catastrophe',
+		headline: 'Headline string',
 		idApiUrl: 'https://idapi.theguardian.com',
 		showRelatedContent: true,
 		adUnit: '/59666047/theguardian.com/environment/article/ng',

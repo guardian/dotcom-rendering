@@ -1,8 +1,8 @@
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { Article } from '../../fixtures/generated/articles/Article';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 
-const example: CAPIArticleType = Article;
+const example: CAPIArticleType = ExampleArticle;
 
 const formatIsPhotoEssay: CAPIFormat = {
 	...example.format,
@@ -47,7 +47,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, Article.format)).toEqual(
+		expect(enhanceBlockquotes(input, ExampleArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -144,7 +144,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, Article.format)).toEqual(
+		expect(enhanceBlockquotes(input, ExampleArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -176,7 +176,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, Article.format)).toEqual(
+		expect(enhanceBlockquotes(input, ExampleArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -219,7 +219,7 @@ describe('Enhancing blockquotes', () => {
 			},
 		];
 
-		expect(enhanceBlockquotes(input, Article.format)).toEqual(
+		expect(enhanceBlockquotes(input, ExampleArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});

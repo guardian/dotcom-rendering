@@ -30,6 +30,8 @@ type Props = {
 	isSensitive: boolean;
 	isDev: boolean;
 	onFirstPage?: boolean;
+	keyEvents?: Block[];
+	filterKeyEvents?: boolean;
 	abTests?: ServerSideTests;
 };
 
@@ -111,6 +113,8 @@ export const ArticleBody = ({
 	isSensitive,
 	isDev,
 	onFirstPage,
+	keyEvents,
+	filterKeyEvents,
 	abTests,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
@@ -157,6 +161,8 @@ export const ArticleBody = ({
 						isPaidContent={isPaidContent}
 						contributionsServiceUrl={contributionsServiceUrl}
 						onFirstPage={onFirstPage}
+						keyEvents={keyEvents}
+						filterKeyEvents={filterKeyEvents}
 					/>
 				</div>
 			</>

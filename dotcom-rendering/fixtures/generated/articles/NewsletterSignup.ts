@@ -1536,7 +1536,7 @@ export const NewsletterSignup: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '77bf0a2d-74e3-491d-8a94-e7a272054f82',
+			elementId: '40cdb028-9318-47cd-9541-283b4e9f58c7',
 		},
 	],
 	webPublicationDate: '2022-03-22T16:57:35.000Z',
@@ -1547,7 +1547,7 @@ export const NewsletterSignup: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football through our new weekly newsletter. It will be informative, entertaining and global. It will be critical – when needed – and passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, the first was published on Wednesday 30 March, 2022. There will also be guest appearances from stars such as Anita Asante, Ada Hegerberg and many more. </p>',
-					elementId: '1f0adcb0-0f4a-4815-85ab-f2c814153bb4',
+					elementId: 'b590a341-1da8-457e-99d4-5a5c649e344b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1558,22 +1558,22 @@ export const NewsletterSignup: CAPIArticleType = {
 					isThirdPartyTracking: false,
 					source: 'The Guardian',
 					sourceDomain: 'theguardian.com',
-					elementId: '2b61b2d6-1683-4eb3-ba7b-a166479f42ec',
+					elementId: '588bbfe2-4342-4db1-998c-10e9578fff88',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li> \n <li><p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li> \n</ul>',
-					elementId: '13226c9b-a299-47a3-9069-a5a0f114d313',
+					elementId: '4ac50602-cc63-40dd-bb0e-30a9b57d6821',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>***</p>',
-					elementId: 'd84219de-567b-4a68-9606-50c28196638c',
+					elementId: '0a910f99-0c57-431f-902e-303f437f8366',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: 'a006b8b4-3281-460f-9066-6e7f284be462',
+					elementId: 'e4a32c26-819e-4dec-882c-46cc48b310c5',
 				},
 			],
 			attributes: {
@@ -1794,8 +1794,7 @@ export const NewsletterSignup: CAPIArticleType = {
 		shouldHideReaderRevenue: false,
 		sentryHost: 'app.getsentry.com/35463',
 		isPaidContent: false,
-		headline:
-			'Fires and floods: maps of Europe predict scale of climate catastrophe',
+		headline: 'Headline string',
 		idApiUrl: 'https://idapi.theguardian.com',
 		showRelatedContent: true,
 		adUnit: '/59666047/theguardian.com/environment/article/ng',

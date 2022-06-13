@@ -1,5 +1,5 @@
 import validator from 'amphtml-validator';
-import { Article as ExampleArticle } from '../../../fixtures/generated/articles/Article';
+import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { extractNAV } from '../../model/extract-nav';
 import type { AnalyticsModel } from '../components/Analytics';
 import { Article } from '../pages/Article';

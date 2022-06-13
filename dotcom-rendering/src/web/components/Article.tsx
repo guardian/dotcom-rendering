@@ -50,7 +50,14 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 			<SkipTo id="navigation" label="Skip to navigation" />
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
-				<SkipTo id="keyevents" label="Skip to key events" />
+				<SkipTo
+					id={
+						CAPIArticle.config.switches.keyEventsCarousel
+							? 'key-events-carousel'
+							: 'keyevents'
+					}
+					label="Skip to key events"
+				/>
 			)}
 			<Island clientOnly={true} deferUntil="idle">
 				<AlreadyVisited />
