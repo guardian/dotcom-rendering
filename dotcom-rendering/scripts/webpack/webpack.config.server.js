@@ -1,5 +1,5 @@
 // @ts-check
-const Dotenv = require('dotenv-webpack');
+const nodeExternals = require('webpack-node-externals');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
@@ -22,7 +22,7 @@ module.exports = ({ sessionId }) => ({
 		runtimeChunk: false,
 	},
 	externals: [
-		require('webpack-node-externals')({
+		nodeExternals({
 			allowlist: [/^@guardian/],
 			additionalModuleDirs: [
 				// Since we use yarn-workspaces for the monorepo, node_modules will be co-located
@@ -61,7 +61,6 @@ module.exports = ({ sessionId }) => ({
 					team: 'dotcom',
 					sessionId,
 				}),
-				new Dotenv(),
 		  ]
 		: undefined,
 	module: {
