@@ -15,10 +15,10 @@ import {
 	Column,
 	Columns,
 	SvgEnvelope,
+	SvgEye,
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { size } from 'lodash';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
@@ -109,6 +109,29 @@ const leftColWrapperStyle = css`
 
 	svg {
 		max-width: 100%;
+	}
+`;
+
+const mainGraphicWrapperStyle = css`
+	border-radius: ${space[2]}px;
+	overflow: hidden;
+
+	& > figcaption {
+		display: flex;
+
+		${until.desktop} {
+			display: none;
+		}
+
+		background-color: ${brandAlt[400]};
+		align-items: center;
+		padding: ${space[1]}px;
+		${textSans.medium({ fontWeight: 'bold', lineHeight: 'tight' })}
+
+		svg {
+			margin-right: ${space[1]}px;
+			flex-shrink: 0;
+		}
 	}
 `;
 
@@ -300,7 +323,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					leftContent={<NewsletterDetail text="UK Focused" />}
 				>
 					<Columns collapseUntil="desktop">
-						<Column width={[1, 1, 4 / 6, 3 / 6, 3 / 6]}>
+						<Column width={[1, 1, 5 / 8, 4 / 8, 4 / 8]}>
 							<NewsletterDetail
 								text="UK Focused"
 								showUntil="leftCol"
@@ -376,19 +399,29 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								</div>
 							</div>
 						</Column>
-						<Column width={[1, 1, 2 / 6, 3 / 6, 3 / 6]}>
-							<MainMedia
-								format={format}
-								elements={CAPIArticle.mainMediaElements}
-								adTargeting={adTargeting}
-								host={host}
-								pageId={CAPIArticle.pageId}
-								webTitle={CAPIArticle.webTitle}
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								switches={CAPIArticle.config.switches}
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								isSensitive={CAPIArticle.config.isSensitive}
-							/>
+						<Column width={[1, 1, 3 / 8, 4 / 8, 4 / 8]}>
+							<div css={mainGraphicWrapperStyle}>
+								<figcaption>
+									<SvgEye size="small" />
+									<span>
+										Click here to see the latest version of
+										this newsletter
+									</span>
+								</figcaption>
+								<MainMedia
+									format={format}
+									elements={CAPIArticle.mainMediaElements}
+									adTargeting={adTargeting}
+									host={host}
+									pageId={CAPIArticle.pageId}
+									webTitle={CAPIArticle.webTitle}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+									switches={CAPIArticle.config.switches}
+									isAdFreeUser={CAPIArticle.isAdFreeUser}
+									isSensitive={CAPIArticle.config.isSensitive}
+									hideCaption={true}
+								/>
+							</div>
 						</Column>
 					</Columns>
 				</ContainerLayout>
