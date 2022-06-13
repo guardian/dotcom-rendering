@@ -9,7 +9,7 @@ import { some } from '@guardian/types';
 import { grid } from 'grid/grid';
 import type { Image } from 'image';
 import type { FC } from 'react';
-import { immersiveCaptionId as captionId } from '../config';
+import { immersiveCaptionId as captionId } from '../MainMedia.defaults';
 
 // ----- Component ----- //
 
