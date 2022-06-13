@@ -109,7 +109,7 @@ const TeamScore: FC<Props> = ({ team, location }) => {
 			<div css={infoStyles(location)}>
 				<h3 css={teamNameStyles}>{team.name}</h3>
 				{maybeRender(scorers, (s: Scorer[]) => (
-					<ul css={scorerStyles(location)}>
+					<ul css={scorerStyles(location)} role="list">
 						{s.map((scorer: Scorer) => (
 							<li key={`${scorer.player}`}>
 								{scorer.player} {scorer.timeInMinutes}&apos;{' '}

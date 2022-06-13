@@ -2,23 +2,11 @@
 
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import HeaderImage from 'components/HeaderImage';
-import HeaderVideo from 'components/HeaderVideo';
-import type { Image as ImageData } from 'image';
+import MainMediaImage from 'components/MainMedia/MainMediaImage';
+import MainMediaVideo from 'components/MainMedia/MainMediaVideo';
 import { maybeRender } from 'lib';
+import { MainMedia, MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
-import type { Video as VideoData } from 'video';
-
-// ----- Types ----- //
-
-export const enum MainMediaKind {
-	Image,
-	Video,
-}
-
-export type MainMedia =
-	| { kind: MainMediaKind.Image; image: ImageData }
-	| { kind: MainMediaKind.Video; video: VideoData };
 
 // ----- Component ----- //
 
@@ -31,9 +19,9 @@ const MainMedia: FC<Props> = ({ format, mainMedia }) =>
 	maybeRender(mainMedia, (media) => {
 		switch (media.kind) {
 			case MainMediaKind.Image:
-				return <HeaderImage image={media.image} format={format} />;
+				return <MainMediaImage image={media.image} format={format} />;
 			case MainMediaKind.Video:
-				return <HeaderVideo video={media.video} format={format} />;
+				return <MainMediaVideo video={media.video} format={format} />;
 		}
 	});
 

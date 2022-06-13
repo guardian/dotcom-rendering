@@ -2,6 +2,7 @@ import { createHash } from 'crypto';
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import React from 'react';
 
 /**
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context
@@ -287,7 +288,7 @@ export const Picture = ({
 			)}
 			{sources.map((source) => {
 				return (
-					<>
+					<React.Fragment key={source.breakpoint}>
 						{/* High resolution (HDPI) sources*/}
 						<source
 							srcSet={source.hiResUrl}
@@ -298,7 +299,7 @@ export const Picture = ({
 							srcSet={source.lowResUrl}
 							media={`(min-width: ${source.breakpoint}px)`}
 						/>
-					</>
+					</React.Fragment>
 				);
 			})}
 

@@ -865,6 +865,8 @@ type DCRFrontCard = {
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;
+	byline?: string;
+	showByline?: boolean;
 };
 
 type FECollectionType = {

@@ -13,11 +13,15 @@
 
 export const Standard: CAPIArticleType = {
 	slotMachineFlags: '',
-	main: '<figure class="element element-image" data-media-id="82cf4777db1bc8aee728f88202118ec67f535156"> <img src="https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/1000.jpg" alt="A digitally manipulated image showing a flooded Rotterdam." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A digitally manipulated image showing a flooded Rotterdam.</span> <span class="element-image__credit">Photograph: Alexandre Rotenberg/Alamy</span> </figcaption> </figure>',
+	main: '<figure class="element element-image" data-media-id="gu-image-410269952"> <img src="http://static.guim.co.uk/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg" alt="Phone records data" width="460" height="276" class="gu-image" /> <figcaption> <span class="element-image__caption">Under the terms of the order, the numbers of both parties on a call are handed over, as is location data and the time and duration of all calls. Photograph: Matt Rourke/AP</span> <span class="element-image__credit">Photograph: Matt Rourke/AP</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/environment/climate-crisis',
-			title: 'Climate crisis',
+			url: '/us-news/us-national-security',
+			title: 'US national security',
+		},
+		{
+			url: '/commentisfree/series/glenn-greenwald-security-liberty',
+			title: 'Glenn Greenwald on security and liberty',
 		},
 	],
 	commercialProperties: {
@@ -28,31 +32,12 @@ export const Standard: CAPIArticleType = {
 					value: 'uk',
 				},
 				{
-					name: 'co',
-					value: ['jennifer-rankin'],
-				},
-				{
-					name: 'url',
-					value: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/3gc62',
 				},
 				{
 					name: 'tn',
 					value: ['news'],
-				},
-				{
-					name: 'k',
-					value: [
-						'climate-crisis',
-						'eu',
-						'flooding',
-						'world',
-						'europe-news',
-						'natural-disasters',
-						'science',
-						'environment',
-						'wildfires',
-						'scienceofclimatechange',
-					],
 				},
 				{
 					name: 'su',
@@ -63,43 +48,49 @@ export const Standard: CAPIArticleType = {
 					value: 'article',
 				},
 				{
+					name: 'se',
+					value: ['glenn-greenwald-security-liberty'],
+				},
+				{
+					name: 'co',
+					value: ['glenn-greenwald'],
+				},
+				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8ex5',
+					name: 'url',
+					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				},
+				{
+					name: 'k',
+					value: [
+						'business',
+						'us-national-security',
+						'world',
+						'data-protection',
+						'us-politics',
+						'technology',
+						'privacy',
+						'the-nsa-files',
+						'nsa',
+						'telecoms',
+						'verizon-communications',
+						'us-news',
+					],
 				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['jennifer-rankin'],
-				},
-				{
-					name: 'url',
-					value: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/3gc62',
 				},
 				{
 					name: 'tn',
 					value: ['news'],
-				},
-				{
-					name: 'k',
-					value: [
-						'climate-crisis',
-						'eu',
-						'flooding',
-						'world',
-						'europe-news',
-						'natural-disasters',
-						'science',
-						'environment',
-						'wildfires',
-						'scienceofclimatechange',
-					],
 				},
 				{
 					name: 'su',
@@ -110,47 +101,53 @@ export const Standard: CAPIArticleType = {
 					value: 'article',
 				},
 				{
+					name: 'se',
+					value: ['glenn-greenwald-security-liberty'],
+				},
+				{
+					name: 'co',
+					value: ['glenn-greenwald'],
+				},
+				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8ex5',
+					name: 'url',
+					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 				},
 				{
 					name: 'edition',
 					value: 'us',
+				},
+				{
+					name: 'k',
+					value: [
+						'business',
+						'us-national-security',
+						'world',
+						'data-protection',
+						'us-politics',
+						'technology',
+						'privacy',
+						'the-nsa-files',
+						'nsa',
+						'telecoms',
+						'verizon-communications',
+						'us-news',
+					],
 				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['jennifer-rankin'],
-				},
-				{
-					name: 'url',
-					value: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/3gc62',
 				},
 				{
 					name: 'tn',
 					value: ['news'],
-				},
-				{
-					name: 'k',
-					value: [
-						'climate-crisis',
-						'eu',
-						'flooding',
-						'world',
-						'europe-news',
-						'natural-disasters',
-						'science',
-						'environment',
-						'wildfires',
-						'scienceofclimatechange',
-					],
 				},
 				{
 					name: 'su',
@@ -161,12 +158,37 @@ export const Standard: CAPIArticleType = {
 					value: 'article',
 				},
 				{
+					name: 'se',
+					value: ['glenn-greenwald-security-liberty'],
+				},
+				{
+					name: 'co',
+					value: ['glenn-greenwald'],
+				},
+				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8ex5',
+					name: 'url',
+					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				},
+				{
+					name: 'k',
+					value: [
+						'business',
+						'us-national-security',
+						'world',
+						'data-protection',
+						'us-politics',
+						'technology',
+						'privacy',
+						'the-nsa-files',
+						'nsa',
+						'telecoms',
+						'verizon-communications',
+						'us-news',
+					],
 				},
 				{
 					name: 'edition',
@@ -177,31 +199,12 @@ export const Standard: CAPIArticleType = {
 		INT: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['jennifer-rankin'],
-				},
-				{
-					name: 'url',
-					value: '/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/3gc62',
 				},
 				{
 					name: 'tn',
 					value: ['news'],
-				},
-				{
-					name: 'k',
-					value: [
-						'climate-crisis',
-						'eu',
-						'flooding',
-						'world',
-						'europe-news',
-						'natural-disasters',
-						'science',
-						'environment',
-						'wildfires',
-						'scienceofclimatechange',
-					],
 				},
 				{
 					name: 'edition',
@@ -216,48 +219,73 @@ export const Standard: CAPIArticleType = {
 					value: 'article',
 				},
 				{
+					name: 'se',
+					value: ['glenn-greenwald-security-liberty'],
+				},
+				{
+					name: 'co',
+					value: ['glenn-greenwald'],
+				},
+				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8ex5',
+					name: 'url',
+					value: '/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+				},
+				{
+					name: 'k',
+					value: [
+						'business',
+						'us-national-security',
+						'world',
+						'data-protection',
+						'us-politics',
+						'technology',
+						'privacy',
+						'the-nsa-files',
+						'nsa',
+						'telecoms',
+						'verizon-communications',
+						'us-news',
+					],
 				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Wed 25 Aug 2021 14.46 BST',
+		'First published on Thu 6 Jun 2013 11.05 BST',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
-	publication: 'theguardian.com',
+	publication: 'The Guardian',
 	trailText:
-		'Without urgent action, rising sea levels by end of century could leave cities under water',
+		'<p><strong>Exclusive:</strong> Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama administration</p>',
 	subMetaKeywordLinks: [
 		{
-			url: '/science/scienceofclimatechange',
-			title: 'Climate science',
+			url: '/us-news/us-politics',
+			title: 'US politics',
 		},
 		{
-			url: '/world/eu',
-			title: 'European Union',
+			url: '/world/privacy',
+			title: 'Privacy',
 		},
 		{
-			url: '/world/europe-news',
-			title: 'Europe',
+			url: '/business/telecoms',
+			title: 'Telecommunications industry',
 		},
 		{
-			url: '/environment/flooding',
-			title: 'Flooding',
+			url: '/technology/telecoms',
+			title: 'Telecoms',
 		},
 		{
-			url: '/world/wildfires',
-			title: 'Wildfires',
+			url: '/business/verizon-communications',
+			title: 'Verizon Communications',
 		},
 		{
-			url: '/world/natural-disasters',
-			title: 'Natural disasters and extreme weather',
+			url: '/technology/data-protection',
+			title: 'Data protection',
 		},
 		{
 			url: '/tone/news',
@@ -266,7 +294,7 @@ export const Standard: CAPIArticleType = {
 	],
 	contentType: 'Article',
 	nav: {
-		currentUrl: '/environment/climate-crisis',
+		currentUrl: '/us-news/us-politics',
 		pillars: [
 			{
 				title: 'News',
@@ -958,66 +986,14 @@ export const Standard: CAPIArticleType = {
 				url: 'https://licensing.theguardian.com/',
 			},
 		],
-		currentNavLinkTitle: 'Climate crisis',
+		currentNavLinkTitle: 'US Politics',
 		currentPillarTitle: 'News',
 		subNavSections: {
 			links: [
 				{
-					title: 'UK',
-					url: '/uk-news',
-					longTitle: 'UK news',
-					children: [
-						{
-							title: 'UK politics',
-							url: '/politics',
-						},
-						{
-							title: 'Education',
-							url: '/education',
-							children: [
-								{
-									title: 'Schools',
-									url: '/education/schools',
-								},
-								{
-									title: 'Teachers',
-									url: '/teacher-network',
-								},
-								{
-									title: 'Universities',
-									url: '/education/universities',
-								},
-								{
-									title: 'Students',
-									url: '/education/students',
-								},
-							],
-						},
-						{
-							title: 'Media',
-							url: '/media',
-						},
-						{
-							title: 'Society',
-							url: '/society',
-						},
-						{
-							title: 'Law',
-							url: '/law',
-						},
-						{
-							title: 'Scotland',
-							url: '/uk/scotland',
-						},
-						{
-							title: 'Wales',
-							url: '/uk/wales',
-						},
-						{
-							title: 'Northern Ireland',
-							url: '/uk/northernireland',
-						},
-					],
+					title: 'US',
+					url: '/us-news',
+					longTitle: 'US news',
 				},
 				{
 					title: 'World',
@@ -1065,15 +1041,33 @@ export const Standard: CAPIArticleType = {
 					],
 				},
 				{
-					title: 'Climate crisis',
-					url: '/environment/climate-crisis',
+					title: 'Environment',
+					url: '/environment',
+					children: [
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Wildlife',
+							url: '/environment/wildlife',
+						},
+						{
+							title: 'Energy',
+							url: '/environment/energy',
+						},
+						{
+							title: 'Pollution',
+							url: '/environment/pollution',
+						},
+						{
+							title: 'Green light',
+							url: '/environment/series/green-light',
+						},
+					],
 				},
 				{
-					title: 'Newsletters',
-					url: '/email-newsletters',
-				},
-				{
-					title: 'Football',
+					title: 'Soccer',
 					url: '/football',
 					children: [
 						{
@@ -1109,9 +1103,9 @@ export const Standard: CAPIArticleType = {
 					],
 				},
 				{
-					title: 'Coronavirus',
-					url: '/world/coronavirus-outbreak',
-					longTitle: 'Coronavirus',
+					title: 'US Politics',
+					url: '/us-news/us-politics',
+					longTitle: 'US politics',
 				},
 				{
 					title: 'Business',
@@ -1122,46 +1116,16 @@ export const Standard: CAPIArticleType = {
 							url: '/business/economics',
 						},
 						{
-							title: 'Banking',
-							url: '/business/banking',
+							title: 'Sustainable business',
+							url: '/us/sustainable-business',
 						},
 						{
-							title: 'Money',
-							url: '/money',
-							children: [
-								{
-									title: 'Property',
-									url: '/money/property',
-								},
-								{
-									title: 'Pensions',
-									url: '/money/pensions',
-								},
-								{
-									title: 'Savings',
-									url: '/money/savings',
-								},
-								{
-									title: 'Borrowing',
-									url: '/money/debt',
-								},
-								{
-									title: 'Careers',
-									url: '/money/work-and-careers',
-								},
-							],
+							title: 'Diversity & equality in business',
+							url: '/business/diversity-and-equality',
 						},
 						{
-							title: 'Markets',
-							url: '/business/stock-markets',
-						},
-						{
-							title: 'Project Syndicate',
-							url: '/business/series/project-syndicate-economists',
-						},
-						{
-							title: 'B2B',
-							url: '/business-to-business',
+							title: 'Small business',
+							url: '/business/us-small-business',
 						},
 						{
 							title: 'Retail',
@@ -1170,72 +1134,20 @@ export const Standard: CAPIArticleType = {
 					],
 				},
 				{
-					title: 'Environment',
-					url: '/environment',
-					children: [
-						{
-							title: 'Climate crisis',
-							url: '/environment/climate-crisis',
-						},
-						{
-							title: 'Wildlife',
-							url: '/environment/wildlife',
-						},
-						{
-							title: 'Energy',
-							url: '/environment/energy',
-						},
-						{
-							title: 'Pollution',
-							url: '/environment/pollution',
-						},
-					],
-				},
-				{
-					title: 'UK politics',
-					url: '/politics',
-				},
-				{
-					title: 'Education',
-					url: '/education',
-					children: [
-						{
-							title: 'Schools',
-							url: '/education/schools',
-						},
-						{
-							title: 'Teachers',
-							url: '/teacher-network',
-						},
-						{
-							title: 'Universities',
-							url: '/education/universities',
-						},
-						{
-							title: 'Students',
-							url: '/education/students',
-						},
-					],
-				},
-				{
-					title: 'Society',
-					url: '/society',
+					title: 'Tech',
+					url: '/technology',
 				},
 				{
 					title: 'Science',
 					url: '/science',
 				},
 				{
-					title: 'Tech',
-					url: '/technology',
+					title: 'Newsletters',
+					url: '/email-newsletters?INTCMP=DOTCOM_NAV_NEWSLETTER_US',
 				},
 				{
-					title: 'Global development',
-					url: '/global-development',
-				},
-				{
-					title: 'Obituaries',
-					url: '/tone/obituaries',
+					title: 'Fight to vote',
+					url: '/us-news/series/the-fight-to-vote',
 				},
 			],
 		},
@@ -1293,7 +1205,7 @@ export const Standard: CAPIArticleType = {
 		},
 	},
 	author: {
-		byline: 'Jennifer Rankin in Brussels',
+		byline: 'Glenn Greenwald',
 	},
 	designType: 'Article',
 	editionId: 'UK',
@@ -1303,66 +1215,81 @@ export const Standard: CAPIArticleType = {
 		display: 'StandardDisplay',
 	},
 	standfirst:
-		'<p>Without urgent action, rising sea levels by end of century could leave cities under water</p>',
+		'<strong>Exclusive:</strong> Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama\n<br>\n<br>• \n<a href="http://www.guardian.co.uk/world/interactive/2013/jun/06/verizon-telephone-data-court-order">Read the Verizon court order in full here</a>\n<br>• \n<a href="http://www.guardian.co.uk/world/2013/jun/06/obama-administration-nsa-verizon-records">Obama administration justifies surveillance</a>',
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
-		'article:author': 'https://www.theguardian.com/profile/jennifer-rankin',
+			'http://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
+		'article:author': 'https://www.theguardian.com/profile/glenn-greenwald',
 		'og:image:height': '720',
 		'og:description':
-			'Without urgent action, rising sea levels by end of century could leave cities under water',
+			'Exclusive: Top secret court order requiring Verizon to hand over all call data shows scale of domestic surveillance under Obama administration',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=87f04661a6a817547fcda09efc969896',
+			'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&enable=upscale&s=2b724110f381774c116ed9e53f249c01',
 		'al:ios:url':
-			'gnmguardian://environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe?contenttype=Article&source=applinks',
+			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'Environment',
-		'article:published_time': '2020-02-10T06:00:27.000Z',
+		'article:section': 'US news',
+		'article:published_time': '2013-06-06T10:05:00.000Z',
 		'og:title':
-			'Fires and floods: maps of Europe predict scale of climate catastrophe',
+			'NSA collecting phone records of millions of Verizon customers daily',
 		'fb:app_id': '180444840287',
 		'article:tag':
-			'Climate crisis,Environment,Climate science,Science,European Union,Europe,World news,Flooding,Wildfires,Natural disasters and extreme weather',
+			'US national security,US politics,Privacy,Telecommunications industry,Telecoms,Verizon Communications,Data protection,Technology,Business,World news,US news,NSA,The NSA files',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2021-08-25T13:46:46.000Z',
+		'article:modified_time': '2019-05-01T17:16:49.000Z',
 	},
-	sectionUrl: 'environment/climate-crisis',
-	pageId: 'environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+	sectionUrl: 'us-news/us-national-security',
+	pageId: 'world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	version: 3,
 	tags: [
 		{
-			id: 'environment/climate-crisis',
+			id: 'us-news/us-national-security',
 			type: 'Keyword',
-			title: 'Climate crisis',
+			title: 'US national security',
 		},
 		{
-			id: 'environment/environment',
+			id: 'us-news/us-politics',
 			type: 'Keyword',
-			title: 'Environment',
+			title: 'US politics',
 		},
 		{
-			id: 'science/scienceofclimatechange',
+			id: 'world/privacy',
 			type: 'Keyword',
-			title: 'Climate science',
+			title: 'Privacy',
 		},
 		{
-			id: 'science/science',
+			id: 'business/telecoms',
 			type: 'Keyword',
-			title: 'Science',
+			title: 'Telecommunications industry',
 		},
 		{
-			id: 'world/eu',
+			id: 'technology/telecoms',
 			type: 'Keyword',
-			title: 'European Union',
+			title: 'Telecoms',
 		},
 		{
-			id: 'world/europe-news',
+			id: 'business/verizon-communications',
 			type: 'Keyword',
-			title: 'Europe',
+			title: 'Verizon Communications',
+		},
+		{
+			id: 'technology/data-protection',
+			type: 'Keyword',
+			title: 'Data protection',
+		},
+		{
+			id: 'technology/technology',
+			type: 'Keyword',
+			title: 'Technology',
+		},
+		{
+			id: 'business/business',
+			type: 'Keyword',
+			title: 'Business',
 		},
 		{
 			id: 'world/world',
@@ -1370,19 +1297,29 @@ export const Standard: CAPIArticleType = {
 			title: 'World news',
 		},
 		{
-			id: 'environment/flooding',
-			type: 'Keyword',
-			title: 'Flooding',
+			id: 'tone/news',
+			type: 'Tone',
+			title: 'News',
 		},
 		{
-			id: 'world/wildfires',
+			id: 'us-news/us-news',
 			type: 'Keyword',
-			title: 'Wildfires',
+			title: 'US news',
 		},
 		{
-			id: 'world/natural-disasters',
+			id: 'commentisfree/series/glenn-greenwald-security-liberty',
+			type: 'Series',
+			title: 'Glenn Greenwald on security and liberty',
+		},
+		{
+			id: 'us-news/nsa',
 			type: 'Keyword',
-			title: 'Natural disasters and extreme weather',
+			title: 'NSA',
+		},
+		{
+			id: 'us-news/the-nsa-files',
+			type: 'Keyword',
+			title: 'The NSA files',
 		},
 		{
 			id: 'type/article',
@@ -1390,30 +1327,33 @@ export const Standard: CAPIArticleType = {
 			title: 'Article',
 		},
 		{
-			id: 'tone/news',
-			type: 'Tone',
-			title: 'News',
-		},
-		{
-			id: 'profile/jennifer-rankin',
+			id: 'profile/glenn-greenwald',
 			type: 'Contributor',
-			title: 'Jennifer Rankin',
+			title: 'Glenn Greenwald',
 			bylineImageUrl:
-				'https://i.guim.co.uk/img/uploads/2017/12/26/Jennifer-Rankin.jpg?width=300&quality=85&auto=format&fit=max&s=c0ebd8938a45421b4873cc414bdf05a7',
-			bylineLargeImageUrl:
-				'https://i.guim.co.uk/img/uploads/2017/12/26/Jennifer_Rankin,_L.png?width=300&quality=85&auto=format&fit=max&s=e12882f2580d0f8384b06b108a89b53f',
+				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2012/8/16/1345126789538/Gleen_Greenwald-140.jpg?width=300&quality=85&auto=format&fit=max&s=e67b2ebc5cf82a3ed2ea1d3cb2f0b268',
 		},
 		{
-			id: 'tracking/commissioningdesk/uk-environment',
-			type: 'Tracking',
-			title: 'UK Environment',
+			id: 'publication/theguardian',
+			type: 'Publication',
+			title: 'The Guardian',
+		},
+		{
+			id: 'theguardian/mainsection',
+			type: 'NewspaperBook',
+			title: 'Main section',
+		},
+		{
+			id: 'theguardian/mainsection/topstories',
+			type: 'NewspaperBookSection',
+			title: 'Top stories',
 		},
 	],
 	pillar: 'news',
-	webURL: 'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+	webURL: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	showBottomSocialButtons: true,
 	isImmersive: false,
-	sectionLabel: 'Climate crisis',
+	sectionLabel: 'US national security',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1569,21 +1509,21 @@ export const Standard: CAPIArticleType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&s=791f5baa9445473c090f4df756088bc1',
+			'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&s=25fcfa670f162b2c5414733152cf57bc',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe?contenttype=Article&source=twitter',
+			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			'guardian://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 		'twitter:app:url:iphone':
-			'gnmguardian://environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe?contenttype=Article&source=twitter',
+			'gnmguardian://world/2013/jun/06/nsa-phone-records-verizon-court-order?contenttype=Article&source=twitter',
 	},
-	sectionName: 'environment',
-	webPublicationDateDeprecated: '2020-02-10T06:00:27.000Z',
+	sectionName: 'us-news',
+	webPublicationDateDeprecated: '2013-06-06T10:05:00.000Z',
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -1596,7 +1536,7 @@ export const Standard: CAPIArticleType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline:
-		'Fires and floods: maps of Europe predict scale of climate catastrophe',
+		'NSA collecting phone records of millions of Verizon customers daily',
 	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
@@ -1607,117 +1547,65 @@ export const Standard: CAPIArticleType = {
 					{
 						index: 0,
 						fields: {
-							height: '1200',
-							width: '2000',
+							height: '276',
+							width: '460',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/2000.jpg',
-					},
-					{
-						index: 1,
-						fields: {
-							height: '600',
-							width: '1000',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/1000.jpg',
-					},
-					{
-						index: 2,
-						fields: {
-							height: '300',
-							width: '500',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/500.jpg',
-					},
-					{
-						index: 3,
-						fields: {
-							height: '84',
-							width: '140',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/140.jpg',
-					},
-					{
-						index: 4,
-						fields: {
-							height: '2743',
-							width: '4571',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/4571.jpg',
-					},
-					{
-						index: 5,
-						fields: {
-							isMaster: 'true',
-							height: '2743',
-							width: '4571',
-						},
-						mediaType: 'Image',
-						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg',
+						url: 'http://static.guim.co.uk/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg',
 					},
 				],
 			},
 			data: {
-				copyright: 'Credit: Alexandre Rotenberg / Alamy Stock Photo',
-				alt: 'A digitally manipulated image showing a flooded Rotterdam.',
+				alt: 'Phone records data',
 				caption:
-					'A digitally manipulated image showing a flooded Rotterdam.',
-				credit: 'Photograph: Alexandre Rotenberg/Alamy',
+					'Under the terms of the order, the numbers of both parties on a call are handed over, as is location data and the time and duration of all calls. Photograph: Matt Rourke/AP',
+				credit: 'Photograph: Matt Rourke/AP',
 			},
-			displayCredit: true,
+			displayCredit: false,
 			role: 'inline',
 			imageSources: [
 				{
 					weighting: 'inline',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=620&quality=85&auto=format&fit=max&s=4f5deafccee04d1b998dd507bcbc4bf1',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=85&auto=format&fit=max&s=2f0303e3a6cfa368bb76b5aa1fe40ba1',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=923022dc82d7813a0a390b98ec51d943',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ac282714e74da98178e57aed900667b3',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=700&quality=85&auto=format&fit=max&s=e1ec3e93858c4f22308cd9d9a114bb13',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d80745c0d7f99b0037cff31324f70595',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=620&quality=85&auto=format&fit=max&s=4f5deafccee04d1b998dd507bcbc4bf1',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=85&auto=format&fit=max&s=2f0303e3a6cfa368bb76b5aa1fe40ba1',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=923022dc82d7813a0a390b98ec51d943',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ac282714e74da98178e57aed900667b3',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=645&quality=85&auto=format&fit=max&s=c0d3ca6cf1db11e43ba219ac13c7b8c2',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=85&auto=format&fit=max&s=b8c14cbb95296c6ce2c47afd1c74caef',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=f0a6b6cf1fe08564c81a5564d4a3f011',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=db791719b428c3726dd025373b5715c8',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=465&quality=85&auto=format&fit=max&s=dbe9477881a8f9fee4077153810d4656',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=85&auto=format&fit=max&s=f4afb47d8116bd1c2f9fb126ab2d09ca',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=18ff3455f67aa188aefd7aceed1b1bc2',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7913b6ad76e99a6811ffc359ead3f1c9',
 							width: 930,
 						},
 					],
@@ -1734,59 +1622,59 @@ export const Standard: CAPIArticleType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1020&quality=85&auto=format&fit=max&s=3aa9f8fbb084d172def9cc564f86904c',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1020&quality=85&auto=format&fit=max&s=bb0557a68adb7d01d0294de4ff7c9a38',
 							width: 1020,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=b7f4939fdb80fca4ffdbfb23161bc243',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=07925e22da45fa157dd39104bea25b07',
 							width: 2040,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=940&quality=85&auto=format&fit=max&s=e28aad9faf270ab910f6c41a6d8be7cc',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=940&quality=85&auto=format&fit=max&s=9e51b0e35b15bda73be0d1cf2a816b06',
 							width: 940,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=5e92491b433ffe8df6a9c88c8449320f',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=c91a29662a3b09d053d4d1fd1080db3c',
 							width: 1880,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=700&quality=85&auto=format&fit=max&s=e1ec3e93858c4f22308cd9d9a114bb13',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d80745c0d7f99b0037cff31324f70595',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=700&quality=85&auto=format&fit=max&s=e1ec3e93858c4f22308cd9d9a114bb13',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=85&auto=format&fit=max&s=214ade1ddb558bcda2ebfb4f250a7bad',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=d80745c0d7f99b0037cff31324f70595',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=69add9eb81396bb095281d8180827dd9',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=660&quality=85&auto=format&fit=max&s=99b46ee78b5a3748dc9b68bb7ec979e2',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=85&auto=format&fit=max&s=f6f422301d42da7f16fdf0099e5d2abb',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=6fd73e1aa11c58d960372691c1a37ef3',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cd24eea3ca1f24fdeac108251502e520',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=645&quality=85&auto=format&fit=max&s=c0d3ca6cf1db11e43ba219ac13c7b8c2',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=85&auto=format&fit=max&s=b8c14cbb95296c6ce2c47afd1c74caef',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=f0a6b6cf1fe08564c81a5564d4a3f011',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=db791719b428c3726dd025373b5715c8',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=465&quality=85&auto=format&fit=max&s=dbe9477881a8f9fee4077153810d4656',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=85&auto=format&fit=max&s=f4afb47d8116bd1c2f9fb126ab2d09ca',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=18ff3455f67aa188aefd7aceed1b1bc2',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=7913b6ad76e99a6811ffc359ead3f1c9',
 							width: 930,
 						},
 					],
@@ -1799,427 +1687,221 @@ export const Standard: CAPIArticleType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1900&quality=85&auto=format&fit=max&s=5597f9ec1044138bc22265512e12b310',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1900&quality=85&auto=format&fit=max&s=23200f4fbf312d4cc329b375882540e7',
 							width: 1900,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=09107b3d9a9ec7bbefdd1c50fbb206dc',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=5314e4ad4795ffd3aaf1a5c8cfd97be4',
 							width: 3800,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1300&quality=85&auto=format&fit=max&s=0f7cbfd1814eddc1a2574610d00f4a70',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1300&quality=85&auto=format&fit=max&s=ce24ae26bde4f0d84db39460758409d1',
 							width: 1300,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=9b7b8dae15b89400dc2b8d5f8b805c03',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=0f9d8d9013a7e589b772d94a3626c6bb',
 							width: 2600,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1140&quality=85&auto=format&fit=max&s=a00f4f70a74ad8699f3fe3c5833c442c',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1140&quality=85&auto=format&fit=max&s=8501c0e4d7abeb6dbc054c78276f3d0e',
 							width: 1140,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=892ca8c2527190b76a6c70623d9c373c',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3267023b74d0d6b9076ece455c939b03',
 							width: 2280,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=980&quality=85&auto=format&fit=max&s=b6191f25e1b34c785662c530164e71e4',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=980&quality=85&auto=format&fit=max&s=e13cdce4024f0740056c3ca1a00944f1',
 							width: 980,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=92a201abd35b3ffe1520ce35c3100bbd',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=7e73c17e8b531b5470a4f312d76851df',
 							width: 1960,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=740&quality=85&auto=format&fit=max&s=e1fbaa5a68c680cfee73f85a772e6e52',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=740&quality=85&auto=format&fit=max&s=3d0f43f5906111bd1d8239acdcf67a9c',
 							width: 740,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=7cf455a1aa41bd7b26f56fb6fd2815e1',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=4d1e34d5a6d635b6fec68eb0aabeb97c',
 							width: 1480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=660&quality=85&auto=format&fit=max&s=99b46ee78b5a3748dc9b68bb7ec979e2',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=85&auto=format&fit=max&s=f6f422301d42da7f16fdf0099e5d2abb',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=6fd73e1aa11c58d960372691c1a37ef3',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=cd24eea3ca1f24fdeac108251502e520',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=480&quality=85&auto=format&fit=max&s=f8820055c81c3f7281b7cea88bfe7d9d',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=480&quality=85&auto=format&fit=max&s=a9b086c50aea4bdc186c8e78983a10b9',
 							width: 480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=2f8c9f1d655fca169c4cee954c52da92',
+							src: 'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=3db6a06f16d14b55a9c41b96fb84a2aa',
 							width: 960,
 						},
 					],
 				},
 			],
-			elementId: 'edeb6fd7-f4e4-45a8-a659-85b03fa6217c',
+			elementId: 'ef7ce09a-d672-498f-bfe1-0dbd1fb01c75',
 		},
 	],
-	webPublicationDate: '2020-02-10T06:00:27.000Z',
+	webPublicationDate: '2013-06-06T10:05:00.000Z',
 	blocks: [
 		{
-			id: '5e3d3b488f086a28115a74be',
+			id: 'ed4dfa13-125b-4c94-8b82-cc1e2bbb0553',
 			elements: [
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>A <a href="https://experience.arcgis.com/stemapp/5f6596de6c4445a58aec956532b9813d">series of detailed maps</a> have laid bare the scale of possible forest fires, floods, droughts and deluges that Europe could face by the end of the century without urgent action to adapt to and confront global heating.</p>',
-					elementId: '7e338b52-5e45-435a-8b9c-7bc9090ef682',
+					html: "<p>The National Security Agency is currently collecting the telephone records of millions of US customers of Verizon, one of America's largest telecoms providers, under a top secret court order issued in April.</p>",
+					elementId: '0631c651-5e3f-4fcd-8f0e-8b19bf9729e3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>An average one-metre rise in sea levels by the end of the century – without any flood prevention action – would mean 90% of the surface of Hull would be under water, according to the European Environment Agency.</p>',
-					elementId: '1813af6f-8bb8-43be-883a-ff2f498a75ec',
+					html: '<p>The order, a copy of which has been obtained by the Guardian, <a href="https://www.theguardian.com/world/interactive/2013/jun/06/verizon-telephone-data-court-order">requires Verizon on an "ongoing, daily basis" to give the NSA information on all telephone calls in its systems</a>, both within the US and between the US and other countries.</p>',
+					elementId: 'c48d912b-05bc-4141-9da8-08b43fefb780',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>English cities including Norwich, Margate, Southend-on-Sea, Runcorn and Blackpool could also experience flooding covering more than 40% of the urban area.</p>',
-					elementId: 'c05f9e82-041c-40f2-9370-8bf074a4245f',
+					html: '<p>The document shows for the first time that under the Obama administration the communication records of millions of US citizens are being collected indiscriminately and in bulk – regardless of whether they are suspected of any wrongdoing.</p>',
+					elementId: 'f214d1a3-d2cb-497c-b6ed-6aac42ef1645',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Across the North Sea, Dutch cities including the Hague, Rotterdam and Leiden were predicted to face severe floods from an average one metre sea-level rise, which is forecast if emissions rise enough to cause an increase in global temperature of 4C–6C above pre-industrial levels.</p>',
-					elementId: '8e35b160-253f-4fa4-aac2-cdd6120d03cd',
+					html: '<p>The secret Foreign Intelligence Surveillance Court (Fisa) granted the order to the FBI on April 25, giving the government unlimited authority to obtain the data for a specified three-month period ending on July 19.</p>',
+					elementId: 'a6c18ecb-7ae6-41c3-9190-0d0c9ab2380e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The model does not account for the Netherlands’ extensive flood-prevention measures, although many other countries have not taken such action.</p>',
-					elementId: 'c162f970-c774-40f5-be16-f6bdbe1feab6',
+					html: '<p>Under the terms of the blanket order, the numbers of both parties on a call are handed over, as is location data, call duration, unique identifiers, and the time and duration of all calls. The contents of the conversation itself are not covered.</p>',
+					elementId: 'ab25a802-19c7-46f3-9aa4-fc8a7f51bae8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Meanwhile, large areas of Spain, Portugal and France would be grappling with desertification, with the worst-affected zones experiencing a two and half-fold increase in droughts under the worst-case scenario.</p>',
-					elementId: '392f4335-4998-418a-83a2-02f91d4845d3',
+					html: "<p>The disclosure is likely to reignite longstanding debates in the US over the proper extent of the government's domestic spying powers.</p>",
+					elementId: '2705a178-17a1-4022-a793-3c7e43d8fe53',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Hotter summers increase the risk of forest fires, which <a href="https://www.theguardian.com/world/2018/jul/18/sweden-calls-for-help-as-arctic-circle-hit-by-wildfires">hit record levels in Sweden in 2018</a>. If emissions exceed 4C, France, southern Germany, the Balkans and the Arctic Circle could experience a greatly increased fire risk. However, the absolute fire danger would remain highest in southern European countries, which are already prone to blazes.</p>',
-					elementId: '675c7833-c3b1-45c8-9e7e-a33eb3f348a9',
+					html: '<p>Under the Bush administration, officials in security agencies had disclosed to reporters the large-scale collection of call records data by the <a href="https://www.theguardian.com/us-news/nsa" data-component="auto-linked-tag">NSA</a>, but this is the first time significant and top-secret documents have revealed the continuation of the practice on a massive scale under President Obama.</p>',
+					elementId: '512c3ada-6a88-43e9-8c9c-56acb0308efd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Further north, winters are becoming wetter. Failure to limit global heating below 2C could mean a swath of central and eastern Europe, from Bratislava in the west to Yaroslavl in the east, will be in line for sharp increase in “heavy rain events” during autumn and winter by the end of the century.</p>',
-					elementId: 'e3d4adf1-5453-4db5-ae98-0eef9890a571',
+					html: '<p>The unlimited nature of the records being handed over to the NSA is extremely unusual. Fisa court orders typically direct the production of records pertaining to a specific named target who is suspected of being an agent of a terrorist group or foreign state, or a finite set of individually named targets.</p>',
+					elementId: '4642f57e-86b8-47bd-b319-04e73b0381f6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>In some areas of central and eastern Europe there is predicted to be a 35% increase in heavy rain events, meaning torrential downpours would be more frequent.</p>',
-					elementId: 'fb7f8504-c544-4b43-843b-507cb950b960',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-					media: {
-						allImages: [
-							{
-								index: 0,
-								fields: {
-									height: '736',
-									width: '1396',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/1396.jpg',
-							},
-							{
-								index: 1,
-								fields: {
-									isMaster: 'true',
-									height: '736',
-									width: '1396',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg',
-							},
-							{
-								index: 2,
-								fields: {
-									height: '527',
-									width: '1000',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/1000.jpg',
-							},
-							{
-								index: 3,
-								fields: {
-									height: '264',
-									width: '500',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/500.jpg',
-							},
-							{
-								index: 4,
-								fields: {
-									height: '74',
-									width: '140',
-								},
-								mediaType: 'Image',
-								mimeType: 'image/jpeg',
-								url: 'https://media.guim.co.uk/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/140.jpg',
-							},
-						],
-					},
-					data: {
-						alt: 'Map predicting flood-hit areas.',
-						caption: 'Map predicting flood-hit areas.',
-						credit: 'Photograph: Center for Remote Sensing of Ice Sheets/Eurostat',
-					},
-					displayCredit: true,
-					role: 'inline',
-					imageSources: [
-						{
-							weighting: 'inline',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=85&auto=format&fit=max&s=c58fef8ad9e72a87e58f2d73ed6acc84',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f6179afd121c35be1908bdebf6561954',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=85&auto=format&fit=max&s=4e13cf8e32551479aeee22395bfd03d8',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=463580da8cc89d1b393017f53583d521',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=85&auto=format&fit=max&s=da702a200c52b5dbabc04e1daadfa16b',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3406fc0dce3ddbebfe368de214049eca',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'thumbnail',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=140&quality=85&auto=format&fit=max&s=7e688cee83069ad75d5e2ca9f476d64d',
-									width: 140,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=5a7be5d793f487f4c61cce41bcfb026d',
-									width: 280,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=120&quality=85&auto=format&fit=max&s=ad27bc3e89e612a0d59b4b3929b70e35',
-									width: 120,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=1cfa9cd300eb7db63a775b108f292aef',
-									width: 240,
-								},
-							],
-						},
-						{
-							weighting: 'supporting',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=380&quality=85&auto=format&fit=max&s=4ebc2fcbaff6a5f3d163ab39ee46c292',
-									width: 380,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=762d95267729d21717ad503e5a74ac98',
-									width: 760,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=300&quality=85&auto=format&fit=max&s=1efd88c2ff8fdaf3ae538d86f049f2f8',
-									width: 300,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=ad9db8eb0021ddf6f9e2900d96a58152',
-									width: 600,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=85&auto=format&fit=max&s=c58fef8ad9e72a87e58f2d73ed6acc84',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f6179afd121c35be1908bdebf6561954',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=85&auto=format&fit=max&s=4e13cf8e32551479aeee22395bfd03d8',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=463580da8cc89d1b393017f53583d521',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=85&auto=format&fit=max&s=da702a200c52b5dbabc04e1daadfa16b',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3406fc0dce3ddbebfe368de214049eca',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'showcase',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=860&quality=85&auto=format&fit=max&s=e2235a8e77054fa178a264b9a4e6c5e3',
-									width: 860,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=d1d9e34ce780a26a57faf85ca66b08fb',
-									width: 1720,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=780&quality=85&auto=format&fit=max&s=36b642ed636934b9874f056789e2b5d4',
-									width: 780,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=6abf9506b1e82a8290d0c50e88756005',
-									width: 1560,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=85&auto=format&fit=max&s=c58fef8ad9e72a87e58f2d73ed6acc84',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f6179afd121c35be1908bdebf6561954',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=85&auto=format&fit=max&s=4e13cf8e32551479aeee22395bfd03d8',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=463580da8cc89d1b393017f53583d521',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=85&auto=format&fit=max&s=da702a200c52b5dbabc04e1daadfa16b',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3406fc0dce3ddbebfe368de214049eca',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'halfwidth',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=85&auto=format&fit=max&s=c58fef8ad9e72a87e58f2d73ed6acc84',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f6179afd121c35be1908bdebf6561954',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=85&auto=format&fit=max&s=4e13cf8e32551479aeee22395bfd03d8',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=463580da8cc89d1b393017f53583d521',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=85&auto=format&fit=max&s=da702a200c52b5dbabc04e1daadfa16b',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3406fc0dce3ddbebfe368de214049eca',
-									width: 890,
-								},
-							],
-						},
-						{
-							weighting: 'immersive',
-							srcSet: [
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=85&auto=format&fit=max&s=c58fef8ad9e72a87e58f2d73ed6acc84',
-									width: 620,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=f6179afd121c35be1908bdebf6561954',
-									width: 1240,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=85&auto=format&fit=max&s=4e13cf8e32551479aeee22395bfd03d8',
-									width: 605,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=463580da8cc89d1b393017f53583d521',
-									width: 1210,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=85&auto=format&fit=max&s=da702a200c52b5dbabc04e1daadfa16b',
-									width: 445,
-								},
-								{
-									src: 'https://i.guim.co.uk/img/media/bfafc8f6005b5b122e84b516ccf2bc90b980622a/0_0_1396_736/master/1396.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=3406fc0dce3ddbebfe368de214049eca',
-									width: 890,
-								},
-							],
-						},
-					],
-					elementId: 'a23f040e-7ffd-4c15-92c8-cfacdf0c0370',
+					html: '<p>The Guardian approached the National Security Agency, the White House and the Department of Justice for comment in advance of publication on Wednesday. All declined. The agencies were also offered the opportunity to raise specific security concerns regarding the publication of the court order.</p>',
+					elementId: '439d3a37-41d8-4dc8-adbc-e9a5d2843284',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>While the climate data has been published before, this is the first time the EU-agency has presented it using detailed maps on one site. Users can zoom in on small areas, for example, to discover that one-third of the London borough of Hammersmith and Fulham could be exposed to flooding by 2071.</p>',
-					elementId: 'e0a4bc49-a3af-4898-a33c-4d03d08ef4e6',
+					html: "<p>The court order expressly bars Verizon from disclosing to the public either the existence of the FBI's request for its customers' records, or the court order itself. </p>",
+					elementId: 'e3b2e265-f09e-4cd1-8260-57e9d62c085a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The Copenhagen-based agency hopes the maps will reach decision-makers in governments and EU institutions, who would not usually read a lengthy EEA report on the impact of the climate emergency.</p>',
-					elementId: '3d0c4d6d-f05d-4c7c-869f-04315027235c',
+					html: '<p>"We decline comment," said Ed McFadden, a Washington-based Verizon spokesman.</p>',
+					elementId: '8046cae9-c490-4798-b3a7-d263813e5e29',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>“It’s very urgent and we need to act now,” said Blaž Kurnik, an EEA expert in climate change impacts and adaptation.</p>',
-					elementId: 'aba84fd5-93a3-45c3-9d77-1e378c4acde0',
+					html: '<p>The order, signed by Judge Roger Vinson, compels Verizon to produce to the NSA electronic copies of "all call detail records or \'telephony metadata\' created by Verizon for communications between the United States and abroad" or "wholly within the United States, including local telephone calls".</p>',
+					elementId: '17913590-be14-4adc-ba08-7fbbc6b6ee0d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Even if countries succeed in restricting global temperature rise, existing CO<strong><sub>2</sub></strong> in the atmosphere would still have an impact, he said.</p>',
-					elementId: '52b5433c-4b02-4525-9d0c-caf0b456a91e',
+					html: '<p>The order directs Verizon to "continue production on an ongoing daily basis thereafter for the duration of this order". It specifies that the records to be produced include "session identifying information", such as "originating and terminating number", the duration of each call, telephone calling card numbers, trunk identifiers, International Mobile Subscriber Identity (IMSI) number, and "comprehensive communication routing information".</p>',
+					elementId: 'edb0fd8c-f77e-4d36-9ffb-47dc2c1c972b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>“The number of extreme events and sea level rise will still continue to increase for the next decades to a century,” Kurnik said. “Sea level rise, especially, can be problematic, because it is still increasing because of past emissions and the current concentration of greenhouse gases.”</p>',
-					elementId: 'a7f92120-6258-43f5-b80b-346818f0f6df',
+					html: '<p>The information is classed as "metadata", or transactional information, rather than communications, and so does not require individual warrants to access. The document also specifies that such "metadata" is not limited to the aforementioned items. A 2005 court ruling judged that cell site location data – the nearest cell tower a phone was connected to – was also transactional data, and so could potentially fall under the scope of the order.</p>',
+					elementId: 'd462a240-ef2e-4dfd-9961-13c695954ded',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The agency wants governments to focus on adapting to unavoidable global heating. “Adaptation is crucial in the next decades of the century. Even if we are able to increase the temperature by 2C, adaptation is crucial for the next decades.”</p>',
-					elementId: '31a738c7-a620-46a5-bfe6-592b36990e1b',
+					html: '<p>While the order itself does not include either the contents of messages or the personal information of the subscriber of any particular cell number, its collection would allow the NSA to build easily a comprehensive picture of who any individual contacted, how and when, and possibly from where, retrospectively.</p>',
+					elementId: 'aa69cd0a-3467-4795-9f98-370c2c71ebaa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>The EEA has concluded it is <a href="https://www.eea.europa.eu/data-and-maps/indicators/atmospheric-greenhouse-gas-concentrations-6/assessment-1">possible to limit the rise in global temperatures to 2C above pre-industrial levels</a>, as long as greenhouse gas concentrations peak during the next 15 to 29 years.</p>',
-					elementId: 'dbcf8b61-7846-43a7-85a7-6e3b79fc582a',
+					html: '<p>It is not known whether Verizon is the only cell-phone provider to be targeted with such an order, although previous reporting has suggested the NSA has collected cell records from all major mobile networks. It is also unclear from the leaked document whether the three-month order was a one-off, or the latest in a series of similar orders.</p>',
+					elementId: 'b3b30345-ebfb-4be9-9db5-c12358b8ba3d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Meeting a more demanding<a href="https://www.theguardian.com/environment/2018/oct/08/global-warming-must-not-exceed-15c-warns-landmark-un-report"> 1.5C limit</a> requires concentrations to peak in the next three to 13 years. Under both scenarios, there is a 50% chance of overshooting the temperature.</p>',
-					elementId: '6849137d-a818-4fd4-a457-cdea73a185ed',
+					html: "<p>The court order appears to explain the numerous cryptic public warnings by two US senators, Ron Wyden and Mark Udall, about the scope of the Obama administration's surveillance activities.</p>",
+					elementId: '54efd1b3-cf1f-42ff-ba27-33451322e4c0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>• This article was amended on 10 February and 14 May 2020. An earlier version said that the EEA concluded “it is possible to keep global temperatures 2C below pre-industrial levels, as long as emissions peak during the next 15 to 29 years”. That meant to say greenhouse gas concentrations, not emissions; and the 2C referred to a rise in temperature above pre-industrial levels, not the temperature below pre-industrial levels. This article was further amended because an earlier version omitted “enough to cause an increase in global temperature of” from the sentence: “… an average one metre sea-level rise, which is forecast if emissions rise enough to cause an increase in global temperature of 4C–6C above pre-industrial levels”. This has been corrected.</p>',
-					elementId: '5f2d717d-60aa-465b-9547-11ae61fc1bf0',
+					html: '<p>For roughly two years, the two Democrats have been stridently advising the public that the US government is relying on "secret legal interpretations" to claim surveillance powers so broad that the American public would be "stunned" to learn of the kind of domestic spying being conducted.</p>',
+					elementId: '09bbe3b7-ab85-4530-a021-8440af4aa366',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Because those activities are classified, the senators, both members of the Senate intelligence committee, have been prevented from specifying which domestic surveillance programs they find so alarming. But the information they have been able to disclose in their public warnings perfectly tracks both the specific law cited by the April 25 court order as well as the vast scope of record-gathering it authorized.</p>',
+					elementId: 'bc20a24b-6d3e-4dc8-a8ef-cbc90d2be9c5',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: "<p>Julian Sanchez, a surveillance expert with the Cato Institute, explained: \"We've certainly seen the government increasingly strain the bounds of 'relevance' to collect large numbers of records at once — everyone at one or two degrees of separation from a target — but vacuuming all metadata up indiscriminately would be an extraordinary repudiation of any pretence of constraint or particularized suspicion.\" The April order requested by the FBI and NSA does precisely that.</p>",
+					elementId: 'ddd7a8c7-7531-4dfa-8be1-e64fa261ed3c',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The law on which the order explicitly relies is the so-called "business records" provision of the Patriot Act, 50 USC section 1861. That is the provision which Wyden and Udall have repeatedly cited when warning the public of what they believe is the Obama administration\'s extreme interpretation of the law to engage in excessive domestic surveillance.</p>',
+					elementId: '54a2e09b-97e4-441a-ae65-78ac396e4554',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In a letter to attorney general Eric Holder last year, they argued that "there is now a significant gap between what most Americans <em>think</em> the law allows and what the government secretly <em>claims</em> the law allows."</p>',
+					elementId: 'e4d7e47b-45cb-4427-8567-687e09f07c99',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>"We believe," they wrote, "that most Americans would be stunned to learn the details of how these secret court opinions have interpreted" the "business records" provision of the Patriot Act.</p>',
+					elementId: '55ee90dd-4d3d-4197-b0d2-93727bccff41',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Privacy advocates have long warned that allowing the government to collect and store unlimited "metadata" is a highly invasive form of surveillance of citizens\' communications activities. Those records enable the government to know the identity of every person with whom an individual communicates electronically, how long they spoke, and their location at the time of the communication.</p>',
+					elementId: '3533d2ce-95d9-4aac-92b9-b40db4e1431a',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: "<p>Such metadata is what the US government has long attempted to obtain in order to discover an individual's network of associations and communication patterns. The request for the bulk collection of all Verizon domestic telephone records indicates that the agency is continuing some version of the data-mining program begun by the Bush administration in the immediate aftermath of the 9/11 attack.</p>",
+					elementId: 'c3cfabfe-5fc2-40cf-aa5b-c9028c79bcd9',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The NSA, as part of a program secretly authorized by President Bush on 4 October 2001, implemented a bulk collection program of domestic telephone, internet and email records. A furore erupted in 2006 when USA Today reported that the NSA had "been secretly collecting the phone call records of tens of millions of Americans, using data provided by AT&amp;T, Verizon and BellSouth" and was "using the data to analyze calling patterns in an effort to detect terrorist activity." Until now, there has been no indication that the Obama administration implemented a similar program.</p>',
+					elementId: '3faf0dc1-c036-46e4-bf78-9ab995667fd2',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: "<p>These recent events reflect how profoundly the NSA's mission has transformed from an agency exclusively devoted to foreign intelligence gathering, into one that focuses increasingly on domestic communications. A 30-year employee of the NSA, William Binney, resigned from the agency shortly after 9/11 in protest at the agency's focus on domestic activities.</p>",
+					elementId: '7f00dd27-3353-4420-af29-0f7f49ca30a9',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In the mid-1970s, Congress, for the first time, investigated the surveillance activities of the US government. Back then, the mandate of the NSA was that it would never direct its surveillance apparatus domestically.</p>',
+					elementId: 'd316c2c0-e51e-4b36-b38b-b90d3870f65b',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>At the conclusion of that investigation, Frank Church, the Democratic senator from Idaho who chaired the investigative committee, warned: "The NSA\'s capability at any time could be turned around on the American people, and no American would have any privacy left, such is the capability to monitor everything: telephone conversations, telegrams, it doesn\'t matter."</p>',
+					elementId: 'a5a8ebec-9fc4-4583-9852-e6f1c671258a',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p><em>Additional reporting by Ewen MacAskill and Spencer Ackerman</em></p>',
+					elementId: 'bd76fc10-59b9-42ae-9a51-237de8be44cf',
 				},
 			],
 			attributes: {
@@ -2227,23 +1909,20 @@ export const Standard: CAPIArticleType = {
 				keyEvent: false,
 				summary: false,
 			},
-			blockCreatedOn: 1581314427000,
-			blockCreatedOnDisplay: '06.00 GMT',
-			blockLastUpdated: 1589470537000,
-			blockLastUpdatedDisplay: '16.35 BST',
-			blockFirstPublished: 1581314427000,
-			blockFirstPublishedDisplay: '06.00 GMT',
-			blockFirstPublishedDisplayNoTimezone: '06.00',
+			blockCreatedOn: 1452843129000,
+			blockCreatedOnDisplay: '07.32 GMT',
+			blockLastUpdated: 1452843129000,
+			blockLastUpdatedDisplay: '07.32 GMT',
 			contributors: [],
-			primaryDateLine: 'Mon 10 Feb 2020 06.00 GMT',
-			secondaryDateLine: 'Last modified on Wed 25 Aug 2021 14.46 BST',
+			primaryDateLine: 'Thu 6 Jun 2013 11.05 BST',
+			secondaryDateLine: 'First published on Thu 6 Jun 2013 11.05 BST',
 		},
 	],
 	linkedData: [
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			'@id': 'https://amp.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2269,41 +1948,41 @@ export const Standard: CAPIArticleType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMjAucG5n&enable=upscale&s=87f04661a6a817547fcda09efc969896',
-				'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=140a9aa95750cca4cd5611019f3323e9',
-				'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=00050297e023e2f5be7225dd3a9ac19b',
-				'https://i.guim.co.uk/img/media/82cf4777db1bc8aee728f88202118ec67f535156/305_0_4571_2743/master/4571.jpg?width=1200&quality=85&auto=format&fit=max&s=21af9b1d12b0db548e3a006c14400cfc',
+				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctYWdlLTIwMTMucG5n&enable=upscale&s=2b724110f381774c116ed9e53f249c01',
+				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
+				'https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Jennifer Rankin',
-					sameAs: 'https://www.theguardian.com/profile/jennifer-rankin',
+					name: 'Glenn Greenwald',
+					sameAs: 'https://www.theguardian.com/profile/glenn-greenwald',
 				},
 			],
-			datePublished: '2020-02-10T06:00:27.000Z',
+			datePublished: '2013-06-06T10:05:00.000Z',
 			headline:
-				'Fires and floods: maps of Europe predict scale of climate catastrophe',
-			dateModified: '2021-08-25T13:46:46.000Z',
+				'NSA collecting phone records of millions of Verizon customers daily',
+			dateModified: '2019-05-01T17:16:49.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+				'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+			'@id': 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/environment/2020/feb/10/fires-floods-maps-europe-climate-catastrophe',
+				target: 'android-app://com.guardian/https/www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Mon 10 Feb 2020 06.00 GMT',
+	webPublicationDateDisplay: 'Thu 6 Jun 2013 11.05 BST',
 	shouldHideAds: false,
 	webTitle:
-		'Fires and floods: maps of Europe predict scale of climate catastrophe',
+		'NSA collecting phone records of millions of Verizon customers daily',
 	isSpecialReport: false,
-	isCommentable: false,
+	isCommentable: true,
 	keyEvents: [],
 	filterKeyEvents: false,
 	config: {
@@ -2440,8 +2119,7 @@ export const Standard: CAPIArticleType = {
 		shouldHideReaderRevenue: false,
 		sentryHost: 'app.getsentry.com/35463',
 		isPaidContent: false,
-		headline:
-			'Fires and floods: maps of Europe predict scale of climate catastrophe',
+		headline: 'Headline string',
 		idApiUrl: 'https://idapi.theguardian.com',
 		showRelatedContent: true,
 		adUnit: '/59666047/theguardian.com/environment/article/ng',

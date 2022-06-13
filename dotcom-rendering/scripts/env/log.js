@@ -7,17 +7,18 @@ const capitalize = (str) =>
 // if this is a first run
 const red = '\x1b[31m';
 const yellow = '\x1b[33m';
+const green = '\u001b[32m';
 const dim = '\x1b[2m';
 const reset = '\x1b[0m';
 
 const logIt = (messages = [], color = dim) => {
-	// eslint-disable-next-line no-console
 	console.log(`${color}%s${reset}`, capitalize(messages.join('\n')));
 };
 
 const log = (...messages) => logIt(messages);
 const warn = (...messages) => logIt(messages, red);
 const prompt = (...messages) => logIt(messages, yellow);
+const success = (...messages) => logIt(messages, green);
 
 // can be used as a normal script too
 const [, , messages, method] = process.argv;
@@ -40,4 +41,5 @@ module.exports = {
 	log,
 	warn,
 	prompt,
+	success,
 };

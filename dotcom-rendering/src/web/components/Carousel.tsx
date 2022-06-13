@@ -9,7 +9,7 @@ import {
 	text,
 	until,
 } from '@guardian/source-foundations';
-import libDebounce from 'lodash/debounce';
+import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
@@ -95,7 +95,6 @@ const containerStyles = css`
 	display: flex;
 	flex-direction: column;
 	position: relative;
-
 	overflow: hidden; /* Needed for scrolling to work */
 `;
 

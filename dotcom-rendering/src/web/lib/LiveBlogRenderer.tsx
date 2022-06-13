@@ -1,5 +1,8 @@
+import { Hide } from '@guardian/source-react-components';
 import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
+import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
 import { Island } from '../components/Island';
+import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { LiveBlock } from '../components/LiveBlock';
 import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
 import { PinnedPost } from '../components/PinnedPost';
@@ -23,6 +26,8 @@ type Props = {
 	isPaidContent: boolean;
 	contributionsServiceUrl: string;
 	onFirstPage?: boolean;
+	keyEvents?: Block[];
+	filterKeyEvents?: boolean;
 };
 
 export const LiveBlogRenderer = ({
@@ -44,6 +49,8 @@ export const LiveBlogRenderer = ({
 	isPaidContent,
 	contributionsServiceUrl,
 	onFirstPage,
+	keyEvents,
+	filterKeyEvents = false,
 }: Props) => {
 	return (
 		<>
@@ -69,6 +76,25 @@ export const LiveBlogRenderer = ({
 						/>
 					</PinnedPost>
 				</>
+			)}
+			{switches.keyEventsCarousel && keyEvents?.length ? (
+				<Hide above="desktop">
+					<Island deferUntil="visible">
+						<KeyEventsCarousel
+							keyEvents={keyEvents}
+							filterKeyEvents={filterKeyEvents}
+							format={format}
+						/>
+					</Island>
+					<Island deferUntil="visible">
+						<FilterKeyEventsToggle
+							filterKeyEvents={filterKeyEvents}
+							id="filter-toggle-mobile"
+						/>
+					</Island>
+				</Hide>
+			) : (
+				<></>
 			)}
 			<div id="top-of-blog" />
 			{blocks.map((block) => {

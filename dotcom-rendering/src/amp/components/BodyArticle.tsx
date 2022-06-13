@@ -143,7 +143,7 @@ export const Body: React.FC<{
 			{elementsWithoutAds.map((item, i) => {
 				if (slotIndexes.includes(i)) {
 					return (
-						<>
+						<React.Fragment key={item.key}>
 							{item}
 							<div
 								id={`ad-${i + 1}`}
@@ -161,7 +161,7 @@ export const Body: React.FC<{
 									adTargeting={adTargeting}
 								/>
 							</div>
-						</>
+						</React.Fragment>
 					);
 				}
 				return item;

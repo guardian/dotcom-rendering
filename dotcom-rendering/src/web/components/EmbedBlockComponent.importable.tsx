@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space, text, textSans } from '@guardian/source-foundations';
+import { from, space, text, textSans } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 import { ClickToView } from './ClickToView';
 
@@ -21,6 +21,15 @@ const emailCaptionStyle = css`
 `;
 
 const embedContainerStyles = (isEmailEmbed: boolean) => css`
+	/* By using inline-block we keep email embed content together if a rich link is placed inline nearby */
+	${isEmailEmbed &&
+	`
+		display: inline-block;
+		${from.tablet}{
+			display: flex;
+			flex-direction: column;
+		}
+	`}
 	iframe {
 		/* Some embeds can hijack the iframe and calculate an incorrect width, which pushes the body out */
 		/* stylelint-disable-next-line declaration-no-important */

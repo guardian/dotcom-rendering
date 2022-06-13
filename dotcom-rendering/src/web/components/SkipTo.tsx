@@ -1,7 +1,11 @@
 import { css } from '@emotion/react';
 import { border, neutral, textSans } from '@guardian/source-foundations';
 
-type Identifier = 'maincontent' | 'navigation' | 'keyevents';
+type Identifier =
+	| 'maincontent'
+	| 'navigation'
+	| 'keyevents'
+	| 'key-events-carousel';
 
 type Props = {
 	id: Identifier;
