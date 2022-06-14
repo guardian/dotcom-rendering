@@ -62,7 +62,7 @@ type Props = {
 
 const styles = (supportsDarkMode: boolean) => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
-	padding-top: ${remSpace[2]};
+	padding-top: ${remSpace[1]};
 	color: ${text.supporting};
 
 	${darkModeCss(supportsDarkMode)`
