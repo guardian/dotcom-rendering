@@ -17,6 +17,7 @@ import StandardLayout from 'components/Layout/StandardLayout';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
+import ImmersiveLayout from './ImmersiveLayout';
 
 // ----- Functions ----- //
 
@@ -106,6 +107,14 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Correction ||
 		item.design === ArticleDesign.Interview
 	) {
+		if (item.display === ArticleDisplay.Immersive) {
+			return (
+				<ImmersiveLayout item={item}>
+					{render(item, body)}
+				</ImmersiveLayout>
+			);
+		}
+
 		return (
 			<StandardLayout item={item}>{render(item, body)}</StandardLayout>
 		);

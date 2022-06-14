@@ -1,43 +1,55 @@
-import type { SerializedStyles } from '@emotion/react';
+// ----- Imports ----- //
+
 import { css } from '@emotion/react';
 import Img from '@guardian/common-rendering/src/components/img';
 import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
+import { from } from '@guardian/source-foundations';
 import { some } from '@guardian/types';
+import { grid } from 'grid/grid';
 import type { Image } from 'image';
 import type { FC } from 'react';
-import { Caption } from './MainMediaImage.defaults';
+import { immersiveCaptionId as captionId } from '../MainMedia.defaults';
 
-const captionId = 'header-image-caption';
+// ----- Component ----- //
 
 const imgStyles = css`
-	display: block;
-	height: 80vh;
+	width: 100%;
 	object-fit: cover;
-	width: 100vw;
+
+	${from.desktop} {
+		width: 100%;
+	}
 `;
 
 const styles = css`
 	margin: 0;
-	position: absolute;
-	left: 0;
+	${grid.between('viewport-start', 'viewport-end')}
+	grid-row: 1 / 4;
+	height: 80vh;
+
+	${from.desktop} {
+		height: 100vh;
+	}
 `;
 
 const getSizes = (image: Image): Sizes => ({
-	mediaQueries: [],
-	default: `${(100 * image.width) / image.height}vh `,
+	mediaQueries: [
+		{
+			breakpoint: 'desktop',
+			size: `${100 * (image.width / image.height)}vh`,
+		},
+	],
+	default: `${80 * (image.width / image.height)}vh`,
 });
 
 interface Props {
 	image: Image;
-	className?: SerializedStyles;
 	format: ArticleFormat;
 }
 
-// NOTE: This component isn't currently used - this file exists to preserve
-// immersive styling and sizes so we don't lose them in the big MainMedia refactor.
-const ImmersiveMainMediaImage: FC<Props> = ({ className, image, format }) => (
-	<figure css={[styles, className]} aria-labelledby={captionId}>
+const ImmersiveMainMediaImage: FC<Props> = ({ image, format }) => (
+	<figure css={styles} aria-labelledby={captionId}>
 		<Img
 			image={image}
 			sizes={getSizes(image)}
@@ -50,8 +62,9 @@ const ImmersiveMainMediaImage: FC<Props> = ({ className, image, format }) => (
 				credit: image.credit,
 			})}
 		/>
-		<Caption format={format} image={image} />
 	</figure>
 );
+
+// ----- Exports ----- //
 
 export default ImmersiveMainMediaImage;
