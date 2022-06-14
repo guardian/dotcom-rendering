@@ -3,6 +3,7 @@
 import { mockApi } from '../../lib/mocks';
 import { disableCMP } from '../../lib/disableCMP';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import '@percy/cypress';
 
 const READER_REVENUE_TITLE_TEXT = 'Support the';
 const articleUrl =
@@ -15,8 +16,10 @@ describe('Interactivity', function () {
 	});
 
 	describe('Verify elements have been hydrated', function () {
-		it('should open the edition dropdown menu when clicked and hide when expected', function () {
+		// eslint-disable-next-line mocha/no-exclusive-tests
+		it.only('should open the edition dropdown menu when clicked and hide when expected', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
+			cy.percySnapshot('Article', { widths: [768, 1200] });
 			cy.get('[data-cy=dropdown-options]').should('not.be.visible');
 			// Open it
 			cy.get('[data-cy=dropdown-button]').click();
