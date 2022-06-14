@@ -28,7 +28,7 @@ export const TrailTextWrapper = ({
 				padding-right: 5px;
 				padding-bottom: 6px;
 
-				${until.desktop} {
+				${until.tablet} {
 					display: none;
 				}
 			`}
