@@ -28,7 +28,7 @@ import { css } from '@emotion/react';
 import { from } from '@guardian/source-foundations';
 
 const wrapperStyle = (contentType: string) => css`
-	${contentType === 'Interactive'
+	${contentType.toLowerCase() === 'interactive'
 		? `
 		position: relative;
 		${from.tablet} {
