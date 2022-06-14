@@ -32,4 +32,4 @@ There is now no other code anywhere else which influences this decision. This wi
 
 ## No need to pick a source based on a desired width
 
-This paradign is no longer needed because DCR is now deciding which width to use at each breakpoint so we no longer need to treat the list of sources Frontend gave us as a range of options; we're now building them ourselves and so we're able to be exact in our decisions.
+This paradigm is no longer needed because DCR is now deciding which width to use at each breakpoint so we no longer need to treat the list of sources Frontend gave us as a range of options; we're now building them ourselves and so we're able to be exact in our decisions.
