@@ -4,13 +4,12 @@ export const joinUrl = (parts: string[]): string => {
 	const trimmed = parts
 		.map((part) => {
 			// Trim left
-			if (part.substr(0, 1) === '/') return part.slice(1);
+			if (part.startsWith('/')) return part.slice(1);
 			return part;
 		})
 		.map((part) => {
 			// Trim right
-			if (part.substr(part.length - 1, 1) === '/')
-				return part.slice(0, -1);
+			if (part.endsWith('/')) return part.slice(0, -1);
 			return part;
 		});
 
