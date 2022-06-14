@@ -24,12 +24,14 @@ import {
 } from '../../lib/contributions';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
+import { from } from '@guardian/source-foundations';
 
 export type EpicConfig = {
 	module: ModuleData;
 	fetchEmail?: () => Promise<string | null>;
 	hasConsentForArticleCount: boolean;
 	stage: string;
+	contentType: string;
 };
 
 type EpicProps = {
@@ -41,9 +43,29 @@ type EpicProps = {
 	// Also anything specified by support-dotcom-components
 };
 
-const wrapperMargins = css`
+const wrapperMargins = (contentType: string) => css`
 	margin: 18px 0;
 	clear: both;
+
+	${contentType === 'Interactive'
+		? `
+		position: relative;
+		${from.tablet} {
+			max-width: 620px;
+		}
+		${from.desktop} {
+			margin-left: 0px;
+			margin-right: 310px;
+		}
+		${from.leftCol} {
+			margin-left: 150px;
+			padding-left: 10px;
+		}
+		${from.wide} {
+			margin-left: 229px;
+		}
+	`
+		: ''}
 `;
 
 export type CanShowData = {
@@ -106,6 +128,7 @@ export const canShowReaderRevenueEpic = async (
 		contributionsServiceUrl,
 		idApiUrl,
 		stage,
+		contentType,
 	} = data;
 
 	if (shouldHideReaderRevenue || isPaidContent) {
@@ -140,6 +163,7 @@ export const canShowReaderRevenueEpic = async (
 			fetchEmail,
 			hasConsentForArticleCount,
 			stage,
+			contentType,
 		},
 	};
 };
@@ -149,6 +173,7 @@ export const ReaderRevenueEpic = ({
 	fetchEmail,
 	hasConsentForArticleCount,
 	stage,
+	contentType,
 }: EpicConfig) => {
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 
@@ -182,7 +207,7 @@ export const ReaderRevenueEpic = ({
 
 	if (Epic) {
 		return (
-			<div css={wrapperMargins}>
+			<div css={wrapperMargins(contentType)}>
 				{}
 				<Epic
 					{...module.props}

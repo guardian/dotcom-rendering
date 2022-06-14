@@ -48,6 +48,8 @@ import {
 	interactiveLegacyClasses,
 } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -241,6 +243,8 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const palette = decidePalette(format);
 
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
+
 	return (
 		<>
 			{CAPIArticle.isLegacyInteractive && (
@@ -290,7 +294,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									CAPIArticle.config.switches.remoteHeader
 								}
 								contributionsServiceUrl={
-									CAPIArticle.contributionsServiceUrl
+									contributionsServiceUrl
 								}
 							/>
 						</ElementContainer>
@@ -520,7 +524,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											!!CAPIArticle.config.isPaidContent
 										}
 										contributionsServiceUrl={
-											CAPIArticle.contributionsServiceUrl
+											contributionsServiceUrl
 										}
 										contentType={CAPIArticle.contentType}
 										sectionName={
@@ -531,6 +535,42 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isDev={!!CAPIArticle.config.isDev}
 									/>
 
+									<Island clientOnly={true}>
+										<SlotBodyEnd
+											contentType={
+												CAPIArticle.contentType
+											}
+											contributionsServiceUrl={
+												contributionsServiceUrl
+											}
+											idApiUrl={
+												CAPIArticle.config.idApiUrl
+											}
+											isMinuteArticle={
+												CAPIArticle.pageType
+													.isMinuteArticle
+											}
+											isPaidContent={
+												CAPIArticle.pageType
+													.isPaidContent
+											}
+											keywordsId={
+												CAPIArticle.config.keywordIds
+											}
+											pageId={CAPIArticle.pageId}
+											sectionId={
+												CAPIArticle.config.section
+											}
+											sectionName={
+												CAPIArticle.sectionName
+											}
+											shouldHideReaderRevenue={
+												CAPIArticle.shouldHideReaderRevenue
+											}
+											stage={CAPIArticle.config.stage}
+											tags={CAPIArticle.tags}
+										/>
+									</Island>
 									{/* <StraightLines data-print-layout="hide" count={4} /> */}
 									<div css={stretchMetaLines}>
 										<StraightLines
@@ -709,9 +749,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={CAPIArticle.contentType}
-						contributionsServiceUrl={
-							CAPIArticle.contributionsServiceUrl
-						}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
 						isMinuteArticle={CAPIArticle.pageType.isMinuteArticle}
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
