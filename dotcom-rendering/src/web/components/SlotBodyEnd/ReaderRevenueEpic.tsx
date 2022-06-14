@@ -30,7 +30,6 @@ export type EpicConfig = {
 	fetchEmail?: () => Promise<string | null>;
 	hasConsentForArticleCount: boolean;
 	stage: string;
-	contentType: string;
 };
 
 type EpicProps = {
@@ -107,7 +106,6 @@ export const canShowReaderRevenueEpic = async (
 		contributionsServiceUrl,
 		idApiUrl,
 		stage,
-		contentType,
 	} = data;
 
 	if (shouldHideReaderRevenue || isPaidContent) {
@@ -142,7 +140,6 @@ export const canShowReaderRevenueEpic = async (
 			fetchEmail,
 			hasConsentForArticleCount,
 			stage,
-			contentType,
 		},
 	};
 };
@@ -152,7 +149,6 @@ export const ReaderRevenueEpic = ({
 	fetchEmail,
 	hasConsentForArticleCount,
 	stage,
-	contentType,
 }: EpicConfig) => {
 	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
 
