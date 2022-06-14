@@ -215,7 +215,7 @@ export const trackVideoInteraction = ({
 }: {
 	trackingEvent: string;
 	elementId: string;
-}) => {
+}): void => {
 	const { ga } = window;
 
 	if (!ga) {

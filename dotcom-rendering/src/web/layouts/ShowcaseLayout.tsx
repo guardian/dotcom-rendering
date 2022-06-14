@@ -209,11 +209,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-export const ShowcaseLayout = ({
-	CAPIArticle,
-	NAV,
-	format,
-}: Props): JSX.Element => {
+export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;

@@ -126,7 +126,7 @@ const Renderer: React.FC<{
 	return <div css={adStyles}>{output}</div>;
 };
 
-const NavHeader = ({ CAPIArticle, NAV, format }: Props): JSX.Element => {
+const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	// Typically immersives use the slim nav, but this switch is used to force
 	// the full nav - typically during special events such as Project 200, or
 	// the Euros. The motivation is to better onboard new visitors; interactives
@@ -269,7 +269,7 @@ export const FullPageInteractiveLayout = ({
 	CAPIArticle,
 	NAV,
 	format,
-}: Props): JSX.Element => {
+}: Props) => {
 	const {
 		config: { host },
 	} = CAPIArticle;

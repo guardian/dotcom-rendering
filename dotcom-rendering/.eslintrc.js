@@ -13,7 +13,6 @@ const rulesToReview = {
 };
 
 const rulesToRemove = {
-	'@typescript-eslint/explicit-module-boundary-types': 'warn',
 	'@typescript-eslint/no-unsafe-call': 'warn',
 	'@typescript-eslint/no-unsafe-assignment': 'warn',
 	'@typescript-eslint/no-unsafe-return': 'warn',
@@ -52,7 +51,6 @@ module.exports = {
 		'jsx-a11y',
 	],
 	rules: {
-    
 		// React & Hooks
 		'react/jsx-indent': [2, 'tab'],
 		'react/jsx-indent-props': [2, 'tab'],
@@ -92,6 +90,27 @@ module.exports = {
 				'@typescript-eslint/no-var-requires': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
+			},
+		},
+		{
+			files: ['**/**.ts'],
+			rules: {
+				'@typescript-eslint/explicit-module-boundary-types': 'error',
+			},
+		},
+		{
+			files: ['**/**.tsx'],
+			rules: {
+				'@typescript-eslint/ban-types': [
+					'warn',
+					{
+						types: {
+							'JSX.Element': 'Prefer type inference',
+							'EmotionJSX.Element': 'Prefer type inference',
+						},
+						extendDefaults: true,
+					},
+				],
 			},
 		},
 		{

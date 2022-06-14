@@ -127,7 +127,7 @@ export const TextBlockComponent = ({
 	format,
 	forceDropCap,
 	isFirstParagraph,
-}: Props): JSX.Element | null => (
+}: Props) => (
 	<ClassNames>
 		{({ css }) => {
 			const paraStyles = css`

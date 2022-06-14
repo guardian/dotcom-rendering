@@ -1,4 +1,4 @@
-export const joinUrl = (parts: string[]) => {
+export const joinUrl = (parts: string[]): string => {
 	// Remove any leading or trailing slashes from all parts and then join cleanly on
 	// a single slash - prevents malformed urls
 	const trimmed = parts
