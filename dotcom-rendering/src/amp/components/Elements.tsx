@@ -26,6 +26,7 @@ export const Elements = (
 	pillar: ArticlePillar,
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
+	// eslint-disable-next-line @typescript-eslint/ban-types -- the type signature is helpful
 ): JSX.Element[] => {
 	const cleanedElements = enhance(elements);
 	const output = cleanedElements.map((element) => {
@@ -268,5 +269,8 @@ export const Elements = (
 		}
 	});
 
-	return output.filter((el) => el !== null) as JSX.Element[];
+	return output.filter(
+		// eslint-disable-next-line @typescript-eslint/ban-types -- it’s a type predicate
+		(el: JSX.Element | null): el is JSX.Element => el !== null,
+	);
 };

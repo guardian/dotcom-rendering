@@ -127,7 +127,7 @@ const dateDiffDays = (from: number, to: number): number => {
 
 const AskPauseDays = 90;
 
-export const isRecentOneOffContributor = () => {
+export const isRecentOneOffContributor = (): boolean => {
 	const lastContributionDate = getLastOneOffContributionTimestamp();
 	if (lastContributionDate) {
 		const now = Date.now();

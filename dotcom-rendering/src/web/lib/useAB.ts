@@ -19,7 +19,7 @@ export const useAB = (): ABTestAPI | undefined => {
 	return data;
 };
 
-export const setABTests = (api: ABTestAPI) => {
+export const setABTests = (api: ABTestAPI): void => {
 	// eslint-disable-next-line @typescript-eslint/no-floating-promises
 	mutate(key, api, false);
 };
