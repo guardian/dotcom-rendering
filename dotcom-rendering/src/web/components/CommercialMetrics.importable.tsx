@@ -6,6 +6,7 @@ import {
 import { getCookie } from '@guardian/libs';
 import { tests } from '../experiments/ab-tests';
 import { commercialEndOfQuarter2Test } from '../experiments/tests/commercial-end-of-quarter-2-test';
+import { commercialLazyLoadMarginReloaded } from '../experiments/tests/commercial-lazy-load-margin-reloaded';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
@@ -29,6 +30,7 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 		const clientSideTestsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
 			commercialEndOfQuarter2Test,
+			commercialLazyLoadMarginReloaded,
 		];
 
 		const userInClientSideTestToForceMetrics = ABTestAPI?.allRunnableTests(
