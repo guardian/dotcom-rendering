@@ -77,10 +77,9 @@ module.exports = ({ sessionId }) => ({
 					options: {
 						...swcConfig,
 						env: {
-							targets: {
-								// TODO read from .nvmrc
-								node: '14.18.3',
-							},
+							// https://swc.rs/docs/configuration/supported-browsers#targets
+							// https://github.com/browserslist/browserslist
+							targets: 'current node',
 						},
 					},
 				},
