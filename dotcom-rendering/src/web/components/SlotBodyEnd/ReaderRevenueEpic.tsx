@@ -24,7 +24,6 @@ import {
 } from '../../lib/contributions';
 import type { CanShowResult } from '../../lib/messagePicker';
 import { setAutomat } from '../../lib/setAutomat';
-import { from } from '@guardian/source-foundations';
 
 export type EpicConfig = {
 	module: ModuleData;
@@ -43,29 +42,9 @@ type EpicProps = {
 	// Also anything specified by support-dotcom-components
 };
 
-const wrapperMargins = (contentType: string) => css`
+const wrapperMargins = css`
 	margin: 18px 0;
 	clear: both;
-
-	${contentType === 'Interactive'
-		? `
-		position: relative;
-		${from.tablet} {
-			max-width: 620px;
-		}
-		${from.desktop} {
-			margin-left: 0px;
-			margin-right: 310px;
-		}
-		${from.leftCol} {
-			margin-left: 150px;
-			padding-left: 10px;
-		}
-		${from.wide} {
-			margin-left: 229px;
-		}
-	`
-		: ''}
 `;
 
 export type CanShowData = {
@@ -207,7 +186,7 @@ export const ReaderRevenueEpic = ({
 
 	if (Epic) {
 		return (
-			<div css={wrapperMargins(contentType)}>
+			<div css={wrapperMargins}>
 				{}
 				<Epic
 					{...module.props}
