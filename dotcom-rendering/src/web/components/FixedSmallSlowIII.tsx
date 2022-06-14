@@ -25,6 +25,7 @@ export const FixedSmallSlowIII = ({
 						showDivider={index > 0}
 						padBottomOnMobile={true}
 						percentage={index === 0 ? '50%' : '25%'}
+						key={trail.url}
 					>
 						<Card
 							containerPalette={containerPalette}
