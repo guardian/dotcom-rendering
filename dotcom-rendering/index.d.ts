@@ -1411,7 +1411,13 @@ type AdSlotType =
 declare module 'chromatic/isChromatic';
 
 declare module 'dynamic-import-polyfill' {
-	export const initialize: any;
+	export const initialize: ({
+		modulePath,
+		importFunctionName,
+	}: {
+		modulePath?: string;
+		importFunctionName?: string;
+	}) => void;
 }
 
 // ------------------------------------- //
