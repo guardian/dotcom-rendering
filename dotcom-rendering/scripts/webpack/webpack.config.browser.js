@@ -51,7 +51,14 @@ const getLoaders = (bundle) => {
 			return [
 				{
 					loader: 'swc-loader',
-					options: swcConfig,
+					options: {
+						...swcConfig,
+						env: {
+							// https://swc.rs/docs/configuration/supported-browsers#targets
+							// https://github.com/browserslist/browserslist
+							targets: 'supports es6-module',
+						},
+					},
 				},
 			];
 		case 'modern':
